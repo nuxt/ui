@@ -7,11 +7,7 @@ export default defineCachedEventHandler(async (event) => {
     .select('path', 'title', 'description')
     .all()
 
-  return {
-    composables: composables.map(composables => composables.title),
-    total: composables.length,
-    composableInfo: composables
-  }
+  return composables.map(composables => composables.title).sort()
 }, {
   name: 'mcp-list-composables',
   maxAge: 3600 // 1 hour

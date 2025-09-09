@@ -45,7 +45,7 @@ function createServer() {
         contents: [{
           uri: uri.href,
           mimeType: 'application/json',
-          text: JSON.stringify(result.components, null, 2)
+          text: JSON.stringify(result, null, 2)
         }]
       }
     }
@@ -64,7 +64,7 @@ function createServer() {
         contents: [{
           uri: uri.href,
           mimeType: 'application/json',
-          text: JSON.stringify(result.composables, null, 2)
+          text: JSON.stringify(result, null, 2)
         }]
       }
     }
@@ -127,7 +127,7 @@ function createServer() {
             role: 'user',
             content: {
               type: 'text',
-              text: `Help me find the best Nuxt UI component for this use case: "${usecase}". Here are all available components: ${JSON.stringify(components.components, null, 2)}`
+              text: `Help me find the best Nuxt UI component for this use case: "${usecase}". Here are all available components: ${JSON.stringify(components, null, 2)}`
             }
           }
         ]
