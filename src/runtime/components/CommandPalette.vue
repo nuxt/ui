@@ -7,6 +7,7 @@ import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, LinkProps, IconProps } from '../types'
+import type { GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type CommandPalette = ComponentConfig<typeof theme, AppConfig, 'commandPalette'>
@@ -134,7 +135,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: string
+  labelKey?: GetItemKeys<T>
   class?: any
   ui?: CommandPalette['slots']
 }
@@ -193,8 +194,8 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'selectionBehavior'), emits)
-const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon'))
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
+const inputProps = useForwardProps(reactivePick(props, 'loading'))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })())
@@ -207,7 +208,7 @@ const fuse = computed(() => defu({}, props.fuse, {
   },
   resultLimit: 12,
   matchAllWhenSearchEmpty: true
-}))
+}) as UseFuseOptions<T>)
 
 const history = ref<(CommandPaletteGroup & { placeholder?: string })[]>([])
 
@@ -329,13 +330,14 @@ function onSelect(e: Event, item: T) {
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <ListboxRoot v-bind="rootProps" ref="listboxRootRef" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ListboxRoot v-bind="rootProps" ref="listboxRootRef" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
         :placeholder="placeholder"
         variant="none"
         :autofocus="autofocus"
         v-bind="inputProps"
+        :loading-icon="loadingIcon"
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input({ class: props.ui?.input })"
         @keydown.backspace="onBackspace"
