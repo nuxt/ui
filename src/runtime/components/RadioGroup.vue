@@ -29,7 +29,7 @@ export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], 
    * When `items` is an array of objects, select the field to use as the value.
    * @defaultValue 'value'
    */
-  valueKey?: string
+  valueKey?: VK
   /**
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
