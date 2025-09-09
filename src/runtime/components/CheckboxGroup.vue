@@ -43,9 +43,9 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGrou
    */
   descriptionKey?: GetItemKeys<T>
   items?: T
-  /** The controlled value of the Tree. Can be bind as `v-model`. */
+  /** The controlled value of the CheckboxGroup. Can be bind as `v-model`. */
   modelValue?: GetModelValue<T, VK, true>
-  /** The value of the Tree when initially rendered. Use when you do not need to control the state of the Tree. */
+  /** The value of the CheckboxGroup when initially rendered. Use when you do not need to control the state of the CheckboxGroup. */
   defaultValue?: GetModelValue<T, VK, true>
   /**
    * @defaultValue 'md'
