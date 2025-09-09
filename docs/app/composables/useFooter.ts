@@ -1,5 +1,5 @@
-export function useFooterLinks() {
-  return [{
+export function useFooter() {
+  const links = [{
     label: 'Docs',
     to: '/docs'
   }, {
@@ -19,4 +19,8 @@ export function useFooterLinks() {
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
   }]
+
+  return {
+    links
+  }
 }

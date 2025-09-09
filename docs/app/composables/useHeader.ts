@@ -1,4 +1,4 @@
-export function useHeaderLinks() {
+export function useHeader() {
   const route = useRoute()
 
   const desktopLinks = computed(() => [{
@@ -18,7 +18,7 @@ export function useHeaderLinks() {
     label: 'Community',
     children: [{
       label: 'Team',
-      description: 'Meet the team behind Nuxt UI.',
+      description: 'Meet the team building and maintaining Nuxt UI.',
       icon: 'i-lucide-users',
       to: '/team'
     }, {
@@ -47,32 +47,25 @@ export function useHeaderLinks() {
   }])
 
   const mobileLinks = computed(() => [{
-    label: 'Docs',
-    icon: 'i-lucide-book-open',
-    to: '/docs',
-    active: false,
-    defaultOpen: true,
-    children: [{
-      label: 'Get Started',
-      icon: 'i-lucide-square-play',
-      to: '/docs/getting-started',
-      active: route.path.startsWith('/docs/getting-started')
-    }, {
-      label: 'Components',
-      icon: 'i-lucide-square-code',
-      to: '/docs/components',
-      active: route.path.startsWith('/docs/components')
-    }, {
-      label: 'Composables',
-      icon: 'i-lucide-square-function',
-      to: '/docs/composables',
-      active: route.path.startsWith('/docs/composables')
-    }, {
-      label: 'Typography',
-      icon: 'i-lucide-square-pilcrow',
-      to: '/docs/typography',
-      active: route.path.startsWith('/docs/typography')
-    }]
+    label: 'Get Started',
+    icon: 'i-lucide-square-play',
+    to: '/docs/getting-started',
+    active: route.path.startsWith('/docs/getting-started')
+  }, {
+    label: 'Components',
+    icon: 'i-lucide-square-code',
+    to: '/docs/components',
+    active: route.path.startsWith('/docs/components')
+  }, {
+    label: 'Composables',
+    icon: 'i-lucide-square-function',
+    to: '/docs/composables',
+    active: route.path.startsWith('/docs/composables')
+  }, {
+    label: 'Typography',
+    icon: 'i-lucide-square-pilcrow',
+    to: '/docs/typography',
+    active: route.path.startsWith('/docs/typography')
   }, {
     label: 'Figma',
     icon: 'i-simple-icons-figma',
@@ -87,7 +80,6 @@ export function useHeaderLinks() {
     to: '/showcase'
   }, {
     label: 'Team',
-    description: 'Meet the team behind Nuxt UI.',
     icon: 'i-lucide-users',
     to: '/team'
   }, {

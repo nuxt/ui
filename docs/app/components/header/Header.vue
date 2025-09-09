@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
-const { desktopLinks } = useHeaderLinks()
+const { desktopLinks } = useHeader()
 </script>
 
 <template>
