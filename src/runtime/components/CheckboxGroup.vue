@@ -20,7 +20,7 @@ export type CheckboxGroupItem = {
   [key: string]: any
 } | CheckboxGroupValue
 
-export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Pick<CheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'indicator' | 'icon'> {
+export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<CheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'indicator' | 'icon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -44,9 +44,9 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGrou
   descriptionKey?: GetItemKeys<T>
   items?: T
   /** The controlled value of the Tree. Can be bind as `v-model`. */
-  modelValue?: GetModelValue<T, VK, M>
+  modelValue?: GetModelValue<T, VK, true>
   /** The value of the Tree when initially rendered. Use when you do not need to control the state of the Tree. */
-  defaultValue?: GetModelValue<T, VK, M>
+  defaultValue?: GetModelValue<T, VK, true>
   /**
    * @defaultValue 'md'
    */
@@ -70,14 +70,14 @@ export type CheckboxGroupEmits = CheckboxGroupRootEmits & {
 
 type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => any
 
-export interface CheckboxGroupSlots<T extends CheckboxGroupItem = CheckboxGroupItem> {
+export interface CheckboxGroupSlots<T extends CheckboxGroupItem[] = CheckboxGroupItem[]> {
   legend(props?: {}): any
-  label: SlotProps<T>
-  description: SlotProps<T>
+  label: SlotProps<T[number]>
+  description: SlotProps<T[number]>
 }
 </script>
 
-<script setup lang="ts" generic="T extends CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false">
+<script setup lang="ts" generic="T extends CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { computed, useId } from 'vue'
 import { CheckboxGroupRoot, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
@@ -87,7 +87,7 @@ import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
 import UCheckbox from './Checkbox.vue'
 
-const props = withDefaults(defineProps<CheckboxGroupProps<T, VK, M>>(), {
+const props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
   labelKey: 'label',
   descriptionKey: 'description',
   valueKey: 'value' as never,
