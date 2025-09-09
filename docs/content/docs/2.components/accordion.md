@@ -180,7 +180,7 @@ props:
 ---
 ::
 
-### Trailing icon
+### Trailing Icon
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon) of each item. Defaults to `i-lucide-chevron-down`.
 

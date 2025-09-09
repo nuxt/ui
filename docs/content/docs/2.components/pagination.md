@@ -34,7 +34,7 @@ props:
 ---
 ::
 
-### Items per page
+### Items Per Page
 
 Use the `items-per-page` prop to set the number of items per page. Defaults to `10`.
 
@@ -53,7 +53,7 @@ props:
 ---
 ::
 
-### Sibling count
+### Sibling Count
 
 Use the `sibling-count` prop to set the number of siblings to show. Defaults to `2`.
 
@@ -73,7 +73,7 @@ props:
 ---
 ::
 
-### Show edges
+### Show Edges
 
 Use the `show-edges` prop to always show the ellipsis, first and last pages. Defaults to `false`.
 
@@ -94,7 +94,7 @@ props:
 ---
 ::
 
-### Show controls
+### Show Controls
 
 Use the `show-controls` prop to show the first, prev, next and last buttons. Defaults to `true`.
 
@@ -181,7 +181,7 @@ props:
 ---
 ::
 
-### Active color
+### Active Color
 
 Use the `active-color` prop to set the color of the active control. Defaults to `primary`.
 
@@ -210,7 +210,7 @@ props:
 ---
 ::
 
-### Active variant
+### Active Variant
 
 Use the `active-variant` prop to set the variant of the active control. Defaults to `solid`.
 

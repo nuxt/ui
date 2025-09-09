@@ -50,7 +50,7 @@ props:
 ---
 ::
 
-### Max length :badge{label="New" class="align-text-top"}
+### Max Length :badge{label="New" class="align-text-top"}
 
 Use the `max-length` prop to set the maximum number of characters allowed in a tag.
 
@@ -162,7 +162,7 @@ props:
 ---
 ::
 
-### Delete icon
+### Delete Icon
 
 Use the `delete-icon` prop to customize the delete [Icon](/docs/components/icon) in the tags. Defaults to `i-lucide-x`.
 
@@ -209,7 +209,7 @@ props:
 ---
 ::
 
-### Loading icon
+### Loading Icon
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 

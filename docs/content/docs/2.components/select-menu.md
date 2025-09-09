@@ -114,7 +114,7 @@ props:
 ---
 ::
 
-### Value key
+### Value Key
 
 You can choose to bind a single property of the object rather than the whole object by using the `value-key` prop. Defaults to `undefined`.
 
@@ -201,7 +201,7 @@ props:
 ---
 ::
 
-### Search input
+### Search Input
 
 Use the `search-input` prop to customize or hide the search input (with `false` value).
 
@@ -420,7 +420,7 @@ props:
 ---
 ::
 
-### Trailing icon
+### Trailing Icon
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon). Defaults to `i-lucide-chevron-down`.
 
@@ -459,7 +459,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
-### Selected icon
+### Selected Icon
 
 Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide-check`.
 
@@ -553,7 +553,7 @@ props:
 ---
 ::
 
-### Loading icon
+### Loading Icon
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 

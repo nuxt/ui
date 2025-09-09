@@ -529,7 +529,7 @@ props:
 The `highlight` prop changes the `pill` variant active item style. Try it out to see the difference.
 ::
 
-### Trailing icon
+### Trailing Icon
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon) of each item. Defaults to `i-lucide-chevron-down`. This icon is only displayed when an item has children.
 
@@ -720,7 +720,7 @@ props:
 The arrow is animated to follow the active item.
 ::
 
-### Content orientation
+### Content Orientation
 
 Use the `content-orientation` prop to change the orientation of the content.
 

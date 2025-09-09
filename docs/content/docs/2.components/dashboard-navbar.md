@@ -96,7 +96,7 @@ props:
 ---
 ::
 
-### Toggle side
+### Toggle Side
 
 Use the `toggle-side` prop to change the side of the toggle button. Defaults to `right`.
 

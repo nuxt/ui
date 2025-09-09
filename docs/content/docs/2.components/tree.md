@@ -188,7 +188,7 @@ props:
 ---
 ::
 
-### Trailing icon
+### Trailing Icon
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon) of a parent node. Defaults to `i-lucide-chevron-down`.
 
@@ -245,7 +245,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
-### Expanded icon
+### Expanded Icon
 
 Use the `expanded-icon` and `collapsed-icon` props to customize the icons of a parent node when it is expanded or collapsed. Defaults to `i-lucide-folder-open` and `i-lucide-folder` respectively.
 

@@ -223,7 +223,7 @@ props:
 ---
 ::
 
-### Auto scroll
+### Auto Scroll
 
 Use the `auto-scroll` prop to customize or hide the auto scroll button (with `false` value) displayed when scrolling to the top of the chat. Defaults to:
 
@@ -283,7 +283,7 @@ props:
 ---
 ::
 
-### Auto scroll icon
+### Auto Scroll Icon
 
 Use the `auto-scroll-icon` prop to customize the auto scroll button [Icon](/docs/components/icon). Defaults to `i-lucide-arrow-down`.
 
@@ -348,7 +348,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ar
 :::
 ::
 
-### Should auto scroll
+### Should Auto Scroll
 
 Use the `should-auto-scroll` prop to enable/disable continuous auto scroll while messages are streaming. Defaults to `false`.
 
@@ -358,7 +358,7 @@ Use the `should-auto-scroll` prop to enable/disable continuous auto scroll while
 </template>
 ```
 
-### Should scroll to bottom
+### Should Scroll To Bottom
 
 Use the `should-scroll-to-bottom` prop to enable/disable bottom auto scroll when the component is mounted. Defaults to `true`.
 

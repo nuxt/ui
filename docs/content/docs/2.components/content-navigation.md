@@ -188,7 +188,7 @@ props:
 ---
 ::
 
-### Trailing icon
+### Trailing Icon
 
 ::component-code{prefix="content"}
 ---

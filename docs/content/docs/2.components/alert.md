@@ -156,7 +156,7 @@ props:
 ---
 ::
 
-### Close icon
+### Close Icon
 
 Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 
