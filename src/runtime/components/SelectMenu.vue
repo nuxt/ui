@@ -190,7 +190,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<SelectMenuProps<T, VK, M>>(), {
   portal: true,
   searchInput: true,
-  labelKey: 'label' as never,
+  labelKey: 'label',
   resetSearchTermOnBlur: true,
   resetSearchTermOnSelect: true,
   autofocusDelay: 0

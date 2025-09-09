@@ -18,7 +18,7 @@ export type RadioGroupItem = {
   [key: string]: any
 } | RadioGroupValue
 
-export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Pick<RadioGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'> {
+export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<RadioGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -42,9 +42,9 @@ export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], 
   descriptionKey?: GetItemKeys<T>
   items?: T
   /** The controlled value of the RadioGroup. Can be bind as `v-model`. */
-  modelValue?: GetModelValue<T, VK, M>
+  modelValue?: GetModelValue<T, VK, false>
   /** The value of the RadioGroup when initially rendered. Use when you do not need to control the state of the RadioGroup. */
-  defaultValue?: GetModelValue<T, VK, M>
+  defaultValue?: GetModelValue<T, VK, false>
   /**
    * @defaultValue 'md'
    */
@@ -86,7 +86,7 @@ export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> 
 }
 </script>
 
-<script setup lang="ts" generic="T extends RadioGroupItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false">
+<script setup lang="ts" generic="T extends RadioGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { computed, useId } from 'vue'
 import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
@@ -95,8 +95,8 @@ import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
-  valueKey: 'value',
+const props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
+  valueKey: 'value' as never,
   labelKey: 'label',
   descriptionKey: 'description',
   orientation: 'vertical'

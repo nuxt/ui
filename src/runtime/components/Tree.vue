@@ -113,7 +113,7 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TreeProps<T, VK, M>>(), {
-  labelKey: 'label' as never,
+  labelKey: 'label',
   valueKey: 'value' as never
 })
 const emits = defineEmits<TreeEmits<T, VK, M>>()

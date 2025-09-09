@@ -156,7 +156,7 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SelectProps<T, VK, M>>(), {
   valueKey: 'value' as never,
-  labelKey: 'label' as never,
+  labelKey: 'label',
   portal: true,
   autofocusDelay: 0
 })

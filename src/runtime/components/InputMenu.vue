@@ -196,7 +196,7 @@ const props = withDefaults(defineProps<InputMenuProps<T, VK, M>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
-  labelKey: 'label' as never,
+  labelKey: 'label',
   resetSearchTermOnBlur: true,
   resetSearchTermOnSelect: true
 })
