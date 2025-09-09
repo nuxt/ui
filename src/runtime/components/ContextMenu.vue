@@ -4,7 +4,7 @@ import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProp
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/context-menu'
 import type { AvatarProps, IconProps, KbdProps, LinkProps } from '../types'
-import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
@@ -74,7 +74,7 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: keyof NestedItem<T>
+  labelKey?: GetItemKeys<T>
   disabled?: boolean
   class?: any
   ui?: ContextMenu['slots']

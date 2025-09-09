@@ -2,7 +2,7 @@
 import json5 from 'json5'
 import icons from '../../../../src/theme/icons'
 
-const { framework } = useSharedData()
+const { framework } = useFrameworks()
 
 const { data: ast } = await useAsyncData(`icons-theme`, async () => {
   const md = `

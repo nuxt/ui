@@ -4,7 +4,7 @@ import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, Dropdown
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/dropdown-menu'
 import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots, IconProps } from '../types'
-import type { ArrayOrNested, NestedItem, DynamicSlots, MergeTypes } from '../types/utils'
+import type { ArrayOrNested, GetItemKeys, NestedItem, DynamicSlots, MergeTypes } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
@@ -13,7 +13,7 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
   items?: T
   portal?: boolean | string | HTMLElement
   sub?: boolean
-  labelKey: keyof NestedItem<T>
+  labelKey: GetItemKeys<T>
   /**
    * @IconifyIcon
    */

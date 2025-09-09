@@ -33,7 +33,7 @@ defineOgImageComponent('Docs', {
       </template>
 
       <template #links>
-        <FrameworkSelect size="md" class="w-48" />
+        <FrameworkTabs size="md" class="w-48" />
       </template>
     </UPageHero>
 

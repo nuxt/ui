@@ -99,7 +99,7 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: keyof NestedItem<T>
+  labelKey?: GetItemKeys<T>
   items?: T
   /** The value of the InputMenu when initially rendered. Use when you do not need to control the state of the InputMenu. */
   defaultValue?: GetModelValue<T, VK, M>
@@ -196,7 +196,7 @@ const props = withDefaults(defineProps<InputMenuProps<T, VK, M>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
-  labelKey: 'label' as never,
+  labelKey: 'label',
   resetSearchTermOnBlur: true,
   resetSearchTermOnSelect: true
 })
@@ -234,8 +234,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
   fieldGroup: orientation.value
 }))
 
+// eslint-disable-next-line vue/no-dupe-keys
+const items = computed(() => groups.value.flatMap(group => group) as T[])
+
 function displayValue(value: GetItemValue<T, VK>): string {
-  return getDisplayValue(items.value, value, {
+  return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value, {
     labelKey: props.labelKey,
     valueKey: props.valueKey
   }) ?? ''
@@ -248,8 +251,6 @@ const groups = computed<InputMenuItem[][]>(() =>
       : [props.items]
     : []
 )
-// eslint-disable-next-line vue/no-dupe-keys
-const items = computed(() => groups.value.flatMap(group => group) as T[])
 
 const filteredGroups = computed(() => {
   if (props.ignoreFilter || !searchTerm.value) {
