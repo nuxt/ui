@@ -232,13 +232,23 @@ function createServer() {
   )
 
   server.tool(
-    'get_content_page',
+    'get_documentation_page',
     'Retrieves documentation page content by URL path. Parameters: path (string, required) - the documentation path starting with /docs/. Returns: A JSON object containing title, content, path, url, and optional metadata.',
     {
       path: z.string().describe('The path to the content page (e.g., /docs/components/button)')
     },
     async (params) => {
       const result = await $fetch<string>(`/raw${params.path}.md`)
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+  )
+
+  server.tool(
+    'list_documentation_pages',
+    'Lists all documentation pages. Returns: A JSON array of objects containing title, title, description, and path.',
+    {},
+    async () => {
+      const result = await $fetch('/api/mcp/list-documentation-pages')
       return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
     }
   )
