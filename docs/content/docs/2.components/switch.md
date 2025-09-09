@@ -107,7 +107,7 @@ props:
 ---
 ::
 
-### Loading Icon
+### Loading icon
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 

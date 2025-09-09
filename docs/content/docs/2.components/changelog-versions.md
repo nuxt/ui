@@ -105,7 +105,7 @@ props:
 ---
 ::
 
-### Indicator Motion
+### Indicator motion
 
 Use the `indicator-motion` prop to customize or hide the motion effect on the indicator bar. Defaults to `true` with `{ damping: 30, restDelta: 0.001 }` [spring transition options](https://motion.dev/docs/vue-transitions#spring).
 

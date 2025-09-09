@@ -86,7 +86,7 @@ name: 'banner-example'
 When closed, `banner-${id}` will be stored in the local storage to prevent it from being displayed again. :br For the example above, `banner-example` will be stored in the local storage.
 ::
 
-### Close Icon
+### Close icon
 
 Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 

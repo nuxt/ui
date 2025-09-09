@@ -47,7 +47,7 @@ props:
 A `span` is rendered instead of a link when the `to` property is not defined.
 ::
 
-### Separator Icon
+### Separator icon
 
 Use the `separator-icon` prop to customize the [Icon](/docs/components/icon) between each item. Defaults to `i-lucide-chevron-right`.
 

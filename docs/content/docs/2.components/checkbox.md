@@ -49,7 +49,7 @@ props:
 ---
 ::
 
-### Indeterminate Icon
+### Indeterminate icon
 
 Use the `indeterminate-icon` prop to customize the indeterminate icon. Defaults to `i-lucide-minus`.
 

@@ -153,7 +153,7 @@ class: 'p-8 px-16 pb-12'
 In this example, we're using the `loop` prop for an infinite carousel.
 ::
 
-### Auto Scroll
+### Auto scroll
 
 This plugin is used to extend Embla Carousel with **auto scroll** functionality.
 
@@ -170,7 +170,7 @@ class: 'p-8 px-16 pb-12'
 In this example, we're using the `loop` prop for an infinite carousel.
 ::
 
-### Auto Height
+### Auto height
 
 This plugin is used to extend Embla Carousel with **auto height** functionality. It changes the height of the carousel container to fit the height of the highest slide in view.
 
@@ -187,7 +187,7 @@ class: 'p-8 pt-16'
 In this example, we add the `transition-[height]` class on the container to animate the height change.
 ::
 
-### Class Names
+### Class names
 
 Class Names is a **class name toggle** utility plugin for Embla Carousel that enables you to automate the toggling of class names on your carousel.
 
@@ -217,7 +217,7 @@ class: 'p-8 pb-12'
 ---
 ::
 
-### Wheel Gestures
+### Wheel gestures
 
 This plugin is used to extend Embla Carousel with the ability to **use the mouse/trackpad wheel** to navigate the carousel.
 

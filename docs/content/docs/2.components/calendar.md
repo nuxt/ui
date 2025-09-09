@@ -123,7 +123,7 @@ props:
 ---
 ::
 
-### Number Of Months
+### Number of months
 
 Use the `numberOfMonths` prop to change the number of months in the calendar.
 
@@ -134,7 +134,7 @@ props:
 ---
 ::
 
-### Month Controls
+### Month controls
 
 Use the `month-controls` prop to show the month controls. Defaults to `true`.
 
@@ -145,7 +145,7 @@ props:
 ---
 ::
 
-### Year Controls
+### Year controls
 
 Use the `year-controls` prop to show the year controls. Defaults to `true`.
 
@@ -156,7 +156,7 @@ props:
 ---
 ::
 
-### Fixed Weeks
+### Fixed weeks
 
 Use the `fixed-weeks` prop to display the calendar with fixed weeks.
 

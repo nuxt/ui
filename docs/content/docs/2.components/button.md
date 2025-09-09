@@ -256,7 +256,7 @@ This also works with the [Form](/docs/components/form) component.
 
 :component-example{name="button-loading-auto-form-example"}
 
-### Loading Icon
+### Loading icon
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 

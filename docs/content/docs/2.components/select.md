@@ -108,7 +108,7 @@ props:
 ---
 ::
 
-### Value Key
+### Value key
 
 You can change the property that is used to set the value by using the `value-key` prop. Defaults to `value`.
 
@@ -372,7 +372,7 @@ props:
 ---
 ::
 
-### Trailing Icon
+### Trailing icon
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon). Defaults to `i-lucide-chevron-down`.
 
@@ -411,7 +411,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
-### Selected Icon
+### Selected icon
 
 Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide-check`.
 
@@ -505,7 +505,7 @@ props:
 ---
 ::
 
-### Loading Icon
+### Loading icon
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 

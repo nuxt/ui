@@ -115,7 +115,7 @@ name: 'toast-close-example'
 ---
 ::
 
-### Close Icon
+### Close icon
 
 Pass a `closeIcon` field to customize the close button [Icon](/docs/components/icon). Default to `i-lucide-x`.
 

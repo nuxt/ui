@@ -166,7 +166,7 @@ slots:
 :placeholder{class="h-48 m-4"}
 ::
 
-### Handle Only
+### Handle only
 
 Use the `handle-only` prop to only allow the Drawer to be dragged by the handle.
 

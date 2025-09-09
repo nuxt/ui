@@ -252,7 +252,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.se
 :::
 ::
 
-### Selected Icon
+### Selected icon
 
 Use the `selected-icon` prop to customize the selected item [Icon](/docs/components/icon). Defaults to `i-lucide-check`.
 
@@ -327,7 +327,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
-### Trailing Icon
+### Trailing icon
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon) when an item has children. Defaults to `i-lucide-chevron-right`.
 
@@ -405,7 +405,7 @@ props:
 ---
 ::
 
-### Loading Icon
+### Loading icon
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
@@ -520,7 +520,7 @@ props:
 ---
 ::
 
-### Close Icon
+### Close icon
 
 Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 
@@ -604,7 +604,7 @@ props:
 ---
 ::
 
-### Back Icon
+### Back icon
 
 Use the `back-icon` prop to customize the back button [Icon](/docs/components/icon). Defaults to `i-lucide-arrow-left`.
 

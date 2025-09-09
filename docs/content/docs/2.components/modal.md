@@ -129,7 +129,7 @@ slots:
 The close button is not displayed if the `#content` slot is used as it's a part of the header.
 ::
 
-### Close Icon
+### Close icon
 
 Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 
