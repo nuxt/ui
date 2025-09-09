@@ -55,7 +55,7 @@ provide('navigation', mappedNavigation)
     <Analytics />
 
     <template v-if="!route.path.startsWith('/examples')">
-      <Banner />
+      <!-- <Banner /> -->
 
       <Header :links="links" />
     </template>
