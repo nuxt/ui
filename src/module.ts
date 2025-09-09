@@ -1,5 +1,5 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
 import type { HookResult } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
@@ -113,10 +113,12 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
     nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, 'isolate'].filter(Boolean).join(' ')
 
-    if (nuxt.options.builder === '@nuxt/vite-builder') {
+    nuxt.hook('vite:extendConfig', async (config) => {
       const plugin = await import('@tailwindcss/vite').then(r => r.default)
-      addVitePlugin(plugin())
-    } else {
+      config.plugins ||= []
+      config.plugins.push(plugin())
+    })
+    if (nuxt.options.builder !== '@nuxt/vite-builder') {
       nuxt.options.postcss.plugins['@tailwindcss/postcss'] = {}
     }
 
