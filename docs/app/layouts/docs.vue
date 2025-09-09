@@ -5,7 +5,7 @@ const route = useRoute()
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const { groupedNavigation } = useGroupNavigation(navigation!)
+const { navigationByCategory } = useNavigation(navigation!)
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const { groupedNavigation } = useGroupNavigation(navigation!)
           <UPageAside>
             <UContentNavigation
               :key="route.path"
-              :navigation="groupedNavigation"
+              :navigation="navigationByCategory"
               highlight
               :ui="{
                 linkTrailingBadge: 'font-semibold uppercase'

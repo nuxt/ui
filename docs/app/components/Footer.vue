@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
-const links = useFooterLinks()
+const { links } = useFooter()
 </script>
 
 <template>

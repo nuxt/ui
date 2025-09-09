@@ -1,7 +1,7 @@
-export function useSearchLinks() {
+export function useSearch() {
   const route = useRoute()
 
-  return computed(() => [{
+  const links = computed(() => [{
     label: 'Get Started',
     description: 'Learn how to get started with Nuxt UI.',
     icon: 'i-lucide-square-play',
@@ -42,14 +42,18 @@ export function useSearchLinks() {
     to: '/showcase'
   }, {
     label: 'Team',
-    description: 'Meet the team behind Nuxt UI.',
+    description: 'Meet the team building and maintaining Nuxt UI.',
     icon: 'i-lucide-users',
     to: '/team'
   }, {
-    label: 'Releases',
-    icon: 'i-lucide-rocket',
-    description: 'Stay up to date with the latest releases of Nuxt UI.',
+    label: 'GitHub',
+    icon: 'i-simple-icons-github',
+    description: 'Check out the Nuxt UI repository and follow development on GitHub.',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
   }])
+
+  return {
+    links
+  }
 }

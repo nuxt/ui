@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { framework, frameworks } = useSharedData()
+const { framework, frameworks } = useFrameworks()
 
 const value = ref<string | undefined>(undefined)
 

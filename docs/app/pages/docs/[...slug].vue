@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
-import { mapContentNavigation } from '@nuxt/ui/utils/content'
-import { findPageBreadcrumb } from '@nuxt/content/utils'
 
 const route = useRoute()
-const { framework } = useSharedData()
+const { framework } = useFrameworks()
 
 definePageMeta({
   layout: 'docs'
@@ -23,20 +21,12 @@ watch(page, () => {
   }
 }, { immediate: true })
 
-const { data: surround } = await useAsyncData(`${kebabCase(route.path)}-surround`, () => {
-  return queryCollectionItemSurroundings('docs', route.path, { fields: ['description'] })
-    .orWhere((group) => {
-      return group
-        .where('framework', '=', framework.value)
-        .where('framework', 'IS NULL')
-    })
-}, {
-  watch: [framework]
-})
-
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value?.path, { indexAsChild: true })).map(({ icon, ...link }) => link))
+const { findSurround, findBreadcrumb } = useNavigation(navigation!)
+
+const breadcrumb = computed(() => findBreadcrumb(page.value?.path as string))
+const surround = computed(() => findSurround(page.value?.path as string))
 
 if (!import.meta.prerender) {
   // Redirect to the correct framework version if the page is not the current framework

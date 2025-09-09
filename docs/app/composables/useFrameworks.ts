@@ -1,4 +1,4 @@
-export function useSharedData() {
+export function useFrameworks() {
   const framework = useCookie('nuxt-ui-framework', { default: () => 'nuxt' })
   const frameworks = computed(() => [{
     label: 'Nuxt',
