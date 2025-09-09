@@ -303,8 +303,11 @@ function createServer() {
   return server
 }
 
-// Create MCP handler using Vercel adapter
 export default defineEventHandler(async (event) => {
+  if (getHeader(event, 'accept')?.includes('text/html')) {
+    return sendRedirect(event, '/docs/getting-started/ai/mcp')
+  }
+
   const server = createServer()
 
   const transport: StreamableHTTPServerTransport = new StreamableHTTPServerTransport({
