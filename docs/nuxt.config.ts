@@ -171,7 +171,7 @@ export default defineNuxtConfig({
     },
     storage: {
       cache: {
-        driver: 'vercel-runtime-cache',
+        driver: 'vercel-runtime-cache'
       }
     }
   },
