@@ -23,8 +23,6 @@ export default defineCachedEventHandler(async (event) => {
     .sort()
 
   return {
-    repository: 'https://github.com/nuxt/ui',
-    documentation: 'https://ui.nuxt.com/components',
     components: componentNames,
     total: componentNames.length,
     categories: componentsPerCategory

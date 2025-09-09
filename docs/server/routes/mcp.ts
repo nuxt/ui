@@ -14,6 +14,25 @@ function createServer() {
 
   // RESOURCES
   server.registerResource(
+    'nuxt-ui-documentation-pages',
+    'resource://nuxt-ui/documentation-pages',
+    {
+      title: 'Nuxt UI Documentation Pages',
+      description: 'Complete list of available Nuxt UI documentation pages'
+    },
+    async (uri) => {
+      const result = await $fetch('/api/mcp/list-documentation-pages')
+      return {
+        contents: [{
+          uri: uri.href,
+          mimeType: 'application/json',
+          text: JSON.stringify(result, null, 2)
+        }]
+      }
+    }
+  )
+
+  server.registerResource(
     'nuxt-ui-components',
     'resource://nuxt-ui/components',
     {
@@ -27,6 +46,25 @@ function createServer() {
           uri: uri.href,
           mimeType: 'application/json',
           text: JSON.stringify(result.components, null, 2)
+        }]
+      }
+    }
+  )
+
+  server.registerResource(
+    'nuxt-ui-composables',
+    'resource://nuxt-ui/composables',
+    {
+      title: 'Nuxt UI Composables',
+      description: 'Complete list of available Nuxt UI v4 composables with metadata and categories'
+    },
+    async (uri) => {
+      const result = await $fetch('/api/mcp/list-composables')
+      return {
+        contents: [{
+          uri: uri.href,
+          mimeType: 'application/json',
+          text: JSON.stringify(result.composables, null, 2)
         }]
       }
     }
@@ -60,25 +98,6 @@ function createServer() {
     },
     async (uri) => {
       const result = await $fetch('/api/mcp/list-templates')
-      return {
-        contents: [{
-          uri: uri.href,
-          mimeType: 'application/json',
-          text: JSON.stringify(result, null, 2)
-        }]
-      }
-    }
-  )
-
-  server.registerResource(
-    'nuxt-ui-guides',
-    'resource://nuxt-ui/guides',
-    {
-      title: 'Nuxt UI Getting Started Guides',
-      description: 'Complete list of getting started guides and installation instructions'
-    },
-    async (uri) => {
-      const result = await $fetch('/api/mcp/list-getting-started-guides')
       return {
         contents: [{
           uri: uri.href,
@@ -179,6 +198,16 @@ function createServer() {
     {},
     async () => {
       const result = await $fetch('/api/mcp/list-components')
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+  )
+
+  server.tool(
+    'list_composables',
+    'Lists all available Nuxt UI composables with their categories and basic information',
+    {},
+    async () => {
+      const result = await $fetch('/api/mcp/list-composables')
       return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
     }
   )
