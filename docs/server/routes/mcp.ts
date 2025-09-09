@@ -194,7 +194,7 @@ function createServer() {
   // TOOLS
   server.tool(
     'list_components',
-    'Lists all available Nuxt UI components with their categories and basic information. Returns: A JSON object containing components (string[]), total (number), categories (Record<string, ComponentInfo[]>), repository (string), and documentation (string).',
+    'Lists all available Nuxt UI components with their categories and basic information. Returns: A JSON array of objects containing name, title, description, path and category.',
     {},
     async () => {
       const result = await $fetch('/api/mcp/list-components')
@@ -204,7 +204,7 @@ function createServer() {
 
   server.tool(
     'list_composables',
-    'Lists all available Nuxt UI composables with their categories and basic information',
+    'Lists all available Nuxt UI composables with their categories and basic information. Returns: A JSON array of objects containing name, title, description and path.',
     {},
     async () => {
       const result = await $fetch('/api/mcp/list-composables')
