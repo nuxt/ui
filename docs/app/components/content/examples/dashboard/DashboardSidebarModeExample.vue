@@ -21,8 +21,9 @@ const items: NavigationMenuItem[] = [{
 <template>
   <UDashboardGroup>
     <UDashboardSidebar :mode="mode">
-      <template #header>
-        <LogoPro class="h-5 w-auto" />
+      <template #header="{ collapsed }">
+        <Logo v-if="!collapsed" class="h-5 w-auto" />
+        <UIcon v-else name="i-simple-icons-nuxtdotjs" class="size-5 text-primary mx-auto" />
       </template>
 
       <UNavigationMenu

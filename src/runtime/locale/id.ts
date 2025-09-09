@@ -2,7 +2,7 @@ import type { Messages } from '../types'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
-  name: 'Indonesia',
+  name: 'Bahasa Indonesia',
   code: 'id',
   messages: {
     alert: {

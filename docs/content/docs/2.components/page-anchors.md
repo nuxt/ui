@@ -40,7 +40,7 @@ props:
       to: /docs/components
     - label: 'Figma Kit'
       icon: i-simple-icons-figma
-      to: https://www.figma.com/community/file/1288455405058138934
+      to: https://go.nuxt.com/figma-ui
       target: _blank
     - label: 'Releases'
       icon: i-simple-icons-github
@@ -77,7 +77,7 @@ const links: PageAnchor[] = [{
 }, {
   label: 'Figma Kit',
   icon: 'i-simple-icons-figma',
-  to: 'https://www.figma.com/community/file/1288455405058138934',
+  to: 'https://go.nuxt.com/figma-ui',
   target: '_blank'
 }, {
   label: 'Releases',
