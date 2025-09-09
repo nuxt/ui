@@ -147,7 +147,7 @@ props:
 ---
 ::
 
-### Nesting Forms
+### Nesting forms
 
 Nesting form components allows you to manage complex data structures, such as lists or conditional fields, more efficiently.
 

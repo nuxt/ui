@@ -50,7 +50,7 @@ Use the `shortcut` prop to change the shortcut used in [defineShortcuts](/docs/c
 </template>
 ```
 
-### Color Mode
+### Color mode
 
 By default, a group of commands will be added to the command palette so you can switch between light and dark mode. This will only take effect if the `colorMode` is not forced in a specific page which can be achieved through `definePageMeta`:
 

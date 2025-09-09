@@ -33,7 +33,7 @@ slots:
 :u-icon{name="i-simple-icons-facebook" class="size-10 shrink-0"}
 ::
 
-### Pause on Hover
+### Pause on hover
 
 Use the `pause-on-hover` prop to pause the animation when the user hovers over the content.
 

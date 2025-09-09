@@ -266,7 +266,7 @@ props:
 
 ## Examples
 
-### With Form validation
+### With form validation
 
 You can use the FileUpload within a [Form](/docs/components/form) and [FormField](/docs/components/form-field) components to handle validation and error handling.
 
