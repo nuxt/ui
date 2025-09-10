@@ -1,16 +1,18 @@
 <script setup lang="ts">
 const datetimes = [
   { label: 'Undefined value', value: undefined },
-  { label: 'Date instance', value: new Date('2002-11-18T00:00:00.000Z') },
+  { label: 'Date instance', value: 0 },
   { label: 'ISO Datetime string', value: '2002-11-18T00:00:00.000Z' },
   { label: 'RFC Datetime string', value: 'Sun, 18 Nov 2020 00:00:00 GMT' },
   { label: 'Date string', value: '2002-11-18' },
   { label: 'Milliseconds', value: 1037577600000 }
 ]
 
-const datetime = ref(undefined)
+const datetime = ref()
 
-const refresh = ref<boolean>(true)
+const realDatetime = computed(() => datetime.value === 0 ? Date.now() : datetime.value)
+
+const refresh = ref(true)
 
 const locales = [
   { label: 'Browser default', value: undefined },
@@ -20,7 +22,7 @@ const locales = [
   'zh-cn'
 ]
 
-const locale = ref<string | undefined>(undefined)
+const locale = ref()
 </script>
 
 <template>
@@ -36,7 +38,7 @@ const locale = ref<string | undefined>(undefined)
     </div>
 
     <div class="text-center py-8">
-      <UAgo :datetime="datetime" :locale="locale" :refresh="refresh" />
+      <UAgo :datetime="realDatetime" :locale="locale" :refresh="refresh" />
     </div>
   </div>
 </template>

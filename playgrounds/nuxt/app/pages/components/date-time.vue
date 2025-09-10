@@ -3,7 +3,7 @@ import { FormatStringMap } from '../../../../../src/runtime/components/DateTime.
 
 const datetimes = [
   { label: 'Undefined value', value: undefined },
-  { label: 'Date instance', value: new Date('2002-11-18T00:00:00.000Z') },
+  { label: 'Date instance', value: 0 },
   { label: 'ISO Datetime string', value: '2002-11-18T00:00:00.000Z' },
   { label: 'RFC Datetime string', value: 'Sun, 18 Nov 2020 00:00:00 GMT' },
   { label: 'Date string', value: '2002-11-18' },
@@ -12,21 +12,21 @@ const datetimes = [
 
 const datetime = ref(undefined)
 
-type FormatValue = keyof typeof FormatStringMap | Intl.DateTimeFormatOptions
+const realDatetime = computed(() => datetime.value === 0 ? Date.now() : datetime.value)
 
 const formatItems = [
   { label: 'Default value', value: undefined },
-  ...Object.entries(FormatStringMap).flatMap(([key, opts]) => ([
-    { label: `${key} (string)`, value: key as keyof typeof FormatStringMap },
-    { label: `${key} (object)`, value: opts as Intl.DateTimeFormatOptions }
-  ]))
+  ...Object.keys(FormatStringMap).map(key => ({
+    label: `${key} (string)`,
+    value: key
+  }))
 ]
 
-const format = ref<FormatValue | undefined>()
+const format = ref()
 
-const ago = ref<boolean>(false)
+const ago = ref(false)
 
-const refresh = ref<boolean>(false)
+const refresh = ref(false)
 
 const locales = [
   { label: 'Browser default', value: undefined },
@@ -55,7 +55,7 @@ const locale = ref<string | undefined>(undefined)
 
     <div class="text-center py-8">
       <UDateTime
-        :datetime="datetime"
+        :datetime="realDatetime"
         :format="format"
         :ago="ago"
         :locale="locale"
