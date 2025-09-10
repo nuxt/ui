@@ -15,6 +15,7 @@ const router = useRouter()
 
 const components = [
   'accordion',
+  'ago',
   'alert',
   'avatar',
   'badge',
@@ -30,6 +31,7 @@ const components = [
   'color-picker',
   'context-menu',
   'command-palette',
+  'datetime',
   'drawer',
   'dropdown-menu',
   'field-group',
