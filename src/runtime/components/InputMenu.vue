@@ -338,7 +338,7 @@ function onUpdate(value: any) {
 function onSearchTermUpdate(value: string) {
   searchTerm.value = value
   if (props.allowFreeInput) {
-    emits('update:modelValue', value)
+    emits('update:modelValue', value as GetModelValue<T, VK, M>)
     onUpdate(value)
   }
 }
