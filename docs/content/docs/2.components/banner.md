@@ -187,7 +187,7 @@ Use the Banner component in your `app.vue` or in a layout:
 ```vue [app.vue]{3}
 <template>
   <UApp>
-    <UBanner icon="i-lucide-construction" title="Nuxt UI v3 has been released!" />
+    <UBanner icon="i-lucide-construction" title="Nuxt UI v4 has been released!" />
 
     <UHeader />
 

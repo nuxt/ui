@@ -54,7 +54,7 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItem
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: keyof NestedItem<T>
+  labelKey?: GetItemKeys<T>
   /**
    * The icon displayed on the right side of a parent node.
    * @defaultValue appConfig.ui.icons.chevronDown
@@ -113,7 +113,7 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TreeProps<T, VK, M>>(), {
-  labelKey: 'label' as never,
+  labelKey: 'label',
   valueKey: 'value' as never
 })
 const emits = defineEmits<TreeEmits<T, VK, M>>()

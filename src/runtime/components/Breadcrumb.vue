@@ -3,7 +3,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/breadcrumb'
 import type { AvatarProps, IconProps, LinkProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Breadcrumb = ComponentConfig<typeof theme, AppConfig, 'breadcrumb'>
@@ -38,7 +38,7 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: string
+  labelKey?: GetItemKeys<T>
   class?: any
   ui?: Breadcrumb['slots']
 }

@@ -4,7 +4,7 @@ import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tabs'
 import type { AvatarProps, BadgeProps, IconProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Tabs = ComponentConfig<typeof theme, AppConfig, 'tabs'>
@@ -64,7 +64,7 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: string
+  labelKey?: GetItemKeys<T>
   class?: any
   ui?: Tabs['slots']
 }
@@ -108,7 +108,7 @@ const slots = defineSlots<TabsSlots<T>>()
 
 const appConfig = useAppConfig() as Tabs['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'activationMode', 'unmountOnHide'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'unmountOnHide'), emits)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) })({
   color: props.color,
@@ -125,7 +125,14 @@ defineExpose({
 </script>
 
 <template>
-  <TabsRoot v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <TabsRoot
+    v-bind="rootProps"
+    :model-value="modelValue"
+    :default-value="defaultValue"
+    :orientation="orientation"
+    :activation-mode="activationMode"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+  >
     <TabsList :class="ui.list({ class: props.ui?.list })">
       <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
 

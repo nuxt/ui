@@ -1,5 +1,5 @@
 import { isEqual } from 'ohash/utils'
-import type { GetItemKeys, NestedItem } from '../types/utils'
+import type { GetItemKeys } from '../types/utils'
 
 export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Keys[]): Pick<Data, Keys> {
   const result = {} as Pick<Data, Keys>
@@ -120,19 +120,15 @@ export function isEmpty(value: unknown): boolean {
   return false
 }
 
-export function getDisplayValue<T, V>(
-  items: T[],
+export function getDisplayValue<T extends Array<any>, V>(
+  items: T,
   value: V | undefined | null,
   options: {
     valueKey?: GetItemKeys<T>
-    labelKey?: keyof NestedItem<T>
+    labelKey?: GetItemKeys<T>
   } = {}
 ): string | undefined {
   const { valueKey, labelKey } = options
-
-  if (isEmpty(value)) {
-    return undefined
-  }
 
   const foundItem = items.find((item) => {
     const itemValue = (typeof item === 'object' && item !== null && valueKey)
@@ -140,6 +136,14 @@ export function getDisplayValue<T, V>(
       : item
     return compare(itemValue, value)
   })
+
+  if (isEmpty(value) && foundItem) {
+    return labelKey ? get(foundItem as Record<string, any>, labelKey as string) : undefined
+  }
+
+  if (isEmpty(value)) {
+    return undefined
+  }
 
   const source = foundItem ?? value
 

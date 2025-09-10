@@ -1,0 +1,35 @@
+---
+title: Icon
+description: 'Display icons from popular icon libraries to enhance your content.'
+framework: nuxt
+category: components
+---
+
+## Usage
+
+Use the `icon` component to display an [Icon](/docs/components/icon) in your content.
+
+::code-preview
+:icon{name="i-simple-icons-nuxtdotjs"}
+
+#code
+
+```mdc
+:icon{name="i-simple-icons-nuxtdotjs"}
+```
+
+::
+
+## API
+
+### Props
+
+:component-props{name="icon" prose}
+
+## Theme
+
+:component-theme{slug="icon" prose}
+
+## Changelog
+
+:component-changelog{prose}

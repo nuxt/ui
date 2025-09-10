@@ -39,7 +39,27 @@ export default defineNuxtModule({
       delete log.body
       const files = raw.replace(/\\/g, '/').trim().split('\n')
 
-      log.components = [...new Set(files.map(i => kebabCase(i.match(/^src\/runtime\/components\/(\w+)\.vue$/)?.[1] ?? '')).filter(Boolean) as string[])]
+      log.components = [...new Set(files.map((i) => {
+        const match = i.match(/^src\/runtime\/components\/(.+)\.vue$/)
+        if (!match) return ''
+
+        const fullPath = match[1]!
+
+        const parts = fullPath.split('/')
+
+        if (parts.length > 1) {
+          const subdir = parts[0]
+          const componentName = parts[parts.length - 1]!
+
+          if (subdir === 'prose') {
+            return `prose-${kebabCase(componentName)}`
+          }
+
+          return kebabCase(componentName)
+        }
+
+        return kebabCase(fullPath)
+      }).filter(Boolean) as string[])]
     }
 
     const result = logs.filter(i => i.components?.length || i.version)
