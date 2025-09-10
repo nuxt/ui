@@ -110,6 +110,11 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /**
+   * Allow free input that is not present in the items list.
+   * When true, the value typed by the user is directly reflected in `v-model`.
+   */
+  allowFreeInput?: boolean
+  /**
    * Determines if custom user input that does not exist in options can be added.
    * @defaultValue false
    */
@@ -330,6 +335,14 @@ function onUpdate(value: any) {
   }
 }
 
+function onSearchTermUpdate(value: string) {
+  searchTerm.value = value
+  if (props.allowFreeInput) {
+    emits('update:modelValue', value)
+    onUpdate(value)
+  }
+}
+
 function onBlur(event: FocusEvent) {
   emits('blur', event)
   emitFormBlur()
@@ -478,7 +491,7 @@ defineExpose({
         :required="required"
         @blur="onBlur"
         @focus="onFocus"
-        @update:model-value="searchTerm = $event"
+        @update:model-value="onSearchTermUpdate"
       />
 
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
