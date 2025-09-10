@@ -3,6 +3,10 @@ title: CardGroup
 description: 'Organize multiple cards in responsive grid layouts for better content presentation.'
 framework: nuxt
 category: components
+links:
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/CardGroup.vue
 ---
 
 ## Usage

@@ -3,6 +3,10 @@ title: Steps
 description: 'Transform headings into numbered step-by-step guides and tutorials.'
 framework: nuxt
 category: components
+links:
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Steps.vue
 ---
 
 ## Usage
