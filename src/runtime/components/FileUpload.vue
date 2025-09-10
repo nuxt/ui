@@ -323,6 +323,7 @@ defineExpose({
       <component
         :is="variant === 'button' ? 'button' : 'div'"
         ref="dropzoneRef"
+        :type="variant === 'button' ? 'button' : undefined"
         :role="variant === 'button' ? undefined : 'button'"
         :data-dragging="isDragging"
         :class="ui.base({ class: props.ui?.base })"
