@@ -162,18 +162,12 @@ export default defineNuxtConfig({
         '/docs/getting-started',
         '/api/countries.json',
         '/api/locales.json',
-        // '/api/releases.json',
-        // '/api/pulls.json'
-        '/404.html'
+        '/api/module.json'
+        // '/api/github/pulls.json',
+        // '/api/github/releases.json'
       ],
-      crawlLinks: true,
-      autoSubfolderIndex: false
+      crawlLinks: true
     }
-    // storage: {
-    //   cache: {
-    //     driver: 'vercel-runtime-cache'
-    //   }
-    // }
   },
 
   vite: {

@@ -1,6 +1,6 @@
 import { Octokit } from '@octokit/rest'
 
-export default cachedEventHandler(async () => {
+export default defineCachedEventHandler(async () => {
   if (!process.env.NUXT_GITHUB_TOKEN) {
     return []
   }
@@ -14,5 +14,6 @@ export default cachedEventHandler(async () => {
 
   return releases
 }, {
-  maxAge: 60 * 60
+  maxAge: 60 * 60, // 1 hour
+  getKey: () => 'releases'
 })

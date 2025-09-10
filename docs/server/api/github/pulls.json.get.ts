@@ -4,7 +4,7 @@ function isUserABot(user: any) {
   return user?.login?.endsWith('-bot') || user?.login?.endsWith('[bot]')
 }
 
-export default cachedEventHandler(async () => {
+export default defineCachedEventHandler(async () => {
   if (!process.env.NUXT_GITHUB_TOKEN) {
     return []
   }
@@ -19,5 +19,6 @@ export default cachedEventHandler(async () => {
 
   return pulls.filter(pull => !!pull.merged_at).filter(pull => !isUserABot(pull.user))
 }, {
-  maxAge: 60 * 60
+  maxAge: 60 * 60, // 1 hour
+  getKey: () => 'pulls'
 })
