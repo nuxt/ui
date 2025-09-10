@@ -162,7 +162,8 @@ export default defineNuxtConfig({
         '/docs/getting-started',
         '/api/countries.json',
         '/api/locales.json',
-        '/api/module.json'
+        '/api/module.json',
+        '/api/github/commits.json'
         // '/api/github/pulls.json',
         // '/api/github/releases.json'
       ],

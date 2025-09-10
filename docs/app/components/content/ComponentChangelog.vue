@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import type { CommitInfo } from '#build/changelog'
-import { changelog } from '#build/changelog'
-
 const props = defineProps<{
   prose?: boolean
 }>()
@@ -9,14 +6,22 @@ const props = defineProps<{
 const route = useRoute()
 const name = route.path.split('/').pop()
 
+const { data } = await useLazyFetch('/api/github/commits.json', {
+  key: `component-changelog-${name}`
+})
+
 const commits = computed(() => {
+  if (!data.value) {
+    return []
+  }
+
   const componentName = props.prose ? `prose-${name}` : name
-  const related = changelog.filter(c => c.version || c.components?.some(i => i === componentName))
+  const related = data.value.filter(c => c.version || c.components?.some(i => i === componentName))
 
   return related.filter((i, idx) => !(i.version && (!related[idx + 1] || related[idx + 1]?.version)))
 })
 
-function normalizeCommitMessage(commit: CommitInfo) {
+function normalizeCommitMessage(commit: { hash: string, message: string }) {
   const prefix = `[\`${commit.hash.slice(0, 5)}\`](https://github.com/nuxt/ui/commit/${commit.hash})`
   const content = commit.message.replace(/\(.*?\)/, '')
     .replace(/#(\d+)/g, '<a href=\'https://github.com/nuxt/ui/issues/$1\'>#$1</a>')
