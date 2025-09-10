@@ -707,7 +707,7 @@ exports[`FileUpload > renders with size lg correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size lg variant button correctly 1`] = `
-"<div class="relative flex flex-col"><button data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary p-2 hover:bg-elevated/25" tabindex="0">
+"<div class="relative flex flex-col"><button type="button" data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary p-2 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center"><span class="iconify i-lucide:upload shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -746,7 +746,7 @@ exports[`FileUpload > renders with size md correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size md variant button correctly 1`] = `
-"<div class="relative flex flex-col"><button data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary p-1.5 hover:bg-elevated/25" tabindex="0">
+"<div class="relative flex flex-col"><button type="button" data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary p-1.5 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center"><span class="iconify i-lucide:upload shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -785,7 +785,7 @@ exports[`FileUpload > renders with size sm correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size sm variant button correctly 1`] = `
-"<div class="relative flex flex-col"><button data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-xs border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary p-1.5 hover:bg-elevated/25" tabindex="0">
+"<div class="relative flex flex-col"><button type="button" data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-xs border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary p-1.5 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center"><span class="iconify i-lucide:upload shrink-0 size-4" aria-hidden="true"></span>
       <!--v-if-->
@@ -824,7 +824,7 @@ exports[`FileUpload > renders with size xl correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size xl variant button correctly 1`] = `
-"<div class="relative flex flex-col"><button data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-base border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary p-2 hover:bg-elevated/25" tabindex="0">
+"<div class="relative flex flex-col"><button type="button" data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-base border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary p-2 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center"><span class="iconify i-lucide:upload shrink-0 size-6" aria-hidden="true"></span>
       <!--v-if-->
@@ -863,7 +863,7 @@ exports[`FileUpload > renders with size xs correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size xs variant button correctly 1`] = `
-"<div class="relative flex flex-col"><button data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-xs border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary p-1 hover:bg-elevated/25" tabindex="0">
+"<div class="relative flex flex-col"><button type="button" data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-xs border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary p-1 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center"><span class="iconify i-lucide:upload shrink-0 size-4" aria-hidden="true"></span>
       <!--v-if-->
@@ -916,7 +916,7 @@ exports[`FileUpload > renders with variant area correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with variant button correctly 1`] = `
-"<div class="relative flex flex-col"><button data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary p-1.5 hover:bg-elevated/25" tabindex="0">
+"<div class="relative flex flex-col"><button type="button" data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary p-1.5 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center"><span class="iconify i-lucide:upload shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->

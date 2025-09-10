@@ -40,9 +40,9 @@ const links = [{
         size="sm"
       />
       <UButton
-        aria-label="Nuxt UI on Discord"
+        aria-label="Nuxt on Discord"
         icon="i-simple-icons-discord"
-        to="https://chat.nuxt.dev"
+        to="https://go.nuxt.com/discord"
         target="_blank"
         color="neutral"
         variant="ghost"
@@ -51,7 +51,7 @@ const links = [{
       <UButton
         aria-label="Nuxt on X"
         icon="i-simple-icons-x"
-        to="https://x.com/nuxt_js"
+        to="https://go.nuxt.com/x"
         target="_blank"
         color="neutral"
         variant="ghost"
@@ -60,7 +60,7 @@ const links = [{
       <UButton
         aria-label="Nuxt on BlueSky"
         icon="i-simple-icons-bluesky"
-        to="https://bsky.app/profile/nuxt.com"
+        to="https://go.nuxt.com/bluesky"
         target="_blank"
         color="neutral"
         variant="ghost"
