@@ -1240,6 +1240,68 @@ exports[`ContentNavigation > renders with ui correctly 1`] = `
 </nav>"
 `;
 
+exports[`ContentNavigation > renders without collapsible correctly 1`] = `
+"<nav>
+  <ul class="isolate -mx-2.5 -mt-1.5">
+    <li data-state="open" data-orientation="vertical" class="flex flex-col data-[state=open]:mb-1.5"><button type="button" aria-controls="" aria-expanded="true" data-state="open" id="reka-accordion-trigger-v-0-0-0" data-reka-collection-item="" data-orientation="vertical" class="group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary text-muted hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted transition-colors before:transition-colors font-semibold focus-visible:ring-primary">
+        <!--v-if--><span class="truncate">Getting Started<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="font-medium inline-flex items-center text-[10px]/3 px-1.5 py-1 gap-1 rounded-sm ring ring-inset ring-accented text-default bg-default shrink-0"><!--v-if--><span class="truncate">New</span>
+        <!--v-if--></span><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span>
+      </button>
+      <div role="region" aria-labelledby="reka-accordion-trigger-v-0-0-0" data-orientation="vertical" style="--reka-accordion-content-width: var(--reka-collapsible-content-width); --reka-accordion-content-height: var(--reka-collapsible-content-height); --reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;" class="data-[state=open]:animate-[accordion-down_200ms_ease-out] data-[state=closed]:animate-[accordion-up_200ms_ease-out] overflow-hidden focus:outline-none" id="reka-collapsible-content-v-0-0-1">
+        <!---->
+        <ul class="ms-5 border-s border-default">
+          <li class="ps-1.5 -ms-px"><a href="/getting-started" class="group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary font-medium text-primary before:bg-elevated">
+              <!--v-if--><span class="truncate">Introduction<!--v-if--></span>
+              <!--v-if-->
+            </a></li>
+          <li class="ps-1.5 -ms-px"><a href="/getting-started/installation" class="group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary text-muted hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted transition-colors before:transition-colors">
+              <!--v-if--><span class="truncate">Installation<!--v-if--></span>
+              <!--v-if-->
+            </a></li>
+          <li class="ps-1.5 -ms-px"><a href="/getting-started/theming" class="group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary text-muted hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted transition-colors before:transition-colors">
+              <!--v-if--><span class="truncate">Theming<!--v-if--></span>
+              <!--v-if-->
+            </a></li>
+          <li class="ps-1.5 -ms-px"><a href="/getting-started/structure" class="group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary text-muted hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted transition-colors before:transition-colors">
+              <!--v-if--><span class="truncate">Structure<!--v-if--></span>
+              <!--v-if-->
+            </a></li>
+          <li class="ps-1.5 -ms-px"><a href="/getting-started/content" class="group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary text-muted hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted transition-colors before:transition-colors">
+              <!--v-if--><span class="truncate">Content<!--v-if--></span>
+              <!--v-if-->
+            </a></li>
+        </ul>
+      </div>
+    </li>
+    <li data-state="open" data-orientation="vertical" class="flex flex-col data-[state=open]:mb-1.5"><button type="button" aria-controls="" aria-expanded="true" data-state="open" id="reka-accordion-trigger-v-0-0-2" data-reka-collection-item="" data-orientation="vertical" class="group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary text-muted hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted transition-colors before:transition-colors font-semibold focus-visible:ring-primary">
+        <!--v-if--><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180" aria-hidden="true"></span></span>
+      </button>
+      <div role="region" aria-labelledby="reka-accordion-trigger-v-0-0-2" data-orientation="vertical" style="--reka-accordion-content-width: var(--reka-collapsible-content-width); --reka-accordion-content-height: var(--reka-collapsible-content-height); --reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;" class="data-[state=open]:animate-[accordion-down_200ms_ease-out] data-[state=closed]:animate-[accordion-up_200ms_ease-out] overflow-hidden focus:outline-none" id="reka-collapsible-content-v-0-0-3">
+        <!---->
+        <ul class="ms-5 border-s border-default">
+          <li class="ps-1.5 -ms-px"><a href="/components/content-navigation" class="group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary text-muted hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted transition-colors before:transition-colors">
+              <!--v-if--><span class="truncate">ContentNavigation<!--v-if--></span>
+              <!--v-if-->
+            </a></li>
+          <li class="ps-1.5 -ms-px"><a href="/components/content-search" class="group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary text-muted hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted transition-colors before:transition-colors">
+              <!--v-if--><span class="truncate">ContentSearch<!--v-if--></span>
+              <!--v-if-->
+            </a></li>
+          <li class="ps-1.5 -ms-px"><a href="/components/content-surround" class="group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary text-muted hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted transition-colors before:transition-colors">
+              <!--v-if--><span class="truncate">ContentSurround<!--v-if--></span>
+              <!--v-if-->
+            </a></li>
+          <li class="ps-1.5 -ms-px"><a href="/components/content-toc" class="group relative w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary text-muted hover:text-highlighted hover:before:bg-elevated/50 data-[state=open]:text-highlighted transition-colors before:transition-colors">
+              <!--v-if--><span class="truncate">ContentToc<!--v-if--></span>
+              <!--v-if-->
+            </a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</nav>"
+`;
+
 exports[`ContentNavigation > renders without defaultOpen correctly 1`] = `
 "<nav>
   <ul class="isolate -mx-2.5 -mt-1.5">

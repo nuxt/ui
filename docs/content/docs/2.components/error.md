@@ -10,17 +10,10 @@ links:
 
 ## Usage
 
-Like the [Main](/docs/components/main) component, the Error component renders a `<main>` element that works together with the [Header](/docs/components/header) component to create a full-height layout that extends to the viewport's available height.
+The Error component renders a `<main>` element that works together with the [Header](/docs/components/header) component to create a full-height layout that extends to the viewport's available height.
 
-::note
-The Header component defines its height through a `--ui-header-height` CSS variable, which you can customize by overriding it in your CSS:
-
-```css
-:root {
-  --ui-header-height: --spacing(16);
-}
-```
-
+::tip{to="/docs/getting-started/theme/css-variables#header"}
+The Error component uses the `--ui-header-height` CSS variable to position itself correctly below the [Header](/docs/components/header).
 ::
 
 ### Error

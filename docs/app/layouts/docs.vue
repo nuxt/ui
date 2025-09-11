@@ -16,6 +16,7 @@ const { navigationByCategory } = useNavigation(navigation!)
           <UPageAside>
             <UContentNavigation
               :key="route.path"
+              :collapsible="false"
               :navigation="navigationByCategory"
               highlight
               :ui="{

@@ -10,13 +10,12 @@ links:
 
 ## Usage
 
-The Header component renders a `<header>` element. Its height is defined through a `--ui-header-height` CSS variable, which you can customize by overriding it in your CSS:
+The Header component renders a `<header>` element.
 
-```css
-:root {
-  --ui-header-height: --spacing(16);
-}
-```
+::tip{to="/docs/getting-started/theme/css-variables#header"}
+Its height is defined through a `--ui-header-height` CSS variable.
+::
+
 
 Use the `left`, `default` and `right` slots to customize the header and the `body` or `content` slots to customize the header menu.
 
