@@ -30,7 +30,13 @@ In order to return a value from the overlay, the `overlay.open().instance` can b
 
 ## API
 
-### `create(component: T, options: OverlayOptions): OverlayInstance`
+The `useOverlay` composable provides methods to manage overlays globally. Each created overlay returns an instance with its own methods.
+
+### create()
+
+```ts
+create(component: T, options: OverlayOptions): OverlayInstance
+```
 
 Create an overlay, and return a factory instance.
 
@@ -41,7 +47,11 @@ Create an overlay, and return a factory instance.
     - `props?: ComponentProps`: An optional object of props to pass to the rendered component.
     - `destroyOnClose?: boolean` Removes the overlay from memory when closed. Defaults to `false`.
 
-### `open(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T>`
+### open()
+
+```ts
+open(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T>
+```
 
 Open an overlay by its `id`.
 
@@ -49,7 +59,11 @@ Open an overlay by its `id`.
   - `id`: The identifier of the overlay.
   - `props`: An optional object of props to pass to the rendered component.
 
-### `close(id: symbol, value?: any): void`
+### close()
+
+```ts
+close(id: symbol, value?: any): void
+```
 
 Close an overlay by its `id`.
 
@@ -57,7 +71,11 @@ Close an overlay by its `id`.
   - `id`: The identifier of the overlay.
   - `value`: A value to resolve the overlay promise with.
 
-### `patch(id: symbol, props: ComponentProps<T>): void`
+### patch()
+
+```ts
+patch(id: symbol, props: ComponentProps<T>): void
+```
 
 Update an overlay by its `id`.
 
@@ -65,27 +83,43 @@ Update an overlay by its `id`.
   - `id`: The identifier of the overlay.
   - `props`: An object of props to update on the rendered component.
 
-### `unmount(id: symbol): void`
+### unmount()
+
+```ts
+unmount(id: symbol): void
+```
 
 Remove an overlay from the DOM by its `id`.
 
 - Parameters:
   - `id`: The identifier of the overlay.
 
-### `isOpen(id: symbol): boolean`
+### isOpen()
+
+```ts
+isOpen(id: symbol): boolean
+```
 
 Check if an overlay is open using its `id`.
 
 - Parameters:
   - `id`: The identifier of the overlay.
 
-### `overlays: Overlay[]`
+### overlays
+
+```ts
+overlays: Overlay[]
+```
 
 In-memory list of all overlays that were created.
 
 ## Instance API
 
-### `open(props?: ComponentProps<T>): Promise<OpenedOverlay<T>>`
+### open()
+
+```ts
+open(props?: ComponentProps<T>): Promise<OpenedOverlay<T>>
+```
 
 Open the overlay.
 
@@ -108,14 +142,22 @@ function openModal() {
 </script>
 ```
 
-### `close(value?: any): void`
+### close()
+
+```ts
+close(value?: any): void
+```
 
 Close the overlay.
 
 - Parameters:
   - `value`: A value to resolve the overlay promise with.
 
-### `patch(props: ComponentProps<T>)`
+### patch()
+
+```ts
+patch(props: ComponentProps<T>): void
+```
 
 Update the props of the overlay.
 
