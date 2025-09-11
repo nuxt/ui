@@ -1,34 +1,34 @@
 <script setup lang="ts">
 const items = [
   {
-    label: 'What are the main considerations when upgrading to Nuxt UI v3?',
+    label: 'Is Nuxt UI free to use?',
     icon: 'i-lucide-circle-help',
-    content: 'The transition to v3 involves significant changes, including new component structures, updated theming approaches, and revised TypeScript definitions. We recommend a careful, incremental upgrade process, starting with thorough testing in a development environment.'
+    content: 'Yes! Nuxt UI is completely free and open source under the MIT license. All 100+ components are available to everyone.'
   },
   {
-    label: 'Is Nuxt UI v3 compatible with standalone Vue projects?',
+    label: 'Can I use Nuxt UI with Vue without Nuxt?',
     icon: 'i-lucide-circle-help',
-    content: 'Nuxt UI is now compatible with Vue! You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.'
+    content: 'Yes! While optimized for Nuxt, Nuxt UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.'
   },
   {
-    label: 'Will Nuxt UI v3 work with other CSS frameworks like UnoCSS?',
+    label: 'Will Nuxt UI work with other CSS frameworks like UnoCSS?',
     icon: 'i-lucide-circle-help',
-    content: 'Nuxt UI v3 is currently designed to work exclusively with Tailwind CSS. While there\'s interest in UnoCSS support, implementing it would require significant changes to the theme structure due to differences in class naming conventions. As a result, we don\'t have plans to add UnoCSS support in v3.'
+    content: 'No. Nuxt UI is designed exclusively for Tailwind CSS. UnoCSS support would require significant architecture changes due to different class naming conventions.'
   },
   {
-    label: 'How does Nuxt UI v3 handle accessibility?',
+    label: 'How does Nuxt UI handle accessibility?',
     icon: 'i-lucide-circle-help',
-    content: 'Nuxt UI v3 enhances accessibility through Reka UI integration. This provides automatic ARIA attributes, keyboard navigation support, intelligent focus management, and screen reader announcements. While offering a strong foundation, proper implementation and testing in your specific use case remains crucial for full accessibility compliance. For more detailed information, refer to [Reka UI\'s accessibility documentation](https://reka-ui.com/docs/overview/accessibility).'
+    content: 'Through [Reka UI](https://reka-ui.com/docs/overview/accessibility) integration, Nuxt UI provides automatic ARIA attributes, keyboard navigation, focus management, and screen reader support. While offering a strong foundation, testing in your specific use case remains important.'
   },
   {
-    label: 'What is the testing approach for Nuxt UI v3?',
+    label: 'How is Nuxt UI tested?',
     icon: 'i-lucide-circle-help',
-    content: 'Nuxt UI v3 ensures reliability with 1000+ Vitest tests, covering core functionality and accessibility. This robust testing suite supports the library\'s stability and serves as a reference for developers.'
+    content: 'Nuxt UI ensures reliability with 1000+ Vitest tests covering core functionality and accessibility.'
   },
   {
-    label: 'Is this version stable and suitable for production use?',
+    label: 'Is Nuxt UI production-ready?',
     icon: 'i-lucide-circle-help',
-    content: 'As Nuxt UI v3 is currently in alpha, we recommend thorough testing before using it in production environments. We\'re actively working on stabilization and welcome feedback from early adopters to improve the library. Feel free to report any issues you encounter on our [GitHub repository](https://github.com/nuxt/ui/issues).'
+    content: 'Yes! Nuxt UI is used in production by thousands of applications with extensive tests, regular updates, and active maintenance.'
   }
 ]
 </script>
@@ -38,7 +38,7 @@ const items = [
     type="multiple"
     :items="items"
     :unmount-on-hide="false"
-    :default-value="['0']"
+    :default-value="['3']"
     :ui="{
       trigger: 'text-base',
       body: 'text-base text-muted'

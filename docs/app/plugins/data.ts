@@ -1,7 +1,7 @@
 export default defineNuxtPlugin({
   enforce: 'post',
   setup() {
-    const { framework } = useSharedData()
+    const { framework } = useFrameworks()
 
     if (import.meta.client) {
       useHead({

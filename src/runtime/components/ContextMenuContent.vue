@@ -3,7 +3,7 @@ import type { ContextMenuContentProps as RekaContextMenuContentProps, ContextMen
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/context-menu'
 import type { AvatarProps, ContextMenuItem, ContextMenuSlots, IconProps, KbdProps } from '../types'
-import type { ArrayOrNested, NestedItem } from '../types/utils'
+import type { ArrayOrNested, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
@@ -12,7 +12,7 @@ interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> exte
   items?: T
   portal?: boolean | string | HTMLElement
   sub?: boolean
-  labelKey: keyof NestedItem<T>
+  labelKey: GetItemKeys<T>
   /**
    * @IconifyIcon
    */
