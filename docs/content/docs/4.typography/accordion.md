@@ -82,4 +82,4 @@ extra:
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

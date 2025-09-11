@@ -57,4 +57,4 @@ Wrap any content with the `code-preview` component to display a live preview alo
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

@@ -81,4 +81,4 @@ Like the `ProsePre` component, the `CodeGroup` handles filenames, icons and copy
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

@@ -57,4 +57,4 @@ Wrap your content with the `collapsible` component to display a [Collapsible](/d
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

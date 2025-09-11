@@ -44,4 +44,4 @@ The `description` can be set as prop or in the default slot with full **markdown
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

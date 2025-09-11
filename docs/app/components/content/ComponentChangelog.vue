@@ -2,7 +2,7 @@
 import { camelCase, upperFirst } from 'scule'
 
 const props = defineProps<{
-  prose?: boolean
+  prefix?: string
 }>()
 
 const route = useRoute()
@@ -12,7 +12,7 @@ const camelName = upperFirst(camelCase(name))
 const { data: commits } = await useLazyFetch('/api/github/commits', {
   key: `component-changelog-${name}`,
   query: {
-    path: `src/runtime/components/${props.prose ? 'prose/' : ''}${camelName}.vue`
+    path: `src/runtime/components/${props.prefix ? `${props.prefix}/` : ''}${camelName}.vue`
   }
 })
 

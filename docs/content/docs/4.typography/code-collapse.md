@@ -91,4 +91,4 @@ Wrap your code-block with a `code-collapse` component to display a collapsible c
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

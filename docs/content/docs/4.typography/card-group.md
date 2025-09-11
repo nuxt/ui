@@ -121,4 +121,4 @@ A landing page you can use as starting point.
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

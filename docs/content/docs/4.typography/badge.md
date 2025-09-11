@@ -41,4 +41,4 @@ Use markdown in the default slot of the `badge` component to display a [Badge](/
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

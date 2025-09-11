@@ -86,4 +86,4 @@ npm run dev
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

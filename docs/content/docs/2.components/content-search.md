@@ -157,4 +157,4 @@ It is recommended to wrap the `ContentSearch` component in a [ClientOnly](https:
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prefix="content"}
