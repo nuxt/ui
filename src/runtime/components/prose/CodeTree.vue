@@ -152,10 +152,13 @@ onBeforeUpdate(() => rerenderCount.value++)
       v-slot="{ isExpanded, isSelected }"
       :level="level"
       :value="item"
-      as="li"
       :class="level > 1 ? ui.itemWithChildren({ class: props.ui?.itemWithChildren }) : ui.item({ class: props.ui?.item })"
     >
-      <button type="button" :data-expanded="isExpanded" :class="ui.link({ class: props.ui?.link, active: isSelected })">
+      <button
+        type="button"
+        :data-expanded="isExpanded"
+        :class="ui.link({ class: props.ui?.link, active: isSelected })"
+      >
         <UIcon
           v-if="item.children?.length"
           :name="isExpanded ? appConfig.ui.icons.folderOpen : appConfig.ui.icons.folder"
