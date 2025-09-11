@@ -27,7 +27,11 @@ Learn how to customize the appearance and behavior of toasts in the **Toast** co
 
 ## API
 
-### `add(toast: Partial<Toast>): Toast`
+### add()
+
+```ts
+add(toast: Partial<Toast>): Toast
+```
 
 Adds a new toast notification.
 
@@ -52,7 +56,11 @@ function showToast() {
 </script>
 ```
 
-### `update(id: string | number, toast: Partial<Toast>)`
+### update()
+
+```ts
+update(id: string | number, toast: Partial<Toast>): void
+```
 
 Updates an existing toast notification.
 
@@ -73,7 +81,11 @@ function updateToast(id: string | number) {
 </script>
 ```
 
-### `remove(id: string | number)`
+### remove()
+
+```ts
+remove(id: string | number): void
+```
 
 Removes a toast notification.
 
@@ -90,7 +102,11 @@ function removeToast(id: string | number) {
 </script>
 ```
 
-### `clear()`
+### clear()
+
+```ts
+clear(): void
+```
 
 Removes all toast notifications.
 
@@ -105,6 +121,10 @@ function clearAllToasts() {
 ```
 
 ### `toasts`
+
+```ts
+toasts: Ref<Toast[]>
+```
 
 - Type: `Ref<Toast[]>`
 - Description: A reactive array containing all current toast notifications.

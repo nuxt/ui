@@ -29,13 +29,18 @@ Learn how to display shortcuts in components in the **Kbd** component documentat
 
 ## API
 
-### `defineShortcuts(config: ShortcutsConfig, options?: ShortcutsOptions)`
+### defineShortcuts()
+
+```ts
+defineShortcuts(config: ShortcutsConfig, options?: ShortcutsOptions): void
+```
 
 Define keyboard shortcuts for your application.
 
-- `config`: An object where keys are shortcut definitions and values are either handler functions or shortcut configuration objects.
-- `options`: Optional configuration for the shortcuts behavior.
-  - `chainDelay`: The delay between key presses to consider the shortcut as chained. Default is `250`.
+- Parameters:
+  - `config`: An object where keys are shortcut definitions and values are either handler functions or shortcut configuration objects.
+  - `options`: Optional configuration for the shortcuts behavior:
+    - `chainDelay`: The delay between key presses to consider the shortcut as chained. Default is `250`.
 
 #### Shortcut definition
 
