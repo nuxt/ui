@@ -65,15 +65,15 @@ Yes! Nuxt UI is used in production by thousands of applications with extensive t
 
 ### Props
 
-:component-props{name="accordion" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="accordion" prose}
+:component-slots{prose}
 
 ## Theme
 
-::component-theme{slug="accordion" prose}
+::component-theme{prose}
 ---
 extra:
   - accordionItem

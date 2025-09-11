@@ -84,15 +84,15 @@ This action cannot be undone.
 
 ### Props
 
-:component-props{name="callout" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="callout" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="callout" prose}
+:component-theme{prose}
 
 ## Changelog
 

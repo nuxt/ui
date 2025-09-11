@@ -63,15 +63,15 @@ Group fields together in a list.
 
 ### Props
 
-:component-props{name="field-group" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="field-group" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="field-group" prose}
+:component-theme{prose}
 
 ## Changelog
 

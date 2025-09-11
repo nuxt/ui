@@ -45,15 +45,15 @@ Wrap your content with the `collapsible` component to display a [Collapsible](/d
 
 ### Props
 
-:component-props{name="collapsible" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="collapsible" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="collapsible" prose}
+:component-theme{prose}
 
 ## Changelog
 

@@ -79,15 +79,15 @@ Wrap your code-block with a `code-collapse` component to display a collapsible c
 
 ### Props
 
-:component-props{name="code-collapse" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="code-collapse" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="code-collapse" prose}
+:component-theme{prose}
 
 ## Changelog
 

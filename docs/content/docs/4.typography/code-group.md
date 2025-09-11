@@ -69,15 +69,15 @@ Like the `ProsePre` component, the `CodeGroup` handles filenames, icons and copy
 
 ### Props
 
-:component-props{name="code-group" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="code-group" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="code-group" prose}
+:component-theme{prose}
 
 ## Changelog
 

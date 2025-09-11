@@ -28,11 +28,11 @@ Use the `kbd` component to display a [Kbd](/docs/components/kbd) in your content
 
 ### Props
 
-:component-props{name="kbd" prose}
+:component-props{prose}
 
 ## Theme
 
-:component-theme{slug="kbd" prose}
+:component-theme{prose}
 
 ## Changelog
 
