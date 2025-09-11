@@ -633,7 +633,7 @@ describe('Form', () => {
     await flushPromises()
     expect(wrapper.html()).toContain('Error message')
   })
-  it('should not have race condition when clear is called in multiple watchers', async () => {
+  it('should not have race condition when clear is called in watchers', async () => {
     const wrapper = await mountSuspended({
       components: {
         UForm,
