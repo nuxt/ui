@@ -73,13 +73,22 @@ export default defineNuxtConfig({
     '/composables/**': { redirect: { to: '/docs/composables/**', statusCode: 301 }, prerender: false },
     // v4 redirects - default root pages
     '/docs': { redirect: '/docs/getting-started', prerender: false },
-    '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
     '/docs/getting-started/migration': { redirect: '/docs/getting-started/migration/v4', prerender: false },
+    '/docs/getting-started/integrations': { redirect: '/docs/getting-started/integrations/icons', prerender: false },
+    '/docs/getting-started/ai': { redirect: '/docs/getting-started/ai/llms-txt', prerender: false },
+    '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
     // v4 redirects - default shadow pages
     '/docs/getting-started/installation': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
-    '/docs/getting-started/icons': { redirect: '/docs/getting-started/icons/nuxt', prerender: false },
-    '/docs/getting-started/color-mode': { redirect: '/docs/getting-started/color-mode/nuxt', prerender: false },
-    '/docs/getting-started/i18n': { redirect: '/docs/getting-started/i18n/nuxt', prerender: false },
+    '/docs/getting-started/integrations/icons': { redirect: '/docs/getting-started/integrations/icons/nuxt', prerender: false },
+    '/docs/getting-started/integrations/color-mode': { redirect: '/docs/getting-started/integrations/color-mode/nuxt', prerender: false },
+    '/docs/getting-started/integrations/i18n': { redirect: '/docs/getting-started/integrations/i18n/nuxt', prerender: false },
+    // v4 redirects - renamed pages
+    '/docs/getting-started/typography': { redirect: { to: '/docs/typography', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/icons/**': { redirect: { to: '/docs/getting-started/integrations/icons/**', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/fonts': { redirect: { to: '/docs/getting-started/integrations/fonts', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/color-mode/**': { redirect: { to: '/docs/getting-started/integrations/color-mode/**', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/i18n/**': { redirect: { to: '/docs/getting-started/integrations/i18n/**', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/content': { redirect: { to: '/docs/getting-started/integrations/content', statusCode: 301 }, prerender: false },
     // v4 redirects - renamed components
     '/docs/components/button-group': { redirect: { to: '/docs/components/field-group', statusCode: 301 }, prerender: false },
     '/docs/components/page-accordion': { redirect: { to: '/docs/components/accordion', statusCode: 301 }, prerender: false },

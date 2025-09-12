@@ -21,7 +21,7 @@ const items: NavigationMenuItem[] = [{
       toggle-side="right"
     >
       <template #header>
-        <LogoPro class="h-5 w-auto" />
+        <Logo class="h-5 w-auto" />
       </template>
 
       <UNavigationMenu

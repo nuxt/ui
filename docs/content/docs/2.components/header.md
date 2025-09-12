@@ -201,7 +201,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
   active: route.path.startsWith('/docs/components')
 }, {
   label: 'Figma',
-  to: 'https://www.figma.com/community/file/1288455405058138934',
+  to: 'https://go.nuxt.com/figma-ui',
   target: '_blank'
 }, {
   label: 'Releases',

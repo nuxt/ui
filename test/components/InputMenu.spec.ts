@@ -117,6 +117,63 @@ describe('InputMenu', () => {
     })
   })
 
+  describe('it should display correct label', () => {
+    test.each([null, undefined, ''])('falsy model value %s should display placeholder', (modelValue) => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items,
+          modelValue,
+          placeholder: 'Select an item'
+        }
+      })
+
+      expect(wrapper.find('input').attributes('placeholder')).toBe('Select an item')
+    })
+
+    test('with string array and string value', () => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items: ['Apple', 'Banana', 'Cherry'],
+          modelValue: 'Banana'
+        }
+      })
+
+      expect(wrapper.find('input').element.value).toBe('Banana')
+    })
+
+    test('with multiple and empty array value should display placeholder', () => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items,
+          multiple: true,
+          modelValue: [],
+          placeholder: 'Select items'
+        }
+      })
+      expect(wrapper.find('input').attributes('placeholder')).toBe('Select items')
+    })
+
+    test('with falsy modelValue and options items contain falsy', async () => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items: [
+            {
+              label: 'John Doe',
+              value: null
+            },
+            {
+              label: 'John Lennon',
+              value: 1
+            }
+          ],
+          valueKey: 'value',
+          modelValue: null
+        }
+      })
+      expect(wrapper.find('input').element.value).toBe('John Doe')
+    })
+  })
+
   describe('form integration', async () => {
     async function createForm(validateOn?: FormInputEvents[]) {
       const wrapper = await renderForm({

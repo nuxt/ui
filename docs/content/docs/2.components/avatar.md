@@ -109,6 +109,12 @@ You can use a [Tooltip](/docs/components/tooltip) component to display a tooltip
 
 :component-example{name="avatar-tooltip-example"}
 
+### With mask
+
+You can use a CSS mask to display an Avatar with a custom shape instead of a simple circle.
+
+:component-example{name="avatar-mask-example"}
+
 ## API
 
 ### Props

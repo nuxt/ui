@@ -24,9 +24,12 @@ watch(page, () => {
 }, { immediate: true })
 
 const { data: surround } = await useAsyncData(`${kebabCase(route.path)}-surround`, () => {
-  return queryCollectionItemSurroundings('docs', route.path, {
-    fields: ['description']
-  }).orWhere(group => group.where('framework', '=', framework.value).where('framework', 'IS NULL'))
+  return queryCollectionItemSurroundings('docs', route.path, { fields: ['description'] })
+    .orWhere((group) => {
+      return group
+        .where('framework', '=', framework.value)
+        .where('framework', 'IS NULL')
+    })
 }, {
   watch: [framework]
 })
@@ -38,7 +41,9 @@ const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(naviga
 if (!import.meta.prerender) {
   // Redirect to the correct framework version if the page is not the current framework
   watch(framework, () => {
-    if (page.value?.framework && page.value?.framework !== framework.value) {
+    const route = useRoute()
+
+    if (page.value?.path === route.path && page.value?.framework && page.value?.framework !== framework.value) {
       if (route.path.endsWith(`/${page.value?.framework}`)) {
         navigateTo(`${route.path.split('/').slice(0, -1).join('/')}/${framework.value}`)
       } else {

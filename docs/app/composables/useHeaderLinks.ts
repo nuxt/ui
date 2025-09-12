@@ -1,26 +1,21 @@
 export function useHeaderLinks() {
   const route = useRoute()
 
-  return computed(() => [{
+  const desktopLinks = computed(() => [{
     label: 'Docs',
-    icon: 'i-lucide-square-play',
     to: '/docs',
     active: route.path.startsWith('/docs/')
   }, {
     label: 'Figma',
-    icon: 'i-simple-icons-figma',
     to: '/figma'
   }, {
-    icon: 'i-lucide-panels-top-left',
     label: 'Templates',
     to: '/templates'
   }, {
-    icon: 'i-lucide-presentation',
     label: 'Showcase',
     to: '/showcase'
   }, {
     label: 'Community',
-    icon: 'i-lucide-users',
     children: [{
       label: 'Team',
       description: 'Meet the team behind Nuxt UI.',
@@ -47,8 +42,63 @@ export function useHeaderLinks() {
     }]
   }, {
     label: 'Releases',
-    icon: 'i-lucide-rocket',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
   }])
+
+  const mobileLinks = computed(() => [{
+    label: 'Docs',
+    icon: 'i-lucide-book-open',
+    to: '/docs',
+    active: false,
+    defaultOpen: true,
+    children: [{
+      label: 'Get Started',
+      icon: 'i-lucide-square-play',
+      to: '/docs/getting-started',
+      active: route.path.startsWith('/docs/getting-started')
+    }, {
+      label: 'Components',
+      icon: 'i-lucide-square-code',
+      to: '/docs/components',
+      active: route.path.startsWith('/docs/components')
+    }, {
+      label: 'Composables',
+      icon: 'i-lucide-square-function',
+      to: '/docs/composables',
+      active: route.path.startsWith('/docs/composables')
+    }, {
+      label: 'Typography',
+      icon: 'i-lucide-square-pilcrow',
+      to: '/docs/typography',
+      active: route.path.startsWith('/docs/typography')
+    }]
+  }, {
+    label: 'Figma',
+    icon: 'i-simple-icons-figma',
+    to: '/figma'
+  }, {
+    icon: 'i-lucide-panels-top-left',
+    label: 'Templates',
+    to: '/templates'
+  }, {
+    icon: 'i-lucide-presentation',
+    label: 'Showcase',
+    to: '/showcase'
+  }, {
+    label: 'Team',
+    description: 'Meet the team behind Nuxt UI.',
+    icon: 'i-lucide-users',
+    to: '/team'
+  }, {
+    label: 'GitHub',
+    to: 'https://github.com/nuxt/ui',
+    icon: 'i-simple-icons-github',
+    target: '_blank'
+  }])
+
+  return {
+    desktopLinks,
+    mobileLinks
+  }
 }
