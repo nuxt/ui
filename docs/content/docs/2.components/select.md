@@ -569,6 +569,31 @@ props:
 ---
 ::
 
+### Allow free input
+
+Use the `allowFreeInput` prop to let users type any value, even if it is not present in the items list.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - class
+external:
+  - items
+props:
+  placeholder: 'Type or select a fruit'
+  allowFreeInput: true
+  items:
+    - Apple
+    - Banana
+    - Blueberry
+    - Grapes
+    - Pineapple
+  class: 'w-48'
+---
+::
+
 ## Examples
 
 ### With items type
