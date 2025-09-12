@@ -67,8 +67,8 @@ export interface ContentNavigationProps<T extends ContentNavigationLink = Conten
    */
   highlightColor?: ContentNavigation['variants']['highlightColor']
   /**
-   * When type is "single", allows closing content when clicking trigger for an open item.
-   * When type is "multiple", this prop has no effect.
+   * When type is "single", prevents closing the open item when clicking its trigger.
+   * When type is "multiple", disables the collapsible behavior.
    * @defaultValue true
    */
   collapsible?: boolean
@@ -118,7 +118,7 @@ const props = withDefaults(defineProps<ContentNavigationProps<T>>(), {
 const emits = defineEmits<ContentNavigationEmits>()
 const slots = defineSlots<ContentNavigationSlots<T>>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'collapsible', 'disabled', 'type', 'unmountOnHide'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'collapsible', 'type', 'unmountOnHide'), emits)
 
 const route = useRoute()
 const appConfig = useAppConfig() as ContentNavigation['AppConfig']
@@ -131,6 +131,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentNavig
   highlight: props.highlight,
   highlightColor: props.highlightColor || props.color
 }))
+
+const disabled = computed(() => props.disabled || (props.type === 'multiple' && props.collapsible === false))
 
 const defaultValue = computed(() => {
   // When `defaultOpen` is `false`, return `undefined` to close all items
@@ -182,14 +184,14 @@ const defaultValue = computed(() => {
   </DefineLinkTemplate>
 
   <Primitive :as="as" v-bind="$attrs" :as-child="level > 0" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <AccordionRoot as="ul" v-bind="rootProps" :default-value="defaultValue" :class="level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
+    <AccordionRoot as="ul" :disabled="disabled" v-bind="rootProps" :default-value="defaultValue" :class="level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
       <template v-for="(link, index) in navigation" :key="index">
         <AccordionItem v-if="link.children?.length" as="li" :class="ui.itemWithChildren({ class: [props.ui?.itemWithChildren, link.ui?.itemWithChildren], level: level > 0 })" :value="String(index)">
           <AccordionTrigger
             as="button"
             :class="[
-              ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active: link.active, disabled: !!link.disabled }),
-              ui.trigger({ class: [props.ui?.trigger, link.ui?.trigger] })
+              ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active: link.active, disabled: !!link.disabled || disabled }),
+              ui.trigger({ class: [props.ui?.trigger, link.ui?.trigger], disabled })
             ]"
           >
             <ReuseLinkTemplate :link="link" :active="link.active" />
