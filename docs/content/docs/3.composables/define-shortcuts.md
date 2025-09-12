@@ -37,7 +37,7 @@ Define keyboard shortcuts for your application.
 - `options`: Optional configuration for the shortcuts behavior.
   - `chainDelay`: The delay between key presses to consider the shortcut as chained. Default is `250`.
 
-#### Shortcut Definition
+#### Shortcut definition
 
 Shortcuts are defined using the following format:
 
@@ -51,13 +51,13 @@ Shortcuts are defined using the following format:
 - `ctrl`: Represents `Ctrl` on all platforms
 - `shift`: Used for alphabetic keys when Shift is required
 
-#### Special Keys
+#### Special keys
 
 - `escape`: Triggers on Esc key
 - `enter`: Triggers on Enter key
 - `arrowleft`, `arrowright`, `arrowup`, `arrowdown`: Trigger on respective arrow keys
 
-#### Shortcut Configuration
+#### Shortcut configuration
 
 Each shortcut can be defined as a function or an object with the following properties:
 

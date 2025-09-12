@@ -4,7 +4,7 @@ import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentP
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, IconProps, KbdProps, LinkProps } from '../types'
-import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
@@ -82,7 +82,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: keyof NestedItem<T>
+  labelKey?: GetItemKeys<T>
   disabled?: boolean
   class?: any
   ui?: DropdownMenu['slots']

@@ -53,6 +53,7 @@ describe('ContentNavigation', () => {
     ['with navigation', { props }],
     ['with defaultOpen', { props, defaultOpen: true }],
     ['without defaultOpen', { props, defaultOpen: false }],
+    ['without collapsible', { props, collapsible: false }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),

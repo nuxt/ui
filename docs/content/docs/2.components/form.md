@@ -13,7 +13,7 @@ Use the Form component to validate form data using validation libraries such as 
 
 It works with the [FormField](/docs/components/form-field) component to display error messages around form elements automatically.
 
-### Schema Validation
+### Schema validation
 
 It requires two props:
 
@@ -70,7 +70,7 @@ Errors are reported directly to the [FormField](/docs/components/form-field) com
 
 Nested validation rules are handled using dot notation. For example, a rule like `{ user: z.object({ email: z.string() }) }`{lang="ts"} will be applied to `<FormField name="user.email">`{lang="vue"}.
 
-### Custom Validation
+### Custom validation
 
 Use the `validate` prop to apply your own validation logic.
 
@@ -91,7 +91,7 @@ props:
 ---
 ::
 
-### Input Events
+### Input events
 
 The Form component automatically triggers validation when an input emits an `input`, `change`, or `blur` event.
 
@@ -128,7 +128,7 @@ options:
 You can use the [`useFormField`](/docs/composables/use-form-field) composable to implement this inside your own components.
 ::
 
-### Error Event
+### Error event
 
 You can listen to the `@error` event to handle errors. This event is triggered when the form is submitted and contains an array of `FormError` objects with the following fields:
 
@@ -147,7 +147,7 @@ props:
 ---
 ::
 
-### Nesting Forms
+### Nesting forms
 
 Nesting form components allows you to manage complex data structures, such as lists or conditional fields, more efficiently.
 
