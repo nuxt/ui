@@ -576,6 +576,28 @@ props:
 ---
 ::
 
+### Free input
+
+Use the `allowFreeInput` prop to let users type any value, even if it is not present in the items list.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+external:
+  - items
+props:
+  placeholder: 'Type or select a status'
+  allowFreeInput: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
 ## Examples
 
 ### With items type
