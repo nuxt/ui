@@ -3,6 +3,10 @@ title: Badge
 description: 'Display version numbers, status labels, and tags within your content.'
 framework: nuxt
 category: components
+links:
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Badge.vue
 ---
 
 ## Usage

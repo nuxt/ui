@@ -75,6 +75,7 @@ export default defineNuxtConfig({
     '/docs': { redirect: '/docs/getting-started', prerender: false },
     '/blocks': { redirect: '/blocks/headers', prerender: false },
     '/docs/getting-started/migration': { redirect: '/docs/getting-started/migration/v4', prerender: false },
+    '/docs/getting-started/theme': { redirect: '/docs/getting-started/theme/design-system', prerender: false },
     '/docs/getting-started/integrations': { redirect: '/docs/getting-started/integrations/icons', prerender: false },
     '/docs/getting-started/ai': { redirect: '/docs/getting-started/ai/llms-txt', prerender: false },
     '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
@@ -163,18 +164,12 @@ export default defineNuxtConfig({
         '/docs/getting-started',
         '/api/countries.json',
         '/api/locales.json',
-        // '/api/releases.json',
-        // '/api/pulls.json'
-        '/404.html'
+        '/api/module.json'
+        // '/api/github/pulls.json',
+        // '/api/github/releases.json'
       ],
-      crawlLinks: true,
-      autoSubfolderIndex: false
+      crawlLinks: true
     }
-    // storage: {
-    //   cache: {
-    //     driver: 'vercel-runtime-cache'
-    //   }
-    // }
   },
 
   vite: {

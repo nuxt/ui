@@ -3,6 +3,10 @@ title: FieldGroup
 description: 'Group related fields together for comprehensive API documentation.'
 framework: nuxt
 category: components
+links:
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/FieldGroup.vue
 ---
 
 ## Usage

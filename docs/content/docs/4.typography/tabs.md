@@ -3,6 +3,10 @@ title: Tabs
 description: 'Organize related content in interactive tabbed interfaces.'
 framework: nuxt
 category: components
+links:
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Tabs.vue
 ---
 
 ## Usage

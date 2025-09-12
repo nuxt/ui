@@ -48,7 +48,7 @@ export default (options: Required<NuxtOptions['ui']>) => ({
     },
     disabled: {
       true: {
-        link: 'cursor-not-allowed opacity-75'
+        trigger: 'data-[state=open]:text-highlighted'
       }
     },
     highlight: {
@@ -102,6 +102,7 @@ export default (options: Required<NuxtOptions['ui']>) => ({
     variant: 'pill',
     active: true,
     highlight: true,
+    disabled: false,
     class: {
       link: ['hover:before:bg-elevated/50', options.theme.transitions && 'before:transition-colors']
     }

@@ -3,6 +3,10 @@ title: Card
 description: 'Create highlighted content blocks with optional links and navigation.'
 framework: nuxt
 category: components
+links:
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Card.vue
 ---
 
 ## Usage
