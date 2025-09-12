@@ -160,7 +160,7 @@
   "devDependencies": {
     "@nuxt/content": "^3.6.3",
     "@nuxt/eslint-config": "^1.9.0",
-    "@nuxt/module-builder": "^1.0.1",
+    "@nuxt/module-builder": "^1.0.2",
     "@nuxt/test-utils": "^3.19.2",
     "@release-it/conventional-changelog": "^10.0.1",
     "@vue/test-utils": "^2.4.6",
@@ -207,13 +207,13 @@
     }
   },
   "resolutions": {
+    "@nuxt/module-builder": "1.0.2",
     "@nuxt/ui": "workspace:*",
-    "@nuxt/module-builder": "1.0.1",
     "chokidar": "3.6.0",
     "debug": "4.3.7",
+    "typescript": "5.8.3",
     "unimport": "4.1.1",
-    "unplugin": "^2.3.10",
-    "typescript": "5.8.3"
+    "unplugin": "^2.3.10"
   },
   "keywords": [
     "nuxt-ui",
