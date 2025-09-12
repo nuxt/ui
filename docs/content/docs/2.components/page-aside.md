@@ -12,15 +12,8 @@ links:
 
 The PageAside component is a sticky `<aside>` element that is only displayed starting from the [`lg` breakpoint](https://tailwindcss.com/docs/breakpoints).
 
-::note
-The PageAside component uses the `--ui-header-height` CSS variable to position itself correctly below the [Header](/docs/components/header). You can customize its height by overriding the variable in your CSS:
-
-```css
-:root {
-  --ui-header-height: --spacing(16);
-}
-```
-
+::tip{to="/docs/getting-started/theme/css-variables#header"}
+The PageAside component uses the `--ui-header-height` CSS variable to position itself correctly below the [Header](/docs/components/header).
 ::
 
 Use it inside the `left` or `right` slot of the [Page](/docs/components/page) component:

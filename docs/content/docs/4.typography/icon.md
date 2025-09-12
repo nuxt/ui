@@ -3,6 +3,10 @@ title: Icon
 description: 'Display icons from popular icon libraries to enhance your content.'
 framework: nuxt
 category: components
+links:
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Icon.vue
 ---
 
 ## Usage

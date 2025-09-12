@@ -3,6 +3,10 @@ title: Kbd
 description: 'Display keyboard shortcuts and key combinations with proper styling.'
 framework: nuxt
 category: components
+links:
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Kbd.vue
 ---
 
 ## Usage

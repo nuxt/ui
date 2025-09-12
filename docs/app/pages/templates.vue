@@ -41,7 +41,6 @@ defineOgImageComponent('Docs', {
       v-for="(template, index) in page.templates"
       :key="index"
       :title="template.title"
-      :links="template.links"
       :features="template.features"
       orientation="horizontal"
       class="lg:border-t border-default"
@@ -53,6 +52,10 @@ defineOgImageComponent('Docs', {
         links: 'gap-x-3'
       }"
     >
+      <template #links>
+        <UButton v-for="link of template.links" :key="link.label" color="neutral" variant="outline" v-bind="link" />
+      </template>
+
       <template #description>
         <MDC :value="template.description" unwrap="p" :cache-key="`pro-templates-${index}-description`" />
       </template>

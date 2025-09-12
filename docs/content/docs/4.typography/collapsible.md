@@ -3,6 +3,10 @@ title: Collapsible
 description: 'Toggle content visibility with smooth expand and collapse animations.'
 framework: nuxt
 category: components
+links:
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Collapsible.vue
 ---
 
 ## Usage

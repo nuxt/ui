@@ -3,6 +3,10 @@ title: Field
 description: 'Document API parameters, props, and configuration options clearly.'
 framework: nuxt
 category: components
+links:
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Field.vue
 ---
 
 ## Usage
