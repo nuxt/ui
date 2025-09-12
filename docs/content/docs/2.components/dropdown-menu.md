@@ -277,19 +277,6 @@ slots:
 
 ## Examples
 
-### Match content & trigger width
-
-You can set `--reka-dropdown-menu-trigger-width` css variable as content width to match the trigger button width.
-
-::component-example
----
-
-collapse: true
-name: 'dropdown-menu-match-content-width-with-trigger-width-example'
----
-
-::
-
 ### With checkbox items
 
 You can use the `type` property with `checkbox` and use the `checked` / `onUpdateChecked` properties to control the checked state of the item.
@@ -393,6 +380,19 @@ defineShortcuts(extractShortcuts(items))
 
 ::note
 In this example, :kbd{value="meta"} :kbd{value="E"}, :kbd{value="meta"} :kbd{value="I"} and :kbd{value="meta"} :kbd{value="N"} would trigger the `select` function of the corresponding item.
+::
+
+### Match content & trigger width
+
+You can set `--reka-dropdown-menu-trigger-width` css variable as content width to match the trigger button width.
+
+::component-example
+---
+
+collapse: true
+name: 'dropdown-menu-match-content-width-with-trigger-width-example'
+---
+
 ::
 
 ## API
