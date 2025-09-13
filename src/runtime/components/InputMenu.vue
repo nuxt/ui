@@ -330,7 +330,7 @@ function onUpdate(value: any) {
   emitFormChange()
   emitFormInput()
 
-  if (props.resetSearchTermOnSelect) {
+  if (props.resetSearchTermOnSelect && !props.allowFreeInput) {
     searchTerm.value = ''
   }
 }
