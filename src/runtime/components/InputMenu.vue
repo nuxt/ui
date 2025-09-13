@@ -243,10 +243,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
 function displayValue(value: GetItemValue<T, VK>): string {
-  return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value, {
-    labelKey: props.labelKey,
-    valueKey: props.valueKey
-  }) ?? ''
+  if (props.allowFreeInput) {
+    return value
+  } else {
+    return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value, {
+      labelKey: props.labelKey,
+      valueKey: props.valueKey
+    }) ?? ''
+  }
 }
 
 const groups = computed<InputMenuItem[][]>(() =>
@@ -512,7 +516,7 @@ defineExpose({
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps" @focus-outside.prevent>
         <slot name="content-top" />
 
-        <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
+        <ComboboxEmpty v-if="!props.allowFreeInput" :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
             {{ searchTerm ? t('inputMenu.noMatch', { searchTerm }) : t('inputMenu.noData') }}
           </slot>
