@@ -8,13 +8,11 @@ const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category']))
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
   server: false
 })
 
-const links = useHeaderLinks()
-const searchLinks = useSearchLinks()
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
 const blackAsPrimary = computed(() => appConfig.theme.blackAsPrimary ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
@@ -44,23 +42,25 @@ useServerSeoMeta({
 
 useFaviconFromTheme()
 
-const { frameworks } = useSharedData()
-const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
+const { frameworks } = useFrameworks()
+const { rootNavigation, navigationByFramework } = useNavigation(navigation)
+const { links } = useSearch()
 
-provide('navigation', mappedNavigation)
+provide('navigation', rootNavigation)
 </script>
 
 <template>
   <UApp :toaster="appConfig.toaster">
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
-    <Analytics />
-    <SpeedInsights />
+
+    <Analytics :debug="false" />
+    <SpeedInsights :debug="false" />
 
     <div :class="[route.path.startsWith('/docs/') && 'root']">
       <template v-if="!route.path.startsWith('/examples')">
         <!-- <Banner /> -->
 
-        <Header :links="links" />
+        <Header />
       </template>
 
       <NuxtLayout>
@@ -72,14 +72,14 @@ provide('navigation', mappedNavigation)
 
         <ClientOnly>
           <LazyUContentSearch
-            :links="searchLinks"
+            :links="links"
             :files="files"
             :groups="[{
               id: 'framework',
               label: 'Framework',
               items: frameworks
             }]"
-            :navigation="filteredNavigation"
+            :navigation="navigationByFramework"
             :fuse="{ resultLimit: 120 }"
           />
         </ClientOnly>

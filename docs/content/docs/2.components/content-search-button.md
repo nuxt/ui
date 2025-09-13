@@ -20,7 +20,7 @@ This component is only available when the `@nuxt/content` module is installed.
 
 The ContentSearchButton component is used to open the [ContentSearch](/docs/components/content-search) modal.
 
-::component-code{prefix="content"}
+:component-code{prefix="content"}
 
 It extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 

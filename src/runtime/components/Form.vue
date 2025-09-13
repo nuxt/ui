@@ -230,15 +230,19 @@ async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean>
   const allErrors = [await getErrors(), nestedErrors].flat()
 
   if (names) {
-    const otherErrors = errors.value.filter(error => !names.some((name) => {
-      const pattern = inputs.value?.[name]?.pattern
-      return name === error.name || (pattern && error.name?.match(pattern))
-    }))
+    const namesSet = new Set(names)
+    const patterns = names
+      .map(name => inputs.value?.[name]?.pattern)
+      .filter(Boolean) as RegExp[]
 
-    const pathErrors = allErrors.filter(error => names.some((name) => {
-      const pattern = inputs.value?.[name]?.pattern
-      return name === error.name || (pattern && error.name?.match(pattern))
-    }))
+    const isErrorForPath = (error: FormErrorWithId): boolean => {
+      if (!error.name) return false
+      if (namesSet.has(error.name)) return true
+      return patterns.some(pattern => pattern.test(error.name!))
+    }
+
+    const otherErrors = errors.value.filter(error => !isErrorForPath(error))
+    const pathErrors = allErrors.filter(isErrorForPath)
 
     errors.value = otherErrors.concat(pathErrors)
   } else {

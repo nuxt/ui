@@ -26,7 +26,7 @@ exports[`Banner > renders with actions slot correctly 1`] = `
     <div data-v-8f05efd1="" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
+      <div data-v-8f05efd1="" class="flex gap-1.5 shrink-0 isolate">Actions slot</div>
     </div>
     <div data-v-8f05efd1="" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->

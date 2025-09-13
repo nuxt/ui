@@ -13,6 +13,7 @@ import { renderForm } from '../utils/form'
 import {
   UForm,
   UInput,
+  URadioGroup,
   UFormField
 } from '#components'
 import { flushPromises } from '@vue/test-utils'
@@ -631,5 +632,66 @@ describe('Form', () => {
     form.value.submit()
     await flushPromises()
     expect(wrapper.html()).toContain('Error message')
+  })
+  it('should not have race condition when clear is called in watchers', async () => {
+    const wrapper = await mountSuspended({
+      components: {
+        UForm,
+        URadioGroup,
+        UFormField
+      },
+      setup() {
+        const form = ref()
+        const schema = z.object({
+          hello: z.string().optional(),
+          world: z.string().optional(),
+          hi: z.string().optional(),
+          pathForACustomError: z.string().optional()
+        })
+
+        const state = reactive({
+          hello: 'hello-1',
+          world: 'world-1',
+          hi: 'hi-1',
+          pathForACustomError: ''
+        })
+
+        return { form, state, schema }
+      },
+      template: `
+        <UForm ref="form" :schema="schema" :state="state">
+          <UFormField name="hello">
+            <URadioGroup v-model="state.hello" :items="[{ value: 'foo-1', label: 'Foo 1' }, { value: 'foo-2', label: 'Foo 2' }]" />
+          </UFormField>
+        </UForm>
+      `
+    })
+
+    const form = wrapper.setupState.form
+
+    const input = wrapper.findComponent({
+      name: 'RadioGroupRoot'
+    })
+
+    const state = wrapper.setupState.state
+
+    watch(() => state.hello, () => {
+      form.value?.clear('pathForACustomError')
+    })
+
+    form.value.setErrors([
+      {
+        name: 'pathForACustomError',
+        message: 'This is a custom error message.'
+      }
+    ])
+
+    expect(form.value.errors).toHaveLength(1)
+
+    input.setValue('foo-2')
+
+    await flushPromises()
+
+    expect(form.value.errors).toHaveLength(0)
   })
 })

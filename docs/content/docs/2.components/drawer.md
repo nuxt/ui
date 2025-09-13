@@ -216,7 +216,7 @@ slots:
 :placeholder{class="h-48 m-4"}
 ::
 
-### Scale background
+### Scale Background
 
 Use the `should-scale-background` prop to scale the background when the Drawer is open, creating a visual depth effect. You can set the `set-background-color-on-scale` prop to `false` to prevent changing the background color.
 
