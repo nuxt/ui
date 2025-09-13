@@ -368,7 +368,7 @@ function onUpdateOpen(value: boolean) {
 
     // Since we use `displayValue` prop inside ComboboxInput we should reset searchTerm manually
     // https://reka-ui.com/docs/components/combobox#api-reference
-    if (props.resetSearchTermOnBlur) {
+    if (props.resetSearchTermOnBlur && !props.allowFreeInput) {
       const STATE_ANIMATION_DELAY_MS = 100
 
       timeoutId = setTimeout(() => {
