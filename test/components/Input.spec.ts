@@ -7,6 +7,7 @@ import theme from '#build/ui/input'
 
 import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '../../src/module'
+import { nextTick } from 'vue'
 
 describe('Input', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -136,29 +137,35 @@ describe('Input', () => {
     test('validate on blur works', async () => {
       const { input, wrapper } = await createForm(['blur'])
       await input.trigger('blur')
+      await nextTick()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
       await input.trigger('blur')
+      await nextTick()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('validate on change works', async () => {
       const { input, wrapper } = await createForm(['change'])
       await input.trigger('change')
+      await nextTick()
       expect(wrapper.text()).toContain('Error message')
 
       input.setValue('valid')
       await input.trigger('change')
+      await nextTick()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'], true)
       await input.setValue('value')
+      await nextTick()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
+      await nextTick()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
@@ -166,14 +173,17 @@ describe('Input', () => {
       const { input, wrapper } = await createForm(['input'])
 
       await input.setValue('value')
+      await nextTick()
       expect(wrapper.text()).not.toContain('Error message')
 
       await input.trigger('blur')
 
       await input.setValue('value')
+      await nextTick()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
+      await nextTick()
       expect(wrapper.text()).not.toContain('Error message')
     })
   })

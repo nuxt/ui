@@ -15,9 +15,7 @@ const itemSchema = z.object({
 
 type ItemSchema = z.output<typeof itemSchema>
 
-const state = reactive<Partial<Schema & { items: Partial<ItemSchema>[] }>>({
-  items: [{}]
-})
+const state = reactive<Partial<Schema & { items: Partial<ItemSchema>[] }>>({ })
 
 function addItem() {
   if (!state.items) {
@@ -54,9 +52,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     <UForm
       v-for="item, count in state.items"
       :key="count"
-      :name="`name.${count}`"
+      :name="`items.${count}`"
       :schema="itemSchema"
-      attach
       class="flex gap-2"
     >
       <UFormField :label="!count ? 'Description' : undefined" name="description">

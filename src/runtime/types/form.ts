@@ -59,7 +59,7 @@ export type FormSubmitEvent<T> = SubmitEvent & { data: T }
 
 export type FormValidationError = {
   errors: FormErrorWithId[]
-  children?: FormValidationError[]
+  children?: FormErrorWithId[]
 }
 
 export type FormErrorEvent = SubmitEvent & FormValidationError
@@ -115,13 +115,11 @@ export interface ValidateReturnSchema<T> {
 export class FormValidationException extends Error {
   formId: string | number
   errors: FormErrorWithId[]
-  children?: FormValidationException[]
 
-  constructor(formId: string | number, errors: FormErrorWithId[], childErrors?: FormValidationException[]) {
+  constructor(formId: string | number, errors: FormErrorWithId[]) {
     super('Form validation exception')
     this.formId = formId
     this.errors = errors
-    this.children = childErrors
     Object.setPrototypeOf(this, FormValidationException.prototype)
   }
 }

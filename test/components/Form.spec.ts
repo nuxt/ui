@@ -477,7 +477,7 @@ describe('Form', () => {
               <UInput id="passwordInput" v-model="state.password" />
             </UFormField>
 
-            <UForm v-if="showNested" ref="nestedForm" name="nested" :state="state.nested" :schema="nestedSchema">
+            <UForm v-if="showNested" ref="nestedForm" name="nested" :schema="nestedSchema">
               <UFormField id="nestedField" name="field">
                 <UInput id="nestedInput" v-model="state.nested.field" />
               </UFormField>
@@ -495,10 +495,10 @@ describe('Form', () => {
       expect(wrapper.setupState.onSubmit).not.toHaveBeenCalled()
       expect(wrapper.setupState.onError).toHaveBeenCalledTimes(1)
       const onErrorCallArgs = wrapper.setupState.onError.mock.lastCall[0]
-      expect(onErrorCallArgs.children[0].errors).toMatchObject([{ id: 'nestedInput', name: 'field', message: 'Invalid input: expected string, received undefined' }])
       expect(onErrorCallArgs.errors).toMatchObject([
         { id: 'emailInput', name: 'email', message: 'Invalid input: expected string, received undefined' },
-        { id: 'passwordInput', name: 'password', message: 'Invalid input: expected string, received undefined' }
+        { id: 'passwordInput', name: 'password', message: 'Invalid input: expected string, received undefined' },
+        { id: 'nestedInput', name: 'nested.field', message: 'Invalid input: expected string, received undefined' }
       ])
 
       const nestedField = wrapper.find('#nestedField')
