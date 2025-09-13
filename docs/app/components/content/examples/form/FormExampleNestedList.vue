@@ -55,6 +55,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       :name="`items.${count}`"
       :schema="itemSchema"
       class="flex gap-2"
+      nested
     >
       <UFormField :label="!count ? 'Description' : undefined" name="description">
         <UInput v-model="item.description" />

@@ -39,7 +39,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UCheckbox v-model="state.news" name="news" label="Register to our newsletter" @update:model-value="state.email = undefined" />
     </div>
 
-    <UForm v-if="state.news" :schema="nestedSchema">
+    <UForm v-if="state.news" :schema="nestedSchema" nested>
       <UFormField label="Email" name="email">
         <UInput v-model="state.email" placeholder="john@lennon.com" />
       </UFormField>

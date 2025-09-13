@@ -6,12 +6,12 @@ import type { ComponentConfig } from '../types/tv'
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>
 
-export type FormProps<S extends FormSchema, T extends boolean = true, Attach extends boolean = true> = {
+export type FormProps<S extends FormSchema, T extends boolean = true, N extends boolean = false> = {
   id?: string | number
   /** Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs. */
   schema?: S
   /** An object representing the current state of the form. */
-  state?: Partial<InferInput<S>>
+  state?: N extends false ? Partial<InferInput<S>> : never
   /**
    * Custom validation function to validate the form state.
    * @param state - The current state of the form.
@@ -31,9 +31,9 @@ export type FormProps<S extends FormSchema, T extends boolean = true, Attach ext
 
   /**
    * Path of the form's state within it's parent form.
-   * Used for nesting forms. Only available if `attach` is true.
+   * Used for nesting forms. Only available if `nested` is true.
    */
-  name?: Attach extends true ? string : never
+  name?: N extends true ? string : never
 
   /**
    * Delay in milliseconds before validating the form on input events.
@@ -47,10 +47,10 @@ export type FormProps<S extends FormSchema, T extends boolean = true, Attach ext
   transform?: T
 
   /**
-   * If true, this form will attach to its parent Form (if any) and validate at the same time.
-   * @defaultValue `true`
+   * If true, this form will attach to its parent Form and validate at the same time.
+   * @defaultValue `false`
    */
-  attach?: Attach
+  nested?: N
 
   /**
    * When `true`, all form elements will be disabled on `@submit` event.
@@ -72,7 +72,7 @@ export interface FormSlots {
 }
 </script>
 
-<script lang="ts" setup generic="S extends FormSchema, T extends boolean = true, Attach extends boolean = true">
+<script lang="ts" setup generic="S extends FormSchema, T extends boolean = true, N extends boolean = false">
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -84,12 +84,11 @@ import { FormValidationException } from '../types/form'
 type I = InferInput<S>
 type O = InferOutput<S>
 
-const props = withDefaults(defineProps<FormProps<S, T, Attach>>(), {
+const props = withDefaults(defineProps<FormProps<S, T, N>>(), {
   validateOn() {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
   validateOnInputDelay: 300,
-  attach: () => true as Attach,
   transform: () => true as T,
   loadingAuto: true
 })
@@ -104,12 +103,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) 
 const formId = props.id ?? useId() as string
 
 const bus = useEventBus<FormEvent<I>>(`form-${formId}`)
-const parentBus = props.attach && inject(
+const parentBus = props.nested && inject(
   formBusInjectionKey,
   undefined
 )
 
-const parentState = props.attach && inject(formStateInjectionKey, undefined)
+const parentState = props.nested && inject(formStateInjectionKey, undefined)
 const state = computed(() => {
   if (parentState?.value) {
     return props.name ? getAtPath(parentState.value, props.name) : parentState.value
@@ -202,7 +201,7 @@ async function getErrors(): Promise<FormErrorWithId[]> {
 type ValidateOpts<Silent extends boolean, Transform extends boolean> = { name?: keyof I | (keyof I)[], silent?: Silent, nested?: boolean, transform?: Transform }
 async function _validate<T extends boolean>(opts: ValidateOpts<false, T>): Promise<FormData<S, T>>
 async function _validate<T extends boolean>(opts: ValidateOpts<true, T>): Promise<FormData<S, T> | false>
-async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean> = { silent: false, nested: true, transform: false }): Promise<FormData<S, T> | false> {
+async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean> = { silent: false, nested: false, transform: false }): Promise<FormData<S, T> | false> {
   const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as (keyof O)[]
 
   async function validateNestedForms({ validate, name }: { validate: typeof _validate, name?: string }) {
