@@ -244,7 +244,7 @@ const items = computed(() => groups.value.flatMap(group => group) as T[])
 
 function displayValue(value: GetItemValue<T, VK>): string {
   if (props.allowFreeInput) {
-    return value
+    return String(value ?? '')
   } else {
     return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value, {
       labelKey: props.labelKey,
