@@ -1,12 +1,11 @@
 import { describe, it, expect, test } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { mount, flushPromises } from '@vue/test-utils'
 import Textarea from '../../src/runtime/components/Textarea.vue'
 import type { TextareaProps, TextareaSlots } from '../../src/runtime/components/Textarea.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/textarea'
 import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '../../src/module'
-import { nextTick } from 'vue'
 
 describe('Textarea', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -140,35 +139,35 @@ describe('Textarea', () => {
     test('validate on blur works', async () => {
       const { input, wrapper } = await createForm(['blur'])
       await input.trigger('blur')
-      await nextTick()
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
       await input.trigger('blur')
-      await nextTick()
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('validate on change works', async () => {
       const { input, wrapper } = await createForm(['change'])
       await input.trigger('change')
-      await nextTick()
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       input.setValue('valid')
       await input.trigger('change')
-      await nextTick()
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'], true)
       await input.setValue('value')
-      await nextTick()
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
-      await nextTick()
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
@@ -176,17 +175,17 @@ describe('Textarea', () => {
       const { input, wrapper } = await createForm(['input'])
 
       await input.setValue('value')
-      await nextTick()
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
 
       await input.trigger('blur')
 
       await input.setValue('value')
-      await nextTick()
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
-      await nextTick()
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
   })

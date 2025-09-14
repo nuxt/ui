@@ -26,6 +26,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
 <template>
   <UForm
+    ref="form"
     :state="state"
     :schema="schema"
     class="gap-4 flex flex-col w-60"
