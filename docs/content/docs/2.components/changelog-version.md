@@ -95,7 +95,7 @@ props:
 Use the `date` prop to display the date of the ChangelogVersion.
 
 ::tip
-The date is automatically formatted to the [current locale](/docs/getting-started/i18n/nuxt#locale). You can either pass a `Date` object or a string.
+The date is automatically formatted to the [current locale](/docs/getting-started/integrations/i18n/nuxt#locale). You can either pass a `Date` object or a string.
 ::
 
 ::component-code

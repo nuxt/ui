@@ -103,7 +103,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 const links = computed<PageLink[]>(() => [{
   icon: 'i-lucide-file-pen',
   label: 'Edit this page',
-  to: `https://github.com/nuxt/ui/edit/v3/docs/content/${page?.value?.stem}.md`,
+  to: `https://github.com/nuxt/ui/edit/v4/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
   icon: 'i-lucide-star',
