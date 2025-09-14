@@ -202,7 +202,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'types/ui.d.ts',
     getContents: () => `import * as ui from '#build/ui'
-import type { TVConfig } from '#ui/types/tv';
+import type { TVConfig } from '@nuxt/ui';
 import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 
