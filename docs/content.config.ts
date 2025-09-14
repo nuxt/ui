@@ -89,7 +89,10 @@ export const collections = {
       design_system: PageSection.extend({
         code: z.string()
       }),
-      component_customization: PageSection.extend({
+      css_variables: PageSection.extend({
+        code: z.string()
+      }),
+      components: PageSection.extend({
         code: z.string()
       }),
       templates: PageSection,
