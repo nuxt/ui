@@ -105,7 +105,7 @@ const appConfig = useAppConfig() as DashboardSearch['AppConfig']
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
 
-const proxySlots = omit(slots, ['content'])
+const getProxySlots = () => omit(slots, ['content'])
 
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
@@ -196,7 +196,7 @@ defineExpose({
           @update:model-value="onSelect"
           @update:open="open = $event"
         >
-          <template v-for="(_, name) in proxySlots" #[name]="slotData">
+          <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
             <slot :name="name" v-bind="slotData" />
           </template>
         </UCommandPalette>

@@ -21,7 +21,7 @@ Wrap your `card` components with the `card-group` component to group them togeth
 ---
 title: Dashboard
 icon: i-simple-icons-github
-to: https://github.com/nuxt-ui-pro/dashboard
+to: https://github.com/nuxt-ui-templates/dashboard
 target: _blank
 ---
 A dashboard with multi-column layout.
@@ -31,7 +31,7 @@ A dashboard with multi-column layout.
 ---
 title: SaaS
 icon: i-simple-icons-github
-to: https://github.com/nuxt-ui-pro/saas
+to: https://github.com/nuxt-ui-templates/saas
 target: _blank
 ---
 A template with landing, pricing, docs and blog.
@@ -41,7 +41,7 @@ A template with landing, pricing, docs and blog.
 ---
 title: Docs
 icon: i-simple-icons-github
-to: https://github.com/nuxt-ui-pro/docs
+to: https://github.com/nuxt-ui-templates/docs
 target: _blank
 ---
 A documentation with `@nuxt/content`.
@@ -51,7 +51,7 @@ A documentation with `@nuxt/content`.
 ---
 title: Landing
 icon: i-simple-icons-github
-to: https://github.com/nuxt-ui-pro/landing
+to: https://github.com/nuxt-ui-templates/landing
 target: _blank
 ---
 A landing page you can use as starting point.
@@ -68,7 +68,7 @@ A landing page you can use as starting point.
 ---
 title: Dashboard
 icon: i-simple-icons-github
-to: https://github.com/nuxt-ui-pro/dashboard
+to: https://github.com/nuxt-ui-templates/dashboard
 target: _blank
 ---
 A dashboard with multi-column layout.
@@ -78,7 +78,7 @@ A dashboard with multi-column layout.
 ---
 title: SaaS
 icon: i-simple-icons-github
-to: https://github.com/nuxt-ui-pro/saas
+to: https://github.com/nuxt-ui-templates/saas
 target: _blank
 ---
 A template with landing, pricing, docs and blog.
@@ -88,7 +88,7 @@ A template with landing, pricing, docs and blog.
 ---
 title: Docs
 icon: i-simple-icons-github
-to: https://github.com/nuxt-ui-pro/docs
+to: https://github.com/nuxt-ui-templates/docs
 target: _blank
 ---
 A documentation with `@nuxt/content`.
@@ -98,7 +98,7 @@ A documentation with `@nuxt/content`.
 ---
 title: Landing
 icon: i-simple-icons-github
-to: https://github.com/nuxt-ui-pro/landing
+to: https://github.com/nuxt-ui-templates/landing
 target: _blank
 ---
 A landing page you can use as starting point.
