@@ -202,7 +202,7 @@ name: 'popover-command-palette-example'
 ---
 ::
 
-### With following cursor :badge{label="New" class="align-text-top"}
+### With following cursor
 
 You can make the Popover follow the cursor when hovering over an element using the [`reference`](https://reka-ui.com/docs/components/tooltip#trigger) prop:
 

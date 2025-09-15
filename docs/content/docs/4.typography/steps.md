@@ -74,16 +74,16 @@ npm run dev
 
 ### Props
 
-:component-props{name="steps" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="steps" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="steps" prose}
+:component-theme{prose}
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}
