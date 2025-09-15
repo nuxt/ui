@@ -83,6 +83,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectItem[]
 props:
   modelValue: 'backlog'
   items:
@@ -145,6 +147,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectItem[]
 props:
   modelValue: 'backlog'
   valueKey: 'id'
