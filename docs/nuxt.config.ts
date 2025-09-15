@@ -178,6 +178,14 @@ export default defineNuxtConfig({
     }
   },
 
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        externalRelAttribute: 'noopener'
+      }
+    }
+  },
+
   componentMeta: {
     exclude: [
       '@nuxt/content',
