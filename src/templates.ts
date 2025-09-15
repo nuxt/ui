@@ -206,7 +206,7 @@ import type { TVConfig } from '@nuxt/ui'
 import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 
-const icons = ${JSON.stringify(uiConfig.icons)};
+type IconsConfig = ${JSON.stringify(uiConfig.icons)};
 
 type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
@@ -216,7 +216,7 @@ type AppConfigUI = {
     ${options.theme?.colors?.map(color => `'${color}'?: Color`).join('\n\t\t')}
     neutral?: NeutralColor | (string & {})
   }
-  icons?: Partial<typeof icons>
+  icons?: Partial<IconsConfig>
   tv?: typeof defaultConfig
 } & TVConfig<typeof ui>
 
