@@ -21,7 +21,7 @@ prettier: true
 props:
   icon: i-lucide-square-play
   color: neutral
-  to: '/docs/getting-started/installation/pro/nuxt'
+  to: '/docs/getting-started/installation/nuxt'
   class: 'w-full my-0'
 hide:
   - class

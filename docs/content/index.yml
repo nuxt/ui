@@ -33,29 +33,29 @@ features:
   - title: Flexible design system
     description: Beautiful by default and easily customizable with design tokens to your brand.
     icon: i-lucide-swatch-book
-    to: /docs/getting-started/theme#design-system
+    to: /docs/getting-started/theme/design-system
   - title: Internationalization (i18n)
     description: Nuxt UI is translated into 50+ languages, works well with i18n and multi-directional support (LTR/RTL).
     icon: i-lucide-globe
-    to: /docs/getting-started/i18n/nuxt
+    to: /docs/getting-started/integrations/i18n
   - title: Easy font customization
     description: Performance-optimized fonts with first-class @nuxt/fonts integration.
     icon: i-lucide-a-large-small
-    to: /docs/getting-started/fonts
+    to: /docs/getting-started/integrations/fonts
   - title: Large icons sets
     description: Access to over 200,000 customizable icons from Iconify, seamlessly integrated with Iconify.
     icon: i-lucide-smile
-    to: /docs/getting-started/icons
+    to: /docs/getting-started/integrations/icons
   - title: Light & Dark
     description: Dark mode-ready components, seamless integration with @nuxtjs/color-mode.
     icon: i-lucide-sun-moon
-    to: /docs/getting-started/color-mode/nuxt
+    to: /docs/getting-started/integrations/color-mode
 design_system:
   title: Flexible design system
   description: Build your next project faster with Nuxt UI's comprehensive design system. Featuring semantic color aliases, comprehensive design tokens, and automatic light/dark mode support for accessible components out of the box.
   links:
     - label: Customize design system
-      to: /docs/getting-started/theme#design-system
+      to: /docs/getting-started/theme/design-system
       variant: outline
       color: neutral
       trailingIcon: i-lucide-arrow-right
@@ -112,7 +112,7 @@ component_customization:
   description: Nuxt UI leverages [Tailwind Variants](https://www.tailwind-variants.org/) to provide a powerful, maintainable system for managing component styles and intelligently merging Tailwind CSS classes without conflicts.
   links:
     - label: Customize components
-      to: /docs/getting-started/theme#customize-theme
+      to: /docs/getting-started/theme/components
       variant: outline
       color: neutral
       trailingIcon: i-lucide-arrow-right

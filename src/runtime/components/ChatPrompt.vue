@@ -68,7 +68,7 @@ const appConfig = useAppConfig() as ChatPrompt['AppConfig']
 
 const textareaProps = useForwardProps(reactivePick(props, 'autofocus', 'autoresize', 'rows'))
 
-const proxySlots = omit(slots, ['header', 'footer'])
+const getProxySlots = () => omit(slots, ['header', 'footer'])
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPrompt || {}) })({
   variant: props.variant
@@ -113,7 +113,7 @@ defineExpose({
       @keydown.enter.exact.prevent="submit"
       @keydown.esc="blur"
     >
-      <template v-for="(_, name) in proxySlots" #[name]="slotData">
+      <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
         <slot :name="name" v-bind="slotData" />
       </template>
     </UTextarea>
