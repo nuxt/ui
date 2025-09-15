@@ -63,7 +63,7 @@ const props = withDefaults(defineProps<ChangelogVersionsProps<T>>(), {
 })
 const slots = defineSlots<ChangelogVersionsSlots<T>>()
 
-const proxySlots = omit(slots, ['default', 'indicator'])
+const getProxySlots = () => omit(slots, ['default', 'indicator'])
 
 const appConfig = useAppConfig() as ChangelogVersions['AppConfig']
 
@@ -93,7 +93,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.changelogVer
           :indicator="!!props.indicator"
           v-bind="(version as ChangelogVersionProps)"
         >
-          <template v-for="(_, name) in proxySlots" #[name]>
+          <template v-for="(_, name) in getProxySlots()" #[name]>
             <slot :name="name" v-bind="{ version }" />
           </template>
         </UChangelogVersion>
