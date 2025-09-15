@@ -101,4 +101,4 @@ slots:
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prefix="color-mode"}

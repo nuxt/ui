@@ -45,16 +45,16 @@ Wrap any content with the `code-preview` component to display a live preview alo
 
 ### Props
 
-:component-props{name="code-preview" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="code-preview" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="code-preview" prose}
+:component-theme{prose}
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

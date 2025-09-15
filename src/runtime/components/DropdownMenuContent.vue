@@ -68,7 +68,7 @@ const appConfig = useAppConfig()
 
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
-const proxySlots = omit(slots, ['default'])
+const getProxySlots = () => omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
 
@@ -152,7 +152,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
                 :external-icon="externalIcon"
                 v-bind="item.content"
               >
-                <template v-for="(_, name) in proxySlots" #[name]="slotData">
+                <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
                   <slot :name="(name as keyof DropdownMenuContentSlots<T>)" v-bind="slotData" />
                 </template>
               </UDropdownMenuContent>

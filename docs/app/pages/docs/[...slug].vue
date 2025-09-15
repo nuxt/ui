@@ -85,7 +85,7 @@ const communityLinks = computed(() => [{
 </script>
 
 <template>
-  <UPage v-if="page">
+  <UPage v-if="page" class="page">
     <UPageHeader :title="page.title">
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
@@ -135,3 +135,9 @@ const communityLinks = computed(() => [{
     </template>
   </UPage>
 </template>
+
+<style>
+.page {
+  --ui-header-height: 4rem;
+}
+</style>
