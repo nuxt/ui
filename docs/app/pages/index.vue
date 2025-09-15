@@ -144,7 +144,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 
     <USeparator />
 
-    <UPageSection :ui="{ container: 'lg:py-16' }">
+    <UPageSection :ui="{ container: 'lg:py-16', root: 'bg-muted/25' }">
       <ul class="grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 lg:gap-x-8 lg:gap-y-8 xl:gap-y-10">
         <Motion
           v-for="(feature, index) in page?.features"
@@ -206,6 +206,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :features="page.css_variables.features"
       :links="page.css_variables.links"
       orientation="horizontal"
+      :ui="{ root: 'bg-muted/25' }"
     >
       <MDC :value="page.css_variables.code" cache-key="index-css-variables-code" />
     </UPageSection>
@@ -233,6 +234,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :links="page.templates.links"
       :features="page.templates.features"
       orientation="horizontal"
+      :ui="{ root: 'bg-muted/25' }"
     >
       <UCarousel
         v-slot="{ item }"
@@ -283,7 +285,6 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :links="page.community.links"
       orientation="horizontal"
       :ui="{ features: 'flex items-center gap-4 lg:gap-8' }"
-      class="border-b border-default"
     >
       <template #features>
         <li>
