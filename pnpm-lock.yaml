@@ -254,8 +254,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: ^3.3.3
-        version: 3.3.3(@babel/parser@7.28.3)(joi@18.0.1)(magicast@0.3.5)(react@19.1.0)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.1.0(typescript@5.8.3))(vue@3.5.21(typescript@5.8.3))(yup@1.7.0)(zod@4.1.8)
+        specifier: ^3.3.4
+        version: 3.3.4(@babel/parser@7.28.3)(joi@18.0.1)(magicast@0.3.5)(react@19.1.0)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.1.0(typescript@5.8.3))(vue@3.5.21(typescript@5.8.3))(yup@1.7.0)(zod@4.1.8)
       '@nuxtjs/plausible':
         specifier: ^2.0.1
         version: 2.0.1(magicast@0.3.5)
@@ -1463,8 +1463,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@3.3.3':
-    resolution: {integrity: sha512-G5NH3HOcl87yWdb62XK7vT8O3D4fZUqko7R+evw8FCSb/wJ5yXAi0c3QUhRaGe669RpDbLVBCLHI+HJXdwSw1Q==}
+  '@nuxt/ui-pro@3.3.4':
+    resolution: {integrity: sha512-uCeqwpS8HtP0HqSmP1oStnRctUt8kNiudZBrm+VSfFqjJ3W6ncRuZWsk8kUrUjOUdEEF0SDsutGuROV75btHTw==}
     peerDependencies:
       joi: ^17.13.0
       superstruct: ^2.0.0
@@ -9159,7 +9159,7 @@ snapshots:
       - magicast
       - typescript
 
-  '@nuxt/ui-pro@3.3.3(@babel/parser@7.28.3)(joi@18.0.1)(magicast@0.3.5)(react@19.1.0)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.1.0(typescript@5.8.3))(vue@3.5.21(typescript@5.8.3))(yup@1.7.0)(zod@4.1.8)':
+  '@nuxt/ui-pro@3.3.4(@babel/parser@7.28.3)(joi@18.0.1)(magicast@0.3.5)(react@19.1.0)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.1.0(typescript@5.8.3))(vue@3.5.21(typescript@5.8.3))(yup@1.7.0)(zod@4.1.8)':
     dependencies:
       '@ai-sdk/vue': 1.2.12(vue@3.5.21(typescript@5.8.3))(zod@4.1.8)
       '@nuxt/kit': 4.0.3(magicast@0.3.5)

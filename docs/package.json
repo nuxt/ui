@@ -17,7 +17,7 @@
     "@nuxt/content": "^3.7.0",
     "@nuxt/image": "^1.11.0",
     "@nuxt/ui": "workspace:*",
-    "@nuxt/ui-pro": "^3.3.3",
+    "@nuxt/ui-pro": "^3.3.4",
     "@nuxtjs/plausible": "^2.0.1",
     "@octokit/rest": "^22.0.0",
     "@rollup/plugin-yaml": "^4.1.2",
