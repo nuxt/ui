@@ -8,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 type RadioGroup = ComponentConfig<typeof theme, AppConfig, 'radioGroup'>
 
 export type RadioGroupValue = AcceptableValue
-export type RadioGroupItem = {
+export type RadioGroupItem = RadioGroupValue | {
   label?: string
   description?: string
   disabled?: boolean
@@ -16,7 +16,7 @@ export type RadioGroupItem = {
   class?: any
   ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'description'>
   [key: string]: any
-} | RadioGroupValue
+}
 
 export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<RadioGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'> {
   /**
