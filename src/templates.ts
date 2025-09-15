@@ -201,12 +201,16 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   // FIXME: `typeof colors[number]` should include all colors from the theme
   templates.push({
     filename: 'types/ui.d.ts',
-    getContents: () => `import * as ui from '#build/ui'
+    getContents: () => {
+      const iconKeys = Object.keys(uiConfig?.icons || {})
+      const iconUnion = iconKeys.length ? iconKeys.map(i => JSON.stringify(i)).join(' | ') : 'string'
+
+      return `import * as ui from '#build/ui'
 import type { TVConfig } from '@nuxt/ui'
 import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 
-type IconsConfig = ${JSON.stringify(uiConfig.icons)};
+type IconsConfig = Record<${iconUnion} | (string & {}), string>
 
 type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
@@ -232,6 +236,7 @@ declare module '@nuxt/schema' {
 
 export {}
 `
+    }
   })
 
   templates.push({
