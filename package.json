@@ -204,13 +204,14 @@
     }
   },
   "resolutions": {
-    "@nuxt/ui": "workspace:*",
+    "@nuxt/kit": "4.0.3",
     "@nuxt/module-builder": "1.0.1",
+    "@nuxt/ui": "workspace:*",
     "chokidar": "3.6.0",
     "debug": "4.3.7",
+    "typescript": "5.8.3",
     "unimport": "4.1.1",
-    "unplugin": "^2.3.10",
-    "typescript": "5.8.3"
+    "unplugin": "^2.3.10"
   },
   "keywords": [
     "nuxt-ui",
