@@ -9,14 +9,14 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@ai-sdk/gateway": "^1.0.19",
-    "@ai-sdk/vue": "^2.0.35",
+    "@ai-sdk/gateway": "^1.0.23",
+    "@ai-sdk/vue": "^2.0.44",
     "@iconify-json/logos": "^1.2.9",
-    "@iconify-json/lucide": "^1.2.66",
-    "@iconify-json/simple-icons": "^1.2.50",
+    "@iconify-json/lucide": "^1.2.68",
+    "@iconify-json/simple-icons": "^1.2.52",
     "@iconify-json/vscode-icons": "^1.2.30",
-    "@modelcontextprotocol/sdk": "^1.17.3",
-    "@nuxt/content": "^3.6.3",
+    "@modelcontextprotocol/sdk": "^1.18.0",
+    "@nuxt/content": "^3.7.0",
     "@nuxt/image": "^1.11.0",
     "@nuxt/ui": "workspace:*",
     "@nuxtjs/plausible": "^2.0.1",
@@ -25,14 +25,14 @@
     "@vercel/speed-insights": "^1.2.0",
     "@vueuse/integrations": "^13.9.0",
     "@vueuse/nuxt": "^13.9.0",
-    "ai": "^5.0.35",
+    "ai": "^5.0.44",
     "better-sqlite3": "^12.2.0",
     "capture-website": "^4.2.0",
     "joi": "^18.0.1",
     "maska": "^3.2.0",
     "motion-v": "^1.7.1",
     "nuxt": "^4.0.3",
-    "nuxt-component-meta": "^0.13.1",
+    "nuxt-component-meta": "^0.14.0",
     "nuxt-llms": "^0.1.3",
     "nuxt-og-image": "^5.1.9",
     "prettier": "^3.6.2",
@@ -43,6 +43,6 @@
     "ufo": "^1.6.1",
     "valibot": "^1.1.0",
     "yup": "^1.7.0",
-    "zod": "^4.1.5"
+    "zod": "^4.1.8"
   }
 }

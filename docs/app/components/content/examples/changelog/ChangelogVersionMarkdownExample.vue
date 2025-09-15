@@ -38,7 +38,7 @@ We want to be transparent: migrating from Nuxt UI v2 to v3 requires significant 
 
 To upgrade your project:
 
-1. Read our detailed [migration guide](https://ui.nuxt.com/docs/getting-started/migration)
+1. Read our detailed [migration guide](https://ui.nuxt.com/docs/getting-started/migration/v3)
 2. Review the new documentation and components before attempting to upgrade
 3. Report any issues on our [GitHub repository](https://github.com/nuxt/ui/issues)
 

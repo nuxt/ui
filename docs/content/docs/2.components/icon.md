@@ -22,7 +22,7 @@ props:
 
 ::framework-only
 #nuxt
-:::caution{to="/docs/getting-started/icons/nuxt#collections"}
+:::caution{to="/docs/getting-started/integrations/icons/nuxt#collections"}
 It's highly recommended to install the icons collections you need, read more about this.
 :::
 ::
