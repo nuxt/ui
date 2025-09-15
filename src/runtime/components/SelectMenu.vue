@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type SelectMenu = ComponentConfig<typeof theme, AppConfig, 'selectMenu'>
 
-export type SelectMenuValue = AcceptableValue | boolean
+export type SelectMenuValue = AcceptableValue
 export type SelectMenuItem = SelectMenuValue | {
   label?: string
   /**

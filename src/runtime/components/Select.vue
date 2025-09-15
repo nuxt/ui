@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>
 
-export type SelectValue = AcceptableValue | boolean
+export type SelectValue = AcceptableValue
 export type SelectItem = SelectValue | {
   label?: string
   /**
@@ -268,8 +268,8 @@ defineExpose({
     v-bind="rootProps"
     :autocomplete="autocomplete"
     :disabled="disabled"
-    :default-value="(defaultValue as (Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[]))"
-    :model-value="(modelValue as (Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[]))"
+    :default-value="defaultValue"
+    :model-value="modelValue"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >

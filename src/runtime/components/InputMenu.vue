@@ -10,7 +10,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type InputMenu = ComponentConfig<typeof theme, AppConfig, 'inputMenu'>
 
-export type InputMenuValue = AcceptableValue | boolean
+export type InputMenuValue = AcceptableValue
 export type InputMenuItem = InputMenuValue | {
   label?: string
   /**
