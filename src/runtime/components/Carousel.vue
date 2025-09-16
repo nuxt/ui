@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { AcceptableValue } from 'reka-ui'
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
 import type { AutoplayOptionsType } from 'embla-carousel-autoplay'
 import type { AutoScrollOptionsType } from 'embla-carousel-auto-scroll'
@@ -11,17 +10,17 @@ import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import theme from '#build/ui/carousel'
 import type { ButtonProps, IconProps } from '../types'
+import type { AcceptableValue } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 
-interface _CarouselItem {
+export type CarouselValue = AcceptableValue
+export type CarouselItem = CarouselValue | {
   class?: any
   ui?: Pick<Carousel['slots'], 'item'>
   [key: string]: any
 }
-
-export type CarouselItem = _CarouselItem | AcceptableValue
 
 export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
   /**
@@ -265,7 +264,7 @@ function onSelect(api: EmblaCarouselType) {
   emits('select', selectedIndex.value)
 }
 
-function isCarouselItem(item: CarouselItem): item is _CarouselItem {
+function isCarouselItem(item: CarouselItem): item is Exclude<CarouselItem, CarouselValue> {
   return typeof item === 'object' && item !== null
 }
 

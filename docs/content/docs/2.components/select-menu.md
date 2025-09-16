@@ -92,6 +92,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectMenuItem[]
 props:
   modelValue:
     label: 'Todo'
@@ -152,6 +154,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectMenuItem[]
 props:
   modelValue: 'todo'
   valueKey: 'id'
@@ -241,6 +245,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectMenuItem[]
 props:
   modelValue:
     label: 'Backlog'
@@ -656,6 +662,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectMenuItem[]
 props:
   modelValue: 'Apple'
   items:
