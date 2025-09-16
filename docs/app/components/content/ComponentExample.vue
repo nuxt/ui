@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ChipProps } from '@nuxt/ui'
 import { camelCase } from 'scule'
+import { hash } from 'ohash'
 import { useElementSize } from '@vueuse/core'
 import { get, set } from '#ui/utils'
 
@@ -99,7 +100,7 @@ ${data?.code ?? ''}
   return code
 })
 
-const { data: ast } = await useAsyncData(`component-example-${camelName}`, async () => {
+const { data: ast } = await useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
   if (!props.prettier) {
     return parseMarkdown(code.value)
   }

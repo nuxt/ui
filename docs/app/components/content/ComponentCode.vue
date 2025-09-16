@@ -300,7 +300,7 @@ ${props.slots?.default}
   return code
 })
 
-const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props: componentProps, slots: props.slots, external: props.external, externalTypes: props.externalTypes })}`, async () => {
+const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props: componentProps, slots: props.slots, external: props.external, externalTypes: props.externalTypes, collapse: props.collapse })}`, async () => {
   if (!props.prettier) {
     return parseMarkdown(code.value)
   }
