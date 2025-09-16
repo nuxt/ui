@@ -12,6 +12,43 @@ links:
 
 ## Usage
 
+Use the Tree component to display a hierarchical structure of items.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+external:
+  - items
+props:
+  items:
+    - label: 'app/'
+      defaultExpanded: true
+      children:
+        - label: 'composables/'
+          children:
+            - label: 'useAuth.ts'
+              icon: 'i-vscode-icons-file-type-typescript'
+            - label: 'useUser.ts'
+              icon: 'i-vscode-icons-file-type-typescript'
+        - label: 'components/'
+          defaultExpanded: true
+          children:
+            - label: 'Card.vue'
+              icon: 'i-vscode-icons-file-type-vue'
+            - label: 'Button.vue'
+              icon: 'i-vscode-icons-file-type-vue'
+    - label: 'app.vue'
+      icon: 'i-vscode-icons-file-type-vue'
+    - label: 'nuxt.config.ts'
+      icon: 'i-vscode-icons-file-type-nuxt'
+  class: 'w-60'
+---
+::
+
 ### Items
 
 Use the `items` prop as an array of objects with the following properties:
@@ -235,12 +272,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
 :::
 ::
@@ -288,12 +325,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize these icons globally in your `app.config.ts` under `ui.icons.folder` and `ui.icons.folderOpen` keys.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize these icons globally in your `vite.config.ts` under `ui.icons.folder` and `ui.icons.folderOpen` keys.
 :::
 ::

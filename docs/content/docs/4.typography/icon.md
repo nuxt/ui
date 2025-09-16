@@ -28,12 +28,12 @@ Use the `icon` component to display an [Icon](/docs/components/icon) in your con
 
 ### Props
 
-:component-props{name="icon" prose}
+:component-props{prose}
 
 ## Theme
 
-:component-theme{slug="icon" prose}
+:component-theme{prose}
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

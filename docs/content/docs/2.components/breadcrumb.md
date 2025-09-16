@@ -9,6 +9,29 @@ links:
 
 ## Usage
 
+Use the Breadcrumb component to show the current page's location in your site's hierarchy.
+
+::component-code
+---
+collapse: true
+ignore:
+  - items
+external:
+  - items
+props:
+  items:
+    - label: 'Docs'
+      icon: 'i-lucide-book-open'
+      to: '/docs'
+    - label: 'Components'
+      icon: 'i-lucide-box'
+      to: '/docs/components'
+    - label: 'Breadcrumb'
+      icon: 'i-lucide-link'
+      to: '/docs/components/breadcrumb'
+---
+::
+
 ### Items
 
 Use the `items` prop as an array of objects with the following properties:
@@ -32,8 +55,9 @@ externalTypes:
   - BreadcrumbItem[]
 props:
   items:
-    - label: 'Home'
-      icon: 'i-lucide-house'
+    - label: 'Docs'
+      icon: 'i-lucide-book-open'
+      to: '/docs'
     - label: 'Components'
       icon: 'i-lucide-box'
       to: '/docs/components'
@@ -62,8 +86,9 @@ externalTypes:
 props:
   separatorIcon: 'i-lucide-arrow-right'
   items:
-    - label: 'Home'
-      icon: 'i-lucide-house'
+    - label: 'Docs'
+      icon: 'i-lucide-book-open'
+      to: '/docs'
     - label: 'Components'
       icon: 'i-lucide-box'
       to: '/docs/components'
@@ -75,12 +100,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronRight` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronRight` key.
 :::
 ::

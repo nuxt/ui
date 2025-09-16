@@ -69,15 +69,15 @@ Lorem velit voluptate ex reprehenderit ullamco et culpa.
 
 ### Props
 
-:component-props{name="tabs" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="tabs" prose}
+:component-slots{prose}
 
 ## Theme
 
-::component-theme{slug="tabs" prose}
+::component-theme{prose}
 ---
 extra:
   - tabsItem
@@ -86,4 +86,4 @@ extra:
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

@@ -9,8 +9,11 @@ links:
 
 ## Usage
 
+Use the `header`, `default` and `footer` slots to add content to the Card.
+
 ::component-example
 ---
+collapse: true
 name: 'card-example'
 props:
   class: 'w-full'

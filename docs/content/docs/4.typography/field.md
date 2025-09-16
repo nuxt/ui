@@ -32,16 +32,16 @@ The `description` can be set as prop or in the default slot with full **markdown
 
 ### Props
 
-:component-props{name="field" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="field" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="field" prose}
+:component-theme{prose}
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

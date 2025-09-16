@@ -10,8 +10,6 @@ links:
 
 ## Usage
 
-### Value
-
 Use the default slot to set the value of the Kbd.
 
 ::component-code
@@ -21,7 +19,9 @@ slots:
 ---
 ::
 
-You can achieve the same result by using the `value` prop.
+### Value
+
+Use the `value` prop to set the value of the Kbd.
 
 ::component-code
 ---
@@ -62,7 +62,7 @@ items:
 ---
 ::
 
-### Color :badge{label="New" class="align-text-top"}
+### Color
 
 Use the `color` prop to change the color of the Kbd.
 

@@ -9,8 +9,6 @@ links:
 
 ## Usage
 
-### Label
-
 Use the default slot to set the label of the Button.
 
 ::component-code
@@ -20,7 +18,9 @@ slots:
 ---
 ::
 
-You can achieve the same result by using the `label` prop.
+### Label
+
+Use the `label` prop to set the label of the Button.
 
 ::component-code
 ---
@@ -273,12 +273,12 @@ Button
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
 :::
 ::
