@@ -207,6 +207,7 @@
     }
   },
   "resolutions": {
+    "@nuxt/kit": "4.0.3",
     "@nuxt/ui": "workspace:*",
     "chokidar": "3.6.0",
     "debug": "4.3.7",
