@@ -15,6 +15,73 @@ links:
 
 Use anything you like in the default slot of the ContextMenu, and right-click on it to display the menu.
 
+::component-code
+---
+prettier: true
+collapse: true
+ignore:
+  - items
+  - ui.content
+external:
+  - items
+props:
+  items:
+    - - label: Appearance
+        children:
+          - label: System
+            icon: i-lucide-monitor
+          - label: Light
+            icon: i-lucide-sun
+          - label: Dark
+            icon: i-lucide-moon
+    - - label: Show Sidebar
+        kbds:
+          - meta
+          - s
+      - label: Show Toolbar
+        kbds:
+          - shift
+          - meta
+          - d
+      - label: Collapse Pinned Tabs
+        disabled: true
+    - - label: Refresh the Page
+      - label: Clear Cookies and Refresh
+      - label: Clear Cache and Refresh
+      - type: separator
+      - label: Developer
+        children:
+          - - label: View Source
+              kbds:
+                - meta
+                - shift
+                - u
+            - label: Developer Tools
+              kbds:
+                - option
+                - meta
+                - i
+            - label: Inspect Elements
+              kbds:
+                - option
+                - meta
+                - c
+          - - label: JavaScript Console
+              kbds:
+                - option
+                - meta
+                - j
+slots:
+  default: |
+
+    <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
+      Right click here
+    </div>
+---
+
+:div{class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72"}[Right click here]
+::
+
 ### Items
 
 Use the `items` prop as an array of objects with the following properties:

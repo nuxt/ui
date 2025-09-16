@@ -29,6 +29,5 @@ export default defineCachedEventHandler(async (event) => {
   }))
 }, {
   maxAge: 60 * 60,
-  shouldBypassCache: () => !!import.meta.dev,
   getKey: event => `commits-${getQuery(event).path}`
 })

@@ -15,6 +15,29 @@ links:
 
 Use the `v-model` directive to control the value of the SelectMenu or the `default-value` prop to set the initial value when you do not need to control its state.
 
+::component-code
+---
+prettier: true
+hide:
+  - class
+ignore:
+  - modelValue
+  - items
+  - class
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
 ::tip
 Use this over a [`Select`](/docs/components/select) to take advantage of Reka UI's [`Combobox`](https://reka-ui.com/docs/components/combobox) component that offers search capabilities and multiple selection.
 ::
@@ -69,6 +92,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectMenuItem[]
 props:
   modelValue:
     label: 'Todo'
@@ -129,6 +154,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectMenuItem[]
 props:
   modelValue: 'todo'
   valueKey: 'id'
@@ -218,6 +245,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectMenuItem[]
 props:
   modelValue:
     label: 'Backlog'
@@ -633,6 +662,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectMenuItem[]
 props:
   modelValue: 'Apple'
   items:

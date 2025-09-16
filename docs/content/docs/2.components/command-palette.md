@@ -19,6 +19,58 @@ links:
 
 Use the `v-model` directive to control the value of the CommandPalette or the `default-value` prop to set the initial value when you do not need to control its state.
 
+::component-code
+---
+collapse: true
+hide:
+  - autofocus
+ignore:
+  - groups
+  - modelValue
+  - class
+external:
+  - groups
+  - modelValue
+class: '!p-0'
+props:
+  modelValue: {}
+  autofocus: false
+  groups:
+    - id: 'users'
+      label: 'Users'
+      items:
+        - label: 'Benjamin Canac'
+          suffix: 'benjamincanac'
+          avatar:
+            src: 'https://github.com/benjamincanac.png'
+        - label: 'Sylvain Marroufin'
+          suffix: 'smarroufin'
+          avatar:
+            src: 'https://github.com/smarroufin.png'
+        - label: 'Sébastien Chopin'
+          suffix: 'atinux'
+          avatar:
+            src: 'https://github.com/atinux.png'
+        - label: 'Romain Hamel'
+          suffix: 'romhml'
+          avatar:
+            src: 'https://github.com/romhml.png'
+        - label: 'Haytham A. Salama'
+          suffix: 'Haythamasalama'
+          avatar:
+            src: 'https://github.com/Haythamasalama.png'
+        - label: 'Daniel Roe'
+          suffix: 'danielroe'
+          avatar:
+            src: 'https://github.com/danielroe.png'
+        - label: 'Neil Richter'
+          suffix: 'noook'
+          avatar:
+            src: 'https://github.com/noook.png'
+  class: 'flex-1'
+---
+::
+
 ::tip{to="#control-selected-items"}
 You can also use the `@update:model-value` event to listen to the selected item(s).
 ::
@@ -877,7 +929,7 @@ props:
 This can be useful when using the CommandPalette inside a [`Modal`](/docs/components/modal) for example.
 ::
 
-### With footer slot :badge{label="New" class="align-text-top"}
+### With footer slot
 
 Use the `#footer` slot to add custom content at the bottom of the CommandPalette, such as keyboard shortcuts help or additional actions.
 
