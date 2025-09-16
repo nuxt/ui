@@ -74,12 +74,12 @@ export default (options: Required<ModuleOptions>) => ({
       horizontal: {
         root: 'w-full flex flex-col',
         base: 'w-full',
-        status: 'flex-row items-center justify-end'
+        status: 'flex-row items-center justify-end min-w-fit'
       },
       vertical: {
         root: 'h-full flex flex-row-reverse',
         base: 'h-full',
-        status: 'flex-col justify-end'
+        status: 'flex-col justify-end min-h-fit'
       }
     },
     inverted: {

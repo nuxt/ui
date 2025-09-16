@@ -122,11 +122,8 @@ const indicatorStyle = computed(() => {
 })
 
 const statusStyle = computed(() => {
-  return {
-    [props.orientation === 'vertical' ? 'height' : 'width']: `${Math.max(percent.value ?? 0, 0)}%`,
-    minWidth: props.orientation === 'horizontal' ? 'fit-content' : undefined,
-    minHeight: props.orientation === 'vertical' ? 'fit-content' : undefined
-  }
+  const value = `${Math.max(percent.value ?? 0, 0)}%`
+  return props.orientation === 'vertical' ? { height: value } : { width: value }
 })
 
 function isActive(index: number) {
