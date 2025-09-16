@@ -357,7 +357,7 @@ const api = {
     if (name) {
       formErrors = errors.value.filter(
         (err) => {
-          return !!inputs.value[err.name]
+          return (err.name && !!inputs.value[err.name])
             && (name instanceof RegExp
               ? !(err.name && name.test(err.name))
               : err.name !== name)
