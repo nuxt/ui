@@ -37,4 +37,4 @@ Switch between light and dark mode to see the different images: :u-color-mode-se
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prefix="color-mode"}

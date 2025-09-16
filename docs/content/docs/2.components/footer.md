@@ -17,6 +17,7 @@ Use the `left`, `default` and `right` slots to customize the footer.
 ::component-example
 ---
 prettier: true
+collapse: true
 name: 'footer-example'
 class: '!p-0'
 props:
@@ -26,6 +27,10 @@ props:
 
 ::note
 In this example, we use the [NavigationMenu](/docs/components/navigation-menu) component to render the footer links in the center.
+::
+
+::tip{to="/docs/components/footer-columns"}
+You can use the [FooterColumns](/docs/components/footer-columns) component to display a list of links inside the `top` slot.
 ::
 
 ## Examples

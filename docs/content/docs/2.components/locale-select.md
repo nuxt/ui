@@ -114,4 +114,4 @@ const { locale, setLocale } = useI18n()
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prefix="locale"}

@@ -16,6 +16,26 @@ links:
 
 Use the `v-model` directive to control the value of the CheckboxGroup or the `default-value` prop to set the initial value when you do not need to control its state.
 
+::component-code
+---
+collapse: true
+prettier: true
+ignore:
+  - modelValue
+  - items
+external:
+  - items
+  - modelValue
+props:
+  modelValue:
+    - 'System'
+  items:
+    - 'System'
+    - 'Light'
+    - 'Dark'
+---
+::
+
 ### Items
 
 Use the `items` prop as an array of strings or numbers:

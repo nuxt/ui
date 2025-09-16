@@ -289,4 +289,4 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prefix="content"}

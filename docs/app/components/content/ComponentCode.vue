@@ -300,7 +300,7 @@ ${props.slots?.default}
   return code
 })
 
-const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props: componentProps, slots: props.slots })}`, async () => {
+const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props: componentProps, slots: props.slots, external: props.external, externalTypes: props.externalTypes })}`, async () => {
   if (!props.prettier) {
     return parseMarkdown(code.value)
   }
@@ -322,7 +322,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
 </script>
 
 <template>
-  <div class="my-5">
+  <div class="my-5" :style="{ '--ui-header-height': '4rem' }">
     <div class="relative">
       <div v-if="options.length" class="flex flex-wrap items-center gap-2.5 border border-muted border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">

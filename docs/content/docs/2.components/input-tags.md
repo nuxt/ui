@@ -50,7 +50,7 @@ props:
 ---
 ::
 
-### Max Length :badge{label="New" class="align-text-top"}
+### Max Length
 
 Use the `max-length` prop to set the maximum number of characters allowed in a tag.
 

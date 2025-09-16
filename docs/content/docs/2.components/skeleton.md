@@ -9,6 +9,8 @@ links:
 
 ## Usage
 
+Use the Skeleton component as-is to display a placeholder.
+
 :component-example{name="skeleton-example"}
 
 ## API

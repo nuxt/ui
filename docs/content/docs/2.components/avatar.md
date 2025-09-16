@@ -11,6 +11,16 @@ links:
 
 The Avatar uses the `<NuxtImg>` component when [`@nuxt/image`](https://github.com/nuxt/image) is installed, falling back to `img` otherwise.
 
+::component-code
+---
+ignore:
+  - src
+props:
+  src: 'https://github.com/benjamincanac.png'
+---
+::
+
+
 ::note
 You can pass any property from the HTML `<img>` element such as `alt`, `loading`, etc.
 ::

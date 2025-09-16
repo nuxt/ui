@@ -325,16 +325,16 @@ Like the `ProsePre` component, the `CodeTree` handles filenames, icons and copy 
 
 ### Props
 
-:component-props{name="code-tree" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="code-tree" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="code-tree" prose}
+:component-theme{prose}
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}
