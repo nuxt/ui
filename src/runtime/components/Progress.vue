@@ -123,7 +123,7 @@ const indicatorStyle = computed(() => {
 
 const statusStyle = computed(() => {
   return {
-    [props.orientation === 'vertical' ? 'height' : 'width']: percent.value ? `${percent.value}%` : 'fit-content'
+    [props.orientation === 'vertical' ? 'height' : 'width']: percent.value !== undefined ? `${percent.value}%` : 'fit-content'
   }
 })
 
