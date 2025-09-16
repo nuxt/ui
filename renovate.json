@@ -10,7 +10,6 @@
     "v3"
   ],
   "ignoreDeps": [
-    "@nuxt/module-builder",
     "typescript"
   ],
   "packageRules": [

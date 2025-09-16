@@ -157,7 +157,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.9.0",
-    "@nuxt/module-builder": "^1.0.1",
+    "@nuxt/module-builder": "^1.0.2",
     "@nuxt/test-utils": "^3.19.2",
     "@release-it/conventional-changelog": "^10.0.1",
     "@vue/test-utils": "^2.4.6",
@@ -205,7 +205,6 @@
   },
   "resolutions": {
     "@nuxt/kit": "4.0.3",
-    "@nuxt/module-builder": "1.0.1",
     "@nuxt/ui": "workspace:*",
     "chokidar": "3.6.0",
     "debug": "4.3.7",
