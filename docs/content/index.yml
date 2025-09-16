@@ -30,26 +30,26 @@ features:
     description: Powered by Tailwind CSS and Reka UI for top performance and accessibility.
     icon: i-lucide-rocket
     to: /docs/getting-started
-  - title: Flexible theming system
-    description: Beautiful by default and easily customizable with semantic colors and CSS variables to match your brand.
-    icon: i-lucide-swatch-book
-    to: /docs/getting-started/theme/design-system
-  - title: Internationalization (i18n)
-    description: Nuxt UI is translated into 50+ languages, works well with i18n and multi-directional support (LTR/RTL).
-    icon: i-lucide-globe
-    to: /docs/getting-started/integrations/i18n
-  - title: Easy font customization
-    description: Performance-optimized fonts with first-class @nuxt/fonts integration.
-    icon: i-lucide-a-large-small
-    to: /docs/getting-started/integrations/fonts
   - title: Large icons sets
     description: Access to over 200,000 customizable icons from Iconify powered by @nuxt/icon.
     icon: i-lucide-smile
     to: /docs/getting-started/integrations/icons
+  - title: Easy font customization
+    description: Performance-optimized fonts with first-class @nuxt/fonts integration.
+    icon: i-lucide-a-large-small
+    to: /docs/getting-started/integrations/fonts
   - title: Light & dark mode
     description: Dark mode-ready components with @nuxtjs/color-mode module integration.
     icon: i-lucide-sun-moon
     to: /docs/getting-started/integrations/color-mode
+  - title: Internationalization (i18n)
+    description: Translated into 50+ languages, works well with i18n and multi-directional support (LTR/RTL).
+    icon: i-lucide-languages
+    to: /docs/getting-started/integrations/i18n
+  - title: Beautiful typography
+    description: Integrates with @nuxt/content to deliver beautiful typography and consistent component styling.
+    icon: i-simple-icons-markdown
+    to: /docs/getting-started/integrations/content
 design_system:
   title: Flexible design system
   description: Build faster with Nuxt UI's CSS-first design system powered by Tailwind CSS and its semantic color system combined with a runtime configuration.
@@ -62,7 +62,7 @@ design_system:
   features:
     - title: CSS-first configuration
       description: Define fonts, colors, and breakpoints with the @theme directive directly in your CSS. This makes your theme portable, maintainable and easy to customize.
-      icon: i-logos-tailwindcss-icon
+      icon: i-simple-icons-css
     - title: Semantic color system
       description: Configure 7 semantic color aliases (primary, secondary, success, info, warning, error, neutral) that describe the purpose of colors rather than specific values.
       icon: i-lucide-palette
@@ -116,10 +116,10 @@ design_system:
 
     ::
 css_variables:
-  title: CSS Variables
-  description: Use CSS variables as design tokens for flexible theming with semantic utility classes that automatically adapt to light and dark modes.
+  title: Consistent design tokens
+  description: Use CSS variables as design tokens for consistent theming with semantic utility classes that automatically adapt to light and dark modes.
   links:
-    - label: Explore CSS variables
+    - label: Customize CSS variables
       to: /docs/getting-started/theme/css-variables
       variant: outline
       color: neutral
@@ -135,31 +135,32 @@ css_variables:
       description: Customize global styles with --ui-radius for border rounding, --ui-container for layout widths, and --ui-header-height for consistent spacing.
       icon: i-lucide-settings
   code: |
-    ::code-group
+    ::code-group{class="lg:[&_pre]:min-h-[362px]"}
 
     ```css [main.css]
     @import "tailwindcss";
     @import "@nuxt/ui";
 
     :root {
+      --ui-primary: black;
       --ui-radius: 0.5rem;
-      --ui-container: var(--container-7xl);
-      --ui-header-height: --spacing(16);
-      --ui-primary: var(--ui-color-primary-500);
+      --ui-container: var(--container-5xl);
+      --ui-header-height: --spacing(24);
     }
 
     .dark {
-      --ui-primary: var(--ui-color-primary-400);
-      --ui-text: var(--color-white);
-      --ui-bg: var(--ui-color-neutral-900);
+      --ui-primary: white;
+      --ui-bg: var(--ui-color-neutral-950);
     }
     ```
 
     ```vue [Component.vue]
     <template>
-      <div class="bg-default text-default border border-default rounded-lg p-4">
+      <div class="bg-default border border-default rounded-lg p-4">
         <span class="text-primary">Primary text</span>
+
         <span class="text-dimmed">Dimmed text</span>
+
         <div class="bg-elevated p-3 rounded-md mt-2">
           <span class="text-muted">Elevated background</span>
         </div>
@@ -167,20 +168,10 @@ css_variables:
     </template>
     ```
 
-    ::code-preview{label="Preview"}
-    <div class="bg-default text-default border border-default rounded-lg p-4">
-      <span class="text-primary">Primary text</span>
-      <span class="text-dimmed">Dimmed text</span>
-      <div class="bg-elevated p-3 rounded-md mt-2">
-        <span class="text-muted">Elevated background</span>
-      </div>
-    </div>
-    ::
-
     ::
 components:
-  title: Customize components
-  description: Customize Nuxt UI components with the Tailwind Variants API using slots, variants, and compound variants with intelligent class merging.
+  title: Tailor components to your needs
+  description: Use the Tailwind Variants API with slots, variants, and compound variants for powerful component theming with intelligent class merging.
   links:
     - label: Customize components
       to: /docs/getting-started/theme/components
@@ -198,7 +189,7 @@ components:
       description: Fine-tune individual components with the ui prop for slot-specific styling and class prop for root element overrides, providing maximum flexibility.
       icon: i-lucide-component
   code: |
-    ::code-group
+    ::code-group{class="lg:[&_pre]:min-h-[482px]"}
 
     ```ts [app.config.ts]
     export default defineAppConfig({
@@ -215,8 +206,7 @@ components:
             }
           },
           defaultVariants: {
-            color: 'neutral',
-            variant: 'outline'
+            color: 'neutral'
           }
         }
       }
@@ -226,12 +216,14 @@ components:
     ```vue [Button.vue]
     <template>
       <UButton
-        label="Custom Button"
+        label="Button"
+        size="md"
+        variant="outline"
         trailing-icon="i-lucide-chevron-right"
         :ui="{
-          trailingIcon: 'rotate-90 size-3'
+          trailingIcon: 'rotate-90'
         }"
-        class="font-bold rounded-full"
+        class="rounded-full"
       />
     </template>
     ```
