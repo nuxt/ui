@@ -18,7 +18,6 @@ Use the `v-model` directive to control the value of the CheckboxGroup or the `de
 
 ::component-code
 ---
-collapse: true
 prettier: true
 ignore:
   - modelValue
@@ -49,9 +48,6 @@ ignore:
 external:
   - items
   - modelValue
-externalTypes:
-  - CheckboxGroupItem[]
-  - CheckboxGroupValue[]
 props:
   modelValue:
     - 'System'
@@ -81,7 +77,6 @@ external:
   - modelValue
 externalTypes:
   - CheckboxGroupItem[]
-  - CheckboxGroupValue[]
 props:
   modelValue:
     - 'system'
@@ -117,7 +112,6 @@ external:
   - modelValue
 externalTypes:
   - CheckboxGroupItem[]
-  - CheckboxGroupValue[]
 props:
   modelValue:
     - 'light'
@@ -147,8 +141,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - CheckboxGroupItem[]
 props:
   legend: 'Theme'
   defaultValue:
@@ -172,8 +164,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - CheckboxGroupItem[]
 items:
   color:
     - primary
@@ -206,8 +196,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - CheckboxGroupItem[]
 items:
   color:
     - primary
@@ -245,8 +233,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - CheckboxGroupItem[]
 items:
   variant:
     - list
@@ -276,8 +262,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - CheckboxGroupItem[]
 items:
   variant:
     - list
@@ -307,8 +291,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - CheckboxGroupItem[]
 items:
   indicator:
     - start
@@ -342,8 +324,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - CheckboxGroupItem[]
 props:
   disabled: true
   defaultValue:

@@ -612,6 +612,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectItem[]
 props:
   modelValue: 'Apple'
   items:
