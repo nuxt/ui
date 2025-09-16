@@ -113,12 +113,12 @@ A landing page you can use as starting point.
 
 ### Slots
 
-:component-slots{name="card-group" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="card-group" prose}
+:component-theme{prose}
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

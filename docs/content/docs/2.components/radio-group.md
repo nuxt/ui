@@ -15,6 +15,24 @@ links:
 
 Use the `v-model` directive to control the value of the RadioGroup or the `default-value` prop to set the initial value when you do not need to control its state.
 
+::component-code
+---
+prettier: true
+ignore:
+  - modelValue
+  - items
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'System'
+  items:
+    - 'System'
+    - 'Light'
+    - 'Dark'
+---
+::
+
 ### Items
 
 Use the `items` prop as an array of strings or numbers:
@@ -28,9 +46,6 @@ ignore:
 external:
   - items
   - modelValue
-externalTypes:
-  - RadioGroupItem[]
-  - RadioGroupValue
 props:
   modelValue: 'System'
   items:
@@ -59,7 +74,6 @@ external:
   - modelValue
 externalTypes:
   - RadioGroupItem[]
-  - RadioGroupValue
 props:
   modelValue: 'system'
   items:
@@ -94,7 +108,6 @@ external:
   - modelValue
 externalTypes:
   - RadioGroupItem[]
-  - RadioGroupValue
 props:
   modelValue: 'light'
   valueKey: 'id'
@@ -123,8 +136,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - RadioGroupItem[]
 props:
   legend: 'Theme'
   defaultValue: 'System'
@@ -147,8 +158,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - RadioGroupItem[]
 props:
   color: neutral
   defaultValue: 'System'
@@ -202,8 +211,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - RadioGroupItem[]
 props:
   size: 'xl'
   variant: 'list'
@@ -227,8 +234,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - RadioGroupItem[]
 props:
   orientation: 'horizontal'
   variant: 'list'
@@ -252,8 +257,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - RadioGroupItem[]
 props:
   indicator: 'end'
   variant: 'card'
@@ -277,8 +280,6 @@ ignore:
   - items
 external:
   - items
-externalTypes:
-  - RadioGroupItem[]
 props:
   disabled: true
   defaultValue: 'System'

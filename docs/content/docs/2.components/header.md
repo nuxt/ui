@@ -16,7 +16,6 @@ The Header component renders a `<header>` element.
 Its height is defined through a `--ui-header-height` CSS variable.
 ::
 
-
 Use the `left`, `default` and `right` slots to customize the header and the `body` or `content` slots to customize the header menu.
 
 ::component-example

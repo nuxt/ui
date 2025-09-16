@@ -13,6 +13,7 @@ function createServer() {
   })
 
   // RESOURCES
+
   server.registerResource(
     'nuxt-ui-documentation-pages',
     'resource://nuxt-ui/documentation-pages',
@@ -109,13 +110,15 @@ function createServer() {
   )
 
   // PROMPTS
+
+  // @ts-expect-error - Type instantiation is excessively deep and possibly infinite.
   server.registerPrompt(
     'find_component_for_usecase',
     {
       title: 'Find Component for Use Case',
       description: 'Find the best Nuxt UI component for a specific use case',
       argsSchema: {
-        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        // need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
         usecase: z.string().describe('Describe what you want to build (e.g., "user login form", "data table", "navigation menu")')
       }
     },
@@ -141,9 +144,9 @@ function createServer() {
       title: 'Implement Component with Props',
       description: 'Generate complete component implementation with proper props and styling',
       argsSchema: {
-        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        // need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
         componentName: z.string().describe('The Nuxt UI component name (PascalCase)'),
-        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        // need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
         requirements: z.string().optional().describe('Specific requirements or customizations needed')
       }
     },
@@ -171,7 +174,7 @@ function createServer() {
       title: 'Setup Project with Template',
       description: 'Guide through setting up a new project with a Nuxt UI template',
       argsSchema: {
-        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        // need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
         projectType: z.string().describe('Type of project (dashboard, landing page, admin panel, etc.)')
       }
     },
@@ -192,6 +195,7 @@ function createServer() {
   )
 
   // TOOLS
+
   server.tool(
     'list_components',
     'Lists all available Nuxt UI components with their categories and basic information. Returns: A JSON array of objects containing name, title, description, path and category.',

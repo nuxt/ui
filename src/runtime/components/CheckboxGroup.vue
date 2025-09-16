@@ -9,8 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>
 
 export type CheckboxGroupValue = AcceptableValue
-
-export type CheckboxGroupItem = {
+export type CheckboxGroupItem = CheckboxGroupValue | {
   label?: string
   description?: string
   disabled?: boolean
@@ -18,7 +17,7 @@ export type CheckboxGroupItem = {
   class?: any
   ui?: Pick<CheckboxGroup['slots'], 'item'> & Omit<Required<CheckboxProps>['ui'], 'root'>
   [key: string]: any
-} | CheckboxGroupValue
+}
 
 export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<CheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'indicator' | 'icon'> {
   /**

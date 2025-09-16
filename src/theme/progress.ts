@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'gap-2',
     base: 'relative overflow-hidden rounded-full bg-accented',
     indicator: 'rounded-full size-full transition-transform duration-200 ease-out',
-    status: 'flex justify-end text-dimmed transition-[width] duration-200',
+    status: 'flex text-dimmed transition-[width] duration-200',
     steps: 'grid items-end',
     step: 'truncate text-end row-start-1 col-start-1 transition-opacity'
   },
@@ -74,12 +74,12 @@ export default (options: Required<ModuleOptions>) => ({
       horizontal: {
         root: 'w-full flex flex-col',
         base: 'w-full',
-        status: 'flex-row'
+        status: 'flex-row items-center justify-end min-w-fit'
       },
       vertical: {
         root: 'h-full flex flex-row-reverse',
         base: 'h-full',
-        status: 'flex-col'
+        status: 'flex-col justify-end min-h-fit'
       }
     },
     inverted: {

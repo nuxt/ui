@@ -76,4 +76,4 @@ export default defineConfig({
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prefix="color-mode"}
