@@ -79,6 +79,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - TreeItem[]
 props:
   items:
     - label: 'app/'
@@ -118,6 +120,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - TreeItem[]
 props:
   multiple: true
   items:
@@ -158,6 +162,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - TreeItem[]
 props:
   color: neutral
   items:
@@ -198,6 +204,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - TreeItem[]
 props:
   size: xl
   items:
@@ -242,6 +250,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - TreeItem[]
 props:
   trailingIcon: 'i-lucide-arrow-down'
   items:
@@ -295,6 +305,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - TreeItem[]
 props:
   expandedIcon: 'i-lucide-book-open'
   collapsedIcon: 'i-lucide-book'
@@ -352,6 +364,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - TreeItem[]
 props:
   disabled: true
   items:
