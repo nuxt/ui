@@ -1,5 +1,9 @@
 import type { ClassValue, TVVariants, TVCompoundVariants, TVDefaultVariants } from 'tailwind-variants'
 
+type GenericVariants = TVVariants<Record<string, any>, ClassValue, Record<string, any>>
+type GenericCompoundVariants = TVCompoundVariants<GenericVariants, Record<string, any>, ClassValue, object, undefined>
+type GenericDefaultVariants = TVDefaultVariants<GenericVariants, Record<string, any>, object, undefined>
+
 /**
  * Defines the AppConfig object based on the tailwind-variants configuration.
  */
@@ -8,10 +12,12 @@ export type TVConfig<T extends Record<string, any>> = {
     [K in keyof T[P]as K extends 'base' | 'slots' | 'variants' | 'compoundVariants' | 'defaultVariants' ? K : never]?: K extends 'base' ? ClassValue
       : K extends 'slots' ? {
         [S in keyof T[P]['slots']]?: ClassValue
+      } & {
+        [key: string]: ClassValue
       }
-        : K extends 'variants' ? TVVariants<T[P]['slots'], ClassValue, T[P]['variants']>
-          : K extends 'compoundVariants' ? TVCompoundVariants<T[P]['variants'], T[P]['slots'], ClassValue, object, undefined>
-            : K extends 'defaultVariants' ? TVDefaultVariants<T[P]['variants'], T[P]['slots'], object, undefined>
+        : K extends 'variants' ? TVVariants<T[P]['slots'], ClassValue, T[P]['variants']> | GenericVariants
+          : K extends 'compoundVariants' ? TVCompoundVariants<T[P]['variants'], T[P]['slots'], ClassValue, object, undefined> | GenericCompoundVariants
+            : K extends 'defaultVariants' ? TVDefaultVariants<T[P]['variants'], T[P]['slots'], object, undefined> | GenericDefaultVariants
               : never
   }
 }
