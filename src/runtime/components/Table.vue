@@ -113,69 +113,69 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   loadingAnimation?: Table['variants']['loadingAnimation']
   /**
    * Use the `watchOptions` prop to customize reactivity (for ex: disable deep watching for changes in your data or limiting the max traversal depth). This can improve performance by reducing unnecessary re-renders, but it should be used with caution as it may lead to unexpected behavior if not managed properly.
-   * @link [API Docs](https://vuejs.org/api/options-state.html#watch)
-   * @link [Guide](https://vuejs.org/guide/essentials/watchers.html)
+   * @see [API](https://vuejs.org/api/options-state.html#watch)
+   * @see [Guide](https://vuejs.org/guide/essentials/watchers.html)
    * @defaultValue { deep: true }
    */
   watchOptions?: WatchOptions
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/global-filtering#table-options)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/global-filtering)
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/global-filtering#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/global-filtering)
    */
   globalFilterOptions?: Omit<GlobalFilterOptions<T>, 'onGlobalFilterChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-filtering#table-options)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-filtering)
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-filtering#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-filtering)
    */
   columnFiltersOptions?: Omit<ColumnFiltersOptions<T>, 'getFilteredRowModel' | 'onColumnFiltersChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-pinning#table-options)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-pinning)
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-pinning#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-pinning)
    */
   columnPinningOptions?: Omit<ColumnPinningOptions, 'onColumnPinningChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-sizing#table-options)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-sizing)
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-sizing#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-sizing)
    */
   columnSizingOptions?: Omit<ColumnSizingOptions, 'onColumnSizingChange' | 'onColumnSizingInfoChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-visibility#table-options)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-visibility)
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-visibility#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-visibility)
    */
   visibilityOptions?: Omit<VisibilityOptions, 'onColumnVisibilityChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/sorting#table-options)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/sorting)
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/sorting#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/sorting)
    */
   sortingOptions?: Omit<SortingOptions<T>, 'getSortedRowModel' | 'onSortingChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/grouping#table-options)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/grouping)
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/grouping#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/grouping)
    */
   groupingOptions?: Omit<GroupingOptions, 'onGroupingChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/expanding#table-options)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/expanding)
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/expanding#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/expanding)
    */
   expandedOptions?: Omit<ExpandedOptions<T>, 'getExpandedRowModel' | 'onExpandedChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/row-selection#table-options)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/row-selection)
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/row-selection#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/row-selection)
    */
   rowSelectionOptions?: Omit<RowSelectionOptions<T>, 'onRowSelectionChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/row-pinning#table-options)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/row-pinning)
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/row-pinning#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/row-pinning)
    */
   rowPinningOptions?: Omit<RowPinningOptions<T>, 'onRowPinningChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/pagination#table-options)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/pagination)
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/pagination#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/pagination)
    */
   paginationOptions?: Omit<PaginationOptions, 'onPaginationChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-faceting#table-options)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-faceting#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
    */
   facetedOptions?: FacetedOptions<T>
   onSelect?: (row: TableRow<T>, e?: Event) => void

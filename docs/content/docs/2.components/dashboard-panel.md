@@ -32,6 +32,10 @@ definePageMeta({
 It is recommended to set an `id` when using multiple panels in different pages to avoid conflicts.
 ::
 
+::warning
+This component does not have a single root element when using the `resizable` prop, so wrap it in a container (e.g., `<div class="flex flex-1">`) if you use page transitions or require a single root for layout.
+::
+
 Use the `header`, `body` and `footer` slots to customize the panel or the default slot if you don't want a scrollable body with padding.
 
 ::component-example

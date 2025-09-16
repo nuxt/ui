@@ -33,12 +33,12 @@ Use markdown in the default slot of the `badge` component to display a [Badge](/
 
 ### Slots
 
-:component-slots{name="badge" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="badge" prose}
+:component-theme{prose}
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

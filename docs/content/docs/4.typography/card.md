@@ -39,16 +39,16 @@ Best suited for small teams, startups and agencies with up to 5 developers.
 
 ### Props
 
-:component-props{name="card" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="card" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="card" prose}
+:component-theme{prose}
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}
