@@ -34,82 +34,121 @@ The `useOverlay` composable provides methods to manage overlays globally. Each c
 
 ### create()
 
-```ts
-create(component: T, options: OverlayOptions): OverlayInstance
-```
+`create(component: T, options: OverlayOptions): OverlayInstance`{lang="ts-type"}
 
 Create an overlay, and return a factory instance.
 
-- Parameters:
-  - `component`: The overlay component.
-  - `options`:
-    - `defaultOpen?: boolean` Open the overlay immediately after being created. Defaults to `false`.
-    - `props?: ComponentProps`: An optional object of props to pass to the rendered component.
-    - `destroyOnClose?: boolean` Removes the overlay from memory when closed. Defaults to `false`.
+#### Parameters
+
+::field-group
+  ::field{name="component" type="T" required}
+  The overlay component to render.
+  ::
+
+  ::field{name="options" type="OverlayOptions"}
+  Configuration options for the overlay.
+
+  ::field-group
+    ::field{name="defaultOpen" type="boolean"}
+    Open the overlay immediately after being created. Defaults to `false`.
+    ::
+
+    ::field{name="props" type="ComponentProps"}
+    An optional object of props to pass to the rendered component.
+    ::
+
+    ::field{name="destroyOnClose" type="boolean"}
+    Removes the overlay from memory when closed. Defaults to `false`.
+    ::
+  ::
+  ::
+::
 
 ### open()
 
-```ts
-open(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T>
-```
+`open(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T>`{lang="ts-type"}
 
 Open an overlay by its `id`.
 
-- Parameters:
-  - `id`: The identifier of the overlay.
-  - `props`: An optional object of props to pass to the rendered component.
+#### Parameters
+
+::field-group
+  ::field{name="id" type="symbol" required}
+  The identifier of the overlay.
+  ::
+
+  ::field{name="props" type="ComponentProps<T>"}
+  An optional object of props to pass to the rendered component.
+  ::
+::
 
 ### close()
 
-```ts
-close(id: symbol, value?: any): void
-```
+`close(id: symbol, value?: any): void`{lang="ts-type"}
 
 Close an overlay by its `id`.
 
-- Parameters:
-  - `id`: The identifier of the overlay.
-  - `value`: A value to resolve the overlay promise with.
+#### Parameters
+
+::field-group
+  ::field{name="id" type="symbol" required}
+  The identifier of the overlay.
+  ::
+
+  ::field{name="value" type="any"}
+  A value to resolve the overlay promise with.
+  ::
+::
 
 ### patch()
 
-```ts
-patch(id: symbol, props: ComponentProps<T>): void
-```
+`patch(id: symbol, props: ComponentProps<T>): void`{lang="ts-type"}
 
 Update an overlay by its `id`.
 
-- Parameters:
-  - `id`: The identifier of the overlay.
-  - `props`: An object of props to update on the rendered component.
+#### Parameters
+
+::field-group
+  ::field{name="id" type="symbol" required}
+  The identifier of the overlay.
+  ::
+
+  ::field{name="props" type="ComponentProps<T>" required}
+  An object of props to update on the rendered component.
+  ::
+::
 
 ### unmount()
 
-```ts
-unmount(id: symbol): void
-```
+`unmount(id: symbol): void`{lang="ts-type"}
 
 Remove an overlay from the DOM by its `id`.
 
-- Parameters:
-  - `id`: The identifier of the overlay.
+#### Parameters
+
+::field-group
+  ::field{name="id" type="symbol" required}
+  The identifier of the overlay.
+  ::
+::
 
 ### isOpen()
 
-```ts
-isOpen(id: symbol): boolean
-```
+`isOpen(id: symbol): boolean`{lang="ts-type"}
 
 Check if an overlay is open using its `id`.
 
-- Parameters:
-  - `id`: The identifier of the overlay.
+#### Parameters
+
+::field-group
+  ::field{name="id" type="symbol" required}
+  The identifier of the overlay.
+  ::
+::
 
 ### overlays
 
-```ts
-overlays: Overlay[]
-```
+`overlays: Overlay[]`{lang="ts-type"}
 
 In-memory list of all overlays that were created.
 
@@ -117,14 +156,17 @@ In-memory list of all overlays that were created.
 
 ### open()
 
-```ts
-open(props?: ComponentProps<T>): Promise<OpenedOverlay<T>>
-```
+`open(props?: ComponentProps<T>): Promise<OpenedOverlay<T>>`{lang="ts-type"}
 
 Open the overlay.
 
-- Parameters:
-  - `props`: An optional object of props to pass to the rendered component.
+#### Parameters
+
+::field-group
+  ::field{name="props" type="ComponentProps<T>"}
+  An optional object of props to pass to the rendered component.
+  ::
+::
 
 ```vue
 <script setup lang="ts">
@@ -144,25 +186,31 @@ function openModal() {
 
 ### close()
 
-```ts
-close(value?: any): void
-```
+`close(value?: any): void`{lang="ts-type"}
 
 Close the overlay.
 
-- Parameters:
-  - `value`: A value to resolve the overlay promise with.
+#### Parameters
+
+::field-group
+  ::field{name="value" type="any"}
+  A value to resolve the overlay promise with.
+  ::
+::
 
 ### patch()
 
-```ts
-patch(props: ComponentProps<T>): void
-```
+`patch(props: ComponentProps<T>): void`{lang="ts-type"}
 
 Update the props of the overlay.
 
-- Parameters:
-  - `props`: An object of props to update on the rendered component.
+#### Parameters
+
+::field-group
+  ::field{name="props" type="ComponentProps<T>" required}
+  An object of props to update on the rendered component.
+  ::
+::
 
 ```vue
 <script setup lang="ts">
