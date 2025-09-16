@@ -9,8 +9,6 @@ links:
 
 ## Usage
 
-### Label
-
 Use the default slot to set the label of the Button.
 
 ::component-code
@@ -20,7 +18,9 @@ slots:
 ---
 ::
 
-You can achieve the same result by using the `label` prop.
+### Label
+
+Use the `label` prop to set the label of the Button.
 
 ::component-code
 ---

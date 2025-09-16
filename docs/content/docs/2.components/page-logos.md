@@ -12,6 +12,26 @@ links:
 
 The PageLogos component provides a flexible way to display a list of logos or images in your pages.
 
+::component-code
+---
+collapse: true
+prettier: true
+hide:
+  - class
+ignore:
+  - items
+props:
+  items:
+    - i-simple-icons-github
+    - i-simple-icons-discord
+    - i-simple-icons-x
+    - i-simple-icons-instagram
+    - i-simple-icons-linkedin
+    - i-simple-icons-facebook
+  class: 'mb-10'
+---
+::
+
 ### Title
 
 Use the `title` prop to set the title above the logos.
@@ -21,6 +41,8 @@ Use the `title` prop to set the title above the logos.
 prettier: true
 ignore:
   - items
+hide:
+  - class
 props:
   title: 'Trusted by the best front-end teams'
   items:
@@ -30,6 +52,7 @@ props:
     - i-simple-icons-instagram
     - i-simple-icons-linkedin
     - i-simple-icons-facebook
+  class: 'my-10'
 ---
 ::
 
@@ -44,15 +67,17 @@ You can display logos in two ways:
 
 ::tabs{class="gap-0"}
 
-::component-example{label="With Items"}
+::component-example{label="With items"}
 ---
 name: 'page-logos-with-items'
+class: '[&>div]:my-10'
 ---
 ::
 
-::component-example{label="With Slot"}
+::component-example{label="With slot"}
 ---
 name: 'page-logos-with-slot'
+class: '[&>div]:my-10'
 ---
 ::
 
@@ -68,6 +93,8 @@ prettier: true
 ignore:
   - items
   - marquee
+hide:
+  - class
 props:
   title: 'Trusted by the best front-end teams'
   marquee: true
@@ -78,6 +105,7 @@ props:
     - i-simple-icons-instagram
     - i-simple-icons-linkedin
     - i-simple-icons-facebook
+  class: 'my-10'
 ---
 ::
 

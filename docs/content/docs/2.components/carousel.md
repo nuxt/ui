@@ -12,13 +12,23 @@ links:
 
 ## Usage
 
-### Items
+Use the Carousel component to display a list of items in a carousel.
 
-Use the `items` prop as an array and render each item using the default slot:
+::component-example
+---
+collapse: true
+name: 'carousel-items-example'
+class: 'p-8'
+---
+::
 
 ::note
 Use your mouse to drag the carousel horizontally on desktop.
 ::
+
+### Items
+
+Use the `items` prop as an array and render each item using the default slot:
 
 ::component-example
 ---

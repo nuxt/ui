@@ -95,9 +95,9 @@ export default defineNuxtConfig({
     '/docs/components/page-accordion': { redirect: { to: '/docs/components/accordion', statusCode: 301 }, prerender: false },
     '/docs/components/page-marquee': { redirect: { to: '/docs/components/marquee', statusCode: 301 }, prerender: false },
     // v4 redirects - removed pro pages
-    '/pro': { redirect: { to: '/pro/activate', statusCode: 301 }, prerender: false },
-    '/pro/pricing': { redirect: { to: '/pro/activate', statusCode: 301 }, prerender: false },
-    '/pro/purchase': { redirect: { to: '/pro/activate', statusCode: 301 }, prerender: false },
+    '/pro': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
+    '/pro/pricing': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
+    '/pro/purchase': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/pro/templates': { redirect: { to: '/templates', statusCode: 301 }, prerender: false },
     '/docs/getting-started/license': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/docs/getting-started/installation/pro': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
