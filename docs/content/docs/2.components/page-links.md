@@ -10,6 +10,30 @@ links:
 
 ## Usage
 
+Use the PageLinks component to display a list of links.
+
+::component-code
+---
+collapse: true
+prettier: true
+ignore:
+  - links
+external:
+  - links
+props:
+  links:
+    - label: 'Edit this page'
+      icon: i-lucide-file-pen
+      to: https://github.com/nuxt/ui/blob/v4/docs/content/3.components/page-links.md
+    - label: 'Star on GitHub'
+      icon: i-lucide-star
+      to: https://github.com/nuxt/ui
+    - label: 'Releases'
+      icon: i-lucide-rocket
+      to: https://github.com/nuxt/ui/releases
+---
+::
+
 ### Links
 
 Use the `links` prop as an array of objects with the following properties:

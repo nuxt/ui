@@ -11,10 +11,6 @@ links:
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputNumber.vue
 ---
 
-::note
-This component relies on the [`@internationalized/number`](https://react-spectrum.adobe.com/internationalized/number/index.html) package which provides utilities for formatting and parsing numbers across locales and numbering systems.
-::
-
 ## Usage
 
 Use the `v-model` directive to control the value of the InputNumber.
@@ -39,6 +35,10 @@ ignore:
 props:
   defaultValue: 5
 ---
+::
+
+::note
+This component relies on the [`@internationalized/number`](https://react-spectrum.adobe.com/internationalized/number/index.html) package which provides utilities for formatting and parsing numbers across locales and numbering systems.
 ::
 
 ### Min / Max

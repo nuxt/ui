@@ -103,4 +103,4 @@ if (!page.value) {
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prefix="content"}

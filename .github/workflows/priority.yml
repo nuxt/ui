@@ -8,6 +8,7 @@ on:
 
 permissions:
   issues: write
+  pull-requests: write
 
 # Avoid label race conditions with other workflows (issue-labeler, etc.)
 concurrency:
@@ -23,6 +24,7 @@ jobs:
         with:
           script: |
             const TRIAGE = "triage";
+            const QUESTION = "question";
             const PRIORITIES = ["p0-critical","p1-high","p2-medium","p3-low"];
             const WORD_TO_LABEL = { critical:"p0-critical", high:"p1-high", medium:"p2-medium", low:"p3-low" };
             const NUM_TO_LABEL  = ["p0-critical","p1-high","p2-medium","p3-low"];
@@ -59,7 +61,9 @@ jobs:
                 if (!current.includes(target)) await addLabels([target]);
                 if (current.includes(TRIAGE)) await removeLabel(TRIAGE);
 
-                await github.rest.reactions.createForIssueComment({ ...context.repo, comment_id: context.payload.comment.id, content: "rocket" });
+                // Delete the command comment after processing
+                await github.rest.issues.deleteComment({ ...context.repo, comment_id: context.payload.comment.id });
+
                 return;
               }
             }
@@ -80,9 +84,12 @@ jobs:
             const labelsNow = await getLabels();
             const hasPriority = labelsNow.some(l => PRIORITIES.includes(l));
             const hasTriage   = labelsNow.includes(TRIAGE);
+            const hasQuestion = labelsNow.includes(QUESTION);
+            // Check if the issue was created by a bot
+            const isBot = issue.user?.type === "Bot" || issue.user?.login?.endsWith("[bot]");
 
             // priority present → remove triage
             if (hasPriority && hasTriage) await removeLabel(TRIAGE);
 
-            // no priority & no triage → add triage (so your stale job still sees it)
-            if (!hasPriority && !hasTriage && issue.state === "open") await addLabels([TRIAGE]);
+            // no priority & no triage & not a question & not created by bot → add triage (so your stale job still sees it)
+            if (!hasPriority && !hasTriage && !hasQuestion && !isBot && issue.state === "open") await addLabels([TRIAGE]);

@@ -12,6 +12,32 @@ links:
 
 ## Usage
 
+Use the Stepper component to display a list of items in a stepper.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+  - class
+external:
+  - items
+props:
+  items:
+    - title: 'Address'
+      description: 'Add your address here'
+      icon: 'i-lucide-house'
+    - title: 'Shipping'
+      description: 'Set your preferred shipping method'
+      icon: 'i-lucide-truck'
+    - title: 'Checkout'
+      description: 'Confirm your order'
+  class: 'w-full'
+---
+::
+
 ### Items
 
 Use the `items` prop as an array of objects with the following properties:
