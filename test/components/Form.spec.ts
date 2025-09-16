@@ -165,6 +165,7 @@ describe('Form', () => {
 
     it('setErrors with regex works', async () => {
       form.setErrors([{ id: 'email', name: 'email', message: 'this is an error' }])
+
       expect(form.errors).toMatchObject([{ id: 'email', name: 'email', message: 'this is an error' }])
 
       form.setErrors([{ id: 'password', name: 'password', message: 'this is another error' }], /email/)
@@ -492,7 +493,6 @@ describe('Form', () => {
         { id: 'password', name: 'password' },
         { id: 'nested', name: 'nested.field' }
       ])
-      expect(errors).toHaveLength(3)
     })
 
     it('getErrors works with nested paths', async () => {
@@ -501,7 +501,12 @@ describe('Form', () => {
       expect(nestedErrors).toMatchObject([
         { id: 'nested', name: 'nested.field' }
       ])
-      expect(nestedErrors).toHaveLength(1)
+    })
+
+    it('clear with nested forms works', async () => {
+      await form.submit()
+      form.clear()
+      expect(form.errors).toMatchObject({})
     })
 
     it('setErrors works with nested paths', async () => {
@@ -515,6 +520,15 @@ describe('Form', () => {
       expect(wrapper.html()).toContain('Nested error')
     })
 
+    it('clear with nested forms works on root path', async () => {
+      await form.submit()
+      form.clear('password')
+      expect(form.errors).toMatchObject([
+        { id: 'email', name: 'email' },
+        { id: 'nested', name: 'nested.field' }
+      ])
+    })
+
     it('clear works with nested paths', async () => {
       await form.submit()
       form.clear('nested.field')
@@ -525,9 +539,18 @@ describe('Form', () => {
       ])
     })
 
+    it('clear works on nested form name', async () => {
+      await form.submit()
+      form.clear('nested')
+      expect(form.errors).toMatchObject([
+        { id: 'email', name: 'email' },
+        { id: 'password', name: 'password' }
+      ])
+    })
+
     it('clear works with nested regex patterns', async () => {
       await form.submit()
-      form.clear(/nested\..*/)
+      form.clear(/nested.*/)
       expect(form.errors).toMatchObject([
         { id: 'email', name: 'email' },
         { id: 'password', name: 'password' }

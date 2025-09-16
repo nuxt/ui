@@ -352,15 +352,35 @@ const api = {
   },
 
   clear(name?: keyof I | string | RegExp) {
+    let formErrors: FormError[] = []
+
     if (name) {
-      errors.value = errors.value.filter(err => name instanceof RegExp ? !(err.name && name.test(err.name)) : err.name !== name)
-    } else {
-      errors.value = []
+      formErrors = errors.value.filter(
+        (err) => {
+          return !!inputs.value[err.name]
+            && (name instanceof RegExp
+              ? !(err.name && name.test(err.name))
+              : err.name !== name)
+        })
     }
 
     for (const form of nestedForms.value.values()) {
-      form.api.clear(name)
+      if (!form.name) form.api.clear(name)
+      else if (form.name === name || (name instanceof RegExp && name.test(form.name))) form.api.clear()
+      else if (typeof name === 'string' && name?.startsWith(form.name + `.`)) {
+        const nestedName = name?.split(`${form.name}.`)[1]
+        form.api.clear(nestedName)
+      }
+
+      formErrors = formErrors.concat(
+        form.api.getErrors().map(e => ({
+          ...e,
+          name: form.name ? [form.name, e.name].join('.') : e.name
+        }))
+      )
     }
+
+    errors.value = formErrors
   },
 
   disabled,
