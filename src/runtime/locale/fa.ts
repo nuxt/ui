@@ -3,7 +3,7 @@ import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
   name: 'فارسی',
-  code: 'fa-IR',
+  code: 'fa',
   dir: 'rtl',
   messages: {
     alert: {
