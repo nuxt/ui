@@ -95,6 +95,8 @@
   ],
   "scripts": {
     "build": "nuxt-module-build build",
+    "build:repl:prepare": "node scripts/generate-repl-exports.mjs",
+    "build:repl": "pnpm build:repl:prepare && vite build -c vite.repl.config.ts",
     "prepack": "pnpm build",
     "dev": "nuxt dev playgrounds/nuxt --uiDev",
     "dev:build": "nuxt build playgrounds/nuxt",
@@ -171,7 +173,8 @@
     "release-it": "^19.0.4",
     "vitest": "^3.2.4",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^3.0.6"
+    "vue-tsc": "^3.0.6",
+    "@vitejs/plugin-vue": "^5.1.4"
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7",
