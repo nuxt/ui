@@ -4,7 +4,7 @@ import type { TreeRootProps, TreeRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
 import type { IconProps } from '../types'
-import type { DynamicSlots, GetItemKeys, GetModelValue, GetModelValueEmits, NestedItem } from '../types/utils'
+import type { DynamicSlots, GetItemKeys, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Tree = ComponentConfig<typeof theme, AppConfig, 'tree'>
@@ -16,12 +16,15 @@ export type TreeItem = {
   icon?: IconProps['name']
   label?: string
   /**
+   * The unique key of the item. If not provided, the label will be used as the key.
+   */
+  key?: string
+  /**
    * @IconifyIcon
    */
   trailingIcon?: IconProps['name']
   defaultExpanded?: boolean
   disabled?: boolean
-  value?: string
   slot?: string
   children?: TreeItem[]
   onToggle?(e: Event): void
@@ -31,7 +34,7 @@ export type TreeItem = {
   [key: string]: any
 }
 
-export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled' | 'bubbleSelect'> {
+export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled' | 'bubbleSelect'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'ul'
@@ -46,15 +49,15 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItem
    */
   size?: Tree['variants']['size']
   /**
-   * The key used to get the value from the item.
-   * @defaultValue 'value'
-   */
-  valueKey?: VK
-  /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>
+  /**
+   * The key used to get the unique key from the item.
+   * @defaultValue 'key'
+   */
+  indexKey?: GetItemKeys<T>
   /**
    * The icon displayed on the right side of a parent node.
    * @defaultValue appConfig.ui.icons.chevronDown
@@ -75,16 +78,16 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItem
   collapsedIcon?: IconProps['name']
   items?: T
   /** The controlled value of the Tree. Can be bind as `v-model`. */
-  modelValue?: GetModelValue<T, VK, M>
+  modelValue?: M extends true ? NestedItem<T>[] : NestedItem<T>
   /** The value of the Tree when initially rendered. Use when you do not need to control the state of the Tree. */
-  defaultValue?: GetModelValue<T, VK, M>
+  defaultValue?: M extends true ? NestedItem<T>[] : NestedItem<T>
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
   class?: any
   ui?: Tree['slots']
 }
 
-export type TreeEmits<A extends TreeItem[], VK extends GetItemKeys<A> | undefined, M extends boolean> = Omit<TreeRootEmits, 'update:modelValue'> & GetModelValueEmits<A, VK, M>
+export type TreeEmits<T extends TreeItem = TreeItem, M extends boolean = false> = TreeRootEmits<T, M>
 
 type SlotProps<T extends TreeItem> = (props: { item: T, index: number, level: number, expanded: boolean, selected: boolean }) => any
 
@@ -101,7 +104,7 @@ export type TreeSlots<
 
 </script>
 
-<script setup lang="ts" generic="T extends TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false">
+<script setup lang="ts" generic="T extends TreeItem[], M extends boolean = false">
 import { computed } from 'vue'
 import { TreeRoot, TreeItem, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
@@ -112,11 +115,11 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<TreeProps<T, VK, M>>(), {
+const props = withDefaults(defineProps<TreeProps<T, M>>(), {
   labelKey: 'label',
-  valueKey: 'value' as never
+  indexKey: 'key'
 })
-const emits = defineEmits<TreeEmits<T, VK, M>>()
+const emits = defineEmits<TreeEmits<T[number], M>>()
 const slots = defineSlots<TreeSlots<T>>()
 
 const appConfig = useAppConfig() as Tree['AppConfig']
@@ -134,12 +137,12 @@ function getItemLabel<Item extends TreeItem = NestedItem<T>>(item: Item): string
   return get(item, props.labelKey as string)
 }
 
-function getItemValue(item: NestedItem<T>): string {
-  return get(item, props.valueKey as string) ?? get(item, props.labelKey as string)
+function getItemKey<Item extends TreeItem = NestedItem<T>>(item: Item): string {
+  return get(item, props.indexKey as string) ?? getItemLabel(item)
 }
 
 function getDefaultOpenedItems(item: NestedItem<T>): string[] {
-  const currentItem = item.defaultExpanded ? getItemValue(item) : null
+  const currentItem = item.defaultExpanded ? getItemKey(item) : null
   const childItems = item.children?.flatMap((child: TreeItem) => getDefaultOpenedItems(child as NestedItem<T>)) ?? []
 
   return [currentItem, ...childItems].filter(Boolean) as string[]
@@ -236,7 +239,7 @@ const defaultExpanded = computed(() =>
   <TreeRoot
     v-bind="{ ...(rootProps as unknown as TreeRootProps<NestedItem<T>>), ...$attrs }"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :get-key="getItemValue"
+    :get-key="getItemKey"
     :default-expanded="defaultExpanded"
     :selection-behavior="selectionBehavior"
   >

@@ -4,11 +4,11 @@ import type { TreeItem } from '@nuxt/ui'
 const items: TreeItem[] = [
   {
     label: 'app/',
-    value: 'app',
+    key: 'app',
     children: [
       {
         label: 'composables/',
-        value: 'composables',
+        key: 'composables',
         children: [
           { label: 'useAuth.ts', icon: 'i-vscode-icons-file-type-typescript' },
           { label: 'useUser.ts', icon: 'i-vscode-icons-file-type-typescript' }
@@ -16,7 +16,7 @@ const items: TreeItem[] = [
       },
       {
         label: 'components/',
-        value: 'components',
+        key: 'components',
         children: [
           { label: 'Card.vue', icon: 'i-vscode-icons-file-type-vue' },
           { label: 'Button.vue', icon: 'i-vscode-icons-file-type-vue' }
