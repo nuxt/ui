@@ -76,7 +76,7 @@ export default defineNuxtConfig({
     '/docs/getting-started/migration': { redirect: '/docs/getting-started/migration/v4', prerender: false },
     '/docs/getting-started/theme': { redirect: '/docs/getting-started/theme/design-system', prerender: false },
     '/docs/getting-started/integrations': { redirect: '/docs/getting-started/integrations/icons', prerender: false },
-    '/docs/getting-started/ai': { redirect: '/docs/getting-started/ai/llms-txt', prerender: false },
+    '/docs/getting-started/ai': { redirect: '/docs/getting-started/ai/mcp', prerender: false },
     '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
     // v4 redirects - default shadow pages
     '/docs/getting-started/installation': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
@@ -95,9 +95,9 @@ export default defineNuxtConfig({
     '/docs/components/page-accordion': { redirect: { to: '/docs/components/accordion', statusCode: 301 }, prerender: false },
     '/docs/components/page-marquee': { redirect: { to: '/docs/components/marquee', statusCode: 301 }, prerender: false },
     // v4 redirects - removed pro pages
-    '/pro': { redirect: { to: '/pro/activate', statusCode: 301 }, prerender: false },
-    '/pro/pricing': { redirect: { to: '/pro/activate', statusCode: 301 }, prerender: false },
-    '/pro/purchase': { redirect: { to: '/pro/activate', statusCode: 301 }, prerender: false },
+    '/pro': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
+    '/pro/pricing': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
+    '/pro/purchase': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/pro/templates': { redirect: { to: '/templates', statusCode: 301 }, prerender: false },
     '/docs/getting-started/license': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/docs/getting-started/installation/pro': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
@@ -153,6 +153,14 @@ export default defineNuxtConfig({
     '/pro/components/**': { redirect: { to: '/components/**', statusCode: 301 }, prerender: false },
     '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false },
     '/releases': { redirect: 'https://github.com/nuxt/ui/releases', prerender: false }
+  },
+
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        externalRelAttribute: 'noopener'
+      }
+    }
   },
 
   compatibilityDate: '2024-07-09',

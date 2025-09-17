@@ -9,8 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>
 
 export type CheckboxGroupValue = AcceptableValue
-
-export type CheckboxGroupItem = {
+export type CheckboxGroupItem = CheckboxGroupValue | {
   label?: string
   description?: string
   disabled?: boolean
@@ -18,7 +17,7 @@ export type CheckboxGroupItem = {
   class?: any
   ui?: Pick<CheckboxGroup['slots'], 'item'> & Omit<Required<CheckboxProps>['ui'], 'root'>
   [key: string]: any
-} | CheckboxGroupValue
+}
 
 export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<CheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'indicator' | 'icon'> {
   /**
@@ -100,7 +99,7 @@ const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator', 'icon'))
-const proxySlots = omit(slots, ['legend'])
+const getProxySlots = () => omit(slots, ['legend'])
 
 const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(props, { bind: false })
 const id = _id.value ?? useId()
@@ -187,7 +186,7 @@ function onUpdate(value: any) {
         :ui="{ ...(props.ui ? omit(props.ui, ['root']) : undefined), ...(item.ui || {}) }"
         :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
       >
-        <template v-for="(_, name) in proxySlots" #[name]>
+        <template v-for="(_, name) in getProxySlots()" #[name]>
           <slot :name="(name as keyof CheckboxGroupSlots<T>)" :item="item" />
         </template>
       </UCheckbox>

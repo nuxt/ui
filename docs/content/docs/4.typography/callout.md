@@ -21,7 +21,7 @@ prettier: true
 props:
   icon: i-lucide-square-play
   color: neutral
-  to: '/docs/getting-started/installation/pro/nuxt'
+  to: '/docs/getting-started/installation/nuxt'
   class: 'w-full my-0'
 hide:
   - class
@@ -84,16 +84,16 @@ This action cannot be undone.
 
 ### Props
 
-:component-props{name="callout" prose}
+:component-props{prose}
 
 ### Slots
 
-:component-slots{name="callout" prose}
+:component-slots{prose}
 
 ## Theme
 
-:component-theme{slug="callout" prose}
+:component-theme{prose}
 
 ## Changelog
 
-:component-changelog{prose}
+:component-changelog{prefix="prose"}

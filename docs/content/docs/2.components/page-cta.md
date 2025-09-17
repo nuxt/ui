@@ -209,7 +209,7 @@ slots:
 
 ### Props
 
-:component-props{name="page-CTA"}
+:component-props{slug="page-CTA"}
 
 ### Slots
 

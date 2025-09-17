@@ -82,7 +82,7 @@ props:
   title: 'Theme'
   description: 'Customize Nuxt UI with your own colors, fonts, and more.'
   icon: 'i-lucide-swatch-book'
-  to: '/docs/getting-started/theme'
+  to: '/docs/getting-started/theme/design-system'
   target: _blank
   class: 'w-96'
 ---

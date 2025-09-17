@@ -18,7 +18,7 @@ This component implements Reka UI [ConfigProvider](https://reka-ui.com/docs/util
 
 It's also using [ToastProvider](https://reka-ui.com/docs/components/toast#provider) and [TooltipProvider](https://reka-ui.com/docs/components/tooltip#provider) to provide global toasts and tooltips, as well as programmatic modals and slideovers.
 
-Use it at the root of your app:
+Wrap your entire application with the App component in your `app.vue` file:
 
 ```vue [app.vue]
 <template>
@@ -30,12 +30,12 @@ Use it at the root of your app:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/i18n/nuxt#locale"}
+:::tip{to="/docs/getting-started/integrations/i18n/nuxt#locale"}
 Learn how to use the `locale` prop to change the locale of your app.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/i18n/vue#locale"}
+:::tip{to="/docs/getting-started/integrations/i18n/vue#locale"}
 Learn how to use the `locale` prop to change the locale of your app.
 :::
 ::

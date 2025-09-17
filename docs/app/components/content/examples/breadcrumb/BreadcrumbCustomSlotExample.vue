@@ -11,7 +11,8 @@ const items = [
     icon: 'i-lucide-ellipsis',
     children: [
       {
-        label: 'Documentation'
+        label: 'Documentation',
+        to: '/docs'
       },
       {
         label: 'Themes'

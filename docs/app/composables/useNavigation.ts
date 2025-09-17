@@ -25,15 +25,15 @@ const categories = {
     id: 'page',
     title: 'Page'
   }, {
-    id: 'content',
-    title: 'Content',
-    framework: 'nuxt'
-  }, {
     id: 'dashboard',
     title: 'Dashboard'
   }, {
     id: 'chat',
-    title: 'AI Chat'
+    title: 'Chat'
+  }, {
+    id: 'content',
+    title: 'Content',
+    framework: 'nuxt'
   }, {
     id: 'color-mode',
     title: 'Color Mode'

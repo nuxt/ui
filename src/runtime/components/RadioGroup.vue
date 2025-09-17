@@ -8,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 type RadioGroup = ComponentConfig<typeof theme, AppConfig, 'radioGroup'>
 
 export type RadioGroupValue = AcceptableValue
-export type RadioGroupItem = {
+export type RadioGroupItem = RadioGroupValue | {
   label?: string
   description?: string
   disabled?: boolean
@@ -16,7 +16,7 @@ export type RadioGroupItem = {
   class?: any
   ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'description'>
   [key: string]: any
-} | RadioGroupValue
+}
 
 export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<RadioGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'> {
   /**
@@ -88,7 +88,7 @@ export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> 
 
 <script setup lang="ts" generic="T extends RadioGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { computed, useId } from 'vue'
-import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'reka-ui'
+import { RadioGroupRoot, RadioGroupItem as RRadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
@@ -172,8 +172,8 @@ function onUpdate(value: any) {
   <RadioGroupRoot
     :id="id"
     v-bind="rootProps"
-    :model-value="modelValue"
-    :default-value="defaultValue"
+    :model-value="(modelValue as Exclude<RadioGroupItem, boolean> | Exclude<RadioGroupItem, boolean>[])"
+    :default-value="(defaultValue as Exclude<RadioGroupItem, boolean> | Exclude<RadioGroupItem, boolean>[])"
     :orientation="orientation"
     :name="name"
     :disabled="disabled"
@@ -189,14 +189,14 @@ function onUpdate(value: any) {
 
       <component :is="(!variant || variant === 'list') ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })">
         <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
-          <RadioGroupItem
+          <RRadioGroupItem
             :id="item.id"
             :value="item.value"
             :disabled="item.disabled"
             :class="ui.base({ class: [props.ui?.base, item.ui?.base], disabled: item.disabled })"
           >
             <RadioGroupIndicator :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })" />
-          </RadioGroupItem>
+          </RRadioGroupItem>
         </div>
 
         <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">

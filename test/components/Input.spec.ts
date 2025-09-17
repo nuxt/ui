@@ -1,5 +1,5 @@
 import { describe, it, expect, test } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { mount, flushPromises } from '@vue/test-utils'
 import Input from '../../src/runtime/components/Input.vue'
 import type { InputProps, InputSlots } from '../../src/runtime/components/Input.vue'
 import ComponentRender from '../component-render'
@@ -136,29 +136,35 @@ describe('Input', () => {
     test('validate on blur works', async () => {
       const { input, wrapper } = await createForm(['blur'])
       await input.trigger('blur')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
       await input.trigger('blur')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('validate on change works', async () => {
       const { input, wrapper } = await createForm(['change'])
       await input.trigger('change')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       input.setValue('valid')
       await input.trigger('change')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'], true)
       await input.setValue('value')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
@@ -166,14 +172,17 @@ describe('Input', () => {
       const { input, wrapper } = await createForm(['input'])
 
       await input.setValue('value')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
 
       await input.trigger('blur')
 
       await input.setValue('value')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
   })
