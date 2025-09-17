@@ -72,7 +72,7 @@ const modelValueWithMappedId = ref<(typeof itemsWithMappedId)[number]>()
       <UTree :default-value="modelValue" :items="items" />
       <UTree :items="items" @update:model-value="(payload) => payload" />
 
-      <UTree v-model="modelValueWithMappedId" :items="itemsWithMappedId" index-key="id" />
+      <UTree v-model="modelValueWithMappedId" :items="itemsWithMappedId" :get-key="(i) => i.id" />
       <UTree v-model="modelValueWithMappedId" :items="itemsWithMappedId" label-key="title" />
     </template>
   </div>

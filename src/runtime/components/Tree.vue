@@ -16,10 +16,6 @@ export type TreeItem = {
   icon?: IconProps['name']
   label?: string
   /**
-   * The unique key of the item. If not provided, the label will be used as the key.
-   */
-  key?: string
-  /**
    * @IconifyIcon
    */
   trailingIcon?: IconProps['name']
@@ -48,16 +44,13 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean 
    * @defaultValue 'md'
    */
   size?: Tree['variants']['size']
+  /** This function is passed the index of each item and should return a unique key for that item */
+  getKey?: (val: NestedItem<T>) => string
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>
-  /**
-   * The key used to get the unique key from the item.
-   * @defaultValue 'key'
-   */
-  indexKey?: GetItemKeys<T>
   /**
    * The icon displayed on the right side of a parent node.
    * @defaultValue appConfig.ui.icons.chevronDown
@@ -116,8 +109,7 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TreeProps<T, M>>(), {
-  labelKey: 'label',
-  indexKey: 'key'
+  labelKey: 'label'
 })
 const emits = defineEmits<TreeEmits<T[number], M>>()
 const slots = defineSlots<TreeSlots<T>>()
@@ -133,17 +125,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tree || {}) 
   size: props.size
 }))
 
-function getItemLabel<Item extends TreeItem = NestedItem<T>>(item: Item): string {
+function getItemLabel<Item extends NestedItem<T>>(item: Item): string {
   return get(item, props.labelKey as string)
 }
 
-function getItemKey<Item extends TreeItem = NestedItem<T>>(item: Item): string {
-  return get(item, props.indexKey as string) ?? getItemLabel(item)
+function getItemKey<Item extends NestedItem<T>>(item: Item): string {
+  return props.getKey
+    ? props.getKey(item)
+    : getItemLabel(item)
 }
 
 function getDefaultOpenedItems(item: NestedItem<T>): string[] {
   const currentItem = item.defaultExpanded ? getItemKey(item) : null
-  const childItems = item.children?.flatMap((child: TreeItem) => getDefaultOpenedItems(child as NestedItem<T>)) ?? []
+  const childItems = item.children?.flatMap((child: NestedItem<T>) => getDefaultOpenedItems(child)) ?? []
 
   return [currentItem, ...childItems].filter(Boolean) as string[]
 }
@@ -191,14 +185,14 @@ const defaultExpanded = computed(() =>
             </slot>
 
             <span
-              v-if="getItemLabel(item) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>]"
+              v-if="getItemLabel(item as NestedItem<T>) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>]"
               :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })"
             >
               <slot
                 :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>)"
                 v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }"
               >
-                {{ getItemLabel(item) }}
+                {{ getItemLabel(item as NestedItem<T>) }}
               </slot>
             </span>
 

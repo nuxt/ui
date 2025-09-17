@@ -10,7 +10,7 @@ describe('Tree', () => {
 
   const items: TreeItem[] = [
     {
-      key: 'root',
+      id: 'root',
       label: 'app',
       slot: 'app',
       children: [{
@@ -22,8 +22,8 @@ describe('Tree', () => {
         ]
       }]
     },
-    { key: 'app-vue', label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
-    { key: 'nuxt-config-ts', label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
+    { id: 'app-vue', label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
+    { id: 'nuxt-config-ts', label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
   ]
 
   const props = { items }
@@ -37,8 +37,8 @@ describe('Tree', () => {
     ['with expanded', { props: { ...props, expanded: [items[0]] } }],
     ['with defaultExpanded', { props: { ...props, defaultExpanded: [items[0]] } }],
     // Key mapping
-    ['with indexKey', { props: { ...props, indexKey: 'label' } }],
-    ['with labelKey', { props: { ...props, labelKey: 'key' } }],
+    ['with labelKey', { props: { ...props, labelKey: 'id' } }],
+    ['with getKey', { props: { ...props, getKey: (item: TreeItem) => item.id } }],
     // Multiple
     ['with multiple', { props: { ...props, multiple: true } }],
     ['with multiple and modelValue', { props: { ...props, multiple: true, modelValue: [items[0], items[1]] } }],
@@ -76,8 +76,8 @@ describe('Tree', () => {
     })).toEqualTypeOf<[{ label: string }]>()
 
     expectEmitPayloadType('update:modelValue', () => Tree({
-      items: [{ label: 'foo', id: 1 }, { label: 'baz', id: 2 }],
-      indexKey: 'id'
-    })).toEqualTypeOf<[{ label: string, id: number }]>()
+      items: [{ label: 'foo', id: 'one' }, { label: 'baz', id: 'two' }],
+      getKey: i => i.id
+    })).toEqualTypeOf<[{ label: string, id: string }]>()
   })
 })
