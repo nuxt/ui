@@ -726,7 +726,7 @@ collapse: true
 
 ### With full content width
 
-You can expand the content to the full width of its items by using the `ui.content` key.
+You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
 
 ::component-example
 ---

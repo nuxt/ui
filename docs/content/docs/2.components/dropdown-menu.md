@@ -403,6 +403,33 @@ name: 'dropdown-menu-custom-slot-example'
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
 ::
 
+### With trigger content width
+
+You can expand the content to the full width of its button by adding the `w-(--reka-dropdown-menu-trigger-width)` class on the `ui.content` slot.
+
+::component-example
+---
+collapse: true
+name: 'dropdown-menu-content-width-example'
+---
+::
+
+::tip
+You can also change the content width globally in your `app.config.ts`:
+
+```
+export default defineAppConfig({
+  ui: {
+    dropdownMenu: {
+      slots: {
+        content: 'w-(--reka-dropdown-menu-trigger-width)'
+      }
+    }
+  }
+})
+```
+::
+
 ### Extract shortcuts
 
 When you have some items with `kbds` property (displaying some [Kbd](/docs/components/kbd)), you can easily make them work with the [defineShortcuts](/docs/composables/define-shortcuts) composable.
@@ -446,19 +473,6 @@ defineShortcuts(extractShortcuts(items))
 
 ::note
 In this example, :kbd{value="meta"} :kbd{value="E"}, :kbd{value="meta"} :kbd{value="I"} and :kbd{value="meta"} :kbd{value="N"} would trigger the `select` function of the corresponding item.
-::
-
-### Match content & trigger width
-
-You can set `--reka-dropdown-menu-trigger-width` css variable as content width to match the trigger button width.
-
-::component-example
----
-
-collapse: true
-name: 'dropdown-menu-match-content-width-with-trigger-width-example'
----
-
 ::
 
 ## API
