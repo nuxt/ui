@@ -67,7 +67,7 @@ export type GetModelValueEmits<
   M extends boolean
 > = {
   /** Event handler called when the value changes. */
-  'update:modelValue': [payload: GetModelValue<T, VK, M>]
+  'update:modelValue': [value: GetModelValue<T, VK, M>]
 }
 
 export type StringOrVNode

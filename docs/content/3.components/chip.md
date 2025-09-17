@@ -146,6 +146,10 @@ In this example, the Chip has a color per status and is displayed when the statu
 
 :component-slots
 
+### Emits
+
+:component-emits
+
 ## Theme
 
 :component-theme

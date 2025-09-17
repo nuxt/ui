@@ -48,7 +48,7 @@ export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'req
 }
 
 export type CheckboxEmits = {
-  change: [payload: Event]
+  change: [event: Event]
 }
 
 export interface CheckboxSlots {

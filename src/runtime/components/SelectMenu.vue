@@ -122,9 +122,9 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
 }
 
 export type SelectMenuEmits<A extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
-  change: [payload: Event]
-  blur: [payload: FocusEvent]
-  focus: [payload: FocusEvent]
+  change: [event: Event]
+  blur: [event: FocusEvent]
+  focus: [event: FocusEvent]
   create: [item: string]
   /** Event handler when highlighted element changes. */
   highlight: [payload: {

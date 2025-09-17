@@ -99,9 +99,9 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
 }
 
 export type SelectEmits<A extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Omit<SelectRootEmits, 'update:modelValue'> & {
-  change: [payload: Event]
-  blur: [payload: FocusEvent]
-  focus: [payload: FocusEvent]
+  change: [event: Event]
+  blur: [event: FocusEvent]
+  focus: [event: FocusEvent]
 } & GetModelValueEmits<A, VK, M>
 
 type SlotProps<T extends SelectItem> = (props: { item: T, index: number }) => any

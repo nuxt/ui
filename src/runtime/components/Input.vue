@@ -52,7 +52,7 @@ export interface InputProps<T extends AcceptableValue = AcceptableValue> extends
 }
 
 export interface InputEmits<T extends AcceptableValue = AcceptableValue> {
-  'update:modelValue': [payload: T]
+  'update:modelValue': [value: T]
   'blur': [event: FocusEvent]
   'change': [event: Event]
 }

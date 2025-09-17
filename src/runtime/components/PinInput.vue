@@ -41,8 +41,8 @@ export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<Pin
 }
 
 export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T> & {
-  change: [payload: Event]
-  blur: [payload: Event]
+  change: [event: Event]
+  blur: [event: Event]
 }
 
 </script>
