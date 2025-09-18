@@ -130,7 +130,7 @@ function getItemLabel<Item extends T[number]>(item: Item): string {
 
 function getItemKey<Item extends T[number]>(item: Item): string {
   return props.getKey
-    ? props.getKey(item)
+    ? props.getKey(item) ?? getItemLabel(item)
     : getItemLabel(item)
 }
 
