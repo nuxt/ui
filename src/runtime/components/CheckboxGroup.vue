@@ -59,7 +59,7 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupI
   ui?: CheckboxGroup['slots'] & CheckboxProps['ui']
 }
 
-export type CheckboxGroupEmits = CheckboxGroupRootEmits & {
+export type CheckboxGroupEmits<T extends CheckboxGroupItem[] = CheckboxGroupItem[]> = CheckboxGroupRootEmits<T[number]> & {
   change: [event: Event]
 }
 
@@ -88,7 +88,7 @@ const props = withDefaults(defineProps<CheckboxGroupProps<T>>(), {
   descriptionKey: 'description',
   orientation: 'vertical'
 })
-const emits = defineEmits<CheckboxGroupEmits>()
+const emits = defineEmits<CheckboxGroupEmits<T>>()
 const slots = defineSlots<CheckboxGroupSlots<T>>()
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
