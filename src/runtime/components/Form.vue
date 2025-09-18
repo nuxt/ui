@@ -6,42 +6,51 @@ import type { ComponentConfig } from '../types/tv'
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>
 
-export interface FormProps<S extends FormSchema, T extends boolean = true> {
+export type FormProps<S extends FormSchema, T extends boolean = true, N extends boolean = false> = {
   id?: string | number
   /** Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs. */
   schema?: S
   /** An object representing the current state of the form. */
-  state: Partial<InferInput<S>>
+  state?: N extends false ? Partial<InferInput<S>> : never
   /**
    * Custom validation function to validate the form state.
    * @param state - The current state of the form.
    * @returns A promise that resolves to an array of FormError objects, or an array of FormError objects directly.
    */
   validate?: (state: Partial<InferInput<S>>) => Promise<FormError[]> | FormError[]
+
   /**
    * The list of input events that trigger the form validation.
    * @remarks The form always validates on submit.
    * @defaultValue `['blur', 'change', 'input']`
    */
   validateOn?: FormInputEvents[]
+
   /** Disable all inputs inside the form. */
   disabled?: boolean
+
+  /**
+   * Path of the form's state within it's parent form.
+   * Used for nesting forms. Only available if `nested` is true.
+   */
+  name?: N extends true ? string : never
+
   /**
    * Delay in milliseconds before validating the form on input events.
    * @defaultValue `300`
    */
   validateOnInputDelay?: number
   /**
-   * If true, schema transformations will be applied to the state on submit.
+   * If true, applies schema transformations on submit.
    * @defaultValue `true`
    */
   transform?: T
 
   /**
-   * If true, this form will attach to its parent Form (if any) and validate at the same time.
-   * @defaultValue `true`
+   * If true, this form will attach to its parent Form and validate at the same time.
+   * @defaultValue `false`
    */
-  attach?: boolean
+  nested?: N
 
   /**
    * When `true`, all form elements will be disabled on `@submit` event.
@@ -63,24 +72,23 @@ export interface FormSlots {
 }
 </script>
 
-<script lang="ts" setup generic="S extends FormSchema, T extends boolean = true">
+<script lang="ts" setup generic="S extends FormSchema, T extends boolean = true, N extends boolean = false">
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey } from '../composables/useFormField'
+import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
-import { validateSchema } from '../utils/form'
+import { validateSchema, getAtPath, setAtPath } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
 type I = InferInput<S>
 type O = InferOutput<S>
 
-const props = withDefaults(defineProps<FormProps<S, T>>(), {
+const props = withDefaults(defineProps<FormProps<S, T, N>>(), {
   validateOn() {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
   validateOnInputDelay: 300,
-  attach: true,
   transform: () => true as T,
   loadingAuto: true
 })
@@ -95,19 +103,46 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) 
 const formId = props.id ?? useId() as string
 
 const bus = useEventBus<FormEvent<I>>(`form-${formId}`)
-const parentBus = props.attach && inject(
+
+// The comparison with '' is needed because vue is not casting boolean correctly without
+// explicitly setting the prop to true (`:nested="true" works, but `nested` returns '')
+const isNested = props.nested?.toString() === '' || props.nested === true
+const parentBus = isNested && inject(
   formBusInjectionKey,
   undefined
 )
 
-provide(formBusInjectionKey, bus)
+const parentState = isNested ? inject(formStateInjectionKey, undefined) : undefined
+const state = computed(() => {
+  if (parentState?.value) {
+    return props.name ? getAtPath(parentState.value, props.name) : parentState.value
+  }
+  return props.state
+})
 
-const nestedForms = ref<Map<string | number, { validate: typeof _validate }>>(new Map())
+provide(formBusInjectionKey, bus)
+provide(formStateInjectionKey, state)
+
+const nestedForms = ref<Map<string | number, { validate: typeof _validate, name?: string, api: Form<any> }>>(new Map())
+
+onMounted(async () => {
+  if (parentBus) {
+    await nextTick()
+    parentBus.emit({ type: 'attach', validate: _validate, formId, name: props.name, api })
+  }
+})
+
+onUnmounted(() => {
+  bus.reset()
+  if (parentBus) {
+    parentBus.emit({ type: 'detach', formId })
+  }
+})
 
 onMounted(async () => {
   bus.on(async (event) => {
     if (event.type === 'attach') {
-      nestedForms.value.set(event.formId, { validate: event.validate })
+      nestedForms.value.set(event.formId, { validate: event.validate, name: event.name, api: event.api as any })
     } else if (event.type === 'detach') {
       nestedForms.value.delete(event.formId)
     } else if (props.validateOn?.includes(event.type) && !loading.value) {
@@ -132,24 +167,8 @@ onMounted(async () => {
   })
 })
 
-onUnmounted(() => {
-  bus.reset()
-})
-
-onMounted(async () => {
-  if (parentBus) {
-    await nextTick()
-    parentBus.emit({ type: 'attach', validate: _validate, formId })
-  }
-})
-
-onUnmounted(() => {
-  if (parentBus) {
-    parentBus.emit({ type: 'detach', formId })
-  }
-})
-
 const errors = ref<FormErrorWithId[]>([])
+
 provide(formErrorsInjectionKey, errors)
 
 const inputs = ref<{ [P in keyof I]?: { id?: string, pattern?: RegExp } }>({})
@@ -169,10 +188,10 @@ function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
 const transformedState = ref<O | null>(null)
 
 async function getErrors(): Promise<FormErrorWithId[]> {
-  let errs = props.validate ? (await props.validate(props.state)) ?? [] : []
+  let errs = props.validate ? (await props.validate(state.value)) ?? [] : []
 
   if (props.schema) {
-    const { errors, result } = await validateSchema(props.state, props.schema as FormSchema<typeof props.state>)
+    const { errors, result } = await validateSchema(state.value, props.schema)
     if (errors) {
       errs = errs.concat(errors)
     } else {
@@ -186,19 +205,32 @@ async function getErrors(): Promise<FormErrorWithId[]> {
 type ValidateOpts<Silent extends boolean, Transform extends boolean> = { name?: keyof I | (keyof I)[], silent?: Silent, nested?: boolean, transform?: Transform }
 async function _validate<T extends boolean>(opts: ValidateOpts<false, T>): Promise<FormData<S, T>>
 async function _validate<T extends boolean>(opts: ValidateOpts<true, T>): Promise<FormData<S, T> | false>
-async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean> = { silent: false, nested: true, transform: false }): Promise<FormData<S, T> | false> {
+async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean> = { silent: false, nested: false, transform: false }): Promise<FormData<S, T> | false> {
   const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as (keyof O)[]
 
+  async function validateNestedForms({ validate, name }: { validate: typeof _validate, name?: string }) {
+    try {
+      return { name, output: await validate({ ...opts, silent: false }) }
+    } catch (error: unknown) {
+      if (!(error instanceof FormValidationException)) {
+        throw error
+      }
+      return { name, error }
+    }
+  }
+
   const nestedValidatePromises = !names && opts.nested
-    ? Array.from(nestedForms.value.values()).map(
-        ({ validate }) => validate(opts as any).then(() => undefined).catch((error: Error) => {
-          if (!(error instanceof FormValidationException)) {
-            throw error
-          }
-          return error
-        })
-      )
+    ? Array.from(nestedForms.value.values()).map(validateNestedForms)
     : []
+
+  const nestedResults = await Promise.all(nestedValidatePromises)
+  const nestedErrors = nestedResults.flatMap((result) => {
+    if (!result.error) return []
+    return result.error.errors.map(e => ({ ...e, name: result.name ? [result.name, e.name].join('.') : e.name }))
+  })
+
+  const nestedOutputs = nestedResults.filter(c => c.output !== undefined)
+  const allErrors = [await getErrors(), nestedErrors].flat()
 
   if (names) {
     const namesSet = new Set(names)
@@ -212,28 +244,28 @@ async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean>
       return patterns.some(pattern => pattern.test(error.name!))
     }
 
-    const allNewErrors = await getErrors()
-
     const otherErrors = errors.value.filter(error => !isErrorForPath(error))
-    const pathErrors = allNewErrors.filter(isErrorForPath)
+    const pathErrors = allErrors.filter(isErrorForPath)
 
     errors.value = otherErrors.concat(pathErrors)
   } else {
-    errors.value = await getErrors()
+    errors.value = allErrors
   }
 
-  const childErrors = (await Promise.all(nestedValidatePromises)).filter(val => val !== undefined)
-
-  if (errors.value.length + childErrors.length > 0) {
+  if (errors.value?.length) {
     if (opts.silent) return false
-    throw new FormValidationException(formId, errors.value, childErrors)
+    throw new FormValidationException(formId, errors.value)
   }
 
   if (opts.transform) {
-    Object.assign(props.state, transformedState.value)
+    nestedOutputs.forEach((o) => {
+      if (o.name) setAtPath(transformedState.value, o.name, o.output)
+      else Object.assign(transformedState.value, o.output)
+    })
+    return transformedState.value ?? state.value
   }
 
-  return props.state as FormData<S, T>
+  return state.value as FormData<S, T>
 }
 
 const loading = ref(false)
@@ -255,8 +287,7 @@ async function onSubmitWrapper(payload: Event) {
 
     const errorEvent: FormErrorEvent = {
       ...event,
-      errors: error.errors,
-      children: error.children
+      errors: error.errors
     }
     emits('error', errorEvent)
   } finally {
@@ -271,37 +302,85 @@ provide(formOptionsInjectionKey, computed(() => ({
   validateOnInputDelay: props.validateOnInputDelay
 })))
 
-defineExpose<Form<S>>({
+const api = {
   validate: _validate,
   errors,
 
-  setErrors(errs: FormError[], name?: keyof I | RegExp) {
+  setErrors(errs: FormError[], name?: keyof I | string | RegExp) {
+    let formErrors: FormErrorWithId[] = resolveErrorIds(errs).filter(e => e.id)
+
     if (name) {
-      errors.value = errors.value
-        .filter(err => name instanceof RegExp ? !(err.name && name.test(err.name)) : err.name !== name)
-        .concat(resolveErrorIds(errs))
-    } else {
-      errors.value = resolveErrorIds(errs)
+      formErrors = errors.value
+        .filter(err =>
+          name instanceof RegExp
+            ? !(err.name && name.test(err.name))
+            : err.name !== name
+        ).concat(formErrors)
     }
+
+    for (const form of nestedForms.value.values()) {
+      const errors = errs.flatMap((e) => {
+        if (!form.name) return [e]
+        if (e?.name?.startsWith(form.name + `.`)) {
+          return [{
+            ...e,
+            name: e?.name.split(form.name + `.`)[1]
+          }]
+        }
+        return []
+      })
+
+      const nameMatch = name instanceof RegExp ? form.name && name.test(form.name.toString()) : form.name !== name
+      if (nameMatch || !form.name) {
+        form.api.setErrors(errors, name)
+        formErrors = formErrors.concat(form.api.getErrors().map(e => ({ ...e, name: form.name ? [form.name, e.name].join('.') : e.name })))
+      }
+    }
+
+    errors.value = formErrors
   },
 
   async submit() {
     await onSubmitWrapper(new Event('submit'))
   },
 
-  getErrors(name?: keyof I | RegExp) {
+  getErrors(name?: keyof I | string | RegExp) {
     if (name) {
       return errors.value.filter(err => name instanceof RegExp ? err.name && name.test(err.name) : err.name === name)
     }
     return errors.value
   },
 
-  clear(name?: keyof I | RegExp) {
+  clear(name?: keyof I | string | RegExp) {
+    let formErrors: FormError[] = []
+
     if (name) {
-      errors.value = errors.value.filter(err => name instanceof RegExp ? !(err.name && name.test(err.name)) : err.name !== name)
-    } else {
-      errors.value = []
+      formErrors = errors.value.filter(
+        (err) => {
+          return (err.name && !!inputs.value[err.name])
+            && (name instanceof RegExp
+              ? !(err.name && name.test(err.name))
+              : err.name !== name)
+        })
     }
+
+    for (const form of nestedForms.value.values()) {
+      if (!form.name) form.api.clear(name)
+      else if (form.name === name || (name instanceof RegExp && name.test(form.name))) form.api.clear()
+      else if (typeof name === 'string' && name?.startsWith(form.name + `.`)) {
+        const nestedName = name?.split(`${form.name}.`)[1]
+        form.api.clear(nestedName)
+      }
+
+      formErrors = formErrors.concat(
+        form.api.getErrors().map(e => ({
+          ...e,
+          name: form.name ? [form.name, e.name].join('.') : e.name
+        }))
+      )
+    }
+
+    errors.value = formErrors
   },
 
   disabled,
@@ -311,7 +390,9 @@ defineExpose<Form<S>>({
   dirtyFields: readonly(dirtyFields),
   blurredFields: readonly(blurredFields),
   touchedFields: readonly(touchedFields)
-})
+} satisfies Form<S>
+
+defineExpose(api)
 </script>
 
 <template>

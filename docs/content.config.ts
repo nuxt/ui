@@ -205,7 +205,8 @@ export const collections = {
         thumbnail: DualModeImage,
         images: z.array(Image).optional(),
         features: z.array(TitleIconFeature).optional(),
-        links: z.array(Button).optional()
+        links: z.array(Button).optional(),
+        deploy_links: z.array(Button).optional()
       }))
     })
   })

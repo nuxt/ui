@@ -10,7 +10,7 @@ const schema = z.object({
 type Schema = z.output<typeof schema>
 
 const nestedSchema = z.object({
-  email: z.string().email()
+  email: z.email()
 })
 
 type NestedSchema = z.output<typeof nestedSchema>
@@ -26,6 +26,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
 <template>
   <UForm
+    ref="form"
     :state="state"
     :schema="schema"
     class="gap-4 flex flex-col w-60"
@@ -39,7 +40,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UCheckbox v-model="state.news" name="news" label="Register to our newsletter" @update:model-value="state.email = undefined" />
     </div>
 
-    <UForm v-if="state.news" :state="state" :schema="nestedSchema" attach>
+    <UForm v-if="state.news" :schema="nestedSchema" nested>
       <UFormField label="Email" name="email">
         <UInput v-model="state.email" placeholder="john@lennon.com" />
       </UFormField>
