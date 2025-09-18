@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TreeItem } from '@nuxt/ui'
 
-const items = [
+const items: TreeItem[] = [
   {
     label: 'app/',
     defaultExpanded: true,
@@ -25,9 +25,9 @@ const items = [
   },
   { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
   { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
-] satisfies TreeItem[]
+]
 
-const value = ref<(typeof items)[number]>()
+const value = ref()
 </script>
 
 <template>
