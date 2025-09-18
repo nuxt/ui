@@ -9,16 +9,22 @@ export type TVConfig<T extends Record<string, any>> = {
       : K extends 'slots' ? {
         [S in keyof T[P]['slots']]?: ClassValue
       }
-        : K extends 'variants' ? TVVariants<T[P]['slots'], ClassValue, T[P]['variants']>
+        : K extends 'variants' ? TVVariants<T[P]['slots'], ClassValue, WidenVariantsValues<T[P]['variants']>>
           : never
   }
-}
-& {
+} & {
   [P in keyof T]?: {
-    compoundVariants?: TVCompoundVariants<T[P]['variants'], T[P]['slots'], ClassValue, object, undefined>
-    defaultVariants?: TVDefaultVariants<T[P]['variants'], T[P]['slots'], object, undefined>
+    compoundVariants?: TVCompoundVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], ClassValue, object, undefined>
+    defaultVariants?: TVDefaultVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], object, undefined>
   }
 }
+
+type WidenVariantsValues<V extends Record<string, any> | undefined>
+  = V extends Record<string, any> ? V & {
+    [K in keyof V]: V[K] extends Record<string, any>
+      ? V[K] & Record<string & {}, any>
+      : V[K]
+  } : V
 
 /**
  * Utility type to flatten intersection types for better IDE hover information.
