@@ -80,7 +80,7 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean 
   ui?: Tree['slots']
 }
 
-export type TreeEmits<T extends TreeItem = TreeItem, M extends boolean = false> = TreeRootEmits<T, M>
+export type TreeEmits<T extends TreeItem[] = TreeItem[], M extends boolean = false> = TreeRootEmits<T[number], M>
 
 type SlotProps<T extends TreeItem> = (props: { item: T, index: number, level: number, expanded: boolean, selected: boolean }) => any
 
@@ -111,7 +111,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<TreeProps<T, M>>(), {
   labelKey: 'label'
 })
-const emits = defineEmits<TreeEmits<T[number], M>>()
+const emits = defineEmits<TreeEmits<T, M>>()
 const slots = defineSlots<TreeSlots<T>>()
 
 const appConfig = useAppConfig() as Tree['AppConfig']
