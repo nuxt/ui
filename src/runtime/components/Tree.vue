@@ -241,7 +241,9 @@ const defaultExpanded = computed(() =>
   </DefineTreeTemplate>
 
   <TreeRoot
-    v-bind="{ ...(rootProps as unknown as TreeRootProps<T[number]>), ...$attrs }"
+    v-bind="{ ...rootProps, ...$attrs }"
+    :model-value="modelValue"
+    :default-value="defaultValue"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :get-key="getItemKey"
     :default-expanded="defaultExpanded"
