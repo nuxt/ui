@@ -10,7 +10,8 @@ import type { ComponentConfig } from '../types/tv'
 
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
 
-export interface InputProps<T extends AcceptableValue = AcceptableValue> extends UseComponentIconsProps {
+export type InputValue = AcceptableValue
+export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -47,7 +48,7 @@ export interface InputProps<T extends AcceptableValue = AcceptableValue> extends
   ui?: Input['slots']
 }
 
-export interface InputEmits<T extends AcceptableValue = AcceptableValue> {
+export interface InputEmits<T extends InputValue = InputValue> {
   'update:modelValue': [value: T]
   'blur': [event: FocusEvent]
   'change': [event: Event]
@@ -60,7 +61,7 @@ export interface InputSlots {
 }
 </script>
 
-<script setup lang="ts" generic="T extends AcceptableValue">
+<script setup lang="ts" generic="T extends InputValue">
 import { ref, computed, onMounted } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'

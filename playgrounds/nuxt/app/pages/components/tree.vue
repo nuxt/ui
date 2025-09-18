@@ -41,8 +41,9 @@ const itemsWithMappedId = [
   { id: 'id3', title: 'obiwan kenobi' }
 ]
 
-const modelValue = ref<string>()
-const modelValues = ref<string[]>([])
+const modelValue = ref<(typeof items)[number]>()
+const modelValues = ref<(typeof items)>([])
+const modelValueWithMappedId = ref<(typeof itemsWithMappedId)[number]>()
 </script>
 
 <template>
@@ -71,8 +72,8 @@ const modelValues = ref<string[]>([])
       <UTree :default-value="modelValue" :items="items" />
       <UTree :items="items" @update:model-value="(payload) => payload" />
 
-      <UTree v-model="modelValue" :items="itemsWithMappedId" value-key="id" />
-      <UTree v-model="modelValue" :items="itemsWithMappedId" label-key="title" />
+      <UTree v-model="modelValueWithMappedId" :items="itemsWithMappedId" :get-key="(i) => i.id" />
+      <UTree v-model="modelValueWithMappedId" :items="itemsWithMappedId" label-key="title" />
     </template>
   </div>
 </template>

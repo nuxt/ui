@@ -144,7 +144,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 
     <USeparator />
 
-    <UPageSection :ui="{ container: 'lg:py-16' }">
+    <UPageSection :ui="{ container: 'lg:py-16', root: 'bg-muted/25' }">
       <ul class="grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 lg:gap-x-8 lg:gap-y-8 xl:gap-y-10">
         <Motion
           v-for="(feature, index) in page?.features"
@@ -201,16 +201,29 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
     <USeparator />
 
     <UPageSection
-      :title="page.component_customization.title"
-      :features="page.component_customization.features"
-      :links="page.component_customization.links"
+      :title="page.css_variables.title"
+      :description="page.css_variables.description"
+      :features="page.css_variables.features"
+      :links="page.css_variables.links"
+      orientation="horizontal"
+      :ui="{ root: 'bg-muted/25' }"
+    >
+      <MDC :value="page.css_variables.code" cache-key="index-css-variables-code" />
+    </UPageSection>
+
+    <USeparator />
+
+    <UPageSection
+      :title="page.components.title"
+      :features="page.components.features"
+      :links="page.components.links"
       orientation="horizontal"
     >
       <template #description>
-        <MDC :value="page.component_customization.description" cache-key="index-component-customization-description" />
+        <MDC :value="page.components.description" cache-key="index-components-description" />
       </template>
 
-      <MDC :value="page.component_customization.code" cache-key="index-component-customization-code" />
+      <MDC :value="page.components.code" cache-key="index-components-code" />
     </UPageSection>
 
     <USeparator />
@@ -221,6 +234,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :links="page.templates.links"
       :features="page.templates.features"
       orientation="horizontal"
+      :ui="{ root: 'bg-muted/25' }"
     >
       <UCarousel
         v-slot="{ item }"
@@ -271,7 +285,6 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :links="page.community.links"
       orientation="horizontal"
       :ui="{ features: 'flex items-center gap-4 lg:gap-8' }"
-      class="border-b border-default"
     >
       <template #features>
         <li>

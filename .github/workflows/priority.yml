@@ -87,9 +87,11 @@ jobs:
             const hasQuestion = labelsNow.includes(QUESTION);
             // Check if the issue was created by a bot
             const isBot = issue.user?.type === "Bot" || issue.user?.login?.endsWith("[bot]");
+            // Check if the issue has upstream-related labels
+            const hasUpstream = labelsNow.some(l => l.startsWith("upstream"));
 
             // priority present → remove triage
             if (hasPriority && hasTriage) await removeLabel(TRIAGE);
 
-            // no priority & no triage & not a question & not created by bot → add triage (so your stale job still sees it)
-            if (!hasPriority && !hasTriage && !hasQuestion && !isBot && issue.state === "open") await addLabels([TRIAGE]);
+            // no priority & no triage & not a question & not created by bot & no upstream labels → add triage (so your stale job still sees it)
+            if (!hasPriority && !hasTriage && !hasQuestion && !isBot && !hasUpstream && issue.state === "open") await addLabels([TRIAGE]);

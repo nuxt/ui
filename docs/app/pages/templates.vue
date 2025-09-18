@@ -54,6 +54,26 @@ defineOgImageComponent('Docs', {
     >
       <template #links>
         <UButton v-for="link of template.links" :key="link.label" color="neutral" variant="outline" v-bind="link" />
+
+        <UDropdownMenu
+          :items="[
+            ...template.deploy_links,
+            { label: 'More', icon: 'i-lucide-globe', to: 'https://nuxt.com/deploy', target: '_blank' }
+          ]"
+          :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-auto' }"
+          class="group"
+        >
+          <UButton
+            color="neutral"
+            variant="outline"
+            icon="i-lucide-cloud"
+            trailing-icon="i-lucide-chevron-down"
+            label="Deploy"
+            :ui="{
+              trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
+            }"
+          />
+        </UDropdownMenu>
       </template>
 
       <template #description>
