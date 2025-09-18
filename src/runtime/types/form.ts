@@ -7,10 +7,10 @@ import type { Struct as SuperstructSchema } from 'superstruct'
 
 export interface Form<S extends FormSchema> {
   validate<T extends boolean>(opts?: { name?: keyof FormData<S, false> | (keyof FormData<S, false>)[], silent?: boolean, nested?: boolean, transform?: T }): Promise<FormData<S, T> | false>
-  clear (path?: keyof FormData<S, false> | RegExp): void
+  clear (path?: keyof FormData<S, false> | string | RegExp): void
   errors: Ref<FormError[]>
-  setErrors (errs: FormError[], name?: keyof FormData<S, false> | RegExp): void
-  getErrors (name?: keyof FormData<S, false> | RegExp): FormError[]
+  setErrors (errs: FormError[], name?: keyof FormData<S, false> | string | RegExp): void
+  getErrors (name?: keyof FormData<S, false> | string | RegExp): FormError[]
   submit (): Promise<void>
   disabled: ComputedRef<boolean>
   dirty: ComputedRef<boolean>
@@ -59,17 +59,19 @@ export type FormSubmitEvent<T> = SubmitEvent & { data: T }
 
 export type FormValidationError = {
   errors: FormErrorWithId[]
-  children?: FormValidationError[]
+  children?: FormErrorWithId[]
 }
 
 export type FormErrorEvent = SubmitEvent & FormValidationError
 
 export type FormEventType = FormInputEvents
 
-export type FormChildAttachEvent = {
+export type FormChildAttachEvent<S extends FormSchema> = {
   type: 'attach'
   formId: string | number
   validate: Form<any>['validate']
+  name?: string
+  api: Form<S>
 }
 
 export type FormChildDetachEvent = {
@@ -85,7 +87,7 @@ export type FormInputEvent<T extends object> = {
 
 export type FormEvent<T extends object>
   = | FormInputEvent<T>
-    | FormChildAttachEvent
+    | FormChildAttachEvent<any>
     | FormChildDetachEvent
 
 export interface FormInjectedOptions {
@@ -114,13 +116,11 @@ export interface ValidateReturnSchema<T> {
 export class FormValidationException extends Error {
   formId: string | number
   errors: FormErrorWithId[]
-  children?: FormValidationException[]
 
-  constructor(formId: string | number, errors: FormErrorWithId[], childErrors?: FormValidationException[]) {
+  constructor(formId: string | number, errors: FormErrorWithId[]) {
     super('Form validation exception')
     this.formId = formId
     this.errors = errors
-    this.children = childErrors
     Object.setPrototypeOf(this, FormValidationException.prototype)
   }
 }

@@ -92,6 +92,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectMenuItem[]
 props:
   modelValue:
     label: 'Todo'
@@ -152,6 +154,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectMenuItem[]
 props:
   modelValue: 'todo'
   valueKey: 'id'
@@ -241,6 +245,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectMenuItem[]
 props:
   modelValue:
     label: 'Backlog'
@@ -656,6 +662,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - SelectMenuItem[]
 props:
   modelValue: 'Apple'
   items:
@@ -815,7 +823,7 @@ name: 'select-menu-filter-fields-example'
 
 ### With full content width
 
-You can expand the content to the full width of its items by using the `ui.content` key.
+You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
 
 ::component-example
 ---

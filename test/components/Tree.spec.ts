@@ -10,7 +10,7 @@ describe('Tree', () => {
 
   const items: TreeItem[] = [
     {
-      value: 'root',
+      id: 'root',
       label: 'app',
       slot: 'app',
       children: [{
@@ -22,8 +22,8 @@ describe('Tree', () => {
         ]
       }]
     },
-    { value: 'app-vue', label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
-    { value: 'nuxt-config-ts', label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
+    { id: 'app-vue', label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
+    { id: 'nuxt-config-ts', label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
   ]
 
   const props = { items }
@@ -37,8 +37,8 @@ describe('Tree', () => {
     ['with expanded', { props: { ...props, expanded: [items[0]] } }],
     ['with defaultExpanded', { props: { ...props, defaultExpanded: [items[0]] } }],
     // Key mapping
-    ['with valueKey', { props: { ...props, valueKey: 'label' } }],
-    ['with labelKey', { props: { ...props, labelKey: 'value' } }],
+    ['with labelKey', { props: { ...props, labelKey: 'id' } }],
+    ['with getKey', { props: { ...props, getKey: (item: TreeItem) => item.id } }],
     // Multiple
     ['with multiple', { props: { ...props, multiple: true } }],
     ['with multiple and modelValue', { props: { ...props, multiple: true, modelValue: [items[0], items[1]] } }],
@@ -71,15 +71,13 @@ describe('Tree', () => {
   })
 
   test('should have the correct types', () => {
-    // with default `value` key
     expectEmitPayloadType('update:modelValue', () => Tree({
-      items: [{ label: 'foo', value: 'bar' }, { label: 'baz', value: 'qux' }]
-    })).toEqualTypeOf<[string]>()
+      items: [{ label: 'foo' }, { label: 'baz' }]
+    })).toEqualTypeOf<[{ label: string }]>()
 
-    // with custom value key
     expectEmitPayloadType('update:modelValue', () => Tree({
-      items: [{ label: 'foo', value: 'bar', id: 1 }, { label: 'baz', value: 'qux', id: 2 }],
-      valueKey: 'id'
-    })).toEqualTypeOf<[number]>()
+      items: [{ label: 'foo', id: 'one' }, { label: 'baz', id: 'two' }],
+      getKey: i => i.id
+    })).toEqualTypeOf<[{ label: string, id: string }]>()
   })
 })

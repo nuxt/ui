@@ -89,7 +89,10 @@ export const collections = {
       design_system: PageSection.extend({
         code: z.string()
       }),
-      component_customization: PageSection.extend({
+      css_variables: PageSection.extend({
+        code: z.string()
+      }),
+      components: PageSection.extend({
         code: z.string()
       }),
       templates: PageSection,
@@ -202,7 +205,8 @@ export const collections = {
         thumbnail: DualModeImage,
         images: z.array(Image).optional(),
         features: z.array(TitleIconFeature).optional(),
-        links: z.array(Button).optional()
+        links: z.array(Button).optional(),
+        deploy_links: z.array(Button).optional()
       }))
     })
   })

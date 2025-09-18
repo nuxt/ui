@@ -1,6 +1,5 @@
-import { reactive, ref, nextTick, watch } from 'vue'
-import { describe, it, expect, test, beforeEach, vi } from 'vitest'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { nextTick, watch } from 'vue'
+import { describe, expect, it, beforeEach, vi } from 'vitest'
 import * as z from 'zod'
 import * as yup from 'yup'
 import Joi from 'joi'
@@ -9,20 +8,13 @@ import { object, string, nonempty, refine } from 'superstruct'
 import ComponentRender from '../component-render'
 import type { FormProps, FormSlots } from '../../src/runtime/components/Form.vue'
 import { renderForm } from '../utils/form'
+import { UForm } from '#components'
 
-import {
-  UForm,
-  UInput,
-  URadioGroup,
-  UFormField
-} from '#components'
 import { flushPromises } from '@vue/test-utils'
 
 describe('Form', () => {
   it.each([
-    // Props
     ['with state', { props: { state: {} } }],
-    // Slots
     ['with default slot', { props: { state: {} }, slots: { default: () => 'Form slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props: FormProps<any>, slots?: Partial<FormSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, UForm)
@@ -88,28 +80,23 @@ describe('Form', () => {
     const onSubmit = vi.fn()
 
     const wrapper = await renderForm({
-      props: { ...options, onSubmit },
-      slotTemplate: `
-          <UFormField name="email">
-            <UInput id="email" v-model="state.email" />
-          </UFormField>
-          <UFormField name="password">
-            <UInput id="password" v-model="state.password" />
-          </UFormField>
-        `
+      fixture: 'FormBasic',
+      props: { ...options, onSubmit }
     })
 
     const form = wrapper.find('form')
-    const emailInput = wrapper.find('#email')
-    const passwordInput = wrapper.find('#password')
+    const email = wrapper.find('#email')
+    const password = wrapper.find('#password')
 
-    await emailInput.setValue('bob@dylan.com')
-    await passwordInput.setValue('short')
+    await email.setValue('bob@dylan.com')
+    await password.setValue('short')
 
     await form.trigger('submit.prevent')
     await flushPromises()
+
+    const formComponent = wrapper.findComponent({ name: 'Form' })
     // @ts-expect-error object is possibly undefined
-    expect(wrapper.emitted('error')[0][0].errors).toMatchObject([
+    expect(formComponent.emitted('error')[0][0].errors).toMatchObject([
       {
         id: 'password',
         name: 'password',
@@ -119,7 +106,7 @@ describe('Form', () => {
 
     expect(wrapper.html()).toMatchSnapshot('with error')
 
-    await passwordInput.setValue('validpassword')
+    await password.setValue('validpassword')
     await form.trigger('submit.prevent')
     await flushPromises()
 
@@ -135,49 +122,34 @@ describe('Form', () => {
     let form: any
     let state: any
 
+    const onSubmit = vi.fn()
+    const onError = vi.fn()
+
     beforeEach(async () => {
-      wrapper = await mountSuspended({
-        components: {
-          UFormField,
-          UForm,
-          UInput
-        },
-        setup() {
-          const form = ref()
-          const state = reactive({})
-          const schema = z.object({
-            email: z.string().email(),
+      vi.clearAllMocks()
+      wrapper = await renderForm({
+        fixture: 'FormBasic',
+        props: {
+          schema: z.object({
+            email: z.email(),
             password: z.string().min(8)
-          })
-
-          const onError = vi.fn()
-          const onSubmit = vi.fn()
-
-          return { state, schema, form, onSubmit, onError }
-        },
-        template: `
-          <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit" @error="onError">
-            <UFormField id="emailField" name="email">
-              <UInput id="emailInput" v-model="state.email" />
-            </UFormField>
-            <UFormField id="passwordField" name="password">
-              <UInput id="passwordInput" v-model="state.password" />
-            </UFormField>
-          </UForm>
-        `
+          }),
+          onSubmit,
+          onError
+        }
       })
-      form = wrapper.setupState.form
+      form = wrapper.setupState.form.value
       state = wrapper.setupState.state
     })
 
-    test('setErrors works', async () => {
-      form.value.setErrors([{
+    it('setErrors works', async () => {
+      form.setErrors([{
         name: 'email',
         message: 'this is an error'
       }])
 
-      expect(form.value.errors).toMatchObject([{
-        id: 'emailInput',
+      expect(form.errors).toMatchObject([{
+        id: 'email',
         name: 'email',
         message: 'this is an error'
       }])
@@ -191,14 +163,13 @@ describe('Form', () => {
       expect(passwordField.text()).toBe('')
     })
 
-    test('setErrors with regex works', async () => {
-      form.value.setErrors([{ id: 'emailInput', name: 'email', message: 'this is an error' }])
+    it('setErrors with regex works', async () => {
+      form.setErrors([{ id: 'email', name: 'email', message: 'this is an error' }])
 
-      expect(form.value.errors).toMatchObject([{ id: 'emailInput', name: 'email', message: 'this is an error' }])
+      expect(form.errors).toMatchObject([{ id: 'email', name: 'email', message: 'this is an error' }])
 
-      form.value.setErrors([{ id: 'passwordInput', name: 'password', message: 'this is another error' }], /email/)
-
-      expect(form.value.errors).toMatchObject([{ id: 'passwordInput', name: 'password', message: 'this is another error' }])
+      form.setErrors([{ id: 'password', name: 'password', message: 'this is another error' }], /email/)
+      expect(form.errors).toMatchObject([{ id: 'password', name: 'password', message: 'this is another error' }])
 
       await nextTick()
 
@@ -209,16 +180,16 @@ describe('Form', () => {
       expect(passwordField.text()).toBe('this is another error')
     })
 
-    test('clear works', async () => {
-      form.value.setErrors([{
-        id: 'emailInput',
+    it('clear works', async () => {
+      form.setErrors([{
+        id: 'email',
         name: 'email',
         message: 'this is an error'
       }])
 
-      form.value.clear()
+      form.clear()
 
-      expect(form.value.errors).toMatchObject([])
+      expect(form.errors).toMatchObject([])
 
       await flushPromises()
 
@@ -229,37 +200,16 @@ describe('Form', () => {
       expect(passwordField.text()).toBe('')
     })
 
-    test('clear with name works', async () => {
-      form.value.setErrors([
-        { id: 'emailInput', name: 'email', message: 'this is an error' },
-        { id: 'passwordInput', name: 'password', message: 'this is another error' }
+    it('clear with name works', async () => {
+      form.setErrors([
+        { id: 'email', name: 'email', message: 'this is an error' },
+        { id: 'password', name: 'password', message: 'this is another error' }
       ])
 
-      form.value.clear('email')
+      form.clear('email')
 
-      expect(form.value.errors).toMatchObject([
-        { id: 'passwordInput', name: 'password', message: 'this is another error' }
-      ])
-
-      await nextTick()
-
-      const emailField = wrapper.find('#emailField')
-      expect(emailField.text()).toBe('')
-
-      const passwordField = wrapper.find('#passwordField')
-      expect(passwordField.text()).toBe('this is another error')
-    })
-
-    test('clear with regex works', async () => {
-      form.value.setErrors([
-        { id: 'emailInput', name: 'email', message: 'this is an error' },
-        { id: 'passwordInput', name: 'password', message: 'this is another error' }
-      ])
-
-      form.value.clear(/email/)
-
-      expect(form.value.errors).toMatchObject([
-        { id: 'passwordInput', name: 'password', message: 'this is another error' }
+      expect(form.errors).toMatchObject([
+        { id: 'password', name: 'password', message: 'this is another error' }
       ])
 
       await nextTick()
@@ -271,20 +221,41 @@ describe('Form', () => {
       expect(passwordField.text()).toBe('this is another error')
     })
 
-    test('submit error works', async () => {
-      await form.value.submit()
-
-      expect(form.value.errors).toMatchObject([
-        { id: 'emailInput', name: 'email', message: 'Invalid input: expected string, received undefined' },
-        { id: 'passwordInput', name: 'password', message: 'Invalid input: expected string, received undefined' }
+    it('clear with regex works', async () => {
+      form.setErrors([
+        { id: 'email', name: 'email', message: 'this is an error' },
+        { id: 'password', name: 'password', message: 'this is another error' }
       ])
 
-      expect(wrapper.setupState.onSubmit).not.toHaveBeenCalled()
-      expect(wrapper.setupState.onError).toHaveBeenCalledTimes(1)
-      expect(wrapper.setupState.onError).toHaveBeenCalledWith(expect.objectContaining({
+      form.clear(/email/)
+
+      expect(form.errors).toMatchObject([
+        { id: 'password', name: 'password', message: 'this is another error' }
+      ])
+
+      await nextTick()
+
+      const emailField = wrapper.find('#emailField')
+      expect(emailField.text()).toBe('')
+
+      const passwordField = wrapper.find('#passwordField')
+      expect(passwordField.text()).toBe('this is another error')
+    })
+
+    it('submit error works', async () => {
+      await form.submit()
+
+      expect(form.errors).toMatchObject([
+        { id: 'email', name: 'email', message: 'Invalid input: expected string, received undefined' },
+        { id: 'password', name: 'password', message: 'Invalid input: expected string, received undefined' }
+      ])
+
+      expect(onSubmit).not.toHaveBeenCalled()
+      expect(onError).toHaveBeenCalledTimes(1)
+      expect(onError).toHaveBeenCalledWith(expect.objectContaining({
         errors: [
-          { id: 'emailInput', name: 'email', message: 'Invalid input: expected string, received undefined' },
-          { id: 'passwordInput', name: 'password', message: 'Invalid input: expected string, received undefined' }
+          { id: 'email', name: 'email', message: 'Invalid input: expected string, received undefined' },
+          { id: 'password', name: 'password', message: 'Invalid input: expected string, received undefined' }
         ]
       }))
 
@@ -295,14 +266,14 @@ describe('Form', () => {
       expect(passwordField.text()).toBe('Invalid input: expected string, received undefined')
     })
 
-    test('validate on submit works', async () => {
+    it('validate on submit works', async () => {
       state.email = 'bob@dylan.com'
       state.password = 'strongpassword'
 
-      await form.value.submit()
+      await form.submit()
 
-      expect(wrapper.setupState.onSubmit).toHaveBeenCalledTimes(1)
-      expect(wrapper.setupState.onSubmit).toHaveBeenCalledWith(expect.objectContaining({
+      expect(onSubmit).toHaveBeenCalledTimes(1)
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
         type: 'submit',
         data: {
           email: 'bob@dylan.com',
@@ -310,132 +281,132 @@ describe('Form', () => {
         }
       }))
 
-      expect(wrapper.setupState.onError).toHaveBeenCalledTimes(0)
+      expect(onError).toHaveBeenCalledTimes(0)
     })
 
-    test('validate works', async () => {
-      await expect(form.value.validate).rejects.toThrow('Form validation exception')
+    it('validate works', async () => {
+      await expect(form.validate).rejects.toThrow('Form validation exception')
 
       state.email = 'bob@dylan.com'
       state.password = 'strongpassword'
 
-      expect(await form.value.validate()).toMatchObject({
+      expect(await form.validate()).toMatchObject({
         email: 'bob@dylan.com',
         password: 'strongpassword'
       })
     })
 
-    test('getErrors works', async () => {
-      await form.value.submit()
-      const errors = form.value.getErrors()
+    it('getErrors works', async () => {
+      await form.submit()
+      const errors = form.getErrors()
 
       expect(errors).toMatchObject([
-        { id: 'emailInput', name: 'email', message: 'Invalid input: expected string, received undefined' },
-        { id: 'passwordInput', name: 'password', message: 'Invalid input: expected string, received undefined' }
+        { id: 'email', name: 'email', message: 'Invalid input: expected string, received undefined' },
+        { id: 'password', name: 'password', message: 'Invalid input: expected string, received undefined' }
       ])
     })
 
-    test('getErrors with regex works', async () => {
-      await form.value.submit()
-      const errors = form.value.getErrors(/email/)
+    it('getErrors with regex works', async () => {
+      await form.submit()
+      const errors = form.getErrors(/email/)
 
       expect(errors).toMatchObject([
-        { id: 'emailInput', name: 'email', message: 'Invalid input: expected string, received undefined' }
+        { id: 'email', name: 'email', message: 'Invalid input: expected string, received undefined' }
       ])
     })
 
-    test('touchedFields works', async () => {
-      const emailInput = wrapper.find('#emailInput')
+    it('touchedFields works', async () => {
+      const email = wrapper.find('#email')
 
-      emailInput.trigger('focus')
+      email.trigger('focus')
       await flushPromises()
 
-      expect(form.value.touchedFields.has('email')).toBe(true)
-      expect(form.value.touchedFields.has('password')).toBe(false)
+      expect(form.touchedFields.has('email')).toBe(true)
+      expect(form.touchedFields.has('password')).toBe(false)
     })
 
-    test('touchedFields works', async () => {
-      const emailInput = wrapper.find('#emailInput')
+    it('touchedFields works', async () => {
+      const email = wrapper.find('#email')
 
-      emailInput.trigger('change')
+      email.trigger('change')
       await flushPromises()
 
-      expect(form.value.dirtyFields.has('email')).toBe(true)
-      expect(form.value.touchedFields.has('email')).toBe(true)
+      expect(form.dirtyFields.has('email')).toBe(true)
+      expect(form.touchedFields.has('email')).toBe(true)
 
-      expect(form.value.dirtyFields.has('password')).toBe(false)
-      expect(form.value.touchedFields.has('password')).toBe(false)
+      expect(form.dirtyFields.has('password')).toBe(false)
+      expect(form.touchedFields.has('password')).toBe(false)
     })
 
-    test('blurredFields works', async () => {
-      const emailInput = wrapper.find('#emailInput')
+    it('blurredFields works', async () => {
+      const email = wrapper.find('#email')
 
-      emailInput.trigger('blur')
+      email.trigger('blur')
       await flushPromises()
 
-      expect(form.value.blurredFields.has('email')).toBe(true)
-      expect(form.value.blurredFields.has('password')).toBe(false)
+      expect(form.blurredFields.has('email')).toBe(true)
+      expect(form.blurredFields.has('password')).toBe(false)
     })
 
-    test('reactivity: touchedFields works on focus', async () => {
-      const emailInput = wrapper.find('#emailInput')
+    it('reactivity: touchedFields works on focus', async () => {
+      const email = wrapper.find('#email')
 
       const mockWatchCallback = vi.fn()
-      watch(() => form.value.touchedFields, mockWatchCallback, { deep: true })
+      watch(() => form.touchedFields, mockWatchCallback, { deep: true })
 
-      emailInput.trigger('focus')
+      email.trigger('focus')
       await flushPromises()
       expect(mockWatchCallback).toHaveBeenCalledTimes(1)
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('email')).toBe(true)
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('password')).toBe(false)
     })
 
-    test('reactivity: touchedFields works on change', async () => {
-      const emailInput = wrapper.find('#emailInput')
+    it('reactivity: touchedFields works on change', async () => {
+      const email = wrapper.find('#email')
 
       const mockWatchCallback = vi.fn()
-      watch(() => form.value.touchedFields, mockWatchCallback, { deep: true })
+      watch(() => form.touchedFields, mockWatchCallback, { deep: true })
 
-      emailInput.trigger('change')
+      email.trigger('change')
       await flushPromises()
       expect(mockWatchCallback).toHaveBeenCalledTimes(1)
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('email')).toBe(true)
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('password')).toBe(false)
     })
 
-    test('reactivity: blurredFields works', async () => {
-      const emailInput = wrapper.find('#emailInput')
+    it('reactivity: blurredFields works', async () => {
+      const email = wrapper.find('#email')
 
       const mockWatchCallback = vi.fn()
-      watch(() => form.value.blurredFields, mockWatchCallback, { deep: true })
+      watch(() => form.blurredFields, mockWatchCallback, { deep: true })
 
-      emailInput.trigger('blur')
+      email.trigger('blur')
       await flushPromises()
       expect(mockWatchCallback).toHaveBeenCalledTimes(1)
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('email')).toBe(true)
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('password')).toBe(false)
     })
 
-    test('reactivity: dirtyFields works', async () => {
-      const emailInput = wrapper.find('#emailInput')
+    it('reactivity: dirtyFields works', async () => {
+      const email = wrapper.find('#email')
       const mockWatchCallback = vi.fn()
-      watch(() => form.value.dirtyFields, mockWatchCallback, { deep: true })
+      watch(() => form.dirtyFields, mockWatchCallback, { deep: true })
 
-      emailInput.trigger('change')
+      email.trigger('change')
       await flushPromises()
       expect(mockWatchCallback).toHaveBeenCalledTimes(1)
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('email')).toBe(true)
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('password')).toBe(false)
     })
 
-    test('reactivity: dirty works', async () => {
-      const emailInput = wrapper.find('#emailInput')
-      expect(form.value.dirty).toBe(false)
+    it('reactivity: dirty works', async () => {
+      const email = wrapper.find('#email')
+      expect(form.dirty).toBe(false)
 
-      emailInput.trigger('change')
+      email.trigger('change')
       await flushPromises()
 
-      expect(form.value.dirty).toBe(true)
+      expect(form.dirty).toBe(true)
     })
   })
 
@@ -444,80 +415,50 @@ describe('Form', () => {
     let form: any
     let state: any
 
+    const onSubmit = vi.fn()
+    const onError = vi.fn()
+
     beforeEach(async () => {
-      wrapper = await mountSuspended({
-        components: {
-          UFormField,
-          UForm,
-          UInput
-        },
-        setup() {
-          const form = ref()
-          const state = reactive({ nested: {} })
-          const schema = z.object({
-            email: z.string().email(),
-            password: z.string().min(8)
-          })
-
-          const showNested = ref(true)
-          const nestedSchema = z.object({
-            field: z.string().min(1)
-          })
-
-          const onError = vi.fn()
-          const onSubmit = vi.fn()
-
-          return { state, schema, nestedSchema, form, onSubmit, onError, showNested }
-        },
-        template: `
-          <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit" @error="onError">
-            <UFormField id="emailField" name="email">
-              <UInput id="emailInput" v-model="state.email" />
-            </UFormField>
-            <UFormField id="passwordField" name="password">
-              <UInput id="passwordInput" v-model="state.password" />
-            </UFormField>
-
-            <UForm v-if="showNested" ref="nestedForm" :state="state.nested" :schema="nestedSchema">
-              <UFormField id="nestedField" name="field">
-                <UInput id="nestedInput" v-model="state.nested.field" />
-              </UFormField>
-            </UForm>
-          </UForm>
-        `
+      vi.clearAllMocks()
+      wrapper = await renderForm({
+        fixture: 'FormNested',
+        props: {
+          onSubmit,
+          onError
+        }
       })
-      form = wrapper.setupState.form
+      form = wrapper.setupState.form.value
       state = wrapper.setupState.state
     })
 
-    test('submit error works', async () => {
-      await form.value.submit()
+    it('submit error works', async () => {
+      await form.submit()
 
-      expect(wrapper.setupState.onSubmit).not.toHaveBeenCalled()
-      expect(wrapper.setupState.onError).toHaveBeenCalledTimes(1)
-      const onErrorCallArgs = wrapper.setupState.onError.mock.lastCall[0]
-      expect(onErrorCallArgs.children[0].errors).toMatchObject([{ id: 'nestedInput', name: 'field', message: 'Invalid input: expected string, received undefined' }])
+      expect(onSubmit).not.toHaveBeenCalled()
+      expect(onError).toHaveBeenCalledTimes(1)
+      const onErrorCallArgs = onError.mock.lastCall?.[0]
       expect(onErrorCallArgs.errors).toMatchObject([
-        { id: 'emailInput', name: 'email', message: 'Invalid input: expected string, received undefined' },
-        { id: 'passwordInput', name: 'password', message: 'Invalid input: expected string, received undefined' }
+        { id: 'email', name: 'email', message: 'Invalid input: expected string, received undefined' },
+        { id: 'password', name: 'password', message: 'Invalid input: expected string, received undefined' },
+        { id: 'nested', name: 'nested.field', message: 'Invalid input: expected string, received undefined' }
       ])
 
       const nestedField = wrapper.find('#nestedField')
       expect(nestedField.text()).toBe('Invalid input: expected string, received undefined')
     })
 
-    test('submit event contains nested attributes', async () => {
+    it('submit event contains nested attributes', async () => {
       state.email = 'bob@dylan.com'
       state.password = 'strongpassword'
       state.nested.field = 'nested'
 
-      await form.value.submit()
-      expect(wrapper.setupState.onSubmit).toHaveBeenCalledWith(expect.objectContaining({ data: { email: 'bob@dylan.com', password: 'strongpassword', nested: { field: 'nested' } } }))
+      await form.submit()
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ data: { email: 'bob@dylan.com', password: 'strongpassword', nested: { field: 'nested' } } }))
     })
 
-    test('submit works when child is disabled', async () => {
-      await form.value.submit()
-      expect(wrapper.setupState.onError).toHaveBeenCalledTimes(1)
+    it('submit works when child is disabled', async () => {
+      await form.submit()
+      expect(onError).toHaveBeenCalledTimes(1)
       vi.resetAllMocks()
 
       wrapper.setupState.showNested.value = false
@@ -526,9 +467,94 @@ describe('Form', () => {
       state.email = 'bob@dylan.com'
       state.password = 'strongpassword'
 
-      await form.value.submit()
-      expect(wrapper.setupState.onSubmit).toHaveBeenCalledTimes(1)
-      expect(wrapper.setupState.onError).toHaveBeenCalledTimes(0)
+      await form.submit()
+      expect(onSubmit).toHaveBeenCalledTimes(1)
+      expect(onError).toHaveBeenCalledTimes(0)
+    })
+  })
+  describe('nested API operations', async () => {
+    let wrapper: any
+    let form: any
+
+    const onSubmit = vi.fn()
+    const onError = vi.fn()
+
+    beforeEach(async () => {
+      vi.clearAllMocks()
+      wrapper = await renderForm({ fixture: 'FormNested', props: { onSubmit, onError } })
+      form = wrapper.setupState.form.value
+    })
+
+    it('getErrors returns nested errors', async () => {
+      await form.submit()
+      const errors = form.getErrors()
+      expect(errors).toMatchObject([
+        { id: 'email', name: 'email' },
+        { id: 'password', name: 'password' },
+        { id: 'nested', name: 'nested.field' }
+      ])
+    })
+
+    it('getErrors works with nested paths', async () => {
+      await form.submit()
+      const nestedErrors = form.getErrors(/nested\./)
+      expect(nestedErrors).toMatchObject([
+        { id: 'nested', name: 'nested.field' }
+      ])
+    })
+
+    it('clear with nested forms works', async () => {
+      await form.submit()
+      form.clear()
+      expect(form.errors).toMatchObject({})
+    })
+
+    it('setErrors works with nested paths', async () => {
+      form.setErrors([
+        { name: 'nested.field', message: 'Nested error' }
+      ])
+      expect(form.errors).toMatchObject([
+        { id: 'nested', name: 'nested.field', message: 'Nested error' }
+      ])
+      await flushPromises()
+      expect(wrapper.html()).toContain('Nested error')
+    })
+
+    it('clear with nested forms works on root path', async () => {
+      await form.submit()
+      form.clear('password')
+      expect(form.errors).toMatchObject([
+        { id: 'email', name: 'email' },
+        { id: 'nested', name: 'nested.field' }
+      ])
+    })
+
+    it('clear works with nested paths', async () => {
+      await form.submit()
+      form.clear('nested.field')
+
+      expect(form.errors).toMatchObject([
+        { id: 'email', name: 'email' },
+        { id: 'password', name: 'password' }
+      ])
+    })
+
+    it('clear works on nested form name', async () => {
+      await form.submit()
+      form.clear('nested')
+      expect(form.errors).toMatchObject([
+        { id: 'email', name: 'email' },
+        { id: 'password', name: 'password' }
+      ])
+    })
+
+    it('clear works with nested regex patterns', async () => {
+      await form.submit()
+      form.clear(/nested.*/)
+      expect(form.errors).toMatchObject([
+        { id: 'email', name: 'email' },
+        { id: 'password', name: 'password' }
+      ])
     })
   })
 
@@ -569,129 +595,33 @@ describe('Form', () => {
     ])(
       '%s schema transform works',
       async (_name: string, schema: any, input: any, expected: any) => {
-        const wrapper = await mountSuspended({
-          components: {
-            UFormField,
-            UForm,
-            UInput
-          },
-          setup() {
-            const form = ref()
-            const state = reactive({})
-            const onSubmit = vi.fn()
-            return { state, schema, form, onSubmit }
-          },
-          template: `
-          <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit">
-            <UFormField name="value">
-              <UInput id="input" v-model="state.value" />
-            </UFormField>
-          </UForm>
-        `
+        const onSubmit = vi.fn()
+        const wrapper = await renderForm({
+          fixture: 'FormTransform',
+          props: {
+            schema,
+            onSubmit
+          }
         })
-        const form = wrapper.setupState.form
-
+        const form = wrapper.setupState.form.value
         const inputEl = wrapper.find('#input')
         inputEl.setValue(input.value)
 
-        form.value.submit()
+        form.submit()
         await flushPromises()
 
-        expect(wrapper.setupState.onSubmit).toHaveBeenCalledWith(expect.objectContaining({
+        expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
           data: expected
         }))
       }
     )
   })
 
-  test('form field errorPattern works', async () => {
-    const wrapper = await mountSuspended({
-      components: {
-        UFormField,
-        UForm,
-        UInput
-      },
-      setup() {
-        const form = ref()
-        const state = reactive({})
-        function validate() {
-          return [{ name: 'email.1', message: 'Error message' }]
-        }
-        return { state, validate, form }
-      },
-      template: `
-          <UForm ref="form" :state="state" :validate="validate">
-            <UFormField id="emailField" :error-pattern="/(email)\\..*/">
-              <UInput id="emailInput" v-model="state.email" />
-            </UFormField>
-          </UForm>
-        `
-    })
-
-    const form = wrapper.setupState.form
-    form.value.submit()
+  it('form field errorPattern works', async () => {
+    const wrapper = await renderForm({ fixture: 'FormErrorPattern' })
+    const form = wrapper.setupState.form.value
+    form.submit()
     await flushPromises()
     expect(wrapper.html()).toContain('Error message')
-  })
-  it('should not have race condition when clear is called in watchers', async () => {
-    const wrapper = await mountSuspended({
-      components: {
-        UForm,
-        URadioGroup,
-        UFormField
-      },
-      setup() {
-        const form = ref()
-        const schema = z.object({
-          hello: z.string().optional(),
-          world: z.string().optional(),
-          hi: z.string().optional(),
-          pathForACustomError: z.string().optional()
-        })
-
-        const state = reactive({
-          hello: 'hello-1',
-          world: 'world-1',
-          hi: 'hi-1',
-          pathForACustomError: ''
-        })
-
-        return { form, state, schema }
-      },
-      template: `
-        <UForm ref="form" :schema="schema" :state="state">
-          <UFormField name="hello">
-            <URadioGroup v-model="state.hello" :items="[{ value: 'foo-1', label: 'Foo 1' }, { value: 'foo-2', label: 'Foo 2' }]" />
-          </UFormField>
-        </UForm>
-      `
-    })
-
-    const form = wrapper.setupState.form
-
-    const input = wrapper.findComponent({
-      name: 'RadioGroupRoot'
-    })
-
-    const state = wrapper.setupState.state
-
-    watch(() => state.hello, () => {
-      form.value?.clear('pathForACustomError')
-    })
-
-    form.value.setErrors([
-      {
-        name: 'pathForACustomError',
-        message: 'This is a custom error message.'
-      }
-    ])
-
-    expect(form.value.errors).toHaveLength(1)
-
-    input.setValue('foo-2')
-
-    await flushPromises()
-
-    expect(form.value.errors).toHaveLength(0)
   })
 })
