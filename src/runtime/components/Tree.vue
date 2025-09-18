@@ -4,7 +4,7 @@ import type { TreeRootProps, TreeRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
 import type { IconProps } from '../types'
-import type { DynamicSlots, GetItemKeys, NestedItem } from '../types/utils'
+import type { DynamicSlots, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Tree = ComponentConfig<typeof theme, AppConfig, 'tree'>
@@ -45,7 +45,7 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean 
    */
   size?: Tree['variants']['size']
   /** This function is passed the index of each item and should return a unique key for that item */
-  getKey?: (val: NestedItem<T>) => string
+  getKey?: (val: T[number]) => string
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
@@ -71,9 +71,9 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean 
   collapsedIcon?: IconProps['name']
   items?: T
   /** The controlled value of the Tree. Can be bind as `v-model`. */
-  modelValue?: M extends true ? NestedItem<T>[] : NestedItem<T>
+  modelValue?: M extends true ? T[number][] : T[number]
   /** The value of the Tree when initially rendered. Use when you do not need to control the state of the Tree. */
-  defaultValue?: M extends true ? NestedItem<T>[] : NestedItem<T>
+  defaultValue?: M extends true ? T[number][] : T[number]
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
   class?: any
@@ -85,15 +85,14 @@ export type TreeEmits<T extends TreeItem[] = TreeItem[], M extends boolean = fal
 type SlotProps<T extends TreeItem> = (props: { item: T, index: number, level: number, expanded: boolean, selected: boolean }) => any
 
 export type TreeSlots<
-  A extends TreeItem[] = TreeItem[],
-  T extends NestedItem<A> = NestedItem<A>
+  T extends TreeItem[] = TreeItem[]
 > = {
-  'item-wrapper': SlotProps<T>
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-} & DynamicSlots<T, undefined, { index: number, level: number, expanded: boolean, selected: boolean }>
+  'item-wrapper': SlotProps<T[number]>
+  'item': SlotProps<T[number]>
+  'item-leading': SlotProps<T[number]>
+  'item-label': SlotProps<T[number]>
+  'item-trailing': SlotProps<T[number]>
+} & DynamicSlots<T[number], undefined, { index: number, level: number, expanded: boolean, selected: boolean }>
 
 </script>
 
@@ -125,25 +124,25 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tree || {}) 
   size: props.size
 }))
 
-function getItemLabel<Item extends NestedItem<T>>(item: Item): string {
+function getItemLabel<Item extends T[number]>(item: Item): string {
   return get(item, props.labelKey as string)
 }
 
-function getItemKey<Item extends NestedItem<T>>(item: Item): string {
+function getItemKey<Item extends T[number]>(item: Item): string {
   return props.getKey
     ? props.getKey(item)
     : getItemLabel(item)
 }
 
-function getDefaultOpenedItems(item: NestedItem<T>): string[] {
+function getDefaultOpenedItems(item: T[number]): string[] {
   const currentItem = item.defaultExpanded ? getItemKey(item) : null
-  const childItems = item.children?.flatMap((child: NestedItem<T>) => getDefaultOpenedItems(child)) ?? []
+  const childItems = item.children?.flatMap((child: T[number]) => getDefaultOpenedItems(child)) ?? []
 
   return [currentItem, ...childItems].filter(Boolean) as string[]
 }
 
 const defaultExpanded = computed(() =>
-  props.defaultExpanded ?? props.items?.flatMap(item => getDefaultOpenedItems(item as NestedItem<T>))
+  props.defaultExpanded ?? props.items?.flatMap(item => getDefaultOpenedItems(item))
 )
 </script>
 
@@ -162,7 +161,8 @@ const defaultExpanded = computed(() =>
     >
       <slot
         :name="((item.slot ? `${item.slot}-wrapper` : 'item-wrapper') as keyof TreeSlots<T>)"
-        v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }"
+        v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+        :item="(item as Extract<T[number], { slot: string; }>)"
       >
         <button
           type="button"
@@ -170,8 +170,16 @@ const defaultExpanded = computed(() =>
           :data-expanded="isExpanded"
           :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })"
         >
-          <slot :name="((item.slot || 'item') as keyof TreeSlots<T>)" v-bind="{ index, level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
-            <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof TreeSlots<T>)" v-bind="{ index, level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
+          <slot
+            :name="((item.slot || 'item') as keyof TreeSlots<T>)"
+            v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+            :item="(item as Extract<T[number], { slot: string; }>)"
+          >
+            <slot
+              :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof TreeSlots<T>)"
+              v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+              :item="(item as Extract<T[number], { slot: string; }>)"
+            >
               <UIcon
                 v-if="item.icon"
                 :name="item.icon"
@@ -185,14 +193,15 @@ const defaultExpanded = computed(() =>
             </slot>
 
             <span
-              v-if="getItemLabel(item as NestedItem<T>) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>]"
+              v-if="getItemLabel(item) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>]"
               :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })"
             >
               <slot
                 :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>)"
-                v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }"
+                v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+                :item="(item as Extract<T[number], { slot: string; }>)"
               >
-                {{ getItemLabel(item as NestedItem<T>) }}
+                {{ getItemLabel(item) }}
               </slot>
             </span>
 
@@ -202,7 +211,8 @@ const defaultExpanded = computed(() =>
             >
               <slot
                 :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof TreeSlots<T>)"
-                v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }"
+                v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+                :item="(item as Extract<T[number], { slot: string; }>)"
               >
                 <UIcon
                   v-if="item.trailingIcon"
@@ -231,7 +241,7 @@ const defaultExpanded = computed(() =>
   </DefineTreeTemplate>
 
   <TreeRoot
-    v-bind="{ ...(rootProps as unknown as TreeRootProps<NestedItem<T>>), ...$attrs }"
+    v-bind="{ ...(rootProps as unknown as TreeRootProps<T[number]>), ...$attrs }"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :get-key="getItemKey"
     :default-expanded="defaultExpanded"
