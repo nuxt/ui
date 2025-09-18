@@ -28,7 +28,7 @@ const items: TreeItem[] = [
   { label: 'nuxt.config.ts', id: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
 ]
 
-const expanded = ref(['app', 'composables'])
+const expanded = ref(['app', 'app/composables'])
 </script>
 
 <template>
