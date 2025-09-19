@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Anterior'
     },
     chatPrompt: {
-      placeholder: 'Escreva sua mensagem aqui...'
+      placeholder: 'Escreva a sua mensagem aqui...'
     },
     chatPromptSubmit: {
       label: 'Enviar'
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Criar "{label}"',
       noData: 'Sem dados',
       noMatch: 'Nenhum dado correspondente',
-      search: 'Buscar...'
+      search: 'Pesquisar...'
     },
     slideover: {
       close: 'Fechar'
