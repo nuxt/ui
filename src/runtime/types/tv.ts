@@ -5,17 +5,17 @@ import type { ClassValue, TVVariants, TVCompoundVariants, TVDefaultVariants } fr
  */
 export type TVConfig<T extends Record<string, any>> = {
   [P in keyof T]?: {
-    [K in keyof T[P]as K extends 'base' | 'slots' | 'variants' ? K : never]?: K extends 'base' ? ClassValue
+    [K in keyof T[P]as K extends 'base' | 'slots' | 'variants' | 'defaultVariants' ? K : never]?: K extends 'base' ? ClassValue
       : K extends 'slots' ? {
         [S in keyof T[P]['slots']]?: ClassValue
       }
         : K extends 'variants' ? TVVariants<T[P]['slots'], ClassValue, WidenVariantsValues<T[P]['variants']>>
-          : never
+          : K extends 'defaultVariants' ? TVDefaultVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], object, undefined>
+            : never
   }
 } & {
   [P in keyof T]?: {
     compoundVariants?: TVCompoundVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], ClassValue, object, undefined>
-    defaultVariants?: TVDefaultVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], object, undefined>
   }
 }
 
