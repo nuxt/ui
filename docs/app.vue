@@ -2,9 +2,10 @@
 <template>
   <div>
     <NuxtLoadingIndicator />
-    <Analytics />
 
-    <!-- <Banner v-if="!$route.path.startsWith('/examples')" /> -->
+    <Analytics :debug="false" />
+
+    <Banner v-if="!$route.path.startsWith('/examples')" />
 
     <Header v-if="!$route.path.startsWith('/examples')" :links="links" />
 

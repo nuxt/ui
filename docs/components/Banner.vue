@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const id = 'nuxt-ui-banner-4'
+const id = 'nuxt-ui-banner-5'
 const to = 'https://ui.nuxt.com'
 
 const hideBanner = () => {
@@ -40,7 +40,7 @@ if (import.meta.server) {
 
         <p class="text-sm font-medium text-white dark:text-gray-900 truncate">
           <UIcon name="i-lucide-rocket" class="size-5 align-top flex-shrink-0 pointer-events-none mr-1.5" />
-          <span class="font-bold">Nuxt UI v3</span> is officially released!
+          <span class="font-bold">Nuxt UI v4</span> is officially released!
         </p>
 
         <!-- <UButton

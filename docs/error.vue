@@ -3,7 +3,7 @@
   <div>
     <NuxtLoadingIndicator />
 
-    <!-- <Banner /> -->
+    <Banner />
 
     <Header :links="links" />
 
