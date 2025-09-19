@@ -16,14 +16,14 @@ Use markdown in the default slot of the `badge` component to display a [Badge](/
 ::code-preview
 
 :::badge
-**v3.0.0**
+**v4.0.0**
 :::
 
 #code
 
 ```mdc
 ::badge
-**v3.0.0**
+**v4.0.0**
 ::
 ```
 

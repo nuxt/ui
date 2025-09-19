@@ -27,7 +27,7 @@ export default defineNuxtConfig({
   },
   $production: {
     site: {
-      url: 'https://ui4.nuxt.com'
+      url: 'https://ui.nuxt.com'
     }
   },
 
@@ -225,7 +225,7 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://ui4.nuxt.com',
+    domain: 'https://ui.nuxt.com',
     title: 'Nuxt UI',
     description: 'A comprehensive, Nuxt-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.',
     full: {

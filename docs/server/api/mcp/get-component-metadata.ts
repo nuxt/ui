@@ -43,7 +43,7 @@ export default defineCachedEventHandler(async (event) => {
     description: page.description,
     // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
     category: page.category,
-    documentation_url: `https://ui4.nuxt.com${page.path}`,
+    documentation_url: `https://ui.nuxt.com${page.path}`,
     metadata: {
       pascalName: metadata.pascalName,
       kebabName: metadata.kebabName,
