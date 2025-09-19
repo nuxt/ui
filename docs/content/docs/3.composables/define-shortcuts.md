@@ -29,8 +29,6 @@ Learn how to display shortcuts in components in the **Kbd** component documentat
 
 ## API
 
-### defineShortcuts()
-
 `defineShortcuts(config: ShortcutsConfig, options?: ShortcutsOptions): void`{lang="ts-type"}
 
 Define keyboard shortcuts for your application.
