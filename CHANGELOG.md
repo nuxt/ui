@@ -1,5 +1,38 @@
 # Changelog
 
+## [4.0.0-alpha.2](https://github.com/nuxt/ui/compare/v4.0.0-alpha.1...v4.0.0-alpha.2) (2025-09-17)
+
+### ⚠ BREAKING CHANGES
+
+* **Form:** don't mutate the form's state if transformations are enabled (#4902)
+
+### Features
+
+* **ContentNavigation:** handle collapsible false with type multiple ([c42c2ab](https://github.com/nuxt/ui/commit/c42c2ab47125f31278730fa929d8afae5134572a))
+* **locale:** add Georgian language ([#4973](https://github.com/nuxt/ui/issues/4973)) ([996478f](https://github.com/nuxt/ui/commit/996478fe40a7f1506a8e76ab98c991df4ea979ad))
+* **locale:** add Swiss German language ([#4962](https://github.com/nuxt/ui/issues/4962)) ([dcf17bb](https://github.com/nuxt/ui/commit/dcf17bb96bec276ac57ba5208e31018884e25de0))
+
+### Bug Fixes
+
+* **Banner:** ensure `actions` slot renders ([#4946](https://github.com/nuxt/ui/issues/4946)) ([5d6e1fc](https://github.com/nuxt/ui/commit/5d6e1fcb29d7f58254847e328f4a66f65dddab70))
+* **CodeTree/Tree:** improve accessibility ([#4945](https://github.com/nuxt/ui/issues/4945)) ([117b4b3](https://github.com/nuxt/ui/commit/117b4b36acae3f91f6e9a57ff772c62a1930f56a))
+* **components:** dot notation type support for `labelKey` and `valueKey` ([#4933](https://github.com/nuxt/ui/issues/4933)) ([11a0320](https://github.com/nuxt/ui/commit/11a03201ed8454f37e911db4a14b00f74104932a))
+* **components:** proxySlots reactivity ([#4969](https://github.com/nuxt/ui/issues/4969)) ([3173bee](https://github.com/nuxt/ui/commit/3173bee38ce9e518076848999f14374600069d35))
+* **components:** standardize naming for type interfaces ([#4990](https://github.com/nuxt/ui/issues/4990)) ([788d2de](https://github.com/nuxt/ui/commit/788d2deb53b2a96c8d87828629b3d5d5ec5187d6))
+* **FileUpload:** add missing `button` type ([f33e43c](https://github.com/nuxt/ui/commit/f33e43cddeef333efe086607f404808a7c211f5c)), closes [#4935](https://github.com/nuxt/ui/issues/4935)
+* **Form:** don't mutate the form's state if transformations are enabled ([#4902](https://github.com/nuxt/ui/issues/4902)) ([99dbe81](https://github.com/nuxt/ui/commit/99dbe81783f16cdd9bee14e9c74b34b93eb61976))
+* **Form:** handling race condition on `clear` function ([#4843](https://github.com/nuxt/ui/issues/4843)) ([2269b48](https://github.com/nuxt/ui/commit/2269b4831acb172ce9ab9d1526ce60051b7462b8))
+* **InputMenu/Select/SelectMenu:** show falsy value when model value is falsy ([#4882](https://github.com/nuxt/ui/issues/4882)) ([073dd14](https://github.com/nuxt/ui/commit/073dd144e172282757affde491c440966e573b99))
+* **locale:** improve `id` name ([#4890](https://github.com/nuxt/ui/issues/4890)) ([1b5d741](https://github.com/nuxt/ui/commit/1b5d7418a5681a6ef2c4df5512e0e91c1defa2af))
+* **Marquee:** handle RTL mode ([#4887](https://github.com/nuxt/ui/issues/4887)) ([1846079](https://github.com/nuxt/ui/commit/1846079c1e2c6da0f7fcacc619c9c82a081f86d5))
+* **Progress:** improve `status-position` when 0 ([#4994](https://github.com/nuxt/ui/issues/4994)) ([0e1e44c](https://github.com/nuxt/ui/commit/0e1e44c16236eb367f6c27587d5395879d2ad179))
+* **types:** export missing tv types ([#4971](https://github.com/nuxt/ui/issues/4971)) ([2bf273c](https://github.com/nuxt/ui/commit/2bf273cd991442cc5b13b400a85d958f588e9b74))
+* **types:** resolve ambient declaration error in `icons` type ([#4991](https://github.com/nuxt/ui/issues/4991)) ([6ddf899](https://github.com/nuxt/ui/commit/6ddf8993b5864442802910e27e5aa32a7f67696c))
+
+### Performance Improvements
+
+* **module:** do not block setup by importing plugin ([#4923](https://github.com/nuxt/ui/issues/4923)) ([695d9f7](https://github.com/nuxt/ui/commit/695d9f767df42f7d6fd8d73abad0851c04e05265))
+
 ## [4.0.0-alpha.1](https://github.com/nuxt/ui/compare/v3.3.3...v4.0.0-alpha.1) (2025-09-01)
 
 ### ⚠ BREAKING CHANGES

@@ -22,8 +22,6 @@ ignore:
   - ui.content
 external:
   - items
-externalTypes:
-  - AccordionItem[]
 hide:
   - class
   - ui

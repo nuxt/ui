@@ -142,3 +142,51 @@ export function validateSchema<T extends object>(state: T, schema: FormSchema<T>
     throw new Error('Form validation failed: Unsupported form schema')
   }
 }
+
+export function getAtPath<T extends object>(
+  data: T,
+  path?: string
+) {
+  if (!path) return data
+  const value = path
+    .split('.')
+    .reduce(
+      (value, key) => (value as any)?.[key],
+      data as any
+    )
+
+  return value
+}
+
+export function setAtPath<T extends object>(
+  data: T,
+  path: string,
+  value: any
+): T {
+  if (!path) return Object.assign(data, value)
+  if (!data) return data
+
+  const keys = path.split('.')
+  let current = data as Record<string, any>
+
+  // Navigate to the parent of the target property
+  for (let i = 0; i < keys.length - 1; i++) {
+    const key = keys[i]!
+    if (current[key] === undefined || current[key] === null) {
+      // If the next key is a number, initialize as array
+      if (i + 1 < keys.length && !Number.isNaN(Number(keys[i + 1]))) {
+        current[key] = []
+      } else {
+        current[key] = {}
+      }
+    }
+
+    current = current[key]
+  }
+
+  // Set the final value
+  const lastKey = keys[keys.length - 1]!
+  current[lastKey] = value
+
+  return data
+}

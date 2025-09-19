@@ -9,8 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>
 
 export type CheckboxGroupValue = AcceptableValue
-
-export type CheckboxGroupItem = {
+export type CheckboxGroupItem = CheckboxGroupValue | {
   label?: string
   description?: string
   disabled?: boolean
@@ -18,7 +17,7 @@ export type CheckboxGroupItem = {
   class?: any
   ui?: Pick<CheckboxGroup['slots'], 'item'> & Omit<Required<CheckboxProps>['ui'], 'root'>
   [key: string]: any
-} | CheckboxGroupValue
+}
 
 export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<CheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'indicator' | 'icon'> {
   /**
@@ -64,7 +63,7 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGrou
   ui?: CheckboxGroup['slots'] & CheckboxProps['ui']
 }
 
-export type CheckboxGroupEmits = CheckboxGroupRootEmits & {
+export type CheckboxGroupEmits<T extends CheckboxGroupItem[] = CheckboxGroupItem[]> = CheckboxGroupRootEmits<T[number]> & {
   change: [event: Event]
 }
 
@@ -93,7 +92,7 @@ const props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
   valueKey: 'value' as never,
   orientation: 'vertical'
 })
-const emits = defineEmits<CheckboxGroupEmits>()
+const emits = defineEmits<CheckboxGroupEmits<T>>()
 const slots = defineSlots<CheckboxGroupSlots<T>>()
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']

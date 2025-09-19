@@ -149,9 +149,12 @@ props:
 
 ### Nesting forms
 
-Nesting form components allows you to manage complex data structures, such as lists or conditional fields, more efficiently.
+Use the `nested` prop to nest multiple Form components and link their validation functions. In this case, validating the parent form will automatically validate all the other forms inside it.
 
-For example, it can be used to dynamically add fields based on user's input:
+Nested forms directly inherit their parent's state, so you don’t need to define a separate state for them. You can use the `name` prop to target a nested attribute within the parent's state.
+
+It can be used to dynamically add fields based on user's input:
+
 ::component-example
 ---
 collapse: true
@@ -166,6 +169,7 @@ collapse: true
 name: 'form-example-nested-list'
 ---
 ::
+
 
 ## API
 

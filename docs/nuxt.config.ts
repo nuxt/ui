@@ -156,6 +156,14 @@ export default defineNuxtConfig({
     '/releases': { redirect: 'https://github.com/nuxt/ui/releases', prerender: false }
   },
 
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        externalRelAttribute: 'noopener'
+      }
+    }
+  },
+
   compatibilityDate: '2024-07-09',
 
   nitro: {
