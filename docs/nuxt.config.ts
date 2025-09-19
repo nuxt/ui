@@ -98,6 +98,7 @@ export default defineNuxtConfig({
     '/pro': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/pro/pricing': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/pro/purchase': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
+    '/pro/activate': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/pro/templates': { redirect: { to: '/templates', statusCode: 301 }, prerender: false },
     '/docs/getting-started/license': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/docs/getting-started/installation/pro': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
