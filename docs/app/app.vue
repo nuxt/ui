@@ -25,7 +25,7 @@ useHead({
   ],
   link: [
     // { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
+    { rel: 'canonical', href: `https://ui3.nuxt.com${withoutTrailingSlash(route.path)}` }
   ],
   style: [
     { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 },
@@ -55,7 +55,7 @@ provide('navigation', mappedNavigation)
     <Analytics />
 
     <template v-if="!route.path.startsWith('/examples')">
-      <!-- <Banner /> -->
+      <Banner />
 
       <Header :links="links" />
     </template>

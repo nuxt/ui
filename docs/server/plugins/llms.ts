@@ -27,5 +27,5 @@ export default defineNitroPlugin((nitroApp) => {
 })
 
 function transformRawLink(href: string) {
-  return `${href.replace(/^https:\/\/ui.nuxt.com/, 'https://ui.nuxt.com/raw')}.md`
+  return `${href.replace(/^https:\/\/ui3.nuxt.com/, 'https://ui3.nuxt.com/raw')}.md`
 }

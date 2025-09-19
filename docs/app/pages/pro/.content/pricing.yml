@@ -5,7 +5,7 @@ pricing:
   title: Upgrade to Nuxt UI [Pro]{class="text-primary"}.
   description: On top of 40+ open source components from Nuxt UI, Pro gives you access to 50+ premium Vue components to create beautiful & responsive Nuxt applications in minutes. It includes all primitives to build landing pages, documentations, blogs, dashboards or entire SaaS products.
   freePlan:
-    description: "**NuxtLabs is joining Vercel** :tada: As part of this transition, Nuxt UI is becoming even more accessible.<br><br> **In September, we're launching Nuxt UI v4**: a free, open-source library that unifies Nuxt UI and Nuxt UI Pro, offering 100+ components and a complete free Figma Kit for everyone."
+    description: ":tada: **Nuxt UI v4 is now available**: a free, open-source library that unifies Nuxt UI and Nuxt UI Pro, offering 100+ components and a complete free Figma Kit for everyone."
     orientation: horizontal
     button:
       label: Read the announcement
@@ -47,7 +47,7 @@ pricing:
       - Includes Nuxt UI [Figma Kit](https://go.nuxt.com/figma-ui3)
     button:
       label: Buy Figma Kit
-      to: 'https://nuxt.lemonsqueezy.com/buy/17213c49-621b-4c2c-9478-3a50a099003d'
+      disabled: true
       color: 'neutral'
   plans:
     - title: Solo
@@ -64,7 +64,7 @@ pricing:
         - Lifetime access
       button:
         label: Buy now
-        to: https://nuxt.lemonsqueezy.com/buy/057dacb2-87ba-4dc1-9256-59ee5b3bd394
+        disabled: true
     - title: Startup
       description: Best suited for small teams, startups and agencies.
       price: $499
@@ -79,7 +79,7 @@ pricing:
         - Lifetime access
       button:
         label: Buy now
-        to: https://nuxt.lemonsqueezy.com/buy/2e042a33-7e76-4dda-bd68-e353c182e571
+        disabled: true
       highlight: true
     - title: Organization
       description: Ideal for larger teams and organizations.
@@ -96,7 +96,7 @@ pricing:
         - Lifetime access
       button:
         label: Buy now
-        to: https://nuxt.lemonsqueezy.com/buy/2979099c-b7a0-4ba1-90e0-a0d60509b92d
+        disabled: true
 logos:
   - src: /pro/logos/springfieldclinic.svg
     alt: Springfield Clinic

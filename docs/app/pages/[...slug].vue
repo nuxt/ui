@@ -106,16 +106,6 @@ const communityLinks = computed(() => [{
   label: 'Star on GitHub',
   to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}`,
   target: '_blank'
-}, module.value === 'ui-pro' && {
-  icon: 'i-lucide-credit-card',
-  label: 'Purchase a license',
-  to: 'https://nuxt.lemonsqueezy.com/checkout/buy/057dacb2-87ba-4dc1-9256-59ee5b3bd394',
-  target: '_blank'
-}, module.value === 'ui-pro' && {
-  icon: 'i-lucide-ticket-percent',
-  label: 'Become an affiliate',
-  to: 'https://nuxt.lemonsqueezy.com/affiliates',
-  target: '_blank'
 }, {
   icon: 'i-lucide-git-pull-request-arrow',
   label: 'Contribution',
