@@ -28,7 +28,6 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
   const formOptions = inject(formOptionsInjectionKey, undefined)
   const formBus = inject(formBusInjectionKey, undefined)
   const formField = inject(formFieldInjectionKey, undefined)
-  const formInputs = inject(formInputsInjectionKey, undefined)
   const inputId = inject(inputIdInjectionKey, undefined)
 
   // Blocks the FormField injection to avoid duplicating events when nesting input components.
@@ -41,10 +40,6 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     } else if (props?.id) {
       // Updates for="..." attribute on label if props.id is provided.
       inputId.value = props?.id
-    }
-
-    if (formInputs && formField.value.name && inputId.value) {
-      formInputs.value[formField.value.name] = { id: inputId.value, pattern: formField.value.errorPattern }
     }
   }
 
