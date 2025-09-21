@@ -42,8 +42,7 @@ export function useHeader() {
     }]
   }, {
     label: 'Releases',
-    to: 'https://github.com/nuxt/ui/releases',
-    target: '_blank'
+    to: '/releases'
   }])
 
   const mobileLinks = computed(() => [{
@@ -84,9 +83,8 @@ export function useHeader() {
     to: '/team'
   }, {
     label: 'GitHub',
-    to: 'https://github.com/nuxt/ui',
-    icon: 'i-simple-icons-github',
-    target: '_blank'
+    to: '/releases',
+    icon: 'i-simple-icons-github'
   }])
 
   return {
