@@ -92,7 +92,7 @@ exports[`ChatMessages > renders with default slot correctly 1`] = `
 `;
 
 exports[`ChatMessages > renders with indicator slot correctly 1`] = `
-"<div class="w-full flex flex-col gap-1 flex-1 px-2.5 [&amp;>article]:last-of-type:min-h-(--last-message-height)" style="--last-message-height: 0px;">
+"<div data-status="submitted" class="w-full flex flex-col gap-1 flex-1 px-2.5 [&amp;>article]:last-of-type:min-h-(--last-message-height)" style="--last-message-height: 0px;">
   <article data-role="user" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
     <div class="relative flex items-start group-data-[role=user]/message:max-w-[75%] ltr:justify-end ms-auto gap-3 pb-8">
       <!--v-if-->
@@ -107,7 +107,13 @@ exports[`ChatMessages > renders with indicator slot correctly 1`] = `
       <!--v-if-->
     </div>
   </article>
-  <!--v-if-->
+  <article data-role="assistant" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
+    <div class="relative flex items-start group-data-[role=user]/message:max-w-[75%] rtl:justify-end gap-3 pb-8">
+      <!--v-if-->
+      <div class="relative text-pretty min-w-0">Indicator slot</div>
+      <!--v-if-->
+    </div>
+  </article>
   <!---->
 </div>"
 `;
