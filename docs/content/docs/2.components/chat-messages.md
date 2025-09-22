@@ -437,7 +437,7 @@ You can customize the loading indicator that appears when the status is `submitt
 
 ::component-example
 ---
-name: "chat-custom-indicator-example"
+name: "chat-messages-indicator-slot-example"
 collapse: true
 ---
 ::
