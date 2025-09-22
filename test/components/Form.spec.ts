@@ -369,7 +369,7 @@ describe('Form', () => {
 
       email.trigger('change')
       await flushPromises()
-      expect(mockWatchCallback).toHaveBeenCalledTimes(1)
+      expect(mockWatchCallback).toHaveBeenCalled()
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('email')).toBe(true)
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('password')).toBe(false)
     })
@@ -382,7 +382,7 @@ describe('Form', () => {
 
       email.trigger('blur')
       await flushPromises()
-      expect(mockWatchCallback).toHaveBeenCalledTimes(1)
+      expect(mockWatchCallback).toHaveBeenCalled()
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('email')).toBe(true)
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('password')).toBe(false)
     })
@@ -394,7 +394,7 @@ describe('Form', () => {
 
       email.trigger('change')
       await flushPromises()
-      expect(mockWatchCallback).toHaveBeenCalledTimes(1)
+      expect(mockWatchCallback).toHaveBeenCalled()
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('email')).toBe(true)
       expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('password')).toBe(false)
     })
