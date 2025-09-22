@@ -282,13 +282,13 @@ onMounted(() => {
       :compact="compact"
     >
       <template #content>
-        <div :class="ui.indicator({ class: props.ui?.indicator })">
-          <slot name="indicator">
+        <slot name="indicator">
+          <div :class="ui.indicator({ class: props.ui?.indicator })">
             <span />
             <span />
             <span />
-          </slot>
-        </div>
+          </div>
+        </slot>
       </template>
     </UChatMessage>
 
