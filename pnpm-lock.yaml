@@ -158,6 +158,9 @@ importers:
       unplugin-vue-components:
         specifier: ^29.0.0
         version: 29.0.0(@babel/parser@7.28.3)(@nuxt/kit@4.0.3(magicast@0.3.5))(vue@3.5.21(typescript@5.8.3))
+      uqr:
+        specifier: ^0.1.2
+        version: 0.1.2
       valibot:
         specifier: ^1.0.0
         version: 1.1.0(typescript@5.8.3)
