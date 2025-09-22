@@ -104,6 +104,9 @@ importers:
       hookable:
         specifier: ^5.5.3
         version: 5.5.3
+      joi:
+        specifier: ^18.0.0
+        version: 18.0.1
       knitwork:
         specifier: ^1.2.0
         version: 1.2.0
@@ -155,6 +158,9 @@ importers:
       unplugin-vue-components:
         specifier: ^29.1.0
         version: 29.1.0(@babel/parser@7.28.3)(@nuxt/kit@4.0.3(magicast@0.3.5))(vue@3.5.21(typescript@5.8.3))
+      valibot:
+        specifier: ^1.0.0
+        version: 1.1.0(typescript@5.8.3)
       vaul-vue:
         specifier: 0.4.1
         version: 0.4.1(reka-ui@2.5.0(typescript@5.8.3)(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))
@@ -164,6 +170,12 @@ importers:
       vue-router:
         specifier: ^4.5.0
         version: 4.5.1(vue@3.5.21(typescript@5.8.3))
+      yup:
+        specifier: ^1.7.0
+        version: 1.7.1
+      zod:
+        specifier: ^3.24.0 || ^4.0.0
+        version: 4.1.11
     devDependencies:
       '@nuxt/content':
         specifier: ^3.7.1
