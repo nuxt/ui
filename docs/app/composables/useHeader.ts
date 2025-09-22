@@ -78,13 +78,17 @@ export function useHeader() {
     label: 'Showcase',
     to: '/showcase'
   }, {
+    label: 'Releases',
+    to: '/releases'
+  }, {
     label: 'Team',
     icon: 'i-lucide-users',
     to: '/team'
   }, {
     label: 'GitHub',
-    to: '/releases',
-    icon: 'i-simple-icons-github'
+    to: 'https://github.com/nuxt/ui',
+    icon: 'i-simple-icons-github',
+    target: '_blank'
   }])
 
   return {

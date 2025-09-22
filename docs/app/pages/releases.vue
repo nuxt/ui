@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { UPageSection } from '#components'
-
 const { data: versions } = await useFetch('https://ungh.cc/repos/nuxt/ui/releases', {
   transform: (data: {
     releases: {
@@ -23,7 +21,7 @@ const { data: versions } = await useFetch('https://ungh.cc/repos/nuxt/ui/release
 <template>
   <div class="relative">
     <UPageHero
-      title="Changelog"
+      title="Releases"
       description="All the latest updates, improvements, and bug fixes to Nuxt UI"
       class="md:border-b border-default"
       :ui="{
