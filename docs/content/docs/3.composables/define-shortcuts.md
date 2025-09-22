@@ -43,7 +43,7 @@ Define keyboard shortcuts for your application.
   ::field{name="options" type="ShortcutsOptions"}
   Optional configuration for the shortcuts behavior.
 
-  ::field-group
+  ::collapsible
     ::field{name="chainDelay" type="number"}
     The delay between key presses to consider the shortcut as chained. Default is `250`.
     ::

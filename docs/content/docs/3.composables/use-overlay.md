@@ -30,6 +30,8 @@ In order to return a value from the overlay, the `overlay.open()` can be awaited
 
 ## API
 
+`useOverlay()`{lang="ts-type"}
+
 The `useOverlay` composable provides methods to manage overlays globally. Each created overlay returns an instance with its own methods.
 
 ### create()
@@ -48,7 +50,8 @@ Create an overlay, and return a factory instance.
   ::field{name="options" type="OverlayOptions"}
   Configuration options for the overlay.
 
-  ::field-group
+  ::collapsible
+    ::field-group
     ::field{name="defaultOpen" type="boolean"}
     Open the overlay immediately after being created. Defaults to `false`.
     ::
@@ -59,6 +62,7 @@ Create an overlay, and return a factory instance.
 
     ::field{name="destroyOnClose" type="boolean"}
     Removes the overlay from memory when closed. Defaults to `false`.
+    ::
     ::
   ::
   ::

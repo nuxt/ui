@@ -27,6 +27,10 @@ Learn how to customize the appearance and behavior of toasts in the **Toast** co
 
 ## API
 
+`useToast()`{lang="ts-type"}
+
+The `useToast` composable provides methods to manage toast notifications globally.
+
 ### add()
 
 `add(toast: Partial<Toast>): Toast`{lang="ts-type"}
@@ -39,17 +43,19 @@ Adds a new toast notification.
   ::field{name="toast" type="Partial<Toast>" required}
   A partial `Toast` object with the following properties:
 
-  ::field-group
-    ::field{name="id" type="string | number"}
-    A unique identifier for the toast. If not provided, a timestamp will be used.
-    ::
+  ::collapsible
+    ::field-group
+      ::field{name="id" type="string | number"}
+      A unique identifier for the toast. If not provided, a timestamp will be used.
+      ::
 
-    ::field{name="open" type="boolean"}
-    Whether the toast is open. Defaults to `true`.
-    ::
+      ::field{name="open" type="boolean"}
+      Whether the toast is open. Defaults to `true`.
+      ::
 
-    ::field{name="..." type="Toast"}
-    Other properties from the `Toast` interface.
+      ::field{name="..." type="Toast"}
+      Other properties from the `Toast` interface.
+      ::
     ::
   ::
   ::
