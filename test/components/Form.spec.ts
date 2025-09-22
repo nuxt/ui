@@ -624,4 +624,20 @@ describe('Form', () => {
     await flushPromises()
     expect(wrapper.html()).toContain('Error message')
   })
+
+  it('works with empty fields', async () => {
+    const wrapper = await renderForm({ fixture: 'FormEmptyFields' })
+    const form = wrapper.setupState.form.value
+    form.setErrors([
+      { name: 'field1', message: 'Error on field1' },
+      { name: 'field2', message: 'Error on field2' },
+      { message: 'General error' }
+    ])
+    await nextTick()
+    await flushPromises()
+
+    expect(wrapper.html()).toContain('Error on field1')
+    expect(wrapper.html()).toContain('Error on field2')
+    expect(wrapper.html()).toContain('General error')
+  })
 })

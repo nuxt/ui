@@ -14,7 +14,7 @@
     "@internationalized/date": "^3.9.0",
     "@nuxt/ui": "workspace:*",
     "nuxt": "^4.0.3",
-    "zod": "^4.1.8"
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "typescript": "^5.8.3",
