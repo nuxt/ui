@@ -574,7 +574,7 @@ class: '!p-0'
 
 ### With drag and drop
 
-Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Table. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
+You can use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Table. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
 
 ::note
 Since the table ref doesn't expose the tbody element, add a unique class to it via the `:ui` prop to target it with `useSortable` (e.g. `:ui="{ tbody: 'my-table-tbody' }"`).
@@ -585,6 +585,22 @@ Since the table ref doesn't expose the tbody element, add a unique class to it v
 prettier: true
 collapse: true
 name: 'table-drag-and-drop-example'
+class: '!p-0'
+---
+::
+
+### With tree data
+
+You can use the `get-sub-rows` prop to display hierarchical (tree) data in the table.
+For example, if your data objects have a `children` array, set `:get-sub-rows="row => row.children"` to enable expandable rows.
+
+::component-example
+---
+prettier: true
+collapse: true
+highlights:
+  - 168
+name: 'table-tree-data-example'
 class: '!p-0'
 ---
 ::
