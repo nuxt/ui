@@ -15,12 +15,12 @@
     "@nuxt/ui": "workspace:*",
     "@nuxthub/core": "^0.9.0",
     "nuxt": "^4.0.3",
-    "zod": "^4.1.8"
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "typescript": "^5.8.3",
     "vue-tsc": "^3.0.7",
-    "wrangler": "^4.37.0"
+    "wrangler": "^4.38.0"
   },
   "resolutions": {
     "unimport": "4.1.1"

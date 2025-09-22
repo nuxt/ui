@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "3.3.4",
-  "packageManager": "pnpm@10.16.1",
+  "packageManager": "pnpm@10.17.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -123,7 +123,7 @@
     "@tailwindcss/postcss": "^4.1.13",
     "@tailwindcss/vite": "^4.1.13",
     "@tanstack/vue-table": "^8.21.3",
-    "@unhead/vue": "^2.0.14",
+    "@unhead/vue": "^2.0.17",
     "@vueuse/core": "^13.9.0",
     "@vueuse/integrations": "^13.9.0",
     "colortranslator": "^5.0.0",
@@ -157,15 +157,15 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.9.0",
-    "@nuxt/module-builder": "^1.0.1",
+    "@nuxt/module-builder": "^1.0.2",
     "@nuxt/test-utils": "^3.19.2",
     "@release-it/conventional-changelog": "^10.0.1",
     "@vue/test-utils": "^2.4.6",
     "embla-carousel": "^8.6.0",
-    "eslint": "^9.35.0",
+    "eslint": "^9.36.0",
     "happy-dom": "^18.0.1",
     "nuxt": "^4.0.3",
-    "release-it": "^19.0.4",
+    "release-it": "^19.0.5",
     "vitest": "^3.2.4",
     "vitest-environment-nuxt": "^1.0.1",
     "vue-tsc": "^3.0.7"
@@ -205,7 +205,7 @@
   },
   "resolutions": {
     "@nuxt/kit": "4.0.3",
-    "@nuxt/module-builder": "1.0.1",
+    "@nuxt/module-builder": "^1.0.2",
     "@nuxt/ui": "workspace:*",
     "chokidar": "3.6.0",
     "debug": "4.3.7",
