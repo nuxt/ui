@@ -325,7 +325,7 @@ describe('Form', () => {
       expect(form.touchedFields.has('password')).toBe(false)
     })
 
-    it.skip('touchedFields works', async () => {
+    it('touchedFields works', async () => {
       const email = wrapper.find('#email')
 
       email.trigger('change')
@@ -348,7 +348,7 @@ describe('Form', () => {
       expect(form.blurredFields.has('password')).toBe(false)
     })
 
-    it.skip('reactivity: touchedFields works on focus', async () => {
+    it('reactivity: touchedFields works on focus', async () => {
       const email = wrapper.find('#email')
 
       const mockWatchCallback = vi.fn()
