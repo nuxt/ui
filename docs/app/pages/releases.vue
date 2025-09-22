@@ -22,7 +22,7 @@ const { data: versions } = await useFetch('https://ungh.cc/repos/nuxt/ui/release
   <div class="relative">
     <UPageHero
       title="Releases"
-      description="All the latest updates, improvements, and bug fixes to Nuxt UI"
+      description="Stay up to date with the newest features, enhancements, and fixes for Nuxt UI."
       class="md:border-b border-default"
       :ui="{
         container: 'relative'
@@ -32,6 +32,7 @@ const { data: versions } = await useFetch('https://ungh.cc/repos/nuxt/ui/release
 
       <div aria-hidden="true" class="hidden md:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
+
     <UPageSection
       :ui="{
         container: '!py-0'

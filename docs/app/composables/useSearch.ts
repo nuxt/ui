@@ -43,7 +43,7 @@ export function useSearch() {
   }, {
     icon: 'i-lucide-newspaper',
     label: 'Releases',
-    description: 'All the latest updates, improvements, and bug fixes to Nuxt UI.',
+    description: 'Stay up to date with the newest features, enhancements, and fixes for Nuxt UI.',
     to: '/releases'
   }, {
     label: 'Team',
