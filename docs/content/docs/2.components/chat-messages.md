@@ -431,7 +431,7 @@ const handleSubmit = (e: Event) => {
 In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) to render the content of the message. The `getTextFromMessage` utility extracts the text content from the AI SDK V5 message parts. As Nuxt UI provides pre-styled prose components, your content will be automatically styled.
 ::
 
-### Custom Indicator
+### With indicator slot
 
 You can customize the loading indicator that appears when the status is `submitted`.
 
