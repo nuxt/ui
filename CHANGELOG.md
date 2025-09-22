@@ -1,5 +1,30 @@
 # Changelog
 
+## [3.3.4](https://github.com/nuxt/ui/compare/v3.3.3...v3.3.4) (2025-09-15)
+
+### Bug Fixes
+
+* **FileUpload:** add missing `button` type ([91f86d9](https://github.com/nuxt/ui/commit/91f86d9da2a614bd37a12f2ece9ff3ce176e8cb2)), closes [#4935](https://github.com/nuxt/ui/issues/4935)
+* **Form:** handling race condition on `clear` function ([#4843](https://github.com/nuxt/ui/issues/4843)) ([0a8ead7](https://github.com/nuxt/ui/commit/0a8ead72b53019969cf28d91549b9495ccc89f02))
+* **InputMenu/Select/SelectMenu:** show falsy value when model value is falsy ([#4882](https://github.com/nuxt/ui/issues/4882)) ([5b9d9d8](https://github.com/nuxt/ui/commit/5b9d9d8135fe5b4c3f9298161dbd0c59c511897a))
+* **locale:** improve `id` name ([#4890](https://github.com/nuxt/ui/issues/4890)) ([e5cb55b](https://github.com/nuxt/ui/commit/e5cb55be7d5ac2690c95f05f56462b16d453670f))
+
+## [3.3.3](https://github.com/nuxt/ui/compare/v3.3.2...v3.3.3) (2025-09-01)
+
+### Features
+
+* **useFormField:** export form errors injection key ([#4808](https://github.com/nuxt/ui/issues/4808)) ([ec2bc0a](https://github.com/nuxt/ui/commit/ec2bc0a89d3b0854b6ccd6384d1a5fd78be8b726))
+
+### Bug Fixes
+
+* **components:** broken types for `update:model-value` event ([#4853](https://github.com/nuxt/ui/issues/4853)) ([7133f50](https://github.com/nuxt/ui/commit/7133f501e4346ba6990c437cfa16af05b886c884))
+* **Form:** default slot types ([#4758](https://github.com/nuxt/ui/issues/4758)) ([a32cc37](https://github.com/nuxt/ui/commit/a32cc37f7392499ab02558e4d58b46195f7ffad4))
+* **Form:** update `Form` interface to accept RegExp ([#4821](https://github.com/nuxt/ui/issues/4821)) ([0c2d390](https://github.com/nuxt/ui/commit/0c2d390139d540350d517d97d56be7dd4e25b34a))
+* **InputMenu/Select/SelectMenu:** show placeholder when model value is falsy ([#4825](https://github.com/nuxt/ui/issues/4825)) ([90b5daf](https://github.com/nuxt/ui/commit/90b5daf2a16fbf87f8b0c20e6abf9fe7ae546809))
+* **InputMenu:** prevent `focus-outside` event on content ([77b6b9a](https://github.com/nuxt/ui/commit/77b6b9ae8e876b03a5edc45a85e94b448c2c48e9))
+* **Link:** ensure target `_blank` is flagged as external for Inertia ([#4746](https://github.com/nuxt/ui/issues/4746)) ([520b277](https://github.com/nuxt/ui/commit/520b2775d8978240c00bfa934dccd317898445d4))
+* **Table:** ensure `colspan` calc for `loading` and `empty` states ([#4826](https://github.com/nuxt/ui/issues/4826)) ([bdcc8c4](https://github.com/nuxt/ui/commit/bdcc8c4bf2ac339f046e6a0bbc1a719100f51566))
+
 ## [3.3.2](https://github.com/nuxt/ui/compare/v3.3.1...v3.3.2) (2025-08-14)
 
 ## [3.3.1](https://github.com/nuxt/ui/compare/v3.3.0...v3.3.1) (2025-08-14)

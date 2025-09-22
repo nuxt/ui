@@ -19,19 +19,11 @@ jobs:
           days-before-pr-stale: -1
           days-before-stale: 60
           days-before-close: 7
+          any-of-labels: 'triage,question'
           stale-issue-label: 'stale'
+          stale-issue-message: |
+            Hi! 👋 This issue has been open for 60 days without activity and will be closed in 7 days. Please comment if it's still relevant.
           close-issue-label: 'closed-by-bot'
           close-issue-message: |
-            Hi! 👋
-
-            This issue has been automatically **closed** due to prolonged inactivity.
-
-            We're a small team and can't address every report, but we appreciate your feedback and contributions.
-
-            If this issue is still relevant with the latest version of Nuxt UI, please feel free to reopen or create a new issue with updated details.
-
-            Thank you for your understanding and support!
-
-            — Nuxt UI Team
-          exempt-issue-labels: 'feature,announcement,release,reka-ui,upstream'
+            Hi! 👋 This issue was automatically closed due to inactivity. If it's still relevant with the latest Nuxt UI version, feel free to reopen or create a new issue.
           operations-per-run: 300

@@ -72,7 +72,7 @@ exports[`Progress > renders with color neutral correctly 1`] = `
 
 exports[`Progress > renders with max correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
-  <div class="flex justify-end text-dimmed transition-[width] duration-200 text-sm flex-row" style="width: 50%;">50% </div>
+  <div class="flex text-dimmed transition-[width] duration-200 text-sm flex-row items-center justify-end min-w-fit" style="width: 50%;">50% </div>
   <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="2" data-max="4" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-50%);"></div>
   </div>
@@ -88,7 +88,7 @@ exports[`Progress > renders with max correctly 1`] = `
 
 exports[`Progress > renders with max inverted correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
-  <div class="flex justify-end text-dimmed transition-[width] duration-200 text-sm self-end flex-row-reverse" style="width: 50%;">50% </div>
+  <div class="flex text-dimmed transition-[width] duration-200 text-sm items-center justify-end min-w-fit self-end flex-row-reverse" style="width: 50%;">50% </div>
   <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="2" data-max="4" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(50%);"></div>
   </div>
@@ -204,7 +204,7 @@ exports[`Progress > renders with size xs correctly 1`] = `
 
 exports[`Progress > renders with status correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
-  <div class="flex justify-end text-dimmed transition-[width] duration-200 text-sm flex-row" style="width: 50%;">50% </div>
+  <div class="flex text-dimmed transition-[width] duration-200 text-sm flex-row items-center justify-end min-w-fit" style="width: 50%;">50% </div>
   <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="50" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-50%);"></div>
   </div>
@@ -214,7 +214,7 @@ exports[`Progress > renders with status correctly 1`] = `
 
 exports[`Progress > renders with status inverted correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
-  <div class="flex justify-end text-dimmed transition-[width] duration-200 text-sm self-end flex-row-reverse" style="width: 50%;">50% </div>
+  <div class="flex text-dimmed transition-[width] duration-200 text-sm items-center justify-end min-w-fit self-end flex-row-reverse" style="width: 50%;">50% </div>
   <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="50" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(50%);"></div>
   </div>

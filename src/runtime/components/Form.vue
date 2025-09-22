@@ -54,8 +54,8 @@ export interface FormProps<S extends FormSchema, T extends boolean = true> {
 }
 
 export interface FormEmits<S extends FormSchema, T extends boolean = true> {
-  submit: [payload: FormSubmitEvent<FormData<S, T>>]
-  error: [payload: FormErrorEvent]
+  submit: [event: FormSubmitEvent<FormData<S, T>>]
+  error: [event: FormErrorEvent]
 }
 
 export interface FormSlots {
@@ -67,7 +67,7 @@ export interface FormSlots {
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
+import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import { validateSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
@@ -150,7 +150,7 @@ onUnmounted(() => {
 })
 
 const errors = ref<FormErrorWithId[]>([])
-provide('form-errors', errors)
+provide(formErrorsInjectionKey, errors)
 
 const inputs = ref<{ [P in keyof I]?: { id?: string, pattern?: RegExp } }>({})
 provide(formInputsInjectionKey, inputs as any)
@@ -201,15 +201,21 @@ async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean>
     : []
 
   if (names) {
-    const otherErrors = errors.value.filter(error => !names.some((name) => {
-      const pattern = inputs.value?.[name]?.pattern
-      return name === error.name || (pattern && error.name?.match(pattern))
-    }))
+    const namesSet = new Set(names)
+    const patterns = names
+      .map(name => inputs.value?.[name]?.pattern)
+      .filter(Boolean) as RegExp[]
 
-    const pathErrors = (await getErrors()).filter(error => names.some((name) => {
-      const pattern = inputs.value?.[name]?.pattern
-      return name === error.name || (pattern && error.name?.match(pattern))
-    }))
+    const isErrorForPath = (error: FormErrorWithId): boolean => {
+      if (!error.name) return false
+      if (namesSet.has(error.name)) return true
+      return patterns.some(pattern => pattern.test(error.name!))
+    }
+
+    const allNewErrors = await getErrors()
+
+    const otherErrors = errors.value.filter(error => !isErrorForPath(error))
+    const pathErrors = allNewErrors.filter(isErrorForPath)
 
     errors.value = otherErrors.concat(pathErrors)
   } else {
