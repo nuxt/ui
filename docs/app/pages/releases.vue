@@ -22,7 +22,14 @@ const { data: versions } = await useFetch('https://ungh.cc/repos/nuxt/ui/release
 
 <template>
   <div class="relative">
-    <UPageHero title="Changelog" class="md:border-b border-default" :ui="{ container: 'relative' }">
+    <UPageHero
+      title="Changelog"
+      description="All the latest updates, improvements, and bug fixes to Nuxt UI"
+      class="md:border-b border-default"
+      :ui="{
+        container: 'relative'
+      }"
+    >
       <LazyStarsBg />
 
       <div aria-hidden="true" class="hidden md:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
