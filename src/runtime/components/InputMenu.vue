@@ -441,7 +441,7 @@ defineExpose({
         @focus="onFocus"
         @remove-tag="onRemoveTag"
       >
-        <TagsInputItem v-for="(item, index) in tags" :key="index" :value="item" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
+        <TagsInputItem v-for="(item, index) in tags" :key="index" :value="isInputItem(item) ? item : String(item)" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
           <TagsInputItemText :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
             <slot name="tags-item-text" :item="(item as NestedItem<T>)" :index="index">
               {{ displayValue(item as GetItemValue<T, VK>) }}

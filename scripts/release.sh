@@ -13,4 +13,4 @@ fi
 
 # Release package
 echo "Publishing @nuxt/ui"
-npm publish --access public
+npm publish --access public --tag beta
