@@ -303,7 +303,8 @@ async function validateNestedForm(form: { validate: typeof _validate, name?: str
 }
 
 function addFormPath(error: FormError, formPath?: string): FormError {
-  if (!formPath) return error
+  if (!formPath || !error.name) return error
+  if (!error.name) return error
   return { ...error, name: formPath + '.' + error.name }
 }
 
