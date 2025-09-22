@@ -3,7 +3,7 @@ import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 
 const UCheckbox = resolveComponent('UCheckbox')
-const UIcon = resolveComponent('UIcon')
+const UButton = resolveComponent('UButton')
 
 type Payment = {
   id: string
@@ -99,10 +99,17 @@ const columns: TableColumn<Payment>[] = [{
         class: 'flex items-center gap-2'
       },
       [
-        h(UIcon, {
-          name: row.getIsExpanded() ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right',
-          onClick: row.getToggleExpandedHandler(),
-          class: row.getCanExpand() ? 'cursor-pointer' : 'invisible'
+        h(UButton, {
+          color: 'neutral',
+          variant: 'outline',
+          size: 'xs',
+          icon: row.getIsExpanded() ? 'i-lucide-minus' : 'i-lucide-plus',
+          class: !row.getCanExpand() && 'invisible',
+          ui: {
+            base: 'p-0 rounded-sm',
+            leadingIcon: 'size-4'
+          },
+          onClick: row.getToggleExpandedHandler()
         }),
         row.getValue('id') as string
       ]
