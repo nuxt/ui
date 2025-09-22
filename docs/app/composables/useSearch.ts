@@ -41,6 +41,11 @@ export function useSearch() {
     description: 'Explore some of the amazing projects built with Nuxt UI.',
     to: '/showcase'
   }, {
+    icon: 'i-lucide-newspaper',
+    label: 'Releases',
+    description: 'All the latest updates, improvements, and bug fixes to Nuxt UI.',
+    to: '/releases'
+  }, {
     label: 'Team',
     description: 'Meet the team building and maintaining Nuxt UI.',
     icon: 'i-lucide-users',
