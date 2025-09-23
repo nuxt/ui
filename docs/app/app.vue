@@ -93,7 +93,7 @@ provide('navigation', rootNavigation)
 
 @media (min-width: 1024px) {
   .root {
-    --ui-header-height: 113px;
+    --ui-header-height: 112px;
   }
 }
 </style>
