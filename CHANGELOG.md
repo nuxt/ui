@@ -1,5 +1,24 @@
 # Changelog
 
+## [4.0.0-beta.0](https://github.com/nuxt/ui/compare/v4.0.0-alpha.2...v4.0.0-beta.0) (2025-09-22)
+
+### Bug Fixes
+
+* **ChatMessages:** wrap indicator with slot ([#5036](https://github.com/nuxt/ui/issues/5036)) ([c00bf30](https://github.com/nuxt/ui/commit/c00bf30497ac0235e45ece5edeaf53e13da4a5dc))
+* **CheckboxGroup:** proxy generic to emits ([ffa5b23](https://github.com/nuxt/ui/commit/ffa5b23f80ac517b0556d7763bb364025282bacf))
+* **Form:** flaky reactivity test ([#5038](https://github.com/nuxt/ui/issues/5038)) ([263015c](https://github.com/nuxt/ui/commit/263015c1f298a5fa279ded6f241e4b8a7d05c8d0))
+* **Form:** flaky reactivity tests ([#5033](https://github.com/nuxt/ui/issues/5033)) ([817b902](https://github.com/nuxt/ui/commit/817b902070183c197616f499159aa4bf3616c3a5))
+* **Form:** improve nested form validation handling ([#5024](https://github.com/nuxt/ui/issues/5024)) ([77a554e](https://github.com/nuxt/ui/commit/77a554eb422e243fd43a6105df22568ef333a0b4))
+* **Form:** remove `joi` and `yup` in favor of @standard-schema/spec ([#5035](https://github.com/nuxt/ui/issues/5035)) ([723cf36](https://github.com/nuxt/ui/commit/723cf369b61089cb3c1da04e8f2d8e60e4aafd90))
+* **InputMenu:** ensure to pass a string to items when multiple ([9beccbb](https://github.com/nuxt/ui/commit/9beccbb359f1f034b40195d999aee67cb4dd3c38)), closes [#5018](https://github.com/nuxt/ui/issues/5018)
+* **InputTags:** add blur and focus event handlers on input ([#5007](https://github.com/nuxt/ui/issues/5007)) ([3fd2614](https://github.com/nuxt/ui/commit/3fd261410aa4f775008eb5e8132352bb378faae5))
+* **locale:** improve translations in `pt` locale ([#5003](https://github.com/nuxt/ui/issues/5003)) ([725ef9b](https://github.com/nuxt/ui/commit/725ef9b0ce5717ee4d7d8ae38d5298ed55343e45))
+* **module:** only inject tailwindcss vite plugin once ([#5008](https://github.com/nuxt/ui/issues/5008)) ([c2e39dd](https://github.com/nuxt/ui/commit/c2e39dd661c58872a52458619e24f9b0b2162f57))
+* **ProseImg:** add `w-full` by default ([#4997](https://github.com/nuxt/ui/issues/4997)) ([de47add](https://github.com/nuxt/ui/commit/de47add2e14cfa4ea71079aa7f500c4336f055f6))
+* **Tabs:** use nullish coalescing on item value ([340fc48](https://github.com/nuxt/ui/commit/340fc4837eb7cff44b5693d73865ea98d41a3ab6)), closes [#4804](https://github.com/nuxt/ui/issues/4804)
+* **Tree:** remove `value-key` in favor of `get-key` ([#4999](https://github.com/nuxt/ui/issues/4999)) ([240ff42](https://github.com/nuxt/ui/commit/240ff4266d2ac7a1c60ad271eb95aad77d842f65))
+* **types:** allow arbitrary keys in tv config ([#4992](https://github.com/nuxt/ui/issues/4992)) ([ae77b69](https://github.com/nuxt/ui/commit/ae77b6921f25707dbb4de2d62323033892b1aab8))
+
 ## [4.0.0-alpha.2](https://github.com/nuxt/ui/compare/v4.0.0-alpha.1...v4.0.0-alpha.2) (2025-09-17)
 
 ### ⚠ BREAKING CHANGES
