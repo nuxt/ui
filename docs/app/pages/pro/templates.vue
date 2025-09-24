@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { joinURL } from 'ufo'
 // @ts-expect-error yaml is not typed
-import page from '.content/templates.yml'
+import page from './.content/templates.yml'
 
 const { url } = useSiteConfig()
 
