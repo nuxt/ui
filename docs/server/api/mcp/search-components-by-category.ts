@@ -28,7 +28,7 @@ export default defineCachedEventHandler(async (event) => {
     // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
     category: component.category,
     path: component.path,
-    url: `https://ui4.nuxt.com${component.path}`,
+    url: `https://ui.nuxt.com${component.path}`,
     // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
     links: component.links
   }))

@@ -4,7 +4,7 @@ const config = useRuntimeConfig().public
 const items = computed(() => {
   return [
     { label: `v${config.version}`, active: true, color: 'primary' as const, checked: true, type: 'checkbox' as const },
-    { label: 'v3.x', to: 'https://ui.nuxt.com' },
+    { label: 'v3.x', to: 'https://ui3.nuxt.com' },
     { label: 'v2.x', to: 'https://ui2.nuxt.com' }
   ]
 })

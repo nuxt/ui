@@ -29,7 +29,7 @@ describe('ChatMessages', () => {
     ['with ui', { props: { ...props, ui: { autoScroll: 'bottom-0' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
-    ['with indicator slot', { props, slots: { indicator: () => 'Indicator slot' } }],
+    ['with indicator slot', { props: { ...props, status: 'submitted' }, slots: { indicator: () => 'Indicator slot' } }],
     ['with viewport slot', { props, slots: { viewport: () => 'Viewport slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatMessagesProps, slots?: Partial<ChatMessagesSlots> }) => {

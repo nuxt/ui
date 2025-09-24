@@ -42,8 +42,7 @@ export function useHeader() {
     }]
   }, {
     label: 'Releases',
-    to: 'https://github.com/nuxt/ui/releases',
-    target: '_blank'
+    to: '/releases'
   }])
 
   const mobileLinks = computed(() => [{
@@ -71,17 +70,21 @@ export function useHeader() {
     icon: 'i-simple-icons-figma',
     to: '/figma'
   }, {
-    icon: 'i-lucide-panels-top-left',
     label: 'Templates',
+    icon: 'i-lucide-panels-top-left',
     to: '/templates'
   }, {
-    icon: 'i-lucide-presentation',
     label: 'Showcase',
+    icon: 'i-lucide-presentation',
     to: '/showcase'
   }, {
     label: 'Team',
     icon: 'i-lucide-users',
     to: '/team'
+  }, {
+    label: 'Releases',
+    icon: 'i-lucide-newspaper',
+    to: '/releases'
   }, {
     label: 'GitHub',
     to: 'https://github.com/nuxt/ui',
