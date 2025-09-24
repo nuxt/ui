@@ -14,7 +14,7 @@
     "@internationalized/date": "^3.9.0",
     "@nuxt/ui": "workspace:*",
     "@nuxthub/core": "^0.9.0",
-    "nuxt": "^4.0.3",
+    "nuxt": "^4.1.2",
     "zod": "^4.1.11"
   },
   "devDependencies": {
