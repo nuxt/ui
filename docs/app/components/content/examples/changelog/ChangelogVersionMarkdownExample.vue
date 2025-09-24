@@ -6,7 +6,7 @@ We are thrilled to introduce Nuxt UI v3, a comprehensive redesign of our UI libr
 
 Read the blog post announcement: https://nuxt.com/blog/nuxt-ui-v3
 
-**[Get started with Nuxt UI v3 →](https://ui.nuxt.com/docs/getting-started/installation/nuxt)**
+**[Get started with Nuxt UI v3 →](https://ui3.nuxt.com/getting-started/installation/nuxt)**
 
 ### 🧩 Reka UI: A New Foundation
 
@@ -38,7 +38,7 @@ We want to be transparent: migrating from Nuxt UI v2 to v3 requires significant 
 
 To upgrade your project:
 
-1. Read our detailed [migration guide](https://ui.nuxt.com/docs/getting-started/migration/v3)
+1. Read our detailed [migration guide](https://ui3.nuxt.com/getting-started/migration)
 2. Review the new documentation and components before attempting to upgrade
 3. Report any issues on our [GitHub repository](https://github.com/nuxt/ui/issues)
 

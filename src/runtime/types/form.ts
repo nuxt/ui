@@ -1,7 +1,5 @@
 import type { StandardSchemaV1 } from '@standard-schema/spec'
 import type { ComputedRef, DeepReadonly, Ref } from 'vue'
-import type { Schema as JoiSchema } from 'joi'
-import type { ObjectSchema as YupObjectSchema } from 'yup'
 import type { GetObjectField } from './utils'
 import type { Struct as SuperstructSchema } from 'superstruct'
 
@@ -22,25 +20,19 @@ export interface Form<S extends FormSchema> {
 }
 
 export type FormSchema<I extends object = object, O extends object = I>
-  = | YupObjectSchema<I>
-    | JoiSchema<I>
-    | SuperstructSchema<any, any>
+  = | SuperstructSchema<any, any>
     | StandardSchemaV1<I, O>
 
 // Define a utility type to infer the input type based on the schema type
 export type InferInput<Schema> = Schema extends StandardSchemaV1 ? StandardSchemaV1.InferInput<Schema>
-  : Schema extends YupObjectSchema<infer I> ? I
-    : Schema extends JoiSchema<infer I> ? I
-      : Schema extends SuperstructSchema<infer I, any> ? I
-        : Schema extends StandardSchemaV1 ? StandardSchemaV1.InferInput<Schema>
-          : never
+  : Schema extends SuperstructSchema<infer I, any> ? I
+    : Schema extends StandardSchemaV1 ? StandardSchemaV1.InferInput<Schema>
+      : never
 
 // Define a utility type to infer the output type based on the schema type
 export type InferOutput<Schema> = Schema extends StandardSchemaV1 ? StandardSchemaV1.InferOutput<Schema>
-  : Schema extends YupObjectSchema<infer O> ? O
-    : Schema extends JoiSchema<infer O> ? O
-      : Schema extends SuperstructSchema<infer O, any> ? O
-        : never
+  : Schema extends SuperstructSchema<infer O, any> ? O
+    : never
 
 export type FormData<S extends FormSchema, T extends boolean = true> = T extends true ? InferOutput<S> : InferInput<S>
 
