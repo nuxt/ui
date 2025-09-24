@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Sebelum'
     },
     chatPrompt: {
-      placeholder: 'Taip mesej anda di sini...'
+      placeholder: 'Taip mesej anda di sini…'
     },
     chatPromptSubmit: {
       label: 'Hantar mesej'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Tutup',
       noData: 'Tiada data',
       noMatch: 'Tiada data yang sepadan',
-      placeholder: 'Taip arahan atau carian...'
+      placeholder: 'Taip arahan atau carian…'
     },
     contentSearch: {
       links: 'Pautan',
       theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Cari...'
+      label: 'Cari…'
     },
     contentToc: {
       title: 'Di halaman ini'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Cari...'
+      label: 'Cari…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Runtuhkan bar sisi',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Cipta "{label}"',
       noData: 'Tiada data',
       noMatch: 'Tiada data yang sepadan',
-      search: 'Cari...'
+      search: 'Cari…'
     },
     slideover: {
       close: 'Tutup'

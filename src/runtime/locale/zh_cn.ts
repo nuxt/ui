@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: '上一页'
     },
     chatPrompt: {
-      placeholder: '在这里输入你的消息...'
+      placeholder: '在这里输入你的消息…'
     },
     chatPromptSubmit: {
       label: '发送'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: '关闭',
       noData: '没有数据',
       noMatch: '没有匹配的数据',
-      placeholder: '输入命令或搜索...'
+      placeholder: '输入命令或搜索…'
     },
     contentSearch: {
       links: '链接',
       theme: '主题'
     },
     contentSearchButton: {
-      label: '搜索...'
+      label: '搜索…'
     },
     contentToc: {
       title: '本页内容'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: '主题'
     },
     dashboardSearchButton: {
-      label: '搜索...'
+      label: '搜索…'
     },
     dashboardSidebarCollapse: {
       collapse: '收起侧边栏',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '创建 "{label}"',
       noData: '没有数据',
       noMatch: '没有匹配的数据',
-      search: '搜索...'
+      search: '搜索…'
     },
     slideover: {
       close: '关闭'

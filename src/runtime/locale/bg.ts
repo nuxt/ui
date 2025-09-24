@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Назад'
     },
     chatPrompt: {
-      placeholder: 'Въведете съобщение...'
+      placeholder: 'Въведете съобщение…'
     },
     chatPromptSubmit: {
       label: 'Изпрати'
@@ -46,7 +46,7 @@ export default defineLocale<Messages>({
       close: 'Затворете',
       noData: 'Няма данни',
       noMatch: 'Няма съвпадение на данни',
-      placeholder: 'Въведете команда или потърсете...'
+      placeholder: 'Въведете команда или потърсете…'
     },
     contentSearch: {
       links: 'Връзки',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Създайте "{label}"',
       noData: 'Няма данни',
       noMatch: 'Няма съвпадение на данни',
-      search: 'Потърсете...'
+      search: 'Потърсете…'
     },
     slideover: {
       close: 'Затворете'

@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Алдыңкы'
     },
     chatPrompt: {
-      placeholder: 'Бул жерге билдирүүңүздү жазыңыз...'
+      placeholder: 'Бул жерге билдирүүңүздү жазыңыз…'
     },
     chatPromptSubmit: {
       label: 'Билдирүү жөнөтүү'
@@ -53,7 +53,7 @@ export default defineLocale<Messages>({
       theme: 'Тема'
     },
     contentSearchButton: {
-      label: 'Издөө...'
+      label: 'Издөө…'
     },
     contentToc: {
       title: 'Бул бетте'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Тема'
     },
     dashboardSearchButton: {
-      label: 'Издөө...'
+      label: 'Издөө…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Каптал тилкесин жыйноо',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" жасоо',
       noData: 'Маалымат жок',
       noMatch: 'Сүйлөшкөн маалыматтар жок',
-      search: 'Издөө...'
+      search: 'Издөө…'
     },
     slideover: {
       close: 'Жабуу'

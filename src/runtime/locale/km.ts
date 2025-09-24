@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'មុន'
     },
     chatPrompt: {
-      placeholder: 'សួរស្រឡាញ់មួយបីនេះមានប្រភេទបានទាមទារទេ...'
+      placeholder: 'សួរស្រឡាញ់មួយបីនេះមានប្រភេទបានទាមទារទេ…'
     },
     chatPromptSubmit: {
       label: 'សាក់'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'បិទ',
       noData: 'មិនមានទិន្នន័យ',
       noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
-      placeholder: 'វាយពាក្យបញ្ជា ឬស្វែងរក...'
+      placeholder: 'វាយពាក្យបញ្ជា ឬស្វែងរក…'
     },
     contentSearch: {
       links: 'តំណភ្ជាប់',
       theme: 'រូបរាង'
     },
     contentSearchButton: {
-      label: 'ស្វែងរក...'
+      label: 'ស្វែងរក…'
     },
     contentToc: {
       title: 'នៅលើទំព័រនេះ'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'រូបរាង'
     },
     dashboardSearchButton: {
-      label: 'ស្វែងរក...'
+      label: 'ស្វែងរក…'
     },
     dashboardSidebarCollapse: {
       collapse: 'បង្រួមបារចំហៀង',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'បង្កើត "{label}"',
       noData: 'មិនមានទិន្នន័យ',
       noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
-      search: 'ស្វែងរក...'
+      search: 'ស្វែងរក…'
     },
     slideover: {
       close: 'បិទ'
