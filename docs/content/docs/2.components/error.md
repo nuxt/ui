@@ -1,7 +1,7 @@
 ---
 title: Error
 description: 'A pre-built error component with NuxtError support.'
-category: page
+category: layout
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -10,17 +10,10 @@ links:
 
 ## Usage
 
-Like the [Main](/docs/components/main) component, the Error component renders a `<main>` element that works together with the [Header](/docs/components/header) component to create a full-height layout that extends to the viewport's available height.
+The Error component renders a `<main>` element that works together with the [Header](/docs/components/header) component to create a full-height layout that extends to the viewport's available height.
 
-::note
-The Header component defines its height through a `--ui-header-height` CSS variable, which you can customize by overriding it in your CSS:
-
-```css
-:root {
-  --ui-header-height: --spacing(16);
-}
-```
-
+::tip{to="/docs/getting-started/theme/css-variables#header"}
+The Error component uses the `--ui-header-height` CSS variable to position itself correctly below the [Header](/docs/components/header).
 ::
 
 ### Error
@@ -128,7 +121,7 @@ const props = defineProps<{
 ```
 
 ::tip
-You might want to replicate the code of your `app.vue` inside your `error.vue` file to have the same layout and features, here is an example: <https://github.com/nuxt/ui/blob/v3/docs/app/error.vue>
+You might want to replicate the code of your `app.vue` inside your `error.vue` file to have the same layout and features, here is an example: <https://github.com/nuxt/ui/blob/v4/docs/app/error.vue>
 ::
 
 ::note
@@ -138,7 +131,9 @@ You can read more about how to handle errors in the [Nuxt documentation](https:/
 <script setup lang="ts">
 const route = useRoute()
 
-const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+const { data: page } = await useAsyncData(route.path, () => {
+  return queryCollection('docs').path(route.path).first()
+})
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }

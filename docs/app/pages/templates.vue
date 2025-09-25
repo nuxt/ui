@@ -33,7 +33,7 @@ defineOgImageComponent('Docs', {
       </template>
 
       <template #links>
-        <FrameworkSelect size="md" class="w-48" />
+        <FrameworkTabs size="md" class="w-48" />
       </template>
     </UPageHero>
 
@@ -41,7 +41,6 @@ defineOgImageComponent('Docs', {
       v-for="(template, index) in page.templates"
       :key="index"
       :title="template.title"
-      :links="template.links"
       :features="template.features"
       orientation="horizontal"
       class="lg:border-t border-default"
@@ -53,6 +52,30 @@ defineOgImageComponent('Docs', {
         links: 'gap-x-3'
       }"
     >
+      <template #links>
+        <UButton v-for="link of template.links" :key="link.label" color="neutral" variant="outline" v-bind="link" />
+
+        <UDropdownMenu
+          :items="[
+            ...template.deploy_links,
+            { label: 'More', icon: 'i-lucide-globe', to: 'https://nuxt.com/deploy', target: '_blank' }
+          ]"
+          :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-auto' }"
+          class="group"
+        >
+          <UButton
+            color="neutral"
+            variant="outline"
+            icon="i-lucide-cloud"
+            trailing-icon="i-lucide-chevron-down"
+            label="Deploy"
+            :ui="{
+              trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
+            }"
+          />
+        </UDropdownMenu>
+      </template>
+
       <template #description>
         <MDC :value="template.description" unwrap="p" :cache-key="`pro-templates-${index}-description`" />
       </template>

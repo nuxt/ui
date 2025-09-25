@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
       prev: 'הקודם'
     },
     chatPrompt: {
-      placeholder: 'כתוב את ההודעה שלך כאן...'
+      placeholder: 'כתוב את ההודעה שלך כאן…'
     },
     chatPromptSubmit: {
       label: 'שלח'
@@ -47,14 +47,14 @@ export default defineLocale<Messages>({
       close: 'סגור',
       noData: 'אין נתונים זמינים',
       noMatch: 'לא נמצאה התאמה',
-      placeholder: 'הקלד פקודה...'
+      placeholder: 'הקלד פקודה…'
     },
     contentSearch: {
       links: 'קישורים',
       theme: 'ערכת נושא'
     },
     contentSearchButton: {
-      label: 'חיפוש...'
+      label: 'חיפוש…'
     },
     contentToc: {
       title: 'בדף זה'
@@ -63,7 +63,7 @@ export default defineLocale<Messages>({
       theme: 'ערכת נושא'
     },
     dashboardSearchButton: {
-      label: 'חיפוש...'
+      label: 'חיפוש…'
     },
     dashboardSidebarCollapse: {
       collapse: 'כווץ סרגל צד',
@@ -117,7 +117,7 @@ export default defineLocale<Messages>({
       create: 'צור "{label}"',
       noData: 'אין נתונים',
       noMatch: 'לא נמצאה התאמה',
-      search: 'חפש...'
+      search: 'חפש…'
     },
     slideover: {
       close: 'סגור'

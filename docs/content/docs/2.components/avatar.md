@@ -11,6 +11,16 @@ links:
 
 The Avatar uses the `<NuxtImg>` component when [`@nuxt/image`](https://github.com/nuxt/image) is installed, falling back to `img` otherwise.
 
+::component-code
+---
+ignore:
+  - src
+props:
+  src: 'https://github.com/benjamincanac.png'
+---
+::
+
+
 ::note
 You can pass any property from the HTML `<img>` element such as `alt`, `loading`, etc.
 ::
@@ -108,6 +118,12 @@ props:
 You can use a [Tooltip](/docs/components/tooltip) component to display a tooltip when hovering the Avatar.
 
 :component-example{name="avatar-tooltip-example"}
+
+### With mask
+
+You can use a CSS mask to display an Avatar with a custom shape instead of a simple circle.
+
+:component-example{name="avatar-mask-example"}
 
 ## API
 

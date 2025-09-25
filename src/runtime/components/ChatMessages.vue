@@ -87,7 +87,7 @@ const props = withDefaults(defineProps<ChatMessagesProps>(), {
 })
 const slots = defineSlots<ChatMessagesSlots>()
 
-const proxySlots = omit(slots, ['default', 'indicator', 'viewport'])
+const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
 
 const appConfig = useAppConfig() as ChatMessages['AppConfig']
 
@@ -268,7 +268,7 @@ onMounted(() => {
         :ref="(el) => registerMessageRef(message.id, el as ComponentPublicInstance)"
         :compact="compact"
       >
-        <template v-for="(_, name) in proxySlots" #[name]>
+        <template v-for="(_, name) in getProxySlots()" #[name]>
           <slot :name="name" v-bind="{ message }" />
         </template>
       </UChatMessage>
@@ -282,13 +282,13 @@ onMounted(() => {
       :compact="compact"
     >
       <template #content>
-        <div :class="ui.indicator({ class: props.ui?.indicator })">
-          <slot name="indicator">
+        <slot name="indicator">
+          <div :class="ui.indicator({ class: props.ui?.indicator })">
             <span />
             <span />
             <span />
-          </slot>
-        </div>
+          </div>
+        </slot>
       </template>
     </UChatMessage>
 

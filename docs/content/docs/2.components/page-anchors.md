@@ -10,6 +10,35 @@ links:
 
 ## Usage
 
+Use the PageAnchors component to display a list of links.
+
+::component-code
+---
+collapse: true
+prettier: true
+ignore:
+  - links
+external:
+  - links
+props:
+  links:
+    - label: 'Documentation'
+      icon: i-lucide-book-open
+      to: /docs/getting-started
+    - label: 'Components'
+      icon: i-lucide-box
+      to: /docs/components
+    - label: 'Figma Kit'
+      icon: i-simple-icons-figma
+      to: https://go.nuxt.com/figma-ui
+      target: _blank
+    - label: 'Releases'
+      icon: i-simple-icons-github
+      to: https://github.com/nuxt/ui/releases
+      target: _blank
+---
+::
+
 ### Links
 
 Use the `links` prop as an array of objects with the following properties:

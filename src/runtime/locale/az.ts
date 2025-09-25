@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Əvvəlki'
     },
     chatPrompt: {
-      placeholder: 'Buraya mesajınızı yazın...'
+      placeholder: 'Buraya mesajınızı yazın…'
     },
     chatPromptSubmit: {
       label: 'Göndər'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Bağla',
       noData: 'Məlumat yoxdur',
       noMatch: 'Uyğun məlumat tapılmadı',
-      placeholder: 'Əmr daxil edin və ya axtarın...'
+      placeholder: 'Əmr daxil edin və ya axtarın…'
     },
     contentSearch: {
       links: 'Bağlantılar',
       theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Axtar...'
+      label: 'Axtar…'
     },
     contentToc: {
       title: 'Bu səhifədə'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Axtar...'
+      label: 'Axtar…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Yan paneli daralt',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" yarat',
       noData: 'Məlumat yoxdur',
       noMatch: 'Uyğun məlumat tapılmadı',
-      search: 'Axtar...'
+      search: 'Axtar…'
     },
     slideover: {
       close: 'Bağla'

@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Nazaj'
     },
     chatPrompt: {
-      placeholder: 'Tukaj napišite svoje sporočilo...'
+      placeholder: 'Tukaj napišite svoje sporočilo…'
     },
     chatPromptSubmit: {
       label: 'Pošlji sporočilo'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Zapri',
       noData: 'Ni podatkov',
       noMatch: 'Ni ujemanj',
-      placeholder: 'Vpiši ukaz ali išči...'
+      placeholder: 'Vpiši ukaz ali išči…'
     },
     contentSearch: {
       links: 'Povezave',
       theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Išči...'
+      label: 'Išči…'
     },
     contentToc: {
       title: 'Na tej strani'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Išči...'
+      label: 'Išči…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Strni stransko vrstico',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Ustvari "{label}"',
       noData: 'Ni podatkov',
       noMatch: 'Ni ujemanj',
-      search: 'Išči...'
+      search: 'Išči…'
     },
     slideover: {
       close: 'Zapri'

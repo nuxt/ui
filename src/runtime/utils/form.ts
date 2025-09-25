@@ -1,16 +1,6 @@
 import type { StandardSchemaV1 } from '@standard-schema/spec'
-import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
-import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { Struct } from 'superstruct'
 import type { FormSchema, ValidateReturnSchema } from '../types/form'
-
-export function isYupSchema(schema: any): schema is YupObjectSchema<any> {
-  return schema.validate && schema.__isYupSchema__
-}
-
-export function isYupError(error: any): error is YupError {
-  return error.inner !== undefined
-}
 
 export function isSuperStructSchema(schema: any): schema is Struct<any, any> {
   return (
@@ -19,14 +9,6 @@ export function isSuperStructSchema(schema: any): schema is Struct<any, any> {
     && typeof schema.validator === 'function'
     && typeof schema.refiner === 'function'
   )
-}
-
-export function isJoiSchema(schema: any): schema is JoiSchema {
-  return schema.validateAsync !== undefined && schema.id !== undefined
-}
-
-export function isJoiError(error: any): error is JoiError {
-  return error.isJoi === true
 }
 
 export function isStandardSchema(schema: any): schema is StandardSchemaV1 {
@@ -55,33 +37,6 @@ export async function validateStandardSchema(
   }
 }
 
-async function validateYupSchema(
-  state: any,
-  schema: YupObjectSchema<any>
-): Promise<ValidateReturnSchema<typeof state>> {
-  try {
-    const result = await schema.validate(state, { abortEarly: false })
-    return {
-      errors: null,
-      result
-    }
-  } catch (error) {
-    if (isYupError(error)) {
-      const errors = error.inner.map(issue => ({
-        name: issue.path ?? '',
-        message: issue.message
-      }))
-
-      return {
-        errors,
-        result: null
-      }
-    } else {
-      throw error
-    }
-  }
-}
-
 async function validateSuperstructSchema(state: any, schema: Struct<any, any>): Promise<ValidateReturnSchema<typeof state>> {
   const [err, result] = schema.validate(state)
   if (err) {
@@ -102,43 +57,60 @@ async function validateSuperstructSchema(state: any, schema: Struct<any, any>): 
   }
 }
 
-async function validateJoiSchema(
-  state: any,
-  schema: JoiSchema
-): Promise<ValidateReturnSchema<typeof state>> {
-  try {
-    const result = await schema.validateAsync(state, { abortEarly: false })
-    return {
-      errors: null,
-      result
-    }
-  } catch (error) {
-    if (isJoiError(error)) {
-      const errors = error.details.map(issue => ({
-        name: issue.path.join('.'),
-        message: issue.message
-      }))
-
-      return {
-        errors,
-        result: null
-      }
-    } else {
-      throw error
-    }
-  }
-}
-
 export function validateSchema<T extends object>(state: T, schema: FormSchema<T>): Promise<ValidateReturnSchema<typeof state>> {
   if (isStandardSchema(schema)) {
     return validateStandardSchema(state, schema)
-  } else if (isJoiSchema(schema)) {
-    return validateJoiSchema(state, schema)
-  } else if (isYupSchema(schema)) {
-    return validateYupSchema(state, schema)
   } else if (isSuperStructSchema(schema)) {
     return validateSuperstructSchema(state, schema)
   } else {
     throw new Error('Form validation failed: Unsupported form schema')
   }
+}
+
+export function getAtPath<T extends object>(
+  data: T,
+  path?: string
+) {
+  if (!path) return data
+  const value = path
+    .split('.')
+    .reduce(
+      (value, key) => (value as any)?.[key],
+      data as any
+    )
+
+  return value
+}
+
+export function setAtPath<T extends object>(
+  data: T,
+  path: string,
+  value: any
+): T {
+  if (!path) return Object.assign(data, value)
+  if (!data) return data
+
+  const keys = path.split('.')
+  let current = data as Record<string, any>
+
+  // Navigate to the parent of the target property
+  for (let i = 0; i < keys.length - 1; i++) {
+    const key = keys[i]!
+    if (current[key] === undefined || current[key] === null) {
+      // If the next key is a number, initialize as array
+      if (i + 1 < keys.length && !Number.isNaN(Number(keys[i + 1]))) {
+        current[key] = []
+      } else {
+        current[key] = {}
+      }
+    }
+
+    current = current[key]
+  }
+
+  // Set the final value
+  const lastKey = keys[keys.length - 1]!
+  current[lastKey] = value
+
+  return data
 }

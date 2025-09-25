@@ -4,7 +4,7 @@ import type { ComponentMeta } from 'vue-component-meta'
 import * as theme from '#build/ui'
 
 const props = withDefaults(defineProps<{
-  name?: string
+  slug?: string
   ignore?: string[]
   prose?: boolean
 }>(), {
@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<{
 
 const route = useRoute()
 
-const camelName = camelCase(props.name ?? route.path.split('/').pop() ?? '')
+const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '')
 const componentName = props.prose ? `Prose${upperFirst(camelName)}` : `U${upperFirst(camelName)}`
 
 const componentTheme = ((props.prose ? theme.prose : theme) as any)[camelName]

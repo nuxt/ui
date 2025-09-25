@@ -48,7 +48,7 @@ const icons = {
     </UPageHero>
 
     <UPageSection :ui="{ container: '!pt-0' }">
-      <UPageGrid class="xl:grid-cols-5">
+      <UPageGrid class="xl:grid-cols-4">
         <UPageCard
           v-for="(user, index) in module?.team"
           :key="index"
@@ -56,7 +56,7 @@ const icons = {
           :description="[user.pronouns, user.location].filter(Boolean).join(' ・ ')"
           :ui="{
             wrapper: 'items-center',
-            container: 'gap-y-4 lg:p-8',
+            container: 'gap-y-4 lg:py-8',
             leading: 'flex justify-center',
             title: 'text-center',
             description: 'text-center text-muted'

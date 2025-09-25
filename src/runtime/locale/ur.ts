@@ -47,14 +47,14 @@ export default defineLocale<Messages>({
       close: 'بند کریں',
       noData: 'کوئی ڈیٹا نہیں',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں...'
+      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں…'
     },
     contentSearch: {
       links: 'لنکس',
       theme: 'تھیم'
     },
     contentSearchButton: {
-      label: 'تلاش کریں...'
+      label: 'تلاش کریں…'
     },
     contentToc: {
       title: 'اس صفحے پر'
@@ -63,7 +63,7 @@ export default defineLocale<Messages>({
       theme: 'تھیم'
     },
     dashboardSearchButton: {
-      label: 'تلاش کریں...'
+      label: 'تلاش کریں…'
     },
     dashboardSidebarCollapse: {
       collapse: 'سائیڈ بار کو سکیڑیں',
@@ -117,7 +117,7 @@ export default defineLocale<Messages>({
       create: '"{label}" بنائیں',
       noData: 'کوئی ڈیٹا نہیں',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      search: 'تلاش کریں...'
+      search: 'تلاش کریں…'
     },
     slideover: {
       close: 'بند کریں'

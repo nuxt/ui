@@ -10,7 +10,8 @@ import type { ComponentConfig } from '../types/tv'
 
 type InputMenu = ComponentConfig<typeof theme, AppConfig, 'inputMenu'>
 
-interface _InputMenuItem {
+export type InputMenuValue = AcceptableValue
+export type InputMenuItem = InputMenuValue | {
   label?: string
   /**
    * @IconifyIcon
@@ -29,7 +30,6 @@ interface _InputMenuItem {
   ui?: Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
-export type InputMenuItem = _InputMenuItem | AcceptableValue | boolean
 
 export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus'>, UseComponentIconsProps {
   /**
@@ -99,7 +99,7 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: keyof NestedItem<T>
+  labelKey?: GetItemKeys<T>
   items?: T
   /** The value of the InputMenu when initially rendered. Use when you do not need to control the state of the InputMenu. */
   defaultValue?: GetModelValue<T, VK, M>
@@ -196,7 +196,7 @@ const props = withDefaults(defineProps<InputMenuProps<T, VK, M>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
-  labelKey: 'label' as never,
+  labelKey: 'label',
   resetSearchTermOnBlur: true,
   resetSearchTermOnSelect: true
 })
@@ -234,8 +234,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
   fieldGroup: orientation.value
 }))
 
+// eslint-disable-next-line vue/no-dupe-keys
+const items = computed(() => groups.value.flatMap(group => group) as T[])
+
 function displayValue(value: GetItemValue<T, VK>): string {
-  return getDisplayValue(items.value, value, {
+  return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value, {
     labelKey: props.labelKey,
     valueKey: props.valueKey
   }) ?? ''
@@ -248,8 +251,6 @@ const groups = computed<InputMenuItem[][]>(() =>
       : [props.items]
     : []
 )
-// eslint-disable-next-line vue/no-dupe-keys
-const items = computed(() => groups.value.flatMap(group => group) as T[])
 
 const filteredGroups = computed(() => {
   if (props.ignoreFilter || !searchTerm.value) {
@@ -388,7 +389,7 @@ function onSelect(e: Event, item: InputMenuItem) {
   item.onSelect?.(e)
 }
 
-function isInputItem(item: InputMenuItem): item is _InputMenuItem {
+function isInputItem(item: InputMenuItem): item is Exclude<InputMenuItem, InputMenuValue> {
   return typeof item === 'object' && item !== null
 }
 
@@ -440,7 +441,7 @@ defineExpose({
         @focus="onFocus"
         @remove-tag="onRemoveTag"
       >
-        <TagsInputItem v-for="(item, index) in tags" :key="index" :value="item" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
+        <TagsInputItem v-for="(item, index) in tags" :key="index" :value="isInputItem(item) ? item : String(item)" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
           <TagsInputItemText :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
             <slot name="tags-item-text" :item="(item as NestedItem<T>)" :index="index">
               {{ displayValue(item as GetItemValue<T, VK>) }}

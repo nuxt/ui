@@ -116,12 +116,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::
 ::
@@ -187,7 +187,7 @@ Use the Banner component in your `app.vue` or in a layout:
 ```vue [app.vue]{3}
 <template>
   <UApp>
-    <UBanner icon="i-lucide-construction" title="Nuxt UI v3 has been released!" />
+    <UBanner icon="i-lucide-construction" title="Nuxt UI v4 has been released!" />
 
     <UHeader />
 

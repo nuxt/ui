@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Präz.'
     },
     chatPrompt: {
-      placeholder: 'Tippt hei Äre Message...'
+      placeholder: 'Tippt hei Äre Message…'
     },
     chatPromptSubmit: {
       label: 'Prompt schécken'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Zoumaachen',
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      placeholder: 'Tippt e Befeel oder sicht...'
+      placeholder: 'Tippt e Befeel oder sicht…'
     },
     contentSearch: {
       links: 'Linken',
       theme: 'Thema'
     },
     contentSearchButton: {
-      label: 'Sichen...'
+      label: 'Sichen…'
     },
     contentToc: {
       title: 'Op dëser Säit'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Thema'
     },
     dashboardSearchButton: {
-      label: 'Sichen...'
+      label: 'Sichen…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Sidebar zouklappen',

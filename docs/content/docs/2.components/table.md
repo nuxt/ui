@@ -347,7 +347,7 @@ class: '!p-0'
 You can use this to navigate to a page, open a modal or even to select the row manually.
 ::
 
-### With row context menu event :badge{label="New" class="align-text-top"}
+### With row context menu event
 
 You can add a `@contextmenu` listener to make rows right clickable and wrap the Table in a [ContextMenu](/docs/components/context-menu) component to display row actions for example.
 
@@ -367,7 +367,7 @@ class: '!p-0'
 ---
 ::
 
-### With row hover event :badge{label="New" class="align-text-top"}
+### With row hover event
 
 You can add a `@hover` listener to make rows hoverable and use a [Popover](/docs/components/popover) or a [Tooltip](/docs/components/tooltip) component to display row details for example.
 
@@ -391,7 +391,7 @@ class: '!p-0'
 This example is similar as the Popover [with following cursor example](/docs/components/popover#with-following-cursor) and uses a [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to prevent the Popover from opening and closing too quickly when moving the cursor from one row to another.
 ::
 
-### With column footer :badge{label="New" class="align-text-top"}
+### With column footer
 
 You can add a `footer` property to the column definition to render a footer for the column.
 
@@ -574,7 +574,7 @@ class: '!p-0'
 
 ### With drag and drop
 
-Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Table. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
+You can use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Table. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
 
 ::note
 Since the table ref doesn't expose the tbody element, add a unique class to it via the `:ui` prop to target it with `useSortable` (e.g. `:ui="{ tbody: 'my-table-tbody' }"`).
@@ -585,6 +585,22 @@ Since the table ref doesn't expose the tbody element, add a unique class to it v
 prettier: true
 collapse: true
 name: 'table-drag-and-drop-example'
+class: '!p-0'
+---
+::
+
+### With tree data
+
+You can use the `get-sub-rows` prop to display hierarchical (tree) data in the table.
+For example, if your data objects have a `children` array, set `:get-sub-rows="row => row.children"` to enable expandable rows.
+
+::component-example
+---
+prettier: true
+collapse: true
+highlights:
+  - 168
+name: 'table-tree-data-example'
 class: '!p-0'
 ---
 ::

@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'পূর্ববর্তী'
     },
     chatPrompt: {
-      placeholder: 'এখানে আপনার বার্তা লিখুন...'
+      placeholder: 'এখানে আপনার বার্তা লিখুন…'
     },
     chatPromptSubmit: {
       label: 'প্রেরণ করুন'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'বন্ধ করুন',
       noData: 'কোন তথ্য নেই',
       noMatch: 'কোন মিল পাওয়া যায়নি',
-      placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন...'
+      placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন…'
     },
     contentSearch: {
       links: 'লিংকসমূহ',
       theme: 'থিম'
     },
     contentSearchButton: {
-      label: 'অনুসন্ধান করুন...'
+      label: 'অনুসন্ধান করুন…'
     },
     contentToc: {
       title: 'এই পৃষ্ঠায়'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'থিম'
     },
     dashboardSearchButton: {
-      label: 'অনুসন্ধান করুন...'
+      label: 'অনুসন্ধান করুন…'
     },
     dashboardSidebarCollapse: {
       collapse: 'সাইডবার সংকুচিত করুন',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" তৈরি করুন',
       noData: 'কোন তথ্য নেই',
       noMatch: 'কোন মিল পাওয়া যায়নি',
-      search: 'অনুসন্ধান করুন...'
+      search: 'অনুসন্ধান করুন…'
     },
     slideover: {
       close: 'বন্ধ করুন'

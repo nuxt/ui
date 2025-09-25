@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: '이전'
     },
     chatPrompt: {
-      placeholder: '여기에 메시지를 입력하세요...'
+      placeholder: '여기에 메시지를 입력하세요…'
     },
     chatPromptSubmit: {
       label: '전송'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: '닫기',
       noData: '데이터가 없습니다.',
       noMatch: '일치하는 데이터가 없습니다.',
-      placeholder: '명령을 입력하거나 검색...'
+      placeholder: '명령을 입력하거나 검색…'
     },
     contentSearch: {
       links: '링크',
       theme: '테마'
     },
     contentSearchButton: {
-      label: '검색...'
+      label: '검색…'
     },
     contentToc: {
       title: '이 페이지에서'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: '테마'
     },
     dashboardSearchButton: {
-      label: '검색...'
+      label: '검색…'
     },
     dashboardSidebarCollapse: {
       collapse: '사이드바 축소',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" 생성',
       noData: '데이터가 없습니다.',
       noMatch: '일치하는 데이터가 없습니다.',
-      search: '검색...'
+      search: '검색…'
     },
     slideover: {
       close: '닫기'

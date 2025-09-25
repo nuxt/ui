@@ -63,8 +63,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {
 }
 
 @keyframes marquee-rtl {
-  from { transform: translate3d(calc(100%), 0, 0); will-change: transform; }
-  to { transform: translate3d(calc(-100% * var(--repeat) - var(--gap) * var(--repeat)), 0, 0); will-change: transform; }
+  from { transform: translate3d(0, 0, 0); will-change: transform; }
+  to { transform: translate3d(calc(100% + var(--gap)), 0, 0); will-change: transform; }
 }
 
 @keyframes marquee-vertical {
@@ -73,7 +73,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {
 }
 
 @keyframes marquee-vertical-rtl {
-  from { transform: translate3d(0, calc(100%), 0); will-change: transform; }
-  to { transform: translate3d(0, calc(-100% * var(--repeat) - var(--gap) * var(--repeat)), 0); will-change: transform; }
+  from { transform: translate3d(0, calc(-100% - var(--gap)), 0); will-change: transform; }
+  to { transform: translate3d(0, calc(-100% * var(--gap)), 0); will-change: transform; }
 }
 </style>

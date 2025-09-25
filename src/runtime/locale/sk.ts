@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Predchádzajúci'
     },
     chatPrompt: {
-      placeholder: 'Tu napíšte svoje správu...'
+      placeholder: 'Tu napíšte svoje správu…'
     },
     chatPromptSubmit: {
       label: 'Odoslať'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Zavrieť',
       noData: 'Žiadne dáta',
       noMatch: 'Žiadna zhoda',
-      placeholder: 'Zadajte príkaz alebo vyhľadajte...'
+      placeholder: 'Zadajte príkaz alebo vyhľadajte…'
     },
     contentSearch: {
       links: 'Odkazy',
       theme: 'Téma'
     },
     contentSearchButton: {
-      label: 'Hľadať...'
+      label: 'Hľadať…'
     },
     contentToc: {
       title: 'Na tejto stránke'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Téma'
     },
     dashboardSearchButton: {
-      label: 'Hľadať...'
+      label: 'Hľadať…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Zbaliť bočný panel',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Vytvoriť "{label}"',
       noData: 'Žiadne dáta',
       noMatch: 'Žiadna zhoda',
-      search: 'Hľadať...'
+      search: 'Hľadať…'
     },
     slideover: {
       close: 'Zatvoriť'

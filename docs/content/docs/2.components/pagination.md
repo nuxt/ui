@@ -14,6 +14,21 @@ links:
 
 Use the `default-page` prop or the `v-model:page` directive to control the current page.
 
+::component-code
+---
+external:
+  - page
+model:
+  - page
+ignore:
+  - page
+  - total
+props:
+  page: 5
+  total: 100
+---
+::
+
 ::note
 The Pagination component uses some [`Button`](/docs/components/button) to display the pages, use [`color`](#color), [`variant`](#variant) and [`size`](#size) props to style them.
 ::

@@ -4,7 +4,7 @@ const cards = ref([
     title: 'Theme',
     description: 'Learn how to customize Nuxt UI components using Tailwind CSS v4.',
     icon: 'i-lucide-swatch-book',
-    to: '/docs/getting-started/theme',
+    to: '/docs/getting-started/theme/design-system',
     class: 'lg:col-span-2',
     image: {
       path: 'https://ui2.nuxt.com/illustrations/color-palette',
@@ -17,21 +17,21 @@ const cards = ref([
     title: 'Fonts',
     description: 'Nuxt UI integrates with Nuxt Fonts to provide plug-and-play font optimization.',
     icon: 'i-lucide-a-large-small',
-    to: '/docs/getting-started/fonts',
+    to: '/docs/getting-started/integrations/fonts',
     variant: 'soft' as const
   },
   {
     title: 'Color Mode',
     description: 'Nuxt UI integrates with Nuxt Color Mode to switch between light and dark.',
     icon: 'i-lucide-sun-moon',
-    to: '/docs/getting-started/color-mode',
+    to: '/docs/getting-started/integrations/color-mode',
     variant: 'soft' as const
   },
   {
     title: 'Icons',
     description: 'Nuxt UI integrates with Nuxt Icon to access over 200,000+ icons from Iconify.',
     icon: 'i-lucide-smile',
-    to: '/docs/getting-started/icons',
+    to: '/docs/getting-started/integrations/icons',
     image: {
       path: 'https://ui2.nuxt.com/illustrations/icon-library',
       width: 362,

@@ -146,43 +146,50 @@ onBeforeUpdate(() => rerenderCount.value++)
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <DefineTreeTemplate v-slot="{ items, level }">
-    <li
+    <TreeItem
       v-for="(item, index) in items"
       :key="`${level}-${index}`"
-      :class="level > 0 ? ui.itemWithChildren({ class: props.ui?.itemWithChildren }) : ui.item({ class: props.ui?.item })"
+      v-slot="{ isExpanded, isSelected }"
+      :level="level"
+      :value="item"
+      :class="level > 1 ? ui.itemWithChildren({ class: props.ui?.itemWithChildren }) : ui.item({ class: props.ui?.item })"
     >
-      <TreeItem
-        v-slot="{ isExpanded, isSelected }"
-        as-child
-        :level="level"
-        :value="item"
+      <button
+        type="button"
+        :data-expanded="isExpanded"
+        :class="ui.link({ class: props.ui?.link, active: isSelected })"
       >
-        <button :class="ui.link({ class: props.ui?.link, active: isSelected })">
+        <UIcon
+          v-if="item.children?.length"
+          :name="isExpanded ? appConfig.ui.icons.folderOpen : appConfig.ui.icons.folder"
+          :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon })"
+        />
+        <UCodeIcon
+          v-else
+          :filename="item.label"
+          :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon })"
+        />
+
+        <span :class="ui.linkLabel({ class: props.ui?.linkLabel })">
+          {{ item.label }}
+        </span>
+
+        <span v-if="item.children?.length" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
           <UIcon
-            v-if="item.children?.length"
-            :name="isExpanded ? appConfig.ui.icons.folderOpen : appConfig.ui.icons.folder"
-            :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon })"
+            :name="appConfig.ui.icons.chevronDown"
+            :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon })"
           />
-          <UCodeIcon
-            v-else
-            :filename="item.label"
-            :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon })"
-          />
+        </span>
+      </button>
 
-          <span :class="ui.linkLabel({ class: props.ui?.linkLabel })">
-            {{ item.label }}
-          </span>
-
-          <span v-if="item.children?.length" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
-            <UIcon :name="appConfig.ui.icons.chevronDown" :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon })" />
-          </span>
-        </button>
-
-        <ul v-if="item.children?.length && isExpanded" :class="ui.listWithChildren({ class: props.ui?.listWithChildren })">
-          <ReuseTreeTemplate :items="item.children" :level="level + 1" />
-        </ul>
-      </TreeItem>
-    </li>
+      <ul
+        v-if="item.children?.length && isExpanded"
+        role="group"
+        :class="ui.listWithChildren({ class: props.ui?.listWithChildren })"
+      >
+        <ReuseTreeTemplate :items="item.children" :level="level + 1" />
+      </ul>
+    </TreeItem>
   </DefineTreeTemplate>
 
   <div v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
@@ -193,7 +200,7 @@ onBeforeUpdate(() => rerenderCount.value++)
       :get-key="(item) => item.path"
       :default-expanded="expanded"
     >
-      <ReuseTreeTemplate :items="items" :level="0" />
+      <ReuseTreeTemplate :items="items" :level="1" />
     </TreeRoot>
 
     <div :class="ui.content({ class: props.ui?.content })">

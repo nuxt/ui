@@ -54,8 +54,6 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   decrementDisabled?: boolean
   autofocus?: boolean
   autofocusDelay?: number
-  modelValue?: number
-  defaultValue?: number
   modelModifiers?: Pick<ModelModifiers, 'optional'>
   /**
    * The locale to use for formatting and parsing numbers.

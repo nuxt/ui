@@ -29,15 +29,29 @@ Learn how to display shortcuts in components in the **Kbd** component documentat
 
 ## API
 
-### `defineShortcuts(config: ShortcutsConfig, options?: ShortcutsOptions)`
+`defineShortcuts(config: ShortcutsConfig, options?: ShortcutsOptions): void`{lang="ts-type"}
 
 Define keyboard shortcuts for your application.
 
-- `config`: An object where keys are shortcut definitions and values are either handler functions or shortcut configuration objects.
-- `options`: Optional configuration for the shortcuts behavior.
-  - `chainDelay`: The delay between key presses to consider the shortcut as chained. Default is `250`.
+#### Parameters
 
-#### Shortcut Definition
+::field-group
+  ::field{name="config" type="ShortcutsConfig" required}
+  An object where keys are shortcut definitions and values are either handler functions or shortcut configuration objects.
+  ::
+
+  ::field{name="options" type="ShortcutsOptions"}
+  Optional configuration for the shortcuts behavior.
+
+  ::collapsible
+    ::field{name="chainDelay" type="number"}
+    The delay between key presses to consider the shortcut as chained. Default is `250`.
+    ::
+  ::
+  ::
+::
+
+#### Shortcut definition
 
 Shortcuts are defined using the following format:
 
@@ -51,28 +65,32 @@ Shortcuts are defined using the following format:
 - `ctrl`: Represents `Ctrl` on all platforms
 - `shift`: Used for alphabetic keys when Shift is required
 
-#### Special Keys
+#### Special keys
 
 - `escape`: Triggers on Esc key
 - `enter`: Triggers on Enter key
 - `arrowleft`, `arrowright`, `arrowup`, `arrowdown`: Trigger on respective arrow keys
 
-#### Shortcut Configuration
+#### Shortcut configuration
 
 Each shortcut can be defined as a function or an object with the following properties:
 
-```ts
-interface ShortcutConfig {
-  handler: () => void
-  usingInput?: boolean | string
-}
-```
+`interface ShortcutConfig { handler: () => void; usingInput?: boolean | string }`{lang="ts-type"}
 
-- `handler`: Function to be executed when the shortcut is triggered
-- `usingInput`:
+#### Parameters
+
+::field-group
+  ::field{name="handler" type="() => void" required}
+  Function to be executed when the shortcut is triggered.
+  ::
+
+  ::field{name="usingInput" type="boolean | string"}
+  Controls when the shortcut should trigger based on input focus:
   - `false` (default): Shortcut only triggers when no input is focused
   - `true`: Shortcut triggers even when any input is focused
   - `string`: Shortcut only triggers when the specified input (by name) is focused
+  ::
+::
 
 ## Examples
 
