@@ -27,16 +27,41 @@ Learn how to customize the appearance and behavior of toasts in the **Toast** co
 
 ## API
 
-### `add(toast: Partial<Toast>): Toast`
+`useToast()`{lang="ts-type"}
+
+The `useToast` composable provides methods to manage toast notifications globally.
+
+### add()
+
+`add(toast: Partial<Toast>): Toast`{lang="ts-type"}
 
 Adds a new toast notification.
 
-- Parameters:
-  - `toast`: A partial `Toast` object with the following properties:
-    - `id` (optional): A unique identifier for the toast. If not provided, a timestamp will be used.
-    - `open` (optional): Whether the toast is open. Defaults to `true`.
-    - Other properties from the `Toast` interface.
-- Returns: The complete `Toast` object that was added.
+#### Parameters
+
+::field-group
+  ::field{name="toast" type="Partial<Toast>" required}
+  A partial `Toast` object with the following properties:
+
+  ::collapsible
+    ::field-group
+      ::field{name="id" type="string | number"}
+      A unique identifier for the toast. If not provided, a timestamp will be used.
+      ::
+
+      ::field{name="open" type="boolean"}
+      Whether the toast is open. Defaults to `true`.
+      ::
+
+      ::field{name="..." type="Toast"}
+      Other properties from the `Toast` interface.
+      ::
+    ::
+  ::
+  ::
+::
+
+**Returns:** The complete `Toast` object that was added.
 
 ```vue
 <script setup lang="ts">
@@ -52,13 +77,23 @@ function showToast() {
 </script>
 ```
 
-### `update(id: string | number, toast: Partial<Toast>)`
+### update()
+
+`update(id: string | number, toast: Partial<Toast>): void`{lang="ts-type"}
 
 Updates an existing toast notification.
 
-- Parameters:
-  - `id`: The unique identifier of the toast to update.
-  - `toast`: A partial `Toast` object with the properties to update.
+#### Parameters
+
+::field-group
+  ::field{name="id" type="string | number" required}
+  The unique identifier of the toast to update.
+  ::
+
+  ::field{name="toast" type="Partial<Toast>" required}
+  A partial `Toast` object with the properties to update.
+  ::
+::
 
 ```vue
 <script setup lang="ts">
@@ -73,12 +108,19 @@ function updateToast(id: string | number) {
 </script>
 ```
 
-### `remove(id: string | number)`
+### remove()
+
+`remove(id: string | number): void`{lang="ts-type"}
 
 Removes a toast notification.
 
-- Parameters:
-  - `id`: The unique identifier of the toast to remove.
+#### Parameters
+
+::field-group
+  ::field{name="id" type="string | number" required}
+  The unique identifier of the toast to remove.
+  ::
+::
 
 ```vue
 <script setup lang="ts">
@@ -90,7 +132,9 @@ function removeToast(id: string | number) {
 </script>
 ```
 
-### `clear()`
+### clear()
+
+`clear(): void`{lang="ts-type"}
 
 Removes all toast notifications.
 
@@ -105,6 +149,8 @@ function clearAllToasts() {
 ```
 
 ### `toasts`
+
+`toasts: Ref<Toast[]>`{lang="ts-type"}
 
 - Type: `Ref<Toast[]>`
 - Description: A reactive array containing all current toast notifications.

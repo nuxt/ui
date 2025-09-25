@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Өмнөх'
     },
     chatPrompt: {
-      placeholder: 'Энд мессежээ бичнэ үү...'
+      placeholder: 'Энд мессежээ бичнэ үү…'
     },
     chatPromptSubmit: {
       label: 'Мессеж илгээх'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Хаах',
       noData: 'Мэдээлэл байхгүй',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      placeholder: 'Комманд бичих эсвэл хайлт хийх...'
+      placeholder: 'Комманд бичих эсвэл хайлт хийх…'
     },
     contentSearch: {
       links: 'Холбоосууд',
       theme: 'Загвар'
     },
     contentSearchButton: {
-      label: 'Хайх...'
+      label: 'Хайх…'
     },
     contentToc: {
       title: 'Энэ хуудсанд'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Загвар'
     },
     dashboardSearchButton: {
-      label: 'Хайх...'
+      label: 'Хайх…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Хажуугийн самбарыг хураах',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" үүсгэх',
       noData: 'Мэдээлэл байхгүй',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      search: 'Хайх...'
+      search: 'Хайх…'
     },
     slideover: {
       close: 'Хаах'

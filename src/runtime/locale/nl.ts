@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Vorige'
     },
     chatPrompt: {
-      placeholder: 'Schrijf hier je bericht...'
+      placeholder: 'Schrijf hier je bericht…'
     },
     chatPromptSubmit: {
       label: 'Versturen'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Sluiten',
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      placeholder: 'Typ een commando of zoek...'
+      placeholder: 'Typ een commando of zoek…'
     },
     contentSearch: {
       links: 'Links',
       theme: 'Thema'
     },
     contentSearchButton: {
-      label: 'Zoeken...'
+      label: 'Zoeken…'
     },
     contentToc: {
       title: 'Op deze pagina'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Thema'
     },
     dashboardSearchButton: {
-      label: 'Zoeken...'
+      label: 'Zoeken…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Zijbalk invouwen',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" creëren',
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      search: 'Zoeken...'
+      search: 'Zoeken…'
     },
     slideover: {
       close: 'Sluiten'

@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
       prev: 'السابق'
     },
     chatPrompt: {
-      placeholder: 'اكتب رسالتك هنا...'
+      placeholder: 'اكتب رسالتك هنا…'
     },
     chatPromptSubmit: {
       label: 'إرسال'
@@ -47,14 +47,14 @@ export default defineLocale<Messages>({
       close: 'إغلاق',
       noData: 'لا توجد بيانات',
       noMatch: 'لا توجد نتائج مطابقة',
-      placeholder: 'اكتب أمرًا أو ابحث...'
+      placeholder: 'اكتب أمرًا أو ابحث…'
     },
     contentSearch: {
       links: 'الروابط',
       theme: 'السمة'
     },
     contentSearchButton: {
-      label: 'بحث...'
+      label: 'بحث…'
     },
     contentToc: {
       title: 'في هذه الصفحة'
@@ -63,7 +63,7 @@ export default defineLocale<Messages>({
       theme: 'السمة'
     },
     dashboardSearchButton: {
-      label: 'بحث...'
+      label: 'بحث…'
     },
     dashboardSidebarCollapse: {
       collapse: 'طي الشريط الجانبي',
@@ -117,7 +117,7 @@ export default defineLocale<Messages>({
       create: 'إنشاء "{label}"',
       noData: 'لا توجد بيانات',
       noMatch: 'لا توجد نتائج مطابقة',
-      search: 'بحث...'
+      search: 'بحث…'
     },
     slideover: {
       close: 'إغلاق'

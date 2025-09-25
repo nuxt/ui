@@ -27,7 +27,7 @@ export default defineNuxtConfig({
   },
   $production: {
     site: {
-      url: 'https://ui4.nuxt.com'
+      url: 'https://ui.nuxt.com'
     }
   },
 
@@ -98,6 +98,7 @@ export default defineNuxtConfig({
     '/pro': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/pro/pricing': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/pro/purchase': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
+    '/pro/activate': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/pro/templates': { redirect: { to: '/templates', statusCode: 301 }, prerender: false },
     '/docs/getting-started/license': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/docs/getting-started/installation/pro': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
@@ -224,7 +225,7 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://ui4.nuxt.com',
+    domain: 'https://ui.nuxt.com',
     title: 'Nuxt UI',
     description: 'A comprehensive, Nuxt-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.',
     full: {

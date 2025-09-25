@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
       prev: 'پێشووی'
     },
     chatPrompt: {
-      placeholder: 'هەڵەیەک لەسەر چاپەکەت بنووسە...'
+      placeholder: 'هەڵەیەک لەسەر چاپەکەت بنووسە…'
     },
     chatPromptSubmit: {
       label: 'پێچەوە'
@@ -47,14 +47,14 @@ export default defineLocale<Messages>({
       close: 'داخستن',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      placeholder: 'فەرمانێک بنووسە یان بگەڕێ...'
+      placeholder: 'فەرمانێک بنووسە یان بگەڕێ…'
     },
     contentSearch: {
       links: 'بەستەرەکان',
       theme: 'ڕووکار'
     },
     contentSearchButton: {
-      label: 'گەڕان...'
+      label: 'گەڕان…'
     },
     contentToc: {
       title: 'لەم پەڕەیەدا'
@@ -63,7 +63,7 @@ export default defineLocale<Messages>({
       theme: 'ڕووکار'
     },
     dashboardSearchButton: {
-      label: 'گەڕان...'
+      label: 'گەڕان…'
     },
     dashboardSidebarCollapse: {
       collapse: 'داخستنی لای تەنیشت',
@@ -117,7 +117,7 @@ export default defineLocale<Messages>({
       create: '"{label}" دروستکردنی',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      search: 'گەڕان...'
+      search: 'گەڕان…'
     },
     slideover: {
       close: 'داخستن'

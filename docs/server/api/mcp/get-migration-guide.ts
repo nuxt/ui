@@ -29,7 +29,7 @@ export default defineCachedEventHandler(async (event) => {
     description: page.description,
     path: page.path,
     documentation,
-    url: `https://ui4.nuxt.com${page.path}`
+    url: `https://ui.nuxt.com${page.path}`
   }
 }, {
   name: 'mcp-get-migration-guide',

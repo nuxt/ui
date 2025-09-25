@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Eel'
     },
     chatPrompt: {
-      placeholder: 'Siia kirjutage oma sõnum...'
+      placeholder: 'Siia kirjutage oma sõnum…'
     },
     chatPromptSubmit: {
       label: 'Saada'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Sulge',
       noData: 'Pole andmeid',
       noMatch: 'Pole vastavaid andmeid',
-      placeholder: 'Sisesta käsk või otsi...'
+      placeholder: 'Sisesta käsk või otsi…'
     },
     contentSearch: {
       links: 'Lingid',
       theme: 'Teema'
     },
     contentSearchButton: {
-      label: 'Otsi...'
+      label: 'Otsi…'
     },
     contentToc: {
       title: 'Sellel lehel'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Teema'
     },
     dashboardSearchButton: {
-      label: 'Otsi...'
+      label: 'Otsi…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Ahenda külgriba',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Loo "{label}"',
       noData: 'Pole andmeid',
       noMatch: 'Pole vastavaid andmeid',
-      search: 'Otsi...'
+      search: 'Otsi…'
     },
     slideover: {
       close: 'Sulge'
