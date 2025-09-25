@@ -1,5 +1,7 @@
 # Changelog
 
+## [4.0.0](https://github.com/nuxt/ui/compare/v4.0.0-beta.0...v4.0.0) (2025-09-23)
+
 ## [4.0.0-beta.0](https://github.com/nuxt/ui/compare/v4.0.0-alpha.2...v4.0.0-beta.0) (2025-09-22)
 
 ### Bug Fixes

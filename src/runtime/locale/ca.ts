@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Anterior'
     },
     chatPrompt: {
-      placeholder: 'Escriu el teu missatge aquí...'
+      placeholder: 'Escriu el teu missatge aquí…'
     },
     chatPromptSubmit: {
       label: 'Enviar'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Tancar',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      placeholder: 'Escriu una ordre o cerca...'
+      placeholder: 'Escriu una ordre o cerca…'
     },
     contentSearch: {
       links: 'Enllaços',
       theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Cercar...'
+      label: 'Cercar…'
     },
     contentToc: {
       title: 'En aquesta pàgina'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Cercar...'
+      label: 'Cercar…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Contraure barra lateral',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Crear "{label}"',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca...'
+      search: 'Cerca…'
     },
     slideover: {
       close: 'Tancar'

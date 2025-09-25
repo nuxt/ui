@@ -40,7 +40,7 @@ export default defineCachedEventHandler(async (event) => {
     // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
     category: page.category,
     documentation,
-    documentation_url: `https://ui4.nuxt.com${page.path}`
+    documentation_url: `https://ui.nuxt.com${page.path}`
   }
 }, {
   name: 'mcp-get-component',

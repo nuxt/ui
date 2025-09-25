@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Փակել',
       noData: 'Տվյալներ չկան',
       noMatch: 'Համընկնումներ չեն գտնվել',
-      placeholder: 'Մուտքագրեք հրաման կամ որոնեք...'
+      placeholder: 'Մուտքագրեք հրաման կամ որոնեք…'
     },
     contentSearch: {
       links: 'Հղումներ',
       theme: 'Թեմա'
     },
     contentSearchButton: {
-      label: 'Որոնել...'
+      label: 'Որոնել…'
     },
     contentToc: {
       title: 'Այս էջում'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Թեմա'
     },
     dashboardSearchButton: {
-      label: 'Որոնել...'
+      label: 'Որոնել…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Կոլապսել կողային վահանակը',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Ստեղծել "{label}"',
       noData: 'Տվյալներ չկան',
       noMatch: 'Համընկնումներ չեն գտնվել',
-      search: 'Որոնում...'
+      search: 'Որոնում…'
     },
     slideover: {
       close: 'Փակել'

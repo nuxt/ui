@@ -24,7 +24,7 @@ useHead({
   ],
   link: [
     // { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    { rel: 'canonical', href: `https://ui4.nuxt.com${withoutTrailingSlash(route.path)}` }
+    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
   ],
   style: [
     { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 },
@@ -58,7 +58,7 @@ provide('navigation', rootNavigation)
 
     <div :class="[(route.path.startsWith('/docs/') || route.path.startsWith('/blocks/')) && 'root']">
       <template v-if="!route.path.startsWith('/examples')">
-        <!-- <Banner /> -->
+        <Banner />
 
         <Header />
       </template>
@@ -93,7 +93,7 @@ provide('navigation', rootNavigation)
 
 @media (min-width: 1024px) {
   .root {
-    --ui-header-height: 113px;
+    --ui-header-height: 112px;
   }
 }
 </style>
