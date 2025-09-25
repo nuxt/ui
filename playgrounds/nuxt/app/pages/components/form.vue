@@ -6,8 +6,8 @@ import FormExampleNestedList from '../../../../../docs/app/components/content/ex
 import FormExampleNested from '../../../../../docs/app/components/content/examples/form/FormExampleNested.vue'
 
 const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
+  email: z.email(),
+  password: z.string('Password is required').min(8),
   tos: z.literal(true)
 })
 
