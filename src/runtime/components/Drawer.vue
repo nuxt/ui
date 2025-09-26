@@ -100,7 +100,7 @@ const contentEvents = computed(() => {
       acc[curr] = (e: Event) => {
         e.preventDefault()
       }
-      
+
       return acc
     }, defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (e: Event) => void>)
   }

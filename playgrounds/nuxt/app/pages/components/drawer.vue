@@ -29,11 +29,23 @@ const interactiveDrawerOpen = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer v-model:open="interactiveDrawerOpen" :dismissible="false"  :overlay="false" :handle="false" :modal="false" title="Drawer with interactive background" :inset="inset" direction="bottom" :ui="{ header: 'flex items-center justify-between' }">
+    <UDrawer
+      v-model:open="interactiveDrawerOpen"
+      :dismissible="false"
+      :overlay="false"
+      :handle="false"
+      :modal="false"
+      title="Drawer with interactive background"
+      :inset="inset"
+      direction="bottom"
+      :ui="{ header: 'flex items-center justify-between' }"
+    >
       <UButton color="neutral" variant="outline" label="Open with interactive background" />
 
       <template #header>
-        <h2 class="text-highlighted font-semibold">Drawer non-dismissible</h2>
+        <h2 class="text-highlighted font-semibold">
+          Drawer non-dismissible
+        </h2>
 
         <UButton id="close" color="neutral" variant="ghost" icon="i-lucide-x" @click="interactiveDrawerOpen = false" />
       </template>
