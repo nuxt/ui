@@ -169,7 +169,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pagination |
 
         <PaginationEllipsis v-else :key="item.type" :index="index" as-child :class="ui.ellipsis({ class: props.ui?.ellipsis })">
           <slot name="ellipsis">
-            <UButton :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" />
+            <UButton as="div" :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" />
           </slot>
         </PaginationEllipsis>
       </template>
