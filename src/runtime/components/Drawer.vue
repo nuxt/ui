@@ -85,9 +85,28 @@ const appConfig = useAppConfig() as Drawer['AppConfig']
 const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
-const contentEvents = {
-  closeAutoFocus: (e: Event) => e.preventDefault()
-}
+
+// Handle dismissal behavior similar to Modal and Slideover components
+const contentEvents = computed(() => {
+  const defaultEvents = {
+    closeAutoFocus: (e: Event) => e.preventDefault()
+  }
+
+  // If dismissible is false, prevent interaction outside events
+  if (!props.dismissible) {
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
+
+    return events.reduce((acc, curr) => {
+      acc[curr] = (e: Event) => {
+        e.preventDefault()
+      }
+      
+      return acc
+    }, defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (e: Event) => void>)
+  }
+
+  return defaultEvents
+})
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })({
   direction: props.direction,
