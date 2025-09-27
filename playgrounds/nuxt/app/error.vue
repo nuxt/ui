@@ -36,7 +36,7 @@ provide('components', components)
       </UDashboardSidebar>
 
       <UDashboardPanel>
-        <UDashboardNavbar class="lg:border-b-0" />
+        <UDashboardNavbar class="border-b-0" />
 
         <UError :error="error" />
       </UDashboardPanel>

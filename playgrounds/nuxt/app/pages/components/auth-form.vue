@@ -51,7 +51,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
 <template>
   <Navbar />
 
-  <UCard>
+  <UCard class="shrink-0">
     <UAuthForm
       :schema="schema"
       title="Login"

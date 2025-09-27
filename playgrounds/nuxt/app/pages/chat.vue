@@ -30,10 +30,10 @@ function handleSubmit(e: Event) {
 </script>
 
 <template>
-  <UDashboardNavbar class="absolute top-0 inset-x-0 lg:border-b-0" />
+  <UDashboardNavbar class="absolute top-0 inset-x-0 z-5 border-b-0" />
 
-  <div class="flex-1 flex flex-col gap-4 sm:gap-6 max-w-3xl w-full mx-auto">
-    <UChatMessages :messages="chat.messages" :status="chat.status" :user="{ avatar: { src: 'https://github.com/benjamincanac.png' } }" class="lg:pt-(--ui-header-height) pb-4 sm:pb-6">
+  <div class="flex-1 flex flex-col gap-4 sm:gap-6 max-w-xl w-full mx-auto min-h-0">
+    <UChatMessages :messages="chat.messages" :status="chat.status" :user="{ avatar: { src: 'https://github.com/benjamincanac.png' } }">
       <template #content="{ message }">
         <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
       </template>
