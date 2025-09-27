@@ -81,7 +81,7 @@ const appConfig = useAppConfig() as Checkbox['AppConfig']
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
 
 const { emitFormChange, emitFormInput, size, color, name, disabled } = useFormField<CheckboxProps>(props)
-const { controlProps, field: { isDisabled } } = useCustomControl<boolean>({
+const { controlId, controlProps, field: { isDisabled } } = useCustomControl<boolean>({
   name,
   disabled,
   required: props.required,
@@ -128,7 +128,7 @@ function onUpdate(value: any) {
     </div>
 
     <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <component :is="(!variant || variant === 'list') ? Label : 'p'" v-if="label || !!slots.label" :for="controlProps.id" :class="ui.label({ class: props.ui?.label })">
+      <component :is="(!variant || variant === 'list') ? Label : 'p'" v-if="label || !!slots.label" :for="controlId" :class="ui.label({ class: props.ui?.label })">
         <slot name="label" :label="label">
           {{ label }}
         </slot>
