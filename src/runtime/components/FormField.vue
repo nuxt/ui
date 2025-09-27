@@ -60,7 +60,7 @@ const slots = defineSlots<FormFieldSlots>()
 
 const appConfig = useAppConfig() as FormField['AppConfig']
 
-const { labelProps, descriptionProps, errorMessageProps, state: { errorMessage, isTouched } } = useFormField({
+const { labelProps, descriptionProps, errorMessageProps, label, state: { errorMessage, isTouched } } = useFormField({
   path: props.name,
   label: props.label,
   description: props.description
