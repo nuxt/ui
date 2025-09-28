@@ -1,62 +1,29 @@
 <script setup lang="ts">
-import { upperFirst } from 'scule'
 import theme from '#build/ui/badge'
 
-const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
-const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
+const colors = Object.keys(theme.variants.color)
+const variants = Object.keys(theme.variants.variant)
+const sizes = Object.keys(theme.variants.size)
+
+const attrs = reactive({
+  color: [theme.defaultVariants.color],
+  variant: [theme.defaultVariants.variant],
+  size: [theme.defaultVariants.size]
+})
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
-    <div class="flex items-center gap-2">
-      <UBadge class="font-bold">
-        Badge
-      </UBadge>
-    </div>
-    <div class="flex items-center gap-2">
-      <UBadge v-for="variant in variants" :key="variant" icon="i-lucide-rocket" :label="upperFirst(variant)" :variant="variant" />
-    </div>
-    <div class="flex items-center gap-2">
-      <UBadge
-        v-for="variant in variants"
-        :key="variant"
-        icon="i-lucide-rocket"
-        :label="upperFirst(variant)"
-        :variant="variant"
-        color="neutral"
-      />
-    </div>
-    <div class="flex items-center gap-2">
-      <UBadge
-        v-for="variant in variants"
-        :key="variant"
-        :avatar="{ src: 'https://github.com/benjamincanac.png' }"
-        :label="upperFirst(variant)"
-        :variant="variant"
-        color="neutral"
-      />
-    </div>
-    <div class="flex items-center gap-2 ms-[-90px]">
-      <UBadge v-for="size in sizes" :key="size" label="Badge" :size="size" />
-    </div>
-    <div class="flex items-center gap-2 ms-[-122px]">
-      <UBadge v-for="size in sizes" :key="size" icon="i-lucide-rocket" label="Badge" :size="size" />
-    </div>
-    <div class="flex items-center gap-2 ms-[-130px]">
-      <UBadge v-for="size in sizes" :key="size" :avatar="{ src: 'https://github.com/benjamincanac.png' }" label="Badge" :size="size" />
-    </div>
-    <div class="flex items-center gap-2 ms-[-52px]">
-      <UBadge v-for="size in sizes" :key="size" icon="i-lucide-rocket" :size="size" />
-    </div>
-    <div class="flex items-center gap-2 ms-[-60px]">
-      <UBadge
-        v-for="size in sizes"
-        :key="size"
-        :avatar="{ src: 'https://github.com/benjamincanac.png' }"
-        :size="size"
-        color="neutral"
-        variant="outline"
-      />
-    </div>
-  </div>
+  <Navbar>
+    <USelect v-model="attrs.color" :items="colors" multiple />
+    <USelect v-model="attrs.variant" :items="variants" multiple />
+    <USelect v-model="attrs.size" :items="sizes" multiple />
+  </Navbar>
+
+  <Matrix v-slot="props" :attrs="attrs">
+    <UBadge label="Badge" v-bind="props" />
+    <UBadge icon="i-lucide-rocket" label="Icon" v-bind="props" />
+    <UBadge :avatar="{ src: 'https://github.com/benjamincanac.png' }" label="Avatar" v-bind="props" />
+    <UBadge icon="i-lucide-rocket" v-bind="props" />
+    <UBadge :avatar="{ src: 'https://github.com/benjamincanac.png' }" v-bind="props" />
+  </Matrix>
 </template>

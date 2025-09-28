@@ -7,15 +7,16 @@ const variants = Object.keys(theme.variants.variant)
 const orientations = Object.keys(theme.variants.orientation)
 const contentOrientations = Object.keys(theme.variants.contentOrientation)
 
-const color = ref(theme.defaultVariants.color)
-const highlightColor = ref()
-const variant = ref(theme.defaultVariants.variant)
-const orientation = ref('horizontal' as const)
-const contentOrientation = ref('horizontal' as const)
+const attrs = reactive({
+  color: [theme.defaultVariants.color],
+  variant: [theme.defaultVariants.variant]
+})
+
 const highlight = ref(true)
+const highlightColor = ref()
+const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
+const contentOrientation = ref('horizontal' as keyof typeof theme.variants.contentOrientation)
 const collapsed = ref(false)
-const tooltip = ref(false)
-const popover = ref(false)
 const arrow = ref(false)
 
 const items = [
@@ -96,34 +97,31 @@ const items = [
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-12">
-    <div class="flex items-center gap-2">
-      <USelect v-model="color" :items="colors" placeholder="Color" />
-      <USelect v-model="variant" :items="variants" placeholder="Variant" />
-      <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
-      <USelect v-model="contentOrientation" :items="contentOrientations" placeholder="Content orientation" />
-      <USwitch v-model="collapsed" label="Collapsed" />
-      <USwitch v-model="highlight" label="Highlight" />
-      <USelect v-model="highlightColor" :items="colors" placeholder="Highlight color" />
-      <USwitch v-model="tooltip" label="Tooltip" />
-      <USwitch v-model="popover" label="Popover" />
-      <USwitch v-model="arrow" label="Arrow" />
-    </div>
+  <Navbar>
+    <USelect v-model="attrs.color" :items="colors" placeholder="Color" multiple />
+    <USelect v-model="attrs.variant" :items="variants" placeholder="Variant" multiple />
+    <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
+    <USelect v-model="contentOrientation" :items="contentOrientations" placeholder="Content orientation" />
+    <USwitch v-model="highlight" label="Highlight" />
+    <USelect v-model="highlightColor" :items="colors" placeholder="Highlight color" />
+    <USwitch v-model="collapsed" label="Collapsed" />
+    <USwitch v-model="arrow" label="Arrow" />
+  </Navbar>
 
+  <Matrix v-slot="props" :attrs="attrs" :class="orientation === 'horizontal' ? 'flex-col' : ''">
     <UNavigationMenu
       :arrow="arrow"
-      :tooltip="tooltip"
-      :popover="popover"
+      tooltip
+      popover
       :collapsed="collapsed"
       :items="items"
-      :color="color"
-      :variant="variant"
       :orientation="orientation"
       :content-orientation="contentOrientation"
       :highlight="highlight"
       :highlight-color="highlightColor"
+      v-bind="props"
       :class="highlight && 'data-[orientation=horizontal]:border-b border-default'"
       class="data-[orientation=vertical]:data-[collapsed=false]:w-48"
     />
-  </div>
+  </Matrix>
 </template>

@@ -1,13 +1,12 @@
 import './assets/css/main.css'
 
-import { createApp, defineAsyncComponent, ref } from 'vue'
+import { createApp, ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import ui from '@nuxt/ui/vue-plugin'
 
 import App from './app.vue'
 
-const pages = import.meta.glob('../../nuxt/app/pages/**/*.vue')
-const components = import.meta.glob('../../nuxt/app/components/**/*.vue')
+const pages = import.meta.glob(['../../nuxt/app/pages/*.vue', '../../nuxt/app/pages/components/*.vue'])
 
 const routes = Object.keys(pages).map((path) => {
   const name = path.match(/\.\.\/\.\.\/nuxt\/app\/pages(.*)\.vue$/)![1].toLowerCase()
@@ -23,11 +22,6 @@ const router = createRouter({
 })
 
 const app = createApp(App)
-
-Object.entries(components).forEach(([path, component]) => {
-  const name = path.split('/').pop()!.replace('.vue', '')
-  app.component(name, defineAsyncComponent(component as any))
-})
 
 app.use(router)
 app.use(ui)
