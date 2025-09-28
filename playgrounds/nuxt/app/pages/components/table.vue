@@ -353,42 +353,42 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-full flex flex-col flex-1 gap-4 w-full">
-    <div class="flex gap-2 items-center">
-      <UInput
-        :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
-        class="max-w-sm"
-        placeholder="Filter emails..."
-        @update:model-value="table?.tableApi?.getColumn('email')?.setFilterValue($event)"
+  <Navbar>
+    <UInput
+      :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
+      class="max-w-sm"
+      placeholder="Filter emails..."
+      @update:model-value="table?.tableApi?.getColumn('email')?.setFilterValue($event)"
+    />
+
+    <UButton color="neutral" label="Randomize" @click="randomize" />
+    <UButton color="neutral" label="Add element" @click="addElement" />
+
+    <UDropdownMenu
+      :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
+        label: upperFirst(column.id),
+        type: 'checkbox' as const,
+        checked: column.getIsVisible(),
+        onUpdateChecked(checked: boolean) {
+          table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
+        },
+        onSelect(e?: Event) {
+          e?.preventDefault()
+        }
+      }))"
+      :content="{ align: 'end' }"
+    >
+      <UButton
+        label="Columns"
+        color="neutral"
+        variant="outline"
+        trailing-icon="i-lucide-chevron-down"
+        class="ms-auto"
       />
+    </UDropdownMenu>
+  </Navbar>
 
-      <UButton color="neutral" label="Randomize" @click="randomize" />
-      <UButton color="neutral" label="Add element" @click="addElement" />
-
-      <UDropdownMenu
-        :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
-          label: upperFirst(column.id),
-          type: 'checkbox' as const,
-          checked: column.getIsVisible(),
-          onUpdateChecked(checked: boolean) {
-            table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
-          },
-          onSelect(e?: Event) {
-            e?.preventDefault()
-          }
-        }))"
-        :content="{ align: 'end' }"
-      >
-        <UButton
-          label="Columns"
-          color="neutral"
-          variant="outline"
-          trailing-icon="i-lucide-chevron-down"
-          class="ms-auto"
-        />
-      </UDropdownMenu>
-    </div>
-
+  <div class="flex flex-col gap-4 w-full h-full">
     <UContextMenu :items="contextmenuItems">
       <UTable
         ref="table"

@@ -21,7 +21,9 @@ function openModal() {
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
+  <Navbar />
+
+  <div class="flex flex-col gap-2 min-h-0">
     <UModal title="First modal">
       <UButton color="neutral" variant="outline" label="Open with nested" />
 

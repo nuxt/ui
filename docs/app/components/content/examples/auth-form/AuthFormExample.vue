@@ -14,7 +14,8 @@ const fields = [{
   name: 'password',
   label: 'Password',
   type: 'password' as const,
-  placeholder: 'Enter your password'
+  placeholder: 'Enter your password',
+  required: true
 }, {
   name: 'remember',
   label: 'Remember me',
@@ -36,8 +37,8 @@ const providers = [{
 }]
 
 const schema = z.object({
-  email: z.string().email('Invalid email'),
-  password: z.string().min(8, 'Must be at least 8 characters')
+  email: z.email('Invalid email'),
+  password: z.string('Password is required').min(8, 'Must be at least 8 characters')
 })
 
 type Schema = z.output<typeof schema>

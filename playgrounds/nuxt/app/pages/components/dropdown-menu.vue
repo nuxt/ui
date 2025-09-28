@@ -115,6 +115,7 @@ const items = computed(() => [
   }], [{
     label: 'Logout',
     icon: 'i-lucide-log-out',
+    color: 'error',
     kbds: ['shift', 'meta', 'q'],
     onSelect() {
       console.log('Logout clicked')
@@ -122,35 +123,30 @@ const items = computed(() => [
   }]
 ])
 
-const itemsWithColor = computed(() => Object.keys(theme.variants.color).map(color => ({
-  color: (color as keyof typeof theme.variants.color),
-  icon: 'i-lucide-swatch-book',
-  label: color
-})))
-
 const sizes = Object.keys(theme.variants.size)
 
-const size = ref('md' as const)
+const attrs = reactive({
+  size: [theme.defaultVariants.size]
+})
+
+const arrow = ref(false)
 
 defineShortcuts(extractShortcuts(items.value))
 </script>
 
 <template>
-  <div class="flex-1">
-    <div class="flex flex-col items-center gap-8">
-      <USelectMenu v-model="size" :items="sizes" placeholder="Size" />
+  <Navbar>
+    <USelect v-model="attrs.size" :items="sizes" multiple placeholder="Size" />
+    <USwitch v-model="arrow" label="Arrow" />
+  </Navbar>
 
-      <UDropdownMenu :items="items" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" :ui="{ content: 'w-48' }">
-        <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
+  <Matrix v-slot="props" :attrs="attrs">
+    <UDropdownMenu :items="items" :arrow="arrow" :content="{ side: 'bottom', align: 'start' }" v-bind="props">
+      <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
 
-        <template #custom-trailing>
-          <UIcon name="i-lucide-badge-check" class="shrink-0 size-5 text-primary" />
-        </template>
-      </UDropdownMenu>
-
-      <UDropdownMenu :items="itemsWithColor" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" :ui="{ content: 'w-48' }">
-        <UButton label="Color" color="neutral" variant="outline" icon="i-lucide-menu" />
-      </UDropdownMenu>
-    </div>
-  </div>
+      <template #custom-trailing>
+        <UIcon name="i-lucide-badge-check" class="shrink-0 size-5 text-primary" />
+      </template>
+    </UDropdownMenu>
+  </Matrix>
 </template>

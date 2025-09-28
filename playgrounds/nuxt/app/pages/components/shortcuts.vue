@@ -36,14 +36,10 @@ defineShortcuts(shortcuts)
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-4">
-    <UCard class="flex-1">
-      <template #header>
-        <h3 class="font-bold">
-          Shortcuts
-        </h3>
-      </template>
+  <Navbar />
 
+  <div class="w-full flex flex-col justify-stretch items-stretch gap-4 h-full">
+    <UCard>
       <div class="space-y-2">
         <div>
           <span>{{ shortcutsState.a.label }} shortcut</span>
