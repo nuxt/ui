@@ -164,20 +164,22 @@ defineShortcuts({
         }
       }"
       multiple
-      class="sm:max-h-80"
+      class="sm:max-h-96"
       @update:model-value="onSelect"
     >
       <template #footer>
         <div class="flex items-center justify-between gap-2">
           <UIcon name="i-simple-icons-nuxtdotjs" class="size-5 text-dimmed ml-1" />
           <div class="flex items-center gap-1">
-            <UButton color="neutral" variant="ghost" label="Open Command" class="text-dimmed" size="xs">
+            <UButton color="neutral" variant="ghost" label="Open" size="xs">
               <template #trailing>
                 <UKbd value="enter" />
               </template>
             </UButton>
+
             <USeparator orientation="vertical" class="h-4" />
-            <UButton color="neutral" variant="ghost" label="Actions" class="text-dimmed" size="xs">
+
+            <UButton color="neutral" variant="ghost" label="Actions" size="xs">
               <template #trailing>
                 <UKbd value="meta" />
                 <UKbd value="k" />
@@ -189,35 +191,33 @@ defineShortcuts({
     </UCommandPalette>
   </DefineTemplate>
 
-  <div class="flex-1 flex flex-col gap-12 w-full max-w-lg">
-    <div class="flex items-center justify-between gap-2 mt-[58px]">
-      <UModal v-model:open="open">
-        <UButton label="Open modal" color="neutral" variant="outline" />
+  <Navbar>
+    <UModal v-model:open="open">
+      <UButton label="Open modal" color="neutral" variant="outline" />
 
-        <template #content>
-          <ReuseTemplate :close="true" @update:open="open = $event" />
-        </template>
-      </UModal>
+      <template #content>
+        <ReuseTemplate :close="true" @update:open="open = $event" />
+      </template>
+    </UModal>
 
-      <UDrawer should-scale-background>
-        <UButton label="Open drawer" color="neutral" variant="outline" />
+    <UDrawer should-scale-background>
+      <UButton label="Open drawer" color="neutral" variant="outline" />
 
-        <template #content>
-          <ReuseTemplate class="border-t border-default mt-4" />
-        </template>
-      </UDrawer>
+      <template #content>
+        <ReuseTemplate class="border-t border-default mt-4" />
+      </template>
+    </UDrawer>
 
-      <UPopover :content="{ side: 'right', align: 'start' }">
-        <UButton label="Select label (popover)" color="neutral" variant="outline" />
+    <UPopover :content="{ side: 'right', align: 'start' }">
+      <UButton label="Select label (popover)" color="neutral" variant="outline" />
 
-        <template #content>
-          <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }" />
-        </template>
-      </UPopover>
-    </div>
+      <template #content>
+        <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }" />
+      </template>
+    </UPopover>
+  </Navbar>
 
-    <UCard :ui="{ body: '!p-0' }">
-      <ReuseTemplate />
-    </UCard>
-  </div>
+  <UCard :ui="{ body: '!p-0' }">
+    <ReuseTemplate />
+  </UCard>
 </template>

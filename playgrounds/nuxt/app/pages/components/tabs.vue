@@ -6,10 +6,13 @@ const variants = Object.keys(theme.variants.variant)
 const orientations = Object.keys(theme.variants.orientation)
 const sizes = Object.keys(theme.variants.size)
 
-const color = ref(theme.defaultVariants.color)
-const variant = ref(theme.defaultVariants.variant)
-const orientation = ref('horizontal' as const)
-const size = ref('md' as const)
+const attrs = reactive({
+  color: [theme.defaultVariants.color],
+  variant: [theme.defaultVariants.variant],
+  size: [theme.defaultVariants.size]
+})
+
+const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
 
 const items = [{
   label: 'Tab1',
@@ -31,36 +34,30 @@ const items = [{
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-12">
-    <div class="flex items-center gap-2">
-      <USelect v-model="color" :items="colors" placeholder="Color" />
-      <USelect v-model="variant" :items="variants" placeholder="Variant" />
-      <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
-      <USelect v-model="size" :items="sizes" placeholder="Size" />
-    </div>
+  <Navbar>
+    <USelect v-model="attrs.color" :items="colors" placeholder="Color" multiple />
+    <USelect v-model="attrs.variant" :items="variants" placeholder="Variant" multiple />
+    <USelect v-model="attrs.size" :items="sizes" placeholder="Size" multiple />
+    <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
+  </Navbar>
 
-    <div class="flex gap-4">
-      <UTabs
-        :color="color"
-        :variant="variant"
-        :orientation="orientation"
-        :size="size"
-        :items="[{ label: 'Monthly' }, { label: 'Yearly' }]"
-        :content="false"
-      />
+  <Matrix v-slot="props" :attrs="attrs" container-class="gap-4">
+    <UTabs
+      :orientation="orientation"
+      :items="[{ label: 'Monthly' }, { label: 'Yearly' }]"
+      :content="false"
+      v-bind="props"
+    />
 
-      <UTabs
-        :color="color"
-        :variant="variant"
-        :orientation="orientation"
-        :size="size"
-        :items="items"
-        class="w-96"
-      >
-        <template #custom="{ item }">
-          <span class="text-muted">Custom: {{ item.content }}</span>
-        </template>
-      </UTabs>
-    </div>
-  </div>
+    <UTabs
+      :orientation="orientation"
+      :items="items"
+      class="w-80"
+      v-bind="props"
+    >
+      <template #custom="{ item }">
+        <span class="text-muted">Custom: {{ item.content }}</span>
+      </template>
+    </UTabs>
+  </Matrix>
 </template>

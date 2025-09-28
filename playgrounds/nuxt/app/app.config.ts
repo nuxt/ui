@@ -1,4 +1,5 @@
 export default defineAppConfig({
+  dir: 'ltr',
   toaster: {
     position: 'bottom-right' as const,
     expand: true,

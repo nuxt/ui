@@ -4,9 +4,11 @@ const inset = ref(false)
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
-    <USwitch v-model="inset" label="Inset" class="mb-4" />
+  <Navbar>
+    <USwitch v-model="inset" label="Inset" />
+  </Navbar>
 
+  <div class="flex flex-col gap-2 min-h-0">
     <UDrawer v-model:open="open" title="Drawer with v-model" description="This is useful to control the state yourself." :inset="inset">
       <UButton color="neutral" variant="outline" label="Open with v-model" />
 

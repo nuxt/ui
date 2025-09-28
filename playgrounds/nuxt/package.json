@@ -9,10 +9,13 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
+    "@ai-sdk/gateway": "^1.0.28",
+    "@ai-sdk/vue": "^2.0.51",
     "@iconify-json/lucide": "^1.2.68",
     "@iconify-json/simple-icons": "^1.2.53",
     "@internationalized/date": "^3.9.0",
     "@nuxt/ui": "workspace:*",
+    "ai": "^5.0.51",
     "nuxt": "^4.1.2",
     "zod": "^4.1.11"
   },

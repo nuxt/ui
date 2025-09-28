@@ -25,7 +25,7 @@ exports[`Toast > renders with actions correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -62,7 +62,7 @@ exports[`Toast > renders with as correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -98,7 +98,7 @@ exports[`Toast > renders with avatar correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -135,7 +135,7 @@ exports[`Toast > renders with class correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -169,7 +169,7 @@ exports[`Toast > renders with close slot correctly 1`] = `
       <div class="flex gap-1.5 shrink-0 items-center">
         <!--v-if-->Close slot
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -206,7 +206,7 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -243,7 +243,7 @@ exports[`Toast > renders with color neutral correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-inverted data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -280,7 +280,7 @@ exports[`Toast > renders with description correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -317,7 +317,7 @@ exports[`Toast > renders with description slot correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -353,7 +353,7 @@ exports[`Toast > renders with icon correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -388,7 +388,7 @@ exports[`Toast > renders with leading slot correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -425,7 +425,7 @@ exports[`Toast > renders with orientation horizontal correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -464,7 +464,7 @@ exports[`Toast > renders with orientation vertical correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -501,7 +501,7 @@ exports[`Toast > renders with title correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -538,7 +538,7 @@ exports[`Toast > renders with title slot correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -575,7 +575,7 @@ exports[`Toast > renders with type correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -612,7 +612,7 @@ exports[`Toast > renders with ui correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -644,7 +644,7 @@ exports[`Toast > renders without close correctly 1`] = `
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
