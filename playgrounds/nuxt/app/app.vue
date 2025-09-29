@@ -1,131 +1,51 @@
 <script setup lang="ts">
-import { splitByCase, upperFirst } from 'scule'
-import { useColorMode } from '#imports'
-
-const router = useRouter()
+const route = useRoute()
 const appConfig = useAppConfig()
-const colorMode = useColorMode()
 
-const isDark = computed({
-  get() {
-    return colorMode.value === 'dark'
-  },
-  set(_isDark) {
-    colorMode.preference = _isDark ? 'dark' : 'light'
+const { components, groups, items } = useNavigation()
+
+useHead({
+  title: 'Nuxt UI - Playground',
+  htmlAttrs: {
+    dir: computed(() => appConfig.dir as 'ltr' | 'rtl')
   }
 })
 
-const components = [
-  'accordion',
-  'alert',
-  'avatar',
-  'badge',
-  'breadcrumb',
-  'button',
-  'card',
-  'calendar',
-  'carousel',
-  'checkbox',
-  'checkbox-group',
-  'chip',
-  'collapsible',
-  'color-picker',
-  'context-menu',
-  'command-palette',
-  'drawer',
-  'dropdown-menu',
-  'field-group',
-  'file-upload',
-  'form',
-  'form-field',
-  'input',
-  'input-menu',
-  'input-number',
-  'input-tags',
-  'kbd',
-  'link',
-  'modal',
-  'navigation-menu',
-  'pagination',
-  'pin-input',
-  'popover',
-  'progress',
-  'radio-group',
-  'select',
-  'select-menu',
-  'separator',
-  'shortcuts',
-  'skeleton',
-  'slideover',
-  'slider',
-  'stepper',
-  'switch',
-  'tabs',
-  'table',
-  'textarea',
-  'timeline',
-  'toast',
-  'tooltip',
-  'tree'
-]
-
-const items = components.map(component => ({ label: upperName(component), to: `/components/${component}` }))
-
-function upperName(name: string) {
-  return splitByCase(name).map(p => upperFirst(p)).join('')
-}
-
-const isCommandPaletteOpen = ref(false)
-
-function onSelect(item: any) {
-  router.push(item.to)
-}
-
-defineShortcuts({
-  meta_k: () => isCommandPaletteOpen.value = true
-})
-
-useHead({
-  title: 'Nuxt UI - Playground'
-})
+provide('components', components)
 </script>
 
 <template>
-  <template v-if="!$route.path.startsWith('/__nuxt_ui__')">
-    <UApp :toaster="appConfig.toaster">
-      <div class="h-screen w-screen overflow-hidden flex flex-col lg:flex-row min-h-0 bg-default" data-vaul-drawer-wrapper>
-        <UNavigationMenu :items="items" orientation="vertical" class="hidden lg:flex border-e border-default overflow-y-auto w-48 p-4" />
-        <UNavigationMenu :items="items" orientation="horizontal" class="lg:hidden border-b border-default [&>div]:min-w-min overflow-x-auto" />
+  <UApp :toaster="appConfig.toaster" :dir="appConfig.dir">
+    <UDashboardGroup unit="rem">
+      <UDashboardSidebar class="bg-elevated/25">
+        <template #header>
+          <NuxtLink to="/" class="text-highlighted">
+            <Logo class="h-5 w-auto" />
+          </NuxtLink>
 
-        <div class="fixed top-15 lg:top-3 end-4 flex items-center gap-2">
-          <ClientOnly v-if="!colorMode?.forced">
-            <UButton
-              :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
-              color="neutral"
-              variant="ghost"
-              :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
-              @click="isDark = !isDark"
-            />
+          <div class="flex items-center ms-auto">
+            <ThemeDropdown />
 
-            <template #fallback>
-              <div class="size-8" />
-            </template>
-          </ClientOnly>
-        </div>
+            <UColorModeButton />
+          </div>
+        </template>
 
-        <div class="flex-1 flex flex-col items-center justify-around overflow-y-auto w-full py-14 px-4">
+        <UDashboardSearchButton />
+
+        <UNavigationMenu :items="items" orientation="vertical" />
+
+        <USeparator type="dashed" />
+
+        <UNavigationMenu :items="components" orientation="vertical" />
+      </UDashboardSidebar>
+
+      <UDashboardPanel :ui="{ body: ['justify-center items-center', route.path.startsWith('/components') && 'mt-16'] }">
+        <template #body>
           <NuxtPage />
-        </div>
+        </template>
+      </UDashboardPanel>
 
-        <UModal v-model:open="isCommandPaletteOpen" class="sm:h-96">
-          <template #content>
-            <UCommandPalette placeholder="Search a component..." :groups="[{ id: 'items', items }]" :fuse="{ resultLimit: 100 }" @update:model-value="onSelect" @update:open="value => isCommandPaletteOpen = value" />
-          </template>
-        </UModal>
-      </div>
-    </UApp>
-  </template>
-  <template v-else>
-    <NuxtPage />
-  </template>
+      <UDashboardSearch :groups="groups" :fuse="{ resultLimit: 100 }" />
+    </UDashboardGroup>
+  </UApp>
 </template>

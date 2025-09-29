@@ -18,11 +18,11 @@ Nuxt UI harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Ta
 
 ## Documentation
 
-Visit https://ui4.nuxt.com to explore the documentation.
+Visit https://ui.nuxt.com to explore the documentation.
 
 ## Templates
 
-Kickstart your project with one of our ready-to-use Nuxt UI templates or follow the [Installation Guide](https://ui4.nuxt.com/getting-started/installation/nuxt). Explore all available templates on the [official templates page](https://ui4.nuxt.com/templates).
+Kickstart your project with one of our ready-to-use Nuxt UI templates or follow the [Installation Guide](https://ui.nuxt.com/getting-started/installation/nuxt). Explore all available templates on the [official templates page](https://ui.nuxt.com/templates).
 
 - [Starter](https://github.com/nuxt-ui-templates/starter) — A minimal template to get started with Nuxt UI.
 - [Landing](https://github.com/nuxt-ui-templates/landing) — A modern landing page template powered by Nuxt Content.
@@ -36,19 +36,19 @@ Kickstart your project with one of our ready-to-use Nuxt UI templates or follow 
 ## Installation
 
 ```bash [pnpm]
-pnpm add @nuxt/ui@alpha
+pnpm add @nuxt/ui
 ```
 
 ```bash [yarn]
-yarn add @nuxt/ui@alpha
+yarn add @nuxt/ui
 ```
 
 ```bash [npm]
-npm install @nuxt/ui@alpha
+npm install @nuxt/ui
 ```
 
 ```bash [bun]
-bun add @nuxt/ui@alpha
+bun add @nuxt/ui
 ```
 
 ### Nuxt
@@ -68,7 +68,7 @@ export default defineNuxtConfig({
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui4.nuxt.com/docs/getting-started/installation/nuxt).
+Learn more in the [installation guide](https://ui.nuxt.com/docs/getting-started/installation/nuxt).
 
 ### Vue
 
@@ -115,18 +115,18 @@ app.mount('#app')
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui4.nuxt.com/docs/getting-started/installation/vue).
+Learn more in the [installation guide](https://ui.nuxt.com/docs/getting-started/installation/vue).
 
 ## Contribution
 
 Thank you for considering contributing to Nuxt UI. Here are a few ways you can get involved:
 
 - Reporting Bugs: If you come across any bugs or issues, please check out the reporting bugs guide to learn how to submit a bug report.
-- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui4.nuxt.com/docs/getting-started/contribution) to share your suggestions.
+- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/docs/getting-started/contribution) to share your suggestions.
 
 ## Local Development
 
-Follow the docs to [set up your local development environment](https://ui4.nuxt.com/docs/getting-started/contribution#local-development) and contribute.
+Follow the docs to [set up your local development environment](https://ui.nuxt.com/docs/getting-started/contribution#local-development) and contribute.
 
 ## Credits
 
@@ -143,7 +143,7 @@ Follow the docs to [set up your local development environment](https://ui4.nuxt.
 Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v4/LICENSE.md).
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/alpha.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-version-href]: https://npmjs.com/package/@nuxt/ui
 
 [npm-downloads-src]: https://img.shields.io/npm/dm/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D

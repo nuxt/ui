@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Atgal'
     },
     chatPrompt: {
-      placeholder: 'Įveskite savo žinutę čia...'
+      placeholder: 'Įveskite savo žinutę čia…'
     },
     chatPromptSubmit: {
       label: 'Siųsti žinutę'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Uždaryti',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
-      placeholder: 'Įveskite komandą arba ieškokite...'
+      placeholder: 'Įveskite komandą arba ieškokite…'
     },
     contentSearch: {
       links: 'Nuorodos',
       theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Ieškoti...'
+      label: 'Ieškoti…'
     },
     contentToc: {
       title: 'Šiame puslapyje'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Ieškoti...'
+      label: 'Ieškoti…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Suskleisti šoninę juostą',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Sukurti „{label}"',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
-      search: 'Ieškoti...'
+      search: 'Ieškoti…'
     },
     slideover: {
       close: 'Uždaryti'

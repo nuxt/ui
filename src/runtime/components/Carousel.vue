@@ -231,8 +231,15 @@ function scrollTo(index: number) {
 }
 
 function onKeyDown(event: KeyboardEvent) {
-  const prevKey = props.orientation === 'vertical' ? 'ArrowUp' : 'ArrowLeft'
-  const nextKey = props.orientation === 'vertical' ? 'ArrowDown' : 'ArrowRight'
+  let prevKey
+  let nextKey
+  if (props.orientation === 'horizontal') {
+    prevKey = dir.value === 'ltr' ? 'ArrowLeft' : 'ArrowRight'
+    nextKey = dir.value === 'ltr' ? 'ArrowRight' : 'ArrowLeft'
+  } else {
+    prevKey = 'ArrowUp'
+    nextKey = 'ArrowDown'
+  }
 
   if (event.key === prevKey) {
     event.preventDefault()
@@ -291,6 +298,7 @@ defineExpose({
     :as="as"
     role="region"
     aria-roledescription="carousel"
+    :data-orientation="orientation"
     tabindex="0"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @keydown="onKeyDown"

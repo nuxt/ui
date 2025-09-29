@@ -1,110 +1,64 @@
 <script setup lang="ts">
-import { splitByCase, upperFirst } from 'scule'
-import { useRouter } from 'vue-router'
-import { reactive, ref } from 'vue'
+import { reactive } from 'vue'
+import { useHead } from '@unhead/vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const appConfig = useAppConfig()
 
+appConfig.dir = ref('ltr')
 appConfig.toaster = reactive({
   position: 'bottom-right' as const,
   expand: true,
   duration: 5000
 })
 
-const router = useRouter()
-
-const components = [
-  'accordion',
-  'alert',
-  'avatar',
-  'badge',
-  'breadcrumb',
-  'button',
-  'card',
-  'calendar',
-  'carousel',
-  'checkbox',
-  'checkbox-group',
-  'chip',
-  'collapsible',
-  'color-picker',
-  'context-menu',
-  'command-palette',
-  'drawer',
-  'dropdown-menu',
-  'field-group',
-  'file-upload',
-  'form',
-  'form-field',
-  'input',
-  'input-menu',
-  'input-number',
-  'input-tags',
-  'kbd',
-  'link',
-  'modal',
-  'navigation-menu',
-  'pagination',
-  'pin-input',
-  'popover',
-  'progress',
-  'radio-group',
-  'select',
-  'select-menu',
-  'separator',
-  'shortcuts',
-  'skeleton',
-  'slideover',
-  'slider',
-  'stepper',
-  'switch',
-  'tabs',
-  'table',
-  'textarea',
-  'timeline',
-  'toast',
-  'tooltip',
-  'tree'
-]
-
-const items = components.map(component => ({ label: upperName(component), to: `/components/${component}` }))
-
-function upperName(name: string) {
-  return splitByCase(name).map(p => upperFirst(p)).join('')
-}
-
-const isCommandPaletteOpen = ref(false)
-
-function onSelect(item: any) {
-  router.push(item.to)
-}
-
-defineShortcuts({
-  meta_k: () => isCommandPaletteOpen.value = true
+useHead({
+  title: 'Nuxt UI - Playground',
+  htmlAttrs: {
+    dir: computed(() => appConfig.dir as 'ltr' | 'rtl')
+  }
 })
+
+const { components, groups, items } = useNavigation()
+
+provide('components', components)
 </script>
 
 <template>
-  <UApp :toaster="(appConfig.toaster as any)">
-    <div class="h-screen w-screen overflow-hidden flex min-h-0 bg-default" data-vaul-drawer-wrapper>
-      <UNavigationMenu :items="items" orientation="vertical" class="hidden lg:flex border-e border-default overflow-y-auto w-48 p-4" />
-      <UNavigationMenu :items="items" orientation="horizontal" class="lg:hidden border-b border-default [&>div]:min-w-min overflow-x-auto" />
+  <UApp :toaster="appConfig.toaster" :dir="appConfig.dir">
+    <UDashboardGroup unit="rem" storage="local">
+      <UDashboardSidebar class="bg-elevated/25">
+        <template #header>
+          <RouterLink to="/" class="text-highlighted">
+            <Logo class="h-5 w-auto" />
+          </RouterLink>
 
-      <div class="fixed top-15 lg:top-3 end-4 flex items-center gap-2">
-        <UColorModeButton />
-      </div>
+          <div class="flex items-center ms-auto">
+            <ThemeDropdown />
 
-      <div class="flex-1 flex flex-col items-center justify-around overflow-y-auto w-full py-14 px-4">
-        <Suspense>
-          <RouterView />
-        </Suspense>
-      </div>
-    </div>
+            <UColorModeButton />
+          </div>
+        </template>
 
-    <UModal v-model:open="isCommandPaletteOpen" class="sm:h-96">
-      <template #content>
-        <UCommandPalette placeholder="Search a component..." :groups="[{ id: 'items', items }]" :fuse="{ resultLimit: 100 }" @update:model-value="onSelect" @update:open="value => isCommandPaletteOpen = value" />
-      </template>
-    </UModal>
+        <UDashboardSearchButton />
+
+        <UNavigationMenu :items="items" orientation="vertical" />
+
+        <USeparator type="dashed" />
+
+        <UNavigationMenu :items="components" orientation="vertical" />
+      </UDashboardSidebar>
+
+      <UDashboardPanel :ui="{ body: ['justify-center items-center', route.path.startsWith('/components') && 'mt-16'] }">
+        <template #body>
+          <Suspense>
+            <RouterView />
+          </Suspense>
+        </template>
+      </UDashboardPanel>
+
+      <UDashboardSearch :groups="groups" :fuse="{ resultLimit: 100 }" />
+    </UDashboardGroup>
   </UApp>
 </template>

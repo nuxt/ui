@@ -2,11 +2,13 @@
 import type { TreeItem } from '@nuxt/ui'
 import theme from '#build/ui/tree'
 
-const colors = Object.keys(theme.variants.color) as Array<keyof typeof theme.variants.color>
-const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
+const colors = Object.keys(theme.variants.color)
+const sizes = Object.keys(theme.variants.size)
 
-const color = ref(theme.defaultVariants.color)
-const size = ref(theme.defaultVariants.size)
+const attrs = reactive({
+  color: [theme.defaultVariants.color],
+  size: [theme.defaultVariants.size]
+})
 
 const items = [
   {
@@ -42,38 +44,37 @@ const itemsWithMappedId = [
 ]
 
 const modelValue = ref<(typeof items)[number]>()
-const modelValues = ref<(typeof items)>([])
+const modelValues = ref<(typeof items)>([items[items.length - 2]!])
 const modelValueWithMappedId = ref<(typeof itemsWithMappedId)[number]>()
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
-    <div class="flex items-center gap-2">
-      <USelect v-model="color" :items="colors" placeholder="Color" />
-      <USelect v-model="size" :items="sizes" placeholder="Size" />
-    </div>
+  <Navbar>
+    <USelect v-model="attrs.color" :items="colors" placeholder="Color" multiple />
+    <USelect v-model="attrs.size" :items="sizes" placeholder="Size" multiple />
+  </Navbar>
 
+  <Matrix v-slot="props" :attrs="attrs">
     <UTree
       v-model="modelValues"
       :items="items"
-      :color="color"
-      :size="size"
       expanded-icon="i-lucide-chevron-up"
       collapsed-icon="i-lucide-chevron-down"
       multiple
+      v-bind="props"
     />
+  </Matrix>
 
-    <!-- Typescript tests -->
-    <template v-if="false">
-      <UTree :model-value="modelValues" :items="items" multiple />
-      <UTree :default-value="modelValues" :items="items" multiple />
-      <UTree :items="items" multiple @update:model-value="(payload) => payload" />
-      <UTree :model-value="modelValue" :items="items" />
-      <UTree :default-value="modelValue" :items="items" />
-      <UTree :items="items" @update:model-value="(payload) => payload" />
+  <!-- Typescript tests -->
+  <template v-if="false">
+    <UTree :model-value="modelValues" :items="items" multiple />
+    <UTree :default-value="modelValues" :items="items" multiple />
+    <UTree :items="items" multiple @update:model-value="(payload) => payload" />
+    <UTree :model-value="modelValue" :items="items" />
+    <UTree :default-value="modelValue" :items="items" />
+    <UTree :items="items" @update:model-value="(payload) => payload" />
 
-      <UTree v-model="modelValueWithMappedId" :items="itemsWithMappedId" :get-key="(i) => i.id" />
-      <UTree v-model="modelValueWithMappedId" :items="itemsWithMappedId" label-key="title" />
-    </template>
-  </div>
+    <UTree v-model="modelValueWithMappedId" :items="itemsWithMappedId" :get-key="(i) => i.id" />
+    <UTree v-model="modelValueWithMappedId" :items="itemsWithMappedId" label-key="title" />
+  </template>
 </template>

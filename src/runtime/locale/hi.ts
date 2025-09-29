@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'पिछला'
     },
     chatPrompt: {
-      placeholder: 'यहाँ आपका संदेश लिखें...'
+      placeholder: 'यहाँ आपका संदेश लिखें…'
     },
     chatPromptSubmit: {
       label: 'भेजें'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'बंद करें',
       noData: 'कोई डेटा नहीं',
       noMatch: 'कोई मेल खाता डेटा नहीं',
-      placeholder: 'एक आदेश या खोज टाइप करें...'
+      placeholder: 'एक आदेश या खोज टाइप करें…'
     },
     contentSearch: {
       links: 'लिंक्स',
       theme: 'थीम'
     },
     contentSearchButton: {
-      label: 'खोजें...'
+      label: 'खोजें…'
     },
     contentToc: {
       title: 'इस पृष्ठ पर'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'थीम'
     },
     dashboardSearchButton: {
-      label: 'खोजें...'
+      label: 'खोजें…'
     },
     dashboardSidebarCollapse: {
       collapse: 'साइडबार संकुचित करें',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" बनाएँ',
       noData: 'कोई डेटा नहीं',
       noMatch: 'कोई मेल खाता डेटा नहीं',
-      search: 'खोजें...'
+      search: 'खोजें…'
     },
     slideover: {
       close: 'बंद करें'

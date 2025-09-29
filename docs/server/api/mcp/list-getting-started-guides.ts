@@ -10,7 +10,7 @@ export default defineCachedEventHandler(async (event) => {
     title: page.title,
     description: page.description,
     path: page.path,
-    url: `https://ui4.nuxt.com${page.path}`,
+    url: `https://ui.nuxt.com${page.path}`,
     navigation: page.navigation
   })).sort((a, b) => a.path.localeCompare(b.path))
 }, {

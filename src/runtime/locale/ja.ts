@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: '前へ'
     },
     chatPrompt: {
-      placeholder: 'ここにメッセージを入力してください...'
+      placeholder: 'ここにメッセージを入力してください…'
     },
     chatPromptSubmit: {
       label: '送信'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: '閉じる',
       noData: 'データがありません',
       noMatch: '一致するデータがありません',
-      placeholder: 'コマンドを入力するか検索...'
+      placeholder: 'コマンドを入力するか検索…'
     },
     contentSearch: {
       links: 'リンク',
       theme: 'テーマ'
     },
     contentSearchButton: {
-      label: '検索...'
+      label: '検索…'
     },
     contentToc: {
       title: 'このページ内'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'テーマ'
     },
     dashboardSearchButton: {
-      label: '検索...'
+      label: '検索…'
     },
     dashboardSidebarCollapse: {
       collapse: 'サイドバーを折りたたむ',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}"を作成',
       noData: 'データがありません',
       noMatch: '一致するデータがありません',
-      search: '検索...'
+      search: '検索…'
     },
     slideover: {
       close: '閉じる'

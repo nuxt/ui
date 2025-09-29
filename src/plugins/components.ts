@@ -20,6 +20,11 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
     ].filter(Boolean) as string[]
   })
   const componentNames = new Set(components.map(c => `${options.prefix}${c.split('/').pop()?.replace(/\.vue$/, '')}`))
+  const componentPaths = new Map(components.map((c) => {
+    const name = c.replace(/\.vue$/, '')
+    const componentName = `${options.prefix}${name.split('/').pop()}`
+    return [componentName, c]
+  }))
 
   const overrides = globSync('**/*.vue', {
     cwd: join(runtimeDir, 'vue/components'),
@@ -55,8 +60,10 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
           const relativePath = overridePaths.get(componentName)
           return { name: 'default', from: join(runtimeDir, 'vue/components', relativePath as string) }
         }
-        if (componentNames.has(componentName))
-          return { name: 'default', from: join(runtimeDir, 'components', `${componentName.slice(options.prefix.length)}.vue`) }
+        if (componentNames.has(componentName)) {
+          const relativePath = componentPaths.get(componentName)
+          return { name: 'default', from: join(runtimeDir, 'components', relativePath as string) }
+        }
       }
     ]
   })
