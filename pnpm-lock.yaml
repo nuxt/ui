@@ -6,7 +6,7 @@ settings:
 
 overrides:
   '@nuxt/kit': ^4.1.2
-  '@nuxt/module-builder': ^1.0.2
+  '@nuxt/module-builder': 1.0.1
   '@nuxt/ui': workspace:*
   chokidar: 3.6.0
   debug: 4.3.7
@@ -176,8 +176,8 @@ importers:
         specifier: ^1.9.0
         version: 1.9.0(@typescript-eslint/utils@8.40.0(eslint@9.36.0(jiti@2.5.1))(typescript@5.8.3))(@vue/compiler-sfc@3.5.21)(eslint@9.36.0(jiti@2.5.1))(typescript@5.8.3)
       '@nuxt/module-builder':
-        specifier: ^1.0.2
-        version: 1.0.2(@nuxt/cli@3.28.0(magicast@0.3.5))(@vue/compiler-core@3.5.21)(esbuild@0.25.10)(typescript@5.8.3)(vue-tsc@3.0.8(typescript@5.8.3))(vue@3.5.21(typescript@5.8.3))
+        specifier: 1.0.1
+        version: 1.0.1(@nuxt/cli@3.28.0(magicast@0.3.5))(@vue/compiler-core@3.5.21)(esbuild@0.25.10)(typescript@5.8.3)(vue-tsc@3.0.8(typescript@5.8.3))(vue@3.5.21(typescript@5.8.3))
       '@nuxt/test-utils':
         specifier: ^3.19.2
         version: 3.19.2(@vue/test-utils@2.4.6)(happy-dom@19.0.1)(magicast@0.3.5)(playwright-core@1.55.0)(typescript@5.8.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.0.7)(happy-dom@19.0.1)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0))
@@ -1536,12 +1536,12 @@ packages:
     resolution: {integrity: sha512-P5q41xeEOa6ZQC0PvIP7TSBmOAMxXK4qihDcCbYIJq8RcVsEPbGZVlidmxE6EOw1ucSyodq9nbV31FAKwoL4NQ==}
     engines: {node: '>=18.12.0'}
 
-  '@nuxt/module-builder@1.0.2':
-    resolution: {integrity: sha512-9M+0oZimbwom1J+HrfDuR5NDPED6C+DlM+2xfXju9wqB6VpVfYkS6WNEmS0URw8kpJcKBuogAc7ADO7vRS4s4A==}
+  '@nuxt/module-builder@1.0.1':
+    resolution: {integrity: sha512-PmxiKKbwJ32EpASyrgX9XxD/8cZyRCZBx/A6/eSUb5PmqtEVM8QFIBZDN5+oDhAZKB1ayI+ukQNNu4kzbd292Q==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
-      '@nuxt/cli': ^3.26.4
+      '@nuxt/cli': ^3.24.1
       typescript: 5.8.3
 
   '@nuxt/schema@4.1.2':
@@ -5213,6 +5213,9 @@ packages:
 
   magic-regexp@0.10.0:
     resolution: {integrity: sha512-Uly1Bu4lO1hwHUW0CQeSWuRtzCMNO00CmXtS8N6fyvB3B979GOEEeAkiTUDsmbYLAbvpUS/Kt5c4ibosAzVyVg==}
+
+  magic-regexp@0.8.0:
+    resolution: {integrity: sha512-lOSLWdE156csDYwCTIGiAymOLN7Epu/TU5e/oAnISZfU6qP+pgjkE+xbVjVn3yLPKN8n1G2yIAYTAM5KRk6/ow==}
 
   magic-string-ast@1.0.0:
     resolution: {integrity: sha512-8rbuNizut2gW94kv7pqgt0dvk+AHLPVIm0iJtpSgQJ9dx21eWx5SBel8z3jp1xtC0j6/iyK3AWGhAR1H61s7LA==}
@@ -8959,14 +8962,14 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@nuxt/module-builder@1.0.2(@nuxt/cli@3.28.0(magicast@0.3.5))(@vue/compiler-core@3.5.21)(esbuild@0.25.10)(typescript@5.8.3)(vue-tsc@3.0.8(typescript@5.8.3))(vue@3.5.21(typescript@5.8.3))':
+  '@nuxt/module-builder@1.0.1(@nuxt/cli@3.28.0(magicast@0.3.5))(@vue/compiler-core@3.5.21)(esbuild@0.25.10)(typescript@5.8.3)(vue-tsc@3.0.8(typescript@5.8.3))(vue@3.5.21(typescript@5.8.3))':
     dependencies:
       '@nuxt/cli': 3.28.0(magicast@0.3.5)
       citty: 0.1.6
       consola: 3.4.2
       defu: 6.1.4
       jiti: 2.5.1
-      magic-regexp: 0.10.0
+      magic-regexp: 0.8.0
       mkdist: 2.4.1(typescript@5.8.3)(vue-sfc-transformer@0.1.17(@vue/compiler-core@3.5.21)(esbuild@0.25.10)(vue@3.5.21(typescript@5.8.3)))(vue-tsc@3.0.8(typescript@5.8.3))(vue@3.5.21(typescript@5.8.3))
       mlly: 1.8.0
       pathe: 2.0.3
@@ -12840,6 +12843,16 @@ snapshots:
   macos-release@3.4.0: {}
 
   magic-regexp@0.10.0:
+    dependencies:
+      estree-walker: 3.0.3
+      magic-string: 0.30.19
+      mlly: 1.8.0
+      regexp-tree: 0.1.27
+      type-level-regexp: 0.1.17
+      ufo: 1.6.1
+      unplugin: 2.3.10
+
+  magic-regexp@0.8.0:
     dependencies:
       estree-walker: 3.0.3
       magic-string: 0.30.19
