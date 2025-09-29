@@ -39,7 +39,7 @@ exports[`DashboardSidebar > renders with collapsible correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-r border-default" style="--width: 0%;">
+  <div id="dashboard-sidebar-v-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-r border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -272,7 +272,7 @@ exports[`DashboardSidebar > renders with resizable correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-r border-default" style="--width: 0%;">
+  <div id="dashboard-sidebar-v-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-r border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
