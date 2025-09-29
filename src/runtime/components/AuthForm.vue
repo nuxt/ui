@@ -2,22 +2,48 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
-import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, PinInputProps, IconProps } from '../types'
+import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps } from '../types'
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
 import type { ComponentConfig } from '../types/tv'
 
 type AuthForm = ComponentConfig<typeof theme, AppConfig, 'authForm'>
 
-type AuthFormField = FormFieldProps & {
+type AuthFormCheckboxField = Omit<FormFieldProps, 'name'> & CheckboxProps & {
   name: string
-  type?: 'checkbox' | 'select' | 'password' | 'text' | 'otp' | 'email'
-  defaultValue?: any
-  /*
+  type: 'checkbox'
+}
+
+type AuthFormSelectField = Omit<FormFieldProps, 'name'> & SelectMenuProps & {
+  name: string
+  type: 'select'
+}
+
+type AuthFormOtpField = Omit<FormFieldProps, 'name'> & PinInputProps & {
+  name: string
+  type: 'otp'
+  /**
+   * @deprecated
    * The optional props for the `otp` type.
    * `{ otp: true }`{lang="ts-type"}
    */
   otp?: PinInputProps
 }
+
+type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number'
+
+type AuthFormInputField<T extends AuthFormInputFieldType = AuthFormInputFieldType> = Omit<FormFieldProps, 'name'> & InputProps & {
+  name: string
+  type: T
+}
+
+type AuthFormFieldType = 'checkbox' | 'select' | 'otp' | 'password' | 'text' | 'email' | 'number'
+
+export type AuthFormField<T extends AuthFormFieldType = AuthFormFieldType>
+  = T extends 'checkbox' ? AuthFormCheckboxField
+    : T extends 'select' ? AuthFormSelectField
+      : T extends 'otp' ? AuthFormOtpField
+        : T extends AuthFormInputFieldType ? AuthFormInputField<T>
+          : never
 
 export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> {
   /**
@@ -86,7 +112,7 @@ import { reactive, ref, computed, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
-import { omit } from '../utils'
+import { omit, pick } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import UIcon from './Icon.vue'
@@ -132,6 +158,20 @@ defineExpose({
   formRef,
   state
 })
+
+function pickFieldProps(field: F) {
+  if (field.type === 'checkbox') {
+    return pick(field, ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'])
+  }
+  return pick(field, ['name', 'errorPattern', 'label', 'description', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'])
+}
+
+function omitFieldProps(field: F) {
+  if (field.type === 'checkbox') {
+    return omit(field, ['errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'])
+  }
+  return omit(field, ['name', 'errorPattern', 'label', 'description', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'])
+}
 </script>
 
 <template>
@@ -193,35 +233,38 @@ defineExpose({
         <UFormField
           v-for="field in fields"
           :key="field.name"
-          :label="field.type === 'checkbox' ? '' : field.label ?? ''"
-          :description="field.description"
-          :help="field.help"
-          :hint="field.hint"
-          :name="field.name"
-          :size="field.size"
-          :required="field.required"
-          :error="field.error"
+          v-bind="pickFieldProps(field)"
         >
           <slot :name="`${field.name}-field`" v-bind="{ state, field }">
             <UCheckbox
               v-if="field.type === 'checkbox'"
               v-model="state[field.name]"
               :class="ui.checkbox({ class: props.ui?.checkbox })"
-              v-bind="omit(field, ['description', 'help', 'hint', 'size'])"
+              v-bind="(omitFieldProps(field) as AuthFormCheckboxField)"
             />
             <USelectMenu
               v-else-if="field.type === 'select'"
               v-model="state[field.name]"
               :class="ui.select({ class: props.ui?.select })"
-              v-bind="omit(field, ['description', 'help', 'hint', 'size'])"
+              v-bind="(omitFieldProps(field) as AuthFormSelectField)"
+            />
+            <UPinInput
+              v-else-if="field.type === 'otp'"
+              :id="field.name"
+              v-model="state[field.name]"
+              :class="ui.otp({ class: props.ui?.otp })"
+              otp
+              v-bind="{
+                ...(omit(omitFieldProps(field), ['otp'] as any) as AuthFormOtpField),
+                ...((field as AuthFormOtpField).otp || {})
+              }"
             />
             <UInput
               v-else-if="field.type === 'password'"
               v-model="state[field.name]"
               :class="ui.password({ class: props.ui?.password })"
+              v-bind="(omitFieldProps(field) as AuthFormInputField<'password'>)"
               :type="passwordVisibility ? 'text' : 'password'"
-              v-bind="omit(field, ['label', 'description', 'help', 'hint', 'size', 'type', 'required', 'defaultValue'])"
-              :ui="{ root: 'w-full' }"
             >
               <template #trailing>
                 <UButton
@@ -236,19 +279,11 @@ defineExpose({
                 />
               </template>
             </UInput>
-            <UPinInput
-              v-else-if="field.type === 'otp'"
-              :id="field.name"
-              v-model="state[field.name]"
-              :class="ui.otp({ class: props.ui?.otp })"
-              otp
-              v-bind="field.otp"
-            />
             <UInput
               v-else
               v-model="state[field.name]"
               :class="ui.input({ class: props.ui?.input })"
-              v-bind="omit(field, ['label', 'description', 'help', 'hint', 'size', 'required', 'defaultValue'])"
+              v-bind="(omitFieldProps(field) as AuthFormInputField)"
             />
           </slot>
 

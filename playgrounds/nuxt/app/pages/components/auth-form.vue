@@ -1,25 +1,26 @@
 <script setup lang="ts">
 import * as z from 'zod'
-import type { FormSubmitEvent } from '@nuxt/ui'
+import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 
 const toast = useToast()
 
-const fields = [{
+const fields: AuthFormField[] = [{
   name: 'email',
-  type: 'text' as const,
+  type: 'email',
   label: 'Email',
   placeholder: 'Enter your email',
-  required: true
+  required: true,
+  error: 'Invalid email'
 }, {
   name: 'password',
   label: 'Password',
-  type: 'password' as const,
+  type: 'password',
   placeholder: 'Enter your password',
   required: true
 }, {
   name: 'remember',
   label: 'Remember me',
-  type: 'checkbox' as const
+  type: 'checkbox'
 }]
 
 const providers = [{
