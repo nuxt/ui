@@ -14,7 +14,9 @@ function send() {
 </script>
 
 <template>
-  <div class="text-center">
+  <Navbar />
+
+  <div class="text-center min-h-0">
     <div>
       <UPopover arrow :content="{ side: 'top' }">
         <UButton label="Click me top" color="neutral" variant="outline" />

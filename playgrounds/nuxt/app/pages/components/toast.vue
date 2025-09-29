@@ -125,17 +125,15 @@ function removeToast() {
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-8">
-    <div class="flex flex-col gap-2">
-      <URadioGroup v-model="appConfig.toaster.position" :items="positions" />
-      <UCheckbox v-model="appConfig.toaster.expand" label="Expand" class="mt-1" />
-      <UInput v-model="appConfig.toaster.duration" label="Duration" type="number" class="mt-1" />
-    </div>
+  <Navbar>
+    <UCheckbox v-model="appConfig.toaster.expand" label="Expand" />
+    <USelect v-model="appConfig.toaster.position" :items="positions" placeholder="Position" />
+    <UInput v-model="appConfig.toaster.duration" label="Duration" type="number" />
+  </Navbar>
 
-    <div class="flex items-center gap-2">
-      <UButton label="Add new" color="neutral" variant="outline" @click="addToast" />
-      <UButton label="Update last" color="neutral" variant="outline" @click="updateToast" />
-      <UButton label="Remove last" color="neutral" variant="outline" @click="removeToast" />
-    </div>
+  <div class="flex items-center gap-2">
+    <UButton label="Add new" color="neutral" variant="outline" @click="addToast" />
+    <UButton label="Update last" color="neutral" variant="outline" @click="updateToast" />
+    <UButton label="Remove last" color="neutral" variant="outline" @click="removeToast" />
   </div>
 </template>

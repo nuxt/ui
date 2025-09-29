@@ -1,19 +1,23 @@
 <script setup lang="ts">
 import type { SelectMenuItem, AvatarProps } from '@nuxt/ui'
-
-import { upperFirst } from 'scule'
 import { refDebounced } from '@vueuse/core'
 import theme from '#build/ui/select-menu'
 import type { User } from '~/types'
 
-const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
-const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
+const colors = Object.keys(theme.variants.color)
+const sizes = Object.keys(theme.variants.size)
+const variants = Object.keys(theme.variants.variant)
+
+const attrs = reactive({
+  color: [theme.defaultVariants.color],
+  size: [theme.defaultVariants.size],
+  variant: [theme.defaultVariants.variant]
+})
 
 const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
 const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Vegetables', type: 'label' }, ...vegetables]] satisfies SelectMenuItem[][]
-const selectedItems = ref([fruits[0]!, vegetables[0]!])
 
 const statuses = [{
   label: 'Backlog',
@@ -47,96 +51,62 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   },
   lazy: true
 })
+
+const value = ref('Apple')
+const valueMultiple = ref([fruits[0]!, vegetables[0]!])
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 w-48">
-      <USelectMenu :items="items" placeholder="Search..." default-value="Apple" />
-    </div>
-    <div class="flex items-center gap-2">
-      <USelectMenu
-        v-for="variant in variants"
-        :key="variant"
-        :items="items"
-        :placeholder="upperFirst(variant)"
-        :variant="variant"
-        class="w-48"
-      />
-    </div>
-    <div class="flex items-center gap-2">
-      <USelectMenu
-        v-for="variant in variants"
-        :key="variant"
-        :items="items"
-        :placeholder="upperFirst(variant)"
-        :variant="variant"
-        color="neutral"
-        class="w-48"
-      />
-    </div>
-    <div class="flex items-center gap-2">
-      <USelectMenu
-        v-for="variant in variants"
-        :key="variant"
-        :items="items"
-        :placeholder="upperFirst(variant)"
-        :variant="variant"
-        color="error"
-        highlight
-        class="w-48"
-      />
-    </div>
-    <div class="flex flex-col gap-4 w-48">
-      <USelectMenu :items="items" placeholder="Disabled" disabled />
-      <USelectMenu :items="items" placeholder="Required" required />
-      <USelectMenu v-model="selectedItems" :items="items" placeholder="Multiple" multiple />
-      <USelectMenu :items="items" loading placeholder="Search..." />
-    </div>
-    <div class="flex items-center gap-4">
-      <USelectMenu
-        v-for="size in sizes"
-        :key="size"
-        :items="items"
-        placeholder="Search..."
-        :size="size"
-        class="w-48"
-      />
-    </div>
-    <div class="flex items-center gap-4">
-      <USelectMenu
-        v-for="size in sizes"
-        :key="size"
-        :items="statuses"
-        placeholder="Search status..."
-        icon="i-lucide-search"
-        trailing-icon="i-lucide-chevrons-up-down"
-        :size="size"
-        class="w-48"
-      >
-        <template #leading="{ modelValue, ui }">
-          <UIcon v-if="modelValue" :name="modelValue.icon" :class="ui.leadingIcon()" />
-        </template>
-      </USelectMenu>
-    </div>
-    <div class="flex items-center gap-4">
-      <USelectMenu
-        v-for="size in sizes"
-        :key="size"
-        v-model:search-term="searchTerm"
-        :items="users"
-        :loading="status === 'pending'"
-        ignore-filter
-        icon="i-lucide-user"
-        placeholder="Search users..."
-        :size="size"
-        class="w-48"
-        @update:open="searchTerm = ''"
-      >
-        <template #leading="{ modelValue, ui }">
-          <UAvatar v-if="modelValue?.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="modelValue.avatar" />
-        </template>
-      </USelectMenu>
-    </div>
-  </div>
+  <Navbar>
+    <USelect v-model="attrs.color" :items="colors" multiple />
+    <USelect v-model="attrs.size" :items="sizes" multiple />
+    <USelect v-model="attrs.variant" :items="variants" multiple />
+  </Navbar>
+
+  <Matrix v-slot="props" :attrs="attrs">
+    <USelectMenu v-model="value" :items="items" autofocus v-bind="props" />
+    <USelectMenu :default-value="value" :items="items" v-bind="props" />
+    <USelectMenu v-model="valueMultiple" multiple placeholder="Multiple" :items="items" v-bind="props" />
+    <USelectMenu :default-value="valueMultiple" multiple placeholder="Multiple" :items="items" v-bind="props" />
+    <USelectMenu placeholder="Highlight" highlight :items="items" v-bind="props" />
+    <USelectMenu placeholder="Disabled" disabled :items="items" v-bind="props" />
+    <USelectMenu placeholder="Required" required :items="items" v-bind="props" />
+    <USelectMenu placeholder="Search..." icon="i-lucide-search" :items="items" v-bind="props" />
+    <USelectMenu placeholder="Search..." trailing-icon="i-lucide-search" :items="items" v-bind="props" />
+    <USelectMenu placeholder="Search..." :avatar="{ src: 'https://github.com/benjamincanac.png' }" :items="items" v-bind="props" />
+    <USelectMenu placeholder="Loading..." loading :items="items" v-bind="props" />
+    <USelectMenu placeholder="Loading..." loading trailing :items="items" v-bind="props" />
+    <USelectMenu
+      placeholder="Loading..."
+      loading
+      icon="i-lucide-search"
+      trailing-icon="i-lucide-arrow-right"
+      :items="items"
+      v-bind="props"
+    />
+    <USelectMenu
+      placeholder="Search status..."
+      icon="i-lucide-search"
+      trailing-icon="i-lucide-chevrons-up-down"
+      :items="statuses"
+      v-bind="props"
+    >
+      <template #leading="{ modelValue, ui }">
+        <UIcon v-if="modelValue" :name="modelValue.icon" :class="ui.leadingIcon()" />
+      </template>
+    </USelectMenu>
+    <USelectMenu
+      v-model:search-term="searchTerm"
+      placeholder="Search users..."
+      icon="i-lucide-user"
+      ignore-filter
+      :loading="status === 'pending'"
+      :items="users"
+      v-bind="props"
+    >
+      <template #leading="{ modelValue, ui }">
+        <UAvatar v-if="modelValue" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="modelValue.avatar" />
+      </template>
+    </USelectMenu>
+  </Matrix>
 </template>

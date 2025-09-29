@@ -1,52 +1,36 @@
 <script setup lang="ts">
 import theme from '#build/ui/checkbox'
 
-const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
+const colors = Object.keys(theme.variants.color)
 const variants = Object.keys(theme.variants.variant)
-const variant = ref('list' as const)
-const indicators = Object.keys(theme.variants.indicator) as Array<keyof typeof theme.variants.indicator>
-const indicator = ref('start' as const)
+const sizes = Object.keys(theme.variants.size)
+const indicators = Object.keys(theme.variants.indicator)
 
-const checked = ref(true)
+const attrs = reactive({
+  color: [theme.defaultVariants.color],
+  variant: [theme.defaultVariants.variant],
+  size: [theme.defaultVariants.size],
+  indicator: [theme.defaultVariants.indicator]
+})
+
+const value = ref(true)
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-4">
-    <div class="flex gap-4">
-      <USelect v-model="variant" :items="variants" />
-      <USelect v-model="indicator" :items="indicators" />
-    </div>
+  <Navbar>
+    <USelect v-model="attrs.color" :items="colors" multiple />
+    <USelect v-model="attrs.variant" :items="variants" multiple />
+    <USelect v-model="attrs.size" :items="sizes" multiple />
+    <USelect v-model="attrs.indicator" :items="indicators" multiple />
+  </Navbar>
 
-    <div class="flex flex-col gap-4">
-      <UCheckbox v-model="checked" label="Primary" :variant="variant" :indicator="indicator" orientation="horizontal" />
-      <UCheckbox label="Neutral" color="neutral" :variant="variant" :indicator="indicator" :default-value="true" />
-      <UCheckbox label="Error" color="error" :variant="variant" :indicator="indicator" :model-value="true" />
-      <UCheckbox label="Icon" icon="i-lucide-heart" :variant="variant" :indicator="indicator" :model-value="true" />
-      <UCheckbox label="Default value" :variant="variant" :indicator="indicator" :default-value="true" />
-      <UCheckbox label="Indeterminate" :variant="variant" :indicator="indicator" default-value="indeterminate" />
-      <UCheckbox label="Required" :variant="variant" :indicator="indicator" required />
-      <UCheckbox label="Disabled" :variant="variant" :indicator="indicator" disabled />
-    </div>
-    <div class="flex items-center gap-4 me-[-11px]">
-      <UCheckbox
-        v-for="size in sizes"
-        :key="size"
-        label="Check me"
-        :size="size"
-        :variant="variant"
-        :indicator="indicator"
-      />
-    </div>
-    <div class="flex items-center gap-4 me-[-96px]">
-      <UCheckbox
-        v-for="size in sizes"
-        :key="size"
-        label="Check me"
-        description="This is a description"
-        :size="size"
-        :variant="variant"
-        :indicator="indicator"
-      />
-    </div>
-  </div>
+  <Matrix v-slot="props" :attrs="attrs">
+    <UCheckbox v-model="value" label="Model value" v-bind="props" />
+    <UCheckbox label="Default value" v-bind="props" :default-value="true" />
+    <UCheckbox label="Indeterminate" v-bind="props" default-value="indeterminate" />
+    <UCheckbox label="Icon" icon="i-lucide-heart" v-bind="props" :model-value="true" />
+    <UCheckbox label="Required" v-bind="props" required />
+    <UCheckbox label="Disabled" v-bind="props" disabled />
+    <UCheckbox label="Description" description="This is a description" v-bind="props" />
+  </Matrix>
 </template>

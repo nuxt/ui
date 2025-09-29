@@ -6,9 +6,9 @@ const sizes = Object.keys(theme.variants.size)
 const colors = Object.keys(theme.variants.color)
 const orientations = Object.keys(theme.variants.orientation)
 
-const orientation = ref('vertical' as const)
-const color = ref('primary' as const)
-const size = ref('md' as const)
+const color = ref(theme.defaultVariants.color)
+const size = ref(theme.defaultVariants.size)
+const orientation = ref('vertical' as keyof typeof theme.variants.orientation)
 const reverse = ref(false)
 
 const items = [{
@@ -41,23 +41,21 @@ const value = ref('kickoff')
 </script>
 
 <template>
-  <div class="flex flex-col gap-10">
-    <div class="flex items-center justify-center gap-2">
-      <USelect v-model="color" :items="colors" placeholder="Color" />
-      <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
-      <USelect v-model="size" :items="sizes" placeholder="Size" />
-      <USelect v-model="value" :items="items.map(item => item.value)" placeholder="Value" />
-      <USelect v-model="reverse" :items="[true, false]" placeholder="Reverse" />
-    </div>
+  <Navbar>
+    <USelect v-model="color" :items="colors" placeholder="Color" />
+    <USelect v-model="size" :items="sizes" placeholder="Size" />
+    <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
+    <USelect v-model="value" :items="items.map(item => item.value)" placeholder="Value" />
+    <USwitch v-model="reverse" label="Reverse" />
+  </Navbar>
 
-    <UTimeline
-      v-model="value"
-      :color="color"
-      :orientation="orientation"
-      :size="size"
-      :items="items"
-      :reverse="reverse"
-      class="data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-96"
-    />
-  </div>
+  <UTimeline
+    v-model="value"
+    :color="color"
+    :orientation="orientation"
+    :size="size"
+    :items="items"
+    :reverse="reverse"
+    class="data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-96 min-h-0"
+  />
 </template>
