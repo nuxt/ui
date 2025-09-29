@@ -102,7 +102,7 @@ function openSlideover() {
       </template>
     </USlideover>
 
-    <USlideover title="Slideover prevent close" description="This slideover has `dismissible: false` prop so it won't close when clicking outside." :dismissible="false">
+    <USlideover title="Slideover prevent close" description="This slideover has `dismissible: false` prop so it won't close when clicking outside." :dismissible="false" :modal="false" :overlay="false">
       <UButton label="Open unclosable" color="neutral" variant="subtle" />
 
       <template #body>

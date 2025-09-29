@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const open = ref(false)
 const inset = ref(false)
-const interactiveDrawerOpen = ref(false)
 </script>
 
 <template>
@@ -31,38 +30,6 @@ const interactiveDrawerOpen = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer
-      v-model:open="interactiveDrawerOpen"
-      :dismissible="false"
-      :overlay="false"
-      :handle="false"
-      :modal="false"
-      title="Drawer with interactive background"
-      :inset="inset"
-      direction="bottom"
-      :ui="{ header: 'flex items-center justify-between' }"
-    >
-      <UButton color="neutral" variant="outline" label="Open with interactive background" />
-
-      <template #header>
-        <h2 class="text-highlighted font-semibold">
-          Drawer non-dismissible
-        </h2>
-
-        <UButton id="close" color="neutral" variant="ghost" icon="i-lucide-x" @click="interactiveDrawerOpen = false" />
-      </template>
-
-      <template #body>
-        <div class="space-y-4">
-          <p class="text-sm text-gray-600">
-            This drawer should NOT close when you interact with background elements like buttons, inputs or selects.
-            The `Switch` above should remain clickable without closing this drawer.
-          </p>
-          <Placeholder class="h-48 w-full" />
-        </div>
-      </template>
-    </UDrawer>
-
     <UDrawer title="Drawer with nested" :inset="inset" :ui="{ content: 'h-full' }" should-scale-background>
       <UButton color="neutral" variant="outline" label="Open nested" />
 
@@ -74,6 +41,21 @@ const interactiveDrawerOpen = ref(false)
             <Placeholder class="flex-1 m-4" />
           </template>
         </UDrawer>
+      </template>
+    </UDrawer>
+
+    <UDrawer
+      title="Drawer prevent close"
+      description="This drawer has `dismissible: false` prop so it won't close when clicking outside."
+      :dismissible="false"
+      :modal="false"
+      :overlay="false"
+      :inset="inset"
+    >
+      <UButton label="Open unclosable" color="neutral" variant="outline" />
+
+      <template #body>
+        <Placeholder class="h-96 w-full" />
       </template>
     </UDrawer>
 
