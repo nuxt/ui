@@ -3,15 +3,18 @@ import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 import theme from '#build/ui/file-upload'
 
-const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
-const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
-const layouts = Object.keys(theme.variants.layout) as Array<keyof typeof theme.variants.layout>
-const positions = Object.keys(theme.variants.position) as Array<keyof typeof theme.variants.position>
+const sizes = Object.keys(theme.variants.size)
+const variants = Object.keys(theme.variants.variant)
+const layouts = Object.keys(theme.variants.layout)
+const positions = Object.keys(theme.variants.position)
 
-const size = ref<keyof typeof theme.variants.size>('md')
-const variant = ref<keyof typeof theme.variants.variant>('area')
-const layout = ref<keyof typeof theme.variants.layout>('grid')
-const position = ref<keyof typeof theme.variants.position>('outside')
+const attrs = reactive({
+  size: [theme.defaultVariants.size]
+})
+
+const variant = ref(theme.defaultVariants.variant)
+const layout = ref('grid' as keyof typeof theme.variants.layout)
+const position = ref('outside' as keyof typeof theme.variants.position)
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
 const MIN_DIMENSIONS = { width: 200, height: 200 }
@@ -81,9 +84,16 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-8 w-96">
+  <Navbar>
+    <USelect v-model="attrs.size" :items="sizes" placeholder="Size" multiple />
+    <USelect v-model="variant" :items="variants" placeholder="Variant" />
+    <USelect v-model="layout" :items="layouts" placeholder="Layout" />
+    <USelect v-model="position" :items="positions" placeholder="Position" />
+  </Navbar>
+
+  <Matrix v-slot="props" :attrs="attrs">
     <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
-      <UFormField name="avatar" label="Avatar" description="JPG, GIF or PNG. 1MB Max." :size="size">
+      <UFormField name="avatar" label="Avatar" description="JPG, GIF or PNG. 1MB Max." v-bind="props">
         <UFileUpload v-slot="{ open, removeFile }" v-model="state.avatar" accept="image/*">
           <div class="flex flex-wrap items-center gap-3">
             <UAvatar size="lg" :src="state.avatar ? createObjectUrl(state.avatar) : undefined" icon="i-lucide-image" />
@@ -106,44 +116,31 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
         </UFileUpload>
       </UFormField>
 
-      <UButton label="Submit" type="submit" />
+      <UButton label="Submit" type="submit" :size="props?.size" />
     </UForm>
-
-    <USeparator />
-
-    <div class="flex flex-wrap items-center gap-3">
-      <USelect v-model="size" :items="sizes" />
-      <USelect v-model="variant" :items="variants" />
-      <USelect v-model="layout" :items="layouts" />
-      <USelect v-model="position" :items="positions" />
-    </div>
-
-    <USeparator />
 
     <UFileUpload
       v-model="value"
-      :size="size"
+      label="Drop your image here"
+      description="SVG, PNG, JPG or GIF (max. 2MB)"
       :variant="variant"
       :layout="layout"
       :position="position"
-      label="Drop your image here"
-      description="SVG, PNG, JPG or GIF (max. 2MB)"
+      v-bind="props"
       :class="variant === 'area' ? 'w-full min-h-44' : ''"
     />
 
-    <USeparator />
-
     <UFileUpload
       v-model="valueMultiple"
-      :size="size"
-      :variant="variant"
-      :layout="layout"
-      :position="position"
       icon="i-lucide-image"
       label="Drop your images here"
       description="SVG, PNG, JPG or GIF (max. 2MB)"
       multiple
       :interactive="false"
+      :variant="variant"
+      :layout="layout"
+      :position="position"
+      v-bind="props"
       class="w-full min-h-44"
     >
       <template #actions="{ open }">
@@ -152,7 +149,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
           icon="i-lucide-upload"
           color="neutral"
           variant="outline"
-          :size="size"
+          :size="props?.size"
           @click="open()"
         />
       </template>
@@ -167,7 +164,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
             label="Add files"
             color="neutral"
             variant="outline"
-            :size="size"
+            :size="props?.size"
             class="-my-2"
             @click="open()"
           />
@@ -181,10 +178,10 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
           color="neutral"
           variant="outline"
           class="self-start"
-          :size="size"
+          :size="props?.size"
           @click="removeFile(0)"
         />
       </template>
     </UFileUpload>
-  </div>
+  </Matrix>
 </template>
