@@ -164,6 +164,7 @@
     "@nuxt/test-utils": "^3.19.2",
     "@release-it/conventional-changelog": "^10.0.1",
     "@vue/test-utils": "^2.4.6",
+    "ai": "^5.0.51",
     "embla-carousel": "^8.6.0",
     "eslint": "^9.36.0",
     "happy-dom": "^18.0.1",

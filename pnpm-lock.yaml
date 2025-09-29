@@ -195,6 +195,9 @@ importers:
       '@vue/test-utils':
         specifier: ^2.4.6
         version: 2.4.6
+      ai:
+        specifier: ^5.0.51
+        version: 5.0.51(zod@4.1.11)
       embla-carousel:
         specifier: ^8.6.0
         version: 8.6.0
