@@ -60,7 +60,7 @@ const slots = defineSlots<FormFieldSlots>()
 
 const appConfig = useAppConfig() as FormField['AppConfig']
 
-const { labelProps, descriptionProps, errorMessageProps, label, state: { errorMessage, isTouched } } = useFormField({
+const { labelProps, descriptionProps, errorMessageProps, label, state: { errorMessage, isTouched }, controlId } = useFormField({
   path: props.name,
   label: props.label,
   description: props.description
@@ -92,7 +92,7 @@ provide(formFieldInjectionKey, computed(() => ({
             {{ label }}
           </slot>
         </Label>
-        <span v-if="hint || !!slots.hint" :id="`${labelProps.id}-hint`" :class="ui.hint({ class: props.ui?.hint })">
+        <span v-if="hint || !!slots.hint" :id="`${controlId}-hint`" :class="ui.hint({ class: props.ui?.hint })">
           <slot name="hint" :hint="hint">
             {{ hint }}
           </slot>
@@ -114,7 +114,7 @@ provide(formFieldInjectionKey, computed(() => ({
           {{ error }}
         </slot>
       </div>
-      <div v-else-if="help || !!slots.help" :id="`${labelProps.id}-help`" :class="ui.help({ class: props.ui?.help })">
+      <div v-else-if="help || !!slots.help" :id="`${controlId}-help`" :class="ui.help({ class: props.ui?.help })">
         <slot name="help" :help="help">
           {{ help }}
         </slot>
