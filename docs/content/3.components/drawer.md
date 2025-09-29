@@ -293,7 +293,7 @@ This allows you to move the trigger outside of the Drawer or remove it entirely.
 
 ### Disable dismissal
 
-Set the `dismissible` prop to `false` to prevent the Drawer from being closed when clicking outside of it or pressing escape.
+Set the `dismissible` prop to `false` to prevent the Drawer from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
 
 ::component-example
 ---
