@@ -18,15 +18,15 @@ type AuthFormSelectField = Omit<FormFieldProps, 'name'> & SelectMenuProps & {
   type: 'select'
 }
 
-type AuthFormOtpField = Omit<FormFieldProps, 'name'> & PinInputProps & {
+type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type' | 'otp'> & {
   name: string
   type: 'otp'
   /**
-   * @deprecated
+   * @deprecated Bind props directly in the field object.
    * The optional props for the `otp` type.
    * `{ otp: true }`{lang="ts-type"}
    */
-  otp?: PinInputProps
+  otp?: boolean | PinInputProps
 }
 
 type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number'
@@ -160,17 +160,30 @@ defineExpose({
 })
 
 function pickFieldProps(field: F) {
+  const fields = ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as (keyof F)[]
+
+  // Prevent binding `label` and `description` on Checkbox's FormField
   if (field.type === 'checkbox') {
-    return pick(field, ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'])
+    return pick(field, fields)
   }
-  return pick(field, ['name', 'errorPattern', 'label', 'description', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'])
+
+  return pick(field, [...fields, 'label', 'description'])
 }
 
 function omitFieldProps(field: F) {
-  if (field.type === 'checkbox') {
-    return omit(field, ['errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'])
+  const fields = ['errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as (keyof F)[]
+
+  // Prevent binding `type` on other fields than Input
+  if (field.type === 'checkbox' || field.type === 'select' || field.type === 'otp') {
+    // Prevent binding `label` and `description` on Checkbox's FormField
+    if (field.type === 'checkbox') {
+      return omit(field, [...fields, 'type'])
+    }
+
+    return omit(field, [...fields, 'type', 'label', 'description'])
   }
-  return omit(field, ['name', 'errorPattern', 'label', 'description', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'])
+
+  return omit(field, [...fields, 'label', 'description'])
 }
 </script>
 
@@ -253,11 +266,11 @@ function omitFieldProps(field: F) {
               :id="field.name"
               v-model="state[field.name]"
               :class="ui.otp({ class: props.ui?.otp })"
-              otp
               v-bind="{
-                ...(omit(omitFieldProps(field), ['otp'] as any) as AuthFormOtpField),
-                ...((field as AuthFormOtpField).otp || {})
+                ...(omitFieldProps(field) as Omit<AuthFormOtpField, 'type'>),
+                ...(typeof field.otp === 'object' ? field.otp : {})
               }"
+              otp
             />
             <UInput
               v-else-if="field.type === 'password'"
