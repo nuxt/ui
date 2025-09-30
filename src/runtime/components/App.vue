@@ -6,7 +6,7 @@ export interface AppProps<T extends Messages = Messages> extends Omit<ConfigProv
   tooltip?: TooltipProviderProps
   toaster?: ToasterProps | null
   locale?: Locale<T>
-  portal?: string | HTMLElement
+  portal?: boolean | string | HTMLElement
 }
 
 export interface AppSlots {
