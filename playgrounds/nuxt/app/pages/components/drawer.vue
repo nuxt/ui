@@ -44,6 +44,21 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
+    <UDrawer
+      title="Drawer prevent close"
+      description="This drawer has `dismissible: false` prop so it won't close when clicking outside."
+      :dismissible="false"
+      :modal="false"
+      :overlay="false"
+      :inset="inset"
+    >
+      <UButton label="Open unclosable" color="neutral" variant="outline" />
+
+      <template #body>
+        <Placeholder class="h-96 w-full" />
+      </template>
+    </UDrawer>
+
     <UDrawer title="Drawer with bottom direction" direction="bottom" :inset="inset">
       <UButton color="neutral" variant="outline" label="Open on bottom" />
 
