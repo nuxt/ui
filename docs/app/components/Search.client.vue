@@ -50,10 +50,14 @@ const groups = computed(() => [{
   items: frameworks.value
 }, {
   id: 'ia',
+  label: 'AI',
   ignoreFilter: true,
   items: [{
-    label: searchTerm.value ? `Ask AI for “${searchTerm.value}”` : 'Ask AI',
+    label: 'Ask Nuxt AI',
     icon: 'i-lucide-bot',
+    ui: {
+      itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
+    },
     onSelect: (e: any) => {
       e.preventDefault()
 
@@ -112,37 +116,13 @@ function handleClose(event: Event) {
             :assistant="{ icon: 'i-lucide-bot' }"
           >
             <template #content="{ message }">
-              <div class="space-y-2">
-                <MDCCached
-                  :value="getTextFromMessage(message)"
-                  :cache-key="message.id"
-                  unwrap="p"
-                  :components="components"
-                  :parser-options="{ highlight: false }"
-                />
-                <template v-for="(part, index) in message.parts" :key="`${part.type}-${index}-${message.id}`">
-                  <div
-                    v-if="part.type === 'dynamic-tool'"
-                    :key="`${part.type}-${part.state}`"
-                    class="text-sm text-muted flex items-center gap-1 bg-muted/50 rounded-md p-2 border border-muted/20"
-                  >
-                    <UIcon
-                      v-if="part.state === 'output-available'"
-                      name="i-lucide-circle-check"
-                      class="text-success"
-                    />
-                    <UIcon
-                      v-else
-                      name="i-lucide-loader-circle"
-                      class="text-muted animate-spin"
-                    />
-                    Tool call{{ part.state === 'output-available' ? ' successful' : ' in progress' }}
-                    <ProseCode class="text-xs">
-                      {{ part.toolName }}
-                    </ProseCode>
-                  </div>
-                </template>
-              </div>
+              <MDCCached
+                :value="getTextFromMessage(message)"
+                :cache-key="message.id"
+                unwrap="p"
+                :components="components"
+                :parser-options="{ highlight: false }"
+              />
             </template>
           </UChatMessages>
 
