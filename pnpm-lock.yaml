@@ -321,6 +321,9 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
+      shiki-stream:
+        specifier: ^0.1.2
+        version: 0.1.2(react@19.1.0)(vue@3.5.21(typescript@5.8.3))
       shiki-transformer-color-highlight:
         specifier: ^1.0.0
         version: 1.0.0
@@ -14242,12 +14245,12 @@ snapshots:
 
   shell-quote@1.8.3: {}
 
-  shiki-stream@0.1.2(react@19.1.0)(vue@3.5.14(typescript@5.8.3)):
+  shiki-stream@0.1.2(react@19.1.0)(vue@3.5.21(typescript@5.8.3)):
     dependencies:
-      '@shikijs/core': 3.4.0
+      '@shikijs/core': 3.12.2
     optionalDependencies:
       react: 19.1.0
-      vue: 3.5.14(typescript@5.8.3)
+      vue: 3.5.21(typescript@5.8.3)
 
   shiki-transformer-color-highlight@1.0.0:
     dependencies:

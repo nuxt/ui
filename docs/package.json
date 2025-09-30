@@ -16,6 +16,7 @@
     "@iconify-json/simple-icons": "^1.2.53",
     "@iconify-json/vscode-icons": "^1.2.30",
     "@modelcontextprotocol/sdk": "^1.18.1",
+    "shiki-stream": "^0.1.2",
     "@nuxt/content": "^3.7.1",
     "@nuxt/image": "^1.11.0",
     "@nuxt/ui": "workspace:*",
