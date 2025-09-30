@@ -64,7 +64,7 @@ const groups = computed(() => [{
     :fuse="{ resultLimit: 115 }"
   >
     <template v-if="chat" #content>
-      <SearchChat :messages="messages" @close="chat = false" />
+      <SearchChat v-model:messages="messages" @close="chat = false" />
     </template>
   </UContentSearch>
 </template>

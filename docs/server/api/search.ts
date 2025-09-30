@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
   const tools = await httpClient.tools()
 
   return streamText({
-    model: gateway('openai/gpt-4o-mini'),
+    model: gateway('anthropic/claude-sonnet-4.5'),
     maxOutputTokens: 10000,
     system: `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Use your knowledge base tools to search for relevant information before answering questions.
 
@@ -23,12 +23,12 @@ Guidelines:
 - If no relevant information is found after searching, respond with "Sorry, I couldn't find information about that in the documentation."
 - Be concise and direct in your responses.
 - When providing code examples, always use the \`vue\` language identifier for syntax highlighting.
-- Do not use markdown headings in your responses.
+- NEVER use markdown headings (no #, ##, ###, ####, etc.) in your responses. Use **bold text** for emphasis instead.
 - Reference specific component names, props, or APIs when applicable.
 - If a question is ambiguous, ask for clarification rather than guessing.
     `,
     messages: convertToModelMessages(messages),
-    stopWhen: stepCountIs(2),
+    stopWhen: stepCountIs(4),
     tools,
     onFinish: async () => {
       await httpClient.close()
