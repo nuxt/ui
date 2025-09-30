@@ -68,7 +68,9 @@ provide('navigation', rootNavigation)
       <template v-if="!route.path.startsWith('/examples')">
         <Footer />
 
-        <Search :files="files" :navigation="navigationByFramework" />
+        <ClientOnly>
+          <Search :files="files" :navigation="navigationByFramework" />
+        </ClientOnly>
       </template>
     </div>
   </UApp>

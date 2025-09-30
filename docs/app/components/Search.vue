@@ -55,18 +55,16 @@ const groups = computed(() => [{
 </script>
 
 <template>
-  <ClientOnly>
-    <LazyUContentSearch
-      v-model:search-term="searchTerm"
-      :links="links"
-      :files="files"
-      :groups="groups"
-      :navigation="navigation"
-      :fuse="{ resultLimit: 100 }"
-    >
-      <template v-if="chat" #content>
-        <SearchChat :messages="messages" @close="chat = false" />
-      </template>
-    </LazyUContentSearch>
-  </ClientOnly>
+  <UContentSearch
+    v-model:search-term="searchTerm"
+    :links="links"
+    :files="files"
+    :groups="groups"
+    :navigation="navigation"
+    :fuse="{ resultLimit: 115 }"
+  >
+    <template v-if="chat" #content>
+      <SearchChat :messages="messages" @close="chat = false" />
+    </template>
+  </UContentSearch>
 </template>

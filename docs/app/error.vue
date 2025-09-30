@@ -66,7 +66,9 @@ provide('navigation', rootNavigation)
 
       <Footer />
 
-      <Search :files="files" :navigation="navigationByFramework" />
+      <ClientOnly>
+        <Search :files="files" :navigation="navigationByFramework" />
+      </ClientOnly>
     </div>
   </UApp>
 </template>
