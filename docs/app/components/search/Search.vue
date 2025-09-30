@@ -24,12 +24,8 @@ const { frameworks } = useFrameworks()
 const { links } = useSearch()
 
 const groups = computed(() => [{
-  id: 'framework',
-  label: 'Framework',
-  items: frameworks.value
-}, {
-  id: 'ia',
-  label: 'AI',
+  id: 'ai',
+  label: 'Assistant',
   ignoreFilter: true,
   items: [{
     label: 'Ask Nuxt AI',
@@ -51,6 +47,10 @@ const groups = computed(() => [{
       chat.value = true
     }
   }]
+}, {
+  id: 'framework',
+  label: 'Framework',
+  items: frameworks.value
 }])
 </script>
 
