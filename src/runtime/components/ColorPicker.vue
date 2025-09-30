@@ -4,7 +4,7 @@ import type { MaybeRefOrGetter } from '@vueuse/shared'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/color-picker'
 import type { HSLObject } from 'colortranslator'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type ColorPicker = ComponentConfig<typeof theme, AppConfig, 'colorPicker'>
 
@@ -31,7 +31,7 @@ function HSVtoHSL(hsv: HSVColor): HSLObject {
   return {
     H: hsv.h,
     S: x === 0 || x === 200 ? 0 : Math.round(hsv.s * hsv.v / (x <= 100 ? x : 200 - x)),
-    L: Math.round(x / 2)
+    L: x / 2
   }
 }
 
@@ -82,6 +82,7 @@ const props = withDefaults(defineProps<ColorPickerProps>(), {
   throttle: 50,
   defaultValue: '#FFFFFF'
 })
+
 const modelValue = defineModel<string>(undefined)
 
 const appConfig = useAppConfig() as ColorPicker['AppConfig']
@@ -102,7 +103,6 @@ const pickedColor = computed<HSVColor>({
   },
   set(value) {
     const color = new ColorTranslator(HSVtoHSL(value), {
-      decimals: 2,
       labUnit: 'percent',
       cmykUnit: 'percent',
       cmykFunction: 'cmyk'

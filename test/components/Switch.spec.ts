@@ -1,10 +1,11 @@
 import { describe, it, expect, test } from 'vitest'
-import Switch, { type SwitchProps, type SwitchSlots } from '../../src/runtime/components/Switch.vue'
+import Switch from '../../src/runtime/components/Switch.vue'
+import type { SwitchProps, SwitchSlots } from '../../src/runtime/components/Switch.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/switch'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 
 describe('Switch', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -20,7 +21,7 @@ describe('Switch', () => {
     ['with checkedIcon', { props: { checkedIcon: 'i-lucide-check', defaultValue: true } }],
     ['with uncheckedIcon', { props: { uncheckedIcon: 'i-lucide-x' } }],
     ['with loading', { props: { loading: true } }],
-    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-sparkles' } }],
+    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
     ['with label', { props: { label: 'Label' } }],
     ['with required', { props: { label: 'Label', required: true } }],
     ['with description', { props: { label: 'Label', description: 'Description' } }],

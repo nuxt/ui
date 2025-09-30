@@ -1,8 +1,9 @@
 <script lang="ts">
-import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverContentProps, PopoverContentEmits, PopoverArrowProps } from 'reka-ui'
+import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverContentProps, PopoverContentEmits, PopoverArrowProps, HoverCardTriggerProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/popover'
-import type { EmitsToProps, ComponentConfig } from '../types/utils'
+import type { EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Popover = ComponentConfig<typeof theme, AppConfig, 'popover'>
 
@@ -28,6 +29,12 @@ export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps,
    */
   portal?: boolean | string | HTMLElement
   /**
+   * The reference (or anchor) element that is being referred to for positioning.
+   *
+   * If not provided will use the current component as anchor.
+   */
+  reference?: HoverCardTriggerProps['reference']
+  /**
    * When `false`, the popover will not close when clicking outside or pressing escape.
    * @defaultValue true
    */
@@ -43,6 +50,7 @@ export interface PopoverEmits extends PopoverRootEmits {
 export interface PopoverSlots {
   default(props: { open: boolean }): any
   content(props?: {}): any
+  anchor(props?: {}): any
 }
 </script>
 
@@ -74,15 +82,15 @@ const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)
 const contentEvents = computed(() => {
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown'] as const
-    type EventType = typeof events[number]
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
+
     return events.reduce((acc, curr) => {
       acc[curr] = (e: Event) => {
         e.preventDefault()
         emits('close:prevent')
       }
       return acc
-    }, {} as Record<EventType, (e: Event) => void>)
+    }, {} as Record<typeof events[number], (e: Event) => void>)
   }
 
   return {}
@@ -99,9 +107,13 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 
 <template>
   <Component.Root v-slot="{ open }" v-bind="rootProps">
-    <Component.Trigger v-if="!!slots.default" as-child :class="props.class">
+    <Component.Trigger v-if="!!slots.default || !!reference" as-child :reference="reference" :class="props.class">
       <slot :open="open" />
     </Component.Trigger>
+
+    <Component.Anchor v-if="'Anchor' in Component && !!slots.anchor" as-child>
+      <slot name="anchor" />
+    </Component.Anchor>
 
     <Component.Portal v-bind="portalProps">
       <Component.Content v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">

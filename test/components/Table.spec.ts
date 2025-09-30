@@ -1,7 +1,10 @@
-import { h } from 'vue'
+import { h, ref, computed } from 'vue'
 import { describe, it, expect } from 'vitest'
+import { flushPromises } from '@vue/test-utils'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
-import Table, { type TableProps, type TableSlots, type TableColumn } from '../../src/runtime/components/Table.vue'
+import Table from '../../src/runtime/components/Table.vue'
+import type { TableProps, TableSlots, TableColumn, TableRow } from '../../src/runtime/components/Table.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/table'
 
@@ -96,6 +99,16 @@ describe('Table', () => {
   }, {
     accessorKey: 'amount',
     header: () => h('div', { class: 'text-right' }, 'Amount'),
+    footer: ({ column }) => {
+      const total = column.getFacetedRowModel().rows.reduce((acc: number, row: TableRow<typeof data[number]>) => acc + Number.parseFloat(row.getValue('amount')), 0)
+
+      const formatted = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'EUR'
+      }).format(total)
+
+      return h('div', { class: 'text-right font-medium' }, `Total: ${formatted}`)
+    },
     cell: ({ row }) => {
       const amount = Number.parseFloat(row.getValue('amount'))
 
@@ -152,6 +165,8 @@ describe('Table', () => {
     ['with loading', { props: { ...props, loading: true } }],
     ...loadingColors.map((loadingColor: string) => [`with loading color ${loadingColor}`, { props: { ...props, loading: true, loadingColor } }]),
     ...loadingAnimations.map((loadingAnimation: string) => [`with loading animation ${loadingAnimation}`, { props: { ...props, loading: true, loadingAnimation } }]),
+    ['with meta prop', { props: { ...props, meta: { class: { tr: 'custom-row-class' }, style: { tr: { backgroundColor: 'lightgray' } } } } }],
+    ['with meta field on columns', { props: { ...props, columns: columns.map(c => ({ ...c, meta: { class: { th: 'custom-heading-class', td: 'custom-cell-class' }, style: { th: { backgroundColor: 'black' }, td: { backgroundColor: 'lightgray' } } } })) } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { base: 'table-auto' } } }],
@@ -161,9 +176,53 @@ describe('Table', () => {
     ['with expanded slot', { props, slots: { expanded: () => 'Expanded slot' } }],
     ['with empty slot', { props: { columns }, slots: { empty: () => 'Empty slot' } }],
     ['with loading slot', { props: { columns, loading: true }, slots: { loading: () => 'Loading slot' } }],
-    ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps<typeof data[number]>, slots?: Partial<TableSlots<typeof data[number]>> }) => {
+    ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }],
+    ['with body-top slot', { props, slots: { 'body-top': () => 'Body top slot' } }],
+    ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }]
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps, slots?: Partial<TableSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Table)
     expect(html).toMatchSnapshot()
+  })
+
+  it('reactive columns', async () => {
+    const wrapper = await mountSuspended({
+      components: { Table },
+      setup() {
+        const filter = ref<1 | 2>(1)
+
+        const columns = computed<TableColumn<typeof data[number]>[]>(() => [
+          {
+            accessorKey: 'id'
+          },
+          ...(filter.value === 2
+            ? [
+              {
+                accessorKey: 'amount',
+                header: () => h('div', { ['data-test-th']: 'amount' }, 'Amount')
+              } satisfies TableColumn<typeof data[number]>
+              ]
+            : [])
+        ])
+
+        function onClick() {
+          filter.value = 2
+        }
+
+        return { data, columns, onClick }
+      },
+      template: `
+            <div>
+              <button @click="onClick">Change filter</button>
+              <Table :data :columns />
+            </div>
+          `
+    })
+
+    expect(wrapper.find('[data-test-th="amount"]').exists()).toBeFalsy()
+
+    wrapper.find('button').trigger('click')
+    await flushPromises()
+
+    expect(wrapper.find('[data-test-th="amount"]').exists()).toBeTruthy()
   })
 })

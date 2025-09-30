@@ -15,6 +15,9 @@ const schema = z.object({
   select: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
   }),
+  selectMultiple: z.array(z.string()).refine(values => values.includes('option-2'), {
+    message: 'Include Option 2'
+  }),
   selectMenu: z.any().refine(option => option?.value === 'option-2', {
     message: 'Select Option 2'
   }),
@@ -34,7 +37,8 @@ const schema = z.object({
     message: 'Include Option 2'
   }),
   slider: z.number().max(20, { message: 'Must be less than 20' }),
-  pin: z.string().regex(/^\d$/).array().length(5)
+  pin: z.string().regex(/^\d$/).array().length(5),
+  file: z.file().min(1).max(1024 * 1024).mime('image/png')
 })
 
 type Schema = z.input<typeof schema>
@@ -81,6 +85,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         <USelect v-model="state.select" :items="items" class="w-full" />
       </UFormField>
 
+      <UFormField name="selectMultiple" label="Select (Multiple)">
+        <USelect v-model="state.selectMultiple" multiple :items="items" class="w-full" />
+      </UFormField>
+
       <UFormField name="selectMenu" label="Select Menu">
         <USelectMenu v-model="state.selectMenu" :items="items" class="w-full" />
       </UFormField>
@@ -114,6 +122,15 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       </div>
       <UFormField name="pin" label="Pin Input" :error-pattern="/(pin)\..*/">
         <UPinInput v-model="state.pin" />
+      </UFormField>
+
+      <UFormField name="file" label="File Input">
+        <UFileUpload
+          v-model="state.file"
+          label="Drop your image here"
+          description="PNG (max. 1MB)"
+          class="w-full min-h-44"
+        />
       </UFormField>
     </div>
 

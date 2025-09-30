@@ -3,8 +3,9 @@
 import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, DropdownMenuContentEmits as RekaDropdownMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/dropdown-menu'
-import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
-import type { ArrayOrNested, NestedItem, ComponentConfig } from '../types/utils'
+import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots, IconProps } from '../types'
+import type { ArrayOrNested, GetItemKeys, NestedItem, DynamicSlots, MergeTypes } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 
@@ -12,19 +13,19 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
   items?: T
   portal?: boolean | string | HTMLElement
   sub?: boolean
-  labelKey: keyof NestedItem<T>
+  labelKey: GetItemKeys<T>
   /**
    * @IconifyIcon
    */
-  checkedIcon?: string
+  checkedIcon?: IconProps['name']
   /**
    * @IconifyIcon
    */
-  loadingIcon?: string
+  loadingIcon?: IconProps['name']
   /**
    * @IconifyIcon
    */
-  externalIcon?: boolean | string
+  externalIcon?: boolean | IconProps['name']
   class?: any
   ui: { [K in keyof Required<DropdownMenu['slots']>]: (props?: Record<string, any>) => string }
   uiOverride?: DropdownMenu['slots']
@@ -32,9 +33,12 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
 
 interface DropdownMenuContentEmits extends RekaDropdownMenuContentEmits {}
 
-type DropdownMenuContentSlots<T extends ArrayOrNested<DropdownMenuItem>> = Omit<DropdownMenuSlots<T>, 'default'> & {
+type DropdownMenuContentSlots<
+  A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
+  T extends NestedItem<A> = NestedItem<A>
+> = Pick<DropdownMenuSlots<A>, 'item' | 'item-leading' | 'item-label' | 'item-trailing' | 'content-top' | 'content-bottom'> & {
   default(props?: {}): any
-}
+} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
 </script>
 
@@ -53,7 +57,6 @@ import ULink from './Link.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
-// eslint-disable-next-line import/no-self-import
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
 const props = defineProps<DropdownMenuContentProps<T>>()
@@ -65,7 +68,7 @@ const appConfig = useAppConfig()
 
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
-const proxySlots = omit(slots, ['default'])
+const getProxySlots = () => omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
 
@@ -85,7 +88,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
       <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof DropdownMenuContentSlots<T>)" :item="(item as Extract<NestedItem<T>, { slot: string; }>)" :active="active" :index="index">
         <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, loading: true })" />
         <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, active })" />
-        <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.uiOverride?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [uiOverride?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active })" />
+        <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || uiOverride?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [uiOverride?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active })" />
       </slot>
 
       <span v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof DropdownMenuContentSlots<T>]" :class="ui.itemLabel({ class: [uiOverride?.itemLabel, item.ui?.itemLabel], active })">
@@ -100,7 +103,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
         <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof DropdownMenuContentSlots<T>)" :item="(item as Extract<NestedItem<T>, { slot: string; }>)" :active="active" :index="index">
           <UIcon v-if="item.children?.length" :name="childrenIcon" :class="ui.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color, active })" />
           <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: [uiOverride?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
-            <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((item.ui?.itemTrailingKbdsSize || props.uiOverride?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+            <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((item.ui?.itemTrailingKbdsSize || uiOverride?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
 
@@ -115,70 +118,72 @@ const groups = computed<DropdownMenuItem[][]>(() =>
     <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" :class="props.class" v-bind="contentProps">
       <slot name="content-top" />
 
-      <DropdownMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: uiOverride?.group })">
-        <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-          <DropdownMenu.Label v-if="item.type === 'label'" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class] })">
-            <ReuseItemTemplate :item="item" :index="index" />
-          </DropdownMenu.Label>
-          <DropdownMenu.Separator v-else-if="item.type === 'separator'" :class="ui.separator({ class: [uiOverride?.separator, item.ui?.separator, item.class] })" />
-          <DropdownMenu.Sub v-else-if="item?.children?.length" :open="item.open" :default-open="item.defaultOpen">
-            <DropdownMenu.SubTrigger
-              as="button"
-              type="button"
+      <div role="presentation" :class="ui.viewport({ class: uiOverride?.viewport })">
+        <DropdownMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: uiOverride?.group })">
+          <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
+            <DropdownMenu.Label v-if="item.type === 'label'" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class] })">
+              <ReuseItemTemplate :item="item" :index="index" />
+            </DropdownMenu.Label>
+            <DropdownMenu.Separator v-else-if="item.type === 'separator'" :class="ui.separator({ class: [uiOverride?.separator, item.ui?.separator, item.class] })" />
+            <DropdownMenu.Sub v-else-if="item?.children?.length" :open="item.open" :default-open="item.defaultOpen">
+              <DropdownMenu.SubTrigger
+                as="button"
+                type="button"
+                :disabled="item.disabled"
+                :text-value="get(item, props.labelKey as string)"
+                :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
+              >
+                <ReuseItemTemplate :item="item" :index="index" />
+              </DropdownMenu.SubTrigger>
+
+              <UDropdownMenuContent
+                sub
+                :class="props.class"
+                :ui="ui"
+                :ui-override="uiOverride"
+                :portal="portal"
+                :items="(item.children as T)"
+                align="start"
+                :align-offset="-4"
+                :side-offset="3"
+                :label-key="labelKey"
+                :checked-icon="checkedIcon"
+                :loading-icon="loadingIcon"
+                :external-icon="externalIcon"
+                v-bind="item.content"
+              >
+                <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
+                  <slot :name="(name as keyof DropdownMenuContentSlots<T>)" v-bind="slotData" />
+                </template>
+              </UDropdownMenuContent>
+            </DropdownMenu.Sub>
+            <DropdownMenu.CheckboxItem
+              v-else-if="item.type === 'checkbox'"
+              :model-value="item.checked"
               :disabled="item.disabled"
               :text-value="get(item, props.labelKey as string)"
               :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
+              @update:model-value="item.onUpdateChecked"
+              @select="item.onSelect"
             >
               <ReuseItemTemplate :item="item" :index="index" />
-            </DropdownMenu.SubTrigger>
-
-            <UDropdownMenuContent
-              sub
-              :class="props.class"
-              :ui="ui"
-              :ui-override="uiOverride"
-              :portal="portal"
-              :items="(item.children as T)"
-              align="start"
-              :align-offset="-4"
-              :side-offset="3"
-              :label-key="labelKey"
-              :checked-icon="checkedIcon"
-              :loading-icon="loadingIcon"
-              :external-icon="externalIcon"
-              v-bind="item.content"
+            </DropdownMenu.CheckboxItem>
+            <DropdownMenu.Item
+              v-else
+              as-child
+              :disabled="item.disabled"
+              :text-value="get(item, props.labelKey as string)"
+              @select="item.onSelect"
             >
-              <template v-for="(_, name) in proxySlots" #[name]="slotData">
-                <slot :name="(name as keyof DropdownMenuContentSlots<T>)" v-bind="slotData" />
-              </template>
-            </UDropdownMenuContent>
-          </DropdownMenu.Sub>
-          <DropdownMenu.CheckboxItem
-            v-else-if="item.type === 'checkbox'"
-            :model-value="item.checked"
-            :disabled="item.disabled"
-            :text-value="get(item, props.labelKey as string)"
-            :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
-            @update:model-value="item.onUpdateChecked"
-            @select="item.onSelect"
-          >
-            <ReuseItemTemplate :item="item" :index="index" />
-          </DropdownMenu.CheckboxItem>
-          <DropdownMenu.Item
-            v-else
-            as-child
-            :disabled="item.disabled"
-            :text-value="get(item, props.labelKey as string)"
-            @select="item.onSelect"
-          >
-            <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<DropdownMenuItem, 'type'>)" custom>
-              <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color, active })">
-                <ReuseItemTemplate :item="item" :active="active" :index="index" />
-              </ULinkBase>
-            </ULink>
-          </DropdownMenu.Item>
-        </template>
-      </DropdownMenu.Group>
+              <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<DropdownMenuItem, 'type'>)" custom>
+                <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color, active })">
+                  <ReuseItemTemplate :item="item" :active="active" :index="index" />
+                </ULinkBase>
+              </ULink>
+            </DropdownMenu.Item>
+          </template>
+        </DropdownMenu.Group>
+      </div>
 
       <slot />
 

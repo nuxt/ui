@@ -3,11 +3,11 @@
 import type { ProgressRootProps, ProgressRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/progress'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Progress = ComponentConfig<typeof theme, AppConfig, 'progress'>
 
-export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' | 'modelValue'> {
+export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' | 'getValueText' | 'modelValue'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -70,7 +70,7 @@ const slots = defineSlots<ProgressSlots>()
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Progress['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'getValueLabel', 'modelValue'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'getValueLabel', 'getValueText', 'modelValue'), emits)
 
 const isIndeterminate = computed(() => rootProps.value.modelValue === null)
 const hasSteps = computed(() => Array.isArray(props.max))
@@ -122,9 +122,8 @@ const indicatorStyle = computed(() => {
 })
 
 const statusStyle = computed(() => {
-  return {
-    [props.orientation === 'vertical' ? 'height' : 'width']: percent.value ? `${percent.value}%` : 'fit-content'
-  }
+  const value = `${Math.max(percent.value ?? 0, 0)}%`
+  return props.orientation === 'vertical' ? { height: value } : { width: value }
 })
 
 function isActive(index: number) {
@@ -167,7 +166,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="!isIndeterminate && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%

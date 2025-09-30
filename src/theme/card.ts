@@ -1,6 +1,6 @@
 export default {
   slots: {
-    root: 'rounded-lg',
+    root: 'rounded-lg overflow-hidden',
     header: 'p-4 sm:px-6',
     body: 'p-4 sm:p-6',
     footer: 'p-4 sm:px-6'

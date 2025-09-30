@@ -1,6 +1,10 @@
 import type { VNode } from 'vue'
 import type { AcceptableValue as _AcceptableValue } from 'reka-ui'
 
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P] | undefined
+}
+
 export type DynamicSlotsKeys<Name extends string | undefined, Suffix extends string | undefined = undefined> = (
   Name extends string
     ? Suffix extends string
@@ -22,7 +26,9 @@ export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extend
   ? MaybeObject[Key]
   : never
 
-export type AcceptableValue = Exclude<_AcceptableValue, Record<string, any>>
+// NOTE: `Boolean` could potentially cause casting issues, but have been safe so far.
+// https://vuejs.org/guide/components/props.html#boolean-casting
+export type AcceptableValue = Exclude<_AcceptableValue, Record<string, any>> | boolean
 export type ArrayOrNested<T> = T[] | T[][]
 export type NestedItem<T> = T extends Array<infer I> ? NestedItem<I> : T
 type AllKeys<T> = T extends any ? keyof T : never
@@ -38,14 +44,34 @@ export type MergeTypes<T extends object> = {
   [k in NonCommonKeys<T>]?: PickTypeOf<T, k>;
 }
 
-export type GetItemKeys<I> = keyof Extract<NestedItem<I>, object>
+type DotPathKeys<T> = T extends Array<any>
+  ? never
+  : T extends object
+    ? {
+        [K in keyof T & string]:
+        T[K] extends Record<string, any>
+          ? K | `${K}.${DotPathKeys<T[K]>}`
+          : K
+      }[keyof T & string]
+    : never
 
-export type GetItemValue<I, VK extends GetItemKeys<I> | undefined, T extends NestedItem<I> = NestedItem<I>> =
-  T extends object
+type DotPathValue<T, P extends DotPathKeys<T> | (string & {})>
+  = P extends `${infer K}.${infer Rest}`
+    ? K extends keyof T
+      ? DotPathValue<T[K], Rest>
+      : never
+    : P extends keyof T
+      ? T[P]
+      : never
+
+export type GetItemKeys<I> = keyof Extract<NestedItem<I>, object> | DotPathKeys<Extract<NestedItem<I>, object>>
+
+export type GetItemValue<I, VK extends GetItemKeys<I> | undefined, T extends NestedItem<I> = NestedItem<I>>
+  = T extends object
     ? VK extends undefined
       ? T
-      : VK extends keyof T
-        ? T[VK]
+      : VK extends DotPathKeys<T>
+        ? DotPathValue<T, VK>
         : never
     : T
 
@@ -63,18 +89,16 @@ export type GetModelValueEmits<
   M extends boolean
 > = {
   /** Event handler called when the value changes. */
-  'update:modelValue': [payload: GetModelValue<T, VK, M>]
+  'update:modelValue': [value: GetModelValue<T, VK, M>]
 }
 
-export type StringOrVNode =
-  | string
-  | VNode
-  | (() => VNode)
+export type StringOrVNode
+  = | string
+    | VNode
+    | (() => VNode)
 
 export type EmitsToProps<T> = {
   [K in keyof T as `on${Capitalize<string & K>}`]: T[K] extends [...args: infer Args]
     ? (...args: Args) => void
     : never
 }
-
-export * from './tv'

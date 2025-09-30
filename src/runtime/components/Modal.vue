@@ -2,8 +2,9 @@
 import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/modal'
-import type { ButtonProps } from '../types'
-import type { EmitsToProps, ComponentConfig } from '../types/utils'
+import type { ButtonProps, IconProps } from '../types'
+import type { EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>
 
@@ -43,7 +44,7 @@ export interface ModalProps extends DialogRootProps {
    * @defaultValue appConfig.ui.icons.close
    * @IconifyIcon
    */
-  closeIcon?: string
+  closeIcon?: IconProps['name']
   /**
    * When `false`, the modal will not close when clicking outside or pressing escape.
    * @defaultValue true
@@ -55,18 +56,20 @@ export interface ModalProps extends DialogRootProps {
 
 export interface ModalEmits extends DialogRootEmits {
   'after:leave': []
+  'after:enter': []
   'close:prevent': []
 }
 
 export interface ModalSlots {
   default(props: { open: boolean }): any
-  content(props?: {}): any
-  header(props?: {}): any
+  content(props: { close: () => void }): any
+  header(props: { close: () => void }): any
   title(props?: {}): any
   description(props?: {}): any
-  close(props: { ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string } }): any
-  body(props?: {}): any
-  footer(props?: {}): any
+  actions(props?: {}): any
+  close(props: { close: () => void, ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string } }): any
+  body(props: { close: () => void }): any
+  footer(props: { close: () => void }): any
 }
 </script>
 
@@ -103,15 +106,15 @@ const contentEvents = computed(() => {
   }
 
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown', 'closeAutoFocus'] as const
-    type EventType = typeof events[number]
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
+
     return events.reduce((acc, curr) => {
       acc[curr] = (e: Event) => {
         e.preventDefault()
         emits('close:prevent')
       }
       return acc
-    }, {} as Record<EventType, (e: Event) => void>)
+    }, defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (e: Event) => void>)
   }
 
   return defaultEvents
@@ -123,8 +126,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
 }))
 </script>
 
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <DialogRoot v-slot="{ open }" v-bind="rootProps">
+  <DialogRoot v-slot="{ open, close }" v-bind="rootProps">
     <DialogTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot :open="open" />
     </DialogTrigger>
@@ -132,7 +136,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
     <DialogPortal v-bind="portalProps">
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-leave="emits('after:leave')" v-on="contentEvents">
+      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-enter="emits('after:enter')" @after-leave="emits('after:leave')" v-on="contentEvents">
         <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
           <DialogTitle v-if="title || !!slots.title">
             <slot name="title">
@@ -147,9 +151,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
           </DialogDescription>
         </VisuallyHidden>
 
-        <slot name="content">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
-            <slot name="header">
+        <slot name="content" :close="close">
+          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
+            <slot name="header" :close="close">
               <div :class="ui.wrapper({ class: props.ui?.wrapper })">
                 <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
                   <slot name="title">
@@ -164,16 +168,17 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
                 </DialogDescription>
               </div>
 
-              <DialogClose v-if="close || !!slots.close" as-child>
-                <slot name="close" :ui="ui">
+              <slot name="actions" />
+
+              <DialogClose v-if="props.close || !!slots.close" as-child>
+                <slot name="close" :close="close" :ui="ui">
                   <UButton
-                    v-if="close"
+                    v-if="props.close"
                     :icon="closeIcon || appConfig.ui.icons.close"
-                    size="md"
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('modal.close')"
-                    v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
+                    v-bind="(typeof props.close === 'object' ? props.close as Partial<ButtonProps> : {})"
                     :class="ui.close({ class: props.ui?.close })"
                   />
                 </slot>
@@ -182,11 +187,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
           </div>
 
           <div v-if="!!slots.body" :class="ui.body({ class: props.ui?.body })">
-            <slot name="body" />
+            <slot name="body" :close="close" />
           </div>
 
           <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
-            <slot name="footer" />
+            <slot name="footer" :close="close" />
           </div>
         </slot>
       </DialogContent>

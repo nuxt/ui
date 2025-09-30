@@ -2,7 +2,8 @@
 import type { CheckboxRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox'
-import type { ComponentConfig } from '../types/utils'
+import type { IconProps } from '../types'
+import type { ComponentConfig } from '../types/tv'
 
 type Checkbox = ComponentConfig<typeof theme, AppConfig, 'checkbox'>
 
@@ -36,19 +37,19 @@ export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'req
    * @defaultValue appConfig.ui.icons.check
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   /**
    * The icon displayed when the checkbox is indeterminate.
    * @defaultValue appConfig.ui.icons.minus
    * @IconifyIcon
    */
-  indeterminateIcon?: string
+  indeterminateIcon?: IconProps['name']
   class?: any
   ui?: Checkbox['slots']
 }
 
 export type CheckboxEmits = {
-  change: [payload: Event]
+  change: [event: Event]
 }
 
 export interface CheckboxSlots {

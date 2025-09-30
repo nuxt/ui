@@ -1,10 +1,11 @@
 import { describe, it, expect, test } from 'vitest'
-import Slider, { type SliderProps } from '../../src/runtime/components/Slider.vue'
+import Slider from '../../src/runtime/components/Slider.vue'
+import type { SliderProps } from '../../src/runtime/components/Slider.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/slider'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 
 describe('Slider', () => {
   const sizes = Object.keys(theme.variants.size) as any

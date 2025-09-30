@@ -1,10 +1,11 @@
 import { describe, it, expect, test } from 'vitest'
-import InputMenu, { type InputMenuProps, type InputMenuSlots } from '../../src/runtime/components/InputMenu.vue'
+import InputMenu from '../../src/runtime/components/InputMenu.vue'
+import type { InputMenuProps, InputMenuSlots } from '../../src/runtime/components/InputMenu.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import { flushPromises, mount } from '@vue/test-utils'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 import { expectEmitPayloadType } from '../utils/types'
 
 describe('InputMenu', () => {
@@ -42,6 +43,8 @@ describe('InputMenu', () => {
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
     ['with valueKey', { props: { ...props, valueKey: 'value' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
+    ['with multiple', { props: { ...props, multiple: true } }],
+    ['with multiple and modelValue', { props: { ...props, multiple: true, modelValue: [items[0], items[1]] } }],
     ['with id', { props: { ...props, id: 'id' } }],
     ['with name', { props: { ...props, name: 'name' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
@@ -59,7 +62,7 @@ describe('InputMenu', () => {
     ['with loading and avatar', { props: { loading: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with loading trailing', { props: { loading: true, trailing: true } }],
     ['with loading trailing and avatar', { props: { loading: true, trailing: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
-    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-sparkles' } }],
+    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-chevron-down' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-check' } }],
     ['with arrow', { props: { ...props, arrow: true } }],
@@ -104,6 +107,70 @@ describe('InputMenu', () => {
       const input = wrapper.findComponent({ name: 'ComboboxRoot' })
       await input.vm.$emit('update:open', false)
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
+    })
+
+    test('remove-tag event', async () => {
+      const wrapper = mount(InputMenu, { props: { modelValue: ['Option 1'], items: ['Option 1', 'Option 2'], multiple: true } })
+      const input = wrapper.findComponent({ name: 'TagsInputRoot' })
+      await input.vm.$emit('remove-tag', 'Option 1')
+      expect(wrapper.emitted()).toMatchObject({ 'remove-tag': [['Option 1']] })
+    })
+  })
+
+  describe('it should display correct label', () => {
+    test.each([null, undefined, ''])('falsy model value %s should display placeholder', (modelValue) => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items,
+          modelValue,
+          placeholder: 'Select an item'
+        }
+      })
+
+      expect(wrapper.find('input').attributes('placeholder')).toBe('Select an item')
+    })
+
+    test('with string array and string value', () => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items: ['Apple', 'Banana', 'Cherry'],
+          modelValue: 'Banana'
+        }
+      })
+
+      expect(wrapper.find('input').element.value).toBe('Banana')
+    })
+
+    test('with multiple and empty array value should display placeholder', () => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items,
+          multiple: true,
+          modelValue: [],
+          placeholder: 'Select items'
+        }
+      })
+      expect(wrapper.find('input').attributes('placeholder')).toBe('Select items')
+    })
+
+    test('with falsy modelValue and options items contain falsy', async () => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items: [
+            {
+              label: 'John Doe',
+              value: null
+            },
+            {
+              label: 'John Lennon',
+              value: 1
+            }
+          ],
+          valueKey: 'value',
+          modelValue: null
+        }
+      })
+      expect(wrapper.find('input').element.value).toBe('John Doe')
     })
   })
 

@@ -34,7 +34,7 @@ const meta = await fetchComponentMeta(name as any)
           </ProseCode>
         </ProseTd>
         <ProseTd>
-          <HighlightInlineType v-if="slot.type" :type="slot.type" />
+          <HighlightInlineType v-if="slot.type" :type="slot.type.replace(/ui:\s*\{[^}]*\}/g, 'ui: {}')" />
 
           <MDC v-if="slot.description" :value="slot.description" class="text-toned mt-1" :cache-key="`${kebabCase(route.path)}-${slot.name}-description`" />
         </ProseTd>

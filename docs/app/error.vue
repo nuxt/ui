@@ -6,15 +6,15 @@ const props = defineProps<{
   error: NuxtError
 }>()
 
+const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework', 'module']))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
   server: false
 })
 
-const links = useLinks()
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
 const blackAsPrimary = computed(() => appConfig.theme.blackAsPrimary ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
@@ -48,23 +48,39 @@ useServerSeoMeta({
 
 useFaviconFromTheme()
 
-const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
+const { frameworks } = useFrameworks()
+const { rootNavigation, navigationByFramework } = useNavigation(navigation)
+const { links } = useSearch()
 
-provide('navigation', mappedNavigation)
+provide('navigation', rootNavigation)
 </script>
 
 <template>
   <UApp>
-    <NuxtLoadingIndicator color="#FFF" />
+    <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
-    <!-- <Banner /> -->
+    <div :class="[route.path.startsWith('/docs/') && 'root']">
+      <Banner />
 
-    <Header :links="links" />
+      <Header />
 
-    <UError :error="error" />
+      <UError :error="error" />
 
-    <Footer />
+      <Footer />
 
-    <Search :files="files" :navigation="filteredNavigation" />
+      <ClientOnly>
+        <LazyUContentSearch
+          :links="links"
+          :files="files"
+          :groups="[{
+            id: 'framework',
+            label: 'Framework',
+            items: frameworks
+          }]"
+          :navigation="navigationByFramework"
+          :fuse="{ resultLimit: 120 }"
+        />
+      </ClientOnly>
+    </div>
   </UApp>
 </template>

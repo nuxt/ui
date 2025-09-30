@@ -16,16 +16,25 @@ import {
   USwitch,
   USlider,
   UPinInput,
-  UCheckboxGroup
+  UCheckboxGroup,
+  UFileUpload
 } from '#components'
 
 export async function renderForm(options: {
   state?: Reactive<any>
-  props: Partial<FormProps<any>>
+  props?: Partial<FormProps<any>> & Record<string, any>
   slotVars?: object
-  slotTemplate: string
+  slotTemplate?: string
+  fixture?: string
 }) {
   const state = options.state ?? reactive({})
+
+  if (options.fixture) {
+    const fixture = await import(/* @vite-ignore */ `../components/fixtures/${options.fixture}.vue`).then(c => c.default)
+    return await mountSuspended(fixture, {
+      props: options.props
+    })
+  }
 
   return await mountSuspended(UForm, {
     props: {
@@ -53,7 +62,8 @@ export async function renderForm(options: {
           USwitch,
           USlider,
           UPinInput,
-          UCheckboxGroup
+          UCheckboxGroup,
+          UFileUpload
         },
         template: options.slotTemplate
       }

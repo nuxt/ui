@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
+import { Analytics } from '@vercel/analytics/nuxt'
+import { SpeedInsights } from '@vercel/speed-insights/nuxt'
 
 const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework', 'module']))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
   server: false
 })
 
-const links = useLinks()
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
 const blackAsPrimary = computed(() => appConfig.theme.blackAsPrimary ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
@@ -41,33 +42,58 @@ useServerSeoMeta({
 
 useFaviconFromTheme()
 
-const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
+const { frameworks } = useFrameworks()
+const { rootNavigation, navigationByFramework } = useNavigation(navigation)
+const { links } = useSearch()
 
-provide('navigation', mappedNavigation)
+provide('navigation', rootNavigation)
 </script>
 
 <template>
   <UApp :toaster="appConfig.toaster">
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
-    <template v-if="!route.path.startsWith('/examples')">
-      <!-- <Banner /> -->
+    <Analytics :debug="false" />
+    <SpeedInsights :debug="false" />
 
-      <Header :links="links" />
-    </template>
+    <div :class="[route.path.startsWith('/docs/') && 'root']">
+      <template v-if="!route.path.startsWith('/examples')">
+        <Banner />
 
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+        <Header />
+      </template>
 
-    <template v-if="!route.path.startsWith('/examples')">
-      <Footer />
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
 
-      <Search :files="files" :navigation="filteredNavigation" />
-    </template>
+      <template v-if="!route.path.startsWith('/examples')">
+        <Footer />
+
+        <ClientOnly>
+          <LazyUContentSearch
+            :links="links"
+            :files="files"
+            :groups="[{
+              id: 'framework',
+              label: 'Framework',
+              items: frameworks
+            }]"
+            :navigation="navigationByFramework"
+            :fuse="{ resultLimit: 120 }"
+          />
+        </ClientOnly>
+      </template>
+    </div>
   </UApp>
 </template>
 
 <style>
 /* Safelist (do not remove): [&>div]:*:my-0 [&>div]:*:w-full h-64 !px-0 !py-0 !pt-0 !pb-0 !p-0 !justify-start !justify-end !min-h-96 h-136 max-h-[341px] */
+
+@media (min-width: 1024px) {
+  .root {
+    --ui-header-height: 112px;
+  }
+}
 </style>

@@ -40,9 +40,9 @@ const text = computed(() => {
         placeholder="Password"
         :color="color"
         :type="show ? 'text' : 'password'"
-        :ui="{ trailing: 'pe-1' }"
         :aria-invalid="score < 4"
         aria-describedby="password-strength"
+        :ui="{ trailing: 'pe-1' }"
         class="w-full"
       >
         <template #trailing>

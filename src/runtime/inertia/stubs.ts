@@ -1,11 +1,10 @@
 import { ref, onScopeDispose } from 'vue'
 import type { Ref, Plugin as VuePlugin } from 'vue'
 import { createHooks } from 'hookable'
-
+import { usePage } from '@inertiajs/vue3'
+import { useColorMode as useColorModeVueUse } from '@vueuse/core'
 import appConfig from '#build/app.config'
 import type { NuxtApp } from '#app'
-import { useColorMode as useColorModeVueUse } from '@vueuse/core'
-import { usePage } from '@inertiajs/vue3'
 
 export { useHead } from '@unhead/vue'
 
@@ -16,12 +15,17 @@ export { useLocale } from '../composables/useLocale'
 
 export const useRoute = () => {
   const page = usePage()
+
   return {
     fullPath: page.url
   }
 }
 
 export const useRouter = () => {
+
+}
+
+export const clearError = () => {
 
 }
 
@@ -46,10 +50,10 @@ export const useCookie = <T = string>(
   _name: string,
   _options: Record<string, any> = {}
 ) => {
-  const value = ref(null) as Ref<T>
+  const value = ref(_options?.default?.() ?? null) as Ref<T>
 
   return {
-    value,
+    value: value.value,
     get: () => value.value,
     set: () => {},
     update: () => {},

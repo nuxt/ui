@@ -3,9 +3,34 @@ import { reactive, markRaw, shallowReactive } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
 import type { ComponentProps, ComponentEmit } from 'vue-component-type-helpers'
 
-// Extracts the first argument of the close event
-type CloseEventArgType<T> = T extends (event: 'close', args_0: infer R) => void ? R : never
-
+/**
+ * This is a workaround for a design limitation in TypeScript.
+ *
+ * Conditional types only match the last function overload, not a union of all possible
+ * parameter types. This workaround forces TypeScript to properly extract the 'close'
+ * event argument type from component emits with multiple event signatures.
+ *
+ * @see https://github.com/microsoft/TypeScript/issues/32164
+ */
+type CloseEventArgType<T> = T extends {
+  (event: 'close', arg_0: infer Arg, ...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+} ? Arg : never
 export type OverlayOptions<OverlayAttrs = Record<string, any>> = {
   defaultOpen?: boolean
   props?: OverlayAttrs
@@ -17,6 +42,7 @@ interface ManagedOverlayOptionsPrivate<T extends Component> {
   id: symbol
   isMounted: boolean
   isOpen: boolean
+  originalProps?: ComponentProps<T>
   resolvePromise?: (value: any) => void
 }
 export type Overlay = OverlayOptions<Component> & ManagedOverlayOptionsPrivate<Component>
@@ -26,18 +52,17 @@ type OverlayInstance<T extends Component> = Omit<ManagedOverlayOptionsPrivate<T>
   open: (props?: ComponentProps<T>) => OpenedOverlay<T>
   close: (value?: any) => void
   patch: (props: Partial<ComponentProps<T>>) => void
-
 }
 
 type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvePromise'> & {
   result: Promise<CloseEventArgType<ComponentEmit<T>>>
-}
+} & Promise<CloseEventArgType<ComponentEmit<T>>>
 
 function _useOverlay() {
   const overlays = shallowReactive<Overlay[]>([])
 
   const create = <T extends Component>(component: T, _options?: OverlayOptions<ComponentProps<T>>): OverlayInstance<T> => {
-    const { props: props, defaultOpen, destroyOnClose } = _options || {}
+    const { props, defaultOpen, destroyOnClose } = _options || {}
 
     const options = reactive<Overlay>({
       id: Symbol(import.meta.dev ? 'useOverlay' : ''),
@@ -45,7 +70,8 @@ function _useOverlay() {
       component: markRaw(component!),
       isMounted: !!defaultOpen,
       destroyOnClose: !!destroyOnClose,
-      props: props || {}
+      originalProps: props || {},
+      props: { ...props }
     })
 
     overlays.push(options)
@@ -61,20 +87,23 @@ function _useOverlay() {
   const open = <T extends Component>(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T> => {
     const overlay = getOverlay(id)
 
-    // If props are provided, update the overlay's props
+    // If props are provided, merge them with the original props, otherwise use the original props
     if (props) {
-      patch(overlay.id, props)
+      overlay.props = { ...overlay.originalProps, ...props }
+    } else {
+      overlay.props = { ...overlay.originalProps }
     }
 
     overlay.isOpen = true
     overlay.isMounted = true
+    const result = new Promise<any>(resolve => overlay.resolvePromise = resolve)
 
-    return {
+    return Object.assign(result, {
       id,
       isMounted: overlay.isMounted,
       isOpen: overlay.isOpen,
-      result: new Promise<any>(resolve => overlay.resolvePromise = resolve)
-    }
+      result
+    })
   }
 
   const close = (id: symbol, value?: any): void => {
@@ -93,7 +122,7 @@ function _useOverlay() {
     overlays.forEach(overlay => close(overlay.id))
   }
 
-  const unMount = (id: symbol): void => {
+  const unmount = (id: symbol): void => {
     const overlay = getOverlay(id)
 
     overlay.isMounted = false
@@ -107,9 +136,7 @@ function _useOverlay() {
   const patch = <T extends Component>(id: symbol, props: Partial<ComponentProps<T>>): void => {
     const overlay = getOverlay(id)
 
-    Object.entries(props!).forEach(([key, value]) => {
-      (overlay.props as any)[key] = value
-    })
+    overlay.props = { ...overlay.props, ...props }
   }
 
   const getOverlay = (id: symbol): Overlay => {
@@ -135,7 +162,7 @@ function _useOverlay() {
     closeAll,
     create,
     patch,
-    unMount,
+    unmount,
     isOpen
   }
 }

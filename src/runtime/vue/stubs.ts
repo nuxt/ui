@@ -1,10 +1,9 @@
 import { ref, onScopeDispose } from 'vue'
 import type { Ref, Plugin as VuePlugin } from 'vue'
 import { createHooks } from 'hookable'
-
+import { useColorMode as useColorModeVueUse } from '@vueuse/core'
 import appConfig from '#build/app.config'
 import type { NuxtApp } from '#app'
-import { useColorMode as useColorModeVueUse } from '@vueuse/core'
 
 export { useHead } from '@unhead/vue'
 export { useRoute, useRouter } from 'vue-router'
@@ -13,6 +12,10 @@ export { useAppConfig } from './composables/useAppConfig'
 export { defineShortcuts } from '../composables/defineShortcuts'
 export { defineLocale } from '../composables/defineLocale'
 export { useLocale } from '../composables/useLocale'
+
+export const clearError = () => {
+
+}
 
 export const useColorMode = () => {
   if (!appConfig.colorMode) {
@@ -35,10 +38,10 @@ export const useCookie = <T = string>(
   _name: string,
   _options: Record<string, any> = {}
 ) => {
-  const value = ref(null) as Ref<T>
+  const value = ref(_options?.default?.() ?? null) as Ref<T>
 
   return {
-    value,
+    value: value.value,
     get: () => value.value,
     set: () => {},
     update: () => {},

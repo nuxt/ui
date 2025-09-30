@@ -22,9 +22,13 @@ function getEmojiFlag(locale: string): string {
     hi: 'in', // Hindi -> India
     hy: 'am', // Armenian -> Armenia
     ja: 'jp', // Japanese -> Japan
+    ka: 'ge', // Georgian -> Georgia
     kk: 'kz', // Kazakh -> Kazakhstan
     km: 'kh', // Khmer -> Cambodia
     ko: 'kr', // Korean -> South Korea
+    ky: 'kg', // Kyrgyz -> Kyrgyzstan
+    lb: 'lu', // Luxembourgish -> Luxembourg
+    ms: 'my', // Malay -> Malaysia
     nb: 'no', // Norwegian Bokmål -> Norway
     sl: 'si', // Slovenian -> Slovenia
     sv: 'se', // Swedish -> Sweden
@@ -63,7 +67,7 @@ function getEmojiFlag(locale: string): string {
         </div>
       </div>
     </div>
-    <ProseNote to="https://github.com/nuxt/ui/tree/v3/src/runtime/locale" target="_blank">
+    <ProseNote to="https://github.com/nuxt/ui/tree/v4/src/runtime/locale" target="_blank">
       If you need additional languages, you can contribute by creating a PR to add a new locale in <ProseCode>src/runtime/locale/</ProseCode>.
     </ProseNote>
     <ProseTip>

@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import CommandPalette, { type CommandPaletteProps } from '../../src/runtime/components/CommandPalette.vue'
+import CommandPalette from '../../src/runtime/components/CommandPalette.vue'
+import type { CommandPaletteProps, CommandPaletteSlots } from '../../src/runtime/components/CommandPalette.vue'
 import ComponentRender from '../component-render'
 
 describe('CommandPalette', () => {
@@ -67,15 +68,15 @@ describe('CommandPalette', () => {
     // Props
     ['with groups', { props }],
     ['without data', {}],
-    ['with modelValue', { props: { ...props, modelValue: groups[2].items[0] } }],
-    ['with defaultValue', { props: { ...props, defaultValue: groups[2].items[0] } }],
+    ['with modelValue', { props: { ...props, modelValue: groups[2]?.items[0] } }],
+    ['with defaultValue', { props: { ...props, defaultValue: groups[2]?.items[0] } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with icon', { props: { ...props, icon: 'i-lucide-terminal' } }],
     ['with loading', { props: { ...props, loading: true } }],
-    ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-sparkles' } }],
-    ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-badge-check', modelValue: groups[2].items[0] } }],
+    ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loader' } }],
+    ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-badge-check', modelValue: groups[2]?.items[0] } }],
     ['with close', { props: { ...props, close: true } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-lucide-trash' } }],
     ['with as', { props: { ...props, as: 'section' } }],
@@ -88,8 +89,9 @@ describe('CommandPalette', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
-    ['with close slot', { props: { ...props, close: true }, slots: { close: () => 'Close slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps<typeof groups[number], typeof groups[number]['items'][number]>, slots?: Partial<any> }) => {
+    ['with close slot', { props: { ...props, close: true }, slots: { close: () => 'Close slot' } }],
+    ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps, slots?: Partial<CommandPaletteSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, CommandPalette)
     expect(html).toMatchSnapshot()
   })

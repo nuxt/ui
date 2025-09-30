@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/kbd'
 import type { KbdKey } from '../composables/useKbd'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Kbd = ComponentConfig<typeof theme, AppConfig, 'kbd'>
 
@@ -13,6 +13,10 @@ export interface KbdProps {
    */
   as?: any
   value?: KbdKey | string
+  /**
+   * @defaultValue 'neutral'
+   */
+  color?: Kbd['variants']['color']
   /**
    * @defaultValue 'outline'
    */
@@ -48,7 +52,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.kbd || {}) }
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ variant, size, class: props.class })">
+  <Primitive :as="as" :class="ui({ class: props.class, color: props.color, variant: props.variant, size: props.size })">
     <slot>
       {{ getKbdKey(value) }}
     </slot>

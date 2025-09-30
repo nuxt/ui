@@ -3,7 +3,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/button'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { LinkProps, AvatarProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Button = ComponentConfig<typeof theme, AppConfig, 'button'>
 
@@ -42,14 +42,15 @@ export interface ButtonSlots {
 </script>
 
 <script setup lang="ts">
-import { type Ref, computed, ref, inject } from 'vue'
+import { computed, ref, inject } from 'vue'
+import type { Ref } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentIcons } from '../composables/useComponentIcons'
-import { useButtonGroup } from '../composables/useButtonGroup'
+import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
-import { omit } from '../utils'
+import { omit, mergeClasses } from '../utils'
 import { tv } from '../utils/tv'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
@@ -57,15 +58,11 @@ import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
 
-const props = withDefaults(defineProps<ButtonProps>(), {
-  active: undefined,
-  activeClass: '',
-  inactiveClass: ''
-})
+const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
 const appConfig = useAppConfig() as Button['AppConfig']
-const { orientation, size: buttonSize } = useButtonGroup<ButtonProps>(props)
+const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(props)
 
 const linkProps = useForwardProps(pickLinkProps(props))
 
@@ -96,10 +93,10 @@ const ui = computed(() => tv({
     variants: {
       active: {
         true: {
-          base: props.activeClass
+          base: mergeClasses(appConfig.ui?.button?.variants?.active?.true?.base, props.activeClass)
         },
         false: {
-          base: props.inactiveClass
+          base: mergeClasses(appConfig.ui?.button?.variants?.active?.false?.base, props.inactiveClass)
         }
       }
     }
@@ -113,7 +110,7 @@ const ui = computed(() => tv({
   square: props.square || (!slots.default && !props.label),
   leading: isLeading.value,
   trailing: isTrailing.value,
-  buttonGroup: orientation.value
+  fieldGroup: orientation.value
 }))
 </script>
 

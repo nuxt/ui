@@ -3,17 +3,19 @@ import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, Combob
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
+import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type SelectMenu = ComponentConfig<typeof theme, AppConfig, 'selectMenu'>
 
-interface _SelectMenuItem {
+export type SelectMenuValue = AcceptableValue
+export type SelectMenuItem = SelectMenuValue | {
   label?: string
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   avatar?: AvatarProps
   chip?: ChipProps
   /**
@@ -27,7 +29,6 @@ interface _SelectMenuItem {
   ui?: Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
-export type SelectMenuItem = _SelectMenuItem | AcceptableValue | boolean
 
 export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps {
   id?: string
@@ -58,13 +59,13 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * @defaultValue appConfig.ui.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
    * @IconifyIcon
    */
-  selectedIcon?: string
+  selectedIcon?: IconProps['name']
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
@@ -90,7 +91,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: keyof NestedItem<T>
+  labelKey?: GetItemKeys<T>
   items?: T
   /** The value of the SelectMenu when initially rendered. Use when you do not need to control the state of the SelectMenu. */
   defaultValue?: GetModelValue<T, VK, M>
@@ -115,14 +116,16 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * @defaultValue false
    */
   ignoreFilter?: boolean
+  autofocus?: boolean
+  autofocusDelay?: number
   class?: any
   ui?: SelectMenu['slots']
 }
 
 export type SelectMenuEmits<A extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
-  change: [payload: Event]
-  blur: [payload: FocusEvent]
-  focus: [payload: FocusEvent]
+  change: [event: Event]
+  blur: [event: FocusEvent]
+  focus: [event: FocusEvent]
   create: [item: string]
   /** Event handler when highlighted element changes. */
   highlight: [payload: {
@@ -165,17 +168,17 @@ export interface SelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { computed, toRef, toRaw } from 'vue'
-import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
+import { ref, computed, onMounted, toRef, toRaw } from 'vue'
+import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useButtonGroup } from '../composables/useButtonGroup'
+import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
-import { compare, get, isArrayOfArray } from '../utils'
+import { compare, get, getDisplayValue, isArrayOfArray } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -187,9 +190,10 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<SelectMenuProps<T, VK, M>>(), {
   portal: true,
   searchInput: true,
-  labelKey: 'label' as never,
+  labelKey: 'label',
   resetSearchTermOnBlur: true,
-  resetSearchTermOnSelect: true
+  resetSearchTermOnSelect: true,
+  autofocusDelay: 0
 })
 const emits = defineEmits<SelectMenuEmits<T, VK, M>>()
 const slots = defineSlots<SelectMenuSlots<T, VK, M>>()
@@ -207,10 +211,10 @@ const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps)
 
 const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
-const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
-const selectSize = computed(() => buttonGroupSize.value || formGroupSize.value)
+const selectSize = computed(() => fieldGroupSize.value || formGroupSize.value)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 
@@ -222,20 +226,25 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu |
   highlight: highlight.value,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  buttonGroup: orientation.value
+  fieldGroup: orientation.value
 }))
 
-function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string {
+function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
   if (props.multiple && Array.isArray(value)) {
-    return value.map(v => displayValue(v)).filter(Boolean).join(', ')
+    const displayedValues = value
+      .map(item => getDisplayValue<T[], GetItemValue<T, VK>>(items.value, item, {
+        labelKey: props.labelKey,
+        valueKey: props.valueKey
+      }))
+      .filter((v): v is string => v != null && v !== '')
+
+    return displayedValues.length > 0 ? displayedValues.join(', ') : undefined
   }
 
-  if (!props.valueKey) {
-    return value && (typeof value === 'object' ? get(value, props.labelKey as string) : value)
-  }
-
-  const item = items.value.find(item => compare(typeof item === 'object' ? get(item as Record<string, any>, props.valueKey as string) : item, value))
-  return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
+  return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value as GetItemValue<T, VK>, {
+    labelKey: props.labelKey,
+    valueKey: props.valueKey
+  })
 }
 
 const groups = computed<SelectMenuItem[][]>(() =>
@@ -256,7 +265,11 @@ const filteredGroups = computed(() => {
   const fields = Array.isArray(props.filterFields) ? props.filterFields : [props.labelKey] as string[]
 
   return groups.value.map(items => items.filter((item) => {
-    if (typeof item !== 'object' || item === null) {
+    if (item === undefined || item === null) {
+      return false
+    }
+
+    if (typeof item !== 'object') {
       return contains(String(item), searchTerm.value)
     }
 
@@ -264,7 +277,10 @@ const filteredGroups = computed(() => {
       return true
     }
 
-    return fields.some(field => contains(get(item, field), searchTerm.value))
+    return fields.some((field) => {
+      const value = get(item, field)
+      return value !== undefined && value !== null && contains(String(value), searchTerm.value)
+    })
   })).filter(group => group.filter(item =>
     !isSelectItem(item) || (!item.type || !['label', 'separator'].includes(item.type))
   ).length > 0)
@@ -285,6 +301,22 @@ const createItem = computed(() => {
   return !filteredItems.value.length
 })
 const createItemPosition = computed(() => typeof props.createItem === 'object' ? props.createItem.position : 'bottom')
+
+const triggerRef = ref<InstanceType<typeof ComboboxTrigger> | null>(null)
+
+function autoFocus() {
+  if (props.autofocus) {
+    triggerRef.value?.$el?.focus({
+      focusVisible: true
+    })
+  }
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
 
 function onUpdate(value: any) {
   if (toRaw(props.modelValue) === value) {
@@ -340,9 +372,13 @@ function onSelect(e: Event, item: SelectMenuItem) {
   item.onSelect?.(e)
 }
 
-function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
+function isSelectItem(item: SelectMenuItem): item is Exclude<SelectMenuItem, SelectMenuValue> {
   return typeof item === 'object' && item !== null
 }
+
+defineExpose({
+  triggerRef
+})
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -375,7 +411,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
     @update:open="onUpdateOpen"
   >
     <ComboboxAnchor as-child>
-      <ComboboxTrigger :class="ui.base({ class: [props.ui?.base, props.class] })" tabindex="0">
+      <ComboboxTrigger ref="triggerRef" :class="ui.base({ class: [props.ui?.base, props.class] })" tabindex="0">
         <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
             <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
@@ -385,7 +421,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
 
         <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open">
           <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
-            <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
+            <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" :class="ui.value({ class: props.ui?.value })">
               {{ displayedModelValue }}
             </span>
             <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
@@ -408,7 +444,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
           <slot name="content-top" />
 
           <ComboboxInput v-if="!!searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
-            <UInput autofocus autocomplete="off" v-bind="searchInputProps" :class="ui.input({ class: props.ui?.input })" />
+            <UInput autofocus autocomplete="off" :size="size" v-bind="searchInputProps" :class="ui.input({ class: props.ui?.input })" />
           </ComboboxInput>
 
           <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
@@ -417,7 +453,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
             </slot>
           </ComboboxEmpty>
 
-          <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
+          <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
             <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
             <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
@@ -468,7 +504,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
             </ComboboxGroup>
 
             <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
-          </ComboboxViewport>
+          </div>
 
           <slot name="content-bottom" />
         </FocusScope>

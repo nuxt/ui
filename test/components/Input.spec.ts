@@ -1,11 +1,12 @@
 import { describe, it, expect, test } from 'vitest'
-import { mount } from '@vue/test-utils'
-import Input, { type InputProps, type InputSlots } from '../../src/runtime/components/Input.vue'
+import { mount, flushPromises } from '@vue/test-utils'
+import Input from '../../src/runtime/components/Input.vue'
+import type { InputProps, InputSlots } from '../../src/runtime/components/Input.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 
 describe('Input', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -32,7 +33,7 @@ describe('Input', () => {
     ['with loading and avatar', { props: { loading: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with loading trailing', { props: { loading: true, trailing: true } }],
     ['with loading trailing and avatar', { props: { loading: true, trailing: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
-    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-sparkles' } }],
+    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
@@ -53,7 +54,8 @@ describe('Input', () => {
     ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
     ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
     ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' }],
-    ['with .nullify modifier', { props: { modelModifiers: { nullify: true } } }, { input: '', expected: null }]
+    ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: '', expected: null }],
+    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }]
   ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
     const wrapper = mount(Input, {
       ...options
@@ -134,29 +136,35 @@ describe('Input', () => {
     test('validate on blur works', async () => {
       const { input, wrapper } = await createForm(['blur'])
       await input.trigger('blur')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
       await input.trigger('blur')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('validate on change works', async () => {
       const { input, wrapper } = await createForm(['change'])
       await input.trigger('change')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       input.setValue('valid')
       await input.trigger('change')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'], true)
       await input.setValue('value')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
@@ -164,14 +172,17 @@ describe('Input', () => {
       const { input, wrapper } = await createForm(['input'])
 
       await input.setValue('value')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
 
       await input.trigger('blur')
 
       await input.setValue('value')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
   })

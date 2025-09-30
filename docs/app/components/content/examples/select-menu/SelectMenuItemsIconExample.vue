@@ -23,6 +23,7 @@ const items = ref([
     icon: 'i-lucide-circle-check'
   }
 ] satisfies SelectMenuItem[])
+
 const value = ref(items.value[0])
 </script>
 

@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Kbd, { type KbdProps, type KbdSlots } from '../../src/runtime/components/Kbd.vue'
+import Kbd from '../../src/runtime/components/Kbd.vue'
+import type { KbdProps, KbdSlots } from '../../src/runtime/components/Kbd.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/kbd'
 
@@ -11,7 +12,8 @@ describe('Kbd', () => {
     // Props
     ['with value', { props: { value: 'K' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { value: 'K', size } }]),
-    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { value: 'K', variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { value: 'K', variant } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { value: 'K', variant, color: 'neutral' } }]),
     ['with as', { props: { value: 'K', as: 'span' } }],
     ['with class', { props: { value: 'K', class: 'font-bold' } }],
     // Slots

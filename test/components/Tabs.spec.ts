@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Tabs, { type TabsProps, type TabsSlots } from '../../src/runtime/components/Tabs.vue'
+import Tabs from '../../src/runtime/components/Tabs.vue'
+import type { TabsProps, TabsSlots } from '../../src/runtime/components/Tabs.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/tabs'
 
@@ -21,7 +22,8 @@ describe('Tabs', () => {
     label: 'Tab3',
     icon: 'i-lucide-bell',
     content: 'Finally, this is the content for Tab3',
-    slot: 'custom'
+    slot: 'custom',
+    badge: 'badge'
   }]
 
   const props = { items }

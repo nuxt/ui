@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Skeleton, { type SkeletonProps } from '../../src/runtime/components/Skeleton.vue'
+import Skeleton from '../../src/runtime/components/Skeleton.vue'
+import type { SkeletonProps } from '../../src/runtime/components/Skeleton.vue'
 import ComponentRender from '../component-render'
 
 describe('Skeleton', () => {

@@ -2,8 +2,9 @@
 import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toast'
-import type { AvatarProps, ButtonProps } from '../types'
-import type { StringOrVNode, ComponentConfig } from '../types/utils'
+import type { AvatarProps, ButtonProps, IconProps, ProgressProps } from '../types'
+import type { StringOrVNode } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Toast = ComponentConfig<typeof theme, AppConfig, 'toast'>
 
@@ -18,7 +19,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   avatar?: AvatarProps
   /**
    * @defaultValue 'primary'
@@ -30,18 +31,6 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    */
   orientation?: Toast['variants']['orientation']
   /**
-   * Whether to show the progress bar.
-   * @defaultValue true
-   */
-  progress?: boolean
-  /**
-   * Display a list of actions:
-   * - under the title and description when orientation is `vertical`
-   * - next to the close button when orientation is `horizontal`
-   * `{ size: 'xs' }`{lang="ts-type"}
-   */
-  actions?: ButtonProps[]
-  /**
    * Display a close button to dismiss the toast.
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @defaultValue true
@@ -52,7 +41,20 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * @defaultValue appConfig.ui.icons.close
    * @IconifyIcon
    */
-  closeIcon?: string
+  closeIcon?: IconProps['name']
+  /**
+   * Display a list of actions:
+   * - under the title and description when orientation is `vertical`
+   * - next to the close button when orientation is `horizontal`
+   * `{ size: 'xs' }`{lang="ts-type"}
+   */
+  actions?: ButtonProps[]
+  /**
+   * Display a progress bar showing the toast's remaining duration.
+   * `{ size: 'sm' }`{lang="ts-type"}
+   * @defaultValue true
+   */
+  progress?: boolean | Pick<ProgressProps, 'color' | 'ui'>
   class?: any
   ui?: Toast['slots']
 }
@@ -69,7 +71,7 @@ export interface ToastSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -78,10 +80,11 @@ import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
+import UProgress from './Progress.vue'
 
 const props = withDefaults(defineProps<ToastProps>(), {
-  close: true,
   orientation: 'vertical',
+  close: true,
   progress: true
 })
 const emits = defineEmits<ToastEmits>()
@@ -106,9 +109,9 @@ onMounted(() => {
     return
   }
 
-  setTimeout(() => {
-    height.value = el.value.$el.getBoundingClientRect()?.height
-  }, 0)
+  nextTick(() => {
+    height.value = el.value?.$el?.getBoundingClientRect()?.height
+  })
 })
 
 defineExpose({
@@ -119,7 +122,7 @@ defineExpose({
 <template>
   <ToastRoot
     ref="el"
-    v-slot="{ remaining, duration }"
+    v-slot="{ remaining, duration, open }"
     v-bind="rootProps"
     :data-orientation="orientation"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
@@ -173,7 +176,6 @@ defineExpose({
           <UButton
             v-if="close"
             :icon="closeIcon || appConfig.ui.icons.close"
-            size="md"
             color="neutral"
             variant="link"
             :aria-label="t('toast.close')"
@@ -185,6 +187,13 @@ defineExpose({
       </ToastClose>
     </div>
 
-    <div v-if="progress && remaining > 0 && duration" :class="ui.progress({ class: props.ui?.progress })" :style="{ width: `${remaining / duration * 100}%` }" />
+    <UProgress
+      v-if="progress && open && remaining > 0 && duration"
+      :model-value="remaining / duration * 100"
+      :color="color"
+      v-bind="(typeof progress === 'object' ? progress as Partial<ProgressProps> : {})"
+      size="sm"
+      :class="ui.progress({ class: props.ui?.progress })"
+    />
   </ToastRoot>
 </template>

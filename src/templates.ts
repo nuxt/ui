@@ -1,12 +1,14 @@
 import { fileURLToPath } from 'node:url'
 import { kebabCase } from 'scule'
-import { addTemplate, addTypeTemplate } from '@nuxt/kit'
+import { genExport } from 'knitwork'
+import colors from 'tailwindcss/colors'
+import { addTemplate, addTypeTemplate, hasNuxtModule } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
-import colors from 'tailwindcss/colors'
-import { genExport } from 'knitwork'
+import * as themeProse from './theme/prose'
+import * as themeContent from './theme/content'
 
 export function buildTemplates(options: ModuleOptions) {
   return Object.entries(theme).reduce((acc, [key, component]) => {
@@ -15,68 +17,108 @@ export function buildTemplates(options: ModuleOptions) {
   }, {} as Record<string, any>)
 }
 
-export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>) {
+export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt) {
   const templates: NuxtTemplate[] = []
 
-  for (const component in theme) {
-    templates.push({
-      filename: `ui/${kebabCase(component)}.ts`,
-      write: true,
-      getContents: async () => {
-        const template = (theme as any)[component]
-        const result = typeof template === 'function' ? template(options) : template
+  let hasProse = false
+  let hasContent = false
 
-        const variants = Object.entries(result.variants || {})
-          .filter(([_, values]) => {
-            const keys = Object.keys(values as Record<string, unknown>)
-            return keys.some(key => key !== 'true' && key !== 'false')
-          })
-          .map(([key]) => key)
+  const isDev = process.argv.includes('--uiDev')
 
-        let json = JSON.stringify(result, null, 2)
+  function writeThemeTemplate(theme: Record<string, any>, path?: string) {
+    for (const component in theme) {
+      templates.push({
+        filename: `ui/${path ? path + '/' : ''}${kebabCase(component)}.ts`,
+        write: true,
+        getContents: async () => {
+          const template = (theme as any)[component]
+          const result = typeof template === 'function' ? template(options) : template
 
-        for (const variant of variants) {
-          json = json.replace(new RegExp(`("${variant}": "[^"]+")`, 'g'), `$1 as typeof ${variant}[number]`)
-          json = json.replace(new RegExp(`("${variant}": \\[\\s*)((?:"[^"]+",?\\s*)+)(\\])`, 'g'), (_, before, match, after) => {
-            const replaced = match.replace(/("[^"]+")/g, `$1 as typeof ${variant}[number]`)
-            return `${before}${replaced}${after}`
-          })
-        }
+          // Override default variants from nuxt.config.ts
+          if (result?.defaultVariants?.color && options.theme?.defaultVariants?.color) {
+            result.defaultVariants.color = options.theme.defaultVariants.color
+          }
+          if (result?.defaultVariants?.size && options.theme?.defaultVariants?.size) {
+            result.defaultVariants.size = options.theme.defaultVariants.size
+          }
 
-        function generateVariantDeclarations(variants: string[]) {
-          return variants.filter(variant => json.includes(`as typeof ${variant}`)).map((variant) => {
-            const keys = Object.keys(result.variants[variant])
-            return `const ${variant} = ${JSON.stringify(keys, null, 2)} as const`
-          })
-        }
+          const variants = Object.entries(result.variants || {})
+            .filter(([_, values]) => {
+              const keys = Object.keys(values as Record<string, unknown>)
+              return keys.some(key => key !== 'true' && key !== 'false')
+            })
+            .map(([key]) => key)
 
-        // For local development, import directly from theme
-        if (process.argv.includes('--uiDev')) {
-          const templatePath = fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url))
+          let json = JSON.stringify(result, null, 2)
+
+          for (const variant of variants) {
+            json = json.replace(new RegExp(`("${variant}": "[^"]+")`, 'g'), `$1 as typeof ${variant}[number]`)
+            json = json.replace(new RegExp(`("${variant}": \\[\\s*)((?:"[^"]+",?\\s*)+)(\\])`, 'g'), (_, before, match, after) => {
+              const replaced = match.replace(/("[^"]+")/g, `$1 as typeof ${variant}[number]`)
+              return `${before}${replaced}${after}`
+            })
+          }
+
+          function generateVariantDeclarations(variants: string[]) {
+            return variants.filter(variant => json.includes(`as typeof ${variant}`)).map((variant) => {
+              const keys = Object.keys(result.variants[variant])
+              return `const ${variant} = ${JSON.stringify(keys, null, 2)} as const`
+            })
+          }
+
+          // For local development, import directly from theme
+          if (isDev) {
+            const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${kebabCase(component)}`, import.meta.url))
+            return [
+              `import template from ${JSON.stringify(templatePath)}`,
+              ...generateVariantDeclarations(variants),
+              `const options = ${JSON.stringify(options, null, 2)}`,
+              `const result = typeof template === 'function' ? (template as Function)(options) : template`,
+              `if (result?.defaultVariants?.color && options.theme?.defaultVariants?.color) result.defaultVariants.color = options.theme.defaultVariants.color`,
+              `if (result?.defaultVariants?.size && options.theme?.defaultVariants?.size) result.defaultVariants.size = options.theme.defaultVariants.size`,
+              `const theme = ${json}`,
+              `export default result as typeof theme`
+            ].join('\n\n')
+          }
+
+          // For production build
           return [
-            `import template from ${JSON.stringify(templatePath)}`,
             ...generateVariantDeclarations(variants),
-            `const result = typeof template === 'function' ? (template as Function)(${JSON.stringify(options, null, 2)}) : template`,
-            `const theme = ${json}`,
-            `export default result as typeof theme`
+            `export default ${json}`
           ].join('\n\n')
         }
+      })
+    }
+  }
 
-        // For production build
-        return [
-          ...generateVariantDeclarations(variants),
-          `export default ${json}`
-        ].join('\n\n')
-      }
+  if (!!nuxt && ((hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content))) {
+    hasProse = true
+
+    const path = 'prose'
+
+    writeThemeTemplate(themeProse, path)
+
+    templates.push({
+      filename: `ui/${path}/index.ts`,
+      write: true,
+      getContents: () => Object.keys(themeProse).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
     })
   }
+
+  if (!!nuxt && (hasNuxtModule('@nuxt/content') || options.content)) {
+    hasContent = true
+
+    writeThemeTemplate(themeContent, 'content')
+  }
+
+  writeThemeTemplate(theme)
 
   templates.push({
     filename: 'ui.css',
     write: true,
     getContents: () => `@source "./ui";
 
-@theme default inline {
+@theme static {
   --color-old-neutral-50: ${colors.neutral[50]};
   --color-old-neutral-100: ${colors.neutral[100]};
   --color-old-neutral-200: ${colors.neutral[200]};
@@ -88,6 +130,9 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --color-old-neutral-800: ${colors.neutral[800]};
   --color-old-neutral-900: ${colors.neutral[900]};
   --color-old-neutral-950: ${colors.neutral[950]};
+}
+
+@theme default inline {
   ${[...(options.theme?.colors || []).filter(color => !colors[color as keyof typeof colors]), 'neutral'].map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
   ${options.theme?.colors?.map(color => `--color-${color}: var(--ui-${color});`).join('\n\t')}
   --radius-xs: calc(var(--ui-radius) * 0.5);
@@ -142,28 +187,40 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'ui/index.ts',
     write: true,
-    getContents: () => Object.keys(theme).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
+    getContents: () => {
+      let contents = Object.keys(theme).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
+      if (hasContent) {
+        contents += '\n'
+        contents += Object.keys(themeContent).map(component => `export { default as ${component} } from './content/${kebabCase(component)}'`).join('\n')
+      }
+      if (hasProse) contents += `\nexport * as prose from './prose'\n`
+      return contents
+    }
   })
 
   // FIXME: `typeof colors[number]` should include all colors from the theme
   templates.push({
     filename: 'types/ui.d.ts',
-    getContents: () => `import * as ui from '#build/ui'
+    getContents: () => {
+      const iconKeys = Object.keys(uiConfig?.icons || {})
+      const iconUnion = iconKeys.length ? iconKeys.map(i => JSON.stringify(i)).join(' | ') : 'string'
+
+      return `import * as ui from '#build/ui'
 import type { TVConfig } from '@nuxt/ui'
 import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 
-const icons = ${JSON.stringify(uiConfig.icons)};
+type IconsConfig = Record<${iconUnion} | (string & {}), string>
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | (string & {})
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {
   colors?: {
     ${options.theme?.colors?.map(color => `'${color}'?: Color`).join('\n\t\t')}
-    neutral?: NeutralColor
+    neutral?: NeutralColor | (string & {})
   }
-  icons?: Partial<typeof icons>
+  icons?: Partial<IconsConfig>
   tv?: typeof defaultConfig
 } & TVConfig<typeof ui>
 
@@ -171,7 +228,7 @@ declare module '@nuxt/schema' {
   interface AppConfigInput {
     /**
      * Nuxt UI theme configuration
-     * @see https://ui.nuxt.com/getting-started/theme#customize-theme
+     * @see https://ui.nuxt.com/docs/getting-started/theme/components
      */
     ui?: AppConfigUI
   }
@@ -179,6 +236,7 @@ declare module '@nuxt/schema' {
 
 export {}
 `
+    }
   })
 
   templates.push({
@@ -195,7 +253,7 @@ export {}
 }
 
 export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolver['resolve']) {
-  const templates = getTemplates(options, nuxt.options.appConfig.ui)
+  const templates = getTemplates(options, nuxt.options.appConfig.ui, nuxt)
   for (const template of templates) {
     if (template.filename!.endsWith('.d.ts')) {
       addTypeTemplate(template as NuxtTypeTemplate)

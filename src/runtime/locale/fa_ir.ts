@@ -6,52 +6,127 @@ export default defineLocale<Messages>({
   code: 'fa-IR',
   dir: 'rtl',
   messages: {
-    inputMenu: {
-      noMatch: 'داده‌ای یافت نشد',
-      noData: 'داده‌ای موجود نیست',
-      create: 'ایجاد "{label}"'
+    alert: {
+      close: 'بستن'
+    },
+    authForm: {
+      hidePassword: 'پنهان کردن رمز عبور',
+      showPassword: 'نمایش رمز عبور',
+      submit: 'ادامه'
+    },
+    banner: {
+      close: 'بستن'
     },
     calendar: {
-      prevYear: 'سال گذشته',
+      nextMonth: 'ماه آینده',
       nextYear: 'سال آینده',
       prevMonth: 'ماه گذشته',
-      nextMonth: 'ماه آینده'
-    },
-    inputNumber: {
-      increment: 'افزایش',
-      decrement: 'کاهش'
-    },
-    commandPalette: {
-      placeholder: 'یک دستور وارد کنید یا جستجو کنید...',
-      noMatch: 'داده‌ای یافت نشد',
-      noData: 'داده‌ای موجود نیست',
-      close: 'بستن'
-    },
-    selectMenu: {
-      noMatch: 'داده‌ای یافت نشد',
-      noData: 'داده‌ای موجود نیست',
-      create: 'ایجاد "{label}"',
-      search: 'جستجو...'
-    },
-    toast: {
-      close: 'بستن'
+      prevYear: 'سال گذشته'
     },
     carousel: {
-      prev: 'قبلی',
+      dots: 'اسلاید مورد نظر برای نمایش را انتخاب کنید',
+      goto: 'رفتن به اسلاید {slide}',
       next: 'بعدی',
-      goto: 'رفتن به اسلاید {slide}'
+      prev: 'قبلی'
+    },
+    chatPrompt: {
+      placeholder: 'اینجا پیام خود را بنویسید…'
+    },
+    chatPromptSubmit: {
+      label: 'ارسال'
+    },
+    colorMode: {
+      dark: 'تیره',
+      light: 'روشن',
+      switchToDark: 'تغییر به حالت تیره',
+      switchToLight: 'تغییر به حالت روشن',
+      system: 'سیستم'
+    },
+    commandPalette: {
+      back: 'بازگشت',
+      close: 'بستن',
+      noData: 'داده‌ای موجود نیست',
+      noMatch: 'داده‌ای یافت نشد',
+      placeholder: 'یک دستور وارد کنید یا جستجو کنید…'
+    },
+    contentSearch: {
+      links: 'پیوندها',
+      theme: 'تم'
+    },
+    contentSearchButton: {
+      label: 'جستجو…'
+    },
+    contentToc: {
+      title: 'در این صفحه'
+    },
+    dashboardSearch: {
+      theme: 'تم'
+    },
+    dashboardSearchButton: {
+      label: 'جستجو…'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'جمع کردن نوار کناری',
+      expand: 'گسترش نوار کناری'
+    },
+    dashboardSidebarToggle: {
+      close: 'بستن نوار کناری',
+      open: 'باز کردن نوار کناری'
+    },
+    error: {
+      clear: 'بازگشت به صفحه اصلی'
+    },
+    fileUpload: {
+      removeFile: 'حذف {filename}'
+    },
+    header: {
+      close: 'بستن منو',
+      open: 'باز کردن منو'
+    },
+    inputMenu: {
+      create: 'ایجاد "{label}"',
+      noData: 'داده‌ای موجود نیست',
+      noMatch: 'داده‌ای یافت نشد'
+    },
+    inputNumber: {
+      decrement: 'کاهش',
+      increment: 'افزایش'
     },
     modal: {
       close: 'بستن'
     },
-    slideover: {
-      close: 'بستن'
+    pricingTable: {
+      caption: 'مقایسه طرح قیمت'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'جمع کردن',
+        name: 'کد',
+        openText: 'گسترش'
+      },
+      collapsible: {
+        closeText: 'پنهان',
+        name: 'ویژگی‌ها',
+        openText: 'نمایش'
+      },
+      pre: {
+        copy: 'کپی کد در کلیپ‌بورد'
+      }
+    },
+    selectMenu: {
+      create: 'ایجاد "{label}"',
+      noData: 'داده‌ای موجود نیست',
+      noMatch: 'داده‌ای یافت نشد',
+      search: 'جستجو…'
+    },
+    slideover: {
       close: 'بستن'
     },
     table: {
       noData: 'داده‌ای موجود نیست'
+    },
+    toast: {
+      close: 'بستن'
     }
   }
 })

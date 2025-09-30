@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form-field'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type FormField = ComponentConfig<typeof theme, AppConfig, 'formField'>
 
@@ -18,7 +18,7 @@ export interface FormFieldProps {
   label?: string
   description?: string
   help?: string
-  error?: string | boolean
+  error?: boolean | string
   hint?: string
   /**
    * @defaultValue 'md'
@@ -41,16 +41,17 @@ export interface FormFieldSlots {
   hint(props: { hint?: string }): any
   description(props: { description?: string }): any
   help(props: { help?: string }): any
-  error(props: { error?: string | boolean }): any
-  default(props: { error?: string | boolean }): any
+  error(props: { error?: boolean | string }): any
+  default(props: { error?: boolean | string }): any
 }
 </script>
 
 <script setup lang="ts">
-import { computed, ref, inject, provide, type Ref, useId } from 'vue'
+import { computed, ref, inject, provide, useId, watch } from 'vue'
+import type { Ref } from 'vue'
 import { Primitive, Label } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { formFieldInjectionKey, inputIdInjectionKey } from '../composables/useFormField'
+import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, formInputsInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
@@ -64,14 +65,21 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.formField ||
   required: props.required
 }))
 
-const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
+const formErrors = inject<Ref<FormError[]> | null>(formErrorsInjectionKey, null)
 
-const error = computed(() => props.error || formErrors?.value?.find(error => error.name && (error.name === props.name || (props.errorPattern && error.name.match(props.errorPattern))))?.message)
+const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name?.match(props.errorPattern)))?.message)
 
 const id = ref(useId())
 // Copies id's initial value to bind aria-attributes such as aria-describedby.
 // This is required for the RadioGroup component which unsets the id value.
 const ariaId = id.value
+
+const formInputs = inject(formInputsInjectionKey, undefined)
+watch(id, () => {
+  if (formInputs && props.name) {
+    formInputs.value[props.name] = { id: id.value, pattern: props.errorPattern }
+  }
+}, { immediate: true })
 
 provide(inputIdInjectionKey, id)
 
@@ -120,7 +128,7 @@ provide(formFieldInjectionKey, computed(() => ({
           {{ error }}
         </slot>
       </div>
-      <div v-else-if="help || !!slots.help" :class="ui.help({ class: props.ui?.help })">
+      <div v-else-if="help || !!slots.help" :id="`${ariaId}-help`" :class="ui.help({ class: props.ui?.help })">
         <slot name="help" :help="help">
           {{ help }}
         </slot>

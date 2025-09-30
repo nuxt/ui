@@ -1,18 +1,18 @@
 <template>
   <UBanner
-    id="ui3-launch"
+    id="nuxt-ui-v4"
+    title="Nuxt UI v4 is officially released!"
+    to="https://github.com/nuxt/ui/releases/tag/v4.0.0"
     icon="i-lucide-rocket"
-    :actions="[
-      {
-        label: 'Discover Nuxt UI Pro',
-        to: '/pro/pricing',
-        trailingIcon: 'i-lucide-arrow-right'
-      }
-    ]"
     close
-  >
-    <template #title>
-      <span class="font-semibold">Nuxt UI v3</span> is officially released.
-    </template>
-  </UBanner>
+    :actions="[{
+      label: 'Read the post',
+      color: 'neutral',
+      variant: 'outline',
+      trailingIcon: 'i-lucide-arrow-right',
+      to: 'https://nuxt.com/blog/nuxt-ui-v4',
+      target: '_blank',
+      class: 'ring-0'
+    }]"
+  />
 </template>

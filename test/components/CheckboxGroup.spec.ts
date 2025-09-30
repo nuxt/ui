@@ -1,11 +1,12 @@
 import { describe, it, expect, test } from 'vitest'
-import CheckboxGroup, { type CheckboxGroupProps, type CheckboxGroupSlots } from '../../src/runtime/components/CheckboxGroup.vue'
+import CheckboxGroup from '../../src/runtime/components/CheckboxGroup.vue'
+import type { CheckboxGroupProps, CheckboxGroupSlots } from '../../src/runtime/components/CheckboxGroup.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/checkbox-group'
 import themeCheckbox from '#build/ui/checkbox'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 
 describe('CheckboxGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -119,7 +120,7 @@ describe('CheckboxGroup', () => {
     test('no label for=... on FormField', async () => {
       const { wrapper } = await createForm()
       const formFieldLabel = wrapper.findAll('label').map(label => label.attributes()).filter(label => !label.for?.includes(':'))[0]
-      expect(formFieldLabel.for).toBeUndefined()
+      expect(formFieldLabel?.for).toBeUndefined()
     })
   })
 })

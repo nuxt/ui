@@ -1,6 +1,8 @@
 <script lang="ts">
+import type { IconProps as NuxtIconProps } from '../../types'
+
 export interface IconProps {
-  name: string
+  name: NuxtIconProps['name']
 }
 </script>
 
@@ -11,5 +13,6 @@ defineProps<IconProps>()
 </script>
 
 <template>
-  <IconifyIcon :icon="name.replace(/^i-/, '')" />
+  <IconifyIcon v-if="typeof name === 'string'" :icon="name.replace(/^i-/, '')" />
+  <component :is="name" v-else />
 </template>

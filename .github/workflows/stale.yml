@@ -1,6 +1,7 @@
 name: stale
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '30 1 * * *'
 
@@ -9,17 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
+      actions: write
       issues: write
 
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/stale@4c023f01d613e60293d8004f251a18bfb9bbd71d
         with:
-          days-before-stale: -1 # Issues and PR will never be flagged stale automatically.
-          stale-issue-label: 'needs reproduction' # Label that flags an issue as stale.
-          only-labels: 'needs reproduction' # Only process these issues
-          days-before-issue-close: 7
-          ignore-updates: true
-          remove-stale-when-updated: false
-          close-issue-message: This issue was closed because it was open for 7 days without a reproduction.
-          close-issue-label: closed-by-bot
-          operations-per-run: 300 #default 30
+          days-before-pr-stale: -1
+          days-before-stale: 60
+          days-before-close: 7
+          any-of-labels: 'triage,question'
+          stale-issue-label: 'stale'
+          stale-issue-message: |
+            Hi! 👋 This issue has been open for 60 days without activity and will be closed in 7 days. Please comment if it's still relevant.
+          close-issue-label: 'closed-by-bot'
+          close-issue-message: |
+            Hi! 👋 This issue was automatically closed due to inactivity. If it's still relevant with the latest Nuxt UI version, feel free to reopen or create a new issue.
+          operations-per-run: 300

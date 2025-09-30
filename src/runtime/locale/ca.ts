@@ -5,52 +5,127 @@ export default defineLocale<Messages>({
   name: 'Català',
   code: 'ca',
   messages: {
-    inputMenu: {
-      noMatch: 'No hi ha dades coincidents',
-      noData: 'Sense dades',
-      create: 'Crear "{label}"'
+    alert: {
+      close: 'Tancar'
+    },
+    authForm: {
+      hidePassword: 'Amagar contrasenya',
+      showPassword: 'Mostrar contrasenya',
+      submit: 'Continuar'
+    },
+    banner: {
+      close: 'Tancar'
     },
     calendar: {
-      prevYear: 'Any anterior',
+      nextMonth: 'Mes següent',
       nextYear: 'Any següent',
       prevMonth: 'Mes anterior',
-      nextMonth: 'Mes següent'
-    },
-    inputNumber: {
-      increment: 'Incrementar',
-      decrement: 'Decrementar'
-    },
-    commandPalette: {
-      placeholder: 'Escriu una ordre o cerca...',
-      noMatch: 'No hi ha dades coincidents',
-      noData: 'Sense dades',
-      close: 'Tancar'
-    },
-    selectMenu: {
-      noMatch: 'No hi ha dades coincidents',
-      noData: 'Sense dades',
-      create: 'Crear "{label}"',
-      search: 'Cerca...'
-    },
-    toast: {
-      close: 'Tancar'
+      prevYear: 'Any anterior'
     },
     carousel: {
-      prev: 'Anterior',
+      dots: 'Tria la diapositiva a mostrar',
+      goto: 'Anar a la diapositiva {slide}',
       next: 'Següent',
-      goto: 'Anar a la diapositiva {slide}'
+      prev: 'Anterior'
+    },
+    chatPrompt: {
+      placeholder: 'Escriu el teu missatge aquí…'
+    },
+    chatPromptSubmit: {
+      label: 'Enviar'
+    },
+    colorMode: {
+      dark: 'Fosc',
+      light: 'Clar',
+      switchToDark: 'Canviar a mode fosc',
+      switchToLight: 'Canviar a mode clar',
+      system: 'Sistema'
+    },
+    commandPalette: {
+      back: 'Enrere',
+      close: 'Tancar',
+      noData: 'Sense dades',
+      noMatch: 'No hi ha dades coincidents',
+      placeholder: 'Escriu una ordre o cerca…'
+    },
+    contentSearch: {
+      links: 'Enllaços',
+      theme: 'Tema'
+    },
+    contentSearchButton: {
+      label: 'Cercar…'
+    },
+    contentToc: {
+      title: 'En aquesta pàgina'
+    },
+    dashboardSearch: {
+      theme: 'Tema'
+    },
+    dashboardSearchButton: {
+      label: 'Cercar…'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'Contraure barra lateral',
+      expand: 'Expandir barra lateral'
+    },
+    dashboardSidebarToggle: {
+      close: 'Tancar barra lateral',
+      open: 'Obrir barra lateral'
+    },
+    error: {
+      clear: 'Tornar a l\'inici'
+    },
+    fileUpload: {
+      removeFile: 'Eliminar {filename}'
+    },
+    header: {
+      close: 'Tancar menú',
+      open: 'Obrir menú'
+    },
+    inputMenu: {
+      create: 'Crear "{label}"',
+      noData: 'Sense dades',
+      noMatch: 'No hi ha dades coincidents'
+    },
+    inputNumber: {
+      decrement: 'Decrementar',
+      increment: 'Incrementar'
     },
     modal: {
       close: 'Tancar'
     },
-    slideover: {
-      close: 'Tancar'
+    pricingTable: {
+      caption: 'Comparació de plans de preu'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'Replega',
+        name: 'codi',
+        openText: 'Desplega'
+      },
+      collapsible: {
+        closeText: 'Amaga',
+        name: 'propietats',
+        openText: 'Mostra'
+      },
+      pre: {
+        copy: 'Copiar codi al portapapers'
+      }
+    },
+    selectMenu: {
+      create: 'Crear "{label}"',
+      noData: 'Sense dades',
+      noMatch: 'No hi ha dades coincidents',
+      search: 'Cerca…'
+    },
+    slideover: {
       close: 'Tancar'
     },
     table: {
       noData: 'Sense dades'
+    },
+    toast: {
+      close: 'Tancar'
     }
   }
 })

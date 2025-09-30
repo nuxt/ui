@@ -1,9 +1,10 @@
 <script lang="ts">
-import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipContentEmits, TooltipArrowProps } from 'reka-ui'
+import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipContentEmits, TooltipArrowProps, TooltipTriggerProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tooltip'
 import type { KbdProps } from '../types'
-import type { EmitsToProps, ComponentConfig } from '../types/utils'
+import type { EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Tooltip = ComponentConfig<typeof theme, AppConfig, 'tooltip'>
 
@@ -27,6 +28,12 @@ export interface TooltipProps extends TooltipRootProps {
    * @defaultValue true
    */
   portal?: boolean | string | HTMLElement
+  /**
+   * The reference (or anchor) element that is being referred to for positioning.
+   *
+   * If not provided will use the current component as anchor.
+   */
+  reference?: TooltipTriggerProps['reference']
   class?: any
   ui?: Tooltip['slots']
 }
@@ -57,7 +64,7 @@ const slots = defineSlots<TooltipSlots>()
 
 const appConfig = useAppConfig() as Tooltip['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration', 'disableHoverableContent', 'disableClosingTrigger', 'disabled', 'ignoreNonKeyboardFocus'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration', 'disableHoverableContent', 'disableClosingTrigger', 'ignoreNonKeyboardFocus'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as TooltipContentProps)
 const arrowProps = toRef(() => props.arrow as TooltipArrowProps)
@@ -69,8 +76,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {
 </script>
 
 <template>
-  <TooltipRoot v-slot="{ open }" v-bind="rootProps">
-    <TooltipTrigger v-if="!!slots.default" v-bind="$attrs" as-child :class="props.class">
+  <TooltipRoot v-slot="{ open }" v-bind="rootProps" :disabled="!(text || kbds?.length || !!slots.content) || props.disabled">
+    <TooltipTrigger v-if="!!slots.default || !!reference" v-bind="$attrs" as-child :reference="reference" :class="props.class">
       <slot :open="open" />
     </TooltipTrigger>
 

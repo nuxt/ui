@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/alert'
-import type { AvatarProps, ButtonProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { AvatarProps, ButtonProps, IconProps } from '../types'
+import type { ComponentConfig } from '../types/tv'
 
 type Alert = ComponentConfig<typeof theme, AppConfig, 'alert'>
 
@@ -17,7 +17,7 @@ export interface AlertProps {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   avatar?: AvatarProps
   /**
    * @defaultValue 'primary'
@@ -51,13 +51,13 @@ export interface AlertProps {
    * @defaultValue appConfig.ui.icons.close
    * @IconifyIcon
    */
-  closeIcon?: string
+  closeIcon?: IconProps['name']
   class?: any
   ui?: Alert['slots']
 }
 
 export interface AlertEmits {
-  (e: 'update:open', value: boolean): void
+  'update:open': [value: boolean]
 }
 
 export interface AlertSlots {
@@ -133,7 +133,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.alert || {})
         <UButton
           v-if="close"
           :icon="closeIcon || appConfig.ui.icons.close"
-          size="md"
           color="neutral"
           variant="link"
           :aria-label="t('alert.close')"
