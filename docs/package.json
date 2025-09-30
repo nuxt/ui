@@ -29,7 +29,7 @@
     "capture-website": "^5.0.0",
     "joi": "^18.0.1",
     "maska": "^3.2.0",
-    "motion-v": "^1.7.1",
+    "motion-v": "^1.7.2",
     "nuxt": "^4.1.2",
     "nuxt-component-meta": "^0.14.0",
     "nuxt-llms": "^0.1.3",
