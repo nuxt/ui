@@ -1,4 +1,4 @@
-import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp'
+import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
 import { streamText, convertToModelMessages, experimental_createMCPClient, stepCountIs } from 'ai'
 import { gateway } from '@ai-sdk/gateway'
 
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     maxOutputTokens: 10000,
     system: `You are a helpful assistant for Nuxt UI. Check your knowledge base before answering any questions.
     Only respond to questions using information from tool calls.
-    if no relevant information is found in the tool calls, respond, "Sorry, I don't know."
+    If no relevant information is found in the tool calls, respond, "Sorry, I don't know."
     Format your markdown response using the following rules:
     - Use the vue lang for code blocks syntax highlighting.
     - Don't use markdown headings.

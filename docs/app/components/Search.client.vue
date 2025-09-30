@@ -34,7 +34,7 @@ const messages: UIMessage[] = []
 const chat = new Chat({
   messages,
   transport: new DefaultChatTransport({
-    api: '/api/ai-search'
+    api: '/api/search'
   }),
   onError: (error) => {
     console.error('onError', error)
