@@ -4,8 +4,7 @@ import { Chat } from '@ai-sdk/vue'
 import type { UIMessage } from 'ai'
 import { DefaultChatTransport } from 'ai'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
-
-import ProseStreamPre from './prose/PreStream.vue'
+import ProseStreamPre from '../prose/PreStream.vue'
 
 const components = {
   pre: ProseStreamPre as unknown as DefineComponent
@@ -52,7 +51,7 @@ function handleClose(e: Event) {
 }
 
 onMounted(() => {
-  if (props.messages?.length === 1) {
+  if (props.messages?.length) {
     chat.regenerate()
   }
 })
@@ -64,6 +63,8 @@ onMounted(() => {
       should-auto-scroll
       :messages="chat.messages"
       :status="chat.status"
+      :user="{ side: 'left', variant: 'naked', avatar: { icon: 'i-lucide-user' } }"
+      :assistant="{ avatar: { icon: 'i-lucide-bot' } }"
     >
       <template #content="{ message }">
         <MDCCached

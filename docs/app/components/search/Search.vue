@@ -40,15 +40,15 @@ const groups = computed(() => [{
     onSelect: (e: any) => {
       e.preventDefault()
 
-      chat.value = true
+      messages.value = searchTerm.value
+        ? [{
+            id: '1',
+            role: 'user',
+            parts: [{ type: 'text', text: searchTerm.value }]
+          }]
+        : []
 
-      if (searchTerm.value) {
-        messages.value = [{
-          id: '1',
-          role: 'user',
-          parts: [{ type: 'text', text: searchTerm.value }]
-        }]
-      }
+      chat.value = true
     }
   }]
 }])
