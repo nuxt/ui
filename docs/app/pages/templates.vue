@@ -11,19 +11,18 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs', {
-  headline: 'Community'
-})
+defineOgImageComponent('Docs')
 </script>
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <div v-if="page" class="relative">
-    <UPageHero :links="page.links" :ui="{ container: 'relative' }">
-      <LazyStarsBg />
-
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-
+    <UPageHero
+      :links="page.links"
+      :ui="{
+        container: 'relative lg:py-32'
+      }"
+    >
       <template #title>
         <MDC :value="page.hero.title" unwrap="p" cache-key="pro-templates-hero-title" />
       </template>
@@ -35,10 +34,18 @@ defineOgImageComponent('Docs', {
       <template #links>
         <FrameworkTabs size="md" class="w-48" />
       </template>
+
+      <template #top>
+        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+      </template>
+
+      <LazyStarsBg />
+
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
 
     <UPageSection
-      v-for="(template, index) in page.templates"
+      v-for="(template, index) in page.items"
       :key="index"
       :title="template.title"
       :features="template.features"

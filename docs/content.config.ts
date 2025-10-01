@@ -197,7 +197,7 @@ export const collections = {
       navigation: z.boolean().optional(),
       links: z.array(Button),
       hero: BaseSection,
-      templates: z.array(z.object({
+      items: z.array(z.object({
         title: z.string(),
         description: z.string(),
         icon: z.string(),
@@ -208,6 +208,42 @@ export const collections = {
         links: z.array(Button).optional(),
         deploy_links: z.array(Button).optional()
       }))
+    })
+  }),
+  community: defineCollection({
+    type: 'page',
+    source: 'community.yml',
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      hero: BaseSection,
+      items: z.array(z.object({
+        label: z.string(),
+        description: z.string(),
+        icon: z.string(),
+        to: z.string(),
+        target: z.string().optional()
+      }))
+    })
+  }),
+  team: defineCollection({
+    type: 'page',
+    source: 'team.yml',
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      hero: BaseSection
+    })
+  }),
+  releases: defineCollection({
+    type: 'page',
+    source: 'releases.yml',
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      hero: BaseSection.extend({
+        links: z.array(Button).optional()
+      })
     })
   })
 }

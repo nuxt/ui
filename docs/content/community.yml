@@ -1,0 +1,37 @@
+title: Community
+description: Discover amazing projects built around Nuxt UI.
+navigation: false
+hero:
+  title: Community
+  description: Discover amazing projects built around Nuxt UI.
+items:
+  - label: 'Compodium'
+    description: 'Integrate Nuxt UI with Nuxt Devtools with Compodium.'
+    icon: 'i-lucide-code'
+    to: 'https://github.com/romhml/compodium'
+    target: '_blank'
+  - label: 'Raycast Extension'
+    description: 'Access Nuxt UI components without leaving your editor.'
+    icon: 'i-simple-icons-raycast'
+    to: 'https://github.com/HugoRCD/nuxt-raycast-extension'
+    target: '_blank'
+  - label: 'Figma to Code'
+    description: 'Convert Figma designs to Nuxt UI code.'
+    icon: 'i-simple-icons-figma'
+    to: 'https://github.com/Justineo/tempad-dev-plugin-nuxt-ui'
+    target: '_blank'
+  - label: 'Nuxt Auto Form'
+    description: 'Generate forms automatically from Zod schemas with Nuxt UI.'
+    icon: 'i-heroicons-document-text'
+    to: 'https://github.com/Norbiros/nuxt-auto-form'
+    target: '_blank'
+  - label: 'Nuxt Charts'
+    description: 'Create beautiful charts and dashboards with Nuxt UI.'
+    icon: 'i-heroicons-chart-bar'
+    to: 'https://github.com/dennisadriaans/vue-chrts'
+    target: '_blank'
+  - label: 'Nuxt QRCode'
+    description: 'Generate and read QR codes in your Nuxt application.'
+    icon: 'i-heroicons-qr-code'
+    to: 'https://github.com/sandros94/nuxt-qrcode'
+    target: '_blank'

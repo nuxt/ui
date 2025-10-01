@@ -11,7 +11,7 @@ export default defineCachedEventHandler(async (event) => {
   const templatesCollectionItems = await queryCollection(event, 'templates').first()
 
   // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
-  const templateListing = templatesCollectionItems?.body?.templates || []
+  const templateListing = templatesCollectionItems?.body?.items || []
 
   const filteredTemplates = framework
     // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly

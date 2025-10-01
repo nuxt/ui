@@ -5,16 +5,14 @@ if (!page.value) {
 }
 
 useSeoMeta({
-  titleTemplate: `%s - Nuxt UI`,
+  titleTemplate: '%s - Nuxt UI',
   title: page.value.title,
   description: page.value.description,
   ogTitle: `${page.value.title} - Nuxt UI`,
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs', {
-  headline: 'Community'
-})
+defineOgImageComponent('Docs')
 </script>
 
 <template>
@@ -24,8 +22,7 @@ defineOgImageComponent('Docs', {
       :description="page.hero.description"
       :links="page.hero.links"
       :ui="{
-        wrapper: 'lg:px-12',
-        container: 'relative'
+        container: 'relative lg:py-32'
       }"
     >
       <template #top>
@@ -34,6 +31,10 @@ defineOgImageComponent('Docs', {
 
       <LazyStarsBg />
 
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
+    </UPageHero>
+
+    <UPageSection :ui="{ container: '!pt-0 relative' }">
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
       <div class="border-l border-t border-default">
@@ -67,6 +68,6 @@ defineOgImageComponent('Docs', {
           </li>
         </ul>
       </div>
-    </UPageHero>
+    </UPageSection>
   </UMain>
 </template>
