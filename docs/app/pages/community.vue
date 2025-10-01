@@ -34,7 +34,7 @@ defineOgImageComponent('Docs')
       <div aria-hidden="true" class="hidden md:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
 
-    <UPageSection class="border-(--ui-warning)">
+    <UPageSection>
       <UPageGrid>
         <UPageCard
           v-for="item in page.items"
