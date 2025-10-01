@@ -218,7 +218,7 @@ const [emblaRef, emblaApi] = useEmblaCarousel(options.value, plugins.value)
 
 watch([options, plugins], () => {
   emblaApi.value?.reInit(options.value, plugins.value)
-})
+}, { flush: 'post' })
 
 function scrollPrev() {
   emblaApi.value?.scrollPrev()
