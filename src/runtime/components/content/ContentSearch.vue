@@ -35,7 +35,7 @@ export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPal
   icon?: IconProps['name']
 }
 
-export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends /* @vue-ignore */ Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
@@ -120,7 +120,8 @@ import UCommandPalette from '../CommandPalette.vue'
 const props = withDefaults(defineProps<ContentSearchProps<T>>(), {
   shortcut: 'meta_k',
   colorMode: true,
-  close: true
+  close: true,
+  fullscreen: false
 })
 const slots = defineSlots<ContentSearchSlots>()
 
@@ -133,6 +134,7 @@ const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
+const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
 
 const getProxySlots = () => omit(slots, ['content'])
 
@@ -142,8 +144,9 @@ const fuse = computed(() => defu({}, props.fuse, {
   }
 }))
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })({
+  fullscreen: props.fullscreen
+}))
 
 function mapLinksItems(links: T[]): ContentSearchItem[] {
   return links.flatMap(link => [{
@@ -267,8 +270,9 @@ defineExpose({
 <template>
   <UModal
     v-model:open="open"
-    :title="t('contentSearch.title')"
-    :description="t('contentSearch.description')"
+    :title="title || t('contentSearch.title')"
+    :description="description || t('contentSearch.description')"
+    v-bind="modalProps"
     :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
     <template #content>

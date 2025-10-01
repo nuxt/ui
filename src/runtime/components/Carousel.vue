@@ -298,6 +298,7 @@ defineExpose({
     :as="as"
     role="region"
     aria-roledescription="carousel"
+    :data-orientation="orientation"
     tabindex="0"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @keydown="onKeyDown"

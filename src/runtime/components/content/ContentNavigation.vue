@@ -134,6 +134,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentNavig
 
 const disabled = computed(() => props.disabled || (props.type === 'multiple' && props.collapsible === false))
 
+function isRouteInTree(link: ContentNavigationLink, routePath: string): boolean {
+  if (link.children?.length) {
+    return link.children.some(child => isRouteInTree(child, routePath))
+  }
+  return routePath === link.path
+}
+
 const defaultValue = computed(() => {
   // When `defaultOpen` is `false`, return `undefined` to close all items
   if (props.defaultOpen === false) {
@@ -144,10 +151,14 @@ const defaultValue = computed(() => {
     return props.type === 'single' ? '0' : props.navigation?.map((link, index) => link.defaultOpen !== false && String(index)).filter(Boolean) as string[]
   }
   // When `defaultOpen` is `true`, open items based on the current route
-  const index = props.navigation?.findIndex(link => route.path.startsWith(link.path))
-  const tyindex = index === -1 ? 0 : index
+  const indices = props.navigation?.reduce((acc, link, index) => {
+    if (isRouteInTree(link, route.path)) {
+      acc.push(String(index))
+    }
+    return acc
+  }, [] as string[]) || []
 
-  return props.type === 'multiple' ? [String(tyindex)] : String(tyindex)
+  return props.type === 'multiple' ? indices : indices[0]
 })
 </script>
 

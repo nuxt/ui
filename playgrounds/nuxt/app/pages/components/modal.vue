@@ -21,7 +21,9 @@ function openModal() {
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
+  <Navbar />
+
+  <div class="flex flex-col gap-2 min-h-0">
     <UModal title="First modal">
       <UButton color="neutral" variant="outline" label="Open with nested" />
 
@@ -56,7 +58,7 @@ function openModal() {
       <UButton label="Open fullscreen" color="neutral" variant="outline" />
     </UModal>
 
-    <UModal title="Modal prevent close" description="This modal has `dismissible: false` prop so it won't close when clicking outside." :dismissible="false">
+    <UModal title="Modal prevent close" description="This modal has `dismissible: false` prop so it won't close when clicking outside." :dismissible="false" :modal="false" :overlay="false">
       <UButton label="Open unclosable" color="neutral" variant="subtle" />
     </UModal>
 

@@ -94,7 +94,6 @@ function onError() {
     <component
       :is="ImageComponent"
       v-if="src && !error"
-      role="img"
       :src="src"
       :alt="alt"
       :width="sizePx"
