@@ -8,7 +8,7 @@ onMounted(() => {
 
   const script = document.createElement('script')
   script.setAttribute('type', 'text/javascript')
-  script.setAttribute('src', 'https://cdn.carbonads.com/carbon.js?serve=CWYIVK3E&placement=uinuxtcom')
+  script.setAttribute('src', 'https://cdn.carbonads.com/carbon.js?serve=CWBDT27M&placement=ui3nuxtcom')
   script.setAttribute('id', '_carbonads_js')
 
   el.value?.appendChild(script)
