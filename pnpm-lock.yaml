@@ -262,8 +262,8 @@ importers:
         specifier: ^1.18.2
         version: 1.18.2
       '@nuxt/content':
-        specifier: ^3.7.1
-        version: 3.7.1(better-sqlite3@12.4.1)(magicast@0.3.5)(valibot@1.1.0(typescript@5.8.3))
+        specifier: https://pkg.pr.new/@nuxt/content@dd054ea
+        version: https://pkg.pr.new/@nuxt/content@dd054ea(better-sqlite3@12.4.1)(magicast@0.3.5)(valibot@1.1.0(typescript@5.8.3))
       '@nuxt/image':
         specifier: ^1.11.0
         version: 1.11.0(@netlify/blobs@9.1.2)(db0@0.3.2(better-sqlite3@12.4.1))(ioredis@5.8.0)(magicast@0.3.5)
@@ -1176,6 +1176,30 @@ packages:
 
   '@nuxt/content@3.7.1':
     resolution: {integrity: sha512-QjUyxvC3IhLca9gZuGGZslL+L2PkxFwiPD/fbXN1X0EuUfbe17H/AMt53ZRezWrxs6MOaLbyWLHzcllcjEB/jQ==}
+    peerDependencies:
+      '@electric-sql/pglite': '*'
+      '@libsql/client': '*'
+      '@valibot/to-json-schema': ^1.0.0
+      better-sqlite3: ^12.2.0
+      sqlite3: '*'
+      valibot: ^1.0.0
+    peerDependenciesMeta:
+      '@electric-sql/pglite':
+        optional: true
+      '@libsql/client':
+        optional: true
+      '@valibot/to-json-schema':
+        optional: true
+      better-sqlite3:
+        optional: true
+      sqlite3:
+        optional: true
+      valibot:
+        optional: true
+
+  '@nuxt/content@https://pkg.pr.new/@nuxt/content@dd054ea':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/content@dd054ea}
+    version: 3.7.1
     peerDependencies:
       '@electric-sql/pglite': '*'
       '@libsql/client': '*'
@@ -5380,6 +5404,11 @@ packages:
     resolution: {integrity: sha512-RaL6bHJujuZmw/G+uNWAHYktf3k4hdlBIy+FqudXji42IefrJKdSMkh5ixyhsfEHWsuTYGKxD2NU3sq990KGrQ==}
     hasBin: true
 
+  nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@e3eb2c4:
+    resolution: {tarball: https://pkg.pr.new/nuxt-component-meta@e3eb2c4}
+    version: 0.14.0
+    hasBin: true
+
   nuxt-llms@0.1.3:
     resolution: {integrity: sha512-+LaySko5UnlZw37GoTbsRX6KBFccSAzh6ENAYjV+xlVwsG8lSMz+IWnE7z5rstyVxHiX3Rx62M9JVut4jotJ3w==}
 
@@ -8203,6 +8232,66 @@ snapshots:
       minimark: 0.2.0
       minimatch: 10.0.3
       nuxt-component-meta: 0.14.0(magicast@0.3.5)
+      nypm: 0.6.2
+      ohash: 2.0.11
+      pathe: 2.0.3
+      pkg-types: 2.3.0
+      remark-mdc: 3.6.0
+      scule: 1.3.0
+      shiki: 3.12.2
+      slugify: 1.6.6
+      socket.io-client: 4.8.1
+      tar: 7.5.1
+      tinyglobby: 0.2.15
+      ufo: 1.6.1
+      unctx: 2.4.1
+      unified: 11.0.5
+      unist-util-stringify-position: 4.0.0
+      unist-util-visit: 5.0.0
+      ws: 8.18.3
+      zod: 3.25.76
+      zod-to-json-schema: 3.24.6(zod@3.25.76)
+    optionalDependencies:
+      better-sqlite3: 12.4.1
+      valibot: 1.1.0(typescript@5.8.3)
+    transitivePeerDependencies:
+      - bufferutil
+      - drizzle-orm
+      - magicast
+      - mysql2
+      - supports-color
+      - utf-8-validate
+
+  '@nuxt/content@https://pkg.pr.new/@nuxt/content@dd054ea(better-sqlite3@12.4.1)(magicast@0.3.5)(valibot@1.1.0(typescript@5.8.3))':
+    dependencies:
+      '@nuxt/kit': 4.1.2(magicast@0.3.5)
+      '@nuxtjs/mdc': 0.17.4(magicast@0.3.5)
+      '@shikijs/langs': 3.12.2
+      '@sqlite.org/sqlite-wasm': 3.50.4-build1
+      '@standard-schema/spec': 1.0.0
+      '@webcontainer/env': 1.1.1
+      c12: 3.3.0(magicast@0.3.5)
+      chokidar: 3.6.0
+      consola: 3.4.2
+      db0: 0.3.2(better-sqlite3@12.4.1)
+      defu: 6.1.4
+      destr: 2.0.5
+      git-url-parse: 16.1.0
+      jiti: 2.6.1
+      json-schema-to-typescript: 15.0.4
+      knitwork: 1.2.0
+      listhen: 1.9.0
+      mdast-util-to-hast: 13.2.0
+      mdast-util-to-string: 4.0.0
+      micromark: 4.0.2
+      micromark-util-character: 2.1.1
+      micromark-util-chunked: 2.0.1
+      micromark-util-resolve-all: 2.0.1
+      micromark-util-sanitize-uri: 2.0.1
+      micromatch: 4.0.8
+      minimark: 0.2.0
+      minimatch: 10.0.3
+      nuxt-component-meta: https://pkg.pr.new/nuxt-component-meta@e3eb2c4(magicast@0.3.5)
       nypm: 0.6.2
       ohash: 2.0.11
       pathe: 2.0.3
@@ -12976,6 +13065,20 @@ snapshots:
       boolbase: 1.0.0
 
   nuxt-component-meta@0.14.0(magicast@0.3.5):
+    dependencies:
+      '@nuxt/kit': 4.1.2(magicast@0.3.5)
+      citty: 0.1.6
+      json-schema-to-zod: 2.6.1
+      mlly: 1.8.0
+      ohash: 2.0.11
+      scule: 1.3.0
+      typescript: 5.8.3
+      ufo: 1.6.1
+      vue-component-meta: 3.0.7(typescript@5.8.3)
+    transitivePeerDependencies:
+      - magicast
+
+  nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@e3eb2c4(magicast@0.3.5):
     dependencies:
       '@nuxt/kit': 4.1.2(magicast@0.3.5)
       citty: 0.1.6
