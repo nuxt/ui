@@ -43,21 +43,24 @@ defineOgImageComponent('Docs')
             :title="item.label"
             :description="item.description"
             :to="item.to"
-            :target="item.target"
-            class="rounded-none"
+            target="_blank"
+            class="rounded-none group"
+            :ui="{ footer: 'pointer-events-auto z-[1]' }"
           >
             <template #leading>
               <UAvatar v-bind="item.avatar" size="3xl" class="mx-auto" loading="lazy" />
             </template>
 
             <template v-if="item.user" #footer>
-              <UBadge
+              <UButton
                 :label="item.user.name"
                 :avatar="item.user.avatar"
-                size="lg"
+                :to="item.user.to"
+                target="_blank"
+                size="sm"
                 color="neutral"
                 variant="outline"
-                class="ring-default bg-transparent"
+                class="ring-default group-hover:ring-accented transition bg-transparent"
               />
             </template>
           </UPageCard>

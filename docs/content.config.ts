@@ -143,10 +143,10 @@ export const collections = {
         avatar: Avatar,
         user: z.object({
           name: z.string(),
-          avatar: Avatar
+          avatar: Avatar,
+          to: z.string()
         }),
-        to: z.string(),
-        target: z.string().optional()
+        to: z.string()
       }))
     })
   }),
