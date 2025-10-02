@@ -90,7 +90,8 @@ const contentEvents = {
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })({
   direction: props.direction,
-  inset: props.inset
+  inset: props.inset,
+  snapPoints: props.snapPoints && props.snapPoints.length > 0
 }))
 </script>
 
