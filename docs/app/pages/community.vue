@@ -56,7 +56,8 @@ defineOgImageComponent('Docs')
                 :avatar="item.user.avatar"
                 size="lg"
                 color="neutral"
-                variant="subtle"
+                variant="outline"
+                class="ring-default bg-transparent"
               />
             </template>
           </UPageCard>

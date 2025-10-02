@@ -18,7 +18,11 @@ const PageCTA = property(z.object({})).inherit('@nuxt/ui/components/PageCTA.vue'
 const Page = z.object({
   title: z.string(),
   description: z.string(),
-  hero: PageHero
+  hero: PageHero.extend({
+    title: z.string(),
+    description: z.string(),
+    image: z.string().optional()
+  })
 })
 
 export const collections = {
@@ -58,11 +62,6 @@ export const collections = {
     type: 'page',
     source: 'figma.yml',
     schema: Page.extend({
-      hero: PageHero.extend({
-        title: z.string(),
-        description: z.string(),
-        image: z.string()
-      }),
       features1: PageSection,
       cta1: PageCTA,
       section1: PageSection.extend({
@@ -137,10 +136,7 @@ export const collections = {
   community: defineCollection({
     type: 'page',
     source: 'community.yml',
-    schema: z.object({
-      title: z.string(),
-      description: z.string(),
-      hero: PageHero,
+    schema: Page.extend({
       items: z.array(z.object({
         label: z.string(),
         description: z.string(),
