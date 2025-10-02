@@ -32,7 +32,7 @@ const icons = {
 </script>
 
 <template>
-  <UMain v-if="page">
+  <div v-if="page">
     <UPageHero
       :title="page.hero.title"
       :description="page.hero.description"
@@ -156,5 +156,5 @@ const icons = {
         </UPageCard>
       </UPageGrid>
     </UPageSection>
-  </UMain>
+  </div>
 </template>

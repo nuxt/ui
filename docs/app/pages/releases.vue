@@ -34,7 +34,7 @@ const { data: versions } = await useFetch('https://ungh.cc/repos/nuxt/ui/release
 </script>
 
 <template>
-  <UMain v-if="page">
+  <div v-if="page">
     <UPageHero
       :title="page.hero.title"
       :description="page.hero.description"
@@ -81,5 +81,5 @@ const { data: versions } = await useFetch('https://ungh.cc/repos/nuxt/ui/release
         </UContainer>
       </div>
     </UPageSection>
-  </UMain>
+  </div>
 </template>

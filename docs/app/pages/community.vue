@@ -16,7 +16,7 @@ defineOgImageComponent('Docs')
 </script>
 
 <template>
-  <UMain v-if="page">
+  <div v-if="page">
     <UPageHero
       :title="page.hero.title"
       :description="page.hero.description"
@@ -34,19 +34,34 @@ defineOgImageComponent('Docs')
       <div aria-hidden="true" class="hidden md:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
 
-    <UPageSection>
-      <UPageGrid>
-        <UPageCard
-          v-for="item in page.items"
-          :key="item.label"
-          :title="item.label"
-          :description="item.description"
-          :icon="item.icon"
-          :to="item.to"
-          :target="item.target"
-          spotlight
-        />
-      </UPageGrid>
+    <UPageSection :ui="{ container: '!py-0' }">
+      <div class="pb-16 sm:pb-24 lg:pb-32 md:border-x border-default">
+        <UPageGrid class="gap-px">
+          <UPageCard
+            v-for="item in page.items"
+            :key="item.label"
+            :title="item.label"
+            :description="item.description"
+            :to="item.to"
+            :target="item.target"
+            class="rounded-none"
+          >
+            <template #leading>
+              <UAvatar v-bind="item.avatar" size="3xl" class="mx-auto" loading="lazy" />
+            </template>
+
+            <template v-if="item.user" #footer>
+              <UBadge
+                :label="item.user.name"
+                :avatar="item.user.avatar"
+                size="lg"
+                color="neutral"
+                variant="subtle"
+              />
+            </template>
+          </UPageCard>
+        </UPageGrid>
+      </div>
     </UPageSection>
-  </UMain>
+  </div>
 </template>

@@ -16,7 +16,7 @@ defineOgImageComponent('Docs')
 </script>
 
 <template>
-  <UMain v-if="page">
+  <div v-if="page">
     <UPageHero
       :title="page.hero.title"
       :description="page.hero.description"
@@ -69,5 +69,5 @@ defineOgImageComponent('Docs')
         </ul>
       </div>
     </UPageSection>
-  </UMain>
+  </div>
 </template>

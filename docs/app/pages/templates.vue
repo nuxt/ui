@@ -16,7 +16,7 @@ defineOgImageComponent('Docs')
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <div v-if="page" class="relative">
+  <div v-if="page">
     <UPageHero
       :links="page.links"
       :ui="{

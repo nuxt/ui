@@ -43,7 +43,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 </script>
 
 <template>
-  <UMain v-if="page">
+  <div v-if="page">
     <UPageHero
       orientation="horizontal"
       :ui="{
@@ -319,5 +319,5 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView || isContributorsHovered" />
       </div>
     </UPageSection>
-  </UMain>
+  </div>
 </template>

@@ -1,37 +1,69 @@
 title: Community
-description: Discover amazing projects built around Nuxt UI.
+description: Discover amazing projects built around Nuxt UI by the community.
 navigation: false
 hero:
   title: Community
-  description: Discover amazing projects built around Nuxt UI.
+  description: Discover amazing projects built around Nuxt UI by the community.
 items:
   - label: 'Compodium'
-    description: 'Integrate Nuxt UI with Nuxt Devtools with Compodium.'
-    icon: 'i-lucide-code'
+    description: 'Preview, customize, and generate Nuxt UI component code directly within Nuxt DevTools for faster development.'
+    avatar:
+      src: 'https://compodium.dev/favicon.svg'
+      ui:
+        image: 'p-2.5'
     to: 'https://github.com/romhml/compodium'
     target: '_blank'
+    user:
+      name: 'romhml'
+      avatar: { src: 'https://github.com/romhml.png' }
   - label: 'Raycast Extension'
-    description: 'Access Nuxt UI components without leaving your editor.'
-    icon: 'i-simple-icons-raycast'
+    description: 'Quickly search, browse, and copy Nuxt UI component code snippets without leaving your editor.'
+    avatar:
+      src: 'https://github.com/raycast.png'
     to: 'https://github.com/HugoRCD/nuxt-raycast-extension'
     target: '_blank'
+    user:
+      name: 'HugoRDC'
+      avatar: { src: 'https://github.com/HugoRCD.png' }
   - label: 'Figma to Code'
-    description: 'Convert Figma designs to Nuxt UI code.'
-    icon: 'i-simple-icons-figma'
+    description: 'Transform your Figma designs into production-ready Nuxt UI components with one click.'
+    avatar:
+      icon: 'i-logos-figma'
     to: 'https://github.com/Justineo/tempad-dev-plugin-nuxt-ui'
     target: '_blank'
+    user:
+      name: 'Justineo'
+      avatar: { src: 'https://github.com/Justineo.png' }
   - label: 'Nuxt Auto Form'
-    description: 'Generate forms automatically from Zod schemas with Nuxt UI.'
-    icon: 'i-heroicons-document-text'
+    description: 'Auto-generate Nuxt UI forms from your Zod 4 schemas with zero boilerplate.'
+    avatar:
+      src: 'https://nuxt-auto-form.norbiros.dev/logo.png'
+      ui:
+        image: 'p-2.5'
     to: 'https://github.com/Norbiros/nuxt-auto-form'
     target: '_blank'
+    user:
+      name: 'Norbiros'
+      avatar: { src: 'https://github.com/Norbiros.png' }
   - label: 'Nuxt Charts'
-    description: 'Create beautiful charts and dashboards with Nuxt UI.'
-    icon: 'i-heroicons-chart-bar'
+    description: 'Build interactive, responsive charts and data visualizations seamlessly integrated with Nuxt UI.'
+    avatar:
+      src: 'https://nuxtcharts.com/favicons/favicon-96x96.png'
+      ui:
+        image: 'p-2.5'
     to: 'https://github.com/dennisadriaans/vue-chrts'
     target: '_blank'
+    user:
+      name: 'dennisadriaans'
+      avatar: { src: 'https://github.com/dennisadriaans.png' }
   - label: 'Nuxt QRCode'
-    description: 'Generate and read QR codes in your Nuxt application.'
-    icon: 'i-heroicons-qr-code'
+    description: 'Generate and read QR codes with Nuxt, a perfect addition to your Nuxt UI projects.'
+    avatar:
+      src: 'https://qrcode.s94.dev/favicon.svg'
+      ui:
+        image: 'p-2.5'
     to: 'https://github.com/sandros94/nuxt-qrcode'
     target: '_blank'
+    user:
+      name: 'sandros94'
+      avatar: { src: 'https://github.com/sandros94.png' }
