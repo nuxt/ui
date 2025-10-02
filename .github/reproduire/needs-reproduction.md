@@ -17,8 +17,8 @@ If `needs reproduction` labeled issues don't receive any substantial activity (e
 
 We have templates to create a minimal reproduction:
 
-* **Nuxt**: https://codesandbox.io/p/devbox/nuxt-ui3-n3sxks
-* **Vue**: https://codesandbox.io/p/devbox/nuxt-ui3-vue-4h5gqn
+* **Nuxt**: https://codesandbox.io/p/devbox/nuxt-ui-xgrzw5
+* **Vue**: https://codesandbox.io/p/devbox/nuxt-ui-vue-f2qp34
 
 Please ensure that the reproduction is as **minimal** as possible. See more details [in our guide](https://nuxt.com/docs/community/reporting-bugs/#create-a-minimal-reproduction).
 

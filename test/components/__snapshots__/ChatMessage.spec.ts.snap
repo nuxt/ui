@@ -13,7 +13,7 @@ exports[`ChatMessage > renders with as correctly 1`] = `
 exports[`ChatMessage > renders with avatar correctly 1`] = `
 "<article data-role="user" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
   <div class="relative flex items-start group-data-[role=user]/message:max-w-[75%] gap-3 pb-8">
-    <div class="inline-flex items-center justify-center min-h-6"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span></div>
+    <div class="inline-flex items-center justify-center min-h-6"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span></div>
     <div class="relative text-pretty min-w-0">Hello, how are you?</div>
     <!--v-if-->
   </div>

@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
       prev: 'ئالدىنقى بەت'
     },
     chatPrompt: {
-      placeholder: 'خەت كىرگۈزۈڭ...'
+      placeholder: 'خەت كىرگۈزۈڭ…'
     },
     chatPromptSubmit: {
       label: 'يوللاش'
@@ -47,7 +47,7 @@ export default defineLocale<Messages>({
       close: 'تاقاش',
       noData: 'سانلىق مەلۇمات يوق',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ...'
+      placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ…'
     },
     contentSearch: {
       links: 'ئۇلانمىلار',
@@ -117,7 +117,7 @@ export default defineLocale<Messages>({
       create: '"{label}" نى قۇرۇش',
       noData: 'سانلىق مەلۇمات يوق',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      search: 'ئىزدەش...'
+      search: 'ئىزدەش…'
     },
     slideover: {
       close: 'تاقاش'

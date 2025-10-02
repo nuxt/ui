@@ -11,10 +11,30 @@ export interface MarqueeProps {
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * Pause the marquee on hover.
+   * @defaultValue false
+   */
   pauseOnHover?: boolean
+  /**
+   * Reverse the direction of the marquee.
+   * @defaultValue false
+   */
   reverse?: boolean
+  /**
+   * The orientation of the marquee.
+   * @defaultValue 'horizontal'
+   */
   orientation?: Marquee['variants']['orientation']
+  /**
+   * The number of times the marquee should repeat.
+   * @defaultValue 4
+   */
   repeat?: number
+  /**
+   * Display an overlay on the marquee.
+   * @defaultValue true
+   */
   overlay?: boolean
   class?: any
   ui?: Marquee['slots']
@@ -49,7 +69,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-for="i in repeat" :key="i" :class="ui.content({ class: [props.ui?.content] })">
       <slot />
     </div>

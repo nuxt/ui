@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
       prev: 'قبلی'
     },
     chatPrompt: {
-      placeholder: 'اینجا پیام خود را بنویسید...'
+      placeholder: 'اینجا پیام خود را بنویسید…'
     },
     chatPromptSubmit: {
       label: 'ارسال'
@@ -47,14 +47,14 @@ export default defineLocale<Messages>({
       close: 'بستن',
       noData: 'داده‌ای موجود نیست',
       noMatch: 'داده‌ای یافت نشد',
-      placeholder: 'یک دستور وارد کنید یا جستجو کنید...'
+      placeholder: 'یک دستور وارد کنید یا جستجو کنید…'
     },
     contentSearch: {
       links: 'پیوندها',
       theme: 'تم'
     },
     contentSearchButton: {
-      label: 'جستجو...'
+      label: 'جستجو…'
     },
     contentToc: {
       title: 'در این صفحه'
@@ -63,7 +63,7 @@ export default defineLocale<Messages>({
       theme: 'تم'
     },
     dashboardSearchButton: {
-      label: 'جستجو...'
+      label: 'جستجو…'
     },
     dashboardSidebarCollapse: {
       collapse: 'جمع کردن نوار کناری',
@@ -117,7 +117,7 @@ export default defineLocale<Messages>({
       create: 'ایجاد "{label}"',
       noData: 'داده‌ای موجود نیست',
       noMatch: 'داده‌ای یافت نشد',
-      search: 'جستجو...'
+      search: 'جستجو…'
     },
     slideover: {
       close: 'بستن'

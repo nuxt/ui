@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Ortga'
     },
     chatPrompt: {
-      placeholder: 'Bu yerda savolingizni yozing...'
+      placeholder: 'Bu yerda savolingizni yozing…'
     },
     chatPromptSubmit: {
       label: 'Jo\'natish'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Yopish',
       noData: 'Maʼlumot yoʻq',
       noMatch: 'Mos keluvchi natija topilmadi',
-      placeholder: 'Buyruq kiriting yoki qidiring...'
+      placeholder: 'Buyruq kiriting yoki qidiring…'
     },
     contentSearch: {
       links: 'Havolalar',
       theme: 'Mavzu'
     },
     contentSearchButton: {
-      label: 'Qidirish...'
+      label: 'Qidirish…'
     },
     contentToc: {
       title: 'Ushbu sahifada'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Mavzu'
     },
     dashboardSearchButton: {
-      label: 'Qidirish...'
+      label: 'Qidirish…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Yon panelni yig\'ish',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" yaratish',
       noData: 'Maʼlumot yoʻq',
       noMatch: 'Mos keluvchi natija topilmadi',
-      search: 'Qidirish...'
+      search: 'Qidirish…'
     },
     slideover: {
       close: 'Yopish'

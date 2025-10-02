@@ -25,6 +25,7 @@ jobs:
           script: |
             const TRIAGE = "triage";
             const QUESTION = "question";
+            const RELEASE = "release";
             const PRIORITIES = ["p0-critical","p1-high","p2-medium","p3-low"];
             const WORD_TO_LABEL = { critical:"p0-critical", high:"p1-high", medium:"p2-medium", low:"p3-low" };
             const NUM_TO_LABEL  = ["p0-critical","p1-high","p2-medium","p3-low"];
@@ -85,6 +86,7 @@ jobs:
             const hasPriority = labelsNow.some(l => PRIORITIES.includes(l));
             const hasTriage   = labelsNow.includes(TRIAGE);
             const hasQuestion = labelsNow.includes(QUESTION);
+            const hasRelease = labelsNow.includes(RELEASE);
             // Check if the issue was created by a bot
             const isBot = issue.user?.type === "Bot" || issue.user?.login?.endsWith("[bot]");
             // Check if the issue has upstream-related labels
@@ -93,5 +95,5 @@ jobs:
             // priority present → remove triage
             if (hasPriority && hasTriage) await removeLabel(TRIAGE);
 
-            // no priority & no triage & not a question & not created by bot & no upstream labels → add triage (so your stale job still sees it)
-            if (!hasPriority && !hasTriage && !hasQuestion && !isBot && !hasUpstream && issue.state === "open") await addLabels([TRIAGE]);
+            // no priority & no triage & not a question & not a release & not created by bot & no upstream labels → add triage (so your stale job still sees it)
+            if (!hasPriority && !hasTriage && !hasQuestion && !hasRelease && !isBot && !hasUpstream && issue.state === "open") await addLabels([TRIAGE]);

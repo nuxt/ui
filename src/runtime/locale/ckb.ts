@@ -10,8 +10,8 @@ export default defineLocale<Messages>({
       close: 'داخستن'
     },
     authForm: {
-      hidePassword: 'شاردنەوەی وشەی نهێنی',
-      showPassword: 'پیشاندانی وشەی نهێنی',
+      hidePassword: 'شاردنەوەی تێپەڕەوشە',
+      showPassword: 'پیشاندانی تێپەڕەوشە',
       submit: 'بەردەوام بە'
     },
     banner: {
@@ -26,14 +26,14 @@ export default defineLocale<Messages>({
     carousel: {
       dots: 'سلایدێک هەڵبژێرە بۆ پیشاندان',
       goto: 'بڕۆ بۆ سلایدی {slide}',
-      next: 'داهاتوو',
-      prev: 'پێشووی'
+      next: 'دواتر',
+      prev: 'پێشتر'
     },
     chatPrompt: {
-      placeholder: 'هەڵەیەک لەسەر چاپەکەت بنووسە...'
+      placeholder: 'نامەکەت لێرە بنوسە...'
     },
     chatPromptSubmit: {
-      label: 'پێچەوە'
+      label: 'ناردن'
     },
     colorMode: {
       dark: 'تاریک',
@@ -47,14 +47,14 @@ export default defineLocale<Messages>({
       close: 'داخستن',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      placeholder: 'فەرمانێک بنووسە یان بگەڕێ...'
+      placeholder: 'فەرمانێک بنووسە یان بگەڕێ…'
     },
     contentSearch: {
       links: 'بەستەرەکان',
       theme: 'ڕووکار'
     },
     contentSearchButton: {
-      label: 'گەڕان...'
+      label: 'گەڕان…'
     },
     contentToc: {
       title: 'لەم پەڕەیەدا'
@@ -63,15 +63,15 @@ export default defineLocale<Messages>({
       theme: 'ڕووکار'
     },
     dashboardSearchButton: {
-      label: 'گەڕان...'
+      label: 'گەڕان…'
     },
     dashboardSidebarCollapse: {
       collapse: 'داخستنی لای تەنیشت',
       expand: 'فراوانکردنی لای تەنیشت'
     },
     dashboardSidebarToggle: {
-      close: 'داخستنی لای تەنیشت',
-      open: 'کردنەوەی لای تەنیشت'
+      close: 'داخستنی لاتەنیشت',
+      open: 'کردنەوەی لاتەنیشت'
     },
     error: {
       clear: 'گەڕانەوە بۆ سەرەتا'
@@ -84,7 +84,7 @@ export default defineLocale<Messages>({
       open: 'کردنەوەی پێڕست'
     },
     inputMenu: {
-      create: '"{label}" دروستکردنی',
+      create: '"{label}" زیادکردنی',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە'
     },
@@ -96,7 +96,7 @@ export default defineLocale<Messages>({
       close: 'داخستن'
     },
     pricingTable: {
-      caption: 'ڕێچووی پەیکەردان'
+      caption: 'بەراورکردنی پلانی نرخدانان'
     },
     prose: {
       codeCollapse: {
@@ -114,10 +114,10 @@ export default defineLocale<Messages>({
       }
     },
     selectMenu: {
-      create: '"{label}" دروستکردنی',
+      create: '"{label}" زیادکردنی',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      search: 'گەڕان...'
+      search: 'گەڕان…'
     },
     slideover: {
       close: 'داخستن'

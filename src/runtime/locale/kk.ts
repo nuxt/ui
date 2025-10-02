@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Алдыңғы'
     },
     chatPrompt: {
-      placeholder: 'Хабар енгізіңіз...'
+      placeholder: 'Хабар енгізіңіз…'
     },
     chatPromptSubmit: {
       label: 'Жіберу'
@@ -46,7 +46,7 @@ export default defineLocale<Messages>({
       close: 'Жабу',
       noData: 'Деректер жоқ',
       noMatch: 'Сәйкес келетін деректер жоқ',
-      placeholder: 'Команда енгізіңіз немесе іздеңіз...'
+      placeholder: 'Команда енгізіңіз немесе іздеңіз…'
     },
     contentSearch: {
       links: 'Сілтемелер',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" жасау',
       noData: 'Деректер жоқ',
       noMatch: 'Сәйкес келетін деректер жоқ',
-      search: 'Іздеу...'
+      search: 'Іздеу…'
     },
     slideover: {
       close: 'Жабу'

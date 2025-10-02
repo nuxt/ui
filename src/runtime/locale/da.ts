@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Forrige'
     },
     chatPrompt: {
-      placeholder: 'Skriv din besked her...'
+      placeholder: 'Skriv din besked her…'
     },
     chatPromptSubmit: {
       label: 'Send'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Luk',
       noData: 'Ingen data',
       noMatch: 'Ingen matchende data',
-      placeholder: 'Skriv en kommando eller søg...'
+      placeholder: 'Skriv en kommando eller søg…'
     },
     contentSearch: {
       links: 'Links',
       theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Søg...'
+      label: 'Søg…'
     },
     contentToc: {
       title: 'På denne side'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Søg...'
+      label: 'Søg…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Sammenfold sidemenu',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Opret "{label}"',
       noData: 'Ingen data',
       noMatch: 'Ingen matchende data',
-      search: 'Søg...'
+      search: 'Søg…'
     },
     slideover: {
       close: 'Luk'

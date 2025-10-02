@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { queryCollection } from '@nuxt/content/server'
 
 const querySchema = z.object({
   version: z.string().describe('The migration version (e.g., v4, v3)')
@@ -7,7 +8,6 @@ const querySchema = z.object({
 export default defineCachedEventHandler(async (event) => {
   const { version } = await getValidatedQuery(event, querySchema.parse)
 
-  // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
   const page = await queryCollection(event, 'docs')
     .where('path', 'LIKE', `%/migration/${version}`)
     .where('extension', '=', 'md')
@@ -29,7 +29,7 @@ export default defineCachedEventHandler(async (event) => {
     description: page.description,
     path: page.path,
     documentation,
-    url: `https://ui4.nuxt.com${page.path}`
+    url: `https://ui.nuxt.com${page.path}`
   }
 }, {
   name: 'mcp-get-migration-guide',

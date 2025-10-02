@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Önceki'
     },
     chatPrompt: {
-      placeholder: 'Buraya mesajınızı yazın...'
+      placeholder: 'Buraya mesajınızı yazın…'
     },
     chatPromptSubmit: {
       label: 'Gönder'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Kapat',
       noData: 'Veri yok',
       noMatch: 'Eşleşen veri yok',
-      placeholder: 'Bir komut yazın veya arama yapın...'
+      placeholder: 'Bir komut yazın veya arama yapın…'
     },
     contentSearch: {
       links: 'Bağlantılar',
       theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Ara...'
+      label: 'Ara…'
     },
     contentToc: {
       title: 'Bu sayfada'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Ara...'
+      label: 'Ara…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Kenar çubuğunu daralt',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" oluştur',
       noData: 'Veri yok',
       noMatch: 'Eşleşen veri yok',
-      search: 'Ara...'
+      search: 'Ara…'
     },
     slideover: {
       close: 'Kapat'

@@ -3,6 +3,8 @@ const page = ref(5)
 </script>
 
 <template>
+  <Navbar />
+
   <div class="flex flex-col gap-4">
     <div class="flex flex-col gap-2">
       <p>With buttons (default)</p>

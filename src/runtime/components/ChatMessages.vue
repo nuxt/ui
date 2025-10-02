@@ -144,7 +144,7 @@ watchThrottled([() => props.messages, () => props.status], ([_, status]) => {
     // Check scroll position when message is streaming to show the auto scroll button
     checkScrollPosition()
   }
-}, { throttle: 100, leading: true })
+}, { deep: true, throttle: 100, leading: true })
 
 watch(() => props.status, (status) => {
   if (status !== 'submitted') {
@@ -238,12 +238,15 @@ onMounted(() => {
     return
   }
 
-  if (props.shouldScrollToBottom) {
-    // Scroll to bottom on mount without smooth animation when `props.shouldScrollToBottom` is true
-    nextTick(() => scrollToBottom(false))
-  } else {
-    checkScrollPosition()
-  }
+  // Wait for content to fully render (especially MDC components in ChatPalette)
+  setTimeout(() => {
+    if (props.shouldScrollToBottom) {
+      // Scroll to bottom on mount without smooth animation when `props.shouldScrollToBottom` is true
+      scrollToBottom(false)
+    } else {
+      checkScrollPosition()
+    }
+  }, 100)
 
   // Add event listener to check scroll position to show the auto scroll button
   useEventListener(parent, 'scroll', checkScrollPosition)
@@ -282,13 +285,13 @@ onMounted(() => {
       :compact="compact"
     >
       <template #content>
-        <div :class="ui.indicator({ class: props.ui?.indicator })">
-          <slot name="indicator">
+        <slot name="indicator">
+          <div :class="ui.indicator({ class: props.ui?.indicator })">
             <span />
             <span />
             <span />
-          </slot>
-        </div>
+          </div>
+        </slot>
       </template>
     </UChatMessage>
 
