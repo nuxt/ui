@@ -188,6 +188,35 @@ slots:
 :img{src="/tailwindcss-v4.svg" alt="Tailwind CSS" class="w-full"}
 ::
 
+### Links
+
+Use the `links` prop to display a list of [Button](/docs/components/button) under the description.
+
+::component-code{slug="page-Card"}
+---
+prettier: true
+hide:
+  - class
+ignore:
+  - title
+  - description
+  - icon
+  - orientation
+  - links
+props:
+  title: 'Tailwind CSS'
+  description: 'Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements.'
+  icon: 'i-simple-icons-tailwindcss'
+  links:
+    - label: 'Get started'
+      color: 'neutral'
+    - label: 'Learn more'
+      color: 'neutral'
+      variant: 'subtle'
+      trailingIcon: 'i-lucide-arrow-right'
+---
+::
+
 ### Highlight
 
 Use the `highlight` and `highlight-color` props to display a highlighted border around the card.

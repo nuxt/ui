@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-card'
-import type { IconProps, LinkProps } from '../types'
+import type { IconProps, LinkProps, ButtonProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type PageCard = ComponentConfig<typeof theme, AppConfig, 'pageCard'>
@@ -53,6 +53,7 @@ export interface PageCardProps {
   target?: LinkProps['target']
   onClick?: (event: MouseEvent) => void | Promise<void>
   class?: any
+  links?: ButtonProps[]
   ui?: PageCard['slots']
 }
 
@@ -63,6 +64,7 @@ export interface PageCardSlots {
   title(props?: {}): any
   description(props?: {}): any
   footer(props?: {}): any
+  links(props?: {}): any
   default(props?: {}): any
 }
 </script>
@@ -132,18 +134,17 @@ const ariaLabel = computed(() => {
     <div v-if="props.spotlight" :class="ui.spotlight({ class: props.ui?.spotlight })" />
 
     <div :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.header || (icon || !!slots.leading) || !!slots.body || (title || !!slots.title) || (description || !!slots.description) || !!slots.footer" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <div v-if="!!slots.header || (icon || !!slots.leading) || !!slots.body || (title || !!slots.title) || (description || !!slots.description) || !!slots.footer || (links?.length || !!slots.links)" :class="ui.wrapper({ class: props.ui?.wrapper })">
         <div v-if="!!slots.header" :class="ui.header({ class: props.ui?.header })">
           <slot name="header" />
         </div>
 
-        <div v-if="icon || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-          <slot name="leading">
-            <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-          </slot>
-        </div>
-
         <div v-if="!!slots.body || (title || !!slots.title) || (description || !!slots.description)" :class="ui.body({ class: props.ui?.body })">
+          <div v-if="icon || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+            <slot name="leading">
+              <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+            </slot>
+          </div>
           <slot name="body">
             <div v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
               <slot name="title">
@@ -159,6 +160,12 @@ const ariaLabel = computed(() => {
           </slot>
         </div>
 
+        <div v-if="links?.length || !!slots.links" :class="ui.links({ class: props.ui?.links })">
+          <slot name="links">
+            <UButton v-for="(link, index) in links" :key="index" v-bind="link" />
+          </slot>
+        </div>
+
         <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
           <slot name="footer" />
         </div>
@@ -167,13 +174,7 @@ const ariaLabel = computed(() => {
       <slot />
     </div>
 
-    <ULink
-      v-if="to"
-      :aria-label="ariaLabel"
-      v-bind="{ to, target, ...$attrs }"
-      class="focus:outline-none peer"
-      raw
-    >
+    <ULink v-if="to" :aria-label="ariaLabel" v-bind="{ to, target, ...$attrs }" class="focus:outline-none peer" raw>
       <span class="absolute inset-0" aria-hidden="true" />
     </ULink>
   </Primitive>

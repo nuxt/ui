@@ -22,6 +22,7 @@ describe('PageCard', () => {
     ['with icon', { props: { icon: 'i-lucide-house' } }],
     ['with title', { props: { title: 'Title' } }],
     ['with description', { props: { description: 'Description' } }],
+    ['with links', { props: { links: [{ label: 'Get started' }] } }],
     ['with to', { props: { to: 'https://github.com/benjamincanac' } }],
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with variant ${variant} to`, { props: { ...props, variant, to: 'https://github.com/benjamincanac' } }]),
@@ -43,6 +44,7 @@ describe('PageCard', () => {
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }],
+    ['with links slot', { props, slots: { links: () => 'Links slot' } }],
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageCardProps, slots?: Partial<PageCardSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PageCard)

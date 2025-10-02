@@ -14,10 +14,12 @@ exports[`PageCard > renders with body slot correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
-      <div class="flex-1">Body slot</div>
+      <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>Body slot
+      </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -29,13 +31,14 @@ exports[`PageCard > renders with class correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex bg-default ring ring-default rounded-xl">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -47,13 +50,14 @@ exports[`PageCard > renders with default slot correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>Default slot
   </div>
@@ -65,13 +69,14 @@ exports[`PageCard > renders with description correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
-      <!--v-if-->
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
       <div class="flex-1">
         <!--v-if-->
+        <!--v-if-->
         <div class="text-[15px] text-pretty text-muted">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -83,13 +88,14 @@ exports[`PageCard > renders with description slot correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description slot</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -101,13 +107,14 @@ exports[`PageCard > renders with footer slot correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <div class="pt-4 mt-auto">Footer slot</div>
     </div>
   </div>
@@ -119,13 +126,14 @@ exports[`PageCard > renders with header slot correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <div class="mb-4">Header slot</div>
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -137,13 +145,14 @@ exports[`PageCard > renders with highlight color error correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring-2 ring-error">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -155,13 +164,14 @@ exports[`PageCard > renders with highlight color info correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring-2 ring-info">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -173,13 +183,14 @@ exports[`PageCard > renders with highlight color neutral correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring-2 ring-inverted">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -191,13 +202,14 @@ exports[`PageCard > renders with highlight color neutral correctly 2`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring-2 ring-inverted">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -209,13 +221,14 @@ exports[`PageCard > renders with highlight color primary correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring-2 ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -227,13 +240,14 @@ exports[`PageCard > renders with highlight color secondary correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring-2 ring-secondary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -245,13 +259,14 @@ exports[`PageCard > renders with highlight color success correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring-2 ring-success">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -263,13 +278,14 @@ exports[`PageCard > renders with highlight color warning correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring-2 ring-warning">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -281,13 +297,14 @@ exports[`PageCard > renders with highlight correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring-2 ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -299,9 +316,9 @@ exports[`PageCard > renders with icon correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </div>
@@ -314,13 +331,51 @@ exports[`PageCard > renders with leading slot correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5">Leading slot</div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5">Leading slot</div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with links correctly 1`] = `
+"<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
+      <!--v-if-->
+      <!--v-if-->
+      <div class="inline-flex flex-wrap gap-2.5 self-center"><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if--><span class="truncate">Get started</span>
+          <!--v-if-->
+        </button></div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with links slot correctly 1`] = `
+"<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
+      <!--v-if-->
+      <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
+        <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <div class="inline-flex flex-wrap gap-2.5 self-center">Links slot</div>
       <!--v-if-->
     </div>
   </div>
@@ -332,13 +387,14 @@ exports[`PageCard > renders with orientation horizontal correctly 1`] = `
 "<div data-orientation="horizontal" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 lg:grid-cols-2 lg:items-center">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-col flex-1 items-start gap-2.5 flex-wrap">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -350,13 +406,14 @@ exports[`PageCard > renders with orientation horizontal reverse correctly 1`] = 
 "<div data-orientation="horizontal" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 lg:grid-cols-2 lg:items-center">
-    <div class="flex flex-col flex-1 items-start lg:order-last">
+    <div class="flex flex-col flex-1 items-start gap-2.5 flex-wrap lg:order-last">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -368,13 +425,14 @@ exports[`PageCard > renders with orientation vertical correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -386,13 +444,14 @@ exports[`PageCard > renders with orientation vertical reverse correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start lg:order-last">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row lg:order-last">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -404,13 +463,14 @@ exports[`PageCard > renders with spotlight color error correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <div class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -422,13 +482,14 @@ exports[`PageCard > renders with spotlight color info correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <div class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -440,13 +501,14 @@ exports[`PageCard > renders with spotlight color neutral correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <div class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -458,13 +520,14 @@ exports[`PageCard > renders with spotlight color neutral correctly 2`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <div class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -476,13 +539,14 @@ exports[`PageCard > renders with spotlight color primary correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <div class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -494,13 +558,14 @@ exports[`PageCard > renders with spotlight color secondary correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <div class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -512,13 +577,14 @@ exports[`PageCard > renders with spotlight color success correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <div class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -530,13 +596,14 @@ exports[`PageCard > renders with spotlight color warning correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <div class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -548,13 +615,14 @@ exports[`PageCard > renders with spotlight correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <div class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -566,13 +634,14 @@ exports[`PageCard > renders with title correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
-      <!--v-if-->
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
       <div class="flex-1">
+        <!--v-if-->
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <!--v-if-->
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -584,13 +653,14 @@ exports[`PageCard > renders with title slot correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title slot</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -611,13 +681,14 @@ exports[`PageCard > renders with ui correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty text-highlighted font-bold">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -629,13 +700,14 @@ exports[`PageCard > renders with variant ghost correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -647,13 +719,14 @@ exports[`PageCard > renders with variant ghost highlight correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg ring-2 ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -665,13 +738,14 @@ exports[`PageCard > renders with variant ghost to correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg transition hover:bg-elevated/50 has-focus-visible:ring-2 has-focus-visible:ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
@@ -682,13 +756,14 @@ exports[`PageCard > renders with variant naked correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-0 sm:p-0">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -700,13 +775,14 @@ exports[`PageCard > renders with variant naked highlight correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg ring-2 ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-0 sm:p-0">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -718,13 +794,14 @@ exports[`PageCard > renders with variant naked to correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg transition has-focus-visible:ring-2 has-focus-visible:ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-0 sm:p-0">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
@@ -735,13 +812,14 @@ exports[`PageCard > renders with variant outline correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -753,13 +831,14 @@ exports[`PageCard > renders with variant outline highlight correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring-2 ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -771,13 +850,14 @@ exports[`PageCard > renders with variant outline to correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-default ring ring-default transition hover:bg-elevated/50 has-focus-visible:ring-2 has-focus-visible:ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-muted mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
@@ -788,13 +868,14 @@ exports[`PageCard > renders with variant soft correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-elevated/50">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-toned mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -806,13 +887,14 @@ exports[`PageCard > renders with variant soft highlight correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-elevated/50 ring-2 ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-toned mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -824,13 +906,14 @@ exports[`PageCard > renders with variant soft to correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-elevated/50 transition hover:bg-elevated has-focus-visible:ring-2 has-focus-visible:ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-toned mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
@@ -841,13 +924,14 @@ exports[`PageCard > renders with variant solid correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-inverted text-inverted">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-inverted">Title</div>
         <div class="text-[15px] text-pretty text-dimmed mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -859,13 +943,14 @@ exports[`PageCard > renders with variant solid highlight correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-inverted text-inverted ring-2 ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-inverted">Title</div>
         <div class="text-[15px] text-pretty text-dimmed mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -877,13 +962,14 @@ exports[`PageCard > renders with variant solid to correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-inverted text-inverted transition hover:bg-inverted/90 has-focus-visible:ring-2 has-focus-visible:ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-inverted">Title</div>
         <div class="text-[15px] text-pretty text-dimmed mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
@@ -894,13 +980,14 @@ exports[`PageCard > renders with variant subtle correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-elevated/50 ring ring-default">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-toned mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -912,13 +999,14 @@ exports[`PageCard > renders with variant subtle highlight correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-elevated/50 ring-2 ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-toned mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div>
@@ -930,13 +1018,14 @@ exports[`PageCard > renders with variant subtle to correctly 1`] = `
 "<div data-orientation="vertical" class="relative flex rounded-lg bg-elevated/50 ring ring-default transition hover:bg-elevated hover:ring-accented has-focus-visible:ring-2 has-focus-visible:ring-primary">
   <!--v-if-->
   <div class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div class="flex flex-col flex-1 items-start">
+    <div class="flex flex-1 items-start gap-2.5 flex-wrap flex-row">
       <!--v-if-->
-      <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
       <div class="flex-1">
+        <div class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="size-5 shrink-0 text-primary"></svg></div>
         <div class="text-base text-pretty font-semibold text-highlighted">Title</div>
         <div class="text-[15px] text-pretty text-toned mt-1">Description</div>
       </div>
+      <!--v-if-->
       <!--v-if-->
     </div>
   </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>

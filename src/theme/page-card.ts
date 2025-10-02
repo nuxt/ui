@@ -5,22 +5,27 @@ export default (options: Required<NuxtOptions['ui']>) => ({
     root: 'relative flex rounded-lg',
     spotlight: 'absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90',
     container: 'relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6',
-    wrapper: 'flex flex-col flex-1 items-start',
+    wrapper: 'flex flex-col flex-1 items-start gap-2.5 flex-wrap',
     header: 'mb-4',
     body: 'flex-1',
     footer: 'pt-4 mt-auto',
     leading: 'inline-flex items-center mb-2.5',
     leadingIcon: 'size-5 shrink-0 text-primary',
     title: 'text-base text-pretty font-semibold text-highlighted',
-    description: 'text-[15px] text-pretty'
+    description: 'text-[15px] text-pretty',
+    links: 'inline-flex flex-wrap gap-2.5'
   },
   variants: {
     orientation: {
       horizontal: {
-        container: 'lg:grid-cols-2 lg:items-center'
+        container: 'lg:grid-cols-2 lg:items-center',
+        wrapper: '',
+        links: ''
       },
       vertical: {
-        container: ''
+        container: '',
+        wrapper: 'flex-row',
+        links: 'self-center'
       }
     },
     reverse: {
