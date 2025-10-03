@@ -277,7 +277,7 @@ function createServer() {
 
   server.tool(
     'list_documentation_pages',
-    'Lists all documentation pages. Returns: A JSON array of objects containing title, title, description, and path.',
+    'Lists all documentation pages. Returns: A JSON array of objects containing title, description, and path.',
     {},
     async () => {
       const result = await $fetch('/api/mcp/list-documentation-pages')
