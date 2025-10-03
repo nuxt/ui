@@ -131,7 +131,7 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
     <template #prompt>
       <UChatPrompt
         v-model="input"
-        icon="i-lucide-search"
+        icon="i-lucide-message-circle"
         variant="naked"
         :error="chat.error"
         :ui="{ trailing: 'items-center' }"
@@ -143,7 +143,8 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
             :icon="fullscreen ? 'i-lucide-maximize' : 'i-lucide-minimize'"
             color="neutral"
             variant="ghost"
-            :ui="{ leadingIcon: 'text-dimmed' }"
+            class="group"
+            :ui="{ leadingIcon: 'text-dimmed group-hover:text-muted transition' }"
             @click="fullscreen = !fullscreen"
           />
         </template>
