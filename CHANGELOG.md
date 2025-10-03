@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.3.6](https://github.com/nuxt/ui/compare/v3.3.5...v3.3.6) (2025-10-03)
+
+### Bug Fixes
+
+* **App:** allow global portal disabling ([#5111](https://github.com/nuxt/ui/issues/5111)) ([43c119f](https://github.com/nuxt/ui/commit/43c119fdd9964902437978313922a7f37f2bb862))
+* **Carousel:** ensure plugins init after client-side navigation ([#5117](https://github.com/nuxt/ui/issues/5117)) ([0f7a1b7](https://github.com/nuxt/ui/commit/0f7a1b7c4f5febf34a90c155909fbb7a6ec206f3))
+* **Carousel:** invert arrow keys in RTL direction ([#5072](https://github.com/nuxt/ui/issues/5072)) ([27cb2b6](https://github.com/nuxt/ui/commit/27cb2b6fc26d900b1e4b5d6b256b5c871bedfbd5))
+* **Drawer:** prevent unwanted close when dismissible is false ([#5085](https://github.com/nuxt/ui/issues/5085)) ([027c06a](https://github.com/nuxt/ui/commit/027c06acce543284b06a45167a55d09bcd32b05a))
+* **Drawer:** use full height/width for snapPoints ([#5041](https://github.com/nuxt/ui/issues/5041)) ([8f21339](https://github.com/nuxt/ui/commit/8f21339fd46c72a432234fdb3ef8ecfbbf2d025b))
+* **Pagination:** make ellipsis non-interactive ([#5081](https://github.com/nuxt/ui/issues/5081)) ([ab168af](https://github.com/nuxt/ui/commit/ab168af668539117f7fc93f68693f38d7e03225d))
+* **Table:** empty cell value causing hydration errors ([#5069](https://github.com/nuxt/ui/issues/5069)) ([cd2662a](https://github.com/nuxt/ui/commit/cd2662a952ea249b95f7cea9144610e3b85bf040))
+* **useKbd:** update escape key from `⎋` to `Esc` ([#5076](https://github.com/nuxt/ui/issues/5076)) ([27aa80c](https://github.com/nuxt/ui/commit/27aa80cd83b6ad35c39cb2fe4a93c0faf1d12853))
+
 ## [3.3.5](https://github.com/nuxt/ui/compare/v3.3.4...v3.3.5) (2025-09-23)
 
 ### Bug Fixes
