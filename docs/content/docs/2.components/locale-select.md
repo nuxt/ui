@@ -68,11 +68,15 @@ You can use it with Nuxt i18n:
 import * as locales from '@nuxt/ui/locale'
 
 const { locale, setLocale } = useI18n()
+const selectedLang = ref(locale.value) // This ref is needed for lazy loaded translations
+watch(locale, newLocale => {
+    selectedLang.value = newLocale
+})
 </script>
 
 <template>
   <ULocaleSelect
-    v-model="locale"
+    v-model="selectedLang"
     :locales="Object.values(locales)"
     @update:model-value="setLocale($event)"
   />
