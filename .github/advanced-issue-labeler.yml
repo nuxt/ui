@@ -1,0 +1,12 @@
+policy:
+  - template: ['bug-report.yml', 'feature-request.yml', 'question.yml']
+    section:
+      - id: ['package']
+        block-list: []
+        label:
+          - name: 'v4'
+            keys: ['v4.x']
+          - name: 'v3'
+            keys: ['v3.x']
+          - name: 'v2'
+            keys: ['v2.x']

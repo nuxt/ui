@@ -3,7 +3,7 @@
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pin-input'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type PinInput = ComponentConfig<typeof theme, AppConfig, 'pinInput'>
 
@@ -41,8 +41,8 @@ export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<Pin
 }
 
 export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T> & {
-  change: [payload: Event]
-  blur: [payload: Event]
+  change: [event: Event]
+  blur: [event: Event]
 }
 
 </script>

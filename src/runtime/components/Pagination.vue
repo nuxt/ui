@@ -2,8 +2,8 @@
 import type { PaginationRootProps, PaginationRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pagination'
-import type { ButtonProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { ButtonProps, IconProps } from '../types'
+import type { ComponentConfig } from '../types/tv'
 
 type Pagination = ComponentConfig<typeof theme, AppConfig, 'pagination'>
 
@@ -18,31 +18,31 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
    * @defaultValue appConfig.ui.icons.chevronDoubleLeft
    * @IconifyIcon
    */
-  firstIcon?: string
+  firstIcon?: IconProps['name']
   /**
    * The icon to use for the previous page control.
    * @defaultValue appConfig.ui.icons.chevronLeft
    * @IconifyIcon
    */
-  prevIcon?: string
+  prevIcon?: IconProps['name']
   /**
    * The icon to use for the next page control.
    * @defaultValue appConfig.ui.icons.chevronRight
    * @IconifyIcon
    */
-  nextIcon?: string
+  nextIcon?: IconProps['name']
   /**
    * The icon to use for the last page control.
    * @defaultValue appConfig.ui.icons.chevronDoubleRight
    * @IconifyIcon
    */
-  lastIcon?: string
+  lastIcon?: IconProps['name']
   /**
    * The icon to use for the ellipsis control.
    * @defaultValue appConfig.ui.icons.ellipsis
    * @IconifyIcon
    */
-  ellipsisIcon?: string
+  ellipsisIcon?: IconProps['name']
   /**
    * The color of the pagination controls.
    * @defaultValue 'neutral'
@@ -152,8 +152,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pagination |
         </slot>
       </PaginationPrev>
 
-      <template v-for="(item, index) in items">
-        <PaginationListItem v-if="item.type === 'page'" :key="index" as-child :value="item.value" :class="ui.item({ class: props.ui?.item })">
+      <template v-for="(item, index) in items" :key="index">
+        <PaginationListItem v-if="item.type === 'page'" as-child :value="item.value" :class="ui.item({ class: props.ui?.item })">
           <slot name="item" v-bind="{ item, index, page, pageCount }">
             <UButton
               :color="page === item.value ? activeColor : color"
@@ -167,9 +167,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pagination |
           </slot>
         </PaginationListItem>
 
-        <PaginationEllipsis v-else :key="item.type" :index="index" as-child :class="ui.ellipsis({ class: props.ui?.ellipsis })">
+        <PaginationEllipsis v-else as-child :class="ui.ellipsis({ class: props.ui?.ellipsis })">
           <slot name="ellipsis">
-            <UButton :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" />
+            <UButton as="div" :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" />
           </slot>
         </PaginationEllipsis>
       </template>
