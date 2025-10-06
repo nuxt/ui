@@ -230,6 +230,7 @@ async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean>
   }
 
   if (opts.transform) {
+    // eslint-disable-next-line vue/no-mutating-props
     Object.assign(props.state, transformedState.value)
   }
 
