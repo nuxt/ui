@@ -17,7 +17,8 @@ items:
       name: 'romhml'
       to: 'https://github.com/romhml'
       target: '_blank'
-      avatar: { src: 'https://github.com/romhml.png' }
+      avatar:
+        src: 'https://github.com/romhml.png'
   - label: 'Raycast Extension'
     description: 'Quickly search, browse, and copy Nuxt UI component code snippets without leaving your editor.'
     avatar:
@@ -28,7 +29,8 @@ items:
       name: 'HugoRDC'
       to: 'https://github.com/HugoRCD'
       target: '_blank'
-      avatar: { src: 'https://github.com/HugoRCD.png' }
+      avatar:
+        src: 'https://github.com/HugoRCD.png'
   - label: 'Figma to Code'
     description: 'Transform your Figma designs into production-ready Nuxt UI components with one click.'
     avatar:
@@ -39,7 +41,8 @@ items:
       name: 'Justineo'
       to: 'https://github.com/Justineo'
       target: '_blank'
-      avatar: { src: 'https://github.com/Justineo.png' }
+      avatar:
+        src: 'https://github.com/Justineo.png'
   - label: 'Nuxt Auto Form'
     description: 'Auto-generate Nuxt UI forms from your Zod 4 schemas with zero boilerplate.'
     avatar:
@@ -52,7 +55,8 @@ items:
       name: 'Norbiros'
       to: 'https://github.com/Norbiros'
       target: '_blank'
-      avatar: { src: 'https://github.com/Norbiros.png' }
+      avatar:
+        src: 'https://github.com/Norbiros.png'
   - label: 'Nuxt Charts'
     description: 'Build interactive, responsive charts and data visualizations seamlessly integrated with Nuxt UI.'
     avatar:
@@ -65,7 +69,8 @@ items:
       name: 'dennisadriaans'
       to: 'https://github.com/dennisadriaans'
       target: '_blank'
-      avatar: { src: 'https://github.com/dennisadriaans.png' }
+      avatar:
+        src: 'https://github.com/dennisadriaans.png'
   - label: 'Nuxt QRCode'
     description: 'Generate and read QR codes with Nuxt, a perfect addition to your Nuxt UI projects.'
     avatar:
@@ -78,4 +83,5 @@ items:
       name: 'sandros94'
       to: 'https://github.com/sandros94'
       target: '_blank'
-      avatar: { src: 'https://github.com/sandros94.png' }
+      avatar:
+        src: 'https://github.com/sandros94.png'

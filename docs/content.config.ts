@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { defineCollection, property } from '@nuxt/content'
+import { defineCollection } from '@nuxt/content'
 
 const Image = z.object({
   src: z.string(),
@@ -8,21 +8,52 @@ const Image = z.object({
   height: z.number().optional()
 })
 
-const Avatar = property(z.object({})).inherit('@nuxt/ui/components/Avatar.vue')
-const Button = property(z.object({})).inherit('@nuxt/ui/components/Button.vue')
-const PageHero = property(z.object({})).inherit('@nuxt/ui/components/PageHero.vue')
-const PageSection = property(z.object({})).inherit('@nuxt/ui/components/PageSection.vue')
-const PageFeature = property(z.object({})).inherit('@nuxt/ui/components/PageFeature.vue')
-const PageCTA = property(z.object({})).inherit('@nuxt/ui/components/PageCTA.vue')
+const Avatar = z.object({
+  src: z.string(),
+  alt: z.string().optional()
+})
+
+const Button = z.object({
+  label: z.string(),
+  icon: z.string().optional(),
+  avatar: Avatar.optional(),
+  leadingIcon: z.string().optional(),
+  trailingIcon: z.string().optional(),
+  to: z.string().optional(),
+  target: z.enum(['_blank', '_self']).optional(),
+  color: z.enum(['primary', 'neutral', 'success', 'warning', 'error', 'info']).optional(),
+  size: z.enum(['xs', 'sm', 'md', 'lg', 'xl']).optional(),
+  variant: z.enum(['solid', 'outline', 'subtle', 'soft', 'ghost', 'link']).optional(),
+  id: z.string().optional(),
+  class: z.string().optional()
+})
+
+const PageFeature = z.object({
+  title: z.string(),
+  description: z.string().optional(),
+  icon: z.string(),
+  to: z.string().optional(),
+  target: z.enum(['_blank', '_self']).optional()
+})
+
+const PageHero = z.object({
+  title: z.string(),
+  description: z.string(),
+  links: z.array(Button).optional()
+})
+
+const PageSection = z.object({
+  title: z.string(),
+  description: z.string(),
+  icon: z.string().optional(),
+  links: z.array(Button).optional(),
+  features: z.array(PageFeature).optional()
+})
 
 const Page = z.object({
   title: z.string(),
   description: z.string(),
-  hero: PageHero.extend({
-    title: z.string(),
-    description: z.string(),
-    image: z.string().optional()
-  })
+  hero: PageHero
 })
 
 export const collections = {
@@ -44,6 +75,9 @@ export const collections = {
     type: 'page',
     source: 'index.yml',
     schema: Page.extend({
+      hero: PageHero.extend({
+        features: z.array(PageFeature)
+      }),
       features: z.array(PageFeature),
       design_system: PageSection.extend({
         code: z.string()
@@ -63,7 +97,7 @@ export const collections = {
     source: 'figma.yml',
     schema: Page.extend({
       features1: PageSection,
-      cta1: PageCTA,
+      cta1: PageSection,
       section1: PageSection.extend({
         tabs: z.array(z.object({
           label: z.string(),
@@ -89,7 +123,7 @@ export const collections = {
           image: Image
         }))
       }),
-      customers: PageCTA.extend({
+      customers: PageSection.extend({
         items: z.array(z.object({
           src: z.string(),
           alt: z.string()

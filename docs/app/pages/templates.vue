@@ -18,7 +18,6 @@ defineOgImageComponent('Docs')
 <template>
   <div v-if="page">
     <UPageHero
-      :links="page.links"
       :ui="{
         container: 'relative lg:py-32'
       }"
