@@ -455,6 +455,23 @@ props:
 This lets you select a parent item without expanding or collapsing its children.
 ::
 
+### With virtualization :badge{label="Soon"}
+
+Use the `virtualize` prop to enable virtualization for large lists. Can be `true` or an object with virtualizer options like `estimateSize`, `overscan`, etc.
+
+::component-example
+---
+prettier: true
+name: 'tree-virtualize-example'
+props:
+  class: 'w-60'
+---
+::
+
+::note
+When virtualization is enabled, the tree structure is flattened (as if the `nested` prop is set to `false`).
+::
+
 ### With custom slot
 
 Use the `slot` property to customize a specific item.
