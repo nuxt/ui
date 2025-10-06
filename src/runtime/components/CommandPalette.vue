@@ -193,6 +193,7 @@ import UKbd from './Kbd.vue'
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
   labelKey: 'label',
+  valueKey: 'value',
   autofocus: true,
   back: true
 })
@@ -393,7 +394,7 @@ function onSelect(e: Event, item: T) {
           <ListboxItem
             v-for="(item, index) in group.items"
             :key="`group-${group.id}-${index}`"
-            :value="props.valueKey ? get(omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children']), props.valueKey as string) : omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
+            :value="get(omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children']), props.valueKey as string)"
             :disabled="item.disabled"
             as-child
             @select="onSelect($event, item)"
