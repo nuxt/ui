@@ -873,6 +873,24 @@ props:
 ---
 ::
 
+### With virtualization :badge{label="Soon"}
+
+Use the `virtualize` prop to enable virtualization for large lists. Can be `true` or an object with virtualizer options like `estimateSize`, `overscan`, etc.
+
+::warning
+When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
+::
+
+::component-example
+---
+prettier: true
+name: 'command-palette-virtualize-example'
+class: '!p-0'
+props:
+  autofocus: false
+---
+::
+
 ### Within a Popover
 
 You can use the CommandPalette component inside a [Popover](/docs/components/popover)'s content.
