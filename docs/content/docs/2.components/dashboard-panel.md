@@ -112,6 +112,10 @@ class: '!p-0 !justify-start'
 :placeholder{class="h-96"}
 ::
 
+::tip{to="/docs/components/dashboard-group#props"}
+Sizes are calculated as percentages by default. You can change this using the `unit` prop on the `DashboardGroup` component.
+::
+
 ## API
 
 ### Props

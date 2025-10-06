@@ -221,8 +221,30 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as Table['AppConfig']
 
 const data = ref(props.data ?? []) as Ref<T[]>
-const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 const meta = computed(() => props.meta ?? {})
+const columns = computed<TableColumn<T>[]>(() => processColumns(props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) }))))
+
+function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
+  return columns.map((column) => {
+    const col = { ...column } as TableColumn<T>
+
+    if ('columns' in col && col.columns) {
+      col.columns = processColumns(col.columns as TableColumn<T>[])
+    }
+
+    if (!col.cell) {
+      col.cell = ({ getValue }) => {
+        const value = getValue()
+        if (value === '' || value === null || value === undefined) {
+          return '\u00A0'
+        }
+        return String(value)
+      }
+    }
+
+    return col
+  })
+}
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })({
   sticky: props.sticky,
