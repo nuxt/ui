@@ -85,3 +85,17 @@ items:
       target: '_blank'
       avatar:
         src: 'https://github.com/sandros94.png'
+  - label: 'LunixPOS'
+    description: 'An all-in-one platform designed for electronics repair shops to manage sales, inventory, and operations.'
+    avatar:
+      src: 'https://res.cloudinary.com/dtomoi7fb/image/upload/v1759778770/lunixpos.svg'
+      ui:
+        image: 'p-2.5'
+    to: 'https://lunixpos.com'
+    target: '_blank'
+    user:
+      name: 'devadedeji'
+      to: 'https://github.com/devadedeji'
+      target: '_blank'
+      avatar:
+        src: 'https://github.com/devadedeji.png'
