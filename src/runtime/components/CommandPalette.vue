@@ -136,6 +136,11 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>
+  /**
+   * Use this to compare objects by a particular field, or pass your own
+   * comparison function for complete control over how objects are compared.
+   */
+  by?: GetItemKeys<T> | ((a: T, b: T) => boolean)
   class?: any
   ui?: CommandPalette['slots']
 }
@@ -330,7 +335,7 @@ function onSelect(e: Event, item: T) {
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <ListboxRoot v-bind="rootProps" ref="listboxRootRef" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ListboxRoot v-bind="rootProps" :by="(by as any)" ref="listboxRootRef" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
         :placeholder="placeholder"
