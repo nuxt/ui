@@ -147,7 +147,7 @@ export type InputMenuEmits<A extends ArrayOrNested<InputMenuItem>, VK extends Ge
   'remove-tag': [item: GetModelValue<A, VK, M>]
 } & GetModelValueEmits<A, VK, M>
 
-type SlotProps<T extends InputMenuItem> = (props: { item: T, index?: number }) => any
+type SlotProps<T extends InputMenuItem> = (props: { item: T, index: number }) => any
 
 export interface InputMenuSlots<
   A extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>,
@@ -237,7 +237,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: InputMenuItem, index?: number }>({
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: InputMenuItem, index: number }>({
   props: {
     item: {
       type: Object,
@@ -582,12 +582,12 @@ defineExpose({
             <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
             <ComboboxVirtualizer
-              v-slot="{ option: item }"
+              v-slot="{ option: item, virtualItem }"
               :options="(filteredItems as any[])"
               :text-content="item => isInputItem(item) ? get(item, props.labelKey as string) : String(item)"
               v-bind="virtualizerProps"
             >
-              <ReuseItemTemplate :item="item" />
+              <ReuseItemTemplate :item="item" :index="virtualItem.index" />
             </ComboboxVirtualizer>
 
             <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />

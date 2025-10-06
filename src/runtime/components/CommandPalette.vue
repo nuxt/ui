@@ -150,7 +150,7 @@ export type CommandPaletteEmits<T extends CommandPaletteItem = CommandPaletteIte
   'update:open': [value: boolean]
 }
 
-type SlotProps<T> = (props: { item: T, index?: number }) => any
+type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> = {
   'empty'(props: { searchTerm?: string }): any
@@ -205,7 +205,7 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'mu
 const inputProps = useForwardProps(reactivePick(props, 'loading'))
 const virtualizerProps = toRef(() => !!props.virtualize && defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, { estimateSize: 32 }))
 
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: CommandPaletteItem, group?: CommandPaletteGroup, index?: number }>({
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: CommandPaletteItem, group?: CommandPaletteGroup, index: number }>({
   props: {
     item: {
       type: Object,
@@ -464,12 +464,12 @@ function onSelect(e: Event, item: T) {
       <div v-if="filteredGroups?.length" role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
         <ListboxVirtualizer
           v-if="!!virtualize"
-          v-slot="{ option: item }"
+          v-slot="{ option: item, virtualItem }"
           :options="(filteredItems as any[])"
           :text-content="item => get(item, props.labelKey as string)"
           v-bind="virtualizerProps"
         >
-          <ReuseItemTemplate :item="item" />
+          <ReuseItemTemplate :item="item" :index="virtualItem.index" />
         </ListboxVirtualizer>
 
         <template v-else>
