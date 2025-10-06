@@ -137,6 +137,11 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   labelKey?: GetItemKeys<T>
   /**
+   * When `items` is an array of objects, select the field to use as the value.
+   * @defaultValue 'value'
+   */
+  valueKey?: GetItemKeys<T>
+  /**
    * Use this to compare objects by a particular field, or pass your own
    * comparison function for complete control over how objects are compared.
    */
@@ -335,7 +340,7 @@ function onSelect(e: Event, item: T) {
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <ListboxRoot v-bind="rootProps" :by="(by as any)" ref="listboxRootRef" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ListboxRoot v-bind="rootProps" ref="listboxRootRef" :by="(by as any)" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
         :placeholder="placeholder"
@@ -388,7 +393,7 @@ function onSelect(e: Event, item: T) {
           <ListboxItem
             v-for="(item, index) in group.items"
             :key="`group-${group.id}-${index}`"
-            :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
+            :value="props.valueKey ? get(omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children']), props.valueKey as string) : omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
             :disabled="item.disabled"
             as-child
             @select="onSelect($event, item)"
