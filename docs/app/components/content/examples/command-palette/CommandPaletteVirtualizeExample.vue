@@ -1,5 +1,10 @@
 <script setup lang="ts">
-const items = Array(5000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i }))
+import type { CommandPaletteItem } from '@nuxt/ui'
+
+const items: CommandPaletteItem[] = Array(5000).fill(0).map((_, value) => ({
+  label: `item-${value}`,
+  value
+}))
 
 const groups = [{
   id: 'items',

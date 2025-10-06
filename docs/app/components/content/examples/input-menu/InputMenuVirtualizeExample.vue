@@ -1,5 +1,10 @@
 <script setup lang="ts">
-const items = Array(5000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i }))
+import type { InputMenuItem } from '@nuxt/ui'
+
+const items: InputMenuItem[] = Array(5000).fill(0).map((_, i) => ({
+  label: `item-${i}`,
+  value: i
+}))
 </script>
 
 <template>
