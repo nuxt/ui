@@ -91,7 +91,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
     <USelect v-model="position" :items="positions" placeholder="Position" />
   </Navbar>
 
-  <Matrix v-slot="props" :attrs="attrs">
+  <Matrix v-slot="props" :attrs="attrs" container-class="w-80">
     <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
       <UFormField name="avatar" label="Avatar" description="JPG, GIF or PNG. 1MB Max." v-bind="props">
         <UFileUpload v-slot="{ open, removeFile }" v-model="state.avatar" accept="image/*">

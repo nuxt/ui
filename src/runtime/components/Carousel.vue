@@ -114,7 +114,7 @@ export interface CarouselEmits {
 </script>
 
 <script setup lang="ts" generic="T extends CarouselItem">
-import { computed, ref, watch, onMounted } from 'vue'
+import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
@@ -212,13 +212,16 @@ async function loadPlugins() {
   plugins.value = emblaPlugins
 }
 
-watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], loadPlugins, { immediate: true })
-
-const [emblaRef, emblaApi] = useEmblaCarousel(options.value, plugins.value)
-
-watch([options, plugins], () => {
+watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], async () => {
+  await loadPlugins()
   emblaApi.value?.reInit(options.value, plugins.value)
-})
+}, { immediate: true })
+
+const [emblaRef, emblaApi] = useEmblaCarousel(options, plugins)
+
+watch(options, () => {
+  emblaApi.value?.reInit(options.value, plugins.value)
+}, { flush: 'post' })
 
 function scrollPrev() {
   emblaApi.value?.scrollPrev()
@@ -280,11 +283,23 @@ onMounted(() => {
     return
   }
 
-  emblaApi.value?.on('init', onInit)
-  emblaApi.value?.on('init', onSelect)
-  emblaApi.value?.on('reInit', onInit)
-  emblaApi.value?.on('reInit', onSelect)
-  emblaApi.value?.on('select', onSelect)
+  emblaApi.value.on('init', onInit)
+  emblaApi.value.on('init', onSelect)
+  emblaApi.value.on('reInit', onInit)
+  emblaApi.value.on('reInit', onSelect)
+  emblaApi.value.on('select', onSelect)
+})
+
+onBeforeUnmount(() => {
+  if (!emblaApi.value) {
+    return
+  }
+
+  emblaApi.value.off('init', onInit)
+  emblaApi.value.off('init', onSelect)
+  emblaApi.value.off('reInit', onInit)
+  emblaApi.value.off('reInit', onSelect)
+  emblaApi.value.off('select', onSelect)
 })
 
 defineExpose({
