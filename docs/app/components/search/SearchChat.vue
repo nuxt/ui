@@ -11,6 +11,7 @@ const components = {
 }
 
 const messages = defineModel<UIMessage[]>('messages')
+const fullscreen = defineModel<boolean>('fullscreen')
 
 const emits = defineEmits<{
   close: []
@@ -70,7 +71,9 @@ function upperName(name: string) {
   return splitByCase(name).map(p => upperFirst(p)).join('')
 }
 
-function getToolMessage(state: UIToolInvocation<any>['state'], toolName: string, input: any) {
+type State = UIToolInvocation<any>['state']
+
+function getToolMessage(state: State, toolName: string, input: any) {
   const searchVerb = state === 'output-available' ? 'Searched' : 'Searching'
   const readVerb = state === 'output-available' ? 'Read' : 'Reading'
 
@@ -84,18 +87,21 @@ function getToolMessage(state: UIToolInvocation<any>['state'], toolName: string,
     get_documentation_page: `${readVerb} ${input.path || ''} page`,
     list_documentation_pages: `${searchVerb} documentation pages`,
     list_getting_started_guides: `${searchVerb} documentation guides`,
-    get_migration_guide: `${readVerb} ${input.version} migration guide`,
+    get_migration_guide: `${readVerb} migration guide${input.version ? ` for ${input.version}` : ''}`,
     list_examples: `${searchVerb} examples`,
     get_example: `${readVerb} ${upperName(input.exampleName)} example`,
     search_components_by_category: `${searchVerb} components${input.category ? ` in ${input.category} category` : ''}${input.search ? ` for "${input.search}"` : ''}`
   }[toolName] || `${searchVerb} ${toolName}`
 }
+
+const getCachedToolMessage = useMemoize((state: State, toolName: string, input: string) =>
+  getToolMessage(state, toolName, JSON.parse(input))
+)
 </script>
 
 <template>
   <UChatPalette>
     <UChatMessages
-      should-auto-scroll
       :messages="chat.messages"
       :status="chat.status"
       :user="{ side: 'left', variant: 'naked', icon: 'i-lucide-user' }"
@@ -115,7 +121,7 @@ function getToolMessage(state: UIToolInvocation<any>['state'], toolName: string,
             />
 
             <p v-if="part.type === 'dynamic-tool'" class="text-muted text-sm leading-6 my-1.5">
-              {{ getToolMessage(part.state, part.toolName, part.input || {}) }}
+              {{ getCachedToolMessage(part.state, part.toolName, JSON.stringify(part.input || {})) }}
             </p>
           </template>
         </div>
@@ -125,14 +131,22 @@ function getToolMessage(state: UIToolInvocation<any>['state'], toolName: string,
     <template #prompt>
       <UChatPrompt
         v-model="input"
-        icon="i-lucide-search"
+        icon="i-lucide-message-circle"
         variant="naked"
         :error="chat.error"
+        :ui="{ trailing: 'items-center' }"
         @submit="handleSubmit"
         @close="handleClose"
       >
         <template #trailing>
-          <UBadge label="Beta" color="neutral" variant="outline" />
+          <UButton
+            :icon="fullscreen ? 'i-lucide-maximize' : 'i-lucide-minimize'"
+            color="neutral"
+            variant="ghost"
+            class="group"
+            :ui="{ leadingIcon: 'text-dimmed group-hover:text-muted transition' }"
+            @click="fullscreen = !fullscreen"
+          />
         </template>
       </UChatPrompt>
     </template>

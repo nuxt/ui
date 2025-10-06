@@ -40,6 +40,7 @@ describe('DashboardSearch', () => {
     ['with loading', { props: { ...props, loading: true } }],
     ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loading' } }],
     ['without colorMode', { props: { ...props, colorMode: false } }],
+    ['with fullscreen', { props: { ...props, fullscreen: true } }],
     ['with ui', { props: { ...props, ui: { input: '[&>input]:text-lg' } } }],
     ['with class', { props: { ...props, class: 'sm:max-w-5xl' } }]
   ])('renders %s correctly', async (_: string, options: { props?: DashboardSearchProps }) => {

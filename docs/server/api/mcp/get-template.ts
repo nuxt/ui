@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { queryCollection } from '@nuxt/content/server'
 
 const querySchema = z.object({
   templateName: z.string().min(1, 'Missing templateName')
@@ -7,9 +8,9 @@ const querySchema = z.object({
 export default defineCachedEventHandler(async (event) => {
   const { templateName } = await getValidatedQuery(event, querySchema.parse)
 
-  const { templates } = await $fetch('/api/mcp/list-templates')
-  // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
-  const template = templates.find((t: any) => t.title.toLowerCase() === templateName.toLowerCase())
+  const template = await queryCollection(event, 'templates')
+    .where('title', '=', templateName)
+    .first()
 
   if (!template) {
     throw createError({

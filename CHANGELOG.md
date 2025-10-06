@@ -1,5 +1,30 @@
 # Changelog
 
+## [4.0.1](https://github.com/nuxt/ui/compare/v4.0.0...v4.0.1) (2025-10-02)
+
+### Bug Fixes
+
+* **App:** allow global portal disabling ([#5111](https://github.com/nuxt/ui/issues/5111)) ([7659fa1](https://github.com/nuxt/ui/commit/7659fa11628238b89f85d6f402c7bc5ccdd077e1))
+* **AuthForm:** export type with proper inference for field-specific props ([#5106](https://github.com/nuxt/ui/issues/5106)) ([344f269](https://github.com/nuxt/ui/commit/344f26950bd7d509aafd07a91848e4e919ebb10a))
+* **Avatar:** remove redundant `img` role ([066b8a1](https://github.com/nuxt/ui/commit/066b8a1ccdc2b266593b377e04b3993490c0de7d)), closes [#5044](https://github.com/nuxt/ui/issues/5044)
+* **Carousel:** ensure plugins init after client-side navigation ([#5117](https://github.com/nuxt/ui/issues/5117)) ([21fbe63](https://github.com/nuxt/ui/commit/21fbe630eb80f274287fe0e7fd7c838d4d9aac7d))
+* **Carousel:** invert arrow keys in RTL direction ([#5072](https://github.com/nuxt/ui/issues/5072)) ([fde53ee](https://github.com/nuxt/ui/commit/fde53ee3cbeb9aaed4314aafc90f325273a00c3a))
+* **ChatMessages:** ensure content is render before scrolling ([0db622a](https://github.com/nuxt/ui/commit/0db622acfb78f4dcb75b8f71694b6db502e10507))
+* **ChatMessages:** watch deep to handle streaming with `parts` ([ff67fa3](https://github.com/nuxt/ui/commit/ff67fa368bfd4f73d77eeed13fecf04674d41d76))
+* **components:** add missing `data-orientation` for consistency ([a9fe7c6](https://github.com/nuxt/ui/commit/a9fe7c61f43feb0639e8d0546496a51c993c05fe))
+* **ContentNavigation:** improve path matching and recursion with `default-open` ([22ee075](https://github.com/nuxt/ui/commit/22ee075a398365464bc5b39ba4ac5f8648399ac4)), closes [#5112](https://github.com/nuxt/ui/issues/5112)
+* **ContentSearch/DashboardSearch:** proxy modal props to support fullscreen ([095a0c1](https://github.com/nuxt/ui/commit/095a0c1eec7c28e140202f260031fc6c57daef3a))
+* **DashboardPanel/DashboardSidebar:** handle RTL mode ([#5109](https://github.com/nuxt/ui/issues/5109)) ([fface35](https://github.com/nuxt/ui/commit/fface35e5456f084b3d97d90f5fe25f920e96bf8))
+* **Drawer:** prevent unwanted close when dismissible is false ([#5085](https://github.com/nuxt/ui/issues/5085)) ([2abdc21](https://github.com/nuxt/ui/commit/2abdc217823b5371766d51a8ea5a570011b68051))
+* **Drawer:** use full height/width for snapPoints ([#5041](https://github.com/nuxt/ui/issues/5041)) ([b145768](https://github.com/nuxt/ui/commit/b1457685b8a5a73e8390748524a2437df27b46b4))
+* **locale:** improve `ckb` translations ([#5079](https://github.com/nuxt/ui/issues/5079)) ([3ee3a5e](https://github.com/nuxt/ui/commit/3ee3a5ea0e571a94ef9c813220eac39a25d43f82))
+* **locale:** improve typography with ellipsis ([#5052](https://github.com/nuxt/ui/issues/5052)) ([391f9f5](https://github.com/nuxt/ui/commit/391f9f5f5b51f67d0ffe376026d0167377087a9e))
+* **Pagination:** make ellipsis non-interactive ([#5081](https://github.com/nuxt/ui/issues/5081)) ([62f64cc](https://github.com/nuxt/ui/commit/62f64cc260fbf85a2f143d53c93e0e5b665b6f71))
+* **Table:** empty cell value causing hydration errors ([#5069](https://github.com/nuxt/ui/issues/5069)) ([44a38ea](https://github.com/nuxt/ui/commit/44a38ea3340e7e21a4e290c29eb8818a7c464860))
+* **unplugin:** handle components resolution with subpath ([31db8d9](https://github.com/nuxt/ui/commit/31db8d933ac368b194d72e562c19ba7480b85f77))
+* **useKbd:** update escape key from `⎋` to `Esc` ([#5076](https://github.com/nuxt/ui/issues/5076)) ([64d1589](https://github.com/nuxt/ui/commit/64d1589d2d2a94541cca13c0821a8c9294369942))
+* **vue:** align `useCookie` stub with nuxt's default value handling ([#5089](https://github.com/nuxt/ui/issues/5089)) ([f531807](https://github.com/nuxt/ui/commit/f53180751cb2012ee3022e5e5d13db372312251a))
+
 ## [4.0.0](https://github.com/nuxt/ui/compare/v4.0.0-beta.0...v4.0.0) (2025-09-23)
 
 ## [4.0.0-beta.0](https://github.com/nuxt/ui/compare/v4.0.0-alpha.2...v4.0.0-beta.0) (2025-09-22)
