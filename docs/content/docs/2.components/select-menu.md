@@ -784,6 +784,21 @@ The create option shows when no match is found by default. Set it to `always` to
 Use the `@create` event to handle the creation of the item. You will receive the event and the item as arguments.
 ::
 
+### With virtualization :badge{label="Soon"}
+
+Use the `virtualize` prop to enable virtualization for large lists. Can be `true` or an object with virtualizer options like `estimateSize`, `overscan`, etc.
+
+::warning
+When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
+::
+
+::component-example
+---
+prettier: true
+name: 'select-menu-virtualize-example'
+---
+::
+
 ### With fetched items
 
 You can fetch items from an API and use them in the SelectMenu.
