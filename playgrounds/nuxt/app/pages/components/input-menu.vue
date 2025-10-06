@@ -112,7 +112,7 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
       icon="i-lucide-layout-list"
       placeholder="Search virtualized..."
       virtualize
-      :items="[Array(5000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i }))]"
+      :items="[Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i }))]"
       v-bind="props"
     />
   </Matrix>

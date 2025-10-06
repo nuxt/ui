@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { InputMenuItem } from '@nuxt/ui'
 
-const items: InputMenuItem[] = Array(5000).fill(0).map((_, i) => ({
+const items: InputMenuItem[] = Array(1000).fill(0).map((_, i) => ({
   label: `item-${i}`,
   value: i
 }))

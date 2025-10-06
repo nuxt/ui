@@ -224,9 +224,9 @@ defineShortcuts({
     <UCommandPalette
       v-if="virtualize"
       virtualize
-      :fuse="{ resultLimit: 5000 }"
+      :fuse="{ resultLimit: 1000 }"
       placeholder="Search virtualized items..."
-      :groups="[{ id: 'items', items: Array(5000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i, icon: 'i-lucide-file' })) }]"
+      :groups="[{ id: 'items', items: Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i, icon: 'i-lucide-file' })) }]"
       class="sm:max-h-96"
     />
 
