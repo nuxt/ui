@@ -62,7 +62,7 @@ export interface CheckboxSlots {
 import { computed, useId } from 'vue'
 import { Primitive, CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -76,6 +76,7 @@ const emits = defineEmits<CheckboxEmits>()
 const modelValue = defineModel<boolean | 'indeterminate'>({ default: undefined })
 
 const appConfig = useAppConfig() as Checkbox['AppConfig']
+const uiTheme = useComponentUiTheme('checkbox', () => ({ slots: props.ui }))
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
 
@@ -102,33 +103,33 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <Primitive :as="(!variant || variant === 'list') ? as : Label" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.container({ class: props.ui?.container })">
+  <Primitive :as="(!variant || variant === 'list') ? as : Label" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <div :class="ui.container({ class: uiTheme?.slots?.container })">
       <CheckboxRoot
         :id="id"
         v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
         v-model="modelValue"
         :name="name"
         :disabled="disabled"
-        :class="ui.base({ class: props.ui?.base })"
+        :class="ui.base({ class: uiTheme?.slots?.base })"
         @update:model-value="onUpdate"
       >
         <template #default="{ modelValue }">
-          <CheckboxIndicator :class="ui.indicator({ class: props.ui?.indicator })">
-            <UIcon v-if="modelValue === 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" :class="ui.icon({ class: props.ui?.icon })" />
-            <UIcon v-else :name="icon || appConfig.ui.icons.check" :class="ui.icon({ class: props.ui?.icon })" />
+          <CheckboxIndicator :class="ui.indicator({ class: uiTheme?.slots?.indicator })">
+            <UIcon v-if="modelValue === 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" :class="ui.icon({ class: uiTheme?.slots?.icon })" />
+            <UIcon v-else :name="icon || appConfig.ui.icons.check" :class="ui.icon({ class: uiTheme?.slots?.icon })" />
           </CheckboxIndicator>
         </template>
       </CheckboxRoot>
     </div>
 
-    <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <component :is="(!variant || variant === 'list') ? Label : 'p'" v-if="label || !!slots.label" :for="id" :class="ui.label({ class: props.ui?.label })">
+    <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
+      <component :is="(!variant || variant === 'list') ? Label : 'p'" v-if="label || !!slots.label" :for="id" :class="ui.label({ class: uiTheme?.slots?.label })">
         <slot name="label" :label="label">
           {{ label }}
         </slot>
       </component>
-      <p v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+      <p v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
         <slot name="description" :description="description">
           {{ description }}
         </slot>

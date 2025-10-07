@@ -52,7 +52,7 @@ export interface SeparatorSlots {
 import { computed } from 'vue'
 import { Separator, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -63,6 +63,7 @@ const props = withDefaults(defineProps<SeparatorProps>(), {
 const slots = defineSlots<SeparatorSlots>()
 
 const appConfig = useAppConfig() as Separator['AppConfig']
+const uiTheme = useComponentUiTheme('separator', () => ({ slots: props.ui }))
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'decorative', 'orientation'))
 
@@ -75,19 +76,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator ||
 </script>
 
 <template>
-  <Separator v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.border({ class: props.ui?.border })" />
+  <Separator v-bind="rootProps" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <div :class="ui.border({ class: uiTheme?.slots?.border })" />
 
     <template v-if="label || icon || avatar || !!slots.default">
-      <div :class="ui.container({ class: props.ui?.container })">
+      <div :class="ui.container({ class: uiTheme?.slots?.container })">
         <slot>
-          <span v-if="label" :class="ui.label({ class: props.ui?.label })">{{ label }}</span>
-          <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
-          <UAvatar v-else-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+          <span v-if="label" :class="ui.label({ class: uiTheme?.slots?.label })">{{ label }}</span>
+          <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: uiTheme?.slots?.icon })" />
+          <UAvatar v-else-if="avatar" :size="((uiTheme?.slots?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: uiTheme?.slots?.avatar })" />
         </slot>
       </div>
 
-      <div :class="ui.border({ class: props.ui?.border })" />
+      <div :class="ui.border({ class: uiTheme?.slots?.border })" />
     </template>
   </Separator>
 </template>

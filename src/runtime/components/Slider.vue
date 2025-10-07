@@ -47,7 +47,7 @@ export interface SliderEmits {
 import { computed } from 'vue'
 import { SliderRoot, SliderRange, SliderTrack, SliderThumb, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UTooltip from './Tooltip.vue'
@@ -63,6 +63,7 @@ const emits = defineEmits<SliderEmits>()
 const modelValue = defineModel<T>()
 
 const appConfig = useAppConfig() as Slider['AppConfig']
+const uiTheme = useComponentUiTheme('slider', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'), emits)
 
@@ -111,13 +112,13 @@ function onChange(value: any) {
     v-model="sliderValue"
     :name="name"
     :disabled="disabled"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
     :default-value="defaultSliderValue"
     @update:model-value="emitFormInput()"
     @value-commit="onChange"
   >
-    <SliderTrack :class="ui.track({ class: props.ui?.track })">
-      <SliderRange :class="ui.range({ class: props.ui?.range })" />
+    <SliderTrack :class="ui.track({ class: uiTheme?.slots?.track })">
+      <SliderRange :class="ui.range({ class: uiTheme?.slots?.range })" />
     </SliderTrack>
 
     <template v-for="thumb in thumbs" :key="thumb">
@@ -127,9 +128,9 @@ function onChange(value: any) {
         disable-closing-trigger
         v-bind="(typeof tooltip === 'object' ? tooltip : {})"
       >
-        <SliderThumb :class="ui.thumb({ class: props.ui?.thumb })" />
+        <SliderThumb :class="ui.thumb({ class: uiTheme?.slots?.thumb })" />
       </UTooltip>
-      <SliderThumb v-else :class="ui.thumb({ class: props.ui?.thumb })" />
+      <SliderThumb v-else :class="ui.thumb({ class: uiTheme?.slots?.thumb })" />
     </template>
   </SliderRoot>
 </template>

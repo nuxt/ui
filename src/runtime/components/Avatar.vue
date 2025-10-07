@@ -38,7 +38,7 @@ export interface AvatarSlots {
 import { ref, computed, watch } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
 import { defu } from 'defu'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import ImageComponent from '#build/ui-image-component'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
@@ -60,6 +60,7 @@ const as = computed(() => {
 const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
 
 const appConfig = useAppConfig() as Avatar['AppConfig']
+const uiTheme = useComponentUiTheme('avatar', () => ({ slots: props.ui }))
 const { size } = useAvatarGroup(props)
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -97,7 +98,7 @@ function onError() {
     :is="props.chip ? UChip : Primitive"
     :as="as.root"
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
     :style="props.style"
   >
     <component
@@ -108,14 +109,14 @@ function onError() {
       :width="sizePx"
       :height="sizePx"
       v-bind="$attrs"
-      :class="ui.image({ class: props.ui?.image })"
+      :class="ui.image({ class: uiTheme?.slots?.image })"
       @error="onError"
     />
 
     <Slot v-else v-bind="$attrs">
       <slot>
-        <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
-        <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
+        <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: uiTheme?.slots?.icon })" />
+        <span v-else :class="ui.fallback({ class: uiTheme?.slots?.fallback })">{{ fallback || '&nbsp;' }}</span>
       </slot>
     </Slot>
   </component>

@@ -85,7 +85,7 @@ export interface ChatPromptSubmitEmits {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { transformUI } from '../utils'
 import { tv } from '../utils/tv'
@@ -105,6 +105,7 @@ const slots = defineSlots<ButtonSlots>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPromptSubmit['AppConfig']
+const uiTheme = useComponentUiTheme('chatPromptSubmit', () => ({ slots: props.ui }))
 
 const buttonProps = computed(() => ({
   ready: {
@@ -147,7 +148,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPromptSu
   <UButton
     :aria-label="t('chatPromptSubmit.label')"
     v-bind="buttonProps"
-    :class="ui.base({ class: [props.ui?.base, props.class] })"
+    :class="ui.base({ class: [uiTheme?.slots?.base, props.class] })"
     :ui="transformUI(ui, props.ui)"
   >
     <template v-for="(_, name) in slots" #[name]="slotData">

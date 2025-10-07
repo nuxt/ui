@@ -110,7 +110,7 @@ import { computed } from 'vue'
 import { useForwardPropsEmits } from 'reka-ui'
 import { Calendar as SingleCalendar, RangeCalendar } from 'reka-ui/namespaced'
 import { reactiveOmit } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -125,6 +125,7 @@ defineSlots<CalendarSlots>()
 
 const { code: locale, dir, t } = useLocale()
 const appConfig = useAppConfig() as Calendar['AppConfig']
+const uiTheme = useComponentUiTheme('calendar', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
 
@@ -157,16 +158,16 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
     :default-value="(defaultValue as DateValue)"
     :locale="locale"
     :dir="dir"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
   >
-    <Calendar.Header :class="ui.header({ class: props.ui?.header })">
+    <Calendar.Header :class="ui.header({ class: uiTheme?.slots?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>
         <UButton :icon="prevYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevYear" />
       </Calendar.Prev>
       <Calendar.Prev v-if="props.monthControls" :aria-label="t('calendar.prevMonth')" as-child>
         <UButton :icon="prevMonthIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevMonth" />
       </Calendar.Prev>
-      <Calendar.Heading v-slot="{ headingValue }" :class="ui.heading({ class: props.ui?.heading })">
+      <Calendar.Heading v-slot="{ headingValue }" :class="ui.heading({ class: uiTheme?.slots?.heading })">
         <slot name="heading" :value="headingValue">
           {{ headingValue }}
         </slot>
@@ -178,18 +179,18 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
         <UButton :icon="nextYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.nextYear" />
       </Calendar.Next>
     </Calendar.Header>
-    <div :class="ui.body({ class: props.ui?.body })">
+    <div :class="ui.body({ class: uiTheme?.slots?.body })">
       <Calendar.Grid
         v-for="month in grid"
         :key="month.value.toString()"
-        :class="ui.grid({ class: props.ui?.grid })"
+        :class="ui.grid({ class: uiTheme?.slots?.grid })"
       >
         <Calendar.GridHead>
-          <Calendar.GridRow :class="ui.gridWeekDaysRow({ class: props.ui?.gridWeekDaysRow })">
+          <Calendar.GridRow :class="ui.gridWeekDaysRow({ class: uiTheme?.slots?.gridWeekDaysRow })">
             <Calendar.HeadCell
               v-for="day in weekDays"
               :key="day"
-              :class="ui.headCell({ class: props.ui?.headCell })"
+              :class="ui.headCell({ class: uiTheme?.slots?.headCell })"
             >
               <slot name="week-day" :day="day">
                 {{ day }}
@@ -197,22 +198,22 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
             </Calendar.HeadCell>
           </Calendar.GridRow>
         </Calendar.GridHead>
-        <Calendar.GridBody :class="ui.gridBody({ class: props.ui?.gridBody })">
+        <Calendar.GridBody :class="ui.gridBody({ class: uiTheme?.slots?.gridBody })">
           <Calendar.GridRow
             v-for="(weekDates, index) in month.rows"
             :key="`weekDate-${index}`"
-            :class="ui.gridRow({ class: props.ui?.gridRow })"
+            :class="ui.gridRow({ class: uiTheme?.slots?.gridRow })"
           >
             <Calendar.Cell
               v-for="weekDate in weekDates"
               :key="weekDate.toString()"
               :date="weekDate"
-              :class="ui.cell({ class: props.ui?.cell })"
+              :class="ui.cell({ class: uiTheme?.slots?.cell })"
             >
               <Calendar.CellTrigger
                 :day="weekDate"
                 :month="month.value"
-                :class="ui.cellTrigger({ class: props.ui?.cellTrigger })"
+                :class="ui.cellTrigger({ class: uiTheme?.slots?.cellTrigger })"
               >
                 <slot name="day" :day="weekDate">
                   {{ weekDate.day }}

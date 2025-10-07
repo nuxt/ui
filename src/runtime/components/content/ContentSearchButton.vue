@@ -55,7 +55,7 @@ import { computed, toRef } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
 import { omit, transformUI } from '../../utils'
@@ -84,6 +84,7 @@ const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : 
 const { t } = useLocale()
 const { open } = useContentSearch()
 const appConfig = useAppConfig() as ContentSearchButton['AppConfig']
+const uiTheme = useComponentUiTheme('contentSearchButton', () => ({ slots: props.ui }))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearchButton || {}) })())
@@ -104,7 +105,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
         } : {}),
         ...$attrs
       }"
-      :class="ui.base({ class: [props.ui?.base, props.class] })"
+      :class="ui.base({ class: [uiTheme?.slots?.base, props.class] })"
       :ui="transformUI(ui, props.ui)"
       @click="open = true"
     >
@@ -113,7 +114,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
       </template>
 
       <template v-if="!collapsed" #trailing>
-        <div :class="ui.trailing({ class: props.ui?.trailing })">
+        <div :class="ui.trailing({ class: uiTheme?.slots?.trailing })">
           <slot name="trailing">
             <template v-if="kbds?.length">
               <UKbd v-for="(kbd, index) in kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />

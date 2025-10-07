@@ -51,7 +51,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { usePortal } from '../composables/usePortal'
 import { tv } from '../utils/tv'
 import UKbd from './Kbd.vue'
@@ -63,6 +63,7 @@ const emits = defineEmits<TooltipEmits>()
 const slots = defineSlots<TooltipSlots>()
 
 const appConfig = useAppConfig() as Tooltip['AppConfig']
+const uiTheme = useComponentUiTheme('tooltip', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration', 'disableHoverableContent', 'disableClosingTrigger', 'ignoreNonKeyboardFocus'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
@@ -82,16 +83,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {
     </TooltipTrigger>
 
     <TooltipPortal v-bind="portalProps">
-      <TooltipContent v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
+      <TooltipContent v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, uiTheme?.slots?.content] })">
         <slot name="content">
-          <span v-if="text" :class="ui.text({ class: props.ui?.text })">{{ text }}</span>
+          <span v-if="text" :class="ui.text({ class: uiTheme?.slots?.text })">{{ text }}</span>
 
-          <span v-if="kbds?.length" :class="ui.kbds({ class: props.ui?.kbds })">
-            <UKbd v-for="(kbd, index) in kbds" :key="index" :size="((props.ui?.kbdsSize || ui.kbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+          <span v-if="kbds?.length" :class="ui.kbds({ class: uiTheme?.slots?.kbds })">
+            <UKbd v-for="(kbd, index) in kbds" :key="index" :size="((uiTheme?.slots?.kbdsSize || ui.kbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
 
-        <TooltipArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
+        <TooltipArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: uiTheme?.slots?.arrow })" />
       </TooltipContent>
     </TooltipPortal>
   </TooltipRoot>

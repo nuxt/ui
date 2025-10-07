@@ -69,7 +69,7 @@ export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
 import { computed } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
-import { useRouter, useAppConfig, useNuxtApp } from '#imports'
+import { useRouter, useAppConfig, useComponentUiTheme, useNuxtApp } from '#imports'
 import { useScrollspy } from '../../composables/useScrollspy'
 import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
@@ -88,6 +88,7 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'open', 'defaul
 const { t } = useLocale()
 const router = useRouter()
 const appConfig = useAppConfig() as ContentToc['AppConfig']
+const uiTheme = useComponentUiTheme('contentToc', () => ({ slots: props.ui }))
 const { activeHeadings, updateHeadings } = useScrollspy()
 
 const [DefineListTemplate, ReuseListTemplate] = createReusableTemplate<{ links: T[], level: number }>({
@@ -145,11 +146,11 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
 <template>
   <!-- eslint-disable-next-line vue/no-template-shadow -->
   <DefineListTemplate v-slot="{ links, level }">
-    <ul :class="level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
-      <li v-for="(link, index) in links" :key="index" :class="link.children && link.children.length > 0 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, link.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, link.ui?.item] })">
-        <a :href="`#${link.id}`" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active: activeHeadings.includes(link.id) })" @click.prevent="scrollToHeading(link.id)">
+    <ul :class="level > 0 ? ui.listWithChildren({ class: uiTheme?.slots?.listWithChildren }) : ui.list({ class: uiTheme?.slots?.list })">
+      <li v-for="(link, index) in links" :key="index" :class="link.children && link.children.length > 0 ? ui.itemWithChildren({ class: [uiTheme?.slots?.itemWithChildren, link.ui?.itemWithChildren] }) : ui.item({ class: [uiTheme?.slots?.item, link.ui?.item] })">
+        <a :href="`#${link.id}`" :class="ui.link({ class: [uiTheme?.slots?.link, link.ui?.link, link.class], active: activeHeadings.includes(link.id) })" @click.prevent="scrollToHeading(link.id)">
           <slot name="link" :link="link">
-            <span :class="ui.linkText({ class: [props.ui?.linkText, link.ui?.linkText] })">
+            <span :class="ui.linkText({ class: [uiTheme?.slots?.linkText, link.ui?.linkText] })">
               {{ link.text }}
             </span>
           </slot>
@@ -163,20 +164,20 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
   <DefineTriggerTemplate v-slot="{ open }">
     <slot name="leading" :open="open" />
 
-    <span :class="ui.title({ class: props.ui?.title })">
+    <span :class="ui.title({ class: uiTheme?.slots?.title })">
       <slot :open="open">{{ title || t('contentToc.title') }}</slot>
     </span>
 
-    <span :class="ui.trailing({ class: props.ui?.trailing })">
+    <span :class="ui.trailing({ class: uiTheme?.slots?.trailing })">
       <slot name="trailing" :open="open">
-        <UIcon :name="trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <UIcon :name="trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon({ class: uiTheme?.slots?.trailingIcon })" />
       </slot>
     </span>
   </DefineTriggerTemplate>
 
-  <CollapsibleRoot v-slot="{ open }" v-bind="{ ...rootProps, ...$attrs }" :default-open="defaultOpen" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.top" :class="ui.top({ class: props.ui?.top })">
+  <CollapsibleRoot v-slot="{ open }" v-bind="{ ...rootProps, ...$attrs }" :default-open="defaultOpen" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <div :class="ui.container({ class: uiTheme?.slots?.container })">
+      <div v-if="!!slots.top" :class="ui.top({ class: uiTheme?.slots?.top })">
         <slot name="top" :links="links" />
       </div>
 
@@ -185,8 +186,8 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
           <ReuseTriggerTemplate :open="open" />
         </CollapsibleTrigger>
 
-        <CollapsibleContent :class="ui.content({ class: [props.ui?.content, 'lg:hidden'] })">
-          <div v-if="highlight" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+        <CollapsibleContent :class="ui.content({ class: [uiTheme?.slots?.content, 'lg:hidden'] })">
+          <div v-if="highlight" :class="ui.indicator({ class: uiTheme?.slots?.indicator })" :style="indicatorStyle" />
 
           <slot name="content" :links="links">
             <ReuseListTemplate :links="links" :level="0" />
@@ -197,8 +198,8 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
           <ReuseTriggerTemplate :open="open" />
         </p>
 
-        <div :class="ui.content({ class: [props.ui?.content, 'hidden lg:flex'] })">
-          <div v-if="highlight" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+        <div :class="ui.content({ class: [uiTheme?.slots?.content, 'hidden lg:flex'] })">
+          <div v-if="highlight" :class="ui.indicator({ class: uiTheme?.slots?.indicator })" :style="indicatorStyle" />
 
           <slot name="content" :links="links">
             <ReuseListTemplate :links="links" :level="0" />
@@ -206,7 +207,7 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
         </div>
       </template>
 
-      <div v-if="!!slots.bottom" :class="ui.bottom({ class: props.ui?.bottom, body: !!slots.top || !!links?.length })">
+      <div v-if="!!slots.bottom" :class="ui.bottom({ class: uiTheme?.slots?.bottom, body: !!slots.top || !!links?.length })">
         <slot name="bottom" :links="links" />
       </div>
     </div>

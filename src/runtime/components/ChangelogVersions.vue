@@ -52,7 +52,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { Motion, useScroll, useSpring, useTransform } from 'motion-v'
 import { defu } from 'defu'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UChangelogVersion from './ChangelogVersion.vue'
@@ -66,6 +66,7 @@ const slots = defineSlots<ChangelogVersionsSlots<T>>()
 const getProxySlots = () => omit(slots, ['default', 'indicator'])
 
 const appConfig = useAppConfig() as ChangelogVersions['AppConfig']
+const uiTheme = useComponentUiTheme('changelogVersions', () => ({ slots: props.ui }))
 
 const springOptions = computed(() => defu(typeof props.indicatorMotion === 'object' ? props.indicatorMotion : {}, { damping: 30, restDelta: 0.001 }))
 
@@ -78,14 +79,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.changelogVer
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!props.indicator || !!slots.indicator" :class="ui.indicator({ class: props.ui?.indicator })">
+  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <div v-if="!!props.indicator || !!slots.indicator" :class="ui.indicator({ class: uiTheme?.slots?.indicator })">
       <slot name="indicator">
-        <Motion v-if="!!props.indicatorMotion" :class="ui.beam({ class: props.ui?.beam })" :style="{ height }" />
+        <Motion v-if="!!props.indicatorMotion" :class="ui.beam({ class: uiTheme?.slots?.beam })" :style="{ height }" />
       </slot>
     </div>
 
-    <div v-if="versions?.length || !!slots.default" :class="ui.container({ class: props.ui?.container })">
+    <div v-if="versions?.length || !!slots.default" :class="ui.container({ class: uiTheme?.slots?.container })">
       <slot>
         <UChangelogVersion
           v-for="(version, index) in versions"

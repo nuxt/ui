@@ -46,7 +46,7 @@ import { computed, ref, inject } from 'vue'
 import type { Ref } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
@@ -57,7 +57,6 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
-import { useComponentUiTheme } from '../composables/useComponentUiTheme'
 
 const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()

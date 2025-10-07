@@ -61,7 +61,7 @@ export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
 <script setup lang="ts" generic="T extends TimelineItem">
 import { computed } from 'vue'
 import { Primitive, Separator } from 'reka-ui'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
 
@@ -73,6 +73,7 @@ const slots = defineSlots<TimelineSlots<T>>()
 const modelValue = defineModel<string | number>()
 
 const appConfig = useAppConfig() as Timeline['AppConfig']
+const uiTheme = useComponentUiTheme('timeline', () => ({ slots: props.ui }))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.timeline || {}) })({
   orientation: props.orientation,
@@ -108,37 +109,37 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
     <div
       v-for="(item, index) in items"
       :key="item.value ?? index"
-      :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
+      :class="ui.item({ class: [uiTheme?.slots?.item, item.ui?.item, item.class] })"
       :data-state="getItemState(index)"
     >
-      <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
-        <UAvatar :size="size" :icon="item.icon" v-bind="typeof item.avatar === 'object' ? item.avatar : {}" :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })" :ui="{ icon: 'text-inherit', fallback: 'text-inherit' }">
+      <div :class="ui.container({ class: [uiTheme?.slots?.container, item.ui?.container] })">
+        <UAvatar :size="size" :icon="item.icon" v-bind="typeof item.avatar === 'object' ? item.avatar : {}" :class="ui.indicator({ class: [uiTheme?.slots?.indicator, item.ui?.indicator] })" :ui="{ icon: 'text-inherit', fallback: 'text-inherit' }">
           <slot :name="((item.slot ? `${item.slot}-indicator` : 'indicator') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" />
         </UAvatar>
 
         <Separator
           v-if="index < items.length - 1"
-          :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator] })"
+          :class="ui.separator({ class: [uiTheme?.slots?.separator, item.ui?.separator] })"
           :orientation="props.orientation"
         />
       </div>
 
-      <div :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
-        <div v-if="item.date" :class="ui.date({ class: [props.ui?.date, item.ui?.date] })">
+      <div :class="ui.wrapper({ class: [uiTheme?.slots?.wrapper, item.ui?.wrapper] })">
+        <div v-if="item.date" :class="ui.date({ class: [uiTheme?.slots?.date, item.ui?.date] })">
           <slot :name="((item.slot ? `${item.slot}-date` : 'date') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
             {{ item.date }}
           </slot>
         </div>
-        <div v-if="item.title || !!slots.title" :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
+        <div v-if="item.title || !!slots.title" :class="ui.title({ class: [uiTheme?.slots?.title, item.ui?.title] })">
           <slot :name="((item.slot ? `${item.slot}-title` : 'title') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
             {{ item.title }}
           </slot>
         </div>
-        <div v-if="item.description || !!slots.description" :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
+        <div v-if="item.description || !!slots.description" :class="ui.description({ class: [uiTheme?.slots?.description, item.ui?.description] })">
           <slot :name="((item.slot ? `${item.slot}-description` : 'description') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
             {{ item.description }}
           </slot>

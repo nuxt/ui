@@ -105,7 +105,7 @@ export interface PaginationSlots {
 import { computed } from 'vue'
 import { PaginationRoot, PaginationList, PaginationListItem, PaginationFirst, PaginationPrev, PaginationEllipsis, PaginationNext, PaginationLast, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -126,6 +126,7 @@ const slots = defineSlots<PaginationSlots>()
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Pagination['AppConfig']
+const uiTheme = useComponentUiTheme('pagination', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)
 
@@ -139,21 +140,21 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pagination |
 </script>
 
 <template>
-  <PaginationRoot v-slot="{ page, pageCount }" v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <PaginationList v-slot="{ items }" :class="ui.list({ class: props.ui?.list })">
-      <PaginationFirst v-if="showControls || !!slots.first" as-child :class="ui.first({ class: props.ui?.first })">
+  <PaginationRoot v-slot="{ page, pageCount }" v-bind="rootProps" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <PaginationList v-slot="{ items }" :class="ui.list({ class: uiTheme?.slots?.list })">
+      <PaginationFirst v-if="showControls || !!slots.first" as-child :class="ui.first({ class: uiTheme?.slots?.first })">
         <slot name="first">
           <UButton :color="color" :variant="variant" :size="size" :icon="firstIcon" :to="to?.(1)" />
         </slot>
       </PaginationFirst>
-      <PaginationPrev v-if="showControls || !!slots.prev" as-child :class="ui.prev({ class: props.ui?.prev })">
+      <PaginationPrev v-if="showControls || !!slots.prev" as-child :class="ui.prev({ class: uiTheme?.slots?.prev })">
         <slot name="prev">
           <UButton :color="color" :variant="variant" :size="size" :icon="prevIcon" :to="page > 1 ? to?.(page - 1) : undefined" />
         </slot>
       </PaginationPrev>
 
       <template v-for="(item, index) in items" :key="index">
-        <PaginationListItem v-if="item.type === 'page'" as-child :value="item.value" :class="ui.item({ class: props.ui?.item })">
+        <PaginationListItem v-if="item.type === 'page'" as-child :value="item.value" :class="ui.item({ class: uiTheme?.slots?.item })">
           <slot name="item" v-bind="{ item, index, page, pageCount }">
             <UButton
               :color="page === item.value ? activeColor : color"
@@ -167,19 +168,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pagination |
           </slot>
         </PaginationListItem>
 
-        <PaginationEllipsis v-else as-child :class="ui.ellipsis({ class: props.ui?.ellipsis })">
+        <PaginationEllipsis v-else as-child :class="ui.ellipsis({ class: uiTheme?.slots?.ellipsis })">
           <slot name="ellipsis">
             <UButton as="div" :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" />
           </slot>
         </PaginationEllipsis>
       </template>
 
-      <PaginationNext v-if="showControls || !!slots.next" as-child :class="ui.next({ class: props.ui?.next })">
+      <PaginationNext v-if="showControls || !!slots.next" as-child :class="ui.next({ class: uiTheme?.slots?.next })">
         <slot name="next">
           <UButton :color="color" :variant="variant" :size="size" :icon="nextIcon" :to="page < pageCount ? to?.(page + 1) : undefined" />
         </slot>
       </PaginationNext>
-      <PaginationLast v-if="showControls || !!slots.last" as-child :class="ui.last({ class: props.ui?.last })">
+      <PaginationLast v-if="showControls || !!slots.last" as-child :class="ui.last({ class: uiTheme?.slots?.last })">
         <slot name="last">
           <UButton :color="color" :variant="variant" :size="size" :icon="lastIcon" :to="to?.(pageCount)" />
         </slot>

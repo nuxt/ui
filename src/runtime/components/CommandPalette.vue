@@ -165,7 +165,7 @@ import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupL
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
 import { tv } from '../utils/tv'
@@ -193,6 +193,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
+const uiTheme = useComponentUiTheme('commandPalette', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
 const inputProps = useForwardProps(reactivePick(props, 'loading'))
@@ -330,7 +331,7 @@ function onSelect(e: Event, item: T) {
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <ListboxRoot v-bind="rootProps" ref="listboxRootRef" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ListboxRoot v-bind="rootProps" ref="listboxRootRef" :selection-behavior="selectionBehavior" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
         :placeholder="placeholder"
@@ -339,7 +340,7 @@ function onSelect(e: Event, item: T) {
         v-bind="inputProps"
         :loading-icon="loadingIcon"
         :icon="icon || appConfig.ui.icons.search"
-        :class="ui.input({ class: props.ui?.input })"
+        :class="ui.input({ class: uiTheme?.slots?.input })"
         @keydown.backspace="onBackspace"
       >
         <template v-if="history?.length && (back || !!slots.back)" #leading>
@@ -350,7 +351,7 @@ function onSelect(e: Event, item: T) {
               variant="link"
               :aria-label="t('commandPalette.back')"
               v-bind="(typeof back === 'object' ? back as Partial<ButtonProps> : {})"
-              :class="ui.back({ class: props.ui?.back })"
+              :class="ui.back({ class: uiTheme?.slots?.back })"
               @click="navigateBack"
             />
           </slot>
@@ -365,7 +366,7 @@ function onSelect(e: Event, item: T) {
               variant="ghost"
               :aria-label="t('commandPalette.close')"
               v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
-              :class="ui.close({ class: props.ui?.close })"
+              :class="ui.close({ class: uiTheme?.slots?.close })"
               @click="emits('update:open', false)"
             />
           </slot>
@@ -373,10 +374,10 @@ function onSelect(e: Event, item: T) {
       </UInput>
     </ListboxFilter>
 
-    <ListboxContent :class="ui.content({ class: props.ui?.content })">
-      <div v-if="filteredGroups?.length" role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
-        <ListboxGroup v-for="group in filteredGroups" :key="`group-${group.id}`" :class="ui.group({ class: props.ui?.group })">
-          <ListboxGroupLabel v-if="get(group, props.labelKey as string)" :class="ui.label({ class: props.ui?.label })">
+    <ListboxContent :class="ui.content({ class: uiTheme?.slots?.content })">
+      <div v-if="filteredGroups?.length" role="presentation" :class="ui.viewport({ class: uiTheme?.slots?.viewport })">
+        <ListboxGroup v-for="group in filteredGroups" :key="`group-${group.id}`" :class="ui.group({ class: uiTheme?.slots?.group })">
+          <ListboxGroupLabel v-if="get(group, props.labelKey as string)" :class="ui.label({ class: uiTheme?.slots?.label })">
             {{ get(group, props.labelKey as string) }}
           </ListboxGroupLabel>
 
@@ -389,49 +390,49 @@ function onSelect(e: Event, item: T) {
             @select="onSelect($event, item)"
           >
             <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
-              <ULinkBase v-bind="slotProps" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], active: active || item.active })">
+              <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiTheme?.slots?.item, item.ui?.item, item.class], active: active || item.active })">
                 <slot :name="((item.slot || group.slot || 'item') as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
                   <slot :name="((item.slot ? `${item.slot}-leading` : group.slot ? `${group.slot}-leading` : `item-leading`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
-                    <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon], loading: true })" />
-                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon], active: active || item.active })" />
-                    <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active: active || item.active })" />
+                    <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: [uiTheme?.slots?.itemLeadingIcon, item.ui?.itemLeadingIcon], loading: true })" />
+                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: [uiTheme?.slots?.itemLeadingIcon, item.ui?.itemLeadingIcon], active: active || item.active })" />
+                    <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || uiTheme?.slots?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [uiTheme?.slots?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active: active || item.active })" />
                     <UChip
                       v-else-if="item.chip"
-                      :size="((item.ui?.itemLeadingChipSize || props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
+                      :size="((item.ui?.itemLeadingChipSize || uiTheme?.slots?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
                       inset
                       standalone
                       v-bind="item.chip"
-                      :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, item.ui?.itemLeadingChip], active: active || item.active })"
+                      :class="ui.itemLeadingChip({ class: [uiTheme?.slots?.itemLeadingChip, item.ui?.itemLeadingChip], active: active || item.active })"
                     />
                   </slot>
 
-                  <span v-if="item.labelHtml || get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>]" :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel], active: active || item.active })">
+                  <span v-if="item.labelHtml || get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>]" :class="ui.itemLabel({ class: [uiTheme?.slots?.itemLabel, item.ui?.itemLabel], active: active || item.active })">
                     <slot :name="((item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
-                      <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: [props.ui?.itemLabelPrefix, item.ui?.itemLabelPrefix] })">{{ item.prefix }}</span>
+                      <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: [uiTheme?.slots?.itemLabelPrefix, item.ui?.itemLabelPrefix] })">{{ item.prefix }}</span>
 
-                      <span :class="ui.itemLabelBase({ class: [props.ui?.itemLabelBase, item.ui?.itemLabelBase], active: active || item.active })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
+                      <span :class="ui.itemLabelBase({ class: [uiTheme?.slots?.itemLabelBase, item.ui?.itemLabelBase], active: active || item.active })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
 
-                      <span :class="ui.itemLabelSuffix({ class: [props.ui?.itemLabelSuffix, item.ui?.itemLabelSuffix], active: active || item.active })" v-html="item.suffixHtml || item.suffix" />
+                      <span :class="ui.itemLabelSuffix({ class: [uiTheme?.slots?.itemLabelSuffix, item.ui?.itemLabelSuffix], active: active || item.active })" v-html="item.suffixHtml || item.suffix" />
                     </slot>
                   </span>
 
-                  <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, item.ui?.itemTrailing] })">
+                  <span :class="ui.itemTrailing({ class: [uiTheme?.slots?.itemTrailing, item.ui?.itemTrailing] })">
                     <slot :name="((item.slot ? `${item.slot}-trailing` : group.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
                       <UIcon
                         v-if="item.children && item.children.length > 0"
                         :name="trailingIcon || appConfig.ui.icons.chevronRight"
-                        :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })"
+                        :class="ui.itemTrailingIcon({ class: [uiTheme?.slots?.itemTrailingIcon, item.ui?.itemTrailingIcon] })"
                       />
 
-                      <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: [props.ui?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
-                        <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((item.ui?.itemTrailingKbdsSize || props.ui?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+                      <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: [uiTheme?.slots?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
+                        <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((item.ui?.itemTrailingKbdsSize || uiTheme?.slots?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
                       </span>
 
-                      <UIcon v-else-if="group.highlightedIcon" :name="group.highlightedIcon" :class="ui.itemTrailingHighlightedIcon({ class: [props.ui?.itemTrailingHighlightedIcon, item.ui?.itemTrailingHighlightedIcon] })" />
+                      <UIcon v-else-if="group.highlightedIcon" :name="group.highlightedIcon" :class="ui.itemTrailingHighlightedIcon({ class: [uiTheme?.slots?.itemTrailingHighlightedIcon, item.ui?.itemTrailingHighlightedIcon] })" />
                     </slot>
 
                     <ListboxItemIndicator v-if="!item.children?.length" as-child>
-                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })" />
+                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [uiTheme?.slots?.itemTrailingIcon, item.ui?.itemTrailingIcon] })" />
                     </ListboxItemIndicator>
                   </span>
                 </slot>
@@ -441,14 +442,14 @@ function onSelect(e: Event, item: T) {
         </ListboxGroup>
       </div>
 
-      <div v-else :class="ui.empty({ class: props.ui?.empty })">
+      <div v-else :class="ui.empty({ class: uiTheme?.slots?.empty })">
         <slot name="empty" :search-term="searchTerm">
           {{ searchTerm ? t('commandPalette.noMatch', { searchTerm }) : t('commandPalette.noData') }}
         </slot>
       </div>
     </ListboxContent>
 
-    <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" :class="ui.footer({ class: uiTheme?.slots?.footer })">
       <slot name="footer" :ui="ui" />
     </div>
   </ListboxRoot>

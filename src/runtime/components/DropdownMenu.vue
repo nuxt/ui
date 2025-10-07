@@ -112,7 +112,7 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
@@ -127,6 +127,7 @@ const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
 
 const appConfig = useAppConfig() as DropdownMenu['AppConfig']
+const uiTheme = useComponentUiTheme('dropdownMenu', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
@@ -145,7 +146,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
     </DropdownMenuTrigger>
 
     <UDropdownMenuContent
-      :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
+      :class="ui.content({ class: [!slots.default && props.class, uiTheme?.slots?.content] })"
       :ui="ui"
       :ui-override="props.ui"
       v-bind="contentProps"
@@ -160,7 +161,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
         <slot :name="(name as keyof DropdownMenuSlots<T>)" v-bind="slotData" />
       </template>
 
-      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
+      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: uiTheme?.slots?.arrow })" />
     </UDropdownMenuContent>
   </DropdownMenuRoot>
 </template>

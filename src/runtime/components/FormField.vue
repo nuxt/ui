@@ -50,7 +50,7 @@ export interface FormFieldSlots {
 import { computed, ref, inject, provide, useId, watch } from 'vue'
 import type { Ref } from 'vue'
 import { Primitive, Label } from 'reka-ui'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, formInputsInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
@@ -59,6 +59,7 @@ const props = defineProps<FormFieldProps>()
 const slots = defineSlots<FormFieldSlots>()
 
 const appConfig = useAppConfig() as FormField['AppConfig']
+const uiTheme = useComponentUiTheme('formField', () => ({ slots: props.ui }))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.formField || {}) })({
   size: props.size,
@@ -98,37 +99,37 @@ provide(formFieldInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <div v-if="label || !!slots.label" :class="ui.labelWrapper({ class: props.ui?.labelWrapper })">
-        <Label :for="id" :class="ui.label({ class: props.ui?.label })">
+  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <div :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
+      <div v-if="label || !!slots.label" :class="ui.labelWrapper({ class: uiTheme?.slots?.labelWrapper })">
+        <Label :for="id" :class="ui.label({ class: uiTheme?.slots?.label })">
           <slot name="label" :label="label">
             {{ label }}
           </slot>
         </Label>
-        <span v-if="hint || !!slots.hint" :id="`${ariaId}-hint`" :class="ui.hint({ class: props.ui?.hint })">
+        <span v-if="hint || !!slots.hint" :id="`${ariaId}-hint`" :class="ui.hint({ class: uiTheme?.slots?.hint })">
           <slot name="hint" :hint="hint">
             {{ hint }}
           </slot>
         </span>
       </div>
 
-      <p v-if="description || !!slots.description" :id="`${ariaId}-description`" :class="ui.description({ class: props.ui?.description })">
+      <p v-if="description || !!slots.description" :id="`${ariaId}-description`" :class="ui.description({ class: uiTheme?.slots?.description })">
         <slot name="description" :description="description">
           {{ description }}
         </slot>
       </p>
     </div>
 
-    <div :class="[(label || !!slots.label || description || !!slots.description) && ui.container({ class: props.ui?.container })]">
+    <div :class="[(label || !!slots.label || description || !!slots.description) && ui.container({ class: uiTheme?.slots?.container })]">
       <slot :error="error" />
 
-      <div v-if="(typeof error === 'string' && error) || !!slots.error" :id="`${ariaId}-error`" :class="ui.error({ class: props.ui?.error })">
+      <div v-if="(typeof error === 'string' && error) || !!slots.error" :id="`${ariaId}-error`" :class="ui.error({ class: uiTheme?.slots?.error })">
         <slot name="error" :error="error">
           {{ error }}
         </slot>
       </div>
-      <div v-else-if="help || !!slots.help" :id="`${ariaId}-help`" :class="ui.help({ class: props.ui?.help })">
+      <div v-else-if="help || !!slots.help" :id="`${ariaId}-help`" :class="ui.help({ class: uiTheme?.slots?.help })">
         <slot name="help" :help="help">
           {{ help }}
         </slot>

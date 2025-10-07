@@ -65,7 +65,7 @@ export interface PageSectionSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { tv } from '../utils/tv'
 import UPageFeature from './PageFeature.vue'
 import UContainer from './Container.vue'
@@ -79,6 +79,7 @@ const props = withDefaults(defineProps<PageSectionProps>(), {
 const slots = defineSlots<PageSectionSlots>()
 
 const appConfig = useAppConfig() as PageSection['AppConfig']
+const uiTheme = useComponentUiTheme('pageSection', () => ({ slots: props.ui }))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageSection || {}) })({
   orientation: props.orientation,
@@ -90,32 +91,32 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageSection 
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
     <slot name="top" />
 
-    <UContainer :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.header || (icon || !!slots.leading) || (headline || !!slots.headline) || (title || !!slots.title) || (description || !!slots.description) || !!slots.body || (features?.length || !!slots.features) || !!slots.footer || (links?.length || !!slots.links)" :class="ui.wrapper({ class: props.ui?.wrapper })">
-        <div v-if="!!slots.header || (icon || !!slots.leading) || (headline || !!slots.headline) || (title || !!slots.title) || (description || !!slots.description)" :class="ui.header({ class: props.ui?.header })">
+    <UContainer :class="ui.container({ class: uiTheme?.slots?.container })">
+      <div v-if="!!slots.header || (icon || !!slots.leading) || (headline || !!slots.headline) || (title || !!slots.title) || (description || !!slots.description) || !!slots.body || (features?.length || !!slots.features) || !!slots.footer || (links?.length || !!slots.links)" :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
+        <div v-if="!!slots.header || (icon || !!slots.leading) || (headline || !!slots.headline) || (title || !!slots.title) || (description || !!slots.description)" :class="ui.header({ class: uiTheme?.slots?.header })">
           <slot name="header">
-            <div v-if="icon || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+            <div v-if="icon || !!slots.leading" :class="ui.leading({ class: uiTheme?.slots?.leading })">
               <slot name="leading">
-                <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+                <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: uiTheme?.slots?.leadingIcon })" />
               </slot>
             </div>
 
-            <div v-if="headline || !!slots.headline" :class="ui.headline({ class: props.ui?.headline, headline: !slots.headline })">
+            <div v-if="headline || !!slots.headline" :class="ui.headline({ class: uiTheme?.slots?.headline, headline: !slots.headline })">
               <slot name="headline">
                 {{ headline }}
               </slot>
             </div>
 
-            <h2 v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+            <h2 v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
               <slot name="title">
                 {{ title }}
               </slot>
             </h2>
 
-            <div v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+            <div v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
               <slot name="description">
                 {{ description }}
               </slot>
@@ -123,9 +124,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageSection 
           </slot>
         </div>
 
-        <div v-if="!!slots.body || (features?.length || !!slots.features)" :class="ui.body({ class: props.ui?.body })">
+        <div v-if="!!slots.body || (features?.length || !!slots.features)" :class="ui.body({ class: uiTheme?.slots?.body })">
           <slot name="body">
-            <ul v-if="features?.length || !!slots.features" :class="ui.features({ class: props.ui?.features })">
+            <ul v-if="features?.length || !!slots.features" :class="ui.features({ class: uiTheme?.slots?.features })">
               <slot name="features">
                 <UPageFeature
                   v-for="(feature, index) in features"
@@ -138,9 +139,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageSection 
           </slot>
         </div>
 
-        <div v-if="!!slots.footer || (links?.length || !!slots.links)" :class="ui.footer({ class: props.ui?.footer })">
+        <div v-if="!!slots.footer || (links?.length || !!slots.links)" :class="ui.footer({ class: uiTheme?.slots?.footer })">
           <slot name="footer">
-            <div v-if="links?.length || !!slots.links" :class="ui.links({ class: props.ui?.links })">
+            <div v-if="links?.length || !!slots.links" :class="ui.links({ class: uiTheme?.slots?.links })">
               <slot name="links">
                 <UButton v-for="(link, index) in links" :key="index" size="lg" v-bind="link" />
               </slot>

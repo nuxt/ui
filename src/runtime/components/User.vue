@@ -43,7 +43,7 @@ export interface UserSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { tv } from '../utils/tv'
 import UChip from './Chip.vue'
 import UAvatar from './Avatar.vue'
@@ -57,6 +57,7 @@ const props = withDefaults(defineProps<UserProps>(), {
 const slots = defineSlots<UserSlots>()
 
 const appConfig = useAppConfig() as User['AppConfig']
+const uiTheme = useComponentUiTheme('user', () => ({ slots: props.ui }))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) })({
   size: props.size,
@@ -66,15 +67,15 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) 
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="onClick">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })" @click="onClick">
     <slot name="avatar">
       <UChip v-if="chip && avatar" inset v-bind="typeof chip === 'object' ? chip : {}" :size="size">
-        <UAvatar :alt="name" v-bind="avatar" :size="size" :class="ui.avatar({ class: props.ui?.avatar })" />
+        <UAvatar :alt="name" v-bind="avatar" :size="size" :class="ui.avatar({ class: uiTheme?.slots?.avatar })" />
       </UChip>
-      <UAvatar v-else-if="avatar" :alt="name" v-bind="avatar" :size="size" :class="ui.avatar({ class: props.ui?.avatar })" />
+      <UAvatar v-else-if="avatar" :alt="name" v-bind="avatar" :size="size" :class="ui.avatar({ class: uiTheme?.slots?.avatar })" />
     </slot>
 
-    <div :class="ui.wrapper({ class: props.ui?.wrapper })">
+    <div :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
       <ULink
         v-if="to"
         :aria-label="name"
@@ -87,12 +88,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) 
       </ULink>
 
       <slot>
-        <p v-if="name || !!slots.name" :class="ui.name({ class: props.ui?.name })">
+        <p v-if="name || !!slots.name" :class="ui.name({ class: uiTheme?.slots?.name })">
           <slot name="name">
             {{ name }}
           </slot>
         </p>
-        <p v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+        <p v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
           <slot name="description">
             {{ description }}
           </slot>

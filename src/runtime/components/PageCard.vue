@@ -71,7 +71,7 @@ export interface PageCardSlots {
 import { computed, ref, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useMouseInElement, pausableFilter } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -88,6 +88,7 @@ const cardRef = ref<HTMLElement>()
 const motionControl = pausableFilter()
 
 const appConfig = useAppConfig() as PageCard['AppConfig']
+const uiTheme = useComponentUiTheme('pageCard', () => ({ slots: props.ui }))
 const { elementX, elementY } = useMouseInElement(cardRef, {
   eventFilter: motionControl.eventFilter
 })
@@ -125,33 +126,33 @@ const ariaLabel = computed(() => {
     ref="cardRef"
     :as="as"
     :data-orientation="orientation"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
     :style="spotlight && { '--spotlight-x': `${elementX}px`, '--spotlight-y': `${elementY}px` }"
     @click="onClick"
   >
-    <div v-if="props.spotlight" :class="ui.spotlight({ class: props.ui?.spotlight })" />
+    <div v-if="props.spotlight" :class="ui.spotlight({ class: uiTheme?.slots?.spotlight })" />
 
-    <div :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.header || (icon || !!slots.leading) || !!slots.body || (title || !!slots.title) || (description || !!slots.description) || !!slots.footer" :class="ui.wrapper({ class: props.ui?.wrapper })">
-        <div v-if="!!slots.header" :class="ui.header({ class: props.ui?.header })">
+    <div :class="ui.container({ class: uiTheme?.slots?.container })">
+      <div v-if="!!slots.header || (icon || !!slots.leading) || !!slots.body || (title || !!slots.title) || (description || !!slots.description) || !!slots.footer" :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
+        <div v-if="!!slots.header" :class="ui.header({ class: uiTheme?.slots?.header })">
           <slot name="header" />
         </div>
 
-        <div v-if="icon || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+        <div v-if="icon || !!slots.leading" :class="ui.leading({ class: uiTheme?.slots?.leading })">
           <slot name="leading">
-            <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+            <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: uiTheme?.slots?.leadingIcon })" />
           </slot>
         </div>
 
-        <div v-if="!!slots.body || (title || !!slots.title) || (description || !!slots.description)" :class="ui.body({ class: props.ui?.body })">
+        <div v-if="!!slots.body || (title || !!slots.title) || (description || !!slots.description)" :class="ui.body({ class: uiTheme?.slots?.body })">
           <slot name="body">
-            <div v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+            <div v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
               <slot name="title">
                 {{ title }}
               </slot>
             </div>
 
-            <div v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+            <div v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
               <slot name="description">
                 {{ description }}
               </slot>
@@ -159,7 +160,7 @@ const ariaLabel = computed(() => {
           </slot>
         </div>
 
-        <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+        <div v-if="!!slots.footer" :class="ui.footer({ class: uiTheme?.slots?.footer })">
           <slot name="footer" />
         </div>
       </div>

@@ -100,7 +100,7 @@ export type TreeSlots<
 import { computed } from 'vue'
 import { TreeRoot, TreeItem, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -114,6 +114,7 @@ const emits = defineEmits<TreeEmits<T, M>>()
 const slots = defineSlots<TreeSlots<T>>()
 
 const appConfig = useAppConfig() as Tree['AppConfig']
+const uiTheme = useComponentUiTheme('tree', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect'), emits)
 
@@ -155,7 +156,7 @@ const defaultExpanded = computed(() =>
       v-slot="{ isExpanded, isSelected }"
       :level="level"
       :value="item"
-      :class="level > 1 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
+      :class="level > 1 ? ui.itemWithChildren({ class: [uiTheme?.slots?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [uiTheme?.slots?.item, item.ui?.item] })"
       @toggle="item.onToggle"
       @select="item.onSelect"
     >
@@ -168,7 +169,7 @@ const defaultExpanded = computed(() =>
           type="button"
           :disabled="item.disabled || disabled"
           :data-expanded="isExpanded"
-          :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })"
+          :class="ui.link({ class: [uiTheme?.slots?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })"
         >
           <slot
             :name="((item.slot || 'item') as keyof TreeSlots<T>)"
@@ -183,18 +184,18 @@ const defaultExpanded = computed(() =>
               <UIcon
                 v-if="item.icon"
                 :name="item.icon"
-                :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
+                :class="ui.linkLeadingIcon({ class: [uiTheme?.slots?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
               />
               <UIcon
                 v-else-if="item.children?.length"
                 :name="isExpanded ? (expandedIcon ?? appConfig.ui.icons.folderOpen) : (collapsedIcon ?? appConfig.ui.icons.folder)"
-                :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
+                :class="ui.linkLeadingIcon({ class: [uiTheme?.slots?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
               />
             </slot>
 
             <span
               v-if="getItemLabel(item) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>]"
-              :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })"
+              :class="ui.linkLabel({ class: [uiTheme?.slots?.linkLabel, item.ui?.linkLabel] })"
             >
               <slot
                 :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>)"
@@ -207,7 +208,7 @@ const defaultExpanded = computed(() =>
 
             <span
               v-if="item.trailingIcon || item.children?.length || !!slots[(item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof TreeSlots<T>]"
-              :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing] })"
+              :class="ui.linkTrailing({ class: [uiTheme?.slots?.linkTrailing, item.ui?.linkTrailing] })"
             >
               <slot
                 :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof TreeSlots<T>)"
@@ -217,12 +218,12 @@ const defaultExpanded = computed(() =>
                 <UIcon
                   v-if="item.trailingIcon"
                   :name="item.trailingIcon"
-                  :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon] })"
+                  :class="ui.linkTrailingIcon({ class: [uiTheme?.slots?.linkTrailingIcon, item.ui?.linkTrailingIcon] })"
                 />
                 <UIcon
                   v-else-if="item.children?.length"
                   :name="trailingIcon ?? appConfig.ui.icons.chevronDown"
-                  :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon] })"
+                  :class="ui.linkTrailingIcon({ class: [uiTheme?.slots?.linkTrailingIcon, item.ui?.linkTrailingIcon] })"
                 />
               </slot>
             </span>
@@ -233,7 +234,7 @@ const defaultExpanded = computed(() =>
       <ul
         v-if="item.children?.length && isExpanded"
         role="group"
-        :class="ui.listWithChildren({ class: [props.ui?.listWithChildren, item.ui?.listWithChildren] })"
+        :class="ui.listWithChildren({ class: [uiTheme?.slots?.listWithChildren, item.ui?.listWithChildren] })"
       >
         <ReuseTreeTemplate :items="item.children" :level="level + 1" />
       </ul>
@@ -244,7 +245,7 @@ const defaultExpanded = computed(() =>
     v-bind="{ ...rootProps, ...$attrs }"
     :model-value="modelValue"
     :default-value="defaultValue"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
     :get-key="getItemKey"
     :default-expanded="defaultExpanded"
     :selection-behavior="selectionBehavior"

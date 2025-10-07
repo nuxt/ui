@@ -27,7 +27,7 @@ export interface FooterSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { tv } from '../utils/tv'
 import UContainer from './Container.vue'
 
@@ -37,32 +37,33 @@ const props = withDefaults(defineProps<FooterProps>(), {
 const slots = defineSlots<FooterSlots>()
 
 const appConfig = useAppConfig() as Footer['AppConfig']
+const uiTheme = useComponentUiTheme('footer', () => ({ slots: props.ui }))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.footer || {}) })())
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.top" :class="ui.top({ class: props.ui?.top })">
+  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <div v-if="!!slots.top" :class="ui.top({ class: uiTheme?.slots?.top })">
       <slot name="top" />
     </div>
 
-    <UContainer :class="ui.container({ class: props.ui?.container })">
-      <div :class="ui.right({ class: props.ui?.right })">
+    <UContainer :class="ui.container({ class: uiTheme?.slots?.container })">
+      <div :class="ui.right({ class: uiTheme?.slots?.right })">
         <slot name="right" />
       </div>
 
-      <div :class="ui.center({ class: props.ui?.center })">
+      <div :class="ui.center({ class: uiTheme?.slots?.center })">
         <slot />
       </div>
 
-      <div :class="ui.left({ class: props.ui?.left })">
+      <div :class="ui.left({ class: uiTheme?.slots?.left })">
         <slot name="left" />
       </div>
     </UContainer>
 
-    <div v-if="!!slots.bottom" :class="ui.bottom({ class: props.ui?.bottom })">
+    <div v-if="!!slots.bottom" :class="ui.bottom({ class: uiTheme?.slots?.bottom })">
       <slot name="bottom" />
     </div>
   </Primitive>

@@ -51,7 +51,7 @@ export interface DashboardNavbarSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UDashboardSidebarToggle from './DashboardSidebarToggle.vue'
@@ -66,6 +66,7 @@ const props = withDefaults(defineProps<DashboardNavbarProps>(), {
 const slots = defineSlots<DashboardNavbarSlots>()
 
 const appConfig = useAppConfig() as DashboardNavbar['AppConfig']
+const uiTheme = useComponentUiTheme('dashboardNavbar', () => ({ slots: props.ui }))
 const dashboardContext = useDashboard({})
 
 const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate()
@@ -81,21 +82,21 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardNav
         v-if="toggle"
         v-bind="(typeof toggle === 'object' ? toggle as Partial<ButtonProps> : {})"
         :side="toggleSide"
-        :class="ui.toggle({ class: props.ui?.toggle, toggleSide })"
+        :class="ui.toggle({ class: uiTheme?.slots?.toggle, toggleSide })"
       />
     </slot>
   </DefineToggleTemplate>
 
-  <Primitive :as="as" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.left({ class: props.ui?.left })">
+  <Primitive :as="as" v-bind="$attrs" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <div :class="ui.left({ class: uiTheme?.slots?.left })">
       <ReuseToggleTemplate v-if="toggleSide === 'left'" />
 
       <slot name="left" v-bind="dashboardContext">
         <slot name="leading" v-bind="dashboardContext">
-          <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
+          <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: uiTheme?.slots?.icon })" />
         </slot>
 
-        <h1 :class="ui.title({ class: props.ui?.title })">
+        <h1 :class="ui.title({ class: uiTheme?.slots?.title })">
           <slot name="title">
             {{ title }}
           </slot>
@@ -105,11 +106,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardNav
       </slot>
     </div>
 
-    <div v-if="!!slots.default" :class="ui.center({ class: props.ui?.center })">
+    <div v-if="!!slots.default" :class="ui.center({ class: uiTheme?.slots?.center })">
       <slot v-bind="dashboardContext" />
     </div>
 
-    <div :class="ui.right({ class: props.ui?.right })">
+    <div :class="ui.right({ class: uiTheme?.slots?.right })">
       <slot name="right" v-bind="dashboardContext" />
 
       <ReuseToggleTemplate v-if="toggleSide === 'right'" />

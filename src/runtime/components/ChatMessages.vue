@@ -73,7 +73,7 @@ import { ref, computed, watch, nextTick, toRef, onMounted } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'
 import { useElementBounding, useEventListener, watchThrottled } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UChatMessage from './ChatMessage.vue'
@@ -90,6 +90,7 @@ const slots = defineSlots<ChatMessagesSlots>()
 const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
 
 const appConfig = useAppConfig() as ChatMessages['AppConfig']
+const uiTheme = useComponentUiTheme('chatMessages', () => ({ slots: props.ui }))
 
 const userProps = toRef(() => defu(props.user, { side: 'right' as const, variant: 'soft' as const }))
 const assistantProps = toRef(() => defu(props.assistant, { side: 'left' as const, variant: 'naked' as const }))
@@ -260,7 +261,7 @@ onMounted(() => {
   <div
     ref="el"
     :data-status="status"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
     <slot>
@@ -286,7 +287,7 @@ onMounted(() => {
     >
       <template #content>
         <slot name="indicator">
-          <div :class="ui.indicator({ class: props.ui?.indicator })">
+          <div :class="ui.indicator({ class: uiTheme?.slots?.indicator })">
             <span />
             <span />
             <span />
@@ -296,7 +297,7 @@ onMounted(() => {
     </UChatMessage>
 
     <Presence :present="showAutoScroll">
-      <div :data-state="showAutoScroll ? 'open' : 'closed'" :class="ui.viewport({ class: props.ui?.viewport })">
+      <div :data-state="showAutoScroll ? 'open' : 'closed'" :class="ui.viewport({ class: uiTheme?.slots?.viewport })">
         <slot name="viewport" :on-click="onAutoScrollClick">
           <UButton
             v-if="autoScroll"
@@ -304,7 +305,7 @@ onMounted(() => {
             color="neutral"
             variant="outline"
             v-bind="(typeof autoScroll === 'object' ? autoScroll as Partial<ButtonProps> : {})"
-            :class="ui.autoScroll({ class: props.ui?.autoScroll })"
+            :class="ui.autoScroll({ class: uiTheme?.slots?.autoScroll })"
             @click="onAutoScrollClick"
           />
         </slot>

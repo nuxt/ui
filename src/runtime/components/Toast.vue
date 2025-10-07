@@ -74,7 +74,7 @@ export interface ToastSlots {
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -92,6 +92,7 @@ const slots = defineSlots<ToastSlots>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Toast['AppConfig']
+const uiTheme = useComponentUiTheme('toast', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
 
@@ -125,16 +126,16 @@ defineExpose({
     v-slot="{ remaining, duration, open }"
     v-bind="rootProps"
     :data-orientation="orientation"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
     :style="{ '--height': height }"
   >
     <slot name="leading">
-      <UAvatar v-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
-      <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
+      <UAvatar v-if="avatar" :size="((uiTheme?.slots?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: uiTheme?.slots?.avatar })" />
+      <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: uiTheme?.slots?.icon })" />
     </slot>
 
-    <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <ToastTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+    <div :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
+      <ToastTitle v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
         <slot name="title">
           <component :is="title()" v-if="typeof title === 'function'" />
           <component :is="title" v-else-if="typeof title === 'object'" />
@@ -143,7 +144,7 @@ defineExpose({
           </template>
         </slot>
       </ToastTitle>
-      <ToastDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+      <ToastDescription v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
         <slot name="description">
           <component :is="description()" v-if="typeof description === 'function'" />
           <component :is="description" v-else-if="typeof description === 'object'" />
@@ -153,7 +154,7 @@ defineExpose({
         </slot>
       </ToastDescription>
 
-      <div v-if="orientation === 'vertical' && (actions?.length || !!slots.actions)" :class="ui.actions({ class: props.ui?.actions })">
+      <div v-if="orientation === 'vertical' && (actions?.length || !!slots.actions)" :class="ui.actions({ class: uiTheme?.slots?.actions })">
         <slot name="actions">
           <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
             <UButton size="xs" :color="color" v-bind="action" />
@@ -162,7 +163,7 @@ defineExpose({
       </div>
     </div>
 
-    <div v-if="(orientation === 'horizontal' && (actions?.length || !!slots.actions)) || close" :class="ui.actions({ class: props.ui?.actions, orientation: 'horizontal' })">
+    <div v-if="(orientation === 'horizontal' && (actions?.length || !!slots.actions)) || close" :class="ui.actions({ class: uiTheme?.slots?.actions, orientation: 'horizontal' })">
       <template v-if="orientation === 'horizontal' && (actions?.length || !!slots.actions)">
         <slot name="actions">
           <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
@@ -180,7 +181,7 @@ defineExpose({
             variant="link"
             :aria-label="t('toast.close')"
             v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
-            :class="ui.close({ class: props.ui?.close })"
+            :class="ui.close({ class: uiTheme?.slots?.close })"
             @click.stop
           />
         </slot>
@@ -193,7 +194,7 @@ defineExpose({
       :color="color"
       v-bind="(typeof progress === 'object' ? progress as Partial<ProgressProps> : {})"
       size="sm"
-      :class="ui.progress({ class: props.ui?.progress })"
+      :class="ui.progress({ class: uiTheme?.slots?.progress })"
     />
   </ToastRoot>
 </template>

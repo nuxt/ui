@@ -40,7 +40,7 @@ export interface PricingPlansSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { tv } from '../utils/tv'
 import UPricingPlan from './PricingPlan.vue'
 
@@ -52,6 +52,7 @@ const props = withDefaults(defineProps<PricingPlansProps>(), {
 const slots = defineSlots<PricingPlansSlots>()
 
 const appConfig = useAppConfig() as PricingPlans['AppConfig']
+const uiTheme = useComponentUiTheme('pricingPlans', () => ({ slots: props.ui }))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingPlans || {}) }))
 

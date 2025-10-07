@@ -206,7 +206,7 @@ import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
 import { reactiveOmit } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
@@ -219,6 +219,7 @@ const slots = defineSlots<TableSlots<T>>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Table['AppConfig']
+const uiTheme = useComponentUiTheme('table', () => ({ slots: props.ui }))
 
 const data = ref(props.data ?? []) as Ref<T[]>
 const meta = computed(() => props.meta ?? {})
@@ -426,16 +427,16 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <table ref="tableRef" :class="ui.base({ class: [props.ui?.base] })">
-      <caption v-if="caption || !!slots.caption" :class="ui.caption({ class: [props.ui?.caption] })">
+  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <table ref="tableRef" :class="ui.base({ class: [uiTheme?.slots?.base] })">
+      <caption v-if="caption || !!slots.caption" :class="ui.caption({ class: [uiTheme?.slots?.caption] })">
         <slot name="caption">
           {{ caption }}
         </slot>
       </caption>
 
-      <thead :class="ui.thead({ class: [props.ui?.thead] })">
-        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
+      <thead :class="ui.thead({ class: [uiTheme?.slots?.thead] })">
+        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" :class="ui.tr({ class: [uiTheme?.slots?.tr] })">
           <th
             v-for="header in headerGroup.headers"
             :key="header.id"
@@ -445,7 +446,7 @@ defineExpose({
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
             :class="ui.th({
               class: [
-                props.ui?.th,
+                uiTheme?.slots?.th,
                 resolveValue(header.column.columnDef.meta?.class?.th, header)
               ],
               pinned: !!header.column.getIsPinned()
@@ -457,10 +458,10 @@ defineExpose({
           </th>
         </tr>
 
-        <tr :class="ui.separator({ class: [props.ui?.separator] })" />
+        <tr :class="ui.separator({ class: [uiTheme?.slots?.separator] })" />
       </thead>
 
-      <tbody :class="ui.tbody({ class: [props.ui?.tbody] })">
+      <tbody :class="ui.tbody({ class: [uiTheme?.slots?.tbody] })">
         <slot name="body-top" />
 
         <template v-if="tableApi.getRowModel().rows?.length">
@@ -473,7 +474,7 @@ defineExpose({
               :tabindex="props.onSelect ? 0 : undefined"
               :class="ui.tr({
                 class: [
-                  props.ui?.tr,
+                  uiTheme?.slots?.tr,
                   resolveValue(tableApi.options.meta?.class?.tr, row)
                 ]
               })"
@@ -491,7 +492,7 @@ defineExpose({
                 :rowspan="resolveValue(cell.column.columnDef.meta?.rowspan?.td, cell)"
                 :class="ui.td({
                   class: [
-                    props.ui?.td,
+                    uiTheme?.slots?.td,
                     resolveValue(cell.column.columnDef.meta?.class?.td, cell)
                   ],
                   pinned: !!cell.column.getIsPinned()
@@ -503,8 +504,8 @@ defineExpose({
                 </slot>
               </td>
             </tr>
-            <tr v-if="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })">
-              <td :colspan="row.getAllCells().length" :class="ui.td({ class: [props.ui?.td] })">
+            <tr v-if="row.getIsExpanded()" :class="ui.tr({ class: [uiTheme?.slots?.tr] })">
+              <td :colspan="row.getAllCells().length" :class="ui.td({ class: [uiTheme?.slots?.td] })">
                 <slot name="expanded" :row="row" />
               </td>
             </tr>
@@ -512,13 +513,13 @@ defineExpose({
         </template>
 
         <tr v-else-if="loading && !!slots['loading']">
-          <td :colspan="tableApi.getAllLeafColumns().length" :class="ui.loading({ class: props.ui?.loading })">
+          <td :colspan="tableApi.getAllLeafColumns().length" :class="ui.loading({ class: uiTheme?.slots?.loading })">
             <slot name="loading" />
           </td>
         </tr>
 
         <tr v-else>
-          <td :colspan="tableApi.getAllLeafColumns().length" :class="ui.empty({ class: props.ui?.empty })">
+          <td :colspan="tableApi.getAllLeafColumns().length" :class="ui.empty({ class: uiTheme?.slots?.empty })">
             <slot name="empty">
               {{ empty || t('table.noData') }}
             </slot>
@@ -528,10 +529,10 @@ defineExpose({
         <slot name="body-bottom" />
       </tbody>
 
-      <tfoot v-if="hasFooter" :class="ui.tfoot({ class: [props.ui?.tfoot] })">
-        <tr :class="ui.separator({ class: [props.ui?.separator] })" />
+      <tfoot v-if="hasFooter" :class="ui.tfoot({ class: [uiTheme?.slots?.tfoot] })">
+        <tr :class="ui.separator({ class: [uiTheme?.slots?.separator] })" />
 
-        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
+        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" :class="ui.tr({ class: [uiTheme?.slots?.tr] })">
           <th
             v-for="header in footerGroup.headers"
             :key="header.id"
@@ -540,7 +541,7 @@ defineExpose({
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
             :class="ui.th({
               class: [
-                props.ui?.th,
+                uiTheme?.slots?.th,
                 resolveValue(header.column.columnDef.meta?.class?.th, header)
               ],
               pinned: !!header.column.getIsPinned()

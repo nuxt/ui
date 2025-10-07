@@ -58,7 +58,7 @@ export type BreadcrumbSlots<T extends BreadcrumbItem = BreadcrumbItem> = {
 <script setup lang="ts" generic="T extends BreadcrumbItem">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
@@ -76,6 +76,7 @@ const slots = defineSlots<BreadcrumbSlots<T>>()
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Breadcrumb['AppConfig']
+const uiTheme = useComponentUiTheme('breadcrumb', () => ({ slots: props.ui }))
 
 const separatorIcon = computed(() => props.separatorIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
 
@@ -84,19 +85,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb |
 </script>
 
 <template>
-  <Primitive :as="as" aria-label="breadcrumb" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <ol :class="ui.list({ class: props.ui?.list })">
+  <Primitive :as="as" aria-label="breadcrumb" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <ol :class="ui.list({ class: uiTheme?.slots?.list })">
       <template v-for="(item, index) in items" :key="index">
-        <li :class="ui.item({ class: [props.ui?.item, item.ui?.item] })">
+        <li :class="ui.item({ class: [uiTheme?.slots?.item, item.ui?.item] })">
           <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
-            <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })">
+            <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" :class="ui.link({ class: [uiTheme?.slots?.link, item.ui?.link, item.class], active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })">
               <slot :name="((item.slot || 'item') as keyof BreadcrumbSlots<T>)" :item="item" :index="index">
                 <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof BreadcrumbSlots<T>)" :item="item" :active="index === items!.length - 1" :index="index">
-                  <UIcon v-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active: index === items!.length - 1 })" />
-                  <UAvatar v-else-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: [props.ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active: index === items!.length - 1 })" />
+                  <UIcon v-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: [uiTheme?.slots?.linkLeadingIcon, item.ui?.linkLeadingIcon], active: index === items!.length - 1 })" />
+                  <UAvatar v-else-if="item.avatar" :size="((uiTheme?.slots?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: [uiTheme?.slots?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active: index === items!.length - 1 })" />
                 </slot>
 
-                <span v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof BreadcrumbSlots<T>]" :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })">
+                <span v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof BreadcrumbSlots<T>]" :class="ui.linkLabel({ class: [uiTheme?.slots?.linkLabel, item.ui?.linkLabel] })">
                   <slot :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof BreadcrumbSlots<T>)" :item="item" :active="index === items!.length - 1" :index="index">
                     {{ get(item, props.labelKey as string) }}
                   </slot>
@@ -108,9 +109,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb |
           </ULink>
         </li>
 
-        <li v-if="index < items!.length - 1" role="presentation" aria-hidden="true" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator] })">
+        <li v-if="index < items!.length - 1" role="presentation" aria-hidden="true" :class="ui.separator({ class: [uiTheme?.slots?.separator, item.ui?.separator] })">
           <slot name="separator">
-            <UIcon :name="separatorIcon" :class="ui.separatorIcon({ class: [props.ui?.separatorIcon, item.ui?.separatorIcon] })" />
+            <UIcon :name="separatorIcon" :class="ui.separatorIcon({ class: [uiTheme?.slots?.separatorIcon, item.ui?.separatorIcon] })" />
           </slot>
         </li>
       </template>

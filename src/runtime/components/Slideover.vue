@@ -77,7 +77,7 @@ export interface SlideoverSlots {
 import { computed, toRef } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { tv } from '../utils/tv'
@@ -97,6 +97,7 @@ const slots = defineSlots<SlideoverSlots>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Slideover['AppConfig']
+const uiTheme = useComponentUiTheme('slideover', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
@@ -135,11 +136,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
     </DialogTrigger>
 
     <DialogPortal v-bind="portalProps">
-      <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
+      <DialogOverlay v-if="overlay" :class="ui.overlay({ class: uiTheme?.slots?.overlay })" />
 
       <DialogContent
         :data-side="side"
-        :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
+        :class="ui.content({ class: [!slots.default && props.class, uiTheme?.slots?.content] })"
         v-bind="contentProps"
         @after-enter="emits('after:enter')"
         @after-leave="emits('after:leave')"
@@ -160,16 +161,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
         </VisuallyHidden>
 
         <slot name="content" :close="close">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
+          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" :class="ui.header({ class: uiTheme?.slots?.header })">
             <slot name="header" :close="close">
-              <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-                <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+              <div :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
+                <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
                   <slot name="title">
                     {{ title }}
                   </slot>
                 </DialogTitle>
 
-                <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+                <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
                   <slot name="description">
                     {{ description }}
                   </slot>
@@ -187,18 +188,18 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
                     variant="ghost"
                     :aria-label="t('slideover.close')"
                     v-bind="(typeof props.close === 'object' ? props.close as Partial<ButtonProps> : {})"
-                    :class="ui.close({ class: props.ui?.close })"
+                    :class="ui.close({ class: uiTheme?.slots?.close })"
                   />
                 </slot>
               </DialogClose>
             </slot>
           </div>
 
-          <div :class="ui.body({ class: props.ui?.body })">
+          <div :class="ui.body({ class: uiTheme?.slots?.body })">
             <slot name="body" :close="close" />
           </div>
 
-          <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+          <div v-if="!!slots.footer" :class="ui.footer({ class: uiTheme?.slots?.footer })">
             <slot name="footer" :close="close" />
           </div>
         </slot>

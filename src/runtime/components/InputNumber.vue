@@ -80,7 +80,7 @@ export interface InputNumberSlots {
 import { onMounted, ref, computed } from 'vue'
 import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, useVModel } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
@@ -101,6 +101,7 @@ const modelValue = useVModel<InputNumberProps, 'modelValue', 'update:modelValue'
 
 const { t, code: codeLocale } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
+const uiTheme = useComponentUiTheme('inputNumber', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'readonly'), emits)
 
@@ -164,7 +165,7 @@ defineExpose({
     v-bind="rootProps"
     :id="id"
     :model-value="modelValue"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
     :name="name"
     :disabled="disabled"
     :locale="locale"
@@ -175,12 +176,12 @@ defineExpose({
       ref="inputRef"
       :placeholder="placeholder"
       :required="required"
-      :class="ui.base({ class: props.ui?.base })"
+      :class="ui.base({ class: uiTheme?.slots?.base })"
       @blur="onBlur"
       @focus="emitFormFocus"
     />
 
-    <div :class="ui.increment({ class: props.ui?.increment })">
+    <div :class="ui.increment({ class: uiTheme?.slots?.increment })">
       <NumberFieldIncrement as-child :disabled="disabled || incrementDisabled">
         <slot name="increment">
           <UButton
@@ -195,7 +196,7 @@ defineExpose({
       </NumberFieldIncrement>
     </div>
 
-    <div :class="ui.decrement({ class: props.ui?.decrement })">
+    <div :class="ui.decrement({ class: uiTheme?.slots?.decrement })">
       <NumberFieldDecrement as-child :disabled="disabled || decrementDisabled">
         <slot name="decrement">
           <UButton

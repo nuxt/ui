@@ -55,7 +55,7 @@ export type ProgressSlots = {
 import { computed } from 'vue'
 import { Primitive, ProgressRoot, ProgressIndicator, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
@@ -69,6 +69,7 @@ const slots = defineSlots<ProgressSlots>()
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Progress['AppConfig']
+const uiTheme = useComponentUiTheme('progress', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'getValueLabel', 'getValueText', 'modelValue'), emits)
 
@@ -166,19 +167,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!isIndeterminate && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <div v-if="!isIndeterminate && (status || !!slots.status)" :class="ui.status({ class: uiTheme?.slots?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
       </slot>
     </div>
 
-    <ProgressRoot v-bind="rootProps" :max="realMax" :class="ui.base({ class: props.ui?.base })" style="transform: translateZ(0)">
-      <ProgressIndicator :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+    <ProgressRoot v-bind="rootProps" :max="realMax" :class="ui.base({ class: uiTheme?.slots?.base })" style="transform: translateZ(0)">
+      <ProgressIndicator :class="ui.indicator({ class: uiTheme?.slots?.indicator })" :style="indicatorStyle" />
     </ProgressRoot>
 
-    <div v-if="hasSteps" :class="ui.steps({ class: props.ui?.steps })">
-      <div v-for="(step, index) in max" :key="index" :class="ui.step({ class: props.ui?.step, step: stepVariant(index) })">
+    <div v-if="hasSteps" :class="ui.steps({ class: uiTheme?.slots?.steps })">
+      <div v-for="(step, index) in max" :key="index" :class="ui.step({ class: uiTheme?.slots?.step, step: stepVariant(index) })">
         <slot :name="`step-${index}`" :step="step">
           {{ step }}
         </slot>

@@ -74,7 +74,7 @@ export type StepperSlots<T extends StepperItem = StepperItem> = {
 import { computed } from 'vue'
 import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSeparator, StepperTitle, StepperDescription, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -88,6 +88,7 @@ const slots = defineSlots<StepperSlots<T>>()
 const modelValue = defineModel<string | number>()
 
 const appConfig = useAppConfig() as Stepper['AppConfig']
+const uiTheme = useComponentUiTheme('stepper', () => ({ slots: props.ui }))
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'linear'))
 
@@ -133,20 +134,20 @@ defineExpose({
 </script>
 
 <template>
-  <StepperRoot v-bind="rootProps" v-model="currentStepIndex" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.header({ class: props.ui?.header })">
+  <StepperRoot v-bind="rootProps" v-model="currentStepIndex" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <div :class="ui.header({ class: uiTheme?.slots?.header })">
       <StepperItem
         v-for="(item, count) in items"
         :key="item.value ?? count"
         :step="count"
         :disabled="item.disabled || props.disabled"
-        :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
+        :class="ui.item({ class: [uiTheme?.slots?.item, item.ui?.item, item.class] })"
       >
-        <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
-          <StepperTrigger :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger] })">
-            <StepperIndicator :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })">
+        <div :class="ui.container({ class: [uiTheme?.slots?.container, item.ui?.container] })">
+          <StepperTrigger :class="ui.trigger({ class: [uiTheme?.slots?.trigger, item.ui?.trigger] })">
+            <StepperIndicator :class="ui.indicator({ class: [uiTheme?.slots?.indicator, item.ui?.indicator] })">
               <slot name="indicator" :item="item">
-                <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon({ class: [props.ui?.icon, item.ui?.icon] })" />
+                <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon({ class: [uiTheme?.slots?.icon, item.ui?.icon] })" />
                 <template v-else>
                   {{ count + 1 }}
                 </template>
@@ -156,17 +157,17 @@ defineExpose({
 
           <StepperSeparator
             v-if="count < items.length - 1"
-            :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator] })"
+            :class="ui.separator({ class: [uiTheme?.slots?.separator, item.ui?.separator] })"
           />
         </div>
 
-        <div :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
-          <StepperTitle as="div" :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
+        <div :class="ui.wrapper({ class: [uiTheme?.slots?.wrapper, item.ui?.wrapper] })">
+          <StepperTitle as="div" :class="ui.title({ class: [uiTheme?.slots?.title, item.ui?.title] })">
             <slot name="title" :item="item">
               {{ item.title }}
             </slot>
           </StepperTitle>
-          <StepperDescription as="div" :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
+          <StepperDescription as="div" :class="ui.description({ class: [uiTheme?.slots?.description, item.ui?.description] })">
             <slot name="description" :item="item">
               {{ item.description }}
             </slot>
@@ -175,7 +176,7 @@ defineExpose({
       </StepperItem>
     </div>
 
-    <div v-if="currentStep?.content || !!slots.content || currentStep?.slot" :class="ui.content({ class: props.ui?.content })">
+    <div v-if="currentStep?.content || !!slots.content || currentStep?.slot" :class="ui.content({ class: uiTheme?.slots?.content })">
       <slot
         :name="((currentStep?.slot || 'content') as keyof StepperSlots<T>)"
         :item="(currentStep as Extract<T, { slot: string }>)"

@@ -126,7 +126,7 @@ export interface FileUploadSlots<M extends boolean = false> {
 import { computed, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig, useLocale } from '#imports'
+import { useAppConfig, useLocale, useComponentUiTheme } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { useFileUpload } from '../composables/useFileUpload'
 import { tv } from '../utils/tv'
@@ -151,6 +151,7 @@ const slots = defineSlots<FileUploadSlots<M>>()
 const modelValue = defineModel<(M extends true ? File[] : File) | null>()
 
 const appConfig = useAppConfig() as FileUpload['AppConfig']
+const uiTheme = useComponentUiTheme('fileUpload', () => ({ slots: props.ui }))
 
 const { t } = useLocale()
 
@@ -268,22 +269,22 @@ defineExpose({
     <template v-if="modelValue && (Array.isArray(modelValue) ? modelValue.length : true)">
       <slot name="files-top" :files="modelValue" :open="open" :remove-file="removeFile" />
 
-      <div :class="ui.files({ class: props.ui?.files })">
+      <div :class="ui.files({ class: uiTheme?.slots?.files })">
         <slot name="files" :files="modelValue">
-          <div v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]" :key="(file as File).name" :class="ui.file({ class: props.ui?.file })">
+          <div v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]" :key="(file as File).name" :class="ui.file({ class: uiTheme?.slots?.file })">
             <slot name="file" :file="file" :index="index">
               <slot name="file-leading" :file="file" :index="index">
-                <UAvatar :as="{ img: 'img' }" :src="createObjectUrl(file)" :icon="fileIcon || appConfig.ui.icons.file" :size="props.size" :class="ui.fileLeadingAvatar({ class: props.ui?.fileLeadingAvatar })" />
+                <UAvatar :as="{ img: 'img' }" :src="createObjectUrl(file)" :icon="fileIcon || appConfig.ui.icons.file" :size="props.size" :class="ui.fileLeadingAvatar({ class: uiTheme?.slots?.fileLeadingAvatar })" />
               </slot>
 
-              <div :class="ui.fileWrapper({ class: props.ui?.fileWrapper })">
-                <span :class="ui.fileName({ class: props.ui?.fileName })">
+              <div :class="ui.fileWrapper({ class: uiTheme?.slots?.fileWrapper })">
+                <span :class="ui.fileName({ class: uiTheme?.slots?.fileName })">
                   <slot name="file-name" :file="file" :index="index">
                     {{ (file as File).name }}
                   </slot>
                 </span>
 
-                <span :class="ui.fileSize({ class: props.ui?.fileSize })">
+                <span :class="ui.fileSize({ class: uiTheme?.slots?.fileSize })">
                   <slot name="file-size" :file="file" :index="index">
                     {{ formatFileSize((file as File).size) }}
                   </slot>
@@ -305,7 +306,7 @@ defineExpose({
                   }"
                   :aria-label="t('fileUpload.removeFile', { filename: (file as File).name })"
                   :trailing-icon="fileDeleteIcon || appConfig.ui.icons.close"
-                  :class="ui.fileTrailingButton({ class: props.ui?.fileTrailingButton })"
+                  :class="ui.fileTrailingButton({ class: uiTheme?.slots?.fileTrailingButton })"
                   @click.stop.prevent="removeFile(index)"
                 />
               </slot>
@@ -318,7 +319,7 @@ defineExpose({
     </template>
   </DefineFilesTemplate>
 
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
     <slot :open="open" :remove-file="removeFile">
       <component
         :is="variant === 'button' ? 'button' : 'div'"
@@ -326,7 +327,7 @@ defineExpose({
         :type="variant === 'button' ? 'button' : undefined"
         :role="variant === 'button' ? undefined : 'button'"
         :data-dragging="isDragging"
-        :class="ui.base({ class: props.ui?.base })"
+        :class="ui.base({ class: uiTheme?.slots?.base })"
         :tabindex="interactive && !disabled ? 0 : -1"
         @click="interactive && !disabled && open()"
         @keydown.space.prevent
@@ -334,25 +335,25 @@ defineExpose({
       >
         <ReuseFilesTemplate v-if="position === 'inside'" />
 
-        <div v-if="position === 'inside' ? (multiple ? !(modelValue as File[])?.length : !modelValue) : true" :class="ui.wrapper({ class: props.ui?.wrapper })">
+        <div v-if="position === 'inside' ? (multiple ? !(modelValue as File[])?.length : !modelValue) : true" :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
           <slot name="leading">
-            <UIcon v-if="variant === 'button'" :name="icon || appConfig.ui.icons.upload" :class="ui.icon({ class: props.ui?.icon })" />
-            <UAvatar v-else :icon="icon || appConfig.ui.icons.upload" :size="props.size" :class="ui.avatar({ class: props.ui?.avatar })" />
+            <UIcon v-if="variant === 'button'" :name="icon || appConfig.ui.icons.upload" :class="ui.icon({ class: uiTheme?.slots?.icon })" />
+            <UAvatar v-else :icon="icon || appConfig.ui.icons.upload" :size="props.size" :class="ui.avatar({ class: uiTheme?.slots?.avatar })" />
           </slot>
 
           <template v-if="variant !== 'button'">
-            <div v-if="label || !!slots.label" :class="ui.label({ class: props.ui?.label })">
+            <div v-if="label || !!slots.label" :class="ui.label({ class: uiTheme?.slots?.label })">
               <slot name="label">
                 {{ label }}
               </slot>
             </div>
-            <div v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+            <div v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
               <slot name="description">
                 {{ description }}
               </slot>
             </div>
 
-            <div v-if="!!slots.actions" :class="ui.actions({ class: props.ui?.actions })">
+            <div v-if="!!slots.actions" :class="ui.actions({ class: uiTheme?.slots?.actions })">
               <slot name="actions" :files="modelValue" :open="open" :remove-file="removeFile" />
             </div>
           </template>

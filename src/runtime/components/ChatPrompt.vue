@@ -44,7 +44,7 @@ export interface ChatPromptSlots extends TextareaSlots {
 import { computed, useTemplateRef } from 'vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
@@ -65,6 +65,7 @@ const model = defineModel<string>({ default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPrompt['AppConfig']
+const uiTheme = useComponentUiTheme('chatPrompt', () => ({ slots: props.ui }))
 
 const textareaProps = useForwardProps(reactivePick(props, 'autofocus', 'autoresize', 'rows'))
 
@@ -96,8 +97,8 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })" @submit.prevent="submit">
-    <div v-if="!!slots.header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })" @submit.prevent="submit">
+    <div v-if="!!slots.header" :class="ui.header({ class: uiTheme?.slots?.header })">
       <slot name="header" />
     </div>
 
@@ -109,7 +110,7 @@ defineExpose({
       variant="none"
       v-bind="{ ...textareaProps, ...$attrs }"
       :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), props.ui)"
-      :class="ui.body({ class: props.ui?.body })"
+      :class="ui.body({ class: uiTheme?.slots?.body })"
       @keydown.enter.exact.prevent="submit"
       @keydown.esc="blur"
     >
@@ -118,7 +119,7 @@ defineExpose({
       </template>
     </UTextarea>
 
-    <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" :class="ui.footer({ class: uiTheme?.slots?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

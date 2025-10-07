@@ -118,7 +118,7 @@ import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -157,6 +157,7 @@ const emits = defineEmits<CarouselEmits>()
 
 const { dir, t } = useLocale()
 const appConfig = useAppConfig() as Carousel['AppConfig']
+const uiTheme = useComponentUiTheme('carousel', () => ({ slots: props.ui }))
 
 const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'))
 
@@ -315,24 +316,24 @@ defineExpose({
     aria-roledescription="carousel"
     :data-orientation="orientation"
     tabindex="0"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
     @keydown="onKeyDown"
   >
-    <div ref="emblaRef" :class="ui.viewport({ class: props.ui?.viewport })">
-      <div :class="ui.container({ class: props.ui?.container })">
+    <div ref="emblaRef" :class="ui.viewport({ class: uiTheme?.slots?.viewport })">
+      <div :class="ui.container({ class: uiTheme?.slots?.container })">
         <div
           v-for="(item, index) in items"
           :key="index"
           v-bind="dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': 'slide' }"
-          :class="ui.item({ class: [props.ui?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
+          :class="ui.item({ class: [uiTheme?.slots?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
         >
           <slot :item="item" :index="index" />
         </div>
       </div>
     </div>
 
-    <div v-if="arrows || dots" :class="ui.controls({ class: props.ui?.controls })">
-      <div v-if="arrows" :class="ui.arrows({ class: props.ui?.arrows })">
+    <div v-if="arrows || dots" :class="ui.controls({ class: uiTheme?.slots?.controls })">
+      <div v-if="arrows" :class="ui.arrows({ class: uiTheme?.slots?.arrows })">
         <UButton
           :disabled="!canScrollPrev"
           :icon="prevIcon"
@@ -340,7 +341,7 @@ defineExpose({
           variant="outline"
           :aria-label="t('carousel.prev')"
           v-bind="typeof prev === 'object' ? prev : undefined"
-          :class="ui.prev({ class: props.ui?.prev })"
+          :class="ui.prev({ class: uiTheme?.slots?.prev })"
           @click="scrollPrev"
         />
         <UButton
@@ -350,19 +351,19 @@ defineExpose({
           variant="outline"
           :aria-label="t('carousel.next')"
           v-bind="typeof next === 'object' ? next : undefined"
-          :class="ui.next({ class: props.ui?.next })"
+          :class="ui.next({ class: uiTheme?.slots?.next })"
           @click="scrollNext"
         />
       </div>
 
-      <div v-if="dots" role="tablist" :aria-label="t('carousel.dots')" :class="ui.dots({ class: props.ui?.dots })">
+      <div v-if="dots" role="tablist" :aria-label="t('carousel.dots')" :class="ui.dots({ class: uiTheme?.slots?.dots })">
         <template v-for="(_, index) in scrollSnaps" :key="index">
           <button
             type="button"
             role="tab"
             :aria-label="t('carousel.goto', { slide: index + 1 })"
             :aria-selected="selectedIndex === index"
-            :class="ui.dot({ class: props.ui?.dot, active: selectedIndex === index })"
+            :class="ui.dot({ class: uiTheme?.slots?.dot, active: selectedIndex === index })"
             :data-state="selectedIndex === index ? 'active' : undefined"
             @click="scrollTo(index)"
           />

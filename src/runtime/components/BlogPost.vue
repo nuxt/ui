@@ -58,7 +58,7 @@ export interface BlogPostSlots {
 import { computed } from 'vue'
 import { Primitive, useDateFormatter } from 'reka-ui'
 import ImageComponent from '#build/ui-image-component'
-import { useLocale, useAppConfig } from '#imports'
+import { useLocale, useAppConfig, useComponentUiTheme } from '#imports'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -77,6 +77,7 @@ const slots = defineSlots<BlogPostSlots>()
 
 const { locale } = useLocale()
 const appConfig = useAppConfig() as BlogPost['AppConfig']
+const uiTheme = useComponentUiTheme('blogPost', () => ({ slots: props.ui }))
 const formatter = useDateFormatter(locale.value.code)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPost || {}) })({
@@ -115,18 +116,18 @@ const ariaLabel = computed(() => {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="onClick">
-    <div v-if="image || !!slots.header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })" @click="onClick">
+    <div v-if="image || !!slots.header" :class="ui.header({ class: uiTheme?.slots?.header })">
       <slot name="header">
         <component
           :is="ImageComponent"
           v-bind="typeof image === 'string' ? { src: image, alt: title } : { alt: title, ...image }"
-          :class="ui.image({ class: props.ui?.image, to: !!to })"
+          :class="ui.image({ class: uiTheme?.slots?.image, to: !!to })"
         />
       </slot>
     </div>
 
-    <div :class="ui.body({ class: props.ui?.body })">
+    <div :class="ui.body({ class: uiTheme?.slots?.body })">
       <ULink
         v-if="to"
         :aria-label="ariaLabel"
@@ -139,31 +140,31 @@ const ariaLabel = computed(() => {
       </ULink>
 
       <slot name="body">
-        <div v-if="(date || !!slots.date) || (badge || !!slots.badge)" :class="ui.meta({ class: props.ui?.meta })">
+        <div v-if="(date || !!slots.date) || (badge || !!slots.badge)" :class="ui.meta({ class: uiTheme?.slots?.meta })">
           <slot name="badge">
-            <UBadge v-if="badge" color="neutral" variant="subtle" v-bind="typeof badge === 'string' ? { label: badge } : badge" :class="ui.badge({ class: props.ui?.badge })" />
+            <UBadge v-if="badge" color="neutral" variant="subtle" v-bind="typeof badge === 'string' ? { label: badge } : badge" :class="ui.badge({ class: uiTheme?.slots?.badge })" />
           </slot>
 
-          <time v-if="date || !!slots.date" :datetime="datetime" :class="ui.date({ class: props.ui?.date })">
+          <time v-if="date || !!slots.date" :datetime="datetime" :class="ui.date({ class: uiTheme?.slots?.date })">
             <slot name="date">
               {{ date }}
             </slot>
           </time>
         </div>
 
-        <h2 v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+        <h2 v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
           <slot name="title">
             {{ title }}
           </slot>
         </h2>
 
-        <div v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+        <div v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
           <slot name="description">
             {{ description }}
           </slot>
         </div>
 
-        <div v-if="authors?.length || !!slots.authors" :class="ui.authors({ class: props.ui?.authors })">
+        <div v-if="authors?.length || !!slots.authors" :class="ui.authors({ class: uiTheme?.slots?.authors })">
           <slot name="authors">
             <template v-if="authors?.length">
               <UAvatarGroup v-if="authors.length > 1">
@@ -172,7 +173,7 @@ const ariaLabel = computed(() => {
                   :key="index"
                   :to="author.to"
                   :target="author.target"
-                  :class="ui.avatar({ class: props.ui?.avatar, to: !!author.to })"
+                  :class="ui.avatar({ class: uiTheme?.slots?.avatar, to: !!author.to })"
                   raw
                 >
                   <UAvatar v-bind="author.avatar" />
@@ -185,7 +186,7 @@ const ariaLabel = computed(() => {
       </slot>
     </div>
 
-    <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" :class="ui.footer({ class: uiTheme?.slots?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

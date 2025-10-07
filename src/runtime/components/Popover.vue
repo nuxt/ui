@@ -60,7 +60,7 @@ import { defu } from 'defu'
 import { useForwardPropsEmits } from 'reka-ui'
 import { Popover, HoverCard } from 'reka-ui/namespaced'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { usePortal } from '../composables/usePortal'
 import { tv } from '../utils/tv'
 
@@ -75,6 +75,7 @@ const emits = defineEmits<PopoverEmits>()
 const slots = defineSlots<PopoverSlots>()
 
 const appConfig = useAppConfig() as Popover['AppConfig']
+const uiTheme = useComponentUiTheme('popover', () => ({ slots: props.ui }))
 
 const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay') : reactivePick(props, 'defaultOpen', 'open', 'modal')
 const rootProps = useForwardPropsEmits(pick, emits)
@@ -116,10 +117,10 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
     </Component.Anchor>
 
     <Component.Portal v-bind="portalProps">
-      <Component.Content v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">
+      <Component.Content v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, uiTheme?.slots?.content] })" v-on="contentEvents">
         <slot name="content" />
 
-        <Component.Arrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
+        <Component.Arrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: uiTheme?.slots?.arrow })" />
       </Component.Content>
     </Component.Portal>
   </Component.Root>

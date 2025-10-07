@@ -74,7 +74,7 @@ import { Primitive } from 'reka-ui'
 import { useEventListener, useElementBounding, watchThrottled, watchPausable } from '@vueuse/core'
 import { isClient } from '@vueuse/shared'
 import { ColorTranslator } from 'colortranslator'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<ColorPickerProps>(), {
@@ -86,6 +86,7 @@ const props = withDefaults(defineProps<ColorPickerProps>(), {
 const modelValue = defineModel<string>(undefined)
 
 const appConfig = useAppConfig() as ColorPicker['AppConfig']
+const uiTheme = useComponentUiTheme('colorPicker', () => ({ slots: props.ui }))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.colorPicker || {}) })({
   size: props.size
@@ -263,17 +264,17 @@ const trackThumbStyle = computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })" :data-disabled="disabled ? true : undefined">
-    <div :class="ui.picker({ class: props.ui?.picker })">
+  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })" :data-disabled="disabled ? true : undefined">
+    <div :class="ui.picker({ class: uiTheme?.slots?.picker })">
       <div
         ref="selectorRef"
-        :class="ui.selector({ class: props.ui?.selector })"
+        :class="ui.selector({ class: uiTheme?.slots?.selector })"
         :style="selectorStyle"
       >
-        <div :class="ui.selectorBackground({ class: props.ui?.selectorBackground })" data-color-picker-background>
+        <div :class="ui.selectorBackground({ class: uiTheme?.slots?.selectorBackground })" data-color-picker-background>
           <div
             ref="selectorThumbRef"
-            :class="ui.selectorThumb({ class: props.ui?.selectorThumb })"
+            :class="ui.selectorThumb({ class: uiTheme?.slots?.selectorThumb })"
             :style="selectorThumbStyle"
             :data-disabled="disabled ? true : undefined"
           />
@@ -281,12 +282,12 @@ const trackThumbStyle = computed(() => ({
       </div>
       <div
         ref="trackRef"
-        :class="ui.track({ class: props.ui?.track })"
+        :class="ui.track({ class: uiTheme?.slots?.track })"
         data-color-picker-track
       >
         <div
           ref="trackThumbRef"
-          :class="ui.trackThumb({ class: props.ui?.trackThumb })"
+          :class="ui.trackThumb({ class: uiTheme?.slots?.trackThumb })"
           :style="trackThumbStyle"
           :data-disabled="disabled ? true : undefined"
         />

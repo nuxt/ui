@@ -103,7 +103,7 @@ export type ContextMenuSlots<
 import { computed, toRef } from 'vue'
 import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UContextMenuContent from './ContextMenuContent.vue'
@@ -118,6 +118,7 @@ const emits = defineEmits<ContextMenuEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
 const appConfig = useAppConfig() as ContextMenu['AppConfig']
+const uiTheme = useComponentUiTheme('contextMenu', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content)
@@ -135,7 +136,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu 
     </ContextMenuTrigger>
 
     <UContextMenuContent
-      :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
+      :class="ui.content({ class: [!slots.default && props.class, uiTheme?.slots?.content] })"
       :ui="ui"
       :ui-override="props.ui"
       v-bind="contentProps"

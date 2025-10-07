@@ -110,7 +110,7 @@ export type AuthFormSlots<T extends object = object, F extends AuthFormField = A
 <script setup lang="ts" generic="T extends FormSchema, F extends AuthFormField">
 import { reactive, ref, computed, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { omit, pick } from '../utils'
 import { tv } from '../utils/tv'
@@ -147,6 +147,7 @@ const slots = defineSlots<AuthFormSlots<typeof state, F>>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as AuthForm['AppConfig']
+const uiTheme = useComponentUiTheme('authForm', () => ({ slots: props.ui }))
 
 const formRef = useTemplateRef('formRef')
 const passwordVisibility = ref(false)
@@ -188,22 +189,22 @@ function omitFieldProps(field: F) {
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="(icon || !!slots.icon) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <div v-if="(icon || !!slots.icon) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header" :class="ui.header({ class: uiTheme?.slots?.header })">
       <slot name="header">
-        <div v-if="icon || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+        <div v-if="icon || !!slots.leading" :class="ui.leading({ class: uiTheme?.slots?.leading })">
           <slot name="leading">
-            <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+            <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: uiTheme?.slots?.leadingIcon })" />
           </slot>
         </div>
 
-        <div v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+        <div v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
           <slot name="title">
             {{ title }}
           </slot>
         </div>
 
-        <div v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+        <div v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
           <slot name="description">
             {{ description }}
           </slot>
@@ -211,8 +212,8 @@ function omitFieldProps(field: F) {
       </slot>
     </div>
 
-    <div :class="ui.body({ class: props.ui?.body })">
-      <div v-if="providers?.length || !!slots.providers" :class="ui.providers({ class: props.ui?.providers })">
+    <div :class="ui.body({ class: uiTheme?.slots?.body })">
+      <div v-if="providers?.length || !!slots.providers" :class="ui.providers({ class: uiTheme?.slots?.providers })">
         <slot name="providers">
           <UButton
             v-for="(provider, index) in providers"
@@ -228,7 +229,7 @@ function omitFieldProps(field: F) {
       <USeparator
         v-if="providers?.length && fields?.length"
         v-bind="typeof separator === 'object' ? separator : { label: separator }"
-        :class="ui.separator({ class: props.ui?.separator })"
+        :class="ui.separator({ class: uiTheme?.slots?.separator })"
       />
 
       <UForm
@@ -238,7 +239,7 @@ function omitFieldProps(field: F) {
         :schema="schema"
         :validate="validate"
         :validate-on="validateOn"
-        :class="ui.form({ class: props.ui?.form })"
+        :class="ui.form({ class: uiTheme?.slots?.form })"
         :disabled="disabled"
         :loading-auto="loadingAuto"
         @submit="onSubmit"
@@ -252,20 +253,20 @@ function omitFieldProps(field: F) {
             <UCheckbox
               v-if="field.type === 'checkbox'"
               v-model="state[field.name]"
-              :class="ui.checkbox({ class: props.ui?.checkbox })"
+              :class="ui.checkbox({ class: uiTheme?.slots?.checkbox })"
               v-bind="(omitFieldProps(field) as AuthFormCheckboxField)"
             />
             <USelectMenu
               v-else-if="field.type === 'select'"
               v-model="state[field.name]"
-              :class="ui.select({ class: props.ui?.select })"
+              :class="ui.select({ class: uiTheme?.slots?.select })"
               v-bind="(omitFieldProps(field) as AuthFormSelectField)"
             />
             <UPinInput
               v-else-if="field.type === 'otp'"
               :id="field.name"
               v-model="state[field.name]"
-              :class="ui.otp({ class: props.ui?.otp })"
+              :class="ui.otp({ class: uiTheme?.slots?.otp })"
               v-bind="{
                 ...(omitFieldProps(field) as Omit<AuthFormOtpField, 'type'>),
                 ...(typeof field.otp === 'object' ? field.otp : {})
@@ -275,7 +276,7 @@ function omitFieldProps(field: F) {
             <UInput
               v-else-if="field.type === 'password'"
               v-model="state[field.name]"
-              :class="ui.password({ class: props.ui?.password })"
+              :class="ui.password({ class: uiTheme?.slots?.password })"
               v-bind="(omitFieldProps(field) as AuthFormInputField<'password'>)"
               :type="passwordVisibility ? 'text' : 'password'"
             >
@@ -295,7 +296,7 @@ function omitFieldProps(field: F) {
             <UInput
               v-else
               v-model="state[field.name]"
-              :class="ui.input({ class: props.ui?.input })"
+              :class="ui.input({ class: uiTheme?.slots?.input })"
               v-bind="(omitFieldProps(field) as AuthFormInputField)"
             />
           </slot>
@@ -332,7 +333,7 @@ function omitFieldProps(field: F) {
       </UForm>
     </div>
 
-    <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" :class="ui.footer({ class: uiTheme?.slots?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

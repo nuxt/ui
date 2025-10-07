@@ -52,7 +52,7 @@ import type { ComponentPublicInstance } from 'vue'
 import { ref, computed, onMounted } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
@@ -65,6 +65,7 @@ const props = withDefaults(defineProps<PinInputProps<T>>(), {
 const emits = defineEmits<PinInputEmits<T>>()
 
 const appConfig = useAppConfig() as PinInput['AppConfig']
+const uiTheme = useComponentUiTheme('pinInput', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'), emits)
 
@@ -119,7 +120,7 @@ defineExpose({
     :placeholder="placeholder"
     :model-value="(modelValue as PinInputValue<T>)"
     :default-value="(defaultValue as PinInputValue<T>[])"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
     @update:model-value="emitFormInput()"
     @complete="onComplete"
   >
@@ -128,7 +129,7 @@ defineExpose({
       :key="ids"
       :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
       :index="index"
-      :class="ui.base({ class: props.ui?.base })"
+      :class="ui.base({ class: uiTheme?.slots?.base })"
       :disabled="disabled"
       @blur="onBlur"
       @focus="emitFormFocus"

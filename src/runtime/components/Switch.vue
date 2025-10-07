@@ -59,7 +59,7 @@ export interface SwitchSlots {
 import { computed, useId } from 'vue'
 import { Primitive, SwitchRoot, SwitchThumb, useForwardProps, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -73,6 +73,7 @@ const emits = defineEmits<SwitchEmits>()
 const modelValue = defineModel<boolean>({ default: undefined })
 
 const appConfig = useAppConfig() as Switch['AppConfig']
+const uiTheme = useComponentUiTheme('switch', () => ({ slots: props.ui }))
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
 
@@ -97,33 +98,33 @@ function onUpdate(value: any) {
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.container({ class: props.ui?.container })">
+  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+    <div :class="ui.container({ class: uiTheme?.slots?.container })">
       <SwitchRoot
         :id="id"
         v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
         v-model="modelValue"
         :name="name"
         :disabled="disabled || loading"
-        :class="ui.base({ class: props.ui?.base })"
+        :class="ui.base({ class: uiTheme?.slots?.base })"
         @update:model-value="onUpdate"
       >
-        <SwitchThumb :class="ui.thumb({ class: props.ui?.thumb })">
-          <UIcon v-if="loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.icon({ class: props.ui?.icon, checked: true, unchecked: true })" />
+        <SwitchThumb :class="ui.thumb({ class: uiTheme?.slots?.thumb })">
+          <UIcon v-if="loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.icon({ class: uiTheme?.slots?.icon, checked: true, unchecked: true })" />
           <template v-else>
-            <UIcon v-if="checkedIcon" :name="checkedIcon" :class="ui.icon({ class: props.ui?.icon, checked: true })" />
-            <UIcon v-if="uncheckedIcon" :name="uncheckedIcon" :class="ui.icon({ class: props.ui?.icon, unchecked: true })" />
+            <UIcon v-if="checkedIcon" :name="checkedIcon" :class="ui.icon({ class: uiTheme?.slots?.icon, checked: true })" />
+            <UIcon v-if="uncheckedIcon" :name="uncheckedIcon" :class="ui.icon({ class: uiTheme?.slots?.icon, unchecked: true })" />
           </template>
         </SwitchThumb>
       </SwitchRoot>
     </div>
-    <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <Label v-if="label || !!slots.label" :for="id" :class="ui.label({ class: props.ui?.label })">
+    <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
+      <Label v-if="label || !!slots.label" :for="id" :class="ui.label({ class: uiTheme?.slots?.label })">
         <slot name="label" :label="label">
           {{ label }}
         </slot>
       </Label>
-      <p v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+      <p v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
         <slot name="description" :description="description">
           {{ description }}
         </slot>

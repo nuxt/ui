@@ -90,7 +90,7 @@ export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> 
 import { computed, useId } from 'vue'
 import { RadioGroupRoot, RadioGroupItem as RRadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUiTheme } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
@@ -105,6 +105,7 @@ const emits = defineEmits<RadioGroupEmits>()
 const slots = defineSlots<RadioGroupSlots<T>>()
 
 const appConfig = useAppConfig() as RadioGroup['AppConfig']
+const uiTheme = useComponentUiTheme('radioGroup', () => ({ slots: props.ui }))
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'loop', 'required'), emits)
 
@@ -177,35 +178,35 @@ function onUpdate(value: any) {
     :orientation="orientation"
     :name="name"
     :disabled="disabled"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
     @update:model-value="onUpdate"
   >
-    <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
-      <legend v-if="legend || !!slots.legend" :class="ui.legend({ class: props.ui?.legend })">
+    <fieldset :class="ui.fieldset({ class: uiTheme?.slots?.fieldset })" v-bind="ariaAttrs">
+      <legend v-if="legend || !!slots.legend" :class="ui.legend({ class: uiTheme?.slots?.legend })">
         <slot name="legend">
           {{ legend }}
         </slot>
       </legend>
 
-      <component :is="(!variant || variant === 'list') ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })">
-        <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
+      <component :is="(!variant || variant === 'list') ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: [uiTheme?.slots?.item, item.ui?.item, item.class] })">
+        <div :class="ui.container({ class: [uiTheme?.slots?.container, item.ui?.container] })">
           <RRadioGroupItem
             :id="item.id"
             :value="item.value"
             :disabled="item.disabled"
-            :class="ui.base({ class: [props.ui?.base, item.ui?.base], disabled: item.disabled })"
+            :class="ui.base({ class: [uiTheme?.slots?.base, item.ui?.base], disabled: item.disabled })"
           >
-            <RadioGroupIndicator :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })" />
+            <RadioGroupIndicator :class="ui.indicator({ class: [uiTheme?.slots?.indicator, item.ui?.indicator] })" />
           </RRadioGroupItem>
         </div>
 
-        <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
-          <component :is="(!variant || variant === 'list') ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" :class="ui.label({ class: [props.ui?.label, item.ui?.label] })">
+        <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" :class="ui.wrapper({ class: [uiTheme?.slots?.wrapper, item.ui?.wrapper] })">
+          <component :is="(!variant || variant === 'list') ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" :class="ui.label({ class: [uiTheme?.slots?.label, item.ui?.label] })">
             <slot name="label" :item="item" :model-value="(modelValue as RadioGroupValue)">
               {{ item.label }}
             </slot>
           </component>
-          <p v-if="item.description || !!slots.description" :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
+          <p v-if="item.description || !!slots.description" :class="ui.description({ class: [uiTheme?.slots?.description, item.ui?.description] })">
             <slot name="description" :item="item" :model-value="(modelValue as RadioGroupValue)">
               {{ item.description }}
             </slot>
