@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import type { CommandPaletteItem } from '@nuxt/ui'
 
-const items: CommandPaletteItem[] = Array(1000).fill(0).map((_, value) => ({
-  label: `item-${value}`,
-  value
-}))
+const items: CommandPaletteItem[] = Array(1000)
+  .fill(0)
+  .map((_, value) => ({
+    label: `item-${value}`,
+    value
+  }))
 
-const groups = [{
-  id: 'items',
-  items
-}]
+const groups = [
+  {
+    id: 'items',
+    items
+  }
+]
 </script>
 
 <template>

@@ -899,7 +899,7 @@ When enabled, all groups are flattened into a single list due to a limitation of
 
 ::component-example
 ---
-prettier: true
+collapse: true
 name: 'command-palette-virtualize-example'
 class: '!p-0'
 props:
