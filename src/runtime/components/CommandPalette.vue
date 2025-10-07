@@ -7,7 +7,7 @@ import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, LinkProps, IconProps } from '../types'
-import type { GetItemKeys } from '../types/utils'
+import type { GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type CommandPalette = ComponentConfig<typeof theme, AppConfig, 'commandPalette'>
@@ -58,7 +58,7 @@ export interface CommandPaletteGroup<T extends CommandPaletteItem = CommandPalet
   highlightedIcon?: IconProps['name']
 }
 
-export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'selectionBehavior'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ListboxRootProps, 'disabled' | 'highlightOnHover' | 'selectionBehavior'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -118,6 +118,10 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   backIcon?: IconProps['name']
   groups?: G[]
+  /** The value of the InputMenu when initially rendered. Use when you do not need to control the state of the InputMenu. */
+  defaultValue?: GetModelValue<T, VK, M>
+  /** The controlled value of the InputMenu. Can be binded-with with `v-model`. */
+  modelValue?: GetModelValue<T, VK, M>
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).
    * @defaultValue {
@@ -138,21 +142,23 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
   labelKey?: GetItemKeys<T>
   /**
    * When `items` is an array of objects, select the field to use as the value.
-   * @defaultValue 'value'
+   * @defaultValue 'undefined'
    */
-  valueKey?: GetItemKeys<T>
+  valueKey?: VK
+  /** Whether multiple options can be selected or not. */
+  multiple?: M & boolean
   /**
    * Use this to compare objects by a particular field, or pass your own
    * comparison function for complete control over how objects are compared.
    */
-  by?: GetItemKeys<T> | ((a: T, b: T) => boolean)
+  by?: GetItemKeys<T> | ((a: GetModelValue<T, VK, M>, b: GetModelValue<T, VK, M>) => boolean)
   class?: any
   ui?: CommandPalette['slots']
 }
 
-export type CommandPaletteEmits<T extends CommandPaletteItem = CommandPaletteItem> = ListboxRootEmits<T> & {
+export type CommandPaletteEmits<T extends CommandPaletteItem = CommandPaletteItem, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> = ListboxRootEmits<T> & {
   'update:open': [value: boolean]
-}
+} & GetModelValueEmits<T, VK, M>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
@@ -169,7 +175,9 @@ export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPalett
 
 </script>
 
-<script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
+<script setup lang="ts"
+  generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem = CommandPaletteItem, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, "
+>
 import { computed, ref, useTemplateRef } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
@@ -190,14 +198,12 @@ import ULink from './Link.vue'
 import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
 
-const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
-  modelValue: '',
+const props = withDefaults(defineProps<CommandPaletteProps<G, T, VK, M>>(), {
   labelKey: 'label',
-  valueKey: 'value',
   autofocus: true,
   back: true
 })
-const emits = defineEmits<CommandPaletteEmits<T>>()
+const emits = defineEmits<CommandPaletteEmits<T, VK, M>>()
 const slots = defineSlots<CommandPaletteSlots<G, T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
@@ -341,7 +347,13 @@ function onSelect(e: Event, item: T) {
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <ListboxRoot v-bind="rootProps" ref="listboxRootRef" :by="(by as any)" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ListboxRoot
+    v-bind="rootProps"
+    ref="listboxRootRef"
+    :by="(by as any)"
+    :selection-behavior="selectionBehavior"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+  >
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
         :placeholder="placeholder"
@@ -386,7 +398,11 @@ function onSelect(e: Event, item: T) {
 
     <ListboxContent :class="ui.content({ class: props.ui?.content })">
       <div v-if="filteredGroups?.length" role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
-        <ListboxGroup v-for="group in filteredGroups" :key="`group-${group.id}`" :class="ui.group({ class: props.ui?.group })">
+        <ListboxGroup
+          v-for="group in filteredGroups"
+          :key="`group-${group.id}`"
+          :class="ui.group({ class: props.ui?.group })"
+        >
           <ListboxGroupLabel v-if="get(group, props.labelKey as string)" :class="ui.label({ class: props.ui?.label })">
             {{ get(group, props.labelKey as string) }}
           </ListboxGroupLabel>
@@ -394,7 +410,7 @@ function onSelect(e: Event, item: T) {
           <ListboxItem
             v-for="(item, index) in group.items"
             :key="`group-${group.id}-${index}`"
-            :value="get(omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children']), props.valueKey as string)"
+            :value="props.valueKey ? get(omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children']), props.valueKey as string) : omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
             :disabled="item.disabled"
             as-child
             @select="onSelect($event, item)"
