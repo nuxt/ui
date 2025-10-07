@@ -95,6 +95,11 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   highlight?: boolean
   autofocus?: boolean
   autofocusDelay?: number
+  /**
+   * Use this to compare objects by a particular field, or pass your own
+   * comparison function for complete control over how objects are compared.
+   */
+  by?: GetItemKeys<T> | ((a: GetModelValue<T, VK, M>, b: GetModelValue<T, VK, M>) => boolean)
   class?: any
   ui?: Select['slots']
 }
@@ -270,6 +275,7 @@ defineExpose({
     :disabled="disabled"
     :default-value="(defaultValue as Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[])"
     :model-value="(modelValue as Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[])"
+    :by="(by as any)"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >

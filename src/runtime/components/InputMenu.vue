@@ -124,6 +124,11 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
    * @defaultValue false
    */
   ignoreFilter?: boolean
+  /**
+   * Use this to compare objects by a particular field, or pass your own
+   * comparison function for complete control over how objects are compared.
+   */
+  by?: GetItemKeys<T> | ((a: GetModelValue<T, VK, M>, b: GetModelValue<T, VK, M>) => boolean)
   class?: any
   ui?: InputMenu['slots']
 }
@@ -423,6 +428,7 @@ defineExpose({
     :disabled="disabled"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :as-child="!!multiple"
+    :by="(by as any)"
     ignore-filter
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"

@@ -118,6 +118,11 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   ignoreFilter?: boolean
   autofocus?: boolean
   autofocusDelay?: number
+  /**
+   * Use this to compare objects by a particular field, or pass your own
+   * comparison function for complete control over how objects are compared.
+   */
+  by?: GetItemKeys<T> | ((a: GetModelValue<T, VK, M>, b: GetModelValue<T, VK, M>) => boolean)
   class?: any
   ui?: SelectMenu['slots']
 }
@@ -407,6 +412,7 @@ defineExpose({
     as-child
     :name="name"
     :disabled="disabled"
+    :by="(by as any)"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
