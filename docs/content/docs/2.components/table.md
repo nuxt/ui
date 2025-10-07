@@ -627,7 +627,6 @@ prettier: true
 collapse: true
 highlights:
   - 175
-overflowHidden: true
 name: 'table-tree-data-example'
 class: '!p-0'
 ---
