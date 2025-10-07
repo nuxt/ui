@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { ListboxRootProps, ListboxRootEmits, ListboxVirtualizerProps } from 'reka-ui'
+import type { ListboxRootProps, ListboxRootEmits } from 'reka-ui'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
@@ -132,11 +132,22 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   fuse?: UseFuseOptions<T>
   /**
-   * Enable virtualization for large lists. Can be `true` or an object with virtualizer options.
+   * Enable virtualization for large lists.
    * Note: when enabled, all groups are flattened into a single list due to a limitation of Reka UI (https://github.com/unovue/reka-ui/issues/1885).
    * @defaultValue false
    */
-  virtualize?: boolean | Omit<ListboxVirtualizerProps, 'options' | 'textContent'>
+  virtualize?: boolean | {
+    /**
+     * Number of items rendered outside the visible area
+     * @defaultValue 12
+     */
+    overscan?: number
+    /**
+     * Estimated size (in px) of each item
+     * @defaultValue 32
+     */
+    estimateSize?: number
+  }
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'

@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { TreeRootProps, TreeRootEmits, TreeVirtualizerProps } from 'reka-ui'
+import type { TreeRootProps, TreeRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
 import type { IconProps } from '../types'
@@ -83,11 +83,22 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean 
    */
   nested?: boolean
   /**
-   * Enable virtualization for large lists. Can be `true` or an object with virtualizer options.
+   * Enable virtualization for large lists.
    * Note: when enabled, the tree structure is flattened like if `nested` was set to `false`.
    * @defaultValue false
    */
-  virtualize?: boolean | Omit<TreeVirtualizerProps, 'textContent'>
+  virtualize?: boolean | {
+    /**
+     * Number of items rendered outside the visible area
+     * @defaultValue 12
+     */
+    overscan?: number
+    /**
+     * Estimated size (in px) of each item
+     * @defaultValue 32
+     */
+    estimateSize?: number
+  }
   class?: any
   ui?: Tree['slots']
 }
