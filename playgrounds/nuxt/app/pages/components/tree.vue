@@ -46,10 +46,6 @@ const itemsWithMappedId = [
   { id: 'id3', title: 'obiwan kenobi' }
 ]
 
-const modelValue = ref<(typeof items)[number]>()
-const modelValues = ref<(typeof items)>([items[items.length - 2]!])
-const modelValueWithMappedId = ref<(typeof itemsWithMappedId)[number]>()
-
 const largeItems = Array(1000).fill(0).map((_, i) => ({
   label: `Item ${i + 1}`,
   icon: 'i-lucide-file',
@@ -58,6 +54,10 @@ const largeItems = Array(1000).fill(0).map((_, i) => ({
     { label: `Child ${i + 1}-2`, icon: 'i-lucide-file-text' }
   ]
 })) satisfies TreeItem[]
+
+const modelValue = ref<(typeof items)[number]>()
+const modelValues = ref<(typeof items)>([items[items.length - 2]!])
+const modelValueWithMappedId = ref<(typeof itemsWithMappedId)[number]>()
 </script>
 
 <template>
