@@ -35,6 +35,7 @@ import type {
   VisibilityOptions,
   VisibilityState
 } from '@tanstack/vue-table'
+import type { VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '#build/ui/table'
 import type { ComponentConfig } from '../types/tv'
 
@@ -96,7 +97,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    * Note: when enabled, the divider between rows and sticky properties are not supported.
    * @defaultValue false
    */
-  virtualize?: boolean | {
+  virtualize?: boolean | (Partial<Omit<VirtualizerOptions<Element, Element>, 'getScrollElement' | 'count' | 'estimateSize' | 'overscan'>> & {
     /**
      * Number of items rendered outside the visible area
      * @defaultValue 12
@@ -107,7 +108,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
      * @defaultValue 65
      */
     estimateSize?: number
-  }
+  })
   /**
    * The text to display when the table is empty.
    * @defaultValue t('table.noData')
@@ -411,12 +412,12 @@ const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' 
 }))
 
 const virtualizer = !!props.virtualize && useVirtualizer({
+  ...virtualizerProps.value,
   get count() {
     return rows.value.length
   },
   getScrollElement: () => rootRef.value?.$el,
-  estimateSize: () => virtualizerProps.value.estimateSize,
-  overscan: virtualizerProps.value.overscan
+  estimateSize: () => virtualizerProps.value.estimateSize
 })
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {

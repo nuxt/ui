@@ -597,7 +597,7 @@ class: '!p-0'
 
 ### With virtualization :badge{label="Soon"}
 
-Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`.
+Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/latest/docs/api/virtualizer#optional-options) to customize the virtualization behavior.
 
 ::warning
 When virtualization is enabled, the divider between rows and sticky properties are not supported.
