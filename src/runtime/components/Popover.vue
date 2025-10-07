@@ -6,13 +6,14 @@ import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Popover = ComponentConfig<typeof theme, AppConfig, 'popover'>
+type PopoverMode = 'click' | 'hover'
 
-export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'> {
+export interface PopoverProps<M extends PopoverMode = PopoverMode> extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'> {
   /**
    * The display mode of the popover.
    * @defaultValue 'click'
    */
-  mode?: 'click' | 'hover'
+  mode?: M
   /**
    * The content of the popover.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
@@ -47,32 +48,23 @@ export interface PopoverEmits extends PopoverRootEmits {
   'close:prevent': []
 }
 
-export interface PopoverSlots {
+export interface PopoverSlots<M extends PopoverMode = PopoverMode> {
   default(props: {
     open: boolean
-    /**
-     * Available only with mode 'click'
-     */
-    close?: () => void
+    close: M extends 'click' ? (() => void) : never
   }): any
 
   content(props: {
-    /**
-     * Available only with mode 'click'
-     */
-    close?: () => void
+    close: M extends 'click' ? (() => void) : never
   }): any
 
   anchor(props: {
-    /**
-     * Available only with mode 'click'
-     */
-    close?: () => void
+    close: M extends 'click' ? (() => void) : never
   }): any
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="M extends PopoverMode = PopoverMode">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { useForwardPropsEmits } from 'reka-ui'
@@ -82,15 +74,15 @@ import { useAppConfig } from '#imports'
 import { usePortal } from '../composables/usePortal'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<PopoverProps>(), {
+const props = withDefaults(defineProps<PopoverProps<M>>(), {
   portal: true,
-  mode: 'click',
+  mode: 'click' as never,
   openDelay: 0,
   closeDelay: 0,
   dismissible: true
 })
 const emits = defineEmits<PopoverEmits>()
-const slots = defineSlots<PopoverSlots>()
+const slots = defineSlots<PopoverSlots<M>>()
 
 const appConfig = useAppConfig() as Popover['AppConfig']
 
@@ -121,21 +113,25 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.popover || {
 }))
 
 const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
+type ComponentRootContext = {
+  open: boolean
+  close: M extends 'click' ? (() => void) : never
+}
 </script>
 
 <template>
-  <Component.Root v-slot="{ open, close }: { open: boolean, close?: () => void }" v-bind="rootProps">
+  <Component.Root v-slot="{ open, close }: {open: boolean, close?: () => void}" v-bind="rootProps">
     <Component.Trigger v-if="!!slots.default || !!reference" as-child :reference="reference" :class="props.class">
-      <slot :open="open" :close="close" />
+      <slot v-bind="{ open, close } as ComponentRootContext" />
     </Component.Trigger>
 
     <Component.Anchor v-if="'Anchor' in Component && !!slots.anchor" as-child>
-      <slot name="anchor" :close="close" />
+      <slot name="anchor" v-bind="{ open, close } as ComponentRootContext" />
     </Component.Anchor>
 
     <Component.Portal v-bind="portalProps">
       <Component.Content v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">
-        <slot name="content" :close="close" />
+        <slot name="content" v-bind="{ open, close } as ComponentRootContext" />
 
         <Component.Arrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </Component.Content>
