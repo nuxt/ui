@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import Accordion from '../../src/runtime/components/Accordion.vue'
-import type { AccordionProps, AccordionSlots } from '../../src/runtime/components/Accordion.vue'
+import type { AccordionItem, AccordionProps, AccordionSlots } from '../../src/runtime/components/Accordion.vue'
 import ComponentRender from '../component-render'
+import { axe } from 'vitest-axe'
 
 describe('Accordion', () => {
   const items = [{
@@ -52,7 +53,7 @@ describe('Accordion', () => {
     ['with ui', { props: { ...props, ui: { item: 'border-accented' } } }],
     // Slots
     ['with leading slot', { props: { ...props, modelValue: '1' }, slots: { leading: () => 'Leading slot' } }],
-    ['with default slot', { props: { ...props, modelValue: '1' }, slots: { default: () => 'Default slot' } }],
+    ['with default slot', { props: { ...props, modelValue: '1' }, slots: { default: ({ item }: { item: AccordionItem }) => `Default slot: ${item.label}` } }],
     ['with trailing slot', { props: { ...props, modelValue: '1' }, slots: { trailing: () => 'Trailing slot' } }],
     ['with content slot', { props: { ...props, modelValue: '1' }, slots: { content: () => 'Content slot' } }],
     ['with body slot', { props: { ...props, modelValue: '1' }, slots: { body: () => 'Body slot' } }],
@@ -61,5 +62,6 @@ describe('Accordion', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps, slots?: Partial<AccordionSlots & { custom: () => 'Custom slot' } & { 'custom-body': () => 'Custom body slot' }> }) => {
     const html = await ComponentRender(nameOrHtml, options, Accordion)
     expect(html).toMatchSnapshot()
+    expect(await axe(html)).toHaveNoViolations()
   })
 })
