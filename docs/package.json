@@ -22,6 +22,8 @@
     "@nuxt/ui": "workspace:*",
     "@nuxtjs/plausible": "^2.0.1",
     "@octokit/rest": "^22.0.0",
+    "@regle/core": "^1.9.5",
+    "@regle/rules": "^1.9.5",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "@vueuse/integrations": "^13.9.0",

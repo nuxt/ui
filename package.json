@@ -176,6 +176,8 @@
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7",
+    "@regle/core": "^1.9.5",
+    "@regle/rules": "^1.9.5",
     "joi": "^18.0.0",
     "superstruct": "^2.0.0",
     "typescript": "^5.6.3",
