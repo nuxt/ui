@@ -148,6 +148,52 @@ props:
 ---
 ::
 
+### Nested :badge{label="Soon"}
+
+Use the `nested` prop to control whether the Tree is rendered with nested structure or as a flat list. Defaults to `true`.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+external:
+  - items
+externalTypes:
+  - TreeItem[]
+props:
+  nested: false
+  items:
+    - label: 'app/'
+      defaultExpanded: true
+      children:
+        - label: 'composables/'
+          children:
+            - label: 'useAuth.ts'
+              icon: 'i-vscode-icons-file-type-typescript'
+            - label: 'useUser.ts'
+              icon: 'i-vscode-icons-file-type-typescript'
+        - label: 'components/'
+          defaultExpanded: true
+          children:
+            - label: 'Card.vue'
+              icon: 'i-vscode-icons-file-type-vue'
+            - label: 'Button.vue'
+              icon: 'i-vscode-icons-file-type-vue'
+    - label: 'app.vue'
+      icon: 'i-vscode-icons-file-type-vue'
+    - label: 'nuxt.config.ts'
+      icon: 'i-vscode-icons-file-type-nuxt'
+  class: 'w-60'
+---
+::
+
+::note{to="#with-virtualization"}
+When `nested` is `false`, all items are rendered at the same level with indentation to indicate hierarchy. This is useful for virtualization or drag and drop functionality.
+::
+
 ### Color
 
 Use the `color` prop to change the color of the Tree.
@@ -350,10 +396,6 @@ You can customize these icons globally in your `vite.config.ts` under `ui.icons.
 
 Use the `disabled` prop to prevent any user interaction with the Tree.
 
-::note
-You can also disable individual items using `item.disabled`.
-::
-
 ::component-code
 ---
 collapse: true
@@ -395,6 +437,10 @@ props:
       icon: 'i-vscode-icons-file-type-nuxt'
   class: 'w-60'
 ---
+::
+
+::note
+You can also disable individual items using `item.disabled`.
 ::
 
 ## Examples
@@ -459,6 +505,10 @@ This lets you select a parent item without expanding or collapsing its children.
 
 Use the `virtualize` prop to enable virtualization for large lists. Can be `true` or an object with virtualizer options like `estimateSize`, `overscan`, etc.
 
+::warning
+When virtualization is enabled, the tree structure is flattened, similar to setting the `nested` prop to `false`.
+::
+
 ::component-example
 ---
 prettier: true
@@ -466,10 +516,6 @@ name: 'tree-virtualize-example'
 props:
   class: 'w-60'
 ---
-::
-
-::note
-When virtualization is enabled, the tree structure is flattened (as if the `nested` prop is set to `false`).
 ::
 
 ### With custom slot
