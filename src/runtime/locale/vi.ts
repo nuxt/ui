@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Trước'
     },
     chatPrompt: {
-      placeholder: 'Nhập tin nhắn của bạn ở đây...'
+      placeholder: 'Nhập tin nhắn của bạn ở đây…'
     },
     chatPromptSubmit: {
       label: 'Gửi'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Đóng',
       noData: 'Không có dữ liệu',
       noMatch: 'Không có kết quả phù hợp',
-      placeholder: 'Nhập lệnh hoặc tìm kiếm...'
+      placeholder: 'Nhập lệnh hoặc tìm kiếm…'
     },
     contentSearch: {
       links: 'Liên kết',
       theme: 'Chủ đề'
     },
     contentSearchButton: {
-      label: 'Tìm kiếm...'
+      label: 'Tìm kiếm…'
     },
     contentToc: {
       title: 'Trong trang này'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Chủ đề'
     },
     dashboardSearchButton: {
-      label: 'Tìm kiếm...'
+      label: 'Tìm kiếm…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Thu gọn thanh bên',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Tạo "{label}"',
       noData: 'Không có dữ liệu',
       noMatch: 'Không có kết quả phù hợp',
-      search: 'Tìm kiếm...'
+      search: 'Tìm kiếm…'
     },
     slideover: {
       close: 'Đóng'

@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'წინა'
     },
     chatPrompt: {
-      placeholder: 'დაწერეთ თქვენი მესიჯი აქ...'
+      placeholder: 'დაწერეთ თქვენი მესიჯი აქ…'
     },
     chatPromptSubmit: {
       label: 'შეტყობინების გაგზავნა'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'დახურვა',
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
-      placeholder: 'ჩაწერეთ ბრძანება ან ძიება...'
+      placeholder: 'ჩაწერეთ ბრძანება ან ძიება…'
     },
     contentSearch: {
       links: 'ბმულები',
       theme: 'თემა'
     },
     contentSearchButton: {
-      label: 'ძიება...'
+      label: 'ძიება…'
     },
     contentToc: {
       title: 'ამ გვერდზე'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'თემა'
     },
     dashboardSearchButton: {
-      label: 'ძიება...'
+      label: 'ძიება…'
     },
     dashboardSidebarCollapse: {
       collapse: 'გვერდითი ზოლის ჩაკეცვა',
@@ -118,7 +118,7 @@ export default defineLocale<Messages>({
       create: 'დაამატე "{label}"', // "Create" translates as "შექმნა", but since we are simply adding new choice, creating sounds wrong, thus I chose to use "დაამატე", meaning "add".
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
-      search: 'ძიება...'
+      search: 'ძიება…'
     },
     slideover: {
       close: 'დახურვა'

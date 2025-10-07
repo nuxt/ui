@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Edellinen'
     },
     chatPrompt: {
-      placeholder: 'Kirjoita viestisi tähän...'
+      placeholder: 'Kirjoita viestisi tähän…'
     },
     chatPromptSubmit: {
       label: 'Lähetä'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Sulje',
       noData: 'Ei tietoja',
       noMatch: 'Ei vastaavia tietoja',
-      placeholder: 'Kirjoita komento tai hae...'
+      placeholder: 'Kirjoita komento tai hae…'
     },
     contentSearch: {
       links: 'Linkit',
       theme: 'Teema'
     },
     contentSearchButton: {
-      label: 'Hae...'
+      label: 'Hae…'
     },
     contentToc: {
       title: 'Tällä sivulla'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Teema'
     },
     dashboardSearchButton: {
-      label: 'Hae...'
+      label: 'Hae…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Supista sivupalkki',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Luo "{label}"',
       noData: 'Ei tietoja',
       noMatch: 'Ei vastaavia tietoja',
-      search: 'Hae...'
+      search: 'Hae…'
     },
     slideover: {
       close: 'Sulje'

@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Föregående'
     },
     chatPrompt: {
-      placeholder: 'Skriv ditt meddelande här...'
+      placeholder: 'Skriv ditt meddelande här…'
     },
     chatPromptSubmit: {
       label: 'Skicka'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Stäng',
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      placeholder: 'Skriv ett kommando eller sök...'
+      placeholder: 'Skriv ett kommando eller sök…'
     },
     contentSearch: {
       links: 'Länkar',
       theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Sök...'
+      label: 'Sök…'
     },
     contentToc: {
       title: 'På denna sida'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Sök...'
+      label: 'Sök…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Minimera sidofältet',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Skapa "{label}"',
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      search: 'Sök...'
+      search: 'Sök…'
     },
     slideover: {
       close: 'Stäng'

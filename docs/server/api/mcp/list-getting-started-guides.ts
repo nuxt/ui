@@ -1,5 +1,6 @@
+import { queryCollection } from '@nuxt/content/server'
+
 export default defineCachedEventHandler(async (event) => {
-  // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
   const pages = await queryCollection(event, 'docs')
     .where('path', 'LIKE', '/docs/getting-started/%')
     .where('extension', '=', 'md')
@@ -10,7 +11,7 @@ export default defineCachedEventHandler(async (event) => {
     title: page.title,
     description: page.description,
     path: page.path,
-    url: `https://ui4.nuxt.com${page.path}`,
+    url: `https://ui.nuxt.com${page.path}`,
     navigation: page.navigation
   })).sort((a, b) => a.path.localeCompare(b.path))
 }, {

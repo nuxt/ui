@@ -51,9 +51,11 @@ const items = computed(() => [
       }, 2000)
     }
   }, {
-    label: 'Clear Cookies and Refresh'
+    label: 'Clear Cookies and Refresh',
+    color: 'warning'
   }, {
-    label: 'Clear Cache and Refresh'
+    label: 'Clear Cache and Refresh',
+    color: 'error'
   }, {
     type: 'separator' as const
   }, {
@@ -86,35 +88,25 @@ const items = computed(() => [
   }]
 ])
 
-const itemsWithColor = computed(() => Object.keys(theme.variants.color).map(color => ({
-  color: (color as keyof typeof theme.variants.color),
-  icon: 'i-lucide-swatch-book',
-  label: color
-})))
-
 const sizes = Object.keys(theme.variants.size)
 
-const size = ref('md' as const)
+const attrs = reactive({
+  size: [theme.defaultVariants.size]
+})
 
 defineShortcuts(extractShortcuts(items.value))
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-8">
-    <div class="flex items-center gap-2">
-      <USelect v-model="size" :items="sizes" placeholder="Size" />
-    </div>
+  <Navbar>
+    <USelect v-model="attrs.size" :items="sizes" placeholder="Size" multiple />
+  </Navbar>
 
-    <UContextMenu :items="items" :ui="{ content: 'w-48' }" :size="size">
+  <Matrix v-slot="props" :attrs="attrs">
+    <UContextMenu :items="items" v-bind="props">
       <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
         Right click here
       </div>
     </UContextMenu>
-
-    <UContextMenu :items="itemsWithColor" :ui="{ content: 'w-48' }" :size="size">
-      <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
-        Color right click here
-      </div>
-    </UContextMenu>
-  </div>
+  </Matrix>
 </template>

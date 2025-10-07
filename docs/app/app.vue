@@ -24,7 +24,7 @@ useHead({
   ],
   link: [
     // { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    { rel: 'canonical', href: `https://ui4.nuxt.com${withoutTrailingSlash(route.path)}` }
+    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
   ],
   style: [
     { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 },
@@ -42,9 +42,7 @@ useServerSeoMeta({
 
 useFaviconFromTheme()
 
-const { frameworks } = useFrameworks()
 const { rootNavigation, navigationByFramework } = useNavigation(navigation)
-const { links } = useSearch()
 
 provide('navigation', rootNavigation)
 </script>
@@ -58,7 +56,7 @@ provide('navigation', rootNavigation)
 
     <div :class="[route.path.startsWith('/docs/') && 'root']">
       <template v-if="!route.path.startsWith('/examples')">
-        <!-- <Banner /> -->
+        <Banner />
 
         <Header />
       </template>
@@ -71,17 +69,7 @@ provide('navigation', rootNavigation)
         <Footer />
 
         <ClientOnly>
-          <LazyUContentSearch
-            :links="links"
-            :files="files"
-            :groups="[{
-              id: 'framework',
-              label: 'Framework',
-              items: frameworks
-            }]"
-            :navigation="navigationByFramework"
-            :fuse="{ resultLimit: 120 }"
-          />
+          <Search :files="files" :navigation="navigationByFramework" />
         </ClientOnly>
       </template>
     </div>
@@ -93,7 +81,7 @@ provide('navigation', rootNavigation)
 
 @media (min-width: 1024px) {
   .root {
-    --ui-header-height: 113px;
+    --ui-header-height: 112px;
   }
 }
 </style>

@@ -1,3 +1,4 @@
+import { queryCollection } from '@nuxt/content/server'
 import { stringify } from 'minimark/stringify'
 import { withLeadingSlash } from 'ufo'
 
@@ -8,7 +9,6 @@ export default eventHandler(async (event) => {
   }
 
   const path = withLeadingSlash(slug.replace('.md', ''))
-  // @ts-expect-error TODO: fix this
   const page = await queryCollection(event, 'docs').path(path).first()
   if (!page) {
     throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })

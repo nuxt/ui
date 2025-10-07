@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: '上一頁'
     },
     chatPrompt: {
-      placeholder: '在這裡輸入你的消息...'
+      placeholder: '在這裡輸入你的消息…'
     },
     chatPromptSubmit: {
       label: '發送'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: '關閉',
       noData: '沒有資料',
       noMatch: '沒有相符的資料',
-      placeholder: '輸入命令或搜尋...'
+      placeholder: '輸入命令或搜尋…'
     },
     contentSearch: {
       links: '連結',
       theme: '主題'
     },
     contentSearchButton: {
-      label: '搜尋...'
+      label: '搜尋…'
     },
     contentToc: {
       title: '本頁內容'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: '主題'
     },
     dashboardSearchButton: {
-      label: '搜尋...'
+      label: '搜尋…'
     },
     dashboardSidebarCollapse: {
       collapse: '收起側邊欄',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '建立「{label}」',
       noData: '沒有資料',
       noMatch: '沒有相符的資料',
-      search: '搜尋...'
+      search: '搜尋…'
     },
     slideover: {
       close: '關閉'

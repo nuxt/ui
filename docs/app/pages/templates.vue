@@ -11,19 +11,17 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs', {
-  headline: 'Community'
-})
+defineOgImageComponent('Docs')
 </script>
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <div v-if="page" class="relative">
-    <UPageHero :links="page.links" :ui="{ container: 'relative' }">
-      <LazyStarsBg />
-
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-
+  <div v-if="page">
+    <UPageHero
+      :ui="{
+        container: 'relative lg:py-32'
+      }"
+    >
       <template #title>
         <MDC :value="page.hero.title" unwrap="p" cache-key="pro-templates-hero-title" />
       </template>
@@ -35,10 +33,18 @@ defineOgImageComponent('Docs', {
       <template #links>
         <FrameworkTabs size="md" class="w-48" />
       </template>
+
+      <template #top>
+        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+      </template>
+
+      <LazyStarsBg />
+
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
 
     <UPageSection
-      v-for="(template, index) in page.templates"
+      v-for="(template, index) in page.items"
       :key="index"
       :title="template.title"
       :features="template.features"
@@ -54,6 +60,26 @@ defineOgImageComponent('Docs', {
     >
       <template #links>
         <UButton v-for="link of template.links" :key="link.label" color="neutral" variant="outline" v-bind="link" />
+
+        <UDropdownMenu
+          :items="[
+            ...template.deploy_links,
+            { label: 'More', icon: 'i-lucide-globe', to: 'https://nuxt.com/deploy', target: '_blank' }
+          ]"
+          :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-auto' }"
+          class="group"
+        >
+          <UButton
+            color="neutral"
+            variant="outline"
+            icon="i-lucide-cloud"
+            trailing-icon="i-lucide-chevron-down"
+            label="Deploy"
+            :ui="{
+              trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
+            }"
+          />
+        </UDropdownMenu>
       </template>
 
       <template #description>

@@ -5,12 +5,20 @@ hero:
   title: Showcase
   description: Discover our selection of projects built with Nuxt UI.
 items:
+  - name: CodeSnap
+    url: https://codesnap.dev/
   - name: Details
     url: https://details.team/
   - name: Directus Docs
     url: https://docs.directus.io/
+  - name: DefenceMore
+    url: https://defencemore.com/
   - name: Espace Asso by Benevolt
     url: https://asso.benevolt.fr/
+  - name: Eleven Spectacles
+    url: https://elevenspectacles.com/
+  - name: JSON DeepL
+    url: https://jsondeepl.com/
   - name: Juno.one
     url: https://www.juno.one/
   - name: Kassebil
@@ -27,22 +35,24 @@ items:
     url: https://pallyy.com/
   - name: Passionate People
     url: https://passionatepeople.io/
-  - name: Postal
-    url: https://postalserver.io/
-  - name: Prismos
-    url: https://prismos.co/
+  - name: Pingschools
+    url: https://pingschools.com/
   - name: Readyy
     url: https://readyy.app/
   - name: Sagematt
     url: https://siedlung-sagematt.ch/
   - name: Shelve
     url: https://shelve.cloud/
+  - name: Sigxel
+    url: https://sigxel.com/
   - name: Speaker Bot
     url: https://speaker.bot/
   - name: Super SaaS
     url: https://supersaas.dev/
   - name: The Companies API
     url: https://www.thecompaniesapi.com/
+  - name: TresJS
+    url: https://tresjs.org/
   - name: Thuprai
     url: https://thuprai.com/
   - name: Uneed

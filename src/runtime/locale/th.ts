@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'ย้อนกลับ'
     },
     chatPrompt: {
-      placeholder: 'กรุณาป้อนข้อความของคุณที่นี่...'
+      placeholder: 'กรุณาป้อนข้อความของคุณที่นี่…'
     },
     chatPromptSubmit: {
       label: 'ส่ง'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'ปิด',
       noData: 'ไม่มีข้อมูล',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      placeholder: 'พิมพ์คำสั่งหรือค้นหา...'
+      placeholder: 'พิมพ์คำสั่งหรือค้นหา…'
     },
     contentSearch: {
       links: 'ลิงก์',
       theme: 'ธีม'
     },
     contentSearchButton: {
-      label: 'ค้นหา...'
+      label: 'ค้นหา…'
     },
     contentToc: {
       title: 'ในหน้านี้'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'ธีม'
     },
     dashboardSearchButton: {
-      label: 'ค้นหา...'
+      label: 'ค้นหา…'
     },
     dashboardSidebarCollapse: {
       collapse: 'ย่อแถบด้านข้าง',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'สร้าง "{label}"',
       noData: 'ไม่มีข้อมูล',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      search: 'ค้นหา...'
+      search: 'ค้นหา…'
     },
     slideover: {
       close: 'ปิด'

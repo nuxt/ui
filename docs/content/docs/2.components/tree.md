@@ -58,7 +58,6 @@ Use the `items` prop as an array of objects with the following properties:
 - `trailingIcon?: string`{lang="ts-type"}
 - `defaultExpanded?: boolean`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
-- `value?: string`{lang="ts-type"}
 - `slot?: string`{lang="ts-type"}
 - `children?: TreeItem[]`{lang="ts-type"}
 - `onToggle?(e: Event): void`{lang="ts-type"}
@@ -67,7 +66,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `ui?: { item?: ClassNameValue, itemWithChildren?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingIcon?: ClassNameValue, listWithChildren?: ClassNameValue }`{lang="ts-type"}
 
 ::note
-A unique identifier is required for each item. The component will use the `value` prop as identifier, falling back to `label` if `value` is not provided. One of these must be provided for the component to work properly.
+A unique identifier is required for each item. The component will use the `label` prop as identifier if no `get-key` is provided. Ideally you should provide a `get-key` function prop to return a unique identifier. Alternatively, you can use the `labelKey` prop to specify which property to use as the unique identifier.
 ::
 
 ::component-code

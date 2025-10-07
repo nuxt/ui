@@ -71,6 +71,7 @@ async function copyPage() {
         size="sm"
         color="neutral"
         variant="outline"
+        aria-label="Open copy actions menu"
       />
     </UDropdownMenu>
   </UFieldGroup>

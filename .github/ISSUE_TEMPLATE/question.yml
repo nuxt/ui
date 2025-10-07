@@ -11,7 +11,7 @@ body:
     attributes:
       label: Package
       options:
-        - v4.0.0-alpha.x
+        - v4.x
         - v3.x
         - v2.x
       default: 1

@@ -3,23 +3,27 @@ import theme from '#build/ui/card'
 
 const variants = Object.keys(theme.variants.variant)
 
-const variant = ref(theme.defaultVariants.variant)
+const attrs = reactive({
+  variant: [theme.defaultVariants.variant]
+})
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
-    <USelect v-model="variant" :items="variants" />
+  <Navbar>
+    <USelect v-model="attrs.variant" :items="variants" multiple />
+  </Navbar>
 
-    <UCard :variant="variant" class="w-96">
+  <Matrix v-slot="props" :attrs="attrs">
+    <UCard v-bind="props" class="w-80">
       <template #header>
         <Placeholder class="h-8" />
       </template>
 
-      <Placeholder class="h-32" />
+      <Placeholder class="h-24" />
 
       <template #footer>
         <Placeholder class="h-8" />
       </template>
     </UCard>
-  </div>
+  </Matrix>
 </template>
