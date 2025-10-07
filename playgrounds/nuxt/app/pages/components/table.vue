@@ -23,7 +23,7 @@ type Payment = {
 
 const table = useTemplateRef('table')
 
-const virtualize = ref(true)
+const virtualize = ref(false)
 
 const data = ref<Payment[]>([{
   id: '4600',
@@ -404,6 +404,7 @@ onMounted(() => {
     <UContextMenu :items="contextmenuItems">
       <UTable
         ref="table"
+        :key="String(virtualize)"
         :columns="columns"
         :column-pinning="columnPinning"
         :row-selection="rowSelection"
