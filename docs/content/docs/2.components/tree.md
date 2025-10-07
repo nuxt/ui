@@ -503,7 +503,7 @@ This lets you select a parent item without expanding or collapsing its children.
 
 ### With virtualization :badge{label="Soon"}
 
-Use the `virtualize` prop to enable virtualization for large lists. Can be `true` or an object with virtualizer options like `estimateSize`, `overscan`, etc.
+Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 
 ::warning
 When virtualization is enabled, the tree structure is flattened, similar to setting the `nested` prop to `false`.

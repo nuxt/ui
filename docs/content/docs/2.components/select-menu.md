@@ -823,9 +823,9 @@ name: 'select-menu-filter-fields-example'
 
 ### With virtualization :badge{label="Soon"}
 
-Use the `virtualize` prop to enable virtualization for large lists. Can be `true` or an object with virtualizer options like `estimateSize`, `overscan`, etc.
+Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 
-::warning
+::warning{to="https://github.com/unovue/reka-ui/issues/1885" target="_blank"}
 When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
 ::
 
