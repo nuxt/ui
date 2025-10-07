@@ -1956,6 +1956,27 @@ exports[`Table > renders with ui correctly 1`] = `
 </div>"
 `;
 
+exports[`Table > renders with virtualize correctly 1`] = `
+"<div class="relative overflow-auto">
+  <div style="height: 325px;">
+    <table class="min-w-full">
+      <!--v-if-->
+      <thead class="relative">
+        <tr class="data-[selected=true]:bg-elevated/50">
+          <th data-pinned="false" scope="col" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+          <th data-pinned="false" scope="col" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+          <th data-pinned="false" scope="col" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+          <th data-pinned="false" scope="col" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        </tr>
+        <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      </thead>
+      <tbody class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary"></tbody>
+      <!--v-if-->
+    </table>
+  </div>
+</div>"
+`;
+
 exports[`Table > renders without data correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
