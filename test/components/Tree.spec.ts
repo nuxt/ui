@@ -45,6 +45,10 @@ describe('Tree', () => {
     ['with multiple and defaultValue', { props: { ...props, multiple: true, defaultValue: [items[0], items[1]] } }],
     // Disabled
     ['with disabled', { props: { ...props, disabled: true } }],
+    // Nested
+    ['without nested', { props: { ...props, nested: false } }],
+    // Virtualize
+    ['with virtualize', { props: { ...props, virtualize: true } }],
     // Item properties
     ['with defautExpanded item', { props: { items: [{ label: 'Default Expanded', defaultExpanded: true, children: items }] } }],
     ['with disabled item', { props: { items: [{ label: 'Disabled item', disabled: true, children: items }] } }],
