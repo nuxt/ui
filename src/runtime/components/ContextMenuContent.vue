@@ -106,7 +106,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
   </DefineItemTemplate>
 
   <ContextMenu.Portal v-bind="portalProps">
-    <component :is="sub ? ContextMenu.SubContent : ContextMenu.Content" :class="props.class" v-bind="contentProps">
+    <component :is="sub ? ContextMenu.SubContent : ContextMenu.Content" data-slot="content" :class="props.class" v-bind="contentProps">
       <slot name="content-top" />
 
       <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiOverride?.viewport })">

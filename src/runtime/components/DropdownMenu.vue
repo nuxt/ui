@@ -145,7 +145,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
     </DropdownMenuTrigger>
 
     <UDropdownMenuContent
-      data-slot="content"
       :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
       :ui="ui"
       :ui-override="props.ui"

@@ -115,7 +115,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
   </DefineItemTemplate>
 
   <DropdownMenu.Portal v-bind="portalProps">
-    <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" :class="props.class" v-bind="contentProps">
+    <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" data-slot="content" :class="props.class" v-bind="contentProps">
       <slot name="content-top" />
 
       <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiOverride?.viewport })">
