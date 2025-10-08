@@ -64,7 +64,7 @@ export interface PopoverSlots<M extends PopoverMode = PopoverMode> {
 }
 </script>
 
-<script setup lang="ts" generic="M extends PopoverMode = PopoverMode">
+<script setup lang="ts" generic="M extends PopoverMode">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { useForwardPropsEmits } from 'reka-ui'
