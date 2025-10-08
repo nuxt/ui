@@ -31,29 +31,34 @@ export function useSearch() {
     icon: 'i-simple-icons-figma',
     to: '/figma'
   }, {
-    icon: 'i-lucide-panels-top-left',
     label: 'Templates',
     description: 'Explore official templates built with Nuxt UI.',
+    icon: 'i-lucide-panels-top-left',
     to: '/templates'
   }, {
-    icon: 'i-lucide-presentation',
     label: 'Showcase',
     description: 'Explore some of the amazing projects built with Nuxt UI.',
+    icon: 'i-lucide-presentation',
     to: '/showcase'
   }, {
-    icon: 'i-lucide-newspaper',
-    label: 'Releases',
-    description: 'Stay up to date with the newest features, enhancements, and fixes for Nuxt UI.',
-    to: '/releases'
+    label: 'Community',
+    description: 'Explore the amazing projects built around Nuxt UI.',
+    icon: 'i-lucide-globe',
+    to: '/community'
   }, {
     label: 'Team',
     description: 'Meet the team building and maintaining Nuxt UI.',
     icon: 'i-lucide-users',
     to: '/team'
   }, {
+    label: 'Releases',
+    description: 'Stay up to date with the newest features, enhancements, and fixes for Nuxt UI.',
+    icon: 'i-lucide-newspaper',
+    to: '/releases'
+  }, {
     label: 'GitHub',
-    icon: 'i-simple-icons-github',
     description: 'Check out the Nuxt UI repository and follow development on GitHub.',
+    icon: 'i-simple-icons-github',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
   }])

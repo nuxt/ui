@@ -117,11 +117,12 @@ onMounted(async () => {
         Sarah
       </UBadge>
     </div>
+
     <UPageHero
       :links="page.hero.links"
       class="relative"
       :ui="{
-        container: 'relative !pb-0'
+        container: 'relative !pb-0 lg:py-32'
       }"
     >
       <template #title>
@@ -156,9 +157,8 @@ onMounted(async () => {
           </UButton>
         </div>
       </div>
-      <Motion as-child :initial="{ height: 0 }" :animate="{ height: 'auto' }" :transition="{ delay: 0.2, duration: 1 }">
-        <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-      </Motion>
+
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
     <UPageSection v-bind="page.features1" :ui="{ container: 'py-16 sm:py-16 lg:py-16', features: 'mt-0' }" class="border-y border-default" />
     <UPageCTA

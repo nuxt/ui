@@ -9,6 +9,9 @@ export function useFooter() {
     label: 'Showcase',
     to: '/showcase'
   }, {
+    label: 'Community',
+    to: '/community'
+  }, {
     label: 'Team',
     to: '/team'
   }]
