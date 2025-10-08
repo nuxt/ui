@@ -113,25 +113,21 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.popover || {
 }))
 
 const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
-type ComponentRootContext = {
-  open: boolean
-  close: M extends 'click' ? (() => void) : never
-}
 </script>
 
 <template>
   <Component.Root v-slot="{ open, close }: {open: boolean, close?: () => void}" v-bind="rootProps">
     <Component.Trigger v-if="!!slots.default || !!reference" as-child :reference="reference" :class="props.class">
-      <slot v-bind="{ open, close } as ComponentRootContext" />
+      <slot v-bind="{ open, close } as Parameters<typeof slots.default>[0]" />
     </Component.Trigger>
 
     <Component.Anchor v-if="'Anchor' in Component && !!slots.anchor" as-child>
-      <slot name="anchor" v-bind="{ open, close } as ComponentRootContext" />
+      <slot name="anchor" v-bind="{ close } as Parameters<typeof slots.anchor>[0]" />
     </Component.Anchor>
 
     <Component.Portal v-bind="portalProps">
       <Component.Content v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">
-        <slot name="content" v-bind="{ open, close } as ComponentRootContext" />
+        <slot name="content" v-bind="{ close } as Parameters<typeof slots.content>[0]" />
 
         <Component.Arrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </Component.Content>
