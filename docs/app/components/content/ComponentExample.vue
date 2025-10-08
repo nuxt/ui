@@ -3,6 +3,7 @@ import type { ChipProps } from '@nuxt/ui'
 import { camelCase } from 'scule'
 import { hash } from 'ohash'
 import { useElementSize } from '@vueuse/core'
+import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
 
 const props = withDefaults(defineProps<{
@@ -70,14 +71,18 @@ const slots = defineSlots<{
 }>()
 
 const el = ref<HTMLElement | null>(null)
+const previewRef = ref<HTMLElement | null>(null)
+const showSlots = ref(false)
 
+const route = useRoute()
 const { $prettier } = useNuxtApp()
 const { width } = useElementSize(el)
 
 const camelName = camelCase(props.name)
 
+const componentTheme = (theme as any)[camelCase(route.path.split('/').pop() ?? '')]
 const data = await fetchComponentExample(camelName)
-
+console.log(componentTheme)
 const componentProps = reactive({ ...(props.props || {}) })
 
 const code = computed(() => {
@@ -149,8 +154,19 @@ const urlSearchParams = computed(() => {
 </script>
 
 <template>
-  <div ref="el" class="my-5" :style="{ '--ui-header-height': '4rem' }">
+  <div ref="el" class="group/example relative my-5" :style="{ '--ui-header-height': '4rem' }">
     <template v-if="preview">
+      <UButton
+        v-if="componentTheme?.slots"
+        icon="i-lucide-box-select"
+        color="neutral"
+        variant="outline"
+        size="sm"
+        class="absolute -top-3 -right-3 opacity-0 group-hover/example:opacity-100 transition z-[2] rounded-full"
+        :ui="{ leadingIcon: showSlots ? 'text-primary' : '' }"
+        @click="showSlots = !showSlots"
+      />
+
       <div class="border border-muted relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
         <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-muted">
           <slot name="options" />
@@ -210,8 +226,12 @@ const urlSearchParams = computed(() => {
           class="relative w-full"
           :class="[props.class, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
         />
-        <div v-else class="flex justify-center p-4" :class="props.class">
+        <div v-else ref="previewRef" class="flex justify-center p-4 relative" :class="props.class">
           <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
+
+          <Transition name="fade" mode="out-in">
+            <LazySlotVisualization v-if="showSlots" :target="previewRef" />
+          </Transition>
         </div>
       </div>
     </template>
@@ -224,3 +244,15 @@ const urlSearchParams = computed(() => {
     </template>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

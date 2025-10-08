@@ -87,6 +87,8 @@ const { $prettier } = useNuxtApp()
 
 const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '')
 const name = `${props.prose ? 'Prose' : 'U'}${upperFirst(camelName)}`
+const previewRef = ref<HTMLElement | null>(null)
+const showSlots = ref(false)
 const component = defineAsyncComponent(() => {
   if (props.prefix) {
     return import(`#ui/components/${props.prefix}/${upperFirst(camelName)}.vue`)
@@ -125,6 +127,8 @@ function setComponentProp(name: string, value: any) {
 
 const componentTheme = ((props.prose ? theme.prose : theme) as any)[camelName]
 const meta = await fetchComponentMeta(name as any)
+
+console.log(componentTheme)
 
 function mapKeys(obj: object, parentKey = ''): any {
   return Object.entries(obj || {}).flatMap(([key, value]: [string, any]) => {
@@ -322,7 +326,18 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
 </script>
 
 <template>
-  <div class="my-5" :style="{ '--ui-header-height': '4rem' }">
+  <div class="group/code relative my-5" :style="{ '--ui-header-height': '4rem' }">
+    <UButton
+      v-if="componentTheme?.slots"
+      icon="i-lucide-box-select"
+      color="neutral"
+      variant="outline"
+      size="sm"
+      class="absolute -top-3 -right-3 opacity-0 group-hover/code:opacity-100 transition z-[2] rounded-full"
+      :ui="{ leadingIcon: showSlots ? 'text-primary' : '' }"
+      @click="showSlots = !showSlots"
+    />
+
     <div class="relative">
       <div v-if="options.length" class="flex flex-wrap items-center gap-2.5 border border-muted border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">
@@ -372,7 +387,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
         </template>
       </div>
 
-      <div v-if="component" class="flex justify-center border border-b-0 border-muted relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden }]">
+      <div v-if="component" ref="previewRef" class="flex justify-center border border-b-0 border-muted relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden }]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">
@@ -380,9 +395,25 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
             </slot>
           </template>
         </component>
+
+        <Transition name="fade" mode="out-in">
+          <LazySlotVisualization v-if="showSlots" :target="previewRef" />
+        </Transition>
       </div>
     </div>
 
     <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
