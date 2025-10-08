@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => ({
     back: 'p-0',
     content: 'relative overflow-hidden flex flex-col',
     footer: 'p-1',
-    viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
+    viewport: 'relative scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
     group: 'p-1 isolate',
     empty: 'py-6 text-center text-sm text-muted',
     label: 'p-1.5 text-xs font-semibold text-highlighted',
@@ -29,6 +29,14 @@ export default (options: Required<ModuleOptions>) => ({
     itemLabelSuffix: 'text-dimmed [&>mark]:text-inverted [&>mark]:bg-primary'
   },
   variants: {
+    virtualize: {
+      true: {
+        viewport: 'p-1 isolate'
+      },
+      false: {
+        viewport: 'divide-y divide-default'
+      }
+    },
     active: {
       true: {
         item: 'text-highlighted before:bg-elevated',
