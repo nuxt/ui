@@ -10,6 +10,7 @@ const open = ref(false)
 const searchTerm = ref('')
 // const searchTermDebounced = refDebounced(searchTerm, 200)
 const selected = ref([])
+const virtualize = ref(false)
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   // params: { q: searchTermDebounced },
@@ -152,6 +153,34 @@ defineShortcuts({
 </script>
 
 <template>
+  <Navbar>
+    <USwitch v-model="virtualize" label="Virtualize" />
+
+    <UModal v-model:open="open">
+      <UButton label="Open modal" color="neutral" variant="outline" />
+
+      <template #content>
+        <ReuseTemplate :close="true" @update:open="open = $event" />
+      </template>
+    </UModal>
+
+    <UDrawer should-scale-background>
+      <UButton label="Open drawer" color="neutral" variant="outline" />
+
+      <template #content>
+        <ReuseTemplate class="border-t border-default mt-4" />
+      </template>
+    </UDrawer>
+
+    <UPopover :content="{ side: 'right', align: 'start' }">
+      <UButton label="Select label (popover)" color="neutral" variant="outline" />
+
+      <template #content>
+        <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }" />
+      </template>
+    </UPopover>
+  </Navbar>
+
   <DefineTemplate>
     <UCommandPalette
       v-model="selected"
@@ -191,33 +220,16 @@ defineShortcuts({
     </UCommandPalette>
   </DefineTemplate>
 
-  <Navbar>
-    <UModal v-model:open="open">
-      <UButton label="Open modal" color="neutral" variant="outline" />
+  <UCard :ui="{ body: '!p-0' }" class="w-xl">
+    <UCommandPalette
+      v-if="virtualize"
+      virtualize
+      :fuse="{ resultLimit: 1000 }"
+      placeholder="Search virtualized items..."
+      :groups="[{ id: 'items', items: Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i, icon: 'i-lucide-file' })) }]"
+      class="sm:max-h-96"
+    />
 
-      <template #content>
-        <ReuseTemplate :close="true" @update:open="open = $event" />
-      </template>
-    </UModal>
-
-    <UDrawer should-scale-background>
-      <UButton label="Open drawer" color="neutral" variant="outline" />
-
-      <template #content>
-        <ReuseTemplate class="border-t border-default mt-4" />
-      </template>
-    </UDrawer>
-
-    <UPopover :content="{ side: 'right', align: 'start' }">
-      <UButton label="Select label (popover)" color="neutral" variant="outline" />
-
-      <template #content>
-        <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }" />
-      </template>
-    </UPopover>
-  </Navbar>
-
-  <UCard :ui="{ body: '!p-0' }">
-    <ReuseTemplate />
+    <ReuseTemplate v-else />
   </UCard>
 </template>
