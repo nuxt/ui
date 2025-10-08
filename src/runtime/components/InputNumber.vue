@@ -164,6 +164,7 @@ defineExpose({
     v-bind="rootProps"
     :id="id"
     :model-value="modelValue"
+    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :name="name"
     :disabled="disabled"
@@ -175,12 +176,13 @@ defineExpose({
       ref="inputRef"
       :placeholder="placeholder"
       :required="required"
+      data-slot="base"
       :class="ui.base({ class: props.ui?.base })"
       @blur="onBlur"
       @focus="emitFormFocus"
     />
 
-    <div :class="ui.increment({ class: props.ui?.increment })">
+    <div data-slot="increment" :class="ui.increment({ class: props.ui?.increment })">
       <NumberFieldIncrement as-child :disabled="disabled || incrementDisabled">
         <slot name="increment">
           <UButton
@@ -195,7 +197,7 @@ defineExpose({
       </NumberFieldIncrement>
     </div>
 
-    <div :class="ui.decrement({ class: props.ui?.decrement })">
+    <div data-slot="decrement" :class="ui.decrement({ class: props.ui?.decrement })">
       <NumberFieldDecrement as-child :disabled="disabled || decrementDisabled">
         <slot name="decrement">
           <UButton

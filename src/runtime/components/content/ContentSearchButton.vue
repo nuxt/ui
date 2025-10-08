@@ -104,6 +104,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
         } : {}),
         ...$attrs
       }"
+      data-slot="base"
       :class="ui.base({ class: [props.ui?.base, props.class] })"
       :ui="transformUI(ui, props.ui)"
       @click="open = true"
@@ -113,7 +114,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
       </template>
 
       <template v-if="!collapsed" #trailing>
-        <div :class="ui.trailing({ class: props.ui?.trailing })">
+        <div data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing">
             <template v-if="kbds?.length">
               <UKbd v-for="(kbd, index) in kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />

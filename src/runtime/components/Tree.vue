@@ -233,6 +233,7 @@ const defaultExpanded = computed(() =>
           type="button"
           :disabled="item.disabled || disabled"
           :data-expanded="isExpanded"
+          data-slot="link"
           :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })"
           :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : undefined"
         >
@@ -249,11 +250,13 @@ const defaultExpanded = computed(() =>
               <UIcon
                 v-if="item.icon"
                 :name="item.icon"
+                data-slot="linkLeadingIcon"
                 :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
               />
               <UIcon
                 v-else-if="item.children?.length"
                 :name="isExpanded ? (expandedIcon ?? appConfig.ui.icons.folderOpen) : (collapsedIcon ?? appConfig.ui.icons.folder)"
+                data-slot="linkLeadingIcon"
                 :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
               />
             </slot>
@@ -283,11 +286,13 @@ const defaultExpanded = computed(() =>
                 <UIcon
                   v-if="item.trailingIcon"
                   :name="item.trailingIcon"
+                  data-slot="linkTrailingIcon"
                   :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon] })"
                 />
                 <UIcon
                   v-else-if="item.children?.length"
                   :name="trailingIcon ?? appConfig.ui.icons.chevronDown"
+                  data-slot="linkTrailingIcon"
                   :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon] })"
                 />
               </slot>
@@ -299,6 +304,7 @@ const defaultExpanded = computed(() =>
       <ul
         v-if="nested && item.children?.length && isExpanded"
         role="group"
+        data-slot="listWithChildren"
         :class="ui.listWithChildren({ class: [props.ui?.listWithChildren, item.ui?.listWithChildren] })"
       >
         <ReuseTreeTemplate :items="item.children" :level="level + 1" />
@@ -315,6 +321,7 @@ const defaultExpanded = computed(() =>
     v-bind="{ ...rootProps, ...$attrs }"
     :model-value="modelValue"
     :default-value="defaultValue"
+    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :get-key="getItemKey"
     :default-expanded="defaultExpanded"

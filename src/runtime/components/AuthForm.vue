@@ -188,22 +188,22 @@ function omitFieldProps(field: F) {
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="(icon || !!slots.icon) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="(icon || !!slots.icon) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
-        <div v-if="icon || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+        <div v-if="icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading">
-            <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+            <UIcon v-if="icon" :name="icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           </slot>
         </div>
 
-        <div v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+        <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ title }}
           </slot>
         </div>
 
-        <div v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+        <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
             {{ description }}
           </slot>
@@ -211,8 +211,8 @@ function omitFieldProps(field: F) {
       </slot>
     </div>
 
-    <div :class="ui.body({ class: props.ui?.body })">
-      <div v-if="providers?.length || !!slots.providers" :class="ui.providers({ class: props.ui?.providers })">
+    <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
+      <div v-if="providers?.length || !!slots.providers" data-slot="providers" :class="ui.providers({ class: props.ui?.providers })">
         <slot name="providers">
           <UButton
             v-for="(provider, index) in providers"
@@ -228,6 +228,7 @@ function omitFieldProps(field: F) {
       <USeparator
         v-if="providers?.length && fields?.length"
         v-bind="typeof separator === 'object' ? separator : { label: separator }"
+        data-slot="separator"
         :class="ui.separator({ class: props.ui?.separator })"
       />
 
@@ -238,6 +239,7 @@ function omitFieldProps(field: F) {
         :schema="schema"
         :validate="validate"
         :validate-on="validateOn"
+        data-slot="form"
         :class="ui.form({ class: props.ui?.form })"
         :disabled="disabled"
         :loading-auto="loadingAuto"
@@ -252,12 +254,14 @@ function omitFieldProps(field: F) {
             <UCheckbox
               v-if="field.type === 'checkbox'"
               v-model="state[field.name]"
+              data-slot="checkbox"
               :class="ui.checkbox({ class: props.ui?.checkbox })"
               v-bind="(omitFieldProps(field) as AuthFormCheckboxField)"
             />
             <USelectMenu
               v-else-if="field.type === 'select'"
               v-model="state[field.name]"
+              data-slot="select"
               :class="ui.select({ class: props.ui?.select })"
               v-bind="(omitFieldProps(field) as AuthFormSelectField)"
             />
@@ -265,6 +269,7 @@ function omitFieldProps(field: F) {
               v-else-if="field.type === 'otp'"
               :id="field.name"
               v-model="state[field.name]"
+              data-slot="otp"
               :class="ui.otp({ class: props.ui?.otp })"
               v-bind="{
                 ...(omitFieldProps(field) as Omit<AuthFormOtpField, 'type'>),
@@ -275,6 +280,7 @@ function omitFieldProps(field: F) {
             <UInput
               v-else-if="field.type === 'password'"
               v-model="state[field.name]"
+              data-slot="password"
               :class="ui.password({ class: props.ui?.password })"
               v-bind="(omitFieldProps(field) as AuthFormInputField<'password'>)"
               :type="passwordVisibility ? 'text' : 'password'"
@@ -295,6 +301,7 @@ function omitFieldProps(field: F) {
             <UInput
               v-else
               v-model="state[field.name]"
+              data-slot="input"
               :class="ui.input({ class: props.ui?.input })"
               v-bind="(omitFieldProps(field) as AuthFormInputField)"
             />
@@ -332,7 +339,7 @@ function omitFieldProps(field: F) {
       </UForm>
     </div>
 
-    <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

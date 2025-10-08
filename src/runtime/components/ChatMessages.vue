@@ -260,6 +260,7 @@ onMounted(() => {
   <div
     ref="el"
     :data-status="status"
+    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
@@ -286,7 +287,7 @@ onMounted(() => {
     >
       <template #content>
         <slot name="indicator">
-          <div :class="ui.indicator({ class: props.ui?.indicator })">
+          <div data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
             <span />
             <span />
             <span />
@@ -296,7 +297,7 @@ onMounted(() => {
     </UChatMessage>
 
     <Presence :present="showAutoScroll">
-      <div :data-state="showAutoScroll ? 'open' : 'closed'" :class="ui.viewport({ class: props.ui?.viewport })">
+      <div :data-state="showAutoScroll ? 'open' : 'closed'" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
         <slot name="viewport" :on-click="onAutoScrollClick">
           <UButton
             v-if="autoScroll"

@@ -3,67 +3,67 @@
 exports[`PricingPlans > renders with as correctly 1`] = `
 "<section data-orientation="horizontal" class="flex flex-col gap-y-8 lg:grid lg:grid-cols-[repeat(var(--count),minmax(0,1fr))] gap-x-8" style="--count: 3;">
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
@@ -74,67 +74,67 @@ exports[`PricingPlans > renders with as correctly 1`] = `
 exports[`PricingPlans > renders with class correctly 1`] = `
 "<div data-orientation="horizontal" class="flex flex-col lg:grid lg:grid-cols-[repeat(var(--count),minmax(0,1fr))] gap-x-8 gap-y-12" style="--count: 3;">
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
@@ -145,67 +145,67 @@ exports[`PricingPlans > renders with class correctly 1`] = `
 exports[`PricingPlans > renders with compact and scale correctly 1`] = `
 "<div data-orientation="horizontal" class="flex flex-col gap-y-8 lg:grid lg:grid-cols-[repeat(var(--count),minmax(0,1fr))]" style="--count: 3;">
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
@@ -216,67 +216,67 @@ exports[`PricingPlans > renders with compact and scale correctly 1`] = `
 exports[`PricingPlans > renders with compact correctly 1`] = `
 "<div data-orientation="horizontal" class="flex flex-col gap-y-8 lg:grid lg:grid-cols-[repeat(var(--count),minmax(0,1fr))]" style="--count: 3;">
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
@@ -289,23 +289,23 @@ exports[`PricingPlans > renders with default slot correctly 1`] = `"<div data-or
 exports[`PricingPlans > renders with one plan correctly 1`] = `
 "<div data-orientation="horizontal" class="flex flex-col gap-y-8 lg:grid lg:grid-cols-[repeat(var(--count),minmax(0,1fr))] gap-x-8" style="--count: 1;">
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
@@ -316,26 +316,26 @@ exports[`PricingPlans > renders with one plan correctly 1`] = `
 exports[`PricingPlans > renders with orientation vertical correctly 1`] = `
 "<div data-orientation="vertical" class="flex flex-col gap-y-8 gap-x-8" style="--count: 3;">
   <!---->
-  <div data-orientation="horizontal" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-default ring ring-default">
+  <div data-orientation="horizontal" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+    <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
       <!--v-if-->
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0 lg:grid lg:grid-cols-2 lg:mt-12">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0 lg:grid lg:grid-cols-2 lg:mt-12">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
-    <div class="flex flex-col gap-6 items-center lg:justify-center lg:items-center lg:p-6 lg:max-w-xs lg:w-full lg:mx-auto">
+    <div data-slot="footer" class="flex flex-col gap-6 items-center lg:justify-center lg:items-center lg:p-6 lg:max-w-xs lg:w-full lg:mx-auto">
       <!--v-if-->
-      <div class="flex items-center gap-1">
+      <div data-slot="priceWrapper" class="flex items-center gap-1">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -343,26 +343,26 @@ exports[`PricingPlans > renders with orientation vertical correctly 1`] = `
     </div>
   </div>
   <!---->
-  <div data-orientation="horizontal" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-default ring ring-default">
+  <div data-orientation="horizontal" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+    <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
       <!--v-if-->
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0 lg:grid lg:grid-cols-2 lg:mt-12">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0 lg:grid lg:grid-cols-2 lg:mt-12">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
-    <div class="flex flex-col gap-6 items-center lg:justify-center lg:items-center lg:p-6 lg:max-w-xs lg:w-full lg:mx-auto">
+    <div data-slot="footer" class="flex flex-col gap-6 items-center lg:justify-center lg:items-center lg:p-6 lg:max-w-xs lg:w-full lg:mx-auto">
       <!--v-if-->
-      <div class="flex items-center gap-1">
+      <div data-slot="priceWrapper" class="flex items-center gap-1">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -370,26 +370,26 @@ exports[`PricingPlans > renders with orientation vertical correctly 1`] = `
     </div>
   </div>
   <!---->
-  <div data-orientation="horizontal" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-default ring ring-default">
+  <div data-orientation="horizontal" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+    <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
       <!--v-if-->
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0 lg:grid lg:grid-cols-2 lg:mt-12">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0 lg:grid lg:grid-cols-2 lg:mt-12">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
-    <div class="flex flex-col gap-6 items-center lg:justify-center lg:items-center lg:p-6 lg:max-w-xs lg:w-full lg:mx-auto">
+    <div data-slot="footer" class="flex flex-col gap-6 items-center lg:justify-center lg:items-center lg:p-6 lg:max-w-xs lg:w-full lg:mx-auto">
       <!--v-if-->
-      <div class="flex items-center gap-1">
+      <div data-slot="priceWrapper" class="flex items-center gap-1">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -402,67 +402,67 @@ exports[`PricingPlans > renders with orientation vertical correctly 1`] = `
 exports[`PricingPlans > renders with scale correctly 1`] = `
 "<div data-orientation="horizontal" class="flex flex-col gap-y-8 lg:grid lg:grid-cols-[repeat(var(--count),minmax(0,1fr))] gap-x-8 lg:gap-x-13" style="--count: 3;">
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
@@ -473,67 +473,67 @@ exports[`PricingPlans > renders with scale correctly 1`] = `
 exports[`PricingPlans > renders with three plans correctly 1`] = `
 "<div data-orientation="horizontal" class="flex flex-col gap-y-8 lg:grid lg:grid-cols-[repeat(var(--count),minmax(0,1fr))] gap-x-8" style="--count: 3;">
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$30</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
@@ -544,45 +544,45 @@ exports[`PricingPlans > renders with three plans correctly 1`] = `
 exports[`PricingPlans > renders with two plans correctly 1`] = `
 "<div data-orientation="horizontal" class="flex flex-col gap-y-8 lg:grid lg:grid-cols-[repeat(var(--count),minmax(0,1fr))] gap-x-8" style="--count: 2;">
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$10</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->
   </div>
   <!---->
-  <div data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+  <div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
     <!--v-if-->
-    <div class="flex flex-col min-w-0">
-      <div class="flex items-center gap-3">
-        <div class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+    <div data-slot="body" class="flex flex-col min-w-0">
+      <div data-slot="titleWrapper" class="flex items-center gap-3">
+        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="flex items-center gap-1 mt-6">
+      <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
         <!--v-if-->
-        <div class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
+        <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$20</div>
         <!--v-if-->
       </div>
-      <ul class="flex flex-col gap-3 flex-1 mt-6 grow-0">
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 1</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 2</span></li>
-        <li class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true"></span><span class="text-muted text-sm truncate">Feature 3</span></li>
+      <ul data-slot="features" class="flex flex-col gap-3 flex-1 mt-6 grow-0">
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 1</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 2</span></li>
+        <li data-slot="feature" class="flex items-center gap-2 min-w-0"><span class="iconify i-lucide:circle-check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="featureIcon"></span><span data-slot="featureTitle" class="text-muted text-sm truncate">Feature 3</span></li>
       </ul>
     </div>
     <!--v-if-->

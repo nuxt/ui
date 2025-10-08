@@ -46,12 +46,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.collapsible 
 </script>
 
 <template>
-  <CollapsibleRoot v-slot="{ open }" v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <CollapsibleRoot v-slot="{ open }" v-bind="rootProps" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <CollapsibleTrigger v-if="!!slots.default" as-child>
       <slot :open="open" />
     </CollapsibleTrigger>
 
-    <CollapsibleContent :class="ui.content({ class: props.ui?.content })">
+    <CollapsibleContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
       <slot name="content" />
     </CollapsibleContent>
   </CollapsibleRoot>

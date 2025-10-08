@@ -147,6 +147,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPromptSu
   <UButton
     :aria-label="t('chatPromptSubmit.label')"
     v-bind="buttonProps"
+    data-slot="base"
     :class="ui.base({ class: [props.ui?.base, props.class] })"
     :ui="transformUI(ui, props.ui)"
   >
