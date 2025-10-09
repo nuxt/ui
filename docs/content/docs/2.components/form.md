@@ -9,7 +9,7 @@ links:
 
 ## Usage
 
-Use the Form component to validate form data using any validation library supporting [Standard Schema](https://github.com/standard-schema/standard-schema) such as [Valibot](https://github.com/fabian-hiller/valibot), [Zod](https://github.com/colinhacks/zod), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi) or [Superstruct](https://github.com/ianstormtaylor/superstruct) or your own validation logic.
+Use the Form component to validate form data using any validation library supporting [Standard Schema](https://github.com/standard-schema/standard-schema) such as [Valibot](https://github.com/fabian-hiller/valibot), [Zod](https://github.com/colinhacks/zod), [Regle](https://github.com/victorgarciaesgi/regle), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi) or [Superstruct](https://github.com/ianstormtaylor/superstruct) or your own validation logic.
 
 It works with the [FormField](/docs/components/form-field) component to display error messages around form elements automatically.
 
@@ -36,6 +36,14 @@ It requires two props:
   ::component-example{label="Zod"}
   ---
   name: 'form-example-zod'
+  props:
+    class: 'w-60'
+  ---
+  ::
+
+  ::component-example{label="Regle"}
+  ---
+  name: 'form-example-regle'
   props:
     class: 'w-60'
   ---

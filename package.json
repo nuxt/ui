@@ -124,6 +124,7 @@
     "@tailwindcss/postcss": "^4.1.14",
     "@tailwindcss/vite": "^4.1.14",
     "@tanstack/vue-table": "^8.21.3",
+    "@tanstack/vue-virtual": "^3.13.12",
     "@unhead/vue": "^2.0.17",
     "@vueuse/core": "^13.9.0",
     "@vueuse/integrations": "^13.9.0",

@@ -237,6 +237,10 @@ name: 'popover-anchor-slot-example'
 
 :component-slots
 
+::note
+The `close` function is only available when `mode` is set to `click` because Reka UI exposes this for [`Popover`](https://reka-ui.com/docs/components/popover#close-using-slot-props) but not for [`HoverCard`](https://reka-ui.com/docs/components/hover-card).
+::
+
 ### Emits
 
 :component-emits
