@@ -11,6 +11,7 @@ type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 
 export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
+  description?: string
   /**
    * @IconifyIcon
    */
@@ -34,7 +35,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   onSelect?(e: Event): void
   onUpdateChecked?(checked: boolean): void
   class?: any
-  ui?: Pick<DropdownMenu['slots'], 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLabel' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>
+  ui?: Pick<DropdownMenu['slots'], 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemContent' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>
   [key: string]: any
 }
 
@@ -83,6 +84,11 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>
+  /**
+   * The key used to get the description from the item.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>
   disabled?: boolean
   class?: any
   ui?: DropdownMenu['slots']
@@ -100,10 +106,11 @@ export type DropdownMenuSlots<
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
+  'item-description': SlotProps<T>
   'item-trailing': SlotProps<T>
   'content-top': (props?: {}) => any
   'content-bottom': (props?: {}) => any
-} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
+} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'description' | 'trailing', { active?: boolean, index: number }>
 
 </script>
 
@@ -121,7 +128,8 @@ const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
   portal: true,
   modal: true,
   externalIcon: true,
-  labelKey: 'label'
+  labelKey: 'label',
+  descriptionKey: 'description'
 })
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
@@ -152,6 +160,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
       :items="items"
       :portal="portal"
       :label-key="(labelKey as keyof NestedItem<T>)"
+      :description-key="(descriptionKey as keyof NestedItem<T>)"
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"

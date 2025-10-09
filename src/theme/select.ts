@@ -25,7 +25,9 @@ export default (options: Required<ModuleOptions>) => {
       itemLeadingChipSize: '',
       itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
       itemTrailingIcon: 'shrink-0',
-      itemLabel: 'truncate'
+      itemContent: 'flex-1 flex flex-col truncate',
+      itemLabel: 'truncate',
+      itemDescription: 'truncate text-muted'
     },
     variants: {
       ...fieldGroupVariant,
@@ -37,6 +39,7 @@ export default (options: Required<ModuleOptions>) => {
           itemLeadingAvatarSize: '3xs',
           itemLeadingChip: 'size-4',
           itemLeadingChipSize: 'sm',
+          itemDescription: 'text-[10px]/3',
           itemTrailingIcon: 'size-4',
           empty: 'p-1 text-xs'
         },
@@ -47,6 +50,7 @@ export default (options: Required<ModuleOptions>) => {
           itemLeadingAvatarSize: '3xs',
           itemLeadingChip: 'size-4',
           itemLeadingChipSize: 'sm',
+          itemDescription: 'text-[10px]/3',
           itemTrailingIcon: 'size-4',
           empty: 'p-1.5 text-xs'
         },
@@ -57,6 +61,7 @@ export default (options: Required<ModuleOptions>) => {
           itemLeadingAvatarSize: '2xs',
           itemLeadingChip: 'size-5',
           itemLeadingChipSize: 'md',
+          itemDescription: 'text-xs',
           itemTrailingIcon: 'size-5',
           empty: 'p-1.5 text-sm'
         },
@@ -67,6 +72,7 @@ export default (options: Required<ModuleOptions>) => {
           itemLeadingAvatarSize: '2xs',
           itemLeadingChip: 'size-5',
           itemLeadingChipSize: 'md',
+          itemDescription: 'text-xs',
           itemTrailingIcon: 'size-5',
           empty: 'p-2 text-sm'
         },
@@ -77,6 +83,7 @@ export default (options: Required<ModuleOptions>) => {
           itemLeadingAvatarSize: 'xs',
           itemLeadingChip: 'size-6',
           itemLeadingChipSize: 'lg',
+          itemDescription: 'text-sm',
           itemTrailingIcon: 'size-6',
           empty: 'p-2 text-base'
         }

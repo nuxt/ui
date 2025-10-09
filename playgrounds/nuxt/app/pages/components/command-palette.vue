@@ -76,6 +76,14 @@ const groups = computed(() => [{
     },
     kbds: ['meta', 'L']
   }, {
+    label: 'Add label',
+    description: 'Add a label to the current item.',
+    icon: 'i-lucide-tag',
+    onSelect(e: Event) {
+      e.preventDefault()
+    },
+    kbds: ['meta', 'L']
+  }, {
     label: 'More actions',
     placeholder: 'Search actions...',
     children: [{

@@ -12,6 +12,7 @@ type SelectMenu = ComponentConfig<typeof theme, AppConfig, 'selectMenu'>
 export type SelectMenuValue = AcceptableValue
 export type SelectMenuItem = SelectMenuValue | {
   label?: string
+  description?: string
   /**
    * @IconifyIcon
    */
@@ -26,7 +27,7 @@ export type SelectMenuItem = SelectMenuValue | {
   disabled?: boolean
   onSelect?(e?: Event): void
   class?: any
-  ui?: Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
+  ui?: Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemContent' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
 
@@ -109,6 +110,11 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>
+  /**
+   * When `items` is an array of objects, select the field to use as the description.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>
   items?: T
   /** The value of the SelectMenu when initially rendered. Use when you do not need to control the state of the SelectMenu. */
   defaultValue?: GetModelValue<T, VK, M>
@@ -177,6 +183,7 @@ export interface SelectMenuSlots<
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
+  'item-description': SlotProps<T>
   'item-trailing': SlotProps<T>
   'content-top': (props?: {}) => any
   'content-bottom': (props?: {}) => any
@@ -208,6 +215,7 @@ const props = withDefaults(defineProps<SelectMenuProps<T, VK, M>>(), {
   portal: true,
   searchInput: true,
   labelKey: 'label',
+  descriptionKey: 'description',
   resetSearchTermOnBlur: true,
   resetSearchTermOnSelect: true,
   autofocusDelay: 0,
@@ -465,10 +473,18 @@ defineExpose({
           />
         </slot>
 
-        <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
-          <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
-            {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
-          </slot>
+        <span :class="ui.itemContent({ class: [props.ui?.itemContent, isSelectItem(item) && item.ui?.itemContent] })">
+          <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
+            <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
+              {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
+            </slot>
+          </span>
+
+          <span v-if="isSelectItem(item) && get(item, props.descriptionKey as string)" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
+            <slot name="item-description" :item="(item as NestedItem<T>)" :index="index">
+              {{ get(item, props.descriptionKey as string) }}
+            </slot>
+          </span>
         </span>
 
         <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
