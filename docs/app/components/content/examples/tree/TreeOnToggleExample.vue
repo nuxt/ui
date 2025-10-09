@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { TreeItemToggleEvent } from 'reka-ui'
 import type { TreeItem } from '@nuxt/ui'
 
 const items: TreeItem[] = [
@@ -29,8 +30,14 @@ const items: TreeItem[] = [
   { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
   { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
 ]
+
+function onToggle(event: TreeItemToggleEvent<TreeItem>) {
+  if (event.detail.originalEvent.type === 'keydown') {
+    event.preventDefault()
+  }
+}
 </script>
 
 <template>
-  <UTree :items="items" />
+  <UTree :items="items" @toggle="onToggle" />
 </template>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { TreeItemSelectEvent } from 'reka-ui'
 import type { TreeItem } from '@nuxt/ui'
 
 const items: TreeItem[] = [
@@ -29,8 +30,14 @@ const items: TreeItem[] = [
   { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
   { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
 ]
+
+function onSelect(event: TreeItemSelectEvent<TreeItem>) {
+  if (event.detail.originalEvent.type === 'click') {
+    event.preventDefault()
+  }
+}
 </script>
 
 <template>
-  <UTree :items="items" />
+  <UTree :items="items" @select="onSelect" />
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import type { TreeItemSelectEvent } from 'reka-ui'
 import type { TreeItem } from '@nuxt/ui'
-import type { TreeItemSelectEvent, TreeItemToggleEvent } from 'reka-ui'
 
 const items: TreeItem[] = [
   {
@@ -35,12 +35,6 @@ function onSelect(event: TreeItemSelectEvent<TreeItem>) {
     event.preventDefault()
   }
 }
-
-function onToggle(event: TreeItemToggleEvent<TreeItem>) {
-  if (event.detail.originalEvent.type === 'keydown') {
-    event.preventDefault()
-  }
-}
 </script>
 
 <template>
@@ -51,11 +45,11 @@ function onToggle(event: TreeItemToggleEvent<TreeItem>) {
     propagate-select
     bubble-select
     @select="onSelect"
-    @toggle="onToggle"
   >
     <template #item-leading="{ selected, indeterminate, handleSelect }">
       <UCheckbox
         :model-value="indeterminate ? 'indeterminate' : selected"
+        tabindex="-1"
         @change="handleSelect"
         @click.stop
       />

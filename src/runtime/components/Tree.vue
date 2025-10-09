@@ -252,8 +252,7 @@ const defaultExpanded = computed(() =>
           v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
           :item="(item as Extract<T[number], { slot: string; }>)"
         >
-          <button
-            type="button"
+          <div
             :disabled="item.disabled || disabled"
             :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })"
             :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : undefined"
@@ -316,7 +315,7 @@ const defaultExpanded = computed(() =>
                 </slot>
               </span>
             </slot>
-          </button>
+          </div>
         </slot>
 
         <ul

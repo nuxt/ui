@@ -458,7 +458,7 @@ props:
 ---
 ::
 
-If you want to prevent an item from being selected, you can use the `item.onSelect()`{lang="ts-type"} property:
+If you want to prevent an item from being selected, you can use the `item.onSelect()`{lang="ts-type"} property or the global `select` event:
 
 ::component-example
 ---
@@ -486,7 +486,7 @@ props:
 ---
 ::
 
-If you want to prevent an item from being expanded, you can use the `item.onToggle()`{lang="ts-type"} property:
+If you want to prevent an item from being expanded, you can use the `item.onToggle()`{lang="ts-type"} property or the global `toggle` event:
 
 ::component-example
 ---
@@ -503,7 +503,7 @@ This lets you select a parent item without expanding or collapsing its children.
 
 ### With checkbox in items
 
-You can use the `item-leading` slot to add a [Checkbox](/docs/components/checkbox) to the item and the `onSelect` and `onToggle` events to control the checked state of the item.
+You can use the `item-leading` slot to add a [Checkbox](/docs/components/checkbox) to the items. Use the `multiple`, `propagate-select` and `bubble-select` props to enable multi-selection with parent-child relationship and the `select` and `toggle` events to control the selected and expanded state of the items.
 
 ::component-example
 ---
