@@ -15,6 +15,10 @@ appConfig.toaster = reactive({
 
 useHead({
   title: 'Nuxt UI - Playground',
+  meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'description', content: 'Explore and test all Nuxt UI components in an interactive environment' }
+  ],
   htmlAttrs: {
     dir: computed(() => appConfig.dir as 'ltr' | 'rtl')
   }
@@ -30,7 +34,7 @@ provide('components', components)
     <UDashboardGroup unit="rem" storage="local">
       <UDashboardSidebar class="bg-elevated/25">
         <template #header>
-          <RouterLink to="/" class="text-highlighted">
+          <RouterLink to="/" class="text-highlighted" aria-label="Home">
             <Logo class="h-5 w-auto" />
           </RouterLink>
 
