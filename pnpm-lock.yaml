@@ -59,6 +59,9 @@ importers:
       '@tanstack/vue-table':
         specifier: ^8.21.3
         version: 8.21.3(vue@3.5.22(typescript@5.8.3))
+      '@tanstack/vue-virtual':
+        specifier: ^3.13.12
+        version: 3.13.12(vue@3.5.22(typescript@5.8.3))
       '@unhead/vue':
         specifier: ^2.0.17
         version: 2.0.17(vue@3.5.22(typescript@5.8.3))

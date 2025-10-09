@@ -105,7 +105,16 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean 
 
 export type TreeEmits<T extends TreeItem[] = TreeItem[], M extends boolean = false> = TreeRootEmits<T[number], M>
 
-type SlotProps<T extends TreeItem> = (props: { item: T, index: number, level: number, expanded: boolean, selected: boolean }) => any
+type SlotProps<T extends TreeItem> = (props: {
+  item: T
+  index: number
+  level: number
+  expanded: boolean
+  selected: boolean
+  indeterminate: boolean | undefined
+  handleSelect: () => void
+  handleToggle: () => void
+}) => any
 
 export type TreeSlots<
   T extends TreeItem[] = TreeItem[]
@@ -115,7 +124,15 @@ export type TreeSlots<
   'item-leading': SlotProps<T[number]>
   'item-label': SlotProps<T[number]>
   'item-trailing': SlotProps<T[number]>
-} & DynamicSlots<T[number], undefined, { index: number, level: number, expanded: boolean, selected: boolean }>
+} & DynamicSlots<T[number], undefined, {
+  index: number
+  level: number
+  expanded: boolean
+  selected: boolean
+  indeterminate: boolean | undefined
+  handleSelect: () => void
+  handleToggle: () => void
+}>
 
 </script>
 
@@ -217,7 +234,7 @@ const defaultExpanded = computed(() =>
 <template>
   <DefineItemTemplate v-slot="{ item, index, level }">
     <TreeItem
-      v-slot="{ isExpanded, isSelected }"
+      v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
       :level="level"
       :value="item"
       :class="!!nested && level > 1 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
@@ -226,7 +243,7 @@ const defaultExpanded = computed(() =>
     >
       <slot
         :name="((item.slot ? `${item.slot}-wrapper` : 'item-wrapper') as keyof TreeSlots<T>)"
-        v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+        v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
         :item="(item as Extract<T[number], { slot: string; }>)"
       >
         <button
@@ -238,12 +255,12 @@ const defaultExpanded = computed(() =>
         >
           <slot
             :name="((item.slot || 'item') as keyof TreeSlots<T>)"
-            v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+            v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
             :item="(item as Extract<T[number], { slot: string; }>)"
           >
             <slot
               :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof TreeSlots<T>)"
-              v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+              v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
               :item="(item as Extract<T[number], { slot: string; }>)"
             >
               <UIcon
@@ -264,7 +281,7 @@ const defaultExpanded = computed(() =>
             >
               <slot
                 :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>)"
-                v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+                v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
                 :item="(item as Extract<T[number], { slot: string; }>)"
               >
                 {{ getItemLabel(item) }}
@@ -277,7 +294,7 @@ const defaultExpanded = computed(() =>
             >
               <slot
                 :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof TreeSlots<T>)"
-                v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+                v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
                 :item="(item as Extract<T[number], { slot: string; }>)"
               >
                 <UIcon
