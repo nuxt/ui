@@ -1,7 +1,6 @@
-import type { NuxtUIOptions } from '../unplugin'
-
-import { getTemplates } from '../templates'
 import type { UnpluginOptions } from 'unplugin'
+import type { NuxtUIOptions } from '../unplugin'
+import { getTemplates } from '../templates'
 
 /**
  * This plugin is responsible for getting the generated virtual templates and

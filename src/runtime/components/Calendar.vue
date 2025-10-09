@@ -3,8 +3,8 @@ import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootProps, Rang
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/calendar'
-import type { ButtonProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { ButtonProps, IconProps } from '../types'
+import type { ComponentConfig } from '../types/tv'
 
 type Calendar = ComponentConfig<typeof theme, AppConfig, 'calendar'>
 
@@ -33,7 +33,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * @defaultValue appConfig.ui.icons.chevronDoubleRight
    * @IconifyIcon
    */
-  nextYearIcon?: string
+  nextYearIcon?: IconProps['name']
   /**
    * Configure the next year button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -44,7 +44,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * @defaultValue appConfig.ui.icons.chevronRight
    * @IconifyIcon
    */
-  nextMonthIcon?: string
+  nextMonthIcon?: IconProps['name']
   /**
    * Configure the next month button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -55,7 +55,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * @defaultValue appConfig.ui.icons.chevronDoubleLeft
    * @IconifyIcon
    */
-  prevYearIcon?: string
+  prevYearIcon?: IconProps['name']
   /**
    * Configure the prev year button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -66,7 +66,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * @defaultValue appConfig.ui.icons.chevronLeft
    * @IconifyIcon
    */
-  prevMonthIcon?: string
+  prevMonthIcon?: IconProps['name']
   /**
    * Configure the prev month button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -76,6 +76,10 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * @defaultValue 'primary'
    */
   color?: Calendar['variants']['color']
+  /**
+   * @defaultValue 'solid'
+   */
+  variant?: Calendar['variants']['variant']
   /**
    * @defaultValue 'md'
    */
@@ -126,7 +130,7 @@ defineSlots<CalendarSlots>()
 const { code: locale, dir, t } = useLocale()
 const appConfig = useAppConfig() as Calendar['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
 
 const nextYearIcon = computed(() => props.nextYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
 const nextMonthIcon = computed(() => props.nextMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
@@ -135,6 +139,7 @@ const prevMonthIcon = computed(() => props.prevMonthIcon || (dir.value === 'rtl'
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })({
   color: props.color,
+  variant: props.variant,
   size: props.size
 }))
 

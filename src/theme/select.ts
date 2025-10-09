@@ -1,7 +1,7 @@
 import { defuFn } from 'defu'
 import type { ModuleOptions } from '../module'
 import input from './input'
-import { buttonGroupVariant } from './button-group'
+import { fieldGroupVariant } from './field-group'
 
 export default (options: Required<ModuleOptions>) => {
   return defuFn({
@@ -28,7 +28,7 @@ export default (options: Required<ModuleOptions>) => {
       itemLabel: 'truncate'
     },
     variants: {
-      ...buttonGroupVariant,
+      ...fieldGroupVariant,
       size: {
         xs: {
           label: 'p-1 text-[10px]/3 gap-1',
@@ -81,6 +81,15 @@ export default (options: Required<ModuleOptions>) => {
           empty: 'p-2 text-base'
         }
       }
-    }
+    },
+    compoundVariants: (prev: Record<string, any>[]) => prev.map(item => ({
+      ...item,
+      class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
+    }))
   }, input(options))
+}
+
+function replaceFocus(str: string): string {
+  return str
+    .replace(/focus-visible:/g, 'focus:')
 }

@@ -3,8 +3,9 @@
 import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, DropdownMenuContentEmits as RekaDropdownMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/dropdown-menu'
-import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots, DynamicSlots, MergeTypes } from '../types'
-import type { ArrayOrNested, NestedItem, ComponentConfig } from '../types/utils'
+import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots, IconProps } from '../types'
+import type { ArrayOrNested, GetItemKeys, NestedItem, DynamicSlots, MergeTypes } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 
@@ -12,19 +13,19 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
   items?: T
   portal?: boolean | string | HTMLElement
   sub?: boolean
-  labelKey: keyof NestedItem<T>
+  labelKey: GetItemKeys<T>
   /**
    * @IconifyIcon
    */
-  checkedIcon?: string
+  checkedIcon?: IconProps['name']
   /**
    * @IconifyIcon
    */
-  loadingIcon?: string
+  loadingIcon?: IconProps['name']
   /**
    * @IconifyIcon
    */
-  externalIcon?: boolean | string
+  externalIcon?: boolean | IconProps['name']
   class?: any
   ui: { [K in keyof Required<DropdownMenu['slots']>]: (props?: Record<string, any>) => string }
   uiOverride?: DropdownMenu['slots']
@@ -67,7 +68,7 @@ const appConfig = useAppConfig()
 
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
-const proxySlots = omit(slots, ['default'])
+const getProxySlots = () => omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
 
@@ -151,7 +152,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
                 :external-icon="externalIcon"
                 v-bind="item.content"
               >
-                <template v-for="(_, name) in proxySlots" #[name]="slotData">
+                <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
                   <slot :name="(name as keyof DropdownMenuContentSlots<T>)" v-bind="slotData" />
                 </template>
               </UDropdownMenuContent>

@@ -1,0 +1,215 @@
+title: Nuxt UI Figma Design Kit
+description: Bridge the gap between designers and developers using professional-grade components. The official Nuxt UI design kit for Figma mirrors the development library for perfect consistency.
+hero:
+  title: From [Figma]{#figma} to [Nuxt]{#nuxt}, faster.
+  description: From wireframe to production in no time with the official Nuxt UI design kit for Figma. Get access to all components, layouts, and enhanced design-to-code efficiency in one comprehensive kit.
+  image: /figma/hero.png
+  links:
+    - label: Open Figma Kit
+      to: 'https://go.nuxt.com/figma-ui'
+      icon: i-logos-figma
+      color: neutral
+      variant: outline
+      target: _blank
+features1:
+  features:
+    - title: Advanced Figma Features
+      description: Components, Local Variables, Auto Layout, Variants and more.
+      icon: i-logos-figma
+    - title: Instant Theming
+      description: Customize your design system instantly using local variables and tokens.
+      icon: i-lucide-swatch-book
+    - title: Complete Design Kit
+      description: Access all components, blocks, and templates in one comprehensive kit.
+      icon: i-lucide-files
+cta1:
+  title: Everything you need in a [single file]{class="text-primary"}.
+  description: Design and development in perfect sync with our comprehensive [Nuxt UI design kit](https://go.nuxt.com/figma-ui). Developers can implement designs faster, while designers work with production-ready components.
+section1:
+  title: Customize in a few clicks to fit your needs
+  description: Control your entire design system with Figma Variables. Update primitive tokens once and watch your changes spread across the entire system.
+  reverse: true
+  features:
+    - title: Style with color variables powered by Tailwind CSS colors
+      icon: i-simple-icons-tailwindcss
+    - title: Apply over 500+ local variables across your entire file
+      icon: i-lucide-layers-2
+    - title: Build with unified tokens for consistency
+      icon: i-lucide-bolt
+  tabs:
+    - label: Define your tokens
+      src: /figma/local-variables.png
+      width: 656
+      height: 342
+      alt: Define local variables in the Nuxt UI Figma design kit
+    - label: Use them in your design
+      src: /figma/local-variables-result.png
+      width: 656
+      height: 342
+      alt: Use color variables in the Nuxt UI Figma design kit
+  links:
+    - label: Open Figma Kit
+      to: 'https://go.nuxt.com/figma-ui'
+      target: _blank
+      icon: i-logos-figma
+      color: neutral
+      variant: outline
+section2:
+  title: One component, endless possibilities
+  description: Create unlimited variations through nested components and swappable instances. Every element is fully themeable with props and slots, giving you complete control.
+  features:
+    - title: Choose between 20k+ components and variants
+      icon: i-lucide-component
+    - title: Customize designs with swap instance
+      icon: i-lucide-square-dashed-mouse-pointer
+    - title: Switch between light and dark modes in one click
+      icon: i-lucide-moon
+  image:
+    src: /figma/component.png
+    width: 656
+    height: 374
+    alt: A component in the Nuxt UI Figma design kit
+  links:
+    - label: Open Figma Kit
+      to: 'https://go.nuxt.com/figma-ui'
+      target: _blank
+      icon: i-logos-figma
+      color: neutral
+      variant: outline
+section3:
+  title: Perfect match with development
+  description: Our Figma kit perfectly matches Nuxt UI components, ensuring complete alignment between design and development.
+  reverse: true
+  features:
+    - title: Match development standards using the same props and tokens
+      icon: i-lucide-square-code
+    - title: Access Nuxt UI components through direct links
+      icon: i-lucide-link
+    - title: Work together as design and dev teams share one component language
+      icon: i-lucide-handshake
+  image:
+    src: /figma/nuxt-ui-figma-to-code.png
+    width: 656
+    height: 370
+    alt: A screenshot of Nuxt UI Code & Figma Kit
+  links:
+    - label: Open Figma Kit
+      to: 'https://go.nuxt.com/figma-ui'
+      icon: i-logos-figma
+      color: neutral
+      variant: outline
+      target: _blank
+features2:
+  features:
+    - title: Ready-to-use Templates
+      description: Production-ready templates for marketing sites, documentation, and more included.
+      icon: i-lucide-panels-top-left
+    - title: Well-Documented System
+      description: Complete guides for designers and developers to master your design system.
+      icon: i-lucide-book-open-text
+    - title: Icons Pack
+      description: Complete Lucide icon library included - 1500+ ready components.
+      icon: i-lucide-smile
+section4:
+  title: Start designing now.
+  description: '**From Figma to deployment in simple steps.** :br Get instant access to production-ready components and start creating.'
+  links:
+    - label: Open Figma Kit
+      to: 'https://go.nuxt.com/figma-ui'
+      icon: i-logos-figma
+      color: neutral
+      variant: outline
+      target: _blank
+  steps:
+    - title: Open & Duplicate
+      description: Visit the Figma Community page and duplicate the file directly to your projects.
+      to: 'https://go.nuxt.com/figma-ui'
+      target: _blank
+      image:
+        src: /figma/step-1.png
+        alt: Open and duplicate the Nuxt UI Figma design kit
+        width: 314
+        height: 230
+    - title: Customize to your brand
+      description: Set your colors, typography, and styles to match your brand identity in minutes.
+      image:
+        src: /figma/step-2.png
+        alt: Customize the Nuxt UI Figma design kit
+        width: 314
+        height: 230
+    - title: Design your website
+      description: Design beautiful interfaces with production-ready components. Drag, drop, and customize.
+      image:
+        src: /figma/step-3.png
+        alt: Design your website with the Nuxt UI Figma design kit
+        width: 314
+        height: 230
+    - title: Share it with your developers
+      description: Perfect development handoff with components that match Nuxt UI's structure exactly.
+      image:
+        src: /figma/step-4.png
+        alt: Share it with your developers with the Nuxt UI Figma design kit
+        width: 314
+        height: 230
+
+customers:
+  title: Used by 2,000+ developers & designers around the world.
+  items:
+    - src: /logos/springfieldclinic.svg
+      alt: Springfield Clinic
+    - src: /logos/churnkey.svg
+      alt: Churnkey
+    - src: /logos/bosch.svg
+      alt: BOSCH
+    - src: /logos/blizzard.svg
+      alt: Blizzard
+    - src: /logos/bodet.svg
+      alt: Bodet
+    - src: /logos/win.svg
+      alt: WinReality
+    - src: /logos/tower.svg
+      alt: Tower Research
+    - src: /logos/liegeairport.svg
+      alt: Liege Airport
+    - src: /logos/wuniversity.svg
+      alt: University of Washington
+    - src: /logos/funda.svg
+      alt: Funda
+    - src: /logos/exxonmobil.svg
+      alt: ExxonMobil
+    - src: /logos/mainpost.svg
+      alt: Main Post
+    - src: /logos/insep.svg
+      alt: INSEP
+    - src: /logos/applause.svg
+      alt: Applause
+    - src: /logos/instadapp.svg
+      alt: Instadapp
+faq:
+  title: Frequently Asked Questions
+  description: If you can't find what you're looking for, email our support team and if you're lucky someone will get back to you.
+  items:
+    - label: Can I use the UI kit on a free Figma account?
+      content: Yes. You don't need Figma's paid plan to use our UI kit.
+      defaultOpen: true
+    - label: How do I access the files?
+      content: Just visit the [Figma community page](https://go.nuxt.com/figma-ui) and duplicate the file to your account.
+    - label: Can I use the UI Kit for commercial projects?
+      content: Yes, you can use the UI Kit for commercial projects and sell your designs that utilize the components.
+    - label: Can I create multiple projects for multiple clients?
+      content: Yes, you can create multiple projects for multiple clients, there is no limit to the number of projects you can create.
+    - label: How do I contact you?
+      content: Email us at design@nuxt.com with your details and we'll help you out.
+    - label: Do you have a Figma to Code plugin?
+      content: >
+        We recommend the open source [TemPad Dev](https://github.com/ecomfe/tempad-dev) inspect panel with the [TemPad Dev Nuxt UI Plugin](https://github.com/Justineo/tempad-dev-plugin-nuxt-ui):
+
+          1. Install the [TemPad Dev Chrome Extension](https://chromewebstore.google.com/detail/tempad-dev/lgoeakbaikpkihoiphamaeopmliaimpc)
+
+          2. Open your Figma file with Nuxt UI components (reload the page if you don't see the TemPad Dev panel)
+
+          3. Install the `@nuxt` plugin in TemPad Dev's plugins section
+
+          4. Select any Nuxt UI component and inspect the code it generates
+
+        ![TemPad Dev Nuxt UI Plugin](/figma/teampad-dev-nuxt-ui-plugin.gif){.w-full .rounded .mb-2 .max-w-[636px]}

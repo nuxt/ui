@@ -3,7 +3,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/badge'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Badge = ComponentConfig<typeof theme, AppConfig, 'badge'>
 
@@ -43,7 +43,7 @@ export interface BadgeSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useButtonGroup } from '../composables/useButtonGroup'
+import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -55,15 +55,15 @@ const props = withDefaults(defineProps<BadgeProps>(), {
 const slots = defineSlots<BadgeSlots>()
 
 const appConfig = useAppConfig() as Badge['AppConfig']
-const { orientation, size: buttonGroupSize } = useButtonGroup<BadgeProps>(props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<BadgeProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.badge || {}) })({
   color: props.color,
   variant: props.variant,
-  size: buttonGroupSize.value || props.size,
+  size: fieldGroupSize.value || props.size,
   square: props.square || (!slots.default && !props.label),
-  buttonGroup: orientation.value
+  fieldGroup: orientation.value
 }))
 </script>
 

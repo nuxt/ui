@@ -2,8 +2,9 @@
 import type { ContextMenuContentProps as RekaContextMenuContentProps, ContextMenuContentEmits as RekaContextMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/context-menu'
-import type { AvatarProps, ContextMenuItem, ContextMenuSlots, KbdProps } from '../types'
-import type { ArrayOrNested, NestedItem, ComponentConfig } from '../types/utils'
+import type { AvatarProps, ContextMenuItem, ContextMenuSlots, IconProps, KbdProps } from '../types'
+import type { ArrayOrNested, GetItemKeys } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 
@@ -11,19 +12,19 @@ interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> exte
   items?: T
   portal?: boolean | string | HTMLElement
   sub?: boolean
-  labelKey: keyof NestedItem<T>
+  labelKey: GetItemKeys<T>
   /**
    * @IconifyIcon
    */
-  checkedIcon?: string
+  checkedIcon?: IconProps['name']
   /**
    * @IconifyIcon
    */
-  loadingIcon?: string
+  loadingIcon?: IconProps['name']
   /**
    * @IconifyIcon
    */
-  externalIcon?: boolean | string
+  externalIcon?: boolean | IconProps['name']
   class?: any
   ui: { [K in keyof Required<ContextMenu['slots']>]: (props?: Record<string, any>) => string }
   uiOverride?: ContextMenu['slots']
@@ -58,7 +59,7 @@ const appConfig = useAppConfig()
 
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
-const proxySlots = omit(slots, ['default'])
+const getProxySlots = () => omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ContextMenuItem, active?: boolean, index: number }>()
 
@@ -140,7 +141,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
                 :external-icon="externalIcon"
                 v-bind="item.content"
               >
-                <template v-for="(_, name) in proxySlots" #[name]="slotData">
+                <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
                   <slot :name="(name as keyof ContextMenuSlots<T>)" v-bind="slotData" />
                 </template>
               </UContextMenuContent>

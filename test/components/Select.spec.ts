@@ -39,8 +39,8 @@ describe('Select', () => {
   it.each([
     // Props
     ['with items', { props }],
-    ['with modelValue', { props: { ...props, modelValue: items[0] } }],
-    ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
+    ['with modelValue', { props: { ...props, modelValue: items[0]?.value } }],
+    ['with defaultValue', { props: { ...props, defaultValue: items[0]?.value } }],
     ['with valueKey', { props: { ...props, valueKey: 'label' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
@@ -82,6 +82,63 @@ describe('Select', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps, slots?: Partial<SelectSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Select)
     expect(html).toMatchSnapshot()
+  })
+
+  describe('it should display correct label', () => {
+    test.each([null, undefined, ''])('falsy model value %s should display placeholder', (modelValue) => {
+      const wrapper = mount(Select, {
+        props: {
+          items,
+          modelValue,
+          placeholder: 'Select an item'
+        }
+      })
+
+      expect(wrapper.text()).toBe('Select an item')
+    })
+
+    test('with string array and string value', () => {
+      const wrapper = mount(Select, {
+        props: {
+          items: ['Apple', 'Banana', 'Cherry'],
+          modelValue: 'Banana'
+        }
+      })
+
+      expect(wrapper.text()).toBe('Banana')
+    })
+
+    test('with multiple and empty array value should display placeholder', () => {
+      const wrapper = mount(Select, {
+        props: {
+          items,
+          multiple: true,
+          modelValue: [],
+          placeholder: 'Select items'
+        }
+      })
+      expect(wrapper.text()).toBe('Select items')
+    })
+
+    test('with falsy modelValue and options items contain falsy', () => {
+      const wrapper = mount(Select, {
+        props: {
+          items: [
+            {
+              label: 'John Doe',
+              value: null
+            },
+            {
+              label: 'John Lennon',
+              value: 1
+            }
+          ],
+          valueKey: 'value',
+          modelValue: null
+        }
+      })
+      expect(wrapper.text()).toBe('John Doe')
+    })
   })
 
   describe('emits', () => {

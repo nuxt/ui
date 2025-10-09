@@ -14,7 +14,7 @@ jobs:
       issues: write
 
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/stale@v10
         with:
           days-before-stale: -1 # Issues and PR will never be flagged stale automatically.
           stale-issue-label: 'needs reproduction' # Label that flags an issue as stale.
@@ -22,6 +22,7 @@ jobs:
           days-before-issue-close: 7
           ignore-updates: true
           remove-stale-when-updated: false
-          close-issue-message: This issue was closed because it was open for 7 days without a reproduction.
-          close-issue-label: closed-by-bot
+          close-issue-message: |
+            Hi! 👋 This issue was closed because it was open for 7 days without a reproduction.
+          close-issue-label: 'closed-by-bot'
           operations-per-run: 300 #default 30

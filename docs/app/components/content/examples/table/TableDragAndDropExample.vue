@@ -69,14 +69,13 @@ useSortable('.my-table-tbody', data, {
 </script>
 
 <template>
-  <div class="w-full">
-    <UTable
-      ref="table"
-      :data="data"
-      :columns="columns"
-      :ui="{
-        tbody: 'my-table-tbody'
-      }"
-    />
-  </div>
+  <UTable
+    ref="table"
+    :data="data"
+    :columns="columns"
+    :ui="{
+      tbody: 'my-table-tbody'
+    }"
+    class="flex-1"
+  />
 </template>

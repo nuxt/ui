@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ChipProps } from '@nuxt/ui'
 import { camelCase } from 'scule'
+import { hash } from 'ohash'
 import { useElementSize } from '@vueuse/core'
 import { get, set } from '#ui/utils'
 
@@ -99,7 +100,7 @@ ${data?.code ?? ''}
   return code
 })
 
-const { data: ast } = await useAsyncData(`component-example-${camelName}`, async () => {
+const { data: ast } = await useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
   if (!props.prettier) {
     return parseMarkdown(code.value)
   }
@@ -148,7 +149,7 @@ const urlSearchParams = computed(() => {
 </script>
 
 <template>
-  <div ref="el" class="my-5">
+  <div ref="el" class="my-5" :style="{ '--ui-header-height': '4rem' }">
     <template v-if="preview">
       <div class="border border-muted relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
         <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-muted">

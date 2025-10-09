@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form-field'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type FormField = ComponentConfig<typeof theme, AppConfig, 'formField'>
 
@@ -47,11 +47,11 @@ export interface FormFieldSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, inject, provide, useId } from 'vue'
+import { computed, ref, inject, provide, useId, watch } from 'vue'
 import type { Ref } from 'vue'
 import { Primitive, Label } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { formFieldInjectionKey, inputIdInjectionKey } from '../composables/useFormField'
+import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, formInputsInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
@@ -65,14 +65,21 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.formField ||
   required: props.required
 }))
 
-const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
+const formErrors = inject<Ref<FormError[]> | null>(formErrorsInjectionKey, null)
 
-const error = computed(() => props.error || formErrors?.value?.find(error => error.name && (error.name === props.name || (props.errorPattern && error.name.match(props.errorPattern))))?.message)
+const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name?.match(props.errorPattern)))?.message)
 
 const id = ref(useId())
 // Copies id's initial value to bind aria-attributes such as aria-describedby.
 // This is required for the RadioGroup component which unsets the id value.
 const ariaId = id.value
+
+const formInputs = inject(formInputsInjectionKey, undefined)
+watch(id, () => {
+  if (formInputs && props.name) {
+    formInputs.value[props.name] = { id: id.value, pattern: props.errorPattern }
+  }
+}, { immediate: true })
 
 provide(inputIdInjectionKey, id)
 

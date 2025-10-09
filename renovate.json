@@ -7,17 +7,13 @@
   },
   "baseBranchPatterns": [
     "v2",
-    "v3"
+    "v3",
+    "v4"
+  ],
+  "ignoreDeps": [
+    "typescript"
   ],
   "packageRules": [
-    {
-      "matchBaseBranches": [
-        "v3"
-      ],
-      "labels": [
-        "v3"
-      ]
-    },
     {
       "groupName": "tailwindcss",
       "matchPackageNames": [

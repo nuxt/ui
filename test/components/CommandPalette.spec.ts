@@ -79,6 +79,7 @@ describe('CommandPalette', () => {
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-badge-check', modelValue: groups[2]?.items[0] } }],
     ['with close', { props: { ...props, close: true } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-lucide-trash' } }],
+    ['with virtualize', { props: { ...props, virtualize: true } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'divide-accented' } }],
     ['with ui', { props: { ...props, ui: { input: '[&>input]:h-10' } } }],
