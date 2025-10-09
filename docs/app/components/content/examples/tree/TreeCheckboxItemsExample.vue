@@ -5,6 +5,7 @@ import type { TreeItemSelectEvent, TreeItemToggleEvent } from 'reka-ui'
 const items: TreeItem[] = [
   {
     label: 'app/',
+    defaultExpanded: true,
     children: [
       {
         label: 'composables/',
@@ -55,7 +56,6 @@ function onToggle(event: TreeItemToggleEvent<TreeItem>) {
     <template #item-leading="{ selected, indeterminate, handleSelect }">
       <UCheckbox
         :model-value="indeterminate ? 'indeterminate' : selected"
-        data-tree-select-checkbox="true"
         @change="handleSelect"
         @click.stop
       />
