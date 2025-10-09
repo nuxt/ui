@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { TreeRootProps, TreeRootEmits } from 'reka-ui'
+import type { TreeRootProps, TreeRootEmits, TreeItemSelectEvent, TreeItemToggleEvent } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
 import type { IconProps } from '../types'
@@ -23,8 +23,8 @@ export type TreeItem = {
   disabled?: boolean
   slot?: string
   children?: TreeItem[]
-  onToggle?(e: Event): void
-  onSelect?(e?: Event): void
+  onToggle?: (e: TreeItemToggleEvent<TreeItem>) => void
+  onSelect?: (e: TreeItemSelectEvent<TreeItem>) => void
   class?: any
   ui?: Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>
   [key: string]: any
@@ -99,11 +99,16 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean 
      */
     estimateSize?: number
   }
+  onItemSelect?: (e: TreeItemSelectEvent<T[number]>) => void
+  onItemToggle?: (e: TreeItemToggleEvent<T[number]>) => void
   class?: any
   ui?: Tree['slots']
 }
 
-export type TreeEmits<T extends TreeItem[] = TreeItem[], M extends boolean = false> = TreeRootEmits<T[number], M>
+export type TreeEmits<T extends TreeItem[] = TreeItem[], M extends boolean = false> = TreeRootEmits<T[number], M> & {
+  itemSelect: [event: TreeItemSelectEvent<T[number]>]
+  itemToggle: [event: TreeItemToggleEvent<T[number]>]
+}
 
 type SlotProps<T extends TreeItem> = (props: {
   item: T
@@ -225,6 +230,14 @@ function getDefaultOpenedItems(item: T[number]): string[] {
   return [currentItem, ...childItems].filter(Boolean) as string[]
 }
 
+function onToggle(event: TreeItemToggleEvent<T[number]>, item: T[number]) {
+  (item.onToggle ?? props.onItemToggle)?.(event)
+}
+
+function onSelect(event: TreeItemSelectEvent<T[number]>, item: T[number]) {
+  (item.onSelect ?? props.onItemSelect)?.(event)
+}
+
 const defaultExpanded = computed(() =>
   props.defaultExpanded ?? props.items?.flatMap(item => getDefaultOpenedItems(item))
 )
@@ -238,8 +251,8 @@ const defaultExpanded = computed(() =>
       :level="level"
       :value="item"
       :class="!!nested && level > 1 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
-      @toggle="item.onToggle"
-      @select="item.onSelect"
+      @toggle="onToggle($event, item)"
+      @select="onSelect($event, item)"
     >
       <slot
         :name="((item.slot ? `${item.slot}-wrapper` : 'item-wrapper') as keyof TreeSlots<T>)"

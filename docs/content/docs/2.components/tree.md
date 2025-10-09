@@ -539,6 +539,17 @@ props:
 ---
 ::
 
+### With checkbox items
+
+::component-example
+---
+name: 'tree-checkbox-items-example'
+collapse: true
+props:
+  class: 'w-60'
+---
+::
+
 ## API
 
 ### Props
