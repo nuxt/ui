@@ -11,6 +11,7 @@ const searchTerm = ref('')
 // const searchTermDebounced = refDebounced(searchTerm, 200)
 const selected = ref([])
 const virtualize = ref(false)
+const preserveGroupOrder = ref(false)
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   // params: { q: searchTermDebounced },
@@ -155,6 +156,7 @@ defineShortcuts({
 <template>
   <Navbar>
     <USwitch v-model="virtualize" label="Virtualize" />
+    <USwitch v-model="preserveGroupOrder" label="Preserve group order" />
 
     <UModal v-model:open="open">
       <UButton label="Open modal" color="neutral" variant="outline" />
@@ -176,7 +178,7 @@ defineShortcuts({
       <UButton label="Select label (popover)" color="neutral" variant="outline" />
 
       <template #content>
-        <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }" />
+        <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }" :preserve-group-order />
       </template>
     </UPopover>
   </Navbar>
@@ -193,6 +195,7 @@ defineShortcuts({
         }
       }"
       multiple
+      :preserve-group-order
       class="sm:max-h-96"
       @update:model-value="onSelect"
     >
@@ -224,6 +227,7 @@ defineShortcuts({
     <UCommandPalette
       v-if="virtualize"
       virtualize
+      :preserve-group-order
       :fuse="{ resultLimit: 1000 }"
       placeholder="Search virtualized items..."
       :groups="[{ id: 'items', items: Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i, icon: 'i-lucide-file' })) }]"
