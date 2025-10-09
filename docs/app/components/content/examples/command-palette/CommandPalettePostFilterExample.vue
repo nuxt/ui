@@ -6,27 +6,27 @@ const items = [
     level: 1
   },
   {
-    id: '/getting-started#whats-new-in-v3',
+    id: '/docs/getting-started#whats-new-in-v3',
     label: 'What\'s new in v3?',
     level: 2
   },
   {
-    id: '/getting-started#reka-ui',
+    id: '/docs/getting-started#reka-ui',
     label: 'Reka UI',
     level: 3
   },
   {
-    id: '/getting-started#tailwind-css-v4',
+    id: '/docs/getting-started#tailwind-css-v4',
     label: 'Tailwind CSS v4',
     level: 3
   },
   {
-    id: '/getting-started#tailwind-variants',
+    id: '/docs/getting-started#tailwind-variants',
     label: 'Tailwind Variants',
     level: 3
   },
   {
-    id: '/getting-started/installation',
+    id: '/docs/getting-started/installation',
     label: 'Installation',
     level: 1
   }

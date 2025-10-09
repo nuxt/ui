@@ -3,7 +3,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/button'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { LinkProps, AvatarProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Button = ComponentConfig<typeof theme, AppConfig, 'button'>
 
@@ -48,7 +48,7 @@ import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentIcons } from '../composables/useComponentIcons'
-import { useButtonGroup } from '../composables/useButtonGroup'
+import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
 import { omit, mergeClasses } from '../utils'
 import { tv } from '../utils/tv'
@@ -62,7 +62,7 @@ const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
 const appConfig = useAppConfig() as Button['AppConfig']
-const { orientation, size: buttonSize } = useButtonGroup<ButtonProps>(props)
+const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(props)
 
 const linkProps = useForwardProps(pickLinkProps(props))
 
@@ -110,7 +110,7 @@ const ui = computed(() => tv({
   square: props.square || (!slots.default && !props.label),
   leading: isLeading.value,
   trailing: isTrailing.value,
-  buttonGroup: orientation.value
+  fieldGroup: orientation.value
 }))
 </script>
 

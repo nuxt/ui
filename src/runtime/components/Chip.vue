@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chip'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Chip = ComponentConfig<typeof theme, AppConfig, 'chip'>
 
@@ -35,7 +35,7 @@ export interface ChipProps {
 }
 
 export interface ChipEmits {
-  'update:show': [payload: boolean]
+  'update:show': [value: boolean]
 }
 
 export interface ChipSlots {

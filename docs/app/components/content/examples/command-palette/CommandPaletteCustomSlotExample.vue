@@ -36,9 +36,9 @@ const groups = [
         target: '_blank'
       },
       {
-        label: 'Sylvain Marroufin',
-        suffix: 'smarroufin',
-        to: 'https://github.com/smarroufin',
+        label: 'Romain Hamel',
+        suffix: 'romhml',
+        to: 'https://github.com/romhml',
         target: '_blank'
       },
       {
@@ -48,15 +48,15 @@ const groups = [
         target: '_blank'
       },
       {
-        label: 'Romain Hamel',
-        suffix: 'romhml',
-        to: 'https://github.com/romhml',
+        label: 'Hugo Richard',
+        suffix: 'HugoRCD',
+        to: 'https://github.com/HugoRCD',
         target: '_blank'
       },
       {
-        label: 'Haytham A. Salama',
-        suffix: 'Haythamasalama',
-        to: 'https://github.com/Haythamasalama',
+        label: 'Sandro Circi',
+        suffix: 'sandros94',
+        to: 'https://github.com/sandros94',
         target: '_blank'
       },
       {
@@ -66,9 +66,15 @@ const groups = [
         target: '_blank'
       },
       {
-        label: 'Neil Richter',
-        suffix: 'noook',
-        to: 'https://github.com/noook',
+        label: 'Jakub Michálek',
+        suffix: 'J-Michalek',
+        to: 'https://github.com/J-Michalek',
+        target: '_blank'
+      },
+      {
+        label: 'Eugen Istoc',
+        suffix: 'genu',
+        to: 'https://github.com/genu',
         target: '_blank'
       }
     ]

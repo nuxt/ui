@@ -66,6 +66,7 @@ describe('InputMenu', () => {
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-chevron-down' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-check' } }],
     ['with arrow', { props: { ...props, arrow: true } }],
+    ['with virtualize', { props: { ...props, virtualize: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
@@ -114,6 +115,63 @@ describe('InputMenu', () => {
       const input = wrapper.findComponent({ name: 'TagsInputRoot' })
       await input.vm.$emit('remove-tag', 'Option 1')
       expect(wrapper.emitted()).toMatchObject({ 'remove-tag': [['Option 1']] })
+    })
+  })
+
+  describe('it should display correct label', () => {
+    test.each([null, undefined, ''])('falsy model value %s should display placeholder', (modelValue) => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items,
+          modelValue,
+          placeholder: 'Select an item'
+        }
+      })
+
+      expect(wrapper.find('input').attributes('placeholder')).toBe('Select an item')
+    })
+
+    test('with string array and string value', () => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items: ['Apple', 'Banana', 'Cherry'],
+          modelValue: 'Banana'
+        }
+      })
+
+      expect(wrapper.find('input').element.value).toBe('Banana')
+    })
+
+    test('with multiple and empty array value should display placeholder', () => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items,
+          multiple: true,
+          modelValue: [],
+          placeholder: 'Select items'
+        }
+      })
+      expect(wrapper.find('input').attributes('placeholder')).toBe('Select items')
+    })
+
+    test('with falsy modelValue and options items contain falsy', async () => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items: [
+            {
+              label: 'John Doe',
+              value: null
+            },
+            {
+              label: 'John Lennon',
+              value: 1
+            }
+          ],
+          valueKey: 'value',
+          modelValue: null
+        }
+      })
+      expect(wrapper.find('input').element.value).toBe('John Doe')
     })
   })
 

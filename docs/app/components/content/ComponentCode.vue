@@ -6,7 +6,6 @@ import { upperFirst, camelCase, kebabCase } from 'scule'
 import { hash } from 'ohash'
 import { CalendarDate } from '@internationalized/date'
 import * as theme from '#build/ui'
-import * as themePro from '#build/ui-pro'
 import { get, set } from '#ui/utils'
 
 interface Cast {
@@ -42,7 +41,6 @@ const castMap: Record<string, Cast> = {
 }
 
 const props = defineProps<{
-  pro?: boolean
   prose?: boolean
   prefix?: string
   /** Override the slug taken from the route */
@@ -90,16 +88,12 @@ const { $prettier } = useNuxtApp()
 const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '')
 const name = `${props.prose ? 'Prose' : 'U'}${upperFirst(camelName)}`
 const component = defineAsyncComponent(() => {
-  if (props.pro) {
-    if (props.prefix) {
-      return import(`#ui-pro/components/${props.prefix}/${upperFirst(camelName)}.vue`)
-    }
+  if (props.prefix) {
+    return import(`#ui/components/${props.prefix}/${upperFirst(camelName)}.vue`)
+  }
 
-    if (props.prose) {
-      return import(`#ui-pro/components/prose/${upperFirst(camelName)}.vue`)
-    }
-
-    return import(`#ui-pro/components/${upperFirst(camelName)}.vue`)
+  if (props.prose) {
+    return import(`#ui/components/prose/${upperFirst(camelName)}.vue`)
   }
 
   return import(`#ui/components/${upperFirst(camelName)}.vue`)
@@ -129,7 +123,7 @@ function setComponentProp(name: string, value: any) {
   set(componentProps, name, value)
 }
 
-const componentTheme = ((props.pro ? props.prose ? themePro.prose : themePro : theme) as any)[camelName]
+const componentTheme = ((props.prose ? theme.prose : theme) as any)[camelName]
 const meta = await fetchComponentMeta(name as any)
 
 function mapKeys(obj: object, parentKey = ''): any {
@@ -217,7 +211,7 @@ ${props.slots?.default}
       const removeArrayBrackets = (type: string): string => type.endsWith('[]') ? removeArrayBrackets(type.slice(0, -2)) : type
 
       const types = props.externalTypes.map(type => removeArrayBrackets(type))
-      code += `import type { ${types.join(', ')} } from '@nuxt/ui${props.pro ? '-pro' : ''}'
+      code += `import type { ${types.join(', ')} } from '@nuxt/ui'
 
 `
     }
@@ -306,7 +300,7 @@ ${props.slots?.default}
   return code
 })
 
-const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props: componentProps, slots: props.slots })}`, async () => {
+const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props: componentProps, slots: props.slots, external: props.external, externalTypes: props.externalTypes, collapse: props.collapse })}`, async () => {
   if (!props.prettier) {
     return parseMarkdown(code.value)
   }
@@ -328,7 +322,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
 </script>
 
 <template>
-  <div class="my-5">
+  <div class="my-5" :style="{ '--ui-header-height': '4rem' }">
     <div class="relative">
       <div v-if="options.length" class="flex flex-wrap items-center gap-2.5 border border-muted border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">

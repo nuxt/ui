@@ -2,8 +2,9 @@
 import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/modal'
-import type { ButtonProps } from '../types'
-import type { EmitsToProps, ComponentConfig } from '../types/utils'
+import type { ButtonProps, IconProps } from '../types'
+import type { EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>
 
@@ -43,7 +44,7 @@ export interface ModalProps extends DialogRootProps {
    * @defaultValue appConfig.ui.icons.close
    * @IconifyIcon
    */
-  closeIcon?: string
+  closeIcon?: IconProps['name']
   /**
    * When `false`, the modal will not close when clicking outside or pressing escape.
    * @defaultValue true
@@ -100,10 +101,6 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen'
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
-  const defaultEvents = {
-    closeAutoFocus: (e: Event) => e.preventDefault()
-  }
-
   if (!props.dismissible) {
     const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
 
@@ -113,10 +110,10 @@ const contentEvents = computed(() => {
         emits('close:prevent')
       }
       return acc
-    }, defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (e: Event) => void>)
+    }, {} as Record<typeof events[number], (e: Event) => void>)
   }
 
-  return defaultEvents
+  return {}
 })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {}) })({

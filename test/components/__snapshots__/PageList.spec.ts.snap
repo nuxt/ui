@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageList > renders with as correctly 1`] = `"<div role="list" class="relative flex flex-col"></div>"`;
+
+exports[`PageList > renders with class correctly 1`] = `"<div role="list" class="relative flex flex-col gap-2"></div>"`;
+
+exports[`PageList > renders with default slot correctly 1`] = `"<div role="list" class="relative flex flex-col">Default slot</div>"`;
+
+exports[`PageList > renders with divide correctly 1`] = `"<div role="list" class="relative flex flex-col *:not-last:after:absolute *:not-last:after:inset-x-1 *:not-last:after:bottom-0 *:not-last:after:bg-border *:not-last:after:h-px"></div>"`;

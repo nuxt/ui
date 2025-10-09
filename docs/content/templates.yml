@@ -1,0 +1,291 @@
+title: Official Nuxt UI Templates
+description: 'Explore ready-made templates powered by our Vue components. These templates are fully responsive, accessible, and easy to customize, so you can launch your project quickly and effortlessly.'
+hero:
+  title: Ship [faster]{.text-primary} with :br Nuxt UI Templates
+  description: 'Explore ready-made templates powered by our Vue components. These templates are fully responsive, accessible, and easy to customize, so you can launch your project quickly and effortlessly.'
+navigation: false
+items:
+  - title: 'Changelog'
+    description: "A changelog template to display your repository releases notes from GitHub powered by Nuxt MDC."
+    icon: i-lucide-newspaper
+    framework: nuxt
+    features:
+      - title: GitHub API integration
+        icon: i-lucide-github
+      - title: Beautiful typography
+        icon: i-lucide-type
+      - title: Dark mode ready
+        icon: i-lucide-moon
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=changelog&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fchangelog&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fchangelog-dark.png&demo-url=https%3A%2F%2Fchangelog-template.nuxt.dev%2F&demo-title=Nuxt%20Changelog%20Template&demo-description=A%20changelog%20template%20to%20display%20your%20repository%20releases%20notes%20from%20GitHub%20powered%20by%20Nuxt%20MDC.
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/changelog
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://changelog-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/changelog
+        target: _blank
+        icon: i-simple-icons-github
+  - title: 'Portfolio'
+    description: "A sleek portfolio template to showcase your work, skills and blog powered by Nuxt Content."
+    icon: i-lucide-user
+    framework: nuxt
+    features:
+      - title: Projects, blog, speaking & about sections
+        icon: i-lucide-layout-list
+      - title: Markdown & YAML content
+        icon: i-simple-icons-markdown
+      - title: Fully responsive
+        icon: i-lucide-smartphone
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=portfolio&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fportfolio&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fportfolio-dark.png&demo-url=https%3A%2F%2Fportfolio-template.nuxt.dev%2F&demo-title=Nuxt%20Portfolio%20Template&demo-description=A%20sleek%20portfolio%20template%20to%20showcase%20your%20work%2C%20skills%20and%20blog%20powered%20by%20Nuxt%20Content.
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/portfolio
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://portfolio-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/portfolio
+        target: _blank
+        icon: i-simple-icons-github
+  - title: 'Chat'
+    description: "An AI chatbot template to build your own chatbot powered by Nuxt MDC and Vercel AI SDK."
+    icon: i-lucide-message-circle
+    framework: nuxt
+    features:
+      - title: GitHub authentication
+        icon: i-lucide-lock
+      - title: Persistent chat history
+        icon: i-lucide-database
+      - title: Markdown syntax highlight
+        icon: i-lucide-palette
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=chat&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fchat&env=NUXT_SESSION_PASSWORD,NUXT_OAUTH_GITHUB_CLIENT_ID,NUXT_OAUTH_GITHUB_CLIENT_SECRET&products=%5B%7B%22type%22%3A%22integration%22%2C%22group%22%3A%22postgres%22%7D%5D&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fchat-dark.png&demo-url=https%3A%2F%2Fchat-template.nuxt.dev%2F&demo-title=Nuxt%20Chat%20Template&demo-description=An%20AI%20chatbot%20template%20to%20build%20your%20own%20chatbot%20powered%20by%20Nuxt%20MDC%20and%20Vercel%20AI%20SDK.
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/chat
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://chat-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/chat
+        target: _blank
+        icon: i-simple-icons-github
+  - title: 'Dashboard'
+    description: "A dashboard template with multi-column layout for building sophisticated admin interfaces."
+    icon: i-lucide-bar-chart-big
+    framework: nuxt
+    features:
+      - title: Works with SaaS template
+        icon: i-lucide-puzzle
+      - title: Charts and date pickers
+        icon: i-lucide-bar-chart-big
+      - title: Multi-column layout
+        icon: i-lucide-columns-3
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=dashboard&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fdashboard&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fdashboard-dark.png&demo-url=https%3A%2F%2Fdashboard-template.nuxt.dev%2F&demo-title=Nuxt%20Dashboard%20Template&demo-description=A%20dashboard%20template%20with%20multi-column%20layout%20for%20building%20sophisticated%20admin%20interfaces.
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/dashboard
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://dashboard-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/dashboard
+        target: _blank
+        icon: i-simple-icons-github
+  - title: 'Dashboard'
+    description: "A dashboard template with multi-column layout for building sophisticated admin interfaces."
+    icon: i-lucide-bar-chart-big
+    framework: vue
+    features:
+      - title: Charts and date pickers
+        icon: i-lucide-bar-chart-big
+      - title: Multi-column layout
+        icon: i-lucide-columns-3
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=dashboard-vue&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fdashboard-vue&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fvue%2Fdashboard-dark.png&demo-url=https%3A%2F%2Fdashboard-vue-template.nuxt.dev%2F&demo-title=Vue%20Dashboard%20Template&demo-description=A%20dashboard%20template%20with%20multi-column%20layout%20for%20building%20sophisticated%20admin%20interfaces.
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/dashboard-vue
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://dashboard-vue-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/dashboard-vue
+        target: _blank
+        icon: i-simple-icons-github
+  - title: 'SaaS'
+    description: "A SaaS template with landing, pricing, docs and blog powered by Nuxt Content."
+    icon: i-lucide-cloud
+    framework: nuxt
+    features:
+      - title: Landing, pricing, docs & blog sections
+        icon: i-lucide-grid-2x2-plus
+      - title: Authentication pages
+        icon: i-lucide-user-round-check
+      - title: YAML content
+        icon: i-simple-icons-yaml
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=saas&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fsaas&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fsaas-dark.png&demo-url=https%3A%2F%2Fsaas-template.nuxt.dev%2F&demo-title=Nuxt%20SaaS%20Template&demo-description=A%20SaaS%20template%20with%20landing%2C%20pricing%2C%20docs%20and%20blog%20powered%20by%20Nuxt%20Content.
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/saas
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://saas-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/saas
+        target: _blank
+        icon: i-simple-icons-github
+  - title: 'Landing'
+    description: "A modern landing page template powered by Nuxt Content."
+    icon: i-lucide-layout
+    framework: nuxt
+    features:
+      - title: Features, pricing, testimonials & FAQ
+        icon: i-lucide-rows-3
+      - title: YAML content
+        icon: i-simple-icons-yaml
+      - title: Fully responsive
+        icon: i-lucide-smartphone
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=landing&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Flanding&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Flanding-dark.png&demo-url=https%3A%2F%2Flanding-template.nuxt.dev%2F&demo-title=Nuxt%20Landing%20Template&demo-description=A%20modern%20landing%20page%20template%20powered%20by%20Nuxt%20Content
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/landing
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://landing-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/landing
+        target: _blank
+        icon: i-simple-icons-github
+  - title: 'Docs'
+    description: "A documentation template powered by Nuxt Content."
+    icon: i-lucide-book
+    framework: nuxt
+    features:
+      - title: Markdown pages
+        icon: i-simple-icons-markdown
+      - title: Auto-generated navigation
+        icon: i-lucide-text
+      - title: Full-text search
+        icon: i-lucide-search
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=docs&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fdocs&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fdocs-dark.png&demo-url=https%3A%2F%2Fdocs-template.nuxt.dev%2F&demo-title=Nuxt%20Docs%20Template&demo-description=A%20documentation%20template%20powered%20by%20Nuxt%20Content.
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/docs
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://docs-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/docs
+        target: _blank
+        icon: i-simple-icons-github
+  - title: 'Starter'
+    description: "A minimal template to get started with Nuxt UI."
+    icon: i-lucide-flower
+    framework: nuxt
+    features:
+      - title: Nuxt configured
+        icon: i-simple-icons-nuxt
+      - title: ESLint configured
+        icon: i-simple-icons-eslint
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=starter&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fstarter&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fstarter-dark.png&demo-url=https%3A%2F%2Fstarter-template.nuxt.dev%2F&demo-title=Nuxt%20Starter%20Template&demo-description=A%20minimal%20template%20to%20get%20started%20with%20Nuxt%20UI.
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/starter
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://starter-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/starter
+        target: _blank
+        icon: i-simple-icons-github
+  - title: 'Starter'
+    description: "A minimal template to get started with Nuxt UI."
+    icon: i-lucide-flower
+    framework: vue
+    features:
+      - title: Vite configured
+        icon: i-simple-icons-vite
+      - title: ESLint configured
+        icon: i-simple-icons-eslint
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=starter-vue&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fstarter-vue&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fvue%2Fstarter-dark.png&demo-url=https%3A%2F%2Fstarter-vue-template.nuxt.dev%2F&demo-title=Vue%20Starter%20Template&demo-description=A%20minimal%20template%20to%20get%20started%20with%20Nuxt%20UI.
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/starter-vue
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://starter-vue-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/starter-vue
+        target: _blank
+        icon: i-simple-icons-github

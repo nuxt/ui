@@ -3,17 +3,19 @@ import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, Combob
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
+import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type SelectMenu = ComponentConfig<typeof theme, AppConfig, 'selectMenu'>
 
-interface _SelectMenuItem {
+export type SelectMenuValue = AcceptableValue
+export type SelectMenuItem = SelectMenuValue | {
   label?: string
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   avatar?: AvatarProps
   chip?: ChipProps
   /**
@@ -27,7 +29,6 @@ interface _SelectMenuItem {
   ui?: Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
-export type SelectMenuItem = _SelectMenuItem | AcceptableValue | boolean
 
 export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps {
   id?: string
@@ -58,13 +59,13 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * @defaultValue appConfig.ui.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
    * @IconifyIcon
    */
-  selectedIcon?: string
+  selectedIcon?: IconProps['name']
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
@@ -82,6 +83,23 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    */
   portal?: boolean | string | HTMLElement
   /**
+   * Enable virtualization for large lists.
+   * Note: when enabled, all groups are flattened into a single list due to a limitation of Reka UI (https://github.com/unovue/reka-ui/issues/1885).
+   * @defaultValue false
+   */
+  virtualize?: boolean | {
+    /**
+     * Number of items rendered outside the visible area
+     * @defaultValue 12
+     */
+    overscan?: number
+    /**
+     * Estimated size (in px) of each item
+     * @defaultValue 32
+     */
+    estimateSize?: number
+  }
+  /**
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
    * @defaultValue undefined
    */
@@ -90,7 +108,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: keyof NestedItem<T>
+  labelKey?: GetItemKeys<T>
   items?: T
   /** The value of the SelectMenu when initially rendered. Use when you do not need to control the state of the SelectMenu. */
   defaultValue?: GetModelValue<T, VK, M>
@@ -122,9 +140,9 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
 }
 
 export type SelectMenuEmits<A extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
-  change: [payload: Event]
-  blur: [payload: FocusEvent]
-  focus: [payload: FocusEvent]
+  change: [event: Event]
+  blur: [event: FocusEvent]
+  focus: [event: FocusEvent]
   create: [item: string]
   /** Event handler when highlighted element changes. */
   highlight: [payload: {
@@ -168,16 +186,16 @@ export interface SelectMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
 import { ref, computed, onMounted, toRef, toRaw } from 'vue'
-import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
+import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useButtonGroup } from '../composables/useButtonGroup'
+import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
-import { compare, get, isArrayOfArray } from '../utils'
+import { compare, get, getDisplayValue, isArrayOfArray } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -189,10 +207,11 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<SelectMenuProps<T, VK, M>>(), {
   portal: true,
   searchInput: true,
-  labelKey: 'label' as never,
+  labelKey: 'label',
   resetSearchTermOnBlur: true,
   resetSearchTermOnSelect: true,
-  autofocusDelay: 0
+  autofocusDelay: 0,
+  virtualize: false
 })
 const emits = defineEmits<SelectMenuEmits<T, VK, M>>()
 const slots = defineSlots<SelectMenuSlots<T, VK, M>>()
@@ -207,15 +226,36 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaul
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
+const virtualizerProps = toRef(() => !!props.virtualize && defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+  estimateSize: ({
+    xs: 24,
+    sm: 28,
+    md: 32,
+    lg: 36,
+    xl: 40
+  })[props.size || 'md']
+}))
 const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps)
 
 const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
-const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
-const selectSize = computed(() => buttonGroupSize.value || formGroupSize.value)
+const selectSize = computed(() => fieldGroupSize.value || formGroupSize.value)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: SelectMenuItem, index: number }>({
+  props: {
+    item: {
+      type: Object,
+      required: true
+    },
+    index: {
+      type: Number,
+      required: false
+    }
+  }
+})
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu || {}) })({
   color: color.value,
@@ -225,17 +265,26 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu |
   highlight: highlight.value,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  buttonGroup: orientation.value
+  fieldGroup: orientation.value,
+  virtualize: !!props.virtualize
 }))
 
 function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
   if (props.multiple && Array.isArray(value)) {
-    const values = value.map(v => displayValue(v)).filter(Boolean)
-    return values?.length ? values.join(', ') : undefined
+    const displayedValues = value
+      .map(item => getDisplayValue<T[], GetItemValue<T, VK>>(items.value, item, {
+        labelKey: props.labelKey,
+        valueKey: props.valueKey
+      }))
+      .filter((v): v is string => v != null && v !== '')
+
+    return displayedValues.length > 0 ? displayedValues.join(', ') : undefined
   }
 
-  const item = items.value.find(item => compare(typeof item === 'object' && props.valueKey ? get(item as Record<string, any>, props.valueKey as string) : item, value))
-  return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
+  return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value as GetItemValue<T, VK>, {
+    labelKey: props.labelKey,
+    valueKey: props.valueKey
+  })
 }
 
 const groups = computed<SelectMenuItem[][]>(() =>
@@ -363,7 +412,7 @@ function onSelect(e: Event, item: SelectMenuItem) {
   item.onSelect?.(e)
 }
 
-function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
+function isSelectItem(item: SelectMenuItem): item is Exclude<SelectMenuItem, SelectMenuValue> {
   return typeof item === 'object' && item !== null
 }
 
@@ -375,20 +424,63 @@ defineExpose({
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <DefineCreateItemTemplate>
-    <ComboboxGroup :class="ui.group({ class: props.ui?.group })">
-      <ComboboxItem
-        :class="ui.item({ class: props.ui?.item })"
-        :value="searchTerm"
-        @select.prevent="emits('create', searchTerm)"
-      >
-        <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
-          <slot name="create-item-label" :item="searchTerm">
-            {{ t('selectMenu.create', { label: searchTerm }) }}
+    <ComboboxItem
+      :class="ui.item({ class: props.ui?.item })"
+      :value="searchTerm"
+      @select.prevent="emits('create', searchTerm)"
+    >
+      <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
+        <slot name="create-item-label" :item="searchTerm">
+          {{ t('selectMenu.create', { label: searchTerm }) }}
+        </slot>
+      </span>
+    </ComboboxItem>
+  </DefineCreateItemTemplate>
+
+  <DefineItemTemplate v-slot="{ item, index }">
+    <ComboboxLabel v-if="isSelectItem(item) && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
+      {{ get(item, props.labelKey as string) }}
+    </ComboboxLabel>
+
+    <ComboboxSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
+
+    <ComboboxItem
+      v-else
+      :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
+      :disabled="isSelectItem(item) && item.disabled"
+      :value="props.valueKey && isSelectItem(item) ? get(item, props.valueKey as string) : item"
+      @select="onSelect($event, item)"
+    >
+      <slot name="item" :item="(item as NestedItem<T>)" :index="index">
+        <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index">
+          <UIcon v-if="isSelectItem(item) && item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
+          <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
+          <UChip
+            v-else-if="isSelectItem(item) && item.chip"
+            :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
+            inset
+            standalone
+            v-bind="item.chip"
+            :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, item.ui?.itemLeadingChip] })"
+          />
+        </slot>
+
+        <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
+          <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
+            {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
           </slot>
         </span>
-      </ComboboxItem>
-    </ComboboxGroup>
-  </DefineCreateItemTemplate>
+
+        <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
+          <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" />
+
+          <ComboboxItemIndicator as-child>
+            <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
+          </ComboboxItemIndicator>
+        </span>
+      </slot>
+    </ComboboxItem>
+  </DefineItemTemplate>
 
   <ComboboxRoot
     :id="id"
@@ -445,56 +537,34 @@ defineExpose({
           </ComboboxEmpty>
 
           <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
-            <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
+            <template v-if="!!virtualize">
+              <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
-            <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
-              <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-                <ComboboxLabel v-if="isSelectItem(item) && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
-                  {{ get(item, props.labelKey as string) }}
-                </ComboboxLabel>
+              <ComboboxVirtualizer
+                v-slot="{ option: item, virtualItem }"
+                :options="(filteredItems as any[])"
+                :text-content="item => isSelectItem(item) ? get(item, props.labelKey as string) : String(item)"
+                v-bind="virtualizerProps"
+              >
+                <ReuseItemTemplate :item="item" :index="virtualItem.index" />
+              </ComboboxVirtualizer>
 
-                <ComboboxSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
+              <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
+            </template>
 
-                <ComboboxItem
-                  v-else
-                  :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
-                  :disabled="isSelectItem(item) && item.disabled"
-                  :value="props.valueKey && isSelectItem(item) ? get(item, props.valueKey as string) : item"
-                  @select="onSelect($event, item)"
-                >
-                  <slot name="item" :item="(item as NestedItem<T>)" :index="index">
-                    <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index">
-                      <UIcon v-if="isSelectItem(item) && item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
-                      <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
-                      <UChip
-                        v-else-if="isSelectItem(item) && item.chip"
-                        :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
-                        inset
-                        standalone
-                        v-bind="item.chip"
-                        :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, item.ui?.itemLeadingChip] })"
-                      />
-                    </slot>
+            <template v-else>
+              <ComboboxGroup v-if="createItem && createItemPosition === 'top'" :class="ui.group({ class: props.ui?.group })">
+                <ReuseCreateItemTemplate />
+              </ComboboxGroup>
 
-                    <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
-                      <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
-                        {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
-                      </slot>
-                    </span>
+              <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
+                <ReuseItemTemplate v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`" :item="item" :index="index" />
+              </ComboboxGroup>
 
-                    <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
-                      <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" />
-
-                      <ComboboxItemIndicator as-child>
-                        <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
-                      </ComboboxItemIndicator>
-                    </span>
-                  </slot>
-                </ComboboxItem>
-              </template>
-            </ComboboxGroup>
-
-            <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
+              <ComboboxGroup v-if="createItem && createItemPosition === 'bottom'" :class="ui.group({ class: props.ui?.group })">
+                <ReuseCreateItemTemplate />
+              </ComboboxGroup>
+            </template>
           </div>
 
           <slot name="content-bottom" />

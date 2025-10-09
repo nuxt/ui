@@ -1,0 +1,64 @@
+<script setup lang="ts">
+import { reactive } from 'vue'
+import { useHead } from '@unhead/vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const appConfig = useAppConfig()
+
+appConfig.dir = ref('ltr')
+appConfig.toaster = reactive({
+  position: 'bottom-right' as const,
+  expand: true,
+  duration: 5000
+})
+
+useHead({
+  title: 'Nuxt UI - Playground',
+  htmlAttrs: {
+    dir: computed(() => appConfig.dir as 'ltr' | 'rtl')
+  }
+})
+
+const { components, groups, items } = useNavigation()
+
+provide('components', components)
+</script>
+
+<template>
+  <UApp :toaster="appConfig.toaster" :dir="appConfig.dir">
+    <UDashboardGroup unit="rem" storage="local">
+      <UDashboardSidebar class="bg-elevated/25">
+        <template #header>
+          <RouterLink to="/" class="text-highlighted">
+            <Logo class="h-5 w-auto" />
+          </RouterLink>
+
+          <div class="flex items-center ms-auto">
+            <ThemeDropdown />
+
+            <UColorModeButton />
+          </div>
+        </template>
+
+        <UDashboardSearchButton />
+
+        <UNavigationMenu :items="items" orientation="vertical" />
+
+        <USeparator type="dashed" />
+
+        <UNavigationMenu :items="components" orientation="vertical" />
+      </UDashboardSidebar>
+
+      <UDashboardPanel :ui="{ body: ['justify-center items-center', route.path.startsWith('/components') && 'mt-16'] }">
+        <template #body>
+          <Suspense>
+            <RouterView />
+          </Suspense>
+        </template>
+      </UDashboardPanel>
+
+      <UDashboardSearch :groups="groups" :fuse="{ resultLimit: 100 }" />
+    </UDashboardGroup>
+  </UApp>
+</template>
