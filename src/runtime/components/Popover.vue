@@ -48,19 +48,12 @@ export interface PopoverEmits extends PopoverRootEmits {
   'close:prevent': []
 }
 
+type SlotProps<M extends PopoverMode = PopoverMode> = [M] extends ['hover'] ? {} : { close: () => void }
+
 export interface PopoverSlots<M extends PopoverMode = PopoverMode> {
-  default(props: {
-    open: boolean
-    close: M extends 'click' ? (() => void) : never
-  }): any
-
-  content(props: {
-    close: M extends 'click' ? (() => void) : never
-  }): any
-
-  anchor(props: {
-    close: M extends 'click' ? (() => void) : never
-  }): any
+  default(props: { open: boolean }): any
+  content(props: SlotProps<M>): any
+  anchor(props: SlotProps<M>): any
 }
 </script>
 
@@ -116,18 +109,18 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 </script>
 
 <template>
-  <Component.Root v-slot="{ open, close }: {open: boolean, close?: () => void}" v-bind="rootProps">
+  <Component.Root v-slot="{ open, close }: { open: boolean, close?: () => void }" v-bind="rootProps">
     <Component.Trigger v-if="!!slots.default || !!reference" as-child :reference="reference" :class="props.class">
-      <slot v-bind="{ open, close } as Parameters<typeof slots.default>[0]" />
+      <slot :open="open" />
     </Component.Trigger>
 
     <Component.Anchor v-if="'Anchor' in Component && !!slots.anchor" as-child>
-      <slot name="anchor" v-bind="{ close } as Parameters<typeof slots.anchor>[0]" />
+      <slot name="anchor" v-bind="(close ? { close } : {}) as SlotProps<M>" />
     </Component.Anchor>
 
     <Component.Portal v-bind="portalProps">
       <Component.Content v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">
-        <slot name="content" v-bind="{ close } as Parameters<typeof slots.content>[0]" />
+        <slot name="content" v-bind="(close ? { close } : {}) as SlotProps<M>" />
 
         <Component.Arrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </Component.Content>
