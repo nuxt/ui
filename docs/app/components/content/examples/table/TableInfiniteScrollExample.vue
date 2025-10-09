@@ -60,10 +60,10 @@ watch(data, () => {
 
 execute()
 
-const table = useTemplateRef<ComponentPublicInstance>('table')
+const table = useTemplateRef('table')
 
 onMounted(() => {
-  useInfiniteScroll(table.value?.$el, () => {
+  useInfiniteScroll(table.value?.rootRef, () => {
     skip.value += 10
   }, {
     distance: 200,
@@ -75,14 +75,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full">
-    <UTable
-      ref="table"
-      :data="users"
-      :columns="columns"
-      :loading="status === 'pending'"
-      sticky
-      class="flex-1 h-80"
-    />
-  </div>
+  <UTable
+    ref="table"
+    :data="users"
+    :columns="columns"
+    :loading="status === 'pending'"
+    sticky
+    class="flex-1 h-80"
+  />
 </template>

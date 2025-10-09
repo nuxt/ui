@@ -9,7 +9,7 @@ export default (options: Required<ModuleOptions>) => {
       trailing: 'group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75',
       arrow: 'fill-default',
       content: 'max-h-60 w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col',
-      viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
+      viewport: 'relative scroll-py-1 overflow-y-auto flex-1',
       group: 'p-1 isolate',
       empty: 'text-center text-muted',
       label: 'font-semibold text-highlighted',
@@ -30,6 +30,14 @@ export default (options: Required<ModuleOptions>) => {
       tagsInput: 'flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
     },
     variants: {
+      virtualize: {
+        true: {
+          viewport: 'p-1 isolate'
+        },
+        false: {
+          viewport: 'divide-y divide-default'
+        }
+      },
       multiple: {
         true: {
           root: 'flex-wrap'

@@ -108,5 +108,12 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
         <UAvatar v-if="modelValue" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="modelValue.avatar" />
       </template>
     </UInputMenu>
+    <UInputMenu
+      icon="i-lucide-layout-list"
+      placeholder="Search virtualized..."
+      virtualize
+      :items="[Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i }))]"
+      v-bind="props"
+    />
   </Matrix>
 </template>

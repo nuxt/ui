@@ -76,13 +76,45 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean 
   defaultValue?: M extends true ? T[number][] : T[number]
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
+  /**
+   * Use nested DOM structure (children inside parents) vs flattened structure (all items at same level).
+   * When `virtualize` is enabled, this is automatically set to `false`.
+   * @defaultValue true
+   */
+  nested?: boolean
+  /**
+   * Enable virtualization for large lists.
+   * Note: when enabled, the tree structure is flattened like if `nested` was set to `false`.
+   * @defaultValue false
+   */
+  virtualize?: boolean | {
+    /**
+     * Number of items rendered outside the visible area
+     * @defaultValue 12
+     */
+    overscan?: number
+    /**
+     * Estimated size (in px) of each item
+     * @defaultValue 32
+     */
+    estimateSize?: number
+  }
   class?: any
   ui?: Tree['slots']
 }
 
 export type TreeEmits<T extends TreeItem[] = TreeItem[], M extends boolean = false> = TreeRootEmits<T[number], M>
 
-type SlotProps<T extends TreeItem> = (props: { item: T, index: number, level: number, expanded: boolean, selected: boolean }) => any
+type SlotProps<T extends TreeItem> = (props: {
+  item: T
+  index: number
+  level: number
+  expanded: boolean
+  selected: boolean
+  indeterminate: boolean | undefined
+  handleSelect: () => void
+  handleToggle: () => void
+}) => any
 
 export type TreeSlots<
   T extends TreeItem[] = TreeItem[]
@@ -92,14 +124,23 @@ export type TreeSlots<
   'item-leading': SlotProps<T[number]>
   'item-label': SlotProps<T[number]>
   'item-trailing': SlotProps<T[number]>
-} & DynamicSlots<T[number], undefined, { index: number, level: number, expanded: boolean, selected: boolean }>
+} & DynamicSlots<T[number], undefined, {
+  index: number
+  level: number
+  expanded: boolean
+  selected: boolean
+  indeterminate: boolean | undefined
+  handleSelect: () => void
+  handleToggle: () => void
+}>
 
 </script>
 
 <script setup lang="ts" generic="T extends TreeItem[], M extends boolean = false">
-import { computed } from 'vue'
-import { TreeRoot, TreeItem, useForwardPropsEmits } from 'reka-ui'
+import { computed, toRef } from 'vue'
+import { TreeRoot, TreeItem, TreeVirtualizer, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
@@ -108,7 +149,9 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TreeProps<T, M>>(), {
-  labelKey: 'label'
+  labelKey: 'label',
+  nested: true,
+  virtualize: false
 })
 const emits = defineEmits<TreeEmits<T, M>>()
 const slots = defineSlots<TreeSlots<T>>()
@@ -117,11 +160,52 @@ const appConfig = useAppConfig() as Tree['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect'), emits)
 
+const nested = computed(() => props.virtualize ? false : props.nested)
+
+const flattenedPaddingFormula = computed(() => {
+  const sizeConfig = {
+    xs: { base: 2, perLevel: 5.5 }, // px-2, ms-4 + ps-1.5
+    sm: { base: 2.5, perLevel: 6 }, // px-2.5, ms-4.5 + ps-1.5
+    md: { base: 2.5, perLevel: 6.5 }, // px-2.5, ms-5 + ps-1.5
+    lg: { base: 3, perLevel: 7 }, // px-3, ms-5.5 + ps-1.5
+    xl: { base: 3, perLevel: 7.5 } // px-3, ms-6 + ps-1.5
+  }
+  const config = sizeConfig[props.size || 'md']
+  return (level: number) => `calc(var(--spacing) * ${(level - 1) * config.perLevel + config.base})`
+})
+
+const virtualizerProps = toRef(() => !!props.virtualize && defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+  estimateSize: ({
+    xs: 24,
+    sm: 28,
+    md: 32,
+    lg: 36,
+    xl: 40
+  })[props.size || 'md']
+}))
+
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items?: TreeItem[], level: number }, TreeSlots<T>>()
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: TreeItem, index: number, level: number }, TreeSlots<T>>({
+  props: {
+    item: {
+      type: Object,
+      required: true
+    },
+    index: {
+      type: Number,
+      required: true
+    },
+    level: {
+      type: Number,
+      required: true
+    }
+  }
+})
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tree || {}) })({
   color: props.color,
-  size: props.size
+  size: props.size,
+  virtualize: !!props.virtualize
 }))
 
 function getItemLabel<Item extends T[number]>(item: Item): string {
@@ -148,20 +232,18 @@ const defaultExpanded = computed(() =>
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <DefineTreeTemplate v-slot="{ items, level }">
+  <DefineItemTemplate v-slot="{ item, index, level }">
     <TreeItem
-      v-for="(item, index) in items"
-      :key="`${level}-${index}`"
-      v-slot="{ isExpanded, isSelected }"
+      v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
       :level="level"
       :value="item"
-      :class="level > 1 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
+      :class="!!nested && level > 1 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
       @toggle="item.onToggle"
       @select="item.onSelect"
     >
       <slot
         :name="((item.slot ? `${item.slot}-wrapper` : 'item-wrapper') as keyof TreeSlots<T>)"
-        v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+        v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
         :item="(item as Extract<T[number], { slot: string; }>)"
       >
         <button
@@ -169,15 +251,16 @@ const defaultExpanded = computed(() =>
           :disabled="item.disabled || disabled"
           :data-expanded="isExpanded"
           :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })"
+          :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : undefined"
         >
           <slot
             :name="((item.slot || 'item') as keyof TreeSlots<T>)"
-            v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+            v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
             :item="(item as Extract<T[number], { slot: string; }>)"
           >
             <slot
               :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof TreeSlots<T>)"
-              v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+              v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
               :item="(item as Extract<T[number], { slot: string; }>)"
             >
               <UIcon
@@ -198,7 +281,7 @@ const defaultExpanded = computed(() =>
             >
               <slot
                 :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>)"
-                v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+                v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
                 :item="(item as Extract<T[number], { slot: string; }>)"
               >
                 {{ getItemLabel(item) }}
@@ -211,7 +294,7 @@ const defaultExpanded = computed(() =>
             >
               <slot
                 :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof TreeSlots<T>)"
-                v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+                v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
                 :item="(item as Extract<T[number], { slot: string; }>)"
               >
                 <UIcon
@@ -231,16 +314,21 @@ const defaultExpanded = computed(() =>
       </slot>
 
       <ul
-        v-if="item.children?.length && isExpanded"
+        v-if="nested && item.children?.length && isExpanded"
         role="group"
         :class="ui.listWithChildren({ class: [props.ui?.listWithChildren, item.ui?.listWithChildren] })"
       >
         <ReuseTreeTemplate :items="item.children" :level="level + 1" />
       </ul>
     </TreeItem>
+  </DefineItemTemplate>
+
+  <DefineTreeTemplate v-slot="{ items, level }">
+    <ReuseItemTemplate v-for="(item, index) in items" :key="`${level}-${index}`" :item="item" :index="index" :level="level" />
   </DefineTreeTemplate>
 
   <TreeRoot
+    v-slot="{ flattenItems }"
     v-bind="{ ...rootProps, ...$attrs }"
     :model-value="modelValue"
     :default-value="defaultValue"
@@ -249,6 +337,25 @@ const defaultExpanded = computed(() =>
     :default-expanded="defaultExpanded"
     :selection-behavior="selectionBehavior"
   >
-    <ReuseTreeTemplate :items="items" :level="1" />
+    <TreeVirtualizer
+      v-if="!!virtualize"
+      v-slot="{ item, virtualItem }"
+      :text-content="item => getItemLabel(item.value)"
+      v-bind="virtualizerProps"
+    >
+      <ReuseItemTemplate :item="item.value" :index="virtualItem.index" :level="item.level" />
+    </TreeVirtualizer>
+
+    <template v-else-if="!nested">
+      <ReuseItemTemplate
+        v-for="(item, index) in flattenItems"
+        :key="item._id"
+        :item="item.value"
+        :index="index"
+        :level="item.level"
+      />
+    </template>
+
+    <ReuseTreeTemplate v-else :items="items" :level="1" />
   </TreeRoot>
 </template>
