@@ -2,19 +2,6 @@
 import type { TreeItem } from '@nuxt/ui'
 import type { TreeItemSelectEvent, TreeItemToggleEvent } from 'reka-ui'
 
-function onSelect(event: TreeItemSelectEvent<TreeItem>) {
-  if (event.detail.originalEvent.type === 'click') {
-    event.preventDefault()
-  }
-}
-
-function onToggle(event: TreeItemToggleEvent<TreeItem>) {
-  if (event.detail.originalEvent.type === 'keydown') {
-    event.preventDefault()
-  }
-}
-
-const selectedItems = ref<(typeof items)>([])
 const items: TreeItem[] = [
   {
     label: 'app/',
@@ -39,17 +26,31 @@ const items: TreeItem[] = [
   { label: 'app.vue' },
   { label: 'nuxt.config.ts' }
 ]
+
+const value = ref<(typeof items)>([])
+
+function onSelect(event: TreeItemSelectEvent<TreeItem>) {
+  if (event.detail.originalEvent.type === 'click') {
+    event.preventDefault()
+  }
+}
+
+function onToggle(event: TreeItemToggleEvent<TreeItem>) {
+  if (event.detail.originalEvent.type === 'keydown') {
+    event.preventDefault()
+  }
+}
 </script>
 
 <template>
   <UTree
-    v-model="selectedItems"
+    v-model="value"
     :items="items"
     multiple
     propagate-select
     bubble-select
-    @item-select="onSelect"
-    @item-toggle="onToggle"
+    @select="onSelect"
+    @toggle="onToggle"
   >
     <template #item-leading="{ selected, indeterminate, handleSelect }">
       <UCheckbox

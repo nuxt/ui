@@ -501,6 +501,19 @@ props:
 This lets you select a parent item without expanding or collapsing its children.
 ::
 
+### With checkbox in items
+
+You can use the `item-leading` slot to add a [Checkbox](/docs/components/checkbox) to the item and the `onSelect` and `onToggle` events to control the checked state of the item.
+
+::component-example
+---
+name: 'tree-checkbox-items-example'
+collapse: true
+props:
+  class: 'w-60'
+---
+::
+
 ### With virtualization :badge{label="Soon"}
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
@@ -533,17 +546,6 @@ You will have access to the following slots:
 ::component-example
 ---
 name: 'tree-custom-slot-example'
-collapse: true
-props:
-  class: 'w-60'
----
-::
-
-### With checkbox items
-
-::component-example
----
-name: 'tree-checkbox-items-example'
 collapse: true
 props:
   class: 'w-60'
