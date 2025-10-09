@@ -99,16 +99,13 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean 
      */
     estimateSize?: number
   }
-  onItemSelect?: (e: TreeItemSelectEvent<T[number]>) => void
-  onItemToggle?: (e: TreeItemToggleEvent<T[number]>) => void
+  onSelect?: (e: TreeItemSelectEvent<T[number]>, item: T[number]) => void
+  onToggle?: (e: TreeItemToggleEvent<T[number]>, item: T[number]) => void
   class?: any
   ui?: Tree['slots']
 }
 
-export type TreeEmits<T extends TreeItem[] = TreeItem[], M extends boolean = false> = TreeRootEmits<T[number], M> & {
-  itemSelect: [event: TreeItemSelectEvent<T[number]>]
-  itemToggle: [event: TreeItemToggleEvent<T[number]>]
-}
+export type TreeEmits<T extends TreeItem[] = TreeItem[], M extends boolean = false> = TreeRootEmits<T[number], M>
 
 type SlotProps<T extends TreeItem> = (props: {
   item: T
@@ -230,14 +227,6 @@ function getDefaultOpenedItems(item: T[number]): string[] {
   return [currentItem, ...childItems].filter(Boolean) as string[]
 }
 
-function onToggle(event: TreeItemToggleEvent<T[number]>, item: T[number]) {
-  (item.onToggle ?? props.onItemToggle)?.(event)
-}
-
-function onSelect(event: TreeItemSelectEvent<T[number]>, item: T[number]) {
-  (item.onSelect ?? props.onItemSelect)?.(event)
-}
-
 const defaultExpanded = computed(() =>
   props.defaultExpanded ?? props.items?.flatMap(item => getDefaultOpenedItems(item))
 )
@@ -251,8 +240,8 @@ const defaultExpanded = computed(() =>
       :level="level"
       :value="item"
       :class="!!nested && level > 1 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
-      @toggle="onToggle($event, item)"
-      @select="onSelect($event, item)"
+      @toggle="(item.onToggle ?? props.onToggle)?.($event, item)"
+      @select="(item.onSelect ?? props.onSelect)?.($event, item)"
     >
       <slot
         :name="((item.slot ? `${item.slot}-wrapper` : 'item-wrapper') as keyof TreeSlots<T>)"
