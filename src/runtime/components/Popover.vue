@@ -115,12 +115,12 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
     </Component.Trigger>
 
     <Component.Anchor v-if="'Anchor' in Component && !!slots.anchor" as-child>
-      <slot name="anchor" v-bind="(close ? { close } : {}) as SlotProps<M>" />
+      <slot name="anchor" v-bind="((close ? { close } : {}) as SlotProps<M>)" />
     </Component.Anchor>
 
     <Component.Portal v-bind="portalProps">
       <Component.Content v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">
-        <slot name="content" v-bind="(close ? { close } : {}) as SlotProps<M>" />
+        <slot name="content" v-bind="((close ? { close } : {}) as SlotProps<M>)" />
 
         <Component.Arrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </Component.Content>
