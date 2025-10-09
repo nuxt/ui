@@ -501,7 +501,7 @@ props:
 This lets you select a parent item without expanding or collapsing its children.
 ::
 
-### With checkbox in items
+### With checkbox in items :badge{label="Soon"}
 
 You can use the `item-leading` slot to add a [Checkbox](/docs/components/checkbox) to the items. Use the `multiple`, `propagate-select` and `bubble-select` props to enable multi-selection with parent-child relationship and the `select` and `toggle` events to control the selected and expanded state of the items.
 
