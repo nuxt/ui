@@ -187,6 +187,7 @@ defineExpose({
       :disabled="disabled"
       :required="required"
       :autocomplete="autocomplete"
+      :aria-required="required"
       v-bind="{ ...$attrs, ...ariaAttrs }"
       @input="onInput"
       @blur="onBlur"
