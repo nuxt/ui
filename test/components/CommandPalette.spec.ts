@@ -75,7 +75,7 @@ describe('CommandPalette', () => {
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with icon', { props: { ...props, icon: 'i-lucide-terminal' } }],
     ['with trailingIcon', { props: { ...props, inputTrailingIcon: 'i-lucide-settings' } }],
-    ['with itemTrailingIcon', { props: { ...props, itemTrailingIcon: 'i-lucide-arrow-right' } }],
+    ['with childrenIcon', { props: { ...props, childrenIcon: 'i-lucide-arrow-right' } }],
     ['with loading', { props: { ...props, loading: true } }],
     ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loader' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-badge-check', modelValue: groups[2]?.items[0] } }],

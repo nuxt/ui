@@ -20,6 +20,7 @@ export default (options: Required<ModuleOptions>) => ({
     itemLeadingChip: 'shrink-0 size-5',
     itemLeadingChipSize: 'md',
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
+    childrenIcon: 'shrink-0 size-5',
     itemTrailingIcon: 'shrink-0 size-5',
     itemTrailingHighlightedIcon: 'shrink-0 size-5 text-dimmed hidden group-data-highlighted:inline-flex',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0 gap-0.5',

@@ -81,7 +81,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @defaultValue appConfig.ui.icons.chevronRight
    * @IconifyIcon
    */
-  itemTrailingIcon?: IconProps['name']
+  childrenIcon?: IconProps['name']
   /**
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
@@ -93,11 +93,11 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   autofocus?: boolean
   /**
-   * The icon displayed in the input.
+   * The icon displayed on the right side of the input.
    * @defaultValue appConfig.ui.icons.search
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   /**
    * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -414,8 +414,8 @@ function onSelect(e: Event, item: T) {
               <slot :name="((item.slot ? `${item.slot}-trailing` : group?.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
                 <UIcon
                   v-if="item.children && item.children.length > 0"
-                  :name="trailingIcon || appConfig.ui.icons.chevronRight"
-                  :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })"
+                  :name="childrenIcon || appConfig.ui.icons.chevronRight"
+                  :class="ui.childrenIcon({ class: [props.ui?.childrenIcon, item.ui?.childrenIcon] })"
                 />
 
                 <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: [props.ui?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
