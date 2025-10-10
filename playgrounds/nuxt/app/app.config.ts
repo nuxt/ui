@@ -2,8 +2,9 @@ export default defineAppConfig({
   dir: 'ltr',
   toaster: {
     position: 'bottom-right' as const,
-    expand: true,
-    duration: 5000
+    duration: 5000,
+    max: 5,
+    expand: true
   },
   ui: {
     colors: {

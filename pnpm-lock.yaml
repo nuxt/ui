@@ -59,6 +59,9 @@ importers:
       '@tanstack/vue-table':
         specifier: ^8.21.3
         version: 8.21.3(vue@3.5.22(typescript@5.8.3))
+      '@tanstack/vue-virtual':
+        specifier: ^3.13.12
+        version: 3.13.12(vue@3.5.22(typescript@5.8.3))
       '@unhead/vue':
         specifier: ^2.0.17
         version: 2.0.17(vue@3.5.22(typescript@5.8.3))
@@ -276,6 +279,12 @@ importers:
       '@octokit/rest':
         specifier: ^22.0.0
         version: 22.0.0
+      '@regle/core':
+        specifier: ^1.9.5
+        version: 1.9.5(vue@3.5.22(typescript@5.8.3))
+      '@regle/rules':
+        specifier: ^1.9.5
+        version: 1.9.5(vue@3.5.22(typescript@5.8.3))
       '@vercel/analytics':
         specifier: ^1.5.0
         version: 1.5.0(react@19.2.0)(vue-router@4.5.1(vue@3.5.22(typescript@5.8.3)))(vue@3.5.22(typescript@5.8.3))
@@ -1737,6 +1746,18 @@ packages:
     resolution: {integrity: sha512-3ZG500+ZeLql8rE0hjfhkycJjDj0pI/btEh3L9IkWUYcOrgP0xCNRq3HbtbqOPbvDhFaAWD88pDFtlLv8ns8gA==}
     engines: {node: '>=18'}
     hasBin: true
+
+  '@regle/core@1.9.5':
+    resolution: {integrity: sha512-YAicq8119Xasahq9Jb0N5JoDAApQRpyw0Dc4XXC/ql9fPRUnmKp+6NyndIUyO81BY1WlnxeUzoLImwKZawTy4w==}
+    peerDependencies:
+      pinia: '>=2.2.5'
+      vue: '>=3.3.0'
+    peerDependenciesMeta:
+      pinia:
+        optional: true
+
+  '@regle/rules@1.9.5':
+    resolution: {integrity: sha512-hDdT9BSfjUVMyHpiTzhKIXydO9/GeKthEzVUrhunXHtCVmSe3Ir9mLBDVUEmMRVs3irAzH5N+lt3BpKmjLl+nw==}
 
   '@release-it/conventional-changelog@10.0.1':
     resolution: {integrity: sha512-Qp+eyMGCPyq5xiWoNK91cWVIR/6HD1QAUNeG6pV2G4kxotWl81k/KDQqDNvrNVmr9+zDp53jI7pVVYQp6mi4zA==}
@@ -8839,6 +8860,18 @@ snapshots:
       - bare-buffer
       - react-native-b4a
       - supports-color
+
+  '@regle/core@1.9.5(vue@3.5.22(typescript@5.8.3))':
+    dependencies:
+      '@standard-schema/spec': 1.0.0
+      vue: 3.5.22(typescript@5.8.3)
+
+  '@regle/rules@1.9.5(vue@3.5.22(typescript@5.8.3))':
+    dependencies:
+      '@regle/core': 1.9.5(vue@3.5.22(typescript@5.8.3))
+    transitivePeerDependencies:
+      - pinia
+      - vue
 
   '@release-it/conventional-changelog@10.0.1(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.2.0)(release-it@19.0.5(@types/node@24.7.0)(magicast@0.3.5))':
     dependencies:

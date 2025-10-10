@@ -27,6 +27,11 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
    * @defaultValue true
    */
   portal?: boolean | string | HTMLElement
+  /**
+   * Maximum number of toasts to display at once.
+   * @defaultValue 5
+   */
+  max?: number
   class?: any
   ui?: Toaster['slots']
 }
@@ -41,11 +46,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, toRef } from 'vue'
+import { ref, computed, toRef, provide } from 'vue'
 import { ToastProvider, ToastViewport, ToastPortal, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useToast } from '../composables/useToast'
+import { useToast, toastMaxInjectionKey } from '../composables/useToast'
 import { usePortal } from '../composables/usePortal'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -55,12 +60,15 @@ const props = withDefaults(defineProps<ToasterProps>(), {
   expand: true,
   portal: true,
   duration: 5000,
-  progress: true
+  progress: true,
+  max: 5
 })
 defineSlots<ToasterSlots>()
 
 const { toasts, remove } = useToast()
 const appConfig = useAppConfig() as Toaster['AppConfig']
+
+provide(toastMaxInjectionKey, toRef(() => props.max))
 
 const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold'))
 const portalProps = usePortal(toRef(() => props.portal))
