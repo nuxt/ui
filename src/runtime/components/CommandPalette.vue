@@ -71,6 +71,12 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   icon?: IconProps['name']
   /**
+   * The icon displayed on the right side of the input.
+   * @defaultValue appConfig.ui.icons.search
+   * @IconifyIcon
+   */
+  trailingIcon?: IconProps['name']
+  /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
    * @IconifyIcon
@@ -92,12 +98,6 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @defaultValue true
    */
   autofocus?: boolean
-  /**
-   * The icon displayed on the right side of the input.
-   * @defaultValue appConfig.ui.icons.search
-   * @IconifyIcon
-   */
-  trailingIcon?: IconProps['name']
   /**
    * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -445,7 +445,6 @@ function onSelect(e: Event, item: T) {
         v-bind="inputProps"
         :loading-icon="loadingIcon"
         :icon="icon || appConfig.ui.icons.search"
-        :trailing-icon="trailingIcon"
         :class="ui.input({ class: props.ui?.input })"
         @keydown.backspace="onBackspace"
       >

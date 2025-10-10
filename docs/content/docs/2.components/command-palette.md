@@ -1021,10 +1021,6 @@ props:
 ---
 ::
 
-::tip
-The actions slot appears in the input's trailing section, before the close button if enabled.
-::
-
 ## API
 
 ### Props
