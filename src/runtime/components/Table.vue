@@ -197,7 +197,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
    */
   facetedOptions?: FacetedOptions<T>
-  onSelect?: (row: TableRow<T>, e?: Event) => void
+  onSelect?: (e: Event, row: TableRow<T>) => void
   onHover?: (e: Event, row: TableRow<T> | null) => void
   onContextmenu?: ((e: Event, row: TableRow<T>) => void) | Array<((e: Event, row: TableRow<T>) => void)>
   class?: any
@@ -437,8 +437,7 @@ function onRowSelect(e: Event, row: TableRow<T>) {
   e.preventDefault()
   e.stopPropagation()
 
-  // FIXME: `e` should be the first argument for consistency
-  props.onSelect(row, e)
+  props.onSelect(e, row)
 }
 
 function onRowHover(e: Event, row: TableRow<T> | null) {

@@ -320,7 +320,7 @@ function randomize() {
 
 const rowSelection = ref<Record<string, boolean>>({})
 
-function onSelect(row: TableRow<Payment>) {
+function onSelect(e: Event, row: TableRow<Payment>) {
   row.toggleSelected(!row.getIsSelected())
 }
 
