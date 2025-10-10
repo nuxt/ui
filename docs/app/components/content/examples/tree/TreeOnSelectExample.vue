@@ -31,9 +31,9 @@ const items: TreeItem[] = [
   { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
 ]
 
-function onSelect(event: TreeItemSelectEvent<TreeItem>) {
-  if (event.detail.originalEvent.type === 'click') {
-    event.preventDefault()
+function onSelect(e: TreeItemSelectEvent<TreeItem>) {
+  if (e.detail.originalEvent.type === 'click') {
+    e.preventDefault()
   }
 }
 </script>

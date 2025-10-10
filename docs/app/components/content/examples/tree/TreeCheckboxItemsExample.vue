@@ -30,9 +30,9 @@ const items: TreeItem[] = [
 
 const value = ref<(typeof items)>([])
 
-function onSelect(event: TreeItemSelectEvent<TreeItem>) {
-  if (event.detail.originalEvent.type === 'click') {
-    event.preventDefault()
+function onSelect(e: TreeItemSelectEvent<TreeItem>) {
+  if (e.detail.originalEvent.type === 'click') {
+    e.preventDefault()
   }
 }
 </script>
