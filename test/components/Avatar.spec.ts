@@ -16,6 +16,8 @@ describe('Avatar', () => {
     ['with chip', { props: { chip: { text: '1' } } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { src: 'https://github.com/benjamincanac.png', size } }]),
     ['with as', { props: { as: 'section' } }],
+    ['with as (object)', { props: { src: 'https://github.com/benjamincanac.png', as: { root: 'section', img: 'p' } } }],
+    ['with as (partial object)', { props: { src: 'https://github.com/benjamincanac.png', as: { img: 'p' } } }],
     ['with class', { props: { class: 'bg-default' } }],
     ['with ui', { props: { ui: { fallback: 'font-bold' } } }],
     // Slots

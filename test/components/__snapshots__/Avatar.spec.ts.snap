@@ -2,6 +2,14 @@
 
 exports[`Avatar > renders with alt correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span class="font-medium leading-none text-muted truncate">BC</span></span>"`;
 
+exports[`Avatar > renders with as (object) correctly 1`] = `
+"<section class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base">
+  <p src="https://github.com/benjamincanac.png" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></p>
+</section>"
+`;
+
+exports[`Avatar > renders with as (partial object) correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><p src="https://github.com/benjamincanac.png" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></p></span>"`;
+
 exports[`Avatar > renders with as correctly 1`] = `"<section class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span class="font-medium leading-none text-muted truncate">&nbsp;</span></section>"`;
 
 exports[`Avatar > renders with chip correctly 1`] = `"<span class="relative inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span class="font-medium leading-none text-muted truncate">&nbsp;</span><span class="rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap bg-primary h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute">1</span></span>"`;

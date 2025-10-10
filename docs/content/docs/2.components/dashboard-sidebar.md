@@ -144,6 +144,10 @@ class: '!p-0 !justify-start'
 :placeholder{class="h-96"}
 ::
 
+::tip{to="/docs/components/dashboard-group#props"}
+Sizes are calculated as percentages by default. You can change this using the `unit` prop on the `DashboardGroup` component.
+::
+
 ::note
 The `collapsed-size` prop is set to `0` by default but the sidebar has a `min-w-16` to make sure it is visible.
 ::
