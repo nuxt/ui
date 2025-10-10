@@ -35,9 +35,9 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
 }
 
 export interface ButtonSlots {
-  leading(props?: {}): any
+  leading(props: { ui: Button['ui'] }): any
   default(props?: {}): any
-  trailing(props?: {}): any
+  trailing(props: { ui: Button['ui'] }): any
 }
 </script>
 
@@ -132,7 +132,7 @@ const ui = computed(() => tv({
       })"
       @click="onClickWrapper"
     >
-      <slot name="leading">
+      <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
         <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
       </slot>
@@ -143,7 +143,7 @@ const ui = computed(() => tv({
         </span>
       </slot>
 
-      <slot name="trailing">
+      <slot name="trailing" :ui="ui">
         <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
       </slot>
     </ULinkBase>

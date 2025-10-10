@@ -45,7 +45,7 @@ export interface HeaderSlots {
   left(props?: {}): any
   default(props?: {}): any
   right(props?: {}): any
-  toggle(props: { open: boolean, toggle: () => void }): any
+  toggle(props: { open: boolean, toggle: () => void, ui: Header['ui'] }): any
   top(props?: {}): any
   bottom(props?: {}): any
   body(props?: {}): any
@@ -122,7 +122,7 @@ function toggleOpen() {
 
 <template>
   <DefineToggleTemplate>
-    <slot name="toggle" :open="open" :toggle="toggleOpen">
+    <slot name="toggle" :open="open" :toggle="toggleOpen" :ui="ui">
       <UButton
         v-if="toggle"
         color="neutral"

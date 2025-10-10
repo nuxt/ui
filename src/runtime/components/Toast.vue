@@ -62,11 +62,11 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
 export interface ToastEmits extends ToastRootEmits {}
 
 export interface ToastSlots {
-  leading(props?: {}): any
+  leading(props: { ui: Toast['ui'] }): any
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { ui: { [K in keyof Required<Toast['slots']>]: (props?: Record<string, any>) => string } }): any
+  close(props: { ui: Toast['ui'] }): any
 }
 </script>
 
@@ -128,7 +128,7 @@ defineExpose({
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--height': height }"
   >
-    <slot name="leading">
+    <slot name="leading" :ui="ui">
       <UAvatar v-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
     </slot>
