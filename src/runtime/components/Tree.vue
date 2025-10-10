@@ -35,7 +35,7 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean 
    * The element or component this component should render as.
    * @defaultValue 'ul'
    */
-  as?: any
+  as?: any | { root?: any, link?: any }
   /**
    * @defaultValue 'primary'
    */
@@ -160,7 +160,15 @@ const slots = defineSlots<TreeSlots<T>>()
 
 const appConfig = useAppConfig() as Tree['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect'), emits)
+
+const as = computed(() => {
+  if (typeof props.as === 'string' || typeof props.as?.render === 'function') {
+    return { root: props.as, link: 'button' }
+  }
+
+  return defu(props.as, { root: 'ul', link: 'button' })
+})
 
 const nested = computed(() => props.virtualize ? false : props.nested)
 
@@ -252,8 +260,9 @@ const defaultExpanded = computed(() =>
           v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
           :item="(item as Extract<T[number], { slot: string; }>)"
         >
-          <button
-            type="button"
+          <component
+            :is="as.link"
+            :type="as.link === 'button' ? 'button' : undefined"
             :disabled="item.disabled || disabled"
             :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })"
             :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : undefined"
@@ -315,7 +324,7 @@ const defaultExpanded = computed(() =>
                 </slot>
               </span>
             </slot>
-          </button>
+          </component>
         </slot>
 
         <ul
@@ -336,6 +345,7 @@ const defaultExpanded = computed(() =>
   <TreeRoot
     v-slot="{ flattenItems }"
     v-bind="{ ...rootProps, ...$attrs }"
+    :as="as.root"
     :model-value="modelValue"
     :default-value="defaultValue"
     :class="ui.root({ class: [props.ui?.root, props.class] })"

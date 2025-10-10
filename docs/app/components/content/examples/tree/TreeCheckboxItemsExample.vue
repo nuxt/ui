@@ -40,6 +40,7 @@ function onSelect(event: TreeItemSelectEvent<TreeItem>) {
 <template>
   <UTree
     v-model="value"
+    :as="{ link: 'div' }"
     :items="items"
     multiple
     propagate-select

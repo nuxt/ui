@@ -514,6 +514,10 @@ props:
 ---
 ::
 
+::note
+This example uses the `as` prop to change the items from `button` to `div` as the [`Checkbox`](/docs/components/checkbox) is also rendered as a `button`.
+::
+
 ### With virtualization :badge{label="Soon"}
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
