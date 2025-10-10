@@ -31,9 +31,9 @@ const items: TreeItem[] = [
   { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
 ]
 
-function onToggle(event: TreeItemToggleEvent<TreeItem>) {
-  if (event.detail.originalEvent.type === 'keydown') {
-    event.preventDefault()
+function onToggle(e: TreeItemToggleEvent<TreeItem>) {
+  if (e.detail.originalEvent.type === 'keydown') {
+    e.preventDefault()
   }
 }
 </script>
