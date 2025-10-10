@@ -20,6 +20,7 @@ export interface ProseTabsProps {
    */
   hash?: string
   class?: any
+  ui?: ProseTabs['slots']
 }
 
 export interface ProseTabsSlots {
@@ -43,6 +44,7 @@ const model = defineModel<string>()
 
 const appConfig = useAppConfig() as ProseTabs['AppConfig']
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.tabs || {}) }))
 
 const rerenderCount = ref(1)
@@ -112,7 +114,7 @@ onBeforeUpdate(() => rerenderCount.value++)
     :items="items"
     :class="props.class"
     :unmount-on-hide="false"
-    :ui="transformUI(ui())"
+    :ui="transformUI(ui(), props.ui)"
     @update:model-value="onUpdateModelValue"
   >
     <template #content="{ item }">

@@ -56,7 +56,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.colla
 </script>
 
 <template>
-  <UCollapsible :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui)">
+  <UCollapsible :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui, props.ui)">
     <template #default="{ open }">
       <button :class="ui.trigger({ class: props.ui?.trigger })">
         <UIcon :name="icon || appConfig.ui.icons.chevronDown" :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" />

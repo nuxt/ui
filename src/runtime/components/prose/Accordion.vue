@@ -4,6 +4,7 @@ import theme from '#build/ui/prose/accordion'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseAccordion = ComponentConfig<typeof theme, AppConfig, 'accordion', 'ui.prose'>
+type Accordion = ComponentConfig<typeof theme, AppConfig, 'accordion'>
 
 export interface ProseAccordionProps {
   type?: 'single' | 'multiple'
