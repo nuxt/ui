@@ -8,7 +8,7 @@ type ProseAccordion = ComponentConfig<typeof theme, AppConfig, 'accordion', 'ui.
 export interface ProseAccordionProps {
   type?: 'single' | 'multiple'
   class?: any
-  ui?: ProseAccordion['slots']
+  ui?: ProseAccordion['slots'] & Accordion['slots']
 }
 
 export interface ProseAccordionSlots {
