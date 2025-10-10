@@ -185,6 +185,7 @@ defineShortcuts({
     <UCommandPalette
       v-model="selected"
       v-model:search-term="searchTerm"
+      children-icon="i-lucide-arrow-right"
       :loading="status === 'pending'"
       :groups="groups"
       :fuse="{
@@ -196,6 +197,12 @@ defineShortcuts({
       class="sm:max-h-96"
       @update:model-value="onSelect"
     >
+      <template #actions>
+        <UDropdownMenu :items="[{ label: 'Backlog' }, { label: 'Todo' }, { label: 'In Progress' }, { label: 'Done' }]">
+          <UButton label="In Progress" color="neutral" variant="outline" trailing-icon="i-lucide-chevron-down" />
+        </UDropdownMenu>
+      </template>
+
       <template #footer>
         <div class="flex items-center justify-between gap-2">
           <UIcon name="i-simple-icons-nuxtdotjs" class="size-5 text-dimmed ml-1" />

@@ -1007,6 +1007,24 @@ props:
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
 ::
 
+### With actions slot
+
+Use the `#actions` slot to add custom components in the input's trailing area, such as a [DropdownMenu](/docs/components/dropdown-menu) for filtering or status selection.
+
+::component-example
+---
+collapse: true
+name: 'command-palette-actions-slot-example'
+class: '!p-0'
+props:
+  autofocus: false
+---
+::
+
+::tip
+The actions slot appears in the input's trailing section, before the close button if enabled.
+::
+
 ## API
 
 ### Props
