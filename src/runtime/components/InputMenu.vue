@@ -474,11 +474,11 @@ defineExpose({
           />
         </slot>
 
-          <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isInputItem(item) && item.ui?.itemLabel] })">
-            <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
-              {{ isInputItem(item) ? get(item, props.labelKey as string) : item }}
-            </slot>
-          </span>
+        <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isInputItem(item) && item.ui?.itemLabel] })">
+          <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
+            {{ isInputItem(item) ? get(item, props.labelKey as string) : item }}
+          </slot>
+        </span>
 
         <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isInputItem(item) && item.ui?.itemTrailing] })">
           <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" :ui="ui" />
@@ -517,11 +517,11 @@ defineExpose({
         @remove-tag="onRemoveTag"
       >
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="isInputItem(item) ? item : String(item)" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
-        <TagsInputItemText :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
-          <slot name="tags-item-text" :item="(item as NestedItem<T>)" :index="index">
-            {{ displayValue(item as GetItemValue<T, VK>) }}
-          </slot>
-        </TagsInputItemText>
+          <TagsInputItemText :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
+            <slot name="tags-item-text" :item="(item as NestedItem<T>)" :index="index">
+              {{ displayValue(item as GetItemValue<T, VK>) }}
+            </slot>
+          </TagsInputItemText>
 
           <TagsInputItemDelete :class="ui.tagsItemDelete({ class: [props.ui?.tagsItemDelete, isInputItem(item) && item.ui?.tagsItemDelete] })" :disabled="disabled">
             <slot name="tags-item-delete" :item="(item as NestedItem<T>)" :index="index" :ui="ui">

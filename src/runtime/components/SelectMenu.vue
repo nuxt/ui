@@ -454,11 +454,11 @@ defineExpose({
           />
         </slot>
 
-          <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
-            <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
-              {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
-            </slot>
-          </span>
+        <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
+          <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
+            {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
+          </slot>
+        </span>
 
         <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
           <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" :ui="ui" />
