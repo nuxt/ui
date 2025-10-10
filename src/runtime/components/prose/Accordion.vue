@@ -2,14 +2,14 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/accordion'
 import type { ComponentConfig } from '../../types/tv'
+import type { AccordionProps } from '../../types'
 
 type ProseAccordion = ComponentConfig<typeof theme, AppConfig, 'accordion', 'ui.prose'>
-type Accordion = ComponentConfig<typeof theme, AppConfig, 'accordion'>
 
 export interface ProseAccordionProps {
   type?: 'single' | 'multiple'
   class?: any
-  ui?: ProseAccordion['slots'] & Accordion['slots']
+  ui?: ProseAccordion['slots'] & AccordionProps['ui']
 }
 
 export interface ProseAccordionSlots {

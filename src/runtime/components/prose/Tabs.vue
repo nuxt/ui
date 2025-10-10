@@ -2,6 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/tabs'
 import type { ComponentConfig } from '../../types/tv'
+import type { TabsProps } from '../../types'
 
 type ProseTabs = ComponentConfig<typeof theme, AppConfig, 'tabs', 'ui.prose'>
 
@@ -20,7 +21,7 @@ export interface ProseTabsProps {
    */
   hash?: string
   class?: any
-  ui?: ProseTabs['slots']
+  ui?: ProseTabs['slots'] & TabsProps['ui']
 }
 
 export interface ProseTabsSlots {
