@@ -85,6 +85,7 @@ const modelValueWithMappedId = ref<(typeof itemsWithMappedId)[number]>()
       :nested="nested"
       multiple
       v-bind="props"
+      class="w-full"
     />
   </Matrix>
 
