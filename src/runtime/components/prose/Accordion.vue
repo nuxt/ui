@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/accordion'
-import type { ComponentConfig } from '../../types/tv'
 import type { AccordionProps } from '../../types'
+import type { ComponentConfig } from '../../types/tv'
 
 type ProseAccordion = ComponentConfig<typeof theme, AppConfig, 'accordion', 'ui.prose'>
 
