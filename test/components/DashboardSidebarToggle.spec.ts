@@ -4,6 +4,7 @@ import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardSidebarToggle from '../../src/runtime/components/DashboardSidebarToggle.vue'
 import type { DashboardSidebarToggleProps } from '../../src/runtime/components/DashboardSidebarToggle.vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { axe } from 'vitest-axe'
 
 const DashboardWrapper = defineComponent({
   components: {
@@ -26,5 +27,11 @@ describe('DashboardSidebarToggle', () => {
   ])('renders %s correctly', async (_: string, options: { props?: DashboardSidebarToggleProps }) => {
     const wrapper = await mountSuspended(DashboardWrapper, options)
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(DashboardWrapper)
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

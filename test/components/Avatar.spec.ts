@@ -3,6 +3,8 @@ import Avatar from '../../src/runtime/components/Avatar.vue'
 import type { AvatarProps, AvatarSlots } from '../../src/runtime/components/Avatar.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/avatar'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { axe } from 'vitest-axe'
 
 describe('Avatar', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -25,5 +27,16 @@ describe('Avatar', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarProps, slots?: AvatarSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Avatar)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Avatar, {
+      props: {
+        alt: 'Benjamin Canac',
+        src: 'https://github.com/benjamincanac.png'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

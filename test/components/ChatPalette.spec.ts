@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest'
 import ChatPalette from '../../src/runtime/components/ChatPalette.vue'
 import type { ChatPaletteProps, ChatPaletteSlots } from '../../src/runtime/components/ChatPalette.vue'
 import ComponentRender from '../component-render'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('ChatPalette', () => {
   it.each([
@@ -15,5 +17,11 @@ describe('ChatPalette', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatPaletteProps, slots?: Partial<ChatPaletteSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ChatPalette)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(ChatPalette)
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

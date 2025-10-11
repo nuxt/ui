@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest'
 import DashboardToolbar from '../../src/runtime/components/DashboardToolbar.vue'
 import type { DashboardToolbarProps, DashboardToolbarSlots } from '../../src/runtime/components/DashboardToolbar.vue'
 import ComponentRender from '../component-render'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('DashboardToolbar', () => {
   it.each([
@@ -16,5 +18,11 @@ describe('DashboardToolbar', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DashboardToolbarProps, slots?: Partial<DashboardToolbarSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, DashboardToolbar)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(DashboardToolbar)
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

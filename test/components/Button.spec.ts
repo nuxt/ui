@@ -6,6 +6,7 @@ import ComponentRender from '../component-render'
 import theme from '#build/ui/button'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises } from '@vue/test-utils'
+import { axe } from 'vitest-axe'
 
 import {
   UForm
@@ -110,5 +111,21 @@ describe('Button', () => {
     expect(icon?.vm?.name).toBe('i-lucide-loader-circle')
 
     resolve?.(null)
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Button, {
+      props: {
+        label: 'Button',
+        avatar: {
+          src: 'https://github.com/benjamincanac.png',
+          alt: 'Benjamin Canac'
+        },
+        trailingIcon: 'i-lucide-arrow-right'
+
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

@@ -3,13 +3,15 @@ import ChatMessage from '../../src/runtime/components/ChatMessage.vue'
 import type { ChatMessageProps, ChatMessageSlots } from '../../src/runtime/components/ChatMessage.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/chat-message'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('ChatMessage', () => {
   const variants = Object.keys(theme.variants.variant) as any
   const props = {
     id: '6045235a-a435-46b8-989d-2df38ca2eb47',
     role: 'user' as const,
-    parts: [{ type: 'text', text: 'Hello, how are you?' }]
+    parts: [{ type: 'text' as const, text: 'Hello, how are you?' }]
   }
 
   it.each([
@@ -30,5 +32,13 @@ describe('ChatMessage', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatMessageProps, slots?: Partial<ChatMessageSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ChatMessage)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(ChatMessage, {
+      props
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

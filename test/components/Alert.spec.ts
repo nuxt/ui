@@ -3,6 +3,8 @@ import Alert from '../../src/runtime/components/Alert.vue'
 import type { AlertProps, AlertSlots } from '../../src/runtime/components/Alert.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/alert'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { axe } from 'vitest-axe'
 
 describe('Alert', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -33,5 +35,23 @@ describe('Alert', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AlertProps, slots?: Partial<AlertSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Alert)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Alert, {
+      props: {
+        title: 'Alert',
+        icon: 'i-lucide-lightbulb',
+        description: 'This is a description',
+        actions: [{ label: 'Action' }],
+        close: true,
+        avatar: {
+          src: 'https://github.com/benjamincanac.png',
+          alt: 'Benjamin Canac'
+        }
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

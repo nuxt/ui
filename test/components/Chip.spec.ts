@@ -3,6 +3,8 @@ import Chip from '../../src/runtime/components/Chip.vue'
 import type { ChipProps, ChipSlots } from '../../src/runtime/components/Chip.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/chip'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Chip', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -25,5 +27,15 @@ describe('Chip', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChipProps, slots?: Partial<ChipSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Chip)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Chip, {
+      props: {
+        text: 'Text'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

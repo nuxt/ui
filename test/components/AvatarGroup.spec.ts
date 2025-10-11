@@ -5,6 +5,8 @@ import AvatarGroup from '../../src/runtime/components/AvatarGroup.vue'
 import type { AvatarGroupProps, AvatarGroupSlots } from '../../src/runtime/components/AvatarGroup.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/avatar-group'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { axe } from 'vitest-axe'
 
 const AvatarGroupWrapper = defineComponent({
   components: {
@@ -33,5 +35,15 @@ describe('AvatarGroup', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarGroupProps, slots?: Partial<AvatarGroupSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, AvatarGroupWrapper)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(AvatarGroupWrapper, {
+      props: {
+        max: 2
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

@@ -3,6 +3,8 @@ import Card from '../../src/runtime/components/Card.vue'
 import type { CardProps, CardSlots } from '../../src/runtime/components/Card.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/card'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Card', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -20,5 +22,11 @@ describe('Card', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CardProps, slots?: Partial<CardSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Card)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Card)
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

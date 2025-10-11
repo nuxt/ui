@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest'
 import Header from '../../src/runtime/components/Header.vue'
 import type { HeaderProps, HeaderSlots } from '../../src/runtime/components/Header.vue'
 import ComponentRender from '../component-render'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Header', () => {
   it.each([
@@ -30,5 +32,16 @@ describe('Header', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: HeaderProps, slots?: Partial<HeaderSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Header)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Header, {
+      props: {
+        title: 'Documentation',
+        to: '/docs'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

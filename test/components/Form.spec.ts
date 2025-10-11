@@ -11,6 +11,7 @@ import { renderForm } from '../utils/form'
 import { UForm } from '#components'
 
 import { flushPromises } from '@vue/test-utils'
+import { axe } from 'vitest-axe'
 
 describe('Form', () => {
   it.each([
@@ -19,6 +20,14 @@ describe('Form', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props: FormProps<any>, slots?: Partial<FormSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, UForm)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await renderForm({
+      fixture: 'FormA11y'
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   it.each([

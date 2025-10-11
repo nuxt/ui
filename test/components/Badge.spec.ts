@@ -3,6 +3,8 @@ import Badge from '../../src/runtime/components/Badge.vue'
 import type { BadgeProps, BadgeSlots } from '../../src/runtime/components/Badge.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/badge'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { axe } from 'vitest-axe'
 
 describe('Badge', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -33,5 +35,19 @@ describe('Badge', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BadgeProps, slots?: Partial<BadgeSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Badge)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Badge, {
+      props: {
+        label: 'Badge',
+        icon: 'i-lucide-rocket',
+        leadingIcon: 'i-lucide-arrow-left',
+        trailingIcon: 'i-lucide-arrow-right',
+        avatar: { src: 'https://github.com/benjamincanac.png' }
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

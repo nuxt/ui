@@ -4,6 +4,8 @@ import type { FieldGroupProps, FieldGroupSlots } from '../../src/runtime/compone
 import ComponentRender from '../component-render'
 import { UInput, UButton } from '#components'
 import buttonTheme from '#build/ui/button'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('FieldGroup', () => {
   const sizes = Object.keys(buttonTheme.variants.size) as any
@@ -44,5 +46,17 @@ describe('FieldGroup', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FieldGroupProps, slots?: Partial<FieldGroupSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, FieldGroup)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(FieldGroup, {
+      slots: {
+        default: {
+          template: `<UInput /> <UButton> Click me! </UButton>`
+        }
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

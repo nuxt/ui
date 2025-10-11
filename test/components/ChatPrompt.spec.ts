@@ -3,6 +3,8 @@ import ChatPrompt from '../../src/runtime/components/ChatPrompt.vue'
 import type { ChatPromptProps, ChatPromptSlots } from '../../src/runtime/components/ChatPrompt.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/chat-prompt'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('ChatPrompt', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -21,5 +23,15 @@ describe('ChatPrompt', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatPromptProps, slots?: Partial<ChatPromptSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ChatPrompt)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: {
+        placeholder: 'Placeholder'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

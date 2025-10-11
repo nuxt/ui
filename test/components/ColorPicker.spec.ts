@@ -4,6 +4,7 @@ import ColorPicker from '../../src/runtime/components/ColorPicker.vue'
 import type { ColorPickerProps } from '../../src/runtime/components/ColorPicker.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/color-picker'
+import { axe } from 'vitest-axe'
 
 describe('ColorPicker', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -26,6 +27,12 @@ describe('ColorPicker', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ColorPickerProps }) => {
     const html = await ComponentRender(nameOrHtml, options, ColorPicker)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(ColorPicker)
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {

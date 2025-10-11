@@ -6,6 +6,8 @@ import theme from '#build/ui/checkbox'
 import { renderForm } from '../utils/form'
 import { mount, flushPromises } from '@vue/test-utils'
 import type { FormInputEvents } from '../../src/module'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Checkbox', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -40,6 +42,16 @@ describe('Checkbox', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxProps, slots?: Partial<CheckboxSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Checkbox)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Checkbox, {
+      props: {
+        label: 'Test checkbox'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {
