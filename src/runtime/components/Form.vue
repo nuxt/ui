@@ -1,15 +1,16 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
+import type { GenericFormSchema } from '@formwerk/core'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData } from '../types/form'
 import type { ComponentConfig } from '../types/tv'
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>
 
-export type FormProps<S extends FormSchema, T extends boolean = true, N extends boolean = false> = {
+export type FormProps<TSchema extends GenericFormSchema, S extends FormSchema, T extends boolean = true, N extends boolean = false> = {
   id?: string | number
   /** Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs. */
-  schema?: S
+  schema: TSchema
   /** An object representing the current state of the form. */
   state?: N extends false ? Partial<InferInput<S>> : never
   /**
@@ -72,9 +73,10 @@ export interface FormSlots {
 }
 </script>
 
-<script lang="ts" setup generic="S extends FormSchema, T extends boolean = true, N extends boolean = false">
+<script lang="ts" setup generic="TSchema extends GenericFormSchema, S extends FormSchema, T extends boolean = true, N extends boolean = false, ">
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive } from 'vue'
 import { useEventBus } from '@vueuse/core'
+import { useForm } from '@formwerk/core'
 import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
@@ -84,12 +86,12 @@ import { FormValidationException } from '../types/form'
 type I = InferInput<S>
 type O = InferOutput<S>
 
-const props = withDefaults(defineProps<FormProps<S, T, N>>(), {
+const props = withDefaults(defineProps<FormProps<TSchema, S, T, N>>(), {
   validateOn() {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
   validateOnInputDelay: 300,
-  transform: () => true as T,
+  // transform: () => true as T,
   loadingAuto: true
 })
 
@@ -111,6 +113,7 @@ const parentBus = isNested && inject(
   formBusInjectionKey,
   undefined
 )
+const { values } = useForm({ id: 'Login', schema: props.schema })
 
 const parentState = isNested ? inject(formStateInjectionKey, undefined) : undefined
 const state = computed(() => {
@@ -146,22 +149,22 @@ onMounted(async () => {
     } else if (event.type === 'detach') {
       nestedForms.value.delete(event.formId)
     } else if (props.validateOn?.includes(event.type) && !loading.value) {
-      if (event.type !== 'input') {
-        await _validate({ name: event.name, silent: true, nested: false })
-      } else if (event.eager || blurredFields.has(event.name)) {
-        await _validate({ name: event.name, silent: true, nested: false })
-      }
+      // if (event.type !== 'input') {
+      //   await _validate({ name: event.name, silent: true, nested: false })
+      // } else if (event.eager || blurredFields.has(event.name)) {
+      //   await _validate({ name: event.name, silent: true, nested: false })
+      // }
     }
 
     if (event.type === 'blur') {
       blurredFields.add(event.name)
     }
 
-    if (event.type === 'change' || event.type === 'input' || event.type === 'blur' || event.type === 'focus') {
+    if (event.type === 'touched') {
       touchedFields.add(event.name)
     }
 
-    if (event.type === 'change' || event.type === 'input') {
+    if (event.type === 'dirty') {
       dirtyFields.add(event.name)
     }
   })
@@ -434,7 +437,6 @@ const api = {
 
     errors.value = [...localErrors, ...nestedErrors]
   },
-
   disabled,
   loading,
   dirty: computed(() => !!dirtyFields.size),
@@ -447,6 +449,7 @@ defineExpose(api)
 </script>
 
 <template>
+  <pre>{{ values }}</pre>
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"

@@ -1,6 +1,5 @@
 import { inject, computed, provide } from 'vue'
 import type { InjectionKey, Ref, ComputedRef } from 'vue'
-import { useDebounceFn } from '@vueuse/core'
 import type { UseEventBusReturn } from '@vueuse/core'
 import type { FormFieldProps } from '../types'
 import type { FormErrorWithId, FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjectedOptions } from '../types/form'
@@ -53,20 +52,13 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     emitFormEvent('blur', formField?.value.name)
   }
 
-  function emitFormFocus() {
-    emitFormEvent('focus', formField?.value.name)
+  function emitFormTouched() {
+    emitFormEvent('touched', formField?.value.name)
   }
 
-  function emitFormChange() {
-    emitFormEvent('change', formField?.value.name)
+  function emitFormDirty() {
+    emitFormEvent('dirty', formField?.value.name)
   }
-
-  const emitFormInput = useDebounceFn(
-    () => {
-      emitFormEvent('input', formField?.value.name, !opts?.deferInputValidation || formField?.value.eagerValidation)
-    },
-    formField?.value.validateOnInputDelay ?? formOptions?.value.validateOnInputDelay ?? 0
-  )
 
   return {
     name: computed(() => props?.name ?? formField?.value.name),
@@ -75,8 +67,7 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     highlight: computed(() => formField?.value.error ? true : props?.highlight),
     disabled: computed(() => formOptions?.value.disabled || props?.disabled),
     emitFormBlur,
-    emitFormInput,
-    emitFormChange,
-    emitFormFocus
+    emitFormTouched,
+    emitFormDirty
   }
 }

@@ -89,8 +89,8 @@ const modelValue = useVModel<InputProps<T>, 'modelValue', 'update:modelValue'>(p
 
 const appConfig = useAppConfig() as Input['AppConfig']
 
-const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, name, highlight, disabled, emitFormFocus } = useFormField<InputProps<T>>(props, { deferInputValidation: true })
-const { controlProps, field: { isDisabled } } = useCustomControl({
+const { size: formGroupSize, color, name, highlight, disabled, emitFormDirty, emitFormTouched, emitFormBlur } = useFormField<InputProps<T>>(props, { deferInputValidation: true })
+const { controlProps, field: { isDisabled, setBlurred, setTouched, setValue } } = useCustomControl({
   name,
   disabled,
   required: props.required,
@@ -134,7 +134,10 @@ function updateInput(value: string | null | undefined) {
   }
 
   modelValue.value = value as T
-  emitFormInput()
+  setValue(value)
+  setTouched(true)
+  emitFormDirty()
+  emitFormTouched()
 }
 
 function onInput(event: Event) {
@@ -155,13 +158,16 @@ function onChange(event: Event) {
     (event.target as HTMLInputElement).value = value.trim()
   }
 
-  emitFormChange()
   emits('change', event)
 }
 
 function onBlur(event: FocusEvent) {
-  emitFormBlur()
   emits('blur', event)
+
+  setTouched(true)
+  setBlurred(true)
+  emitFormBlur()
+  emitFormTouched()
 }
 
 function autoFocus() {
@@ -196,7 +202,6 @@ defineExpose({
       @input="onInput"
       @blur="onBlur"
       @change="onChange"
-      @focus="emitFormFocus"
     >
 
     <slot />
