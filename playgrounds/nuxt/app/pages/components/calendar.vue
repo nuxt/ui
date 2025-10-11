@@ -10,10 +10,12 @@ const rangeValue = shallowRef({
 })
 
 const colors = Object.keys(theme.variants.color)
+const variants = Object.keys(theme.variants.variant)
 const sizes = Object.keys(theme.variants.size)
 
 const attrs = reactive({
   color: [theme.defaultVariants.color],
+  variant: [theme.defaultVariants.variant],
   size: [theme.defaultVariants.size]
 })
 
@@ -24,6 +26,7 @@ const range = ref(false)
 <template>
   <Navbar>
     <USelect v-model="attrs.color" :items="colors" multiple />
+    <USelect v-model="attrs.variant" :items="variants" multiple />
     <USelect v-model="attrs.size" :items="sizes" multiple />
     <USwitch v-model="multiple" label="Multiple" />
     <USwitch v-model="range" label="Range" />

@@ -25,7 +25,7 @@ export type InputMenuItem = InputMenuValue | {
    */
   type?: 'label' | 'separator' | 'item'
   disabled?: boolean
-  onSelect?(e?: Event): void
+  onSelect?: (e: Event) => void
   class?: any
   ui?: Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any

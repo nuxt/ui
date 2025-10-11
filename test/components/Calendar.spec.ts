@@ -8,6 +8,7 @@ import { CalendarDate } from '@internationalized/date'
 
 describe('Calendar', () => {
   const sizes = Object.keys(theme.variants.size) as any
+  const variants = Object.keys(theme.variants.variant) as any
   const date = new Date('2025-01-01')
 
   vi.setSystemTime(date)
@@ -37,6 +38,7 @@ describe('Calendar', () => {
     ['without monthControls', { props: { monthControls: false } }],
     ['without yearControls', { props: { yearControls: false } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
+    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant, defaultValue: new CalendarDate(2025, 1, 15) } }]),
     ['with color neutral', { props: { color: 'neutral' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'max-w-sm' } }],

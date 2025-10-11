@@ -328,7 +328,7 @@ You can use the `row-selection` prop to control the selection state of the rows 
 You can add a `@select` listener to make rows clickable with or without a checkbox column.
 
 ::note
-The handler function receives the `TableRow` instance as the first argument and an optional `Event` as the second argument.
+The handler function receives the `Event` and `TableRow` instance as the first and second arguments respectively.
 ::
 
 ::component-example
