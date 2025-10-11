@@ -1,9 +1,13 @@
 import { describe, it, expect, test } from 'vitest'
+import type { AppConfig } from '@nuxt/schema'
 import NavigationMenu from '../../src/runtime/components/NavigationMenu.vue'
 import type { NavigationMenuProps, NavigationMenuSlots } from '../../src/runtime/components/NavigationMenu.vue'
+import type { ComponentConfig } from '../../src/runtime/types/tv'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/navigation-menu'
 import { expectSlotProps } from '../utils/types'
+
+type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>
 
 describe('NavigationMenu', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -118,21 +122,21 @@ describe('NavigationMenu', () => {
     // normal
     expectSlotProps('item', () => NavigationMenu({
       items: [{ label: 'foo', value: 'bar' }]
-    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean, ui: NavigationMenu['ui'] }>()
 
     // groups
     expectSlotProps('item', () => NavigationMenu({
       items: [[{ label: 'foo', value: 'bar' }]]
-    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean, ui: NavigationMenu['ui'] }>()
 
     // custom
     expectSlotProps('item', () => NavigationMenu({
       items: [{ label: 'foo', value: 'bar', custom: 'nice' }]
-    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean, ui: NavigationMenu['ui'] }>()
 
     // custom + groups
     expectSlotProps('item', () => NavigationMenu({
       items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]]
-    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean, ui: NavigationMenu['ui'] }>()
   })
 })
