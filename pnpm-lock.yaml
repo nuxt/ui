@@ -21,8 +21,8 @@ importers:
         specifier: ^2.0.51
         version: 2.0.51(vue@3.5.21(typescript@5.8.3))(zod@4.1.11)
       '@formwerk/core':
-        specifier: ^0.14.0
-        version: 0.14.0(vue@3.5.21(typescript@5.8.3))
+        specifier: ^0.14.1
+        version: 0.14.1(vue@3.5.21(typescript@5.8.3))
       '@iconify/vue':
         specifier: ^5.0.0
         version: 5.0.0(vue@3.5.21(typescript@5.8.3))
@@ -829,13 +829,13 @@ packages:
   '@floating-ui/vue@1.1.7':
     resolution: {integrity: sha512-idmAtbAIigGXN2SI5gItiXYBYtNfDTP9yIiObxgu13dgtG7ARCHlNfnR29GxP4LI4o13oiwsJ8wVgghj1lNqcw==}
 
-  '@formwerk/core@0.14.0':
-    resolution: {integrity: sha512-9jomx0zgr6YEjgFuJf7Ci6Dd89dFYqVvrzlczOH2ck7+UDbBbFz4rOg2tkkxVzaDYlUPuduBYq+bcZjWInDaUQ==}
+  '@formwerk/core@0.14.1':
+    resolution: {integrity: sha512-iFC6L16kY+QZYzJ7/1v7oiZUtotGZ2nDxsRJfxd3tuVPnqWu0UWo6fH3Sa+QW+q+9dPHZMyVQTTB16J/V8BJFQ==}
     peerDependencies:
       vue: '>=3.5.0'
 
-  '@formwerk/devtools@0.14.0':
-    resolution: {integrity: sha512-VyRh14IQqbTR7Co3ld/9LmtNX5pzfxUtCtNxjtkxlOOpZGH0+6mH6oXGTehQO3PIIrD2uXwKMrb6+K7j7ZD6Zg==}
+  '@formwerk/devtools@0.14.1':
+    resolution: {integrity: sha512-CenDXRHxeDkvKfMNFm3SeL3JAXWhtaE6zEpSh0L97UfqOzYlIKJmIatDn1LuN3t4MHd3GJwvaWJlMnvfaJa9Eg==}
 
   '@ghostery/adblocker-content@2.11.6':
     resolution: {integrity: sha512-K+hJR27fYpRGoUQnza2p0BmN86htN1ASoRxF73mAdf1CNDSyfPNCNlpoKt83Z9CbYBdEglXOWItazB9hRMs7gw==}
@@ -7752,9 +7752,9 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@formwerk/core@0.14.0(vue@3.5.21(typescript@5.8.3))':
+  '@formwerk/core@0.14.1(vue@3.5.21(typescript@5.8.3))':
     dependencies:
-      '@formwerk/devtools': 0.14.0
+      '@formwerk/devtools': 0.14.1
       '@internationalized/date': 3.9.0
       '@standard-schema/spec': 1.0.0
       '@standard-schema/utils': 0.3.0
@@ -7762,7 +7762,7 @@ snapshots:
       type-fest: 4.41.0
       vue: 3.5.21(typescript@5.8.3)
 
-  '@formwerk/devtools@0.14.0':
+  '@formwerk/devtools@0.14.1':
     dependencies:
       '@vue/devtools-api': 8.0.2
       '@vue/devtools-kit': 8.0.2
