@@ -6,13 +6,12 @@ export function useHeader() {
     to: '/docs',
     active: route.path.startsWith('/docs/')
   }, {
-    label: 'Blocks',
-    icon: 'i-lucide-blocks',
-    to: '/blocks',
-    active: route.path.startsWith('/blocks/')
-  }, {
     label: 'Figma',
     to: '/figma'
+  }, {
+    label: 'Blocks',
+    to: '/blocks',
+    active: route.path.startsWith('/blocks/')
   }, {
     label: 'Templates',
     to: '/templates'

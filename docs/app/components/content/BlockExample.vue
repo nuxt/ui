@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { camelCase } from 'scule'
+import { camelCase, pascalCase } from 'scule'
 import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
 import type { TabsItem } from '@nuxt/ui'
 
@@ -143,6 +143,30 @@ const copyCode = async () => {
     }
   }
 }
+
+const downloadCode = () => {
+  if (data?.code) {
+    try {
+      const fileName = pascalCase(props.name)
+      const blob = new Blob([data.code], { type: 'text/plain;charset=utf-8' })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `${fileName}.vue`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+
+      toast.add({
+        title: 'Component downloaded',
+        color: 'success'
+      })
+    } catch (err) {
+      console.error('Failed to download code:', err)
+    }
+  }
+}
 </script>
 
 <template>
@@ -229,6 +253,23 @@ const copyCode = async () => {
               label="Copy code"
               @click="copyCode"
             />
+
+            <UTooltip
+              text="Download component"
+              :delay-duration="0"
+              :content="{
+                side: 'top'
+              }"
+            >
+              <UButton
+                variant="ghost"
+                size="sm"
+                square
+                color="neutral"
+                icon="i-lucide-download"
+                @click="downloadCode"
+              />
+            </UTooltip>
 
             <UTooltip
               :text="themeTooltip"

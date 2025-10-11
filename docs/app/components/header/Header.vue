@@ -36,7 +36,7 @@ const { desktopLinks } = useHeader()
       <HeaderBody />
     </template>
 
-    <template v-if="route.path.startsWith('/docs/')" #bottom>
+    <template v-if="route.path.startsWith('/docs/') || route.path.startsWith('/blocks/')" #bottom>
       <HeaderBottom />
     </template>
   </UHeader>
