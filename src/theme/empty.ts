@@ -1,10 +1,11 @@
 export default {
   slots: {
-    root: 'relative isolate rounded-lg',
-    container: 'flex flex-col items-center gap-6 p-4 sm:p-6',
+    root: 'relative isolate w-full rounded-lg space-y-8 p-4 sm:p-6',
+    container: 'flex flex-col items-center gap-6',
     content: 'mx-auto',
     wrapper: 'max-w-sm flex flex-col items-center gap-y-2 text-center',
     icon: 'size-8',
+    iconWrapper: 'size-14',
     title: 'text-2xl font-pretty font-bold text-highlighted tracking-tight',
     description: 'text-base text-muted text-balance',
     actions: 'flex flex-wrap items-center justify-center gap-x-2 gap-y-3'
@@ -30,19 +31,10 @@ export default {
       },
       ghost: {
         description: 'text-muted'
-      },
-      naked: {
-        container: 'p-0 sm:p-0',
-        description: 'text-muted'
       }
-    },
-    content: {
-      default: '',
-      icon: ''
     }
   },
   defaultVariants: {
-    variant: 'subtle',
-    content: 'icon'
+    variant: 'subtle'
   }
 }

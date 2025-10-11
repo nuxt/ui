@@ -17,10 +17,6 @@ export interface EmptyProps {
    */
   variant?: Empty['variants']['variant']
   /**
-   * @defaultValue 'icon'
-   */
-  content?: Empty['variants']['content']
-  /**
    * The icon displayed above the title.
    * @IconifyIcon
    */
@@ -51,9 +47,7 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<EmptyProps>(), {
-  content: 'icon'
-})
+const props = defineProps<EmptyProps>()
 const slots = defineSlots<EmptySlots>()
 
 const appConfig = useAppConfig() as Empty['AppConfig']
@@ -65,10 +59,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.empty || {})
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <slot name="top" />
+
     <div :class="ui.container({ class: props.ui?.container })">
-      <div :class="ui.content({ class: props.ui?.content })">
-        <slot v-if="!!slots.default || icon">
-          <UAvatar v-if="icon" :icon="icon" :ui="{ icon: ui.icon({ class: props.ui?.icon }) }" class="size-14" />
+      <div v-if="!!slots.default || icon" :class="ui.content({ class: props.ui?.content })">
+        <slot>
+          <UAvatar v-if="icon" :icon="icon" :ui="{ icon: ui.icon({ class: props.ui?.icon }) }" :class="ui.iconWrapper({ class: props.ui?.iconWrapper })" />
         </slot>
       </div>
 
@@ -78,17 +74,21 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.empty || {})
             {{ title }}
           </slot>
         </h2>
+
         <div v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
             {{ description }}
           </slot>
         </div>
       </div>
+
       <div v-if="actions?.length || !!slots.actions" :class="ui.actions({ class: props.ui?.actions })">
         <slot name="actions">
           <UButton v-for="(action, index) in actions" :key="index" v-bind="action" />
         </slot>
       </div>
     </div>
+
+    <slot name="bottom" />
   </Primitive>
 </template>
