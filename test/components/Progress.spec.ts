@@ -3,6 +3,8 @@ import Progress from '../../src/runtime/components/Progress.vue'
 import type { ProgressProps, ProgressSlots } from '../../src/runtime/components/Progress.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/progress'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Progress', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -29,5 +31,16 @@ describe('Progress', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ProgressProps, slots?: Partial<ProgressSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Progress)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Progress, {
+      props: {
+        modelValue: 75,
+        status: true
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

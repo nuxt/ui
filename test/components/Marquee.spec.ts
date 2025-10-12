@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest'
 import Marquee from '../../src/runtime/components/Marquee.vue'
 import type { MarqueeProps, MarqueeSlots } from '../../src/runtime/components/Marquee.vue'
 import ComponentRender from '../component-render'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Marquee', () => {
   it.each([
@@ -19,5 +21,15 @@ describe('Marquee', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: MarqueeProps, slots?: Partial<MarqueeSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Marquee)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Marquee, {
+      slots: {
+        default: () => 'Default slot'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

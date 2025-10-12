@@ -3,6 +3,8 @@ import theme from '#build/ui/input'
 import InputTags from '../../src/runtime/components/InputTags.vue'
 import type { InputTagsProps, InputTagsSlots } from '../../src/runtime/components/InputTags.vue'
 import ComponentRender from '../component-render'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('InputTags', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -39,5 +41,18 @@ describe('InputTags', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputTagsProps, slots?: Partial<InputTagsSlots>, attrs?: Record<string, unknown> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputTags)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(InputTags, {
+      props: {
+        modelValue: ['tag1', 'tag2'],
+        placeholder: 'Add tags...',
+        required: true,
+        icon: 'i-lucide-tag'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

@@ -4,6 +4,8 @@ import PinInput from '../../src/runtime/components/PinInput.vue'
 import type { PinInputProps } from '../../src/runtime/components/PinInput.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/pin-input'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '../../src/module'
@@ -126,7 +128,20 @@ describe('PinInput', () => {
 
       await input.vm.$emit('update:modelValue', ['1', '2', '3', '4', '5'])
       await flushPromises()
-      expect(wrapper.text()).not.toContain('Error message')
+      expect(wrapper.html()).not.toContain('Error message')
     })
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PinInput, {
+      props: {
+        length: 4,
+        placeholder: '*',
+        required: true,
+        otp: true
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

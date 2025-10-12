@@ -3,6 +3,8 @@ import Separator from '../../src/runtime/components/Separator.vue'
 import type { SeparatorProps, SeparatorSlots } from '../../src/runtime/components/Separator.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/separator'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Separator', () => {
   const types = Object.keys(theme.variants.type) as any
@@ -24,5 +26,16 @@ describe('Separator', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SeparatorProps, slots?: Partial<SeparatorSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Separator)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Separator, {
+      props: {
+        label: '+1',
+        icon: 'i-lucide-image'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

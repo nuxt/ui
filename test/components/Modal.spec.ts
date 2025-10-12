@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest'
 import Modal from '../../src/runtime/components/Modal.vue'
 import type { ModalProps, ModalSlots } from '../../src/runtime/components/Modal.vue'
 import ComponentRender from '../component-render'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Modal', () => {
   const props = { open: true, portal: false }
@@ -31,5 +33,18 @@ describe('Modal', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ModalProps, slots?: Partial<ModalSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Modal)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Modal, {
+      props: {
+        open: true,
+        portal: false,
+        title: 'Modal Title',
+        description: 'This is a modal description'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

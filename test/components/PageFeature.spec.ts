@@ -3,6 +3,8 @@ import PageFeature from '../../src/runtime/components/PageFeature.vue'
 import type { PageFeatureProps, PageFeatureSlots } from '../../src/runtime/components/PageFeature.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/page-feature'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('PageFeature', () => {
   const orientations = Object.keys(theme.variants.orientation) as any
@@ -31,5 +33,18 @@ describe('PageFeature', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageFeatureProps, slots?: Partial<PageFeatureSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PageFeature)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PageFeature, {
+      props: {
+        title: 'Title',
+        description: 'Description',
+        icon: 'i-lucide-star',
+        to: 'https://github.com/benjamincanac'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

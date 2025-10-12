@@ -1,4 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Slider from '../../src/runtime/components/Slider.vue'
 import type { SliderProps } from '../../src/runtime/components/Slider.vue'
 import ComponentRender from '../component-render'
@@ -30,6 +32,16 @@ describe('Slider', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SliderProps }) => {
     const html = await ComponentRender(nameOrHtml, options, Slider)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Slider, {
+      props: {
+        modelValue: 10
+
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {

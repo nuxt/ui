@@ -3,6 +3,8 @@ import Tabs from '../../src/runtime/components/Tabs.vue'
 import type { TabsProps, TabsSlots } from '../../src/runtime/components/Tabs.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/tabs'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Tabs', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -52,5 +54,16 @@ describe('Tabs', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TabsProps, slots?: Partial<TabsSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Tabs)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Tabs, {
+      props: {
+        items,
+        modelValue: '0'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

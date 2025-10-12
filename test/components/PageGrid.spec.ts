@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest'
 import PageGrid from '../../src/runtime/components/PageGrid.vue'
 import type { PageGridProps, PageGridSlots } from '../../src/runtime/components/PageGrid.vue'
 import ComponentRender from '../component-render'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('PageGrid', () => {
   it.each([
@@ -13,5 +15,15 @@ describe('PageGrid', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageGridProps, slots?: Partial<PageGridSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PageGrid)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PageGrid, {
+      slots: {
+        default: () => 'Default slot'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

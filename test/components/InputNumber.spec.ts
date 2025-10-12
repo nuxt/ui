@@ -2,6 +2,7 @@ import { describe, it, expect, test } from 'vitest'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { reactive } from 'vue'
+import { axe } from 'vitest-axe'
 import InputNumber from '../../src/runtime/components/InputNumber.vue'
 import type { InputNumberProps, InputNumberSlots } from '../../src/runtime/components/InputNumber.vue'
 import ComponentRender from '../component-render'
@@ -36,6 +37,19 @@ describe('InputNumber', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputNumberProps, slots?: Partial<InputNumberSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputNumber)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(InputNumber, {
+      props: {
+        placeholder: 'Enter a number',
+        required: true,
+        incrementIcon: 'i-lucide-plus',
+        decrementIcon: 'i-lucide-minus'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {

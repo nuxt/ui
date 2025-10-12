@@ -3,6 +3,8 @@ import Timeline from '../../src/runtime/components/Timeline.vue'
 import type { TimelineProps, TimelineSlots } from '../../src/runtime/components/Timeline.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/timeline'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Timeline', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -57,5 +59,16 @@ describe('Timeline', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TimelineProps, slots?: Partial<TimelineSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Timeline)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Timeline, {
+      props: {
+        items,
+        modelValue: 'design'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

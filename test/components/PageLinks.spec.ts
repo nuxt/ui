@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest'
 import PageLinks from '../../src/runtime/components/PageLinks.vue'
 import type { PageLinksProps, PageLinksSlots } from '../../src/runtime/components/PageLinks.vue'
 import ComponentRender from '../component-render'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('PageLinks', () => {
   const links = [{
@@ -42,5 +44,16 @@ describe('PageLinks', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageLinksProps, slots?: Partial<PageLinksSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PageLinks)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PageLinks, {
+      props: {
+        title: 'Resources',
+        links
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest'
 import { ULink as Link } from '#components'
 import type { LinkProps, LinkSlots } from '../../src/runtime/components/Link.vue'
 import ComponentRender from '../component-render'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Link', () => {
   it.each([
@@ -21,5 +23,18 @@ describe('Link', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: LinkProps, slots?: Partial<LinkSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Link)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Link, {
+      props: {
+        to: '/'
+      },
+      slots: {
+        default: () => 'Home'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

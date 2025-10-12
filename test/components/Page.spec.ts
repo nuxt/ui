@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest'
 import Page from '../../src/runtime/components/Page.vue'
 import type { PageProps, PageSlots } from '../../src/runtime/components/Page.vue'
 import ComponentRender from '../component-render'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Page', () => {
   it.each([
@@ -17,5 +19,17 @@ describe('Page', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageProps, slots?: Partial<PageSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Page)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Page, {
+      slots: {
+        default: () => 'Default slot',
+        left: () => 'Left slot',
+        right: () => 'Right slot'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

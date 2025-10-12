@@ -3,6 +3,8 @@ import Kbd from '../../src/runtime/components/Kbd.vue'
 import type { KbdProps, KbdSlots } from '../../src/runtime/components/Kbd.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/kbd'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Kbd', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -21,5 +23,15 @@ describe('Kbd', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: KbdProps, slots?: Partial<KbdSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Kbd)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Kbd, {
+      props: {
+        value: 'K'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

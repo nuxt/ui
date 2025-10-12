@@ -1,5 +1,7 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Toaster from '../../src/runtime/components/Toaster.vue'
 import Toast from '../../src/runtime/components/Toast.vue'
 import type { ToastProps, ToastSlots } from '../../src/runtime/components/Toast.vue'
@@ -51,5 +53,17 @@ describe('Toast', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ToastProps, slots?: Partial<ToastSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ToastWrapper)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(ToastWrapper, {
+      props: {
+        title: 'Title',
+        description: 'Description',
+        avatar: { src: 'https://github.com/benjamincanac.png', alt: 'Benjamin Canac' },
+        actions: [{ label: 'Action' }]
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

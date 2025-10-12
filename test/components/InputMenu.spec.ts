@@ -7,6 +7,8 @@ import { renderForm } from '../utils/form'
 import { flushPromises, mount } from '@vue/test-utils'
 import type { FormInputEvents } from '../../src/module'
 import { expectEmitPayloadType } from '../utils/types'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('InputMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -85,6 +87,21 @@ describe('InputMenu', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputMenuProps, slots?: Partial<InputMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputMenu)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(InputMenu, {
+      props: {
+        items,
+        modelValue: items[0],
+        placeholder: 'Select an item',
+        icon: 'i-lucide-search',
+        trailingIcon: 'i-lucide-chevron-down',
+        required: true
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {

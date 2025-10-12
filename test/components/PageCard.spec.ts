@@ -3,6 +3,8 @@ import PageCard from '../../src/runtime/components/PageCard.vue'
 import type { PageCardProps, PageCardSlots } from '../../src/runtime/components/PageCard.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/page-card'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('PageCard', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -47,5 +49,18 @@ describe('PageCard', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageCardProps, slots?: Partial<PageCardSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PageCard)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PageCard, {
+      props: {
+        title: 'Title',
+        description: 'Description',
+        icon: 'i-lucide-card',
+        to: 'https://github.com/benjamincanac'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })
