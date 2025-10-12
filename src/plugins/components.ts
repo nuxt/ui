@@ -6,6 +6,7 @@ import AutoImportComponents from 'unplugin-vue-components'
 import type { Options as ComponentsOptions } from 'unplugin-vue-components/types'
 import type { NuxtUIOptions } from '../unplugin'
 import { runtimeDir } from '../unplugin'
+import { resolveRouterMode } from '../utils/router'
 
 /**
  * This plugin adds all the Nuxt UI components as auto-imports.
@@ -39,10 +40,13 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
     return [componentName, c]
   }))
 
-  const inertiaOverrides = globSync('**/*.vue', {
-    cwd: join(runtimeDir, 'inertia/components')
-  })
+  const inertiaOverrides = globSync('**/*.vue', { cwd: join(runtimeDir, 'inertia/components') })
   const inertiaOverrideNames = new Set(inertiaOverrides.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
+
+  const noRouterOverrides = globSync('**/*.vue', { cwd: join(runtimeDir, 'no-router/components') })
+  const noRouterOverrideNames = new Set(noRouterOverrides.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
+
+  const routerMode = resolveRouterMode(options)
 
   const pluginOptions = defu(options.components, <ComponentsOptions>{
     dts: options.dts ?? true,
@@ -53,7 +57,10 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
     ],
     resolvers: [
       (componentName) => {
-        if (options.inertia && inertiaOverrideNames.has(componentName)) {
+        if (routerMode === 'none' && noRouterOverrideNames.has(componentName)) {
+          return { name: 'default', from: join(runtimeDir, 'no-router/components', `${componentName.slice(options.prefix.length)}.vue`) }
+        }
+        if (routerMode === 'inertia' && inertiaOverrideNames.has(componentName)) {
           return { name: 'default', from: join(runtimeDir, 'inertia/components', `${componentName.slice(options.prefix.length)}.vue`) }
         }
         if (overrideNames.has(componentName)) {
@@ -88,7 +95,10 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
         }
 
         const filename = id.match(/([^/]+)\.vue$/)?.[1]
-        if (filename && options.inertia && inertiaOverrideNames.has(`${options.prefix}${filename}`)) {
+        if (filename && routerMode === 'none' && noRouterOverrideNames.has(`${options.prefix}${filename}`)) {
+          return join(runtimeDir, 'no-router/components', `${filename}.vue`)
+        }
+        if (filename && routerMode === 'inertia' && inertiaOverrideNames.has(`${options.prefix}${filename}`)) {
           return join(runtimeDir, 'inertia/components', `${filename}.vue`)
         }
         if (filename && overrideNames.has(`${options.prefix}${filename}`)) {
