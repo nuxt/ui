@@ -84,9 +84,13 @@ export interface ModuleOptions {
     /**
      * Enable automatic component detection for tree-shaking
      * Only generates theme files for components actually used in your app
+     * - `true`: Enable automatic detection
+     * - `string[]`: Enable detection and include additional components (useful for dynamic components)
      * @defaultValue false
+     * @example true
+     * @example ['Modal', 'Dropdown']
      */
-    componentDetection?: boolean
+    componentDetection?: boolean | string[]
   }
 }
 
@@ -239,7 +243,16 @@ export default defineNuxtModule<ModuleOptions>({
     let detectedComponents: Set<string> | undefined
     if (options.experimental?.componentDetection) {
       const componentDir = resolve('./runtime/components')
-      detectedComponents = await detectUsedComponents(nuxt.options.rootDir, options.prefix!, componentDir)
+      const includeComponents = Array.isArray(options.experimental.componentDetection)
+        ? options.experimental.componentDetection
+        : undefined
+
+      detectedComponents = await detectUsedComponents(
+        nuxt.options.rootDir,
+        options.prefix!,
+        componentDir,
+        includeComponents
+      )
       if (detectedComponents && detectedComponents.size > 0) {
         logger.success(`Nuxt UI detected ${detectedComponents.size} components in use (including dependencies)`)
       } else {

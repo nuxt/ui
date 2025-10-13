@@ -83,8 +83,20 @@ function resolveComponentDependencies(
 /**
  * Detect components used in the project by scanning source files
  */
-export async function detectUsedComponents(rootDir: string, prefix: string, componentDir: string): Promise<Set<string> | undefined> {
+export async function detectUsedComponents(
+  rootDir: string,
+  prefix: string,
+  componentDir: string,
+  includeComponents?: string[]
+): Promise<Set<string> | undefined> {
   const detectedComponents = new Set<string>()
+
+  // Add manually specified components
+  if (includeComponents && includeComponents.length > 0) {
+    for (const component of includeComponents) {
+      detectedComponents.add(component)
+    }
+  }
 
   // Scan all source files for component usage
   const appFiles = globSync(['**/*.{vue,ts,js,tsx,jsx}'], {
