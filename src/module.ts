@@ -1,7 +1,7 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, installModule, hasNuxtModule, logger } from '@nuxt/kit'
 import type { HookResult } from '@nuxt/schema'
-import { addTemplates } from './templates'
+import { addTemplates, detectUsedComponents } from './templates'
 import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
 import { name, version } from '../package.json'
 
@@ -76,6 +76,18 @@ export interface ModuleOptions {
    * @defaultValue false
    */
   content?: boolean
+
+  /**
+   * Experimental features
+   */
+  experimental?: {
+    /**
+     * Enable automatic component detection for tree-shaking
+     * Only generates theme files for components actually used in your app
+     * @defaultValue false
+     */
+    componentDetection?: boolean
+  }
 }
 
 declare module '#app' {
@@ -223,6 +235,18 @@ export default defineNuxtModule<ModuleOptions>({
 
     addImportsDir(resolve('./runtime/composables'))
 
-    addTemplates(options, nuxt, resolve)
+    // Detect used components for tree-shaking (if experimental feature is enabled)
+    let detectedComponents: Set<string> | undefined
+    if (options.experimental?.componentDetection) {
+      const componentDir = resolve('./runtime/components')
+      detectedComponents = await detectUsedComponents(nuxt.options.rootDir, options.prefix!, componentDir)
+      if (detectedComponents && detectedComponents.size > 0) {
+        logger.success(`Nuxt UI detected ${detectedComponents.size} components in use (including dependencies)`)
+      } else {
+        logger.info('Nuxt UI detected no components in use, including all components')
+      }
+    }
+
+    addTemplates(options, nuxt, resolve, detectedComponents)
   }
 })
