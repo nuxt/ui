@@ -274,9 +274,9 @@ function omitFieldProps(field: F) {
             />
             <UInput
               v-else-if="field.type === 'password'"
-              v-bind="(omitFieldProps(field) as AuthFormInputField<'password'>)"
               v-model="state[field.name]"
               :class="ui.password({ class: props.ui?.password })"
+              v-bind="(omitFieldProps(field) as AuthFormInputField<'password'>)"
               :type="passwordVisibility ? 'text' : 'password'"
             >
               <template #trailing>
