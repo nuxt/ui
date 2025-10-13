@@ -1,6 +1,6 @@
 ---
 title: Empty
-description: 'A component used to display a placeholder when no data is available.'
+description: 'A component to display an empty state.'
 category: data
 links:
   - label: GitHub
