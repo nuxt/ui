@@ -71,7 +71,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.empty || {})
     <div v-if="!!slots.header || (icon || avatar || !!slots.leading) || (title || !!slots.title) || (description || !!slots.description)" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
         <slot name="leading">
-          <UAvatar v-if="icon || avatar" :icon="icon" :size="size" v-bind="typeof avatar === 'object' ? avatar : {}" :class="ui.avatar({ class: props.ui?.avatar })" />
+          <UAvatar v-if="icon || avatar" :icon="icon" v-bind="typeof avatar === 'object' ? avatar : {}" :class="ui.avatar({ class: props.ui?.avatar })" />
         </slot>
 
         <h2 v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">

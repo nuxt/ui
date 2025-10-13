@@ -18,6 +18,7 @@ const attrs = reactive({
 
   <Matrix v-slot="props" :attrs="attrs">
     <UEmpty
+      icon="i-lucide-file"
       title="No projects found"
       description="It looks like you haven't added any projects. Create one to get started."
       :actions="[{
