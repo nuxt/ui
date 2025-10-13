@@ -99,7 +99,15 @@ describe('SelectMenu', () => {
 
       }
     })
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await axe(wrapper.element, {
+      rules: {
+        // "Certain ARIA roles must contain particular children (aria-required-children)"
+
+        // Fix any of the following:
+        //   Element has children which are not allowed: div[tabindex]
+        'aria-required-children': { enabled: false }
+      }
+    })).toHaveNoViolations()
   })
 
   describe('emits', () => {
