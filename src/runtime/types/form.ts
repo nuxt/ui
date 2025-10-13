@@ -102,7 +102,6 @@ export interface FormFieldInjectedOptions<T> {
   eagerValidation?: boolean
   validateOnInputDelay?: number
   errorPattern?: RegExp
-  required?: boolean
   hint?: string
   description?: string
   help?: string
