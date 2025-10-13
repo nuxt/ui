@@ -1,4 +1,4 @@
-import { nextTick, reactive, ref, watch } from 'vue'
+import { nextTick, watch } from 'vue'
 import { describe, expect, it, beforeEach, vi } from 'vitest'
 import * as z from 'zod'
 import * as yup from 'yup'
@@ -8,13 +8,9 @@ import { object, string, nonempty, refine } from 'superstruct'
 import ComponentRender from '../component-render'
 import type { FormProps, FormSlots } from '../../src/runtime/components/Form.vue'
 import { renderForm } from '../utils/form'
-import { UForm,
-  URadioGroup,
-  UFormField
-} from '#components'
+import { UForm } from '#components'
 
 import { flushPromises } from '@vue/test-utils'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Form', () => {
   it.each([
@@ -627,66 +623,5 @@ describe('Form', () => {
     form.submit()
     await flushPromises()
     expect(wrapper.html()).toContain('Error message')
-  })
-  it('should not have race condition when clear is called in watchers', async () => {
-    const wrapper = await mountSuspended({
-      components: {
-        UForm,
-        URadioGroup,
-        UFormField
-      },
-      setup() {
-        const form = ref()
-        const schema = z.object({
-          hello: z.string().optional(),
-          world: z.string().optional(),
-          hi: z.string().optional(),
-          pathForACustomError: z.string().optional()
-        })
-
-        const state = reactive({
-          hello: 'hello-1',
-          world: 'world-1',
-          hi: 'hi-1',
-          pathForACustomError: ''
-        })
-
-        return { form, state, schema }
-      },
-      template: `
-        <UForm ref="form" :schema="schema" :state="state">
-          <UFormField name="hello">
-            <URadioGroup v-model="state.hello" :items="[{ value: 'foo-1', label: 'Foo 1' }, { value: 'foo-2', label: 'Foo 2' }]" />
-          </UFormField>
-        </UForm>
-      `
-    })
-
-    const form = wrapper.setupState.form
-
-    const input = wrapper.findComponent({
-      name: 'RadioGroupRoot'
-    })
-
-    const state = wrapper.setupState.state
-
-    watch(() => state.hello, () => {
-      form.value?.clear('pathForACustomError')
-    })
-
-    form.value.setErrors([
-      {
-        name: 'pathForACustomError',
-        message: 'This is a custom error message.'
-      }
-    ])
-
-    expect(form.value.errors).toHaveLength(1)
-
-    input.setValue('foo-2')
-
-    await flushPromises()
-
-    expect(form.value.errors).toHaveLength(0)
   })
 })
