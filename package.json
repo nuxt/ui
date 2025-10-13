@@ -168,7 +168,7 @@
     "ai": "^5.0.60",
     "embla-carousel": "^8.6.0",
     "eslint": "^9.37.0",
-    "happy-dom": "^19.0.2",
+    "happy-dom": "^20.0.0",
     "nuxt": "^4.1.2",
     "release-it": "^19.0.5",
     "vitest": "^3.2.4",
