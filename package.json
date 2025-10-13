@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "3.3.6",
-  "packageManager": "pnpm@10.18.0",
+  "packageManager": "pnpm@10.18.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -123,7 +123,7 @@
     "@tailwindcss/postcss": "^4.1.14",
     "@tailwindcss/vite": "^4.1.14",
     "@tanstack/vue-table": "^8.21.3",
-    "@unhead/vue": "^2.0.17",
+    "@unhead/vue": "^2.0.19",
     "@vueuse/core": "^13.9.0",
     "@vueuse/integrations": "^13.9.0",
     "colortranslator": "^5.0.0",
