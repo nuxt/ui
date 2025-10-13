@@ -2,8 +2,9 @@
 import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/modal'
-import type { ButtonProps } from '../types'
-import type { EmitsToProps, ComponentConfig } from '../types/utils'
+import type { ButtonProps, IconProps } from '../types'
+import type { EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>
 
@@ -43,7 +44,7 @@ export interface ModalProps extends DialogRootProps {
    * @defaultValue appConfig.ui.icons.close
    * @IconifyIcon
    */
-  closeIcon?: string
+  closeIcon?: IconProps['name']
   /**
    * When `false`, the modal will not close when clicking outside or pressing escape.
    * @defaultValue true

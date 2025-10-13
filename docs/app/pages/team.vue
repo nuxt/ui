@@ -56,7 +56,7 @@ const icons = {
           :description="[user.pronouns, user.location].filter(Boolean).join(' ・ ')"
           :ui="{
             wrapper: 'items-center',
-            container: 'gap-y-4 lg:p-8',
+            container: 'gap-y-4 lg:py-8',
             leading: 'flex justify-center',
             title: 'text-center',
             description: 'text-center text-muted'

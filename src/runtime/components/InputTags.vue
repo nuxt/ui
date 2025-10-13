@@ -3,8 +3,8 @@ import type { AppConfig } from '@nuxt/schema'
 import type { TagsInputRootProps, TagsInputRootEmits, AcceptableInputValue } from 'reka-ui'
 import theme from '#build/ui/input-tags'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { AvatarProps, IconProps } from '../types'
+import type { ComponentConfig } from '../types/tv'
 
 type InputTags = ComponentConfig<typeof theme, AppConfig, 'inputTags'>
 
@@ -39,7 +39,7 @@ export interface InputTagsProps<T extends InputTagItem = InputTagItem> extends P
    * @defaultValue appConfig.ui.icons.close
    * @IconifyIcon
    */
-  deleteIcon?: string
+  deleteIcon?: IconProps['name']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
@@ -68,7 +68,7 @@ import { computed, ref, onMounted, toRaw } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useButtonGroup } from '../composables/useButtonGroup'
+import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
@@ -88,11 +88,11 @@ const appConfig = useAppConfig() as InputTags['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'addOnPaste', 'addOnTab', 'addOnBlur', 'duplicate', 'delimiter', 'max', 'convertValue', 'displayValue'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, required, ariaAttrs } = useFormField<InputTagsProps>(props)
-const { orientation, size: buttonGroupSize } = useButtonGroup<InputTagsProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs, required } = useFormField<InputTagsProps>(props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputTagsProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
+const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTags || {}) })({
   color: color.value,
@@ -102,7 +102,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTags ||
   highlight: highlight.value,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  buttonGroup: orientation.value
+  fieldGroup: orientation.value
 }))
 
 const inputRef = ref<InstanceType<typeof TagsInputInput> | null>(null)
@@ -158,8 +158,6 @@ defineExpose({
     :name="name"
     :disabled="disabled"
     @update:model-value="onUpdate"
-    @blur="onBlur"
-    @focus="onFocus"
   >
     <TagsInputItem
       v-for="(item, index) in tags"
@@ -187,6 +185,8 @@ defineExpose({
       :placeholder="placeholder"
       :max-length="maxLength"
       :class="ui.input({ class: props.ui?.input })"
+      @blur="onBlur"
+      @focus="onFocus"
     />
 
     <slot />

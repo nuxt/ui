@@ -1,13 +1,95 @@
 # Changelog
 
-## [3.3.4](https://github.com/nuxt/ui/compare/v3.3.3...v3.3.4) (2025-09-15)
+## [4.0.0-alpha.2](https://github.com/nuxt/ui/compare/v4.0.0-alpha.1...v4.0.0-alpha.2) (2025-09-17)
+
+### ⚠ BREAKING CHANGES
+
+* **Form:** don't mutate the form's state if transformations are enabled (#4902)
+
+### Features
+
+* **ContentNavigation:** handle collapsible false with type multiple ([c42c2ab](https://github.com/nuxt/ui/commit/c42c2ab47125f31278730fa929d8afae5134572a))
+* **locale:** add Georgian language ([#4973](https://github.com/nuxt/ui/issues/4973)) ([996478f](https://github.com/nuxt/ui/commit/996478fe40a7f1506a8e76ab98c991df4ea979ad))
+* **locale:** add Swiss German language ([#4962](https://github.com/nuxt/ui/issues/4962)) ([dcf17bb](https://github.com/nuxt/ui/commit/dcf17bb96bec276ac57ba5208e31018884e25de0))
 
 ### Bug Fixes
 
-* **FileUpload:** add missing `button` type ([91f86d9](https://github.com/nuxt/ui/commit/91f86d9da2a614bd37a12f2ece9ff3ce176e8cb2)), closes [#4935](https://github.com/nuxt/ui/issues/4935)
-* **Form:** handling race condition on `clear` function ([#4843](https://github.com/nuxt/ui/issues/4843)) ([0a8ead7](https://github.com/nuxt/ui/commit/0a8ead72b53019969cf28d91549b9495ccc89f02))
-* **InputMenu/Select/SelectMenu:** show falsy value when model value is falsy ([#4882](https://github.com/nuxt/ui/issues/4882)) ([5b9d9d8](https://github.com/nuxt/ui/commit/5b9d9d8135fe5b4c3f9298161dbd0c59c511897a))
-* **locale:** improve `id` name ([#4890](https://github.com/nuxt/ui/issues/4890)) ([e5cb55b](https://github.com/nuxt/ui/commit/e5cb55be7d5ac2690c95f05f56462b16d453670f))
+* **Banner:** ensure `actions` slot renders ([#4946](https://github.com/nuxt/ui/issues/4946)) ([5d6e1fc](https://github.com/nuxt/ui/commit/5d6e1fcb29d7f58254847e328f4a66f65dddab70))
+* **CodeTree/Tree:** improve accessibility ([#4945](https://github.com/nuxt/ui/issues/4945)) ([117b4b3](https://github.com/nuxt/ui/commit/117b4b36acae3f91f6e9a57ff772c62a1930f56a))
+* **components:** dot notation type support for `labelKey` and `valueKey` ([#4933](https://github.com/nuxt/ui/issues/4933)) ([11a0320](https://github.com/nuxt/ui/commit/11a03201ed8454f37e911db4a14b00f74104932a))
+* **components:** proxySlots reactivity ([#4969](https://github.com/nuxt/ui/issues/4969)) ([3173bee](https://github.com/nuxt/ui/commit/3173bee38ce9e518076848999f14374600069d35))
+* **components:** standardize naming for type interfaces ([#4990](https://github.com/nuxt/ui/issues/4990)) ([788d2de](https://github.com/nuxt/ui/commit/788d2deb53b2a96c8d87828629b3d5d5ec5187d6))
+* **FileUpload:** add missing `button` type ([f33e43c](https://github.com/nuxt/ui/commit/f33e43cddeef333efe086607f404808a7c211f5c)), closes [#4935](https://github.com/nuxt/ui/issues/4935)
+* **Form:** don't mutate the form's state if transformations are enabled ([#4902](https://github.com/nuxt/ui/issues/4902)) ([99dbe81](https://github.com/nuxt/ui/commit/99dbe81783f16cdd9bee14e9c74b34b93eb61976))
+* **Form:** handling race condition on `clear` function ([#4843](https://github.com/nuxt/ui/issues/4843)) ([2269b48](https://github.com/nuxt/ui/commit/2269b4831acb172ce9ab9d1526ce60051b7462b8))
+* **InputMenu/Select/SelectMenu:** show falsy value when model value is falsy ([#4882](https://github.com/nuxt/ui/issues/4882)) ([073dd14](https://github.com/nuxt/ui/commit/073dd144e172282757affde491c440966e573b99))
+* **locale:** improve `id` name ([#4890](https://github.com/nuxt/ui/issues/4890)) ([1b5d741](https://github.com/nuxt/ui/commit/1b5d7418a5681a6ef2c4df5512e0e91c1defa2af))
+* **Marquee:** handle RTL mode ([#4887](https://github.com/nuxt/ui/issues/4887)) ([1846079](https://github.com/nuxt/ui/commit/1846079c1e2c6da0f7fcacc619c9c82a081f86d5))
+* **Progress:** improve `status-position` when 0 ([#4994](https://github.com/nuxt/ui/issues/4994)) ([0e1e44c](https://github.com/nuxt/ui/commit/0e1e44c16236eb367f6c27587d5395879d2ad179))
+* **types:** export missing tv types ([#4971](https://github.com/nuxt/ui/issues/4971)) ([2bf273c](https://github.com/nuxt/ui/commit/2bf273cd991442cc5b13b400a85d958f588e9b74))
+* **types:** resolve ambient declaration error in `icons` type ([#4991](https://github.com/nuxt/ui/issues/4991)) ([6ddf899](https://github.com/nuxt/ui/commit/6ddf8993b5864442802910e27e5aa32a7f67696c))
+
+### Performance Improvements
+
+* **module:** do not block setup by importing plugin ([#4923](https://github.com/nuxt/ui/issues/4923)) ([695d9f7](https://github.com/nuxt/ui/commit/695d9f767df42f7d6fd8d73abad0851c04e05265))
+
+## [4.0.0-alpha.1](https://github.com/nuxt/ui/compare/v3.3.3...v4.0.0-alpha.1) (2025-09-01)
+
+### ⚠ BREAKING CHANGES
+
+* **components:** rename `nullify` modifier to `nullable` and add `optional` (#4838)
+* **module:** update compatibility to nuxt 4
+* **PageAccordion:** remove in favor of `Accordion` (#4734)
+* **Marquee:** rename from `PageMarquee` (#4741)
+* **FieldGroup:** rename from `ButtonGroup` (#4596)
+* **components:** upgrade `ai-sdk` to v5 (#4698)
+
+### Features
+
+* **components:** rename `nullify` modifier to `nullable` and add `optional` ([#4838](https://github.com/nuxt/ui/issues/4838)) ([83b0306](https://github.com/nuxt/ui/commit/83b0306a30835a385049200c5de804c51577c64c))
+* **components:** upgrade `ai-sdk` to v5 ([#4698](https://github.com/nuxt/ui/issues/4698)) ([de7822f](https://github.com/nuxt/ui/commit/de7822f6a11f6d1830421db337237c6e16f530b1))
+* **FieldGroup:** rename from `ButtonGroup` ([#4596](https://github.com/nuxt/ui/issues/4596)) ([a0963eb](https://github.com/nuxt/ui/commit/a0963eba8254d2ecf02cd1ee87cee7f73c4b2bc4))
+* **Icon:** allow passing a component instead of a name ([#4766](https://github.com/nuxt/ui/issues/4766)) ([61b603f](https://github.com/nuxt/ui/commit/61b603fff476aeac065268bd8dd493ff45577de4))
+* import `@nuxt/ui-pro` components ([#4675](https://github.com/nuxt/ui/issues/4675)) ([5cb65cf](https://github.com/nuxt/ui/commit/5cb65cfbd0d176393e841796bbbcd825be7cd376))
+* **Marquee:** rename from `PageMarquee` ([#4741](https://github.com/nuxt/ui/issues/4741)) ([b6edce2](https://github.com/nuxt/ui/commit/b6edce266281ef8448588f303e4d8e28c7adf6ea))
+* **module:** update compatibility to nuxt 4 ([2aca598](https://github.com/nuxt/ui/commit/2aca598792cf2075db9b763bb41c4044ee9ad258))
+* **PageAccordion:** remove in favor of `Accordion` ([#4734](https://github.com/nuxt/ui/issues/4734)) ([f70a3ff](https://github.com/nuxt/ui/commit/f70a3ff13f3e9baa0e9ef2070596512f67189c1a))
+
+### Bug Fixes
+
+* **AuthForm:** use `error` from form field ([#4738](https://github.com/nuxt/ui/issues/4738)) ([00dfb6b](https://github.com/nuxt/ui/commit/00dfb6b5866760e0669e9dbbaa247919f5400f55))
+* **BlogPost:** ensure date slot renders ([#4743](https://github.com/nuxt/ui/issues/4743)) ([4514880](https://github.com/nuxt/ui/commit/4514880902ba6ec75b5bf69099f4b6bef0f58efa))
+* **ChangelogVersion/ChangelogVersions:** handle RTL mode ([#4777](https://github.com/nuxt/ui/issues/4777)) ([f91c408](https://github.com/nuxt/ui/commit/f91c4081e5d6b884fc7dd8c5669fd262ddb98649))
+* **ContentSearch/DashboardSearch:** make `ui.modal` work ([946c2ec](https://github.com/nuxt/ui/commit/946c2ec8875af2c3fc74862b2c29d08dfb4cf6e2))
+* **module:** add `[@source](https://github.com/source)` on components ([a16465f](https://github.com/nuxt/ui/commit/a16465f3da051d1a4dbef6dadfe7a5f66da1216e)), closes [#4773](https://github.com/nuxt/ui/issues/4773)
+* **PageCard:** improve keyboard accessibility ([#4733](https://github.com/nuxt/ui/issues/4733)) ([3029568](https://github.com/nuxt/ui/commit/30295684653f89b811e75e7a79a9684814c68ec1))
+* **ProseImg:** ensure unique motion layout id for images ([#4720](https://github.com/nuxt/ui/issues/4720)) ([9480a0b](https://github.com/nuxt/ui/commit/9480a0baa46a2391d43d2f868fa8efdba12011f6))
+* **unplugin:** handle components overrides in subdirectories ([#4781](https://github.com/nuxt/ui/issues/4781)) ([69ee75e](https://github.com/nuxt/ui/commit/69ee75e5b291873e3b9466bfdb9187ac05e82d6f))
+
+## [4.0.0-alpha.0](https://github.com/nuxt/ui/compare/v3.3.3...v4.0.0-alpha.0) (2025-08-15)
+
+### ⚠ BREAKING CHANGES
+
+* **PageAccordion:** remove in favor of `Accordion` (#4734)
+* **Marquee:** rename from `PageMarquee` (#4741)
+* **FieldGroup:** rename from `ButtonGroup` (#4596)
+* **components:** upgrade `ai-sdk` to v5 (#4698)
+
+### Features
+
+* **components:** upgrade `ai-sdk` to v5 ([#4698](https://github.com/nuxt/ui/issues/4698)) ([9545fdd](https://github.com/nuxt/ui/commit/9545fddec8ba88bbf523cdb26672129adc5ed4f3))
+* **FieldGroup:** rename from `ButtonGroup` ([#4596](https://github.com/nuxt/ui/issues/4596)) ([8aa96d1](https://github.com/nuxt/ui/commit/8aa96d1a04c66bd5796bebed75709015e1e2b684))
+* import `@nuxt/ui-pro` components ([#4675](https://github.com/nuxt/ui/issues/4675)) ([f6ae153](https://github.com/nuxt/ui/commit/f6ae1534280818ff6a8a4c967ae589e0f715ddbe))
+* **Marquee:** rename from `PageMarquee` ([#4741](https://github.com/nuxt/ui/issues/4741)) ([0a4d9b4](https://github.com/nuxt/ui/commit/0a4d9b4dd35703f884b740eab2bfcc6e0d11f870))
+* **PageAccordion:** remove in favor of `Accordion` ([#4734](https://github.com/nuxt/ui/issues/4734)) ([1c63aab](https://github.com/nuxt/ui/commit/1c63aab7eb21a5d2fb0a7c69725f0e7490c88ebd))
+
+### Bug Fixes
+
+* **AuthForm:** use `error` from form field ([#4738](https://github.com/nuxt/ui/issues/4738)) ([314e661](https://github.com/nuxt/ui/commit/314e661774ae300a2b7d6f704e815cf571d67e34))
+* **BlogPost:** ensure date slot renders ([#4743](https://github.com/nuxt/ui/issues/4743)) ([44e0178](https://github.com/nuxt/ui/commit/44e0178d27e175661a504b7f0137a99457492b8c))
+* **ContentSearch/DashboardSearch:** make `ui.modal` work ([99d3227](https://github.com/nuxt/ui/commit/99d32279f330a9e655e66d015bd1238737dedcb8))
+* **PageCard:** improve keyboard accessibility ([#4733](https://github.com/nuxt/ui/issues/4733)) ([6606fa3](https://github.com/nuxt/ui/commit/6606fa35b3dba6be3096e0e3090aab406dc6d0cc))
+* **ProseImg:** ensure unique motion layout id for images ([#4720](https://github.com/nuxt/ui/issues/4720)) ([841c369](https://github.com/nuxt/ui/commit/841c369d30641fe534d1f715cc144b04eaa2fa1c))
 
 ## [3.3.3](https://github.com/nuxt/ui/compare/v3.3.2...v3.3.3) (2025-09-01)
 

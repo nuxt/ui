@@ -2,13 +2,11 @@ import json5 from 'json5'
 import { camelCase, kebabCase } from 'scule'
 import { visit } from '@nuxt/content/runtime'
 import * as theme from '../../.nuxt/ui'
-import * as themePro from '../../.nuxt/ui-pro'
 import meta from '#nuxt-component-meta'
 // @ts-expect-error - no types available
 import components from '#component-example/nitro'
 
 type ComponentAttributes = {
-  ':pro'?: string
   ':prose'?: string
   ':props'?: string
   ':external'?: string
@@ -19,13 +17,11 @@ type ComponentAttributes = {
 }
 
 type ThemeConfig = {
-  pro: boolean
   prose: boolean
   componentName: string
 }
 
 type CodeConfig = {
-  pro: boolean
   props: Record<string, unknown>
   external: string[]
   externalTypes: string[]
@@ -185,19 +181,18 @@ function emitItemHandler(event: any): string {
   return result
 }
 
-const generateThemeConfig = ({ pro, prose, componentName }: ThemeConfig) => {
-  const computedTheme = pro ? (prose ? themePro.prose : themePro) : theme
+const generateThemeConfig = ({ prose, componentName }: ThemeConfig) => {
+  const computedTheme = prose ? theme.prose : theme
   const componentTheme = computedTheme[componentName as keyof typeof computedTheme]
 
   return {
-    [pro ? 'uiPro' : 'ui']: prose
+    ui: prose
       ? { prose: { [componentName]: componentTheme } }
       : { [componentName]: componentTheme }
   }
 }
 
 const generateComponentCode = ({
-  pro,
   props,
   external,
   externalTypes,
@@ -209,21 +204,17 @@ const generateComponentCode = ({
     Object.entries(props).filter(([key]) => !hide.includes(key))
   )
 
-  const imports = pro
-    ? ''
-    : external
-        .filter((_, index) => externalTypes[index] && externalTypes[index] !== 'undefined')
-        .map((ext, index) => {
-          const type = externalTypes[index]?.replace(/[[\]]/g, '')
-          return `import type { ${type} } from '@nuxt/${pro ? 'ui-pro' : 'ui'}'`
-        })
-        .join('\n')
+  const imports = external
+    .filter((_, index) => externalTypes[index] && externalTypes[index] !== 'undefined')
+    .map((ext, index) => {
+      const type = externalTypes[index]?.replace(/[[\]]/g, '')
+      return `import type { ${type} } from '@nuxt/ui'`
+    })
+    .join('\n')
 
   let itemsCode = ''
   if (props.items) {
-    itemsCode = pro
-      ? `const items = ref(${json5.stringify(props.items, null, 2)})`
-      : `const items = ref<${externalTypes[0]}>(${json5.stringify(props.items, null, 2)})`
+    itemsCode = `const items = ref<${externalTypes[0]}>(${json5.stringify(props.items, null, 2)})`
     delete filteredProps.items
   }
 
@@ -309,9 +300,8 @@ export function transformMDC(doc: Document): Document {
 
     const finalComponentName = mdcSpecificName ? camelCase(mdcSpecificName) : componentName
 
-    const pro = parseBoolean(attributes[':pro'])
     const prose = parseBoolean(attributes[':prose'])
-    const appConfig = generateThemeConfig({ pro, prose, componentName: finalComponentName })
+    const appConfig = generateThemeConfig({ prose, componentName: finalComponentName })
 
     replaceNodeWithPre(
       node,
@@ -323,7 +313,6 @@ export function transformMDC(doc: Document): Document {
 
   visitAndReplace(doc, 'component-code', (node) => {
     const attributes = node[1] as ComponentAttributes
-    const pro = parseBoolean(attributes[':pro'])
     const props = attributes[':props'] ? json5.parse(attributes[':props']) : {}
     const external = attributes[':external'] ? json5.parse(attributes[':external']) : []
     const externalTypes = attributes[':externalTypes'] ? json5.parse(attributes[':externalTypes']) : []
@@ -332,7 +321,6 @@ export function transformMDC(doc: Document): Document {
     const slots = attributes[':slots'] ? json5.parse(attributes[':slots']) : {}
 
     const code = generateComponentCode({
-      pro,
       props,
       external,
       externalTypes,

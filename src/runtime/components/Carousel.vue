@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { AcceptableValue } from 'reka-ui'
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
 import type { AutoplayOptionsType } from 'embla-carousel-autoplay'
 import type { AutoScrollOptionsType } from 'embla-carousel-auto-scroll'
@@ -10,18 +9,18 @@ import type { ClassNamesOptionsType } from 'embla-carousel-class-names'
 import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import theme from '#build/ui/carousel'
-import type { ButtonProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { ButtonProps, IconProps } from '../types'
+import type { AcceptableValue } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 
-interface _CarouselItem {
+export type CarouselValue = AcceptableValue
+export type CarouselItem = CarouselValue | {
   class?: any
   ui?: Pick<Carousel['slots'], 'item'>
   [key: string]: any
 }
-
-export type CarouselItem = _CarouselItem | AcceptableValue
 
 export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
   /**
@@ -39,7 +38,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * @defaultValue appConfig.ui.icons.arrowLeft
    * @IconifyIcon
    */
-  prevIcon?: string
+  prevIcon?: IconProps['name']
   /**
    * Configure the next button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
@@ -50,7 +49,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * @defaultValue appConfig.ui.icons.arrowRight
    * @IconifyIcon
    */
-  nextIcon?: string
+  nextIcon?: IconProps['name']
   /**
    * Display prev and next buttons to scroll the carousel.
    * @defaultValue false
@@ -69,32 +68,32 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
   items?: T[]
   /**
    * Enable Autoplay plugin
-   * @link https://www.embla-carousel.com/plugins/autoplay/
+   * @see https://www.embla-carousel.com/plugins/autoplay/
    */
   autoplay?: boolean | AutoplayOptionsType
   /**
    * Enable Auto Scroll plugin
-   * @link https://www.embla-carousel.com/plugins/auto-scroll/
+   * @see https://www.embla-carousel.com/plugins/auto-scroll/
    */
   autoScroll?: boolean | AutoScrollOptionsType
   /**
    * Enable Auto Height plugin
-   * @link https://www.embla-carousel.com/plugins/auto-height/
+   * @see https://www.embla-carousel.com/plugins/auto-height/
    */
   autoHeight?: boolean | AutoHeightOptionsType
   /**
    * Enable Class Names plugin
-   * @link https://www.embla-carousel.com/plugins/class-names/
+   * @see https://www.embla-carousel.com/plugins/class-names/
    */
   classNames?: boolean | ClassNamesOptionsType
   /**
    * Enable Fade plugin
-   * @link https://www.embla-carousel.com/plugins/fade/
+   * @see https://www.embla-carousel.com/plugins/fade/
    */
   fade?: boolean | FadeOptionsType
   /**
    * Enable Wheel Gestures plugin
-   * @link https://www.embla-carousel.com/plugins/wheel-gestures/
+   * @see https://www.embla-carousel.com/plugins/wheel-gestures/
    */
   wheelGestures?: boolean | WheelGesturesPluginOptions
   class?: any
@@ -265,7 +264,7 @@ function onSelect(api: EmblaCarouselType) {
   emits('select', selectedIndex.value)
 }
 
-function isCarouselItem(item: CarouselItem): item is _CarouselItem {
+function isCarouselItem(item: CarouselItem): item is Exclude<CarouselItem, CarouselValue> {
   return typeof item === 'object' && item !== null
 }
 

@@ -2,12 +2,13 @@ packages:
   - ./
   - cli
   - docs
-  - playground
-  - playground-vue
+  - playgrounds/nuxt
+  - playgrounds/vue
 
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - '@tailwindcss/oxide'
+  - '@vercel/speed-insights'
   - esbuild
   - unrs-resolver
   - vue-demi

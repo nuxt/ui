@@ -5,57 +5,127 @@ export default defineLocale<Messages>({
   name: 'Danish',
   code: 'da',
   messages: {
-    inputMenu: {
-      noMatch: 'Ingen matchende data',
-      noData: 'Ingen data',
-      create: 'Opret "{label}"'
-    },
-    calendar: {
-      prevYear: 'Forrige år',
-      nextYear: 'Næste år',
-      prevMonth: 'Forrige måned',
-      nextMonth: 'Næste måned'
-    },
-    inputNumber: {
-      increment: 'Øg',
-      decrement: 'Reducer'
-    },
-    commandPalette: {
-      placeholder: 'Skriv en kommando eller søg...',
-      noMatch: 'Ingen matchende data',
-      noData: 'Ingen data',
-      close: 'Luk',
-      back: 'Tilbage'
-    },
-    selectMenu: {
-      noMatch: 'Ingen matchende data',
-      noData: 'Ingen data',
-      create: 'Opret "{label}"',
-      search: 'Søg...'
-    },
-    toast: {
+    alert: {
       close: 'Luk'
     },
+    authForm: {
+      hidePassword: 'Skjul adgangskode',
+      showPassword: 'Vis adgangskode',
+      submit: 'Fortsæt'
+    },
+    banner: {
+      close: 'Luk'
+    },
+    calendar: {
+      nextMonth: 'Næste måned',
+      nextYear: 'Næste år',
+      prevMonth: 'Forrige måned',
+      prevYear: 'Forrige år'
+    },
     carousel: {
-      prev: 'Forrige',
-      next: 'Næste',
       dots: 'Vælg dias til visning',
-      goto: 'Gå til slide {slide}'
+      goto: 'Gå til slide {slide}',
+      next: 'Næste',
+      prev: 'Forrige'
+    },
+    chatPrompt: {
+      placeholder: 'Skriv din besked her...'
+    },
+    chatPromptSubmit: {
+      label: 'Send'
+    },
+    colorMode: {
+      dark: 'Mørk',
+      light: 'Lys',
+      switchToDark: 'Skift til mørk tilstand',
+      switchToLight: 'Skift til lys tilstand',
+      system: 'System'
+    },
+    commandPalette: {
+      back: 'Tilbage',
+      close: 'Luk',
+      noData: 'Ingen data',
+      noMatch: 'Ingen matchende data',
+      placeholder: 'Skriv en kommando eller søg...'
+    },
+    contentSearch: {
+      links: 'Links',
+      theme: 'Tema'
+    },
+    contentSearchButton: {
+      label: 'Søg...'
+    },
+    contentToc: {
+      title: 'På denne side'
+    },
+    dashboardSearch: {
+      theme: 'Tema'
+    },
+    dashboardSearchButton: {
+      label: 'Søg...'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'Sammenfold sidemenu',
+      expand: 'Udvid sidemenu'
+    },
+    dashboardSidebarToggle: {
+      close: 'Luk sidemenu',
+      open: 'Åbn sidemenu'
+    },
+    error: {
+      clear: 'Tilbage til forsiden'
+    },
+    fileUpload: {
+      removeFile: 'Fjern {filename}'
+    },
+    header: {
+      close: 'Luk menu',
+      open: 'Åbn menu'
+    },
+    inputMenu: {
+      create: 'Opret "{label}"',
+      noData: 'Ingen data',
+      noMatch: 'Ingen matchende data'
+    },
+    inputNumber: {
+      decrement: 'Reducer',
+      increment: 'Øg'
     },
     modal: {
       close: 'Luk'
     },
-    slideover: {
-      close: 'Luk'
+    pricingTable: {
+      caption: 'Prisplaneringssammenligning'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'Sammenfold',
+        name: 'kode',
+        openText: 'Udvid'
+      },
+      collapsible: {
+        closeText: 'Skjul',
+        name: 'egenskaber',
+        openText: 'Vis'
+      },
+      pre: {
+        copy: 'Kopiér kode til udklipsholder'
+      }
+    },
+    selectMenu: {
+      create: 'Opret "{label}"',
+      noData: 'Ingen data',
+      noMatch: 'Ingen matchende data',
+      search: 'Søg...'
+    },
+    slideover: {
       close: 'Luk'
     },
     table: {
       noData: 'Ingen data'
     },
-    fileUpload: {
-      removeFile: 'Fjern {filename}'
+    toast: {
+      close: 'Luk'
     }
   }
 })

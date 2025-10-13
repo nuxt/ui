@@ -3,16 +3,16 @@ import type { BreadcrumbItem } from '@nuxt/ui'
 
 const items: BreadcrumbItem[] = [
   {
-    label: 'Home',
-    to: '/'
+    label: 'Docs',
+    to: '/docs'
   },
   {
     label: 'Components',
-    to: '/components'
+    to: '/docs/components'
   },
   {
     label: 'Breadcrumb',
-    to: '/components/breadcrumb'
+    to: '/docs/components/breadcrumb'
   }
 ]
 </script>

@@ -1,20 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
-
-const links = [{
-  label: 'Team',
-  to: '/team'
-}, {
-  label: 'Roadmap',
-  to: '/roadmap'
-}, {
-  label: 'Terms',
-  to: '/pro/terms'
-}, {
-  label: 'Releases',
-  to: 'https://github.com/nuxt/ui/releases',
-  target: '_blank'
-}]
+const { links } = useFooter()
 </script>
 
 <template>

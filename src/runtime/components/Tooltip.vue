@@ -3,7 +3,8 @@ import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipCo
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tooltip'
 import type { KbdProps } from '../types'
-import type { EmitsToProps, ComponentConfig } from '../types/utils'
+import type { EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Tooltip = ComponentConfig<typeof theme, AppConfig, 'tooltip'>
 
