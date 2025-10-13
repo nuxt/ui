@@ -15,7 +15,7 @@ exports[`AuthForm > renders with as correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -63,7 +63,7 @@ exports[`AuthForm > renders with class correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -115,7 +115,7 @@ exports[`AuthForm > renders with description correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -167,7 +167,7 @@ exports[`AuthForm > renders with description slot correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -215,7 +215,7 @@ exports[`AuthForm > renders with disabled correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" disabled="" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" disabled="" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -263,7 +263,7 @@ exports[`AuthForm > renders with fields correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -311,7 +311,7 @@ exports[`AuthForm > renders with footer slot correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -359,7 +359,7 @@ exports[`AuthForm > renders with header slot correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -411,7 +411,7 @@ exports[`AuthForm > renders with icon correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -459,7 +459,7 @@ exports[`AuthForm > renders with leading slot correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -507,7 +507,7 @@ exports[`AuthForm > renders with loading correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -560,7 +560,7 @@ exports[`AuthForm > renders with providers correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -608,7 +608,7 @@ exports[`AuthForm > renders with providers slot correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -656,7 +656,7 @@ exports[`AuthForm > renders with separator correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -704,7 +704,7 @@ exports[`AuthForm > renders with submit correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -752,7 +752,7 @@ exports[`AuthForm > renders with submit slot correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -801,7 +801,7 @@ exports[`AuthForm > renders with title correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -853,7 +853,7 @@ exports[`AuthForm > renders with title slot correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -901,7 +901,7 @@ exports[`AuthForm > renders with ui correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
@@ -949,7 +949,7 @@ exports[`AuthForm > renders with validation slot correctly 1`] = `
           <!--v-if-->
         </div>
         <div class="mt-1 relative">
-          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" error="Invalid email format" aria-invalid="true" aria-describedby="v-0-0-1-error">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>

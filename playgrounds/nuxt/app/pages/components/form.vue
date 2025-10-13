@@ -6,8 +6,8 @@ import FormExampleNestedList from '../../../../../docs/app/components/content/ex
 import FormExampleNested from '../../../../../docs/app/components/content/examples/form/FormExampleNested.vue'
 
 const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
+  email: z.email(),
+  password: z.string('Password is required').min(8),
   tos: z.literal(true)
 })
 
@@ -24,7 +24,9 @@ const disabled = ref(false)
 </script>
 
 <template>
-  <div class="flex flex-col gap-8">
+  <Navbar />
+
+  <div class="flex flex-col gap-8 min-h-0 mt-16 pb-8">
     <div class="flex gap-4">
       <UForm
         :state="state"

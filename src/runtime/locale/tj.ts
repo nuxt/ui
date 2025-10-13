@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Қаблӣ'
     },
     chatPrompt: {
-      placeholder: 'Пайём ворид кунед...'
+      placeholder: 'Пайём ворид кунед…'
     },
     chatPromptSubmit: {
       label: 'Фиристодан'
@@ -46,7 +46,7 @@ export default defineLocale<Messages>({
       close: 'Бастан',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед...'
+      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед…'
     },
     contentSearch: {
       links: 'Пайвандҳо',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" созед',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      search: 'Ҷустуҷӯ...'
+      search: 'Ҷустуҷӯ…'
     },
     slideover: {
       close: 'Бастан'

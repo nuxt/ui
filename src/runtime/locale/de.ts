@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Zurück'
     },
     chatPrompt: {
-      placeholder: 'Hier schreiben Sie Ihre Nachricht...'
+      placeholder: 'Hier schreiben Sie Ihre Nachricht…'
     },
     chatPromptSubmit: {
       label: 'Senden'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Schließen',
       noData: 'Keine Daten',
       noMatch: 'Nichts gefunden',
-      placeholder: 'Geben Sie einen Befehl ein oder suchen Sie...'
+      placeholder: 'Geben Sie einen Befehl ein oder suchen Sie…'
     },
     contentSearch: {
       links: 'Links',
       theme: 'Thema'
     },
     contentSearchButton: {
-      label: 'Suchen...'
+      label: 'Suchen…'
     },
     contentToc: {
       title: 'Auf dieser Seite'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Thema'
     },
     dashboardSearchButton: {
-      label: 'Suchen...'
+      label: 'Suchen…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Seitenleiste einklappen',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" erstellen',
       noData: 'Keine Daten',
       noMatch: 'Nichts gefunden',
-      search: 'Suchen...'
+      search: 'Suchen…'
     },
     slideover: {
       close: 'Schließen'

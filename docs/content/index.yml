@@ -76,7 +76,7 @@ design_system:
     @import "tailwindcss";
     @import "@nuxt/ui";
 
-    @theme {
+    @theme static {
       --font-sans: 'Public Sans', system-ui, sans-serif;
 
       --color-brand-50: #f0f9ff;

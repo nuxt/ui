@@ -25,7 +25,7 @@ export type SelectItem = SelectValue | {
   type?: 'label' | 'separator' | 'item'
   value?: SelectValue
   disabled?: boolean
-  onSelect?(e?: Event): void
+  onSelect?: (e: Event) => void
   class?: any
   ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any

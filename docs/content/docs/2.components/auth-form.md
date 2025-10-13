@@ -15,8 +15,6 @@ links:
 
 Built on top of the [Form](/docs/components/form) component, the `AuthForm` component can be used in your pages or wrapped in a [PageCard](/docs/components/page-card).
 
-The form will construct itself based on the `fields` prop and the state will be handled internally. You can pass all the props you would pass to a [FormField](/docs/components/form-field#props) or an [Input](/docs/components/input#props) to each field.
-
 ::component-example
 ---
 name: 'auth-form-example'
@@ -24,9 +22,18 @@ collapse: true
 ---
 ::
 
-### Title
+### Fields
 
-Use the `title` prop to set the title of the form.
+The Form will construct itself based on the `fields` prop and the state will be handled internally.
+
+Use the `fields` prop as an array of objects with the following properties:
+
+- `name?: string`{lang="ts-type"}
+- `type?: 'text' | 'password' | 'email' | 'number' | 'checkbox' | 'select' | 'otp'`{lang="ts-type"}
+
+Each field must include a `type` property, which determines the input component and any additional props applied: `checkbox` fields use [Checkbox](/docs/components/checkbox#props) props, `select` fields use [SelectMenu](/docs/components/select-menu#props) props, `otp` fields use [PinInput](/docs/components/pin-input#props) props, and all other types use [Input](/docs/components/input#props) props.
+
+You can also pass any property from the [FormField](/docs/components/form-field#props) component to each field.
 
 ::component-code
 ---
@@ -36,8 +43,61 @@ ignore:
   - class
 external:
   - fields
+externalTypes:
+  - AuthFormField[]
 props:
-  class: 'max-w-md'
+  fields:
+    - name: 'email'
+      type: 'email'
+      label: 'Email'
+      placeholder: 'Enter your email'
+      required: true
+    - name: 'password'
+      type: 'password'
+      label: 'Password'
+      placeholder: 'Enter your password'
+      required: true
+    - name: 'country'
+      type: 'select'
+      label: 'Country'
+      placeholder: 'Select country'
+      items:
+        - label: 'United States'
+          value: 'us'
+        - label: 'France'
+          value: 'fr'
+        - label: 'United Kingdom'
+          value: 'uk'
+        - label: 'Australia'
+          value: 'au'
+    - name: 'otp'
+      type: 'otp'
+      label: 'OTP'
+      length: 6
+      placeholder: '○'
+    - name: 'remember'
+      type: 'checkbox'
+      label: 'Remember me'
+      description: 'You will be logged in for 30 days.'
+  class: 'max-w-sm'
+---
+::
+
+### Title
+
+Use the `title` prop to set the title of the Form.
+
+::component-code
+---
+prettier: true
+ignore:
+  - fields
+  - class
+external:
+  - fields
+externalTypes:
+  - AuthFormField[]
+props:
   title: 'Login'
   fields:
     - name: 'email'
@@ -46,12 +106,13 @@ props:
     - name: 'password'
       type: 'password'
       label: 'Password'
+  class: 'max-w-md'
 ---
 ::
 
 ### Description
 
-Use the `description` prop to set the description of the form.
+Use the `description` prop to set the description of the Form.
 
 ::component-code
 ---
@@ -62,8 +123,9 @@ ignore:
   - class
 external:
   - fields
+externalTypes:
+  - AuthFormField[]
 props:
-  class: 'max-w-md'
   title: 'Login'
   description: 'Enter your credentials to access your account.'
   fields:
@@ -73,12 +135,13 @@ props:
     - name: 'password'
       type: 'password'
       label: 'Password'
+  class: 'max-w-md'
 ---
 ::
 
 ### Icon
 
-Use the `icon` prop to set the icon of the form.
+Use the `icon` prop to set the icon of the Form.
 
 ::component-code
 ---
@@ -90,8 +153,9 @@ ignore:
   - class
 external:
   - fields
+externalTypes:
+  - AuthFormField[]
 props:
-  class: 'max-w-md'
   title: 'Login'
   description: 'Enter your credentials to access your account.'
   icon: 'i-lucide-user'
@@ -102,6 +166,7 @@ props:
     - name: 'password'
       type: 'password'
       label: 'Password'
+  class: 'max-w-md'
 ---
 ::
 
@@ -123,10 +188,12 @@ ignore:
   - headerAlign
   - class
 external:
-  - fields
   - providers
+  - fields
+externalTypes:
+  - ButtonProps[]
+  - AuthFormField[]
 props:
-  class: 'max-w-md'
   title: 'Login'
   description: 'Enter your credentials to access your account.'
   icon: 'i-lucide-user'
@@ -146,6 +213,7 @@ props:
     - name: 'password'
       type: 'password'
       label: 'Password'
+  class: 'max-w-md'
 ---
 ::
 
@@ -166,8 +234,10 @@ ignore:
 external:
   - providers
   - fields
+externalTypes:
+  - ButtonProps[]
+  - AuthFormField[]
 props:
-  class: 'max-w-md'
   title: 'Login'
   description: 'Enter your credentials to access your account.'
   icon: 'i-lucide-user'
@@ -188,6 +258,7 @@ props:
       type: 'password'
       label: 'Password'
   separator: 'Providers'
+  class: 'max-w-md'
 ---
 ::
 
@@ -206,8 +277,10 @@ ignore:
 external:
   - providers
   - fields
+externalTypes:
+  - ButtonProps[]
+  - AuthFormField[]
 props:
-  class: 'max-w-md'
   title: 'Login'
   description: 'Enter your credentials to access your account.'
   icon: 'i-lucide-user'
@@ -229,12 +302,13 @@ props:
       label: 'Password'
   separator:
     icon: 'i-lucide-user'
+  class: 'max-w-md'
 ---
 ::
 
 ### Submit
 
-Use the `submit` prop to change the submit button of the form.
+Use the `submit` prop to change the submit button of the Form.
 
 You can pass any property from the [Button](/docs/components/button) component such as `variant`, `color`, `to`, etc.
 
@@ -253,8 +327,9 @@ ignore:
   - class
 external:
   - fields
+externalTypes:
+  - AuthFormField[]
 props:
-  class: 'max-w-md'
   title: 'Login'
   description: 'Enter your credentials to access your account.'
   icon: 'i-lucide-user'
@@ -269,6 +344,7 @@ props:
     label: 'Submit'
     color: 'error'
     variant: 'subtle'
+  class: 'max-w-md'
 ---
 ::
 
@@ -282,39 +358,6 @@ You can wrap the `AuthForm` component with the [PageCard](/docs/components/page-
 ---
 name: 'auth-form-page-example'
 collapse: true
----
-::
-
-### OTP / 2FA Example
-
-You can add a One-Time Password (OTP) field for two-factor authentication by using the `otp` type in your fields array. The `otp` property allows you to pass any prop supported by the [PinInput](/docs/components/pin-input#api) component.
-
-::component-code
----
-prettier: true
-ignore:
-  - fields
-  - title
-  - description
-  - icon
-  - class
-external:
-  - fields
-props:
-  class: 'max-w-md'
-  title: 'Login with 2FA'
-  fields:
-    - name: 'email'
-      type: text
-      label: 'Email'
-    - name: 'password'
-      type: 'password'
-      label: 'Password'
-    - name: 'otp'
-      type: 'otp'
-      otp:
-        length: 6
-        placeholder: '●'
 ---
 ::
 

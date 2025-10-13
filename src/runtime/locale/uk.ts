@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Назад'
     },
     chatPrompt: {
-      placeholder: 'Введіть ваше повідомлення тут...'
+      placeholder: 'Введіть ваше повідомлення тут…'
     },
     chatPromptSubmit: {
       label: 'Відправити'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Закрити',
       noData: 'Немає даних',
       noMatch: 'Збігів не знайдено',
-      placeholder: 'Введіть команду або шукайте...'
+      placeholder: 'Введіть команду або шукайте…'
     },
     contentSearch: {
       links: 'Посилання',
       theme: 'Тема'
     },
     contentSearchButton: {
-      label: 'Пошук...'
+      label: 'Пошук…'
     },
     contentToc: {
       title: 'На цій сторінці'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Тема'
     },
     dashboardSearchButton: {
-      label: 'Пошук...'
+      label: 'Пошук…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Згорнути бічну панель',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Створити "{label}"',
       noData: 'Немає даних',
       noMatch: 'Збігів не знайдено',
-      search: 'Пошук...'
+      search: 'Пошук…'
     },
     slideover: {
       close: 'Закрити'

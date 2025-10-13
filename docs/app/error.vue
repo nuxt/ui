@@ -48,9 +48,7 @@ useServerSeoMeta({
 
 useFaviconFromTheme()
 
-const { frameworks } = useFrameworks()
 const { rootNavigation, navigationByFramework } = useNavigation(navigation)
-const { links } = useSearch()
 
 provide('navigation', rootNavigation)
 </script>
@@ -60,7 +58,7 @@ provide('navigation', rootNavigation)
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
     <div :class="[route.path.startsWith('/docs/') && 'root']">
-      <!-- <Banner /> -->
+      <Banner />
 
       <Header />
 
@@ -69,17 +67,7 @@ provide('navigation', rootNavigation)
       <Footer />
 
       <ClientOnly>
-        <LazyUContentSearch
-          :links="links"
-          :files="files"
-          :groups="[{
-            id: 'framework',
-            label: 'Framework',
-            items: frameworks
-          }]"
-          :navigation="navigationByFramework"
-          :fuse="{ resultLimit: 120 }"
-        />
+        <Search :files="files" :navigation="navigationByFramework" />
       </ClientOnly>
     </div>
   </UApp>
