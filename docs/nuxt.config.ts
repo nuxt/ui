@@ -18,13 +18,16 @@ export default defineNuxtConfig({
         dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
       })
     },
-    'nuxt-llms'
+    'nuxt-llms',
+    'nuxt-vitalizer'
   ],
+
   $development: {
     site: {
       url: 'http://localhost:3000'
     }
   },
+
   $production: {
     site: {
       url: 'https://ui.nuxt.com'
@@ -255,5 +258,10 @@ export default defineNuxtConfig({
       'The documentation excludes Nuxt UI v2 content.',
       'The content is automatically generated from the same source as the official documentation.'
     ]
+  },
+
+  vitalizer: {
+    // Remove the render-blocking entry CSS
+    disableStylesheets: 'entry'
   }
 })
