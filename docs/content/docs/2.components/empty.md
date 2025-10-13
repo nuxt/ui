@@ -6,26 +6,28 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Empty.vue
-navigation.badge: New
+navigation.badge: Soon
 ---
 
 ## Usage
 
-::component-preview
+::code-preview
+
 :::u-empty
 ---
 icon: i-lucide-file
 title: No projects found
-description: Get started by creating a new project.
+description: It looks like you haven't added any projects. Create one to get started.
 actions:
   - icon: i-lucide-plus
-    label: New Project
+    label: Create new
   - icon: i-lucide-refresh-cw
     label: Refresh
     color: neutral
     variant: subtle
 ---
 :::
+
 ::
 
 ### Title
@@ -50,7 +52,7 @@ ignore:
   - title
 props:
   title: No projects found
-  description: Get started by creating a new project.
+  description: It looks like you haven't added any projects. Create one to get started.
 ---
 ::
 
@@ -67,13 +69,13 @@ ignore:
 props:
   icon: i-lucide-file
   title: No projects found
-  description: Get started by creating a new project.
+  description: It looks like you haven't added any projects. Create one to get started.
 ---
 ::
 
-### Content
+### Avatar
 
-Use the `default` slot to add content to the empty state.
+Use the `avatar` prop to set the avatar of the empty state.
 
 ::component-code
 ---
@@ -82,19 +84,11 @@ ignore:
   - icon
   - title
   - description
-  - actions
 props:
+  avatar.src: 'https://github.com/nuxt.png'
   title: No projects found
-  description: Get started by creating a new project.
-  actions:
-    - icon: i-lucide-plus
-      label: New Project
-slots:
-  default: |
-
-    <Placeholder class="w-52 h-32" />
+  description: It looks like you haven't added any projects. Create one to get started.
 ---
-:placeholder{.w-52.h-32}
 ::
 
 ### Actions
@@ -112,10 +106,14 @@ ignore:
 props:
   icon: i-lucide-file
   title: No projects found
-  description: Get started by creating a new project.
+  description: It looks like you haven't added any projects. Create one to get started.
   actions:
     - icon: i-lucide-plus
-      label: New Project
+      label: Create new
+    - icon: i-lucide-refresh-cw
+      label: Refresh
+      color: neutral
+      variant: subtle
 ---
 ::
 
@@ -132,27 +130,53 @@ ignore:
   - description
   - actions
 props:
-  variant: ghost
+  variant: naked
   icon: i-lucide-bell
   title: No notifications
   description: You're all caught up. New notifications will appear here.
   actions:
     - icon: i-lucide-refresh-cw
       label: Refresh
-      variant: subtle
       color: neutral
+      variant: subtle
+---
+::
+
+### Size
+
+Use the `size` prop to change the size of the empty state.
+
+::component-code
+---
+prettier: true
+ignore:
+  - icon
+  - title
+  - description
+  - actions
+props:
+  size: xl
+  icon: i-lucide-bell
+  title: No notifications
+  description: You're all caught up. New notifications will appear here.
+  actions:
+    - icon: i-lucide-refresh-cw
+      label: Refresh
+      color: neutral
+      variant: subtle
 ---
 ::
 
 ## Examples
 
+### With slots
+
+Use the available slots to create a more complex empty state.
+
 ::component-example
 ---
 collapse: true
-name: 'empty-example'
-class: '!p-0'
-props:
-  autofocus: false
+name: 'empty-slots-example'
 ---
 ::
 

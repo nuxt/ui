@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import type { UserProps } from '#ui/types'
+import type { ButtonProps } from '@nuxt/ui'
 
-const value = ref('Can edit')
 const members: UserProps[] = [
   {
     name: 'Benjamin Canac',
@@ -87,27 +86,29 @@ const members: UserProps[] = [
 </script>
 
 <template>
-  <UEmpty variant="ghost" icon="i-lucide-users" title="Add team members" description="You haven’t added any team members to your project yet.">
-    <template #actions>
-      <UFieldGroup>
-        <UInput placeholder="Enter an email" />
-        <USelect v-model="value" :items="['Can edit', 'Can view']" />
-      </UFieldGroup>
+  <UEmpty
+    title="No team members"
+    description="Invite your team to collaborate on this project."
+    variant="naked"
+    :avatar="{ src: 'https://github.com/nuxt.png', alt: 'Nuxt', size: 'xl' }"
+    :actions="[{
+      label: 'Invite members',
+      icon: 'i-lucide-user-plus',
+      color: 'neutral'
+    }]"
+  >
+    <template #footer>
+      <USeparator class="my-4" />
 
-      <UButton label="Send invite" />
-    </template>
-
-    <template #bottom>
-      <div class="grid gap-4">
-        <p class="font-medium text-highlighted">
-          Recommended team members
-        </p>
-        <div class="grid grid-cols-2 gap-2">
-          <UPageCard v-for="(member, index) in members" :key="index" :to="member.to" :ui="{ container: 'flex-row items-center lg:flex' }">
-            <UUser v-bind="member" />
-            <UIcon name="i-lucide-plus" class="ml-auto" />
-          </UPageCard>
-        </div>
+      <div class="grid grid-cols-2 gap-4">
+        <UPageCard
+          v-for="(member, index) in members"
+          :key="index"
+          :to="member.to"
+          :ui="{ container: 'sm:p-4' }"
+        >
+          <UUser :avatar="member.avatar" :name="member.name" :description="member.description" :ui="{ name: 'truncate' }" />
+        </UPageCard>
       </div>
     </template>
   </UEmpty>

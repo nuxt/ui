@@ -1,19 +1,40 @@
 export default {
   slots: {
-    root: 'relative isolate w-full rounded-lg space-y-8 p-4 sm:p-6',
-    container: 'flex flex-col items-center gap-6',
-    content: 'mx-auto',
-    wrapper: 'max-w-sm flex flex-col items-center gap-y-2 text-center',
-    icon: 'size-8',
-    iconWrapper: 'size-14',
-    title: 'text-2xl font-pretty font-bold text-highlighted tracking-tight',
-    description: 'text-base text-muted text-balance',
-    actions: 'flex flex-wrap items-center justify-center gap-x-2 gap-y-3'
+    root: 'relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0',
+    header: 'flex flex-col items-center gap-2 max-w-sm',
+    avatar: 'shrink-0 mb-2',
+    title: 'text-highlighted text-pretty font-medium',
+    description: 'text-balance text-center',
+    body: 'flex flex-col items-center gap-4 max-w-sm',
+    actions: 'flex flex-wrap gap-2 shrink-0',
+    footer: 'flex flex-col items-center gap-2 max-w-sm'
   },
   variants: {
+    size: {
+      xs: {
+        title: 'text-sm',
+        description: 'text-xs'
+      },
+      sm: {
+        title: 'text-sm',
+        description: 'text-xs'
+      },
+      md: {
+        title: 'text-base',
+        description: 'text-sm'
+      },
+      lg: {
+        title: 'text-base',
+        description: 'text-sm'
+      },
+      xl: {
+        title: 'text-lg',
+        description: 'text-base'
+      }
+    },
     variant: {
       solid: {
-        root: 'bg-inverted text-inverted',
+        root: 'bg-inverted',
         title: 'text-inverted',
         description: 'text-dimmed'
       },
@@ -29,12 +50,13 @@ export default {
         root: 'bg-elevated/50 ring ring-default',
         description: 'text-toned'
       },
-      ghost: {
+      naked: {
         description: 'text-muted'
       }
     }
   },
   defaultVariants: {
-    variant: 'subtle'
+    variant: 'outline',
+    size: 'md'
   }
 }
