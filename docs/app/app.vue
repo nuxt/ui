@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
+import { Analytics } from '@vercel/analytics/nuxt'
 import { SpeedInsights } from '@vercel/speed-insights/nuxt'
 
 const route = useRoute()
