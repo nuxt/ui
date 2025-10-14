@@ -106,8 +106,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit && nuxt typecheck playgrounds/nuxt && nuxt typecheck docs && cd playgrounds/vue && vue-tsc --noEmit",
-    "test": "vitest",
-    "test:vue": "vitest -c vitest.vue.config.ts",
+    "test": "TZ=UTC vitest",
+    "test:vue": "TZ=UTC vitest -c vitest.vue.config.ts",
     "release": "release-it"
   },
   "dependencies": {

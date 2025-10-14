@@ -159,7 +159,7 @@ props:
 
 Use the `nested` prop to nest multiple Form components and link their validation functions. In this case, validating the parent form will automatically validate all the other forms inside it.
 
-Nested forms directly inherit their parent's state, so you don’t need to define a separate state for them. You can use the `name` prop to target a nested attribute within the parent's state.
+Nested forms directly inherit their parent's state, so you don't need to define a separate state for them. You can use the `name` prop to target a nested attribute within the parent's state.
 
 It can be used to dynamically add fields based on user's input:
 

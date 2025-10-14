@@ -16,7 +16,7 @@ export interface ProseFieldProps {
    */
   name?: string
   /**
-   * Expected type of the field’s value
+   * Expected type of the field's value
    */
   type?: string
   /**
