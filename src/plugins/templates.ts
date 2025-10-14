@@ -1,11 +1,9 @@
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { writeFileSync, mkdirSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
-import { normalize } from 'pathe'
 import type { UnpluginOptions } from 'unplugin'
 import type { NuxtUIOptions } from '../unplugin'
-import { getTemplates, detectUsedComponents } from '../templates'
+import { getTemplates } from '../templates'
 
 /**
  * This plugin is responsible for getting the generated virtual templates and
@@ -24,32 +22,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
   async function initializeTemplates() {
     if (detectionComplete) return
 
-    let detectedComponents: Set<string> | undefined
-
-    // Detect used components for tree-shaking (if experimental feature is enabled)
-    if (options.experimental?.componentDetection) {
-      const componentDir = normalize(fileURLToPath(new URL('../runtime/components', import.meta.url)))
-      const rootDir = process.cwd()
-
-      const includeComponents = Array.isArray(options.experimental.componentDetection)
-        ? options.experimental.componentDetection
-        : undefined
-
-      detectedComponents = await detectUsedComponents(
-        rootDir,
-        options.prefix!,
-        componentDir,
-        includeComponents
-      )
-
-      if (detectedComponents && detectedComponents.size > 0) {
-        console.log(`[Nuxt UI] ✔ Detected ${detectedComponents.size} components in use (including dependencies)`)
-      } else {
-        console.log('[Nuxt UI] ℹ No components detected, including all components')
-      }
-    }
-
-    templates = getTemplates(options, appConfig.ui, undefined, detectedComponents)
+    templates = getTemplates(options, appConfig.ui, undefined, undefined)
     templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
     // Write all templates to temp directory
