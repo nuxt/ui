@@ -9,7 +9,7 @@ if (!page.value) {
 const { url } = useSiteConfig()
 
 useSeoMeta({
-  titleTemplate: `%s - Nuxt UI`,
+  titleTemplate: '%s - Nuxt UI',
   title: page.value.title,
   description: page.value.description,
   ogTitle: `${page.value.title} - Nuxt UI`,
@@ -26,7 +26,7 @@ const { data: components } = await useAsyncData('index-components', () => {
 })
 
 const { data: templates } = await useAsyncData('index-templates', () => queryCollection('templates').first(), {
-  transform: data => data?.templates?.filter(template => template.framework === 'nuxt') || []
+  transform: data => data?.items?.filter(template => template.framework === 'nuxt') || []
 })
 
 const { data: module } = await useFetch('/api/module.json')
@@ -43,7 +43,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 </script>
 
 <template>
-  <UMain v-if="page">
+  <div v-if="page">
     <UPageHero
       orientation="horizontal"
       :ui="{
@@ -319,5 +319,5 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView || isContributorsHovered" />
       </div>
     </UPageSection>
-  </UMain>
+  </div>
 </template>

@@ -10,7 +10,7 @@ export default defineCachedEventHandler(async (event) => {
 
   const templatesCollectionItems = await queryCollection(event, 'templates').first()
 
-  const templateListing = templatesCollectionItems?.templates || []
+  const templateListing = templatesCollectionItems?.items || []
 
   const filteredTemplates = framework
     ? templateListing.filter(template => template.framework === framework)

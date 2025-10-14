@@ -23,6 +23,8 @@ type Payment = {
 
 const table = useTemplateRef('table')
 
+const virtualize = ref(false)
+
 const data = ref<Payment[]>([{
   id: '4600',
   date: '2024-03-11T15:30:00',
@@ -144,6 +146,14 @@ const data = ref<Payment[]>([{
   email: 'logan.baker@example.com',
   amount: 567
 }])
+
+const largeData = useState<Payment[]>('largeData', () => Array.from({ length: 1000 }, (_, i) => ({
+  id: `4580-${i}`,
+  date: new Date().toISOString(),
+  status: 'paid',
+  email: `email-${i}@example.com`,
+  amount: Math.random() * 1000
+})))
 
 const currentID = ref(4601)
 
@@ -294,7 +304,7 @@ const pagination = ref({
 })
 
 function addElement() {
-  data.value.unshift({
+  (virtualize.value ? largeData.value : data.value).unshift({
     id: currentID.value.toString(),
     date: new Date().toISOString(),
     status: 'paid',
@@ -305,12 +315,12 @@ function addElement() {
 }
 
 function randomize() {
-  data.value = data.value.sort(() => Math.random() - 0.5)
+  (virtualize.value ? largeData : data).value = (virtualize.value ? largeData : data).value.sort(() => Math.random() - 0.5)
 }
 
 const rowSelection = ref<Record<string, boolean>>({})
 
-function onSelect(row: TableRow<Payment>) {
+function onSelect(e: Event, row: TableRow<Payment>) {
   row.toggleSelected(!row.getIsSelected())
 }
 
@@ -354,6 +364,8 @@ onMounted(() => {
 
 <template>
   <Navbar>
+    <USwitch v-model="virtualize" label="Virtualize" />
+
     <UInput
       :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
       class="max-w-sm"
@@ -372,8 +384,8 @@ onMounted(() => {
         onUpdateChecked(checked: boolean) {
           table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
         },
-        onSelect(e?: Event) {
-          e?.preventDefault()
+        onSelect(e: Event) {
+          e.preventDefault()
         }
       }))"
       :content="{ align: 'end' }"
@@ -392,17 +404,23 @@ onMounted(() => {
     <UContextMenu :items="contextmenuItems">
       <UTable
         ref="table"
-        :data="data"
+        :key="String(virtualize)"
         :columns="columns"
         :column-pinning="columnPinning"
         :row-selection="rowSelection"
         :loading="loading"
-        :pagination="pagination"
-        :pagination-options="{
-          getPaginationRowModel: getPaginationRowModel()
-        }"
-        :ui="{
-          tr: 'divide-x divide-default'
+        :virtualize="virtualize"
+        v-bind="virtualize ? {
+          data: largeData
+        } : {
+          data,
+          pagination,
+          paginationOptions: {
+            getPaginationRowModel: getPaginationRowModel()
+          },
+          ui: {
+            tr: 'divide-x divide-default'
+          }
         }"
         sticky
         class="border border-accented rounded-sm"
