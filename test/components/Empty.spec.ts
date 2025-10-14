@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Empty from '../../src/runtime/components/Empty.vue'
 import type { EmptyProps, EmptySlots } from '../../src/runtime/components/Empty.vue'
 import ComponentRender from '../component-render'
@@ -38,5 +40,13 @@ describe('Empty', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: EmptyProps, slots?: Partial<EmptySlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Empty)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Empty, {
+      props
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })
