@@ -66,24 +66,42 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
     detectionComplete = true
   }
 
+  // Initialize templates immediately (starts async process)
+  const initPromise = initializeTemplates()
+
   return {
     name: 'nuxt:ui:templates',
     enforce: 'pre',
+    async buildStart() {
+      // Ensure templates are initialized before build starts
+      await initPromise
+    },
     resolveId(id) {
-      if (!detectionComplete || !templatePaths) return
+      if (!id.startsWith('#build/')) return
+
+      if (!templatePaths) {
+        console.warn('[Nuxt UI] resolveId called before templates initialized:', id)
+        return
+      }
 
       // Resolve all #build/* imports to actual temp files
       if (templatePaths.has(id)) {
-        return { id: templatePaths.get(id)! }
+        const resolved = templatePaths.get(id)!
+        console.log('[Nuxt UI] Resolved', id, '→', resolved)
+        return { id: resolved }
       }
       if (templatePaths.has(id + '.ts')) {
-        return { id: templatePaths.get(id + '.ts')! }
+        const resolved = templatePaths.get(id + '.ts')!
+        console.log('[Nuxt UI] Resolved', id, '→', resolved, '(added .ts)')
+        return { id: resolved }
       }
+
+      console.warn('[Nuxt UI] Could not resolve:', id)
     },
     vite: {
       async config() {
-        // Initialize templates during config phase (before any imports are resolved)
-        await initializeTemplates()
+        // Wait for initialization to complete during config phase
+        await initPromise
 
         // Set up aliases for Tailwind's enhanced-resolve
         const aliases: Record<string, string> = {}
