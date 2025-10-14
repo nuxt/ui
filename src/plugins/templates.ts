@@ -72,9 +72,9 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
   return {
     name: 'nuxt:ui:templates',
     enforce: 'pre',
-    buildStart() {
+    async buildStart() {
       // Ensure detection is complete before build starts
-      return detectionPromise
+      await detectionPromise
     },
     async resolveId(id) {
       // Wait for detection to complete before resolving
@@ -84,10 +84,10 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
 
       // Resolve all #build/* imports to actual temp files
       if (templatePaths.has(id)) {
-        return templatePaths.get(id)
+        return { id: templatePaths.get(id)! }
       }
       if (templatePaths.has(id + '.ts')) {
-        return templatePaths.get(id + '.ts')
+        return { id: templatePaths.get(id + '.ts')! }
       }
     },
     vite: {
