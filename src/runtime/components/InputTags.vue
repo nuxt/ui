@@ -86,9 +86,9 @@ const slots = defineSlots<InputTagsSlots<T>>()
 
 const appConfig = useAppConfig() as InputTags['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'addOnPaste', 'addOnTab', 'addOnBlur', 'duplicate', 'delimiter', 'max', 'convertValue', 'displayValue', 'required'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'addOnPaste', 'addOnTab', 'addOnBlur', 'duplicate', 'delimiter', 'max', 'convertValue', 'displayValue'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputTagsProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs, required } = useFormField<InputTagsProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputTagsProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
@@ -154,6 +154,7 @@ defineExpose({
     :default-value="defaultValue"
     :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })"
     v-bind="rootProps"
+    :required="required"
     :name="name"
     :disabled="disabled"
     @update:model-value="onUpdate"

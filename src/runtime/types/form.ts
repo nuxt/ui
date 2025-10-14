@@ -95,6 +95,7 @@ export interface FormFieldInjectedOptions<T> {
   validateOnInputDelay?: number
   errorPattern?: RegExp
   hint?: string
+  required?: boolean
   description?: string
   help?: string
   ariaId: string

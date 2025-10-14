@@ -18,6 +18,7 @@ import {
   USlider,
   UPinInput,
   UFormField,
+  UForm,
   UFileUpload
 } from '#components'
 
@@ -27,18 +28,29 @@ async function renderFormField(options: {
   props: Partial<FormFieldProps>
   inputComponent: typeof inputComponents[number]
 }) {
-  return await mountSuspended(UFormField, {
-    props: options.props,
+  let modelValue: any = '0'
+  if ((options.inputComponent as any).__name === 'FileUpload') {
+    modelValue = new File([''], 'test-file.txt', { type: 'text/plain' })
+  }
+
+  return await mountSuspended(UForm, {
     slots: {
       default: {
         // @ts-expect-error - Object literal may only specify known properties, and setup does not exist in type
-        setup: () => ({ inputComponent: options.inputComponent }),
+        setup: () => ({
+          formFieldProps: options.props,
+          inputComponent: options.inputComponent,
+          modelValue
+        }),
         components: {
           UFormField,
+          UForm,
           ...inputComponents
         },
         template: `
-          <component :is="inputComponent" />
+          <UFormField v-bind="formFieldProps">
+            <component :is="inputComponent" :model-value="modelValue" />
+          </UFormField>
         `
       }
     }
@@ -52,11 +64,12 @@ const FormFieldWrapper = defineComponent({
     UFormField
   },
   template: `
-<UFormField>
-  <template v-for="(_, name) in $slots" #[name]="slotData">
-    <slot :name="name" v-bind="slotData" />
-  </template>
-</UFormField>`
+    <UFormField>
+      <template v-for="(_, name) in $slots" #[name]="slotData">
+      <slot :name="name" v-bind="slotData" />
+      </template>
+    </UFormField>
+  `
 })
 
 describe('FormField', () => {
@@ -118,6 +131,18 @@ describe('FormField', () => {
         expect(input.exists()).toBe(true)
       })
     }
+    test('binds required', async () => {
+      const wrapper = await renderFormField({
+        props: {
+          required: true,
+          name
+        },
+        inputComponent
+      })
+
+      const requiredInput = wrapper.find('[required], [aria-required=true]')
+      expect(requiredInput.exists()).toBe(true)
+    })
 
     test('binds hints with aria-describedby', async () => {
       const wrapper = await renderFormField({

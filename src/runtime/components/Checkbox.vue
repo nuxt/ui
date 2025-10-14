@@ -77,9 +77,9 @@ const modelValue = defineModel<boolean | 'indeterminate'>({ default: undefined }
 
 const appConfig = useAppConfig() as Checkbox['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
+const rootProps = useForwardProps(reactivePick(props, 'value', 'defaultValue'))
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<CheckboxProps>(props)
+const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, required, ariaAttrs } = useFormField<CheckboxProps>(props)
 const id = _id.value ?? useId()
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.checkbox || {}) })({
@@ -109,6 +109,7 @@ function onUpdate(value: any) {
         v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
         v-model="modelValue"
         :name="name"
+        :required="required"
         :disabled="disabled"
         :class="ui.base({ class: props.ui?.base })"
         @update:model-value="onUpdate"

@@ -104,7 +104,7 @@ const appConfig = useAppConfig() as InputNumber['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'readonly'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs, required } = useFormField<InputNumberProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps>(props)
 
 const locale = computed(() => props.locale || codeLocale.value)
@@ -166,6 +166,7 @@ defineExpose({
     :model-value="modelValue"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :name="name"
+    :required="required"
     :disabled="disabled"
     :locale="locale"
     @update:model-value="onUpdate"
