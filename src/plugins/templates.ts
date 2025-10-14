@@ -13,10 +13,11 @@ import { getTemplates, detectUsedComponents } from '../templates'
  */
 export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record<string, any>) {
   let templates: ReturnType<typeof getTemplates>
-  let templatePaths: Map<string, string>
+  let templateKeys: Set<string>
+  let cssFilePath: string | undefined
   let detectionComplete = false
 
-  // Write all templates to a temporary directory
+  // Write CSS to a temporary directory (for Tailwind to read)
   const tempDir = join(tmpdir(), 'nuxt-ui-' + Date.now())
   mkdirSync(tempDir, { recursive: true })
 
@@ -49,9 +50,11 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
     }
 
     templates = getTemplates(options, appConfig.ui, undefined, detectedComponents)
-    templatePaths = new Map<string, string>()
+    templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
-    // Write all templates with their actual content
+    // Write all templates to temp directory
+    // - CSS file needs to be real for Tailwind to read
+    // - TypeScript files need to be real for Tailwind's @source directive to scan them
     for (const template of templates) {
       if (template.write && template.filename) {
         const filepath = join(tempDir, template.filename)
@@ -59,7 +62,10 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         mkdirSync(dir, { recursive: true })
         const contents = await template.getContents!({} as any)
         writeFileSync(filepath, contents as string)
-        templatePaths.set(`#build/${template.filename}`, filepath)
+
+        if (template.filename === 'ui.css') {
+          cssFilePath = filepath
+        }
       }
     }
 
@@ -77,41 +83,32 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
       await initPromise
     },
     async resolveId(id) {
-      // Only handle #build/ui/* imports (not #build/app.config which is handled by AppConfigPlugin)
-      if (!id.startsWith('#build/ui')) return
-
-      // Wait for templates to be initialized
       await initPromise
 
-      // Resolve all #build/* imports to actual temp files
-      if (templatePaths.has(id)) {
-        const resolved = templatePaths.get(id)!
-        return { id: resolved }
+      if (templateKeys.has(id + '.ts')) {
+        return id.replace('#build/', 'virtual:nuxt-ui-templates/') + '.ts'
       }
-      if (templatePaths.has(id + '.ts')) {
-        const resolved = templatePaths.get(id + '.ts')!
-        return { id: resolved }
-      }
+    },
+    loadInclude: id => templateKeys.has(id.replace('virtual:nuxt-ui-templates/', '#build/')),
+    async load(id) {
+      await initPromise
+
+      id = id.replace('virtual:nuxt-ui-templates/', '#build/')
+      return templates.find(t => `#build/${t.filename}` === id)!.getContents!({} as any)
     },
     vite: {
       async config() {
         // Wait for initialization to complete during config phase
         await initPromise
 
-        // Set up aliases for Tailwind's enhanced-resolve
-        const aliases: Record<string, string> = {}
-        if (templatePaths) {
-          for (const [key, path] of templatePaths.entries()) {
-            aliases[key] = path
-            // Also add alias without .ts extension for TypeScript imports
-            if (key.endsWith('.ts')) {
-              aliases[key.slice(0, -3)] = path
+        // Set up alias only for CSS file (for Tailwind's enhanced-resolve)
+        if (cssFilePath) {
+          return {
+            resolve: {
+              alias: {
+                '#build/ui.css': cssFilePath
+              }
             }
-          }
-        }
-        return {
-          resolve: {
-            alias: aliases
           }
         }
       }
