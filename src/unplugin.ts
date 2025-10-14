@@ -70,9 +70,9 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
     NuxtEnvironmentPlugin(options),
     ComponentImportPlugin(options, meta),
     AutoImportPlugin(options, meta),
+    TemplatePlugin(options, appConfig),
     tailwind(),
     PluginsPlugin(options),
-    TemplatePlugin(options, appConfig),
     AppConfigPlugin(options, appConfig),
     <UnpluginOptions>{
       name: 'nuxt:ui:plugins-duplication-detection',
