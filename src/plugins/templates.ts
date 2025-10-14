@@ -76,27 +76,22 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
       // Ensure templates are initialized before build starts
       await initPromise
     },
-    resolveId(id) {
-      if (!id.startsWith('#build/')) return
+    async resolveId(id) {
+      // Only handle #build/ui/* imports (not #build/app.config which is handled by AppConfigPlugin)
+      if (!id.startsWith('#build/ui')) return
 
-      if (!templatePaths) {
-        console.warn('[Nuxt UI] resolveId called before templates initialized:', id)
-        return
-      }
+      // Wait for templates to be initialized
+      await initPromise
 
       // Resolve all #build/* imports to actual temp files
       if (templatePaths.has(id)) {
         const resolved = templatePaths.get(id)!
-        console.log('[Nuxt UI] Resolved', id, '→', resolved)
         return { id: resolved }
       }
       if (templatePaths.has(id + '.ts')) {
         const resolved = templatePaths.get(id + '.ts')!
-        console.log('[Nuxt UI] Resolved', id, '→', resolved, '(added .ts)')
         return { id: resolved }
       }
-
-      console.warn('[Nuxt UI] Could not resolve:', id)
     },
     vite: {
       async config() {
