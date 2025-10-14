@@ -77,12 +77,18 @@
       ]
     }
   },
+  "imports": {
+    "#build/ui/*": "./.nuxt/ui/*.ts",
+    "#build/ui.css": "./.nuxt/ui.css"
+  },
   "bin": {
     "nuxt-ui": "./cli/index.mjs"
   },
   "style": "./dist/runtime/index.css",
   "main": "./dist/module.mjs",
   "files": [
+    ".nuxt/ui",
+    ".nuxt/ui.css",
     "dist",
     "cli",
     "vue-plugin.d.ts"
@@ -166,6 +172,7 @@
     "nuxt": "^4.1.2",
     "release-it": "^19.0.5",
     "vitest": "^3.2.4",
+    "vitest-axe": "^0.1.0",
     "vitest-environment-nuxt": "^1.0.1",
     "vue-tsc": "^3.1.1"
   },
