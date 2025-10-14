@@ -1,4 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises, mount } from '@vue/test-utils'
 import Select from '../../src/runtime/components/Select.vue'
 import type { SelectProps, SelectSlots } from '../../src/runtime/components/Select.vue'
@@ -82,6 +84,38 @@ describe('Select', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps, slots?: Partial<SelectSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Select)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Select, {
+      props: {
+        ...props,
+        modelValue: items[0]?.value,
+        required: true,
+        avatar: {
+          src: 'https://github.com/benjamincanac.png',
+          alt: 'Benjamin Canac'
+        }
+      }
+    })
+
+    expect(await axe(wrapper.element, {
+      rules: {
+        // "Buttons must have discernible text (button-name)"
+
+        // Fix any of the following:
+        //   Element does not have inner text that is visible to screen readers
+        //   aria-label attribute does not exist or is empty
+        //   aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
+        //   Element has no title attribute
+        //   Element does not have an implicit (wrapped) <label>
+        //   Element does not have an explicit <label>
+        //   Element's default semantics were not overridden with role="none" or role="presentation"
+
+        // We should add aria-labeledby to the SelectTrigger and the id to the value/placeholder element.
+        'button-name': { enabled: false }
+      }
+    })).toHaveNoViolations()
   })
 
   describe('it should display correct label', () => {
