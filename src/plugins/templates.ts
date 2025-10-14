@@ -66,21 +66,11 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
     detectionComplete = true
   }
 
-  // Initialize templates immediately during plugin creation
-  const detectionPromise = initializeTemplates()
-
   return {
     name: 'nuxt:ui:templates',
     enforce: 'pre',
-    async buildStart() {
-      // Ensure detection is complete before build starts
-      await detectionPromise
-    },
-    async resolveId(id) {
-      // Wait for detection to complete before resolving
-      await detectionPromise
-
-      if (!templatePaths) return
+    resolveId(id) {
+      if (!detectionComplete || !templatePaths) return
 
       // Resolve all #build/* imports to actual temp files
       if (templatePaths.has(id)) {
@@ -92,8 +82,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
     },
     vite: {
       async config() {
-        // Wait for detection to complete
-        await detectionPromise
+        // Initialize templates during config phase (before any imports are resolved)
+        await initializeTemplates()
 
         // Set up aliases for Tailwind's enhanced-resolve
         const aliases: Record<string, string> = {}
