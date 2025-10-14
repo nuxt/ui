@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Collapsible from '../../src/runtime/components/Collapsible.vue'
 import type { CollapsibleProps, CollapsibleSlots } from '../../src/runtime/components/Collapsible.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Collapsible', () => {
   const props = { open: true }

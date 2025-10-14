@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Container from '../../src/runtime/components/Container.vue'
 import type { ContainerProps, ContainerSlots } from '../../src/runtime/components/Container.vue'
 import ComponentRender from '../component-render'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { axe } from 'vitest-axe'
 
 describe('Container', () => {
   it.each([

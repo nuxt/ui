@@ -1,14 +1,13 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises, mount } from '@vue/test-utils'
 import PinInput from '../../src/runtime/components/PinInput.vue'
 import type { PinInputProps } from '../../src/runtime/components/PinInput.vue'
-import ComponentRender from '../component-render'
-import theme from '#build/ui/pin-input'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-
-import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '../../src/module'
+import ComponentRender from '../component-render'
+import { renderForm } from '../utils/form'
+import theme from '#build/ui/pin-input'
 
 describe('PinInput', () => {
   const sizes = Object.keys(theme.variants.size) as any

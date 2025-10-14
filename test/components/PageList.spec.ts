@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageList from '../../src/runtime/components/PageList.vue'
 import type { PageListProps, PageListSlots } from '../../src/runtime/components/PageList.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('PageList', () => {
   it.each([

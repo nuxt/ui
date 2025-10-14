@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Kbd from '../../src/runtime/components/Kbd.vue'
 import type { KbdProps, KbdSlots } from '../../src/runtime/components/Kbd.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/kbd'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Kbd', () => {
   const sizes = Object.keys(theme.variants.size) as any

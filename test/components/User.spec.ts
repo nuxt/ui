@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import User from '../../src/runtime/components/User.vue'
 import type { UserProps, UserSlots } from '../../src/runtime/components/User.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/user'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('User', () => {
   const sizes = Object.keys(theme.variants.size) as any

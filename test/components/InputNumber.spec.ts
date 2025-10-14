@@ -1,14 +1,14 @@
-import { describe, it, expect, test } from 'vitest'
-import { flushPromises } from '@vue/test-utils'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { reactive } from 'vue'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { flushPromises } from '@vue/test-utils'
 import InputNumber from '../../src/runtime/components/InputNumber.vue'
 import type { InputNumberProps, InputNumberSlots } from '../../src/runtime/components/InputNumber.vue'
-import ComponentRender from '../component-render'
-import theme from '#build/ui/input-number'
 import type { FormInputEvents } from '../../src/module'
+import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
+import theme from '#build/ui/input-number'
 
 describe('InputNumber', () => {
   const sizes = Object.keys(theme.variants.size) as any

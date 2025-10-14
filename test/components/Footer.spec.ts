@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Footer from '../../src/runtime/components/Footer.vue'
 import type { FooterProps, FooterSlots } from '../../src/runtime/components/Footer.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Footer', () => {
   it.each([

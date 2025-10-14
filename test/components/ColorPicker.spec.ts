@@ -1,10 +1,10 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ColorPicker from '../../src/runtime/components/ColorPicker.vue'
 import type { ColorPickerProps } from '../../src/runtime/components/ColorPicker.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/color-picker'
-import { axe } from 'vitest-axe'
 
 describe('ColorPicker', () => {
   const sizes = Object.keys(theme.variants.size) as any

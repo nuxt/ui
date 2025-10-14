@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Slideover from '../../src/runtime/components/Slideover.vue'
 import type { SlideoverProps, SlideoverSlots } from '../../src/runtime/components/Slideover.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Slideover', () => {
   const props = { open: true, portal: false }

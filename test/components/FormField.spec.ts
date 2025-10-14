@@ -1,11 +1,10 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect, test, vi } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import type { FormFieldProps, FormFieldSlots } from '../../src/runtime/components/FormField.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/form-field'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { axe } from 'vitest-axe'
-
 import {
   UInput,
   URadioGroup,

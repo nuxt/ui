@@ -1,12 +1,12 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Avatar from '../../src/runtime/components/Avatar.vue'
 import AvatarGroup from '../../src/runtime/components/AvatarGroup.vue'
 import type { AvatarGroupProps, AvatarGroupSlots } from '../../src/runtime/components/AvatarGroup.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/avatar-group'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { axe } from 'vitest-axe'
 
 const AvatarGroupWrapper = defineComponent({
   components: {

@@ -1,11 +1,11 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DropdownMenu from '../../src/runtime/components/DropdownMenu.vue'
 import type { DropdownMenuProps, DropdownMenuSlots } from '../../src/runtime/components/DropdownMenu.vue'
 import ComponentRender from '../component-render'
-import theme from '#build/ui/dropdown-menu'
 import { expectSlotProps } from '../utils/types'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
+import theme from '#build/ui/dropdown-menu'
 
 describe('DropdownMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any

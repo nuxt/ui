@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Tabs from '../../src/runtime/components/Tabs.vue'
 import type { TabsProps, TabsSlots } from '../../src/runtime/components/Tabs.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/tabs'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Tabs', () => {
   const variants = Object.keys(theme.variants.variant) as any

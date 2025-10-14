@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Badge from '../../src/runtime/components/Badge.vue'
 import type { BadgeProps, BadgeSlots } from '../../src/runtime/components/Badge.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/badge'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { axe } from 'vitest-axe'
 
 describe('Badge', () => {
   const sizes = Object.keys(theme.variants.size) as any

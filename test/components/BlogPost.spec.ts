@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import BlogPost from '../../src/runtime/components/BlogPost.vue'
 import type { BlogPostProps, BlogPostSlots } from '../../src/runtime/components/BlogPost.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/blog-post'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('BlogPost', () => {
   const variants = Object.keys(theme.variants.variant) as any

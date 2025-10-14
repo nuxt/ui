@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Stepper from '../../src/runtime/components/Stepper.vue'
 import type { StepperProps, StepperSlots } from '../../src/runtime/components/Stepper.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/stepper'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Stepper', () => {
   const sizes = Object.keys(theme.variants.size) as any

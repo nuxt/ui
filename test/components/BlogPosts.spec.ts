@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import BlogPosts from '../../src/runtime/components/BlogPosts.vue'
 import type { BlogPostsProps, BlogPostsSlots } from '../../src/runtime/components/BlogPosts.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('BlogPosts', () => {
   const posts = [{

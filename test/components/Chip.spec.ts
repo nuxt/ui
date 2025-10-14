@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Chip from '../../src/runtime/components/Chip.vue'
 import type { ChipProps, ChipSlots } from '../../src/runtime/components/Chip.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/chip'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Chip', () => {
   const sizes = Object.keys(theme.variants.size) as any

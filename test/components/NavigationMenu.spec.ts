@@ -1,11 +1,11 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import NavigationMenu from '../../src/runtime/components/NavigationMenu.vue'
 import type { NavigationMenuProps, NavigationMenuSlots } from '../../src/runtime/components/NavigationMenu.vue'
 import ComponentRender from '../component-render'
-import theme from '#build/ui/navigation-menu'
 import { expectSlotProps } from '../utils/types'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
+import theme from '#build/ui/navigation-menu'
 
 describe('NavigationMenu', () => {
   const variants = Object.keys(theme.variants.variant) as any

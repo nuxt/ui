@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChangelogVersion from '../../src/runtime/components/ChangelogVersion.vue'
 import type { ChangelogVersionProps, ChangelogVersionSlots } from '../../src/runtime/components/ChangelogVersion.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('ChangelogVersion', () => {
   it.each([

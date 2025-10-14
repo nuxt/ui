@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Marquee from '../../src/runtime/components/Marquee.vue'
 import type { MarqueeProps, MarqueeSlots } from '../../src/runtime/components/Marquee.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Marquee', () => {
   it.each([

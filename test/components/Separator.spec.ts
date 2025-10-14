@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Separator from '../../src/runtime/components/Separator.vue'
 import type { SeparatorProps, SeparatorSlots } from '../../src/runtime/components/Separator.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/separator'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Separator', () => {
   const types = Object.keys(theme.variants.type) as any

@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChatPrompt from '../../src/runtime/components/ChatPrompt.vue'
 import type { ChatPromptProps, ChatPromptSlots } from '../../src/runtime/components/ChatPrompt.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/chat-prompt'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('ChatPrompt', () => {
   const variants = Object.keys(theme.variants.variant) as any

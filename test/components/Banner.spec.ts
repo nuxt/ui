@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Banner from '../../src/runtime/components/Banner.vue'
 import type { BannerProps, BannerSlots } from '../../src/runtime/components/Banner.vue'
 import ComponentRender from '../component-render'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { axe } from 'vitest-axe'
 
 describe('Banner', () => {
   const props = { id: 'banner' }

@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import { ULink as Link } from '#components'
-import type { LinkProps, LinkSlots } from '../../src/runtime/components/Link.vue'
-import ComponentRender from '../component-render'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import type { LinkProps, LinkSlots } from '../../src/runtime/components/Link.vue'
+import ComponentRender from '../component-render'
+import { ULink as Link } from '#components'
 
 describe('Link', () => {
   it.each([

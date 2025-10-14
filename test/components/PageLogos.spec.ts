@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageLogos from '../../src/runtime/components/PageLogos.vue'
 import type { PageLogosProps, PageLogosSlots } from '../../src/runtime/components/PageLogos.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('PageLogos', () => {
   const items = [

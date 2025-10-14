@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import FieldGroup from '../../src/runtime/components/FieldGroup.vue'
 import type { FieldGroupProps, FieldGroupSlots } from '../../src/runtime/components/FieldGroup.vue'
 import ComponentRender from '../component-render'
-import { UInput, UButton } from '#components'
 import buttonTheme from '#build/ui/button'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { UInput, UButton } from '#components'
 
 describe('FieldGroup', () => {
   const sizes = Object.keys(buttonTheme.variants.size) as any

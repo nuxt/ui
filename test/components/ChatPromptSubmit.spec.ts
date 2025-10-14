@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChatPromptSubmit from '../../src/runtime/components/ChatPromptSubmit.vue'
 import type { ChatPromptSubmitProps } from '../../src/runtime/components/ChatPromptSubmit.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('ChatPromptSubmit', () => {
   const statuses = ['ready', 'submitted', 'streaming', 'error'] as any

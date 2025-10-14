@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, afterAll, test } from 'vitest'
+import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { CalendarDate } from '@internationalized/date'
 import Calendar from '../../src/runtime/components/Calendar.vue'
 import type { CalendarProps, CalendarSlots } from '../../src/runtime/components/Calendar.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/calendar'
-import { CalendarDate } from '@internationalized/date'
-import { axe } from 'vitest-axe'
 
 describe('Calendar', () => {
   const sizes = Object.keys(theme.variants.size) as any

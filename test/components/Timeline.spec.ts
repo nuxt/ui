@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Timeline from '../../src/runtime/components/Timeline.vue'
 import type { TimelineProps, TimelineSlots } from '../../src/runtime/components/Timeline.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/timeline'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Timeline', () => {
   const sizes = Object.keys(theme.variants.size) as any

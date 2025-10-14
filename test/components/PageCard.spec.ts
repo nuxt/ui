@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageCard from '../../src/runtime/components/PageCard.vue'
 import type { PageCardProps, PageCardSlots } from '../../src/runtime/components/PageCard.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/page-card'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('PageCard', () => {
   const variants = Object.keys(theme.variants.variant) as any

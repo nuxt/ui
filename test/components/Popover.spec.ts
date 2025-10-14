@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Popover from '../../src/runtime/components/Popover.vue'
 import type { PopoverProps, PopoverSlots } from '../../src/runtime/components/Popover.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Popover', () => {
   const props = { open: true, portal: false }

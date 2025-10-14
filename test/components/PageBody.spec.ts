@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageBody from '../../src/runtime/components/PageBody.vue'
 import type { PageBodyProps, PageBodySlots } from '../../src/runtime/components/PageBody.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('PageBody', () => {
   it.each([

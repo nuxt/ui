@@ -1,10 +1,10 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardPanel from '../../src/runtime/components/DashboardPanel.vue'
 import type { DashboardPanelProps, DashboardPanelSlots } from '../../src/runtime/components/DashboardPanel.vue'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { axe } from 'vitest-axe'
 
 const DashboardWrapper = defineComponent({
   components: {

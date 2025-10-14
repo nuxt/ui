@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Pagination from '../../src/runtime/components/Pagination.vue'
 import type { PaginationProps, PaginationSlots } from '../../src/runtime/components/Pagination.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/button'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Pagination', () => {
   const sizes = Object.keys(theme.variants.size) as any

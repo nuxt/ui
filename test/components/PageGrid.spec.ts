@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageGrid from '../../src/runtime/components/PageGrid.vue'
 import type { PageGridProps, PageGridSlots } from '../../src/runtime/components/PageGrid.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('PageGrid', () => {
   it.each([

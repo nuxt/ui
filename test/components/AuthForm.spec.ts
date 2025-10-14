@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import AuthForm from '../../src/runtime/components/AuthForm.vue'
 import type { AuthFormProps, AuthFormSlots } from '../../src/runtime/components/AuthForm.vue'
 import ComponentRender from '../component-render'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { axe } from 'vitest-axe'
 
 describe('AuthForm', () => {
   const fields = [{

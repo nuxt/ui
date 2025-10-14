@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Progress from '../../src/runtime/components/Progress.vue'
 import type { ProgressProps, ProgressSlots } from '../../src/runtime/components/Progress.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/progress'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('Progress', () => {
   const sizes = Object.keys(theme.variants.size) as any

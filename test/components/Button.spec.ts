@@ -1,16 +1,13 @@
 import { ref } from 'vue'
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { flushPromises } from '@vue/test-utils'
 import Button from '../../src/runtime/components/Button.vue'
 import type { ButtonProps, ButtonSlots } from '../../src/runtime/components/Button.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/button'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { flushPromises } from '@vue/test-utils'
-import { axe } from 'vitest-axe'
-
-import {
-  UForm
-} from '#components'
+import { UForm } from '#components'
 
 describe('Button', () => {
   const sizes = Object.keys(theme.variants.size) as any

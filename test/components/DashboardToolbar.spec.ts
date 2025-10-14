@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardToolbar from '../../src/runtime/components/DashboardToolbar.vue'
 import type { DashboardToolbarProps, DashboardToolbarSlots } from '../../src/runtime/components/DashboardToolbar.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('DashboardToolbar', () => {
   it.each([

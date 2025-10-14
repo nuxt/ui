@@ -1,14 +1,14 @@
 import { describe, it, expect, test } from 'vitest'
-import InputMenu from '../../src/runtime/components/InputMenu.vue'
-import type { InputMenuProps, InputMenuSlots } from '../../src/runtime/components/InputMenu.vue'
-import ComponentRender from '../component-render'
-import theme from '#build/ui/input'
-import { renderForm } from '../utils/form'
-import { flushPromises, mount } from '@vue/test-utils'
-import type { FormInputEvents } from '../../src/module'
-import { expectEmitPayloadType } from '../utils/types'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { flushPromises, mount } from '@vue/test-utils'
+import InputMenu from '../../src/runtime/components/InputMenu.vue'
+import type { InputMenuProps, InputMenuSlots } from '../../src/runtime/components/InputMenu.vue'
+import type { FormInputEvents } from '../../src/module'
+import ComponentRender from '../component-render'
+import { renderForm } from '../utils/form'
+import { expectEmitPayloadType } from '../utils/types'
+import theme from '#build/ui/input'
 
 describe('InputMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any

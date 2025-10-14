@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
-import theme from '#build/ui/input'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import InputTags from '../../src/runtime/components/InputTags.vue'
 import type { InputTagsProps, InputTagsSlots } from '../../src/runtime/components/InputTags.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
+import theme from '#build/ui/input'
 
 describe('InputTags', () => {
   const sizes = Object.keys(theme.variants.size) as any

@@ -1,13 +1,13 @@
 import { describe, it, expect, vi, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { mount } from '@vue/test-utils'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
 import type { FileUploadProps, FileUploadSlots } from '../../src/runtime/components/FileUpload.vue'
+import type { FormInputEvents } from '../../src/module'
 import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '../../src/module'
 import theme from '#build/ui/file-upload'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 // Mock URL.createObjectURL to return deterministic blob URLs
 URL.createObjectURL = vi.fn((file: File | Blob) => {

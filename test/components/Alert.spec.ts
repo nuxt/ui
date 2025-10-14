@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Alert from '../../src/runtime/components/Alert.vue'
 import type { AlertProps, AlertSlots } from '../../src/runtime/components/Alert.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/alert'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { axe } from 'vitest-axe'
 
 describe('Alert', () => {
   const variants = Object.keys(theme.variants.variant) as any

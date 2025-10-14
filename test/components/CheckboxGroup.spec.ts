@@ -1,13 +1,13 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { flushPromises, mount } from '@vue/test-utils'
 import CheckboxGroup from '../../src/runtime/components/CheckboxGroup.vue'
 import type { CheckboxGroupProps, CheckboxGroupSlots } from '../../src/runtime/components/CheckboxGroup.vue'
+import type { FormInputEvents } from '../../src/module'
 import ComponentRender from '../component-render'
+import { renderForm } from '../utils/form'
 import theme from '#build/ui/checkbox-group'
 import themeCheckbox from '#build/ui/checkbox'
-import { flushPromises, mount } from '@vue/test-utils'
-import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '../../src/module'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('CheckboxGroup', () => {

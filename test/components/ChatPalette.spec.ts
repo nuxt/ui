@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChatPalette from '../../src/runtime/components/ChatPalette.vue'
 import type { ChatPaletteProps, ChatPaletteSlots } from '../../src/runtime/components/ChatPalette.vue'
 import ComponentRender from '../component-render'
-import { axe } from 'vitest-axe'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('ChatPalette', () => {
   it.each([
