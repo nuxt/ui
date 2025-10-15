@@ -91,8 +91,8 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
   orientation: 'horizontal',
-  disabledIncrement: false,
-  disabledDecrement: false,
+  incrementDisabled: false,
+  decrementDisabled: false,
   increment: true,
   decrement: true
 })
