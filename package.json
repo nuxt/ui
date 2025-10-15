@@ -150,8 +150,8 @@
     "tailwindcss": "^4.1.14",
     "tinyglobby": "^0.2.15",
     "unplugin": "^2.3.10",
-    "unplugin-auto-import": "^19.3.0",
-    "unplugin-vue-components": "^28.8.0",
+    "unplugin-auto-import": "^20.2.0",
+    "unplugin-vue-components": "^29.1.0",
     "vaul-vue": "0.4.1",
     "vue-component-type-helpers": "^3.1.1"
   },
@@ -211,7 +211,9 @@
     "debug": "4.3.7",
     "typescript": "5.8.3",
     "unimport": "4.1.1",
-    "unplugin": "^2.3.10"
+    "unplugin": "^2.3.10",
+    "unplugin-auto-import": "^20.2.0",
+    "unplugin-vue-components": "^29.1.0"
   },
   "keywords": [
     "nuxt-ui",
