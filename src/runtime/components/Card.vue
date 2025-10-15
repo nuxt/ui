@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/card'
 import type { ComponentConfig } from '../types/tv'
@@ -20,9 +21,9 @@ export interface CardProps {
 }
 
 export interface CardSlots {
-  header(props?: {}): any
-  default(props?: {}): any
-  footer(props?: {}): any
+  header?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 

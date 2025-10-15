@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { ComponentPublicInstance, VNode } from 'vue'
 import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tabs'
@@ -71,21 +72,20 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
 
 export interface TabsEmits extends TabsRootEmits<string | number> {}
 
-type SlotProps<T extends TabsItem> = (props: { item: T, index: number }) => any
+type SlotProps<T extends TabsItem> = (props: { item: T, index: number }) => VNode[]
 
 export type TabsSlots<T extends TabsItem = TabsItem> = {
-  'leading': SlotProps<T>
+  'leading'?: SlotProps<T>
   'default': SlotProps<T>
-  'trailing': SlotProps<T>
-  'content': SlotProps<T>
-  'list-leading': (props?: {}) => any
-  'list-trailing': (props?: {}) => any
+  'trailing'?: SlotProps<T>
+  'content'?: SlotProps<T>
+  'list-leading'?: (props?: {}) => VNode[]
+  'list-trailing'?: (props?: {}) => VNode[]
 } & DynamicSlots<T, undefined, { index: number }>
 
 </script>
 
 <script setup lang="ts" generic="T extends TabsItem">
-import type { ComponentPublicInstance } from 'vue'
 import { ref, computed } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'

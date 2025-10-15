@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-palette'
 import type { ComponentConfig } from '../types/tv'
@@ -16,8 +17,8 @@ export interface ChatPaletteProps {
 }
 
 export interface ChatPaletteSlots {
-  default(props?: {}): any
-  prompt(props?: {}): any
+  default?(props?: {}): VNode[]
+  prompt?(props?: {}): VNode[]
 }
 </script>
 

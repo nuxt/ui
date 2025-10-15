@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/slideover'
@@ -61,15 +62,15 @@ export interface SlideoverEmits extends DialogRootEmits {
 }
 
 export interface SlideoverSlots {
-  default(props: { open: boolean }): any
-  content(props: { close: () => void }): any
-  header(props: { close: () => void }): any
-  title(props?: {}): any
-  description(props?: {}): any
-  actions(props?: {}): any
-  close(props: { close: () => void, ui: { [K in keyof Required<Slideover['slots']>]: (props?: Record<string, any>) => string } }): any
-  body(props: { close: () => void }): any
-  footer(props: { close: () => void }): any
+  default?(props: { open: boolean }): VNode[]
+  content?(props: { close: () => void }): VNode[]
+  header?(props: { close: () => void }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  close?(props: { close: () => void, ui: { [K in keyof Required<Slideover['slots']>]: (props?: Record<string, any>) => string } }): VNode[]
+  body?(props: { close: () => void }): VNode[]
+  footer?(props: { close: () => void }): VNode[]
 }
 </script>
 

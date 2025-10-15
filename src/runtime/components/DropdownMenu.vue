@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuContentEmits, DropdownMenuArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dropdown-menu'
@@ -90,19 +91,19 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
+type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number }) => VNode[]
 
 export type DropdownMenuSlots<
   A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  'default'(props: { open: boolean }): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
+  'default'?(props: { open: boolean }): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: SlotProps<T>
+  'item-trailing'?: SlotProps<T>
+  'content-top'?: (props?: {}) => VNode[]
+  'content-bottom'?: (props?: {}) => VNode[]
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
 </script>

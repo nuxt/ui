@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Ref, WatchOptions } from 'vue'
+import type { Ref, WatchOptions, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Cell, Header, RowData, TableMeta } from '@tanstack/table-core'
 import type {
@@ -204,17 +204,17 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   ui?: Table['slots']
 }
 
-type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => any>
-type DynamicFooterSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-footer`, (props: HeaderContext<T, unknown>) => any>
-type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => any>
+type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => VNode[]> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => VNode[]>
+type DynamicFooterSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => VNode[]> & Record<`${K extends string ? K : never}-footer`, (props: HeaderContext<T, unknown>) => VNode[]>
+type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => VNode[]> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => VNode[]>
 
 export type TableSlots<T extends TableData = TableData> = {
-  'expanded': (props: { row: Row<T> }) => any
-  'empty': (props?: {}) => any
-  'loading': (props?: {}) => any
-  'caption': (props?: {}) => any
-  'body-top': (props?: {}) => any
-  'body-bottom': (props?: {}) => any
+  'expanded'?: (props: { row: Row<T> }) => VNode[]
+  'empty'?: (props?: {}) => VNode[]
+  'loading'?: (props?: {}) => VNode[]
+  'caption'?: (props?: {}) => VNode[]
+  'body-top'?: (props?: {}) => VNode[]
+  'body-bottom'?: (props?: {}) => VNode[]
 } & DynamicHeaderSlots<T> & DynamicFooterSlots<T> & DynamicCellSlots<T>
 
 </script>

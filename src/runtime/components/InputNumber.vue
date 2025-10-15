@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { NumberFieldRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-number'
@@ -71,8 +72,8 @@ export interface InputNumberEmits {
 }
 
 export interface InputNumberSlots {
-  increment(props?: {}): any
-  decrement(props?: {}): any
+  increment?(props?: {}): VNode[]
+  decrement?(props?: {}): VNode[]
 }
 </script>
 

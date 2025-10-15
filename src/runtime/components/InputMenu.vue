@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { InputHTMLAttributes } from 'vue'
+import type { InputHTMLAttributes, VNode } from 'vue'
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-menu'
@@ -158,7 +158,7 @@ export type InputMenuEmits<A extends ArrayOrNested<InputMenuItem>, VK extends Ge
   'remove-tag': [item: GetModelValue<A, VK, M>]
 } & GetModelValueEmits<A, VK, M>
 
-type SlotProps<T extends InputMenuItem> = (props: { item: T, index: number }) => any
+type SlotProps<T extends InputMenuItem> = (props: { item: T, index: number }) => VNode[]
 
 export interface InputMenuSlots<
   A extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>,
@@ -166,26 +166,26 @@ export interface InputMenuSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: {
+  'leading'?(props: {
     modelValue?: GetModelValue<A, VK, M>
     open: boolean
     ui: { [K in keyof Required<InputMenu['slots']>]: (props?: Record<string, any>) => string }
-  }): any
-  'trailing'(props: {
+  }): VNode[]
+  'trailing'?(props: {
     modelValue?: GetModelValue<A, VK, M>
     open: boolean
     ui: { [K in keyof Required<InputMenu['slots']>]: (props?: Record<string, any>) => string }
-  }): any
-  'empty'(props: { searchTerm?: string }): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-  'tags-item-text': SlotProps<T>
-  'tags-item-delete': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
-  'create-item-label'(props: { item: string }): any
+  }): VNode[]
+  'empty'?(props: { searchTerm?: string }): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: SlotProps<T>
+  'item-trailing'?: SlotProps<T>
+  'tags-item-text'?: SlotProps<T>
+  'tags-item-delete'?: SlotProps<T>
+  'content-top'?: (props?: {}) => VNode[]
+  'content-bottom'?: (props?: {}) => VNode[]
+  'create-item-label'?(props: { item: string }): VNode[]
 }
 </script>
 

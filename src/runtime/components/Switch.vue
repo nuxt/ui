@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { SwitchRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/switch'
@@ -50,8 +51,8 @@ export type SwitchEmits = {
 }
 
 export interface SwitchSlots {
-  label(props: { label?: string }): any
-  description(props: { description?: string }): any
+  label?(props: { label?: string }): VNode[]
+  description?(props: { description?: string }): VNode[]
 }
 </script>
 

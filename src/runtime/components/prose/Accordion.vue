@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/accordion'
 import type { AccordionProps } from '../../types'
@@ -13,7 +14,7 @@ export interface ProseAccordionProps {
 }
 
 export interface ProseAccordionSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 

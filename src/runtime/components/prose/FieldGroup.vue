@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/field-group'
@@ -15,7 +16,7 @@ export interface ProseFieldGroupProps {
 }
 
 export interface ProseFieldGroupSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/badge'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -33,9 +34,9 @@ export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'lo
 }
 
 export interface BadgeSlots {
-  leading(props?: {}): any
-  default(props?: {}): any
-  trailing(props?: {}): any
+  leading?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  trailing?(props?: {}): VNode[]
 }
 </script>
 

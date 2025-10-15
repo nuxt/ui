@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { VNode } from 'vue'
 import type { ChipProps } from '@nuxt/ui'
 import { camelCase } from 'scule'
 import { hash } from 'ohash'
@@ -65,8 +66,8 @@ const props = withDefaults(defineProps<{
 })
 
 const slots = defineSlots<{
-  options(props?: {}): any
-  code(props?: {}): any
+  options?(props?: {}): VNode
+  code?(props?: {}): VNode
 }>()
 
 const el = ref<HTMLElement | null>(null)

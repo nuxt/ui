@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/field-group'
 import type { ComponentConfig } from '../types/tv'
@@ -25,7 +26,7 @@ export interface FieldGroupProps {
 }
 
 export interface FieldGroupSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 

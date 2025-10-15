@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/user'
 import type { AvatarProps, ChipProps, LinkProps } from '../types'
@@ -33,10 +34,10 @@ export interface UserProps {
 }
 
 export interface UserSlots {
-  avatar(props?: {}): any
-  name(props?: {}): any
-  description(props?: {}): any
-  default(props?: {}): any
+  avatar?(props?: {}): VNode[]
+  name?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

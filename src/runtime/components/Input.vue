@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { InputHTMLAttributes } from 'vue'
+import type { InputHTMLAttributes, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -55,9 +55,9 @@ export interface InputEmits<T extends InputValue = InputValue> {
 }
 
 export interface InputSlots {
-  leading(props?: {}): any
-  default(props?: {}): any
-  trailing(props?: {}): any
+  leading?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  trailing?(props?: {}): VNode[]
 }
 </script>
 

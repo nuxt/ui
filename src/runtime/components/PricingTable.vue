@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-table'
 import type { PricingPlanProps } from '../types'
@@ -13,7 +14,7 @@ type DynamicSlots<T extends { id: string }, S extends string | undefined = undef
       ? (K | `${K}-${S}`)
       : K
     : never
-  ]?: (props: { tier: Extract<T, { id: K extends `${infer Base}-${S}` ? Base : K }> }) => any
+  ]?: (props: { tier: Extract<T, { id: K extends `${infer Base}-${S}` ? Base : K }> }) => VNode[]
 }
 
 type FeatureDynamicSlots<T extends PricingTableSectionFeature, S extends string | undefined = undefined> = {
@@ -22,7 +23,7 @@ type FeatureDynamicSlots<T extends PricingTableSectionFeature, S extends string 
       ? (`feature-${K}` | `feature-${K}-${S}`)
       : `feature-${K}`
     : never
-  ]?: (props: { feature: T, tier: PricingTableTier, section: PricingTableSection }) => any
+  ]?: (props: { feature: T, tier: PricingTableTier, section: PricingTableSection }) => VNode[]
 }
 
 type SectionDynamicSlots<T extends PricingTableSection, S extends string | undefined = undefined> = {
@@ -31,7 +32,7 @@ type SectionDynamicSlots<T extends PricingTableSection, S extends string | undef
       ? (`section-${K}` | `section-${K}-${S}`)
       : `section-${K}`
     : never
-  ]?: (props: { section: T }) => any
+  ]?: (props: { section: T }) => VNode[]
 }
 
 export type PricingTableTier = Pick<PricingPlanProps, 'title' | 'description' | 'badge' | 'billingCycle' | 'billingPeriod' | 'price' | 'discount' | 'button' | 'highlight'> & {
@@ -78,21 +79,21 @@ export interface PricingTableProps<T extends PricingTableTier = PricingTableTier
   ui?: PricingTable['slots']
 }
 
-type SlotProps<T extends PricingTableTier> = (props: { tier: T }) => any
+type SlotProps<T extends PricingTableTier> = (props: { tier: T }) => VNode[]
 
 export type PricingTableSlots<T extends PricingTableTier = PricingTableTier> = {
-  'caption': (props?: {}) => any
-  'tier': SlotProps<T>
-  'tier-title': SlotProps<T>
-  'tier-description': SlotProps<T>
-  'tier-badge': SlotProps<T>
-  'tier-button': SlotProps<T>
-  'tier-billing': SlotProps<T>
-  'tier-discount': SlotProps<T>
-  'tier-price': SlotProps<T>
-  'section-title': (props: { section: PricingTableSection<T> }) => any
-  'feature-title': (props: { feature: PricingTableSectionFeature<T>, section: PricingTableSection<T> }) => any
-  'feature-value': (props: { feature: PricingTableSectionFeature<T>, tier: T, section: PricingTableSection<T> }) => any
+  'caption'?: (props?: {}) => VNode[]
+  'tier'?: SlotProps<T>
+  'tier-title'?: SlotProps<T>
+  'tier-description'?: SlotProps<T>
+  'tier-badge'?: SlotProps<T>
+  'tier-button'?: SlotProps<T>
+  'tier-billing'?: SlotProps<T>
+  'tier-discount'?: SlotProps<T>
+  'tier-price'?: SlotProps<T>
+  'section-title'?: (props: { section: PricingTableSection<T> }) => VNode[]
+  'feature-title'?: (props: { feature: PricingTableSectionFeature<T>, section: PricingTableSection<T> }) => VNode[]
+  'feature-value'?: (props: { feature: PricingTableSectionFeature<T>, tier: T, section: PricingTableSection<T> }) => VNode[]
 } & DynamicSlots<T, 'title' | 'description' | 'badge' | 'button' | 'billing' | 'discount' | 'price'>
 & FeatureDynamicSlots<PricingTableSectionFeature<T>, 'title' | 'value'>
 & SectionDynamicSlots<PricingTableSection<T>, 'title'>

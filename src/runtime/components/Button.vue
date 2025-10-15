@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { Ref, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/button'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -35,15 +36,14 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
 }
 
 export interface ButtonSlots {
-  leading(props?: {}): any
-  default(props?: {}): any
-  trailing(props?: {}): any
+  leading?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  trailing?(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed, ref, inject } from 'vue'
-import type { Ref } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
 import { useAppConfig } from '#imports'

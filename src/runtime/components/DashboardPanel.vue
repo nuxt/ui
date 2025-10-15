@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-panel'
 import type { UseResizableProps } from '../composables/useResizable'
@@ -12,11 +13,11 @@ export interface DashboardPanelProps extends Pick<UseResizableProps, 'id' | 'min
 }
 
 export interface DashboardPanelSlots {
-  'default'(props?: {}): any
-  'header'(props?: {}): any
-  'body'(props?: {}): any
-  'footer'(props?: {}): any
-  'resize-handle'(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): any
+  'default'?(props?: {}): VNode[]
+  'header'?(props?: {}): VNode[]
+  'body'?(props?: {}): VNode[]
+  'footer'?(props?: {}): VNode[]
+  'resize-handle'?(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): VNode[]
 }
 </script>
 

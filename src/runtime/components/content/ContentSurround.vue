@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { PropType, VNode } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-surround'
@@ -40,18 +41,17 @@ export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSur
   ui?: ContentSurround['slots']
 }
 
-type SlotProps<T> = (props: { link: T }) => any
+type SlotProps<T> = (props: { link: T }) => VNode[]
 
 export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSurroundLink> {
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-title': SlotProps<T>
-  'link-description': SlotProps<T>
+  'link'?: SlotProps<T>
+  'link-leading'?: SlotProps<T>
+  'link-title'?: SlotProps<T>
+  'link-description'?: SlotProps<T>
 }
 </script>
 
 <script setup lang="ts" generic="T extends ContentSurroundLink">
-import type { PropType } from 'vue'
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'

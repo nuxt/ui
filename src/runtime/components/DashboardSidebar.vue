@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-sidebar'
 import type { UseResizableProps } from '../composables/useResizable'
@@ -36,12 +37,12 @@ export interface DashboardSidebarProps<T extends DashboardSidebarMode = Dashboar
 }
 
 export interface DashboardSidebarSlots {
-  'header'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
-  'default'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
-  'footer'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
-  'toggle'(props: { open: boolean, toggle: () => void }): any
-  'content'(props?: {}): any
-  'resize-handle'(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): any
+  'header'?(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): VNode[]
+  'default'?(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): VNode[]
+  'footer'?(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): VNode[]
+  'toggle'?(props: { open: boolean, toggle: () => void }): VNode[]
+  'content'?(props?: {}): VNode[]
+  'resize-handle'?(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): VNode[]
 }
 </script>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UIMessage, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
@@ -58,17 +59,16 @@ export interface ChatMessagesProps {
 }
 
 export interface ChatMessagesSlots {
-  default(props?: {}): any
-  indicator(props?: {}): any
-  viewport(props: { onClick: () => void }): any
-  content(props: { message: UIMessage }): any
-  leading(props: { message: UIMessage }): any
-  actions(props: { message: UIMessage }): any
+  default?(props?: {}): VNode[]
+  indicator?(props?: {}): VNode[]
+  viewport?(props: { onClick: () => void }): VNode[]
+  content?(props: { message: UIMessage }): VNode[]
+  leading?(props: { message: UIMessage }): VNode[]
+  actions?(props: { message: UIMessage }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
-import type { ComponentPublicInstance } from 'vue'
 import { ref, computed, watch, nextTick, toRef, onMounted } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'

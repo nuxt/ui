@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/context-menu'
@@ -82,19 +83,19 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
 
 export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
-type SlotProps<T extends ContextMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
+type SlotProps<T extends ContextMenuItem> = (props: { item: T, active?: boolean, index: number }) => VNode[]
 
 export type ContextMenuSlots<
   A extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  'default'(props?: {}): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
+  'default'?(props?: {}): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: SlotProps<T>
+  'item-trailing'?: SlotProps<T>
+  'content-top'?: (props?: {}) => VNode[]
+  'content-bottom'?: (props?: {}) => VNode[]
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
 </script>

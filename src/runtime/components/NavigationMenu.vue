@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps, NavigationMenuContentEmits, AccordionRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/navigation-menu'
@@ -144,19 +145,19 @@ export interface NavigationMenuProps<T extends ArrayOrNested<NavigationMenuItem>
 
 export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 
-type SlotProps<T extends NavigationMenuItem> = (props: { item: T, index: number, active?: boolean }) => any
+type SlotProps<T extends NavigationMenuItem> = (props: { item: T, index: number, active?: boolean }) => VNode[]
 
 export type NavigationMenuSlots<
   A extends ArrayOrNested<NavigationMenuItem> = ArrayOrNested<NavigationMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-  'item-content': SlotProps<T>
-  'list-leading': (props?: {}) => any
-  'list-trailing': (props?: {}) => any
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: SlotProps<T>
+  'item-trailing'?: SlotProps<T>
+  'item-content'?: SlotProps<T>
+  'list-leading'?: (props?: {}) => VNode[]
+  'list-trailing'?: (props?: {}) => VNode[]
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing' | 'content', { index: number, active?: boolean }>
 
 </script>

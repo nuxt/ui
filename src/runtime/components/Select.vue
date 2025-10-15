@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectContentEmits, SelectArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select'
@@ -105,7 +106,7 @@ export type SelectEmits<A extends ArrayOrNested<SelectItem>, VK extends GetItemK
   focus: [event: FocusEvent]
 } & GetModelValueEmits<A, VK, M>
 
-type SlotProps<T extends SelectItem> = (props: { item: T, index: number }) => any
+type SlotProps<T extends SelectItem> = (props: { item: T, index: number }) => VNode[]
 
 export interface SelectSlots<
   A extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>,
@@ -113,26 +114,26 @@ export interface SelectSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: {
+  'leading'?(props: {
     modelValue?: GetModelValue<A, VK, M>
     open: boolean
     ui: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string }
-  }): any
-  'default'(props: {
+  }): VNode[]
+  'default'?(props: {
     modelValue?: GetModelValue<A, VK, M>
     open: boolean
-  }): any
-  'trailing'(props: {
+  }): VNode[]
+  'trailing'?(props: {
     modelValue?: GetModelValue<A, VK, M>
     open: boolean
     ui: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string }
-  }): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
+  }): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: SlotProps<T>
+  'item-trailing'?: SlotProps<T>
+  'content-top'?: (props?: {}) => VNode[]
+  'content-bottom'?: (props?: {}) => VNode[]
 }
 </script>
 

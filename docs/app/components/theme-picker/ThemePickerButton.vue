@@ -7,7 +7,7 @@ defineProps<{
 }>()
 
 const slots = defineSlots<{
-  leading: () => any
+  leading?(): VNode[]
 }>()
 </script>
 

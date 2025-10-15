@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chip'
 import type { ComponentConfig } from '../types/tv'
@@ -39,8 +40,8 @@ export interface ChipEmits {
 }
 
 export interface ChipSlots {
-  default(props?: {}): any
-  content(props?: {}): any
+  default?(props?: {}): VNode[]
+  content?(props?: {}): VNode[]
 }
 </script>
 

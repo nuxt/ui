@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { SpringOptions } from 'motion-v'
 import theme from '#build/ui/changelog-versions'
@@ -31,19 +32,19 @@ export interface ChangelogVersionsProps<T extends ChangelogVersionProps = Change
 }
 
 export interface ChangelogVersionsSlots<T extends ChangelogVersionProps = ChangelogVersionProps> {
-  default(props?: {}): any
-  indicator(props?: {}): any
-  header(props: { version: T }): any
-  badge(props: { version: T }): any
-  date(props: { version: T }): any
-  title(props: { version: T }): any
-  description(props: { version: T }): any
-  image(props: { version: T }): any
-  body(props: { version: T }): any
-  footer(props: { version: T }): any
-  authors(props: { version: T }): any
-  actions(props: { version: T }): any
-  indicator(props: { version: T }): any
+  default?(props?: {}): VNode[]
+  indicator?(props?: {}): VNode[]
+  header?(props: { version: T }): VNode[]
+  badge?(props: { version: T }): VNode[]
+  date?(props: { version: T }): VNode[]
+  title?(props: { version: T }): VNode[]
+  description?(props: { version: T }): VNode[]
+  image?(props: { version: T }): VNode[]
+  body?(props: { version: T }): VNode[]
+  footer?(props: { version: T }): VNode[]
+  authors?(props: { version: T }): VNode[]
+  actions?(props: { version: T }): VNode[]
+  indicator?(props: { version: T }): VNode[]
 }
 </script>
 

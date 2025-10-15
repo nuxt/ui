@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ButtonHTMLAttributes } from 'vue'
+import type { ButtonHTMLAttributes, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { InertiaLinkProps } from '@inertiajs/vue3'
 import theme from '#build/ui/link'
@@ -53,7 +53,7 @@ export interface LinkProps extends NuxtLinkProps {
 }
 
 export interface LinkSlots {
-  default(props: { active: boolean }): any
+  default(props: { active: boolean }): VNode[]
 }
 </script>
 

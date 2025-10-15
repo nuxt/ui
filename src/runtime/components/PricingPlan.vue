@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plan'
 import type { BadgeProps, ButtonProps, IconProps } from '../types'
@@ -92,19 +93,19 @@ export interface PricingPlanProps {
 }
 
 export interface PricingPlanSlots {
-  badge(props?: {}): any
-  title(props?: {}): any
-  description(props?: {}): any
-  price(props?: {}): any
-  discount(props?: {}): any
-  billing(props?: {}): any
-  features(props?: {}): any
-  button(props?: {}): any
-  header(props?: {}): any
-  body(props?: {}): any
-  footer(props?: {}): any
-  tagline(props?: {}): any
-  terms(props?: {}): any
+  badge?(props?: {}): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  price?(props?: {}): VNode[]
+  discount?(props?: {}): VNode[]
+  billing?(props?: {}): VNode[]
+  features?(props?: {}): VNode[]
+  button?(props?: {}): VNode[]
+  header?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
+  tagline?(props?: {}): VNode[]
+  terms?(props?: {}): VNode[]
 }
 </script>
 

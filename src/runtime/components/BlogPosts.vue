@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-posts'
 import type { BlogPostProps } from '../types'
@@ -22,7 +23,7 @@ export interface BlogPostsProps {
 }
 
 export interface BlogPostsSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 

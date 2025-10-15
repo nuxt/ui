@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
 import type { AutoplayOptionsType } from 'embla-carousel-autoplay'
@@ -101,7 +102,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
 }
 
 export type CarouselSlots<T extends CarouselItem = CarouselItem> = {
-  default(props: { item: T, index: number }): any
+  default?(props: { item: T, index: number }): VNode[]
 }
 
 export interface CarouselEmits {

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { Ref, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form-field'
 import type { ComponentConfig } from '../types/tv'
@@ -37,18 +38,17 @@ export interface FormFieldProps {
 }
 
 export interface FormFieldSlots {
-  label(props: { label?: string }): any
-  hint(props: { hint?: string }): any
-  description(props: { description?: string }): any
-  help(props: { help?: string }): any
-  error(props: { error?: boolean | string }): any
-  default(props: { error?: boolean | string }): any
+  label?(props: { label?: string }): VNode[]
+  hint?(props: { hint?: string }): VNode[]
+  description?(props: { description?: string }): VNode[]
+  help?(props: { help?: string }): VNode[]
+  error?(props: { error?: boolean | string }): VNode[]
+  default(props: { error?: boolean | string }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed, ref, inject, provide, useId, watch } from 'vue'
-import type { Ref } from 'vue'
 import { Primitive, Label } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, formInputsInjectionKey } from '../composables/useFormField'

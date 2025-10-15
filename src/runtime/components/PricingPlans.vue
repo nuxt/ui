@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plans'
 import type { PricingPlanProps } from '../types'
@@ -33,7 +34,7 @@ export interface PricingPlansProps {
 }
 
 export interface PricingPlansSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 

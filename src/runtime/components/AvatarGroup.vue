@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar-group'
 import type { ComponentConfig } from '../types/tv'
@@ -24,7 +25,7 @@ export interface AvatarGroupProps {
 }
 
 export interface AvatarGroupSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
