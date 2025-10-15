@@ -216,23 +216,6 @@ props:
 ---
 ::
 
-### Buttons
-
-Use the `showButtons` prop to configure the visibility of increment and decrement buttons.
-
-::component-code
----
-ignore:
-  - modelValue
-external:
-  - modelValue
-props:
-  modelValue: 0
-  showButtons: false
-  orientation: 'horizontal'
----
-::
-
 ## Examples
 
 ### With decimal format
@@ -262,6 +245,16 @@ Use the `format-options` prop with `style: 'currency'` to customize the format o
 ::component-example
 ---
 name: 'input-number-currency-example'
+---
+::
+
+### Without buttons
+
+You can use the `increment` and `decrement` props to control visibility of the buttons.
+
+::component-example
+---
+name: 'input-number-without-buttons-example'
 ---
 ::
 
