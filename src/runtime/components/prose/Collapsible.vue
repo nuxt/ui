@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/collapsible'
-import type { IconProps } from '../../types'
+import type { IconProps, CollapsibleProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseCollapsible = ComponentConfig<typeof theme, AppConfig, 'collapsible', 'ui.prose'>
@@ -28,7 +28,7 @@ export interface ProseCollapsibleProps {
    */
   closeText?: string
   class?: any
-  ui?: ProseCollapsible['slots']
+  ui?: ProseCollapsible['slots'] & CollapsibleProps['ui']
 }
 
 export interface ProseCollapsibleSlots {
@@ -56,7 +56,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.colla
 </script>
 
 <template>
-  <UCollapsible :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui)">
+  <UCollapsible :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui, props.ui)">
     <template #default="{ open }">
       <button :class="ui.trigger({ class: props.ui?.trigger })">
         <UIcon :name="icon || appConfig.ui.icons.chevronDown" :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" />

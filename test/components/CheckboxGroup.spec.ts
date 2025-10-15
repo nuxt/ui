@@ -1,12 +1,14 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { flushPromises, mount } from '@vue/test-utils'
 import CheckboxGroup from '../../src/runtime/components/CheckboxGroup.vue'
 import type { CheckboxGroupProps, CheckboxGroupSlots } from '../../src/runtime/components/CheckboxGroup.vue'
+import type { FormInputEvents } from '../../src/module'
 import ComponentRender from '../component-render'
+import { renderForm } from '../utils/form'
 import theme from '#build/ui/checkbox-group'
 import themeCheckbox from '#build/ui/checkbox'
-import { flushPromises, mount } from '@vue/test-utils'
-import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '../../src/module'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 describe('CheckboxGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -47,6 +49,21 @@ describe('CheckboxGroup', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxGroupProps, slots?: Partial<CheckboxGroupSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, CheckboxGroup)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(CheckboxGroup, {
+      props: {
+        items: [
+          { value: '1', label: 'Option 1' },
+          { value: '2', label: 'Option 2' }
+        ],
+        legend: 'Legend'
+
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {

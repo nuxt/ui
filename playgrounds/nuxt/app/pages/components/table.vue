@@ -320,7 +320,7 @@ function randomize() {
 
 const rowSelection = ref<Record<string, boolean>>({})
 
-function onSelect(row: TableRow<Payment>) {
+function onSelect(e: Event, row: TableRow<Payment>) {
   row.toggleSelected(!row.getIsSelected())
 }
 
@@ -384,8 +384,8 @@ onMounted(() => {
         onUpdateChecked(checked: boolean) {
           table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
         },
-        onSelect(e?: Event) {
-          e?.preventDefault()
+        onSelect(e: Event) {
+          e.preventDefault()
         }
       }))"
       :content="{ align: 'end' }"

@@ -9,15 +9,15 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@ai-sdk/gateway": "^1.0.33",
-    "@ai-sdk/vue": "^2.0.60",
-    "@iconify-json/lucide": "^1.2.68",
+    "@ai-sdk/gateway": "^1.0.39",
+    "@ai-sdk/vue": "^2.0.68",
+    "@iconify-json/lucide": "^1.2.69",
     "@iconify-json/simple-icons": "^1.2.54",
     "@internationalized/date": "^3.10.0",
     "@nuxt/ui": "workspace:*",
-    "ai": "^5.0.60",
+    "ai": "^5.0.68",
     "nuxt": "^4.1.2",
-    "zod": "^4.1.11"
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "typescript": "^5.8.3",

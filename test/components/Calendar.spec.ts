@@ -1,13 +1,15 @@
 import { describe, it, expect, vi, afterAll, test } from 'vitest'
+import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { CalendarDate } from '@internationalized/date'
 import Calendar from '../../src/runtime/components/Calendar.vue'
 import type { CalendarProps, CalendarSlots } from '../../src/runtime/components/Calendar.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/calendar'
-import { CalendarDate } from '@internationalized/date'
 
 describe('Calendar', () => {
   const sizes = Object.keys(theme.variants.size) as any
+  const variants = Object.keys(theme.variants.variant) as any
   const date = new Date('2025-01-01')
 
   vi.setSystemTime(date)
@@ -37,6 +39,7 @@ describe('Calendar', () => {
     ['without monthControls', { props: { monthControls: false } }],
     ['without yearControls', { props: { yearControls: false } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
+    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant, defaultValue: new CalendarDate(2025, 1, 15) } }]),
     ['with color neutral', { props: { color: 'neutral' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'max-w-sm' } }],
@@ -66,5 +69,18 @@ describe('Calendar', () => {
       await wrapper.setValue(date)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[date]] })
     })
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Calendar, {
+      props: {
+        modelValue: new CalendarDate(2025, 1, 1),
+        range: true,
+        multiple: true,
+        numberOfMonths: 2
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

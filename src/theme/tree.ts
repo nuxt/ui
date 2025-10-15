@@ -6,11 +6,11 @@ export default (options: Required<ModuleOptions>) => ({
     item: 'w-full',
     listWithChildren: 'border-s border-default',
     itemWithChildren: 'ps-1.5 -ms-px',
-    link: 'relative group w-full flex items-center text-sm before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'relative group w-full flex items-center text-sm select-none before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0 relative',
     linkLabel: 'truncate',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
-    linkTrailingIcon: 'shrink-0 transform transition-transform duration-200 group-data-[expanded=true]:rotate-180'
+    linkTrailingIcon: 'shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180'
   },
   variants: {
     virtualize: {
@@ -61,9 +61,6 @@ export default (options: Required<ModuleOptions>) => ({
     selected: {
       true: {
         link: 'before:bg-elevated'
-      },
-      false: {
-        link: ['hover:not-disabled:text-highlighted hover:not-disabled:before:bg-elevated/50', options.theme.transitions && 'transition-colors before:transition-colors']
       }
     },
     disabled: {
@@ -83,6 +80,12 @@ export default (options: Required<ModuleOptions>) => ({
     selected: true,
     class: {
       link: 'text-highlighted'
+    }
+  }, {
+    selected: false,
+    disabled: false,
+    class: {
+      link: ['hover:text-highlighted hover:before:bg-elevated/50', options.theme.transitions && 'transition-colors before:transition-colors']
     }
   }],
   defaultVariants: {
