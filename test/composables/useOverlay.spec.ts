@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { useOverlay } from '../../src/runtime/composables/useOverlay'
 import MockModal from '../mocks/MockModal.vue'
 
@@ -166,5 +166,34 @@ describe('useOverlay', () => {
     modal.close()
 
     expect(getModalById(overlay.overlays, modal.id).isOpen).toBe(false)
+  })
+
+  describe('listen to emits', () => {
+    it('should listen to emits', () => {
+      const modal = overlay.create(MockModal)
+      modal.open({
+        onClose() {
+          modal.close()
+        }
+      })
+      const spyCall = vi.fn()
+      modal.on('close', (value) => {
+        value.toLowerCase()
+        spyCall(value)
+      })
+      modal.on('submit', (value) => {
+        value.toFixed(2)
+        spyCall(value)
+      })
+      modal.on('refresh', (value) => {
+        value.join()
+        spyCall(value)
+      })
+
+      // Check that emits is set
+      const overlayData = getModalById(overlay.overlays, modal.id)
+      expect(overlayData.emits).toHaveProperty('close')
+      expect(typeof overlayData.emits!.close).toBe('function')
+    })
   })
 })

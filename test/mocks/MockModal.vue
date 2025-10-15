@@ -3,9 +3,17 @@
     <h2>{{ title }}</h2>
     <p>{{ description }}</p>
     <button
+      class="close"
       @click="$emit('close', 'test-result')"
     >
       Close
+    </button>
+    <button
+      type="button"
+      class="submit"
+      @click="$emit('submit', 42)"
+    >
+      Submit
     </button>
   </div>
 </template>
@@ -17,6 +25,8 @@ const { title = 'Test Modal', description = 'Test Description' } = defineProps<{
 }>()
 
 defineEmits<{
+  refresh: [ids: number[]]
+  submit: [id: number]
   close: [value: string]
 }>()
 </script>

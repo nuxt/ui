@@ -4,6 +4,45 @@ import { createSharedComposable } from '@vueuse/core'
 import type { ComponentProps, ComponentEmit } from 'vue-component-type-helpers'
 
 /**
+ * Workaround for TypeScript limitation with overloaded functions in conditional types.
+ *
+ * TypeScript's conditional types infer from the last overload only when matching overloaded functions.
+ * These utilities extract the union of all event names and their corresponding arguments from ComponentEmit<T>'s overloads.
+ *
+ * @see https://github.com/microsoft/TypeScript/issues/32164
+ */
+type OverloadUnion<T> = T extends {
+  (...args: infer A1): any
+  (...args: infer A2): any
+  (...args: infer A3): any
+  (...args: infer A4): any
+} ? A1[0] | A2[0] | A3[0] | A4[0] : T extends {
+  (...args: infer A1): any
+  (...args: infer A2): any
+  (...args: infer A3): any
+} ? A1[0] | A2[0] | A3[0] : T extends {
+  (...args: infer A1): any
+  (...args: infer A2): any
+} ? A1[0] | A2[0] : T extends (...args: infer A1) => any ? A1[0] : never
+
+type OverloadArgs<T, K> = T extends {
+  (event: K, ...args: infer A1): any
+  (...args: any[]): any
+  (...args: any[]): any
+  (...args: any[]): any
+} ? A1 : T extends {
+    (event: K, ...args: infer A1): any
+    (...args: any[]): any
+    (...args: any[]): any
+  } ? A1 : T extends {
+      (event: K, ...args: infer A1): any
+      (...args: any[]): any
+    } ? A1 : T extends (event: K, ...args: infer A1) => any ? A1 : never
+
+type EmitKeys<T> = OverloadUnion<ComponentEmit<T>>
+type EmitArgs<T, K> = OverloadArgs<ComponentEmit<T>, K>
+
+/**
  * This is a workaround for a design limitation in TypeScript.
  *
  * Conditional types only match the last function overload, not a union of all possible
@@ -33,7 +72,7 @@ type CloseEventArgType<T> = T extends {
 } ? Arg : never
 export type OverlayOptions<OverlayAttrs = Record<string, any>> = {
   defaultOpen?: boolean
-  props?: OverlayAttrs
+  props?: Partial<OverlayAttrs>
   destroyOnClose?: boolean
 }
 
@@ -42,19 +81,21 @@ interface ManagedOverlayOptionsPrivate<T extends Component> {
   id: symbol
   isMounted: boolean
   isOpen: boolean
+  emits?: Record<string, (...args: any[]) => unknown>
   originalProps?: ComponentProps<T>
   resolvePromise?: (value: any) => void
 }
 export type Overlay = OverlayOptions<Component> & ManagedOverlayOptionsPrivate<Component>
 
-type OverlayInstance<T extends Component> = Omit<ManagedOverlayOptionsPrivate<T>, 'component'> & {
+type OverlayInstance<T extends Component> = Omit<ManagedOverlayOptionsPrivate<T>, 'component' | 'emits'> & {
   id: symbol
   open: (props?: ComponentProps<T>) => OpenedOverlay<T>
   close: (value?: any) => void
   patch: (props: Partial<ComponentProps<T>>) => void
+  on<K extends EmitKeys<T>>(event: K, callback: (...args: EmitArgs<T, K>) => void): void
 }
 
-type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvePromise'> & {
+type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvePromise' | 'on'> & {
   result: Promise<CloseEventArgType<ComponentEmit<T>>>
 } & Promise<CloseEventArgType<ComponentEmit<T>>>
 
@@ -64,13 +105,18 @@ function _useOverlay() {
   const create = <T extends Component>(component: T, _options?: OverlayOptions<ComponentProps<T>>): OverlayInstance<T> => {
     const { props, defaultOpen, destroyOnClose } = _options || {}
 
+    const id = Symbol(import.meta.dev ? 'useOverlay' : '')
+
     const options = reactive<Overlay>({
-      id: Symbol(import.meta.dev ? 'useOverlay' : ''),
+      id,
       isOpen: !!defaultOpen,
       component: markRaw(component!),
       isMounted: !!defaultOpen,
       destroyOnClose: !!destroyOnClose,
       originalProps: props || {},
+      emits: {
+        close: (value: unknown) => close(id, value)
+      },
       props: { ...props }
     })
 
@@ -80,7 +126,8 @@ function _useOverlay() {
       ...options,
       open: <T extends Component>(props?: ComponentProps<T>) => open(options.id, props),
       close: value => close(options.id, value),
-      patch: <T extends Component>(props: Partial<ComponentProps<T>>) => patch(options.id, props)
+      patch: <T extends Component>(props: Partial<ComponentProps<T>>) => patch(options.id, props),
+      on: <T extends Component, K extends EmitKeys<T>>(event: K, callback: (...args: EmitArgs<T, K>) => void): void => on(options.id, event, callback)
     }
   }
 
@@ -109,6 +156,7 @@ function _useOverlay() {
   const close = (id: symbol, value?: any): void => {
     const overlay = getOverlay(id)
 
+    console.log('close', id)
     overlay.isOpen = false
 
     // Resolve the promise if it exists
@@ -155,12 +203,24 @@ function _useOverlay() {
     return overlay.isOpen
   }
 
+  function on<T extends Component, K extends EmitKeys<T>>(
+    id: symbol,
+    event: K,
+    callback: (...args: EmitArgs<T, K>) => void
+  ): void {
+    const overlay = getOverlay(id)
+
+    if (!overlay.emits) overlay.emits = {}
+    overlay.emits[event as string] = callback
+  }
+
   return {
     overlays,
+    create,
+    on,
     open,
     close,
     closeAll,
-    create,
     patch,
     unmount,
     isOpen
