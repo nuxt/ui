@@ -48,7 +48,10 @@ export default (options: Required<ModuleOptions>) => {
       highlight: {
         true: ''
       },
-      showButtons: {
+      increment: {
+        false: ''
+      },
+      decrement: {
         false: ''
       }
     },
@@ -110,13 +113,15 @@ export default (options: Required<ModuleOptions>) => {
       class: 'pe-11'
     }, {
       orientation: 'vertical',
-      showButtons: false,
+      increment: false,
+      decrement: false,
       class: 'pe-2.5'
     },
     {
       orientation: 'horizontal',
-      showButtons: false,
-      class: 'px-2.5 text-start '
+      increment: false,
+      decrement: false,
+      class: 'px-2.5 text-start'
     }
     ],
     defaultVariants: {
