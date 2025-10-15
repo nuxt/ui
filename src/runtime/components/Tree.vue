@@ -139,7 +139,8 @@ export type TreeSlots<
 </script>
 
 <script setup lang="ts" generic="T extends TreeItem[], M extends boolean = false">
-import { computed, toRef } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
+import { computed, toRef, ref } from 'vue'
 import { TreeRoot, TreeItem, TreeVirtualizer, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { defu } from 'defu'
@@ -218,6 +219,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tree || {}) 
   virtualize: !!props.virtualize
 }))
 
+const rootRef = ref<ComponentPublicInstance>()
+
 function getItemLabel<Item extends T[number]>(item: Item): string {
   return get(item, props.labelKey as string)
 }
@@ -235,9 +238,13 @@ function getDefaultOpenedItems(item: T[number]): string[] {
   return [currentItem, ...childItems].filter(Boolean) as string[]
 }
 
-const defaultExpanded = computed(() =>
-  props.defaultExpanded ?? props.items?.flatMap(item => getDefaultOpenedItems(item))
-)
+const defaultExpanded = computed(() => props.defaultExpanded ?? props.items?.flatMap(item => getDefaultOpenedItems(item)))
+
+defineExpose({
+  get $el() {
+    return rootRef.value?.$el
+  }
+})
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -343,6 +350,7 @@ const defaultExpanded = computed(() =>
   </DefineTreeTemplate>
 
   <TreeRoot
+    ref="rootRef"
     v-slot="{ flattenItems }"
     v-bind="{ ...rootProps, ...$attrs }"
     :as="as.root"
