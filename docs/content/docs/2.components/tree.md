@@ -60,8 +60,8 @@ Use the `items` prop as an array of objects with the following properties:
 - `disabled?: boolean`{lang="ts-type"}
 - `slot?: string`{lang="ts-type"}
 - `children?: TreeItem[]`{lang="ts-type"}
-- `onToggle?(e: Event): void`{lang="ts-type"}
-- `onSelect?(e?: Event): void`{lang="ts-type"}
+- `onToggle?: (e: TreeItemToggleEvent<TreeItem>) => void`{lang="ts-type"}
+- `onSelect?: (e: TreeItemSelectEvent<TreeItem>) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, itemWithChildren?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingIcon?: ClassNameValue, listWithChildren?: ClassNameValue }`{lang="ts-type"}
 
@@ -458,7 +458,7 @@ props:
 ---
 ::
 
-If you want to prevent an item from being selected, you can use the `item.onSelect()`{lang="ts-type"} property:
+If you want to prevent an item from being selected, you can use the `item.onSelect()`{lang="ts-type"} property or the global `select` event:
 
 ::component-example
 ---
@@ -486,7 +486,7 @@ props:
 ---
 ::
 
-If you want to prevent an item from being expanded, you can use the `item.onToggle()`{lang="ts-type"} property:
+If you want to prevent an item from being expanded, you can use the `item.onToggle()`{lang="ts-type"} property or the global `toggle` event:
 
 ::component-example
 ---
@@ -499,6 +499,23 @@ props:
 
 ::note
 This lets you select a parent item without expanding or collapsing its children.
+::
+
+### With checkbox in items :badge{label="Soon"}
+
+You can use the `item-leading` slot to add a [Checkbox](/docs/components/checkbox) to the items. Use the `multiple`, `propagate-select` and `bubble-select` props to enable multi-selection with parent-child relationship and the `select` and `toggle` events to control the selected and expanded state of the items.
+
+::component-example
+---
+name: 'tree-checkbox-items-example'
+collapse: true
+props:
+  class: 'w-60'
+---
+::
+
+::note
+This example uses the `as` prop to change the items from `button` to `div` as the [`Checkbox`](/docs/components/checkbox) is also rendered as a `button`.
 ::
 
 ### With virtualization :badge{label="Soon"}

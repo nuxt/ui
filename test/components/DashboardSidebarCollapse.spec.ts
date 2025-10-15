@@ -1,9 +1,10 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardSidebarCollapse from '../../src/runtime/components/DashboardSidebarCollapse.vue'
 import type { DashboardSidebarCollapseProps } from '../../src/runtime/components/DashboardSidebarCollapse.vue'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 const DashboardWrapper = defineComponent({
   components: {
@@ -26,5 +27,11 @@ describe('DashboardSidebarCollapse', () => {
   ])('renders %s correctly', async (_: string, options: { props?: DashboardSidebarCollapseProps }) => {
     const wrapper = await mountSuspended(DashboardWrapper, options)
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(DashboardWrapper)
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

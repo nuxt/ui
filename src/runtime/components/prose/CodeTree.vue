@@ -161,7 +161,6 @@ onBeforeUpdate(() => rerenderCount.value++)
         <button
           type="button"
           :class="ui.link({ class: props.ui?.link, active: isSelected })"
-          tabindex="0"
         >
           <UIcon
             v-if="item.children?.length"

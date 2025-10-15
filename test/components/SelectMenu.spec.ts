@@ -1,4 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import SelectMenu from '../../src/runtime/components/SelectMenu.vue'
 import type { SelectMenuProps, SelectMenuSlots } from '../../src/runtime/components/SelectMenu.vue'
 import ComponentRender from '../component-render'
@@ -88,6 +90,25 @@ describe('SelectMenu', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectMenuProps, slots?: Partial<SelectMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, SelectMenu)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(SelectMenu, {
+      props: {
+        ...props,
+        modelValue: items[0]
+
+      }
+    })
+    expect(await axe(wrapper.element, {
+      rules: {
+        // "Certain ARIA roles must contain particular children (aria-required-children)"
+
+        // Fix any of the following:
+        //   Element has children which are not allowed: div[tabindex]
+        'aria-required-children': { enabled: false }
+      }
+    })).toHaveNoViolations()
   })
 
   describe('emits', () => {

@@ -1,9 +1,10 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardNavbar from '../../src/runtime/components/DashboardNavbar.vue'
 import type { DashboardNavbarProps, DashboardNavbarSlots } from '../../src/runtime/components/DashboardNavbar.vue'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 const DashboardWrapper = defineComponent({
   components: {
@@ -42,5 +43,15 @@ describe('DashboardNavbar', () => {
   ])('renders %s correctly', async (_: string, options: { props?: DashboardNavbarProps, slots?: Partial<DashboardNavbarSlots> }) => {
     const wrapper = await mountSuspended(DashboardWrapper, options)
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(DashboardWrapper, {
+      props: {
+        title: 'Dashboard'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })
