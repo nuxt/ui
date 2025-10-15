@@ -68,6 +68,26 @@ Create an overlay, and return a factory instance.
   ::
 ::
 
+### on()
+
+`on(event: string, callback: (value: unknown) => void): void`{lang="ts-type"}
+
+#### Parameters
+
+::field-group
+  ::field{name="event" type="string" required}
+  The event to listen to.
+  ::
+
+  ::field{name="callback" type="(value: unknown) => void" required}
+  The callback to invoke when the event is emitted.
+  ::
+::
+
+::warning
+Emits and its callback arguments are infer from component but it's not working for component which have more than 5 emits.
+::
+
 ### open()
 
 `open(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T>`{lang="ts-type"}
@@ -252,15 +272,27 @@ const modalB = overlay.create(ModalB)
 
 const slideoverA = overlay.create(SlideoverA)
 
+modalB.on('close', (value) => {
+  console.log(value)
+})
+
 const openModalA = () => {
   // Open modalA, but override the title prop
   modalA.open({ title: 'Hello' })
 }
 
 const openModalB = async () => {
-  // Open modalB, and wait for its result
+  // Open modalB
   const modalBInstance = modalB.open()
 
+  /// Open the slideover when modalB closes
+  /// - Using the callback argument of the `on` method
+  modalB.on('close', (input) => {
+    slideoverA.open({ input })
+  })
+
+  /// - Using the promise returned by `open`
+  // Wait for opening result (resolved automatically when the overlay is closed)
   const input = await modalBInstance
 
   // Pass the result from modalB to the slideover, and open it
