@@ -311,7 +311,14 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
             </ULinkBase>
 
             <template #content="{ close }">
-              <slot :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)" :item="item" :active="active || item.active" :index="index" :close="close">
+              <slot
+                :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)"
+                :item="item"
+                :active="active || item.active"
+                :index="index"
+                :ui="ui"
+                :close="close"
+              >
                 <ul :class="ui.childList({ class: [props.ui?.childList, item.ui?.childList] })">
                   <li :class="ui.childLabel({ class: [props.ui?.childLabel, item.ui?.childLabel] })">
                     {{ get(item, props.labelKey as string) }}
@@ -346,7 +353,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
         </component>
 
         <NavigationMenuContent v-if="orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])" v-bind="contentProps" :class="ui.content({ class: [props.ui?.content, item.ui?.content] })">
-          <slot :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)" :item="item" :active="active || item.active" :index="index">
+          <slot :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)" :item="item" :active="active || item.active" :index="index" :ui="ui">
             <ul :class="ui.childList({ class: [props.ui?.childList, item.ui?.childList] })">
               <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: [props.ui?.childItem, item.ui?.childItem] })">
                 <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>

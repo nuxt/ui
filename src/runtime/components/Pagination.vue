@@ -86,7 +86,7 @@ export interface PaginationSlots {
   prev(props?: {}): any
   next(props?: {}): any
   last(props?: {}): any
-  ellipsis(props?: {}): any
+  ellipsis(props: { ui: Pagination['ui'] }): any
   item(props: {
     page: number
     pageCount: number
@@ -168,7 +168,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pagination |
         </PaginationListItem>
 
         <PaginationEllipsis v-else as-child :class="ui.ellipsis({ class: props.ui?.ellipsis })">
-          <slot name="ellipsis">
+          <slot name="ellipsis" :ui="ui">
             <UButton as="div" :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" />
           </slot>
         </PaginationEllipsis>

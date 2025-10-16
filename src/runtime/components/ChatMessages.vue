@@ -59,8 +59,8 @@ export interface ChatMessagesProps {
 
 export interface ChatMessagesSlots {
   default(props?: {}): any
-  indicator(props?: {}): any
-  viewport(props: { onClick: () => void }): any
+  indicator(props: { ui: ChatMessages['ui'] }): any
+  viewport(props: { ui: ChatMessages['ui'], onClick: () => void }): any
   content(props: { message: UIMessage }): any
   leading(props: { message: UIMessage }): any
   actions(props: { message: UIMessage }): any
@@ -285,7 +285,7 @@ onMounted(() => {
       :compact="compact"
     >
       <template #content>
-        <slot name="indicator">
+        <slot name="indicator" :ui="ui">
           <div :class="ui.indicator({ class: props.ui?.indicator })">
             <span />
             <span />
@@ -297,7 +297,7 @@ onMounted(() => {
 
     <Presence :present="showAutoScroll">
       <div :data-state="showAutoScroll ? 'open' : 'closed'" :class="ui.viewport({ class: props.ui?.viewport })">
-        <slot name="viewport" :on-click="onAutoScrollClick">
+        <slot name="viewport" :ui="ui" :on-click="onAutoScrollClick">
           <UButton
             v-if="autoScroll"
             :icon="autoScrollIcon || appConfig.ui.icons.arrowDown"
