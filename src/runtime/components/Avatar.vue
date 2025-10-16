@@ -3,6 +3,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
 import type { ChipProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Avatar = ComponentConfig<typeof theme, AppConfig, 'avatar'>
 
@@ -30,7 +31,7 @@ export interface AvatarProps {
 }
 
 export interface AvatarSlots {
-  default(props?: {}): any
+  default(props?: {}): SlotsReturn
 }
 </script>
 
