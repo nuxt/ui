@@ -153,7 +153,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
                 v-bind="item.content"
               >
                 <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
-                  <slot :name="(name as keyof DropdownMenuContentSlots<T>)" v-bind="slotData" :ui="ui" />
+                  <slot :name="(name as keyof DropdownMenuContentSlots<T>)" v-bind="slotData" />
                 </template>
               </UDropdownMenuContent>
             </DropdownMenu.Sub>

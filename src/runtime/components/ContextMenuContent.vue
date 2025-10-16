@@ -142,7 +142,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
                 v-bind="item.content"
               >
                 <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
-                  <slot :name="(name as keyof ContextMenuSlots<T>)" v-bind="slotData" :ui="ui" />
+                  <slot :name="(name as keyof ContextMenuSlots<T>)" v-bind="slotData" />
                 </template>
               </UContextMenuContent>
             </ContextMenu.Sub>
