@@ -4,12 +4,12 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardNavbar from '../../src/runtime/components/DashboardNavbar.vue'
-import type { DashboardNavbarProps, DashboardNavbarSlots } from '../../src/runtime/components/DashboardNavbar.vue'
+import type { DashboardNavbarProps } from '../../src/runtime/components/DashboardNavbar.vue'
 
 const DashboardWrapper = defineComponent({
   components: {
-    UDashboardGroup: DashboardGroup as any,
-    UDashboardNavbar: DashboardNavbar as any
+    UDashboardGroup: DashboardGroup,
+    UDashboardNavbar: DashboardNavbar
   },
   inheritAttrs: false,
   template: `<UDashboardGroup>
@@ -40,7 +40,7 @@ describe('DashboardNavbar', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with right slot', { slots: { right: () => 'Right slot' } }],
     ['with toggle slot', { slots: { toggle: () => 'Toggle slot' } }]
-  ])('renders %s correctly', async (_: string, options: { props?: DashboardNavbarProps, slots?: Partial<DashboardNavbarSlots> }) => {
+  ])('renders %s correctly', async (_: string, options: { props?: DashboardNavbarProps, slots?: typeof DashboardWrapper['slots'] }) => {
     const wrapper = await mountSuspended(DashboardWrapper, options)
     expect(wrapper.html()).toMatchSnapshot()
   })

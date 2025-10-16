@@ -36,7 +36,7 @@ describe('Switch', () => {
     // Slots
     ['with label slot', { slots: { label: () => 'Label slot' } }],
     ['with description slot', { slots: { label: () => 'Description slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SwitchProps, slots?: Partial<SwitchSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SwitchProps, slots?: SwitchSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Switch)
     expect(html).toMatchSnapshot()
   })

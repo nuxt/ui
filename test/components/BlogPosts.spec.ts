@@ -33,7 +33,7 @@ describe('BlogPosts', () => {
     ['with class', { props: { ...props, class: 'gap-y-12' } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BlogPostsProps, slots?: Partial<BlogPostsSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BlogPostsProps, slots?: BlogPostsSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, BlogPosts)
     expect(html).toMatchSnapshot()
   })

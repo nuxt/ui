@@ -32,7 +32,7 @@ describe('Alert', () => {
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with close slot', { props, slots: { close: () => 'Close slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AlertProps, slots?: Partial<AlertSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AlertProps, slots?: AlertSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Alert)
     expect(html).toMatchSnapshot()
   })

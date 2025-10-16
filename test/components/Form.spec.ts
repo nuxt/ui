@@ -16,7 +16,7 @@ describe('Form', () => {
   it.each([
     ['with state', { props: { state: {} } }],
     ['with default slot', { props: { state: {} }, slots: { default: () => 'Form slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props: FormProps<any>, slots?: Partial<FormSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props: FormProps<any>, slots?: FormSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, UForm)
     expect(html).toMatchSnapshot()
   })

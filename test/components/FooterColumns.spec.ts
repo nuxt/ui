@@ -71,7 +71,7 @@ describe('FooterColumns', () => {
     ['with link-leading slot', { props, slots: { 'link-leading': () => 'Link leading slot' } }],
     ['with link-label slot', { props, slots: { 'link-label': () => 'Link label slot' } }],
     ['with link-trailing slot', { props, slots: { 'link-trailing': () => 'Link trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FooterColumnsProps, slots?: Partial<FooterColumnsSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FooterColumnsProps, slots?: FooterColumnsSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, FooterColumns)
     expect(html).toMatchSnapshot()
   })

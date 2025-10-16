@@ -29,7 +29,7 @@ describe('Drawer', () => {
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with body slot', { props, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DrawerProps, slots?: Partial<DrawerSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DrawerProps, slots?: DrawerSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Drawer)
     expect(html).toMatchSnapshot()
   })

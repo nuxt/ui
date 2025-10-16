@@ -30,7 +30,7 @@ describe('PageFeature', () => {
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageFeatureProps, slots?: Partial<PageFeatureSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageFeatureProps, slots?: PageFeatureSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PageFeature)
     expect(html).toMatchSnapshot()
   })

@@ -14,7 +14,7 @@ describe('ChatPalette', () => {
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with prompt slot', { slots: { prompt: () => 'Prompt slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatPaletteProps, slots?: Partial<ChatPaletteSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatPaletteProps, slots?: ChatPaletteSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, ChatPalette)
     expect(html).toMatchSnapshot()
   })

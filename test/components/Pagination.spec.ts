@@ -42,7 +42,7 @@ describe('Pagination', () => {
     ['with last slot', { props, slots: { last: () => 'Last slot' } }],
     ['with ellipsis slot', { props: { ...props, siblingCount: 1, showEdges: true, page: 5 }, slots: { ellipsis: () => 'Ellipsis slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PaginationProps, slots?: Partial<PaginationSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PaginationProps, slots?: PaginationSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Pagination)
     expect(html).toMatchSnapshot()
   })

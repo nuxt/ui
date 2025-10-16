@@ -28,7 +28,7 @@ describe('ContentSurround', () => {
     ['with link slot', { props, slots: { link: () => 'Link slot' } }],
     ['with link-leading slot', { props, slots: { 'link-leading': () => 'Link leading slot' } }],
     ['with link-title slot', { props, slots: { 'link-title': () => 'Link title slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentSurroundProps, slots?: Partial<ContentSurroundSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentSurroundProps, slots?: ContentSurroundSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, ContentSurround)
     expect(html).toMatchSnapshot()
   })

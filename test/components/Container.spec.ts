@@ -12,7 +12,7 @@ describe('Container', () => {
     ['with class', { props: { class: 'max-w-5xl' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContainerProps, slots?: Partial<ContainerSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContainerProps, slots?: ContainerSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Container)
     expect(html).toMatchSnapshot()
   })

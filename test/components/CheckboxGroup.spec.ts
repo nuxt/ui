@@ -46,7 +46,7 @@ describe('CheckboxGroup', () => {
     ['with legend slot', { props, slots: { legend: () => 'Legend slot' } }],
     ['with label slot', { props, slots: { label: () => 'Label slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxGroupProps, slots?: Partial<CheckboxGroupSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxGroupProps, slots?: CheckboxGroupSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, CheckboxGroup)
     expect(html).toMatchSnapshot()
   })

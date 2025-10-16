@@ -36,7 +36,7 @@ describe('ChangelogVersions', () => {
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with indicator slot', { props, slots: { indicator: () => 'Indicator slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChangelogVersionsProps, slots?: Partial<ChangelogVersionsSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChangelogVersionsProps, slots?: ChangelogVersionsSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, ChangelogVersions)
     expect(html).toMatchSnapshot()
   })

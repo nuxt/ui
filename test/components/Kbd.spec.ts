@@ -20,7 +20,7 @@ describe('Kbd', () => {
     ['with class', { props: { value: 'K', class: 'font-bold' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: KbdProps, slots?: Partial<KbdSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: KbdProps, slots?: KbdSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Kbd)
     expect(html).toMatchSnapshot()
   })

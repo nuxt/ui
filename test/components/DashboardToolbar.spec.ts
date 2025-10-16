@@ -15,7 +15,7 @@ describe('DashboardToolbar', () => {
     ['with default slot', { slots: { default: (): string => 'Default slot' } }],
     ['with left slot', { slots: { left: (): string => 'Left slot' } }],
     ['with right slot', { slots: { right: (): string => 'Right slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DashboardToolbarProps, slots?: Partial<DashboardToolbarSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DashboardToolbarProps, slots?: DashboardToolbarSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, DashboardToolbar)
     expect(html).toMatchSnapshot()
   })

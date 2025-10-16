@@ -37,7 +37,7 @@ describe('Empty', () => {
     ['with body slot', { props, slots: { body: () => 'Body slot' } }],
     ['with actions slot', { props, slots: { actions: () => 'Actions slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: EmptyProps, slots?: Partial<EmptySlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: EmptyProps, slots?: EmptySlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Empty)
     expect(html).toMatchSnapshot()
   })

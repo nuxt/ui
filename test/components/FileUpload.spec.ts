@@ -86,7 +86,7 @@ describe('FileUpload', () => {
     ['with file-name slot', { props, slots: { 'file-name': () => 'File name slot' } }],
     ['with file-size slot', { props, slots: { 'file-size': () => 'File size slot' } }],
     ['with file-trailing slot', { props, slots: { 'file-trailing': () => 'File trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FileUploadProps, slots?: Partial<FileUploadSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FileUploadProps, slots?: FileUploadSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, FileUpload)
     expect(html).toMatchSnapshot()
   })

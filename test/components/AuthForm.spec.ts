@@ -42,7 +42,7 @@ describe('AuthForm', () => {
     ['with validation slot', { props, slots: { validation: () => 'Validation' } }],
     ['with submit slot', { props, slots: { submit: () => 'Submit' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props: AuthFormProps, slots?: Partial<AuthFormSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props: AuthFormProps, slots?: AuthFormSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, AuthForm)
     expect(html).toMatchSnapshot()
   })

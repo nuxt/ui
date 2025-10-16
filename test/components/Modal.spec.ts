@@ -30,7 +30,7 @@ describe('Modal', () => {
     ['with close slot', { props, slots: { close: () => 'Close slot' } }],
     ['with body slot', { props, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ModalProps, slots?: Partial<ModalSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ModalProps, slots?: ModalSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Modal)
     expect(html).toMatchSnapshot()
   })

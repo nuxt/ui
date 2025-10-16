@@ -32,7 +32,7 @@ describe('AvatarGroup', () => {
     ['with ui', { props: { ui: { base: 'rounded-lg' } } }],
     // Slots
     ['with default slot', {}]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarGroupProps, slots?: Partial<AvatarGroupSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarGroupProps, slots?: AvatarGroupSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, AvatarGroupWrapper)
     expect(html).toMatchSnapshot()
   })

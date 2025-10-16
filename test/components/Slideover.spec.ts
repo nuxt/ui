@@ -32,7 +32,7 @@ describe('Slideover', () => {
     ['with close slot', { props, slots: { close: () => 'Close slot' } }],
     ['with body slot', { props, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SlideoverProps, slots?: Partial<SlideoverSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SlideoverProps, slots?: SlideoverSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Slideover)
     expect(html).toMatchSnapshot()
   })

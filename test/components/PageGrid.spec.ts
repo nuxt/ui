@@ -12,7 +12,7 @@ describe('PageGrid', () => {
     ['with class', { props: { class: 'xl:grid-cols-4' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageGridProps, slots?: Partial<PageGridSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageGridProps, slots?: PageGridSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PageGrid)
     expect(html).toMatchSnapshot()
   })

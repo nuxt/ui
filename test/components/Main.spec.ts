@@ -12,7 +12,7 @@ describe('Main', () => {
     ['with class', { props: { class: 'min-h-full' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: MainProps, slots?: Partial<MainSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: MainProps, slots?: MainSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Main)
     expect(html).toMatchSnapshot()
   })

@@ -29,7 +29,7 @@ describe('ChatMessage', () => {
     ['with ui', { props: { ...props, ui: {} } }],
     // Slots
     ['with content slot', { props, slots: { content: () => 'Content slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatMessageProps, slots?: Partial<ChatMessageSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatMessageProps, slots?: ChatMessageSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, ChatMessage)
     expect(html).toMatchSnapshot()
   })

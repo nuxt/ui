@@ -71,7 +71,7 @@ describe('Tree', () => {
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'leading slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'trailing slot' } }],
     ['with dynamic slot', { props, slots: { app: () => 'dynamic slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: Partial<TreeProps>, slots?: Partial<TreeSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: Partial<TreeProps>, slots?: TreeSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Tree)
     expect(html).toMatchSnapshot()
   })

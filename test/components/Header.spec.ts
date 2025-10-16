@@ -29,7 +29,7 @@ describe('Header', () => {
     ['with bottom slot', { slots: { bottom: () => 'Bottom slot' } }],
     ['with body slot', { slots: { body: () => 'Body slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: HeaderProps, slots?: Partial<HeaderSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: HeaderProps, slots?: HeaderSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Header)
     expect(html).toMatchSnapshot()
   })

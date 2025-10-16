@@ -18,7 +18,7 @@ describe('Marquee', () => {
     ['with ui', { props: { ui: { content: 'gap-4' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: MarqueeProps, slots?: Partial<MarqueeSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: MarqueeProps, slots?: MarqueeSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Marquee)
     expect(html).toMatchSnapshot()
   })

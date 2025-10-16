@@ -46,7 +46,7 @@ describe('Input', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputProps, slots?: Partial<InputSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputProps, slots?: InputSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Input)
     expect(html).toMatchSnapshot()
   })

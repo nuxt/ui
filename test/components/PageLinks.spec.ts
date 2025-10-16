@@ -41,7 +41,7 @@ describe('PageLinks', () => {
     ['with link-leading slot', { props, slots: { 'link-leading': () => 'Link leading slot' } }],
     ['with link-label slot', { props, slots: { 'link-label': () => 'Link label slot' } }],
     ['with link-trailing slot', { props, slots: { 'link-trailing': () => 'Link trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageLinksProps, slots?: Partial<PageLinksSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageLinksProps, slots?: PageLinksSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PageLinks)
     expect(html).toMatchSnapshot()
   })

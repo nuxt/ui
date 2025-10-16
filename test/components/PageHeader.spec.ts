@@ -21,7 +21,7 @@ describe('PageHeader', () => {
     ['with headline slot', { slots: { headline: () => 'Headline slot' } }],
     ['with links slot', { slots: { links: () => 'Links slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageHeaderProps, slots?: Partial<PageHeaderSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageHeaderProps, slots?: PageHeaderSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PageHeader)
     expect(html).toMatchSnapshot()
   })

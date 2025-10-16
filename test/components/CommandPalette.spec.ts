@@ -95,7 +95,7 @@ describe('CommandPalette', () => {
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
     ['with close slot', { props: { ...props, close: true }, slots: { close: () => 'Close slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps, slots?: Partial<CommandPaletteSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps, slots?: CommandPaletteSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, CommandPalette)
     expect(html).toMatchSnapshot()
   })

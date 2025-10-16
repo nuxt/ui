@@ -20,7 +20,7 @@ describe('Link', () => {
     ['with class', { props: { class: 'font-medium' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: LinkProps, slots?: Partial<LinkSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: LinkProps, slots?: LinkSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Link)
     expect(html).toMatchSnapshot()
   })

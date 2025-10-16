@@ -80,7 +80,7 @@ describe('PricingTable', () => {
     ['with tier-billing slot', { props, slots: { 'tier-billing': () => 'Tier billing slot' } }],
     ['with tier-discount slot', { props, slots: { 'tier-discount': () => 'Tier discount slot' } }],
     ['with tier-price slot', { props, slots: { 'tier-price': () => 'Tier price slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props: PricingTableProps, slots?: Partial<PricingTableSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props: PricingTableProps, slots?: PricingTableSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PricingTable)
     expect(html).toMatchSnapshot()
   })

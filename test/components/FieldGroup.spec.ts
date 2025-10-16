@@ -43,7 +43,7 @@ describe('FieldGroup', () => {
         }
       }]
     )
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FieldGroupProps, slots?: Partial<FieldGroupSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FieldGroupProps, slots?: FieldGroupSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, FieldGroup)
     expect(html).toMatchSnapshot()
   })

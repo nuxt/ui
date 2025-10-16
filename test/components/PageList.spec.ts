@@ -13,7 +13,7 @@ describe('PageList', () => {
     ['with class', { props: { class: 'gap-2' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageListProps, slots?: Partial<PageListSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageListProps, slots?: PageListSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PageList)
     expect(html).toMatchSnapshot()
   })

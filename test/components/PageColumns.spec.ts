@@ -12,7 +12,7 @@ describe('PageColumns', () => {
     ['with class', { props: { class: 'xl:columns-4' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageColumnsProps, slots?: Partial<PageColumnsSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageColumnsProps, slots?: PageColumnsSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PageColumns)
     expect(html).toMatchSnapshot()
   })

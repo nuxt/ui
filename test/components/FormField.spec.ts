@@ -80,7 +80,7 @@ describe('FormField', () => {
     ['with error slot', { slots: { error: () => 'Error slot' } }],
     ['with hint slot', { slots: { hint: () => 'Hint slot' } }],
     ['with help slot', { slots: { help: () => 'Help slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FormFieldProps, slots?: Partial<FormFieldSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FormFieldProps, slots?: FormFieldSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, FormFieldWrapper)
     expect(html).toMatchSnapshot()
   })

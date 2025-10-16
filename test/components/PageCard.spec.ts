@@ -46,7 +46,7 @@ describe('PageCard', () => {
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }],
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageCardProps, slots?: Partial<PageCardSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageCardProps, slots?: PageCardSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PageCard)
     expect(html).toMatchSnapshot()
   })

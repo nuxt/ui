@@ -46,7 +46,7 @@ describe('Button', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ButtonProps, slots?: Partial<ButtonSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ButtonProps, slots?: ButtonSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Button)
     expect(html).toMatchSnapshot()
   })

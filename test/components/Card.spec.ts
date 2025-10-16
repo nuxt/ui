@@ -19,7 +19,7 @@ describe('Card', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with header slot', { slots: { header: () => 'Header slot' } }],
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CardProps, slots?: Partial<CardSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CardProps, slots?: CardSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Card)
     expect(html).toMatchSnapshot()
   })

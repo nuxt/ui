@@ -32,7 +32,7 @@ describe('Badge', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BadgeProps, slots?: Partial<BadgeSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BadgeProps, slots?: BadgeSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Badge)
     expect(html).toMatchSnapshot()
   })

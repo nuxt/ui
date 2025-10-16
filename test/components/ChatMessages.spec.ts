@@ -34,7 +34,7 @@ describe('ChatMessages', () => {
     ['with indicator slot', { props: { ...props, status: 'submitted' }, slots: { indicator: () => 'Indicator slot' } }],
     ['with viewport slot', { props, slots: { viewport: () => 'Viewport slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatMessagesProps, slots?: Partial<ChatMessagesSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatMessagesProps, slots?: ChatMessagesSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, ChatMessages)
     expect(html).toMatchSnapshot()
   })

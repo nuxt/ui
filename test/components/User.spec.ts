@@ -33,7 +33,7 @@ describe('User', () => {
     ['with name slot', { props, slots: { name: () => 'Name slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: UserProps, slots?: Partial<UserSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: UserProps, slots?: UserSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, User)
     expect(html).toMatchSnapshot()
   })

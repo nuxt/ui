@@ -28,7 +28,7 @@ describe('Error', () => {
     ['with statusMessage slot', { props, slots: { statusMessage: () => 'Status message slot' } }],
     ['with message slot', { props, slots: { message: () => 'Message slot' } }],
     ['with links slot', { props, slots: { links: () => 'Links slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ErrorProps, slots?: Partial<ErrorSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ErrorProps, slots?: ErrorSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Error)
     expect(html).toMatchSnapshot()
   })

@@ -23,7 +23,7 @@ describe('Separator', () => {
     ['with as', { props: { as: 'span' } }],
     ['with class', { props: { class: 'flex-row-reverse' } }],
     ['with ui', { props: { ui: { label: 'text-lg' } } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SeparatorProps, slots?: Partial<SeparatorSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SeparatorProps, slots?: SeparatorSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Separator)
     expect(html).toMatchSnapshot()
   })

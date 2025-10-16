@@ -35,7 +35,7 @@ describe('ChangelogVersion', () => {
     ['with authors slot', { slots: { authors: () => 'Authors slot' } }],
     ['with actions slot', { slots: { actions: () => 'Actions slot' } }],
     ['with indicator slot', { slots: { indicator: () => 'Indicator slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChangelogVersionProps, slots?: Partial<ChangelogVersionSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChangelogVersionProps, slots?: ChangelogVersionSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, ChangelogVersion)
     expect(html).toMatchSnapshot()
   })

@@ -66,7 +66,7 @@ describe('PricingPlan', () => {
     ['with header slot', { props, slots: { header: () => 'Header slot' } }],
     ['with body slot', { props, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PricingPlanProps, slots?: Partial<PricingPlanSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PricingPlanProps, slots?: PricingPlanSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PricingPlan)
     expect(html).toMatchSnapshot()
   })

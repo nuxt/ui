@@ -17,7 +17,7 @@ describe('Footer', () => {
     ['with right slot', { slots: { right: () => 'Right slot' } }],
     ['with top slot', { slots: { top: () => 'Top slot' } }],
     ['with bottom slot', { slots: { bottom: () => 'Bottom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FooterProps, slots?: Partial<FooterSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FooterProps, slots?: FooterSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Footer)
     expect(html).toMatchSnapshot()
   })

@@ -58,7 +58,7 @@ describe('BlogPost', () => {
     ['with header slot', { props, slots: { header: () => 'Header slot' } }],
     ['with body slot', { props, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BlogPostProps, slots?: Partial<BlogPostSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BlogPostProps, slots?: BlogPostSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, BlogPost)
     expect(html).toMatchSnapshot()
   })

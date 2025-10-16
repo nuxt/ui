@@ -46,7 +46,7 @@ describe('Stepper', () => {
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: StepperProps, slots?: Partial<StepperSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: StepperProps, slots?: StepperSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Stepper)
     expect(html).toMatchSnapshot()
   })

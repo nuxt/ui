@@ -56,7 +56,7 @@ describe('Timeline', () => {
     ['with date slot', { props, slots: { date: () => 'Date slot' } }],
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TimelineProps, slots?: Partial<TimelineSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TimelineProps, slots?: TimelineSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Timeline)
     expect(html).toMatchSnapshot()
   })

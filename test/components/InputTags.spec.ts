@@ -38,7 +38,7 @@ describe('InputTags', () => {
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
     ['with item-text slot', { slots: { ['item-text']: () => 'Item Text slot' } }],
     ['with item-delete slot', { slots: { ['item-delete']: () => 'Item Delete slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputTagsProps, slots?: Partial<InputTagsSlots>, attrs?: Record<string, unknown> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputTagsProps, slots?: InputTagsSlots, attrs?: Record<string, unknown> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputTags)
     expect(html).toMatchSnapshot()
   })

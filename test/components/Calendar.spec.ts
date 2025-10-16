@@ -46,9 +46,9 @@ describe('Calendar', () => {
     ['with ui', { props: { ui: { header: 'gap-4' } } }],
     // Slots
     ['with heading slot', { slots: { heading: () => 'Heading' } }],
-    ['with day slot', { slots: { day: ({ day }: Parameters<CalendarSlots['day']>[0]) => day.day } }],
-    ['with week-day slot', { slots: { 'week-day': ({ day }: Parameters<CalendarSlots['week-day']>[0]) => day } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CalendarProps<false, false>, slots?: Partial<CalendarSlots> }) => {
+    ['with day slot', { slots: { day: ({ day }: Parameters<Required<CalendarSlots>['day']>[0]) => day.day } }],
+    ['with week-day slot', { slots: { 'week-day': ({ day }: Parameters<Required<CalendarSlots>['week-day']>[0]) => day } }]
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CalendarProps<false, false>, slots?: CalendarSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Calendar)
     expect(html).toMatchSnapshot()
   })

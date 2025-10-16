@@ -98,7 +98,7 @@ describe('ContextMenu', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContextMenuProps, slots?: Partial<ContextMenuSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContextMenuProps, slots?: ContextMenuSlots }) => {
     const wrapper = await mountSuspended(ContextMenuWrapper, options as any)
 
     await wrapper.find('span').trigger('click.right')

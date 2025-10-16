@@ -68,7 +68,7 @@ describe('ContentNavigation', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentNavigationProps, slots?: Partial<ContentNavigationSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentNavigationProps, slots?: ContentNavigationSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, ContentNavigation)
     expect(html).toMatchSnapshot()
   })

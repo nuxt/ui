@@ -50,7 +50,7 @@ describe('Toast', () => {
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with close slot', { props, slots: { close: () => 'Close slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ToastProps, slots?: Partial<ToastSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ToastProps, slots?: ToastSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, ToastWrapper)
     expect(html).toMatchSnapshot()
   })

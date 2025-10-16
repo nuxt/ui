@@ -4,12 +4,12 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardSidebar from '../../src/runtime/components/DashboardSidebar.vue'
-import type { DashboardSidebarProps, DashboardSidebarSlots } from '../../src/runtime/components/DashboardSidebar.vue'
+import type { DashboardSidebarProps } from '../../src/runtime/components/DashboardSidebar.vue'
 
 const DashboardWrapper = defineComponent({
   components: {
-    UDashboardGroup: DashboardGroup as any,
-    UDashboardSidebar: DashboardSidebar as any
+    UDashboardGroup: DashboardGroup,
+    UDashboardSidebar: DashboardSidebar
   },
   inheritAttrs: false,
   template: `<UDashboardGroup>
@@ -47,7 +47,7 @@ describe('DashboardSidebar', () => {
     ['with toggle slot', { slots: { toggle: () => 'Toggle slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }],
     ['with resize-handle slot', { slots: { 'resize-handle': () => 'Resize handle slot' } }]
-  ])('renders %s correctly', async (_: string, options: { props?: DashboardSidebarProps, slots?: Partial<DashboardSidebarSlots> }) => {
+  ])('renders %s correctly', async (_: string, options: { props?: DashboardSidebarProps, slots?: typeof DashboardWrapper['slots'] }) => {
     const wrapper = await mountSuspended(DashboardWrapper, options)
     expect(wrapper.html()).toMatchSnapshot()
   })

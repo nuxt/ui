@@ -34,7 +34,7 @@ describe('InputNumber', () => {
     // Slots
     ['with increment slot', { slots: { increment: () => '+' } }],
     ['with decrement slot', { slots: { decrement: () => '-' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputNumberProps, slots?: Partial<InputNumberSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputNumberProps, slots?: InputNumberSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, InputNumber)
     expect(html).toMatchSnapshot()
   })

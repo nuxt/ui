@@ -4,12 +4,12 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardResizeHandle from '../../src/runtime/components/DashboardResizeHandle.vue'
-import type { DashboardResizeHandleProps, DashboardResizeHandleSlots } from '../../src/runtime/components/DashboardResizeHandle.vue'
+import type { DashboardResizeHandleProps } from '../../src/runtime/components/DashboardResizeHandle.vue'
 
 const DashboardWrapper = defineComponent({
   components: {
-    UDashboardGroup: DashboardGroup as any,
-    UDashboardResizeHandle: DashboardResizeHandle as any
+    UDashboardGroup: DashboardGroup,
+    UDashboardResizeHandle: DashboardResizeHandle
   },
   inheritAttrs: false,
   template: `<UDashboardGroup>
@@ -28,7 +28,7 @@ describe('DashboardResizeHandle', () => {
     ['with class', { props: { class: 'absolute' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (_: string, options: { props?: DashboardResizeHandleProps, slots?: Partial<DashboardResizeHandleSlots> }) => {
+  ])('renders %s correctly', async (_: string, options: { props?: DashboardResizeHandleProps, slots?: typeof DashboardWrapper['slots'] }) => {
     const wrapper = await mountSuspended(DashboardWrapper, options)
     expect(wrapper.html()).toMatchSnapshot()
   })

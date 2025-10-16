@@ -35,7 +35,7 @@ describe('PricingPlans', () => {
     ['with class', { props: { ...props, class: 'gap-y-12' } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PricingPlansProps, slots?: Partial<PricingPlansSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PricingPlansProps, slots?: PricingPlansSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PricingPlans)
     expect(html).toMatchSnapshot()
   })

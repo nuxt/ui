@@ -28,7 +28,7 @@ describe('Progress', () => {
     ['with ui', { props: { ui: { base: 'bg-default' } } }],
     // Slots
     ['with status slot', { slots: { status: () => 'Status slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ProgressProps, slots?: Partial<ProgressSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ProgressProps, slots?: ProgressSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Progress)
     expect(html).toMatchSnapshot()
   })

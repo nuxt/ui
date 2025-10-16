@@ -66,7 +66,7 @@ describe('ContentToc', () => {
     ['with link slot', { props, slots: { link: () => 'Link slot' } }],
     ['with top slot', { props, slots: { top: () => 'Top slot' } }],
     ['with bottom slot', { props, slots: { bottom: () => 'Bottom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentTocProps, slots?: Partial<ContentTocSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentTocProps, slots?: ContentTocSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, ContentToc)
     expect(html).toMatchSnapshot()
   })

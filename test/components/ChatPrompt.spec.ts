@@ -20,7 +20,7 @@ describe('ChatPrompt', () => {
     // Slots
     ['with header slot', { slots: { header: () => 'Header slot' } }],
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatPromptProps, slots?: Partial<ChatPromptSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatPromptProps, slots?: ChatPromptSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, ChatPrompt)
     expect(html).toMatchSnapshot()
   })

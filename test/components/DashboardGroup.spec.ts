@@ -12,7 +12,7 @@ describe('DashboardGroup', () => {
     ['with class', { props: { class: 'inset-4' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DashboardGroupProps, slots?: Partial<DashboardGroupSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DashboardGroupProps, slots?: DashboardGroupSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, DashboardGroup)
     expect(html).toMatchSnapshot()
   })

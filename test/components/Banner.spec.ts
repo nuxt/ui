@@ -27,7 +27,7 @@ describe('Banner', () => {
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with actions slot', { props, slots: { actions: () => 'Actions slot' } }],
     ['with close slot', { props, slots: { close: () => 'Close slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BannerProps, slots?: Partial<BannerSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BannerProps, slots?: BannerSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Banner)
     expect(html).toMatchSnapshot()
   })

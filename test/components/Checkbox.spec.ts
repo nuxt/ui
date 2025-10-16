@@ -39,7 +39,7 @@ describe('Checkbox', () => {
     // Slots
     ['with label slot', { slots: { label: () => 'Label slot' } }],
     ['with description slot', { slots: { label: () => 'Description slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxProps, slots?: Partial<CheckboxSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxProps, slots?: CheckboxSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Checkbox)
     expect(html).toMatchSnapshot()
   })

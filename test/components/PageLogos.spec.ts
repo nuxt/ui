@@ -21,7 +21,7 @@ describe('PageLogos', () => {
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageLogosProps, slots?: Partial<PageLogosSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageLogosProps, slots?: PageLogosSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PageLogos)
     expect(html).toMatchSnapshot()
   })

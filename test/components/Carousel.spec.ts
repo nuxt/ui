@@ -40,7 +40,7 @@ describe('Carousel', () => {
     ['with as', { props: { ...props, as: 'nav' } }],
     ['with class', { props: { ...props, class: 'w-full max-w-xs' } }],
     ['with ui', { props: { ...props, ui: { viewport: 'h-[320px]' } } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CarouselProps, slots?: Partial<CarouselSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CarouselProps, slots?: CarouselSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, CarouselWrapper)
     expect(html).toMatchSnapshot()
   })

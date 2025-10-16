@@ -12,7 +12,7 @@ describe('PageBody', () => {
     ['with class', { props: { class: 'mt-12' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageBodyProps, slots?: Partial<PageBodySlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageBodyProps, slots?: PageBodySlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PageBody)
     expect(html).toMatchSnapshot()
   })

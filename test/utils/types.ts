@@ -18,7 +18,7 @@ export function expectSlotProps<T extends VNode, S extends keyof Slots<T>>(_name
 type Ctx<V extends VNode> = V extends { __ctx?: infer C } ? NonNullable<C> : never
 
 type Slots<V extends VNode> = Ctx<V> extends { slots: infer S } ? {
-  [K in keyof S as S[K] extends never ? never : K]: S[K] extends (props: infer P) => any ? P : never
+  [K in keyof Required<S> as Required<S>[K] extends never ? never : K]: Required<S>[K] extends (props: infer P) => any ? P : never
 } : never
 
 type Events<V extends VNode> = Ctx<V> extends { props: infer Props } ? {

@@ -32,7 +32,7 @@ describe('PageCTA', () => {
     ['with links slot', { slots: { links: () => 'Links slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with bottom slot', { slots: { bottom: () => 'Bottom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageCTAProps, slots?: Partial<PageCTASlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageCTAProps, slots?: PageCTASlots }) => {
     const html = await ComponentRender(nameOrHtml, options, PageCTA)
     expect(html).toMatchSnapshot()
   })

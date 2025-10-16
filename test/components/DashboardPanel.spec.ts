@@ -4,12 +4,12 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardPanel from '../../src/runtime/components/DashboardPanel.vue'
-import type { DashboardPanelProps, DashboardPanelSlots } from '../../src/runtime/components/DashboardPanel.vue'
+import type { DashboardPanelProps } from '../../src/runtime/components/DashboardPanel.vue'
 
 const DashboardWrapper = defineComponent({
   components: {
-    UDashboardGroup: DashboardGroup as any,
-    UDashboardPanel: DashboardPanel as any
+    UDashboardGroup: DashboardGroup,
+    UDashboardPanel: DashboardPanel
   },
   inheritAttrs: false,
   template: `<UDashboardGroup>
@@ -37,7 +37,7 @@ describe('DashboardPanel', () => {
     ['with header slot', { slots: { header: () => 'Header slot' } }],
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }],
     ['with resize-handle slot', { slots: { 'resize-handle': () => 'Resize handle slot' } }]
-  ])('renders %s correctly', async (_: string, options: { props?: DashboardPanelProps, slots?: Partial<DashboardPanelSlots> }) => {
+  ])('renders %s correctly', async (_: string, options: { props?: DashboardPanelProps, slots?: typeof DashboardWrapper['slots'] }) => {
     const wrapper = await mountSuspended(DashboardWrapper, options)
     expect(wrapper.html()).toMatchSnapshot()
   })
