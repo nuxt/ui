@@ -38,7 +38,7 @@ export interface EmptyProps {
 
 export interface EmptySlots {
   header(props?: {}): any
-  leading(props?: {}): any
+  leading(props: { ui: Empty['ui'] }): any
   title(props?: {}): any
   description(props?: {}): any
   body(props?: {}): any
@@ -70,7 +70,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.empty || {})
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="!!slots.header || (icon || avatar || !!slots.leading) || (title || !!slots.title) || (description || !!slots.description)" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
-        <slot name="leading">
+        <slot name="leading" :ui="ui">
           <UAvatar v-if="icon || avatar" :icon="icon" v-bind="typeof avatar === 'object' ? avatar : {}" :class="ui.avatar({ class: props.ui?.avatar })" />
         </slot>
 
