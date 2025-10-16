@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { UIMessage, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
-import type { ButtonProps, ChatMessageProps, IconProps } from '../types'
+import type { ButtonProps, ChatMessageProps, ChatMessageSlots, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
@@ -57,13 +57,17 @@ export interface ChatMessagesProps {
   ui?: ChatMessages['slots']
 }
 
-export interface ChatMessagesSlots {
+type ExtendSlotWithVersion<K extends keyof ChatMessageSlots>
+  = ChatMessageSlots[K] extends (props: infer P) => any
+    ? (props: P & { message: UIMessage }) => any
+    : ChatMessageSlots[K]
+
+export type ChatMessagesSlots = {
+  [K in keyof ChatMessageSlots]: ExtendSlotWithVersion<K>
+} & {
   default(props?: {}): any
   indicator(props: { ui: ChatMessages['ui'] }): any
   viewport(props: { ui: ChatMessages['ui'], onClick: () => void }): any
-  content(props: { message: UIMessage }): any
-  leading(props: { message: UIMessage }): any
-  actions(props: { message: UIMessage }): any
 }
 </script>
 
@@ -271,8 +275,8 @@ onMounted(() => {
         :ref="(el) => registerMessageRef(message.id, el as ComponentPublicInstance)"
         :compact="compact"
       >
-        <template v-for="(_, name) in getProxySlots()" #[name]>
-          <slot :name="name" v-bind="{ message }" />
+        <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
+          <slot :name="name" v-bind="(slotData as any)" :message="message" />
         </template>
       </UChatMessage>
     </slot>
