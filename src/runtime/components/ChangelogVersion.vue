@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/changelog-version'
 import type { BadgeProps, LinkProps, UserProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type ChangelogVersion = ComponentConfig<typeof theme, AppConfig, 'changelogVersion'>
 
@@ -40,17 +40,17 @@ export interface ChangelogVersionProps {
 }
 
 export interface ChangelogVersionSlots {
-  header?(props?: {}): VNode[]
-  badge?(props?: {}): VNode[]
-  date?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  image?(props?: {}): VNode[]
-  body?(props?: {}): VNode[]
-  footer?(props?: {}): VNode[]
-  authors?(props?: {}): VNode[]
-  actions?(props?: {}): VNode[]
-  indicator?(props?: {}): VNode[]
+  header?(props?: {}): SlotsReturn
+  badge?(props?: {}): SlotsReturn
+  date?(props?: {}): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  description?(props?: {}): SlotsReturn
+  image?(props?: {}): SlotsReturn
+  body?(props?: {}): SlotsReturn
+  footer?(props?: {}): SlotsReturn
+  authors?(props?: {}): SlotsReturn
+  actions?(props?: {}): SlotsReturn
+  indicator?(props?: {}): SlotsReturn
 }
 </script>
 

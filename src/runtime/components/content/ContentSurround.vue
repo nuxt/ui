@@ -1,10 +1,11 @@
 <script lang="ts">
-import type { PropType, VNode } from 'vue'
+import type { PropType } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-surround'
 import type { IconProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
+import type { SlotsReturn } from '../../types/utils'
 
 type ContentSurround = ComponentConfig<typeof theme, AppConfig, 'contentSurround'>
 
@@ -41,7 +42,7 @@ export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSur
   ui?: ContentSurround['slots']
 }
 
-type SlotProps<T> = (props: { link: T }) => VNode[]
+type SlotProps<T> = (props: { link: T }) => SlotsReturn
 
 export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSurroundLink> {
   'link'?: SlotProps<T>

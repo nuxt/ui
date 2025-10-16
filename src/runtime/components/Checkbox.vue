@@ -1,10 +1,10 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { CheckboxRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox'
 import type { IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Checkbox = ComponentConfig<typeof theme, AppConfig, 'checkbox'>
 
@@ -54,8 +54,8 @@ export type CheckboxEmits = {
 }
 
 export interface CheckboxSlots {
-  label?(props: { label?: string }): VNode[]
-  description?(props: { description?: string }): VNode[]
+  label?(props: { label?: string }): SlotsReturn
+  description?(props: { description?: string }): SlotsReturn
 }
 </script>
 

@@ -1,11 +1,10 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuContentEmits, DropdownMenuArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, IconProps, KbdProps, LinkProps } from '../types'
-import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
@@ -91,19 +90,19 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number }) => VNode[]
+type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number }) => SlotsReturn
 
 export type DropdownMenuSlots<
   A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  'default'?(props: { open: boolean }): VNode[]
+  'default'?(props: { open: boolean }): SlotsReturn
   'item'?: SlotProps<T>
   'item-leading'?: SlotProps<T>
   'item-label'?: SlotProps<T>
   'item-trailing'?: SlotProps<T>
-  'content-top'?: (props?: {}) => VNode[]
-  'content-bottom'?: (props?: {}) => VNode[]
+  'content-top'?: (props?: {}) => SlotsReturn
+  'content-bottom'?: (props?: {}) => SlotsReturn
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
 </script>

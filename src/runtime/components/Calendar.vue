@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootProps, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'reka-ui'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/calendar'
 import type { ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Calendar = ComponentConfig<typeof theme, AppConfig, 'calendar'>
 
@@ -104,9 +104,9 @@ export interface CalendarEmits<R extends boolean, M extends boolean> extends Omi
 }
 
 export interface CalendarSlots {
-  'heading'?: (props: { value: string }) => VNode[]
-  'day'?: (props: Pick<CalendarCellTriggerProps, 'day'>) => VNode[]
-  'week-day'?: (props: { day: string }) => VNode[]
+  'heading'?: (props: { value: string }) => SlotsReturn
+  'day'?: (props: Pick<CalendarCellTriggerProps, 'day'>) => SlotsReturn
+  'week-day'?: (props: { day: string }) => SlotsReturn
 }
 </script>
 

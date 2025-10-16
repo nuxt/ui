@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
+import type { SlotsReturn } from '../../types/utils'
 import theme from '#build/ui/prose/field'
 
 type ProseField = ComponentConfig<typeof theme, AppConfig, 'field', 'ui.prose'>
@@ -33,7 +33,7 @@ export interface ProseFieldProps {
 }
 
 export interface ProseFieldSlots {
-  default?(props?: {}): VNode[]
+  default?(props?: {}): SlotsReturn
 }
 </script>
 

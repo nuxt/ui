@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-grid'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type PageGrid = ComponentConfig<typeof theme, AppConfig, 'pageGrid'>
 
@@ -16,7 +16,7 @@ export interface PageGridProps {
 }
 
 export interface PageGridSlots {
-  default(props?: {}): VNode[]
+  default(props?: {}): SlotsReturn
 }
 </script>
 

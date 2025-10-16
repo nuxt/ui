@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/empty'
 import type { ComponentConfig } from '../types/tv'
 import type { ButtonProps, IconProps, AvatarProps } from '../types'
+import type { SlotsReturn } from '../types/utils'
 
 type Empty = ComponentConfig<typeof theme, AppConfig, 'empty'>
 
@@ -38,13 +38,13 @@ export interface EmptyProps {
 }
 
 export interface EmptySlots {
-  header?(props?: {}): VNode[]
-  leading?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  body?(props?: {}): VNode[]
-  actions?(props?: {}): VNode[]
-  footer?(props?: {}): VNode[]
+  header?(props?: {}): SlotsReturn
+  leading?(props?: {}): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  description?(props?: {}): SlotsReturn
+  body?(props?: {}): SlotsReturn
+  actions?(props?: {}): SlotsReturn
+  footer?(props?: {}): SlotsReturn
 }
 </script>
 

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { SlotsReturn } from '#ui/types/utils'
+
 defineProps<{
   label: string
   icon?: string
@@ -7,7 +9,7 @@ defineProps<{
 }>()
 
 const slots = defineSlots<{
-  leading?(): VNode[]
+  leading?(): SlotsReturn
 }>()
 </script>
 

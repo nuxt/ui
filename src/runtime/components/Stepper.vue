@@ -1,11 +1,10 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/stepper'
 import type { IconProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Stepper = ComponentConfig<typeof theme, AppConfig, 'stepper'>
@@ -60,7 +59,7 @@ export type StepperEmits<T extends StepperItem = StepperItem> = Omit<StepperRoot
   prev: [value: T]
 }
 
-type SlotProps<T extends StepperItem> = (props: { item: T }) => VNode[]
+type SlotProps<T extends StepperItem> = (props: { item: T }) => SlotsReturn
 
 export type StepperSlots<T extends StepperItem = StepperItem> = {
   indicator?: SlotProps<T>

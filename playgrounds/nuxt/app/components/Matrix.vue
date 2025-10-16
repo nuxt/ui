@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T extends Record<string, string[]>">
-import type { VNode } from 'vue'
+import type { SlotsReturn } from '#ui/types/utils'
 
 const props = defineProps<{
   attrs: T
@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 defineSlots<{
-  default?(props?: { [K in keyof T]: T[K] extends (infer U)[] ? U : never }): VNode
+  default?(props?: { [K in keyof T]: T[K] extends (infer U)[] ? U : never }): SlotsReturn
 }>()
 
 const combinations = computed(() => {

@@ -1,11 +1,10 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/context-menu'
 import type { AvatarProps, IconProps, KbdProps, LinkProps } from '../types'
-import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
@@ -83,19 +82,19 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
 
 export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
-type SlotProps<T extends ContextMenuItem> = (props: { item: T, active?: boolean, index: number }) => VNode[]
+type SlotProps<T extends ContextMenuItem> = (props: { item: T, active?: boolean, index: number }) => SlotsReturn
 
 export type ContextMenuSlots<
   A extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  'default'?(props?: {}): VNode[]
+  'default'?(props?: {}): SlotsReturn
   'item'?: SlotProps<T>
   'item-leading'?: SlotProps<T>
   'item-label'?: SlotProps<T>
   'item-trailing'?: SlotProps<T>
-  'content-top'?: (props?: {}) => VNode[]
-  'content-bottom'?: (props?: {}) => VNode[]
+  'content-top'?: (props?: {}) => SlotsReturn
+  'content-bottom'?: (props?: {}) => SlotsReturn
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
 </script>

@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/kbd'
 import type { KbdKey } from '../composables/useKbd'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Kbd = ComponentConfig<typeof theme, AppConfig, 'kbd'>
 
@@ -30,7 +30,7 @@ export interface KbdProps {
 }
 
 export interface KbdSlots {
-  default?(props?: {}): VNode[]
+  default?(props?: {}): SlotsReturn
 }
 </script>
 

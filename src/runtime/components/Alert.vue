@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/alert'
 import type { AvatarProps, ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Alert = ComponentConfig<typeof theme, AppConfig, 'alert'>
 
@@ -62,11 +62,11 @@ export interface AlertEmits {
 }
 
 export interface AlertSlots {
-  leading?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  actions?(props?: {}): VNode[]
-  close?(props: { ui: { [K in keyof Required<Alert['slots']>]: (props?: Record<string, any>) => string } }): VNode[]
+  leading?(props?: {}): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  description?(props?: {}): SlotsReturn
+  actions?(props?: {}): SlotsReturn
+  close?(props: { ui: { [K in keyof Required<Alert['slots']>]: (props?: Record<string, any>) => string } }): SlotsReturn
 }
 </script>
 

@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-anchors'
 import type { IconProps, LinkProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type PageAnchors = ComponentConfig<typeof theme, AppConfig, 'pageAnchors'>
 
@@ -28,7 +28,7 @@ export interface PageAnchorsProps<T extends PageAnchor = PageAnchor> {
   ui?: PageAnchors['slots']
 }
 
-type SlotProps<T> = (props: { link: T, active: boolean }) => VNode[]
+type SlotProps<T> = (props: { link: T, active: boolean }) => SlotsReturn
 
 export interface PageAnchorsSlots<T extends PageAnchor = PageAnchor> {
   'link'?: SlotProps<T>

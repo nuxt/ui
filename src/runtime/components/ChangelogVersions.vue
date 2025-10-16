@@ -1,10 +1,10 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { SpringOptions } from 'motion-v'
 import theme from '#build/ui/changelog-versions'
 import type { ChangelogVersionProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type ChangelogVersions = ComponentConfig<typeof theme, AppConfig, 'changelogVersions'>
 
@@ -32,19 +32,19 @@ export interface ChangelogVersionsProps<T extends ChangelogVersionProps = Change
 }
 
 export interface ChangelogVersionsSlots<T extends ChangelogVersionProps = ChangelogVersionProps> {
-  default?(props?: {}): VNode[]
-  indicator?(props?: {}): VNode[]
-  header?(props: { version: T }): VNode[]
-  badge?(props: { version: T }): VNode[]
-  date?(props: { version: T }): VNode[]
-  title?(props: { version: T }): VNode[]
-  description?(props: { version: T }): VNode[]
-  image?(props: { version: T }): VNode[]
-  body?(props: { version: T }): VNode[]
-  footer?(props: { version: T }): VNode[]
-  authors?(props: { version: T }): VNode[]
-  actions?(props: { version: T }): VNode[]
-  indicator?(props: { version: T }): VNode[]
+  default?(props?: {}): SlotsReturn
+  indicator?(props?: {}): SlotsReturn
+  header?(props: { version: T }): SlotsReturn
+  badge?(props: { version: T }): SlotsReturn
+  date?(props: { version: T }): SlotsReturn
+  title?(props: { version: T }): SlotsReturn
+  description?(props: { version: T }): SlotsReturn
+  image?(props: { version: T }): SlotsReturn
+  body?(props: { version: T }): SlotsReturn
+  footer?(props: { version: T }): SlotsReturn
+  authors?(props: { version: T }): SlotsReturn
+  actions?(props: { version: T }): SlotsReturn
+  indicator?(props: { version: T }): SlotsReturn
 }
 </script>
 

@@ -1,6 +1,5 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
 import type { AutoplayOptionsType } from 'embla-carousel-autoplay'
@@ -11,7 +10,7 @@ import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import theme from '#build/ui/carousel'
 import type { ButtonProps, IconProps } from '../types'
-import type { AcceptableValue } from '../types/utils'
+import type { AcceptableValue, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
@@ -102,7 +101,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
 }
 
 export type CarouselSlots<T extends CarouselItem = CarouselItem> = {
-  default?(props: { item: T, index: number }): VNode[]
+  default?(props: { item: T, index: number }): SlotsReturn
 }
 
 export interface CarouselEmits {

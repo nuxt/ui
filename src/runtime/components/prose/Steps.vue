@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
+import type { SlotsReturn } from '../../types/utils'
 import theme from '#build/ui/prose/steps'
 
 type ProseSteps = ComponentConfig<typeof theme, AppConfig, 'steps', 'ui.prose'>
@@ -16,7 +16,7 @@ export interface ProseStepsProps {
 }
 
 export interface ProseStepsSlots {
-  default(props?: {}): VNode[]
+  default(props?: {}): SlotsReturn
 }
 </script>
 

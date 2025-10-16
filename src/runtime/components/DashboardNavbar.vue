@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { VNode } from 'vue'
+import type { VNodeChild } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-navbar'
 import type { DashboardContext } from '../utils/dashboard'
@@ -38,13 +38,13 @@ export interface DashboardNavbarProps {
 type DashboardNavbarSlotsProps = Omit<DashboardContext, 'storage' | 'storageKey' | 'persistent' | 'unit'>
 
 export interface DashboardNavbarSlots {
-  title?(props?: {}): VNode[]
-  leading?(props: DashboardNavbarSlotsProps): VNode[]
-  trailing?(props: DashboardNavbarSlotsProps): VNode[]
-  left?(props: DashboardNavbarSlotsProps): VNode[]
-  default?(props: DashboardNavbarSlotsProps): VNode[]
-  right?(props: DashboardNavbarSlotsProps): VNode[]
-  toggle?(props: DashboardNavbarSlotsProps): VNode[]
+  title?(props?: {}): VNodeChild
+  leading?(props: DashboardNavbarSlotsProps): VNodeChild
+  trailing?(props: DashboardNavbarSlotsProps): VNodeChild
+  left?(props: DashboardNavbarSlotsProps): VNodeChild
+  default?(props: DashboardNavbarSlotsProps): VNodeChild
+  right?(props: DashboardNavbarSlotsProps): VNodeChild
+  toggle?(props: DashboardNavbarSlotsProps): VNodeChild
 }
 </script>
 

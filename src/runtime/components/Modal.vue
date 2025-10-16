@@ -1,10 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/modal'
 import type { ButtonProps, IconProps } from '../types'
-import type { EmitsToProps } from '../types/utils'
+import type { EmitsToProps, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>
@@ -62,15 +61,15 @@ export interface ModalEmits extends DialogRootEmits {
 }
 
 export interface ModalSlots {
-  default?(props: { open: boolean }): VNode[]
-  content?(props: { close: () => void }): VNode[]
-  header?(props: { close: () => void }): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  actions?(props?: {}): VNode[]
-  close?(props: { close: () => void, ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string } }): VNode[]
-  body?(props: { close: () => void }): VNode[]
-  footer?(props: { close: () => void }): VNode[]
+  default?(props: { open: boolean }): SlotsReturn
+  content?(props: { close: () => void }): SlotsReturn
+  header?(props: { close: () => void }): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  description?(props?: {}): SlotsReturn
+  actions?(props?: {}): SlotsReturn
+  close?(props: { close: () => void, ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string } }): SlotsReturn
+  body?(props: { close: () => void }): SlotsReturn
+  footer?(props: { close: () => void }): SlotsReturn
 }
 </script>
 

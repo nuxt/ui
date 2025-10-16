@@ -1,11 +1,11 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
 import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps } from '../types'
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type AuthForm = ComponentConfig<typeof theme, AppConfig, 'authForm'>
 
@@ -91,19 +91,19 @@ export type AuthFormEmits<T extends object> = {
   submit: [payload: FormSubmitEvent<T>]
 }
 
-type DynamicFieldSlots<T, F, SlotProps = { field: F, state: T }> = Record<string, (props: SlotProps) => VNode[]> & Record<`${keyof T extends string ? keyof T : never}-field`, (props: SlotProps) => VNode[]>
+type DynamicFieldSlots<T, F, SlotProps = { field: F, state: T }> = Record<string, (props: SlotProps) => SlotsReturn> & Record<`${keyof T extends string ? keyof T : never}-field`, (props: SlotProps) => SlotsReturn>
 
-type DynamicFormFieldSlots<T> = Record<string, (props?: {}) => VNode[]> & Record<`${keyof T extends string ? keyof T : never}-${'label' | 'description' | 'hint' | 'help' | 'error'}`, (props?: {}) => VNode[]>
+type DynamicFormFieldSlots<T> = Record<string, (props?: {}) => SlotsReturn> & Record<`${keyof T extends string ? keyof T : never}-${'label' | 'description' | 'hint' | 'help' | 'error'}`, (props?: {}) => SlotsReturn>
 
 export type AuthFormSlots<T extends object = object, F extends AuthFormField = AuthFormField> = {
-  header?(props?: {}): VNode[]
-  leading?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  providers?(props?: {}): VNode[]
-  validation?(props?: {}): VNode[]
-  submit?(props: { loading: boolean }): VNode[]
-  footer?(props?: {}): VNode[]
+  header?(props?: {}): SlotsReturn
+  leading?(props?: {}): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  description?(props?: {}): SlotsReturn
+  providers?(props?: {}): SlotsReturn
+  validation?(props?: {}): SlotsReturn
+  submit?(props: { loading: boolean }): SlotsReturn
+  footer?(props?: {}): SlotsReturn
 } & DynamicFieldSlots<T, F> & DynamicFormFieldSlots<T>
 
 </script>

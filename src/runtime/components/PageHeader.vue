@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-header'
 import type { ButtonProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type PageHeader = ComponentConfig<typeof theme, AppConfig, 'pageHeader'>
 
@@ -26,11 +26,11 @@ export interface PageHeaderProps {
 }
 
 export interface PageHeaderSlots {
-  headline?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  links?(props?: {}): VNode[]
-  default?(props?: {}): VNode[]
+  headline?(props?: {}): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  description?(props?: {}): SlotsReturn
+  links?(props?: {}): SlotsReturn
+  default?(props?: {}): SlotsReturn
 }
 </script>
 

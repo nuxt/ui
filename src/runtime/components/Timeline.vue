@@ -1,10 +1,9 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/timeline'
 import type { AvatarProps, IconProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Timeline = ComponentConfig<typeof theme, AppConfig, 'timeline'>
@@ -48,7 +47,7 @@ export interface TimelineProps<T extends TimelineItem = TimelineItem> {
   ui?: Timeline['slots']
 }
 
-type SlotProps<T extends TimelineItem> = (props: { item: T }) => VNode[]
+type SlotProps<T extends TimelineItem> = (props: { item: T }) => SlotsReturn
 
 export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
   indicator?: SlotProps<T>

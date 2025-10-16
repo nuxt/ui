@@ -5,6 +5,9 @@ export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P] | undefined
 }
 
+export type MaybeArray<T> = T | T[]
+export type SlotsReturn = MaybeArray<VNode | string | number | boolean | null | undefined>
+
 export type DynamicSlotsKeys<Name extends string | undefined, Suffix extends string | undefined = undefined> = (
   Name extends string
     ? Suffix extends string
@@ -19,7 +22,7 @@ export type DynamicSlots<
 > = {
   [K in DynamicSlotsKeys<T['slot'], Suffix>]?: (
     props: { item: Extract<T, { slot: K extends `${infer Base}-${Suffix}` ? Base : K }> } & ExtraProps
-  ) => VNode[]
+  ) => SlotsReturn
 }
 
 export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extends Record<string, any>

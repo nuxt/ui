@@ -1,10 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipContentEmits, TooltipArrowProps, TooltipTriggerProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tooltip'
 import type { KbdProps } from '../types'
-import type { EmitsToProps } from '../types/utils'
+import type { EmitsToProps, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Tooltip = ComponentConfig<typeof theme, AppConfig, 'tooltip'>
@@ -42,8 +41,8 @@ export interface TooltipProps extends TooltipRootProps {
 export interface TooltipEmits extends TooltipRootEmits {}
 
 export interface TooltipSlots {
-  default(props: { open: boolean }): VNode[]
-  content?(props?: {}): VNode[]
+  default(props: { open: boolean }): SlotsReturn
+  content?(props?: {}): SlotsReturn
 }
 </script>
 

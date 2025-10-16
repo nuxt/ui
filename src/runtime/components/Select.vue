@@ -1,11 +1,10 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectContentEmits, SelectArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>
@@ -106,7 +105,7 @@ export type SelectEmits<A extends ArrayOrNested<SelectItem>, VK extends GetItemK
   focus: [event: FocusEvent]
 } & GetModelValueEmits<A, VK, M>
 
-type SlotProps<T extends SelectItem> = (props: { item: T, index: number }) => VNode[]
+type SlotProps<T extends SelectItem> = (props: { item: T, index: number }) => SlotsReturn
 
 export interface SelectSlots<
   A extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>,
@@ -118,22 +117,22 @@ export interface SelectSlots<
     modelValue?: GetModelValue<A, VK, M>
     open: boolean
     ui: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string }
-  }): VNode[]
+  }): SlotsReturn
   'default'?(props: {
     modelValue?: GetModelValue<A, VK, M>
     open: boolean
-  }): VNode[]
+  }): SlotsReturn
   'trailing'?(props: {
     modelValue?: GetModelValue<A, VK, M>
     open: boolean
     ui: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string }
-  }): VNode[]
+  }): SlotsReturn
   'item'?: SlotProps<T>
   'item-leading'?: SlotProps<T>
   'item-label'?: SlotProps<T>
   'item-trailing'?: SlotProps<T>
-  'content-top'?: (props?: {}) => VNode[]
-  'content-bottom'?: (props?: {}) => VNode[]
+  'content-top'?: (props?: {}) => SlotsReturn
+  'content-bottom'?: (props?: {}) => SlotsReturn
 }
 </script>
 

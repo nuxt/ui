@@ -1,10 +1,10 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
 import type { ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>
 
@@ -107,19 +107,19 @@ export interface FileUploadSlots<M extends boolean = false> {
   'default'?(props: {
     open: UseFileDialogReturn['open']
     removeFile: (index?: number) => void
-  }): VNode[]
-  'leading'?(props?: {}): VNode[]
-  'label'?(props?: {}): VNode[]
-  'description'?(props?: {}): VNode[]
-  'actions'?(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
-  'files'?(props: { files?: FileUploadFiles<M> }): VNode[]
-  'files-top'?(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
-  'files-bottom'?(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
-  'file'?(props: { file: File, index: number }): VNode[]
-  'file-leading'?(props: { file: File, index: number }): VNode[]
-  'file-name'?(props: { file: File, index: number }): VNode[]
-  'file-size'?(props: { file: File, index: number }): VNode[]
-  'file-trailing'?(props: { file: File, index: number }): VNode[]
+  }): SlotsReturn
+  'leading'?(props?: {}): SlotsReturn
+  'label'?(props?: {}): SlotsReturn
+  'description'?(props?: {}): SlotsReturn
+  'actions'?(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): SlotsReturn
+  'files'?(props: { files?: FileUploadFiles<M> }): SlotsReturn
+  'files-top'?(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): SlotsReturn
+  'files-bottom'?(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): SlotsReturn
+  'file'?(props: { file: File, index: number }): SlotsReturn
+  'file-leading'?(props: { file: File, index: number }): SlotsReturn
+  'file-name'?(props: { file: File, index: number }): SlotsReturn
+  'file-size'?(props: { file: File, index: number }): SlotsReturn
+  'file-trailing'?(props: { file: File, index: number }): SlotsReturn
 }
 </script>
 

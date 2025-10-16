@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/banner'
 import type { ButtonProps, IconProps, LinkProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Banner = ComponentConfig<typeof theme, AppConfig, 'banner'>
 
@@ -54,10 +54,10 @@ export interface BannerProps {
 }
 
 export interface BannerSlots {
-  leading?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  actions?(props?: {}): VNode[]
-  close?(props: { ui: any }): VNode[]
+  leading?(props?: {}): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  actions?(props?: {}): SlotsReturn
+  close?(props: { ui: any }): SlotsReturn
 }
 
 export interface BannerEmits {

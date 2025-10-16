@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-table'
 import type { PricingPlanProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type PricingTable = ComponentConfig<typeof theme, AppConfig, 'pricingTable'>
 
@@ -14,7 +14,7 @@ type DynamicSlots<T extends { id: string }, S extends string | undefined = undef
       ? (K | `${K}-${S}`)
       : K
     : never
-  ]?: (props: { tier: Extract<T, { id: K extends `${infer Base}-${S}` ? Base : K }> }) => VNode[]
+  ]?: (props: { tier: Extract<T, { id: K extends `${infer Base}-${S}` ? Base : K }> }) => SlotsReturn
 }
 
 type FeatureDynamicSlots<T extends PricingTableSectionFeature, S extends string | undefined = undefined> = {
@@ -23,7 +23,7 @@ type FeatureDynamicSlots<T extends PricingTableSectionFeature, S extends string 
       ? (`feature-${K}` | `feature-${K}-${S}`)
       : `feature-${K}`
     : never
-  ]?: (props: { feature: T, tier: PricingTableTier, section: PricingTableSection }) => VNode[]
+  ]?: (props: { feature: T, tier: PricingTableTier, section: PricingTableSection }) => SlotsReturn
 }
 
 type SectionDynamicSlots<T extends PricingTableSection, S extends string | undefined = undefined> = {
@@ -32,7 +32,7 @@ type SectionDynamicSlots<T extends PricingTableSection, S extends string | undef
       ? (`section-${K}` | `section-${K}-${S}`)
       : `section-${K}`
     : never
-  ]?: (props: { section: T }) => VNode[]
+  ]?: (props: { section: T }) => SlotsReturn
 }
 
 export type PricingTableTier = Pick<PricingPlanProps, 'title' | 'description' | 'badge' | 'billingCycle' | 'billingPeriod' | 'price' | 'discount' | 'button' | 'highlight'> & {
@@ -79,10 +79,10 @@ export interface PricingTableProps<T extends PricingTableTier = PricingTableTier
   ui?: PricingTable['slots']
 }
 
-type SlotProps<T extends PricingTableTier> = (props: { tier: T }) => VNode[]
+type SlotProps<T extends PricingTableTier> = (props: { tier: T }) => SlotsReturn
 
 export type PricingTableSlots<T extends PricingTableTier = PricingTableTier> = {
-  'caption'?: (props?: {}) => VNode[]
+  'caption'?: (props?: {}) => SlotsReturn
   'tier'?: SlotProps<T>
   'tier-title'?: SlotProps<T>
   'tier-description'?: SlotProps<T>
@@ -91,9 +91,9 @@ export type PricingTableSlots<T extends PricingTableTier = PricingTableTier> = {
   'tier-billing'?: SlotProps<T>
   'tier-discount'?: SlotProps<T>
   'tier-price'?: SlotProps<T>
-  'section-title'?: (props: { section: PricingTableSection<T> }) => VNode[]
-  'feature-title'?: (props: { feature: PricingTableSectionFeature<T>, section: PricingTableSection<T> }) => VNode[]
-  'feature-value'?: (props: { feature: PricingTableSectionFeature<T>, tier: T, section: PricingTableSection<T> }) => VNode[]
+  'section-title'?: (props: { section: PricingTableSection<T> }) => SlotsReturn
+  'feature-title'?: (props: { feature: PricingTableSectionFeature<T>, section: PricingTableSection<T> }) => SlotsReturn
+  'feature-value'?: (props: { feature: PricingTableSectionFeature<T>, tier: T, section: PricingTableSection<T> }) => SlotsReturn
 } & DynamicSlots<T, 'title' | 'description' | 'badge' | 'button' | 'billing' | 'discount' | 'price'>
 & FeatureDynamicSlots<PricingTableSectionFeature<T>, 'title' | 'value'>
 & SectionDynamicSlots<PricingTableSection<T>, 'title'>

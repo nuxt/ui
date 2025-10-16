@@ -1,10 +1,10 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { NuxtError } from '#app'
 import theme from '#build/ui/error'
 import type { ButtonProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Error = ComponentConfig<typeof theme, AppConfig, 'error'>
 
@@ -31,11 +31,11 @@ export interface ErrorProps {
 }
 
 export interface ErrorSlots {
-  default?(props?: {}): VNode[]
-  statusCode?(props?: {}): VNode[]
-  statusMessage?(props?: {}): VNode[]
-  message?(props?: {}): VNode[]
-  links?(props?: {}): VNode[]
+  default?(props?: {}): SlotsReturn
+  statusCode?(props?: {}): SlotsReturn
+  statusMessage?(props?: {}): SlotsReturn
+  message?(props?: {}): SlotsReturn
+  links?(props?: {}): SlotsReturn
 }
 </script>
 

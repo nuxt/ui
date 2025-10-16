@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { ProgressRootProps, ProgressRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/progress'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Progress = ComponentConfig<typeof theme, AppConfig, 'progress'>
 
@@ -45,9 +45,9 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
 export interface ProgressEmits extends ProgressRootEmits {}
 
 export type ProgressSlots = {
-  status?(props: { percent?: number }): VNode[]
+  status?(props: { percent?: number }): SlotsReturn
 } & {
-  [key: string]: (props: { step: number }) => VNode[]
+  [key: string]: (props: { step: number }) => SlotsReturn
 }
 
 </script>

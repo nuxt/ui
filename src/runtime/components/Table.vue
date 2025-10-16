@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Ref, WatchOptions, VNode } from 'vue'
+import type { Ref, WatchOptions } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Cell, Header, RowData, TableMeta } from '@tanstack/table-core'
 import type {
@@ -38,6 +38,7 @@ import type {
 import type { VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '#build/ui/table'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 declare module '@tanstack/table-core' {
 
@@ -204,17 +205,17 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   ui?: Table['slots']
 }
 
-type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => VNode[]> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => VNode[]>
-type DynamicFooterSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => VNode[]> & Record<`${K extends string ? K : never}-footer`, (props: HeaderContext<T, unknown>) => VNode[]>
-type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => VNode[]> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => VNode[]>
+type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => SlotsReturn> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => SlotsReturn>
+type DynamicFooterSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => SlotsReturn> & Record<`${K extends string ? K : never}-footer`, (props: HeaderContext<T, unknown>) => SlotsReturn>
+type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => SlotsReturn> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => SlotsReturn>
 
 export type TableSlots<T extends TableData = TableData> = {
-  'expanded'?: (props: { row: Row<T> }) => VNode[]
-  'empty'?: (props?: {}) => VNode[]
-  'loading'?: (props?: {}) => VNode[]
-  'caption'?: (props?: {}) => VNode[]
-  'body-top'?: (props?: {}) => VNode[]
-  'body-bottom'?: (props?: {}) => VNode[]
+  'expanded'?: (props: { row: Row<T> }) => SlotsReturn
+  'empty'?: (props?: {}) => SlotsReturn
+  'loading'?: (props?: {}) => SlotsReturn
+  'caption'?: (props?: {}) => SlotsReturn
+  'body-top'?: (props?: {}) => SlotsReturn
+  'body-bottom'?: (props?: {}) => SlotsReturn
 } & DynamicHeaderSlots<T> & DynamicFooterSlots<T> & DynamicCellSlots<T>
 
 </script>

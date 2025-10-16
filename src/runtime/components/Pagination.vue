@@ -1,10 +1,10 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { PaginationRootProps, PaginationRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pagination'
 import type { ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Pagination = ComponentConfig<typeof theme, AppConfig, 'pagination'>
 
@@ -83,11 +83,11 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
 export interface PaginationEmits extends PaginationRootEmits {}
 
 export interface PaginationSlots {
-  first?(props?: {}): VNode[]
-  prev?(props?: {}): VNode[]
-  next?(props?: {}): VNode[]
-  last?(props?: {}): VNode[]
-  ellipsis?(props?: {}): VNode[]
+  first?(props?: {}): SlotsReturn
+  prev?(props?: {}): SlotsReturn
+  next?(props?: {}): SlotsReturn
+  last?(props?: {}): SlotsReturn
+  ellipsis?(props?: {}): SlotsReturn
   item?(props: {
     page: number
     pageCount: number
@@ -98,7 +98,7 @@ export interface PaginationSlots {
       value: number
     }
     index: number
-  }): VNode[]
+  }): SlotsReturn
 }
 </script>
 

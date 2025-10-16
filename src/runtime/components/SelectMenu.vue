@@ -1,11 +1,10 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type SelectMenu = ComponentConfig<typeof theme, AppConfig, 'selectMenu'>
@@ -152,7 +151,7 @@ export type SelectMenuEmits<A extends ArrayOrNested<SelectMenuItem>, VK extends 
   } | undefined]
 } & GetModelValueEmits<A, VK, M>
 
-type SlotProps<T extends SelectMenuItem> = (props: { item: T, index: number }) => VNode[]
+type SlotProps<T extends SelectMenuItem> = (props: { item: T, index: number }) => SlotsReturn
 
 export interface SelectMenuSlots<
   A extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>,
@@ -164,24 +163,24 @@ export interface SelectMenuSlots<
     modelValue?: GetModelValue<A, VK, M>
     open: boolean
     ui: { [K in keyof Required<SelectMenu['slots']>]: (props?: Record<string, any>) => string }
-  }): VNode[]
+  }): SlotsReturn
   'default'?(props: {
     modelValue?: GetModelValue<A, VK, M>
     open: boolean
-  }): VNode[]
+  }): SlotsReturn
   'trailing'?(props: {
     modelValue?: GetModelValue<A, VK, M>
     open: boolean
     ui: { [K in keyof Required<SelectMenu['slots']>]: (props?: Record<string, any>) => string }
-  }): VNode[]
-  'empty'?(props: { searchTerm?: string }): VNode[]
+  }): SlotsReturn
+  'empty'?(props: { searchTerm?: string }): SlotsReturn
   'item'?: SlotProps<T>
   'item-leading'?: SlotProps<T>
   'item-label'?: SlotProps<T>
   'item-trailing'?: SlotProps<T>
-  'content-top'?: (props?: {}) => VNode[]
-  'content-bottom'?: (props?: {}) => VNode[]
-  'create-item-label'?(props: { item: string }): VNode[]
+  'content-top'?: (props?: {}) => SlotsReturn
+  'content-bottom'?: (props?: {}) => SlotsReturn
+  'create-item-label'?(props: { item: string }): SlotsReturn
 }
 </script>
 

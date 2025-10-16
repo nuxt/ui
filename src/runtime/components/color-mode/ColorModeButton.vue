@@ -14,10 +14,11 @@ export interface ColorModeButtonProps extends /** @vue-ignore */ Pick<ButtonProp
 </script>
 
 <script setup lang="ts">
-import { type VNode, computed } from 'vue'
+import { computed } from 'vue'
 import { useColorMode, useAppConfig } from '#imports'
 import { useLocale } from '../../composables/useLocale'
 import UButton from '../Button.vue'
+import type { SlotsReturn } from '../../types/utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -26,7 +27,7 @@ withDefaults(defineProps<ColorModeButtonProps>(), {
   variant: 'ghost'
 })
 defineSlots<{
-  fallback?(props?: {}): VNode[]
+  fallback?(props?: {}): SlotsReturn
 }>()
 
 const { t } = useLocale()

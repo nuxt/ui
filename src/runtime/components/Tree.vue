@@ -1,11 +1,10 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { TreeRootProps, TreeRootEmits, TreeItemSelectEvent, TreeItemToggleEvent } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
 import type { IconProps } from '../types'
-import type { DynamicSlots, GetItemKeys } from '../types/utils'
+import type { DynamicSlots, GetItemKeys, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Tree = ComponentConfig<typeof theme, AppConfig, 'tree'>
@@ -117,7 +116,7 @@ type SlotProps<T extends TreeItem> = (props: {
   indeterminate: boolean | undefined
   handleSelect: () => void
   handleToggle: () => void
-}) => VNode[]
+}) => SlotsReturn
 
 export type TreeSlots<
   T extends TreeItem[] = TreeItem[]

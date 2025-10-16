@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/marquee'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Marquee = ComponentConfig<typeof theme, AppConfig, 'marquee'>
 
@@ -42,7 +42,7 @@ export interface MarqueeProps {
 }
 
 export interface MarqueeSlots {
-  default(props?: {}): VNode[]
+  default(props?: {}): SlotsReturn
 }
 </script>
 

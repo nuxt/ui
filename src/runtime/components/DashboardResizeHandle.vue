@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-resize-handle'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type DashboardResizeHandle = ComponentConfig<typeof theme, AppConfig, 'dashboardResizeHandle'>
 
@@ -16,7 +16,7 @@ export interface DashboardResizeHandleProps {
 }
 
 export interface DashboardResizeHandleSlots {
-  default?(props?: {}): VNode[]
+  default?(props?: {}): SlotsReturn
 }
 </script>
 

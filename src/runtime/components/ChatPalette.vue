@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-palette'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type ChatPalette = ComponentConfig<typeof theme, AppConfig, 'chatPalette'>
 
@@ -17,8 +17,8 @@ export interface ChatPaletteProps {
 }
 
 export interface ChatPaletteSlots {
-  default?(props?: {}): VNode[]
-  prompt?(props?: {}): VNode[]
+  default?(props?: {}): SlotsReturn
+  prompt?(props?: {}): SlotsReturn
 }
 </script>
 

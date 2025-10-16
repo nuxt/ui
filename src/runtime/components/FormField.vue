@@ -1,8 +1,9 @@
 <script lang="ts">
-import type { Ref, VNode } from 'vue'
+import type { Ref } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form-field'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type FormField = ComponentConfig<typeof theme, AppConfig, 'formField'>
 
@@ -38,12 +39,12 @@ export interface FormFieldProps {
 }
 
 export interface FormFieldSlots {
-  label?(props: { label?: string }): VNode[]
-  hint?(props: { hint?: string }): VNode[]
-  description?(props: { description?: string }): VNode[]
-  help?(props: { help?: string }): VNode[]
-  error?(props: { error?: boolean | string }): VNode[]
-  default(props: { error?: boolean | string }): VNode[]
+  label?(props: { label?: string }): SlotsReturn
+  hint?(props: { hint?: string }): SlotsReturn
+  description?(props: { description?: string }): SlotsReturn
+  help?(props: { help?: string }): SlotsReturn
+  error?(props: { error?: boolean | string }): SlotsReturn
+  default(props: { error?: boolean | string }): SlotsReturn
 }
 </script>
 

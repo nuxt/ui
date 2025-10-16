@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-body'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type PageBody = ComponentConfig<typeof theme, AppConfig, 'pageBody'>
 
@@ -16,7 +16,7 @@ export interface PageBodyProps {
 }
 
 export interface PageBodySlots {
-  default(props?: {}): VNode[]
+  default(props?: {}): SlotsReturn
 }
 </script>
 

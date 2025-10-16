@@ -1,10 +1,11 @@
 <script lang="ts">
-import type { ComponentPublicInstance, VNode } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UIMessage, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
 import type { ButtonProps, ChatMessageProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
 
@@ -59,12 +60,12 @@ export interface ChatMessagesProps {
 }
 
 export interface ChatMessagesSlots {
-  default?(props?: {}): VNode[]
-  indicator?(props?: {}): VNode[]
-  viewport?(props: { onClick: () => void }): VNode[]
-  content?(props: { message: UIMessage }): VNode[]
-  leading?(props: { message: UIMessage }): VNode[]
-  actions?(props: { message: UIMessage }): VNode[]
+  default?(props?: {}): SlotsReturn
+  indicator?(props?: {}): SlotsReturn
+  viewport?(props: { onClick: () => void }): SlotsReturn
+  content?(props: { message: UIMessage }): SlotsReturn
+  leading?(props: { message: UIMessage }): SlotsReturn
+  actions?(props: { message: UIMessage }): SlotsReturn
 }
 </script>
 

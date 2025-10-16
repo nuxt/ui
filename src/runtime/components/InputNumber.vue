@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { NumberFieldRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-number'
 import type { ButtonProps, IconProps } from '../types'
 import type { ModelModifiers } from '../types/input'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>
 
@@ -72,8 +72,8 @@ export interface InputNumberEmits {
 }
 
 export interface InputNumberSlots {
-  increment?(props?: {}): VNode[]
-  decrement?(props?: {}): VNode[]
+  increment?(props?: {}): SlotsReturn
+  decrement?(props?: {}): SlotsReturn
 }
 </script>
 

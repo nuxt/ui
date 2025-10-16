@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-cta'
 import type { ButtonProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type PageCTA = ComponentConfig<typeof theme, AppConfig, 'pageCTA'>
 
@@ -39,15 +39,15 @@ export interface PageCTAProps {
 }
 
 export interface PageCTASlots {
-  top?(props?: {}): VNode[]
-  header?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  body?(props?: {}): VNode[]
-  footer?(props?: {}): VNode[]
-  links?(props?: {}): VNode[]
-  default?(props?: {}): VNode[]
-  bottom?(props?: {}): VNode[]
+  top?(props?: {}): SlotsReturn
+  header?(props?: {}): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  description?(props?: {}): SlotsReturn
+  body?(props?: {}): SlotsReturn
+  footer?(props?: {}): SlotsReturn
+  links?(props?: {}): SlotsReturn
+  default?(props?: {}): SlotsReturn
+  bottom?(props?: {}): SlotsReturn
 }
 </script>
 

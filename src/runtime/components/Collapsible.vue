@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/collapsible'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Collapsible = ComponentConfig<typeof theme, AppConfig, 'collapsible'>
 
@@ -20,8 +20,8 @@ export interface CollapsibleProps extends Pick<CollapsibleRootProps, 'defaultOpe
 export interface CollapsibleEmits extends CollapsibleRootEmits {}
 
 export interface CollapsibleSlots {
-  default?(props: { open: boolean }): VNode[]
-  content?(props?: {}): VNode[]
+  default?(props: { open: boolean }): SlotsReturn
+  content?(props?: {}): SlotsReturn
 }
 </script>
 

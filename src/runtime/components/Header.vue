@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/header'
 import type { ButtonProps, DrawerProps, ModalProps, SlideoverProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Header = ComponentConfig<typeof theme, AppConfig, 'header'>
 
@@ -42,15 +42,15 @@ export interface HeaderProps<T extends HeaderMode = HeaderMode> {
 }
 
 export interface HeaderSlots {
-  title?(props?: {}): VNode[]
-  left?(props?: {}): VNode[]
-  default?(props?: {}): VNode[]
-  right?(props?: {}): VNode[]
-  toggle?(props: { open: boolean, toggle: () => void }): VNode[]
-  top?(props?: {}): VNode[]
-  bottom?(props?: {}): VNode[]
-  body?(props?: {}): VNode[]
-  content?(props?: {}): VNode[]
+  title?(props?: {}): SlotsReturn
+  left?(props?: {}): SlotsReturn
+  default?(props?: {}): SlotsReturn
+  right?(props?: {}): SlotsReturn
+  toggle?(props: { open: boolean, toggle: () => void }): SlotsReturn
+  top?(props?: {}): SlotsReturn
+  bottom?(props?: {}): SlotsReturn
+  body?(props?: {}): SlotsReturn
+  content?(props?: {}): SlotsReturn
 }
 </script>
 

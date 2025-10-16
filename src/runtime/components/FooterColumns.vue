@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/footer-columns'
 import type { IconProps, LinkProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type FooterColumns = ComponentConfig<typeof theme, AppConfig, 'footerColumns'>
 
@@ -33,13 +33,13 @@ export interface FooterColumnsProps<T extends FooterColumnLink = FooterColumnLin
   ui?: FooterColumns['slots']
 }
 
-type SlotProps<T> = (props: { link: T, active: boolean }) => VNode[]
+type SlotProps<T> = (props: { link: T, active: boolean }) => SlotsReturn
 
 export interface FooterColumnsSlots<T extends FooterColumnLink = FooterColumnLink> {
-  'left'?(props?: {}): VNode[]
-  'default'?(props?: {}): VNode[]
-  'right'?(props?: {}): VNode[]
-  'column-label'?: (props: { column: FooterColumn<T> }) => VNode[]
+  'left'?(props?: {}): SlotsReturn
+  'default'?(props?: {}): SlotsReturn
+  'right'?(props?: {}): SlotsReturn
+  'column-label'?: (props: { column: FooterColumn<T> }) => SlotsReturn
   'link'?: SlotProps<T>
   'link-leading'?: SlotProps<T>
   'link-label'?: SlotProps<T>

@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 import theme from '#build/ui/footer'
 
 type Footer = ComponentConfig<typeof theme, AppConfig, 'footer'>
@@ -17,11 +17,11 @@ export interface FooterProps {
 }
 
 export interface FooterSlots {
-  left?(props?: {}): VNode[]
-  default?(props?: {}): VNode[]
-  right?(props?: {}): VNode[]
-  top?(props?: {}): VNode[]
-  bottom?(props?: {}): VNode[]
+  left?(props?: {}): SlotsReturn
+  default?(props?: {}): SlotsReturn
+  right?(props?: {}): SlotsReturn
+  top?(props?: {}): SlotsReturn
+  bottom?(props?: {}): SlotsReturn
 }
 </script>
 

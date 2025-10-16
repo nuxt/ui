@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/textarea'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
 import type { ModelModifiers } from '../types/input'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>
 
@@ -57,9 +57,9 @@ export interface TextareaEmits<T extends TextareaValue = TextareaValue> {
 }
 
 export interface TextareaSlots {
-  leading?(props?: {}): VNode[]
-  default(props?: {}): VNode[]
-  trailing?(props?: {}): VNode[]
+  leading?(props?: {}): SlotsReturn
+  default(props?: {}): SlotsReturn
+  trailing?(props?: {}): SlotsReturn
 }
 </script>
 

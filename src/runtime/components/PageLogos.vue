@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-logos'
 import type { MarqueeProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type PageLogos = ComponentConfig<typeof theme, AppConfig, 'pageLogos'>
 
@@ -26,7 +26,7 @@ export interface PageLogosProps {
 }
 
 export interface PageLogosSlots {
-  default(props?: {}): VNode[]
+  default(props?: {}): SlotsReturn
 }
 </script>
 

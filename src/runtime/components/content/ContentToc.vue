@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
 import type { TocLink } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-toc'
 import type { IconProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
+import type { SlotsReturn } from '../../types/utils'
 
 type ContentToc = ComponentConfig<typeof theme, AppConfig, 'contentToc'>
 
@@ -53,16 +53,16 @@ export type ContentTocEmits = CollapsibleRootEmits & {
   move: [id: string]
 }
 
-type SlotProps<T> = (props: { link: T }) => VNode[]
+type SlotProps<T> = (props: { link: T }) => SlotsReturn
 
 export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
-  leading?(props: { open: boolean }): VNode[]
-  default?(props: { open: boolean }): VNode[]
-  trailing?(props: { open: boolean }): VNode[]
-  content?(props: { links: T[] }): VNode[]
+  leading?(props: { open: boolean }): SlotsReturn
+  default?(props: { open: boolean }): SlotsReturn
+  trailing?(props: { open: boolean }): SlotsReturn
+  content?(props: { links: T[] }): SlotsReturn
   link?: SlotProps<T>
-  top?(props: { links?: T[] }): VNode[]
-  bottom?(props: { links?: T[] }): VNode[]
+  top?(props: { links?: T[] }): SlotsReturn
+  bottom?(props: { links?: T[] }): SlotsReturn
 }
 </script>
 

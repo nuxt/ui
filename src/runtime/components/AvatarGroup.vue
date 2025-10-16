@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar-group'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type AvatarGroup = ComponentConfig<typeof theme, AppConfig, 'avatarGroup'>
 
@@ -25,7 +25,7 @@ export interface AvatarGroupProps {
 }
 
 export interface AvatarGroupSlots {
-  default?(props?: {}): VNode[]
+  default?(props?: {}): SlotsReturn
 }
 </script>
 
@@ -50,6 +50,9 @@ const max = computed(() => typeof props.max === 'string' ? Number.parseInt(props
 
 const children = computed(() => {
   let children = slots.default?.()
+  if (!Array.isArray(children)) {
+    children = children ? [children] : []
+  }
   if (children?.length) {
     children = children.flatMap((child: any) => {
       if (typeof child.type === 'symbol') {

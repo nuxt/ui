@@ -1,11 +1,11 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { ComponentPublicInstance, VNode } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
 import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tabs'
 import type { AvatarProps, BadgeProps, IconProps } from '../types'
-import type { DynamicSlots, GetItemKeys } from '../types/utils'
+import type { DynamicSlots, GetItemKeys, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Tabs = ComponentConfig<typeof theme, AppConfig, 'tabs'>
@@ -72,15 +72,15 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
 
 export interface TabsEmits extends TabsRootEmits<string | number> {}
 
-type SlotProps<T extends TabsItem> = (props: { item: T, index: number }) => VNode[]
+type SlotProps<T extends TabsItem> = (props: { item: T, index: number }) => SlotsReturn
 
 export type TabsSlots<T extends TabsItem = TabsItem> = {
   'leading'?: SlotProps<T>
   'default': SlotProps<T>
   'trailing'?: SlotProps<T>
   'content'?: SlotProps<T>
-  'list-leading'?: (props?: {}) => VNode[]
-  'list-trailing'?: (props?: {}) => VNode[]
+  'list-leading'?: (props?: {}) => SlotsReturn
+  'list-trailing'?: (props?: {}) => SlotsReturn
 } & DynamicSlots<T, undefined, { index: number }>
 
 </script>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { VNode } from 'vue'
 import type { ChipProps } from '@nuxt/ui'
 import { camelCase } from 'scule'
 import { hash } from 'ohash'
 import { useElementSize } from '@vueuse/core'
 import { get, set } from '#ui/utils'
+import type { SlotsReturn } from '#ui/types/utils'
 
 const props = withDefaults(defineProps<{
   name: string
@@ -66,8 +66,8 @@ const props = withDefaults(defineProps<{
 })
 
 const slots = defineSlots<{
-  options?(props?: {}): VNode
-  code?(props?: {}): VNode
+  options?(props?: {}): SlotsReturn
+  code?(props?: {}): SlotsReturn
 }>()
 
 const el = ref<HTMLElement | null>(null)

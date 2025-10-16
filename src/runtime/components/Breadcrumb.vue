@@ -1,10 +1,9 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/breadcrumb'
 import type { AvatarProps, IconProps, LinkProps } from '../types'
-import type { DynamicSlots, GetItemKeys } from '../types/utils'
+import type { DynamicSlots, GetItemKeys, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Breadcrumb = ComponentConfig<typeof theme, AppConfig, 'breadcrumb'>
@@ -44,14 +43,14 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
   ui?: Breadcrumb['slots']
 }
 
-type SlotProps<T extends BreadcrumbItem> = (props: { item: T, index: number, active?: boolean }) => VNode[]
+type SlotProps<T extends BreadcrumbItem> = (props: { item: T, index: number, active?: boolean }) => SlotsReturn
 
 export type BreadcrumbSlots<T extends BreadcrumbItem = BreadcrumbItem> = {
   'item'?: SlotProps<T>
   'item-leading'?: SlotProps<T>
   'item-label'?: SlotProps<T>
   'item-trailing'?: SlotProps<T>
-  'separator'?: (props?: {}) => VNode[]
+  'separator'?: (props?: {}) => SlotsReturn
 } & DynamicSlots<T, 'leading' | 'label' | 'trailing', { index: number, active?: boolean }>
 
 </script>

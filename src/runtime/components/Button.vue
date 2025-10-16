@@ -1,10 +1,11 @@
 <script lang="ts">
-import type { Ref, VNode } from 'vue'
+import type { Ref } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/button'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { LinkProps, AvatarProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Button = ComponentConfig<typeof theme, AppConfig, 'button'>
 
@@ -36,9 +37,9 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
 }
 
 export interface ButtonSlots {
-  leading?(props?: {}): VNode[]
-  default?(props?: {}): VNode[]
-  trailing?(props?: {}): VNode[]
+  leading?(props?: {}): SlotsReturn
+  default?(props?: {}): SlotsReturn
+  trailing?(props?: {}): SlotsReturn
 }
 </script>
 

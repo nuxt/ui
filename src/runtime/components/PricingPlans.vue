@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plans'
 import type { PricingPlanProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type PricingPlans = ComponentConfig<typeof theme, AppConfig, 'pricingPlans'>
 
@@ -34,7 +34,7 @@ export interface PricingPlansProps {
 }
 
 export interface PricingPlansSlots {
-  default(props?: {}): VNode[]
+  default(props?: {}): SlotsReturn
 }
 </script>
 
@@ -56,7 +56,17 @@ const appConfig = useAppConfig() as PricingPlans['AppConfig']
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingPlans || {}) }))
 
-const count = computed(() => props.plans?.length || slots.default?.()?.flatMap(mapSlot).filter(Boolean)?.length || 3)
+const count = computed(() => {
+  if (props.plans?.length) {
+    return props.plans.length
+  }
+  const children = slots.default?.()
+  if (Array.isArray(children)) {
+    return children.flatMap(mapSlot).filter(Boolean).length || 3
+  } else {
+    return children ? 1 : 3
+  }
+})
 
 function mapSlot(slot: any) {
   if (typeof slot.type === 'symbol') {

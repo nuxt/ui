@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plan'
 import type { BadgeProps, ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type PricingPlan = ComponentConfig<typeof theme, AppConfig, 'pricingPlan'>
 
@@ -93,19 +93,19 @@ export interface PricingPlanProps {
 }
 
 export interface PricingPlanSlots {
-  badge?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  price?(props?: {}): VNode[]
-  discount?(props?: {}): VNode[]
-  billing?(props?: {}): VNode[]
-  features?(props?: {}): VNode[]
-  button?(props?: {}): VNode[]
-  header?(props?: {}): VNode[]
-  body?(props?: {}): VNode[]
-  footer?(props?: {}): VNode[]
-  tagline?(props?: {}): VNode[]
-  terms?(props?: {}): VNode[]
+  badge?(props?: {}): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  description?(props?: {}): SlotsReturn
+  price?(props?: {}): SlotsReturn
+  discount?(props?: {}): SlotsReturn
+  billing?(props?: {}): SlotsReturn
+  features?(props?: {}): SlotsReturn
+  button?(props?: {}): SlotsReturn
+  header?(props?: {}): SlotsReturn
+  body?(props?: {}): SlotsReturn
+  footer?(props?: {}): SlotsReturn
+  tagline?(props?: {}): SlotsReturn
+  terms?(props?: {}): SlotsReturn
 }
 </script>
 

@@ -1,10 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { CheckboxGroupRootProps, CheckboxGroupRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox-group'
 import type { CheckboxProps } from '../types'
-import type { AcceptableValue, GetItemKeys, GetModelValue } from '../types/utils'
+import type { AcceptableValue, GetItemKeys, GetModelValue, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>
@@ -68,10 +67,10 @@ export type CheckboxGroupEmits<T extends CheckboxGroupItem[] = CheckboxGroupItem
   change: [event: Event]
 }
 
-type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => VNode[]
+type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => SlotsReturn
 
 export interface CheckboxGroupSlots<T extends CheckboxGroupItem[] = CheckboxGroupItem[]> {
-  legend?(props?: {}): VNode[]
+  legend?(props?: {}): SlotsReturn
   label?: SlotProps<T[number]>
   description?: SlotProps<T[number]>
 }

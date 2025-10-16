@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/field-group'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type FieldGroup = ComponentConfig<typeof theme, AppConfig, 'fieldGroup'>
 
@@ -26,7 +26,7 @@ export interface FieldGroupProps {
 }
 
 export interface FieldGroupSlots {
-  default?(props?: {}): VNode[]
+  default?(props?: {}): SlotsReturn
 }
 </script>
 

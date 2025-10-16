@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
+import type { SlotsReturn } from '../../types/utils'
 import theme from '#build/ui/prose/code-group'
 
 type ProseCodeGroup = ComponentConfig<typeof theme, AppConfig, 'codeGroup', 'ui.prose'>
@@ -21,7 +21,7 @@ export interface ProseCodeGroupProps {
 }
 
 export interface ProseCodeGroupSlots {
-  default(props?: {}): VNode[]
+  default(props?: {}): SlotsReturn
 }
 </script>
 
@@ -54,7 +54,11 @@ const items = computed<{
 }[]>(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   rerenderCount.value
-  return slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
+  let children = slots.default?.()
+  if (!Array.isArray(children)) {
+    children = [children]
+  }
+  return children?.flatMap(transformSlot).filter(Boolean) || []
 })
 
 function transformSlot(slot: any, index: number) {

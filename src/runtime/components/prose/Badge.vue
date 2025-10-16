@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/badge'
 import type { ComponentConfig } from '../../types/tv'
+import type { SlotsReturn } from '../../types/utils'
 
 type ProseBadge = ComponentConfig<typeof theme, AppConfig, 'badge', 'ui.prose'>
 
@@ -11,7 +11,7 @@ export interface ProseBadgeProps {
 }
 
 export interface ProseBadgeSlots {
-  default(props?: {}): VNode[]
+  default(props?: {}): SlotsReturn
 }
 </script>
 

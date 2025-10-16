@@ -1,10 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toast'
 import type { AvatarProps, ButtonProps, IconProps, ProgressProps } from '../types'
-import type { StringOrVNode } from '../types/utils'
+import type { StringOrVNode, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Toast = ComponentConfig<typeof theme, AppConfig, 'toast'>
@@ -63,11 +62,11 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
 export interface ToastEmits extends ToastRootEmits {}
 
 export interface ToastSlots {
-  leading?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  actions?(props?: {}): VNode[]
-  close?(props: { ui: { [K in keyof Required<Toast['slots']>]: (props?: Record<string, any>) => string } }): VNode[]
+  leading?(props?: {}): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  description?(props?: {}): SlotsReturn
+  actions?(props?: {}): SlotsReturn
+  close?(props: { ui: { [K in keyof Required<Toast['slots']>]: (props?: Record<string, any>) => string } }): SlotsReturn
 }
 </script>
 

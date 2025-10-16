@@ -1,10 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
 import type { DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/drawer'
-import type { EmitsToProps } from '../types/utils'
+import type { EmitsToProps, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Drawer = ComponentConfig<typeof theme, AppConfig, 'drawer'>
@@ -53,13 +52,13 @@ export interface DrawerEmits extends DrawerRootEmits {
 }
 
 export interface DrawerSlots {
-  default?(props?: {}): VNode[]
-  content?(props?: {}): VNode[]
-  header?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  body?(props?: {}): VNode[]
-  footer?(props?: {}): VNode[]
+  default?(props?: {}): SlotsReturn
+  content?(props?: {}): SlotsReturn
+  header?(props?: {}): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  description?(props?: {}): SlotsReturn
+  body?(props?: {}): SlotsReturn
+  footer?(props?: {}): SlotsReturn
 }
 </script>
 

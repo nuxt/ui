@@ -1,10 +1,10 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-sidebar'
 import type { UseResizableProps } from '../composables/useResizable'
 import type { ButtonProps, DrawerProps, ModalProps, SlideoverProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type DashboardSidebar = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebar'>
 
@@ -37,12 +37,12 @@ export interface DashboardSidebarProps<T extends DashboardSidebarMode = Dashboar
 }
 
 export interface DashboardSidebarSlots {
-  'header'?(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): VNode[]
-  'default'?(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): VNode[]
-  'footer'?(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): VNode[]
-  'toggle'?(props: { open: boolean, toggle: () => void }): VNode[]
-  'content'?(props?: {}): VNode[]
-  'resize-handle'?(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): VNode[]
+  'header'?(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): SlotsReturn
+  'default'?(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): SlotsReturn
+  'footer'?(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): SlotsReturn
+  'toggle'?(props: { open: boolean, toggle: () => void }): SlotsReturn
+  'content'?(props?: {}): SlotsReturn
+  'resize-handle'?(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): SlotsReturn
 }
 </script>
 

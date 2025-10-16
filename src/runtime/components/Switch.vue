@@ -1,10 +1,10 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { SwitchRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/switch'
 import type { IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type Switch = ComponentConfig<typeof theme, AppConfig, 'switch'>
 
@@ -51,8 +51,8 @@ export type SwitchEmits = {
 }
 
 export interface SwitchSlots {
-  label?(props: { label?: string }): VNode[]
-  description?(props: { description?: string }): VNode[]
+  label?(props: { label?: string }): SlotsReturn
+  description?(props: { description?: string }): SlotsReturn
 }
 </script>
 

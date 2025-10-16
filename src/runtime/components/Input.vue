@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { InputHTMLAttributes, VNode } from 'vue'
+import type { InputHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
 import type { ModelModifiers } from '../types/input'
-import type { AcceptableValue } from '../types/utils'
+import type { AcceptableValue, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
@@ -55,9 +55,9 @@ export interface InputEmits<T extends InputValue = InputValue> {
 }
 
 export interface InputSlots {
-  leading?(props?: {}): VNode[]
-  default?(props?: {}): VNode[]
-  trailing?(props?: {}): VNode[]
+  leading?(props?: {}): SlotsReturn
+  default?(props?: {}): SlotsReturn
+  trailing?(props?: {}): SlotsReturn
 }
 </script>
 

@@ -1,11 +1,10 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/accordion'
 import type { IconProps } from '../types'
-import type { DynamicSlots, GetItemKeys } from '../types/utils'
+import type { DynamicSlots, GetItemKeys, SlotsReturn } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Accordion = ComponentConfig<typeof theme, AppConfig, 'accordion'>
@@ -54,7 +53,7 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> extends
 
 export interface AccordionEmits extends AccordionRootEmits {}
 
-type SlotProps<T extends AccordionItem> = (props: { item: T, index: number, open: boolean }) => VNode[]
+type SlotProps<T extends AccordionItem> = (props: { item: T, index: number, open: boolean }) => SlotsReturn
 
 export type AccordionSlots<T extends AccordionItem = AccordionItem> = {
   leading?: SlotProps<T>

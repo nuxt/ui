@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-section'
 import type { ButtonProps, IconProps, PageFeatureProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type PageSection = ComponentConfig<typeof theme, AppConfig, 'pageSection'>
 
@@ -48,18 +48,18 @@ export interface PageSectionProps {
 }
 
 export interface PageSectionSlots {
-  top?(props?: {}): VNode[]
-  header?(props?: {}): VNode[]
-  leading?(props?: {}): VNode[]
-  headline?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  body?(props?: {}): VNode[]
-  features?(props?: {}): VNode[]
-  footer?(props?: {}): VNode[]
-  links?(props?: {}): VNode[]
-  default?(props?: {}): VNode[]
-  bottom?(props?: {}): VNode[]
+  top?(props?: {}): SlotsReturn
+  header?(props?: {}): SlotsReturn
+  leading?(props?: {}): SlotsReturn
+  headline?(props?: {}): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  description?(props?: {}): SlotsReturn
+  body?(props?: {}): SlotsReturn
+  features?(props?: {}): SlotsReturn
+  footer?(props?: {}): SlotsReturn
+  links?(props?: {}): SlotsReturn
+  default?(props?: {}): SlotsReturn
+  bottom?(props?: {}): SlotsReturn
 }
 </script>
 

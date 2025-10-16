@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/callout'
 import type { IconProps, LinkProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
+import type { SlotsReturn } from '../../types/utils'
 
 type ProseCallout = ComponentConfig<typeof theme, AppConfig, 'callout', 'ui.prose'>
 
@@ -20,7 +20,7 @@ export interface ProseCalloutProps {
 }
 
 export interface ProseCalloutSlots {
-  default(props?: {}): VNode[]
+  default(props?: {}): SlotsReturn
 }
 </script>
 

@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-post'
 import type { BadgeProps, LinkProps, UserProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type BlogPost = ComponentConfig<typeof theme, AppConfig, 'blogPost'>
 
@@ -44,14 +44,14 @@ export interface BlogPostProps {
 }
 
 export interface BlogPostSlots {
-  date?(props?: {}): VNode[]
-  badge?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  authors?(props?: {}): VNode[]
-  header?(props?: {}): VNode[]
-  body?(props?: {}): VNode[]
-  footer?(props?: {}): VNode[]
+  date?(props?: {}): SlotsReturn
+  badge?(props?: {}): SlotsReturn
+  title?(props?: {}): SlotsReturn
+  description?(props?: {}): SlotsReturn
+  authors?(props?: {}): SlotsReturn
+  header?(props?: {}): SlotsReturn
+  body?(props?: {}): SlotsReturn
+  footer?(props?: {}): SlotsReturn
 }
 </script>
 

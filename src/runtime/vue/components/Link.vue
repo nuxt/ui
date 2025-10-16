@@ -1,9 +1,10 @@
 <script lang="ts">
-import type { ButtonHTMLAttributes, VNode } from 'vue'
+import type { ButtonHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { RouterLinkProps, RouteLocationRaw } from 'vue-router'
 import theme from '#build/ui/link'
 import type { ComponentConfig } from '../../types/tv'
+import type { SlotsReturn } from '../../types/utils'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
 
@@ -82,7 +83,7 @@ export interface LinkProps extends NuxtLinkProps {
 }
 
 export interface LinkSlots {
-  default(props: { active: boolean }): VNode[]
+  default(props: { active: boolean }): SlotsReturn
 }
 </script>
 
