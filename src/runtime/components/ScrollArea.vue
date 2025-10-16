@@ -157,7 +157,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.scrollArea |
     :as="as"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{
-      paddingInline: virtualizerProps.gap ? `${virtualizerProps.gap / 2}px` : undefined
+      paddingInline: orientation === 'vertical' ? virtualizerProps.gap ? `${virtualizerProps.gap / 2}px` : undefined : undefined,
+      paddingBlock: orientation === 'horizontal' ? virtualizerProps.gap ? `${virtualizerProps.gap / 2}px` : undefined : undefined
     }"
   >
     <template v-if="!!virtualize">
@@ -175,7 +176,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.scrollArea |
           :ref="measureElement"
           :data-index="virtualItem.index"
           :style="{
-            paddingInline: virtualizerProps.gap ? `${virtualizerProps.gap / 2}px` : undefined,
+            paddingInline: orientation === 'vertical' ? virtualizerProps.gap ? `${virtualizerProps.gap / 2}px` : undefined : undefined,
+            paddingBlock: orientation === 'horizontal' ? virtualizerProps.gap ? `${virtualizerProps.gap / 2}px` : undefined : undefined,
             position: 'absolute',
             top: orientation === 'horizontal' && virtualItem.lane !== undefined
               ? `${virtualItem.lane * (100 / virtualizerProps.lanes)}%`

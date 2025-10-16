@@ -16,30 +16,23 @@ type Item = {
   color?: string
 }
 
+const aspectRatios = ['1/1', '4/3', '16/9']
+
 // Generate items with variable sizes for dynamic sizing demo
 const items = computed<Item[]>(() => {
-  if (orientation.value === 'horizontal') {
-    return Array.from({ length: itemCount.value }, (_, i) => ({
-      id: i + 1,
-      url: `https://picsum.photos/300/200?random=${i}`,
-      title: `Image ${i + 1}`
-    }))
-  }
-
   return Array.from({ length: itemCount.value }, (_, i) => {
-    // For masonry layouts, vary the content length more dramatically
+    const aspectRatios = ['1/1', '4/3', '16/9']
     const descriptions = [
       `Item ${i + 1}`,
       `Item ${i + 1} with some additional text.`,
       `This is item number ${i + 1} with quite a bit more description text that demonstrates dynamic sizing with variable height content in masonry layouts.`,
       `Item ${i + 1} - short one.`
     ]
-
     return {
       id: i + 1,
-      title: `Item ${i + 1}`,
-      description: descriptions[i % descriptions.length],
-      color: (['blue', 'green', 'purple', 'red', 'orange'] as const)[i % 5] as string
+      url: `https://picsum.photos/300/${aspectRatios[i % aspectRatios.length] === '1/1' ? 300 : aspectRatios[i % aspectRatios.length] === '4/3' ? 400 : 200}?random=${i}`,
+      title: `Image ${i + 1}`,
+      description: descriptions[i % descriptions.length]
     }
   })
 })
@@ -136,11 +129,11 @@ const items = computed<Item[]>(() => {
       :items="items"
       :orientation="orientation"
       :virtualize="virtualize ? { estimateSize, gap, paddingStart, paddingEnd, lanes } : false"
-      :class="orientation === 'horizontal' ? 'h-64' : 'h-128'"
+      class="h-128"
     >
-      <template v-if="orientation === 'horizontal'" #default="{ item, index }">
-        <div class="inline-block">
-          <div class="w-[300px] h-[200px] bg-elevated rounded-lg overflow-hidden">
+      <template v-if="orientation === 'horizontal'" #default="{ item }">
+        <div class="flex flex-col h-full">
+          <div class="bg-elevated rounded-lg overflow-hidden h-full">
             <img
               :src="item!.url"
               :alt="item!.title"
@@ -169,6 +162,13 @@ const items = computed<Item[]>(() => {
               </span>
             </div>
           </template>
+          <div class="bg-elevated rounded-lg overflow-hidden h-full">
+            <img
+              :src="item!.url"
+              :alt="item!.title"
+              class="w-full h-full object-cover"
+            >
+          </div>
           <p class="text-sm text-muted">
             {{ item!.description || '' }}
           </p>
