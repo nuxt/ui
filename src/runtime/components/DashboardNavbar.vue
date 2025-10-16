@@ -1,10 +1,10 @@
 <script lang="ts">
-import type { VNodeChild } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-navbar'
 import type { DashboardContext } from '../utils/dashboard'
 import type { ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { SlotsReturn } from '../types/utils'
 
 type DashboardNavbar = ComponentConfig<typeof theme, AppConfig, 'dashboardNavbar'>
 
@@ -38,13 +38,13 @@ export interface DashboardNavbarProps {
 type DashboardNavbarSlotsProps = Omit<DashboardContext, 'storage' | 'storageKey' | 'persistent' | 'unit'>
 
 export interface DashboardNavbarSlots {
-  title?(props?: {}): VNodeChild
-  leading?(props: DashboardNavbarSlotsProps): VNodeChild
-  trailing?(props: DashboardNavbarSlotsProps): VNodeChild
-  left?(props: DashboardNavbarSlotsProps): VNodeChild
-  default?(props: DashboardNavbarSlotsProps): VNodeChild
-  right?(props: DashboardNavbarSlotsProps): VNodeChild
-  toggle?(props: DashboardNavbarSlotsProps): VNodeChild
+  title?(props?: {}): SlotsReturn
+  leading?(props: DashboardNavbarSlotsProps): SlotsReturn
+  trailing?(props: DashboardNavbarSlotsProps): SlotsReturn
+  left?(props: DashboardNavbarSlotsProps): SlotsReturn
+  default?(props: DashboardNavbarSlotsProps): SlotsReturn
+  right?(props: DashboardNavbarSlotsProps): SlotsReturn
+  toggle?(props: DashboardNavbarSlotsProps): SlotsReturn
 }
 </script>
 

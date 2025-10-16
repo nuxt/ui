@@ -44,7 +44,6 @@ export interface ChangelogVersionsSlots<T extends ChangelogVersionProps = Change
   footer?(props: { version: T }): SlotsReturn
   authors?(props: { version: T }): SlotsReturn
   actions?(props: { version: T }): SlotsReturn
-  indicator?(props: { version: T }): SlotsReturn
 }
 </script>
 
