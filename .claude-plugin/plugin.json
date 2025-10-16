@@ -18,18 +18,12 @@
     "mcp",
     "ui-library"
   ],
-  "hooks": "./hooks/hooks.json",
+  "commands": "./.claude-plugin/commands/",
+  "hooks": "./.claude-plugin/hooks/hooks.json",
   "mcpServers": {
     "nuxt-ui-remote": {
-      "command": "claude",
-      "args": [
-        "mcp",
-        "add",
-        "--transport",
-        "http",
-        "nuxt-ui-remote",
-        "https://ui.nuxt.com/mcp"
-      ]
+      "type": "http",
+      "url": "https://ui.nuxt.com/mcp"
     }
   }
 }
