@@ -188,8 +188,11 @@ export default defineNuxtConfig({
 
   componentMeta: {
     transformers: [(component, code) => {
-      // Remove complex ui slot prop type definitions to reduce metadata file size
+      // Simplify ui in slot prop types: `leading(props: { ui: Button['ui'] })` -> `leading(props: { ui: object })`
       code = code.replace(/ui:[^}]+(?=\})/g, 'ui: object')
+
+      // Simplify ui prop type definitions: `ui?: Button['slots']` -> `ui?: object`
+      code = code.replace(/\bui\?\s*:\s*[^;\n]+/g, 'ui?: object')
 
       return { component, code }
     }],
