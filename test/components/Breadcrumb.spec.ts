@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Breadcrumb from '../../src/runtime/components/Breadcrumb.vue'
 import type { BreadcrumbProps, BreadcrumbSlots } from '../../src/runtime/components/Breadcrumb.vue'
 import ComponentRender from '../component-render'
@@ -7,7 +9,8 @@ describe('Breadcrumb', () => {
   const items = [{
     label: 'Home',
     avatar: {
-      src: 'https://github.com/benjamincanac.png'
+      src: 'https://github.com/benjamincanac.png',
+      alt: 'Benjamin Canac'
     },
     to: '/'
   }, {
@@ -41,5 +44,13 @@ describe('Breadcrumb', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BreadcrumbProps, slots?: Partial<BreadcrumbSlots & { custom: () => 'Custom slot' }> }) => {
     const html = await ComponentRender(nameOrHtml, options, Breadcrumb)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Breadcrumb, {
+      props
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

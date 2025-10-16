@@ -141,21 +141,33 @@ const test = ({ name, prose, content }) => {
       ? undefined
       : `
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ${upperName} from '../../${content ? '../' : ''}src/runtime/components/${content ? 'content/' : ''}${upperName}.vue'
 import type { ${upperName}Props, ${upperName}Slots } from '../../${content ? '../' : ''}src/runtime/components/${content ? 'content/' : ''}${upperName}.vue'
 import ComponentRender from '../${content ? '../' : ''}component-render'
 
 describe('${upperName}', () => {
+  const props = {}
+
   it.each([
     // Props
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: '' } }],
     ['with ui', { props: { ui: {} } }],
     // Slots
-    ['with default slot', { slots: { default: () => 'Default slot' } }]
+    ['with default slot', { props, slots: { default: () => 'Default slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ${upperName}Props, slots?: Partial<${upperName}Slots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ${upperName})
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(${upperName}, {
+      props
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })
 `

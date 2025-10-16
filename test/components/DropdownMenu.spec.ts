@@ -1,11 +1,13 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import type { AppConfig } from '@nuxt/schema'
 import DropdownMenu from '../../src/runtime/components/DropdownMenu.vue'
 import type { DropdownMenuProps, DropdownMenuSlots } from '../../src/runtime/components/DropdownMenu.vue'
 import type { ComponentConfig } from '../../src/runtime/types/tv'
 import ComponentRender from '../component-render'
-import theme from '#build/ui/dropdown-menu'
 import { expectSlotProps } from '../utils/types'
+import theme from '#build/ui/dropdown-menu'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 
@@ -16,7 +18,8 @@ describe('DropdownMenu', () => {
     [{
       label: 'My account',
       avatar: {
-        src: 'https://github.com/benjamincanac.png'
+        src: 'https://github.com/benjamincanac.png',
+        alt: 'Benjamín Canac'
       },
       type: 'label'
     }],
@@ -114,6 +117,22 @@ describe('DropdownMenu', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DropdownMenuProps, slots?: Partial<DropdownMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, DropdownMenu)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(DropdownMenu, {
+      props
+    })
+
+    expect(await axe(wrapper.element, {
+      rules: {
+        // "Certain ARIA roles must contain particular children (aria-required-children)"
+        //
+        // Fix any of the following:
+        //  Element has children which are not allowed: img[tabindex]
+        'aria-required-children': { enabled: false }
+      }
+    })).toHaveNoViolations()
   })
 
   test('should have the correct types', () => {

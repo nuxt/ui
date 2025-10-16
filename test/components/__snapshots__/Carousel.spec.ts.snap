@@ -4,12 +4,12 @@ exports[`Carousel > renders with arrows correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" class="relative focus:outline-none">
   <div class="overflow-hidden">
     <div class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
   <div class="">
@@ -29,12 +29,12 @@ exports[`Carousel > renders with as correctly 1`] = `
 "<nav role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" class="relative focus:outline-none">
   <div class="overflow-hidden">
     <div class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
   <!--v-if-->
@@ -45,12 +45,12 @@ exports[`Carousel > renders with class correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" class="relative focus:outline-none w-full max-w-xs">
   <div class="overflow-hidden">
     <div class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
   <!--v-if-->
@@ -61,12 +61,12 @@ exports[`Carousel > renders with dots correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" class="relative focus:outline-none">
   <div class="overflow-hidden">
     <div class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
-      <div role="tabpanel" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
-      <div role="tabpanel" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
-      <div role="tabpanel" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
-      <div role="tabpanel" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" width="300" height="300" class="rounded-lg"></div>
-      <div role="tabpanel" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" width="300" height="300" class="rounded-lg"></div>
-      <div role="tabpanel" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="tabpanel" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
   <div class="">
@@ -80,12 +80,12 @@ exports[`Carousel > renders with items correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" class="relative focus:outline-none">
   <div class="overflow-hidden">
     <div class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
   <!--v-if-->
@@ -96,12 +96,12 @@ exports[`Carousel > renders with next correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" class="relative focus:outline-none">
   <div class="overflow-hidden">
     <div class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
   <div class="">
@@ -121,12 +121,12 @@ exports[`Carousel > renders with nextIcon correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" class="relative focus:outline-none">
   <div class="overflow-hidden">
     <div class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
   <div class="">
@@ -146,12 +146,12 @@ exports[`Carousel > renders with orientation vertical correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" data-orientation="vertical" tabindex="0" class="relative focus:outline-none">
   <div class="overflow-hidden">
     <div class="flex items-start flex-col -mt-4" style="transform: translate3d(0px,NaNpx,0px);">
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=4" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=5" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full pt-4"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
   <!--v-if-->
@@ -162,12 +162,12 @@ exports[`Carousel > renders with prev correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" class="relative focus:outline-none">
   <div class="overflow-hidden">
     <div class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
   <div class="">
@@ -187,12 +187,12 @@ exports[`Carousel > renders with prevIcon correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" class="relative focus:outline-none">
   <div class="overflow-hidden">
     <div class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
   <div class="">
@@ -212,12 +212,12 @@ exports[`Carousel > renders with ui correctly 1`] = `
 "<div role="region" aria-roledescription="carousel" data-orientation="horizontal" tabindex="0" class="relative focus:outline-none">
   <div class="overflow-hidden h-[320px]">
     <div class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" width="300" height="300" class="rounded-lg"></div>
-      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" alt="Image 1" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=2" alt="Image 2" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=3" alt="Image 3" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=4" alt="Image 4" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=5" alt="Image 5" width="300" height="300" class="rounded-lg"></div>
+      <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=6" alt="Image 6" width="300" height="300" class="rounded-lg"></div>
     </div>
   </div>
   <!--v-if-->

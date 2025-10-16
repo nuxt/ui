@@ -322,7 +322,7 @@ const groupingState = defineModel<GroupingState>('grouping', { default: [] })
 const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 const paginationState = defineModel<PaginationState>('pagination', { default: {} })
 
-const rootRef = ref()
+const rootRef = ref<InstanceType<typeof Primitive>>()
 const tableRef = ref<HTMLTableElement | null>(null)
 
 const tableApi = useVueTable({
@@ -473,7 +473,9 @@ watch(() => props.data, () => {
 }, props.watchOptions)
 
 defineExpose({
-  rootRef,
+  get $el() {
+    return rootRef.value?.$el
+  },
   tableRef,
   tableApi
 })

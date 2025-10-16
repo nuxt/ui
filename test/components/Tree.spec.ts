@@ -1,4 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Tree from '../../src/runtime/components/Tree.vue'
 import type { TreeProps, TreeSlots, TreeItem } from '../../src/runtime/components/Tree.vue'
 import ComponentRender from '../component-render'
@@ -72,6 +74,17 @@ describe('Tree', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: Partial<TreeProps>, slots?: Partial<TreeSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Tree)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        ...props,
+        modelValue: items[0],
+        expanded: [items[0] as any]
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   test('should have the correct types', () => {
