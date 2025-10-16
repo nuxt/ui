@@ -3,10 +3,9 @@ const virtualize = ref(true)
 const orientation = ref<'vertical' | 'horizontal'>('vertical')
 const itemCount = ref(100)
 const estimateSize = ref(100)
-const gap = ref(0)
-const paddingStart = ref(0)
-const paddingEnd = ref(0)
-const lanes = ref(1)
+const gap = ref(12)
+const padding = ref(12)
+const lanes = ref(3)
 
 type Item = {
   id: number
@@ -69,7 +68,7 @@ const items = computed<Item[]>(() => {
     </div>
 
     <template v-if="virtualize">
-      <div class="flex items-center gap-2">
+      <!-- <div class="flex items-center gap-2">
         <span class="text-sm text-muted">Estimate:</span>
         <UInput
           v-model.number="estimateSize"
@@ -78,7 +77,7 @@ const items = computed<Item[]>(() => {
           :max="500"
           class="w-24"
         />
-      </div>
+      </div> -->
 
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted">Gap:</span>
@@ -94,19 +93,11 @@ const items = computed<Item[]>(() => {
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted">Padding:</span>
         <UInput
-          v-model.number="paddingStart"
+          v-model.number="padding"
           type="number"
           :min="0"
           :max="200"
-          placeholder="Start"
-          class="w-20"
-        />
-        <UInput
-          v-model.number="paddingEnd"
-          type="number"
-          :min="0"
-          :max="200"
-          placeholder="End"
+          placeholder="Padding"
           class="w-20"
         />
       </div>
@@ -128,7 +119,7 @@ const items = computed<Item[]>(() => {
     <UScrollArea
       :items="items"
       :orientation="orientation"
-      :virtualize="virtualize ? { estimateSize, gap, paddingStart, paddingEnd, lanes } : false"
+      :virtualize="virtualize ? { estimateSize, gap, paddingStart: padding, paddingEnd: padding, lanes } : false"
       class="h-128"
     >
       <template v-if="orientation === 'horizontal'" #default="{ item }">
