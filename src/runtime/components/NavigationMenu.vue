@@ -154,7 +154,7 @@ export type NavigationMenuSlots<
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
-  'item-content': SlotProps<T>
+  'item-content': SlotProps<T> & { close?: () => void }
   'list-leading': (props?: {}) => any
   'list-trailing': (props?: {}) => any
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing' | 'content', { index: number, active?: boolean, ui: NavigationMenu['ui'] }>
@@ -310,8 +310,8 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
               <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
             </ULinkBase>
 
-            <template #content>
-              <slot :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)" :item="item" :active="active || item.active" :index="index">
+            <template #content="{ close }">
+              <slot :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)" :item="item" :active="active || item.active" :index="index" :close="close">
                 <ul :class="ui.childList({ class: [props.ui?.childList, item.ui?.childList] })">
                   <li :class="ui.childLabel({ class: [props.ui?.childLabel, item.ui?.childLabel] })">
                     {{ get(item, props.labelKey as string) }}

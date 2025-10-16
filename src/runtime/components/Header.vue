@@ -49,7 +49,7 @@ export interface HeaderSlots {
   top(props?: {}): any
   bottom(props?: {}): any
   body(props?: {}): any
-  content(props?: {}): any
+  content(props: { close?: () => void }): any
 }
 </script>
 
@@ -184,8 +184,8 @@ function toggleOpen() {
       content: ui.content({ class: props.ui?.content })
     }"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot name="content" v-bind="contentData">
         <div v-if="mode !== 'drawer'" :class="ui.header({ class: props.ui?.header })">
           <ReuseLeftTemplate />
 

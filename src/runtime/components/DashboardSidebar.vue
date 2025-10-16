@@ -40,7 +40,7 @@ export interface DashboardSidebarSlots {
   'default'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
   'footer'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
   'toggle'(props: { open: boolean, toggle: () => void, ui: DashboardSidebar['ui'] }): any
-  'content'(props?: {}): any
+  'content'(props: { close?: () => void }): any
   'resize-handle'(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void, ui: DashboardSidebar['ui'] }): any
 }
 </script>
@@ -194,8 +194,8 @@ function toggleOpen() {
       content: ui.content({ class: props.ui?.content })
     }"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot name="content" v-bind="contentData">
         <div v-if="!!slots.header || mode !== 'drawer'" :class="ui.header({ class: props.ui?.header, menu: true })">
           <ReuseToggleTemplate v-if="mode !== 'drawer' && toggleSide === 'left'" />
 
