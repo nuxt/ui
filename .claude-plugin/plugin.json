@@ -1,0 +1,35 @@
+{
+  "name": "nuxt-ui",
+  "version": "1.0.0",
+  "description": "Nuxt UI component library with comprehensive documentation, templates, and examples via MCP server",
+  "author": {
+    "name": "Nuxt",
+    "url": "https://github.com/nuxt"
+  },
+  "homepage": "https://ui.nuxt.com",
+  "repository": "https://github.com/nuxt/ui",
+  "license": "MIT",
+  "keywords": [
+    "nuxt-ui",
+    "vue",
+    "components",
+    "tailwindcss",
+    "documentation",
+    "mcp",
+    "ui-library"
+  ],
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": {
+    "nuxt-ui-remote": {
+      "command": "claude",
+      "args": [
+        "mcp",
+        "add",
+        "--transport",
+        "http",
+        "nuxt-ui-remote",
+        "https://ui.nuxt.com/mcp"
+      ]
+    }
+  }
+}

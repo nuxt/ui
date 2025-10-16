@@ -117,6 +117,28 @@ app.mount('#app')
 
 Learn more in the [installation guide](https://ui.nuxt.com/docs/getting-started/installation/vue).
 
+## Claude Code Plugin
+
+Install Nuxt UI as a Claude Code plugin to get instant access to component documentation, templates, and examples directly in your AI coding sessions:
+
+```sh
+claude
+/plugin marketplace add pleaseai/claude-code-plugins
+/plugin install nuxt-ui@pleaseai
+```
+
+This plugin provides:
+
+- **13 MCP Tools** for accessing components, documentation, templates, and examples
+- **Automatic Context Loading** - Usage instructions load automatically on session start
+- **Live Documentation** - Always up-to-date with the latest Nuxt UI v4 documentation
+- **Component Search** - Find the right component for your use case
+- **Template Access** - Quick access to project templates (Starter, Dashboard, SaaS, etc.)
+
+The plugin connects to Nuxt UI's MCP server at `https://ui.nuxt.com/mcp` and integrates seamlessly with Claude Code's tool system. No additional configuration required!
+
+Learn more about the MCP server at [https://ui.nuxt.com/docs/getting-started/ai/mcp](https://ui.nuxt.com/docs/getting-started/ai/mcp).
+
 ## Contribution
 
 Thank you for considering contributing to Nuxt UI. Here are a few ways you can get involved:
