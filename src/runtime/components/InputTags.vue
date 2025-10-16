@@ -56,7 +56,7 @@ type SlotProps<T extends InputTagItem> = (props: { item: T, index: number, ui: I
 
 export interface InputTagsSlots<T extends InputTagItem = InputTagItem> {
   'leading'(props: { ui: InputTags['ui'] }): any
-  'default'(props?: {}): any
+  'default'(props: { ui: InputTags['ui'] }): any
   'trailing'(props: { ui: InputTags['ui'] }): any
   'item-text': SlotProps<T>
   'item-delete': SlotProps<T>
@@ -188,7 +188,7 @@ defineExpose({
       @focus="onFocus"
     />
 
-    <slot />
+    <slot :ui="ui" />
 
     <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">

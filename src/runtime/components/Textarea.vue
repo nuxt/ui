@@ -57,7 +57,7 @@ export interface TextareaEmits<T extends TextareaValue = TextareaValue> {
 
 export interface TextareaSlots {
   leading(props: { ui: Textarea['ui'] }): any
-  default(props?: {}): any
+  default(props: { ui: Textarea['ui'] }): any
   trailing(props: { ui: Textarea['ui'] }): any
 }
 </script>
@@ -222,7 +222,7 @@ defineExpose({
       @focus="emitFormFocus"
     />
 
-    <slot />
+    <slot :ui="ui" />
 
     <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">

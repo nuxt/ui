@@ -56,7 +56,7 @@ export interface InputEmits<T extends InputValue = InputValue> {
 
 export interface InputSlots {
   leading(props: { ui: Input['ui'] }): any
-  default(props?: {}): any
+  default(props: { ui: Input['ui'] }): any
   trailing(props: { ui: Input['ui'] }): any
 }
 </script>
@@ -194,7 +194,7 @@ defineExpose({
       @focus="emitFormFocus"
     >
 
-    <slot />
+    <slot :ui="ui" />
 
     <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">

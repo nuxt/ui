@@ -36,7 +36,7 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
 
 export interface ButtonSlots {
   leading(props: { ui: Button['ui'] }): any
-  default(props?: {}): any
+  default(props: { ui: Button['ui'] }): any
   trailing(props: { ui: Button['ui'] }): any
 }
 </script>
@@ -137,7 +137,7 @@ const ui = computed(() => tv({
         <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
       </slot>
 
-      <slot>
+      <slot :ui="ui">
         <span v-if="label !== undefined && label !== null" :class="ui.label({ class: props.ui?.label, active })">
           {{ label }}
         </span>

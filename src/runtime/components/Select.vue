@@ -114,7 +114,7 @@ export interface SelectSlots<
   T extends NestedItem<A> = NestedItem<A>
 > {
   'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: Select['ui'] }): any
-  'default'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean }): any
+  'default'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: Select['ui'] }): any
   'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: Select['ui'] }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -275,7 +275,7 @@ defineExpose({
         </slot>
       </span>
 
-      <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open">
+      <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
         <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
           <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" :class="ui.value({ class: props.ui?.value })">
             {{ displayedModelValue }}

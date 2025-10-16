@@ -106,6 +106,7 @@ export interface FileUploadSlots<M extends boolean = false> {
   'default'(props: {
     open: UseFileDialogReturn['open']
     removeFile: (index?: number) => void
+    ui: FileUpload['ui']
   }): any
   'leading'(props: { ui: FileUpload['ui'] }): any
   'label'(props?: {}): any
@@ -319,7 +320,7 @@ defineExpose({
   </DefineFilesTemplate>
 
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <slot :open="open" :remove-file="removeFile">
+    <slot :open="open" :remove-file="removeFile" :ui="ui">
       <component
         :is="variant === 'button' ? 'button' : 'div'"
         ref="dropzoneRef"
