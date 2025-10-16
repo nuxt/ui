@@ -19,7 +19,6 @@
     "ui-library"
   ],
   "commands": "./.claude-plugin/commands/",
-  "hooks": "./.claude-plugin/hooks/hooks.json",
   "mcpServers": {
     "nuxt-ui-remote": {
       "type": "http",
