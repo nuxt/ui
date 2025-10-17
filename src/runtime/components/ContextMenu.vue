@@ -91,11 +91,13 @@ export type ContextMenuSlots<
   'default'(props?: {}): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
+  'item-label': (props: { item: T, active?: boolean, index: number }) => any
   'item-trailing': SlotProps<T>
   'content-top': (props?: {}) => any
   'content-bottom': (props?: {}) => any
-} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number, ui: ContextMenu['ui'] }>
+}
+& DynamicSlots<MergeTypes<T>, 'label', { active?: boolean, index: number }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean, index: number, ui: ContextMenu['ui'] }>
 
 </script>
 

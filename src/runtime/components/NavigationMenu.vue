@@ -152,12 +152,14 @@ export type NavigationMenuSlots<
 > = {
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
+  'item-label': (props: { item: T, index: number, active?: boolean }) => any
   'item-trailing': SlotProps<T>
   'item-content': SlotProps<T> & { close?: () => void }
   'list-leading': (props?: {}) => any
   'list-trailing': (props?: {}) => any
-} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing' | 'content', { index: number, active?: boolean, ui: NavigationMenu['ui'] }>
+}
+& DynamicSlots<MergeTypes<T>, 'label', { index: number, active?: boolean, ui: NavigationMenu['ui'] }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing' | 'content', { index: number, active?: boolean, ui: NavigationMenu['ui'] }>
 
 </script>
 

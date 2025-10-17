@@ -48,10 +48,12 @@ type SlotProps<T extends BreadcrumbItem> = (props: { item: T, index: number, act
 export type BreadcrumbSlots<T extends BreadcrumbItem = BreadcrumbItem> = {
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
+  'item-label': (props: { item: T, index: number, active?: boolean }) => any
+  'item-trailing': (props: { item: T, index: number, active?: boolean }) => any
   'separator': (props: { ui: Breadcrumb['ui'] }) => any
-} & DynamicSlots<T, 'leading' | 'label' | 'trailing', { index: number, active?: boolean, ui: Breadcrumb['ui'] }>
+}
+& DynamicSlots<T, 'leading', { index: number, active?: boolean, ui: Breadcrumb['ui'] }>
+& DynamicSlots<T, 'label' | 'trailing', { index: number, active?: boolean }>
 
 </script>
 
@@ -97,12 +99,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb |
                 </slot>
 
                 <span v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof BreadcrumbSlots<T>]" :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })">
-                  <slot :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof BreadcrumbSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :active="index === items!.length - 1" :index="index" :ui="ui">
+                  <slot :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof DynamicSlots<T, 'label'>)" :item="(item as Extract<T, { slot: string; }>)" :active="index === items!.length - 1" :index="index">
                     {{ get(item, props.labelKey as string) }}
                   </slot>
                 </span>
 
-                <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof BreadcrumbSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :active="index === items!.length - 1" :index="index" :ui="ui" />
+                <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof DynamicSlots<T, 'trailing'>)" :item="(item as Extract<T, { slot: string; }>)" :active="index === items!.length - 1" :index="index" />
               </slot>
             </ULinkBase>
           </ULink>
