@@ -95,10 +95,10 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    */
   colorMode?: boolean
   class?: any
-  ui?: ContentSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>['ui']
+  ui?: ContentSearch['slots'] & CommandPaletteProps<ContentSearchItem>['ui']
 }
 
-export type ContentSearchSlots = CommandPaletteSlots<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem> & {
+export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
   content(props?: {}): any
 }
 

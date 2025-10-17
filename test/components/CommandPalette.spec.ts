@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import CommandPalette from '../../src/runtime/components/CommandPalette.vue'
-import type { CommandPaletteProps, CommandPaletteSlots } from '../../src/runtime/components/CommandPalette.vue'
+import type { CommandPaletteGroup, CommandPaletteProps, CommandPaletteSlots } from '../../src/runtime/components/CommandPalette.vue'
 import ComponentRender from '../component-render'
 
 describe('CommandPalette', () => {
@@ -60,7 +60,7 @@ describe('CommandPalette', () => {
       to: 'https://github.com/benjamincanac',
       target: '_blank'
     }]
-  }]
+  }] satisfies CommandPaletteGroup[]
 
   const props = { groups }
 

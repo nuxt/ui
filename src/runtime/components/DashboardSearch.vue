@@ -63,10 +63,10 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
    */
   colorMode?: boolean
   class?: any
-  ui?: DashboardSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem>['ui']
+  ui?: DashboardSearch['slots'] & CommandPaletteProps<T>['ui']
 }
 
-export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem> & {
+export type DashboardSearchSlots<T extends CommandPaletteItem = CommandPaletteItem> = CommandPaletteSlots<T> & {
   content(props?: {}): any
 }
 

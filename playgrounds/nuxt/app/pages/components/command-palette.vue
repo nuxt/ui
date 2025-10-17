@@ -2,6 +2,7 @@
 // import { createReusableTemplate, refDebounced } from '@vueuse/core'
 import { createReusableTemplate } from '@vueuse/core'
 import type { User } from '~/types'
+import type { CommandPaletteItem } from '@nuxt/ui'
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 const toast = useToast()
@@ -9,7 +10,7 @@ const toast = useToast()
 const open = ref(false)
 const searchTerm = ref('')
 // const searchTermDebounced = refDebounced(searchTerm, 200)
-const selected = ref([])
+const selected = ref<CommandPaletteItem[]>([])
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   // params: { q: searchTermDebounced },
@@ -21,106 +22,121 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 
 const loading = ref(false)
 
-const groups = computed(() => [{
-  id: 'users',
-  label: searchTerm.value ? `Users matching “${searchTerm.value}”...` : 'Users',
-  items: users.value || []
-}, {
-  id: 'actions',
-  items: [{
-    label: 'Add new file',
-    suffix: 'Create a new file in the current directory or workspace.',
-    icon: 'i-lucide-file-plus',
-    loading: loading.value,
-    onSelect(e: Event) {
-      e.preventDefault()
-
-      toast.add({ title: 'New file added!' })
-
-      loading.value = true
-
-      setTimeout(() => {
-        loading.value = false
-      }, 2000)
-    },
-    kbds: ['meta', 'N']
-  }, {
-    label: 'Add new folder',
-    suffix: 'Create a new folder in the current directory or workspace.',
-    icon: 'i-lucide-folder-plus',
-    onSelect(e: Event) {
-      e.preventDefault()
-
-      toast.add({ title: 'New folder added!' })
-    },
-    kbds: ['meta', 'F']
-  }, {
-    label: 'Add hashtag',
-    suffix: 'Add a hashtag to the current item.',
-    icon: 'i-lucide-hash',
-    onSelect(e: Event) {
-      e.preventDefault()
-
-      toast.add({ title: 'Hashtag added!' })
-    },
-    kbds: ['meta', 'H']
-  }, {
-    label: 'Add label',
-    suffix: 'Add a label to the current item.',
-    icon: 'i-lucide-tag',
-    onSelect(e: Event) {
-      e.preventDefault()
-
-      toast.add({ title: 'Label added!' })
-    },
-    kbds: ['meta', 'L']
-  }, {
-    label: 'More actions',
-    placeholder: 'Search actions...',
-    children: [{
-      label: 'Create new file',
-      suffix: 'Create a new file in the current directory or workspace.',
-      icon: 'i-lucide-file-plus',
-      onSelect(e: Event) {
-        e.preventDefault()
-
-        toast.add({ title: 'New file added!' })
-      }
-    }, {
-      label: 'Create new folder',
-      suffix: 'Create a new folder in the current directory or workspace.',
-      icon: 'i-lucide-folder-plus',
-      onSelect(e: Event) {
-        e.preventDefault()
-
-        toast.add({ title: 'New folder added!' })
-      }
-    }, {
-      label: 'Share',
-      placeholder: 'Search share options...',
-      icon: 'i-lucide-share',
-      children: [{
-        label: 'Share with everyone',
-        suffix: 'Share with everyone in the current directory or workspace.',
-        icon: 'i-lucide-share',
+const groups = computed(() => [
+  {
+    id: 'users',
+    label: searchTerm.value ? `Users matching “${searchTerm.value}”...` : 'Users',
+    items: users.value || []
+  },
+  {
+    id: 'actions',
+    items: [
+      {
+        label: 'Add new file',
+        suffix: 'Create a new file in the current directory or workspace.',
+        icon: 'i-lucide-file-plus',
+        loading: loading.value,
         onSelect(e: Event) {
           e.preventDefault()
 
-          toast.add({ title: 'Shared with everyone!' })
-        }
-      }, {
-        label: 'Share with team',
-        suffix: 'Share with the team in the current directory or workspace.',
-        icon: 'i-lucide-users',
+          toast.add({ title: 'New file added!' })
+
+          loading.value = true
+
+          setTimeout(() => {
+            loading.value = false
+          }, 2000)
+        },
+        kbds: ['meta', 'N']
+      },
+      {
+        label: 'Add new folder',
+        suffix: 'Create a new folder in the current directory or workspace.',
+        icon: 'i-lucide-folder-plus',
         onSelect(e: Event) {
           e.preventDefault()
 
-          toast.add({ title: 'Shared with team!' })
-        }
-      }]
-    }]
-  }]
-}])
+          toast.add({ title: 'New folder added!' })
+        },
+        kbds: ['meta', 'F']
+      },
+      {
+        label: 'Add hashtag',
+        suffix: 'Add a hashtag to the current item.',
+        icon: 'i-lucide-hash',
+        onSelect(e: Event) {
+          e.preventDefault()
+
+          toast.add({ title: 'Hashtag added!' })
+        },
+        kbds: ['meta', 'H']
+      },
+      {
+        label: 'Add label',
+        suffix: 'Add a label to the current item.',
+        icon: 'i-lucide-tag',
+        onSelect(e: Event) {
+          e.preventDefault()
+
+          toast.add({ title: 'Label added!' })
+        },
+        kbds: ['meta', 'L']
+      },
+      {
+        label: 'More actions',
+        placeholder: 'Search actions...',
+        children: [
+          {
+            label: 'Create new file',
+            suffix: 'Create a new file in the current directory or workspace.',
+            icon: 'i-lucide-file-plus',
+            onSelect(e: Event) {
+              e.preventDefault()
+
+              toast.add({ title: 'New file added!' })
+            }
+          },
+          {
+            label: 'Create new folder',
+            suffix: 'Create a new folder in the current directory or workspace.',
+            icon: 'i-lucide-folder-plus',
+            onSelect(e: Event) {
+              e.preventDefault()
+
+              toast.add({ title: 'New folder added!' })
+            }
+          },
+          {
+            label: 'Share',
+            placeholder: 'Search share options...',
+            icon: 'i-lucide-share',
+            children: [{
+              label: 'Share with everyone',
+              suffix: 'Share with everyone in the current directory or workspace.',
+              icon: 'i-lucide-share',
+              onSelect(e: Event) {
+                e.preventDefault()
+
+                toast.add({ title: 'Shared with everyone!' })
+              }
+            },
+            {
+              label: 'Share with team',
+              suffix: 'Share with the team in the current directory or workspace.',
+              icon: 'i-lucide-users',
+              onSelect(e: Event) {
+                e.preventDefault()
+
+                toast.add({ title: 'Shared with team!' })
+              }
+            }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+])
 
 const labels = [{
   label: 'bug',

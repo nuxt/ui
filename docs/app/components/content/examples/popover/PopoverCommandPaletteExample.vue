@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const items = ref([
+import type { CommandPaletteItem } from '@nuxt/ui'
+
+const items = ref<CommandPaletteItem[]>([
   {
     label: 'bug',
     value: 'bug',
@@ -22,7 +24,7 @@ const items = ref([
     }
   }
 ])
-const label = ref([])
+const label = ref<CommandPaletteItem[]>([])
 </script>
 
 <template>
