@@ -392,11 +392,13 @@ exports[`Table > renders with columns correctly 1`] = `
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select all" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
-            <!--v-if-->
+            <div class="w-full ms-2 text-sm"><label for="v-0-0-0" class="block font-medium text-default">Select all</label>
+              <!--v-if-->
+            </div>
           </div>
         </th>
         <th data-pinned="false" scope="col" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
@@ -418,7 +420,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button aria-label="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
@@ -435,7 +437,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <div class="text-right font-medium">€316.00</div>
         </td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-2" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
+          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-2" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
               <!--v-if-->
               <!--v-if-->
             </button>
@@ -449,7 +451,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button aria-label="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
@@ -466,7 +468,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <div class="text-right font-medium">€242.00</div>
         </td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-4" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
+          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-4" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
               <!--v-if-->
               <!--v-if-->
             </button>
@@ -480,7 +482,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button aria-label="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
@@ -497,7 +499,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <div class="text-right font-medium">€837.00</div>
         </td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-6" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
+          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-6" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
               <!--v-if-->
               <!--v-if-->
             </button>
@@ -511,7 +513,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button aria-label="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
@@ -528,7 +530,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <div class="text-right font-medium">€874.00</div>
         </td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-8" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
+          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-8" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
               <!--v-if-->
               <!--v-if-->
             </button>
@@ -542,7 +544,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button aria-label="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
@@ -559,7 +561,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <div class="text-right font-medium">€721.00</div>
         </td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-10" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
+          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-10" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
               <!--v-if-->
               <!--v-if-->
             </button>
@@ -682,11 +684,13 @@ exports[`Table > renders with empty slot correctly 1`] = `
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select all" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
-            <!--v-if-->
+            <div class="w-full ms-2 text-sm"><label for="v-0-0-0" class="block font-medium text-default">Select all</label>
+              <!--v-if-->
+            </div>
           </div>
         </th>
         <th data-pinned="false" scope="col" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
@@ -1517,11 +1521,13 @@ exports[`Table > renders with loading slot correctly 1`] = `
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select all" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
-            <!--v-if-->
+            <div class="w-full ms-2 text-sm"><label for="v-0-0-0" class="block font-medium text-default">Select all</label>
+              <!--v-if-->
+            </div>
           </div>
         </th>
         <th data-pinned="false" scope="col" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
@@ -1582,11 +1588,13 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select all" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
-            <!--v-if-->
+            <div class="w-full ms-2 text-sm"><label for="v-0-0-0" class="block font-medium text-default">Select all</label>
+              <!--v-if-->
+            </div>
           </div>
         </th>
         <th data-pinned="false" scope="col" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class">#</th>
@@ -1608,7 +1616,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button aria-label="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
@@ -1625,7 +1633,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <div class="text-right font-medium">€316.00</div>
         </td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
-          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-2" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
+          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-2" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
               <!--v-if-->
               <!--v-if-->
             </button>
@@ -1639,7 +1647,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button aria-label="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
@@ -1656,7 +1664,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <div class="text-right font-medium">€242.00</div>
         </td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
-          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-4" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
+          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-4" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
               <!--v-if-->
               <!--v-if-->
             </button>
@@ -1670,7 +1678,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button aria-label="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
@@ -1687,7 +1695,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <div class="text-right font-medium">€837.00</div>
         </td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
-          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-6" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
+          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-6" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
               <!--v-if-->
               <!--v-if-->
             </button>
@@ -1701,7 +1709,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button aria-label="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
@@ -1718,7 +1726,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <div class="text-right font-medium">€874.00</div>
         </td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
-          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-8" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
+          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-8" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
               <!--v-if-->
               <!--v-if-->
             </button>
@@ -1732,7 +1740,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
           <div class="relative flex items-start flex-row">
-            <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div class="flex items-center h-5"><button aria-label="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!--v-if-->
               </button></div>
@@ -1749,7 +1757,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <div class="text-right font-medium">€721.00</div>
         </td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
-          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-10" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
+          <div class="text-right"><button type="button" id="reka-dropdown-menu-trigger-v-0-0-10" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Actions" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 ml-auto"><span class="iconify i-lucide:ellipsis-vertical shrink-0 size-5" aria-hidden="true"></span>
               <!--v-if-->
               <!--v-if-->
             </button>

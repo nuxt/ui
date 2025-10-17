@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Drawer from '../../src/runtime/components/Drawer.vue'
 import type { DrawerProps, DrawerSlots } from '../../src/runtime/components/Drawer.vue'
 import ComponentRender from '../component-render'
@@ -30,5 +32,18 @@ describe('Drawer', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DrawerProps, slots?: Partial<DrawerSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Drawer)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Drawer, {
+      props: {
+        open: true,
+        portal: false,
+        title: 'Title',
+        description: 'Description'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

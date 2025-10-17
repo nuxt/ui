@@ -36,12 +36,12 @@ export interface ChatMessagesProps {
    * The `user` messages props.
    * `{ side: 'right', variant: 'soft' }`{lang="ts-type"}
    */
-  user?: Pick<ChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions'>
+  user?: Pick<ChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'ui'>
   /**
    * The `assistant` messages props.
    * `{ side: 'left', variant: 'naked' }`{lang="ts-type"}
    */
-  assistant?: Pick<ChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions'>
+  assistant?: Pick<ChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'ui'>
   /**
    * Render the messages in a compact style.
    * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.

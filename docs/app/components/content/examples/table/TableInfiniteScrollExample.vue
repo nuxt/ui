@@ -63,7 +63,7 @@ execute()
 const table = useTemplateRef('table')
 
 onMounted(() => {
-  useInfiniteScroll(table.value?.rootRef, () => {
+  useInfiniteScroll(table.value?.$el, () => {
     skip.value += 10
   }, {
     distance: 200,

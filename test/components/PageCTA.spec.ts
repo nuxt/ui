@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageCTA from '../../src/runtime/components/PageCTA.vue'
 import type { PageCTAProps, PageCTASlots } from '../../src/runtime/components/PageCTA.vue'
 import ComponentRender from '../component-render'
@@ -33,5 +35,17 @@ describe('PageCTA', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageCTAProps, slots?: Partial<PageCTASlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PageCTA)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PageCTA, {
+      props: {
+        title: 'Title',
+        description: 'Description',
+        links: [{ label: 'Get Started', to: '/get-started' }, { label: 'Learn More', to: '/learn' }]
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

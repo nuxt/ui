@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageHero from '../../src/runtime/components/PageHero.vue'
 import type { PageHeroProps, PageHeroSlots } from '../../src/runtime/components/PageHero.vue'
 import ComponentRender from '../component-render'
@@ -30,5 +32,17 @@ describe('PageHero', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageHeroProps, slots?: Partial<PageHeroSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PageHero)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PageHero, {
+      props: {
+        title: 'Title',
+        description: 'Description',
+        links: [{ label: 'Get Started', to: '/start' }, { label: 'Learn More', to: '/learn' }]
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

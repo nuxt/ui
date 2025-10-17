@@ -1,16 +1,16 @@
 import { nextTick, watch } from 'vue'
 import { describe, expect, it, beforeEach, vi } from 'vitest'
+import { axe } from 'vitest-axe'
+import { flushPromises } from '@vue/test-utils'
 import * as z from 'zod'
 import * as yup from 'yup'
 import Joi from 'joi'
 import * as valibot from 'valibot'
 import { object, string, nonempty, refine } from 'superstruct'
-import ComponentRender from '../component-render'
 import type { FormProps, FormSlots } from '../../src/runtime/components/Form.vue'
+import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import { UForm } from '#components'
-
-import { flushPromises } from '@vue/test-utils'
 
 describe('Form', () => {
   it.each([
@@ -19,6 +19,14 @@ describe('Form', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props: FormProps<any>, slots?: Partial<FormSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, UForm)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await renderForm({
+      fixture: 'FormA11y'
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   it.each([

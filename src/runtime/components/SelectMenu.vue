@@ -247,7 +247,7 @@ const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTempla
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: SelectMenuItem, index: number }>({
   props: {
     item: {
-      type: Object,
+      type: [Object, String, Number, Boolean],
       required: true
     },
     index: {
