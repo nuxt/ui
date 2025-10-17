@@ -19,7 +19,7 @@ export default {
     },
     reverse: {
       true: {
-        content: '[animation-direction:reverse]'
+        content: '![animation-direction:reverse]'
       }
     },
     overlay: {

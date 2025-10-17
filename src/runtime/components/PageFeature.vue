@@ -32,7 +32,7 @@ export interface PageFeatureProps {
 }
 
 export interface PageFeatureSlots {
-  leading(props?: {}): any
+  leading(props: { ui: PageFeature['ui'] }): any
   title(props?: {}): any
   description(props?: {}): any
   default(props?: {}): any
@@ -71,7 +71,7 @@ const ariaLabel = computed(() => {
 <template>
   <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="onClick">
     <div v-if="icon || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-      <slot name="leading">
+      <slot name="leading" :ui="ui">
         <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
       </slot>
     </div>

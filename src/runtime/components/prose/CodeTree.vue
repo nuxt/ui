@@ -149,15 +149,19 @@ onBeforeUpdate(() => rerenderCount.value++)
     <li
       v-for="(item, index) in items"
       :key="`${level}-${index}`"
-      :class="level > 0 ? ui.itemWithChildren({ class: props.ui?.itemWithChildren }) : ui.item({ class: props.ui?.item })"
+      role="presentation"
+      :class="level > 1 ? ui.itemWithChildren({ class: props.ui?.itemWithChildren }) : ui.item({ class: props.ui?.item })"
     >
       <TreeItem
         v-slot="{ isExpanded, isSelected }"
-        as-child
         :level="level"
         :value="item"
+        as-child
       >
-        <button :class="ui.link({ class: props.ui?.link, active: isSelected })">
+        <button
+          type="button"
+          :class="ui.link({ class: props.ui?.link, active: isSelected })"
+        >
           <UIcon
             v-if="item.children?.length"
             :name="isExpanded ? appConfig.ui.icons.folderOpen : appConfig.ui.icons.folder"
@@ -174,11 +178,18 @@ onBeforeUpdate(() => rerenderCount.value++)
           </span>
 
           <span v-if="item.children?.length" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
-            <UIcon :name="appConfig.ui.icons.chevronDown" :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon })" />
+            <UIcon
+              :name="appConfig.ui.icons.chevronDown"
+              :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon })"
+            />
           </span>
         </button>
 
-        <ul v-if="item.children?.length && isExpanded" :class="ui.listWithChildren({ class: props.ui?.listWithChildren })">
+        <ul
+          v-if="item.children?.length && isExpanded"
+          role="group"
+          :class="ui.listWithChildren({ class: props.ui?.listWithChildren })"
+        >
           <ReuseTreeTemplate :items="item.children" :level="level + 1" />
         </ul>
       </TreeItem>
@@ -193,7 +204,7 @@ onBeforeUpdate(() => rerenderCount.value++)
       :get-key="(item) => item.path"
       :default-expanded="expanded"
     >
-      <ReuseTreeTemplate :items="items" :level="0" />
+      <ReuseTreeTemplate :items="items" :level="1" />
     </TreeRoot>
 
     <div :class="ui.content({ class: props.ui?.content })">

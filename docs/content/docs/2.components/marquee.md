@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The `Marquee` component allows you to create an infinite scrolling animation with your content. Perfect for showcasing logos, testimonials, or any repeating content in an engaging way.
+Use the default slot with your content to create an infinite scrolling animation.
 
 ::component-code
 ---

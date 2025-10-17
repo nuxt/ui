@@ -1,5 +1,7 @@
 <template>
-  <div class="flex items-center gap-4">
+  <Navbar />
+
+  <div class="flex items-center gap-2">
     <div class="flex flex-col items-start gap-2 text-sm">
       <ULink raw>
         Button raw

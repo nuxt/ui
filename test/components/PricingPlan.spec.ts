@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PricingPlan from '../../src/runtime/components/PricingPlan.vue'
 import type { PricingPlanProps, PricingPlanSlots } from '../../src/runtime/components/PricingPlan.vue'
 import ComponentRender from '../component-render'
@@ -67,5 +69,20 @@ describe('PricingPlan', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PricingPlanProps, slots?: Partial<PricingPlanSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PricingPlan)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PricingPlan, {
+      props: {
+        title: 'Title',
+        description: 'Description',
+        price: '$99',
+        features: ['Feature 1', 'Feature 2'],
+        badge: 'Badge',
+        discount: '30$'
+
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

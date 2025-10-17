@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Előző'
     },
     chatPrompt: {
-      placeholder: 'Írd be a kérdésedet itt...'
+      placeholder: 'Írd be a kérdésedet itt…'
     },
     chatPromptSubmit: {
       label: 'Küldés'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Bezárás',
       noData: 'Nincs adat',
       noMatch: 'Nincs találat',
-      placeholder: 'Írjon be egy parancsot vagy keressen...'
+      placeholder: 'Írjon be egy parancsot vagy keressen…'
     },
     contentSearch: {
       links: 'Linkek',
       theme: 'Téma'
     },
     contentSearchButton: {
-      label: 'Keresés...'
+      label: 'Keresés…'
     },
     contentToc: {
       title: 'Ezen az oldalon'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Téma'
     },
     dashboardSearchButton: {
-      label: 'Keresés...'
+      label: 'Keresés…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Oldalsáv összecsukása',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: '"{label}" létrehozása',
       noData: 'Nincs adat',
       noMatch: 'Nincs találat',
-      search: 'Keresés...'
+      search: 'Keresés…'
     },
     slideover: {
       close: 'Bezárás'

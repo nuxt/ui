@@ -12,7 +12,7 @@ links:
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/content/ContentSearchButton.vue
 ---
 
-::warning{to="/docs/getting-started/content"}
+::warning{to="/docs/getting-started/integrations/content"}
 This component is only available when the `@nuxt/content` module is installed.
 ::
 
@@ -20,7 +20,7 @@ This component is only available when the `@nuxt/content` module is installed.
 
 The ContentSearchButton component is used to open the [ContentSearch](/docs/components/content-search) modal.
 
-::component-code{prefix="content"}
+:component-code{prefix="content"}
 
 It extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
@@ -82,4 +82,4 @@ props:
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prefix="content"}

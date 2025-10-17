@@ -52,12 +52,12 @@ export interface InputTagsEmits<T extends InputTagItem> extends TagsInputRootEmi
   focus: [event: FocusEvent]
 }
 
-type SlotProps<T extends InputTagItem> = (props: { item: T, index: number }) => any
+type SlotProps<T extends InputTagItem> = (props: { item: T, index: number, ui: InputTags['ui'] }) => any
 
 export interface InputTagsSlots<T extends InputTagItem = InputTagItem> {
-  'leading'(props?: {}): any
-  'default'(props?: {}): any
-  'trailing'(props?: {}): any
+  'leading'(props: { ui: InputTags['ui'] }): any
+  'default'(props: { ui: InputTags['ui'] }): any
+  'trailing'(props: { ui: InputTags['ui'] }): any
   'item-text': SlotProps<T>
   'item-delete': SlotProps<T>
 }
@@ -157,8 +157,6 @@ defineExpose({
     :name="name"
     :disabled="disabled"
     @update:model-value="onUpdate"
-    @blur="onBlur"
-    @focus="onFocus"
   >
     <TagsInputItem
       v-for="(item, index) in tags"
@@ -167,14 +165,14 @@ defineExpose({
       :class="ui.item({ class: [props.ui?.item] })"
     >
       <TagsInputItemText :class="ui.itemText({ class: [props.ui?.itemText] })">
-        <slot v-if="!!slots['item-text']" name="item-text" :item="(item as T)" :index="index" />
+        <slot v-if="!!slots['item-text']" name="item-text" :item="(item as T)" :index="index" :ui="ui" />
       </TagsInputItemText>
 
       <TagsInputItemDelete
         :class="ui.itemDelete({ class: [props.ui?.itemDelete] })"
         :disabled="disabled"
       >
-        <slot name="item-delete" :item="(item as T)" :index="index">
+        <slot name="item-delete" :item="(item as T)" :index="index" :ui="ui">
           <UIcon :name="deleteIcon || appConfig.ui.icons.close" :class="ui.itemDeleteIcon({ class: [props.ui?.itemDeleteIcon] })" />
         </slot>
       </TagsInputItemDelete>
@@ -186,19 +184,21 @@ defineExpose({
       :placeholder="placeholder"
       :max-length="maxLength"
       :class="ui.input({ class: props.ui?.input })"
+      @blur="onBlur"
+      @focus="onFocus"
     />
 
-    <slot />
+    <slot :ui="ui" />
 
     <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-      <slot name="leading">
+      <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
         <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
     <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-      <slot name="trailing">
+      <slot name="trailing" :ui="ui">
         <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>

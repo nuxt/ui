@@ -56,9 +56,9 @@ export interface TextareaEmits<T extends TextareaValue = TextareaValue> {
 }
 
 export interface TextareaSlots {
-  leading(props?: {}): any
-  default(props?: {}): any
-  trailing(props?: {}): any
+  leading(props: { ui: Textarea['ui'] }): any
+  default(props: { ui: Textarea['ui'] }): any
+  trailing(props: { ui: Textarea['ui'] }): any
 }
 </script>
 
@@ -222,17 +222,17 @@ defineExpose({
       @focus="emitFormFocus"
     />
 
-    <slot />
+    <slot :ui="ui" />
 
     <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-      <slot name="leading">
+      <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
         <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
     <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-      <slot name="trailing">
+      <slot name="trailing" :ui="ui">
         <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>

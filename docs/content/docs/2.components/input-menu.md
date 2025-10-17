@@ -15,6 +15,25 @@ links:
 
 Use the `v-model` directive to control the value of the InputMenu or the `default-value` prop to set the initial value when you do not need to control its state.
 
+::component-code
+---
+prettier: true
+ignore:
+  - modelValue
+  - items
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
 ::tip
 Use this over an [`Input`](/docs/components/input) to take advantage of Reka UI's [`Combobox`](https://reka-ui.com/docs/components/combobox) component that offers autocomplete capabilities.
 ::
@@ -54,7 +73,7 @@ You can also pass an array of objects with the following properties:
 - [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
 - [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
 - `disabled?: boolean`{lang="ts-type"}
-- `onSelect?(e: Event): void`{lang="ts-type"}
+- `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { tagsItem?: ClassNameValue, tagsItemText?: ClassNameValue, tagsItemDelete?: ClassNameValue, tagsItemDeleteIcon?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
 
@@ -66,6 +85,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - InputMenuItem[]
 props:
   modelValue:
     label: 'Todo'
@@ -118,6 +139,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - InputMenuItem[]
 props:
   modelValue: 'todo'
   valueKey: 'id'
@@ -194,12 +217,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::
 ::
@@ -418,12 +441,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
 :::
 ::
@@ -455,12 +478,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.check` key.
 :::
 ::
@@ -543,12 +566,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
 :::
 ::
@@ -591,6 +614,8 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - InputMenuItem[]
 props:
   modelValue: 'Apple'
   items:
@@ -757,9 +782,24 @@ name: 'input-menu-filter-fields-example'
 ---
 ::
 
+### With virtualization :badge{label="Soon"}
+
+Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
+
+::warning{to="https://github.com/unovue/reka-ui/issues/1885" target="_blank"}
+When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
+::
+
+::component-example
+---
+prettier: true
+name: 'input-menu-virtualize-example'
+---
+::
+
 ### With full content width
 
-You can expand the content to the full width of its items by using the `ui.content` key.
+You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
 
 ::component-example
 ---

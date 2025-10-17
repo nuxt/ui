@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { AcceptableValue } from 'reka-ui'
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
 import type { AutoplayOptionsType } from 'embla-carousel-autoplay'
 import type { AutoScrollOptionsType } from 'embla-carousel-auto-scroll'
@@ -11,17 +10,17 @@ import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import theme from '#build/ui/carousel'
 import type { ButtonProps, IconProps } from '../types'
+import type { AcceptableValue } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 
-interface _CarouselItem {
+export type CarouselValue = AcceptableValue
+export type CarouselItem = CarouselValue | {
   class?: any
   ui?: Pick<Carousel['slots'], 'item'>
   [key: string]: any
 }
-
-export type CarouselItem = _CarouselItem | AcceptableValue
 
 export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
   /**
@@ -69,32 +68,32 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
   items?: T[]
   /**
    * Enable Autoplay plugin
-   * @link https://www.embla-carousel.com/plugins/autoplay/
+   * @see https://www.embla-carousel.com/plugins/autoplay/
    */
   autoplay?: boolean | AutoplayOptionsType
   /**
    * Enable Auto Scroll plugin
-   * @link https://www.embla-carousel.com/plugins/auto-scroll/
+   * @see https://www.embla-carousel.com/plugins/auto-scroll/
    */
   autoScroll?: boolean | AutoScrollOptionsType
   /**
    * Enable Auto Height plugin
-   * @link https://www.embla-carousel.com/plugins/auto-height/
+   * @see https://www.embla-carousel.com/plugins/auto-height/
    */
   autoHeight?: boolean | AutoHeightOptionsType
   /**
    * Enable Class Names plugin
-   * @link https://www.embla-carousel.com/plugins/class-names/
+   * @see https://www.embla-carousel.com/plugins/class-names/
    */
   classNames?: boolean | ClassNamesOptionsType
   /**
    * Enable Fade plugin
-   * @link https://www.embla-carousel.com/plugins/fade/
+   * @see https://www.embla-carousel.com/plugins/fade/
    */
   fade?: boolean | FadeOptionsType
   /**
    * Enable Wheel Gestures plugin
-   * @link https://www.embla-carousel.com/plugins/wheel-gestures/
+   * @see https://www.embla-carousel.com/plugins/wheel-gestures/
    */
   wheelGestures?: boolean | WheelGesturesPluginOptions
   class?: any
@@ -115,7 +114,7 @@ export interface CarouselEmits {
 </script>
 
 <script setup lang="ts" generic="T extends CarouselItem">
-import { computed, ref, watch, onMounted } from 'vue'
+import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
@@ -213,13 +212,16 @@ async function loadPlugins() {
   plugins.value = emblaPlugins
 }
 
-watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], loadPlugins, { immediate: true })
-
-const [emblaRef, emblaApi] = useEmblaCarousel(options.value, plugins.value)
-
-watch([options, plugins], () => {
+watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], async () => {
+  await loadPlugins()
   emblaApi.value?.reInit(options.value, plugins.value)
-})
+}, { immediate: true })
+
+const [emblaRef, emblaApi] = useEmblaCarousel(options, plugins)
+
+watch(options, () => {
+  emblaApi.value?.reInit(options.value, plugins.value)
+}, { flush: 'post' })
 
 function scrollPrev() {
   emblaApi.value?.scrollPrev()
@@ -232,8 +234,15 @@ function scrollTo(index: number) {
 }
 
 function onKeyDown(event: KeyboardEvent) {
-  const prevKey = props.orientation === 'vertical' ? 'ArrowUp' : 'ArrowLeft'
-  const nextKey = props.orientation === 'vertical' ? 'ArrowDown' : 'ArrowRight'
+  let prevKey
+  let nextKey
+  if (props.orientation === 'horizontal') {
+    prevKey = dir.value === 'ltr' ? 'ArrowLeft' : 'ArrowRight'
+    nextKey = dir.value === 'ltr' ? 'ArrowRight' : 'ArrowLeft'
+  } else {
+    prevKey = 'ArrowUp'
+    nextKey = 'ArrowDown'
+  }
 
   if (event.key === prevKey) {
     event.preventDefault()
@@ -265,7 +274,7 @@ function onSelect(api: EmblaCarouselType) {
   emits('select', selectedIndex.value)
 }
 
-function isCarouselItem(item: CarouselItem): item is _CarouselItem {
+function isCarouselItem(item: CarouselItem): item is Exclude<CarouselItem, CarouselValue> {
   return typeof item === 'object' && item !== null
 }
 
@@ -274,11 +283,23 @@ onMounted(() => {
     return
   }
 
-  emblaApi.value?.on('init', onInit)
-  emblaApi.value?.on('init', onSelect)
-  emblaApi.value?.on('reInit', onInit)
-  emblaApi.value?.on('reInit', onSelect)
-  emblaApi.value?.on('select', onSelect)
+  emblaApi.value.on('init', onInit)
+  emblaApi.value.on('init', onSelect)
+  emblaApi.value.on('reInit', onInit)
+  emblaApi.value.on('reInit', onSelect)
+  emblaApi.value.on('select', onSelect)
+})
+
+onBeforeUnmount(() => {
+  if (!emblaApi.value) {
+    return
+  }
+
+  emblaApi.value.off('init', onInit)
+  emblaApi.value.off('init', onSelect)
+  emblaApi.value.off('reInit', onInit)
+  emblaApi.value.off('reInit', onSelect)
+  emblaApi.value.off('select', onSelect)
 })
 
 defineExpose({
@@ -292,6 +313,7 @@ defineExpose({
     :as="as"
     role="region"
     aria-roledescription="carousel"
+    :data-orientation="orientation"
     tabindex="0"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @keydown="onKeyDown"

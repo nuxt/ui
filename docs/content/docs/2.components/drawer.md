@@ -216,7 +216,7 @@ slots:
 :placeholder{class="h-48 m-4"}
 ::
 
-### Scale background
+### Scale Background
 
 Use the `should-scale-background` prop to scale the background when the Drawer is open, creating a visual depth effect. You can set the `set-background-color-on-scale` prop to `false` to prevent changing the background color.
 
@@ -293,7 +293,7 @@ This allows you to move the trigger outside of the Drawer or remove it entirely.
 
 ### Disable dismissal
 
-Set the `dismissible` prop to `false` to prevent the Drawer from being closed when clicking outside of it or pressing escape.
+Set the `dismissible` prop to `false` to prevent the Drawer from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
 
 ::component-example
 ---
@@ -328,7 +328,7 @@ name: 'drawer-responsive-example'
 ---
 ::
 
-### Nested drawers :badge{label="New" class="align-text-top"}
+### Nested drawers
 
 You can nest drawers within each other by using the `nested` prop.
 

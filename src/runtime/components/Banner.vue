@@ -53,10 +53,10 @@ export interface BannerProps {
 }
 
 export interface BannerSlots {
-  leading(props?: {}): any
+  leading(props: { ui: Banner['ui'] }): any
   title(props?: {}): any
   actions(props?: {}): any
-  close(props: { ui: any }): any
+  close(props: { ui: Banner['ui'] }): any
 }
 
 export interface BannerEmits {
@@ -135,7 +135,7 @@ function onClose() {
       <div :class="ui.left({ class: props.ui?.left })" />
 
       <div :class="ui.center({ class: props.ui?.center })">
-        <slot name="leading">
+        <slot name="leading" :ui="ui">
           <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
         </slot>
 
@@ -145,7 +145,7 @@ function onClose() {
           </slot>
         </div>
 
-        <div v-if="actions?.length" :class="ui.actions({ class: props.ui?.actions })">
+        <div v-if="actions?.length || !!slots.actions" :class="ui.actions({ class: props.ui?.actions })">
           <slot name="actions">
             <UButton v-for="(action, index) in actions" :key="index" color="neutral" size="xs" v-bind="action" />
           </slot>

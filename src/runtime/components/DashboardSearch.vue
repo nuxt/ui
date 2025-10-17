@@ -8,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch'>
 
-export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends /* @vue-ignore */ Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
@@ -67,7 +67,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
 }
 
 export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem> & {
-  content(props?: {}): any
+  content(props: { close: () => void }): any
 }
 
 </script>
@@ -87,7 +87,8 @@ import UModal from './Modal.vue'
 const props = withDefaults(defineProps<DashboardSearchProps>(), {
   shortcut: 'meta_k',
   colorMode: true,
-  close: true
+  close: true,
+  fullscreen: false
 })
 const slots = defineSlots<DashboardSearchSlots>()
 
@@ -104,16 +105,18 @@ const colorMode = useColorMode()
 const appConfig = useAppConfig() as DashboardSearch['AppConfig']
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
+const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
 
-const proxySlots = omit(slots, ['content'])
+const getProxySlots = () => omit(slots, ['content'])
 
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
   }
 }))
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearch || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearch || {}) })({
+  fullscreen: props.fullscreen
+}))
 
 const groups = computed(() => {
   const groups = []
@@ -180,12 +183,13 @@ defineExpose({
 <template>
   <UModal
     v-model:open="open"
-    :title="t('dashboardSearch.title')"
-    :description="t('dashboardSearch.description')"
+    :title="title || t('dashboardSearch.title')"
+    :description="description || t('dashboardSearch.description')"
+    v-bind="modalProps"
     :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot name="content" v-bind="contentData">
         <UCommandPalette
           ref="commandPaletteRef"
           v-model:search-term="searchTerm"
@@ -196,7 +200,7 @@ defineExpose({
           @update:model-value="onSelect"
           @update:open="open = $event"
         >
-          <template v-for="(_, name) in proxySlots" #[name]="slotData">
+          <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
             <slot :name="name" v-bind="slotData" />
           </template>
         </UCommandPalette>

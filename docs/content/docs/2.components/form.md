@@ -9,16 +9,16 @@ links:
 
 ## Usage
 
-Use the Form component to validate form data using validation libraries such as [Valibot](https://github.com/fabian-hiller/valibot), [Zod](https://github.com/colinhacks/zod), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi), [Superstruct](https://github.com/ianstormtaylor/superstruct) or your own validation logic.
+Use the Form component to validate form data using any validation library supporting [Standard Schema](https://github.com/standard-schema/standard-schema) such as [Valibot](https://github.com/fabian-hiller/valibot), [Zod](https://github.com/colinhacks/zod), [Regle](https://github.com/victorgarciaesgi/regle), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi) or [Superstruct](https://github.com/ianstormtaylor/superstruct) or your own validation logic.
 
 It works with the [FormField](/docs/components/form-field) component to display error messages around form elements automatically.
 
-### Schema Validation
+### Schema validation
 
 It requires two props:
 
 - `state` - a reactive object holding the form's state.
-- `schema` - any [Standard Schema](https://standardschema.dev/) or a schema from [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi) or [Superstruct](https://github.com/ianstormtaylor/superstruct).
+- `schema` - any [Standard Schema](https://github.com/standard-schema/standard-schema) or [Superstruct](https://github.com/ianstormtaylor/superstruct).
 
 ::warning
 **No validation library is included** by default, ensure you **install the one you need**.
@@ -36,6 +36,14 @@ It requires two props:
   ::component-example{label="Zod"}
   ---
   name: 'form-example-zod'
+  props:
+    class: 'w-60'
+  ---
+  ::
+
+  ::component-example{label="Regle"}
+  ---
+  name: 'form-example-regle'
   props:
     class: 'w-60'
   ---
@@ -70,7 +78,7 @@ Errors are reported directly to the [FormField](/docs/components/form-field) com
 
 Nested validation rules are handled using dot notation. For example, a rule like `{ user: z.object({ email: z.string() }) }`{lang="ts"} will be applied to `<FormField name="user.email">`{lang="vue"}.
 
-### Custom Validation
+### Custom validation
 
 Use the `validate` prop to apply your own validation logic.
 
@@ -91,7 +99,7 @@ props:
 ---
 ::
 
-### Input Events
+### Input events
 
 The Form component automatically triggers validation when an input emits an `input`, `change`, or `blur` event.
 
@@ -128,7 +136,7 @@ options:
 You can use the [`useFormField`](/docs/composables/use-form-field) composable to implement this inside your own components.
 ::
 
-### Error Event
+### Error event
 
 You can listen to the `@error` event to handle errors. This event is triggered when the form is submitted and contains an array of `FormError` objects with the following fields:
 
@@ -147,11 +155,14 @@ props:
 ---
 ::
 
-### Nesting Forms
+### Nesting forms
 
-Nesting form components allows you to manage complex data structures, such as lists or conditional fields, more efficiently.
+Use the `nested` prop to nest multiple Form components and link their validation functions. In this case, validating the parent form will automatically validate all the other forms inside it.
 
-For example, it can be used to dynamically add fields based on user's input:
+Nested forms directly inherit their parent's state, so you don't need to define a separate state for them. You can use the `name` prop to target a nested attribute within the parent's state.
+
+It can be used to dynamically add fields based on user's input:
+
 ::component-example
 ---
 collapse: true
@@ -166,6 +177,7 @@ collapse: true
 name: 'form-example-nested-list'
 ---
 ::
+
 
 ## API
 
@@ -202,7 +214,7 @@ This will give you access to the following:
 | `submit()`{lang="ts-type"}                                                                                                   | `Promise<void>`{lang="ts-type"} <br> <div class="text-toned mt-1"><p>Triggers form submission.</p>                                                                                         |
 | `validate(opts: { name?: keyof T \| (keyof T)[], silent?: boolean, nested?: boolean, transform?: boolean })`{lang="ts-type"} | `Promise<T>`{lang="ts-type"} <br> <div class="text-toned mt-1"><p>Triggers form validation. Will raise any errors unless `opts.silent` is set to true.</p>                                 |
 | `clear(path?: keyof T \| RegExp)`{lang="ts-type"}                                                                            | `void` <br> <div class="text-toned mt-1"><p>Clears form errors associated with a specific path. If no path is provided, clears all form errors.</p>                                        |
-| `getErrors(path?: keyof T RegExp)`{lang="ts-type"}                                                                           | `FormError[]`{lang="ts-type <br> <div class="text-toned mt-1"><p>Retrieves form errors associated with a specific path. If no path is provided, returns all form errors.</p></div>         |
+| `getErrors(path?: keyof T RegExp)`{lang="ts-type"}                                                                           | `FormError[]`{lang="ts-type"} <br> <div class="text-toned mt-1"><p>Retrieves form errors associated with a specific path. If no path is provided, returns all form errors.</p></div>         |
 | `setErrors(errors: FormError[], name?: keyof T RegExp)`{lang="ts-type"}                                                      | `void` <br> <div class="text-toned mt-1"><p>Sets form errors for a given path. If no path is provided, overrides all errors.</p>                                                           |
 | `errors`{lang="ts-type"}                                                                                                     | `Ref<FormError[]>`{lang="ts-type"} <br> <div class="text-toned mt-1"><p>A reference to the array containing validation errors. Use this to access or manipulate the error information.</p> |
 | `disabled`{lang="ts-type"}                                                                                                   | `Ref<boolean>`{lang="ts-type"}                                                                                                                                                             |

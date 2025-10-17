@@ -1,4 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Slider from '../../src/runtime/components/Slider.vue'
 import type { SliderProps } from '../../src/runtime/components/Slider.vue'
 import ComponentRender from '../component-render'
@@ -30,6 +32,26 @@ describe('Slider', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SliderProps }) => {
     const html = await ComponentRender(nameOrHtml, options, Slider)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Slider, {
+      props: {
+        modelValue: 10
+
+      }
+    })
+    expect(await axe(wrapper.element, {
+      rules: {
+        // "ARIA input fields must have an accessible name (aria-input-field-name)"
+
+        // Fix any of the following:
+        //   aria-label attribute does not exist or is empty
+        //   aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
+        //   Element has no title attribute
+        'aria-input-field-name': { enabled: false }
+      }
+    })).toHaveNoViolations()
   })
 
   describe('emits', () => {

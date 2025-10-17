@@ -338,12 +338,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.arrowDown` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.arrowDown` key.
 :::
 ::
@@ -430,6 +430,18 @@ const handleSubmit = (e: Event) => {
 ::note
 In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) to render the content of the message. The `getTextFromMessage` utility extracts the text content from the AI SDK V5 message parts. As Nuxt UI provides pre-styled prose components, your content will be automatically styled.
 ::
+
+### With indicator slot
+
+You can customize the loading indicator that appears when the status is `submitted`.
+
+::component-example
+---
+name: "chat-messages-indicator-slot-example"
+collapse: true
+---
+::
+
 
 ## API
 

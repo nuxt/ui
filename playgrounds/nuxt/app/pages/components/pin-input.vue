@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import theme from '#build/ui/pin-input'
 
-const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
-const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
+const colors = Object.keys(theme.variants.color)
+const sizes = Object.keys(theme.variants.size)
+const variants = Object.keys(theme.variants.variant)
+
+const attrs = reactive({
+  color: [theme.defaultVariants.color],
+  size: [theme.defaultVariants.size],
+  variant: [theme.defaultVariants.variant]
+})
 
 const onComplete = (e: string[]) => {
   console.log(e)
@@ -10,43 +17,16 @@ const onComplete = (e: string[]) => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-4">
-    <div class="flex gap-4">
-      <UPinInput placeholder="○" autofocus @complete="onComplete" />
-    </div>
-    <div class="flex items-center gap-4">
-      <UPinInput v-for="variant in variants" :key="variant" placeholder="○" :variant="variant" />
-    </div>
-    <div class="flex items-center gap-4">
-      <UPinInput
-        v-for="variant in variants"
-        :key="variant"
-        placeholder="○"
-        :variant="variant"
-        color="neutral"
-      />
-    </div>
-    <div class="flex items-center gap-4">
-      <UPinInput
-        v-for="variant in variants"
-        :key="variant"
-        placeholder="○"
-        :variant="variant"
-        color="error"
-        highlight
-      />
-    </div>
-    <div class="flex flex-col gap-4">
-      <UPinInput placeholder="○" disabled />
-      <UPinInput placeholder="○" required />
-    </div>
-    <div class="flex items-center gap-4">
-      <UPinInput
-        v-for="size in sizes"
-        :key="size"
-        placeholder="○"
-        :size="size"
-      />
-    </div>
-  </div>
+  <Navbar>
+    <USelect v-model="attrs.color" :items="colors" multiple />
+    <USelect v-model="attrs.size" :items="sizes" multiple />
+    <USelect v-model="attrs.variant" :items="variants" multiple />
+  </Navbar>
+
+  <Matrix v-slot="props" :attrs="attrs">
+    <UPinInput placeholder="○" autofocus v-bind="props" @complete="onComplete" />
+    <UPinInput placeholder="○" highlight v-bind="props" />
+    <UPinInput placeholder="○" disabled v-bind="props" />
+    <UPinInput placeholder="○" required v-bind="props" />
+  </Matrix>
 </template>

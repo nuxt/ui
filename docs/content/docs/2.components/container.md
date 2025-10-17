@@ -9,6 +9,12 @@ links:
 
 ## Usage
 
+Use the default slot to center and constrain the width of your content.
+
+::tip{to="/docs/getting-started/theme/css-variables#container"}
+Its max width is controlled by the `--ui-container` CSS variable.
+::
+
 ::component-example
 ---
 name: 'container-example'

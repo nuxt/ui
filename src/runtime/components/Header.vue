@@ -45,11 +45,11 @@ export interface HeaderSlots {
   left(props?: {}): any
   default(props?: {}): any
   right(props?: {}): any
-  toggle(props: { open: boolean, toggle: () => void }): any
+  toggle(props: { open: boolean, toggle: () => void, ui: Header['ui'] }): any
   top(props?: {}): any
   bottom(props?: {}): any
   body(props?: {}): any
-  content(props?: {}): any
+  content(props: { close?: () => void }): any
 }
 </script>
 
@@ -122,7 +122,7 @@ function toggleOpen() {
 
 <template>
   <DefineToggleTemplate>
-    <slot name="toggle" :open="open" :toggle="toggleOpen">
+    <slot name="toggle" :open="open" :toggle="toggleOpen" :ui="ui">
       <UButton
         v-if="toggle"
         color="neutral"
@@ -184,8 +184,8 @@ function toggleOpen() {
       content: ui.content({ class: props.ui?.content })
     }"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot name="content" v-bind="contentData">
         <div v-if="mode !== 'drawer'" :class="ui.header({ class: props.ui?.header })">
           <ReuseLeftTemplate />
 

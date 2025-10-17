@@ -29,7 +29,7 @@ exports[`ChangelogVersions > renders with as correctly 1`] = `
         </div>
         <div class="border-t border-default pt-5 flex items-center justify-between mt-5">
           <div class="flex flex-wrap gap-x-4 gap-y-1.5">
-            <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+            <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
               <div class="">
                 <!--v-if-->
                 <p class="font-medium text-highlighted text-sm">benjamincanac</p>
@@ -73,7 +73,7 @@ exports[`ChangelogVersions > renders with class correctly 1`] = `
         </div>
         <div class="border-t border-default pt-5 flex items-center justify-between mt-5">
           <div class="flex flex-wrap gap-x-4 gap-y-1.5">
-            <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+            <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
               <div class="">
                 <!--v-if-->
                 <p class="font-medium text-highlighted text-sm">benjamincanac</p>
@@ -124,7 +124,7 @@ exports[`ChangelogVersions > renders with indicator slot correctly 1`] = `
         </div>
         <div class="border-t border-default pt-5 flex items-center justify-between mt-5">
           <div class="flex flex-wrap gap-x-4 gap-y-1.5">
-            <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+            <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
               <div class="">
                 <!--v-if-->
                 <p class="font-medium text-highlighted text-sm">benjamincanac</p>
@@ -168,7 +168,7 @@ exports[`ChangelogVersions > renders with ui correctly 1`] = `
         </div>
         <div class="border-t border-default pt-5 flex items-center justify-between mt-5">
           <div class="flex flex-wrap gap-x-4 gap-y-1.5">
-            <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+            <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
               <div class="">
                 <!--v-if-->
                 <p class="font-medium text-highlighted text-sm">benjamincanac</p>
@@ -212,7 +212,7 @@ exports[`ChangelogVersions > renders with versions correctly 1`] = `
         </div>
         <div class="border-t border-default pt-5 flex items-center justify-between mt-5">
           <div class="flex flex-wrap gap-x-4 gap-y-1.5">
-            <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+            <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
               <div class="">
                 <!--v-if-->
                 <p class="font-medium text-highlighted text-sm">benjamincanac</p>
@@ -250,7 +250,7 @@ exports[`ChangelogVersions > renders without indicator correctly 1`] = `
         </div>
         <div class="border-t border-default pt-5 flex items-center justify-between mt-5">
           <div class="flex flex-wrap gap-x-4 gap-y-1.5">
-            <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+            <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
               <div class="">
                 <!--v-if-->
                 <p class="font-medium text-highlighted text-sm">benjamincanac</p>

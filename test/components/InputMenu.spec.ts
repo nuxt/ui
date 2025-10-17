@@ -1,12 +1,14 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { flushPromises, mount } from '@vue/test-utils'
 import InputMenu from '../../src/runtime/components/InputMenu.vue'
 import type { InputMenuProps, InputMenuSlots } from '../../src/runtime/components/InputMenu.vue'
-import ComponentRender from '../component-render'
-import theme from '#build/ui/input'
-import { renderForm } from '../utils/form'
-import { flushPromises, mount } from '@vue/test-utils'
 import type { FormInputEvents } from '../../src/module'
+import ComponentRender from '../component-render'
+import { renderForm } from '../utils/form'
 import { expectEmitPayloadType } from '../utils/types'
+import theme from '#build/ui/input'
 
 describe('InputMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -66,6 +68,7 @@ describe('InputMenu', () => {
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-chevron-down' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-check' } }],
     ['with arrow', { props: { ...props, arrow: true } }],
+    ['with virtualize', { props: { ...props, virtualize: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
@@ -85,6 +88,21 @@ describe('InputMenu', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputMenuProps, slots?: Partial<InputMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputMenu)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(InputMenu, {
+      props: {
+        items,
+        modelValue: items[0],
+        placeholder: 'Select an item',
+        icon: 'i-lucide-search',
+        trailingIcon: 'i-lucide-chevron-down',
+        required: true
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {
@@ -114,6 +132,63 @@ describe('InputMenu', () => {
       const input = wrapper.findComponent({ name: 'TagsInputRoot' })
       await input.vm.$emit('remove-tag', 'Option 1')
       expect(wrapper.emitted()).toMatchObject({ 'remove-tag': [['Option 1']] })
+    })
+  })
+
+  describe('it should display correct label', () => {
+    test.each([null, undefined, ''])('falsy model value %s should display placeholder', (modelValue) => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items,
+          modelValue,
+          placeholder: 'Select an item'
+        }
+      })
+
+      expect(wrapper.find('input').attributes('placeholder')).toBe('Select an item')
+    })
+
+    test('with string array and string value', () => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items: ['Apple', 'Banana', 'Cherry'],
+          modelValue: 'Banana'
+        }
+      })
+
+      expect(wrapper.find('input').element.value).toBe('Banana')
+    })
+
+    test('with multiple and empty array value should display placeholder', () => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items,
+          multiple: true,
+          modelValue: [],
+          placeholder: 'Select items'
+        }
+      })
+      expect(wrapper.find('input').attributes('placeholder')).toBe('Select items')
+    })
+
+    test('with falsy modelValue and options items contain falsy', async () => {
+      const wrapper = mount(InputMenu, {
+        props: {
+          items: [
+            {
+              label: 'John Doe',
+              value: null
+            },
+            {
+              label: 'John Lennon',
+              value: 1
+            }
+          ],
+          valueKey: 'value',
+          modelValue: null
+        }
+      })
+      expect(wrapper.find('input').element.value).toBe('John Doe')
     })
   })
 

@@ -4,7 +4,7 @@ import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentP
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, IconProps, KbdProps, LinkProps } from '../types'
-import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
@@ -31,8 +31,8 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   open?: boolean
   defaultOpen?: boolean
   children?: ArrayOrNested<DropdownMenuItem>
-  onSelect?(e: Event): void
-  onUpdateChecked?(checked: boolean): void
+  onSelect?: (e: Event) => void
+  onUpdateChecked?: (checked: boolean) => void
   class?: any
   ui?: Pick<DropdownMenu['slots'], 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLabel' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>
   [key: string]: any
@@ -82,7 +82,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: keyof NestedItem<T>
+  labelKey?: GetItemKeys<T>
   disabled?: boolean
   class?: any
   ui?: DropdownMenu['slots']
@@ -90,7 +90,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
+type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number, ui: DropdownMenu['ui'] }) => any
 
 export type DropdownMenuSlots<
   A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
@@ -99,11 +99,13 @@ export type DropdownMenuSlots<
   'default'(props: { open: boolean }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
+  'item-label': (props: { item: T, active?: boolean, index: number }) => any
   'item-trailing': SlotProps<T>
   'content-top': (props?: {}) => any
   'content-bottom': (props?: {}) => any
-} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
+}
+& DynamicSlots<MergeTypes<T>, 'label', { active?: boolean, index: number }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean, index: number, ui: DropdownMenu['ui'] }>
 
 </script>
 
@@ -131,7 +133,7 @@ const appConfig = useAppConfig() as DropdownMenu['AppConfig']
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
-const proxySlots = omit(slots, ['default'])
+const getProxySlots = () => omit(slots, ['default'])
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })({
   size: props.size
@@ -156,7 +158,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
     >
-      <template v-for="(_, name) in proxySlots" #[name]="slotData">
+      <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
         <slot :name="(name as keyof DropdownMenuSlots<T>)" v-bind="slotData" />
       </template>
 

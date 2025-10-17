@@ -1,4 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises, mount } from '@vue/test-utils'
 import Select from '../../src/runtime/components/Select.vue'
 import type { SelectProps, SelectSlots } from '../../src/runtime/components/Select.vue'
@@ -82,6 +84,95 @@ describe('Select', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps, slots?: Partial<SelectSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Select)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Select, {
+      props: {
+        ...props,
+        modelValue: items[0]?.value,
+        required: true,
+        avatar: {
+          src: 'https://github.com/benjamincanac.png',
+          alt: 'Benjamin Canac'
+        }
+      }
+    })
+
+    expect(await axe(wrapper.element, {
+      rules: {
+        // "Buttons must have discernible text (button-name)"
+
+        // Fix any of the following:
+        //   Element does not have inner text that is visible to screen readers
+        //   aria-label attribute does not exist or is empty
+        //   aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
+        //   Element has no title attribute
+        //   Element does not have an implicit (wrapped) <label>
+        //   Element does not have an explicit <label>
+        //   Element's default semantics were not overridden with role="none" or role="presentation"
+
+        // We should add aria-labeledby to the SelectTrigger and the id to the value/placeholder element.
+        'button-name': { enabled: false }
+      }
+    })).toHaveNoViolations()
+  })
+
+  describe('it should display correct label', () => {
+    test.each([null, undefined, ''])('falsy model value %s should display placeholder', (modelValue) => {
+      const wrapper = mount(Select, {
+        props: {
+          items,
+          modelValue,
+          placeholder: 'Select an item'
+        }
+      })
+
+      expect(wrapper.text()).toBe('Select an item')
+    })
+
+    test('with string array and string value', () => {
+      const wrapper = mount(Select, {
+        props: {
+          items: ['Apple', 'Banana', 'Cherry'],
+          modelValue: 'Banana'
+        }
+      })
+
+      expect(wrapper.text()).toBe('Banana')
+    })
+
+    test('with multiple and empty array value should display placeholder', () => {
+      const wrapper = mount(Select, {
+        props: {
+          items,
+          multiple: true,
+          modelValue: [],
+          placeholder: 'Select items'
+        }
+      })
+      expect(wrapper.text()).toBe('Select items')
+    })
+
+    test('with falsy modelValue and options items contain falsy', () => {
+      const wrapper = mount(Select, {
+        props: {
+          items: [
+            {
+              label: 'John Doe',
+              value: null
+            },
+            {
+              label: 'John Lennon',
+              value: 1
+            }
+          ],
+          valueKey: 'value',
+          modelValue: null
+        }
+      })
+      expect(wrapper.text()).toBe('John Doe')
+    })
   })
 
   describe('emits', () => {

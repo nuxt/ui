@@ -19,6 +19,62 @@ links:
 
 Use the `v-model` directive to control the value of the CommandPalette or the `default-value` prop to set the initial value when you do not need to control its state.
 
+::component-code
+---
+collapse: true
+hide:
+  - autofocus
+ignore:
+  - groups
+  - modelValue
+  - class
+external:
+  - groups
+  - modelValue
+class: '!p-0'
+props:
+  modelValue: {}
+  autofocus: false
+  groups:
+    - id: 'users'
+      label: 'Users'
+      items:
+        - label: 'Benjamin Canac'
+          suffix: 'benjamincanac'
+          avatar:
+            src: 'https://github.com/benjamincanac.png'
+        - label: 'Romain Hamel'
+          suffix: 'romhml'
+          avatar:
+            src: 'https://github.com/romhml.png'
+        - label: 'Sébastien Chopin'
+          suffix: 'atinux'
+          avatar:
+            src: 'https://github.com/atinux.png'
+        - label: 'Hugo Richard'
+          suffix: 'HugoRCD'
+          avatar:
+            src: 'https://github.com/HugoRCD.png'
+        - label: 'Sandro Circi'
+          suffix: 'sandros94'
+          avatar:
+            src: 'https://github.com/sandros94.png'
+        - label: 'Daniel Roe'
+          suffix: 'danielroe'
+          avatar:
+            src: 'https://github.com/danielroe.png'
+        - label: 'Jakub Michálek'
+          suffix: 'J-Michalek'
+          avatar:
+            src: 'https://github.com/J-Michalek.png'
+        - label: 'Eugen Istoc'
+          suffix: 'genu'
+          avatar:
+            src: 'https://github.com/genu.png'
+  class: 'flex-1 h-80'
+---
+::
+
 ::tip{to="#control-selected-items"}
 You can also use the `@update:model-value` event to listen to the selected item(s).
 ::
@@ -54,7 +110,7 @@ Each group contains an `items` array of objects that define the commands. Each i
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `placeholder?: string`{lang="ts-type"}
 - `children?: CommandPaletteItem[]`{lang="ts-type"}
-- `onSelect?(e?: Event): void`{lang="ts-type"}
+- `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
 
@@ -84,30 +140,34 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
-        - label: 'Sylvain Marroufin'
-          suffix: 'smarroufin'
-          avatar:
-            src: 'https://github.com/smarroufin.png'
-        - label: 'Sébastien Chopin'
-          suffix: 'atinux'
-          avatar:
-            src: 'https://github.com/atinux.png'
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
-        - label: 'Haytham A. Salama'
-          suffix: 'Haythamasalama'
+        - label: 'Sébastien Chopin'
+          suffix: 'atinux'
           avatar:
-            src: 'https://github.com/Haythamasalama.png'
+            src: 'https://github.com/atinux.png'
+        - label: 'Hugo Richard'
+          suffix: 'HugoRCD'
+          avatar:
+            src: 'https://github.com/HugoRCD.png'
+        - label: 'Sandro Circi'
+          suffix: 'sandros94'
+          avatar:
+            src: 'https://github.com/sandros94.png'
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
-        - label: 'Neil Richter'
-          suffix: 'noook'
+        - label: 'Jakub Michálek'
+          suffix: 'J-Michalek'
           avatar:
-            src: 'https://github.com/noook.png'
+            src: 'https://github.com/J-Michalek.png'
+        - label: 'Eugen Istoc'
+          suffix: 'genu'
+          avatar:
+            src: 'https://github.com/genu.png'
   class: 'flex-1'
 ---
 ::
@@ -146,30 +206,34 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
-        - label: 'Sylvain Marroufin'
-          suffix: 'smarroufin'
-          avatar:
-            src: 'https://github.com/smarroufin.png'
-        - label: 'Sébastien Chopin'
-          suffix: 'atinux'
-          avatar:
-            src: 'https://github.com/atinux.png'
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
-        - label: 'Haytham A. Salama'
-          suffix: 'Haythamasalama'
+        - label: 'Sébastien Chopin'
+          suffix: 'atinux'
           avatar:
-            src: 'https://github.com/Haythamasalama.png'
+            src: 'https://github.com/atinux.png'
+        - label: 'Hugo Richard'
+          suffix: 'HugoRCD'
+          avatar:
+            src: 'https://github.com/HugoRCD.png'
+        - label: 'Sandro Circi'
+          suffix: 'sandros94'
+          avatar:
+            src: 'https://github.com/sandros94.png'
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
-        - label: 'Neil Richter'
-          suffix: 'noook'
+        - label: 'Jakub Michálek'
+          suffix: 'J-Michalek'
           avatar:
-            src: 'https://github.com/noook.png'
+            src: 'https://github.com/J-Michalek.png'
+        - label: 'Eugen Istoc'
+          suffix: 'genu'
+          avatar:
+            src: 'https://github.com/genu.png'
   class: 'flex-1'
 ---
 ::
@@ -242,12 +306,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.search` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.search` key.
 :::
 ::
@@ -287,42 +351,46 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
-        - label: 'Sylvain Marroufin'
-          suffix: 'smarroufin'
-          avatar:
-            src: 'https://github.com/smarroufin.png'
-        - label: 'Sébastien Chopin'
-          suffix: 'atinux'
-          avatar:
-            src: 'https://github.com/atinux.png'
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
-        - label: 'Haytham A. Salama'
-          suffix: 'Haythamasalama'
+        - label: 'Sébastien Chopin'
+          suffix: 'atinux'
           avatar:
-            src: 'https://github.com/Haythamasalama.png'
+            src: 'https://github.com/atinux.png'
+        - label: 'Hugo Richard'
+          suffix: 'HugoRCD'
+          avatar:
+            src: 'https://github.com/HugoRCD.png'
+        - label: 'Sandro Circi'
+          suffix: 'sandros94'
+          avatar:
+            src: 'https://github.com/sandros94.png'
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
-        - label: 'Neil Richter'
-          suffix: 'noook'
+        - label: 'Jakub Michálek'
+          suffix: 'J-Michalek'
           avatar:
-            src: 'https://github.com/noook.png'
+            src: 'https://github.com/J-Michalek.png'
+        - label: 'Eugen Istoc'
+          suffix: 'genu'
+          avatar:
+            src: 'https://github.com/genu.png'
   class: 'flex-1'
 ---
 ::
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.check` key.
 :::
 ::
@@ -364,12 +432,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronRight` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronRight` key.
 :::
 ::
@@ -439,12 +507,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
 :::
 ::
@@ -555,12 +623,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::
 ::
@@ -642,12 +710,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.arrowLeft` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.arrowLeft` key.
 :::
 ::
@@ -821,6 +889,24 @@ props:
 ---
 ::
 
+### With virtualization :badge{label="Soon"}
+
+Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
+
+::warning{to="https://github.com/unovue/reka-ui/issues/1885" target="_blank"}
+When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
+::
+
+::component-example
+---
+collapse: true
+name: 'command-palette-virtualize-example'
+class: '!p-0'
+props:
+  autofocus: false
+---
+::
+
 ### Within a Popover
 
 You can use the CommandPalette component inside a [Popover](/docs/components/popover)'s content.
@@ -877,7 +963,7 @@ props:
 This can be useful when using the CommandPalette inside a [`Modal`](/docs/components/modal) for example.
 ::
 
-### With footer slot :badge{label="New" class="align-text-top"}
+### With footer slot
 
 Use the `#footer` slot to add custom content at the bottom of the CommandPalette, such as keyboard shortcuts help or additional actions.
 

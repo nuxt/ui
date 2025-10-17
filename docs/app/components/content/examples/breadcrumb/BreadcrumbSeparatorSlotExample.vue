@@ -3,8 +3,8 @@ import type { BreadcrumbItem } from '@nuxt/ui'
 
 const items: BreadcrumbItem[] = [
   {
-    label: 'Home',
-    to: '/'
+    label: 'Docs',
+    to: '/docs'
   },
   {
     label: 'Components',

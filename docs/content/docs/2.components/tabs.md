@@ -12,6 +12,18 @@ links:
 
 ## Usage
 
+Use the Tabs component to display a list of items in a tabs.
+
+::component-example
+---
+collapse: true
+prettier: true
+name: 'tabs-example'
+props:
+  class: 'w-full'
+---
+::
+
 ### Items
 
 Use the `items` prop as an array of objects with the following properties:

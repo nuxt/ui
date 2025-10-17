@@ -10,7 +10,8 @@ import type { ComponentConfig } from '../types/tv'
 
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
 
-export interface InputProps<T extends AcceptableValue = AcceptableValue> extends UseComponentIconsProps {
+export type InputValue = AcceptableValue
+export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -47,20 +48,20 @@ export interface InputProps<T extends AcceptableValue = AcceptableValue> extends
   ui?: Input['slots']
 }
 
-export interface InputEmits<T extends AcceptableValue = AcceptableValue> {
+export interface InputEmits<T extends InputValue = InputValue> {
   'update:modelValue': [value: T]
   'blur': [event: FocusEvent]
   'change': [event: Event]
 }
 
 export interface InputSlots {
-  leading(props?: {}): any
-  default(props?: {}): any
-  trailing(props?: {}): any
+  leading(props: { ui: Input['ui'] }): any
+  default(props: { ui: Input['ui'] }): any
+  trailing(props: { ui: Input['ui'] }): any
 }
 </script>
 
-<script setup lang="ts" generic="T extends AcceptableValue">
+<script setup lang="ts" generic="T extends InputValue">
 import { ref, computed, onMounted } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
@@ -193,17 +194,17 @@ defineExpose({
       @focus="emitFormFocus"
     >
 
-    <slot />
+    <slot :ui="ui" />
 
     <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-      <slot name="leading">
+      <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
         <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
     <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-      <slot name="trailing">
+      <slot name="trailing" :ui="ui">
         <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>

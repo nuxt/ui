@@ -9,7 +9,8 @@ import type { ComponentConfig } from '../types/tv'
 
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>
 
-interface SelectItemBase {
+export type SelectValue = AcceptableValue
+export type SelectItem = SelectValue | {
   label?: string
   /**
    * @IconifyIcon
@@ -22,14 +23,13 @@ interface SelectItemBase {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
-  value?: AcceptableValue | boolean
+  value?: SelectValue
   disabled?: boolean
-  onSelect?(e?: Event): void
+  onSelect?: (e: Event) => void
   class?: any
   ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
-export type SelectItem = SelectItemBase | AcceptableValue | boolean
 
 export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
   id?: string
@@ -83,7 +83,7 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: keyof NestedItem<T>
+  labelKey?: GetItemKeys<T>
   items?: T
   /** The value of the Select when initially rendered. Use when you do not need to control the state of the Select. */
   defaultValue?: GetModelValue<T, VK, M>
@@ -105,7 +105,7 @@ export type SelectEmits<A extends ArrayOrNested<SelectItem>, VK extends GetItemK
   focus: [event: FocusEvent]
 } & GetModelValueEmits<A, VK, M>
 
-type SlotProps<T extends SelectItem> = (props: { item: T, index: number }) => any
+type SlotProps<T extends SelectItem> = (props: { item: T, index: number, ui: Select['ui'] }) => any
 
 export interface SelectSlots<
   A extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>,
@@ -113,23 +113,12 @@ export interface SelectSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: {
-    modelValue?: GetModelValue<A, VK, M>
-    open: boolean
-    ui: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string }
-  }): any
-  'default'(props: {
-    modelValue?: GetModelValue<A, VK, M>
-    open: boolean
-  }): any
-  'trailing'(props: {
-    modelValue?: GetModelValue<A, VK, M>
-    open: boolean
-    ui: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string }
-  }): any
+  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: Select['ui'] }): any
+  'default'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: Select['ui'] }): any
+  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: Select['ui'] }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
+  'item-label'(props: { item: T, index: number }): any
   'item-trailing': SlotProps<T>
   'content-top': (props?: {}) => any
   'content-bottom': (props?: {}) => any
@@ -138,7 +127,7 @@ export interface SelectSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false">
 import { ref, computed, onMounted, toRef } from 'vue'
-import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
+import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -156,7 +145,7 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SelectProps<T, VK, M>>(), {
   valueKey: 'value' as never,
-  labelKey: 'label' as never,
+  labelKey: 'label',
   portal: true,
   autofocusDelay: 0
 })
@@ -200,7 +189,7 @@ const items = computed(() => groups.value.flatMap(group => group) as T[])
 function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map(item => getDisplayValue(items.value, item, {
+      .map(item => getDisplayValue<T[], GetItemValue<T, VK>>(items.value, item, {
         labelKey: props.labelKey,
         valueKey: props.valueKey
       }))
@@ -209,7 +198,7 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
     return displayedValues.length > 0 ? displayedValues.join(', ') : undefined
   }
 
-  return getDisplayValue(items.value, value, {
+  return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value as GetItemValue<T, VK>, {
     labelKey: props.labelKey,
     valueKey: props.valueKey
   })
@@ -251,7 +240,7 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
-function isSelectItem(item: SelectItem): item is SelectItemBase {
+function isSelectItem(item: SelectItem): item is Exclude<SelectItem, SelectValue> {
   return typeof item === 'object' && item !== null
 }
 
@@ -268,8 +257,8 @@ defineExpose({
     v-bind="rootProps"
     :autocomplete="autocomplete"
     :disabled="disabled"
-    :default-value="(defaultValue as (AcceptableValue | AcceptableValue[]))"
-    :model-value="(modelValue as (AcceptableValue | AcceptableValue[]))"
+    :default-value="(defaultValue as Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[])"
+    :model-value="(modelValue as Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[])"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
@@ -286,7 +275,7 @@ defineExpose({
         </slot>
       </span>
 
-      <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open">
+      <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
         <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
           <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" :class="ui.value({ class: props.ui?.value })">
             {{ displayedModelValue }}
@@ -317,15 +306,15 @@ defineExpose({
 
               <SelectSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
 
-              <SelectItem
+              <RSelectItem
                 v-else
                 :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
                 :disabled="isSelectItem(item) && item.disabled"
                 :value="isSelectItem(item) ? get(item, props.valueKey as string) : item"
                 @select="isSelectItem(item) && item.onSelect?.($event)"
               >
-                <slot name="item" :item="(item as NestedItem<T>)" :index="index">
-                  <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index">
+                <slot name="item" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
+                  <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
                     <UIcon v-if="isSelectItem(item) && item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
                     <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
                     <UChip
@@ -345,14 +334,14 @@ defineExpose({
                   </SelectItemText>
 
                   <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
-                    <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" />
+                    <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" :ui="ui" />
 
                     <SelectItemIndicator as-child>
                       <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
                     </SelectItemIndicator>
                   </span>
                 </slot>
-              </SelectItem>
+              </RSelectItem>
             </template>
           </SelectGroup>
         </div>

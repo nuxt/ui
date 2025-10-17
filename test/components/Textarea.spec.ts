@@ -1,5 +1,7 @@
 import { describe, it, expect, test } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { flushPromises, mount } from '@vue/test-utils'
 import Textarea from '../../src/runtime/components/Textarea.vue'
 import type { TextareaProps, TextareaSlots } from '../../src/runtime/components/Textarea.vue'
 import ComponentRender from '../component-render'
@@ -47,6 +49,19 @@ describe('Textarea', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TextareaProps, slots?: Partial<TextareaSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Textarea)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Textarea, {
+      props: {
+        placeholder: 'Placeholder',
+        leadingIcon: 'i-lucide-user',
+        trailingIcon: 'i-lucide-check',
+        rows: 5,
+        required: true
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   it.each([
@@ -139,29 +154,35 @@ describe('Textarea', () => {
     test('validate on blur works', async () => {
       const { input, wrapper } = await createForm(['blur'])
       await input.trigger('blur')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
       await input.trigger('blur')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('validate on change works', async () => {
       const { input, wrapper } = await createForm(['change'])
       await input.trigger('change')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       input.setValue('valid')
       await input.trigger('change')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'], true)
       await input.setValue('value')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
@@ -169,14 +190,17 @@ describe('Textarea', () => {
       const { input, wrapper } = await createForm(['input'])
 
       await input.setValue('value')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
 
       await input.trigger('blur')
 
       await input.setValue('value')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
   })

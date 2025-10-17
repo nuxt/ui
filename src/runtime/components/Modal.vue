@@ -67,7 +67,7 @@ export interface ModalSlots {
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { close: () => void, ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string } }): any
+  close(props: { ui: Modal['ui'] }): any
   body(props: { close: () => void }): any
   footer(props: { close: () => void }): any
 }
@@ -101,10 +101,6 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen'
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
-  const defaultEvents = {
-    closeAutoFocus: (e: Event) => e.preventDefault()
-  }
-
   if (!props.dismissible) {
     const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
 
@@ -114,10 +110,10 @@ const contentEvents = computed(() => {
         emits('close:prevent')
       }
       return acc
-    }, defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (e: Event) => void>)
+    }, {} as Record<typeof events[number], (e: Event) => void>)
   }
 
-  return defaultEvents
+  return {}
 })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {}) })({
@@ -171,7 +167,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
               <slot name="actions" />
 
               <DialogClose v-if="props.close || !!slots.close" as-child>
-                <slot name="close" :close="close" :ui="ui">
+                <slot name="close" :ui="ui">
                   <UButton
                     v-if="props.close"
                     :icon="closeIcon || appConfig.ui.icons.close"

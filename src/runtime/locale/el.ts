@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'Προηγούμενο'
     },
     chatPrompt: {
-      placeholder: 'Εδώ γράψτε το μήνυμά σας...'
+      placeholder: 'Εδώ γράψτε το μήνυμά σας…'
     },
     chatPromptSubmit: {
       label: 'Αποστολή'
@@ -46,14 +46,14 @@ export default defineLocale<Messages>({
       close: 'Κλείσιμο',
       noData: 'Δεν υπάρχουν δεδομένα',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε...'
+      placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε…'
     },
     contentSearch: {
       links: 'Σύνδεσμοι',
       theme: 'Θέμα'
     },
     contentSearchButton: {
-      label: 'Αναζήτηση...'
+      label: 'Αναζήτηση…'
     },
     contentToc: {
       title: 'Σε αυτή τη σελίδα'
@@ -62,7 +62,7 @@ export default defineLocale<Messages>({
       theme: 'Θέμα'
     },
     dashboardSearchButton: {
-      label: 'Αναζήτηση...'
+      label: 'Αναζήτηση…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Σύμπτυξη πλευρικής μπάρας',
@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
       create: 'Δημιουργία "{label}"',
       noData: 'Δεν υπάρχουν δεδομένα',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      search: 'Αναζήτηση...'
+      search: 'Αναζήτηση…'
     },
     slideover: {
       close: 'Κλείσιμο'

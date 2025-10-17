@@ -14,6 +14,14 @@ links:
 
 Use the [useToast](/docs/composables/use-toast) composable to display a toast in your application.
 
+::component-example
+---
+collapse: true
+prettier: true
+name: 'toast-example'
+---
+::
+
 ::warning
 Make sure to wrap your app with the [`App`](/docs/components/app) component which uses our [`Toaster`](https://github.com/nuxt/ui/blob/v4/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://reka-ui.com/docs/components/toast#provider) component from Reka UI.
 ::
@@ -131,12 +139,12 @@ name: 'toast-close-icon-example'
 
 ::framework-only
 #nuxt
-:::tip{to="/docs/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::
 ::
@@ -155,7 +163,7 @@ name: 'toast-actions-example'
 ---
 ::
 
-### Progress :badge{label="New" class="align-text-top"}
+### Progress
 
 Pass a `progress` field to customize or hide the [Progress](/docs/components/progress) bar (with `false` value).
 
@@ -248,21 +256,17 @@ name: 'toast-example'
 :toaster-duration-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L5"}
+::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L4"}
 In this example, we use the `AppConfig` to configure the `duration` prop of the `Toaster` component globally.
 ::
 
-### Stacked toasts
+### Change global max :badge{label="Soon"}
 
-Set the `toaster.expand` prop to `false` on the [App](/docs/components/app#props) component to display stacked toasts.
-
-::tip
-You can hover over the toasts to expand them. This will also pause the timer of the toasts.
-::
+Change the `toaster.max` prop on the [App](/docs/components/app#props) component to change the max number of toasts displayed at once.
 
 ```vue [app.vue]
 <script setup lang="ts">
-const toaster = { expand: true }
+const toaster = { max: 3 }
 </script>
 
 <template>
@@ -279,10 +283,44 @@ name: 'toast-example'
 ---
 
 #options
+:toaster-max-example
+::
+
+::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L5"}
+In this example, we use the `AppConfig` to configure the `max` prop of the `Toaster` component globally.
+::
+
+### Stacked toasts
+
+Set the `toaster.expand` prop to `false` on the [App](/docs/components/app#props) component to display stacked toasts (inspired by [Sonner](https://sonner.emilkowal.ski/)).
+
+```vue [app.vue]
+<script setup lang="ts">
+const toaster = { expand: true }
+</script>
+
+<template>
+  <UApp :toaster="toaster">
+    <NuxtPage />
+  </UApp>
+</template>
+```
+
+::tip
+You can hover over the toasts to expand them. This will also pause the timer of the toasts.
+::
+
+::component-example
+---
+prettier: true
+name: 'toast-example'
+---
+
+#options
 :toaster-expand-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L4"}
+::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L6"}
 In this example, we use the `AppConfig` to configure the `expand` prop of the `Toaster` component globally.
 ::
 

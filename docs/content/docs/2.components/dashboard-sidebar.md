@@ -24,6 +24,10 @@ Use it inside the default slot of the [DashboardGroup](/docs/components/dashboar
 </template>
 ```
 
+::warning
+This component does not have a single root element when using the `resizable` prop, so wrap it in a container (e.g., `<div class="flex flex-1">`) if you use page transitions or require a single root for layout.
+::
+
 Use the `left`, `default` and `right` slots to customize the sidebar and the `body` or `content` slots to customize the sidebar menu.
 
 ::component-example
@@ -138,6 +142,10 @@ class: '!p-0 !justify-start'
 ---
 
 :placeholder{class="h-96"}
+::
+
+::tip{to="/docs/components/dashboard-group#props"}
+Sizes are calculated as percentages by default. You can change this using the `unit` prop on the `DashboardGroup` component.
 ::
 
 ::note

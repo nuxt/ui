@@ -1,5 +1,5 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, hasNuxtModule, addVitePlugin } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, hasNuxtModule } from '@nuxt/kit'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
@@ -14,40 +14,40 @@ export interface ModuleOptions {
   /**
    * Prefix for components
    * @defaultValue `U`
-   * @link https://ui.nuxt.com/docs/getting-started/installation/nuxt#prefix
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#prefix
    */
   prefix?: string
 
   /**
    * Enable or disable `@nuxt/fonts` module
    * @defaultValue `true`
-   * @link https://ui.nuxt.com/docs/getting-started/installation/nuxt#fonts
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#fonts
    */
   fonts?: boolean
 
   /**
    * Enable or disable `@nuxtjs/color-mode` module
    * @defaultValue `true`
-   * @link https://ui.nuxt.com/docs/getting-started/installation/nuxt#colormode
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#colormode
    */
   colorMode?: boolean
 
   /**
    * Customize how the theme is generated
-   * @link https://ui.nuxt.com/docs/getting-started/theme
+   * @see https://ui.nuxt.com/docs/getting-started/theme/design-system
    */
   theme?: {
     /**
      * Define the color aliases available for components
      * @defaultValue `['primary', 'secondary', 'success', 'info', 'warning', 'error']`
-     * @link https://ui.nuxt.com/docs/getting-started/installation/nuxt#themecolors
+     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themecolors
      */
     colors?: Color[]
 
     /**
      * Enable or disable transitions on components
      * @defaultValue `true`
-     * @link https://ui.nuxt.com/docs/getting-started/installation/nuxt#themetransitions
+     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themetransitions
      */
     transitions?: boolean
 
@@ -179,10 +179,12 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
     nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, 'isolate'].filter(Boolean).join(' ')
 
-    if (nuxt.options.builder === '@nuxt/vite-builder') {
+    nuxt.hook('vite:extend', async ({ config }) => {
       const plugin = await import('@tailwindcss/vite').then(r => r.default)
-      addVitePlugin(plugin())
-    } else {
+      config.plugins ||= []
+      config.plugins.push(plugin())
+    })
+    if (nuxt.options.builder !== '@nuxt/vite-builder') {
       nuxt.options.postcss.plugins['@tailwindcss/postcss'] = {}
     }
 

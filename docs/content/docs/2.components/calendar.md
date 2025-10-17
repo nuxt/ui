@@ -11,10 +11,6 @@ links:
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Calendar.vue
 ---
 
-::note
-This component relies on the [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/index.html) package which provides objects and functions for representing and manipulating dates and times in a locale-aware manner.
-::
-
 ## Usage
 
 Use the `v-model` directive to control the selected date.
@@ -45,6 +41,10 @@ external:
 props:
   defaultValue: [2022, 2, 6]
 ---
+::
+
+::note
+This component relies on the [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/index.html) package which provides objects and functions for representing and manipulating dates and times in a locale-aware manner.
 ::
 
 ### Multiple
@@ -98,6 +98,28 @@ Use the `color` prop to change the color of the calendar.
 ---
 props:
   color: neutral
+---
+::
+
+### Variant
+
+Use the `variant` prop to change the variant of the calendar.
+
+::component-code
+---
+cast:
+  defaultValue: DateRange
+hide:
+  - range
+  - defaultValue
+  - defaultValue.start
+  - defaultValue.end
+props:
+  variant: subtle
+  range: true
+  defaultValue:
+    start: [2022, 2, 3]
+    end: [2022, 2, 20]
 ---
 ::
 

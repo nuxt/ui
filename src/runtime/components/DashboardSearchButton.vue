@@ -76,7 +76,7 @@ const slots = defineSlots<ButtonSlots>()
 
 const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate()
 
-const proxySlots = omit(slots, ['trailing'])
+const getProxySlots = () => omit(slots, ['trailing'])
 
 const rootProps = useForwardProps(reactivePick(props, 'color', 'size'))
 const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as TooltipProps)
@@ -108,13 +108,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSea
       :ui="transformUI(ui, props.ui)"
       @click="toggleSearch"
     >
-      <template v-for="(_, name) in proxySlots" #[name]="slotData">
+      <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
         <slot :name="name" v-bind="slotData" />
       </template>
 
-      <template v-if="!collapsed" #trailing>
+      <template v-if="!collapsed" #trailing="{ ui: uiProxy }">
         <div :class="ui.trailing({ class: props.ui?.trailing })">
-          <slot name="trailing">
+          <slot name="trailing" :ui="uiProxy">
             <template v-if="kbds?.length">
               <UKbd v-for="(kbd, index) in kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
             </template>

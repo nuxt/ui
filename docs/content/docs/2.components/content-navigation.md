@@ -9,7 +9,7 @@ links:
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/content/ContentNavigation.vue
 ---
 
-::warning{to="/docs/getting-started/content"}
+::warning{to="/docs/getting-started/integrations/content"}
 This component is only available when the `@nuxt/content` module is installed.
 ::
 
@@ -289,4 +289,4 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prefix="content"}

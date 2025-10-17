@@ -67,8 +67,8 @@ export interface ContentNavigationProps<T extends ContentNavigationLink = Conten
    */
   highlightColor?: ContentNavigation['variants']['highlightColor']
   /**
-   * When type is "single", allows closing content when clicking trigger for an open item.
-   * When type is "multiple", this prop has no effect.
+   * When type is "single", prevents closing the open item when clicking its trigger.
+   * When type is "multiple", disables the collapsible behavior.
    * @defaultValue true
    */
   collapsible?: boolean
@@ -80,7 +80,7 @@ export interface ContentNavigationProps<T extends ContentNavigationLink = Conten
 
 export interface ContentNavigationEmits extends AccordionRootEmits {}
 
-type SlotProps<T> = (props: { link: T, active?: boolean }) => any
+type SlotProps<T> = (props: { link: T, active?: boolean, ui: ContentNavigation['ui'] }) => any
 
 export interface ContentNavigationSlots<T extends ContentNavigationLink = ContentNavigationLink> {
   'link': SlotProps<T>
@@ -118,7 +118,7 @@ const props = withDefaults(defineProps<ContentNavigationProps<T>>(), {
 const emits = defineEmits<ContentNavigationEmits>()
 const slots = defineSlots<ContentNavigationSlots<T>>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'collapsible', 'disabled', 'type', 'unmountOnHide'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'collapsible', 'type', 'unmountOnHide'), emits)
 
 const route = useRoute()
 const appConfig = useAppConfig() as ContentNavigation['AppConfig']
@@ -132,6 +132,15 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentNavig
   highlightColor: props.highlightColor || props.color
 }))
 
+const disabled = computed(() => props.disabled || (props.type === 'multiple' && props.collapsible === false))
+
+function isRouteInTree(link: ContentNavigationLink, routePath: string): boolean {
+  if (link.children?.length) {
+    return link.children.some(child => isRouteInTree(child, routePath))
+  }
+  return routePath === link.path
+}
+
 const defaultValue = computed(() => {
   // When `defaultOpen` is `false`, return `undefined` to close all items
   if (props.defaultOpen === false) {
@@ -142,22 +151,26 @@ const defaultValue = computed(() => {
     return props.type === 'single' ? '0' : props.navigation?.map((link, index) => link.defaultOpen !== false && String(index)).filter(Boolean) as string[]
   }
   // When `defaultOpen` is `true`, open items based on the current route
-  const index = props.navigation?.findIndex(link => route.path.startsWith(link.path))
-  const tyindex = index === -1 ? 0 : index
+  const indices = props.navigation?.reduce((acc, link, index) => {
+    if (isRouteInTree(link, route.path)) {
+      acc.push(String(index))
+    }
+    return acc
+  }, [] as string[]) || []
 
-  return props.type === 'multiple' ? [String(tyindex)] : String(tyindex)
+  return props.type === 'multiple' ? indices : indices[0]
 })
 </script>
 
 <template>
   <DefineLinkTemplate v-slot="{ link, active }">
-    <slot name="link" :link="(link as T)" :active="active">
-      <slot name="link-leading" :link="(link as T)" :active="active">
+    <slot name="link" :link="(link as T)" :active="active" :ui="ui">
+      <slot name="link-leading" :link="(link as T)" :active="active" :ui="ui">
         <UIcon v-if="link.icon" :name="link.icon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, link.ui?.linkLeadingIcon], active })" />
       </slot>
 
       <span v-if="link.title || !!slots['link-title']" :class="ui.linkTitle({ class: [props.ui?.linkTitle, link.ui?.linkTitle], active })">
-        <slot name="link-title" :link="(link as T)" :active="active">
+        <slot name="link-title" :link="(link as T)" :active="active" :ui="ui">
           {{ link.title }}
         </slot>
 
@@ -165,7 +178,7 @@ const defaultValue = computed(() => {
       </span>
 
       <span v-if="link.badge || (link.children?.length && !disabled) || link.trailingIcon || !!slots['link-trailing']" :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, link.ui?.linkTrailing] })">
-        <slot name="link-trailing" :link="(link as T)" :active="active">
+        <slot name="link-trailing" :link="(link as T)" :active="active" :ui="ui">
           <UBadge
             v-if="link.badge"
             color="neutral"
@@ -182,14 +195,14 @@ const defaultValue = computed(() => {
   </DefineLinkTemplate>
 
   <Primitive :as="as" v-bind="$attrs" :as-child="level > 0" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <AccordionRoot as="ul" v-bind="rootProps" :default-value="defaultValue" :class="level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
+    <AccordionRoot as="ul" :disabled="disabled" v-bind="rootProps" :default-value="defaultValue" :class="level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
       <template v-for="(link, index) in navigation" :key="index">
         <AccordionItem v-if="link.children?.length" as="li" :class="ui.itemWithChildren({ class: [props.ui?.itemWithChildren, link.ui?.itemWithChildren], level: level > 0 })" :value="String(index)">
           <AccordionTrigger
             as="button"
             :class="[
-              ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active: link.active, disabled: !!link.disabled }),
-              ui.trigger({ class: [props.ui?.trigger, link.ui?.trigger] })
+              ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active: link.active, disabled: !!link.disabled || disabled }),
+              ui.trigger({ class: [props.ui?.trigger, link.ui?.trigger], disabled })
             ]"
           >
             <ReuseLinkTemplate :link="link" :active="link.active" />
@@ -209,7 +222,7 @@ const defaultValue = computed(() => {
               :ui="props.ui"
             >
               <template v-for="(_, name) in slots" #[name]="slotData">
-                <slot :name="name" :link="(slotData.link as T)" :active="slotData.active" />
+                <slot :name="name" v-bind="{ ...slotData, link: link as T }" />
               </template>
             </UContentNavigation>
           </AccordionContent>
