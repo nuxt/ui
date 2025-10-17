@@ -30,7 +30,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * Configure the increment button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  increment?: ButtonProps | boolean
+  increment?: boolean | ButtonProps
   /**
    * The icon displayed to increment the value.
    * @defaultValue appConfig.ui.icons.plus
@@ -43,7 +43,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * Configure the decrement button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  decrement?: ButtonProps | boolean
+  decrement?: boolean | ButtonProps
   /**
    * The icon displayed to decrement the value.
    * @defaultValue appConfig.ui.icons.minus
@@ -91,8 +91,6 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
   orientation: 'horizontal',
-  incrementDisabled: false,
-  decrementDisabled: false,
   increment: true,
   decrement: true
 })

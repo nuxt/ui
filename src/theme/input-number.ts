@@ -116,14 +116,12 @@ export default (options: Required<ModuleOptions>) => {
       increment: false,
       decrement: false,
       class: 'pe-2.5'
-    },
-    {
+    }, {
       orientation: 'horizontal',
       increment: false,
       decrement: false,
       class: 'px-2.5 text-start'
-    }
-    ],
+    }],
     defaultVariants: {
       size: 'md',
       color: 'primary',
