@@ -61,7 +61,7 @@ const items = computed<{
   rerenderCount.value
   let children = slots.default?.()
   if (!Array.isArray(children)) {
-    children = [children]
+    children = children ? [children] : []
   }
   return children?.flatMap(transformSlot).filter(Boolean) || []
 })
