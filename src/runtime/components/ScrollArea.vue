@@ -76,7 +76,7 @@ export interface ScrollAreaSlots<T = any> {
 </script>
 
 <script setup lang="ts" generic="T = any">
-import { computed, ref, toRef } from 'vue'
+import { computed, ref, toRef, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useVirtualizer } from '@tanstack/vue-virtual'
@@ -139,6 +139,22 @@ const virtualizer = useVirtualizer({
 const virtualItems = computed(() => virtualizer.value.getVirtualItems())
 const totalSize = computed(() => virtualizer.value.getTotalSize())
 
+// Computed values for lane calculations (to avoid re-computing per item)
+const laneSize = computed(() => {
+  const lanes = virtualizerProps.value.lanes
+  return lanes > 1 ? 100 / lanes : 100
+})
+const hasLanes = computed(() => virtualizerProps.value.lanes > 1)
+const gapPadding = computed(() => {
+  const gap = virtualizerProps.value.gap
+  return gap ? `${gap / 2}px` : undefined
+})
+
+// Watch for lane changes and reset measurements
+watch(() => virtualizerProps.value.lanes, () => {
+  virtualizer.value.measure()
+}, { flush: 'sync' })
+
 // Measure element for dynamic sizing
 function measureElement(el: Element | null) {
   if (!el) return undefined
@@ -157,8 +173,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.scrollArea |
     :as="as"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{
-      paddingInline: orientation === 'vertical' ? virtualizerProps.gap ? `${virtualizerProps.gap / 2}px` : undefined : undefined,
-      paddingBlock: orientation === 'horizontal' ? virtualizerProps.gap ? `${virtualizerProps.gap / 2}px` : undefined : undefined
+      paddingInline: orientation === 'vertical' ? gapPadding : undefined,
+      paddingBlock: orientation === 'horizontal' ? gapPadding : undefined
     }"
   >
     <template v-if="!!virtualize">
@@ -176,20 +192,20 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.scrollArea |
           :ref="measureElement"
           :data-index="virtualItem.index"
           :style="{
-            paddingInline: orientation === 'vertical' ? virtualizerProps.gap ? `${virtualizerProps.gap / 2}px` : undefined : undefined,
-            paddingBlock: orientation === 'horizontal' ? virtualizerProps.gap ? `${virtualizerProps.gap / 2}px` : undefined : undefined,
+            paddingInline: orientation === 'vertical' ? gapPadding : undefined,
+            paddingBlock: orientation === 'horizontal' ? gapPadding : undefined,
             position: 'absolute',
-            top: orientation === 'horizontal' && virtualItem.lane !== undefined
-              ? `${virtualItem.lane * (100 / virtualizerProps.lanes)}%`
+            top: orientation === 'horizontal' && hasLanes && virtualItem.lane !== undefined
+              ? `${virtualItem.lane * laneSize}%`
               : 0,
-            left: orientation === 'vertical' && virtualItem.lane !== undefined
-              ? `${virtualItem.lane * (100 / virtualizerProps.lanes)}%`
+            left: orientation === 'vertical' && hasLanes && virtualItem.lane !== undefined
+              ? `${virtualItem.lane * laneSize}%`
               : 0,
             height: orientation === 'horizontal'
-              ? virtualItem.lane !== undefined ? `${100 / virtualizerProps.lanes}%` : '100%'
+              ? hasLanes && virtualItem.lane !== undefined ? `${laneSize}%` : '100%'
               : undefined,
             width: orientation === 'vertical'
-              ? virtualItem.lane !== undefined ? `${100 / virtualizerProps.lanes}%` : '100%'
+              ? hasLanes && virtualItem.lane !== undefined ? `${laneSize}%` : '100%'
               : undefined,
             transform: orientation === 'horizontal'
               ? `translateX(${virtualItem.start}px)`

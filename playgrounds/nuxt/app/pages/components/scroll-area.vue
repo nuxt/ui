@@ -15,8 +15,6 @@ type Item = {
   color?: string
 }
 
-const aspectRatios = ['1/1', '4/3', '16/9']
-
 // Generate items with variable sizes for dynamic sizing demo
 const items = computed<Item[]>(() => {
   return Array.from({ length: itemCount.value }, (_, i) => {
@@ -39,31 +37,36 @@ const items = computed<Item[]>(() => {
 
 <template>
   <Navbar>
-    <USwitch v-model="virtualize" label="Virtualize" />
+    <USwitch v-model="virtualize" label="Virtualize" reverse />
 
     <UFieldGroup>
       <UButton
-        :color="orientation === 'vertical' ? 'primary' : 'neutral'"
-        :variant="orientation === 'vertical' ? 'solid' : 'ghost'"
-        label="Vertical"
+        color="neutral"
+        variant="outline"
+        active-variant="solid"
+        active-color="primary"
+        :active="orientation === 'vertical'"
+        icon="i-lucide-arrow-down"
         @click="orientation = 'vertical'"
       />
       <UButton
-        :color="orientation === 'horizontal' ? 'primary' : 'neutral'"
-        :variant="orientation === 'horizontal' ? 'solid' : 'ghost'"
-        label="Horizontal"
+        color="neutral"
+        variant="outline"
+        active-variant="solid"
+        active-color="primary"
+        :active="orientation === 'horizontal'"
+        icon="i-lucide-arrow-right"
         @click="orientation = 'horizontal'"
       />
     </UFieldGroup>
 
     <div class="flex items-center gap-2">
-      <span class="text-sm text-muted">Items:</span>
       <UInput
         v-model.number="itemCount"
         type="number"
+        icon="i-lucide-image"
         :min="10"
-        :max="10000"
-        class="w-24"
+        :max="100000"
       />
     </div>
 
@@ -80,36 +83,32 @@ const items = computed<Item[]>(() => {
       </div> -->
 
       <div class="flex items-center gap-2">
-        <span class="text-sm text-muted">Gap:</span>
         <UInput
           v-model.number="gap"
           type="number"
           :min="0"
+          icon="i-lucide-between-vertical-start"
           :max="50"
-          class="w-24"
         />
       </div>
 
       <div class="flex items-center gap-2">
-        <span class="text-sm text-muted">Padding:</span>
         <UInput
           v-model.number="padding"
           type="number"
           :min="0"
           :max="200"
-          placeholder="Padding"
-          class="w-20"
+          icon="i-lucide-square-dashed"
         />
       </div>
 
       <div class="flex items-center gap-2">
-        <span class="text-sm text-muted">Lanes:</span>
         <UInput
           v-model.number="lanes"
           type="number"
           :min="1"
-          :max="6"
-          class="w-24"
+          icon="i-lucide-layout-dashboard"
+          :max="10"
         />
       </div>
     </template>
@@ -140,7 +139,8 @@ const items = computed<Item[]>(() => {
       <template v-else #default="{ item, index }">
         <UCard
           :ui="{
-            root: `bg-${item!.color || 'blue'}-500/10 border-${item!.color || 'blue'}-500/20`
+            root: `bg-${item!.color || 'blue'}-500/10 border-${item!.color || 'blue'}-500/20`,
+            body: 'p-0 sm:p-0'
           }"
         >
           <template #header>
@@ -153,16 +153,13 @@ const items = computed<Item[]>(() => {
               </span>
             </div>
           </template>
-          <div class="bg-elevated rounded-lg overflow-hidden h-full">
+          <div class="bg-elevated overflow-hidden h-full">
             <img
               :src="item!.url"
               :alt="item!.title"
               class="w-full h-full object-cover"
             >
           </div>
-          <p class="text-sm text-muted">
-            {{ item!.description || '' }}
-          </p>
         </UCard>
       </template>
     </UScrollArea>
