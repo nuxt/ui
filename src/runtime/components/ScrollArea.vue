@@ -25,53 +25,59 @@ export interface ScrollAreaProps<T = any> {
    * Enable virtualization for large lists.
    * @defaultValue false
    */
-  virtualize?: boolean | {
-    /**
-     * Number of items rendered outside the visible area
-     * @defaultValue 12
-     */
-    overscan?: number
-    /**
-     * Estimated size (in px) of each item
-     * @defaultValue 100
-     */
-    estimateSize?: number
-    /**
-     * Gap (in px) between items
-     * @defaultValue 0
-     */
-    gap?: number
-    /**
-     * Padding (in px) at the start of the list
-     * @defaultValue 0
-     */
-    paddingStart?: number
-    /**
-     * Padding (in px) at the end of the list
-     * @defaultValue 0
-     */
-    paddingEnd?: number
-    /**
-     * Scroll margin (in px) offset for scroll calculations
-     * @defaultValue 0
-     */
-    scrollMargin?: number
-    /**
-     * Number of lanes (columns for vertical, rows for horizontal)
-     * @defaultValue 1
-     */
-    lanes?: number
-    /**
-     * Custom key generation function for items
-     */
-    getItemKey?: (index: number) => string | number
-  }
+  virtualize?:
+    | boolean
+    | {
+      /**
+       * Number of items rendered outside the visible area
+       * @defaultValue 12
+       */
+      overscan?: number
+      /**
+       * Estimated size (in px) of each item
+       * @defaultValue 100
+       */
+      estimateSize?: number
+      /**
+       * Gap (in px) between items
+       * @defaultValue 0
+       */
+      gap?: number
+      /**
+       * Padding (in px) at the start of the list
+       * @defaultValue 0
+       */
+      paddingStart?: number
+      /**
+       * Padding (in px) at the end of the list
+       * @defaultValue 0
+       */
+      paddingEnd?: number
+      /**
+       * Scroll margin (in px) offset for scroll calculations
+       * @defaultValue 0
+       */
+      scrollMargin?: number
+      /**
+       * Number of lanes (columns for vertical, rows for horizontal)
+       * @defaultValue 1
+       */
+      lanes?: number
+      /**
+       * Custom key generation function for items
+       */
+      getItemKey?: (index: number) => string | number
+    }
   class?: any
   ui?: ScrollArea['slots']
 }
 
 export interface ScrollAreaSlots<T = any> {
-  default(props: { item: T, index: number, virtualItem?: VirtualItem } | Record<string, never>): any
+  default(
+    props:
+      | { item: T, index: number, virtualItem?: VirtualItem }
+      | Record<string, never>,
+  ): any
 }
 </script>
 
@@ -94,22 +100,24 @@ const appConfig = useAppConfig() as ScrollArea['AppConfig']
 
 const rootRef = ref()
 
-const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-  estimateSize: 100,
-  overscan: 12,
-  gap: 0,
-  paddingStart: 0,
-  paddingEnd: 0,
-  scrollMargin: 0,
-  lanes: 1
-}))
+const virtualizerProps = toRef(() =>
+  defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+    estimateSize: 100,
+    overscan: 12,
+    gap: 0,
+    paddingStart: 0,
+    paddingEnd: 0,
+    scrollMargin: 0,
+    lanes: 1
+  })
+)
 
 const virtualizer = useVirtualizer({
   enabled: !!props.virtualize,
   get count() {
     return props.items?.length || 0
   },
-  getScrollElement: () => (rootRef.value?.$el || null),
+  getScrollElement: () => rootRef.value?.$el || null,
   get horizontal() {
     return props.orientation === 'horizontal'
   },
@@ -151,9 +159,13 @@ const gapPadding = computed(() => {
 })
 
 // Watch for lane changes and reset measurements
-watch(() => virtualizerProps.value.lanes, () => {
-  virtualizer.value.measure()
-}, { flush: 'sync' })
+watch(
+  () => virtualizerProps.value.lanes,
+  () => {
+    virtualizer.value.measure()
+  },
+  { flush: 'sync' }
+)
 
 // Measure element for dynamic sizing
 function measureElement(el: Element | null) {
@@ -162,9 +174,11 @@ function measureElement(el: Element | null) {
   return undefined
 }
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.scrollArea || {}) })({
-  orientation: props.orientation
-}))
+const ui = computed(() =>
+  tv({ extend: tv(theme), ...(appConfig.ui?.scrollArea || {}) })({
+    orientation: props.orientation
+  })
+)
 </script>
 
 <template>
@@ -191,29 +205,43 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.scrollArea |
           :key="virtualItem.key"
           :ref="measureElement"
           :data-index="virtualItem.index"
+          :class="ui.item({ class: props.ui?.item })"
           :style="{
             paddingInline: orientation === 'vertical' ? gapPadding : undefined,
             paddingBlock: orientation === 'horizontal' ? gapPadding : undefined,
             position: 'absolute',
-            top: orientation === 'horizontal' && hasLanes && virtualItem.lane !== undefined
-              ? `${virtualItem.lane * laneSize}%`
-              : 0,
-            left: orientation === 'vertical' && hasLanes && virtualItem.lane !== undefined
-              ? `${virtualItem.lane * laneSize}%`
-              : 0,
-            height: orientation === 'horizontal'
-              ? hasLanes && virtualItem.lane !== undefined ? `${laneSize}%` : '100%'
-              : undefined,
-            width: orientation === 'vertical'
-              ? hasLanes && virtualItem.lane !== undefined ? `${laneSize}%` : '100%'
-              : undefined,
-            transform: orientation === 'horizontal'
-              ? `translateX(${virtualItem.start}px)`
-              : `translateY(${virtualItem.start}px)`
+            top:
+              orientation === 'horizontal'
+              && hasLanes
+              && virtualItem.lane !== undefined
+                ? `${virtualItem.lane * laneSize}%`
+                : 0,
+            left:
+              orientation === 'vertical'
+              && hasLanes
+              && virtualItem.lane !== undefined
+                ? `${virtualItem.lane * laneSize}%`
+                : 0,
+            height:
+              orientation === 'horizontal'
+                ? hasLanes && virtualItem.lane !== undefined
+                  ? `${laneSize}%`
+                  : '100%'
+                : undefined,
+            width:
+              orientation === 'vertical'
+                ? hasLanes && virtualItem.lane !== undefined
+                  ? `${laneSize}%`
+                  : '100%'
+                : undefined,
+            transform:
+              orientation === 'horizontal'
+                ? `translateX(${virtualItem.start}px)`
+                : `translateY(${virtualItem.start}px)`
           }"
         >
           <slot
-            :item="(items![virtualItem.index] as T)"
+            :item="items![virtualItem.index] as T"
             :index="virtualItem.index"
             :virtual-item="virtualItem"
           />
@@ -222,11 +250,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.scrollArea |
     </template>
 
     <template v-else-if="items?.length">
-      <slot
+      <div
         v-for="(item, index) in items"
-        :item="item"
-        :index="index"
-      />
+        :key="index"
+        :class="ui.item({ class: props.ui?.item })"
+      >
+        <slot :item="item" :index="index" />
+      </div>
     </template>
 
     <template v-else>
