@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url'
 import { readFile } from 'node:fs/promises'
 import { join } from 'pathe'
 import { globSync } from 'tinyglobby'
-import { kebabCase, pascalCase } from 'scule'
+import { camelCase, kebabCase, pascalCase } from 'scule'
 import { genExport } from 'knitwork'
 import colors from 'tailwindcss/colors'
 import { addTemplate, addTypeTemplate, hasNuxtModule } from '@nuxt/kit'
@@ -155,10 +155,6 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
   function writeThemeTemplate(theme: Record<string, any>, path?: string) {
     for (const component in theme) {
-      if (path !== 'prose' && detectedComponents && detectedComponents.size > 0 && !detectedComponents.has(pascalCase(component))) {
-        continue
-      }
-
       templates.push({
         filename: `ui/${path ? path + '/' : ''}${kebabCase(component)}.ts`,
         write: true,
@@ -248,7 +244,32 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'ui.css',
     write: true,
-    getContents: () => `@source "./ui";
+    getContents: () => {
+      let sources = ''
+      if (detectedComponents && detectedComponents.size > 0) {
+        const sourcesList: string[] = []
+
+        if (hasProse) {
+          sourcesList.push('@source "./ui/prose";')
+        }
+
+        for (const component of detectedComponents) {
+          const kebabComponent = kebabCase(component)
+          const camelComponent = camelCase(component)
+
+          if (hasContent && (themeContent as any)[camelComponent]) {
+            sourcesList.push(`@source "./ui/content/${kebabComponent}.ts";`)
+          } else if ((theme as any)[camelComponent]) {
+            sourcesList.push(`@source "./ui/${kebabComponent}.ts";`)
+          }
+        }
+
+        sources = sourcesList.join('\n')
+      } else {
+        sources = '@source "./ui";'
+      }
+
+      return `${sources}
 
 @theme static {
   --color-old-neutral-50: ${colors.neutral[50]};
@@ -314,6 +335,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --fill-inverted: var(--ui-border-inverted);
 }
 `
+    }
   })
 
   templates.push({
