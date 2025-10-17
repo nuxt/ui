@@ -31,7 +31,7 @@ export interface AvatarProps {
 }
 
 export interface AvatarSlots {
-  default(props?: {}): SlotsReturn
+  default?(props?: {}): SlotsReturn
 }
 </script>
 
