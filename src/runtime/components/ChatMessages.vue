@@ -109,6 +109,7 @@ const messagesRefs = ref(new Map<string, HTMLElement>())
 const showAutoScroll = ref(false)
 const lastMessageHeight = ref(0)
 const lastMessageSubmitted = ref(false)
+const isNearBottom = ref(true)
 
 function registerMessageRef(id: string, element: ComponentPublicInstance | null) {
   const elInstance = element?.$el
@@ -129,6 +130,11 @@ function scrollToBottom(smooth: boolean = true) {
     return
   }
 
+  // Don't scroll if user has manually scrolled away from bottom (unless it's an explicit scroll action)
+  if (smooth && props.shouldAutoScroll && !isNearBottom.value) {
+    return
+  }
+
   if (smooth) {
     parent.value.scrollTo({ top: parent.value.scrollHeight, behavior: 'smooth' })
   } else {
@@ -141,14 +147,14 @@ watchThrottled([() => props.messages, () => props.status], ([_, status]) => {
     return
   }
 
-  if (props.shouldAutoScroll) {
-    // Scroll to bottom when message is streaming if `props.shouldAutoScroll` is true
+  if (props.shouldAutoScroll && isNearBottom.value) {
+    // Scroll to bottom when message is streaming if `props.shouldAutoScroll` is true and user is near bottom
     requestAnimationFrame(() => nextTick(scrollToBottom))
   } else {
     // Check scroll position when message is streaming to show the auto scroll button
     checkScrollPosition()
   }
-}, { deep: true, throttle: 100, leading: true })
+}, { deep: true, throttle: 50, leading: true })
 
 watch(() => props.status, (status) => {
   if (status !== 'submitted') {
@@ -178,9 +184,12 @@ function checkScrollPosition() {
 
   const scrollPosition = parent.value.scrollTop + parent.value.clientHeight
   const scrollHeight = parent.value.scrollHeight
-  const threshold = 100
+  const threshold = 50
 
-  showAutoScroll.value = (scrollHeight - scrollPosition) >= threshold
+  const isAtBottom = (scrollHeight - scrollPosition) < threshold
+
+  showAutoScroll.value = !isAtBottom
+  isNearBottom.value = isAtBottom
 }
 
 function onAutoScrollClick() {
