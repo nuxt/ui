@@ -1,7 +1,7 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, installModule, hasNuxtModule, logger } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
 import type { HookResult } from '@nuxt/schema'
-import { addTemplates, detectUsedComponents } from './templates'
+import { addTemplates } from './templates'
 import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
 import { name, version } from '../package.json'
 
@@ -239,27 +239,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     addImportsDir(resolve('./runtime/composables'))
 
-    // Detect used components for tree-shaking (if experimental feature is enabled)
-    let detectedComponents: Set<string> | undefined
-    if (options.experimental?.componentDetection) {
-      const componentDir = resolve('./runtime/components')
-      const includeComponents = Array.isArray(options.experimental.componentDetection)
-        ? options.experimental.componentDetection
-        : undefined
-
-      detectedComponents = await detectUsedComponents(
-        nuxt.options.rootDir,
-        options.prefix!,
-        componentDir,
-        includeComponents
-      )
-      if (detectedComponents && detectedComponents.size > 0) {
-        logger.success(`Nuxt UI detected ${detectedComponents.size} components in use (including dependencies)`)
-      } else {
-        logger.info('Nuxt UI detected no components in use, including all components')
-      }
-    }
-
-    addTemplates(options, nuxt, resolve, detectedComponents)
+    addTemplates(options, nuxt, resolve)
   }
 })

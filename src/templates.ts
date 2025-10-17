@@ -5,20 +5,13 @@ import { globSync } from 'tinyglobby'
 import { camelCase, kebabCase, pascalCase } from 'scule'
 import { genExport } from 'knitwork'
 import colors from 'tailwindcss/colors'
-import { addTemplate, addTypeTemplate, hasNuxtModule } from '@nuxt/kit'
+import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
-
-export function buildTemplates(options: ModuleOptions) {
-  return Object.entries(theme).reduce((acc, [key, component]) => {
-    acc[key] = typeof component === 'function' ? component(options as Required<ModuleOptions>) : component
-    return acc
-  }, {} as Record<string, any>)
-}
 
 /**
  * Build a dependency graph of components by scanning their source files
@@ -83,7 +76,7 @@ function resolveComponentDependencies(
 /**
  * Detect components used in the project by scanning source files
  */
-export async function detectUsedComponents(
+async function detectUsedComponents(
   rootDir: string,
   prefix: string,
   componentDir: string,
@@ -145,11 +138,12 @@ export async function detectUsedComponents(
   return allComponents
 }
 
-export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, detectedComponents?: Set<string>) {
+export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve']) {
   const templates: NuxtTemplate[] = []
 
   let hasProse = false
   let hasContent = false
+  let previousDetectedComponents: Set<string> | undefined
 
   const isDev = process.argv.includes('--uiDev')
 
@@ -219,6 +213,60 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     }
   }
 
+  async function getSources() {
+    let sources = ''
+
+    if (!!nuxt && !!resolve && options.experimental?.componentDetection) {
+      const detectedComponents = await detectUsedComponents(
+        nuxt.options.rootDir,
+        options.prefix!,
+        resolve!('./runtime/components'),
+        Array.isArray(options.experimental.componentDetection) ? options.experimental.componentDetection : undefined
+      )
+
+      if (detectedComponents && detectedComponents.size > 0) {
+        if (previousDetectedComponents) {
+          const newComponents = Array.from(detectedComponents).filter(
+            component => !previousDetectedComponents!.has(component)
+          )
+          if (newComponents.length > 0) {
+            logger.success(`Nuxt UI detected new components: ${newComponents.join(', ')}`)
+          }
+        } else {
+          logger.success(`Nuxt UI detected ${detectedComponents.size} components in use (including dependencies)`)
+        }
+
+        previousDetectedComponents = detectedComponents
+
+        const sourcesList: string[] = []
+
+        if (hasProse) {
+          sourcesList.push('@source "./ui/prose";')
+        }
+
+        for (const component of detectedComponents) {
+          const kebabComponent = kebabCase(component)
+          const camelComponent = camelCase(component)
+
+          if (hasContent && (themeContent as any)[camelComponent]) {
+            sourcesList.push(`@source "./ui/content/${kebabComponent}.ts";`)
+          } else if ((theme as any)[camelComponent]) {
+            sourcesList.push(`@source "./ui/${kebabComponent}.ts";`)
+          }
+        }
+
+        sources = sourcesList.join('\n')
+      } else {
+        if (!previousDetectedComponents || previousDetectedComponents.size > 0) {
+          logger.info('Nuxt UI detected no components in use, including all components')
+        }
+        previousDetectedComponents = new Set()
+      }
+    }
+
+    return sources || '@source "./ui";'
+  }
+
   if (!!nuxt && ((hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content))) {
     hasProse = true
 
@@ -244,30 +292,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'ui.css',
     write: true,
-    getContents: () => {
-      let sources = ''
-      if (detectedComponents && detectedComponents.size > 0) {
-        const sourcesList: string[] = []
-
-        if (hasProse) {
-          sourcesList.push('@source "./ui/prose";')
-        }
-
-        for (const component of detectedComponents) {
-          const kebabComponent = kebabCase(component)
-          const camelComponent = camelCase(component)
-
-          if (hasContent && (themeContent as any)[camelComponent]) {
-            sourcesList.push(`@source "./ui/content/${kebabComponent}.ts";`)
-          } else if ((theme as any)[camelComponent]) {
-            sourcesList.push(`@source "./ui/${kebabComponent}.ts";`)
-          }
-        }
-
-        sources = sourcesList.join('\n')
-      } else {
-        sources = '@source "./ui";'
-      }
+    getContents: async () => {
+      const sources = await getSources()
 
       return `${sources}
 
@@ -406,8 +432,8 @@ export {}
   return templates
 }
 
-export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolver['resolve'], detectedComponents?: Set<string>) {
-  const templates = getTemplates(options, nuxt.options.appConfig.ui, nuxt, detectedComponents)
+export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolver['resolve']) {
+  const templates = getTemplates(options, nuxt.options.appConfig.ui, nuxt, resolve)
   for (const template of templates) {
     if (template.filename!.endsWith('.d.ts')) {
       addTypeTemplate(template as NuxtTypeTemplate)
@@ -419,4 +445,12 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
   nuxt.hook('prepare:types', ({ references }) => {
     references.push({ path: resolve('./runtime/types/app.config.d.ts') })
   })
+
+  if (options.experimental?.componentDetection && import.meta.dev) {
+    nuxt.hook('builder:watch', async (_, path) => {
+      if (/\.(?:vue|ts|js|tsx|jsx)$/.test(path)) {
+        await updateTemplates({ filter: template => template.filename === 'ui.css' })
+      }
+    })
+  }
 }
