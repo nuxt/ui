@@ -142,6 +142,7 @@ const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   reset: false,
   dropzone: true,
   interactive: true,
+  fileDelete: true,
   layout: 'grid',
   position: 'outside'
 })
@@ -292,6 +293,7 @@ defineExpose({
 
               <slot name="file-trailing" :file="file" :index="index">
                 <UButton
+                  v-if="fileDelete"
                   color="neutral"
                   v-bind="{
                     ...(layout === 'grid' ? {
