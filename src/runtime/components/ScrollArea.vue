@@ -64,10 +64,31 @@ export interface ScrollAreaProps<T = any> {
        */
       lanes?: number
       /**
+       * Lane width in pixels for responsive layouts (column width for vertical, row height for horizontal)
+       * When set, lanes will be calculated automatically based on container size
+       * @defaultValue undefined
+       */
+      laneWidth?: number
+      /**
+       * Minimum number of lanes for responsive layouts
+       * @defaultValue 1
+       */
+      minLanes?: number
+      /**
+       * Maximum number of lanes for responsive layouts
+       * @defaultValue undefined
+       */
+      maxLanes?: number
+      /**
        * Custom key generation function for items
        */
       getItemKey?: (index: number) => string | number
     }
+  /**
+   * Enable right-to-left layout
+   * @defaultValue false
+   */
+  rtl?: boolean
   class?: any
   ui?: ScrollArea['slots']
 }
@@ -82,7 +103,7 @@ export interface ScrollAreaSlots<T = any> {
 </script>
 
 <script setup lang="ts" generic="T = any">
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, ref, toRef, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useVirtualizer } from '@tanstack/vue-virtual'
@@ -92,25 +113,71 @@ import { tv } from '../utils/tv'
 const props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
   as: 'div',
   orientation: 'vertical',
-  virtualize: false
+  virtualize: false,
+  rtl: false
 })
 defineSlots<ScrollAreaSlots<T>>()
 
 const appConfig = useAppConfig() as ScrollArea['AppConfig']
 
 const rootRef = ref()
+const containerSize = ref(0)
 
-const virtualizerProps = toRef(() =>
-  defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+// Calculate number of lanes based on container size and lane width constraints
+function calculateResponsiveLanes(): number {
+  const vProps = typeof props.virtualize === 'boolean' ? {} : props.virtualize
+
+  // If laneWidth is not set, use fixed lanes
+  if (!vProps?.laneWidth) {
+    return vProps?.lanes ?? 1
+  }
+
+  const size = containerSize.value
+  const gap = vProps.gap ?? 0
+  const laneWidth = vProps.laneWidth
+  const minLanesValue = vProps.minLanes ?? 1
+  const maxLanesValue = vProps.maxLanes
+
+  if (size === 0) return minLanesValue
+
+  // Calculate how many lanes fit iteratively
+  function countLanes(count: number, consumed: number): number {
+    const nextConsumed = consumed + (count > 0 ? gap : 0) + laneWidth
+    if (nextConsumed <= size) {
+      return countLanes(count + 1, nextConsumed)
+    }
+    return count
+  }
+
+  let lanes = Math.max(minLanesValue, countLanes(0, 0))
+
+  // Apply max constraint
+  if (maxLanesValue !== undefined) {
+    lanes = Math.min(lanes, maxLanesValue)
+  }
+
+  return Math.max(1, lanes)
+}
+
+const virtualizerProps = toRef(() => {
+  const baseProps = defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
     estimateSize: 100,
     overscan: 12,
     gap: 0,
     paddingStart: 0,
     paddingEnd: 0,
     scrollMargin: 0,
-    lanes: 1
+    lanes: 1,
+    minLanes: 1
   })
-)
+
+  // Use responsive lanes if laneWidth is set
+  if (baseProps.laneWidth !== undefined) {
+    baseProps.lanes = calculateResponsiveLanes()
+  }
+
+  return baseProps
+})
 
 const virtualizer = useVirtualizer({
   enabled: !!props.virtualize,
@@ -158,6 +225,15 @@ const gapPadding = computed(() => {
   return gap ? `${gap / 2}px` : undefined
 })
 
+// Calculate lane position (reversed for RTL in vertical mode only)
+function getLanePosition(lane: number): string {
+  const totalLanes = virtualizerProps.value.lanes
+  // Only reverse lane order for vertical orientation (columns go right-to-left)
+  // For horizontal orientation, CSS direction:rtl handles the scroll direction
+  const effectiveLane = props.rtl && props.orientation === 'vertical' ? (totalLanes - 1 - lane) : lane
+  return `${effectiveLane * laneSize.value}%`
+}
+
 // Watch for lane changes and reset measurements
 watch(
   () => virtualizerProps.value.lanes,
@@ -166,6 +242,77 @@ watch(
   },
   { flush: 'sync' }
 )
+
+// ResizeObserver for responsive lanes
+let resizeObserver: ResizeObserver | null = null
+
+function setupResizeObserver() {
+  const vProps = typeof props.virtualize === 'boolean' ? {} : props.virtualize
+
+  // Clean up existing observer
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+    resizeObserver = null
+  }
+
+  // Only setup ResizeObserver if laneWidth is defined (responsive mode)
+  if (vProps?.laneWidth !== undefined && rootRef.value) {
+    const element = rootRef.value.$el || rootRef.value
+    const isHorizontal = props.orientation === 'horizontal'
+
+    resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        // Measure width for vertical (columns), height for horizontal (rows)
+        const newSize = isHorizontal ? entry.contentRect.height : entry.contentRect.width
+        if (newSize !== containerSize.value) {
+          containerSize.value = newSize
+        }
+      }
+    })
+
+    resizeObserver.observe(element)
+
+    // Set initial size immediately
+    const initialSize = isHorizontal
+      ? (element.offsetHeight || element.clientHeight)
+      : (element.offsetWidth || element.clientWidth)
+
+    // Always set the size, even if 0 - the ResizeObserver will update it
+    // But if it's 0, the calculateResponsiveLanes will use minLanes as fallback
+    containerSize.value = initialSize
+  } else {
+    // Reset to 0 when not in responsive mode
+    containerSize.value = 0
+  }
+}
+
+onMounted(async () => {
+  await nextTick()
+  // Small delay to allow CSS to fully apply
+  setTimeout(() => {
+    setupResizeObserver()
+  }, 0)
+})
+
+// Watch for laneWidth or orientation changes to setup/teardown observer
+watch(
+  () => {
+    const vProps = typeof props.virtualize === 'boolean' ? {} : props.virtualize
+    return [vProps?.laneWidth, props.orientation] as const
+  },
+  () => {
+    if (rootRef.value) {
+      setupResizeObserver()
+    }
+  }
+)
+
+onUnmounted(() => {
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+    resizeObserver = null
+  }
+})
 
 // Measure element for dynamic sizing
 function measureElement(el: Element | null) {
@@ -188,7 +335,8 @@ const ui = computed(() =>
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{
       paddingInline: orientation === 'vertical' ? gapPadding : undefined,
-      paddingBlock: orientation === 'horizontal' ? gapPadding : undefined
+      paddingBlock: orientation === 'horizontal' ? gapPadding : undefined,
+      direction: rtl && orientation === 'horizontal' ? 'rtl' : undefined
     }"
   >
     <template v-if="!!virtualize">
@@ -214,13 +362,13 @@ const ui = computed(() =>
               orientation === 'horizontal'
               && hasLanes
               && virtualItem.lane !== undefined
-                ? `${virtualItem.lane * laneSize}%`
+                ? getLanePosition(virtualItem.lane)
                 : 0,
             left:
               orientation === 'vertical'
               && hasLanes
               && virtualItem.lane !== undefined
-                ? `${virtualItem.lane * laneSize}%`
+                ? getLanePosition(virtualItem.lane)
                 : 0,
             height:
               orientation === 'horizontal'

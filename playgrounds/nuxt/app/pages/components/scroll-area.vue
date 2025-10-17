@@ -6,6 +6,16 @@ const estimateSize = ref(100)
 const gap = ref(12)
 const padding = ref(12)
 const lanes = ref(3)
+const rtl = ref(false)
+
+// Responsive lanes settings
+const useResponsive = ref(false)
+const laneWidth = ref(200)
+const minLanes = ref(1)
+const maxLanes = ref(6)
+
+// Resizable container
+const containerWidth = ref(800)
 
 type Item = {
   id: number
@@ -14,6 +24,12 @@ type Item = {
   description?: string
   color?: string
 }
+
+useHead({
+  htmlAttrs: {
+    dir: computed(() => rtl.value ? 'rtl' : 'ltr')
+  }
+})
 
 // Generate items with variable sizes for dynamic sizing demo
 const items = computed<Item[]>(() => {
@@ -109,17 +125,65 @@ const items = computed<Item[]>(() => {
           :min="1"
           icon="i-lucide-layout-dashboard"
           :max="10"
+          :disabled="useResponsive"
         />
       </div>
+
+      <USwitch v-model="useResponsive" label="Responsive" reverse />
+
+      <template v-if="useResponsive">
+        <div class="flex items-center gap-2">
+          <UInput
+            v-model.number="laneWidth"
+            type="number"
+            :min="50"
+            :max="500"
+            icon="i-lucide-panel-left"
+          />
+        </div>
+
+        <div class="flex items-center gap-2">
+          <UInput
+            v-model.number="minLanes"
+            type="number"
+            :min="1"
+            :max="10"
+            icon="i-lucide-arrow-down-to-line"
+          />
+        </div>
+
+        <div class="flex items-center gap-2">
+          <UInput
+            v-model.number="maxLanes"
+            type="number"
+            :min="1"
+            :max="10"
+            icon="i-lucide-arrow-up-to-line"
+          />
+        </div>
+      </template>
+
+      <USwitch v-model="rtl" label="RTL" reverse />
     </template>
   </Navbar>
 
-  <UCard :ui="{ body: '!p-0' }" class="w-5xl">
+  <UCard :ui="{ body: '!p-0 h-full' }" :class="useResponsive ? '' : 'w-5xl'" :style="{ width: useResponsive ? `${containerWidth}px` : undefined, height: useResponsive ? '600px' : undefined, resize: useResponsive ? 'both' : undefined, overflow: useResponsive ? 'auto' : undefined, minWidth: useResponsive ? '300px' : undefined, minHeight: useResponsive ? '300px' : undefined }">
     <UScrollArea
       :items="items"
       :orientation="orientation"
-      :virtualize="virtualize ? { estimateSize, gap, paddingStart: padding, paddingEnd: padding, lanes } : false"
-      class="h-128"
+      :rtl="rtl"
+      :virtualize="virtualize ? {
+        estimateSize,
+        gap,
+        paddingStart: padding,
+        paddingEnd: padding,
+        lanes: useResponsive ? undefined : lanes,
+        laneWidth: useResponsive ? laneWidth : undefined,
+        minLanes: useResponsive ? minLanes : undefined,
+        maxLanes: useResponsive ? maxLanes : undefined
+      } : false"
+      :class="useResponsive ? '' : 'h-128'"
+      :style="{ height: useResponsive ? '100%' : undefined }"
     >
       <template v-if="orientation === 'horizontal'" #default="{ item }">
         <div class="flex flex-col h-full">
