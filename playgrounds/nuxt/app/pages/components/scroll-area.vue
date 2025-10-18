@@ -176,15 +176,15 @@ const items = computed<Item[]>(() => {
       :style="{ height: useResponsive ? '100%' : undefined }"
     >
       <template v-if="orientation === 'horizontal'" #default="{ item }">
-        <div class="flex flex-col h-full">
+        <div class="grid h-full">
           <div class="bg-elevated rounded-lg overflow-hidden h-full">
             <img
               :src="item!.url"
               :alt="item!.title"
-              class="w-full h-full object-cover"
+              class="h-full object-cover"
             >
           </div>
-          <p class="mt-2 text-sm text-center">
+          <p class="mt-2 text-sm text-center overflow-hidden text-ellipsis">
             {{ item!.title }}
           </p>
         </div>
