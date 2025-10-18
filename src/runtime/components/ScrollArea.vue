@@ -88,7 +88,7 @@ export interface ScrollAreaProps<T = any> {
    * Enable right-to-left layout
    * @defaultValue false
    */
-  rtl?: boolean
+
   class?: any
   ui?: ScrollArea['slots']
 }
@@ -113,13 +113,12 @@ import { tv } from '../utils/tv'
 const props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
   as: 'div',
   orientation: 'vertical',
-  virtualize: false,
-  rtl: false
+  virtualize: false
 })
 defineSlots<ScrollAreaSlots<T>>()
 
 const appConfig = useAppConfig() as ScrollArea['AppConfig']
-
+const rtl = appConfig.dir === 'rtl'
 const rootRef = ref()
 const containerSize = ref(0)
 
@@ -181,6 +180,7 @@ const virtualizerProps = toRef(() => {
 
 const virtualizer = useVirtualizer({
   enabled: !!props.virtualize,
+  isRtl: rtl,
   get count() {
     return props.items?.length || 0
   },
@@ -225,13 +225,9 @@ const gapPadding = computed(() => {
   return gap ? `${gap / 2}px` : undefined
 })
 
-// Calculate lane position (reversed for RTL in vertical mode only)
+// Calculate lane position as percentage
 function getLanePosition(lane: number): string {
-  const totalLanes = virtualizerProps.value.lanes
-  // Only reverse lane order for vertical orientation (columns go right-to-left)
-  // For horizontal orientation, CSS direction:rtl handles the scroll direction
-  const effectiveLane = props.rtl && props.orientation === 'vertical' ? (totalLanes - 1 - lane) : lane
-  return `${effectiveLane * laneSize.value}%`
+  return `${lane * laneSize.value}%`
 }
 
 // Watch for lane changes and reset measurements
@@ -335,8 +331,7 @@ const ui = computed(() =>
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{
       paddingInline: orientation === 'vertical' ? gapPadding : undefined,
-      paddingBlock: orientation === 'horizontal' ? gapPadding : undefined,
-      direction: rtl && orientation === 'horizontal' ? 'rtl' : undefined
+      paddingBlock: orientation === 'horizontal' ? gapPadding : undefined
     }"
   >
     <template v-if="!!virtualize">
@@ -344,39 +339,39 @@ const ui = computed(() =>
         :class="ui.viewport({ class: props.ui?.viewport })"
         :style="{
           position: 'relative',
-          width: orientation === 'horizontal' ? `${totalSize}px` : '100%',
-          height: orientation === 'vertical' ? `${totalSize}px` : '100%'
+          inlineSize: orientation === 'horizontal' ? `${totalSize}px` : '100%',
+          blockSize: orientation === 'vertical' ? `${totalSize}px` : '100%'
         }"
       >
         <div
           v-for="virtualItem in virtualItems"
-          :key="virtualItem.key"
-          :ref="measureElement"
+          :key="virtualItem.key as any"
+          :ref="measureElement as any"
           :data-index="virtualItem.index"
           :class="ui.item({ class: props.ui?.item })"
           :style="{
             paddingInline: orientation === 'vertical' ? gapPadding : undefined,
             paddingBlock: orientation === 'horizontal' ? gapPadding : undefined,
             position: 'absolute',
-            top:
+            insetBlockStart:
               orientation === 'horizontal'
               && hasLanes
               && virtualItem.lane !== undefined
                 ? getLanePosition(virtualItem.lane)
                 : 0,
-            left:
+            insetInlineStart:
               orientation === 'vertical'
               && hasLanes
               && virtualItem.lane !== undefined
                 ? getLanePosition(virtualItem.lane)
                 : 0,
-            height:
+            blockSize:
               orientation === 'horizontal'
                 ? hasLanes && virtualItem.lane !== undefined
                   ? `${laneSize}%`
                   : '100%'
                 : undefined,
-            width:
+            inlineSize:
               orientation === 'vertical'
                 ? hasLanes && virtualItem.lane !== undefined
                   ? `${laneSize}%`
@@ -384,7 +379,7 @@ const ui = computed(() =>
                 : undefined,
             transform:
               orientation === 'horizontal'
-                ? `translateX(${virtualItem.start}px)`
+                ? `translateX(${rtl ? -virtualItem.start : virtualItem.start}px)`
                 : `translateY(${virtualItem.start}px)`
           }"
         >

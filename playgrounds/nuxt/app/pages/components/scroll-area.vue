@@ -6,7 +6,6 @@ const estimateSize = ref(100)
 const gap = ref(12)
 const padding = ref(12)
 const lanes = ref(3)
-const rtl = ref(false)
 
 // Responsive lanes settings
 const useResponsive = ref(false)
@@ -24,12 +23,6 @@ type Item = {
   description?: string
   color?: string
 }
-
-useHead({
-  htmlAttrs: {
-    dir: computed(() => rtl.value ? 'rtl' : 'ltr')
-  }
-})
 
 // Generate items with variable sizes for dynamic sizing demo
 const items = computed<Item[]>(() => {
@@ -162,8 +155,6 @@ const items = computed<Item[]>(() => {
           />
         </div>
       </template>
-
-      <USwitch v-model="rtl" label="RTL" reverse />
     </template>
   </Navbar>
 
@@ -171,7 +162,6 @@ const items = computed<Item[]>(() => {
     <UScrollArea
       :items="items"
       :orientation="orientation"
-      :rtl="rtl"
       :virtualize="virtualize ? {
         estimateSize,
         gap,
