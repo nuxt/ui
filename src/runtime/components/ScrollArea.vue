@@ -84,10 +84,6 @@ export interface ScrollAreaProps<T = any> {
        */
       getItemKey?: (index: number) => string | number
     }
-  /**
-   * Enable right-to-left layout
-   * @defaultValue false
-   */
 
   class?: any
   ui?: ScrollArea['slots']
@@ -109,6 +105,7 @@ import { defu } from 'defu'
 import { useVirtualizer } from '@tanstack/vue-virtual'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
+import { useLocale } from '../composables/useLocale'
 
 const props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
   as: 'div',
@@ -118,7 +115,8 @@ const props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
 defineSlots<ScrollAreaSlots<T>>()
 
 const appConfig = useAppConfig() as ScrollArea['AppConfig']
-const rtl = appConfig.dir === 'rtl'
+const { dir } = useLocale()
+const isRtl = computed(() => dir.value === 'rtl')
 const rootRef = ref()
 const containerSize = ref(0)
 
@@ -180,7 +178,9 @@ const virtualizerProps = toRef(() => {
 
 const virtualizer = useVirtualizer({
   enabled: !!props.virtualize,
-  isRtl: rtl,
+  get isRtl() {
+    return isRtl.value
+  },
   get count() {
     return props.items?.length || 0
   },
@@ -379,7 +379,7 @@ const ui = computed(() =>
                 : undefined,
             transform:
               orientation === 'horizontal'
-                ? `translateX(${rtl ? -virtualItem.start : virtualItem.start}px)`
+                ? `translateX(${isRtl ? -virtualItem.start : virtualItem.start}px)`
                 : `translateY(${virtualItem.start}px)`
           }"
         >

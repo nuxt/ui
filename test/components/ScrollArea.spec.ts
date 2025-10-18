@@ -18,7 +18,6 @@ describe('ScrollArea', () => {
     ['with items', { props: { items: testItems } }],
     ['with orientation vertical', { props: { orientation: 'vertical' as const } }],
     ['with orientation horizontal', { props: { orientation: 'horizontal' as const } }],
-    ['with rtl', { props: { rtl: true } }],
 
     // Virtualization
     ['with virtualize boolean', { props: { items: testItems, virtualize: true } }],
@@ -32,10 +31,6 @@ describe('ScrollArea', () => {
     ['with responsive minLanes', { props: { items: testItems, virtualize: { laneWidth: 200, minLanes: 2 } } }],
     ['with responsive maxLanes', { props: { items: testItems, virtualize: { laneWidth: 200, maxLanes: 6 } } }],
     ['with responsive full config', { props: { items: testItems, virtualize: { laneWidth: 200, minLanes: 1, maxLanes: 4, gap: 12 } } }],
-
-    // RTL Combinations
-    ['with rtl and vertical', { props: { rtl: true, orientation: 'vertical' as const, items: testItems, virtualize: { lanes: 3 } } }],
-    ['with rtl and horizontal', { props: { rtl: true, orientation: 'horizontal' as const, items: testItems, virtualize: { lanes: 2 } } }],
 
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]

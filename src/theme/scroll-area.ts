@@ -1,6 +1,4 @@
-import type { ModuleOptions } from '../module'
-
-export default (_options: Required<ModuleOptions>) => ({
+export default {
   slots: {
     root: 'relative overflow-auto',
     viewport: 'relative',
@@ -16,4 +14,4 @@ export default (_options: Required<ModuleOptions>) => ({
       }
     }
   }
-})
+}
