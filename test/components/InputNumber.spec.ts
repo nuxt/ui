@@ -31,6 +31,9 @@ describe('InputNumber', () => {
     ['with class', { props: { class: 'absolute' } }],
     ['with ui', { props: { ui: { base: 'rounded-full' } } }],
     ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }],
+    ['without decrement', { props: { decrement: false } }],
+    ['without increment', { props: { increment: false } }],
+    ['with increment and decrement', { props: { increment: false, decrement: false } }],
     // Slots
     ['with increment slot', { slots: { increment: () => '+' } }],
     ['with decrement slot', { slots: { decrement: () => '-' } }]

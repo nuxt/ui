@@ -47,6 +47,12 @@ export default (options: Required<ModuleOptions>) => {
       },
       highlight: {
         true: ''
+      },
+      increment: {
+        false: ''
+      },
+      decrement: {
+        false: ''
       }
     },
     compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
@@ -105,6 +111,16 @@ export default (options: Required<ModuleOptions>) => {
       orientation: 'vertical',
       size: 'xl',
       class: 'pe-11'
+    }, {
+      orientation: 'vertical',
+      increment: false,
+      decrement: false,
+      class: 'pe-2.5'
+    }, {
+      orientation: 'horizontal',
+      increment: false,
+      decrement: false,
+      class: 'px-2.5 text-start'
     }],
     defaultVariants: {
       size: 'md',
