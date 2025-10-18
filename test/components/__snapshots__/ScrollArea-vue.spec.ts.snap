@@ -1,0 +1,75 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ScrollArea > renders with as correctly 1`] = `"<section class="relative overflow-auto overflow-y-auto overflow-x-hidden"></section>"`;
+
+exports[`ScrollArea > renders with class correctly 1`] = `"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden custom-class"></div>"`;
+
+exports[`ScrollArea > renders with default slot correctly 1`] = `"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden">Default slot</div>"`;
+
+exports[`ScrollArea > renders with items correctly 1`] = `
+"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden">
+  <div class=""></div>
+  <div class=""></div>
+  <div class=""></div>
+</div>"
+`;
+
+exports[`ScrollArea > renders with orientation horizontal correctly 1`] = `"<div class="relative overflow-auto overflow-x-auto overflow-y-hidden"></div>"`;
+
+exports[`ScrollArea > renders with orientation vertical correctly 1`] = `"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden"></div>"`;
+
+exports[`ScrollArea > renders with responsive full config correctly 1`] = `
+"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden">
+  <div class="relative" style="position: relative; inline-size: 100%; block-size: 324px;"></div>
+</div>"
+`;
+
+exports[`ScrollArea > renders with responsive laneWidth correctly 1`] = `
+"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden">
+  <div class="relative" style="position: relative; inline-size: 100%; block-size: 300px;"></div>
+</div>"
+`;
+
+exports[`ScrollArea > renders with responsive maxLanes correctly 1`] = `
+"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden">
+  <div class="relative" style="position: relative; inline-size: 100%; block-size: 300px;"></div>
+</div>"
+`;
+
+exports[`ScrollArea > renders with responsive minLanes correctly 1`] = `
+"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden">
+  <div class="relative" style="position: relative; inline-size: 100%; block-size: 200px;"></div>
+</div>"
+`;
+
+exports[`ScrollArea > renders with ui correctly 1`] = `"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden custom-root"></div>"`;
+
+exports[`ScrollArea > renders with virtualize boolean correctly 1`] = `
+"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden">
+  <div class="relative" style="position: relative; inline-size: 100%; block-size: 300px;"></div>
+</div>"
+`;
+
+exports[`ScrollArea > renders with virtualize gap correctly 1`] = `
+"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden">
+  <div class="relative" style="position: relative; inline-size: 100%; block-size: 320px;"></div>
+</div>"
+`;
+
+exports[`ScrollArea > renders with virtualize lanes correctly 1`] = `
+"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden">
+  <div class="relative" style="position: relative; inline-size: 100%; block-size: 100px;"></div>
+</div>"
+`;
+
+exports[`ScrollArea > renders with virtualize object correctly 1`] = `
+"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden">
+  <div class="relative" style="position: relative; inline-size: 100%; block-size: 150px;"></div>
+</div>"
+`;
+
+exports[`ScrollArea > renders with virtualize padding correctly 1`] = `
+"<div class="relative overflow-auto overflow-y-auto overflow-x-hidden">
+  <div class="relative" style="position: relative; inline-size: 100%; block-size: 340px;"></div>
+</div>"
+`;
