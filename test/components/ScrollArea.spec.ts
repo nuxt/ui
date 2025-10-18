@@ -11,15 +11,31 @@ describe('ScrollArea', () => {
   ]
 
   it.each([
-    // Props
+    // Basic Props
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'custom-class' } }],
     ['with ui', { props: { ui: { root: 'custom-root' } } }],
     ['with items', { props: { items: testItems } }],
     ['with orientation vertical', { props: { orientation: 'vertical' as const } }],
     ['with orientation horizontal', { props: { orientation: 'horizontal' as const } }],
+    ['with rtl', { props: { rtl: true } }],
+
+    // Virtualization
     ['with virtualize boolean', { props: { items: testItems, virtualize: true } }],
     ['with virtualize object', { props: { items: testItems, virtualize: { overscan: 5, estimateSize: 50 } } }],
+    ['with virtualize gap', { props: { items: testItems, virtualize: { gap: 10 } } }],
+    ['with virtualize padding', { props: { items: testItems, virtualize: { paddingStart: 20, paddingEnd: 20 } } }],
+    ['with virtualize lanes', { props: { items: testItems, virtualize: { lanes: 3 } } }],
+
+    // Responsive Lanes
+    ['with responsive laneWidth', { props: { items: testItems, virtualize: { laneWidth: 200 } } }],
+    ['with responsive minLanes', { props: { items: testItems, virtualize: { laneWidth: 200, minLanes: 2 } } }],
+    ['with responsive maxLanes', { props: { items: testItems, virtualize: { laneWidth: 200, maxLanes: 6 } } }],
+    ['with responsive full config', { props: { items: testItems, virtualize: { laneWidth: 200, minLanes: 1, maxLanes: 4, gap: 12 } } }],
+
+    // RTL Combinations
+    ['with rtl and vertical', { props: { rtl: true, orientation: 'vertical' as const, items: testItems, virtualize: { lanes: 3 } } }],
+    ['with rtl and horizontal', { props: { rtl: true, orientation: 'horizontal' as const, items: testItems, virtualize: { lanes: 2 } } }],
 
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
