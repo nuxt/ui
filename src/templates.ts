@@ -446,7 +446,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
     references.push({ path: resolve('./runtime/types/app.config.d.ts') })
   })
 
-  if (options.experimental?.componentDetection && import.meta.dev) {
+  if (options.experimental?.componentDetection && nuxt.options.dev) {
     nuxt.hook('builder:watch', async (_, path) => {
       if (/\.(?:vue|ts|js|tsx|jsx)$/.test(path)) {
         await updateTemplates({ filter: template => template.filename === 'ui.css' })
