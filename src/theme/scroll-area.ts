@@ -1,6 +1,6 @@
 export default {
   slots: {
-    root: 'relative overflow-auto',
+    root: 'relative',
     viewport: 'relative',
     item: ''
   },
@@ -10,7 +10,8 @@ export default {
         root: 'overflow-y-auto overflow-x-hidden'
       },
       horizontal: {
-        root: 'overflow-x-auto overflow-y-hidden'
+        root: 'overflow-x-auto overflow-y-hidden grid grid-flow-col auto-cols-max',
+        item: 'w-max'
       }
     }
   }

@@ -1,9 +1,10 @@
 ---
-title: ScrollArea
 description: A flexible scroll container with virtualization support for efficiently rendering large lists of any content type.
+category: layout
 links:
   - label: TanStack Virtual
-    icon: i-simple-icons-tanstack
+    avatar:
+      src: https://github.com/tanstack.png
     to: https://tanstack.com/virtual/latest
   - label: GitHub
     icon: i-simple-icons-github
@@ -14,229 +15,137 @@ links:
 
 Use the `ScrollArea` component to create scrollable containers for any type of content. It supports both vertical and horizontal scrolling, and can optionally virtualize large lists for better performance.
 
-### Basic Vertical Scroll
+::component-example
+---
+name: 'scroll-area-basic-example'
+class: 'p-8'
+---
+::
+
+### Items
+
+Use the `items` prop as an array and render each item using the default slot:
 
 ::component-example
 ---
 name: 'scroll-area-basic-example'
+class: 'p-8'
 ---
-
-#component
-  :scroll-area-basic-example
-
-#code
-```vue
-<script setup lang="ts">
-const items = ref(
-  Array.from({ length: 50 }, (_, i) => ({
-    id: i + 1,
-    title: `Item ${i + 1}`,
-    description: `Description for item ${i + 1}`
-  }))
-)
-</script>
-
-<template>
-  <UScrollArea
-    :items="items"
-    class="h-96 border border-default rounded-lg p-4"
-  >
-    <template #default="{ item }">
-      <UCard class="mb-4">
-        <template #header>
-          <h3 class="font-semibold">{{ item.title }}</h3>
-        </template>
-        <p class="text-sm text-muted">{{ item.description }}</p>
-      </UCard>
-    </template>
-  </UScrollArea>
-</template>
-```
 ::
 
-### Horizontal Scroll
+### Orientation
+
+Use the `orientation` prop to change the scroll direction. Defaults to `vertical`.
+
+::component-example
+---
+name: 'scroll-area-orientation-example'
+class: 'p-8'
+---
+::
+
+::note
+Use your mouse to drag the scroll area horizontally or vertically depending on the orientation.
+::
+
+### Virtualize
+
+Enable virtualization with the `virtualize` prop to efficiently handle large datasets. This renders only visible items, dramatically improving performance with thousands of items.
+
+::component-example
+---
+name: 'scroll-area-virtualized-example'
+class: 'p-8'
+---
+::
+
+::tip
+Virtualization is recommended for lists with 100+ items or when items contain heavy components.
+::
+
+## Examples
+
+### With horizontal scroll
 
 Set `orientation="horizontal"` to enable horizontal scrolling.
 
 ::component-example
 ---
 name: 'scroll-area-horizontal-example'
+class: 'p-8'
 ---
-
-#component
-  :scroll-area-horizontal-example
-
-#code
-```vue
-<script setup lang="ts">
-const images = ref(
-  Array.from({ length: 20 }, (_, i) => ({
-    id: i + 1,
-    url: `https://picsum.photos/300/200?random=${i}`,
-    title: `Image ${i + 1}`
-  }))
-)
-</script>
-
-<template>
-  <UScrollArea
-    :items="images"
-    orientation="horizontal"
-    class="w-full border border-default rounded-lg p-4"
-  >
-    <template #default="{ item }">
-      <div class="inline-block me-4">
-        <img 
-          :src="item.url" 
-          :alt="item.title"
-          class="w-[300px] h-[200px] rounded-lg object-cover"
-        >
-        <p class="mt-2 text-sm text-center">{{ item.title }}</p>
-      </div>
-    </template>
-  </UScrollArea>
-</template>
-```
 ::
 
-## Examples
-
-### Virtualized Large List
-
-Enable virtualization with the `virtualize` prop to efficiently handle large datasets. This renders only visible items, dramatically improving performance.
-
-::component-example
----
-name: 'scroll-area-virtualized-example'
----
-
-#component
-  :scroll-area-virtualized-example
-
-#code
-```vue
-<script setup lang="ts">
-const largeDataset = ref(
-  Array.from({ length: 10000 }, (_, i) => ({
-    id: i + 1,
-    title: `Item ${i + 1}`,
-    description: `This is item ${i + 1} in a list of 10,000 items`
-  }))
-)
-</script>
-
-<template>
-  <UScrollArea
-    :items="largeDataset"
-    virtualize
-    class="h-96 border border-default rounded-lg p-4"
-  >
-    <template #default="{ item, index }">
-      <div class="p-3 mb-2 bg-elevated rounded-lg">
-        <div class="flex items-center justify-between">
-          <span class="font-medium">{{ item.title }}</span>
-          <span class="text-xs text-muted">Index: {{ index }}</span>
-        </div>
-        <p class="text-sm text-muted mt-1">{{ item.description }}</p>
-      </div>
-    </template>
-  </UScrollArea>
-</template>
-```
-::
-
-### Variable Height Items
+### With variable height items
 
 When using virtualization with items of varying heights, provide an `estimateSize` that represents the average item height for better initial rendering.
 
 ::component-example
 ---
 name: 'scroll-area-variable-height-example'
+class: 'p-8'
 ---
-
-#component
-  :scroll-area-variable-height-example
-
-#code
-```vue
-<script setup lang="ts">
-const items = ref(
-  Array.from({ length: 100 }, (_, i) => ({
-    id: i + 1,
-    title: `Card ${i + 1}`,
-    description: i % 3 === 0 
-      ? `This is a longer description with more text to demonstrate variable height handling.`
-      : `Short description.`
-  }))
-)
-</script>
-
-<template>
-  <UScrollArea
-    :items="items"
-    virtualize
-    :estimate-size="120"
-    class="h-96 border border-default rounded-lg p-4"
-  >
-    <template #default="{ item }">
-      <UCard class="mb-4">
-        <template #header>
-          <h3 class="font-semibold">{{ item.title }}</h3>
-        </template>
-        <p class="text-sm text-muted">{{ item.description }}</p>
-      </UCard>
-    </template>
-  </UScrollArea>
-</template>
-```
 ::
 
-### Custom Content
+::note
+TanStack Virtual automatically measures and adjusts for variable heights, but providing a good estimate helps with initial rendering and scroll behavior.
+::
 
-You can also use `ScrollArea` without the `items` prop for custom scrollable content.
+### With custom content
+
+You can use `ScrollArea` without the `items` prop for custom scrollable content.
 
 ::component-example
 ---
 name: 'scroll-area-custom-example'
+class: 'p-8'
 ---
-
-#component
-  :scroll-area-custom-example
-
-#code
-```vue
-<template>
-  <UScrollArea class="h-64 border border-default rounded-lg p-4">
-    <div class="space-y-4">
-      <UCard>
-        <template #header>
-          <h3 class="font-semibold">Section 1</h3>
-        </template>
-        <p>Custom content without using the items prop.</p>
-      </UCard>
-      <UCard>
-        <template #header>
-          <h3 class="font-semibold">Section 2</h3>
-        </template>
-        <p>Any content can be placed here and it will be scrollable.</p>
-      </UCard>
-    </div>
-  </UScrollArea>
-</template>
-```
 ::
 
-### Custom Virtualization Options
+### With masonry layout
 
-Fine-tune virtualization behavior with custom options.
+Use the `lanes` option to create multi-column masonry layouts. This is perfect for image galleries and Pinterest-style layouts.
+
+::component-example
+---
+name: 'scroll-area-masonry-example'
+class: 'p-8'
+---
+::
+
+::note
+The `lanes` option works with both vertical (columns) and horizontal (rows) orientations.
+::
+
+### With responsive masonry
+
+Use the `laneWidth`, `minLanes`, and `maxLanes` options to create responsive masonry layouts that automatically adjust the number of columns based on container size.
+
+::component-example
+---
+name: 'scroll-area-responsive-masonry-example'
+class: 'p-8'
+---
+::
+
+::note
+The container has `resize: both` applied so you can drag from the bottom-right corner to see the columns adjust automatically as the width changes.
+::
+
+### With custom virtualization options
+
+Fine-tune virtualization behavior with custom options like `overscan`, `gap`, `paddingStart`, and `paddingEnd`.
 
 ```vue
 <template>
   <UScrollArea
     :items="items"
     :virtualize="{
+      estimateSize: 150,
       overscan: 20,
-      estimateSize: 150
+      gap: 16,
+      paddingStart: 24,
+      paddingEnd: 24
     }"
     class="h-96"
   >
@@ -273,15 +182,16 @@ Fine-tune virtualization behavior with custom options.
 ### When Not to Use Virtualization
 
 - **Small Lists**: Less than 50 simple items
-- **Known Heights**: All items have the same fixed height (consider CSS-only solutions)
+- **Static Heights**: All items have the same fixed height and there are few items
 - **Rare Scrolling**: Content is rarely scrolled through
 
 ### Virtualization Tips
 
 1. **Estimate Size**: Provide an accurate `estimateSize` for better initial rendering and scroll behavior
-2. **Overscan**: Increase `overscan` for smoother scrolling at the cost of rendering more items
-3. **Variable Heights**: TanStack Virtual automatically measures and adjusts for variable heights, but a good estimate helps initial rendering
-4. **Horizontal**: Works seamlessly with `orientation="horizontal"` for horizontal lists
+2. **Overscan**: Increase `overscan` (default: 12) for smoother scrolling at the cost of rendering more items
+3. **Variable Heights**: TanStack Virtual automatically measures and adjusts for variable heights dynamically
+4. **Gap & Padding**: Use `gap`, `paddingStart`, and `paddingEnd` for proper spacing in virtualized lists
+5. **Masonry Layouts**: Use `lanes` for multi-column layouts, or `laneWidth` with `minLanes`/`maxLanes` for responsive layouts
 
 ## Changelog
 

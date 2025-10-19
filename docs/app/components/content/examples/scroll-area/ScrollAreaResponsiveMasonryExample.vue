@@ -1,0 +1,44 @@
+<script setup lang="ts">
+const items = Array.from({ length: 100 }, (_, i) => {
+  const aspectRatios = ['1/1', '4/3', '16/9', '3/4']
+  return {
+    id: i + 1,
+    url: `https://picsum.photos/300/${aspectRatios[i % aspectRatios.length] === '1/1' ? 300 : aspectRatios[i % aspectRatios.length] === '4/3' ? 400 : aspectRatios[i % aspectRatios.length] === '3/4' ? 450 : 200}?random=${i}`,
+    title: `Image ${i + 1}`
+  }
+})
+</script>
+
+<template>
+  <UScrollArea
+    :items="items"
+    :virtualize="{
+      estimateSize: 300,
+      gap: 12,
+      paddingStart: 12,
+      paddingEnd: 12,
+      laneWidth: 100,
+      minLanes: 1,
+      maxLanes: 6
+    }"
+    class="h-[600px] border border-default rounded-lg"
+    style="resize: horizontal; overflow: auto; min-width: 300px; min-height: 300px;"
+  >
+    <template #default="{ item }">
+      <UCard :ui="{ body: 'p-0 sm:p-0' }">
+        <template #header>
+          <h3 class="font-semibold text-sm">
+            {{ item.title }}
+          </h3>
+        </template>
+        <div class="bg-elevated overflow-hidden">
+          <img
+            :src="item.url"
+            :alt="item.title"
+            class="w-full h-full object-cover"
+          >
+        </div>
+      </UCard>
+    </template>
+  </UScrollArea>
+</template>

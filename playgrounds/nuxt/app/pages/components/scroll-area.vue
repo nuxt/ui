@@ -21,6 +21,7 @@ type Item = {
   title: string
   url?: string
   description?: string
+  aspectRatio?: number
   color?: string
 }
 
@@ -38,7 +39,8 @@ const items = computed<Item[]>(() => {
       id: i + 1,
       url: `https://picsum.photos/300/${aspectRatios[i % aspectRatios.length] === '1/1' ? 300 : aspectRatios[i % aspectRatios.length] === '4/3' ? 400 : 200}?random=${i}`,
       title: `Image ${i + 1}`,
-      description: descriptions[i % descriptions.length]
+      description: descriptions[i % descriptions.length],
+      aspectRatio: aspectRatios[i % aspectRatios.length] === '1/1' ? 1 : aspectRatios[i % aspectRatios.length] === '4/3' ? 4 / 3 : 16 / 9
     }
   })
 })
@@ -158,7 +160,7 @@ const items = computed<Item[]>(() => {
     </template>
   </Navbar>
 
-  <UCard :ui="{ body: '!p-0 h-full' }" :class="useResponsive ? '' : 'w-5xl'" :style="{ width: useResponsive ? `${containerWidth}px` : undefined, height: useResponsive ? '600px' : undefined, resize: useResponsive ? 'both' : undefined, overflow: useResponsive ? 'auto' : undefined, minWidth: useResponsive ? '300px' : undefined, minHeight: useResponsive ? '300px' : undefined }">
+  <UCard :ui="{ body: '!p-0 h-full' }" :class="useResponsive ? '' : 'max-w-5xl w-full'" :style="{ width: useResponsive ? `${containerWidth}px` : undefined, height: useResponsive ? '600px' : undefined, resize: useResponsive ? 'both' : undefined, overflow: useResponsive ? 'auto' : undefined, minWidth: useResponsive ? '300px' : undefined, minHeight: useResponsive ? '300px' : undefined }">
     <UScrollArea
       :items="items"
       :orientation="orientation"
@@ -176,15 +178,17 @@ const items = computed<Item[]>(() => {
       :style="{ height: useResponsive ? '100%' : undefined }"
     >
       <template v-if="orientation === 'horizontal'" #default="{ item }">
-        <div class="grid h-full">
-          <div class="bg-elevated rounded-lg overflow-hidden h-full">
+        <div class="grid grid-rows-[1fr_min-content] h-full w-max-content gap-2">
+          <div class="bg-elevated rounded-lg overflow-hidden h-full w-max-content">
             <img
               :src="item!.url"
               :alt="item!.title"
               class="h-full object-cover"
+              :style="{ aspectRatio: item!.aspectRatio?.toString() }"
             >
           </div>
-          <p class="mt-2 text-sm text-center overflow-hidden text-ellipsis">
+
+          <p class="text-sm text-center">
             {{ item!.title }}
           </p>
         </div>
