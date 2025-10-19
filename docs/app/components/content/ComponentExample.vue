@@ -50,7 +50,6 @@ const props = withDefaults(defineProps<{
     items?: any[]
     default: any
     multiple?: boolean
-    visibleWhen?: { option: string, is: any }
   }>
   /**
    * A list of line numbers to highlight in the code block
@@ -158,7 +157,6 @@ const urlSearchParams = computed(() => {
 
           <UFormField
             v-for="option in props.options"
-            v-show="!option.visibleWhen || get(optionsValues, option.visibleWhen.option) === option.visibleWhen.is"
             :key="option.name"
             :label="option.label"
             :name="option.name"
@@ -197,11 +195,10 @@ const urlSearchParams = computed(() => {
             <UInput
               v-else
               :model-value="get(optionsValues, option.name)"
-              :type="typeof option.default === 'number' ? 'number' : 'text'"
               color="neutral"
               variant="soft"
               :ui="{ base: 'rounded-sm rounded-l-none min-w-12' }"
-              @update:model-value="set(optionsValues, option.name, typeof option.default === 'number' ? Number($event) || option.default : $event)"
+              @update:model-value="set(optionsValues, option.name, $event)"
             />
           </UFormField>
         </div>
