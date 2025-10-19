@@ -1,13 +1,14 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { UIMessage } from 'ai'
+import type { UIDataTypes, UIMessage, UITools } from 'ai'
 import theme from '#build/ui/chat-message'
 import type { AvatarProps, ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatMessage = ComponentConfig<typeof theme, AppConfig, 'chatMessage'>
 
-export interface ChatMessageProps extends UIMessage {
+export interface ChatMessageProps<METADATA = unknown, DATA_PARTS extends UIDataTypes = UIDataTypes, TOOLS extends UITools = UITools>
+  extends UIMessage<METADATA, DATA_PARTS, TOOLS> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'article'
@@ -31,7 +32,7 @@ export interface ChatMessageProps extends UIMessage {
    * The `label` will be used in a tooltip.
    * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  actions?: (Omit<ButtonProps, 'onClick'> & { onClick?: (e: MouseEvent, message: UIMessage) => void })[]
+  actions?: (Omit<ButtonProps, 'onClick'> & { onClick?: (e: MouseEvent, message: UIMessage<METADATA, DATA_PARTS, TOOLS>) => void })[]
   /**
    * Render the message in a compact style.
    * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
@@ -47,14 +48,14 @@ export interface ChatMessageProps extends UIMessage {
   ui?: ChatMessage['slots']
 }
 
-export interface ChatMessageSlots {
-  leading(props: { avatar: ChatMessageProps['avatar'], ui: ChatMessage['ui'] }): any
-  content(props: ChatMessageProps): any
-  actions(props: { actions: ChatMessageProps['actions'] }): any
+export interface ChatMessageSlots<METADATA = unknown, DATA_PARTS extends UIDataTypes = UIDataTypes, TOOLS extends UITools = UITools> {
+  leading(props: { avatar: ChatMessageProps<METADATA, DATA_PARTS, TOOLS>['avatar'], ui: ChatMessage['ui'] }): any
+  content(props: ChatMessageProps<METADATA, DATA_PARTS, TOOLS>): any
+  actions(props: { actions: ChatMessageProps<METADATA, DATA_PARTS, TOOLS>['actions'] }): any
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="METADATA = unknown, DATA_PARTS extends UIDataTypes = UIDataTypes, TOOLS extends UITools = UITools">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
@@ -65,10 +66,10 @@ import UTooltip from './Tooltip.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 
-const props = withDefaults(defineProps<ChatMessageProps>(), {
+const props = withDefaults(defineProps<ChatMessageProps<METADATA, DATA_PARTS, TOOLS>>(), {
   as: 'article'
 })
-const slots = defineSlots<ChatMessageSlots>()
+const slots = defineSlots<ChatMessageSlots<METADATA, DATA_PARTS, TOOLS>>()
 
 const appConfig = useAppConfig() as ChatMessage['AppConfig']
 
@@ -105,7 +106,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
           <template v-else>
             <template v-for="(part, index) in parts" :key="`${id}-${part.type}-${index}`">
               <template v-if="part.type === 'text'">
-                {{ part.text }}
+                {{ (part as any).text }}
               </template>
             </template>
           </template>
