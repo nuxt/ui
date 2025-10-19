@@ -22,7 +22,7 @@ const items = Array.from({ length: 100 }, (_, i) => {
       maxLanes: 6
     }"
     class="h-[600px] border border-default rounded-lg"
-    style="resize: horizontal; overflow: auto; min-width: 300px; min-height: 300px;"
+    style="resize: both; overflow: auto; min-width: 300px; min-height: 300px;"
   >
     <template #default="{ item }">
       <UCard :ui="{ body: 'p-0 sm:p-0' }">

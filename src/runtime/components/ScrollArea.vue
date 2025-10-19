@@ -186,7 +186,25 @@ const virtualizerProps = toRef(() => {
 })
 
 const virtualizer = !!props.virtualize && useVirtualizer({
-  ...virtualizerProps.value,
+  get overscan() {
+    return virtualizerProps.value.overscan
+  },
+  get gap() {
+    return virtualizerProps.value.gap
+  },
+  get paddingStart() {
+    return virtualizerProps.value.paddingStart
+  },
+  get paddingEnd() {
+    return virtualizerProps.value.paddingEnd
+  },
+  get scrollMargin() {
+    return virtualizerProps.value.scrollMargin
+  },
+  get lanes() {
+    return virtualizerProps.value.lanes
+  },
+  getItemKey: virtualizerProps.value.getItemKey,
   get isRtl() {
     return isRtl.value
   },
@@ -207,9 +225,9 @@ const totalSize = computed(() => virtualizer ? virtualizer.value.getTotalSize() 
 // Computed values for lane calculations (to avoid re-computing per item)
 const laneSize = computed(() => {
   const lanes = virtualizerProps.value.lanes
-  return lanes > 1 ? 100 / lanes : 100
+  return lanes !== undefined ? 100 / lanes : 100
 })
-const hasLanes = computed(() => virtualizerProps.value.lanes > 0)
+const hasLanes = computed(() => virtualizerProps.value.lanes !== undefined)
 const gapPadding = computed(() => {
   const gap = virtualizerProps.value.gap
   return gap ? `${gap / 2}px` : undefined
