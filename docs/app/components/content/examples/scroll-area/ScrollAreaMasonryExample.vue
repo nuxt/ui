@@ -1,9 +1,15 @@
 <script setup lang="ts">
-const items = Array.from({ length: 100 }, (_, i) => {
-  const aspectRatios = ['1/1', '4/3', '16/9', '3/4']
+defineProps<{
+  lanes?: number
+  gap?: number
+  padding?: number
+}>()
+
+const items = Array.from({ length: 30 }, (_, i) => {
+  const heights = [300, 400, 200, 450]
   return {
     id: i + 1,
-    url: `https://picsum.photos/300/${aspectRatios[i % aspectRatios.length] === '1/1' ? 300 : aspectRatios[i % aspectRatios.length] === '4/3' ? 400 : aspectRatios[i % aspectRatios.length] === '3/4' ? 450 : 200}?random=${i}`,
+    url: `https://picsum.photos/300/${heights[i % heights.length]}?random=${i}`,
     title: `Image ${i + 1}`
   }
 })
@@ -14,10 +20,10 @@ const items = Array.from({ length: 100 }, (_, i) => {
     :items="items"
     :virtualize="{
       estimateSize: 300,
-      gap: 12,
-      paddingStart: 12,
-      paddingEnd: 12,
-      lanes: 3
+      gap,
+      paddingStart: padding,
+      paddingEnd: padding,
+      lanes
     }"
     class="h-[600px] w-full border border-default rounded-lg"
   >

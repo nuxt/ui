@@ -95,6 +95,30 @@ Use the `lanes` option to create multi-column masonry layouts. This is perfect f
 ---
 name: 'scroll-area-masonry-example'
 class: 'p-8'
+options:
+  - name: lanes
+    label: Lanes
+    default: 3
+    items:
+      - 2
+      - 3
+      - 4
+  - name: gap
+    label: Gap
+    default: 12
+    items:
+      - 0
+      - 8
+      - 12
+      - 16
+  - name: padding
+    label: Padding
+    default: 12
+    items:
+      - 0
+      - 8
+      - 12
+      - 16
 ---
 ::
 
