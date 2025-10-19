@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { VirtualItem } from '@tanstack/vue-virtual'
+import type { VirtualItem, VirtualizerOptions } from '@tanstack/vue-virtual'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/scroll-area'
 import type { ComponentConfig } from '../types/tv'
@@ -185,8 +185,8 @@ const virtualizerProps = toRef(() => {
   return baseProps
 })
 
-const virtualizer = useVirtualizer({
-  enabled: !!props.virtualize,
+const virtualizer = !!props.virtualize && useVirtualizer({
+  ...virtualizerProps.value,
   get isRtl() {
     return isRtl.value
   },
@@ -197,31 +197,12 @@ const virtualizer = useVirtualizer({
   get horizontal() {
     return props.orientation === 'horizontal'
   },
-  get overscan() {
-    return virtualizerProps.value.overscan
-  },
-  estimateSize: () => virtualizerProps.value.estimateSize,
-  get gap() {
-    return virtualizerProps.value.gap
-  },
-  get paddingStart() {
-    return virtualizerProps.value.paddingStart
-  },
-  get paddingEnd() {
-    return virtualizerProps.value.paddingEnd
-  },
-  get scrollMargin() {
-    return virtualizerProps.value.scrollMargin
-  },
-  get lanes() {
-    return virtualizerProps.value.lanes
-  },
-  getItemKey: virtualizerProps.value.getItemKey
+  estimateSize: () => virtualizerProps.value.estimateSize
 })
 
 // Computed refs for virtual items and total size
-const virtualItems = computed(() => virtualizer.value.getVirtualItems())
-const totalSize = computed(() => virtualizer.value.getTotalSize())
+const virtualItems = computed(() => virtualizer && virtualizer.getVirtualItems())
+const totalSize = computed(() => virtualizer && virtualizer.getTotalSize())
 
 // Computed values for lane calculations (to avoid re-computing per item)
 const laneSize = computed(() => {
@@ -243,7 +224,7 @@ function getLanePosition(lane: number): string {
 watch(
   () => virtualizerProps.value.lanes,
   () => {
-    virtualizer.value.measure()
+    virtualizer && virtualizer.measure()
   },
   { flush: 'sync' }
 )
@@ -322,7 +303,7 @@ onUnmounted(() => {
 // Measure element for dynamic sizing
 function measureElement(el: Element | null) {
   if (!el) return undefined
-  virtualizer.value.measureElement(el)
+  virtualizer && virtualizer.measureElement(el)
   return undefined
 }
 
@@ -334,7 +315,7 @@ const ui = computed(() =>
 
 // Watch for scroll state changes and emit event
 watch(
-  () => virtualizer.value.isScrolling,
+  () => virtualizer && virtualizer.isScrolling,
   (isScrolling) => {
     emit('scroll', isScrolling)
   }
@@ -349,7 +330,7 @@ defineExpose({
   /**
    * The virtualizer instance (null if virtualization is disabled)
    */
-  virtualizer: computed(() => props.virtualize ? virtualizer.value : null),
+  virtualizer: computed(() => props.virtualize ? virtualizer : null),
   /**
    * Scroll to a specific pixel offset
    * @param offset - The pixel offset to scroll to
@@ -360,7 +341,7 @@ defineExpose({
       console.warn('scrollToOffset requires virtualization to be enabled')
       return
     }
-    virtualizer.value.scrollToOffset(offset, options as any)
+    virtualizer && virtualizer.scrollToOffset(offset, options as any)
   },
   /**
    * Scroll to a specific item index
@@ -372,7 +353,7 @@ defineExpose({
       console.warn('scrollToIndex requires virtualization to be enabled')
       return
     }
-    virtualizer.value.scrollToIndex(index, options as any)
+    virtualizer && virtualizer.scrollToIndex(index, options as any)
   },
   /**
    * Get the total size of all virtualized items
@@ -383,7 +364,7 @@ defineExpose({
       console.warn('getTotalSize requires virtualization to be enabled')
       return 0
     }
-    return virtualizer.value.getTotalSize()
+    return virtualizer ? virtualizer.getTotalSize() : 0
   },
   /**
    * Reset all previously measured item sizes
@@ -393,7 +374,7 @@ defineExpose({
       console.warn('measure requires virtualization to be enabled')
       return
     }
-    virtualizer.value.measure()
+    virtualizer && virtualizer.measure()
   },
   /**
    * Get current scroll offset in pixels
@@ -403,7 +384,7 @@ defineExpose({
     if (!props.virtualize) {
       return 0
     }
-    return virtualizer.value.scrollOffset ?? 0
+    return virtualizer ? (virtualizer.scrollOffset ?? 0) : 0
   },
   /**
    * Check if the list is currently being scrolled
@@ -413,7 +394,7 @@ defineExpose({
     if (!props.virtualize) {
       return false
     }
-    return virtualizer.value.isScrolling
+    return virtualizer ? virtualizer.isScrolling : false
   },
   /**
    * Get the current scroll direction
@@ -423,7 +404,7 @@ defineExpose({
     if (!props.virtualize) {
       return null
     }
-    return virtualizer.value.scrollDirection ?? null
+    return virtualizer ? (virtualizer.scrollDirection ?? null) : null
   }
 })
 </script>
