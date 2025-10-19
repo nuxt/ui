@@ -1,10 +1,37 @@
 <script lang="ts">
-import type { VirtualItem } from '@tanstack/vue-virtual'
+import type { VirtualItem, VirtualizerOptions } from '@tanstack/vue-virtual'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/scroll-area'
 import type { ComponentConfig } from '../types/tv'
 
 type ScrollArea = ComponentConfig<typeof theme, AppConfig, 'scrollArea'>
+
+export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
+  VirtualizerOptions<any, any>,
+  'count' | 'getScrollElement' | 'horizontal' | 'enabled' | 'isRtl' | 'estimateSize'
+>> {
+  /**
+   * Estimated size (in px) of each item. Can be a number or a function.
+   * @defaultValue 100
+   */
+  estimateSize?: number | ((index: number) => number)
+  /**
+   * Lane width in pixels for responsive layouts (column width for vertical, row height for horizontal)
+   * When set, lanes will be calculated automatically based on container size
+   * @defaultValue undefined
+   */
+  laneWidth?: number
+  /**
+   * Minimum number of lanes for responsive layouts
+   * @defaultValue 1
+   */
+  minLanes?: number
+  /**
+   * Maximum number of lanes for responsive layouts
+   * @defaultValue undefined
+   */
+  maxLanes?: number
+}
 
 export interface ScrollAreaProps<T = any> {
   /**
@@ -25,65 +52,7 @@ export interface ScrollAreaProps<T = any> {
    * Enable virtualization for large lists.
    * @defaultValue false
    */
-  virtualize?:
-    | boolean
-    | {
-      /**
-       * Number of items rendered outside the visible area
-       * @defaultValue 12
-       */
-      overscan?: number
-      /**
-       * Estimated size (in px) of each item
-       * @defaultValue 100
-       */
-      estimateSize?: number
-      /**
-       * Gap (in px) between items
-       * @defaultValue 0
-       */
-      gap?: number
-      /**
-       * Padding (in px) at the start of the list
-       * @defaultValue 0
-       */
-      paddingStart?: number
-      /**
-       * Padding (in px) at the end of the list
-       * @defaultValue 0
-       */
-      paddingEnd?: number
-      /**
-       * Scroll margin (in px) offset for scroll calculations
-       * @defaultValue 0
-       */
-      scrollMargin?: number
-      /**
-       * Number of lanes (columns for vertical, rows for horizontal)
-       * @defaultValue 1
-       */
-      lanes?: number
-      /**
-       * Lane width in pixels for responsive layouts (column width for vertical, row height for horizontal)
-       * When set, lanes will be calculated automatically based on container size
-       * @defaultValue undefined
-       */
-      laneWidth?: number
-      /**
-       * Minimum number of lanes for responsive layouts
-       * @defaultValue 1
-       */
-      minLanes?: number
-      /**
-       * Maximum number of lanes for responsive layouts
-       * @defaultValue undefined
-       */
-      maxLanes?: number
-      /**
-       * Custom key generation function for items
-       */
-      getItemKey?: (index: number) => string | number
-    }
+  virtualize?: boolean | ScrollAreaVirtualizeOptions
 
   class?: any
   ui?: ScrollArea['slots']
@@ -121,7 +90,7 @@ const props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
   virtualize: false
 })
 defineSlots<ScrollAreaSlots<T>>()
-const emit = defineEmits<ScrollAreaEmits>()
+const emits = defineEmits<ScrollAreaEmits>()
 
 const appConfig = useAppConfig() as ScrollArea['AppConfig']
 const { dir } = useLocale()
@@ -215,7 +184,9 @@ const virtualizer = !!props.virtualize && useVirtualizer({
   get horizontal() {
     return props.orientation === 'horizontal'
   },
-  estimateSize: () => virtualizerProps.value.estimateSize
+  estimateSize: typeof virtualizerProps.value.estimateSize === 'function'
+    ? virtualizerProps.value.estimateSize
+    : () => virtualizerProps.value.estimateSize as number
 })
 
 // Computed refs for virtual items and total size
@@ -335,7 +306,7 @@ const ui = computed(() =>
 watch(
   () => virtualizer ? virtualizer.value.isScrolling : false,
   (isScrolling) => {
-    emit('scroll', isScrolling)
+    emits('scroll', isScrolling)
   }
 )
 
@@ -499,18 +470,18 @@ defineExpose({
       </div>
     </template>
 
-    <template v-else-if="items?.length">
-      <div
-        v-for="(item, index) in items"
-        :key="index"
-        :class="ui.item({ class: props.ui?.item })"
-      >
-        <slot :item="item" :index="index" />
-      </div>
-    </template>
-
     <template v-else>
-      <slot />
+      <template v-if="items?.length">
+        <div
+          v-for="(item, index) in items"
+          :key="index"
+          :class="ui.item({ class: props.ui?.item })"
+        >
+          <slot :item="item" :index="index" />
+        </div>
+      </template>
+
+      <slot v-else />
     </template>
   </Primitive>
 </template>

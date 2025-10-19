@@ -143,7 +143,7 @@ The container has `resize: both` applied so you can drag from the bottom-right c
 
 ### With custom virtualization options
 
-Fine-tune virtualization behavior with custom options like `overscan`, `gap`, `paddingStart`, and `paddingEnd`.
+The `virtualize` prop accepts all [TanStack Virtual options](https://tanstack.com/virtual/latest/docs/api/virtualizer), plus additional responsive masonry options (`laneWidth`, `minLanes`, `maxLanes`).
 
 ```vue
 <template>
@@ -164,6 +164,10 @@ Fine-tune virtualization behavior with custom options like `overscan`, `gap`, `p
   </UScrollArea>
 </template>
 ```
+
+::tip
+You can pass any [TanStack Virtual option](https://tanstack.com/virtual/latest/docs/api/virtualizer#options) to customize the virtualization behavior. The component automatically handles `count`, `getScrollElement`, `horizontal`, `enabled`, and `isRtl` based on your props.
+::
 
 ### With programmatic scrolling
 
