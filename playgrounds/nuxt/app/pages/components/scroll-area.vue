@@ -169,7 +169,7 @@ const items = computed<Item[]>(() => {
         gap,
         paddingStart: padding,
         paddingEnd: padding,
-        lanes: useResponsive ? undefined : lanes,
+        lanes: useResponsive ? undefined : (lanes > 0 ? lanes : undefined),
         laneWidth: useResponsive ? laneWidth : undefined,
         minLanes: useResponsive ? minLanes : undefined,
         maxLanes: useResponsive ? maxLanes : undefined
