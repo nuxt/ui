@@ -9,7 +9,7 @@ const items = Array.from({ length: 50 }, (_, i) => ({
 <template>
   <UScrollArea
     :items="items"
-    class="h-96 border border-default rounded-lg p-4"
+    class="h-96 w-full border border-default rounded-lg p-4"
   >
     <template #default="{ item }">
       <UCard class="mb-4">

@@ -96,6 +96,14 @@ export interface ScrollAreaSlots<T = any> {
       | Record<string, never>,
   ): any
 }
+
+export interface ScrollAreaEmits {
+  /**
+   * Emitted when scroll state changes
+   * @param isScrolling - Whether the list is currently being scrolled
+   */
+  scroll: [isScrolling: boolean]
+}
 </script>
 
 <script setup lang="ts" generic="T = any">
@@ -113,6 +121,7 @@ const props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
   virtualize: false
 })
 defineSlots<ScrollAreaSlots<T>>()
+const emit = defineEmits<ScrollAreaEmits>()
 
 const appConfig = useAppConfig() as ScrollArea['AppConfig']
 const { dir } = useLocale()
@@ -322,6 +331,101 @@ const ui = computed(() =>
     orientation: props.orientation
   })
 )
+
+// Watch for scroll state changes and emit event
+watch(
+  () => virtualizer.value.isScrolling,
+  (isScrolling) => {
+    emit('scroll', isScrolling)
+  }
+)
+
+// Expose virtualizer methods and properties
+defineExpose({
+  /**
+   * The root element ref
+   */
+  rootRef,
+  /**
+   * The virtualizer instance (null if virtualization is disabled)
+   */
+  virtualizer: computed(() => props.virtualize ? virtualizer.value : null),
+  /**
+   * Scroll to a specific pixel offset
+   * @param offset - The pixel offset to scroll to
+   * @param options - Scroll options
+   */
+  scrollToOffset: (offset: number, options?: { align?: 'start' | 'center' | 'end' | 'auto', behavior?: 'auto' | 'smooth' | 'instant' }) => {
+    if (!props.virtualize) {
+      console.warn('scrollToOffset requires virtualization to be enabled')
+      return
+    }
+    virtualizer.value.scrollToOffset(offset, options as any)
+  },
+  /**
+   * Scroll to a specific item index
+   * @param index - The item index to scroll to
+   * @param options - Scroll options
+   */
+  scrollToIndex: (index: number, options?: { align?: 'start' | 'center' | 'end' | 'auto', behavior?: 'auto' | 'smooth' | 'instant' }) => {
+    if (!props.virtualize) {
+      console.warn('scrollToIndex requires virtualization to be enabled')
+      return
+    }
+    virtualizer.value.scrollToIndex(index, options as any)
+  },
+  /**
+   * Get the total size of all virtualized items
+   * @returns The total size in pixels
+   */
+  getTotalSize: () => {
+    if (!props.virtualize) {
+      console.warn('getTotalSize requires virtualization to be enabled')
+      return 0
+    }
+    return virtualizer.value.getTotalSize()
+  },
+  /**
+   * Reset all previously measured item sizes
+   */
+  measure: () => {
+    if (!props.virtualize) {
+      console.warn('measure requires virtualization to be enabled')
+      return
+    }
+    virtualizer.value.measure()
+  },
+  /**
+   * Get current scroll offset in pixels
+   * @returns The current scroll offset
+   */
+  getScrollOffset: () => {
+    if (!props.virtualize) {
+      return 0
+    }
+    return virtualizer.value.scrollOffset ?? 0
+  },
+  /**
+   * Check if the list is currently being scrolled
+   * @returns Whether scrolling is in progress
+   */
+  isScrolling: () => {
+    if (!props.virtualize) {
+      return false
+    }
+    return virtualizer.value.isScrolling
+  },
+  /**
+   * Get the current scroll direction
+   * @returns 'forward', 'backward', or null
+   */
+  getScrollDirection: () => {
+    if (!props.virtualize) {
+      return null
+    }
+    return virtualizer.value.scrollDirection ?? null
+  }
+})
 </script>
 
 <template>

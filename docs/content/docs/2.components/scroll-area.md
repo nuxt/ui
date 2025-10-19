@@ -13,18 +13,7 @@ links:
 
 ## Usage
 
-Use the `ScrollArea` component to create scrollable containers for any type of content. It supports both vertical and horizontal scrolling, and can optionally virtualize large lists for better performance.
-
-::component-example
----
-name: 'scroll-area-basic-example'
-class: 'p-8'
----
-::
-
-### Items
-
-Use the `items` prop as an array and render each item using the default slot:
+Use the `ScrollArea` component to create scrollable containers for any type of content. Pass an array to the `items` prop and render each item using the default slot. The component supports both vertical and horizontal scrolling, and can optionally virtualize large lists for better performance.
 
 ::component-example
 ---
@@ -41,6 +30,13 @@ Use the `orientation` prop to change the scroll direction. Defaults to `vertical
 ---
 name: 'scroll-area-orientation-example'
 class: 'p-8'
+options:
+  - name: orientation
+    label: Orientation
+    default: vertical
+    items:
+      - vertical
+      - horizontal
 ---
 ::
 
@@ -64,17 +60,6 @@ Virtualization is recommended for lists with 100+ items or when items contain he
 ::
 
 ## Examples
-
-### With horizontal scroll
-
-Set `orientation="horizontal"` to enable horizontal scrolling.
-
-::component-example
----
-name: 'scroll-area-horizontal-example'
-class: 'p-8'
----
-::
 
 ### With variable height items
 
@@ -156,6 +141,17 @@ Fine-tune virtualization behavior with custom options like `overscan`, `gap`, `p
 </template>
 ```
 
+### With programmatic scrolling
+
+Use the exposed methods to programmatically scroll to specific items or positions.
+
+::component-example
+---
+name: 'scroll-area-scroll-to-example'
+class: 'p-8'
+---
+::
+
 ## API
 
 ### Props
@@ -165,6 +161,47 @@ Fine-tune virtualization behavior with custom options like `overscan`, `gap`, `p
 ### Slots
 
 :component-slots
+
+### Emits
+
+:component-emits
+
+### Expose
+
+You can access the typed component instance using [`useTemplateRef`](https://vuejs.org/api/composition-api-helpers.html#usetemplateref).
+
+```vue
+<script setup lang="ts">
+const scrollArea = useTemplateRef('scrollArea')
+
+// Scroll to a specific item
+function scrollToItem(index: number) {
+  scrollArea.value?.scrollToIndex(index, { align: 'center' })
+}
+</script>
+
+<template>
+  <UScrollArea ref="scrollArea" :items="items" virtualize />
+</template>
+```
+
+This will give you access to the following:
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `rootRef`{lang="ts-type"} | `Ref<HTMLElement>`{lang="ts-type"} | The root element reference |
+| `virtualizer`{lang="ts-type"} | `ComputedRef<Virtualizer \| null>`{lang="ts-type"} | The TanStack Virtual virtualizer instance (null if virtualization is disabled) |
+| `scrollToOffset`{lang="ts-type"} | `(offset: number, options?: ScrollToOptions) => void`{lang="ts-type"} | Scroll to a specific pixel offset |
+| `scrollToIndex`{lang="ts-type"} | `(index: number, options?: ScrollToOptions) => void`{lang="ts-type"} | Scroll to a specific item index |
+| `getTotalSize`{lang="ts-type"} | `() => number`{lang="ts-type"} | Get the total size of all virtualized items in pixels |
+| `measure`{lang="ts-type"} | `() => void`{lang="ts-type"} | Reset all previously measured item sizes |
+| `getScrollOffset`{lang="ts-type"} | `() => number`{lang="ts-type"} | Get the current scroll offset in pixels |
+| `isScrolling`{lang="ts-type"} | `() => boolean`{lang="ts-type"} | Check if the list is currently being scrolled |
+| `getScrollDirection`{lang="ts-type"} | `() => 'forward' \| 'backward' \| null`{lang="ts-type"} | Get the current scroll direction |
+
+::note
+All scroll methods require virtualization to be enabled. They will log a warning if called when `virtualize` is `false`.
+::
 
 ## Theme
 
