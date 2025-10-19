@@ -40,6 +40,14 @@ export type BlogPostsSlots<T extends BlogPostProps = BlogPostProps> = {
   default(props?: {}): any
 }
 
+export interface BlogPostsEmits {
+  /**
+   * Emitted when user scrolls near the end of the list (for infinite scroll)
+   * Only emitted when virtualize is enabled
+   * @param lastIndex - The index of the last visible item
+   */
+  loadMore: [lastIndex: number]
+}
 </script>
 
 <script setup lang="ts" generic="T extends BlogPostProps">
@@ -58,6 +66,7 @@ const props = withDefaults(defineProps<BlogPostsProps>(), {
 const slots = defineSlots<BlogPostsSlots<T>>()
 
 const getProxySlots = () => omit(slots, ['default'])
+const emits = defineEmits<BlogPostsEmits>()
 
 const appConfig = useAppConfig() as BlogPosts['AppConfig']
 
@@ -85,6 +94,7 @@ const virtualizeOptions = computed(() => {
         orientation="vertical"
         :virtualize="virtualizeOptions"
         class="h-full"
+        @load-more="emits('loadMore', $event)"
       >
         <template #default="{ item: post }">
           <UBlogPost

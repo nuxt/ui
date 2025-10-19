@@ -218,6 +218,43 @@ options:
 ---
 ::
 
+### With infinite scroll
+
+Use the `@load-more` event to implement infinite scroll functionality. The event emits when the user scrolls within 5 items of the end of the list.
+
+```vue
+<script setup lang="ts">
+const posts = ref([...initialPosts])
+const isLoading = ref(false)
+
+async function loadMore() {
+  if (isLoading.value) return
+
+  isLoading.value = true
+  const morePosts = await fetchMorePosts()
+  posts.value.push(...morePosts)
+  isLoading.value = false
+}
+</script>
+
+<template>
+  <UScrollArea
+    :items="posts"
+    virtualize
+    class="h-96"
+    @load-more="loadMore"
+  >
+    <template #default="{ item }">
+      <UCard>{{ item.title }}</UCard>
+    </template>
+  </UScrollArea>
+</template>
+```
+
+::tip
+The `loadMore` event only fires when virtualization is enabled and provides the index of the last visible item. Add debouncing or a loading flag to prevent multiple simultaneous requests.
+::
+
 ## API
 
 ### Props

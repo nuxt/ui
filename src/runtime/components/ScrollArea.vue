@@ -72,6 +72,11 @@ export interface ScrollAreaEmits {
    * @param isScrolling - Whether the list is currently being scrolled
    */
   scroll: [isScrolling: boolean]
+  /**
+   * Emitted when user scrolls near the end of the list (for infinite scroll)
+   * @param lastIndex - The index of the last visible item
+   */
+  loadMore: [lastIndex: number]
 }
 </script>
 
@@ -307,6 +312,23 @@ watch(
   () => virtualizer ? virtualizer.value.isScrolling : false,
   (isScrolling) => {
     emits('scroll', isScrolling)
+  }
+)
+
+// Watch for infinite scroll - emit loadMore when last item is visible
+watch(
+  () => virtualizer ? virtualizer.value.getVirtualItems() : [],
+  (items) => {
+    if (!items.length || !props.items?.length) return
+
+    const lastItem = items[items.length - 1]
+    if (!lastItem) return
+
+    // If last visible item is within threshold of the end, emit loadMore
+    const threshold = 5 // Load more when within 5 items of the end
+    if (lastItem.index >= props.items.length - threshold) {
+      emits('loadMore', lastItem.index)
+    }
   }
 )
 
