@@ -4,6 +4,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-posts'
 import type { BlogPostProps, BlogPostSlots } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { ScrollAreaVirtualizeOptions } from './ScrollArea.vue'
 
 type BlogPosts = ComponentConfig<typeof theme, AppConfig, 'blogPosts'>
 
@@ -19,6 +20,12 @@ export interface BlogPostsProps<T extends BlogPostProps = BlogPostProps> {
    * @defaultValue 'horizontal'
    */
   orientation?: BlogPosts['variants']['orientation']
+  /**
+   * Enable virtualization for large lists of blog posts.
+   * Can be a boolean or ScrollAreaVirtualizeOptions for advanced configuration.
+   * @defaultValue false
+   */
+  virtualize?: boolean | ScrollAreaVirtualizeOptions
   class?: any
 }
 
@@ -42,9 +49,11 @@ import { useAppConfig } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UBlogPost from './BlogPost.vue'
+import UScrollArea from './ScrollArea.vue'
 
 const props = withDefaults(defineProps<BlogPostsProps>(), {
-  orientation: 'horizontal'
+  orientation: 'horizontal',
+  virtualize: false
 })
 const slots = defineSlots<BlogPostsSlots<T>>()
 
@@ -53,13 +62,40 @@ const getProxySlots = () => omit(slots, ['default'])
 const appConfig = useAppConfig() as BlogPosts['AppConfig']
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPosts || {}) }))
+
+const virtualizeOptions = computed(() => {
+  if (!props.virtualize) return false
+
+  const baseOptions = typeof props.virtualize === 'boolean' ? {} : props.virtualize
+
+  return {
+    estimateSize: 400,
+    gap: 16,
+    ...baseOptions
+  }
+})
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: props.class })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, virtualize: !!virtualize, class: props.class })">
     <slot>
+      <UScrollArea
+        v-if="virtualize"
+        :items="posts"
+        orientation="vertical"
+        :virtualize="virtualizeOptions"
+        class="h-full"
+      >
+        <template #default="{ item: post }">
+          <UBlogPost
+            :orientation="orientation === 'vertical' ? 'horizontal' : 'vertical'"
+            v-bind="post"
+          />
+        </template>
+      </UScrollArea>
       <UBlogPost
         v-for="(post, index) in posts"
+        v-else
         :key="index"
         :orientation="orientation === 'vertical' ? 'horizontal' : 'vertical'"
         v-bind="post"
