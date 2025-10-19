@@ -19,6 +19,37 @@ Use the `ScrollArea` component to create scrollable containers for any type of c
 ---
 name: 'scroll-area-basic-example'
 class: 'p-8'
+options:
+  - name: orientation
+    label: orientation
+    default: vertical
+    items:
+      - vertical
+      - horizontal
+  - name: virtualize
+    label: virtualize
+    default: true
+    items:
+      - true
+      - false
+  - name: lanes
+    label: lanes
+    default: 3
+    visibleWhen:
+      option: virtualize
+      is: true
+  - name: gap
+    label: gap
+    default: 12
+    visibleWhen:
+      option: virtualize
+      is: true
+  - name: padding
+    label: padding
+    default: 12
+    visibleWhen:
+      option: virtualize
+      is: true
 ---
 ::
 
@@ -32,7 +63,7 @@ name: 'scroll-area-orientation-example'
 class: 'p-8'
 options:
   - name: orientation
-    label: Orientation
+    label: orientation
     default: vertical
     items:
       - vertical
@@ -52,6 +83,10 @@ Enable virtualization with the `virtualize` prop to efficiently handle large dat
 ---
 name: 'scroll-area-virtualized-example'
 class: 'p-8'
+options:
+  - name: itemCount
+    label: itemCount
+    default: 10000
 ---
 ::
 
@@ -97,28 +132,14 @@ name: 'scroll-area-masonry-example'
 class: 'p-8'
 options:
   - name: lanes
-    label: Lanes
+    label: lanes
     default: 3
-    items:
-      - 2
-      - 3
-      - 4
   - name: gap
-    label: Gap
+    label: gap
     default: 12
-    items:
-      - 0
-      - 8
-      - 12
-      - 16
   - name: padding
-    label: Padding
+    label: padding
     default: 12
-    items:
-      - 0
-      - 8
-      - 12
-      - 16
 ---
 ::
 
@@ -134,6 +155,16 @@ Use the `laneWidth`, `minLanes`, and `maxLanes` options to create responsive mas
 ---
 name: 'scroll-area-responsive-masonry-example'
 class: 'p-8'
+options:
+  - name: laneWidth
+    label: laneWidth
+    default: 200
+  - name: minLanes
+    label: minLanes
+    default: 1
+  - name: maxLanes
+    label: maxLanes
+    default: 6
 ---
 ::
 
@@ -177,6 +208,13 @@ Use the exposed methods to programmatically scroll to specific items or position
 ---
 name: 'scroll-area-scroll-to-example'
 class: 'p-8'
+options:
+  - name: itemCount
+    label: itemCount
+    default: 10000
+  - name: targetIndex
+    label: targetIndex
+    default: 500
 ---
 ::
 

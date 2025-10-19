@@ -1,4 +1,12 @@
 <script setup lang="ts">
+defineProps<{
+  orientation?: 'vertical' | 'horizontal'
+  virtualize?: boolean
+  lanes?: number
+  gap?: number
+  padding?: number
+}>()
+
 const items = Array.from({ length: 50 }, (_, i) => ({
   id: i + 1,
   title: `Item ${i + 1}`,
@@ -9,10 +17,17 @@ const items = Array.from({ length: 50 }, (_, i) => ({
 <template>
   <UScrollArea
     :items="items"
-    class="h-96 w-full border border-default rounded-lg p-4"
+    :orientation="orientation"
+    :virtualize="virtualize ? {
+      lanes: lanes && lanes > 1 ? lanes : undefined,
+      gap,
+      paddingStart: padding,
+      paddingEnd: padding
+    } : false"
+    class="h-96 w-full border border-default rounded-lg"
   >
     <template #default="{ item }">
-      <UCard class="mb-4">
+      <UCard class="h-full overflow-hidden">
         <template #header>
           <h3 class="font-semibold">
             {{ item.title }}

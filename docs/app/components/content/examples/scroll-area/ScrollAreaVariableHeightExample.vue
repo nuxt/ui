@@ -11,11 +11,11 @@ const items = Array.from({ length: 100 }, (_, i) => ({
 <template>
   <UScrollArea
     :items="items"
-    :virtualize="{ estimateSize: 120 }"
-    class="h-96 w-full border border-default rounded-lg p-4"
+    :virtualize="{ estimateSize: 120, lanes: 3, gap: 12, paddingStart: 12, paddingEnd: 12 }"
+    class="h-96 w-full border border-default rounded-lg"
   >
     <template #default="{ item }">
-      <UCard class="mb-4">
+      <UCard>
         <template #header>
           <h3 class="font-semibold">
             {{ item.title }}

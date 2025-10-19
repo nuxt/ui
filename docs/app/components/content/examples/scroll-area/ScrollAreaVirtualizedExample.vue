@@ -1,9 +1,13 @@
 <script setup lang="ts">
-const items = Array.from({ length: 10000 }, (_, i) => ({
+const props = defineProps<{
+  itemCount?: number
+}>()
+
+const items = computed(() => Array.from({ length: props.itemCount || 10000 }, (_, i) => ({
   id: i + 1,
   title: `Item ${i + 1}`,
   description: `Description for item ${i + 1}`
-}))
+})))
 </script>
 
 <template>

@@ -1,4 +1,10 @@
 <script setup lang="ts">
+defineProps<{
+  laneWidth?: number
+  minLanes?: number
+  maxLanes?: number
+}>()
+
 const items = Array.from({ length: 30 }, (_, i) => {
   const heights = [300, 400, 200, 450]
   return {
@@ -17,12 +23,12 @@ const items = Array.from({ length: 30 }, (_, i) => {
       gap: 12,
       paddingStart: 12,
       paddingEnd: 12,
-      laneWidth: 200,
-      minLanes: 1,
-      maxLanes: 6
+      laneWidth,
+      minLanes,
+      maxLanes
     }"
     class="h-[600px] border border-default rounded-lg"
-    style="resize: horizontal; overflow: auto; min-width: 300px; min-height: 300px;"
+    style="resize: both; overflow: auto; min-width: 300px; min-height: 300px;"
   >
     <template #default="{ item }">
       <UCard :ui="{ body: 'p-0 sm:p-0' }">
