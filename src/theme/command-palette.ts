@@ -4,7 +4,6 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'flex flex-col min-h-0 min-w-0 divide-y divide-default',
     input: '[&>input]:h-12',
-    actions: '',
     close: '',
     back: 'p-0',
     trailingIcon: 'shrink-0 size-5 text-dimmed',
@@ -53,11 +52,6 @@ export default (options: Required<ModuleOptions>) => ({
     loading: {
       true: {
         itemLeadingIcon: 'animate-spin'
-      }
-    },
-    close: {
-      true: {
-        actions: 'me-2'
       }
     }
   }

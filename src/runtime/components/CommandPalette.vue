@@ -173,7 +173,6 @@ export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPalett
   'empty'(props: { searchTerm?: string }): any
   'footer'(props: { ui: CommandPalette['ui'] }): any
   'back'(props: { ui: CommandPalette['ui'] }): any
-  'actions'(props: { ui: CommandPalette['ui'] }): any
   'close'(props: { ui: CommandPalette['ui'] }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -462,11 +461,8 @@ function onSelect(e: Event, item: T) {
           </slot>
         </template>
 
-        <template v-if="trailingIcon || close || !!slots.close || !!slots.actions" #trailing>
+        <template v-if="trailingIcon || close || !!slots.close" #trailing>
           <UIcon v-if="trailingIcon" :name="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
-          <div v-if="!!slots.actions" :class="ui.actions({ class: props.ui?.actions })">
-            <slot name="actions" :ui="ui" />
-          </div>
           <slot name="close" :ui="ui">
             <UButton
               v-if="close"
