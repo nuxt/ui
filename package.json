@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "4.0.1",
-  "packageManager": "pnpm@10.18.2",
+  "packageManager": "pnpm@10.18.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -111,7 +111,7 @@
     "release": "release-it"
   },
   "dependencies": {
-    "@ai-sdk/vue": "^2.0.68",
+    "@ai-sdk/vue": "^2.0.76",
     "@iconify/vue": "^5.0.0",
     "@internationalized/date": "^3.10.0",
     "@internationalized/number": "^3.6.5",
@@ -143,7 +143,7 @@
     "knitwork": "^1.2.0",
     "magic-string": "^0.30.19",
     "mlly": "^1.8.0",
-    "motion-v": "^1.7.2",
+    "motion-v": "^1.7.3",
     "ohash": "^2.0.11",
     "pathe": "^2.0.3",
     "reka-ui": "2.5.1",
@@ -154,7 +154,7 @@
     "tinyglobby": "^0.2.15",
     "unplugin": "^2.3.10",
     "unplugin-auto-import": "^20.2.0",
-    "unplugin-vue-components": "^29.1.0",
+    "unplugin-vue-components": "^29.2.0",
     "vaul-vue": "0.4.1",
     "vue-component-type-helpers": "^3.1.1"
   },
@@ -165,10 +165,10 @@
     "@nuxt/test-utils": "^3.19.2",
     "@release-it/conventional-changelog": "^10.0.1",
     "@vue/test-utils": "^2.4.6",
-    "ai": "^5.0.68",
+    "ai": "^5.0.76",
     "embla-carousel": "^8.6.0",
-    "eslint": "^9.37.0",
-    "happy-dom": "^20.0.0",
+    "eslint": "^9.38.0",
+    "happy-dom": "^20.0.7",
     "nuxt": "^4.1.2",
     "release-it": "^19.0.5",
     "vitest": "^3.2.4",
