@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import CommandPalette from '../../src/runtime/components/CommandPalette.vue'
 import type { CommandPaletteProps, CommandPaletteSlots } from '../../src/runtime/components/CommandPalette.vue'
 import ComponentRender from '../component-render'
@@ -36,17 +38,17 @@ describe('CommandPalette', () => {
     items: [{
       label: 'bug',
       chip: {
-        color: 'error'
+        color: 'error' as const
       }
     }, {
       label: 'feature',
       chip: {
-        color: 'success'
+        color: 'success' as const
       }
     }, {
       label: 'enhancement',
       chip: {
-        color: 'info'
+        color: 'info' as const
       }
     }]
   }, {
@@ -55,7 +57,8 @@ describe('CommandPalette', () => {
     items: [{
       label: 'benjamincanac',
       avatar: {
-        src: 'https://github.com/benjamincanac.png'
+        src: 'https://github.com/benjamincanac.png',
+        alt: 'Benjamin Canac'
       },
       to: 'https://github.com/benjamincanac',
       target: '_blank'
@@ -95,5 +98,27 @@ describe('CommandPalette', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps, slots?: Partial<CommandPaletteSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, CommandPalette)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(CommandPalette, {
+      props: {
+        groups,
+        close: true,
+        modelValue: [groups[2]?.items[0], groups[1]?.items[0]],
+        multiple: true
+      }
+    })
+
+    expect(await axe(wrapper.element, {
+      rules: {
+        // ARIA input fields must have an accessible name (aria-input-field-name)"
+        // Fix any of the following:
+        //   aria-label attribute does not exist or is empty
+        //   aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
+        //   Element has no title attribute
+        'aria-input-field-name': { enabled: false }
+      }
+    })).toHaveNoViolations()
   })
 })

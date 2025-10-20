@@ -47,8 +47,8 @@ export interface BlogPostSlots {
   badge(props?: {}): any
   title(props?: {}): any
   description(props?: {}): any
-  authors(props?: {}): any
-  header(props?: {}): any
+  authors(props: { ui: BlogPost['ui'] }): any
+  header(props: { ui: BlogPost['ui'] }): any
   body(props?: {}): any
   footer(props?: {}): any
 }
@@ -117,7 +117,7 @@ const ariaLabel = computed(() => {
 <template>
   <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="onClick">
     <div v-if="image || !!slots.header" :class="ui.header({ class: props.ui?.header })">
-      <slot name="header">
+      <slot name="header" :ui="ui">
         <component
           :is="ImageComponent"
           v-bind="typeof image === 'string' ? { src: image, alt: title } : { alt: title, ...image }"
@@ -164,7 +164,7 @@ const ariaLabel = computed(() => {
         </div>
 
         <div v-if="authors?.length || !!slots.authors" :class="ui.authors({ class: props.ui?.authors })">
-          <slot name="authors">
+          <slot name="authors" :ui="ui">
             <template v-if="authors?.length">
               <UAvatarGroup v-if="authors.length > 1">
                 <ULink

@@ -328,7 +328,7 @@ You can use the `row-selection` prop to control the selection state of the rows 
 You can add a `@select` listener to make rows clickable with or without a checkbox column.
 
 ::note
-The handler function receives the `TableRow` instance as the first argument and an optional `Event` as the second argument.
+The handler function receives the `Event` and `TableRow` instance as the first and second arguments respectively.
 ::
 
 ::component-example
@@ -677,7 +677,6 @@ This will give you access to the following:
 
 | Name | Type |
 | ---- | ---- |
-| `rootRef`{lang="ts-type"} | `Ref<HTMLDivElement \| null>`{lang="ts-type"} |
 | `tableRef`{lang="ts-type"} | `Ref<HTMLTableElement \| null>`{lang="ts-type"} |
 | `tableApi`{lang="ts-type"} | [`Ref<Table \| null>`{lang="ts-type"}](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
 

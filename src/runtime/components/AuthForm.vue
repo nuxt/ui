@@ -96,7 +96,7 @@ type DynamicFormFieldSlots<T> = Record<string, (props?: {}) => any> & Record<`${
 
 export type AuthFormSlots<T extends object = object, F extends AuthFormField = AuthFormField> = {
   header(props?: {}): any
-  leading(props?: {}): any
+  leading(props: { ui: AuthForm['ui'] }): any
   title(props?: {}): any
   description(props?: {}): any
   providers(props?: {}): any
@@ -192,7 +192,7 @@ function omitFieldProps(field: F) {
     <div v-if="(icon || !!slots.icon) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
         <div v-if="icon || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-          <slot name="leading">
+          <slot name="leading" :ui="ui">
             <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           </slot>
         </div>

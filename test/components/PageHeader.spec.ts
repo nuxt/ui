@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageHeader from '../../src/runtime/components/PageHeader.vue'
 import type { PageHeaderProps, PageHeaderSlots } from '../../src/runtime/components/PageHeader.vue'
 import ComponentRender from '../component-render'
@@ -22,5 +24,18 @@ describe('PageHeader', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageHeaderProps, slots?: Partial<PageHeaderSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PageHeader)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PageHeader, {
+      props: {
+        title: 'Title',
+        description: 'Description',
+        headline: 'Breaking News',
+        links: [{ label: 'GitHub', icon: 'i-simple-icons-github', to: 'https://github.com' }]
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

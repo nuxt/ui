@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageLogos from '../../src/runtime/components/PageLogos.vue'
 import type { PageLogosProps, PageLogosSlots } from '../../src/runtime/components/PageLogos.vue'
 import ComponentRender from '../component-render'
@@ -22,5 +24,16 @@ describe('PageLogos', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageLogosProps, slots?: Partial<PageLogosSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PageLogos)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PageLogos, {
+      props: {
+        title: 'Title',
+        items
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

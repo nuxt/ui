@@ -44,6 +44,7 @@ const items = computed<DropdownMenuItem[]>(() => [{
       color="neutral"
       variant="ghost"
       class="data-[state=open]:bg-elevated"
+      aria-label="Switch theme"
     />
 
     <template #item-leading="{ item }">
