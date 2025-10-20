@@ -178,6 +178,43 @@ In-memory list of all overlays that were created.
 
 ## Instance API
 
+### on()
+
+`on(event: string, callback: (value: unknown) => void): void`{lang="ts-type"}
+
+Listen to overlay's component emits.
+
+#### Parameters
+
+::field-group
+  ::field{name="event" type="string" required}
+  The event to listen to.
+  ::
+
+  ::field{name="callback" type="(value: unknown) => void" required}
+  The callback to invoke when the event is emitted.
+  ::
+::
+
+```vue
+<script setup lang="ts">
+import { LazyModalExample } from '#components'
+
+const overlay = useOverlay()
+
+const modal = overlay.create(LazyModalExample)
+modal.on('event-emitted', () => {
+  console.log('event emitted')
+})
+
+function openModal() {
+  modal.open({
+    title: 'Welcome'
+  })
+}
+</script>
+```
+
 ### open()
 
 `open(props?: ComponentProps<T>): Promise<OpenedOverlay<T>>`{lang="ts-type"}
@@ -272,7 +309,7 @@ const modalB = overlay.create(ModalB)
 
 const slideoverA = overlay.create(SlideoverA)
 
-modalB.on('close', (value) => {
+modalA.on('close', (value) => {
   console.log(value)
 })
 
@@ -329,3 +366,9 @@ const modal = overlay.create(LazyModalExample, {
 })
 </script>
 ```
+
+### Limitation for components with more than 5 emits
+
+Because of TypeScript limitation for infer overloaded functions in conditional types (cf: https://github.com/microsoft/TypeScript/issues/32164).
+
+Because of this limitation, you could expect typing issues for components with more than 5 defined emits. This limitation is set 5 as we use a trick to make work for most cases.
