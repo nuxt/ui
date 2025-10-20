@@ -15,9 +15,9 @@ export default (options: Required<ModuleOptions>) => ({
     itemTrailingIcon: 'shrink-0',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0',
     itemTrailingKbdsSize: '',
-    itemContent: 'flex-1 flex flex-col truncate',
-    itemLabel: 'truncate text-start',
-    itemDescription: 'truncate text-muted text-start',
+    itemWrapper: 'flex-1 flex flex-col items-start min-w-0',
+    itemLabel: 'truncate',
+    itemDescription: 'truncate text-muted',
     itemLabelExternalIcon: 'inline-block size-3 align-top text-dimmed'
   },
   variants: {
@@ -46,7 +46,6 @@ export default (options: Required<ModuleOptions>) => ({
         item: 'p-1 text-xs gap-1',
         itemLeadingIcon: 'size-4',
         itemLeadingAvatarSize: '3xs',
-        itemDescription: 'text-[10px]/3',
         itemTrailingIcon: 'size-4',
         itemTrailingKbds: 'gap-0.5',
         itemTrailingKbdsSize: 'sm'
@@ -56,7 +55,6 @@ export default (options: Required<ModuleOptions>) => ({
         item: 'p-1.5 text-xs gap-1.5',
         itemLeadingIcon: 'size-4',
         itemLeadingAvatarSize: '3xs',
-        itemDescription: 'text-[10px]/3',
         itemTrailingIcon: 'size-4',
         itemTrailingKbds: 'gap-0.5',
         itemTrailingKbdsSize: 'sm'
@@ -66,7 +64,6 @@ export default (options: Required<ModuleOptions>) => ({
         item: 'p-1.5 text-sm gap-1.5',
         itemLeadingIcon: 'size-5',
         itemLeadingAvatarSize: '2xs',
-        itemDescription: 'text-xs',
         itemTrailingIcon: 'size-5',
         itemTrailingKbds: 'gap-0.5',
         itemTrailingKbdsSize: 'md'
@@ -76,7 +73,6 @@ export default (options: Required<ModuleOptions>) => ({
         item: 'p-2 text-sm gap-2',
         itemLeadingIcon: 'size-5',
         itemLeadingAvatarSize: '2xs',
-        itemDescription: 'text-xs',
         itemTrailingIcon: 'size-5',
         itemTrailingKbds: 'gap-1',
         itemTrailingKbdsSize: 'md'
@@ -86,7 +82,6 @@ export default (options: Required<ModuleOptions>) => ({
         item: 'p-2 text-base gap-2',
         itemLeadingIcon: 'size-6',
         itemLeadingAvatarSize: 'xs',
-        itemDescription: 'text-sm',
         itemTrailingIcon: 'size-6',
         itemTrailingKbds: 'gap-1',
         itemTrailingKbdsSize: 'lg'

@@ -23,9 +23,9 @@ export default (options: Required<ModuleOptions>) => ({
     itemTrailingHighlightedIcon: 'shrink-0 size-5 text-dimmed hidden group-data-highlighted:inline-flex',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0 gap-0.5',
     itemTrailingKbdsSize: 'md',
-    itemContent: 'flex-1 flex flex-col truncate',
-    itemLabel: 'truncate space-x-1 text-dimmed text-start',
-    itemDescription: 'truncate text-muted text-start text-xs',
+    itemWrapper: 'flex-1 flex flex-col items-start min-w-0',
+    itemLabel: 'truncate space-x-1 text-dimmed',
+    itemDescription: 'truncate text-muted',
     itemLabelBase: 'text-highlighted [&>mark]:text-inverted [&>mark]:bg-primary',
     itemLabelPrefix: 'text-default',
     itemLabelSuffix: 'text-dimmed [&>mark]:text-inverted [&>mark]:bg-primary'

@@ -28,7 +28,7 @@ export type InputMenuItem = InputMenuValue | {
   disabled?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemContent' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
+  ui?: Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
 
@@ -481,14 +481,14 @@ defineExpose({
           />
         </slot>
 
-        <span :class="ui.itemContent({ class: [props.ui?.itemContent, isInputItem(item) && item.ui?.itemContent] })">
+        <span :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, isInputItem(item) && item.ui?.itemWrapper] })">
           <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isInputItem(item) && item.ui?.itemLabel] })">
             <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
               {{ isInputItem(item) ? get(item, props.labelKey as string) : item }}
             </slot>
           </span>
 
-          <span v-if="isInputItem(item) && get(item, props.descriptionKey as string)" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
+          <span v-if="isInputItem(item) && (get(item, props.descriptionKey as string) || !!slots['item-description'])" :class="ui.itemDescription({ class: [props.ui?.itemDescription, isInputItem(item) && item.ui?.itemDescription] })">
             <slot name="item-description" :item="(item as NestedItem<T>)" :index="index">
               {{ get(item, props.descriptionKey as string) }}
             </slot>

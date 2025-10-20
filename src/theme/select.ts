@@ -17,7 +17,7 @@ export default (options: Required<ModuleOptions>) => {
       empty: 'text-center text-muted',
       label: 'font-semibold text-highlighted',
       separator: '-mx-1 my-1 h-px bg-border',
-      item: ['group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50', options.theme.transitions && 'transition-colors before:transition-colors'],
+      item: ['group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50', options.theme.transitions && 'transition-colors before:transition-colors'],
       itemLeadingIcon: ['shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default', options.theme.transitions && 'transition-colors'],
       itemLeadingAvatar: 'shrink-0',
       itemLeadingAvatarSize: '',
@@ -25,7 +25,7 @@ export default (options: Required<ModuleOptions>) => {
       itemLeadingChipSize: '',
       itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
       itemTrailingIcon: 'shrink-0',
-      itemContent: 'flex-1 flex flex-col truncate',
+      itemWrapper: 'flex-1 flex flex-col min-w-0',
       itemLabel: 'truncate',
       itemDescription: 'truncate text-muted'
     },
@@ -39,7 +39,6 @@ export default (options: Required<ModuleOptions>) => {
           itemLeadingAvatarSize: '3xs',
           itemLeadingChip: 'size-4',
           itemLeadingChipSize: 'sm',
-          itemDescription: 'text-[10px]/3',
           itemTrailingIcon: 'size-4',
           empty: 'p-1 text-xs'
         },
@@ -50,7 +49,6 @@ export default (options: Required<ModuleOptions>) => {
           itemLeadingAvatarSize: '3xs',
           itemLeadingChip: 'size-4',
           itemLeadingChipSize: 'sm',
-          itemDescription: 'text-[10px]/3',
           itemTrailingIcon: 'size-4',
           empty: 'p-1.5 text-xs'
         },
@@ -61,7 +59,6 @@ export default (options: Required<ModuleOptions>) => {
           itemLeadingAvatarSize: '2xs',
           itemLeadingChip: 'size-5',
           itemLeadingChipSize: 'md',
-          itemDescription: 'text-xs',
           itemTrailingIcon: 'size-5',
           empty: 'p-1.5 text-sm'
         },
@@ -72,7 +69,6 @@ export default (options: Required<ModuleOptions>) => {
           itemLeadingAvatarSize: '2xs',
           itemLeadingChip: 'size-5',
           itemLeadingChipSize: 'md',
-          itemDescription: 'text-xs',
           itemTrailingIcon: 'size-5',
           empty: 'p-2 text-sm'
         },
@@ -83,7 +79,6 @@ export default (options: Required<ModuleOptions>) => {
           itemLeadingAvatarSize: 'xs',
           itemLeadingChip: 'size-6',
           itemLeadingChipSize: 'lg',
-          itemDescription: 'text-sm',
           itemTrailingIcon: 'size-6',
           empty: 'p-2 text-base'
         }

@@ -27,7 +27,7 @@ export type SelectMenuItem = SelectMenuValue | {
   disabled?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemContent' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
+  ui?: Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
 
@@ -462,14 +462,14 @@ defineExpose({
           />
         </slot>
 
-        <span :class="ui.itemContent({ class: [props.ui?.itemContent, isSelectItem(item) && item.ui?.itemContent] })">
+        <span :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })">
           <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
             <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
               {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
             </slot>
           </span>
 
-          <span v-if="isSelectItem(item) && get(item, props.descriptionKey as string)" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
+          <span v-if="isSelectItem(item) && (get(item, props.descriptionKey as string) || !!slots['item-description'])" :class="ui.itemDescription({ class: [props.ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })">
             <slot name="item-description" :item="(item as NestedItem<T>)" :index="index">
               {{ get(item, props.descriptionKey as string) }}
             </slot>
