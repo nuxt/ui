@@ -109,7 +109,8 @@ const messagesRefs = ref(new Map<string, HTMLElement>())
 const showAutoScroll = ref(false)
 const lastMessageHeight = ref(0)
 const lastMessageSubmitted = ref(false)
-const isNearBottom = ref(true)
+const lastScrollTop = ref(0)
+const userScrolledUp = ref(false)
 
 function registerMessageRef(id: string, element: ComponentPublicInstance | null) {
   const elInstance = element?.$el
@@ -130,11 +131,6 @@ function scrollToBottom(smooth: boolean = true) {
     return
   }
 
-  // Don't scroll if user has manually scrolled away from bottom (unless it's an explicit scroll action)
-  if (smooth && props.shouldAutoScroll && !isNearBottom.value) {
-    return
-  }
-
   if (smooth) {
     parent.value.scrollTo({ top: parent.value.scrollHeight, behavior: 'smooth' })
   } else {
@@ -143,16 +139,20 @@ function scrollToBottom(smooth: boolean = true) {
 }
 
 watchThrottled([() => props.messages, () => props.status], ([_, status]) => {
-  if (status !== 'streaming') {
+  if (status !== 'streaming' || !props.shouldAutoScroll) {
     return
   }
 
-  if (props.shouldAutoScroll && isNearBottom.value) {
-    // Scroll to bottom when message is streaming if `props.shouldAutoScroll` is true and user is near bottom
-    requestAnimationFrame(() => nextTick(scrollToBottom))
-  } else {
-    // Check scroll position when message is streaming to show the auto scroll button
-    checkScrollPosition()
+  if (props.shouldAutoScroll) {
+    // Scroll to bottom when message is streaming if `props.shouldAutoScroll` is true
+    nextTick(() => {
+      if (!parent.value || userScrolledUp.value) return
+
+      const distanceFromBottom = parent.value.scrollHeight - parent.value.scrollTop - parent.value.clientHeight
+      if (distanceFromBottom < 150) {
+        scrollToBottom(false)
+      }
+    })
   }
 }, { deep: true, throttle: 50, leading: true })
 
@@ -165,6 +165,8 @@ watch(() => props.status, (status) => {
   if (!lastMessage || lastMessage.role !== 'user') {
     return
   }
+
+  userScrolledUp.value = false
 
   nextTick(() => {
     lastMessageSubmitted.value = true
@@ -182,17 +184,24 @@ function checkScrollPosition() {
     return
   }
 
-  const scrollPosition = parent.value.scrollTop + parent.value.clientHeight
-  const scrollHeight = parent.value.scrollHeight
-  const threshold = 50
+  const currentScrollTop = parent.value.scrollTop
+  const distanceFromBottom = parent.value.scrollHeight - currentScrollTop - parent.value.clientHeight
+  const threshold = 100
 
-  const isAtBottom = (scrollHeight - scrollPosition) < threshold
+  showAutoScroll.value = distanceFromBottom >= threshold
 
-  showAutoScroll.value = !isAtBottom
-  isNearBottom.value = isAtBottom
+  // Detect user scrolling up
+  if (currentScrollTop < lastScrollTop.value) {
+    userScrolledUp.value = true
+  } else if (distanceFromBottom < threshold) {
+    userScrolledUp.value = false
+  }
+
+  lastScrollTop.value = currentScrollTop
 }
 
 function onAutoScrollClick() {
+  userScrolledUp.value = false
   scrollToBottom()
 }
 
@@ -250,6 +259,8 @@ onMounted(() => {
   if (!parent.value) {
     return
   }
+
+  lastScrollTop.value = parent.value.scrollTop
 
   // Wait for content to fully render (especially MDC components in ChatPalette)
   setTimeout(() => {
