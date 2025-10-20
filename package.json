@@ -154,7 +154,7 @@
     "tinyglobby": "^0.2.15",
     "unplugin": "^2.3.10",
     "unplugin-auto-import": "^20.2.0",
-    "unplugin-vue-components": "^29.2.0",
+    "unplugin-vue-components": "^30.0.0",
     "vaul-vue": "0.4.1",
     "vue-component-type-helpers": "^3.1.1"
   },
@@ -212,7 +212,6 @@
   "resolutions": {
     "@nuxt/kit": "^4.1.2",
     "@nuxt/ui": "workspace:*",
-    "chokidar": "3.6.0",
     "debug": "4.3.7",
     "typescript": "5.8.3",
     "unimport": "4.1.1",
