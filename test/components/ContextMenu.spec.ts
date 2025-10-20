@@ -2,10 +2,14 @@ import { h, defineComponent } from 'vue'
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import type { AppConfig } from '@nuxt/schema'
 import ContextMenu from '../../src/runtime/components/ContextMenu.vue'
 import type { ContextMenuProps, ContextMenuSlots } from '../../src/runtime/components/ContextMenu.vue'
+import type { ComponentConfig } from '../../src/runtime/types/tv'
 import { expectSlotProps } from '../utils/types'
 import theme from '#build/ui/context-menu'
+
+type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 
 const ContextMenuWrapper = defineComponent({
   components: {
@@ -120,21 +124,21 @@ describe('ContextMenu', () => {
     // normal
     expectSlotProps('item', () => ContextMenu({
       items: [{ label: 'foo', value: 'bar' }]
-    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean, ui: ContextMenu['ui'] }>()
 
     // groups
     expectSlotProps('item', () => ContextMenu({
       items: [[{ label: 'foo', value: 'bar' }]]
-    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean, ui: ContextMenu['ui'] }>()
 
     // custom
     expectSlotProps('item', () => ContextMenu({
       items: [{ label: 'foo', value: 'bar', custom: 'nice' }]
-    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean, ui: ContextMenu['ui'] }>()
 
     // custom + groups
     expectSlotProps('item', () => ContextMenu({
       items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]]
-    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean, ui: ContextMenu['ui'] }>()
   })
 })
