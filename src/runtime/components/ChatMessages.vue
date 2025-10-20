@@ -143,17 +143,14 @@ watchThrottled([() => props.messages, () => props.status], ([_, status]) => {
     return
   }
 
-  if (props.shouldAutoScroll) {
-    // Scroll to bottom when message is streaming if `props.shouldAutoScroll` is true
-    nextTick(() => {
-      if (!parent.value || userScrolledUp.value) return
+  // Scroll to bottom when message is streaming if `props.shouldAutoScroll` is true
+  nextTick(() => {
+    if (!parent.value || userScrolledUp.value) return
 
-      const distanceFromBottom = parent.value.scrollHeight - parent.value.scrollTop - parent.value.clientHeight
-      if (distanceFromBottom < 150) {
-        scrollToBottom(false)
-      }
-    })
-  }
+    if ((parent.value.scrollHeight - parent.value.scrollTop - parent.value.clientHeight) < 150) {
+      scrollToBottom(false)
+    }
+  })
 }, { deep: true, throttle: 50, leading: true })
 
 watch(() => props.status, (status) => {
@@ -184,20 +181,20 @@ function checkScrollPosition() {
     return
   }
 
-  const currentScrollTop = parent.value.scrollTop
-  const distanceFromBottom = parent.value.scrollHeight - currentScrollTop - parent.value.clientHeight
+  const scrollPosition = parent.value.scrollTop + parent.value.clientHeight
+  const scrollHeight = parent.value.scrollHeight
   const threshold = 100
 
-  showAutoScroll.value = distanceFromBottom >= threshold
+  showAutoScroll.value = (scrollHeight - scrollPosition) >= threshold
 
   // Detect user scrolling up
-  if (currentScrollTop < lastScrollTop.value) {
+  if (parent.value.scrollTop < lastScrollTop.value) {
     userScrolledUp.value = true
-  } else if (distanceFromBottom < threshold) {
+  } else if ((scrollHeight - scrollPosition) < threshold) {
     userScrolledUp.value = false
   }
 
-  lastScrollTop.value = currentScrollTop
+  lastScrollTop.value = parent.value.scrollTop
 }
 
 function onAutoScrollClick() {
