@@ -518,6 +518,20 @@ props:
 This example uses the `as` prop to change the items from `button` to `div` as the [`Checkbox`](/docs/components/checkbox) is also rendered as a `button`.
 ::
 
+### With drag and drop :badge{label="Soon"}
+
+Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Tree. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
+
+::component-example
+---
+name: 'tree-drag-and-drop-example'
+---
+::
+
+::note
+This example sets the `nested` prop to `false` to have a flat list of items so that the items can be dragged and dropped.
+::
+
 ### With virtualization :badge{label="Soon"}
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.

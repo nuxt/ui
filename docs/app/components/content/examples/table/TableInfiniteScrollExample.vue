@@ -63,8 +63,7 @@ execute()
 const table = useTemplateRef('table')
 
 onMounted(() => {
-  // `rootRef` has been added in https://github.com/nuxt/ui/pull/5162 and will be available in v4.1.0, use `table.value?.$el` for older versions
-  useInfiniteScroll(table.value?.rootRef, () => {
+  useInfiniteScroll(table.value?.$el, () => {
     skip.value += 10
   }, {
     distance: 200,

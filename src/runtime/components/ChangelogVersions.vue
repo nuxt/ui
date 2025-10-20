@@ -1,8 +1,9 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import type { SpringOptions } from 'motion-v'
 import theme from '#build/ui/changelog-versions'
-import type { ChangelogVersionProps } from '../types'
+import type { ChangelogVersionProps, ChangelogVersionSlots } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChangelogVersions = ComponentConfig<typeof theme, AppConfig, 'changelogVersions'>
@@ -30,21 +31,18 @@ export interface ChangelogVersionsProps<T extends ChangelogVersionProps = Change
   ui?: ChangelogVersions['slots']
 }
 
-export interface ChangelogVersionsSlots<T extends ChangelogVersionProps = ChangelogVersionProps> {
+type ExtendSlotWithVersion<T extends ChangelogVersionProps, K extends keyof ChangelogVersionSlots>
+  = ChangelogVersionSlots[K] extends (props: infer P) => any
+    ? (props: P & { version: T }) => any
+    : ChangelogVersionSlots[K]
+
+export type ChangelogVersionsSlots<T extends ChangelogVersionProps = ChangelogVersionProps> = {
+  [K in keyof ChangelogVersionSlots]: ExtendSlotWithVersion<T, K>
+} & {
   default(props?: {}): any
   indicator(props?: {}): any
-  header(props: { version: T }): any
-  badge(props: { version: T }): any
-  date(props: { version: T }): any
-  title(props: { version: T }): any
-  description(props: { version: T }): any
-  image(props: { version: T }): any
-  body(props: { version: T }): any
-  footer(props: { version: T }): any
-  authors(props: { version: T }): any
-  actions(props: { version: T }): any
-  indicator(props: { version: T }): any
 }
+
 </script>
 
 <script setup lang="ts" generic="T extends ChangelogVersionProps">
@@ -93,8 +91,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.changelogVer
           :indicator="!!props.indicator"
           v-bind="(version as ChangelogVersionProps)"
         >
-          <template v-for="(_, name) in getProxySlots()" #[name]>
-            <slot :name="name" v-bind="{ version }" />
+          <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
+            <slot :name="name" v-bind="(slotData as any)" :version="version" />
           </template>
         </UChangelogVersion>
       </slot>

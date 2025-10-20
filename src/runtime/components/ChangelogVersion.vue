@@ -40,16 +40,16 @@ export interface ChangelogVersionProps {
 
 export interface ChangelogVersionSlots {
   header(props?: {}): any
-  badge(props?: {}): any
+  badge(props: { ui: ChangelogVersion['ui'] }): any
   date(props?: {}): any
   title(props?: {}): any
   description(props?: {}): any
-  image(props?: {}): any
+  image(props: { ui: ChangelogVersion['ui'] }): any
   body(props?: {}): any
   footer(props?: {}): any
   authors(props?: {}): any
   actions(props?: {}): any
-  indicator(props?: {}): any
+  indicator(props: { ui: ChangelogVersion['ui'] }): any
 }
 </script>
 
@@ -143,7 +143,7 @@ const ariaLabel = computed(() => {
 
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="onClick">
     <div v-if="!!props.indicator || !!slots.indicator" :class="ui.indicator({ class: props.ui?.indicator })">
-      <slot name="indicator">
+      <slot name="indicator" :ui="ui">
         <ReuseDateTemplate />
 
         <div :class="ui.dot({ class: props.ui?.dot })">
@@ -156,7 +156,7 @@ const ariaLabel = computed(() => {
       <div v-if="!!slots.header || (date || !!slots.date) || (badge || !!slots.badge) || (title || !!slots.title) || (description || !!slots.description) || (image || !!slots.image)" :class="ui.header({ class: props.ui?.header })">
         <slot name="header">
           <div v-if="(date || !!slots.date) || (badge || !!slots.badge)" :class="ui.meta({ class: props.ui?.meta, badge: (!!badge || !!slots.badge) || !props.indicator })">
-            <slot name="badge">
+            <slot name="badge" :ui="ui">
               <UBadge v-if="badge" color="neutral" variant="solid" v-bind="typeof badge === 'string' ? { label: badge } : badge" :class="ui.badge({ class: props.ui?.badge })" />
             </slot>
 
@@ -178,7 +178,7 @@ const ariaLabel = computed(() => {
           </div>
 
           <div v-if="image || !!slots.image" :class="ui.imageWrapper({ class: props.ui?.imageWrapper })">
-            <slot name="image">
+            <slot name="image" :ui="ui">
               <component
                 :is="ImageComponent"
                 v-if="image"

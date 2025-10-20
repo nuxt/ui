@@ -80,7 +80,7 @@ export interface ContentNavigationProps<T extends ContentNavigationLink = Conten
 
 export interface ContentNavigationEmits extends AccordionRootEmits {}
 
-type SlotProps<T> = (props: { link: T, active?: boolean }) => any
+type SlotProps<T> = (props: { link: T, active?: boolean, ui: ContentNavigation['ui'] }) => any
 
 export interface ContentNavigationSlots<T extends ContentNavigationLink = ContentNavigationLink> {
   'link': SlotProps<T>
@@ -164,13 +164,13 @@ const defaultValue = computed(() => {
 
 <template>
   <DefineLinkTemplate v-slot="{ link, active }">
-    <slot name="link" :link="(link as T)" :active="active">
-      <slot name="link-leading" :link="(link as T)" :active="active">
+    <slot name="link" :link="(link as T)" :active="active" :ui="ui">
+      <slot name="link-leading" :link="(link as T)" :active="active" :ui="ui">
         <UIcon v-if="link.icon" :name="link.icon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, link.ui?.linkLeadingIcon], active })" />
       </slot>
 
       <span v-if="link.title || !!slots['link-title']" :class="ui.linkTitle({ class: [props.ui?.linkTitle, link.ui?.linkTitle], active })">
-        <slot name="link-title" :link="(link as T)" :active="active">
+        <slot name="link-title" :link="(link as T)" :active="active" :ui="ui">
           {{ link.title }}
         </slot>
 
@@ -178,7 +178,7 @@ const defaultValue = computed(() => {
       </span>
 
       <span v-if="link.badge || (link.children?.length && !disabled) || link.trailingIcon || !!slots['link-trailing']" :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, link.ui?.linkTrailing] })">
-        <slot name="link-trailing" :link="(link as T)" :active="active">
+        <slot name="link-trailing" :link="(link as T)" :active="active" :ui="ui">
           <UBadge
             v-if="link.badge"
             color="neutral"
@@ -222,7 +222,7 @@ const defaultValue = computed(() => {
               :ui="props.ui"
             >
               <template v-for="(_, name) in slots" #[name]="slotData">
-                <slot :name="name" :link="(slotData.link as T)" :active="slotData.active" />
+                <slot :name="name" v-bind="{ ...slotData, link: link as T }" />
               </template>
             </UContentNavigation>
           </AccordionContent>
