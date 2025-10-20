@@ -403,7 +403,7 @@ function onSelect(e: Event, item: T) {
 
             <span v-if="item.labelHtml || get(item, props.labelKey as string) || get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>]" :class="ui.itemContent({ class: [props.ui?.itemContent, item.ui?.itemContent] })">
               <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel], active: active || item.active })">
-                <slot :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
+                <slot :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
                   <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: [props.ui?.itemLabelPrefix, item.ui?.itemLabelPrefix] })">{{ item.prefix }}</span>
 
                   <span :class="ui.itemLabelBase({ class: [props.ui?.itemLabelBase, item.ui?.itemLabelBase], active: active || item.active })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
@@ -413,7 +413,7 @@ function onSelect(e: Event, item: T) {
               </span>
 
               <span v-if="get(item, props.descriptionKey as string)" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
-                <slot :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
+                <slot :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
                   {{ get(item, props.descriptionKey as string) }}
                 </slot>
               </span>
