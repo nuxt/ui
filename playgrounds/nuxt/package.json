@@ -9,13 +9,13 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@ai-sdk/gateway": "^1.0.39",
-    "@ai-sdk/vue": "^2.0.68",
-    "@iconify-json/lucide": "^1.2.69",
-    "@iconify-json/simple-icons": "^1.2.54",
+    "@ai-sdk/gateway": "^1.0.41",
+    "@ai-sdk/vue": "^2.0.76",
+    "@iconify-json/lucide": "^1.2.70",
+    "@iconify-json/simple-icons": "^1.2.55",
     "@internationalized/date": "^3.10.0",
     "@nuxt/ui": "workspace:*",
-    "ai": "^5.0.68",
+    "ai": "^5.0.76",
     "nuxt": "^4.1.2",
     "zod": "^4.1.12"
   },
