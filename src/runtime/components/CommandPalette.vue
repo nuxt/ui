@@ -458,6 +458,7 @@ function onSelect(e: Event, item: T) {
         :autofocus="autofocus"
         v-bind="inputProps"
         :loading-icon="loadingIcon"
+        :trailing-icon="trailingIcon"
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input({ class: props.ui?.input })"
         @keydown.backspace="onBackspace"
@@ -476,8 +477,7 @@ function onSelect(e: Event, item: T) {
           </slot>
         </template>
 
-        <template v-if="trailingIcon || close || !!slots.close" #trailing="{ ui: _ui }">
-          <UIcon v-if="trailingIcon" :name="trailingIcon" :class="_ui.trailingIcon({ class: props.ui?.itemTrailingIcon })" />
+        <template v-if="close || !!slots.close" #trailing>
           <slot name="close" :ui="ui">
             <UButton
               v-if="close"
