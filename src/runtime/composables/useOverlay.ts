@@ -156,7 +156,6 @@ function _useOverlay() {
   const close = (id: symbol, value?: any): void => {
     const overlay = getOverlay(id)
 
-    console.log('close', id)
     overlay.isOpen = false
 
     // Resolve the promise if it exists
