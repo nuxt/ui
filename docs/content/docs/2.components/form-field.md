@@ -143,6 +143,27 @@ slots:
 This sets the `color` to `error` on the form control. You can change it globally in your `app.config.ts`.
 ::
 
+### Error Pattern
+
+Nested state values will not show up as validation-failed messages below the form control. This is particularly relevant for components such as UInputTags and USelect. Providing a regular expression via this prop will allow those form errors to be detected and displayed. The regular expression will be matched against the `name` key within the `errors` list of the `FormErrorEvent`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - label
+props:
+  label: List of IDs
+  error-pattern: /ids.*/
+slots:
+  default: |
+
+    <UInputTags v-model="state.ids" class="w-full" />
+---
+
+:u-input-tags{v-model="state.ids" class="w-full"}
+::
+
 ### Size
 
 Use the `size` prop to change the size of the FormField, the `size` is proxied to the form control.
