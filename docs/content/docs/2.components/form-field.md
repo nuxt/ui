@@ -162,10 +162,10 @@ props:
 slots:
   default: |
 
-    <UInputTags v-model="state.ids" class="w-full" />
+    <UInputTags class="w-full" />
 ---
 
-:u-input-tags{v-model="state.ids" class="w-full"}
+:u-input-tags{class="w-full"}
 ::
 
 ### Size
