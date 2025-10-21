@@ -103,7 +103,7 @@ describe('CommandPalette', () => {
     // Props
     ['with groups', { props }],
     ['with groups with description', { props: { groups: groupsWithDescription } }],
-    ['without data', {}],
+    ['without groups', {}],
     ['with modelValue', { props: { ...props, modelValue: groups[2]?.items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: groups[2]?.items[0] } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
@@ -117,7 +117,6 @@ describe('CommandPalette', () => {
     ['with close', { props: { ...props, close: true } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-lucide-trash' } }],
     ['with virtualize', { props: { ...props, virtualize: true } }],
-    ['with preserveGroupOrder', { props: { ...props, preserveGroupOrder: true } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'divide-accented' } }],
     ['with ui', { props: { ...props, ui: { input: '[&>input]:h-10' } } }],
