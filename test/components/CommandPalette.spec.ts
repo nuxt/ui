@@ -106,6 +106,8 @@ describe('CommandPalette', () => {
     ['without groups', {}],
     ['with modelValue', { props: { ...props, modelValue: groups[2]?.items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: groups[2]?.items[0] } }],
+    ['with searchTerm', { props: { ...props, searchTerm: 'f' } }],
+    ['with searchTerm and preserveGroupOrder', { props: { ...props, searchTerm: 'f', preserveGroupOrder: true } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with descriptionKey', { props: { groups: groupsWithDescription, descriptionKey: 'label' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
