@@ -310,6 +310,7 @@ const filteredGroups = computed(() => {
 
     return acc
   }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)
+
   if (props.preserveGroupOrder) {
     const processedGroups: Array<ReturnType<typeof getGroupWithItems>> = []
 
@@ -318,10 +319,9 @@ const filteredGroups = computed(() => {
         continue
       }
 
-      const items
-        = group.ignoreFilter
-          ? group.items
-          : groupsById[group.id]
+      const items = group.ignoreFilter
+        ? group.items
+        : groupsById[group.id]
 
       if (items?.length) {
         processedGroups.push(getGroupWithItems(group, items))

@@ -158,7 +158,7 @@ defineShortcuts({
 <template>
   <Navbar>
     <USwitch v-model="virtualize" label="Virtualize" />
-    <USwitch v-model="preserveGroupOrder" label="Preserve group order" />
+    <USwitch v-model="preserveGroupOrder" label="Preserve order" />
 
     <UModal v-model:open="open">
       <UButton label="Open modal" color="neutral" variant="outline" />
