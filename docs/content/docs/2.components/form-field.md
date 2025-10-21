@@ -145,7 +145,7 @@ This sets the `color` to `error` on the form control. You can change it globally
 
 ### Error Pattern
 
-Nested state values will not show up as validation-failed messages below the form control. This is particularly relevant for components such as UInputTags and USelect. Providing a regular expression via this prop will allow those form errors to be detected and displayed. The regular expression will be matched against the `name` key within the `errors` list of the `FormErrorEvent`.
+Nested state values will not show up by default as validation-failed messages below the form control. This is particularly relevant for components such as UInputTags and USelect. Providing a regular expression via this prop will allow those form errors to be detected and displayed. The regular expression will be matched against the `name` key within the `errors` list of the `FormErrorEvent`.
 
 ::component-code{slug="input-tags"}
 ---
