@@ -155,7 +155,7 @@ ignore:
   - class
 props:
   label: List of IDs
-  errorPattern: /ids.*/
+  errorPattern: /^ids\..*/
   class: 'w-full'
 ---
 ::
