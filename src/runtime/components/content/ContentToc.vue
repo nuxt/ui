@@ -55,9 +55,9 @@ export type ContentTocEmits = CollapsibleRootEmits & {
 type SlotProps<T> = (props: { link: T }) => any
 
 export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
-  leading(props: { open: boolean }): any
+  leading(props: { open: boolean, ui: ContentToc['ui'] }): any
   default(props: { open: boolean }): any
-  trailing(props: { open: boolean }): any
+  trailing(props: { open: boolean, ui: ContentToc['ui'] }): any
   content(props: { links: T[] }): any
   link: SlotProps<T>
   top(props: { links?: T[] }): any
@@ -161,14 +161,14 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
   </DefineListTemplate>
 
   <DefineTriggerTemplate v-slot="{ open }">
-    <slot name="leading" :open="open" />
+    <slot name="leading" :open="open" :ui="ui" />
 
     <span :class="ui.title({ class: props.ui?.title })">
       <slot :open="open">{{ title || t('contentToc.title') }}</slot>
     </span>
 
     <span :class="ui.trailing({ class: props.ui?.trailing })">
-      <slot name="trailing" :open="open">
+      <slot name="trailing" :open="open" :ui="ui">
         <UIcon :name="trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>

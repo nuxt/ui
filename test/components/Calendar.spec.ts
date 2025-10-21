@@ -1,10 +1,11 @@
 import { describe, it, expect, vi, afterAll, test } from 'vitest'
+import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { CalendarDate } from '@internationalized/date'
 import Calendar from '../../src/runtime/components/Calendar.vue'
 import type { CalendarProps, CalendarSlots } from '../../src/runtime/components/Calendar.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/calendar'
-import { CalendarDate } from '@internationalized/date'
 
 describe('Calendar', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -68,5 +69,18 @@ describe('Calendar', () => {
       await wrapper.setValue(date)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[date]] })
     })
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Calendar, {
+      props: {
+        modelValue: new CalendarDate(2025, 1, 1),
+        range: true,
+        multiple: true,
+        numberOfMonths: 2
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

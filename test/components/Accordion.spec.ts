@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Accordion from '../../src/runtime/components/Accordion.vue'
 import type { AccordionProps, AccordionSlots } from '../../src/runtime/components/Accordion.vue'
 import ComponentRender from '../component-render'
@@ -61,5 +63,13 @@ describe('Accordion', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps, slots?: Partial<AccordionSlots & { custom: () => 'Custom slot' } & { 'custom-body': () => 'Custom body slot' }> }) => {
     const html = await ComponentRender(nameOrHtml, options, Accordion)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Accordion, {
+      props: { items, modelValue: '1' }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

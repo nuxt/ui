@@ -49,7 +49,7 @@ export interface PageSectionProps {
 export interface PageSectionSlots {
   top(props?: {}): any
   header(props?: {}): any
-  leading(props?: {}): any
+  leading(props: { ui: PageSection['ui'] }): any
   headline(props?: {}): any
   title(props?: {}): any
   description(props?: {}): any
@@ -98,7 +98,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageSection 
         <div v-if="!!slots.header || (icon || !!slots.leading) || (headline || !!slots.headline) || (title || !!slots.title) || (description || !!slots.description)" :class="ui.header({ class: props.ui?.header })">
           <slot name="header">
             <div v-if="icon || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-              <slot name="leading">
+              <slot name="leading" :ui="ui">
                 <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
               </slot>
             </div>

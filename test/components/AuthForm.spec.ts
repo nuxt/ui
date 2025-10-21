@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import AuthForm from '../../src/runtime/components/AuthForm.vue'
 import type { AuthFormProps, AuthFormSlots } from '../../src/runtime/components/AuthForm.vue'
 import ComponentRender from '../component-render'
@@ -43,5 +45,27 @@ describe('AuthForm', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props: AuthFormProps, slots?: Partial<AuthFormSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, AuthForm)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(AuthForm, {
+      props: {
+        fields,
+        title: 'Title',
+        description: 'Description',
+        icon: 'i-lucide-user',
+        providers: [{ label: 'Google', icon: 'i-simple-icons-google' }],
+        separator: 'or',
+        submit: { label: 'Submit' }
+
+      }
+    })
+
+    expect(await axe(wrapper.element, {
+      rules: {
+        // The passwordVisibility button has an invalid aria-controls value - it need to point to the id of the password input not its name.
+        'aria-valid-attr-value': { enabled: false }
+      }
+    })).toHaveNoViolations()
   })
 })
