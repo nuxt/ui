@@ -147,21 +147,17 @@ This sets the `color` to `error` on the form control. You can change it globally
 
 Nested state values will not show up as validation-failed messages below the form control. This is particularly relevant for components such as UInputTags and USelect. Providing a regular expression via this prop will allow those form errors to be detected and displayed. The regular expression will be matched against the `name` key within the `errors` list of the `FormErrorEvent`.
 
-::component-code
+::component-code{slug="input-tags"}
 ---
 prettier: true
 ignore:
   - label
+  - class
 props:
   label: List of IDs
-  error-pattern: /ids.*/
-slots:
-  default: |
-
-    <UInputTags v-model="state.ids" class="w-full" />
+  errorPattern: /ids.*/
+  class: 'w-full'
 ---
-
-:u-input-tags{v-model="state.ids" class="w-full"}
 ::
 
 ### Size
