@@ -74,23 +74,54 @@ export default (options: Required<ModuleOptions>) => {
     }, {
       orientation: 'horizontal',
       size: 'xs',
+      decrement: true,
       class: 'px-7'
     }, {
       orientation: 'horizontal',
       size: 'sm',
+      decrement: true,
       class: 'px-8'
     }, {
       orientation: 'horizontal',
       size: 'md',
+      decrement: true,
       class: 'px-9'
     }, {
       orientation: 'horizontal',
       size: 'lg',
+      decrement: true,
       class: 'px-10'
     }, {
       orientation: 'horizontal',
       size: 'xl',
+      decrement: true,
       class: 'px-11'
+    },
+    {
+      orientation: 'horizontal',
+      size: 'xs',
+      decrement: false,
+      class: 'pe-7'
+    }, {
+      orientation: 'horizontal',
+      size: 'sm',
+      decrement: false,
+      class: 'pe-8'
+    }, {
+      orientation: 'horizontal',
+      size: 'md',
+      decrement: false,
+      class: 'pe-9'
+    }, {
+      orientation: 'horizontal',
+      size: 'lg',
+      decrement: false,
+      class: 'pe-10'
+    }, {
+      orientation: 'horizontal',
+      size: 'xl',
+      decrement: false,
+      class: 'pe-11'
     }, {
       orientation: 'vertical',
       size: 'xs',
@@ -112,15 +143,9 @@ export default (options: Required<ModuleOptions>) => {
       size: 'xl',
       class: 'pe-11'
     }, {
-      orientation: 'vertical',
-      increment: false,
-      decrement: false,
-      class: 'pe-2.5'
-    }, {
       orientation: 'horizontal',
-      increment: false,
       decrement: false,
-      class: 'px-2.5 text-start'
+      class: 'text-start'
     }],
     defaultVariants: {
       size: 'md',
