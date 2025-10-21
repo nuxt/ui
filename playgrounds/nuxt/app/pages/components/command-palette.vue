@@ -187,7 +187,6 @@ defineShortcuts({
     <UCommandPalette
       v-model="selected"
       v-model:search-term="searchTerm"
-      children-icon="i-lucide-arrow-right"
       :loading="status === 'pending'"
       :groups="groups"
       :fuse="{
