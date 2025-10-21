@@ -79,6 +79,7 @@ if (props.zoom) {
       :class="ui.base({ class: [props.ui?.base, props.class] })"
     />
   </DefineImageTemplate>
+
   <DefineZoomedImageTemplate>
     <component
       :is="ImageComponent"
