@@ -83,12 +83,40 @@ describe('ContextMenu', () => {
     }]
   ]
 
+  const itemsWithDescription = [
+    [{
+      label: 'Profile',
+      description: 'View and edit your profile',
+      icon: 'i-lucide-user',
+      children: [{
+        label: 'Settings',
+        description: 'Configure your preferences',
+        icon: 'i-lucide-settings'
+      }, {
+        label: 'Logout',
+        description: 'Sign out of your account',
+        icon: 'i-lucide-log-out'
+      }]
+    }], [{
+      label: 'Dashboard',
+      description: 'Main overview page',
+      color: 'primary',
+      kbds: ['meta', 'D']
+    }, {
+      label: 'Analytics',
+      description: 'View detailed statistics',
+      kbds: ['shift', 'meta', 'A']
+    }]
+  ]
+
   const props = { portal: false, items }
 
   it.each([
     // Props
     ['with items', { props }],
+    ['with items with description', { props: { ...props, items: itemsWithDescription } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
+    ['with descriptionKey', { props: { ...props, items: itemsWithDescription, descriptionKey: 'label' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with externalIcon', { props: { ...props, externalIcon: 'i-lucide-external-link' } }],
@@ -100,6 +128,7 @@ describe('ContextMenu', () => {
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
+    ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContextMenuProps, slots?: Partial<ContextMenuSlots> }) => {
