@@ -180,7 +180,7 @@ defineShortcuts({
       <UButton label="Select label (popover)" color="neutral" variant="outline" />
 
       <template #content>
-        <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }" :preserve-group-order />
+        <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }" />
       </template>
     </UPopover>
   </Navbar>
@@ -197,7 +197,7 @@ defineShortcuts({
         }
       }"
       multiple
-      :preserve-group-order
+      :preserve-group-order="preserveGroupOrder"
       class="sm:max-h-96"
       @update:model-value="onSelect"
     >
@@ -229,7 +229,6 @@ defineShortcuts({
     <UCommandPalette
       v-if="virtualize"
       virtualize
-      :preserve-group-order
       :fuse="{ resultLimit: 1000 }"
       placeholder="Search virtualized items..."
       :groups="[{ id: 'items', items: Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i, icon: 'i-lucide-file' })) }]"
