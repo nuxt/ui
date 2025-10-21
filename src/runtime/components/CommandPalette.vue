@@ -34,7 +34,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   children?: CommandPaletteItem[]
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon' | 'childrenIcon'>
+  ui?: Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>
   [key: string]: any
 }
 
@@ -240,8 +240,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: C
 })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })({
-  virtualize: !!props.virtualize,
-  close: !!(props.close || slots.close)
+  virtualize: !!props.virtualize
 }))
 
 const fuse = computed(() => defu({}, props.fuse, {
@@ -415,7 +414,7 @@ function onSelect(e: Event, item: T) {
                 <UIcon
                   v-if="item.children && item.children.length > 0"
                   :name="childrenIcon || appConfig.ui.icons.chevronRight"
-                  :class="ui.childrenIcon({ class: [props.ui?.childrenIcon, item.ui?.childrenIcon] })"
+                  :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })"
                 />
 
                 <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: [props.ui?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
@@ -461,8 +460,8 @@ function onSelect(e: Event, item: T) {
           </slot>
         </template>
 
-        <template v-if="trailingIcon || close || !!slots.close" #trailing>
-          <UIcon v-if="trailingIcon" :name="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <template v-if="trailingIcon || close || !!slots.close" #trailing="{ ui: _ui }">
+          <UIcon v-if="trailingIcon" :name="trailingIcon" :class="_ui.trailingIcon({ class: props.ui?.itemTrailingIcon })" />
           <slot name="close" :ui="ui">
             <UButton
               v-if="close"

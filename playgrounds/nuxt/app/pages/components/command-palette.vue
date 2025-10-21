@@ -186,7 +186,6 @@ defineShortcuts({
       v-model="selected"
       v-model:search-term="searchTerm"
       children-icon="i-lucide-arrow-right"
-      trailing-icon="i-lucide-chevron-down"
       :loading="status === 'pending'"
       :groups="groups"
       :fuse="{
