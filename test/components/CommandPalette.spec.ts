@@ -111,7 +111,7 @@ describe('CommandPalette', () => {
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with icon', { props: { ...props, icon: 'i-lucide-terminal' } }],
-    ['with trailingIcon', { props: { ...props, inputTrailingIcon: 'i-lucide-settings' } }],
+    ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-settings' } }],
     ['with childrenIcon', { props: { ...props, childrenIcon: 'i-lucide-arrow-right' } }],
     ['with loading', { props: { ...props, loading: true } }],
     ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loader' } }],
