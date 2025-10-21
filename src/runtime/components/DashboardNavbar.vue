@@ -38,12 +38,12 @@ type DashboardNavbarSlotsProps = Omit<DashboardContext, 'storage' | 'storageKey'
 
 export interface DashboardNavbarSlots {
   title(props?: {}): any
-  leading(props: DashboardNavbarSlotsProps): any
-  trailing(props: DashboardNavbarSlotsProps): any
+  leading(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): any
+  trailing(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): any
   left(props: DashboardNavbarSlotsProps): any
   default(props: DashboardNavbarSlotsProps): any
   right(props: DashboardNavbarSlotsProps): any
-  toggle(props: DashboardNavbarSlotsProps): any
+  toggle(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): any
 }
 </script>
 
@@ -76,7 +76,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardNav
 
 <template>
   <DefineToggleTemplate>
-    <slot name="toggle" v-bind="dashboardContext">
+    <slot name="toggle" v-bind="{ ...dashboardContext, ui }">
       <UDashboardSidebarToggle
         v-if="toggle"
         v-bind="(typeof toggle === 'object' ? toggle as Partial<ButtonProps> : {})"
@@ -91,7 +91,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardNav
       <ReuseToggleTemplate v-if="toggleSide === 'left'" />
 
       <slot name="left" v-bind="dashboardContext">
-        <slot name="leading" v-bind="dashboardContext">
+        <slot name="leading" v-bind="{ ...dashboardContext, ui }">
           <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
         </slot>
 
@@ -101,7 +101,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardNav
           </slot>
         </h1>
 
-        <slot name="trailing" v-bind="dashboardContext" />
+        <slot name="trailing" v-bind="{ ...dashboardContext, ui }" />
       </slot>
     </div>
 

@@ -67,7 +67,7 @@ export interface SlideoverSlots {
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { close: () => void, ui: { [K in keyof Required<Slideover['slots']>]: (props?: Record<string, any>) => string } }): any
+  close(props: { ui: Slideover['ui'] }): any
   body(props: { close: () => void }): any
   footer(props: { close: () => void }): any
 }
@@ -175,7 +175,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
               <slot name="actions" />
 
               <DialogClose v-if="props.close || !!slots.close" as-child>
-                <slot name="close" :close="close" :ui="ui">
+                <slot name="close" :ui="ui">
                   <UButton
                     v-if="props.close"
                     :icon="closeIcon || appConfig.ui.icons.close"

@@ -92,14 +92,14 @@ export interface PricingPlanProps {
 }
 
 export interface PricingPlanSlots {
-  badge(props?: {}): any
+  badge(props: { ui: PricingPlan['ui'] }): any
   title(props?: {}): any
   description(props?: {}): any
   price(props?: {}): any
   discount(props?: {}): any
-  billing(props?: {}): any
+  billing(props: { ui: PricingPlan['ui'] }): any
   features(props?: {}): any
-  button(props?: {}): any
+  button(props: { ui: PricingPlan['ui'] }): any
   header(props?: {}): any
   body(props?: {}): any
   footer(props?: {}): any
@@ -155,7 +155,7 @@ const features = computed(() => props.features?.map(feature => typeof feature ==
       </div>
 
       <div v-if="billingCycle || billingPeriod || !!slots.billing" :class="ui.billing({ class: props.ui?.billing })">
-        <slot name="billing">
+        <slot name="billing" :ui="ui">
           <span :class="ui.billingPeriod({ class: props.ui?.billingPeriod })">
             {{ billingPeriod || '&nbsp;' }}
           </span>
@@ -182,7 +182,7 @@ const features = computed(() => props.features?.map(feature => typeof feature ==
             </slot>
           </div>
 
-          <slot name="badge">
+          <slot name="badge" :ui="ui">
             <UBadge v-if="badge" color="primary" variant="subtle" v-bind="typeof badge === 'string' ? { label: badge } : badge" :class="ui.badge({ class: props.ui?.badge })" />
           </slot>
         </div>
@@ -217,7 +217,7 @@ const features = computed(() => props.features?.map(feature => typeof feature ==
 
         <ReusePriceTemplate v-if="orientation === 'horizontal'" />
 
-        <slot name="button">
+        <slot name="button" :ui="ui">
           <UButton v-if="button" v-bind="{ block: true, size: 'lg', ...button }" :class="ui.button({ class: props.ui?.button })" @click="button?.onClick" />
         </slot>
 

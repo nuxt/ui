@@ -36,15 +36,19 @@ describe('Select', () => {
     icon: 'i-lucide-circle-x'
   }]
 
+  const itemsWithDescription = [...items.map(item => ({ ...item, description: 'Description' }))]
+
   const props = { open: true, portal: false, items }
 
   it.each([
     // Props
     ['with items', { props }],
+    ['with items with description', { props: { ...props, items: itemsWithDescription } }],
     ['with modelValue', { props: { ...props, modelValue: items[0]?.value } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0]?.value } }],
     ['with valueKey', { props: { ...props, valueKey: 'label' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
+    ['with descriptionKey', { props: { ...props, descriptionKey: 'description' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
     ['with multiple and modelValue', { props: { ...props, multiple: true, modelValue: [items[0], items[1]] } }],
     ['with id', { props: { ...props, id: 'id' } }],
@@ -80,6 +84,7 @@ describe('Select', () => {
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
+    ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps, slots?: Partial<SelectSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Select)

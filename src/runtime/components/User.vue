@@ -33,7 +33,7 @@ export interface UserProps {
 }
 
 export interface UserSlots {
-  avatar(props?: {}): any
+  avatar(props: { ui: User['ui'] }): any
   name(props?: {}): any
   description(props?: {}): any
   default(props?: {}): any
@@ -67,7 +67,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) 
 
 <template>
   <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="onClick">
-    <slot name="avatar">
+    <slot name="avatar" :ui="ui">
       <UChip v-if="chip && avatar" inset v-bind="typeof chip === 'object' ? chip : {}" :size="size">
         <UAvatar :alt="name" v-bind="avatar" :size="size" :class="ui.avatar({ class: props.ui?.avatar })" />
       </UChip>

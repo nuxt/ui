@@ -53,15 +53,15 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> extends
 
 export interface AccordionEmits extends AccordionRootEmits {}
 
-type SlotProps<T extends AccordionItem> = (props: { item: T, index: number, open: boolean }) => any
+type SlotProps<T extends AccordionItem> = (props: { item: T, index: number, open: boolean, ui: Accordion['ui'] }) => any
 
 export type AccordionSlots<T extends AccordionItem = AccordionItem> = {
   leading: SlotProps<T>
-  default: SlotProps<T>
+  default(props: { item: T, index: number, open: boolean }): any
   trailing: SlotProps<T>
   content: SlotProps<T>
   body: SlotProps<T>
-} & DynamicSlots<T, 'body', { index: number, open: boolean }>
+} & DynamicSlots<T, 'body', { index: number, open: boolean, ui: Accordion['ui'] }>
 
 </script>
 
@@ -104,7 +104,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
     >
       <AccordionHeader as="div" :class="ui.header({ class: [props.ui?.header, item.ui?.header] })">
         <AccordionTrigger :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger], disabled: item.disabled })">
-          <slot name="leading" :item="item" :index="index" :open="open">
+          <slot name="leading" :item="item" :index="index" :open="open" :ui="ui">
             <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, item?.ui?.leadingIcon] })" />
           </slot>
 
@@ -112,16 +112,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
             <slot :item="item" :index="index" :open="open">{{ get(item, props.labelKey as string) }}</slot>
           </span>
 
-          <slot name="trailing" :item="item" :index="index" :open="open">
+          <slot name="trailing" :item="item" :index="index" :open="open" :ui="ui">
             <UIcon :name="item.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon({ class: [props.ui?.trailingIcon, item.ui?.trailingIcon] })" />
           </slot>
         </AccordionTrigger>
       </AccordionHeader>
 
       <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot as keyof AccordionSlots<T>]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body` as keyof AccordionSlots<T>])" :class="ui.content({ class: [props.ui?.content, item.ui?.content] })">
-        <slot :name="((item.slot || 'content') as keyof AccordionSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :open="open">
+        <slot :name="((item.slot || 'content') as keyof AccordionSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :open="open" :ui="ui">
           <div :class="ui.body({ class: [props.ui?.body, item.ui?.body] })">
-            <slot :name="((item.slot ? `${item.slot}-body`: 'body') as keyof AccordionSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :open="open">
+            <slot :name="((item.slot ? `${item.slot}-body`: 'body') as keyof AccordionSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :open="open" :ui="ui">
               {{ item.content }}
             </slot>
           </div>
