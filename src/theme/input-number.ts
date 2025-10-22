@@ -75,53 +75,93 @@ export default (options: Required<ModuleOptions>) => {
       orientation: 'horizontal',
       size: 'xs',
       decrement: true,
+      increment: true,
       class: 'px-7'
     }, {
       orientation: 'horizontal',
       size: 'sm',
       decrement: true,
+      increment: true,
       class: 'px-8'
     }, {
       orientation: 'horizontal',
       size: 'md',
       decrement: true,
+      increment: true,
       class: 'px-9'
     }, {
       orientation: 'horizontal',
       size: 'lg',
       decrement: true,
+      increment: true,
       class: 'px-10'
     }, {
       orientation: 'horizontal',
       size: 'xl',
       decrement: true,
+      increment: true,
       class: 'px-11'
     },
     {
       orientation: 'horizontal',
       size: 'xs',
       decrement: false,
+      increment: true,
       class: 'pe-7'
     }, {
       orientation: 'horizontal',
       size: 'sm',
       decrement: false,
+      increment: true,
       class: 'pe-8'
     }, {
       orientation: 'horizontal',
       size: 'md',
       decrement: false,
+      increment: true,
       class: 'pe-9'
     }, {
       orientation: 'horizontal',
       size: 'lg',
       decrement: false,
+      increment: true,
       class: 'pe-10'
     }, {
       orientation: 'horizontal',
       size: 'xl',
       decrement: false,
+      increment: true,
       class: 'pe-11'
+    }, {
+      orientation: 'horizontal',
+      size: 'xs',
+      decrement: true,
+      increment: false,
+      class: 'ps-7'
+    }, {
+      orientation: 'horizontal',
+      size: 'sm',
+      decrement: true,
+      increment: false,
+      class: 'ps-8'
+    }, {
+      orientation: 'horizontal',
+      size: 'md',
+      decrement: true,
+      increment: false,
+      class: 'ps-9'
+    }, {
+      orientation: 'horizontal',
+      size: 'lg',
+      decrement: true,
+      increment: false,
+      class: 'ps-10'
+    }, {
+      orientation: 'horizontal',
+      size: 'xl',
+      decrement: true,
+      increment: false,
+      class: 'ps-11'
     }, {
       orientation: 'vertical',
       size: 'xs',
@@ -142,7 +182,14 @@ export default (options: Required<ModuleOptions>) => {
       orientation: 'vertical',
       size: 'xl',
       class: 'pe-11'
-    }, {
+    },
+    {
+      orientation: 'vertical',
+      increment: false,
+      decrement: false,
+      class: 'pe-0'
+    },
+    {
       orientation: 'horizontal',
       decrement: false,
       class: 'text-start'
