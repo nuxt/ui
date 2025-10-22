@@ -5,9 +5,15 @@ export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   return streamText({
-    model: gateway('openai/gpt-4o-mini'),
+    model: gateway('openai/gpt-5-nano'),
     maxOutputTokens: 10000,
-    system: 'You are a helpful assistant that can answer questions and help.',
-    messages: convertToModelMessages(messages)
+    system: 'You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue.',
+    messages: convertToModelMessages(messages),
+    providerOptions: {
+      openai: {
+        reasoningEffort: 'low',
+        reasoningSummary: 'detailed'
+      }
+    }
   }).toUIMessageStreamResponse()
 })

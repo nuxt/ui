@@ -41,21 +41,17 @@ const chat = new Chat({
   }
 })
 
-function handleSubmit(event: Event) {
-  event.preventDefault()
-
+function onSubmit() {
   if (!input.value.trim()) {
     return
   }
 
-  chat.sendMessage({
-    text: input.value
-  })
+  chat.sendMessage({ text: input.value })
 
   input.value = ''
 }
 
-function handleClose(e: Event) {
+function onClose(e: Event) {
   e.preventDefault()
 
   emits('close')
@@ -108,23 +104,20 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
       :assistant="{ icon: 'i-lucide-bot' }"
     >
       <template #content="{ message }">
-        <div class="*:first:!mt-0 *:last:!mb-0">
-          <template v-for="(part, index) in message.parts" :key="`${message.id}-${index}`">
-            <MDCCached
-              v-if="part.type === 'text'"
-              :value="part.text"
-              :cache-key="`${message.id}-${index}`"
-              :components="components"
-              unwrap="div"
-              :parser-options="{ highlight: false }"
-              class="[&_.my-5]:my-2.5 *:first:!mt-0 *:last:!mb-0 [&_.leading-7]:!leading-6"
-            />
+        <template v-for="(part, index) in message.parts" :key="`${message.id}-${index}`">
+          <MDCCached
+            v-if="part.type === 'text'"
+            :value="part.text"
+            :cache-key="`${message.id}-${index}`"
+            :components="components"
+            :parser-options="{ highlight: false }"
+            class="[&_.my-5]:my-2.5 *:first:!mt-0 *:last:!mb-0 [&_.leading-7]:!leading-6"
+          />
 
-            <p v-if="part.type === 'dynamic-tool'" class="text-muted text-sm leading-6 my-1.5">
-              {{ getCachedToolMessage(part.state, part.toolName, JSON.stringify(part.input || {})) }}
-            </p>
-          </template>
-        </div>
+          <p v-else-if="part.type === 'dynamic-tool'" class="text-muted text-sm leading-6 my-1.5">
+            {{ getCachedToolMessage(part.state, part.toolName, JSON.stringify(part.input || {})) }}
+          </p>
+        </template>
       </template>
     </UChatMessages>
 
@@ -135,8 +128,8 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
         variant="naked"
         :error="chat.error"
         :ui="{ trailing: 'items-center' }"
-        @submit="handleSubmit"
-        @close="handleClose"
+        @submit="onSubmit"
+        @close="onClose"
       >
         <template #trailing>
           <UButton

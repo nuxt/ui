@@ -249,7 +249,7 @@ Use the ChatPromptSubmit component with the `Chat` class from AI SDK v5 to displ
 
 Pass the `status` prop and listen to the `stop` and `reload` events to control the chat.
 
-```vue [pages/\[id\\].vue] {2-4,7,11-15,19,24}
+```vue [pages/\[id\\].vue] {2,7-11,35}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
@@ -258,13 +258,13 @@ const input = ref('')
 
 const chat = new Chat({
   onError(error) {
-    console.error('Chat error:', error)
+    console.error(error)
   }
 })
 
-const handleSubmit = (e: Event) => {
-  e.preventDefault()
+function onSubmit() {
   chat.sendMessage({ text: input.value })
+
   input.value = ''
 }
 </script>
@@ -275,15 +275,15 @@ const handleSubmit = (e: Event) => {
       <UContainer>
         <UChatMessages :messages="chat.messages" :status="chat.status">
           <template #content="{ message }">
-            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
+            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" class="*:first:mt-0 *:last:mb-0" />
           </template>
         </UChatMessages>
       </UContainer>
     </template>
 
     <template #footer>
-      <UContainer>
-        <UChatPrompt v-model="input" :error="chat.error" @submit="handleSubmit">
+      <UContainer class="pb-4 sm:pb-6">
+        <UChatPrompt v-model="input" :error="chat.error" @submit="onSubmit">
           <UChatPromptSubmit :status="chat.status" @stop="chat.stop" @reload="chat.regenerate" />
         </UChatPrompt>
       </UContainer>
