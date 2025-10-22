@@ -223,7 +223,8 @@ const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   autofocus: true,
   back: true,
   preserveGroupOrder: false,
-  virtualize: false
+  virtualize: false,
+  highlightOnHover: true
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<G, T>>()
