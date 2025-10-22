@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Calendar > renders with as correctly 1`] = `
-"<section role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<section aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -179,7 +179,7 @@ exports[`Calendar > renders with as correctly 1`] = `
 `;
 
 exports[`Calendar > renders with class correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr" class="max-w-sm">
+"<div aria-label="Event Date, January 2025" dir="ltr" class="max-w-sm">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -357,7 +357,7 @@ exports[`Calendar > renders with class correctly 1`] = `
 `;
 
 exports[`Calendar > renders with color neutral correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -535,7 +535,7 @@ exports[`Calendar > renders with color neutral correctly 1`] = `
 `;
 
 exports[`Calendar > renders with day slot correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -713,7 +713,7 @@ exports[`Calendar > renders with day slot correctly 1`] = `
 `;
 
 exports[`Calendar > renders with default value correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -891,7 +891,7 @@ exports[`Calendar > renders with default value correctly 1`] = `
 `;
 
 exports[`Calendar > renders with disabled correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" data-disabled="" dir="ltr">
+"<div aria-label="Event Date, January 2025" data-disabled="" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" disabled="" aria-label="Previous year" aria-disabled="true" data-disabled="true" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -1069,7 +1069,7 @@ exports[`Calendar > renders with disabled correctly 1`] = `
 `;
 
 exports[`Calendar > renders with heading slot correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -1247,7 +1247,7 @@ exports[`Calendar > renders with heading slot correctly 1`] = `
 `;
 
 exports[`Calendar > renders with isDateDisabled correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -1425,7 +1425,7 @@ exports[`Calendar > renders with isDateDisabled correctly 1`] = `
 `;
 
 exports[`Calendar > renders with isDateUnavailable correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -1603,7 +1603,7 @@ exports[`Calendar > renders with isDateUnavailable correctly 1`] = `
 `;
 
 exports[`Calendar > renders with modelValue correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -1781,7 +1781,7 @@ exports[`Calendar > renders with modelValue correctly 1`] = `
 `;
 
 exports[`Calendar > renders with multiple correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -1959,7 +1959,7 @@ exports[`Calendar > renders with multiple correctly 1`] = `
 `;
 
 exports[`Calendar > renders with nextMonth correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr" nextmonth="[object Object]">
+"<div aria-label="Event Date, January 2025" dir="ltr" nextmonth="[object Object]">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -2137,7 +2137,7 @@ exports[`Calendar > renders with nextMonth correctly 1`] = `
 `;
 
 exports[`Calendar > renders with nextYear correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr" nextyear="[object Object]">
+"<div aria-label="Event Date, January 2025" dir="ltr" nextyear="[object Object]">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -2315,7 +2315,7 @@ exports[`Calendar > renders with nextYear correctly 1`] = `
 `;
 
 exports[`Calendar > renders with numberOfMonths correctly 1`] = `
-"<div role="application" aria-label="Event Date, January - February 2025" dir="ltr">
+"<div aria-label="Event Date, January - February 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -2646,7 +2646,7 @@ exports[`Calendar > renders with numberOfMonths correctly 1`] = `
 `;
 
 exports[`Calendar > renders with prevMonth correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr" prevmonth="[object Object]">
+"<div aria-label="Event Date, January 2025" dir="ltr" prevmonth="[object Object]">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -2824,7 +2824,7 @@ exports[`Calendar > renders with prevMonth correctly 1`] = `
 `;
 
 exports[`Calendar > renders with prevYear correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr" prevyear="[object Object]">
+"<div aria-label="Event Date, January 2025" dir="ltr" prevyear="[object Object]">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-primary hover:bg-primary/10 active:bg-primary/10 focus:outline-none focus-visible:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent p-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -3002,7 +3002,7 @@ exports[`Calendar > renders with prevYear correctly 1`] = `
 `;
 
 exports[`Calendar > renders with range correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;">
     <div role="heading" aria-level="2">Event Date, January 2025</div>
   </div>
@@ -3180,7 +3180,7 @@ exports[`Calendar > renders with range correctly 1`] = `
 `;
 
 exports[`Calendar > renders with readonly correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" data-readonly="" dir="ltr">
+"<div aria-label="Event Date, January 2025" data-readonly="" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -3358,7 +3358,7 @@ exports[`Calendar > renders with readonly correctly 1`] = `
 `;
 
 exports[`Calendar > renders with size lg correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -3536,7 +3536,7 @@ exports[`Calendar > renders with size lg correctly 1`] = `
 `;
 
 exports[`Calendar > renders with size md correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -3714,7 +3714,7 @@ exports[`Calendar > renders with size md correctly 1`] = `
 `;
 
 exports[`Calendar > renders with size sm correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-4"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -3892,7 +3892,7 @@ exports[`Calendar > renders with size sm correctly 1`] = `
 `;
 
 exports[`Calendar > renders with size xl correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-base gap-2 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-6"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -4070,7 +4070,7 @@ exports[`Calendar > renders with size xl correctly 1`] = `
 `;
 
 exports[`Calendar > renders with size xs correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-4"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -4248,7 +4248,7 @@ exports[`Calendar > renders with size xs correctly 1`] = `
 `;
 
 exports[`Calendar > renders with ui correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between gap-4"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -4426,7 +4426,7 @@ exports[`Calendar > renders with ui correctly 1`] = `
 `;
 
 exports[`Calendar > renders with variant outline correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -4604,7 +4604,7 @@ exports[`Calendar > renders with variant outline correctly 1`] = `
 `;
 
 exports[`Calendar > renders with variant soft correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -4782,7 +4782,7 @@ exports[`Calendar > renders with variant soft correctly 1`] = `
 `;
 
 exports[`Calendar > renders with variant solid correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -4960,7 +4960,7 @@ exports[`Calendar > renders with variant solid correctly 1`] = `
 `;
 
 exports[`Calendar > renders with variant subtle correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -5138,7 +5138,7 @@ exports[`Calendar > renders with variant subtle correctly 1`] = `
 `;
 
 exports[`Calendar > renders with week-day slot correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -5316,7 +5316,7 @@ exports[`Calendar > renders with week-day slot correctly 1`] = `
 `;
 
 exports[`Calendar > renders with weekStartsOn correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -5494,7 +5494,7 @@ exports[`Calendar > renders with weekStartsOn correctly 1`] = `
 `;
 
 exports[`Calendar > renders with weekdayFormat correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -5672,7 +5672,7 @@ exports[`Calendar > renders with weekdayFormat correctly 1`] = `
 `;
 
 exports[`Calendar > renders without fixedWeeks correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -5827,7 +5827,7 @@ exports[`Calendar > renders without fixedWeeks correctly 1`] = `
 `;
 
 exports[`Calendar > renders without monthControls correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
@@ -6001,7 +6001,7 @@ exports[`Calendar > renders without monthControls correctly 1`] = `
 `;
 
 exports[`Calendar > renders without yearControls correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr">
+"<div aria-label="Event Date, January 2025" dir="ltr">
   <div class="flex items-center justify-between">
     <!--v-if--><button type="button" aria-label="Previous month" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
