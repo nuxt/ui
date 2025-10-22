@@ -13,6 +13,7 @@ type InputMenu = ComponentConfig<typeof theme, AppConfig, 'inputMenu'>
 export type InputMenuValue = AcceptableValue
 export type InputMenuItem = InputMenuValue | {
   label?: string
+  description?: string
   /**
    * @IconifyIcon
    */
@@ -27,7 +28,7 @@ export type InputMenuItem = InputMenuValue | {
   disabled?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
+  ui?: Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
 
@@ -117,6 +118,11 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>
+  /**
+   * When `items` is an array of objects, select the field to use as the description.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>
   items?: T
   /** The value of the InputMenu when initially rendered. Use when you do not need to control the state of the InputMenu. */
   defaultValue?: GetModelValue<T, VK, M>
@@ -172,6 +178,7 @@ export interface InputMenuSlots<
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label'(props: { item: T, index: number }): any
+  'item-description'(props: { item: T, index: number }): any
   'item-trailing': SlotProps<T>
   'tags-item-text'(props: { item: T, index: number }): any
   'tags-item-delete': SlotProps<T>
@@ -206,6 +213,7 @@ const props = withDefaults(defineProps<InputMenuProps<T, VK, M>>(), {
   autofocusDelay: 0,
   portal: true,
   labelKey: 'label',
+  descriptionKey: 'description',
   resetSearchTermOnBlur: true,
   resetSearchTermOnSelect: true,
   virtualize: false
@@ -473,10 +481,18 @@ defineExpose({
           />
         </slot>
 
-        <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isInputItem(item) && item.ui?.itemLabel] })">
-          <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
-            {{ isInputItem(item) ? get(item, props.labelKey as string) : item }}
-          </slot>
+        <span :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, isInputItem(item) && item.ui?.itemWrapper] })">
+          <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isInputItem(item) && item.ui?.itemLabel] })">
+            <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
+              {{ isInputItem(item) ? get(item, props.labelKey as string) : item }}
+            </slot>
+          </span>
+
+          <span v-if="isInputItem(item) && (get(item, props.descriptionKey as string) || !!slots['item-description'])" :class="ui.itemDescription({ class: [props.ui?.itemDescription, isInputItem(item) && item.ui?.itemDescription] })">
+            <slot name="item-description" :item="(item as NestedItem<T>)" :index="index">
+              {{ get(item, props.descriptionKey as string) }}
+            </slot>
+          </span>
         </span>
 
         <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isInputItem(item) && item.ui?.itemTrailing] })">

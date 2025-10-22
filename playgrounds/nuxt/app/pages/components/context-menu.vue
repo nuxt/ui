@@ -13,6 +13,7 @@ const items = computed(() => [
   }],
   [{
     label: 'Appearance',
+    description: 'Change the appearance of the app',
     children: [{
       label: 'System',
       icon: 'i-lucide-monitor'
@@ -62,6 +63,7 @@ const items = computed(() => [
     label: 'Developer',
     children: [[{
       label: 'View Source',
+      description: 'View the source code of the app',
       kbds: ['option', 'meta', 'U'],
       onSelect() {
         console.log('View Source clicked')

@@ -152,11 +152,13 @@ function mapLinksItems(links: T[]): ContentSearchItem[] {
   return links.flatMap(link => [{
     ...link,
     suffix: link.description,
+    description: undefined,
     icon: link.icon || appConfig.ui.icons.file
   }, ...(link.children?.map(child => ({
     ...child,
     prefix: link.label + ' >',
     suffix: child.description,
+    description: undefined,
     icon: child.icon || link.icon || appConfig.ui.icons.file
   })) || [])])
 }

@@ -16,6 +16,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   prefix?: string
   label?: string
   suffix?: string
+  description?: string
   /**
    * @IconifyIcon
    */
@@ -34,7 +35,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   children?: CommandPaletteItem[]
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>
+  ui?: Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>
   [key: string]: any
 }
 
@@ -71,6 +72,12 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   icon?: IconProps['name']
   /**
+   * The icon displayed on the right side of the input.
+   * @defaultValue appConfig.ui.icons.search
+   * @IconifyIcon
+   */
+  trailingIcon?: IconProps['name']
+  /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
    * @IconifyIcon
@@ -81,7 +88,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @defaultValue appConfig.ui.icons.chevronRight
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name']
+  childrenIcon?: IconProps['name']
   /**
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
@@ -153,6 +160,17 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>
+  /**
+   * The key used to get the description from the item.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>
+  /**
+   * Whether to preserve the order of groups as defined in the `groups` prop when filtering.
+   * When `false`, groups will appear based on item matches.
+   * @defaultValue false
+   */
+  preserveGroupOrder?: boolean
   class?: any
   ui?: CommandPalette['slots']
 }
@@ -171,6 +189,7 @@ export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPalett
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
+  'item-description': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & Record<string, SlotProps<G>> & Record<string, SlotProps<T>>
 
@@ -200,8 +219,10 @@ import UKbd from './Kbd.vue'
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
   labelKey: 'label',
+  descriptionKey: 'description',
   autofocus: true,
   back: true,
+  preserveGroupOrder: false,
   virtualize: false
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
@@ -295,6 +316,26 @@ const filteredGroups = computed(() => {
 
     return acc
   }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)
+
+  if (props.preserveGroupOrder) {
+    const processedGroups: Array<ReturnType<typeof getGroupWithItems>> = []
+
+    for (const group of groups.value || []) {
+      if (!group.items?.length) {
+        continue
+      }
+
+      const items = group.ignoreFilter
+        ? group.items
+        : groupsById[group.id]
+
+      if (items?.length) {
+        processedGroups.push(getGroupWithItems(group, items))
+      }
+    }
+
+    return processedGroups
+  }
 
   const fuseGroups = Object.entries(groupsById).map(([id, items]) => {
     const group = groups.value?.find(group => group.id === id)
@@ -393,21 +434,29 @@ function onSelect(e: Event, item: T) {
               />
             </slot>
 
-            <span v-if="item.labelHtml || get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>]" :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel], active: active || item.active })">
-              <slot :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
-                <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: [props.ui?.itemLabelPrefix, item.ui?.itemLabelPrefix] })">{{ item.prefix }}</span>
+            <span v-if="(item.prefix || (item.labelHtml || get(item, props.labelKey as string)) || (item.suffixHtml || item.suffix) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>]) || (get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>])" :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, item.ui?.itemWrapper] })">
+              <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel], active: active || item.active })">
+                <slot :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
+                  <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: [props.ui?.itemLabelPrefix, item.ui?.itemLabelPrefix] })">{{ item.prefix }}</span>
 
-                <span :class="ui.itemLabelBase({ class: [props.ui?.itemLabelBase, item.ui?.itemLabelBase], active: active || item.active })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
+                  <span :class="ui.itemLabelBase({ class: [props.ui?.itemLabelBase, item.ui?.itemLabelBase], active: active || item.active })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
 
-                <span :class="ui.itemLabelSuffix({ class: [props.ui?.itemLabelSuffix, item.ui?.itemLabelSuffix], active: active || item.active })" v-html="item.suffixHtml || item.suffix" />
-              </slot>
+                  <span :class="ui.itemLabelSuffix({ class: [props.ui?.itemLabelSuffix, item.ui?.itemLabelSuffix], active: active || item.active })" v-html="item.suffixHtml || item.suffix" />
+                </slot>
+              </span>
+
+              <span v-if="get(item, props.descriptionKey as string)" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
+                <slot :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
+                  {{ get(item, props.descriptionKey as string) }}
+                </slot>
+              </span>
             </span>
 
             <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, item.ui?.itemTrailing] })">
               <slot :name="((item.slot ? `${item.slot}-trailing` : group?.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
                 <UIcon
                   v-if="item.children && item.children.length > 0"
-                  :name="trailingIcon || appConfig.ui.icons.chevronRight"
+                  :name="childrenIcon || appConfig.ui.icons.chevronRight"
                   :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })"
                 />
 
@@ -436,6 +485,7 @@ function onSelect(e: Event, item: T) {
         :autofocus="autofocus"
         v-bind="inputProps"
         :loading-icon="loadingIcon"
+        :trailing-icon="trailingIcon"
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input({ class: props.ui?.input })"
         @keydown.backspace="onBackspace"

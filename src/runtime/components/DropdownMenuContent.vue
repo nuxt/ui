@@ -14,6 +14,7 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
   portal?: boolean | string | HTMLElement
   sub?: boolean
   labelKey: GetItemKeys<T>
+  descriptionKey: GetItemKeys<T>
   /**
    * @IconifyIcon
    */
@@ -36,10 +37,10 @@ interface DropdownMenuContentEmits extends RekaDropdownMenuContentEmits {}
 type DropdownMenuContentSlots<
   A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
-> = Pick<DropdownMenuSlots<A>, 'item' | 'item-leading' | 'item-label' | 'item-trailing' | 'content-top' | 'content-bottom'> & {
+> = Pick<DropdownMenuSlots<A>, 'item' | 'item-leading' | 'item-label' | 'item-description' | 'item-trailing' | 'content-top' | 'content-bottom'> & {
   default(props?: {}): any
 }
-& DynamicSlots<MergeTypes<T>, 'label', { active?: boolean, index: number }>
+& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active?: boolean, index: number }>
 & DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean, index: number, ui: DropdownMenu['ui'] }>
 
 </script>
@@ -69,7 +70,7 @@ const { dir } = useLocale()
 const appConfig = useAppConfig()
 
 const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
+const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const getProxySlots = () => omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
@@ -93,12 +94,20 @@ const groups = computed<DropdownMenuItem[][]>(() =>
         <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || uiOverride?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [uiOverride?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active })" />
       </slot>
 
-      <span v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof DropdownMenuContentSlots<T>]" :class="ui.itemLabel({ class: [uiOverride?.itemLabel, item.ui?.itemLabel], active })">
-        <slot :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof DropdownMenuContentSlots<T>)" :item="(item as Extract<NestedItem<T>, { slot: string; }>)" :active="active" :index="index">
-          {{ get(item, props.labelKey as string) }}
-        </slot>
+      <span v-if="(get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof DropdownMenuSlots<T>]) || (get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description`: 'item-description') as keyof DropdownMenuSlots<T>])" :class="ui.itemWrapper({ class: [uiOverride?.itemWrapper, item.ui?.itemWrapper] })">
+        <span :class="ui.itemLabel({ class: [uiOverride?.itemLabel, item.ui?.itemLabel], active })">
+          <slot :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof DropdownMenuContentSlots<T>)" :item="(item as Extract<NestedItem<T>, { slot: string; }>)" :active="active" :index="index">
+            {{ get(item, props.labelKey as string) }}
+          </slot>
 
-        <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ class: [uiOverride?.itemLabelExternalIcon, item.ui?.itemLabelExternalIcon], color: item?.color, active })" />
+          <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ class: [uiOverride?.itemLabelExternalIcon, item.ui?.itemLabelExternalIcon], color: item?.color, active })" />
+        </span>
+
+        <span v-if="get(item, props.descriptionKey as string)" :class="ui.itemDescription({ class: [uiOverride?.itemDescription, item.ui?.itemDescription] })">
+          <slot :name="((item.slot ? `${item.slot}-description`: 'item-description') as keyof DropdownMenuContentSlots<T>)" :item="(item as Extract<NestedItem<T>, { slot: string; }>)" :active="active" :index="index">
+            {{ get(item, props.descriptionKey as string) }}
+          </slot>
+        </span>
       </span>
 
       <span :class="ui.itemTrailing({ class: [uiOverride?.itemTrailing, item.ui?.itemTrailing] })">
@@ -117,7 +126,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
   </DefineItemTemplate>
 
   <DropdownMenu.Portal v-bind="portalProps">
-    <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" :class="props.class" v-bind="contentProps">
+    <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" :class="ui.content({ class: [uiOverride?.content, props.class] })" v-bind="contentProps">
       <slot name="content-top" />
 
       <div role="presentation" :class="ui.viewport({ class: uiOverride?.viewport })">
@@ -140,7 +149,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
 
               <UDropdownMenuContent
                 sub
-                :class="props.class"
+                :class="item.ui?.content"
                 :ui="ui"
                 :ui-override="uiOverride"
                 :portal="portal"
@@ -149,6 +158,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
                 :align-offset="-4"
                 :side-offset="3"
                 :label-key="labelKey"
+                :description-key="descriptionKey"
                 :checked-icon="checkedIcon"
                 :loading-icon="loadingIcon"
                 :external-icon="externalIcon"

@@ -25,7 +25,7 @@ export interface BlogPostProps {
   /** The authors of the blog post. */
   authors?: UserProps[]
   /** The image of the blog post. Can be a string or an object. */
-  image?: string | Partial<HTMLImageElement>
+  image?: string | (Partial<HTMLImageElement> & { [key: string]: any })
   /**
    * The orientation of the blog post.
    * @defaultValue 'vertical'
