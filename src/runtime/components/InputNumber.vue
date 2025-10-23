@@ -117,8 +117,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber 
   highlight: highlight.value,
   orientation: props.orientation,
   fieldGroup: orientation.value,
-  increment: props.increment !== false,
-  decrement: props.decrement !== false
+  increment: props.orientation === 'vertical' ? (!!props.increment || !!props.decrement) : !!props.increment,
+  decrement: props.orientation === 'vertical' ? false : !!props.decrement
 }))
 
 const incrementIcon = computed(() => props.incrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.plus : appConfig.ui.icons.chevronUp))
@@ -182,7 +182,7 @@ defineExpose({
       @focus="emitFormFocus"
     />
 
-    <div v-if="increment !== false" :class="ui.increment({ class: props.ui?.increment })">
+    <div v-if="!!increment" :class="ui.increment({ class: props.ui?.increment })">
       <NumberFieldIncrement as-child :disabled="disabled || incrementDisabled">
         <slot name="increment">
           <UButton
@@ -197,7 +197,7 @@ defineExpose({
       </NumberFieldIncrement>
     </div>
 
-    <div v-if="decrement !== false" :class="ui.decrement({ class: props.ui?.decrement })">
+    <div v-if="!!decrement" :class="ui.decrement({ class: props.ui?.decrement })">
       <NumberFieldDecrement as-child :disabled="disabled || decrementDisabled">
         <slot name="decrement">
           <UButton
