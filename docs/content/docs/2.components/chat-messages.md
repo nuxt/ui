@@ -49,7 +49,10 @@ external:
   - messages
 ignore:
   - messages
+hide:
+  - shouldScrollToBottom
 collapse: true
+class: 'overflow-y-auto'
 props:
   messages:
     - id: '6045235a-a435-46b8-989d-2df38ca2eb47'
@@ -72,6 +75,7 @@ props:
       parts:
         - type: 'text'
           text: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies."
+  shouldScrollToBottom: false
 ---
 ::
 
@@ -87,6 +91,9 @@ external:
 ignore:
   - messages
   - status
+hide:
+  - shouldScrollToBottom
+class: 'overflow-y-auto'
 props:
   status: 'submitted'
   messages:
@@ -95,6 +102,7 @@ props:
       parts:
         - type: 'text'
           text: 'Hello, how are you?'
+  shouldScrollToBottom: false
 ---
 ::
 
@@ -122,6 +130,8 @@ external:
 ignore:
   - messages
   - avatar.src
+hide:
+  - shouldScrollToBottom
 collapse: true
 items:
   user.variant:
@@ -133,6 +143,7 @@ items:
   user.side:
     - left
     - right
+class: 'overflow-y-auto'
 props:
   user:
     side: left
@@ -160,6 +171,7 @@ props:
       parts:
         - type: 'text'
           text: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies."
+  shouldScrollToBottom: false
 ---
 ::
 
@@ -179,6 +191,8 @@ ignore:
   - messages
   - avatar.icon
   - assistant.actions
+hide:
+  - shouldScrollToBottom
 collapse: true
 items:
   assistant.variant:
@@ -190,6 +204,7 @@ items:
   assistant.side:
     - left
     - right
+class: 'overflow-y-auto'
 props:
   assistant:
     side: left
@@ -220,6 +235,7 @@ props:
       parts:
         - type: 'text'
           text: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies."
+  shouldScrollToBottom: false
 ---
 ::
 
@@ -384,7 +400,7 @@ Use the ChatMessages component with the `Chat` class from AI SDK v5 to display a
 
 Pass the `messages` prop alongside the `status` prop that will be used for the auto scroll and the indicator display.
 
-```vue [pages/\[id\\].vue] {2-5,8,12-16,20}
+```vue [pages/\[id\\].vue] {2,7-11,24,28}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
@@ -393,13 +409,13 @@ const input = ref('')
 
 const chat = new Chat({
   onError(error) {
-    console.error('Chat error:', error)
+    console.error(error)
   }
 })
 
-const handleSubmit = (e: Event) => {
-  e.preventDefault()
+function onSubmit() {
   chat.sendMessage({ text: input.value })
+
   input.value = ''
 }
 </script>
@@ -410,15 +426,15 @@ const handleSubmit = (e: Event) => {
       <UContainer>
         <UChatMessages :messages="chat.messages" :status="chat.status">
           <template #content="{ message }">
-            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
+            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" class="*:first:mt-0 *:last:mb-0" />
           </template>
         </UChatMessages>
       </UContainer>
     </template>
 
     <template #footer>
-      <UContainer>
-        <UChatPrompt v-model="input" :error="chat.error" @submit="handleSubmit">
+      <UContainer class="pb-4 sm:pb-6">
+        <UChatPrompt v-model="input" :error="chat.error" @submit="onSubmit">
           <UChatPromptSubmit :status="chat.status" @stop="chat.stop" @reload="chat.regenerate" />
         </UChatPrompt>
       </UContainer>
@@ -438,6 +454,7 @@ You can customize the loading indicator that appears when the status is `submitt
 ::component-example
 ---
 name: "chat-messages-indicator-slot-example"
+class: 'overflow-y-auto'
 collapse: true
 ---
 ::
@@ -456,7 +473,7 @@ collapse: true
 ::tip
 You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
 
-```vue{3-5}
+```vue{7-9}
 <script setup lang="ts">
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 </script>
@@ -464,7 +481,7 @@ import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 <template>
   <UChatMessages :messages="messages" :status="status">
     <template #content="{ message }">
-      <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
+      <MDC :value="getTextFromMessage(message)" :cache-key="message.id" class="*:first:mt-0 *:last:mb-0" />
     </template>
   </UChatMessages>
 </template>

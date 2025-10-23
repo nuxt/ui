@@ -1,9 +1,10 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardSearch from '../../src/runtime/components/DashboardSearch.vue'
 import type { DashboardSearchProps } from '../../src/runtime/components/DashboardSearch.vue'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 
 const DashboardWrapper = defineComponent({
   components: {
@@ -46,5 +47,23 @@ describe('DashboardSearch', () => {
   ])('renders %s correctly', async (_: string, options: { props?: DashboardSearchProps }) => {
     const wrapper = await mountSuspended(DashboardWrapper, options)
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(DashboardWrapper, {
+      props
+    })
+
+    expect(await axe(wrapper.element, {
+      // "ARIA input fields must have an accessible name (aria-input-field-name)"
+      //
+      // Fix any of the following:
+      //  aria-label attribute does not exist or is empty
+      //  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
+      //  Element has no title attribute
+      rules: {
+        'aria-input-field-name': { enabled: false }
+      }
+    })).toHaveNoViolations()
   })
 })

@@ -60,8 +60,8 @@ Use the `items` prop as an array of objects with the following properties:
 - `disabled?: boolean`{lang="ts-type"}
 - `slot?: string`{lang="ts-type"}
 - `children?: TreeItem[]`{lang="ts-type"}
-- `onToggle?(e: Event): void`{lang="ts-type"}
-- `onSelect?(e?: Event): void`{lang="ts-type"}
+- `onToggle?: (e: TreeItemToggleEvent<TreeItem>) => void`{lang="ts-type"}
+- `onSelect?: (e: TreeItemSelectEvent<TreeItem>) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, itemWithChildren?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingIcon?: ClassNameValue, listWithChildren?: ClassNameValue }`{lang="ts-type"}
 
@@ -146,6 +146,52 @@ props:
       icon: 'i-vscode-icons-file-type-nuxt'
   class: 'w-60'
 ---
+::
+
+### Nested :badge{label="Soon"}
+
+Use the `nested` prop to control whether the Tree is rendered with nested structure or as a flat list. Defaults to `true`.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+external:
+  - items
+externalTypes:
+  - TreeItem[]
+props:
+  nested: false
+  items:
+    - label: 'app/'
+      defaultExpanded: true
+      children:
+        - label: 'composables/'
+          children:
+            - label: 'useAuth.ts'
+              icon: 'i-vscode-icons-file-type-typescript'
+            - label: 'useUser.ts'
+              icon: 'i-vscode-icons-file-type-typescript'
+        - label: 'components/'
+          defaultExpanded: true
+          children:
+            - label: 'Card.vue'
+              icon: 'i-vscode-icons-file-type-vue'
+            - label: 'Button.vue'
+              icon: 'i-vscode-icons-file-type-vue'
+    - label: 'app.vue'
+      icon: 'i-vscode-icons-file-type-vue'
+    - label: 'nuxt.config.ts'
+      icon: 'i-vscode-icons-file-type-nuxt'
+  class: 'w-60'
+---
+::
+
+::note{to="#with-virtualization"}
+When `nested` is `false`, all items are rendered at the same level with indentation to indicate hierarchy. This is useful for virtualization or drag and drop functionality.
 ::
 
 ### Color
@@ -350,10 +396,6 @@ You can customize these icons globally in your `vite.config.ts` under `ui.icons.
 
 Use the `disabled` prop to prevent any user interaction with the Tree.
 
-::note
-You can also disable individual items using `item.disabled`.
-::
-
 ::component-code
 ---
 collapse: true
@@ -397,6 +439,10 @@ props:
 ---
 ::
 
+::note
+You can also disable individual items using `item.disabled`.
+::
+
 ## Examples
 
 ### Control selected item(s)
@@ -412,7 +458,7 @@ props:
 ---
 ::
 
-If you want to prevent an item from being selected, you can use the `item.onSelect()`{lang="ts-type"} property:
+If you want to prevent an item from being selected, you can use the `item.onSelect()`{lang="ts-type"} property or the global `select` event:
 
 ::component-example
 ---
@@ -440,7 +486,7 @@ props:
 ---
 ::
 
-If you want to prevent an item from being expanded, you can use the `item.onToggle()`{lang="ts-type"} property:
+If you want to prevent an item from being expanded, you can use the `item.onToggle()`{lang="ts-type"} property or the global `toggle` event:
 
 ::component-example
 ---
@@ -453,6 +499,54 @@ props:
 
 ::note
 This lets you select a parent item without expanding or collapsing its children.
+::
+
+### With checkbox in items :badge{label="Soon"}
+
+You can use the `item-leading` slot to add a [Checkbox](/docs/components/checkbox) to the items. Use the `multiple`, `propagate-select` and `bubble-select` props to enable multi-selection with parent-child relationship and the `select` and `toggle` events to control the selected and expanded state of the items.
+
+::component-example
+---
+name: 'tree-checkbox-items-example'
+collapse: true
+props:
+  class: 'w-60'
+---
+::
+
+::note
+This example uses the `as` prop to change the items from `button` to `div` as the [`Checkbox`](/docs/components/checkbox) is also rendered as a `button`.
+::
+
+### With drag and drop :badge{label="Soon"}
+
+Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Tree. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
+
+::component-example
+---
+name: 'tree-drag-and-drop-example'
+---
+::
+
+::note
+This example sets the `nested` prop to `false` to have a flat list of items so that the items can be dragged and dropped.
+::
+
+### With virtualization :badge{label="Soon"}
+
+Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
+
+::warning
+When virtualization is enabled, the tree structure is flattened, similar to setting the `nested` prop to `false`.
+::
+
+::component-example
+---
+prettier: true
+name: 'tree-virtualize-example'
+props:
+  class: 'w-60'
+---
 ::
 
 ### With custom slot

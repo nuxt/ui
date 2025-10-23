@@ -40,6 +40,10 @@ type ComponentSlots<T extends { slots?: Record<string, any> }> = Id<{
   [K in keyof T['slots']]?: ClassValue
 }>
 
+type ComponentUI<T extends { slots?: Record<string, any> }> = Id<{
+  [K in keyof Required<T['slots']>]: (props?: Record<string, any>) => string
+}>
+
 type GetComponentAppConfig<A, U extends string, K extends string>
   = A extends Record<U, Record<K, any>> ? A[U][K] : {}
 
@@ -70,4 +74,5 @@ export type ComponentConfig<
   AppConfig: ComponentAppConfig<T, A, K, U>
   variants: ComponentVariants<T & GetComponentAppConfig<A, U, K>>
   slots: ComponentSlots<T>
+  ui: ComponentUI<T>
 }

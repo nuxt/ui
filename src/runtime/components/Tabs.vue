@@ -71,16 +71,16 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
 
 export interface TabsEmits extends TabsRootEmits<string | number> {}
 
-type SlotProps<T extends TabsItem> = (props: { item: T, index: number }) => any
+type SlotProps<T extends TabsItem> = (props: { item: T, index: number, ui: Tabs['ui'] }) => any
 
 export type TabsSlots<T extends TabsItem = TabsItem> = {
   'leading': SlotProps<T>
-  'default': SlotProps<T>
+  'default'(props: { item: T, index: number }): any
   'trailing': SlotProps<T>
   'content': SlotProps<T>
-  'list-leading': (props?: {}) => any
-  'list-trailing': (props?: {}) => any
-} & DynamicSlots<T, undefined, { index: number }>
+  'list-leading'(props?: {}): any
+  'list-trailing'(props?: {}): any
+} & DynamicSlots<T, undefined, { index: number, ui: Tabs['ui'] }>
 
 </script>
 
@@ -146,7 +146,7 @@ defineExpose({
         :disabled="item.disabled"
         :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger] })"
       >
-        <slot name="leading" :item="item" :index="index">
+        <slot name="leading" :item="item" :index="index" :ui="ui">
           <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, item.ui?.leadingIcon] })" />
           <UAvatar v-else-if="item.avatar" :size="((item.ui?.leadingAvatarSize || props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.leadingAvatar({ class: [props.ui?.leadingAvatar, item.ui?.leadingAvatar] })" />
         </slot>
@@ -155,7 +155,7 @@ defineExpose({
           <slot :item="item" :index="index">{{ get(item, props.labelKey as string) }}</slot>
         </span>
 
-        <slot name="trailing" :item="item" :index="index">
+        <slot name="trailing" :item="item" :index="index" :ui="ui">
           <UBadge
             v-if="item.badge !== undefined"
             color="neutral"
@@ -172,7 +172,7 @@ defineExpose({
 
     <template v-if="!!content">
       <TabsContent v-for="(item, index) of items" :key="index" :value="item.value ?? String(index)" :class="ui.content({ class: [props.ui?.content, item.ui?.content, item.class] })">
-        <slot :name="((item.slot || 'content') as keyof TabsSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index">
+        <slot :name="((item.slot || 'content') as keyof TabsSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :ui="ui">
           {{ item.content }}
         </slot>
       </TabsContent>

@@ -328,7 +328,7 @@ You can use the `row-selection` prop to control the selection state of the rows 
 You can add a `@select` listener to make rows clickable with or without a checkbox column.
 
 ::note
-The handler function receives the `TableRow` instance as the first argument and an optional `Event` as the second argument.
+The handler function receives the `Event` and `TableRow` instance as the first and second arguments respectively.
 ::
 
 ::component-example
@@ -566,6 +566,9 @@ If you use server-side pagination, you can use the [`useInfiniteScroll`](https:/
 ---
 prettier: true
 collapse: true
+highlights:
+  - 72
+  - 83
 overflowHidden: true
 name: 'table-infinite-scroll-example'
 class: '!p-0'
@@ -584,9 +587,33 @@ Since the table ref doesn't expose the tbody element, add a unique class to it v
 ---
 prettier: true
 collapse: true
+highlights:
+  - 76
+  - 78
 name: 'table-drag-and-drop-example'
 class: '!p-0'
 ---
+::
+
+### With virtualization :badge{label="Soon"}
+
+Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/latest/docs/api/virtualizer#optional-options) to customize the virtualization behavior.
+
+::warning
+When virtualization is enabled, the divider between rows and sticky properties are not supported.
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-virtualize-example'
+class: '!p-0'
+---
+::
+
+::note
+A height constraint is required on the table for virtualization to work properly (e.g., `class="h-[400px]"`).
 ::
 
 ### With tree data
@@ -599,7 +626,7 @@ For example, if your data objects have a `children` array, set `:get-sub-rows="r
 prettier: true
 collapse: true
 highlights:
-  - 168
+  - 175
 name: 'table-tree-data-example'
 class: '!p-0'
 ---

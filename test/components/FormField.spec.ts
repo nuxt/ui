@@ -1,10 +1,10 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect, test, vi } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import type { FormFieldProps, FormFieldSlots } from '../../src/runtime/components/FormField.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/form-field'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
-
 import {
   UInput,
   URadioGroup,
@@ -83,6 +83,20 @@ describe('FormField', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FormFieldProps, slots?: Partial<FormFieldSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, FormFieldWrapper)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(FormFieldWrapper, {
+      props: {
+        label: 'Username',
+        description: 'Enter your username',
+        help: 'Username must be unique',
+        hint: 'Use letters, numbers, and special characters',
+        error: 'Username is already taken'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe.each(inputComponents.map(inputComponent => [(inputComponent as any).__name, inputComponent]))('%s integration', async (name: string, inputComponent: any) => {

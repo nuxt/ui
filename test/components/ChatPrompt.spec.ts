@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChatPrompt from '../../src/runtime/components/ChatPrompt.vue'
 import type { ChatPromptProps, ChatPromptSlots } from '../../src/runtime/components/ChatPrompt.vue'
 import ComponentRender from '../component-render'
@@ -21,5 +23,15 @@ describe('ChatPrompt', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatPromptProps, slots?: Partial<ChatPromptSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ChatPrompt)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: {
+        placeholder: 'Placeholder'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

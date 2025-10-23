@@ -39,9 +39,9 @@ export interface DashboardSidebarSlots {
   'header'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
   'default'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
   'footer'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
-  'toggle'(props: { open: boolean, toggle: () => void }): any
-  'content'(props?: {}): any
-  'resize-handle'(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): any
+  'toggle'(props: { open: boolean, toggle: () => void, ui: DashboardSidebar['ui'] }): any
+  'content'(props: { close?: () => void }): any
+  'resize-handle'(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void, ui: DashboardSidebar['ui'] }): any
 }
 </script>
 
@@ -135,7 +135,7 @@ function toggleOpen() {
 
 <template>
   <DefineToggleTemplate>
-    <slot name="toggle" :open="open" :toggle="toggleOpen">
+    <slot name="toggle" :open="open" :toggle="toggleOpen" :ui="ui">
       <UDashboardSidebarToggle
         v-if="toggle"
         v-bind="(typeof toggle === 'object' ? toggle as Partial<ButtonProps> : {})"
@@ -146,7 +146,7 @@ function toggleOpen() {
   </DefineToggleTemplate>
 
   <DefineResizeHandleTemplate>
-    <slot name="resize-handle" :on-mouse-down="onMouseDown" :on-touch-start="onTouchStart" :on-double-click="onDoubleClick">
+    <slot name="resize-handle" :on-mouse-down="onMouseDown" :on-touch-start="onTouchStart" :on-double-click="onDoubleClick" :ui="ui">
       <UDashboardResizeHandle
         v-if="resizable"
         :aria-controls="id"
@@ -194,8 +194,8 @@ function toggleOpen() {
       content: ui.content({ class: props.ui?.content })
     }"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot name="content" v-bind="contentData">
         <div v-if="!!slots.header || mode !== 'drawer'" :class="ui.header({ class: props.ui?.header, menu: true })">
           <ReuseToggleTemplate v-if="mode !== 'drawer' && toggleSide === 'left'" />
 

@@ -99,7 +99,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
 }
 
 export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
-  content(props?: {}): any
+  content(props: { close: () => void }): any
 }
 
 </script>
@@ -152,11 +152,13 @@ function mapLinksItems(links: T[]): ContentSearchItem[] {
   return links.flatMap(link => [{
     ...link,
     suffix: link.description,
+    description: undefined,
     icon: link.icon || appConfig.ui.icons.file
   }, ...(link.children?.map(child => ({
     ...child,
     prefix: link.label + ' >',
     suffix: child.description,
+    description: undefined,
     icon: child.icon || link.icon || appConfig.ui.icons.file
   })) || [])])
 }
@@ -275,8 +277,8 @@ defineExpose({
     v-bind="modalProps"
     :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot name="content" v-bind="contentData">
         <UCommandPalette
           ref="commandPaletteRef"
           v-model:search-term="searchTerm"
