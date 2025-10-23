@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.3.7](https://github.com/nuxt/ui/compare/v3.3.6...v3.3.7) (2025-10-23)
+
+### Bug Fixes
+
+* **FileUpload:** handle disabling file delete button ([8e506c4](https://github.com/nuxt/ui/commit/8e506c4c4abbb78b27a007167ff3966bcf4a07f2)), closes [#5249](https://github.com/nuxt/ui/issues/5249)
+* **FileUpload:** stuck focus while tabbing ([#5128](https://github.com/nuxt/ui/issues/5128)) ([1752f21](https://github.com/nuxt/ui/commit/1752f21b83d4420e5a9a496dcb280eaf61c97c30))
+* **NavigationMenu:** display trailing slot when badge not undefined ([ee9e02a](https://github.com/nuxt/ui/commit/ee9e02a6021b8007b706284345a5697c55a63d26)), closes [#4670](https://github.com/nuxt/ui/issues/4670)
+
 ## [3.3.6](https://github.com/nuxt/ui/compare/v3.3.5...v3.3.6) (2025-10-03)
 
 ### Bug Fixes
