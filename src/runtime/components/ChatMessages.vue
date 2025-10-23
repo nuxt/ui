@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
 
-export interface ChatMessagesProps<T extends UIMessage[]> {
+export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
   messages?: T
   status?: ChatStatus
   /**
@@ -64,7 +64,7 @@ type ExtendSlotWithVersion<K extends keyof ChatMessageSlots, T extends UIMessage
     ? (props: P & { message: T[number] }) => any
     : ChatMessageSlots[K]
 
-export type ChatMessagesSlots<T extends UIMessage[]> = {
+export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
   [K in keyof ChatMessageSlots]: ExtendSlotWithVersion<K, T>
 } & {
   default(props?: {}): any
@@ -74,7 +74,7 @@ export type ChatMessagesSlots<T extends UIMessage[]> = {
 
 </script>
 
-<script setup lang="ts" generic="T extends UIMessage[]">
+<script setup lang="ts" generic="T extends UIMessage[] = UIMessage[]">
 import { ref, computed, watch, nextTick, toRef, onMounted } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'
