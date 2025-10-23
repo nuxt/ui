@@ -105,8 +105,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
           </template>
           <template v-else>
             <template v-for="(part, index) in parts" :key="`${id}-${part.type}-${index}`">
-              <template v-if="part.type === 'text'">
-                {{ (part as any).text }}
+              <template v-if="part.type === 'text' && 'text' in part">
+                {{ part.text }}
               </template>
             </template>
           </template>
