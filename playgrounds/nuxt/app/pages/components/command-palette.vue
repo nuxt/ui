@@ -1,6 +1,8 @@
 <script setup lang="ts">
 // import { createReusableTemplate, refDebounced } from '@vueuse/core'
 import { createReusableTemplate } from '@vueuse/core'
+import type { CommandPaletteItem } from '@nuxt/ui'
+
 import type { User } from '~/types'
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
@@ -9,7 +11,7 @@ const toast = useToast()
 const open = ref(false)
 const searchTerm = ref('')
 // const searchTermDebounced = refDebounced(searchTerm, 200)
-const selected = ref([])
+const selected = ref<CommandPaletteItem[]>([])
 const virtualize = ref(false)
 const preserveGroupOrder = ref(false)
 
