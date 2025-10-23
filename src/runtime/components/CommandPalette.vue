@@ -183,7 +183,8 @@ const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
   labelKey: 'label',
   autofocus: true,
-  back: true
+  back: true,
+  highlightOnHover: true
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<G, T>>()
