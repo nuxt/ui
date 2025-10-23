@@ -50,7 +50,7 @@ export interface ChatMessageProps<METADATA = unknown, DATA_PARTS extends UIDataT
 
 export interface ChatMessageSlots<METADATA = unknown, DATA_PARTS extends UIDataTypes = UIDataTypes, TOOLS extends UITools = UITools> {
   leading(props: { avatar: ChatMessageProps<METADATA, DATA_PARTS, TOOLS>['avatar'], ui: ChatMessage['ui'] }): any
-  content(props: ChatMessageProps<METADATA, DATA_PARTS, TOOLS>): any
+  content(props: Pick<ChatMessageProps<METADATA, DATA_PARTS, TOOLS>, 'id' | 'role' | 'parts' | 'metadata' | 'content'>): any
   actions(props: { actions: ChatMessageProps<METADATA, DATA_PARTS, TOOLS>['actions'] }): any
 }
 </script>
@@ -99,6 +99,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
           :role="role"
           :content="content"
           :parts="parts"
+          :metadata="metadata"
         >
           <template v-if="content">
             {{ content }}
