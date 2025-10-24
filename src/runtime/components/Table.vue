@@ -327,7 +327,9 @@ const tableRef = ref<HTMLTableElement | null>(null)
 
 const tableApi = useVueTable({
   ...reactiveOmit(props, 'as', 'data', 'columns', 'virtualize', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
-  data,
+  get data() {
+    return data.value
+  },
   get columns() {
     return columns.value
   },
