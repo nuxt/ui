@@ -14,14 +14,7 @@ defineProps<{
   navigation?: ContentNavigationItem[]
 }>()
 
-const { frameworks } = useFrameworks()
-const { links, fullscreen, chat, searchTerm, messages } = useSearch()
-
-const groups = computed(() => [{
-  id: 'framework',
-  label: 'Framework',
-  items: frameworks.value
-}])
+const { links, groups, fullscreen, chat, searchTerm, messages } = useSearch()
 
 function onClose() {
   chat.value = false
