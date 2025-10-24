@@ -38,6 +38,7 @@ const components = [
   'input-menu',
   'input-number',
   'input-tags',
+  'input-time',
   'input',
   'kbd',
   'link',
