@@ -2,11 +2,13 @@
 import type { TimeFieldRootProps, TimeFieldRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-time'
+import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import type { AvatarProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type InputTime = ComponentConfig<typeof theme, AppConfig, 'inputTime'>
 
-export interface InputTimeProps extends Omit<TimeFieldRootProps, 'as' | 'locale' | 'dir'> {
+export interface InputTimeProps extends Omit<TimeFieldRootProps, 'as' | 'locale' | 'dir'>, UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -45,7 +47,7 @@ export interface InputTimeSlots {
 import type { ComponentPublicInstance } from 'vue'
 import { computed, onMounted, ref } from 'vue'
 import { TimeFieldRoot, TimeFieldInput, useForwardPropsEmits, Primitive } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
+import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
@@ -62,7 +64,7 @@ const slots = defineSlots<InputTimeSlots>()
 const { code: codeLocale, dir } = useLocale()
 const appConfig = useAppConfig() as InputTime['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'id', 'name', 'required'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'autofocus', 'autofocusDelay', 'locale', 'icon', 'avatar', 'class', 'ui'), emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputTimeProps>(props)
@@ -76,6 +78,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTime ||
   variant: props.variant,
   size: inputSize.value,
   highlight: highlight.value,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value
 }))
@@ -126,12 +129,9 @@ defineExpose({
       v-slot="{ segments }"
       :model-value="modelValue"
       :default-value="defaultValue"
-      :default-placeholder="defaultPlaceholder"
-      :placeholder="placeholder"
-      :required="required"
+      :name="name"
       :disabled="disabled"
       :locale="locale"
-      :name="name"
       :dir="dir"
       :class="ui.base({ class: [props.ui?.base] })"
       @update:model-value="onUpdate"
@@ -150,9 +150,10 @@ defineExpose({
 
       <slot :ui="ui" />
 
-      <span v-if="isLeading || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+      <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+          <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
         </slot>
       </span>
 
