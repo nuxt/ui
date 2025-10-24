@@ -6,7 +6,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChatPrompt = ComponentConfig<typeof theme, AppConfig, 'chatPrompt'>
 
-export interface ChatPromptProps extends /** @vue-ignore */ Pick<TextareaProps, 'autofocusDelay' | 'autoresizeDelay' | 'maxrows' | 'icon' | 'avatar' | 'loading' | 'loadingIcon'> {
+export interface ChatPromptProps extends /** @vue-ignore */ Pick<TextareaProps, 'autofocusDelay' | 'autoresizeDelay' | 'maxrows' | 'icon' | 'avatar' | 'loading' | 'loadingIcon' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'form'
@@ -105,7 +105,7 @@ defineExpose({
       ref="textarea"
       v-model="model"
       :placeholder="placeholder || t('chatPrompt.placeholder')"
-      :disabled="Boolean(error)"
+      :disabled="Boolean(error) || disabled"
       variant="none"
       v-bind="{ ...textareaProps, ...$attrs }"
       :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), props.ui)"
