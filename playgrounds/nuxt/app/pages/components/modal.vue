@@ -24,7 +24,7 @@ function openModal() {
   <Navbar />
 
   <div class="flex flex-col gap-2 min-h-0">
-    <UModal title="First modal" :overlay="false">
+    <UModal title="First modal">
       <UButton color="neutral" variant="outline" label="Open with nested" />
 
       <template #footer>
