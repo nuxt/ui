@@ -222,6 +222,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
 
       <template v-else>
         <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
+
         <ReuseContentTemplate />
       </template>
     </DialogPortal>

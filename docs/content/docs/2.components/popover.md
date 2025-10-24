@@ -165,16 +165,39 @@ slots:
 :placeholder{class="size-48 m-4 inline-flex"}
 ::
 
+### Modal
+
+Use the `modal` prop to control whether the Popover blocks interaction with outside content. Defaults to `false`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  modal: true
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  content: |
+
+    <Placeholder class="size-48 m-4 inline-flex" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#content
+:placeholder{class="size-48 m-4 inline-flex"}
+::
+
 ### Dismissible
 
 Use the `dismissible` prop to control whether the Popover is dismissible when clicking outside of it or pressing escape. Defaults to `true`.
 
 ::note
 A `close:prevent` event will be emitted when the user tries to close it.
-::
-
-::tip
-You can combine `modal: false` with `dismissible: false` to make the Popover's background interactive without closing it.
 ::
 
 ::component-example

@@ -225,7 +225,7 @@ slots:
 :placeholder{class="h-48"}
 ::
 
-### Interactive
+### Modal
 
 Use the `modal` prop to control whether the Modal blocks interaction with outside content. Defaults to `true`.
 

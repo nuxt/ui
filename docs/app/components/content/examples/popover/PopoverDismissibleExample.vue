@@ -1,5 +1,5 @@
 <template>
-  <UPopover :dismissible="false" :modal="false" :ui="{ content: 'p-4' }">
+  <UPopover :dismissible="false" :ui="{ content: 'p-4' }">
     <UButton label="Open" color="neutral" variant="subtle" />
 
     <template #content="{ close }">

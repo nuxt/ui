@@ -253,7 +253,7 @@ slots:
 :placeholder{class="h-full"}
 ::
 
-### Interactive
+### Modal
 
 Use the `modal` prop to control whether the Slideover blocks interaction with outside content. Defaults to `true`.
 

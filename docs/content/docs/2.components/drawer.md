@@ -216,7 +216,7 @@ slots:
 :placeholder{class="h-48 m-4"}
 ::
 
-### Interactive
+### Modal
 
 Use the `modal` prop to control whether the Drawer blocks interaction with outside content. Defaults to `true`.
 
