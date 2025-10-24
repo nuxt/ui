@@ -98,13 +98,14 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
 <template>
   <UChatPalette>
     <UChatMessages
+      should-auto-scroll
       :messages="chat.messages"
       :status="chat.status"
       :user="{ side: 'left', variant: 'naked', icon: 'i-lucide-user' }"
       :assistant="{ icon: 'i-lucide-bot' }"
     >
       <template #content="{ message }">
-        <template v-for="(part, index) in message.parts" :key="`${message.id}-${index}`">
+        <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${part.state}` : ''}`">
           <MDCCached
             v-if="part.type === 'text'"
             :value="part.text"
