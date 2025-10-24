@@ -47,16 +47,33 @@ function onSubmit() {
       :spacing-offset="48"
     >
       <template #content="{ message }">
-        <template v-for="(part, index) in message.parts" :key="`${message.id}-${index}`">
-          <MDC v-if="part.type === 'text'" :value="part.text" :cache-key="`${message.id}-${index}`" class="*:first:mt-0 *:last:mb-0" />
-          <p v-else-if="part.type === 'reasoning'" class="text-sm text-muted my-5">
+        <template
+          v-for="(part, index) in message.parts"
+          :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${part.state}` : ''}`"
+        >
+          <MDC
+            v-if="part.type === 'text'"
+            :value="part.text"
+            :cache-key="`${message.id}-${index}`"
+            class="*:first:mt-0 *:last:mb-0"
+          />
+          <p
+            v-else-if="part.type === 'reasoning'"
+            class="text-sm text-muted my-5"
+          >
             {{ part.state === 'done' ? 'Thoughts' : 'Thinking...' }}
           </p>
         </template>
       </template>
     </UChatMessages>
 
-    <UChatPrompt v-model="input" :error="chat.error" variant="subtle" class="sticky bottom-0" @submit="onSubmit">
+    <UChatPrompt
+      v-model="input"
+      :error="chat.error"
+      variant="subtle"
+      class="sticky bottom-0"
+      @submit="onSubmit"
+    >
       <UChatPromptSubmit :status="chat.status" @stop="chat.stop" @reload="chat.regenerate" />
     </UChatPrompt>
   </div>

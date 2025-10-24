@@ -1,7 +1,38 @@
+import type { UIMessage } from 'ai'
+
 export function useSearch() {
   const route = useRoute()
 
+  const chat = ref(false)
+  const fullscreen = ref(false)
+  const searchTerm = ref('')
+  const messages = ref<UIMessage[]>([])
+
   const links = computed(() => [{
+    label: 'Ask AI',
+    description: 'Ask the AI assistant powered by our custom MCP server for help.',
+    icon: 'i-lucide-bot',
+    ui: {
+      itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
+    },
+    onSelect: (e: any) => {
+      e.preventDefault()
+
+      messages.value = searchTerm.value
+        ? [{
+            id: '1',
+            role: 'user',
+            parts: [{ type: 'text', text: searchTerm.value }]
+          }]
+        : [{
+            id: '1',
+            role: 'assistant',
+            parts: [{ type: 'text', text: 'Hello, how can I help you today?' }]
+          }]
+
+      chat.value = true
+    }
+  }, {
     label: 'Get Started',
     description: 'Learn how to get started with Nuxt UI.',
     icon: 'i-lucide-square-play',
@@ -64,6 +95,10 @@ export function useSearch() {
   }])
 
   return {
-    links
+    links,
+    chat,
+    fullscreen,
+    searchTerm,
+    messages
   }
 }
