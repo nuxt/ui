@@ -144,7 +144,7 @@ defineShortcuts(extractShortcuts(items.value))
   </Navbar>
 
   <Matrix v-slot="props" :attrs="attrs">
-    <UDropdownMenu :items="items" :arrow="arrow" :content="{ side: 'bottom', align: 'start' }" v-bind="props">
+    <UDropdownMenu :items="items" :arrow="arrow" :content="{ side: 'bottom', align: 'start' }" v-bind="props" :search="3">
       <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
 
       <template #custom-trailing>

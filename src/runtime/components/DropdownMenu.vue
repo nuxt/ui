@@ -32,6 +32,14 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   open?: boolean
   defaultOpen?: boolean
   children?: ArrayOrNested<DropdownMenuItem>
+  /**
+   * Enable search functionality. Can be:
+   * - true: Always show search
+   * - number: Show search when items.length >= number
+   * - false: Disable search
+   * @defaultValue false
+   */
+  search?: boolean | number
   onSelect?: (e: Event) => void
   onUpdateChecked?: (checked: boolean) => void
   class?: any
@@ -89,12 +97,16 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
    * @defaultValue 'description'
    */
   descriptionKey?: GetItemKeys<T>
+  /**
+   * Enable search functionality
+   */
+  search?: boolean | number
   disabled?: boolean
   class?: any
   ui?: DropdownMenu['slots']
 }
 
-export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
+export interface DropdownMenuEmits extends DropdownMenuRootEmits { }
 
 type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number, ui: DropdownMenu['ui'] }) => any
 
@@ -108,6 +120,7 @@ export type DropdownMenuSlots<
   'item-label': (props: { item: T, active?: boolean, index: number }) => any
   'item-description': (props: { item: T, active?: boolean, index: number }) => any
   'item-trailing': SlotProps<T>
+  'search': (props: { modelValue: string, clear: () => void }) => any
   'content-top': (props?: {}) => any
   'content-bottom': (props?: {}) => any
 }
@@ -131,7 +144,8 @@ const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
   modal: true,
   externalIcon: true,
   labelKey: 'label',
-  descriptionKey: 'description'
+  descriptionKey: 'description',
+  search: false
 })
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
@@ -166,6 +180,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
+      :search="props.search"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
         <slot :name="(name as keyof DropdownMenuSlots<T>)" v-bind="slotData" />
