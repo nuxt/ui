@@ -121,6 +121,9 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'बंद करें'
     },
+    slider: {
+      thumb: 'रेंज'
+    },
     table: {
       noData: 'कोई डेटा नहीं'
     },

@@ -121,6 +121,9 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Κλείσιμο'
     },
+    slider: {
+      thumb: 'Εύρος'
+    },
     table: {
       noData: 'Δεν υπάρχουν δεδομένα'
     },

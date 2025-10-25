@@ -123,6 +123,9 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'დახურვა'
     },
+    slider: {
+      thumb: 'დიაპაზონი'
+    },
     table: {
       noData: 'მონაცემები არ არის'
     },

@@ -122,6 +122,9 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'بستن'
     },
+    slider: {
+      thumb: 'محدوده'
+    },
     table: {
       noData: 'داده‌ای موجود نیست'
     },

@@ -121,6 +121,9 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Uždaryti'
     },
+    slider: {
+      thumb: 'Diapazonas'
+    },
     table: {
       noData: 'Nėra duomenų'
     },

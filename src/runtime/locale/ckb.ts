@@ -122,6 +122,9 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'داخستن'
     },
+    slider: {
+      thumb: 'مەودا'
+    },
     table: {
       noData: 'هیچ داتایەک نییە'
     },

@@ -121,6 +121,9 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Tancar'
     },
+    slider: {
+      thumb: 'Rang'
+    },
     table: {
       noData: 'Sense dades'
     },

@@ -122,6 +122,9 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'تاقاش'
     },
+    slider: {
+      thumb: 'دائىرە'
+    },
     table: {
       noData: 'سانلىق مەلۇمات يوق'
     },

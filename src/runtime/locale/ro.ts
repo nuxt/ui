@@ -121,6 +121,9 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Închide'
     },
+    slider: {
+      thumb: 'Interval'
+    },
     table: {
       noData: 'Nu există date'
     },

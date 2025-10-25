@@ -121,6 +121,9 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Sulje'
     },
+    slider: {
+      thumb: 'Alue'
+    },
     table: {
       noData: 'Ei tietoja'
     },
