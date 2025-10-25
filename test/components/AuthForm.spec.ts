@@ -57,15 +57,9 @@ describe('AuthForm', () => {
         providers: [{ label: 'Google', icon: 'i-simple-icons-google' }],
         separator: 'or',
         submit: { label: 'Submit' }
-
       }
     })
 
-    expect(await axe(wrapper.element, {
-      rules: {
-        // The passwordVisibility button has an invalid aria-controls value - it need to point to the id of the password input not its name.
-        'aria-valid-attr-value': { enabled: false }
-      }
-    })).toHaveNoViolations()
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })
