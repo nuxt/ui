@@ -59,7 +59,6 @@ import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { omit, get, isArrayOfArray } from '../utils'
 import { pickLinkProps } from '../utils/link'
-import UButton from './Button.vue'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
 import UAvatar from './Avatar.vue'
@@ -172,13 +171,12 @@ const filteredGroups = computed(() => {
             base: 'rounded-none ring-0 placeholder-gray-500 dark:placeholder-gray-400'
           }"
           class="border-b border-gray-200 dark:border-gray-800"
-          icon="i-lucide-"
+          :class="{
+            'border-gray-100 dark:border-gray-900': filteredGroups.length === 0
+          }"
+          icon="i-lucide-search"
           trailing
-        >
-          <template v-if="searchValue" #trailing>
-            <UIcon name="i-lucide-x" @click="clearSearch" />
-          </template>
-        </UInput>
+        />
       </slot>
 
       <slot name="content-top" />
