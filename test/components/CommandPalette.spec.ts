@@ -65,18 +65,56 @@ describe('CommandPalette', () => {
     }]
   }]
 
+  const groupsWithDescription = [{
+    id: 'actions',
+    items: [{
+      label: 'Create Project',
+      description: 'Start a new project from scratch',
+      icon: 'i-lucide-folder-plus',
+      kbds: ['meta', 'N']
+    }, {
+      label: 'Open File',
+      description: 'Browse and open an existing file',
+      icon: 'i-lucide-file',
+      kbds: ['meta', 'O']
+    }, {
+      label: 'Settings',
+      description: 'Configure your preferences',
+      icon: 'i-lucide-settings',
+      kbds: ['meta', ',']
+    }]
+  }, {
+    id: 'recent',
+    label: 'Recent Files',
+    items: [{
+      label: 'index.vue',
+      description: '/src/pages/index.vue',
+      icon: 'i-lucide-file-code'
+    }, {
+      label: 'app.vue',
+      description: '/app.vue',
+      icon: 'i-lucide-file-code'
+    }]
+  }]
+
   const props = { groups }
 
   it.each([
     // Props
     ['with groups', { props }],
-    ['without data', {}],
+    ['with groups with description', { props: { groups: groupsWithDescription } }],
+    ['without groups', {}],
     ['with modelValue', { props: { ...props, modelValue: groups[2]?.items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: groups[2]?.items[0] } }],
+    ['with searchTerm', { props: { ...props, searchTerm: 'f' } }],
+    ['with searchTerm and preserveGroupOrder', { props: { ...props, searchTerm: 'f', preserveGroupOrder: true } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
+    ['with descriptionKey', { props: { groups: groupsWithDescription, descriptionKey: 'label' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with icon', { props: { ...props, icon: 'i-lucide-terminal' } }],
+    ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-settings' } }],
+    ['with childrenIcon', { props: { ...props, childrenIcon: 'i-lucide-arrow-right' } }],
     ['with loading', { props: { ...props, loading: true } }],
     ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loader' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-badge-check', modelValue: groups[2]?.items[0] } }],
@@ -91,6 +129,7 @@ describe('CommandPalette', () => {
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
+    ['with item-description slot', { props: { groups: groupsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
     ['with close slot', { props: { ...props, close: true }, slots: { close: () => 'Close slot' } }],

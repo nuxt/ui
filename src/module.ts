@@ -76,6 +76,22 @@ export interface ModuleOptions {
    * @defaultValue false
    */
   content?: boolean
+
+  /**
+   * Experimental features
+   */
+  experimental?: {
+    /**
+     * Enable automatic component detection for tree-shaking
+     * Only generates theme files for components actually used in your app
+     * - `true`: Enable automatic detection
+     * - `string[]`: Enable detection and include additional components (useful for dynamic components)
+     * @defaultValue false
+     * @example true
+     * @example ['Modal', 'Dropdown']
+     */
+    componentDetection?: boolean | string[]
+  }
 }
 
 declare module '#app' {

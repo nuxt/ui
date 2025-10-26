@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { UIMessage } from 'ai'
 import type { ContentNavigationItem } from '@nuxt/content'
 
 interface ContentSearchFile {
@@ -15,46 +14,11 @@ defineProps<{
   navigation?: ContentNavigationItem[]
 }>()
 
-const chat = ref(false)
-const fullscreen = ref(false)
-const searchTerm = ref('')
-const messages = ref<UIMessage[]>([])
-
-const { frameworks } = useFrameworks()
-const { links } = useSearch()
-
-const groups = computed(() => [{
-  id: 'ai',
-  label: 'Assistant',
-  ignoreFilter: true,
-  items: [{
-    label: 'Ask Nuxt AI',
-    icon: 'i-lucide-bot',
-    ui: {
-      itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
-    },
-    onSelect: (e: any) => {
-      e.preventDefault()
-
-      messages.value = searchTerm.value
-        ? [{
-            id: '1',
-            role: 'user',
-            parts: [{ type: 'text', text: searchTerm.value }]
-          }]
-        : []
-
-      chat.value = true
-    }
-  }]
-}, {
-  id: 'framework',
-  label: 'Framework',
-  items: frameworks.value
-}])
+const { links, groups, fullscreen, chat, searchTerm, messages } = useSearch()
 
 function onClose() {
   chat.value = false
+
   fullscreen.value = false
 }
 </script>

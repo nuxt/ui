@@ -260,7 +260,7 @@ name: 'toast-example'
 In this example, we use the `AppConfig` to configure the `duration` prop of the `Toaster` component globally.
 ::
 
-### Change global max :badge{label="Soon"}
+### Change global max :badge{label="4.1+"}
 
 Change the `toaster.max` prop on the [App](/docs/components/app#props) component to change the max number of toasts displayed at once.
 

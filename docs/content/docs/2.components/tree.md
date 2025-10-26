@@ -148,7 +148,7 @@ props:
 ---
 ::
 
-### Nested :badge{label="Soon"}
+### Nested :badge{label="4.1+"}
 
 Use the `nested` prop to control whether the Tree is rendered with nested structure or as a flat list. Defaults to `true`.
 
@@ -501,7 +501,7 @@ props:
 This lets you select a parent item without expanding or collapsing its children.
 ::
 
-### With checkbox in items :badge{label="Soon"}
+### With checkbox in items :badge{label="4.1+"}
 
 You can use the `item-leading` slot to add a [Checkbox](/docs/components/checkbox) to the items. Use the `multiple`, `propagate-select` and `bubble-select` props to enable multi-selection with parent-child relationship and the `select` and `toggle` events to control the selected and expanded state of the items.
 
@@ -518,7 +518,7 @@ props:
 This example uses the `as` prop to change the items from `button` to `div` as the [`Checkbox`](/docs/components/checkbox) is also rendered as a `button`.
 ::
 
-### With drag and drop :badge{label="Soon"}
+### With drag and drop :badge{label="4.1+"}
 
 Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Tree. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
 
@@ -532,7 +532,7 @@ name: 'tree-drag-and-drop-example'
 This example sets the `nested` prop to `false` to have a flat list of items so that the items can be dragged and dropped.
 ::
 
-### With virtualization :badge{label="Soon"}
+### With virtualization :badge{label="4.1+"}
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 

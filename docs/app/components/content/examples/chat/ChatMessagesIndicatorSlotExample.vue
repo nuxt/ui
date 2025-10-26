@@ -8,6 +8,7 @@
       }
     ]"
     status="submitted"
+    :should-scroll-to-bottom="false"
     :user="{
       avatar: { icon: 'i-lucide-user' },
       variant: 'soft',

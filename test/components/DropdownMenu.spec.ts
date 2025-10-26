@@ -94,12 +94,36 @@ describe('DropdownMenu', () => {
     }]
   ]
 
+  const itemsWithDescription = [
+    [{
+      label: 'My account',
+      description: 'Account settings',
+      avatar: {
+        src: 'https://github.com/benjamincanac.png'
+      },
+      type: 'label'
+    }],
+    [{
+      label: 'Profile',
+      description: 'View your profile',
+      icon: 'i-lucide-user',
+      slot: 'custom'
+    }, {
+      label: 'Billing',
+      description: 'Manage billing',
+      icon: 'i-lucide-credit-card',
+      kbds: ['meta', 'b']
+    }]
+  ]
+
   const props = { open: true, portal: false, items }
 
   it.each([
     // Props
     ['with items', { props }],
+    ['with items with description', { props: { ...props, items: itemsWithDescription } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
+    ['with descriptionKey', { props: { ...props, descriptionKey: 'description' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with arrow', { props: { ...props, arrow: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
@@ -112,6 +136,7 @@ describe('DropdownMenu', () => {
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
+    ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DropdownMenuProps, slots?: Partial<DropdownMenuSlots> }) => {

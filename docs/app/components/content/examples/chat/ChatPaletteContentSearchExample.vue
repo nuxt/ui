@@ -37,9 +37,9 @@ const chat = new Chat({
   messages
 })
 
-function handleSubmit(e: Event) {
-  e.preventDefault()
+function onSubmit() {
   chat.sendMessage({ text: input.value })
+
   input.value = ''
 }
 
@@ -51,33 +51,35 @@ function onClose(e: Event) {
 </script>
 
 <template>
-  <ClientOnly>
-    <LazyUContentSearch v-model:search-term="searchTerm" open :groups="groups">
-      <template v-if="ai" #content>
-        <UChatPalette>
-          <UChatMessages
-            :messages="chat.messages"
-            :status="chat.status"
-            :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png' } }"
-            :assistant="{ icon: 'i-lucide-bot' }"
-          >
-            <template #content="{ message }">
-              <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
-            </template>
-          </UChatMessages>
-
-          <template #prompt>
-            <UChatPrompt
-              v-model="input"
-              icon="i-lucide-search"
-              variant="naked"
-              :error="chat.error"
-              @submit="handleSubmit"
-              @close="onClose"
+  <UContentSearch v-model:search-term="searchTerm" open :groups="groups">
+    <template v-if="ai" #content>
+      <UChatPalette>
+        <UChatMessages
+          :messages="chat.messages"
+          :status="chat.status"
+          :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png' } }"
+          :assistant="{ icon: 'i-lucide-bot' }"
+        >
+          <template #content="{ message }">
+            <MDC
+              :value="getTextFromMessage(message)"
+              :cache-key="message.id"
+              class="[&_.my-5]:my-2.5 *:first:!mt-0 *:last:!mb-0 [&_.leading-7]:!leading-6"
             />
           </template>
-        </UChatPalette>
-      </template>
-    </LazyUContentSearch>
-  </ClientOnly>
+        </UChatMessages>
+
+        <template #prompt>
+          <UChatPrompt
+            v-model="input"
+            icon="i-lucide-search"
+            variant="naked"
+            :error="chat.error"
+            @submit="onSubmit"
+            @close="onClose"
+          />
+        </template>
+      </UChatPalette>
+    </template>
+  </UContentSearch>
 </template>

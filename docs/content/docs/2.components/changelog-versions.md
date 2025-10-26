@@ -18,7 +18,7 @@ The ChangelogVersions component provides a flexible layout to display a list of 
     <UChangelogVersion
       v-for="(version, index) in versions"
       :key="index"
-      v-bind="post"
+      v-bind="version"
     />
   </UChangelogVersions>
 </template>

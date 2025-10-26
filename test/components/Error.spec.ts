@@ -19,7 +19,7 @@ describe('Error', () => {
     ['with error', { props }],
     ['with redirect', { props: { ...props, redirect: '/blog' } }],
     ['with clear', { props: { ...props, clear: { label: 'Home' } } }],
-    ['with as', { props: { ...props, as: 'div' } }],
+    ['with as', { props: { ...props, as: 'main' } }],
     ['with class', { props: { ...props, class: 'min-h-full' } }],
     ['with ui', { props: { ...props, ui: { links: 'mt-16' } } }],
     // Slots
