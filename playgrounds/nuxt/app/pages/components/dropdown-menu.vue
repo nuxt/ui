@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import theme from '#build/ui/dropdown-menu'
-import Separator from '#ui/components/Separator.vue'
 
 const loading = ref(false)
 
