@@ -1,6 +1,7 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, hasNuxtModule } from '@nuxt/kit'
-import type { HookResult, ModuleDependencies } from '@nuxt/schema'
+import type { HookResult } from '@nuxt/schema'
+import type { ModuleDependencies } from 'nuxt/schema'
 import { addTemplates } from './templates'
 import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
 import { name, version } from '../package.json'
