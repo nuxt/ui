@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import theme from '#build/ui/dropdown-menu'
-import { DropdownMenuRoot } from 'reka-ui'
 
 const loading = ref(false)
 
