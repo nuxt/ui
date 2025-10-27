@@ -1,5 +1,6 @@
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
-import { streamText, convertToModelMessages, experimental_createMCPClient, stepCountIs } from 'ai'
+import { streamText, convertToModelMessages, stepCountIs } from 'ai'
+import { experimental_createMCPClient } from '@ai-sdk/mcp'
 import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
