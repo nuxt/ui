@@ -32,18 +32,10 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   open?: boolean
   defaultOpen?: boolean
   children?: ArrayOrNested<DropdownMenuItem>
-  /**
-   * Enable search functionality. Can be:
-   * - true: Always show search
-   * - number: Show search when items.length >= number
-   * - false: Disable search
-   * @defaultValue false
-   */
-  search?: boolean | number
   onSelect?: (e: Event) => void
   onUpdateChecked?: (checked: boolean) => void
   class?: any
-  ui?: Pick<DropdownMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>
+  ui?: Pick<DropdownMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLabel' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>
   [key: string]: any
 }
 
@@ -98,7 +90,11 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
    */
   descriptionKey?: GetItemKeys<T>
   /**
-   * Enable search functionality
+   * Enable search functionality. Can be:
+   * - true: Always show search
+   * - number: Show search when items.length >= number
+   * - false: Disable search
+   * @defaultValue false
    */
   search?: boolean | number
   disabled?: boolean
