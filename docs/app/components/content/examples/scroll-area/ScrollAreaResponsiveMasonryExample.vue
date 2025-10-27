@@ -27,8 +27,8 @@ const items = Array.from({ length: 30 }, (_, i) => {
       minLanes,
       maxLanes
     }"
-    class="h-[600px] border border-default rounded-lg"
-    style="resize: both; overflow: auto; min-width: 300px; min-height: 300px;"
+    class="h-[600px] w-full border border-default rounded-lg"
+    style="resize: horizontal; overflow: auto; min-width: 300px; min-height: 300px;"
   >
     <template #default="{ item }">
       <UCard :ui="{ body: 'p-0 sm:p-0' }">

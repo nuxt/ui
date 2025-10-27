@@ -151,6 +151,17 @@ const virtualizerProps = toRef(() => {
     minLanes: 1
   })
 
+  // Ensure numeric props are actually numbers (they may come in as strings from component props)
+  const numericProps = ['estimateSize', 'overscan', 'gap', 'paddingStart', 'paddingEnd', 'scrollMargin', 'lanes', 'minLanes', 'maxLanes', 'laneWidth'] as const
+  for (const key of numericProps) {
+    if (baseProps[key] !== undefined && typeof baseProps[key] !== 'function') {
+      const num = Number(baseProps[key])
+      if (!isNaN(num)) {
+        baseProps[key] = num
+      }
+    }
+  }
+
   // Use responsive lanes if laneWidth is set
   if (baseProps.laneWidth !== undefined) {
     baseProps.lanes = calculateResponsiveLanes()

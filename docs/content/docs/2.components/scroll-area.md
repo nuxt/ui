@@ -65,14 +65,7 @@ options:
   - name: orientation
     label: orientation
     default: vertical
-    items:
-      - vertical
-      - horizontal
 ---
-::
-
-::note
-Use your mouse to drag the scroll area horizontally or vertically depending on the orientation.
 ::
 
 ### Virtualize
@@ -130,16 +123,10 @@ Use the `lanes` option to create multi-column masonry layouts. This is perfect f
 ---
 name: 'scroll-area-masonry-example'
 class: 'p-8'
-options:
-  - name: lanes
-    label: lanes
-    default: 3
-  - name: gap
-    label: gap
-    default: 12
-  - name: padding
-    label: padding
-    default: 12
+props:
+  lanes: 3
+  gap: 12
+  padding: 12
 ---
 ::
 
@@ -155,21 +142,11 @@ Use the `laneWidth`, `minLanes`, and `maxLanes` options to create responsive mas
 ---
 name: 'scroll-area-responsive-masonry-example'
 class: 'p-8'
-options:
-  - name: laneWidth
-    label: laneWidth
-    default: 200
-  - name: minLanes
-    label: minLanes
-    default: 1
-  - name: maxLanes
-    label: maxLanes
-    default: 6
+props:
+  laneWidth: 200
+  minLanes: 1
+  maxLanes: 6
 ---
-::
-
-::note
-The container has `resize: both` applied so you can drag from the bottom-right corner to see the columns adjust automatically as the width changes.
 ::
 
 ### With custom virtualization options
