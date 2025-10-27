@@ -18,9 +18,6 @@ const items = [
       }, {
         label: 'Filter C-B',
         icon: 'i-lucide-credit-card'
-      }, {
-        label: 'Filter C-C',
-        icon: 'i-lucide-filter'
       }
     ]
   }, {
@@ -47,7 +44,7 @@ const items = [
 </script>
 
 <template>
-  <UDropdownMenu :items="items" :ui="{ content: 'w-48' }" :search="2">
+  <UDropdownMenu :items="items" :ui="{ content: 'w-48' }" :search="3">
     <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
   </UDropdownMenu>
 </template>
