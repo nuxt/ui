@@ -140,8 +140,7 @@ const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
   modal: true,
   externalIcon: true,
   labelKey: 'label',
-  descriptionKey: 'description',
-  search: false
+  descriptionKey: 'description'
 })
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
@@ -176,7 +175,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
-      :search="props.search"
+      :search="search ?? undefined"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
         <slot :name="(name as keyof DropdownMenuSlots<T>)" v-bind="slotData" />

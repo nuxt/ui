@@ -131,6 +131,8 @@ describe('DropdownMenu', () => {
     ['without externalIcon', { props: { ...props, externalIcon: false } }],
     ['with class', { props: { ...props, class: 'min-w-96' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],
+    ['with search', { props: { ...props, search: true } }],
+    ['with search (number)', { props: { ...props, search: 2 } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
