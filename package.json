@@ -112,7 +112,7 @@
     "@vueuse/core": "^13.9.0",
     "@vueuse/integrations": "^13.9.0",
     "@vueuse/math": "^13.9.0",
-    "@vueuse/nuxt": "13.1.0",
+    "@vueuse/nuxt": "^13.9.0",
     "unimport": "4.1.1",
     "chokidar": "3.6.0",
     "typescript": "5.8.3"
