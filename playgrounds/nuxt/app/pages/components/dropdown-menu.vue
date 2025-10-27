@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import theme from '#build/ui/dropdown-menu'
+import Separator from '#ui/components/Separator.vue'
 
 const loading = ref(false)
+
+const search = ref(0)
 
 const items = computed(() => [
   [{
@@ -141,10 +144,13 @@ defineShortcuts(extractShortcuts(items.value))
   <Navbar>
     <USelect v-model="attrs.size" :items="sizes" multiple placeholder="Size" />
     <USwitch v-model="arrow" label="Arrow" />
+    <Separator orientation="vertical" class="h-6 mx-2" />
+    <USwitch v-if="search === 0" :model-value="false" unchecked-icon="i-lucide-search" checked-icon="i-lucide-search" @update:model-value="search = 1" />
+    <UInputNumber v-else v-model="search" label="Search" class="w-20" />
   </Navbar>
 
   <Matrix v-slot="props" :attrs="attrs">
-    <UDropdownMenu :items="items" :arrow="arrow" :content="{ side: 'bottom', align: 'start' }" v-bind="props" :search="3">
+    <UDropdownMenu :items="items" :arrow="arrow" :content="{ side: 'bottom', align: 'start' }" v-bind="props" :search>
       <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
 
       <template #custom-trailing>
