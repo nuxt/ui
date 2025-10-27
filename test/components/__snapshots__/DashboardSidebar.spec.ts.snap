@@ -5,7 +5,7 @@ exports[`DashboardSidebar > renders with class correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default border-none" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default border-none" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -22,7 +22,7 @@ exports[`DashboardSidebar > renders with collapsedSize correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="true" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 10%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="true" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 10%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -39,7 +39,7 @@ exports[`DashboardSidebar > renders with collapsible correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -56,7 +56,7 @@ exports[`DashboardSidebar > renders with content slot correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -73,7 +73,7 @@ exports[`DashboardSidebar > renders with default slot correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2">Default slot</div>
     <!--v-if-->
@@ -90,7 +90,7 @@ exports[`DashboardSidebar > renders with defaultSize correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 50%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 50%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -107,7 +107,7 @@ exports[`DashboardSidebar > renders with footer slot correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <div class="shrink-0 flex items-center gap-1.5 px-4 py-2">Footer slot</div>
@@ -124,7 +124,7 @@ exports[`DashboardSidebar > renders with header slot correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <div class="h-(--ui-header-height) shrink-0 flex items-center gap-1.5 px-4">Header slot</div>
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -158,7 +158,7 @@ exports[`DashboardSidebar > renders with maxSize correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -175,7 +175,7 @@ exports[`DashboardSidebar > renders with minSize correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -192,7 +192,7 @@ exports[`DashboardSidebar > renders with mode drawer correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -201,8 +201,8 @@ exports[`DashboardSidebar > renders with mode drawer correctly 1`] = `
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" data-vaul-overlay="" data-vaul-snap-points="false" data-vaul-snap-points-overlay="true" class="fixed inset-0 bg-elevated/75 lg:hidden"></div>
-  <div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="bottom" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" class="fixed bg-default ring ring-default flex focus:outline-none mt-24 flex-col h-auto max-h-[96%] inset-x-0 bottom-0 rounded-t-lg lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-2" aria-labelledby="reka-dialog-title-v-0-1" data-state="open">
-    <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-1">dashboardSidebar.title</h2><p id="reka-dialog-description-v-0-2">dashboardSidebar.description</p></span>
+  <div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="bottom" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" class="fixed bg-default ring ring-default flex focus:outline-none mt-24 flex-col h-auto max-h-[96%] inset-x-0 bottom-0 rounded-t-lg lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-2" aria-labelledby="reka-dialog-title-v-0-0-1" data-state="open">
+    <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-1">dashboardSidebar.title</h2><p id="reka-dialog-description-v-0-0-2">dashboardSidebar.description</p></span>
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2 sm:px-6"></div>
     <!--v-if-->
@@ -216,7 +216,7 @@ exports[`DashboardSidebar > renders with mode modal correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -225,7 +225,7 @@ exports[`DashboardSidebar > renders with mode modal correctly 1`] = `
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 lg:hidden"></div>
-  <div data-dismissable-layer="" tabindex="-1" class="fixed bg-default divide-y divide-default flex flex-col focus:outline-none inset-0 lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-2" aria-labelledby="reka-dialog-title-v-0-1" data-state="open" style="pointer-events: auto;"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-1">dashboardSidebar.title</h2><p id="reka-dialog-description-v-0-2">dashboardSidebar.description</p></span>
+  <div data-dismissable-layer="" tabindex="-1" class="fixed bg-default divide-y divide-default flex flex-col focus:outline-none inset-0 lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-2" aria-labelledby="reka-dialog-title-v-0-0-1" data-state="open" style="pointer-events: auto;"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-1">dashboardSidebar.title</h2><p id="reka-dialog-description-v-0-0-2">dashboardSidebar.description</p></span>
     <div class="h-(--ui-header-height) shrink-0 flex items-center gap-1.5 px-4 sm:px-6"><button type="button" aria-label="Close sidebar" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
         <!--v-if-->
         <!--v-if-->
@@ -244,7 +244,7 @@ exports[`DashboardSidebar > renders with mode slideover correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -253,7 +253,7 @@ exports[`DashboardSidebar > renders with mode slideover correctly 1`] = `
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] lg:hidden"></div>
-  <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="left" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none left-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-left_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-left_200ms_ease-in-out] lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-2" aria-labelledby="reka-dialog-title-v-0-1" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-1">dashboardSidebar.title</h2><p id="reka-dialog-description-v-0-2">dashboardSidebar.description</p></span>
+  <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="left" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none left-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-left_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-left_200ms_ease-in-out] lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-2" aria-labelledby="reka-dialog-title-v-0-0-1" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-1">dashboardSidebar.title</h2><p id="reka-dialog-description-v-0-0-2">dashboardSidebar.description</p></span>
     <div class="h-(--ui-header-height) shrink-0 flex items-center gap-1.5 px-4 sm:px-6"><button type="button" aria-label="Close sidebar" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
         <!--v-if-->
         <!--v-if-->
@@ -272,12 +272,12 @@ exports[`DashboardSidebar > renders with resizable correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
   </div>
-  <div role="separator" class="hidden lg:block touch-none select-none cursor-ew-resize relative before:absolute before:inset-y-0 before:-left-1.5 before:-right-1.5" aria-controls="dashboard-sidebar-v-0-0"></div>
+  <div role="separator" class="hidden lg:block touch-none select-none cursor-ew-resize relative before:absolute before:inset-y-0 before:-left-1.5 before:-right-1.5" aria-controls="dashboard-sidebar-v-0-0-0"></div>
   <!--v-if-->
   <!--teleport start-->
   <!--teleport end-->
@@ -289,7 +289,7 @@ exports[`DashboardSidebar > renders with resize-handle slot correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -305,7 +305,7 @@ exports[`DashboardSidebar > renders with side right correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -322,7 +322,7 @@ exports[`DashboardSidebar > renders with toggle correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -341,7 +341,7 @@ exports[`DashboardSidebar > renders with toggle slot correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -358,7 +358,7 @@ exports[`DashboardSidebar > renders with toggleSide correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
@@ -367,7 +367,7 @@ exports[`DashboardSidebar > renders with toggleSide correctly 1`] = `
   <!--v-if-->
   <!--teleport start-->
   <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] lg:hidden"></div>
-  <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="left" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none left-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-left_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-left_200ms_ease-in-out] lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-2" aria-labelledby="reka-dialog-title-v-0-1" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-1">dashboardSidebar.title</h2><p id="reka-dialog-description-v-0-2">dashboardSidebar.description</p></span>
+  <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="left" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none left-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-left_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-left_200ms_ease-in-out] lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-2" aria-labelledby="reka-dialog-title-v-0-0-1" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-1">dashboardSidebar.title</h2><p id="reka-dialog-description-v-0-0-2">dashboardSidebar.description</p></span>
     <div class="h-(--ui-header-height) shrink-0 flex items-center gap-1.5 px-4 sm:px-6">
       <!--v-if--><button type="button" aria-label="Close sidebar" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden ms-auto"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
         <!--v-if-->
@@ -386,7 +386,7 @@ exports[`DashboardSidebar > renders with ui correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-4"></div>
     <!--v-if-->
@@ -403,7 +403,7 @@ exports[`DashboardSidebar > renders without toggle correctly 1`] = `
   <!---->
   <!---->
   <!--v-if-->
-  <div id="dashboard-sidebar-v-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
+  <div id="dashboard-sidebar-v-0-0-0" data-collapsed="false" data-dragging="false" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
     <!--v-if-->
