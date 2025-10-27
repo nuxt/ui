@@ -16,7 +16,7 @@
     "@internationalized/date": "^3.10.0",
     "@nuxt/ui": "workspace:*",
     "ai": "^5.0.80",
-    "nuxt": "^4.1.2",
+    "nuxt": "^4.2.0",
     "zod": "^4.1.12"
   },
   "devDependencies": {
