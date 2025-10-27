@@ -16,9 +16,6 @@ importers:
 
   .:
     dependencies:
-      '@ai-sdk/vue':
-        specifier: ^2.0.80
-        version: 2.0.80(vue@3.5.22(typescript@5.8.3))(zod@4.1.12)
       '@iconify/vue':
         specifier: ^5.0.0
         version: 5.0.0(vue@3.5.22(typescript@5.8.3))
@@ -248,6 +245,9 @@ importers:
       '@ai-sdk/gateway':
         specifier: ^2.0.1
         version: 2.0.1(zod@4.1.12)
+      '@ai-sdk/mcp':
+        specifier: ^0.0.1
+        version: 0.0.1(zod@4.1.12)
       '@ai-sdk/vue':
         specifier: ^2.0.80
         version: 2.0.80(vue@3.5.22(typescript@5.8.3))(zod@4.1.12)
@@ -429,6 +429,12 @@ packages:
 
   '@ai-sdk/gateway@2.0.1':
     resolution: {integrity: sha512-vPVIbnP35ZnayS937XLo85vynR85fpBQWHCdUweq7apzqFOTU2YkUd4V3msebEHbQ2Zro60ZShDDy9SMiyWTqA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
+
+  '@ai-sdk/mcp@0.0.1':
+    resolution: {integrity: sha512-DCO+OS5vw6El5PKkQGrqaUp8ZDOTzgFbTtwqYWt8MZWbectK1dCaOYCsdXQEb0BXNks8wa9GbHVTwm9v//fojw==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -7273,6 +7279,13 @@ snapshots:
       '@ai-sdk/provider': 2.0.0
       '@ai-sdk/provider-utils': 3.0.12(zod@4.1.12)
       '@vercel/oidc': 3.0.3
+      zod: 4.1.12
+
+  '@ai-sdk/mcp@0.0.1(zod@4.1.12)':
+    dependencies:
+      '@ai-sdk/provider': 2.0.0
+      '@ai-sdk/provider-utils': 3.0.12(zod@4.1.12)
+      pkce-challenge: 5.0.0
       zod: 4.1.12
 
   '@ai-sdk/provider-utils@3.0.12(zod@4.1.12)':
