@@ -403,6 +403,20 @@ name: 'dropdown-menu-custom-slot-example'
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
 ::
 
+### With search
+
+Use the `search` property to add a search input to the DropdownMenu.
+
+::component-example
+---
+name: 'dropdown-menu-search-example'
+---
+::
+
+::tip{to="#slots"}
+You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
+::
+
 ### With trigger content width
 
 You can expand the content to the full width of its button by adding the `w-(--reka-dropdown-menu-trigger-width)` class on the `ui.content` slot.
