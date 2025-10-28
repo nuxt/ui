@@ -75,25 +75,3 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {
     </div>
   </Primitive>
 </template>
-
-<style>
-@keyframes marquee {
-  from { transform: translate3d(0, 0, 0); will-change: transform; }
-  to { transform: translate3d(calc(-100% - var(--gap)), 0, 0); will-change: transform; }
-}
-
-@keyframes marquee-rtl {
-  from { transform: translate3d(0, 0, 0); will-change: transform; }
-  to { transform: translate3d(calc(100% + var(--gap)), 0, 0); will-change: transform; }
-}
-
-@keyframes marquee-vertical {
-  from { transform: translate3d(0, 0, 0); will-change: transform; }
-  to { transform: translate3d(0, calc(-100% - var(--gap)), 0); will-change: transform; }
-}
-
-@keyframes marquee-vertical-rtl {
-  from { transform: translate3d(0, calc(-100% - var(--gap)), 0); will-change: transform; }
-  to { transform: translate3d(0, calc(-100% * var(--gap)), 0); will-change: transform; }
-}
-</style>
