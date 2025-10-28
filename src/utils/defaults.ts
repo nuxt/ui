@@ -1,6 +1,5 @@
-import icons from './theme/icons'
-
-import { pick } from './runtime/utils'
+import icons from '../theme/icons'
+import { pick } from '../runtime/utils'
 
 export const getDefaultUiConfig = (colors?: string[]) => ({
   colors: pick({
@@ -21,7 +20,12 @@ export const defaultOptions = {
   colorMode: true,
   theme: {
     colors: undefined,
-    transitions: true
+    transitions: true,
+    defaultVariants: {
+      color: undefined,
+      size: undefined
+    },
+    prefix: undefined
   },
   mdc: false,
   content: false

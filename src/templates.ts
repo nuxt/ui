@@ -1,142 +1,16 @@
 import { fileURLToPath } from 'node:url'
-import { readFile } from 'node:fs/promises'
-import { join } from 'pathe'
-import { globSync } from 'tinyglobby'
-import { camelCase, kebabCase, pascalCase } from 'scule'
+import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
 import colors from 'tailwindcss/colors'
 import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
+import { applyPrefixToObject } from './utils/prefix'
+import { detectUsedComponents } from './utils/components'
 import * as theme from './theme'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
-
-/**
- * Build a dependency graph of components by scanning their source files
- */
-async function buildComponentDependencyGraph(componentDir: string, prefix: string): Promise<Map<string, Set<string>>> {
-  const dependencyGraph = new Map<string, Set<string>>()
-
-  const componentFiles = globSync(['**/*.vue'], {
-    cwd: componentDir,
-    absolute: true
-  })
-
-  const componentPattern = new RegExp(`<${prefix}([A-Z][a-zA-Z]+)|\\b${prefix}([A-Z][a-zA-Z]+)\\b`, 'g')
-
-  for (const componentFile of componentFiles) {
-    try {
-      const content = await readFile(componentFile, 'utf-8')
-      const componentName = pascalCase(componentFile.split('/').pop()!.replace('.vue', ''))
-      const dependencies = new Set<string>()
-
-      const matches = content.matchAll(componentPattern)
-      for (const match of matches) {
-        const depName = match[1] || match[2]
-        if (depName && depName !== componentName) {
-          dependencies.add(depName)
-        }
-      }
-
-      dependencyGraph.set(componentName, dependencies)
-    } catch {
-      // Ignore files that can't be read
-    }
-  }
-
-  return dependencyGraph
-}
-
-/**
- * Recursively resolve all dependencies for a component
- */
-function resolveComponentDependencies(
-  component: string,
-  dependencyGraph: Map<string, Set<string>>,
-  resolved: Set<string> = new Set()
-): Set<string> {
-  if (resolved.has(component)) {
-    return resolved
-  }
-
-  resolved.add(component)
-  const dependencies = dependencyGraph.get(component)
-
-  if (dependencies) {
-    for (const dep of dependencies) {
-      resolveComponentDependencies(dep, dependencyGraph, resolved)
-    }
-  }
-
-  return resolved
-}
-
-/**
- * Detect components used in the project by scanning source files
- */
-async function detectUsedComponents(
-  rootDir: string,
-  prefix: string,
-  componentDir: string,
-  includeComponents?: string[]
-): Promise<Set<string> | undefined> {
-  const detectedComponents = new Set<string>()
-
-  // Add manually specified components
-  if (includeComponents && includeComponents.length > 0) {
-    for (const component of includeComponents) {
-      detectedComponents.add(component)
-    }
-  }
-
-  // Scan all source files for component usage
-  const appFiles = globSync(['**/*.{vue,ts,js,tsx,jsx}'], {
-    cwd: rootDir,
-    ignore: ['node_modules/**', '.nuxt/**', 'dist/**']
-  })
-
-  // Pattern to match:
-  // - <UButton in templates
-  // - UButton in script (imports, usage)
-  const componentPattern = new RegExp(`<${prefix}([A-Z][a-zA-Z]+)|\\b${prefix}([A-Z][a-zA-Z]+)\\b`, 'g')
-
-  for (const file of appFiles) {
-    try {
-      const filePath = join(rootDir, file)
-      const content = await readFile(filePath, 'utf-8')
-      const matches = content.matchAll(componentPattern)
-
-      for (const match of matches) {
-        const componentName = match[1] || match[2]
-        if (componentName) {
-          detectedComponents.add(componentName)
-        }
-      }
-    } catch {
-      // Ignore files that can't be read
-    }
-  }
-
-  if (detectedComponents.size === 0) {
-    return undefined
-  }
-
-  // Build dependency graph of components
-  const dependencyGraph = await buildComponentDependencyGraph(componentDir, prefix)
-
-  // Resolve all dependencies for detected components
-  const allComponents = new Set<string>()
-  for (const component of detectedComponents) {
-    const resolved = resolveComponentDependencies(component, dependencyGraph)
-    for (const resolvedComponent of resolved) {
-      allComponents.add(resolvedComponent)
-    }
-  }
-
-  return allComponents
-}
 
 export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve']) {
   const templates: NuxtTemplate[] = []
@@ -154,7 +28,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         write: true,
         getContents: async () => {
           const template = (theme as any)[component]
-          const result = typeof template === 'function' ? template(options) : template
+          let result = typeof template === 'function' ? template(options) : template
 
           // Override default variants from nuxt.config.ts
           if (result?.defaultVariants?.color && options.theme?.defaultVariants?.color) {
@@ -162,6 +36,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           }
           if (result?.defaultVariants?.size && options.theme?.defaultVariants?.size) {
             result.defaultVariants.size = options.theme.defaultVariants.size
+          }
+
+          // Apply Tailwind prefix if configured
+          if (options.theme?.prefix) {
+            result = applyPrefixToObject(result, options.theme.prefix)
           }
 
           const variants = Object.entries(result.variants || {})
@@ -294,8 +173,15 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     write: true,
     getContents: async () => {
       const sources = await getSources()
+      const prefix = options.theme?.prefix ? `${options.theme.prefix}:` : ''
 
       return `${sources}
+
+@layer base {
+  body {
+    @apply ${prefix}antialiased ${prefix}text-default ${prefix}bg-default ${prefix}scheme-light ${prefix}dark:scheme-dark;
+  }
+}
 
 @theme static {
   --color-old-neutral-50: ${colors.neutral[50]};

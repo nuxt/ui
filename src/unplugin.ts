@@ -11,7 +11,7 @@ import type colors from 'tailwindcss/colors'
 
 import type * as ui from '#build/ui'
 
-import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
+import { defaultOptions, getDefaultUiConfig, resolveColors } from './utils/defaults'
 import type { ModuleOptions } from './module'
 import type icons from './theme/icons'
 
