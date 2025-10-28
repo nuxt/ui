@@ -81,7 +81,7 @@ Nested validation rules are handled using dot notation. For example, a rule like
 Errors are reported directly to the [FormField](/docs/components/form-field) component based on the `name` or `error-pattern` prop. This means the validation rules defined for the `email` attribute in your schema will be applied to `<FormField name="email">`{lang="vue"}. 
 
 ::warning
-Errors from nested values within an input component are not reported by default (e.g. [InputTags](/docs/components/input-tags), [Select](/docs/components/select)). Use the `error-pattern` prop on the [FormField](/docs/components/form-field) component to match nested field errors.
+Errors from nested values within an input component (e.g. [InputTags](/docs/components/input-tags), [Select](/docs/components/select)) are not reported by default. Use the `error-pattern` prop on the [FormField](/docs/components/form-field) component to match nested field errors.
 ::
 
 ::component-example
