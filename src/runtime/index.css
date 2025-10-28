@@ -5,12 +5,12 @@
 @variant light (&:where(.light, .light *));
 @variant dark (&:where(.dark, .dark *));
 
-@layer base {
-  :root {
+@layer theme {
+  :root, :host {
     --ui-header-height: --spacing(16);
   }
 
-  :root, .light {
+  :root, :host, .light {
     --ui-text-dimmed: var(--ui-color-neutral-400);
     --ui-text-muted: var(--ui-color-neutral-500);
     --ui-text-toned: var(--ui-color-neutral-600);
