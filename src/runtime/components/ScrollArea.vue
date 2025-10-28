@@ -156,7 +156,7 @@ const virtualizerProps = toRef(() => {
   for (const key of numericProps) {
     if (baseProps[key] !== undefined && typeof baseProps[key] !== 'function') {
       const num = Number(baseProps[key])
-      if (!isNaN(num)) {
+      if (!Number.isNaN(num)) {
         baseProps[key] = num
       }
     }
