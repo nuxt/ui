@@ -150,7 +150,7 @@ const appConfig = useAppConfig() as AuthForm['AppConfig']
 
 const formRef = useTemplateRef('formRef')
 const passwordVisibility = ref(false)
-const passwordRef = useTemplateRef('password')
+const passwordRef = useTemplateRef('passwordRef')
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.authForm || {}) })())
@@ -275,7 +275,7 @@ function omitFieldProps(field: F) {
             />
             <UInput
               v-else-if="field.type === 'password'"
-              ref="password"
+              ref="passwordRef"
               v-model="state[field.name]"
               :class="ui.password({ class: props.ui?.password })"
               v-bind="(omitFieldProps(field) as AuthFormInputField<'password'>)"
