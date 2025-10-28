@@ -4,7 +4,7 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = z.object({
   email: z.email('Invalid email'),
-  favoriteDates: z.array(z.string().regex(/\d\d\d\d\-\d\d\-\d\d/)),
+  favoriteDates: z.array(z.string("Must be a date of format YYYY-MM-DD").regex(/\d\d\d\d\-\d\d\-\d\d/)),
 })
 
 type Schema = z.output<typeof schema>
