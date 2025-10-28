@@ -27,7 +27,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UInput v-model="state.email" />
     </UFormField>
 
-    <UFormField label="Favorite Dates" name="favoriteDates" :error-pattern="/favoriteDates.*/">
+    <UFormField label="Favorite Dates" name="favoriteDates" :error-pattern="/favoriteDates\..*/">
       <UInputTags v-model="state.favoriteDates" />
     </UFormField>
 
