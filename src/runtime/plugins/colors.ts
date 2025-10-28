@@ -27,12 +27,10 @@ export default defineNuxtPlugin(() => {
   const root = computed(() => {
     const { neutral, ...colors } = appConfig.ui.colors
     const prefix = (appConfig.ui as { prefix?: string }).prefix
-    const prefixStr = prefix ? `${prefix}-` : ''
 
     return `@layer base {
   :root {
     ${Object.entries(appConfig.ui.colors).map(([key, value]: [string, string]) => generateShades(key, value, prefix)).join('\n  ')}
-    --ui-color-white: var(--${prefixStr}color-white);
   }
   :root, .light {
   ${Object.keys(colors).map(key => generateColor(key, 500)).join('\n  ')}
