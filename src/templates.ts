@@ -6,7 +6,7 @@ import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates } 
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
-import { applyPrefixToObject } from './utils/prefix'
+import { applyDefaultVariants, applyPrefixToObject } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
 import * as theme from './theme'
 import * as themeProse from './theme/prose'
@@ -31,17 +31,9 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           let result = typeof template === 'function' ? template(options) : template
 
           // Override default variants from nuxt.config.ts
-          if (result?.defaultVariants?.color && options.theme?.defaultVariants?.color) {
-            result.defaultVariants.color = options.theme.defaultVariants.color
-          }
-          if (result?.defaultVariants?.size && options.theme?.defaultVariants?.size) {
-            result.defaultVariants.size = options.theme.defaultVariants.size
-          }
-
+          result = applyDefaultVariants(result, options.theme?.defaultVariants)
           // Apply Tailwind prefix if configured
-          if (options.theme?.prefix) {
-            result = applyPrefixToObject(result, options.theme.prefix)
-          }
+          result = applyPrefixToObject(result, options.theme?.prefix)
 
           const variants = Object.entries(result.variants || {})
             .filter(([_, values]) => {
@@ -70,13 +62,16 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           // For local development, import directly from theme
           if (isDev) {
             const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${kebabCase(component)}`, import.meta.url))
+            const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url))
+
             return [
               `import template from ${JSON.stringify(templatePath)}`,
+              `import { applyDefaultVariants, applyPrefixToObject } from ${JSON.stringify(themeUtilsPath)}`,
               ...generateVariantDeclarations(variants),
               `const options = ${JSON.stringify(options, null, 2)}`,
-              `const result = typeof template === 'function' ? (template as Function)(options) : template`,
-              `if (result?.defaultVariants?.color && options.theme?.defaultVariants?.color) result.defaultVariants.color = options.theme.defaultVariants.color`,
-              `if (result?.defaultVariants?.size && options.theme?.defaultVariants?.size) result.defaultVariants.size = options.theme.defaultVariants.size`,
+              `let result = typeof template === 'function' ? (template as Function)(options) : template`,
+              `result = applyDefaultVariants(result, options.theme?.defaultVariants)`,
+              `result = applyPrefixToObject(result, options.theme?.prefix)`,
               `const theme = ${json}`,
               `export default result as typeof theme`
             ].join('\n\n')
@@ -287,6 +282,7 @@ type AppConfigUI = {
     neutral?: NeutralColor | (string & {})
   }
   icons?: Partial<IconsConfig>
+  prefix?: string
   tv?: typeof defaultConfig
 } & TVConfig<typeof ui>
 
