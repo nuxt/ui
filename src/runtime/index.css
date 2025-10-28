@@ -30,7 +30,7 @@
     --ui-border-inverted: var(--ui-color-neutral-900);
 
     --ui-radius: 0.25rem;
-    --ui-container: var(--container-7xl);
+    --ui-container: 80rem;
   }
 
   .dark {
