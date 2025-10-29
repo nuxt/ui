@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "4.1.0",
-  "packageManager": "pnpm@10.18.3",
+  "packageManager": "pnpm@10.20.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -111,14 +111,13 @@
     "release": "release-it"
   },
   "dependencies": {
-    "@ai-sdk/vue": "^2.0.76",
     "@iconify/vue": "^5.0.0",
     "@internationalized/date": "^3.10.0",
     "@internationalized/number": "^3.6.5",
     "@nuxt/fonts": "^0.11.4",
-    "@nuxt/icon": "^2.0.0",
-    "@nuxt/kit": "^4.1.2",
-    "@nuxt/schema": "^4.1.2",
+    "@nuxt/icon": "^2.1.0",
+    "@nuxt/kit": "^4.2.0",
+    "@nuxt/schema": "^4.2.0",
     "@nuxtjs/color-mode": "^3.5.2",
     "@standard-schema/spec": "^1.0.0",
     "@tailwindcss/postcss": "^4.1.16",
@@ -141,7 +140,7 @@
     "fuse.js": "^7.1.0",
     "hookable": "^5.5.3",
     "knitwork": "^1.2.0",
-    "magic-string": "^0.30.19",
+    "magic-string": "^0.30.21",
     "mlly": "^1.8.0",
     "motion-v": "^1.7.3",
     "ohash": "^2.0.11",
@@ -156,25 +155,25 @@
     "unplugin-auto-import": "^20.2.0",
     "unplugin-vue-components": "^30.0.0",
     "vaul-vue": "0.4.1",
-    "vue-component-type-helpers": "^3.1.1"
+    "vue-component-type-helpers": "^3.1.2"
   },
   "devDependencies": {
     "@nuxt/content": "^3.7.1",
-    "@nuxt/eslint-config": "^1.9.0",
+    "@nuxt/eslint-config": "^1.10.0",
     "@nuxt/module-builder": "^1.0.2",
-    "@nuxt/test-utils": "^3.19.2",
+    "@nuxt/test-utils": "^3.20.1",
     "@release-it/conventional-changelog": "^10.0.1",
     "@vue/test-utils": "^2.4.6",
-    "ai": "^5.0.76",
+    "ai": "^5.0.81",
     "embla-carousel": "^8.6.0",
     "eslint": "^9.38.0",
-    "happy-dom": "^20.0.7",
-    "nuxt": "^4.1.2",
+    "happy-dom": "^20.0.10",
+    "nuxt": "^4.2.0",
     "release-it": "^19.0.5",
     "vitest": "^3.2.4",
     "vitest-axe": "^0.1.0",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^3.1.1"
+    "vue-tsc": "^3.1.2"
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7",
@@ -210,7 +209,7 @@
     }
   },
   "resolutions": {
-    "@nuxt/kit": "^4.1.2",
+    "@nuxt/kit": "^4.2.0",
     "@nuxt/ui": "workspace:*",
     "debug": "4.3.7",
     "typescript": "5.8.3",

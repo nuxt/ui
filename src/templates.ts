@@ -16,15 +16,13 @@ import * as themeContent from './theme/content'
 /**
  * Build a dependency graph of components by scanning their source files
  */
-async function buildComponentDependencyGraph(componentDir: string, prefix: string): Promise<Map<string, Set<string>>> {
+async function buildComponentDependencyGraph(componentDir: string, componentPattern: RegExp): Promise<Map<string, Set<string>>> {
   const dependencyGraph = new Map<string, Set<string>>()
 
   const componentFiles = globSync(['**/*.vue'], {
     cwd: componentDir,
     absolute: true
   })
-
-  const componentPattern = new RegExp(`<${prefix}([A-Z][a-zA-Z]+)|\\b${prefix}([A-Z][a-zA-Z]+)\\b`, 'g')
 
   for (const componentFile of componentFiles) {
     try {
@@ -100,7 +98,9 @@ async function detectUsedComponents(
   // Pattern to match:
   // - <UButton in templates
   // - UButton in script (imports, usage)
-  const componentPattern = new RegExp(`<${prefix}([A-Z][a-zA-Z]+)|\\b${prefix}([A-Z][a-zA-Z]+)\\b`, 'g')
+  // - <LazyUButton (lazy components)
+  // - LazyUButton in script
+  const componentPattern = new RegExp(`<(?:Lazy)?${prefix}([A-Z][a-zA-Z]+)|\\b(?:Lazy)?${prefix}([A-Z][a-zA-Z]+)\\b`, 'g')
 
   for (const file of appFiles) {
     try {
@@ -124,7 +124,7 @@ async function detectUsedComponents(
   }
 
   // Build dependency graph of components
-  const dependencyGraph = await buildComponentDependencyGraph(componentDir, prefix)
+  const dependencyGraph = await buildComponentDependencyGraph(componentDir, componentPattern)
 
   // Resolve all dependencies for detected components
   const allComponents = new Set<string>()

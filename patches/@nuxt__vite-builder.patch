@@ -1,0 +1,12 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index f58ecfd7fbf251eda347e932aef875c5ac1e0fdb..fe6f591f6c96c35de6601808d86561dbb81268c1 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -1886,6 +1886,7 @@ function EnvironmentsPlugin(nuxt) {
+   let viteConfig;
+   return {
+     name: "nuxt:environments",
++    enforce: "pre",
+     config(config) {
+       viteConfig = config;
+       if (!nuxt.options.dev) {
