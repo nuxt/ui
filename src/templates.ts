@@ -87,14 +87,36 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     }
   }
 
-  async function getSources() {
+  if (!!nuxt && ((hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content))) {
+    hasProse = true
+
+    const path = 'prose'
+
+    writeThemeTemplate(themeProse, path)
+
+    templates.push({
+      filename: `ui/${path}/index.ts`,
+      write: true,
+      getContents: () => Object.keys(themeProse).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
+    })
+  }
+
+  if (!!nuxt && (hasNuxtModule('@nuxt/content') || options.content)) {
+    hasContent = true
+
+    writeThemeTemplate(themeContent, 'content')
+  }
+
+  writeThemeTemplate(theme)
+
+  async function generateSources() {
     let sources = ''
 
     if (!!nuxt && !!resolve && options.experimental?.componentDetection) {
       const detectedComponents = await detectUsedComponents(
         nuxt.options.rootDir,
         options.prefix!,
-        resolve!('./runtime/components'),
+        resolve('./runtime/components'),
         Array.isArray(options.experimental.componentDetection) ? options.experimental.componentDetection : undefined
       )
 
@@ -141,33 +163,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     return sources || '@source "./ui";'
   }
 
-  if (!!nuxt && ((hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content))) {
-    hasProse = true
-
-    const path = 'prose'
-
-    writeThemeTemplate(themeProse, path)
-
-    templates.push({
-      filename: `ui/${path}/index.ts`,
-      write: true,
-      getContents: () => Object.keys(themeProse).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
-    })
-  }
-
-  if (!!nuxt && (hasNuxtModule('@nuxt/content') || options.content)) {
-    hasContent = true
-
-    writeThemeTemplate(themeContent, 'content')
-  }
-
-  writeThemeTemplate(theme)
-
   templates.push({
     filename: 'ui.css',
     write: true,
     getContents: async () => {
-      const sources = await getSources()
+      const sources = await generateSources()
       const prefix = options.theme?.prefix ? `${options.theme.prefix}:` : ''
 
       return `${sources}
@@ -248,15 +248,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'ui/index.ts',
     write: true,
-    getContents: () => {
-      let contents = Object.keys(theme).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
-      if (hasContent) {
-        contents += '\n'
-        contents += Object.keys(themeContent).map(component => `export { default as ${component} } from './content/${kebabCase(component)}'`).join('\n')
-      }
-      if (hasProse) contents += `\nexport * as prose from './prose'\n`
-      return contents
-    }
+    getContents: () => [
+      ...Object.keys(theme).map(component => `export { default as ${component} } from './${kebabCase(component)}'`),
+      ...(hasContent ? Object.keys(themeContent).map(component => `export { default as ${component} } from './content/${kebabCase(component)}'`) : []),
+      ...(hasProse ? [`export * as prose from './prose'`] : [])
+    ].join('\n')
   })
 
   // FIXME: `typeof colors[number]` should include all colors from the theme
