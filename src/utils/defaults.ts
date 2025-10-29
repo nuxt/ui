@@ -20,7 +20,12 @@ export function getDefaultConfig(theme?: ModuleOptions['theme']) {
       neutral: 'slate'
     }, [...(theme?.colors || []), 'neutral' as any]),
     icons,
-    prefix: theme?.prefix
+    prefix: theme?.prefix,
+    tv: {
+      twMergeConfig: {
+        prefix: theme?.prefix
+      }
+    }
   }
 }
 
