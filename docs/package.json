@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@ai-sdk/vue": "^1.2.12",
-    "@iconify-json/logos": "^1.2.9",
+    "@iconify-json/logos": "^1.2.10",
     "@iconify-json/lucide": "^1.2.71",
-    "@iconify-json/simple-icons": "^1.2.55",
+    "@iconify-json/simple-icons": "^1.2.56",
     "@iconify-json/vscode-icons": "^1.2.33",
     "@nuxt/content": "^3.7.1",
     "@nuxt/image": "^1.11.0",
