@@ -1,12 +1,18 @@
+<script lang="ts">
+import type { ImgHTMLAttributes } from 'vue'
+
+export interface ColorModeImageProps extends /** @vue-ignore */ ImgHTMLAttributes {
+  dark: string
+  light: string
+}
+</script>
+
 <script setup lang="ts">
 import ImageComponent from '#build/ui-image-component'
 
 defineOptions({ inheritAttrs: false })
 
-defineProps<{
-  dark: string
-  light: string
-}>()
+defineProps<ColorModeImageProps>()
 </script>
 
 <template>

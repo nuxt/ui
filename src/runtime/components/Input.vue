@@ -11,7 +11,8 @@ import type { ComponentConfig } from '../types/tv'
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
 
 export type InputValue = AcceptableValue
-export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps {
+
+export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps, /** @vue-ignore */ InputHTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

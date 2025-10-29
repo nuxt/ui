@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { FormHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
 import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps } from '../types'
@@ -45,7 +46,7 @@ export type AuthFormField<T extends AuthFormFieldType = AuthFormFieldType>
         : T extends AuthFormInputFieldType ? AuthFormInputField<T>
           : never
 
-export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> {
+export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> extends /** @vue-ignore */ Omit<FormHTMLAttributes, 'onSubmit'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -123,6 +124,8 @@ import UCheckbox from './Checkbox.vue'
 import USelectMenu from './SelectMenu.vue'
 import UInput from './Input.vue'
 import UPinInput from './PinInput.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<AuthFormProps<T, F>>(), {
   separator: 'or'
@@ -239,9 +242,10 @@ function omitFieldProps(field: F) {
         :schema="schema"
         :validate="validate"
         :validate-on="validateOn"
-        :class="ui.form({ class: props.ui?.form })"
         :disabled="disabled"
         :loading-auto="loadingAuto"
+        :class="ui.form({ class: props.ui?.form })"
+        v-bind="$attrs"
         @submit="onSubmit"
       >
         <UFormField

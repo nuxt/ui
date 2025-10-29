@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { FormHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData } from '../types/form'
@@ -6,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>
 
-export type FormProps<S extends FormSchema, T extends boolean = true, N extends boolean = false> = {
+export type FormProps<S extends FormSchema, T extends boolean = true, N extends boolean = false> = /** @vue-ignore */ Omit<FormHTMLAttributes, 'onSubmit'> & {
   id?: string | number
   /** Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs. */
   schema?: S
