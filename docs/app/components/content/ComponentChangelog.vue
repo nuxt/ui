@@ -6,7 +6,7 @@ const route = useRoute()
 const name = route.path.split('/').pop()
 
 const commits = computed(() => {
-  const related = changelog.filter(c => c.version || c.components?.some(i => i === name))
+  const related = changelog.filter(c => c.version || c.components?.includes(name!))
   return related.filter((i, idx) => !(i.version && (!related[idx + 1] || related[idx + 1]?.version)))
 })
 
