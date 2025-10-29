@@ -12,6 +12,11 @@ overrides:
   unimport: 4.1.1
   unplugin: ^2.3.10
 
+patchedDependencies:
+  '@nuxt/vite-builder':
+    hash: dbfb7f37d331cee8de42bac0867af36d698e9207ed6dfd1415b4b243177e569e
+    path: patches/@nuxt__vite-builder.patch
+
 importers:
 
   .:
@@ -8609,7 +8614,7 @@ snapshots:
       - magicast
       - typescript
 
-  '@nuxt/vite-builder@4.2.0(@types/node@24.7.0)(eslint@9.38.0(jiti@2.6.1))(lightningcss@1.30.2)(magicast@0.3.5)(meow@13.2.0)(nuxt@4.2.0(@parcel/watcher@2.5.1)(@types/node@24.7.0)(@vue/compiler-sfc@3.5.22)(better-sqlite3@12.4.1)(db0@0.3.4(better-sqlite3@12.4.1))(eslint@9.38.0(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vite@7.1.12(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.1))(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vue-tsc@3.1.2(typescript@5.8.3))(vue@3.5.22(typescript@5.8.3))(yaml@2.8.1)':
+  '@nuxt/vite-builder@4.2.0(patch_hash=dbfb7f37d331cee8de42bac0867af36d698e9207ed6dfd1415b4b243177e569e)(@types/node@24.7.0)(eslint@9.38.0(jiti@2.6.1))(lightningcss@1.30.2)(magicast@0.3.5)(meow@13.2.0)(nuxt@4.2.0(@parcel/watcher@2.5.1)(@types/node@24.7.0)(@vue/compiler-sfc@3.5.22)(better-sqlite3@12.4.1)(db0@0.3.4(better-sqlite3@12.4.1))(eslint@9.38.0(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vite@7.1.12(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.1))(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vue-tsc@3.1.2(typescript@5.8.3))(vue@3.5.22(typescript@5.8.3))(yaml@2.8.1)':
     dependencies:
       '@nuxt/kit': 4.2.0(magicast@0.3.5)
       '@rollup/plugin-replace': 6.0.2(rollup@4.52.5)
@@ -13071,7 +13076,7 @@ snapshots:
       '@nuxt/nitro-server': 4.2.0(better-sqlite3@12.4.1)(db0@0.3.4(better-sqlite3@12.4.1))(ioredis@5.8.2)(magicast@0.3.5)(nuxt@4.2.0(@parcel/watcher@2.5.1)(@types/node@24.7.0)(@vue/compiler-sfc@3.5.22)(better-sqlite3@12.4.1)(db0@0.3.4(better-sqlite3@12.4.1))(eslint@9.38.0(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vite@7.1.12(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.1))(typescript@5.8.3)
       '@nuxt/schema': 4.2.0
       '@nuxt/telemetry': 2.6.6(magicast@0.3.5)
-      '@nuxt/vite-builder': 4.2.0(@types/node@24.7.0)(eslint@9.38.0(jiti@2.6.1))(lightningcss@1.30.2)(magicast@0.3.5)(meow@13.2.0)(nuxt@4.2.0(@parcel/watcher@2.5.1)(@types/node@24.7.0)(@vue/compiler-sfc@3.5.22)(better-sqlite3@12.4.1)(db0@0.3.4(better-sqlite3@12.4.1))(eslint@9.38.0(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vite@7.1.12(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.1))(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vue-tsc@3.1.2(typescript@5.8.3))(vue@3.5.22(typescript@5.8.3))(yaml@2.8.1)
+      '@nuxt/vite-builder': 4.2.0(patch_hash=dbfb7f37d331cee8de42bac0867af36d698e9207ed6dfd1415b4b243177e569e)(@types/node@24.7.0)(eslint@9.38.0(jiti@2.6.1))(lightningcss@1.30.2)(magicast@0.3.5)(meow@13.2.0)(nuxt@4.2.0(@parcel/watcher@2.5.1)(@types/node@24.7.0)(@vue/compiler-sfc@3.5.22)(better-sqlite3@12.4.1)(db0@0.3.4(better-sqlite3@12.4.1))(eslint@9.38.0(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vite@7.1.12(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.1))(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vue-tsc@3.1.2(typescript@5.8.3))(vue@3.5.22(typescript@5.8.3))(yaml@2.8.1)
       '@unhead/vue': 2.0.19(vue@3.5.22(typescript@5.8.3))
       '@vue/shared': 3.5.22
       c12: 3.3.1(magicast@0.3.5)
