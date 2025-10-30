@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { InputHTMLAttributes, ComponentPublicInstance } from 'vue'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pin-input'
@@ -10,7 +11,7 @@ type PinInput = ComponentConfig<typeof theme, AppConfig, 'pinInput'>
 type PinInputType = 'text' | 'number'
 type PinInputValue<Type extends PinInputType> = [Type] extends ['number'] ? number[] : string[]
 
-export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<PinInputRootProps<T>, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'> {
+export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<PinInputRootProps<T>, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'required' | 'type'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -48,7 +49,6 @@ export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T
 </script>
 
 <script setup lang="ts" generic="T extends PinInputType">
-import type { ComponentPublicInstance } from 'vue'
 import { ref, computed, onMounted } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
@@ -56,6 +56,8 @@ import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<PinInputProps<T>>(), {
   type: 'text' as never,
@@ -130,6 +132,7 @@ defineExpose({
       :index="index"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
+      v-bind="$attrs"
       @blur="onBlur"
       @focus="emitFormFocus"
     />
