@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/footer-columns'
 import type { IconProps, LinkProps } from '../types'
@@ -21,7 +22,7 @@ export interface FooterColumn<T extends FooterColumnLink = FooterColumnLink> {
   children?: T[]
 }
 
-export interface FooterColumnsProps<T extends FooterColumnLink = FooterColumnLink> {
+export interface FooterColumnsProps<T extends FooterColumnLink = FooterColumnLink> extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

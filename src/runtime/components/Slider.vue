@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { SliderRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/slider'
@@ -7,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Slider = ComponentConfig<typeof theme, AppConfig, 'slider'>
 
-export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' | 'inverted' | 'min' | 'max' | 'step' | 'minStepsBetweenThumbs'> {
+export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' | 'inverted' | 'min' | 'max' | 'step' | 'minStepsBetweenThumbs'>, /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

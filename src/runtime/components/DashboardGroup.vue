@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-group'
 import type { UseResizableProps } from '../composables/useResizable'
@@ -6,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type DashboardGroup = ComponentConfig<typeof theme, AppConfig, 'dashboardGroup'>
 
-export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'persistent' | 'unit'> {
+export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'persistent' | 'unit'>, /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

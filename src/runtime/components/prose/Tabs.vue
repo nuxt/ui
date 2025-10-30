@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/tabs'
 import type { TabsProps } from '../../types'
@@ -6,7 +7,7 @@ import type { ComponentConfig } from '../../types/tv'
 
 type ProseTabs = ComponentConfig<typeof theme, AppConfig, 'tabs', 'ui.prose'>
 
-export interface ProseTabsProps {
+export interface ProseTabsProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The default tab to select.
    * @example '1'

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { ContentNavigationItem } from '@nuxt/content'
@@ -31,7 +32,7 @@ export interface ContentNavigationLink extends ContentNavigationItem {
   ui?: Pick<ContentNavigation['slots'], 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkTrailing' | 'linkTrailingIcon' | 'linkTrailingBadge' | 'linkTrailingBadgeSize' | 'linkTrailingIcon' | 'linkTitleExternalIcon' | 'trigger' | 'content' | 'item' | 'itemWithChildren'>
 }
 
-export interface ContentNavigationProps<T extends ContentNavigationLink = ContentNavigationLink> extends Pick<AccordionRootProps, 'disabled' | 'type' | 'unmountOnHide'> {
+export interface ContentNavigationProps<T extends ContentNavigationLink = ContentNavigationLink> extends Pick<AccordionRootProps, 'disabled' | 'type' | 'unmountOnHide'>, /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'

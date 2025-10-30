@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-sidebar'
 import type { UseResizableProps } from '../composables/useResizable'
@@ -10,7 +11,7 @@ type DashboardSidebar = ComponentConfig<typeof theme, AppConfig, 'dashboardSideb
 type DashboardSidebarMode = 'modal' | 'slideover' | 'drawer'
 type DashboardSidebarMenu<T> = T extends 'modal' ? ModalProps : T extends 'slideover' ? SlideoverProps : T extends 'drawer' ? DrawerProps : never
 
-export interface DashboardSidebarProps<T extends DashboardSidebarMode = DashboardSidebarMode> extends Pick<UseResizableProps, 'id' | 'side' | 'minSize' | 'maxSize' | 'defaultSize' | 'resizable' | 'collapsible' | 'collapsedSize'> {
+export interface DashboardSidebarProps<T extends DashboardSidebarMode = DashboardSidebarMode> extends Pick<UseResizableProps, 'id' | 'side' | 'minSize' | 'maxSize' | 'defaultSize' | 'resizable' | 'collapsible' | 'collapsedSize'>, /** @vue-ignore */ HTMLAttributes {
   /**
    * The mode of the sidebar menu.
    * @defaultValue 'modal'

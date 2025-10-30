@@ -154,6 +154,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
 }
 </script>
 
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
   <template v-if="!isExternal && !!to">
     <RouterLink v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive }" v-bind="routerLinkProps" :to="to" custom>

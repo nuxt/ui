@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Ref, WatchOptions } from 'vue'
+import type { Ref, WatchOptions, TableHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Cell, Header, RowData, TableMeta } from '@tanstack/table-core'
 import type {
@@ -82,7 +82,7 @@ export interface TableOptions<T extends TableData = TableData> extends Omit<Core
   renderFallbackValue?: CoreOptions<T>['renderFallbackValue']
 }
 
-export interface TableProps<T extends TableData = TableData> extends TableOptions<T> {
+export interface TableProps<T extends TableData = TableData> extends TableOptions<T>, /** @vue-ignore */ Omit<TableHTMLAttributes, 'onSelect' | 'onContextmenu'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

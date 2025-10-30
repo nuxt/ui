@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-links'
 import type { IconProps, LinkProps } from '../types'
@@ -16,7 +17,7 @@ export interface PageLink extends Omit<LinkProps, 'custom'> {
   ui?: Pick<PageLinks['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeadingIcon'>
 }
 
-export interface PageLinksProps<T extends PageLink = PageLink> {
+export interface PageLinksProps<T extends PageLink = PageLink> extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'

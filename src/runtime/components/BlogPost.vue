@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-post'
 import type { BadgeProps, LinkProps, UserProps } from '../types'
@@ -6,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type BlogPost = ComponentConfig<typeof theme, AppConfig, 'blogPost'>
 
-export interface BlogPostProps {
+export interface BlogPostProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'article'

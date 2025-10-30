@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { ToastProviderProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toaster'
@@ -6,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Toaster = ComponentConfig<typeof theme, AppConfig, 'toaster'>
 
-export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'> {
+export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>, /** @vue-ignore */ HTMLAttributes {
   /**
    * The position on the screen to display the toasts.
    * @defaultValue 'bottom-right'

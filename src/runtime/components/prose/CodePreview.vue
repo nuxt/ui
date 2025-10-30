@@ -1,11 +1,12 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/code-preview'
 
 type ProseCodePreview = ComponentConfig<typeof theme, AppConfig, 'codePreview', 'ui.prose'>
 
-export interface ProseCodePreviewProps {
+export interface ProseCodePreviewProps extends /** @vue-ignore */ HTMLAttributes {
   class?: any
   ui?: ProseCodePreview['slots']
 }

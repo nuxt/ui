@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipContentEmits, TooltipArrowProps, TooltipTriggerProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tooltip'
@@ -8,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Tooltip = ComponentConfig<typeof theme, AppConfig, 'tooltip'>
 
-export interface TooltipProps extends TooltipRootProps {
+export interface TooltipProps extends TooltipRootProps, /** @vue-ignore */ HTMLAttributes {
   /** The text content of the tooltip. */
   text?: string
   /** The keyboard keys to display in the tooltip. */

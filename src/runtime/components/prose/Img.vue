@@ -1,11 +1,12 @@
 <script lang="ts">
+import type { ImgHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/img'
 
 type ProseImg = ComponentConfig<typeof theme, AppConfig, 'img', 'ui.prose'>
 
-export interface ProseImgProps {
+export interface ProseImgProps extends /** @vue-ignore */ ImgHTMLAttributes {
   src: string
   alt: string
   width?: string | number

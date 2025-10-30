@@ -1,11 +1,12 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/icon'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseIcon = ComponentConfig<typeof theme, AppConfig, 'icon', 'ui.prose'>
 
-export interface ProseIconProps {
+export interface ProseIconProps extends /** @vue-ignore */ HTMLAttributes {
   name: string
   class?: any
 }

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes, PropType } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-surround'
@@ -17,7 +18,7 @@ export interface ContentSurroundLink extends ContentNavigationItem {
   ui?: Pick<ContentSurround['slots'], 'link' | 'linkLeading' | 'linkLeadingIcon' | 'linkTitle' | 'linkDescription'>
 }
 
-export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSurroundLink> {
+export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSurroundLink> extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -51,7 +52,6 @@ export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSur
 </script>
 
 <script setup lang="ts" generic="T extends ContentSurroundLink">
-import type { PropType } from 'vue'
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'

@@ -1,11 +1,12 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page'
 import type { ComponentConfig } from '../types/tv'
 
 type Page = ComponentConfig<typeof theme, AppConfig, 'page'>
 
-export interface PageProps {
+export interface PageProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

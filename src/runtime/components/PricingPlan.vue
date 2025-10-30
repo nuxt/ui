@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plan'
 import type { BadgeProps, ButtonProps, IconProps } from '../types'
@@ -15,7 +16,7 @@ type PricingPlanFeature = {
   icon?: IconProps['name']
 }
 
-export interface PricingPlanProps {
+export interface PricingPlanProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

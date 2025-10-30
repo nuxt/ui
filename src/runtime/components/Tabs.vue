@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { HTMLAttributes, ComponentPublicInstance } from 'vue'
 import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tabs'
@@ -31,7 +32,7 @@ export interface TabsItem {
   [key: string]: any
 }
 
-export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode' | 'unmountOnHide'> {
+export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode' | 'unmountOnHide'>, /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -85,7 +86,6 @@ export type TabsSlots<T extends TabsItem = TabsItem> = {
 </script>
 
 <script setup lang="ts" generic="T extends TabsItem">
-import type { ComponentPublicInstance } from 'vue'
 import { ref, computed } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'

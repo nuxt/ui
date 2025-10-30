@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { HTMLAttributes, ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, HTMLAttributes } from 'vue'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pin-input'

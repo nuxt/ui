@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/accordion'
 import type { AccordionProps } from '../../types'
@@ -6,7 +7,7 @@ import type { ComponentConfig } from '../../types/tv'
 
 type ProseAccordion = ComponentConfig<typeof theme, AppConfig, 'accordion', 'ui.prose'>
 
-export interface ProseAccordionProps {
+export interface ProseAccordionProps extends /** @vue-ignore */ HTMLAttributes {
   type?: 'single' | 'multiple'
   class?: any
   ui?: ProseAccordion['slots'] & AccordionProps['ui']

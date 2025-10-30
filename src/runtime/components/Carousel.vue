@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
 import type { AutoplayOptionsType } from 'embla-carousel-autoplay'
@@ -22,7 +23,7 @@ export type CarouselItem = CarouselValue | {
   [key: string]: any
 }
 
-export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
+export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'>, /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

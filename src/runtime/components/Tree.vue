@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { HTMLAttributes, ComponentPublicInstance } from 'vue'
 import type { TreeRootProps, TreeRootEmits, TreeItemSelectEvent, TreeItemToggleEvent } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
@@ -30,7 +31,7 @@ export type TreeItem = {
   [key: string]: any
 }
 
-export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled' | 'bubbleSelect'> {
+export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled' | 'bubbleSelect'>, /** @vue-ignore */ Omit<HTMLAttributes, 'onSelect' | 'onToggle'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'ul'
@@ -141,7 +142,6 @@ export type TreeSlots<
 </script>
 
 <script setup lang="ts" generic="T extends TreeItem[], M extends boolean = false">
-import type { ComponentPublicInstance } from 'vue'
 import { computed, toRef, ref } from 'vue'
 import { TreeRoot, TreeItem, TreeVirtualizer, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'

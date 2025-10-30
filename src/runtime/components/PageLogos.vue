@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-logos'
 import type { MarqueeProps } from '../types'
@@ -11,7 +12,7 @@ type PageLogosItem = {
   alt: string
 } | string
 
-export interface PageLogosProps {
+export interface PageLogosProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

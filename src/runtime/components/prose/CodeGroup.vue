@@ -1,11 +1,12 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/code-group'
 
 type ProseCodeGroup = ComponentConfig<typeof theme, AppConfig, 'codeGroup', 'ui.prose'>
 
-export interface ProseCodeGroupProps {
+export interface ProseCodeGroupProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The default tab to select.
    * @example '1'

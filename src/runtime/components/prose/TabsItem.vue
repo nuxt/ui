@@ -1,11 +1,12 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/tabs-item'
 
 type ProseTabsItem = ComponentConfig<typeof theme, AppConfig, 'tabsItem', 'ui.prose'>
 
-export interface ProseTabsItemProps {
+export interface ProseTabsItemProps extends /** @vue-ignore */ HTMLAttributes {
   label: string
   description?: string
   class?: any

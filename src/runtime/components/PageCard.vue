@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-card'
 import type { IconProps, LinkProps } from '../types'
@@ -6,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type PageCard = ComponentConfig<typeof theme, AppConfig, 'pageCard'>
 
-export interface PageCardProps {
+export interface PageCardProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

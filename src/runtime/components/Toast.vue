@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toast'
@@ -8,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Toast = ComponentConfig<typeof theme, AppConfig, 'toast'>
 
-export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' | 'type' | 'duration'> {
+export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' | 'type' | 'duration'>, /** @vue-ignore */ Omit<HTMLAttributes, 'id' | 'title' | 'onPause' | 'onClick'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'li'

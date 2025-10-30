@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-section'
 import type { ButtonProps, IconProps, PageFeatureProps } from '../types'
@@ -6,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type PageSection = ComponentConfig<typeof theme, AppConfig, 'pageSection'>
 
-export interface PageSectionProps {
+export interface PageSectionProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'section'

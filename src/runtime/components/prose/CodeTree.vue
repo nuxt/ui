@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/code-tree'
 import type { ComponentConfig } from '../../types/tv'
@@ -11,7 +12,7 @@ type TreeNode = {
   children?: TreeNode[]
 }
 
-export interface ProseCodeTreeProps {
+export interface ProseCodeTreeProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The default path to select.
    * @example 'package.json'

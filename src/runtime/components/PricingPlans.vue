@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plans'
 import type { PricingPlanProps, PricingPlanSlots } from '../types'
@@ -7,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type PricingPlans = ComponentConfig<typeof theme, AppConfig, 'pricingPlans'>
 
-export interface PricingPlansProps {
+export interface PricingPlansProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

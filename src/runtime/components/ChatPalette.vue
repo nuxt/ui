@@ -1,11 +1,12 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-palette'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatPalette = ComponentConfig<typeof theme, AppConfig, 'chatPalette'>
 
-export interface ChatPaletteProps {
+export interface ChatPaletteProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

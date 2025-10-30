@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/timeline'
 import type { AvatarProps, IconProps } from '../types'
@@ -21,7 +22,7 @@ export interface TimelineItem {
   [key: string]: any
 }
 
-export interface TimelineProps<T extends TimelineItem = TimelineItem> {
+export interface TimelineProps<T extends TimelineItem = TimelineItem> extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { Ref } from 'vue'
+import type { Ref, HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form-field'
 import type { ComponentConfig } from '../types/tv'
 
 type FormField = ComponentConfig<typeof theme, AppConfig, 'formField'>
 
-export interface FormFieldProps {
+export interface FormFieldProps extends /** @vue-ignore */ Omit<HTMLAttributes, 'name'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

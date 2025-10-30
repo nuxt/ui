@@ -1,11 +1,12 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/accordion-item'
 
 type ProseAccordionItem = ComponentConfig<typeof theme, AppConfig, 'accordionItem', 'ui.prose'>
 
-export interface ProseAccordionItemProps {
+export interface ProseAccordionItemProps extends /** @vue-ignore */ HTMLAttributes {
   label: string
   description?: string
   class?: any

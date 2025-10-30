@@ -655,6 +655,10 @@ class: '!p-0'
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table#attributes" target="_blank"}
+This component also supports all native `<table>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots

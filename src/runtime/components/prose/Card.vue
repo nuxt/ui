@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/card'
 import type { IconProps, LinkProps } from '../../types'
@@ -6,7 +7,7 @@ import type { ComponentConfig } from '../../types/tv'
 
 type ProseCard = ComponentConfig<typeof theme, AppConfig, 'card', 'ui.prose'>
 
-export interface ProseCardProps {
+export interface ProseCardProps extends /** @vue-ignore */ HTMLAttributes {
   to?: LinkProps['to']
   target?: LinkProps['target']
   icon?: IconProps['name']

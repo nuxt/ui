@@ -1,11 +1,12 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-aside'
 import type { ComponentConfig } from '../types/tv'
 
 type PageAside = ComponentConfig<typeof theme, AppConfig, 'pageAside'>
 
-export interface PageAsideProps {
+export interface PageAsideProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'aside'

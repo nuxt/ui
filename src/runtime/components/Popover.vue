@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverContentProps, PopoverContentEmits, PopoverArrowProps, HoverCardTriggerProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/popover'
@@ -8,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 type Popover = ComponentConfig<typeof theme, AppConfig, 'popover'>
 type PopoverMode = 'click' | 'hover'
 
-export interface PopoverProps<M extends PopoverMode = PopoverMode> extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'> {
+export interface PopoverProps<M extends PopoverMode = PopoverMode> extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'>, /** @vue-ignore */ HTMLAttributes {
   /**
    * The display mode of the popover.
    * @defaultValue 'click'

@@ -1,11 +1,12 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/skeleton'
 import type { ComponentConfig } from '../types/tv'
 
 type Skeleton = ComponentConfig<typeof theme, AppConfig, 'skeleton'>
 
-export interface SkeletonProps {
+export interface SkeletonProps extends /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

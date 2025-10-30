@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { SeparatorProps as _SeparatorProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/separator'
@@ -7,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Separator = ComponentConfig<typeof theme, AppConfig, 'separator'>
 
-export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
+export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'>, /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

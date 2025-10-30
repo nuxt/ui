@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-panel'
 import type { UseResizableProps } from '../composables/useResizable'
@@ -6,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type DashboardPanel = ComponentConfig<typeof theme, AppConfig, 'dashboardPanel'>
 
-export interface DashboardPanelProps extends Pick<UseResizableProps, 'id' | 'minSize' | 'maxSize' | 'defaultSize' | 'resizable'> {
+export interface DashboardPanelProps extends Pick<UseResizableProps, 'id' | 'minSize' | 'maxSize' | 'defaultSize' | 'resizable'>, /** @vue-ignore */ HTMLAttributes {
   class?: any
   ui?: DashboardPanel['slots']
 }
