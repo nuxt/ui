@@ -1,5 +1,5 @@
 export default defineAppConfig({
-  dir: 'ltr',
+  dir: 'ltr' as 'ltr' | 'rtl',
   toaster: {
     position: 'bottom-right' as const,
     duration: 5000,
