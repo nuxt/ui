@@ -71,8 +71,9 @@ export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], 
   ui?: RadioGroup['slots']
 }
 
-export type RadioGroupEmits = RadioGroupRootEmits & {
-  change: [event: Event]
+export type RadioGroupEmits<T extends RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> = RadioGroupRootEmits & {
+  'update:modelValue': [payload: GetModelValue<T, VK, false>]
+  'change': [event: Event]
 }
 
 type NormalizeItem<T extends RadioGroupItem> = Exclude<T & { id: string }, RadioGroupValue>
@@ -101,7 +102,7 @@ const props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
   descriptionKey: 'description',
   orientation: 'vertical'
 })
-const emits = defineEmits<RadioGroupEmits>()
+const emits = defineEmits<RadioGroupEmits<T>>()
 const slots = defineSlots<RadioGroupSlots<T>>()
 
 const appConfig = useAppConfig() as RadioGroup['AppConfig']
