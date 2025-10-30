@@ -212,6 +212,9 @@ export default defineNuxtConfig({
       // Simplify ui in slot prop types: `leading(props: { ui: Button['ui'] })` -> `leading(props: { ui: object })`
       code = code.replace(/ui:[^}]+(?=\})/g, 'ui: object')
 
+      // Remove all extends with `/** @vue-ignore */` for HTMLAttributes
+      code = code.replace(/,?\s*\/\*\*\s*@vue-ignore\s*\*\/[^{]*HTMLAttributes[^{]*(?=\{)/g, '')
+
       return { component, code }
     }],
     exclude: [
