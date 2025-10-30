@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { InputHTMLAttributes, ComponentPublicInstance } from 'vue'
+import type { HTMLAttributes, ComponentPublicInstance } from 'vue'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pin-input'
@@ -11,7 +11,7 @@ type PinInput = ComponentConfig<typeof theme, AppConfig, 'pinInput'>
 type PinInputType = 'text' | 'number'
 type PinInputValue<Type extends PinInputType> = [Type] extends ['number'] ? number[] : string[]
 
-export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<PinInputRootProps<T>, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'required' | 'type'> {
+export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<PinInputRootProps<T>, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'>, /** @vue-ignore */ HTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
