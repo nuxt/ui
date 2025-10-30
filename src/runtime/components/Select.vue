@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { ButtonHTMLAttributes } from 'vue'
 import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectContentEmits, SelectArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select'
@@ -10,6 +11,7 @@ import type { ComponentConfig } from '../types/tv'
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>
 
 export type SelectValue = AcceptableValue
+
 export type SelectItem = SelectValue | {
   label?: string
   description?: string
@@ -32,7 +34,7 @@ export type SelectItem = SelectValue | {
   [key: string]: any
 }
 
-export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
+export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'disabled' | 'type' | 'onClick'> {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string

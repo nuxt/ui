@@ -8,6 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 type RadioGroup = ComponentConfig<typeof theme, AppConfig, 'radioGroup'>
 
 export type RadioGroupValue = AcceptableValue
+
 export type RadioGroupItem = RadioGroupValue | {
   label?: string
   description?: string

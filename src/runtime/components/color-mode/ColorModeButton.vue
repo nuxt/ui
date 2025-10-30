@@ -1,7 +1,15 @@
 <script lang="ts">
 import type { ButtonProps } from '../../types'
 
-export interface ColorModeButtonProps extends ButtonProps {
+export interface ColorModeButtonProps extends Omit<ButtonProps, 'color' | 'variant'> {
+  /**
+   * @defaultValue 'neutral'
+   */
+  color?: ButtonProps['color']
+  /**
+   * @defaultValue 'ghost'
+   */
+  variant?: ButtonProps['variant']
 }
 </script>
 

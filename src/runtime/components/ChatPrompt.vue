@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { TextareaHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt'
 import type { TextareaProps, TextareaSlots } from '../types'
@@ -6,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChatPrompt = ComponentConfig<typeof theme, AppConfig, 'chatPrompt'>
 
-export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus' | 'autofocusDelay' | 'autoresize' | 'autoresizeDelay' | 'maxrows' | 'icon' | 'avatar' | 'loading' | 'loadingIcon' | 'disabled'> {
+export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus' | 'autofocusDelay' | 'autoresize' | 'autoresizeDelay' | 'maxrows' | 'icon' | 'avatar' | 'loading' | 'loadingIcon' | 'disabled'>, /** @vue-ignore */ Omit<TextareaHTMLAttributes, 'autofocus' | 'disabled' | 'rows'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'form'

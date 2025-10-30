@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { ButtonHTMLAttributes } from 'vue'
 import type { CheckboxRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox'
@@ -7,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Checkbox = ComponentConfig<typeof theme, AppConfig, 'checkbox'>
 
-export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'> {
+export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'disabled' | 'value'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

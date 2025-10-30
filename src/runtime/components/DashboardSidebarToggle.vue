@@ -6,7 +6,19 @@ import type { ComponentConfig } from '../types/tv'
 
 type DashboardSidebarToggle = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarToggle'>
 
-export interface DashboardSidebarToggleProps extends ButtonProps {
+export interface DashboardSidebarToggleProps extends Omit<ButtonProps, 'color' | 'variant'> {
+  /**
+   * @defaultValue 'neutral'
+   */
+  color?: ButtonProps['color']
+  /**
+   * @defaultValue 'ghost'
+   */
+  variant?: ButtonProps['variant']
+  /**
+   * The side of the sidebar to toggle.
+   * @defaultValue 'left'
+   */
   side?: 'left' | 'right'
 }
 </script>
