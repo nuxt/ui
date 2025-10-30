@@ -2,17 +2,27 @@
 import type { SelectMenuProps } from '../../types'
 import type { Locale } from '../../types/locale'
 
-export interface LocaleSelectProps extends /** @vue-ignore */ Pick<SelectMenuProps<any>, 'color' | 'variant' | 'size' | 'trailingIcon' | 'selectedIcon' | 'content' | 'arrow' | 'portal' | 'disabled' | 'ui'> {
+export interface LocaleSelectProps extends Omit<SelectMenuProps<Locale<any>[], 'code', false>, 'items' | 'modelValue'> {
   locales?: Locale<any>[]
 }
 </script>
 
 <script setup lang="ts">
+import { useForwardProps } from 'reka-ui'
+import { reactiveOmit } from '@vueuse/core'
 import USelectMenu from '../SelectMenu.vue'
 
-defineProps<LocaleSelectProps>()
+defineOptions({ inheritAttrs: false })
 
-const modelValue = defineModel<string>()
+const props = withDefaults(defineProps<LocaleSelectProps>(), {
+  searchInput: false,
+  valueKey: 'code',
+  labelKey: 'name'
+})
+
+const selectMenuProps = useForwardProps(reactiveOmit(props, 'locales'))
+
+const modelValue = defineModel<string>({ required: true })
 
 function getEmojiFlag(locale: string): string {
   const languageToCountry: Record<string, string> = {
@@ -56,9 +66,7 @@ function getEmojiFlag(locale: string): string {
 <template>
   <USelectMenu
     v-model="modelValue"
-    :search-input="false"
-    value-key="code"
-    label-key="name"
+    v-bind="{ ...selectMenuProps, ...$attrs }"
     :items="locales"
   >
     <template #leading>

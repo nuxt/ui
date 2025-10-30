@@ -46,7 +46,7 @@ export type AuthFormField<T extends AuthFormFieldType = AuthFormFieldType>
         : T extends AuthFormInputFieldType ? AuthFormInputField<T>
           : never
 
-export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> extends /** @vue-ignore */ Omit<FormHTMLAttributes, 'onSubmit'> {
+export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> extends /** @vue-ignore */ Omit<FormHTMLAttributes, 'onSubmit' | 'onError'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

@@ -6,29 +6,22 @@ import type { ComponentConfig } from '../types/tv'
 
 type DashboardSidebarToggle = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarToggle'>
 
-export interface DashboardSidebarToggleProps extends /** @vue-ignore */ Pick<ButtonProps, 'as' | 'size' | 'disabled' | 'ui'> {
+export interface DashboardSidebarToggleProps extends ButtonProps {
   side?: 'left' | 'right'
-  /**
-   * @defaultValue 'neutral'
-   */
-  color?: ButtonProps['color']
-  /**
-   * @defaultValue 'ghost'
-   */
-  variant?: ButtonProps['variant']
-  class?: any
 }
 </script>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useForwardProps } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
+import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DashboardSidebarToggleProps>(), {
   color: 'neutral',
@@ -36,7 +29,7 @@ const props = withDefaults(defineProps<DashboardSidebarToggleProps>(), {
   side: 'left'
 })
 
-const rootProps = useForwardProps(reactivePick(props, 'color', 'variant', 'size'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'side'))
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebarToggle['AppConfig']
@@ -47,9 +40,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSid
 
 <template>
   <UButton
-    v-bind="rootProps"
-    :aria-label="sidebarOpen ? t('dashboardSidebarToggle.close') : t('dashboardSidebarToggle.open')"
-    :icon="sidebarOpen ? appConfig.ui.icons.close : appConfig.ui.icons.menu"
+    v-bind="{
+      ...buttonProps,
+      'icon': icon || (sidebarOpen ? appConfig.ui.icons.close : appConfig.ui.icons.menu),
+      'aria-label': sidebarOpen ? t('dashboardSidebarToggle.close') : t('dashboardSidebarToggle.open'),
+      ...$attrs
+    }"
     :class="ui({ class: props.class, side: props.side })"
     @click="toggleSidebar"
   />

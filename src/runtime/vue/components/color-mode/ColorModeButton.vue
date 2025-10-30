@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ButtonProps } from '../../../types'
 
-export interface ColorModeButtonProps extends Omit<ButtonProps, 'icon'> {
+export interface ColorModeButtonProps extends ButtonProps {
 }
 </script>
 
@@ -11,6 +11,8 @@ import { useForwardProps } from 'reka-ui'
 import { useAppConfig, useColorMode } from '#imports'
 import { useLocale } from '../../../composables/useLocale'
 import UButton from '../../../components/Button.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ColorModeButtonProps>(), {
   color: 'neutral',
@@ -35,9 +37,9 @@ const isDark = computed({
 
 <template>
   <UButton
-    :icon="isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light"
     v-bind="{
       ...buttonProps,
+      'icon': icon || (isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light),
       'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
       ...$attrs
     }"

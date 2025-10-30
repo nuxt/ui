@@ -7,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>
 
-export type FormProps<S extends FormSchema, T extends boolean = true, N extends boolean = false> = /** @vue-ignore */ Omit<FormHTMLAttributes, 'onSubmit'> & {
+export type FormProps<S extends FormSchema, T extends boolean = true, N extends boolean = false> = {
   id?: string | number
   /** Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs. */
   schema?: S
@@ -61,7 +61,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
   loadingAuto?: boolean
   class?: any
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>)
-}
+} & /** @vue-ignore */ Omit<FormHTMLAttributes, 'onSubmit' | 'onError'>
 
 export interface FormEmits<S extends FormSchema, T extends boolean = true> {
   submit: [event: FormSubmitEvent<FormData<S, T>>]

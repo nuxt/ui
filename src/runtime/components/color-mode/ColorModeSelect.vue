@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { SelectMenuProps } from '../../types'
+import type { SelectMenuProps, SelectMenuItem } from '../../types'
 
-export interface ColorModeSelectProps extends Omit<SelectMenuProps<any>, 'icon' | 'modelValue'> {
+export interface ColorModeSelectProps extends Omit<SelectMenuProps<SelectMenuItem[]>, 'icon' | 'items' | 'modelValue'> {
 }
 </script>
 

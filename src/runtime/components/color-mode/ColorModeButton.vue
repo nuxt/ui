@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ButtonProps } from '../../types'
 
-export interface ColorModeButtonProps extends Omit<ButtonProps, 'icon'> {
+export interface ColorModeButtonProps extends ButtonProps {
 }
 </script>
 
@@ -41,9 +41,9 @@ const isDark = computed({
 <template>
   <ClientOnly v-if="!colorMode?.forced">
     <UButton
-      :icon="isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light"
       v-bind="{
         ...buttonProps,
+        'icon': icon || (isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light),
         'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
         ...$attrs
       }"
