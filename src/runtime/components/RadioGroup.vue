@@ -102,7 +102,7 @@ const props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
   descriptionKey: 'description',
   orientation: 'vertical'
 })
-const emits = defineEmits<RadioGroupEmits<T>>()
+const emits = defineEmits<RadioGroupEmits<T, VK>>()
 const slots = defineSlots<RadioGroupSlots<T>>()
 
 const appConfig = useAppConfig() as RadioGroup['AppConfig']
