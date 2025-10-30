@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<DashboardSidebarCollapseProps>(), {
   side: 'left'
 })
 
-const buttonProps = useForwardProps(reactiveOmit(props, 'side'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'side', 'class'))
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebarCollapse['AppConfig']

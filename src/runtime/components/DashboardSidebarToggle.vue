@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<DashboardSidebarToggleProps>(), {
   side: 'left'
 })
 
-const buttonProps = useForwardProps(reactiveOmit(props, 'side'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'side', 'class'))
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebarToggle['AppConfig']
