@@ -185,6 +185,10 @@ name: 'form-example-nested-list'
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attributes" target="_blank"}
+This component also supports all native `<form>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots

@@ -757,6 +757,10 @@ export default defineAppConfig({
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+This component also supports all native `<button>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots
