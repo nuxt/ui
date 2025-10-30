@@ -71,10 +71,9 @@ export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], 
   ui?: RadioGroup['slots']
 }
 
-export type RadioGroupEmits<T extends RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> = RadioGroupRootEmits & {
-  'update:modelValue': [payload: GetModelValue<T, VK, false>]
+export type RadioGroupEmits<T extends RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> = Omit<RadioGroupRootEmits, 'update:modelValue'> & {
   'change': [event: Event]
-}
+} & GetModelValueEmits<T, VK, false>
 
 type NormalizeItem<T extends RadioGroupItem> = Exclude<T & { id: string }, RadioGroupValue>
 
