@@ -9,12 +9,12 @@ import type { ComponentConfig } from '../types/tv'
 
 type AuthForm = ComponentConfig<typeof theme, AppConfig, 'authForm'>
 
-type AuthFormCheckboxField = Omit<FormFieldProps, 'name'> & CheckboxProps & {
+type AuthFormCheckboxField = Omit<FormFieldProps, 'name'> & Omit<CheckboxProps, 'type'> & {
   name: string
   type: 'checkbox'
 }
 
-type AuthFormSelectField = Omit<FormFieldProps, 'name'> & SelectMenuProps & {
+type AuthFormSelectField = Omit<FormFieldProps, 'name'> & Omit<SelectMenuProps, 'type'> & {
   name: string
   type: 'select'
 }
@@ -32,7 +32,7 @@ type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type
 
 type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number'
 
-type AuthFormInputField<T extends AuthFormInputFieldType = AuthFormInputFieldType> = Omit<FormFieldProps, 'name'> & InputProps & {
+type AuthFormInputField<T extends AuthFormInputFieldType = AuthFormInputFieldType> = Omit<FormFieldProps, 'name'> & Omit<InputProps, 'type'> & {
   name: string
   type: T
 }
@@ -45,6 +45,8 @@ export type AuthFormField<T extends AuthFormFieldType = AuthFormFieldType>
       : T extends 'otp' ? AuthFormOtpField
         : T extends AuthFormInputFieldType ? AuthFormInputField<T>
           : never
+
+type AuthFormFieldUnion = AuthFormCheckboxField | AuthFormSelectField | AuthFormOtpField | AuthFormInputField<'password'> | AuthFormInputField<'text'> | AuthFormInputField<'email'> | AuthFormInputField<'number'>
 
 export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> extends /** @vue-ignore */ Omit<FormHTMLAttributes, 'onSubmit' | 'onError'> {
   /**
@@ -163,31 +165,26 @@ defineExpose({
   state
 })
 
-function pickFieldProps(field: F) {
-  const fields = ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as (keyof F)[]
+function pickFieldProps(field: AuthFormFieldUnion) {
+  const fields = ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as any
 
   // Prevent binding `label` and `description` on Checkbox's FormField
   if (field.type === 'checkbox') {
     return pick(field, fields)
   }
 
-  return pick(field, [...fields, 'label', 'description'])
+  return pick(field, [...fields, 'label', 'description'] as any)
 }
 
-function omitFieldProps(field: F) {
-  const fields = ['errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as (keyof F)[]
+function omitFieldProps(field: AuthFormFieldUnion) {
+  const fields = ['errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay', 'name', 'label', 'description'] as any
 
   // Prevent binding `type` on other fields than Input
   if (field.type === 'checkbox' || field.type === 'select' || field.type === 'otp') {
-    // Prevent binding `label` and `description` on Checkbox's FormField
-    if (field.type === 'checkbox') {
-      return omit(field, [...fields, 'type'])
-    }
-
-    return omit(field, [...fields, 'type', 'label', 'description'])
+    return omit(field, [...fields, 'type'] as any)
   }
 
-  return omit(field, [...fields, 'label', 'description'])
+  return omit(field, fields)
 }
 </script>
 
@@ -251,38 +248,35 @@ function omitFieldProps(field: F) {
         <UFormField
           v-for="field in fields"
           :key="field.name"
-          v-bind="pickFieldProps(field)"
+          v-bind="pickFieldProps(field as AuthFormFieldUnion)"
         >
           <slot :name="`${field.name}-field`" v-bind="{ state, field }">
             <UCheckbox
-              v-if="field.type === 'checkbox'"
+              v-if="(field as AuthFormFieldUnion).type === 'checkbox'"
               v-model="state[field.name]"
               :class="ui.checkbox({ class: props.ui?.checkbox })"
-              v-bind="(omitFieldProps(field) as AuthFormCheckboxField)"
+              v-bind="(omitFieldProps(field as AuthFormFieldUnion) as any)"
             />
             <USelectMenu
-              v-else-if="field.type === 'select'"
+              v-else-if="(field as AuthFormFieldUnion).type === 'select'"
               v-model="state[field.name]"
               :class="ui.select({ class: props.ui?.select })"
-              v-bind="(omitFieldProps(field) as AuthFormSelectField)"
+              v-bind="(omitFieldProps(field as AuthFormFieldUnion) as AuthFormSelectField)"
             />
             <UPinInput
-              v-else-if="field.type === 'otp'"
+              v-else-if="(field as AuthFormFieldUnion).type === 'otp'"
               :id="field.name"
               v-model="state[field.name]"
               :class="ui.otp({ class: props.ui?.otp })"
-              v-bind="{
-                ...(omitFieldProps(field) as Omit<AuthFormOtpField, 'type'>),
-                ...(typeof field.otp === 'object' ? field.otp : {})
-              }"
+              v-bind="(Object.assign({}, omitFieldProps(field as AuthFormFieldUnion), typeof (field as AuthFormOtpField).otp === 'object' ? (field as AuthFormOtpField).otp : {}) as any)"
               otp
             />
             <UInput
-              v-else-if="field.type === 'password'"
+              v-else-if="(field as AuthFormFieldUnion).type === 'password'"
               ref="passwordRef"
               v-model="state[field.name]"
               :class="ui.password({ class: props.ui?.password })"
-              v-bind="(omitFieldProps(field) as AuthFormInputField<'password'>)"
+              v-bind="(omitFieldProps(field as AuthFormFieldUnion) as AuthFormInputField<'password'>)"
               :type="passwordVisibility ? 'text' : 'password'"
             >
               <template #trailing>
@@ -302,7 +296,7 @@ function omitFieldProps(field: F) {
               v-else
               v-model="state[field.name]"
               :class="ui.input({ class: props.ui?.input })"
-              v-bind="(omitFieldProps(field) as AuthFormInputField)"
+              v-bind="(omitFieldProps(field as AuthFormFieldUnion) as AuthFormInputField)"
             />
           </slot>
 

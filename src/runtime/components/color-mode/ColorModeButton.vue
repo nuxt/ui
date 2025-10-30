@@ -16,6 +16,7 @@ export interface ColorModeButtonProps extends Omit<ButtonProps, 'color' | 'varia
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useForwardProps } from 'reka-ui'
+import { reactiveOmit } from '@vueuse/core'
 import { useColorMode, useAppConfig } from '#imports'
 import { useLocale } from '../../composables/useLocale'
 import UButton from '../Button.vue'
@@ -34,7 +35,7 @@ const { t } = useLocale()
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
 
-const buttonProps = useForwardProps(props)
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon'))
 
 const isDark = computed({
   get() {
