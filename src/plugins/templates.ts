@@ -1,8 +1,8 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import type { UnpluginOptions } from 'unplugin'
 import type { NuxtUIOptions } from '../unplugin'
 import { getTemplates } from '../templates'
-import path from 'node:path'
-import fs from 'node:fs'
 
 /**
  * This plugin is responsible for getting the generated virtual templates and
@@ -24,7 +24,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         fs.mkdirSync(path.dirname(filePath), { recursive: true })
       }
       fs.writeFileSync(filePath, await template.getContents!({} as any))
-      map['#build/' + template.filename] = filePath
+
+      map[`#build/${template.filename}`] = filePath
     }
     return map
   }
@@ -34,9 +35,11 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
     enforce: 'pre',
     vite: {
       async config(config) {
+        const alias = await writeTemplates(config.root || process.cwd())
+
         return {
           resolve: {
-            alias: await writeTemplates(config.root || process.cwd())
+            alias
           }
         }
       }
