@@ -2,7 +2,7 @@
 import type { RadioGroupRootProps, RadioGroupRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/radio-group'
-import type { AcceptableValue, GetItemKeys, GetModelValue } from '../types/utils'
+import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type RadioGroup = ComponentConfig<typeof theme, AppConfig, 'radioGroup'>
@@ -72,7 +72,7 @@ export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], 
 }
 
 export type RadioGroupEmits<T extends RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> = Omit<RadioGroupRootEmits, 'update:modelValue'> & {
-  'change': [event: Event]
+  change: [event: Event]
 } & GetModelValueEmits<T, VK, false>
 
 type NormalizeItem<T extends RadioGroupItem> = Exclude<T & { id: string }, RadioGroupValue>
