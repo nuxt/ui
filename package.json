@@ -77,18 +77,12 @@
       ]
     }
   },
-  "imports": {
-    "#build/ui/*": "./.nuxt/ui/*.ts",
-    "#build/ui.css": "./.nuxt/ui.css"
-  },
   "bin": {
     "nuxt-ui": "./cli/index.mjs"
   },
   "style": "./dist/runtime/index.css",
   "main": "./dist/module.mjs",
   "files": [
-    ".nuxt/ui",
-    ".nuxt/ui.css",
     "dist",
     "cli",
     "vue-plugin.d.ts"
@@ -213,7 +207,6 @@
     "@nuxt/ui": "workspace:*",
     "debug": "4.3.7",
     "typescript": "5.8.3",
-    "unimport": "4.1.1",
     "unplugin": "^2.3.10"
   },
   "keywords": [
