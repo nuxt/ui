@@ -209,7 +209,6 @@
     "@nuxt/ui": "workspace:*",
     "debug": "4.3.7",
     "typescript": "5.8.3",
-    "unimport": "4.1.1",
     "unplugin": "^2.3.10"
   },
   "keywords": [

@@ -22,8 +22,5 @@
   "devDependencies": {
     "typescript": "^5.8.3",
     "vue-tsc": "^3.1.2"
-  },
-  "resolutions": {
-    "unimport": "4.1.1"
   }
 }
