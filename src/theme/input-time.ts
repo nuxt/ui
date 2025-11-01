@@ -5,8 +5,8 @@ import input from './input'
 export default (options: Required<ModuleOptions>) => {
   return defuFn({
     slots: {
-      base: () => ['w-full select-none relative group rounded-md inline-flex items-center focus:outline-none !gap-0', options.theme.transitions && 'transition-colors'],
-      segment: 'focus:bg-muted data-invalid:data-focused:bg-error data-focused:data-placeholder:text-muted data-focused:text-highlighted data-invalid:data-placeholder:text-error data-invalid:text-error data-placeholder:text-muted data-[segment=literal]:text-muted rounded px-1 data-[segment=literal]:px-0 outline-hidden data-disabled:cursor-not-allowed data-disabled:opacity-75 data-invalid:data-focused:text-white data-invalid:data-focused:data-placeholder:text-white'
+      base: () => ['w-full select-none relative group rounded-md inline-flex items-center align-middle focus:outline-none !gap-0', options.theme.transitions && 'transition-colors'],
+      segment: 'focus:bg-muted data-invalid:data-focused:bg-error data-focused:data-placeholder:text-muted data-focused:text-highlighted data-invalid:data-placeholder:text-error data-invalid:text-error data-placeholder:text-muted data-[segment=literal]:text-muted rounded outline-hidden data-disabled:cursor-not-allowed data-disabled:opacity-75 data-invalid:data-focused:text-white data-invalid:data-focused:data-placeholder:text-white text-center'
     },
     variants: {
       variant: {
@@ -15,6 +15,23 @@ export default (options: Required<ModuleOptions>) => {
         subtle: 'text-highlighted bg-elevated ring ring-inset ring-accented',
         ghost: 'text-highlighted bg-transparent hover:bg-elevated focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent',
         none: 'text-highlighted bg-transparent'
+      },
+      size: {
+        xs: {
+          segment: 'w-7'
+        },
+        sm: {
+          segment: 'w-7'
+        },
+        md: {
+          segment: 'w-8'
+        },
+        lg: {
+          segment: 'w-8'
+        },
+        xl: {
+          segment: 'w-9'
+        }
       }
     },
     compoundVariants: [...(options.theme.colors || []).map((color: string) => ({

@@ -140,12 +140,12 @@ defineExpose({
     >
       <TimeFieldInput
         v-for="(segment, index) in segments"
-        :key="segment.part"
+        :key="`${segment.part}-${index}`"
         :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
         :part="segment.part"
-        :class="ui.segment({ class: props.ui?.segment })"
+        :class="segment.part !== 'literal' ? ui.segment({ class: props.ui?.segment }) : ''"
       >
-        {{ segment.value }}
+        {{ segment.value.trim() }}
       </TimeFieldInput>
 
       <slot :ui="ui" />
