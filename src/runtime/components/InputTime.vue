@@ -146,7 +146,6 @@ defineExpose({
         :class="segment.part !== 'literal' ? ui.segment({ class: props.ui?.segment }) : ''"
       >
         {{ segment.value.trim() }}
-        {{ console.log(segment) }}
       </TimeFieldInput>
 
       <slot :ui="ui" />
