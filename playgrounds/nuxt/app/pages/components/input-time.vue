@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Time } from '@internationalized/date'
-import theme from '#build/ui/input-number'
+import theme from '#build/ui/input-time'
 
 const colors = Object.keys(theme.variants.color)
 const sizes = Object.keys(theme.variants.size)
