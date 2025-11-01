@@ -43,7 +43,7 @@ export interface InputProps<T extends InputValue = InputValue> extends UseCompon
   highlight?: boolean
   modelValue?: T
   defaultValue?: T
-  modelModifiers?: ModelModifiers
+  modelModifiers?: ModelModifiers<T>
   class?: any
   ui?: Input['slots']
 }
