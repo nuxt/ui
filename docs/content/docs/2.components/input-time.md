@@ -48,20 +48,16 @@ props:
 This component relies on the [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/index.html) package which provides objects and functions for representing and manipulating dates and times in a locale-aware manner.
 ::
 
-### Placeholder
+### Hour Cycle
 
-Use the `placeholder` prop to set a placeholder text.
+Use the `hourCycle` prop to change the hour cycle of the InputTime.
 
 ::component-code
 ---
-cast:
-  placeholder: TimeValue
 ignore:
-  - placeholder
-external:
-  - placeholder
+  - hourCycle
 props:
-  placeholder: [12, 30, 0]
+  hourCycle: 24
 ---
 ::
 
@@ -146,17 +142,6 @@ Use the `disabled` prop to disable the InputTime.
 ---
 props:
   disabled: true
----
-::
-
-### Hide Time Zone
-
-Use the `hideTimeZone` prop to hide the time zone of the InputTime.
-
-::component-code
----
-props:
-  hideTimeZone: true
 ---
 ::
 
