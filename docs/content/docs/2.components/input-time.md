@@ -54,10 +54,16 @@ Use the `hourCycle` prop to change the hour cycle of the InputTime.
 
 ::component-code
 ---
+cast:
+  defaultValue: TimeValue
 ignore:
   - hourCycle
+  - defaultValue
+external:
+  - defaultValue
 props:
   hourCycle: 24
+  defaultValue: [16, 30, 0]
 ---
 ::
 
