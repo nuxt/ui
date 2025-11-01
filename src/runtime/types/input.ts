@@ -1,4 +1,4 @@
-export interface ModelModifiers<T> {
+export interface ModelModifiers<T = any> {
   string?: boolean
   number?: boolean
   trim?: T extends string ? boolean : never
