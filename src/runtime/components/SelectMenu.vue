@@ -226,7 +226,7 @@ const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
-  const hasDescriptions = items.value.some(item =>
+  const hasDescriptions = filteredItems.value.some(item =>
     isSelectItem(item) && (get(item, props.descriptionKey as string) || !!slots['item-description'])
   )
 
