@@ -72,6 +72,11 @@ export interface FileUploadProps<M extends boolean = false> {
    * @defaultValue true
    */
   interactive?: boolean
+  /**
+   * Skip preview and directly emit update event.
+   * @defaultValue false
+   */
+  directUpdate?: boolean
   required?: boolean
   disabled?: boolean
   /**
@@ -144,6 +149,7 @@ const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   dropzone: true,
   interactive: true,
   fileDelete: true,
+  directUpdate: false,
   layout: 'grid',
   position: 'outside'
 })
@@ -213,6 +219,14 @@ function formatFileSize(bytes: number): string {
 }
 
 function onUpdate(files: File[], reset = false) {
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
+  let event = new Event('change', { target: { value: files } })
+
+  if (props.directUpdate) {
+    emits('change', event)
+    return
+  }
+
   if (props.multiple) {
     if (reset) {
       modelValue.value = files as (M extends true ? File[] : File) | null
@@ -225,7 +239,7 @@ function onUpdate(files: File[], reset = false) {
   }
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
-  const event = new Event('change', { target: { value: modelValue.value } })
+  event = new Event('change', { target: { value: modelValue.value } })
   emits('change', event)
   emitFormChange()
   emitFormInput()
