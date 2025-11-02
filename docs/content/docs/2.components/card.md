@@ -24,6 +24,10 @@ props:
 
 Use the `variant` prop to change the variant of the Card.
 
+### Size
+
+Use the `size` prop to change the size of the Card.
+
 ::component-code
 ---
 prettier: true
