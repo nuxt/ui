@@ -14,7 +14,7 @@ describe('Card', () => {
     // Props
     ['with as', { props: { as: 'section' } }],
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
-    ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with class', { props: { class: 'rounded-xl' } }],
     ['with ui', { props: { ui: { body: 'font-bold' } } }],
     // Slots
