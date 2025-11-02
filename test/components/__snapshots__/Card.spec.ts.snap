@@ -40,6 +40,46 @@ exports[`Card > renders with header slot correctly 1`] = `
 </div>"
 `;
 
+exports[`Card > renders with size lg correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with size md correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with size sm correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with size xl correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with size xs correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Card > renders with ui correctly 1`] = `
 "<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
