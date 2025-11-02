@@ -16,6 +16,10 @@ export interface CardProps {
    */
   variant?: Card['variants']['variant']
   class?: any
+  /**
+   * @defaultValue 'md'
+   */
+  size?: Card['variants']['size']
   ui?: Card['slots']
 }
 
@@ -38,7 +42,8 @@ const slots = defineSlots<CardSlots>()
 const appConfig = useAppConfig() as Card['AppConfig']
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.card || {}) })({
-  variant: props.variant
+  variant: props.variant,
+  size: props.size
 }))
 </script>
 
