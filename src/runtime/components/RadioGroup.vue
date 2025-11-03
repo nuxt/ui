@@ -90,7 +90,6 @@ export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> 
 import { computed } from 'vue'
 import { RadioGroupRoot, RadioGroupItem as RRadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useCustomControl } from '@formwerk/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
@@ -109,10 +108,9 @@ const appConfig = useAppConfig() as RadioGroup['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'loop', 'required'), emits)
 
-const { emitFormChange, emitFormInput, color, name, size, disabled } = useFormField<RadioGroupProps<T>>(props, { bind: false })
-const { controlProps, controlId } = useCustomControl({
-  name,
-  disabled,
+const { color, name, size, isDisabled, controlId, controlProps } = useFormField<RadioGroupProps<T>>(props, {
+  name: props.name,
+  disabled: props.disabled,
   required: props.required,
   controlType: 'URadioGroup'
 })
@@ -120,7 +118,7 @@ const { controlProps, controlId } = useCustomControl({
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.radioGroup || {}) })({
   size: size.value,
   color: color.value,
-  disabled: disabled.value,
+  disabled: isDisabled.value,
   required: props.required,
   orientation: props.orientation,
   variant: props.variant,
@@ -169,8 +167,6 @@ function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
-  emitFormChange()
-  emitFormInput()
 }
 </script>
 

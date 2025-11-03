@@ -62,7 +62,6 @@ export interface CheckboxSlots {
 import { computed } from 'vue'
 import { Primitive, CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useCustomControl } from '@formwerk/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
@@ -80,10 +79,9 @@ const appConfig = useAppConfig() as Checkbox['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
 
-const { emitFormChange, emitFormInput, size, color, name, disabled } = useFormField<CheckboxProps>(props)
-const { controlId, controlProps, field: { isDisabled } } = useCustomControl<boolean>({
-  name,
-  disabled,
+const { color, size, isDisabled, controlProps, controlId } = useFormField<CheckboxProps>(props, {
+  name: props.name,
+  disabled: props.disabled,
   required: props.required,
   controlType: 'UCheckbox'
 })
@@ -94,22 +92,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.checkbox || 
   variant: props.variant,
   indicator: props.indicator,
   required: props.required,
-  disabled: disabled.value
+  disabled: isDisabled.value
 }))
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
-  emitFormChange()
-  emitFormInput()
 }
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <Primitive :as="(!variant || variant === 'list') ? as : Label" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <pre>{{ name }}</pre>
     <div :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         v-bind="{ ...rootProps, ...$attrs, ...controlProps }"

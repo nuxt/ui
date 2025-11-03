@@ -65,7 +65,6 @@ export interface InputSlots {
 import { ref, computed, onMounted } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
-import { useCustomControl } from '@formwerk/core'
 import { useAppConfig } from '#imports'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
@@ -89,13 +88,13 @@ const modelValue = useVModel<InputProps<T>, 'modelValue', 'update:modelValue'>(p
 
 const appConfig = useAppConfig() as Input['AppConfig']
 
-const { size: formGroupSize, color, name, highlight, disabled, emitFormDirty, emitFormTouched, emitFormBlur } = useFormField<InputProps<T>>(props, { deferInputValidation: true })
-const { controlProps, field: { isDisabled, setBlurred, setTouched, setValue } } = useCustomControl({
-  name,
-  disabled,
+const { size: formGroupSize, color, highlight, isDisabled, controlProps, setValue, setTouched, setBlurred } = useFormField<InputProps<T>>(props, {
+  name: props.name,
+  disabled: props.disabled,
   required: props.required,
   controlType: 'UInput'
 })
+
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps<T>>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
@@ -136,8 +135,6 @@ function updateInput(value: string | null | undefined) {
   modelValue.value = value as T
   setValue(value)
   setTouched(true)
-  emitFormDirty()
-  emitFormTouched()
 }
 
 function onInput(event: Event) {
@@ -166,8 +163,6 @@ function onBlur(event: FocusEvent) {
 
   setTouched(true)
   setBlurred(true)
-  emitFormBlur()
-  emitFormTouched()
 }
 
 function autoFocus() {

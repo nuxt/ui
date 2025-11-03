@@ -126,7 +126,6 @@ export interface FileUploadSlots<M extends boolean = false> {
 import { computed, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useCustomControl } from '@formwerk/core'
 import { useAppConfig, useLocale } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { useFileUpload } from '../composables/useFileUpload'
@@ -164,10 +163,9 @@ const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   dropzone: props.dropzone,
   onUpdate
 })
-const { emitFormInput, emitFormChange, size: formFieldSize, highlight, color, name, disabled } = useFormField<FileUploadProps>(props)
-const { controlProps } = useCustomControl<File[] | File>({
-  name,
-  disabled,
+const { size: formFieldSize, highlight, color, name, isDisabled, controlProps } = useFormField<FileUploadProps>(props, {
+  name: props.name,
+  disabled: props.disabled,
   required: props.required,
   controlType: 'UFileUpload'
 })
@@ -195,7 +193,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload |
   position: position.value,
   multiple: props.multiple,
   highlight: highlight.value,
-  disabled: disabled.value
+  disabled: isDisabled.value
 }))
 
 function createObjectUrl(file: File): string {
@@ -232,8 +230,6 @@ function onUpdate(files: File[], reset = false) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value: modelValue.value } })
   emits('change', event)
-  emitFormChange()
-  emitFormInput()
 }
 
 function removeFile(index?: number) {
