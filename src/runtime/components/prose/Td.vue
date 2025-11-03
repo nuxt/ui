@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { TdHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/td'
 
 type ProseTd = ComponentConfig<typeof theme, AppConfig, 'td', 'ui.prose'>
 
-export interface ProseTdProps extends /** @vue-ignore */ TdHTMLAttributes {
+export interface ProseTdProps {
   class?: any
 }
 

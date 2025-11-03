@@ -57,8 +57,6 @@ import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
 
-defineOptions({ inheritAttrs: false })
-
 const props = withDefaults(defineProps<PinInputProps<T>>(), {
   type: 'text' as never,
   length: 5,
@@ -132,7 +130,6 @@ defineExpose({
       :index="index"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
-      v-bind="$attrs"
       @blur="onBlur"
       @focus="emitFormFocus"
     />

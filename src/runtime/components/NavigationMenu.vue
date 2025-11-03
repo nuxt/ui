@@ -9,8 +9,9 @@ import type { ComponentConfig } from '../types/tv'
 
 type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>
 
-export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'type' | 'children'> {
-  slot?: string
+export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'type' | 'ui'> {
+  /** Description is only used when `orientation` is `horizontal`. */
+  description?: string
   [key: string]: any
 }
 

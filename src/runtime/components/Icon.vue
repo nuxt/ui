@@ -1,5 +1,4 @@
 <script lang="ts">
-
 export interface IconProps {
   name: string | object
   mode?: 'svg' | 'css'

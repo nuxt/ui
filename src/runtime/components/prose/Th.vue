@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { ThHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/th'
 
 type ProseTh = ComponentConfig<typeof theme, AppConfig, 'th', 'ui.prose'>
 
-export interface ProseThProps extends /** @vue-ignore */ ThHTMLAttributes {
+export interface ProseThProps {
   class?: any
 }
 
