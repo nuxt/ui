@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-header'
 import type { ButtonProps } from '../types'
@@ -7,7 +6,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type PageHeader = ComponentConfig<typeof theme, AppConfig, 'pageHeader'>
 
-export interface PageHeaderProps extends /** @vue-ignore */ HTMLAttributes {
+export interface PageHeaderProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

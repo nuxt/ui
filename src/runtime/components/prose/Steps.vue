@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/steps'
 
 type ProseSteps = ComponentConfig<typeof theme, AppConfig, 'steps', 'ui.prose'>
 
-export interface ProseStepsProps extends /** @vue-ignore */ HTMLAttributes {
+export interface ProseStepsProps {
   /**
    * The heading level to apply to the steps.
    * @defaultValue '3'

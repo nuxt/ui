@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/callout'
 import type { IconProps, LinkProps } from '../../types'
@@ -7,7 +6,7 @@ import type { ComponentConfig } from '../../types/tv'
 
 type ProseCallout = ComponentConfig<typeof theme, AppConfig, 'callout', 'ui.prose'>
 
-export interface ProseCalloutProps extends /** @vue-ignore */ HTMLAttributes {
+export interface ProseCalloutProps {
   to?: LinkProps['to']
   target?: LinkProps['target']
   icon?: IconProps['name']

@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-resize-handle'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardResizeHandle = ComponentConfig<typeof theme, AppConfig, 'dashboardResizeHandle'>
 
-export interface DashboardResizeHandleProps extends /** @vue-ignore */ HTMLAttributes {
+export interface DashboardResizeHandleProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

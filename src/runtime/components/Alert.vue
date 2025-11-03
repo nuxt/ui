@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/alert'
 import type { AvatarProps, ButtonProps, IconProps } from '../types'
@@ -7,7 +6,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Alert = ComponentConfig<typeof theme, AppConfig, 'alert'>
 
-export interface AlertProps extends /** @vue-ignore */ HTMLAttributes {
+export interface AlertProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

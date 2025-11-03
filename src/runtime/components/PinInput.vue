@@ -11,7 +11,7 @@ type PinInput = ComponentConfig<typeof theme, AppConfig, 'pinInput'>
 type PinInputType = 'text' | 'number'
 type PinInputValue<Type extends PinInputType> = [Type] extends ['number'] ? number[] : string[]
 
-export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<PinInputRootProps<T>, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'>, /** @vue-ignore */ HTMLAttributes {
+export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<PinInputRootProps<T>, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

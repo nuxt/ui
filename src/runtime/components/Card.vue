@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/card'
 import type { ComponentConfig } from '../types/tv'
 
 type Card = ComponentConfig<typeof theme, AppConfig, 'card'>
 
-export interface CardProps extends /** @vue-ignore */ HTMLAttributes {
+export interface CardProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

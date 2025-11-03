@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/blockquote'
 
 type ProseBlockquote = ComponentConfig<typeof theme, AppConfig, 'blockquote', 'ui.prose'>
 
-export interface ProseBlockquoteProps extends /** @vue-ignore */ HTMLAttributes {
+export interface ProseBlockquoteProps {
   class?: any
 }
 

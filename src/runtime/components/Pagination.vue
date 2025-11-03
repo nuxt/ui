@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { PaginationRootProps, PaginationRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pagination'
@@ -8,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Pagination = ComponentConfig<typeof theme, AppConfig, 'pagination'>
 
-export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'>>, /** @vue-ignore */ HTMLAttributes {
+export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'>> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

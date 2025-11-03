@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-navbar'
 import type { DashboardContext } from '../utils/dashboard'
@@ -8,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type DashboardNavbar = ComponentConfig<typeof theme, AppConfig, 'dashboardNavbar'>
 
-export interface DashboardNavbarProps extends /** @vue-ignore */ HTMLAttributes {
+export interface DashboardNavbarProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

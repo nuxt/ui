@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/slideover'
@@ -9,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Slideover = ComponentConfig<typeof theme, AppConfig, 'slideover'>
 
-export interface SlideoverProps extends DialogRootProps, /** @vue-ignore */ HTMLAttributes {
+export interface SlideoverProps extends DialogRootProps {
   title?: string
   description?: string
   /** The content of the slideover. */

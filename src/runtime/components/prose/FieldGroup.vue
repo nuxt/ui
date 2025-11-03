@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/field-group'
 
 type ProseFieldGroup = ComponentConfig<typeof theme, AppConfig, 'fieldGroup', 'ui.prose'>
 
-export interface ProseFieldGroupProps extends /** @vue-ignore */ HTMLAttributes {
+export interface ProseFieldGroupProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

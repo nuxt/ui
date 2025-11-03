@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-anchors'
 import type { IconProps } from '../types'
@@ -18,7 +17,7 @@ export interface PageAnchor extends Link {
   ui?: Pick<PageAnchors['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeading' | 'linkLeadingIcon'>
 }
 
-export interface PageAnchorsProps<T extends PageAnchor = PageAnchor> extends /** @vue-ignore */ HTMLAttributes {
+export interface PageAnchorsProps<T extends PageAnchor = PageAnchor> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'

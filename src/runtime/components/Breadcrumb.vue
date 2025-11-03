@@ -1,6 +1,5 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/breadcrumb'
 import type { AvatarProps, IconProps } from '../types'
@@ -23,7 +22,7 @@ export interface BreadcrumbItem extends Link {
   [key: string]: any
 }
 
-export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> extends /** @vue-ignore */ HTMLAttributes {
+export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'

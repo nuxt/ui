@@ -1,7 +1,6 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 
-export interface IconProps extends /** @vue-ignore */ HTMLAttributes {
+export interface IconProps {
   name: string | object
   mode?: 'svg' | 'css'
   size?: string | number

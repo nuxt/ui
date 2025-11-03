@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/modal'
@@ -9,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>
 
-export interface ModalProps extends DialogRootProps, /** @vue-ignore */ HTMLAttributes {
+export interface ModalProps extends DialogRootProps {
   title?: string
   description?: string
   /** The content of the modal. */

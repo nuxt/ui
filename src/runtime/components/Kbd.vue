@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/kbd'
 import type { KbdKey } from '../composables/useKbd'
@@ -7,7 +6,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Kbd = ComponentConfig<typeof theme, AppConfig, 'kbd'>
 
-export interface KbdProps extends /** @vue-ignore */ HTMLAttributes {
+export interface KbdProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'kbd'

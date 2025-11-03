@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { NuxtError } from '#app'
 import theme from '#build/ui/error'
@@ -8,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Error = ComponentConfig<typeof theme, AppConfig, 'error'>
 
-export interface ErrorProps extends /** @vue-ignore */ HTMLAttributes {
+export interface ErrorProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

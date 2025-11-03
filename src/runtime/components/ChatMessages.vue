@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
 
-export interface ChatMessagesProps extends /** @vue-ignore */ HTMLAttributes {
+export interface ChatMessagesProps {
   messages?: UIMessage[]
   status?: ChatStatus
   /**

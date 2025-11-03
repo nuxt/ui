@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/header'
 import type { ButtonProps, DrawerProps, ModalProps, SlideoverProps } from '../types'
@@ -10,7 +9,7 @@ type Header = ComponentConfig<typeof theme, AppConfig, 'header'>
 type HeaderMode = 'modal' | 'slideover' | 'drawer'
 type HeaderMenu<T> = T extends 'modal' ? ModalProps : T extends 'slideover' ? SlideoverProps : T extends 'drawer' ? DrawerProps : never
 
-export interface HeaderProps<T extends HeaderMode = HeaderMode> extends /** @vue-ignore */ HTMLAttributes {
+export interface HeaderProps<T extends HeaderMode = HeaderMode> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'header'

@@ -1,6 +1,5 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-posts'
 import type { BlogPostProps, BlogPostSlots } from '../types'
@@ -8,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type BlogPosts = ComponentConfig<typeof theme, AppConfig, 'blogPosts'>
 
-export interface BlogPostsProps<T extends BlogPostProps = BlogPostProps> extends /** @vue-ignore */ HTMLAttributes {
+export interface BlogPostsProps<T extends BlogPostProps = BlogPostProps> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

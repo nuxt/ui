@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/h1'
 
 type ProseH1 = ComponentConfig<typeof theme, AppConfig, 'h1', 'ui.prose'>
 
-export interface ProseH1Props extends /** @vue-ignore */ HTMLAttributes {
+export interface ProseH1Props {
   id?: string
   class?: any
   ui?: ProseH1['slots']

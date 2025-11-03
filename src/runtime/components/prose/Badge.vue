@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/badge'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseBadge = ComponentConfig<typeof theme, AppConfig, 'badge', 'ui.prose'>
 
-export interface ProseBadgeProps extends /** @vue-ignore */ HTMLAttributes {
+export interface ProseBadgeProps {
   class?: any
 }
 

@@ -1,6 +1,5 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { ProgressRootProps, ProgressRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/progress'
@@ -8,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Progress = ComponentConfig<typeof theme, AppConfig, 'progress'>
 
-export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' | 'getValueText' | 'modelValue'>, /** @vue-ignore */ HTMLAttributes {
+export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' | 'getValueText' | 'modelValue'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

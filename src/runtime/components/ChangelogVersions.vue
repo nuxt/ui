@@ -1,6 +1,5 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { SpringOptions } from 'motion-v'
 import theme from '#build/ui/changelog-versions'
@@ -9,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChangelogVersions = ComponentConfig<typeof theme, AppConfig, 'changelogVersions'>
 
-export interface ChangelogVersionsProps<T extends ChangelogVersionProps = ChangelogVersionProps> extends /** @vue-ignore */ HTMLAttributes {
+export interface ChangelogVersionsProps<T extends ChangelogVersionProps = ChangelogVersionProps> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

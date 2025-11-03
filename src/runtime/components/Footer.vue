@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../types/tv'
 import theme from '#build/ui/footer'
 
 type Footer = ComponentConfig<typeof theme, AppConfig, 'footer'>
 
-export interface FooterProps extends /** @vue-ignore */ HTMLAttributes {
+export interface FooterProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'footer'

@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-feature'
 import type { IconProps, LinkProps } from '../types'
@@ -7,7 +6,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type PageFeature = ComponentConfig<typeof theme, AppConfig, 'pageFeature'>
 
-export interface PageFeatureProps extends /** @vue-ignore */ HTMLAttributes {
+export interface PageFeatureProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

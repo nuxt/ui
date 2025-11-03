@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
 import type { TocLink } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
@@ -14,7 +13,7 @@ export type ContentTocLink = TocLink & {
   ui?: Pick<ContentToc['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkText'>
 }
 
-export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open'>, /** @vue-ignore */ HTMLAttributes {
+export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'

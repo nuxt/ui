@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/main'
 import type { ComponentConfig } from '../types/tv'
 
 type Main = ComponentConfig<typeof theme, AppConfig, 'main'>
 
-export interface MainProps extends /** @vue-ignore */ HTMLAttributes {
+export interface MainProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

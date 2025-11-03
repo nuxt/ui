@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar-group'
 import type { ComponentConfig } from '../types/tv'
 
 type AvatarGroup = ComponentConfig<typeof theme, AppConfig, 'avatarGroup'>
 
-export interface AvatarGroupProps extends /** @vue-ignore */ HTMLAttributes {
+export interface AvatarGroupProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

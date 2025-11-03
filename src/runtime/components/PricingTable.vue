@@ -1,6 +1,5 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-table'
 import type { PricingPlanProps } from '../types'
@@ -54,7 +53,7 @@ export interface PricingTableSection<T extends PricingTableTier = PricingTableTi
   features: PricingTableSectionFeature<T>[]
 }
 
-export interface PricingTableProps<T extends PricingTableTier = PricingTableTier> extends /** @vue-ignore */ HTMLAttributes {
+export interface PricingTableProps<T extends PricingTableTier = PricingTableTier> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

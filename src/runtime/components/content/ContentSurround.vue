@@ -18,7 +18,7 @@ export interface ContentSurroundLink extends ContentNavigationItem {
   ui?: Pick<ContentSurround['slots'], 'link' | 'linkLeading' | 'linkLeadingIcon' | 'linkTitle' | 'linkDescription'>
 }
 
-export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSurroundLink> extends /** @vue-ignore */ HTMLAttributes {
+export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSurroundLink> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

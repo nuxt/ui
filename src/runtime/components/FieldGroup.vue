@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/field-group'
 import type { ComponentConfig } from '../types/tv'
 
 type FieldGroup = ComponentConfig<typeof theme, AppConfig, 'fieldGroup'>
 
-export interface FieldGroupProps extends /** @vue-ignore */ HTMLAttributes {
+export interface FieldGroupProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

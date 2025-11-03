@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/collapsible'
 import type { IconProps, CollapsibleProps } from '../../types'
@@ -7,7 +6,7 @@ import type { ComponentConfig } from '../../types/tv'
 
 type ProseCollapsible = ComponentConfig<typeof theme, AppConfig, 'collapsible', 'ui.prose'>
 
-export interface ProseCollapsibleProps extends /** @vue-ignore */ HTMLAttributes {
+export interface ProseCollapsibleProps {
   /**
    * The icon displayed to toggle the collapsible.
    * @defaultValue appConfig.ui.icons.chevronDown

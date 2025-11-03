@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/marquee'
 import type { ComponentConfig } from '../types/tv'
 
 type Marquee = ComponentConfig<typeof theme, AppConfig, 'marquee'>
 
-export interface MarqueeProps extends /** @vue-ignore */ HTMLAttributes {
+export interface MarqueeProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

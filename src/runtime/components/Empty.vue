@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/empty'
 import type { ComponentConfig } from '../types/tv'
@@ -7,7 +6,7 @@ import type { ButtonProps, IconProps, AvatarProps } from '../types'
 
 type Empty = ComponentConfig<typeof theme, AppConfig, 'empty'>
 
-export interface EmptyProps extends /** @vue-ignore */ HTMLAttributes {
+export interface EmptyProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

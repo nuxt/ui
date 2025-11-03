@@ -1,6 +1,5 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/stepper'
@@ -26,7 +25,7 @@ export interface StepperItem {
   [key: string]: any
 }
 
-export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<StepperRootProps, 'linear'>, /** @vue-ignore */ HTMLAttributes {
+export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<StepperRootProps, 'linear'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
