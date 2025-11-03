@@ -345,7 +345,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               variant="soft"
               class="rounded-sm rounded-l-none min-w-12"
               :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
-              :ui="{ itemLeadingChip: 'size-2' }"
+              :ui="{ itemLeadingChip: 'w-2' }"
               @update:model-value="setComponentProp(option.name, $event)"
             >
               <template v-if="option.name.toLowerCase().endsWith('color')" #leading="{ modelValue, ui }">
