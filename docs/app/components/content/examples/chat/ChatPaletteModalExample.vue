@@ -10,15 +10,15 @@ const chat = new Chat({
   messages
 })
 
-function handleSubmit(e: Event) {
-  e.preventDefault()
+function onSubmit() {
   chat.sendMessage({ text: input.value })
+
   input.value = ''
 }
 </script>
 
 <template>
-  <UModal open :ui="{ content: 'sm:h-[28rem]' }">
+  <UModal open :ui="{ content: 'sm:max-w-3xl sm:h-[28rem]' }">
     <template #content>
       <UChatPalette>
         <UChatMessages
@@ -28,7 +28,11 @@ function handleSubmit(e: Event) {
           :assistant="{ icon: 'i-lucide-bot' }"
         >
           <template #content="{ message }">
-            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
+            <MDC
+              :value="getTextFromMessage(message)"
+              :cache-key="message.id"
+              class="[&_.my-5]:my-2.5 *:first:!mt-0 *:last:!mb-0 [&_.leading-7]:!leading-6"
+            />
           </template>
         </UChatMessages>
 
@@ -38,7 +42,7 @@ function handleSubmit(e: Event) {
             icon="i-lucide-search"
             variant="naked"
             :error="chat.error"
-            @submit="handleSubmit"
+            @submit="onSubmit"
           />
         </template>
       </UChatPalette>

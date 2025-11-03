@@ -248,6 +248,16 @@ name: 'input-number-currency-example'
 ---
 ::
 
+### Without buttons
+
+You can use the `increment` and `decrement` props to control visibility of the buttons.
+
+::component-example
+---
+name: 'input-number-without-buttons-example'
+---
+::
+
 ### Within a FormField
 
 You can use the InputNumber within a [FormField](/docs/components/form-field) component to display a label, help text, required indicator, etc.

@@ -30,7 +30,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * Configure the increment button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  increment?: ButtonProps
+  increment?: boolean | ButtonProps
   /**
    * The icon displayed to increment the value.
    * @defaultValue appConfig.ui.icons.plus
@@ -43,7 +43,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * Configure the decrement button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  decrement?: ButtonProps
+  decrement?: boolean | ButtonProps
   /**
    * The icon displayed to decrement the value.
    * @defaultValue appConfig.ui.icons.minus
@@ -91,8 +91,8 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
   orientation: 'horizontal',
-  disabledIncrement: false,
-  disabledDecrement: false
+  increment: true,
+  decrement: true
 })
 const emits = defineEmits<InputNumberEmits>()
 defineSlots<InputNumberSlots>()
@@ -116,7 +116,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber 
   size: inputSize.value,
   highlight: highlight.value,
   orientation: props.orientation,
-  fieldGroup: orientation.value
+  fieldGroup: orientation.value,
+  increment: props.orientation === 'vertical' ? (!!props.increment || !!props.decrement) : !!props.increment,
+  decrement: props.orientation === 'vertical' ? false : !!props.decrement
 }))
 
 const incrementIcon = computed(() => props.incrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.plus : appConfig.ui.icons.chevronUp))
@@ -180,7 +182,7 @@ defineExpose({
       @focus="emitFormFocus"
     />
 
-    <div :class="ui.increment({ class: props.ui?.increment })">
+    <div v-if="!!increment" :class="ui.increment({ class: props.ui?.increment })">
       <NumberFieldIncrement as-child :disabled="disabled || incrementDisabled">
         <slot name="increment">
           <UButton
@@ -195,7 +197,7 @@ defineExpose({
       </NumberFieldIncrement>
     </div>
 
-    <div :class="ui.decrement({ class: props.ui?.decrement })">
+    <div v-if="!!decrement" :class="ui.decrement({ class: props.ui?.decrement })">
       <NumberFieldDecrement as-child :disabled="disabled || decrementDisabled">
         <slot name="decrement">
           <UButton

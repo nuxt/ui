@@ -20,7 +20,7 @@ export default eventHandler(async (event) => {
     page.body.value.unshift(['h1', {}, page.title])
   }
 
-  const transformedPage = transformMDC({
+  const transformedPage = await transformMDC(event, {
     title: page.title,
     body: page.body
   })

@@ -8,7 +8,7 @@ type Main = ComponentConfig<typeof theme, AppConfig, 'main'>
 export interface MainProps {
   /**
    * The element or component this component should render as.
-   * @defaultValue 'main'
+   * @defaultValue 'div'
    */
   as?: any
   class?: any
@@ -25,9 +25,7 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<MainProps>(), {
-  as: 'main'
-})
+const props = defineProps<MainProps>()
 defineSlots<MainSlots>()
 
 const appConfig = useAppConfig() as Main['AppConfig']

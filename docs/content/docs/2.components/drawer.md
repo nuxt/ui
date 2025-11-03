@@ -216,6 +216,54 @@ slots:
 :placeholder{class="h-48 m-4"}
 ::
 
+### Modal
+
+Use the `modal` prop to control whether the Drawer blocks interaction with outside content. Defaults to `true`.
+
+::note
+When `modal` is set to `false`, the overlay is automatically disabled and outside content becomes interactive.
+::
+
+::component-code
+---
+prettier: true
+props:
+  modal: false
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  content: |
+
+    <Placeholder class="h-48 m-4" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#content
+:placeholder{class="h-48 m-4"}
+::
+
+### Dismissible
+
+Use the `dismissible` prop to control whether the Drawer is dismissible when clicking outside of it or pressing escape. Defaults to `true`.
+
+::note
+A `close:prevent` event will be emitted when the user tries to close it.
+::
+
+::tip
+You can combine `modal: false` with `dismissible: false` to make the Drawer's background interactive without closing it.
+::
+
+::component-example
+---
+prettier: true
+name: 'drawer-dismissible-example'
+---
+::
+
 ### Scale Background
 
 Use the `should-scale-background` prop to scale the background when the Drawer is open, creating a visual depth effect. You can set the `set-background-color-on-scale` prop to `false` to prevent changing the background color.
@@ -289,32 +337,6 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 ::tip
 This allows you to move the trigger outside of the Drawer or remove it entirely.
-::
-
-### Disable dismissal
-
-Set the `dismissible` prop to `false` to prevent the Drawer from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
-
-::component-example
----
-prettier: true
-name: 'drawer-dismissible-example'
----
-::
-
-::note
-In this example, the `header` slot is used to add a close button which is not done by default.
-::
-
-### With interactive background
-
-Set the `overlay` and `modal` props to `false` alongside the `dismissible` prop to make the Drawer's background interactive without closing the Drawer.
-
-::component-example
----
-prettier: true
-name: 'drawer-modal-example'
----
 ::
 
 ### Responsive drawer

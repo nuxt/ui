@@ -18,9 +18,12 @@ The ChatMessage component renders an `<article>` element for a `user` or `assist
 ---
 parts:
   - type: 'text'
+    id: '1'
     text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 side: 'right'
 variant: 'soft'
+role: 'user'
+id: '1'
 avatar:
   src: 'https://github.com/benjamincanac.png'
 ---
@@ -41,10 +44,15 @@ Use the `parts` prop to display the message content using the AI SDK v5 format.
 prettier: true
 ignore:
   - parts
+  - role
+  - id
 props:
   parts:
     - type: 'text'
+      id: '1'
       text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+  role: 'user'
+  id: '1'
 ---
 ::
 
@@ -61,11 +69,16 @@ Use the `side` prop to display the message on the left or right.
 prettier: true
 ignore:
   - parts
+  - role
+  - id
 props:
   side: 'right'
   parts:
     - type: 'text'
+      id: '1'
       text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+  role: 'user'
+  id: '1'
 ---
 ::
 
@@ -82,11 +95,16 @@ Use the `variant` prop to change style of the message.
 prettier: true
 ignore:
   - parts
+  - role
+  - id
 props:
   variant: 'soft'
   parts:
     - type: 'text'
+      id: '1'
       text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+  role: 'user'
+  id: '1'
 ---
 ::
 
@@ -105,13 +123,18 @@ ignore:
   - parts
   - side
   - variant
+  - role
+  - id
 props:
   icon: i-lucide-user
   variant: 'soft'
   side: 'right'
   parts:
     - type: 'text'
+      id: '1'
       text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+  role: 'user'
+  id: '1'
 ---
 ::
 
@@ -126,6 +149,8 @@ ignore:
   - parts
   - side
   - variant
+  - role
+  - id
 props:
   avatar:
     src: 'https://github.com/benjamincanac.png'
@@ -133,7 +158,10 @@ props:
   side: 'right'
   parts:
     - type: 'text'
+      id: '1'
       text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+  role: 'user'
+  id: '1'
 ---
 ::
 
@@ -144,12 +172,17 @@ You can also use the `avatar.icon` prop to display an icon as the avatar.
 prettier: true
 ignore:
   - parts
+  - role
+  - id
 props:
   avatar:
     icon: i-lucide-bot
   parts:
     - type: 'text'
+      id: '1'
       text: 'Nuxt UI offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the Chat class from AI SDK v5, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
+  role: 'assistant'
+  id: '1'
 ---
 ::
 
@@ -165,13 +198,18 @@ external:
 ignore:
   - parts
   - actions
+  - role
+  - id
 props:
   actions:
     - label: 'Copy to clipboard'
       icon: i-lucide-copy
   parts:
     - type: 'text'
+      id: '1'
       text: 'Nuxt UI offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the Chat class from AI SDK v5, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
+  role: 'user'
+  id: '1'
 ---
 ::
 
