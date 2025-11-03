@@ -218,7 +218,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
 
-    if ((hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content)) {
+    if ((options.mdc || hasNuxtModule('@nuxtjs/mdc')) || (options.content || hasNuxtModule('@nuxt/content'))) {
       addComponentsDir({
         path: resolve('./runtime/components/prose'),
         pathPrefix: false,
@@ -227,7 +227,7 @@ export default defineNuxtModule<ModuleOptions>({
       })
     }
 
-    if ((hasNuxtModule('@nuxt/content') || options.content)) {
+    if (options.content || hasNuxtModule('@nuxt/content')) {
       addComponentsDir({
         path: resolve('./runtime/components/content'),
         pathPrefix: false,
@@ -235,7 +235,7 @@ export default defineNuxtModule<ModuleOptions>({
       })
     }
 
-    if (hasNuxtModule('@nuxtjs/color-mode')) {
+    if (options.colorMode || hasNuxtModule('@nuxtjs/color-mode')) {
       addComponentsDir({
         path: resolve('./runtime/components/color-mode'),
         pathPrefix: false,
