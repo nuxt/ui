@@ -1,8 +1,8 @@
 export interface ModelModifiers<T = any> {
-  string?: T extends string ? boolean : never
-  number?: T extends number ? boolean : never
-  trim?: T extends string ? boolean : never
+  string?: string extends T ? boolean : never
+  number?: number extends T ? boolean : never
+  trim?: string extends T ? boolean : never
   lazy?: boolean
-  nullable?: T extends null ? boolean : never
+  nullable?: null extends T ? boolean : never
   optional?: boolean
 }
