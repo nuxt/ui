@@ -213,7 +213,7 @@ export default defineNuxtConfig({
       code = code.replace(/ui:[^}]+(?=\})/g, 'ui: object')
 
       // Remove all extends with `/** @vue-ignore */` for HTMLAttributes
-      code = code.replace(/,?\s*\/\*\*\s*@vue-ignore\s*\*\/[^{]*HTMLAttributes[^{]*(?=\{)/g, '')
+      code = code.replace(/,?\s*\/\*\*\s*@vue-ignore\s*\*\/\s*(?:Omit<[A-Za-z]+HTMLAttributes[^>]*>|[A-Za-z]*HTMLAttributes)/g, '')
 
       return { component, code }
     }],
