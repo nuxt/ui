@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { TableHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/table'
 
 type ProseTable = ComponentConfig<typeof theme, AppConfig, 'table', 'ui.prose'>
 
-export interface ProseTableProps extends /** @vue-ignore */ TableHTMLAttributes {
+export interface ProseTableProps {
   class?: any
   ui?: ProseTable['slots']
 }

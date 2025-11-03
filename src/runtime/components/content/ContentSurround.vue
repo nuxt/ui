@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { HTMLAttributes, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-surround'

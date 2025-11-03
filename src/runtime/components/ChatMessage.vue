@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UIMessage } from 'ai'
 import theme from '#build/ui/chat-message'
@@ -8,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChatMessage = ComponentConfig<typeof theme, AppConfig, 'chatMessage'>
 
-export interface ChatMessageProps extends UIMessage, /** @vue-ignore */ Omit<HTMLAttributes, 'id' | 'role'> {
+export interface ChatMessageProps extends UIMessage {
   /**
    * The element or component this component should render as.
    * @defaultValue 'article'

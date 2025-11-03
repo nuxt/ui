@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { AnchorHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/a'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseA = ComponentConfig<typeof theme, AppConfig, 'a', 'ui.prose'>
 
-export interface ProseAProps extends /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target'> {
+export interface ProseAProps {
   href?: string
   target?: '_blank' | '_parent' | '_self' | '_top' | (string & object) | null | undefined
   class?: any
