@@ -58,19 +58,32 @@ function openModal() {
       <UButton label="Open fullscreen" color="neutral" variant="outline" />
     </UModal>
 
+    <UModal title="Modal scrollable" description="This modal has `scrollable: true` prop. Content scrolls within the overlay, preventing accidental closes on scrollbar clicks." scrollable>
+      <UButton color="neutral" variant="subtle" label="Open scrollable" />
+
+      <template #body>
+        <Placeholder class="h-[300vh] w-full" />
+      </template>
+
+      <template #footer>
+        <UButton label="Submit" color="primary" />
+        <UButton label="Cancel" color="neutral" variant="ghost" />
+      </template>
+    </UModal>
+
     <UModal title="Modal prevent close" description="This modal has `dismissible: false` prop so it won't close when clicking outside." :dismissible="false" :modal="false" :overlay="false">
-      <UButton label="Open unclosable" color="neutral" variant="subtle" />
+      <UButton label="Open unclosable" color="neutral" variant="outline" />
     </UModal>
 
     <UModal title="Modal without close button" description="This modal has `close: false` prop." :close="false">
-      <UButton label="Open without close button" color="neutral" variant="outline" />
+      <UButton label="Open without close button" color="neutral" variant="subtle" />
     </UModal>
 
     <UModal title="Modal with custom close button" description="The `close` prop inherits from the Button props." :close="{ color: 'primary', variant: 'solid', size: 'xs' }" :ui="{ close: 'top-3.5 rounded-full' }">
-      <UButton label="Open with custom close button" color="neutral" variant="subtle" />
+      <UButton label="Open with custom close button" color="neutral" variant="outline" />
     </UModal>
 
-    <UButton label="Open programmatically" color="neutral" variant="outline" @click="openModal" />
+    <UButton label="Open programmatically" color="neutral" variant="subtle" @click="openModal" />
 
     <UModal title="First modal">
       <UButton color="neutral" variant="outline" label="Close with scoped slot close" />
