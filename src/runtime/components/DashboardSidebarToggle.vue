@@ -54,7 +54,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSid
   <UButton
     v-bind="{
       ...buttonProps,
-      'icon': icon || (sidebarOpen ? appConfig.ui.icons.close : appConfig.ui.icons.menu),
+      'icon': props.icon || (sidebarOpen ? appConfig.ui.icons.close : appConfig.ui.icons.menu),
       'aria-label': sidebarOpen ? t('dashboardSidebarToggle.close') : t('dashboardSidebarToggle.open'),
       ...$attrs
     }"

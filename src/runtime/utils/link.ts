@@ -2,17 +2,43 @@ import { reactivePick } from '@vueuse/core'
 import { isEqual, diff } from 'ohash/utils'
 import type { LinkProps } from '../types'
 
-export function pickLinkProps(link: LinkProps & { [key: string]: any }) {
+export const linkKeys = [
+  'active',
+  'activeClass',
+  'ariaCurrentValue',
+  'disabled',
+  'download',
+  'exact',
+  'exactActiveClass',
+  'exactHash',
+  'exactQuery',
+  'external',
+  'href',
+  'inactiveClass',
+  'noPrefetch',
+  'noRel',
+  'prefetch',
+  'prefetchedClass',
+  'prefetchOn',
+  'rel',
+  'replace',
+  'target',
+  'title',
+  'to',
+  'trailingSlash',
+  'viewTransition'
+] as const
+
+export type Link = Pick<LinkProps, (typeof linkKeys)[number]> & { [key: string]: any }
+
+export function pickLinkProps(link: Link) {
   const keys = Object.keys(link)
 
   const ariaKeys = keys.filter(key => key.startsWith('aria-'))
   const dataKeys = keys.filter(key => key.startsWith('data-'))
 
   const propsToInclude = [
-    'active', 'activeClass', 'ariaCurrentValue', 'as', 'disabled',
-    'exact', 'exactActiveClass', 'exactHash', 'exactQuery', 'external',
-    'href', 'download', 'inactiveClass', 'noPrefetch', 'noRel', 'prefetch',
-    'prefetchedClass', 'rel', 'replace', 'target', 'to', 'type', 'title',
+    ...linkKeys,
     'onClick',
     ...ariaKeys,
     ...dataKeys

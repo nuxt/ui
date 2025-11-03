@@ -7,13 +7,14 @@ import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, LinkProps, IconProps } from '../types'
+import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, IconProps } from '../types'
 import type { GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { Link } from '../utils/link'
 
 type CommandPalette = ComponentConfig<typeof theme, AppConfig, 'commandPalette'>
 
-export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
+export interface CommandPaletteItem extends Link {
   prefix?: string
   label?: string
   suffix?: string
@@ -216,6 +217,8 @@ import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
 import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
@@ -479,7 +482,7 @@ function onSelect(e: Event, item: T) {
     </ListboxItem>
   </DefineItemTemplate>
 
-  <ListboxRoot v-bind="rootProps" ref="listboxRootRef" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ListboxRoot v-bind="{ ...rootProps, ...$attrs }" ref="listboxRootRef" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
         :placeholder="placeholder"

@@ -5,12 +5,13 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/content/content-search'
-import type { ButtonProps, InputProps, LinkProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps } from '../../types'
+import type { ButtonProps, InputProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
+import type { Link } from '../../utils/link'
 
 type ContentSearch = ComponentConfig<typeof theme, AppConfig, 'contentSearch'>
 
-export interface ContentSearchLink extends Omit<LinkProps, 'custom'> {
+export interface ContentSearchLink extends Link {
   label?: string
   description?: string
   /**
@@ -28,7 +29,7 @@ export interface ContentSearchFile {
   content: string
 }
 
-export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPaletteItem {
+export interface ContentSearchItem extends Link, CommandPaletteItem {
   level?: number
   /**
    * @IconifyIcon

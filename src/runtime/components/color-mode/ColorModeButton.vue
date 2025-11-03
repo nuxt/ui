@@ -52,7 +52,7 @@ const isDark = computed({
     <UButton
       v-bind="{
         ...buttonProps,
-        'icon': icon || (isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light),
+        'icon': props.icon || (isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light),
         'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
         ...$attrs
       }"

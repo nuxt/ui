@@ -3,13 +3,14 @@
 import type { HTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/breadcrumb'
-import type { AvatarProps, IconProps, LinkProps } from '../types'
+import type { AvatarProps, IconProps } from '../types'
 import type { DynamicSlots, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { Link } from '../utils/link'
 
 type Breadcrumb = ComponentConfig<typeof theme, AppConfig, 'breadcrumb'>
 
-export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
+export interface BreadcrumbItem extends Link {
   label?: string
   /**
    * @IconifyIcon
