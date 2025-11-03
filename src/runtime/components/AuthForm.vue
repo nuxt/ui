@@ -1,9 +1,9 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { FormHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
 import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps } from '../types'
+import type { FormHTMLAttributes } from '../types/html'
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
 import type { ComponentConfig } from '../types/tv'
 
@@ -48,7 +48,7 @@ export type AuthFormField<T extends AuthFormFieldType = AuthFormFieldType>
 
 type AuthFormFieldUnion = AuthFormCheckboxField | AuthFormSelectField | AuthFormOtpField | AuthFormInputField<'password'> | AuthFormInputField<'text'> | AuthFormInputField<'email'> | AuthFormInputField<'number'>
 
-export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> extends /** @vue-ignore */ Omit<FormHTMLAttributes, 'onSubmit' | 'onError'> {
+export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> extends /** @vue-ignore */ FormHTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

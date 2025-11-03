@@ -1,13 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/footer-columns'
-import type { IconProps } from '../types'
+import type { IconProps, LinkProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
-import type { Link } from '../utils/link'
 
 type FooterColumns = ComponentConfig<typeof theme, AppConfig, 'footerColumns'>
 
-export interface FooterColumnLink extends Link {
+export interface FooterColumnLink extends Omit<LinkProps, 'custom'> {
   label: string
   /**
    * @IconifyIcon

@@ -1,10 +1,10 @@
 <script lang="ts">
-import type { InputHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { TagsInputRootProps, TagsInputRootEmits, AcceptableInputValue } from 'reka-ui'
 import theme from '#build/ui/input-tags'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, IconProps } from '../types'
+import type { InputHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type InputTags = ComponentConfig<typeof theme, AppConfig, 'inputTags'>

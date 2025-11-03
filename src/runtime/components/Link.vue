@@ -1,13 +1,13 @@
 <script lang="ts">
-import type { ButtonHTMLAttributes, AnchorHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { NuxtLinkProps } from '#app'
 import theme from '#build/ui/link'
+import type { ButtonHTMLAttributes, AnchorHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
 
-export interface LinkProps extends Omit<NuxtLinkProps, 'custom'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'onClick'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type' | 'onClick'> {
+export interface LinkProps extends Omit<NuxtLinkProps, 'custom'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
   /**
    * The element or component this component should render as when not a link.
    * @defaultValue 'button'

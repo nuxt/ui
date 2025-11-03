@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { InputHTMLAttributes } from 'vue'
 import type { NumberFieldRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-number'
 import type { ButtonProps, IconProps } from '../types'
+import type { InputHTMLAttributes } from '../types/html'
 import type { ModelModifiers } from '../types/input'
 import type { ComponentConfig } from '../types/tv'
 

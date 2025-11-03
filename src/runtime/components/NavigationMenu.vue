@@ -3,27 +3,18 @@
 import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps, NavigationMenuContentEmits, AccordionRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/navigation-menu'
-import type { AvatarProps, BadgeProps, IconProps, PopoverProps, TooltipProps } from '../types'
+import type { AvatarProps, BadgeProps, IconProps, LinkProps, PopoverProps, TooltipProps } from '../types'
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
-import type { Link } from '../utils/link'
 
 type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>
 
-export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'type' | 'ui'> {
-  /** Description is only used when `orientation` is `horizontal`. */
-  description?: string
+export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'type' | 'children'> {
+  slot?: string
   [key: string]: any
 }
 
-export interface NavigationMenuItem extends Link {
-  /**
-   * The type of the item.
-   * The `label` type is only displayed in `vertical` orientation.
-   * The `trigger` type is used to force the item to be collapsible when its a link in `vertical` orientation.
-   * @defaultValue 'link'
-   */
-  type?: 'label' | 'trigger' | 'link'
+export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
   /**
    * @IconifyIcon
@@ -49,6 +40,13 @@ export interface NavigationMenuItem extends Link {
    * @IconifyIcon
    */
   trailingIcon?: IconProps['name']
+  /**
+   * The type of the item.
+   * The `label` type is only displayed in `vertical` orientation.
+   * The `trigger` type is used to force the item to be collapsible when its a link in `vertical` orientation.
+   * @defaultValue 'link'
+   */
+  type?: 'label' | 'trigger' | 'link'
   slot?: string
   /**
    * The value of the item. Avoid using `index` as the value to prevent conflicts in horizontal orientation with Reka UI.

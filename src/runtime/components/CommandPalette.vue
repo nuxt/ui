@@ -6,14 +6,13 @@ import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, IconProps } from '../types'
+import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, LinkProps, IconProps } from '../types'
 import type { GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
-import type { Link } from '../utils/link'
 
 type CommandPalette = ComponentConfig<typeof theme, AppConfig, 'commandPalette'>
 
-export interface CommandPaletteItem extends Link {
+export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   prefix?: string
   label?: string
   suffix?: string

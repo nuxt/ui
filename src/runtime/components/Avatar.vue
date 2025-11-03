@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { ImgHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
 import type { ChipProps, IconProps } from '../types'
+import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type Avatar = ComponentConfig<typeof theme, AppConfig, 'avatar'>

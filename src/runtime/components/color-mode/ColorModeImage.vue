@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ImgHTMLAttributes } from 'vue'
+import type { ImgHTMLAttributes } from '../../types/html'
 
 export interface ColorModeImageProps extends /** @vue-ignore */ ImgHTMLAttributes {
   dark: string

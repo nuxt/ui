@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { TextareaHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/textarea'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
+import type { TextareaHTMLAttributes } from '../types/html'
 import type { ModelModifiers } from '../types/input'
 import type { ComponentConfig } from '../types/tv'
 

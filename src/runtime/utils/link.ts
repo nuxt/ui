@@ -17,6 +17,7 @@ export const linkKeys = [
   'inactiveClass',
   'noPrefetch',
   'noRel',
+  'onClick',
   'prefetch',
   'prefetchedClass',
   'prefetchOn',
@@ -29,9 +30,7 @@ export const linkKeys = [
   'viewTransition'
 ] as const
 
-export type Link = Pick<LinkProps, (typeof linkKeys)[number]> & { [key: string]: any }
-
-export function pickLinkProps(link: Link) {
+export function pickLinkProps(link: LinkProps & { [key: string]: any }) {
   const keys = Object.keys(link)
 
   const ariaKeys = keys.filter(key => key.startsWith('aria-'))
@@ -39,7 +38,6 @@ export function pickLinkProps(link: Link) {
 
   const propsToInclude = [
     ...linkKeys,
-    'onClick',
     ...ariaKeys,
     ...dataKeys
   ]

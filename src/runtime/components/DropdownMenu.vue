@@ -3,19 +3,13 @@
 import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuContentEmits, DropdownMenuArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dropdown-menu'
-import type { AvatarProps, IconProps, KbdProps } from '../types'
+import type { AvatarProps, IconProps, KbdProps, LinkProps } from '../types'
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
-import type { Link } from '../utils/link'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 
-export interface DropdownMenuItem extends Link {
-  /**
-   * The item type.
-   * @defaultValue 'link'
-   */
-  type?: 'label' | 'separator' | 'link' | 'checkbox'
+export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
   description?: string
   /**
@@ -26,6 +20,11 @@ export interface DropdownMenuItem extends Link {
   avatar?: AvatarProps
   content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & { class?: any } & Partial<EmitsToProps<DropdownMenuContentEmits>>
   kbds?: KbdProps['value'][] | KbdProps[]
+  /**
+   * The item type.
+   * @defaultValue 'link'
+   */
+  type?: 'label' | 'separator' | 'link' | 'checkbox'
   slot?: string
   loading?: boolean
   disabled?: boolean

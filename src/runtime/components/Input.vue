@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { InputHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
+import type { InputHTMLAttributes } from '../types/html'
 import type { ModelModifiers } from '../types/input'
 import type { AcceptableValue } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
