@@ -1,6 +1,7 @@
+import { queryCollection } from '@nuxt/content/server'
+
 export default defineCachedEventHandler(async (event) => {
   // Use the same approach as /pages/components.vue
-  // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
   return await queryCollection(event, 'docs')
     .where('path', 'LIKE', '%/composables/%')
     .where('extension', '=', 'md')

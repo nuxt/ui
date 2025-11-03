@@ -44,7 +44,7 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
 }
 
 export interface SeparatorSlots {
-  default(props?: {}): any
+  default(props: { ui: Separator['ui'] }): any
 }
 </script>
 
@@ -80,7 +80,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator ||
 
     <template v-if="label || icon || avatar || !!slots.default">
       <div :class="ui.container({ class: props.ui?.container })">
-        <slot>
+        <slot :ui="ui">
           <span v-if="label" :class="ui.label({ class: props.ui?.label })">{{ label }}</span>
           <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
           <UAvatar v-else-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />

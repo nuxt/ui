@@ -40,7 +40,7 @@ export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSur
   ui?: ContentSurround['slots']
 }
 
-type SlotProps<T> = (props: { link: T }) => any
+type SlotProps<T> = (props: { link: T, ui: ContentSurround['ui'] }) => any
 
 export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSurroundLink> {
   'link': SlotProps<T>
@@ -82,21 +82,21 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSurro
 <template>
   <DefineLinkTemplate v-slot="{ link, icon, direction }">
     <ULink v-if="link" :to="link.path" raw :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], direction })">
-      <slot name="link" :link="(link as T)">
+      <slot name="link" :link="(link as T)" :ui="ui">
         <div :class="ui.linkLeading({ class: [props.ui?.linkLeading, link.ui?.linkLeading] })">
-          <slot name="link-leading" :link="(link as T)">
+          <slot name="link-leading" :link="(link as T)" :ui="ui">
             <UIcon :name="link.icon || icon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, link.ui?.linkLeadingIcon], direction })" />
           </slot>
         </div>
 
         <p :class="ui.linkTitle({ class: [props.ui?.linkTitle, link.ui?.linkTitle] })">
-          <slot name="link-title" :link="(link as T)">
+          <slot name="link-title" :link="(link as T)" :ui="ui">
             {{ link.title }}
           </slot>
         </p>
 
         <p :class="ui.linkDescription({ class: [props.ui?.linkDescription, link.ui?.linkDescription] })">
-          <slot name="link-description" :link="(link as T)">
+          <slot name="link-description" :link="(link as T)" :ui="ui">
             {{ link.description }}
           </slot>
         </p>

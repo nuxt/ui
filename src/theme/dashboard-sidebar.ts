@@ -19,7 +19,7 @@ export default {
     },
     side: {
       left: {
-        root: 'border-r border-default'
+        root: 'border-e border-default'
       },
       right: {
         root: ''

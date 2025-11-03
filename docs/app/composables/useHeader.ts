@@ -16,30 +16,7 @@ export function useHeader() {
     to: '/showcase'
   }, {
     label: 'Community',
-    children: [{
-      label: 'Team',
-      description: 'Meet the team building and maintaining Nuxt UI.',
-      icon: 'i-lucide-users',
-      to: '/team'
-    }, {
-      label: 'Devtools Integration',
-      description: 'Integrate Nuxt UI with Nuxt Devtools with Compodium.',
-      icon: 'i-lucide-code',
-      to: 'https://github.com/romhml/compodium',
-      target: '_blank'
-    }, {
-      label: 'Raycast Extension',
-      description: 'Access Nuxt UI components without leaving your editor.',
-      icon: 'i-simple-icons-raycast',
-      to: 'https://www.raycast.com/HugoRCD/nuxt',
-      target: '_blank'
-    }, {
-      label: 'Figma to Code',
-      description: 'Convert Figma designs to Nuxt UI code.',
-      icon: 'i-simple-icons-figma',
-      to: 'https://github.com/Justineo/tempad-dev-plugin-nuxt-ui',
-      target: '_blank'
-    }]
+    to: '/community'
   }, {
     label: 'Releases',
     to: '/releases'
@@ -77,6 +54,10 @@ export function useHeader() {
     label: 'Showcase',
     icon: 'i-lucide-presentation',
     to: '/showcase'
+  }, {
+    label: 'Community',
+    icon: 'i-lucide-globe',
+    to: '/community'
   }, {
     label: 'Team',
     icon: 'i-lucide-users',

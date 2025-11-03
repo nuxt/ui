@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col gap-4">
+  <Navbar />
+
+  <div class="flex flex-col gap-4 min-h-0">
     <div>
       <p class="font-semibold text-highlighted">
         Nuxt UI

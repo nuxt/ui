@@ -48,7 +48,7 @@ export interface ChatMessageProps extends UIMessage {
 }
 
 export interface ChatMessageSlots {
-  leading(props: { avatar: ChatMessageProps['avatar'] }): any
+  leading(props: { avatar: ChatMessageProps['avatar'], ui: ChatMessage['ui'] }): any
   content(props: ChatMessageProps): any
   actions(props: { actions: ChatMessageProps['actions'] }): any
 }
@@ -85,7 +85,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
   <Primitive :as="as" :data-role="role" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div :class="ui.container({ class: props.ui?.container })">
       <div v-if="icon || avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :avatar="avatar">
+        <slot name="leading" :avatar="avatar" :ui="ui">
           <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           <UAvatar v-else-if="avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
         </slot>

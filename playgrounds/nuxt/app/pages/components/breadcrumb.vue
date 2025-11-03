@@ -22,6 +22,8 @@ const items = [{
 </script>
 
 <template>
+  <Navbar />
+
   <UBreadcrumb :items="items">
     <template #dropdown="{ item }">
       <UDropdownMenu :items="item.children">

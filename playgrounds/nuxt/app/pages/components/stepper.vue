@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import theme from '#build/ui/stepper'
 
-const sizes = Object.keys(theme.variants.size)
 const colors = Object.keys(theme.variants.color)
+const sizes = Object.keys(theme.variants.size)
 const orientations = Object.keys(theme.variants.orientation)
 
-const orientation = ref('horizontal' as const)
-const color = ref('primary' as const)
-const size = ref('md' as const)
+const color = ref(theme.defaultVariants.color)
+const size = ref(theme.defaultVariants.size)
+const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
 
 const items = [
   {
@@ -36,13 +36,13 @@ const stepper = useTemplateRef('stepper')
 </script>
 
 <template>
-  <div class="flex flex-col gap-10">
-    <div class="flex items-center justify-center gap-2 ">
-      <USelect v-model="color" :items="colors" placeholder="Color" />
-      <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
-      <USelect v-model="size" :items="sizes" placeholder="Size" />
-    </div>
+  <Navbar>
+    <USelect v-model="color" :items="colors" placeholder="Color" />
+    <USelect v-model="size" :items="sizes" placeholder="Size" />
+    <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
+  </Navbar>
 
+  <div class="flex flex-col gap-10 min-h-0">
     <UStepper
       ref="stepper"
       :items="items"

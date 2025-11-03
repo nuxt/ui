@@ -50,7 +50,8 @@ export default (options: Required<ModuleOptions>) => ({
     direction: ['top', 'bottom'],
     snapPoints: true,
     class: {
-      content: 'h-full' }
+      content: 'h-full'
+    }
   }, {
     direction: ['right', 'left'],
     class: {
@@ -61,7 +62,8 @@ export default (options: Required<ModuleOptions>) => ({
     direction: ['right', 'left'],
     snapPoints: true,
     class: {
-      content: 'w-full' }
+      content: 'w-full'
+    }
   },
   {
     direction: 'top',

@@ -6,7 +6,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChatPrompt = ComponentConfig<typeof theme, AppConfig, 'chatPrompt'>
 
-export interface ChatPromptProps extends /** @vue-ignore */ Pick<TextareaProps, 'autofocusDelay' | 'autoresizeDelay' | 'maxrows' | 'icon' | 'avatar' | 'loading' | 'loadingIcon'> {
+export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus' | 'autofocusDelay' | 'autoresize' | 'autoresizeDelay' | 'maxrows' | 'icon' | 'avatar' | 'loading' | 'loadingIcon' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'form'
@@ -17,9 +17,6 @@ export interface ChatPromptProps extends /** @vue-ignore */ Pick<TextareaProps, 
    * @defaultValue t('chatPrompt.placeholder')
    */
   placeholder?: string
-  autofocus?: TextareaProps['autofocus']
-  autoresize?: TextareaProps['autoresize']
-  rows?: TextareaProps['rows']
   /**
    * @defaultValue 'outline'
    */
@@ -66,7 +63,7 @@ const model = defineModel<string>({ default: '' })
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPrompt['AppConfig']
 
-const textareaProps = useForwardProps(reactivePick(props, 'autofocus', 'autoresize', 'rows'))
+const textareaProps = useForwardProps(reactivePick(props, 'rows', 'autofocus', 'autofocusDelay', 'autoresize', 'autoresizeDelay', 'maxrows', 'icon', 'avatar', 'loading', 'loadingIcon'))
 
 const getProxySlots = () => omit(slots, ['header', 'footer'])
 
@@ -105,7 +102,7 @@ defineExpose({
       ref="textarea"
       v-model="model"
       :placeholder="placeholder || t('chatPrompt.placeholder')"
-      :disabled="Boolean(error)"
+      :disabled="Boolean(error) || disabled"
       variant="none"
       v-bind="{ ...textareaProps, ...$attrs }"
       :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), props.ui)"

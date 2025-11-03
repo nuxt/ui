@@ -101,6 +101,28 @@ props:
 ---
 ::
 
+### Variant
+
+Use the `variant` prop to change the variant of the calendar.
+
+::component-code
+---
+cast:
+  defaultValue: DateRange
+hide:
+  - range
+  - defaultValue
+  - defaultValue.start
+  - defaultValue.end
+props:
+  variant: subtle
+  range: true
+  defaultValue:
+    start: [2022, 2, 3]
+    end: [2022, 2, 20]
+---
+::
+
 ### Size
 
 Use the `size` prop to change the size of the calendar.

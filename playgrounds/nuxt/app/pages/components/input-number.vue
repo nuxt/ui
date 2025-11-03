@@ -1,68 +1,35 @@
-<template>
-  <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 w-48">
-      <UInputNumber />
-    </div>
-    <div class="flex items-center gap-2">
-      <UInputNumber
-        v-for="variant in variants"
-        :key="variant"
-        :placeholder="upperFirst(variant)"
-        :variant="variant"
-        class="w-48"
-      />
-    </div>
-    <div class="flex items-center gap-2">
-      <UInputNumber
-        v-for="variant in variants"
-        :key="variant"
-        :placeholder="upperFirst(variant)"
-        :variant="variant"
-        color="neutral"
-        class="w-48"
-      />
-    </div>
-    <div class="flex items-center gap-2">
-      <UInputNumber
-        v-for="variant in variants"
-        :key="variant"
-        :placeholder="upperFirst(variant)"
-        :variant="variant"
-        color="error"
-        highlight
-        class="w-48"
-      />
-    </div>
-    <div class="flex flex-col gap-4 w-48">
-      <UInputNumber placeholder="Disabled" disabled />
-      <UInputNumber placeholder="Required" required />
-    </div>
-    <div class="flex items-center gap-4">
-      <UInputNumber
-        v-for="size in sizes"
-        :key="size"
-        :size="size"
-        :placeholder="`Horizontal ${size}`"
-        class="w-48"
-      />
-    </div>
-    <div class="flex items-center gap-4">
-      <UInputNumber
-        v-for="size in sizes"
-        :key="size"
-        :size="size"
-        class="w-48"
-        :placeholder="`Vertical ${size}`"
-        orientation="vertical"
-      />
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { upperFirst } from 'scule'
 import theme from '#build/ui/input-number'
 
-const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
-const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
+const colors = Object.keys(theme.variants.color)
+const sizes = Object.keys(theme.variants.size)
+const variants = Object.keys(theme.variants.variant)
+const orientations = Object.keys(theme.variants.orientation)
+
+const attrs = reactive({
+  color: [theme.defaultVariants.color],
+  size: [theme.defaultVariants.size],
+  variant: [theme.defaultVariants.variant]
+})
+
+const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
+
+const value = ref(50)
 </script>
+
+<template>
+  <Navbar>
+    <USelect v-model="attrs.color" :items="colors" multiple />
+    <USelect v-model="attrs.size" :items="sizes" multiple />
+    <USelect v-model="attrs.variant" :items="variants" multiple />
+    <USelect v-model="orientation" :items="orientations" />
+  </Navbar>
+
+  <Matrix v-slot="props" :attrs="attrs">
+    <UInputNumber v-model="value" :orientation="orientation" v-bind="props" />
+    <UInputNumber :default-value="75" :orientation="orientation" v-bind="props" />
+    <UInputNumber placeholder="Highlight" highlight :orientation="orientation" v-bind="props" />
+    <UInputNumber placeholder="Disabled" disabled :orientation="orientation" v-bind="props" />
+    <UInputNumber placeholder="Required" required :orientation="orientation" v-bind="props" />
+  </Matrix>
+</template>

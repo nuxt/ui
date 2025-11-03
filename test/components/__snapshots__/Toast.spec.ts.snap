@@ -7,7 +7,7 @@ exports[`Toast > renders with actions correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -25,7 +25,7 @@ exports[`Toast > renders with actions correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -33,7 +33,7 @@ exports[`Toast > renders with actions correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -47,7 +47,7 @@ exports[`Toast > renders with as correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <section data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -62,7 +62,7 @@ exports[`Toast > renders with as correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -70,7 +70,7 @@ exports[`Toast > renders with as correctly 1`] = `
         <!--v-if-->
       </div>
     </section>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -84,9 +84,9 @@ exports[`Toast > renders with avatar correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-11 text-[22px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="44" height="44" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-11 text-[22px] shrink-0"><img src="https://github.com/benjamincanac.png" width="44" height="44" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="w-0 flex-1 flex flex-col">
         <div class="text-sm font-medium text-highlighted">Toast</div>
         <!--v-if-->
@@ -98,7 +98,7 @@ exports[`Toast > renders with avatar correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -106,7 +106,7 @@ exports[`Toast > renders with avatar correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -120,7 +120,7 @@ exports[`Toast > renders with class correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start bg-elevated/50" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -135,7 +135,7 @@ exports[`Toast > renders with class correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -143,7 +143,7 @@ exports[`Toast > renders with class correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -157,7 +157,7 @@ exports[`Toast > renders with close slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -169,7 +169,7 @@ exports[`Toast > renders with close slot correctly 1`] = `
       <div class="flex gap-1.5 shrink-0 items-center">
         <!--v-if-->Close slot
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -177,7 +177,7 @@ exports[`Toast > renders with close slot correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -191,7 +191,7 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -206,7 +206,7 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -214,7 +214,7 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -228,7 +228,7 @@ exports[`Toast > renders with color neutral correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -243,7 +243,7 @@ exports[`Toast > renders with color neutral correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-inverted data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -251,7 +251,7 @@ exports[`Toast > renders with color neutral correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -265,7 +265,7 @@ exports[`Toast > renders with description correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -280,7 +280,7 @@ exports[`Toast > renders with description correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -288,7 +288,7 @@ exports[`Toast > renders with description correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -302,7 +302,7 @@ exports[`Toast > renders with description slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -317,7 +317,7 @@ exports[`Toast > renders with description slot correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -325,7 +325,7 @@ exports[`Toast > renders with description slot correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -339,7 +339,7 @@ exports[`Toast > renders with icon correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="iconify i-lucide:rocket shrink-0 size-5 text-primary" aria-hidden="true"></span>
       <div class="w-0 flex-1 flex flex-col">
@@ -353,7 +353,7 @@ exports[`Toast > renders with icon correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -361,7 +361,7 @@ exports[`Toast > renders with icon correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -375,7 +375,7 @@ exports[`Toast > renders with leading slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">Leading slot<div class="w-0 flex-1 flex flex-col">
         <div class="text-sm font-medium text-highlighted">Toast</div>
@@ -388,7 +388,7 @@ exports[`Toast > renders with leading slot correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -396,7 +396,7 @@ exports[`Toast > renders with leading slot correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -410,7 +410,7 @@ exports[`Toast > renders with orientation horizontal correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="horizontal" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="iconify i-lucide:rocket shrink-0 size-5 text-primary" aria-hidden="true"></span>
       <div class="w-0 flex-1 flex flex-col">
@@ -425,7 +425,7 @@ exports[`Toast > renders with orientation horizontal correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -433,7 +433,7 @@ exports[`Toast > renders with orientation horizontal correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -447,7 +447,7 @@ exports[`Toast > renders with orientation vertical correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="iconify i-lucide:rocket shrink-0 size-5 text-primary" aria-hidden="true"></span>
       <div class="w-0 flex-1 flex flex-col">
@@ -464,7 +464,7 @@ exports[`Toast > renders with orientation vertical correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -472,7 +472,7 @@ exports[`Toast > renders with orientation vertical correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -486,7 +486,7 @@ exports[`Toast > renders with title correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -501,7 +501,7 @@ exports[`Toast > renders with title correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -509,7 +509,7 @@ exports[`Toast > renders with title correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -523,7 +523,7 @@ exports[`Toast > renders with title slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -538,7 +538,7 @@ exports[`Toast > renders with title slot correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -546,7 +546,7 @@ exports[`Toast > renders with title slot correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -560,7 +560,7 @@ exports[`Toast > renders with type correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -575,7 +575,7 @@ exports[`Toast > renders with type correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -583,7 +583,7 @@ exports[`Toast > renders with type correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -597,7 +597,7 @@ exports[`Toast > renders with ui correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -612,7 +612,7 @@ exports[`Toast > renders with ui correctly 1`] = `
           <!--v-if-->
         </button>
       </div>
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -620,7 +620,7 @@ exports[`Toast > renders with ui correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 
@@ -634,7 +634,7 @@ exports[`Toast > renders without close correctly 1`] = `
 <!--teleport start-->
 
 
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li data-reka-collection-item="" role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
       <!--v-if-->
@@ -644,7 +644,7 @@ exports[`Toast > renders without close correctly 1`] = `
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+      <div data-orientation="horizontal" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
           <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
@@ -652,7 +652,7 @@ exports[`Toast > renders without close correctly 1`] = `
         <!--v-if-->
       </div>
     </li>
-  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span>
 </div>
 
 

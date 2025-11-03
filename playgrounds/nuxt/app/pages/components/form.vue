@@ -24,7 +24,9 @@ const disabled = ref(false)
 </script>
 
 <template>
-  <div class="flex flex-col gap-8">
+  <Navbar />
+
+  <div class="flex flex-col gap-8 min-h-0 mt-16 pb-8">
     <div class="flex gap-4">
       <UForm
         :state="state"

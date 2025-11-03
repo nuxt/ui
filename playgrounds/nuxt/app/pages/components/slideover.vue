@@ -21,7 +21,9 @@ function openSlideover() {
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
+  <Navbar />
+
+  <div class="flex flex-col gap-2 min-h-0">
     <USlideover title="First slideover">
       <UButton color="neutral" variant="outline" label="Open with nested" />
 
@@ -100,7 +102,7 @@ function openSlideover() {
       </template>
     </USlideover>
 
-    <USlideover title="Slideover prevent close" description="This slideover has `dismissible: false` prop so it won't close when clicking outside." :dismissible="false">
+    <USlideover title="Slideover prevent close" description="This slideover has `dismissible: false` prop so it won't close when clicking outside." :dismissible="false" :modal="false" :overlay="false">
       <UButton label="Open unclosable" color="neutral" variant="subtle" />
 
       <template #body>

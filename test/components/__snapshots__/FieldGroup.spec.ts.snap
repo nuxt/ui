@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`FieldGroup > renders orientation vertical with default slot correctly 1`] = `
-"<div class="relative flex flex-col -space-y-px">
+"<div data-orientation="vertical" class="relative flex flex-col -space-y-px">
   <div class="relative inline-flex items-center group has-focus-visible:z-[1]"><input type="text" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-b-none group-not-only:group-last:rounded-t-none group-not-last:group-not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
@@ -12,12 +12,12 @@ exports[`FieldGroup > renders orientation vertical with default slot correctly 1
 </div>"
 `;
 
-exports[`FieldGroup > renders with as correctly 1`] = `"<section class="relative inline-flex -space-x-px"></section>"`;
+exports[`FieldGroup > renders with as correctly 1`] = `"<section data-orientation="horizontal" class="relative inline-flex -space-x-px"></section>"`;
 
-exports[`FieldGroup > renders with class correctly 1`] = `"<div class="inline-flex -space-x-px absolute"></div>"`;
+exports[`FieldGroup > renders with class correctly 1`] = `"<div data-orientation="horizontal" class="inline-flex -space-x-px absolute"></div>"`;
 
 exports[`FieldGroup > renders with default slot correctly 1`] = `
-"<div class="relative inline-flex -space-x-px">
+"<div data-orientation="horizontal" class="relative inline-flex -space-x-px">
   <div class="relative inline-flex items-center group has-focus-visible:z-[1]"><input type="text" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
@@ -29,7 +29,7 @@ exports[`FieldGroup > renders with default slot correctly 1`] = `
 `;
 
 exports[`FieldGroup > renders with size lg correctly 1`] = `
-"<div class="relative inline-flex -space-x-px">
+"<div data-orientation="horizontal" class="relative inline-flex -space-x-px">
   <div class="relative inline-flex items-center group has-focus-visible:z-[1]"><input type="text" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-3 py-2 text-sm gap-2 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
@@ -41,7 +41,7 @@ exports[`FieldGroup > renders with size lg correctly 1`] = `
 `;
 
 exports[`FieldGroup > renders with size md correctly 1`] = `
-"<div class="relative inline-flex -space-x-px">
+"<div data-orientation="horizontal" class="relative inline-flex -space-x-px">
   <div class="relative inline-flex items-center group has-focus-visible:z-[1]"><input type="text" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
@@ -53,7 +53,7 @@ exports[`FieldGroup > renders with size md correctly 1`] = `
 `;
 
 exports[`FieldGroup > renders with size sm correctly 1`] = `
-"<div class="relative inline-flex -space-x-px">
+"<div data-orientation="horizontal" class="relative inline-flex -space-x-px">
   <div class="relative inline-flex items-center group has-focus-visible:z-[1]"><input type="text" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-2.5 py-1.5 text-xs gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
@@ -65,7 +65,7 @@ exports[`FieldGroup > renders with size sm correctly 1`] = `
 `;
 
 exports[`FieldGroup > renders with size xl correctly 1`] = `
-"<div class="relative inline-flex -space-x-px">
+"<div data-orientation="horizontal" class="relative inline-flex -space-x-px">
   <div class="relative inline-flex items-center group has-focus-visible:z-[1]"><input type="text" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-3 py-2 text-base gap-2 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
@@ -77,7 +77,7 @@ exports[`FieldGroup > renders with size xl correctly 1`] = `
 `;
 
 exports[`FieldGroup > renders with size xs correctly 1`] = `
-"<div class="relative inline-flex -space-x-px">
+"<div data-orientation="horizontal" class="relative inline-flex -space-x-px">
   <div class="relative inline-flex items-center group has-focus-visible:z-[1]"><input type="text" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-2 py-1 text-xs gap-1 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->

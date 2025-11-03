@@ -14,13 +14,17 @@ function send() {
 </script>
 
 <template>
-  <div class="text-center">
+  <Navbar />
+
+  <div class="text-center min-h-0">
     <div>
       <UPopover arrow :content="{ side: 'top' }">
         <UButton label="Click me top" color="neutral" variant="outline" />
 
-        <template #content>
-          <div class="w-48 h-16" />
+        <template #content="{ close }">
+          <div class="flex justify-center gap-2 p-4 w-48">
+            <UButton label="Close" color="neutral" @click="close" />
+          </div>
         </template>
       </UPopover>
 

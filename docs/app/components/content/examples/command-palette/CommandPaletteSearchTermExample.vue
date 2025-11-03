@@ -10,12 +10,12 @@ const users = [
     }
   },
   {
-    label: 'Sylvain Marroufin',
-    suffix: 'smarroufin',
-    to: 'https://github.com/smarroufin',
+    label: 'Romain Hamel',
+    suffix: 'romhml',
+    to: 'https://github.com/romhml',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/smarroufin.png'
+      src: 'https://github.com/romhml.png'
     }
   },
   {
@@ -28,21 +28,21 @@ const users = [
     }
   },
   {
-    label: 'Romain Hamel',
-    suffix: 'romhml',
-    to: 'https://github.com/romhml',
+    label: 'Hugo Richard',
+    suffix: 'HugoRCD',
+    to: 'https://github.com/HugoRCD',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/romhml.png'
+      src: 'https://github.com/HugoRCD.png'
     }
   },
   {
-    label: 'Haytham A. Salama',
-    suffix: 'Haythamasalama',
-    to: 'https://github.com/Haythamasalama',
+    label: 'Sandro Circi',
+    suffix: 'sandros94',
+    to: 'https://github.com/sandros94',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/Haythamasalama.png'
+      src: 'https://github.com/sandros94.png'
     }
   },
   {
@@ -55,12 +55,21 @@ const users = [
     }
   },
   {
-    label: 'Neil Richter',
-    suffix: 'noook',
-    to: 'https://github.com/noook',
+    label: 'Jakub Michálek',
+    suffix: 'J-Michalek',
+    to: 'https://github.com/J-Michalek',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/noook.png'
+      src: 'https://github.com/J-Michalek.png'
+    }
+  },
+  {
+    label: 'Eugen Istoc',
+    suffix: 'genu',
+    to: 'https://github.com/genu',
+    target: '_blank',
+    avatar: {
+      src: 'https://github.com/genu.png'
     }
   }
 ]

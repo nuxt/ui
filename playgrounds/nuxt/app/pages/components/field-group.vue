@@ -1,66 +1,62 @@
 <script setup lang="ts">
-import theme from '#build/ui/button'
+import theme from '#build/ui/field-group'
 
-const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
+const sizes = Object.keys(theme.variants.size)
+const orientations = Object.keys(theme.variants.orientation)
+
+const attrs = reactive({
+  size: ['md' as keyof typeof theme.variants.size]
+})
+
+const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 items-center">
-    <div class="flex flex-col gap-4 -ms-[110px]">
-      <UFieldGroup>
-        <UButton>Button</UButton>
-      </UFieldGroup>
+  <Navbar>
+    <USelect v-model="attrs.size" :items="sizes" multiple />
+    <USelect v-model="orientation" :items="orientations" />
+  </Navbar>
 
-      <UFieldGroup>
-        <UInput placeholder="Search..." />
-      </UFieldGroup>
+  <Matrix v-slot="props" :attrs="attrs">
+    <UFieldGroup :orientation="orientation" v-bind="props">
+      <UButton color="neutral" variant="outline">
+        Button
+      </UButton>
+    </UFieldGroup>
 
-      <UFieldGroup>
-        <UButton color="neutral" variant="outline">
-          Button
-        </UButton>
-        <UButton color="neutral" variant="subtle">
-          Button
-        </UButton>
-        <UButton color="neutral" variant="outline">
-          Button
-        </UButton>
-      </UFieldGroup>
+    <UFieldGroup :orientation="orientation" v-bind="props">
+      <UInput placeholder="Search..." />
+    </UFieldGroup>
 
-      <UFieldGroup orientation="vertical">
-        <UButton color="neutral" variant="outline">
-          Button
-        </UButton>
-        <UInput placeholder="Search..." />
-      </UFieldGroup>
+    <UFieldGroup :orientation="orientation" v-bind="props">
+      <UButton color="neutral" variant="outline">
+        Button
+      </UButton>
+      <UButton color="neutral" variant="subtle">
+        Button
+      </UButton>
+      <UButton color="neutral" variant="outline">
+        Button
+      </UButton>
+    </UFieldGroup>
 
-      <UFieldGroup>
-        <UButton color="neutral" variant="outline">
-          Button
-        </UButton>
-        <UInput placeholder="Search..." />
-      </UFieldGroup>
+    <UFieldGroup :orientation="orientation" v-bind="props">
+      <UButton color="neutral" variant="outline">
+        Button
+      </UButton>
+      <UInput placeholder="Search..." />
+    </UFieldGroup>
 
-      <UFieldGroup>
-        <UInput placeholder="Search..." />
-        <UButton color="neutral" variant="outline">
-          Button
-        </UButton>
-      </UFieldGroup>
+    <UFieldGroup :orientation="orientation" v-bind="props">
+      <UInput placeholder="Search..." />
+      <UButton color="neutral" variant="outline">
+        Button
+      </UButton>
+    </UFieldGroup>
 
-      <UFieldGroup>
-        <UBadge color="neutral" variant="outline" size="lg" label="https://" />
-        <UInput color="neutral" variant="outline" placeholder="www.example.com" />
-      </UFieldGroup>
-    </div>
-
-    <div class="flex gap-4 items-center justify-center">
-      <UFieldGroup v-for="size in sizes" :key="size" :size="size">
-        <UInput placeholder="Search..." />
-        <UButton color="neutral" variant="outline">
-          Button
-        </UButton>
-      </UFieldGroup>
-    </div>
-  </div>
+    <UFieldGroup :orientation="orientation" v-bind="props">
+      <UBadge color="neutral" variant="outline" size="lg" label="https://" />
+      <UInput color="neutral" variant="outline" placeholder="www.example.com" />
+    </UFieldGroup>
+  </Matrix>
 </template>

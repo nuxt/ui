@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { queryCollection } from '@nuxt/content/server'
 
 const querySchema = z.object({
   category: z.string().optional().describe('Filter components by category'),
@@ -8,11 +9,9 @@ const querySchema = z.object({
 export default defineCachedEventHandler(async (event) => {
   const { category, search } = await getValidatedQuery(event, querySchema.parse)
 
-  // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
   let query = queryCollection(event, 'docs')
     .where('path', 'LIKE', '/docs/components/%')
     .where('extension', '=', 'md')
-    // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
     .select('id', 'title', 'description', 'path', 'category', 'links')
 
   if (category) {
@@ -25,11 +24,9 @@ export default defineCachedEventHandler(async (event) => {
     name: component.path.split('/').pop(),
     title: component.title,
     description: component.description,
-    // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
     category: component.category,
     path: component.path,
     url: `https://ui.nuxt.com${component.path}`,
-    // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
     links: component.links
   }))
 

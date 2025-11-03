@@ -1,4 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Switch from '../../src/runtime/components/Switch.vue'
 import type { SwitchProps, SwitchSlots } from '../../src/runtime/components/Switch.vue'
 import ComponentRender from '../component-render'
@@ -37,6 +39,18 @@ describe('Switch', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SwitchProps, slots?: Partial<SwitchSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Switch)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Switch, {
+      props: {
+        modelValue: true,
+        required: true,
+        label: 'Label',
+        description: 'Description'
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {

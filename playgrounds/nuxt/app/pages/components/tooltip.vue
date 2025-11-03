@@ -1,4 +1,6 @@
 <template>
+  <Navbar />
+
   <div class="flex flex-col gap-2">
     <UTooltip text="Top" :kbds="['meta', 'T']" :content="{ side: 'top' }" arrow>
       <UButton label="Top" color="neutral" variant="outline" block />

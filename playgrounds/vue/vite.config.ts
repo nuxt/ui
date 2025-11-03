@@ -14,6 +14,7 @@ export default defineConfig({
         }
       },
       autoImport: {
+        dirs: ['../nuxt/app/composables'],
         imports: ['vue']
       },
       components: {

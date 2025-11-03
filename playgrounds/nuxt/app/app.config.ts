@@ -1,8 +1,11 @@
 export default defineAppConfig({
+  dir: 'ltr',
   toaster: {
     position: 'bottom-right' as const,
+    duration: 5000,
+    max: 5,
     expand: true,
-    duration: 5000
+    disableSwipe: false
   },
   ui: {
     colors: {

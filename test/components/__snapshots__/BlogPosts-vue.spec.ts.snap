@@ -12,7 +12,7 @@ exports[`BlogPosts > renders with as correctly 1`] = `
       <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
       <div class="mt-1 text-base text-pretty text-muted">Description</div>
       <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-        <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
           <div class="">
             <!--v-if-->
             <p class="font-medium text-highlighted text-sm">Author</p>
@@ -38,7 +38,7 @@ exports[`BlogPosts > renders with class correctly 1`] = `
       <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
       <div class="mt-1 text-base text-pretty text-muted">Description</div>
       <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-        <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
           <div class="">
             <!--v-if-->
             <p class="font-medium text-highlighted text-sm">Author</p>
@@ -66,7 +66,7 @@ exports[`BlogPosts > renders with orientation vertical correctly 1`] = `
       <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
       <div class="mt-1 text-base text-pretty text-muted">Description</div>
       <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-        <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
           <div class="">
             <!--v-if-->
             <p class="font-medium text-highlighted text-sm">Author</p>
@@ -92,7 +92,7 @@ exports[`BlogPosts > renders with posts correctly 1`] = `
       <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
       <div class="mt-1 text-base text-pretty text-muted">Description</div>
       <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-        <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://i.pravatar.cc/120?img=1" alt="Author" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
           <div class="">
             <!--v-if-->
             <p class="font-medium text-highlighted text-sm">Author</p>

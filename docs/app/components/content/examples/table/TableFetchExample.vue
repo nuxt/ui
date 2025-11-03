@@ -52,5 +52,5 @@ const columns: TableColumn<User>[] = [{
 </script>
 
 <template>
-  <UTable :data="data" :columns="columns" :loading="status === 'pending'" class="flex-1" />
+  <UTable :data="data" :columns="columns" :loading="status === 'pending'" class="flex-1 h-80" />
 </template>

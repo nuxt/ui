@@ -4,7 +4,7 @@ hero:
   title: Ship [faster]{.text-primary} with :br Nuxt UI Templates
   description: 'Explore ready-made templates powered by our Vue components. These templates are fully responsive, accessible, and easy to customize, so you can launch your project quickly and effortlessly.'
 navigation: false
-templates:
+items:
   - title: 'Changelog'
     description: "A changelog template to display your repository releases notes from GitHub powered by Nuxt MDC."
     icon: i-lucide-newspaper

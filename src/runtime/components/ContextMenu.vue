@@ -11,13 +11,14 @@ type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 
 export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
+  description?: string
   /**
    * @IconifyIcon
    */
   icon?: IconProps['name']
   color?: ContextMenu['variants']['color']
   avatar?: AvatarProps
-  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ContextMenuContentEmits>>
+  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & { class?: any } & Partial<EmitsToProps<ContextMenuContentEmits>>
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The item type.
@@ -31,10 +32,10 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
   open?: boolean
   defaultOpen?: boolean
   children?: ArrayOrNested<ContextMenuItem>
-  onSelect?(e: Event): void
-  onUpdateChecked?(checked: boolean): void
+  onSelect?: (e: Event) => void
+  onUpdateChecked?: (checked: boolean) => void
   class?: any
-  ui?: Pick<ContextMenu['slots'], 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLabel' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>
+  ui?: Pick<ContextMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>
   [key: string]: any
 }
 
@@ -75,6 +76,11 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>
+  /**
+   * The key used to get the description from the item.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>
   disabled?: boolean
   class?: any
   ui?: ContextMenu['slots']
@@ -82,7 +88,7 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
 
 export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
-type SlotProps<T extends ContextMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
+type SlotProps<T extends ContextMenuItem> = (props: { item: T, active?: boolean, index: number, ui: ContextMenu['ui'] }) => any
 
 export type ContextMenuSlots<
   A extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>,
@@ -91,11 +97,14 @@ export type ContextMenuSlots<
   'default'(props?: {}): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
+  'item-label': (props: { item: T, active?: boolean, index: number }) => any
+  'item-description': (props: { item: T, active?: boolean, index: number }) => any
   'item-trailing': SlotProps<T>
   'content-top': (props?: {}) => any
   'content-bottom': (props?: {}) => any
-} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
+}
+& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active?: boolean, index: number }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean, index: number, ui: ContextMenu['ui'] }>
 
 </script>
 
@@ -112,7 +121,8 @@ const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
   portal: true,
   modal: true,
   externalIcon: true,
-  labelKey: 'label'
+  labelKey: 'label',
+  descriptionKey: 'description'
 })
 const emits = defineEmits<ContextMenuEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
@@ -142,6 +152,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu 
       :items="items"
       :portal="portal"
       :label-key="(labelKey as keyof NestedItem<T>)"
+      :description-key="(descriptionKey as keyof NestedItem<T>)"
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"

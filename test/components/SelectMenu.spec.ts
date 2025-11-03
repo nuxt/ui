@@ -1,4 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import SelectMenu from '../../src/runtime/components/SelectMenu.vue'
 import type { SelectMenuProps, SelectMenuSlots } from '../../src/runtime/components/SelectMenu.vue'
 import ComponentRender from '../component-render'
@@ -34,15 +36,19 @@ describe('SelectMenu', () => {
     icon: 'i-lucide-circle-x'
   }]
 
+  const itemsWithDescription = [...items.map(item => ({ ...item, description: 'Description' }))]
+
   const props = { open: true, portal: false, items }
 
   it.each([
     // Props
     ['with items', { props }],
+    ['with items with description', { props: { ...props, items: itemsWithDescription } }],
     ['with modelValue', { props: { ...props, modelValue: items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
     ['with valueKey', { props: { ...props, valueKey: 'value' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
+    ['with descriptionKey', { props: { ...props, descriptionKey: 'description' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
     ['with multiple and modelValue', { props: { ...props, multiple: true, modelValue: [items[0], items[1]] } }],
     ['with id', { props: { ...props, id: 'id' } }],
@@ -69,6 +75,7 @@ describe('SelectMenu', () => {
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-chevron-down' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-check' } }],
     ['with arrow', { props: { ...props, arrow: true } }],
+    ['with virtualize', { props: { ...props, virtualize: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
@@ -82,11 +89,31 @@ describe('SelectMenu', () => {
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
+    ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectMenuProps, slots?: Partial<SelectMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, SelectMenu)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(SelectMenu, {
+      props: {
+        ...props,
+        modelValue: items[0]
+
+      }
+    })
+    expect(await axe(wrapper.element, {
+      rules: {
+        // "Certain ARIA roles must contain particular children (aria-required-children)"
+
+        // Fix any of the following:
+        //   Element has children which are not allowed: div[tabindex]
+        'aria-required-children': { enabled: false }
+      }
+    })).toHaveNoViolations()
   })
 
   describe('emits', () => {

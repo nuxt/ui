@@ -1,87 +1,37 @@
 <script setup lang="ts">
-import { upperFirst } from 'scule'
 import theme from '#build/ui/input-tags'
 
-const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
-const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
+const colors = Object.keys(theme.variants.color)
+const sizes = Object.keys(theme.variants.size)
+const variants = Object.keys(theme.variants.variant)
+
+const attrs = reactive({
+  color: [theme.defaultVariants.color],
+  size: [theme.defaultVariants.size],
+  variant: [theme.defaultVariants.variant]
+})
 
 const tags = ref(['Vue', 'Nuxt'])
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 w-48">
-      <UInputTags
-        v-model="tags"
-        placeholder="Enter tags..."
-        autofocus
-      />
-    </div>
-    <div class="flex items-center gap-2">
-      <UInputTags
-        v-for="variant in variants"
-        :key="variant"
-        :placeholder="upperFirst(variant)"
-        :variant="variant"
-        class="w-48"
-      />
-    </div>
-    <div class="flex items-center gap-2">
-      <UInputTags
-        v-for="variant in variants"
-        :key="variant"
-        :placeholder="upperFirst(variant)"
-        :variant="variant"
-        color="neutral"
-        class="w-48"
-      />
-    </div>
-    <div class="flex items-center gap-2">
-      <UInputTags
-        v-for="variant in variants"
-        :key="variant"
-        :placeholder="upperFirst(variant)"
-        :variant="variant"
-        color="error"
-        highlight
-        class="w-48"
-      />
-    </div>
-    <div class="flex flex-col gap-4 w-48">
-      <UInputTags placeholder="Disabled" disabled />
-      <UInputTags placeholder="Required" required />
-      <UInputTags loading placeholder="Loading..." />
-      <UInputTags loading trailing placeholder="Loading..." />
-    </div>
-    <div class="flex items-center gap-4">
-      <UInputTags
-        v-for="size in sizes"
-        :key="size"
-        :size="size"
-        :placeholder="upperFirst(size)"
-        class="w-48"
-      />
-    </div>
-    <div class="flex items-center gap-4">
-      <UInputTags
-        v-for="size in sizes"
-        :key="size"
-        icon="i-lucide-search"
-        placeholder="Search..."
-        :size="size"
-        class="w-48"
-      />
-    </div>
-    <div class="flex items-center gap-4">
-      <UInputTags
-        v-for="size in sizes"
-        :key="size"
-        icon="i-lucide-search"
-        trailing
-        placeholder="Search..."
-        :size="size"
-        class="w-48"
-      />
-    </div>
-  </div>
+  <Navbar>
+    <USelect v-model="attrs.color" :items="colors" multiple />
+    <USelect v-model="attrs.size" :items="sizes" multiple />
+    <USelect v-model="attrs.variant" :items="variants" multiple />
+  </Navbar>
+
+  <Matrix v-slot="props" :attrs="attrs">
+    <UInputTags v-model="tags" placeholder="Enter tags..." autofocus v-bind="props" />
+    <UInputTags :default-value="['TypeScript']" placeholder="Enter tags..." v-bind="props" />
+    <UInputTags placeholder="Highlight" highlight v-bind="props" />
+    <UInputTags placeholder="Disabled" disabled v-bind="props" />
+    <UInputTags placeholder="Required" required v-bind="props" />
+    <UInputTags placeholder="Search..." icon="i-lucide-search" v-bind="props" />
+    <UInputTags placeholder="Search..." icon="i-lucide-search" trailing v-bind="props" />
+    <UInputTags :avatar="{ src: 'https://github.com/vuejs.png' }" icon="i-lucide-search" trailing placeholder="Search..." v-bind="props" />
+    <UInputTags placeholder="Loading..." loading v-bind="props" />
+    <UInputTags placeholder="Loading..." loading trailing v-bind="props" />
+    <UInputTags placeholder="Loading..." loading icon="i-lucide-search" trailing-icon="i-lucide-chevron-down" v-bind="props" />
+  </Matrix>
 </template>

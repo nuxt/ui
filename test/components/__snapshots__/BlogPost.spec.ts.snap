@@ -10,7 +10,7 @@ exports[`BlogPost > renders with as correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -32,7 +32,7 @@ exports[`BlogPost > renders with author correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -55,7 +55,7 @@ exports[`BlogPost > renders with authors correctly 1`] = `
     <!--v-if-->
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
       <div class="inline-flex flex-row-reverse justify-end">
-        <!--v-if--><button type="button" class="relative rounded-full ring-bg first:me-0 ring-2 -me-1.5"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><img role="img" src="https://github.com/atinux.png" alt="atinux" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span></button><button type="button" class="relative rounded-full ring-bg first:me-0 ring-2 -me-1.5"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span></button>
+        <!--v-if--><button type="button" class="relative rounded-full ring-bg first:me-0 ring-2 -me-1.5"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><img src="https://github.com/atinux.png" alt="atinux" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span></button><button type="button" class="relative rounded-full ring-bg first:me-0 ring-2 -me-1.5"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span></button>
       </div>
     </div>
   </div>
@@ -120,7 +120,7 @@ exports[`BlogPost > renders with badge slot correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -151,7 +151,7 @@ exports[`BlogPost > renders with class correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -190,7 +190,7 @@ exports[`BlogPost > renders with date slot correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -227,7 +227,7 @@ exports[`BlogPost > renders with description slot correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description slot</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -250,7 +250,7 @@ exports[`BlogPost > renders with footer slot correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -273,7 +273,7 @@ exports[`BlogPost > renders with header slot correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -310,7 +310,7 @@ exports[`BlogPost > renders with orientation horizontal correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -333,7 +333,7 @@ exports[`BlogPost > renders with orientation vertical correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -370,7 +370,7 @@ exports[`BlogPost > renders with title slot correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title slot</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -419,7 +419,7 @@ exports[`BlogPost > renders with ui correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -442,7 +442,7 @@ exports[`BlogPost > renders with variant ghost correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -465,7 +465,7 @@ exports[`BlogPost > renders with variant naked correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -488,7 +488,7 @@ exports[`BlogPost > renders with variant outline correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-muted">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -511,7 +511,7 @@ exports[`BlogPost > renders with variant soft correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-toned">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
@@ -534,7 +534,7 @@ exports[`BlogPost > renders with variant subtle correctly 1`] = `
     <h2 class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
     <div class="mt-1 text-base text-pretty text-toned">Description</div>
     <div class="pt-4 mt-auto flex flex-wrap gap-x-3 gap-y-1.5">
-      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div data-orientation="horizontal" class="relative group/user flex items-center gap-2"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div class="">
           <!--v-if-->
           <p class="font-medium text-highlighted text-sm">Benjamin Canac</p>
