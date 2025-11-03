@@ -27,6 +27,7 @@ const components = [
   'context-menu',
   'drawer',
   'dropdown-menu',
+  'editor',
   'empty',
   'error',
   'field-group',
