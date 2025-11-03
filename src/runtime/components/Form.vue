@@ -110,7 +110,7 @@ const parentBus = props.nested === true && inject(
   formBusInjectionKey,
   undefined
 )
-const { values } = useForm({ id: 'Login', schema: props.schema })
+const { values } = useForm({ id: props.name, schema: props.schema })
 
 const parentState = props.nested === true ? inject(formStateInjectionKey, undefined) : undefined
 const state = computed(() => {
