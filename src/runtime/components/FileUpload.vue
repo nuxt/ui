@@ -261,7 +261,7 @@ watch(modelValue, (newValue) => {
 
 defineExpose({
   get inputRef() {
-    return inputRef.value?.$el
+    return inputRef.value?.$el as HTMLInputElement
   },
   dropzoneRef
 })
