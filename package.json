@@ -29,7 +29,14 @@
     },
     "./runtime/*": "./dist/runtime/*",
     "./components/*": "./dist/runtime/components/*",
-    "./composables/*": "./dist/runtime/composables/*",
+    "./composables": {
+      "types": "./dist/runtime/composables/index.d.ts",
+      "import": "./dist/runtime/composables/index.js"
+    },
+    "./composables/*": {
+      "types": "./dist/runtime/composables/*.d.ts",
+      "import": "./dist/runtime/composables/*.js"
+    },
     "./utils": {
       "types": "./dist/runtime/utils/index.d.ts",
       "import": "./dist/runtime/utils/index.js"
@@ -63,8 +70,11 @@
       "components/*": [
         "./dist/runtime/components/*"
       ],
+      "composables": [
+        "./dist/runtime/composables/index.d.ts"
+      ],
       "composables/*": [
-        "./dist/runtime/composables/*"
+        "./dist/runtime/composables/*.d.ts"
       ],
       "utils": [
         "./dist/runtime/utils/index.d.ts"
