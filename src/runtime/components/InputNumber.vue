@@ -79,7 +79,7 @@ export interface InputNumberSlots {
 </script>
 
 <script setup lang="ts" generic="T extends InputNumberValue = InputNumberValue">
-import { onMounted, computed, useTemplateRef } from 'vue'
+import { onMounted, computed, useTemplateRef, toRef } from 'vue'
 import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -159,7 +159,7 @@ onMounted(() => {
 })
 
 defineExpose({
-  inputRef
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement)
 })
 </script>
 

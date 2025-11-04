@@ -433,7 +433,7 @@ function isInputItem(item: InputMenuItem): item is Exclude<InputMenuItem, InputM
 }
 
 defineExpose({
-  inputRef
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement)
 })
 </script>
 

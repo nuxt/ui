@@ -296,9 +296,9 @@ name: 'input-number-slots-example'
 
 When accessing the component via a template ref, you can use the following:
 
-| Name                       | Type                                            |
-| -------------------------- | ----------------------------------------------- |
-| `inputRef`{lang="ts-type"} | `Ref<InstanceType<typeof NumberFieldInput> \| null>`{lang="ts-type"} |
+| Name | Type |
+| ---- | ---- |
+| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

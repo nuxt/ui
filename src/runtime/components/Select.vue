@@ -253,7 +253,7 @@ function isSelectItem(item: SelectItem): item is Exclude<SelectItem, SelectValue
 }
 
 defineExpose({
-  triggerRef
+  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement)
 })
 </script>
 
