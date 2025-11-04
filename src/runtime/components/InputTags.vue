@@ -64,7 +64,7 @@ export interface InputTagsSlots<T extends InputTagItem = InputTagItem> {
 </script>
 
 <script setup lang="ts" generic="T extends InputTagItem">
-import { computed, ref, onMounted, toRaw } from 'vue'
+import { computed, useTemplateRef, onMounted, toRaw } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -105,7 +105,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTags ||
   fieldGroup: orientation.value
 }))
 
-const inputRef = ref<InstanceType<typeof TagsInputInput> | null>(null)
+const inputRef = useTemplateRef('inputRef')
 
 onMounted(() => {
   setTimeout(() => {

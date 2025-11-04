@@ -1,5 +1,5 @@
+import type { ComponentPublicInstance } from 'vue'
 import { ref, computed, unref, onMounted, watch, reactive } from 'vue'
-import type { VisuallyHidden } from 'reka-ui'
 import { useFileDialog, useDropZone } from '@vueuse/core'
 import type { MaybeRef } from '@vueuse/core'
 
@@ -46,7 +46,7 @@ export function useFileUpload(options: UseFileUploadOptions) {
     dropzone = true,
     onUpdate
   } = options
-  const inputRef = ref<InstanceType<typeof VisuallyHidden>>()
+  const inputRef = ref<ComponentPublicInstance>()
   const dropzoneRef = ref<HTMLDivElement>()
 
   const dataTypes = computed(() => parseAcceptToDataTypes(unref(accept)))

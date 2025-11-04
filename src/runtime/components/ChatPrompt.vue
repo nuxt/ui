@@ -38,7 +38,7 @@ export interface ChatPromptSlots extends TextareaSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
+import { computed, toRef, useTemplateRef } from 'vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -80,15 +80,15 @@ function submit(e: Event) {
 }
 
 function blur(e: Event) {
-  textarea.value?.textareaRef?.blur()
+  textareaRef.value?.textareaRef?.blur()
 
   emits('close', e)
 }
 
-const textarea = useTemplateRef('textarea')
+const textareaRef = useTemplateRef('textareaRef')
 
 defineExpose({
-  textareaRef: textarea.value?.textareaRef
+  textareaRef: toRef(() => textareaRef.value?.textareaRef)
 })
 </script>
 
@@ -99,7 +99,7 @@ defineExpose({
     </div>
 
     <UTextarea
-      ref="textarea"
+      ref="textareaRef"
       v-model="model"
       :placeholder="placeholder || t('chatPrompt.placeholder')"
       :disabled="Boolean(error) || disabled"

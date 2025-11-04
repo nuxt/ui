@@ -124,7 +124,7 @@ export interface FileUploadSlots<M extends boolean = false> {
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
-import { computed, watch } from 'vue'
+import { computed, toRef, watch } from 'vue'
 import { Primitive, VisuallyHidden } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig, useLocale } from '#imports'
@@ -260,9 +260,7 @@ watch(modelValue, (newValue) => {
 })
 
 defineExpose({
-  get inputRef() {
-    return inputRef.value?.$el as HTMLInputElement
-  },
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement),
   dropzoneRef
 })
 </script>
