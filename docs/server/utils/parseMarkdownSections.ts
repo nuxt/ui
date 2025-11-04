@@ -35,11 +35,12 @@ export function parseMarkdownSections(markdown: string, sections: string[]): Rec
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]
+    if (!line) continue
 
     // Check if this is a heading line
     const headingMatch = line.match(/^(#{1,6}) +(\S.*)$/)
 
-    if (headingMatch) {
+    if (headingMatch && headingMatch[1] && headingMatch[2]) {
       const depth = headingMatch[1].length
       const title = headingMatch[2].trim()
       const normalizedTitle = title.toLowerCase()
@@ -78,7 +79,7 @@ export function parseMarkdownSections(markdown: string, sections: string[]): Rec
           currentContent.push(line)
         }
       }
-    } else if (inTargetSection) {
+    } else if (inTargetSection && line) {
       // We're in a target section, capture the line
       currentContent.push(line)
     }
@@ -102,8 +103,9 @@ export function getAvailableSections(markdown: string): string[] {
   const lines = markdown.split('\n')
 
   for (const line of lines) {
+    if (!line) continue
     const headingMatch = line.match(/^(#{2,3}) +(\S.*)$/)
-    if (headingMatch) {
+    if (headingMatch && headingMatch[2]) {
       const title = headingMatch[2].trim().toLowerCase()
       sections.push(title)
     }
