@@ -3,8 +3,8 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
 import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps } from '../types'
-import type { FormHTMLAttributes } from '../types/html'
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
+import type { FormHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type AuthForm = ComponentConfig<typeof theme, AppConfig, 'authForm'>

@@ -11,7 +11,7 @@ type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>
 
 type TextareaValue = string | number | null
 
-export interface TextareaProps<T extends TextareaValue = TextareaValue> extends UseComponentIconsProps, /** @vue-ignore */ TextareaHTMLAttributes {
+export interface TextareaProps<T extends TextareaValue = TextareaValue> extends UseComponentIconsProps, /** @vue-ignore */ Omit<TextareaHTMLAttributes, 'name' | 'placeholder' | 'required' | 'autofocus' | 'disabled' | 'rows'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

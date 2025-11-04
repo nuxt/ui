@@ -8,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>
 
-export interface FileUploadProps<M extends boolean = false> extends /** @vue-ignore */ InputHTMLAttributes {
+export interface FileUploadProps<M extends boolean = false> extends /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'accept' | 'multiple' | 'required' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

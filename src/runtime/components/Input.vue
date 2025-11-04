@@ -12,7 +12,7 @@ type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
 
 export type InputValue = AcceptableValue
 
-export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps, /** @vue-ignore */ InputHTMLAttributes {
+export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'type' | 'placeholder' | 'required' | 'autocomplete' | 'autofocus' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
