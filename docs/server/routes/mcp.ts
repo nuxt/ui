@@ -217,9 +217,10 @@ function createServer() {
 
   server.tool(
     'get_component',
-    'Retrieves Nuxt UI component documentation and details. Parameters: componentName (string, required) - the component name in PascalCase. Returns: A JSON object containing name, title, description, category, documentation, and documentation_url.',
+    'Retrieves Nuxt UI component documentation and details. Parameters: componentName (string, required) - the component name in PascalCase; sections (string, optional) - comma-separated list of sections to retrieve (e.g., "props,slots,theme") to save tokens by fetching only specific parts. Returns: A JSON object containing name, title, description, category, and either full documentation or filtered sections.',
     {
-      componentName: z.string().describe('The name of the component (PascalCase)')
+      componentName: z.string().describe('The name of the component (PascalCase)'),
+      sections: z.string().optional().describe('Comma-separated sections to retrieve (e.g., "props,slots,emits,theme"). Use this to save tokens by fetching only needed sections instead of full documentation.')
     },
     async (params) => {
       const result = await $fetch('/api/mcp/get-component', { query: params })
@@ -235,6 +236,31 @@ function createServer() {
     },
     async (params) => {
       const result = await $fetch('/api/mcp/get-component-metadata', { query: params })
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+  )
+
+  server.tool(
+    'get_component_sections',
+    'Retrieves specific sections of Nuxt UI component documentation. This is a token-efficient alternative to get_component when you only need certain parts like props, slots, or theme. Parameters: componentName (string, required) - the component name in PascalCase; sections (string, optional) - comma-separated sections to retrieve. Common sections: "props", "slots", "emits", "theme", "usage", "examples". Defaults to "props,slots,emits,theme" if not specified. Returns: A JSON object with filtered sections and metadata about available sections.',
+    {
+      componentName: z.string().describe('The name of the component (PascalCase)'),
+      sections: z.string().optional().describe('Comma-separated sections to retrieve (e.g., "props,slots"). Common sections: props, slots, emits, theme, usage, examples. Defaults to props,slots,emits,theme')
+    },
+    async (params) => {
+      const result = await $fetch('/api/mcp/get-component-sections', { query: params })
+      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+    }
+  )
+
+  server.tool(
+    'list_component_sections',
+    'Lists all available documentation sections for a specific Nuxt UI component. Use this tool first to discover what sections are available before fetching specific content. Parameters: componentName (string, required) - the component name in PascalCase. Returns: A JSON object with available_sections array, recommended_sections array, and categorized sections grouped by type (api, configuration, documentation, meta).',
+    {
+      componentName: z.string().describe('The name of the component (PascalCase)')
+    },
+    async (params) => {
+      const result = await $fetch('/api/mcp/list-component-sections', { query: params })
       return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
     }
   )
