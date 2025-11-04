@@ -42,41 +42,41 @@ exports[`Card > renders with header slot correctly 1`] = `
 
 exports[`Card > renders with size lg correctly 1`] = `
 "<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <!--v-if-->
-  <!--v-if-->
-  <!--v-if-->
+  <div class="p-5 sm:px-7">Header slot</div>
+  <div class="p-5 sm:p-7">Default slot</div>
+  <div class="p-5 sm:px-7">Footer slot</div>
 </div>"
 `;
 
 exports[`Card > renders with size md correctly 1`] = `
 "<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <!--v-if-->
-  <!--v-if-->
-  <!--v-if-->
+  <div class="p-4 sm:px-6">Header slot</div>
+  <div class="p-4 sm:p-6">Default slot</div>
+  <div class="p-4 sm:px-6">Footer slot</div>
 </div>"
 `;
 
 exports[`Card > renders with size sm correctly 1`] = `
 "<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <!--v-if-->
-  <!--v-if-->
-  <!--v-if-->
+  <div class="p-3 sm:px-5">Header slot</div>
+  <div class="p-3 sm:p-5">Default slot</div>
+  <div class="p-3 sm:px-5">Footer slot</div>
 </div>"
 `;
 
 exports[`Card > renders with size xl correctly 1`] = `
 "<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <!--v-if-->
-  <!--v-if-->
-  <!--v-if-->
+  <div class="p-6 sm:px-8">Header slot</div>
+  <div class="p-6 sm:p-8">Default slot</div>
+  <div class="p-6 sm:px-8">Footer slot</div>
 </div>"
 `;
 
 exports[`Card > renders with size xs correctly 1`] = `
 "<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
-  <!--v-if-->
-  <!--v-if-->
-  <!--v-if-->
+  <div class="p-2 sm:px-4">Header slot</div>
+  <div class="p-2 sm:p-4">Default slot</div>
+  <div class="p-2 sm:px-4">Footer slot</div>
 </div>"
 `;
 
