@@ -223,6 +223,12 @@ props:
 
 You can control the active item by using the `default-value` prop or `v-model` directive, corresponding to the `value` property in the `items` array.
 
+Here is a simple example of setting the default active tab to be the first item in the `items array`:
+
+:component-example{name="tabs-model-value-simple-example"}
+
+And a more involved example of setting the default active tab to be determined by a URL query parameter, using `route.query.tab`:
+
 :component-example{name="tabs-model-value-example"}
 
 ### With content slot
