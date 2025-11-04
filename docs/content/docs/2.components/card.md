@@ -24,6 +24,28 @@ props:
 
 Use the `variant` prop to change the variant of the Card.
 
+::component-code
+---
+prettier: true
+hide:
+- class
+  props:
+  variant: subtle
+  class: 'w-full'
+  slots:
+  header: |
+
+  <Placeholder class="h-8" />
+
+default: |
+
+    <Placeholder class="h-32" />
+
+footer: |
+
+    <Placeholder class="h-8" />
+---
+
 ### Size
 
 Use the `size` prop to change the size of the Card.
@@ -34,7 +56,7 @@ prettier: true
 hide:
   - class
 props:
-  variant: subtle
+  size: md
   class: 'w-full'
 slots:
   header: |
