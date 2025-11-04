@@ -148,17 +148,12 @@ const slots = defineSlots<AuthFormSlots<typeof state, F>>()
 const { t } = useLocale()
 const appConfig = useAppConfig() as AuthForm['AppConfig']
 
-const formRef = useTemplateRef('formRef')
-const passwordVisibility = ref(false)
-const passwordRef = useTemplateRef('passwordRef')
-
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.authForm || {}) })())
 
-defineExpose({
-  formRef,
-  state
-})
+const formRef = useTemplateRef('formRef')
+const passwordVisibility = ref(false)
+const passwordRef = useTemplateRef('passwordRef')
 
 function pickFieldProps(field: F) {
   const fields = ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as (keyof F)[]
@@ -186,6 +181,11 @@ function omitFieldProps(field: F) {
 
   return omit(field, [...fields, 'label', 'description'])
 }
+
+defineExpose({
+  formRef,
+  state
+})
 </script>
 
 <template>

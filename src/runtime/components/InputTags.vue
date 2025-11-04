@@ -107,17 +107,17 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTags ||
 
 const inputRef = useTemplateRef('inputRef')
 
-onMounted(() => {
-  setTimeout(() => {
-    autoFocus()
-  }, props.autofocusDelay)
-})
-
 function autoFocus() {
   if (props.autofocus) {
     inputRef.value?.$el?.focus()
   }
 }
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
 
 function onUpdate(value: T[]) {
   if (toRaw(props.modelValue) === value) {

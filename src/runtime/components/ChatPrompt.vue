@@ -71,6 +71,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPrompt |
   variant: props.variant
 }))
 
+const textareaRef = useTemplateRef('textareaRef')
+
 function submit(e: Event) {
   if (model.value.trim() === '') {
     return
@@ -84,8 +86,6 @@ function blur(e: Event) {
 
   emits('close', e)
 }
-
-const textareaRef = useTemplateRef('textareaRef')
 
 defineExpose({
   textareaRef: toRef(() => textareaRef.value?.textareaRef)
