@@ -218,7 +218,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
 
-    if ((options.mdc || hasNuxtModule('@nuxtjs/mdc')) || (options.content || hasNuxtModule('@nuxt/content'))) {
+    if (options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc')) || hasNuxtModule('@nuxt/content')) {
       addComponentsDir({
         path: resolve('./runtime/components/prose'),
         pathPrefix: false,
