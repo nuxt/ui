@@ -221,7 +221,7 @@ props:
 
 ### Control active item
 
-You can control the active item by using the `default-value` prop or the `v-model` directive with the index of the item.
+You can control the active item by using the `default-value` prop or `v-model` directive, corresponding to the `value` property in the `items` array.
 
 :component-example{name="tabs-model-value-example"}
 
