@@ -181,7 +181,7 @@ export interface SelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { ref, computed, onMounted, toRef, toRaw } from 'vue'
+import { useTemplateRef, computed, onMounted, toRef, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
@@ -339,7 +339,7 @@ const createItem = computed(() => {
 })
 const createItemPosition = computed(() => typeof props.createItem === 'object' ? props.createItem.position : 'bottom')
 
-const triggerRef = ref<InstanceType<typeof ComboboxTrigger> | null>(null)
+const triggerRef = useTemplateRef('triggerRef')
 
 function autoFocus() {
   if (props.autofocus) {
@@ -414,7 +414,7 @@ function isSelectItem(item: SelectMenuItem): item is Exclude<SelectMenuItem, Sel
 }
 
 defineExpose({
-  triggerRef
+  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement)
 })
 </script>
 

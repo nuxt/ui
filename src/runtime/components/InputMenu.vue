@@ -189,7 +189,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { computed, ref, toRef, onMounted, toRaw, nextTick } from 'vue'
+import { computed, useTemplateRef, toRef, onMounted, toRaw, nextTick } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
@@ -337,7 +337,7 @@ const createItem = computed(() => {
 })
 const createItemPosition = computed(() => typeof props.createItem === 'object' ? props.createItem.position : 'bottom')
 
-const inputRef = ref<InstanceType<typeof ComboboxInput> | null>(null)
+const inputRef = useTemplateRef('inputRef')
 
 function autoFocus() {
   if (props.autofocus) {
@@ -433,7 +433,7 @@ function isInputItem(item: InputMenuItem): item is Exclude<InputMenuItem, InputM
 }
 
 defineExpose({
-  inputRef
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement)
 })
 </script>
 
