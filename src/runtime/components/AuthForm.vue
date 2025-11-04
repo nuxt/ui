@@ -6,20 +6,21 @@ import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
 import type { FormHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
+import type { NonUnion } from '../types/utils'
 
 type AuthForm = ComponentConfig<typeof theme, AppConfig, 'authForm'>
 
-type AuthFormCheckboxField = Omit<FormFieldProps, 'name'> & Omit<CheckboxProps, 'type'> & {
+export type AuthFormCheckboxField = Omit<FormFieldProps, 'name'> & Omit<CheckboxProps, 'type'> & {
   name: string
   type: 'checkbox'
 }
 
-type AuthFormSelectField = Omit<FormFieldProps, 'name'> & Omit<SelectMenuProps, 'type'> & {
+export type AuthFormSelectField = Omit<FormFieldProps, 'name'> & Omit<SelectMenuProps, 'type'> & {
   name: string
   type: 'select'
 }
 
-type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type' | 'otp'> & {
+export type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type' | 'otp'> & {
   name: string
   type: 'otp'
   /**
@@ -30,23 +31,14 @@ type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type
   otp?: boolean | PinInputProps
 }
 
-type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number'
+export type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number'
 
-type AuthFormInputField<T extends AuthFormInputFieldType = AuthFormInputFieldType> = Omit<FormFieldProps, 'name'> & Omit<InputProps, 'type'> & {
+export type AuthFormInputField<T extends AuthFormInputFieldType & NonUnion<T> = 'text'> = Omit<FormFieldProps, 'name'> & Omit<InputProps, 'type'> & {
   name: string
   type: T
 }
 
-type AuthFormFieldType = 'checkbox' | 'select' | 'otp' | 'password' | 'text' | 'email' | 'number'
-
-export type AuthFormField<T extends AuthFormFieldType = AuthFormFieldType>
-  = T extends 'checkbox' ? AuthFormCheckboxField
-    : T extends 'select' ? AuthFormSelectField
-      : T extends 'otp' ? AuthFormOtpField
-        : T extends AuthFormInputFieldType ? AuthFormInputField<T>
-          : never
-
-type AuthFormFieldUnion = AuthFormCheckboxField | AuthFormSelectField | AuthFormOtpField | AuthFormInputField<'password'> | AuthFormInputField<'text'> | AuthFormInputField<'email'> | AuthFormInputField<'number'>
+export type AuthFormField = AuthFormCheckboxField | AuthFormSelectField | AuthFormOtpField | AuthFormInputField<'password'> | AuthFormInputField<'text'> | AuthFormInputField<'email'> | AuthFormInputField<'number'>
 
 export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> extends /** @vue-ignore */ FormHTMLAttributes {
   /**
@@ -160,23 +152,23 @@ const formRef = useTemplateRef('formRef')
 const passwordVisibility = ref(false)
 const passwordRef = useTemplateRef('passwordRef')
 
-function pickFieldProps(field: AuthFormFieldUnion) {
-  const fields = ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as any
+function pickFieldProps(field: F) {
+  const fields = ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as (keyof F)[]
 
   // Prevent binding `label` and `description` on Checkbox's FormField
   if (field.type === 'checkbox') {
     return pick(field, fields)
   }
 
-  return pick(field, [...fields, 'label', 'description'] as any)
+  return pick(field, [...fields, 'label', 'description'])
 }
 
-function omitFieldProps(field: AuthFormFieldUnion) {
-  const fields = ['errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay', 'name', 'label', 'description'] as any
+function omitFieldProps(field: F) {
+  const fields = ['errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay', 'name', 'label', 'description'] as (keyof F)[]
 
   // Prevent binding `type` on other fields than Input
   if (field.type === 'checkbox' || field.type === 'select' || field.type === 'otp') {
-    return omit(field, [...fields, 'type'] as any)
+    return omit(field, [...fields, 'type'])
   }
 
   return omit(field, fields)
@@ -248,35 +240,35 @@ defineExpose({
         <UFormField
           v-for="field in fields"
           :key="field.name"
-          v-bind="pickFieldProps(field as AuthFormFieldUnion)"
+          v-bind="pickFieldProps(field)"
         >
           <slot :name="`${field.name}-field`" v-bind="{ state, field }">
             <UCheckbox
-              v-if="(field as AuthFormFieldUnion).type === 'checkbox'"
+              v-if="(field).type === 'checkbox'"
               v-model="state[field.name]"
               :class="ui.checkbox({ class: props.ui?.checkbox })"
-              v-bind="(omitFieldProps(field as AuthFormFieldUnion) as any)"
+              v-bind="(omitFieldProps(field))"
             />
             <USelectMenu
-              v-else-if="(field as AuthFormFieldUnion).type === 'select'"
+              v-else-if="(field).type === 'select'"
               v-model="state[field.name]"
               :class="ui.select({ class: props.ui?.select })"
-              v-bind="(omitFieldProps(field as AuthFormFieldUnion) as AuthFormSelectField)"
+              v-bind="(omitFieldProps(field) as AuthFormSelectField)"
             />
             <UPinInput
-              v-else-if="(field as AuthFormFieldUnion).type === 'otp'"
+              v-else-if="(field).type === 'otp'"
               :id="field.name"
               v-model="state[field.name]"
               :class="ui.otp({ class: props.ui?.otp })"
-              v-bind="(Object.assign({}, omitFieldProps(field as AuthFormFieldUnion), typeof (field as AuthFormOtpField).otp === 'object' ? (field as AuthFormOtpField).otp : {}) as any)"
+              v-bind="(Object.assign({}, omitFieldProps(field), typeof (field as AuthFormOtpField).otp === 'object' ? (field as AuthFormOtpField).otp : {}) as any)"
               otp
             />
             <UInput
-              v-else-if="(field as AuthFormFieldUnion).type === 'password'"
+              v-else-if="(field).type === 'password'"
               ref="passwordRef"
               v-model="state[field.name]"
               :class="ui.password({ class: props.ui?.password })"
-              v-bind="(omitFieldProps(field as AuthFormFieldUnion) as AuthFormInputField<'password'>)"
+              v-bind="(omitFieldProps(field) as AuthFormInputField<'password'>)"
               :type="passwordVisibility ? 'text' : 'password'"
             >
               <template #trailing>
@@ -296,7 +288,7 @@ defineExpose({
               v-else
               v-model="state[field.name]"
               :class="ui.input({ class: props.ui?.input })"
-              v-bind="(omitFieldProps(field as AuthFormFieldUnion) as AuthFormInputField)"
+              v-bind="(omitFieldProps(field) as AuthFormInputField)"
             />
           </slot>
 
