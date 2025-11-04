@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { ComponentPublicInstance } from 'vue'
 import type { TimeFieldRootProps, TimeFieldRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-time'
@@ -14,8 +15,17 @@ export interface InputTimeProps extends Omit<TimeFieldRootProps, 'as' | 'locale'
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'primary'
+   */
   color?: InputTime['variants']['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: InputTime['variants']['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: InputTime['variants']['size']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
@@ -44,7 +54,6 @@ export interface InputTimeSlots {
 </script>
 
 <script setup lang="ts">
-import type { ComponentPublicInstance } from 'vue'
 import { computed, onMounted, ref } from 'vue'
 import { TimeFieldRoot, TimeFieldInput, useForwardPropsEmits, Primitive } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
