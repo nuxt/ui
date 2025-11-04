@@ -50,7 +50,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
    * If true, this form will attach to its parent Form and validate at the same time.
    * @defaultValue `false`
    */
-  nested?: N
+  nested?: N & boolean
 
   /**
    * When `true`, all form elements will be disabled on `@submit` event.
@@ -104,15 +104,12 @@ const formId = props.id ?? useId() as string
 
 const bus = useEventBus<FormEvent<I>>(`form-${formId}`)
 
-// The comparison with '' is needed because vue is not casting boolean correctly without
-// explicitly setting the prop to true (`:nested="true" works, but `nested` returns '')
-const isNested = props.nested?.toString() === '' || props.nested === true
-const parentBus = isNested && inject(
+const parentBus = props.nested === true && inject(
   formBusInjectionKey,
   undefined
 )
 
-const parentState = isNested ? inject(formStateInjectionKey, undefined) : undefined
+const parentState = props.nested === true ? inject(formStateInjectionKey, undefined) : undefined
 const state = computed(() => {
   if (parentState?.value) {
     return props.name ? getAtPath(parentState.value, props.name) : parentState.value

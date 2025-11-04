@@ -125,7 +125,7 @@ export interface FileUploadSlots<M extends boolean = false> {
 
 <script setup lang="ts" generic="M extends boolean = false">
 import { computed, watch } from 'vue'
-import { Primitive } from 'reka-ui'
+import { Primitive, VisuallyHidden } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig, useLocale } from '#imports'
 import { useFormField } from '../composables/useFormField'
@@ -252,15 +252,17 @@ function removeFile(index?: number) {
 }
 
 watch(modelValue, (newValue) => {
-  const hasModelReset = !Array.isArray(newValue) || !newValue.length
+  const hasModelReset = props.multiple ? !(newValue as File[])?.length : !newValue
 
-  if (hasModelReset && inputRef.value) {
-    inputRef.value.value = ''
+  if (hasModelReset && inputRef.value?.$el) {
+    inputRef.value.$el.value = ''
   }
 })
 
 defineExpose({
-  inputRef,
+  get inputRef() {
+    return inputRef.value?.$el as HTMLInputElement
+  },
   dropzoneRef
 })
 </script>
@@ -365,18 +367,18 @@ defineExpose({
       <ReuseFilesTemplate v-if="position === 'outside'" />
     </slot>
 
-    <input
+    <VisuallyHidden
       :id="id"
       ref="inputRef"
+      as="input"
       type="file"
+      feature="fully-hidden"
       :name="name"
       :accept="accept"
       :multiple="(multiple as boolean)"
       :required="required"
       :disabled="disabled"
       v-bind="{ ...$attrs, ...ariaAttrs }"
-      class="sr-only"
-      tabindex="-1"
-    >
+    />
   </Primitive>
 </template>
