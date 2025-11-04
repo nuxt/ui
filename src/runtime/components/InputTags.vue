@@ -65,7 +65,7 @@ export interface InputTagsSlots<T extends InputTagItem = InputTagItem> {
 </script>
 
 <script setup lang="ts" generic="T extends InputTagItem">
-import { computed, ref, onMounted, toRaw } from 'vue'
+import { computed, useTemplateRef, onMounted, toRaw, toRef } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -106,19 +106,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTags ||
   fieldGroup: orientation.value
 }))
 
-const inputRef = ref<InstanceType<typeof TagsInputInput> | null>(null)
-
-onMounted(() => {
-  setTimeout(() => {
-    autoFocus()
-  }, props.autofocusDelay)
-})
+const inputRef = useTemplateRef('inputRef')
 
 function autoFocus() {
   if (props.autofocus) {
     inputRef.value?.$el?.focus()
   }
 }
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
 
 function onUpdate(value: T[]) {
   if (toRaw(props.modelValue) === value) {
@@ -142,7 +142,7 @@ function onFocus(event: FocusEvent) {
 }
 
 defineExpose({
-  inputRef
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement)
 })
 </script>
 

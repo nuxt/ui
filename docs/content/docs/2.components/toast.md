@@ -338,6 +338,14 @@ In this example, we use the `AppConfig` to configure the `expand` prop of the `T
 
 :component-emits
 
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `height`{lang="ts-type"} | `Ref<number>`{lang="ts-type"} |
+
 ## Theme
 
 :component-theme

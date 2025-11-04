@@ -290,9 +290,9 @@ This component also supports all native `<input>` HTML attributes.
 
 When accessing the component via a template ref, you can use the following:
 
-| Name                       | Type                                            |
-| -------------------------- | ----------------------------------------------- |
-| `inputRef`{lang="ts-type"} | `Ref<InstanceType<typeof TagsInputInput> \| null>`{lang="ts-type"} |
+| Name | Type |
+| ---- | ---- |
+| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

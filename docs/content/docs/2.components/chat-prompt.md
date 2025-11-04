@@ -190,6 +190,14 @@ This component also supports all native `<textarea>` HTML attributes.
 
 :component-emits
 
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `textareaRef`{lang="ts-type"} | `Ref<HTMLTextAreaElement \| null>`{lang="ts-type"} |
+
 ## Theme
 
 :component-theme
