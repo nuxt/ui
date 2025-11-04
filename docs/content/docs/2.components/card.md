@@ -28,23 +28,33 @@ Use the `variant` prop to change the variant of the Card.
 ---
 prettier: true
 hide:
-- class
-  props:
+  - class
+props:
   variant: subtle
   class: 'w-full'
-  slots:
+slots:
   header: |
 
-  <Placeholder class="h-8" />
+    <Placeholder class="h-8" />
 
-default: |
+  default: |
 
     <Placeholder class="h-32" />
 
-footer: |
+  footer: |
 
     <Placeholder class="h-8" />
 ---
+
+#header
+:placeholder{class="h-8"}
+
+#default
+:placeholder{class="h-32"}
+
+#footer
+:placeholder{class="h-8"}
+::
 
 ### Size
 
