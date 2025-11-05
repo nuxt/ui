@@ -47,6 +47,8 @@ const isDark = computed({
 
     <template #fallback>
       <USwitch
+        :checked-icon="appConfig.ui.icons.dark"
+        :unchecked-icon="appConfig.ui.icons.light"
         v-bind="{
           ...switchProps,
           'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
