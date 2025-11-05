@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type InputTime = ComponentConfig<typeof theme, AppConfig, 'inputTime'>
 
-export interface InputTimeProps extends Omit<TimeFieldRootProps, 'as' | 'locale' | 'dir'>, UseComponentIconsProps {
+export interface InputTimeProps extends Omit<TimeFieldRootProps, 'as' | 'asChild' | 'locale' | 'dir'>, UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
