@@ -162,7 +162,7 @@ defineExpose({
       :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
       :type="type"
       :part="segment.part"
-      :class="segment.part !== 'literal' ? ui.segment({ class: props.ui?.segment }) : ''"
+      :class="ui.segment({ class: props.ui?.segment })"
       :data-segment="segment.part"
     >
       {{ segment.value.trim() }}
