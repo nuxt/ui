@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { ComponentPublicInstance } from 'vue'
-import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateRange, DateValue } from 'reka-ui'
+import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, IconProps } from '../types'
@@ -9,14 +9,11 @@ import theme from '#build/ui/input-date'
 
 type InputDate = ComponentConfig<typeof theme, AppConfig, 'inputDate'>
 
-type InputDateDefaultValue<R extends boolean = false> = R extends true ? DateRange : DateValue
-type InputDateModelValue<R extends boolean = false> = R extends true ? (DateRange | null) : (DateValue | undefined)
-
-// todo: reka-ui does not export this type, we need to figure something out about it. https://github.com/unovue/reka-ui/blob/v2/packages/core/src/shared/date/types.ts#L37
-type SegmentPart = any
-
 type _DateFieldRootProps = Omit<DateFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>
 type _RangeDateFieldRootProps = Omit<DateRangeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>
+
+type InputDateDefaultValue<R extends boolean = false> = R extends true ? DateRangeFieldRootProps['defaultValue'] : DateFieldRootProps['defaultValue']
+type InputDateModelValue<R extends boolean = false> = (R extends true ? DateRangeFieldRootProps['modelValue'] : DateFieldRootProps['modelValue']) | undefined
 
 export interface InputDateProps<R extends boolean = false> extends UseComponentIconsProps, _DateFieldRootProps, _RangeDateFieldRootProps {
   /**
@@ -98,7 +95,7 @@ const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGr
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{ segments: { part: SegmentPart, value: string }[], type?: 'start' | 'end' }>()
+const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{ segments?: { part: any, value: string }[], type?: 'start' | 'end' }>()
 
 const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
 
@@ -171,8 +168,8 @@ defineExpose({
     v-bind="{ ...rootProps, ...ariaAttrs }"
     :id="id"
     v-slot="{ segments }"
-    :model-value="(modelValue as DateValue | DateRange)"
-    :default-value="(defaultValue as DateValue | DateRange)"
+    :model-value="(modelValue as DateValue)"
+    :default-value="(defaultValue as DateValue)"
     :name="name"
     :disabled="disabled"
     :locale="locale"
@@ -182,15 +179,15 @@ defineExpose({
     @blur="onBlur"
     @focus="onFocus"
   >
-    <template v-if="props.range">
+    <template v-if="Array.isArray(segments)">
+      <ReuseSegmentsTemplate :segments="segments" />
+    </template>
+    <template v-else>
       <ReuseSegmentsTemplate :segments="segments.start" type="start" />
       <slot name="rangeSeparator" :ui="ui">
         <UIcon :name="rangeSeparatorIcon || appConfig.ui.icons.minus" :class="ui.rangeSeparatorIcon({ class: props.ui?.rangeSeparatorIcon })" />
       </slot>
       <ReuseSegmentsTemplate :segments="segments.end" type="end" />
-    </template>
-    <template v-else>
-      <ReuseSegmentsTemplate :segments="segments" />
     </template>
 
     <slot :ui="ui" />
