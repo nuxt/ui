@@ -69,18 +69,20 @@ props:
 
 ### Color
 
-Use the `color` prop to change the color of the calendar.
+Use the `color` prop to change the color of the InputDate.
 
 ::component-code
 ---
+prettier: true
 props:
   color: neutral
+  highlight: true
 ---
 ::
 
 ### Variant
 
-Use the `variant` prop to change the variant of the calendar.
+Use the `variant` prop to change the variant of the InputDate.
 
 ::component-code
 ---
@@ -102,7 +104,7 @@ props:
 
 ### Size
 
-Use the `size` prop to change the size of the calendar.
+Use the `size` prop to change the size of the InputDate.
 
 ::component-code
 ---
@@ -113,12 +115,24 @@ props:
 
 ### Disabled
 
-Use the `disabled` prop to disable the calendar.
+Use the `disabled` prop to disable the InputDate.
 
 ::component-code
 ---
 props:
   disabled: true
+---
+::
+
+### Range Separator Icon
+
+Use the `range-separator-icon` prop to change the icon of the range separator.
+
+::component-code
+---
+props:
+  range: true
+  rangeSeparatorIcon: 'i-lucide-arrow-right'
 ---
 ::
 
