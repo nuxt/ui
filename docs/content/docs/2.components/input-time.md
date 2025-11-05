@@ -50,7 +50,7 @@ This component relies on the [`@internationalized/date`](https://react-spectrum.
 
 ### Hour Cycle
 
-Use the `hourCycle` prop to change the hour cycle of the InputTime.
+Use the `hour-cycle` prop to change the hour cycle of the InputTime. Defaults to `12`.
 
 ::component-code
 ---
@@ -89,13 +89,8 @@ Use the `variant` prop to change the variant of the InputTime.
 
 ::component-code
 ---
-cast:
-  defaultValue: TimeValue
-hide:
-  - defaultValue
 props:
   variant: subtle
-  defaultValue: [12, 30, 0]
 ---
 ::
 
