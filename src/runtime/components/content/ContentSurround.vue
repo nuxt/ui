@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { PropType } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-surround'
@@ -51,7 +52,6 @@ export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSur
 </script>
 
 <script setup lang="ts" generic="T extends ContentSurroundLink">
-import type { PropType } from 'vue'
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'

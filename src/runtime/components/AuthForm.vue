@@ -4,21 +4,23 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
 import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps } from '../types'
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
+import type { FormHTMLAttributes } from '../types/html'
+import type { NonUnion } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type AuthForm = ComponentConfig<typeof theme, AppConfig, 'authForm'>
 
-type AuthFormCheckboxField = Omit<FormFieldProps, 'name'> & CheckboxProps & {
+export type AuthFormCheckboxField = Omit<FormFieldProps, 'name'> & CheckboxProps & {
   name: string
   type: 'checkbox'
 }
 
-type AuthFormSelectField = Omit<FormFieldProps, 'name'> & SelectMenuProps & {
+export type AuthFormSelectField = Omit<FormFieldProps, 'name'> & SelectMenuProps & {
   name: string
   type: 'select'
 }
 
-type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type' | 'otp'> & {
+export type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type' | 'otp'> & {
   name: string
   type: 'otp'
   /**
@@ -29,23 +31,16 @@ type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type
   otp?: boolean | PinInputProps
 }
 
-type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number'
+export type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number'
 
-type AuthFormInputField<T extends AuthFormInputFieldType = AuthFormInputFieldType> = Omit<FormFieldProps, 'name'> & InputProps & {
+export type AuthFormInputField<T extends AuthFormInputFieldType & NonUnion<T> = 'text'> = Omit<FormFieldProps, 'name'> & Omit<InputProps, 'type'> & {
   name: string
   type: T
 }
 
-type AuthFormFieldType = 'checkbox' | 'select' | 'otp' | 'password' | 'text' | 'email' | 'number'
+export type AuthFormField = AuthFormCheckboxField | AuthFormSelectField | AuthFormOtpField | AuthFormInputField<'password'> | AuthFormInputField<'text'> | AuthFormInputField<'email'> | AuthFormInputField<'number'>
 
-export type AuthFormField<T extends AuthFormFieldType = AuthFormFieldType>
-  = T extends 'checkbox' ? AuthFormCheckboxField
-    : T extends 'select' ? AuthFormSelectField
-      : T extends 'otp' ? AuthFormOtpField
-        : T extends AuthFormInputFieldType ? AuthFormInputField<T>
-          : never
-
-export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> {
+export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> extends /** @vue-ignore */ FormHTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -123,6 +118,8 @@ import UCheckbox from './Checkbox.vue'
 import USelectMenu from './SelectMenu.vue'
 import UInput from './Input.vue'
 import UPinInput from './PinInput.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<AuthFormProps<T, F>>(), {
   separator: 'or'
@@ -239,9 +236,10 @@ defineExpose({
         :schema="schema"
         :validate="validate"
         :validate-on="validateOn"
-        :class="ui.form({ class: props.ui?.form })"
         :disabled="disabled"
         :loading-auto="loadingAuto"
+        :class="ui.form({ class: props.ui?.form })"
+        v-bind="$attrs"
         @submit="onSubmit"
       >
         <UFormField
@@ -254,7 +252,7 @@ defineExpose({
               v-if="field.type === 'checkbox'"
               v-model="state[field.name]"
               :class="ui.checkbox({ class: props.ui?.checkbox })"
-              v-bind="(omitFieldProps(field) as AuthFormCheckboxField)"
+              v-bind="(omitFieldProps(field))"
             />
             <USelectMenu
               v-else-if="field.type === 'select'"
@@ -267,10 +265,7 @@ defineExpose({
               :id="field.name"
               v-model="state[field.name]"
               :class="ui.otp({ class: props.ui?.otp })"
-              v-bind="{
-                ...(omitFieldProps(field) as Omit<AuthFormOtpField, 'type'>),
-                ...(typeof field.otp === 'object' ? field.otp : {})
-              }"
+              v-bind="(Object.assign({}, omitFieldProps(field), typeof (field as AuthFormOtpField).otp === 'object' ? (field as AuthFormOtpField).otp : {}) as any)"
               otp
             />
             <UInput

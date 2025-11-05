@@ -3,11 +3,12 @@ import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
 import type { ButtonProps, IconProps } from '../types'
+import type { InputHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>
 
-export interface FileUploadProps<M extends boolean = false> {
+export interface FileUploadProps<M extends boolean = false> extends /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'accept' | 'multiple' | 'required' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

@@ -106,7 +106,6 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
     <USelect
       placeholder="Search users..."
       icon="i-lucide-user"
-      ignore-filter
       :loading="status === 'pending'"
       :items="users"
       v-bind="props"
