@@ -55,7 +55,7 @@ export interface InputTimeSlots {
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import { TimeFieldRoot, TimeFieldInput, useForwardPropsEmits, Primitive } from 'reka-ui'
+import { TimeFieldRoot, TimeFieldInput, useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFieldGroup } from '../composables/useFieldGroup'
@@ -73,7 +73,7 @@ const slots = defineSlots<InputTimeSlots>()
 const { code: codeLocale, dir } = useLocale()
 const appConfig = useAppConfig() as InputTime['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'autofocus', 'autofocusDelay', 'locale', 'icon', 'avatar', 'class', 'ui'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'as', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'autofocus', 'autofocusDelay', 'locale', 'icon', 'avatar', 'class', 'ui'), emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputTimeProps>(props)
@@ -86,6 +86,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTime ||
   color: color.value,
   variant: props.variant,
   size: inputSize.value,
+  loading: props.loading,
   highlight: highlight.value,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
@@ -131,46 +132,44 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <TimeFieldRoot
-      v-bind="{ ...rootProps, ...ariaAttrs }"
-      :id="id"
-      v-slot="{ segments }"
-      :model-value="modelValue"
-      :default-value="defaultValue"
-      :name="name"
-      :disabled="disabled"
-      :locale="locale"
-      :dir="dir"
-      :class="ui.base({ class: [props.ui?.base] })"
-      @update:model-value="onUpdate"
-      @blur="onBlur"
-      @focus="onFocus"
+  <TimeFieldRoot
+    v-bind="{ ...rootProps, ...ariaAttrs }"
+    :id="id"
+    v-slot="{ segments }"
+    :model-value="modelValue"
+    :default-value="defaultValue"
+    :name="name"
+    :disabled="disabled"
+    :locale="locale"
+    :dir="dir"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
+    @update:model-value="onUpdate"
+    @blur="onBlur"
+    @focus="onFocus"
+  >
+    <TimeFieldInput
+      v-for="(segment, index) in segments"
+      :key="`${segment.part}-${index}`"
+      :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
+      :part="segment.part"
+      :class="ui.segment({ class: props.ui?.segment })"
     >
-      <TimeFieldInput
-        v-for="(segment, index) in segments"
-        :key="`${segment.part}-${index}`"
-        :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
-        :part="segment.part"
-        :class="segment.part !== 'literal' ? ui.segment({ class: props.ui?.segment }) : ''"
-      >
-        {{ segment.value.trim() }}
-      </TimeFieldInput>
+      {{ segment.value.trim() }}
+    </TimeFieldInput>
 
-      <slot :ui="ui" />
+    <slot :ui="ui" />
 
-      <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :ui="ui">
-          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-          <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
-        </slot>
-      </span>
+    <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+      <slot name="leading" :ui="ui">
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+      </slot>
+    </span>
 
-      <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-        <slot name="trailing" :ui="ui">
-          <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
-        </slot>
-      </span>
-    </TimeFieldRoot>
-  </Primitive>
+    <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+      <slot name="trailing" :ui="ui">
+        <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+      </slot>
+    </span>
+  </TimeFieldRoot>
 </template>
