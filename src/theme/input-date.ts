@@ -5,28 +5,60 @@ import input from './input'
 export default (options: Required<ModuleOptions>) => {
   return defuFn({
     slots: {
-      base: (prev: string) => [prev, 'select-none relative inline-flex items-center align-middle !gap-0'],
-      separator: 'mx-1 text-muted',
-      segment: 'focus:bg-muted data-invalid:data-focused:bg-error data-focused:data-placeholder:text-muted data-focused:text-highlighted data-invalid:data-placeholder:text-error data-invalid:text-error data-placeholder:text-muted data-[segment=literal]:text-muted rounded outline-hidden data-disabled:cursor-not-allowed data-disabled:opacity-75 data-invalid:data-focused:text-white data-invalid:data-focused:data-placeholder:text-white text-center'
+      root: () => undefined,
+      base: () => ['group relative inline-flex items-center rounded-md select-none', options.theme.transitions && 'transition-colors'],
+      segment: ['rounded text-center outline-hidden data-placeholder:text-dimmed data-[segment=literal]:text-dimmed data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+      separatorIcon: 'shrink-0 size-4 text-muted'
     },
     variants: {
       size: {
         xs: {
-          segment: 'min-w-7'
+          base: (prev: string) => [prev, 'gap-0.25'],
+          segment: ''
         },
         sm: {
-          segment: 'min-w-7'
+          base: (prev: string) => [prev, 'gap-0.5'],
+          segment: ''
         },
         md: {
-          segment: 'min-w-8'
+          base: (prev: string) => [prev, 'gap-0.5'],
+          segment: 'data-[segment=day]:w-7 data-[segment=month]:w-7 data-[segment=year]:w-12'
         },
         lg: {
-          segment: 'min-w-8'
+          base: (prev: string) => [prev, 'gap-0.75'],
+          segment: ''
         },
         xl: {
-          segment: 'min-w-9'
+          base: (prev: string) => [prev, 'gap-0.75'],
+          segment: ''
         }
       }
-    }
+    },
+    compoundVariants: [{
+      variant: 'outline',
+      class: {
+        segment: 'focus:bg-elevated'
+      }
+    }, {
+      variant: 'soft',
+      class: {
+        segment: 'focus:bg-accented/50 group-hover:focus:bg-accented'
+      }
+    }, {
+      variant: 'subtle',
+      class: {
+        segment: 'focus:bg-accented'
+      }
+    }, {
+      variant: 'ghost',
+      class: {
+        segment: 'focus:bg-elevated group-hover:focus:bg-accented'
+      }
+    }, {
+      variant: 'none',
+      class: {
+        segment: 'focus:bg-elevated'
+      }
+    }]
   }, input(options))
 }

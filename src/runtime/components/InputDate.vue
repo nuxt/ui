@@ -3,7 +3,7 @@ import type { ComponentPublicInstance } from 'vue'
 import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateRange, DateValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps } from '../types'
+import type { AvatarProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 import theme from '#build/ui/input-date'
 
@@ -11,6 +11,9 @@ type InputDate = ComponentConfig<typeof theme, AppConfig, 'inputDate'>
 
 type InputDateDefaultValue<R extends boolean = false> = R extends true ? DateRange : DateValue
 type InputDateModelValue<R extends boolean = false> = R extends true ? (DateRange | null) : (DateValue | undefined)
+
+// todo: reka-ui does not export this type, we need to figure something out about it. https://github.com/unovue/reka-ui/blob/v2/packages/core/src/shared/date/types.ts#L37
+type SegmentPart = any
 
 type _DateFieldRootProps = Omit<DateFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>
 type _RangeDateFieldRootProps = Omit<DateRangeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>
@@ -37,6 +40,12 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
   highlight?: boolean
   autofocus?: boolean
   autofocusDelay?: number
+  /**
+   * The icon to use as a separator.
+   * @defaultValue appConfig.ui.icons.chevronRight
+   * @IconifyIcon
+   */
+  separatorIcon?: IconProps['name']
   /** Whether or not a range of dates can be selected */
   range?: R & boolean
   defaultValue?: InputDateDefaultValue<R>
@@ -56,12 +65,13 @@ export interface InputDateSlots {
   leading(props: { ui: InputDate['ui'] }): any
   default(props: { ui: InputDate['ui'] }): any
   trailing(props: { ui: InputDate['ui'] }): any
+  separator(props: { ui: InputDate['ui'] }): any
 }
 </script>
 
 <script setup lang="ts" generic="R extends boolean">
 import { computed, onMounted, ref } from 'vue'
-import { useForwardPropsEmits, Primitive } from 'reka-ui'
+import { useForwardPropsEmits } from 'reka-ui'
 import { DateField as SingleDateField, DateRangeField as RangeDateField } from 'reka-ui/namespaced'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -70,6 +80,8 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
+import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 const props = withDefaults(defineProps<InputDateProps<R>>(), {
   autofocusDelay: 0
@@ -148,50 +160,51 @@ defineExpose({
       :type="type"
       :part="segment.part"
       :class="segment.part !== 'literal' ? ui.segment({ class: props.ui?.segment }) : ''"
+      :data-segment="segment.part"
     >
       {{ segment.value.trim() }}
     </DateField.Input>
   </DefineSegmentsTemplate>
 
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <DateField.Root
-      v-bind="{ ...rootProps, ...ariaAttrs }"
-      :id="id"
-      v-slot="{ segments }"
-      :model-value="(modelValue as DateValue | DateValue[])"
-      :default-value="(defaultValue as DateValue)"
-      :name="name"
-      :disabled="disabled"
-      :locale="locale"
-      :dir="dir"
-      :class="ui.base({ class: [props.ui?.base] })"
-      @update:model-value="onUpdate"
-      @blur="onBlur"
-      @focus="onFocus"
-    >
-      <template v-if="props.range">
-        <ReuseSegmentsTemplate :segments="segments.start" type="start" />
-        <span :class="ui.separator({ class: props.ui?.separator })">-</span>
-        <ReuseSegmentsTemplate :segments="segments.end" type="end" />
-      </template>
-      <template v-else>
-        <ReuseSegmentsTemplate :segments="segments" />
-      </template>
+  <DateField.Root
+    v-bind="{ ...rootProps, ...ariaAttrs }"
+    :id="id"
+    v-slot="{ segments }"
+    :model-value="(modelValue as DateValue | DateRange)"
+    :default-value="(defaultValue as DateValue | DateRange)"
+    :name="name"
+    :disabled="disabled"
+    :locale="locale"
+    :dir="dir"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
+    @update:model-value="onUpdate"
+    @blur="onBlur"
+    @focus="onFocus"
+  >
+    <template v-if="props.range">
+      <ReuseSegmentsTemplate :segments="segments.start" type="start" />
+      <slot name="separator" :ui="ui">
+        <UIcon :name="separatorIcon || appConfig.ui.icons.minus" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
+      </slot>
+      <ReuseSegmentsTemplate :segments="segments.end" type="end" />
+    </template>
+    <template v-else>
+      <ReuseSegmentsTemplate :segments="segments" />
+    </template>
 
-      <slot :ui="ui" />
+    <slot :ui="ui" />
 
-      <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :ui="ui">
-          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-          <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
-        </slot>
-      </span>
+    <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+      <slot name="leading" :ui="ui">
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+      </slot>
+    </span>
 
-      <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-        <slot name="trailing" :ui="ui">
-          <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
-        </slot>
-      </span>
-    </DateField.Root>
-  </Primitive>
+    <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+      <slot name="trailing" :ui="ui">
+        <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+      </slot>
+    </span>
+  </DateField.Root>
 </template>
