@@ -65,6 +65,9 @@ options:
   - name: orientation
     label: orientation
     default: vertical
+    items:
+      - vertical
+      - horizontal
 ---
 ::
 

@@ -85,28 +85,6 @@ props:
 When using the `posts` prop instead of the default slot, the `orientation` of the posts is automatically reversed, `horizontal` to `vertical` and vice versa.
 ::
 
-### Virtualize
-
-Use the `virtualize` prop to enable virtualization for large lists of blog posts. This improves performance by only rendering visible items.
-
-::component-example
----
-name: 'blog-posts-virtualized-example'
-class: '!p-0'
-options:
-  - name: postCount
-    label: postCount
-    default: 100
-  - name: laneWidth
-    label: laneWidth
-    default: 200
----
-::
-
-::tip
-Virtualization uses the [ScrollArea](/docs/components/scroll-area) component internally to efficiently render large lists by only mounting visible items in the DOM.
-::
-
 ## Examples
 
 ::note
