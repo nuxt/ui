@@ -73,7 +73,7 @@ const slots = defineSlots<InputTimeSlots>()
 const { code: codeLocale, dir } = useLocale()
 const appConfig = useAppConfig() as InputTime['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'as', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'autofocus', 'autofocusDelay', 'locale', 'icon', 'avatar', 'class', 'ui'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'as', 'id', 'name', 'color', 'variant', 'size', 'name', 'highlight', 'disabled', 'autofocus', 'autofocusDelay', 'locale', 'icon', 'avatar', 'class', 'ui'), emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputTimeProps>(props)
@@ -136,8 +136,6 @@ defineExpose({
     v-bind="{ ...rootProps, ...ariaAttrs }"
     :id="id"
     v-slot="{ segments }"
-    :model-value="modelValue"
-    :default-value="defaultValue"
     :name="name"
     :disabled="disabled"
     :locale="locale"
