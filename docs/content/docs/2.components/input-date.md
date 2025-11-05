@@ -113,6 +113,18 @@ props:
 ---
 ::
 
+### Separator Icon
+
+Use the `separator-icon` prop to change the icon of the range separator.
+
+::component-code
+---
+props:
+  range: true
+  separatorIcon: 'i-lucide-arrow-right'
+---
+::
+
 ### Disabled
 
 Use the `disabled` prop to disable the InputDate.
@@ -121,18 +133,6 @@ Use the `disabled` prop to disable the InputDate.
 ---
 props:
   disabled: true
----
-::
-
-### Range Separator Icon
-
-Use the `range-separator-icon` prop to change the icon of the range separator.
-
-::component-code
----
-props:
-  range: true
-  rangeSeparatorIcon: 'i-lucide-arrow-right'
 ---
 ::
 
