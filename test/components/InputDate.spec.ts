@@ -29,8 +29,9 @@ describe('InputDate', () => {
     ['with minValue', { props: { minValue: new CalendarDate(2025, 1, 1) } }],
     ['with maxValue', { props: { maxValue: new CalendarDate(2025, 1, 31) } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant, defaultValue: new CalendarDate(2025, 1, 15) } }]),
-    ['with color neutral', { props: { color: 'neutral' } }],
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant, defaultValue: new CalendarDate(2025, 1, 15) } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral', defaultValue: new CalendarDate(2025, 1, 15) } }]),
+    ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'max-w-sm' } }],
     ['with ui', { props: { ui: { header: 'gap-4' } } }],
@@ -38,7 +39,7 @@ describe('InputDate', () => {
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
-    ['with rangeSeparator slot', { slots: { rangeSeparator: () => '=' } }]
+    ['with separator slot', { slots: { separator: () => '=' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputDateProps, slots?: Partial<InputDateSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputDate)
     expect(html).toMatchSnapshot()
