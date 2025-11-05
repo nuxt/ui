@@ -43,8 +43,7 @@ import { tv } from '../utils/tv'
 import UBlogPost from './BlogPost.vue'
 
 const props = withDefaults(defineProps<BlogPostsProps>(), {
-  orientation: 'horizontal',
-  virtualize: false
+  orientation: 'horizontal'
 })
 const slots = defineSlots<BlogPostsSlots<T>>()
 
@@ -56,7 +55,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPosts ||
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, virtualize: !!virtualize, class: props.class })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: props.class })">
     <slot>
       <UBlogPost
         v-for="(post, index) in posts"
