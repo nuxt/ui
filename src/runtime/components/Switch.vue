@@ -8,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Switch = ComponentConfig<typeof theme, AppConfig, 'switch'>
 
-export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'disabled' | 'type' | 'value' | 'name'> {
+export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'value' | 'name'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
