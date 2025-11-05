@@ -41,11 +41,11 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
   autofocus?: boolean
   autofocusDelay?: number
   /**
-   * The icon to use as a separator.
-   * @defaultValue appConfig.ui.icons.chevronRight
+   * The icon to use as a range separator.
+   * @defaultValue appConfig.ui.icons.minus
    * @IconifyIcon
    */
-  separatorIcon?: IconProps['name']
+  rangeSeparatorIcon?: IconProps['name']
   /** Whether or not a range of dates can be selected */
   range?: R & boolean
   defaultValue?: InputDateDefaultValue<R>
@@ -66,6 +66,7 @@ export interface InputDateSlots {
   default(props: { ui: InputDate['ui'] }): any
   trailing(props: { ui: InputDate['ui'] }): any
   separator(props: { ui: InputDate['ui'] }): any
+  rangeSeparator(props: { ui: InputDate['ui'] }): any
 }
 </script>
 
@@ -183,8 +184,8 @@ defineExpose({
   >
     <template v-if="props.range">
       <ReuseSegmentsTemplate :segments="segments.start" type="start" />
-      <slot name="separator" :ui="ui">
-        <UIcon :name="separatorIcon || appConfig.ui.icons.minus" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
+      <slot name="rangeSeparator" :ui="ui">
+        <UIcon :name="rangeSeparatorIcon || appConfig.ui.icons.minus" :class="ui.rangeSeparatorIcon({ class: props.ui?.rangeSeparatorIcon })" />
       </slot>
       <ReuseSegmentsTemplate :segments="segments.end" type="end" />
     </template>
