@@ -37,7 +37,8 @@ describe('InputDate', () => {
     // Slots
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }],
-    ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
+    ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
+    ['with rangeSeparator slot', { slots: { rangeSeparator: () => '=' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputDateProps, slots?: Partial<InputDateSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputDate)
     expect(html).toMatchSnapshot()
