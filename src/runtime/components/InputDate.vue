@@ -81,6 +81,8 @@ import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(defineProps<InputDateProps<R>>(), {
   autofocusDelay: 0
 })
@@ -169,7 +171,7 @@ defineExpose({
   </DefineSegmentsTemplate>
 
   <DateField.Root
-    v-bind="{ ...rootProps, ...ariaAttrs }"
+    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="id"
     v-slot="{ segments }"
     :model-value="(modelValue as DateValue)"
