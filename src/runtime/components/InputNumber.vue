@@ -3,12 +3,15 @@ import type { NumberFieldRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-number'
 import type { ButtonProps, IconProps } from '../types'
+import type { InputHTMLAttributes } from '../types/html'
 import type { ModelModifiers } from '../types/input'
 import type { ComponentConfig } from '../types/tv'
 
 type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>
 
-export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly'> {
+type InputNumberValue = number | null
+
+export interface InputNumberProps<T extends InputNumberValue = InputNumberValue> extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'min' | 'max' | 'readonly' | 'required' | 'step' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -54,7 +57,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   decrementDisabled?: boolean
   autofocus?: boolean
   autofocusDelay?: number
-  modelModifiers?: Pick<ModelModifiers, 'optional'>
+  modelModifiers?: Pick<ModelModifiers<T>, 'optional'>
   /**
    * The locale to use for formatting and parsing numbers.
    * @defaultValue UApp.locale.code
@@ -64,8 +67,8 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   ui?: InputNumber['slots']
 }
 
-export interface InputNumberEmits {
-  'update:modelValue': [value: number]
+export interface InputNumberEmits<T extends InputNumberValue = InputNumberValue> {
+  'update:modelValue': [value: T]
   'blur': [event: FocusEvent]
   'change': [event: Event]
 }
@@ -76,8 +79,8 @@ export interface InputNumberSlots {
 }
 </script>
 
-<script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
+<script setup lang="ts" generic="T extends InputNumberValue = InputNumberValue">
+import { onMounted, computed, useTemplateRef, toRef } from 'vue'
 import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -89,23 +92,23 @@ import UButton from './Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<InputNumberProps>(), {
+const props = withDefaults(defineProps<InputNumberProps<T>>(), {
   orientation: 'horizontal',
   increment: true,
   decrement: true
 })
-const emits = defineEmits<InputNumberEmits>()
+const emits = defineEmits<InputNumberEmits<T>>()
 defineSlots<InputNumberSlots>()
 
-const modelValue = useVModel<InputNumberProps, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
+const modelValue = useVModel<InputNumberProps<T>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
 
 const { t, code: codeLocale } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'readonly'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps>(props)
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps<T>>(props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps<T>>(props)
 
 const locale = computed(() => props.locale || codeLocale.value)
 const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
@@ -124,7 +127,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber 
 const incrementIcon = computed(() => props.incrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.plus : appConfig.ui.icons.chevronUp))
 const decrementIcon = computed(() => props.decrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.minus : appConfig.ui.icons.chevronDown))
 
-const inputRef = ref<InstanceType<typeof NumberFieldInput> | null>(null)
+const inputRef = useTemplateRef('inputRef')
 
 function onUpdate(value: number | undefined) {
   if (props.modelModifiers?.optional) {
@@ -157,7 +160,7 @@ onMounted(() => {
 })
 
 defineExpose({
-  inputRef
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement)
 })
 </script>
 

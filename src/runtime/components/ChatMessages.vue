@@ -1,4 +1,6 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { ComponentPublicInstance } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UIMessage, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
@@ -69,10 +71,10 @@ export type ChatMessagesSlots = {
   indicator(props: { ui: ChatMessages['ui'] }): any
   viewport(props: { ui: ChatMessages['ui'], onClick: () => void }): any
 }
+
 </script>
 
 <script setup lang="ts">
-import type { ComponentPublicInstance } from 'vue'
 import { ref, computed, watch, nextTick, toRef, onMounted } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'

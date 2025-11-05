@@ -216,6 +216,8 @@ import ULink from './Link.vue'
 import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
   labelKey: 'label',
@@ -360,7 +362,7 @@ const filteredGroups = computed(() => {
 
 const filteredItems = computed(() => filteredGroups.value.flatMap(group => group.items || []))
 
-const listboxRootRef = useTemplateRef('listboxRootRef')
+const rootRef = useTemplateRef('rootRef')
 
 function navigate(item: T) {
   if (!item.children?.length) {
@@ -377,7 +379,7 @@ function navigate(item: T) {
 
   searchTerm.value = ''
 
-  listboxRootRef.value?.highlightFirstItem()
+  rootRef.value?.highlightFirstItem()
 }
 
 function navigateBack() {
@@ -389,7 +391,7 @@ function navigateBack() {
 
   searchTerm.value = ''
 
-  listboxRootRef.value?.highlightFirstItem()
+  rootRef.value?.highlightFirstItem()
 }
 
 function onBackspace() {
@@ -478,7 +480,7 @@ function onSelect(e: Event, item: T) {
     </ListboxItem>
   </DefineItemTemplate>
 
-  <ListboxRoot v-bind="rootProps" ref="listboxRootRef" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ListboxRoot v-bind="{ ...rootProps, ...$attrs }" ref="rootRef" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
         :placeholder="placeholder"

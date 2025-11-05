@@ -1,16 +1,17 @@
 <script lang="ts">
-import type { InputHTMLAttributes } from 'vue'
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { InputHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type InputMenu = ComponentConfig<typeof theme, AppConfig, 'inputMenu'>
 
 export type InputMenuValue = AcceptableValue
+
 export type InputMenuItem = InputMenuValue | {
   label?: string
   description?: string
@@ -32,7 +33,7 @@ export type InputMenuItem = InputMenuValue | {
   [key: string]: any
 }
 
-export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus'>, UseComponentIconsProps {
+export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'name' | 'type' | 'placeholder' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'max' | 'step'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -189,7 +190,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { computed, ref, toRef, onMounted, toRaw, nextTick } from 'vue'
+import { computed, useTemplateRef, toRef, onMounted, toRaw, nextTick } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
@@ -337,7 +338,7 @@ const createItem = computed(() => {
 })
 const createItemPosition = computed(() => typeof props.createItem === 'object' ? props.createItem.position : 'bottom')
 
-const inputRef = ref<InstanceType<typeof ComboboxInput> | null>(null)
+const inputRef = useTemplateRef('inputRef')
 
 function autoFocus() {
   if (props.autofocus) {
@@ -433,7 +434,7 @@ function isInputItem(item: InputMenuItem): item is Exclude<InputMenuItem, InputM
 }
 
 defineExpose({
-  inputRef
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement)
 })
 </script>
 

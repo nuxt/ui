@@ -4,13 +4,14 @@ import type { TagsInputRootProps, TagsInputRootEmits, AcceptableInputValue } fro
 import theme from '#build/ui/input-tags'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, IconProps } from '../types'
+import type { InputHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type InputTags = ComponentConfig<typeof theme, AppConfig, 'inputTags'>
 
 export type InputTagItem = AcceptableInputValue
 
-export interface InputTagsProps<T extends InputTagItem = InputTagItem> extends Pick<TagsInputRootProps<T>, 'modelValue' | 'defaultValue' | 'addOnPaste' | 'addOnTab' | 'addOnBlur' | 'duplicate' | 'disabled' | 'delimiter' | 'max' | 'id' | 'convertValue' | 'displayValue' | 'name' | 'required'>, UseComponentIconsProps {
+export interface InputTagsProps<T extends InputTagItem = InputTagItem> extends Pick<TagsInputRootProps<T>, 'modelValue' | 'defaultValue' | 'addOnPaste' | 'addOnTab' | 'addOnBlur' | 'duplicate' | 'disabled' | 'delimiter' | 'max' | 'id' | 'convertValue' | 'displayValue' | 'name' | 'required'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'max' | 'required' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'step'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -64,7 +65,7 @@ export interface InputTagsSlots<T extends InputTagItem = InputTagItem> {
 </script>
 
 <script setup lang="ts" generic="T extends InputTagItem">
-import { computed, ref, onMounted, toRaw } from 'vue'
+import { computed, useTemplateRef, onMounted, toRaw, toRef } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -105,19 +106,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTags ||
   fieldGroup: orientation.value
 }))
 
-const inputRef = ref<InstanceType<typeof TagsInputInput> | null>(null)
-
-onMounted(() => {
-  setTimeout(() => {
-    autoFocus()
-  }, props.autofocusDelay)
-})
+const inputRef = useTemplateRef('inputRef')
 
 function autoFocus() {
   if (props.autofocus) {
     inputRef.value?.$el?.focus()
   }
 }
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
 
 function onUpdate(value: T[]) {
   if (toRaw(props.modelValue) === value) {
@@ -141,7 +142,7 @@ function onFocus(event: FocusEvent) {
 }
 
 defineExpose({
-  inputRef
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement)
 })
 </script>
 

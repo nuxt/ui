@@ -4,12 +4,14 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { ButtonHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type SelectMenu = ComponentConfig<typeof theme, AppConfig, 'selectMenu'>
 
 export type SelectMenuValue = AcceptableValue
+
 export type SelectMenuItem = SelectMenuValue | {
   label?: string
   description?: string
@@ -31,7 +33,7 @@ export type SelectMenuItem = SelectMenuValue | {
   [key: string]: any
 }
 
-export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps {
+export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -181,7 +183,7 @@ export interface SelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { ref, computed, onMounted, toRef, toRaw } from 'vue'
+import { useTemplateRef, computed, onMounted, toRef, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
@@ -339,7 +341,7 @@ const createItem = computed(() => {
 })
 const createItemPosition = computed(() => typeof props.createItem === 'object' ? props.createItem.position : 'bottom')
 
-const triggerRef = ref<InstanceType<typeof ComboboxTrigger> | null>(null)
+const triggerRef = useTemplateRef('triggerRef')
 
 function autoFocus() {
   if (props.autofocus) {
@@ -414,7 +416,7 @@ function isSelectItem(item: SelectMenuItem): item is Exclude<SelectMenuItem, Sel
 }
 
 defineExpose({
-  triggerRef
+  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement)
 })
 </script>
 

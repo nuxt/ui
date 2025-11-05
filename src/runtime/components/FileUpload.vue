@@ -3,11 +3,12 @@ import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
 import type { ButtonProps, IconProps } from '../types'
+import type { InputHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>
 
-export interface FileUploadProps<M extends boolean = false> {
+export interface FileUploadProps<M extends boolean = false> extends /** @vue-ignore */ Pick<InputHTMLAttributes, 'form' | 'formaction' | 'formenctype' | 'formmethod' | 'formnovalidate' | 'formtarget'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -124,8 +125,8 @@ export interface FileUploadSlots<M extends boolean = false> {
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
-import { computed, watch } from 'vue'
-import { Primitive } from 'reka-ui'
+import { computed, toRef, watch } from 'vue'
+import { Primitive, VisuallyHidden } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig, useLocale } from '#imports'
 import { useFormField } from '../composables/useFormField'
@@ -252,15 +253,15 @@ function removeFile(index?: number) {
 }
 
 watch(modelValue, (newValue) => {
-  const hasModelReset = !Array.isArray(newValue) || !newValue.length
+  const hasModelReset = props.multiple ? !(newValue as File[])?.length : !newValue
 
-  if (hasModelReset && inputRef.value) {
-    inputRef.value.value = ''
+  if (hasModelReset && inputRef.value?.$el) {
+    inputRef.value.$el.value = ''
   }
 })
 
 defineExpose({
-  inputRef,
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement),
   dropzoneRef
 })
 </script>
@@ -365,18 +366,18 @@ defineExpose({
       <ReuseFilesTemplate v-if="position === 'outside'" />
     </slot>
 
-    <input
+    <VisuallyHidden
       :id="id"
       ref="inputRef"
+      as="input"
       type="file"
+      feature="fully-hidden"
       :name="name"
       :accept="accept"
       :multiple="(multiple as boolean)"
       :required="required"
       :disabled="disabled"
       v-bind="{ ...$attrs, ...ariaAttrs }"
-      class="sr-only"
-      tabindex="-1"
-    >
+    />
   </Primitive>
 </template>

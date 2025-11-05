@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Ref, WatchOptions } from 'vue'
+import type { Ref, WatchOptions, ComponentPublicInstance } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Cell, Header, RowData, TableMeta } from '@tanstack/table-core'
 import type {
@@ -37,6 +37,7 @@ import type {
 } from '@tanstack/vue-table'
 import type { VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '#build/ui/table'
+import type { TableHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 declare module '@tanstack/table-core' {
@@ -82,7 +83,7 @@ export interface TableOptions<T extends TableData = TableData> extends Omit<Core
   renderFallbackValue?: CoreOptions<T>['renderFallbackValue']
 }
 
-export interface TableProps<T extends TableData = TableData> extends TableOptions<T> {
+export interface TableProps<T extends TableData = TableData> extends TableOptions<T>, /** @vue-ignore */ TableHTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -220,7 +221,7 @@ export type TableSlots<T extends TableData = TableData> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, ref, watch, toRef } from 'vue'
+import { ref, computed, useTemplateRef, watch, toRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -322,8 +323,8 @@ const groupingState = defineModel<GroupingState>('grouping', { default: [] })
 const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 const paginationState = defineModel<PaginationState>('pagination', { default: {} })
 
-const rootRef = ref<InstanceType<typeof Primitive>>()
-const tableRef = ref<HTMLTableElement | null>(null)
+const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
+const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
 
 const tableApi = useVueTable({
   ...reactiveOmit(props, 'as', 'data', 'columns', 'virtualize', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
@@ -474,7 +475,7 @@ watch(() => props.data, () => {
 
 defineExpose({
   get $el() {
-    return rootRef.value?.$el
+    return rootRef.value?.$el as HTMLElement
   },
   tableRef,
   tableApi

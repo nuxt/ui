@@ -1,21 +1,22 @@
 <script lang="ts">
-import type { ButtonHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { RouterLinkProps, RouteLocationRaw } from 'vue-router'
+import type { RouterLinkProps } from 'vue-router'
 import theme from '#build/ui/link'
+import type { ButtonHTMLAttributes, AnchorHTMLAttributes } from '../../types/html'
 import type { ComponentConfig } from '../../types/tv'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
 
-interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
+export interface LinkProps extends Omit<RouterLinkProps, 'custom'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
   /**
-   * Route Location the link should navigate to when clicked on.
+   * The element or component this component should render as when not a link.
+   * @defaultValue 'button'
    */
-  to?: RouteLocationRaw // need to manually type to avoid breaking typedPages
+  as?: any
   /**
    * An alias for `to`. If used with `to`, `href` will be ignored
    */
-  href?: NuxtLinkProps['to']
+  href?: LinkProps['to']
   /**
    * Forces the link to be considered as external (true) or internal (false). This is helpful to handle edge-cases
    */
@@ -28,37 +29,6 @@ interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
    * A rel attribute value to apply on the link. Defaults to "noopener noreferrer" for external links.
    */
   rel?: 'noopener' | 'noreferrer' | 'nofollow' | 'sponsored' | 'ugc' | (string & {}) | null
-  /**
-   * If set to true, no rel attribute will be added to the link
-   */
-  noRel?: boolean
-  /**
-   * A class to apply to links that have been prefetched.
-   */
-  prefetchedClass?: string
-  /**
-   * When enabled will prefetch middleware, layouts and payloads of links in the viewport.
-   */
-  prefetch?: boolean
-  /**
-   * Allows controlling when to prefetch links. By default, prefetch is triggered only on visibility.
-   */
-  prefetchOn?: 'visibility' | 'interaction' | Partial<{
-    visibility: boolean
-    interaction: boolean
-  }>
-  /**
-   * Escape hatch to disable `prefetch` attribute.
-   */
-  noPrefetch?: boolean
-}
-
-export interface LinkProps extends NuxtLinkProps {
-  /**
-   * The element or component this component should render as when not a link.
-   * @defaultValue 'button'
-   */
-  as?: any
   /**
    * The type of the button when not a link.
    * @defaultValue 'button'
@@ -184,6 +154,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
 }
 </script>
 
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
   <template v-if="!isExternal && !!to">
     <RouterLink v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive }" v-bind="routerLinkProps" :to="to" custom>
