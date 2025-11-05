@@ -95,7 +95,11 @@ const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGr
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{ segments?: { part: any, value: string }[], type?: 'start' | 'end' }>()
+const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
+  // todo: need to make a PR in reka-ui to export this type.
+  segments?: Parameters<InstanceType<typeof SingleDateField.Root>['$slots']['default'] & {}>[0]['segments']
+  type?: 'start' | 'end'
+}>()
 
 const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
 
