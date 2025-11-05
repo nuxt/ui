@@ -96,7 +96,7 @@ const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(p
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
-  // todo: need to make a PR in reka-ui to export this type.
+  // todo: need to make a PR in reka-ui to export this type - https://github.com/unovue/reka-ui/issues/2260
   segments?: Parameters<InstanceType<typeof SingleDateField.Root>['$slots']['default'] & {}>[0]['segments']
   type?: 'start' | 'end'
 }>()
