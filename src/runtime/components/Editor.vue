@@ -1,69 +1,97 @@
 <script lang="ts">
+import type { Content, EditorOptions } from '@tiptap/core'
+import type { Editor as TiptapEditor } from '@tiptap/vue-3'
+import type { StarterKitOptions } from '@tiptap/starter-kit'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/editor'
 import type { ComponentConfig } from '../types/tv'
-import * as prose from '#build/ui/prose'
 
 type Editor = ComponentConfig<typeof theme, AppConfig, 'editor'>
 
-export interface EditorProps {
+export type EditorFormat = 'json' | 'html' | 'text'
+export type EditorContent = Content
+
+export interface EditorProps<T extends EditorFormat = EditorFormat> extends Omit<Partial<EditorOptions>, 'content'> {
   /**
-   * The element or component this component should render as.
-   * @defaultValue 'div'
+   * The starter kit options to configure the editor.
+   * @defaultValue `{ headings: { levels: [1, 2, 3, 4] } }`
    */
-  as?: any
   starterKit?: Partial<StarterKitOptions>
+  /**
+   * The format for the content output
+   * - 'json': Returns ProseMirror JSON document
+   * - 'html': Returns HTML string
+   * - 'text': Returns plain text string
+   * If not specified, auto-detects from the initial content type
+   * @defaultValue undefined (auto-detect)
+   */
+  format?: T
   class?: any
-  ui?: Editor['slots']
+  ui?: Editor['ui']
 }
 
 export interface EditorSlots {
-  default(props?: {}): any
+  default(props: { editor: TiptapEditor }): any
 }
 </script>
 
-<script setup lang="ts">
-import { computed } from 'vue'
-import { useEditor, EditorContent } from '@tiptap/vue-3'
-import StarterKit, { type StarterKitOptions } from '@tiptap/starter-kit'
+<script setup lang="ts" generic="T extends EditorFormat">
+import { computed, ref } from 'vue'
 import { defu } from 'defu'
+import { useForwardProps } from 'reka-ui'
+import { reactiveOmit } from '@vueuse/core'
+import { useEditor, EditorContent } from '@tiptap/vue-3'
+import StarterKit from '@tiptap/starter-kit'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
 
 const props = defineProps<EditorProps>()
 defineSlots<EditorSlots>()
 
-const content = defineModel<string>({ default: '' })
+const content = defineModel<Content>({ default: '' })
 
 const appConfig = useAppConfig() as Editor['AppConfig']
 
+const editorProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'class', 'format'))
+
+const detectedFormat = ref<EditorFormat>(props.format || (typeof content.value === 'string' ? 'html' : 'json'))
+
 const editor = useEditor({
+  ...editorProps.value,
   content: content.value,
-  extensions: [StarterKit.configure(defu(props.starterKit, {
-    heading: {
-      levels: [2, 3, 4]
-    },
-    paragraph: {
-      HTMLAttributes: {
-        class: prose.p.base
+  extensions: [
+    StarterKit.configure(defu(props.starterKit, {
+      headings: {
+        levels: [1, 2, 3, 4, 5, 6]
       }
-    },
-    link: false,
-    blockquote: {
-      HTMLAttributes: {
-        class: prose.blockquote.base
-      }
-    }
-  })), ...props.extensions],
+    })),
+    ...(props.extensions || [])
+  ],
   onUpdate: ({ editor }) => {
-    content.value = editor.getHTML()
+    const format = props.format || detectedFormat.value
+
+    if (format === 'html') {
+      content.value = editor.getHTML()
+    } else if (format === 'text') {
+      content.value = editor.getText()
+    } else {
+      content.value = editor.getJSON()
+    }
   }
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editor || {}) })())
+
+defineExpose({
+  editor
+})
 </script>
 
 <template>
-  <EditorContent :editor="editor" :class="ui.root({ class: [props.ui?.root, props.class] })" />
+  <div :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <slot v-if="editor" :editor="editor" />
+
+    <EditorContent role="presentation" :editor="editor" :class="ui.base({ class: props.ui?.base })" />
+  </div>
 </template>
