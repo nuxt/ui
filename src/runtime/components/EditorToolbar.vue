@@ -19,7 +19,7 @@ type EditorActionType
   = | { kind: 'mark', mark: 'bold' | 'italic' | 'strike' | 'code' | 'underline' }
     | { kind: 'textAlign', align: 'left' | 'center' | 'right' | 'justify' }
     | { kind: 'heading', level: 1 | 2 | 3 | 4 | 5 | 6 }
-    | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' }
+    | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' | 'undo' | 'redo' }
 
 type EditorToolbarDropdownItem = (DropdownMenuItem & EditorActionType) | DropdownMenuItem
 
@@ -107,7 +107,9 @@ const functionMap = {
   orderedList: 'toggleOrderedList',
   codeBlock: 'toggleCodeBlock',
   horizontalRule: 'setHorizontalRule',
-  paragraph: 'setParagraph'
+  paragraph: 'setParagraph',
+  undo: 'undo',
+  redo: 'redo'
 }
 
 function isCommandActive(command: EditorToolbarItem): boolean {
@@ -137,6 +139,11 @@ function isCommandActive(command: EditorToolbarItem): boolean {
   // For mark commands, check the mark
   if (command.kind === 'mark' && command.mark) {
     return props.editor.isActive(command.mark)
+  }
+
+  // Undo/redo commands don't have an active state
+  if (command.kind === 'undo' || command.kind === 'redo') {
+    return false
   }
 
   // For other node types (blockquote, bulletList, etc.)
@@ -174,8 +181,13 @@ function isCommandDisabled(command: EditorToolbarItem) {
     return !(props.editor.can() as any).toggleHeading({ level: command.level })
   }
 
-  // For node commands that use toggle
-  if (['blockquote', 'bulletList', 'orderedList', 'codeBlock'].includes(command.kind)) {
+  // For list commands, always allow switching between list types
+  if (command.kind === 'bulletList' || command.kind === 'orderedList') {
+    return false
+  }
+
+  // For other node commands that use toggle
+  if (['blockquote', 'codeBlock'].includes(command.kind)) {
     const canFunction = functionMap[command.kind] as keyof typeof props.editor.can
     return !(props.editor.can() as any)[canFunction]()
   }
@@ -184,6 +196,11 @@ function isCommandDisabled(command: EditorToolbarItem) {
   if (['horizontalRule', 'paragraph'].includes(command.kind)) {
     const canFunction = functionMap[command.kind] as keyof typeof props.editor.can
     return !(props.editor.can() as any)[canFunction]()
+  }
+
+  // For undo/redo commands, check if there's history
+  if (command.kind === 'undo' || command.kind === 'redo') {
+    return !(props.editor.can() as any)[command.kind]()
   }
 
   return false
@@ -203,24 +220,52 @@ function onCommandClick(_: Event, command: EditorToolbarItem) {
     return
   }
 
-  const chain = props.editor.chain().focus() as any
+  const chain = props.editor.chain() as any
   const chainFunction = functionMap[command.kind]
 
   // Handle different command types with their specific arguments
   if (command.kind === 'mark' && command.mark) {
-    chain[chainFunction](command.mark).run()
+    chain.focus()[chainFunction](command.mark).run()
   } else if (command.kind === 'textAlign' && command.align) {
-    chain[chainFunction](command.align).run()
+    chain.focus()[chainFunction](command.align).run()
   } else if (command.kind === 'heading' && command.level) {
-    chain[chainFunction]({ level: command.level }).run()
+    chain.focus()[chainFunction]({ level: command.level }).run()
+  } else if (command.kind === 'undo' || command.kind === 'redo') {
+    // Undo/redo don't need focus
+    chain[chainFunction]().run()
   } else {
     // For commands without arguments (blockquote, bulletList, etc.)
-    chain[chainFunction]().run()
+    chain.focus()[chainFunction]().run()
   }
 }
 
+function getActiveChildItem(command: EditorToolbarItem & { kind: 'dropdown' }): EditorToolbarItem | undefined {
+  if (!command.items) {
+    return undefined
+  }
+
+  const items = isArrayOfArray(command.items) ? command.items.flat() : command.items
+
+  return items.find((item): item is EditorToolbarItem => {
+    if (!('kind' in item)) {
+      return false
+    }
+    return isCommandActive(item as EditorToolbarItem)
+  }) as EditorToolbarItem | undefined
+}
+
 function getButtonProps(command: EditorToolbarItem) {
-  return defu(pick(command, ['label', 'color', 'activeColor', 'variant', 'activeVariant', 'size', 'icon', 'leadingIcon', 'trailingIcon', 'loading', 'loadingIcon', 'disabled', 'active', 'class', 'ui']), {
+  const baseProps = pick(command, ['label', 'color', 'activeColor', 'variant', 'activeVariant', 'size', 'icon', 'leadingIcon', 'trailingIcon', 'loading', 'loadingIcon', 'disabled', 'active', 'class', 'ui'])
+
+  // For dropdown commands, use the active child's icon if available
+  if (command.kind === 'dropdown') {
+    const activeChild = getActiveChildItem(command)
+    if (activeChild?.icon) {
+      baseProps.icon = activeChild.icon
+    }
+  }
+
+  return defu(baseProps, {
     color: 'neutral' as const,
     activeColor: 'primary' as const,
     variant: 'ghost' as const,
@@ -267,7 +312,11 @@ function getDropdownItems(command: EditorToolbarItem & { kind: 'dropdown' }) {
         <div role="group" :class="ui.group({ class: props.ui?.group })">
           <template v-for="(command, index) in group" :key="`group-${groupIndex}-${index}`">
             <!-- <slot :name="`command-${command.slot}`" v-bind="{ command, index }"> -->
-            <UDropdownMenu v-if="command.kind === 'dropdown'" v-bind="getDropdownProps(command as EditorToolbarItem & { kind: 'dropdown' })" :items="getDropdownItems(command)">
+            <UDropdownMenu
+              v-if="command.kind === 'dropdown' && command.items?.length"
+              v-bind="getDropdownProps(command as EditorToolbarItem & { kind: 'dropdown' })"
+              :items="getDropdownItems(command)"
+            >
               <UButton
                 :active="isCommandActive(command)"
                 v-bind="getButtonProps(command)"

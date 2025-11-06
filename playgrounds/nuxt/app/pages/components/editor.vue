@@ -480,6 +480,12 @@ const content = ref<EditorContent>({
 })
 
 const items: EditorToolbarItem[][] = [[{
+  kind: 'undo',
+  icon: 'i-lucide-undo'
+}, {
+  kind: 'redo',
+  icon: 'i-lucide-redo'
+}], [{
   kind: 'dropdown',
   icon: 'i-lucide-heading',
   items: [{
