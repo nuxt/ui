@@ -51,6 +51,10 @@ class: '!px-0 !pt-0'
 
 You can also use the `title` slot to add your own logo.
 
+::tip{to="#props"}
+You should still add the `title` prop to replace the default `aria-label` of the link.
+::
+
 ::component-code
 ---
 prettier: true

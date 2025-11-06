@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChangelogVersion from '../../src/runtime/components/ChangelogVersion.vue'
 import type { ChangelogVersionProps, ChangelogVersionSlots } from '../../src/runtime/components/ChangelogVersion.vue'
 import ComponentRender from '../component-render'
@@ -36,5 +38,22 @@ describe('ChangelogVersion', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChangelogVersionProps, slots?: Partial<ChangelogVersionSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ChangelogVersion)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(ChangelogVersion, {
+      props: {
+        title: 'Version 1.0.0',
+        description: 'Initial release',
+        date: '2025-01-01',
+        badge: 'Badge',
+        authors: [{ name: 'Benjamin Canac', description: 'benjamincanac', avatar: { src: 'https://github.com/benjamincanac.png', alt: 'Benjamin Canac' } }],
+        indicator: true,
+        to: '/changelog',
+        image: 'https://picsum.photos/640/360'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

@@ -151,6 +151,14 @@ It is recommended to wrap the `ContentSearch` component in a [ClientOnly](https:
 
 :component-emits
 
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `commandPaletteRef`{lang="ts-type"} | `Ref<InstanceType<typeof UCommandPalette> \| null>`{lang="ts-type"} |
+
 ## Theme
 
 :component-theme

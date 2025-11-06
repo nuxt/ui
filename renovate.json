@@ -11,7 +11,8 @@
     "v4"
   ],
   "ignoreDeps": [
-    "typescript"
+    "typescript",
+    "actions/stale"
   ],
   "packageRules": [
     {

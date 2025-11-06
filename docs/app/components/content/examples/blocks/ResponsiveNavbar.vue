@@ -130,7 +130,7 @@ const navigationUi = computed(() => ({
 
 <template>
   <div class="relative">
-    <div class="z-[99] flex justify-center w-full">
+    <div class="z-99 flex justify-center w-full">
       <UHeader mode="drawer" :ui="headerUi">
         <template #left>
           <Logo class="w-auto h-5 shrink-0" />
@@ -225,7 +225,7 @@ const navigationUi = computed(() => ({
         {
           title: 'Accessible by Default',
           description: 'Built with accessibility in mind, WCAG 2.1 compliant components.',
-          icon: 'i-lucide-universal-access'
+          icon: 'i-lucide-accessibility'
         },
         {
           title: 'Developer Experience',

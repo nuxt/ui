@@ -307,6 +307,40 @@ The `size` prop will not be proxied to the Button, you need to set it yourself.
 When using the same size, the DropdownMenu items will be perfectly aligned with the Button.
 ::
 
+### Modal
+
+Use the `modal` prop to control whether the DropdownMenu blocks interaction with outside content. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - ui.content
+external:
+  - items
+externalTypes:
+  - DropdownMenuItem[]
+props:
+  modal: false
+  items:
+    - label: Profile
+      icon: i-lucide-user
+    - label: Billing
+      icon: i-lucide-credit-card
+    - label: Settings
+      icon: i-lucide-cog
+  ui:
+    content: 'w-48'
+slots:
+  default: |
+
+    <UButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
+---
+
+:u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+::
+
 ### Disabled
 
 Use the `disabled` prop to disable the DropdownMenu.

@@ -1,10 +1,12 @@
 import { describe, it, expect, vi, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { mount } from '@vue/test-utils'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
 import type { FileUploadProps, FileUploadSlots } from '../../src/runtime/components/FileUpload.vue'
+import type { FormInputEvents } from '../../src/module'
 import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '../../src/module'
 import theme from '#build/ui/file-upload'
 
 // Mock URL.createObjectURL to return deterministic blob URLs
@@ -87,6 +89,31 @@ describe('FileUpload', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FileUploadProps, slots?: Partial<FileUploadSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, FileUpload)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(FileUpload, {
+      props: {
+        label: 'Upload files',
+        description: 'Select files to upload',
+        required: true
+      }
+    })
+
+    expect(await axe(wrapper.element, {
+      rules: {
+        // "Form elements must have labels (label)"
+        // Fix any of the following:
+        //  Element does not have an implicit (wrapped) <label>
+        //  Element does not have an explicit <label>
+        //  aria-label attribute does not exist or is empty
+        //  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
+        //  Element has no title attribute
+        //  Element has no placeholder attribute
+        //  Element's default semantics were not overridden with role="none" or role="presentation"
+        label: { enabled: false }
+      }
+    })).toHaveNoViolations()
   })
 
   describe('emits', () => {

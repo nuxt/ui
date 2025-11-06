@@ -28,14 +28,14 @@ export interface PageLinksProps<T extends PageLink = PageLink> {
   ui?: PageLinks['slots']
 }
 
-type SlotProps<T> = (props: { link: T, active: boolean }) => any
+type SlotProps<T> = (props: { link: T, active: boolean, ui: PageLinks['ui'] }) => any
 
 export interface PageLinksSlots<T extends PageLink = PageLink> {
   'title'(props?: {}): any
   'link': SlotProps<T>
   'link-leading': SlotProps<T>
-  'link-label': SlotProps<T>
-  'link-trailing': SlotProps<T>
+  'link-label'(props: { link: T, active: boolean }): any
+  'link-trailing'(props: { link: T, active: boolean }): any
 }
 </script>
 
@@ -72,8 +72,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageLinks ||
       <li v-for="(link, index) in links" :key="index" :class="ui.item({ class: [props.ui?.item, link.ui?.item] })">
         <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(link)" custom>
           <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active })">
-            <slot name="link" :link="link" :active="active">
-              <slot name="link-leading" :link="link" :active="active">
+            <slot name="link" :link="link" :active="active" :ui="ui">
+              <slot name="link-leading" :link="link" :active="active" :ui="ui">
                 <UIcon v-if="link.icon" :name="link.icon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, link.ui?.linkLeadingIcon], active })" />
               </slot>
 

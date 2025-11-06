@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageAnchors from '../../src/runtime/components/PageAnchors.vue'
 import type { PageAnchorsProps, PageAnchorsSlots } from '../../src/runtime/components/PageAnchors.vue'
 import ComponentRender from '../component-render'
@@ -40,5 +42,15 @@ describe('PageAnchors', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageAnchorsProps, slots?: Partial<PageAnchorsSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PageAnchors)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PageAnchors, {
+      props: {
+        links
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

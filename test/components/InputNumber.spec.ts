@@ -1,13 +1,14 @@
-import { describe, it, expect, test } from 'vitest'
-import { flushPromises } from '@vue/test-utils'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { reactive } from 'vue'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { flushPromises } from '@vue/test-utils'
 import InputNumber from '../../src/runtime/components/InputNumber.vue'
 import type { InputNumberProps, InputNumberSlots } from '../../src/runtime/components/InputNumber.vue'
-import ComponentRender from '../component-render'
-import theme from '#build/ui/input-number'
 import type { FormInputEvents } from '../../src/module'
+import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
+import theme from '#build/ui/input-number'
 
 describe('InputNumber', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -22,20 +23,39 @@ describe('InputNumber', () => {
     ['with orientation vertical', { props: { orientation: 'vertical' } }],
     ['with incrementIcon', { props: { incrementIcon: 'i-lucide-arrow-left' } }],
     ['with decrementIcon', { props: { decrementIcon: 'i-lucide-arrow-right' } }],
+    ['without increment', { props: { increment: false } }],
+    ['without increment vertical', { props: { increment: false, orientation: 'vertical' } }],
+    ['without decrement', { props: { decrement: false } }],
+    ['without decrement vertical', { props: { decrement: false, orientation: 'vertical' } }],
+    ['without increment and decrement', { props: { increment: false, decrement: false } }],
+    ['without increment and decrement vertical', { props: { increment: false, decrement: false, orientation: 'vertical' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
+    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'absolute' } }],
     ['with ui', { props: { ui: { base: 'rounded-full' } } }],
-    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }],
     // Slots
     ['with increment slot', { slots: { increment: () => '+' } }],
     ['with decrement slot', { slots: { decrement: () => '-' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputNumberProps, slots?: Partial<InputNumberSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputNumber)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(InputNumber, {
+      props: {
+        placeholder: 'Enter a number',
+        required: true,
+        incrementIcon: 'i-lucide-plus',
+        decrementIcon: 'i-lucide-minus'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {

@@ -99,6 +99,10 @@ ignore:
 ---
 ::
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attributes" target="_blank"}
+This component also supports all native `<a>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots

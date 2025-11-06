@@ -62,16 +62,16 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
 export interface ToastEmits extends ToastRootEmits {}
 
 export interface ToastSlots {
-  leading(props?: {}): any
+  leading(props: { ui: Toast['ui'] }): any
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { ui: { [K in keyof Required<Toast['slots']>]: (props?: Record<string, any>) => string } }): any
+  close(props: { ui: Toast['ui'] }): any
 }
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { ref, computed, onMounted, nextTick, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -101,16 +101,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.toast || {})
   title: !!props.title || !!slots.title
 }))
 
-const el = ref()
+const rootRef = useTemplateRef('rootRef')
 const height = ref(0)
 
 onMounted(() => {
-  if (!el.value) {
+  if (!rootRef.value) {
     return
   }
 
   nextTick(() => {
-    height.value = el.value?.$el?.getBoundingClientRect()?.height
+    height.value = rootRef.value?.$el?.getBoundingClientRect()?.height
   })
 })
 
@@ -121,14 +121,14 @@ defineExpose({
 
 <template>
   <ToastRoot
-    ref="el"
+    ref="rootRef"
     v-slot="{ remaining, duration, open }"
     v-bind="rootProps"
     :data-orientation="orientation"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--height': height }"
   >
-    <slot name="leading">
+    <slot name="leading" :ui="ui">
       <UAvatar v-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
     </slot>

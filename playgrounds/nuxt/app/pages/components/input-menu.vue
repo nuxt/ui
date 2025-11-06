@@ -22,22 +22,27 @@ const items = [[{ label: 'Fruits', type: 'label' as const }, ...fruits], [{ labe
 const statuses = [{
   label: 'Backlog',
   value: 'backlog',
+  description: 'Issues that have been identified but not yet prioritized',
   icon: 'i-lucide-circle-help'
 }, {
   label: 'Todo',
   value: 'todo',
+  description: 'Issues that are ready to be worked on',
   icon: 'i-lucide-circle-plus'
 }, {
   label: 'In Progress',
   value: 'in_progress',
+  description: 'Issues that are currently being worked on',
   icon: 'i-lucide-circle-arrow-up'
 }, {
   label: 'Done',
   value: 'done',
+  description: 'Issues that have been completed successfully',
   icon: 'i-lucide-circle-check'
 }, {
   label: 'Canceled',
   value: 'canceled',
+  description: 'Issues that have been cancelled or rejected',
   icon: 'i-lucide-circle-x'
 }] satisfies InputMenuItem[]
 

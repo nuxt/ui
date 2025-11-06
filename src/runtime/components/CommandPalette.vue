@@ -16,6 +16,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   prefix?: string
   label?: string
   suffix?: string
+  description?: string
   /**
    * @IconifyIcon
    */
@@ -34,7 +35,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   children?: CommandPaletteItem[]
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>
+  ui?: Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>
   [key: string]: any
 }
 
@@ -71,6 +72,12 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   icon?: IconProps['name']
   /**
+   * The icon displayed on the right side of the input.
+   * @defaultValue appConfig.ui.icons.search
+   * @IconifyIcon
+   */
+  trailingIcon?: IconProps['name']
+  /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
    * @IconifyIcon
@@ -81,7 +88,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @defaultValue appConfig.ui.icons.chevronRight
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name']
+  childrenIcon?: IconProps['name']
   /**
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
@@ -153,6 +160,17 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>
+  /**
+   * The key used to get the description from the item.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>
+  /**
+   * Whether to preserve the order of groups as defined in the `groups` prop when filtering.
+   * When `false`, groups will appear based on item matches.
+   * @defaultValue false
+   */
+  preserveGroupOrder?: boolean
   class?: any
   ui?: CommandPalette['slots']
 }
@@ -161,16 +179,17 @@ export type CommandPaletteEmits<T extends CommandPaletteItem = CommandPaletteIte
   'update:open': [value: boolean]
 }
 
-type SlotProps<T> = (props: { item: T, index: number }) => any
+type SlotProps<T> = (props: { item: T, index: number, ui: CommandPalette['ui'] }) => any
 
 export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> = {
   'empty'(props: { searchTerm?: string }): any
-  'footer'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
-  'back'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
-  'close'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
+  'footer'(props: { ui: CommandPalette['ui'] }): any
+  'back'(props: { ui: CommandPalette['ui'] }): any
+  'close'(props: { ui: CommandPalette['ui'] }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
+  'item-description': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & Record<string, SlotProps<G>> & Record<string, SlotProps<T>>
 
@@ -197,12 +216,17 @@ import ULink from './Link.vue'
 import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
   labelKey: 'label',
+  descriptionKey: 'description',
   autofocus: true,
   back: true,
-  virtualize: false
+  preserveGroupOrder: false,
+  virtualize: false,
+  highlightOnHover: true
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<G, T>>()
@@ -296,6 +320,26 @@ const filteredGroups = computed(() => {
     return acc
   }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)
 
+  if (props.preserveGroupOrder) {
+    const processedGroups: Array<ReturnType<typeof getGroupWithItems>> = []
+
+    for (const group of groups.value || []) {
+      if (!group.items?.length) {
+        continue
+      }
+
+      const items = group.ignoreFilter
+        ? group.items
+        : groupsById[group.id]
+
+      if (items?.length) {
+        processedGroups.push(getGroupWithItems(group, items))
+      }
+    }
+
+    return processedGroups
+  }
+
   const fuseGroups = Object.entries(groupsById).map(([id, items]) => {
     const group = groups.value?.find(group => group.id === id)
     if (!group) {
@@ -318,7 +362,7 @@ const filteredGroups = computed(() => {
 
 const filteredItems = computed(() => filteredGroups.value.flatMap(group => group.items || []))
 
-const listboxRootRef = useTemplateRef('listboxRootRef')
+const rootRef = useTemplateRef('rootRef')
 
 function navigate(item: T) {
   if (!item.children?.length) {
@@ -335,7 +379,7 @@ function navigate(item: T) {
 
   searchTerm.value = ''
 
-  listboxRootRef.value?.highlightFirstItem()
+  rootRef.value?.highlightFirstItem()
 }
 
 function navigateBack() {
@@ -347,7 +391,7 @@ function navigateBack() {
 
   searchTerm.value = ''
 
-  listboxRootRef.value?.highlightFirstItem()
+  rootRef.value?.highlightFirstItem()
 }
 
 function onBackspace() {
@@ -378,8 +422,8 @@ function onSelect(e: Event, item: T) {
     >
       <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
         <ULinkBase v-bind="slotProps" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], active: active || item.active })">
-          <slot :name="((item.slot || group?.slot || 'item') as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
-            <slot :name="((item.slot ? `${item.slot}-leading` : group?.slot ? `${group.slot}-leading` : `item-leading`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
+          <slot :name="((item.slot || group?.slot || 'item') as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
+            <slot :name="((item.slot ? `${item.slot}-leading` : group?.slot ? `${group.slot}-leading` : `item-leading`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
               <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon], loading: true })" />
               <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon], active: active || item.active })" />
               <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active: active || item.active })" />
@@ -393,21 +437,29 @@ function onSelect(e: Event, item: T) {
               />
             </slot>
 
-            <span v-if="item.labelHtml || get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>]" :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel], active: active || item.active })">
-              <slot :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
-                <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: [props.ui?.itemLabelPrefix, item.ui?.itemLabelPrefix] })">{{ item.prefix }}</span>
+            <span v-if="(item.prefix || (item.labelHtml || get(item, props.labelKey as string)) || (item.suffixHtml || item.suffix) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>]) || (get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>])" :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, item.ui?.itemWrapper] })">
+              <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel], active: active || item.active })">
+                <slot :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
+                  <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: [props.ui?.itemLabelPrefix, item.ui?.itemLabelPrefix] })">{{ item.prefix }}</span>
 
-                <span :class="ui.itemLabelBase({ class: [props.ui?.itemLabelBase, item.ui?.itemLabelBase], active: active || item.active })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
+                  <span :class="ui.itemLabelBase({ class: [props.ui?.itemLabelBase, item.ui?.itemLabelBase], active: active || item.active })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
 
-                <span :class="ui.itemLabelSuffix({ class: [props.ui?.itemLabelSuffix, item.ui?.itemLabelSuffix], active: active || item.active })" v-html="item.suffixHtml || item.suffix" />
-              </slot>
+                  <span :class="ui.itemLabelSuffix({ class: [props.ui?.itemLabelSuffix, item.ui?.itemLabelSuffix], active: active || item.active })" v-html="item.suffixHtml || item.suffix" />
+                </slot>
+              </span>
+
+              <span v-if="get(item, props.descriptionKey as string)" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
+                <slot :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
+                  {{ get(item, props.descriptionKey as string) }}
+                </slot>
+              </span>
             </span>
 
             <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, item.ui?.itemTrailing] })">
-              <slot :name="((item.slot ? `${item.slot}-trailing` : group?.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
+              <slot :name="((item.slot ? `${item.slot}-trailing` : group?.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
                 <UIcon
                   v-if="item.children && item.children.length > 0"
-                  :name="trailingIcon || appConfig.ui.icons.chevronRight"
+                  :name="childrenIcon || appConfig.ui.icons.chevronRight"
                   :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })"
                 />
 
@@ -428,7 +480,7 @@ function onSelect(e: Event, item: T) {
     </ListboxItem>
   </DefineItemTemplate>
 
-  <ListboxRoot v-bind="rootProps" ref="listboxRootRef" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ListboxRoot v-bind="{ ...rootProps, ...$attrs }" ref="rootRef" :selection-behavior="selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
         :placeholder="placeholder"
@@ -436,6 +488,7 @@ function onSelect(e: Event, item: T) {
         :autofocus="autofocus"
         v-bind="inputProps"
         :loading-icon="loadingIcon"
+        :trailing-icon="trailingIcon"
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input({ class: props.ui?.input })"
         @keydown.backspace="onBackspace"

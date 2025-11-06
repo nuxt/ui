@@ -1,5 +1,7 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Avatar from '../../src/runtime/components/Avatar.vue'
 import AvatarGroup from '../../src/runtime/components/AvatarGroup.vue'
 import type { AvatarGroupProps, AvatarGroupSlots } from '../../src/runtime/components/AvatarGroup.vue'
@@ -33,5 +35,15 @@ describe('AvatarGroup', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarGroupProps, slots?: Partial<AvatarGroupSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, AvatarGroupWrapper)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(AvatarGroupWrapper, {
+      props: {
+        max: 2
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

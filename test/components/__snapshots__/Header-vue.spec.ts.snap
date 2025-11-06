@@ -171,8 +171,9 @@ exports[`Header > renders with mode modal correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 lg:hidden"></div>
-<div data-dismissable-layer="" tabindex="-1" class="fixed bg-default divide-y divide-default flex flex-col focus:outline-none inset-0 lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open" style="pointer-events: auto;"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0">header.title</h2><p id="reka-dialog-description-v-1">header.description</p></span>
+<div data-dismissable-layer="" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none inset-0 fixed lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open" style="pointer-events: auto;"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0">header.title</h2><p id="reka-dialog-description-v-1">header.description</p></span>
   <div class="px-4 sm:px-6 h-(--ui-header-height) shrink-0 flex items-center justify-between gap-3">
     <div class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -184,6 +185,7 @@ exports[`Header > renders with mode modal correctly 1`] = `
   </div>
   <div class="p-4 sm:p-6 overflow-y-auto"></div>
 </div>
+
 
 
 <!--teleport end-->"

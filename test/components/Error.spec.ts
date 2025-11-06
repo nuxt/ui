@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Error from '../../src/runtime/components/Error.vue'
 import type { ErrorProps, ErrorSlots } from '../../src/runtime/components/Error.vue'
 import ComponentRender from '../component-render'
@@ -17,7 +19,7 @@ describe('Error', () => {
     ['with error', { props }],
     ['with redirect', { props: { ...props, redirect: '/blog' } }],
     ['with clear', { props: { ...props, clear: { label: 'Home' } } }],
-    ['with as', { props: { ...props, as: 'div' } }],
+    ['with as', { props: { ...props, as: 'main' } }],
     ['with class', { props: { ...props, class: 'min-h-full' } }],
     ['with ui', { props: { ...props, ui: { links: 'mt-16' } } }],
     // Slots
@@ -29,5 +31,17 @@ describe('Error', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ErrorProps, slots?: Partial<ErrorSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Error)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Error, {
+      props: {
+        error,
+        redirect: '/blog',
+        clear: { label: 'Home' }
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

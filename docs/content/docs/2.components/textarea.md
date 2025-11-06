@@ -240,6 +240,10 @@ props:
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attributes" target="_blank"}
+This component also supports all native `<textarea>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots

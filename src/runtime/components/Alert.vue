@@ -61,11 +61,11 @@ export interface AlertEmits {
 }
 
 export interface AlertSlots {
-  leading(props?: {}): any
+  leading(props: { ui: Alert['ui'] }): any
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { ui: { [K in keyof Required<Alert['slots']>]: (props?: Record<string, any>) => string } }): any
+  close(props: { ui: Alert['ui'] }): any
 }
 </script>
 
@@ -98,7 +98,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.alert || {})
 
 <template>
   <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <slot name="leading">
+    <slot name="leading" :ui="ui">
       <UAvatar v-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
     </slot>

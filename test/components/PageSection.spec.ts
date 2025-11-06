@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageSection from '../../src/runtime/components/PageSection.vue'
 import type { PageSectionProps, PageSectionSlots } from '../../src/runtime/components/PageSection.vue'
 import ComponentRender from '../component-render'
@@ -39,5 +41,20 @@ describe('PageSection', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageSectionProps, slots?: Partial<PageSectionSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PageSection)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PageSection, {
+      props: {
+        headline: 'News',
+        icon: 'i-lucide-newspaper',
+        title: 'Title',
+        description: 'Description',
+        links: [{ label: 'Read More', to: '/read' }],
+        features: [{ title: 'Feature', description: 'Feature description', icon: 'i-lucide-check' }]
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

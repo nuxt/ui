@@ -1,3 +1,4 @@
+import type { NuxtComponentMeta } from 'nuxt-component-meta'
 import { createResolver } from '@nuxt/kit'
 import pkg from '../package.json'
 
@@ -183,11 +184,37 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       // prevents reloading page when navigating between components
-      include: ['@internationalized/date', '@vueuse/shared', '@vueuse/integrations/useFuse', '@tanstack/vue-table', 'reka-ui', 'reka-ui/namespaced', 'embla-carousel-vue', 'embla-carousel-autoplay', 'embla-carousel-auto-scroll', 'embla-carousel-auto-height', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-wheel-gestures', 'colortranslator', 'tailwindcss/colors', 'tailwind-variants', 'ufo', 'zod', 'vaul-vue', 'scule', 'motion-v', 'json5', 'ohash', 'shiki-transformer-color-highlight']
+      include: ['@ai-sdk/vue', '@internationalized/date', '@nuxt/content/utils', '@tanstack/vue-table', '@vercel/analytics/nuxt', '@vercel/speed-insights/nuxt', '@vue/devtools-core', '@vue/devtools-kit', '@vueuse/integrations/useFuse', '@vueuse/shared', 'ai', 'colortranslator', 'embla-carousel-auto-height', 'embla-carousel-auto-scroll', 'embla-carousel-autoplay', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-vue', 'embla-carousel-wheel-gestures', 'json5', 'motion-v', 'ohash', 'ohash/utils', 'prettier', 'reka-ui', 'reka-ui/namespaced', 'scule', 'shiki', 'shiki-stream/vue', 'shiki-transformer-color-highlight', 'shiki/engine-javascript.mjs', 'tailwind-variants', 'tailwindcss/colors', 'ufo', 'vaul-vue', 'zod']
+    }
+  },
+
+  hooks: {
+    // @ts-expect-error - Hook is not typed correctly
+    'component-meta:schema': (schema: NuxtComponentMeta) => {
+      for (const componentName in schema) {
+        const component = schema[componentName]
+        // Delete schema from slots to reduce metadata file size
+        if (component?.meta?.slots) {
+          for (const slot of component.meta.slots) {
+            delete (slot as any).schema
+          }
+        }
+        if (component?.meta?.events) {
+          for (const event of component.meta.events) {
+            delete (event as any).schema
+          }
+        }
+      }
     }
   },
 
   componentMeta: {
+    transformers: [(component, code) => {
+      // Simplify ui in slot prop types: `leading(props: { ui: Button['ui'] })` -> `leading(props: { ui: object })`
+      code = code.replace(/ui:[^}]+(?=\})/g, 'ui: object')
+
+      return { component, code }
+    }],
     exclude: [
       '@nuxt/content',
       '@nuxt/icon',

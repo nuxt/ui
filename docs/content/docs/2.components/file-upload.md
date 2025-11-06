@@ -323,6 +323,10 @@ name: 'file-upload-files-top-slot-example'
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+This component also supports all native `<input>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots

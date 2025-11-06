@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { InputHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
+import type { InputHTMLAttributes } from '../types/html'
 import type { ModelModifiers } from '../types/input'
 import type { AcceptableValue } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
@@ -11,7 +11,8 @@ import type { ComponentConfig } from '../types/tv'
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
 
 export type InputValue = AcceptableValue
-export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps {
+
+export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'type' | 'placeholder' | 'required' | 'autocomplete' | 'autofocus' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -43,7 +44,7 @@ export interface InputProps<T extends InputValue = InputValue> extends UseCompon
   highlight?: boolean
   modelValue?: T
   defaultValue?: T
-  modelModifiers?: ModelModifiers
+  modelModifiers?: ModelModifiers<T>
   class?: any
   ui?: Input['slots']
 }
@@ -55,14 +56,14 @@ export interface InputEmits<T extends InputValue = InputValue> {
 }
 
 export interface InputSlots {
-  leading(props?: {}): any
-  default(props?: {}): any
-  trailing(props?: {}): any
+  leading(props: { ui: Input['ui'] }): any
+  default(props: { ui: Input['ui'] }): any
+  trailing(props: { ui: Input['ui'] }): any
 }
 </script>
 
 <script setup lang="ts" generic="T extends InputValue">
-import { ref, computed, onMounted } from 'vue'
+import { useTemplateRef, computed, onMounted } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -106,7 +107,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {})
   fieldGroup: orientation.value
 }))
 
-const inputRef = ref<HTMLInputElement | null>(null)
+const inputRef = useTemplateRef('inputRef')
 
 // Custom function to handle the v-model properties
 function updateInput(value: string | null | undefined) {
@@ -194,17 +195,17 @@ defineExpose({
       @focus="emitFormFocus"
     >
 
-    <slot />
+    <slot :ui="ui" />
 
     <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-      <slot name="leading">
+      <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
         <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
     <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-      <slot name="trailing">
+      <slot name="trailing" :ui="ui">
         <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>

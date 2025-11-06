@@ -2,11 +2,12 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
 import type { ChipProps, IconProps } from '../types'
+import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type Avatar = ComponentConfig<typeof theme, AppConfig, 'avatar'>
 
-export interface AvatarProps {
+export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 'src' | 'alt'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'span'

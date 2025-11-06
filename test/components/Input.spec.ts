@@ -1,12 +1,13 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { mount, flushPromises } from '@vue/test-utils'
 import Input from '../../src/runtime/components/Input.vue'
 import type { InputProps, InputSlots } from '../../src/runtime/components/Input.vue'
-import ComponentRender from '../component-render'
-import theme from '#build/ui/input'
-
-import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '../../src/module'
+import ComponentRender from '../component-render'
+import { renderForm } from '../utils/form'
+import theme from '#build/ui/input'
 
 describe('Input', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -65,6 +66,16 @@ describe('Input', () => {
     await input.setValue(spec.input)
 
     expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Input, {
+      props: {
+        placeholder: 'Enter text...'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   test('with .lazy modifier updates on change only', async () => {

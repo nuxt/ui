@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PricingTable from '../../src/runtime/components/PricingTable.vue'
 import type { PricingTableProps, PricingTableSlots, PricingTableTier, PricingTableSection } from '../../src/runtime/components/PricingTable.vue'
 import ComponentRender from '../component-render'
@@ -81,5 +83,15 @@ describe('PricingTable', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props: PricingTableProps, slots?: Partial<PricingTableSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PricingTable)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PricingTable, {
+      props: {
+        ...props,
+        captions: 'Caption'
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

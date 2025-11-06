@@ -33,9 +33,9 @@ export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'lo
 }
 
 export interface BadgeSlots {
-  leading(props?: {}): any
-  default(props?: {}): any
-  trailing(props?: {}): any
+  leading(props: { ui: Badge['ui'] }): any
+  default(props: { ui: Badge['ui'] }): any
+  trailing(props: { ui: Badge['ui'] }): any
 }
 </script>
 
@@ -69,18 +69,18 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.badge || {})
 
 <template>
   <Primitive :as="as" :class="ui.base({ class: [props.ui?.base, props.class] })">
-    <slot name="leading">
+    <slot name="leading" :ui="ui">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
       <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
     </slot>
 
-    <slot>
+    <slot :ui="ui">
       <span v-if="label !== undefined && label !== null" :class="ui.label({ class: props.ui?.label })">
         {{ label }}
       </span>
     </slot>
 
-    <slot name="trailing">
+    <slot name="trailing" :ui="ui">
       <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
     </slot>
   </Primitive>

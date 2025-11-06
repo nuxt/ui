@@ -70,7 +70,7 @@ const appConfig = useAppConfig() as Toaster['AppConfig']
 
 provide(toastMaxInjectionKey, toRef(() => props.max))
 
-const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold'))
+const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold', 'disableSwipe'))
 const portalProps = usePortal(toRef(() => props.portal))
 
 const swipeDirection = computed(() => {

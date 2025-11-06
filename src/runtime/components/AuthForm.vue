@@ -4,21 +4,23 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
 import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps } from '../types'
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
+import type { FormHTMLAttributes } from '../types/html'
+import type { NonUnion } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type AuthForm = ComponentConfig<typeof theme, AppConfig, 'authForm'>
 
-type AuthFormCheckboxField = Omit<FormFieldProps, 'name'> & CheckboxProps & {
+export type AuthFormCheckboxField = Omit<FormFieldProps, 'name'> & CheckboxProps & {
   name: string
   type: 'checkbox'
 }
 
-type AuthFormSelectField = Omit<FormFieldProps, 'name'> & SelectMenuProps & {
+export type AuthFormSelectField = Omit<FormFieldProps, 'name'> & SelectMenuProps & {
   name: string
   type: 'select'
 }
 
-type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type' | 'otp'> & {
+export type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type' | 'otp'> & {
   name: string
   type: 'otp'
   /**
@@ -29,23 +31,16 @@ type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type
   otp?: boolean | PinInputProps
 }
 
-type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number'
+export type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number'
 
-type AuthFormInputField<T extends AuthFormInputFieldType = AuthFormInputFieldType> = Omit<FormFieldProps, 'name'> & InputProps & {
+export type AuthFormInputField<T extends AuthFormInputFieldType & NonUnion<T> = 'text'> = Omit<FormFieldProps, 'name'> & Omit<InputProps, 'type'> & {
   name: string
   type: T
 }
 
-type AuthFormFieldType = 'checkbox' | 'select' | 'otp' | 'password' | 'text' | 'email' | 'number'
+export type AuthFormField = AuthFormCheckboxField | AuthFormSelectField | AuthFormOtpField | AuthFormInputField<'password'> | AuthFormInputField<'text'> | AuthFormInputField<'email'> | AuthFormInputField<'number'>
 
-export type AuthFormField<T extends AuthFormFieldType = AuthFormFieldType>
-  = T extends 'checkbox' ? AuthFormCheckboxField
-    : T extends 'select' ? AuthFormSelectField
-      : T extends 'otp' ? AuthFormOtpField
-        : T extends AuthFormInputFieldType ? AuthFormInputField<T>
-          : never
-
-export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> {
+export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> extends /** @vue-ignore */ FormHTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -96,7 +91,7 @@ type DynamicFormFieldSlots<T> = Record<string, (props?: {}) => any> & Record<`${
 
 export type AuthFormSlots<T extends object = object, F extends AuthFormField = AuthFormField> = {
   header(props?: {}): any
-  leading(props?: {}): any
+  leading(props: { ui: AuthForm['ui'] }): any
   title(props?: {}): any
   description(props?: {}): any
   providers(props?: {}): any
@@ -124,6 +119,8 @@ import USelectMenu from './SelectMenu.vue'
 import UInput from './Input.vue'
 import UPinInput from './PinInput.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(defineProps<AuthFormProps<T, F>>(), {
   separator: 'or'
 })
@@ -148,16 +145,12 @@ const slots = defineSlots<AuthFormSlots<typeof state, F>>()
 const { t } = useLocale()
 const appConfig = useAppConfig() as AuthForm['AppConfig']
 
-const formRef = useTemplateRef('formRef')
-const passwordVisibility = ref(false)
-
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.authForm || {}) })())
 
-defineExpose({
-  formRef,
-  state
-})
+const formRef = useTemplateRef('formRef')
+const passwordVisibility = ref(false)
+const passwordRef = useTemplateRef('passwordRef')
 
 function pickFieldProps(field: F) {
   const fields = ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as (keyof F)[]
@@ -185,6 +178,11 @@ function omitFieldProps(field: F) {
 
   return omit(field, [...fields, 'label', 'description'])
 }
+
+defineExpose({
+  formRef,
+  state
+})
 </script>
 
 <template>
@@ -192,7 +190,7 @@ function omitFieldProps(field: F) {
     <div v-if="(icon || !!slots.icon) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
         <div v-if="icon || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-          <slot name="leading">
+          <slot name="leading" :ui="ui">
             <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           </slot>
         </div>
@@ -238,9 +236,10 @@ function omitFieldProps(field: F) {
         :schema="schema"
         :validate="validate"
         :validate-on="validateOn"
-        :class="ui.form({ class: props.ui?.form })"
         :disabled="disabled"
         :loading-auto="loadingAuto"
+        :class="ui.form({ class: props.ui?.form })"
+        v-bind="$attrs"
         @submit="onSubmit"
       >
         <UFormField
@@ -253,7 +252,7 @@ function omitFieldProps(field: F) {
               v-if="field.type === 'checkbox'"
               v-model="state[field.name]"
               :class="ui.checkbox({ class: props.ui?.checkbox })"
-              v-bind="(omitFieldProps(field) as AuthFormCheckboxField)"
+              v-bind="(omitFieldProps(field))"
             />
             <USelectMenu
               v-else-if="field.type === 'select'"
@@ -266,14 +265,12 @@ function omitFieldProps(field: F) {
               :id="field.name"
               v-model="state[field.name]"
               :class="ui.otp({ class: props.ui?.otp })"
-              v-bind="{
-                ...(omitFieldProps(field) as Omit<AuthFormOtpField, 'type'>),
-                ...(typeof field.otp === 'object' ? field.otp : {})
-              }"
+              v-bind="(Object.assign({}, omitFieldProps(field), typeof (field as AuthFormOtpField).otp === 'object' ? (field as AuthFormOtpField).otp : {}) as any)"
               otp
             />
             <UInput
               v-else-if="field.type === 'password'"
+              ref="passwordRef"
               v-model="state[field.name]"
               :class="ui.password({ class: props.ui?.password })"
               v-bind="(omitFieldProps(field) as AuthFormInputField<'password'>)"
@@ -287,7 +284,7 @@ function omitFieldProps(field: F) {
                   :icon="passwordVisibility ? appConfig.ui.icons.eyeOff : appConfig.ui.icons.eye"
                   :aria-label="passwordVisibility ? t('authForm.hidePassword') : t('authForm.showPassword')"
                   :aria-pressed="passwordVisibility"
-                  aria-controls="password"
+                  :aria-controls="passwordRef?.[0]?.inputRef?.id"
                   @click="passwordVisibility = !passwordVisibility"
                 />
               </template>

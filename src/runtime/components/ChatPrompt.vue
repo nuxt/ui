@@ -6,7 +6,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChatPrompt = ComponentConfig<typeof theme, AppConfig, 'chatPrompt'>
 
-export interface ChatPromptProps extends /** @vue-ignore */ Pick<TextareaProps, 'autofocusDelay' | 'autoresizeDelay' | 'maxrows' | 'icon' | 'avatar' | 'loading' | 'loadingIcon'> {
+export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus' | 'autofocusDelay' | 'autoresize' | 'autoresizeDelay' | 'maxrows' | 'icon' | 'avatar' | 'loading' | 'loadingIcon' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'form'
@@ -17,9 +17,6 @@ export interface ChatPromptProps extends /** @vue-ignore */ Pick<TextareaProps, 
    * @defaultValue t('chatPrompt.placeholder')
    */
   placeholder?: string
-  autofocus?: TextareaProps['autofocus']
-  autoresize?: TextareaProps['autoresize']
-  rows?: TextareaProps['rows']
   /**
    * @defaultValue 'outline'
    */
@@ -41,7 +38,7 @@ export interface ChatPromptSlots extends TextareaSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
+import { computed, toRef, useTemplateRef } from 'vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -66,13 +63,15 @@ const model = defineModel<string>({ default: '' })
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPrompt['AppConfig']
 
-const textareaProps = useForwardProps(reactivePick(props, 'autofocus', 'autoresize', 'rows'))
+const textareaProps = useForwardProps(reactivePick(props, 'rows', 'autofocus', 'autofocusDelay', 'autoresize', 'autoresizeDelay', 'maxrows', 'icon', 'avatar', 'loading', 'loadingIcon'))
 
 const getProxySlots = () => omit(slots, ['header', 'footer'])
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPrompt || {}) })({
   variant: props.variant
 }))
+
+const textareaRef = useTemplateRef('textareaRef')
 
 function submit(e: Event) {
   if (model.value.trim() === '') {
@@ -83,15 +82,13 @@ function submit(e: Event) {
 }
 
 function blur(e: Event) {
-  textarea.value?.textareaRef?.blur()
+  textareaRef.value?.textareaRef?.blur()
 
   emits('close', e)
 }
 
-const textarea = useTemplateRef('textarea')
-
 defineExpose({
-  textareaRef: textarea.value?.textareaRef
+  textareaRef: toRef(() => textareaRef.value?.textareaRef)
 })
 </script>
 
@@ -102,10 +99,10 @@ defineExpose({
     </div>
 
     <UTextarea
-      ref="textarea"
+      ref="textareaRef"
       v-model="model"
       :placeholder="placeholder || t('chatPrompt.placeholder')"
-      :disabled="Boolean(error)"
+      :disabled="Boolean(error) || disabled"
       variant="none"
       v-bind="{ ...textareaProps, ...$attrs }"
       :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), props.ui)"

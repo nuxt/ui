@@ -1,7 +1,8 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plans'
-import type { PricingPlanProps } from '../types'
+import type { PricingPlanProps, PricingPlanSlots } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type PricingPlans = ComponentConfig<typeof theme, AppConfig, 'pricingPlans'>
@@ -32,15 +33,24 @@ export interface PricingPlansProps {
   class?: any
 }
 
-export interface PricingPlansSlots {
+type ExtendSlotWithPlan<T extends PricingPlanProps, K extends keyof PricingPlanSlots>
+  = PricingPlanSlots[K] extends (props: infer P) => any
+    ? (props: P & { plan: T }) => any
+    : PricingPlanSlots[K]
+
+export type PricingPlansSlots<T extends PricingPlanProps = PricingPlanProps> = {
+  [K in keyof PricingPlanSlots]: ExtendSlotWithPlan<T, K>
+} & {
   default(props?: {}): any
 }
+
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends PricingPlanProps">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UPricingPlan from './PricingPlan.vue'
 
@@ -49,7 +59,9 @@ const props = withDefaults(defineProps<PricingPlansProps>(), {
   compact: false,
   scale: false
 })
-const slots = defineSlots<PricingPlansSlots>()
+const slots = defineSlots<PricingPlansSlots<T>>()
+
+const getProxySlots = () => omit(slots, ['default'])
 
 const appConfig = useAppConfig() as PricingPlans['AppConfig']
 
@@ -78,7 +90,11 @@ function mapSlot(slot: any) {
         :key="index"
         :orientation="orientation === 'vertical' ? 'horizontal' : 'vertical'"
         v-bind="plan"
-      />
+      >
+        <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
+          <slot :name="name" v-bind="(slotData as any)" :plan="plan" />
+        </template>
+      </UPricingPlan>
     </slot>
   </Primitive>
 </template>

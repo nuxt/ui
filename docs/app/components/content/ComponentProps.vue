@@ -26,7 +26,14 @@ const props = withDefaults(defineProps<{
     'exactHash',
     'external',
     'onClick',
-    'viewTransition'
+    'viewTransition',
+    'enterKeyHint',
+    'form',
+    'formaction',
+    'formenctype',
+    'formmethod',
+    'formnovalidate',
+    'formtarget'
   ]
 })
 

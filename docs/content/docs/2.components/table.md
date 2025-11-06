@@ -595,7 +595,7 @@ class: '!p-0'
 ---
 ::
 
-### With virtualization :badge{label="Soon"}
+### With virtualization :badge{label="4.1+"}
 
 Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/latest/docs/api/virtualizer#optional-options) to customize the virtualization behavior.
 
@@ -655,6 +655,10 @@ class: '!p-0'
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table#attributes" target="_blank"}
+This component also supports all native `<table>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots
@@ -677,9 +681,8 @@ This will give you access to the following:
 
 | Name | Type |
 | ---- | ---- |
-| `rootRef`{lang="ts-type"} | `Ref<HTMLDivElement \| null>`{lang="ts-type"} |
 | `tableRef`{lang="ts-type"} | `Ref<HTMLTableElement \| null>`{lang="ts-type"} |
-| `tableApi`{lang="ts-type"} | [`Ref<Table \| null>`{lang="ts-type"}](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
+| `tableApi`{lang="ts-type"} | [`Table`{lang="ts-type"}](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
 
 ## Theme
 

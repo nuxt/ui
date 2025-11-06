@@ -67,7 +67,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
 }
 
 export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem> & {
-  content(props?: {}): any
+  content(props: { close: () => void }): any
 }
 
 </script>
@@ -155,6 +155,8 @@ const groups = computed(() => {
   return groups
 })
 
+const commandPaletteRef = useTemplateRef('commandPaletteRef')
+
 function onSelect(item: CommandPaletteItem) {
   if (item.disabled) {
     return
@@ -173,8 +175,6 @@ defineShortcuts({
   }
 })
 
-const commandPaletteRef = useTemplateRef('commandPaletteRef')
-
 defineExpose({
   commandPaletteRef
 })
@@ -188,8 +188,8 @@ defineExpose({
     v-bind="modalProps"
     :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot name="content" v-bind="contentData">
         <UCommandPalette
           ref="commandPaletteRef"
           v-model:search-term="searchTerm"
