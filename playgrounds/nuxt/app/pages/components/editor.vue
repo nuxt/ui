@@ -1,483 +1,74 @@
 <script setup lang="ts">
 import type { EditorContent, EditorToolbarItem } from '@nuxt/ui'
 
-const content = ref<EditorContent>({
-  type: 'doc',
-  content: [
-    {
-      type: 'heading',
-      attrs: {
-        textAlign: null,
-        level: 1
-      },
-      content: [
-        {
-          type: 'text',
-          text: 'Getting started'
-        }
-      ]
-    },
-    {
-      type: 'paragraph',
-      attrs: {
-        textAlign: null
-      },
-      content: [
-        {
-          type: 'text',
-          text: 'Welcome to the '
-        },
-        {
-          type: 'text',
-          marks: [
-            {
-              type: 'italic'
-            }
-            // {
-            //   type: 'highlight',
-            //   attrs: {
-            //     color: 'var(--tt-color-highlight-yellow)'
-            //   }
-            // }
-          ],
-          text: 'Simple Editor'
-        },
-        {
-          type: 'text',
-          text: ' template! This template integrates '
-        },
-        {
-          type: 'text',
-          marks: [
-            {
-              type: 'bold'
-            }
-          ],
-          text: 'open source'
-        },
-        {
-          type: 'text',
-          text: ' UI components and Tiptap extensions licensed under '
-        },
-        {
-          type: 'text',
-          marks: [
-            {
-              type: 'bold'
-            }
-          ],
-          text: 'MIT'
-        },
-        {
-          type: 'text',
-          text: '.'
-        }
-      ]
-    },
-    {
-      type: 'paragraph',
-      attrs: {
-        textAlign: null
-      },
-      content: [
-        {
-          type: 'text',
-          text: 'Integrate it by following the '
-        },
-        {
-          type: 'text',
-          marks: [
-            {
-              type: 'link',
-              attrs: {
-                href: 'https://tiptap.dev/docs/ui-components/templates/simple-editor',
-                target: '_blank',
-                rel: 'noopener noreferrer nofollow',
-                class: null
-              }
-            }
-          ],
-          text: 'Tiptap UI Components docs'
-        },
-        {
-          type: 'text',
-          text: ' or using our CLI tool.'
-        }
-      ]
-    },
-    {
-      type: 'codeBlock',
-      attrs: {
-        language: null
-      },
-      content: [
-        {
-          type: 'text',
-          text: 'npx @tiptap/cli init'
-        }
-      ]
-    },
-    {
-      type: 'heading',
-      attrs: {
-        textAlign: null,
-        level: 2
-      },
-      content: [
-        {
-          type: 'text',
-          text: 'Features'
-        }
-      ]
-    },
-    {
-      type: 'blockquote',
-      content: [
-        {
-          type: 'paragraph',
-          attrs: {
-            textAlign: null
-          },
-          content: [
-            {
-              type: 'text',
-              marks: [
-                {
-                  type: 'italic'
-                }
-              ],
-              text: 'A fully responsive rich text editor with built-in support for common formatting and layout tools. Type markdown '
-            },
-            {
-              type: 'text',
-              marks: [
-                {
-                  type: 'code'
-                }
-              ],
-              text: '**'
-            },
-            {
-              type: 'text',
-              marks: [
-                {
-                  type: 'italic'
-                }
-              ],
-              text: ' or use keyboard shortcuts '
-            },
-            {
-              type: 'text',
-              marks: [
-                {
-                  type: 'code'
-                }
-              ],
-              text: '⌘+B'
-            },
-            {
-              type: 'text',
-              text: ' for '
-            },
-            {
-              type: 'text',
-              marks: [
-                {
-                  type: 'strike'
-                }
-              ],
-              text: 'most'
-            },
-            {
-              type: 'text',
-              text: ' all common markdown marks. 🪄'
-            }
-          ]
-        }
-      ]
-    },
-    {
-      type: 'paragraph',
-      attrs: {
-        textAlign: 'left'
-      },
-      content: [
-        {
-          type: 'text',
-          text: 'Add images, customize alignment, and apply '
-        },
-        {
-          type: 'text',
-          // marks: [
-          //   {
-          //     type: 'highlight',
-          //     attrs: {
-          //       color: 'var(--tt-color-highlight-blue)'
-          //     }
-          //   }
-          // ],
-          text: 'advanced formatting'
-        },
-        {
-          type: 'text',
-          text: ' to make your writing more engaging and professional.'
-        }
-      ]
-    },
-    // {
-    //   type: 'image',
-    //   attrs: {
-    //     src: '/images/tiptap-ui-placeholder-image.jpg',
-    //     alt: 'placeholder-image',
-    //     title: 'placeholder-image'
-    //   }
-    // },
-    {
-      type: 'bulletList',
-      content: [
-        {
-          type: 'listItem',
-          content: [
-            {
-              type: 'paragraph',
-              attrs: {
-                textAlign: 'left'
-              },
-              content: [
-                {
-                  type: 'text',
-                  marks: [
-                    {
-                      type: 'bold'
-                    }
-                  ],
-                  text: 'Superscript'
-                },
-                {
-                  type: 'text',
-                  text: ' (x'
-                },
-                {
-                  type: 'text',
-                  // marks: [
-                  //   {
-                  //     type: 'superscript'
-                  //   }
-                  // ],
-                  text: '2'
-                },
-                {
-                  type: 'text',
-                  text: ') and '
-                },
-                {
-                  type: 'text',
-                  marks: [
-                    {
-                      type: 'bold'
-                    }
-                  ],
-                  text: 'Subscript'
-                },
-                {
-                  type: 'text',
-                  text: ' (H'
-                },
-                {
-                  type: 'text',
-                  // marks: [
-                  //   {
-                  //     type: 'subscript'
-                  //   }
-                  // ],
-                  text: '2'
-                },
-                {
-                  type: 'text',
-                  text: 'O) for precision.'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          type: 'listItem',
-          content: [
-            {
-              type: 'paragraph',
-              attrs: {
-                textAlign: 'left'
-              },
-              content: [
-                {
-                  type: 'text',
-                  marks: [
-                    {
-                      type: 'bold'
-                    }
-                  ],
-                  text: 'Typographic conversion'
-                },
-                {
-                  type: 'text',
-                  text: ': automatically convert to '
-                },
-                {
-                  type: 'text',
-                  marks: [
-                    {
-                      type: 'code'
-                    }
-                  ],
-                  text: '->'
-                },
-                {
-                  type: 'text',
-                  text: ' an arrow '
-                },
-                {
-                  type: 'text',
-                  marks: [
-                    {
-                      type: 'bold'
-                    }
-                  ],
-                  text: '→'
-                },
-                {
-                  type: 'text',
-                  text: '.'
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      type: 'paragraph',
-      attrs: {
-        textAlign: 'left'
-      },
-      content: [
-        {
-          type: 'text',
-          marks: [
-            {
-              type: 'italic'
-            }
-          ],
-          text: '→ '
-        },
-        {
-          type: 'text',
-          marks: [
-            {
-              type: 'link',
-              attrs: {
-                href: 'https://tiptap.dev/docs/ui-components/templates/simple-editor#features',
-                target: '_blank',
-                rel: 'noopener noreferrer nofollow',
-                class: null
-              }
-            }
-          ],
-          text: 'Learn more'
-        }
-      ]
-    },
-    {
-      type: 'horizontalRule'
-    },
-    {
-      type: 'heading',
-      attrs: {
-        textAlign: 'left',
-        level: 2
-      },
-      content: [
-        {
-          type: 'text',
-          text: 'Make it your own'
-        }
-      ]
-    },
-    {
-      type: 'paragraph',
-      attrs: {
-        textAlign: 'left'
-      },
-      content: [
-        {
-          type: 'text',
-          text: 'Switch between light and dark modes, and tailor the editor\'s appearance with customizable CSS to match your style.'
-        }
-      ]
-    },
-    // {
-    //   type: 'taskList',
-    //   content: [
-    //     {
-    //       type: 'taskItem',
-    //       attrs: {
-    //         checked: true
-    //       },
-    //       content: [
-    //         {
-    //           type: 'paragraph',
-    //           attrs: {
-    //             textAlign: 'left'
-    //           },
-    //           content: [
-    //             {
-    //               type: 'text',
-    //               text: 'Test template'
-    //             }
-    //           ]
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       type: 'taskItem',
-    //       attrs: {
-    //         checked: false
-    //       },
-    //       content: [
-    //         {
-    //           type: 'paragraph',
-    //           attrs: {
-    //             textAlign: 'left'
-    //           },
-    //           content: [
-    //             {
-    //               type: 'text',
-    //               marks: [
-    //                 {
-    //                   type: 'link',
-    //                   attrs: {
-    //                     href: 'https://tiptap.dev/docs/ui-components/templates/simple-editor',
-    //                     target: '_blank',
-    //                     rel: 'noopener noreferrer nofollow',
-    //                     class: null
-    //                   }
-    //                 }
-    //               ],
-    //               text: 'Integrate the free template'
-    //             }
-    //           ]
-    //         }
-    //       ]
-    //     }
-    //   ]
-    // },
-    {
-      type: 'paragraph',
-      attrs: {
-        textAlign: 'left'
-      }
-    }
-  ]
-})
+const content = ref<EditorContent>(`
+<h1>Nuxt UI: A Modern UI Library</h1>
+
+<p>Welcome to <strong>Nuxt UI</strong>, a comprehensive UI library for <em>Nuxt 3</em> applications.<br> Built with <a href="https://tailwindcss.com">Tailwind CSS</a> and <a href="https://reka-ui.com">Reka UI</a>, it provides a complete set of components for building beautiful interfaces.</p>
+
+<h2>Key Features</h2>
+
+<p style="text-align: center">Nuxt UI combines the best of modern web development</p>
+
+<ul>
+  <li><strong>Fully typed</strong> with TypeScript support</li>
+  <li><em>Customizable</em> theme system with semantic colors</li>
+  <li><u>Accessible</u> components following ARIA guidelines</li>
+  <li>Built on top of <code>Reka UI</code> primitives</li>
+  <li>Support for <s>legacy browsers</s> modern standards</li>
+</ul>
+
+<h3>Getting Started</h3>
+
+<p>Install Nuxt UI in your project with the following command:</p>
+
+<pre><code>npx nuxi@latest module add ui</code></pre>
+
+<blockquote>
+  <p><em>Nuxt UI is designed to be intuitive and easy to use, whether you're building a simple landing page or a complex application.</em></p>
+</blockquote>
+
+<h3>Component Categories</h3>
+
+<ol>
+  <li>Layout components (Container, Card, Accordion)</li>
+  <li>Form components (Input, Select, Checkbox)</li>
+  <li>Navigation (Navbar, Sidebar, Breadcrumb)</li>
+  <li>Feedback (Alert, Toast, Modal)</li>
+</ol>
+
+<h4>Code Example</h4>
+
+<p>Here's a simple example using the <code>Button</code> component:</p>
+
+<pre><code>&lt;template&gt;
+  &lt;UButton color="primary"&gt;
+    Click me
+  &lt;/UButton&gt;
+&lt;/template&gt;</code></pre>
+
+<hr>
+
+<h2>Advanced Features</h2>
+
+<p style="text-align: right">Powerful capabilities for modern applications</p>
+
+<ul>
+  <li>Dark mode support out of the box</li>
+  <li>Keyboard shortcuts for improved accessibility</li>
+  <li>
+    <p>Nested lists support:</p>
+    <ul>
+      <li>With multiple levels</li>
+      <li>And proper spacing</li>
+    </ul>
+  </li>
+</ul>
+
+<p style="text-align: justify">Whether you're working on a personal project or building an enterprise application, Nuxt UI provides all the tools you need to create stunning user interfaces quickly and efficiently. The library is constantly evolving with new components and improvements based on community feedback.</p>
+
+<p>Visit our <a href="https://ui.nuxt.com">documentation</a> to learn more and explore all available components.</p>
+`)
 
 const items: EditorToolbarItem[][] = [[{
   kind: 'undo',
@@ -576,8 +167,8 @@ const items: EditorToolbarItem[][] = [[{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="content" class="flex-1 w-full min-h-0">
-    <Navbar :ui="{ right: 'items-stretch' }">
+  <UEditor v-slot="{ editor }" v-model:html="content" v-model="content" class="flex-1 w-full min-h-0">
+    <Navbar>
       <UEditorToolbar :editor="editor" :items="items" variant="fixed" />
     </Navbar>
 
