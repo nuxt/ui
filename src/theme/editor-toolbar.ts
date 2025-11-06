@@ -1,16 +1,16 @@
 export default {
   slots: {
-    root: 'bg-default p-1 flex items-center gap-1.5 min-h-0',
-    group: 'flex items-stretch gap-0.5 min-h-0',
-    separator: 'w-px h-full bg-border'
+    root: 'bg-default p-1 flex items-stretch gap-1.5',
+    group: 'flex items-center gap-0.5',
+    separator: 'w-px self-stretch bg-border'
   },
   variants: {
     variant: {
       bubble: {
-        root: 'border border-default rounded-lg z-100'
+        root: 'border border-default rounded-lg'
       },
       floating: {
-        root: 'border border-default rounded-lg z-100'
+        root: 'border border-default rounded-lg'
       },
       fixed: {
         root: ''

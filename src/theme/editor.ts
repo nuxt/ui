@@ -4,7 +4,6 @@ export default (_options: Required<NuxtOptions['ui']>) => ({
   slots: {
     root: 'flex flex-col',
     base: [
-      // Editor container
       '[&_.tiptap]:focus:outline-none [&_.tiptap]:size-full [&_.tiptap]:*:first:mt-0 [&_.tiptap]:*:last:mb-0',
       // Paragraph
       '[&_p]:my-5 [&_p]:leading-7 [&_p]:text-pretty',
@@ -20,12 +19,13 @@ export default (_options: Required<NuxtOptions['ui']>) => ({
       '[&_h3]:text-xl [&_h3]:mt-8 [&_h3]:mb-3 [&_h3_a_code]:text-lg/6',
       '[&_h4]:text-lg [&_h4]:mt-6 [&_h4]:mb-2',
       // Blockquote & HR
-      '[&_blockquote]:border-s-4 [&_blockquote]:border-accented [&_blockquote]:ps-4 [&_blockquote]:italic',
+      '[&_blockquote]:border-s-4 [&_blockquote]:border-accented [&_blockquote]:ps-4 [&_blockquote]:italic [&_blockquote_pre]:my-0',
       '[&_hr]:border-t [&_hr]:border-default [&_hr]:my-12',
       // Code blocks
       '[&_pre]:my-5 [&_pre]:font-mono [&_pre]:text-sm/6 [&_pre]:border [&_pre]:border-muted [&_pre]:bg-muted [&_pre]:rounded-md [&_pre]:px-4 [&_pre]:py-3 [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:overflow-x-auto',
+      '[&_pre_code]:p-0 [&_pre_code]:text-inherit [&_pre_code]:font-inherit [&_pre_code]:rounded-none [&_pre_code]:inline [&_pre_code]:border-0 [&_pre_code]:bg-transparent',
       // Inline code
-      '[&_:not(pre)_code]:px-1.5 [&_:not(pre)_code]:py-0.5 [&_:not(pre)_code]:text-sm [&_:not(pre)_code]:font-mono [&_:not(pre)_code]:font-medium [&_:not(pre)_code]:rounded-md [&_:not(pre)_code]:inline-block [&_:not(pre)_code]:border [&_:not(pre)_code]:border-muted [&_:not(pre)_code]:text-highlighted [&_:not(pre)_code]:bg-muted',
+      '[&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-mono [&_code]:font-medium [&_code]:rounded-md [&_code]:inline-block [&_code]:border [&_code]:border-muted [&_code]:text-highlighted [&_code]:bg-muted',
       // Lists
       '[&_:is(ul,ol)]:ps-6 [&_:is(ul,ol)]:my-5',
       '[&_ul]:list-disc [&_ul]:marker:text-(--ui-border-accented)',
