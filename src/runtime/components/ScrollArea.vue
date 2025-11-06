@@ -31,6 +31,11 @@ export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
    * @defaultValue undefined
    */
   maxLanes?: number
+  /**
+   * Number of items from the end to trigger loadMore event (for infinite scroll)
+   * @defaultValue 5
+   */
+  loadMoreThreshold?: number
 }
 
 export interface ScrollAreaProps<T = any> {
@@ -148,11 +153,12 @@ const virtualizerProps = toRef(() => {
     paddingEnd: 0,
     scrollMargin: 0,
     lanes: 1,
-    minLanes: 1
+    minLanes: 1,
+    loadMoreThreshold: 5
   })
 
   // Ensure numeric props are actually numbers (they may come in as strings from component props)
-  const numericProps = ['estimateSize', 'overscan', 'gap', 'paddingStart', 'paddingEnd', 'scrollMargin', 'lanes', 'minLanes', 'maxLanes', 'laneWidth'] as const
+  const numericProps = ['estimateSize', 'overscan', 'gap', 'paddingStart', 'paddingEnd', 'scrollMargin', 'lanes', 'minLanes', 'maxLanes', 'laneWidth', 'loadMoreThreshold'] as const
   for (const key of numericProps) {
     if (baseProps[key] !== undefined && typeof baseProps[key] !== 'function') {
       const num = Number(baseProps[key])
@@ -328,17 +334,18 @@ watch(
 
 // Watch for infinite scroll - emit loadMore when last item is visible
 watch(
-  () => virtualizer ? virtualizer.value.getVirtualItems() : [],
-  (items) => {
-    if (!items.length || !props.items?.length) return
-
-    const lastItem = items[items.length - 1]
-    if (!lastItem) return
+  () => {
+    if (!virtualizer) return -1
+    const items = virtualizer.value.getVirtualItems()
+    return items.length > 0 ? items[items.length - 1]?.index ?? -1 : -1
+  },
+  (lastVisibleIndex) => {
+    if (lastVisibleIndex === -1 || !props.items?.length) return
 
     // If last visible item is within threshold of the end, emit loadMore
-    const threshold = 5 // Load more when within 5 items of the end
-    if (lastItem.index >= props.items.length - threshold) {
-      emits('loadMore', lastItem.index)
+    const threshold = virtualizerProps.value.loadMoreThreshold ?? 5
+    if (lastVisibleIndex >= props.items.length - threshold) {
+      emits('loadMore', lastVisibleIndex)
     }
   }
 )

@@ -200,7 +200,7 @@ options:
 
 ### With infinite scroll
 
-Use the `@load-more` event to implement infinite scroll functionality. The event emits when the user scrolls within 5 items of the end of the list.
+Use the `@load-more` event to implement infinite scroll functionality. The event emits when the user scrolls within a threshold distance from the end of the list.
 
 ```vue
 <script setup lang="ts">
@@ -212,7 +212,8 @@ async function loadMore() {
 
   isLoading.value = true
   const morePosts = await fetchMorePosts()
-  posts.value.push(...morePosts)
+  // Use immutable update for Vue 3 reactivity
+  posts.value = [...posts.value, ...morePosts]
   isLoading.value = false
 }
 </script>
@@ -220,7 +221,9 @@ async function loadMore() {
 <template>
   <UScrollArea
     :items="posts"
-    virtualize
+    :virtualize="{
+      loadMoreThreshold: 5  // Trigger when within 5 items of the end (default)
+    }"
     class="h-96"
     @load-more="loadMore"
   >
@@ -232,7 +235,7 @@ async function loadMore() {
 ```
 
 ::tip
-The `loadMore` event only fires when virtualization is enabled and provides the index of the last visible item. Add debouncing or a loading flag to prevent multiple simultaneous requests.
+The `loadMore` event only fires when virtualization is enabled and provides the index of the last visible item. The `loadMoreThreshold` option (default: 5) controls how many items from the end will trigger the event. Add debouncing or a loading flag to prevent multiple simultaneous requests.
 ::
 
 ## API
@@ -312,6 +315,25 @@ All scroll methods require virtualization to be enabled. They will log a warning
 3. **Variable Heights**: TanStack Virtual automatically measures and adjusts for variable heights dynamically
 4. **Gap & Padding**: Use `gap`, `paddingStart`, and `paddingEnd` for proper spacing in virtualized lists
 5. **Masonry Layouts**: Use `lanes` for multi-column layouts, or `laneWidth` with `minLanes`/`maxLanes` for responsive layouts
+6. **Infinite Scroll**: Use `loadMoreThreshold` to control when the `@load-more` event fires (default: 5 items from end)
+
+### Performance Best Practices
+
+For optimal performance with large datasets:
+
+- **Immutable Updates**: When updating items, replace the entire array to ensure Vue 3 reactivity triggers correctly:
+  ```typescript
+  // ✅ Recommended: Immutable update
+  items.value = [...items.value, ...newItems]
+
+  // ❌ Avoid: Direct mutation (may not trigger reactivity in Vue 3)
+  items.value.push(...newItems)
+  ```
+  This pattern aligns with [TanStack Virtual's examples](https://github.com/TanStack/virtual/tree/main/examples/vue/infinite-scroll) and Vue 3's shallow reactivity for arrays.
+
+- **TanStack Virtual Options**: All [TanStack Virtual options](https://tanstack.com/virtual/latest/docs/api/virtualizer) are available through the `virtualize` prop for advanced customization
+
+- **No Deep Watching**: ScrollArea doesn't deeply watch items, so large nested objects won't impact reactivity performance
 
 ## Changelog
 
