@@ -48,21 +48,17 @@ const isDark = computed({
 </script>
 
 <template>
-  <ClientOnly v-if="!colorMode?.forced">
-    <UButton
-      v-bind="{
-        ...buttonProps,
-        'icon': props.icon || (isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light),
-        'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
-        ...$attrs
-      }"
-      @click="isDark = !isDark"
-    />
-
-    <template #fallback>
-      <slot name="fallback">
-        <div class="size-8" />
-      </slot>
+  <UButton
+    v-bind="{
+      ...buttonProps,
+      'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
+      ...$attrs
+    }"
+    @click="isDark = !isDark"
+  >
+    <template #leading>
+      <UIcon class="hidden dark:inline" :name="appConfig.ui.icons.dark" />
+      <UIcon class="inline dark:hidden" :name="appConfig.ui.icons.light" />
     </template>
-  </ClientOnly>
+  </UButton>
 </template>
