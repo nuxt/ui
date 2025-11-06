@@ -16,17 +16,17 @@ type BaseItem = Pick<ButtonProps, 'label' | 'color' | 'activeColor' | 'variant' 
 }
 
 type EditorActionType
-  = | { as: 'mark', mark: 'bold' | 'italic' | 'strike' | 'code' | 'underline' }
-    | { as: 'textAlign', align: 'left' | 'center' | 'right' | 'justify' }
-    | { as: 'heading', level: 1 | 2 | 3 | 4 | 5 | 6 }
-    | { as: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' }
+  = | { kind: 'mark', mark: 'bold' | 'italic' | 'strike' | 'code' | 'underline' }
+    | { kind: 'textAlign', align: 'left' | 'center' | 'right' | 'justify' }
+    | { kind: 'heading', level: 1 | 2 | 3 | 4 | 5 | 6 }
+    | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' }
 
 type EditorToolbarDropdownItem = (DropdownMenuItem & EditorActionType) | DropdownMenuItem
 
 export type EditorToolbarItem
   = | (BaseItem & EditorActionType)
     | (BaseItem & DropdownMenuProps<ArrayOrNested<EditorToolbarDropdownItem>>) & {
-      as: 'dropdown'
+      kind: 'dropdown'
     }
 
 export interface EditorToolbarProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>> {
@@ -115,28 +115,32 @@ function isCommandActive(command: EditorToolbarItem): boolean {
     return false
   }
 
+  if (!('kind' in command)) {
+    return false
+  }
+
   // Dropdown commands are active if any of their items are active
-  if (command.as === 'dropdown') {
+  if (command.kind === 'dropdown') {
     return command.items?.some((item): boolean => isCommandActive(item as EditorToolbarItem)) || false
   }
 
   // For textAlign commands, check with the align parameter
-  if (command.as === 'textAlign' && command.align) {
+  if (command.kind === 'textAlign' && command.align) {
     return props.editor.isActive({ textAlign: command.align })
   }
 
   // For heading commands, check with the level parameter
-  if (command.as === 'heading' && command.level) {
+  if (command.kind === 'heading' && command.level) {
     return props.editor.isActive('heading', { level: command.level })
   }
 
   // For mark commands, check the mark
-  if (command.as === 'mark' && command.mark) {
+  if (command.kind === 'mark' && command.mark) {
     return props.editor.isActive(command.mark)
   }
 
   // For other node types (blockquote, bulletList, etc.)
-  return props.editor.isActive(command.as)
+  return props.editor.isActive(command.kind)
 }
 
 function isCommandDisabled(command: EditorToolbarItem) {
@@ -145,12 +149,12 @@ function isCommandDisabled(command: EditorToolbarItem) {
   }
 
   // Dropdown commands are never disabled (their items might be)
-  if (command.as === 'dropdown') {
+  if (command.kind === 'dropdown') {
     return false
   }
 
   // For mark commands, check if mark is in schema and if a restricted node is selected
-  if (command.as === 'mark' && command.mark) {
+  if (command.kind === 'mark' && command.mark) {
     if (!isMarkInSchema(command.mark, props.editor) || isNodeTypeSelected(props.editor, ['image'])) {
       return true
     }
@@ -158,7 +162,7 @@ function isCommandDisabled(command: EditorToolbarItem) {
   }
 
   // For textAlign commands, check extension availability and restricted nodes
-  if (command.as === 'textAlign' && command.align) {
+  if (command.kind === 'textAlign' && command.align) {
     if (!isExtensionAvailable(props.editor, 'textAlign') || isNodeTypeSelected(props.editor, ['image', 'horizontalRule'])) {
       return true
     }
@@ -166,32 +170,32 @@ function isCommandDisabled(command: EditorToolbarItem) {
   }
 
   // For heading commands, check with level
-  if (command.as === 'heading' && command.level) {
+  if (command.kind === 'heading' && command.level) {
     return !(props.editor.can() as any).toggleHeading({ level: command.level })
   }
 
   // For node commands that use toggle
-  if (['blockquote', 'bulletList', 'orderedList', 'codeBlock'].includes(command.as)) {
-    const canFunction = functionMap[command.as] as keyof typeof props.editor.can
+  if (['blockquote', 'bulletList', 'orderedList', 'codeBlock'].includes(command.kind)) {
+    const canFunction = functionMap[command.kind] as keyof typeof props.editor.can
     return !(props.editor.can() as any)[canFunction]()
   }
 
   // For commands that use set (horizontalRule, paragraph)
-  if (['horizontalRule', 'paragraph'].includes(command.as)) {
-    const canFunction = functionMap[command.as] as keyof typeof props.editor.can
+  if (['horizontalRule', 'paragraph'].includes(command.kind)) {
+    const canFunction = functionMap[command.kind] as keyof typeof props.editor.can
     return !(props.editor.can() as any)[canFunction]()
   }
 
   return false
 }
 
-function onCommandClick(e: Event, command: EditorToolbarItem) {
+function onCommandClick(_: Event, command: EditorToolbarItem) {
   if (!props.editor?.isEditable) {
     return
   }
 
   // Dropdown commands don't have actions
-  if (command.as === 'dropdown') {
+  if (command.kind === 'dropdown') {
     return
   }
 
@@ -200,14 +204,14 @@ function onCommandClick(e: Event, command: EditorToolbarItem) {
   }
 
   const chain = props.editor.chain().focus() as any
-  const chainFunction = functionMap[command.as]
+  const chainFunction = functionMap[command.kind]
 
   // Handle different command types with their specific arguments
-  if (command.as === 'mark' && command.mark) {
+  if (command.kind === 'mark' && command.mark) {
     chain[chainFunction](command.mark).run()
-  } else if (command.as === 'textAlign' && command.align) {
+  } else if (command.kind === 'textAlign' && command.align) {
     chain[chainFunction](command.align).run()
-  } else if (command.as === 'heading' && command.level) {
+  } else if (command.kind === 'heading' && command.level) {
     chain[chainFunction]({ level: command.level }).run()
   } else {
     // For commands without arguments (blockquote, bulletList, etc.)
@@ -217,34 +221,33 @@ function onCommandClick(e: Event, command: EditorToolbarItem) {
 
 function getButtonProps(command: EditorToolbarItem) {
   return defu(pick(command, ['label', 'color', 'activeColor', 'variant', 'activeVariant', 'size', 'icon', 'leadingIcon', 'trailingIcon', 'loading', 'loadingIcon', 'disabled', 'active', 'class', 'ui']), {
-    color: 'neutral',
-    activeColor: 'primary',
-    variant: 'ghost',
-    activeVariant: 'soft',
-    size: 'sm'
+    color: 'neutral' as const,
+    activeColor: 'primary' as const,
+    variant: 'ghost' as const,
+    activeVariant: 'soft' as const,
+    size: 'sm' as const
   })
 }
 
-function getDropdownProps(command: EditorToolbarItem & { as: 'dropdown' }) {
+function getDropdownProps(command: EditorToolbarItem & { kind: 'dropdown' }) {
   return reactivePick(command, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal'])
 }
 
 function mapDropdownItem(item: EditorToolbarItem | DropdownMenuItem) {
-  // If it's a separator or label (no 'as' property), return as is
-  if (!('as' in item)) {
+  // If it's a separator or label (no 'kind' property), return as is
+  if (!('kind' in item)) {
     return item
   }
   // Otherwise it's an EditorToolbarItem, add computed props
   return {
     ...item,
-    ...getButtonProps(item as EditorToolbarItem),
     active: isCommandActive(item as EditorToolbarItem),
     disabled: isCommandDisabled(item as EditorToolbarItem),
     onClick: (e: Event) => onCommandClick(e, item as EditorToolbarItem)
   }
 }
 
-function getDropdownItems(command: EditorToolbarItem & { as: 'dropdown' }) {
+function getDropdownItems(command: EditorToolbarItem & { kind: 'dropdown' }) {
   if (!command.items) {
     return []
   }
@@ -264,7 +267,7 @@ function getDropdownItems(command: EditorToolbarItem & { as: 'dropdown' }) {
         <div role="group" :class="ui.group({ class: props.ui?.group })">
           <template v-for="(command, index) in group" :key="`group-${groupIndex}-${index}`">
             <!-- <slot :name="`command-${command.slot}`" v-bind="{ command, index }"> -->
-            <UDropdownMenu v-if="command.as === 'dropdown'" v-bind="getDropdownProps(command as EditorToolbarItem & { as: 'dropdown' })" :items="getDropdownItems(command)">
+            <UDropdownMenu v-if="command.kind === 'dropdown'" v-bind="getDropdownProps(command as EditorToolbarItem & { kind: 'dropdown' })" :items="getDropdownItems(command)">
               <UButton
                 :active="isCommandActive(command)"
                 v-bind="getButtonProps(command)"

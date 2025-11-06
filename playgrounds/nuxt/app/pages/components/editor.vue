@@ -480,96 +480,90 @@ const content = ref<EditorContent>({
 })
 
 const items: EditorToolbarItem[][] = [[{
-  as: 'dropdown',
+  kind: 'dropdown',
   icon: 'i-lucide-heading',
-  color: 'secondary',
-  variant: 'solid',
   items: [{
     type: 'label',
-    label: 'Heading',
-    as: 'blockquote'
-
+    label: 'Headings'
   }, {
-    as: 'heading',
+    kind: 'heading',
     level: 1,
     icon: 'i-lucide-heading',
     label: 'Heading 1'
   }, {
-    type: 'separator'
-  }, {
-    as: 'heading',
+    kind: 'heading',
     level: 2,
     icon: 'i-lucide-heading-2',
     label: 'Heading 2'
   }, {
-    as: 'heading',
+    kind: 'heading',
     level: 3,
     icon: 'i-lucide-heading-3',
     label: 'Heading 3'
   }, {
-    as: 'heading',
+    kind: 'heading',
     level: 4,
     icon: 'i-lucide-heading-4',
     label: 'Heading 4'
   }]
 }, {
-  as: 'dropdown',
+  kind: 'dropdown',
   icon: 'i-lucide-list',
   items: [{
-    as: 'bulletList',
+    kind: 'bulletList',
     icon: 'i-lucide-list',
     label: 'Bullet List'
   }, {
-    as: 'orderedList',
+    kind: 'orderedList',
     icon: 'i-lucide-list-ordered',
     label: 'Ordered List'
   }]
 }, {
-  as: 'blockquote',
+  kind: 'blockquote',
   icon: 'i-lucide-text-quote'
 }, {
-  as: 'codeBlock',
+  kind: 'codeBlock',
   icon: 'i-lucide-square-code'
 }, {
-  as: 'horizontalRule',
+  kind: 'horizontalRule',
   icon: 'i-lucide-separator-horizontal'
 }, {
-  as: 'paragraph',
+  kind: 'paragraph',
   icon: 'i-lucide-letter-text'
 }], [{
-  as: 'mark',
+  kind: 'mark',
   mark: 'bold',
   icon: 'i-lucide-bold'
 }, {
-  as: 'mark',
+  kind: 'mark',
   mark: 'italic',
   icon: 'i-lucide-italic'
 }, {
-  as: 'mark',
+  kind: 'mark',
   mark: 'underline',
   icon: 'i-lucide-underline'
 }, {
-  as: 'mark',
+  kind: 'mark',
   mark: 'strike',
   icon: 'i-lucide-strikethrough'
 }, {
-  as: 'mark',
+  kind: 'mark',
   mark: 'code',
   icon: 'i-lucide-code'
 }], [{
-  as: 'textAlign',
+  kind: 'textAlign',
   align: 'left',
   icon: 'i-lucide-align-left'
 }, {
-  as: 'textAlign',
+  kind: 'textAlign',
   align: 'center',
   icon: 'i-lucide-align-center'
 }, {
-  as: 'textAlign',
+  kind: 'textAlign',
   align: 'right',
   icon: 'i-lucide-align-right'
 }, {
-  as: 'textAlign',
+  kind: 'textAlign',
   align: 'justify',
   icon: 'i-lucide-align-justify'
 }]]
