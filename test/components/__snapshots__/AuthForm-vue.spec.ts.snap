@@ -428,7 +428,11 @@ exports[`AuthForm > renders with icon correctly 1`] = `
 
 exports[`AuthForm > renders with leading slot correctly 1`] = `
 "<div class="w-full space-y-6">
-  <!--v-if-->
+  <div class="flex flex-col text-center">
+    <div class="mb-2">Leading</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
   <div class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
