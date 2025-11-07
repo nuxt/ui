@@ -1,13 +1,13 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Editor as TiptapEditor } from '@tiptap/vue-3'
 import type { AppConfig } from '@nuxt/schema'
+import type { Editor as TiptapEditor } from '@tiptap/vue-3'
+import type { BubbleMenuPluginProps } from '@tiptap/extension-bubble-menu'
+import type { FloatingMenuPluginProps } from '@tiptap/extension-floating-menu'
 import theme from '#build/ui/editor-toolbar'
 import type { ButtonProps, DropdownMenuProps, DropdownMenuItem } from '../types'
 import type { ArrayOrNested, DynamicSlots, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
-import { reactivePick } from '@vueuse/core'
-import defu from 'defu'
 
 type EditorToolbar = ComponentConfig<typeof theme, AppConfig, 'editorToolbar'>
 
@@ -29,7 +29,7 @@ export type EditorToolbarItem
       kind: 'dropdown'
     }
 
-export interface EditorToolbarProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>> {
+type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>> = {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -40,14 +40,22 @@ export interface EditorToolbarProps<T extends ArrayOrNested<EditorToolbarItem> =
    * `{ color: 'neutral', activeColor: 'primary', variant: 'ghost', activeVariant: 'soft', size: 'sm' }`{lang="ts-type"}
    */
   items?: T
-  /**
-   * @defaultValue 'fixed'
-   */
-  variant?: EditorToolbar['variants']['variant']
   editor: TiptapEditor
   class?: any
   ui?: EditorToolbar['slots']
 }
+
+export type EditorToolbarProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>>
+  = | (EditorToolbarBaseProps<T> & {
+
+    layout?: 'fixed'
+  })
+  | (EditorToolbarBaseProps<T> & Partial<Omit<BubbleMenuPluginProps, 'pluginKey' | 'editor' | 'element'>> & {
+    layout?: 'bubble'
+  })
+  | (EditorToolbarBaseProps<T> & Partial<Omit<FloatingMenuPluginProps, 'pluginKey' | 'editor' | 'element'>> & {
+    layout?: 'floating'
+  })
 
 type SlotProps<T extends EditorToolbarItem> = (props: { command: T, active?: boolean }) => any
 
@@ -59,9 +67,10 @@ export type EditorToolbarSlots<A extends ArrayOrNested<EditorToolbarItem> = Arra
 
 <script setup lang="ts" generic="T extends ArrayOrNested<EditorToolbarItem>">
 import { computed } from 'vue'
-import { Primitive, Separator } from 'reka-ui'
-// import { createReusableTemplate } from '@vueuse/core'
+import { Primitive, Separator, useForwardProps } from 'reka-ui'
+import { defu } from 'defu'
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
+import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { isArrayOfArray, pick } from '../utils'
 import { isExtensionAvailable, isMarkInSchema, isNodeTypeSelected } from '../utils/editor'
@@ -71,23 +80,26 @@ import UButton from './Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<EditorToolbarProps<T>>()
+const props = withDefaults(defineProps<EditorToolbarProps<T>>(), {
+  layout: 'fixed'
+})
 defineSlots<EditorToolbarSlots<T>>()
 
 const appConfig = useAppConfig() as EditorToolbar['AppConfig']
-
-// const [DefineCommandButtonTemplate, ReuseCommandButtonTemplate] = createReusableTemplate<EditorToolbarCommand>()
 
 const Component = computed(() => {
   return ({
     bubble: BubbleMenu,
     floating: FloatingMenu,
     fixed: 'template'
-  }[props.variant || 'fixed'])
+  }[props.layout || 'fixed'])
 })
+const ComponentProps = useForwardProps(reactivePick(props as any, 'appendTo', 'updateDelay', 'resizeDelay', 'shouldShow', 'options'))
+
+console.log(ComponentProps.value)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorToolbar || {}) })({
-  variant: props.variant
+  layout: props.layout
 }))
 
 const groups = computed<EditorToolbarItem[][]>(() =>
@@ -275,7 +287,13 @@ function getButtonProps(command: EditorToolbarItem) {
 }
 
 function getDropdownProps(command: EditorToolbarItem & { kind: 'dropdown' }) {
-  return reactivePick(command, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal'])
+  const baseProps = pick(command, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal'])
+
+  return defu(baseProps, {
+    content: {
+      // onCloseAutoFocus: (e: Event) => e.preventDefault()
+    }
+  })
 }
 
 function mapDropdownItem(item: EditorToolbarItem | DropdownMenuItem) {
@@ -304,10 +322,18 @@ function getDropdownItems(command: EditorToolbarItem & { kind: 'dropdown' }) {
 </script>
 
 <template>
-  <Primitive :as="Component" :editor="editor" style="z-index: 100;">
-    <div role="toolbar" :data-variant="variant" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
-      <!-- <DefineCommandButtonTemplate v-slot="{ active, onClick, ...command }" /> -->
-
+  <Primitive
+    :as="Component"
+    v-bind="Component !== 'template' ? {
+      editor,
+      class: ui.root({ class: props.ui?.root }),
+      ...ComponentProps,
+      ...$attrs
+    } : {
+      ...$attrs
+    }"
+  >
+    <div role="toolbar" :data-layout="props.layout" :class="ui.base({ class: [props.ui?.base, props.class] })">
       <template v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`">
         <div role="group" :class="ui.group({ class: props.ui?.group })">
           <template v-for="(command, index) in group" :key="`group-${groupIndex}-${index}`">

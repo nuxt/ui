@@ -1,73 +1,67 @@
 <script setup lang="ts">
 import type { EditorContent, EditorToolbarItem } from '@nuxt/ui'
 
-const content = ref<EditorContent>(`
-<h1>Nuxt UI: A Modern UI Library</h1>
+const content = ref<EditorContent>(`# Nuxt UI: A Modern UI Library
 
-<p>Welcome to <strong>Nuxt UI</strong>, a comprehensive UI library for <em>Nuxt 3</em> applications.<br> Built with <a href="https://tailwindcss.com">Tailwind CSS</a> and <a href="https://reka-ui.com">Reka UI</a>, it provides a complete set of components for building beautiful interfaces.</p>
+Welcome to **Nuxt UI**, a comprehensive UI library for *Nuxt 3* applications.
+Built with [Tailwind CSS](https://tailwindcss.com) and [Reka UI](https://reka-ui.com), it provides a complete set of components for building beautiful interfaces.
 
-<h2>Key Features</h2>
+![Image](https://ui.nuxt.com/assets/templates/nuxt/dashboard-dark.png)
 
-<p style="text-align: center">Nuxt UI combines the best of modern web development</p>
+## Key Features
 
-<ul>
-  <li><strong>Fully typed</strong> with TypeScript support</li>
-  <li><em>Customizable</em> theme system with semantic colors</li>
-  <li><u>Accessible</u> components following ARIA guidelines</li>
-  <li>Built on top of <code>Reka UI</code> primitives</li>
-  <li>Support for <s>legacy browsers</s> modern standards</li>
-</ul>
+Nuxt UI combines the best of modern web development
 
-<h3>Getting Started</h3>
+- **Fully typed** with TypeScript support
+- *Customizable* theme system with semantic colors
+- <u>Accessible</u> components following ARIA guidelines
+- Built on top of \`Reka UI\` primitives
+- Support for ~~legacy browsers~~ modern standards
 
-<p>Install Nuxt UI in your project with the following command:</p>
+### Getting Started
 
-<pre><code>npx nuxi@latest module add ui</code></pre>
+Install Nuxt UI in your project with the following command:
 
-<blockquote>
-  <p><em>Nuxt UI is designed to be intuitive and easy to use, whether you're building a simple landing page or a complex application.</em></p>
-</blockquote>
+\`\`\`
+npx nuxi@latest module add ui
+\`\`\`
 
-<h3>Component Categories</h3>
+> *Nuxt UI is designed to be intuitive and easy to use, whether you're building a simple landing page or a complex application.*
 
-<ol>
-  <li>Layout components (Container, Card, Accordion)</li>
-  <li>Form components (Input, Select, Checkbox)</li>
-  <li>Navigation (Navbar, Sidebar, Breadcrumb)</li>
-  <li>Feedback (Alert, Toast, Modal)</li>
-</ol>
+### Component Categories
 
-<h4>Code Example</h4>
+1. Layout components (Container, Card, Accordion)
+2. Form components (Input, Select, Checkbox)
+3. Navigation (Navbar, Sidebar, Breadcrumb)
+4. Feedback (Alert, Toast, Modal)
 
-<p>Here's a simple example using the <code>Button</code> component:</p>
+#### Code Example
 
-<pre><code>&lt;template&gt;
-  &lt;UButton color="primary"&gt;
+Here's a simple example using the \`Button\` component:
+
+\`\`\`
+<template>
+  <UButton color="primary">
     Click me
-  &lt;/UButton&gt;
-&lt;/template&gt;</code></pre>
+  </UButton>
+</template>
+\`\`\`
 
-<hr>
+---
 
-<h2>Advanced Features</h2>
+## Advanced Features
 
-<p style="text-align: right">Powerful capabilities for modern applications</p>
+Powerful capabilities for modern applications
 
-<ul>
-  <li>Dark mode support out of the box</li>
-  <li>Keyboard shortcuts for improved accessibility</li>
-  <li>
-    <p>Nested lists support:</p>
-    <ul>
-      <li>With multiple levels</li>
-      <li>And proper spacing</li>
-    </ul>
-  </li>
-</ul>
+- Dark mode support out of the box
+- Keyboard shortcuts for improved accessibility
+- Nested lists support:
+  - With multiple levels
+  - And proper spacing
 
-<p style="text-align: justify">Whether you're working on a personal project or building an enterprise application, Nuxt UI provides all the tools you need to create stunning user interfaces quickly and efficiently. The library is constantly evolving with new components and improvements based on community feedback.</p>
+Whether you're working on a personal project or building an enterprise application, Nuxt UI provides all the tools you need to create stunning user interfaces quickly and efficiently. The library is constantly evolving with new components and improvements based on community feedback.
 
-<p>Visit our <a href="https://ui.nuxt.com">documentation</a> to learn more and explore all available components.</p>
+Visit our [documentation](https://ui.nuxt.com) to learn more and explore all available components.
 `)
 
 const items: EditorToolbarItem[][] = [[{
@@ -167,12 +161,40 @@ const items: EditorToolbarItem[][] = [[{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model:html="content" v-model="content" class="flex-1 w-full min-h-0">
+  <UEditor
+    v-slot="{ editor }"
+    v-model="content"
+    content-type="markdown"
+    aria-label="Coucou"
+    class="flex-1 w-full min-h-0"
+    :ui="{ content: 'max-w-2xl mx-auto' }"
+  >
     <Navbar>
-      <UEditorToolbar :editor="editor" :items="items" variant="fixed" />
+      <UEditorToolbar :editor="editor" :items="items" />
     </Navbar>
 
-    <UEditorToolbar :editor="editor" :items="items" variant="bubble" />
-    <UEditorToolbar :editor="editor" :items="items" variant="floating" />
+    <UEditorToolbar :editor="editor" :items="items" layout="bubble" />
+
+    <UEditorDragHandle :editor="editor" />
   </UEditor>
 </template>
+
+<!-- <style>
+.ProseMirror-selectednode,
+.ProseMirror-selectednoderange {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    pointer-events: none;
+    z-index: -1;
+    content: '';
+    top: -0.25rem;
+    left: -0.25rem;
+    right: -0.25rem;
+    bottom: -0.25rem;
+    background-color: #70cff850;
+    border-radius: 0.2rem;
+  }
+}
+</style> -->

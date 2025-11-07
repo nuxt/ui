@@ -2,9 +2,10 @@ import type { NuxtOptions } from '@nuxt/schema'
 
 export default (_options: Required<NuxtOptions['ui']>) => ({
   slots: {
-    root: 'flex flex-col',
+    root: '',
+    content: 'size-full flex flex-col flex-1',
     base: [
-      '[&_.tiptap]:focus:outline-none [&_.tiptap]:size-full [&_.tiptap]:*:first:mt-0 [&_.tiptap]:*:last:mb-0',
+      'flex-1 w-full outline-none *:first:mt-0 *:last:mb-0 px-4 sm:px-6 lg:px-8',
       // Paragraph
       '[&_p]:my-5 [&_p]:leading-7 [&_p]:text-pretty',
       // Links
@@ -30,7 +31,9 @@ export default (_options: Required<NuxtOptions['ui']>) => ({
       '[&_:is(ul,ol)]:ps-6 [&_:is(ul,ol)]:my-5',
       '[&_ul]:list-disc [&_ul]:marker:text-(--ui-border-accented)',
       '[&_ol]:list-decimal [&_ol]:marker:text-muted',
-      '[&_li]:my-1.5 [&_li]:ps-1.5 [&_li]:leading-7 [&_li_p]:my-0 [&_li_ul]:my-0'
+      '[&_li]:my-1.5 [&_li]:ps-1.5 [&_li]:leading-7 [&_li_p]:my-0 [&_li_ul]:my-0',
+      // Images
+      '[&_img]:my-5 [&_img]:rounded-md [&_img]:w-full'
     ]
   }
 })

@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`EditorToolbar > renders with as correctly 1`] = `"<div role="toolbar" data-layout="fixed" class="bg-default p-1 flex items-stretch gap-1.5"></div>"`;
+
+exports[`EditorToolbar > renders with class correctly 1`] = `"<div role="toolbar" data-layout="fixed" class="bg-default p-1 flex items-stretch gap-1.5"></div>"`;
+
+exports[`EditorToolbar > renders with default slot correctly 1`] = `"<div role="toolbar" data-layout="fixed" class="bg-default p-1 flex items-stretch gap-1.5"></div>"`;
+
+exports[`EditorToolbar > renders with ui correctly 1`] = `"<div role="toolbar" data-layout="fixed" class="bg-default p-1 flex items-stretch gap-1.5"></div>"`;

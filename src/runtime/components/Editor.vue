@@ -1,33 +1,29 @@
 <script lang="ts">
+import type { AppConfig } from '@nuxt/schema'
 import type { Content, EditorOptions } from '@tiptap/core'
 import type { Editor as TiptapEditor } from '@tiptap/vue-3'
 import type { StarterKitOptions } from '@tiptap/starter-kit'
-import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/editor'
 import type { ComponentConfig } from '../types/tv'
 
 type Editor = ComponentConfig<typeof theme, AppConfig, 'editor'>
 
-export type EditorFormat = 'json' | 'html' | 'text'
 export type EditorContent = Content
+export type EditorContentType = 'json' | 'html' | 'markdown'
 
-export interface EditorProps<T extends EditorFormat = EditorFormat> extends Omit<Partial<EditorOptions>, 'content'> {
+export interface EditorProps extends Omit<Partial<EditorOptions>, 'content'> {
   /**
    * The starter kit options to configure the editor.
    * @defaultValue `{ headings: { levels: [1, 2, 3, 4] } }`
    */
   starterKit?: Partial<StarterKitOptions>
   /**
-   * The format for the content output
-   * - 'json': Returns ProseMirror JSON document
-   * - 'html': Returns HTML string
-   * - 'text': Returns plain text string
-   * If not specified, auto-detects from the initial content type
-   * @defaultValue undefined (auto-detect)
+   * The content type the content is provided as.
+   * @defaultValue 'json'
    */
-  format?: T
+  contentType?: EditorContentType
   class?: any
-  ui?: Editor['ui']
+  ui?: Editor['slots']
 }
 
 export interface EditorSlots {
@@ -35,53 +31,88 @@ export interface EditorSlots {
 }
 </script>
 
-<script setup lang="ts" generic="T extends EditorFormat">
-import { computed, ref } from 'vue'
+<script setup lang="ts">
+import { computed, useAttrs } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
-import { reactiveOmit } from '@vueuse/core'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
+import { Markdown } from '@tiptap/markdown'
 import StarterKit from '@tiptap/starter-kit'
+import Image from '@tiptap/extension-image'
+import TextAlign from '@tiptap/extension-text-align'
+import NodeRange from '@tiptap/extension-node-range'
+import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
 
-const props = defineProps<EditorProps>()
+defineOptions({ inheritAttrs: false })
+
+const props = withDefaults(defineProps<EditorProps>(), {
+  contentType: 'json'
+})
 defineSlots<EditorSlots>()
+
+const attrs = useAttrs()
 
 const content = defineModel<Content>({ default: '' })
 
 const appConfig = useAppConfig() as Editor['AppConfig']
 
-const editorProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'class', 'format'))
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editor || {}) })())
 
-const detectedFormat = ref<EditorFormat>(props.format || (typeof content.value === 'string' ? 'html' : 'json'))
+const rootProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'editorProps', 'contentType', 'class'))
+const editorProps = computed(() => defu(props.editorProps, {
+  attributes: {
+    autocomplete: 'off',
+    autocorrect: 'off',
+    autocapitalize: 'off',
+    ...attrs,
+    class: ui.value.base({ class: [props.ui?.base, props.class] })
+  }
+}))
+const contentType = computed(() => props.contentType || (typeof content.value === 'string' ? 'html' : 'json'))
+
+const extensions = computed(() => [
+  contentType.value === 'markdown' ? Markdown : undefined,
+  StarterKit.configure(defu(props.starterKit, {
+
+    headings: {
+      levels: [1, 2, 3, 4, 5, 6]
+    }
+  })),
+  NodeRange.configure({
+    // allow to select only on depth 0
+    depth: 0,
+    key: null
+  }),
+  Image,
+  TextAlign.configure({
+    types: ['heading', 'paragraph']
+  }),
+  ...(props.extensions || [])
+].filter(extension => !!extension))
 
 const editor = useEditor({
-  ...editorProps.value,
+  ...rootProps.value,
   content: content.value,
-  extensions: [
-    StarterKit.configure(defu(props.starterKit, {
-      headings: {
-        levels: [1, 2, 3, 4, 5, 6]
-      }
-    })),
-    ...(props.extensions || [])
-  ],
+  contentType: contentType.value,
+  extensions: extensions.value,
+  editorProps: editorProps.value,
   onUpdate: ({ editor }) => {
-    const format = props.format || detectedFormat.value
-
-    if (format === 'html') {
-      content.value = editor.getHTML()
-    } else if (format === 'text') {
+    try {
+      if (contentType.value === 'html') {
+        content.value = editor.getHTML()
+      } else if (contentType.value === 'json') {
+        content.value = editor.getJSON()
+      } else if (contentType.value === 'markdown') {
+        content.value = editor.getMarkdown()
+      }
+    } catch (error) {
       content.value = editor.getText()
-    } else {
-      content.value = editor.getJSON()
     }
   }
 })
-
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editor || {}) })())
 
 defineExpose({
   editor
@@ -90,8 +121,10 @@ defineExpose({
 
 <template>
   <div :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <slot v-if="editor" :editor="editor" />
+    <template v-if="editor">
+      <slot :editor="editor" />
+    </template>
 
-    <EditorContent role="presentation" :editor="editor" :class="ui.base({ class: props.ui?.base })" />
+    <EditorContent role="presentation" :editor="editor" :class="ui.content({ class: props.ui?.content })" />
   </div>
 </template>
