@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import type { AutoPlacementOptions, FlipOptions, HideOptions, InlineOptions, Middleware, OffsetOptions, Placement, ShiftOptions, SizeOptions, Strategy } from '@floating-ui/dom'
-import type { Editor as TiptapEditor } from '@tiptap/core'
+import type { Editor as TiptapEditor } from '@tiptap/vue-3'
 import type { DragHandlePluginProps } from '@tiptap/extension-drag-handle'
 import theme from '#build/ui/editor-drag-handle'
 import type { ButtonProps, IconProps } from '../types'
