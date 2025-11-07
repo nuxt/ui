@@ -177,23 +177,3 @@ const items: EditorToolbarItem[][] = [[{
     <UEditorDragHandle :editor="editor" />
   </UEditor>
 </template>
-
-<!-- <style>
-.ProseMirror-selectednode,
-.ProseMirror-selectednoderange {
-  position: relative;
-
-  &::before {
-    position: absolute;
-    pointer-events: none;
-    z-index: -1;
-    content: '';
-    top: -0.25rem;
-    left: -0.25rem;
-    right: -0.25rem;
-    bottom: -0.25rem;
-    background-color: #70cff850;
-    border-radius: 0.2rem;
-  }
-}
-</style> -->

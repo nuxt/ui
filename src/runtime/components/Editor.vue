@@ -39,7 +39,9 @@ export interface EditorSlots {
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
 import { defu } from 'defu'
-import { useForwardProps } from 'reka-ui'
+import { Primitive, useForwardProps } from 'reka-ui'
+import { mergeAttributes } from '@tiptap/core'
+import HorizontalRule from '@tiptap/extension-horizontal-rule'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { Markdown } from '@tiptap/markdown'
 import StarterKit from '@tiptap/starter-kit'
@@ -76,14 +78,25 @@ const editorProps = computed(() => defu(props.editorProps, {
   }
 } as EditorOptions['editorProps']))
 const contentType = computed(() => props.contentType || (typeof content.value === 'string' ? 'html' : 'json'))
+const starterKit = computed(() => defu(props.starterKit, {
+  horizontalRule: false,
+  headings: {
+    levels: [1, 2, 3, 4]
+  }
+} as Partial<StarterKitOptions>))
 
 const extensions = computed(() => [
   contentType.value === 'markdown' ? Markdown : undefined,
-  StarterKit.configure(defu(props.starterKit, {
-    headings: {
-      levels: [1, 2, 3, 4, 5, 6]
+  StarterKit.configure(starterKit.value),
+  HorizontalRule.extend({
+    renderHTML() {
+      return [
+        'div',
+        mergeAttributes(this.options.HTMLAttributes, { 'data-type': this.name }),
+        ['hr']
+      ]
     }
-  })),
+  }),
   Image,
   TextAlign.configure({
     types: ['heading', 'paragraph']

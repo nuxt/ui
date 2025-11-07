@@ -21,7 +21,8 @@ export default (_options: Required<NuxtOptions['ui']>) => ({
       '[&_h4]:text-lg [&_h4]:mt-6 [&_h4]:mb-2',
       // Blockquote & HR
       '[&_blockquote]:border-s-4 [&_blockquote]:border-accented [&_blockquote]:ps-4 [&_blockquote]:italic [&_blockquote_pre]:my-0',
-      '[&_hr]:border-t [&_hr]:border-default [&_hr]:my-12',
+      '[&_[data-type=horizontalRule]]:my-10 [&_[data-type=horizontalRule]]:py-2',
+      '[&_hr]:border-t [&_hr]:border-default',
       // Code blocks
       '[&_pre]:my-5 [&_pre]:font-mono [&_pre]:text-sm/6 [&_pre]:border [&_pre]:border-muted [&_pre]:bg-muted [&_pre]:rounded-md [&_pre]:px-4 [&_pre]:py-3 [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:overflow-x-auto',
       '[&_pre_code]:p-0 [&_pre_code]:text-inherit [&_pre_code]:font-inherit [&_pre_code]:rounded-none [&_pre_code]:inline [&_pre_code]:border-0 [&_pre_code]:bg-transparent',
@@ -33,7 +34,7 @@ export default (_options: Required<NuxtOptions['ui']>) => ({
       '[&_ol]:list-decimal [&_ol]:marker:text-muted',
       '[&_li]:my-1.5 [&_li]:ps-1.5 [&_li]:leading-7 [&_li_p]:my-0 [&_li_ul]:my-0',
       // Images
-      '[&_img]:my-5 [&_img]:rounded-md [&_img]:w-full'
+      '[&_img]:my-5 [&_img]:rounded-md [&_img]:block [&_img]:max-w-full [&_img.ProseMirror-selectednode]:outline-2 [&_img.ProseMirror-selectednode]:outline-primary'
     ]
   }
 })

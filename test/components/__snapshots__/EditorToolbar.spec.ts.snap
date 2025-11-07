@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`EditorToolbar > renders with as correctly 1`] = `"<div role="toolbar" class="bg-default p-1 flex items-stretch gap-1.5"></div>"`;
+exports[`EditorToolbar > renders with as correctly 1`] = `"<section role="toolbar" class="bg-default p-1 flex items-stretch gap-1.5"></section>"`;
 
 exports[`EditorToolbar > renders with class correctly 1`] = `"<div role="toolbar" class="bg-default p-1 flex items-stretch gap-1.5"></div>"`;
 
