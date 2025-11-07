@@ -343,7 +343,7 @@ function getDropdownItems(command: EditorToolbarItem & { kind: 'dropdown' }) {
       ...$attrs
     }"
   >
-    <div role="toolbar" :class="ui.base({ class: [props.ui?.base, props.class] })">
+    <Primitive :as="as" role="toolbar" :class="ui.base({ class: [props.ui?.base, props.class] })">
       <template v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`">
         <div role="group" :class="ui.group({ class: props.ui?.group })">
           <template v-for="(command, index) in group" :key="`group-${groupIndex}-${index}`">
@@ -377,6 +377,6 @@ function getDropdownItems(command: EditorToolbarItem & { kind: 'dropdown' }) {
           orientation="vertical"
         />
       </template>
-    </div>
+    </Primitive>
   </Primitive>
 </template>

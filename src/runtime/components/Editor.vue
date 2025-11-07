@@ -13,6 +13,11 @@ export type EditorContentType = 'json' | 'html' | 'markdown'
 
 export interface EditorProps extends Omit<Partial<EditorOptions>, 'content'> {
   /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
+  /**
    * The starter kit options to configure the editor.
    * @defaultValue { headings: { levels: [1, 2, 3, 4] } }
    */
@@ -113,11 +118,11 @@ defineExpose({
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <template v-if="editor">
       <slot :editor="editor" />
     </template>
 
     <EditorContent role="presentation" :editor="editor" :class="ui.content({ class: props.ui?.content })" />
-  </div>
+  </Primitive>
 </template>
