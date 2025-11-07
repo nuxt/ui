@@ -7,6 +7,7 @@ import type { FloatingMenuPluginProps } from '@tiptap/extension-floating-menu'
 import theme from '#build/ui/editor-toolbar'
 import type { ButtonProps, DropdownMenuProps, DropdownMenuItem } from '../types'
 import type { ArrayOrNested, DynamicSlots, NestedItem } from '../types/utils'
+import type { CommandHandler } from '../utils/editor'
 import type { ComponentConfig } from '../types/tv'
 
 type EditorToolbar = ComponentConfig<typeof theme, AppConfig, 'editorToolbar'>
@@ -29,6 +30,8 @@ export type EditorToolbarItem
       kind: 'dropdown'
     }
 
+export type EditorToolbarHandlers = Record<string, CommandHandler>
+
 type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>> = {
   /**
    * The element or component this component should render as.
@@ -40,6 +43,10 @@ type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOr
    * `{ color: 'neutral', activeColor: 'primary', variant: 'ghost', activeVariant: 'soft', size: 'sm' }`{lang="ts-type"}
    */
   items?: T
+  /**
+   * Custom command handlers to override or extend the default handlers.
+   */
+  handlers?: EditorToolbarHandlers
   editor: TiptapEditor
   class?: any
   ui?: EditorToolbar['slots']
@@ -108,7 +115,7 @@ const groups = computed<EditorToolbarItem[][]>(() =>
     : []
 )
 
-const commandHandlers = {
+const commandHandlers = computed((): Record<string, CommandHandler> => ({
   mark: createMarkHandler(),
   textAlign: createTextAlignHandler(),
   heading: createHeadingHandler(),
@@ -119,8 +126,9 @@ const commandHandlers = {
   horizontalRule: createSetHandler('horizontalRule'),
   paragraph: createSetHandler('paragraph'),
   undo: createSimpleHandler('undo'),
-  redo: createSimpleHandler('redo')
-}
+  redo: createSimpleHandler('redo'),
+  ...props.handlers
+}))
 
 function isCommandActive(command: EditorToolbarItem): boolean {
   if (!props.editor?.isEditable || !('kind' in command)) {
@@ -131,7 +139,7 @@ function isCommandActive(command: EditorToolbarItem): boolean {
     return command.items?.some((item): boolean => isCommandActive(item as EditorToolbarItem)) || false
   }
 
-  const handler = commandHandlers[command.kind as keyof typeof commandHandlers]
+  const handler = commandHandlers.value[command.kind]
   return handler?.isActive(props.editor, command) || false
 }
 
@@ -155,7 +163,7 @@ function isCommandDisabled(command: EditorToolbarItem): boolean {
     return commandItems.every(item => isCommandDisabled(item))
   }
 
-  const handler = commandHandlers[command.kind as keyof typeof commandHandlers]
+  const handler = commandHandlers.value[command.kind]
   if (!handler) {
     return false
   }
@@ -174,7 +182,7 @@ function onCommandClick(_: Event, command: EditorToolbarItem) {
     return
   }
 
-  const handler = commandHandlers[command.kind as keyof typeof commandHandlers]
+  const handler = commandHandlers.value[command.kind]
   if (handler) {
     const chain = props.editor.chain() as any
     handler.execute(chain, command).run()

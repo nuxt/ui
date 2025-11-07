@@ -1,5 +1,12 @@
 import type { Editor, Mark } from '@tiptap/vue-3'
 
+export interface CommandHandler {
+  canExecute: (editor: Editor, cmd?: any) => boolean
+  execute: (chain: any, cmd?: any) => any
+  isActive: (editor: Editor, cmd?: any) => boolean
+  isDisabled?: (editor: Editor, cmd?: any) => boolean
+}
+
 export function isMarkInSchema(mark: string | Mark, editor: Editor | null): boolean {
   if (!editor?.schema) {
     return false
