@@ -325,8 +325,8 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0(@parcel/watcher@2.5.1)(@types/node@24.7.0)(@vue/compiler-sfc@3.5.22)(better-sqlite3@12.4.1)(db0@0.3.4(better-sqlite3@12.4.1))(eslint@9.39.1(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vite@7.1.12(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1))(vue-tsc@3.1.3(typescript@5.8.3))(yaml@2.8.1)
       nuxt-component-meta:
-        specifier: ^0.14.1
-        version: 0.14.1(magicast@0.3.5)
+        specifier: https://pkg.pr.new/nuxt-component-meta@1ad6fe5
+        version: https://pkg.pr.new/nuxt-component-meta@1ad6fe5(magicast@0.3.5)
       nuxt-llms:
         specifier: ^0.1.3
         version: 0.1.3(magicast@0.3.5)
@@ -5424,8 +5424,9 @@ packages:
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
 
-  nuxt-component-meta@0.14.1:
-    resolution: {integrity: sha512-Q8NuynMJleiutBx4cD33TLp5HCGGmGfz/dE+PNOsAScSAG54hmpPk2beeIwh2VZJoMzPAyPPAqbsdIKpMcOHbA==}
+  nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@1ad6fe5:
+    resolution: {tarball: https://pkg.pr.new/nuxt-component-meta@1ad6fe5}
+    version: 0.14.1
     hasBin: true
 
   nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@e3eb2c4:
@@ -7166,6 +7167,11 @@ packages:
 
   vue-component-meta@3.1.0:
     resolution: {integrity: sha512-Ep98rBwhBOvEFf0bSUQtMPJ7cEv3OcfNCDMwlUy/0iK3Qb7N9My1b2KbaKLjCaTdERCqamGzEgICg8sOTMA59Q==}
+    peerDependencies:
+      typescript: 5.8.3
+
+  vue-component-meta@3.1.3:
+    resolution: {integrity: sha512-Rtaa1L5Vu9iQEnL0t7rkhebuUGOWQavAeFl8DS3IGQZUndJoQnW+k4+eLZUnCwjiCA4DV8KKSlLKptbpHxLOGw==}
     peerDependencies:
       typescript: 5.8.3
 
@@ -13098,7 +13104,7 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
-  nuxt-component-meta@0.14.1(magicast@0.3.5):
+  nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@1ad6fe5(magicast@0.3.5):
     dependencies:
       '@nuxt/kit': 4.2.0(magicast@0.3.5)
       citty: 0.1.6
@@ -13108,7 +13114,7 @@ snapshots:
       scule: 1.3.0
       typescript: 5.8.3
       ufo: 1.6.1
-      vue-component-meta: 3.1.0(typescript@5.8.3)
+      vue-component-meta: 3.1.3(typescript@5.8.3)
     transitivePeerDependencies:
       - magicast
 
@@ -15361,6 +15367,14 @@ snapshots:
       path-browserify: 1.0.1
       typescript: 5.8.3
       vue-component-type-helpers: 3.1.0
+
+  vue-component-meta@3.1.3(typescript@5.8.3):
+    dependencies:
+      '@volar/typescript': 2.4.23
+      '@vue/language-core': 3.1.3(typescript@5.8.3)
+      path-browserify: 1.0.1
+      typescript: 5.8.3
+      vue-component-type-helpers: 3.1.3
 
   vue-component-type-helpers@2.2.12: {}
 
