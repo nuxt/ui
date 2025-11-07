@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { EditorContent, EditorToolbarItem } from '@nuxt/ui'
+import { TaskItem, TaskList } from '@tiptap/extension-list'
+import { TextAlign } from '@tiptap/extension-text-align'
 
 const content = ref<EditorContent>(`# Nuxt UI: A Modern UI Library
 
@@ -108,6 +110,10 @@ const items: EditorToolbarItem[][] = [[{
     kind: 'orderedList',
     icon: 'i-lucide-list-ordered',
     label: 'Ordered List'
+  }, {
+    kind: 'taskList',
+    icon: 'i-lucide-list-check',
+    label: 'Task List'
   }]
 }, {
   kind: 'blockquote',
@@ -164,6 +170,13 @@ const items: EditorToolbarItem[][] = [[{
   <UEditor
     v-slot="{ editor }"
     v-model="content"
+    :extensions="[
+      TextAlign,
+      TaskList,
+      TaskItem.configure({
+        nested: true
+      })
+    ]"
     content-type="markdown"
     class="flex-1 w-full min-h-0"
     :ui="{ content: 'max-w-2xl mx-auto' }"

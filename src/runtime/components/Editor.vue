@@ -46,7 +46,6 @@ import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { Markdown } from '@tiptap/markdown'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
-import TextAlign from '@tiptap/extension-text-align'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
@@ -98,9 +97,6 @@ const extensions = computed(() => [
     }
   }),
   Image,
-  TextAlign.configure({
-    types: ['heading', 'paragraph']
-  }),
   ...(props.extensions || [])
 ].filter(extension => !!extension))
 

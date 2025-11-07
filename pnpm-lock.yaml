@@ -68,12 +68,6 @@ importers:
       '@tiptap/extension-image':
         specifier: ^3.10.2
         version: 3.10.2(@tiptap/core@3.10.1(@tiptap/pm@3.10.1))
-      '@tiptap/extension-table':
-        specifier: ^3.10.2
-        version: 3.10.2(@tiptap/core@3.10.1(@tiptap/pm@3.10.1))(@tiptap/pm@3.10.1)
-      '@tiptap/extension-text-align':
-        specifier: ^3.10.2
-        version: 3.10.2(@tiptap/core@3.10.1(@tiptap/pm@3.10.1))
       '@tiptap/markdown':
         specifier: ^3.10.2
         version: 3.10.2(@tiptap/core@3.10.1(@tiptap/pm@3.10.1))(@tiptap/pm@3.10.1)
@@ -405,6 +399,9 @@ importers:
       '@nuxt/ui':
         specifier: workspace:*
         version: link:../..
+      '@tiptap/extension-text-align':
+        specifier: ^3.10.3
+        version: 3.10.3(@tiptap/core@3.10.1(@tiptap/pm@3.10.1))
       ai:
         specifier: ^5.0.87
         version: 5.0.87(zod@4.1.12)
@@ -2465,16 +2462,10 @@ packages:
     peerDependencies:
       '@tiptap/core': ^3.10.1
 
-  '@tiptap/extension-table@3.10.2':
-    resolution: {integrity: sha512-6aIJcrIhc/1ukdGMr/ZuGLnkXt3xTob3KHDsnEWFMVtRfcdologE6zEeP/xObF2GJ0bNeeU1BLj/k6Vf/3o8IQ==}
+  '@tiptap/extension-text-align@3.10.3':
+    resolution: {integrity: sha512-hq1Btg/xmBRfFtuxxD/8qnkKnB6TcfWdAXOqCANGrzTC2J76QUyp4WEwkKC4rX5rNj9Myk5dcvWGbYz0FdH+MA==}
     peerDependencies:
-      '@tiptap/core': ^3.10.2
-      '@tiptap/pm': ^3.10.2
-
-  '@tiptap/extension-text-align@3.10.2':
-    resolution: {integrity: sha512-PD7ZNuC1qr/dHcvYT8QwBDeCxXH6LzIbYIZ69/Aph0llXPCUf9N0UWKjy2gYHHXG1AfTr0iQ9vhPWF+YF3TWtg==}
-    peerDependencies:
-      '@tiptap/core': ^3.10.2
+      '@tiptap/core': ^3.10.3
 
   '@tiptap/extension-text@3.10.1':
     resolution: {integrity: sha512-Af0WBQJvjiTnEArutOZENCVNGuK7Ln3BwUH3jXsk4OUHxOyt5JK9qsDePsO46Dj9OlXHbnBi5hAnhJGI8zGLzw==}
@@ -10022,12 +10013,7 @@ snapshots:
     dependencies:
       '@tiptap/core': 3.10.1(@tiptap/pm@3.10.1)
 
-  '@tiptap/extension-table@3.10.2(@tiptap/core@3.10.1(@tiptap/pm@3.10.1))(@tiptap/pm@3.10.1)':
-    dependencies:
-      '@tiptap/core': 3.10.1(@tiptap/pm@3.10.1)
-      '@tiptap/pm': 3.10.1
-
-  '@tiptap/extension-text-align@3.10.2(@tiptap/core@3.10.1(@tiptap/pm@3.10.1))':
+  '@tiptap/extension-text-align@3.10.3(@tiptap/core@3.10.1(@tiptap/pm@3.10.1))':
     dependencies:
       '@tiptap/core': 3.10.1(@tiptap/pm@3.10.1)
 
