@@ -1,9 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Editor > renders with as correctly 1`] = `
-"<div class="">
+"<section class="">
   <div role="presentation" class="size-full flex flex-col flex-1"></div>
-</div>"
+</section>"
 `;
 
 exports[`Editor > renders with class correctly 1`] = `
