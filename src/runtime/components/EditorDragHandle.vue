@@ -81,9 +81,23 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorDragHa
 const floatingUIOptions = computed(() => defu(props.options, {
   strategy: 'absolute' as Strategy,
   placement: 'left-start' as Placement,
-  offset: {
-    alignmentAxis: 2,
-    mainAxis: 8
+  offset: ({ rects }) => {
+    const blockHeight = rects.reference.height
+    const handleHeight = rects.floating.height
+
+    // For blocks taller than 40px, align to top (no offset)
+    if (blockHeight > 40) {
+      return {
+        alignmentAxis: 0,
+        mainAxis: 8
+      }
+    }
+
+    // For smaller blocks, center vertically
+    return {
+      alignmentAxis: (blockHeight - handleHeight) / 2,
+      mainAxis: 8
+    }
   }
 } as EditorDragHandleOptions))
 
