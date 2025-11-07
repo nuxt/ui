@@ -14,7 +14,7 @@ export type EditorContentType = 'json' | 'html' | 'markdown'
 export interface EditorProps extends Omit<Partial<EditorOptions>, 'content'> {
   /**
    * The starter kit options to configure the editor.
-   * @defaultValue `{ headings: { levels: [1, 2, 3, 4] } }`
+   * @defaultValue { headings: { levels: [1, 2, 3, 4] } }
    */
   starterKit?: Partial<StarterKitOptions>
   /**

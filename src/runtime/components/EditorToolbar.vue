@@ -96,8 +96,6 @@ const Component = computed(() => {
 })
 const ComponentProps = useForwardProps(reactivePick(props as any, 'appendTo', 'updateDelay', 'resizeDelay', 'shouldShow', 'options'))
 
-console.log(ComponentProps.value)
-
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorToolbar || {}) })({
   layout: props.layout
 }))
