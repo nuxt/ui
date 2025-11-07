@@ -73,7 +73,7 @@ import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { isArrayOfArray, pick } from '../utils'
-import { isExtensionAvailable, isMarkInSchema, isNodeTypeSelected } from '../utils/editor'
+import { createToggleHandler, createSetHandler, createSimpleHandler, createMarkHandler, createTextAlignHandler, createHeadingHandler } from '../utils/editor'
 import { tv } from '../utils/tv'
 import UDropdownMenu from './DropdownMenu.vue'
 import UButton from './Button.vue'
@@ -108,56 +108,31 @@ const groups = computed<EditorToolbarItem[][]>(() =>
     : []
 )
 
-const functionMap = {
-  mark: 'toggleMark',
-  textAlign: 'setTextAlign',
-  heading: 'toggleHeading',
-  blockquote: 'toggleBlockquote',
-  bulletList: 'toggleBulletList',
-  orderedList: 'toggleOrderedList',
-  codeBlock: 'toggleCodeBlock',
-  horizontalRule: 'setHorizontalRule',
-  paragraph: 'setParagraph',
-  undo: 'undo',
-  redo: 'redo'
+const commandHandlers = {
+  mark: createMarkHandler(),
+  textAlign: createTextAlignHandler(),
+  heading: createHeadingHandler(),
+  blockquote: createToggleHandler('blockquote'),
+  bulletList: createToggleHandler('bulletList'),
+  orderedList: createToggleHandler('orderedList'),
+  codeBlock: createToggleHandler('codeBlock'),
+  horizontalRule: createSetHandler('horizontalRule'),
+  paragraph: createSetHandler('paragraph'),
+  undo: createSimpleHandler('undo'),
+  redo: createSimpleHandler('redo')
 }
 
 function isCommandActive(command: EditorToolbarItem): boolean {
-  if (!props.editor?.isEditable) {
+  if (!props.editor?.isEditable || !('kind' in command)) {
     return false
   }
 
-  if (!('kind' in command)) {
-    return false
-  }
-
-  // Dropdown commands are active if any of their items are active
   if (command.kind === 'dropdown') {
     return command.items?.some((item): boolean => isCommandActive(item as EditorToolbarItem)) || false
   }
 
-  // For textAlign commands, check with the align parameter
-  if (command.kind === 'textAlign' && command.align) {
-    return props.editor.isActive({ textAlign: command.align })
-  }
-
-  // For heading commands, check with the level parameter
-  if (command.kind === 'heading' && command.level) {
-    return props.editor.isActive('heading', { level: command.level })
-  }
-
-  // For mark commands, check the mark
-  if (command.kind === 'mark' && command.mark) {
-    return props.editor.isActive(command.mark)
-  }
-
-  // Undo/redo commands don't have an active state
-  if (command.kind === 'undo' || command.kind === 'redo') {
-    return false
-  }
-
-  // For other node types (blockquote, bulletList, etc.)
-  return props.editor.isActive(command.kind)
+  const handler = commandHandlers[command.kind as keyof typeof commandHandlers]
+  return handler?.isActive(props.editor, command) || false
 }
 
 function isCommandDisabled(command: EditorToolbarItem): boolean {
@@ -165,16 +140,14 @@ function isCommandDisabled(command: EditorToolbarItem): boolean {
     return true
   }
 
-  // Dropdown commands are disabled if all their items are disabled
   if (command.kind === 'dropdown') {
     if (!command.items || command.items.length === 0) {
       return true
     }
 
     const items = isArrayOfArray(command.items) ? command.items.flat() : command.items
-
-    // Check if all items are disabled (skipping separators and labels)
     const commandItems = items.filter((item): item is EditorToolbarItem => 'kind' in item)
+
     if (commandItems.length === 0) {
       return true
     }
@@ -182,82 +155,29 @@ function isCommandDisabled(command: EditorToolbarItem): boolean {
     return commandItems.every(item => isCommandDisabled(item))
   }
 
-  // For mark commands, check if mark is in schema and if a restricted node is selected
-  if (command.kind === 'mark' && command.mark) {
-    if (!isMarkInSchema(command.mark, props.editor) || isNodeTypeSelected(props.editor, ['image'])) {
-      return true
-    }
-    return !(props.editor.can() as any).toggleMark(command.mark)
-  }
-
-  // For textAlign commands, check extension availability and restricted nodes
-  if (command.kind === 'textAlign' && command.align) {
-    if (!isExtensionAvailable(props.editor, 'textAlign') || isNodeTypeSelected(props.editor, ['image', 'horizontalRule'])) {
-      return true
-    }
-    return !(props.editor.can() as any).setTextAlign(command.align)
-  }
-
-  // For heading commands, check with level
-  if (command.kind === 'heading' && command.level) {
-    return !(props.editor.can() as any).toggleHeading({ level: command.level })
-  }
-
-  // For list commands, always allow switching between list types
-  if (command.kind === 'bulletList' || command.kind === 'orderedList') {
+  const handler = commandHandlers[command.kind as keyof typeof commandHandlers]
+  if (!handler) {
     return false
   }
 
-  // For other node commands that use toggle
-  if (['blockquote', 'codeBlock'].includes(command.kind)) {
-    const canFunction = functionMap[command.kind] as keyof typeof props.editor.can
-    return !(props.editor.can() as any)[canFunction]()
+  // Check command-specific disabled state
+  if (handler.isDisabled?.(props.editor, command)) {
+    return true
   }
 
-  // For commands that use set (horizontalRule, paragraph)
-  if (['horizontalRule', 'paragraph'].includes(command.kind)) {
-    const canFunction = functionMap[command.kind] as keyof typeof props.editor.can
-    return !(props.editor.can() as any)[canFunction]()
-  }
-
-  // For undo/redo commands, check if there's history
-  if (command.kind === 'undo' || command.kind === 'redo') {
-    return !(props.editor.can() as any)[command.kind]()
-  }
-
-  return false
+  // Check if command can be executed
+  return !handler.canExecute(props.editor, command)
 }
 
 function onCommandClick(_: Event, command: EditorToolbarItem) {
-  if (!props.editor?.isEditable) {
+  if (!props.editor?.isEditable || command.kind === 'dropdown' || isCommandDisabled(command)) {
     return
   }
 
-  // Dropdown commands don't have actions
-  if (command.kind === 'dropdown') {
-    return
-  }
-
-  if (isCommandDisabled(command)) {
-    return
-  }
-
-  const chain = props.editor.chain() as any
-  const chainFunction = functionMap[command.kind]
-
-  // Handle different command types with their specific arguments
-  if (command.kind === 'mark' && command.mark) {
-    chain.focus()[chainFunction](command.mark).run()
-  } else if (command.kind === 'textAlign' && command.align) {
-    chain.focus()[chainFunction](command.align).run()
-  } else if (command.kind === 'heading' && command.level) {
-    chain.focus()[chainFunction]({ level: command.level }).run()
-  } else if (command.kind === 'undo' || command.kind === 'redo') {
-    // Undo/redo don't need focus
-    chain[chainFunction]().run()
-  } else {
-    // For commands without arguments (blockquote, bulletList, etc.)
-    chain.focus()[chainFunction]().run()
+  const handler = commandHandlers[command.kind as keyof typeof commandHandlers]
+  if (handler) {
+    const chain = props.editor.chain() as any
+    handler.execute(chain, command).run()
   }
 }
 
@@ -297,13 +217,7 @@ function getButtonProps(command: EditorToolbarItem) {
 }
 
 function getDropdownProps(command: EditorToolbarItem & { kind: 'dropdown' }) {
-  const baseProps = pick(command, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal'])
-
-  return defu(baseProps, {
-    content: {
-      // onCloseAutoFocus: (e: Event) => e.preventDefault()
-    }
-  })
+  return pick(command, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal'])
 }
 
 function mapDropdownItem(item: EditorToolbarItem | DropdownMenuItem) {
@@ -311,7 +225,7 @@ function mapDropdownItem(item: EditorToolbarItem | DropdownMenuItem) {
   if (!('kind' in item)) {
     return item
   }
-  // Otherwise it's an EditorToolbarItem, add computed props
+
   return {
     ...item,
     active: isCommandActive(item as EditorToolbarItem),

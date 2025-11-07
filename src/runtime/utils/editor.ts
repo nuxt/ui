@@ -31,3 +31,59 @@ export function isExtensionAvailable(editor: Editor | null, extensionName: strin
 
   return editor.extensionManager.extensions.some(ext => ext.name === extensionName)
 }
+
+export function createToggleHandler(name: string) {
+  const fnName = `toggle${name.charAt(0).toUpperCase()}${name.slice(1)}`
+  return {
+    canExecute: (editor: Editor) => (editor.can() as any)[fnName](),
+    execute: (chain: any) => chain.focus()[fnName](),
+    isActive: (editor: Editor) => editor.isActive(name),
+    isDisabled: undefined
+  }
+}
+
+export function createSetHandler(name: string) {
+  const fnName = `set${name.charAt(0).toUpperCase()}${name.slice(1)}`
+  return {
+    canExecute: (editor: Editor) => (editor.can() as any)[fnName](),
+    execute: (chain: any) => chain.focus()[fnName](),
+    isActive: (editor: Editor) => editor.isActive(name),
+    isDisabled: undefined
+  }
+}
+
+export function createSimpleHandler(name: string) {
+  return {
+    canExecute: (editor: Editor) => (editor.can() as any)[name](),
+    execute: (chain: any) => chain[name](),
+    isActive: () => false,
+    isDisabled: undefined
+  }
+}
+
+export function createMarkHandler() {
+  return {
+    canExecute: (editor: Editor, cmd: any) => (editor.can() as any).toggleMark(cmd.mark),
+    execute: (chain: any, cmd: any) => chain.focus().toggleMark(cmd.mark),
+    isActive: (editor: Editor, cmd: any) => editor.isActive(cmd.mark),
+    isDisabled: (editor: Editor, cmd: any) => !isMarkInSchema(cmd.mark, editor) || isNodeTypeSelected(editor, ['image'])
+  }
+}
+
+export function createTextAlignHandler() {
+  return {
+    canExecute: (editor: Editor, cmd: any) => (editor.can() as any).setTextAlign(cmd.align),
+    execute: (chain: any, cmd: any) => chain.focus().setTextAlign(cmd.align),
+    isActive: (editor: Editor, cmd: any) => editor.isActive({ textAlign: cmd.align }),
+    isDisabled: (editor: Editor) => !isExtensionAvailable(editor, 'textAlign') || isNodeTypeSelected(editor, ['image', 'horizontalRule'])
+  }
+}
+
+export function createHeadingHandler() {
+  return {
+    canExecute: (editor: Editor, cmd: any) => (editor.can() as any).toggleHeading({ level: cmd.level }),
+    execute: (chain: any, cmd: any) => chain.focus().toggleHeading({ level: cmd.level }),
+    isActive: (editor: Editor, cmd: any) => editor.isActive('heading', { level: cmd.level }),
+    isDisabled: undefined
+  }
+}
