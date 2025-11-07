@@ -1,6 +1,6 @@
 import type { Editor, Mark } from '@tiptap/vue-3'
 
-export interface CommandHandler {
+export interface Handler {
   canExecute: (editor: Editor, cmd?: any) => boolean
   execute: (chain: any, cmd?: any) => any
   isActive: (editor: Editor, cmd?: any) => boolean

@@ -6,8 +6,8 @@ import type { BubbleMenuPluginProps } from '@tiptap/extension-bubble-menu'
 import type { FloatingMenuPluginProps } from '@tiptap/extension-floating-menu'
 import theme from '#build/ui/editor-toolbar'
 import type { ButtonProps, DropdownMenuProps, DropdownMenuItem } from '../types'
-import type { ArrayOrNested, DynamicSlots, NestedItem } from '../types/utils'
-import type { CommandHandler } from '../utils/editor'
+import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem } from '../types/utils'
+import type { Handler } from '../utils/editor'
 import type { ComponentConfig } from '../types/tv'
 
 type EditorToolbar = ComponentConfig<typeof theme, AppConfig, 'editorToolbar'>
@@ -30,7 +30,7 @@ export type EditorToolbarItem
       kind: 'dropdown'
     }
 
-export type EditorToolbarHandlers = Record<string, CommandHandler>
+export type EditorToolbarHandlers = Record<string, Handler>
 
 type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>> = {
   /**
@@ -44,7 +44,7 @@ type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOr
    */
   items?: T
   /**
-   * Custom command handlers to override or extend the default handlers.
+   * Custom item handlers to override or extend the default handlers.
    */
   handlers?: EditorToolbarHandlers
   editor: TiptapEditor
@@ -53,22 +53,23 @@ type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOr
 }
 
 export type EditorToolbarProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>>
-  = | (EditorToolbarBaseProps<T> & {
+  = | (EditorToolbarBaseProps<T> & { layout?: 'fixed' })
+    | (EditorToolbarBaseProps<T> & Partial<Omit<BubbleMenuPluginProps, 'pluginKey' | 'editor' | 'element'>> & {
+      layout?: 'bubble'
+    })
+    | (EditorToolbarBaseProps<T> & Partial<Omit<FloatingMenuPluginProps, 'pluginKey' | 'editor' | 'element'>> & {
+      layout?: 'floating'
+    })
 
-    layout?: 'fixed'
-  })
-  | (EditorToolbarBaseProps<T> & Partial<Omit<BubbleMenuPluginProps, 'pluginKey' | 'editor' | 'element'>> & {
-    layout?: 'bubble'
-  })
-  | (EditorToolbarBaseProps<T> & Partial<Omit<FloatingMenuPluginProps, 'pluginKey' | 'editor' | 'element'>> & {
-    layout?: 'floating'
-  })
+type SlotProps<T extends EditorToolbarItem> = (props: { item: T, index: number }) => any
 
-type SlotProps<T extends EditorToolbarItem> = (props: { command: T, active?: boolean }) => any
-
-export type EditorToolbarSlots<A extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>, T extends NestedItem<A> = NestedItem<A>> = {
+export type EditorToolbarSlots<
+  A extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>,
+  T extends NestedItem<A> = NestedItem<A>
+> = {
   default(props?: {}): any
-} & DynamicSlots<T, 'command', SlotProps<T>>
+  item: SlotProps<T>
+} & DynamicSlots<MergeTypes<T>, undefined, { index: number }>
 
 </script>
 
@@ -115,7 +116,7 @@ const groups = computed<EditorToolbarItem[][]>(() =>
     : []
 )
 
-const commandHandlers = computed((): Record<string, CommandHandler> => ({
+const handlers = computed<EditorToolbarHandlers>(() => ({
   mark: createMarkHandler(),
   textAlign: createTextAlignHandler(),
   heading: createHeadingHandler(),
@@ -130,86 +131,86 @@ const commandHandlers = computed((): Record<string, CommandHandler> => ({
   ...props.handlers
 }))
 
-function isCommandActive(command: EditorToolbarItem): boolean {
-  if (!props.editor?.isEditable || !('kind' in command)) {
+function isActive(item: EditorToolbarItem): boolean {
+  if (!props.editor?.isEditable || !('kind' in item)) {
     return false
   }
 
-  if (command.kind === 'dropdown') {
-    return command.items?.some((item): boolean => isCommandActive(item as EditorToolbarItem)) || false
+  if (item.kind === 'dropdown') {
+    return item.items?.some((item): boolean => isActive(item as EditorToolbarItem)) || false
   }
 
-  const handler = commandHandlers.value[command.kind]
-  return handler?.isActive(props.editor, command) || false
+  const handler = handlers.value[item.kind]
+  return handler?.isActive(props.editor, item) || false
 }
 
-function isCommandDisabled(command: EditorToolbarItem): boolean {
+function isDisabled(item: EditorToolbarItem): boolean {
   if (!props.editor?.isEditable) {
     return true
   }
 
-  if (command.kind === 'dropdown') {
-    if (!command.items || command.items.length === 0) {
+  if (item.kind === 'dropdown') {
+    if (!item.items || item.items.length === 0) {
       return true
     }
 
-    const items = isArrayOfArray(command.items) ? command.items.flat() : command.items
-    const commandItems = items.filter((item): item is EditorToolbarItem => 'kind' in item)
+    const items = isArrayOfArray(item.items) ? item.items.flat() : item.items
+    const itemItems = items.filter((item): item is EditorToolbarItem => 'kind' in item)
 
-    if (commandItems.length === 0) {
+    if (itemItems.length === 0) {
       return true
     }
 
-    return commandItems.every(item => isCommandDisabled(item))
+    return itemItems.every(item => isDisabled(item))
   }
 
-  const handler = commandHandlers.value[command.kind]
+  const handler = handlers.value[item.kind]
   if (!handler) {
     return false
   }
 
-  // Check command-specific disabled state
-  if (handler.isDisabled?.(props.editor, command)) {
+  // Check item-specific disabled state
+  if (handler.isDisabled?.(props.editor, item)) {
     return true
   }
 
-  // Check if command can be executed
-  return !handler.canExecute(props.editor, command)
+  // Check if item can be executed
+  return !handler.canExecute(props.editor, item)
 }
 
-function onCommandClick(_: Event, command: EditorToolbarItem) {
-  if (!props.editor?.isEditable || command.kind === 'dropdown' || isCommandDisabled(command)) {
+function onClick(_: Event, item: EditorToolbarItem) {
+  if (!props.editor?.isEditable || item.kind === 'dropdown' || isDisabled(item)) {
     return
   }
 
-  const handler = commandHandlers.value[command.kind]
+  const handler = handlers.value[item.kind]
   if (handler) {
     const chain = props.editor.chain() as any
-    handler.execute(chain, command).run()
+    handler.execute(chain, item).run()
   }
 }
 
-function getActiveChildItem(command: EditorToolbarItem & { kind: 'dropdown' }): EditorToolbarItem | undefined {
-  if (!command.items) {
+function getActiveChildItem(item: EditorToolbarItem & { kind: 'dropdown' }): EditorToolbarItem | undefined {
+  if (!item.items) {
     return undefined
   }
 
-  const items = isArrayOfArray(command.items) ? command.items.flat() : command.items
+  const items = isArrayOfArray(item.items) ? item.items.flat() : item.items
 
   return items.find((item): item is EditorToolbarItem => {
     if (!('kind' in item)) {
       return false
     }
-    return isCommandActive(item as EditorToolbarItem)
+    return isActive(item as EditorToolbarItem)
   }) as EditorToolbarItem | undefined
 }
 
-function getButtonProps(command: EditorToolbarItem) {
-  const baseProps = pick(command, ['label', 'color', 'activeColor', 'variant', 'activeVariant', 'size', 'icon', 'leadingIcon', 'trailingIcon', 'loading', 'loadingIcon', 'disabled', 'active', 'class', 'ui'])
+function getButtonProps(item: EditorToolbarItem) {
+  const baseProps = pick(item, ['label', 'color', 'activeColor', 'variant', 'activeVariant', 'size', 'icon', 'leadingIcon', 'trailingIcon', 'loading', 'loadingIcon', 'disabled', 'active', 'class', 'ui'])
 
-  // For dropdown commands, use the active child's icon if available
-  if (command.kind === 'dropdown') {
-    const activeChild = getActiveChildItem(command)
+  // For dropdown items, use the active child's icon if available
+  if (item.kind === 'dropdown') {
+    const activeChild = getActiveChildItem(item)
     if (activeChild?.icon) {
       baseProps.icon = activeChild.icon
     }
@@ -224,8 +225,8 @@ function getButtonProps(command: EditorToolbarItem) {
   })
 }
 
-function getDropdownProps(command: EditorToolbarItem & { kind: 'dropdown' }) {
-  return pick(command, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal'])
+function getDropdownProps(item: EditorToolbarItem & { kind: 'dropdown' }) {
+  return pick(item, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal'])
 }
 
 function mapDropdownItem(item: EditorToolbarItem | DropdownMenuItem) {
@@ -236,20 +237,20 @@ function mapDropdownItem(item: EditorToolbarItem | DropdownMenuItem) {
 
   return {
     ...item,
-    active: isCommandActive(item as EditorToolbarItem),
-    disabled: isCommandDisabled(item as EditorToolbarItem),
-    onClick: (e: Event) => onCommandClick(e, item as EditorToolbarItem)
+    active: isActive(item as EditorToolbarItem),
+    disabled: isDisabled(item as EditorToolbarItem),
+    onClick: (e: Event) => onClick(e, item as EditorToolbarItem)
   }
 }
 
-function getDropdownItems(command: EditorToolbarItem & { kind: 'dropdown' }) {
-  if (!command.items) {
+function getDropdownItems(item: EditorToolbarItem & { kind: 'dropdown' }) {
+  if (!item.items) {
     return []
   }
 
-  return isArrayOfArray(command.items)
-    ? command.items.map(group => group.map(mapDropdownItem))
-    : [command.items.map(mapDropdownItem)]
+  return isArrayOfArray(item.items)
+    ? item.items.map(group => group.map(mapDropdownItem))
+    : [item.items.map(mapDropdownItem)]
 }
 </script>
 
@@ -268,28 +269,28 @@ function getDropdownItems(command: EditorToolbarItem & { kind: 'dropdown' }) {
     <Primitive :as="as" role="toolbar" :class="ui.base({ class: [props.ui?.base, props.class] })">
       <template v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`">
         <div role="group" :class="ui.group({ class: props.ui?.group })">
-          <template v-for="(command, index) in group" :key="`group-${groupIndex}-${index}`">
-            <!-- <slot :name="`command-${command.slot}`" v-bind="{ command, index }"> -->
-            <UDropdownMenu
-              v-if="command.kind === 'dropdown' && command.items?.length"
-              v-bind="getDropdownProps(command as EditorToolbarItem & { kind: 'dropdown' })"
-              :items="getDropdownItems(command)"
-            >
-              <UButton
-                :active="isCommandActive(command)"
-                :disabled="isCommandDisabled(command)"
-                v-bind="getButtonProps(command)"
-              />
-            </UDropdownMenu>
+          <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
+            <slot :name="((item.slot || 'item') as keyof EditorToolbarSlots<T>)" :item="(item as any)" :index="index">
+              <UDropdownMenu
+                v-if="item.kind === 'dropdown' && item.items?.length"
+                v-bind="getDropdownProps(item as EditorToolbarItem & { kind: 'dropdown' })"
+                :items="getDropdownItems(item)"
+              >
+                <UButton
+                  :active="isActive(item)"
+                  :disabled="isDisabled(item)"
+                  v-bind="getButtonProps(item)"
+                />
+              </UDropdownMenu>
 
-            <UButton
-              v-else
-              :active="isCommandActive(command)"
-              :disabled="isCommandDisabled(command)"
-              v-bind="getButtonProps(command)"
-              @click="onCommandClick($event, command)"
-            />
-            <!-- </slot> -->
+              <UButton
+                v-else
+                :active="isActive(item)"
+                :disabled="isDisabled(item)"
+                v-bind="getButtonProps(item)"
+                @click="onClick($event, item)"
+              />
+            </slot>
           </template>
         </div>
 
