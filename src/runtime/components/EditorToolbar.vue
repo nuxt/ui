@@ -160,14 +160,26 @@ function isCommandActive(command: EditorToolbarItem): boolean {
   return props.editor.isActive(command.kind)
 }
 
-function isCommandDisabled(command: EditorToolbarItem) {
+function isCommandDisabled(command: EditorToolbarItem): boolean {
   if (!props.editor?.isEditable) {
     return true
   }
 
-  // Dropdown commands are never disabled (their items might be)
+  // Dropdown commands are disabled if all their items are disabled
   if (command.kind === 'dropdown') {
-    return false
+    if (!command.items || command.items.length === 0) {
+      return true
+    }
+
+    const items = isArrayOfArray(command.items) ? command.items.flat() : command.items
+
+    // Check if all items are disabled (skipping separators and labels)
+    const commandItems = items.filter((item): item is EditorToolbarItem => 'kind' in item)
+    if (commandItems.length === 0) {
+      return true
+    }
+
+    return commandItems.every(item => isCommandDisabled(item))
   }
 
   // For mark commands, check if mark is in schema and if a restricted node is selected
@@ -343,6 +355,7 @@ function getDropdownItems(command: EditorToolbarItem & { kind: 'dropdown' }) {
             >
               <UButton
                 :active="isCommandActive(command)"
+                :disabled="isCommandDisabled(command)"
                 v-bind="getButtonProps(command)"
               />
             </UDropdownMenu>
