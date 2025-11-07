@@ -1,4 +1,3 @@
-import type { NuxtComponentMeta } from 'nuxt-component-meta'
 import { createResolver } from '@nuxt/kit'
 import pkg from '../package.json'
 
