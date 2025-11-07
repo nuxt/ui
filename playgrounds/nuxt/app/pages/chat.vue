@@ -34,6 +34,14 @@ function onSubmit() {
 
   input.value = ''
 }
+
+function onReload() {
+  chat.regenerate()
+}
+
+function onStop() {
+  chat.stop()
+}
 </script>
 
 <template>
@@ -74,7 +82,7 @@ function onSubmit() {
       class="sticky bottom-0"
       @submit="onSubmit"
     >
-      <UChatPromptSubmit :status="chat.status" @stop="chat.stop" @reload="chat.regenerate" />
+      <UChatPromptSubmit :status="chat.status" @stop="onStop" @reload="onReload" />
     </UChatPrompt>
   </div>
 </template>
