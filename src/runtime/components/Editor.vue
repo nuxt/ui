@@ -40,7 +40,6 @@ import { Markdown } from '@tiptap/markdown'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
 import TextAlign from '@tiptap/extension-text-align'
-import NodeRange from '@tiptap/extension-node-range'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
@@ -70,22 +69,16 @@ const editorProps = computed(() => defu(props.editorProps, {
     ...attrs,
     class: ui.value.base({ class: [props.ui?.base, props.class] })
   }
-}))
+} as EditorOptions['editorProps']))
 const contentType = computed(() => props.contentType || (typeof content.value === 'string' ? 'html' : 'json'))
 
 const extensions = computed(() => [
   contentType.value === 'markdown' ? Markdown : undefined,
   StarterKit.configure(defu(props.starterKit, {
-
     headings: {
       levels: [1, 2, 3, 4, 5, 6]
     }
   })),
-  NodeRange.configure({
-    // allow to select only on depth 0
-    depth: 0,
-    key: null
-  }),
   Image,
   TextAlign.configure({
     types: ['heading', 'paragraph']

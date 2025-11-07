@@ -81,9 +81,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorDragHa
 const floatingUIOptions = computed(() => defu(props.options, {
   strategy: 'absolute' as Strategy,
   placement: 'left-start' as Placement,
-  offset: 8,
-  shift: {
-    mainAxis: true
+  offset: {
+    alignmentAxis: 2,
+    mainAxis: 8
   }
 } as EditorDragHandleOptions))
 

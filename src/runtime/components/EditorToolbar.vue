@@ -92,7 +92,7 @@ const Component = computed(() => {
     bubble: BubbleMenu,
     floating: FloatingMenu,
     fixed: 'template'
-  }[props.layout || 'fixed'])
+  }[props.layout])
 })
 const ComponentProps = useForwardProps(reactivePick(props as any, 'appendTo', 'updateDelay', 'resizeDelay', 'shouldShow', 'options'))
 
@@ -331,7 +331,7 @@ function getDropdownItems(command: EditorToolbarItem & { kind: 'dropdown' }) {
       ...$attrs
     }"
   >
-    <div role="toolbar" :data-layout="props.layout" :class="ui.base({ class: [props.ui?.base, props.class] })">
+    <div role="toolbar" :class="ui.base({ class: [props.ui?.base, props.class] })">
       <template v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`">
         <div role="group" :class="ui.group({ class: props.ui?.group })">
           <template v-for="(command, index) in group" :key="`group-${groupIndex}-${index}`">

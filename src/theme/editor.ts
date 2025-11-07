@@ -15,7 +15,7 @@ export default (_options: Required<NuxtOptions['ui']>) => ({
       '[&_:is(h1,h2,h3,h4)]:text-highlighted [&_:is(h1,h2,h3,h4)]:font-bold',
       '[&_:is(h2,h3)_a_code]:font-bold [&_:is(h2,h3)_a_code]:border-dashed [&_:is(h2,h3):hover_a_code]:border-primary [&_:is(h2,h3):hover_a_code]:text-primary [&_:is(h2,h3)_a_code]:transition-colors',
       // Headings - unique styles
-      '[&_h1]:text-4xl [&_h1]:mb-8',
+      '[&_h1]:text-3xl [&_h1]:mb-8',
       '[&_h2]:text-2xl [&_h2]:mb-6 [&_h2_a_code]:text-xl/7',
       '[&_h3]:text-xl [&_h3]:mt-8 [&_h3]:mb-3 [&_h3_a_code]:text-lg/6',
       '[&_h4]:text-lg [&_h4]:mt-6 [&_h4]:mb-2',

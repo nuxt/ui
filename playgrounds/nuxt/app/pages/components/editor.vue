@@ -165,7 +165,6 @@ const items: EditorToolbarItem[][] = [[{
     v-slot="{ editor }"
     v-model="content"
     content-type="markdown"
-    aria-label="Coucou"
     class="flex-1 w-full min-h-0"
     :ui="{ content: 'max-w-2xl mx-auto' }"
   >
