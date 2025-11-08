@@ -6,8 +6,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type DashboardSidebarCollapse = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarCollapse'>
 
-export interface DashboardSidebarCollapseProps extends /** @vue-ignore */ Pick<ButtonProps, 'as' | 'size' | 'disabled' | 'ui'> {
-  side?: 'left' | 'right'
+export interface DashboardSidebarCollapseProps extends Omit<ButtonProps, 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */
@@ -16,14 +15,18 @@ export interface DashboardSidebarCollapseProps extends /** @vue-ignore */ Pick<B
    * @defaultValue 'ghost'
    */
   variant?: ButtonProps['variant']
-  class?: any
+  /**
+   * The side of the sidebar to collapse.
+   * @defaultValue 'left'
+   */
+  side?: 'left' | 'right'
 }
 </script>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useForwardProps } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
+import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { useDashboard } from '../utils/dashboard'
@@ -36,7 +39,7 @@ const props = withDefaults(defineProps<DashboardSidebarCollapseProps>(), {
   side: 'left'
 })
 
-const rootProps = useForwardProps(reactivePick(props, 'color', 'variant', 'size'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class'))
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebarCollapse['AppConfig']
@@ -47,9 +50,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSid
 
 <template>
   <UButton
-    v-bind="rootProps"
-    :aria-label="sidebarCollapsed ? t('dashboardSidebarCollapse.expand') : t('dashboardSidebarCollapse.collapse')"
-    :icon="sidebarCollapsed ? appConfig.ui.icons.panelOpen : appConfig.ui.icons.panelClose"
+    v-bind="{
+      ...buttonProps,
+      'icon': props.icon || (sidebarCollapsed ? appConfig.ui.icons.panelOpen : appConfig.ui.icons.panelClose),
+      'aria-label': sidebarCollapsed ? t('dashboardSidebarCollapse.expand') : t('dashboardSidebarCollapse.collapse'),
+      ...$attrs
+    }"
     :class="ui({ class: props.class, side: props.side })"
     @click="collapseSidebar?.(!sidebarCollapsed)"
   />

@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { InputHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
+import type { InputHTMLAttributes } from '../types/html'
 import type { ModelModifiers } from '../types/input'
 import type { AcceptableValue } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
@@ -11,7 +11,8 @@ import type { ComponentConfig } from '../types/tv'
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
 
 export type InputValue = AcceptableValue
-export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps {
+
+export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'type' | 'placeholder' | 'required' | 'autocomplete' | 'autofocus' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

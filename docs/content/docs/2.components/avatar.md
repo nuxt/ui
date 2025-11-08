@@ -131,6 +131,10 @@ You can use a CSS mask to display an Avatar with a custom shape instead of a sim
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attributes" target="_blank"}
+This component also supports all native `<img>` HTML attributes.
+::
+
 ## Theme
 
 :component-theme

@@ -1,13 +1,18 @@
 <script lang="ts">
-import type { ButtonHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { InertiaLinkProps } from '@inertiajs/vue3'
 import theme from '#build/ui/link'
+import type { ButtonHTMLAttributes, AnchorHTMLAttributes } from '../../types/html'
 import type { ComponentConfig } from '../../types/tv'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
 
-interface NuxtLinkProps extends Omit<InertiaLinkProps, 'href' | 'onClick'> {
+export interface LinkProps extends Omit<InertiaLinkProps, 'href' | 'onClick'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
+  /**
+   * The element or component this component should render as when not a link.
+   * @defaultValue 'button'
+   */
+  as?: any
   activeClass?: string
   /**
    * Route Location the link should navigate to when clicked on.
@@ -16,7 +21,7 @@ interface NuxtLinkProps extends Omit<InertiaLinkProps, 'href' | 'onClick'> {
   /**
    * An alias for `to`. If used with `to`, `href` will be ignored
    */
-  href?: NuxtLinkProps['to']
+  href?: LinkProps['to']
   /**
    * Forces the link to be considered as external (true) or internal (false). This is helpful to handle edge-cases
    */
@@ -25,15 +30,16 @@ interface NuxtLinkProps extends Omit<InertiaLinkProps, 'href' | 'onClick'> {
    * Where to display the linked URL, as the name for a browsing context.
    */
   target?: '_blank' | '_parent' | '_self' | '_top' | (string & {}) | null
-  ariaCurrentValue?: string
-}
-
-export interface LinkProps extends NuxtLinkProps {
   /**
-   * The element or component this component should render as when not a link.
-   * @defaultValue 'button'
+   * A rel attribute value to apply on the link. Defaults to "noopener noreferrer" for external links.
    */
-  as?: any
+  rel?: 'noopener' | 'noreferrer' | 'nofollow' | 'sponsored' | 'ugc' | (string & {}) | null
+  /**
+   * Value passed to the attribute `aria-current` when the link is exact active.
+   *
+   * @defaultValue `'page'`
+   */
+  ariaCurrentValue?: 'page' | 'step' | 'location' | 'date' | 'time' | 'true' | 'false'
   /**
    * The type of the button when not a link.
    * @defaultValue 'button'

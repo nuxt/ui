@@ -9,6 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>
 
 export type CheckboxGroupValue = AcceptableValue
+
 export type CheckboxGroupItem = CheckboxGroupValue | {
   label?: string
   description?: string

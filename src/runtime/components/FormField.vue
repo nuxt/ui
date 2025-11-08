@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { Ref } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form-field'
 import type { ComponentConfig } from '../types/tv'
@@ -48,7 +49,6 @@ export interface FormFieldSlots {
 
 <script setup lang="ts">
 import { computed, ref, inject, provide, useId, watch } from 'vue'
-import type { Ref } from 'vue'
 import { Primitive, Label } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, formInputsInjectionKey } from '../composables/useFormField'
