@@ -1,0 +1,142 @@
+<script lang="ts">
+import type { AppConfig } from '@nuxt/schema'
+import theme from '#build/ui/editor-suggestion-menu'
+import type { EditorMenuOptions } from '../composables/useEditorMenu'
+import type { EditorHandler, EditorActionType } from '../utils/editor'
+import type { IconProps } from '../types'
+import type { ComponentConfig } from '../types/tv'
+
+type EditorSuggestionMenu = ComponentConfig<typeof theme, AppConfig, 'editorSuggestionMenu'>
+
+type EditorSuggestionMenuLabelItem = {
+  type: 'label'
+  label: string
+  class?: any
+  ui?: Pick<EditorSuggestionMenu['slots'], 'label'>
+  [key: string]: any
+}
+
+type EditorSuggestionMenuActionItem = {
+  type?: never
+  label: string
+  description?: string
+  /**
+   * @IconifyIcon
+   */
+  icon?: IconProps['name']
+  disabled?: boolean
+  slot?: string
+  class?: any
+  ui?: Pick<EditorSuggestionMenu['slots'], 'item' | 'itemLeadingIcon' | 'itemWrapper' | 'itemLabel' | 'itemDescription'>
+  [key: string]: any
+} & EditorActionType
+
+export type EditorSuggestionMenuItem = EditorSuggestionMenuLabelItem | EditorSuggestionMenuActionItem
+
+export type EditorSuggestionMenuHandlers = Record<string, EditorHandler>
+
+export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit'>> {
+  /**
+   * Custom item handlers to override or extend the default handlers.
+   */
+  handlers?: EditorSuggestionMenuHandlers
+  class?: any
+  ui?: EditorSuggestionMenu['slots']
+}
+</script>
+
+<script setup lang="ts" generic="T extends EditorSuggestionMenuItem">
+import { computed, h, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { useAppConfig } from '#imports'
+import { useEditorMenu } from '../composables/useEditorMenu'
+import { createHandlers } from '../utils/editor'
+import { tv } from '../utils/tv'
+import UIcon from './Icon.vue'
+
+defineOptions({ inheritAttrs: false })
+
+const props = withDefaults(defineProps<EditorSuggestionMenuProps<T>>(), {
+  pluginKey: 'suggestionMenu',
+  char: '/',
+  items: () => []
+})
+
+const appConfig = useAppConfig() as EditorSuggestionMenu['AppConfig']
+
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorSuggestionMenu || {}) })())
+
+const handlers = computed(() => ({
+  ...createHandlers(),
+  ...props.handlers
+}))
+
+let menu: ReturnType<typeof useEditorMenu> | null = null
+
+onMounted(async () => {
+  await nextTick()
+
+  if (!props.editor || props.editor.isDestroyed) {
+    return
+  }
+
+  menu = useEditorMenu({
+    editor: props.editor,
+    char: props.char,
+    pluginKey: props.pluginKey,
+    items: props.items,
+    limit: props.limit,
+    ui,
+    onSelect: (editor, range, item) => {
+      // Skip if it's a label (non-interactive)
+      if (item.type === 'label') return
+
+      // Delete the trigger character and query text
+      editor.chain().focus().deleteRange(range).run()
+
+      // Execute the actual command using handlers
+      const handler = handlers.value[item.kind]
+      if (handler) {
+        const chain = editor.chain()
+        handler.execute(chain, item).run()
+      }
+    },
+    renderItem: (item, styles) => {
+      // Render label (just text)
+      if (item.type === 'label') {
+        return [h('span', {}, item.label)]
+      }
+
+      // Render regular item
+      return [
+        item.icon
+          ? h(UIcon, { name: item.icon, class: styles.value.itemLeadingIcon() })
+          : null,
+        h('span', { class: styles.value.itemWrapper() }, [
+          h('span', { class: styles.value.itemLabel() }, item.label),
+          item.description
+            ? h('span', { class: styles.value.itemDescription() }, item.description)
+            : null
+        ])
+      ]
+    }
+  })
+
+  props.editor.registerPlugin(menu.plugin)
+})
+
+onBeforeUnmount(() => {
+  if (menu) {
+    menu.destroy()
+    menu = null
+  }
+
+  if (props.editor && !props.editor.isDestroyed) {
+    props.editor.unregisterPlugin(props.pluginKey)
+  }
+})
+</script>
+
+<template>
+  <div />
+</template>

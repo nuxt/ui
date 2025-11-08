@@ -50,6 +50,7 @@ import { Primitive, useForwardProps } from 'reka-ui'
 import { mergeAttributes } from '@tiptap/core'
 import HorizontalRule from '@tiptap/extension-horizontal-rule'
 import Placeholder from '@tiptap/extension-placeholder'
+import Mention from '@tiptap/extension-mention'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { Markdown } from '@tiptap/markdown'
 import StarterKit from '@tiptap/starter-kit'
@@ -110,6 +111,14 @@ const extensions = computed(() => [
         typeof props.placeholder === 'string' ? { placeholder: props.placeholder } : props.placeholder,
         { showOnlyWhenEditable: true, showOnlyCurrent: true } as PlaceholderOptions))
     : undefined,
+  Mention.configure({
+    HTMLAttributes: {
+      class: 'mention'
+    },
+    renderText({ node }) {
+      return `@${node.attrs.id ?? node.attrs.label}`
+    }
+  }),
   ...(props.extensions || [])
 ].filter(extension => !!extension))
 

@@ -13,6 +13,8 @@ export default (_options: Required<NuxtOptions['ui']>) => ({
       // Links
       '[&_a]:text-primary [&_a]:border-b [&_a]:border-transparent [&_a]:hover:border-primary [&_a]:font-medium [&_a]:transition-colors',
       '[&_a_code]:border-dashed [&_a:hover_code]:border-primary [&_a:hover_code]:text-primary [&_a_code]:transition-colors',
+      // Mentions
+      '[&_.mention]:text-primary [&_.mention]:font-medium',
       // Headings - shared styles
       '[&_:is(h1,h2,h3,h4)]:text-highlighted [&_:is(h1,h2,h3,h4)]:font-bold',
       '[&_:is(h2,h3)_a_code]:font-bold [&_:is(h2,h3)_a_code]:border-dashed [&_:is(h2,h3):hover_a_code]:border-primary [&_:is(h2,h3):hover_a_code]:text-primary [&_:is(h2,h3)_a_code]:transition-colors',

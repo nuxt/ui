@@ -1,11 +1,17 @@
 import type { Editor, Mark } from '@tiptap/vue-3'
 
-export interface Handler {
+export interface EditorHandler {
   canExecute: (editor: Editor, cmd?: any) => boolean
   execute: (chain: any, cmd?: any) => any
   isActive: (editor: Editor, cmd?: any) => boolean
   isDisabled?: (editor: Editor, cmd?: any) => boolean
 }
+
+export type EditorActionType
+  = | { kind: 'mark', mark: 'bold' | 'italic' | 'strike' | 'code' | 'underline' }
+    | { kind: 'textAlign', align: 'left' | 'center' | 'right' | 'justify' }
+    | { kind: 'heading', level: 1 | 2 | 3 | 4 | 5 | 6 }
+    | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' | 'undo' | 'redo' | 'mention' | 'emoji' }
 
 export function isMarkInSchema(mark: string | Mark, editor: Editor | null): boolean {
   if (!editor?.schema) {
@@ -92,5 +98,33 @@ export function createHeadingHandler() {
     execute: (chain: any, cmd: any) => chain.focus().toggleHeading({ level: cmd.level }),
     isActive: (editor: Editor, cmd: any) => editor.isActive('heading', { level: cmd.level }),
     isDisabled: undefined
+  }
+}
+
+export function createHandlers(): Record<EditorActionType['kind'], EditorHandler> {
+  return {
+    mark: createMarkHandler(),
+    textAlign: createTextAlignHandler(),
+    heading: createHeadingHandler(),
+    blockquote: createToggleHandler('blockquote'),
+    bulletList: createToggleHandler('bulletList'),
+    orderedList: createToggleHandler('orderedList'),
+    codeBlock: createToggleHandler('codeBlock'),
+    horizontalRule: createSetHandler('horizontalRule'),
+    paragraph: createSetHandler('paragraph'),
+    undo: createSimpleHandler('undo'),
+    redo: createSimpleHandler('redo'),
+    mention: {
+      canExecute: () => true,
+      execute: (chain: any) => chain.insertContent('@'),
+      isActive: () => false,
+      isDisabled: undefined
+    },
+    emoji: {
+      canExecute: () => true,
+      execute: (chain: any) => chain.insertContent(':'),
+      isActive: () => false,
+      isDisabled: undefined
+    }
   }
 }

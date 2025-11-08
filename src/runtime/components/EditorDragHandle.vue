@@ -21,7 +21,7 @@ type EditorDragHandleOptions = {
   inline?: InlineOptions | boolean
 }
 
-export interface EditorDragHandleProps extends Omit<DragHandlePluginProps, 'editor' | 'element' | 'pluginKey' | 'onNodeChange' | 'computePositionConfig'>, Omit<ButtonProps, 'icon' | 'color' | 'variant'> {
+export interface EditorDragHandleProps extends Omit<DragHandlePluginProps, 'editor' | 'element' | 'onNodeChange' | 'computePositionConfig'>, Omit<ButtonProps, 'icon' | 'color' | 'variant'> {
   /**
    * @defaultValue appConfig.ui.icons.drag
    * @IconifyIcon
@@ -66,12 +66,12 @@ const props = withDefaults(defineProps<EditorDragHandleProps>(), {
   color: 'neutral',
   variant: 'ghost',
   side: 'left',
-  size: 'xs'
+  size: 'sm'
 })
 defineSlots<EditorDragHandleSlots>()
 
-const dragHandleProps = useForwardProps(reactivePick(props, 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement'))
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class'))
+const dragHandleProps = useForwardProps(reactivePick(props, 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class'))
 
 const appConfig = useAppConfig() as EditorDragHandle['AppConfig']
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import type { EditorContent, EditorToolbarItem } from '@nuxt/ui'
+import type { EditorContent, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem } from '@nuxt/ui'
 import { TextAlign } from '@tiptap/extension-text-align'
+import { gitHubEmojis } from '@tiptap/extension-emoji'
 
 const content = ref<EditorContent>(`# Nuxt UI: A Modern UI Library
 
@@ -65,7 +66,7 @@ Whether you're working on a personal project or building an enterprise applicati
 Visit our [documentation](https://ui.nuxt.com) to learn more and explore all available components.
 `)
 
-const items: EditorToolbarItem[][] = [[{
+const toolbarItems: EditorToolbarItem[][] = [[{
   kind: 'undo',
   icon: 'i-lucide-undo'
 }, {
@@ -121,7 +122,7 @@ const items: EditorToolbarItem[][] = [[{
   icon: 'i-lucide-separator-horizontal'
 }, {
   kind: 'paragraph',
-  icon: 'i-lucide-letter-text'
+  icon: 'i-lucide-type'
 }], [{
   kind: 'mark',
   mark: 'bold',
@@ -159,6 +160,93 @@ const items: EditorToolbarItem[][] = [[{
   align: 'justify',
   icon: 'i-lucide-align-justify'
 }]]
+
+const suggestionItems: EditorSuggestionMenuItem[][] = [[{
+  type: 'label',
+  label: 'Style'
+}, {
+  kind: 'paragraph',
+  label: 'Paragraph',
+  icon: 'i-lucide-type'
+}, {
+  kind: 'heading',
+  level: 1,
+  label: 'Heading 1',
+  icon: 'i-lucide-heading-1'
+}, {
+  kind: 'heading',
+  level: 2,
+  label: 'Heading 2',
+  icon: 'i-lucide-heading-2'
+}, {
+  kind: 'heading',
+  level: 3,
+  label: 'Heading 3',
+  icon: 'i-lucide-heading-3'
+}, {
+  kind: 'bulletList',
+  label: 'Bullet List',
+  icon: 'i-lucide-list'
+}, {
+  kind: 'orderedList',
+  label: 'Numbered List',
+  icon: 'i-lucide-list-ordered'
+}, {
+  kind: 'blockquote',
+  label: 'Blockquote',
+  icon: 'i-lucide-text-quote'
+}, {
+  kind: 'codeBlock',
+  label: 'Code Block',
+  icon: 'i-lucide-square-code'
+}], [{
+  type: 'label',
+  label: 'Insert'
+}, {
+  kind: 'mention',
+  label: 'Mention',
+  icon: 'i-lucide-at-sign'
+}, {
+  kind: 'emoji',
+  label: 'Emoji',
+  icon: 'i-lucide-smile-plus'
+}, {
+  kind: 'horizontalRule',
+  label: 'Horizontal Rule',
+  icon: 'i-lucide-separator-horizontal'
+}]]
+
+const mentionItems: EditorMentionMenuItem[] = [{
+  id: 'benjamincanac',
+  label: 'Benjamin Canac',
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+  }
+}, {
+  id: 'atinux',
+  label: 'Sébastien Chopin',
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/904724?v=4'
+  }
+}, {
+  id: 'danielroe',
+  label: 'Daniel Roe',
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/28706372?v=4'
+  }
+}, {
+  id: 'pi0',
+  label: 'Pooya Parsa',
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/5158436?v=4'
+  }
+}, {
+  id: 'antfu',
+  label: 'Anthony Fu',
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/11247099?v=4'
+  }
+}]
 </script>
 
 <template>
@@ -167,16 +255,22 @@ const items: EditorToolbarItem[][] = [[{
     v-model="content"
     :extensions="[TextAlign]"
     content-type="markdown"
-    placeholder="Type '/' for commands..."
+    placeholder="Write, type '/' for commands..."
     class="flex-1 w-full min-h-0"
     :ui="{ content: 'max-w-2xl mx-auto' }"
   >
     <Navbar>
-      <UEditorToolbar :editor="editor" :items="items" />
+      <UEditorToolbar :editor="editor" :items="toolbarItems" />
     </Navbar>
 
-    <UEditorToolbar :editor="editor" :items="items" layout="bubble" />
+    <UEditorToolbar :editor="editor" :items="toolbarItems" layout="bubble" />
 
     <UEditorDragHandle :editor="editor" />
+
+    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
+
+    <UEditorMentionMenu :editor="editor" :items="mentionItems" />
+
+    <UEditorEmojiMenu :editor="editor" :items="gitHubEmojis" />
   </UEditor>
 </template>

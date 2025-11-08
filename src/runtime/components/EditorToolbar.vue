@@ -7,7 +7,7 @@ import type { FloatingMenuPluginProps } from '@tiptap/extension-floating-menu'
 import theme from '#build/ui/editor-toolbar'
 import type { ButtonProps, DropdownMenuProps, DropdownMenuItem } from '../types'
 import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem } from '../types/utils'
-import type { Handler } from '../utils/editor'
+import type { EditorHandler, EditorActionType } from '../utils/editor'
 import type { ComponentConfig } from '../types/tv'
 
 type EditorToolbar = ComponentConfig<typeof theme, AppConfig, 'editorToolbar'>
@@ -15,12 +15,6 @@ type EditorToolbar = ComponentConfig<typeof theme, AppConfig, 'editorToolbar'>
 type BaseItem = Pick<ButtonProps, 'label' | 'color' | 'activeColor' | 'variant' | 'activeVariant' | 'size' | 'icon' | 'leadingIcon' | 'trailingIcon' | 'loading' | 'loadingIcon' | 'disabled' | 'active' | 'class' | 'ui'> & {
   slot?: string
 }
-
-type EditorActionType
-  = | { kind: 'mark', mark: 'bold' | 'italic' | 'strike' | 'code' | 'underline' }
-    | { kind: 'textAlign', align: 'left' | 'center' | 'right' | 'justify' }
-    | { kind: 'heading', level: 1 | 2 | 3 | 4 | 5 | 6 }
-    | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' | 'undo' | 'redo' }
 
 type EditorToolbarDropdownItem = (DropdownMenuItem & EditorActionType) | DropdownMenuItem
 
@@ -30,7 +24,7 @@ export type EditorToolbarItem
       kind: 'dropdown'
     }
 
-export type EditorToolbarHandlers = Record<string, Handler>
+export type EditorToolbarHandlers = Record<string, EditorHandler>
 
 type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>> = {
   /**
@@ -39,9 +33,30 @@ type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOr
    */
   as?: any
   /**
-   * The items to display in the toolbar.
-   * `{ color: 'neutral', activeColor: 'primary', variant: 'ghost', activeVariant: 'soft', size: 'sm' }`{lang="ts-type"}
+   * The color of the toolbar controls.
+   * @defaultValue 'neutral'
    */
+  color?: ButtonProps['color']
+  /**
+   * The variant of the toolbar controls.
+   * @defaultValue 'ghost'
+   */
+  variant?: ButtonProps['variant']
+  /**
+   * The color of the active toolbar control.
+   * @defaultValue 'primary'
+   */
+  activeColor?: ButtonProps['color']
+  /**
+   * The variant of the active toolbar control.
+   * @defaultValue 'soft'
+   */
+  activeVariant?: ButtonProps['variant']
+  /**
+   * The size of the toolbar controls.
+   * @defaultValue 'sm'
+   */
+  size?: ButtonProps['size']
   items?: T
   /**
    * Custom item handlers to override or extend the default handlers.
@@ -54,10 +69,10 @@ type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOr
 
 export type EditorToolbarProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>>
   = | (EditorToolbarBaseProps<T> & { layout?: 'fixed' })
-    | (EditorToolbarBaseProps<T> & Partial<Omit<BubbleMenuPluginProps, 'pluginKey' | 'editor' | 'element'>> & {
+    | (EditorToolbarBaseProps<T> & Partial<Omit<BubbleMenuPluginProps, 'editor' | 'element'>> & {
       layout?: 'bubble'
     })
-    | (EditorToolbarBaseProps<T> & Partial<Omit<FloatingMenuPluginProps, 'pluginKey' | 'editor' | 'element'>> & {
+    | (EditorToolbarBaseProps<T> & Partial<Omit<FloatingMenuPluginProps, 'editor' | 'element'>> & {
       layout?: 'floating'
     })
 
@@ -81,7 +96,7 @@ import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { isArrayOfArray, pick } from '../utils'
-import { createToggleHandler, createSetHandler, createSimpleHandler, createMarkHandler, createTextAlignHandler, createHeadingHandler } from '../utils/editor'
+import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
 import UDropdownMenu from './DropdownMenu.vue'
 import UButton from './Button.vue'
@@ -89,7 +104,12 @@ import UButton from './Button.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<EditorToolbarProps<T>>(), {
-  layout: 'fixed'
+  layout: 'fixed',
+  color: 'neutral',
+  variant: 'ghost',
+  activeColor: 'primary',
+  activeVariant: 'soft',
+  size: 'sm'
 })
 defineSlots<EditorToolbarSlots<T>>()
 
@@ -102,7 +122,7 @@ const Component = computed(() => {
     fixed: 'template'
   }[props.layout])
 })
-const ComponentProps = useForwardProps(reactivePick(props as any, 'appendTo', 'updateDelay', 'resizeDelay', 'shouldShow', 'options'))
+const ComponentProps = useForwardProps(reactivePick(props as any, 'pluginKey', 'appendTo', 'updateDelay', 'resizeDelay', 'shouldShow', 'options'))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorToolbar || {}) })({
   layout: props.layout
@@ -117,17 +137,7 @@ const groups = computed<EditorToolbarItem[][]>(() =>
 )
 
 const handlers = computed<EditorToolbarHandlers>(() => ({
-  mark: createMarkHandler(),
-  textAlign: createTextAlignHandler(),
-  heading: createHeadingHandler(),
-  blockquote: createToggleHandler('blockquote'),
-  bulletList: createToggleHandler('bulletList'),
-  orderedList: createToggleHandler('orderedList'),
-  codeBlock: createToggleHandler('codeBlock'),
-  horizontalRule: createSetHandler('horizontalRule'),
-  paragraph: createSetHandler('paragraph'),
-  undo: createSimpleHandler('undo'),
-  redo: createSimpleHandler('redo'),
+  ...createHandlers(),
   ...props.handlers
 }))
 
@@ -217,16 +227,20 @@ function getButtonProps(item: EditorToolbarItem) {
   }
 
   return defu(baseProps, {
-    color: 'neutral' as const,
-    activeColor: 'primary' as const,
-    variant: 'ghost' as const,
-    activeVariant: 'soft' as const,
-    size: 'sm' as const
+    color: props.color,
+    activeColor: props.activeColor,
+    activeVariant: props.activeVariant,
+    variant: props.variant,
+    size: props.size
   })
 }
 
 function getDropdownProps(item: EditorToolbarItem & { kind: 'dropdown' }) {
-  return pick(item, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal'])
+  const baseProps = pick(item, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal'])
+
+  return defu(baseProps, {
+    modal: false
+  })
 }
 
 function mapDropdownItem(item: EditorToolbarItem | DropdownMenuItem) {
