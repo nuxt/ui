@@ -52,7 +52,7 @@ const locale = ref('en')
 </script>
 
 <template>
-  <ULocaleSelect :model-value="locale" :locales="[en, es, fr]" />
+  <ULocaleSelect v-model="locale" :locales="[en, es, fr]" />
 </template>
 ```
 
