@@ -167,6 +167,7 @@ const items: EditorToolbarItem[][] = [[{
     v-model="content"
     :extensions="[TextAlign]"
     content-type="markdown"
+    placeholder="Type '/' for commands..."
     class="flex-1 w-full min-h-0"
     :ui="{ content: 'max-w-2xl mx-auto' }"
   >

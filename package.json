@@ -130,6 +130,7 @@
     "@tanstack/vue-virtual": "^3.13.12",
     "@tiptap/extension-drag-handle-vue-3": "^3.10.2",
     "@tiptap/extension-image": "^3.10.2",
+    "@tiptap/extension-placeholder": "^3.10.2",
     "@tiptap/markdown": "^3.10.2",
     "@tiptap/starter-kit": "^3.10.1",
     "@tiptap/vue-3": "^3.10.1",

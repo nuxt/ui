@@ -6,6 +6,8 @@ export default (_options: Required<NuxtOptions['ui']>) => ({
     content: 'size-full flex flex-col flex-1',
     base: [
       'flex-1 w-full outline-none *:first:mt-0 *:last:mb-0 px-4 sm:px-6 lg:px-8',
+      // Placeholder
+      '[&_.is-empty]:before:content-[attr(data-placeholder)] [&_.is-empty]:before:text-muted [&_.is-empty]:before:float-left [&_.is-empty]:before:h-0 [&_.is-empty]:before:pointer-events-none',
       // Paragraph
       '[&_p]:my-5 [&_p]:leading-7 [&_p]:text-pretty',
       // Links

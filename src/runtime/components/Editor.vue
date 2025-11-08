@@ -3,6 +3,7 @@ import type { AppConfig } from '@nuxt/schema'
 import type { Content, EditorOptions } from '@tiptap/core'
 import type { Editor as TiptapEditor } from '@tiptap/vue-3'
 import type { StarterKitOptions } from '@tiptap/starter-kit'
+import type { PlaceholderOptions } from '@tiptap/extension-placeholder'
 import theme from '#build/ui/editor'
 import type { ComponentConfig } from '../types/tv'
 
@@ -27,6 +28,12 @@ export interface EditorProps extends Omit<Partial<EditorOptions>, 'content'> {
    * @defaultValue 'json'
    */
   contentType?: EditorContentType
+  /**
+   * The placeholder text to show in empty paragraphs.
+   * Can be a string or PlaceholderOptions from @tiptap/extension-placeholder.
+   * @defaultValue undefined
+   */
+  placeholder?: string | PlaceholderOptions
   class?: any
   ui?: Editor['slots']
 }
@@ -42,6 +49,7 @@ import { defu } from 'defu'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { mergeAttributes } from '@tiptap/core'
 import HorizontalRule from '@tiptap/extension-horizontal-rule'
+import Placeholder from '@tiptap/extension-placeholder'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { Markdown } from '@tiptap/markdown'
 import StarterKit from '@tiptap/starter-kit'
@@ -66,7 +74,7 @@ const appConfig = useAppConfig() as Editor['AppConfig']
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editor || {}) })())
 
-const rootProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'editorProps', 'contentType', 'class'))
+const rootProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'editorProps', 'contentType', 'class', 'placeholder'))
 const editorProps = computed(() => defu(props.editorProps, {
   attributes: {
     autocomplete: 'off',
@@ -97,6 +105,11 @@ const extensions = computed(() => [
     }
   }),
   Image,
+  props.placeholder
+    ? Placeholder.configure(defu(
+        typeof props.placeholder === 'string' ? { placeholder: props.placeholder } : props.placeholder,
+        { showOnlyWhenEditable: true, showOnlyCurrent: true } as PlaceholderOptions))
+    : undefined,
   ...(props.extensions || [])
 ].filter(extension => !!extension))
 
