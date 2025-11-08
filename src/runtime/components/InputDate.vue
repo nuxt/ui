@@ -91,7 +91,7 @@ const slots = defineSlots<InputDateSlots>()
 const { code: locale, dir } = useLocale()
 const appConfig = useAppConfig() as InputDate['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'class', 'ui'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputDateProps<R>>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
