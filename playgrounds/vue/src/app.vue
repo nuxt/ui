@@ -39,9 +39,9 @@ provide('components', components)
         :toggle="{ size: 'sm', variant: 'outline', class: 'ring-default' }"
       >
         <template #header="{ collapsed }">
-          <NuxtLink to="/" class="text-highlighted inline-flex" aria-label="Home">
+          <RouterLink to="/" class="text-highlighted inline-flex" aria-label="Home">
             <Logo class="h-5 w-auto" :collapsed="collapsed" />
-          </NuxtLink>
+          </RouterLink>
 
           <div v-if="!collapsed" class="flex items-center ms-auto">
             <ThemeDropdown />

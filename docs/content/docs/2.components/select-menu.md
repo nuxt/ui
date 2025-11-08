@@ -882,6 +882,10 @@ name: 'select-menu-countries-example'
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+This component also supports all native `<button>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots
@@ -896,7 +900,7 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `triggerRef`{lang="ts-type"} | `Ref<InstanceType<typeof ComboboxTrigger> \| null>`{lang="ts-type"} |
+| `triggerRef`{lang="ts-type"} | `Ref<HTMLButtonElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

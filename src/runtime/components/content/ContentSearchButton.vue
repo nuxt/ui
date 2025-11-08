@@ -6,7 +6,7 @@ import type { ComponentConfig } from '../../types/tv'
 
 type ContentSearchButton = ComponentConfig<typeof theme, AppConfig, 'contentSearchButton'>
 
-export interface ContentSearchButtonProps {
+export interface ContentSearchButtonProps extends Omit<ButtonProps, 'icon' | 'label' | 'color' | 'variant'> {
   /**
    * The icon displayed in the button.
    * @defaultValue appConfig.ui.icons.search
@@ -28,7 +28,6 @@ export interface ContentSearchButtonProps {
    * Defaults to 'outline' when not collapsed, 'ghost' when collapsed.
    */
   variant?: ButtonProps['variant']
-  size?: ButtonProps['size']
   /**
    * Whether the button is collapsed.
    * @defaultValue true
@@ -54,7 +53,7 @@ export interface ContentSearchButtonProps {
 import { computed, toRef } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
@@ -78,7 +77,7 @@ const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate()
 
 const getProxySlots = () => omit(slots, ['trailing'])
 
-const rootProps = useForwardProps(reactivePick(props, 'color', 'size'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'label', 'variant', 'collapsed', 'tooltip', 'kbds', 'class', 'ui'))
 const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as TooltipProps)
 
 const { t } = useLocale()
@@ -96,7 +95,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
       :label="label || t('contentSearchButton.label')"
       :variant="variant || (collapsed ? 'ghost' : 'outline')"
       v-bind="{
-        ...rootProps,
+        ...buttonProps,
         ...(collapsed ? {
           'square': true,
           'label': undefined,

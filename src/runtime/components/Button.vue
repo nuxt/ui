@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { Ref } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/button'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -43,7 +44,6 @@ export interface ButtonSlots {
 
 <script setup lang="ts">
 import { computed, ref, inject } from 'vue'
-import type { Ref } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
 import { useAppConfig } from '#imports'

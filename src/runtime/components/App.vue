@@ -3,7 +3,7 @@ import type { ConfigProviderProps, TooltipProviderProps } from 'reka-ui'
 import type { ToasterProps } from '../types'
 import type { Locale, Messages } from '../types/locale'
 
-export interface AppProps<T extends Messages = Messages> extends Omit<ConfigProviderProps, 'useId' | 'dir' | 'locale'> {
+export interface AppProps<T extends Messages = Messages> extends Omit<ConfigProviderProps, 'useId' | 'locale'> {
   tooltip?: TooltipProviderProps
   toaster?: ToasterProps | null
   locale?: Locale<T>
@@ -46,7 +46,7 @@ provide(portalTargetInjectionKey, portal)
 </script>
 
 <template>
-  <ConfigProvider :use-id="() => (useId() as string)" :dir="locale?.dir" :locale="locale?.code" v-bind="configProviderProps">
+  <ConfigProvider :use-id="() => (useId() as string)" :dir="props.dir || locale?.dir" :locale="locale?.code" v-bind="configProviderProps">
     <TooltipProvider v-bind="tooltipProps">
       <UToaster v-if="toaster !== null" v-bind="toasterProps">
         <slot />

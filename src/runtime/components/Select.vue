@@ -4,12 +4,14 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { ButtonHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>
 
 export type SelectValue = AcceptableValue
+
 export type SelectItem = SelectValue | {
   label?: string
   description?: string
@@ -32,7 +34,7 @@ export type SelectItem = SelectValue | {
   [key: string]: any
 }
 
-export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
+export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -133,7 +135,7 @@ export interface SelectSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false">
-import { ref, computed, onMounted, toRef } from 'vue'
+import { useTemplateRef, computed, onMounted, toRef } from 'vue'
 import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
@@ -212,7 +214,7 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
   })
 }
 
-const triggerRef = ref<InstanceType<typeof SelectTrigger> | null>(null)
+const triggerRef = useTemplateRef('triggerRef')
 
 function autoFocus() {
   if (props.autofocus) {
@@ -253,7 +255,7 @@ function isSelectItem(item: SelectItem): item is Exclude<SelectItem, SelectValue
 }
 
 defineExpose({
-  triggerRef
+  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement)
 })
 </script>
 

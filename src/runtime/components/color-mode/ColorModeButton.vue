@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { ButtonProps } from '@nuxt/ui'
+import type { ButtonProps } from '../../types'
 
-export interface ColorModeButtonProps extends /** @vue-ignore */ Pick<ButtonProps, 'as' | 'size' | 'disabled' | 'ui'> {
+export interface ColorModeButtonProps extends Omit<ButtonProps, 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */
@@ -15,13 +15,15 @@ export interface ColorModeButtonProps extends /** @vue-ignore */ Pick<ButtonProp
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useForwardProps } from 'reka-ui'
+import { reactiveOmit } from '@vueuse/core'
 import { useColorMode, useAppConfig } from '#imports'
 import { useLocale } from '../../composables/useLocale'
 import UButton from '../Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
-withDefaults(defineProps<ColorModeButtonProps>(), {
+const props = withDefaults(defineProps<ColorModeButtonProps>(), {
   color: 'neutral',
   variant: 'ghost'
 })
@@ -32,6 +34,8 @@ defineSlots<{
 const { t } = useLocale()
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
+
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon'))
 
 const isDark = computed({
   get() {
@@ -46,11 +50,12 @@ const isDark = computed({
 <template>
   <ClientOnly v-if="!colorMode?.forced">
     <UButton
-      :icon="isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light"
-      :color="color"
-      :variant="variant"
-      :aria-label="isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark')"
-      v-bind="$attrs"
+      v-bind="{
+        ...buttonProps,
+        'icon': props.icon || (isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light),
+        'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
+        ...$attrs
+      }"
       @click="isDark = !isDark"
     />
 

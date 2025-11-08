@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { ComponentPublicInstance } from 'vue'
 import type { TreeRootProps, TreeRootEmits, TreeItemSelectEvent, TreeItemToggleEvent } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
@@ -141,8 +142,7 @@ export type TreeSlots<
 </script>
 
 <script setup lang="ts" generic="T extends TreeItem[], M extends boolean = false">
-import type { ComponentPublicInstance } from 'vue'
-import { computed, toRef, ref } from 'vue'
+import { computed, toRef, useTemplateRef } from 'vue'
 import { TreeRoot, TreeItem, TreeVirtualizer, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { defu } from 'defu'
@@ -221,7 +221,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tree || {}) 
   virtualize: !!props.virtualize
 }))
 
-const rootRef = ref<ComponentPublicInstance>()
+const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 
 function getItemLabel<Item extends T[number]>(item: Item): string {
   return get(item, props.labelKey as string)
@@ -244,7 +244,7 @@ const defaultExpanded = computed(() => props.defaultExpanded ?? props.items?.fla
 
 defineExpose({
   get $el() {
-    return rootRef.value?.$el
+    return rootRef.value?.$el as HTMLElement
   }
 })
 </script>

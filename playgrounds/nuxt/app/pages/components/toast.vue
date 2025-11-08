@@ -129,8 +129,8 @@ function removeToast() {
     <USwitch v-model="appConfig.toaster.disableSwipe" label="Disable swipe" />
     <UCheckbox v-model="appConfig.toaster.expand" label="Expand" />
     <USelect v-model="appConfig.toaster.position" :items="positions" placeholder="Position" />
-    <UInput v-model="appConfig.toaster.duration" label="Duration" type="number" />
-    <UInput v-model="appConfig.toaster.max" label="Max" type="number" />
+    <UInput v-model="appConfig.toaster.duration" placeholder="Duration" type="number" />
+    <UInput v-model="appConfig.toaster.max" placeholder="Max" type="number" />
   </Navbar>
 
   <div class="flex items-center gap-2">

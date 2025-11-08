@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const testimonials = [{
+import type { UserProps } from '@nuxt/ui'
+
+const testimonials: { user: UserProps, quote: string }[] = [{
   user: {
     name: 'Anthony Bettini',
     description: 'CEO and founder of VulnCheck',
