@@ -109,6 +109,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputDate ||
   variant: props.variant,
   size: inputSize.value,
   highlight: highlight.value,
+  loading: props.loading,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value
