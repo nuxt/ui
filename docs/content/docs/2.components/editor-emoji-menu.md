@@ -1,6 +1,6 @@
 ---
 title: EditorEmojiMenu
-description: ''
+description: An emoji picker menu that displays emoji suggestions when typing the : character in the editor.
 category: editor
 links:
   - label: GitHub

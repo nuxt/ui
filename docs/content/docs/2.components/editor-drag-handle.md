@@ -1,6 +1,6 @@
 ---
 title: EditorDragHandle
-description: ''
+description: A draggable handle for reordering and selecting blocks in the editor.
 category: editor
 links:
   - label: GitHub

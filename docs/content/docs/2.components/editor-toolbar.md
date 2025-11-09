@@ -1,6 +1,6 @@
 ---
 title: EditorToolbar
-description: ''
+description: A customizable toolbar for editor actions that can be displayed as fixed, bubble, or floating menu.
 category: editor
 links:
   - label: GitHub

@@ -1,6 +1,6 @@
 ---
 title: EditorSuggestionMenu
-description: ''
+description: A command menu that displays formatting and action suggestions when typing the / character in the editor.
 category: editor
 links:
   - label: GitHub

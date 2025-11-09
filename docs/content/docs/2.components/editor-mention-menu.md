@@ -1,6 +1,6 @@
 ---
 title: EditorMentionMenu
-description: ''
+description: A mention menu that displays user suggestions when typing the @ character in the editor.
 category: editor
 links:
   - label: GitHub
