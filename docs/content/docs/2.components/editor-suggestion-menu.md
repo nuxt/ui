@@ -1,11 +1,11 @@
 ---
-title: EditorDragHandle
+title: EditorSuggestionMenu
 description: ''
 category: editor
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/EditorDragHandle.vue
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/EditorSuggestionMenu.vue
 navigation.badge: Soon
 ---
 

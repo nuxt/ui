@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
-import type { Editor } from '@tiptap/vue-3'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import type { Editor } from '@tiptap/vue-3'
 import EditorToolbar from '../../src/runtime/components/EditorToolbar.vue'
 import type { EditorToolbarProps, EditorToolbarSlots } from '../../src/runtime/components/EditorToolbar.vue'
 import ComponentRender from '../component-render'

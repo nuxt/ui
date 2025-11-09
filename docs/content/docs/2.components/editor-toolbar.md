@@ -1,6 +1,7 @@
 ---
 title: EditorToolbar
 description: ''
+category: editor
 links:
   - label: GitHub
     icon: i-simple-icons-github
