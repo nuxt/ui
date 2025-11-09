@@ -2,7 +2,7 @@
 
 exports[`EditorDragHandle > renders with as correctly 1`] = `
 "<div class="flex items-center justify-center transition-all duration-200 ease-out" style="visibility: hidden; position: absolute;">
-  <section editor="[object Object]" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1 py-1.5"><span class="iconify i-lucide:grip-vertical shrink-0 size-4" aria-hidden="true"></span>
+  <section editor="[object Object]" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:grip-vertical shrink-0 size-4" aria-hidden="true"></span>
     <!--v-if-->
     <!--v-if-->
   </section>
@@ -10,7 +10,7 @@ exports[`EditorDragHandle > renders with as correctly 1`] = `
 `;
 
 exports[`EditorDragHandle > renders with class correctly 1`] = `
-"<div class="flex items-center justify-center transition-all duration-200 ease-out" style="visibility: hidden; position: absolute;"><button type="button" editor="[object Object]" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1 py-1.5"><span class="iconify i-lucide:grip-vertical shrink-0 size-4" aria-hidden="true"></span>
+"<div class="flex items-center justify-center transition-all duration-200 ease-out" style="visibility: hidden; position: absolute;"><button type="button" editor="[object Object]" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:grip-vertical shrink-0 size-4" aria-hidden="true"></span>
     <!--v-if-->
     <!--v-if-->
   </button></div>"
@@ -19,7 +19,7 @@ exports[`EditorDragHandle > renders with class correctly 1`] = `
 exports[`EditorDragHandle > renders with default slot correctly 1`] = `"<div class="flex items-center justify-center transition-all duration-200 ease-out" style="visibility: hidden; position: absolute;">Default slot</div>"`;
 
 exports[`EditorDragHandle > renders with ui correctly 1`] = `
-"<div class="flex items-center justify-center transition-all duration-200 ease-out" style="visibility: hidden; position: absolute;"><button type="button" editor="[object Object]" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1 py-1.5"><span class="iconify i-lucide:grip-vertical shrink-0 size-4" aria-hidden="true"></span>
+"<div class="flex items-center justify-center transition-all duration-200 ease-out" style="visibility: hidden; position: absolute;"><button type="button" editor="[object Object]" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:grip-vertical shrink-0 size-4" aria-hidden="true"></span>
     <!--v-if-->
     <!--v-if-->
   </button></div>"
