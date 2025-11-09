@@ -6,8 +6,7 @@ import theme from '#build/ui/editor-emoji-menu'
 
 type EditorEmojiMenu = ComponentConfig<typeof theme, AppConfig, 'editorEmojiMenu'>
 
-// TipTap's emoji format
-export interface TipTapEmojiItem {
+export interface EditorEmojiMenuItem {
   name: string
   emoji?: string
   shortcodes: string[]
@@ -16,19 +15,6 @@ export interface TipTapEmojiItem {
   fallbackImage?: string
   [key: string]: any
 }
-
-// Our custom emoji format
-export interface CustomEmojiItem {
-  label: string
-  emoji: string
-  description?: string
-  keywords?: string[]
-  disabled?: boolean
-  class?: any
-  [key: string]: any
-}
-
-export type EditorEmojiMenuItem = TipTapEmojiItem | CustomEmojiItem
 
 export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmojiMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit'>> {
   class?: any
@@ -57,22 +43,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorEmojiM
 
 let menu: ReturnType<typeof useEditorMenu> | null = null
 
-// Helper to check if item is TipTap format
-const isTipTapEmoji = (item: EditorEmojiMenuItem): item is TipTapEmojiItem => {
-  return 'name' in item && 'shortcodes' in item
-}
-
-// Custom filter that handles both TipTap and custom emoji formats
 const filterEmojis = (items: EditorEmojiMenuItem[], query: string) => {
   if (!query) return items
   return items.filter((item) => {
-    if (isTipTapEmoji(item)) {
-      const searchText = `${item.name} ${item.shortcodes.join(' ')} ${item.tags?.join(' ') || ''}`.toLowerCase()
-      return searchText.includes(query.toLowerCase())
-    } else {
-      const searchText = `${item.label} ${item.description || ''} ${item.keywords?.join(' ') || ''}`.toLowerCase()
-      return searchText.includes(query.toLowerCase())
-    }
+    const searchText = `${item.name} ${item.shortcodes.join(' ')} ${item.tags?.join(' ') || ''}`.toLowerCase()
+    return searchText.includes(query.toLowerCase())
   })
 }
 
@@ -92,30 +67,22 @@ onMounted(async () => {
     limit: props.limit,
     ui,
     onSelect: (editor, range, item) => {
-      // Get the emoji character based on format
-      const emojiChar = isTipTapEmoji(item) ? item.emoji : item.emoji
-
       // Delete the trigger character and query text, then insert the emoji
-      editor
-        .chain()
-        .focus()
-        .deleteRange(range)
-        .insertContent(emojiChar || '')
-        .run()
+      if (item.emoji) {
+        editor
+          .chain()
+          .focus()
+          .deleteRange(range)
+          .insertContent(item.emoji)
+          .run()
+      }
     },
     renderItem: (item, styles) => {
-      const isTipTap = isTipTapEmoji(item)
-      const emoji = isTipTap ? item.emoji : item.emoji
-      const label = isTipTap ? item.name : item.label
-      // const description = isTipTap ? item.shortcodes[0] : item.description
-
+      const content = item.emoji || item.shortcodes[0] || item.name
       return [
-        h('span', { class: styles.value.itemLeadingIcon() }, emoji),
+        h('span', { class: styles.value.itemLeadingIcon() }, content),
         h('span', { class: styles.value.itemWrapper() }, [
-          h('span', { class: styles.value.itemLabel() }, label)
-          // description
-          //   ? h('span', { class: styles.value.itemDescription() }, description)
-          //   : null
+          h('span', { class: styles.value.itemLabel() }, item.name)
         ])
       ]
     }

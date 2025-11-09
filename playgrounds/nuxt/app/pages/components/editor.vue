@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { EditorContent, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem } from '@nuxt/ui'
+import type { EditorContent, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem } from '@nuxt/ui'
 import { TextAlign } from '@tiptap/extension-text-align'
-import { gitHubEmojis } from '@tiptap/extension-emoji'
+import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 
 const content = ref<EditorContent>(`# Nuxt UI: A Modern UI Library
 
@@ -165,6 +165,8 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
   type: 'label',
   label: 'Style'
 }, {
+  type: 'separator'
+}, {
   kind: 'paragraph',
   label: 'Paragraph',
   icon: 'i-lucide-type'
@@ -247,13 +249,15 @@ const mentionItems: EditorMentionMenuItem[] = [{
     src: 'https://avatars.githubusercontent.com/u/11247099?v=4'
   }
 }]
+
+const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.name.startsWith('regional_indicator_'))
 </script>
 
 <template>
   <UEditor
     v-slot="{ editor }"
     v-model="content"
-    :extensions="[TextAlign]"
+    :extensions="[TextAlign, Emoji]"
     content-type="markdown"
     placeholder="Write, type '/' for commands..."
     class="flex-1 w-full min-h-0"
@@ -271,6 +275,6 @@ const mentionItems: EditorMentionMenuItem[] = [{
 
     <UEditorMentionMenu :editor="editor" :items="mentionItems" />
 
-    <UEditorEmojiMenu :editor="editor" :items="gitHubEmojis" />
+    <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
   </UEditor>
 </template>

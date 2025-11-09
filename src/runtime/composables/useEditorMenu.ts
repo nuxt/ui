@@ -143,9 +143,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
         const groupsData = menuProps.groups as T[][]
         let globalIndex = 0
 
-        return h('div', {
-          class: options.ui.value.root()
-        }, [
+        return h('div', { class: options.ui.value.root() }, [
           h('div', { class: options.ui.value.content() }, [
             h('div', {
               class: options.ui.value.viewport(),
@@ -158,20 +156,29 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
               }, group.map((item, itemInGroupIndex) => {
                 const itemData = item as any
 
-                // Render label (non-interactive)
+                // Render label
                 if (itemData.type === 'label') {
                   return h('div', {
                     key: `label-${groupIndex}-${itemInGroupIndex}`,
-                    class: options.ui.value.label({ class: itemData.class }),
-                    role: 'presentation'
+                    class: options.ui.value.label({ class: itemData.class })
                   }, options.renderItem(item, options.ui))
                 }
 
-                // Render regular item (interactive)
+                // Render separator
+                if (itemData.type === 'separator') {
+                  return h('div', {
+                    key: `separator-${groupIndex}-${itemInGroupIndex}`,
+                    class: options.ui.value.separator({ class: itemData.class }),
+                    role: 'separator'
+                  })
+                }
+
+                // Render regular item
                 const itemIndex = globalIndex++
                 const isHighlighted = itemIndex === menuProps.selectedIndex
+
                 return h('div', {
-                  'key': itemIndex,
+                  'key': `item-${itemIndex}`,
                   'class': options.ui.value.item({ class: itemData.class, active: false }),
                   'role': 'option',
                   'aria-selected': isHighlighted,

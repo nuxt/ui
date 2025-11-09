@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/editor-mention-menu'
 import type { EditorMenuOptions } from '../composables/useEditorMenu'
-import type { IconProps } from '../types'
+import type { AvatarProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type EditorMentionMenu = ComponentConfig<typeof theme, AppConfig, 'editorMentionMenu'>
@@ -15,10 +15,7 @@ export interface EditorMentionMenuItem {
    * @IconifyIcon
    */
   icon?: IconProps['name']
-  avatar?: {
-    src?: string
-    alt?: string
-  }
+  avatar?: AvatarProps
   disabled?: boolean
   class?: any
   [key: string]: any

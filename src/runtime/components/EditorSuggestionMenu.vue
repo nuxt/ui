@@ -8,16 +8,12 @@ import type { ComponentConfig } from '../types/tv'
 
 type EditorSuggestionMenu = ComponentConfig<typeof theme, AppConfig, 'editorSuggestionMenu'>
 
-type EditorSuggestionMenuLabelItem = {
-  type: 'label'
-  label: string
-  class?: any
-  ui?: Pick<EditorSuggestionMenu['slots'], 'label'>
-  [key: string]: any
-}
-
-type EditorSuggestionMenuActionItem = {
-  type?: never
+export type EditorSuggestionMenuItem = {
+  /**
+   * The item type.
+   * @defaultValue 'action'
+   */
+  type?: 'label' | 'separator' | 'action'
   label: string
   description?: string
   /**
@@ -27,11 +23,8 @@ type EditorSuggestionMenuActionItem = {
   disabled?: boolean
   slot?: string
   class?: any
-  ui?: Pick<EditorSuggestionMenu['slots'], 'item' | 'itemLeadingIcon' | 'itemWrapper' | 'itemLabel' | 'itemDescription'>
   [key: string]: any
 } & EditorActionType
-
-export type EditorSuggestionMenuItem = EditorSuggestionMenuLabelItem | EditorSuggestionMenuActionItem
 
 export type EditorSuggestionMenuHandlers = Record<string, EditorHandler>
 
