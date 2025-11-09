@@ -31,7 +31,7 @@ export interface EditorProps extends Omit<Partial<EditorOptions>, 'content'> {
   /**
    * The placeholder text to show in empty paragraphs.
    * Can be a string or PlaceholderOptions from @tiptap/extension-placeholder.
-   * @defaultValue undefined
+   * @defaultValue { showOnlyWhenEditable: false, showOnlyCurrent: true }
    */
   placeholder?: string | PlaceholderOptions
   class?: any
@@ -98,7 +98,7 @@ const starterKit = computed(() => defu(props.starterKit, {
 } as Partial<StarterKitOptions>))
 
 const extensions = computed(() => [
-  contentType.value === 'markdown' ? Markdown : undefined,
+  contentType.value === 'markdown' && Markdown,
   StarterKit.configure(starterKit.value),
   HorizontalRule.extend({
     renderHTML() {
@@ -110,11 +110,10 @@ const extensions = computed(() => [
     }
   }),
   Image,
-  props.placeholder
-    ? Placeholder.configure(defu(
-        typeof props.placeholder === 'string' ? { placeholder: props.placeholder } : props.placeholder,
-        { showOnlyWhenEditable: true, showOnlyCurrent: true } as PlaceholderOptions))
-    : undefined,
+  props.placeholder && Placeholder.configure(defu(
+    typeof props.placeholder === 'string' ? { placeholder: props.placeholder } : props.placeholder,
+    { showOnlyWhenEditable: false, showOnlyCurrent: true } as PlaceholderOptions
+  )),
   Mention.configure({
     HTMLAttributes: {
       class: 'mention'
