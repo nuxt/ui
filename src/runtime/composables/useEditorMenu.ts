@@ -50,6 +50,7 @@ export interface EditorMenuOptions<T = any> {
 export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   const filteredItems: Ref<T[]> = ref([])
   const selectedIndex = ref(0)
+  const menuState = ref<'closed' | 'open' | 'closing'>('closed')
   let renderer: VueRenderer | null = null
   let element: HTMLElement | null = null
   let handleMouseDown: ((e: MouseEvent) => void) | null = null
@@ -58,6 +59,45 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   let globalKeyHandler: ((e: KeyboardEvent) => void) | null = null
   let triggerClientRect: (() => DOMRect | null) | null = null
   let handleHover: ((index: number) => void) | null = null
+
+  // Helper function to cleanup menu with close animation
+  const cleanupMenu = () => {
+    if (menuState.value === 'closed') return
+
+    // Set state to closed for animation
+    menuState.value = 'closed'
+
+    // Update renderer to show closing animation
+    if (renderer) {
+      renderer.updateProps({
+        groups: groups.value,
+        selectedIndex: selectedIndex.value,
+        onSelect: commandFn,
+        onHover: handleHover!,
+        state: menuState.value
+      })
+    }
+
+    // Wait for animation to complete (100ms from theme) before cleanup
+    setTimeout(() => {
+      if (globalKeyHandler) {
+        document.removeEventListener('keydown', globalKeyHandler, true)
+        globalKeyHandler = null
+      }
+      if (element && handleMouseDown) {
+        element.removeEventListener('mousedown', handleMouseDown)
+        handleMouseDown = null
+      }
+      if (renderer) {
+        renderer.destroy()
+        renderer = null
+      }
+      if (element) {
+        element.remove()
+        element = null
+      }
+    }, 100)
+  }
 
   const defaultFilter = (items: T[], query: string) => {
     if (!query) return items
@@ -133,7 +173,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
       groups: { type: Array, required: true },
       selectedIndex: { type: Number, required: true },
       onSelect: { type: Function, required: true },
-      onHover: { type: Function, required: true }
+      onHover: { type: Function, required: true },
+      state: { type: String, required: true }
     },
     setup(menuProps: any) {
       function handleClick(e: MouseEvent, item: T, selectableIndex: number) {
@@ -161,17 +202,18 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
         }
 
         return h('div', {
-          class: options.ui.value.content(),
-          role: 'listbox'
+          'class': options.ui.value.content(),
+          'role': 'listbox',
+          'data-state': menuProps.state
         }, [
           h('div', {
-            class: options.ui.value.viewport(),
-            role: 'presentation'
+            'class': options.ui.value.viewport(),
+            'role': 'presentation'
           }, groupsData.map((group, groupIndex) =>
             h('div', {
-              key: `group-${groupIndex}`,
-              class: options.ui.value.group(),
-              role: 'group'
+              'key': `group-${groupIndex}`,
+              'class': options.ui.value.group(),
+              'role': 'group'
             }, group.map((item, itemInGroupIndex) => {
               const itemData = item as any
 
@@ -243,18 +285,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
         // Handle Escape
         if (event.key === 'Escape') {
-          if (element && handleMouseDown) {
-            element.removeEventListener('mousedown', handleMouseDown)
-            handleMouseDown = null
-          }
-          if (renderer) {
-            renderer.destroy()
-            renderer = null
-          }
-          if (element) {
-            element.remove()
-            element = null
-          }
+          cleanupMenu()
           return true
         }
 
@@ -265,7 +296,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
             groups: groups.value,
             selectedIndex: selectedIndex.value,
             onSelect: commandFn,
-            onHover: handleHover!
+            onHover: handleHover!,
+            state: menuState.value
           })
           return true
         }
@@ -277,7 +309,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
             groups: groups.value,
             selectedIndex: selectedIndex.value,
             onSelect: commandFn,
-            onHover: handleHover!
+            onHover: handleHover!,
+            state: menuState.value
           })
           return true
         }
@@ -313,6 +346,9 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
             return
           }
 
+          // Set state to open for animation
+          menuState.value = 'open'
+
           // Add global keyboard listener to capture Enter/arrows
           globalKeyHandler = (e: KeyboardEvent) => {
             if (keyDownHandler) {
@@ -334,7 +370,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
                 groups: groups.value,
                 selectedIndex: index,
                 onSelect: commandFn,
-                onHover: handleHover!
+                onHover: handleHover!,
+                state: menuState.value
               })
             }
           }
@@ -344,7 +381,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
               groups: groups.value,
               selectedIndex: selectedIndex.value,
               onSelect: commandFn,
-              onHover: handleHover
+              onHover: handleHover,
+              state: menuState.value
             },
             editor: suggestionProps.editor
           })
@@ -379,28 +417,15 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
           // Hide menu if no items
           if (!filteredItems.value.length) {
-          // Remove global keyboard listener
-            if (globalKeyHandler) {
-              document.removeEventListener('keydown', globalKeyHandler, true)
-              globalKeyHandler = null
-            }
-            if (element && handleMouseDown) {
-              element.removeEventListener('mousedown', handleMouseDown)
-              handleMouseDown = null
-            }
-            if (renderer) {
-              renderer.destroy()
-              renderer = null
-            }
-            if (element) {
-              element.remove()
-              element = null
-            }
+            cleanupMenu()
             return
           }
 
           // Show menu if it was hidden
           if (!renderer) {
+            // Set state to open for animation
+            menuState.value = 'open'
+
             // Re-add global keyboard listener
             if (!globalKeyHandler) {
               globalKeyHandler = (e: KeyboardEvent) => {
@@ -424,7 +449,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
                   groups: groups.value,
                   selectedIndex: index,
                   onSelect: commandFn,
-                  onHover: handleHover!
+                  onHover: handleHover!,
+                  state: menuState.value
                 })
               }
             }
@@ -434,7 +460,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
                 groups: groups.value,
                 selectedIndex: selectedIndex.value,
                 onSelect: commandFn,
-                onHover: handleHover
+                onHover: handleHover,
+                state: menuState.value
               },
               editor: suggestionProps.editor
             })
@@ -461,7 +488,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
               onSelect: commandFn,
               onHover: (index: number) => {
                 selectedIndex.value = index
-              }
+              },
+              state: menuState.value
             })
           }
 
@@ -471,23 +499,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
         },
         onKeyDown: keyDownHandler!,
         onExit: () => {
-        // Remove global keyboard listener
-          if (globalKeyHandler) {
-            document.removeEventListener('keydown', globalKeyHandler, true)
-            globalKeyHandler = null
-          }
-          if (element && handleMouseDown) {
-            element.removeEventListener('mousedown', handleMouseDown)
-            handleMouseDown = null
-          }
-          if (renderer) {
-            renderer.destroy()
-            renderer = null
-          }
-          if (element) {
-            element.remove()
-            element = null
-          }
+          cleanupMenu()
           // Clear the stored trigger position
           triggerClientRect = null
         }
@@ -496,8 +508,12 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     }
   })
 
-  // Cleanup function
+  // Cleanup function (immediate, no animation)
   const destroy = () => {
+    if (globalKeyHandler) {
+      document.removeEventListener('keydown', globalKeyHandler, true)
+      globalKeyHandler = null
+    }
     if (element && handleMouseDown) {
       element.removeEventListener('mousedown', handleMouseDown)
       handleMouseDown = null
