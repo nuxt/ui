@@ -255,7 +255,12 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
   <UEditor
     v-slot="{ editor }"
     v-model="content"
-    :extensions="[TextAlign, Emoji]"
+    :extensions="[
+      TextAlign.configure({
+        types: ['heading', 'paragraph']
+      }),
+      Emoji
+    ]"
     content-type="markdown"
     placeholder="Write, type '/' for commands..."
     class="flex-1 w-full min-h-0"
