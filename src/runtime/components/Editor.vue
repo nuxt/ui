@@ -90,6 +90,10 @@ const starterKit = computed(() => defu(props.starterKit, {
   horizontalRule: false,
   headings: {
     levels: [1, 2, 3, 4]
+  },
+  dropcursor: {
+    color: 'var(--ui-primary)',
+    width: 2
   }
 } as Partial<StarterKitOptions>))
 
