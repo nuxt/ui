@@ -39,8 +39,7 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
   pluginKey: 'mentionMenu',
-  char: '@',
-  items: () => []
+  char: '@'
 })
 
 const appConfig = useAppConfig() as EditorMentionMenu['AppConfig']

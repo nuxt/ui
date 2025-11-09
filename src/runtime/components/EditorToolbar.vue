@@ -7,7 +7,7 @@ import type { FloatingMenuPluginProps } from '@tiptap/extension-floating-menu'
 import theme from '#build/ui/editor-toolbar'
 import type { ButtonProps, DropdownMenuProps, DropdownMenuItem } from '../types'
 import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem } from '../types/utils'
-import type { EditorHandler, EditorActionType } from '../utils/editor'
+import type { EditorHandler, EditorActionItem } from '../utils/editor'
 import type { ComponentConfig } from '../types/tv'
 
 type EditorToolbar = ComponentConfig<typeof theme, AppConfig, 'editorToolbar'>
@@ -16,10 +16,10 @@ type BaseItem = Pick<ButtonProps, 'label' | 'color' | 'activeColor' | 'variant' 
   slot?: string
 }
 
-type EditorToolbarDropdownItem = (DropdownMenuItem & EditorActionType) | DropdownMenuItem
+type EditorToolbarDropdownItem = (DropdownMenuItem & EditorActionItem) | DropdownMenuItem
 
 export type EditorToolbarItem
-  = | (BaseItem & EditorActionType)
+  = | (BaseItem & EditorActionItem)
     | (BaseItem & DropdownMenuProps<ArrayOrNested<EditorToolbarDropdownItem>>) & {
       kind: 'dropdown'
     }

@@ -2,18 +2,27 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/editor-suggestion-menu'
 import type { EditorMenuOptions } from '../composables/useEditorMenu'
-import type { EditorHandler, EditorActionType } from '../utils/editor'
+import type { EditorHandler, EditorActionItem } from '../utils/editor'
 import type { IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type EditorSuggestionMenu = ComponentConfig<typeof theme, AppConfig, 'editorSuggestionMenu'>
 
-export type EditorSuggestionMenuItem = {
-  /**
-   * The item type.
-   * @defaultValue 'action'
-   */
-  type?: 'label' | 'separator' | 'action'
+type EditorSuggestionMenuLabelItem = {
+  type: 'label'
+  label: string
+  class?: any
+  [key: string]: any
+}
+
+type EditorSuggestionMenuSeparatorItem = {
+  type: 'separator'
+  class?: any
+  [key: string]: any
+}
+
+type EditorSuggestionMenuActionItem = {
+  type?: never
   label: string
   description?: string
   /**
@@ -21,10 +30,11 @@ export type EditorSuggestionMenuItem = {
    */
   icon?: IconProps['name']
   disabled?: boolean
-  slot?: string
   class?: any
   [key: string]: any
-} & EditorActionType
+} & EditorActionItem
+
+export type EditorSuggestionMenuItem = EditorSuggestionMenuLabelItem | EditorSuggestionMenuSeparatorItem | EditorSuggestionMenuActionItem
 
 export type EditorSuggestionMenuHandlers = Record<string, EditorHandler>
 
@@ -50,8 +60,7 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<EditorSuggestionMenuProps<T>>(), {
   pluginKey: 'suggestionMenu',
-  char: '/',
-  items: () => []
+  char: '/'
 })
 
 const appConfig = useAppConfig() as EditorSuggestionMenu['AppConfig']
@@ -82,7 +91,7 @@ onMounted(async () => {
     ui,
     onSelect: (editor, range, item) => {
       // Skip if it's a label (non-interactive)
-      if (item.type === 'label') return
+      if (item.type === 'label' || item.type === 'separator') return
 
       // Delete the trigger character and query text
       editor.chain().focus().deleteRange(range).run()

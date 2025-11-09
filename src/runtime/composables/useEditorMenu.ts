@@ -23,7 +23,7 @@ export interface EditorMenuOptions<T = any> {
   /**
    * The items to display (can be a flat array or grouped)
    */
-  items: T[] | T[][]
+  items?: T[] | T[][]
   /**
    * Function to filter items based on query
    */
@@ -72,7 +72,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
   // Flatten items to a single array for filtering
   const flatItems = computed(() => {
-    return isArrayOfArray(options.items)
+    return isArrayOfArray(options.items || [])
       ? (options.items as T[][]).flat()
       : options.items as T[]
   })
@@ -81,7 +81,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   const groups = computed<T[][]>(() => {
     if (filteredItems.value.length === 0) return []
 
-    if (isArrayOfArray(options.items)) {
+    if (isArrayOfArray(options.items || [])) {
       // Reconstruct groups maintaining the original group structure
       const groups: T[][] = []
       for (const group of options.items as T[][]) {
@@ -143,53 +143,54 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
         const groupsData = menuProps.groups as T[][]
         let globalIndex = 0
 
-        return h('div', { class: options.ui.value.root() }, [
-          h('div', { class: options.ui.value.content() }, [
+        return h('div', {
+          class: options.ui.value.content(),
+          role: 'listbox'
+        }, [
+          h('div', {
+            class: options.ui.value.viewport(),
+            role: 'presentation'
+          }, groupsData.map((group, groupIndex) =>
             h('div', {
-              class: options.ui.value.viewport(),
-              role: 'presentation'
-            }, groupsData.map((group, groupIndex) =>
-              h('div', {
-                key: `group-${groupIndex}`,
-                class: options.ui.value.group(),
-                role: 'group'
-              }, group.map((item, itemInGroupIndex) => {
-                const itemData = item as any
+              key: `group-${groupIndex}`,
+              class: options.ui.value.group(),
+              role: 'group'
+            }, group.map((item, itemInGroupIndex) => {
+              const itemData = item as any
 
-                // Render label
-                if (itemData.type === 'label') {
-                  return h('div', {
-                    key: `label-${groupIndex}-${itemInGroupIndex}`,
-                    class: options.ui.value.label({ class: itemData.class })
-                  }, options.renderItem(item, options.ui))
-                }
-
-                // Render separator
-                if (itemData.type === 'separator') {
-                  return h('div', {
-                    key: `separator-${groupIndex}-${itemInGroupIndex}`,
-                    class: options.ui.value.separator({ class: itemData.class }),
-                    role: 'separator'
-                  })
-                }
-
-                // Render regular item
-                const itemIndex = globalIndex++
-                const isHighlighted = itemIndex === menuProps.selectedIndex
-
+              // Render label
+              if (itemData.type === 'label') {
                 return h('div', {
-                  'key': `item-${itemIndex}`,
-                  'class': options.ui.value.item({ class: itemData.class, active: false }),
-                  'role': 'option',
-                  'aria-selected': isHighlighted,
-                  'data-highlighted': isHighlighted ? '' : undefined,
-                  'data-disabled': itemData.disabled ? '' : undefined,
-                  'onMousedown': (e: MouseEvent) => handleClick(e, item, itemIndex),
-                  'onMouseenter': () => handleMouseEnter(itemIndex)
+                  key: `label-${groupIndex}-${itemInGroupIndex}`,
+                  class: options.ui.value.label({ class: itemData.class })
                 }, options.renderItem(item, options.ui))
-              }))
-            ))
-          ])
+              }
+
+              // Render separator
+              if (itemData.type === 'separator') {
+                return h('div', {
+                  key: `separator-${groupIndex}-${itemInGroupIndex}`,
+                  class: options.ui.value.separator({ class: itemData.class }),
+                  role: 'separator'
+                })
+              }
+
+              // Render regular item
+              const itemIndex = globalIndex++
+              const isHighlighted = itemIndex === menuProps.selectedIndex
+
+              return h('div', {
+                'key': `item-${itemIndex}`,
+                'class': options.ui.value.item({ class: itemData.class, active: false }),
+                'role': 'option',
+                'aria-selected': isHighlighted,
+                'data-highlighted': isHighlighted ? '' : undefined,
+                'data-disabled': itemData.disabled ? '' : undefined,
+                'onMousedown': (e: MouseEvent) => handleClick(e, item, itemIndex),
+                'onMouseenter': () => handleMouseEnter(itemIndex)
+              }, options.renderItem(item, options.ui))
+            }))
+          ))
         ])
       }
     }

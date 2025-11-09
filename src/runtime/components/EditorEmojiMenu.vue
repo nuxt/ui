@@ -32,8 +32,7 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
   pluginKey: 'emojiMenu',
-  char: ':',
-  items: () => []
+  char: ':'
 })
 
 const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig']
@@ -67,15 +66,15 @@ onMounted(async () => {
     limit: props.limit,
     ui,
     onSelect: (editor, range, item) => {
+      if (!item.emoji) return
+
       // Delete the trigger character and query text, then insert the emoji
-      if (item.emoji) {
-        editor
-          .chain()
-          .focus()
-          .deleteRange(range)
-          .insertContent(item.emoji)
-          .run()
-      }
+      editor
+        .chain()
+        .focus()
+        .deleteRange(range)
+        .insertContent(item.emoji)
+        .run()
     },
     renderItem: (item, styles) => {
       const content = item.emoji || item.shortcodes[0] || item.name

@@ -165,8 +165,6 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
   type: 'label',
   label: 'Style'
 }, {
-  type: 'separator'
-}, {
   kind: 'paragraph',
   label: 'Paragraph',
   icon: 'i-lucide-type'

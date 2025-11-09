@@ -7,7 +7,7 @@ export interface EditorHandler {
   isDisabled?: (editor: Editor, cmd?: any) => boolean
 }
 
-export type EditorActionType
+export type EditorActionItem
   = | { kind: 'mark', mark: 'bold' | 'italic' | 'strike' | 'code' | 'underline' }
     | { kind: 'textAlign', align: 'left' | 'center' | 'right' | 'justify' }
     | { kind: 'heading', level: 1 | 2 | 3 | 4 | 5 | 6 }
@@ -101,7 +101,7 @@ export function createHeadingHandler() {
   }
 }
 
-export function createHandlers(): Record<EditorActionType['kind'], EditorHandler> {
+export function createHandlers(): Record<EditorActionItem['kind'], EditorHandler> {
   return {
     mark: createMarkHandler(),
     textAlign: createTextAlignHandler(),
