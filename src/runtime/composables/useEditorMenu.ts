@@ -96,6 +96,13 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     return [filteredItems.value]
   })
 
+  // Get only selectable items (excluding labels and separators) for keyboard navigation
+  const selectableItems = computed<T[]>(() => {
+    return filteredItems.value.filter((item: any) => {
+      return item.type !== 'label' && item.type !== 'separator'
+    })
+  })
+
   // Helper function to update menu position using floating-ui
   const updatePosition = (element: HTMLElement) => {
     if (!triggerClientRect) return
@@ -129,19 +136,29 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
       onHover: { type: Function, required: true }
     },
     setup(menuProps: any) {
-      function handleClick(e: MouseEvent, item: T, index: number) {
+      function handleClick(e: MouseEvent, item: T, selectableIndex: number) {
         e.preventDefault()
-        menuProps.onSelect(item, index)
+        menuProps.onSelect(item, selectableIndex)
       }
 
-      function handleMouseEnter(index: number) {
+      function handleMouseEnter(selectableIndex: number) {
         // Update selected index on hover via callback
-        menuProps.onHover(index)
+        menuProps.onHover(selectableIndex)
       }
 
       return () => {
         const groupsData = menuProps.groups as T[][]
-        let globalIndex = 0
+        // Build a map of selectable items to their indices
+        const selectableIndexMap = new Map<T, number>()
+        let selectableCounter = 0
+        for (const group of groupsData) {
+          for (const item of group) {
+            const itemData = item as any
+            if (itemData.type !== 'label' && itemData.type !== 'separator') {
+              selectableIndexMap.set(item, selectableCounter++)
+            }
+          }
+        }
 
         return h('div', {
           class: options.ui.value.content(),
@@ -176,18 +193,23 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
               }
 
               // Render regular item
-              const itemIndex = globalIndex++
-              const isHighlighted = itemIndex === menuProps.selectedIndex
+              const selectableIndex = selectableIndexMap.get(item)!
+              const isHighlighted = selectableIndex === menuProps.selectedIndex
 
               return h('div', {
-                'key': `item-${itemIndex}`,
+                'key': `item-${selectableIndex}`,
                 'class': options.ui.value.item({ class: itemData.class, active: false }),
                 'role': 'option',
                 'aria-selected': isHighlighted,
                 'data-highlighted': isHighlighted ? '' : undefined,
                 'data-disabled': itemData.disabled ? '' : undefined,
-                'onMousedown': (e: MouseEvent) => handleClick(e, item, itemIndex),
-                'onMouseenter': () => handleMouseEnter(itemIndex)
+                'onMousedown': (e: MouseEvent) => handleClick(e, item, selectableIndex),
+                'onMouseenter': () => handleMouseEnter(selectableIndex),
+                'ref': (el: any) => {
+                  if (el && isHighlighted) {
+                    el.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+                  }
+                }
               }, options.renderItem(item, options.ui))
             }))
           ))
@@ -215,7 +237,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
       keyDownHandler = (props: { event: KeyboardEvent }) => {
         const { event } = props
 
-        if (!renderer || !filteredItems.value.length) {
+        if (!renderer || !selectableItems.value.length) {
           return false
         }
 
@@ -238,7 +260,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
         // Handle ArrowUp
         if (event.key === 'ArrowUp') {
-          selectedIndex.value = (selectedIndex.value + filteredItems.value.length - 1) % filteredItems.value.length
+          selectedIndex.value = (selectedIndex.value + selectableItems.value.length - 1) % selectableItems.value.length
           renderer?.updateProps({
             groups: groups.value,
             selectedIndex: selectedIndex.value,
@@ -250,7 +272,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
         // Handle ArrowDown
         if (event.key === 'ArrowDown') {
-          selectedIndex.value = (selectedIndex.value + 1) % filteredItems.value.length
+          selectedIndex.value = (selectedIndex.value + 1) % selectableItems.value.length
           renderer?.updateProps({
             groups: groups.value,
             selectedIndex: selectedIndex.value,
@@ -262,7 +284,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
         // Handle Enter or Tab
         if (event.key === 'Enter' || event.key === 'Tab') {
-          const selectedItem = filteredItems.value[selectedIndex.value]
+          const selectedItem = selectableItems.value[selectedIndex.value]
           if (selectedItem && commandFn) {
             commandFn(selectedItem)
           }
@@ -276,6 +298,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
       const handlers = {
         onStart: (suggestionProps: SuggestionProps) => {
           filteredItems.value = suggestionProps.items as T[]
+
+          // Start at first selectable item (index 0 in selectableItems)
           selectedIndex.value = 0
 
           // Capture the command function for use in keyboard navigation
@@ -348,9 +372,9 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           // Update the command function
           commandFn = (item: T) => suggestionProps.command(item)
 
-          // Reset selected index if out of bounds
-          if (selectedIndex.value >= filteredItems.value.length) {
-            selectedIndex.value = Math.max(0, filteredItems.value.length - 1)
+          // Reset selected index if out of bounds (comparing against selectableItems)
+          if (selectedIndex.value >= selectableItems.value.length) {
+            selectedIndex.value = Math.max(0, selectableItems.value.length - 1)
           }
 
           // Hide menu if no items
