@@ -207,13 +207,13 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           'data-state': menuProps.state
         }, [
           h('div', {
-            'class': options.ui.value.viewport(),
-            'role': 'presentation'
+            class: options.ui.value.viewport(),
+            role: 'presentation'
           }, groupsData.map((group, groupIndex) =>
             h('div', {
-              'key': `group-${groupIndex}`,
-              'class': options.ui.value.group(),
-              'role': 'group'
+              key: `group-${groupIndex}`,
+              class: options.ui.value.group(),
+              role: 'group'
             }, group.map((item, itemInGroupIndex) => {
               const itemData = item as any
 
