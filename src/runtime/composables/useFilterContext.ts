@@ -1,4 +1,4 @@
-import { inject } from 'vue'
+import { inject, unref } from 'vue'
 import type {
   FilterI18nConfig,
   FiltersVariant,
@@ -45,9 +45,9 @@ export const FilterContext = Symbol('FilterContext') as symbol
  * @returns The filter context configuration
  */
 export function useFilterContext(): FilterContextValue {
-  const context = inject<FilterContextValue>(FilterContext)
+  const context = inject(FilterContext)
   if (!context) {
     throw new Error('useFilterContext must be used within FilterContextProvider')
   }
-  return context
+  return unref(context)
 }

@@ -58,7 +58,7 @@ import type {
   FilterOperatorValue
 } from '../types/filter'
 import { computed } from 'vue'
-import { mergeI18nConfig } from '../utils/operators'
+import { mergeI18nConfig, getDefaultOperatorForFieldType } from '../utils/operators'
 import { flattenFieldsConfig, getFieldsMap } from '../utils/fields'
 import FilterContextProvider from './filters/FilterContextProvider.vue'
 import FilterItem from './filters/FilterItem.vue'
@@ -210,13 +210,10 @@ function handleAddFilter(fieldKey: string, operator?: FilterOperatorValue, value
 
 /**
  * Determines the default operator for a given field
- * For booleans, always returns 'is'
+ * Uses the utility function to get the correct default operator for each field type
  */
 function getDefaultOperatorForField(field: FilterFieldConfig): FilterOperatorValue {
-  if (field.type === 'boolean') {
-    return 'is'
-  }
-  return 'is'
+  return getDefaultOperatorForFieldType(field.type, field.defaultOperator)
 }
 
 /**
