@@ -554,7 +554,7 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
-            :style="[resolveValue(header.column.columnDef.meta?.style?.th, header)]"
+            :style="resolveValue(header.column.columnDef.meta?.style?.th, header)"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
