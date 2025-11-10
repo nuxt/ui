@@ -53,9 +53,9 @@ const isDark = computed({
     }"
     @click="isDark = !isDark"
   >
-    <template #leading>
-      <UIcon class="hidden dark:inline" :name="appConfig.ui.icons.dark" />
-      <UIcon class="inline dark:hidden" :name="appConfig.ui.icons.light" />
+    <template #leading="{ ui }">
+      <UIcon :class="ui.leadingIcon({ class: props.ui?.trailingIcon, active })" class="hidden dark:inline" :name="appConfig.ui.icons.dark" />
+      <UIcon :class="ui.leadingIcon({ class: props.ui?.trailingIcon, active })" class="inline dark:hidden" :name="appConfig.ui.icons.light" />
     </template>
   </UButton>
 </template>
