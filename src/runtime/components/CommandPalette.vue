@@ -156,11 +156,6 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
     estimateSize?: number
   }
   /**
-   * Debounce time in milliseconds for search input to improve performance with large datasets.
-   * @defaultValue 0
-   */
-  debounce?: number
-  /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
@@ -204,7 +199,7 @@ export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPalett
 import { computed, ref, useTemplateRef, toRef, markRaw } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
-import { reactivePick, createReusableTemplate, refDebounced } from '@vueuse/core'
+import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -238,7 +233,6 @@ const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<G, T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
-const debouncedSearchTerm = props.debounce > 0 ? refDebounced(searchTerm, props.debounce) : searchTerm
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
@@ -295,11 +289,10 @@ const items = computed(() => groups.value?.filter((group) => {
   return true
 })?.flatMap(group => group.items?.map(item => markRaw({ ...item, group: group.id })) || []) || [])
 
-const { results: fuseResults } = useFuse<typeof items.value[number]>(debouncedSearchTerm, items, fuse)
+const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
 
 const filteredGroups = computed(() => {
   // Extract reactive values once to minimize reactivity tracking
-  const searchTerm = debouncedSearchTerm.value
   const labelKey = props.labelKey
   const resultLimit = fuse.value.resultLimit
   const currentGroups = groups.value
@@ -308,7 +301,7 @@ const filteredGroups = computed(() => {
     let processedItems = items
 
     if (group?.postFilter && typeof group.postFilter === 'function') {
-      processedItems = group.postFilter(searchTerm, processedItems)
+      processedItems = group.postFilter(searchTerm.value, processedItems)
     }
 
     return {
@@ -317,8 +310,8 @@ const filteredGroups = computed(() => {
         // Use markRaw to prevent deep reactivity tracking on item properties
         return markRaw({
           ...item,
-          labelHtml: highlight<T>(item, searchTerm, labelKey),
-          suffixHtml: highlight<T>(item, searchTerm, undefined, [labelKey])
+          labelHtml: highlight<T>(item, searchTerm.value, labelKey),
+          suffixHtml: highlight<T>(item, searchTerm.value, undefined, [labelKey])
         })
       })
     }
@@ -571,8 +564,8 @@ function onSelect(e: Event, item: T) {
       </div>
 
       <div v-else :class="ui.empty({ class: props.ui?.empty })">
-        <slot name="empty" :search-term="debouncedSearchTerm">
-          {{ debouncedSearchTerm ? t('commandPalette.noMatch', { searchTerm: debouncedSearchTerm }) : t('commandPalette.noData') }}
+        <slot name="empty" :search-term="searchTerm">
+          {{ searchTerm ? t('commandPalette.noMatch', { searchTerm }) : t('commandPalette.noData') }}
         </slot>
       </div>
     </ListboxContent>

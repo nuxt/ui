@@ -62,11 +62,6 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
    * @defaultValue true
    */
   colorMode?: boolean
-  /**
-   * Debounce time in milliseconds for search input to improve performance with large datasets.
-   * @defaultValue 200
-   */
-  debounce?: number
   class?: any
   ui?: DashboardSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem>['ui']
 }
@@ -94,7 +89,7 @@ const props = withDefaults(defineProps<DashboardSearchProps>(), {
   colorMode: true,
   close: true,
   fullscreen: false,
-  debounce: 200
+  debounce: 0
 })
 const slots = defineSlots<DashboardSearchSlots>()
 
@@ -202,7 +197,6 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :debounce="debounce"
           :ui="transformUI(omit(ui, ['modal']), props.ui)"
           @update:model-value="onSelect"
           @update:open="open = $event"

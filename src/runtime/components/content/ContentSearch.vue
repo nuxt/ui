@@ -94,11 +94,6 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    * @defaultValue true
    */
   colorMode?: boolean
-  /**
-   * Debounce time in milliseconds for search input to improve performance with large datasets.
-   * @defaultValue 200
-   */
-  debounce?: number
   class?: any
   ui?: ContentSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>['ui']
 }
@@ -126,8 +121,7 @@ const props = withDefaults(defineProps<ContentSearchProps<T>>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
-  fullscreen: false,
-  debounce: 200
+  fullscreen: false
 })
 const slots = defineSlots<ContentSearchSlots>()
 
@@ -311,7 +305,6 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :debounce="debounce"
           :ui="transformUI(omit(ui, ['modal']), props.ui)"
           @update:model-value="onSelect"
           @update:open="open = $event"
