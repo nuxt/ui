@@ -24,9 +24,9 @@ describe('Card', () => {
     ['with class', { props: { class: 'rounded-xl' } }],
     ['with ui', { props: { ui: { body: 'font-bold' } } }],
     // Slots
-    ['with default slot', { slots: { default: slots.default } }],
-    ['with header slot', { slots: { header: slots.header } }],
-    ['with footer slot', { slots: { footer: slots.footer } }]
+    ['with default slot', { slots: { default: slots.default }, props: { size: 'md' } }],
+    ['with header slot', { slots: { header: slots.header }, props: { size: 'md' } }],
+    ['with footer slot', { slots: { footer: slots.footer }, props: { size: 'md' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CardProps, slots?: Partial<CardSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Card)
     expect(html).toMatchSnapshot()
