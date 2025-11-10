@@ -73,7 +73,7 @@ export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteGroup<Comma
 </script>
 
 <script setup lang="ts">
-import { computed, useTemplateRef, markRaw } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
@@ -127,28 +127,28 @@ const groups = computed(() => {
     groups.push({
       id: 'theme',
       label: t('dashboardSearch.theme'),
-      items: [markRaw({
+      items: [{
         label: t('colorMode.system'),
         icon: appConfig.ui.icons.system,
         active: colorMode.preference === 'system',
         onSelect: () => {
           colorMode.preference = 'system'
         }
-      }), markRaw({
+      }, {
         label: t('colorMode.light'),
         icon: appConfig.ui.icons.light,
         active: colorMode.preference === 'light',
         onSelect: () => {
           colorMode.preference = 'light'
         }
-      }), markRaw({
+      }, {
         label: t('colorMode.dark'),
         icon: appConfig.ui.icons.dark,
         active: colorMode.preference === 'dark',
         onSelect: () => {
           colorMode.preference = 'dark'
         }
-      })]
+      }]
     })
   }
 

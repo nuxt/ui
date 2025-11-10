@@ -196,10 +196,10 @@ export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPalett
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
-import { computed, ref, useTemplateRef, toRef, markRaw } from 'vue'
+import { computed, ref, useTemplateRef, toRef } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { reactivePick, createReusableTemplate, refThrottled } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -286,9 +286,12 @@ const items = computed(() => groups.value?.filter((group) => {
     return false
   }
   return true
-})?.flatMap(group => group.items?.map(item => markRaw({ ...item, group: group.id })) || []) || [])
+})?.flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || [])
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
+
+// Throttle fuseResults to batch multiple updates within the same frame (16ms)
+const throttledFuseResults = refThrottled(fuseResults, 16)
 
 const filteredGroups = computed(() => {
   // Extract reactive values once to minimize reactivity tracking
@@ -306,25 +309,23 @@ const filteredGroups = computed(() => {
     return {
       ...group,
       items: processedItems.slice(0, resultLimit).map((item) => {
-        // Use markRaw to prevent deep reactivity tracking on item properties
-        return markRaw({
+        return {
           ...item,
           labelHtml: highlight<T>(item, searchTerm.value, labelKey),
           suffixHtml: highlight<T>(item, searchTerm.value, undefined, [labelKey])
-        })
+        }
       })
     }
   }
 
-  const groupsById = fuseResults.value.reduce((acc, result) => {
+  const groupsById = throttledFuseResults.value.reduce((acc, result) => {
     const { item, matches } = result
     if (!item.group) {
       return acc
     }
 
     acc[item.group] ||= []
-    // Use markRaw to prevent deep tracking during reduce
-    acc[item.group]?.push(markRaw({ ...item, matches }))
+    acc[item.group]?.push({ ...item, matches })
 
     return acc
   }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)

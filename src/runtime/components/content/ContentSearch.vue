@@ -105,7 +105,7 @@ export type ContentSearchSlots = CommandPaletteSlots<CommandPaletteGroup<Content
 </script>
 
 <script setup lang="ts" generic="T extends ContentSearchLink">
-import { computed, useTemplateRef, markRaw } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
@@ -154,12 +154,12 @@ const commandPaletteRef = useTemplateRef('commandPaletteRef')
 const mappedLinksItems = computed(() => {
   if (!props.links?.length) return []
 
-  return props.links.flatMap(link => [markRaw({
+  return props.links.flatMap(link => [{
     ...link,
     suffix: link.description,
     description: undefined,
     icon: link.icon || appConfig.ui.icons.file
-  }), ...(link.children?.map(child => markRaw({
+  }, ...(link.children?.map(child => ({
     ...child,
     prefix: link.label + ' >',
     suffix: child.description,
@@ -190,14 +190,14 @@ function mapNavigationItems(children: ContentNavigationItem[], parent?: ContentN
 function mapFile(file: ContentSearchFile, link: ContentNavigationItem, parent?: ContentNavigationItem): ContentSearchItem {
   const prefix = [...new Set([parent?.title, ...file.titles].filter(Boolean))]
 
-  return markRaw({
+  return {
     prefix: prefix?.length ? (prefix.join(' > ') + ' >') : undefined,
     label: file.id === link.path ? link.title : file.title,
     suffix: file.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
     to: file.id,
     icon: (link.icon || parent?.icon || (file.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
     level: file.level
-  })
+  }
 }
 
 // Memoize mapped navigation items to avoid recomputing on every render
@@ -223,28 +223,28 @@ const themeGroup = computed(() => {
   return {
     id: 'theme',
     label: t('contentSearch.theme'),
-    items: [markRaw({
+    items: [{
       label: t('colorMode.system'),
       icon: appConfig.ui.icons.system,
       active: colorMode.preference === 'system',
       onSelect: () => {
         colorMode.preference = 'system'
       }
-    }), markRaw({
+    }, {
       label: t('colorMode.light'),
       icon: appConfig.ui.icons.light,
       active: colorMode.preference === 'light',
       onSelect: () => {
         colorMode.preference = 'light'
       }
-    }), markRaw({
+    }, {
       label: t('colorMode.dark'),
       icon: appConfig.ui.icons.dark,
       active: colorMode.preference === 'dark',
       onSelect: () => {
         colorMode.preference = 'dark'
       }
-    })]
+    }]
   }
 })
 
