@@ -62,6 +62,11 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
    * @defaultValue true
    */
   colorMode?: boolean
+  /**
+   * Debounce time in milliseconds for search input to improve performance with large datasets.
+   * @defaultValue 200
+   */
+  debounce?: number
   class?: any
   ui?: DashboardSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem>['ui']
 }
@@ -73,7 +78,7 @@ export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteGroup<Comma
 </script>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
+import { computed, useTemplateRef, markRaw } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
@@ -88,7 +93,8 @@ const props = withDefaults(defineProps<DashboardSearchProps>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
-  fullscreen: false
+  fullscreen: false,
+  debounce: 200
 })
 const slots = defineSlots<DashboardSearchSlots>()
 
@@ -127,28 +133,28 @@ const groups = computed(() => {
     groups.push({
       id: 'theme',
       label: t('dashboardSearch.theme'),
-      items: [{
+      items: [markRaw({
         label: t('colorMode.system'),
         icon: appConfig.ui.icons.system,
         active: colorMode.preference === 'system',
         onSelect: () => {
           colorMode.preference = 'system'
         }
-      }, {
+      }), markRaw({
         label: t('colorMode.light'),
         icon: appConfig.ui.icons.light,
         active: colorMode.preference === 'light',
         onSelect: () => {
           colorMode.preference = 'light'
         }
-      }, {
+      }), markRaw({
         label: t('colorMode.dark'),
         icon: appConfig.ui.icons.dark,
         active: colorMode.preference === 'dark',
         onSelect: () => {
           colorMode.preference = 'dark'
         }
-      }]
+      })]
     })
   }
 
@@ -196,6 +202,7 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
+          :debounce="debounce"
           :ui="transformUI(omit(ui, ['modal']), props.ui)"
           @update:model-value="onSelect"
           @update:open="open = $event"

@@ -94,6 +94,11 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    * @defaultValue true
    */
   colorMode?: boolean
+  /**
+   * Debounce time in milliseconds for search input to improve performance with large datasets.
+   * @defaultValue 200
+   */
+  debounce?: number
   class?: any
   ui?: ContentSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>['ui']
 }
@@ -105,7 +110,7 @@ export type ContentSearchSlots = CommandPaletteSlots<CommandPaletteGroup<Content
 </script>
 
 <script setup lang="ts" generic="T extends ContentSearchLink">
-import { computed, useTemplateRef } from 'vue'
+import { computed, useTemplateRef, markRaw } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
@@ -121,7 +126,8 @@ const props = withDefaults(defineProps<ContentSearchProps<T>>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
-  fullscreen: false
+  fullscreen: false,
+  debounce: 200
 })
 const slots = defineSlots<ContentSearchSlots>()
 
@@ -150,19 +156,31 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
 
 const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
-function mapLinksItems(links: T[]): ContentSearchItem[] {
-  return links.flatMap(link => [{
+// Memoize mapped links items
+const mappedLinksItems = computed(() => {
+  if (!props.links?.length) return []
+
+  return props.links.flatMap(link => [markRaw({
     ...link,
     suffix: link.description,
     description: undefined,
     icon: link.icon || appConfig.ui.icons.file
-  }, ...(link.children?.map(child => ({
+  }), ...(link.children?.map(child => markRaw({
     ...child,
     prefix: link.label + ' >',
     suffix: child.description,
     description: undefined,
     icon: child.icon || link.icon || appConfig.ui.icons.file
   })) || [])])
+})
+
+function postFilter(query: string, items: ContentSearchItem[]) {
+  // Filter only first level items if no query
+  if (!query) {
+    return items?.filter(item => item.level === 1)
+  }
+
+  return items
 }
 
 function mapNavigationItems(children: ContentNavigationItem[], parent?: ContentNavigationItem): ContentSearchItem[] {
@@ -178,73 +196,81 @@ function mapNavigationItems(children: ContentNavigationItem[], parent?: ContentN
 function mapFile(file: ContentSearchFile, link: ContentNavigationItem, parent?: ContentNavigationItem): ContentSearchItem {
   const prefix = [...new Set([parent?.title, ...file.titles].filter(Boolean))]
 
-  return {
+  return markRaw({
     prefix: prefix?.length ? (prefix.join(' > ') + ' >') : undefined,
     label: file.id === link.path ? link.title : file.title,
     suffix: file.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
     to: file.id,
     icon: (link.icon || parent?.icon || (file.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
     level: file.level
-  }
+  })
 }
+
+// Memoize mapped navigation items to avoid recomputing on every render
+const mappedNavigationItems = computed(() => {
+  if (!props.navigation?.length) return []
+
+  if (props.navigation.some(link => !!link.children?.length)) {
+    return props.navigation.map(group => ({
+      id: group.path,
+      label: group.title,
+      items: mapNavigationItems(group.children || []),
+      postFilter
+    }))
+  } else {
+    return [{ id: 'docs', items: mapNavigationItems(props.navigation), postFilter }]
+  }
+})
+
+// Memoize theme group
+const themeGroup = computed(() => {
+  if (!props.colorMode || colorMode?.forced) return null
+
+  return {
+    id: 'theme',
+    label: t('contentSearch.theme'),
+    items: [markRaw({
+      label: t('colorMode.system'),
+      icon: appConfig.ui.icons.system,
+      active: colorMode.preference === 'system',
+      onSelect: () => {
+        colorMode.preference = 'system'
+      }
+    }), markRaw({
+      label: t('colorMode.light'),
+      icon: appConfig.ui.icons.light,
+      active: colorMode.preference === 'light',
+      onSelect: () => {
+        colorMode.preference = 'light'
+      }
+    }), markRaw({
+      label: t('colorMode.dark'),
+      icon: appConfig.ui.icons.dark,
+      active: colorMode.preference === 'dark',
+      onSelect: () => {
+        colorMode.preference = 'dark'
+      }
+    })]
+  }
+})
 
 const groups = computed(() => {
   const groups = []
 
-  if (props.links?.length) {
-    groups.push({ id: 'links', label: t('contentSearch.links'), items: mapLinksItems(props.links) })
+  if (mappedLinksItems.value.length) {
+    groups.push({ id: 'links', label: t('contentSearch.links'), items: mappedLinksItems.value })
   }
 
-  if (props.navigation?.length) {
-    if (props.navigation.some(link => !!link.children?.length)) {
-      groups.push(...props.navigation.map(group => ({ id: group.path, label: group.title, items: mapNavigationItems(group.children || []), postFilter })))
-    } else {
-      groups.push({ id: 'docs', items: mapNavigationItems(props.navigation), postFilter })
-    }
-  }
+  groups.push(...mappedNavigationItems.value)
 
   groups.push(...(props.groups || []))
 
-  if (props.colorMode && !colorMode?.forced) {
-    groups.push({
-      id: 'theme',
-      label: t('contentSearch.theme'),
-      items: [{
-        label: t('colorMode.system'),
-        icon: appConfig.ui.icons.system,
-        active: colorMode.preference === 'system',
-        onSelect: () => {
-          colorMode.preference = 'system'
-        }
-      }, {
-        label: t('colorMode.light'),
-        icon: appConfig.ui.icons.light,
-        active: colorMode.preference === 'light',
-        onSelect: () => {
-          colorMode.preference = 'light'
-        }
-      }, {
-        label: t('colorMode.dark'),
-        icon: appConfig.ui.icons.dark,
-        active: colorMode.preference === 'dark',
-        onSelect: () => {
-          colorMode.preference = 'dark'
-        }
-      }]
-    })
+  if (themeGroup.value) {
+    groups.push(themeGroup.value)
   }
 
   return groups
 })
-
-function postFilter(query: string, items: ContentSearchItem[]) {
-  // Filter only first level items if no query
-  if (!query) {
-    return items?.filter(item => item.level === 1)
-  }
-
-  return items
-}
 
 function onSelect(item: ContentSearchItem) {
   if (item.disabled) {
@@ -285,6 +311,7 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
+          :debounce="debounce"
           :ui="transformUI(omit(ui, ['modal']), props.ui)"
           @update:model-value="onSelect"
           @update:open="open = $event"

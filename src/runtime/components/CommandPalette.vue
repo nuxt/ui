@@ -156,6 +156,11 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
     estimateSize?: number
   }
   /**
+   * Debounce time in milliseconds for search input to improve performance with large datasets.
+   * @defaultValue 0
+   */
+  debounce?: number
+  /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
@@ -196,10 +201,10 @@ export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPalett
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
-import { computed, ref, useTemplateRef, toRef } from 'vue'
+import { computed, ref, useTemplateRef, toRef, markRaw } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { reactivePick, createReusableTemplate, refDebounced } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -226,12 +231,14 @@ const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   back: true,
   preserveGroupOrder: false,
   virtualize: false,
-  highlightOnHover: true
+  highlightOnHover: true,
+  debounce: 0
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<G, T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
+const debouncedSearchTerm = props.debounce > 0 ? refDebounced(searchTerm, props.debounce) : searchTerm
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
@@ -286,28 +293,37 @@ const items = computed(() => groups.value?.filter((group) => {
     return false
   }
   return true
-})?.flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || [])
+})?.flatMap(group => group.items?.map(item => markRaw({ ...item, group: group.id })) || []) || [])
 
-const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
-
-function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
-  if (group?.postFilter && typeof group.postFilter === 'function') {
-    items = group.postFilter(searchTerm.value, items)
-  }
-
-  return {
-    ...group,
-    items: items.slice(0, fuse.value.resultLimit).map((item) => {
-      return {
-        ...item,
-        labelHtml: highlight<T>(item, searchTerm.value, props.labelKey),
-        suffixHtml: highlight<T>(item, searchTerm.value, undefined, [props.labelKey])
-      }
-    })
-  }
-}
+const { results: fuseResults } = useFuse<typeof items.value[number]>(debouncedSearchTerm, items, fuse)
 
 const filteredGroups = computed(() => {
+  // Extract reactive values once to minimize reactivity tracking
+  const searchTerm = debouncedSearchTerm.value
+  const labelKey = props.labelKey
+  const resultLimit = fuse.value.resultLimit
+  const currentGroups = groups.value
+
+  function processGroupItems(group: G, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
+    let processedItems = items
+
+    if (group?.postFilter && typeof group.postFilter === 'function') {
+      processedItems = group.postFilter(searchTerm, processedItems)
+    }
+
+    return {
+      ...group,
+      items: processedItems.slice(0, resultLimit).map((item) => {
+        // Use markRaw to prevent deep reactivity tracking on item properties
+        return markRaw({
+          ...item,
+          labelHtml: highlight<T>(item, searchTerm, labelKey),
+          suffixHtml: highlight<T>(item, searchTerm, undefined, [labelKey])
+        })
+      })
+    }
+  }
+
   const groupsById = fuseResults.value.reduce((acc, result) => {
     const { item, matches } = result
     if (!item.group) {
@@ -315,15 +331,16 @@ const filteredGroups = computed(() => {
     }
 
     acc[item.group] ||= []
-    acc[item.group]?.push({ ...item, matches })
+    // Use markRaw to prevent deep tracking during reduce
+    acc[item.group]?.push(markRaw({ ...item, matches }))
 
     return acc
   }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)
 
   if (props.preserveGroupOrder) {
-    const processedGroups: Array<ReturnType<typeof getGroupWithItems>> = []
+    const processedGroups: Array<ReturnType<typeof processGroupItems>> = []
 
-    for (const group of groups.value || []) {
+    for (const group of currentGroups || []) {
       if (!group.items?.length) {
         continue
       }
@@ -333,7 +350,7 @@ const filteredGroups = computed(() => {
         : groupsById[group.id]
 
       if (items?.length) {
-        processedGroups.push(getGroupWithItems(group, items))
+        processedGroups.push(processGroupItems(group, items))
       }
     }
 
@@ -341,18 +358,18 @@ const filteredGroups = computed(() => {
   }
 
   const fuseGroups = Object.entries(groupsById).map(([id, items]) => {
-    const group = groups.value?.find(group => group.id === id)
+    const group = currentGroups?.find(group => group.id === id)
     if (!group) {
       return
     }
 
-    return getGroupWithItems(group, items)
+    return processGroupItems(group, items)
   }).filter(group => !!group)
 
-  const nonFuseGroups = groups.value
+  const nonFuseGroups = currentGroups
     ?.map((group, index) => ({ ...group, index }))
     ?.filter(group => group.ignoreFilter && group.items?.length)
-    ?.map(group => ({ ...getGroupWithItems(group, group.items || []), index: group.index })) || []
+    ?.map(group => ({ ...processGroupItems(group, group.items || []), index: group.index })) || []
 
   return nonFuseGroups.reduce((acc, group) => {
     acc.splice(group.index, 0, group)
@@ -554,8 +571,8 @@ function onSelect(e: Event, item: T) {
       </div>
 
       <div v-else :class="ui.empty({ class: props.ui?.empty })">
-        <slot name="empty" :search-term="searchTerm">
-          {{ searchTerm ? t('commandPalette.noMatch', { searchTerm }) : t('commandPalette.noData') }}
+        <slot name="empty" :search-term="debouncedSearchTerm">
+          {{ debouncedSearchTerm ? t('commandPalette.noMatch', { searchTerm: debouncedSearchTerm }) : t('commandPalette.noData') }}
         </slot>
       </div>
     </ListboxContent>
