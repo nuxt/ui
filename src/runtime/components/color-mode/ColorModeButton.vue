@@ -27,9 +27,6 @@ const props = withDefaults(defineProps<ColorModeButtonProps>(), {
   color: 'neutral',
   variant: 'ghost'
 })
-defineSlots<{
-  fallback(props?: {}): any
-}>()
 
 const { t } = useLocale()
 const colorMode = useColorMode()
