@@ -31,6 +31,7 @@ const components = [
   'error',
   'field-group',
   'file-upload',
+  'filters',
   'footer',
   'form-field',
   'form',
