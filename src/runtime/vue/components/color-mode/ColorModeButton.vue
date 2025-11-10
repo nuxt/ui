@@ -48,10 +48,14 @@ const isDark = computed({
   <UButton
     v-bind="{
       ...buttonProps,
-      'icon': props.icon || (isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light),
       'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
       ...$attrs
     }"
     @click="isDark = !isDark"
-  />
+  >
+    <template #leading="{ ui }">
+      <UIcon :class="ui.leadingIcon({ class: props.ui?.trailingIcon, active })" class="hidden dark:inline" :name="appConfig.ui.icons.dark" />
+      <UIcon :class="ui.leadingIcon({ class: props.ui?.trailingIcon, active })" class="inline dark:hidden" :name="appConfig.ui.icons.light" />
+    </template>
+  </UButton>
 </template>
