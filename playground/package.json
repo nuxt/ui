@@ -9,8 +9,8 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.72",
-    "@iconify-json/simple-icons": "^1.2.57",
+    "@iconify-json/lucide": "^1.2.73",
+    "@iconify-json/simple-icons": "^1.2.58",
     "@internationalized/date": "^3.10.0",
     "@nuxt/ui": "workspace:*",
     "@nuxthub/core": "^0.9.0",
@@ -20,7 +20,7 @@
   "devDependencies": {
     "typescript": "^5.8.3",
     "vue-tsc": "^3.1.3",
-    "wrangler": "^4.45.4"
+    "wrangler": "^4.46.0"
   },
   "resolutions": {
     "unimport": "4.1.1"
