@@ -142,7 +142,7 @@ const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
     includeMatches: true
   }
-}))
+} as UseFuseOptions<T>))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })({
   fullscreen: props.fullscreen
