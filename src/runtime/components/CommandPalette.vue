@@ -290,33 +290,29 @@ const items = computed(() => groups.value?.filter((group) => {
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
 
-// Throttle fuseResults to batch multiple updates within the same frame (16ms)
-const throttledFuseResults = refThrottled(fuseResults, 16)
+const throttledFuseResults = refThrottled(fuseResults, 16, true)
+
+function processGroupItems(group: G, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
+  let processedItems = items
+
+  if (group?.postFilter && typeof group.postFilter === 'function') {
+    processedItems = group.postFilter(searchTerm.value, processedItems)
+  }
+
+  return {
+    ...group,
+    items: processedItems.slice(0, fuse.value.resultLimit).map((item) => {
+      return {
+        ...item,
+        labelHtml: highlight<T>(item, searchTerm.value, props.labelKey),
+        suffixHtml: highlight<T>(item, searchTerm.value, undefined, [props.labelKey])
+      }
+    })
+  }
+}
 
 const filteredGroups = computed(() => {
-  // Extract reactive values once to minimize reactivity tracking
-  const labelKey = props.labelKey
-  const resultLimit = fuse.value.resultLimit
   const currentGroups = groups.value
-
-  function processGroupItems(group: G, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
-    let processedItems = items
-
-    if (group?.postFilter && typeof group.postFilter === 'function') {
-      processedItems = group.postFilter(searchTerm.value, processedItems)
-    }
-
-    return {
-      ...group,
-      items: processedItems.slice(0, resultLimit).map((item) => {
-        return {
-          ...item,
-          labelHtml: highlight<T>(item, searchTerm.value, labelKey),
-          suffixHtml: highlight<T>(item, searchTerm.value, undefined, [labelKey])
-        }
-      })
-    }
-  }
 
   const groupsById = throttledFuseResults.value.reduce((acc, result) => {
     const { item, matches } = result
