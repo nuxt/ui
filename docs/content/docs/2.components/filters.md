@@ -774,7 +774,7 @@ props:
       label: 'Score'
       type: 'number'
       validation: (value) => {
-        if (typeof value !== 'number') {
+        if (!/^\d+(\.\d+)?$/.test(String(value))) {
           return 'Score must be a number'
         }
         if (value < 0) {
@@ -889,27 +889,6 @@ The component supports two visual variants:
 - `outline` (default): Visible borders
 - `solid`: Colored background without borders
 
-::component-code
----
-collapse: true
-class: '!py-4'
-ignore:
-  - filters
-  - fields
-items:
-  variant:
-    - outline
-    - solid
-props:
-  variant: 'outline'
-  filters: []
-  fields:
-    - key: 'name'
-      label: 'Name'
-      type: 'text'
----
-::
-
 ### Sizes
 
 Three sizes are available:
@@ -918,90 +897,10 @@ Three sizes are available:
 - `md` (default): Medium size
 - `lg`: Large size
 
-::component-code
----
-collapse: true
-class: '!py-4'
-ignore:
-  - filters
-  - fields
-items:
-  size:
-    - sm
-    - md
-    - lg
-props:
-  size: 'md'
-  filters: []
-  fields:
-    - key: 'name'
-      label: 'Name'
-      type: 'text'
----
-::
-
 ### Radius
 
 - `md` (default): Rounded borders
 - `full`: Fully rounded borders
-
-::component-code
----
-collapse: true
-class: '!py-4'
-ignore:
-  - filters
-  - fields
-items:
-  radius:
-    - md
-    - full
-props:
-  radius: 'md'
-  filters: []
-  fields:
-    - key: 'name'
-      label: 'Name'
-      type: 'text'
----
-::
-
-### Custom Add Button
-
-You can completely customize the add button:
-
-::component-code
----
-collapse: true
-class: '!py-4'
-ignore:
-  - filters
-  - fields
-props:
-  filters: []
-  fields:
-    - key: 'name'
-      label: 'Name'
-      type: 'text'
-  addButtonText: 'Add filter'
-  addButtonIcon: 'i-lucide-plus'
-  addButtonClassName: 'custom-class'
----
-::
-
-Or use a custom component:
-
-::component-example
----
-prettier: true
-collapse: true
-name: 'filters-custom-button-example'
-highlights:
-  - 85
-  - 95
-class: '!py-4'
----
-::
 
 ### Multiple Filters per Field
 
