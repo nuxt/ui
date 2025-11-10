@@ -195,150 +195,221 @@ function createServer() {
 
   // TOOLS
 
-  server.tool(
+  server.registerTool(
     'list_components',
-    'Lists all available Nuxt UI components with their categories and basic information. Returns: A JSON array of objects containing name, title, description, path and category.',
-    {},
+    {
+      title: 'List Components',
+      description: 'Lists all available Nuxt UI components with their categories and basic information'
+    },
     async () => {
       const result = await $fetch('/api/mcp/list-components')
-      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }]
+      }
     }
   )
 
-  server.tool(
+  server.registerTool(
     'list_composables',
-    'Lists all available Nuxt UI composables with their categories and basic information. Returns: A JSON array of objects containing name, title, description and path.',
-    {},
+    {
+      title: 'List Composables',
+      description: 'Lists all available Nuxt UI composables with their categories and basic information'
+    },
     async () => {
       const result = await $fetch('/api/mcp/list-composables')
-      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }]
+      }
     }
   )
 
-  server.tool(
+  server.registerTool(
     'get_component',
-    'Retrieves Nuxt UI component documentation and details. Parameters: componentName (string, required) - the component name in PascalCase. Returns: A JSON object containing name, title, description, category, documentation, and documentation_url.',
     {
-      componentName: z.string().describe('The name of the component (PascalCase)')
+      title: 'Get Component',
+      description: 'Retrieves Nuxt UI component documentation and details',
+      inputSchema: {
+        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        componentName: z.string().describe('The name of the component (PascalCase)')
+      }
     },
     async (params) => {
       const result = await $fetch('/api/mcp/get-component', { query: params })
-      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }]
+      }
     }
   )
 
-  server.tool(
+  server.registerTool(
     'get_component_metadata',
-    'Retrieves detailed metadata for a Nuxt UI component including props, slots, and events. Parameters: componentName (string, required) - the component name in PascalCase. Returns: A JSON object containing component metadata with pascalName, kebabName, props array, slots array, and emits array.',
     {
-      componentName: z.string().describe('The name of the component (PascalCase)')
+      title: 'Get Component Metadata',
+      description: 'Retrieves detailed metadata for a Nuxt UI component including props, slots, and events',
+      inputSchema: {
+        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        componentName: z.string().describe('The name of the component (PascalCase)')
+      }
     },
     async (params) => {
       const result = await $fetch('/api/mcp/get-component-metadata', { query: params })
-      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }]
+      }
     }
   )
 
-  server.tool(
+  server.registerTool(
     'list_templates',
-    'Lists all available Nuxt UI templates with optional category filtering. Parameters: category (string, optional) - filter by template category. Returns: A JSON object containing templates array, categories array, and total count.',
     {
-      category: z.string().optional().describe('Filter templates by category')
+      title: 'List Templates',
+      description: 'Lists all available Nuxt UI templates with optional category filtering',
+      inputSchema: {
+        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        category: z.string().optional().describe('Filter templates by category')
+      }
     },
     async (params) => {
       const result = await $fetch('/api/mcp/list-templates', { query: params })
-      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
+        structuredContent: result as any
+      }
     }
   )
 
-  server.tool(
+  server.registerTool(
     'get_template',
-    'Retrieves template details and setup instructions. Parameters: templateName (string, required) - the template name identifier. Returns: A JSON object containing name, description, setup_instructions, dependencies array, and optional preview_url and repository.',
     {
-      templateName: z.string().describe('The name of the template')
+      title: 'Get Template',
+      description: 'Retrieves template details and setup instructions',
+      inputSchema: {
+        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        templateName: z.string().describe('The name of the template')
+      }
     },
     async (params) => {
       const result = await $fetch('/api/mcp/get-template', { query: params })
-      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
+        structuredContent: result as any
+      }
     }
   )
 
-  server.tool(
+  server.registerTool(
     'get_documentation_page',
-    'Retrieves documentation page content by URL path. Parameters: path (string, required) - the documentation path starting with /docs/. Returns: A JSON object containing title, content, path, url, and optional metadata.',
     {
-      path: z.string().describe('The path to the content page (e.g., /docs/components/button)')
+      title: 'Get Documentation Page',
+      description: 'Retrieves documentation page content by URL path',
+      inputSchema: {
+        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        path: z.string().describe('The path to the content page (e.g., /docs/components/button)')
+      }
     },
     async (params) => {
       const result = await $fetch<string>(`/raw${params.path}.md`)
-      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }]
+      }
     }
   )
 
-  server.tool(
+  server.registerTool(
     'list_documentation_pages',
-    'Lists all documentation pages. Returns: A JSON array of objects containing title, description, and path.',
-    {},
+    {
+      title: 'List Documentation Pages',
+      description: 'Lists all documentation pages'
+    },
     async () => {
       const result = await $fetch('/api/mcp/list-documentation-pages')
-      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }]
+      }
     }
   )
 
-  server.tool(
+  server.registerTool(
     'list_getting_started_guides',
-    'Lists all getting started guides and installation instructions. Returns: A JSON object containing guides array, categories array, and total count.',
-    {},
+    {
+      title: 'List Getting Started Guides',
+      description: 'Lists all getting started guides and installation instructions'
+    },
     async () => {
       const result = await $fetch('/api/mcp/list-getting-started-guides')
-      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }]
+      }
     }
   )
 
-  server.tool(
+  server.registerTool(
     'get_migration_guide',
-    'Retrieves version-specific migration guides and upgrade instructions. Parameters: version (enum[v3,v4], required) - the migration version. Returns: A JSON object containing version, title, content, breaking_changes array, and migration_steps array.',
     {
-      version: z.enum(['v3', 'v4']).describe('The migration version (e.g., v4, v3)')
+      title: 'Get Migration Guide',
+      description: 'Retrieves version-specific migration guides and upgrade instructions',
+      inputSchema: {
+        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        version: z.enum(['v3', 'v4']).describe('The migration version (e.g., v4, v3)')
+      }
     },
     async (params) => {
       const result = await $fetch('/api/mcp/get-migration-guide', { query: params })
-      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }]
+      }
     }
   )
 
-  server.tool(
+  server.registerTool(
     'list_examples',
-    'Lists all available UI examples and code demonstrations. Returns: A JSON object containing examples array, categories array, and total count.',
-    {},
+    {
+      title: 'List Examples',
+      description: 'Lists all available UI examples and code demonstrations'
+    },
     async () => {
       const result = await $fetch('/api/mcp/list-examples')
-      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }]
+      }
     }
   )
 
-  server.tool(
+  server.registerTool(
     'get_example',
-    'Retrieves specific UI example implementation code and details. Parameters: exampleName (string, required) - the example name in PascalCase. Returns: A JSON object containing name, code, description, category, and optional dependencies array.',
     {
-      exampleName: z.string().describe('The name of the example (PascalCase)')
+      title: 'Get Example',
+      description: 'Retrieves specific UI example implementation code and details',
+      inputSchema: {
+        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        exampleName: z.string().describe('The name of the example (PascalCase)')
+      }
     },
     async ({ exampleName }) => {
       const result = await $fetch(`/api/component-example/${exampleName}.json`)
-      return { content: [{ type: 'text', text: result.code }] }
+      return {
+        content: [{ type: 'text', text: result.code }]
+      }
     }
   )
 
-  server.tool(
+  server.registerTool(
     'search_components_by_category',
-    'Searches components by category or text filter. Parameters: category (string, optional) - filter by category, search (string, optional) - search term for name/description. Returns: A JSON object containing filtered components array, total count, and applied filters.',
     {
-      category: z.string().optional().describe('Filter components by category'),
-      search: z.string().optional().describe('Search term to filter components by name or description')
+      title: 'Search Components by Category',
+      description: 'Searches components by category or text filter',
+      inputSchema: {
+        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        category: z.string().optional().describe('Filter components by category'),
+        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        search: z.string().optional().describe('Search term to filter components by name or description')
+      }
     },
     async (params) => {
       const result = await $fetch('/api/mcp/search-components-by-category', { query: params })
-      return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }]
+      }
     }
   )
 
