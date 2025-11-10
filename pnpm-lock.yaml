@@ -1471,8 +1471,8 @@ packages:
   '@nuxtjs/color-mode@3.5.2':
     resolution: {integrity: sha512-cC6RfgZh3guHBMLLjrBB2Uti5eUoGM9KyauOaYS9ETmxNWBMTvpgjvSiSJp1OFljIXPIqVTJ3xtJpSNZiO3ZaA==}
 
-  '@nuxtjs/mdc@0.18.1':
-    resolution: {integrity: sha512-0ZYO4PGZoHjRsn1tbQwUfpqG7uWs58EDiclAmajEf7mdGKvv2hgUsWCpGFGlWGChfcEJ35lqyi/tX7Sopr+sKw==}
+  '@nuxtjs/mdc@0.18.2':
+    resolution: {integrity: sha512-pdeWd2/oOPriPVa1F6QNoK4fZCp/b4sxEVoouXJJCETCBIFSNS4OOtdRTY1ATLM1Gr+6ZvNyNPABvaaUEGC4Lw==}
 
   '@nuxtjs/plausible@2.0.1':
     resolution: {integrity: sha512-Edr7oFIeZ9Og2lS21NhC3MRgcR7X9H1Hyjve8EsM2CycJGBlCcGKHs0+vi4KpbCVi33VlTXUUYNRPtGyeUX6Fw==}
@@ -8469,7 +8469,7 @@ snapshots:
   '@nuxt/content@3.8.0(better-sqlite3@12.4.1)(magicast@0.3.5)(valibot@1.1.0(typescript@5.8.3))':
     dependencies:
       '@nuxt/kit': 4.2.1(magicast@0.3.5)
-      '@nuxtjs/mdc': 0.18.1(magicast@0.3.5)
+      '@nuxtjs/mdc': 0.18.2(magicast@0.3.5)
       '@shikijs/langs': 3.14.0
       '@sqlite.org/sqlite-wasm': 3.50.4-build1
       '@standard-schema/spec': 1.0.0
@@ -8530,7 +8530,7 @@ snapshots:
   '@nuxt/content@3.8.0(better-sqlite3@12.4.1)(magicast@0.5.1)(valibot@1.1.0(typescript@5.8.3))':
     dependencies:
       '@nuxt/kit': 4.2.1(magicast@0.5.1)
-      '@nuxtjs/mdc': 0.18.1(magicast@0.5.1)
+      '@nuxtjs/mdc': 0.18.2(magicast@0.5.1)
       '@shikijs/langs': 3.14.0
       '@sqlite.org/sqlite-wasm': 3.50.4-build1
       '@standard-schema/spec': 1.0.0
@@ -9221,7 +9221,7 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@nuxtjs/mdc@0.18.1(magicast@0.3.5)':
+  '@nuxtjs/mdc@0.18.2(magicast@0.3.5)':
     dependencies:
       '@nuxt/kit': 4.2.1(magicast@0.3.5)
       '@shikijs/core': 3.14.0
@@ -9270,7 +9270,7 @@ snapshots:
       - magicast
       - supports-color
 
-  '@nuxtjs/mdc@0.18.1(magicast@0.5.1)':
+  '@nuxtjs/mdc@0.18.2(magicast@0.5.1)':
     dependencies:
       '@nuxt/kit': 4.2.1(magicast@0.5.1)
       '@shikijs/core': 3.14.0

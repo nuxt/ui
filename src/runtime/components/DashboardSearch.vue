@@ -88,8 +88,7 @@ const props = withDefaults(defineProps<DashboardSearchProps>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
-  fullscreen: false,
-  debounce: 0
+  fullscreen: false
 })
 const slots = defineSlots<DashboardSearchSlots>()
 
