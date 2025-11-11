@@ -16,7 +16,7 @@ export interface EditorEmojiMenuItem {
   [key: string]: any
 }
 
-export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmojiMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit' | 'options'>> {
+export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmojiMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit' | 'options' | 'appendTo'>> {
   class?: any
   ui?: EditorEmojiMenu['slots']
 }
@@ -65,6 +65,7 @@ onMounted(async () => {
     filter: filterEmojis,
     limit: props.limit,
     options: props.options,
+    appendTo: props.appendTo,
     ui,
     onSelect: (editor, range, item) => {
       if (!item.emoji) return

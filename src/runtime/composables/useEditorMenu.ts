@@ -53,6 +53,15 @@ export interface EditorMenuOptions<T = any> {
    */
   options?: FloatingUIOptions
   /**
+   * The DOM element to append the menu to. Default is the editor's parent element.
+   *
+   * Sometimes the menu needs to be appended to a different DOM context due to accessibility, clipping, or z-index issues.
+   *
+   * @type {HTMLElement}
+   * @default editor.view.dom.parentElement
+   */
+  appendTo?: HTMLElement | (() => HTMLElement)
+  /**
    * UI styles computed ref
    */
   ui: ComputedRef<any>
@@ -70,6 +79,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   let globalKeyHandler: ((e: KeyboardEvent) => void) | null = null
   let triggerClientRect: (() => DOMRect | null) | null = null
   let handleHover: ((index: number) => void) | null = null
+  let scrollHandler: (() => void) | null = null
 
   // Helper function to cleanup menu with close animation
   const cleanupMenu = () => {
@@ -94,6 +104,10 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
       if (globalKeyHandler) {
         document.removeEventListener('keydown', globalKeyHandler, true)
         globalKeyHandler = null
+      }
+      if (scrollHandler) {
+        window.removeEventListener('scroll', scrollHandler, true)
+        scrollHandler = null
       }
       if (element && handleMouseDown) {
         element.removeEventListener('mousedown', handleMouseDown)
@@ -387,6 +401,14 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           }
           document.addEventListener('keydown', globalKeyHandler, true) // Use capture phase
 
+          // Add scroll listener to update position on scroll
+          scrollHandler = () => {
+            if (element) {
+              updatePosition(element)
+            }
+          }
+          window.addEventListener('scroll', scrollHandler, true)
+
           // Define onHover handler that updates both state and renderer
           handleHover = (index: number) => {
             selectedIndex.value = index
@@ -423,7 +445,9 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           }
           element.addEventListener('mousedown', handleMouseDown)
 
-          document.body.appendChild(element)
+          // Attach to appendTo or editor's parent element
+          const appendToElement = typeof options.appendTo === 'function' ? options.appendTo() : options.appendTo
+          ;(appendToElement ?? suggestionProps.editor.view.dom.parentElement)?.appendChild(element)
           if (renderer.element) {
             element.appendChild(renderer.element)
           }
@@ -466,6 +490,16 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
               document.addEventListener('keydown', globalKeyHandler, true)
             }
 
+            // Re-add scroll listener
+            if (!scrollHandler) {
+              scrollHandler = () => {
+                if (element) {
+                  updatePosition(element)
+                }
+              }
+              window.addEventListener('scroll', scrollHandler, true)
+            }
+
             // Define onHover handler that updates both state and renderer
             handleHover = (index: number) => {
               selectedIndex.value = index
@@ -502,7 +536,9 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
             }
             element.addEventListener('mousedown', handleMouseDown)
 
-            document.body.appendChild(element)
+            // Attach to appendTo or editor's parent element
+            const appendToElement = typeof options.appendTo === 'function' ? options.appendTo() : options.appendTo
+            ;(appendToElement ?? suggestionProps.editor.view.dom.parentElement)?.appendChild(element)
             if (renderer.element) {
               element.appendChild(renderer.element)
             }
@@ -539,6 +575,10 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     if (globalKeyHandler) {
       document.removeEventListener('keydown', globalKeyHandler, true)
       globalKeyHandler = null
+    }
+    if (scrollHandler) {
+      window.removeEventListener('scroll', scrollHandler, true)
+      scrollHandler = null
     }
     if (element && handleMouseDown) {
       element.removeEventListener('mousedown', handleMouseDown)
