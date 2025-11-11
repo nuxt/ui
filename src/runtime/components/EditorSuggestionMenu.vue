@@ -38,7 +38,7 @@ export type EditorSuggestionMenuItem = EditorSuggestionMenuLabelItem | EditorSug
 
 export type EditorSuggestionMenuHandlers = Record<string, EditorHandler>
 
-export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit'>> {
+export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit' | 'options'>> {
   /**
    * Custom item handlers to override or extend the default handlers.
    */
@@ -88,6 +88,7 @@ onMounted(async () => {
     pluginKey: props.pluginKey,
     items: props.items,
     limit: props.limit,
+    options: props.options,
     ui,
     onSelect: (editor, range, item) => {
       // Skip if it's a label (non-interactive)

@@ -1,10 +1,15 @@
-import { ref, h, computed, type Ref, type ComputedRef } from 'vue'
-import { computePosition, flip, shift } from '@floating-ui/dom'
+import { ref, h, computed } from 'vue'
+import type { Ref, ComputedRef } from 'vue'
+import { computePosition } from '@floating-ui/dom'
+import type { Strategy, Placement } from '@floating-ui/dom'
 import type { Editor } from '@tiptap/vue-3'
 import { VueRenderer } from '@tiptap/vue-3'
 import type { SuggestionProps } from '@tiptap/suggestion'
 import Suggestion from '@tiptap/suggestion'
 import { PluginKey } from '@tiptap/pm/state'
+import { defu } from 'defu'
+import type { FloatingUIOptions } from '../utils/editor'
+import { buildFloatingUIMiddleware } from '../utils/editor'
 import { isArrayOfArray } from '../utils'
 
 export interface EditorMenuOptions<T = any> {
@@ -41,6 +46,12 @@ export interface EditorMenuOptions<T = any> {
    * Function to render each menu item
    */
   renderItem: (item: T, ui: ComputedRef<any>) => any
+  /**
+   * The options for positioning the menu. Those are passed to Floating UI and include options for the placement, offset, flip, shift, size, autoPlacement, hide, and inline middleware.
+   * @defaultValue { strategy: 'absolute', placement: 'bottom-start', offset: 8 }
+   * @see https://floating-ui.com/docs/computePosition#options
+   */
+  options?: FloatingUIOptions
   /**
    * UI styles computed ref
    */
@@ -143,6 +154,21 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     })
   })
 
+  // Build middleware array based on options (following BubbleMenu pattern)
+  const floatingUIOptions = defu(options.options, {
+    strategy: 'absolute' as Strategy,
+    placement: 'bottom-start' as Placement,
+    offset: 8,
+    flip: {},
+    shift: {},
+    size: false,
+    autoPlacement: false,
+    hide: false,
+    inline: false
+  })
+
+  const middleware = buildFloatingUIMiddleware(floatingUIOptions)
+
   // Helper function to update menu position using floating-ui
   const updatePosition = (element: HTMLElement) => {
     if (!triggerClientRect) return
@@ -155,9 +181,9 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     }
 
     computePosition(virtualElement, element, {
-      placement: 'bottom-start',
-      strategy: 'absolute',
-      middleware: [shift(), flip()]
+      placement: floatingUIOptions.placement,
+      strategy: floatingUIOptions.strategy,
+      middleware
     }).then(({ x, y, strategy }) => {
       element.style.width = 'max-content'
       element.style.position = strategy

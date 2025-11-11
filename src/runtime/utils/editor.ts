@@ -1,4 +1,18 @@
 import type { Editor, Mark } from '@tiptap/vue-3'
+import { flip, shift, offset, size, autoPlacement, hide, inline } from '@floating-ui/dom'
+import type { Middleware, Strategy, Placement, OffsetOptions, FlipOptions, ShiftOptions, SizeOptions, AutoPlacementOptions, HideOptions, InlineOptions } from '@floating-ui/dom'
+
+export interface FloatingUIOptions {
+  strategy?: Strategy
+  placement?: Placement
+  offset?: OffsetOptions | boolean
+  flip?: FlipOptions | boolean
+  shift?: ShiftOptions | boolean
+  size?: SizeOptions | boolean
+  autoPlacement?: AutoPlacementOptions | boolean
+  hide?: HideOptions | boolean
+  inline?: InlineOptions | boolean
+}
 
 export interface EditorHandler {
   canExecute: (editor: Editor, cmd?: any) => boolean
@@ -99,6 +113,40 @@ export function createHeadingHandler() {
     isActive: (editor: Editor, cmd: any) => editor.isActive('heading', { level: cmd.level }),
     isDisabled: undefined
   }
+}
+
+export function buildFloatingUIMiddleware(options: FloatingUIOptions): Middleware[] {
+  const middleware: Middleware[] = []
+
+  if (options.flip) {
+    middleware.push(flip(typeof options.flip !== 'boolean' ? options.flip : undefined))
+  }
+
+  if (options.shift) {
+    middleware.push(shift(typeof options.shift !== 'boolean' ? options.shift : undefined))
+  }
+
+  if (options.offset) {
+    middleware.push(offset(typeof options.offset !== 'boolean' ? options.offset : undefined))
+  }
+
+  if (options.size) {
+    middleware.push(size(typeof options.size !== 'boolean' ? options.size : undefined))
+  }
+
+  if (options.autoPlacement) {
+    middleware.push(autoPlacement(typeof options.autoPlacement !== 'boolean' ? options.autoPlacement : undefined))
+  }
+
+  if (options.hide) {
+    middleware.push(hide(typeof options.hide !== 'boolean' ? options.hide : undefined))
+  }
+
+  if (options.inline) {
+    middleware.push(inline(typeof options.inline !== 'boolean' ? options.inline : undefined))
+  }
+
+  return middleware
 }
 
 export function createHandlers(): Record<EditorActionItem['kind'], EditorHandler> {

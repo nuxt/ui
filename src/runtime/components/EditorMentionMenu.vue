@@ -21,7 +21,7 @@ export interface EditorMentionMenuItem {
   [key: string]: any
 }
 
-export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = EditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit'>> {
+export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = EditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit' | 'options'>> {
   class?: any
   ui?: EditorMentionMenu['slots']
 }
@@ -62,6 +62,7 @@ onMounted(async () => {
     pluginKey: props.pluginKey,
     items: props.items,
     limit: props.limit,
+    options: props.options,
     ui,
     onSelect: (editor, range, item) => {
       // Delete the trigger character and query text, then insert the mention

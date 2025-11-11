@@ -1,25 +1,14 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { AutoPlacementOptions, FlipOptions, HideOptions, InlineOptions, Middleware, OffsetOptions, Placement, ShiftOptions, SizeOptions, Strategy } from '@floating-ui/dom'
+import type { Placement, Strategy } from '@floating-ui/dom'
 import type { Editor as TiptapEditor } from '@tiptap/vue-3'
 import type { DragHandlePluginProps } from '@tiptap/extension-drag-handle'
 import theme from '#build/ui/editor-drag-handle'
 import type { ButtonProps, IconProps } from '../types'
+import type { FloatingUIOptions } from '../utils/editor'
 import type { ComponentConfig } from '../types/tv'
 
 type EditorDragHandle = ComponentConfig<typeof theme, AppConfig, 'editorDragHandle'>
-
-type EditorDragHandleOptions = {
-  strategy?: Strategy
-  placement?: Placement
-  offset?: OffsetOptions | boolean
-  flip?: FlipOptions | boolean
-  shift?: ShiftOptions | boolean
-  size?: SizeOptions | boolean
-  autoPlacement?: AutoPlacementOptions | boolean
-  hide?: HideOptions | boolean
-  inline?: InlineOptions | boolean
-}
 
 export interface EditorDragHandleProps extends Omit<DragHandlePluginProps, 'editor' | 'element' | 'onNodeChange' | 'computePositionConfig'>, Omit<ButtonProps, 'icon' | 'color' | 'variant'> {
   /**
@@ -37,10 +26,10 @@ export interface EditorDragHandleProps extends Omit<DragHandlePluginProps, 'edit
   variant?: ButtonProps['variant']
   /**
    * The options for positioning the drag handle. Those are passed to Floating UI and include options for the placement, offset, flip, shift, size, autoPlacement, hide, and inline middleware.
-   * @defaultValue { strategy: 'absolute', placement: 'left-start', offset: 8 }
+   * @defaultValue { strategy: 'absolute', placement: 'left-start' }
    * @see https://floating-ui.com/docs/computePosition#options
    */
-  options?: EditorDragHandleOptions
+  options?: FloatingUIOptions
   editor: TiptapEditor
   ui?: EditorDragHandle['slots'] & ButtonProps['ui']
 }
@@ -52,12 +41,12 @@ export interface EditorDragHandleSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { autoPlacement, flip, hide, inline, offset, shift, size } from '@floating-ui/dom'
 import DragHandle from '@tiptap/extension-drag-handle-vue-3'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit, reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
+import { buildFloatingUIMiddleware } from '../utils/editor'
 import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
@@ -98,42 +87,16 @@ const floatingUIOptions = computed(() => defu(props.options, {
       alignmentAxis: (blockHeight - handleHeight) / 2,
       mainAxis: 8
     }
-  }
-} as EditorDragHandleOptions))
+  },
+  flip: {},
+  shift: {},
+  size: false,
+  autoPlacement: false,
+  hide: false,
+  inline: false
+} as FloatingUIOptions))
 
-const middleware = computed(() => {
-  const result: Middleware[] = []
-
-  if (floatingUIOptions.value.flip) {
-    result.push(flip(typeof floatingUIOptions.value.flip !== 'boolean' ? floatingUIOptions.value.flip : undefined))
-  }
-
-  if (floatingUIOptions.value.shift) {
-    result.push(shift(typeof floatingUIOptions.value.shift !== 'boolean' ? floatingUIOptions.value.shift : undefined))
-  }
-
-  if (floatingUIOptions.value.offset) {
-    result.push(offset(typeof floatingUIOptions.value.offset !== 'boolean' ? floatingUIOptions.value.offset : undefined))
-  }
-
-  if (floatingUIOptions.value.size) {
-    result.push(size(typeof floatingUIOptions.value.size !== 'boolean' ? floatingUIOptions.value.size : undefined))
-  }
-
-  if (floatingUIOptions.value.autoPlacement) {
-    result.push(autoPlacement(typeof floatingUIOptions.value.autoPlacement !== 'boolean' ? floatingUIOptions.value.autoPlacement : undefined))
-  }
-
-  if (floatingUIOptions.value.hide) {
-    result.push(hide(typeof floatingUIOptions.value.hide !== 'boolean' ? floatingUIOptions.value.hide : undefined))
-  }
-
-  if (floatingUIOptions.value.inline) {
-    result.push(inline(typeof floatingUIOptions.value.inline !== 'boolean' ? floatingUIOptions.value.inline : undefined))
-  }
-
-  return result
-})
+const middleware = computed(() => buildFloatingUIMiddleware(floatingUIOptions.value))
 
 const computePositionConfig = computed<DragHandlePluginProps['computePositionConfig']>(() => ({
   placement: floatingUIOptions.value.placement,

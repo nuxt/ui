@@ -264,7 +264,7 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
     content-type="markdown"
     placeholder="Write, type '/' for commands..."
     class="flex-1 w-full min-h-0"
-    :ui="{ content: 'max-w-2xl mx-auto' }"
+    :ui="{ content: 'max-w-2xl mx-auto relative' }"
   >
     <Navbar>
       <UEditorToolbar :editor="editor" :items="toolbarItems" />
