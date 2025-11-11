@@ -334,12 +334,16 @@ const filteredGroups = computed(() => {
         continue
       }
 
-      const items = group.ignoreFilter
-        ? group.items
-        : groupsById[group.id]
+      const items = group.ignoreFilter ? group.items : groupsById[group.id]
+      if (!items?.length) {
+        continue
+      }
 
-      if (items?.length) {
-        processedGroups.push(processGroupItems(group, items))
+      const processedGroup = processGroupItems(group, items)
+
+      // Filter out groups that become empty after postFilter
+      if (processedGroup.items?.length) {
+        processedGroups.push(processedGroup)
       }
     }
 
@@ -352,13 +356,20 @@ const filteredGroups = computed(() => {
       return
     }
 
-    return processGroupItems(group, items)
+    const processedGroup = processGroupItems(group, items)
+    // Filter out groups without items after postFilter
+    return processedGroup.items?.length ? processedGroup : undefined
   }).filter(group => !!group)
 
   const nonFuseGroups = currentGroups
     ?.map((group, index) => ({ ...group, index }))
     ?.filter(group => group.ignoreFilter && group.items?.length)
-    ?.map(group => ({ ...processGroupItems(group, group.items || []), index: group.index })) || []
+    ?.map((group) => {
+      const processedGroup = processGroupItems(group, group.items || [])
+      return { ...processedGroup, index: group.index }
+    })
+    // Filter out groups without items after postFilter
+    ?.filter(group => group.items?.length) || []
 
   return nonFuseGroups.reduce((acc, group) => {
     acc.splice(group.index, 0, group)
