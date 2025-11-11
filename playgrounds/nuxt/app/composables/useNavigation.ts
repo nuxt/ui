@@ -47,6 +47,7 @@ const components = [
   'marquee',
   'modal',
   'navigation-menu',
+  'number-counter',
   'page-anchors',
   'page-card',
   'page-cta',

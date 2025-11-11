@@ -118,6 +118,7 @@
     "@iconify/vue": "^5.0.0",
     "@internationalized/date": "^3.10.0",
     "@internationalized/number": "^3.6.5",
+    "@number-flow/vue": "^0.4.8",
     "@nuxt/fonts": "^0.12.1",
     "@nuxt/icon": "^2.1.0",
     "@nuxt/kit": "^4.2.1",
