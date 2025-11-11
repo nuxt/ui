@@ -1,0 +1,181 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NumberCounter > renders with class correctly 1`] = `
+"<number-flow-vue class="base root" batched="false" trend="(n, t) => Math.sign(t - n)" animated="true" transformtiming="[object Object]" opacitytiming="[object Object]" respectmotionpreference="true" data-allow-mismatch="" data="[object Object]"><template shadowroot="open" shadowrootmode="open">
+    <style>
+      :host {
+        display: inline-block;
+        direction: ltr;
+        white-space: nowrap;
+        line-height: var(--number-flow-char-height, 1em) !important
+      }
+
+      span {
+        display: inline-block
+      }
+
+      :host([data-will-change]) span {
+        will-change: transform
+      }
+
+      .number,
+      .digit {
+        padding: calc(var(--number-flow-mask-height, 0.25em) / 2) 0
+      }
+
+      .symbol {
+        white-space: pre
+      }
+    </style><span role="img" aria-label="NaN"><span part="left"><span class="symbol" part="symbol nan">NaN</span></span><span part="number" class="number"><span part="integer"></span><span part="fraction"></span></span><span part="right"></span></span>
+  </template><span style="font-kerning: none; display: inline-block; line-height: var(--number-flow-char-height, 1em) !important; padding: var(--number-flow-mask-height, 0.25em) 0;">NaN</span></number-flow-vue>"
+`;
+
+exports[`NumberCounter > renders with format correctly 1`] = `
+"<number-flow-vue class="base root" batched="false" trend="(n, t) => Math.sign(t - n)" animated="true" transformtiming="[object Object]" opacitytiming="[object Object]" respectmotionpreference="true" data-allow-mismatch="" data="[object Object]"><template shadowroot="open" shadowrootmode="open">
+    <style>
+      :host {
+        display: inline-block;
+        direction: ltr;
+        white-space: nowrap;
+        line-height: var(--number-flow-char-height, 1em) !important
+      }
+
+      span {
+        display: inline-block
+      }
+
+      :host([data-will-change]) span {
+        will-change: transform
+      }
+
+      .number,
+      .digit {
+        padding: calc(var(--number-flow-mask-height, 0.25em) / 2) 0
+      }
+
+      .symbol {
+        white-space: pre
+      }
+    </style><span role="img" aria-label="NaN"><span part="left"><span class="symbol" part="symbol nan">NaN</span></span><span part="number" class="number"><span part="integer"></span><span part="fraction"></span></span><span part="right"></span></span>
+  </template><span style="font-kerning: none; display: inline-block; line-height: var(--number-flow-char-height, 1em) !important; padding: var(--number-flow-mask-height, 0.25em) 0;">NaN</span></number-flow-vue>"
+`;
+
+exports[`NumberCounter > renders with prefix correctly 1`] = `
+"<number-flow-vue class="base root" batched="false" trend="(n, t) => Math.sign(t - n)" animated="true" transformtiming="[object Object]" opacitytiming="[object Object]" respectmotionpreference="true" data-allow-mismatch="" data="[object Object]"><template shadowroot="open" shadowrootmode="open">
+    <style>
+      :host {
+        display: inline-block;
+        direction: ltr;
+        white-space: nowrap;
+        line-height: var(--number-flow-char-height, 1em) !important
+      }
+
+      span {
+        display: inline-block
+      }
+
+      :host([data-will-change]) span {
+        will-change: transform
+      }
+
+      .number,
+      .digit {
+        padding: calc(var(--number-flow-mask-height, 0.25em) / 2) 0
+      }
+
+      .symbol {
+        white-space: pre
+      }
+    </style><span role="img" aria-label="$NaN"><span part="left"><span class="symbol" part="symbol prefix">$</span><span class="symbol" part="symbol nan">NaN</span></span><span part="number" class="number"><span part="integer"></span><span part="fraction"></span></span><span part="right"></span></span>
+  </template><span style="font-kerning: none; display: inline-block; line-height: var(--number-flow-char-height, 1em) !important; padding: var(--number-flow-mask-height, 0.25em) 0;">$NaN</span></number-flow-vue>"
+`;
+
+exports[`NumberCounter > renders with suffix correctly 1`] = `
+"<number-flow-vue class="base root" batched="false" trend="(n, t) => Math.sign(t - n)" animated="true" transformtiming="[object Object]" opacitytiming="[object Object]" respectmotionpreference="true" data-allow-mismatch="" data="[object Object]"><template shadowroot="open" shadowrootmode="open">
+    <style>
+      :host {
+        display: inline-block;
+        direction: ltr;
+        white-space: nowrap;
+        line-height: var(--number-flow-char-height, 1em) !important
+      }
+
+      span {
+        display: inline-block
+      }
+
+      :host([data-will-change]) span {
+        will-change: transform
+      }
+
+      .number,
+      .digit {
+        padding: calc(var(--number-flow-mask-height, 0.25em) / 2) 0
+      }
+
+      .symbol {
+        white-space: pre
+      }
+    </style><span role="img" aria-label="NaN$"><span part="left"><span class="symbol" part="symbol nan">NaN</span><span class="symbol" part="symbol suffix">$</span></span><span part="number" class="number"><span part="integer"></span><span part="fraction"></span></span><span part="right"></span></span>
+  </template><span style="font-kerning: none; display: inline-block; line-height: var(--number-flow-char-height, 1em) !important; padding: var(--number-flow-mask-height, 0.25em) 0;">NaN$</span></number-flow-vue>"
+`;
+
+exports[`NumberCounter > renders with value correctly 1`] = `
+"<number-flow-vue class="base root" batched="false" trend="(n, t) => Math.sign(t - n)" animated="true" transformtiming="[object Object]" opacitytiming="[object Object]" respectmotionpreference="true" data-allow-mismatch="" data="[object Object]"><template shadowroot="open" shadowrootmode="open">
+    <style>
+      :host {
+        display: inline-block;
+        direction: ltr;
+        white-space: nowrap;
+        line-height: var(--number-flow-char-height, 1em) !important
+      }
+
+      span {
+        display: inline-block
+      }
+
+      :host([data-will-change]) span {
+        will-change: transform
+      }
+
+      .number,
+      .digit {
+        padding: calc(var(--number-flow-mask-height, 0.25em) / 2) 0
+      }
+
+      .symbol {
+        white-space: pre
+      }
+    </style><span role="img" aria-label="1,024"><span part="left"></span><span part="number" class="number"><span part="integer"><span class="digit" part="digit integer-digit">1</span><span class="symbol" part="symbol group">,</span><span class="digit" part="digit integer-digit">0</span><span class="digit" part="digit integer-digit">2</span><span class="digit" part="digit integer-digit">4</span></span><span part="fraction"></span></span><span part="right"></span></span>
+  </template><span style="font-kerning: none; display: inline-block; line-height: var(--number-flow-char-height, 1em) !important; padding: var(--number-flow-mask-height, 0.25em) 0;">1,024</span></number-flow-vue>"
+`;
+
+exports[`NumberCounter > renders with willChange correctly 1`] = `
+"<number-flow-vue class="base root" batched="false" trend="(n, t) => Math.sign(t - n)" animated="true" transformtiming="[object Object]" opacitytiming="[object Object]" respectmotionpreference="true" data-will-change="" data-allow-mismatch="" data="[object Object]"><template shadowroot="open" shadowrootmode="open">
+    <style>
+      :host {
+        display: inline-block;
+        direction: ltr;
+        white-space: nowrap;
+        line-height: var(--number-flow-char-height, 1em) !important
+      }
+
+      span {
+        display: inline-block
+      }
+
+      :host([data-will-change]) span {
+        will-change: transform
+      }
+
+      .number,
+      .digit {
+        padding: calc(var(--number-flow-mask-height, 0.25em) / 2) 0
+      }
+
+      .symbol {
+        white-space: pre
+      }
+    </style><span role="img" aria-label="NaN"><span part="left"><span class="symbol" part="symbol nan">NaN</span></span><span part="number" class="number"><span part="integer"></span><span part="fraction"></span></span><span part="right"></span></span>
+  </template><span style="font-kerning: none; display: inline-block; line-height: var(--number-flow-char-height, 1em) !important; padding: var(--number-flow-mask-height, 0.25em) 0;">NaN</span></number-flow-vue>"
+`;
