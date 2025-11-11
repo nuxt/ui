@@ -75,7 +75,6 @@ import { useAppConfig } from '#imports'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
-import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -88,7 +87,6 @@ const props = withDefaults(defineProps<InputDateProps<R>>(), {
 const emits = defineEmits<InputDateEmits<R>>()
 const slots = defineSlots<InputDateSlots>()
 
-const { code: locale, dir } = useLocale()
 const appConfig = useAppConfig() as InputDate['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
@@ -178,8 +176,6 @@ defineExpose({
     :default-value="(defaultValue as DateValue)"
     :name="name"
     :disabled="disabled"
-    :locale="locale"
-    :dir="dir"
     :class="ui.base({ class: [props.ui?.base, props.class] })"
     @update:model-value="onUpdate"
     @blur="onBlur"

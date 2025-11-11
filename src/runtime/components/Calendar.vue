@@ -127,7 +127,7 @@ const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
 const emits = defineEmits<CalendarEmits<R, M>>()
 defineSlots<CalendarSlots>()
 
-const { code: locale, dir, t } = useLocale()
+const { dir, t } = useLocale()
 const appConfig = useAppConfig() as Calendar['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
@@ -160,8 +160,6 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
     v-bind="rootProps"
     :model-value="(modelValue as DateValue | DateValue[])"
     :default-value="(defaultValue as DateValue)"
-    :locale="locale"
-    :dir="dir"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
