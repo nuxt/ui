@@ -20,7 +20,7 @@ export interface EditorProps extends Omit<Partial<EditorOptions>, 'content'> {
   as?: any
   /**
    * The starter kit options to configure the editor.
-   * @defaultValue { headings: { levels: [1, 2, 3, 4] } }
+   * @defaultValue { headings: { levels: [1, 2, 3, 4] }, link: { openOnClick: false }, dropcursor: { color: 'var(--ui-primary)', width: 2 } }
    */
   starterKit?: Partial<StarterKitOptions>
   /**
@@ -94,6 +94,9 @@ const starterKit = computed(() => defu(props.starterKit, {
   dropcursor: {
     color: 'var(--ui-primary)',
     width: 2
+  },
+  link: {
+    openOnClick: false
   }
 } as Partial<StarterKitOptions>))
 

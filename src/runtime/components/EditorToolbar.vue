@@ -18,6 +18,8 @@ type BaseItem = Pick<ButtonProps, 'label' | 'color' | 'activeColor' | 'variant' 
 
 type EditorToolbarDropdownItem = (DropdownMenuItem & EditorActionItem) | DropdownMenuItem
 
+export type { EditorActionItem, EditorHandler } from '../utils/editor'
+
 export type EditorToolbarItem
   = | (BaseItem & EditorActionItem)
     | (BaseItem & DropdownMenuProps<ArrayOrNested<EditorToolbarDropdownItem>>) & {
@@ -196,7 +198,7 @@ function onClick(_: Event, item: EditorToolbarItem) {
   const handler = handlers.value[item.kind]
   if (handler) {
     const chain = props.editor.chain() as any
-    handler.execute(chain, item).run()
+    handler.execute(chain, item, props.editor).run()
   }
 }
 
@@ -249,11 +251,12 @@ function mapDropdownItem(item: EditorToolbarItem | DropdownMenuItem) {
     return item
   }
 
+  const editorToolbarItem = item as EditorToolbarItem
   return {
-    ...item,
-    active: isActive(item as EditorToolbarItem),
-    disabled: isDisabled(item as EditorToolbarItem),
-    onClick: (e: Event) => onClick(e, item as EditorToolbarItem)
+    ...editorToolbarItem,
+    active: isActive(editorToolbarItem),
+    disabled: isDisabled(editorToolbarItem),
+    onClick: (e: Event) => onClick(e, editorToolbarItem)
   }
 }
 

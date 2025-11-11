@@ -143,6 +143,9 @@ const toolbarItems: EditorToolbarItem[][] = [[{
   kind: 'mark',
   mark: 'code',
   icon: 'i-lucide-code'
+}, {
+  kind: 'link',
+  icon: 'i-lucide-link'
 }], [{
   kind: 'textAlign',
   align: 'left',

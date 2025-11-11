@@ -16,7 +16,7 @@ export interface FloatingUIOptions {
 
 export interface EditorHandler {
   canExecute: (editor: Editor, cmd?: any) => boolean
-  execute: (chain: any, cmd?: any) => any
+  execute: (chain: any, cmd?: any, editor?: Editor) => any
   isActive: (editor: Editor, cmd?: any) => boolean
   isDisabled?: (editor: Editor, cmd?: any) => boolean
 }
@@ -25,6 +25,7 @@ export type EditorActionItem
   = | { kind: 'mark', mark: 'bold' | 'italic' | 'strike' | 'code' | 'underline' }
     | { kind: 'textAlign', align: 'left' | 'center' | 'right' | 'justify' }
     | { kind: 'heading', level: 1 | 2 | 3 | 4 | 5 | 6 }
+    | { kind: 'link', href?: string }
     | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' | 'undo' | 'redo' | 'mention' | 'emoji' }
 
 export function isMarkInSchema(mark: string | Mark, editor: Editor | null): boolean {
@@ -115,6 +116,49 @@ export function createHeadingHandler() {
   }
 }
 
+export function createLinkHandler() {
+  return {
+    canExecute: (editor: Editor) => {
+      // Can execute if we can set a link or unset a link
+      return (editor.can() as any).setLink({ href: '' }) || (editor.can() as any).unsetLink()
+    },
+    execute: (chain: any, cmd: any, editor?: Editor) => {
+      if (!editor) {
+        return chain
+      }
+
+      const previousUrl = editor.getAttributes('link').href
+
+      // If link is already active, unset it
+      if (previousUrl) {
+        return chain.focus().unsetLink()
+      }
+
+      // If href is provided in cmd, use it
+      if (cmd?.href) {
+        return chain.focus().setLink({ href: cmd.href })
+      }
+
+      // Otherwise prompt for URL
+      const href = prompt('Enter the URL:')
+      if (href) {
+        return chain.focus().setLink({ href })
+      }
+
+      return chain
+    },
+    isActive: (editor: Editor) => editor.isActive('link'),
+    isDisabled: (editor: Editor) => {
+      if (!isExtensionAvailable(editor, 'link') || isNodeTypeSelected(editor, ['image'])) {
+        return true
+      }
+      // Disable if no text is selected and no link is active
+      const { selection } = editor.state
+      return selection.empty && !editor.isActive('link')
+    }
+  }
+}
+
 export function buildFloatingUIMiddleware(options: FloatingUIOptions): Middleware[] {
   const middleware: Middleware[] = []
 
@@ -154,6 +198,7 @@ export function createHandlers(): Record<EditorActionItem['kind'], EditorHandler
     mark: createMarkHandler(),
     textAlign: createTextAlignHandler(),
     heading: createHeadingHandler(),
+    link: createLinkHandler(),
     blockquote: createToggleHandler('blockquote'),
     bulletList: createToggleHandler('bulletList'),
     orderedList: createToggleHandler('orderedList'),

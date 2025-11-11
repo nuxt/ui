@@ -102,7 +102,7 @@ onMounted(async () => {
       const handler = handlers.value[item.kind]
       if (handler) {
         const chain = editor.chain()
-        handler.execute(chain, item).run()
+        handler.execute(chain, item, editor).run()
       }
     },
     renderItem: (item, styles) => {
