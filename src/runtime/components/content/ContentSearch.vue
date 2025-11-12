@@ -128,7 +128,7 @@ const slots = defineSlots<ContentSearchSlots>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const { open } = useContentSearch()
+const { open, mapNavigationItems, postFilter } = useContentSearch()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
@@ -150,9 +150,10 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
 
 const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
-// Memoize mapped links items
 const mappedLinksItems = computed(() => {
-  if (!props.links?.length) return []
+  if (!props.links?.length) {
+    return []
+  }
 
   return props.links.flatMap(link => [{
     ...link,
@@ -168,57 +169,27 @@ const mappedLinksItems = computed(() => {
   })) || [])])
 })
 
-function postFilter(query: string, items: ContentSearchItem[]) {
-  // Filter only first level items if no query
-  if (!query) {
-    return items?.filter(item => item.level === 1)
+const mappedNavigationGroups = computed(() => {
+  if (!props.navigation?.length) {
+    return []
   }
-
-  return items
-}
-
-function mapNavigationItems(children: ContentNavigationItem[], parent?: ContentNavigationItem): ContentSearchItem[] {
-  return children.flatMap((link) => {
-    if (link.children?.length) {
-      return mapNavigationItems(link.children, link)
-    }
-
-    return props.files?.filter(file => file.id === link.path || file.id.startsWith(`${link.path}#`))?.map(file => mapFile(file, link, parent)) || []
-  })
-}
-
-function mapFile(file: ContentSearchFile, link: ContentNavigationItem, parent?: ContentNavigationItem): ContentSearchItem {
-  const prefix = [...new Set([parent?.title, ...file.titles].filter(Boolean))]
-
-  return {
-    prefix: prefix?.length ? (prefix.join(' > ') + ' >') : undefined,
-    label: file.id === link.path ? link.title : file.title,
-    suffix: file.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
-    to: file.id,
-    icon: (link.icon || parent?.icon || (file.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
-    level: file.level
-  }
-}
-
-// Memoize mapped navigation items to avoid recomputing on every render
-const mappedNavigationItems = computed(() => {
-  if (!props.navigation?.length) return []
 
   if (props.navigation.some(link => !!link.children?.length)) {
     return props.navigation.map(group => ({
       id: group.path,
       label: group.title,
-      items: mapNavigationItems(group.children || []),
+      items: mapNavigationItems(group.children || [], props.files || []),
       postFilter
     }))
   } else {
-    return [{ id: 'docs', items: mapNavigationItems(props.navigation), postFilter }]
+    return [{ id: 'docs', items: mapNavigationItems(props.navigation, props.files || []), postFilter }]
   }
 })
 
-// Memoize theme group
 const themeGroup = computed(() => {
-  if (!props.colorMode || colorMode?.forced) return null
+  if (!props.colorMode || colorMode?.forced) {
+    return null
+  }
 
   return {
     id: 'theme',
@@ -255,7 +226,7 @@ const groups = computed(() => {
     groups.push({ id: 'links', label: t('contentSearch.links'), items: mappedLinksItems.value })
   }
 
-  groups.push(...mappedNavigationItems.value)
+  groups.push(...mappedNavigationGroups.value)
 
   groups.push(...(props.groups || []))
 
