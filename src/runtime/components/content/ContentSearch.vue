@@ -159,7 +159,8 @@ const mappedLinksItems = computed(() => {
     ...link,
     suffix: link.description,
     description: undefined,
-    icon: link.icon || appConfig.ui.icons.file
+    icon: link.icon || appConfig.ui.icons.file,
+    children: undefined
   }, ...(link.children?.map(child => ({
     ...child,
     prefix: link.label + ' >',
