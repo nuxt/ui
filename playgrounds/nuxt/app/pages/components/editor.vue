@@ -66,7 +66,7 @@ Whether you're working on a personal project or building an enterprise applicati
 Visit our [documentation](https://ui.nuxt.com) to learn more and explore all available components.
 `)
 
-const toolbarItems: EditorToolbarItem[][] = [[{
+const toolbarItems = [[{
   kind: 'undo',
   icon: 'i-lucide-undo'
 }, {
@@ -144,8 +144,8 @@ const toolbarItems: EditorToolbarItem[][] = [[{
   mark: 'code',
   icon: 'i-lucide-code'
 }, {
-  kind: 'link',
-  icon: 'i-lucide-link'
+  kind: 'slot',
+  slot: 'link' as const
 }], [{
   kind: 'textAlign',
   align: 'left',
@@ -162,7 +162,7 @@ const toolbarItems: EditorToolbarItem[][] = [[{
   kind: 'textAlign',
   align: 'justify',
   icon: 'i-lucide-align-justify'
-}]]
+}]] satisfies EditorToolbarItem[][]
 
 const suggestionItems: EditorSuggestionMenuItem[][] = [[{
   type: 'label',
@@ -270,10 +270,18 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
     :ui="{ content: 'max-w-2xl mx-auto relative' }"
   >
     <Navbar>
-      <UEditorToolbar :editor="editor" :items="toolbarItems" />
+      <UEditorToolbar :editor="editor" :items="toolbarItems" class="relative">
+        <template #link>
+          <EditorLink :editor="editor" auto-open />
+        </template>
+      </UEditorToolbar>
     </Navbar>
 
-    <UEditorToolbar :editor="editor" :items="toolbarItems" layout="bubble" />
+    <UEditorToolbar :editor="editor" :items="toolbarItems" layout="bubble">
+      <template #link>
+        <EditorLink :editor="editor" />
+      </template>
+    </UEditorToolbar>
 
     <UEditorDragHandle :editor="editor" />
 
