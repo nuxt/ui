@@ -40,7 +40,7 @@ export interface EditorDragHandleSlots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import DragHandle from '@tiptap/extension-drag-handle-vue-3'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit, reactivePick } from '@vueuse/core'
@@ -60,7 +60,7 @@ const props = withDefaults(defineProps<EditorDragHandleProps>(), {
 defineSlots<EditorDragHandleSlots>()
 
 const dragHandleProps = useForwardProps(reactivePick(props, 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement'))
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class'))
 
 const appConfig = useAppConfig() as EditorDragHandle['AppConfig']
 
@@ -103,6 +103,23 @@ const computePositionConfig = computed<DragHandlePluginProps['computePositionCon
   strategy: floatingUIOptions.value.strategy,
   middleware: middleware.value
 }))
+
+const currentNodePos = ref<number | null>(null)
+
+function onNodeChange({ pos }: { node: any, pos: number }) {
+  currentNodePos.value = pos
+}
+
+function onClick(_event: MouseEvent) {
+  if (!props.editor || !currentNodePos.value) return
+
+  const pos = currentNodePos.value
+  const node = props.editor.state.doc.nodeAt(pos)
+  if (node) {
+    // Select the entire node
+    props.editor.chain().focus().setNodeSelection(pos).run()
+  }
+}
 </script>
 
 <template>
@@ -110,7 +127,9 @@ const computePositionConfig = computed<DragHandlePluginProps['computePositionCon
     v-bind="dragHandleProps"
     :compute-position-config="computePositionConfig"
     :editor="editor"
+    :on-node-change="onNodeChange"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
+    @click="onClick"
   >
     <slot>
       <UButton
