@@ -9,6 +9,8 @@ import type { ComponentConfig } from '../types/tv'
 
 type Editor = ComponentConfig<typeof theme, AppConfig, 'editor'>
 
+export type { Editor } from '@tiptap/vue-3'
+
 export type EditorContent = Content
 export type EditorContentType = 'json' | 'html' | 'markdown'
 
