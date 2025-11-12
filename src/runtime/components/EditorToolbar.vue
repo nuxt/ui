@@ -10,20 +10,24 @@ import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem } from '../typ
 import type { EditorHandler, EditorActionItem } from '../utils/editor'
 import type { ComponentConfig } from '../types/tv'
 
+export type { EditorHandler, EditorActionItem } from '../utils/editor'
+
 type EditorToolbar = ComponentConfig<typeof theme, AppConfig, 'editorToolbar'>
 
-type BaseItem = Pick<ButtonProps, 'label' | 'color' | 'activeColor' | 'variant' | 'activeVariant' | 'size' | 'icon' | 'leadingIcon' | 'trailingIcon' | 'loading' | 'loadingIcon' | 'disabled' | 'active' | 'class' | 'ui'> & {
+type ButtonItem = Pick<ButtonProps, 'label' | 'color' | 'activeColor' | 'variant' | 'activeVariant' | 'size' | 'icon' | 'leadingIcon' | 'trailingIcon' | 'loading' | 'loadingIcon' | 'disabled' | 'active' | 'class' | 'ui'> & {
   slot?: string
 }
 
 type EditorToolbarDropdownItem = (DropdownMenuItem & EditorActionItem) | DropdownMenuItem
 
-export type { EditorActionItem, EditorHandler } from '../utils/editor'
-
 export type EditorToolbarItem
-  = | (BaseItem & EditorActionItem)
-    | (BaseItem & DropdownMenuProps<ArrayOrNested<EditorToolbarDropdownItem>>) & {
+  = | (ButtonItem & EditorActionItem)
+    | (ButtonItem & DropdownMenuProps<ArrayOrNested<EditorToolbarDropdownItem>>) & {
       kind: 'dropdown'
+    }
+    | ButtonItem & {
+      kind: 'slot'
+      slot: string
     }
 
 export type EditorToolbarHandlers = Record<string, EditorHandler>
@@ -78,7 +82,13 @@ export type EditorToolbarProps<T extends ArrayOrNested<EditorToolbarItem> = Arra
       layout?: 'floating'
     })
 
-type SlotProps<T extends EditorToolbarItem> = (props: { item: T, index: number }) => any
+type SlotPropsProps = {
+  index: number
+  isActive: (item: EditorToolbarItem) => boolean
+  isDisabled: (item: EditorToolbarItem) => boolean
+  onClick: (e: Event, item: EditorToolbarItem) => void
+}
+type SlotProps<T extends EditorToolbarItem> = (props: { item: T } & SlotPropsProps) => any
 
 export type EditorToolbarSlots<
   A extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>,
@@ -86,7 +96,7 @@ export type EditorToolbarSlots<
 > = {
   default(props?: {}): any
   item: SlotProps<T>
-} & DynamicSlots<MergeTypes<T>, undefined, { index: number }>
+} & DynamicSlots<MergeTypes<T>, undefined, SlotPropsProps>
 
 </script>
 
@@ -286,7 +296,14 @@ function getDropdownItems(item: EditorToolbarItem & { kind: 'dropdown' }) {
       <template v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`">
         <div role="group" :class="ui.group({ class: props.ui?.group })">
           <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-            <slot :name="((item.slot || 'item') as keyof EditorToolbarSlots<T>)" :item="(item as any)" :index="index">
+            <slot
+              :name="((item.slot || 'item') as keyof EditorToolbarSlots<T>)"
+              :item="(item as any)"
+              :index="index"
+              :is-active="isActive"
+              :is-disabled="isDisabled"
+              :on-click="onClick"
+            >
               <UDropdownMenu
                 v-if="item.kind === 'dropdown' && item.items?.length"
                 v-bind="getDropdownProps(item as EditorToolbarItem & { kind: 'dropdown' })"
