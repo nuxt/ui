@@ -196,9 +196,8 @@ function onClick(_: Event, item: EditorToolbarItem) {
   }
 
   const handler = handlers.value[item.kind]
-  if (handler) {
-    const chain = props.editor.chain() as any
-    handler.execute(chain, item, props.editor).run()
+  if (handler && props.editor) {
+    handler.execute(props.editor, item).run()
   }
 }
 

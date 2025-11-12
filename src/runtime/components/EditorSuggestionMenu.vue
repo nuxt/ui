@@ -101,8 +101,7 @@ onMounted(async () => {
       // Execute the actual command using handlers
       const handler = handlers.value[item.kind]
       if (handler) {
-        const chain = editor.chain()
-        handler.execute(chain, item, editor).run()
+        handler.execute(editor, item).run()
       }
     },
     renderItem: (item, styles) => {

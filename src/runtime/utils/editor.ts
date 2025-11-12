@@ -16,7 +16,7 @@ export interface FloatingUIOptions {
 
 export interface EditorHandler {
   canExecute: (editor: Editor, cmd?: any) => boolean
-  execute: (chain: any, cmd?: any, editor?: Editor) => any
+  execute: (editor: Editor, cmd?: any) => any
   isActive: (editor: Editor, cmd?: any) => boolean
   isDisabled?: (editor: Editor, cmd?: any) => boolean
 }
@@ -64,7 +64,7 @@ export function createToggleHandler(name: string) {
   const fnName = `toggle${name.charAt(0).toUpperCase()}${name.slice(1)}`
   return {
     canExecute: (editor: Editor) => (editor.can() as any)[fnName](),
-    execute: (chain: any) => chain.focus()[fnName](),
+    execute: (editor: Editor) => (editor.chain().focus() as any)[fnName](),
     isActive: (editor: Editor) => editor.isActive(name),
     isDisabled: undefined
   }
@@ -74,7 +74,7 @@ export function createSetHandler(name: string) {
   const fnName = `set${name.charAt(0).toUpperCase()}${name.slice(1)}`
   return {
     canExecute: (editor: Editor) => (editor.can() as any)[fnName](),
-    execute: (chain: any) => chain.focus()[fnName](),
+    execute: (editor: Editor) => (editor.chain().focus() as any)[fnName](),
     isActive: (editor: Editor) => editor.isActive(name),
     isDisabled: undefined
   }
@@ -83,7 +83,7 @@ export function createSetHandler(name: string) {
 export function createSimpleHandler(name: string) {
   return {
     canExecute: (editor: Editor) => (editor.can() as any)[name](),
-    execute: (chain: any) => chain[name](),
+    execute: (editor: Editor) => (editor.chain() as any)[name](),
     isActive: () => false,
     isDisabled: undefined
   }
@@ -92,7 +92,7 @@ export function createSimpleHandler(name: string) {
 export function createMarkHandler() {
   return {
     canExecute: (editor: Editor, cmd: any) => (editor.can() as any).toggleMark(cmd.mark),
-    execute: (chain: any, cmd: any) => chain.focus().toggleMark(cmd.mark),
+    execute: (editor: Editor, cmd: any) => editor.chain().focus().toggleMark(cmd.mark),
     isActive: (editor: Editor, cmd: any) => editor.isActive(cmd.mark),
     isDisabled: (editor: Editor, cmd: any) => !isMarkInSchema(cmd.mark, editor) || isNodeTypeSelected(editor, ['image'])
   }
@@ -101,7 +101,7 @@ export function createMarkHandler() {
 export function createTextAlignHandler() {
   return {
     canExecute: (editor: Editor, cmd: any) => (editor.can() as any).setTextAlign(cmd.align),
-    execute: (chain: any, cmd: any) => chain.focus().setTextAlign(cmd.align),
+    execute: (editor: Editor, cmd: any) => (editor.chain().focus() as any).setTextAlign(cmd.align),
     isActive: (editor: Editor, cmd: any) => editor.isActive({ textAlign: cmd.align }),
     isDisabled: (editor: Editor) => !isExtensionAvailable(editor, 'textAlign') || isNodeTypeSelected(editor, ['image', 'horizontalRule'])
   }
@@ -110,7 +110,7 @@ export function createTextAlignHandler() {
 export function createHeadingHandler() {
   return {
     canExecute: (editor: Editor, cmd: any) => (editor.can() as any).toggleHeading({ level: cmd.level }),
-    execute: (chain: any, cmd: any) => chain.focus().toggleHeading({ level: cmd.level }),
+    execute: (editor: Editor, cmd: any) => editor.chain().focus().toggleHeading({ level: cmd.level }),
     isActive: (editor: Editor, cmd: any) => editor.isActive('heading', { level: cmd.level }),
     isDisabled: undefined
   }
@@ -122,11 +122,8 @@ export function createLinkHandler() {
       // Can execute if we can set a link or unset a link
       return (editor.can() as any).setLink({ href: '' }) || (editor.can() as any).unsetLink()
     },
-    execute: (chain: any, cmd: any, editor?: Editor) => {
-      if (!editor) {
-        return chain
-      }
-
+    execute: (editor: Editor, cmd: any) => {
+      const chain = editor.chain()
       const previousUrl = editor.getAttributes('link').href
 
       // If link is already active, unset it
@@ -155,6 +152,35 @@ export function createLinkHandler() {
       // Disable if no text is selected and no link is active
       const { selection } = editor.state
       return selection.empty && !editor.isActive('link')
+    }
+  }
+}
+
+export function createHandlers(): Record<EditorActionItem['kind'], EditorHandler> {
+  return {
+    mark: createMarkHandler(),
+    textAlign: createTextAlignHandler(),
+    heading: createHeadingHandler(),
+    link: createLinkHandler(),
+    blockquote: createToggleHandler('blockquote'),
+    bulletList: createToggleHandler('bulletList'),
+    orderedList: createToggleHandler('orderedList'),
+    codeBlock: createToggleHandler('codeBlock'),
+    horizontalRule: createSetHandler('horizontalRule'),
+    paragraph: createSetHandler('paragraph'),
+    undo: createSimpleHandler('undo'),
+    redo: createSimpleHandler('redo'),
+    mention: {
+      canExecute: () => true,
+      execute: (editor: Editor) => editor.chain().insertContent('@'),
+      isActive: () => false,
+      isDisabled: undefined
+    },
+    emoji: {
+      canExecute: () => true,
+      execute: (editor: Editor) => editor.chain().insertContent(':'),
+      isActive: () => false,
+      isDisabled: undefined
     }
   }
 }
@@ -191,33 +217,4 @@ export function buildFloatingUIMiddleware(options: FloatingUIOptions): Middlewar
   }
 
   return middleware
-}
-
-export function createHandlers(): Record<EditorActionItem['kind'], EditorHandler> {
-  return {
-    mark: createMarkHandler(),
-    textAlign: createTextAlignHandler(),
-    heading: createHeadingHandler(),
-    link: createLinkHandler(),
-    blockquote: createToggleHandler('blockquote'),
-    bulletList: createToggleHandler('bulletList'),
-    orderedList: createToggleHandler('orderedList'),
-    codeBlock: createToggleHandler('codeBlock'),
-    horizontalRule: createSetHandler('horizontalRule'),
-    paragraph: createSetHandler('paragraph'),
-    undo: createSimpleHandler('undo'),
-    redo: createSimpleHandler('redo'),
-    mention: {
-      canExecute: () => true,
-      execute: (chain: any) => chain.insertContent('@'),
-      isActive: () => false,
-      isDisabled: undefined
-    },
-    emoji: {
-      canExecute: () => true,
-      execute: (chain: any) => chain.insertContent(':'),
-      isActive: () => false,
-      isDisabled: undefined
-    }
-  }
 }
