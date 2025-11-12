@@ -146,6 +146,26 @@ name: 'input-date-min-max-dates-example'
 ---
 ::
 
+### As a DatePicker
+
+Use a [Calendar](/docs/components/calendar) and a [Popover](/docs/components/popover) component to create a date picker.
+
+::component-example
+---
+name: 'input-date-date-picker-example'
+---
+::
+
+### As a DateRangePicker
+
+Use a [Calendar](/docs/components/calendar) and a [Popover](/docs/components/popover) component to create a date range picker.
+
+::component-example
+---
+name: 'input-date-date-range-picker-example'
+---
+::
+
 ## API
 
 ### Props
