@@ -2,7 +2,7 @@
 import type { EditorContent, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, Editor } from '@nuxt/ui'
 import { TextAlign } from '@tiptap/extension-text-align'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
-import { ImageUpload } from '~/utils/editor/image-upload'
+import { ImageUpload } from '../../utils/editor/image-upload'
 
 const content = ref<EditorContent>(`# Nuxt UI: A Modern UI Library
 
