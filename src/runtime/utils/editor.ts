@@ -26,6 +26,7 @@ export type EditorActionItem
     | { kind: 'textAlign', align: 'left' | 'center' | 'right' | 'justify' }
     | { kind: 'heading', level: 1 | 2 | 3 | 4 | 5 | 6 }
     | { kind: 'link', href?: string }
+    | { kind: 'image', src?: string }
     | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' | 'undo' | 'redo' | 'mention' | 'emoji' }
 
 export function isMarkInSchema(mark: string | Mark, editor: Editor | null): boolean {
@@ -156,12 +157,41 @@ export function createLinkHandler() {
   }
 }
 
+export function createImageHandler() {
+  return {
+    canExecute: (editor: Editor) => {
+      return (editor.can() as any).setImage({ src: '' })
+    },
+    execute: (editor: Editor, cmd: any) => {
+      const chain = editor.chain().focus()
+
+      // If src is provided in cmd, use it
+      if (cmd?.src) {
+        return chain.setImage({ src: cmd.src })
+      }
+
+      // Otherwise prompt for URL
+      const src = prompt('Enter the image URL:')
+      if (src) {
+        return chain.setImage({ src })
+      }
+
+      return chain
+    },
+    isActive: (editor: Editor) => editor.isActive('image'),
+    isDisabled: (editor: Editor) => {
+      return !isExtensionAvailable(editor, 'image')
+    }
+  }
+}
+
 export function createHandlers(): Record<EditorActionItem['kind'], EditorHandler> {
   return {
     mark: createMarkHandler(),
     textAlign: createTextAlignHandler(),
     heading: createHeadingHandler(),
     link: createLinkHandler(),
+    image: createImageHandler(),
     blockquote: createToggleHandler('blockquote'),
     bulletList: createToggleHandler('bulletList'),
     orderedList: createToggleHandler('orderedList'),

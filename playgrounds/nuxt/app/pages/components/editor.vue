@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { EditorContent, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem } from '@nuxt/ui'
+import type { EditorContent, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, Editor } from '@nuxt/ui'
 import { TextAlign } from '@tiptap/extension-text-align'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
+import { ImageUpload } from '~/extensions/image-upload'
 
 const content = ref<EditorContent>(`# Nuxt UI: A Modern UI Library
 
@@ -146,6 +147,9 @@ const toolbarItems = [[{
 }, {
   kind: 'slot',
   slot: 'link' as const
+}, {
+  kind: 'image',
+  icon: 'i-lucide-image'
 }], [{
   kind: 'textAlign',
   align: 'left',
@@ -214,6 +218,10 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
   label: 'Emoji',
   icon: 'i-lucide-smile-plus'
 }, {
+  kind: 'image',
+  label: 'Image',
+  icon: 'i-lucide-image'
+}, {
   kind: 'horizontalRule',
   label: 'Horizontal Rule',
   icon: 'i-lucide-separator-horizontal'
@@ -252,6 +260,15 @@ const mentionItems: EditorMentionMenuItem[] = [{
 }]
 
 const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.name.startsWith('regional_indicator_'))
+
+const handlers = {
+  image: {
+    canExecute: (editor: Editor) => (editor.can() as any).insertContent({ type: 'imageUpload' }),
+    execute: (editor: Editor) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
+    isActive: (editor: Editor) => editor.isActive('imageUpload'),
+    isDisabled: undefined
+  }
+}
 </script>
 
 <template>
@@ -262,7 +279,8 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
       TextAlign.configure({
         types: ['heading', 'paragraph']
       }),
-      Emoji
+      Emoji,
+      ImageUpload
     ]"
     content-type="markdown"
     placeholder="Write, type '/' for commands..."
@@ -270,22 +288,35 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
     :ui="{ content: 'max-w-2xl mx-auto relative' }"
   >
     <Navbar>
-      <UEditorToolbar :editor="editor" :items="toolbarItems" class="relative">
+      <UEditorToolbar :editor="editor" :items="toolbarItems" :handlers="handlers" class="relative">
         <template #link>
-          <EditorLink :editor="editor" auto-open />
+          <EditorLinkPopover :editor="editor" auto-open />
         </template>
       </UEditorToolbar>
     </Navbar>
 
-    <UEditorToolbar :editor="editor" :items="toolbarItems" layout="bubble">
+    <UEditorToolbar
+      :editor="editor"
+      :items="toolbarItems"
+      :handlers="handlers"
+      layout="bubble"
+      :should-show="({ editor, state }) => {
+        if (editor.isActive('imageUpload') || editor.isActive('image')) {
+          return false
+        }
+        const { selection } = state
+        const { empty } = selection
+        return !empty
+      }"
+    >
       <template #link>
-        <EditorLink :editor="editor" />
+        <EditorLinkPopover :editor="editor" />
       </template>
     </UEditorToolbar>
 
     <UEditorDragHandle :editor="editor" />
 
-    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
+    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" :handlers="handlers" />
 
     <UEditorMentionMenu :editor="editor" :items="mentionItems" />
 
