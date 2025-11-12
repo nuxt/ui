@@ -8,29 +8,25 @@ type ScrollArea = ComponentConfig<typeof theme, AppConfig, 'scrollArea'>
 
 export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
   VirtualizerOptions<any, any>,
-  'count' | 'getScrollElement' | 'horizontal' | 'enabled' | 'isRtl' | 'estimateSize'
+  'count' | 'getScrollElement' | 'horizontal' | 'enabled' | 'isRtl' | 'estimateSize' | 'lanes'
 >> {
   /**
-   * Estimated size (in px) of each item. Can be a number or a function.
+   * Enable or disable virtualization while still applying layout options.
+   * @defaultValue true
+   */
+  enabled?: boolean
+  /**
+   * Estimated size (in px) of each item along the scroll axis. Can be a number or a function.
    * @defaultValue 100
    */
   estimateSize?: number | ((index: number) => number)
   /**
-   * Lane width in pixels for responsive layouts (column width for vertical, row height for horizontal)
-   * When set, lanes will be calculated automatically based on container size
+   * Number of lanes or target lane size for multi-column layouts.
+   * - Number (e.g., 3): fixed number of columns/rows
+   * - String (e.g., '300px'): responsive columns based on item width
    * @defaultValue undefined
    */
-  laneWidth?: number
-  /**
-   * Minimum number of lanes for responsive layouts
-   * @defaultValue 1
-   */
-  minLanes?: number
-  /**
-   * Maximum number of lanes for responsive layouts
-   * @defaultValue undefined
-   */
-  maxLanes?: number
+  lanes?: number | string
   /**
    * Number of items from the end to trigger loadMore event (for infinite scroll)
    * @defaultValue 5
@@ -86,7 +82,8 @@ export interface ScrollAreaEmits {
 </script>
 
 <script setup lang="ts" generic="T = any">
-import { computed, ref, toRef, watch, onMounted, onUnmounted, nextTick } from 'vue'
+import { computed, ref, toRef, watch } from 'vue'
+import type { CSSProperties } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useVirtualizer } from '@tanstack/vue-virtual'
@@ -106,77 +103,42 @@ const appConfig = useAppConfig() as ScrollArea['AppConfig']
 const { dir } = useLocale()
 const isRtl = computed(() => dir.value === 'rtl')
 const rootRef = ref()
-const containerSize = ref(0)
-
-// Calculate number of lanes based on container size and lane width constraints
-function calculateResponsiveLanes(): number {
-  const vProps = typeof props.virtualize === 'boolean' ? {} : props.virtualize
-
-  // If laneWidth is not set, use fixed lanes
-  if (!vProps?.laneWidth) {
-    return vProps?.lanes ?? 1
+const isHorizontal = computed(() => props.orientation === 'horizontal')
+const isVertical = computed(() => !isHorizontal.value)
+const isVirtualizerEnabled = computed(() => {
+  if (!props.virtualize) {
+    return false
   }
-
-  const size = containerSize.value
-  const gap = vProps.gap ?? 0
-  const laneWidth = vProps.laneWidth
-  const minLanesValue = vProps.minLanes ?? 1
-  const maxLanesValue = vProps.maxLanes
-
-  if (size === 0) return minLanesValue
-
-  // Calculate how many lanes fit iteratively
-  function countLanes(count: number, consumed: number): number {
-    const nextConsumed = consumed + (count > 0 ? gap : 0) + laneWidth
-    if (nextConsumed <= size) {
-      return countLanes(count + 1, nextConsumed)
-    }
-    return count
+  if (typeof props.virtualize === 'boolean') {
+    return props.virtualize
   }
-
-  let lanes = Math.max(minLanesValue, countLanes(0, 0))
-
-  // Apply max constraint
-  if (maxLanesValue !== undefined) {
-    lanes = Math.min(lanes, maxLanesValue)
-  }
-
-  return Math.max(1, lanes)
-}
+  return props.virtualize.enabled !== false
+})
 
 const virtualizerProps = toRef(() => {
-  const baseProps = defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+  const options = typeof props.virtualize === 'boolean' ? {} : props.virtualize
+
+  return defu(options, {
     estimateSize: 100,
     overscan: 12,
     gap: 0,
     paddingStart: 0,
     paddingEnd: 0,
     scrollMargin: 0,
-    lanes: 1,
-    minLanes: 1,
     loadMoreThreshold: 5
   })
-
-  // Ensure numeric props are actually numbers (they may come in as strings from component props)
-  const numericProps = ['estimateSize', 'overscan', 'gap', 'paddingStart', 'paddingEnd', 'scrollMargin', 'lanes', 'minLanes', 'maxLanes', 'laneWidth', 'loadMoreThreshold'] as const
-  for (const key of numericProps) {
-    if (baseProps[key] !== undefined && typeof baseProps[key] !== 'function') {
-      const num = Number(baseProps[key])
-      if (!Number.isNaN(num)) {
-        baseProps[key] = num
-      }
-    }
-  }
-
-  // Use responsive lanes if laneWidth is set
-  if (baseProps.laneWidth !== undefined) {
-    baseProps.lanes = calculateResponsiveLanes()
-  }
-
-  return baseProps
 })
 
-const virtualizer = !!props.virtualize && useVirtualizer({
+const lanes = computed(() => {
+  const value = virtualizerProps.value.lanes
+  return typeof value === 'number' ? value : undefined
+})
+
+// Virtualization
+const virtualizer = useVirtualizer({
+  get enabled() {
+    return isVirtualizerEnabled.value
+  },
   get overscan() {
     return virtualizerProps.value.overscan
   },
@@ -193,7 +155,7 @@ const virtualizer = !!props.virtualize && useVirtualizer({
     return virtualizerProps.value.scrollMargin
   },
   get lanes() {
-    return virtualizerProps.value.lanes
+    return lanes.value
   },
   getItemKey: virtualizerProps.value.getItemKey,
   get isRtl() {
@@ -204,118 +166,71 @@ const virtualizer = !!props.virtualize && useVirtualizer({
   },
   getScrollElement: () => rootRef.value?.$el || null,
   get horizontal() {
-    return props.orientation === 'horizontal'
+    return isHorizontal.value
   },
   estimateSize: typeof virtualizerProps.value.estimateSize === 'function'
     ? virtualizerProps.value.estimateSize
     : () => virtualizerProps.value.estimateSize as number
 })
 
-// Computed refs for virtual items and total size
-const virtualItems = computed(() => virtualizer ? virtualizer.value.getVirtualItems() : [])
-const totalSize = computed(() => virtualizer ? virtualizer.value.getTotalSize() : 0)
+const virtualItems = computed(() => isVirtualizerEnabled.value ? virtualizer.value.getVirtualItems() : [])
+const totalSize = computed(() => isVirtualizerEnabled.value ? virtualizer.value.getTotalSize() : 0)
 
-// Computed values for lane calculations (to avoid re-computing per item)
-const laneSize = computed(() => {
-  const lanes = virtualizerProps.value.lanes
-  return lanes !== undefined ? 100 / lanes : 100
-})
-const hasLanes = computed(() => virtualizerProps.value.lanes !== undefined)
-const gapPadding = computed(() => {
-  const gap = virtualizerProps.value.gap
-  return gap ? `${gap / 2}px` : undefined
+const virtualRootStyle = computed<CSSProperties>(() => {
+  const gap = virtualizerProps.value.gap ?? 0
+  const halfGap = gap ? `${gap / 2}px` : undefined
+
+  return isHorizontal.value
+    ? { paddingBlock: halfGap }
+    : { paddingInline: halfGap }
 })
 
-// Calculate lane position as percentage
-function getLanePosition(lane: number): string {
-  return `${lane * laneSize.value}%`
-}
+const virtualViewportStyle = computed<CSSProperties>(() => ({
+  position: 'relative',
+  inlineSize: isHorizontal.value ? `${totalSize.value}px` : '100%',
+  blockSize: isVertical.value ? `${totalSize.value}px` : '100%'
+}))
 
-// Watch for lane changes and reset measurements
-watch(
-  () => virtualizerProps.value.lanes,
-  () => {
-    if (virtualizer) virtualizer.value.measure()
-  },
-  { flush: 'sync' }
-)
+function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
+  const hasLanes = lanes.value !== undefined && lanes.value > 1
+  const laneSize = lanes.value ? 100 / lanes.value : 100
+  const lane = virtualItem.lane
+  const gap = virtualizerProps.value.gap ?? 0
+  const halfGap = gap ? `${gap / 2}px` : undefined
 
-// ResizeObserver for responsive lanes
-let resizeObserver: ResizeObserver | null = null
-
-function setupResizeObserver() {
-  const vProps = typeof props.virtualize === 'boolean' ? {} : props.virtualize
-
-  // Clean up existing observer
-  if (resizeObserver) {
-    resizeObserver.disconnect()
-    resizeObserver = null
-  }
-
-  // Only setup ResizeObserver if laneWidth is defined (responsive mode)
-  if (vProps?.laneWidth !== undefined && rootRef.value) {
-    const element = rootRef.value.$el || rootRef.value
-    const isHorizontal = props.orientation === 'horizontal'
-
-    resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        // Measure width for vertical (columns), height for horizontal (rows)
-        const newSize = isHorizontal ? entry.contentRect.height : entry.contentRect.width
-        if (newSize !== containerSize.value) {
-          containerSize.value = newSize
-        }
-      }
-    })
-
-    resizeObserver.observe(element)
-
-    // Set initial size immediately
-    const initialSize = isHorizontal
-      ? (element.offsetHeight || element.clientHeight)
-      : (element.offsetWidth || element.clientWidth)
-
-    // Always set the size, even if 0 - the ResizeObserver will update it
-    // But if it's 0, the calculateResponsiveLanes will use minLanes as fallback
-    containerSize.value = initialSize
-  } else {
-    // Reset to 0 when not in responsive mode
-    containerSize.value = 0
+  return {
+    position: 'absolute',
+    insetBlockStart: isHorizontal.value && hasLanes && lane !== undefined
+      ? `${(lane * 100) / lanes.value!}%`
+      : 0,
+    insetInlineStart: isVertical.value && hasLanes && lane !== undefined
+      ? `${(lane * 100) / lanes.value!}%`
+      : 0,
+    blockSize: isHorizontal.value && hasLanes && lane !== undefined
+      ? `${laneSize}%`
+      : isHorizontal.value ? '100%' : undefined,
+    inlineSize: isVertical.value && hasLanes && lane !== undefined
+      ? `${laneSize}%`
+      : isVertical.value ? '100%' : undefined,
+    paddingBlock: isHorizontal.value ? halfGap : undefined,
+    paddingInline: isVertical.value ? halfGap : undefined,
+    transform: isHorizontal.value
+      ? `translateX(${isRtl.value ? -virtualItem.start : virtualItem.start}px)`
+      : `translateY(${virtualItem.start}px)`
   }
 }
 
-onMounted(async () => {
-  await nextTick()
-  // Small delay to allow CSS to fully apply
-  setTimeout(() => {
-    setupResizeObserver()
-  }, 0)
-})
-
-// Watch for laneWidth or orientation changes to setup/teardown observer
-watch(
-  () => {
-    const vProps = typeof props.virtualize === 'boolean' ? {} : props.virtualize
-    return [vProps?.laneWidth, props.orientation] as const
-  },
-  () => {
-    if (rootRef.value) {
-      setupResizeObserver()
-    }
+// Remeasure when lanes change
+watch(lanes, () => {
+  if (isVirtualizerEnabled.value) {
+    virtualizer.value.measure()
   }
-)
+}, { flush: 'sync' })
 
-onUnmounted(() => {
-  if (resizeObserver) {
-    resizeObserver.disconnect()
-    resizeObserver = null
-  }
-})
-
-// Measure element for dynamic sizing
 function measureElement(el: Element | null) {
-  if (!el) return undefined
-  if (virtualizer) virtualizer.value.measureElement(el)
-  return undefined
+  if (el && isVirtualizerEnabled.value) {
+    virtualizer.value.measureElement(el)
+  }
 }
 
 const ui = computed(() =>
@@ -324,25 +239,22 @@ const ui = computed(() =>
   })
 )
 
-// Watch for scroll state changes and emit event
+// Emit scroll state changes
 watch(
-  () => virtualizer ? virtualizer.value.isScrolling : false,
-  (isScrolling) => {
-    emits('scroll', isScrolling)
-  }
+  () => (isVirtualizerEnabled.value ? virtualizer.value.isScrolling : false),
+  isScrolling => emits('scroll', isScrolling)
 )
 
-// Watch for infinite scroll - emit loadMore when last item is visible
+// Emit loadMore when scrolling near the end (infinite scroll support)
 watch(
   () => {
-    if (!virtualizer) return -1
+    if (!isVirtualizerEnabled.value) return -1
     const items = virtualizer.value.getVirtualItems()
     return items.length > 0 ? items[items.length - 1]?.index ?? -1 : -1
   },
   (lastVisibleIndex) => {
     if (lastVisibleIndex === -1 || !props.items?.length) return
 
-    // If last visible item is within threshold of the end, emit loadMore
     const threshold = virtualizerProps.value.loadMoreThreshold ?? 5
     if (lastVisibleIndex >= props.items.length - threshold) {
       emits('loadMore', lastVisibleIndex)
@@ -350,94 +262,52 @@ watch(
   }
 )
 
-// Expose virtualizer methods and properties
+type ScrollToOptions = { align?: 'start' | 'center' | 'end' | 'auto', behavior?: 'auto' | 'smooth' | 'instant' }
+
+function requireVirtualization(method: string) {
+  if (!isVirtualizerEnabled.value) {
+    console.warn(`${method} requires virtualization to be enabled`)
+    return false
+  }
+  return true
+}
+
 defineExpose({
-  /**
-   * The root element ref
-   */
   rootRef,
-  /**
-   * The virtualizer instance (null if virtualization is disabled)
-   */
-  virtualizer: computed(() => virtualizer ? virtualizer.value : null),
-  /**
-   * Scroll to a specific pixel offset
-   * @param offset - The pixel offset to scroll to
-   * @param options - Scroll options
-   * @param options.align - Alignment of the item in the viewport
-   * @param options.behavior - Scroll behavior (auto, smooth, or instant)
-   */
-  scrollToOffset: (offset: number, options?: { align?: 'start' | 'center' | 'end' | 'auto', behavior?: 'auto' | 'smooth' | 'instant' }) => {
-    if (!props.virtualize) {
-      console.warn('scrollToOffset requires virtualization to be enabled')
-      return
+  virtualizer: computed(() => isVirtualizerEnabled.value ? virtualizer.value : null),
+
+  scrollToOffset(offset: number, options?: ScrollToOptions) {
+    if (requireVirtualization('scrollToOffset')) {
+      virtualizer.value.scrollToOffset(offset, options as any)
     }
-    if (virtualizer) virtualizer.value.scrollToOffset(offset, options as any)
   },
-  /**
-   * Scroll to a specific item index
-   * @param index - The item index to scroll to
-   * @param options - Scroll options
-   * @param options.align - Alignment of the item in the viewport
-   * @param options.behavior - Scroll behavior (auto, smooth, or instant)
-   */
-  scrollToIndex: (index: number, options?: { align?: 'start' | 'center' | 'end' | 'auto', behavior?: 'auto' | 'smooth' | 'instant' }) => {
-    if (!props.virtualize) {
-      console.warn('scrollToIndex requires virtualization to be enabled')
-      return
+
+  scrollToIndex(index: number, options?: ScrollToOptions) {
+    if (requireVirtualization('scrollToIndex')) {
+      virtualizer.value.scrollToIndex(index, options as any)
     }
-    if (virtualizer) virtualizer.value.scrollToIndex(index, options as any)
   },
-  /**
-   * Get the total size of all virtualized items
-   * @returns The total size in pixels
-   */
-  getTotalSize: () => {
-    if (!props.virtualize) {
-      console.warn('getTotalSize requires virtualization to be enabled')
-      return 0
-    }
-    return virtualizer ? virtualizer.value.getTotalSize() : 0
+
+  getTotalSize() {
+    return requireVirtualization('getTotalSize') ? virtualizer.value.getTotalSize() : 0
   },
-  /**
-   * Reset all previously measured item sizes
-   */
-  measure: () => {
-    if (!props.virtualize) {
-      console.warn('measure requires virtualization to be enabled')
-      return
+
+  measure() {
+    if (requireVirtualization('measure')) {
+      virtualizer.value.measure()
     }
-    if (virtualizer) virtualizer.value.measure()
   },
-  /**
-   * Get current scroll offset in pixels
-   * @returns The current scroll offset
-   */
-  getScrollOffset: () => {
-    if (!props.virtualize) {
-      return 0
-    }
-    return virtualizer ? (virtualizer.value.scrollOffset ?? 0) : 0
+
+  getScrollOffset() {
+    return isVirtualizerEnabled.value ? virtualizer.value.scrollOffset ?? 0 : 0
   },
-  /**
-   * Check if the list is currently being scrolled
-   * @returns Whether scrolling is in progress
-   */
-  isScrolling: () => {
-    if (!props.virtualize) {
-      return false
-    }
-    return virtualizer ? virtualizer.value.isScrolling : false
+
+  isScrolling() {
+    return isVirtualizerEnabled.value ? virtualizer.value.isScrolling : false
   },
-  /**
-   * Get the current scroll direction
-   * @returns 'forward', 'backward', or null
-   */
-  getScrollDirection: () => {
-    if (!props.virtualize) {
-      return null
-    }
-    return virtualizer ? (virtualizer.value.scrollDirection ?? null) : null
+
+  getScrollDirection() {
+    return isVirtualizerEnabled.value ? virtualizer.value.scrollDirection ?? null : null
   }
 })
 </script>
@@ -447,19 +317,12 @@ defineExpose({
     ref="rootRef"
     :as="as"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :style="{
-      paddingInline: orientation === 'vertical' ? gapPadding : undefined,
-      paddingBlock: orientation === 'horizontal' ? gapPadding : undefined
-    }"
+    :style="isVirtualizerEnabled ? virtualRootStyle : undefined"
   >
-    <template v-if="!!virtualize">
+    <template v-if="isVirtualizerEnabled">
       <div
         :class="ui.viewport({ class: props.ui?.viewport })"
-        :style="{
-          position: 'relative',
-          inlineSize: orientation === 'horizontal' ? `${totalSize}px` : '100%',
-          blockSize: orientation === 'vertical' ? `${totalSize}px` : '100%'
-        }"
+        :style="virtualViewportStyle"
       >
         <div
           v-for="virtualItem in virtualItems"
@@ -467,39 +330,7 @@ defineExpose({
           :ref="measureElement as any"
           :data-index="virtualItem.index"
           :class="ui.item({ class: props.ui?.item })"
-          :style="{
-            paddingInline: orientation === 'vertical' ? gapPadding : undefined,
-            paddingBlock: orientation === 'horizontal' ? gapPadding : undefined,
-            position: 'absolute',
-            insetBlockStart:
-              orientation === 'horizontal'
-              && hasLanes
-              && virtualItem.lane !== undefined
-                ? getLanePosition(virtualItem.lane)
-                : 0,
-            insetInlineStart:
-              orientation === 'vertical'
-              && hasLanes
-              && virtualItem.lane !== undefined
-                ? getLanePosition(virtualItem.lane)
-                : 0,
-            blockSize:
-              orientation === 'horizontal'
-                ? hasLanes && virtualItem.lane !== undefined
-                  ? `${laneSize}%`
-                  : '100%'
-                : undefined,
-            inlineSize:
-              orientation === 'vertical'
-                ? hasLanes && virtualItem.lane !== undefined
-                  ? `${laneSize}%`
-                  : '100%'
-                : undefined,
-            transform:
-              orientation === 'horizontal'
-                ? `translateX(${isRtl ? -virtualItem.start : virtualItem.start}px)`
-                : `translateY(${virtualItem.start}px)`
-          }"
+          :style="getVirtualItemStyle(virtualItem)"
         >
           <slot
             :item="items![virtualItem.index] as T"
@@ -511,17 +342,21 @@ defineExpose({
     </template>
 
     <template v-else>
-      <template v-if="items?.length">
-        <div
-          v-for="(item, index) in items"
-          :key="index"
-          :class="ui.item({ class: props.ui?.item })"
-        >
-          <slot :item="item" :index="index" />
-        </div>
-      </template>
+      <div :class="ui.viewport({ class: props.ui?.viewport })">
+        <template v-if="items?.length">
+          <div
+            v-for="(item, index) in items"
+            :key="index"
+            :class="ui.item({ class: props.ui?.item })"
+          >
+            <slot :item="item" :index="index" />
+          </div>
+        </template>
 
-      <slot v-else />
+        <template v-else>
+          <slot />
+        </template>
+      </div>
     </template>
   </Primitive>
 </template>

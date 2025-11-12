@@ -13,7 +13,10 @@ links:
 
 ## Usage
 
-Use the `ScrollArea` component to create scrollable containers for any type of content. Pass an array to the `items` prop and render each item using the default slot. The component supports both vertical and horizontal scrolling, and can optionally virtualize large lists for better performance.
+Use the `ScrollArea` component to create scrollable containers with optional virtualization for large lists.
+
+- **Non-virtualized**: Gap and padding are controlled via theme (Tailwind classes)
+- **Virtualized**: Gap, padding, and layout options (like `lanes`) are configured via the `virtualize` prop
 
 ::component-example
 ---
@@ -71,9 +74,9 @@ options:
 ---
 ::
 
-### Virtualize
+### Virtualization
 
-Enable virtualization with the `virtualize` prop to efficiently handle large datasets. This renders only visible items, dramatically improving performance with thousands of items.
+Enable virtualization to render only visible items, dramatically improving performance with large lists.
 
 ::component-example
 ---
@@ -87,14 +90,14 @@ options:
 ::
 
 ::tip
-Virtualization is recommended for lists with 100+ items or when items contain heavy components.
+Use virtualization for lists with 100+ items or when items contain heavy components (images, complex UI).
 ::
 
 ## Examples
 
-### With variable height items
+### Variable heights
 
-When using virtualization with items of varying heights, provide an `estimateSize` that represents the average item height for better initial rendering.
+Provide `estimateSize` (average height) for better initial rendering. Items are automatically measured as they render.
 
 ::component-example
 ---
@@ -103,13 +106,9 @@ class: 'p-8'
 ---
 ::
 
-::note
-TanStack Virtual automatically measures and adjusts for variable heights, but providing a good estimate helps with initial rendering and scroll behavior.
-::
+### Custom content
 
-### With custom content
-
-You can use `ScrollArea` without the `items` prop for custom scrollable content.
+Use the default slot without `items` for custom scrollable content.
 
 ::component-example
 ---
@@ -118,71 +117,60 @@ class: 'p-8'
 ---
 ::
 
-### With masonry layout
+### Masonry layouts
 
-Use the `lanes` option to create multi-column masonry layouts. This is perfect for image galleries and Pinterest-style layouts.
-
-::component-example
----
-name: 'scroll-area-masonry-example'
-class: 'p-8'
-props:
-  lanes: 3
-  gap: 12
-  padding: 12
----
-::
-
-::note
-The `lanes` option works with both vertical (columns) and horizontal (rows) orientations.
-::
-
-### With responsive masonry
-
-Use the `laneWidth`, `minLanes`, and `maxLanes` options to create responsive masonry layouts that automatically adjust the number of columns based on container size.
-
-::component-example
----
-name: 'scroll-area-responsive-masonry-example'
-class: 'p-8'
-props:
-  laneWidth: 200
-  minLanes: 1
-  maxLanes: 6
----
-::
-
-### With custom virtualization options
-
-The `virtualize` prop accepts all [TanStack Virtual options](https://tanstack.com/virtual/latest/docs/api/virtualizer), plus additional responsive masonry options (`laneWidth`, `minLanes`, `maxLanes`).
+Use `lanes` for multi-column (vertical) or multi-row (horizontal) layouts.
 
 ```vue
-<template>
-  <UScrollArea
-    :items="items"
-    :virtualize="{
-      estimateSize: 150,
-      overscan: 20,
-      gap: 16,
-      paddingStart: 24,
-      paddingEnd: 24
-    }"
-    class="h-96"
-  >
-    <template #default="{ item }">
-      <!-- item content -->
-    </template>
-  </UScrollArea>
-</template>
+<UScrollArea
+  :items="items"
+  :virtualize="{
+    lanes: 3,
+    gap: 12,
+    estimateSize: 200
+  }"
+  class="h-96"
+>
+  <template #default="{ item }">
+    <img :src="item.url" :alt="item.title" class="w-full" />
+  </template>
+</UScrollArea>
 ```
 
-::tip
-You can pass any [TanStack Virtual option](https://tanstack.com/virtual/latest/docs/api/virtualizer#options) to customize the virtualization behavior. The component automatically handles `count`, `getScrollElement`, `horizontal`, `enabled`, and `isRtl` based on your props.
+::warning
+For responsive layouts, implement your own resize logic to update `lanes` based on container width:
+
+```vue
+<script setup lang="ts">
+const lanes = ref(useBreakpoints({
+  sm: 1,
+  md: 2,
+  lg: 3
+}))
+</script>
+```
 ::
 
-### With programmatic scrolling
+### Virtualization options
 
-Use the exposed methods to programmatically scroll to specific items or positions.
+Common options for the `virtualize` prop:
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `estimateSize` | `100` | Estimated item size in pixels |
+| `overscan` | `12` | Items to render outside visible area |
+| `gap` | `0` | Gap between items (pixels) |
+| `paddingStart` | `0` | Padding at start (pixels) |
+| `paddingEnd` | `0` | Padding at end (pixels) |
+| `lanes` | - | Columns (vertical) or rows (horizontal) |
+| `loadMoreThreshold` | `5` | Items from end to trigger `@load-more` |
+| `enabled` | `true` | Enable/disable virtualization |
+
+See [TanStack Virtual docs](https://tanstack.com/virtual/latest/docs/api/virtualizer#options) for all available options.
+
+### Programmatic scrolling
+
+Use exposed methods to control scrolling:
 
 ::component-example
 ---
@@ -198,33 +186,24 @@ options:
 ---
 ::
 
-### With infinite scroll
+### Infinite scroll
 
-Use the `@load-more` event to implement infinite scroll functionality. The event emits when the user scrolls within a threshold distance from the end of the list.
+Use `@load-more` to load more data as the user scrolls (requires virtualization):
 
 ```vue
 <script setup lang="ts">
 const posts = ref([...initialPosts])
-const isLoading = ref(false)
 
 async function loadMore() {
-  if (isLoading.value) return
-
-  isLoading.value = true
   const morePosts = await fetchMorePosts()
-  // Use immutable update for Vue 3 reactivity
-  posts.value = [...posts.value, ...morePosts]
-  isLoading.value = false
+  posts.value = [...posts.value, ...morePosts] // Immutable update
 }
 </script>
 
 <template>
   <UScrollArea
     :items="posts"
-    :virtualize="{
-      loadMoreThreshold: 5  // Trigger when within 5 items of the end (default)
-    }"
-    class="h-96"
+    :virtualize="{ loadMoreThreshold: 5 }"
     @load-more="loadMore"
   >
     <template #default="{ item }">
@@ -235,7 +214,7 @@ async function loadMore() {
 ```
 
 ::tip
-The `loadMore` event only fires when virtualization is enabled and provides the index of the last visible item. The `loadMoreThreshold` option (default: 5) controls how many items from the end will trigger the event. Add debouncing or a loading flag to prevent multiple simultaneous requests.
+Use a loading flag to prevent multiple simultaneous requests.
 ::
 
 ## API
@@ -293,47 +272,73 @@ All scroll methods require virtualization to be enabled. They will log a warning
 
 :component-theme
 
-## Performance Notes
+### Non-virtualized styling
 
-### When to Use Virtualization
+Customize gap and padding via theme or `ui` prop:
 
-- **Large Lists**: Lists with 100+ items
-- **Complex Items**: Each item contains heavy components or images
-- **Infinite Scroll**: Continuously loading data
-- **Performance Critical**: Mobile devices or lower-end hardware
+```vue
+<UScrollArea :items="items" :ui="{ viewport: 'gap-6 p-6' }">
+  <template #default="{ item }">{{ item }}</template>
+</UScrollArea>
+```
 
-### When Not to Use Virtualization
+Or globally in `app.config.ts`:
 
-- **Small Lists**: Less than 50 simple items
-- **Static Heights**: All items have the same fixed height and there are few items
-- **Rare Scrolling**: Content is rarely scrolled through
+```ts
+export default defineAppConfig({
+  ui: {
+    scrollArea: {
+      slots: { viewport: 'gap-4 p-4' }
+    }
+  }
+})
+```
 
-### Virtualization Tips
+## Best Practices
 
-1. **Estimate Size**: Provide an accurate `estimateSize` for better initial rendering and scroll behavior
-2. **Overscan**: Increase `overscan` (default: 12) for smoother scrolling at the cost of rendering more items
-3. **Variable Heights**: TanStack Virtual automatically measures and adjusts for variable heights dynamically
-4. **Gap & Padding**: Use `gap`, `paddingStart`, and `paddingEnd` for proper spacing in virtualized lists
-5. **Masonry Layouts**: Use `lanes` for multi-column layouts, or `laneWidth` with `minLanes`/`maxLanes` for responsive layouts
-6. **Infinite Scroll**: Use `loadMoreThreshold` to control when the `@load-more` event fires (default: 5 items from end)
+### When to virtualize
 
-### Performance Best Practices
+**Use virtualization for:**
 
-For optimal performance with large datasets:
+- Lists with 100+ items
+- Items with heavy components or images
+- Infinite scroll implementations
+- Mobile/low-end devices
 
-- **Immutable Updates**: When updating items, replace the entire array to ensure Vue 3 reactivity triggers correctly:
-  ```typescript
-  // ✅ Recommended: Immutable update
-  items.value = [...items.value, ...newItems]
+**Skip virtualization for:**
 
-  // ❌ Avoid: Direct mutation (may not trigger reactivity in Vue 3)
-  items.value.push(...newItems)
-  ```
-  This pattern aligns with [TanStack Virtual's examples](https://github.com/TanStack/virtual/tree/main/examples/vue/infinite-scroll) and Vue 3's shallow reactivity for arrays.
+- Small lists (< 50 simple items)
+- Rarely scrolled content
 
-- **TanStack Virtual Options**: All [TanStack Virtual options](https://tanstack.com/virtual/latest/docs/api/virtualizer) are available through the `virtualize` prop for advanced customization
+### Performance tips
 
-- **No Deep Watching**: ScrollArea doesn't deeply watch items, so large nested objects won't impact reactivity performance
+**Accurate estimates**
+
+Provide `estimateSize` close to average item height for better initial rendering.
+
+**Overscan**
+
+Increase `overscan` for smoother scrolling at the cost of rendering more off-screen items.
+
+**Immutable updates**
+
+Use spread syntax for reactive updates:
+
+```ts
+// Recommended
+items.value = [...items.value, ...newItems]
+
+// Avoid - may not trigger reactivity
+items.value.push(...newItems)
+```
+
+**Responsive lanes**
+
+Implement your own resize logic to update `lanes` based on viewport width.
+
+**Loading states**
+
+Use flags to prevent multiple simultaneous `@load-more` calls.
 
 ## Changelog
 

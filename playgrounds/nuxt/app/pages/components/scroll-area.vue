@@ -1,20 +1,11 @@
 <script setup lang="ts">
-const virtualize = ref(true)
+const virtualize = ref(false)
 const orientation = ref<'vertical' | 'horizontal'>('vertical')
 const itemCount = ref(100)
 const estimateSize = ref(100)
 const gap = ref(12)
 const padding = ref(12)
 const lanes = ref(3)
-
-// Responsive lanes settings
-const useResponsive = ref(false)
-const laneWidth = ref(200)
-const minLanes = ref(1)
-const maxLanes = ref(6)
-
-// Resizable container
-const containerWidth = ref(800)
 
 type Item = {
   id: number
@@ -43,6 +34,21 @@ const items = computed<Item[]>(() => {
       aspectRatio: aspectRatios[i % aspectRatios.length] === '1/1' ? 1 : aspectRatios[i % aspectRatios.length] === '4/3' ? 4 / 3 : 16 / 9
     }
   })
+})
+
+// For virtualized mode, pass layout options (gap, padding, lanes)
+const virtualizeOptions = computed(() => {
+  if (!virtualize.value) {
+    return false
+  }
+  return {
+    estimateSize: estimateSize.value,
+    gap: gap.value,
+    paddingStart: padding.value,
+    paddingEnd: padding.value,
+    lanes: lanes.value,
+    enabled: true
+  }
 })
 </script>
 
@@ -81,101 +87,54 @@ const items = computed<Item[]>(() => {
       />
     </div>
 
-    <template v-if="virtualize">
-      <!-- <div class="flex items-center gap-2">
-        <span class="text-sm text-muted">Estimate:</span>
-        <UInput
-          v-model.number="estimateSize"
-          type="number"
-          :min="20"
-          :max="500"
-          class="w-24"
-        />
-      </div> -->
+    <!-- <div class="flex items-center gap-2">
+      <span class="text-sm text-muted">Estimate:</span>
+      <UInput
+        v-model.number="estimateSize"
+        type="number"
+        :min="20"
+        :max="500"
+        class="w-24"
+      />
+    </div> -->
 
-      <div class="flex items-center gap-2">
-        <UInput
-          v-model.number="gap"
-          type="number"
-          :min="0"
-          icon="i-lucide-between-vertical-start"
-          :max="50"
-        />
-      </div>
+    <div v-if="virtualize" class="flex items-center gap-2">
+      <UInput
+        v-model.number="gap"
+        type="number"
+        :min="0"
+        icon="i-lucide-between-vertical-start"
+        :max="50"
+      />
+    </div>
 
-      <div class="flex items-center gap-2">
-        <UInput
-          v-model.number="padding"
-          type="number"
-          :min="0"
-          :max="200"
-          icon="i-lucide-square-dashed"
-        />
-      </div>
+    <div v-if="virtualize" class="flex items-center gap-2">
+      <UInput
+        v-model.number="padding"
+        type="number"
+        :min="0"
+        :max="200"
+        icon="i-lucide-square-dashed"
+      />
+    </div>
 
-      <div class="flex items-center gap-2">
-        <UInput
-          v-model.number="lanes"
-          type="number"
-          :min="1"
-          icon="i-lucide-layout-dashboard"
-          :max="10"
-          :disabled="useResponsive"
-        />
-      </div>
-
-      <USwitch v-model="useResponsive" label="Responsive" reverse />
-
-      <template v-if="useResponsive">
-        <div class="flex items-center gap-2">
-          <UInput
-            v-model.number="laneWidth"
-            type="number"
-            :min="50"
-            :max="500"
-            icon="i-lucide-panel-left"
-          />
-        </div>
-
-        <div class="flex items-center gap-2">
-          <UInput
-            v-model.number="minLanes"
-            type="number"
-            :min="1"
-            :max="10"
-            icon="i-lucide-arrow-down-to-line"
-          />
-        </div>
-
-        <div class="flex items-center gap-2">
-          <UInput
-            v-model.number="maxLanes"
-            type="number"
-            :min="1"
-            :max="10"
-            icon="i-lucide-arrow-up-to-line"
-          />
-        </div>
-      </template>
-    </template>
+    <div v-if="virtualize" class="flex items-center gap-2">
+      <UInput
+        v-model.number="lanes"
+        type="number"
+        :min="1"
+        icon="i-lucide-layout-dashboard"
+        :max="10"
+      />
+    </div>
   </Navbar>
 
-  <UCard :ui="{ body: '!p-0 h-full' }" :class="useResponsive ? '' : 'max-w-5xl w-full'" :style="{ width: useResponsive ? `${containerWidth}px` : undefined, height: useResponsive ? '600px' : undefined, resize: useResponsive ? 'both' : undefined, overflow: useResponsive ? 'auto' : undefined, minWidth: useResponsive ? '300px' : undefined, minHeight: useResponsive ? '300px' : undefined }">
+  <UCard :ui="{ body: '!p-0 h-full' }" class="max-w-5xl w-full">
     <UScrollArea
       :items="items"
       :orientation="orientation"
-      :virtualize="virtualize ? {
-        estimateSize,
-        gap,
-        paddingStart: padding,
-        paddingEnd: padding,
-        lanes: useResponsive ? undefined : (lanes > 0 ? lanes : undefined),
-        laneWidth: useResponsive ? laneWidth : undefined,
-        minLanes: useResponsive ? minLanes : undefined,
-        maxLanes: useResponsive ? maxLanes : undefined
-      } : false"
-      :class="useResponsive ? '' : 'h-128'"
-      :style="{ height: useResponsive ? '100%' : undefined }"
+      :virtualize="virtualizeOptions"
+      class="h-128"
     >
       <template v-if="orientation === 'horizontal'" #default="{ item }">
         <div class="grid grid-rows-[1fr_min-content] h-full w-max-content gap-2">
