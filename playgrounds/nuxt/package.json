@@ -16,7 +16,6 @@
     "@internationalized/date": "^3.10.0",
     "@nuxt/ui": "workspace:*",
     "@tiptap/extension-emoji": "^3.10.5",
-    "@tiptap/extension-text-align": "^3.10.5",
     "ai": "^5.0.90",
     "nuxt": "^4.2.1",
     "zod": "^4.1.12"

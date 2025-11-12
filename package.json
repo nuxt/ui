@@ -132,6 +132,7 @@
     "@tiptap/extension-image": "^3.10.5",
     "@tiptap/extension-mention": "^3.10.5",
     "@tiptap/extension-placeholder": "^3.10.5",
+    "@tiptap/extension-text-align": "^3.10.5",
     "@tiptap/markdown": "^3.10.5",
     "@tiptap/starter-kit": "^3.10.5",
     "@tiptap/suggestion": "^3.10.5",

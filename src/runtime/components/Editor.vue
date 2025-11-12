@@ -51,12 +51,13 @@ import { defu } from 'defu'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { mergeAttributes } from '@tiptap/core'
 import HorizontalRule from '@tiptap/extension-horizontal-rule'
-import Placeholder from '@tiptap/extension-placeholder'
+import Image from '@tiptap/extension-image'
 import Mention from '@tiptap/extension-mention'
-import { useEditor, EditorContent } from '@tiptap/vue-3'
+import Placeholder from '@tiptap/extension-placeholder'
+import TextAlign from '@tiptap/extension-text-align'
 import { Markdown } from '@tiptap/markdown'
 import StarterKit from '@tiptap/starter-kit'
-import Image from '@tiptap/extension-image'
+import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
@@ -119,6 +120,9 @@ const extensions = computed(() => [
     typeof props.placeholder === 'string' ? { placeholder: props.placeholder } : props.placeholder,
     { showOnlyWhenEditable: false, showOnlyCurrent: true } as PlaceholderOptions
   )),
+  TextAlign.configure({
+    types: ['heading', 'paragraph']
+  }),
   Mention.configure({
     HTMLAttributes: {
       class: 'mention'

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { EditorContent, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, Editor } from '@nuxt/ui'
-import { TextAlign } from '@tiptap/extension-text-align'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import { ImageUpload } from '../../utils/editor/image-upload'
 
@@ -276,9 +275,6 @@ const handlers = {
     v-slot="{ editor }"
     v-model="content"
     :extensions="[
-      TextAlign.configure({
-        types: ['heading', 'paragraph']
-      }),
       Emoji,
       ImageUpload
     ]"

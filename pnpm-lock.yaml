@@ -69,6 +69,9 @@ importers:
       '@tiptap/extension-placeholder':
         specifier: ^3.10.5
         version: 3.10.5(@tiptap/extensions@3.10.5(@tiptap/core@3.10.5(@tiptap/pm@3.10.5))(@tiptap/pm@3.10.5))
+      '@tiptap/extension-text-align':
+        specifier: ^3.10.5
+        version: 3.10.5(@tiptap/core@3.10.5(@tiptap/pm@3.10.5))
       '@tiptap/markdown':
         specifier: ^3.10.5
         version: 3.10.5(@tiptap/core@3.10.5(@tiptap/pm@3.10.5))(@tiptap/pm@3.10.5)
@@ -406,9 +409,6 @@ importers:
       '@tiptap/extension-emoji':
         specifier: ^3.10.5
         version: 3.10.5(@tiptap/core@3.10.5(@tiptap/pm@3.10.5))(@tiptap/pm@3.10.5)(@tiptap/suggestion@3.10.5(@tiptap/core@3.10.5(@tiptap/pm@3.10.5))(@tiptap/pm@3.10.5))(emojibase@16.0.0)
-      '@tiptap/extension-text-align':
-        specifier: ^3.10.5
-        version: 3.10.5(@tiptap/core@3.10.5(@tiptap/pm@3.10.5))
       ai:
         specifier: ^5.0.90
         version: 5.0.90(zod@4.1.12)
