@@ -98,33 +98,34 @@ function onUpdate(value: any) {
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.container({ class: props.ui?.container })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <SwitchRoot
         :id="id"
         v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
         v-model="modelValue"
         :name="name"
         :disabled="disabled || loading"
+        data-slot="base"
         :class="ui.base({ class: props.ui?.base })"
         @update:model-value="onUpdate"
       >
-        <SwitchThumb :class="ui.thumb({ class: props.ui?.thumb })">
-          <UIcon v-if="loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.icon({ class: props.ui?.icon, checked: true, unchecked: true })" />
+        <SwitchThumb data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })">
+          <UIcon v-if="loading" :name="loadingIcon || appConfig.ui.icons.loading" data-slot="icon" :class="ui.icon({ class: props.ui?.icon, checked: true, unchecked: true })" />
           <template v-else>
-            <UIcon v-if="checkedIcon" :name="checkedIcon" :class="ui.icon({ class: props.ui?.icon, checked: true })" />
-            <UIcon v-if="uncheckedIcon" :name="uncheckedIcon" :class="ui.icon({ class: props.ui?.icon, unchecked: true })" />
+            <UIcon v-if="checkedIcon" :name="checkedIcon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon, checked: true })" />
+            <UIcon v-if="uncheckedIcon" :name="uncheckedIcon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon, unchecked: true })" />
           </template>
         </SwitchThumb>
       </SwitchRoot>
     </div>
-    <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <Label v-if="label || !!slots.label" :for="id" :class="ui.label({ class: props.ui?.label })">
+    <div v-if="(label || !!slots.label) || (description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <Label v-if="label || !!slots.label" :for="id" data-slot="label" :class="ui.label({ class: props.ui?.label })">
         <slot name="label" :label="label">
           {{ label }}
         </slot>
       </Label>
-      <p v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+      <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description" :description="description">
           {{ description }}
         </slot>

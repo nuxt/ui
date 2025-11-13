@@ -166,11 +166,12 @@ function onUpdate(value: any) {
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
+    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >
-    <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
-      <legend v-if="legend || !!slots.legend" :class="ui.legend({ class: props.ui?.legend })">
+    <fieldset data-slot="fieldset" :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
+      <legend v-if="legend || !!slots.legend" data-slot="legend" :class="ui.legend({ class: props.ui?.legend })">
         <slot name="legend">
           {{ legend }}
         </slot>
@@ -185,6 +186,7 @@ function onUpdate(value: any) {
         :name="name"
         :disabled="item.disabled || disabled"
         :ui="{ ...(props.ui ? omit(props.ui, ['root']) : undefined), ...(item.ui || {}) }"
+        data-slot="item"
         :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
       >
         <template v-for="(_, name) in getProxySlots()" #[name]>

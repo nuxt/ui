@@ -27,6 +27,9 @@ importers:
       '@internationalized/number':
         specifier: ^3.6.5
         version: 3.6.5
+      '@nuxt/content':
+        specifier: ^3.0.0
+        version: 3.8.0(better-sqlite3@12.4.1)(magicast@0.3.5)(valibot@1.1.0(typescript@5.8.3))
       '@nuxt/fonts':
         specifier: ^0.12.1
         version: 0.12.1(db0@0.3.4(better-sqlite3@12.4.1))(ioredis@5.8.2)(magicast@0.3.5)(vite@7.2.2(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1))
@@ -175,9 +178,6 @@ importers:
         specifier: ^3.24.0 || ^4.0.0
         version: 4.1.12
     devDependencies:
-      '@nuxt/content':
-        specifier: ^3.8.0
-        version: 3.8.0(better-sqlite3@12.4.1)(magicast@0.3.5)(valibot@1.1.0(typescript@5.8.3))
       '@nuxt/eslint-config':
         specifier: ^1.10.0
         version: 1.10.0(@typescript-eslint/utils@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.8.3))(@vue/compiler-sfc@3.5.24)(eslint@9.39.1(jiti@2.6.1))(typescript@5.8.3)
@@ -320,8 +320,8 @@ importers:
         specifier: ^4.2.1
         version: 4.2.1(@parcel/watcher@2.5.1)(@types/node@24.9.2)(@vue/compiler-sfc@3.5.24)(better-sqlite3@12.4.1)(db0@0.3.4(better-sqlite3@12.4.1))(eslint@9.39.1(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.5.1)(meow@13.2.0)(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vite@7.2.2(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1))(vue-tsc@3.1.3(typescript@5.8.3))(yaml@2.8.1)
       nuxt-component-meta:
-        specifier: ^0.14.1
-        version: 0.14.1(magicast@0.5.1)
+        specifier: ^0.14.2
+        version: 0.14.2(magicast@0.5.1)
       nuxt-llms:
         specifier: ^0.1.3
         version: 0.1.3(magicast@0.5.1)
@@ -1636,8 +1636,8 @@ packages:
   '@nuxtjs/color-mode@3.5.2':
     resolution: {integrity: sha512-cC6RfgZh3guHBMLLjrBB2Uti5eUoGM9KyauOaYS9ETmxNWBMTvpgjvSiSJp1OFljIXPIqVTJ3xtJpSNZiO3ZaA==}
 
-  '@nuxtjs/mdc@0.18.0':
-    resolution: {integrity: sha512-/rWEOiLpD6oNx2FC/UsYxLn1pP31pvRmaX5y8GurBOogATKDWd3jlfKCGgshLnsWM6dCKgNkF0mCZQCMZMfpIQ==}
+  '@nuxtjs/mdc@0.18.2':
+    resolution: {integrity: sha512-pdeWd2/oOPriPVa1F6QNoK4fZCp/b4sxEVoouXJJCETCBIFSNS4OOtdRTY1ATLM1Gr+6ZvNyNPABvaaUEGC4Lw==}
 
   '@nuxtjs/plausible@2.0.1':
     resolution: {integrity: sha512-Edr7oFIeZ9Og2lS21NhC3MRgcR7X9H1Hyjve8EsM2CycJGBlCcGKHs0+vi4KpbCVi33VlTXUUYNRPtGyeUX6Fw==}
@@ -5702,8 +5702,8 @@ packages:
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
 
-  nuxt-component-meta@0.14.1:
-    resolution: {integrity: sha512-Q8NuynMJleiutBx4cD33TLp5HCGGmGfz/dE+PNOsAScSAG54hmpPk2beeIwh2VZJoMzPAyPPAqbsdIKpMcOHbA==}
+  nuxt-component-meta@0.14.2:
+    resolution: {integrity: sha512-pxEnARUzRmq3zbOm8fJkWLPR8mL82NeP5Pu/iYff4otl6jPJwgC1Cbpz3Z77HlVeYVtzhSpQRsCSo/+296CwYw==}
     hasBin: true
 
   nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@e3eb2c4:
@@ -6368,11 +6368,11 @@ packages:
   remark-gfm@4.0.1:
     resolution: {integrity: sha512-1quofZ2RQ9EWdeN34S79+KExV1764+wCUGop5CPL1WGdD0ocPpu91lzPGbwWMECpEpd42kJGQwzRfyov9j4yNg==}
 
-  remark-mdc-edge@3.6.0-29333381.8558577:
-    resolution: {integrity: sha512-kI1hczSecJMgLPzD5YKNpsOsmMBroZNaF8XitfbBxx7dGP9V3O5CBEHxCjgkVBmfOXN50i8db/bLuk8lbLsjmg==}
-
   remark-mdc@3.7.0:
     resolution: {integrity: sha512-6XmnEYc4u3lgBf79M6I73nmKhwJCXn5J53BkzIplqjUK/29GubdpYBCF+oH2WQFvNy/70wuf365xwOSUxt397g==}
+
+  remark-mdc@3.8.1:
+    resolution: {integrity: sha512-TGFY61OhgziAITAomenbw4THQvEHC7MxZI1kO1YL/VuWQTHZ0RG20G6GGATIFeGnq65IUe7dngiQVcVIeFdB/g==}
 
   remark-parse@11.0.0:
     resolution: {integrity: sha512-FCxlKLNGknS5ba/1lmpYijMUzX2esxW5xQqjWxw2eHFfS2MSdaHVINFmhjo+qN1WhZhNimq0dZATN9pH0IDrpA==}
@@ -7224,6 +7224,9 @@ packages:
   unwasm@0.3.11:
     resolution: {integrity: sha512-Vhp5gb1tusSQw5of/g3Q697srYgMXvwMgXMjcG4ZNga02fDX9coxJ9fAb0Ci38hM2Hv/U1FXRPGgjP2BYqhNoQ==}
 
+  unwasm@0.4.2:
+    resolution: {integrity: sha512-/DWXXXn63zAbdoQ6jtdbhr1WP2Cz6ax2nwIu4/yqj4617VWmva4UAzNH16q2fD4I6fym4tSAXFT8P89weXn2AA==}
+
   update-browserslist-db@1.1.4:
     resolution: {integrity: sha512-q0SPT4xyU84saUX+tomz1WLkxUbuaJnR1xWt17M7fJtEJigJeWUNGUqrauFXsHnqev9y9JTRGwk13tFBuKby4A==}
     hasBin: true
@@ -7468,16 +7471,13 @@ packages:
   vue-bundle-renderer@2.2.0:
     resolution: {integrity: sha512-sz/0WEdYH1KfaOm0XaBmRZOWgYTEvUDt6yPYaUzl4E52qzgWLlknaPPTTZmp6benaPTlQAI/hN1x3tAzZygycg==}
 
-  vue-component-meta@3.1.2:
-    resolution: {integrity: sha512-LpQiZuTrkKOpiQAMVMrFQ4MFnxCZX4qA/sbMR2zJL/2P2c2e1sc75bfvluuEKO44PviMNE396qZRWxXTqwB9aA==}
+  vue-component-meta@3.1.3:
+    resolution: {integrity: sha512-Rtaa1L5Vu9iQEnL0t7rkhebuUGOWQavAeFl8DS3IGQZUndJoQnW+k4+eLZUnCwjiCA4DV8KKSlLKptbpHxLOGw==}
     peerDependencies:
       typescript: 5.8.3
 
   vue-component-type-helpers@2.2.12:
     resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
-
-  vue-component-type-helpers@3.1.2:
-    resolution: {integrity: sha512-ch3/SKBtxdZq18vsEntiGCdSszCRNfhX5QaTxjSacCAXLlNQRXfXo+ANjoQEYJMsJOJy1/vHF6Tkc4s85MS+zw==}
 
   vue-component-type-helpers@3.1.3:
     resolution: {integrity: sha512-V1dOD8XYfstOKCnXbWyEJIrhTBMwSyNjv271L1Jlx9ExpNlCSuqOs3OdWrGJ0V544zXufKbcYabi/o+gK8lyfQ==}
@@ -8767,7 +8767,7 @@ snapshots:
   '@nuxt/content@3.8.0(better-sqlite3@12.4.1)(magicast@0.3.5)(valibot@1.1.0(typescript@5.8.3))':
     dependencies:
       '@nuxt/kit': 4.2.1(magicast@0.3.5)
-      '@nuxtjs/mdc': 0.18.0(magicast@0.3.5)
+      '@nuxtjs/mdc': 0.18.2(magicast@0.3.5)
       '@shikijs/langs': 3.14.0
       '@sqlite.org/sqlite-wasm': 3.50.4-build1
       '@standard-schema/spec': 1.0.0
@@ -8828,7 +8828,7 @@ snapshots:
   '@nuxt/content@3.8.0(better-sqlite3@12.4.1)(magicast@0.5.1)(valibot@1.1.0(typescript@5.8.3))':
     dependencies:
       '@nuxt/kit': 4.2.1(magicast@0.5.1)
-      '@nuxtjs/mdc': 0.18.0(magicast@0.5.1)
+      '@nuxtjs/mdc': 0.18.2(magicast@0.5.1)
       '@shikijs/langs': 3.14.0
       '@sqlite.org/sqlite-wasm': 3.50.4-build1
       '@standard-schema/spec': 1.0.0
@@ -9521,7 +9521,7 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@nuxtjs/mdc@0.18.0(magicast@0.3.5)':
+  '@nuxtjs/mdc@0.18.2(magicast@0.3.5)':
     dependencies:
       '@nuxt/kit': 4.2.1(magicast@0.3.5)
       '@shikijs/core': 3.14.0
@@ -9554,7 +9554,7 @@ snapshots:
       rehype-sort-attributes: 5.0.1
       remark-emoji: 5.0.2
       remark-gfm: 4.0.1
-      remark-mdc: remark-mdc-edge@3.6.0-29333381.8558577
+      remark-mdc: 3.8.1
       remark-parse: 11.0.0
       remark-rehype: 11.1.2
       remark-stringify: 11.0.0
@@ -9564,13 +9564,13 @@ snapshots:
       unified: 11.0.5
       unist-builder: 4.0.0
       unist-util-visit: 5.0.0
-      unwasm: 0.3.11
+      unwasm: 0.4.2
       vfile: 6.0.3
     transitivePeerDependencies:
       - magicast
       - supports-color
 
-  '@nuxtjs/mdc@0.18.0(magicast@0.5.1)':
+  '@nuxtjs/mdc@0.18.2(magicast@0.5.1)':
     dependencies:
       '@nuxt/kit': 4.2.1(magicast@0.5.1)
       '@shikijs/core': 3.14.0
@@ -9603,7 +9603,7 @@ snapshots:
       rehype-sort-attributes: 5.0.1
       remark-emoji: 5.0.2
       remark-gfm: 4.0.1
-      remark-mdc: remark-mdc-edge@3.6.0-29333381.8558577
+      remark-mdc: 3.8.1
       remark-parse: 11.0.0
       remark-rehype: 11.1.2
       remark-stringify: 11.0.0
@@ -9613,7 +9613,7 @@ snapshots:
       unified: 11.0.5
       unist-builder: 4.0.0
       unist-util-visit: 5.0.0
-      unwasm: 0.3.11
+      unwasm: 0.4.2
       vfile: 6.0.3
     transitivePeerDependencies:
       - magicast
@@ -13951,7 +13951,7 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
-  nuxt-component-meta@0.14.1(magicast@0.5.1):
+  nuxt-component-meta@0.14.2(magicast@0.5.1):
     dependencies:
       '@nuxt/kit': 4.2.1(magicast@0.5.1)
       citty: 0.1.6
@@ -13961,7 +13961,7 @@ snapshots:
       scule: 1.3.0
       typescript: 5.8.3
       ufo: 1.6.1
-      vue-component-meta: 3.1.2(typescript@5.8.3)
+      vue-component-meta: 3.1.3(typescript@5.8.3)
     transitivePeerDependencies:
       - magicast
 
@@ -13975,7 +13975,7 @@ snapshots:
       scule: 1.3.0
       typescript: 5.8.3
       ufo: 1.6.1
-      vue-component-meta: 3.1.2(typescript@5.8.3)
+      vue-component-meta: 3.1.3(typescript@5.8.3)
     transitivePeerDependencies:
       - magicast
 
@@ -13989,7 +13989,7 @@ snapshots:
       scule: 1.3.0
       typescript: 5.8.3
       ufo: 1.6.1
-      vue-component-meta: 3.1.2(typescript@5.8.3)
+      vue-component-meta: 3.1.3(typescript@5.8.3)
     transitivePeerDependencies:
       - magicast
 
@@ -15112,7 +15112,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  remark-mdc-edge@3.6.0-29333381.8558577:
+  remark-mdc@3.7.0:
     dependencies:
       '@types/mdast': 4.0.4
       '@types/unist': 3.0.3
@@ -15135,7 +15135,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  remark-mdc@3.7.0:
+  remark-mdc@3.8.1:
     dependencies:
       '@types/mdast': 4.0.4
       '@types/unist': 3.0.3
@@ -16133,6 +16133,15 @@ snapshots:
       pkg-types: 2.3.0
       unplugin: 2.3.10
 
+  unwasm@0.4.2:
+    dependencies:
+      exsolve: 1.0.7
+      knitwork: 1.2.0
+      magic-string: 0.30.21
+      mlly: 1.8.0
+      pathe: 2.0.3
+      pkg-types: 2.3.0
+
   update-browserslist-db@1.1.4(browserslist@4.27.0):
     dependencies:
       browserslist: 4.27.0
@@ -16388,17 +16397,15 @@ snapshots:
     dependencies:
       ufo: 1.6.1
 
-  vue-component-meta@3.1.2(typescript@5.8.3):
+  vue-component-meta@3.1.3(typescript@5.8.3):
     dependencies:
       '@volar/typescript': 2.4.23
-      '@vue/language-core': 3.1.2(typescript@5.8.3)
+      '@vue/language-core': 3.1.3(typescript@5.8.3)
       path-browserify: 1.0.1
       typescript: 5.8.3
-      vue-component-type-helpers: 3.1.2
+      vue-component-type-helpers: 3.1.3
 
   vue-component-type-helpers@2.2.12: {}
-
-  vue-component-type-helpers@3.1.2: {}
 
   vue-component-type-helpers@3.1.3: {}
 

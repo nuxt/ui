@@ -6,14 +6,14 @@ exports[`Modal > renders with actions slot correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
       <!--v-if-->
       <!--v-if-->
-    </div>Actions slot<button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div>Actions slot<button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -33,19 +33,19 @@ exports[`Modal > renders with body slot correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
   </div>
-  <div class="flex-1 p-4 sm:p-6 overflow-y-auto">Body slot</div>
+  <div data-slot="body" class="flex-1 p-4 sm:p-6 overflow-y-auto">Body slot</div>
   <!--v-if-->
 </div>
 
@@ -60,14 +60,14 @@ exports[`Modal > renders with class correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden bg-elevated" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden bg-elevated" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -87,11 +87,11 @@ exports[`Modal > renders with close slot correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
       <!--v-if-->
       <!--v-if-->
     </div>Close slot
@@ -111,14 +111,14 @@ exports[`Modal > renders with closeIcon correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -138,8 +138,8 @@ exports[`Modal > renders with content slot correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->Content slot
 </div>
 
@@ -154,14 +154,14 @@ exports[`Modal > renders with default slot correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="reka-dialog-content-v-0-0-0" role="dialog" aria-describedby="reka-dialog-description-v-0-0-2" aria-labelledby="reka-dialog-title-v-0-0-1" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="reka-dialog-content-v-0-0-0" role="dialog" aria-describedby="reka-dialog-description-v-0-0-2" aria-labelledby="reka-dialog-title-v-0-0-1" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -181,14 +181,14 @@ exports[`Modal > renders with description correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
+      <h2 id="reka-dialog-title-v-0-0-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
+      <p id="reka-dialog-description-v-0-0-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -208,14 +208,14 @@ exports[`Modal > renders with description slot correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
       <!--v-if-->
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description slot</p>
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      <p id="reka-dialog-description-v-0-0-1" data-slot="description" class="mt-1 text-muted text-sm">Description slot</p>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -235,20 +235,20 @@ exports[`Modal > renders with footer slot correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
   </div>
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6">Footer slot</div>
+  <div data-slot="footer" class="flex items-center gap-1.5 p-4 sm:px-6">Footer slot</div>
 </div>
 
 
@@ -262,14 +262,14 @@ exports[`Modal > renders with fullscreen correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] inset-0 fixed" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] inset-0 fixed" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
+      <h2 id="reka-dialog-title-v-0-0-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
+      <p id="reka-dialog-description-v-0-0-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -289,10 +289,10 @@ exports[`Modal > renders with header slot correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">Header slot</div>
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">Header slot</div>
   <!--v-if-->
   <!--v-if-->
 </div>
@@ -308,14 +308,14 @@ exports[`Modal > renders with open correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" style="pointer-events: auto;">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" style="pointer-events: auto;">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -334,14 +334,14 @@ exports[`Modal > renders with scrollable and fullscreen correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75 overflow-y-auto">
-  <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] inset-0 relative" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75 overflow-y-auto">
+  <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] inset-0 relative" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
     <!--v-if-->
-    <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-      <div class="">
-        <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
-        <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
-      </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+      <div data-slot="wrapper" class="">
+        <h2 id="reka-dialog-title-v-0-0-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
+        <p id="reka-dialog-description-v-0-0-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
+      </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button>
@@ -360,14 +360,14 @@ exports[`Modal > renders with scrollable and without overlay correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] overflow-y-auto grid place-items-center p-4 sm:py-8">
-  <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default relative" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] overflow-y-auto grid place-items-center p-4 sm:py-8">
+  <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default relative" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
     <!--v-if-->
-    <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-      <div class="">
-        <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
-        <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
-      </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+      <div data-slot="wrapper" class="">
+        <h2 id="reka-dialog-title-v-0-0-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
+        <p id="reka-dialog-description-v-0-0-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
+      </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button>
@@ -386,14 +386,14 @@ exports[`Modal > renders with scrollable correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75 overflow-y-auto grid place-items-center p-4 sm:py-8">
-  <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default relative" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75 overflow-y-auto grid place-items-center p-4 sm:py-8">
+  <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default relative" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
     <!--v-if-->
-    <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-      <div class="">
-        <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
-        <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
-      </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+      <div data-slot="wrapper" class="">
+        <h2 id="reka-dialog-title-v-0-0-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
+        <p id="reka-dialog-description-v-0-0-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
+      </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button>
@@ -413,14 +413,14 @@ exports[`Modal > renders with title correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
+      <h2 id="reka-dialog-title-v-0-0-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -440,14 +440,14 @@ exports[`Modal > renders with title slot correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title slot</h2>
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
+      <h2 id="reka-dialog-title-v-0-0-0" data-slot="title" class="text-highlighted font-semibold">Title slot</h2>
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -467,14 +467,14 @@ exports[`Modal > renders with ui correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-2"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-2"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -494,13 +494,13 @@ exports[`Modal > renders without close correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
+      <h2 id="reka-dialog-title-v-0-0-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
+      <p id="reka-dialog-description-v-0-0-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
     </div>
     <!--v-if-->
   </div>
@@ -520,13 +520,13 @@ exports[`Modal > renders without overlay correctly 1`] = `
 
 
 <!--v-if-->
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
+      <h2 id="reka-dialog-title-v-0-0-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
+      <p id="reka-dialog-description-v-0-0-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -546,14 +546,14 @@ exports[`Modal > renders without transition correctly 1`] = `
 
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" class="bg-default divide-y divide-default flex flex-col focus:outline-none w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none w-[calc(100vw-2rem)] max-w-lg rounded-lg shadow-lg ring ring-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <!--v-if-->
-  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
-    <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+  <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div data-slot="wrapper" class="">
+      <h2 id="reka-dialog-title-v-0-0-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
+      <p id="reka-dialog-description-v-0-0-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
+    </div><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>

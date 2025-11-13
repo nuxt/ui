@@ -132,6 +132,7 @@ defineExpose({
     v-slot="{ segments }"
     :name="name"
     :disabled="disabled"
+    data-slot="base"
     :class="ui.base({ class: [props.ui?.base, props.class] })"
     @update:model-value="onUpdate"
     @blur="onBlur"
@@ -142,6 +143,7 @@ defineExpose({
       :key="`${segment.part}-${index}`"
       :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
       :part="segment.part"
+      data-slot="segment"
       :class="ui.segment({ class: props.ui?.segment })"
     >
       {{ segment.value.trim() }}
@@ -149,16 +151,16 @@ defineExpose({
 
     <slot :ui="ui" />
 
-    <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+    <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </TimeFieldRoot>

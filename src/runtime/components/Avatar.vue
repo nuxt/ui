@@ -98,6 +98,7 @@ function onError() {
     :is="props.chip ? UChip : Primitive"
     :as="as.root"
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
+    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="props.style"
   >
@@ -109,14 +110,15 @@ function onError() {
       :width="sizePx"
       :height="sizePx"
       v-bind="$attrs"
+      data-slot="image"
       :class="ui.image({ class: props.ui?.image })"
       @error="onError"
     />
 
     <Slot v-else v-bind="$attrs">
       <slot>
-        <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
-        <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
+        <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+        <span v-else data-slot="fallback" :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
       </slot>
     </Slot>
   </component>

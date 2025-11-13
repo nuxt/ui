@@ -131,10 +131,11 @@ defineExpose({
     :default-value="defaultValue"
     :orientation="orientation"
     :activation-mode="activationMode"
+    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
-    <TabsList :class="ui.list({ class: props.ui?.list })">
-      <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
+    <TabsList data-slot="list" :class="ui.list({ class: props.ui?.list })">
+      <TabsIndicator data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" />
 
       <slot name="list-leading" />
 
@@ -144,14 +145,15 @@ defineExpose({
         :ref="el => (triggersRef[index] = el as ComponentPublicInstance)"
         :value="item.value ?? String(index)"
         :disabled="item.disabled"
+        data-slot="trigger"
         :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger] })"
       >
         <slot name="leading" :item="item" :index="index" :ui="ui">
-          <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, item.ui?.leadingIcon] })" />
-          <UAvatar v-else-if="item.avatar" :size="((item.ui?.leadingAvatarSize || props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.leadingAvatar({ class: [props.ui?.leadingAvatar, item.ui?.leadingAvatar] })" />
+          <UIcon v-if="item.icon" :name="item.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, item.ui?.leadingIcon] })" />
+          <UAvatar v-else-if="item.avatar" :size="((item.ui?.leadingAvatarSize || props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: [props.ui?.leadingAvatar, item.ui?.leadingAvatar] })" />
         </slot>
 
-        <span v-if="get(item, props.labelKey as string) || !!slots.default" :class="ui.label({ class: [props.ui?.label, item.ui?.label] })">
+        <span v-if="get(item, props.labelKey as string) || !!slots.default" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label] })">
           <slot :item="item" :index="index">{{ get(item, props.labelKey as string) }}</slot>
         </span>
 
@@ -162,6 +164,7 @@ defineExpose({
             variant="outline"
             :size="((item.ui?.trailingBadgeSize || props.ui?.trailingBadgeSize || ui.trailingBadgeSize()) as BadgeProps['size'])"
             v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
+            data-slot="trailingBadge"
             :class="ui.trailingBadge({ class: [props.ui?.trailingBadge, item.ui?.trailingBadge] })"
           />
         </slot>
@@ -171,7 +174,7 @@ defineExpose({
     </TabsList>
 
     <template v-if="!!content">
-      <TabsContent v-for="(item, index) of items" :key="index" :value="item.value ?? String(index)" :class="ui.content({ class: [props.ui?.content, item.ui?.content, item.class] })">
+      <TabsContent v-for="(item, index) of items" :key="index" :value="item.value ?? String(index)" data-slot="content" :class="ui.content({ class: [props.ui?.content, item.ui?.content, item.class] })">
         <slot :name="((item.slot || 'content') as keyof TabsSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :ui="ui">
           {{ item.content }}
         </slot>
