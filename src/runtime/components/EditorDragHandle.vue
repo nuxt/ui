@@ -139,6 +139,7 @@ function onClick(_event: MouseEvent) {
           icon: props.icon || appConfig.ui.icons.drag,
           ...$attrs
         }"
+        data-slot="handle"
         :class="ui.handle({ class: [props.ui?.handle, props.class] })"
       />
     </slot>
