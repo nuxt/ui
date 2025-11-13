@@ -112,7 +112,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSea
       </template>
 
       <template v-if="!collapsed" #trailing="{ ui: uiProxy }">
-        <div :class="ui.trailing({ class: props.ui?.trailing })">
+        <div data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :ui="uiProxy">
             <template v-if="kbds?.length">
               <UKbd v-for="(kbd, index) in kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
