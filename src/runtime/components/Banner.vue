@@ -119,7 +119,7 @@ function onClose() {
 </script>
 
 <template>
-  <Primitive :as="as" class="banner" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" class="banner" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ULink
       v-if="to"
       :aria-label="title"
@@ -131,28 +131,28 @@ function onClose() {
       <span class="absolute inset-0 " aria-hidden="true" />
     </ULink>
 
-    <UContainer :class="ui.container({ class: props.ui?.container })">
-      <div :class="ui.left({ class: props.ui?.left })" />
+    <UContainer data-slot="container" :class="ui.container({ class: props.ui?.container })">
+      <div data-slot="left" :class="ui.left({ class: props.ui?.left })" />
 
-      <div :class="ui.center({ class: props.ui?.center })">
+      <div data-slot="center" :class="ui.center({ class: props.ui?.center })">
         <slot name="leading" :ui="ui">
-          <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
+          <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
         </slot>
 
-        <div v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+        <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ title }}
           </slot>
         </div>
 
-        <div v-if="actions?.length || !!slots.actions" :class="ui.actions({ class: props.ui?.actions })">
+        <div v-if="actions?.length || !!slots.actions" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
           <slot name="actions">
             <UButton v-for="(action, index) in actions" :key="index" color="neutral" size="xs" v-bind="action" />
           </slot>
         </div>
       </div>
 
-      <div :class="ui.right({ class: props.ui?.right })">
+      <div data-slot="right" :class="ui.right({ class: props.ui?.right })">
         <slot name="close" :ui="ui">
           <UButton
             v-if="close"
@@ -162,6 +162,7 @@ function onClose() {
             variant="ghost"
             :aria-label="t('banner.close')"
             v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
+            data-slot="close"
             :class="ui.close({ class: props.ui?.close })"
             @click="onClose"
           />
