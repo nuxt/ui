@@ -16,7 +16,7 @@ const items = Array.from({ length: 30 }, (_, i) => ({
     :orientation="orientation"
     :class="orientation === 'vertical' ? 'h-96 flex flex-col' : 'w-full'"
     class="border border-default rounded-lg p-4"
-    :ui="{ root: 'gap-4' }"
+    :ui="{ viewport: 'p-0' }"
   >
     <template #default="{ item }">
       <UCard>

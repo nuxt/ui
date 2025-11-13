@@ -8,12 +8,12 @@ export default {
     orientation: {
       vertical: {
         root: 'overflow-y-auto overflow-x-hidden',
-        viewport: 'columns-xs',
-        item: 'mb-3'
+        viewport: 'columns-xs inline-flex flex-col gap-3',
+        item: ''
       },
       horizontal: {
         root: 'overflow-x-auto overflow-y-hidden',
-        viewport: 'flex-row',
+        viewport: 'inline-flex flex-row gap-3',
         item: 'w-max'
       }
     }

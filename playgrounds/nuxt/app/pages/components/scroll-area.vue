@@ -135,6 +135,7 @@ const virtualizeOptions = computed(() => {
       :orientation="orientation"
       :virtualize="virtualizeOptions"
       class="h-128"
+      :ui="{ viewport: `${orientation === 'vertical' ? 'w-full' : 'h-full'}` }"
     >
       <template v-if="orientation === 'horizontal'" #default="{ item }">
         <div class="grid grid-rows-[1fr_min-content] h-full w-max-content gap-2">
