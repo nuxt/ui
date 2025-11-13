@@ -16,6 +16,7 @@ const items = Array.from({ length: 50 }, (_, i) => ({
 
 <template>
   <UScrollArea
+    v-slot="{ item }"
     :items="items"
     :orientation="orientation"
     :virtualize="virtualize ? {
@@ -26,17 +27,15 @@ const items = Array.from({ length: 50 }, (_, i) => ({
     } : false"
     class="h-96 w-full border border-default rounded-lg"
   >
-    <template #default="{ item }">
-      <UCard class="h-full overflow-hidden">
-        <template #header>
-          <h3 class="font-semibold">
-            {{ item.title }}
-          </h3>
-        </template>
-        <p class="text-sm text-muted">
-          {{ item.description }}
-        </p>
-      </UCard>
-    </template>
+    <UCard class="h-full overflow-hidden">
+      <template #header>
+        <h3 class="font-semibold">
+          {{ item.title }}
+        </h3>
+      </template>
+      <p class="text-sm text-muted">
+        {{ item.description }}
+      </p>
+    </UCard>
   </UScrollArea>
 </template>

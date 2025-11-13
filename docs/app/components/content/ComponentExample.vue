@@ -44,6 +44,7 @@ const props = withDefaults(defineProps<{
    * A list of variable props to link to the component.
    */
   options?: Array<{
+    type?: string
     alias?: string
     name: string
     label: string
@@ -195,6 +196,7 @@ const urlSearchParams = computed(() => {
             <UInput
               v-else
               :model-value="get(optionsValues, option.name)"
+              :type="option.type"
               color="neutral"
               variant="soft"
               :ui="{ base: 'rounded-sm rounded-l-none min-w-12' }"

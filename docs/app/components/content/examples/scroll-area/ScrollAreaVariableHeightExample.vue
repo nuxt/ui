@@ -10,21 +10,20 @@ const items = Array.from({ length: 100 }, (_, i) => ({
 
 <template>
   <UScrollArea
+    v-slot="{ item }"
     :items="items"
-    :virtualize="{ estimateSize: 120, lanes: 3, gap: 12, paddingStart: 12, paddingEnd: 12 }"
+    :virtualize="{ estimateSize: 120, lanes: 3, gap: 16, paddingStart: 16, paddingEnd: 16 }"
     class="h-96 w-full border border-default rounded-lg"
   >
-    <template #default="{ item }">
-      <UCard>
-        <template #header>
-          <h3 class="font-semibold">
-            {{ item.title }}
-          </h3>
-        </template>
-        <p class="text-sm text-muted">
-          {{ item.description }}
-        </p>
-      </UCard>
-    </template>
+    <UCard>
+      <template #header>
+        <h3 class="font-semibold">
+          {{ item.title }}
+        </h3>
+      </template>
+      <p class="text-sm text-muted">
+        {{ item.description }}
+      </p>
+    </UCard>
   </UScrollArea>
 </template>

@@ -42,16 +42,16 @@ function scrollToItem(index: number) {
       </template>
     </UScrollArea>
 
-    <div class="flex items-center gap-2">
-      <UButton icon="i-lucide-arrow-up-to-line" size="sm" @click="scrollToTop">
+    <UFieldGroup size="sm">
+      <UButton icon="i-lucide-arrow-up-to-line" color="neutral" variant="outline" @click="scrollToTop">
         Top
       </UButton>
-      <UButton icon="i-lucide-arrow-down-to-line" size="sm" @click="scrollToBottom">
+      <UButton icon="i-lucide-arrow-down-to-line" color="neutral" variant="outline" @click="scrollToBottom">
         Bottom
       </UButton>
-      <UButton icon="i-lucide-navigation" size="sm" @click="scrollToItem(targetIndex || 500)">
+      <UButton icon="i-lucide-navigation" color="neutral" variant="outline" @click="scrollToItem(targetIndex || 500)">
         Go to {{ targetIndex || 500 }}
       </UButton>
-    </div>
+    </UFieldGroup>
   </div>
 </template>

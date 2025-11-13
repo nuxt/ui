@@ -14,15 +14,16 @@ navigation.badge: Soon
 
 ## Usage
 
-Use the `ScrollArea` component to create scrollable containers with optional virtualization for large lists.
+The ScrollArea component creates scrollable containers with optional virtualization for large lists.
 
-- **Non-virtualized**: Gap and padding are controlled via theme (Tailwind classes)
-- **Virtualized**: Gap, padding, and layout options (like `lanes`) are configured via the `virtualize` prop
+::note
+When virtualization is **disabled**, spacing and layout use theme configuration. When **enabled**, configure gap, padding, and lanes via the `virtualize` prop.
+::
 
 ::component-example
 ---
-name: 'scroll-area-basic-example'
-class: 'p-8'
+collapse: true
+name: 'scroll-area-example'
 options:
   - name: orientation
     label: orientation
@@ -37,20 +38,23 @@ options:
       - true
       - false
   - name: lanes
+    type: number
     label: lanes
     default: 3
     visibleWhen:
       option: virtualize
       is: true
   - name: gap
+    type: number
     label: gap
-    default: 12
+    default: 16
     visibleWhen:
       option: virtualize
       is: true
   - name: padding
+    type: number
     label: padding
-    default: 12
+    default: 16
     visibleWhen:
       option: virtualize
       is: true
@@ -63,8 +67,8 @@ Use the `orientation` prop to change the scroll direction. Defaults to `vertical
 
 ::component-example
 ---
+collapse: true
 name: 'scroll-area-orientation-example'
-class: 'p-8'
 options:
   - name: orientation
     label: orientation
@@ -77,12 +81,16 @@ options:
 
 ### Virtualization
 
-Enable virtualization to render only visible items, dramatically improving performance with large lists.
+Use the `virtualize` prop to render only the items currently in view, significantly boosting performance when working with large datasets.
+
+::note
+Use virtualization for large lists (100+ items) or heavy components. Skip for small, simple lists (< 50 items).
+::
 
 ::component-example
 ---
-name: 'scroll-area-virtualized-example'
-class: 'p-8'
+collapse: true
+name: 'scroll-area-virtualize-example'
 options:
   - name: itemCount
     label: itemCount
@@ -90,51 +98,39 @@ options:
 ---
 ::
 
-::tip
-Use virtualization for lists with 100+ items or when items contain heavy components (images, complex UI).
-::
-
 ## Examples
 
 ### Variable heights
 
-Provide `estimateSize` (average height) for better initial rendering. Items are automatically measured as they render.
+Set an `estimateSize` (average item height) to improve initial rendering performance. The actual size of each item is measured automatically during rendering.
 
 ::component-example
 ---
+collapse: true
 name: 'scroll-area-variable-height-example'
-class: 'p-8'
 ---
 ::
 
-### Custom content
-
-Use the default slot without `items` for custom scrollable content.
-
-::component-example
----
-name: 'scroll-area-custom-example'
-class: 'p-8'
----
+::note
+For optimal performance, provide an `estimateSize` close to the average item height. You can also increase `overscan` for smoother scrolling at the cost of rendering more off-screen items.
 ::
 
 ### Masonry layouts
 
-Use `lanes` for multi-column (vertical) or multi-row (horizontal) layouts.
+Use the `lanes` prop for multi-column (vertical) or multi-row (horizontal) layouts.
 
 ```vue
 <UScrollArea
+  v-slot="{ item }"
   :items="items"
   :virtualize="{
     lanes: 3,
-    gap: 12,
+    gap: 16,
     estimateSize: 200
   }"
   class="h-96"
 >
-  <template #default="{ item }">
-    <img :src="item.url" :alt="item.title" class="w-full" />
-  </template>
+  <img :src="item.url" :alt="item.title" class="w-full" />
 </UScrollArea>
 ```
 
@@ -152,31 +148,14 @@ const lanes = ref(useBreakpoints({
 ```
 ::
 
-### Virtualization options
-
-Common options for the `virtualize` prop:
-
-| Option | Default | Description |
-|--------|---------|-------------|
-| `estimateSize` | `100` | Estimated item size in pixels |
-| `overscan` | `12` | Items to render outside visible area |
-| `gap` | `0` | Gap between items (pixels) |
-| `paddingStart` | `0` | Padding at start (pixels) |
-| `paddingEnd` | `0` | Padding at end (pixels) |
-| `lanes` | - | Columns (vertical) or rows (horizontal) |
-| `loadMoreThreshold` | `5` | Items from end to trigger `@load-more` |
-| `enabled` | `true` | Enable/disable virtualization |
-
-See [TanStack Virtual docs](https://tanstack.com/virtual/latest/docs/api/virtualizer#options) for all available options.
-
 ### Programmatic scrolling
 
-Use exposed methods to control scrolling:
+Use the exposed methods to programmatically control scroll position (requires virtualization):
 
 ::component-example
 ---
+collapse: true
 name: 'scroll-area-scroll-to-example'
-class: 'p-8'
 options:
   - name: itemCount
     label: itemCount
@@ -194,28 +173,43 @@ Use `@load-more` to load more data as the user scrolls (requires virtualization)
 ```vue
 <script setup lang="ts">
 const posts = ref([...initialPosts])
+const loading = ref(false)
 
 async function loadMore() {
+  if (loading.value) return
+
+  loading.value = true
   const morePosts = await fetchMorePosts()
-  posts.value = [...posts.value, ...morePosts] // Immutable update
+  posts.value = [...posts.value, ...morePosts] // Use spread for immutable update
+  loading.value = false
 }
 </script>
 
 <template>
   <UScrollArea
+    v-slot="{ item }"
     :items="posts"
     :virtualize="{ loadMoreThreshold: 5 }"
     @load-more="loadMore"
   >
-    <template #default="{ item }">
-      <UCard>{{ item.title }}</UCard>
-    </template>
+    <UCard>{{ item.title }}</UCard>
   </UScrollArea>
 </template>
 ```
 
 ::tip
-Use a loading flag to prevent multiple simultaneous requests.
+Always use spread syntax (`[...items, ...newItems]`) for reactive updates instead of `.push()`, and use a loading flag to prevent multiple simultaneous requests.
+::
+
+### With default slot
+
+Use the default slot without the `items` prop for custom scrollable content that doesn't require virtualization.
+
+::component-example
+---
+collapse: true
+name: 'scroll-area-default-slot-example'
+---
 ::
 
 ## API
@@ -264,81 +258,13 @@ This will give you access to the following:
 | `isScrolling`{lang="ts-type"} | `() => boolean`{lang="ts-type"} | Check if the list is currently being scrolled |
 | `getScrollDirection`{lang="ts-type"} | `() => 'forward' \| 'backward' \| null`{lang="ts-type"} | Get the current scroll direction |
 
-::note
-All scroll methods require virtualization to be enabled. They will log a warning if called when `virtualize` is `false`.
+::warning
+Scroll methods are only available when virtualization is enabled. Calling them with `virtualize` set to `false` will result in a warning message.
 ::
 
 ## Theme
 
 :component-theme
-
-### Non-virtualized styling
-
-Customize gap and padding via theme or `ui` prop:
-
-```vue
-<UScrollArea :items="items" :ui="{ viewport: 'gap-6 p-6' }">
-  <template #default="{ item }">{{ item }}</template>
-</UScrollArea>
-```
-
-Or globally in `app.config.ts`:
-
-```ts
-export default defineAppConfig({
-  ui: {
-    scrollArea: {
-      slots: { viewport: 'gap-4 p-4' }
-    }
-  }
-})
-```
-
-## Best Practices
-
-### When to virtualize
-
-**Use virtualization for:**
-
-- Lists with 100+ items
-- Items with heavy components or images
-- Infinite scroll implementations
-- Mobile/low-end devices
-
-**Skip virtualization for:**
-
-- Small lists (< 50 simple items)
-- Rarely scrolled content
-
-### Performance tips
-
-**Accurate estimates**
-
-Provide `estimateSize` close to average item height for better initial rendering.
-
-**Overscan**
-
-Increase `overscan` for smoother scrolling at the cost of rendering more off-screen items.
-
-**Immutable updates**
-
-Use spread syntax for reactive updates:
-
-```ts
-// Recommended
-items.value = [...items.value, ...newItems]
-
-// Avoid - may not trigger reactivity
-items.value.push(...newItems)
-```
-
-**Responsive lanes**
-
-Implement your own resize logic to update `lanes` based on viewport width.
-
-**Loading states**
-
-Use flags to prevent multiple simultaneous `@load-more` calls.
 
 ## Changelog
 
