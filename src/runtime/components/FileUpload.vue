@@ -93,6 +93,11 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
    * @IconifyIcon
    */
   fileDeleteIcon?: IconProps['name']
+  /**
+   * Show the file preview/list after upload.
+   * @defaultValue true
+   */
+  preview?: boolean
   class?: any
   ui?: FileUpload['slots']
 }
@@ -146,7 +151,8 @@ const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   interactive: true,
   fileDelete: true,
   layout: 'grid',
-  position: 'outside'
+  position: 'outside',
+  preview: true
 })
 const emits = defineEmits<FileUploadEmits>()
 const slots = defineSlots<FileUploadSlots<M>>()
@@ -268,7 +274,7 @@ defineExpose({
 
 <template>
   <DefineFilesTemplate>
-    <template v-if="modelValue && (Array.isArray(modelValue) ? modelValue.length : true)">
+    <template v-if="props.preview && modelValue && (Array.isArray(modelValue) ? modelValue.length : true)">
       <slot name="files-top" :files="modelValue" :open="open" :remove-file="removeFile" />
 
       <div :class="ui.files({ class: props.ui?.files })">

@@ -4,7 +4,7 @@ import type { ChipProps } from '@nuxt/ui'
 import json5 from 'json5'
 import { upperFirst, camelCase, kebabCase } from 'scule'
 import { hash } from 'ohash'
-import { CalendarDate } from '@internationalized/date'
+import { CalendarDate, Time } from '@internationalized/date'
 import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
 
@@ -14,6 +14,7 @@ interface Cast {
 }
 
 type CastDateValue = [number, number, number]
+type CastTimeValue = [number, number, number]
 
 const castMap: Record<string, Cast> = {
   'DateValue': {
@@ -36,6 +37,12 @@ const castMap: Record<string, Cast> = {
       }
 
       return `{ start: new CalendarDate(${value.start.year}, ${value.start.month}, ${value.start.day}), end: new CalendarDate(${value.end.year}, ${value.end.month}, ${value.end.day}) }`
+    }
+  },
+  'TimeValue': {
+    get: (args: CastTimeValue) => new Time(...args),
+    template: (value: Time) => {
+      return value ? `new Time(${value.hour}, ${value.minute}, ${value.second})` : 'null'
     }
   }
 }

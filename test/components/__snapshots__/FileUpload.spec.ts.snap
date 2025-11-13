@@ -960,3 +960,17 @@ exports[`FileUpload > renders without interactive correctly 1`] = `
   <!--v-if--><input data-hidden="" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" type="file" accept="*">
 </div>"
 `;
+
+exports[`FileUpload > renders without preview correctly 1`] = `
+"<div class="relative flex flex-col">
+  <div role="button" data-dragging="false" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary hover:bg-elevated/25" tabindex="0">
+    <!--v-if-->
+    <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input data-hidden="" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" type="file" accept="*">
+</div>"
+`;

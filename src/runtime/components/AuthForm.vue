@@ -187,7 +187,7 @@ defineExpose({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="(icon || !!slots.icon) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header" :class="ui.header({ class: props.ui?.header })">
+    <div v-if="(icon || !!slots.leading) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
         <div v-if="icon || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :ui="ui">
