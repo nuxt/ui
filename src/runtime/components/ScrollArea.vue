@@ -274,7 +274,6 @@ function requireVirtualization(method: string) {
 }
 
 defineExpose({
-  rootRef,
   virtualizer: computed(() => isVirtualizerEnabled.value ? virtualizer.value : null),
   scrollToOffset(offset: number, options?: ScrollToOptions) {
     if (requireVirtualization('scrollToOffset')) {

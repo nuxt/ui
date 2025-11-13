@@ -255,7 +255,6 @@ This will give you access to the following:
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `rootRef`{lang="ts-type"} | `Ref<HTMLElement>`{lang="ts-type"} | The root element reference |
 | `virtualizer`{lang="ts-type"} | `ComputedRef<Virtualizer \| null>`{lang="ts-type"} | The TanStack Virtual virtualizer instance (null if virtualization is disabled) |
 | `scrollToOffset`{lang="ts-type"} | `(offset: number, options?: ScrollToOptions) => void`{lang="ts-type"} | Scroll to a specific pixel offset |
 | `scrollToIndex`{lang="ts-type"} | `(index: number, options?: ScrollToOptions) => void`{lang="ts-type"} | Scroll to a specific item index |
