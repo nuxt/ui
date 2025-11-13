@@ -77,28 +77,23 @@ const virtualizeOptions = computed(() => {
       />
     </UFieldGroup>
 
-    <div class="flex items-center gap-2">
-      <UInput
-        v-model.number="itemCount"
-        type="number"
-        icon="i-lucide-image"
-        :min="10"
-        :max="100000"
-      />
-    </div>
+    <UInput
+      v-model.number="itemCount"
+      type="number"
+      icon="i-lucide-image"
+      :min="10"
+      :max="100000"
+    />
 
-    <!-- <div class="flex items-center gap-2">
-      <span class="text-sm text-muted">Estimate:</span>
-      <UInput
+    <!-- <UInput
         v-model.number="estimateSize"
         type="number"
         :min="20"
         :max="500"
         class="w-24"
-      />
-    </div> -->
+      /> -->
 
-    <div v-if="virtualize" class="flex items-center gap-2">
+    <template v-if="virtualize">
       <UInput
         v-model.number="gap"
         type="number"
@@ -106,9 +101,7 @@ const virtualizeOptions = computed(() => {
         icon="i-lucide-between-vertical-start"
         :max="50"
       />
-    </div>
 
-    <div v-if="virtualize" class="flex items-center gap-2">
       <UInput
         v-model.number="padding"
         type="number"
@@ -116,9 +109,7 @@ const virtualizeOptions = computed(() => {
         :max="200"
         icon="i-lucide-square-dashed"
       />
-    </div>
 
-    <div v-if="virtualize" class="flex items-center gap-2">
       <UInput
         v-model.number="lanes"
         type="number"
@@ -126,7 +117,7 @@ const virtualizeOptions = computed(() => {
         icon="i-lucide-layout-dashboard"
         :max="10"
       />
-    </div>
+    </template>
   </Navbar>
 
   <UCard :ui="{ body: '!p-0 h-full' }" class="max-w-5xl w-full">
@@ -134,7 +125,7 @@ const virtualizeOptions = computed(() => {
       :items="items"
       :orientation="orientation"
       :virtualize="virtualizeOptions"
-      class="h-128"
+      class="size-full"
       :ui="{ viewport: `${orientation === 'vertical' ? 'w-full' : 'h-full'}` }"
     >
       <template v-if="orientation === 'horizontal'" #default="{ item }">
