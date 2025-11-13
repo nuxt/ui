@@ -157,7 +157,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPromptSu
       'aria-label': t('chatPromptSubmit.label'),
       ...$attrs
     }"
-    data-slot="base"
     :class="ui.base({ class: [props.ui?.base, props.class] })"
     :ui="transformUI(ui, props.ui)"
   >
