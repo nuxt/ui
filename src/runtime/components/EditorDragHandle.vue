@@ -128,6 +128,7 @@ function onClick(_event: MouseEvent) {
     :compute-position-config="computePositionConfig"
     :editor="editor"
     :on-node-change="onNodeChange"
+    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @click="onClick"
   >

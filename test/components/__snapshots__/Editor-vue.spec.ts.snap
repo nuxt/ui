@@ -1,24 +1,24 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Editor > renders with as correctly 1`] = `
-"<section class="">
-  <div role="presentation" class="size-full flex flex-col flex-1"></div>
+"<section data-slot="root" class="">
+  <div role="presentation" data-slot="content" class="size-full flex flex-col flex-1"></div>
 </section>"
 `;
 
 exports[`Editor > renders with class correctly 1`] = `
-"<div class="">
-  <div role="presentation" class="size-full flex flex-col flex-1"></div>
+"<div data-slot="root" class="">
+  <div role="presentation" data-slot="content" class="size-full flex flex-col flex-1"></div>
 </div>"
 `;
 
 exports[`Editor > renders with default slot correctly 1`] = `
-"<div class="">Default slot<div role="presentation" class="size-full flex flex-col flex-1"></div>
+"<div data-slot="root" class="">Default slot<div role="presentation" data-slot="content" class="size-full flex flex-col flex-1"></div>
 </div>"
 `;
 
 exports[`Editor > renders with ui correctly 1`] = `
-"<div class="">
-  <div role="presentation" class="size-full flex flex-col flex-1"></div>
+"<div data-slot="root" class="">
+  <div role="presentation" data-slot="content" class="size-full flex flex-col flex-1"></div>
 </div>"
 `;
