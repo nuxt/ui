@@ -32,6 +32,7 @@ export type BlogPostsSlots<T extends BlogPostProps = BlogPostProps> = {
 } & {
   default(props?: {}): any
 }
+
 </script>
 
 <script setup lang="ts" generic="T extends BlogPostProps">

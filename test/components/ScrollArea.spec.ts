@@ -25,12 +25,9 @@ describe('ScrollArea', () => {
     ['with virtualize gap', { props: { items: testItems, virtualize: { gap: 10 } } }],
     ['with virtualize padding', { props: { items: testItems, virtualize: { paddingStart: 20, paddingEnd: 20 } } }],
     ['with virtualize lanes', { props: { items: testItems, virtualize: { lanes: 3 } } }],
-
-    // Responsive Lanes
-    ['with responsive laneWidth', { props: { items: testItems, virtualize: { laneWidth: 200 } } }],
-    ['with responsive minLanes', { props: { items: testItems, virtualize: { laneWidth: 200, minLanes: 2 } } }],
-    ['with responsive maxLanes', { props: { items: testItems, virtualize: { laneWidth: 200, maxLanes: 6 } } }],
-    ['with responsive full config', { props: { items: testItems, virtualize: { laneWidth: 200, minLanes: 1, maxLanes: 4, gap: 12 } } }],
+    ['with virtualize scrollMargin', { props: { items: testItems, virtualize: { scrollMargin: 10 } } }],
+    ['with virtualize loadMoreThreshold', { props: { items: testItems, virtualize: { loadMoreThreshold: 10 } } }],
+    ['with virtualize enabled false', { props: { items: testItems, virtualize: { enabled: false } } }],
 
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
