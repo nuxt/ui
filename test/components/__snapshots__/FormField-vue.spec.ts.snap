@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`FormField > renders with as correctly 1`] = `
-"<section class="text-sm">
-  <div class="">
+"<section data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -13,8 +13,8 @@ exports[`FormField > renders with as correctly 1`] = `
 `;
 
 exports[`FormField > renders with class correctly 1`] = `
-"<div class="text-sm relative">
-  <div class="">
+"<div data-slot="root" class="text-sm relative">
+  <div data-slot="wrapper" class="">
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -25,8 +25,8 @@ exports[`FormField > renders with class correctly 1`] = `
 `;
 
 exports[`FormField > renders with default slot correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -37,10 +37,10 @@ exports[`FormField > renders with default slot correctly 1`] = `
 `;
 
 exports[`FormField > renders with description slot correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
     <!--v-if-->
-    <p id="v-0-0-description" class="text-muted">Description slot</p>
+    <p id="v-0-0-description" data-slot="description" class="text-muted">Description slot</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->
@@ -49,56 +49,56 @@ exports[`FormField > renders with description slot correctly 1`] = `
 `;
 
 exports[`FormField > renders with error correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
     <!--v-if-->
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-error" class="mt-2 text-error">Username is already taken</div>
+    <div id="v-0-0-error" data-slot="error" class="mt-2 text-error">Username is already taken</div>
   </div>
 </div>"
 `;
 
 exports[`FormField > renders with error slot correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
     <!--v-if-->
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-error" class="mt-2 text-error">Error slot</div>
+    <div id="v-0-0-error" data-slot="error" class="mt-2 text-error">Error slot</div>
   </div>
 </div>"
 `;
 
 exports[`FormField > renders with help correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
     <!--v-if-->
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-help" class="mt-2 text-muted">Username must be unique</div>
+    <div id="v-0-0-help" data-slot="help" class="mt-2 text-muted">Username must be unique</div>
   </div>
 </div>"
 `;
 
 exports[`FormField > renders with help slot correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
     <!--v-if-->
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-help" class="mt-2 text-muted">Help slot</div>
+    <div id="v-0-0-help" data-slot="help" class="mt-2 text-muted">Help slot</div>
   </div>
 </div>"
 `;
 
 exports[`FormField > renders with hint correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -109,8 +109,8 @@ exports[`FormField > renders with hint correctly 1`] = `
 `;
 
 exports[`FormField > renders with hint slot correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -121,12 +121,12 @@ exports[`FormField > renders with hint slot correctly 1`] = `
 `;
 
 exports[`FormField > renders with label and description correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
-    <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-default">Username</label>
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
+    <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0" data-slot="label" class="block font-medium text-default">Username</label>
       <!--v-if-->
     </div>
-    <p id="v-0-0-description" class="text-muted">Enter your username</p>
+    <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->
@@ -135,9 +135,9 @@ exports[`FormField > renders with label and description correctly 1`] = `
 `;
 
 exports[`FormField > renders with label slot correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
-    <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-default">Label slot</label>
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
+    <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0" data-slot="label" class="block font-medium text-default">Label slot</label>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -149,9 +149,9 @@ exports[`FormField > renders with label slot correctly 1`] = `
 `;
 
 exports[`FormField > renders with required correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
-    <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-default after:content-['*'] after:ms-0.5 after:text-error">Username</label>
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
+    <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0" data-slot="label" class="block font-medium text-default after:content-['*'] after:ms-0.5 after:text-error">Username</label>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -163,12 +163,12 @@ exports[`FormField > renders with required correctly 1`] = `
 `;
 
 exports[`FormField > renders with size lg correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
-    <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-default">Username</label>
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
+    <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0" data-slot="label" class="block font-medium text-default">Username</label>
       <!--v-if-->
     </div>
-    <p id="v-0-0-description" class="text-muted">Enter your username</p>
+    <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->
@@ -177,12 +177,12 @@ exports[`FormField > renders with size lg correctly 1`] = `
 `;
 
 exports[`FormField > renders with size md correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
-    <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-default">Username</label>
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
+    <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0" data-slot="label" class="block font-medium text-default">Username</label>
       <!--v-if-->
     </div>
-    <p id="v-0-0-description" class="text-muted">Enter your username</p>
+    <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->
@@ -191,12 +191,12 @@ exports[`FormField > renders with size md correctly 1`] = `
 `;
 
 exports[`FormField > renders with size sm correctly 1`] = `
-"<div class="text-xs">
-  <div class="">
-    <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-default">Username</label>
+"<div data-slot="root" class="text-xs">
+  <div data-slot="wrapper" class="">
+    <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0" data-slot="label" class="block font-medium text-default">Username</label>
       <!--v-if-->
     </div>
-    <p id="v-0-0-description" class="text-muted">Enter your username</p>
+    <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->
@@ -205,12 +205,12 @@ exports[`FormField > renders with size sm correctly 1`] = `
 `;
 
 exports[`FormField > renders with size xl correctly 1`] = `
-"<div class="text-base">
-  <div class="">
-    <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-default">Username</label>
+"<div data-slot="root" class="text-base">
+  <div data-slot="wrapper" class="">
+    <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0" data-slot="label" class="block font-medium text-default">Username</label>
       <!--v-if-->
     </div>
-    <p id="v-0-0-description" class="text-muted">Enter your username</p>
+    <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->
@@ -219,12 +219,12 @@ exports[`FormField > renders with size xl correctly 1`] = `
 `;
 
 exports[`FormField > renders with size xs correctly 1`] = `
-"<div class="text-xs">
-  <div class="">
-    <div class="flex content-center items-center justify-between"><label for="v-0-0" class="block font-medium text-default">Username</label>
+"<div data-slot="root" class="text-xs">
+  <div data-slot="wrapper" class="">
+    <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0" data-slot="label" class="block font-medium text-default">Username</label>
       <!--v-if-->
     </div>
-    <p id="v-0-0-description" class="text-muted">Enter your username</p>
+    <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
   <div class="mt-1 relative">
     <!--v-if-->
@@ -233,8 +233,8 @@ exports[`FormField > renders with size xs correctly 1`] = `
 `;
 
 exports[`FormField > renders with ui correctly 1`] = `
-"<div class="text-sm">
-  <div class="">
+"<div data-slot="root" class="text-sm">
+  <div data-slot="wrapper" class="">
     <!--v-if-->
     <!--v-if-->
   </div>
