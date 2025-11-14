@@ -38,13 +38,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardToo
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot>
-      <div :class="ui.left({ class: [props.ui?.left] })">
+      <div data-slot="left" :class="ui.left({ class: [props.ui?.left] })">
         <slot name="left" />
       </div>
 
-      <div :class="ui.right({ class: [props.ui?.right] })">
+      <div data-slot="right" :class="ui.right({ class: [props.ui?.right] })">
         <slot name="right" />
       </div>
     </slot>

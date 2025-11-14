@@ -1,23 +1,28 @@
 <script lang="ts">
-import type { SelectMenuProps } from '@nuxt/ui'
+import type { SelectMenuProps, SelectMenuItem } from '../../types'
 
-export interface ColorModeSelectProps extends /** @vue-ignore */ Pick<SelectMenuProps<any>, 'color' | 'variant' | 'size' | 'trailingIcon' | 'selectedIcon' | 'content' | 'arrow' | 'portal' | 'disabled' | 'ui'> {
+export interface ColorModeSelectProps extends Omit<SelectMenuProps<SelectMenuItem[]>, 'icon' | 'items' | 'modelValue'> {
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useForwardProps } from 'reka-ui'
 import { useColorMode, useAppConfig } from '#imports'
 import { useLocale } from '../../composables/useLocale'
 import USelectMenu from '../SelectMenu.vue'
 
 defineOptions({ inheritAttrs: false })
 
-defineProps<ColorModeSelectProps>()
+const props = withDefaults(defineProps<ColorModeSelectProps>(), {
+  searchInput: false
+})
 
 const { t } = useLocale()
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
+
+const selectMenuProps = useForwardProps(props)
 
 const items = computed(() => [
   { label: t('colorMode.system'), value: 'system', icon: appConfig.ui.icons.system },
@@ -27,7 +32,7 @@ const items = computed(() => [
 
 const preference = computed({
   get() {
-    return items.value.find(option => option.value === colorMode.preference) || items.value[0]
+    return items.value.find(option => option.value === colorMode.preference) || items.value[0]!
   },
   set(option) {
     colorMode.preference = option!.value
@@ -39,18 +44,16 @@ const preference = computed({
   <ClientOnly v-if="!colorMode?.forced">
     <USelectMenu
       v-model="preference"
-      :search-input="false"
       :icon="preference?.icon"
-      v-bind="$attrs"
+      v-bind="{ ...(selectMenuProps as any), ...$attrs }"
       :items="items"
     />
 
     <template #fallback>
       <USelectMenu
-        :search-input="false"
         :icon="items[0]?.icon"
-        v-bind="$attrs"
         :model-value="items[0]"
+        v-bind="{ ...(selectMenuProps as any), ...$attrs }"
         :items="items"
         disabled
       />

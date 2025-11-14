@@ -18,6 +18,7 @@ function getEmojiFlag(locale: string): string {
     el: 'gr', // Greek -> Greece
     en: 'gb', // English -> Great Britain
     et: 'ee', // Estonian -> Estonia
+    gl: 'es', // Galician -> Spain
     he: 'il', // Hebrew -> Israel
     hi: 'in', // Hindi -> India
     hy: 'am', // Armenian -> Armenia
