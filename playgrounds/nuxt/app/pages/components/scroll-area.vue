@@ -120,7 +120,7 @@ const virtualizeOptions = computed(() => {
     </template>
   </Navbar>
 
-  <UCard :ui="{ body: '!p-0 h-full' }" class="max-w-5xl w-full">
+  <UCard :ui="{ body: '!p-0 h-full' }" class="max-w-5xl w-full h-full">
     <UScrollArea
       :items="items"
       :orientation="orientation"
@@ -129,8 +129,8 @@ const virtualizeOptions = computed(() => {
       :ui="{ viewport: `${orientation === 'vertical' ? 'w-full' : 'h-full'}` }"
     >
       <template v-if="orientation === 'horizontal'" #default="{ item }">
-        <div class="grid grid-rows-[1fr_min-content] h-full w-max-content gap-2">
-          <div class="bg-elevated rounded-lg overflow-hidden h-full w-max-content">
+        <div class="grid grid-rows-[1fr_min-content] h-full w-max gap-2">
+          <div class="bg-elevated rounded-lg overflow-hidden h-full w-max">
             <img
               :src="item!.url"
               :alt="item!.title"
