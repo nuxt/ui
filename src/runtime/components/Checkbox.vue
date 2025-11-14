@@ -109,7 +109,6 @@ function onUpdate(value: any) {
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <Primitive :as="(!variant || variant === 'list') ? as : Label" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <pre>{{ name }}</pre>
     <div :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         v-bind="{ ...rootProps, ...$attrs, ...controlProps }"

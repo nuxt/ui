@@ -7,7 +7,7 @@ const form = useTemplateRef('form')
 </script>
 
 <template>
-  <UForm id="42" ref="form" :state="state">
+  <UForm id="42" ref="form" :state="state" v-bind="$attrs">
     <UFormField id="emailField" name="email">
       <UInput id="email" v-model="state.email" />
     </UFormField>

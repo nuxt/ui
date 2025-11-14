@@ -60,6 +60,14 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     emitFormEvent('dirty', formField?.value.name)
   }
 
+  function emitFormChange() {
+    emitFormEvent('dirty', formField?.value.name)
+  }
+
+  function emitFormInput() {
+    emitFormEvent('dirty', formField?.value.name)
+  }
+
   return {
     name: computed(() => props?.name ?? formField?.value.name),
     size: computed(() => props?.size ?? formField?.value.size),
@@ -68,6 +76,8 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     disabled: computed(() => formOptions?.value.disabled || props?.disabled),
     emitFormBlur,
     emitFormTouched,
-    emitFormDirty
+    emitFormDirty,
+    emitFormInput,
+    emitFormChange
   }
 }
