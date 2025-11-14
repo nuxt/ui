@@ -1,5 +1,5 @@
 ---
-description: A flexible scroll container with virtualization support for efficiently rendering large lists of any content type.
+description: A flexible scroll container with virtualization support.
 category: layout
 links:
   - label: TanStack Virtual
