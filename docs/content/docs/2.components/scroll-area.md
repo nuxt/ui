@@ -100,9 +100,9 @@ options:
 
 ## Examples
 
-### Variable heights
+### Masonry layouts
 
-Set an `estimateSize` (average item height) to improve initial rendering performance. The actual size of each item is measured automatically during rendering.
+Create masonry (waterfall) layouts with variable height items using `lanes`. Items are automatically measured and positioned as they render.
 
 ::component-example
 ---
@@ -112,40 +112,55 @@ name: 'scroll-area-variable-height-example'
 ::
 
 ::note
-For optimal performance, provide an `estimateSize` close to the average item height. You can also increase `overscan` for smoother scrolling at the cost of rendering more off-screen items.
+Provide an accurate `estimateSize` close to the average item height for better initial rendering performance. Increase `overscan` for smoother scrolling at the cost of rendering more off-screen items.
 ::
 
-### Masonry layouts
+### Responsive lanes
 
-Use the `lanes` prop for multi-column (vertical) or multi-row (horizontal) layouts.
-
-```vue
-<UScrollArea
-  v-slot="{ item }"
-  :items="items"
-  :virtualize="{
-    lanes: 3,
-    gap: 16,
-    estimateSize: 200
-  }"
-  class="h-96"
->
-  <img :src="item.url" :alt="item.title" class="w-full" />
-</UScrollArea>
-```
-
-::warning
-For responsive layouts, implement your own resize logic to update `lanes` based on container width:
+Implement responsive column/row counts using breakpoints or container width tracking.
 
 ```vue
 <script setup lang="ts">
-const lanes = ref(useBreakpoints({
-  sm: 1,
-  md: 2,
-  lg: 3
-}))
+const { width } = useWindowSize()
+
+const lanes = computed(() => {
+  if (width.value < 640) return 1
+  if (width.value < 1024) return 2
+  return 3
+})
 </script>
+
+<template>
+  <UScrollArea :items="items" :virtualize="{ lanes }">
+    <template #default="{ item }">
+      <!-- your item content -->
+    </template>
+  </UScrollArea>
+</template>
 ```
+
+For container-based responsive behavior:
+
+```vue
+<script setup lang="ts">
+const scrollArea = ref()
+const { width } = useElementSize(scrollArea)
+
+const lanes = computed(() => {
+  // 2 lanes is the minimum, 6 lanes is the maximum, 300px is the goal width of each lane
+  return Math.max(2, Math.min(6, Math.floor(width.value / 300)))
+})
+</script>
+
+<template>
+  <UScrollArea ref="scrollArea" :items="items" :virtualize="{ lanes }">
+    <template #default="{ item }">{{ item }}</template>
+  </UScrollArea>
+</template>
+```
+
+::tip
+Use [`useWindowSize`](https://vueuse.org/core/useWindowSize/) for viewport-based or [`useElementSize`](https://vueuse.org/core/useElementSize/) for container-based responsive lanes.
 ::
 
 ### Programmatic scrolling
@@ -170,45 +185,27 @@ options:
 
 Use `@load-more` to load more data as the user scrolls (requires virtualization):
 
-```vue
-<script setup lang="ts">
-const posts = ref([...initialPosts])
-const loading = ref(false)
-
-async function loadMore() {
-  if (loading.value) return
-
-  loading.value = true
-  const morePosts = await fetchMorePosts()
-  posts.value = [...posts.value, ...morePosts] // Use spread for immutable update
-  loading.value = false
-}
-</script>
-
-<template>
-  <UScrollArea
-    v-slot="{ item }"
-    :items="posts"
-    :virtualize="{ loadMoreThreshold: 5 }"
-    @load-more="loadMore"
-  >
-    <UCard>{{ item.title }}</UCard>
-  </UScrollArea>
-</template>
-```
-
-::tip
-Always use spread syntax (`[...items, ...newItems]`) for reactive updates instead of `.push()`, and use a loading flag to prevent multiple simultaneous requests.
+::component-example
+---
+prettier: true
+collapse: true
+name: 'scroll-area-infinite-scroll-example'
+class: '!p-0'
+---
 ::
 
-### With default slot
+::tip
+The `@load-more` event fires when the user scrolls within `loadMoreThreshold` items from the end (default: 5). Use a loading flag to prevent multiple simultaneous requests and always use spread syntax (`[...items, ...newItems]`) for reactive updates.
+::
 
-Use the default slot without the `items` prop for custom scrollable content that doesn't require virtualization.
+### Custom content
+
+Use the default slot without `items` for custom scrollable content.
 
 ::component-example
 ---
-collapse: true
-name: 'scroll-area-default-slot-example'
+name: 'scroll-area-custom-example'
+class: 'p-8'
 ---
 ::
 
