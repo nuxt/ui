@@ -1,9 +1,10 @@
 <script lang="ts">
+import type { ComputedRef } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/editor-suggestion-menu'
 import type { EditorMenuOptions } from '../composables/useEditorMenu'
-import type { EditorHandler, EditorActionItem } from '../utils/editor'
 import type { IconProps } from '../types'
+import type { EditorItem, EditorHandlers } from '../types/editor'
 import type { ComponentConfig } from '../types/tv'
 
 type EditorSuggestionMenu = ComponentConfig<typeof theme, AppConfig, 'editorSuggestionMenu'>
@@ -32,27 +33,20 @@ type EditorSuggestionMenuActionItem = {
   disabled?: boolean
   class?: any
   [key: string]: any
-} & EditorActionItem
+} & EditorItem
 
 export type EditorSuggestionMenuItem = EditorSuggestionMenuLabelItem | EditorSuggestionMenuSeparatorItem | EditorSuggestionMenuActionItem
 
-export type EditorSuggestionMenuHandlers = Record<string, EditorHandler>
-
 export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit' | 'options' | 'appendTo'>> {
-  /**
-   * Custom item handlers to override or extend the default handlers.
-   */
-  handlers?: EditorSuggestionMenuHandlers
   class?: any
   ui?: EditorSuggestionMenu['slots']
 }
 </script>
 
 <script setup lang="ts" generic="T extends EditorSuggestionMenuItem">
-import { computed, h, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { computed, h, inject, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
-import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -65,13 +59,10 @@ const props = withDefaults(defineProps<EditorSuggestionMenuProps<T>>(), {
 
 const appConfig = useAppConfig() as EditorSuggestionMenu['AppConfig']
 
+const handlers = inject<ComputedRef<EditorHandlers>>('editorHandlers')
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorSuggestionMenu || {}) })())
-
-const handlers = computed(() => ({
-  ...createHandlers(),
-  ...props.handlers
-}))
 
 let menu: ReturnType<typeof useEditorMenu> | null = null
 
@@ -99,7 +90,7 @@ onMounted(async () => {
       editor.chain().focus().deleteRange(range).run()
 
       // Execute the actual command using handlers
-      const handler = handlers.value[item.kind]
+      const handler = handlers?.value?.[item.kind]
       if (handler) {
         handler.execute(editor, item).run()
       }

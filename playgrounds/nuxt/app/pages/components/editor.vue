@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import type { EditorContent, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, Editor } from '@nuxt/ui'
+import { upperFirst } from 'scule'
+import type { EditorContent, EditorHandlers, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, Editor, DropdownMenuItem } from '@nuxt/ui'
+import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import { ImageUpload } from '../../utils/editor/image-upload'
 
@@ -66,6 +68,15 @@ Whether you're working on a personal project or building an enterprise applicati
 Visit our [documentation](https://ui.nuxt.com) to learn more and explore all available components.
 `)
 
+const customHandlers: EditorHandlers = {
+  image: {
+    canExecute: (editor: Editor) => (editor.can() as any).insertContent({ type: 'imageUpload' }),
+    execute: (editor: Editor) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
+    isActive: (editor: Editor) => editor.isActive('imageUpload'),
+    isDisabled: undefined
+  }
+}
+
 const toolbarItems = [[{
   kind: 'undo',
   icon: 'i-lucide-undo'
@@ -75,6 +86,9 @@ const toolbarItems = [[{
 }], [{
   kind: 'dropdown',
   icon: 'i-lucide-heading',
+  ui: {
+    label: 'text-xs'
+  },
   items: [{
     type: 'label',
     label: 'Headings'
@@ -260,13 +274,144 @@ const mentionItems: EditorMentionMenuItem[] = [{
 
 const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.name.startsWith('regional_indicator_'))
 
-const handlers = {
-  image: {
-    canExecute: (editor: Editor) => (editor.can() as any).insertContent({ type: 'imageUpload' }),
-    execute: (editor: Editor) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
-    isActive: (editor: Editor) => editor.isActive('imageUpload'),
-    isDisabled: undefined
+const selectedNode = ref<any>(null)
+
+const handleItems = (editor: Editor): DropdownMenuItem[][] => {
+  if (!selectedNode.value) {
+    return []
   }
+
+  return mapEditorItems(editor, [[
+    {
+      type: 'label',
+      label: upperFirst(selectedNode.value.type)
+    },
+    {
+      label: 'Turn into',
+      icon: 'i-lucide-repeat-2',
+      children: [
+        { kind: 'paragraph', label: 'Paragraph', icon: 'i-lucide-type' },
+        { kind: 'heading', level: 1, label: 'Heading 1', icon: 'i-lucide-heading-1' },
+        { kind: 'heading', level: 2, label: 'Heading 2', icon: 'i-lucide-heading-2' },
+        { kind: 'heading', level: 3, label: 'Heading 3', icon: 'i-lucide-heading-3' },
+        { kind: 'heading', level: 4, label: 'Heading 4', icon: 'i-lucide-heading-4' },
+        { kind: 'bulletList', label: 'Bullet List', icon: 'i-lucide-list' },
+        { kind: 'orderedList', label: 'Ordered List', icon: 'i-lucide-list-ordered' },
+        { kind: 'blockquote', label: 'Blockquote', icon: 'i-lucide-text-quote' },
+        { kind: 'codeBlock', label: 'Code Block', icon: 'i-lucide-square-code' }
+      ]
+    },
+    {
+      label: 'Reset formatting',
+      icon: 'i-lucide-rotate-ccw',
+      onSelect: () => {
+        editor.chain().clearNodes().unsetAllMarks().focus().run()
+      }
+    }
+  ], [
+    {
+      label: 'Duplicate',
+      icon: 'i-lucide-copy',
+      onSelect: () => {
+        const { $anchor } = editor.state.selection
+        const depth = $anchor.depth
+        if (depth === 0) return
+
+        const node = $anchor.node(depth)
+        if (node) {
+          const pos = $anchor.before(depth)
+          editor.chain().focus().insertContentAt(pos + node.nodeSize, node.toJSON()).run()
+        }
+      }
+    },
+    {
+      label: 'Copy to clipboard',
+      icon: 'i-lucide-clipboard',
+      onSelect: async () => {
+        const { $anchor } = editor.state.selection
+        const node = $anchor.node($anchor.depth)
+        if (node) {
+          await navigator.clipboard.writeText(node.textContent)
+        }
+      }
+    }
+  ], [
+    {
+      label: 'Move up',
+      icon: 'i-lucide-arrow-up',
+      disabled: (() => {
+        const { $anchor } = editor.state.selection
+        const depth = $anchor.depth
+        if (depth === 0) return true
+        const index = $anchor.index(depth - 1)
+        return index === 0
+      })(),
+      onSelect: () => {
+        const { $anchor } = editor.state.selection
+        const depth = $anchor.depth
+        if (depth === 0) return
+
+        const node = $anchor.node(depth)
+        const pos = $anchor.before(depth)
+        const resolvedPos = editor.state.doc.resolve(pos)
+        const index = resolvedPos.index(depth - 1)
+
+        if (index > 0) {
+          const targetPos = resolvedPos.before(depth) - resolvedPos.nodeBefore!.nodeSize
+          editor.chain().focus()
+            .deleteRange({ from: pos, to: pos + node.nodeSize })
+            .insertContentAt(targetPos, node.toJSON())
+            .run()
+        }
+      }
+    },
+    {
+      label: 'Move down',
+      icon: 'i-lucide-arrow-down',
+      disabled: (() => {
+        const { $anchor } = editor.state.selection
+        const depth = $anchor.depth
+        if (depth === 0) return true
+        const parent = $anchor.node(depth - 1)
+        const index = $anchor.index(depth - 1)
+        return index >= parent.childCount - 1
+      })(),
+      onSelect: () => {
+        const { $anchor } = editor.state.selection
+        const depth = $anchor.depth
+        if (depth === 0) return
+
+        const node = $anchor.node(depth)
+        const pos = $anchor.before(depth)
+        const resolvedPos = editor.state.doc.resolve(pos)
+        const parent = resolvedPos.node(depth - 1)
+        const index = resolvedPos.index(depth - 1)
+
+        if (index < parent.childCount - 1) {
+          const nextNode = parent.child(index + 1)
+          const targetPos = pos + node.nodeSize + nextNode.nodeSize
+          editor.chain().focus()
+            .deleteRange({ from: pos, to: pos + node.nodeSize })
+            .insertContentAt(targetPos, node.toJSON())
+            .run()
+        }
+      }
+    }
+  ], [
+    {
+      label: 'Delete',
+      icon: 'i-lucide-trash',
+      onSelect: () => {
+        const { $anchor } = editor.state.selection
+        const depth = $anchor.depth
+        if (depth === 0) return
+
+        const pos = $anchor.before(depth)
+        const node = $anchor.node(depth)
+        editor.chain().focus().deleteRange({ from: pos, to: pos + node.nodeSize }).run()
+      }
+    }
+  ]], customHandlers) as DropdownMenuItem[][]
 }
 </script>
 
@@ -278,13 +423,14 @@ const handlers = {
       Emoji,
       ImageUpload
     ]"
+    :handlers="customHandlers"
     content-type="markdown"
     placeholder="Write, type '/' for commands..."
-    class="flex-1 w-full min-h-0"
-    :ui="{ content: 'max-w-2xl mx-auto relative' }"
+    class="min-h-0"
+    :ui="{ content: 'max-w-2xl mx-auto' }"
   >
     <Navbar>
-      <UEditorToolbar :editor="editor" :items="toolbarItems" :handlers="handlers" class="relative">
+      <UEditorToolbar :editor="editor" :items="toolbarItems">
         <template #link>
           <EditorLinkPopover :editor="editor" auto-open />
         </template>
@@ -294,10 +440,12 @@ const handlers = {
     <UEditorToolbar
       :editor="editor"
       :items="toolbarItems"
-      :handlers="handlers"
       layout="bubble"
-      :should-show="({ editor, state }) => {
+      :should-show="({ editor, state, view }) => {
         if (editor.isActive('imageUpload') || editor.isActive('image')) {
+          return false
+        }
+        if (!view.hasFocus()) {
           return false
         }
         const { selection } = state
@@ -310,12 +458,31 @@ const handlers = {
       </template>
     </UEditorToolbar>
 
-    <UEditorDragHandle :editor="editor" />
+    <!-- <UEditorToolbar /> for image -->
 
-    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" :handlers="handlers" />
+    <UEditorDragHandle v-slot="{ ui }" :editor="editor" @node-change="selectedNode = $event.node">
+      <UDropdownMenu
+        v-slot="{ open }"
+        :modal="false"
+        :items="handleItems(editor)"
+        :content="{ side: 'left' }"
+        :ui="{ content: 'w-48', label: 'text-xs' }"
+        @update:open="editor.chain().setMeta('lockDragHandle', $event).run()"
+      >
+        <UButton
+          color="neutral"
+          variant="ghost"
+          active-variant="soft"
+          size="sm"
+          icon="i-lucide-grip-vertical"
+          :active="open"
+          :class="ui.handle()"
+        />
+      </UDropdownMenu>
+    </UEditorDragHandle>
 
+    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
     <UEditorMentionMenu :editor="editor" :items="mentionItems" />
-
     <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
   </UEditor>
 </template>

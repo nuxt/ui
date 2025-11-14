@@ -1,11 +1,11 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import type { Placement, Strategy } from '@floating-ui/dom'
-import type { Editor as TiptapEditor } from '@tiptap/vue-3'
+import type { Editor as TiptapEditor, Node as TiptapNode } from '@tiptap/vue-3'
 import type { DragHandlePluginProps } from '@tiptap/extension-drag-handle'
 import theme from '#build/ui/editor-drag-handle'
 import type { ButtonProps, IconProps } from '../types'
-import type { FloatingUIOptions } from '../utils/editor'
+import type { FloatingUIOptions } from '../types/editor'
 import type { ComponentConfig } from '../types/tv'
 
 type EditorDragHandle = ComponentConfig<typeof theme, AppConfig, 'editorDragHandle'>
@@ -35,7 +35,11 @@ export interface EditorDragHandleProps extends Omit<DragHandlePluginProps, 'edit
 }
 
 export interface EditorDragHandleSlots {
-  default(props?: {}): any
+  default(props: { ui: EditorDragHandle['ui'] }): any
+}
+
+export interface EditorDragHandleEmits {
+  nodeChange: [{ node: TiptapNode | null, pos: number }]
 }
 </script>
 
@@ -47,6 +51,7 @@ import { reactiveOmit, reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { buildFloatingUIMiddleware } from '../utils/editor'
+import { transformUI } from '../utils'
 import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
@@ -54,13 +59,13 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<EditorDragHandleProps>(), {
   color: 'neutral',
   variant: 'ghost',
-  side: 'left',
   size: 'sm'
 })
 defineSlots<EditorDragHandleSlots>()
+const emit = defineEmits<EditorDragHandleEmits>()
 
 const dragHandleProps = useForwardProps(reactivePick(props, 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement'))
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class', 'ui'))
 
 const appConfig = useAppConfig() as EditorDragHandle['AppConfig']
 
@@ -104,20 +109,21 @@ const computePositionConfig = computed<DragHandlePluginProps['computePositionCon
   middleware: middleware.value
 }))
 
-const currentNodePos = ref<number | null>(null)
+const currentNodePos = ref<number | null>(0)
 
-function onNodeChange({ pos }: { node: any, pos: number }) {
+function onNodeChange({ pos }: { pos: number }) {
   currentNodePos.value = pos
 }
 
-function onClick(_event: MouseEvent) {
-  if (!props.editor || !currentNodePos.value) return
+function onClick() {
+  if (!props.editor) return
 
-  const pos = currentNodePos.value
+  const pos = currentNodePos.value!
   const node = props.editor.state.doc.nodeAt(pos)
   if (node) {
-    // Select the entire node
-    props.editor.chain().focus().setNodeSelection(pos).run()
+    emit('nodeChange', { node: node.toJSON(), pos })
+
+    props.editor.chain().setNodeSelection(pos).blur().run()
   }
 }
 </script>
@@ -132,7 +138,7 @@ function onClick(_event: MouseEvent) {
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @click="onClick"
   >
-    <slot>
+    <slot :ui="ui">
       <UButton
         v-bind="{
           ...buttonProps,
@@ -141,6 +147,7 @@ function onClick(_event: MouseEvent) {
         }"
         data-slot="handle"
         :class="ui.handle({ class: [props.ui?.handle, props.class] })"
+        :ui="transformUI(ui, props.ui)"
       />
     </slot>
   </DragHandle>

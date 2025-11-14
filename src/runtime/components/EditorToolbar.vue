@@ -1,16 +1,15 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { ComputedRef } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Editor as TiptapEditor } from '@tiptap/vue-3'
 import type { BubbleMenuPluginProps } from '@tiptap/extension-bubble-menu'
 import type { FloatingMenuPluginProps } from '@tiptap/extension-floating-menu'
 import theme from '#build/ui/editor-toolbar'
 import type { ButtonProps, DropdownMenuProps, DropdownMenuItem } from '../types'
+import type { EditorItem, EditorHandlers } from '../types/editor'
 import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem } from '../types/utils'
-import type { EditorHandler, EditorActionItem } from '../utils/editor'
 import type { ComponentConfig } from '../types/tv'
-
-export type { EditorHandler, EditorActionItem } from '../utils/editor'
 
 type EditorToolbar = ComponentConfig<typeof theme, AppConfig, 'editorToolbar'>
 
@@ -18,10 +17,10 @@ type ButtonItem = Pick<ButtonProps, 'label' | 'color' | 'activeColor' | 'variant
   slot?: string
 }
 
-type EditorToolbarDropdownItem = (DropdownMenuItem & EditorActionItem) | DropdownMenuItem
+type EditorToolbarDropdownItem = (DropdownMenuItem & EditorItem) | DropdownMenuItem
 
 export type EditorToolbarItem
-  = | (ButtonItem & EditorActionItem)
+  = | (ButtonItem & EditorItem)
     | (ButtonItem & DropdownMenuProps<ArrayOrNested<EditorToolbarDropdownItem>>) & {
       kind: 'dropdown'
     }
@@ -29,8 +28,6 @@ export type EditorToolbarItem
       kind: 'slot'
       slot: string
     }
-
-export type EditorToolbarHandlers = Record<string, EditorHandler>
 
 type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>> = {
   /**
@@ -64,10 +61,6 @@ type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOr
    */
   size?: ButtonProps['size']
   items?: T
-  /**
-   * Custom item handlers to override or extend the default handlers.
-   */
-  handlers?: EditorToolbarHandlers
   editor: TiptapEditor
   class?: any
   ui?: EditorToolbar['slots']
@@ -101,14 +94,13 @@ export type EditorToolbarSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<EditorToolbarItem>">
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 import { Primitive, Separator, useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { isArrayOfArray, pick } from '../utils'
-import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
 import UDropdownMenu from './DropdownMenu.vue'
 import UButton from './Button.vue'
@@ -126,6 +118,8 @@ const props = withDefaults(defineProps<EditorToolbarProps<T>>(), {
 defineSlots<EditorToolbarSlots<T>>()
 
 const appConfig = useAppConfig() as EditorToolbar['AppConfig']
+
+const handlers = inject<ComputedRef<EditorHandlers>>('editorHandlers')!
 
 const Component = computed(() => {
   return ({
@@ -148,11 +142,6 @@ const groups = computed<EditorToolbarItem[][]>(() =>
     : []
 )
 
-const handlers = computed<EditorToolbarHandlers>(() => ({
-  ...createHandlers(),
-  ...props.handlers
-}))
-
 function isActive(item: EditorToolbarItem): boolean {
   if (!props.editor?.isEditable || !('kind' in item)) {
     return false
@@ -160,6 +149,10 @@ function isActive(item: EditorToolbarItem): boolean {
 
   if (item.kind === 'dropdown') {
     return item.items?.some((item): boolean => isActive(item as EditorToolbarItem)) || false
+  }
+
+  if (item.kind === 'slot') {
+    return false
   }
 
   const handler = handlers.value[item.kind]
@@ -186,6 +179,10 @@ function isDisabled(item: EditorToolbarItem): boolean {
     return itemItems.every(item => isDisabled(item))
   }
 
+  if (item.kind === 'slot') {
+    return false
+  }
+
   const handler = handlers.value[item.kind]
   if (!handler) {
     return false
@@ -201,7 +198,7 @@ function isDisabled(item: EditorToolbarItem): boolean {
 }
 
 function onClick(_: Event, item: EditorToolbarItem) {
-  if (!props.editor?.isEditable || item.kind === 'dropdown' || isDisabled(item)) {
+  if (!props.editor?.isEditable || item.kind === 'dropdown' || item.kind === 'slot' || isDisabled(item)) {
     return
   }
 
@@ -247,7 +244,7 @@ function getButtonProps(item: EditorToolbarItem) {
 }
 
 function getDropdownProps(item: EditorToolbarItem & { kind: 'dropdown' }) {
-  const baseProps = pick(item, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal'])
+  const baseProps = pick(item, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'class', 'ui'])
 
   return defu(baseProps, {
     modal: false

@@ -1,33 +1,8 @@
 import type { Editor, Mark } from '@tiptap/vue-3'
+import type { Middleware } from '@floating-ui/dom'
 import { flip, shift, offset, size, autoPlacement, hide, inline } from '@floating-ui/dom'
-import type { Middleware, Strategy, Placement, OffsetOptions, FlipOptions, ShiftOptions, SizeOptions, AutoPlacementOptions, HideOptions, InlineOptions } from '@floating-ui/dom'
-
-export interface FloatingUIOptions {
-  strategy?: Strategy
-  placement?: Placement
-  offset?: OffsetOptions | boolean
-  flip?: FlipOptions | boolean
-  shift?: ShiftOptions | boolean
-  size?: SizeOptions | boolean
-  autoPlacement?: AutoPlacementOptions | boolean
-  hide?: HideOptions | boolean
-  inline?: InlineOptions | boolean
-}
-
-export interface EditorHandler {
-  canExecute: (editor: Editor, cmd?: any) => boolean
-  execute: (editor: Editor, cmd?: any) => any
-  isActive: (editor: Editor, cmd?: any) => boolean
-  isDisabled?: (editor: Editor, cmd?: any) => boolean
-}
-
-export type EditorActionItem
-  = | { kind: 'mark', mark: 'bold' | 'italic' | 'strike' | 'code' | 'underline' }
-    | { kind: 'textAlign', align: 'left' | 'center' | 'right' | 'justify' }
-    | { kind: 'heading', level: 1 | 2 | 3 | 4 | 5 | 6 }
-    | { kind: 'link', href?: string }
-    | { kind: 'image', src?: string }
-    | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' | 'undo' | 'redo' | 'mention' | 'emoji' }
+import { isArrayOfArray } from './index'
+import type { EditorHandlers, EditorItem, FloatingUIOptions } from '../types/editor'
 
 export function isMarkInSchema(mark: string | Mark, editor: Editor | null): boolean {
   if (!editor?.schema) {
@@ -185,7 +160,7 @@ export function createImageHandler() {
   }
 }
 
-export function createHandlers(): Record<EditorActionItem['kind'], EditorHandler> {
+export function createHandlers(): EditorHandlers {
   return {
     mark: createMarkHandler(),
     textAlign: createTextAlignHandler(),
@@ -213,6 +188,55 @@ export function createHandlers(): Record<EditorActionItem['kind'], EditorHandler
       isDisabled: undefined
     }
   }
+}
+
+export function mapEditorItems(
+  editor: Editor,
+  items: (Partial<EditorItem> & Record<string, any>)[] | (Partial<EditorItem> & Record<string, any>)[][],
+  customHandlers?: EditorHandlers
+): any[] | any[][] {
+  const handlers = { ...createHandlers(), ...customHandlers }
+
+  // Handle nested arrays [[...], [...]]
+  if (isArrayOfArray(items)) {
+    return items.map(group =>
+      mapEditorItems(editor, group, customHandlers)
+    ) as any[][]
+  }
+
+  return items.filter(Boolean).map((config) => {
+    // Pass through items with type (label, separator, etc)
+    if ('type' in config) {
+      return config
+    }
+
+    const { kind, children, ...rest } = config
+
+    // Recursively process children if present
+    const processedChildren = children
+      ? mapEditorItems(editor, children as any, customHandlers) as any[]
+      : undefined
+
+    // Handle action items with handlers
+    if (kind) {
+      const handler = handlers[kind]
+
+      if (!handler) {
+        return { ...rest, children: processedChildren }
+      }
+
+      return {
+        ...rest,
+        children: processedChildren,
+        disabled: handler.isDisabled?.(editor, config) || !handler.canExecute(editor, config),
+        active: handler.isActive(editor, config),
+        onSelect: () => handler.execute(editor, config).run()
+      }
+    }
+
+    // Pass through items without kind but with children
+    return { ...rest, children: processedChildren }
+  })
 }
 
 export function buildFloatingUIMiddleware(options: FloatingUIOptions): Middleware[] {
