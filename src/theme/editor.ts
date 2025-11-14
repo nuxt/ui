@@ -3,9 +3,9 @@ import type { NuxtOptions } from '@nuxt/schema'
 export default (options: Required<NuxtOptions['ui']>) => ({
   slots: {
     root: '',
-    content: 'size-full flex flex-col flex-1',
+    content: 'relative size-full flex-1',
     base: [
-      'flex-1 w-full outline-none *:my-5 *:first:mt-0 *:last:mb-0 sm:px-8',
+      'w-full outline-none *:my-5 *:first:mt-0 *:last:mb-0 sm:px-8',
       // Placeholder
       '[&_:is(p,h1,h2,h3,h4).is-empty]:before:content-[attr(data-placeholder)] [&_:is(p,h1,h2,h3,h4).is-empty]:before:text-dimmed [&_:is(p,h1,h2,h3,h4).is-empty]:before:float-left [&_:is(p,h1,h2,h3,h4).is-empty]:before:h-0 [&_:is(p,h1,h2,h3,h4).is-empty]:before:pointer-events-none',
       '[&_li_.is-empty]:before:content-none',

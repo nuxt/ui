@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     content: 'min-w-48 max-h-96 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
     group: 'p-1 isolate',
-    label: 'w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5',
+    label: 'w-full flex items-center font-semibold text-highlighted p-1.5 text-xs gap-1.5',
     separator: '-mx-1 my-1 h-px bg-border',
     item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-1.5 text-sm gap-1.5',
     itemLeadingIcon: 'shrink-0 size-5 flex items-center justify-center text-base',
