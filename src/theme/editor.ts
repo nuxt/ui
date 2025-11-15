@@ -40,7 +40,7 @@ export default (options: Required<NuxtOptions['ui']>) => ({
       // Images
       '[&_img]:rounded-md [&_img]:block [&_img]:max-w-full [&_img.ProseMirror-selectednode]:outline-2 [&_img.ProseMirror-selectednode]:outline-primary',
       // Selected nodes
-      '[&_.ProseMirror-selectednode:not(img):not(pre)]:bg-primary/10'
+      '[&_.ProseMirror-selectednode:not(img):not(pre):not([data-node-view-wrapper])]:bg-primary/10'
     ]
   }
 })
