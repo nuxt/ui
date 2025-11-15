@@ -158,7 +158,7 @@ const ui = computed(() => tv({
       v-bind="slotProps"
       data-slot="base"
       :class="ui.base({
-        class: [props.ui?.base, props.class],
+        class: [props.ui?.base, props.class, ...(loadingPosition === 'center' && isLoading ? ['relative'] : [])],
         active,
         ...(active && activeVariant ? { variant: activeVariant } : {}),
         ...(active && activeColor ? { color: activeColor } : {})
@@ -172,7 +172,12 @@ const ui = computed(() => tv({
 
       <slot :ui="ui">
         <template v-if="loadingPosition === 'center' && isLoading">
-          <UIcon v-if="centerLoadingIcon" :name="centerLoadingIcon" data-slot="loadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
+          <div class="flex flex-col items-center">
+            <span v-if="label !== undefined && label !== null" data-slot="label" :class="ui.loadingLabel({ class: props.ui?.loadingLabel })">
+              {{ label }}
+            </span>
+            <UIcon v-if="centerLoadingIcon" :name="centerLoadingIcon" data-slot="loadingIcon" :class="ui.loadingIcon({ class: props.ui?.loadingIcon })" />
+          </div>
         </template>
         <template v-else>
           <span v-if="label !== undefined && label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label, active })">

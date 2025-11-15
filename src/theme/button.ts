@@ -8,7 +8,9 @@ export default (options: Required<ModuleOptions>) => ({
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     leadingAvatarSize: '',
-    trailingIcon: 'shrink-0'
+    trailingIcon: 'shrink-0',
+    loadingIcon: 'shrink-0 size-5',
+    loadingLabel: 'opacity-0 h-0'
   },
   variants: {
     ...fieldGroupVariant,
@@ -163,6 +165,11 @@ export default (options: Required<ModuleOptions>) => ({
     trailing: true,
     class: {
       trailingIcon: 'animate-spin'
+    }
+  }, {
+    loading: true,
+    class: {
+      loadingIcon: 'animate-spin'
     }
   }],
   defaultVariants: {
