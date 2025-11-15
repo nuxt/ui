@@ -30,6 +30,11 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   block?: boolean
   /** Set loading state automatically based on the `@click` promise state */
   loadingAuto?: boolean
+  /**
+   * Position of the loading icon when loading is true.
+   * @defaultValue 'left'
+   */
+  loadingPosition?: 'left' | 'center' | 'right'
   onClick?: ((event: MouseEvent) => void | Promise<void>) | Array<((event: MouseEvent) => void | Promise<void>)>
   class?: any
   ui?: Button['slots']
@@ -83,9 +88,41 @@ const isLoading = computed(() => {
   return props.loading || (props.loadingAuto && (loadingAutoState.value || (formLoading?.value && props.type === 'submit')))
 })
 
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(
-  computed(() => ({ ...props, loading: isLoading.value }))
-)
+// loadingPosition이 명시되지 않았을 때는 기존 trailing prop 동작 유지
+const loadingPosition = computed(() => {
+  if (props.loadingPosition) {
+    return props.loadingPosition
+  }
+  // 기존 동작: trailing prop이 있으면 'right', 없으면 'left'
+  return props.trailing ? 'right' : 'left'
+})
+
+// loadingPosition에 따라 trailing prop 조정
+const iconProps = computed(() => {
+  const baseProps = { ...props, loading: isLoading.value }
+
+  if (isLoading.value) {
+    if (loadingPosition.value === 'right') {
+      return { ...baseProps, trailing: true }
+    } else if (loadingPosition.value === 'left') {
+      return { ...baseProps, trailing: false }
+    }
+    // center일 때는 useComponentIcons에서 처리하지 않고 직접 처리
+    return { ...baseProps, trailing: false }
+  }
+
+  return baseProps
+})
+
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(iconProps)
+
+// center일 때 사용할 로딩 아이콘
+const centerLoadingIcon = computed(() => {
+  if (isLoading.value && loadingPosition.value === 'center') {
+    return props.loadingIcon || appConfig.ui.icons.loading
+  }
+  return undefined
+})
 
 const ui = computed(() => tv({
   extend: tv(theme),
@@ -134,18 +171,23 @@ const ui = computed(() => tv({
       @click="onClickWrapper"
     >
       <slot name="leading" :ui="ui">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
-        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
+        <UIcon v-if="loadingPosition !== 'center' && isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
+        <UAvatar v-else-if="loadingPosition !== 'center' && !!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
       </slot>
 
       <slot :ui="ui">
-        <span v-if="label !== undefined && label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label, active })">
-          {{ label }}
-        </span>
+        <template v-if="loadingPosition === 'center' && isLoading">
+          <UIcon v-if="centerLoadingIcon" :name="centerLoadingIcon" data-slot="loadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
+        </template>
+        <template v-else>
+          <span v-if="label !== undefined && label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label, active })">
+            {{ label }}
+          </span>
+        </template>
       </slot>
 
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
+        <UIcon v-if="loadingPosition !== 'center' && isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
       </slot>
     </ULinkBase>
   </ULink>

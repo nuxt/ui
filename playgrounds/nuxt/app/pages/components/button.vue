@@ -28,8 +28,9 @@ function onClick() {
     <UButton label="Link" to="/" v-bind="props" />
     <UButton label="Disabled" disabled v-bind="props" />
     <UButton label="Disabled link" to="#" disabled v-bind="props" />
-    <UButton label="Loading" loading v-bind="props" />
-    <UButton label="Loading" loading trailing v-bind="props" />
+    <UButton label="Loading" loading loading-position="left" v-bind="props" />
+    <UButton label="Loading" loading loading-position="center" v-bind="props" />
+    <UButton label="Loading" loading trailing loading-position="right" v-bind="props" />
     <UButton label="Loading auto" loading-auto v-bind="props" @click="onClick" />
     <UButton label="Icon" icon="i-lucide-rocket" v-bind="props" />
     <UButton label="Icon" icon="i-lucide-chevron-down" trailing v-bind="props" />

@@ -1,0 +1,7 @@
+{
+  "i18n-ally.localesPaths": [
+    "src/runtime/locale",
+    "src/runtime/components/locale",
+    "docs/app/components/content/examples/locale"
+  ]
+}
