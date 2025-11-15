@@ -88,16 +88,13 @@ const isLoading = computed(() => {
   return props.loading || (props.loadingAuto && (loadingAutoState.value || (formLoading?.value && props.type === 'submit')))
 })
 
-// loadingPosition이 명시되지 않았을 때는 기존 trailing prop 동작 유지
 const loadingPosition = computed(() => {
   if (props.loadingPosition) {
     return props.loadingPosition
   }
-  // 기존 동작: trailing prop이 있으면 'right', 없으면 'left'
   return props.trailing ? 'right' : 'left'
 })
 
-// loadingPosition에 따라 trailing prop 조정
 const iconProps = computed(() => {
   const baseProps = { ...props, loading: isLoading.value }
 
@@ -107,7 +104,6 @@ const iconProps = computed(() => {
     } else if (loadingPosition.value === 'left') {
       return { ...baseProps, trailing: false }
     }
-    // center일 때는 useComponentIcons에서 처리하지 않고 직접 처리
     return { ...baseProps, trailing: false }
   }
 
@@ -116,7 +112,6 @@ const iconProps = computed(() => {
 
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(iconProps)
 
-// center일 때 사용할 로딩 아이콘
 const centerLoadingIcon = computed(() => {
   if (isLoading.value && loadingPosition.value === 'center') {
     return props.loadingIcon || appConfig.ui.icons.loading
