@@ -123,7 +123,7 @@ function onClick() {
   if (node) {
     emit('nodeChange', { node: node.toJSON(), pos })
 
-    props.editor.chain().setNodeSelection(pos).blur().run()
+    props.editor.chain().setNodeSelection(pos).run()
   }
 }
 </script>
