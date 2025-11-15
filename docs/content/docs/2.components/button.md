@@ -283,6 +283,47 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.lo
 :::
 ::
 
+### Loading Position
+
+Use the `loading-position` prop to control where the loading icon appears. The prop accepts three values:
+- `left`: displays loading icon on the left (default)
+- `center`: displays loading icon in the center, hiding the label
+- `right`: displays loading icon on the right
+
+::component-code
+---
+props:
+  loading: true
+  loadingPosition: 'left'
+  label: Button
+---
+Button
+::
+
+::component-code
+---
+props:
+  loading: true
+  loadingPosition: 'center'
+  label: Button
+---
+Button
+::
+
+::component-code
+---
+props:
+  loading: true
+  loadingPosition: 'right'
+  label: Button
+---
+Button
+::
+
+:::tip
+The `loading-position` prop maintains full backward compatibility. Existing usage with `leading` and `trailing` props for loading buttons continues to work without any changes. When `loading-position` is not specified, the component automatically determines the position based on the `trailing` prop.
+:::
+
 ### Disabled
 
 Use the `disabled` prop to disable the Button.
