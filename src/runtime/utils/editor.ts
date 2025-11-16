@@ -42,7 +42,7 @@ export function createToggleHandler(name: string) {
     canExecute: (editor: Editor) => (editor.can() as any)[fnName](),
     execute: (editor: Editor) => (editor.chain().focus() as any)[fnName](),
     isActive: (editor: Editor) => editor.isActive(name),
-    isDisabled: undefined
+    isDisabled: (editor: Editor) => isNodeTypeSelected(editor, ['image']) || editor.isActive('code')
   }
 }
 
@@ -52,7 +52,7 @@ export function createSetHandler(name: string) {
     canExecute: (editor: Editor) => (editor.can() as any)[fnName](),
     execute: (editor: Editor) => (editor.chain().focus() as any)[fnName](),
     isActive: (editor: Editor) => editor.isActive(name),
-    isDisabled: undefined
+    isDisabled: (editor: Editor) => isNodeTypeSelected(editor, ['image']) || editor.isActive('code')
   }
 }
 
@@ -88,7 +88,7 @@ export function createHeadingHandler() {
     canExecute: (editor: Editor, cmd: any) => (editor.can() as any).toggleHeading({ level: cmd.level }),
     execute: (editor: Editor, cmd: any) => editor.chain().focus().toggleHeading({ level: cmd.level }),
     isActive: (editor: Editor, cmd: any) => editor.isActive('heading', { level: cmd.level }),
-    isDisabled: undefined
+    isDisabled: (editor: Editor) => isNodeTypeSelected(editor, ['image']) || editor.isActive('code')
   }
 }
 
@@ -160,6 +160,97 @@ export function createImageHandler() {
   }
 }
 
+export function createListHandler(listType: 'bulletList' | 'orderedList') {
+  const fnName = listType === 'bulletList' ? 'toggleBulletList' : 'toggleOrderedList'
+  const otherListType = listType === 'bulletList' ? 'orderedList' : 'bulletList'
+
+  return {
+    canExecute: (editor: Editor) => {
+      // Can execute if we can toggle the list OR if we're in any list (to allow conversion)
+      return (editor.can() as any)[fnName]() || editor.isActive('bulletList') || editor.isActive('orderedList')
+    },
+    execute: (editor: Editor) => {
+      // If the target list type is already active, just toggle it off
+      if (editor.isActive(listType)) {
+        return (editor.chain().focus() as any)[fnName]()
+      }
+
+      // If a different list type is active, we need to convert the entire list
+      if (editor.isActive(otherListType)) {
+        const { state } = editor
+        const { selection } = state
+        const { $from } = selection
+
+        // Find the list node
+        let listDepth = $from.depth
+        while (listDepth > 0 && !['bulletList', 'orderedList'].includes($from.node(listDepth).type.name)) {
+          listDepth--
+        }
+
+        if (listDepth > 0) {
+          const listNode = $from.node(listDepth)
+          const listPos = $from.before(listDepth)
+          const listEnd = listPos + listNode.nodeSize
+
+          // Select the entire list and convert it
+          return (editor.chain()
+            .focus()
+            .setTextSelection({ from: listPos + 1, to: listEnd - 1 })
+            .clearNodes() as any)[fnName]()
+        }
+      }
+
+      // Otherwise, just toggle the list on
+      return (editor.chain().focus() as any)[fnName]()
+    },
+    isActive: (editor: Editor) => editor.isActive(listType),
+    isDisabled: (editor: Editor) => isNodeTypeSelected(editor, ['image']) || editor.isActive('code')
+  }
+}
+
+export function createMoveHandler(direction: 'up' | 'down') {
+  return {
+    canExecute: (editor: Editor, cmd: any) => {
+      if (!cmd?.pos) return false
+      const node = editor.state.doc.nodeAt(cmd.pos)
+      if (!node) return false
+      const $pos = editor.state.doc.resolve(cmd.pos)
+      const parent = $pos.parent
+      const index = $pos.index()
+      return direction === 'up' ? index > 0 : index < parent.childCount - 1
+    },
+    execute: (editor: Editor, cmd: any) => {
+      if (!cmd?.pos) return editor.chain()
+      const node = editor.state.doc.nodeAt(cmd.pos)
+      if (!node) return editor.chain()
+
+      const $pos = editor.state.doc.resolve(cmd.pos)
+      const parent = $pos.parent
+      const index = $pos.index()
+
+      if (direction === 'up' && index > 0) {
+        const prevNode = parent.child(index - 1)
+        const targetPos = cmd.pos - prevNode.nodeSize
+        return editor.chain().focus()
+          .deleteRange({ from: cmd.pos, to: cmd.pos + node.nodeSize })
+          .insertContentAt(targetPos, node.toJSON())
+      }
+
+      if (direction === 'down' && index < parent.childCount - 1) {
+        const nextNode = parent.child(index + 1)
+        const targetPos = cmd.pos + nextNode.nodeSize
+        return editor.chain().focus()
+          .deleteRange({ from: cmd.pos, to: cmd.pos + node.nodeSize })
+          .insertContentAt(targetPos, node.toJSON())
+      }
+
+      return editor.chain()
+    },
+    isActive: () => false,
+    isDisabled: undefined
+  }
+}
+
 export function createHandlers(): EditorHandlers {
   return {
     mark: createMarkHandler(),
@@ -168,13 +259,75 @@ export function createHandlers(): EditorHandlers {
     link: createLinkHandler(),
     image: createImageHandler(),
     blockquote: createToggleHandler('blockquote'),
-    bulletList: createToggleHandler('bulletList'),
-    orderedList: createToggleHandler('orderedList'),
+    bulletList: createListHandler('bulletList'),
+    orderedList: createListHandler('orderedList'),
     codeBlock: createToggleHandler('codeBlock'),
     horizontalRule: createSetHandler('horizontalRule'),
     paragraph: createSetHandler('paragraph'),
     undo: createSimpleHandler('undo'),
     redo: createSimpleHandler('redo'),
+    clearFormatting: {
+      canExecute: (editor: Editor, cmd: any) => {
+        if (cmd?.pos) {
+          const node = editor.state.doc.nodeAt(cmd.pos)
+          return !!node
+        }
+        return editor.can().clearNodes() || editor.can().unsetAllMarks()
+      },
+      execute: (editor: Editor, cmd: any) => {
+        // If position is provided (from drag handle), select the node content first
+        if (cmd?.pos) {
+          const node = editor.state.doc.nodeAt(cmd.pos)
+          if (!node) return editor.chain()
+
+          const from = cmd.pos + 1
+          const to = cmd.pos + node.nodeSize - 1
+
+          return editor.chain()
+            .focus()
+            .setTextSelection({ from, to })
+            .clearNodes()
+            .unsetAllMarks()
+        }
+
+        // Otherwise, clear formatting on current selection
+        return editor.chain().focus().clearNodes().unsetAllMarks()
+      },
+      isActive: () => false,
+      isDisabled: undefined
+    },
+    duplicate: {
+      canExecute: (editor: Editor, cmd: any) => {
+        if (!cmd?.pos) return false
+        const node = editor.state.doc.nodeAt(cmd.pos)
+        return !!node
+      },
+      execute: (editor: Editor, cmd: any) => {
+        if (!cmd?.pos) return editor.chain()
+        const node = editor.state.doc.nodeAt(cmd.pos)
+        if (!node) return editor.chain()
+        return editor.chain().focus().insertContentAt(cmd.pos + node.nodeSize, node.toJSON())
+      },
+      isActive: () => false,
+      isDisabled: undefined
+    },
+    delete: {
+      canExecute: (editor: Editor, cmd: any) => {
+        if (!cmd?.pos) return false
+        const node = editor.state.doc.nodeAt(cmd.pos)
+        return !!node
+      },
+      execute: (editor: Editor, cmd: any) => {
+        if (!cmd?.pos) return editor.chain()
+        const node = editor.state.doc.nodeAt(cmd.pos)
+        if (!node) return editor.chain()
+        return editor.chain().focus().deleteRange({ from: cmd.pos, to: cmd.pos + node.nodeSize })
+      },
+      isActive: () => false,
+      isDisabled: undefined
+    },
+    moveUp: createMoveHandler('up'),
+    moveDown: createMoveHandler('down'),
     mention: {
       canExecute: () => true,
       execute: (editor: Editor) => editor.chain().insertContent('@'),

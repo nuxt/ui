@@ -284,7 +284,7 @@ const handleItems = (editor: Editor): DropdownMenuItem[][] => {
   return mapEditorItems(editor, [[
     {
       type: 'label',
-      label: upperFirst(selectedNode.value.type)
+      label: upperFirst(selectedNode.value.node.type)
     },
     {
       label: 'Turn into',
@@ -302,34 +302,26 @@ const handleItems = (editor: Editor): DropdownMenuItem[][] => {
       ]
     },
     {
+      kind: 'clearFormatting',
+      pos: selectedNode.value?.pos,
       label: 'Reset formatting',
-      icon: 'i-lucide-rotate-ccw',
-      onSelect: () => {
-        editor.chain().clearNodes().unsetAllMarks().focus().run()
-      }
+      icon: 'i-lucide-rotate-ccw'
     }
   ], [
     {
+      kind: 'duplicate',
+      pos: selectedNode.value?.pos,
       label: 'Duplicate',
-      icon: 'i-lucide-copy',
-      onSelect: () => {
-        const { $anchor } = editor.state.selection
-        const depth = $anchor.depth
-        if (depth === 0) return
-
-        const node = $anchor.node(depth)
-        if (node) {
-          const pos = $anchor.before(depth)
-          editor.chain().focus().insertContentAt(pos + node.nodeSize, node.toJSON()).run()
-        }
-      }
+      icon: 'i-lucide-copy'
     },
     {
       label: 'Copy to clipboard',
       icon: 'i-lucide-clipboard',
       onSelect: async () => {
-        const { $anchor } = editor.state.selection
-        const node = $anchor.node($anchor.depth)
+        if (!selectedNode.value) return
+
+        const pos = selectedNode.value.pos
+        const node = editor.state.doc.nodeAt(pos)
         if (node) {
           await navigator.clipboard.writeText(node.textContent)
         }
@@ -337,79 +329,23 @@ const handleItems = (editor: Editor): DropdownMenuItem[][] => {
     }
   ], [
     {
+      kind: 'moveUp',
+      pos: selectedNode.value?.pos,
       label: 'Move up',
-      icon: 'i-lucide-arrow-up',
-      disabled: (() => {
-        const { $anchor } = editor.state.selection
-        const depth = $anchor.depth
-        if (depth === 0) return true
-        const index = $anchor.index(depth - 1)
-        return index === 0
-      })(),
-      onSelect: () => {
-        const { $anchor } = editor.state.selection
-        const depth = $anchor.depth
-        if (depth === 0) return
-
-        const node = $anchor.node(depth)
-        const pos = $anchor.before(depth)
-        const resolvedPos = editor.state.doc.resolve(pos)
-        const index = resolvedPos.index(depth - 1)
-
-        if (index > 0) {
-          const targetPos = resolvedPos.before(depth) - resolvedPos.nodeBefore!.nodeSize
-          editor.chain().focus()
-            .deleteRange({ from: pos, to: pos + node.nodeSize })
-            .insertContentAt(targetPos, node.toJSON())
-            .run()
-        }
-      }
+      icon: 'i-lucide-arrow-up'
     },
     {
+      kind: 'moveDown',
+      pos: selectedNode.value?.pos,
       label: 'Move down',
-      icon: 'i-lucide-arrow-down',
-      disabled: (() => {
-        const { $anchor } = editor.state.selection
-        const depth = $anchor.depth
-        if (depth === 0) return true
-        const parent = $anchor.node(depth - 1)
-        const index = $anchor.index(depth - 1)
-        return index >= parent.childCount - 1
-      })(),
-      onSelect: () => {
-        const { $anchor } = editor.state.selection
-        const depth = $anchor.depth
-        if (depth === 0) return
-
-        const node = $anchor.node(depth)
-        const pos = $anchor.before(depth)
-        const resolvedPos = editor.state.doc.resolve(pos)
-        const parent = resolvedPos.node(depth - 1)
-        const index = resolvedPos.index(depth - 1)
-
-        if (index < parent.childCount - 1) {
-          const nextNode = parent.child(index + 1)
-          const targetPos = pos + node.nodeSize + nextNode.nodeSize
-          editor.chain().focus()
-            .deleteRange({ from: pos, to: pos + node.nodeSize })
-            .insertContentAt(targetPos, node.toJSON())
-            .run()
-        }
-      }
+      icon: 'i-lucide-arrow-down'
     }
   ], [
     {
+      kind: 'delete',
+      pos: selectedNode.value?.pos,
       label: 'Delete',
-      icon: 'i-lucide-trash',
-      onSelect: () => {
-        const { $anchor } = editor.state.selection
-        const depth = $anchor.depth
-        if (depth === 0) return
-
-        const pos = $anchor.before(depth)
-        const node = $anchor.node(depth)
-        editor.chain().focus().deleteRange({ from: pos, to: pos + node.nodeSize }).run()
-      }
+      icon: 'i-lucide-trash'
     }
   ]], customHandlers) as DropdownMenuItem[][]
 }
@@ -460,7 +396,7 @@ const handleItems = (editor: Editor): DropdownMenuItem[][] => {
 
     <!-- <UEditorToolbar /> for image -->
 
-    <UEditorDragHandle v-slot="{ ui }" :editor="editor" @node-change="selectedNode = $event.node">
+    <UEditorDragHandle v-slot="{ ui }" :editor="editor" @node-change="selectedNode = $event">
       <UDropdownMenu
         v-slot="{ open }"
         :modal="false"

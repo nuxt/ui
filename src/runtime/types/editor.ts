@@ -30,4 +30,6 @@ export type EditorItem
     | { kind: 'heading', level: 1 | 2 | 3 | 4 | 5 | 6 }
     | { kind: 'link', href?: string }
     | { kind: 'image', src?: string }
+    | { kind: 'duplicate' | 'delete' | 'moveUp' | 'moveDown', pos: number }
+    | { kind: 'clearFormatting', pos?: number }
     | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' | 'undo' | 'redo' | 'mention' | 'emoji' }
