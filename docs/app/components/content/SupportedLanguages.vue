@@ -33,7 +33,6 @@ function getEmojiFlag(locale: string): string {
     nb: 'no', // Norwegian Bokmål -> Norway
     sl: 'si', // Slovenian -> Slovenia
     sv: 'se', // Swedish -> Sweden
-    sq: 'sq', // Albanian -> Albania
     uk: 'ua', // Ukrainian -> Ukraine
     ur: 'pk', // Urdu -> Pakistan
     vi: 'vn' // Vietnamese -> Vietnam
