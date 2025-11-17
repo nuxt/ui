@@ -5,6 +5,7 @@
 import { z } from 'zod/v3'
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js'
+import type { UIMessage } from 'ai'
 
 function createServer() {
   const server = new McpServer({
@@ -409,6 +410,36 @@ function createServer() {
       const result = await $fetch('/api/mcp/search-components-by-category', { query: params })
       return {
         content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }]
+      }
+    }
+  )
+
+  server.registerTool(
+    'ask_nuxt_ui_agent',
+    {
+      title: 'Ask Nuxt UI Agent',
+      description: 'Asks the Nuxt UI agent a question',
+      inputSchema: {
+        // @ts-expect-error - need to wait for support for zod 4, this works correctly just a type mismatch from zod 3 to zod 4 (https://github.com/modelcontextprotocol/typescript-sdk/pull/869)
+        query: z.string().describe('The question to ask the agent')
+      }
+    },
+    async (params: { query: string }) => {
+      const result = await $fetch<string>('/api/search', {
+        method: 'POST',
+        timeout: 60_000,
+        body: {
+          stream: false,
+          messages: [{
+            role: 'user',
+            parts: [{ type: 'text', text: params.query }]
+          }] satisfies Array<Omit<UIMessage, 'id'>> }
+      })
+
+      console.log(result)
+
+      return {
+        content: [{ type: 'text' as const, text: result }]
       }
     }
   )

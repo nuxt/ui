@@ -1,10 +1,10 @@
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
-import { streamText, convertToModelMessages, stepCountIs } from 'ai'
+import { streamText, convertToModelMessages, stepCountIs, generateText } from 'ai'
 import { experimental_createMCPClient } from '@ai-sdk/mcp'
 import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
+  const { messages, stream = true } = await readBody(event)
 
   const httpTransport = new StreamableHTTPClientTransport(
     new URL(import.meta.dev ? 'http://localhost:3000/mcp' : 'https://ui.nuxt.com/mcp')
@@ -14,9 +14,9 @@ export default defineEventHandler(async (event) => {
   })
   const tools = await httpClient.tools()
 
-  return streamText({
+  const options = {
     model: gateway('anthropic/claude-sonnet-4.5'),
-    maxOutputTokens: 10000,
+    maxOutputTokens: 10_000,
     system: `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Use your knowledge base tools to search for relevant information before answering questions.
 
 Guidelines:
@@ -41,6 +41,25 @@ Guidelines:
     `,
     messages: convertToModelMessages(messages),
     stopWhen: stepCountIs(6),
+  }
+
+  // If not streaming, it's called from the MCP route as a tool.
+  if (stream === false) {
+    const { text } = await generateText({
+      ...options,
+      tools,
+    })
+
+    await httpClient.close()
+
+    return text
+  }
+
+    // Remove the ask_nuxt_ui_agent tool to avoid infinite loops
+  delete tools['ask_nuxt_ui_agent']
+
+  return streamText({
+    ...options,
     tools,
     onFinish: async () => {
       await httpClient.close()
