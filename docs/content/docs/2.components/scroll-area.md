@@ -46,14 +46,14 @@ options:
       is: true
   - name: gap
     type: number
-    label: gap (px)
+    label: gap
     default: 16
     visibleWhen:
       option: virtualize
       is: true
   - name: padding
     type: number
-    label: padding (px)
+    label: padding
     default: 16
     visibleWhen:
       option: virtualize
