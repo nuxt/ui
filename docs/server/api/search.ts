@@ -40,14 +40,14 @@ Guidelines:
 - Format responses in a conversational way, not as documentation sections.
     `,
     messages: convertToModelMessages(messages),
-    stopWhen: stepCountIs(6),
+    stopWhen: stepCountIs(6)
   }
 
   // If not streaming, it's called from the MCP route as a tool.
   if (stream === false) {
     const { text } = await generateText({
       ...options,
-      tools,
+      tools
     })
 
     await httpClient.close()
@@ -55,7 +55,7 @@ Guidelines:
     return text
   }
 
-    // Remove the ask_nuxt_ui_agent tool to avoid infinite loops
+  // Remove the ask_nuxt_ui_agent tool to avoid infinite loops
   delete tools['ask_nuxt_ui_agent']
 
   return streamText({
