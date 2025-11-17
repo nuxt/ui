@@ -14,6 +14,9 @@ export default defineEventHandler(async (event) => {
   })
   const tools = await httpClient.tools()
 
+  // Remove the ask_nuxt_ui_agent tool to avoid infinite loops
+  delete tools['ask_nuxt_ui_agent']
+
   const options = {
     model: gateway('anthropic/claude-sonnet-4.5'),
     maxOutputTokens: 10_000,
@@ -54,9 +57,6 @@ Guidelines:
 
     return text
   }
-
-  // Remove the ask_nuxt_ui_agent tool to avoid infinite loops
-  delete tools['ask_nuxt_ui_agent']
 
   return streamText({
     ...options,
