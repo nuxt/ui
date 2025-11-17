@@ -17,7 +17,7 @@ navigation.badge: Soon
 The ScrollArea component creates scrollable containers with optional virtualization for large lists.
 
 ::note
-When virtualization is **disabled**, spacing and layout use theme configuration. When **enabled**, configure gap, padding, and lanes via the `virtualize` prop.
+When virtualization is **disabled**, spacing uses theme configuration. When **enabled**, spacing has sensible defaults (`gap: 16`, `paddingStart: 16`, `paddingEnd: 16`) matching the theme. Override via the `virtualize` prop as needed.
 ::
 
 ::component-example
@@ -46,14 +46,14 @@ options:
       is: true
   - name: gap
     type: number
-    label: gap
+    label: gap (px)
     default: 16
     visibleWhen:
       option: virtualize
       is: true
   - name: padding
     type: number
-    label: padding
+    label: padding (px)
     default: 16
     visibleWhen:
       option: virtualize

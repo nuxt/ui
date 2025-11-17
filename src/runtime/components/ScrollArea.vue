@@ -128,9 +128,9 @@ const virtualizerProps = toRef(() => {
   return defu(options, {
     estimateSize: 100,
     overscan: 12,
-    gap: 0,
-    paddingStart: 0,
-    paddingEnd: 0,
+    gap: 16,
+    paddingStart: 16,
+    paddingEnd: 16,
     scrollMargin: 0,
     loadMoreThreshold: 5
   })
