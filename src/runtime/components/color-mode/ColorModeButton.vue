@@ -27,9 +27,6 @@ const props = withDefaults(defineProps<ColorModeButtonProps>(), {
   color: 'neutral',
   variant: 'ghost'
 })
-defineSlots<{
-  fallback(props?: {}): any
-}>()
 
 const { t } = useLocale()
 const colorMode = useColorMode()
@@ -48,21 +45,17 @@ const isDark = computed({
 </script>
 
 <template>
-  <ClientOnly v-if="!colorMode?.forced">
-    <UButton
-      v-bind="{
-        ...buttonProps,
-        'icon': props.icon || (isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light),
-        'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
-        ...$attrs
-      }"
-      @click="isDark = !isDark"
-    />
-
-    <template #fallback>
-      <slot name="fallback">
-        <div class="size-8" />
-      </slot>
+  <UButton
+    v-bind="{
+      ...buttonProps,
+      'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
+      ...$attrs
+    }"
+    @click="isDark = !isDark"
+  >
+    <template #leading="{ ui }">
+      <UIcon :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" class="hidden dark:inline" :name="appConfig.ui.icons.dark" />
+      <UIcon :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" class="inline dark:hidden" :name="appConfig.ui.icons.light" />
     </template>
-  </ClientOnly>
+  </UButton>
 </template>
