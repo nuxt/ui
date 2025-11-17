@@ -389,7 +389,7 @@ importers:
         specifier: 5.8.3
         version: 5.8.3
       vite:
-        specifier: ^7.1.12
+        specifier: ^7.2.2
         version: 7.2.2(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1)
       vue-tsc:
         specifier: ^3.1.4
