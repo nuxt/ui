@@ -55,9 +55,6 @@ function loadMore() {
     :items="recipes"
     :virtualize="{
       estimateSize: 120,
-      gap: 16,
-      paddingStart: 16,
-      paddingEnd: 16,
       loadMoreThreshold: 5
     }"
     class="h-96 w-full"

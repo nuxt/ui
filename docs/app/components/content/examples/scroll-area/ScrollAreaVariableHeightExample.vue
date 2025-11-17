@@ -12,7 +12,7 @@ const items = Array.from({ length: 100 }, (_, i) => ({
   <UScrollArea
     v-slot="{ item }"
     :items="items"
-    :virtualize="{ estimateSize: 120, lanes: 3, gap: 16, paddingStart: 16, paddingEnd: 16 }"
+    :virtualize="{ estimateSize: 120, lanes: 3 }"
     class="h-96 w-full border border-default rounded-lg"
   >
     <UCard>
