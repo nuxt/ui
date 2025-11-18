@@ -23,9 +23,14 @@ const type = computed(() => {
   return type
 })
 
-const { data: ast } = await useAsyncData(`hightlight-inline-code-${hash(type.value).slice(0, 10)}`, () => parseMarkdown(`\`${type.value}\`{lang="ts-type"}`))
+const ast = ref<any>(null)
+
+onMounted(async () => {
+  ast.value = await parseMarkdown(`\`${type.value}\`{lang="ts-type"}`)
+})
 </script>
 
 <template>
   <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" />
+  <ProseCode v-else>{{ type }}</ProseCode>
 </template>
