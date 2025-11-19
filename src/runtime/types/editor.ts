@@ -31,5 +31,5 @@ export type EditorItem
     | { kind: 'link', href?: string }
     | { kind: 'image', src?: string }
     | { kind: 'duplicate' | 'delete' | 'moveUp' | 'moveDown', pos: number }
-    | { kind: 'clearFormatting', pos?: number }
+    | { kind: 'clearFormatting' | 'suggestion', pos?: number }
     | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' | 'undo' | 'redo' | 'mention' | 'emoji' }

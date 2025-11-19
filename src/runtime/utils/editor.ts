@@ -328,6 +328,32 @@ export function createHandlers(): EditorHandlers {
     },
     moveUp: createMoveHandler('up'),
     moveDown: createMoveHandler('down'),
+    suggestion: {
+      canExecute: () => true,
+      execute: (editor: Editor, cmd?: any) => {
+        const { state } = editor
+        const { selection } = state
+        const { $from } = selection
+
+        if (cmd?.pos !== undefined) {
+          // When triggered from drag handle, insert after the current node
+          const node = state.doc.nodeAt(cmd.pos)
+          if (node) {
+            const insertPos = cmd.pos + node.nodeSize
+            return editor.chain().focus().insertContentAt(insertPos, { type: 'paragraph', content: [{ type: 'text', text: '/' }] })
+          }
+        }
+
+        // When triggered from toolbar/elsewhere, insert new paragraph after current block
+        const currentNode = $from.node($from.depth)
+        const currentNodePos = $from.before($from.depth)
+        const insertPos = currentNodePos + currentNode.nodeSize
+
+        return editor.chain().focus().insertContentAt(insertPos, { type: 'paragraph', content: [{ type: 'text', text: '/' }] })
+      },
+      isActive: () => false,
+      isDisabled: undefined
+    },
     mention: {
       canExecute: () => true,
       execute: (editor: Editor) => editor.chain().insertContent('@'),
