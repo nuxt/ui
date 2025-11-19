@@ -35,10 +35,12 @@ function getEmojiFlag(locale: string): string {
     el: 'gr', // Greek -> Greece
     en: 'gb', // English -> Great Britain
     et: 'ee', // Estonian -> Estonia
+    gl: 'es', // Galician -> Spain
     he: 'il', // Hebrew -> Israel
     hi: 'in', // Hindi -> India
     hy: 'am', // Armenian -> Armenia
     ja: 'jp', // Japanese -> Japan
+    ka: 'ge', // Georgian -> Georgia
     kk: 'kz', // Kazakh -> Kazakhstan
     km: 'kh', // Khmer -> Cambodia
     ko: 'kr', // Korean -> South Korea
@@ -47,6 +49,7 @@ function getEmojiFlag(locale: string): string {
     ms: 'my', // Malay -> Malaysia
     nb: 'no', // Norwegian Bokmål -> Norway
     sl: 'si', // Slovenian -> Slovenia
+    sq: 'al', // Albanian -> Albania
     sv: 'se', // Swedish -> Sweden
     uk: 'ua', // Ukrainian -> Ukraine
     ur: 'pk', // Urdu -> Pakistan

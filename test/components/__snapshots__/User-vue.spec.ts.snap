@@ -212,7 +212,7 @@ exports[`User > renders with size xs correctly 1`] = `
 
 exports[`User > renders with to correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0 transform transition-transform duration-200 group-hover/user:scale-115"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
-  <div data-slot="wrapper" class=""><a href="https://github.com/benjamincanac" tabindex="-1" target="_blank" aria-label="Benjamin Canac" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+  <div data-slot="wrapper" class=""><a href="https://github.com/benjamincanac" tabindex="-1" rel="noopener noreferrer" aria-label="Benjamin Canac" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
     <p data-slot="name" class="font-medium text-default peer-hover:text-highlighted transition-colors text-sm">Benjamin Canac</p>
     <p data-slot="description" class="text-muted peer-hover:text-toned transition-colors text-xs">Software Engineer</p>
   </div>

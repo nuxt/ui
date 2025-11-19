@@ -53,6 +53,9 @@ export default (options: Required<ModuleOptions>) => ({
       true: {
         legend: 'after:content-[\'*\'] after:ms-0.5 after:text-error'
       }
+    },
+    disabled: {
+      true: {}
     }
   },
   compoundVariants: [
@@ -95,7 +98,7 @@ export default (options: Required<ModuleOptions>) => ({
       variant: 'table',
       disabled: true,
       class: {
-        item: 'cursor-not-allowed opacity-75'
+        item: 'cursor-not-allowed'
       }
     }
   ],
