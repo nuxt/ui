@@ -372,7 +372,7 @@ export function createHandlers(): EditorHandlers {
 export function mapEditorItems(
   editor: Editor,
   items: (Partial<EditorItem> & Record<string, any>)[] | (Partial<EditorItem> & Record<string, any>)[][],
-  customHandlers?: EditorHandlers
+  customHandlers?: Partial<EditorHandlers>
 ): any[] | any[][] {
   const handlers = { ...createHandlers(), ...customHandlers }
 
@@ -399,7 +399,6 @@ export function mapEditorItems(
     // Handle action items with handlers
     if (kind) {
       const handler = handlers[kind]
-
       if (!handler) {
         return { ...rest, children: processedChildren }
       }

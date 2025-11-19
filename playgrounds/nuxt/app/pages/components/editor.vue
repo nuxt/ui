@@ -68,7 +68,7 @@ Whether you're working on a personal project or building an enterprise applicati
 Visit our [documentation](https://ui.nuxt.com) to learn more and explore all available components.
 `)
 
-const customHandlers: EditorHandlers = {
+const customHandlers: Partial<EditorHandlers> = {
   image: {
     canExecute: (editor: Editor) => (editor.can() as any).insertContent({ type: 'imageUpload' }),
     execute: (editor: Editor) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
@@ -84,7 +84,6 @@ const toolbarItems = [[{
   kind: 'redo',
   icon: 'i-lucide-redo'
 }], [{
-  kind: 'dropdown',
   icon: 'i-lucide-heading',
   ui: {
     label: 'text-xs'
@@ -95,7 +94,7 @@ const toolbarItems = [[{
   }, {
     kind: 'heading',
     level: 1,
-    icon: 'i-lucide-heading',
+    icon: 'i-lucide-heading-1',
     label: 'Heading 1'
   }, {
     kind: 'heading',
@@ -114,7 +113,6 @@ const toolbarItems = [[{
     label: 'Heading 4'
   }]
 }, {
-  kind: 'dropdown',
   icon: 'i-lucide-list',
   items: [{
     kind: 'bulletList',
@@ -158,7 +156,6 @@ const toolbarItems = [[{
   mark: 'code',
   icon: 'i-lucide-code'
 }, {
-  kind: 'slot',
   slot: 'link' as const
 }, {
   kind: 'image',
@@ -180,6 +177,118 @@ const toolbarItems = [[{
   align: 'justify',
   icon: 'i-lucide-align-justify'
 }]] satisfies EditorToolbarItem[][]
+
+const imageItems = (editor: Editor): EditorToolbarItem[][] => {
+  const node = editor.state.doc.nodeAt(editor.state.selection.from)
+
+  return [[{
+    icon: 'i-lucide-download',
+    to: node?.attrs?.src,
+    download: true
+  }, {
+    icon: 'i-lucide-refresh-cw',
+    onClick: () => {
+      const { state } = editor
+      const { selection } = state
+
+      const pos = selection.from
+      const node = state.doc.nodeAt(pos)
+
+      if (node && node.type.name === 'image') {
+        editor.chain().focus().deleteRange({ from: pos, to: pos + node.nodeSize }).insertContentAt(pos, { type: 'imageUpload' }).run()
+      }
+    }
+  }], [{
+    icon: 'i-lucide-trash',
+    onClick: () => {
+      const { state } = editor
+      const { selection } = state
+
+      const pos = selection.from
+      const node = state.doc.nodeAt(pos)
+
+      if (node && node.type.name === 'image') {
+        editor.chain().focus().deleteRange({ from: pos, to: pos + node.nodeSize }).run()
+      }
+    }
+  }]]
+}
+
+const selectedNode = ref<any>(null)
+
+const handleItems = (editor: Editor): DropdownMenuItem[][] => {
+  if (!selectedNode.value) {
+    return []
+  }
+
+  return mapEditorItems(editor, [[
+    {
+      type: 'label',
+      label: upperFirst(selectedNode.value.node.type)
+    },
+    {
+      label: 'Turn into',
+      icon: 'i-lucide-repeat-2',
+      children: [
+        { kind: 'paragraph', label: 'Paragraph', icon: 'i-lucide-type' },
+        { kind: 'heading', level: 1, label: 'Heading 1', icon: 'i-lucide-heading-1' },
+        { kind: 'heading', level: 2, label: 'Heading 2', icon: 'i-lucide-heading-2' },
+        { kind: 'heading', level: 3, label: 'Heading 3', icon: 'i-lucide-heading-3' },
+        { kind: 'heading', level: 4, label: 'Heading 4', icon: 'i-lucide-heading-4' },
+        { kind: 'bulletList', label: 'Bullet List', icon: 'i-lucide-list' },
+        { kind: 'orderedList', label: 'Ordered List', icon: 'i-lucide-list-ordered' },
+        { kind: 'blockquote', label: 'Blockquote', icon: 'i-lucide-text-quote' },
+        { kind: 'codeBlock', label: 'Code Block', icon: 'i-lucide-square-code' }
+      ]
+    },
+    {
+      kind: 'clearFormatting',
+      pos: selectedNode.value?.pos,
+      label: 'Reset formatting',
+      icon: 'i-lucide-rotate-ccw'
+    }
+  ], [
+    {
+      kind: 'duplicate',
+      pos: selectedNode.value?.pos,
+      label: 'Duplicate',
+      icon: 'i-lucide-copy'
+    },
+    {
+      label: 'Copy to clipboard',
+      icon: 'i-lucide-clipboard',
+      onSelect: async () => {
+        if (!selectedNode.value) return
+
+        const pos = selectedNode.value.pos
+        const node = editor.state.doc.nodeAt(pos)
+        if (node) {
+          await navigator.clipboard.writeText(node.textContent)
+        }
+      }
+    }
+  ], [
+    {
+      kind: 'moveUp',
+      pos: selectedNode.value?.pos,
+      label: 'Move up',
+      icon: 'i-lucide-arrow-up'
+    },
+    {
+      kind: 'moveDown',
+      pos: selectedNode.value?.pos,
+      label: 'Move down',
+      icon: 'i-lucide-arrow-down'
+    }
+  ], [
+    {
+      kind: 'delete',
+      pos: selectedNode.value?.pos,
+      label: 'Delete',
+      icon: 'i-lucide-trash'
+    }
+  ]], customHandlers) as DropdownMenuItem[][]
+}
 
 const suggestionItems: EditorSuggestionMenuItem[][] = [[{
   type: 'label',
@@ -273,87 +382,11 @@ const mentionItems: EditorMentionMenuItem[] = [{
 }]
 
 const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.name.startsWith('regional_indicator_'))
-
-const selectedNode = ref<any>(null)
-
-const handleItems = (editor: Editor): DropdownMenuItem[][] => {
-  if (!selectedNode.value) {
-    return []
-  }
-
-  return mapEditorItems(editor, [[
-    {
-      type: 'label',
-      label: upperFirst(selectedNode.value.node.type)
-    },
-    {
-      label: 'Turn into',
-      icon: 'i-lucide-repeat-2',
-      children: [
-        { kind: 'paragraph', label: 'Paragraph', icon: 'i-lucide-type' },
-        { kind: 'heading', level: 1, label: 'Heading 1', icon: 'i-lucide-heading-1' },
-        { kind: 'heading', level: 2, label: 'Heading 2', icon: 'i-lucide-heading-2' },
-        { kind: 'heading', level: 3, label: 'Heading 3', icon: 'i-lucide-heading-3' },
-        { kind: 'heading', level: 4, label: 'Heading 4', icon: 'i-lucide-heading-4' },
-        { kind: 'bulletList', label: 'Bullet List', icon: 'i-lucide-list' },
-        { kind: 'orderedList', label: 'Ordered List', icon: 'i-lucide-list-ordered' },
-        { kind: 'blockquote', label: 'Blockquote', icon: 'i-lucide-text-quote' },
-        { kind: 'codeBlock', label: 'Code Block', icon: 'i-lucide-square-code' }
-      ]
-    },
-    {
-      kind: 'clearFormatting',
-      pos: selectedNode.value?.pos,
-      label: 'Reset formatting',
-      icon: 'i-lucide-rotate-ccw'
-    }
-  ], [
-    {
-      kind: 'duplicate',
-      pos: selectedNode.value?.pos,
-      label: 'Duplicate',
-      icon: 'i-lucide-copy'
-    },
-    {
-      label: 'Copy to clipboard',
-      icon: 'i-lucide-clipboard',
-      onSelect: async () => {
-        if (!selectedNode.value) return
-
-        const pos = selectedNode.value.pos
-        const node = editor.state.doc.nodeAt(pos)
-        if (node) {
-          await navigator.clipboard.writeText(node.textContent)
-        }
-      }
-    }
-  ], [
-    {
-      kind: 'moveUp',
-      pos: selectedNode.value?.pos,
-      label: 'Move up',
-      icon: 'i-lucide-arrow-up'
-    },
-    {
-      kind: 'moveDown',
-      pos: selectedNode.value?.pos,
-      label: 'Move down',
-      icon: 'i-lucide-arrow-down'
-    }
-  ], [
-    {
-      kind: 'delete',
-      pos: selectedNode.value?.pos,
-      label: 'Delete',
-      icon: 'i-lucide-trash'
-    }
-  ]], customHandlers) as DropdownMenuItem[][]
-}
 </script>
 
 <template>
   <UEditor
-    v-slot="{ editor }"
+    v-slot="{ editor, handlers }"
     v-model="content"
     :extensions="[
       Emoji,
@@ -361,6 +394,7 @@ const handleItems = (editor: Editor): DropdownMenuItem[][] => {
     ]"
     :handlers="customHandlers"
     content-type="markdown"
+    autofocus
     placeholder="Write, type '/' for commands..."
     class="min-h-0"
     :ui="{ content: 'max-w-2xl mx-auto' }"
@@ -394,9 +428,23 @@ const handleItems = (editor: Editor): DropdownMenuItem[][] => {
       </template>
     </UEditorToolbar>
 
-    <!-- <UEditorToolbar /> for image -->
+    <UEditorToolbar
+      :editor="editor"
+      :items="imageItems(editor)"
+      layout="bubble"
+      :should-show="({ editor }) => editor.isActive('image')"
+    />
 
     <UEditorDragHandle v-slot="{ ui }" :editor="editor" @node-change="selectedNode = $event">
+      <UButton
+        icon="i-lucide-plus"
+        color="neutral"
+        variant="ghost"
+        size="sm"
+        :class="ui.handle()"
+        @click.stop="handlers.suggestion?.execute(editor)"
+      />
+
       <UDropdownMenu
         v-slot="{ open }"
         :modal="false"

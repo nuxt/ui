@@ -41,7 +41,7 @@ export interface EditorProps extends Omit<Partial<EditorOptions>, 'content'> {
    * Custom item handlers to override or extend the default handlers.
    * These handlers are provided to all child components (toolbar, suggestion menu, etc.).
    */
-  handlers?: EditorHandlers
+  handlers?: Partial<EditorHandlers>
   class?: any
   ui?: Editor['slots']
 }

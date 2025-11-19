@@ -13,21 +13,19 @@ import type { ComponentConfig } from '../types/tv'
 
 type EditorToolbar = ComponentConfig<typeof theme, AppConfig, 'editorToolbar'>
 
-type ButtonItem = Pick<ButtonProps, 'label' | 'color' | 'activeColor' | 'variant' | 'activeVariant' | 'size' | 'icon' | 'leadingIcon' | 'trailingIcon' | 'loading' | 'loadingIcon' | 'disabled' | 'active' | 'class' | 'ui'> & {
+type ButtonItem = Omit<ButtonProps, 'type'> & {
   slot?: string
 }
 
-type EditorToolbarDropdownItem = (DropdownMenuItem & EditorItem) | DropdownMenuItem
+type EditorToolbarButtonItem = ButtonItem & EditorItem
+
+type EditorToolbarDropdownChildItem = (DropdownMenuItem & EditorItem) | DropdownMenuItem
+type EditorToolbarDropdownItem = ButtonItem & DropdownMenuProps<ArrayOrNested<EditorToolbarDropdownChildItem>>
 
 export type EditorToolbarItem
-  = | (ButtonItem & EditorItem)
-    | (ButtonItem & DropdownMenuProps<ArrayOrNested<EditorToolbarDropdownItem>>) & {
-      kind: 'dropdown'
-    }
-    | ButtonItem & {
-      kind: 'slot'
-      slot: string
-    }
+  = | ButtonItem
+    | EditorToolbarButtonItem
+    | EditorToolbarDropdownItem
 
 type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>> = {
   /**
@@ -79,7 +77,7 @@ type SlotPropsProps = {
   index: number
   isActive: (item: EditorToolbarItem) => boolean
   isDisabled: (item: EditorToolbarItem) => boolean
-  onClick: (e: Event, item: EditorToolbarItem) => void
+  onClick: (e: MouseEvent, item: EditorToolbarItem) => void
 }
 type SlotProps<T extends EditorToolbarItem> = (props: { item: T } & SlotPropsProps) => any
 
@@ -98,9 +96,9 @@ import { computed, inject } from 'vue'
 import { Primitive, Separator, useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
-import { reactivePick } from '@vueuse/core'
+import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { isArrayOfArray, pick } from '../utils'
+import { isArrayOfArray, pick, omit } from '../utils'
 import { tv } from '../utils/tv'
 import UDropdownMenu from './DropdownMenu.vue'
 import UButton from './Button.vue'
@@ -119,7 +117,7 @@ defineSlots<EditorToolbarSlots<T>>()
 
 const appConfig = useAppConfig() as EditorToolbar['AppConfig']
 
-const handlers = inject<ComputedRef<EditorHandlers>>('editorHandlers')!
+const handlers = inject<ComputedRef<EditorHandlers>>('editorHandlers')
 
 const Component = computed(() => {
   return ({
@@ -128,7 +126,7 @@ const Component = computed(() => {
     fixed: 'template'
   }[props.layout])
 })
-const ComponentProps = useForwardProps(reactivePick(props as any, 'pluginKey', 'appendTo', 'updateDelay', 'resizeDelay', 'shouldShow', 'options'))
+const ComponentProps = useForwardProps(reactiveOmit(props, 'as', 'color', 'variant', 'activeColor', 'activeVariant', 'size', 'items', 'layout', 'editor', 'class', 'ui'))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorToolbar || {}) })({
   layout: props.layout
@@ -143,20 +141,23 @@ const groups = computed<EditorToolbarItem[][]>(() =>
 )
 
 function isActive(item: EditorToolbarItem): boolean {
-  if (!props.editor?.isEditable || !('kind' in item)) {
+  if (!props.editor?.isEditable) {
     return false
   }
 
-  if (item.kind === 'dropdown') {
+  // Check for dropdown (has items property)
+  if (('items' in item) && item.items?.length) {
     return item.items?.some((item): boolean => isActive(item as EditorToolbarItem)) || false
   }
 
-  if (item.kind === 'slot') {
-    return false
+  // Check for plain button (no kind property)
+  if (!('kind' in item)) {
+    return item.active ?? false
   }
 
-  const handler = handlers.value[item.kind]
-  return handler?.isActive(props.editor, item) || false
+  // Check for editor item (has kind property)
+  const handler = handlers?.value?.[item.kind as keyof EditorHandlers]
+  return handler?.isActive(props.editor, item as any) || false
 }
 
 function isDisabled(item: EditorToolbarItem): boolean {
@@ -164,8 +165,8 @@ function isDisabled(item: EditorToolbarItem): boolean {
     return true
   }
 
-  if (item.kind === 'dropdown') {
-    if (!item.items || item.items.length === 0) {
+  if ('items' in item && item.items?.length) {
+    if (item.items.length === 0) {
       return true
     }
 
@@ -179,11 +180,11 @@ function isDisabled(item: EditorToolbarItem): boolean {
     return itemItems.every(item => isDisabled(item))
   }
 
-  if (item.kind === 'slot') {
-    return false
+  if (!('kind' in item)) {
+    return item.disabled ?? false
   }
 
-  const handler = handlers.value[item.kind]
+  const handler = handlers?.value?.[item.kind]
   if (!handler) {
     return false
   }
@@ -197,37 +198,46 @@ function isDisabled(item: EditorToolbarItem): boolean {
   return !handler.canExecute(props.editor, item)
 }
 
-function onClick(_: Event, item: EditorToolbarItem) {
-  if (!props.editor?.isEditable || item.kind === 'dropdown' || item.kind === 'slot' || isDisabled(item)) {
+function onClick(e: MouseEvent, item: EditorToolbarItem) {
+  if (!props.editor?.isEditable || isDisabled(item)) {
     return
   }
 
-  const handler = handlers.value[item.kind]
-  if (handler && props.editor) {
+  if (('items' in item) || !('kind' in item)) {
+    if ('onClick' in item) {
+      for (const onClick of Array.isArray(item.onClick) ? item.onClick : [item.onClick]) {
+        onClick?.(e)
+      }
+    }
+    return
+  }
+
+  const handler = handlers?.value?.[item.kind]
+  if (handler) {
     handler.execute(props.editor, item).run()
   }
 }
 
-function getActiveChildItem(item: EditorToolbarItem & { kind: 'dropdown' }): EditorToolbarItem | undefined {
+function getActiveChildItem(item: EditorToolbarDropdownItem): EditorToolbarItem | undefined {
   if (!item.items) {
     return undefined
   }
 
   const items = isArrayOfArray(item.items) ? item.items.flat() : item.items
 
-  return items.find((item): item is EditorToolbarItem => {
-    if (!('kind' in item)) {
+  return items.find((childItem: any): childItem is EditorToolbarItem => {
+    if (!('kind' in childItem)) {
       return false
     }
-    return isActive(item as EditorToolbarItem)
+    return isActive(childItem as EditorToolbarItem)
   }) as EditorToolbarItem | undefined
 }
 
 function getButtonProps(item: EditorToolbarItem) {
-  const baseProps = pick(item, ['label', 'color', 'activeColor', 'variant', 'activeVariant', 'size', 'icon', 'leadingIcon', 'trailingIcon', 'loading', 'loadingIcon', 'disabled', 'active', 'class', 'ui'])
+  const baseProps = omit(item as EditorToolbarButtonItem & EditorToolbarDropdownItem, ['kind', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal'])
 
   // For dropdown items, use the active child's icon if available
-  if (item.kind === 'dropdown') {
+  if ('items' in item && item.items?.length) {
     const activeChild = getActiveChildItem(item)
     if (activeChild?.icon) {
       baseProps.icon = activeChild.icon
@@ -243,36 +253,36 @@ function getButtonProps(item: EditorToolbarItem) {
   })
 }
 
-function getDropdownProps(item: EditorToolbarItem & { kind: 'dropdown' }) {
-  const baseProps = pick(item, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'class', 'ui'])
+function getDropdownProps(item: EditorToolbarDropdownItem) {
+  const baseProps = pick(item as any, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'ui'])
 
   return defu(baseProps, {
     modal: false
   })
 }
 
-function mapDropdownItem(item: EditorToolbarItem | DropdownMenuItem) {
+function mapDropdownItem(item: EditorToolbarDropdownChildItem) {
   // If it's a separator or label (no 'kind' property), return as is
   if (!('kind' in item)) {
     return item
   }
 
-  const editorToolbarItem = item as EditorToolbarItem
+  const editorToolbarItem = item as EditorToolbarDropdownChildItem
   return {
     ...editorToolbarItem,
     active: isActive(editorToolbarItem),
     disabled: isDisabled(editorToolbarItem),
-    onClick: (e: Event) => onClick(e, editorToolbarItem)
+    onClick: (e: MouseEvent) => onClick(e, editorToolbarItem)
   }
 }
 
-function getDropdownItems(item: EditorToolbarItem & { kind: 'dropdown' }) {
+function getDropdownItems(item: EditorToolbarDropdownItem) {
   if (!item.items) {
     return []
   }
 
   return isArrayOfArray(item.items)
-    ? item.items.map(group => group.map(mapDropdownItem))
+    ? item.items.map((group: any) => group.map(mapDropdownItem))
     : [item.items.map(mapDropdownItem)]
 }
 </script>
@@ -282,6 +292,7 @@ function getDropdownItems(item: EditorToolbarItem & { kind: 'dropdown' }) {
     :as="Component"
     v-bind="Component !== 'template' ? {
       editor,
+      tabindex: -1,
       class: ui.root({ class: props.ui?.root }),
       ...ComponentProps,
       ...$attrs
@@ -302,9 +313,9 @@ function getDropdownItems(item: EditorToolbarItem & { kind: 'dropdown' }) {
               :on-click="onClick"
             >
               <UDropdownMenu
-                v-if="item.kind === 'dropdown' && item.items?.length"
-                v-bind="getDropdownProps(item as EditorToolbarItem & { kind: 'dropdown' })"
-                :items="getDropdownItems(item)"
+                v-if="('items' in item && item.items?.length)"
+                v-bind="getDropdownProps(item as EditorToolbarDropdownItem)"
+                :items="getDropdownItems(item as EditorToolbarDropdownItem)"
               >
                 <UButton
                   :active="isActive(item)"
@@ -318,6 +329,7 @@ function getDropdownItems(item: EditorToolbarItem & { kind: 'dropdown' }) {
                 :active="isActive(item)"
                 :disabled="isDisabled(item)"
                 v-bind="getButtonProps(item)"
+                :ui="item.ui"
                 @click="onClick($event, item)"
               />
             </slot>
