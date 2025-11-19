@@ -15,8 +15,8 @@
     "@iconify-json/simple-icons": "^1.2.59",
     "@internationalized/date": "^3.10.0",
     "@nuxt/ui": "workspace:*",
-    "@tiptap/extension-emoji": "^3.10.7",
-    "@tiptap/extension-image": "^3.10.7",
+    "@tiptap/extension-emoji": "^3.11.0",
+    "@tiptap/extension-image": "^3.11.0",
     "ai": "^5.0.93",
     "nuxt": "^4.2.1",
     "zod": "^4.1.12"
