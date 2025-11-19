@@ -397,6 +397,13 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
+function onCreate(e: Event) {
+  e.preventDefault()
+  e.stopPropagation()
+
+  emits('create', searchTerm.value)
+}
+
 function onSelect(e: Event, item: SelectMenuItem) {
   if (!isSelectItem(item)) {
     return
@@ -426,7 +433,7 @@ defineExpose({
       data-slot="item"
       :class="ui.item({ class: props.ui?.item })"
       :value="searchTerm"
-      @select.prevent="emits('create', searchTerm)"
+      @select="onCreate"
     >
       <span data-slot="itemLabel" :class="ui.itemLabel({ class: props.ui?.itemLabel })">
         <slot name="create-item-label" :item="searchTerm">
@@ -543,6 +550,7 @@ defineExpose({
               v-bind="searchInputProps"
               data-slot="input"
               :class="ui.input({ class: props.ui?.input })"
+              @change.stop
             />
           </ComboboxInput>
 

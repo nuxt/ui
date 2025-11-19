@@ -20,6 +20,7 @@ import { reactiveOmit } from '@vueuse/core'
 import { useColorMode, useAppConfig } from '#imports'
 import { useLocale } from '../../composables/useLocale'
 import UButton from '../Button.vue'
+import UIcon from '../Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 

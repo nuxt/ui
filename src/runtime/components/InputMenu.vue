@@ -415,6 +415,13 @@ function onRemoveTag(event: any, modelValue: GetModelValue<T, VK, true>) {
   }
 }
 
+function onCreate(e: Event) {
+  e.preventDefault()
+  e.stopPropagation()
+
+  emits('create', searchTerm.value)
+}
+
 function onSelect(e: Event, item: InputMenuItem) {
   if (!isInputItem(item)) {
     return
@@ -444,7 +451,7 @@ defineExpose({
       data-slot="item"
       :class="ui.item({ class: props.ui?.item })"
       :value="searchTerm"
-      @select.prevent="emits('create', searchTerm)"
+      @select="onCreate"
     >
       <span data-slot="itemLabel" :class="ui.itemLabel({ class: props.ui?.itemLabel })">
         <slot name="create-item-label" :item="searchTerm">
@@ -520,7 +527,6 @@ defineExpose({
     ignore-filter
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
-    @keydown.enter="$event.preventDefault()"
   >
     <ComboboxAnchor :as-child="!multiple" data-slot="base" :class="ui.base({ class: props.ui?.base })">
       <TagsInputRoot
@@ -557,7 +563,7 @@ defineExpose({
             :placeholder="placeholder"
             data-slot="tagsInput"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
-            @keydown.enter.prevent
+            @change.stop
           />
         </ComboboxInput>
       </TagsInputRoot>
@@ -573,6 +579,7 @@ defineExpose({
         :required="required"
         @blur="onBlur"
         @focus="onFocus"
+        @change.stop
         @update:model-value="searchTerm = $event"
       />
 

@@ -122,7 +122,7 @@ exports[`PageFeature > renders with title slot correctly 1`] = `
 exports[`PageFeature > renders with to correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="relative flex items-start gap-2.5">
   <!--v-if-->
-  <div data-slot="wrapper" class=""><a href="https://github.com/benjamincanac" tabindex="-1" target="_blank" aria-label="Feature link" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+  <div data-slot="wrapper" class=""><a href="https://github.com/benjamincanac" tabindex="-1" rel="noopener noreferrer" aria-label="Feature link" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
     <!--v-if-->
     <!--v-if-->
   </div>

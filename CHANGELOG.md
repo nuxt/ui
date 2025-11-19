@@ -1,5 +1,58 @@
 # Changelog
 
+## [4.2.0](https://github.com/nuxt/ui/compare/v4.1.0...v4.2.0) (2025-11-18)
+
+### ⚠ BREAKING CHANGES
+
+* **components:** consistent exposed refs (#5385)
+* **module:** properly export composables from module
+
+### Features
+
+* **components:** add `data-slot` attributes ([#5447](https://github.com/nuxt/ui/issues/5447)) ([dd81d46](https://github.com/nuxt/ui/commit/dd81d46))
+* **components:** extend native HTML attributes ([#5348](https://github.com/nuxt/ui/issues/5348)) ([5b17751](https://github.com/nuxt/ui/commit/5b17751))
+* **FileUpload:** add `preview` prop ([#5443](https://github.com/nuxt/ui/issues/5443)) ([2af82e7](https://github.com/nuxt/ui/commit/2af82e7))
+* **InputDate:** new component ([#5387](https://github.com/nuxt/ui/issues/5387)) ([dabc4f8](https://github.com/nuxt/ui/commit/dabc4f8))
+* **InputTime:** new component ([#5302](https://github.com/nuxt/ui/issues/5302)) ([936253f](https://github.com/nuxt/ui/commit/936253f))
+* **locale:** add Albanian language ([#5461](https://github.com/nuxt/ui/issues/5461)) ([3331533](https://github.com/nuxt/ui/commit/3331533))
+* **locale:** add Galician language ([#5393](https://github.com/nuxt/ui/issues/5393)) ([e93bfd4](https://github.com/nuxt/ui/commit/e93bfd4))
+* **Modal:** add `scrollable` prop ([#5306](https://github.com/nuxt/ui/issues/5306)) ([240897e](https://github.com/nuxt/ui/commit/240897e))
+* **module:** add `theme.prefix` option ([#5341](https://github.com/nuxt/ui/issues/5341)) ([7fca5d7](https://github.com/nuxt/ui/commit/7fca5d7))
+* **Table:** handle virtualizer `estimateSize` as function ([ebc8568](https://github.com/nuxt/ui/commit/ebc8568))
+
+### Bug Fixes
+
+* **AuthForm:** ensure header is shown with `leading` slot ([#5405](https://github.com/nuxt/ui/issues/5405)) ([b61127a](https://github.com/nuxt/ui/commit/b61127a))
+* **AuthForm:** use password input id for aria-controls ([#5312](https://github.com/nuxt/ui/issues/5312)) ([55ea9be](https://github.com/nuxt/ui/commit/55ea9be))
+* **ChatPrompt:** proxy `disabled` prop ([a8f2156](https://github.com/nuxt/ui/commit/a8f2156)), closes [#5300](https://github.com/nuxt/ui/issues/5300)
+* **CheckboxGroup/RadioGroup/Switch:** consistent disabled styles ([ddd8faf](https://github.com/nuxt/ui/commit/ddd8faf)), closes [#5391](https://github.com/nuxt/ui/issues/5391)
+* **ColorModeButton:** use css to display color mode icon ([#5394](https://github.com/nuxt/ui/issues/5394)) ([1d1c638](https://github.com/nuxt/ui/commit/1d1c638))
+* **CommandPalette/ContentSearch:** improve performances and filtering logic ([#5433](https://github.com/nuxt/ui/issues/5433)) ([e751b37](https://github.com/nuxt/ui/commit/e751b37))
+* **components:** calc virtualizer estimateSize based on item description ([56ae8e7](https://github.com/nuxt/ui/commit/56ae8e7))
+* **components:** clean html attributes extend ([fda3c98](https://github.com/nuxt/ui/commit/fda3c98)), closes [#5348](https://github.com/nuxt/ui/issues/5348)
+* **components:** consistent exposed refs ([#5385](https://github.com/nuxt/ui/issues/5385)) ([fce2df4](https://github.com/nuxt/ui/commit/fce2df4))
+* **components:** remove `locale` / `dir` props proxy ([#5432](https://github.com/nuxt/ui/issues/5432)) ([a6efa7a](https://github.com/nuxt/ui/commit/a6efa7a))
+* **ContentNavigation/NavigationMenu/Tabs:** ensure proper badge display ([e5c11e6](https://github.com/nuxt/ui/commit/e5c11e6))
+* **ContentSearchButton/DashboardSearchButton:** hide label and trailing with css when collapsed ([3e72bf8](https://github.com/nuxt/ui/commit/3e72bf8))
+* **FileUpload:** ensure native validation works with required ([#5358](https://github.com/nuxt/ui/issues/5358)) ([eb491e1](https://github.com/nuxt/ui/commit/eb491e1))
+* **Form:** refine `nested` prop type handling and simplify logic ([#5360](https://github.com/nuxt/ui/issues/5360)) ([8d5c26f](https://github.com/nuxt/ui/commit/8d5c26f))
+* **inertia:** set serverRendered dynamically to prevent SSR crash ([#5396](https://github.com/nuxt/ui/issues/5396)) ([c0da1b2](https://github.com/nuxt/ui/commit/c0da1b2))
+* **Input/InputNumber/Textarea:** make `modelModifiers` generic ([#5361](https://github.com/nuxt/ui/issues/5361)) ([5c347af](https://github.com/nuxt/ui/commit/5c347af))
+* **InputMenu:** prevent change event when selecting create item ([418c87b](https://github.com/nuxt/ui/commit/418c87b)), closes [#4664](https://github.com/nuxt/ui/issues/4664)
+* **Link:** partial extend for `vue-router` and `inertia` ([637ef58](https://github.com/nuxt/ui/commit/637ef58))
+* **Marquee:** move keyframes into global css ([1e6242e](https://github.com/nuxt/ui/commit/1e6242e))
+* **module:** detect lazy components when using `experimental.componentDetection` ([5a5ac45](https://github.com/nuxt/ui/commit/5a5ac45))
+* **module:** properly export composables from module ([cb25902](https://github.com/nuxt/ui/commit/cb25902)), closes [#5370](https://github.com/nuxt/ui/issues/5370)
+* **module:** scan layers when using component detection ([9872740](https://github.com/nuxt/ui/commit/9872740)), closes [#5389](https://github.com/nuxt/ui/issues/5389)
+* **NavigationMenu:** hide label and trailing with css when collapsed ([f004031](https://github.com/nuxt/ui/commit/f004031)), closes [#4254](https://github.com/nuxt/ui/issues/4254)
+* **NavigationMenu:** proxy `modelValue` / `defaultValue` in vertical orientation ([cffaaaa](https://github.com/nuxt/ui/commit/cffaaaa)), closes [#5392](https://github.com/nuxt/ui/issues/5392)
+* **ProseCallout:** add `inline-block` class to icon ([#5317](https://github.com/nuxt/ui/issues/5317)) ([fc36f69](https://github.com/nuxt/ui/commit/fc36f69))
+* **RadioGroup:** update `update:modelValue` emit type ([#5349](https://github.com/nuxt/ui/issues/5349)) ([4cb0638](https://github.com/nuxt/ui/commit/4cb0638))
+* **Table:** apply styles to `th` based on column meta ([#5418](https://github.com/nuxt/ui/issues/5418)) ([620defa](https://github.com/nuxt/ui/commit/620defa))
+* **types:** export missing utils types ([#5448](https://github.com/nuxt/ui/issues/5448)) ([5f0a107](https://github.com/nuxt/ui/commit/5f0a107))
+* **vite:** write theme templates ([#5355](https://github.com/nuxt/ui/issues/5355)) ([411ebcc](https://github.com/nuxt/ui/commit/411ebcc))
+* **vue:** check `import.meta.env.SSR` to support `vite-ssg` ([#5347](https://github.com/nuxt/ui/issues/5347)) ([8f38c04](https://github.com/nuxt/ui/commit/8f38c04))
+
 ## [4.1.0](https://github.com/nuxt/ui/compare/v4.0.1...v4.1.0) (2025-10-23)
 
 ### ⚠ BREAKING CHANGES
