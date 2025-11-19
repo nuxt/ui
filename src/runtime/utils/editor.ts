@@ -383,13 +383,13 @@ export function mapEditorItems(
     ) as any[][]
   }
 
-  return items.filter(Boolean).map((config) => {
+  return items.filter(Boolean).map((item) => {
     // Pass through items with type (label, separator, etc)
-    if ('type' in config) {
-      return config
+    if ('type' in item) {
+      return item
     }
 
-    const { kind, children, ...rest } = config
+    const { kind, children, ...rest } = item
 
     // Recursively process children if present
     const processedChildren = children
@@ -406,9 +406,9 @@ export function mapEditorItems(
       return {
         ...rest,
         children: processedChildren,
-        disabled: handler.isDisabled?.(editor, config) || !handler.canExecute(editor, config),
-        active: handler.isActive(editor, config),
-        onSelect: () => handler.execute(editor, config).run()
+        disabled: handler.isDisabled?.(editor, item) || !handler.canExecute(editor, item),
+        active: handler.isActive(editor, item),
+        onSelect: () => handler.execute(editor, item).run()
       }
     }
 
