@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { hash } from 'ohash'
-
 const props = defineProps<{
   type: string
 }>()
@@ -32,5 +30,7 @@ onMounted(async () => {
 
 <template>
   <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" />
-  <ProseCode v-else>{{ type }}</ProseCode>
+  <ProseCode v-else>
+    {{ type }}
+  </ProseCode>
 </template>
