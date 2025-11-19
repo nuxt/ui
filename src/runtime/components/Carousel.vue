@@ -225,9 +225,19 @@ watch(options, () => {
 
 function scrollPrev() {
   emblaApi.value?.scrollPrev()
+
+
+  if (typeof props.autoplay === 'boolean' || props.autoplay.stopOnInteraction === undefined || props.autoplay.stopOnInteraction) {
+    emblaApi.value?.plugins().autoplay?.stop()
+  }
 }
 function scrollNext() {
   emblaApi.value?.scrollNext()
+
+
+  if (typeof props.autoplay === 'boolean' || props.autoplay.stopOnInteraction === undefined || props.autoplay.stopOnInteraction) {
+    emblaApi.value?.plugins().autoplay?.stop()
+  }
 }
 function scrollTo(index: number) {
   emblaApi.value?.scrollTo(index)
