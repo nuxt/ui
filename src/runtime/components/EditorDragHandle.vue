@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import type { Placement, Strategy } from '@floating-ui/dom'
-import type { Editor as TiptapEditor, Node as TiptapNode } from '@tiptap/vue-3'
+import type { Editor, Node } from '@tiptap/vue-3'
 import type { DragHandlePluginProps } from '@tiptap/extension-drag-handle'
 import theme from '#build/ui/editor-drag-handle'
 import type { ButtonProps, IconProps } from '../types'
@@ -30,16 +30,16 @@ export interface EditorDragHandleProps extends Omit<DragHandlePluginProps, 'edit
    * @see https://floating-ui.com/docs/computePosition#options
    */
   options?: FloatingUIOptions
-  editor: TiptapEditor
+  editor: Editor
   ui?: EditorDragHandle['slots'] & ButtonProps['ui']
 }
 
 export interface EditorDragHandleSlots {
-  default(props: { ui: EditorDragHandle['ui'], onClick: (e: MouseEvent) => { node: TiptapNode | null, pos: number } | undefined }): any
+  default(props: { ui: EditorDragHandle['ui'], onClick: (e: MouseEvent) => { node: Node | null, pos: number } | undefined }): any
 }
 
 export interface EditorDragHandleEmits {
-  nodeChange: [{ node: TiptapNode | null, pos: number }]
+  nodeChange: [{ node: Node | null, pos: number }]
 }
 </script>
 

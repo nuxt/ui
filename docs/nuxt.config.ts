@@ -186,6 +186,20 @@ export default defineNuxtConfig({
     }
   },
 
+  hooks: {
+    // @ts-expect-error - Hook is not typed correctly
+    'component-meta:schema': (schema: NuxtComponentMeta) => {
+      for (const componentName in schema) {
+        const component = schema[componentName]
+        for (const prop of component.meta.props) {
+          if (prop.name === 'editor' && (prop.type === 'Editor' || prop.type === 'Editor | undefined')) {
+            delete prop.schema
+          }
+        }
+      }
+    }
+  },
+
   componentMeta: {
     transformers: [(component, code) => {
       // Simplify ui in slot prop types: `leading(props: { ui: Button['ui'] })` -> `leading(props: { ui: object })`

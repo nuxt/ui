@@ -13,9 +13,6 @@ import { buildFloatingUIMiddleware } from '../utils/editor'
 import { isArrayOfArray } from '../utils'
 
 export interface EditorMenuOptions<T = any> {
-  /**
-   * The editor instance
-   */
   editor: Editor
   /**
    * The trigger character (e.g., '/', '@', ':')

@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { ComputedRef } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { Editor as TiptapEditor } from '@tiptap/vue-3'
+import type { Editor } from '@tiptap/vue-3'
 import type { BubbleMenuPluginProps } from '@tiptap/extension-bubble-menu'
 import type { FloatingMenuPluginProps } from '@tiptap/extension-floating-menu'
 import theme from '#build/ui/editor-toolbar'
@@ -59,7 +59,7 @@ type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOr
    */
   size?: ButtonProps['size']
   items?: T
-  editor: TiptapEditor
+  editor: Editor
   class?: any
   ui?: EditorToolbar['slots']
 }

@@ -13,7 +13,7 @@ type Editor = ComponentConfig<typeof theme, AppConfig, 'editor'>
 export type EditorContent = Content
 export type EditorContentType = 'json' | 'html' | 'markdown'
 
-export interface EditorProps extends Omit<Partial<EditorOptions>, 'content'> {
+export interface EditorProps extends Omit<Partial<EditorOptions>, 'content' | 'element'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -33,7 +33,7 @@ export interface EditorProps extends Omit<Partial<EditorOptions>, 'content'> {
   /**
    * The placeholder text to show in empty paragraphs.
    * `{ showOnlyWhenEditable: false, showOnlyCurrent: true }`{lang="ts-type"}
-   * Can be a string or PlaceholderOptions from @tiptap/extension-placeholder.
+   * Can be a string or PlaceholderOptions from `@tiptap/extension-placeholder`.
    * @see https://tiptap.dev/docs/editor/extensions/functionality/placeholder
    */
   placeholder?: string | PlaceholderOptions

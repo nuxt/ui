@@ -409,9 +409,6 @@ importers:
       '@tiptap/extension-emoji':
         specifier: ^3.11.0
         version: 3.11.0(@tiptap/core@3.11.0(@tiptap/pm@3.11.0))(@tiptap/pm@3.11.0)(@tiptap/suggestion@3.11.0(@tiptap/core@3.11.0(@tiptap/pm@3.11.0))(@tiptap/pm@3.11.0))(emojibase@16.0.0)
-      '@tiptap/extension-image':
-        specifier: ^3.11.0
-        version: 3.11.0(@tiptap/core@3.11.0(@tiptap/pm@3.11.0))
       ai:
         specifier: ^5.0.93
         version: 5.0.93(zod@4.1.12)
