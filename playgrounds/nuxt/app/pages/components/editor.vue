@@ -427,7 +427,15 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
       :editor="editor"
       :items="imageItems(editor)"
       layout="bubble"
-      :should-show="({ editor }) => editor.isActive('image')"
+      :should-show="({ editor, view }) => {
+        if (!editor.isActive('image')) {
+          return false
+        }
+        if (!view.hasFocus()) {
+          return false
+        }
+        return true
+      }"
     />
 
     <UEditorDragHandle v-slot="{ ui, onClick }" :editor="editor" @node-change="selectedNode = $event">

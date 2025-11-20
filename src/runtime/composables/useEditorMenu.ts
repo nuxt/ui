@@ -41,7 +41,7 @@ export interface EditorMenuOptions<T = any> {
   /**
    * Function to execute when an item is selected
    */
-  onSelect: (editor: any, range: any, item: T) => void
+  onSelect: (editor: Editor, range: any, item: T) => void
   /**
    * Function to render each menu item
    */
