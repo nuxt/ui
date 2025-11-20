@@ -162,46 +162,43 @@ export function createImageHandler() {
 
 export function createListHandler(listType: 'bulletList' | 'orderedList') {
   const fnName = listType === 'bulletList' ? 'toggleBulletList' : 'toggleOrderedList'
-  const otherListType = listType === 'bulletList' ? 'orderedList' : 'bulletList'
 
   return {
     canExecute: (editor: Editor) => {
-      // Can execute if we can toggle the list OR if we're in any list (to allow conversion)
       return (editor.can() as any)[fnName]() || editor.isActive('bulletList') || editor.isActive('orderedList')
     },
     execute: (editor: Editor) => {
-      // If the target list type is already active, just toggle it off
+      const { state } = editor
+      const { selection } = state
+      let chain = editor.chain().focus()
+
+      // Handle NodeSelection (e.g., from drag handle)
+      if ((selection as any).node) {
+        const node = (selection as any).node
+        const firstChild = node.firstChild?.firstChild
+        const lastChild = node.lastChild?.lastChild
+
+        const from = firstChild
+          ? selection.from + firstChild.nodeSize
+          : selection.from + 1
+        const to = lastChild
+          ? selection.to - lastChild.nodeSize
+          : selection.to - 1
+
+        chain = chain.setTextSelection({ from, to }).clearNodes()
+      }
+
       if (editor.isActive(listType)) {
-        return (editor.chain().focus() as any)[fnName]()
+        // Unwrap list
+        return chain
+          .liftListItem('listItem')
+          .lift('bulletList')
+          .lift('orderedList')
+          .selectTextblockEnd()
       }
 
-      // If a different list type is active, we need to convert the entire list
-      if (editor.isActive(otherListType)) {
-        const { state } = editor
-        const { selection } = state
-        const { $from } = selection
-
-        // Find the list node
-        let listDepth = $from.depth
-        while (listDepth > 0 && !['bulletList', 'orderedList'].includes($from.node(listDepth).type.name)) {
-          listDepth--
-        }
-
-        if (listDepth > 0) {
-          const listNode = $from.node(listDepth)
-          const listPos = $from.before(listDepth)
-          const listEnd = listPos + listNode.nodeSize
-
-          // Select the entire list and convert it
-          return (editor.chain()
-            .focus()
-            .setTextSelection({ from: listPos + 1, to: listEnd - 1 })
-            .clearNodes() as any)[fnName]()
-        }
-      }
-
-      // Otherwise, just toggle the list on
-      return (editor.chain().focus() as any)[fnName]()
+      // Wrap in list and normalize selection
+      return (chain as any)[fnName]().selectTextblockEnd()
     },
     isActive: (editor: Editor) => editor.isActive(listType),
     isDisabled: (editor: Editor) => isNodeTypeSelected(editor, ['image']) || editor.isActive('code')
