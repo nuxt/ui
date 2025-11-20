@@ -1,8 +1,6 @@
 import type { Editor } from '@tiptap/vue-3'
 import type { Strategy, Placement, OffsetOptions, FlipOptions, ShiftOptions, SizeOptions, AutoPlacementOptions, HideOptions, InlineOptions } from '@floating-ui/dom'
 
-export type { Editor } from '@tiptap/vue-3'
-
 export interface FloatingUIOptions {
   strategy?: Strategy
   placement?: Placement

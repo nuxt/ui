@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { upperFirst } from 'scule'
-import type { EditorContent, EditorHandlers, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, Editor, DropdownMenuItem } from '@nuxt/ui'
+import type { EditorContent, EditorHandlers, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, DropdownMenuItem } from '@nuxt/ui'
+import type { Editor } from '@tiptap/vue-3'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import { ImageUpload } from '../../utils/editor/image-upload'
