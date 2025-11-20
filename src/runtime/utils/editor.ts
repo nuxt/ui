@@ -392,7 +392,7 @@ export function mapEditorItems(
     const { kind, children, ...rest } = item
 
     // Recursively process children if present
-    const processedChildren = children
+    const processedChildren = children?.length
       ? mapEditorItems(editor, children as any, customHandlers) as any[]
       : undefined
 
@@ -400,7 +400,10 @@ export function mapEditorItems(
     if (kind) {
       const handler = handlers[kind]
       if (!handler) {
-        return { ...rest, children: processedChildren }
+        return {
+          ...rest,
+          children: processedChildren
+        }
       }
 
       return {

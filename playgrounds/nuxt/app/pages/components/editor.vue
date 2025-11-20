@@ -397,7 +397,7 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
     autofocus
     placeholder="Write, type '/' for commands..."
     class="min-h-0"
-    :ui="{ content: 'max-w-2xl mx-auto' }"
+    :ui="{ content: 'max-w-2xl mx-auto', base: 'sm:px-14' }"
   >
     <Navbar>
       <UEditorToolbar :editor="editor" :items="toolbarItems">
@@ -435,14 +435,19 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
       :should-show="({ editor }) => editor.isActive('image')"
     />
 
-    <UEditorDragHandle v-slot="{ ui }" :editor="editor" @node-change="selectedNode = $event">
+    <UEditorDragHandle v-slot="{ ui, onClick }" :editor="editor" @node-change="selectedNode = $event">
       <UButton
         icon="i-lucide-plus"
         color="neutral"
         variant="ghost"
         size="sm"
         :class="ui.handle()"
-        @click.stop="handlers.suggestion?.execute(editor)"
+        @click="(e) => {
+          e.stopPropagation()
+          const node = onClick(e)
+
+          handlers.suggestion?.execute(editor, { pos: node?.pos }).run()
+        }"
       />
 
       <UDropdownMenu

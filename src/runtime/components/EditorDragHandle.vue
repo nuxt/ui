@@ -35,7 +35,7 @@ export interface EditorDragHandleProps extends Omit<DragHandlePluginProps, 'edit
 }
 
 export interface EditorDragHandleSlots {
-  default(props: { ui: EditorDragHandle['ui'] }): any
+  default(props: { ui: EditorDragHandle['ui'], onClick: (e: MouseEvent) => { node: TiptapNode | null, pos: number } | undefined }): any
 }
 
 export interface EditorDragHandleEmits {
@@ -124,6 +124,8 @@ function onClick() {
     emit('nodeChange', { node: node.toJSON(), pos })
 
     props.editor.chain().setNodeSelection(pos).run()
+
+    return { node: node.toJSON(), pos }
   }
 }
 </script>
@@ -138,7 +140,7 @@ function onClick() {
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @click="onClick"
   >
-    <slot :ui="ui">
+    <slot :ui="ui" :on-click="onClick">
       <UButton
         v-bind="{
           ...buttonProps,
