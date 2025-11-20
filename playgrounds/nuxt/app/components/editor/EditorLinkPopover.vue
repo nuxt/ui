@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Editor } from '@nuxt/ui'
+import type { Editor } from '@tiptap/vue-3'
 
 const props = defineProps<{
   editor: Editor

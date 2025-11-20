@@ -13,12 +13,13 @@ type Editor = ComponentConfig<typeof theme, AppConfig, 'editor'>
 export type EditorContent = Content
 export type EditorContentType = 'json' | 'html' | 'markdown'
 
-export interface EditorProps extends Omit<Partial<EditorOptions>, 'content' | 'element'> {
+export interface EditorProps<T extends Content = Content> extends Omit<Partial<EditorOptions>, 'content' | 'element'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
+  modelValue?: T
   /**
    * The content type the content is provided as.
    * @defaultValue 'json'
@@ -46,13 +47,17 @@ export interface EditorProps extends Omit<Partial<EditorOptions>, 'content' | 'e
   ui?: Editor['slots']
 }
 
+export interface EditorEmits<T extends Content = Content> {
+  'update:modelValue': [value: T]
+}
+
 export interface EditorSlots {
   default(props: { editor: TiptapEditor, handlers: EditorHandlers }): any
 }
 </script>
 
-<script setup lang="ts">
-import { computed, provide, useAttrs } from 'vue'
+<script setup lang="ts" generic="T extends Content">
+import { computed, provide, useAttrs, watch } from 'vue'
 import { defu } from 'defu'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { mergeAttributes } from '@tiptap/core'
@@ -71,14 +76,13 @@ import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<EditorProps>(), {
+const props = withDefaults(defineProps<EditorProps<T>>(), {
   contentType: 'json'
 })
+const emits = defineEmits<EditorEmits<T>>()
 defineSlots<EditorSlots>()
 
 const attrs = useAttrs()
-
-const content = defineModel<Content>({ default: '' })
 
 const appConfig = useAppConfig() as Editor['AppConfig']
 
@@ -96,7 +100,7 @@ const editorProps = computed(() => defu(props.editorProps, {
     class: ui.value.base({ class: [props.ui?.base, props.class] })
   }
 } as EditorOptions['editorProps']))
-const contentType = computed(() => props.contentType || (typeof content.value === 'string' ? 'html' : 'json'))
+const contentType = computed(() => props.contentType || (typeof props.modelValue === 'string' ? 'html' : 'json'))
 const starterKit = computed(() => defu(props.starterKit, {
   horizontalRule: false,
   headings: {
@@ -141,22 +145,47 @@ const extensions = computed(() => [
 
 const editor = useEditor({
   ...rootProps.value,
-  content: content.value,
+  content: props.modelValue,
   contentType: contentType.value,
   extensions: extensions.value,
   editorProps: editorProps.value,
   onUpdate: ({ editor }) => {
+    let value
     try {
       if (contentType.value === 'html') {
-        content.value = editor.getHTML()
+        value = editor.getHTML()
       } else if (contentType.value === 'json') {
-        content.value = editor.getJSON()
+        value = editor.getJSON()
       } else if (contentType.value === 'markdown') {
-        content.value = editor.getMarkdown()
+        value = editor.getMarkdown()
       }
     } catch (error) {
-      content.value = editor.getText()
+      value = editor.getText()
     }
+
+    emits('update:modelValue', value as T)
+  }
+})
+
+watch(() => props.modelValue, (newVal) => {
+  if (!editor.value || !newVal) {
+    return
+  }
+
+  const currentContent = contentType.value === 'html'
+    ? editor.value.getHTML()
+    : contentType.value === 'json'
+      ? JSON.stringify(editor.value.getJSON())
+      : contentType.value === 'markdown'
+        ? editor.value.getMarkdown()
+        : editor.value.getText()
+
+  const newContent = contentType.value === 'json' && typeof newVal === 'object'
+    ? JSON.stringify(newVal)
+    : String(newVal)
+
+  if (currentContent !== newContent) {
+    editor.value.commands.setContent(newVal)
   }
 })
 
