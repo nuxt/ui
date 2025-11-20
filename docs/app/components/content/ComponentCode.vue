@@ -8,9 +8,15 @@ import { CalendarDate, Time } from '@internationalized/date'
 import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
 
+interface CastImport {
+  name: string
+  from: string
+}
+
 interface Cast {
   get: (args: any) => any
   template: (args: any) => string
+  imports: CastImport[]
 }
 
 type CastDateValue = [number, number, number]
@@ -21,13 +27,15 @@ const castMap: Record<string, Cast> = {
     get: (args: CastDateValue) => new CalendarDate(...args),
     template: (value: CalendarDate) => {
       return value ? `new CalendarDate(${value.year}, ${value.month}, ${value.day})` : 'null'
-    }
+    },
+    imports: [{ name: 'CalendarDate', from: '@internationalized/date' }]
   },
   'DateValue[]': {
     get: (args: CastDateValue[]) => args.map(date => new CalendarDate(...date)),
     template: (value: CalendarDate[]) => {
       return value ? `[${value.map(date => `new CalendarDate(${date.year}, ${date.month}, ${date.day})`).join(', ')}]` : '[]'
-    }
+    },
+    imports: [{ name: 'CalendarDate', from: '@internationalized/date' }]
   },
   'DateRange': {
     get: (args: { start: CastDateValue, end: CastDateValue }) => ({ start: new CalendarDate(...args.start), end: new CalendarDate(...args.end) }),
@@ -37,13 +45,15 @@ const castMap: Record<string, Cast> = {
       }
 
       return `{ start: new CalendarDate(${value.start.year}, ${value.start.month}, ${value.start.day}), end: new CalendarDate(${value.end.year}, ${value.end.month}, ${value.end.day}) }`
-    }
+    },
+    imports: [{ name: 'CalendarDate', from: '@internationalized/date' }]
   },
   'TimeValue': {
     get: (args: CastTimeValue) => new Time(...args),
     template: (value: Time) => {
       return value ? `new Time(${value.hour}, ${value.minute}, ${value.second})` : 'null'
-    }
+    },
+    imports: [{ name: 'Time', from: '@internationalized/date' }]
   }
 }
 
@@ -214,19 +224,23 @@ ${props.slots?.default}
     code += `
 <script setup lang="ts">
 `
-    // Add imports for cast types
-    const castImports = new Set<string>()
+    // Collect imports from cast types
+    const importsBySource = new Map<string, Set<string>>()
     for (const key of props.external) {
       const cast = props.cast?.[key]
-      if (cast?.includes('DateValue') || cast?.includes('DateRange')) {
-        castImports.add('CalendarDate')
-      }
-      if (cast?.includes('TimeValue')) {
-        castImports.add('Time')
+      if (cast && castMap[cast]) {
+        for (const imp of castMap[cast].imports) {
+          if (!importsBySource.has(imp.from)) {
+            importsBySource.set(imp.from, new Set())
+          }
+          importsBySource.get(imp.from)!.add(imp.name)
+        }
       }
     }
-    if (castImports.size > 0) {
-      code += `import { ${Array.from(castImports).join(', ')} } from '@internationalized/date'
+
+    // Generate import statements
+    for (const [source, names] of importsBySource) {
+      code += `import { ${Array.from(names).join(', ')} } from '${source}'
 `
     }
 
@@ -238,7 +252,7 @@ ${props.slots?.default}
 `
     }
 
-    if (castImports.size > 0 || props.externalTypes?.length) {
+    if (importsBySource.size > 0 || props.externalTypes?.length) {
       code += `
 `
     }
