@@ -214,12 +214,32 @@ ${props.slots?.default}
     code += `
 <script setup lang="ts">
 `
+    // Add imports for cast types
+    const castImports = new Set<string>()
+    for (const key of props.external) {
+      const cast = props.cast?.[key]
+      if (cast?.includes('DateValue') || cast?.includes('DateRange')) {
+        castImports.add('CalendarDate')
+      }
+      if (cast?.includes('TimeValue')) {
+        castImports.add('Time')
+      }
+    }
+    if (castImports.size > 0) {
+      code += `import { ${Array.from(castImports).join(', ')} } from '@internationalized/date'
+`
+    }
+
     if (props.externalTypes?.length) {
       const removeArrayBrackets = (type: string): string => type.endsWith('[]') ? removeArrayBrackets(type.slice(0, -2)) : type
 
       const types = props.externalTypes.map(type => removeArrayBrackets(type))
       code += `import type { ${types.join(', ')} } from '@nuxt/ui'
+`
+    }
 
+    if (castImports.size > 0 || props.externalTypes?.length) {
+      code += `
 `
     }
 
@@ -227,8 +247,9 @@ ${props.slots?.default}
       const cast = props.cast?.[key]
       const value = cast ? castMap[cast]!.template(componentProps[key]) : json5.stringify(componentProps[key], null, 2)?.replace(/,([ |\t\n]+[}|\]])/g, '$1')
       const type = props.externalTypes?.[i] ? `<${props.externalTypes[i]}>` : ''
+      const refType = cast ? 'shallowRef' : 'ref'
 
-      code += `const ${key === 'modelValue' ? 'value' : key} = ref${type}(${value})
+      code += `const ${key === 'modelValue' ? 'value' : key} = ${refType}${type}(${value})
 `
     }
     code += `<\/script>
@@ -307,7 +328,9 @@ ${props.slots?.default}
   return code
 })
 
-const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props: componentProps, slots: props.slots, external: props.external, externalTypes: props.externalTypes, collapse: props.collapse })}`, async () => {
+const codeKey = computed(() => `component-code-${name}-${hash({ props: props.props, slots: props.slots, external: props.external, externalTypes: props.externalTypes, collapse: props.collapse, cast: props.cast })}`)
+
+const { data: ast } = await useAsyncData(codeKey, async () => {
   if (!props.prettier) {
     return parseMarkdown(code.value)
   }
@@ -390,6 +413,6 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
       </div>
     </div>
 
-    <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+    <MDCRenderer v-if="ast?.body" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
   </div>
 </template>
