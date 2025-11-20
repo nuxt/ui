@@ -328,7 +328,7 @@ ${props.slots?.default}
   return code
 })
 
-const codeKey = computed(() => `component-code-${name}-${hash({ props: props.props, slots: props.slots, external: props.external, externalTypes: props.externalTypes, collapse: props.collapse, cast: props.cast })}`)
+const codeKey = computed(() => `component-code-${name}-${hash(props)}`)
 
 const { data: ast } = await useAsyncData(codeKey, async () => {
   if (!props.prettier) {
@@ -413,6 +413,6 @@ const { data: ast } = await useAsyncData(codeKey, async () => {
       </div>
     </div>
 
-    <MDCRenderer v-if="ast?.body" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+    <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
   </div>
 </template>
