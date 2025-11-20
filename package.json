@@ -87,6 +87,9 @@
       ]
     }
   },
+  "imports": {
+    "#build/ui.css": "./.nuxt/ui.css"
+  },
   "bin": {
     "nuxt-ui": "./cli/index.mjs"
   },
