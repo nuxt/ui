@@ -134,9 +134,6 @@ const extensions = computed(() => [
   Mention.configure({
     HTMLAttributes: {
       class: 'mention'
-    },
-    renderText({ node }) {
-      return `@${node.attrs.id ?? node.attrs.label}`
     }
   }),
   ...(props.extensions || [])

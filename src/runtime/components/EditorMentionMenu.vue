@@ -8,7 +8,6 @@ import type { ComponentConfig } from '../types/tv'
 type EditorMentionMenu = ComponentConfig<typeof theme, AppConfig, 'editorMentionMenu'>
 
 export interface EditorMentionMenuItem {
-  id: string
   label: string
   description?: string
   /**

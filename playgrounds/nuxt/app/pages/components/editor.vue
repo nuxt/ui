@@ -350,32 +350,27 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
 }]]
 
 const mentionItems: EditorMentionMenuItem[] = [{
-  id: 'benjamincanac',
-  label: 'Benjamin Canac',
+  label: 'benjamincanac',
   avatar: {
     src: 'https://avatars.githubusercontent.com/u/739984?v=4'
   }
 }, {
-  id: 'atinux',
-  label: 'Sébastien Chopin',
+  label: 'atinux',
   avatar: {
     src: 'https://avatars.githubusercontent.com/u/904724?v=4'
   }
 }, {
-  id: 'danielroe',
-  label: 'Daniel Roe',
+  label: 'danielroe',
   avatar: {
     src: 'https://avatars.githubusercontent.com/u/28706372?v=4'
   }
 }, {
-  id: 'pi0',
-  label: 'Pooya Parsa',
+  label: 'pi0',
   avatar: {
     src: 'https://avatars.githubusercontent.com/u/5158436?v=4'
   }
 }, {
-  id: 'antfu',
-  label: 'Anthony Fu',
+  label: 'antfu',
   avatar: {
     src: 'https://avatars.githubusercontent.com/u/11247099?v=4'
   }
