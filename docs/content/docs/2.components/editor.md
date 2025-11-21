@@ -18,24 +18,23 @@ The Editor component provides a powerful rich text editing experience built on T
 
 ::component-example
 ---
-collapse: true
+source: false
 name: 'editor-example'
 class: 'relative h-176 overflow-y-auto'
 ---
 ::
 
-::tip
-This example demonstrates a production-ready editor setup with toolbar, formatting menus, slash commands, mentions, emojis, and drag-and-drop functionality.
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v4/docs/app/components/content/examples/editor/EditorExample.vue" aria-label="View source code"}
+This example demonstrates a production-ready editor setup. Check out the source code on GitHub.
 ::
 
 ### Content
 
-Use the `v-model` directive to control the value of the Editor or the `default-value` prop to set the initial value when you do not need to control its state.
+Use the `v-model` directive to control the value of the Editor.
 
 ::component-code
 ---
 prettier: true
-collapse: true
 ignore:
   - modelValue
   - class
@@ -48,6 +47,7 @@ props:
     # Hello World
 
     This is a **rich text** editor.
+  class: 'w-full'
 ---
 ::
 
@@ -57,34 +57,24 @@ The Editor component exposes the TipTap editor instance via the default slot, wh
 
 ### Content Type
 
-Use the `content-type` prop to change the format of the content. The content type is automatically detected if not specified: string values are treated as `html`, while objects are treated as `json`.
-
-The Editor supports three content types:
-- `json`{lang="ts-type"} (default) for structured TipTap JSON format
-- `html`{lang="ts-type"} for HTML strings
-- `markdown`{lang="ts-type"} for Markdown text
+Use the `content-type` prop to set the format: `json`{lang="ts-type"} (default), `html`{lang="ts-type"}, or `markdown`{lang="ts-type"}. If not specified, strings are treated as HTML and objects as JSON.
 
 ::component-code
 ---
 prettier: true
-collapse: true
 ignore:
   - modelValue
+  - contentType
   - class
 external:
   - modelValue
 class: 'min-h-80'
-items:
-  contentType:
-    - json
-    - html
-    - markdown
 props:
-  contentType: 'markdown'
+  contentType: 'html'
   modelValue: |
-    # Hello World
-
-    This is a **rich text** editor.
+    <h1>Hello World</h1>
+    <p>This is a <strong>rich text</strong> editor.</p>
+  class: 'w-full'
 ---
 ::
 
@@ -110,6 +100,7 @@ props:
   contentType: 'markdown'
   modelValue: ''
   placeholder: 'Start writing...'
+  class: 'w-full'
 ---
 ::
 
@@ -140,6 +131,7 @@ props:
   starterKit:
     heading:
       levels: [1, 2, 3]
+  class: 'w-full'
 ---
 ::
 
@@ -282,6 +274,7 @@ props:
     ## Read-only Editor
 
     This editor is in read-only mode. You can **select** and *copy* text, but you cannot edit it.
+  class: 'w-full'
 ---
 ::
 

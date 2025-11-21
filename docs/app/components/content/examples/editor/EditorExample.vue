@@ -68,13 +68,10 @@ const toolbarItems = [[{
   icon: 'i-lucide-redo'
 }], [{
   icon: 'i-lucide-heading',
-  ui: {
-    label: 'text-xs'
+  content: {
+    align: 'start'
   },
   items: [{
-    type: 'label',
-    label: 'Headings'
-  }, {
     kind: 'heading',
     level: 1,
     icon: 'i-lucide-heading-1',
@@ -97,6 +94,9 @@ const toolbarItems = [[{
   }]
 }, {
   icon: 'i-lucide-list',
+  content: {
+    align: 'start'
+  },
   items: [{
     kind: 'bulletList',
     icon: 'i-lucide-list',
@@ -112,12 +112,6 @@ const toolbarItems = [[{
 }, {
   kind: 'codeBlock',
   icon: 'i-lucide-square-code'
-}, {
-  kind: 'horizontalRule',
-  icon: 'i-lucide-separator-horizontal'
-}, {
-  kind: 'paragraph',
-  icon: 'i-lucide-type'
 }], [{
   kind: 'mark',
   mark: 'bold',
@@ -144,21 +138,31 @@ const toolbarItems = [[{
   kind: 'image',
   icon: 'i-lucide-image'
 }], [{
-  kind: 'textAlign',
-  align: 'left',
-  icon: 'i-lucide-align-left'
-}, {
-  kind: 'textAlign',
-  align: 'center',
-  icon: 'i-lucide-align-center'
-}, {
-  kind: 'textAlign',
-  align: 'right',
-  icon: 'i-lucide-align-right'
-}, {
-  kind: 'textAlign',
-  align: 'justify',
-  icon: 'i-lucide-align-justify'
+  icon: 'i-lucide-align-justify',
+  content: {
+    align: 'end'
+  },
+  items: [{
+    kind: 'textAlign',
+    align: 'left',
+    icon: 'i-lucide-align-left',
+    label: 'Align Left'
+  }, {
+    kind: 'textAlign',
+    align: 'center',
+    icon: 'i-lucide-align-center',
+    label: 'Align Center'
+  }, {
+    kind: 'textAlign',
+    align: 'right',
+    icon: 'i-lucide-align-right',
+    label: 'Align Right'
+  }, {
+    kind: 'textAlign',
+    align: 'justify',
+    icon: 'i-lucide-align-justify',
+    label: 'Align Justify'
+  }]
 }]] satisfies EditorToolbarItem[][]
 
 const imageItems = (editor: Editor): EditorToolbarItem[][] => {
@@ -370,8 +374,7 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
     ]"
     :handlers="customHandlers"
     placeholder="Write, type '/' for commands..."
-    autofocus
-    :ui="{ base: 'sm:px-14 py-8' }"
+    :ui="{ base: 'sm:px-14 py-9.5' }"
   >
     <UEditorToolbar
       :editor="editor"
