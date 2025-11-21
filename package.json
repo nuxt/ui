@@ -1,7 +1,7 @@
 {
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "packageManager": "pnpm@10.22.0",
   "repository": {
     "type": "git",
@@ -87,12 +87,16 @@
       ]
     }
   },
+  "imports": {
+    "#build/ui.css": "./.nuxt/ui.css"
+  },
   "bin": {
     "nuxt-ui": "./cli/index.mjs"
   },
   "style": "./dist/runtime/index.css",
   "main": "./dist/module.mjs",
   "files": [
+    ".nuxt/ui.css",
     "dist",
     "cli",
     "vue-plugin.d.ts"
