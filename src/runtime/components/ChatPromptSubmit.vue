@@ -78,8 +78,8 @@ export interface ChatPromptSubmitProps extends Omit<ButtonProps, 'icon' | 'color
 }
 
 export interface ChatPromptSubmitEmits {
-  stop: [MouseEvent?]
-  reload: [MouseEvent?]
+  stop: [event: MouseEvent]
+  reload: [event: MouseEvent]
 }
 </script>
 
