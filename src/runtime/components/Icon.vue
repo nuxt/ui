@@ -1,8 +1,6 @@
 <script lang="ts">
-import type { Component } from 'vue'
-
 export interface IconProps {
-  name: string | Component
+  name: string | any
   mode?: 'svg' | 'css'
   size?: string | number
   customize?: (
