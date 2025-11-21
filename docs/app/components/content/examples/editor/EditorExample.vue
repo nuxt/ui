@@ -1,74 +1,55 @@
 <script setup lang="ts">
-import { upperFirst } from 'scule'
 import type { EditorContent, EditorHandlers, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, DropdownMenuItem } from '@nuxt/ui'
 import type { Editor } from '@tiptap/vue-3'
+import { upperFirst } from 'scule'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import TextAlign from '@tiptap/extension-text-align'
-import { ImageUpload } from '../../utils/editor/image-upload'
+import { ImageUpload } from '~/utils/editor/image-upload'
+import EditorLinkPopover from './EditorLinkPopover.vue'
 
-const content = ref<EditorContent>(`# Nuxt UI: A Modern UI Library
+const content = ref<EditorContent>(`# Building Modern Interfaces with Nuxt UI
 
-Welcome to **Nuxt UI**, a comprehensive UI library for *Nuxt 3* applications.
-Built with [Tailwind CSS](https://tailwindcss.com) and [Reka UI](https://reka-ui.com), it provides a complete set of components for building beautiful interfaces.
+Welcome to the **Nuxt UI Editor** — a powerful rich text editing experience built on [TipTap](https://tiptap.dev). This editor combines *flexibility* with ease of use, making content creation a breeze.
 
-![Image](https://ui.nuxt.com/assets/templates/nuxt/dashboard-dark.png)
+![Nuxt UI Dashboard](https://ui.nuxt.com/assets/templates/nuxt/dashboard-dark.png)
 
-## Key Features
+## Rich Formatting Options
 
-Nuxt UI combines the best of modern web development
+The editor supports all common text formatting including **bold**, *italic*, <u>underline</u>, ~~strikethrough~~, and \`inline code\`. You can also combine them for **_bold and italic_** text.
 
-- **Fully typed** with TypeScript support
-- *Customizable* theme system with semantic colors
-- <u>Accessible</u> components following ARIA guidelines
-- Built on top of \`Reka UI\` primitives
-- Support for ~~legacy browsers~~ modern standards
+### Interactive Features
 
-### Getting Started
+Try out these powerful capabilities:
 
-Install Nuxt UI in your project with the following command:
+- **Bubble Menu** — Select any text to see formatting options appear
+- **Slash Commands** — Type \`/\` for quick access to blocks and formatting
+- **Mentions** — Use \`@\` to tag people or entities
+- **Emoji Picker** — Type \`:\` followed by an emoji name like :smile:
+- **Drag & Drop** — Hover over any block to see the drag handle
 
-\`\`\`
-npx nuxi@latest module add ui
-\`\`\`
+> **Pro tip:** You can use keyboard shortcuts like Cmd/Ctrl + B for bold, Cmd/Ctrl + I for italic, and more!
 
-> *Nuxt UI is designed to be intuitive and easy to use, whether you're building a simple landing page or a complex application.*
+### Advanced Capabilities
 
-### Component Categories
+1. **Custom Extensions** — Add your own TipTap extensions seamlessly
+2. **Multiple Content Types** — Support for JSON, HTML, and Markdown
+3. **Customizable Toolbars** — Fixed, bubble, and floating layouts
+4. **Theme Integration** — Fully styled with Nuxt UI theme system
 
-1. Layout components (Container, Card, Accordion)
-2. Form components (Input, Select, Checkbox)
-3. Navigation (Navbar, Sidebar, Breadcrumb)
-4. Feedback (Alert, Toast, Modal)
+#### Code Blocks
 
-#### Code Example
-
-Here's a simple example using the \`Button\` component:
+Perfect for technical documentation:
 
 \`\`\`
 <template>
-  <UButton color="primary">
-    Click me
-  </UButton>
+  <UEditor v-model="content" content-type="markdown" />
 </template>
 \`\`\`
 
 ---
 
-## Advanced Features
-
-Powerful capabilities for modern applications
-
-- Dark mode support out of the box
-- Keyboard shortcuts for improved accessibility
-- Nested lists support:
-  - With multiple levels
-  - And proper spacing
-
-Whether you're working on a personal project or building an enterprise application, Nuxt UI provides all the tools you need to create stunning user interfaces quickly and efficiently. The library is constantly evolving with new components and improvements based on community feedback.
-
-Visit our [documentation](https://ui.nuxt.com) to learn more and explore all available components.
-`)
+Whether you're building a blog, documentation site, or content management system, the Nuxt UI Editor provides everything you need for a professional editing experience. Visit [ui.nuxt.com](https://ui.nuxt.com) to explore more components.`)
 
 const customHandlers: Partial<EditorHandlers> = {
   image: {
@@ -381,28 +362,17 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
   <UEditor
     v-slot="{ editor, handlers }"
     v-model="content"
+    content-type="markdown"
     :extensions="[
       Emoji,
-      ImageUpload,
-      TextAlign.configure({
-        types: ['heading', 'paragraph']
-      })
+      TextAlign.configure({ types: ['heading', 'paragraph'] }),
+      ImageUpload
     ]"
     :handlers="customHandlers"
-    content-type="markdown"
-    autofocus
     placeholder="Write, type '/' for commands..."
-    class="min-h-0"
-    :ui="{ content: 'max-w-2xl mx-auto', base: 'sm:px-14' }"
+    autofocus
+    :ui="{ base: 'sm:px-14 py-8' }"
   >
-    <Navbar>
-      <UEditorToolbar :editor="editor" :items="toolbarItems">
-        <template #link>
-          <EditorLinkPopover :editor="editor" auto-open />
-        </template>
-      </UEditorToolbar>
-    </Navbar>
-
     <UEditorToolbar
       :editor="editor"
       :items="toolbarItems"
@@ -439,7 +409,6 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
         @click="(e) => {
           e.stopPropagation()
           const node = onClick(e)
-
           handlers.suggestion?.execute(editor, { pos: node?.pos }).run()
         }"
       />
