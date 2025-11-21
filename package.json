@@ -136,7 +136,6 @@
     "@tiptap/extension-image": "^3.11.0",
     "@tiptap/extension-mention": "^3.11.0",
     "@tiptap/extension-placeholder": "^3.11.0",
-    "@tiptap/extension-text-align": "^3.11.0",
     "@tiptap/markdown": "^3.11.0",
     "@tiptap/starter-kit": "^3.11.0",
     "@tiptap/suggestion": "^3.11.0",
