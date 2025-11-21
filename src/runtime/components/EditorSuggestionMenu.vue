@@ -47,6 +47,7 @@ export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = 
 import { computed, h, inject, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
+import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -59,7 +60,7 @@ const props = withDefaults(defineProps<EditorSuggestionMenuProps<T>>(), {
 
 const appConfig = useAppConfig() as EditorSuggestionMenu['AppConfig']
 
-const handlers = inject<ComputedRef<EditorHandlers>>('editorHandlers')
+const handlers = inject<ComputedRef<EditorHandlers>>('editorHandlers', computed(() => createHandlers()))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorSuggestionMenu || {}) })())

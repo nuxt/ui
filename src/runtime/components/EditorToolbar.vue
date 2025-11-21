@@ -99,6 +99,7 @@ import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { isArrayOfArray, pick, omit } from '../utils'
+import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
 import UDropdownMenu from './DropdownMenu.vue'
 import UButton from './Button.vue'
@@ -117,7 +118,7 @@ defineSlots<EditorToolbarSlots<T>>()
 
 const appConfig = useAppConfig() as EditorToolbar['AppConfig']
 
-const handlers = inject<ComputedRef<EditorHandlers>>('editorHandlers')
+const handlers = inject<ComputedRef<EditorHandlers>>('editorHandlers', computed(() => createHandlers()))
 
 const Component = computed(() => {
   return ({
