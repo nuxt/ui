@@ -96,6 +96,7 @@
   "style": "./dist/runtime/index.css",
   "main": "./dist/module.mjs",
   "files": [
+    ".nuxt/ui.css",
     "dist",
     "cli",
     "vue-plugin.d.ts"
