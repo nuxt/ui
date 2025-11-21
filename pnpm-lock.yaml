@@ -344,8 +344,8 @@ importers:
         specifier: ^4.2.1
         version: 4.2.1(@parcel/watcher@2.5.1)(@types/node@24.7.0)(@vue/compiler-sfc@3.5.24)(better-sqlite3@12.4.1)(db0@0.3.4(better-sqlite3@12.4.1))(eslint@9.39.1(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.5.1)(meow@13.2.0)(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vite@7.2.2(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1))(vue-tsc@3.1.4(typescript@5.8.3))(yaml@2.8.1)
       nuxt-component-meta:
-        specifier: ^0.14.2
-        version: 0.14.2(magicast@0.5.1)
+        specifier: https://pkg.pr.new/nuxt-component-meta@29e1040
+        version: https://pkg.pr.new/nuxt-component-meta@29e1040(magicast@0.5.1)
       nuxt-llms:
         specifier: ^0.1.3
         version: 0.1.3(magicast@0.5.1)
@@ -5812,6 +5812,11 @@ packages:
 
   nuxt-component-meta@0.14.2:
     resolution: {integrity: sha512-pxEnARUzRmq3zbOm8fJkWLPR8mL82NeP5Pu/iYff4otl6jPJwgC1Cbpz3Z77HlVeYVtzhSpQRsCSo/+296CwYw==}
+    hasBin: true
+
+  nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@29e1040:
+    resolution: {tarball: https://pkg.pr.new/nuxt-component-meta@29e1040}
+    version: 0.14.2
     hasBin: true
 
   nuxt-llms@0.1.3:
@@ -14245,6 +14250,20 @@ snapshots:
       - magicast
 
   nuxt-component-meta@0.14.2(magicast@0.5.1):
+    dependencies:
+      '@nuxt/kit': 4.2.1(magicast@0.5.1)
+      citty: 0.1.6
+      json-schema-to-zod: 2.6.1
+      mlly: 1.8.0
+      ohash: 2.0.11
+      scule: 1.3.0
+      typescript: 5.8.3
+      ufo: 1.6.1
+      vue-component-meta: 3.1.3(typescript@5.8.3)
+    transitivePeerDependencies:
+      - magicast
+
+  nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@29e1040(magicast@0.5.1):
     dependencies:
       '@nuxt/kit': 4.2.1(magicast@0.5.1)
       citty: 0.1.6
