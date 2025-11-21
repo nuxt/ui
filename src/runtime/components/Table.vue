@@ -105,10 +105,10 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
      */
     overscan?: number
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 65
      */
-    estimateSize?: number
+    estimateSize?: number | ((index: number) => number)
   })
   /**
    * The text to display when the table is empty.
@@ -418,7 +418,24 @@ const virtualizer = !!props.virtualize && useVirtualizer({
     return rows.value.length
   },
   getScrollElement: () => rootRef.value?.$el,
-  estimateSize: () => virtualizerProps.value.estimateSize
+  estimateSize: (index: number) => {
+    const estimate = virtualizerProps.value.estimateSize
+    return typeof estimate === 'function' ? estimate(index) : estimate
+  }
+})
+
+const renderedSize = computed(() => {
+  if (!virtualizer) {
+    return 0
+  }
+
+  const virtualItems = virtualizer.value.getVirtualItems()
+  if (!virtualItems?.length) {
+    return 0
+  }
+
+  // Sum up the actual sizes of virtual items
+  return virtualItems.reduce((sum: number, item: any) => sum + item.size, 0)
 })
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
@@ -490,6 +507,7 @@ defineExpose({
       :data-expanded="row.getIsExpanded()"
       :role="props.onSelect ? 'button' : undefined"
       :tabindex="props.onSelect ? 0 : undefined"
+      data-slot="tr"
       :class="ui.tr({
         class: [
           props.ui?.tr,
@@ -508,6 +526,7 @@ defineExpose({
         :data-pinned="cell.column.getIsPinned()"
         :colspan="resolveValue(cell.column.columnDef.meta?.colspan?.td, cell)"
         :rowspan="resolveValue(cell.column.columnDef.meta?.rowspan?.td, cell)"
+        data-slot="td"
         :class="ui.td({
           class: [
             props.ui?.td,
@@ -523,23 +542,23 @@ defineExpose({
       </td>
     </tr>
 
-    <tr v-if="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })">
-      <td :colspan="row.getAllCells().length" :class="ui.td({ class: [props.ui?.td] })">
+    <tr v-if="row.getIsExpanded()" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
+      <td :colspan="row.getAllCells().length" data-slot="td" :class="ui.td({ class: [props.ui?.td] })">
         <slot name="expanded" :row="row" />
       </td>
     </tr>
   </DefineRowTemplate>
 
   <DefineTableTemplate>
-    <table ref="tableRef" :class="ui.base({ class: [props.ui?.base] })">
-      <caption v-if="caption || !!slots.caption" :class="ui.caption({ class: [props.ui?.caption] })">
+    <table ref="tableRef" data-slot="base" :class="ui.base({ class: [props.ui?.base] })">
+      <caption v-if="caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
           {{ caption }}
         </slot>
       </caption>
 
-      <thead :class="ui.thead({ class: [props.ui?.thead] })">
-        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
+      <thead data-slot="thead" :class="ui.thead({ class: [props.ui?.thead] })">
+        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
             v-for="header in headerGroup.headers"
             :key="header.id"
@@ -547,6 +566,7 @@ defineExpose({
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            data-slot="th"
             :class="ui.th({
               class: [
                 props.ui?.th,
@@ -554,6 +574,7 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
+            :style="resolveValue(header.column.columnDef.meta?.style?.th, header)"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
@@ -561,10 +582,10 @@ defineExpose({
           </th>
         </tr>
 
-        <tr :class="ui.separator({ class: [props.ui?.separator] })" />
+        <tr data-slot="separator" :class="ui.separator({ class: [props.ui?.separator] })" />
       </thead>
 
-      <tbody :class="ui.tbody({ class: [props.ui?.tbody] })">
+      <tbody data-slot="tbody" :class="ui.tbody({ class: [props.ui?.tbody] })">
         <slot name="body-top" />
 
         <template v-if="rows.length">
@@ -586,13 +607,13 @@ defineExpose({
         </template>
 
         <tr v-else-if="loading && !!slots['loading']">
-          <td :colspan="tableApi.getAllLeafColumns().length" :class="ui.loading({ class: props.ui?.loading })">
+          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
             <slot name="loading" />
           </td>
         </tr>
 
         <tr v-else>
-          <td :colspan="tableApi.getAllLeafColumns().length" :class="ui.empty({ class: props.ui?.empty })">
+          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty">
               {{ empty || t('table.noData') }}
             </slot>
@@ -604,20 +625,22 @@ defineExpose({
 
       <tfoot
         v-if="hasFooter"
+        data-slot="tfoot"
         :class="ui.tfoot({ class: [props.ui?.tfoot] })"
         :style="virtualizer ? {
-          transform: `translateY(${virtualizer.getTotalSize() - virtualizer.getVirtualItems().length * virtualizerProps.estimateSize}px)`
+          transform: `translateY(${virtualizer.getTotalSize() - renderedSize}px)`
         } : undefined"
       >
-        <tr :class="ui.separator({ class: [props.ui?.separator] })" />
+        <tr data-slot="separator" :class="ui.separator({ class: [props.ui?.separator] })" />
 
-        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
+        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
             v-for="header in footerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            data-slot="th"
             :class="ui.th({
               class: [
                 props.ui?.th,
@@ -636,7 +659,7 @@ defineExpose({
     </table>
   </DefineTableTemplate>
 
-  <Primitive ref="rootRef" :as="as" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive ref="rootRef" :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div
       v-if="virtualizer"
       :style="{

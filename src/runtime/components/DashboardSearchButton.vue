@@ -84,8 +84,9 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSearchButton['AppConfig']
 const { toggleSearch } = useDashboard({ toggleSearch: () => {} })
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearchButton || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearchButton || {}) })({
+  collapsed: props.collapsed
+}))
 </script>
 
 <template>
@@ -98,7 +99,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSea
         ...buttonProps,
         ...(collapsed ? {
           'square': true,
-          'label': undefined,
           'aria-label': label || t('dashboardSearchButton.label')
         } : {}),
         ...$attrs
@@ -111,8 +111,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSea
         <slot :name="name" v-bind="slotData" />
       </template>
 
-      <template v-if="!collapsed" #trailing="{ ui: uiProxy }">
-        <div :class="ui.trailing({ class: props.ui?.trailing })">
+      <template #trailing="{ ui: uiProxy }">
+        <div data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :ui="uiProxy">
             <template v-if="kbds?.length">
               <UKbd v-for="(kbd, index) in kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />

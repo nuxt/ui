@@ -96,13 +96,13 @@ const active = ref()
 
 defineShortcuts({
   1: () => {
-    active.value = '0'
+    active.value = 'item-0'
   },
   2: () => {
-    active.value = '1'
+    active.value = 'item-1'
   },
   3: () => {
-    active.value = '2'
+    active.value = 'item-2'
   }
 })
 </script>
