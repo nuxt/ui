@@ -127,7 +127,13 @@ const Component = computed(() => {
     fixed: 'template'
   }[props.layout])
 })
-const ComponentProps = useForwardProps(reactiveOmit(props, 'as', 'color', 'variant', 'activeColor', 'activeVariant', 'size', 'items', 'layout', 'editor', 'class', 'ui'))
+
+const rootProps = useForwardProps(reactiveOmit(props, 'as', 'color', 'variant', 'activeColor', 'activeVariant', 'size', 'items', 'layout', 'editor', 'class', 'ui'))
+
+const options = computed(() => defu((props as any).options, {
+  offset: 8,
+  shift: { padding: 8 }
+}))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorToolbar || {}) })({
   layout: props.layout
@@ -295,7 +301,8 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
       editor,
       tabindex: -1,
       class: ui.root({ class: props.ui?.root }),
-      ...ComponentProps,
+      ...rootProps,
+      options,
       ...$attrs
     } : {
       ...$attrs

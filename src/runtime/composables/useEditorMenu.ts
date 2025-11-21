@@ -45,7 +45,7 @@ export interface EditorMenuOptions<T = any> {
   renderItem: (item: T, ui: ComputedRef<any>) => any
   /**
    * The options for positioning the menu. Those are passed to Floating UI and include options for the placement, offset, flip, shift, size, autoPlacement, hide, and inline middleware.
-   * @defaultValue { strategy: 'absolute', placement: 'bottom-start', offset: 8 }
+   * @defaultValue { strategy: 'absolute', placement: 'bottom-start', offset: 8, shift: { padding: 8 } }
    * @see https://floating-ui.com/docs/computePosition#options
    */
   options?: FloatingUIOptions
@@ -171,7 +171,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     placement: 'bottom-start' as Placement,
     offset: 8,
     flip: {},
-    shift: {},
+    shift: { padding: 8 },
     size: false,
     autoPlacement: false,
     hide: false,
