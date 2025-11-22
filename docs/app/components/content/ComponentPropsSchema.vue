@@ -22,18 +22,24 @@ function getSchemaProps(schema: PropertyMeta['schema']): any {
 }
 
 const schemaProps = computed(() => {
-  return getSchemaProps(props.prop.schema).map((prop: any) => {
-    const defaultValue = prop.default ?? prop.tags?.find((tag: any) => tag.name === 'defaultValue')?.text
-    let description = prop.description
-    if (defaultValue) {
-      description = description ? `${description} Defaults to \`${defaultValue}\`{lang="ts-type"}.` : `Defaults to \`${defaultValue}\`{lang="ts-type"}.`
+  const propsObject = getSchemaProps(props.prop.schema).reduce((acc: any, prop: any) => {
+    if (!acc[prop.name]) {
+      const defaultValue = prop.default ?? prop.tags?.find((tag: any) => tag.name === 'defaultValue')?.text
+      let description = prop.description
+      if (defaultValue) {
+        description = description ? `${description} Defaults to \`${defaultValue}\`{lang="ts-type"}.` : `Defaults to \`${defaultValue}\`{lang="ts-type"}.`
+      }
+
+      acc[prop.name] = {
+        ...prop,
+        description
+      }
     }
 
-    return {
-      ...prop,
-      description
-    }
-  })
+    return acc
+  }, {})
+
+  return Object.values(propsObject) as PropertyMeta[]
 })
 </script>
 

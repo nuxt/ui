@@ -603,7 +603,7 @@ exports[`PageCard > renders with to correctly 1`] = `
   <!--v-if-->
   <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <!--v-if-->
-  </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Card link" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Card link" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
 </div>"
 `;
 
@@ -674,7 +674,7 @@ exports[`PageCard > renders with variant ghost to correctly 1`] = `
       </div>
       <!--v-if-->
     </div>
-  </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
 </div>"
 `;
 
@@ -727,7 +727,7 @@ exports[`PageCard > renders with variant naked to correctly 1`] = `
       </div>
       <!--v-if-->
     </div>
-  </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
 </div>"
 `;
 
@@ -780,7 +780,7 @@ exports[`PageCard > renders with variant outline to correctly 1`] = `
       </div>
       <!--v-if-->
     </div>
-  </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
 </div>"
 `;
 
@@ -833,7 +833,7 @@ exports[`PageCard > renders with variant soft to correctly 1`] = `
       </div>
       <!--v-if-->
     </div>
-  </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
 </div>"
 `;
 
@@ -886,7 +886,7 @@ exports[`PageCard > renders with variant solid to correctly 1`] = `
       </div>
       <!--v-if-->
     </div>
-  </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
 </div>"
 `;
 
@@ -939,6 +939,6 @@ exports[`PageCard > renders with variant subtle to correctly 1`] = `
       </div>
       <!--v-if-->
     </div>
-  </div><a href="https://github.com/benjamincanac" target="_blank" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
 </div>"
 `;

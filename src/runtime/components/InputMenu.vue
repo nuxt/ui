@@ -202,6 +202,7 @@ import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { compare, get, getDisplayValue, isArrayOfArray } from '../utils'
+import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -232,15 +233,13 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', '
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
-const virtualizerProps = toRef(() => !!props.virtualize && defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-  estimateSize: ({
-    xs: 24,
-    sm: 28,
-    md: 32,
-    lg: 36,
-    xl: 40
-  })[props.size || 'md']
-}))
+const virtualizerProps = toRef(() => {
+  if (!props.virtualize) return false
+
+  return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+    estimateSize: getEstimateSize(items.value, inputSize.value || 'md', props.descriptionKey as string)
+  })
+})
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)
@@ -416,6 +415,13 @@ function onRemoveTag(event: any, modelValue: GetModelValue<T, VK, true>) {
   }
 }
 
+function onCreate(e: Event) {
+  e.preventDefault()
+  e.stopPropagation()
+
+  emits('create', searchTerm.value)
+}
+
 function onSelect(e: Event, item: InputMenuItem) {
   if (!isInputItem(item)) {
     return
@@ -445,7 +451,7 @@ defineExpose({
       data-slot="item"
       :class="ui.item({ class: props.ui?.item })"
       :value="searchTerm"
-      @select.prevent="emits('create', searchTerm)"
+      @select="onCreate"
     >
       <span data-slot="itemLabel" :class="ui.itemLabel({ class: props.ui?.itemLabel })">
         <slot name="create-item-label" :item="searchTerm">
@@ -521,7 +527,6 @@ defineExpose({
     ignore-filter
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
-    @keydown.enter="$event.preventDefault()"
   >
     <ComboboxAnchor :as-child="!multiple" data-slot="base" :class="ui.base({ class: props.ui?.base })">
       <TagsInputRoot
@@ -558,7 +563,7 @@ defineExpose({
             :placeholder="placeholder"
             data-slot="tagsInput"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
-            @keydown.enter.prevent
+            @change.stop
           />
         </ComboboxInput>
       </TagsInputRoot>
@@ -574,6 +579,7 @@ defineExpose({
         :required="required"
         @blur="onBlur"
         @focus="onFocus"
+        @change.stop
         @update:model-value="searchTerm = $event"
       />
 

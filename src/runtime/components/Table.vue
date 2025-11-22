@@ -105,10 +105,10 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
      */
     overscan?: number
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 65
      */
-    estimateSize?: number
+    estimateSize?: number | ((index: number) => number)
   })
   /**
    * The text to display when the table is empty.
@@ -418,7 +418,24 @@ const virtualizer = !!props.virtualize && useVirtualizer({
     return rows.value.length
   },
   getScrollElement: () => rootRef.value?.$el,
-  estimateSize: () => virtualizerProps.value.estimateSize
+  estimateSize: (index: number) => {
+    const estimate = virtualizerProps.value.estimateSize
+    return typeof estimate === 'function' ? estimate(index) : estimate
+  }
+})
+
+const renderedSize = computed(() => {
+  if (!virtualizer) {
+    return 0
+  }
+
+  const virtualItems = virtualizer.value.getVirtualItems()
+  if (!virtualItems?.length) {
+    return 0
+  }
+
+  // Sum up the actual sizes of virtual items
+  return virtualItems.reduce((sum: number, item: any) => sum + item.size, 0)
 })
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
@@ -611,7 +628,7 @@ defineExpose({
         data-slot="tfoot"
         :class="ui.tfoot({ class: [props.ui?.tfoot] })"
         :style="virtualizer ? {
-          transform: `translateY(${virtualizer.getTotalSize() - virtualizer.getVirtualItems().length * virtualizerProps.estimateSize}px)`
+          transform: `translateY(${virtualizer.getTotalSize() - renderedSize}px)`
         } : undefined"
       >
         <tr data-slot="separator" :class="ui.separator({ class: [props.ui?.separator] })" />

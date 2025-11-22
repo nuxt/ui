@@ -255,30 +255,30 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
 "<div id="v-0-0" data-slot="root" class="relative" tabindex="-1" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" data-disabled="" aria-orientation="vertical" aria-required="false">
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
     <!--v-if-->
-    <div data-slot="item" class="flex items-start flex-row text-sm">
-      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-disabled="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed opacity-75" id="v-0-0:1" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="1" aria-label="1">
+    <div data-slot="item" class="flex items-start flex-row text-sm opacity-75">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-disabled="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed" id="v-0-0:1" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!--v-if-->
         </button></div>
-      <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:1" data-slot="label" class="block font-medium text-default cursor-not-allowed opacity-75">Option 1</label>
+      <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:1" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div data-slot="item" class="flex items-start flex-row text-sm">
-      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-disabled="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed opacity-75" id="v-0-0:2" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="2" aria-label="2">
+    <div data-slot="item" class="flex items-start flex-row text-sm opacity-75">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-disabled="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed" id="v-0-0:2" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!--v-if-->
         </button></div>
-      <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:2" data-slot="label" class="block font-medium text-default cursor-not-allowed opacity-75">Option 2</label>
+      <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:2" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div data-slot="item" class="flex items-start flex-row text-sm">
-      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-disabled="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed opacity-75" id="v-0-0:3" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="3" aria-label="3">
+    <div data-slot="item" class="flex items-start flex-row text-sm opacity-75">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-disabled="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed" id="v-0-0:3" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!--v-if-->
         </button></div>
-      <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:3" data-slot="label" class="block font-medium text-default cursor-not-allowed opacity-75">Option 3</label>
+      <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:3" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 3</label>
         <!--v-if-->
       </div>
     </div>
