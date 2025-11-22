@@ -127,9 +127,9 @@ function onChange(value: any) {
         disable-closing-trigger
         v-bind="(typeof tooltip === 'object' ? tooltip : {})"
       >
-        <SliderThumb :class="ui.thumb({ class: props.ui?.thumb })" />
+        <SliderThumb :class="ui.thumb({ class: props.ui?.thumb })" :aria-label="`Thumb ${thumb} of ${thumbs}`" />
       </UTooltip>
-      <SliderThumb v-else :class="ui.thumb({ class: props.ui?.thumb })" />
+      <SliderThumb v-else :class="ui.thumb({ class: props.ui?.thumb })" :aria-label="`Thumb ${thumb} of ${thumbs}`" />
     </template>
   </SliderRoot>
 </template>
