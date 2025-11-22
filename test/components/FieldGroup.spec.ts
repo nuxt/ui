@@ -14,6 +14,7 @@ describe('FieldGroup', () => {
     // Props
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'absolute' } }],
+    ['with clear', { props: { clear: true } }],
     // Slots
     ['with default slot', {
       slots: {

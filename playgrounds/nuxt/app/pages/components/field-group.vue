@@ -32,9 +32,22 @@ const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
       <UButton color="neutral" variant="outline">
         Button
       </UButton>
-      <UButton color="neutral" variant="subtle">
-        Button
-      </UButton>
+      <UModal>
+        <UButton color="neutral" variant="subtle">
+          Open
+        </UButton>
+
+        <template #footer="{ close }">
+          <UFieldGroup clear>
+            <UButton @click="close">
+              Submit
+            </UButton>
+            <UButton color="neutral" variant="outline" @click="close">
+              Close
+            </UButton>
+          </UFieldGroup>
+        </template>
+      </UModal>
       <UButton color="neutral" variant="outline">
         Button
       </UButton>

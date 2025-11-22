@@ -70,11 +70,11 @@ const appConfig = useAppConfig() as InputTime['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'color', 'variant', 'size', 'highlight', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'class', 'ui'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formFieldSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputTimeProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
+const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTime || {}) })({
   color: color.value,

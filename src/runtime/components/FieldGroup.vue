@@ -20,6 +20,11 @@ export interface FieldGroupProps {
    * @defaultValue 'horizontal'
    */
   orientation?: FieldGroup['variants']['orientation']
+  /**
+   * When true, clears the field group context so nested components don't inherit styling.
+   * @defaultValue false
+   */
+  clear?: boolean
   class?: any
   ui?: FieldGroup['slots']
 }
@@ -46,14 +51,25 @@ const appConfig = useAppConfig() as FieldGroup['AppConfig']
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fieldGroup || {}) }))
 
-provide(fieldGroupInjectionKey, computed(() => ({
-  orientation: props.orientation,
-  size: props.size
-})))
+provide(fieldGroupInjectionKey, computed(() => {
+  if (props.clear) {
+    return {
+      orientation: undefined,
+      size: undefined
+    }
+  }
+  return {
+    orientation: props.orientation,
+    size: props.size
+  }
+}))
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: props.class })">
+  <template v-if="clear">
+    <slot />
+  </template>
+  <Primitive v-else :as="as" :data-orientation="orientation" :class="ui({ orientation, class: props.class })">
     <slot />
   </Primitive>
 </template>
