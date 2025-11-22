@@ -163,6 +163,22 @@ const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakp
 const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowRight : appConfig.ui.icons.arrowLeft))
 const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowLeft : appConfig.ui.icons.arrowRight))
 
+const stopAutoplayOnInteraction = computed(() => {
+  if (typeof props.autoplay === 'boolean') {
+    return true
+  }
+
+  return props.autoplay.stopOnInteraction ?? true
+})
+
+const stopAutoScrollOnInteraction = computed(() => {
+  if (typeof props.autoScroll === 'boolean') {
+    return true
+  }
+
+  return props.autoScroll.stopOnInteraction ?? true
+})
+
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.carousel || {}) })({
   orientation: props.orientation
 }))
@@ -223,20 +239,26 @@ watch(options, () => {
   emblaApi.value?.reInit(options.value, plugins.value)
 }, { flush: 'post' })
 
+function stopOnInteraction() {
+  if (stopAutoplayOnInteraction.value) {
+    emblaApi.value?.plugins().autoplay?.stop()
+  }
+
+  if (stopAutoScrollOnInteraction.value) {
+    emblaApi.value?.plugins().autoScroll?.stop()
+  }
+}
+
 function scrollPrev() {
   emblaApi.value?.scrollPrev()
-
-  if (props.autoplay && (typeof props.autoplay === 'boolean' || props.autoplay.stopOnInteraction !== false)) {
-    emblaApi.value?.plugins().autoplay?.stop()
-  }
+  stopOnInteraction()
 }
+
 function scrollNext() {
   emblaApi.value?.scrollNext()
-
-  if (props.autoplay && (typeof props.autoplay === 'boolean' || props.autoplay.stopOnInteraction !== false)) {
-    emblaApi.value?.plugins().autoplay?.stop()
-  }
+  stopOnInteraction()
 }
+
 function scrollTo(index: number) {
   emblaApi.value?.scrollTo(index)
 }
