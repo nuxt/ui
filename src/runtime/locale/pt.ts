@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Fechar'
     },
-    slider: {
-      thumb: 'Faixa'
-    },
     table: {
       noData: 'Sem dados'
     },

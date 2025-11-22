@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Đóng'
     },
-    slider: {
-      thumb: 'Phạm vi'
-    },
     table: {
       noData: 'Không có dữ liệu'
     },

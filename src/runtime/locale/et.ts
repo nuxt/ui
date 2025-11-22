@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Sulge'
     },
-    slider: {
-      thumb: 'Vahemik'
-    },
     table: {
       noData: 'Pole andmeid'
     },

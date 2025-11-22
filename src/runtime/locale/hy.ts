@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Փակել'
     },
-    slider: {
-      thumb: 'Տիրույթ'
-    },
     table: {
       noData: 'Տվյալներ չկան'
     },

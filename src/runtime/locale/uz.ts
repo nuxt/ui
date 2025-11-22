@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Yopish'
     },
-    slider: {
-      thumb: 'Diapazon'
-    },
     table: {
       noData: 'Maʼlumot yoʻq'
     },

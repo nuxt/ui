@@ -47,7 +47,7 @@ export interface SliderEmits {
 import { computed } from 'vue'
 import { SliderRoot, SliderRange, SliderTrack, SliderThumb, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig, useLocale } from '#imports'
+import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UTooltip from './Tooltip.vue'
@@ -63,8 +63,6 @@ const emits = defineEmits<SliderEmits>()
 const modelValue = defineModel<T>()
 
 const appConfig = useAppConfig() as Slider['AppConfig']
-
-const { t } = useLocale()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'), emits)
 
@@ -129,9 +127,9 @@ function onChange(value: any) {
         disable-closing-trigger
         v-bind="(typeof tooltip === 'object' ? tooltip : {})"
       >
-        <SliderThumb :class="ui.thumb({ class: props.ui?.thumb })" :aria-label="t('slider.thumb')" />
+        <SliderThumb :class="ui.thumb({ class: props.ui?.thumb })" />
       </UTooltip>
-      <SliderThumb v-else :class="ui.thumb({ class: props.ui?.thumb })" :aria-label="t('slider.thumb')" />
+      <SliderThumb v-else :class="ui.thumb({ class: props.ui?.thumb })" />
     </template>
   </SliderRoot>
 </template>

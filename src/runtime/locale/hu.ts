@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Bezárás'
     },
-    slider: {
-      thumb: 'Tartomány'
-    },
     table: {
       noData: 'Nincs adat'
     },

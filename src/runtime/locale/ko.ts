@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: '닫기'
     },
-    slider: {
-      thumb: '범위'
-    },
     table: {
       noData: '데이터가 없습니다.'
     },

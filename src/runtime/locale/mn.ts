@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Хаах'
     },
-    slider: {
-      thumb: 'Хүрээ'
-    },
     table: {
       noData: 'Мэдээлэл байхгүй'
     },

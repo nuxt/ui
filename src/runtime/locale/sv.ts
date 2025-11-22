@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Stäng'
     },
-    slider: {
-      thumb: 'Intervall'
-    },
     table: {
       noData: 'Inga data'
     },

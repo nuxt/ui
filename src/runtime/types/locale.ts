@@ -125,9 +125,6 @@ export type Messages = {
   slideover: {
     close: string
   }
-  slider: {
-    thumb: string
-  }
   table: {
     noData: string
   }

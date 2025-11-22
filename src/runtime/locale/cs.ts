@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Zavřít'
     },
-    slider: {
-      thumb: 'Rozsah'
-    },
     table: {
       noData: 'Žádná data'
     },

@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Tutup'
     },
-    slider: {
-      thumb: 'Julat'
-    },
     table: {
       noData: 'Tiada data'
     },

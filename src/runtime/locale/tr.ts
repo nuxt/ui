@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Kapat'
     },
-    slider: {
-      thumb: 'Aralık'
-    },
     table: {
       noData: 'Veri yok'
     },

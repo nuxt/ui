@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Cerrar'
     },
-    slider: {
-      thumb: 'Rango'
-    },
     table: {
       noData: 'Sin datos'
     },

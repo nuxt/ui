@@ -122,9 +122,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'إغلاق'
     },
-    slider: {
-      thumb: 'المدى'
-    },
     table: {
       noData: 'لا توجد بيانات'
     },

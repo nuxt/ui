@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Zapri'
     },
-    slider: {
-      thumb: 'Obseg'
-    },
     table: {
       noData: 'Ni podatkov'
     },

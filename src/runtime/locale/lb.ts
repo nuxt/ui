@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'Zoumaachen'
     },
-    slider: {
-      thumb: 'Bereich'
-    },
     table: {
       noData: 'Keng Donnéeën'
     },

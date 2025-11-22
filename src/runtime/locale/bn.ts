@@ -121,9 +121,6 @@ export default defineLocale<Messages>({
     slideover: {
       close: 'বন্ধ করুন'
     },
-    slider: {
-      thumb: 'পরিসীমা'
-    },
     table: {
       noData: 'কোন তথ্য নেই'
     },
