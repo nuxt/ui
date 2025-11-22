@@ -12,7 +12,7 @@ useHead({
   ],
   htmlAttrs: {
     lang: 'en',
-    dir: computed(() => appConfig.dir as 'ltr' | 'rtl')
+    dir: computed(() => appConfig.dir)
   }
 })
 

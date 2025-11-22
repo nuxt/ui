@@ -253,13 +253,9 @@ class: 'overflow-x-auto'
 
 ### Control active item
 
-You can control the active item by using the `default-value` prop or the `v-model` directive with the index of the item.
+You can control the active item by using the `default-value` prop or the `v-model` directive with the `value` of the item. If no `value` is provided, it defaults to the index.
 
 :component-example{name="timeline-model-value-example" prettier}
-
-::tip
-You can also pass the `value` of one of the items if provided.
-::
 
 ### With alternating layout
 

@@ -165,6 +165,47 @@ slots:
 :placeholder{class="size-48 m-4 inline-flex"}
 ::
 
+### Modal
+
+Use the `modal` prop to control whether the Popover blocks interaction with outside content. Defaults to `false`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  modal: true
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  content: |
+
+    <Placeholder class="size-48 m-4 inline-flex" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#content
+:placeholder{class="size-48 m-4 inline-flex"}
+::
+
+### Dismissible
+
+Use the `dismissible` prop to control whether the Popover is dismissible when clicking outside of it or pressing escape. Defaults to `true`.
+
+::note
+A `close:prevent` event will be emitted when the user tries to close it.
+::
+
+::component-example
+---
+name: 'popover-dismissible-example'
+---
+::
+
 ## Examples
 
 ### Control open state
@@ -179,16 +220,6 @@ name: 'popover-open-example'
 
 ::note
 In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the Popover by pressing :kbd{value="O"}.
-::
-
-### Disable dismissal
-
-Set the `dismissible` prop to `false` to prevent the Popover from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
-
-::component-example
----
-name: 'popover-dismissible-example'
----
 ::
 
 ### With command palette

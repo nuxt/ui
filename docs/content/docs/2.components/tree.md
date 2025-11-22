@@ -524,6 +524,8 @@ Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable
 
 ::component-example
 ---
+prettier: true
+collapse: true
 name: 'tree-drag-and-drop-example'
 ---
 ::

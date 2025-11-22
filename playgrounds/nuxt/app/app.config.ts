@@ -1,5 +1,7 @@
+import type { Direction } from '@nuxt/ui'
+
 export default defineAppConfig({
-  dir: 'ltr',
+  dir: 'ltr' as Direction,
   toaster: {
     position: 'bottom-right' as const,
     duration: 5000,
