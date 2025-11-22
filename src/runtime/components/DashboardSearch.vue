@@ -155,6 +155,8 @@ const groups = computed(() => {
   return groups
 })
 
+const commandPaletteRef = useTemplateRef('commandPaletteRef')
+
 function onSelect(item: CommandPaletteItem) {
   if (item.disabled) {
     return
@@ -173,8 +175,6 @@ defineShortcuts({
   }
 })
 
-const commandPaletteRef = useTemplateRef('commandPaletteRef')
-
 defineExpose({
   commandPaletteRef
 })
@@ -186,6 +186,7 @@ defineExpose({
     :title="title || t('dashboardSearch.title')"
     :description="description || t('dashboardSearch.description')"
     v-bind="modalProps"
+    data-slot="modal"
     :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
     <template #content="contentData">

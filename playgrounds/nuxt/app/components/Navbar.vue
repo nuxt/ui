@@ -28,6 +28,11 @@ defineShortcuts({
 
 <template>
   <UDashboardNavbar :title="title" class="absolute top-0 inset-x-0 z-5 bg-default">
+    <template #toggle>
+      <UDashboardSidebarToggle size="sm" variant="outline" class="ring-default" />
+      <UDashboardSidebarCollapse size="sm" variant="outline" class="ring-default" />
+    </template>
+
     <template #leading>
       <UFieldGroup size="sm">
         <UButton

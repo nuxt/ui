@@ -655,6 +655,10 @@ class: '!p-0'
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table#attributes" target="_blank"}
+This component also supports all native `<table>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots
@@ -678,7 +682,7 @@ This will give you access to the following:
 | Name | Type |
 | ---- | ---- |
 | `tableRef`{lang="ts-type"} | `Ref<HTMLTableElement \| null>`{lang="ts-type"} |
-| `tableApi`{lang="ts-type"} | [`Ref<Table \| null>`{lang="ts-type"}](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
+| `tableApi`{lang="ts-type"} | [`Table`{lang="ts-type"}](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
 
 ## Theme
 

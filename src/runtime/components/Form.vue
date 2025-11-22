@@ -2,6 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData } from '../types/form'
+import type { FormHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>
@@ -50,7 +51,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
    * If true, this form will attach to its parent Form and validate at the same time.
    * @defaultValue `false`
    */
-  nested?: N
+  nested?: N & boolean
 
   /**
    * When `true`, all form elements will be disabled on `@submit` event.
@@ -60,7 +61,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
   loadingAuto?: boolean
   class?: any
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>)
-}
+} & /** @vue-ignore */ Omit<FormHTMLAttributes, 'name'>
 
 export interface FormEmits<S extends FormSchema, T extends boolean = true> {
   submit: [event: FormSubmitEvent<FormData<S, T>>]
@@ -104,15 +105,12 @@ const formId = props.id ?? useId() as string
 
 const bus = useEventBus<FormEvent<I>>(`form-${formId}`)
 
-// The comparison with '' is needed because vue is not casting boolean correctly without
-// explicitly setting the prop to true (`:nested="true" works, but `nested` returns '')
-const isNested = props.nested?.toString() === '' || props.nested === true
-const parentBus = isNested && inject(
+const parentBus = props.nested === true && inject(
   formBusInjectionKey,
   undefined
 )
 
-const parentState = isNested ? inject(formStateInjectionKey, undefined) : undefined
+const parentState = props.nested === true ? inject(formStateInjectionKey, undefined) : undefined
 const state = computed(() => {
   if (parentState?.value) {
     return props.name ? getAtPath(parentState.value, props.name) : parentState.value

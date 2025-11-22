@@ -2,7 +2,7 @@ import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
 import type { HookResult } from '@nuxt/schema'
 import { addTemplates } from './templates'
-import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
+import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
 import { name, version } from '../package.json'
 
 export type * from './runtime/types'
@@ -51,6 +51,10 @@ export interface ModuleOptions {
      */
     transitions?: boolean
 
+    /**
+     * The default variants to use for components
+     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themedefaultvariants
+     */
     defaultVariants?: {
       /**
        * The default color variant to use for components
@@ -64,6 +68,13 @@ export interface ModuleOptions {
        */
       size?: Size
     }
+
+    /**
+     * Prefix for Tailwind CSS utility classes
+     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themeprefix
+     * @example 'tw'
+     */
+    prefix?: string
   }
 
   /**
@@ -123,11 +134,11 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
-    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultUiConfig(options.theme.colors))
+    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme))
 
     // Isolate root node from portaled components
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
-    nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, 'isolate'].filter(Boolean).join(' ')
+    nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, `${options.theme?.prefix ? options.theme.prefix + ':' : ''}isolate`].filter(Boolean).join(' ')
 
     nuxt.hook('vite:extend', async ({ config }) => {
       const plugin = await import('@tailwindcss/vite').then(r => r.default)

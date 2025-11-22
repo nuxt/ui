@@ -11,7 +11,8 @@
     "v4"
   ],
   "ignoreDeps": [
-    "typescript"
+    "typescript",
+    "actions/stale"
   ],
   "packageRules": [
     {
@@ -27,20 +28,6 @@
       "matchPackageNames": [
         "reka-ui",
         "vaul-vue"
-      ]
-    },
-    {
-      "groupName": "vite",
-      "matchPackageNames": [
-        "vite",
-        "@vitejs/plugin-vue"
-      ]
-    },
-    {
-      "groupName": "vue-tsc",
-      "matchPackageNames": [
-        "vue-tsc",
-        "vue-component-type-helpers"
       ]
     },
     {

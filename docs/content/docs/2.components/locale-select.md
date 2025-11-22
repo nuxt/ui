@@ -72,7 +72,7 @@ const { locale, setLocale } = useI18n()
 
 <template>
   <ULocaleSelect
-    v-model="locale"
+    :model-value="locale"
     :locales="Object.values(locales)"
     @update:model-value="setLocale($event)"
   />
@@ -95,7 +95,7 @@ const { locale, setLocale } = useI18n()
 
 <template>
   <ULocaleSelect
-    v-model="locale"
+    :model-value="locale"
     :locales="Object.values(locales)"
     @update:model-value="setLocale($event)"
   />

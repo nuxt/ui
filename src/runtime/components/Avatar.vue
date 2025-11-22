@@ -2,11 +2,12 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
 import type { ChipProps, IconProps } from '../types'
+import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type Avatar = ComponentConfig<typeof theme, AppConfig, 'avatar'>
 
-export interface AvatarProps {
+export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 'src' | 'alt'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'span'
@@ -97,6 +98,7 @@ function onError() {
     :is="props.chip ? UChip : Primitive"
     :as="as.root"
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
+    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="props.style"
   >
@@ -108,14 +110,15 @@ function onError() {
       :width="sizePx"
       :height="sizePx"
       v-bind="$attrs"
+      data-slot="image"
       :class="ui.image({ class: props.ui?.image })"
       @error="onError"
     />
 
     <Slot v-else v-bind="$attrs">
       <slot>
-        <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
-        <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
+        <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+        <span v-else data-slot="fallback" :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
       </slot>
     </Slot>
   </component>
