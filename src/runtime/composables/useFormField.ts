@@ -43,6 +43,12 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     }
   }
 
+  const fieldName = computed(() => {
+    const name = props?.name ?? formField?.value.name
+    if (Array.isArray(name)) return undefined
+    return name
+  })
+
   function emitFormEvent(type: FormInputEvents, name?: string, eager?: boolean) {
     if (formBus && formField && name) {
       formBus.emit({ type, name, eager })
@@ -50,27 +56,30 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
   }
 
   function emitFormBlur() {
-    emitFormEvent('blur', formField?.value.name)
+    emitFormEvent('blur', fieldName.value)
   }
 
   function emitFormFocus() {
-    emitFormEvent('focus', formField?.value.name)
+    emitFormEvent('focus', fieldName.value)
   }
 
   function emitFormChange() {
-    emitFormEvent('change', formField?.value.name)
+    emitFormEvent('change', fieldName.value)
   }
 
   const emitFormInput = useDebounceFn(
     () => {
-      emitFormEvent('input', formField?.value.name, !opts?.deferInputValidation || formField?.value.eagerValidation)
+      emitFormEvent('input', fieldName.value, !opts?.deferInputValidation || formField?.value.eagerValidation)
     },
     formField?.value.validateOnInputDelay ?? formOptions?.value.validateOnInputDelay ?? 0
   )
 
   return {
     id: computed(() => props?.id ?? inputId?.value),
-    name: computed(() => props?.name ?? formField?.value.name),
+    name: computed(() => {
+      const name = props?.name ?? formField?.value.name
+      return Array.isArray(name) ? undefined : name
+    }),
     size: computed(() => props?.size ?? formField?.value.size),
     color: computed(() => formField?.value.error ? 'error' : props?.color),
     highlight: computed(() => formField?.value.error ? true : props?.highlight),

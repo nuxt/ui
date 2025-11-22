@@ -116,6 +116,33 @@ slots:
 :u-input{placeholder="Enter your email" class="w-full"}
 ::
 
+### Multiple fields
+
+You can pass an array of names to the `name` prop to track errors for multiple fields. This is useful when you have a complex field that is composed of multiple inputs.
+Make sure you're passing manually name to fields inside the form field to link fields to state (and then errors accordingly).
+Error messages of fields inside the form field will be displayed in the form field itself.
+
+::component-code
+---
+prettier: true
+props:
+  label: Duration
+  name: ['duration.value', 'duration.unit']
+slots:
+  default: |
+
+    <div class="flex gap-2">
+      <UInput name="duration.value" type="number" />
+      <USelect name="duration.unit" :items="['min', 'h']" />
+    </div>
+---
+
+<div class="flex gap-2">
+  <UInput name="duration.value" type="number" />
+  <USelect name="duration.unit" :items="['min', 'h']" />
+</div>
+::
+
 ### Error
 
 Use the `error` prop to display an error message below the form control. When used together with the `help` prop, the `error` prop takes precedence.

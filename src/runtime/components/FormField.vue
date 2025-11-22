@@ -13,7 +13,7 @@ export interface FormFieldProps {
    */
   as?: any
   /** The name of the FormField. Also used to match form errors. */
-  name?: string
+  name?: string | string[]
   /** A regular expression to match form error names. */
   errorPattern?: RegExp
   label?: string
@@ -67,7 +67,18 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.formField ||
 
 const formErrors = inject<Ref<FormError[]> | null>(formErrorsInjectionKey, null)
 
-const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name?.match(props.errorPattern)))?.message)
+const error = computed(() => {
+  if (props.error) return props.error
+  if (!formErrors?.value) return undefined
+
+  if (props.name) {
+    if (Array.isArray(props.name)) {
+      return formErrors.value.find(error => props.name!.includes(error.name!) || (props.errorPattern && error.name?.match(props.errorPattern)))?.message
+    }
+    return formErrors.value.find(error => error.name === props.name || (props.errorPattern && error.name?.match(props.errorPattern)))?.message
+  }
+  return undefined
+})
 
 const id = ref(useId())
 // Copies id's initial value to bind aria-attributes such as aria-describedby.
@@ -75,11 +86,21 @@ const id = ref(useId())
 const ariaId = id.value
 
 const formInputs = inject(formInputsInjectionKey, undefined)
-watch(id, () => {
-  if (formInputs && props.name) {
-    formInputs.value[props.name] = { id: id.value, pattern: props.errorPattern }
-  }
-}, { immediate: true })
+watch(
+  id,
+  () => {
+    if (formInputs && props.name) {
+      if (Array.isArray(props.name)) {
+        props.name.forEach((name) => {
+          formInputs.value[name] = { id: id.value, pattern: props.errorPattern }
+        })
+      } else {
+        formInputs.value[props.name] = { id: id.value, pattern: props.errorPattern }
+      }
+    }
+  },
+  { immediate: true }
+)
 
 provide(inputIdInjectionKey, id)
 

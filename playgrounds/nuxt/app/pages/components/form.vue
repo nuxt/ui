@@ -7,8 +7,10 @@ import FormExampleNested from '../../../../../docs/app/components/content/exampl
 
 const schema = z.object({
   email: z.email(),
-  password: z.string('Password is required').min(8),
-  tos: z.literal(true)
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+  tos: z.literal(true),
+  duration: z.number().min(1),
+  durationUnit: z.enum(['min', 'h'])
 })
 
 type Schema = z.input<typeof schema>
@@ -40,6 +42,13 @@ const disabled = ref(false)
 
         <UFormField label="Password" name="password">
           <UInput v-model="state.password" type="password" />
+        </UFormField>
+
+        <UFormField label="Duration" :name="['duration', 'durationUnit']">
+          <div class="flex items-center gap-2">
+            <UInput v-model="state.duration" name="duration" type="number" class="w-24" />
+            <USelect v-model="state.durationUnit" name="durationUnit" :items="['sec', 'min', 'h']" class="w-24" />
+          </div>
         </UFormField>
 
         <UFormField name="tos">

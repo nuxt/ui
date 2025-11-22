@@ -88,7 +88,7 @@ export interface FormInjectedOptions {
 }
 
 export interface FormFieldInjectedOptions<T> {
-  name?: string
+  name?: string | string[]
   size?: GetObjectField<T, 'size'>
   error?: string | boolean
   eagerValidation?: boolean
