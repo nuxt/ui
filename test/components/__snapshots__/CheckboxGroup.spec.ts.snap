@@ -255,30 +255,30 @@ exports[`CheckboxGroup > renders with disabled correctly 1`] = `
 "<div id="v-0-0" data-slot="root" class="relative" tabindex="-1" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
     <!--v-if-->
-    <div data-slot="root" class="relative flex items-start flex-row">
-      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed opacity-75" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+    <div data-slot="root" class="relative flex items-start flex-row opacity-75">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
           <!---->
           <!--v-if-->
         </button></div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0:1" data-slot="label" class="block font-medium text-default cursor-not-allowed opacity-75">Option 1</label>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0:1" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div data-slot="root" class="relative flex items-start flex-row">
-      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed opacity-75" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+    <div data-slot="root" class="relative flex items-start flex-row opacity-75">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
           <!---->
           <!--v-if-->
         </button></div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0:2" data-slot="label" class="block font-medium text-default cursor-not-allowed opacity-75">Option 2</label>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0:2" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div data-slot="root" class="relative flex items-start flex-row">
-      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed opacity-75" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+    <div data-slot="root" class="relative flex items-start flex-row opacity-75">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
           <!---->
           <!--v-if-->
         </button></div>
-      <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0:3" data-slot="label" class="block font-medium text-default cursor-not-allowed opacity-75">Option 3</label>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0:3" data-slot="label" class="block font-medium text-default cursor-not-allowed">Option 3</label>
         <!--v-if-->
       </div>
     </div>

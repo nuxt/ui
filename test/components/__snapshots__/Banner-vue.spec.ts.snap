@@ -185,7 +185,7 @@ exports[`Banner > renders with neutral color correctly 1`] = `
 `;
 
 exports[`Banner > renders with target correctly 1`] = `
-"<div data-v-0fc735df="" class="banner relative z-50 w-full transition-colors bg-primary hover:bg-primary/90" data-slot="root"><a href="https://nuxt.com" tabindex="-1" target="_blank" class="focus:outline-none"><span data-v-0fc735df="" class="absolute inset-0" aria-hidden="true"></span></a>
+"<div data-v-0fc735df="" class="banner relative z-50 w-full transition-colors bg-primary hover:bg-primary/90" data-slot="root"><a href="https://nuxt.com" tabindex="-1" rel="noopener noreferrer" target="_blank" class="focus:outline-none"><span data-v-0fc735df="" class="absolute inset-0" aria-hidden="true"></span></a>
   <div data-v-0fc735df="" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
     <div data-v-0fc735df="" data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
     <div data-v-0fc735df="" data-slot="center" class="flex items-center gap-1.5 min-w-0">

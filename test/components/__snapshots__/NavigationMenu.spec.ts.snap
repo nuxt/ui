@@ -909,44 +909,34 @@ exports[`NavigationMenu > renders with neutral variant pill highlight neutral co
 
 exports[`NavigationMenu > renders with orientation vertical and collapsed correctly 1`] = `
 "<nav data-collapsed="true" data-slot="root" class="relative flex gap-1.5 [&amp;>div]:min-w-0 flex-col" aria-label="Main" data-orientation="vertical" dir="ltr" data-reka-navigation-menu="">
-  <div style="position: relative;">
-    <ul data-slot="list" class="isolate min-w-0" data-orientation="vertical">
-      <li data-menu-item="" data-slot="item" class="min-w-0"></li>
-      <li data-menu-item="" data-slot="item" class="min-w-0"><button type="button" data-reka-collection-item="" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted px-1.5 hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors"><span class="iconify i-lucide:book-open shrink-0 size-5 text-dimmed group-hover:text-default transition-colors" aria-hidden="true" data-slot="linkLeadingIcon"></span>
-          <!--v-if-->
-          <!--v-if-->
-        </button>
-        <!--v-if-->
-        <!--v-if-->
-      </li>
-      <li data-menu-item="" data-slot="item" class="min-w-0"><button type="button" data-reka-collection-item="" data-active="" aria-current="page" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 px-1.5 text-primary before:bg-elevated"><span class="iconify i-lucide:box shrink-0 size-5 text-primary group-data-[state=open]:text-primary" aria-hidden="true" data-slot="linkLeadingIcon"></span>
-          <!--v-if-->
-          <!--v-if-->
-        </button>
-        <!--v-if-->
-        <!--v-if-->
-      </li>
-    </ul>
-  </div>
+  <ul data-slot="list" class="isolate min-w-0">
+    <li data-menu-item="" data-slot="item" class="min-w-0"></li>
+    <li data-menu-item="" data-slot="item" class="min-w-0"><button type="button" data-reka-collection-item="" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted px-1.5 hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors"><span class="iconify i-lucide:book-open shrink-0 size-5 text-dimmed group-hover:text-default transition-colors" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate hidden">Documentation<!--v-if--></span><span as="span" data-slot="linkTrailing" class="group ms-auto gap-1.5 items-center hidden"><span data-slot="linkTrailingBadge" class="font-medium inline-flex items-center text-[10px]/3 px-1.5 py-1 gap-1 rounded-sm ring ring-inset ring-accented text-default bg-default shrink-0"><!--v-if--><span data-slot="label" class="truncate">10</span>
+        <!--v-if--></span><span class="iconify i-lucide:chevron-down size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="linkTrailingIcon"></span></span>
+      </button>
+      <!--v-if-->
+      <!--v-if-->
+    </li>
+    <li data-menu-item="" data-slot="item" class="min-w-0"><button type="button" data-reka-collection-item="" data-active="" aria-current="page" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 px-1.5 text-primary before:bg-elevated"><span class="iconify i-lucide:box shrink-0 size-5 text-primary group-data-[state=open]:text-primary" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate hidden">Components<!--v-if--></span><span as="span" data-slot="linkTrailing" class="group ms-auto gap-1.5 items-center hidden"><!--v-if--><span class="iconify i-lucide:chevron-down size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="linkTrailingIcon"></span></span></button>
+      <!--v-if-->
+      <!--v-if-->
+    </li>
+  </ul>
   <div data-slot="separator" class="px-2 h-px bg-border"></div>
-  <div style="position: relative;">
-    <ul data-slot="list" class="isolate min-w-0" data-orientation="vertical">
-      <li data-menu-item="" data-slot="item" class="min-w-0"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" data-reka-collection-item="" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted px-1.5 hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors"><span class="iconify i-simple-icons:github shrink-0 size-5 text-dimmed group-hover:text-default transition-colors" aria-hidden="true" data-slot="linkLeadingIcon"></span>
-          <!--v-if-->
-          <!--v-if-->
-        </a>
+  <ul data-slot="list" class="isolate min-w-0">
+    <li data-menu-item="" data-slot="item" class="min-w-0"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" data-reka-collection-item="" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted px-1.5 hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors"><span class="iconify i-simple-icons:github shrink-0 size-5 text-dimmed group-hover:text-default transition-colors" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate hidden">GitHub<span class="iconify i-lucide:arrow-up-right inline-block size-3 align-top text-dimmed" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
         <!--v-if-->
+      </a>
+      <!--v-if-->
+      <!--v-if-->
+    </li>
+    <li data-menu-item="" data-slot="item" class="min-w-0"><button type="button" disabled="" data-reka-collection-item="" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted cursor-not-allowed opacity-75 px-1.5"><span class="iconify i-lucide:circle-help shrink-0 size-5 text-dimmed" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate hidden">Help<!--v-if--></span>
         <!--v-if-->
-      </li>
-      <li data-menu-item="" data-slot="item" class="min-w-0"><button type="button" disabled="" data-reka-collection-item="" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted cursor-not-allowed opacity-75 px-1.5"><span class="iconify i-lucide:circle-help shrink-0 size-5 text-dimmed" aria-hidden="true" data-slot="linkLeadingIcon"></span>
-          <!--v-if-->
-          <!--v-if-->
-        </button>
-        <!--v-if-->
-        <!--v-if-->
-      </li>
-    </ul>
-  </div>
+      </button>
+      <!--v-if-->
+      <!--v-if-->
+    </li>
+  </ul>
   <!--v-if-->
   <!--v-if-->
 </nav>"

@@ -84,8 +84,9 @@ const { t } = useLocale()
 const { open } = useContentSearch()
 const appConfig = useAppConfig() as ContentSearchButton['AppConfig']
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearchButton || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearchButton || {}) })({
+  collapsed: props.collapsed
+}))
 </script>
 
 <template>
@@ -98,7 +99,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
         ...buttonProps,
         ...(collapsed ? {
           'square': true,
-          'label': undefined,
           'aria-label': label || t('contentSearchButton.label')
         } : {}),
         ...$attrs
@@ -111,7 +111,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
         <slot :name="name" v-bind="slotData" />
       </template>
 
-      <template v-if="!collapsed" #trailing="{ ui: uiProxy }">
+      <template #trailing="{ ui: uiProxy }">
         <div data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :ui="uiProxy">
             <template v-if="kbds?.length">
