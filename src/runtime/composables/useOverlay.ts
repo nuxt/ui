@@ -2,6 +2,7 @@ import type { Component } from 'vue'
 import { reactive, markRaw, shallowReactive } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
 import type { ComponentProps, ComponentEmit } from 'vue-component-type-helpers'
+import { kebabCase } from 'scule'
 
 /**
  * Workaround for TypeScript limitation with overloaded functions in conditional types.
@@ -95,15 +96,26 @@ type OverlayInstance<T extends Component> = Omit<ManagedOverlayOptionsPrivate<T>
   on<K extends EmitKeys<T>>(event: K, callback: (...args: EmitArgs<T, K>) => void): void
 }
 
-type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvePromise' | 'on'> & {
+type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'close' | 'onClose' | 'patch' | 'modelValue' | 'resolvePromise' | 'on'> & {
   result: Promise<CloseEventArgType<ComponentEmit<T>>>
 } & Promise<CloseEventArgType<ComponentEmit<T>>>
+
+function warnOnListeningEmitsFromProps(props?: Record<string, any>) {
+  const emitRegex = /^on([A-Z][a-zA-Z]*)$/
+  const hasListeningEmits = Object.keys(props || {}).filter(propName => emitRegex.test(propName)).length > 0
+  if (hasListeningEmits) {
+    const listeningEmits = Object.keys(props || {}).map(propName => propName.match(emitRegex)![1]!)
+    listeningEmits.forEach(emit => console.warn(`[@nuxt/ui] Usage of on${emit} as prop is deprecated. Please consider using on('${kebabCase(emit)}', callback) instead.`))
+  }
+}
 
 function _useOverlay() {
   const overlays = shallowReactive<Overlay[]>([])
 
   const create = <T extends Component>(component: T, _options?: OverlayOptions<ComponentProps<T>>): OverlayInstance<T> => {
     const { props, defaultOpen, destroyOnClose } = _options || {}
+
+    warnOnListeningEmitsFromProps(props)
 
     const id = Symbol(import.meta.dev ? 'useOverlay' : '')
 

@@ -168,6 +168,22 @@ describe('useOverlay', () => {
     expect(getModalById(overlay.overlays, modal.id).isOpen).toBe(false)
   })
 
+  it('should support deprecated onClose', () => {
+    const spy = vi.spyOn(console, 'warn')
+    const modal = overlay.create(MockModal, {
+      props: {
+        onClose() {
+          modal.close()
+        },
+        onSubmit() {
+          modal.close()
+        }
+      }
+    })
+    expect(spy).toHaveBeenCalledWith('[@nuxt/ui] Usage of onClose as prop is deprecated. Please consider using on(\'close\', callback) instead.')
+    expect(spy).toHaveBeenCalledWith('[@nuxt/ui] Usage of onSubmit as prop is deprecated. Please consider using on(\'submit\', callback) instead.')
+  })
+
   describe('listen to emits', () => {
     it('should listen to emits', () => {
       const modal = overlay.create(MockModal)
