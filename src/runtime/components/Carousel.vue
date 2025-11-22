@@ -226,14 +226,14 @@ watch(options, () => {
 function scrollPrev() {
   emblaApi.value?.scrollPrev()
 
-  if (typeof props.autoplay === 'boolean' || props.autoplay.stopOnInteraction === undefined || props.autoplay.stopOnInteraction) {
+  if (props.autoplay && (typeof props.autoplay === 'boolean' || props.autoplay.stopOnInteraction !== false)) {
     emblaApi.value?.plugins().autoplay?.stop()
   }
 }
 function scrollNext() {
   emblaApi.value?.scrollNext()
 
-  if (typeof props.autoplay === 'boolean' || props.autoplay.stopOnInteraction === undefined || props.autoplay.stopOnInteraction) {
+  if (props.autoplay && (typeof props.autoplay === 'boolean' || props.autoplay.stopOnInteraction !== false)) {
     emblaApi.value?.plugins().autoplay?.stop()
   }
 }
