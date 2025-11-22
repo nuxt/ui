@@ -4,6 +4,9 @@ import type { Content, EditorOptions } from '@tiptap/core'
 import type { Editor as TiptapEditor } from '@tiptap/vue-3'
 import type { StarterKitOptions } from '@tiptap/starter-kit'
 import type { PlaceholderOptions } from '@tiptap/extension-placeholder'
+import type { MarkdownExtensionOptions } from '@tiptap/markdown'
+import type { ImageOptions } from '@tiptap/extension-image'
+import type { MentionOptions } from '@tiptap/extension-mention'
 import theme from '#build/ui/editor'
 import type { EditorHandlers } from '../types/editor'
 import type { ComponentConfig } from '../types/tv'
@@ -37,7 +40,22 @@ export interface EditorProps<T extends Content = Content> extends Omit<Partial<E
    * Can be a string or PlaceholderOptions from `@tiptap/extension-placeholder`.
    * @see https://tiptap.dev/docs/editor/extensions/functionality/placeholder
    */
-  placeholder?: string | PlaceholderOptions
+  placeholder?: string | Partial<PlaceholderOptions>
+  /**
+   * The markdown extension options to configure markdown parsing and serialization.
+   * @see https://tiptap.dev/docs/editor/extensions/functionality/markdown
+   */
+  markdown?: Partial<MarkdownExtensionOptions>
+  /**
+   * The image extension options to configure image handling.
+   * @see https://tiptap.dev/docs/editor/extensions/nodes/image
+   */
+  image?: Partial<ImageOptions>
+  /**
+   * The mention extension options to configure mention handling.
+   * @see https://tiptap.dev/docs/editor/extensions/nodes/mention
+   */
+  mention?: Partial<MentionOptions>
   /**
    * Custom item handlers to override or extend the default handlers.
    * These handlers are provided to all child components (toolbar, suggestion menu, etc.).
@@ -88,7 +106,7 @@ const appConfig = useAppConfig() as Editor['AppConfig']
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editor || {}) })())
 
-const rootProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'editorProps', 'contentType', 'class', 'placeholder', 'handlers'))
+const rootProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'editorProps', 'contentType', 'class', 'placeholder', 'markdown', 'image', 'mention', 'handlers'))
 
 const editorProps = computed(() => defu(props.editorProps, {
   attributes: {
@@ -113,9 +131,24 @@ const starterKit = computed(() => defu(props.starterKit, {
     openOnClick: false
   }
 } as Partial<StarterKitOptions>))
+const placeholder = computed(() => defu(typeof props.placeholder === 'string' ? { placeholder: props.placeholder } : props.placeholder, {
+  showOnlyWhenEditable: false,
+  showOnlyCurrent: true
+} as Partial<PlaceholderOptions>))
+const markdown = computed(() => defu(props.markdown, {
+  markedOptions: {
+    gfm: true
+  }
+} as Partial<MarkdownExtensionOptions>))
+const image = computed(() => defu(props.image, {} as Partial<ImageOptions>))
+const mention = computed(() => defu(props.mention, {
+  HTMLAttributes: {
+    class: 'mention'
+  }
+} as Partial<MentionOptions>))
 
 const extensions = computed(() => [
-  contentType.value === 'markdown' && Markdown,
+  contentType.value === 'markdown' && Markdown.configure(markdown.value),
   StarterKit.configure(starterKit.value),
   HorizontalRule.extend({
     renderHTML() {
@@ -126,16 +159,9 @@ const extensions = computed(() => [
       ]
     }
   }),
-  Image,
-  props.placeholder && Placeholder.configure(defu(
-    typeof props.placeholder === 'string' ? { placeholder: props.placeholder } : props.placeholder,
-    { showOnlyWhenEditable: false, showOnlyCurrent: true } as PlaceholderOptions
-  )),
-  Mention.configure({
-    HTMLAttributes: {
-      class: 'mention'
-    }
-  }),
+  Image.configure(image.value),
+  props.placeholder && Placeholder.configure(placeholder.value),
+  Mention.configure(mention.value),
   ...(props.extensions || [])
 ].filter(extension => !!extension))
 

@@ -78,8 +78,44 @@ props:
 ---
 ::
 
+### Extensions
+
+The Editor includes the following extensions by default:
+
+- [**StarterKit**](#starter-kit) - Core editing features (bold, italic, headings, lists, etc.)
+- [**Placeholder**](#placeholder) - Show placeholder text (when placeholder prop is provided)
+- **Image** - Insert and display images
+- **Mention** - Add @ mentions support
+- **Markdown** - Parse and serialize markdown (when content type is markdown)
+
 ::note
-When using `markdown` content type, the Editor automatically includes the Markdown extension from TipTap.
+Each built-in extension can be configured using its corresponding prop (`starter-kit`, `placeholder`, `image`, `mention`, `markdown`) to customize its behavior with TipTap options.
+::
+
+You can use the `extensions` prop to add additional TipTap extensions to enhance the editor's capabilities:
+
+```vue
+<script setup lang="ts">
+import { Emoji } from '@tiptap/extension-emoji'
+import TextAlign from '@tiptap/extension-text-align'
+
+const content = ref('')
+</script>
+
+<template>
+  <UEditor
+    v-model="content"
+    :extensions="[
+      Emoji,
+      TextAlign.configure({ types: ['heading', 'paragraph'] })
+    ]"
+    placeholder="Type to add content..."
+  />
+</template>
+```
+
+::tip{to="#with-custom-extensions"}
+See the Examples section for how to add custom extensions like emoji picker, text alignment, and file uploads with custom UI.
 ::
 
 ### Placeholder
@@ -137,34 +173,6 @@ props:
 
 ::tip{to="https://tiptap.dev/docs/editor/extensions/functionality/starterkit#included-extensions" target="_blank"}
 The StarterKit includes extensions for bold, italic, strike, code, headings, lists, blockquotes, code blocks, horizontal rules, and more. Check the TipTap documentation for all available options.
-::
-
-### Extensions
-
-Use the `extensions` prop to add custom TipTap extensions to enhance the editor's capabilities. Extensions can add new features, modify behavior, or provide additional formatting options.
-
-```vue
-<script setup lang="ts">
-import { Emoji } from '@tiptap/extension-emoji'
-import TextAlign from '@tiptap/extension-text-align'
-
-const content = ref('')
-</script>
-
-<template>
-  <UEditor
-    v-model="content"
-    :extensions="[
-      Emoji,
-      TextAlign.configure({ types: ['heading', 'paragraph'] })
-    ]"
-    placeholder="Type to add content..."
-  />
-</template>
-```
-
-::tip{to="#with-custom-extensions"}
-See the Examples section for how to add custom extensions like emoji picker, text alignment, and file uploads with custom UI.
 ::
 
 ### Handlers
