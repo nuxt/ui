@@ -30,3 +30,6 @@ playgrounds/vue/auto-imports.d.ts
 playgrounds/vue/components.d.ts
 playgrounds/vue/tsconfig.app.tsbuildinfo
 playgrounds/vue/tsconfig.node.tsbuildinfo
+
+# Test snapshots
+__snapshots__/
