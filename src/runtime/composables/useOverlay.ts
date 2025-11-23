@@ -102,9 +102,14 @@ type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'clo
 
 function warnOnListeningEmitsFromProps(props?: Record<string, any>) {
   const emitRegex = /^on([A-Z][a-zA-Z]*)$/
-  const hasListeningEmits = Object.keys(props || {}).filter(propName => emitRegex.test(propName)).length > 0
-  if (hasListeningEmits) {
-    const listeningEmits = Object.keys(props || {}).map(propName => propName.match(emitRegex)![1]!)
+  const listeningEmits = Object.keys(props || {}).reduce<string[]>((acc, propName) => {
+    if (emitRegex.test(propName)) {
+      acc.push(propName.match(emitRegex)![1]!)
+    }
+    return acc
+  }, [])
+
+  if (listeningEmits.length > 0) {
     listeningEmits.forEach(emit => console.warn(`[@nuxt/ui] Usage of on${emit} as prop is deprecated. Please consider using on('${kebabCase(emit)}', callback) instead.`))
   }
 }
