@@ -60,6 +60,8 @@ const slots = defineSlots<FormFieldSlots>()
 
 const appConfig = useAppConfig() as FormField['AppConfig']
 
+const name = props.name ? (Array.isArray(props.name) ? props.name : [props.name]) : []
+
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.formField || {}) })({
   size: props.size,
   required: props.required
@@ -71,13 +73,15 @@ const error = computed(() => {
   if (props.error) return props.error
   if (!formErrors?.value) return undefined
 
-  if (props.name) {
-    if (Array.isArray(props.name)) {
-      return formErrors.value.find(error => props.name!.includes(error.name!) || (props.errorPattern && error.name?.match(props.errorPattern)))?.message
-    }
-    return formErrors.value.find(error => error.name === props.name || (props.errorPattern && error.name?.match(props.errorPattern)))?.message
+  function matchPattern(errorName: string) {
+    return props.errorPattern && errorName?.match(props.errorPattern)
   }
-  return undefined
+
+  return formErrors.value.find(error => (
+    !error.name // if no name is provided, it matches any error
+    || name.includes(error.name)
+    || matchPattern(error.name)
+  ))?.message
 })
 
 const id = ref(useId())
@@ -89,14 +93,10 @@ const formInputs = inject(formInputsInjectionKey, undefined)
 watch(
   id,
   () => {
-    if (formInputs && props.name) {
-      if (Array.isArray(props.name)) {
-        props.name.forEach((name) => {
-          formInputs.value[name] = { id: id.value, pattern: props.errorPattern }
-        })
-      } else {
-        formInputs.value[props.name] = { id: id.value, pattern: props.errorPattern }
-      }
+    if (formInputs && name?.length > 0) {
+      name.forEach((name) => {
+        formInputs.value[name] = { id: id.value, pattern: props.errorPattern }
+      })
     }
   },
   { immediate: true }
