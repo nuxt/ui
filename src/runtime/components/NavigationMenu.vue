@@ -400,7 +400,6 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
                     <ReuseItemTemplate
                       v-else
                       :item="childItem"
-                      :active="active || childItem.active"
                       :index="childIndex"
                       :level="level + 1"
                       with-label
