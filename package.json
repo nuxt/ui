@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "4.2.1",
-  "packageManager": "pnpm@10.22.0",
+  "packageManager": "pnpm@10.23.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -156,14 +156,14 @@
     "reka-ui": "2.6.0",
     "scule": "^1.3.0",
     "tailwind-merge": "^3.4.0",
-    "tailwind-variants": "^3.1.1",
+    "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.1.17",
     "tinyglobby": "^0.2.15",
-    "unplugin": "^2.3.10",
+    "unplugin": "^2.3.11",
     "unplugin-auto-import": "^20.2.0",
     "unplugin-vue-components": "^30.0.0",
     "vaul-vue": "0.4.1",
-    "vue-component-type-helpers": "^3.1.4"
+    "vue-component-type-helpers": "^3.1.5"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.10.0",
@@ -171,7 +171,7 @@
     "@nuxt/test-utils": "^3.20.1",
     "@release-it/conventional-changelog": "^10.0.2",
     "@vue/test-utils": "^2.4.6",
-    "ai": "^5.0.93",
+    "ai": "^5.0.101",
     "embla-carousel": "^8.6.0",
     "eslint": "^9.39.1",
     "happy-dom": "^20.0.10",
@@ -180,7 +180,7 @@
     "vitest": "^3.2.4",
     "vitest-axe": "^0.1.0",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^3.1.4"
+    "vue-tsc": "^3.1.5"
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7",
@@ -224,7 +224,7 @@
     "@nuxt/ui": "workspace:*",
     "debug": "4.3.7",
     "typescript": "5.8.3",
-    "unplugin": "^2.3.10"
+    "unplugin": "^2.3.11"
   },
   "keywords": [
     "nuxt-ui",
