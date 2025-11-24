@@ -260,12 +260,13 @@ const contentProps = toRef(() => props.content)
 const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as TooltipProps)
 const popoverProps = toRef(() => defu(typeof props.popover === 'boolean' ? {} : props.popover, { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }) as PopoverProps)
 
-const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean }>()
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number }>({
+const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean, withLabel?: boolean }>()
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number, withLabel?: boolean }>({
   props: {
     item: Object,
     index: Number,
-    level: Number
+    level: Number,
+    withLabel: Boolean
   }
 })
 
@@ -300,7 +301,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
 </script>
 
 <template>
-  <DefineLinkTemplate v-slot="{ item, active, index }">
+  <DefineLinkTemplate v-slot="{ item, active, index, withLabel }">
     <slot :name="((item.slot || 'item') as keyof NavigationMenuSlots<T>)" :item="item" :index="index" :active="active" :ui="ui">
       <slot :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
         <UAvatar v-if="item.avatar" :size="((item.ui?.linkLeadingAvatarSize || props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="linkLeadingAvatar" :class="ui.linkLeadingAvatar({ class: [props.ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active, disabled: !!item.disabled })" />
@@ -310,7 +311,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
       <span
         v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>]"
         data-slot="linkLabel"
-        :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })"
+        :class="ui.linkLabel({ collapsed: (withLabel && collapsed) ? false : collapsed, class: [props.ui?.linkLabel, item.ui?.linkLabel] })"
       >
         <slot :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index">
           {{ get(item, props.labelKey as string) }}
@@ -320,11 +321,11 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
       </span>
 
       <component
-        :is="orientation === 'vertical' && item.children?.length && !collapsed ? AccordionTrigger : 'span'"
+        :is="orientation === 'vertical' && item.children?.length && (!collapsed || withLabel) ? AccordionTrigger : 'span'"
         v-if="(item.badge || item.badge === 0) || (orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>]"
         as="span"
         data-slot="linkTrailing"
-        :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing] })"
+        :class="ui.linkTrailing({ collapsed: (withLabel && collapsed) ? false : collapsed, class: [props.ui?.linkTrailing, item.ui?.linkTrailing] })"
         @click.stop.prevent
       >
         <slot :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
@@ -345,26 +346,26 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
     </slot>
   </DefineLinkTemplate>
 
-  <DefineItemTemplate v-slot="{ item, index, level = 0 }">
+  <DefineItemTemplate v-slot="{ item, index, level = 0, withLabel }">
     <component
-      :is="(orientation === 'vertical' && !collapsed) ? AccordionItem : NavigationMenuItem"
+      :is="(orientation === 'vertical' && (!collapsed || withLabel)) ? AccordionItem : NavigationMenuItem"
       as="li"
       :value="item.value || (level > 0 ? `item-${level}-${index}` : `item-${index}`)"
     >
-      <div v-if="orientation === 'vertical' && item.type === 'label' && !collapsed" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
-        <ReuseLinkTemplate :item="item" :index="index" />
+      <div v-if="orientation === 'vertical' && item.type === 'label' && (!collapsed || withLabel)" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
+        <ReuseLinkTemplate :item="item" :index="index" :with-label="withLabel" />
       </div>
-      <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="(orientation === 'vertical' && item.children?.length && !collapsed && item.type === 'trigger') ? {} : pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)" custom>
+      <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="(orientation === 'vertical' && item.children?.length && (!collapsed || withLabel) && item.type === 'trigger') ? {} : pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)" custom>
         <component
-          :is="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) ? NavigationMenuTrigger : ((orientation === 'vertical' && item.children?.length && !collapsed && !(slotProps as any).href) ? AccordionTrigger : NavigationMenuLink)"
+          :is="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) ? NavigationMenuTrigger : ((orientation === 'vertical' && item.children?.length && (!collapsed || withLabel) && !(slotProps as any).href) ? AccordionTrigger : NavigationMenuLink)"
           as-child
           :active="active || item.active"
           :disabled="item.disabled"
           @select="item.onSelect"
         >
           <UPopover v-if="orientation === 'vertical' && collapsed && item.children?.length && (!!props.popover || !!item.popover)" v-bind="{ ...popoverProps, ...(typeof item.popover === 'boolean' ? {} : item.popover || {}) }" :ui="{ content: ui.content({ class: [props.ui?.content, item.ui?.content] }) }">
-            <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })">
-              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
+            <ULinkBase v-bind="slotProps" data-slot="link" :class="(withLabel ? ui.childLink : ui.link)({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })">
+              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" :with-label="withLabel" />
             </ULinkBase>
 
             <template #content="{ close }">
@@ -380,21 +381,31 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
                   <li data-slot="childLabel" :class="ui.childLabel({ class: [props.ui?.childLabel, item.ui?.childLabel] })">
                     {{ get(item, props.labelKey as string) }}
                   </li>
-                  <li v-for="(childItem, childIndex) in item.children" :key="childIndex" data-slot="childItem" :class="ui.childItem({ class: [props.ui?.childItem, item.ui?.childItem] })">
-                    <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
-                      <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
-                        <ULinkBase v-bind="childSlotProps" data-slot="childLink" :class="ui.childLink({ class: [props.ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })">
-                          <UIcon v-if="childItem.icon" :name="childItem.icon" data-slot="childLinkIcon" :class="ui.childLinkIcon({ class: [props.ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })" />
+                  <template v-for="(childItem, childIndex) in item.children" :key="childIndex">
+                    <li v-if="!childItem.children?.length" data-slot="childItem" :class="ui.childItem({ class: [props.ui?.childItem, item.ui?.childItem] })">
+                      <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
+                        <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
+                          <ULinkBase v-bind="childSlotProps" data-slot="childLink" :class="ui.childLink({ class: [props.ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })">
+                            <UIcon v-if="childItem.icon" :name="childItem.icon" data-slot="childLinkIcon" :class="ui.childLinkIcon({ class: [props.ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })" />
 
-                          <span data-slot="childLinkLabel" :class="ui.childLinkLabel({ class: [props.ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })">
-                            {{ get(childItem, props.labelKey as string) }}
+                            <span data-slot="childLinkLabel" :class="ui.childLinkLabel({ class: [props.ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })">
+                              {{ get(childItem, props.labelKey as string) }}
 
-                            <UIcon v-if="childItem.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" data-slot="childLinkLabelExternalIcon" :class="ui.childLinkLabelExternalIcon({ class: [props.ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })" />
-                          </span>
-                        </ULinkBase>
-                      </NavigationMenuLink>
-                    </ULink>
-                  </li>
+                              <UIcon v-if="childItem.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" data-slot="childLinkLabelExternalIcon" :class="ui.childLinkLabelExternalIcon({ class: [props.ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })" />
+                            </span>
+                          </ULinkBase>
+                        </NavigationMenuLink>
+                      </ULink>
+                    </li>
+                    <ReuseItemTemplate
+                      v-else
+                      :item="childItem"
+                      :active="active || childItem.active"
+                      :index="childIndex"
+                      :level="level + 1"
+                      with-label
+                    />
+                  </template>
                 </ul>
               </slot>
             </template>

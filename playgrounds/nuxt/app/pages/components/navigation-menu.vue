@@ -14,9 +14,9 @@ const attrs = reactive({
 
 const highlight = ref(true)
 const highlightColor = ref()
-const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
+const orientation = ref('vertical' as keyof typeof theme.variants.orientation)
 const contentOrientation = ref('horizontal' as keyof typeof theme.variants.contentOrientation)
-const collapsed = ref(false)
+const collapsed = ref(true)
 const arrow = ref(false)
 
 const items = [
@@ -50,12 +50,57 @@ const items = [
     to: '/components/navigation-menu',
     type: 'trigger',
     active: true,
+    popover: {
+      mode: 'click'
+    },
     defaultOpen: true,
     children: [{
       label: 'Link',
       icon: 'i-lucide-link',
       description: 'Use NuxtLink with superpowers.',
-      to: '/components/link'
+      to: '/components/link',
+      children: [{
+        label: 'Button',
+        icon: 'i-lucide-square',
+        description: 'Display a modal dialog overlay for important content.',
+        to: '/components/modal'
+      }, {
+        label: 'Pagination',
+        icon: 'i-lucide-parking-meter',
+        description: 'Display a list of pages.',
+        to: '/components/pagination'
+      }, {
+        label: 'Popover',
+        icon: 'i-lucide-message-circle',
+        description: 'Display a non-modal dialog that floats around a trigger element.',
+        to: '/components/popover',
+        children: [{
+          label: 'Button',
+          icon: 'i-lucide-square',
+          description: 'Display a modal dialog overlay for important content.',
+          to: '/components/modal'
+        }, {
+          label: 'Pagination',
+          icon: 'i-lucide-parking-meter',
+          description: 'Display a list of pages.',
+          to: '/components/pagination'
+        }, {
+          label: 'Popover',
+          icon: 'i-lucide-message-circle',
+          description: 'Display a non-modal dialog that floats around a trigger element.',
+          to: '/components/popover'
+        }, {
+          label: 'Progress',
+          icon: 'i-lucide-loader',
+          description: 'Show a horizontal bar to indicate task progression.',
+          to: '/components/progress'
+        }]
+      }, {
+        label: 'Progress',
+        icon: 'i-lucide-loader',
+        description: 'Show a horizontal bar to indicate task progression.',
+        to: '/components/progress'
+      }]
     }, {
       label: 'Modal',
       icon: 'i-lucide-square',
