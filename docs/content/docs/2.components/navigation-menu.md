@@ -373,15 +373,16 @@ props:
           - label: Installation
             description: Learn how to install and configure Nuxt UI in your application.
             icon: i-lucide-cloud-download
-          - label: 'Icons'
-            icon: 'i-lucide-smile'
-            description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
-          - label: 'Colors'
-            icon: 'i-lucide-swatch-book'
-            description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
           - label: 'Theme'
             icon: 'i-lucide-cog'
             description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+            children:
+              - label: 'Icons'
+                icon: 'i-lucide-smile'
+                description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+              - label: 'Colors'
+                icon: 'i-lucide-swatch-book'
+                description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
       - label: Composables
         icon: i-lucide-database
         children:
