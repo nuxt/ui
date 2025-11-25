@@ -13,7 +13,7 @@ export interface FloatingUIOptions {
   inline?: InlineOptions | boolean
 }
 
-export type EditorHandlers = Record<EditorItem['kind'], EditorHandler>
+export type EditorHandlers = Record<EditorItem['kind'], EditorHandler> & Record<string, EditorHandler>
 
 export interface EditorHandler {
   canExecute: (editor: Editor, cmd?: any) => boolean
