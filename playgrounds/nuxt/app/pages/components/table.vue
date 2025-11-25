@@ -2,6 +2,7 @@
 import { h, resolveComponent } from 'vue'
 import { upperFirst } from 'scule'
 import type { TableColumn, TableRow } from '@nuxt/ui'
+import type { Column } from '@tanstack/vue-table'
 import { getPaginationRowModel } from '@tanstack/vue-table'
 import { useClipboard, refDebounced } from '@vueuse/core'
 
@@ -25,17 +26,21 @@ const table = useTemplateRef('table')
 
 const virtualize = ref(false)
 
-const data = useState<Payment[]>('data', () => Array.from({ length: 1000 }, (_, i) => {
-  const statuses: Payment['status'][] = ['paid', 'failed', 'refunded']
-  const domains = ['gmail.com', 'outlook.com', 'yahoo.com', 'company.com', 'mail.com']
-  const firstNames = ['john', 'jane', 'alex', 'sarah', 'mike', 'emma', 'david', 'lisa', 'chris', 'anna']
-  const lastNames = ['smith', 'johnson', 'williams', 'brown', 'jones', 'garcia', 'miller', 'davis', 'rodriguez', 'martinez']
+const statuses: Payment['status'][] = ['paid', 'failed', 'refunded']
+const domains = ['gmail.com', 'outlook.com', 'yahoo.com', 'company.com', 'mail.com']
+const firstNames = ['john', 'jane', 'alex', 'sarah', 'mike', 'emma', 'david', 'lisa', 'chris', 'anna']
+const lastNames = ['smith', 'johnson', 'williams', 'brown', 'jones', 'garcia', 'miller', 'davis', 'rodriguez', 'martinez']
 
+const data = useState<Payment[]>('data', () => Array.from({ length: 1000 }, (_, i) => {
+  const firstName = firstNames[i % firstNames.length]!
+  const lastName = lastNames[i % lastNames.length]!
   return {
     id: `${45800 - i}`,
     date: new Date(Date.now() - i * 3600000 * 2).toISOString(),
+    firstName,
+    lastName,
     status: statuses[i % statuses.length]!,
-    email: `${firstNames[i % firstNames.length]}.${lastNames[i % lastNames.length]}${i > 100 ? Math.floor(i / 10) : ''}@${domains[i % domains.length]}`,
+    email: `${firstName}.${lastName}${i > 100 ? Math.floor(i / 10) : ''}@${domains[i % domains.length]}`,
     amount: Math.floor(Math.random() * 900) + 100
   }
 }))
@@ -84,11 +89,13 @@ const columns: TableColumn<Payment>[] = [{
     'aria-label': 'Select row'
   }),
   enableSorting: false,
-  enableHiding: false
+  enableHiding: false,
+  size: 32
 }, {
   accessorKey: 'id',
-  header: '#',
-  cell: ({ row }) => `#${row.getValue('id')}`
+  header: ({ column }) => getPinnedHeader(column, '#', 'left'),
+  cell: ({ row }) => `#${row.getValue('id')}`,
+  size: 84
 }, {
   accessorKey: 'date',
   header: 'Date',
@@ -109,7 +116,7 @@ const columns: TableColumn<Payment>[] = [{
   }
 }, {
   accessorKey: 'status',
-  header: 'Status',
+  header: ({ column }) => getPinnedHeader(column, 'Status', 'left'),
   cell: ({ row }) => {
     const color = ({
       paid: 'success' as const,
@@ -118,7 +125,18 @@ const columns: TableColumn<Payment>[] = [{
     })[row.getValue('status') as string]
 
     return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
-  }
+  },
+  size: 102
+}, {
+  accessorKey: 'firstName',
+  header: ({ column }) => getPinnedHeader(column, 'First Name', 'left'),
+  cell: ({ row }) => h('div', { class: 'capitalize' }, row.getValue('firstName')),
+  size: 128
+}, {
+  accessorKey: 'lastName',
+  header: ({ column }) => getPinnedHeader(column, 'Last Name', 'left'),
+  cell: ({ row }) => h('div', { class: 'capitalize' }, row.getValue('lastName')),
+  size: 128
 }, {
   accessorKey: 'email',
   header: ({ column }) => {
@@ -136,7 +154,7 @@ const columns: TableColumn<Payment>[] = [{
   cell: ({ row }) => h('div', { class: 'lowercase' }, row.getValue('email'))
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: ({ column }) => h('div', { class: 'text-right' }, getPinnedHeader(column, 'Amount', 'right')),
   footer: ({ column }) => {
     const total = column.getFacetedRowModel().rows.reduce((acc: number, row: TableRow<Payment>) => acc + Number.parseFloat(row.getValue('amount')), 0)
 
@@ -156,7 +174,8 @@ const columns: TableColumn<Payment>[] = [{
     }).format(amount)
 
     return h('div', { class: 'text-right font-medium' }, formatted)
-  }
+  },
+  size: 117
 }, {
   id: 'actions',
   enableHiding: false,
@@ -174,12 +193,28 @@ const columns: TableColumn<Payment>[] = [{
       'class': 'ms-auto',
       'aria-label': 'Actions dropdown'
     })))
-  }
+  },
+  size: 64
 }]
+
+function getPinnedHeader(column: Column<Payment>, label: string, position: 'left' | 'right') {
+  const isPinned = column.getIsPinned()
+
+  return h(UButton, {
+    color: 'neutral',
+    variant: 'ghost',
+    label,
+    icon: isPinned ? 'i-lucide-pin-off' : 'i-lucide-pin',
+    class: '-mx-2.5',
+    onClick() {
+      column.pin(isPinned === position ? false : position)
+    }
+  })
+}
 
 const loading = ref(true)
 const columnPinning = ref({
-  left: [],
+  left: ['select'],
   right: ['actions']
 })
 
@@ -290,9 +325,9 @@ onMounted(() => {
       <UTable
         ref="table"
         :key="String(virtualize)"
+        v-model:column-pinning="columnPinning"
         :data="data"
         :columns="columns"
-        :column-pinning="columnPinning"
         :row-selection="rowSelection"
         :loading="loading"
         :virtualize="virtualize"
@@ -301,9 +336,6 @@ onMounted(() => {
           pagination,
           paginationOptions: {
             getPaginationRowModel: getPaginationRowModel()
-          },
-          ui: {
-            tr: 'divide-x divide-default'
           }
         }"
         sticky
@@ -338,6 +370,7 @@ onMounted(() => {
 
       <div class="flex items-center gap-1.5">
         <UPagination
+          :disabled="!!virtualize"
           :page="(table?.tableApi?.getState().pagination.pageIndex ?? 0) + 1"
           :items-per-page="table?.tableApi?.getState().pagination.pageSize ?? 10"
           :total="table?.tableApi?.getFilteredRowModel().rows.length || 0"
