@@ -329,7 +329,7 @@ const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
 const tableProps = useForwardProps(reactivePick(props, '_features', 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'))
 
 const tableApi = useVueTable({
-  ...tableProps,
+  ...tableProps.value,
   get data() {
     return data.value
   },
