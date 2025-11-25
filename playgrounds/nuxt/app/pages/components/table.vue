@@ -220,7 +220,7 @@ const columnPinning = ref({
 
 const pagination = ref({
   pageIndex: 0,
-  pageSize: 10
+  pageSize: 50
 })
 
 function addElement() {
@@ -325,9 +325,9 @@ onMounted(() => {
       <UTable
         ref="table"
         :key="String(virtualize)"
-        v-model:column-pinning="columnPinning"
         :data="data"
         :columns="columns"
+        :column-pinning="columnPinning"
         :row-selection="rowSelection"
         :loading="loading"
         :virtualize="virtualize"
