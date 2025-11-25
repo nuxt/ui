@@ -249,6 +249,9 @@ function getButtonProps(item: EditorToolbarItem) {
     if (activeChild?.icon) {
       baseProps.icon = activeChild.icon
     }
+    if (activeChild?.label && baseProps.label !== undefined) {
+      baseProps.label = activeChild.label
+    }
   }
 
   return defu(baseProps, {
