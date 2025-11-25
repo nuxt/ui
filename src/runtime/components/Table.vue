@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { Ref, WatchOptions, ComponentPublicInstance } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { Cell, Header, RowData, TableMeta } from '@tanstack/table-core'
+import type { Cell, Column, Header, RowData, TableMeta } from '@tanstack/table-core'
 import type {
   CellContext,
   ColumnDef,
@@ -486,6 +486,19 @@ function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T |
   return prop
 }
 
+function getColumnStyles(column: Column<T>): Record<string, string> {
+  const styles: Record<string, string> = {}
+
+  const pinned = column.getIsPinned()
+  if (pinned === 'left') {
+    styles.left = `${column.getStart('left')}px`
+  } else if (pinned === 'right') {
+    styles.right = `${column.getAfter('right')}px`
+  }
+
+  return styles
+}
+
 watch(() => props.data, () => {
   data.value = props.data ? [...props.data] : []
 }, props.watchOptions)
@@ -534,7 +547,10 @@ defineExpose({
           ],
           pinned: !!cell.column.getIsPinned()
         })"
-        :style="resolveValue(cell.column.columnDef.meta?.style?.td, cell)"
+        :style="[
+          getColumnStyles(cell.column),
+          resolveValue(cell.column.columnDef.meta?.style?.td, cell)
+        ]"
       >
         <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
           <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
@@ -574,7 +590,10 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
-            :style="resolveValue(header.column.columnDef.meta?.style?.th, header)"
+            :style="[
+              getColumnStyles(header.column),
+              resolveValue(header.column.columnDef.meta?.style?.th, header)
+            ]"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
@@ -648,7 +667,10 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
-            :style="resolveValue(header.column.columnDef.meta?.style?.th, header)"
+            :style="[
+              getColumnStyles(header.column),
+              resolveValue(header.column.columnDef.meta?.style?.th, header)
+            ]"
           >
             <slot :name="`${header.id}-footer`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.footer" :props="header.getContext()" />
