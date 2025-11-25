@@ -60,7 +60,7 @@ const customHandlers: Partial<EditorHandlers> = {
   }
 }
 
-const toolbarItems = [[{
+const fixedToolbarItems = [[{
   kind: 'undo',
   icon: 'i-lucide-undo'
 }, {
@@ -165,7 +165,114 @@ const toolbarItems = [[{
   }]
 }]] satisfies EditorToolbarItem[][]
 
-const imageItems = (editor: Editor): EditorToolbarItem[][] => {
+const floatingToolbarItems = [[{
+  label: 'Turn into',
+  trailingIcon: 'i-lucide-chevron-down',
+  activeColor: 'neutral',
+  content: {
+    align: 'start'
+  },
+  ui: {
+    label: 'text-xs'
+  },
+  items: [{
+    type: 'label',
+    label: 'Turn into'
+  }, {
+    kind: 'paragraph',
+    label: 'Paragraph',
+    icon: 'i-lucide-type'
+  }, {
+    kind: 'heading',
+    level: 1,
+    icon: 'i-lucide-heading-1',
+    label: 'Heading 1'
+  }, {
+    kind: 'heading',
+    level: 2,
+    icon: 'i-lucide-heading-2',
+    label: 'Heading 2'
+  }, {
+    kind: 'heading',
+    level: 3,
+    icon: 'i-lucide-heading-3',
+    label: 'Heading 3'
+  }, {
+    kind: 'heading',
+    level: 4,
+    icon: 'i-lucide-heading-4',
+    label: 'Heading 4'
+  }, {
+    kind: 'bulletList',
+    icon: 'i-lucide-list',
+    label: 'Bullet List'
+  }, {
+    kind: 'orderedList',
+    icon: 'i-lucide-list-ordered',
+    label: 'Ordered List'
+  }, {
+    kind: 'blockquote',
+    icon: 'i-lucide-text-quote',
+    label: 'Blockquote'
+  }, {
+    kind: 'codeBlock',
+    icon: 'i-lucide-square-code',
+    label: 'Code Block'
+  }]
+}], [{
+  kind: 'mark',
+  mark: 'bold',
+  icon: 'i-lucide-bold'
+}, {
+  kind: 'mark',
+  mark: 'italic',
+  icon: 'i-lucide-italic'
+}, {
+  kind: 'mark',
+  mark: 'underline',
+  icon: 'i-lucide-underline'
+}, {
+  kind: 'mark',
+  mark: 'strike',
+  icon: 'i-lucide-strikethrough'
+}, {
+  kind: 'mark',
+  mark: 'code',
+  icon: 'i-lucide-code'
+}], [{
+  slot: 'link' as const
+}, {
+  kind: 'image',
+  icon: 'i-lucide-image'
+}], [{
+  icon: 'i-lucide-align-justify',
+  content: {
+    align: 'end'
+  },
+  items: [{
+    kind: 'textAlign',
+    align: 'left',
+    icon: 'i-lucide-align-left',
+    label: 'Align Left'
+  }, {
+    kind: 'textAlign',
+    align: 'center',
+    icon: 'i-lucide-align-center',
+    label: 'Align Center'
+  }, {
+    kind: 'textAlign',
+    align: 'right',
+    icon: 'i-lucide-align-right',
+    label: 'Align Right'
+  }, {
+    kind: 'textAlign',
+    align: 'justify',
+    icon: 'i-lucide-align-justify',
+    label: 'Align Justify'
+  }]
+}]] satisfies EditorToolbarItem[][]
+
+const imageToolbarItems = (editor: Editor): EditorToolbarItem[][] => {
   const node = editor.state.doc.nodeAt(editor.state.selection.from)
 
   return [[{
@@ -374,11 +481,17 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
     ]"
     :handlers="customHandlers"
     placeholder="Write, type '/' for commands..."
-    :ui="{ base: 'sm:px-14 py-9.5' }"
+    :ui="{ base: 'px-4 sm:px-18 py-13.5' }"
   >
+    <UEditorToolbar :editor="editor" :items="fixedToolbarItems" class="border-b border-accented sticky top-0 inset-x-0 px-4 sm:px-18 z-1">
+      <template #link>
+        <EditorLinkPopover :editor="editor" auto-open />
+      </template>
+    </UEditorToolbar>
+
     <UEditorToolbar
       :editor="editor"
-      :items="toolbarItems"
+      :items="floatingToolbarItems"
       layout="bubble"
       :should-show="({ editor, view, state }) => {
         if (editor.isActive('imageUpload') || editor.isActive('image')) {
@@ -395,7 +508,7 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
 
     <UEditorToolbar
       :editor="editor"
-      :items="imageItems(editor)"
+      :items="imageToolbarItems(editor)"
       layout="bubble"
       :should-show="({ editor, view }) => {
         return editor.isActive('image') && view.hasFocus()

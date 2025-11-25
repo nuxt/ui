@@ -19,8 +19,9 @@ The Editor component provides a powerful rich text editing experience built on T
 ::component-example
 ---
 source: false
+elevated: true
 name: 'editor-example'
-class: 'relative h-176 overflow-y-auto'
+class: 'relative h-176 overflow-y-auto !p-0'
 ---
 ::
 
@@ -34,6 +35,7 @@ Use the `v-model` directive to control the value of the Editor.
 
 ::component-code
 ---
+elevated: true
 prettier: true
 ignore:
   - modelValue
@@ -42,11 +44,25 @@ external:
   - modelValue
 class: 'min-h-80'
 props:
-  contentType: 'markdown'
-  modelValue: |
-    # Hello World
-
-    This is a **rich text** editor.
+  modelValue:
+    type: 'doc'
+    content:
+      - type: 'heading'
+        attrs:
+          level: 1
+        content:
+          - type: 'text'
+            text: 'Hello World'
+      - type: 'paragraph'
+        content:
+          - type: 'text'
+            text: 'This is a '
+          - type: 'text'
+            marks:
+              - type: 'bold'
+            text: 'rich text'
+          - type: 'text'
+            text: ' editor.'
   class: 'w-full'
 ---
 ::
