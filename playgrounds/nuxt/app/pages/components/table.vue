@@ -18,6 +18,8 @@ type Payment = {
   id: string
   date: string
   status: 'paid' | 'failed' | 'refunded'
+  firstName: string
+  lastName: string
   email: string
   amount: number
 }
@@ -31,21 +33,23 @@ const domains = ['gmail.com', 'outlook.com', 'yahoo.com', 'company.com', 'mail.c
 const firstNames = ['john', 'jane', 'alex', 'sarah', 'mike', 'emma', 'david', 'lisa', 'chris', 'anna']
 const lastNames = ['smith', 'johnson', 'williams', 'brown', 'jones', 'garcia', 'miller', 'davis', 'rodriguez', 'martinez']
 
-const data = useState<Payment[]>('data', () => Array.from({ length: 1000 }, (_, i) => {
+function makeData(id: number | string, index?: number): Payment {
+  const i = index ?? Number(id)
   const firstName = firstNames[i % firstNames.length]!
   const lastName = lastNames[i % lastNames.length]!
+
   return {
-    id: `${45800 - i}`,
-    date: new Date(Date.now() - i * 3600000 * 2).toISOString(),
+    id: id.toString(),
+    date: index !== undefined ? new Date(Date.now() - index * 3600000 * 2).toISOString() : new Date().toISOString(),
     firstName,
     lastName,
     status: statuses[i % statuses.length]!,
     email: `${firstName}.${lastName}${i > 100 ? Math.floor(i / 10) : ''}@${domains[i % domains.length]}`,
     amount: Math.floor(Math.random() * 900) + 100
   }
-}))
+}
 
-const currentID = ref(4601)
+const data = useState<Payment[]>('data', () => Array.from({ length: 1000 }, (_, i) => makeData(45800 - i, i)))
 
 function getRowItems(row: TableRow<Payment>) {
   return [{
@@ -224,14 +228,8 @@ const pagination = ref({
 })
 
 function addElement() {
-  data.value.unshift({
-    id: currentID.value.toString(),
-    date: new Date().toISOString(),
-    status: 'paid',
-    email: 'new@example.com',
-    amount: Math.random() * 1000
-  })
-  currentID.value++
+  const maxId = Math.max(...data.value.map(item => Number(item.id)))
+  data.value.unshift(makeData(maxId + 1))
 }
 
 function randomize() {
