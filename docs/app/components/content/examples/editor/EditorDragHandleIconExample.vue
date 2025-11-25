@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import type { EditorContent } from '@nuxt/ui'
-
-const content = ref<EditorContent>({
+const value = ref({
   type: 'doc',
   content: [{
     type: 'paragraph',
@@ -14,7 +12,7 @@ const content = ref<EditorContent>({
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="content" content-type="markdown" placeholder="Start typing...">
+  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Start typing...">
     <UEditorDragHandle :editor="editor" icon="i-lucide-move" />
   </UEditor>
 </template>

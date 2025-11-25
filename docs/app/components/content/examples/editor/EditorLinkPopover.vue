@@ -105,40 +105,38 @@ function handleKeyDown(event: KeyboardEvent) {
         placeholder="Paste a link..."
         @keydown="handleKeyDown"
       >
-        <template #trailing>
-          <div class="flex items-center mr-0.5">
-            <UButton
-              icon="i-lucide-corner-down-left"
-              variant="ghost"
-              size="sm"
-              :disabled="!url && !active"
-              title="Apply link"
-              @click="setLink"
-            />
+        <div class="flex items-center mr-0.5">
+          <UButton
+            icon="i-lucide-corner-down-left"
+            variant="ghost"
+            size="sm"
+            :disabled="!url && !active"
+            title="Apply link"
+            @click="setLink"
+          />
 
-            <USeparator orientation="vertical" class="h-6 mx-1" />
+          <USeparator orientation="vertical" class="h-6 mx-1" />
 
-            <UButton
-              icon="i-lucide-external-link"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              :disabled="!url && !active"
-              title="Open in new window"
-              @click="openLink"
-            />
+          <UButton
+            icon="i-lucide-external-link"
+            color="neutral"
+            variant="ghost"
+            size="sm"
+            :disabled="!url && !active"
+            title="Open in new window"
+            @click="openLink"
+          />
 
-            <UButton
-              icon="i-lucide-trash"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              :disabled="!url && !active"
-              title="Remove link"
-              @click="removeLink"
-            />
-          </div>
-        </template>
+          <UButton
+            icon="i-lucide-trash"
+            color="neutral"
+            variant="ghost"
+            size="sm"
+            :disabled="!url && !active"
+            title="Remove link"
+            @click="removeLink"
+          />
+        </div>
       </UInput>
     </template>
   </UPopover>

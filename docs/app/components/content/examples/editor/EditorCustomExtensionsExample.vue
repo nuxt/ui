@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { EditorContent, EditorToolbarItem, EditorEmojiMenuItem } from '@nuxt/ui'
+import type { EditorToolbarItem, EditorEmojiMenuItem } from '@nuxt/ui'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import TextAlign from '@tiptap/extension-text-align'
 
-const content = ref<EditorContent>(`This editor includes custom extensions for emoji picker and text alignment.
+const value = ref(`This editor includes custom extensions for emoji picker and text alignment.
 
 Type : to add emojis or use the alignment buttons in the toolbar.`)
 
@@ -35,7 +35,7 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
 <template>
   <UEditor
     v-slot="{ editor }"
-    v-model="content"
+    v-model="value"
     :extensions="[
       Emoji,
       TextAlign.configure({ types: ['heading', 'paragraph'] })

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { EditorContent, EditorToolbarItem } from '@nuxt/ui'
+import type { EditorToolbarItem } from '@nuxt/ui'
 
-const content = ref<EditorContent>(`# Document Title
+const value = ref(`# Document Title
 
 The toolbar is fixed in the navbar above, providing consistent access to formatting tools.`)
 
@@ -37,7 +37,7 @@ const toolbarItems: EditorToolbarItem[][] = [[{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="content" content-type="markdown" placeholder="Start typing...">
+  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Start typing...">
     <div class="border border-[var(--ui-border)] rounded-lg overflow-hidden">
       <div class="bg-[var(--ui-bg-elevated)] border-b border-[var(--ui-border)] p-2">
         <UEditorToolbar :editor="editor" :items="toolbarItems" />

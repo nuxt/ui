@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { EditorContent, EditorCustomHandlers, EditorToolbarItem } from '@nuxt/ui'
+import type { EditorCustomHandlers, EditorToolbarItem } from '@nuxt/ui'
 import type { Editor } from '@tiptap/vue-3'
 
-const content = ref<EditorContent>(`This editor has a custom handler for the bold command that also adds a notification.
+const value = ref(`This editor has a custom handler for the bold command that also adds a notification.
 
 Try clicking the bold button!`)
 
@@ -39,7 +39,7 @@ const toolbarItems = [[{
 <template>
   <UEditor
     v-slot="{ editor }"
-    v-model="content"
+    v-model="value"
     :handlers="customHandlers"
     content-type="markdown"
     placeholder="Start typing..."

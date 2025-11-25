@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { EditorContent, EditorCustomHandlers, EditorToolbarItem } from '@nuxt/ui'
+import type { EditorCustomHandlers, EditorToolbarItem } from '@nuxt/ui'
 import type { Editor } from '@tiptap/vue-3'
 import { ImageUpload } from '~/utils/editor/image-upload'
 
-const content = ref<EditorContent>(`This editor includes a custom ImageUpload extension with custom handlers.
+const value = ref(`This editor includes a custom ImageUpload extension with custom handlers.
 
 Click the image button to upload a file. The extension uses a custom Vue component to handle the file upload process.`)
 
@@ -33,7 +33,7 @@ const toolbarItems = [[{
 <template>
   <UEditor
     v-slot="{ editor }"
-    v-model="content"
+    v-model="value"
     :extensions="[ImageUpload]"
     :handlers="customHandlers"
     content-type="markdown"

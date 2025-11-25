@@ -18,7 +18,7 @@ Type `@` followed by a name to search and insert mentions into your content.
 ::component-example
 ---
 collapse: true
-name: 'editor-mention-menu-basic-example'
+name: 'editor-mention-menu-example'
 class: 'min-h-80'
 ---
 ::
@@ -58,18 +58,6 @@ Use the `char` prop to change the trigger character. Defaults to `@`.
 ---
 collapse: true
 name: 'editor-mention-menu-char-example'
-class: 'min-h-80'
----
-::
-
-### Limit
-
-Use the `limit` prop to set the maximum number of items shown in the menu.
-
-::component-example
----
-collapse: true
-name: 'editor-mention-menu-limit-example'
 class: 'min-h-80'
 ---
 ::

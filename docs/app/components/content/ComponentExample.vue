@@ -155,7 +155,7 @@ const urlSearchParams = computed(() => {
 <template>
   <div ref="el" class="my-5" :style="{ '--ui-header-height': '4rem' }">
     <template v-if="preview">
-      <div class="border border-muted relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden || props.elevated }]">
+      <div class="border border-muted relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
         <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-muted">
           <slot name="options" />
 
@@ -212,9 +212,9 @@ const urlSearchParams = computed(() => {
           v-bind="typeof iframe === 'object' ? iframe : {}"
           :src="`/examples/${name}?${urlSearchParams}`"
           class="relative w-full"
-          :class="[props.class, { 'bg-neutral-50 dark:bg-neutral-950/50': props.elevated }, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
+          :class="[props.class, { 'bg-neutral-50 dark:bg-neutral-950/50 rounded-t-md': props.elevated }, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
         />
-        <div v-else class="flex justify-center p-4" :class="[props.class, { 'bg-neutral-50 dark:bg-neutral-950/50': props.elevated }]">
+        <div v-else class="flex justify-center p-4" :class="[props.class, { 'bg-neutral-50 dark:bg-neutral-950/50 rounded-t-md': props.elevated }]">
           <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
         </div>
       </div>

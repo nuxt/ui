@@ -18,7 +18,7 @@ Use it to add a draggable handle that appears on hover, allowing users to reorde
 ::component-example
 ---
 collapse: true
-name: 'editor-drag-handle-basic-example'
+name: 'editor-drag-handle-example'
 class: 'min-h-80'
 ---
 ::

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { EditorContent, EditorCustomHandlers, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, DropdownMenuItem } from '@nuxt/ui'
+import type { EditorCustomHandlers, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, DropdownMenuItem } from '@nuxt/ui'
 import type { Editor } from '@tiptap/vue-3'
 import { upperFirst } from 'scule'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
@@ -8,7 +8,7 @@ import TextAlign from '@tiptap/extension-text-align'
 import { ImageUpload } from '~/utils/editor/image-upload'
 import EditorLinkPopover from './EditorLinkPopover.vue'
 
-const content = ref<EditorContent>(`# Building Modern Interfaces with Nuxt UI
+const value = ref(`# Building Modern Interfaces with Nuxt UI
 
 Welcome to the **Nuxt UI Editor** — a powerful rich text editing experience built on [TipTap](https://tiptap.dev). This editor combines *flexibility* with ease of use, making content creation a breeze.
 
@@ -43,7 +43,7 @@ Perfect for technical documentation:
 
 \`\`\`
 <template>
-  <UEditor v-model="content" content-type="markdown" />
+  <UEditor v-model="value" content-type="markdown" />
 </template>
 \`\`\`
 
@@ -472,7 +472,7 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
 <template>
   <UEditor
     v-slot="{ editor, handlers }"
-    v-model="content"
+    v-model="value"
     content-type="markdown"
     :extensions="[
       Emoji,
@@ -482,8 +482,9 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
     :handlers="customHandlers"
     placeholder="Write, type '/' for commands..."
     :ui="{ base: 'px-4 sm:px-18 py-13.5' }"
+    class="max-w-full"
   >
-    <UEditorToolbar :editor="editor" :items="fixedToolbarItems" class="border-b border-accented sticky top-0 inset-x-0 px-4 sm:px-18 z-1">
+    <UEditorToolbar :editor="editor" :items="fixedToolbarItems" class="border-b border-accented sticky top-0 inset-x-0 px-4 py-2 sm:px-18 z-1 overflow-x-auto">
       <template #link>
         <EditorLinkPopover :editor="editor" auto-open />
       </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { EditorContent, EditorToolbarItem } from '@nuxt/ui'
+import type { EditorToolbarItem } from '@nuxt/ui'
 
-const content = ref<EditorContent>(`Select text that is longer than 10 characters to see the bubble menu.
+const value = ref(`Select text that is longer than 10 characters to see the bubble menu.
 
 Short text won't trigger the menu.`)
 
@@ -17,7 +17,7 @@ const toolbarItems: EditorToolbarItem[][] = [[{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="content" content-type="markdown" placeholder="Start typing...">
+  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Start typing...">
     <UEditorToolbar
       :editor="editor"
       :items="toolbarItems"

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { EditorContent, EditorToolbarItem } from '@nuxt/ui'
+import type { EditorToolbarItem } from '@nuxt/ui'
 
-const content = ref<EditorContent>(`Select any text in this editor to see the **bubble menu** appear near your selection.
+const value = ref(`Select any text in this editor to see the **bubble menu** appear near your selection.
 
 The menu automatically adjusts its position to stay visible on screen.`)
 
@@ -29,7 +29,7 @@ const toolbarItems: EditorToolbarItem[][] = [[{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="content" content-type="markdown" placeholder="Start typing...">
+  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Start typing...">
     <UEditorToolbar
       :editor="editor"
       :items="toolbarItems"

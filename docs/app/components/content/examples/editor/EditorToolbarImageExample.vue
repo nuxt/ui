@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { EditorContent, EditorToolbarItem } from '@nuxt/ui'
+import type { EditorToolbarItem } from '@nuxt/ui'
 
-const content = ref<EditorContent>(`Click on the image below to see the image-specific toolbar:
+const value = ref(`Click on the image below to see the image-specific toolbar:
 
 ![Nuxt UI Dashboard](https://ui.nuxt.com/assets/templates/nuxt/dashboard-dark.png)
 
@@ -19,7 +19,7 @@ const imageToolbarItems: EditorToolbarItem[][] = [[{
 <template>
   <UEditor
     v-slot="{ editor }"
-    v-model="content"
+    v-model="value"
     content-type="markdown"
     placeholder="Start typing..."
   >

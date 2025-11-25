@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { EditorContent, EditorSuggestionMenuItem } from '@nuxt/ui'
+import type { EditorSuggestionMenuItem } from '@nuxt/ui'
 
-const content = ref<EditorContent>(`Type / to open the suggestion menu and browse available commands.
+const value = ref(`## Suggestion Menu
 
-`)
+Type / to open the suggestion menu and browse available formatting commands.`)
 
-const suggestionItems: EditorSuggestionMenuItem[][] = [[{
+const items: EditorSuggestionMenuItem[][] = [[{
   type: 'label',
   label: 'Text'
 }, {
@@ -57,7 +57,7 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="content" content-type="markdown" placeholder="Type / for commands...">
-    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
+  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Type / for commands..." class="w-full">
+    <UEditorSuggestionMenu :editor="editor" :items="items" />
   </UEditor>
 </template>

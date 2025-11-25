@@ -37,12 +37,16 @@ Use the `v-model` directive to control the value of the Editor.
 ---
 elevated: true
 prettier: true
+collapse: true
 ignore:
-  - modelValue
+  - modelValue.type
+  - modelValue.content
   - class
 external:
   - modelValue
-class: 'min-h-80'
+externalTypes:
+  - EditorContent
+class: 'min-h-40 sm:py-9'
 props:
   modelValue:
     type: 'doc'
@@ -67,16 +71,13 @@ props:
 ---
 ::
 
-::tip
-The Editor component exposes the TipTap editor instance via the default slot, which you can use to build custom toolbars and menus.
-::
-
 ### Content Type
 
 Use the `content-type` prop to set the format: `json`{lang="ts-type"} (default), `html`{lang="ts-type"}, or `markdown`{lang="ts-type"}. If not specified, strings are treated as HTML and objects as JSON.
 
 ::component-code
 ---
+elevated: true
 prettier: true
 ignore:
   - modelValue
@@ -84,12 +85,12 @@ ignore:
   - class
 external:
   - modelValue
-class: 'min-h-80'
+class: 'min-h-40 sm:py-9'
 props:
-  contentType: 'html'
   modelValue: |
     <h1>Hello World</h1>
     <p>This is a <strong>rich text</strong> editor.</p>
+  contentType: 'html'
   class: 'w-full'
 ---
 ::
@@ -115,17 +116,16 @@ You can use the `extensions` prop to add additional TipTap extensions to enhance
 import { Emoji } from '@tiptap/extension-emoji'
 import TextAlign from '@tiptap/extension-text-align'
 
-const content = ref('')
+const value = ref('<h1>Hello World</h1>\n')
 </script>
 
 <template>
   <UEditor
-    v-model="content"
+    v-model="value"
     :extensions="[
       Emoji,
       TextAlign.configure({ types: ['heading', 'paragraph'] })
     ]"
-    placeholder="Type to add content..."
   />
 </template>
 ```
@@ -136,27 +136,30 @@ See the Examples section for how to add custom extensions like emoji picker, tex
 
 ### Placeholder
 
-Use the `placeholder` prop to set a placeholder text that shows in empty paragraphs. You can also pass a `PlaceholderOptions`{lang="ts-type"} object from TipTap to customize the placeholder behavior.
+Use the `placeholder` prop to set a placeholder text that shows in empty paragraphs.
 
 ::component-code
 ---
+elevated: true
 prettier: true
 ignore:
   - modelValue
   - contentType
+  - placeholder
   - class
 external:
   - modelValue
-class: 'min-h-80'
+class: 'min-h-40 sm:py-9'
 props:
-  contentType: 'markdown'
-  modelValue: ''
+  modelValue: |
+    <h1>Hello World</h1>
+    <p></p>
   placeholder: 'Start writing...'
   class: 'w-full'
 ---
 ::
 
-::tip{to="https://tiptap.dev/docs/editor/extensions/functionality/placeholder#settings" target="_blank"}
+::note{to="https://tiptap.dev/docs/editor/extensions/functionality/placeholder#settings" target="_blank"}
 Learn more about placeholder options in the TipTap documentation.
 ::
 
@@ -164,36 +167,38 @@ Learn more about placeholder options in the TipTap documentation.
 
 Use the `starter-kit` prop to configure the built-in TipTap StarterKit extension which includes common editor features.
 
-::component-code
----
-prettier: true
-collapse: true
-ignore:
-  - modelValue
-  - starterKit.heading.levels
-  - contentType
-  - class
-external:
-  - modelValue
-class: 'min-h-80'
-props:
-  contentType: 'markdown'
-  modelValue: ''
-  placeholder: 'Type # to create a heading...'
-  starterKit:
-    heading:
-      levels: [1, 2, 3]
-  class: 'w-full'
----
-::
+```vue
+<script setup lang="ts">
+const value = ref('<h1>Hello World</h1>\n')
+</script>
 
-::tip{to="https://tiptap.dev/docs/editor/extensions/functionality/starterkit#included-extensions" target="_blank"}
+<template>
+  <UEditor
+    v-model="value"
+    :starter-kit="{
+      blockquote: false,
+      headings: {
+        levels: [1, 2, 3, 4]
+      },
+      dropcursor: {
+        color: 'var(--ui-primary)',
+        width: 2
+      },
+      link: {
+        openOnClick: false
+      }
+    }"
+  />
+</template>
+```
+
+::note{to="https://tiptap.dev/docs/editor/extensions/functionality/starterkit#included-extensions" target="_blank"}
 The StarterKit includes extensions for bold, italic, strike, code, headings, lists, blockquotes, code blocks, horizontal rules, and more. Check the TipTap documentation for all available options.
 ::
 
 ### Handlers
 
-Use the `handlers` prop to override or extend the default command handlers that are used by toolbars and menus. Handlers define how editor commands are executed, checked for active state, and validated.
+Use the `handlers` prop to override or extend the default command handlers that are used by [EditorToolbar](/docs/components/editor-toolbar) and [EditorSuggestionMenu](/docs/components/editor-suggestion-menu) items through the `kind` field. Handlers define how editor commands are executed, checked for active state, and validated.
 
 Each handler implements the `EditorHandler`{lang="ts-type"} interface:
 
@@ -205,8 +210,6 @@ interface EditorHandler {
   isDisabled?: (editor: Editor, item?: any) => boolean
 }
 ```
-
-#### Default Handlers
 
 The Editor component provides the following default handlers:
 
@@ -224,123 +227,30 @@ The Editor component provides the following default handlers:
 - `undo`{lang="ts-type"} - Undo last change
 - `redo`{lang="ts-type"} - Redo last undone change
 - `clearFormatting`{lang="ts-type"} - Remove all formatting from selection
-- `duplicate`{lang="ts-type"} - Duplicate a node (used by drag handle)
-- `delete`{lang="ts-type"} - Delete a node (used by drag handle)
-- `moveUp`{lang="ts-type"} - Move a node up (used by drag handle)
-- `moveDown`{lang="ts-type"} - Move a node down (used by drag handle)
-- `suggestion`{lang="ts-type"} - Trigger suggestion menu (slash commands)
+- `duplicate`{lang="ts-type"} - Duplicate a node
+- `delete`{lang="ts-type"} - Delete a node
+- `moveUp`{lang="ts-type"} - Move a node up
+- `moveDown`{lang="ts-type"} - Move a node down
+- `suggestion`{lang="ts-type"} - Trigger suggestion menu (/)
 - `mention`{lang="ts-type"} - Trigger mention menu (@)
 - `emoji`{lang="ts-type"} - Trigger emoji picker (:)
 
-#### Customizing Handlers
-
-Here's an example of customizing the mark handler to add analytics tracking:
-
-```vue
-<script setup lang="ts">
-import type { EditorCustomHandlers } from '@nuxt/ui'
-import type { Editor } from '@tiptap/vue-3'
-
-const content = ref('')
-
-const customHandlers = {
-  mark: {
-    canExecute: (editor: Editor, item) => editor.can().toggleMark(item.mark),
-    execute: (editor: Editor, item) => {
-      if (item.mark === 'bold') {
-        console.log('Bold command executed')
-        // Add your custom logic here (analytics, notifications, etc.)
-      }
-      return editor.chain().focus().toggleMark(item.mark).run()
-    },
-    isActive: (editor: Editor, item) => editor.isActive(item.mark),
-    isDisabled: undefined
-  }
-} satisfies EditorCustomHandlers
-</script>
-
-<template>
-  <UEditor
-    v-slot="{ editor }"
-    v-model="content"
-    :handlers="customHandlers"
-    placeholder="Start typing..."
-  >
-    <UEditorToolbar :editor="editor" :items="[[
-      { kind: 'mark', mark: 'bold', icon: 'i-lucide-bold' }
-    ]]" />
-  </UEditor>
-</template>
-```
-
 ::tip{to="#with-custom-handlers"}
 See the Examples section for more practical use cases like adding notifications, custom validation, or integrating with external services.
-::
-
-### Editable
-
-Use the `editable` prop to control whether the editor is editable or read-only. Defaults to `true`.
-
-::component-code
----
-prettier: true
-ignore:
-  - modelValue
-  - class
-  - contentType
-external:
-  - modelValue
-class: 'min-h-80'
-props:
-  editable: false
-  contentType: 'markdown'
-  modelValue: |
-    ## Read-only Editor
-
-    This editor is in read-only mode. You can **select** and *copy* text, but you cannot edit it.
-  class: 'w-full'
----
 ::
 
 ## Examples
 
 ### With toolbar
 
-You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a fixed toolbar to the editor with common formatting actions.
+You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a fixed, bubble, or floating toolbar to the editor with common formatting actions.
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-toolbar-example'
-class: 'min-h-80'
----
-::
-
-### With bubble menu
-
-Use the EditorToolbar component with `layout="bubble"` to create a contextual toolbar that appears when text is selected.
-
-::component-example
----
-collapse: true
-name: 'editor-bubble-menu-example'
-class: 'min-h-80'
----
-::
-
-::note
-The bubble menu automatically positions itself near the selected text and hides when the selection is cleared.
-::
-
-### With floating menu
-
-Use the EditorToolbar component with `layout="floating"` to create a toolbar that appears on empty lines, providing quick access to block-level formatting.
-
-::component-example
----
-collapse: true
-name: 'editor-floating-menu-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-9'
 ---
 ::
 
@@ -350,14 +260,11 @@ You can use the [EditorDragHandle](/docs/components/editor-drag-handle) componen
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-drag-handle-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-9'
 ---
-::
-
-::note
-Click the drag handle to select the block, or drag it to reorder blocks in the editor.
 ::
 
 ### With suggestion menu
@@ -366,14 +273,11 @@ You can use the [EditorSuggestionMenu](/docs/components/editor-suggestion-menu) 
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-suggestion-menu-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-9'
 ---
-::
-
-::note
-Type `/` to open the suggestion menu and browse available commands.
 ::
 
 ### With mention menu
@@ -382,14 +286,11 @@ You can use the [EditorMentionMenu](/docs/components/editor-mention-menu) compon
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-mention-menu-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-9'
 ---
-::
-
-::note
-Type `@` followed by a name to search and insert mentions.
 ::
 
 ### With emoji menu
@@ -398,14 +299,11 @@ You can use the [EditorEmojiMenu](/docs/components/editor-emoji-menu) component 
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-emoji-menu-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-9'
 ---
-::
-
-::note
-Type `:` followed by an emoji name to search and insert emojis.
 ::
 
 ### With custom extensions
@@ -414,6 +312,7 @@ You can add custom TipTap extensions to enhance the editor functionality.
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-custom-extensions-example'
 class: 'min-h-96'
@@ -430,9 +329,10 @@ You can provide custom handlers to override or extend the default command behavi
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-custom-handlers-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-9'
 ---
 ::
 
@@ -446,9 +346,10 @@ You can override specific toolbar items using slots to add custom functionality.
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-custom-toolbar-slot-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-9'
 ---
 ::
 
@@ -487,6 +388,7 @@ You can add custom TipTap extensions and provide matching handlers to integrate 
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-custom-extension-handler-example'
 class: 'min-h-96'

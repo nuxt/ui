@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import type { EditorContent } from '@nuxt/ui'
-
-const content = ref<EditorContent>({
+const value = ref({
   type: 'doc',
   content: [{
     type: 'heading',
@@ -32,7 +30,7 @@ const currentNode = ref<any>(null)
       <span class="ml-2 text-[var(--ui-text-muted)]">Position: {{ currentNode.pos }}</span>
     </div>
 
-    <UEditor v-slot="{ editor }" v-model="content" content-type="markdown" placeholder="Start typing...">
+    <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Start typing...">
       <UEditorDragHandle
         :editor="editor"
         @node-change="currentNode = $event"

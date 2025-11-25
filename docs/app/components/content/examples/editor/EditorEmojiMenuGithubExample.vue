@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { EditorContent, EditorEmojiMenuItem } from '@nuxt/ui'
+import type { EditorEmojiMenuItem } from '@nuxt/ui'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 
-const content = ref<EditorContent>({
+const value = ref({
   type: 'doc',
   content: [{
     type: 'paragraph',
@@ -18,9 +18,10 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
 <template>
   <UEditor
     v-slot="{ editor }"
-    v-model="content"
+    v-model="value"
     :extensions="[Emoji]"
-    content-type="markdown" placeholder="Type : to add emojis..."
+    content-type="markdown"
+    placeholder="Type : to add emojis..."
   >
     <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
   </UEditor>

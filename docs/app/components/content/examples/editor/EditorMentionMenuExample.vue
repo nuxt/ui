@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import type { EditorContent, EditorMentionMenuItem } from '@nuxt/ui'
+import type { EditorMentionMenuItem } from '@nuxt/ui'
 
-const content = ref<EditorContent>('Type @ to mention someone, like ')
+const value = ref(`## Mention Menu
 
-const mentionItems: EditorMentionMenuItem[] = [{
+Type @ to mention someone and select from the list of available users.`)
+
+const items: EditorMentionMenuItem[] = [{
   label: 'benjamincanac',
   avatar: {
     src: 'https://avatars.githubusercontent.com/u/739984?v=4'
@@ -27,7 +29,7 @@ const mentionItems: EditorMentionMenuItem[] = [{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="content" content-type="markdown" placeholder="Type @ to mention someone...">
-    <UEditorMentionMenu :editor="editor" :items="mentionItems" />
+  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Type @ to mention someone..." class="w-full">
+    <UEditorMentionMenu :editor="editor" :items="items" />
   </UEditor>
 </template>

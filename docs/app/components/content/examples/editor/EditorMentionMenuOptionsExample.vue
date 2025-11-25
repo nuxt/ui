@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { EditorContent, EditorMentionMenuItem } from '@nuxt/ui'
+import type { EditorMentionMenuItem } from '@nuxt/ui'
 
-const content = ref<EditorContent>(`Type @ to see the mention menu with custom positioning (fixed strategy, right placement).
+const value = ref(`Type @ to see the mention menu with custom positioning (fixed strategy, right placement).
 
 `)
 
@@ -21,7 +21,7 @@ const mentionItems: EditorMentionMenuItem[] = [{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="content" content-type="markdown" placeholder="Type @ to mention...">
+  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Type @ to mention...">
     <UEditorMentionMenu
       :editor="editor"
       :items="mentionItems"

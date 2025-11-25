@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { EditorContent, EditorSuggestionMenuItem } from '@nuxt/ui'
+import type { EditorSuggestionMenuItem } from '@nuxt/ui'
 
-const content = ref<EditorContent>(`Type / to see the suggestion menu with custom positioning (fixed strategy, bottom placement).
+const value = ref(`Type / to see the suggestion menu with custom positioning (fixed strategy, bottom placement).
 
 `)
 
@@ -31,7 +31,7 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="content" content-type="markdown" placeholder="Type / for commands...">
+  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Type / for commands...">
     <UEditorSuggestionMenu
       :editor="editor"
       :items="suggestionItems"

@@ -13,17 +13,18 @@ navigation.badge: Soon
 
 The EditorToolbar component must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
 
-Use the `items` prop to define the toolbar buttons and dropdowns. Each item can be an editor command (with a `kind` property) or a regular button.
-
 ::component-example
 ---
 collapse: true
-name: 'editor-toolbar-basic-example'
-class: 'min-h-80'
+name: 'editor-toolbar-example'
+class: 'min-h-40 sm:py-9'
 ---
 ::
 
 ### Items
+
+Use the `items` prop to define the toolbar buttons and dropdowns. Each item can be an editor command (with a `kind` property) or a regular button.
+
 
 The `items` prop accepts an array of toolbar items or an array of arrays for grouping items with separators.
 

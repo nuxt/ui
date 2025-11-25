@@ -1,17 +1,11 @@
 <script setup lang="ts">
-import type { EditorContent } from '@nuxt/ui'
+const value = ref(`## Drag Handle
 
-const content = ref<EditorContent>(`## Drag and drop
-
-Hover over the left side to see the drag handle appear.
-
-Click the handle to select the block.
-
-Drag the handle to reorder blocks.`)
+Hover over the left side of this block to see the drag handle appear and reorder blocks.`)
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="content" content-type="markdown" placeholder="Start typing...">
+  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Start typing..." class="w-full">
     <UEditorDragHandle :editor="editor" />
   </UEditor>
 </template>
