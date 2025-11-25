@@ -2,7 +2,7 @@ import type { Editor, Mark } from '@tiptap/vue-3'
 import type { Middleware } from '@floating-ui/dom'
 import { flip, shift, offset, size, autoPlacement, hide, inline } from '@floating-ui/dom'
 import { isArrayOfArray } from './index'
-import type { EditorHandlers, EditorItem, FloatingUIOptions } from '../types/editor'
+import type { EditorHandlers, EditorCustomHandlers, EditorItem, FloatingUIOptions } from '../types/editor'
 
 export function isMarkInSchema(mark: string | Mark, editor: Editor | null): boolean {
   if (!editor?.schema) {
@@ -369,7 +369,7 @@ export function createHandlers(): EditorHandlers {
 export function mapEditorItems(
   editor: Editor,
   items: (Partial<EditorItem> & Record<string, any>)[] | (Partial<EditorItem> & Record<string, any>)[][],
-  customHandlers?: Partial<EditorHandlers>
+  customHandlers?: EditorCustomHandlers
 ): any[] | any[][] {
   const handlers = { ...createHandlers(), ...customHandlers }
 

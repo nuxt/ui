@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { EditorContent, EditorHandlers, EditorToolbarItem } from '@nuxt/ui'
+import type { EditorContent, EditorCustomHandlers, EditorToolbarItem } from '@nuxt/ui'
 import type { Editor } from '@tiptap/vue-3'
 
 const content = ref<EditorContent>(`This editor has a custom handler for the bold command that also adds a notification.
@@ -8,7 +8,7 @@ Try clicking the bold button!`)
 
 const toast = useToast()
 
-const customHandlers: Partial<EditorHandlers> = {
+const customHandlers = {
   mark: {
     canExecute: (editor: Editor, item) => editor.can().toggleMark(item.mark),
     execute: (editor: Editor, item) => {
@@ -23,9 +23,9 @@ const customHandlers: Partial<EditorHandlers> = {
     isActive: (editor: Editor, item) => editor.isActive(item.mark),
     isDisabled: undefined
   }
-}
+} satisfies EditorCustomHandlers
 
-const toolbarItems: EditorToolbarItem[][] = [[{
+const toolbarItems = [[{
   kind: 'mark',
   mark: 'bold',
   icon: 'i-lucide-bold'
@@ -33,7 +33,7 @@ const toolbarItems: EditorToolbarItem[][] = [[{
   kind: 'mark',
   mark: 'italic',
   icon: 'i-lucide-italic'
-}]]
+}]] satisfies EditorToolbarItem<typeof customHandlers>[][]
 </script>
 
 <template>

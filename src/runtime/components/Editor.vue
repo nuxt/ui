@@ -8,7 +8,7 @@ import type { MarkdownExtensionOptions } from '@tiptap/markdown'
 import type { ImageOptions } from '@tiptap/extension-image'
 import type { MentionOptions } from '@tiptap/extension-mention'
 import theme from '#build/ui/editor'
-import type { EditorHandlers } from '../types/editor'
+import type { EditorHandlers, EditorCustomHandlers } from '../types/editor'
 import type { ComponentConfig } from '../types/tv'
 
 type Editor = ComponentConfig<typeof theme, AppConfig, 'editor'>
@@ -16,7 +16,7 @@ type Editor = ComponentConfig<typeof theme, AppConfig, 'editor'>
 export type EditorContent = Content
 export type EditorContentType = 'json' | 'html' | 'markdown'
 
-export interface EditorProps<T extends Content = Content> extends Omit<Partial<EditorOptions>, 'content' | 'element'> {
+export interface EditorProps<T extends Content = Content, H extends EditorCustomHandlers = EditorCustomHandlers> extends Omit<Partial<EditorOptions>, 'content' | 'element'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -60,7 +60,7 @@ export interface EditorProps<T extends Content = Content> extends Omit<Partial<E
    * Custom item handlers to override or extend the default handlers.
    * These handlers are provided to all child components (toolbar, suggestion menu, etc.).
    */
-  handlers?: Partial<EditorHandlers>
+  handlers?: H
   class?: any
   ui?: Editor['slots']
 }
@@ -69,12 +69,12 @@ export interface EditorEmits<T extends Content = Content> {
   'update:modelValue': [value: T]
 }
 
-export interface EditorSlots {
-  default(props: { editor: TiptapEditor, handlers: EditorHandlers }): any
+export interface EditorSlots<H extends EditorCustomHandlers = EditorCustomHandlers> {
+  default(props: { editor: TiptapEditor, handlers: EditorHandlers<H> }): any
 }
 </script>
 
-<script setup lang="ts" generic="T extends Content">
+<script setup lang="ts" generic="T extends Content, H extends EditorCustomHandlers">
 import { computed, provide, useAttrs, watch } from 'vue'
 import { defu } from 'defu'
 import { Primitive, useForwardProps } from 'reka-ui'
@@ -93,11 +93,11 @@ import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<EditorProps<T>>(), {
+const props = withDefaults(defineProps<EditorProps<T, H>>(), {
   contentType: 'json'
 })
 const emits = defineEmits<EditorEmits<T>>()
-defineSlots<EditorSlots>()
+defineSlots<EditorSlots<H>>()
 
 const attrs = useAttrs()
 
@@ -211,10 +211,10 @@ watch(() => props.modelValue, (newVal) => {
   }
 })
 
-const handlers = computed<EditorHandlers>(() => ({
+const handlers = computed(() => ({
   ...createHandlers(),
   ...props.handlers
-}))
+}) as EditorHandlers<H>)
 
 provide('editorHandlers', handlers)
 

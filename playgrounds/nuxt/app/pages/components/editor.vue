@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { upperFirst } from 'scule'
-import type { EditorContent, EditorHandlers, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, DropdownMenuItem } from '@nuxt/ui'
+import type { EditorContent, EditorToolbarItem, EditorMentionMenuItem, EditorEmojiMenuItem, DropdownMenuItem, EditorSuggestionMenuItem, EditorCustomHandlers } from '@nuxt/ui'
 import type { Editor } from '@tiptap/vue-3'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
@@ -70,14 +70,14 @@ Whether you're working on a personal project or building an enterprise applicati
 Visit our [documentation](https://ui.nuxt.com) to learn more and explore all available components.
 `)
 
-const customHandlers: Partial<EditorHandlers> = {
-  image: {
+const customHandlers = {
+  imageUpload: {
     canExecute: (editor: Editor) => (editor.can() as any).insertContent({ type: 'imageUpload' }),
     execute: (editor: Editor) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
     isActive: (editor: Editor) => editor.isActive('imageUpload'),
     isDisabled: undefined
   }
-}
+} satisfies EditorCustomHandlers
 
 const toolbarItems = [[{
   kind: 'undo',
@@ -160,7 +160,7 @@ const toolbarItems = [[{
 }, {
   slot: 'link' as const
 }, {
-  kind: 'image',
+  kind: 'imageUpload',
   icon: 'i-lucide-image'
 }], [{
   kind: 'textAlign',
@@ -178,9 +178,9 @@ const toolbarItems = [[{
   kind: 'textAlign',
   align: 'justify',
   icon: 'i-lucide-align-justify'
-}]] satisfies EditorToolbarItem[][]
+}]] satisfies EditorToolbarItem<typeof customHandlers>[][]
 
-const imageItems = (editor: Editor): EditorToolbarItem[][] => {
+const imageToolbarItems = (editor: Editor): EditorToolbarItem<typeof customHandlers>[][] => {
   const node = editor.state.doc.nodeAt(editor.state.selection.from)
 
   return [[{
@@ -292,7 +292,7 @@ const handleItems = (editor: Editor): DropdownMenuItem[][] => {
   ]], customHandlers) as DropdownMenuItem[][]
 }
 
-const suggestionItems: EditorSuggestionMenuItem[][] = [[{
+const suggestionItems = [[{
   type: 'label',
   label: 'Style'
 }, {
@@ -342,14 +342,14 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
   label: 'Emoji',
   icon: 'i-lucide-smile-plus'
 }, {
-  kind: 'image',
+  kind: 'imageUpload',
   label: 'Image',
   icon: 'i-lucide-image'
 }, {
   kind: 'horizontalRule',
   label: 'Horizontal Rule',
   icon: 'i-lucide-separator-horizontal'
-}]]
+}]] satisfies EditorSuggestionMenuItem<typeof customHandlers>[][]
 
 const mentionItems: EditorMentionMenuItem[] = [{
   label: 'benjamincanac',
@@ -422,7 +422,7 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
 
     <UEditorToolbar
       :editor="editor"
-      :items="imageItems(editor)"
+      :items="imageToolbarItems(editor)"
       layout="bubble"
       :should-show="({ editor, view }) => {
         return editor.isActive('image') && view.hasFocus()

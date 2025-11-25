@@ -13,8 +13,6 @@ export interface FloatingUIOptions {
   inline?: InlineOptions | boolean
 }
 
-export type EditorHandlers = Record<EditorItem['kind'], EditorHandler> & Record<string, EditorHandler>
-
 export interface EditorHandler {
   canExecute: (editor: Editor, cmd?: any) => boolean
   execute: (editor: Editor, cmd?: any) => any
@@ -22,7 +20,33 @@ export interface EditorHandler {
   isDisabled?: (editor: Editor, cmd?: any) => boolean
 }
 
-export type EditorItem
+export type EditorCustomHandlers = Record<string, EditorHandler>
+
+export type EditorHandlers<H extends EditorCustomHandlers = EditorCustomHandlers> = {
+  mark: EditorHandler
+  textAlign: EditorHandler
+  heading: EditorHandler
+  link: EditorHandler
+  image: EditorHandler
+  blockquote: EditorHandler
+  bulletList: EditorHandler
+  orderedList: EditorHandler
+  codeBlock: EditorHandler
+  horizontalRule: EditorHandler
+  paragraph: EditorHandler
+  undo: EditorHandler
+  redo: EditorHandler
+  clearFormatting: EditorHandler
+  duplicate: EditorHandler
+  delete: EditorHandler
+  moveUp: EditorHandler
+  moveDown: EditorHandler
+  suggestion: EditorHandler
+  mention: EditorHandler
+  emoji: EditorHandler
+} & H
+
+export type EditorItem<H extends EditorCustomHandlers = EditorCustomHandlers>
   = | { kind: 'mark', mark: 'bold' | 'italic' | 'strike' | 'code' | 'underline' }
     | { kind: 'textAlign', align: 'left' | 'center' | 'right' | 'justify' }
     | { kind: 'heading', level: 1 | 2 | 3 | 4 | 5 | 6 }
@@ -31,3 +55,4 @@ export type EditorItem
     | { kind: 'duplicate' | 'delete' | 'moveUp' | 'moveDown', pos: number }
     | { kind: 'clearFormatting' | 'suggestion', pos?: number }
     | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' | 'undo' | 'redo' | 'mention' | 'emoji' }
+    | { kind: keyof H }

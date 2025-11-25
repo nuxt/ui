@@ -238,12 +238,12 @@ Here's an example of customizing the mark handler to add analytics tracking:
 
 ```vue
 <script setup lang="ts">
-import type { EditorHandlers } from '@nuxt/ui'
+import type { EditorCustomHandlers } from '@nuxt/ui'
 import type { Editor } from '@tiptap/vue-3'
 
 const content = ref('')
 
-const customHandlers: Partial<EditorHandlers> = {
+const customHandlers = {
   mark: {
     canExecute: (editor: Editor, item) => editor.can().toggleMark(item.mark),
     execute: (editor: Editor, item) => {
@@ -256,7 +256,7 @@ const customHandlers: Partial<EditorHandlers> = {
     isActive: (editor: Editor, item) => editor.isActive(item.mark),
     isDisabled: undefined
   }
-}
+} satisfies EditorCustomHandlers
 </script>
 
 <template>
@@ -524,14 +524,17 @@ export const ImageUpload = Node.create({
 **2. Create custom handlers to connect the extension to your toolbar:**
 
 ```ts
-const customHandlers: Partial<EditorHandlers> = {
-  image: {
+import type { EditorCustomHandlers } from '@nuxt/ui'
+import type { Editor } from '@tiptap/vue-3'
+
+const customHandlers = {
+  imageUpload: {
     canExecute: (editor: Editor) => editor.can().insertContent({ type: 'imageUpload' }),
     execute: (editor: Editor) => editor.chain().focus().insertImageUpload().run(),
     isActive: (editor: Editor) => editor.isActive('imageUpload'),
     isDisabled: undefined
   }
-}
+} satisfies EditorCustomHandlers
 ```
 
 **3. Create the Vue component for the custom node (`ImageUploadNode.vue`):**

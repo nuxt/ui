@@ -1,13 +1,12 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { ComputedRef } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Editor } from '@tiptap/vue-3'
 import type { BubbleMenuPluginProps } from '@tiptap/extension-bubble-menu'
 import type { FloatingMenuPluginProps } from '@tiptap/extension-floating-menu'
 import theme from '#build/ui/editor-toolbar'
 import type { ButtonProps, DropdownMenuProps, DropdownMenuItem } from '../types'
-import type { EditorItem, EditorHandlers } from '../types/editor'
+import type { EditorItem, EditorCustomHandlers } from '../types/editor'
 import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -17,15 +16,18 @@ type ButtonItem = Omit<ButtonProps, 'type'> & {
   slot?: string
 }
 
-type EditorToolbarButtonItem = ButtonItem & EditorItem
+type EditorToolbarButtonItem<H extends EditorCustomHandlers = EditorCustomHandlers> = ButtonItem & EditorItem<H>
 
-type EditorToolbarDropdownChildItem = (DropdownMenuItem & EditorItem) | DropdownMenuItem
-type EditorToolbarDropdownItem = ButtonItem & DropdownMenuProps<ArrayOrNested<EditorToolbarDropdownChildItem>>
+type EditorToolbarDropdownChildItem<H extends EditorCustomHandlers = EditorCustomHandlers>
+  = | DropdownMenuItem
+    | (Omit<DropdownMenuItem, 'type'> & EditorItem<H>)
 
-export type EditorToolbarItem
+type EditorToolbarDropdownItem<H extends EditorCustomHandlers = EditorCustomHandlers> = ButtonItem & DropdownMenuProps<ArrayOrNested<EditorToolbarDropdownChildItem<H>>>
+
+export type EditorToolbarItem<H extends EditorCustomHandlers = EditorCustomHandlers>
   = | ButtonItem
-    | EditorToolbarButtonItem
-    | EditorToolbarDropdownItem
+    | EditorToolbarButtonItem<H>
+    | EditorToolbarDropdownItem<H>
 
 type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>> = {
   /**
@@ -118,7 +120,7 @@ defineSlots<EditorToolbarSlots<T>>()
 
 const appConfig = useAppConfig() as EditorToolbar['AppConfig']
 
-const handlers = inject<ComputedRef<EditorHandlers>>('editorHandlers', computed(() => createHandlers()))
+const handlers = inject('editorHandlers', computed(() => createHandlers()))
 
 const Component = computed(() => {
   return ({
@@ -163,7 +165,7 @@ function isActive(item: EditorToolbarItem): boolean {
   }
 
   // Check for editor item (has kind property)
-  const handler = handlers?.value?.[item.kind as keyof EditorHandlers]
+  const handler = handlers?.value?.[item.kind]
   return handler?.isActive(props.editor, item as any) || false
 }
 

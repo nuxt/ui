@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { EditorContent, EditorHandlers, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, DropdownMenuItem } from '@nuxt/ui'
+import type { EditorContent, EditorCustomHandlers, EditorToolbarItem, EditorSuggestionMenuItem, EditorMentionMenuItem, EditorEmojiMenuItem, DropdownMenuItem } from '@nuxt/ui'
 import type { Editor } from '@tiptap/vue-3'
 import { upperFirst } from 'scule'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
@@ -51,14 +51,14 @@ Perfect for technical documentation:
 
 Whether you're building a blog, documentation site, or content management system, the Nuxt UI Editor provides everything you need for a professional editing experience. Visit [ui.nuxt.com](https://ui.nuxt.com) to explore more components.`)
 
-const customHandlers: Partial<EditorHandlers> = {
-  image: {
+const customHandlers = {
+  imageUpload: {
     canExecute: (editor: Editor) => (editor.can() as any).insertContent({ type: 'imageUpload' }),
     execute: (editor: Editor) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
     isActive: (editor: Editor) => editor.isActive('imageUpload'),
     isDisabled: undefined
   }
-}
+} satisfies EditorCustomHandlers
 
 const fixedToolbarItems = [[{
   kind: 'undo',
@@ -135,7 +135,7 @@ const fixedToolbarItems = [[{
 }, {
   slot: 'link' as const
 }, {
-  kind: 'image',
+  kind: 'imageUpload',
   icon: 'i-lucide-image'
 }], [{
   icon: 'i-lucide-align-justify',
@@ -163,7 +163,7 @@ const fixedToolbarItems = [[{
     icon: 'i-lucide-align-justify',
     label: 'Align Justify'
   }]
-}]] satisfies EditorToolbarItem[][]
+}]] satisfies EditorToolbarItem<typeof customHandlers>[][]
 
 const floatingToolbarItems = [[{
   label: 'Turn into',
@@ -242,7 +242,7 @@ const floatingToolbarItems = [[{
 }], [{
   slot: 'link' as const
 }, {
-  kind: 'image',
+  kind: 'imageUpload',
   icon: 'i-lucide-image'
 }], [{
   icon: 'i-lucide-align-justify',
@@ -270,7 +270,7 @@ const floatingToolbarItems = [[{
     icon: 'i-lucide-align-justify',
     label: 'Align Justify'
   }]
-}]] satisfies EditorToolbarItem[][]
+}]] satisfies EditorToolbarItem<typeof customHandlers>[][]
 
 const imageToolbarItems = (editor: Editor): EditorToolbarItem[][] => {
   const node = editor.state.doc.nodeAt(editor.state.selection.from)
@@ -384,7 +384,7 @@ const handleItems = (editor: Editor): DropdownMenuItem[][] => {
   ]], customHandlers) as DropdownMenuItem[][]
 }
 
-const suggestionItems: EditorSuggestionMenuItem[][] = [[{
+const suggestionItems = [[{
   type: 'label',
   label: 'Style'
 }, {
@@ -434,14 +434,14 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
   label: 'Emoji',
   icon: 'i-lucide-smile-plus'
 }, {
-  kind: 'image',
+  kind: 'imageUpload',
   label: 'Image',
   icon: 'i-lucide-image'
 }, {
   kind: 'horizontalRule',
   label: 'Horizontal Rule',
   icon: 'i-lucide-separator-horizontal'
-}]]
+}]] satisfies EditorSuggestionMenuItem<typeof customHandlers>[][]
 
 const mentionItems: EditorMentionMenuItem[] = [{
   label: 'benjamincanac',

@@ -1,10 +1,9 @@
 <script lang="ts">
-import type { ComputedRef } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/editor-suggestion-menu'
 import type { EditorMenuOptions } from '../composables/useEditorMenu'
 import type { IconProps } from '../types'
-import type { EditorItem, EditorHandlers } from '../types/editor'
+import type { EditorItem, EditorCustomHandlers } from '../types/editor'
 import type { ComponentConfig } from '../types/tv'
 
 type EditorSuggestionMenu = ComponentConfig<typeof theme, AppConfig, 'editorSuggestionMenu'>
@@ -22,7 +21,7 @@ type EditorSuggestionMenuSeparatorItem = {
   [key: string]: any
 }
 
-type EditorSuggestionMenuActionItem = {
+type EditorSuggestionMenuActionItem<H extends EditorCustomHandlers = EditorCustomHandlers> = {
   type?: never
   label: string
   description?: string
@@ -33,9 +32,12 @@ type EditorSuggestionMenuActionItem = {
   disabled?: boolean
   class?: any
   [key: string]: any
-} & EditorItem
+} & EditorItem<H>
 
-export type EditorSuggestionMenuItem = EditorSuggestionMenuLabelItem | EditorSuggestionMenuSeparatorItem | EditorSuggestionMenuActionItem
+export type EditorSuggestionMenuItem<H extends EditorCustomHandlers = EditorCustomHandlers>
+  = | EditorSuggestionMenuLabelItem
+    | EditorSuggestionMenuSeparatorItem
+    | EditorSuggestionMenuActionItem<H>
 
 export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit' | 'options' | 'appendTo'>> {
   class?: any
@@ -60,7 +62,7 @@ const props = withDefaults(defineProps<EditorSuggestionMenuProps<T>>(), {
 
 const appConfig = useAppConfig() as EditorSuggestionMenu['AppConfig']
 
-const handlers = inject<ComputedRef<EditorHandlers>>('editorHandlers', computed(() => createHandlers()))
+const handlers = inject('editorHandlers', computed(() => createHandlers()))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorSuggestionMenu || {}) })())
