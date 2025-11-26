@@ -59,17 +59,23 @@ export interface ChatMessagesProps {
   ui?: ChatMessages['slots']
 }
 
+type ChatSlotMessageProps = ChatMessageProps & {
+  message?: UIMessage
+  slots?: {
+    [K in keyof ChatMessageSlots]?: ExtendSlotWithVersion<K>
+  }
+}
+
 type ExtendSlotWithVersion<K extends keyof ChatMessageSlots>
   = ChatMessageSlots[K] extends (props: infer P) => any
     ? (props: P & { message: UIMessage }) => any
     : ChatMessageSlots[K]
 
-export type ChatMessagesSlots = {
-  [K in keyof ChatMessageSlots]: ExtendSlotWithVersion<K>
-} & {
-  default(props?: {}): any
-  indicator(props: { ui: ChatMessages['ui'] }): any
-  viewport(props: { ui: ChatMessages['ui'], onClick: () => void }): any
+export type ChatMessagesSlots = ChatSlotMessageProps['slots'] & {
+  default?(): any
+  indicator?(props: { ui: ChatMessages['ui'] }): any
+  viewport?(props: { ui: ChatMessages['ui'], onClick: () => void }): any
+  message?(props: ChatSlotMessageProps): any
 }
 
 </script>
@@ -297,19 +303,18 @@ onMounted(() => {
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
     <slot>
-      <UChatMessage
-        v-for="message in messages"
-        :key="message.id"
-        v-bind="{ ...(message.role === 'user' ? userProps : assistantProps), ...message }"
-        :ref="el => registerMessageRef(message.id, el as ComponentPublicInstance)"
-        :compact="compact"
-      >
-        <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
-          <slot :name="name" v-bind="(slotData as any)" :message="message" />
-        </template>
-      </UChatMessage>
+      <template v-for="message in messages" :key="message.id">
+        <component
+          :is="$slots.message ? $slots.message : UChatMessage"
+          v-bind="{ ...message, ...(message.role === 'user' ? userProps : assistantProps), compact, message, slots: getProxySlots() }"
+          :ref="(el: ComponentPublicInstance) => registerMessageRef(message.id, el)"
+        >
+          <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
+            <slot :name="name" v-bind="slotData" :message="message" />
+          </template>
+        </component>
+      </template>
     </slot>
-
     <UChatMessage
       v-if="status === 'submitted'"
       id="indicator"
