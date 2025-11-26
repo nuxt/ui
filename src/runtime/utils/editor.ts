@@ -420,16 +420,16 @@ export function mapEditorItems(
 export function buildFloatingUIMiddleware(options: FloatingUIOptions): Middleware[] {
   const middleware: Middleware[] = []
 
+  if (options.offset) {
+    middleware.push(offset(typeof options.offset !== 'boolean' ? options.offset : undefined))
+  }
+
   if (options.flip) {
     middleware.push(flip(typeof options.flip !== 'boolean' ? options.flip : undefined))
   }
 
   if (options.shift) {
     middleware.push(shift(typeof options.shift !== 'boolean' ? options.shift : undefined))
-  }
-
-  if (options.offset) {
-    middleware.push(offset(typeof options.offset !== 'boolean' ? options.offset : undefined))
   }
 
   if (options.size) {

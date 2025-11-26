@@ -74,6 +74,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   let commandFn: ((item: T) => void) | null = null
   let keyDownHandler: ((props: { event: KeyboardEvent }) => boolean) | null = null
   let globalKeyHandler: ((e: KeyboardEvent) => void) | null = null
+  let blurHandler: (() => void) | null = null
   let triggerClientRect: (() => DOMRect | null) | null = null
   let handleHover: ((index: number) => void) | null = null
   let scrollHandler: (() => void) | null = null
@@ -84,6 +85,20 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
     // Set state to closed for animation
     menuState.value = 'closed'
+
+    // Remove event listeners immediately to prevent re-triggering
+    if (globalKeyHandler) {
+      document.removeEventListener('keydown', globalKeyHandler, true)
+      globalKeyHandler = null
+    }
+    if (blurHandler) {
+      options.editor.view.dom.removeEventListener('blur', blurHandler)
+      blurHandler = null
+    }
+    if (scrollHandler) {
+      window.removeEventListener('scroll', scrollHandler, true)
+      scrollHandler = null
+    }
 
     // Update renderer to show closing animation
     if (renderer) {
@@ -96,16 +111,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
       })
     }
 
-    // Wait for animation to complete (100ms from theme) before cleanup
+    // Wait for animation to complete (100ms from theme) before DOM cleanup
     setTimeout(() => {
-      if (globalKeyHandler) {
-        document.removeEventListener('keydown', globalKeyHandler, true)
-        globalKeyHandler = null
-      }
-      if (scrollHandler) {
-        window.removeEventListener('scroll', scrollHandler, true)
-        scrollHandler = null
-      }
       if (element && handleMouseDown) {
         element.removeEventListener('mousedown', handleMouseDown)
         handleMouseDown = null
@@ -198,8 +205,9 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     }).then(({ x, y, strategy }) => {
       element.style.width = 'max-content'
       element.style.position = strategy
-      element.style.left = `${x}px`
-      element.style.top = `${y}px`
+      element.style.top = '0'
+      element.style.left = '0'
+      element.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`
     })
   }
 
@@ -398,6 +406,19 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           }
           document.addEventListener('keydown', globalKeyHandler, true) // Use capture phase
 
+          // Add blur listener to close menu when editor loses focus
+          blurHandler = () => {
+            // Small delay to allow clicks on menu items to be processed first
+            setTimeout(() => {
+              // Only close if still in open state (not already closing from item selection)
+              if (menuState.value === 'open') {
+                const tr = suggestionProps.editor.view.state.tr.setMeta(pluginKeyInstance, { exit: true })
+                suggestionProps.editor.view.dispatch(tr)
+              }
+            }, 0)
+          }
+          suggestionProps.editor.view.dom.addEventListener('blur', blurHandler)
+
           // Add scroll listener to update position on scroll
           scrollHandler = () => {
             if (element) {
@@ -433,7 +454,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           })
 
           element = document.createElement('div')
-          element.style.position = 'absolute'
+          element.style.position = floatingUIOptions.strategy
           element.style.zIndex = '50'
 
           // Prevent the menu from capturing mouse down events which would steal focus
@@ -487,6 +508,19 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
               document.addEventListener('keydown', globalKeyHandler, true)
             }
 
+            // Re-add blur listener
+            if (!blurHandler) {
+              blurHandler = () => {
+                setTimeout(() => {
+                  if (menuState.value === 'open') {
+                    const tr = suggestionProps.editor.view.state.tr.setMeta(pluginKeyInstance, { exit: true })
+                    suggestionProps.editor.view.dispatch(tr)
+                  }
+                }, 0)
+              }
+              suggestionProps.editor.view.dom.addEventListener('blur', blurHandler)
+            }
+
             // Re-add scroll listener
             if (!scrollHandler) {
               scrollHandler = () => {
@@ -524,7 +558,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
             })
 
             element = document.createElement('div')
-            element.style.position = 'absolute'
+            element.style.position = floatingUIOptions.strategy
             element.style.zIndex = '50'
 
             // Prevent the menu from capturing mouse down events which would steal focus
@@ -572,6 +606,10 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     if (globalKeyHandler) {
       document.removeEventListener('keydown', globalKeyHandler, true)
       globalKeyHandler = null
+    }
+    if (blurHandler) {
+      options.editor.view.dom.removeEventListener('blur', blurHandler)
+      blurHandler = null
     }
     if (scrollHandler) {
       window.removeEventListener('scroll', scrollHandler, true)
