@@ -222,12 +222,12 @@ export type TableSlots<T extends TableData = TableData> = {
 
 <script setup lang="ts" generic="T extends TableData">
 import { ref, computed, useTemplateRef, watch, toRef } from 'vue'
-import { Primitive } from 'reka-ui'
+import { Primitive, useForwardProps } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
 import { useVirtualizer } from '@tanstack/vue-virtual'
-import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
+import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -309,58 +309,62 @@ const hasFooter = computed(() => {
   return hasFooterRecursive(columns.value)
 })
 
-const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
-const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
-const columnOrderState = defineModel<ColumnOrderState>('columnOrder', { default: [] })
-const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', { default: {} })
-const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: {} })
-const columnSizingState = defineModel<ColumnSizingState>('columnSizing', { default: {} })
-const columnSizingInfoState = defineModel<ColumnSizingInfoState>('columnSizingInfo', { default: {} })
-const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
-const rowPinningState = defineModel<RowPinningState>('rowPinning', { default: {} })
-const sortingState = defineModel<SortingState>('sorting', { default: [] })
-const groupingState = defineModel<GroupingState>('grouping', { default: [] })
-const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
-const paginationState = defineModel<PaginationState>('pagination', { default: {} })
+const globalFilterState = defineModel<string>('globalFilter')
+const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters')
+const columnOrderState = defineModel<ColumnOrderState>('columnOrder')
+const columnVisibilityState = defineModel<VisibilityState>('columnVisibility')
+const columnPinningState = defineModel<ColumnPinningState>('columnPinning')
+const columnSizingState = defineModel<ColumnSizingState>('columnSizing')
+const columnSizingInfoState = defineModel<ColumnSizingInfoState>('columnSizingInfo')
+const rowSelectionState = defineModel<RowSelectionState>('rowSelection')
+const rowPinningState = defineModel<RowPinningState>('rowPinning')
+const sortingState = defineModel<SortingState>('sorting')
+const groupingState = defineModel<GroupingState>('grouping')
+const expandedState = defineModel<ExpandedState>('expanded')
+const paginationState = defineModel<PaginationState>('pagination')
 
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
 
+const tableProps = useForwardProps(reactivePick(props, '_features', 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'))
+
 const tableApi = useVueTable({
-  ...reactiveOmit(props, 'as', 'data', 'columns', 'virtualize', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
-  data,
+  ...tableProps.value,
+  get data() {
+    return data.value
+  },
   get columns() {
     return columns.value
   },
   meta: meta.value,
   getCoreRowModel: getCoreRowModel(),
   ...(props.globalFilterOptions || {}),
-  onGlobalFilterChange: updaterOrValue => valueUpdater(updaterOrValue, globalFilterState),
+  ...(globalFilterState.value !== undefined && { onGlobalFilterChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, globalFilterState) }),
   ...(props.columnFiltersOptions || {}),
   getFilteredRowModel: getFilteredRowModel(),
-  onColumnFiltersChange: updaterOrValue => valueUpdater(updaterOrValue, columnFiltersState),
-  onColumnOrderChange: updaterOrValue => valueUpdater(updaterOrValue, columnOrderState),
+  ...(columnFiltersState.value !== undefined && { onColumnFiltersChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnFiltersState) }),
+  ...(columnOrderState.value !== undefined && { onColumnOrderChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnOrderState) }),
   ...(props.visibilityOptions || {}),
-  onColumnVisibilityChange: updaterOrValue => valueUpdater(updaterOrValue, columnVisibilityState),
+  ...(columnVisibilityState.value !== undefined && { onColumnVisibilityChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnVisibilityState) }),
   ...(props.columnPinningOptions || {}),
-  onColumnPinningChange: updaterOrValue => valueUpdater(updaterOrValue, columnPinningState),
+  ...(columnPinningState.value !== undefined && { onColumnPinningChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnPinningState) }),
   ...(props.columnSizingOptions || {}),
-  onColumnSizingChange: updaterOrValue => valueUpdater(updaterOrValue, columnSizingState),
-  onColumnSizingInfoChange: updaterOrValue => valueUpdater(updaterOrValue, columnSizingInfoState),
+  ...(columnSizingState.value !== undefined && { onColumnSizingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnSizingState) }),
+  ...(columnSizingInfoState.value !== undefined && { onColumnSizingInfoChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnSizingInfoState) }),
   ...(props.rowSelectionOptions || {}),
-  onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelectionState),
+  ...(rowSelectionState.value !== undefined && { onRowSelectionChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, rowSelectionState) }),
   ...(props.rowPinningOptions || {}),
-  onRowPinningChange: updaterOrValue => valueUpdater(updaterOrValue, rowPinningState),
+  ...(rowPinningState.value !== undefined && { onRowPinningChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, rowPinningState) }),
   ...(props.sortingOptions || {}),
   getSortedRowModel: getSortedRowModel(),
-  onSortingChange: updaterOrValue => valueUpdater(updaterOrValue, sortingState),
+  ...(sortingState.value !== undefined && { onSortingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, sortingState) }),
   ...(props.groupingOptions || {}),
-  onGroupingChange: updaterOrValue => valueUpdater(updaterOrValue, groupingState),
+  ...(groupingState.value !== undefined && { onGroupingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, groupingState) }),
   ...(props.expandedOptions || {}),
   getExpandedRowModel: getExpandedRowModel(),
-  onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
+  ...(expandedState.value !== undefined && { onExpandedChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, expandedState) }),
   ...(props.paginationOptions || {}),
-  onPaginationChange: updaterOrValue => valueUpdater(updaterOrValue, paginationState),
+  ...(paginationState.value !== undefined && { onPaginationChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, paginationState) }),
   ...(props.facetedOptions || {}),
   state: {
     get globalFilter() {
