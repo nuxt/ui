@@ -148,6 +148,7 @@ import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
+import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
@@ -187,15 +188,13 @@ const flattenedPaddingFormula = computed(() => {
   return (level: number) => `calc(var(--spacing) * ${(level - 1) * config.perLevel + config.base})`
 })
 
-const virtualizerProps = toRef(() => !!props.virtualize && defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-  estimateSize: ({
-    xs: 24,
-    sm: 28,
-    md: 32,
-    lg: 36,
-    xl: 40
-  })[props.size || 'md']
-}))
+const virtualizerProps = toRef(() => {
+  if (!props.virtualize) return false
+
+  return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+    estimateSize: getEstimateSize(props.items || [], props.size || 'md')
+  })
+})
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items?: TreeItem[], level: number }, TreeSlots<T>>()
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: TreeItem, index: number, level: number }, TreeSlots<T>>({
