@@ -15,31 +15,31 @@ type Payment = {
 }
 
 const data = ref<Payment[]>([{
-  id: '46000000000000000000000000000000000000000',
+  id: '4600000000000000000000000000000000000000',
   date: '2024-03-11T15:30:00',
   status: 'paid',
   email: 'james.anderson@example.com',
   amount: 594000
 }, {
-  id: '45990000000000000000000000000000000000000',
+  id: '4599000000000000000000000000000000000000',
   date: '2024-03-11T10:10:00',
   status: 'failed',
   email: 'mia.white@example.com',
   amount: 276000
 }, {
-  id: '45980000000000000000000000000000000000000',
+  id: '4598000000000000000000000000000000000000',
   date: '2024-03-11T08:50:00',
   status: 'refunded',
   email: 'william.brown@example.com',
   amount: 315000
 }, {
-  id: '45970000000000000000000000000000000000000',
+  id: '4597000000000000000000000000000000000000',
   date: '2024-03-10T19:45:00',
   status: 'paid',
   email: 'emma.davis@example.com',
   amount: 5290000
 }, {
-  id: '45960000000000000000000000000000000000000',
+  id: '4596000000000000000000000000000000000000',
   date: '2024-03-10T15:55:00',
   status: 'paid',
   email: 'ethan.harris@example.com',
@@ -49,10 +49,12 @@ const data = ref<Payment[]>([{
 const columns: TableColumn<Payment>[] = [{
   accessorKey: 'id',
   header: ({ column }) => getHeader(column, 'ID', 'left'),
-  cell: ({ row }) => `#${row.getValue('id')}`
+  cell: ({ row }) => `#${row.getValue('id')}`,
+  size: 381
 }, {
   accessorKey: 'date',
-  header: ({ column }) => getHeader(column, 'Date', 'left')
+  header: ({ column }) => getHeader(column, 'Date', 'left'),
+  size: 172
 }, {
   accessorKey: 'status',
   header: ({ column }) => getHeader(column, 'Status', 'left'),
@@ -64,10 +66,12 @@ const columns: TableColumn<Payment>[] = [{
     })[row.getValue('status') as string]
 
     return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
-  }
+  },
+  size: 103
 }, {
   accessorKey: 'email',
-  header: ({ column }) => getHeader(column, 'Email', 'left')
+  header: ({ column }) => getHeader(column, 'Email', 'left'),
+  size: 232
 }, {
   accessorKey: 'amount',
   header: ({ column }) => h('div', { class: 'text-right' }, getHeader(column, 'Amount', 'right')),
@@ -80,7 +84,8 @@ const columns: TableColumn<Payment>[] = [{
     }).format(amount)
 
     return h('div', { class: 'text-right font-medium' }, formatted)
-  }
+  },
+  size: 130
 }]
 
 function getHeader(column: Column<Payment>, label: string, position: 'left' | 'right') {
@@ -99,7 +104,7 @@ function getHeader(column: Column<Payment>, label: string, position: 'left' | 'r
 }
 
 const columnPinning = ref({
-  left: [],
+  left: ['id'],
   right: ['amount']
 })
 </script>

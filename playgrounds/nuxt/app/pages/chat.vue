@@ -74,7 +74,7 @@ function onSubmit() {
       class="sticky bottom-0"
       @submit="onSubmit"
     >
-      <UChatPromptSubmit :status="chat.status" @stop="chat.stop" @reload="chat.regenerate" />
+      <UChatPromptSubmit :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
     </UChatPrompt>
   </div>
 </template>
