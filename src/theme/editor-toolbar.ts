@@ -1,17 +1,17 @@
 export default {
   slots: {
     root: 'focus:outline-none',
-    base: 'bg-default p-1 flex items-stretch gap-1.5',
+    base: 'flex items-stretch gap-1.5',
     group: 'flex items-center gap-0.5',
     separator: 'w-px self-stretch bg-border'
   },
   variants: {
     layout: {
       bubble: {
-        base: 'border border-default rounded-lg'
+        base: 'bg-default border border-default rounded-lg p-1'
       },
       floating: {
-        base: 'border border-default rounded-lg'
+        base: 'bg-default border border-default rounded-lg p-1'
       },
       fixed: {
         base: ''

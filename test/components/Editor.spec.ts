@@ -11,7 +11,7 @@ describe('Editor', () => {
   it.each([
     // Props
     ['with as', { props: { as: 'section' } }],
-    ['with class', { props: { class: '' } }],
+    ['with class', { props: { class: 'min-h-80' } }],
     ['with ui', { props: { ui: {} } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]

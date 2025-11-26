@@ -114,7 +114,7 @@ const editorProps = computed(() => defu(props.editorProps, {
     autocorrect: 'off',
     autocapitalize: 'off',
     ...attrs,
-    class: ui.value.base({ class: [props.ui?.base, props.class] })
+    class: ui.value.base({ class: props.ui?.base })
   }
 } as EditorOptions['editorProps']))
 const contentType = computed(() => props.contentType || (typeof props.modelValue === 'string' ? 'html' : 'json'))
