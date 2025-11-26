@@ -1,6 +1,6 @@
 import { Node, mergeAttributes } from '@tiptap/core'
 import { VueNodeViewRenderer } from '@tiptap/vue-3'
-import ImageUploadNode from '../../components/content/examples/editor/ImageUploadNode.vue'
+import ImageUploadNode from '~/components/editor/ImageUploadNode.vue'
 
 declare module '@tiptap/vue-3' {
   interface Commands<ReturnType> {

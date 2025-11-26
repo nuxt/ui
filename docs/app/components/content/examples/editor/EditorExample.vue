@@ -6,13 +6,13 @@ import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import TextAlign from '@tiptap/extension-text-align'
 import { ImageUpload } from '~/utils/editor/image-upload'
-import EditorLinkPopover from './EditorLinkPopover.vue'
+import EditorLinkPopover from '~/components/editor/EditorLinkPopover.vue'
 
 const value = ref(`# Building Modern Interfaces with Nuxt UI
 
 Welcome to the **Nuxt UI Editor** — a powerful rich text editing experience built on [TipTap](https://tiptap.dev). This editor combines *flexibility* with ease of use, making content creation a breeze.
 
-![Nuxt UI Dashboard](https://ui.nuxt.com/assets/templates/nuxt/dashboard-dark.png)
+![Placeholder](/placeholder.jpeg)
 
 ## Rich Formatting Options
 
@@ -132,7 +132,7 @@ const fixedToolbarItems = [[{
   kind: 'mark',
   mark: 'code',
   icon: 'i-lucide-code'
-}, {
+}], [{
   slot: 'link' as const
 }, {
   kind: 'imageUpload',
@@ -481,10 +481,10 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
     ]"
     :handlers="customHandlers"
     placeholder="Write, type '/' for commands..."
-    :ui="{ base: 'px-4 sm:px-18 py-13.5' }"
-    class="max-w-full"
+    :ui="{ base: 'p-8 sm:px-16 py-13.5' }"
+    class="w-full"
   >
-    <UEditorToolbar :editor="editor" :items="fixedToolbarItems" class="border-b border-accented sticky top-0 inset-x-0 px-4 py-2 sm:px-18 z-1 overflow-x-auto">
+    <UEditorToolbar :editor="editor" :items="fixedToolbarItems" class="border-b border-muted sticky top-0 inset-x-0 px-8 sm:px-16 py-2 z-50 bg-default overflow-x-auto">
       <template #link>
         <EditorLinkPopover :editor="editor" auto-open />
       </template>

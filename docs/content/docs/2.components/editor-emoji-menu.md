@@ -11,24 +11,25 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorEmojiMenu component must be used inside an [Editor](/docs/components/editor) component's default slot to provide emoji picker functionality.
+The EditorEmojiMenu component must be used inside an [Editor](/docs/components/editor) component's default slot to provide emoji picker functionality. Emojis are inserted as text characters or custom nodes depending on the extension configuration.
 
-Type `:` followed by an emoji name to search and insert emojis into your content.
+Type `:` followed by an emoji name to search and insert emojis.
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-emoji-menu-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-8'
 ---
 ::
 
 ::note
-The emoji menu filters items as you type emoji names or tags and supports keyboard navigation.
+The menu filters items as you type and supports keyboard navigation (arrow keys, enter to select, escape to close).
 ::
 
 ::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/functionality/emoji" target="_blank"}
-This component requires the Emoji extension from TipTap to be added to the Editor's extensions prop.
+This component requires the Emoji extension from TipTap. Add it to the Editor's `extensions` prop.
 ::
 
 ### Items
@@ -37,47 +38,54 @@ Use the `items` prop to define the available emojis. Each item should include th
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-emoji-menu-items-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-8'
 ---
 ::
 
-Each item should have:
-- `name`{lang="ts-type"}: The emoji name (required)
-- `emoji`{lang="ts-type"}: The emoji character to insert
-- `shortcodes`{lang="ts-type"}: Array of shortcode strings for search
-- `tags`{lang="ts-type"}: Array of tag strings for additional search terms
-- `group`{lang="ts-type"}: Optional group name
-- `fallbackImage`{lang="ts-type"}: Optional fallback image URL
+Each item supports these properties:
+
+| Property | Description |
+| -------- | ----------- |
+| `name`{lang="ts-type"} | The emoji name used for searching (required) |
+| `emoji`{lang="ts-type"} | The emoji character to insert |
+| `shortcodes`{lang="ts-type"} | Array of shortcode strings for search (e.g., `['smile', 'happy']`) |
+| `tags`{lang="ts-type"} | Array of tags for additional search terms |
+| `group`{lang="ts-type"} | Optional group name for organization |
+| `fallbackImage`{lang="ts-type"} | Fallback image URL for custom emojis |
 
 ::tip
-You can use the `gitHubEmojis` export from `@tiptap/extension-emoji` for a complete emoji set.
+Use the `gitHubEmojis` export from `@tiptap/extension-emoji` for a comprehensive emoji set with over 1800 emojis.
 ::
 
 ### Trigger character
 
-Use the `char` prop to change the trigger character. Defaults to `:`.
+Use the `char` prop to change the trigger character. Defaults to `:`{lang="ts-type"}.
 
-::component-example
----
-collapse: true
-name: 'editor-emoji-menu-char-example'
-class: 'min-h-80'
----
-::
+```vue
+<template>
+  <UEditorEmojiMenu :editor="editor" :items="items" char=";" />
+</template>
+```
 
 ### Options
 
 Use the `options` prop to customize the positioning behavior using Floating UI options.
 
-::component-example
----
-collapse: true
-name: 'editor-emoji-menu-options-example'
-class: 'min-h-80'
----
-::
+```vue
+<template>
+  <UEditorEmojiMenu
+    :editor="editor"
+    :items="items"
+    :options="{
+      placement: 'bottom-start',
+      offset: 4
+    }"
+  />
+</template>
+```
 
 ::tip{to="https://floating-ui.com/docs/computeposition" target="_blank"}
 The options are passed to Floating UI's `computePosition` function. You can configure strategy, placement, offset, flip, shift, and other positioning middleware.
@@ -85,36 +93,40 @@ The options are passed to Floating UI's `computePosition` function. You can conf
 
 ## Examples
 
-### GitHub emojis
+### With GitHub emojis
 
-Use the GitHub emoji set from TipTap for a comprehensive emoji picker.
+Use the GitHub emoji set from TipTap for a comprehensive collection.
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-emoji-menu-github-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-8'
 ---
 ::
 
-::note
-This example uses the `gitHubEmojis` export from `@tiptap/extension-emoji` which includes over 1800 emojis.
-::
+```ts
+import { gitHubEmojis } from '@tiptap/extension-emoji'
 
-### Custom emoji sets
+const items = gitHubEmojis
+```
 
-Create your own custom emoji set with specific emojis for your use case.
+### With custom emojis
+
+Create a custom emoji set for your specific use case.
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-emoji-menu-custom-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-8'
 ---
 ::
 
 ::tip
-Custom emoji sets are useful when you want to limit the available emojis or provide domain-specific emojis.
+Custom sets are useful for limiting available emojis, adding brand-specific reactions, or domain-specific symbols.
 ::
 
 ## API
@@ -122,14 +134,6 @@ Custom emoji sets are useful when you want to limit the available emojis or prov
 ### Props
 
 :component-props
-
-### Slots
-
-:component-slots
-
-### Emits
-
-:component-emits
 
 ## Theme
 

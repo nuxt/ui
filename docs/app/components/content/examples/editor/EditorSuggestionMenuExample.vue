@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { EditorSuggestionMenuItem } from '@nuxt/ui'
 
-const value = ref(`## Suggestion Menu
+const value = ref(`# Suggestion Menu
 
 Type / to open the suggestion menu and browse available formatting commands.`)
 
@@ -54,10 +54,19 @@ const items: EditorSuggestionMenuItem[][] = [[{
   label: 'Divider',
   icon: 'i-lucide-separator-horizontal'
 }]]
+
+// SSR-safe function to append menus to body (avoids z-index issues in docs)
+const appendToBody = import.meta.client ? () => document.body : undefined
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Type / for commands..." class="w-full">
-    <UEditorSuggestionMenu :editor="editor" :items="items" />
+  <UEditor
+    v-slot="{ editor }"
+    v-model="value"
+    content-type="markdown"
+    placeholder="Type / for commands..."
+    class="w-full min-h-21"
+  >
+    <UEditorSuggestionMenu :editor="editor" :items="items" :append-to="appendToBody" />
   </UEditor>
 </template>

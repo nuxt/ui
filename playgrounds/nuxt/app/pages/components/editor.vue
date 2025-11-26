@@ -157,7 +157,7 @@ const toolbarItems = [[{
   kind: 'mark',
   mark: 'code',
   icon: 'i-lucide-code'
-}, {
+}], [{
   slot: 'link' as const
 }, {
   kind: 'imageUpload',
@@ -393,7 +393,7 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
     autofocus
     placeholder="Write, type '/' for commands..."
     class="min-h-0"
-    :ui="{ content: 'max-w-2xl mx-auto', base: 'sm:px-14' }"
+    :ui="{ base: 'sm:px-14', content: 'max-w-2xl mx-auto' }"
   >
     <Navbar>
       <UEditorToolbar :editor="editor" :items="toolbarItems">

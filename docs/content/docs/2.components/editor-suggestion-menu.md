@@ -11,20 +11,21 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorSuggestionMenu component must be used inside an [Editor](/docs/components/editor) component's default slot to provide slash command functionality.
+The EditorSuggestionMenu component must be used inside an [Editor](/docs/components/editor) component's default slot to provide slash command functionality. It allows users to quickly insert blocks and formatting by typing a trigger character.
 
-Type `/` to open the suggestion menu and browse available formatting commands and actions.
+Type `/` in the editor to open the suggestion menu.
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-suggestion-menu-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-8'
 ---
 ::
 
 ::note
-The suggestion menu filters items as you type and supports keyboard navigation with arrow keys and enter to select.
+The menu supports keyboard navigation (arrow keys, enter to select, escape to close) and filters items as you type.
 ::
 
 ### Items
@@ -33,47 +34,58 @@ Use the `items` prop to define the available commands in the menu. Items can be 
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-suggestion-menu-items-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-8'
 ---
 ::
 
-Each item can have:
-- `kind`{lang="ts-type"}: The editor command type (e.g., `heading`, `bulletList`, etc.)
-- `label`{lang="ts-type"}: Display text for the item
-- `description`{lang="ts-type"}: Optional description text
-- `icon`{lang="ts-type"}: Icon to display
-- `type: 'label'`{lang="ts-type"}: For section headers
-- `type: 'separator'`{lang="ts-type"}: For visual separators
+Each item supports these properties:
+
+| Property | Description |
+| -------- | ----------- |
+| `kind`{lang="ts-type"} | Editor command type (`heading`, `bulletList`, `blockquote`, etc.) |
+| `label`{lang="ts-type"} | Display text for the item |
+| `description`{lang="ts-type"} | Optional description shown below the label |
+| `icon`{lang="ts-type"} | Icon displayed before the label |
+| `type: 'label'`{lang="ts-type"} | Creates a section header (non-selectable) |
+| `type: 'separator'`{lang="ts-type"} | Creates a visual divider between groups |
 
 ::tip
-Group related commands with labels to create organized, scannable menus.
+Use labels and separators to organize commands into logical groups for better discoverability.
 ::
 
 ### Trigger character
 
-Use the `char` prop to change the trigger character. Defaults to `/`.
+Use the `char` prop to change the trigger character. Defaults to `/`{lang="ts-type"}.
 
-::component-example
----
-collapse: true
-name: 'editor-suggestion-menu-char-example'
-class: 'min-h-80'
----
+```vue
+<template>
+  <UEditorSuggestionMenu :editor="editor" :items="items" char=">" />
+</template>
+```
+
+::tip
+Common alternatives include `>` for block commands or `+` for insertions.
 ::
 
 ### Options
 
 Use the `options` prop to customize the positioning behavior using Floating UI options.
 
-::component-example
----
-collapse: true
-name: 'editor-suggestion-menu-options-example'
-class: 'min-h-80'
----
-::
+```vue
+<template>
+  <UEditorSuggestionMenu
+    :editor="editor"
+    :items="items"
+    :options="{
+      placement: 'bottom-start',
+      offset: 4
+    }"
+  />
+</template>
+```
 
 ::tip{to="https://floating-ui.com/docs/computeposition" target="_blank"}
 The options are passed to Floating UI's `computePosition` function. You can configure strategy, placement, offset, flip, shift, and other positioning middleware.
@@ -81,32 +93,34 @@ The options are passed to Floating UI's `computePosition` function. You can conf
 
 ## Examples
 
-### With custom items
+### With sections
 
-Create a fully customized suggestion menu with your own commands and groupings.
+Create an organized suggestion menu with labeled sections and separators.
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-suggestion-menu-custom-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-8'
 ---
 ::
 
-### With icons and descriptions
+### With descriptions
 
-Add icons and descriptions to make commands more discoverable.
+Add descriptions to help users understand what each command does.
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-suggestion-menu-icons-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-8'
 ---
 ::
 
 ::tip
-Descriptions help users understand what each command does, especially for less common formatting options.
+Descriptions are especially useful for less common formatting options or custom commands.
 ::
 
 ## API
@@ -114,14 +128,6 @@ Descriptions help users understand what each command does, especially for less c
 ### Props
 
 :component-props
-
-### Slots
-
-:component-slots
-
-### Emits
-
-:component-emits
 
 ## Theme
 

@@ -21,7 +21,7 @@ The Editor component provides a powerful rich text editing experience built on T
 source: false
 elevated: true
 name: 'editor-example'
-class: 'relative h-176 overflow-y-auto !p-0'
+class: 'relative h-176 overflow-y-auto !p-0 rounded-b-md'
 ---
 ::
 
@@ -46,7 +46,7 @@ external:
   - modelValue
 externalTypes:
   - EditorContent
-class: 'min-h-40 sm:py-9'
+class: 'p-8'
 props:
   modelValue:
     type: 'doc'
@@ -67,7 +67,7 @@ props:
             text: 'rich text'
           - type: 'text'
             text: ' editor.'
-  class: 'w-full'
+  class: 'w-full min-h-21'
 ---
 ::
 
@@ -85,13 +85,13 @@ ignore:
   - class
 external:
   - modelValue
-class: 'min-h-40 sm:py-9'
+class: 'p-8'
 props:
   modelValue: |
     <h1>Hello World</h1>
     <p>This is a <strong>rich text</strong> editor.</p>
   contentType: 'html'
-  class: 'w-full'
+  class: 'w-full min-h-21'
 ---
 ::
 
@@ -124,14 +124,16 @@ const value = ref('<h1>Hello World</h1>\n')
     v-model="value"
     :extensions="[
       Emoji,
-      TextAlign.configure({ types: ['heading', 'paragraph'] })
+      TextAlign.configure({
+        types: ['heading', 'paragraph']
+      })
     ]"
   />
 </template>
 ```
 
-::tip{to="#with-custom-extensions"}
-See the Examples section for how to add custom extensions like emoji picker, text alignment, and file uploads with custom UI.
+::tip{to="#with-image-upload"}
+See the Examples section to learn how to create your own custom extensions.
 ::
 
 ### Placeholder
@@ -149,13 +151,13 @@ ignore:
   - class
 external:
   - modelValue
-class: 'min-h-40 sm:py-9'
+class: 'p-8'
 props:
   modelValue: |
     <h1>Hello World</h1>
     <p></p>
   placeholder: 'Start writing...'
-  class: 'w-full'
+  class: 'w-full min-h-21'
 ---
 ::
 
@@ -198,7 +200,7 @@ The StarterKit includes extensions for bold, italic, strike, code, headings, lis
 
 ### Handlers
 
-Use the `handlers` prop to override or extend the default command handlers that are used by [EditorToolbar](/docs/components/editor-toolbar) and [EditorSuggestionMenu](/docs/components/editor-suggestion-menu) items through the `kind` field. Handlers define how editor commands are executed, checked for active state, and validated.
+Use the `handlers` prop to override or extend the default command handlers used by [EditorToolbar](/docs/components/editor-toolbar) and [EditorSuggestionMenu](/docs/components/editor-suggestion-menu) items through the `kind` field.
 
 Each handler implements the `EditorHandler`{lang="ts-type"} interface:
 
@@ -235,8 +237,8 @@ The Editor component provides the following default handlers:
 - `mention`{lang="ts-type"} - Trigger mention menu (@)
 - `emoji`{lang="ts-type"} - Trigger emoji picker (:)
 
-::tip{to="#with-custom-handlers"}
-See the Examples section for more practical use cases like adding notifications, custom validation, or integrating with external services.
+::tip{to="#with-image-upload"}
+See the Examples section to learn how to create your own custom handlers.
 ::
 
 ## Examples
@@ -249,8 +251,9 @@ You can use the [EditorToolbar](/docs/components/editor-toolbar) component to ad
 ---
 elevated: true
 collapse: true
+prettier: true
 name: 'editor-toolbar-example'
-class: 'min-h-40 sm:py-9'
+class: 'p-8'
 ---
 ::
 
@@ -262,8 +265,9 @@ You can use the [EditorDragHandle](/docs/components/editor-drag-handle) componen
 ---
 elevated: true
 collapse: true
+prettier: true
 name: 'editor-drag-handle-example'
-class: 'min-h-40 sm:py-9'
+class: 'p-8'
 ---
 ::
 
@@ -275,8 +279,9 @@ You can use the [EditorSuggestionMenu](/docs/components/editor-suggestion-menu) 
 ---
 elevated: true
 collapse: true
+prettier: true
 name: 'editor-suggestion-menu-example'
-class: 'min-h-40 sm:py-9'
+class: 'p-8'
 ---
 ::
 
@@ -288,8 +293,9 @@ You can use the [EditorMentionMenu](/docs/components/editor-mention-menu) compon
 ---
 elevated: true
 collapse: true
+prettier: true
 name: 'editor-mention-menu-example'
-class: 'min-h-40 sm:py-9'
+class: 'p-8'
 ---
 ::
 
@@ -301,147 +307,31 @@ You can use the [EditorEmojiMenu](/docs/components/editor-emoji-menu) component 
 ---
 elevated: true
 collapse: true
+prettier: true
 name: 'editor-emoji-menu-example'
-class: 'min-h-40 sm:py-9'
+class: 'p-8'
 ---
 ::
 
-### With custom extensions
+### With image upload
 
-You can add custom TipTap extensions to enhance the editor functionality.
+This example demonstrates how to create an image upload feature using the `extensions` prop to register a custom TipTap node and the `handlers` prop to define how the toolbar button triggers the upload flow.
 
 ::component-example
 ---
 elevated: true
 collapse: true
-name: 'editor-custom-extensions-example'
-class: 'min-h-96'
+prettier: true
+name: 'editor-image-upload-example'
+class: '!p-0'
 ---
 ::
 
-::tip
-This example includes the Emoji extension for emoji picker support and the TextAlign extension for text alignment buttons.
-::
+1. Create a Vue component that uses the [FileUpload](/docs/components/file-upload) component:
 
-### With custom handlers
+::code-collapse
 
-You can provide custom handlers to override or extend the default command behavior.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-custom-handlers-example'
-class: 'min-h-40 sm:py-9'
----
-::
-
-::note
-Custom handlers allow you to customize how editor commands are executed, checked for active state, and validated.
-::
-
-### Custom toolbar item slots
-
-You can override specific toolbar items using slots to add custom functionality. This is useful for complex interactions like link editing.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-custom-toolbar-slot-example'
-class: 'min-h-40 sm:py-9'
----
-::
-
-In the example above, we use the `slot` property on a toolbar item and provide a matching template slot with custom UI:
-
-```vue
-<script setup lang="ts">
-const toolbarItems = [[{
-  kind: 'mark',
-  mark: 'bold',
-  icon: 'i-lucide-bold'
-}, {
-  slot: 'link' // Custom slot for link button
-}]]
-</script>
-
-<template>
-  <UEditor v-slot="{ editor }" v-model="content">
-    <UEditorToolbar :editor="editor" :items="toolbarItems">
-      <template #link>
-        <!-- Your custom link component here -->
-        <EditorLinkPopover :editor="editor" />
-      </template>
-    </UEditorToolbar>
-  </UEditor>
-</template>
-```
-
-::tip
-Use custom slots when you need more control over toolbar item behavior, such as popovers, modals, or complex forms.
-::
-
-### Custom handlers with extensions
-
-You can add custom TipTap extensions and provide matching handlers to integrate them with the editor's toolbar and menus.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-custom-extension-handler-example'
-class: 'min-h-96'
----
-::
-
-The example above shows a complete custom ImageUpload extension with handlers. Here's how it works:
-
-**1. Create a TipTap extension (`utils/editor/image-upload.ts`):**
-
-```ts
-import { Node, mergeAttributes } from '@tiptap/core'
-import { VueNodeViewRenderer } from '@tiptap/vue-3'
-import ImageUploadNode from './ImageUploadNode.vue'
-
-export const ImageUpload = Node.create({
-  name: 'imageUpload',
-  group: 'block',
-  atom: true,
-
-  addNodeView() {
-    return VueNodeViewRenderer(ImageUploadNode)
-  },
-
-  addCommands() {
-    return {
-      insertImageUpload: () => ({ commands }) => {
-        return commands.insertContent({ type: this.name })
-      }
-    }
-  }
-})
-```
-
-**2. Create custom handlers to connect the extension to your toolbar:**
-
-```ts
-import type { EditorCustomHandlers } from '@nuxt/ui'
-import type { Editor } from '@tiptap/vue-3'
-
-const customHandlers = {
-  imageUpload: {
-    canExecute: (editor: Editor) => editor.can().insertContent({ type: 'imageUpload' }),
-    execute: (editor: Editor) => editor.chain().focus().insertImageUpload().run(),
-    isActive: (editor: Editor) => editor.isActive('imageUpload'),
-    isDisabled: undefined
-  }
-} satisfies EditorCustomHandlers
-```
-
-**3. Create the Vue component for the custom node (`ImageUploadNode.vue`):**
-
-```vue
+```vue [app/components/ImageUploadNode.vue]
 <script setup lang="ts">
 import type { NodeViewProps } from '@tiptap/vue-3'
 import { NodeViewWrapper } from '@tiptap/vue-3'
@@ -449,21 +339,15 @@ import { NodeViewWrapper } from '@tiptap/vue-3'
 const props = defineProps<NodeViewProps>()
 const file = ref<File | null>(null)
 
-watch(file, async (newFile) => {
+watch(file, (newFile) => {
   if (!newFile) return
 
-  // Convert file to data URL
   const reader = new FileReader()
   reader.onload = (e) => {
-    const dataUrl = e.target?.result as string
     const pos = props.getPos()
-
-    // Replace upload node with actual image
-    props.editor
-      .chain()
-      .focus()
+    props.editor.chain().focus()
       .deleteRange({ from: pos, to: pos + 1 })
-      .setImage({ src: dataUrl })
+      .setImage({ src: e.target?.result as string })
       .run()
   }
   reader.readAsDataURL(newFile)
@@ -477,12 +361,102 @@ watch(file, async (newFile) => {
 </template>
 ```
 
-::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/custom-extensions" target="_blank"}
-Learn more about creating custom extensions in the TipTap documentation.
 ::
 
-::tip
-Custom extensions with handlers unlock powerful functionality like file uploads, custom blocks, AI completions, and more. The ImageUpload example shows a complete implementation with a custom Vue component for the node view.
+2. Create a custom TipTap extension to register the node:
+
+::code-collapse
+
+```ts [app/utils/image-upload.ts]
+import { Node, mergeAttributes } from '@tiptap/core'
+import { VueNodeViewRenderer } from '@tiptap/vue-3'
+import ImageUploadNode from '~/components/ImageUploadNode.vue'
+
+declare module '@tiptap/vue-3' {
+  interface Commands<ReturnType> {
+    imageUpload: {
+      insertImageUpload: () => ReturnType
+    }
+  }
+}
+
+export const ImageUpload = Node.create({
+  name: 'imageUpload',
+  group: 'block',
+  atom: true,
+  addAttributes() {
+    return {}
+  },
+  parseHTML() {
+    return [{
+      tag: 'div[data-type="image-upload"]'
+    }]
+  },
+  renderHTML({ HTMLAttributes }) {
+    return ['div', mergeAttributes(HTMLAttributes, { 'data-type': 'image-upload' })]
+  },
+  addNodeView() {
+    return VueNodeViewRenderer(ImageUploadNode)
+  },
+  addCommands() {
+    return {
+      insertImageUpload: () => ({ commands }) => {
+        return commands.insertContent({ type: this.name })
+      }
+    }
+  }
+})
+```
+
+::
+
+3. Pass the extension and handlers to the Editor:
+
+::code-collapse
+
+```vue
+<script setup lang="ts">
+import type { EditorCustomHandlers, EditorToolbarItem } from '@nuxt/ui'
+import type { Editor } from '@tiptap/vue-3'
+import { ImageUpload } from '~/utils/image-upload'
+
+const value = ref('')
+
+const customHandlers = {
+  imageUpload: {
+    canExecute: (editor: Editor) => (editor.can() as any).insertContent({ type: 'imageUpload' }),
+    execute: (editor: Editor) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
+    isActive: (editor: Editor) => editor.isActive('imageUpload'),
+    isDisabled: undefined
+  }
+} satisfies EditorCustomHandlers
+
+const items = [{
+  kind: 'imageUpload',
+  icon: 'i-lucide-image',
+  label: 'Add image'
+}] satisfies EditorToolbarItem<typeof customHandlers>[]
+</script>
+
+<template>
+  <UEditor
+    v-model="value"
+    :extensions="[ImageUpload]"
+    :handlers="customHandlers"
+  >
+    <UEditorToolbar :editor="editor" :items="items" />
+  </UEditor>
+</template>
+```
+
+::
+
+::note
+The `handlers` are automatically provided to [EditorToolbar](/docs/components/editor-toolbar) and [EditorSuggestionMenu](/docs/components/editor-suggestion-menu) which let you use `kind: 'imageUpload'` in your items.
+::
+
+::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/custom-extensions" target="_blank"}
+Learn more about creating custom extensions in the TipTap documentation.
 ::
 
 ## API

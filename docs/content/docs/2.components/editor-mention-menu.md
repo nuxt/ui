@@ -11,20 +11,21 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorMentionMenu component must be used inside an [Editor](/docs/components/editor) component's default slot to provide @ mention functionality.
+The EditorMentionMenu component must be used inside an [Editor](/docs/components/editor) component's default slot to provide @ mention functionality. Mentions are inserted as inline elements that can be styled and linked.
 
-Type `@` followed by a name to search and insert mentions into your content.
+Type `@` followed by a name to search and insert mentions.
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-mention-menu-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-8'
 ---
 ::
 
 ::note
-The mention menu automatically filters items as you type and supports keyboard navigation.
+The menu filters items as you type and supports keyboard navigation (arrow keys, enter to select, escape to close).
 ::
 
 ### Items
@@ -33,46 +34,57 @@ Use the `items` prop to define the available mentions. Each item can include a l
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-mention-menu-items-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-8'
 ---
 ::
 
-Each item should have:
-- `label`{lang="ts-type"}: The mention text (required)
-- `avatar`{lang="ts-type"}: Avatar props for displaying a user image
-- `icon`{lang="ts-type"}: Icon to display if no avatar is provided
-- `description`{lang="ts-type"}: Optional description text
-- `disabled`{lang="ts-type"}: Whether the item can be selected
+Each item supports these properties:
+
+| Property | Description |
+| -------- | ----------- |
+| `label`{lang="ts-type"} | The mention text that gets inserted (required) |
+| `avatar`{lang="ts-type"} | Avatar props for displaying a user image |
+| `icon`{lang="ts-type"} | Icon to display if no avatar is provided |
+| `description`{lang="ts-type"} | Optional description shown below the label |
+| `disabled`{lang="ts-type"} | Whether the item can be selected |
 
 ::tip
-Use avatars for user mentions and icons for other entities like teams or channels.
+Use avatars for user mentions and icons for entities like teams, channels, or tags.
 ::
 
 ### Trigger character
 
-Use the `char` prop to change the trigger character. Defaults to `@`.
+Use the `char` prop to change the trigger character. Defaults to `@`{lang="ts-type"}.
 
-::component-example
----
-collapse: true
-name: 'editor-mention-menu-char-example'
-class: 'min-h-80'
----
+```vue
+<template>
+  <UEditorMentionMenu :editor="editor" :items="channels" char="#" />
+</template>
+```
+
+::tip
+Use `#` for channels or tags, `+` for adding team members, etc.
 ::
 
 ### Options
 
 Use the `options` prop to customize the positioning behavior using Floating UI options.
 
-::component-example
----
-collapse: true
-name: 'editor-mention-menu-options-example'
-class: 'min-h-80'
----
-::
+```vue
+<template>
+  <UEditorMentionMenu
+    :editor="editor"
+    :items="items"
+    :options="{
+      placement: 'bottom-start',
+      offset: 4
+    }"
+  />
+</template>
+```
 
 ::tip{to="https://floating-ui.com/docs/computeposition" target="_blank"}
 The options are passed to Floating UI's `computePosition` function. You can configure strategy, placement, offset, flip, shift, and other positioning middleware.
@@ -80,32 +92,34 @@ The options are passed to Floating UI's `computePosition` function. You can conf
 
 ## Examples
 
-### User mentions
+### With descriptions
 
-Create a mention menu for tagging users in your content.
+Add descriptions to provide more context about each user or entity.
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-mention-menu-users-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-8'
 ---
 ::
 
-### With fetched data
+### With async data
 
-Fetch mention suggestions from an API as users type.
+You can fetch mention suggestions dynamically based on the user's query.
 
 ::component-example
 ---
+elevated: true
 collapse: true
 name: 'editor-mention-menu-fetched-example'
-class: 'min-h-80'
+class: 'min-h-40 sm:py-8'
 ---
 ::
 
 ::note
-This example demonstrates how to dynamically load mentions based on user input.
+The items prop is reactive, allowing you to update suggestions as the user types.
 ::
 
 ## API
@@ -113,14 +127,6 @@ This example demonstrates how to dynamically load mentions based on user input.
 ### Props
 
 :component-props
-
-### Slots
-
-:component-slots
-
-### Emits
-
-:component-emits
 
 ## Theme
 
