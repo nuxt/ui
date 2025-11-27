@@ -8,25 +8,32 @@ defineProps<{
 }>()
 
 interface ImageItem {
+  id: string
   title: string
   creator: string
   thumbnail: string
-  likes: string
+  likes: number
   liked: boolean
 }
 
 const items = ref<ImageItem[]>([])
 const loading = ref(true)
 
+const toggleLike = (item: ImageItem) => {
+  item.liked = !item.liked
+  item.likes += item.liked ? 1 : -1
+}
+
 onMounted(async () => {
   try {
     const randomPage = Math.floor(Math.random() * 10) + 1
     const response = await fetch(
-      `https://api.artic.edu/api/v1/artworks/search?q=painting&page=${randomPage}&limit=100&fields=title,artist_display,image_id&query[term][is_public_domain]=true`
+      `https://api.artic.edu/api/v1/artworks/search?q=painting&page=${randomPage}&limit=100&fields=id,title,artist_display,image_id&query[term][is_public_domain]=true`
     )
     const data = await response.json()
 
     items.value = data.data.map((artwork: any) => ({
+      id: artwork.id,
       title: artwork.title || 'Untitled',
       creator: artwork.artist_display?.split('\n')[0] || 'Unknown Artist',
       thumbnail: `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`,
@@ -56,39 +63,38 @@ onMounted(async () => {
       variant="naked"
       class="w-full h-full magic-card"
       :ui="{
-        body: 'w-full absolute bottom-0',
+        body: 'w-full absolute bottom-0 flex flex-row justify-between items-center gap-2 max-w-full',
         container: 'lg:flex lg:flex-col flex-col-reverse gap-y-2 w-full'
       }"
     >
       <div class="w-full h-full max-h-[calc(100%-36px)] overflow-hidden">
-        <NuxtImg :src="item.thumbnail" class="rounded-xl w-full h-full grow" />
+        <NuxtImg :src="item.thumbnail" :alt="item.title" class="rounded-xl w-full h-full grow" />
       </div>
       <template #body>
-        <div
-          class="flex flex-row justify-between items-center gap-2 max-w-full"
-        >
-          <p class="ps-1 w-full text-sm truncate">
+        <UTooltip :text="`${item.title}, ${item.creator}`">
+          <p class="ps-1 w-full text-sm truncate" :alt="`${item.title}, ${item.creator}`">
             {{ item.title }} <span class="text-muted">{{ item.creator }}</span>
           </p>
-          <UButton
-            color="neutral"
-            variant="ghost"
-            size="sm"
-            square
-            :icon="
-              item.liked
-                ? 'material-symbols:favorite-rounded'
-                : 'material-symbols:favorite-outline-rounded'
-            "
-            :label="item.likes"
-            :active="item.liked"
-            :ui="
-              item.liked
-                ? { leadingIcon: 'text-red-500' }
-                : { leadingIcon: 'text-gray-500' }
-            "
-          />
-        </div>
+        </UTooltip>
+        <UButton
+          color="neutral"
+          variant="ghost"
+          size="sm"
+          square
+          :icon="
+            item.liked
+              ? 'material-symbols:favorite-rounded'
+              : 'material-symbols:favorite-outline-rounded'
+          "
+          :label="String(item.likes)"
+          :active="item.liked"
+          :ui="
+            item.liked
+              ? { leadingIcon: 'text-red-500' }
+              : { leadingIcon: 'text-gray-500' }
+          "
+          @click="toggleLike(item)"
+        />
       </template>
     </UPageCard>
   </UScrollArea>
