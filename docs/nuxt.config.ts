@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/image',
     '@nuxtjs/plausible',
+    '@nuxtjs/mcp-toolkit',
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-og-image',
@@ -261,5 +262,9 @@ export default defineNuxtConfig({
       'The documentation excludes Nuxt UI v2 content.',
       'The content is automatically generated from the same source as the official documentation.'
     ]
+  },
+  mcp: {
+    name: 'Nuxt UI',
+    browserRedirect: '/docs/getting-started/ai/mcp'
   }
 })

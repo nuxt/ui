@@ -21,6 +21,7 @@
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "workspace:*",
     "@nuxtjs/plausible": "^2.0.1",
+    "@nuxtjs/mcp-toolkit": "^0.1.1",
     "@octokit/rest": "^22.0.1",
     "@regle/core": "^1.10.2",
     "@regle/rules": "^1.10.2",
