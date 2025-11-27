@@ -54,7 +54,7 @@ onMounted(async () => {
     v-slot="{ item }"
     :items="items"
     :orientation="orientation"
-    :virtualize="virtualize && { lanes: lanes && lanes > 1 ? lanes : undefined, gap, paddingStart: padding, paddingEnd: padding }"
+    :virtualize="virtualize && { lanes: lanes && lanes > 1 ? lanes : undefined, gap, paddingStart: padding, paddingEnd: padding, estimateSize: 350 }"
     class="border border-default rounded-lg w-full h-128"
     :ui="{ viewport: 'h-full', item: 'shrink-0' }"
   >

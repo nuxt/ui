@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ComponentPublicInstance, CSSProperties } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { VirtualItem, VirtualizerOptions } from '@tanstack/vue-virtual'
+import type { VirtualItem, VirtualizerOptions, Key } from '@tanstack/vue-virtual'
 import theme from '#build/ui/scroll-area'
 import type { ComponentConfig } from '../types/tv'
 
@@ -22,12 +22,16 @@ export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
    */
   estimateSize?: number | ((index: number) => number)
   /**
-   * Number of lanes or target lane size for multi-column layouts.
-   * - Number (e.g., 3): fixed number of columns/rows
-   * - String (e.g., '300px'): responsive columns based on item width
+   * Number of lanes for multi-column/row layouts.
+   * For responsive lane counts, use a computed property with viewport/container size:
+   * @example
+   * ```ts
+   * const { width } = useWindowSize()
+   * const lanes = computed(() => Math.floor(width.value / 300))
+   * ```
    * @defaultValue undefined
    */
-  lanes?: number | string
+  lanes?: number
   /**
    * Number of items from the end to trigger loadMore event (for infinite scroll)
    * @defaultValue 5
@@ -273,9 +277,9 @@ function requireVirtualization(method: string) {
   return true
 }
 
-function getItemKey(item: T, index: number): string | number {
+function getItemKey(item: T, index: number): Key {
   if (virtualizerProps.value.getItemKey) {
-    return virtualizerProps.value.getItemKey(index, item)
+    return virtualizerProps.value.getItemKey(index)
   }
   if (item && typeof item === 'object' && 'id' in item) {
     return (item as any).id
