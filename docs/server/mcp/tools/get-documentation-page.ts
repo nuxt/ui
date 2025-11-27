@@ -8,7 +8,7 @@ export default defineMcpTool({
   handler: async ({ path }) => {
     const result = await $fetch<string>(`/raw${path}.md`)
     return {
-      content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }]
+      content: [{ type: 'text' as const, text: result }]
     }
   }
 })
