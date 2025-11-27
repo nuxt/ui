@@ -1,14 +1,7 @@
 <script setup lang="ts">
-const value = ref({
-  type: 'doc',
-  content: [{
-    type: 'paragraph',
-    content: [{ type: 'text', text: 'Click the plus button to add a new paragraph below the current block.' }]
-  }, {
-    type: 'paragraph',
-    content: [{ type: 'text', text: 'The button appears when hovering over blocks.' }]
-  }]
-})
+const value = ref(`Click the plus button to add a new paragraph below the current block.
+
+The button appears when hovering over blocks.`)
 </script>
 
 <template>

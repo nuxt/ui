@@ -1,14 +1,7 @@
 <script setup lang="ts">
-const value = ref({
-  type: 'doc',
-  content: [{
-    type: 'paragraph',
-    content: [{ type: 'text', text: 'The drag handle uses a custom icon.' }]
-  }, {
-    type: 'paragraph',
-    content: [{ type: 'text', text: 'Hover to see the move icon.' }]
-  }]
-})
+const value = ref(`The drag handle uses a custom icon.
+
+Hover to see the move icon.`)
 </script>
 
 <template>

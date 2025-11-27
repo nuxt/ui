@@ -13,7 +13,7 @@ Try uploading an image below:
 
 const customHandlers = {
   imageUpload: {
-    canExecute: (editor: Editor) => (editor.can() as any).insertContent({ type: 'imageUpload' }),
+    canExecute: (editor: Editor) => editor.can().insertContent({ type: 'imageUpload' }),
     execute: (editor: Editor) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
     isActive: (editor: Editor) => editor.isActive('imageUpload'),
     isDisabled: undefined

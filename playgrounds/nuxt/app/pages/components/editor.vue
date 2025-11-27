@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { upperFirst } from 'scule'
 import type { EditorContent, EditorToolbarItem, EditorMentionMenuItem, EditorEmojiMenuItem, DropdownMenuItem, EditorSuggestionMenuItem, EditorCustomHandlers } from '@nuxt/ui'
-import type { Editor } from '@tiptap/vue-3'
+import type { Editor, Node } from '@tiptap/vue-3'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import TextAlign from '@tiptap/extension-text-align'
@@ -72,7 +72,7 @@ Visit our [documentation](https://ui.nuxt.com) to learn more and explore all ava
 
 const customHandlers = {
   imageUpload: {
-    canExecute: (editor: Editor) => (editor.can() as any).insertContent({ type: 'imageUpload' }),
+    canExecute: (editor: Editor) => editor.can().insertContent({ type: 'imageUpload' }),
     execute: (editor: Editor) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
     isActive: (editor: Editor) => editor.isActive('imageUpload'),
     isDisabled: undefined
@@ -216,10 +216,10 @@ const imageToolbarItems = (editor: Editor): EditorToolbarItem<typeof customHandl
   }]]
 }
 
-const selectedNode = ref<any>(null)
+const selectedNode = ref<{ node: Node | null, pos: number }>()
 
 const handleItems = (editor: Editor): DropdownMenuItem[][] => {
-  if (!selectedNode.value) {
+  if (!selectedNode.value?.node) {
     return []
   }
 

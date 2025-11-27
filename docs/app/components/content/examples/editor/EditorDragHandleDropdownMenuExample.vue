@@ -1,23 +1,15 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
-import type { Editor } from '@tiptap/vue-3'
+import type { Editor, Node } from '@tiptap/vue-3'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 
-const value = ref({
-  type: 'doc',
-  content: [{
-    type: 'paragraph',
-    content: [{ type: 'text', text: 'Hover over the left side to see both drag handle and menu button.' }]
-  }, {
-    type: 'paragraph',
-    content: [{ type: 'text', text: 'Click the menu to see block actions.' }]
-  }, {
-    type: 'paragraph',
-    content: [{ type: 'text', text: 'Try duplicating or deleting a block.' }]
-  }]
-})
+const value = ref(`Hover over the left side to see both drag handle and menu button.
 
-const selectedNode = ref<any>(null)
+Click the menu to see block actions.
+
+Try duplicating or deleting a block.`)
+
+const selectedNode = ref<{ node: Node | null, pos: number }>()
 
 const getMenuItems = (editor: Editor): DropdownMenuItem[][] => {
   if (!selectedNode.value) return []

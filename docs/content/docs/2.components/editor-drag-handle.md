@@ -72,7 +72,7 @@ The options are passed to Floating UI's `computePosition` function to configure 
 
 ## Examples
 
-### With block actions
+### With dropdown menu
 
 Use the default slot to add a dropdown menu with block-level actions.
 
@@ -80,7 +80,7 @@ Use the default slot to add a dropdown menu with block-level actions.
 ---
 elevated: true
 collapse: true
-name: 'editor-drag-handle-dropdown-example'
+name: 'editor-drag-handle-dropdown-menu-example'
 class: 'p-8'
 ---
 ::
