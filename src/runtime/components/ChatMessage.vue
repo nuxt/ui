@@ -82,16 +82,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
 </script>
 
 <template>
-  <Primitive :as="as" :data-role="role" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.container({ class: props.ui?.container })">
-      <div v-if="icon || avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+  <Primitive :as="as" :data-role="role" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="icon || avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :avatar="avatar" :ui="ui">
-          <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-          <UAvatar v-else-if="avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+          <UIcon v-if="icon" :name="icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+          <UAvatar v-else-if="avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
         </slot>
       </div>
 
-      <div v-if="content || parts.length || !!slots.content" :class="ui.content({ class: props.ui?.content })">
+      <div v-if="content || parts.length || !!slots.content" data-slot="content" :class="ui.content({ class: props.ui?.content })">
         <slot
           :id="id"
           name="content"
@@ -112,7 +112,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
         </slot>
       </div>
 
-      <div v-if="actions || !!slots.actions" :class="ui.actions({ class: props.ui?.actions })">
+      <div v-if="actions || !!slots.actions" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
         <slot name="actions" :actions="actions">
           <UTooltip v-for="(action, index) in actions" :key="index" :text="action.label">
             <UButton

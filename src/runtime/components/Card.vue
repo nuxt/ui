@@ -43,16 +43,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.card || {}) 
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" />
     </div>
 
-    <div v-if="!!slots.default" :class="ui.body({ class: props.ui?.body })">
+    <div v-if="!!slots.default" data-slot="body" :class="ui.body({ class: props.ui?.body })">
       <slot />
     </div>
 
-    <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

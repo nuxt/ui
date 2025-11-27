@@ -31,20 +31,6 @@
       ]
     },
     {
-      "groupName": "vite",
-      "matchPackageNames": [
-        "vite",
-        "@vitejs/plugin-vue"
-      ]
-    },
-    {
-      "groupName": "vue-tsc",
-      "matchPackageNames": [
-        "vue-tsc",
-        "vue-component-type-helpers"
-      ]
-    },
-    {
       "matchDepTypes": [
         "peerDependencies"
       ],
