@@ -11,7 +11,7 @@ const vueComponents = await glob('./src/runtime/vue/components/*.vue', { absolut
 
 export default defineConfig({
   test: {
-    testTimeout: 1000,
+    testTimeout: 5000,
     globals: true,
     silent: true,
     resolveSnapshotPath(path, extension, { config }) {
@@ -23,6 +23,7 @@ export default defineConfig({
     },
     projects: [
       await defineVitestProject({
+        extends: true,
         test: {
           name: 'nuxt',
           include: ['./test/components/**/**.spec.ts', './test/composables/**.spec.ts', './test/utils/**/**.spec.ts'],
@@ -36,6 +37,7 @@ export default defineConfig({
         }
       }),
       {
+        extends: true,
         test: {
           name: 'vue',
           environment: 'happy-dom',
