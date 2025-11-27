@@ -133,7 +133,7 @@ const value = ref('<h1>Hello World</h1>\n')
 ```
 
 ::tip{to="#with-image-upload"}
-See the Examples section to learn how to create your own custom extensions.
+Check out the image upload example for creating custom TipTap extensions.
 ::
 
 ### Placeholder
@@ -161,13 +161,13 @@ props:
 ---
 ::
 
-::note{to="https://tiptap.dev/docs/editor/extensions/functionality/placeholder#settings" target="_blank"}
-Learn more about placeholder options in the TipTap documentation.
+::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/functionality/placeholder" target="_blank"}
+Learn more about Placeholder extension in the TipTap documentation.
 ::
 
 ### Starter Kit
 
-Use the `starter-kit` prop to configure the built-in TipTap StarterKit extension which includes common editor features.
+Use the `starter-kit` prop to configure the built-in TipTap StarterKit extension which includes common editor features like bold, italic, headings, lists, blockquotes, code blocks, and more.
 
 ```vue
 <script setup lang="ts">
@@ -194,51 +194,125 @@ const value = ref('<h1>Hello World</h1>\n')
 </template>
 ```
 
-::note{to="https://tiptap.dev/docs/editor/extensions/functionality/starterkit#included-extensions" target="_blank"}
-The StarterKit includes extensions for bold, italic, strike, code, headings, lists, blockquotes, code blocks, horizontal rules, and more. Check the TipTap documentation for all available options.
+::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/functionality/starterkit" target="_blank"}
+Learn more about StarterKit extension in the TipTap documentation.
 ::
 
 ### Handlers
 
-Use the `handlers` prop to override or extend the default command handlers used by [EditorToolbar](/docs/components/editor-toolbar) and [EditorSuggestionMenu](/docs/components/editor-suggestion-menu) items through the `kind` field.
+Handlers wrap TipTap's built-in commands to provide a unified interface for editor actions. When you add a `kind` property to a [EditorToolbar](/docs/components/editor-toolbar) or [EditorSuggestionMenu](/docs/components/editor-suggestion-menu) item, the corresponding handler executes the TipTap command and manages its state (active, disabled, etc.).
+
+#### Default handlers
+
+The Editor component provides these default handlers, which you can reference in toolbar or suggestion menu items using the `kind` property:
+
+| Handler | Description | Usage |
+|---------|-------------|-------|
+| `mark`{lang="ts-type"} | Toggle text marks (bold, italic, strike, code, underline) | Requires `mark` property in item |
+| `textAlign`{lang="ts-type"} | Set text alignment (left, center, right, justify) | Requires `align` property in item |
+| `heading`{lang="ts-type"} | Toggle heading levels (1-6) | Requires `level` property in item |
+| `link`{lang="ts-type"} | Add, edit, or remove links | Prompts for URL if not provided |
+| `image`{lang="ts-type"} | Insert images | Prompts for URL if not provided |
+| `blockquote`{lang="ts-type"} | Toggle blockquotes | |
+| `bulletList`{lang="ts-type"} | Toggle bullet lists | Handles list conversions |
+| `orderedList`{lang="ts-type"} | Toggle ordered lists | Handles list conversions |
+| `codeBlock`{lang="ts-type"} | Toggle code blocks | |
+| `horizontalRule`{lang="ts-type"} | Insert horizontal rules | |
+| `paragraph`{lang="ts-type"} | Set paragraph format | |
+| `undo`{lang="ts-type"} | Undo last change | |
+| `redo`{lang="ts-type"} | Redo last undone change | |
+| `clearFormatting`{lang="ts-type"} | Remove all formatting | Works with selection or position |
+| `duplicate`{lang="ts-type"} | Duplicate a node | Requires `pos` property in item |
+| `delete`{lang="ts-type"} | Delete a node | Requires `pos` property in item |
+| `moveUp`{lang="ts-type"} | Move a node up | Requires `pos` property in item |
+| `moveDown`{lang="ts-type"} | Move a node down | Requires `pos` property in item |
+| `suggestion`{lang="ts-type"} | Trigger suggestion menu | Inserts `/` character |
+| `mention`{lang="ts-type"} | Trigger mention menu | Inserts `@` character |
+| `emoji`{lang="ts-type"} | Trigger emoji picker | Inserts `:` character |
+
+Here's how to use default handlers in toolbar or suggestion menu items:
+
+```vue
+<script setup lang="ts">
+import type { EditorToolbarItem } from '@nuxt/ui'
+
+const value = ref('<h1>Hello World</h1>\n')
+
+const items: EditorToolbarItem[] = [
+  { kind: 'mark', mark: 'bold', icon: 'i-lucide-bold' },
+  { kind: 'mark', mark: 'italic', icon: 'i-lucide-italic' },
+  { kind: 'heading', level: 1, icon: 'i-lucide-heading-1' },
+  { kind: 'heading', level: 2, icon: 'i-lucide-heading-2' },
+  { kind: 'textAlign', align: 'left', icon: 'i-lucide-align-left' },
+  { kind: 'textAlign', align: 'center', icon: 'i-lucide-align-center' },
+  { kind: 'bulletList', icon: 'i-lucide-list' },
+  { kind: 'orderedList', icon: 'i-lucide-list-ordered' },
+  { kind: 'blockquote', icon: 'i-lucide-quote' },
+  { kind: 'link', icon: 'i-lucide-link' }
+]
+</script>
+
+<template>
+  <UEditor v-slot="{ editor }" v-model="value">
+    <UEditorToolbar :editor="editor" :items="items" />
+  </UEditor>
+</template>
+```
+
+#### Custom handlers
+
+Use the `handlers` prop to extend or override the default handlers. Custom handlers are merged with the default handlers, allowing you to add new actions or modify existing behavior.
 
 Each handler implements the `EditorHandler`{lang="ts-type"} interface:
 
 ```ts
 interface EditorHandler {
-  canExecute?: (editor: Editor, item?: any) => boolean
+  /* Checks if the command can be executed in the current editor state */
+  canExecute: (editor: Editor, item?: any) => boolean
+  /* Executes the command and returns a Tiptap chain */
   execute: (editor: Editor, item?: any) => any
-  isActive?: (editor: Editor, item?: any) => boolean
+  /* Determines if the item should appear active (used for toggle states) */
+  isActive: (editor: Editor, item?: any) => boolean
+  /* Optional additional check to disable the item (combined with `canExecute`) */
   isDisabled?: (editor: Editor, item?: any) => boolean
 }
 ```
 
-The Editor component provides the following default handlers:
+Here's an example of creating custom handlers:
 
-- `mark`{lang="ts-type"} - Toggle text marks (bold, italic, strike, code, underline)
-- `textAlign`{lang="ts-type"} - Set text alignment (left, center, right, justify)
-- `heading`{lang="ts-type"} - Toggle heading levels (1-6)
-- `link`{lang="ts-type"} - Add, edit, or remove links
-- `image`{lang="ts-type"} - Insert images
-- `blockquote`{lang="ts-type"} - Toggle blockquotes
-- `bulletList`{lang="ts-type"} - Toggle bullet lists
-- `orderedList`{lang="ts-type"} - Toggle ordered lists
-- `codeBlock`{lang="ts-type"} - Toggle code blocks
-- `horizontalRule`{lang="ts-type"} - Insert horizontal rules
-- `paragraph`{lang="ts-type"} - Set paragraph format
-- `undo`{lang="ts-type"} - Undo last change
-- `redo`{lang="ts-type"} - Redo last undone change
-- `clearFormatting`{lang="ts-type"} - Remove all formatting from selection
-- `duplicate`{lang="ts-type"} - Duplicate a node
-- `delete`{lang="ts-type"} - Delete a node
-- `moveUp`{lang="ts-type"} - Move a node up
-- `moveDown`{lang="ts-type"} - Move a node down
-- `suggestion`{lang="ts-type"} - Trigger suggestion menu (/)
-- `mention`{lang="ts-type"} - Trigger mention menu (@)
-- `emoji`{lang="ts-type"} - Trigger emoji picker (:)
+```vue
+<script setup lang="ts">
+import type { Editor } from '@tiptap/vue-3'
+import type { EditorCustomHandlers, EditorToolbarItem } from '@nuxt/ui'
+
+const value = ref('<h1>Hello World</h1>\n')
+
+const customHandlers = {
+  highlight: {
+    canExecute: (editor: Editor) => editor.can().toggleHighlight(),
+    execute: (editor: Editor) => editor.chain().focus().toggleHighlight(),
+    isActive: (editor: Editor) => editor.isActive('highlight'),
+    isDisabled: (editor: Editor) => !editor.isEditable
+  }
+} satisfies EditorCustomHandlers
+
+const items = [
+  // Built-in handler
+  { kind: 'mark', mark: 'bold', icon: 'i-lucide-bold' },
+  // Custom handler
+  { kind: 'highlight', icon: 'i-lucide-highlighter' }
+] satisfies EditorToolbarItem<typeof customHandlers>[]
+</script>
+
+<template>
+  <UEditor v-slot="{ editor }" v-model="value" :handlers="customHandlers">
+    <UEditorToolbar :editor="editor" :items="items" />
+  </UEditor>
+</template>
+```
 
 ::tip{to="#with-image-upload"}
-See the Examples section to learn how to create your own custom handlers.
+Check out the image upload example for a complete implementation with custom handlers.
 ::
 
 ## Examples
@@ -449,10 +523,6 @@ const items = [{
 </template>
 ```
 
-::
-
-::note
-The `handlers` are automatically provided to [EditorToolbar](/docs/components/editor-toolbar) and [EditorSuggestionMenu](/docs/components/editor-suggestion-menu) which let you use `kind: 'imageUpload'` in your items.
 ::
 
 ::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/custom-extensions" target="_blank"}

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
+import type { Editor } from '@tiptap/vue-3'
+import { mapEditorItems } from '@nuxt/ui/utils/editor'
 
 const value = ref({
   type: 'doc',
@@ -17,37 +19,27 @@ const value = ref({
 
 const selectedNode = ref<any>(null)
 
-const getMenuItems = (editor: any): DropdownMenuItem[][] => {
+const getMenuItems = (editor: Editor): DropdownMenuItem[][] => {
   if (!selectedNode.value) return []
 
-  return [[{
+  return mapEditorItems(editor, [[{
+    kind: 'duplicate',
+    pos: selectedNode.value.pos,
     label: 'Duplicate',
-    icon: 'i-lucide-copy',
-    onSelect: () => {
-      const { pos } = selectedNode.value
-      const node = editor.state.doc.nodeAt(pos)
-      if (node) {
-        editor.chain().focus().insertContentAt(pos + node.nodeSize, node.toJSON()).run()
-      }
-    }
+    icon: 'i-lucide-copy'
   }], [{
+    kind: 'delete',
+    pos: selectedNode.value.pos,
     label: 'Delete',
-    icon: 'i-lucide-trash',
-    onSelect: () => {
-      const { pos } = selectedNode.value
-      const node = editor.state.doc.nodeAt(pos)
-      if (node) {
-        editor.chain().focus().deleteRange({ from: pos, to: pos + node.nodeSize }).run()
-      }
-    }
-  }]]
+    icon: 'i-lucide-trash'
+  }]]) as DropdownMenuItem[][]
 }
 </script>
 
 <template>
   <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Start typing...">
     <UEditorDragHandle
-      v-slot="{ ui, onClick }"
+      v-slot="{ ui }"
       :editor="editor"
       @node-change="selectedNode = $event"
     >

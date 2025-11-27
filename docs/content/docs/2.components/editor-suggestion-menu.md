@@ -20,7 +20,7 @@ Type `/` in the editor to open the suggestion menu.
 elevated: true
 collapse: true
 name: 'editor-suggestion-menu-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -37,7 +37,7 @@ Use the `items` prop to define the available commands in the menu. Items can be 
 elevated: true
 collapse: true
 name: 'editor-suggestion-menu-items-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -102,7 +102,7 @@ Create an organized suggestion menu with labeled sections and separators.
 elevated: true
 collapse: true
 name: 'editor-suggestion-menu-custom-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -115,7 +115,7 @@ Add descriptions to help users understand what each command does.
 elevated: true
 collapse: true
 name: 'editor-suggestion-menu-icons-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 

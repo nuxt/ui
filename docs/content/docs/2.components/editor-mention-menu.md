@@ -20,7 +20,7 @@ Type `@` followed by a name to search and insert mentions.
 elevated: true
 collapse: true
 name: 'editor-mention-menu-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -37,7 +37,7 @@ Use the `items` prop to define the available mentions. Each item can include a l
 elevated: true
 collapse: true
 name: 'editor-mention-menu-items-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -101,7 +101,7 @@ Add descriptions to provide more context about each user or entity.
 elevated: true
 collapse: true
 name: 'editor-mention-menu-users-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -114,7 +114,7 @@ You can fetch mention suggestions dynamically based on the user's query.
 elevated: true
 collapse: true
 name: 'editor-mention-menu-fetched-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 

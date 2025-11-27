@@ -20,7 +20,7 @@ Type `:` followed by an emoji name to search and insert emojis.
 elevated: true
 collapse: true
 name: 'editor-emoji-menu-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -41,7 +41,7 @@ Use the `items` prop to define the available emojis. Each item should include th
 elevated: true
 collapse: true
 name: 'editor-emoji-menu-items-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -102,7 +102,7 @@ Use the GitHub emoji set from TipTap for a comprehensive collection.
 elevated: true
 collapse: true
 name: 'editor-emoji-menu-github-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -121,7 +121,7 @@ Create a custom emoji set for your specific use case.
 elevated: true
 collapse: true
 name: 'editor-emoji-menu-custom-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 

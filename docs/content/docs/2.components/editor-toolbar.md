@@ -18,7 +18,7 @@ The EditorToolbar component must be used inside an [Editor](/docs/components/edi
 elevated: true
 collapse: true
 name: 'editor-toolbar-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -41,7 +41,7 @@ Each item can be:
 elevated: true
 collapse: true
 name: 'editor-toolbar-items-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -64,7 +64,7 @@ Use the `layout` prop to change how the toolbar is displayed. Defaults to `fixed
 elevated: true
 collapse: true
 name: 'editor-toolbar-layout-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -81,7 +81,7 @@ When using `bubble`{lang="ts-type"} or `floating`{lang="ts-type"} layouts, use t
 elevated: true
 collapse: true
 name: 'editor-toolbar-should-show-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -125,7 +125,7 @@ ignore:
 external:
   - editor
   - items
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 props:
   color: 'primary'
   variant: 'soft'
@@ -148,7 +148,7 @@ ignore:
 external:
   - editor
   - items
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 props:
   activeColor: 'success'
   activeVariant: 'solid'
@@ -173,7 +173,7 @@ ignore:
 external:
   - editor
   - items
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 items:
   size:
     - xs
@@ -211,7 +211,7 @@ Use `layout="bubble"` to create a contextual toolbar that appears when text is s
 elevated: true
 collapse: true
 name: 'editor-toolbar-bubble-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -228,7 +228,7 @@ Use `layout="floating"` to create a menu that appears on empty lines.
 elevated: true
 collapse: true
 name: 'editor-toolbar-floating-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -245,7 +245,7 @@ You can use slots to customize specific toolbar items.
 elevated: true
 collapse: true
 name: 'editor-toolbar-custom-slot-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
@@ -268,7 +268,7 @@ Create dropdown menus by adding an `items` property to toolbar items.
 elevated: true
 collapse: true
 name: 'editor-toolbar-dropdown-example'
-class: 'min-h-40 sm:py-8'
+class: 'p-8'
 ---
 ::
 
