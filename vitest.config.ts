@@ -14,10 +14,10 @@ export default defineConfig({
     testTimeout: 1000,
     globals: true,
     silent: true,
-    resolveSnapshotPath(path, extension, {config}) {
-      if(config.name === 'vue') {
+    resolveSnapshotPath(path, extension, { config }) {
+      if (config.name === 'vue') {
         return path.replace(/\/([^/]+)\.spec\.ts$/, `/__snapshots__/$1-vue.spec.ts${extension}`)
-      }else {
+      } else {
         return path.replace(/\/([^/]+)\.spec\.ts$/, `/__snapshots__/$1.spec.ts${extension}`)
       }
     },
@@ -40,7 +40,7 @@ export default defineConfig({
           name: 'vue',
           environment: 'happy-dom',
           include: ['./test/components/**.spec.ts', './test/composables/**.spec.ts'],
-          setupFiles: ['./test/utils/setup.ts'],
+          setupFiles: ['./test/utils/setup.ts']
         },
         plugins: [
           vue(),
