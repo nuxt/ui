@@ -28,8 +28,8 @@ class: 'p-8'
 The menu filters items as you type and supports keyboard navigation (arrow keys, enter to select, escape to close).
 ::
 
-::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/functionality/emoji" target="_blank"}
-This component requires the Emoji extension from TipTap. Add it to the Editor's `extensions` prop.
+::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/nodes/emoji" target="_blank"}
+Learn more about the Emoji extension in the TipTap documentation.
 ::
 
 ### Items

@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { Placement, Strategy } from '@floating-ui/dom'
 import type { Editor, Node } from '@tiptap/vue-3'
-import type { DragHandlePluginProps } from '@tiptap/extension-drag-handle'
+import type { DragHandleProps } from '@tiptap/extension-drag-handle-vue-3'
 import theme from '#build/ui/editor-drag-handle'
 import type { ButtonProps, IconProps } from '../types'
 import type { FloatingUIOptions } from '../types/editor'
@@ -10,7 +10,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type EditorDragHandle = ComponentConfig<typeof theme, AppConfig, 'editorDragHandle'>
 
-export interface EditorDragHandleProps extends Omit<DragHandlePluginProps, 'editor' | 'element' | 'onNodeChange' | 'computePositionConfig'>, Omit<ButtonProps, 'icon' | 'color' | 'variant'> {
+export interface EditorDragHandleProps extends Omit<DragHandleProps, 'editor' | 'element' | 'onNodeChange' | 'computePositionConfig' | 'class'>, Omit<ButtonProps, 'icon' | 'color' | 'variant'> {
   /**
    * @defaultValue appConfig.ui.icons.drag
    * @IconifyIcon
@@ -103,7 +103,7 @@ const floatingUIOptions = computed(() => defu(props.options, {
 
 const middleware = computed(() => buildFloatingUIMiddleware(floatingUIOptions.value))
 
-const computePositionConfig = computed<DragHandlePluginProps['computePositionConfig']>(() => ({
+const computePositionConfig = computed<DragHandleProps['computePositionConfig']>(() => ({
   placement: floatingUIOptions.value.placement,
   strategy: floatingUIOptions.value.strategy,
   middleware: middleware.value

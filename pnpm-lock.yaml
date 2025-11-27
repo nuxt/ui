@@ -431,6 +431,12 @@ importers:
       '@nuxt/ui':
         specifier: workspace:*
         version: link:../..
+      '@tiptap/extension-emoji':
+        specifier: ^3.11.0
+        version: 3.11.0(@tiptap/core@3.11.0(@tiptap/pm@3.11.0))(@tiptap/pm@3.11.0)(@tiptap/suggestion@3.11.0(@tiptap/core@3.11.0(@tiptap/pm@3.11.0))(@tiptap/pm@3.11.0))(emojibase@16.0.0)
+      '@tiptap/extension-text-align':
+        specifier: ^3.11.0
+        version: 3.11.0(@tiptap/core@3.11.0(@tiptap/pm@3.11.0))
       vue:
         specifier: ^3.5.24
         version: 3.5.24(typescript@5.8.3)

@@ -28,6 +28,10 @@ class: 'p-8'
 The menu filters items as you type and supports keyboard navigation (arrow keys, enter to select, escape to close).
 ::
 
+::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/nodes/mention" target="_blank"}
+Learn more about the Mention extension in the TipTap documentation.
+::
+
 ### Items
 
 Use the `items` prop to define the available mentions. Each item can include a label, avatar, icon, and description.
