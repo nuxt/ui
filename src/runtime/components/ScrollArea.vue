@@ -273,6 +273,16 @@ function requireVirtualization(method: string) {
   return true
 }
 
+function getItemKey(item: T, index: number): string | number {
+  if (virtualizerProps.value.getItemKey) {
+    return virtualizerProps.value.getItemKey(index, item)
+  }
+  if (item && typeof item === 'object' && 'id' in item) {
+    return (item as any).id
+  }
+  return index
+}
+
 defineExpose({
   virtualizer: computed(() => isVirtualizerEnabled.value ? virtualizer.value : null),
   scrollToOffset(offset: number, options?: ScrollToOptions) {
@@ -342,7 +352,7 @@ defineExpose({
         <template v-if="items?.length">
           <div
             v-for="(item, index) in items"
-            :key="index"
+            :key="getItemKey(item, index)"
             data-slot="item"
             :class="ui.item({ class: props.ui?.item })"
           >
