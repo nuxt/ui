@@ -391,6 +391,42 @@ class: 'p-8'
 
 This example demonstrates how to create an image upload feature using the `extensions` prop to register a custom TipTap node and the `handlers` prop to define how the toolbar button triggers the upload flow.
 
+1. Create a Vue component that uses the [FileUpload](/docs/components/file-upload) component:
+
+::component-example
+---
+preview: false
+collapse: true
+name: 'editor-image-upload-node'
+---
+::
+
+2. Create a custom TipTap extension to register the node:
+
+::warning
+If you encounter a `Adding different instances of a keyed plugin` error, you may need to add `prosemirror-state` to the `optimizeDeps` list in your `nuxt.config.ts` file:
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  vite: {
+    optimizeDeps: {
+      include: ['prosemirror-state']
+    }
+  }
+})
+::
+
+::component-example
+---
+preview: false
+collapse: true
+lang: 'ts'
+name: 'editor-image-upload'
+---
+::
+
+3. Use the custom extension in the editor:
+
 ::component-example
 ---
 elevated: true
@@ -399,130 +435,6 @@ prettier: true
 name: 'editor-image-upload-example'
 class: '!p-0'
 ---
-::
-
-1. Create a Vue component that uses the [FileUpload](/docs/components/file-upload) component:
-
-::code-collapse
-
-```vue [app/components/ImageUploadNode.vue]
-<script setup lang="ts">
-import type { NodeViewProps } from '@tiptap/vue-3'
-import { NodeViewWrapper } from '@tiptap/vue-3'
-
-const props = defineProps<NodeViewProps>()
-const file = ref<File | null>(null)
-
-watch(file, (newFile) => {
-  if (!newFile) return
-
-  const reader = new FileReader()
-  reader.onload = (e) => {
-    const pos = props.getPos()
-    props.editor.chain().focus()
-      .deleteRange({ from: pos, to: pos + 1 })
-      .setImage({ src: e.target?.result as string })
-      .run()
-  }
-  reader.readAsDataURL(newFile)
-})
-</script>
-
-<template>
-  <NodeViewWrapper>
-    <UFileUpload v-model="file" accept="image/*" />
-  </NodeViewWrapper>
-</template>
-```
-
-::
-
-2. Create a custom TipTap extension to register the node:
-
-::code-collapse
-
-```ts [app/utils/image-upload.ts]
-import { Node, mergeAttributes } from '@tiptap/core'
-import { VueNodeViewRenderer } from '@tiptap/vue-3'
-import ImageUploadNode from '~/components/ImageUploadNode.vue'
-
-declare module '@tiptap/core' {
-  interface Commands<ReturnType> {
-    imageUpload: {
-      insertImageUpload: () => ReturnType
-    }
-  }
-}
-
-export const ImageUpload = Node.create({
-  name: 'imageUpload',
-  group: 'block',
-  atom: true,
-  addAttributes() {
-    return {}
-  },
-  parseHTML() {
-    return [{
-      tag: 'div[data-type="image-upload"]'
-    }]
-  },
-  renderHTML({ HTMLAttributes }) {
-    return ['div', mergeAttributes(HTMLAttributes, { 'data-type': 'image-upload' })]
-  },
-  addNodeView() {
-    return VueNodeViewRenderer(ImageUploadNode)
-  },
-  addCommands() {
-    return {
-      insertImageUpload: () => ({ commands }) => {
-        return commands.insertContent({ type: this.name })
-      }
-    }
-  }
-})
-```
-
-::
-
-3. Pass the extension and handlers to the Editor:
-
-::code-collapse
-
-```vue
-<script setup lang="ts">
-import type { EditorCustomHandlers, EditorToolbarItem } from '@nuxt/ui'
-import type { Editor } from '@tiptap/vue-3'
-import { ImageUpload } from '~/utils/image-upload'
-
-const value = ref('')
-
-const customHandlers = {
-  imageUpload: {
-    canExecute: (editor: Editor) => editor.can().insertContent({ type: 'imageUpload' }),
-    execute: (editor: Editor) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
-    isActive: (editor: Editor) => editor.isActive('imageUpload'),
-    isDisabled: undefined
-  }
-} satisfies EditorCustomHandlers
-
-const items = [{
-  kind: 'imageUpload',
-  icon: 'i-lucide-image',
-  label: 'Add image'
-}] satisfies EditorToolbarItem<typeof customHandlers>[]
-</script>
-
-<template>
-  <UEditor
-    v-model="value"
-    :extensions="[ImageUpload]"
-    :handlers="customHandlers"
-  >
-    <UEditorToolbar :editor="editor" :items="items" />
-  </UEditor>
-</template>
-```
-
 ::
 
 ::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/custom-extensions" target="_blank"}

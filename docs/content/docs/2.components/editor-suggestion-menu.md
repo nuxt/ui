@@ -11,7 +11,11 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorSuggestionMenu component must be used inside an [Editor](/docs/components/editor) component's default slot to provide slash command functionality. It allows users to quickly insert blocks and formatting by typing a trigger character.
+The EditorSuggestionMenu component is used to display a menu of formatting and action suggestions when typing a trigger character in the editor. It allows users to quickly insert blocks and formatting by typing a trigger character.
+
+::caution
+This component must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
+::
 
 Type `/` in the editor to open the suggestion menu.
 

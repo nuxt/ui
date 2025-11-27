@@ -11,7 +11,11 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorDragHandle component wraps TipTap's [Drag Handle extension](https://tiptap.dev/docs/editor/extensions/functionality/drag-handle) and must be used inside an [Editor](/docs/components/editor) component's default slot to provide drag-and-drop functionality for editor blocks.
+The EditorDragHandle component wraps TipTap's [Drag Handle extension](https://tiptap.dev/docs/editor/extensions/functionality/drag-handle) to provide drag-and-drop functionality for editor blocks.
+
+::caution
+This component must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
+::
 
 ::component-example
 ---

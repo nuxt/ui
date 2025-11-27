@@ -5,7 +5,7 @@ import type { Editor, Node } from '@tiptap/vue-3'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import TextAlign from '@tiptap/extension-text-align'
-import { ImageUpload } from '../../utils/editor/image-upload'
+import ImageUpload from '~/components/editor/ImageUpload'
 
 const content = ref<EditorContent>(`# Nuxt UI: A Modern UI Library
 

@@ -63,9 +63,11 @@ const props = withDefaults(defineProps<{
    * Whether to add background-elevated to wrapper
    */
   elevated?: boolean
+  lang?: string
 }>(), {
   preview: true,
-  source: true
+  source: true,
+  lang: 'vue'
 })
 
 const slots = defineSlots<{
@@ -92,7 +94,7 @@ const code = computed(() => {
 `
   }
 
-  code += `\`\`\`vue ${props.preview ? '' : ` [${data.pascalName}.vue]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
+  code += `\`\`\`${props.lang} ${props.preview ? '' : ` [${data.pascalName}.${props.lang}]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
 ${data?.code ?? ''}
 \`\`\``
 

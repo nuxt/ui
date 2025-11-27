@@ -11,7 +11,11 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorMentionMenu component must be used inside an [Editor](/docs/components/editor) component's default slot to provide @ mention functionality. Mentions are inserted as inline elements that can be styled and linked.
+The EditorMentionMenu component is used to display a menu of user suggestions when typing the `@` character in the editor. Mentions are inserted as inline elements that can be styled and linked.
+
+::caution
+This component must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
+::
 
 Type `@` followed by a name to search and insert mentions.
 

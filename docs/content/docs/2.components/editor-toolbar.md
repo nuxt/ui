@@ -11,7 +11,11 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorToolbar component must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance. It provides formatting buttons that automatically sync their active state with the editor content.
+The EditorToolbar component is used to display a toolbar of formatting buttons that automatically sync their active state with the editor content.
+
+::caution
+This component must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
+::
 
 ::component-example
 ---
@@ -20,10 +24,6 @@ collapse: true
 name: 'editor-toolbar-example'
 class: 'p-8'
 ---
-::
-
-::note
-Select some text in the editor to see the bubble toolbar appear with formatting options.
 ::
 
 ### Items
@@ -68,8 +68,8 @@ class: 'p-8'
 ---
 ::
 
-::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/functionality/bubble-menu" target="_blank"}
-The bubble and floating layouts use TipTap's BubbleMenu and FloatingMenu extensions. Check the TipTap documentation for advanced positioning options.
+::callout{icon="i-custom-tiptap"}
+The bubble and floating layouts use TipTap's [BubbleMenu](https://tiptap.dev/docs/editor/extensions/functionality/bubble-menu) and [FloatingMenu](https://tiptap.dev/docs/editor/extensions/functionality/floating-menu) extensions. Check the TipTap documentation for advanced positioning options.
 ::
 
 ### Should show

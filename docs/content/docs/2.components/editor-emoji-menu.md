@@ -11,7 +11,11 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorEmojiMenu component must be used inside an [Editor](/docs/components/editor) component's default slot to provide emoji picker functionality. Emojis are inserted as text characters or custom nodes depending on the extension configuration.
+The EditorEmojiMenu component is used to display a menu of emoji suggestions when typing the `:` character in the editor. Emojis are inserted as text characters or custom nodes depending on the extension configuration.
+
+::caution
+This component must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
+::
 
 Type `:` followed by an emoji name to search and insert emojis.
 

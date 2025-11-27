@@ -1,6 +1,7 @@
 import { Node, mergeAttributes } from '@tiptap/core'
+import type { NodeViewRenderer } from '@tiptap/core'
 import { VueNodeViewRenderer } from '@tiptap/vue-3'
-import ImageUploadNode from '~/components/editor/ImageUploadNode.vue'
+import ImageUploadNodeComponent from './ImageUploadNode.vue'
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
@@ -10,10 +11,11 @@ declare module '@tiptap/core' {
   }
 }
 
-export const ImageUpload = Node.create({
+export default Node.create({
   name: 'imageUpload',
   group: 'block',
   atom: true,
+  draggable: true,
   addAttributes() {
     return {}
   },
@@ -25,8 +27,8 @@ export const ImageUpload = Node.create({
   renderHTML({ HTMLAttributes }) {
     return ['div', mergeAttributes(HTMLAttributes, { 'data-type': 'image-upload' })]
   },
-  addNodeView() {
-    return VueNodeViewRenderer(ImageUploadNode)
+  addNodeView(): NodeViewRenderer {
+    return VueNodeViewRenderer(ImageUploadNodeComponent)
   },
   addCommands() {
     return {
