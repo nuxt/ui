@@ -68,7 +68,7 @@ onMounted(async () => {
           class="flex flex-row justify-between items-center gap-2 max-w-full"
         >
           <p class="ps-1 w-full text-sm truncate">
-            {{ item.title }} <span class="text-muted">by {{ item.creator }}</span>
+            {{ item.title }} <span class="text-muted">{{ item.creator }}</span>
           </p>
           <UButton
             color="neutral"
