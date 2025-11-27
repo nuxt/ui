@@ -49,9 +49,9 @@ onMounted(async () => {
     :orientation="orientation"
     :virtualize="virtualize && { lanes: lanes && lanes > 1 ? lanes : undefined, gap, paddingStart: padding, paddingEnd: padding }"
     class="border border-default rounded-lg w-full h-128"
+    :ui="{ viewport: 'h-full', item: 'shrink-0' }"
   >
     <UPageCard
-      :title="item.title"
       reverse
       variant="naked"
       class="w-full h-full magic-card"
@@ -68,7 +68,7 @@ onMounted(async () => {
           class="flex flex-row justify-between items-center gap-2 max-w-full"
         >
           <p class="ps-1 w-full text-sm truncate">
-            {{ item.creator }}
+            {{ item.title }} <span class="text-muted">by {{ item.creator }}</span>
           </p>
           <UButton
             color="neutral"
