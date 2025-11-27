@@ -182,6 +182,22 @@ describe('useOverlay', () => {
     })
     expect(spy).toHaveBeenCalledWith('[@nuxt/ui] Usage of onClose as prop is deprecated. Please consider using on(\'close\', callback) instead.')
     expect(spy).toHaveBeenCalledWith('[@nuxt/ui] Usage of onSubmit as prop is deprecated. Please consider using on(\'submit\', callback) instead.')
+
+    modal.open({
+      onClose() {
+        modal.close()
+      }
+    })
+    modal.close()
+    expect(spy).toHaveBeenCalledWith('[@nuxt/ui] Usage of onClose as prop is deprecated. Please consider using on(\'close\', callback) instead.')
+
+    modal.patch({
+      onSubmit() {
+        modal.close()
+      }
+    })
+    modal.close()
+    expect(spy).toHaveBeenCalledWith('[@nuxt/ui] Usage of onSubmit as prop is deprecated. Please consider using on(\'submit\', callback) instead.')
   })
 
   describe('listen to emits', () => {

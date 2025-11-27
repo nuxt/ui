@@ -96,7 +96,7 @@ type OverlayInstance<T extends Component> = Omit<ManagedOverlayOptionsPrivate<T>
   on<K extends EmitKeys<T>>(event: K, callback: (...args: EmitArgs<T, K>) => void): void
 }
 
-type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'close' | 'onClose' | 'patch' | 'modelValue' | 'resolvePromise' | 'on'> & {
+type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvePromise' | 'on'> & {
   result: Promise<CloseEventArgType<ComponentEmit<T>>>
 } & Promise<CloseEventArgType<ComponentEmit<T>>>
 
@@ -150,6 +150,7 @@ function _useOverlay() {
 
   const open = <T extends Component>(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T> => {
     const overlay = getOverlay(id)
+    warnOnListeningEmitsFromProps(props)
 
     // If props are provided, merge them with the original props, otherwise use the original props
     if (props) {
@@ -198,6 +199,8 @@ function _useOverlay() {
   }
 
   const patch = <T extends Component>(id: symbol, props: Partial<ComponentProps<T>>): void => {
+    warnOnListeningEmitsFromProps(props)
+
     const overlay = getOverlay(id)
 
     overlay.props = { ...overlay.props, ...props }
@@ -225,9 +228,17 @@ function _useOverlay() {
     callback: (...args: EmitArgs<T, K>) => void
   ): void {
     const overlay = getOverlay(id)
-
     if (!overlay.emits) overlay.emits = {}
-    overlay.emits[event as string] = callback
+
+    const existingHandler = overlay.emits[event as string]
+    if (existingHandler) {
+      overlay.emits[event as string] = (...args: Parameters<typeof callback>) => {
+        callback(...args)
+        existingHandler(...args)
+      }
+    } else {
+      overlay.emits[event as string] = callback
+    }
   }
 
   return {
