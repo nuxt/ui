@@ -262,6 +262,9 @@ importers:
       '@iconify-json/vscode-icons':
         specifier: ^1.2.36
         version: 1.2.36
+      '@modelcontextprotocol/sdk':
+        specifier: ^1.23.0
+        version: 1.23.0(zod@4.1.13)
       '@nuxt/content':
         specifier: ^3.8.2
         version: 3.8.2(better-sqlite3@12.4.6)(magicast@0.5.1)(valibot@1.1.0(typescript@5.8.3))
