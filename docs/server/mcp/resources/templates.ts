@@ -1,8 +1,6 @@
 export default defineMcpResource({
   uri: 'resource://nuxt-ui/templates',
-  metadata: {
-    description: 'Complete list of available Nuxt UI templates with categories'
-  },
+  description: 'Complete list of available Nuxt UI templates with categories',
   handler: async (uri: URL) => {
     const result = await $fetch('/api/mcp/list-templates')
     return {
