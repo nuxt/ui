@@ -7,6 +7,9 @@ settings:
 overrides:
   '@nuxt/kit': ^4.2.1
   '@nuxt/ui': workspace:*
+  '@tiptap/core': ^3.11.1
+  '@tiptap/pm': ^3.11.1
+  '@tiptap/vue-3': ^3.11.1
   debug: 4.3.7
   typescript: 5.8.3
   unplugin: ^2.3.11
@@ -2512,8 +2515,8 @@ packages:
   '@tiptap/extension-collaboration@3.10.2':
     resolution: {integrity: sha512-BaKPdTDfRHBfnsVnqkTQiP8x/lOvSDzMgvSWdjHLGFDYjY8+EZZW7k2OZpTrPDrHwl2OPAhnzkkAN14M7vyehg==}
     peerDependencies:
-      '@tiptap/core': ^3.10.2
-      '@tiptap/pm': ^3.10.2
+      '@tiptap/core': ^3.11.1
+      '@tiptap/pm': ^3.11.1
       '@tiptap/y-tiptap': ^3.0.0-beta.3
       yjs: ^13
 
@@ -2533,10 +2536,10 @@ packages:
   '@tiptap/extension-drag-handle@3.10.2':
     resolution: {integrity: sha512-iQNmGH+AoXQbqMyGlqX2BQxNAtxqXrUgtnGnmyZ3nJjQQz16vv4IOqhEgnbJHvnd67u+1Lwa/HIL5lSIj0/XHA==}
     peerDependencies:
-      '@tiptap/core': ^3.10.2
+      '@tiptap/core': ^3.11.1
       '@tiptap/extension-collaboration': ^3.10.2
       '@tiptap/extension-node-range': ^3.10.2
-      '@tiptap/pm': ^3.10.2
+      '@tiptap/pm': ^3.11.1
       '@tiptap/y-tiptap': ^3.0.0-beta.3
 
   '@tiptap/extension-dropcursor@3.11.1':
@@ -2621,8 +2624,8 @@ packages:
   '@tiptap/extension-node-range@3.10.2':
     resolution: {integrity: sha512-S06Ozv+oLhnMXHr05shrh7MUuy6FB1rBOVkxM2M3cmcdzfYlj1aku1op5qMwZL7h5s0HlPOnrLs7GtM95VDUgg==}
     peerDependencies:
-      '@tiptap/core': ^3.10.2
-      '@tiptap/pm': ^3.10.2
+      '@tiptap/core': ^3.11.1
+      '@tiptap/pm': ^3.11.1
 
   '@tiptap/extension-ordered-list@3.11.1':
     resolution: {integrity: sha512-Aphq0kfk6J/hNQennJ+bntvDzqRPT7RVpnow1s4U4dLBsR6PP7X4zEBg96uAv2OW0RjDHFK9NFqpJPbZtQTmFw==}
