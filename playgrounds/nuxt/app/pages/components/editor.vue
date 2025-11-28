@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { upperFirst } from 'scule'
 import type { EditorToolbarItem, EditorMentionMenuItem, EditorEmojiMenuItem, DropdownMenuItem, EditorSuggestionMenuItem, EditorCustomHandlers } from '@nuxt/ui'
-import type { Editor, Node } from '@tiptap/vue-3'
+import type { Node } from '@tiptap/vue-3'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import TextAlign from '@tiptap/extension-text-align'
@@ -180,7 +180,7 @@ const toolbarItems = [[{
   icon: 'i-lucide-align-justify'
 }]] satisfies EditorToolbarItem<typeof customHandlers>[][]
 
-const imageToolbarItems = (editor: Editor): EditorToolbarItem<typeof customHandlers>[][] => {
+const imageToolbarItems = (editor: any): EditorToolbarItem<typeof customHandlers>[][] => {
   const node = editor.state.doc.nodeAt(editor.state.selection.from)
 
   return [[{
@@ -218,7 +218,7 @@ const imageToolbarItems = (editor: Editor): EditorToolbarItem<typeof customHandl
 
 const selectedNode = ref<{ node: Node | null, pos: number }>()
 
-const handleItems = (editor: Editor): DropdownMenuItem[][] => {
+const handleItems = (editor: any): DropdownMenuItem[][] => {
   if (!selectedNode.value?.node) {
     return []
   }
