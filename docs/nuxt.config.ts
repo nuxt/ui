@@ -204,7 +204,37 @@ export default defineNuxtConfig({
       UEditorToolbar: { props: { editor: { name: 'editor', type: 'Editor' } } },
       UEditorSuggestionMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
       UEditorMentionMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
-      UEditorEmojiMenu: { props: { editor: { name: 'editor', type: 'Editor' } } }
+      UEditorEmojiMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      UCalendar: {
+        props: {
+          defaultValue: { name: 'defaultValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime | DateRange | DateValue[]' },
+          modelValue: { name: 'modelValue', type: 'null | CalendarDate | CalendarDateTime | ZonedDateTime | DateRange | DateValue[]' },
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' }
+        }
+      },
+      UInputDate: {
+        props: {
+          defaultValue: { name: 'defaultValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime | DateRange' },
+          modelValue: { name: 'modelValue', type: 'null | CalendarDate | CalendarDateTime | ZonedDateTime | DateRange' },
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' }
+        }
+      },
+      UInputTime: {
+        props: {
+          defaultValue: { name: 'defaultValue', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          modelValue: { name: 'modelValue', type: 'null | Time | CalendarDateTime | ZonedDateTime' },
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'Time | CalendarDateTime | ZonedDateTime' }
+        }
+      }
     },
     exclude: [
       '@nuxt/content',
