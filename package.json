@@ -231,8 +231,6 @@
   "resolutions": {
     "@nuxt/kit": "^4.2.1",
     "@nuxt/ui": "workspace:*",
-    "@tiptap/core": "^3.11.1",
-    "@tiptap/pm": "^3.11.1",
     "debug": "4.3.7",
     "typescript": "5.8.3",
     "unplugin": "^2.3.11"
