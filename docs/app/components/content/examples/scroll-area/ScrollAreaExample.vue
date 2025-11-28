@@ -55,24 +55,23 @@ onMounted(async () => {
     :items="items"
     :orientation="orientation"
     :virtualize="virtualize && { lanes: lanes && lanes > 1 ? lanes : undefined, gap, paddingStart: padding, paddingEnd: padding, estimateSize: 350 }"
-    class="border border-default rounded-lg w-full h-128"
+    class="-m-4 w-[calc(100%+2rem)] h-128"
     :ui="{ viewport: 'h-full', item: 'shrink-0' }"
   >
     <UPageCard
       reverse
       variant="naked"
-      class="w-full h-full magic-card"
+      class="w-full h-full"
       :ui="{
-        body: 'w-full absolute bottom-0 flex flex-row justify-between items-center gap-2 max-w-full',
-        container: 'lg:flex lg:flex-col flex-col-reverse gap-y-2 w-full'
+        body: 'w-full absolute bottom-0 flex flex-row justify-between items-center gap-2',
+        container: 'lg:flex lg:flex-col gap-y-2 w-full'
       }"
     >
-      <div class="w-full h-full max-h-[calc(100%-36px)] overflow-hidden">
-        <NuxtImg :src="item.thumbnail" :alt="item.title" class="rounded-xl w-full h-full grow" />
-      </div>
+      <NuxtImg :src="item.thumbnail" :alt="item.title" class="rounded-lg w-full h-full max-h-[calc(100%-36px)]" />
+
       <template #body>
         <UTooltip :text="`${item.title}, ${item.creator}`">
-          <p class="ps-1 w-full text-sm truncate" :alt="`${item.title}, ${item.creator}`">
+          <p class="ps-1 text-sm truncate" :alt="`${item.title}, ${item.creator}`">
             {{ item.title }} <span class="text-muted">{{ item.creator }}</span>
           </p>
         </UTooltip>
@@ -87,7 +86,6 @@ onMounted(async () => {
               : 'material-symbols:favorite-outline-rounded'
           "
           :label="String(item.likes)"
-          :active="item.liked"
           :ui="
             item.liked
               ? { leadingIcon: 'text-red-500' }
@@ -98,12 +96,7 @@ onMounted(async () => {
       </template>
     </UPageCard>
   </UScrollArea>
-  <div
-    v-else-if="loading"
-    class="flex justify-center items-center border border-default rounded-lg w-full h-96"
-  >
-    <p class="text-muted">
-      Loading artworks...
-    </p>
+  <div v-else-if="loading" class="flex justify-center items-center -m-4 w-[calc(100%+2rem)] h-128">
+    <UIcon name="lucide:loader-circle" class="size-8 animate-spin" />
   </div>
 </template>
