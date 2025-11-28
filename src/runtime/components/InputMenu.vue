@@ -371,11 +371,11 @@ function onUpdate(value: any) {
   }
 
   if (props.modelModifiers?.nullable) {
-    value ||= null
+    value ??= null
   }
 
   if (props.modelModifiers?.optional) {
-    value ||= undefined
+    value ??= undefined
   }
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
