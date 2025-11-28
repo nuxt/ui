@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { Content, EditorOptions } from '@tiptap/core'
-import type { Editor as TiptapEditor } from '@tiptap/vue-3'
+import type { Editor as TiptapEditor, EditorOptions, Content } from '@tiptap/vue-3'
 import type { StarterKitOptions } from '@tiptap/starter-kit'
 import type { PlaceholderOptions } from '@tiptap/extension-placeholder'
 import type { MarkdownExtensionOptions } from '@tiptap/markdown'
@@ -13,7 +12,6 @@ import type { ComponentConfig } from '../types/tv'
 
 type Editor = ComponentConfig<typeof theme, AppConfig, 'editor'>
 
-export type EditorContent = Content
 export type EditorContentType = 'json' | 'html' | 'markdown'
 
 export interface EditorProps<T extends Content = Content, H extends EditorCustomHandlers = EditorCustomHandlers> extends Omit<Partial<EditorOptions>, 'content' | 'element'> {

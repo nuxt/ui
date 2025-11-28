@@ -44,8 +44,6 @@ ignore:
   - class
 external:
   - modelValue
-externalTypes:
-  - EditorContent
 class: 'p-8'
 props:
   modelValue:
