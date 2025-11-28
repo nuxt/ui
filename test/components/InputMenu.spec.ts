@@ -95,6 +95,22 @@ describe('InputMenu', () => {
     expect(html).toMatchSnapshot()
   })
 
+  it.each([
+    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+    ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
+    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
+  ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
+    const wrapper = mount(InputMenu, {
+      ...options
+    })
+
+    const input = wrapper.findComponent({ name: 'ComboboxRoot' })
+    await input.setValue(spec.input)
+
+    expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputMenu, {
       props: {
