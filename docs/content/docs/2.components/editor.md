@@ -26,7 +26,7 @@ class: 'relative h-176 overflow-y-auto !p-0 rounded-b-md'
 ::
 
 ::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v4/docs/app/components/content/examples/editor/EditorExample.vue" aria-label="View source code"}
-This example demonstrates a production-ready editor setup. Check out the source code on GitHub.
+This example demonstrates a production-ready Editor component. Check out the source code on GitHub.
 ::
 
 ### Content
@@ -109,7 +109,7 @@ The Editor includes the following extensions by default:
 Each built-in extension can be configured using its corresponding prop (`starter-kit`, `placeholder`, `image`, `mention`, `markdown`) to customize its behavior with TipTap options.
 ::
 
-You can use the `extensions` prop to add additional TipTap extensions to enhance the editor's capabilities:
+You can use the `extensions` prop to add additional TipTap extensions to enhance the Editor's capabilities:
 
 ```vue
 <script setup lang="ts">
@@ -319,7 +319,7 @@ Check out the image upload example for a complete implementation with custom han
 
 ### With toolbar
 
-You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a fixed, bubble, or floating toolbar to the editor with common formatting actions.
+You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a fixed, bubble, or floating toolbar to the Editor with common formatting actions.
 
 ::component-example
 ---
@@ -403,19 +403,6 @@ name: 'editor-image-upload-node'
 
 2. Create a custom TipTap extension to register the node:
 
-::warning
-If you encounter a `Adding different instances of a keyed plugin` error, you may need to add `prosemirror-state` to the `optimizeDeps` list in your `nuxt.config.ts` file:
-
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  vite: {
-    optimizeDeps: {
-      include: ['prosemirror-state']
-    }
-  }
-})
-::
-
 ::component-example
 ---
 preview: false
@@ -425,7 +412,21 @@ name: 'editor-image-upload'
 ---
 ::
 
-3. Use the custom extension in the editor:
+::warning
+If you encounter a `Adding different instances of a keyed plugin` error when creating a custom extension, you may need to add `prosemirror-state` to the vite `optimizeDeps` include list in your `nuxt.config.ts` file.
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  vite: {
+    optimizeDeps: {
+      include: ['prosemirror-state']
+    }
+  }
+})
+```
+::
+
+3. Use the custom extension in the Editor:
 
 ::component-example
 ---
