@@ -2,7 +2,7 @@
 import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/modal'
-import type { ButtonProps, IconProps } from '../types'
+import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -43,7 +43,7 @@ export interface ModalProps extends DialogRootProps {
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: boolean | Partial<ButtonProps>
+  close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -197,7 +197,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('modal.close')"
-                    v-bind="(typeof props.close === 'object' ? props.close as Partial<ButtonProps> : {})"
+                    v-bind="(typeof props.close === 'object' ? props.close : {})"
                     data-slot="close"
                     :class="ui.close({ class: props.ui?.close })"
                   />

@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
-import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps } from '../types'
+import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps, LinkPropsKeys } from '../types'
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
 import type { FormHTMLAttributes } from '../types/html'
 import type { NonUnion } from '../types/utils'
@@ -68,7 +68,7 @@ export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F exte
    * Display a submit button at the bottom of the form.
    * `{ label: 'Continue', block: true }`{lang="ts-type"}
    */
-  submit?: ButtonProps
+  submit?: Omit<ButtonProps, LinkPropsKeys>
   schema?: T
   validate?: FormProps<T>['validate']
   validateOn?: FormProps<T>['validateOn']
