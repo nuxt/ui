@@ -11,11 +11,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorEmojiMenu component is used to display a menu of emoji suggestions when typing the `:` character in the editor. Emojis are inserted as text characters or custom nodes depending on the extension configuration.
-
-::caution
-This component must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
-::
+The EditorEmojiMenu component is used to display a menu of emoji suggestions when typing the `:` character in the editor. Emojis are inserted as text characters or custom nodes depending on the extension configuration. It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
 
 Type `:` followed by an emoji name to search and insert emojis.
 
@@ -76,7 +72,7 @@ Use the `char` prop to change the trigger character. Defaults to `:`{lang="ts-ty
 
 ### Options
 
-Use the `options` prop to customize the positioning behavior using Floating UI options.
+Use the `options` prop to customize the positioning behavior using [Floating UI options](https://floating-ui.com/docs/computeposition#options).
 
 ```vue
 <template>
@@ -90,10 +86,6 @@ Use the `options` prop to customize the positioning behavior using Floating UI o
   />
 </template>
 ```
-
-::tip{to="https://floating-ui.com/docs/computeposition" target="_blank"}
-The options are passed to Floating UI's `computePosition` function. You can configure strategy, placement, offset, flip, shift, and other positioning middleware.
-::
 
 ## Examples
 

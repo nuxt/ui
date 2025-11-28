@@ -11,11 +11,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorDragHandle component wraps TipTap's [Drag Handle extension](https://tiptap.dev/docs/editor/extensions/functionality/drag-handle) to provide drag-and-drop functionality for editor blocks.
-
-::caution
-This component must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
-::
+The EditorDragHandle component wraps TipTap's [Drag Handle extension](https://tiptap.dev/docs/editor/extensions/functionality/drag-handle) to provide drag-and-drop functionality for editor blocks. It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
 
 ::component-example
 ---
@@ -53,10 +49,10 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.dr
 
 ### Options
 
-Use the `options` prop to customize the positioning behavior. Defaults to `{ strategy: 'absolute', placement: 'left-start' }`.
+Use the `options` prop to customize the positioning behavior using [Floating UI options](https://floating-ui.com/docs/computeposition#options).
 
 ::note
-The offset is calculated automatically to center the handle vertically for small blocks and align it to the top for blocks taller than 40px.
+The offset is automatically calculated to center the handle for small blocks and align it to the top for taller blocks.
 ::
 
 ```vue
@@ -70,15 +66,11 @@ The offset is calculated automatically to center the handle vertically for small
 </template>
 ```
 
-::callout{icon="i-simple-icons-floatingui" to="https://floating-ui.com/docs/computeposition#options" target="_blank"}
-The options are passed to Floating UI's `computePosition` function to configure positioning middleware.
-::
-
 ## Examples
 
 ### With dropdown menu
 
-Use the default slot to add a dropdown menu with block-level actions.
+Use the default slot to add a dropdown menu with block-level actions and listen to the `@node-change` event to track the currently hovered node.
 
 ::component-example
 ---
@@ -90,7 +82,7 @@ class: 'p-8'
 ::
 
 ::note
-Listen to the `@node-change` event to track the currently hovered node. Use the `mapEditorItems` utility from `@nuxt/ui/utils/editor` to automatically map handler kinds (like `duplicate`, `delete`, `moveUp`, etc.) to their corresponding editor commands with proper state management.
+Use the `mapEditorItems` utility from `@nuxt/ui/utils/editor` to automatically map handler kinds (like `duplicate`, `delete`, `moveUp`, etc.) to their corresponding editor commands with proper state management.
 ::
 
 ### With insert button

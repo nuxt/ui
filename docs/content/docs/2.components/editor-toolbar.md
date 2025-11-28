@@ -11,11 +11,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorToolbar component is used to display a toolbar of formatting buttons that automatically sync their active state with the editor content.
-
-::caution
-This component must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
-::
+The EditorToolbar component is used to display a toolbar of formatting buttons that automatically sync their active state with the editor content. It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
 
 ::component-example
 ---
@@ -28,25 +24,55 @@ class: 'p-8'
 
 ### Items
 
-Use the `items` prop to define the toolbar buttons and dropdowns. Items are passed as an array of arrays, where each inner array represents a group of items separated by dividers.
+Use the `items` prop as an array of objects with the following properties:
 
-Each item can be:
+- `label?: string`{lang="ts-type"}
+- `icon?: string`{lang="ts-type"}
+- `color?: "error" | "primary" | "secondary" | "success" | "info" | "warning" | "neutral"`{lang="ts-type"}
+- `variant?: "solid" | "outline" | "soft" | "ghost" | "link" | "subtle"`{lang="ts-type"}
+- `size?: "xs" | "sm" | "md" | "lg" | "xl"`{lang="ts-type"}
+- `kind?: "mark" | "textAlign" | "heading" | "link" | "image" | "blockquote" | "bulletList" | "orderedList" | "codeBlock" | "horizontalRule" | "paragraph" | "undo" | "redo" | "clearFormatting" | "duplicate" | "delete" | "moveUp" | "moveDown" | "suggestion" | "mention" | "emoji"`{lang="ts-type"}
+- `disabled?: boolean`{lang="ts-type"}
+- `loading?: boolean`{lang="ts-type"}
+- `active?: boolean`{lang="ts-type"}
+- [`slot?: string`{lang="ts-type"}](#with-custom-button-slots)
+- `onClick?: (e: MouseEvent) => void`{lang="ts-type"}
+- [`items?: EditorToolbarItem[] | EditorToolbarItem[][]`{lang="ts-type"}](#with-dropdown-menus)
+- `class?: any`{lang="ts-type"}
 
-- An **editor item** with a `kind`{lang="ts-type"} property (e.g., `{ kind: 'bold', icon: 'i-lucide-bold' }`{lang="ts-type"})
-- A **button item** with standard button props (e.g., `{ icon: 'i-lucide-save', onClick: () => {} }`{lang="ts-type"})
-- A **dropdown item** with an `items`{lang="ts-type"} array for submenus
+::note{to="/docs/components/editor#handlers"}
+The `kind` property references a handler defined in the [Editor](/docs/components/editor) component. Handlers wrap TipTap commands and manage their state (active, disabled, etc.). The Editor provides default handlers for common actions (`mark`, `heading`, `link`, etc.), but you can add custom handlers using the `handlers` prop on the Editor component.
+::
+
+::tip
+When using the `kind` property for editor-specific actions, additional properties may be required:
+
+- For `kind: "mark"`{lang="ts-type"}: `mark: "bold" | "italic" | "strike" | "code" | "underline"`{lang="ts-type"}
+- For `kind: "textAlign"`{lang="ts-type"}: `align: "left" | "center" | "right" | "justify"`{lang="ts-type"}
+- For `kind: "heading"`{lang="ts-type"}: `level: 1 | 2 | 3 | 4 | 5 | 6`{lang="ts-type"}
+- For `kind: "link"`{lang="ts-type"}: `href?: string`{lang="ts-type"}
+- For `kind: "image"`{lang="ts-type"}: `src?: string`{lang="ts-type"}
+- For `kind: "duplicate" | "delete" | "moveUp" | "moveDown"`{lang="ts-type"}: `pos: number`{lang="ts-type"}
+- For `kind: "clearFormatting" | "suggestion"`{lang="ts-type"}: `pos?: number`{lang="ts-type"}
+::
+
+You can pass any property from the [Button](/docs/components/button#props) component such as `color`, `variant`, `size`, etc. but also `active-color` and `active-variant` as items with a `kind` property automatically sync their active state with the editor.
 
 ::component-example
 ---
 elevated: true
 collapse: true
 name: 'editor-toolbar-items-example'
-class: 'p-8'
+class: 'p-8 h-176 overflow-y-auto'
 ---
 ::
 
+::note
+You can also pass an array of arrays to the `items` prop to create separated groups of items.
+::
+
 ::tip
-Editor items automatically sync their active and disabled states with the editor. The toolbar uses handlers from the Editor component to execute commands.
+Each item can take an `items` array of objects with the same properties as the `items` prop to create a [DropdownMenu](/docs/components/dropdown-menu).
 ::
 
 ### Layout
@@ -87,7 +113,7 @@ class: 'p-8'
 
 ### Options
 
-When using `bubble`{lang="ts-type"} or `floating`{lang="ts-type"} layouts, use the `options` prop to customize the positioning behavior using Floating UI options.
+When using `bubble`{lang="ts-type"} or `floating`{lang="ts-type"} layouts, use the `options` prop to customize the positioning behavior using [Floating UI options](https://floating-ui.com/docs/computeposition#options).
 
 ```vue
 <template>
@@ -104,10 +130,6 @@ When using `bubble`{lang="ts-type"} or `floating`{lang="ts-type"} layouts, use t
   />
 </template>
 ```
-
-::tip{to="https://floating-ui.com/docs/computeposition" target="_blank"}
-The options are passed to Floating UI's `computePosition` function. You can configure strategy, placement, offset, flip, shift, and other positioning middleware.
-::
 
 ### Color and variant
 

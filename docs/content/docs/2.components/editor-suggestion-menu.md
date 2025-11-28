@@ -11,11 +11,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorSuggestionMenu component is used to display a menu of formatting and action suggestions when typing a trigger character in the editor. It allows users to quickly insert blocks and formatting by typing a trigger character.
-
-::caution
-This component must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
-::
+The EditorSuggestionMenu component is used to display a menu of formatting and action suggestions when typing a trigger character in the editor. It allows users to quickly insert blocks and formatting by typing a trigger character. It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
 
 Type `/` in the editor to open the suggestion menu.
 
@@ -76,7 +72,7 @@ Common alternatives include `>` for block commands or `+` for insertions.
 
 ### Options
 
-Use the `options` prop to customize the positioning behavior using Floating UI options.
+Use the `options` prop to customize the positioning behavior using [Floating UI options](https://floating-ui.com/docs/computeposition#options).
 
 ```vue
 <template>
@@ -90,10 +86,6 @@ Use the `options` prop to customize the positioning behavior using Floating UI o
   />
 </template>
 ```
-
-::tip{to="https://floating-ui.com/docs/computeposition" target="_blank"}
-The options are passed to Floating UI's `computePosition` function. You can configure strategy, placement, offset, flip, shift, and other positioning middleware.
-::
 
 ## Examples
 
