@@ -41,7 +41,7 @@ body:
         - v4.x
         - v3.x
         - v2.x
-      default: 1
+      default: 0
     validations:
       required: true
   - type: input

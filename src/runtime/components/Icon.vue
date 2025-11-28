@@ -1,6 +1,6 @@
 <script lang="ts">
 export interface IconProps {
-  name: string | object
+  name: string | any
   mode?: 'svg' | 'css'
   size?: string | number
   customize?: (
