@@ -205,7 +205,18 @@ watch(() => props.modelValue, (newVal) => {
     : String(newVal)
 
   if (currentContent !== newContent) {
+    // Store current cursor position
+    const currentSelection = editor.value.state.selection
+    const currentPos = currentSelection.from
+
+    // Set the new content
     editor.value.commands.setContent(newVal)
+
+    // Restore cursor position if the position is still valid in the new content
+    const newDoc = editor.value.state.doc
+    if (currentPos <= newDoc.content.size) {
+      editor.value.commands.setTextSelection(currentPos)
+    }
   }
 })
 
