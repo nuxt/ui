@@ -167,9 +167,8 @@ const toolbarItems: EditorToolbarItem[][] = [
     v-slot="{ editor }"
     v-model="value"
     content-type="markdown"
-    placeholder="Start typing..."
     :extensions="[TextAlign.configure({ types: ['heading', 'paragraph'] })]"
-    class="min-h-64"
+    class="w-full min-h-21"
   >
     <UEditorToolbar :editor="editor" :items="toolbarItems" class="px-8" />
   </UEditor>

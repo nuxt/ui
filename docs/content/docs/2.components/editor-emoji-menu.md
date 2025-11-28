@@ -34,7 +34,14 @@ Learn more about the Emoji extension in the TipTap documentation.
 
 ### Items
 
-Use the `items` prop to define the available emojis. Each item should include the emoji character, name, shortcodes, and optional tags.
+Use the `items` prop as an array of objects with the following properties:
+
+- `name: string`{lang="ts-type"}
+- `emoji: string`{lang="ts-type"}
+- `shortcodes?: string[]`{lang="ts-type"}
+- `tags?: string[]`{lang="ts-type"}
+- `group?: string`{lang="ts-type"}
+- `fallbackImage?: string`{lang="ts-type"}
 
 ::component-example
 ---
@@ -45,22 +52,11 @@ class: 'p-8'
 ---
 ::
 
-Each item supports these properties:
-
-| Property | Description |
-| -------- | ----------- |
-| `name`{lang="ts-type"} | The emoji name used for searching (required) |
-| `emoji`{lang="ts-type"} | The emoji character to insert |
-| `shortcodes`{lang="ts-type"} | Array of shortcode strings for search (e.g., `['smile', 'happy']`) |
-| `tags`{lang="ts-type"} | Array of tags for additional search terms |
-| `group`{lang="ts-type"} | Optional group name for organization |
-| `fallbackImage`{lang="ts-type"} | Fallback image URL for custom emojis |
-
 ::tip
 Use the `gitHubEmojis` export from `@tiptap/extension-emoji` for a comprehensive emoji set with over 1800 emojis.
 ::
 
-### Trigger character
+### Char
 
 Use the `char` prop to change the trigger character. Defaults to `:`{lang="ts-type"}.
 
@@ -86,44 +82,6 @@ Use the `options` prop to customize the positioning behavior using [Floating UI 
   />
 </template>
 ```
-
-## Examples
-
-### With GitHub emojis
-
-Use the GitHub emoji set from TipTap for a comprehensive collection.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-emoji-menu-github-example'
-class: 'p-8'
----
-::
-
-```ts
-import { gitHubEmojis } from '@tiptap/extension-emoji'
-
-const items = gitHubEmojis
-```
-
-### With custom emojis
-
-Create a custom emoji set for your specific use case.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-emoji-menu-custom-example'
-class: 'p-8'
----
-::
-
-::tip
-Custom sets are useful for limiting available emojis, adding brand-specific reactions, or domain-specific symbols.
-::
 
 ## API
 

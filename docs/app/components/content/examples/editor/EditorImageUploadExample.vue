@@ -80,7 +80,6 @@ const items = [[{
     :extensions="[ImageUpload]"
     :handlers="customHandlers"
     content-type="markdown"
-    placeholder="Start typing..."
     :ui="{ base: 'p-8 sm:px-16' }"
     class="w-full min-h-80"
   >

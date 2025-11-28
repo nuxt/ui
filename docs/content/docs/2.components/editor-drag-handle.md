@@ -70,7 +70,7 @@ The offset is automatically calculated to center the handle for small blocks and
 
 ### With dropdown menu
 
-Use the default slot to add a dropdown menu with block-level actions and listen to the `@node-change` event to track the currently hovered node.
+Use the default slot to add a [DropdownMenu](/docs/components/dropdown-menu) with block-level actions and listen to the `@node-change` event to track the currently hovered node.
 
 ::component-example
 ---
@@ -82,18 +82,18 @@ class: 'p-8'
 ::
 
 ::note
-Use the `mapEditorItems` utility from `@nuxt/ui/utils/editor` to automatically map handler kinds (like `duplicate`, `delete`, `moveUp`, etc.) to their corresponding editor commands with proper state management.
+This example uses the `mapEditorItems` utility from `@nuxt/ui/utils/editor` to automatically map handler kinds (like `duplicate`, `delete`, `moveUp`, etc.) to their corresponding editor commands with proper state management.
 ::
 
-### With insert button
+### With suggestion menu
 
-Add a button to insert new content at the current block position.
+Use the default slot to add a button that triggers the `suggestion` handler and open the [EditorSuggestionMenu](/docs/components/editor-suggestion-menu) component.
 
 ::component-example
 ---
 elevated: true
 collapse: true
-name: 'editor-drag-handle-add-example'
+name: 'editor-drag-handle-suggestion-menu-example'
 class: 'p-8'
 ---
 ::

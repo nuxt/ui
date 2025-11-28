@@ -17,7 +17,7 @@ const toolbarItems: EditorToolbarItem[][] = [[{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Start typing...">
+  <UEditor v-slot="{ editor }" v-model="value" class="w-full min-h-21">
     <UEditorToolbar
       :editor="editor"
       :items="toolbarItems"

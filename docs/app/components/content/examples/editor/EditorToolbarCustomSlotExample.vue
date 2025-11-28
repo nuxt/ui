@@ -6,7 +6,7 @@ const value = ref(`Select text and click the link button to add a link with the 
 
 You can also edit existing links like [this one](https://ui.nuxt.com).`)
 
-const toolbarItems: EditorToolbarItem[][] = [[{
+const toolbarItems = [[{
   kind: 'mark',
   mark: 'bold',
   icon: 'i-lucide-bold'
@@ -15,15 +15,20 @@ const toolbarItems: EditorToolbarItem[][] = [[{
   mark: 'italic',
   icon: 'i-lucide-italic'
 }, {
-  slot: 'link'
-}]]
+  slot: 'link' as const
+}]] satisfies EditorToolbarItem[][]
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Start typing...">
+  <UEditor
+    v-slot="{ editor }"
+    v-model="value"
+    content-type="markdown"
+    class="w-full min-h-21"
+  >
     <UEditorToolbar :editor="editor" :items="toolbarItems">
       <template #link>
-        <EditorLinkPopover :editor="editor" />
+        <EditorLinkPopover :editor="editor" auto-open />
       </template>
     </UEditorToolbar>
   </UEditor>

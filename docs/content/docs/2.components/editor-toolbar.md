@@ -211,53 +211,6 @@ props:
 
 ## Examples
 
-### Within a card
-
-Place a fixed toolbar in a card header for a document-style editing interface.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-toolbar-navbar-example'
-class: 'min-h-96'
----
-::
-
-### Bubble menu on text selection
-
-Use `layout="bubble"` to create a contextual toolbar that appears when text is selected.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-toolbar-bubble-example'
-class: 'p-8'
----
-::
-
-::note
-The bubble menu automatically positions itself near the selection and includes flip and shift middleware for optimal positioning.
-::
-
-### Floating menu for empty blocks
-
-Use `layout="floating"` to create a menu that appears on empty lines.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-toolbar-floating-example'
-class: 'p-8'
----
-::
-
-::tip
-Combine with the `should-show` prop to control when the floating menu appears, such as only on empty paragraphs.
-::
-
 ### With custom button slots
 
 You can use slots to customize specific toolbar items.
@@ -280,23 +233,6 @@ Use the `slot` property on an item to specify a named slot, then provide a match
   </template>
 </UEditorToolbar>
 ```
-
-### With dropdown menus
-
-Create dropdown menus by adding an `items` property to toolbar items.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-toolbar-dropdown-example'
-class: 'p-8'
----
-::
-
-::note
-Dropdowns automatically show the active child item's icon when an option is selected.
-::
 
 ### Image-specific toolbar
 

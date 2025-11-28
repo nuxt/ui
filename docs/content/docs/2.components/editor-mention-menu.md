@@ -34,7 +34,13 @@ Learn more about the Mention extension in the TipTap documentation.
 
 ### Items
 
-Use the `items` prop to define the available mentions. Each item can include a label, avatar, icon, and description.
+Use the `items` prop as an array of objects with the following properties:
+
+- `label: string`{lang="ts-type"}
+- `avatar?: AvatarProps`{lang="ts-type"}
+- `icon?: string`{lang="ts-type"}
+- `description?: string`{lang="ts-type"}
+- `disabled?: boolean`{lang="ts-type"}
 
 ::component-example
 ---
@@ -45,21 +51,11 @@ class: 'p-8'
 ---
 ::
 
-Each item supports these properties:
-
-| Property | Description |
-| -------- | ----------- |
-| `label`{lang="ts-type"} | The mention text that gets inserted (required) |
-| `avatar`{lang="ts-type"} | Avatar props for displaying a user image |
-| `icon`{lang="ts-type"} | Icon to display if no avatar is provided |
-| `description`{lang="ts-type"} | Optional description shown below the label |
-| `disabled`{lang="ts-type"} | Whether the item can be selected |
-
 ::tip
 Use avatars for user mentions and icons for entities like teams, channels, or tags.
 ::
 
-### Trigger character
+### Char
 
 Use the `char` prop to change the trigger character. Defaults to `@`{lang="ts-type"}.
 
@@ -89,38 +85,6 @@ Use the `options` prop to customize the positioning behavior using [Floating UI 
   />
 </template>
 ```
-
-## Examples
-
-### With descriptions
-
-Add descriptions to provide more context about each user or entity.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-mention-menu-users-example'
-class: 'p-8'
----
-::
-
-### With async data
-
-You can fetch mention suggestions dynamically based on the user's query.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-mention-menu-fetched-example'
-class: 'p-8'
----
-::
-
-::note
-The items prop is reactive, allowing you to update suggestions as the user types.
-::
 
 ## API
 

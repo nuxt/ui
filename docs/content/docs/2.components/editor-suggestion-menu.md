@@ -11,7 +11,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorSuggestionMenu component is used to display a menu of formatting and action suggestions when typing a trigger character in the editor. It allows users to quickly insert blocks and formatting by typing a trigger character. It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
+The EditorSuggestionMenu component is used to display a menu of formatting and action suggestions when typing a trigger character in the editor. It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
 
 Type `/` in the editor to open the suggestion menu.
 
@@ -30,7 +30,27 @@ The menu supports keyboard navigation (arrow keys, enter to select, escape to cl
 
 ### Items
 
-Use the `items` prop to define the available commands in the menu. Items can be editor commands with a `kind` property or separators and labels.
+Use the `items` prop as an array of objects with the following properties:
+
+- `kind?: "textAlign" | "heading" | "link" | "image" | "blockquote" | "bulletList" | "orderedList" | "codeBlock" | "horizontalRule" | "paragraph" | "clearFormatting" | "duplicate" | "delete" | "moveUp" | "moveDown" | "suggestion" | "mention" | "emoji"`{lang="ts-type"}
+- `label?: string`{lang="ts-type"}
+- `description?: string`{lang="ts-type"}
+- `icon?: string`{lang="ts-type"}
+- `type?: "label" | "separator"`{lang="ts-type"}
+- `disabled?: boolean`{lang="ts-type"}
+
+::note{to="/docs/components/editor#handlers"}
+The `kind` property references a handler defined in the [Editor](/docs/components/editor) component. Handlers wrap TipTap commands and manage their state (active, disabled, etc.). The Editor provides default handlers for common actions (`heading`, `blockquote`, `bulletList`, etc.), but you can add custom handlers using the `handlers` prop on the Editor component.
+::
+
+::tip
+When using the `kind` property for editor-specific actions, additional properties may be required:
+
+- For `kind: "textAlign"`{lang="ts-type"}: `align: "left" | "center" | "right" | "justify"`{lang="ts-type"}
+- For `kind: "heading"`{lang="ts-type"}: `level: 1 | 2 | 3 | 4 | 5 | 6`{lang="ts-type"}
+- For `kind: "link"`{lang="ts-type"}: `href?: string`{lang="ts-type"}
+- For `kind: "image"`{lang="ts-type"}: `src?: string`{lang="ts-type"}
+::
 
 ::component-example
 ---
@@ -41,22 +61,15 @@ class: 'p-8'
 ---
 ::
 
-Each item supports these properties:
-
-| Property | Description |
-| -------- | ----------- |
-| `kind`{lang="ts-type"} | Editor command type (`heading`, `bulletList`, `blockquote`, etc.) |
-| `label`{lang="ts-type"} | Display text for the item |
-| `description`{lang="ts-type"} | Optional description shown below the label |
-| `icon`{lang="ts-type"} | Icon displayed before the label |
-| `type: 'label'`{lang="ts-type"} | Creates a section header (non-selectable) |
-| `type: 'separator'`{lang="ts-type"} | Creates a visual divider between groups |
-
-::tip
-Use labels and separators to organize commands into logical groups for better discoverability.
+::note
+You can also pass an array of arrays to the `items` prop to create separated groups of items.
 ::
 
-### Trigger character
+::tip
+Use `type: 'label'` for section headers and `type: 'separator'` for visual dividers to organize commands into logical groups for better discoverability.
+::
+
+### Char
 
 Use the `char` prop to change the trigger character. Defaults to `/`{lang="ts-type"}.
 
@@ -86,38 +99,6 @@ Use the `options` prop to customize the positioning behavior using [Floating UI 
   />
 </template>
 ```
-
-## Examples
-
-### With sections
-
-Create an organized suggestion menu with labeled sections and separators.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-suggestion-menu-custom-example'
-class: 'p-8'
----
-::
-
-### With descriptions
-
-Add descriptions to help users understand what each command does.
-
-::component-example
----
-elevated: true
-collapse: true
-name: 'editor-suggestion-menu-icons-example'
-class: 'p-8'
----
-::
-
-::tip
-Descriptions are especially useful for less common formatting options or custom commands.
-::
 
 ## API
 

@@ -21,7 +21,7 @@ const imageToolbarItems: EditorToolbarItem[][] = [[{
     v-slot="{ editor }"
     v-model="value"
     content-type="markdown"
-    placeholder="Start typing..."
+    class="w-full min-h-21"
   >
     <UEditorToolbar
       :editor="editor"

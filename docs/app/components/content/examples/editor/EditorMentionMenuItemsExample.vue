@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import type { EditorMentionMenuItem } from '@nuxt/ui'
 
-const value = ref({
-  type: 'doc',
-  content: [{
-    type: 'paragraph',
-    content: [{ type: 'text', text: 'Mention a team member or channel: ' }]
-  }]
-})
+const value = ref(`Mention a team member or channel: `)
 
 const mentionItems: EditorMentionMenuItem[] = [{
   label: 'benjamincanac',
@@ -29,7 +23,7 @@ const mentionItems: EditorMentionMenuItem[] = [{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="value" content-type="markdown" placeholder="Type @ to mention...">
+  <UEditor v-slot="{ editor }" v-model="value" placeholder="Type @ to mention..." class="w-full min-h-21">
     <UEditorMentionMenu :editor="editor" :items="mentionItems" />
   </UEditor>
 </template>
