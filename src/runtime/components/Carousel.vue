@@ -9,7 +9,7 @@ import type { ClassNamesOptionsType } from 'embla-carousel-class-names'
 import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import theme from '#build/ui/carousel'
-import type { ButtonProps, IconProps } from '../types'
+import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { AcceptableValue } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -32,7 +32,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * Configure the prev button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
    */
-  prev?: ButtonProps
+  prev?: Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the prev button.
    * @defaultValue appConfig.ui.icons.arrowLeft
@@ -43,7 +43,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * Configure the next button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
    */
-  next?: ButtonProps
+  next?: Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the next button.
    * @defaultValue appConfig.ui.icons.arrowRight

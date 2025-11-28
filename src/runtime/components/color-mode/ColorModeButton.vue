@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { ButtonProps } from '../../types'
+import type { ButtonProps, LinkPropsKeys } from '../../types'
 
-export interface ColorModeButtonProps extends Omit<ButtonProps, 'color' | 'variant'> {
+export interface ColorModeButtonProps extends Omit<ButtonProps, LinkPropsKeys | 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */
