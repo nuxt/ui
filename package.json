@@ -115,7 +115,8 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit && nuxt typecheck playgrounds/nuxt && nuxt typecheck docs && cd playgrounds/vue && vue-tsc --noEmit",
     "test": "vitest",
-    "test:vue": "vitest -c vitest.vue.config.ts",
+    "test:vue": "vitest --project vue",
+    "test:nuxt": "vitest --project nuxt",
     "release": "release-it"
   },
   "dependencies": {
