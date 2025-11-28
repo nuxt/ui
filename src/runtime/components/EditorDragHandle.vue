@@ -4,13 +4,13 @@ import type { Placement, Strategy } from '@floating-ui/dom'
 import type { Editor, Node } from '@tiptap/vue-3'
 import type { DragHandleProps } from '@tiptap/extension-drag-handle-vue-3'
 import theme from '#build/ui/editor-drag-handle'
-import type { ButtonProps, IconProps } from '../types'
+import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { FloatingUIOptions } from '../types/editor'
 import type { ComponentConfig } from '../types/tv'
 
 type EditorDragHandle = ComponentConfig<typeof theme, AppConfig, 'editorDragHandle'>
 
-export interface EditorDragHandleProps extends Omit<DragHandleProps, 'editor' | 'element' | 'onNodeChange' | 'computePositionConfig' | 'class'>, Omit<ButtonProps, 'icon' | 'color' | 'variant'> {
+export interface EditorDragHandleProps extends Omit<DragHandleProps, 'editor' | 'element' | 'onNodeChange' | 'computePositionConfig' | 'class'>, Omit<ButtonProps, LinkPropsKeys | 'icon' | 'color' | 'variant'> {
   /**
    * @defaultValue appConfig.ui.icons.drag
    * @IconifyIcon

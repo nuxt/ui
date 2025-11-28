@@ -5,7 +5,7 @@ import type { Editor } from '@tiptap/vue-3'
 import type { BubbleMenuPluginProps } from '@tiptap/extension-bubble-menu'
 import type { FloatingMenuPluginProps } from '@tiptap/extension-floating-menu'
 import theme from '#build/ui/editor-toolbar'
-import type { ButtonProps, DropdownMenuProps, DropdownMenuItem } from '../types'
+import type { ButtonProps, DropdownMenuProps, DropdownMenuItem, LinkPropsKeys } from '../types'
 import type { EditorItem, EditorCustomHandlers } from '../types/editor'
 import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
@@ -16,7 +16,7 @@ type ButtonItem = Omit<ButtonProps, 'type'> & {
   slot?: string
 }
 
-type EditorToolbarButtonItem<H extends EditorCustomHandlers = EditorCustomHandlers> = ButtonItem & EditorItem<H>
+type EditorToolbarButtonItem<H extends EditorCustomHandlers = EditorCustomHandlers> = Omit<ButtonItem, LinkPropsKeys> & EditorItem<H>
 
 type EditorToolbarDropdownChildItem<H extends EditorCustomHandlers = EditorCustomHandlers>
   = | DropdownMenuItem
