@@ -7,9 +7,13 @@ export default defineMcpTool({
   },
   cache: '30m',
   async handler({ path }) {
-    const result = await $fetch<string>(`/raw${path}.md`)
-    return {
-      content: [{ type: 'text' as const, text: result }]
+    try {
+      const result = await $fetch<string>(`/raw${path}.md`)
+      return {
+        content: [{ type: 'text' as const, text: result }]
+      }
+    } catch (error) {
+      return errorResult(`Failed to fetch documentation page: ${error}`)
     }
   }
 })
