@@ -72,9 +72,9 @@ Visit our [documentation](https://ui.nuxt.com) to learn more and explore all ava
 
 const customHandlers = {
   imageUpload: {
-    canExecute: (editor: Editor) => editor.can().insertContent({ type: 'imageUpload' }),
-    execute: (editor: Editor) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
-    isActive: (editor: Editor) => editor.isActive('imageUpload'),
+    canExecute: (editor: any) => editor.can().insertContent({ type: 'imageUpload' }),
+    execute: (editor: any) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
+    isActive: (editor: any) => editor.isActive('imageUpload'),
     isDisabled: undefined
   }
 } satisfies EditorCustomHandlers
