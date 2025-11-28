@@ -1,9 +1,17 @@
+import { queryCollection } from '@nuxt/content/server'
+
 export default defineMcpTool({
   description: 'Lists all documentation pages',
-  handler: async () => {
-    const result = await $fetch('/api/mcp/list-documentation-pages')
-    return {
-      content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }]
-    }
+  cache: '1h',
+  async handler() {
+    const event = useEvent()
+
+    const pages = await queryCollection(event, 'docs').all()
+
+    return jsonResult(pages.map(doc => ({
+      title: doc.title,
+      description: doc.description,
+      path: doc.path
+    })))
   }
 })

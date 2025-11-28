@@ -20,7 +20,7 @@
     "@nuxt/content": "^3.8.2",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "workspace:*",
-    "@nuxtjs/mcp-toolkit": "^0.2.0",
+    "@nuxtjs/mcp-toolkit": "^0.4.1",
     "@nuxtjs/plausible": "^2.0.1",
     "@octokit/rest": "^22.0.1",
     "@regle/core": "^1.10.2",

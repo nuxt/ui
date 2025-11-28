@@ -5,7 +5,8 @@ export default defineMcpTool({
   inputSchema: {
     exampleName: z.string().describe('The name of the example (PascalCase)')
   },
-  handler: async ({ exampleName }) => {
+  cache: '30m',
+  async handler({ exampleName }) {
     const result = await $fetch<{ code: string }>(`/api/component-example/${exampleName}.json`)
     return {
       content: [{ type: 'text' as const, text: result.code }]

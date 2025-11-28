@@ -1,9 +1,14 @@
+// @ts-expect-error - no types available
+import components from '#component-example/nitro'
+
 export default defineMcpTool({
   description: 'Lists all available UI examples and code demonstrations',
-  handler: async () => {
-    const result = await $fetch('/api/mcp/list-examples')
-    return {
-      content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }]
-    }
+  cache: '1h',
+  handler() {
+    const examples = Object.entries<{ pascalName: string }>(components).map(([_key, value]) => {
+      return value.pascalName
+    })
+
+    return jsonResult(examples)
   }
 })

@@ -157,6 +157,7 @@ export default defineNuxtConfig({
   },
 
   experimental: {
+    asyncContext: true,
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'
