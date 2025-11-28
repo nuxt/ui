@@ -194,6 +194,12 @@ export default defineNuxtConfig({
       return { component, code }
     }],
     overrides: {
+      UEditor: {
+        props: {
+          modelValue: { name: 'modelValue', type: 'null | string | JSONContent | JSONContent[]' },
+          parseOptions: { name: 'parseOptions', type: 'ParseOptions' }
+        }
+      },
       UEditorDragHandle: { props: { editor: { name: 'editor', type: 'Editor' } } },
       UEditorToolbar: { props: { editor: { name: 'editor', type: 'Editor' } } },
       UEditorSuggestionMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
