@@ -1,4 +1,4 @@
-import { z } from 'zod/v3'
+import { z } from 'zod'
 import { kebabCase, camelCase, upperFirst } from 'scule'
 import { queryCollection } from '@nuxt/content/server'
 import { normalizeComponentName } from '~~/server/utils/normalizeComponentName'

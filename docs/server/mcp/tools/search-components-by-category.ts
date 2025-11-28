@@ -1,4 +1,4 @@
-import { z } from 'zod/v3'
+import { z } from 'zod'
 import { queryCollection } from '@nuxt/content/server'
 
 export default defineMcpTool({

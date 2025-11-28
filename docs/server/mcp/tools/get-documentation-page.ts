@@ -1,4 +1,4 @@
-import { z } from 'zod/v3'
+import { z } from 'zod'
 
 export default defineMcpTool({
   description: 'Retrieves documentation page content by URL path',
