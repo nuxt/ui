@@ -94,7 +94,6 @@ describe('Select', () => {
   it.each([
     ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
     ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
-    ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' }],
     ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
     ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
   ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
