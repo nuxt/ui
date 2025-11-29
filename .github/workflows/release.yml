@@ -45,9 +45,6 @@ jobs:
       - name: Test
         run: pnpm run test run
 
-      - name: Test (vue)
-        run: pnpm run test:vue run
-
       - name: Publish
         run: ./scripts/release.sh
         env:

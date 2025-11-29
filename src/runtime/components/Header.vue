@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/header'
-import type { ButtonProps, DrawerProps, ModalProps, SlideoverProps } from '../types'
+import type { ButtonProps, DrawerProps, ModalProps, SlideoverProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type Header = ComponentConfig<typeof theme, AppConfig, 'header'>
@@ -30,7 +30,7 @@ export interface HeaderProps<T extends HeaderMode = HeaderMode> {
    * Customize the toggle button to open the header menu displayed when the `content` slot is used.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  toggle?: boolean | Partial<ButtonProps>
+  toggle?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The side to render the toggle button on.
    * @defaultValue 'right'
@@ -129,7 +129,7 @@ function toggleOpen() {
         variant="ghost"
         :aria-label="open ? t('header.close') : t('header.open')"
         :icon="open ? appConfig.ui.icons.close : appConfig.ui.icons.menu"
-        v-bind="(typeof toggle === 'object' ? toggle as Partial<ButtonProps> : {})"
+        v-bind="(typeof toggle === 'object' ? toggle : {})"
         data-slot="toggle"
         :class="ui.toggle({ class: props.ui?.toggle, toggleSide })"
         @click="toggleOpen"

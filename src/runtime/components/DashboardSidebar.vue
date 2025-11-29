@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-sidebar'
 import type { UseResizableProps } from '../composables/useResizable'
-import type { ButtonProps, DrawerProps, ModalProps, SlideoverProps } from '../types'
+import type { ButtonProps, DrawerProps, ModalProps, SlideoverProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSidebar = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebar'>
@@ -25,7 +25,7 @@ export interface DashboardSidebarProps<T extends DashboardSidebarMode = Dashboar
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  toggle?: boolean | Partial<ButtonProps>
+  toggle?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The side to render the toggle button on.
    * @defaultValue 'left'
@@ -138,7 +138,7 @@ function toggleOpen() {
     <slot name="toggle" :open="open" :toggle="toggleOpen" :ui="ui">
       <UDashboardSidebarToggle
         v-if="toggle"
-        v-bind="(typeof toggle === 'object' ? toggle as Partial<ButtonProps> : {})"
+        v-bind="(typeof toggle === 'object' ? toggle : {})"
         :side="toggleSide"
         data-slot="toggle"
         :class="ui.toggle({ class: props.ui?.toggle, toggleSide })"
