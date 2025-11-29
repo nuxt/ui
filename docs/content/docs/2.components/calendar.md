@@ -44,7 +44,7 @@ props:
 ::
 
 ::note
-This component relies on the [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/index.html) package which provides objects and functions for representing and manipulating dates and times in a locale-aware manner.
+This component relies on the [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/index.html) package which provides objects and functions for representing and manipulating dates and times in a locale-aware manner. Format of date depends on the [`locale`](/docs/getting-started/integrations/i18n) installed in your application.
 ::
 
 ### Multiple

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/alert'
-import type { AvatarProps, ButtonProps, IconProps } from '../types'
+import type { AvatarProps, ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type Alert = ComponentConfig<typeof theme, AppConfig, 'alert'>
@@ -45,7 +45,7 @@ export interface AlertProps {
    * @emits 'update:open'
    * @defaultValue false
    */
-  close?: boolean | Partial<ButtonProps>
+  close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -136,7 +136,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.alert || {})
           color="neutral"
           variant="link"
           :aria-label="t('alert.close')"
-          v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
+          v-bind="(typeof close === 'object' ? close : {})"
           data-slot="close"
           :class="ui.close({ class: props.ui?.close })"
           @click="emits('update:open', false)"

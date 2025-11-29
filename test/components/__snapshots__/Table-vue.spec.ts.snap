@@ -11,9 +11,9 @@ exports[`Table > renders with as correctly 1`] = `
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -66,9 +66,9 @@ exports[`Table > renders with body-bottom slot correctly 1`] = `
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -121,9 +121,9 @@ exports[`Table > renders with body-top slot correctly 1`] = `
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">Body top slot<tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">Body top slot<tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">success</td>
@@ -175,9 +175,9 @@ exports[`Table > renders with caption correctly 1`] = `
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -230,9 +230,9 @@ exports[`Table > renders with caption slot correctly 1`] = `
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -285,9 +285,9 @@ exports[`Table > renders with cell slot correctly 1`] = `
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">ID Cell slot</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -340,9 +340,9 @@ exports[`Table > renders with class correctly 1`] = `
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -414,9 +414,9 @@ exports[`Table > renders with columns correctly 1`] = `
           <!---->
         </th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
@@ -574,7 +574,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <!--v-if-->
     </tbody>
     <tfoot data-slot="tfoot" class="relative">
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
@@ -614,9 +614,9 @@ exports[`Table > renders with data correctly 1`] = `
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -664,9 +664,9 @@ exports[`Table > renders with empty correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50"></tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr>
         <td colspan="0" data-slot="empty" class="py-6 text-center text-sm text-muted">There is no data</td>
       </tr>
@@ -706,15 +706,15 @@ exports[`Table > renders with empty slot correctly 1`] = `
           <!---->
         </th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr>
         <td colspan="7" data-slot="empty" class="py-6 text-center text-sm text-muted">Empty slot</td>
       </tr>
     </tbody>
     <tfoot data-slot="tfoot" class="relative">
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
@@ -754,9 +754,9 @@ exports[`Table > renders with expanded slot correctly 1`] = `
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -809,9 +809,9 @@ exports[`Table > renders with header slot correctly 1`] = `
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -857,16 +857,16 @@ exports[`Table > renders with loading animation carousel correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -912,16 +912,16 @@ exports[`Table > renders with loading animation carousel-inverse correctly 1`] =
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[carousel-inverse_2s_ease-in-out_infinite] rtl:after:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[carousel-inverse_2s_ease-in-out_infinite] rtl:after:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -967,16 +967,16 @@ exports[`Table > renders with loading animation elastic correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[elastic_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[elastic_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1022,16 +1022,16 @@ exports[`Table > renders with loading animation swing correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[swing_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[swing_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1077,16 +1077,16 @@ exports[`Table > renders with loading color error correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-error after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-error after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1132,16 +1132,16 @@ exports[`Table > renders with loading color info correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-info after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-info after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1187,16 +1187,16 @@ exports[`Table > renders with loading color neutral correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-inverted after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-inverted after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1242,16 +1242,16 @@ exports[`Table > renders with loading color primary correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1297,16 +1297,16 @@ exports[`Table > renders with loading color secondary correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-secondary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-secondary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1352,16 +1352,16 @@ exports[`Table > renders with loading color success correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-success after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-success after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1407,16 +1407,16 @@ exports[`Table > renders with loading color warning correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-warning after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-warning after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1462,16 +1462,16 @@ exports[`Table > renders with loading correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1517,7 +1517,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
@@ -1543,15 +1543,15 @@ exports[`Table > renders with loading slot correctly 1`] = `
           <!---->
         </th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr>
         <td colspan="7" data-slot="loading" class="py-6 text-center">Loading slot</td>
       </tr>
     </tbody>
     <tfoot data-slot="tfoot" class="relative">
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
@@ -1610,9 +1610,9 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <!---->
         </th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
           <div data-slot="root" class="relative flex items-start flex-row">
@@ -1770,7 +1770,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <!--v-if-->
     </tbody>
     <tfoot data-slot="tfoot" class="relative">
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
           <!---->
@@ -1810,9 +1810,9 @@ exports[`Table > renders with meta prop correctly 1`] = `
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50 custom-row-class" style="background-color: lightgray;">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1858,16 +1858,16 @@ exports[`Table > renders with sticky correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 z-[1] backdrop-blur">
+    <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1920,9 +1920,9 @@ exports[`Table > renders with ui correctly 1`] = `
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
@@ -1976,9 +1976,9 @@ exports[`Table > renders with virtualize correctly 1`] = `
           <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
           <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
         </tr>
-        <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+        <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
       </thead>
-      <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary"></tbody>
+      <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary"></tbody>
       <!--v-if-->
     </table>
   </div>
@@ -1991,9 +1991,9 @@ exports[`Table > renders without data correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50"></tr>
-      <tr data-slot="separator" class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="[&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <tr>
         <td colspan="0" data-slot="empty" class="py-6 text-center text-sm text-muted">No data</td>
       </tr>
