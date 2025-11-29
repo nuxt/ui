@@ -42,7 +42,7 @@ describe('Breadcrumb', () => {
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
     ['with separator slot', { props, slots: { separator: () => '/' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BreadcrumbProps, slots?: Partial<BreadcrumbSlots & { custom: () => 'Custom slot' }> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Breadcrumb)
+    const html = await ComponentRender(nameOrHtml, { ...options, route: '/components/breadcrumb' }, Breadcrumb)
     expect(html).toMatchSnapshot()
   })
 
@@ -52,5 +52,27 @@ describe('Breadcrumb', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('highlights the current route link as active', async () => {
+    const wrapper = await mountSuspended(Breadcrumb, {
+      props: {
+        items: [{
+          label: 'Home',
+          to: '/'
+        }, {
+          label: 'Components',
+          to: '/components'
+        }, {
+          label: 'Breadcrumb',
+          to: '/components/breadcrumb'
+        }]
+      },
+      route: '/components'
+    })
+
+    const activeLink = wrapper.find('[aria-current="page"]')
+    expect(activeLink.exists()).toBe(true)
+    expect(activeLink.html()).toContain('Breadcrumb')
   })
 })
