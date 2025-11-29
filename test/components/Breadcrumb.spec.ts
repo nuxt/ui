@@ -73,6 +73,6 @@ describe('Breadcrumb', () => {
 
     const activeLink = wrapper.find('[aria-current="page"]')
     expect(activeLink.exists()).toBe(true)
-    expect(activeLink.html()).toContain('Breadcrumb')
+    expect(activeLink.html()).toContain('Components')
   })
 })
