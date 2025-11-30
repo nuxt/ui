@@ -162,6 +162,11 @@ onMounted(async () => {
     if (event.type === 'change' || event.type === 'input') {
       dirtyFields.add(event.name)
     }
+
+    // Propagate dirty and touched fields to parent form
+    if ((event.type === 'change' || event.type === 'input' || event.type === 'focus' || event.type === 'blur') && parentBus) {
+      parentBus.emit(event)
+    }
   })
 })
 
