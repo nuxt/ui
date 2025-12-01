@@ -43,7 +43,7 @@ jobs:
         run: pnpm run typecheck
 
       - name: Test
-        run: pnpm test run
+        run: pnpm run test run
 
       - name: Publish
         run: ./scripts/release.sh
