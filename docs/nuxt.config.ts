@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
+    '@vercel/analytics/nuxt/module',
     'nuxt-component-meta',
     'nuxt-og-image',
     'motion-v/nuxt',
