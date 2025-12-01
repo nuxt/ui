@@ -64,6 +64,7 @@ type ChatSlotMessageProps = ChatMessageProps & {
   slots?: {
     [K in keyof ChatMessageSlots]?: ExtendSlotWithVersion<K>
   }
+  [key: string]: any
 }
 
 type ExtendSlotWithVersion<K extends keyof ChatMessageSlots>
@@ -100,7 +101,7 @@ const props = withDefaults(defineProps<ChatMessagesProps>(), {
 })
 const slots = defineSlots<ChatMessagesSlots>()
 
-const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
+const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport', 'message'])
 
 const appConfig = useAppConfig() as ChatMessages['AppConfig']
 const uiProp = useComponentUI('chatMessages', props)
@@ -122,8 +123,8 @@ const lastMessageSubmitted = ref(false)
 const lastScrollTop = ref(0)
 const userScrolledUp = ref(false)
 
-function registerMessageRef(id: string, element: ComponentPublicInstance | null) {
-  const elInstance = element?.$el
+function registerMessageRef(id: string, element: ComponentPublicInstance | HTMLElement | null) {
+  const elInstance = element instanceof HTMLElement ? element : element?.$el
   if (elInstance) {
     messagesRefs.value.set(id, elInstance)
   }
@@ -303,16 +304,33 @@ onMounted(() => {
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
     <slot>
-      <template v-for="message in messages" :key="message.id">
-        <component
-          :is="$slots.message ? $slots.message : UChatMessage"
-          v-bind="{ ...message, ...(message.role === 'user' ? userProps : assistantProps), compact, message, slots: getProxySlots() }"
-          :ref="(el: ComponentPublicInstance) => registerMessageRef(message.id, el)"
+      <template
+        v-for="messageData in messages"
+        :key="messageData.id"
+      >
+        <slot
+          v-if="$slots.message"
+          :ref="(el: HTMLElement) => registerMessageRef(messageData.id, el)"
+          name="message"
+          :compact="compact"
+          v-bind="{
+            ...messageData,
+            ...(messageData.role === 'user' ? userProps : assistantProps)
+          }"
+        />
+        <UChatMessage
+          v-else
+          :ref="(el) => registerMessageRef(messageData.id, el as ComponentPublicInstance)"
+          :compact="compact"
+          v-bind="{
+            ...messageData,
+            ...(messageData.role === 'user' ? userProps : assistantProps)
+          }"
         >
           <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
-            <slot :name="name" v-bind="slotData" :message="message" />
+            <slot :name="name" v-bind="(slotData as any)" :message="messageData" />
           </template>
-        </component>
+        </UChatMessage>
       </template>
     </slot>
     <UChatMessage
