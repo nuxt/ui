@@ -31,13 +31,6 @@
       ]
     },
     {
-      "groupName": "vercel",
-      "matchPackageNames": [
-        "@vercel/analytics",
-        "@vercel/speed-insights"
-      ]
-    },
-    {
       "groupName": "vite",
       "matchPackageNames": [
         "@vitejs/plugin-vue",
