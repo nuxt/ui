@@ -21,7 +21,7 @@
     "@nuxtjs/plausible": "^2.0.1",
     "@octokit/rest": "^22.0.1",
     "@rollup/plugin-yaml": "^4.1.2",
-    "@vercel/analytics": "^1.5.0",
+    "@vercel/analytics": "^1.6.0",
     "@vueuse/integrations": "^13.9.0",
     "@vueuse/nuxt": "^13.9.0",
     "ai": "^4.3.19",
