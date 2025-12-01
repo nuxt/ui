@@ -1,6 +1,6 @@
+import type { MaybeRef } from 'vue'
 import { ref, computed, unref, onMounted, watch, reactive } from 'vue'
 import { useFileDialog, useDropZone } from '@vueuse/core'
-import type { MaybeRef } from '@vueuse/core'
 
 export interface UseFileUploadOptions {
   /**
