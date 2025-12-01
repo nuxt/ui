@@ -67,6 +67,13 @@ export default defineNuxtConfig({
     }
   },
 
+  build: {
+    transpile: [
+      '@vercel/analytics',
+      '@vercel/speed-insights'
+    ]
+  },
+
   routeRules: {
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
