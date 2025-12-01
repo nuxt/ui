@@ -223,7 +223,6 @@
   "resolutions": {
     "@nuxt/kit": "^4.2.1",
     "@nuxt/ui": "workspace:*",
-    "debug": "4.3.7",
     "typescript": "5.8.3",
     "unplugin": "^2.3.11"
   },
