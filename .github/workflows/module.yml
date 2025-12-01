@@ -50,7 +50,7 @@ jobs:
         run: pnpm run typecheck
 
       - name: Test
-        run: pnpm run test run
+        run: pnpm test run
 
       - name: Build
         run: pnpm run build
