@@ -175,7 +175,7 @@
     "ai": "^5.0.104",
     "embla-carousel": "^8.6.0",
     "eslint": "^9.39.1",
-    "happy-dom": "^20.0.11",
+    "happy-dom": "^20.0.10",
     "nuxt": "^4.2.1",
     "release-it": "^19.0.6",
     "vitest": "^3.2.4",
@@ -224,6 +224,7 @@
     "@nuxt/kit": "^4.2.1",
     "@nuxt/ui": "workspace:*",
     "debug": "4.3.7",
+    "happy-dom": "20.0.10",
     "typescript": "5.8.3",
     "unplugin": "^2.3.11"
   },
