@@ -177,10 +177,6 @@ function isDisabled(item: EditorToolbarItem): boolean {
   }
 
   if ('items' in item && item.items?.length) {
-    if (item.items.length === 0) {
-      return true
-    }
-
     const items = isArrayOfArray(item.items) ? item.items.flat() : item.items
     const itemItems = items.filter((item): item is EditorToolbarItem => 'kind' in item)
 
