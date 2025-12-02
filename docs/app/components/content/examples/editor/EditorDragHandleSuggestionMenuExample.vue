@@ -27,7 +27,13 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor, handlers }" v-model="value" class="w-full min-h-21">
+  <UEditor
+    v-slot="{ editor, handlers }"
+    v-model="value"
+    content-type="markdown"
+    class="w-full min-h-35"
+    :ui="{ base: 'p-8 sm:px-16' }"
+  >
     <UEditorDragHandle v-slot="{ ui, onClick }" :editor="editor">
       <UButton
         icon="i-lucide-plus"

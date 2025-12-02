@@ -70,7 +70,9 @@ The offset is automatically calculated to center the handle for small blocks and
 
 ### With dropdown menu
 
-Use the default slot to add a [DropdownMenu](/docs/components/dropdown-menu) with block-level actions and listen to the `@node-change` event to track the currently hovered node.
+Use the default slot to add a [DropdownMenu](/docs/components/dropdown-menu) with block-level actions like duplicate, delete, move up/down, or transform blocks into different types.
+
+Listen to the `@node-change` event to track the currently hovered node and its position, then use `editor.chain().setMeta('lockDragHandle', open).run()`{lang="ts-type"} to lock the handle position while the menu is open.
 
 ::component-example
 ---
@@ -87,14 +89,16 @@ This example uses the `mapEditorItems` utility from `@nuxt/ui/utils/editor` to a
 
 ### With suggestion menu
 
-Use the default slot to add a button that triggers the `suggestion` handler and open the [EditorSuggestionMenu](/docs/components/editor-suggestion-menu) component.
+Use the default slot to add a [Button](/docs/components/button) next to the drag handle to open the [EditorSuggestionMenu](/docs/components/editor-suggestion-menu).
+
+Call the `onClick` slot function to get the current node position, then use `handlers.suggestion?.execute(editor, { pos: node?.pos }).run()`{lang="ts-type"} to insert new blocks at that position.
 
 ::component-example
 ---
 elevated: true
 collapse: true
 name: 'editor-drag-handle-suggestion-menu-example'
-class: 'p-8'
+class: '!p-0'
 ---
 ::
 

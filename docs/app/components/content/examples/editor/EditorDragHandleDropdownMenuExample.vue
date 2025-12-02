@@ -86,7 +86,12 @@ const getMenuItems = (editor: Editor): DropdownMenuItem[][] => {
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="value" class="w-full min-h-21">
+  <UEditor
+    v-slot="{ editor }"
+    v-model="value"
+    content-type="markdown"
+    class="w-full min-h-19"
+  >
     <UEditorDragHandle v-slot="{ ui }" :editor="editor" @node-change="selectedNode = $event">
       <UDropdownMenu
         v-slot="{ open }"
@@ -97,7 +102,7 @@ const getMenuItems = (editor: Editor): DropdownMenuItem[][] => {
         @update:open="editor.chain().setMeta('lockDragHandle', $event).run()"
       >
         <UButton
-          icon="i-lucide-more-vertical"
+          icon="i-lucide-grip-vertical"
           color="neutral"
           variant="ghost"
           active-variant="soft"
