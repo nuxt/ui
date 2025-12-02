@@ -11,9 +11,11 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorEmojiMenu component is used to display a menu of emoji suggestions when typing the `:` character in the editor. Emojis are inserted as text characters or custom nodes depending on the extension configuration. It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
+The EditorEmojiMenu component is used to display a menu of emoji suggestions when typing the `:` character in the editor. It uses the `useEditorMenu` composable built on top of TipTap's [Suggestion](https://tiptap.dev/docs/editor/api/utilities/suggestion) utility.
 
-Type `:` followed by an emoji name to search and insert emojis.
+::caution
+It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
+::
 
 ::component-example
 ---
@@ -24,8 +26,8 @@ class: 'p-8'
 ---
 ::
 
-::note
-The menu filters items as you type and supports keyboard navigation (arrow keys, enter to select, escape to close).
+::warning
+The `@tiptap/extension-emoji` package is not installed by default, you need to install it separately.
 ::
 
 ::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/nodes/emoji" target="_blank"}
@@ -52,8 +54,8 @@ class: 'p-8'
 ---
 ::
 
-::tip
-Use the `gitHubEmojis` export from `@tiptap/extension-emoji` for a comprehensive emoji set with over 1800 emojis.
+::note
+You can also pass an array of arrays to the `items` prop to create separated groups of items.
 ::
 
 ### Char
@@ -62,7 +64,9 @@ Use the `char` prop to change the trigger character. Defaults to `:`{lang="ts-ty
 
 ```vue
 <template>
-  <UEditorEmojiMenu :editor="editor" :items="items" char=";" />
+  <UEditor v-slot="{ editor }">
+    <UEditorEmojiMenu :editor="editor" :items="items" char=";" />
+  </UEditor>
 </template>
 ```
 
@@ -72,14 +76,16 @@ Use the `options` prop to customize the positioning behavior using [Floating UI 
 
 ```vue
 <template>
-  <UEditorEmojiMenu
-    :editor="editor"
-    :items="items"
-    :options="{
-      placement: 'bottom-start',
-      offset: 4
-    }"
-  />
+  <UEditor v-slot="{ editor }">
+    <UEditorEmojiMenu
+      :editor="editor"
+      :items="items"
+      :options="{
+        placement: 'bottom-start',
+        offset: 4
+      }"
+    />
+  </UEditor>
 </template>
 ```
 

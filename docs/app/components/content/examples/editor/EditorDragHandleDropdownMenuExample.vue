@@ -10,7 +10,7 @@ Click the menu to see block actions. Try duplicating or deleting a block.`)
 
 const selectedNode = ref<{ node: Node | null, pos: number }>()
 
-const getMenuItems = (editor: Editor): DropdownMenuItem[][] => {
+const items = (editor: Editor): DropdownMenuItem[][] => {
   if (!selectedNode.value?.node) {
     return []
   }
@@ -96,7 +96,7 @@ const getMenuItems = (editor: Editor): DropdownMenuItem[][] => {
       <UDropdownMenu
         v-slot="{ open }"
         :modal="false"
-        :items="getMenuItems(editor)"
+        :items="items(editor)"
         :content="{ side: 'left' }"
         :ui="{ content: 'w-48', label: 'text-xs' }"
         @update:open="editor.chain().setMeta('lockDragHandle', $event).run()"

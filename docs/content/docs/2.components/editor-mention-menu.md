@@ -11,9 +11,11 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorMentionMenu component is used to display a menu of user suggestions when typing the `@` character in the editor. Mentions are inserted as inline elements that can be styled and linked. It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
+The EditorMentionMenu component is used to display a menu of user suggestions when typing the `@` character in the editor. It uses the `useEditorMenu` composable built on top of TipTap's [Suggestion](https://tiptap.dev/docs/editor/api/utilities/suggestion) utility.
 
-Type `@` followed by a name to search and insert mentions.
+::caution
+It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
+::
 
 ::component-example
 ---
@@ -22,10 +24,6 @@ collapse: true
 name: 'editor-mention-menu-example'
 class: 'p-8'
 ---
-::
-
-::note
-The menu filters items as you type and supports keyboard navigation (arrow keys, enter to select, escape to close).
 ::
 
 ::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/nodes/mention" target="_blank"}
@@ -51,8 +49,8 @@ class: 'p-8'
 ---
 ::
 
-::tip
-Use avatars for user mentions and icons for entities like teams, channels, or tags.
+::note
+You can also pass an array of arrays to the `items` prop to create separated groups of items.
 ::
 
 ### Char
@@ -61,13 +59,11 @@ Use the `char` prop to change the trigger character. Defaults to `@`{lang="ts-ty
 
 ```vue
 <template>
-  <UEditorMentionMenu :editor="editor" :items="channels" char="#" />
+  <UEditor v-slot="{ editor }">
+    <UEditorMentionMenu :editor="editor" :items="channels" char="#" />
+  </UEditor>
 </template>
 ```
-
-::tip
-Use `#` for channels or tags, `+` for adding team members, etc.
-::
 
 ### Options
 
@@ -75,14 +71,16 @@ Use the `options` prop to customize the positioning behavior using [Floating UI 
 
 ```vue
 <template>
-  <UEditorMentionMenu
-    :editor="editor"
-    :items="items"
-    :options="{
-      placement: 'bottom-start',
-      offset: 4
-    }"
-  />
+  <UEditor v-slot="{ editor }">
+    <UEditorMentionMenu
+      :editor="editor"
+      :items="items"
+      :options="{
+        placement: 'bottom-start',
+        offset: 4
+      }"
+    />
+  </UEditor>
 </template>
 ```
 

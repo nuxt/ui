@@ -2,46 +2,12 @@
 import type { EditorToolbarItem } from '@nuxt/ui'
 import TextAlign from '@tiptap/extension-text-align'
 
-const value = ref(`# Nuxt UI Editor
-
-This toolbar showcases **all available formatting options** using built-in handlers. Try the different controls to see them in action!
-
-## Text Formatting
+const value = ref(`This toolbar showcases **all available formatting options** using built-in handlers. Try the different controls to see them in action!
 
 You can apply **bold**, *italic*, <u>underline</u>, ~~strikethrough~~, and \`inline code\` formatting to your text.
+`)
 
-## Block Types
-
-### Lists
-
-Here's a bullet list:
-- First item
-- Second item
-- Third item
-
-And a numbered list:
-1. Step one
-2. Step two
-3. Step three
-
-### Blockquote
-
-> This is a blockquote. Use it for highlighting important information or quotes from other sources.
-
-### Code Block
-
-\`\`\`
-// Code blocks are perfect for technical content
-function hello() {
-  console.log('Hello, world!')
-}
-\`\`\`
-
----
-
-Use the horizontal rule above to create visual separations in your content. Try all the toolbar controls to explore the full range of formatting options!`)
-
-const toolbarItems: EditorToolbarItem[][] = [
+const items: EditorToolbarItem[][] = [
   // History controls
   [{
     kind: 'undo',
@@ -57,9 +23,6 @@ const toolbarItems: EditorToolbarItem[][] = [
       align: 'start'
     },
     items: [{
-      type: 'label',
-      label: 'Headings'
-    }, {
       kind: 'heading',
       level: 1,
       icon: 'i-lucide-heading-1',
@@ -168,8 +131,8 @@ const toolbarItems: EditorToolbarItem[][] = [
     v-model="value"
     content-type="markdown"
     :extensions="[TextAlign.configure({ types: ['heading', 'paragraph'] })]"
-    class="w-full min-h-21"
+    class="w-full min-h-37 flex flex-col gap-4"
   >
-    <UEditorToolbar :editor="editor" :items="toolbarItems" class="px-8" />
+    <UEditorToolbar :editor="editor" :items="items" class="sm:px-8 overflow-x-auto" />
   </UEditor>
 </template>

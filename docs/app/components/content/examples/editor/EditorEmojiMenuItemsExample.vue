@@ -2,9 +2,11 @@
 import type { EditorEmojiMenuItem } from '@nuxt/ui'
 import { Emoji } from '@tiptap/extension-emoji'
 
-const value = ref(`Type : to see popular emojis.`)
+const value = ref(`Type : to see a custom emoji set.
 
-const emojiItems: EditorEmojiMenuItem[] = [{
+You can also install the \`@tiptap/extension-emoji\` extension to use a comprehensive set with over 1800 emojis.`)
+
+const items: EditorEmojiMenuItem[] = [{
   name: 'smile',
   emoji: '😄',
   shortcodes: ['smile'],
@@ -52,9 +54,10 @@ const emojiItems: EditorEmojiMenuItem[] = [{
     v-slot="{ editor }"
     v-model="value"
     :extensions="[Emoji]"
+    content-type="markdown"
     placeholder="Type : to add emojis..."
-    class="w-full min-h-21"
+    class="w-full min-h-26"
   >
-    <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
+    <UEditorEmojiMenu :editor="editor" :items="items" />
   </UEditor>
 </template>

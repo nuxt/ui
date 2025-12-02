@@ -1,19 +1,33 @@
 <script setup lang="ts">
+import type { Editor } from '@tiptap/vue-3'
 import type { EditorToolbarItem } from '@nuxt/ui'
 
 const value = ref(`Click on the image below to see the image-specific toolbar:
 
-![Nuxt UI Dashboard](https://ui.nuxt.com/assets/templates/nuxt/dashboard-dark.png)
+![Image Placeholder](/placeholder.jpeg)`)
 
-The toolbar only appears when an image is selected.`)
+const items = (editor: Editor): EditorToolbarItem[][] => {
+  const node = editor.state.doc.nodeAt(editor.state.selection.from)
 
-const imageToolbarItems: EditorToolbarItem[][] = [[{
-  icon: 'i-lucide-download',
-  label: 'Download'
-}, {
-  icon: 'i-lucide-trash',
-  label: 'Delete'
-}]]
+  return [[{
+    icon: 'i-lucide-download',
+    to: node?.attrs?.src,
+    download: true
+  }], [{
+    icon: 'i-lucide-trash',
+    onClick: () => {
+      const { state } = editor
+      const { selection } = state
+
+      const pos = selection.from
+      const node = state.doc.nodeAt(pos)
+
+      if (node && node.type.name === 'image') {
+        editor.chain().focus().deleteRange({ from: pos, to: pos + node.nodeSize }).run()
+      }
+    }
+  }]]
+}
 </script>
 
 <template>
@@ -21,11 +35,11 @@ const imageToolbarItems: EditorToolbarItem[][] = [[{
     v-slot="{ editor }"
     v-model="value"
     content-type="markdown"
-    class="w-full min-h-21"
+    class="w-full min-h-113"
   >
     <UEditorToolbar
       :editor="editor"
-      :items="imageToolbarItems"
+      :items="items(editor)"
       layout="bubble"
       :should-show="({ editor, view }) => {
         return editor.isActive('image') && view.hasFocus()

@@ -11,7 +11,11 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorDragHandle component wraps TipTap's [Drag Handle extension](https://tiptap.dev/docs/editor/extensions/functionality/drag-handle) to provide drag-and-drop functionality for editor blocks. It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
+The EditorDragHandle component wraps TipTap's [Drag Handle extension](https://tiptap.dev/docs/editor/extensions/functionality/drag-handle) to provide drag-and-drop functionality for editor blocks.
+
+::caution
+It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
+::
 
 ::component-example
 ---
@@ -31,7 +35,9 @@ Use the `icon` prop to customize the drag handle icon.
 
 ```vue
 <template>
-  <UEditorDragHandle :editor="editor" icon="i-lucide-move" />
+  <UEditor v-slot="{ editor }">
+    <UEditorDragHandle :editor="editor" icon="i-lucide-move" />
+  </UEditor>
 </template>
 ```
 
@@ -57,12 +63,14 @@ The offset is automatically calculated to center the handle for small blocks and
 
 ```vue
 <template>
-  <UEditorDragHandle
-    :editor="editor"
-    :options="{
-      placement: 'left'
-    }"
-  />
+  <UEditor v-slot="{ editor }">
+    <UEditorDragHandle
+      :editor="editor"
+      :options="{
+        placement: 'left'
+      }"
+    />
+  </UEditor>
 </template>
 ```
 

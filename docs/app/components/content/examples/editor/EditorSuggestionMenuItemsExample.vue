@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type { EditorSuggestionMenuItem } from '@nuxt/ui'
 
-const value = ref(`Type / to see organized command groups.`)
+const value = ref(`Type / to see a list of commands.
 
-const suggestionItems: EditorSuggestionMenuItem[][] = [[{
+You can customize the items with icons, labels, and descriptions.`)
+
+const items: EditorSuggestionMenuItem[][] = [[{
   type: 'label',
   label: 'Text Styles'
 }, {
@@ -55,7 +57,13 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
 </script>
 
 <template>
-  <UEditor v-slot="{ editor }" v-model="value" placeholder="Type / for commands..." class="w-full min-h-21">
-    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
+  <UEditor
+    v-slot="{ editor }"
+    v-model="value"
+    content-type="markdown"
+    placeholder="Type / for commands..."
+    class="w-full min-h-19"
+  >
+    <UEditorSuggestionMenu :editor="editor" :items="items" />
   </UEditor>
 </template>

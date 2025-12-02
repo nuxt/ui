@@ -80,7 +80,7 @@ function handleKeyDown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <UPopover v-model:open="open" :portal="false" :ui="{ content: 'p-0.5' }">
+  <UPopover v-model:open="open" :ui="{ content: 'p-0.5' }">
     <UButton
       icon="i-lucide-link"
       color="neutral"
