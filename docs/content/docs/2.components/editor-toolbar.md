@@ -11,9 +11,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorToolbar component displays a toolbar of formatting buttons that automatically sync their active state with the editor content.
-
-It supports three layout modes using the `@tiptap/vue-3/menus` package:
+The EditorToolbar component displays a toolbar of formatting buttons that automatically sync their active state with the editor content. It supports three layout modes using the `@tiptap/vue-3/menus` package:
 - `fixed`{lang="ts-type"} (always visible)
 - `bubble`{lang="ts-type"} (appears on text selection)
 - `floating`{lang="ts-type"} (appears on empty lines)
@@ -51,7 +49,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `loading?: boolean`{lang="ts-type"}
 - `active?: boolean`{lang="ts-type"}
 - `tooltip?: TooltipProps`{lang="ts-type"}
-- [`slot?: string`{lang="ts-type"}](#with-custom-slot)
+- [`slot?: string`{lang="ts-type"}](#with-link-popover)
 - `onClick?: (e: MouseEvent) => void`{lang="ts-type"}
 - `items?: EditorToolbarItem[] | EditorToolbarItem[][]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
@@ -144,7 +142,7 @@ When using `bubble`{lang="ts-type"} or `floating`{lang="ts-type"} layouts, use t
 
 ### With image toolbar
 
-Use the `should-show` prop to create context-specific toolbars that appear only for certain node types. This example shows a bubble toolbar with download and delete actions that only appears when an image is selected.
+Use the `should-show` prop to create context-specific toolbars that appear only for certain node types. This example shows a `bubble` toolbar with download and delete actions that only appears when an image is selected.
 
 ::component-example
 ---
@@ -155,7 +153,7 @@ class: 'p-8'
 ---
 ::
 
-### With custom slot
+### With link popover
 
 This example demonstrates how to create a custom link popover using the `slot` property on toolbar items and the [Popover](/docs/components/popover) component.
 
