@@ -12,7 +12,7 @@ const content = ref(`# Nuxt UI: A Modern UI Library
 Welcome to **Nuxt UI**, a comprehensive UI library for *Nuxt 3* applications.
 Built with [Tailwind CSS](https://tailwindcss.com) and [Reka UI](https://reka-ui.com), it provides a complete set of components for building beautiful interfaces.
 
-![Image](https://ui.nuxt.com/assets/templates/nuxt/dashboard-dark.png)
+![Image](https://ui.nuxt.com/placeholder.jpeg)
 
 ## Key Features
 
@@ -90,13 +90,7 @@ const toolbarItems = [[{
 }], [{
   icon: 'i-lucide-heading',
   tooltip: { text: 'Headings' },
-  ui: {
-    label: 'text-xs'
-  },
   items: [{
-    type: 'label',
-    label: 'Headings'
-  }, {
     kind: 'heading',
     level: 1,
     icon: 'i-lucide-heading-1',
