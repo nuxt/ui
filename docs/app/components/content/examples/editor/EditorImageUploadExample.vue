@@ -81,7 +81,7 @@ const items = [[{
     :handlers="customHandlers"
     content-type="markdown"
     :ui="{ base: 'p-8 sm:px-16' }"
-    class="w-full min-h-80"
+    class="w-full min-h-74"
   >
     <UEditorToolbar :editor="editor" :items="items" class="border-b border-muted py-2 px-8 sm:px-16 overflow-x-auto" />
   </UEditor>

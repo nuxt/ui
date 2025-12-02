@@ -14,7 +14,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The Editor component provides a powerful rich text editing experience built on TipTap. It supports multiple content formats (JSON, HTML, Markdown), customizable toolbars, drag-and-drop block reordering, slash commands, mentions, emoji picker, and extensible architecture for adding custom functionality.
+The Editor component provides a powerful rich text editing experience built on [TipTap](https://tiptap.dev/). It supports multiple content formats (JSON, HTML, Markdown), customizable toolbars, drag-and-drop block reordering, slash commands, mentions, emoji picker, and extensible architecture for adding custom functionality.
 
 ::component-example
 ---
