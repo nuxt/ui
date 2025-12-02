@@ -1,6 +1,7 @@
 import { ref, h, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
 import { defu } from 'defu'
+import { useFilter } from 'reka-ui'
 import { computePosition } from '@floating-ui/dom'
 import type { Strategy, Placement } from '@floating-ui/dom'
 import type { Editor } from '@tiptap/vue-3'
@@ -10,7 +11,7 @@ import Suggestion from '@tiptap/suggestion'
 import { PluginKey } from '@tiptap/pm/state'
 import type { FloatingUIOptions } from '../types/editor'
 import { buildFloatingUIMiddleware } from '../utils/editor'
-import { isArrayOfArray } from '../utils'
+import { get, isArrayOfArray } from '../utils'
 
 export interface EditorMenuOptions<T = any> {
   editor: Editor
@@ -26,6 +27,11 @@ export interface EditorMenuOptions<T = any> {
    * The items to display (can be a flat array or grouped)
    */
   items?: T[] | T[][]
+  /**
+   * Fields to filter items by.
+   * @defaultValue ['label']
+   */
+  filterFields?: string[]
   /**
    * Function to filter items based on query
    */
@@ -79,6 +85,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   let handleHover: ((index: number) => void) | null = null
   let scrollHandler: (() => void) | null = null
 
+  const { contains } = useFilter({ sensitivity: 'base' })
+
   // Helper function to cleanup menu with close animation
   const cleanupMenu = () => {
     if (menuState.value === 'closed') return
@@ -128,11 +136,18 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     }, 100)
   }
 
+  const filterFields = options.filterFields ?? ['label']
+
   const defaultFilter = (items: T[], query: string) => {
     if (!query) return items
     return items.filter((item: any) => {
-      const searchText = `${item.label} ${item.description || ''}`.toLowerCase()
-      return searchText.includes(query.toLowerCase())
+      return filterFields.some((field) => {
+        const value = get(item, field)
+        if (value === undefined || value === null) return false
+
+        const stringValue = Array.isArray(value) ? value.join(' ') : String(value)
+        return contains(stringValue, query) || contains(stringValue.replace(/[\s_-]/g, ''), query)
+      })
     })
   }
 

@@ -39,7 +39,7 @@ export type EditorSuggestionMenuItem<H extends EditorCustomHandlers = EditorCust
     | EditorSuggestionMenuSeparatorItem
     | EditorSuggestionMenuActionItem<H>
 
-export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit' | 'options' | 'appendTo'>> {
+export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'filterFields' | 'limit' | 'options' | 'appendTo'>> {
   class?: any
   ui?: EditorSuggestionMenu['slots']
 }
@@ -81,6 +81,7 @@ onMounted(async () => {
     char: props.char,
     pluginKey: props.pluginKey,
     items: props.items,
+    filterFields: props.filterFields,
     limit: props.limit,
     options: props.options,
     appendTo: props.appendTo,

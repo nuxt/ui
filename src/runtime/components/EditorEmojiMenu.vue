@@ -16,7 +16,7 @@ export interface EditorEmojiMenuItem {
   [key: string]: any
 }
 
-export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmojiMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit' | 'options' | 'appendTo'>> {
+export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmojiMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'filterFields' | 'limit' | 'options' | 'appendTo'>> {
   class?: any
   ui?: EditorEmojiMenu['slots']
 }
@@ -32,7 +32,8 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
   pluginKey: 'emojiMenu',
-  char: ':'
+  char: ':',
+  filterFields: () => ['name', 'shortcodes', 'tags']
 })
 
 const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig']
@@ -41,14 +42,6 @@ const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig']
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorEmojiMenu || {}) })())
 
 let menu: ReturnType<typeof useEditorMenu> | null = null
-
-const filterEmojis = (items: EditorEmojiMenuItem[], query: string) => {
-  if (!query) return items
-  return items.filter((item) => {
-    const searchText = `${item.name} ${item.shortcodes.join(' ')} ${item.tags?.join(' ') || ''}`.toLowerCase()
-    return searchText.includes(query.toLowerCase())
-  })
-}
 
 onMounted(async () => {
   await nextTick()
@@ -62,7 +55,7 @@ onMounted(async () => {
     char: props.char,
     pluginKey: props.pluginKey,
     items: props.items,
-    filter: filterEmojis,
+    filterFields: props.filterFields,
     limit: props.limit,
     options: props.options,
     appendTo: props.appendTo,

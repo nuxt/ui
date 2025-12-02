@@ -20,7 +20,7 @@ export interface EditorMentionMenuItem {
   [key: string]: any
 }
 
-export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = EditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'limit' | 'options' | 'appendTo'>> {
+export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = EditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'filterFields' | 'limit' | 'options' | 'appendTo'>> {
   class?: any
   ui?: EditorMentionMenu['slots']
 }
@@ -60,6 +60,7 @@ onMounted(async () => {
     char: props.char,
     pluginKey: props.pluginKey,
     items: props.items,
+    filterFields: props.filterFields,
     limit: props.limit,
     options: props.options,
     appendTo: props.appendTo,
