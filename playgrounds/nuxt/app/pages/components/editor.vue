@@ -81,12 +81,15 @@ const customHandlers = {
 
 const toolbarItems = [[{
   kind: 'undo',
-  icon: 'i-lucide-undo'
+  icon: 'i-lucide-undo',
+  tooltip: { text: 'Undo' }
 }, {
   kind: 'redo',
-  icon: 'i-lucide-redo'
+  icon: 'i-lucide-redo',
+  tooltip: { text: 'Redo' }
 }], [{
   icon: 'i-lucide-heading',
+  tooltip: { text: 'Headings' },
   ui: {
     label: 'text-xs'
   },
@@ -116,6 +119,7 @@ const toolbarItems = [[{
   }]
 }, {
   icon: 'i-lucide-list',
+  tooltip: { text: 'Lists' },
   items: [{
     kind: 'bulletList',
     icon: 'i-lucide-list',
@@ -127,57 +131,73 @@ const toolbarItems = [[{
   }]
 }, {
   kind: 'blockquote',
-  icon: 'i-lucide-text-quote'
+  icon: 'i-lucide-text-quote',
+  tooltip: { text: 'Blockquote' }
 }, {
   kind: 'codeBlock',
-  icon: 'i-lucide-square-code'
+  icon: 'i-lucide-square-code',
+  tooltip: { text: 'Code Block' }
 }, {
   kind: 'horizontalRule',
-  icon: 'i-lucide-separator-horizontal'
+  icon: 'i-lucide-separator-horizontal',
+  tooltip: { text: 'Horizontal Rule' }
 }, {
   kind: 'paragraph',
-  icon: 'i-lucide-type'
+  icon: 'i-lucide-type',
+  tooltip: { text: 'Paragraph' }
 }], [{
   kind: 'mark',
   mark: 'bold',
-  icon: 'i-lucide-bold'
+  icon: 'i-lucide-bold',
+  tooltip: { text: 'Bold' }
 }, {
   kind: 'mark',
   mark: 'italic',
-  icon: 'i-lucide-italic'
+  icon: 'i-lucide-italic',
+  tooltip: { text: 'Italic' }
 }, {
   kind: 'mark',
   mark: 'underline',
-  icon: 'i-lucide-underline'
+  icon: 'i-lucide-underline',
+  tooltip: { text: 'Underline' }
 }, {
   kind: 'mark',
   mark: 'strike',
-  icon: 'i-lucide-strikethrough'
+  icon: 'i-lucide-strikethrough',
+  tooltip: { text: 'Strikethrough' }
 }, {
   kind: 'mark',
   mark: 'code',
-  icon: 'i-lucide-code'
+  icon: 'i-lucide-code',
+  tooltip: { text: 'Code' }
 }], [{
-  slot: 'link' as const
+  slot: 'link' as const,
+  icon: 'i-lucide-link',
+  tooltip: { text: 'Link' }
 }, {
   kind: 'imageUpload',
-  icon: 'i-lucide-image'
+  icon: 'i-lucide-image',
+  tooltip: { text: 'Image' }
 }], [{
   kind: 'textAlign',
   align: 'left',
-  icon: 'i-lucide-align-left'
+  icon: 'i-lucide-align-left',
+  tooltip: { text: 'Align Left' }
 }, {
   kind: 'textAlign',
   align: 'center',
-  icon: 'i-lucide-align-center'
+  icon: 'i-lucide-align-center',
+  tooltip: { text: 'Align Center' }
 }, {
   kind: 'textAlign',
   align: 'right',
-  icon: 'i-lucide-align-right'
+  icon: 'i-lucide-align-right',
+  tooltip: { text: 'Align Right' }
 }, {
   kind: 'textAlign',
   align: 'justify',
-  icon: 'i-lucide-align-justify'
+  icon: 'i-lucide-align-justify',
+  tooltip: { text: 'Align Justify' }
 }]] satisfies EditorToolbarItem<typeof customHandlers>[][]
 
 const imageToolbarItems = (editor: any): EditorToolbarItem<typeof customHandlers>[][] => {
@@ -186,9 +206,11 @@ const imageToolbarItems = (editor: any): EditorToolbarItem<typeof customHandlers
   return [[{
     icon: 'i-lucide-download',
     to: node?.attrs?.src,
-    download: true
+    download: true,
+    tooltip: { text: 'Download' }
   }, {
     icon: 'i-lucide-refresh-cw',
+    tooltip: { text: 'Replace' },
     onClick: () => {
       const { state } = editor
       const { selection } = state
@@ -202,6 +224,7 @@ const imageToolbarItems = (editor: any): EditorToolbarItem<typeof customHandlers
     }
   }], [{
     icon: 'i-lucide-trash',
+    tooltip: { text: 'Delete' },
     onClick: () => {
       const { state } = editor
       const { selection } = state

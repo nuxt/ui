@@ -5,7 +5,7 @@ import type { Editor } from '@tiptap/vue-3'
 import type { BubbleMenuPluginProps } from '@tiptap/extension-bubble-menu'
 import type { FloatingMenuPluginProps } from '@tiptap/extension-floating-menu'
 import theme from '#build/ui/editor-toolbar'
-import type { ButtonProps, DropdownMenuProps, DropdownMenuItem, LinkPropsKeys } from '../types'
+import type { ButtonProps, DropdownMenuProps, DropdownMenuItem, TooltipProps, LinkPropsKeys } from '../types'
 import type { EditorItem, EditorCustomHandlers } from '../types/editor'
 import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
@@ -14,6 +14,7 @@ type EditorToolbar = ComponentConfig<typeof theme, AppConfig, 'editorToolbar'>
 
 type ButtonItem = Omit<ButtonProps, 'type'> & {
   slot?: string
+  tooltip?: TooltipProps
 }
 
 type EditorToolbarButtonItem<H extends EditorCustomHandlers = EditorCustomHandlers> = Omit<ButtonItem, LinkPropsKeys> & EditorItem<H>
@@ -103,8 +104,9 @@ import { useAppConfig } from '#imports'
 import { isArrayOfArray, pick, omit } from '../utils'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
-import UDropdownMenu from './DropdownMenu.vue'
 import UButton from './Button.vue'
+import UDropdownMenu from './DropdownMenu.vue'
+import UTooltip from './Tooltip.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -243,7 +245,7 @@ function getActiveChildItem(item: EditorToolbarDropdownItem): EditorToolbarItem 
 }
 
 function getButtonProps(item: EditorToolbarItem) {
-  const baseProps = omit(item as EditorToolbarButtonItem & EditorToolbarDropdownItem, ['kind', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal'])
+  const baseProps = omit(item as EditorToolbarButtonItem & EditorToolbarDropdownItem, ['kind', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'tooltip'])
 
   // For dropdown items, use the active child's icon if available
   if ('items' in item && item.items?.length) {
@@ -330,21 +332,24 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
                 v-bind="getDropdownProps(item as EditorToolbarDropdownItem)"
                 :items="getDropdownItems(item as EditorToolbarDropdownItem)"
               >
+                <UTooltip v-bind="{ ...(item.tooltip || {}) }">
+                  <UButton
+                    :active="isActive(item)"
+                    :disabled="isDisabled(item)"
+                    v-bind="getButtonProps(item)"
+                  />
+                </UTooltip>
+              </UDropdownMenu>
+
+              <UTooltip v-else v-bind="{ ...(item.tooltip || {}) }">
                 <UButton
                   :active="isActive(item)"
                   :disabled="isDisabled(item)"
                   v-bind="getButtonProps(item)"
+                  :ui="item.ui"
+                  @click="onClick($event, item)"
                 />
-              </UDropdownMenu>
-
-              <UButton
-                v-else
-                :active="isActive(item)"
-                :disabled="isDisabled(item)"
-                v-bind="getButtonProps(item)"
-                :ui="item.ui"
-                @click="onClick($event, item)"
-              />
+              </UTooltip>
             </slot>
           </template>
         </div>

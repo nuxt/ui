@@ -7,6 +7,7 @@ Select some text to see the formatting toolbar appear above your selection.`)
 
 const items: EditorToolbarItem[][] = [[{
   icon: 'i-lucide-heading',
+  tooltip: { text: 'Headings' },
   content: {
     align: 'start'
   },
@@ -34,23 +35,28 @@ const items: EditorToolbarItem[][] = [[{
 }], [{
   kind: 'mark',
   mark: 'bold',
-  icon: 'i-lucide-bold'
+  icon: 'i-lucide-bold',
+  tooltip: { text: 'Bold' }
 }, {
   kind: 'mark',
   mark: 'italic',
-  icon: 'i-lucide-italic'
+  icon: 'i-lucide-italic',
+  tooltip: { text: 'Italic' }
 }, {
   kind: 'mark',
   mark: 'underline',
-  icon: 'i-lucide-underline'
+  icon: 'i-lucide-underline',
+  tooltip: { text: 'Underline' }
 }, {
   kind: 'mark',
   mark: 'strike',
-  icon: 'i-lucide-strikethrough'
+  icon: 'i-lucide-strikethrough',
+  tooltip: { text: 'Strikethrough' }
 }, {
   kind: 'mark',
   mark: 'code',
-  icon: 'i-lucide-code'
+  icon: 'i-lucide-code',
+  tooltip: { text: 'Code' }
 }]]
 </script>
 

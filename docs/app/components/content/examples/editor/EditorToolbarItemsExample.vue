@@ -11,14 +11,17 @@ const items: EditorToolbarItem[][] = [
   // History controls
   [{
     kind: 'undo',
-    icon: 'i-lucide-undo'
+    icon: 'i-lucide-undo',
+    tooltip: { text: 'Undo' }
   }, {
     kind: 'redo',
-    icon: 'i-lucide-redo'
+    icon: 'i-lucide-redo',
+    tooltip: { text: 'Redo' }
   }],
   // Block types
   [{
     icon: 'i-lucide-heading',
+    tooltip: { text: 'Headings' },
     content: {
       align: 'start'
     },
@@ -45,6 +48,7 @@ const items: EditorToolbarItem[][] = [
     }]
   }, {
     icon: 'i-lucide-list',
+    tooltip: { text: 'Lists' },
     content: {
       align: 'start'
     },
@@ -59,44 +63,54 @@ const items: EditorToolbarItem[][] = [
     }]
   }, {
     kind: 'blockquote',
-    icon: 'i-lucide-text-quote'
+    icon: 'i-lucide-text-quote',
+    tooltip: { text: 'Blockquote' }
   }, {
     kind: 'codeBlock',
-    icon: 'i-lucide-square-code'
+    icon: 'i-lucide-square-code',
+    tooltip: { text: 'Code Block' }
   }, {
     kind: 'horizontalRule',
-    icon: 'i-lucide-separator-horizontal'
+    icon: 'i-lucide-separator-horizontal',
+    tooltip: { text: 'Horizontal Rule' }
   }],
   // Text formatting
   [{
     kind: 'mark',
     mark: 'bold',
-    icon: 'i-lucide-bold'
+    icon: 'i-lucide-bold',
+    tooltip: { text: 'Bold' }
   }, {
     kind: 'mark',
     mark: 'italic',
-    icon: 'i-lucide-italic'
+    icon: 'i-lucide-italic',
+    tooltip: { text: 'Italic' }
   }, {
     kind: 'mark',
     mark: 'underline',
-    icon: 'i-lucide-underline'
+    icon: 'i-lucide-underline',
+    tooltip: { text: 'Underline' }
   }, {
     kind: 'mark',
     mark: 'strike',
-    icon: 'i-lucide-strikethrough'
+    icon: 'i-lucide-strikethrough',
+    tooltip: { text: 'Strikethrough' }
   }, {
     kind: 'mark',
     mark: 'code',
-    icon: 'i-lucide-code'
+    icon: 'i-lucide-code',
+    tooltip: { text: 'Code' }
   }],
   // Link
   [{
     kind: 'link',
-    icon: 'i-lucide-link'
+    icon: 'i-lucide-link',
+    tooltip: { text: 'Link' }
   }],
   // Text alignment
   [{
     icon: 'i-lucide-align-justify',
+    tooltip: { text: 'Text Align' },
     content: {
       align: 'end'
     },

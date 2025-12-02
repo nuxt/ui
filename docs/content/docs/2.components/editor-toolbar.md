@@ -50,6 +50,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `disabled?: boolean`{lang="ts-type"}
 - `loading?: boolean`{lang="ts-type"}
 - `active?: boolean`{lang="ts-type"}
+- `tooltip?: TooltipProps`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `onClick?: (e: MouseEvent) => void`{lang="ts-type"}
 - `items?: EditorToolbarItem[] | EditorToolbarItem[][]`{lang="ts-type"}

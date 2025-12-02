@@ -12,9 +12,11 @@ const items = (editor: Editor): EditorToolbarItem[][] => {
   return [[{
     icon: 'i-lucide-download',
     to: node?.attrs?.src,
-    download: true
+    download: true,
+    tooltip: { text: 'Download' }
   }], [{
     icon: 'i-lucide-trash',
+    tooltip: { text: 'Delete' },
     onClick: () => {
       const { state } = editor
       const { selection } = state
