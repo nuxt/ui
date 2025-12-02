@@ -208,7 +208,7 @@ export function createListHandler(listType: 'bulletList' | 'orderedList') {
 export function createMoveHandler(direction: 'up' | 'down') {
   return {
     canExecute: (editor: Editor, cmd: any) => {
-      if (!cmd?.pos) return false
+      if (cmd?.pos == null) return false
       const node = editor.state.doc.nodeAt(cmd.pos)
       if (!node) return false
       const $pos = editor.state.doc.resolve(cmd.pos)
@@ -217,7 +217,7 @@ export function createMoveHandler(direction: 'up' | 'down') {
       return direction === 'up' ? index > 0 : index < parent.childCount - 1
     },
     execute: (editor: Editor, cmd: any) => {
-      if (!cmd?.pos) return editor.chain()
+      if (cmd?.pos == null) return editor.chain()
       const node = editor.state.doc.nodeAt(cmd.pos)
       if (!node) return editor.chain()
 
@@ -265,7 +265,7 @@ export function createHandlers(): EditorHandlers {
     redo: createSimpleHandler('redo'),
     clearFormatting: {
       canExecute: (editor: Editor, cmd: any) => {
-        if (cmd?.pos) {
+        if (cmd?.pos != null) {
           const node = editor.state.doc.nodeAt(cmd.pos)
           return !!node
         }
@@ -273,7 +273,7 @@ export function createHandlers(): EditorHandlers {
       },
       execute: (editor: Editor, cmd: any) => {
         // If position is provided (from drag handle), select the node content first
-        if (cmd?.pos) {
+        if (cmd?.pos != null) {
           const node = editor.state.doc.nodeAt(cmd.pos)
           if (!node) return editor.chain()
 
@@ -295,12 +295,12 @@ export function createHandlers(): EditorHandlers {
     },
     duplicate: {
       canExecute: (editor: Editor, cmd: any) => {
-        if (!cmd?.pos) return false
+        if (cmd?.pos == null) return false
         const node = editor.state.doc.nodeAt(cmd.pos)
         return !!node
       },
       execute: (editor: Editor, cmd: any) => {
-        if (!cmd?.pos) return editor.chain()
+        if (cmd?.pos == null) return editor.chain()
         const node = editor.state.doc.nodeAt(cmd.pos)
         if (!node) return editor.chain()
         return editor.chain().focus().insertContentAt(cmd.pos + node.nodeSize, node.toJSON())
@@ -310,12 +310,12 @@ export function createHandlers(): EditorHandlers {
     },
     delete: {
       canExecute: (editor: Editor, cmd: any) => {
-        if (!cmd?.pos) return false
+        if (cmd?.pos == null) return false
         const node = editor.state.doc.nodeAt(cmd.pos)
         return !!node
       },
       execute: (editor: Editor, cmd: any) => {
-        if (!cmd?.pos) return editor.chain()
+        if (cmd?.pos == null) return editor.chain()
         const node = editor.state.doc.nodeAt(cmd.pos)
         if (!node) return editor.chain()
         return editor.chain().focus().deleteRange({ from: cmd.pos, to: cmd.pos + node.nodeSize })
