@@ -118,7 +118,9 @@ function onNodeChange({ pos }: { pos: number }) {
 function onClick() {
   if (!props.editor) return
 
-  const pos = currentNodePos.value!
+  const pos = currentNodePos.value
+  if (pos == null) return
+
   const node = props.editor.state.doc.nodeAt(pos)
   if (node) {
     const selectedNode = { node: node.toJSON(), pos }
