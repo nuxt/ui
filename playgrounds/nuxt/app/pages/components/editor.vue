@@ -438,9 +438,9 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
         :class="ui.handle()"
         @click="(e) => {
           e.stopPropagation()
-          const node = onClick(e)
 
-          handlers.suggestion?.execute(editor, { pos: node?.pos }).run()
+          const selected = onClick()
+          handlers.suggestion?.execute(editor, { pos: selected?.pos }).run()
         }"
       />
 

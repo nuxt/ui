@@ -35,7 +35,7 @@ export interface EditorDragHandleProps extends Omit<DragHandleProps, 'editor' | 
 }
 
 export interface EditorDragHandleSlots {
-  default(props: { ui: EditorDragHandle['ui'], onClick: (e: MouseEvent) => { node: JSONContent, pos: number } | undefined }): any
+  default(props: { ui: EditorDragHandle['ui'], onClick: () => { node: JSONContent, pos: number } | undefined }): any
 }
 
 export interface EditorDragHandleEmits {
