@@ -118,7 +118,7 @@ defineExpose({
     :name="name"
     :placeholder="placeholder"
     :model-value="(modelValue as PinInputValue<T>)"
-    :default-value="(defaultValue as PinInputValue<T>[])"
+    :default-value="(defaultValue as PinInputValue<T>)"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="emitFormInput()"
