@@ -2,16 +2,16 @@
 import { upperFirst } from 'scule'
 import type { DropdownMenuItem } from '@nuxt/ui'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
-import type { Editor, Node } from '@tiptap/vue-3'
+import type { Editor, JSONContent } from '@tiptap/vue-3'
 
 const value = ref(`Hover over the left side to see both drag handle and menu button.
 
 Click the menu to see block actions. Try duplicating or deleting a block.`)
 
-const selectedNode = ref<{ node: Node | null, pos: number }>()
+const selectedNode = ref<{ node: JSONContent, pos: number }>()
 
 const items = (editor: Editor): DropdownMenuItem[][] => {
-  if (!selectedNode.value?.node) {
+  if (!selectedNode.value?.node?.type) {
     return []
   }
 

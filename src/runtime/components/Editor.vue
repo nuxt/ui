@@ -188,7 +188,7 @@ const editor = useEditor({
 })
 
 watch(() => props.modelValue, (newVal) => {
-  if (!editor.value || !newVal) {
+  if (!editor.value || newVal == null) {
     return
   }
 

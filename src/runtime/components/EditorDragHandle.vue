@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import type { Placement, Strategy } from '@floating-ui/dom'
-import type { Editor, Node } from '@tiptap/vue-3'
+import type { Editor, JSONContent } from '@tiptap/vue-3'
 import type { DragHandleProps } from '@tiptap/extension-drag-handle-vue-3'
 import theme from '#build/ui/editor-drag-handle'
 import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
@@ -35,11 +35,11 @@ export interface EditorDragHandleProps extends Omit<DragHandleProps, 'editor' | 
 }
 
 export interface EditorDragHandleSlots {
-  default(props: { ui: EditorDragHandle['ui'], onClick: (e: MouseEvent) => { node: Node | null, pos: number } | undefined }): any
+  default(props: { ui: EditorDragHandle['ui'], onClick: (e: MouseEvent) => { node: JSONContent, pos: number } | undefined }): any
 }
 
 export interface EditorDragHandleEmits {
-  nodeChange: [{ node: Node | null, pos: number }]
+  nodeChange: [{ node: JSONContent, pos: number }]
 }
 </script>
 
@@ -109,7 +109,7 @@ const computePositionConfig = computed<DragHandleProps['computePositionConfig']>
   middleware: middleware.value
 }))
 
-const currentNodePos = ref<number | null>(0)
+const currentNodePos = ref<number | null>()
 
 function onNodeChange({ pos }: { pos: number }) {
   currentNodePos.value = pos
@@ -121,11 +121,13 @@ function onClick() {
   const pos = currentNodePos.value!
   const node = props.editor.state.doc.nodeAt(pos)
   if (node) {
-    emit('nodeChange', { node: node.toJSON(), pos })
+    const selectedNode = { node: node.toJSON(), pos }
+
+    emit('nodeChange', selectedNode)
 
     props.editor.chain().setNodeSelection(pos).run()
 
-    return { node: node.toJSON(), pos }
+    return selectedNode
   }
 }
 </script>
