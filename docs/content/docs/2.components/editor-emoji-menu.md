@@ -11,7 +11,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorEmojiMenu component is used to display a menu of emoji suggestions when typing the `:` character in the editor and works alongside the `@tiptap/extension-emoji` package.
+The EditorEmojiMenu component displays a menu of emoji suggestions when typing the `:` character in the editor and inserts the selected emoji. It works alongside the `@tiptap/extension-emoji` package to provide emoji support.
 
 ::note
 It uses the `useEditorMenu` composable built on top of TipTap's [Suggestion](https://tiptap.dev/docs/editor/api/utilities/suggestion) utility to filter items as you type and support keyboard navigation (arrow keys, enter to select, escape to close).

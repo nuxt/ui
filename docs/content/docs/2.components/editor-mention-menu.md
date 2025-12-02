@@ -11,7 +11,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorMentionMenu component is used to display a menu of user suggestions when typing the `@` character in the editor and insert the mention into the editor using the `@tiptap/extension-mention` package.
+The EditorMentionMenu component displays a menu of user suggestions when typing the `@` character in the editor and inserts the selected mention using the `@tiptap/extension-mention` package.
 
 ::note
 It uses the `useEditorMenu` composable built on top of TipTap's [Suggestion](https://tiptap.dev/docs/editor/api/utilities/suggestion) utility to filter items as you type and support keyboard navigation (arrow keys, enter to select, escape to close).
