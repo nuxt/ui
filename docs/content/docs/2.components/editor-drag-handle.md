@@ -11,22 +11,25 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorDragHandle component wraps TipTap's [Drag Handle extension](https://tiptap.dev/docs/editor/extensions/functionality/drag-handle) to provide drag-and-drop functionality for editor blocks.
+The EditorDragHandle component provides drag-and-drop functionality for reordering editor blocks using the `@tiptap/extension-drag-handle-vue-3` package.
 
 ::caution
 It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
 ::
 
+It extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
+
 ::component-example
 ---
+collapse: true
 elevated: true
 name: 'editor-drag-handle-example'
 class: 'p-8'
 ---
 ::
 
-::note
-The EditorDragHandle component extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
+::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/functionality/drag-handle-vue" target="_blank"}
+Learn more about the Drag Handle extension in the TipTap documentation.
 ::
 
 ### Icon

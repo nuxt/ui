@@ -11,7 +11,12 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorToolbar component is used to display a toolbar of formatting buttons that automatically sync their active state with the editor content.
+The EditorToolbar component displays a toolbar of formatting buttons that automatically sync their active state with the editor content.
+
+It supports three layout modes using the `@tiptap/vue-3/menus` package:
+- `fixed`{lang="ts-type"} (always visible)
+- `bubble`{lang="ts-type"} (appears on text selection)
+- `floating`{lang="ts-type"} (appears on empty lines)
 
 ::caution
 It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
@@ -24,6 +29,10 @@ collapse: true
 name: 'editor-toolbar-example'
 class: 'p-8'
 ---
+::
+
+::callout{icon="i-custom-tiptap"}
+The bubble and floating layouts use TipTap's [BubbleMenu](https://tiptap.dev/docs/editor/extensions/functionality/bubble-menu) and [FloatingMenu](https://tiptap.dev/docs/editor/extensions/functionality/floating-menu) extensions.
 ::
 
 ### Items
@@ -86,10 +95,6 @@ options:
 ---
 ::
 
-::callout{icon="i-custom-tiptap"}
-The bubble and floating layouts use TipTap's [BubbleMenu](https://tiptap.dev/docs/editor/extensions/functionality/bubble-menu) and [FloatingMenu](https://tiptap.dev/docs/editor/extensions/functionality/floating-menu) extensions. Check the TipTap documentation for advanced positioning options.
-::
-
 ### Options
 
 When using `bubble`{lang="ts-type"} or `floating`{lang="ts-type"} layouts, use the `options` prop to customize the positioning behavior using [Floating UI options](https://floating-ui.com/docs/computeposition#options).
@@ -106,6 +111,28 @@ When using `bubble`{lang="ts-type"} or `floating`{lang="ts-type"} layouts, use t
         offset: 8,
         flip: { padding: 8 },
         shift: { padding: 8 }
+      }"
+    />
+  </UEditor>
+</template>
+```
+
+### Should Show
+
+When using `bubble`{lang="ts-type"} or `floating`{lang="ts-type"} layouts, use the `should-show` prop to control when the toolbar appears. This function receives context about the editor state and returns a boolean.
+
+```vue
+<template>
+  <UEditor v-slot="{ editor }">
+    <UEditorToolbar
+      :editor="editor"
+      :items="items"
+      layout="bubble"
+      :should-show="({ view, state }) => {
+        const { selection } = state
+        const { from, to } = selection
+        const text = state.doc.textBetween(from, to)
+        return view.hasFocus() && !selection.empty && text.length > 10
       }"
     />
   </UEditor>

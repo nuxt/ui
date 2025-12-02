@@ -11,7 +11,11 @@ navigation.badge: Soon
 
 ## Usage
 
-The EditorSuggestionMenu component is used to display a menu of formatting and action suggestions when typing a trigger character in the editor. It uses the `useEditorMenu` composable built on top of TipTap's [Suggestion](https://tiptap.dev/docs/editor/api/utilities/suggestion) utility.
+The EditorSuggestionMenu component is used to display a menu of formatting and action suggestions when typing a trigger character in the editor.
+
+::note
+It uses the `useEditorMenu` composable built on top of TipTap's [Suggestion](https://tiptap.dev/docs/editor/api/utilities/suggestion) utility to filter items as you type and support keyboard navigation (arrow keys, enter to select, escape to close).
+::
 
 ::caution
 It must be used inside an [Editor](/docs/components/editor) component's default slot to have access to the editor instance.
