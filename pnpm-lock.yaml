@@ -59,29 +59,44 @@ importers:
       '@tanstack/vue-virtual':
         specifier: ^3.13.12
         version: 3.13.12(vue@3.5.24(typescript@5.8.3))
+      '@tiptap/core':
+        specifier: 3.12.0
+        version: 3.12.0(@tiptap/pm@3.12.0)
+      '@tiptap/extension-bubble-menu':
+        specifier: 3.12.0
+        version: 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)
       '@tiptap/extension-drag-handle-vue-3':
-        specifier: ^3.12.0
-        version: 3.12.0(@tiptap/extension-drag-handle@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/extension-collaboration@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/extension-node-range@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/pm@3.12.0)(@tiptap/vue-3@3.12.0(@floating-ui/dom@1.7.4)(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(vue@3.5.24(typescript@5.8.3)))(vue@3.5.24(typescript@5.8.3))
+        specifier: 3.12.0
+        version: 3.12.0(@tiptap/extension-drag-handle@3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/extension-collaboration@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/extension-node-range@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/pm@3.12.0)(@tiptap/vue-3@3.12.0(@floating-ui/dom@1.7.4)(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(vue@3.5.24(typescript@5.8.3)))(vue@3.5.24(typescript@5.8.3))
+      '@tiptap/extension-floating-menu':
+        specifier: 3.12.0
+        version: 3.12.0(@floating-ui/dom@1.7.4)(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)
+      '@tiptap/extension-horizontal-rule':
+        specifier: 3.12.0
+        version: 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)
       '@tiptap/extension-image':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))
       '@tiptap/extension-mention':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/suggestion@3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))
       '@tiptap/extension-placeholder':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0(@tiptap/extensions@3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))
       '@tiptap/markdown':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)
+      '@tiptap/pm':
+        specifier: 3.12.0
+        version: 3.12.0
       '@tiptap/starter-kit':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0
       '@tiptap/suggestion':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)
       '@tiptap/vue-3':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0(@floating-ui/dom@1.7.4)(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(vue@3.5.24(typescript@5.8.3))
       '@unhead/vue':
         specifier: ^2.0.19
@@ -313,10 +328,10 @@ importers:
         specifier: ^1.11.0
         version: 1.11.0(vue@3.5.24(typescript@5.8.3))
       '@tiptap/extension-emoji':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/suggestion@3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))(emojibase@17.0.0)
       '@tiptap/extension-text-align':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))
       '@vercel/analytics':
         specifier: ^1.6.0
@@ -412,10 +427,10 @@ importers:
         specifier: workspace:*
         version: link:../..
       '@tiptap/extension-emoji':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/suggestion@3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))(emojibase@17.0.0)
       '@tiptap/extension-text-align':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))
       ai:
         specifier: ^5.0.105
@@ -440,10 +455,10 @@ importers:
         specifier: workspace:*
         version: link:../..
       '@tiptap/extension-emoji':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/suggestion@3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))(emojibase@17.0.0)
       '@tiptap/extension-text-align':
-        specifier: ^3.12.0
+        specifier: 3.12.0
         version: 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))
       vue:
         specifier: ^3.5.24
@@ -2542,13 +2557,13 @@ packages:
       '@tiptap/vue-3': ^3.12.0
       vue: ^3.0.0
 
-  '@tiptap/extension-drag-handle@3.11.1':
-    resolution: {integrity: sha512-wXESHzYLcAl365oninFKtJtpHs0ut3BjS7WlPscN+sjRVIUrCu/pOMZfg4z32GV5W5tdRmGWpPMgYrmvntX9Uw==}
+  '@tiptap/extension-drag-handle@3.12.0':
+    resolution: {integrity: sha512-eND0zWQnqbgEBnDEPtFT/lW8zgG/H+P+sH/09D6s9006M16wM9dngibpPYqhTjY0bWxIRLU8o++IqwwdOR8xng==}
     peerDependencies:
-      '@tiptap/core': ^3.11.1
-      '@tiptap/extension-collaboration': ^3.11.1
-      '@tiptap/extension-node-range': ^3.11.1
-      '@tiptap/pm': ^3.11.1
+      '@tiptap/core': ^3.12.0
+      '@tiptap/extension-collaboration': ^3.12.0
+      '@tiptap/extension-node-range': ^3.12.0
+      '@tiptap/pm': ^3.12.0
       '@tiptap/y-tiptap': ^3.0.0
 
   '@tiptap/extension-dropcursor@3.12.0':
@@ -10490,7 +10505,6 @@ snapshots:
       '@floating-ui/dom': 1.7.4
       '@tiptap/core': 3.12.0(@tiptap/pm@3.12.0)
       '@tiptap/pm': 3.12.0
-    optional: true
 
   '@tiptap/extension-bullet-list@3.12.0(@tiptap/extension-list@3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))':
     dependencies:
@@ -10516,14 +10530,14 @@ snapshots:
     dependencies:
       '@tiptap/core': 3.12.0(@tiptap/pm@3.12.0)
 
-  '@tiptap/extension-drag-handle-vue-3@3.12.0(@tiptap/extension-drag-handle@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/extension-collaboration@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/extension-node-range@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/pm@3.12.0)(@tiptap/vue-3@3.12.0(@floating-ui/dom@1.7.4)(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(vue@3.5.24(typescript@5.8.3)))(vue@3.5.24(typescript@5.8.3))':
+  '@tiptap/extension-drag-handle-vue-3@3.12.0(@tiptap/extension-drag-handle@3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/extension-collaboration@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/extension-node-range@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27)))(@tiptap/pm@3.12.0)(@tiptap/vue-3@3.12.0(@floating-ui/dom@1.7.4)(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(vue@3.5.24(typescript@5.8.3)))(vue@3.5.24(typescript@5.8.3))':
     dependencies:
-      '@tiptap/extension-drag-handle': 3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/extension-collaboration@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/extension-node-range@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
+      '@tiptap/extension-drag-handle': 3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/extension-collaboration@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/extension-node-range@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))
       '@tiptap/pm': 3.12.0
       '@tiptap/vue-3': 3.12.0(@floating-ui/dom@1.7.4)(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(vue@3.5.24(typescript@5.8.3))
       vue: 3.5.24(typescript@5.8.3)
 
-  '@tiptap/extension-drag-handle@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/extension-collaboration@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/extension-node-range@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))':
+  '@tiptap/extension-drag-handle@3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/extension-collaboration@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(yjs@13.6.27))(@tiptap/extension-node-range@3.11.1(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0)(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))':
     dependencies:
       '@floating-ui/dom': 1.7.4
       '@tiptap/core': 3.12.0(@tiptap/pm@3.12.0)
@@ -10552,7 +10566,6 @@ snapshots:
       '@floating-ui/dom': 1.7.4
       '@tiptap/core': 3.12.0(@tiptap/pm@3.12.0)
       '@tiptap/pm': 3.12.0
-    optional: true
 
   '@tiptap/extension-gapcursor@3.12.0(@tiptap/extensions@3.12.0(@tiptap/core@3.12.0(@tiptap/pm@3.12.0))(@tiptap/pm@3.12.0))':
     dependencies:
