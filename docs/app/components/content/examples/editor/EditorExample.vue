@@ -145,8 +145,7 @@ const fixedToolbarItems = [[{
   tooltip: { text: 'Code' }
 }], [{
   slot: 'link' as const,
-  icon: 'i-lucide-link',
-  tooltip: { text: 'Link' }
+  icon: 'i-lucide-link'
 }, {
   kind: 'imageUpload',
   icon: 'i-lucide-image',
@@ -180,10 +179,11 @@ const fixedToolbarItems = [[{
   }]
 }]] satisfies EditorToolbarItem<typeof customHandlers>[][]
 
-const floatingToolbarItems = [[{
+const bubbleToolbarItems = [[{
   label: 'Turn into',
   trailingIcon: 'i-lucide-chevron-down',
   activeColor: 'neutral',
+  activeVariant: 'ghost',
   tooltip: { text: 'Turn into' },
   content: {
     align: 'start'
@@ -262,8 +262,7 @@ const floatingToolbarItems = [[{
   tooltip: { text: 'Code' }
 }], [{
   slot: 'link' as const,
-  icon: 'i-lucide-link',
-  tooltip: { text: 'Link' }
+  icon: 'i-lucide-link'
 }, {
   kind: 'imageUpload',
   icon: 'i-lucide-image',
@@ -520,7 +519,7 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
 
     <UEditorToolbar
       :editor="editor"
-      :items="floatingToolbarItems"
+      :items="bubbleToolbarItems"
       layout="bubble"
       :should-show="({ editor, view, state }) => {
         if (editor.isActive('imageUpload') || editor.isActive('image')) {

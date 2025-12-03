@@ -166,8 +166,7 @@ const toolbarItems = [[{
   tooltip: { text: 'Code' }
 }], [{
   slot: 'link' as const,
-  icon: 'i-lucide-link',
-  tooltip: { text: 'Link' }
+  icon: 'i-lucide-link'
 }, {
   kind: 'imageUpload',
   icon: 'i-lucide-image',

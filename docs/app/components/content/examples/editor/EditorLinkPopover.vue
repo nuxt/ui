@@ -83,17 +83,18 @@ function handleKeyDown(event: KeyboardEvent) {
 
 <template>
   <UPopover v-model:open="open" :ui="{ content: 'p-0.5' }">
-    <UButton
-      icon="i-lucide-link"
-      color="neutral"
-      active-color="primary"
-      variant="ghost"
-      active-variant="soft"
-      size="sm"
-      :active="active"
-      :disabled="disabled"
-      :class="[open && 'bg-elevated']"
-    />
+    <UTooltip text="Link">
+      <UButton
+        icon="i-lucide-link"
+        color="neutral"
+        active-color="primary"
+        variant="ghost"
+        active-variant="soft"
+        size="sm"
+        :active="active"
+        :disabled="disabled"
+      />
+    </UTooltip>
 
     <template #content>
       <UInput
