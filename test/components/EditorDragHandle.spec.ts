@@ -12,8 +12,8 @@ describe('EditorDragHandle', () => {
   it.each([
     // Props
     ['with as', { props: { ...props, as: 'section' } }],
-    ['with class', { props: { ...props, class: '' } }],
-    ['with ui', { props: { ...props, ui: {} } }],
+    ['with class', { props: { ...props, class: 'items-start' } }],
+    ['with ui', { props: { ...props, ui: { handle: 'px-4' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: EditorDragHandleProps, slots?: Partial<EditorDragHandleSlots> }) => {

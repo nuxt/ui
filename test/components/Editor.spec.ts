@@ -12,7 +12,7 @@ describe('Editor', () => {
     // Props
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'min-h-80' } }],
-    ['with ui', { props: { ui: {} } }],
+    ['with ui', { props: { ui: { base: 'sm:px-14' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: EditorProps, slots?: Partial<EditorSlots> }) => {
