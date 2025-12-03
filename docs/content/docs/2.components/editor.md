@@ -71,7 +71,9 @@ props:
 
 ### Content Type
 
-Use the `content-type` prop to set the format: `json`{lang="ts-type"} (default), `html`{lang="ts-type"}, or `markdown`{lang="ts-type"}. If not specified, strings are treated as HTML and objects as JSON.
+The Editor automatically detects the content format based on `v-model` type: strings are treated as `html`{lang="ts-type"} and objects as `json`{lang="ts-type"}.
+
+You can explicitly set the format using the `content-type` prop: `json`{lang="ts-type"}, `html`{lang="ts-type"}, or `markdown`{lang="ts-type"}.
 
 ::component-code
 ---

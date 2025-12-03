@@ -23,7 +23,7 @@ export interface EditorProps<T extends Content = Content, H extends EditorCustom
   modelValue?: T
   /**
    * The content type the content is provided as.
-   * @defaultValue 'json'
+   * When not specified, it's automatically inferred: strings are treated as 'html', objects as 'json'.
    */
   contentType?: EditorContentType
   /**
@@ -91,9 +91,7 @@ import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<EditorProps<T, H>>(), {
-  contentType: 'json'
-})
+const props = defineProps<EditorProps<T, H>>()
 const emits = defineEmits<EditorEmits<T>>()
 defineSlots<EditorSlots<H>>()
 
