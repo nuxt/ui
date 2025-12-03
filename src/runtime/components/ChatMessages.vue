@@ -1,8 +1,10 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { ComponentPublicInstance } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UIMessage, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
-import type { ButtonProps, ChatMessageProps, ChatMessageSlots, IconProps } from '../types'
+import type { ButtonProps, ChatMessageProps, ChatMessageSlots, IconProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
@@ -25,7 +27,7 @@ export interface ChatMessagesProps {
    * `{ size: 'md', color: 'neutral', variant: 'outline' }`{lang="ts-type"}
    * @defaultValue true
    */
-  autoScroll?: boolean | Partial<ButtonProps>
+  autoScroll?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the auto scroll button.
    * @defaultValue appConfig.ui.icons.arrowDown
@@ -69,10 +71,10 @@ export type ChatMessagesSlots = {
   indicator(props: { ui: ChatMessages['ui'] }): any
   viewport(props: { ui: ChatMessages['ui'], onClick: () => void }): any
 }
+
 </script>
 
 <script setup lang="ts">
-import type { ComponentPublicInstance } from 'vue'
 import { ref, computed, watch, nextTick, toRef, onMounted } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'
@@ -286,6 +288,7 @@ onMounted(() => {
   <div
     ref="el"
     :data-status="status"
+    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
@@ -312,7 +315,7 @@ onMounted(() => {
     >
       <template #content>
         <slot name="indicator" :ui="ui">
-          <div :class="ui.indicator({ class: props.ui?.indicator })">
+          <div data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
             <span />
             <span />
             <span />
@@ -322,14 +325,15 @@ onMounted(() => {
     </UChatMessage>
 
     <Presence :present="showAutoScroll">
-      <div :data-state="showAutoScroll ? 'open' : 'closed'" :class="ui.viewport({ class: props.ui?.viewport })">
+      <div :data-state="showAutoScroll ? 'open' : 'closed'" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
         <slot name="viewport" :ui="ui" :on-click="onAutoScrollClick">
           <UButton
             v-if="autoScroll"
             :icon="autoScrollIcon || appConfig.ui.icons.arrowDown"
             color="neutral"
             variant="outline"
-            v-bind="(typeof autoScroll === 'object' ? autoScroll as Partial<ButtonProps> : {})"
+            v-bind="(typeof autoScroll === 'object' ? autoScroll : {})"
+            data-slot="autoScroll"
             :class="ui.autoScroll({ class: props.ui?.autoScroll })"
             @click="onAutoScrollClick"
           />

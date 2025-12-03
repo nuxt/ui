@@ -4,29 +4,38 @@ import type { ChipProps } from '@nuxt/ui'
 import json5 from 'json5'
 import { upperFirst, camelCase, kebabCase } from 'scule'
 import { hash } from 'ohash'
-import { CalendarDate } from '@internationalized/date'
+import { CalendarDate, Time } from '@internationalized/date'
 import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
+
+interface CastImport {
+  name: string
+  from: string
+}
 
 interface Cast {
   get: (args: any) => any
   template: (args: any) => string
+  imports: CastImport[]
 }
 
 type CastDateValue = [number, number, number]
+type CastTimeValue = [number, number, number]
 
 const castMap: Record<string, Cast> = {
   'DateValue': {
     get: (args: CastDateValue) => new CalendarDate(...args),
     template: (value: CalendarDate) => {
       return value ? `new CalendarDate(${value.year}, ${value.month}, ${value.day})` : 'null'
-    }
+    },
+    imports: [{ name: 'CalendarDate', from: '@internationalized/date' }]
   },
   'DateValue[]': {
     get: (args: CastDateValue[]) => args.map(date => new CalendarDate(...date)),
     template: (value: CalendarDate[]) => {
       return value ? `[${value.map(date => `new CalendarDate(${date.year}, ${date.month}, ${date.day})`).join(', ')}]` : '[]'
-    }
+    },
+    imports: [{ name: 'CalendarDate', from: '@internationalized/date' }]
   },
   'DateRange': {
     get: (args: { start: CastDateValue, end: CastDateValue }) => ({ start: new CalendarDate(...args.start), end: new CalendarDate(...args.end) }),
@@ -36,7 +45,15 @@ const castMap: Record<string, Cast> = {
       }
 
       return `{ start: new CalendarDate(${value.start.year}, ${value.start.month}, ${value.start.day}), end: new CalendarDate(${value.end.year}, ${value.end.month}, ${value.end.day}) }`
-    }
+    },
+    imports: [{ name: 'CalendarDate', from: '@internationalized/date' }]
+  },
+  'TimeValue': {
+    get: (args: CastTimeValue) => new Time(...args),
+    template: (value: Time) => {
+      return value ? `new Time(${value.hour}, ${value.minute}, ${value.second})` : 'null'
+    },
+    imports: [{ name: 'Time', from: '@internationalized/date' }]
   }
 }
 
@@ -80,6 +97,10 @@ const props = defineProps<{
    * Whether to add overflow-hidden to wrapper
    */
   overflowHidden?: boolean
+  /**
+   * Whether to add background-elevated to wrapper
+   */
+  elevated?: boolean
 }>()
 
 const route = useRoute()
@@ -207,12 +228,36 @@ ${props.slots?.default}
     code += `
 <script setup lang="ts">
 `
+    // Collect imports from cast types
+    const importsBySource = new Map<string, Set<string>>()
+    for (const key of props.external) {
+      const cast = props.cast?.[key]
+      if (cast && castMap[cast]) {
+        for (const imp of castMap[cast].imports) {
+          if (!importsBySource.has(imp.from)) {
+            importsBySource.set(imp.from, new Set())
+          }
+          importsBySource.get(imp.from)!.add(imp.name)
+        }
+      }
+    }
+
+    // Generate import statements
+    for (const [source, names] of importsBySource) {
+      code += `import { ${Array.from(names).join(', ')} } from '${source}'
+`
+    }
+
     if (props.externalTypes?.length) {
       const removeArrayBrackets = (type: string): string => type.endsWith('[]') ? removeArrayBrackets(type.slice(0, -2)) : type
 
       const types = props.externalTypes.map(type => removeArrayBrackets(type))
       code += `import type { ${types.join(', ')} } from '@nuxt/ui'
+`
+    }
 
+    if (importsBySource.size > 0 || props.externalTypes?.length) {
+      code += `
 `
     }
 
@@ -220,8 +265,9 @@ ${props.slots?.default}
       const cast = props.cast?.[key]
       const value = cast ? castMap[cast]!.template(componentProps[key]) : json5.stringify(componentProps[key], null, 2)?.replace(/,([ |\t\n]+[}|\]])/g, '$1')
       const type = props.externalTypes?.[i] ? `<${props.externalTypes[i]}>` : ''
+      const refType = cast ? 'shallowRef' : 'ref'
 
-      code += `const ${key === 'modelValue' ? 'value' : key} = ref${type}(${value})
+      code += `const ${key === 'modelValue' ? 'value' : key} = ${refType}${type}(${value})
 `
     }
     code += `<\/script>
@@ -300,7 +346,9 @@ ${props.slots?.default}
   return code
 })
 
-const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props: componentProps, slots: props.slots, external: props.external, externalTypes: props.externalTypes, collapse: props.collapse })}`, async () => {
+const codeKey = computed(() => `component-code-${name}-${hash(props)}`)
+
+const { data: ast } = await useAsyncData(codeKey, async () => {
   if (!props.prettier) {
     return parseMarkdown(code.value)
   }
@@ -345,7 +393,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               variant="soft"
               class="rounded-sm rounded-l-none min-w-12"
               :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
-              :ui="{ itemLeadingChip: 'size-2' }"
+              :ui="{ itemLeadingChip: 'w-2' }"
               @update:model-value="setComponentProp(option.name, $event)"
             >
               <template v-if="option.name.toLowerCase().endsWith('color')" #leading="{ modelValue, ui }">
@@ -372,7 +420,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
         </template>
       </div>
 
-      <div v-if="component" class="flex justify-center border border-b-0 border-muted relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden }]">
+      <div v-if="component" class="flex justify-center border border-b-0 border-muted relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden, 'dark:bg-neutral-950/50': props.elevated }]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">

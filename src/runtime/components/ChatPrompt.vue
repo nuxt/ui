@@ -38,7 +38,7 @@ export interface ChatPromptSlots extends TextareaSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
+import { computed, toRef, useTemplateRef } from 'vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -71,6 +71,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPrompt |
   variant: props.variant
 }))
 
+const textareaRef = useTemplateRef('textareaRef')
+
 function submit(e: Event) {
   if (model.value.trim() === '') {
     return
@@ -80,32 +82,31 @@ function submit(e: Event) {
 }
 
 function blur(e: Event) {
-  textarea.value?.textareaRef?.blur()
+  textareaRef.value?.textareaRef?.blur()
 
   emits('close', e)
 }
 
-const textarea = useTemplateRef('textarea')
-
 defineExpose({
-  textareaRef: textarea.value?.textareaRef
+  textareaRef: toRef(() => textareaRef.value?.textareaRef)
 })
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })" @submit.prevent="submit">
-    <div v-if="!!slots.header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @submit.prevent="submit">
+    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" />
     </div>
 
     <UTextarea
-      ref="textarea"
+      ref="textareaRef"
       v-model="model"
       :placeholder="placeholder || t('chatPrompt.placeholder')"
       :disabled="Boolean(error) || disabled"
       variant="none"
       v-bind="{ ...textareaProps, ...$attrs }"
       :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), props.ui)"
+      data-slot="body"
       :class="ui.body({ class: props.ui?.body })"
       @keydown.enter.exact.prevent="submit"
       @keydown.esc="blur"
@@ -115,7 +116,7 @@ defineExpose({
       </template>
     </UTextarea>
 
-    <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

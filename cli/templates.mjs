@@ -62,7 +62,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.${camelName}
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot />
   </Primitive>
 </template>
@@ -105,7 +105,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.${camelName}
 </script>
 
 <template>
-  <${upperName}Root v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })" />
+  <${upperName}Root v-bind="rootProps" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" />
 </template>
 `
   }

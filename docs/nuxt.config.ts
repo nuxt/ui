@@ -1,4 +1,3 @@
-import type { NuxtComponentMeta } from 'nuxt-component-meta'
 import { createResolver } from '@nuxt/kit'
 import pkg from '../package.json'
 
@@ -10,7 +9,10 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/image',
     '@nuxtjs/plausible',
+    '@nuxtjs/mcp-toolkit',
     '@vueuse/nuxt',
+    '@vercel/analytics/nuxt/module',
+    '@vercel/speed-insights/nuxt/module',
     'nuxt-component-meta',
     'nuxt-og-image',
     'motion-v/nuxt',
@@ -157,6 +159,7 @@ export default defineNuxtConfig({
   },
 
   experimental: {
+    asyncContext: true,
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'
@@ -183,22 +186,7 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       // prevents reloading page when navigating between components
-      include: ['@ai-sdk/vue', '@internationalized/date', '@nuxt/content/utils', '@tanstack/vue-table', '@vercel/analytics/nuxt', '@vercel/speed-insights/nuxt', '@vue/devtools-core', '@vue/devtools-kit', '@vueuse/integrations/useFuse', '@vueuse/shared', 'ai', 'colortranslator', 'embla-carousel-auto-height', 'embla-carousel-auto-scroll', 'embla-carousel-autoplay', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-vue', 'embla-carousel-wheel-gestures', 'json5', 'motion-v', 'ohash', 'ohash/utils', 'prettier', 'reka-ui', 'reka-ui/namespaced', 'scule', 'shiki', 'shiki-stream/vue', 'shiki-transformer-color-highlight', 'shiki/engine-javascript.mjs', 'tailwind-variants', 'tailwindcss/colors', 'ufo', 'vaul-vue', 'zod']
-    }
-  },
-
-  hooks: {
-    // @ts-expect-error - Hook is not typed correctly
-    'component-meta:schema': (schema: NuxtComponentMeta) => {
-      for (const componentName in schema) {
-        const component = schema[componentName]
-        // Delete schema from slots to reduce metadata file size
-        if (component?.meta?.slots) {
-          for (const slot of component.meta.slots) {
-            delete (slot as any).schema
-          }
-        }
-      }
+      include: ['@ai-sdk/vue', '@internationalized/date', '@nuxt/content/utils', '@tanstack/vue-table', '@tiptap/extension-emoji', '@tiptap/extension-text-align', '@tiptap/core', '@tiptap/extension-horizontal-rule', '@tiptap/extension-image', '@tiptap/extension-mention', '@tiptap/extension-placeholder', '@tiptap/markdown', '@tiptap/starter-kit', '@tiptap/vue-3', '@floating-ui/dom', '@tiptap/extension-drag-handle-vue-3', '@tiptap/vue-3/menus', '@tiptap/suggestion', '@tiptap/pm/state', '@vercel/analytics/nuxt', '@vercel/speed-insights/nuxt', '@vue/devtools-core', '@vue/devtools-kit', '@vueuse/integrations/useFuse', '@vueuse/shared', 'ai', 'colortranslator', 'embla-carousel-auto-height', 'embla-carousel-auto-scroll', 'embla-carousel-autoplay', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-vue', 'embla-carousel-wheel-gestures', 'json5', 'motion-v', 'ohash', 'ohash/utils', 'prettier', 'prosemirror-state', 'reka-ui', 'reka-ui/namespaced', 'scule', 'shiki', 'shiki-stream/vue', 'shiki-transformer-color-highlight', 'shiki/engine-javascript.mjs', 'tailwind-variants', 'tailwindcss/colors', 'ufo', 'vaul-vue', 'zod']
     }
   },
 
@@ -209,6 +197,49 @@ export default defineNuxtConfig({
 
       return { component, code }
     }],
+    overrides: {
+      UEditor: {
+        props: {
+          modelValue: { name: 'modelValue', type: 'null | string | JSONContent | JSONContent[]' },
+          parseOptions: { name: 'parseOptions', type: 'ParseOptions' }
+        }
+      },
+      UEditorDragHandle: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      UEditorToolbar: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      UEditorSuggestionMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      UEditorMentionMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      UEditorEmojiMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      UCalendar: {
+        props: {
+          defaultValue: { name: 'defaultValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime | DateRange | DateValue[]' },
+          modelValue: { name: 'modelValue', type: 'null | CalendarDate | CalendarDateTime | ZonedDateTime | DateRange | DateValue[]' },
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' }
+        }
+      },
+      UInputDate: {
+        props: {
+          defaultValue: { name: 'defaultValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime | DateRange' },
+          modelValue: { name: 'modelValue', type: 'null | CalendarDate | CalendarDateTime | ZonedDateTime | DateRange' },
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' }
+        }
+      },
+      UInputTime: {
+        props: {
+          defaultValue: { name: 'defaultValue', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          modelValue: { name: 'modelValue', type: 'null | Time | CalendarDateTime | ZonedDateTime' },
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'Time | CalendarDateTime | ZonedDateTime' }
+        }
+      }
+    },
     exclude: [
       '@nuxt/content',
       '@nuxt/icon',
@@ -223,8 +254,8 @@ export default defineNuxtConfig({
     metaFields: {
       type: false,
       props: true,
-      slots: true,
-      events: true,
+      slots: 'no-schema',
+      events: 'no-schema',
       exposed: false
     }
   },
@@ -277,5 +308,9 @@ export default defineNuxtConfig({
       'The documentation excludes Nuxt UI v2 content.',
       'The content is automatically generated from the same source as the official documentation.'
     ]
+  },
+  mcp: {
+    name: 'Nuxt UI',
+    browserRedirect: '/docs/getting-started/ai/mcp'
   }
 })
