@@ -89,7 +89,6 @@ export type EditorToolbarSlots<
   A extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  default(props?: {}): any
   item: SlotProps<T>
 } & DynamicSlots<MergeTypes<T>, undefined, SlotPropsProps>
 
