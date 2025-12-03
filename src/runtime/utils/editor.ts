@@ -353,13 +353,33 @@ export function createHandlers(): EditorHandlers {
     },
     mention: {
       canExecute: () => true,
-      execute: (editor: Editor) => editor.chain().insertContent('@'),
+      execute: (editor: Editor) => {
+        const { state } = editor
+        const { selection } = state
+        const { $from } = selection
+
+        // Check if there's text before the cursor
+        const textBefore = $from.parent.textBetween(Math.max(0, $from.parentOffset - 1), $from.parentOffset, undefined, ' ')
+        const needsSpace = textBefore && textBefore !== ' '
+
+        return editor.chain().focus().insertContent(needsSpace ? ' @' : '@')
+      },
       isActive: () => false,
       isDisabled: undefined
     },
     emoji: {
       canExecute: () => true,
-      execute: (editor: Editor) => editor.chain().insertContent(':'),
+      execute: (editor: Editor) => {
+        const { state } = editor
+        const { selection } = state
+        const { $from } = selection
+
+        // Check if there's text before the cursor
+        const textBefore = $from.parent.textBetween(Math.max(0, $from.parentOffset - 1), $from.parentOffset, undefined, ' ')
+        const needsSpace = textBefore && textBefore !== ' '
+
+        return editor.chain().focus().insertContent(needsSpace ? ' :' : ':')
+      },
       isActive: () => false,
       isDisabled: undefined
     }

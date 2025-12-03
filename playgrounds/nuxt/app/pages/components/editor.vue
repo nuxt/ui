@@ -88,6 +88,15 @@ const toolbarItems = [[{
   icon: 'i-lucide-redo',
   tooltip: { text: 'Redo' }
 }], [{
+  kind: 'suggestion',
+  icon: 'i-lucide-square-slash'
+}, {
+  kind: 'mention',
+  icon: 'i-lucide-at-sign'
+}, {
+  kind: 'emoji',
+  icon: 'i-lucide-smile-plus'
+}], [{
   icon: 'i-lucide-heading',
   tooltip: { text: 'Headings' },
   items: [{
