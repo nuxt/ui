@@ -1,5 +1,5 @@
 import { ref, h, computed, unref } from 'vue'
-import type { Ref, ComputedRef } from 'vue'
+import type { Ref, ComputedRef, MaybeRef } from 'vue'
 import { defu } from 'defu'
 import { useFilter } from 'reka-ui'
 import { computePosition } from '@floating-ui/dom'
@@ -26,7 +26,7 @@ export interface EditorMenuOptions<T = any> {
   /**
    * The items to display (can be a flat array or grouped)
    */
-  items?: T[] | T[][]
+  items?: MaybeRef<T[] | T[][] | undefined>
   /**
    * Fields to filter items by.
    * @defaultValue ['label']
@@ -144,6 +144,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   // Normalize items into groups first
   const groups = computed<T[][]>(() => {
     const items = unref(options.items)
+
     return items?.length
       ? isArrayOfArray(items)
         ? items as T[][]

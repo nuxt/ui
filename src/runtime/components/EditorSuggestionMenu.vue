@@ -39,14 +39,15 @@ export type EditorSuggestionMenuItem<H extends EditorCustomHandlers = EditorCust
     | EditorSuggestionMenuSeparatorItem
     | EditorSuggestionMenuActionItem<H>
 
-export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'filterFields' | 'limit' | 'options' | 'appendTo'>> {
+export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'appendTo'>> {
+  items?: T[] | T[][]
   class?: any
   ui?: EditorSuggestionMenu['slots']
 }
 </script>
 
 <script setup lang="ts" generic="T extends EditorSuggestionMenuItem">
-import { computed, h, inject, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { computed, h, inject, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
 import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
 import { createHandlers } from '../utils/editor'
@@ -80,7 +81,7 @@ onMounted(async () => {
     editor: props.editor,
     char: props.char,
     pluginKey: props.pluginKey,
-    items: props.items,
+    items: toRef(() => props.items),
     filterFields: props.filterFields,
     limit: props.limit,
     options: props.options,

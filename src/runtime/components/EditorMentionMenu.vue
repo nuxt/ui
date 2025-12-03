@@ -20,14 +20,15 @@ export interface EditorMentionMenuItem {
   [key: string]: any
 }
 
-export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = EditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'items' | 'filterFields' | 'limit' | 'options' | 'appendTo'>> {
+export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = EditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'appendTo'>> {
+  items?: T[] | T[][]
   class?: any
   ui?: EditorMentionMenu['slots']
 }
 </script>
 
 <script setup lang="ts" generic="T extends EditorMentionMenuItem">
-import { computed, h, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { computed, h, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
 import { useAppConfig } from '#imports'
 import { useEditorMenu } from '../composables/useEditorMenu'
 import { tv } from '../utils/tv'
@@ -59,7 +60,7 @@ onMounted(async () => {
     editor: props.editor,
     char: props.char,
     pluginKey: props.pluginKey,
-    items: props.items,
+    items: toRef(() => props.items),
     filterFields: props.filterFields,
     limit: props.limit,
     options: props.options,
