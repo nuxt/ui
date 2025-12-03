@@ -35,7 +35,6 @@
       "matchPackageNames": [
         "@tiptap/core",
         "@tiptap/extension-bubble-menu",
-        "@tiptap/extension-drag-handle",
         "@tiptap/extension-drag-handle-vue-3",
         "@tiptap/extension-emoji",
         "@tiptap/extension-floating-menu",
