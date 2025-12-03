@@ -1,4 +1,4 @@
-import { ref, h, computed } from 'vue'
+import { ref, h, computed, unref } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
 import { defu } from 'defu'
 import { useFilter } from 'reka-ui'
@@ -126,6 +126,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
   const defaultFilter = (items: T[], query: string) => {
     if (!query) return items
+
     return items.filter((item: any) => {
       return filterFields.some((field) => {
         const value = get(item, field)
@@ -140,30 +141,27 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   const filter = options.filter || defaultFilter
   const limit = options.limit ?? 42
 
-  // Flatten items to a single array for filtering
-  const flatItems = computed(() => {
-    return isArrayOfArray(options.items || [])
-      ? (options.items as T[][]).flat()
-      : options.items as T[]
+  // Normalize items into groups first
+  const groups = computed<T[][]>(() => {
+    const items = unref(options.items)
+    return items?.length
+      ? isArrayOfArray(items)
+        ? items as T[][]
+        : [items as T[]]
+      : []
   })
 
-  // Group items back into groups after filtering
-  const groups = computed<T[][]>(() => {
-    if (filteredItems.value.length === 0) return []
+  // Flatten groups to a single array
+  const items = computed(() => groups.value.flatMap(group => group))
 
-    if (isArrayOfArray(options.items || [])) {
-      // Reconstruct groups maintaining the original group structure
-      const groups: T[][] = []
-      for (const group of options.items as T[][]) {
-        const filteredGroup = group.filter(item => filteredItems.value.includes(item))
-        if (filteredGroup.length > 0) {
-          groups.push(filteredGroup)
-        }
-      }
-      return groups
-    }
+  // Filtered groups after applying filter (maintains group structure)
+  const filteredGroups = computed<T[][]>(() => {
+    if (!filteredItems.value.length) return []
 
-    return [filteredItems.value]
+    // Map each group and filter its items
+    return groups.value
+      .map(group => group.filter(item => filteredItems.value.includes(item)))
+      .filter(group => group.length > 0)
   })
 
   // Get only selectable items (excluding labels and separators) for keyboard navigation
@@ -314,7 +312,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     editor: options.editor,
     char: options.char,
     items: ({ query }: { query: string }) => {
-      const filtered = filter(flatItems.value, query)
+      const filtered = filter(items.value, query)
       return filtered.slice(0, limit)
     },
     command: ({ editor, range, props }: any) => {
@@ -339,7 +337,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
         if (event.key === 'ArrowUp') {
           selectedIndex.value = (selectedIndex.value + selectableItems.value.length - 1) % selectableItems.value.length
           renderer?.updateProps({
-            groups: groups.value,
+            groups: filteredGroups.value,
             selectedIndex: selectedIndex.value,
             onSelect: commandFn,
             onHover: handleHover!,
@@ -352,7 +350,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
         if (event.key === 'ArrowDown') {
           selectedIndex.value = (selectedIndex.value + 1) % selectableItems.value.length
           renderer?.updateProps({
-            groups: groups.value,
+            groups: filteredGroups.value,
             selectedIndex: selectedIndex.value,
             onSelect: commandFn,
             onHover: handleHover!,
@@ -434,7 +432,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
             // Trigger re-render with updated selectedIndex
             if (renderer) {
               renderer.updateProps({
-                groups: groups.value,
+                groups: filteredGroups.value,
                 selectedIndex: index,
                 onSelect: commandFn,
                 onHover: handleHover!,
@@ -445,7 +443,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
           renderer = new VueRenderer(MenuComponent, {
             props: {
-              groups: groups.value,
+              groups: filteredGroups.value,
               selectedIndex: selectedIndex.value,
               onSelect: commandFn,
               onHover: handleHover,
@@ -538,7 +536,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
               // Trigger re-render with updated selectedIndex
               if (renderer) {
                 renderer.updateProps({
-                  groups: groups.value,
+                  groups: filteredGroups.value,
                   selectedIndex: index,
                   onSelect: commandFn,
                   onHover: handleHover!,
@@ -549,7 +547,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
             renderer = new VueRenderer(MenuComponent, {
               props: {
-                groups: groups.value,
+                groups: filteredGroups.value,
                 selectedIndex: selectedIndex.value,
                 onSelect: commandFn,
                 onHover: handleHover,
@@ -577,7 +575,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           } else {
           // Update existing renderer
             renderer.updateProps({
-              groups: groups.value,
+              groups: filteredGroups.value,
               selectedIndex: selectedIndex.value,
               onSelect: commandFn,
               onHover: (index: number) => {
