@@ -73,7 +73,7 @@ export interface EditorMenuOptions<T = any> {
 export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   const filteredItems: Ref<T[]> = ref([])
   const selectedIndex = ref(0)
-  const menuState = ref<'closed' | 'open' | 'closing'>('closed')
+  const menuState = ref<'closed' | 'open'>('closed')
   let renderer: VueRenderer | null = null
   let element: HTMLElement | null = null
   let handleMouseDown: ((e: MouseEvent) => void) | null = null
@@ -87,14 +87,13 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
   const { contains } = useFilter({ sensitivity: 'base' })
 
-  // Helper function to cleanup menu with close animation
+  // Helper function to cleanup menu immediately (no animation)
   const cleanupMenu = () => {
     if (menuState.value === 'closed') return
 
-    // Set state to closed for animation
     menuState.value = 'closed'
 
-    // Remove event listeners immediately to prevent re-triggering
+    // Remove event listeners
     if (globalKeyHandler) {
       document.removeEventListener('keydown', globalKeyHandler, true)
       globalKeyHandler = null
@@ -108,32 +107,19 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
       scrollHandler = null
     }
 
-    // Update renderer to show closing animation
-    if (renderer) {
-      renderer.updateProps({
-        groups: groups.value,
-        selectedIndex: selectedIndex.value,
-        onSelect: commandFn,
-        onHover: handleHover!,
-        state: menuState.value
-      })
+    // Cleanup DOM immediately
+    if (element && handleMouseDown) {
+      element.removeEventListener('mousedown', handleMouseDown)
+      handleMouseDown = null
     }
-
-    // Wait for animation to complete (100ms from theme) before DOM cleanup
-    setTimeout(() => {
-      if (element && handleMouseDown) {
-        element.removeEventListener('mousedown', handleMouseDown)
-        handleMouseDown = null
-      }
-      if (renderer) {
-        renderer.destroy()
-        renderer = null
-      }
-      if (element) {
-        element.remove()
-        element = null
-      }
-    }, 100)
+    if (renderer) {
+      renderer.destroy()
+      renderer = null
+    }
+    if (element) {
+      element.remove()
+      element = null
+    }
   }
 
   const filterFields = options.filterFields ?? ['label']
@@ -616,8 +602,10 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     }
   })
 
-  // Cleanup function (immediate, no animation)
+  // Cleanup function for when the composable is destroyed (always runs regardless of state)
   const destroy = () => {
+    menuState.value = 'closed'
+
     if (globalKeyHandler) {
       document.removeEventListener('keydown', globalKeyHandler, true)
       globalKeyHandler = null
