@@ -51,20 +51,20 @@ const schema = z.object({
     )
 })
 
-type schema = z.output<typeof schema>
+type Schema = z.output<typeof schema>
 
-const state = reactive<Partial<schema>>({
+const state = reactive<Partial<Schema>>({
   image: undefined
 })
 
-async function onSubmit(event: FormSubmitEvent<schema>) {
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data)
 }
 </script>
 
 <template>
   <UForm :schema="schema" :state="state" class="space-y-4 w-96" @submit="onSubmit">
-    <UFormField name="image" label="Image" description="JPG, GIF or PNG. 2MB Max.">
+    <UFormField name="image" label="Image" description="JPG, PNG or WebP. 2MB Max.">
       <UFileUpload v-model="state.image" accept="image/*" class="min-h-48" />
     </UFormField>
 
