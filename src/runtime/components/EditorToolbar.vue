@@ -13,8 +13,9 @@ import type { ComponentConfig } from '../types/tv'
 type EditorToolbar = ComponentConfig<typeof theme, AppConfig, 'editorToolbar'>
 
 type ButtonItem = Omit<ButtonProps, 'type'> & {
-  slot?: string
-  tooltip?: TooltipProps
+  'slot'?: string
+  'tooltip'?: TooltipProps
+  'aria-label'?: string
 }
 
 type EditorToolbarButtonItem<H extends EditorCustomHandlers = EditorCustomHandlers> = Omit<ButtonItem, LinkPropsKeys> & EditorItem<H>
@@ -241,7 +242,7 @@ function getActiveChildItem(item: EditorToolbarDropdownItem): EditorToolbarItem 
 }
 
 function getButtonProps(item: EditorToolbarItem) {
-  const baseProps = omit(item as EditorToolbarButtonItem & EditorToolbarDropdownItem, ['kind', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'tooltip'])
+  const baseProps = omit(item as any, ['kind', 'mark', 'align', 'level', 'href', 'src', 'pos', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'tooltip'])
 
   // For dropdown items, use the active child's icon if available
   if ('items' in item && item.items?.length) {
@@ -328,16 +329,14 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
                 v-bind="getDropdownProps(item as EditorToolbarDropdownItem)"
                 :items="getDropdownItems(item as EditorToolbarDropdownItem)"
               >
-                <UTooltip v-bind="{ ...(item.tooltip || {}) }">
-                  <UButton
-                    :active="isActive(item)"
-                    :disabled="isDisabled(item)"
-                    v-bind="getButtonProps(item)"
-                  />
+                <UTooltip v-if="item.tooltip" :disabled="isDisabled(item)" v-bind="{ ...(item.tooltip || {}) }">
+                  <UButton :active="isActive(item)" :disabled="isDisabled(item)" v-bind="getButtonProps(item)" />
                 </UTooltip>
+
+                <UButton v-else :active="isActive(item)" :disabled="isDisabled(item)" v-bind="getButtonProps(item)" />
               </UDropdownMenu>
 
-              <UTooltip v-else v-bind="{ ...(item.tooltip || {}) }">
+              <UTooltip v-else-if="item.tooltip" :disabled="isDisabled(item)" v-bind="{ ...(item.tooltip || {}) }">
                 <UButton
                   :active="isActive(item)"
                   :disabled="isDisabled(item)"
@@ -346,6 +345,15 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
                   @click="onClick($event, item)"
                 />
               </UTooltip>
+
+              <UButton
+                v-else
+                :active="isActive(item)"
+                :disabled="isDisabled(item)"
+                v-bind="getButtonProps(item)"
+                :ui="item.ui"
+                @click="onClick($event, item)"
+              />
             </slot>
           </template>
         </div>
