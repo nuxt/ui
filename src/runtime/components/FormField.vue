@@ -55,7 +55,9 @@ import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, for
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
-const props = withDefaults(defineProps<FormFieldProps>(), { error: undefined })
+const props = withDefaults(defineProps<FormFieldProps>(), {
+  error: undefined
+})
 const slots = defineSlots<FormFieldSlots>()
 
 const appConfig = useAppConfig() as FormField['AppConfig']
