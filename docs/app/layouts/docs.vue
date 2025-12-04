@@ -32,7 +32,7 @@ watch(() => route.path, () => {
 
 defineShortcuts({
   '/': {
-    usingInput: true,
+    usingInput: false,
     handler: () => {
       input.value?.inputRef?.focus()
     }

@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-sidebar-toggle'
-import type { ButtonProps } from '../types'
+import type { ButtonProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSidebarToggle = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarToggle'>
 
-export interface DashboardSidebarToggleProps extends Omit<ButtonProps, 'color' | 'variant'> {
+export interface DashboardSidebarToggleProps extends Omit<ButtonProps, LinkPropsKeys | 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */
