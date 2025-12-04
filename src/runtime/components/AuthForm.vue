@@ -31,14 +31,14 @@ export type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps
   otp?: boolean | PinInputProps
 }
 
-export type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number' | 'tel'
+export type AuthFormInputFieldType = Required<InputProps>['type']
 
 export type AuthFormInputField<T extends AuthFormInputFieldType & NonUnion<T> = 'text'> = Omit<FormFieldProps, 'name'> & Omit<InputProps, 'type'> & {
   name: string
   type: T
 }
 
-export type AuthFormField = AuthFormCheckboxField | AuthFormSelectField | AuthFormOtpField | AuthFormInputField<'password'> | AuthFormInputField<'text'> | AuthFormInputField<'email'> | AuthFormInputField<'number'> | AuthFormInputField<'tel'>
+export type AuthFormField = AuthFormCheckboxField | AuthFormSelectField | AuthFormOtpField | AuthFormInputField<AuthFormInputFieldType>
 
 export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> extends /** @vue-ignore */ FormHTMLAttributes {
   /**
