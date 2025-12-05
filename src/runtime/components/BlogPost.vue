@@ -132,11 +132,13 @@ const ariaLabel = computed(() => {
         v-if="to"
         :aria-label="ariaLabel"
         v-bind="{ to, target, ...$attrs }"
-        class="focus:outline-none peer"
+        class="focus:outline-none peer absolute inset-0"
         tabindex="-1"
         raw
       >
-        <span class="absolute inset-0" aria-hidden="true" />
+        <span class="absolute block invisible w-0 opacity-0" aria-hidden="true">
+          {{ title }}
+        </span>
       </ULink>
 
       <slot name="body">
