@@ -1,6 +1,5 @@
-import type { Ref } from 'vue'
+import type { Ref, MaybeRef } from 'vue'
 import type { Locale, Direction } from '../types/locale'
-import type { MaybeRef } from '@vueuse/core'
 import { computed, isRef, ref, unref } from 'vue'
 import { get } from './index'
 

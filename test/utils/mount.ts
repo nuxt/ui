@@ -10,7 +10,7 @@ const router = createRouter({
   routes: [{ path: '/', component: { template: '<div>Home</div>' } }]
 })
 
-export function mountSuspended(...args: Parameters<typeof mount>) {
+export async function mountSuspended(...args: Parameters<typeof mount>) {
   let setupState = {}
   const comp = args[0] as any
   if (comp.setup) {
@@ -28,6 +28,8 @@ export function mountSuspended(...args: Parameters<typeof mount>) {
       plugins: [head, router]
     }
   }))
+
+  await wrapper.vm.$nextTick()
 
   // @ts-expect-error - setupState does not exist in type
   wrapper.setupState = setupState

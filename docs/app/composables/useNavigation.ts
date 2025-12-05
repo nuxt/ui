@@ -29,7 +29,10 @@ const categories = {
     title: 'Dashboard'
   }, {
     id: 'chat',
-    title: 'Chat'
+    title: 'AI Chat'
+  }, {
+    id: 'editor',
+    title: 'Editor'
   }, {
     id: 'content',
     title: 'Content',
