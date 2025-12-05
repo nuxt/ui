@@ -64,7 +64,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
 <template>
   <UForm :schema="schema" :state="state" class="space-y-4 w-96" @submit="onSubmit">
-    <UFormField name="image" label="Image" description="JPG, PNG or WebP. 2MB Max.">
+    <UFormField name="image" label="Image" description="JPG, GIF or PNG. 2MB Max.">
       <UFileUpload v-model="state.image" accept="image/*" class="min-h-48" />
     </UFormField>
 
