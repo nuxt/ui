@@ -2,7 +2,7 @@
 import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toast'
-import type { AvatarProps, ButtonProps, IconProps, ProgressProps } from '../types'
+import type { AvatarProps, ButtonProps, IconProps, ProgressProps, LinkPropsKeys } from '../types'
 import type { StringOrVNode } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -35,7 +35,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: boolean | Partial<ButtonProps>
+  close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -180,7 +180,7 @@ defineExpose({
             color="neutral"
             variant="link"
             :aria-label="t('toast.close')"
-            v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
+            v-bind="(typeof close === 'object' ? close : {})"
             data-slot="close"
             :class="ui.close({ class: props.ui?.close })"
             @click.stop

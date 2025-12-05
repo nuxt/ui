@@ -32,6 +32,7 @@ Kickstart your project with one of our ready-to-use Nuxt UI templates or follow 
 - [Chat](https://github.com/nuxt-ui-templates/chat) — An AI chatbot template with GitHub authentication and persistent chat history powered by Vercel AI SDK.
 - [Portfolio](https://github.com/nuxt-ui-templates/portfolio) — A sleek portfolio template to showcase your work, skills and blog powered by Nuxt Content.
 - [Changelog](https://github.com/nuxt-ui-templates/changelog) — A changelog template to display your repository releases notes from GitHub powered by Nuxt MDC.
+- [Editor](https://github.com/nuxt-ui-templates/editor) — A rich text editor template powered by TipTap with support for markdown, HTML, and JSON content types.
 
 ## Installation
 
@@ -152,5 +153,5 @@ Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v4/LICENSE.md).
 [license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
 [license-href]: https://github.com/nuxt/ui/blob/v4/LICENSE.md
 
-[nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
+[nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt
 [nuxt-href]: https://nuxt.com

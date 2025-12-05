@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-search-button'
-import type { ButtonProps, ButtonSlots, IconProps, KbdProps, TooltipProps } from '../../types'
+import type { ButtonProps, ButtonSlots, IconProps, KbdProps, TooltipProps, LinkPropsKeys } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentSearchButton = ComponentConfig<typeof theme, AppConfig, 'contentSearchButton'>
 
-export interface ContentSearchButtonProps extends Omit<ButtonProps, 'icon' | 'label' | 'color' | 'variant'> {
+export interface ContentSearchButtonProps extends Omit<ButtonProps, LinkPropsKeys | 'icon' | 'label' | 'color' | 'variant'> {
   /**
    * The icon displayed in the button.
    * @defaultValue appConfig.ui.icons.search
