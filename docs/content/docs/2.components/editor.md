@@ -319,7 +319,7 @@ Check out the image upload example for a complete implementation with custom han
 
 ### With toolbar
 
-You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a fixed, bubble, or floating toolbar to the Editor with common formatting actions.
+You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a `fixed`, `bubble`, or `floating` toolbar to the Editor with common formatting actions.
 
 ::component-example
 ---
