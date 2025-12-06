@@ -85,7 +85,7 @@ items:
       target: '_blank'
       avatar:
         src: 'https://github.com/sandros94.png'
-  - label: 'Unocss Preset Nuxt UI'
+  - label: 'UnoCSS Preset'
     description: 'The preset that makes using UnoCSS with Nuxt UI effortless.'
     avatar:
       src: 'https://unocss-preset-nuxt-ui.netlify.app/logo.svg'
