@@ -245,4 +245,64 @@ describe('Table', () => {
 
     expect(wrapper.find('[data-test-th="amount"]').exists()).toBeTruthy()
   })
+
+  it('data-selectable attribute with rowSelectionOptions.enableRowSelection', async () => {
+    const testData = [
+      { id: '1', amount: 100, status: 'success', email: 'test1@test.com', canSelect: true },
+      { id: '2', amount: 200, status: 'failed', email: 'test2@test.com', canSelect: false },
+      { id: '3', amount: 300, status: 'success', email: 'test3@test.com', canSelect: true }
+    ]
+
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data: testData,
+        columns: [{
+          accessorKey: 'id'
+        }],
+        rowSelectionOptions: {
+          enableRowSelection: (row: TableRow<typeof testData[number]>) => row.original.canSelect
+        }
+      }
+    })
+
+    await flushPromises()
+
+    const rows = wrapper.findAll('tbody tr')
+    expect(rows).toHaveLength(3)
+
+    expect(rows[0]?.attributes('data-selectable')).toBe('true')
+    expect(rows[1]?.attributes('data-selectable')).toBe('false')
+    expect(rows[2]?.attributes('data-selectable')).toBe('true')
+  })
+
+  it('data-selectable attribute fallback behavior', async () => {
+    const wrapperWithOnSelect = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: [{
+          accessorKey: 'id'
+        }],
+        onSelect: () => {}
+      }
+    })
+
+    await flushPromises()
+
+    const rowsWithOnSelect = wrapperWithOnSelect.findAll('tbody tr')
+    expect(rowsWithOnSelect[0]?.attributes('data-selectable')).toBe('true')
+
+    const wrapperWithoutHandlers = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: [{
+          accessorKey: 'id'
+        }]
+      }
+    })
+
+    await flushPromises()
+
+    const rowsWithoutHandlers = wrapperWithoutHandlers.findAll('tbody tr')
+    expect(rowsWithoutHandlers[0]?.attributes('data-selectable')).toBe('false')
+  })
 })

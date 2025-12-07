@@ -520,7 +520,7 @@ defineExpose({
   <DefineRowTemplate v-slot="{ row, style }">
     <tr
       :data-selected="row.getIsSelected()"
-      :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
+      :data-selectable="!!props.rowSelectionOptions?.enableRowSelection ? row.getCanSelect() : !!props.onSelect || !!props.onHover || !!props.onContextmenu"
       :data-expanded="row.getIsExpanded()"
       :role="props.onSelect ? 'button' : undefined"
       :tabindex="props.onSelect ? 0 : undefined"
