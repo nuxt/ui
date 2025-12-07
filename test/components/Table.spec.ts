@@ -260,7 +260,7 @@ describe('Table', () => {
           accessorKey: 'id'
         }],
         rowSelectionOptions: {
-          enableRowSelection: (row: TableRow<typeof testData[number]>) => row.original.canSelect
+          enableRowSelection: (row: any) => row.original.canSelect
         }
       }
     })
