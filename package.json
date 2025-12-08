@@ -68,7 +68,7 @@
   "devDependencies": {
     "@nuxt/eslint-config": "^1.11.0",
     "@nuxt/module-builder": "^1.0.2",
-    "@nuxt/test-utils": "^3.20.1",
+    "@nuxt/test-utils": "^3.21.0",
     "@release-it/conventional-changelog": "^10.0.2",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^9.39.1",
@@ -78,7 +78,7 @@
     "typescript": "^5.8.3",
     "vitest": "^3.2.4",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^3.1.5"
+    "vue-tsc": "^3.1.7"
   },
   "peerDependencies": {
     "joi": "^17.13.0",
