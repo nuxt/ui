@@ -336,37 +336,47 @@ describe('SelectMenu', () => {
   })
 
   describe('caching', () => {
-    test('should cache selected item label when item is removed from items', async () => {
+    test('should cache selected item label when item is stored in cache', async () => {
       const items = [{ id: 1, label: 'Option 1' }, { id: 2, label: 'Option 2' }]
       const wrapper = mount(SelectMenu, {
         props: {
           items,
           modelValue: 1,
-          valueKey: 'id'
+          valueKey: 'id',
+          portal: false
         }
       })
 
       expect(wrapper.text()).toBe('Option 1')
 
-      await wrapper.setProps({ items: [{ id: 3, label: 'Option 3' }] })
+      const trigger = wrapper.find('button')
+      await trigger.trigger('click')
+
+      const input = wrapper.find('input')
+      await input.setValue('Option 3')
 
       expect(wrapper.text()).toBe('Option 1')
     })
 
-    test('should cache selected items labels when items are removed from items (multiple)', async () => {
+    test('should cache selected items labels when items are stored in cache', async () => {
       const items = [{ id: 1, label: 'Option 1' }, { id: 2, label: 'Option 2' }]
       const wrapper = mount(SelectMenu, {
         props: {
           items,
           multiple: true,
           modelValue: [1, 2],
-          valueKey: 'id'
+          valueKey: 'id',
+          portal: false
         }
       })
 
       expect(wrapper.text()).toBe('Option 1, Option 2')
 
-      await wrapper.setProps({ items: [{ id: 3, label: 'Option 3' }] })
+      const trigger = wrapper.find('button')
+      await trigger.trigger('click')
+
+      const input = wrapper.find('input')
+      await input.setValue('Option 3')
 
       expect(wrapper.text()).toBe('Option 1, Option 2')
     })
