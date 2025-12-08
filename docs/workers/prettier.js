@@ -16,9 +16,9 @@ function handleMessage(message) {
 async function handleFormatMessage(message) {
   if (!globalThis.prettier) {
     await Promise.all([
-      import('https://unpkg.com/prettier@3.3.3/standalone.js'),
-      import('https://unpkg.com/prettier@3.3.3/plugins/html.js'),
-      import('https://unpkg.com/prettier@3.3.3/plugins/markdown.js')
+      import('https://unpkg.com/prettier@3.7.4/standalone.js'),
+      import('https://unpkg.com/prettier@3.7.4/plugins/html.js'),
+      import('https://unpkg.com/prettier@3.7.4/plugins/markdown.js')
     ])
   }
 

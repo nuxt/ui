@@ -7,7 +7,12 @@ import appConfig from '#build/app.config'
 export const twMerge = extendTailwindMerge<string, string>(defu({
   extend: {
     classGroups: {
-      icons: [(classPart: string) => classPart.startsWith('i-')]
+      'icons': [(classPart: string) => classPart.startsWith('i-')],
+      'form-input': ['form-input'],
+      'form-textarea': ['form-textarea'],
+      'form-select': ['form-select'],
+      'form-checkbox': ['form-checkbox'],
+      'form-radio': ['form-radio']
     }
   }
 }, appConfig.ui?.tailwindMerge))
