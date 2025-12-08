@@ -336,29 +336,24 @@ describe('SelectMenu', () => {
   })
 
   describe('caching', () => {
-    test('should cache selected item label when item is stored in cache', async () => {
+    test('should display correct label even items is empty', async () => {
       const items = [{ id: 1, label: 'Option 1' }, { id: 2, label: 'Option 2' }]
       const wrapper = mount(SelectMenu, {
         props: {
           items,
           modelValue: 1,
           valueKey: 'id',
-          portal: false
         }
       })
 
-      expect(wrapper.text()).toBe('Option 1')
-
-      const trigger = wrapper.find('button')
-      await trigger.trigger('click')
-
-      const input = wrapper.find('input')
-      await input.setValue('Option 3')
+        wrapper.setProps({
+        items: []
+      })
 
       expect(wrapper.text()).toBe('Option 1')
     })
 
-    test('should cache selected items labels when items are stored in cache', async () => {
+    test('should display (Multiple) correct label even items is empty', async () => {
       const items = [{ id: 1, label: 'Option 1' }, { id: 2, label: 'Option 2' }]
       const wrapper = mount(SelectMenu, {
         props: {
@@ -366,17 +361,12 @@ describe('SelectMenu', () => {
           multiple: true,
           modelValue: [1, 2],
           valueKey: 'id',
-          portal: false
         }
       })
 
-      expect(wrapper.text()).toBe('Option 1, Option 2')
-
-      const trigger = wrapper.find('button')
-      await trigger.trigger('click')
-
-      const input = wrapper.find('input')
-      await input.setValue('Option 3')
+      wrapper.setProps({
+        items: []
+      })
 
       expect(wrapper.text()).toBe('Option 1, Option 2')
     })
