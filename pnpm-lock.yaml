@@ -157,8 +157,8 @@ importers:
         specifier: 0.4.1
         version: 0.4.1(reka-ui@2.6.1(typescript@5.8.3)(vue@3.5.25(typescript@5.8.3)))(vue@3.5.25(typescript@5.8.3))
       vue-component-type-helpers:
-        specifier: ^3.1.7
-        version: 3.1.7
+        specifier: ^3.1.5
+        version: 3.1.5
       vue-router:
         specifier: ^4.5.0
         version: 4.6.3(vue@3.5.25(typescript@5.8.3))
@@ -7453,9 +7453,6 @@ packages:
 
   vue-component-type-helpers@3.1.5:
     resolution: {integrity: sha512-7V3yJuNWW7/1jxCcI1CswnpDsvs02Qcx/N43LkV+ZqhLj2PKj50slUflHAroNkN4UWiYfzMUUUXiNuv9khmSpQ==}
-
-  vue-component-type-helpers@3.1.7:
-    resolution: {integrity: sha512-SxZOijzRU0LiTYARVZNYf//21bZRLJ26P2prcA6a+FfDQxJtan4tEnsryIY7aiLh2LVoet0ci2G+6RrArQ+7tA==}
 
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
@@ -16353,8 +16350,6 @@ snapshots:
   vue-component-type-helpers@2.2.12: {}
 
   vue-component-type-helpers@3.1.5: {}
-
-  vue-component-type-helpers@3.1.7: {}
 
   vue-demi@0.14.10(vue@3.5.25(typescript@5.8.3)):
     dependencies:
