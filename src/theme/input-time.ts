@@ -1,6 +1,7 @@
 import { defuFn } from 'defu'
 import type { ModuleOptions } from '../module'
 import input from './input'
+import { fieldGroupVariant } from './field-group'
 
 export default (options: Required<ModuleOptions>) => {
   return defuFn({
@@ -10,6 +11,7 @@ export default (options: Required<ModuleOptions>) => {
       segment: ['rounded text-center outline-hidden data-placeholder:text-dimmed data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75', options.theme.transitions && 'transition-colors']
     },
     variants: {
+      ...fieldGroupVariant,
       size: {
         xs: {
           base: (prev: string) => [prev, 'gap-0.25'],

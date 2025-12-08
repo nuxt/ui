@@ -1,15 +1,15 @@
 # Changelog
 
-## [4.2.1](///compare/v4.2.0...v4.2.1) (2025-11-21)
+## [4.2.1](https://github.com/nuxt/ui/compare/v4.2.0...v4.2.1) (2025-11-21)
 
 ### Bug Fixes
 
-* **ChatPromptSubmit:** proxy event to `stop` and `reload` emits ([#5400](undefined/undefined/undefined/issues/5400)) 736a547
-* **ColorModeButton:** missing icon import 5f30ccf, closes #5486
-* **Icon:** improve `name` type ([#5498](undefined/undefined/undefined/issues/5498)) b654a77
-* **Link:** define NuxtLinkProps instead of importing from `[#app](undefined/undefined/undefined/issues/app)` ([#5491](undefined/undefined/undefined/issues/5491)) da8daaa
-* **Link:** ensure consistency across Nuxt, Vue and Inertia a9ed10d, closes #5012
-* **module:** put back `[#build](undefined/undefined/undefined/issues/build)/ui.css` alias ([#5499](undefined/undefined/undefined/issues/5499)) d9aadc7
+* **ChatPromptSubmit:** proxy event to `stop` and `reload` emits ([#5400](https://github.com/nuxt/ui/issues/5400)) ([736a547](https://github.com/nuxt/ui/commit/736a547))
+* **ColorModeButton:** missing icon import ([5f30ccf](https://github.com/nuxt/ui/commit/5f30ccf)), closes [#5486](https://github.com/nuxt/ui/issues/5486)
+* **Icon:** improve `name` type ([#5498](https://github.com/nuxt/ui/issues/5498)) ([b654a77](https://github.com/nuxt/ui/commit/b654a77))
+* **Link:** define NuxtLinkProps instead of importing from `#app` ([#5491](https://github.com/nuxt/ui/issues/5491)) ([da8daaa](https://github.com/nuxt/ui/commit/da8daaa))
+* **Link:** ensure consistency across Nuxt, Vue and Inertia ([a9ed10d](https://github.com/nuxt/ui/commit/a9ed10d)), closes [#5012](https://github.com/nuxt/ui/issues/5012)
+* **module:** put back `#build/ui.css` alias ([#5499](https://github.com/nuxt/ui/issues/5499)) ([d9aadc7](https://github.com/nuxt/ui/commit/d9aadc7))
 
 ## [4.2.0](https://github.com/nuxt/ui/compare/v4.1.0...v4.2.0) (2025-11-18)
 

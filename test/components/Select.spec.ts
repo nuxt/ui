@@ -91,6 +91,22 @@ describe('Select', () => {
     expect(html).toMatchSnapshot()
   })
 
+  it.each([
+    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+    ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
+    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
+  ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
+    const wrapper = mount(Select, {
+      ...options
+    })
+
+    const select = wrapper.findComponent({ name: 'SelectRoot' })
+    await select.setValue(spec.input)
+
+    expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Select, {
       props: {
@@ -101,26 +117,13 @@ describe('Select', () => {
           src: 'https://github.com/benjamincanac.png',
           alt: 'Benjamin Canac'
         }
+      },
+      attrs: {
+        'aria-label': 'Select an item'
       }
     })
 
-    expect(await axe(wrapper.element, {
-      rules: {
-        // "Buttons must have discernible text (button-name)"
-
-        // Fix any of the following:
-        //   Element does not have inner text that is visible to screen readers
-        //   aria-label attribute does not exist or is empty
-        //   aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
-        //   Element has no title attribute
-        //   Element does not have an implicit (wrapped) <label>
-        //   Element does not have an explicit <label>
-        //   Element's default semantics were not overridden with role="none" or role="presentation"
-
-        // We should add aria-labeledby to the SelectTrigger and the id to the value/placeholder element.
-        'button-name': { enabled: false }
-      }
-    })).toHaveNoViolations()
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('it should display correct label', () => {
