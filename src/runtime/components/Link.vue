@@ -148,9 +148,9 @@ const to = computed(() => {
   }
 
   // Use localePath from `@nuxtjs/i18n` if available
-  const localePath = nuxtApp.$localePath as ((route: RouteLocationRaw) => RouteLocationRaw) | undefined
-  if (localePath) {
-    return localePath(path)
+  const localeRoute = nuxtApp.$localeRoute as ((route: RouteLocationRaw) => RouteLocationRaw) | undefined
+  if (localeRoute) {
+    return localeRoute(path)
   }
 
   return path
