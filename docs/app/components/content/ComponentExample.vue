@@ -76,6 +76,7 @@ const slots = defineSlots<{
 }>()
 
 const el = ref<HTMLElement | null>(null)
+const componentContainer = ref<HTMLElement | null>(null)
 
 const { $prettier } = useNuxtApp()
 const { width } = useElementSize(el)
@@ -216,8 +217,10 @@ const urlSearchParams = computed(() => {
           class="relative w-full"
           :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
         />
-        <div v-else class="flex justify-center p-4" :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }]">
+        <div v-else ref="componentContainer" class="flex justify-center p-4 group/component" :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }]">
           <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
+
+          <ComponentThemeVisualizer :container="componentContainer" />
         </div>
       </div>
     </template>

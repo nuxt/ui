@@ -348,6 +348,8 @@ ${props.slots?.default}
 
 const codeKey = computed(() => `component-code-${name}-${hash(props)}`)
 
+const componentContainer = ref<HTMLElement | null>(null)
+
 const { data: ast } = await useAsyncData(codeKey, async () => {
   if (!props.prettier) {
     return parseMarkdown(code.value)
@@ -420,7 +422,7 @@ const { data: ast } = await useAsyncData(codeKey, async () => {
         </template>
       </div>
 
-      <div v-if="component" class="flex justify-center border border-b-0 border-muted relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden, 'dark:bg-neutral-950/50': props.elevated }]">
+      <div v-if="component" ref="componentContainer" class="flex justify-center border border-b-0 border-muted relative p-4 z-[1] group/component" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden, 'dark:bg-neutral-950/50': props.elevated }]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">
@@ -428,6 +430,12 @@ const { data: ast } = await useAsyncData(codeKey, async () => {
             </slot>
           </template>
         </component>
+
+        <ComponentThemeVisualizer
+          :container="componentContainer"
+          :slug="props.slug"
+          :prose="props.prose"
+        />
       </div>
     </div>
 
