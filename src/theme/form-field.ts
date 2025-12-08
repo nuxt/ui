@@ -22,9 +22,18 @@ export default {
       true: {
         label: `after:content-['*'] after:ms-0.5 after:text-error`
       }
+    },
+    orientation: {
+      vertical: {},
+      horizontal: {
+        root: 'flex gap-1 items-start',
+        wrapper: 'flex-none',
+        container: 'flex-1 mt-0'
+      }
     }
   },
   defaultVariants: {
-    size: 'md'
+    size: 'md',
+    orientation: 'vertical'
   }
 }

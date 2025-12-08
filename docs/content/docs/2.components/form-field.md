@@ -170,6 +170,31 @@ slots:
 :u-input{placeholder="Enter your email" class="w-full"}
 ::
 
+### Orientation
+
+Use the `orientation` prop to change the layout of the FormField. The default orientation is `vertical`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - label
+props:
+  label: Email
+  orientation: horizontal
+slots:
+  default: |
+
+    <UInput placeholder="Enter your email" />
+---
+
+:u-input{placeholder="Enter your email"}
+::
+
+::note
+When using `orientation="horizontal"`, the label and form control are displayed side by side, which is useful for inline forms or when space is limited.
+::
+
 ## API
 
 ### Props
