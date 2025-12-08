@@ -11,7 +11,7 @@ declare module '@tiptap/core' {
   }
 }
 
-export default Node.create({
+export const ImageUpload = Node.create({
   name: 'imageUpload',
   group: 'block',
   atom: true,
@@ -38,3 +38,5 @@ export default Node.create({
     }
   }
 })
+
+export default ImageUpload
