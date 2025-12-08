@@ -75,9 +75,8 @@ slots:
 Link
 ::
 
-## IntelliSense
-
-If you're using VSCode and wish to get autocompletion for the classes `active-class` and `inactive-class`, you can add the following settings to your `.vscode/settings.json`:
+::callout{icon="i-simple-icons-visualstudiocode"}
+If you're using the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension for VSCode and wish to get autocompletion for the `active-class` and `inactive-class` props, you can add the following settings to your `.vscode/settings.json`:
 
 ```json [.vscode/settings.json]
 {
@@ -87,6 +86,26 @@ If you're using VSCode and wish to get autocompletion for the classes `active-cl
   ]
 }
 ```
+::
+
+### Locale :badge{label="Soon" class="align-text-top"}
+
+The Link component automatically integrates with [`@nuxtjs/i18n`](https://i18n.nuxtjs.org/) when installed. Internal links are automatically localized using the `$localeRoute` helper without requiring manual wrapping.
+
+```vue
+<template>
+  <!-- Automatically becomes /en/about or /fr/about based on current locale -->
+  <ULink to="/about">About</ULink>
+</template>
+```
+
+::tip
+You can still manually use `localePath()` or `localeRoute()` if needed. The Link component handles already-localized paths correctly without double-localizing.
+::
+
+::note{to="/docs/getting-started/integrations/i18n/nuxt#dynamic-locale"}
+Learn more about Internationalization in Nuxt UI.
+::
 
 ## API
 
