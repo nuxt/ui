@@ -294,7 +294,7 @@ slots:
 :placeholder{class="h-48"}
 ::
 
-### Scrollable :badge{label="4.2+"}
+### Scrollable :badge{label="4.2+" class="align-text-top"}
 
 Use the `scrollable` prop to make the Modal's content scrollable within the overlay.
 

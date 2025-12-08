@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, LinkProps, IconProps } from '../types'
+import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, LinkProps, IconProps, LinkPropsKeys } from '../types'
 import type { GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -105,7 +105,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @emits 'update:open'
    * @defaultValue false
    */
-  close?: boolean | Partial<ButtonProps>
+  close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -117,7 +117,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @defaultValue true
    */
-  back?: boolean | ButtonProps
+  back?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the back button.
    * @defaultValue appConfig.ui.icons.arrowLeft
@@ -529,7 +529,7 @@ function onSelect(e: Event, item: T) {
               color="neutral"
               variant="link"
               :aria-label="t('commandPalette.back')"
-              v-bind="(typeof back === 'object' ? back as Partial<ButtonProps> : {})"
+              v-bind="(typeof back === 'object' ? back : {})"
               data-slot="back"
               :class="ui.back({ class: props.ui?.back })"
               @click="navigateBack"
@@ -545,7 +545,7 @@ function onSelect(e: Event, item: T) {
               color="neutral"
               variant="ghost"
               :aria-label="t('commandPalette.close')"
-              v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
+              v-bind="(typeof close === 'object' ? close : {})"
               data-slot="close"
               :class="ui.close({ class: props.ui?.close })"
               @click="emits('update:open', false)"
