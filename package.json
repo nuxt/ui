@@ -168,7 +168,7 @@
     "release-it": "^19.0.6",
     "vitest": "^3.2.4",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^3.1.7"
+    "vue-tsc": "^3.1.5"
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7",
