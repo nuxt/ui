@@ -1,4 +1,5 @@
 import { fileURLToPath } from 'node:url'
+import { relative } from 'pathe'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
 import colors from 'tailwindcss/colors'
@@ -109,6 +110,27 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
   writeThemeTemplate(theme)
 
+  function generateLayerSources() {
+    if (!nuxt) {
+      return ''
+    }
+
+    const layerSources: string[] = []
+
+    for (const layer of nuxt.options._layers || []) {
+      // Skip layers inside node_modules (dependencies)
+      if (layer.config.rootDir.includes('node_modules')) {
+        continue
+      }
+
+      const relativePath = relative(nuxt.options.buildDir, layer.config.rootDir)
+
+      layerSources.push(`@source "${relativePath}/**/*.{vue,ts,tsx,js,jsx,mjs,mts}";`)
+    }
+
+    return layerSources.join('\n')
+  }
+
   async function generateSources() {
     let sources = ''
 
@@ -165,7 +187,10 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       }
     }
 
-    return sources || '@source "./ui";'
+    const layerSources = generateLayerSources()
+    const themeSources = sources || '@source "./ui";'
+
+    return [layerSources, themeSources].filter(Boolean).join('\n')
   }
 
   templates.push({
