@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TableColumn } from '@nuxt/ui'
-import { useSortable } from '@vueuse/integrations/useSortable.mjs'
+import { useSortable } from '@vueuse/integrations/useSortable'
 
 type Payment = {
   id: string

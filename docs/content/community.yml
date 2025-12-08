@@ -85,3 +85,17 @@ items:
       target: '_blank'
       avatar:
         src: 'https://github.com/sandros94.png'
+  - label: 'UnoCSS Preset'
+    description: 'The preset that makes using UnoCSS with Nuxt UI effortless.'
+    avatar:
+      src: 'https://unocss-preset-nuxt-ui.netlify.app/logo.svg'
+      ui:
+        image: 'p-1.5'
+    to: 'https://github.com/lehuuphuc/unocss-preset-nuxt-ui'
+    target: '_blank'
+    user:
+      name: 'lehuuphuc'
+      to: 'https://github.com/lehuuphuc'
+      target: '_blank'
+      avatar:
+        src: 'https://github.com/lehuuphuc.png'
