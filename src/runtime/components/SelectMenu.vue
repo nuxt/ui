@@ -185,7 +185,7 @@ export interface SelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { useTemplateRef, computed, onMounted, toRef, toRaw } from 'vue'
+import { useTemplateRef, computed, onMounted, toRef, toRaw, shallowRef, watch } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
@@ -195,7 +195,7 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
-import { compare, get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils'
+import { compare, get, getDisplayValue, isArrayOfArray, looseToNumber, wrapInArray } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -269,10 +269,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu |
   virtualize: !!props.virtualize
 }))
 
+const itemCache = shallowRef(new Map<string, any>())
+
 function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map(item => getDisplayValue<T[], GetItemValue<T, VK>>(items.value, item, {
+      .map(item => getDisplayValue<NestedItem<T>[], GetItemValue<NestedItem<T>, VK>>((items.value || []).concat(Array.from(itemCache.value.values())), item as GetItemValue<NestedItem<T>, VK>, {
         labelKey: props.labelKey,
         valueKey: props.valueKey
       }))
@@ -281,7 +283,7 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
     return displayedValues.length > 0 ? displayedValues.join(', ') : undefined
   }
 
-  return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value as GetItemValue<T, VK>, {
+  return getDisplayValue<NestedItem<T>[], GetItemValue<NestedItem<T>, VK>>((items.value || []).concat(Array.from(itemCache.value.values())), value as GetItemValue<NestedItem<T>, VK>, {
     labelKey: props.labelKey,
     valueKey: props.valueKey
   })
@@ -295,7 +297,7 @@ const groups = computed<SelectMenuItem[][]>(() =>
     : []
 )
 // eslint-disable-next-line vue/no-dupe-keys
-const items = computed(() => groups.value.flatMap(group => group) as T[])
+const items = computed(() => groups.value.flatMap(group => group) as NestedItem<T>[])
 
 const filteredGroups = computed(() => {
   if (props.ignoreFilter || !searchTerm.value) {
@@ -439,6 +441,23 @@ function onSelect(e: Event, item: SelectMenuItem) {
 function isSelectItem(item: SelectMenuItem): item is Exclude<SelectMenuItem, SelectMenuValue> {
   return typeof item === 'object' && item !== null
 }
+
+watch([items, () => props.modelValue], () => {
+  const values = wrapInArray(props.modelValue) as any[]
+
+  for (const val of values) {
+    const found = items.value.find((item) => {
+      const itemValue = (typeof item === 'object' && item !== null && props.valueKey)
+        ? get(item, props.valueKey as string)
+        : item
+      return compare(itemValue, val)
+    })
+
+    if (found) {
+      itemCache.value.set(JSON.stringify(val), found)
+    }
+  }
+}, { immediate: true, deep: true })
 
 defineExpose({
   triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement)

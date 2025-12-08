@@ -334,4 +334,41 @@ describe('SelectMenu', () => {
       })).toEqualTypeOf<[(string | number)[]]>()
     })
   })
+
+  describe('caching', () => {
+    test('should cache selected item label when item is removed from items', async () => {
+      const items = [{ id: 1, label: 'Option 1' }, { id: 2, label: 'Option 2' }]
+      const wrapper = mount(SelectMenu, {
+        props: {
+          items,
+          modelValue: 1,
+          valueKey: 'id'
+        }
+      })
+
+      expect(wrapper.text()).toBe('Option 1')
+
+      await wrapper.setProps({ items: [{ id: 3, label: 'Option 3' }] })
+
+      expect(wrapper.text()).toBe('Option 1')
+    })
+
+    test('should cache selected items labels when items are removed from items (multiple)', async () => {
+      const items = [{ id: 1, label: 'Option 1' }, { id: 2, label: 'Option 2' }]
+      const wrapper = mount(SelectMenu, {
+        props: {
+          items,
+          multiple: true,
+          modelValue: [1, 2],
+          valueKey: 'id'
+        }
+      })
+
+      expect(wrapper.text()).toBe('Option 1, Option 2')
+
+      await wrapper.setProps({ items: [{ id: 3, label: 'Option 3' }] })
+
+      expect(wrapper.text()).toBe('Option 1, Option 2')
+    })
+  })
 })
