@@ -5,6 +5,35 @@ hero:
   description: 'Explore ready-made templates powered by our Vue components. These templates are fully responsive, accessible, and easy to customize, so you can launch your project quickly and effortlessly.'
 navigation: false
 items:
+  - title: 'Editor'
+    description: "A rich text editor template powered by TipTap with support for markdown, HTML, and JSON content types."
+    icon: i-lucide-file-text
+    framework: nuxt
+    features:
+      - title: Slash commands
+        icon: i-lucide-square-slash
+      - title: Drag & drop blocks
+        icon: i-lucide-move
+      - title: Real-time collaboration
+        icon: i-lucide-users
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=editor&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Feditor&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Feditor-dark.png&demo-url=https%3A%2F%2Feditor-template.nuxt.dev%2F&demo-title=Nuxt%20Editor%20Template&demo-description=A%20rich%20text%20editor%20template%20built%20with%20Nuxt%20UI%20and%20TipTap.&env=NUXT_PUBLIC_PARTYKIT_HOST&envDescription=PartyKit%20host%20URL%20for%20real-time%20collaboration%20(optional)&envLink=https%3A%2F%2Fdocs.partykit.io%2Fquickstart%2F
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/editor
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://editor-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/editor
+        target: _blank
+        icon: i-simple-icons-github
   - title: 'Changelog'
     description: "A changelog template to display your repository releases notes from GitHub powered by Nuxt MDC."
     icon: i-lucide-newspaper

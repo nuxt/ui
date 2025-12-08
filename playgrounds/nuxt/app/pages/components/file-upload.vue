@@ -65,9 +65,9 @@ const schema = z.object({
     )
 })
 
-type schema = z.output<typeof schema>
+type Schema = z.output<typeof schema>
 
-const state = reactive<Partial<schema>>({
+const state = reactive<Partial<Schema>>({
   avatar: undefined
 })
 
@@ -78,7 +78,7 @@ function createObjectUrl(file: File): string {
   return URL.createObjectURL(file)
 }
 
-async function onSubmit(event: FormSubmitEvent<schema>) {
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data)
 }
 </script>

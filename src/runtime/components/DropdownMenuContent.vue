@@ -127,7 +127,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
 
   <DropdownMenu.Portal v-bind="portalProps">
     <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" data-slot="content" :class="ui.content({ class: [uiOverride?.content, props.class] })" v-bind="contentProps">
-      <slot name="content-top" />
+      <slot name="content-top" :sub="sub ?? false" />
 
       <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiOverride?.viewport })">
         <DropdownMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: uiOverride?.group })">
@@ -201,7 +201,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
 
       <slot />
 
-      <slot name="content-bottom" />
+      <slot name="content-bottom" :sub="sub ?? false" />
     </component>
   </DropdownMenu.Portal>
 </template>

@@ -40,13 +40,11 @@ describe('Popover', () => {
 
     expect(await axe(wrapper.element, {
       rules: {
-        // "ARIA dialog and alertdialog nodes should have an accessible name (aria-dialog-name)"
-
-        // Fix any of the following:
-        //   aria-label attribute does not exist or is empty
-        //   aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
-        //   Element has no title attribute
-        'aria-dialog-name': { enabled: false }
+        // RekaUI does not handle nor check for aria-dialog-name in their tests either
+        // https://github.com/unovue/reka-ui/blob/v2/packages/core/src/Popover/Popover.test.ts
+        'aria-dialog-name': {
+          enabled: false
+        }
       }
     })).toHaveNoViolations()
   })

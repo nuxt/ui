@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { ComponentPublicInstance } from 'vue'
-import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateValue } from 'reka-ui'
+import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateValue, SegmentPart } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, IconProps } from '../types'
@@ -95,8 +95,7 @@ const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(p
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
-  // todo: need to make a PR in reka-ui to export this type - https://github.com/unovue/reka-ui/issues/2260
-  segments?: Parameters<InstanceType<typeof SingleDateField.Root>['$slots']['default'] & {}>[0]['segments']
+  segments?: { part: SegmentPart, value: string }[]
   type?: 'start' | 'end'
 }>()
 
