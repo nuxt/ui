@@ -7,6 +7,14 @@ links:
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Button.vue
 ---
 
+::component-theme-visualizer
+---
+slots:
+  default: Button
+---
+::
+
+
 ## Usage
 
 Use the default slot to set the label of the Button.

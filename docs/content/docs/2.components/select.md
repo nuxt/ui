@@ -10,6 +10,20 @@ links:
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Select.vue
 ---
 
+::component-theme-visualizer
+---
+props:
+  open: true
+  modelValue: 'Backlog'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  portal: false
+---
+::
+
 ## Usage
 
 Use the `v-model` directive to control the value of the Select or the `default-value` prop to set the initial value when you do not need to control its state.

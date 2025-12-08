@@ -11,6 +11,46 @@ links:
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/AuthForm.vue
 ---
 
+::component-theme-visualizer
+---
+class: 'max-w-sm'
+props:
+  fields:
+    - name: 'email'
+      type: 'email'
+      label: 'Email'
+      placeholder: 'Enter your email'
+      required: true
+    - name: 'password'
+      type: 'password'
+      label: 'Password'
+      placeholder: 'Enter your password'
+      required: true
+    - name: 'country'
+      type: 'select'
+      label: 'Country'
+      placeholder: 'Select country'
+      items:
+        - label: 'United States'
+          value: 'us'
+        - label: 'France'
+          value: 'fr'
+        - label: 'United Kingdom'
+          value: 'uk'
+        - label: 'Australia'
+          value: 'au'
+    - name: 'otp'
+      type: 'otp'
+      label: 'OTP'
+      length: 6
+      placeholder: '○'
+    - name: 'remember'
+      type: 'checkbox'
+      label: 'Remember me'
+      description: 'You will be logged in for 30 days.'
+---
+::
+
 ## Usage
 
 Built on top of the [Form](/docs/components/form) component, the `AuthForm` component can be used in your pages or wrapped in a [PageCard](/docs/components/page-card).
