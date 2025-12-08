@@ -342,11 +342,11 @@ describe('SelectMenu', () => {
         props: {
           items,
           modelValue: 1,
-          valueKey: 'id',
+          valueKey: 'id'
         }
       })
 
-        wrapper.setProps({
+      wrapper.setProps({
         items: []
       })
 
@@ -360,7 +360,7 @@ describe('SelectMenu', () => {
           items,
           multiple: true,
           modelValue: [1, 2],
-          valueKey: 'id',
+          valueKey: 'id'
         }
       })
 
