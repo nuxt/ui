@@ -175,7 +175,7 @@ const getCategoryIcon = (category: string) => {
         <NuxtImg
           :src="page.image"
           :alt="page.title"
-          class="w-full max-h-[400px] object-cover object-center max-w-5xl mx-auto"
+          class="w-full max-h-[450px] object-cover object-center max-w-5xl mx-auto"
         />
       </Motion>
     </div>
