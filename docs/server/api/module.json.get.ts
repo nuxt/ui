@@ -18,6 +18,7 @@ interface Module {
     username: string
   }[]
 }
+
 export default defineCachedEventHandler(async () => {
   const team = await $fetch<TeamMember[]>('https://api.nuxt.com/teams/ui')
   const { stats, contributors } = await $fetch<Module>('https://api.nuxt.com/modules/ui')

@@ -1,0 +1,159 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageHeader > renders with as correctly 1`] = `
+"<section data-slot="root" class="relative border-b border-default py-8">
+  <!--v-if-->
+  <div data-slot="container" class="">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</section>"
+`;
+
+exports[`PageHeader > renders with class correctly 1`] = `
+"<div data-slot="root" class="relative border-b border-default py-12">
+  <!--v-if-->
+  <div data-slot="container" class="">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`PageHeader > renders with default slot correctly 1`] = `
+"<div data-slot="root" class="relative border-b border-default py-8">
+  <!--v-if-->
+  <div data-slot="container" class="">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->Default slot
+  </div>
+</div>"
+`;
+
+exports[`PageHeader > renders with description correctly 1`] = `
+"<div data-slot="root" class="relative border-b border-default py-8">
+  <!--v-if-->
+  <div data-slot="container" class="">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-slot="description" class="text-lg text-pretty text-muted">Description</div>
+  </div>
+</div>"
+`;
+
+exports[`PageHeader > renders with description slot correctly 1`] = `
+"<div data-slot="root" class="relative border-b border-default py-8">
+  <!--v-if-->
+  <div data-slot="container" class="">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-slot="description" class="text-lg text-pretty text-muted">Description slot</div>
+  </div>
+</div>"
+`;
+
+exports[`PageHeader > renders with headline correctly 1`] = `
+"<div data-slot="root" class="relative border-b border-default py-8">
+  <div data-slot="headline" class="mb-2.5 text-sm font-semibold text-primary flex items-center gap-1.5">Headline</div>
+  <div data-slot="container" class="">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`PageHeader > renders with headline slot correctly 1`] = `
+"<div data-slot="root" class="relative border-b border-default py-8">
+  <div data-slot="headline" class="mb-2.5 text-sm font-semibold text-primary flex items-center gap-1.5">Headline slot</div>
+  <div data-slot="container" class="">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`PageHeader > renders with links correctly 1`] = `
+"<div data-slot="root" class="relative border-b border-default py-8">
+  <!--v-if-->
+  <div data-slot="container" class="">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <!--v-if-->
+      <div data-slot="links" class="flex flex-wrap items-center gap-1.5"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted"><span class="iconify i-simple-icons:github shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">GitHub</span>
+          <!--v-if-->
+        </button></div>
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`PageHeader > renders with links slot correctly 1`] = `
+"<div data-slot="root" class="relative border-b border-default py-8">
+  <!--v-if-->
+  <div data-slot="container" class="">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <!--v-if-->
+      <div data-slot="links" class="flex flex-wrap items-center gap-1.5">Links slot</div>
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`PageHeader > renders with title correctly 1`] = `
+"<div data-slot="root" class="relative border-b border-default py-8">
+  <!--v-if-->
+  <div data-slot="container" class="">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <h1 data-slot="title" class="text-3xl sm:text-4xl text-pretty font-bold text-highlighted">Title</h1>
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`PageHeader > renders with title slot correctly 1`] = `
+"<div data-slot="root" class="relative border-b border-default py-8">
+  <!--v-if-->
+  <div data-slot="container" class="">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <h1 data-slot="title" class="text-3xl sm:text-4xl text-pretty font-bold text-highlighted">Title slot</h1>
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`PageHeader > renders with ui correctly 1`] = `
+"<div data-slot="root" class="relative border-b border-default py-8">
+  <!--v-if-->
+  <div data-slot="container" class="py-12">
+    <div data-slot="wrapper" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</div>"
+`;

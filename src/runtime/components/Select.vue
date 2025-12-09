@@ -3,17 +3,23 @@ import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectConten
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
+import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { ModelModifiers } from '../types/input'
+import type { ButtonHTMLAttributes } from '../types/html'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>
 
-interface SelectItemBase {
+export type SelectValue = AcceptableValue
+
+export type SelectItem = SelectValue | {
   label?: string
+  description?: string
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   avatar?: AvatarProps
   chip?: ChipProps
   /**
@@ -21,16 +27,15 @@ interface SelectItemBase {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
-  value?: AcceptableValue | boolean
+  value?: SelectValue
   disabled?: boolean
-  onSelect?(e?: Event): void
+  onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
+  ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
-export type SelectItem = SelectItemBase | AcceptableValue | boolean
 
-export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
+export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -51,13 +56,13 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
    * @defaultValue appConfig.ui.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
    * @IconifyIcon
    */
-  selectedIcon?: string
+  selectedIcon?: IconProps['name']
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
@@ -82,12 +87,18 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: keyof NestedItem<T>
+  labelKey?: GetItemKeys<T>
+  /**
+   * When `items` is an array of objects, select the field to use as the description.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>
   items?: T
   /** The value of the Select when initially rendered. Use when you do not need to control the state of the Select. */
   defaultValue?: GetModelValue<T, VK, M>
   /** The controlled value of the Select. Can be bind as `v-model`. */
   modelValue?: GetModelValue<T, VK, M>
+  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
@@ -99,12 +110,12 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
 }
 
 export type SelectEmits<A extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Omit<SelectRootEmits, 'update:modelValue'> & {
-  change: [payload: Event]
-  blur: [payload: FocusEvent]
-  focus: [payload: FocusEvent]
+  change: [event: Event]
+  blur: [event: FocusEvent]
+  focus: [event: FocusEvent]
 } & GetModelValueEmits<A, VK, M>
 
-type SlotProps<T extends SelectItem> = (props: { item: T, index: number }) => any
+type SlotProps<T extends SelectItem> = (props: { item: T, index: number, ui: Select['ui'] }) => any
 
 export interface SelectSlots<
   A extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>,
@@ -112,23 +123,13 @@ export interface SelectSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: {
-    modelValue?: GetModelValue<A, VK, M>
-    open: boolean
-    ui: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string }
-  }): any
-  'default'(props: {
-    modelValue?: GetModelValue<A, VK, M>
-    open: boolean
-  }): any
-  'trailing'(props: {
-    modelValue?: GetModelValue<A, VK, M>
-    open: boolean
-    ui: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string }
-  }): any
+  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: Select['ui'] }): any
+  'default'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: Select['ui'] }): any
+  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: Select['ui'] }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
+  'item-label'(props: { item: T, index: number }): any
+  'item-description'(props: { item: T, index: number }): any
   'item-trailing': SlotProps<T>
   'content-top': (props?: {}) => any
   'content-bottom': (props?: {}) => any
@@ -136,16 +137,16 @@ export interface SelectSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false">
-import { ref, computed, onMounted, toRef } from 'vue'
-import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
+import { useTemplateRef, computed, onMounted, toRef } from 'vue'
+import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useButtonGroup } from '../composables/useButtonGroup'
+import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { usePortal } from '../composables/usePortal'
-import { compare, get, isArrayOfArray } from '../utils'
+import { get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -155,7 +156,8 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SelectProps<T, VK, M>>(), {
   valueKey: 'value' as never,
-  labelKey: 'label' as never,
+  labelKey: 'label',
+  descriptionKey: 'description',
   portal: true,
   autofocusDelay: 0
 })
@@ -170,10 +172,10 @@ const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffse
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
 const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
-const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
-const selectSize = computed(() => buttonGroupSize.value || formGroupSize.value)
+const selectSize = computed(() => fieldGroupSize.value || formGroupSize.value)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}) })({
   color: color.value,
@@ -183,7 +185,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}
   highlight: highlight.value,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  buttonGroup: orientation.value
+  fieldGroup: orientation.value
 }))
 
 const groups = computed<SelectItem[][]>(() =>
@@ -198,15 +200,23 @@ const items = computed(() => groups.value.flatMap(group => group) as T[])
 
 function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
   if (props.multiple && Array.isArray(value)) {
-    const values = value.map(v => displayValue(v)).filter(Boolean)
-    return values?.length ? values.join(', ') : undefined
+    const displayedValues = value
+      .map(item => getDisplayValue<T[], GetItemValue<T, VK>>(items.value, item, {
+        labelKey: props.labelKey,
+        valueKey: props.valueKey
+      }))
+      .filter((v): v is string => v != null && v !== '')
+
+    return displayedValues.length > 0 ? displayedValues.join(', ') : undefined
   }
 
-  const item = items.value.find(item => compare(typeof item === 'object' ? get(item as Record<string, any>, props.valueKey as string) : item, value))
-  return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
+  return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value as GetItemValue<T, VK>, {
+    labelKey: props.labelKey,
+    valueKey: props.valueKey
+  })
 }
 
-const triggerRef = ref<InstanceType<typeof SelectTrigger> | null>(null)
+const triggerRef = useTemplateRef('triggerRef')
 
 function autoFocus() {
   if (props.autofocus) {
@@ -223,6 +233,22 @@ onMounted(() => {
 })
 
 function onUpdate(value: any) {
+  if (props.modelModifiers?.trim) {
+    value = value?.trim() ?? null
+  }
+
+  if (props.modelModifiers?.number) {
+    value = looseToNumber(value)
+  }
+
+  if (props.modelModifiers?.nullable) {
+    value ??= null
+  }
+
+  if (props.modelModifiers?.optional) {
+    value ??= undefined
+  }
+
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
@@ -242,12 +268,12 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
-function isSelectItem(item: SelectItem): item is SelectItemBase {
+function isSelectItem(item: SelectItem): item is Exclude<SelectItem, SelectValue> {
   return typeof item === 'object' && item !== null
 }
 
 defineExpose({
-  triggerRef
+  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement)
 })
 </script>
 
@@ -259,93 +285,109 @@ defineExpose({
     v-bind="rootProps"
     :autocomplete="autocomplete"
     :disabled="disabled"
-    :default-value="(defaultValue as (AcceptableValue | AcceptableValue[]))"
-    :model-value="(modelValue as (AcceptableValue | AcceptableValue[]))"
+    :default-value="(defaultValue as Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[])"
+    :model-value="(modelValue as Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[])"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <SelectTrigger :id="id" ref="triggerRef" :class="ui.base({ class: [props.ui?.base, props.class] })" v-bind="{ ...$attrs, ...ariaAttrs }">
-      <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+    <SelectTrigger
+      :id="id"
+      ref="triggerRef"
+      data-slot="base"
+      :class="ui.base({ class: [props.ui?.base, props.class] })"
+      v-bind="{ ...$attrs, ...ariaAttrs }"
+    >
+      <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
-          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-          <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+          <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
-      <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open">
+      <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
         <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
-          <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" :class="ui.value({ class: props.ui?.value })">
+          <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" data-slot="value" :class="ui.value({ class: props.ui?.value })">
             {{ displayedModelValue }}
           </span>
-          <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
+          <span v-else data-slot="placeholder" :class="ui.placeholder({ class: props.ui?.placeholder })">
             {{ placeholder ?? '&nbsp;' }}
           </span>
         </template>
       </slot>
 
-      <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+      <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
         <slot name="trailing" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
-          <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+          <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </span>
     </SelectTrigger>
 
     <SelectPortal v-bind="portalProps">
-      <SelectContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
+      <SelectContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <slot name="content-top" />
 
-        <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
-          <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
+        <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+          <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
+              <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
                 {{ get(item, props.labelKey as string) }}
               </SelectLabel>
 
-              <SelectSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
+              <SelectSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" data-slot="separator" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
 
-              <SelectItem
+              <RSelectItem
                 v-else
+                data-slot="item"
                 :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
                 :disabled="isSelectItem(item) && item.disabled"
                 :value="isSelectItem(item) ? get(item, props.valueKey as string) : item"
                 @select="isSelectItem(item) && item.onSelect?.($event)"
               >
-                <slot name="item" :item="(item as NestedItem<T>)" :index="index">
-                  <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index">
-                    <UIcon v-if="isSelectItem(item) && item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
-                    <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
+                <slot name="item" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
+                  <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
+                    <UIcon v-if="isSelectItem(item) && item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
+                    <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
                     <UChip
                       v-else-if="isSelectItem(item) && item.chip"
                       :size="((item.ui?.itemLeadingChipSize || props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
                       inset
                       standalone
                       v-bind="item.chip"
+                      data-slot="itemLeadingChip"
                       :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, item.ui?.itemLeadingChip] })"
                     />
                   </slot>
 
-                  <SelectItemText :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
-                    <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
-                      {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
-                    </slot>
-                  </SelectItemText>
+                  <span data-slot="itemWrapper" :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })">
+                    <SelectItemText data-slot="itemLabel" :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
+                      <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
+                        {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
+                      </slot>
+                    </SelectItemText>
 
-                  <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
-                    <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" />
+                    <span v-if="isSelectItem(item) && (get(item, props.descriptionKey as string) || !!slots['item-description'])" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })">
+                      <slot name="item-description" :item="(item as NestedItem<T>)" :index="index">
+                        {{ get(item, props.descriptionKey as string) }}
+                      </slot>
+                    </span>
+                  </span>
+
+                  <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
+                    <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" :ui="ui" />
 
                     <SelectItemIndicator as-child>
-                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
+                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
                     </SelectItemIndicator>
                   </span>
                 </slot>
-              </SelectItem>
+              </RSelectItem>
             </template>
           </SelectGroup>
         </div>
 
         <slot name="content-bottom" />
 
-        <SelectArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
+        <SelectArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
       </SelectContent>
     </SelectPortal>
   </SelectRoot>

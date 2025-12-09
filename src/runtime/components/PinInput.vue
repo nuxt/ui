@@ -1,13 +1,15 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { ComponentPublicInstance } from 'vue'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pin-input'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type PinInput = ComponentConfig<typeof theme, AppConfig, 'pinInput'>
 
 type PinInputType = 'text' | 'number'
+type PinInputValue<Type extends PinInputType> = [Type] extends ['number'] ? number[] : string[]
 
 export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<PinInputRootProps<T>, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'> {
   /**
@@ -40,14 +42,13 @@ export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<Pin
 }
 
 export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T> & {
-  change: [payload: Event]
-  blur: [payload: Event]
+  change: [event: Event]
+  blur: [event: Event]
 }
 
 </script>
 
-<script setup lang="ts" generic="T extends PinInputType = 'text'">
-import type { ComponentPublicInstance } from 'vue'
+<script setup lang="ts" generic="T extends PinInputType">
 import { ref, computed, onMounted } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
@@ -65,7 +66,7 @@ const emits = defineEmits<PinInputEmits<T>>()
 
 const appConfig = useAppConfig() as PinInput['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'disabled', 'id', 'mask', 'modelValue', 'name', 'otp', 'required', 'type'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'), emits)
 
 const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PinInputProps>(props)
 
@@ -116,6 +117,9 @@ defineExpose({
     :id="id"
     :name="name"
     :placeholder="placeholder"
+    :model-value="(modelValue as PinInputValue<T>)"
+    :default-value="(defaultValue as PinInputValue<T>)"
+    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="emitFormInput()"
     @complete="onComplete"
@@ -125,6 +129,7 @@ defineExpose({
       :key="ids"
       :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
       :index="index"
+      data-slot="base"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       @blur="onBlur"

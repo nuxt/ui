@@ -1,10 +1,10 @@
 import type { ModuleOptions } from '../module'
-import { buttonGroupVariantWithRoot } from './button-group'
+import { fieldGroupVariantWithRoot } from './field-group'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative inline-flex items-center',
-    base: ['w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+    base: ['w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     leading: 'absolute inset-y-0 start-0 flex items-center',
     leadingIcon: 'shrink-0 text-dimmed',
     leadingAvatar: 'shrink-0',
@@ -13,7 +13,7 @@ export default (options: Required<ModuleOptions>) => ({
     trailingIcon: 'shrink-0 text-dimmed'
   },
   variants: {
-    ...buttonGroupVariantWithRoot,
+    ...fieldGroupVariantWithRoot,
     size: {
       xs: {
         base: 'px-2 py-1 text-xs gap-1',

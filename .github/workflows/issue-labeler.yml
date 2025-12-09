@@ -1,0 +1,62 @@
+name: issue-labeler
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Parse bug report issue form
+        if: contains(github.event.issue.labels.*.name, 'bug')
+        uses: stefanbuck/github-issue-parser@v3
+        id: issue-parser-bug
+        with:
+          template-path: .github/ISSUE_TEMPLATE/bug-report.yml
+
+      - name: Parse feature request issue form
+        if: contains(github.event.issue.labels.*.name, 'enhancement')
+        uses: stefanbuck/github-issue-parser@v3
+        id: issue-parser-feature
+        with:
+          template-path: .github/ISSUE_TEMPLATE/feature-request.yml
+
+      - name: Parse question issue form
+        if: contains(github.event.issue.labels.*.name, 'question')
+        uses: stefanbuck/github-issue-parser@v3
+        id: issue-parser-question
+        with:
+          template-path: .github/ISSUE_TEMPLATE/question.yml
+
+      - name: Set labels for bug report
+        if: contains(github.event.issue.labels.*.name, 'bug')
+        uses: redhat-plumbers-in-action/advanced-issue-labeler@v3
+        with:
+          issue-form: ${{ steps.issue-parser-bug.outputs.jsonString }}
+          template: bug-report.yml
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set labels for feature request
+        if: contains(github.event.issue.labels.*.name, 'enhancement')
+        uses: redhat-plumbers-in-action/advanced-issue-labeler@v3
+        with:
+          issue-form: ${{ steps.issue-parser-feature.outputs.jsonString }}
+          template: feature-request.yml
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set labels for question
+        if: contains(github.event.issue.labels.*.name, 'question')
+        uses: redhat-plumbers-in-action/advanced-issue-labeler@v3
+        with:
+          issue-form: ${{ steps.issue-parser-question.outputs.jsonString }}
+          template: question.yml
+          token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,4 +1,5 @@
 import type { FuseResult, FuseResultMatch } from 'fuse.js'
+import type { GetItemKeys } from '../types/utils'
 
 function truncateHTMLFromStart(html: string, maxLength: number) {
   let truncated = ''
@@ -32,7 +33,7 @@ function truncateHTMLFromStart(html: string, maxLength: number) {
   return truncated
 }
 
-export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, searchTerm: string, forceKey?: string, omitKeys?: string[]) {
+export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, searchTerm: string, forceKey?: GetItemKeys<T>, omitKeys?: GetItemKeys<T>[]) {
   function generateHighlightedText(value: FuseResultMatch['value'], indices: FuseResultMatch['indices'] = []) {
     value = value || ''
     let content = ''
@@ -75,7 +76,7 @@ export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, s
     if (forceKey && match.key !== forceKey) {
       continue
     }
-    if (omitKeys?.includes(match.key!)) {
+    if (omitKeys?.includes(match.key as GetItemKeys<T>)) {
       continue
     }
 

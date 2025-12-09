@@ -2,8 +2,9 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/breadcrumb'
-import type { AvatarProps, LinkProps } from '../types'
-import type { DynamicSlots, ComponentConfig } from '../types/utils'
+import type { AvatarProps, IconProps, LinkProps } from '../types'
+import type { DynamicSlots, GetItemKeys } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Breadcrumb = ComponentConfig<typeof theme, AppConfig, 'breadcrumb'>
 
@@ -12,7 +13,7 @@ export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   avatar?: AvatarProps
   slot?: string
   class?: any
@@ -32,25 +33,27 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
    * @defaultValue appConfig.ui.icons.chevronRight
    * @IconifyIcon
    */
-  separatorIcon?: string
+  separatorIcon?: IconProps['name']
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: string
+  labelKey?: GetItemKeys<T>
   class?: any
   ui?: Breadcrumb['slots']
 }
 
-type SlotProps<T extends BreadcrumbItem> = (props: { item: T, index: number, active?: boolean }) => any
+type SlotProps<T extends BreadcrumbItem> = (props: { item: T, index: number, active?: boolean, ui: Breadcrumb['ui'] }) => any
 
 export type BreadcrumbSlots<T extends BreadcrumbItem = BreadcrumbItem> = {
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-  'separator': any
-} & DynamicSlots<T, 'leading' | 'label' | 'trailing', { index: number, active?: boolean }>
+  'item-label': (props: { item: T, index: number, active?: boolean }) => any
+  'item-trailing': (props: { item: T, index: number, active?: boolean }) => any
+  'separator': (props: { ui: Breadcrumb['ui'] }) => any
+}
+& DynamicSlots<T, 'leading', { index: number, active?: boolean, ui: Breadcrumb['ui'] }>
+& DynamicSlots<T, 'label' | 'trailing', { index: number, active?: boolean }>
 
 </script>
 
@@ -83,33 +86,33 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb |
 </script>
 
 <template>
-  <Primitive :as="as" aria-label="breadcrumb" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <ol :class="ui.list({ class: props.ui?.list })">
+  <Primitive :as="as" aria-label="breadcrumb" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <ol data-slot="list" :class="ui.list({ class: props.ui?.list })">
       <template v-for="(item, index) in items" :key="index">
-        <li :class="ui.item({ class: [props.ui?.item, item.ui?.item] })">
+        <li data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item] })">
           <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
-            <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })">
-              <slot :name="((item.slot || 'item') as keyof BreadcrumbSlots<T>)" :item="item" :index="index">
-                <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof BreadcrumbSlots<T>)" :item="item" :active="index === items!.length - 1" :index="index">
-                  <UIcon v-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active: index === items!.length - 1 })" />
-                  <UAvatar v-else-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: [props.ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active: index === items!.length - 1 })" />
+            <ULinkBase v-bind="slotProps" as="span" :aria-current="(item.active ?? active) && (index === items!.length - 1) ? 'page' : undefined" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: item.active ?? (index === items!.length - 1), disabled: !!item.disabled, to: !!item.to })">
+              <slot :name="((item.slot || 'item') as keyof BreadcrumbSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :active="item.active ?? (index === items!.length - 1)" :index="index" :ui="ui">
+                <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof BreadcrumbSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :active="item.active ?? (index === items!.length - 1)" :index="index" :ui="ui">
+                  <UIcon v-if="item.icon" :name="item.icon" data-slot="linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active: item.active ?? (index === items!.length - 1) })" />
+                  <UAvatar v-else-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="linkLeadingAvatar" :class="ui.linkLeadingAvatar({ class: [props.ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active: item.active ?? (index === items!.length - 1) })" />
                 </slot>
 
-                <span v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof BreadcrumbSlots<T>]" :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })">
-                  <slot :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof BreadcrumbSlots<T>)" :item="item" :active="index === items!.length - 1" :index="index">
+                <span v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof BreadcrumbSlots<T>]" data-slot="linkLabel" :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })">
+                  <slot :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof DynamicSlots<T, 'label'>)" :item="(item as Extract<T, { slot: string; }>)" :active="item.active ?? (index === items!.length - 1)" :index="index">
                     {{ get(item, props.labelKey as string) }}
                   </slot>
                 </span>
 
-                <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof BreadcrumbSlots<T>)" :item="item" :active="index === items!.length - 1" :index="index" />
+                <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof DynamicSlots<T, 'trailing'>)" :item="(item as Extract<T, { slot: string; }>)" :active="item.active ?? (index === items!.length - 1)" :index="index" />
               </slot>
             </ULinkBase>
           </ULink>
         </li>
 
-        <li v-if="index < items!.length - 1" role="presentation" aria-hidden="true" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator] })">
-          <slot name="separator">
-            <UIcon :name="separatorIcon" :class="ui.separatorIcon({ class: [props.ui?.separatorIcon, item.ui?.separatorIcon] })" />
+        <li v-if="index < items!.length - 1" role="presentation" aria-hidden="true" data-slot="separator" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator] })">
+          <slot name="separator" :ui="ui">
+            <UIcon :name="separatorIcon" data-slot="separatorIcon" :class="ui.separatorIcon({ class: [props.ui?.separatorIcon, item.ui?.separatorIcon] })" />
           </slot>
         </li>
       </template>

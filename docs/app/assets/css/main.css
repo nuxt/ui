@@ -1,8 +1,7 @@
 @import "tailwindcss" theme(static) source("../../../..");
-@import "@nuxt/ui-pro";
+@import "@nuxt/ui";
 
 @source "../../../content/**/*";
-@source "../../../node_modules/.c12";
 
 @theme static {
   --container-8xl: 90rem;
@@ -27,8 +26,6 @@
 }
 
 html[data-framework="nuxt"] .vue-only,
-html[data-framework="vue"] .nuxt-only,
-html[data-module="ui-pro"] .ui-only,
-html[data-module="ui"] .ui-pro-only {
+html[data-framework="vue"] .nuxt-only {
   display: none;
 }

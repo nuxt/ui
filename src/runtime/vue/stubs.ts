@@ -38,10 +38,10 @@ export const useCookie = <T = string>(
   _name: string,
   _options: Record<string, any> = {}
 ) => {
-  const value = ref(null) as Ref<T>
+  const value = ref(_options?.default?.() ?? null) as Ref<T>
 
   return {
-    value,
+    value: value.value,
     get: () => value.value,
     set: () => {},
     update: () => {},
@@ -66,7 +66,7 @@ const hooks = createHooks()
 export function useNuxtApp() {
   return {
     isHydrating: true,
-    payload: { serverRendered: false },
+    payload: { serverRendered: import.meta.env.SSR || false },
     hooks,
     hook: hooks.hook
   }

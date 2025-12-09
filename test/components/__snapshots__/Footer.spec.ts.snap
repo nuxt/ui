@@ -1,0 +1,97 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Footer > renders with as correctly 1`] = `
+"<section data-slot="root" class="">
+  <!--v-if-->
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-4 lg:flex lg:items-center lg:justify-between lg:gap-x-3" data-slot="container">
+    <div data-slot="right" class="lg:flex-1 flex items-center justify-center lg:justify-end gap-x-1.5 lg:order-3"></div>
+    <div data-slot="center" class="mt-3 lg:mt-0 lg:order-2 flex items-center justify-center"></div>
+    <div data-slot="left" class="flex items-center justify-center lg:justify-start lg:flex-1 gap-x-1.5 mt-3 lg:mt-0 lg:order-1"></div>
+  </div>
+  <!--v-if-->
+</section>"
+`;
+
+exports[`Footer > renders with bottom slot correctly 1`] = `
+"<footer data-slot="root" class="">
+  <!--v-if-->
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-4 lg:flex lg:items-center lg:justify-between lg:gap-x-3" data-slot="container">
+    <div data-slot="right" class="lg:flex-1 flex items-center justify-center lg:justify-end gap-x-1.5 lg:order-3"></div>
+    <div data-slot="center" class="mt-3 lg:mt-0 lg:order-2 flex items-center justify-center"></div>
+    <div data-slot="left" class="flex items-center justify-center lg:justify-start lg:flex-1 gap-x-1.5 mt-3 lg:mt-0 lg:order-1"></div>
+  </div>
+  <div data-slot="bottom" class="py-8 lg:py-12">Bottom slot</div>
+</footer>"
+`;
+
+exports[`Footer > renders with class correctly 1`] = `
+"<footer data-slot="root" class="relative">
+  <!--v-if-->
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-4 lg:flex lg:items-center lg:justify-between lg:gap-x-3" data-slot="container">
+    <div data-slot="right" class="lg:flex-1 flex items-center justify-center lg:justify-end gap-x-1.5 lg:order-3"></div>
+    <div data-slot="center" class="mt-3 lg:mt-0 lg:order-2 flex items-center justify-center"></div>
+    <div data-slot="left" class="flex items-center justify-center lg:justify-start lg:flex-1 gap-x-1.5 mt-3 lg:mt-0 lg:order-1"></div>
+  </div>
+  <!--v-if-->
+</footer>"
+`;
+
+exports[`Footer > renders with default slot correctly 1`] = `
+"<footer data-slot="root" class="">
+  <!--v-if-->
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-4 lg:flex lg:items-center lg:justify-between lg:gap-x-3" data-slot="container">
+    <div data-slot="right" class="lg:flex-1 flex items-center justify-center lg:justify-end gap-x-1.5 lg:order-3"></div>
+    <div data-slot="center" class="mt-3 lg:mt-0 lg:order-2 flex items-center justify-center">Default slot</div>
+    <div data-slot="left" class="flex items-center justify-center lg:justify-start lg:flex-1 gap-x-1.5 mt-3 lg:mt-0 lg:order-1"></div>
+  </div>
+  <!--v-if-->
+</footer>"
+`;
+
+exports[`Footer > renders with left slot correctly 1`] = `
+"<footer data-slot="root" class="">
+  <!--v-if-->
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-4 lg:flex lg:items-center lg:justify-between lg:gap-x-3" data-slot="container">
+    <div data-slot="right" class="lg:flex-1 flex items-center justify-center lg:justify-end gap-x-1.5 lg:order-3"></div>
+    <div data-slot="center" class="mt-3 lg:mt-0 lg:order-2 flex items-center justify-center"></div>
+    <div data-slot="left" class="flex items-center justify-center lg:justify-start lg:flex-1 gap-x-1.5 mt-3 lg:mt-0 lg:order-1">Left slot</div>
+  </div>
+  <!--v-if-->
+</footer>"
+`;
+
+exports[`Footer > renders with right slot correctly 1`] = `
+"<footer data-slot="root" class="">
+  <!--v-if-->
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-4 lg:flex lg:items-center lg:justify-between lg:gap-x-3" data-slot="container">
+    <div data-slot="right" class="lg:flex-1 flex items-center justify-center lg:justify-end gap-x-1.5 lg:order-3">Right slot</div>
+    <div data-slot="center" class="mt-3 lg:mt-0 lg:order-2 flex items-center justify-center"></div>
+    <div data-slot="left" class="flex items-center justify-center lg:justify-start lg:flex-1 gap-x-1.5 mt-3 lg:mt-0 lg:order-1"></div>
+  </div>
+  <!--v-if-->
+</footer>"
+`;
+
+exports[`Footer > renders with top slot correctly 1`] = `
+"<footer data-slot="root" class="">
+  <div data-slot="top" class="py-8 lg:py-12">Top slot</div>
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-4 lg:flex lg:items-center lg:justify-between lg:gap-x-3" data-slot="container">
+    <div data-slot="right" class="lg:flex-1 flex items-center justify-center lg:justify-end gap-x-1.5 lg:order-3"></div>
+    <div data-slot="center" class="mt-3 lg:mt-0 lg:order-2 flex items-center justify-center"></div>
+    <div data-slot="left" class="flex items-center justify-center lg:justify-start lg:flex-1 gap-x-1.5 mt-3 lg:mt-0 lg:order-1"></div>
+  </div>
+  <!--v-if-->
+</footer>"
+`;
+
+exports[`Footer > renders with ui correctly 1`] = `
+"<footer data-slot="root" class="">
+  <!--v-if-->
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-4 lg:flex lg:items-center lg:justify-between lg:gap-x-1.5" data-slot="container">
+    <div data-slot="right" class="lg:flex-1 flex items-center justify-center lg:justify-end gap-x-1.5 lg:order-3"></div>
+    <div data-slot="center" class="mt-3 lg:mt-0 lg:order-2 flex items-center justify-center"></div>
+    <div data-slot="left" class="flex items-center justify-center lg:justify-start lg:flex-1 gap-x-1.5 mt-3 lg:mt-0 lg:order-1"></div>
+  </div>
+  <!--v-if-->
+</footer>"
+`;

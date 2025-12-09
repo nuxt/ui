@@ -1,0 +1,274 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DashboardNavbar > renders with as correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <section data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate"></h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </section>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with class correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default sm:px-6 gap-1.5 px-8">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate"></h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with default slot correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate"></h1>
+    </div>
+    <div data-slot="center" class="hidden lg:flex">Default slot</div>
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with icon correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button><span class="iconify i-lucide:house shrink-0 size-5 self-center me-1.5" aria-hidden="true" data-slot="icon"></span>
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate"></h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with leading slot correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>Leading slot<h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate"></h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with left slot correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>Left slot</div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with right slot correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate"></h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">Right slot
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with title correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate">Dashboard</h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with title slot correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate">Title slot</h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with toggle correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate"></h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with toggle slot correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0">Toggle slot
+      <!--v-if-->
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate"></h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with toggleSide correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0">
+      <!--v-if-->
+      <!--v-if-->
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate"></h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with trailing slot correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate"></h1>Trailing slot
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders with ui correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center min-w-0 gap-3"><button type="button" aria-label="Open sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate"></h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders without toggle correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <!---->
+  <div data-slot="root" class="h-(--ui-header-height) shrink-0 flex items-center justify-between border-b border-default px-4 sm:px-6 gap-1.5">
+    <div data-slot="left" class="flex items-center gap-1.5 min-w-0">
+      <!--v-if-->
+      <!--v-if-->
+      <h1 data-slot="title" class="flex items-center gap-1.5 font-semibold text-highlighted truncate"></h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="flex items-center shrink-0 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;

@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ChatPalette > renders with as correctly 1`] = `
+"<section data-slot="root" class="relative flex-1 flex flex-col min-h-0 min-w-0">
+  <div data-slot="content" class="overflow-y-auto flex-1 flex flex-col py-3"></div>
+  <!--v-if-->
+</section>"
+`;
+
+exports[`ChatPalette > renders with class correctly 1`] = `
+"<div data-slot="root" class="flex-1 flex flex-col min-h-0 min-w-0 absolute">
+  <div data-slot="content" class="overflow-y-auto flex-1 flex flex-col py-3"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ChatPalette > renders with default slot correctly 1`] = `
+"<div data-slot="root" class="relative flex-1 flex flex-col min-h-0 min-w-0">
+  <div data-slot="content" class="overflow-y-auto flex-1 flex flex-col py-3">Default slot</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ChatPalette > renders with prompt slot correctly 1`] = `
+"<div data-slot="root" class="relative flex-1 flex flex-col min-h-0 min-w-0">
+  <div data-slot="content" class="overflow-y-auto flex-1 flex flex-col py-3"></div>Prompt slot
+</div>"
+`;
+
+exports[`ChatPalette > renders with ui correctly 1`] = `
+"<div data-slot="root" class="relative flex-1 flex flex-col min-h-0 min-w-0">
+  <div data-slot="content" class="overflow-y-auto flex-1 flex flex-col py-3"></div>
+  <!--v-if-->
+</div>"
+`;

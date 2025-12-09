@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { MaybeRefOrGetter } from '@vueuse/shared'
+import type { MaybeRefOrGetter } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/color-picker'
 import type { HSLObject } from 'colortranslator'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type ColorPicker = ComponentConfig<typeof theme, AppConfig, 'colorPicker'>
 
@@ -82,6 +82,7 @@ const props = withDefaults(defineProps<ColorPickerProps>(), {
   throttle: 50,
   defaultValue: '#FFFFFF'
 })
+
 const modelValue = defineModel<string>(undefined)
 
 const appConfig = useAppConfig() as ColorPicker['AppConfig']
@@ -262,16 +263,18 @@ const trackThumbStyle = computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })" :data-disabled="disabled ? true : undefined">
-    <div :class="ui.picker({ class: props.ui?.picker })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" :data-disabled="disabled ? true : undefined">
+    <div data-slot="picker" :class="ui.picker({ class: props.ui?.picker })">
       <div
         ref="selectorRef"
+        data-slot="selector"
         :class="ui.selector({ class: props.ui?.selector })"
         :style="selectorStyle"
       >
-        <div :class="ui.selectorBackground({ class: props.ui?.selectorBackground })" data-color-picker-background>
+        <div data-slot="selectorBackground" :class="ui.selectorBackground({ class: props.ui?.selectorBackground })" data-color-picker-background>
           <div
             ref="selectorThumbRef"
+            data-slot="selectorThumb"
             :class="ui.selectorThumb({ class: props.ui?.selectorThumb })"
             :style="selectorThumbStyle"
             :data-disabled="disabled ? true : undefined"
@@ -280,11 +283,13 @@ const trackThumbStyle = computed(() => ({
       </div>
       <div
         ref="trackRef"
+        data-slot="track"
         :class="ui.track({ class: props.ui?.track })"
         data-color-picker-track
       >
         <div
           ref="trackThumbRef"
+          data-slot="trackThumb"
           :class="ui.trackThumb({ class: props.ui?.trackThumb })"
           :style="trackThumbStyle"
           :data-disabled="disabled ? true : undefined"

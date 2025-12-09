@@ -1,0 +1,122 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ChatPrompt > renders with as correctly 1`] = `
+"<section data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur bg-default/75 ring ring-default">
+  <!--v-if-->
+  <div data-slot="root" class="relative inline-flex items-start"><textarea rows="1" placeholder="Type your message here…" data-slot="body" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 gap-1.5 text-highlighted bg-transparent resize-none text-base/5" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</section>"
+`;
+
+exports[`ChatPrompt > renders with class correctly 1`] = `
+"<form data-slot="root" class="relative flex flex-col items-stretch gap-2 w-full rounded-lg backdrop-blur bg-default/75 ring ring-default p-5">
+  <!--v-if-->
+  <div data-slot="root" class="relative inline-flex items-start"><textarea rows="1" placeholder="Type your message here…" data-slot="body" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 gap-1.5 text-highlighted bg-transparent resize-none text-base/5" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</form>"
+`;
+
+exports[`ChatPrompt > renders with error correctly 1`] = `
+"<form data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur bg-default/75 ring ring-default">
+  <!--v-if-->
+  <div data-slot="root" class="relative inline-flex items-start"><textarea rows="1" placeholder="Type your message here…" data-slot="body" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 gap-1.5 text-highlighted bg-transparent resize-none text-base/5" disabled="" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</form>"
+`;
+
+exports[`ChatPrompt > renders with footer slot correctly 1`] = `
+"<form data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur bg-default/75 ring ring-default">
+  <!--v-if-->
+  <div data-slot="root" class="relative inline-flex items-start"><textarea rows="1" placeholder="Type your message here…" data-slot="body" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 gap-1.5 text-highlighted bg-transparent resize-none text-base/5" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div data-slot="footer" class="flex items-center justify-between gap-1.5">Footer slot</div>
+</form>"
+`;
+
+exports[`ChatPrompt > renders with header slot correctly 1`] = `
+"<form data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur bg-default/75 ring ring-default">
+  <div data-slot="header" class="flex items-center gap-1.5">Header slot</div>
+  <div data-slot="root" class="relative inline-flex items-start"><textarea rows="1" placeholder="Type your message here…" data-slot="body" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 gap-1.5 text-highlighted bg-transparent resize-none text-base/5" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</form>"
+`;
+
+exports[`ChatPrompt > renders with placeholder correctly 1`] = `
+"<form data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur bg-default/75 ring ring-default">
+  <!--v-if-->
+  <div data-slot="root" class="relative inline-flex items-start"><textarea rows="1" placeholder="Placeholder" data-slot="body" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 gap-1.5 text-highlighted bg-transparent resize-none text-base/5" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</form>"
+`;
+
+exports[`ChatPrompt > renders with ui correctly 1`] = `
+"<form data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur bg-default/75 ring ring-default">
+  <!--v-if-->
+  <div data-slot="root" class="relative inline-flex items-start"><textarea rows="1" placeholder="Type your message here…" data-slot="body" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 gap-1.5 text-highlighted bg-transparent resize-none text-base/5" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</form>"
+`;
+
+exports[`ChatPrompt > renders with variant naked correctly 1`] = `
+"<form data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur">
+  <!--v-if-->
+  <div data-slot="root" class="relative inline-flex items-start"><textarea rows="1" placeholder="Type your message here…" data-slot="body" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 gap-1.5 text-highlighted bg-transparent resize-none text-base/5" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</form>"
+`;
+
+exports[`ChatPrompt > renders with variant outline correctly 1`] = `
+"<form data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur bg-default/75 ring ring-default">
+  <!--v-if-->
+  <div data-slot="root" class="relative inline-flex items-start"><textarea rows="1" placeholder="Type your message here…" data-slot="body" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 gap-1.5 text-highlighted bg-transparent resize-none text-base/5" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</form>"
+`;
+
+exports[`ChatPrompt > renders with variant soft correctly 1`] = `
+"<form data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur bg-elevated/50">
+  <!--v-if-->
+  <div data-slot="root" class="relative inline-flex items-start"><textarea rows="1" placeholder="Type your message here…" data-slot="body" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 gap-1.5 text-highlighted bg-transparent resize-none text-base/5" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</form>"
+`;
+
+exports[`ChatPrompt > renders with variant subtle correctly 1`] = `
+"<form data-slot="root" class="relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur bg-elevated/50 ring ring-default">
+  <!--v-if-->
+  <div data-slot="root" class="relative inline-flex items-start"><textarea rows="1" placeholder="Type your message here…" data-slot="body" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 gap-1.5 text-highlighted bg-transparent resize-none text-base/5" value=""></textarea>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</form>"
+`;

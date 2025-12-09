@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ChipProps } from '@nuxt/ui'
 import { camelCase } from 'scule'
+import { hash } from 'ohash'
 import { useElementSize } from '@vueuse/core'
 import { get, set } from '#ui/utils'
 
@@ -58,9 +59,15 @@ const props = withDefaults(defineProps<{
    * Whether to add overflow-hidden to wrapper
    */
   overflowHidden?: boolean
+  /**
+   * Whether to add background-elevated to wrapper
+   */
+  elevated?: boolean
+  lang?: string
 }>(), {
   preview: true,
-  source: true
+  source: true,
+  lang: 'vue'
 })
 
 const slots = defineSlots<{
@@ -87,7 +94,7 @@ const code = computed(() => {
 `
   }
 
-  code += `\`\`\`vue ${props.preview ? '' : ` [${data.pascalName}.vue]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
+  code += `\`\`\`${props.lang} ${props.preview ? '' : ` [${data.pascalName}.${props.lang}]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
 ${data?.code ?? ''}
 \`\`\``
 
@@ -99,7 +106,7 @@ ${data?.code ?? ''}
   return code
 })
 
-const { data: ast } = await useAsyncData(`component-example-${camelName}`, async () => {
+const { data: ast } = await useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
   if (!props.prettier) {
     return parseMarkdown(code.value)
   }
@@ -148,7 +155,7 @@ const urlSearchParams = computed(() => {
 </script>
 
 <template>
-  <div ref="el" class="my-5">
+  <div ref="el" class="my-5" :style="{ '--ui-header-height': '4rem' }">
     <template v-if="preview">
       <div class="border border-muted relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
         <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-muted">
@@ -178,7 +185,7 @@ const urlSearchParams = computed(() => {
               class="rounded-sm rounded-l-none min-w-12"
               :multiple="option.multiple"
               :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
-              :ui="{ itemLeadingChip: 'size-2' }"
+              :ui="{ itemLeadingChip: 'w-2' }"
               @update:model-value="set(optionsValues, option.name, $event)"
             >
               <template v-if="option.name.toLowerCase().endsWith('color')" #leading="{ modelValue, ui }">
@@ -207,9 +214,9 @@ const urlSearchParams = computed(() => {
           v-bind="typeof iframe === 'object' ? iframe : {}"
           :src="`/examples/${name}?${urlSearchParams}`"
           class="relative w-full"
-          :class="[props.class, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
+          :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
         />
-        <div v-else class="flex justify-center p-4" :class="props.class">
+        <div v-else class="flex justify-center p-4" :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }]">
           <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
         </div>
       </div>

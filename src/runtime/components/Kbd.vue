@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/kbd'
 import type { KbdKey } from '../composables/useKbd'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Kbd = ComponentConfig<typeof theme, AppConfig, 'kbd'>
 

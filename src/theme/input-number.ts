@@ -1,6 +1,6 @@
 import type { ModuleOptions } from '../module'
 import inputTheme from './input'
-import { buttonGroupVariantWithRoot } from './button-group'
+import { fieldGroupVariantWithRoot } from './field-group'
 
 export default (options: Required<ModuleOptions>) => {
   const input = inputTheme(options)
@@ -13,7 +13,7 @@ export default (options: Required<ModuleOptions>) => {
       decrement: 'absolute flex items-center'
     },
     variants: {
-      ...buttonGroupVariantWithRoot,
+      ...fieldGroupVariantWithRoot,
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
         neutral: ''
@@ -47,6 +47,12 @@ export default (options: Required<ModuleOptions>) => {
       },
       highlight: {
         true: ''
+      },
+      increment: {
+        false: ''
+      },
+      decrement: {
+        false: ''
       }
     },
     compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
@@ -67,42 +73,46 @@ export default (options: Required<ModuleOptions>) => {
       class: 'ring ring-inset ring-inverted'
     }, {
       orientation: 'horizontal',
+      decrement: false,
+      class: 'text-start'
+    }, {
+      decrement: true,
       size: 'xs',
-      class: 'px-7'
+      class: 'ps-7'
     }, {
-      orientation: 'horizontal',
+      decrement: true,
       size: 'sm',
-      class: 'px-8'
+      class: 'ps-8'
     }, {
-      orientation: 'horizontal',
+      decrement: true,
       size: 'md',
-      class: 'px-9'
+      class: 'ps-9'
     }, {
-      orientation: 'horizontal',
+      decrement: true,
       size: 'lg',
-      class: 'px-10'
+      class: 'ps-10'
     }, {
-      orientation: 'horizontal',
+      decrement: true,
       size: 'xl',
-      class: 'px-11'
+      class: 'ps-11'
     }, {
-      orientation: 'vertical',
+      increment: true,
       size: 'xs',
       class: 'pe-7'
     }, {
-      orientation: 'vertical',
+      increment: true,
       size: 'sm',
       class: 'pe-8'
     }, {
-      orientation: 'vertical',
+      increment: true,
       size: 'md',
       class: 'pe-9'
     }, {
-      orientation: 'vertical',
+      increment: true,
       size: 'lg',
       class: 'pe-10'
     }, {
-      orientation: 'vertical',
+      increment: true,
       size: 'xl',
       class: 'pe-11'
     }],

@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageBody > renders with as correctly 1`] = `"<section class="mt-8 pb-24 space-y-12"></section>"`;
+
+exports[`PageBody > renders with class correctly 1`] = `"<div class="pb-24 space-y-12 mt-12"></div>"`;
+
+exports[`PageBody > renders with default slot correctly 1`] = `"<div class="mt-8 pb-24 space-y-12">Default slot</div>"`;

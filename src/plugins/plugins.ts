@@ -1,13 +1,11 @@
+import MagicString from 'magic-string'
+import { genSafeVariableName } from 'knitwork'
+import { resolvePathSync } from 'mlly'
 import { join } from 'pathe'
 import { globSync } from 'tinyglobby'
-import { genSafeVariableName } from 'knitwork'
-import MagicString from 'magic-string'
-import { resolvePathSync } from 'mlly'
-
+import type { UnpluginOptions } from 'unplugin'
 import { runtimeDir } from '../unplugin'
 import type { NuxtUIOptions } from '../unplugin'
-
-import type { UnpluginOptions } from 'unplugin'
 
 /**
  * This plugin provides the necessary transforms to allow loading the

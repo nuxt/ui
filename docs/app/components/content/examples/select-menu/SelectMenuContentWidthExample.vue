@@ -4,8 +4,8 @@ const { data: users } = await useFetch('https://jsonplaceholder.typicode.com/use
   transform: (data: { id: number, name: string, email: string }[]) => {
     return data?.map(user => ({
       label: user.name,
-      value: String(user.id),
       email: user.email,
+      value: String(user.id),
       avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` }
     }))
   },

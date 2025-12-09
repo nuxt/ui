@@ -19,7 +19,7 @@ export const kbdKeysMap = {
   enter: '↵',
   delete: '⌦',
   backspace: '⌫',
-  escape: '⎋',
+  escape: 'Esc',
   tab: '⇥',
   capslock: '⇪',
   arrowup: '↑',
@@ -59,7 +59,7 @@ const _useKbd = () => {
       return kbdKeysSpecificMap[value as KbdKeySpecific]
     }
 
-    return kbdKeysMap[value as KbdKey] || value.toUpperCase()
+    return kbdKeysMap[value as KbdKey] || value
   }
 
   return {

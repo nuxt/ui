@@ -21,17 +21,13 @@ export default defineCommand({
       type: 'boolean',
       description: 'Create a primitive component.'
     },
-    pro: {
-      type: 'boolean',
-      description: 'Create a pro component.'
-    },
     prose: {
       type: 'boolean',
-      description: 'Create a prose component (with --pro).'
+      description: 'Create a prose component.'
     },
     content: {
       type: 'boolean',
-      description: 'Create a content component (with --pro).'
+      description: 'Create a content component.'
     },
     template: {
       type: 'string',
@@ -42,15 +38,6 @@ export default defineCommand({
     const name = args.name
     if (!name) {
       consola.error('`name` argument is missing!')
-      process.exit(1)
-    }
-
-    if (args.prose && !args.pro) {
-      consola.error('`--prose` flag can only be used with `--pro` flag!')
-      process.exit(1)
-    }
-    if (args.content && !args.pro) {
-      consola.error('`--content` flag can only be used with `--pro` flag!')
       process.exit(1)
     }
 

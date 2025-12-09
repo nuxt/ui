@@ -1,14 +1,14 @@
 import { computed, toValue } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
 import { useAppConfig } from '#imports'
-import type { AvatarProps } from '../types'
+import type { AvatarProps, IconProps } from '../types'
 
 export interface UseComponentIconsProps {
   /**
    * Display an icon based on the `leading` and `trailing` props.
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   /** Display an avatar on the left side. */
   avatar?: AvatarProps
   /** When `true`, the icon will be displayed on the left side. */
@@ -17,14 +17,14 @@ export interface UseComponentIconsProps {
    * Display an icon on the left side.
    * @IconifyIcon
    */
-  leadingIcon?: string
+  leadingIcon?: IconProps['name']
   /** When `true`, the icon will be displayed on the right side. */
   trailing?: boolean
   /**
    * Display an icon on the right side.
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   /** When `true`, the loading icon will be displayed. */
   loading?: boolean
   /**
@@ -32,7 +32,7 @@ export interface UseComponentIconsProps {
    * @defaultValue appConfig.ui.icons.loading
    * @IconifyIcon
    */
-  loadingIcon?: string
+  loadingIcon?: IconProps['name']
 }
 
 export function useComponentIcons(componentProps: MaybeRefOrGetter<UseComponentIconsProps>) {

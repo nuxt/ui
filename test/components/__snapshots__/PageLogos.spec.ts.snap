@@ -1,0 +1,70 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageLogos > renders with as correctly 1`] = `
+"<section data-slot="root" class="relative overflow-hidden">
+  <!--v-if-->
+  <div data-slot="logos" class="mt-10 flex items-center shrink-0 justify-around gap-(--gap) [--gap:--spacing(16)]">
+    <!--v-if-->
+  </div>
+</section>"
+`;
+
+exports[`PageLogos > renders with class correctly 1`] = `
+"<div data-slot="root" class="relative overflow-hidden text-xl">
+  <!--v-if-->
+  <div data-slot="logos" class="mt-10 flex items-center shrink-0 justify-around gap-(--gap) [--gap:--spacing(16)]">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`PageLogos > renders with default slot correctly 1`] = `
+"<div data-slot="root" class="relative overflow-hidden">
+  <!--v-if-->
+  <div data-slot="logos" class="mt-10 flex items-center shrink-0 justify-around gap-(--gap) [--gap:--spacing(16)]">Default slot</div>
+</div>"
+`;
+
+exports[`PageLogos > renders with default slot correctly 2`] = `
+"<div data-slot="root" class="relative overflow-hidden">
+  <!--v-if-->
+  <div data-slot="logos" class="mt-10 flex items-center shrink-0 justify-around gap-(--gap) [--gap:--spacing(16)]">Default slot</div>
+</div>"
+`;
+
+exports[`PageLogos > renders with items correctly 1`] = `
+"<div data-slot="root" class="relative overflow-hidden">
+  <!--v-if-->
+  <div data-slot="logos" class="mt-10 flex items-center shrink-0 justify-around gap-(--gap) [--gap:--spacing(16)]"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated text-base size-10 shrink-0"><img src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated text-base size-10 shrink-0"><img src="https://avatars.githubusercontent.com/u/71938701?v=4" alt="Hugo Richard" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span></div>
+</div>"
+`;
+
+exports[`PageLogos > renders with marquee correctly 1`] = `
+"<div data-slot="root" class="relative overflow-hidden">
+  <!--v-if-->
+  <div data-orientation="horizontal" data-slot="logos" class="group relative flex items-center overflow-hidden gap-(--gap) [--gap:--spacing(16)] [--duration:20s] before:absolute before:pointer-events-none before:content-[&quot;&quot;] before:z-2 before:from-default before:to-transparent after:absolute after:pointer-events-none after:content-[&quot;&quot;] after:z-2 after:from-default after:to-transparent flex-row before:inset-y-0 before:left-0 before:h-full before:w-1/3 before:bg-gradient-to-r after:inset-y-0 after:right-0 after:h-full after:w-1/3 after:bg-gradient-to-l backface-hidden mt-10">
+    <div data-slot="content" class="flex items-center shrink-0 justify-around gap-(--gap) min-w-max w-full flex-row animate-[marquee_var(--duration)_linear_infinite] rtl:animate-[marquee-rtl_var(--duration)_linear_infinite] backface-hidden"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated text-base size-10 shrink-0"><img src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated text-base size-10 shrink-0"><img src="https://avatars.githubusercontent.com/u/71938701?v=4" alt="Hugo Richard" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span></div>
+    <div data-slot="content" class="flex items-center shrink-0 justify-around gap-(--gap) min-w-max w-full flex-row animate-[marquee_var(--duration)_linear_infinite] rtl:animate-[marquee-rtl_var(--duration)_linear_infinite] backface-hidden"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated text-base size-10 shrink-0"><img src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated text-base size-10 shrink-0"><img src="https://avatars.githubusercontent.com/u/71938701?v=4" alt="Hugo Richard" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span></div>
+    <div data-slot="content" class="flex items-center shrink-0 justify-around gap-(--gap) min-w-max w-full flex-row animate-[marquee_var(--duration)_linear_infinite] rtl:animate-[marquee-rtl_var(--duration)_linear_infinite] backface-hidden"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated text-base size-10 shrink-0"><img src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated text-base size-10 shrink-0"><img src="https://avatars.githubusercontent.com/u/71938701?v=4" alt="Hugo Richard" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span></div>
+    <div data-slot="content" class="flex items-center shrink-0 justify-around gap-(--gap) min-w-max w-full flex-row animate-[marquee_var(--duration)_linear_infinite] rtl:animate-[marquee-rtl_var(--duration)_linear_infinite] backface-hidden"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated text-base size-10 shrink-0"><img src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated text-base size-10 shrink-0"><img src="https://avatars.githubusercontent.com/u/71938701?v=4" alt="Hugo Richard" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span></div>
+  </div>
+</div>"
+`;
+
+exports[`PageLogos > renders with title correctly 1`] = `
+"<div data-slot="root" class="relative overflow-hidden">
+  <h2 data-slot="title" class="text-lg text-center font-semibold text-highlighted">Title</h2>
+  <div data-slot="logos" class="mt-10 flex items-center shrink-0 justify-around gap-(--gap) [--gap:--spacing(16)]">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`PageLogos > renders with ui correctly 1`] = `
+"<div data-slot="root" class="relative overflow-hidden">
+  <!--v-if-->
+  <div data-slot="logos" class="mt-10 flex items-center shrink-0 justify-around gap-(--gap) [--gap:--spacing(16)]">
+    <!--v-if-->
+  </div>
+</div>"
+`;

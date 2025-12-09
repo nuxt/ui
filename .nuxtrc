@@ -1,1 +1,2 @@
 experimental.normalizeComponentNames=false
+modules[]=@nuxt/content

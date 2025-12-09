@@ -11,7 +11,8 @@ const items = [
     icon: 'i-lucide-ellipsis',
     children: [
       {
-        label: 'Documentation'
+        label: 'Documentation',
+        to: '/docs'
       },
       {
         label: 'Themes'
@@ -23,11 +24,11 @@ const items = [
   },
   {
     label: 'Components',
-    to: '/components'
+    to: '/docs/components'
   },
   {
     label: 'Breadcrumb',
-    to: '/components/breadcrumb'
+    to: '/docs/components/breadcrumb'
   }
 ] satisfies BreadcrumbItem[]
 </script>

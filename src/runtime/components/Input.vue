@@ -1,14 +1,18 @@
 <script lang="ts">
-import type { InputHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
-import type { AcceptableValue, ComponentConfig } from '../types/utils'
+import type { InputHTMLAttributes } from '../types/html'
+import type { ModelModifiers } from '../types/input'
+import type { AcceptableValue } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
 
-export interface InputProps<T extends AcceptableValue = AcceptableValue> extends UseComponentIconsProps {
+export type InputValue = AcceptableValue
+
+export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'type' | 'placeholder' | 'required' | 'autocomplete' | 'autofocus' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -40,36 +44,30 @@ export interface InputProps<T extends AcceptableValue = AcceptableValue> extends
   highlight?: boolean
   modelValue?: T
   defaultValue?: T
-  modelModifiers?: {
-    string?: boolean
-    number?: boolean
-    trim?: boolean
-    lazy?: boolean
-    nullify?: boolean
-  }
+  modelModifiers?: ModelModifiers<T>
   class?: any
   ui?: Input['slots']
 }
 
-export interface InputEmits<T extends AcceptableValue = AcceptableValue> {
-  'update:modelValue': [payload: T]
+export interface InputEmits<T extends InputValue = InputValue> {
+  'update:modelValue': [value: T]
   'blur': [event: FocusEvent]
   'change': [event: Event]
 }
 
 export interface InputSlots {
-  leading(props?: {}): any
-  default(props?: {}): any
-  trailing(props?: {}): any
+  leading(props: { ui: Input['ui'] }): any
+  default(props: { ui: Input['ui'] }): any
+  trailing(props: { ui: Input['ui'] }): any
 }
 </script>
 
-<script setup lang="ts" generic="T extends AcceptableValue">
-import { ref, computed, onMounted } from 'vue'
+<script setup lang="ts" generic="T extends InputValue">
+import { useTemplateRef, computed, onMounted } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useButtonGroup } from '../composables/useButtonGroup'
+import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
@@ -92,10 +90,10 @@ const modelValue = useVModel<InputProps<T>, 'modelValue', 'update:modelValue'>(p
 const appConfig = useAppConfig() as Input['AppConfig']
 
 const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps<T>>(props, { deferInputValidation: true })
-const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps<T>>(props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps<T>>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
+const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })({
   type: props.type as Input['variants']['type'],
@@ -106,13 +104,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {})
   highlight: highlight.value,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  buttonGroup: orientation.value
+  fieldGroup: orientation.value
 }))
 
-const inputRef = ref<HTMLInputElement | null>(null)
+const inputRef = useTemplateRef('inputRef')
 
 // Custom function to handle the v-model properties
-function updateInput(value: string | null) {
+function updateInput(value: string | null | undefined) {
   if (props.modelModifiers?.trim) {
     value = value?.trim() ?? null
   }
@@ -121,8 +119,12 @@ function updateInput(value: string | null) {
     value = looseToNumber(value)
   }
 
-  if (props.modelModifiers?.nullify) {
+  if (props.modelModifiers?.nullable) {
     value ||= null
+  }
+
+  if (props.modelModifiers?.optional) {
+    value ||= undefined
   }
 
   modelValue.value = value as T
@@ -174,7 +176,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <input
       :id="id"
       ref="inputRef"
@@ -182,6 +184,7 @@ defineExpose({
       :value="modelValue"
       :name="name"
       :placeholder="placeholder"
+      data-slot="base"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       :required="required"
@@ -193,18 +196,18 @@ defineExpose({
       @focus="emitFormFocus"
     >
 
-    <slot />
+    <slot :ui="ui" />
 
-    <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-      <slot name="leading">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+    <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+      <slot name="leading" :ui="ui">
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-      <slot name="trailing">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+      <slot name="trailing" :ui="ui">
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </Primitive>

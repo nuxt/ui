@@ -1,21 +1,22 @@
 <script lang="ts">
-import type { ButtonHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { RouterLinkProps, RouteLocationRaw } from 'vue-router'
+import type { RouterLinkProps } from 'vue-router'
 import theme from '#build/ui/link'
-import type { ComponentConfig } from '../../types/utils'
+import type { ButtonHTMLAttributes, AnchorHTMLAttributes } from '../../types/html'
+import type { ComponentConfig } from '../../types/tv'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
 
-interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
+export interface LinkProps extends Partial<Omit<RouterLinkProps, 'custom'>>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
   /**
-   * Route Location the link should navigate to when clicked on.
+   * The element or component this component should render as when not a link.
+   * @defaultValue 'button'
    */
-  to?: RouteLocationRaw // need to manually type to avoid breaking typedPages
+  as?: any
   /**
    * An alias for `to`. If used with `to`, `href` will be ignored
    */
-  href?: NuxtLinkProps['to']
+  href?: LinkProps['to']
   /**
    * Forces the link to be considered as external (true) or internal (false). This is helpful to handle edge-cases
    */
@@ -32,33 +33,6 @@ interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
    * If set to true, no rel attribute will be added to the link
    */
   noRel?: boolean
-  /**
-   * A class to apply to links that have been prefetched.
-   */
-  prefetchedClass?: string
-  /**
-   * When enabled will prefetch middleware, layouts and payloads of links in the viewport.
-   */
-  prefetch?: boolean
-  /**
-   * Allows controlling when to prefetch links. By default, prefetch is triggered only on visibility.
-   */
-  prefetchOn?: 'visibility' | 'interaction' | Partial<{
-    visibility: boolean
-    interaction: boolean
-  }>
-  /**
-   * Escape hatch to disable `prefetch` attribute.
-   */
-  noPrefetch?: boolean
-}
-
-export interface LinkProps extends NuxtLinkProps {
-  /**
-   * The element or component this component should render as when not a link.
-   * @defaultValue 'button'
-   */
-  as?: any
   /**
    * The type of the button when not a link.
    * @defaultValue 'button'
@@ -96,6 +70,7 @@ import { hasProtocol } from 'ufo'
 import { useRoute, RouterLink } from 'vue-router'
 import { useAppConfig } from '#imports'
 import { tv } from '../../utils/tv'
+import { mergeClasses } from '../../utils'
 import { isPartiallyEqual } from '../../utils/link'
 import ULinkBase from '../../components/LinkBase.vue'
 
@@ -105,9 +80,7 @@ const props = withDefaults(defineProps<LinkProps>(), {
   as: 'button',
   type: 'button',
   ariaCurrentValue: 'page',
-  active: undefined,
-  activeClass: '',
-  inactiveClass: ''
+  active: undefined
 })
 defineSlots<LinkSlots>()
 
@@ -115,15 +88,15 @@ const route = useRoute()
 
 const appConfig = useAppConfig() as Link['AppConfig']
 
-const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class'))
+const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'noRel'))
 
 const ui = computed(() => tv({
   extend: tv(theme),
   ...defu({
     variants: {
       active: {
-        true: props.activeClass,
-        false: props.inactiveClass
+        true: mergeClasses(appConfig.ui?.link?.variants?.active?.true, props.activeClass),
+        false: mergeClasses(appConfig.ui?.link?.variants?.active?.false, props.inactiveClass)
       }
     }
   }, appConfig.ui?.link || {})
@@ -141,6 +114,27 @@ const isExternal = computed(() => {
   }
 
   return typeof to.value === 'string' && hasProtocol(to.value, { acceptRelative: true })
+})
+
+const hasTarget = computed(() => !!props.target && props.target !== '_self')
+
+const rel = computed(() => {
+  // If noRel is explicitly set, return null
+  if (props.noRel) {
+    return null
+  }
+
+  // If rel is explicitly set, use it
+  if (props.rel !== undefined) {
+    return props.rel || null
+  }
+
+  // Default to "noopener noreferrer" for external links or links with target
+  if (isExternal.value || hasTarget.value) {
+    return 'noopener noreferrer'
+  }
+
+  return null
 })
 
 function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
@@ -184,6 +178,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
 }
 </script>
 
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
   <template v-if="!isExternal && !!to">
     <RouterLink v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive }" v-bind="routerLinkProps" :to="to" custom>
@@ -197,6 +192,9 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
             disabled,
             href,
             navigate,
+            rel,
+            target,
+            isExternal,
             active: isLinkActive({ route: linkRoute, isActive, isExactActive })
           }"
         />
@@ -210,7 +208,10 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           type,
           disabled,
           href,
-          navigate
+          navigate,
+          rel,
+          target,
+          isExternal
         }"
         :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
       >
@@ -228,7 +229,8 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           type,
           disabled,
           href: to,
-          target: isExternal ? '_blank' : undefined,
+          rel,
+          target,
           active,
           isExternal
         }"
@@ -242,7 +244,8 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         type,
         disabled,
         href: (to as string),
-        target: isExternal ? '_blank' : undefined,
+        rel,
+        target,
         isExternal
       }"
       :class="resolveLinkClass()"

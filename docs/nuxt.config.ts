@@ -1,21 +1,15 @@
 import { createResolver } from '@nuxt/kit'
 import pkg from '../package.json'
-import yaml from '@rollup/plugin-yaml'
 
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  extends: [
-    process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#v3', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
-  ],
-
   modules: [
     '../src/module',
-    '@nuxt/ui-pro',
     '@nuxt/content',
     '@nuxt/image',
-    '@nuxthub/core',
     '@nuxtjs/plausible',
+    '@nuxtjs/mcp-toolkit',
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-og-image',
@@ -43,17 +37,6 @@ export default defineNuxtConfig({
   },
 
   app: {
-    head: {
-      // LemonSqueezy affiliate
-      script: [{
-        key: 'lmsqueezy-config',
-        innerHTML: 'window.lemonSqueezyAffiliateConfig = { store: "nuxt" };'
-      }, {
-        key: 'lmsqueezy',
-        src: 'https://lmsqueezy.com/affiliate.js',
-        defer: true
-      }]
-    },
     rootAttrs: {
       'data-vaul-drawer-wrapper': '',
       'class': 'bg-default'
@@ -66,7 +49,7 @@ export default defineNuxtConfig({
     build: {
       markdown: {
         highlight: {
-          langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+          langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc', 'blade', 'edge']
         }
       }
     }
@@ -85,12 +68,43 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/getting-started/installation': { redirect: '/getting-started/installation/nuxt', prerender: false },
-    '/getting-started/installation/pro': { redirect: '/getting-started/installation/pro/nuxt', prerender: false },
-    '/getting-started/icons': { redirect: '/getting-started/icons/nuxt', prerender: false },
-    '/getting-started/color-mode': { redirect: '/getting-started/color-mode/nuxt', prerender: false },
-    '/getting-started/i18n': { redirect: '/getting-started/i18n/nuxt', prerender: false },
-    '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
+    // v4 redirects - moved to `docs/`
+    '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
+    '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
+    '/composables/**': { redirect: { to: '/docs/composables/**', statusCode: 301 }, prerender: false },
+    // v4 redirects - default root pages
+    '/docs': { redirect: '/docs/getting-started', prerender: false },
+    '/docs/getting-started/migration': { redirect: '/docs/getting-started/migration/v4', prerender: false },
+    '/docs/getting-started/theme': { redirect: '/docs/getting-started/theme/design-system', prerender: false },
+    '/docs/getting-started/integrations': { redirect: '/docs/getting-started/integrations/icons', prerender: false },
+    '/docs/getting-started/ai': { redirect: '/docs/getting-started/ai/mcp', prerender: false },
+    '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
+    // v4 redirects - default shadow pages
+    '/docs/getting-started/installation': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
+    '/docs/getting-started/integrations/icons': { redirect: '/docs/getting-started/integrations/icons/nuxt', prerender: false },
+    '/docs/getting-started/integrations/color-mode': { redirect: '/docs/getting-started/integrations/color-mode/nuxt', prerender: false },
+    '/docs/getting-started/integrations/i18n': { redirect: '/docs/getting-started/integrations/i18n/nuxt', prerender: false },
+    // v4 redirects - renamed pages
+    '/docs/getting-started/typography': { redirect: { to: '/docs/typography', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/icons/**': { redirect: { to: '/docs/getting-started/integrations/icons/**', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/fonts': { redirect: { to: '/docs/getting-started/integrations/fonts', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/color-mode/**': { redirect: { to: '/docs/getting-started/integrations/color-mode/**', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/i18n/**': { redirect: { to: '/docs/getting-started/integrations/i18n/**', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/content': { redirect: { to: '/docs/getting-started/integrations/content', statusCode: 301 }, prerender: false },
+    // v4 redirects - renamed components
+    '/docs/components/button-group': { redirect: { to: '/docs/components/field-group', statusCode: 301 }, prerender: false },
+    '/docs/components/page-accordion': { redirect: { to: '/docs/components/accordion', statusCode: 301 }, prerender: false },
+    '/docs/components/page-marquee': { redirect: { to: '/docs/components/marquee', statusCode: 301 }, prerender: false },
+    // v4 redirects - removed pro pages
+    '/pro': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
+    '/pro/pricing': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
+    '/pro/purchase': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
+    '/pro/activate': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
+    '/pro/templates': { redirect: { to: '/templates', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/license': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/installation/pro': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
+    '/docs/getting-started/installation/pro/nuxt': { redirect: { to: '/docs/getting-started/installation/nuxt', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/installation/pro/vue': { redirect: { to: '/docs/getting-started/installation/vue', statusCode: 301 }, prerender: false },
     // v2 redirects
     '/getting-started/theming': { redirect: { to: '/getting-started/theme', statusCode: 301 }, prerender: false },
     '/pro/getting-started/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
@@ -113,7 +127,7 @@ export default defineNuxtConfig({
     '/pro/components/landing-cta': { redirect: { to: '/components/page-cta', statusCode: 301 }, prerender: false },
     '/pro/components/landing-card': { redirect: { to: '/components/page-card', statusCode: 301 }, prerender: false },
     '/pro/components/landing-section': { redirect: { to: '/components/page-section', statusCode: 301 }, prerender: false },
-    '/pro/components/landing-faq': { redirect: { to: '/components/page-accordion', statusCode: 301 }, prerender: false },
+    '/pro/components/landing-faq': { redirect: { to: '/components/accordion', statusCode: 301 }, prerender: false },
     '/pro/components/landing-grid': { redirect: { to: '/components/page-grid', statusCode: 301 }, prerender: false },
     '/pro/components/landing-logos': { redirect: { to: '/components/page-logos', statusCode: 301 }, prerender: false },
     '/pro/components/landing-testimonial': { redirect: { to: '/components/page-card#as-a-testimonial', statusCode: 301 }, prerender: false },
@@ -139,8 +153,16 @@ export default defineNuxtConfig({
     '/pro/components/pricing-grid': { redirect: { to: '/components/pricing-plans', statusCode: 301 }, prerender: false },
     '/pro/components/pricing-switch': { redirect: { to: '/components/switch', statusCode: 301 }, prerender: false },
     '/pro/components/**': { redirect: { to: '/components/**', statusCode: 301 }, prerender: false },
-    '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false },
-    '/releases': { redirect: 'https://github.com/nuxt/ui/releases', prerender: false }
+    '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false }
+  },
+
+  experimental: {
+    asyncContext: true,
+    defaults: {
+      nuxtLink: {
+        externalRelAttribute: 'noopener'
+      }
+    }
   },
 
   compatibilityDate: '2024-07-09',
@@ -148,49 +170,74 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/getting-started',
+        '/docs/getting-started',
         '/api/countries.json',
         '/api/locales.json',
-        // '/api/releases.json',
-        // '/api/pulls.json'
-        '/404.html'
+        '/api/module.json'
+        // '/api/github/pulls.json',
+        // '/api/github/releases.json'
       ],
-      crawlLinks: true,
-      autoSubfolderIndex: false
-    },
-    cloudflare: {
-      pages: {
-        routes: {
-          exclude: [
-            '/components/*',
-            '/getting-started/*',
-            '/composables/*'
-          ]
-        }
-      }
+      crawlLinks: true
     }
   },
 
-  hub: {
-    ai: true
-  },
-
   vite: {
-    plugins: [
-      yaml()
-    ],
-    server: {
-      fs: {
-        allow: process.env.NUXT_UI_PRO_PATH ? [resolve(process.env.NUXT_UI_PRO_PATH)] : undefined
-      }
-    },
     optimizeDeps: {
       // prevents reloading page when navigating between components
-      include: ['@internationalized/date', '@vueuse/shared', '@vueuse/integrations/useFuse', '@tanstack/vue-table', 'reka-ui', 'reka-ui/namespaced', 'embla-carousel-vue', 'embla-carousel-autoplay', 'embla-carousel-auto-scroll', 'embla-carousel-auto-height', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-wheel-gestures', 'colortranslator', 'tailwindcss/colors', 'tailwind-variants', 'ufo', 'zod', 'vaul-vue', 'scule', 'motion-v', 'json5', 'ohash', 'shiki-transformer-color-highlight']
+      include: ['@ai-sdk/vue', '@internationalized/date', '@nuxt/content/utils', '@tanstack/vue-table', '@tiptap/extension-emoji', '@tiptap/extension-text-align', '@tiptap/core', '@tiptap/extension-horizontal-rule', '@tiptap/extension-image', '@tiptap/extension-mention', '@tiptap/extension-placeholder', '@tiptap/markdown', '@tiptap/starter-kit', '@tiptap/vue-3', '@floating-ui/dom', '@tiptap/extension-drag-handle-vue-3', '@tiptap/vue-3/menus', '@tiptap/suggestion', '@tiptap/pm/state', '@vercel/analytics/nuxt', '@vercel/speed-insights/nuxt', '@vue/devtools-core', '@vue/devtools-kit', '@vueuse/integrations/useFuse', '@vueuse/shared', 'ai', 'colortranslator', 'embla-carousel-auto-height', 'embla-carousel-auto-scroll', 'embla-carousel-autoplay', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-vue', 'embla-carousel-wheel-gestures', 'json5', 'motion-v', 'ohash', 'ohash/utils', 'prettier', 'prosemirror-state', 'reka-ui', 'reka-ui/namespaced', 'scule', 'shiki', 'shiki-stream/vue', 'shiki-transformer-color-highlight', 'shiki/engine-javascript.mjs', 'tailwind-variants', 'tailwindcss/colors', 'ufo', 'vaul-vue', 'zod']
     }
   },
 
   componentMeta: {
+    transformers: [(component, code) => {
+      // Simplify ui in slot prop types: `leading(props: { ui: Button['ui'] })` -> `leading(props: { ui: object })`
+      code = code.replace(/ui:[^}]+(?=\})/g, 'ui: object')
+
+      return { component, code }
+    }],
+    overrides: {
+      UEditor: {
+        props: {
+          modelValue: { name: 'modelValue', type: 'null | string | JSONContent | JSONContent[]' },
+          parseOptions: { name: 'parseOptions', type: 'ParseOptions' }
+        }
+      },
+      UEditorDragHandle: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      UEditorToolbar: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      UEditorSuggestionMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      UEditorMentionMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      UEditorEmojiMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      UCalendar: {
+        props: {
+          defaultValue: { name: 'defaultValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime | DateRange | DateValue[]' },
+          modelValue: { name: 'modelValue', type: 'null | CalendarDate | CalendarDateTime | ZonedDateTime | DateRange | DateValue[]' },
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' }
+        }
+      },
+      UInputDate: {
+        props: {
+          defaultValue: { name: 'defaultValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime | DateRange' },
+          modelValue: { name: 'modelValue', type: 'null | CalendarDate | CalendarDateTime | ZonedDateTime | DateRange' },
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' }
+        }
+      },
+      UInputTime: {
+        props: {
+          defaultValue: { name: 'defaultValue', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          modelValue: { name: 'modelValue', type: 'null | Time | CalendarDateTime | ZonedDateTime' },
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'Time | CalendarDateTime | ZonedDateTime' }
+        }
+      }
+    },
     exclude: [
       '@nuxt/content',
       '@nuxt/icon',
@@ -200,14 +247,13 @@ export default defineNuxtConfig({
       '@nuxtjs/plausible',
       'nuxt/dist',
       'nuxt-og-image',
-      resolve('./app/components'),
-      process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'app', 'components') : '.c12'
+      resolve('./app/components')
     ],
     metaFields: {
       type: false,
       props: true,
-      slots: true,
-      events: true,
+      slots: 'no-schema',
+      events: 'no-schema',
       exposed: false
     }
   },
@@ -237,36 +283,32 @@ export default defineNuxtConfig({
       title: 'Nuxt UI Full Documentation',
       description: 'This is the full documentation for Nuxt UI. It includes all the Markdown files written with the MDC syntax.'
     },
-    sections: [
-      {
-        title: 'Getting Started',
-        contentCollection: 'content',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
-        ]
-      },
-      {
-        title: 'Components',
-        contentCollection: 'content',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/components/%' }
-        ]
-      },
-      {
-        title: 'Composables',
-        contentCollection: 'content',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/composables/%' }
-        ]
-      }
-    ],
+    sections: [{
+      title: 'Getting Started',
+      contentCollection: 'docs',
+      contentFilters: [
+        { field: 'path', operator: 'LIKE', value: '/docs/getting-started%' }
+      ]
+    }, {
+      title: 'Components',
+      contentCollection: 'docs',
+      contentFilters: [
+        { field: 'path', operator: 'LIKE', value: '/docs/components/%' }
+      ]
+    }, {
+      title: 'Composables',
+      contentCollection: 'docs',
+      contentFilters: [
+        { field: 'path', operator: 'LIKE', value: '/docs/composables/%' }
+      ]
+    }],
     notes: [
       'The documentation excludes Nuxt UI v2 content.',
       'The content is automatically generated from the same source as the official documentation.'
     ]
   },
-
-  uiPro: {
-    license: 'oss'
+  mcp: {
+    name: 'Nuxt UI',
+    browserRedirect: '/docs/getting-started/ai/mcp'
   }
 })
