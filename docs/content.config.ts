@@ -71,6 +71,21 @@ export const collections = {
       links: z.array(Button)
     })
   }),
+  blog: defineCollection({
+    type: 'page',
+    source: 'blog/**/*',
+    schema: z.object({
+      image: z.string().optional(),
+      minRead: z.number().optional(),
+      authors: z.array(z.object({
+        name: z.string(),
+        avatar: Avatar,
+        to: z.string().optional()
+      })).optional(),
+      date: z.string(),
+      category: z.enum(['Release', 'Tutorial', 'Improvement'])
+    })
+  }),
   index: defineCollection({
     type: 'page',
     source: 'index.yml',
@@ -192,6 +207,11 @@ export const collections = {
   releases: defineCollection({
     type: 'page',
     source: 'releases.yml',
+    schema: Page
+  }),
+  blogIndex: defineCollection({
+    type: 'page',
+    source: 'blog.yml',
     schema: Page
   })
 }

@@ -1,13 +1,17 @@
 <script setup lang="ts">
-// @ts-expect-error - yaml import not typed
-import page from '.blog.yml'
+const { data: page } = await useAsyncData('blog-index', () =>
+  queryCollection('blogIndex').first()
+)
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
 
 const { data: posts } = await useAsyncData('blogs', () =>
   queryCollection('blog').order('date', 'DESC').all()
 )
 
-const title = page.seo?.title || page.title
-const description = page.seo?.description || page.description
+const title = page.value.seo?.title || page.value.title
+const description = page.value.seo?.description || page.value.description
 
 useSeoMeta({
   title,
@@ -95,7 +99,7 @@ const getCategoryIcon = (category: string) => {
 
 <template>
   <div v-if="page" class="relative grid grid-rows-[auto_auto_1fr] min-h-[calc(100vh-150px)]">
-    <UPageHero :links="page.links" :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }">
+    <UPageHero :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }">
       <LazyStarsBg />
 
       <div aria-hidden="true" class="absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
@@ -109,7 +113,7 @@ const getCategoryIcon = (category: string) => {
       </template>
     </UPageHero>
 
-    <UPageBody class="!my-0 !py-0 border-y border-default">
+    <UPageBody class="my-0! py-0! border-y border-default">
       <UContainer>
         <div class="border-x border-default px-4 sm:px-6 py-6 sm:py-8">
           <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8 sm:mb-6">

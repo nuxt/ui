@@ -6,6 +6,9 @@ export function useHeader() {
     to: '/docs',
     active: route.path.startsWith('/docs/')
   }, {
+    label: 'Blog',
+    to: '/blog'
+  }, {
     label: 'Figma',
     to: '/figma'
   }, {
@@ -42,6 +45,10 @@ export function useHeader() {
     icon: 'i-lucide-square-pilcrow',
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
+  }, {
+    label: 'Blog',
+    icon: 'i-lucide-pen-line',
+    to: '/blog'
   }, {
     label: 'Figma',
     icon: 'i-simple-icons-figma',

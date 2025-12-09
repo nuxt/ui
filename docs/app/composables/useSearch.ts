@@ -60,6 +60,11 @@ export function useSearch() {
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
   }, {
+    label: 'Blog',
+    description: 'Read the latest news, tutorials, and updates about Nuxt UI.',
+    icon: 'i-lucide-pen-line',
+    to: '/blog'
+  }, {
     label: 'Figma',
     description: 'Access the official Nuxt UI Figma design kit to streamline your design workflow.',
     icon: 'i-simple-icons-figma',

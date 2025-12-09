@@ -1,7 +1,0 @@
-seo:
-  title: Nuxt UI Blog
-  description: Read the latest news, tutorials, and updates about Nuxt UI.
-title: Nuxt [UI]{.text-primary} Blog
-navigation.title: Blog
-description: Read the latest news, tutorials, and updates about Nuxt UI.
-navigation.icon: i-lucide-newspaper
