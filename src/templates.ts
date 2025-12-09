@@ -110,31 +110,36 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
   writeThemeTemplate(theme)
 
-  function generateLayerSources() {
-    if (!nuxt) {
-      return ''
-    }
-
-    const layerSources: string[] = []
-
-    for (const layer of nuxt.options._layers || []) {
-      // Skip layers inside node_modules (dependencies)
-      if (layer.config.rootDir.includes('node_modules')) {
-        continue
-      }
-
-      const relativePath = relative(nuxt.options.buildDir, layer.config.rootDir)
-
-      layerSources.push(`@source "${relativePath}/**/*.{vue,ts,tsx,js,jsx,mjs,mts}";`)
-    }
-
-    return layerSources.join('\n')
-  }
-
   async function generateSources() {
-    let sources = ''
+    if (!nuxt) {
+      return '@source "./ui";'
+    }
 
-    if (!!nuxt && !!resolve && options.experimental?.componentDetection) {
+    const sources: string[] = []
+
+    // Add layer sources
+    for (const layer of nuxt.options._layers || []) {
+      const srcDir = layer.config.srcDir || layer.cwd
+      const relativePath = relative(nuxt.options.buildDir, srcDir)
+
+      sources.push(`@source ${JSON.stringify(`${relativePath}/**/*.{vue,ts,tsx,js,jsx,mjs,mts}`)};`)
+    }
+
+    // Add inline sources from Nuxt config (classes defined in config)
+    const inlineConfigs = [
+      nuxt.options.app?.rootAttrs?.class,
+      nuxt.options.app?.head?.htmlAttrs?.class,
+      nuxt.options.app?.head?.bodyAttrs?.class
+    ]
+
+    for (const value of inlineConfigs) {
+      if (value && typeof value === 'string') {
+        sources.push(`@source inline(${JSON.stringify(value)});`)
+      }
+    }
+
+    // Add theme sources (component detection or all)
+    if (resolve && options.experimental?.componentDetection) {
       const dirs = [...new Set([
         nuxt.options.rootDir,
         ...(nuxt.options._layers?.map(layer => layer.config.rootDir).filter(Boolean) || [])
@@ -161,10 +166,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
         previousDetectedComponents = detectedComponents
 
-        const sourcesList: string[] = []
-
         if (hasProse) {
-          sourcesList.push('@source "./ui/prose";')
+          sources.push('@source "./ui/prose";')
         }
 
         for (const component of detectedComponents) {
@@ -172,25 +175,24 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           const camelComponent = camelCase(component)
 
           if (hasContent && (themeContent as any)[camelComponent]) {
-            sourcesList.push(`@source "./ui/content/${kebabComponent}.ts";`)
+            sources.push(`@source "./ui/content/${kebabComponent}.ts";`)
           } else if ((theme as any)[camelComponent]) {
-            sourcesList.push(`@source "./ui/${kebabComponent}.ts";`)
+            sources.push(`@source "./ui/${kebabComponent}.ts";`)
           }
         }
-
-        sources = sourcesList.join('\n')
       } else {
         if (!previousDetectedComponents || previousDetectedComponents.size > 0) {
           logger.info('Nuxt UI detected no components in use, including all components')
         }
         previousDetectedComponents = new Set()
+
+        sources.push('@source "./ui";')
       }
+    } else {
+      sources.push('@source "./ui";')
     }
 
-    const layerSources = generateLayerSources()
-    const themeSources = sources || '@source "./ui";'
-
-    return [layerSources, themeSources].filter(Boolean).join('\n')
+    return sources.join('\n')
   }
 
   templates.push({
