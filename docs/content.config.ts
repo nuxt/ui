@@ -50,6 +50,11 @@ const PageSection = z.object({
   features: z.array(PageFeature).optional()
 })
 
+const Seo = z.object({
+  title: z.string(),
+  description: z.string()
+})
+
 const Page = z.object({
   title: z.string(),
   description: z.string(),
@@ -212,6 +217,8 @@ export const collections = {
   blogIndex: defineCollection({
     type: 'page',
     source: 'blog.yml',
-    schema: Page
+    schema: Page.extend({
+      seo: Seo
+    })
   })
 }
