@@ -27,7 +27,7 @@ const feedbacks = [
 
   <Matrix v-slot="props" :attrs="attrs">
     <template v-for="(feedback, index) in feedbacks" :key="index">
-      <UFormField label="Email" name="email" v-bind="{ ...feedback, ...props }">
+      <UFormField label="Email" name="email" v-bind="{ ...feedback, ...props }" :class="{ 'w-90': props?.orientation === 'horizontal' }">
         <UInput placeholder="john@lennon.com" />
       </UFormField>
     </template>

@@ -26,9 +26,9 @@ export default {
     orientation: {
       vertical: {},
       horizontal: {
-        root: 'flex gap-1 items-start',
+        root: 'flex items-center justify-between',
         wrapper: 'flex-none',
-        container: 'flex-1 mt-0'
+        container: 'mt-0'
       }
     }
   },
