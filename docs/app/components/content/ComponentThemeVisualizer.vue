@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { camelCase } from 'scule'
 import * as theme from '#build/ui'
-import { motion } from 'motion-v'
-import type { DOMKeyframesDefinition } from 'motion-v'
 
 const props = defineProps<{
   /**
-   * The container element to visualize slots for.
+   * The container element to find slots in.
    */
   container: HTMLElement | null
+  /**
+   * The positioned ancestor for highlight positioning.
+   * If not provided, uses container.
+   */
+  positionContainer?: HTMLElement | null
   /**
    * Override the component slug taken from the route.
    */
@@ -28,86 +31,74 @@ const componentTheme = computed(() => ((props.prose ? theme.prose : theme) as an
 const themeSlots = computed(() => Object.keys(componentTheme.value?.slots ?? {}))
 
 const open = ref(false)
-const visualizerRef = ref<HTMLElement | null>(null)
 const highlightedSlot = ref<string | null>(null)
-
-const animate = ref<DOMKeyframesDefinition>({
-  opacity: 0
-})
+const highlightStyle = ref<{ left: string, top: string, width: string, height: string } | null>(null)
 
 function getSlotClasses(slotName: string): string {
   const baseClasses = componentTheme.value?.slots?.[slotName] || ''
   return Array.isArray(baseClasses) ? baseClasses.filter(Boolean).join(' ') : baseClasses
 }
 
-function highlightSlot(slotName: string) {
-  if (!props.container) {
-    animate.value = { opacity: 0 }
-    highlightedSlot.value = slotName
-    return
+function getSlotPosition(slotName: string) {
+  if (!props.container) return null
+
+  const slotElement = props.container.querySelector(`[data-slot="${slotName}"]`)
+  if (!slotElement) return null
+
+  const positionEl = props.positionContainer ?? props.container
+  const positionRect = positionEl!.getBoundingClientRect()
+  const targetRect = slotElement.getBoundingClientRect()
+
+  return {
+    left: `${targetRect.left - positionRect.left}px`,
+    top: `${targetRect.top - positionRect.top}px`,
+    width: `${targetRect.width}px`,
+    height: `${targetRect.height}px`
   }
+}
 
-  // Find element with data-slot attribute, excluding visualizer elements
-  const elements = props.container.querySelectorAll(`[data-slot="${slotName}"]`)
-  let slotElement: Element | null = null
-
-  for (const el of elements) {
-    if (!visualizerRef.value?.contains(el)) {
-      slotElement = el
+// Initialize position to first rendered slot (so first hover can animate from there)
+function initializePosition() {
+  for (const slotName of themeSlots.value) {
+    const position = getSlotPosition(slotName)
+    if (position) {
+      highlightStyle.value = position
       break
     }
   }
+}
 
-  if (!slotElement) {
-    animate.value = { opacity: 0 }
-    highlightedSlot.value = slotName
-    return
-  }
-
+function highlightSlot(slotName: string) {
   highlightedSlot.value = slotName
 
-  const containerRect = props.container.getBoundingClientRect()
-  const targetRect = slotElement.getBoundingClientRect()
+  const position = getSlotPosition(slotName)
+  if (!position) return
 
-  const left = targetRect.left - containerRect.left
-  const top = targetRect.top - containerRect.top
-
-  animate.value = {
-    x: left,
-    y: top,
-    width: targetRect.width,
-    height: targetRect.height,
-    opacity: 1
-  }
+  highlightStyle.value = position
 }
 
 function clearHighlight() {
   highlightedSlot.value = null
-  animate.value = { opacity: 0 }
 }
 
 function isSlotRendered(slotName: string): boolean {
   if (!props.container) return false
-
-  const elements = props.container.querySelectorAll(`[data-slot="${slotName}"]`)
-  for (const el of elements) {
-    if (!visualizerRef.value?.contains(el)) {
-      return true
-    }
-  }
-  return false
+  return !!props.container.querySelector(`[data-slot="${slotName}"]`)
 }
 
-// Clear highlight when popover closes
+// Initialize position when popover opens, clear when closes
 watch(open, (isOpen) => {
-  if (!isOpen) {
+  if (isOpen) {
+    initializePosition()
+  } else {
     clearHighlight()
+    highlightStyle.value = null
   }
 })
 </script>
 
 <template>
-  <div ref="visualizerRef" class="group">
+  <template v-if="themeSlots.length">
     <UPopover
       v-model:open="open"
       :content="{ align: 'start' }"
@@ -118,7 +109,7 @@ watch(open, (isOpen) => {
         color="neutral"
         variant="outline"
         size="sm"
-        class="absolute -top-[11px] -right-[11px] z-55 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted"
+        class="absolute -top-[11px] -right-[11px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
         :class="[open && 'lg:opacity-100 bg-elevated']"
       />
 
@@ -143,26 +134,22 @@ watch(open, (isOpen) => {
               {{ getSlotClasses(slotName) }}
             </div>
           </div>
-          <div v-if="!themeSlots.length" class="p-1.5 text-xs text-muted">
-            No slots found
-          </div>
         </div>
       </template>
     </UPopover>
 
-    <!-- Highlight overlay with motion animation -->
-    <component
-      :is="motion.div"
-      :animate="animate"
-      :transition="{ type: 'spring', stiffness: 500, damping: 30 }"
-      class="absolute top-0 left-0 pointer-events-none border border-dashed border-primary invert z-55"
+    <div
+      v-if="highlightStyle"
+      :style="highlightStyle"
+      class="absolute pointer-events-none border-2 border-dashed border-primary invert z-1 rounded transition-all duration-150"
+      :class="[highlightedSlot ? 'opacity-100' : 'opacity-0']"
     >
       <div
-        v-if="highlightedSlot && (animate as any).opacity === 1"
-        class="absolute -top-6 left-0 px-1.5 py-0.5 text-xs font-medium font-mono bg-gray-900 text-white rounded-t whitespace-nowrap"
+        v-if="highlightedSlot"
+        class="absolute -top-6 -left-0.5 px-1.5 py-0.5 text-xs font-medium font-mono bg-primary text-highlighted rounded whitespace-nowrap"
       >
         {{ highlightedSlot }}
       </div>
-    </component>
-  </div>
+    </div>
+  </template>
 </template>
