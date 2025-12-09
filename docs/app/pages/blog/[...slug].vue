@@ -166,16 +166,17 @@ const getCategoryIcon = (category: string) => {
       </div>
     </div>
 
-    <div v-if="page.image" class="py-4 px-4 sm:px-6 lg:px-8">
+    <div v-if="page.illustration || page.image" class="py-4 px-4 sm:px-6 lg:px-8">
       <Motion
         :initial="{ opacity: 0, y: 30 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ delay: 0.3, duration: 0.8 }"
       >
         <NuxtImg
-          :src="page.image"
+          :src="page.illustration || page.image"
           :alt="page.title"
-          class="w-full max-h-[450px] object-cover object-center max-w-5xl mx-auto"
+          class="w-full max-w-5xl mx-auto"
+          :class="page.illustration ? 'max-h-[500px] object-contain' : 'max-h-[450px] object-cover object-center'"
         />
       </Motion>
     </div>
