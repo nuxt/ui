@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { EditorToolbarItem } from '@nuxt/ui'
-import TextAlign from '@tiptap/extension-text-align'
+import { TextAlign } from '@tiptap/extension-text-align'
 
 const value = ref(`This toolbar showcases **all available formatting options** using built-in handlers. Try the different controls to see them in action!
 

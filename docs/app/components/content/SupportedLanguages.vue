@@ -16,7 +16,7 @@ function getEmojiFlag(locale: string): string {
     cs: 'cz', // Czech -> Czech Republic (note: modern country code is actually 'cz')
     da: 'dk', // Danish -> Denmark
     el: 'gr', // Greek -> Greece
-    en: 'gb', // English -> Great Britain
+    en: 'us', // English -> United States (default)
     et: 'ee', // Estonian -> Estonia
     gl: 'es', // Galician -> Spain
     he: 'il', // Hebrew -> Israel
@@ -40,8 +40,20 @@ function getEmojiFlag(locale: string): string {
     vi: 'vn' // Vietnamese -> Vietnam
   }
 
+  // If locale has a country code (e.g., en-GB), extract and use it
+  if (locale.includes('-')) {
+    const countryCode = locale.split('-')[1]?.toLowerCase()
+    if (countryCode) {
+      return countryCode.toUpperCase()
+        .split('')
+        .map(char => String.fromCodePoint(0x1F1A5 + char.charCodeAt(0)))
+        .join('')
+    }
+  }
+
+  // Otherwise, use the language-to-country mapping
   const baseLanguage = locale.split('-')[0]?.toLowerCase() || locale
-  const countryCode = languageToCountry[baseLanguage] || locale.replace(/^.*-/, '').slice(0, 2)
+  const countryCode = languageToCountry[baseLanguage] || locale.slice(0, 2)
 
   return countryCode.toUpperCase()
     .split('')

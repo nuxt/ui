@@ -4,8 +4,8 @@ import type { Editor, JSONContent } from '@tiptap/vue-3'
 import { upperFirst } from 'scule'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
-import TextAlign from '@tiptap/extension-text-align'
-import ImageUpload from './EditorImageUpload'
+import { TextAlign } from '@tiptap/extension-text-align'
+import { ImageUpload } from './EditorImageUpload'
 import EditorLinkPopover from './EditorLinkPopover.vue'
 
 const value = ref(`# Building Modern Interfaces with Nuxt UI

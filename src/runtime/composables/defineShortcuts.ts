@@ -18,6 +18,7 @@ export interface ShortcutsConfig {
 
 export interface ShortcutsOptions {
   chainDelay?: number
+  layoutIndependent?: boolean
 }
 
 interface Shortcut {
@@ -38,6 +39,36 @@ const chainedShortcutRegex = /^[^-]+.*-.*[^-]+$/
 const combinedShortcutRegex = /^[^_]+.*_.*[^_]+$/
 // keyboard keys which can be combined with Shift modifier (in addition to alphabet keys)
 const shiftableKeys = ['arrowleft', 'arrowright', 'arrowup', 'arrowright', 'tab', 'escape', 'enter', 'backspace']
+
+// Simple key to code conversion for layout independence
+function convertKeyToCode(key: string): string {
+  // Handle single letters
+  if (/^[a-z]$/i.test(key)) {
+    return `Key${key.toUpperCase()}`
+  }
+  // Handle digits
+  if (/^\d$/.test(key)) {
+    return `Digit${key}`
+  }
+  // Handle function keys
+  if (/^f\d+$/i.test(key)) {
+    return key.toUpperCase()
+  }
+  // Handle common special keys
+  const specialKeys: Record<string, string> = {
+    space: 'Space',
+    enter: 'Enter',
+    escape: 'Escape',
+    tab: 'Tab',
+    backspace: 'Backspace',
+    delete: 'Delete',
+    arrowup: 'ArrowUp',
+    arrowdown: 'ArrowDown',
+    arrowleft: 'ArrowLeft',
+    arrowright: 'ArrowRight'
+  }
+  return specialKeys[key.toLowerCase()] || key
+}
 
 export function extractShortcuts(items: any[] | any[][]) {
   const shortcuts: Record<string, Handler> = {}
@@ -71,6 +102,10 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
 
   const { macOS } = useKbd()
   const activeElement = useActiveElement()
+  const layoutIndependent = options.layoutIndependent ?? false
+
+  // precompute shiftable codes if layoutIndependent
+  const shiftableCodes = shiftableKeys.map(k => convertKeyToCode(k))
 
   const onKeyDown = (e: KeyboardEvent) => {
     // Input autocomplete triggers a keydown event
@@ -78,11 +113,12 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       return
     }
 
-    const alphabetKey = /^[a-z]{1}$/i.test(e.key)
-    const shiftableKey = shiftableKeys.includes(e.key.toLowerCase())
+    const alphabetKey = layoutIndependent ? /^Key[A-Z]$/i.test(e.code) : /^[a-z]{1}$/i.test(e.key)
+    const shiftableKey = layoutIndependent ? shiftableCodes.includes(e.code) : shiftableKeys.includes(e.key.toLowerCase())
 
     let chainedKey
-    chainedInputs.value.push(e.key)
+    // push either code or key depending on layoutIndependent flag
+    chainedInputs.value.push(layoutIndependent ? e.code : e.key)
     // try matching a chained shortcut
     if (chainedInputs.value.length >= 2) {
       chainedKey = chainedInputs.value.slice(-2).join('-')
@@ -103,9 +139,17 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
 
     // try matching a standard shortcut
     for (const shortcut of shortcuts.value.filter(s => !s.chained)) {
-      if (e.key.toLowerCase() !== shortcut.key) {
-        continue
+      if (layoutIndependent) {
+        // compare by code
+        if (e.code !== shortcut.key) {
+          continue
+        }
+      } else {
+        if (e.key.toLowerCase() !== shortcut.key) {
+          continue
+        }
       }
+
       if (e.metaKey !== shortcut.metaKey) {
         continue
       }
@@ -117,8 +161,6 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       if ((alphabetKey || shiftableKey) && e.shiftKey !== shortcut.shiftKey) {
         continue
       }
-      // alt modifier changes the combined key anyways
-      // if (e.altKey !== shortcut.altKey) { continue }
 
       if (shortcut.enabled) {
         e.preventDefault()
@@ -164,17 +206,33 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
 
       const chained = key.includes('-') && key !== '-' && !key.includes('_')
       if (chained) {
-        shortcut = {
-          key: key.toLowerCase(),
-          metaKey: false,
-          ctrlKey: false,
-          shiftKey: false,
-          altKey: false
+        // convert each part to code if layoutIndependent, otherwise keep raw key
+        if (layoutIndependent) {
+          const parts = key.split('-').map(p => convertKeyToCode(p))
+          shortcut = {
+            key: parts.join('-'),
+            metaKey: false,
+            ctrlKey: false,
+            shiftKey: false,
+            altKey: false
+          }
+        } else {
+          shortcut = {
+            key: key.toLowerCase(),
+            metaKey: false,
+            ctrlKey: false,
+            shiftKey: false,
+            altKey: false
+          }
         }
       } else {
         const keySplit = key.toLowerCase().split('_').map(k => k)
+        let baseKey = keySplit.filter(k => !['meta', 'command', 'ctrl', 'shift', 'alt', 'option'].includes(k)).join('_')
+        if (layoutIndependent) {
+          baseKey = convertKeyToCode(baseKey)
+        }
         shortcut = {
-          key: keySplit.filter(k => !['meta', 'command', 'ctrl', 'shift', 'alt', 'option'].includes(k)).join('_'),
+          key: baseKey,
           metaKey: keySplit.includes('meta') || keySplit.includes('command'),
           ctrlKey: keySplit.includes('ctrl'),
           shiftKey: keySplit.includes('shift'),

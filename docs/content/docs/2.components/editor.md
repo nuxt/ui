@@ -114,7 +114,7 @@ You can use the `extensions` prop to add additional TipTap extensions to enhance
 ```vue
 <script setup lang="ts">
 import { Emoji } from '@tiptap/extension-emoji'
-import TextAlign from '@tiptap/extension-text-align'
+import { TextAlign } from '@tiptap/extension-text-align'
 
 const value = ref('<h1>Hello World</h1>\n')
 </script>

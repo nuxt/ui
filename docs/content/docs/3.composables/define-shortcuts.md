@@ -47,7 +47,11 @@ Define keyboard shortcuts for your application.
     ::field{name="chainDelay" type="number"}
     The delay between key presses to consider the shortcut as chained. Default is `250`.
     ::
-  ::
+    ::field{name="layoutIndependent" type="boolean"}
+    When enabled, shortcuts work consistently across different keyboard layouts (Arabic, Hebrew) by matching physical key positions rather than character values.
+    - `false` (default): Uses `e.key` for character-based matching (Layout specific)
+    - `true`: Uses `e.code` for physical key matching (Layout agnostic)
+    ::
   ::
 ::
 
