@@ -69,11 +69,10 @@ function initializePosition() {
 }
 
 function highlightSlot(slotName: string) {
-  highlightedSlot.value = slotName
-
   const position = getSlotPosition(slotName)
   if (!position) return
 
+  highlightedSlot.value = slotName
   highlightStyle.value = position
 }
 
