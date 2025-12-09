@@ -4,7 +4,6 @@ description: Nuxt UI v3 is out! After 1500+ commits, this major redesign brings
   improved accessibility, Tailwind CSS v4 support, and full Vue compatibility
 navigation: false
 image: /assets/blog/nuxt-ui-v3.png
-minRead: 7
 authors:
   - name: Benjamin Canac
     avatar:
@@ -78,11 +77,11 @@ Our new color system includes 7 semantic color aliases:
 
 | Color                             | Default  | Description                                      |
 |-----------------------------------|----------|--------------------------------------------------|
-| :code[primary]{.text-primary}     | `blue`   | Primary color to represent the brand.            
-| :code[secondary]{.text-secondary} | `blue`   | Secondary color to complement the primary color. 
-| :code[success]{.text-success}     | `green`  | Used for success states.                         
-| :code[info]{.text-info}           | `blue`   | Used for informational states.                   
-| :code[warning]{.text-warning}     | `yellow` | Used for warning states.                         
+| :code[primary]{.text-primary}     | `blue`   | Primary color to represent the brand.
+| :code[secondary]{.text-secondary} | `blue`   | Secondary color to complement the primary color.
+| :code[success]{.text-success}     | `green`  | Used for success states.
+| :code[info]{.text-info}           | `blue`   | Used for informational states.
+| :code[warning]{.text-warning}     | `yellow` | Used for warning states.
 | :code[error]{.text-error}         | `red`    | Used for form error validation states.           |
 | `neutral`                         | `slate`  | Neutral color for backgrounds, text, etc.        |
 

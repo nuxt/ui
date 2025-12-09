@@ -32,6 +32,30 @@ if (page.value.image) {
   })
 }
 
+const WORDS_PER_MINUTE = 200
+
+function extractText(node: unknown): string {
+  if (!node) return ''
+  if (typeof node === 'string') return node
+  if (Array.isArray(node)) {
+    return node.slice(2).map(extractText).join(' ')
+  }
+  if (typeof node === 'object' && node !== null) {
+    const obj = node as Record<string, unknown>
+    if (Array.isArray(obj.value)) {
+      return obj.value.map(extractText).join(' ')
+    }
+  }
+  return ''
+}
+
+const readingTime = computed(() => {
+  if (!page.value?.body) return 1
+  const text = extractText(page.value.body)
+  const words = text.trim().split(/\s+/).filter(Boolean).length
+  return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE))
+})
+
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -63,6 +87,13 @@ const getCategoryIcon = (category: string) => {
   <UContainer v-if="page" class="relative min-h-screen">
     <div aria-hidden="true" class="absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
+    <BlogToc
+      v-if="page?.body?.toc?.links?.length"
+      :links="page.body.toc.links"
+      class="fixed top-1/2 -translate-y-1/2 hidden xl:block"
+      :style="{ right: 'calc((100vw - var(--ui-container)) / 2 + 2.5rem)' }"
+    />
+
     <div class="border-b border-default">
       <div class="py-4 px-4 sm:px-6 lg:px-8">
         <ULink to="/blog" class="flex items-center gap-2 text-sm">
@@ -89,8 +120,8 @@ const getCategoryIcon = (category: string) => {
             {{ formatDate(page.date) }}
           </span>
 
-          <span v-if="page.minRead" class="text-muted font-mono text-xs">
-            {{ page.minRead }} MIN READ
+          <span class="text-muted font-mono text-xs">
+            {{ readingTime }} MIN READ
           </span>
         </div>
 

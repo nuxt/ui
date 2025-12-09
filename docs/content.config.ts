@@ -81,7 +81,6 @@ export const collections = {
     source: 'blog/**/*',
     schema: z.object({
       image: z.string().optional(),
-      minRead: z.number().optional(),
       authors: z.array(z.object({
         name: z.string(),
         avatar: Avatar,

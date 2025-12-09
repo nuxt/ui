@@ -171,7 +171,7 @@ const getCategoryIcon = (category: string) => {
           </div>
         </div>
 
-        <div class="border-x border-t border-default !gap-0">
+        <div class="border-x border-t border-default gap-0!">
           <Motion
             v-for="(post, index) in filteredPosts"
             :key="post.path"
