@@ -1,9 +1,8 @@
 import { fileURLToPath } from 'node:url'
-import { relative } from 'pathe'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
 import colors from 'tailwindcss/colors'
-import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates } from '@nuxt/kit'
+import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, getLayerDirectories } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
@@ -116,13 +115,12 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     }
 
     const sources: string[] = []
+    const layers = getLayerDirectories(nuxt).map(layer => layer.app)
+    const extensions = nuxt.options.extensions.map(ext => ext.replace(/^\./, '')).join(',')
 
     // Add layer sources
-    for (const layer of nuxt.options._layers || []) {
-      const srcDir = layer.config.srcDir || layer.cwd
-      const relativePath = relative(nuxt.options.buildDir, srcDir)
-
-      sources.push(`@source ${JSON.stringify(`${relativePath}/**/*.{vue,ts,tsx,js,jsx,mjs,mts}`)};`)
+    for (const layer of layers) {
+      sources.push(`@source "${layer}**/*.{${extensions}}";`)
     }
 
     // Add inline sources from Nuxt config (classes defined in config)
@@ -140,13 +138,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
     // Add theme sources (component detection or all)
     if (resolve && options.experimental?.componentDetection) {
-      const dirs = [...new Set([
-        nuxt.options.rootDir,
-        ...(nuxt.options._layers?.map(layer => layer.config.rootDir).filter(Boolean) || [])
-      ])]
-
       const detectedComponents = await detectUsedComponents(
-        dirs,
+        layers,
         options.prefix!,
         resolve('./runtime/components'),
         Array.isArray(options.experimental.componentDetection) ? options.experimental.componentDetection : undefined
