@@ -249,6 +249,9 @@ importers:
       release-it:
         specifier: ^19.0.6
         version: 19.0.6(@types/node@24.7.0)(magicast@0.3.5)
+      vite:
+        specifier: ^7.2.7
+        version: 7.2.7(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.2)
       vitest:
         specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@24.7.0)(happy-dom@20.0.11)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.2)
