@@ -488,7 +488,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
-### Clear
+### Clear :badge{label="Soon" class="align-text-top"}
 
 Use the `clear` prop to display a clear button when a value is selected.
 
@@ -512,7 +512,7 @@ props:
 ---
 ::
 
-### Clear Icon
+### Clear Icon :badge{label="Soon" class="align-text-top"}
 
 Use the `clear-icon` prop to customize the clear button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 
