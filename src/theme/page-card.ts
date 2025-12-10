@@ -25,7 +25,7 @@ export default (options: Required<NuxtOptions['ui']>) => ({
     },
     reverse: {
       true: {
-        wrapper: 'lg:order-last'
+        wrapper: 'order-last'
       }
     },
     variant: {

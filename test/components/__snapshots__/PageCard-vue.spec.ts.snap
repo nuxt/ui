@@ -350,7 +350,7 @@ exports[`PageCard > renders with orientation horizontal reverse correctly 1`] = 
 "<div data-orientation="horizontal" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 lg:grid-cols-2 lg:items-center">
-    <div data-slot="wrapper" class="flex flex-col flex-1 items-start lg:order-last">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start order-last">
       <!--v-if-->
       <div data-slot="leading" class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="size-5 shrink-0 text-primary"></svg></div>
       <div data-slot="body" class="flex-1">
@@ -386,7 +386,7 @@ exports[`PageCard > renders with orientation vertical reverse correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div data-slot="wrapper" class="flex flex-col flex-1 items-start lg:order-last">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start order-last">
       <!--v-if-->
       <div data-slot="leading" class="inline-flex items-center mb-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="size-5 shrink-0 text-primary"></svg></div>
       <div data-slot="body" class="flex-1">
