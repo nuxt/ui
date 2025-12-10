@@ -80,7 +80,7 @@ function scrollToSection(id: string) {
               x: isHovered ? 0 : -5
             }"
             :transition="{ duration: 0.1 }"
-            class="truncate text-[11px] leading-tight"
+            class="truncate text-sm leading-tight"
           >
             {{ link.text }}
           </Motion>

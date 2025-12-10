@@ -33,7 +33,7 @@ Check out the complete **AI Chat template** on GitHub for a production-ready imp
 
 Before we start, make sure you have:
 
-- Node.js 18+ installed
+- Node.js 20+ installed
 - A [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) API key (provides access to multiple AI providers through a single endpoint)
 
 ## Project Setup
