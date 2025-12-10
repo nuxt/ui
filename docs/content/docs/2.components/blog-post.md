@@ -36,7 +36,7 @@ class: 'w-96'
 ::
 
 ::tip{to="/docs/components/blog-posts"}
-Use the [`BlogPosts`](/docs/components/blog-posts) component to display multiple blog posts in a responsive grid layout.
+Use the `BlogPosts` component to display multiple blog posts in a responsive grid layout.
 ::
 
 ### Title

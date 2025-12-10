@@ -1,6 +1,8 @@
-export default {
+import type { NuxtOptions } from '@nuxt/schema'
+
+export default (options: Required<NuxtOptions['ui']>) => ({
   slots: {
-    root: 'relative',
+    root: 'relative rounded-sm',
     wrapper: '',
     leading: 'inline-flex items-center justify-center',
     leadingIcon: 'size-5 shrink-0 text-primary',
@@ -17,10 +19,15 @@ export default {
         leading: 'mb-2.5'
       }
     },
+    to: {
+      true: {
+        root: ['has-focus-visible:ring-2 has-focus-visible:ring-primary', options.theme.transitions && 'transition']
+      }
+    },
     title: {
       true: {
         description: 'mt-1'
       }
     }
   }
-}
+})

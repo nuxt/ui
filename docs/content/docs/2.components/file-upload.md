@@ -58,7 +58,7 @@ props:
 Use the `interactive` prop to enable/disable the clickable area. Defaults to `true`.
 
 ::tip{to="#with-files-bottom-slot"}
-This can be useful when adding a [`Button`](/docs/components/button) component in the `#actions` slot.
+This can be useful when adding a `Button` component in the `#actions` slot.
 ::
 
 ::component-code
