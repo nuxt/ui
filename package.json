@@ -191,6 +191,7 @@
     "happy-dom": "^20.0.11",
     "nuxt": "^4.2.2",
     "release-it": "^19.0.6",
+    "vite": "^7.2.7",
     "vitest": "^3.2.4",
     "vitest-axe": "^0.1.0",
     "vitest-environment-nuxt": "^1.0.1",
@@ -238,7 +239,7 @@
     "@nuxt/ui": "workspace:*",
     "typescript": "5.8.3",
     "unplugin": "^2.3.11",
-    "debug": "npm:obug@^1.0.2"
+    "vite": "7.2.4"
   },
   "keywords": [
     "nuxt-ui",
