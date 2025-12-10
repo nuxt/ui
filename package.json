@@ -238,7 +238,8 @@
     "@nuxt/kit": "^4.2.2",
     "@nuxt/ui": "workspace:*",
     "typescript": "5.8.3",
-    "unplugin": "^2.3.11"
+    "unplugin": "^2.3.11",
+    "vite": "7.2.4"
   },
   "keywords": [
     "nuxt-ui",
