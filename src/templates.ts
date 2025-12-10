@@ -116,11 +116,10 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
     const sources: string[] = []
     const layers = getLayerDirectories(nuxt).map(layer => layer.app)
-    const extensions = nuxt.options.extensions.map(ext => ext.replace(/^\./, '')).join(',')
 
     // Add layer sources
     for (const layer of layers) {
-      sources.push(`@source "${layer}**/*.{${extensions}}";`)
+      sources.push(`@source "${layer}**/*";`)
     }
 
     // Add inline sources from Nuxt config (classes defined in config)
