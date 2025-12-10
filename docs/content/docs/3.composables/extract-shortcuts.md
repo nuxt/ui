@@ -5,7 +5,7 @@ description: 'A utility to extract keyboard shortcuts from menu items.'
 
 ## Usage
 
-Use the auto-imported `extractShortcuts` utility to automatically define keyboard shortcuts from menu items.
+Use the auto-imported `extractShortcuts` utility to define keyboard shortcuts from menu items. It extracts shortcuts from components like [DropdownMenu](/docs/components/dropdown-menu), [ContextMenu](/docs/components/context-menu) or [CommandPalette](/docs/components/command-palette) where items have `kbds` defined.
 
 ```vue
 <script setup lang="ts">
@@ -29,15 +29,13 @@ defineShortcuts(extractShortcuts(items))
 </script>
 ```
 
-This is particularly useful when working with components like [DropdownMenu](/docs/components/dropdown-menu), [ContextMenu](/docs/components/context-menu), or [CommandPalette](/docs/components/command-palette) where menu items already define their keyboard shortcuts.
-
 ::tip{to="/docs/composables/define-shortcuts"}
 Learn more about keyboard shortcuts in the **defineShortcuts** composable documentation.
 ::
 
 ## API
 
-`extractShortcuts(items: any[] | any[][]): ShortcutsConfig`{lang="ts-type"}
+`extractShortcuts(items: any[] | any[][], separator?: '_' | '-'): ShortcutsConfig`{lang="ts-type"}
 
 Extracts keyboard shortcuts from an array of menu items and returns a configuration object compatible with `defineShortcuts`.
 
@@ -71,13 +69,19 @@ Extracts keyboard shortcuts from an array of menu items and returns a configurat
     ::
   ::
   ::
+
+  ::field{name="separator" type="'_' | '-'"}
+  The separator used to join keyboard keys. Use `'_'` for key combinations (e.g., `meta_k`) or `'-'` for key sequences (e.g., `g-d`). Defaults to `'_'`.
+  ::
 ::
 
 **Returns:** A `ShortcutsConfig` object that can be passed directly to `defineShortcuts`.
 
-## Example
+## Examples
 
-You can use the `extractShortcuts` utility to extract shortcuts from a [DropdownMenu](/docs/components/dropdown-menu), [ContextMenu](/docs/components/context-menu), [CommandPalette](/docs/components/command-palette), etc. The utility recursively traverses `children` and `items` properties to extract shortcuts from nested menu structures.
+### With nested items
+
+The utility recursively traverses `children` and `items` properties to extract shortcuts from nested menu structures.
 
 ```vue
 <script setup lang="ts">
@@ -132,4 +136,29 @@ defineShortcuts(extractShortcuts(items))
     <UButton label="Actions" />
   </UDropdownMenu>
 </template>
+```
+
+### With key sequences
+
+Use the `separator` parameter to create key sequences instead of key combinations.
+
+```vue
+<script setup lang="ts">
+const items = [{
+  label: 'Go to Dashboard',
+  kbds: ['G', 'D'],
+  onSelect() {
+    navigateTo('/dashboard')
+  }
+}, {
+  label: 'Go to Settings',
+  kbds: ['G', 'S'],
+  onSelect() {
+    navigateTo('/settings')
+  }
+}]
+
+// Using '-' creates key sequences: 'g-d', 'g-s'
+defineShortcuts(extractShortcuts(items, '-'))
+</script>
 ```
