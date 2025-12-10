@@ -461,7 +461,7 @@ importers:
         specifier: 3.13.0
         version: 3.13.0(@tiptap/core@3.13.0(@tiptap/pm@3.13.0))
       vue:
-        specifier: ^3.5.24
+        specifier: ^3.5.25
         version: 3.5.25(typescript@5.8.3)
       vue-router:
         specifier: ^4.6.3
@@ -477,7 +477,7 @@ importers:
         specifier: 5.8.3
         version: 5.8.3
       vite:
-        specifier: ^7.2.4
+        specifier: ^7.2.7
         version: 7.2.7(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.2)
       vue-tsc:
         specifier: ^3.1.5
