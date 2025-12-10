@@ -1,0 +1,121 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card > renders with as correctly 1`] = `
+"<section class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</section>"
+`;
+
+exports[`Card > renders with class correctly 1`] = `
+"<div class="overflow-hidden bg-default ring ring-default divide-y divide-default rounded-xl">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with default slot correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <div class="p-4 sm:p-6">Default slot</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with footer slot correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <div class="p-4 sm:px-6">Footer slot</div>
+</div>"
+`;
+
+exports[`Card > renders with header slot correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <div class="p-4 sm:px-6">Header slot</div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with size lg correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with size md correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with size sm correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with size xl correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with size xs correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with ui correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with variant outline correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-default ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with variant soft correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-elevated/50 divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with variant solid correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-inverted text-inverted">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with variant subtle correctly 1`] = `
+"<div class="rounded-lg overflow-hidden bg-elevated/50 ring ring-default divide-y divide-default">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;

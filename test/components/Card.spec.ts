@@ -10,23 +10,17 @@ describe('Card', () => {
   const variants = Object.keys(theme.variants.variant) as any
   const sizes = Object.keys(theme.variants.size) as any
 
-  const slots = {
-    default: () => 'Default slot',
-    header: () => 'Header slot',
-    footer: () => 'Footer slot'
-  }
-
   it.each([
     // Props
     ['with as', { props: { as: 'section' } }],
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
-    ...sizes.map((size: string) => [`with size ${size}`, { props: { size }, slots }]),
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with class', { props: { class: 'rounded-xl' } }],
     ['with ui', { props: { ui: { body: 'font-bold' } } }],
     // Slots
-    ['with default slot', { slots: { default: slots.default }, props: { size: 'md' } }],
-    ['with header slot', { slots: { header: slots.header }, props: { size: 'md' } }],
-    ['with footer slot', { slots: { footer: slots.footer }, props: { size: 'md' } }]
+    ['with default slot', { slots: { default: 'Default slot' } }],
+    ['with header slot', { slots: { header: 'Header slot' } }],
+    ['with footer slot', { slots: { footer: 'Footer slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CardProps, slots?: Partial<CardSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Card)
     expect(html).toMatchSnapshot()
