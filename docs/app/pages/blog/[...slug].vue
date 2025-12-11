@@ -25,13 +25,16 @@ const items = computed(() => Object.entries(tree.value).map(([key, value]) => ({
   <UPage v-if="page" :ui="{ center: 'lg:col-span-5', right: 'lg:col-span-5' }" class="lg:gap-16">
     <UPageHeader :title="page.title" :description="page.description" :ui="{ title: 'relative flex items-center' }">
       <template #headline>
+        <UButton
+          icon="i-lucide-arrow-left"
+          label="Back to blog"
+          to="/blog"
+          variant="link"
+          class="p-0"
+          :ui="{ leadingIcon: 'size-4' }"
+        />
+        <span class="text-muted">&middot;</span>
         <time class="text-muted font-normal">{{ new Date(page.date).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' }) }}</time>
-      </template>
-
-      <template #title>
-        <UButton icon="i-lucide-arrow-left" to="/blog" color="neutral" variant="soft" class="absolute -left-10 rounded-full" />
-
-        {{ page.title }}
       </template>
     </UPageHeader>
 
@@ -40,8 +43,8 @@ const items = computed(() => Object.entries(tree.value).map(([key, value]) => ({
     </UPageBody>
 
     <template #right>
-      <nav class="sticky top-(--ui-header-height) max-h-[calc(100vh-var(--ui-header-height))] hidden lg:flex flex-col">
-        <ProseCodeTree :model-value="activePath" class="lg:h-auto flex-1 my-0 rounded-none border-y-0" :items="items" />
+      <nav class="sticky top-(--ui-header-height) max-h-[calc(100vh-var(--ui-header-height))] hidden lg:block">
+        <ProseCodeTree :model-value="activePath" class="lg:h-full my-0 rounded-none border-y-0" :items="items" />
       </nav>
     </template>
   </UPage>

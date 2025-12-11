@@ -19,7 +19,8 @@ export function useHeader() {
     to: '/community'
   }, {
     label: 'Blog',
-    to: '/blog'
+    to: '/blog',
+    active: route.path.startsWith('/blog')
   }, {
     label: 'Releases',
     to: '/releases'
@@ -68,7 +69,8 @@ export function useHeader() {
   }, {
     label: 'Blog',
     icon: 'i-lucide-newspaper',
-    to: '/blog'
+    to: '/blog',
+    active: route.path.startsWith('/blog')
   }, {
     label: 'Releases',
     icon: 'i-lucide-rocket',

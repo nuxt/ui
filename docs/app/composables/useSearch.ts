@@ -88,7 +88,8 @@ export function useSearch() {
     label: 'Blog',
     description: 'Learn how to build things with Nuxt UI.',
     icon: 'i-lucide-newspaper',
-    to: '/blog'
+    to: '/blog',
+    active: route.path.startsWith('/blog')
   }, {
     label: 'Releases',
     description: 'Stay up to date with the newest features, enhancements, and fixes for Nuxt UI.',
