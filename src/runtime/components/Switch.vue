@@ -124,12 +124,12 @@ function onUpdate(value: any) {
         <slot name="label" :label="label">
           {{ label }}
         </slot>
+        <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+          <slot name="description" :description="description">
+            {{ description }}
+          </slot>
+        </p>
       </Label>
-      <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
-        <slot name="description" :description="description">
-          {{ description }}
-        </slot>
-      </p>
     </div>
   </Primitive>
 </template>
