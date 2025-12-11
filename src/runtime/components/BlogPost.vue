@@ -136,7 +136,7 @@ const ariaLabel = computed(() => {
         tabindex="-1"
         raw
       >
-        <span class="absolute block invisible w-0 opacity-0" aria-hidden="true">
+        <span class="absolute w-1 h-1 text-nowrap overflow-hidden">
           {{ title }}
         </span>
       </ULink>
