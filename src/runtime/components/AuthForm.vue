@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
-import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps } from '../types'
+import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps, LinkPropsKeys } from '../types'
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
 import type { FormHTMLAttributes } from '../types/html'
 import type { NonUnion } from '../types/utils'
@@ -31,14 +31,14 @@ export type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps
   otp?: boolean | PinInputProps
 }
 
-export type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number'
+export type AuthFormInputFieldType = Required<InputProps>['type']
 
 export type AuthFormInputField<T extends AuthFormInputFieldType & NonUnion<T> = 'text'> = Omit<FormFieldProps, 'name'> & Omit<InputProps, 'type'> & {
   name: string
   type: T
 }
 
-export type AuthFormField = AuthFormCheckboxField | AuthFormSelectField | AuthFormOtpField | AuthFormInputField<'password'> | AuthFormInputField<'text'> | AuthFormInputField<'email'> | AuthFormInputField<'number'>
+export type AuthFormField = AuthFormCheckboxField | AuthFormSelectField | AuthFormOtpField | AuthFormInputField<AuthFormInputFieldType>
 
 export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> extends /** @vue-ignore */ FormHTMLAttributes {
   /**
@@ -68,7 +68,7 @@ export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F exte
    * Display a submit button at the bottom of the form.
    * `{ label: 'Continue', block: true }`{lang="ts-type"}
    */
-  submit?: ButtonProps
+  submit?: Omit<ButtonProps, LinkPropsKeys>
   schema?: T
   validate?: FormProps<T>['validate']
   validateOn?: FormProps<T>['validateOn']

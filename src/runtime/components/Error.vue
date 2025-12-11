@@ -24,7 +24,7 @@ export interface ErrorProps {
    * `{ size: 'lg', color: 'primary', variant: 'solid', label: 'Back to home' }`{lang="ts-type"}
    * @defaultValue true
    */
-  clear?: boolean | Partial<ButtonProps>
+  clear?: boolean | ButtonProps
   class?: any
   ui?: Error['slots']
 }
@@ -88,7 +88,7 @@ function handleError() {
           color="primary"
           variant="solid"
           :label="t('error.clear')"
-          v-bind="(typeof clear === 'object' ? clear as Partial<ButtonProps> : {})"
+          v-bind="(typeof clear === 'object' ? clear : {})"
           @click="handleError"
         />
       </slot>

@@ -45,9 +45,13 @@ Define keyboard shortcuts for your application.
 
   ::collapsible
     ::field{name="chainDelay" type="number"}
-    The delay between key presses to consider the shortcut as chained. Default is `250`.
+    The delay between key presses to consider the shortcut as chained. Default is `800`.
     ::
-  ::
+    ::field{name="layoutIndependent" type="boolean"}
+    When enabled, shortcuts work consistently across different keyboard layouts (Arabic, Hebrew) by matching physical key positions rather than character values.
+    - `false` (default): Uses `e.key` for character-based matching (Layout specific)
+    - `true`: Uses `e.code` for physical key matching (Layout agnostic)
+    ::
   ::
 ::
 
@@ -133,26 +137,8 @@ defineShortcuts({
 
 ### Extracting shortcuts from menu items
 
-The `extractShortcuts` utility can be used to automatically define shortcuts from menu items:
+Use the `extractShortcuts` utility to automatically define shortcuts from menu items.
 
-```vue
-<script setup lang="ts">
-const items = [{
-  label: 'Save',
-  icon: 'i-lucide-file-down',
-  kbds: ['meta', 'S'],
-  onSelect() {
-    save()
-  }
-}, {
-  label: 'Copy',
-  icon: 'i-lucide-copy',
-  kbds: ['meta', 'C'],
-  onSelect() {
-    copy()
-  }
-}]
-
-defineShortcuts(extractShortcuts(items))
-</script>
-```
+::tip{to="/docs/composables/extract-shortcuts"}
+Learn more about the **extractShortcuts** utility.
+::

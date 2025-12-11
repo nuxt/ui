@@ -889,7 +889,7 @@ props:
 ---
 ::
 
-### With virtualization :badge{label="4.1+"}
+### With virtualization :badge{label="4.1+" class="align-text-top"}
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 

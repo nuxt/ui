@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-sidebar-collapse'
-import type { ButtonProps } from '../types'
+import type { ButtonProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSidebarCollapse = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarCollapse'>
 
-export interface DashboardSidebarCollapseProps extends Omit<ButtonProps, 'color' | 'variant'> {
+export interface DashboardSidebarCollapseProps extends Omit<ButtonProps, LinkPropsKeys | 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */

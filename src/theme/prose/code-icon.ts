@@ -61,6 +61,7 @@ export default {
   'npx': 'i-vscode-icons-file-type-npm',
   'yarn': 'i-vscode-icons-file-type-yarn',
   'bun': 'i-vscode-icons-file-type-bun',
+  'deno': 'i-vscode-icons-file-type-deno',
   'yml': 'i-vscode-icons-file-type-yaml',
   'terminal': 'i-lucide-terminal'
 }

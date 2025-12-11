@@ -16,5 +16,7 @@ const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
     description="Customize Nuxt UI with your own colors, fonts, and more."
     icon="i-lucide-swatch-book"
     :orientation="orientation"
+    to="https://ui.nuxt.com/docs/getting-started/theme/design-system"
+    target="_blank"
   />
 </template>

@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { ButtonProps } from '../../types'
+import type { ButtonProps, LinkPropsKeys } from '../../types'
 
-export interface ColorModeButtonProps extends Omit<ButtonProps, 'color' | 'variant'> {
+export interface ColorModeButtonProps extends Omit<ButtonProps, LinkPropsKeys | 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */
@@ -55,8 +55,8 @@ const isDark = computed({
     @click="isDark = !isDark"
   >
     <template #leading="{ ui }">
-      <UIcon :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" class="hidden dark:inline" :name="appConfig.ui.icons.dark" />
-      <UIcon :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" class="inline dark:hidden" :name="appConfig.ui.icons.light" />
+      <UIcon :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, 'hidden dark:inline-block'] })" :name="appConfig.ui.icons.dark" />
+      <UIcon :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, 'dark:hidden'] })" :name="appConfig.ui.icons.light" />
     </template>
   </UButton>
 </template>

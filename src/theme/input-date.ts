@@ -1,6 +1,7 @@
 import { defuFn } from 'defu'
 import type { ModuleOptions } from '../module'
 import input from './input'
+import { fieldGroupVariant } from './field-group'
 
 export default (options: Required<ModuleOptions>) => {
   return defuFn({
@@ -11,6 +12,7 @@ export default (options: Required<ModuleOptions>) => {
       separatorIcon: 'shrink-0 size-4 text-muted'
     },
     variants: {
+      ...fieldGroupVariant,
       size: {
         xs: {
           base: (prev: string) => [prev, 'gap-0.25'],

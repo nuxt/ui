@@ -1,4 +1,6 @@
-export default {
+import type { NuxtOptions } from '@nuxt/schema'
+
+export default (options: Required<NuxtOptions['ui']>) => ({
   slots: {
     root: 'relative',
     container: 'flex flex-col mx-auto max-w-2xl',
@@ -29,7 +31,8 @@ export default {
     },
     to: {
       true: {
-        image: 'transform transition-transform duration-200 group-hover/changelog-version-image:scale-105'
+        title: ['has-focus-visible:ring-2 has-focus-visible:ring-primary rounded-xs', options.theme.transitions && 'transition'],
+        image: 'transform transition-transform duration-200 group-hover/changelog-version-image:scale-105 group-has-focus-visible/changelog-version-image:scale-105'
       }
     },
     hidden: {
@@ -38,4 +41,4 @@ export default {
       }
     }
   }
-}
+})

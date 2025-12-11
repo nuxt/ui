@@ -55,7 +55,9 @@ import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, for
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
-const props = defineProps<FormFieldProps>()
+const props = withDefaults(defineProps<FormFieldProps>(), {
+  error: undefined
+})
 const slots = defineSlots<FormFieldSlots>()
 
 const appConfig = useAppConfig() as FormField['AppConfig']
@@ -122,8 +124,7 @@ provide(formFieldInjectionKey, computed(() => ({
 
     <div :class="[(label || !!slots.label || description || !!slots.description) && ui.container({ class: props.ui?.container })]">
       <slot :error="error" />
-
-      <div v-if="(typeof error === 'string' && error) || !!slots.error" :id="`${ariaId}-error`" data-slot="error" :class="ui.error({ class: props.ui?.error })">
+      <div v-if="props.error !== false && ((typeof error === 'string' && error) || !!slots.error)" :id="`${ariaId}-error`" data-slot="error" :class="ui.error({ class: props.ui?.error })">
         <slot name="error" :error="error">
           {{ error }}
         </slot>
