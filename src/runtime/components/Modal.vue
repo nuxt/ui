@@ -55,6 +55,12 @@ export interface ModalProps extends DialogRootProps {
    * @defaultValue true
    */
   dismissible?: boolean
+  /**
+   * Force the modal content to render even when closed.
+   * Useful for SSR when using `portal: false`.
+   * @defaultValue false
+   */
+  forceMount?: boolean
   class?: any
   ui?: Modal['slots']
 }
@@ -94,7 +100,8 @@ const props = withDefaults(defineProps<ModalProps>(), {
   overlay: true,
   transition: true,
   modal: true,
-  dismissible: true
+  dismissible: true,
+  forceMount: false
 })
 const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()
@@ -221,7 +228,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
       <slot :open="open" />
     </DialogTrigger>
 
-    <DialogPortal v-bind="portalProps">
+    <DialogPortal v-bind="portalProps" :force-mount="forceMount">
       <template v-if="scrollable">
         <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })">
           <ReuseContentTemplate />

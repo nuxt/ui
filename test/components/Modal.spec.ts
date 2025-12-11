@@ -23,6 +23,7 @@ describe('Modal', () => {
     ['with closeIcon', { props: { ...props, closeIcon: 'i-lucide-trash' } }],
     ['with class', { props: { ...props, class: 'bg-elevated' } }],
     ['with ui', { props: { ...props, ui: { close: 'end-2' } } }],
+    ['with forceMount', { props: { ...props, forceMount: true } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],

@@ -360,6 +360,35 @@ slots:
 :placeholder{class="h-full"}
 ::
 
+### Force Mount
+
+Use the `forceMount` prop to force the Modal content to render even when closed. This is useful for SSR when using `portal: false`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  forceMount: true
+  portal: false
+  title: 'Modal with force mount'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:placeholder{class="h-48"}
+::
+
 ## Examples
 
 ### Control open state
