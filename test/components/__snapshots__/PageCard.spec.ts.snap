@@ -350,7 +350,7 @@ exports[`PageCard > renders with orientation horizontal reverse correctly 1`] = 
 "<div data-orientation="horizontal" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 lg:grid-cols-2 lg:items-center">
-    <div data-slot="wrapper" class="flex flex-col flex-1 items-start lg:order-last">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start order-last">
       <!--v-if-->
       <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
       <div data-slot="body" class="flex-1">
@@ -386,7 +386,7 @@ exports[`PageCard > renders with orientation vertical reverse correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div data-slot="wrapper" class="flex flex-col flex-1 items-start lg:order-last">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start order-last">
       <!--v-if-->
       <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
       <div data-slot="body" class="flex-1">
@@ -599,7 +599,7 @@ exports[`PageCard > renders with title slot correctly 1`] = `
 `;
 
 exports[`PageCard > renders with to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default transition hover:bg-elevated/50 has-focus-visible:ring-2 has-focus-visible:ring-primary">
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default has-focus-visible:ring-2 has-focus-visible:ring-primary transition hover:bg-elevated/50">
   <!--v-if-->
   <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <!--v-if-->
@@ -662,7 +662,7 @@ exports[`PageCard > renders with variant ghost highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant ghost to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg transition hover:bg-elevated/50 has-focus-visible:ring-2 has-focus-visible:ring-primary">
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg has-focus-visible:ring-2 has-focus-visible:ring-primary transition hover:bg-elevated/50">
   <!--v-if-->
   <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
@@ -715,7 +715,7 @@ exports[`PageCard > renders with variant naked highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant naked to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg transition has-focus-visible:ring-2 has-focus-visible:ring-primary">
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg has-focus-visible:ring-2 has-focus-visible:ring-primary transition">
   <!--v-if-->
   <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-0 sm:p-0">
     <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
@@ -768,7 +768,7 @@ exports[`PageCard > renders with variant outline highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant outline to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default transition hover:bg-elevated/50 has-focus-visible:ring-2 has-focus-visible:ring-primary">
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default has-focus-visible:ring-2 has-focus-visible:ring-primary transition hover:bg-elevated/50">
   <!--v-if-->
   <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
@@ -821,7 +821,7 @@ exports[`PageCard > renders with variant soft highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant soft to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-elevated/50 transition hover:bg-elevated has-focus-visible:ring-2 has-focus-visible:ring-primary">
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-elevated/50 has-focus-visible:ring-2 has-focus-visible:ring-primary transition hover:bg-elevated">
   <!--v-if-->
   <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
@@ -874,7 +874,7 @@ exports[`PageCard > renders with variant solid highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant solid to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-inverted text-inverted transition hover:bg-inverted/90 has-focus-visible:ring-2 has-focus-visible:ring-primary">
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-inverted text-inverted has-focus-visible:ring-2 has-focus-visible:ring-primary transition hover:bg-inverted/90">
   <!--v-if-->
   <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
@@ -927,7 +927,7 @@ exports[`PageCard > renders with variant subtle highlight correctly 1`] = `
 `;
 
 exports[`PageCard > renders with variant subtle to correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-elevated/50 ring ring-default transition hover:bg-elevated hover:ring-accented has-focus-visible:ring-2 has-focus-visible:ring-primary">
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-elevated/50 ring ring-default has-focus-visible:ring-2 has-focus-visible:ring-primary transition hover:bg-elevated hover:ring-accented">
   <!--v-if-->
   <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
     <div data-slot="wrapper" class="flex flex-col flex-1 items-start">

@@ -114,7 +114,7 @@ You can use the `extensions` prop to add additional TipTap extensions to enhance
 ```vue
 <script setup lang="ts">
 import { Emoji } from '@tiptap/extension-emoji'
-import TextAlign from '@tiptap/extension-text-align'
+import { TextAlign } from '@tiptap/extension-text-align'
 
 const value = ref('<h1>Hello World</h1>\n')
 </script>
@@ -319,7 +319,7 @@ Check out the image upload example for a complete implementation with custom han
 
 ### With toolbar
 
-You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a fixed, bubble, or floating toolbar to the Editor with common formatting actions.
+You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a `fixed`, `bubble`, or `floating` toolbar to the Editor with common formatting actions.
 
 ::component-example
 ---

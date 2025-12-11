@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`PageFeature > renders with as correctly 1`] = `
-"<section data-orientation="horizontal" data-slot="root" class="relative flex items-start gap-2.5">
+"<section data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
   <!--v-if-->
   <div data-slot="wrapper" class="">
     <!--v-if-->
@@ -23,7 +23,7 @@ exports[`PageFeature > renders with class correctly 1`] = `
 `;
 
 exports[`PageFeature > renders with default slot correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class="relative flex items-start gap-2.5">
+"<div data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
   <div data-slot="leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="">
     <!--v-if-->Default slot
@@ -32,7 +32,7 @@ exports[`PageFeature > renders with default slot correctly 1`] = `
 `;
 
 exports[`PageFeature > renders with description correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class="relative flex items-start gap-2.5">
+"<div data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
   <!--v-if-->
   <div data-slot="wrapper" class="">
     <!--v-if-->
@@ -43,7 +43,7 @@ exports[`PageFeature > renders with description correctly 1`] = `
 `;
 
 exports[`PageFeature > renders with description slot correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class="relative flex items-start gap-2.5">
+"<div data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
   <div data-slot="leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="">
     <!--v-if-->
@@ -54,7 +54,7 @@ exports[`PageFeature > renders with description slot correctly 1`] = `
 `;
 
 exports[`PageFeature > renders with icon correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class="relative flex items-start gap-2.5">
+"<div data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
   <div data-slot="leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="">
     <!--v-if-->
@@ -65,7 +65,7 @@ exports[`PageFeature > renders with icon correctly 1`] = `
 `;
 
 exports[`PageFeature > renders with leading slot correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class="relative flex items-start gap-2.5">
+"<div data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
   <div data-slot="leading" class="inline-flex items-center justify-center p-0.5">Leading slot</div>
   <div data-slot="wrapper" class="">
     <!--v-if-->
@@ -76,7 +76,7 @@ exports[`PageFeature > renders with leading slot correctly 1`] = `
 `;
 
 exports[`PageFeature > renders with orientation horizontal correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class="relative flex items-start gap-2.5">
+"<div data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
   <div data-slot="leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="">
     <!--v-if-->
@@ -87,7 +87,7 @@ exports[`PageFeature > renders with orientation horizontal correctly 1`] = `
 `;
 
 exports[`PageFeature > renders with orientation vertical correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative">
+"<div data-orientation="vertical" data-slot="root" class="relative rounded-sm">
   <div data-slot="leading" class="inline-flex items-center justify-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="">
     <!--v-if-->
@@ -98,7 +98,7 @@ exports[`PageFeature > renders with orientation vertical correctly 1`] = `
 `;
 
 exports[`PageFeature > renders with title correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class="relative flex items-start gap-2.5">
+"<div data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
   <!--v-if-->
   <div data-slot="wrapper" class="">
     <!--v-if-->
@@ -109,7 +109,7 @@ exports[`PageFeature > renders with title correctly 1`] = `
 `;
 
 exports[`PageFeature > renders with title slot correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class="relative flex items-start gap-2.5">
+"<div data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
   <div data-slot="leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="">
     <!--v-if-->
@@ -120,9 +120,9 @@ exports[`PageFeature > renders with title slot correctly 1`] = `
 `;
 
 exports[`PageFeature > renders with to correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class="relative flex items-start gap-2.5">
+"<div data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5 has-focus-visible:ring-2 has-focus-visible:ring-primary transition">
   <!--v-if-->
-  <div data-slot="wrapper" class=""><a href="https://github.com/benjamincanac" tabindex="-1" rel="noopener noreferrer" aria-label="Feature link" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+  <div data-slot="wrapper" class=""><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Feature link" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -130,7 +130,7 @@ exports[`PageFeature > renders with to correctly 1`] = `
 `;
 
 exports[`PageFeature > renders with ui correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class="relative flex items-start gap-2.5">
+"<div data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
   <div data-slot="leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
   <div data-slot="wrapper" class="">
     <!--v-if-->
