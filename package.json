@@ -125,8 +125,8 @@
     "@internationalized/number": "^3.6.5",
     "@nuxt/fonts": "^0.12.1",
     "@nuxt/icon": "^2.1.0",
-    "@nuxt/kit": "^4.2.1",
-    "@nuxt/schema": "^4.2.1",
+    "@nuxt/kit": "^4.2.2",
+    "@nuxt/schema": "^4.2.2",
     "@nuxtjs/color-mode": "^3.5.2",
     "@standard-schema/spec": "^1.0.0",
     "@tailwindcss/postcss": "^4.1.17",
@@ -189,7 +189,7 @@
     "embla-carousel": "^8.6.0",
     "eslint": "^9.39.1",
     "happy-dom": "^20.0.11",
-    "nuxt": "^4.2.1",
+    "nuxt": "^4.2.2",
     "release-it": "^19.0.6",
     "vitest": "^3.2.4",
     "vitest-axe": "^0.1.0",
@@ -234,10 +234,11 @@
     }
   },
   "resolutions": {
-    "@nuxt/kit": "^4.2.1",
+    "@nuxt/kit": "^4.2.2",
     "@nuxt/ui": "workspace:*",
     "typescript": "5.8.3",
-    "unplugin": "^2.3.11"
+    "unplugin": "^2.3.11",
+    "c12": "^3.3.2"
   },
   "keywords": [
     "nuxt-ui",

@@ -37,7 +37,7 @@
     "joi": "^18.0.2",
     "maska": "^3.2.0",
     "motion-v": "^1.7.3",
-    "nuxt": "^4.2.1",
+    "nuxt": "^4.2.2",
     "nuxt-component-meta": "^0.15.0",
     "nuxt-llms": "^0.1.3",
     "nuxt-og-image": "^5.1.12",
