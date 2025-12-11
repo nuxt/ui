@@ -33,27 +33,72 @@ const themeSlots = computed(() => Object.keys(componentTheme.value?.slots ?? {})
 const open = ref(false)
 const highlightedSlot = ref<string | null>(null)
 const highlightStyle = ref<{ left: string, top: string, width: string, height: string } | null>(null)
+const isPortalHighlight = ref(false)
+const popoverContentRef = useTemplateRef('popoverContentRef')
 
 function getSlotClasses(slotName: string): string {
   const baseClasses = componentTheme.value?.slots?.[slotName] || ''
   return Array.isArray(baseClasses) ? baseClasses.filter(Boolean).join(' ') : baseClasses
 }
 
-function getSlotPosition(slotName: string) {
+function findSlotElement(slotName: string): { element: Element, inPortal: boolean } | null {
   if (!props.container) return null
 
-  const slotElement = props.container.querySelector(`[data-slot="${slotName}"]`)
-  if (!slotElement) return null
+  // First check in container
+  const containerSlot = props.container.querySelector(`[data-slot="${slotName}"]`)
+  if (containerSlot) {
+    return { element: containerSlot, inPortal: false }
+  }
 
+  // Then check in Reka UI portals (excluding our own popover's portal)
+  for (const child of document.body.children) {
+    const hasRekaAttr = Array.from(child.attributes).some(attr => attr.name.startsWith('data-reka-'))
+    if (hasRekaAttr) {
+      // Skip the portal that contains our popover content
+      if (popoverContentRef.value && child.contains(popoverContentRef.value)) {
+        continue
+      }
+      const portalSlot = child.querySelector(`[data-slot="${slotName}"]`)
+      if (portalSlot) {
+        return { element: portalSlot, inPortal: true }
+      }
+    }
+  }
+
+  return null
+}
+
+function getSlotPosition(slotName: string): { style: { left: string, top: string, width: string, height: string }, inPortal: boolean } | null {
+  const result = findSlotElement(slotName)
+  if (!result) return null
+
+  const targetRect = result.element.getBoundingClientRect()
+
+  if (result.inPortal) {
+    // Use fixed positioning for portal elements
+    return {
+      style: {
+        left: `${targetRect.left}px`,
+        top: `${targetRect.top}px`,
+        width: `${targetRect.width}px`,
+        height: `${targetRect.height}px`
+      },
+      inPortal: true
+    }
+  }
+
+  // Use relative positioning for container elements
   const positionEl = props.positionContainer ?? props.container
   const positionRect = positionEl!.getBoundingClientRect()
-  const targetRect = slotElement.getBoundingClientRect()
 
   return {
-    left: `${targetRect.left - positionRect.left}px`,
-    top: `${targetRect.top - positionRect.top}px`,
-    width: `${targetRect.width}px`,
-    height: `${targetRect.height}px`
+    style: {
+      left: `${targetRect.left - positionRect.left}px`,
+      top: `${targetRect.top - positionRect.top}px`,
+      width: `${targetRect.width}px`,
+      height: `${targetRect.height}px`
+    },
+    inPortal: false
   }
 }
 
@@ -62,7 +107,8 @@ function initializePosition() {
   for (const slotName of themeSlots.value) {
     const position = getSlotPosition(slotName)
     if (position) {
-      highlightStyle.value = position
+      highlightStyle.value = position.style
+      isPortalHighlight.value = position.inPortal
       break
     }
   }
@@ -73,16 +119,18 @@ function highlightSlot(slotName: string) {
   if (!position) return
 
   highlightedSlot.value = slotName
-  highlightStyle.value = position
+  highlightStyle.value = position.style
+  isPortalHighlight.value = position.inPortal
 }
 
 function clearHighlight() {
   highlightedSlot.value = null
 }
 
-function isSlotRendered(slotName: string): boolean {
-  if (!props.container) return false
-  return !!props.container.querySelector(`[data-slot="${slotName}"]`)
+function getSlotRenderLocation(slotName: string): 'container' | 'portal' | 'none' {
+  const result = findSlotElement(slotName)
+  if (!result) return 'none'
+  return result.inPortal ? 'portal' : 'container'
 }
 
 // Initialize position when popover opens, clear when closes
@@ -102,6 +150,7 @@ watch(open, (isOpen) => {
       v-model:open="open"
       :content="{ align: 'start' }"
       :ui="{ content: 'w-64 max-h-72 overflow-y-auto' }"
+      :dismissible="false"
     >
       <UButton
         icon="i-lucide-scan-eye"
@@ -113,7 +162,7 @@ watch(open, (isOpen) => {
       />
 
       <template #content>
-        <div class="px-2.5 py-1.5 text-xs font-semibold text-highlighted border-b border-default">
+        <div ref="popoverContentRef" class="px-2.5 py-1.5 text-xs font-semibold text-highlighted border-b border-default">
           Theme slots
         </div>
         <div class="p-1">
@@ -126,8 +175,9 @@ watch(open, (isOpen) => {
             @mouseleave="clearHighlight"
           >
             <div class="flex items-center gap-2">
-              <code class="text-xs font-medium" :class="[isSlotRendered(slotName) ? 'text-highlighted' : 'text-muted']">{{ slotName }}</code>
-              <span v-if="!isSlotRendered(slotName)" class="text-[10px] text-muted">(not rendered)</span>
+              <code class="text-xs font-medium" :class="[getSlotRenderLocation(slotName) !== 'none' ? 'text-highlighted' : 'text-muted']">{{ slotName }}</code>
+              <span v-if="getSlotRenderLocation(slotName) === 'portal'" class="text-[10px] text-muted">(in portal)</span>
+              <span v-else-if="getSlotRenderLocation(slotName) === 'none'" class="text-[10px] text-muted">(not rendered)</span>
             </div>
             <div v-if="getSlotClasses(slotName)" class="mt-0.5 text-[10px] text-muted line-clamp-2 font-mono">
               {{ getSlotClasses(slotName) }}
@@ -137,18 +187,23 @@ watch(open, (isOpen) => {
       </template>
     </UPopover>
 
-    <div
-      v-if="highlightStyle"
-      :style="highlightStyle"
-      class="absolute pointer-events-none border-2 border-dashed border-primary invert z-1 rounded transition-all duration-150"
-      :class="[highlightedSlot ? 'opacity-100' : 'opacity-0']"
-    >
+    <Teleport to="body" :disabled="!isPortalHighlight">
       <div
-        v-if="highlightedSlot"
-        class="absolute -top-6 -left-0.5 px-1.5 py-0.5 text-xs font-medium font-mono bg-primary text-highlighted rounded whitespace-nowrap"
+        v-if="highlightStyle"
+        :style="highlightStyle"
+        class="pointer-events-none border-2 border-dashed border-primary invert rounded transition-all duration-150"
+        :class="[
+          highlightedSlot ? 'opacity-100' : 'opacity-0',
+          isPortalHighlight ? 'fixed z-2147483647' : 'absolute z-1'
+        ]"
       >
-        {{ highlightedSlot }}
+        <div
+          v-if="highlightedSlot"
+          class="absolute -top-6 -left-0.5 px-1.5 py-0.5 text-xs font-medium font-mono bg-primary text-highlighted rounded whitespace-nowrap"
+        >
+          {{ highlightedSlot }}
+        </div>
       </div>
-    </div>
+    </Teleport>
   </template>
 </template>
