@@ -4,6 +4,7 @@ const slots = defineSlots()
 const target = useTemplateRef('target')
 
 const tree = inject<Ref<Record<string, Node>>>('tree', ref({}))
+const activePath = inject<Ref<string>>('activePath', ref(''))
 
 const children = computed(() => slots.default?.().map(transformSlot))
 
@@ -19,17 +20,14 @@ function transformSlot(slot: any, index: number) {
   }
 }
 
-const { stop } = useIntersectionObserver(
-  target,
-  ([entry]) => {
-    if (entry?.isIntersecting) {
-      for (const child of children.value) {
-        tree.value[child.label] = child.component
-      }
-      stop()
+useIntersectionObserver(target, ([entry]) => {
+  if (entry?.isIntersecting) {
+    for (const child of children.value) {
+      tree.value[child.label] = child.component
+      activePath.value = child.label
     }
   }
-)
+})
 </script>
 
 <template>

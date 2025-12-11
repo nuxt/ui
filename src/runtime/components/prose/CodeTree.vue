@@ -73,8 +73,14 @@ const initialPath = props.modelValue ?? props.defaultValue
 const model = ref(initialPath ? { path: initialPath } : undefined)
 const lastSelectedItem = ref()
 
-watch(model, value => emits('update:modelValue', value?.path))
+watch(model, (value) => {
+  if (value?.path !== props.modelValue) {
+    emits('update:modelValue', value?.path)
+  }
+})
 watch(() => props.modelValue, (value) => {
+  if (value === model.value?.path) return
+
   model.value = value ? { path: value } : undefined
   // Expand the tree to show the selected item
   const pathsToExpand = getExpandedPaths(value)
