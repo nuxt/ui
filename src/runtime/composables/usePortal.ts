@@ -8,30 +8,29 @@ export type PortalProp = boolean | string | HTMLElement | { to?: boolean | strin
 export function usePortal(portal: Ref<PortalProp | undefined>) {
   const globalPortal = inject(portalTargetInjectionKey, undefined)
 
-  const value = computed(() => {
-    // Boolean portal
-    if (portal.value === true) {
+  const value = computed((): boolean | string | HTMLElement | undefined => {
+    const p = portal.value
+
+    if (p === true) {
       return globalPortal?.value
     }
 
-    // Object portal
-    if (typeof portal === 'object' && 'to' in portal) {
-      // Boolean portal to value
-      if (portal.to === true) {
+    if (typeof p === 'object' && p !== null && !(p instanceof HTMLElement)) {
+      if (p.to === true) {
         return globalPortal?.value
       }
-
-      // Non-boolean object portal value
-      return portal.to
+      return p.to
     }
 
-    // Non-boolean, non-object value fallback
-    return portal.value
+    return p
   })
 
   const disabled = computed(() => typeof value.value === 'boolean' ? !value.value : false)
   const to = computed(() => typeof value.value === 'boolean' ? 'body' : value.value)
-  const forceMount = computed(() => 'forceMount' in portal && portal.forceMount === true)
+  const forceMount = computed(() => {
+    const p = portal.value
+    return typeof p === 'object' && p !== null && !(p instanceof HTMLElement) && p.forceMount === true
+  })
 
   return computed(() => ({
     to: to.value,
