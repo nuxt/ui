@@ -153,7 +153,7 @@ watch(open, (isOpen) => {
       :dismissible="false"
     >
       <UButton
-        icon="i-lucide-scan-eye"
+        :icon="open ? 'i-lucide-x' : 'i-lucide-scan-eye'"
         color="neutral"
         variant="outline"
         size="sm"
