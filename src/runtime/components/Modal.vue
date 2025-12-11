@@ -5,6 +5,7 @@ import theme from '#build/ui/modal'
 import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { PortalProp } from '../composables/usePortal'
 
 type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>
 
@@ -37,7 +38,7 @@ export interface ModalProps extends DialogRootProps {
    * Render the modal in a portal.
    * @defaultValue true
    */
-  portal?: boolean | string | HTMLElement
+  portal?: PortalProp
   /**
    * Display a close button to dismiss the modal.
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -55,12 +56,6 @@ export interface ModalProps extends DialogRootProps {
    * @defaultValue true
    */
   dismissible?: boolean
-  /**
-   * Force the modal content to render even when closed.
-   * Useful for SSR when using `portal: false`.
-   * @defaultValue false
-   */
-  forceMount?: boolean
   class?: any
   ui?: Modal['slots']
 }
@@ -100,8 +95,7 @@ const props = withDefaults(defineProps<ModalProps>(), {
   overlay: true,
   transition: true,
   modal: true,
-  dismissible: true,
-  forceMount: false
+  dismissible: true
 })
 const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()
@@ -228,7 +222,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
       <slot :open="open" />
     </DialogTrigger>
 
-    <DialogPortal v-bind="portalProps" :force-mount="forceMount">
+    <DialogPortal v-bind="portalProps">
       <template v-if="scrollable">
         <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })">
           <ReuseContentTemplate />

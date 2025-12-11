@@ -362,7 +362,7 @@ slots:
 
 ### Force Mount
 
-Use the `forceMount` prop to force the Modal content to render even when closed. This is useful for SSR when using `portal: false`.
+Use the `portal` prop with an object to force the Modal content to render even when closed. This is useful for SSR when the modal should be visible on initial page load.
 
 ::component-code
 ---
@@ -370,8 +370,9 @@ prettier: true
 ignore:
   - title
 props:
-  forceMount: true
-  portal: false
+  portal:
+    to: false
+    forceMount: true
   title: 'Modal with force mount'
 slots:
   default: |
