@@ -1,13 +1,7 @@
 ---
 title: How to build an AI chat
 description: This is a guide on how to build an AI chat with Nuxt UI.
-framework: nuxt
-category: blog
-links:
-  - label: GitHub
-    icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/docs/content/blog/how-to-build-an-ai-chat.md
-intersection: true
+date: 2025-12-11
 ---
 
 ## Start here

@@ -78,15 +78,6 @@ export const collections = {
       community: PageSection
     })
   }),
-  blog: defineCollection({
-    type: 'page',
-    source: [{
-      include: 'blog/**/*'
-    }],
-    schema: Page.extend({
-      intersection: z.boolean().optional()
-    })
-  }),
   docs: defineCollection({
     type: 'page',
     source: [{
@@ -101,7 +92,6 @@ export const collections = {
       links: z.array(Button)
     })
   }),
-
   figma: defineCollection({
     type: 'page',
     source: 'figma.yml',
@@ -198,6 +188,20 @@ export const collections = {
     type: 'page',
     source: 'team.yml',
     schema: Page
+  }),
+  blog: defineCollection({
+    type: 'page',
+    source: 'blog.yml',
+    schema: Page
+  }),
+  posts: defineCollection({
+    type: 'page',
+    source: [{
+      include: 'blog/**/*'
+    }],
+    schema: z.object({
+      date: z.string()
+    })
   }),
   releases: defineCollection({
     type: 'page',
