@@ -133,7 +133,6 @@ const ariaLabel = computed(() => {
         :aria-label="ariaLabel"
         v-bind="{ to, target, ...$attrs }"
         class="focus:outline-none peer"
-        tabindex="-1"
         raw
       >
         <span class="absolute inset-0" aria-hidden="true" />

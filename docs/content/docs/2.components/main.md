@@ -13,7 +13,7 @@ links:
 The Main component works together with the [Header](/docs/components/header) component to create a full-height layout that extends to the viewport's available height.
 
 ::tip{to="/docs/getting-started/theme/css-variables#header"}
-The Main component uses the `--ui-header-height` CSS variable to position itself correctly below the [Header](/docs/components/header).
+The Main component uses the `--ui-header-height` CSS variable to position itself correctly below the `Header`.
 ::
 
 ## Examples

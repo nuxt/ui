@@ -287,6 +287,8 @@ As such, using `provide()` in pages or parent components isn't supported directl
 <script setup lang="ts">
 import { LazyModalExample } from '#components'
 
+const overlay = useOverlay()
+
 const providedValue = inject('valueProvidedInPage')
 
 const modal = overlay.create(LazyModalExample, {
