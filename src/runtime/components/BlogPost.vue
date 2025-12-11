@@ -108,7 +108,7 @@ const datetime = computed(() => {
     return undefined
   }
 })
-const ariaLabel = computed(() => {
+const srLabel = computed(() => {
   const slotText = slots.title && getSlotChildrenText(slots.title())
   return (slotText || props.title || 'Post link').trim()
 })
@@ -130,14 +130,13 @@ const ariaLabel = computed(() => {
     <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
       <ULink
         v-if="to"
-        :aria-label="ariaLabel"
         v-bind="{ to, target, ...$attrs }"
         class="focus:outline-none peer absolute inset-0"
         tabindex="-1"
         raw
       >
-        <span class="absolute w-1 h-1 text-nowrap overflow-hidden">
-          {{ title }}
+        <span class="sr-only">
+          {{ srLabel }}
         </span>
       </ULink>
 
