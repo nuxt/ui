@@ -66,7 +66,7 @@ const customHandlers = {
   ...aiHandlers
 } satisfies EditorCustomHandlers
 
-const fixedToolbarItems = computed(() => [[{
+const fixedToolbarItems = [[{
   kind: 'undo',
   icon: 'i-lucide-undo',
   tooltip: { text: 'Undo' }
@@ -183,9 +183,9 @@ const fixedToolbarItems = computed(() => [[{
     icon: 'i-lucide-align-justify',
     label: 'Align Justify'
   }]
-}]] satisfies EditorToolbarItem<typeof customHandlers>[][])
+}]] satisfies EditorToolbarItem<typeof customHandlers>[][]
 
-const bubbleToolbarItems = [[{
+const bubbleToolbarItems = computed(() => [[{
   icon: 'i-lucide-sparkles',
   label: 'Improve',
   activeColor: 'neutral',
@@ -354,7 +354,7 @@ const bubbleToolbarItems = [[{
     icon: 'i-lucide-align-justify',
     label: 'Align Justify'
   }]
-}]] satisfies EditorToolbarItem<typeof customHandlers>[][]
+}]] satisfies EditorToolbarItem<typeof customHandlers>[][])
 
 const imageToolbarItems = (editor: Editor): EditorToolbarItem[][] => {
   const node = editor.state.doc.nodeAt(editor.state.selection.from)
