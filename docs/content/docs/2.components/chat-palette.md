@@ -26,27 +26,9 @@ The ChatPalette component is a structured layout wrapper that organizes [ChatMes
 
 ## Examples
 
-::note
-These chat components are designed to be used with the [Vercel AI SDK](https://ai-sdk.vercel.dev/), specifically the [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class for managing chat state and streaming responses.
+::tip{to="/docs/components/chat-messages#examples"}
+Check the **ChatMessages** documentation for server API setup and installation instructions.
 ::
-
-You can get started with a simple server API endpoint to handle chat requests using [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text#streamtext) from the AI SDK. You can use the [Vercel AI Gateway](https://vercel.com/ai-gateway) to access AI models through a centralized endpoint:
-
-```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
-
-  return streamText({
-    model: gateway('openai/gpt-4o-mini'),
-    maxOutputTokens: 10000,
-    system: 'You are a helpful assistant.',
-    messages: convertToModelMessages(messages)
-  }).toUIMessageStreamResponse()
-})
-```
 
 ### Within a Modal
 
@@ -79,7 +61,47 @@ name: 'chat-palette-content-search-example'
 ::
 
 ::tip
-You can press :kbd{value="meta"} :kbd{value="K"} to open the search on this documentation to try a real-life example.
+You can enhance your chatbot with tool calling capabilities using the [Model Context Protocol](https://ai-sdk.dev/docs/ai-sdk-core/mcp) (`@ai-sdk/mcp`). This allows the AI to search your documentation or perform other actions:
+
+::code-collapse
+
+```ts [server/api/search.ts]
+import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
+import { streamText, convertToModelMessages, stepCountIs } from 'ai'
+import { experimental_createMCPClient } from '@ai-sdk/mcp'
+import { gateway } from '@ai-sdk/gateway'
+
+export default defineEventHandler(async (event) => {
+  const { messages } = await readBody(event)
+
+  const httpTransport = new StreamableHTTPClientTransport(
+    new URL('https://your-app.com/mcp')
+  )
+  const httpClient = await experimental_createMCPClient({
+    transport: httpTransport
+  })
+  const tools = await httpClient.tools()
+
+  return streamText({
+    model: gateway('anthropic/claude-sonnet-4.5'),
+    maxOutputTokens: 10000,
+    system: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
+    messages: convertToModelMessages(messages),
+    stopWhen: stepCountIs(6),
+    tools,
+    onFinish: async () => {
+      await httpClient.close()
+    },
+    onError: async (error) => {
+      console.error(error)
+      await httpClient.close()
+    }
+  }).toUIMessageStreamResponse()
+})
+```
+
+::
+
 ::
 
 ## API

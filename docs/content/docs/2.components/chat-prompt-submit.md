@@ -235,12 +235,8 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.re
 
 ## Examples
 
-::note
-These chat components are designed to be used with the [Vercel AI SDK](https://ai-sdk.vercel.dev/), specifically the [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class for managing chat state and streaming responses.
-::
-
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/chat" target="_blank"}
-Check out the source code of our **AI Chat template** on GitHub for a real-life example.
+::tip{to="/docs/components/chat-messages#examples"}
+Check the **ChatMessages** documentation for server API setup and installation instructions.
 ::
 
 ### Within a page

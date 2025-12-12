@@ -448,10 +448,31 @@ Learn more about creating custom extensions in the TipTap documentation.
 
 ### With AI completion
 
-This example demonstrates how to add AI-powered features to the Editor using the [Vercel AI SDK](https://ai-sdk.vercel.dev/), specifically the [`useCompletion`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-completion) composable for streaming text completions, combined with the [Vercel AI Gateway](https://vercel.com/ai-gateway) to access AI models through a centralized endpoint.
+This example demonstrates how to add AI-powered features to the Editor using the [Vercel AI SDK](https://ai-sdk.vercel.dev/), specifically the [`useCompletion`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-completion) composable for streaming text completions, combined with the [Vercel AI Gateway](https://vercel.com/ai-gateway) to access AI models through a centralized endpoint. It includes ghost text autocompletion and text transformation actions (fix grammar, extend, reduce, simplify, translate, etc.).
 
 ::note
-This example includes ghost text autocompletion and text transformation actions (fix grammar, simplify, translate, etc.).
+You need to install these dependencies first to use this example:
+
+::code-group{sync="pm"}
+
+```bash [pnpm]
+pnpm add ai @ai-sdk/gateway @ai-sdk/vue
+```
+
+```bash [yarn]
+yarn add ai @ai-sdk/gateway @ai-sdk/vue
+```
+
+```bash [npm]
+npm install ai @ai-sdk/gateway @ai-sdk/vue
+```
+
+```bash [bun]
+bun add ai @ai-sdk/gateway @ai-sdk/vue
+```
+
+::
+
 ::
 
 1. Create a custom TipTap extension that handles inline ghost text suggestions:
