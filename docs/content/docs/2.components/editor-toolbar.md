@@ -140,6 +140,10 @@ When using `bubble`{lang="ts-type"} or `floating`{lang="ts-type"} layouts, use t
 
 ## Examples
 
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/editor" target="_blank"}
+Check out the source code of our **Editor template** on GitHub for a real-life example.
+::
+
 ### With image toolbar
 
 Use the `should-show` prop to create context-specific toolbars that appear only for certain node types. This example shows a `bubble` toolbar with download and delete actions that only appears when an image is selected.

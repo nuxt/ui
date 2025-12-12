@@ -317,6 +317,10 @@ Check out the image upload example for a complete implementation with custom han
 
 ## Examples
 
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/editor" target="_blank"}
+Check out the source code of our **Editor template** on GitHub for a real-life example.
+::
+
 ### With toolbar
 
 You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a `fixed`, `bubble`, or `floating` toolbar to the Editor with common formatting actions.
@@ -444,10 +448,10 @@ Learn more about creating custom extensions in the TipTap documentation.
 
 ### With AI completion
 
-This example demonstrates how to add AI-powered features to the Editor using the [Vercel AI SDK](https://ai-sdk.vercel.dev/), specifically the [`useCompletion`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-completion) composable for streaming text completions, combined with the [Vercel AI Gateway](https://vercel.com/ai-gateway) to access AI models through a centralized endpoint. It includes ghost text autocompletion and text transformation actions (fix grammar, extend, reduce, simplify, translate, etc.).
+This example demonstrates how to add AI-powered features to the Editor using the [Vercel AI SDK](https://ai-sdk.vercel.dev/), specifically the [`useCompletion`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-completion) composable for streaming text completions, combined with the [Vercel AI Gateway](https://vercel.com/ai-gateway) to access AI models through a centralized endpoint.
 
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/editor" target="_blank"}
-Check out the source code of our **Editor template** on GitHub for a real-life example.
+::note
+This example includes ghost text autocompletion and text transformation actions (fix grammar, simplify, translate, etc.).
 ::
 
 1. Create a custom TipTap extension that handles inline ghost text suggestions:
