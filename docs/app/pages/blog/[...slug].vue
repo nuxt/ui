@@ -12,6 +12,26 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
+const title = page.value.seo?.title || page.value.title
+const description = page.value.seo?.description || page.value.description
+
+useSeoMeta({
+  title,
+  description,
+  ogDescription: description,
+  ogTitle: title
+})
+
+if (page.value.image) {
+  defineOgImage({ url: page.value.image })
+} else {
+  defineOgImageComponent('Docs', {
+    headline: 'Blog',
+    title,
+    description
+  })
+}
+
 const tree = ref<Record<string, Node>>({})
 const activePath = ref()
 
