@@ -80,8 +80,8 @@ props:
 
 ## Examples
 
-::note{to="https://ai-sdk.dev/docs/getting-started/nuxt" target="_blank"}
-These chat components are designed to be used with the **AI SDK v5** from **Vercel AI SDK**.
+::note
+These chat components are designed to be used with the [Vercel AI SDK](https://ai-sdk.vercel.dev/), specifically the [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class for managing chat state and streaming responses.
 ::
 
 ::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/chat" target="_blank"}

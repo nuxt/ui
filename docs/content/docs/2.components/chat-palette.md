@@ -26,9 +26,27 @@ The ChatPalette component is a structured layout wrapper that organizes [ChatMes
 
 ## Examples
 
-::note{to="https://ai-sdk.dev/docs/getting-started/nuxt" target="_blank"}
-These chat components are designed to be used with the **AI SDK v5** from **Vercel AI SDK**.
+::note
+These chat components are designed to be used with the [Vercel AI SDK](https://ai-sdk.vercel.dev/), specifically the [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class for managing chat state and streaming responses.
 ::
+
+You can get started with a simple server API endpoint to handle chat requests using [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text#streamtext) from the AI SDK. You can use the [Vercel AI Gateway](https://vercel.com/ai-gateway) to access AI models through a centralized endpoint:
+
+```ts [server/api/chat.post.ts]
+import { streamText, convertToModelMessages } from 'ai'
+import { gateway } from '@ai-sdk/gateway'
+
+export default defineEventHandler(async (event) => {
+  const { messages } = await readBody(event)
+
+  return streamText({
+    model: gateway('openai/gpt-4o-mini'),
+    maxOutputTokens: 10000,
+    system: 'You are a helpful assistant.',
+    messages: convertToModelMessages(messages)
+  }).toUIMessageStreamResponse()
+})
+```
 
 ### Within a Modal
 
@@ -58,6 +76,10 @@ iframeMobile: true
 overflowHidden: true
 name: 'chat-palette-content-search-example'
 ---
+::
+
+::tip
+You can press :kbd{value="meta"} :kbd{value="K"} to open the search on this documentation to try a real-life example.
 ::
 
 ## API
