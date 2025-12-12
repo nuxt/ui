@@ -79,10 +79,6 @@ The offset is automatically calculated to center the handle for small blocks and
 
 ## Examples
 
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/editor" target="_blank"}
-Check out the source code of our **Editor template** on GitHub for a real-life example.
-::
-
 ### With dropdown menu
 
 Use the default slot to add a [DropdownMenu](/docs/components/dropdown-menu) with block-level actions like duplicate, delete, move up/down, or transform blocks into different types.
