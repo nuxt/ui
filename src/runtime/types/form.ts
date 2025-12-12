@@ -36,7 +36,7 @@ export type InferOutput<Schema> = Schema extends StandardSchemaV1 ? StandardSche
 
 export type FormData<S extends FormSchema, T extends boolean = true> = T extends true ? InferOutput<S> : InferInput<S>
 
-export type FormInputEvents = 'input' | 'blur' | 'change' | 'focus'
+export type FormInputEvents = 'input' | 'blur' | 'change' | 'focus' | 'submit'
 
 export interface FormError<P extends string = string> {
   name?: P
