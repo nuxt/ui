@@ -6,6 +6,10 @@ export const portalTargetInjectionKey: InjectionKey<Ref<boolean | string | HTMLE
 
 export type PortalProps = boolean | string | HTMLElement | DialogPortalProps
 
+function isDialogPortalProps(p: unknown): p is DialogPortalProps {
+  return typeof p === 'object' && p !== null && ('to' in p || 'disabled' in p || 'defer' in p || 'forceMount' in p)
+}
+
 export function usePortal(portal: Ref<PortalProps | undefined>) {
   const globalPortal = inject(portalTargetInjectionKey, undefined)
 
@@ -16,18 +20,37 @@ export function usePortal(portal: Ref<PortalProps | undefined>) {
       return globalPortal?.value
     }
 
-    if (typeof p === 'object' && p !== null && !(p instanceof HTMLElement)) {
+    if (isDialogPortalProps(p)) {
       return p.to
     }
 
     return p
   })
 
-  const disabled = computed(() => typeof value.value === 'boolean' ? !value.value : false)
-  const to = computed(() => typeof value.value === 'boolean' ? 'body' : value.value)
+  const disabled = computed(() => {
+    const p = portal.value
+
+    if (isDialogPortalProps(p) && p.disabled !== undefined) {
+      return p.disabled
+    }
+
+    return typeof value.value === 'boolean' ? !value.value : false
+  })
+
+  const to = computed(() => {
+    if (isDialogPortalProps(portal.value) && (typeof portal.value?.to === 'boolean' || typeof portal.value?.to === 'undefined')) {
+      return 'body'
+    }
+
+    if (typeof value.value === 'boolean') {
+      return 'body'
+    }
+
+    return value.value
+  })
   const forceMount = computed(() => {
     const p = portal.value
-    return typeof p === 'object' && p !== null && !(p instanceof HTMLElement) && p.forceMount === true
+    return isDialogPortalProps(p) && p.forceMount === true
   })
 
   return computed(() => ({
