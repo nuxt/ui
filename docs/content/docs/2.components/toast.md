@@ -324,6 +324,18 @@ name: 'toast-example'
 In this example, we use the `AppConfig` to configure the `expand` prop of the `Toaster` component globally.
 ::
 
+
+### With callback
+
+Pass an `onUpdateOpen` field to execute a callback when the toast is closed (either by expiration or user dismissal).
+
+::component-example
+---
+collapse: true
+name: 'toast-callback-example'
+---
+::
+
 ## API
 
 ### Props

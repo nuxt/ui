@@ -70,13 +70,13 @@ function convertKeyToCode(key: string): string {
   return specialKeys[key.toLowerCase()] || key
 }
 
-export function extractShortcuts(items: any[] | any[][]) {
+export function extractShortcuts(items: any[] | any[][], separator: '_' | '-' = '_') {
   const shortcuts: Record<string, Handler> = {}
 
   function traverse(items: any[]) {
     items.forEach((item) => {
       if (item.kbds?.length && (item.onSelect || item.onClick)) {
-        const shortcutKey = item.kbds.join('_')
+        const shortcutKey = item.kbds.join(separator)
         shortcuts[shortcutKey] = item.onSelect || item.onClick
       }
       if (item.children) {

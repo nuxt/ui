@@ -59,7 +59,8 @@ const appConfig = useAppConfig() as PageFeature['AppConfig']
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageFeature || {}) })({
   orientation: props.orientation,
-  title: !!props.title || !!slots.title
+  title: !!props.title || !!slots.title,
+  to: !!props.to || !!props.onClick
 }))
 
 const ariaLabel = computed(() => {
@@ -82,7 +83,6 @@ const ariaLabel = computed(() => {
         :aria-label="ariaLabel"
         v-bind="{ to, target, ...$attrs }"
         class="focus:outline-none peer"
-        tabindex="-1"
         raw
       >
         <span class="absolute inset-0" aria-hidden="true" />
