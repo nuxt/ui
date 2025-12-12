@@ -92,11 +92,12 @@ const percent = computed(() => {
     return undefined
   }
 
-  switch (true) {
-    case rootProps.value.modelValue! < 0: return 0
-    case rootProps.value.modelValue! > (realMax.value ?? 100): return 100
-    default: return Math.round((rootProps.value.modelValue! / (realMax.value ?? 100)) * 100)
-  }
+  const maxValue = realMax.value ?? 100
+  const currentModelValue = rootProps.value.modelValue!
+
+  if (currentModelValue < 0 || maxValue === 0) return 0
+  if (currentModelValue > maxValue) return 100
+  return Math.round((currentModelValue / maxValue) * 100)
 })
 
 const indicatorStyle = computed(() => {
