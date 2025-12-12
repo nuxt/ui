@@ -33,14 +33,12 @@ export interface CompletionStorage {
   suggestion: string
   position: number | undefined
   visible: boolean
+  debouncedTrigger: ((editor: Editor) => void) | null
   setSuggestion: (text: string) => void
   clearSuggestion: () => void
 }
 
 export const completionPluginKey = new PluginKey('completion')
-
-// Store debounced function outside the extension
-let debouncedTrigger: ((editor: Editor) => void) | null = null
 
 export const Completion = Extension.create<CompletionOptions, CompletionStorage>({
   name: 'completion',
@@ -60,6 +58,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
       suggestion: '',
       position: undefined as number | undefined,
       visible: false,
+      debouncedTrigger: null as ((editor: Editor) => void) | null,
       setSuggestion(text: string) {
         this.suggestion = text
       },
@@ -142,7 +141,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
     }
 
     // Debounced trigger check
-    debouncedTrigger?.(editor as unknown as Editor)
+    this.storage.debouncedTrigger?.(editor as unknown as Editor)
   },
 
   onSelectionUpdate() {
@@ -156,8 +155,8 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
     const storage = this.storage
     const options = this.options
 
-    // Create debounced trigger function
-    debouncedTrigger = useDebounceFn((editor: Editor) => {
+    // Create debounced trigger function for this instance
+    this.storage.debouncedTrigger = useDebounceFn((editor: Editor) => {
       if (!options.onTrigger) return
 
       const { state } = editor
@@ -191,7 +190,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
   },
 
   onDestroy() {
-    debouncedTrigger = null
+    this.storage.debouncedTrigger = null
   }
 })
 
