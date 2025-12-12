@@ -8,6 +8,7 @@ import type { ModelModifiers } from '../types/input'
 import type { ButtonHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { PortalProps } from '../composables/usePortal'
 
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>
 
@@ -77,7 +78,7 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
    * Render the menu in a portal.
    * @defaultValue true
    */
-  portal?: boolean | string | HTMLElement
+  portal?: PortalProps
   /**
    * When `items` is an array of objects, select the field to use as the value.
    * @defaultValue 'value'

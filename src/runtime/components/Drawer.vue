@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/drawer'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { PortalProps } from '../composables/usePortal'
 
 type Drawer = ComponentConfig<typeof theme, AppConfig, 'drawer'>
 
@@ -37,7 +38,7 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * Render the drawer in a portal.
    * @defaultValue true
    */
-  portal?: boolean | string | HTMLElement
+  portal?: PortalProps
   /**
    * Whether the drawer is nested in another drawer.
    * @defaultValue false

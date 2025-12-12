@@ -3,6 +3,7 @@ import type { ToastProviderProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toaster'
 import type { ComponentConfig } from '../types/tv'
+import type { PortalProps } from '../composables/usePortal'
 
 type Toaster = ComponentConfig<typeof theme, AppConfig, 'toaster'>
 
@@ -26,7 +27,7 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
    * Render the toaster in a portal.
    * @defaultValue true
    */
-  portal?: boolean | string | HTMLElement
+  portal?: PortalProps
   /**
    * Maximum number of toasts to display at once.
    * @defaultValue 5

@@ -4,6 +4,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/popover'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { PortalProps } from '../composables/usePortal'
 
 type Popover = ComponentConfig<typeof theme, AppConfig, 'popover'>
 type PopoverMode = 'click' | 'hover'
@@ -28,7 +29,7 @@ export interface PopoverProps<M extends PopoverMode = PopoverMode> extends Popov
    * Render the popover in a portal.
    * @defaultValue true
    */
-  portal?: boolean | string | HTMLElement
+  portal?: PortalProps
   /**
    * The reference (or anchor) element that is being referred to for positioning.
    *

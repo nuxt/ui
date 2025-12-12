@@ -1,11 +1,12 @@
 import { inject, computed } from 'vue'
 import type { Ref, InjectionKey } from 'vue'
+import type { DialogPortalProps } from 'reka-ui'
 
 export const portalTargetInjectionKey: InjectionKey<Ref<boolean | string | HTMLElement>> = Symbol('nuxt-ui.portal-target')
 
-export type PortalProp = boolean | string | HTMLElement | { to?: boolean | string | HTMLElement, forceMount?: boolean }
+export type PortalProps = boolean | string | HTMLElement | DialogPortalProps
 
-export function usePortal(portal: Ref<PortalProp | undefined>) {
+export function usePortal(portal: Ref<PortalProps | undefined>) {
   const globalPortal = inject(portalTargetInjectionKey, undefined)
 
   const value = computed((): boolean | string | HTMLElement | undefined => {
@@ -16,9 +17,6 @@ export function usePortal(portal: Ref<PortalProp | undefined>) {
     }
 
     if (typeof p === 'object' && p !== null && !(p instanceof HTMLElement)) {
-      if (p.to === true) {
-        return globalPortal?.value
-      }
       return p.to
     }
 

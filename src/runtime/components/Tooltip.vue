@@ -5,6 +5,7 @@ import theme from '#build/ui/tooltip'
 import type { KbdProps } from '../types'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { PortalProps } from '../composables/usePortal'
 
 type Tooltip = ComponentConfig<typeof theme, AppConfig, 'tooltip'>
 
@@ -27,7 +28,7 @@ export interface TooltipProps extends TooltipRootProps {
    * Render the tooltip in a portal.
    * @defaultValue true
    */
-  portal?: boolean | string | HTMLElement
+  portal?: PortalProps
   /**
    * The reference (or anchor) element that is being referred to for positioning.
    *

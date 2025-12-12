@@ -6,6 +6,7 @@ import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, IconProps, KbdProps, LinkProps } from '../types'
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { PortalProps } from '../composables/usePortal'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 
@@ -78,7 +79,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
    * Render the menu in a portal.
    * @defaultValue true
    */
-  portal?: boolean | string | HTMLElement
+  portal?: PortalProps
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'

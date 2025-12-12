@@ -6,6 +6,7 @@ import theme from '#build/ui/context-menu'
 import type { AvatarProps, IconProps, KbdProps, LinkProps } from '../types'
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { PortalProps } from '../composables/usePortal'
 
 type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 
@@ -70,7 +71,7 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
    * Render the menu in a portal.
    * @defaultValue true
    */
-  portal?: boolean | string | HTMLElement
+  portal?: PortalProps
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'

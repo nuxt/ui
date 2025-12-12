@@ -5,7 +5,7 @@ import theme from '#build/ui/modal'
 import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
-import type { PortalProp } from '../composables/usePortal'
+import type { PortalProps } from '../composables/usePortal'
 
 type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>
 
@@ -38,7 +38,7 @@ export interface ModalProps extends DialogRootProps {
    * Render the modal in a portal.
    * @defaultValue true
    */
-  portal?: PortalProp
+  portal?: PortalProps
   /**
    * Display a close button to dismiss the modal.
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}

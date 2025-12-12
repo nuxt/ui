@@ -5,6 +5,7 @@ import theme from '#build/ui/slideover'
 import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { PortalProps } from '../composables/usePortal'
 
 type Slideover = ComponentConfig<typeof theme, AppConfig, 'slideover'>
 
@@ -32,7 +33,7 @@ export interface SlideoverProps extends DialogRootProps {
    * Render the slideover in a portal.
    * @defaultValue true
    */
-  portal?: boolean | string | HTMLElement
+  portal?: PortalProps
   /**
    * Display a close button to dismiss the slideover.
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}

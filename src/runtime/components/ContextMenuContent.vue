@@ -5,12 +5,13 @@ import type theme from '#build/ui/context-menu'
 import type { AvatarProps, ContextMenuItem, ContextMenuSlots, IconProps, KbdProps } from '../types'
 import type { ArrayOrNested, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { PortalProps } from '../composables/usePortal'
 
 type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 
 interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> extends Omit<RekaContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T
-  portal?: boolean | string | HTMLElement
+  portal?: PortalProps
   sub?: boolean
   labelKey: GetItemKeys<T>
   descriptionKey: GetItemKeys<T>
