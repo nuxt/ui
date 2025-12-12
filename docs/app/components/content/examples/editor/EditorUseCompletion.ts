@@ -1,4 +1,5 @@
 import { useCompletion } from '@ai-sdk/vue'
+import type { Editor } from '@tiptap/vue-3'
 import { Completion } from './EditorCompletionExtension'
 import type { CompletionStorage } from './EditorCompletionExtension'
 
@@ -8,7 +9,7 @@ export interface UseEditorCompletionOptions {
   api?: string
 }
 
-export function useEditorCompletion(editorRef: Ref<{ editor: any } | null | undefined>, options: UseEditorCompletionOptions = {}) {
+export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined } | null | undefined>, options: UseEditorCompletionOptions = {}) {
   // State for direct insertion/transform mode
   const insertState = ref<{
     pos: number
@@ -82,7 +83,7 @@ export function useEditorCompletion(editorRef: Ref<{ editor: any } | null | unde
           }
         }
 
-        editor.chain().focus().command(({ tr }: { tr: any }) => {
+        editor.chain().focus().command(({ tr }) => {
           tr.insertText(delta, insertState.value!.pos)
           return true
         }).run()
@@ -91,7 +92,7 @@ export function useEditorCompletion(editorRef: Ref<{ editor: any } | null | unde
     }
   })
 
-  function triggerTransform(editor: any, transformMode: Exclude<CompletionMode, 'continue'>, lang?: string) {
+  function triggerTransform(editor: Editor, transformMode: Exclude<CompletionMode, 'continue'>, lang?: string) {
     if (isLoading.value) return
 
     getCompletionStorage()?.clearSuggestion()
@@ -111,7 +112,7 @@ export function useEditorCompletion(editorRef: Ref<{ editor: any } | null | unde
     complete(selectedText)
   }
 
-  function triggerContinue(editor: any) {
+  function triggerContinue(editor: Editor) {
     if (isLoading.value) return
 
     mode.value = 'continue'
@@ -152,7 +153,7 @@ export function useEditorCompletion(editorRef: Ref<{ editor: any } | null | unde
   const handlers = {
     aiContinue: {
       canExecute: () => !isLoading.value,
-      execute: (editor: any) => {
+      execute: (editor: Editor) => {
         triggerContinue(editor)
         return editor.chain()
       },
@@ -160,58 +161,58 @@ export function useEditorCompletion(editorRef: Ref<{ editor: any } | null | unde
       isDisabled: () => !!isLoading.value
     },
     aiFix: {
-      canExecute: (editor: any) => !editor.state.selection.empty && !isLoading.value,
-      execute: (editor: any) => {
+      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
+      execute: (editor: Editor) => {
         triggerTransform(editor, 'fix')
         return editor.chain()
       },
       isActive: () => !!(isLoading.value && mode.value === 'fix'),
-      isDisabled: (editor: any) => editor.state.selection.empty || !!isLoading.value
+      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
     },
     aiExtend: {
-      canExecute: (editor: any) => !editor.state.selection.empty && !isLoading.value,
-      execute: (editor: any) => {
+      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
+      execute: (editor: Editor) => {
         triggerTransform(editor, 'extend')
         return editor.chain()
       },
       isActive: () => !!(isLoading.value && mode.value === 'extend'),
-      isDisabled: (editor: any) => editor.state.selection.empty || !!isLoading.value
+      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
     },
     aiReduce: {
-      canExecute: (editor: any) => !editor.state.selection.empty && !isLoading.value,
-      execute: (editor: any) => {
+      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
+      execute: (editor: Editor) => {
         triggerTransform(editor, 'reduce')
         return editor.chain()
       },
       isActive: () => !!(isLoading.value && mode.value === 'reduce'),
-      isDisabled: (editor: any) => editor.state.selection.empty || !!isLoading.value
+      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
     },
     aiSimplify: {
-      canExecute: (editor: any) => !editor.state.selection.empty && !isLoading.value,
-      execute: (editor: any) => {
+      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
+      execute: (editor: Editor) => {
         triggerTransform(editor, 'simplify')
         return editor.chain()
       },
       isActive: () => !!(isLoading.value && mode.value === 'simplify'),
-      isDisabled: (editor: any) => editor.state.selection.empty || !!isLoading.value
+      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
     },
     aiSummarize: {
-      canExecute: (editor: any) => !editor.state.selection.empty && !isLoading.value,
-      execute: (editor: any) => {
+      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
+      execute: (editor: Editor) => {
         triggerTransform(editor, 'summarize')
         return editor.chain()
       },
       isActive: () => !!(isLoading.value && mode.value === 'summarize'),
-      isDisabled: (editor: any) => editor.state.selection.empty || !!isLoading.value
+      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
     },
     aiTranslate: {
-      canExecute: (editor: any) => !editor.state.selection.empty && !isLoading.value,
-      execute: (editor: any, cmd: any) => {
+      canExecute: (editor: Editor) => !editor.state.selection.empty && !isLoading.value,
+      execute: (editor: Editor, cmd: { language?: string } | undefined) => {
         triggerTransform(editor, 'translate', cmd?.language)
         return editor.chain()
       },
-      isActive: (_editor: any, cmd: any) => !!(isLoading.value && mode.value === 'translate' && language.value === cmd?.language),
-      isDisabled: (editor: any) => editor.state.selection.empty || !!isLoading.value
+      isActive: (_editor: Editor, cmd: { language?: string } | undefined) => !!(isLoading.value && mode.value === 'translate' && language.value === cmd?.language),
+      isDisabled: (editor: Editor) => editor.state.selection.empty || !!isLoading.value
     }
   }
 
