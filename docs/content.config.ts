@@ -200,7 +200,12 @@ export const collections = {
       include: 'blog/**/*'
     }],
     schema: z.object({
-      date: z.string()
+      date: z.string(),
+      authors: z.array(z.object({
+        name: z.string(),
+        avatar: Avatar.optional(),
+        to: z.string().optional()
+      })).optional()
     })
   }),
   releases: defineCollection({

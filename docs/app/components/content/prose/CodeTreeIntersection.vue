@@ -1,4 +1,12 @@
 <script setup lang="ts">
+const props = defineProps<{
+  /**
+   * Add files to the tree immediately on mount instead of waiting for intersection.
+   * Useful for showing starter/base files at the beginning.
+   */
+  default?: boolean
+}>()
+
 const slots = defineSlots()
 
 const target = useTemplateRef('target')
@@ -20,18 +28,28 @@ function transformSlot(slot: any, index: number) {
   }
 }
 
+function addToTree() {
+  for (const child of children.value) {
+    tree.value[child.label] = child.component
+    activePath.value = child.label
+  }
+}
+
+onMounted(() => {
+  if (props.default) {
+    addToTree()
+  }
+})
+
 useIntersectionObserver(target, ([entry]) => {
   if (entry?.isIntersecting) {
-    for (const child of children.value) {
-      tree.value[child.label] = child.component
-      activePath.value = child.label
-    }
+    addToTree()
   }
 })
 </script>
 
 <template>
-  <div ref="target">
+  <div v-if="!props.default" ref="target">
     <slot />
   </div>
 </template>
