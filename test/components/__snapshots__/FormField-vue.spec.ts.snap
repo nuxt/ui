@@ -149,14 +149,14 @@ exports[`FormField > renders with label slot correctly 1`] = `
 `;
 
 exports[`FormField > renders with orientation horizontal correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class="text-sm flex gap-1 items-start">
+"<div data-orientation="horizontal" data-slot="root" class="text-sm flex items-center justify-between">
   <div data-slot="wrapper" class="flex-none">
     <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0" data-slot="label" class="block font-medium text-default">Username</label>
       <!--v-if-->
     </div>
     <p id="v-0-0-description" data-slot="description" class="text-muted">Enter your username</p>
   </div>
-  <div class="relative flex-1 mt-0">
+  <div class="relative mt-0">
     <!--v-if-->
   </div>
 </div>"
