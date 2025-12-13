@@ -32,9 +32,9 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   loadingAuto?: boolean
   /**
    * Position of the loading icon when loading is true.
-   * @defaultValue 'left'
+   * @defaultValue 'leading'
    */
-  loadingPosition?: 'left' | 'center' | 'right'
+  loadingPosition?: 'leading' | 'center' | 'trailing'
   onClick?: ((event: MouseEvent) => void | Promise<void>) | Array<((event: MouseEvent) => void | Promise<void>)>
   class?: any
   ui?: Button['slots']
@@ -92,16 +92,16 @@ const loadingPosition = computed(() => {
   if (props.loadingPosition) {
     return props.loadingPosition
   }
-  return props.trailing ? 'right' : 'left'
+  return props.trailing ? 'trailing' : 'leading'
 })
 
 const iconProps = computed(() => {
   const baseProps = { ...props, loading: isLoading.value }
 
   if (isLoading.value) {
-    if (loadingPosition.value === 'right') {
+    if (loadingPosition.value === 'trailing') {
       return { ...baseProps, trailing: true }
-    } else if (loadingPosition.value === 'left') {
+    } else if (loadingPosition.value === 'leading') {
       return { ...baseProps, trailing: false }
     }
     return { ...baseProps, trailing: false }

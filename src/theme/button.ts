@@ -3,7 +3,7 @@ import { fieldGroupVariant } from './field-group'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    base: ['rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+    base: ['rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     label: 'truncate',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -61,7 +61,7 @@ export default (options: Required<ModuleOptions>) => ({
     block: {
       true: {
         base: 'w-full justify-center',
-        trailingIcon: 'ms-auto'
+        trailingIcon: 'ms-auto rtl:me-auto rtl:ms-0'
       }
     },
     square: {

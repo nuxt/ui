@@ -11,6 +11,16 @@ const attrs = reactive({
   size: [theme.defaultVariants.size]
 })
 
+const lang = ref('en')
+const dir = ref<'ltr' | 'rtl'>('ltr')
+
+useHead({
+  htmlAttrs: {
+    lang,
+    dir
+  }
+})
+
 function onClick() {
   return new Promise<void>(res => setTimeout(res, 5000))
 }
@@ -21,6 +31,7 @@ function onClick() {
     <USelect v-model="attrs.color" :items="colors" multiple />
     <USelect v-model="attrs.variant" :items="variants" multiple />
     <USelect v-model="attrs.size" :items="sizes" multiple />
+    <USelect v-model="dir" :items="['ltr', 'rtl']" />
   </Navbar>
 
   <Matrix v-slot="props" :attrs="attrs">
@@ -28,9 +39,9 @@ function onClick() {
     <UButton label="Link" to="/" v-bind="props" />
     <UButton label="Disabled" disabled v-bind="props" />
     <UButton label="Disabled link" to="#" disabled v-bind="props" />
-    <UButton label="Loading" loading loading-position="left" v-bind="props" />
+    <UButton label="Loading" loading loading-position="leading" v-bind="props" />
     <UButton label="Loading" loading loading-position="center" v-bind="props" />
-    <UButton label="Loading" loading trailing loading-position="right" v-bind="props" />
+    <UButton label="Loading" loading trailing loading-position="trailing" v-bind="props" />
     <UButton label="Loading auto" loading-auto v-bind="props" @click="onClick" />
     <UButton label="Icon" icon="i-lucide-rocket" v-bind="props" />
     <UButton label="Icon" icon="i-lucide-chevron-down" trailing v-bind="props" />
