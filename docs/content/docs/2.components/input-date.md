@@ -9,7 +9,7 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputDate.vue
-navigation.badge: Soon
+navigation.badge: New
 ---
 
 ## Usage
@@ -42,6 +42,10 @@ external:
 props:
   defaultValue: [2022, 2, 6]
 ---
+::
+
+::note
+This component relies on the [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/index.html) package which provides objects and functions for representing and manipulating dates and times in a locale-aware manner. Format of date depends on the [`locale`](/docs/getting-started/integrations/i18n) installed in your application.
 ::
 
 ### Range

@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-navbar'
 import type { DashboardContext } from '../utils/dashboard'
-import type { ButtonProps, IconProps } from '../types'
+import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardNavbar = ComponentConfig<typeof theme, AppConfig, 'dashboardNavbar'>
@@ -24,7 +24,7 @@ export interface DashboardNavbarProps {
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  toggle?: boolean | Partial<ButtonProps>
+  toggle?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The side to render the toggle button on.
    * @defaultValue 'left'
@@ -79,7 +79,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardNav
     <slot name="toggle" v-bind="{ ...dashboardContext, ui }">
       <UDashboardSidebarToggle
         v-if="toggle"
-        v-bind="(typeof toggle === 'object' ? toggle as Partial<ButtonProps> : {})"
+        v-bind="(typeof toggle === 'object' ? toggle : {})"
         :side="toggleSide"
         data-slot="toggle"
         :class="ui.toggle({ class: props.ui?.toggle, toggleSide })"

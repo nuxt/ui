@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { Ref, WatchOptions, ComponentPublicInstance } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { Cell, Header, RowData, TableMeta } from '@tanstack/table-core'
+import type { Cell, Column, Header, RowData, TableMeta } from '@tanstack/table-core'
 import type {
   CellContext,
   ColumnDef,
@@ -105,10 +105,10 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
      */
     overscan?: number
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 65
      */
-    estimateSize?: number
+    estimateSize?: number | ((index: number) => number)
   })
   /**
    * The text to display when the table is empty.
@@ -222,12 +222,12 @@ export type TableSlots<T extends TableData = TableData> = {
 
 <script setup lang="ts" generic="T extends TableData">
 import { ref, computed, useTemplateRef, watch, toRef } from 'vue'
-import { Primitive } from 'reka-ui'
+import { Primitive, useForwardProps } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
 import { useVirtualizer } from '@tanstack/vue-virtual'
-import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
+import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -309,58 +309,62 @@ const hasFooter = computed(() => {
   return hasFooterRecursive(columns.value)
 })
 
-const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
-const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
-const columnOrderState = defineModel<ColumnOrderState>('columnOrder', { default: [] })
-const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', { default: {} })
-const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { default: {} })
-const columnSizingState = defineModel<ColumnSizingState>('columnSizing', { default: {} })
-const columnSizingInfoState = defineModel<ColumnSizingInfoState>('columnSizingInfo', { default: {} })
-const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
-const rowPinningState = defineModel<RowPinningState>('rowPinning', { default: {} })
-const sortingState = defineModel<SortingState>('sorting', { default: [] })
-const groupingState = defineModel<GroupingState>('grouping', { default: [] })
-const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
-const paginationState = defineModel<PaginationState>('pagination', { default: {} })
+const globalFilterState = defineModel<string>('globalFilter')
+const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters')
+const columnOrderState = defineModel<ColumnOrderState>('columnOrder')
+const columnVisibilityState = defineModel<VisibilityState>('columnVisibility')
+const columnPinningState = defineModel<ColumnPinningState>('columnPinning')
+const columnSizingState = defineModel<ColumnSizingState>('columnSizing')
+const columnSizingInfoState = defineModel<ColumnSizingInfoState>('columnSizingInfo')
+const rowSelectionState = defineModel<RowSelectionState>('rowSelection')
+const rowPinningState = defineModel<RowPinningState>('rowPinning')
+const sortingState = defineModel<SortingState>('sorting')
+const groupingState = defineModel<GroupingState>('grouping')
+const expandedState = defineModel<ExpandedState>('expanded')
+const paginationState = defineModel<PaginationState>('pagination')
 
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
 
+const tableProps = useForwardProps(reactivePick(props, '_features', 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'))
+
 const tableApi = useVueTable({
-  ...reactiveOmit(props, 'as', 'data', 'columns', 'virtualize', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
-  data,
+  ...tableProps.value,
+  get data() {
+    return data.value
+  },
   get columns() {
     return columns.value
   },
   meta: meta.value,
   getCoreRowModel: getCoreRowModel(),
   ...(props.globalFilterOptions || {}),
-  onGlobalFilterChange: updaterOrValue => valueUpdater(updaterOrValue, globalFilterState),
+  ...(globalFilterState.value !== undefined && { onGlobalFilterChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, globalFilterState) }),
   ...(props.columnFiltersOptions || {}),
   getFilteredRowModel: getFilteredRowModel(),
-  onColumnFiltersChange: updaterOrValue => valueUpdater(updaterOrValue, columnFiltersState),
-  onColumnOrderChange: updaterOrValue => valueUpdater(updaterOrValue, columnOrderState),
+  ...(columnFiltersState.value !== undefined && { onColumnFiltersChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnFiltersState) }),
+  ...(columnOrderState.value !== undefined && { onColumnOrderChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnOrderState) }),
   ...(props.visibilityOptions || {}),
-  onColumnVisibilityChange: updaterOrValue => valueUpdater(updaterOrValue, columnVisibilityState),
+  ...(columnVisibilityState.value !== undefined && { onColumnVisibilityChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnVisibilityState) }),
   ...(props.columnPinningOptions || {}),
-  onColumnPinningChange: updaterOrValue => valueUpdater(updaterOrValue, columnPinningState),
+  ...(columnPinningState.value !== undefined && { onColumnPinningChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnPinningState) }),
   ...(props.columnSizingOptions || {}),
-  onColumnSizingChange: updaterOrValue => valueUpdater(updaterOrValue, columnSizingState),
-  onColumnSizingInfoChange: updaterOrValue => valueUpdater(updaterOrValue, columnSizingInfoState),
+  ...(columnSizingState.value !== undefined && { onColumnSizingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnSizingState) }),
+  ...(columnSizingInfoState.value !== undefined && { onColumnSizingInfoChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnSizingInfoState) }),
   ...(props.rowSelectionOptions || {}),
-  onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelectionState),
+  ...(rowSelectionState.value !== undefined && { onRowSelectionChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, rowSelectionState) }),
   ...(props.rowPinningOptions || {}),
-  onRowPinningChange: updaterOrValue => valueUpdater(updaterOrValue, rowPinningState),
+  ...(rowPinningState.value !== undefined && { onRowPinningChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, rowPinningState) }),
   ...(props.sortingOptions || {}),
   getSortedRowModel: getSortedRowModel(),
-  onSortingChange: updaterOrValue => valueUpdater(updaterOrValue, sortingState),
+  ...(sortingState.value !== undefined && { onSortingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, sortingState) }),
   ...(props.groupingOptions || {}),
-  onGroupingChange: updaterOrValue => valueUpdater(updaterOrValue, groupingState),
+  ...(groupingState.value !== undefined && { onGroupingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, groupingState) }),
   ...(props.expandedOptions || {}),
   getExpandedRowModel: getExpandedRowModel(),
-  onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
+  ...(expandedState.value !== undefined && { onExpandedChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, expandedState) }),
   ...(props.paginationOptions || {}),
-  onPaginationChange: updaterOrValue => valueUpdater(updaterOrValue, paginationState),
+  ...(paginationState.value !== undefined && { onPaginationChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, paginationState) }),
   ...(props.facetedOptions || {}),
   state: {
     get globalFilter() {
@@ -418,7 +422,24 @@ const virtualizer = !!props.virtualize && useVirtualizer({
     return rows.value.length
   },
   getScrollElement: () => rootRef.value?.$el,
-  estimateSize: () => virtualizerProps.value.estimateSize
+  estimateSize: (index: number) => {
+    const estimate = virtualizerProps.value.estimateSize
+    return typeof estimate === 'function' ? estimate(index) : estimate
+  }
+})
+
+const renderedSize = computed(() => {
+  if (!virtualizer) {
+    return 0
+  }
+
+  const virtualItems = virtualizer.value.getVirtualItems()
+  if (!virtualItems?.length) {
+    return 0
+  }
+
+  // Sum up the actual sizes of virtual items
+  return virtualItems.reduce((sum: number, item: any) => sum + item.size, 0)
 })
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
@@ -469,6 +490,19 @@ function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T |
   return prop
 }
 
+function getColumnStyles(column: Column<T>): Record<string, string> {
+  const styles: Record<string, string> = {}
+
+  const pinned = column.getIsPinned()
+  if (pinned === 'left') {
+    styles.left = `${column.getStart('left')}px`
+  } else if (pinned === 'right') {
+    styles.right = `${column.getAfter('right')}px`
+  }
+
+  return styles
+}
+
 watch(() => props.data, () => {
   data.value = props.data ? [...props.data] : []
 }, props.watchOptions)
@@ -517,7 +551,10 @@ defineExpose({
           ],
           pinned: !!cell.column.getIsPinned()
         })"
-        :style="resolveValue(cell.column.columnDef.meta?.style?.td, cell)"
+        :style="[
+          getColumnStyles(cell.column),
+          resolveValue(cell.column.columnDef.meta?.style?.td, cell)
+        ]"
       >
         <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
           <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
@@ -557,7 +594,10 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
-            :style="resolveValue(header.column.columnDef.meta?.style?.th, header)"
+            :style="[
+              getColumnStyles(header.column),
+              resolveValue(header.column.columnDef.meta?.style?.th, header)
+            ]"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
@@ -611,7 +651,7 @@ defineExpose({
         data-slot="tfoot"
         :class="ui.tfoot({ class: [props.ui?.tfoot] })"
         :style="virtualizer ? {
-          transform: `translateY(${virtualizer.getTotalSize() - virtualizer.getVirtualItems().length * virtualizerProps.estimateSize}px)`
+          transform: `translateY(${virtualizer.getTotalSize() - renderedSize}px)`
         } : undefined"
       >
         <tr data-slot="separator" :class="ui.separator({ class: [props.ui?.separator] })" />
@@ -631,7 +671,10 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
-            :style="resolveValue(header.column.columnDef.meta?.style?.th, header)"
+            :style="[
+              getColumnStyles(header.column),
+              resolveValue(header.column.columnDef.meta?.style?.th, header)
+            ]"
           >
             <slot :name="`${header.id}-footer`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.footer" :props="header.getContext()" />

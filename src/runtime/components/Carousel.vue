@@ -9,7 +9,7 @@ import type { ClassNamesOptionsType } from 'embla-carousel-class-names'
 import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import theme from '#build/ui/carousel'
-import type { ButtonProps, IconProps } from '../types'
+import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { AcceptableValue } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -32,7 +32,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * Configure the prev button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
    */
-  prev?: ButtonProps
+  prev?: Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the prev button.
    * @defaultValue appConfig.ui.icons.arrowLeft
@@ -43,7 +43,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * Configure the next button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
    */
-  next?: ButtonProps
+  next?: Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the next button.
    * @defaultValue appConfig.ui.icons.arrowRight
@@ -163,6 +163,22 @@ const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakp
 const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowRight : appConfig.ui.icons.arrowLeft))
 const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowLeft : appConfig.ui.icons.arrowRight))
 
+const stopAutoplayOnInteraction = computed(() => {
+  if (typeof props.autoplay === 'boolean') {
+    return true
+  }
+
+  return props.autoplay.stopOnInteraction ?? true
+})
+
+const stopAutoScrollOnInteraction = computed(() => {
+  if (typeof props.autoScroll === 'boolean') {
+    return true
+  }
+
+  return props.autoScroll.stopOnInteraction ?? true
+})
+
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.carousel || {}) })({
   orientation: props.orientation
 }))
@@ -223,12 +239,26 @@ watch(options, () => {
   emblaApi.value?.reInit(options.value, plugins.value)
 }, { flush: 'post' })
 
+function stopOnInteraction() {
+  if (stopAutoplayOnInteraction.value) {
+    emblaApi.value?.plugins().autoplay?.stop()
+  }
+
+  if (stopAutoScrollOnInteraction.value) {
+    emblaApi.value?.plugins().autoScroll?.stop()
+  }
+}
+
 function scrollPrev() {
   emblaApi.value?.scrollPrev()
+  stopOnInteraction()
 }
+
 function scrollNext() {
   emblaApi.value?.scrollNext()
+  stopOnInteraction()
 }
+
 function scrollTo(index: number) {
   emblaApi.value?.scrollTo(index)
 }

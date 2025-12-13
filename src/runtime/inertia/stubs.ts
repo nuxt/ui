@@ -78,7 +78,7 @@ const hooks = createHooks()
 export function useNuxtApp() {
   return {
     isHydrating: true,
-    payload: { serverRendered: false },
+    payload: { serverRendered: typeof window === 'undefined' },
     hooks,
     hook: hooks.hook
   }

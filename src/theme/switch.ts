@@ -76,9 +76,10 @@ export default (options: Required<ModuleOptions>) => ({
     },
     disabled: {
       true: {
-        base: 'cursor-not-allowed opacity-75',
-        label: 'cursor-not-allowed opacity-75',
-        description: 'cursor-not-allowed opacity-75'
+        root: 'opacity-75',
+        base: 'cursor-not-allowed',
+        label: 'cursor-not-allowed',
+        description: 'cursor-not-allowed'
       }
     }
   },
