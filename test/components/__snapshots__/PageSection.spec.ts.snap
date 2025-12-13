@@ -288,7 +288,7 @@ exports[`PageSection > renders with links and features correctly 1`] = `
         </ul>
       </div>
       <div data-slot="footer" class="mt-16">
-        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>
@@ -306,7 +306,7 @@ exports[`PageSection > renders with links correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <div data-slot="footer" class="mt-8">
-        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>
@@ -372,7 +372,7 @@ exports[`PageSection > renders with orientation horizontal links correctly 1`] =
       <!--v-if-->
       <!--v-if-->
       <div data-slot="footer" class="mt-8">
-        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             <!--v-if--><span data-slot="label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>

@@ -7,7 +7,7 @@ exports[`Banner > renders with actions correctly 1`] = `
     <div data-v-8f05efd1="" data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
     <div data-v-8f05efd1="" data-slot="center" class="flex items-center gap-1.5 min-w-0"><span data-v-8f05efd1="" class="iconify i-lucide:rocket size-5 shrink-0 text-inverted pointer-events-none" aria-hidden="true" data-slot="icon"></span>
       <div data-v-8f05efd1="" data-slot="title" class="text-sm text-inverted font-medium truncate">Title</div>
-      <div data-v-8f05efd1="" data-slot="actions" class="flex gap-1.5 shrink-0 isolate"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted">
+      <div data-v-8f05efd1="" data-slot="actions" class="flex gap-1.5 shrink-0 isolate"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted">
           <!--v-if--><span data-slot="label" class="truncate">Learn more</span><span class="iconify i-lucide:arrow-right shrink-0 size-4" aria-hidden="true" data-slot="trailingIcon"></span>
         </button></div>
     </div>
@@ -79,7 +79,7 @@ exports[`Banner > renders with close correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-v-8f05efd1="" data-slot="right" class="lg:flex-1 flex items-center justify-end"><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 active:bg-elevated focus:outline-none hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 text-inverted hover:bg-default/10 focus-visible:bg-default/10 -me-1.5 lg:me-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+    <div data-v-8f05efd1="" data-slot="right" class="lg:flex-1 flex items-center justify-end"><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 active:bg-elevated focus:outline-none hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 text-inverted hover:bg-default/10 focus-visible:bg-default/10 -me-1.5 lg:me-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>

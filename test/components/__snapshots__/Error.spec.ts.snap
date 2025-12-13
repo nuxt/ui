@@ -5,7 +5,7 @@ exports[`Error > renders with as correctly 1`] = `
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
-  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
@@ -17,7 +17,7 @@ exports[`Error > renders with class correctly 1`] = `
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
-  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
@@ -29,7 +29,7 @@ exports[`Error > renders with clear correctly 1`] = `
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
-  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
       <!--v-if--><span data-slot="label" class="truncate">Home</span>
       <!--v-if-->
     </button></div>
@@ -41,7 +41,7 @@ exports[`Error > renders with default slot correctly 1`] = `
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
-  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
@@ -53,7 +53,7 @@ exports[`Error > renders with error correctly 1`] = `
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
-  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
@@ -74,7 +74,7 @@ exports[`Error > renders with message slot correctly 1`] = `
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">Message slot</p>
-  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
@@ -86,7 +86,7 @@ exports[`Error > renders with redirect correctly 1`] = `
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
-  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
@@ -98,7 +98,7 @@ exports[`Error > renders with statusCode slot correctly 1`] = `
   <p data-slot="statusCode" class="text-base font-semibold text-primary">Status code slot</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
-  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
@@ -110,7 +110,7 @@ exports[`Error > renders with statusMessage slot correctly 1`] = `
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Status message slot</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
-  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
@@ -122,7 +122,7 @@ exports[`Error > renders with ui correctly 1`] = `
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
-  <div data-slot="links" class="flex items-center justify-center gap-6 mt-16"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+  <div data-slot="links" class="flex items-center justify-center gap-6 mt-16"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
