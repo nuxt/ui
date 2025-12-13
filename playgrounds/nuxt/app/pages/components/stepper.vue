@@ -28,6 +28,7 @@ const items = [
   }, {
     slot: 'checkout' as const,
     title: 'Checkout',
+    disabled: true,
     description: 'Confirm your order'
   }
 ]

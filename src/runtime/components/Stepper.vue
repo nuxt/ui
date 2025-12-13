@@ -102,7 +102,7 @@ const currentStepIndex = computed({
     const value = modelValue.value ?? props.defaultValue
 
     return ((typeof value === 'string')
-      ? props.items.findIndex(item => item.value === value)
+      ? props.items.findIndex((item: T) => item.value === value)
       : value) ?? 0
   },
   set(value: number) {
@@ -113,6 +113,12 @@ const currentStepIndex = computed({
 const currentStep = computed(() => props.items?.[currentStepIndex.value])
 const hasNext = computed(() => currentStepIndex.value < props.items?.length - 1)
 const hasPrev = computed(() => currentStepIndex.value > 0)
+
+const goToStep = (index: number, item: T) => {
+  if (!item.disabled && !props.disabled) {
+    currentStepIndex.value = index
+  }
+}
 
 defineExpose({
   next() {
@@ -163,7 +169,13 @@ defineExpose({
         </div>
 
         <div data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
-          <StepperTitle as="div" data-slot="title" :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
+          <StepperTitle
+            as="div"
+            data-slot="title"
+            :class="ui.title({ class: [props.ui?.title, item.ui?.title] })"
+            :style="!item.disabled && !props.disabled ? { cursor: 'pointer' } : undefined"
+            @click="goToStep(count, item)"
+          >
             <slot name="title" :item="item">
               {{ item.title }}
             </slot>

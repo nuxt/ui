@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
     item: 'group text-center relative w-full',
     container: 'relative',
     trigger: 'rounded-full font-medium text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2',
-    indicator: 'flex items-center justify-center size-full',
+    indicator: 'flex items-center justify-center size-full cursor-pointer',
     icon: 'shrink-0',
     separator: 'absolute rounded-full group-data-[disabled]:opacity-75 bg-accented',
     wrapper: '',
