@@ -271,18 +271,24 @@ function getDropdownProps(item: EditorToolbarDropdownItem) {
   })
 }
 
-function mapDropdownItem(item: EditorToolbarDropdownChildItem) {
-  // If it's a separator or label (no 'kind' property), return as is
+function mapDropdownItem(item: EditorToolbarDropdownChildItem): any {
+  // Recursively map children if present
+  const children = 'children' in item && Array.isArray(item.children)
+    ? item.children.map(mapDropdownItem)
+    : undefined
+
+  // If it's a separator or label (no 'kind' property), return with mapped children
   if (!('kind' in item)) {
-    return item
+    return children ? { ...item, children } : item
   }
 
   const editorToolbarItem = item as EditorToolbarDropdownChildItem
   return {
     ...editorToolbarItem,
+    ...(children && { children }),
     active: isActive(editorToolbarItem),
     disabled: isDisabled(editorToolbarItem),
-    onClick: (e: MouseEvent) => onClick(e, editorToolbarItem)
+    onSelect: (e: Event) => onClick(e as MouseEvent, editorToolbarItem)
   }
 }
 

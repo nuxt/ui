@@ -5,7 +5,7 @@ category: chat
 links:
   - label: AI SDK
     icon: i-simple-icons-vercel
-    to: https://sdk.vercel.ai/
+    to: https://ai-sdk.vercel.dev/
     target: _blank
   - label: GitHub
     icon: i-simple-icons-github
@@ -386,9 +386,48 @@ Use the `should-scroll-to-bottom` prop to enable/disable bottom auto scroll when
 
 ## Examples
 
-::note{to="https://ai-sdk.dev/docs/getting-started/nuxt" target="_blank"}
-These chat components are designed to be used with the **AI SDK v5** from **Vercel AI SDK**.
+The Chat components are designed to be used with the [Vercel AI SDK](https://ai-sdk.vercel.dev/), specifically the [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class for managing chat state and streaming responses.
+
+
+First, install the required dependencies:
+
+::code-group{sync="pm"}
+
+```bash [pnpm]
+pnpm add ai @ai-sdk/gateway @ai-sdk/vue
+```
+
+```bash [yarn]
+yarn add ai @ai-sdk/gateway @ai-sdk/vue
+```
+
+```bash [npm]
+npm install ai @ai-sdk/gateway @ai-sdk/vue
+```
+
+```bash [bun]
+bun add ai @ai-sdk/gateway @ai-sdk/vue
+```
+
 ::
+
+Then, create a server API endpoint to handle chat requests using [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text) from the AI SDK. You can use the [Vercel AI Gateway](https://vercel.com/ai-gateway) to access AI models through a centralized endpoint:
+
+```ts [server/api/chat.post.ts]
+import { streamText, convertToModelMessages } from 'ai'
+import { gateway } from '@ai-sdk/gateway'
+
+export default defineEventHandler(async (event) => {
+  const { messages } = await readBody(event)
+
+  return streamText({
+    model: gateway('openai/gpt-4o-mini'),
+    maxOutputTokens: 10000,
+    system: 'You are a helpful assistant.',
+    messages: convertToModelMessages(messages)
+  }).toUIMessageStreamResponse()
+})
+```
 
 ::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/chat" target="_blank"}
 Check out the source code of our **AI Chat template** on GitHub for a real-life example.
