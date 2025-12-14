@@ -12,9 +12,9 @@ const data = computed(() => Object.entries(icons).map(([key, icon]) => {
   }
 }))
 
-const custom = ref(icons)
+const custom = ref<Record<string, string>>(icons)
 
-function setLibrary(name) {
+function setLibrary(name: string) {
   if (name === 'phosphor') {
     custom.value = {
       arrowDown: 'i-ph-arrow-down',
