@@ -76,7 +76,7 @@ ${Object.entries(custom.value).map(([key, value]) => `  ${key}: '${value}',`).jo
 
 <template>
   <UModal fullscreen :ui="{ title: 'space-x-4' }" title="Icons Theme configurator">
-    <UButton label="Customize Icons Theme" icon="i-lucide-brush" />
+    <UButton label="Icons Theme configurator" icon="i-lucide-brush" />
     <template #body>
       <div class="flex justify-between">
         <UFieldGroup>
