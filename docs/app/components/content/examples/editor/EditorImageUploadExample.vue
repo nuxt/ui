@@ -21,6 +21,11 @@ const customHandlers = {
 } satisfies EditorCustomHandlers
 
 const items = [[{
+  kind: 'imageUpload',
+  icon: 'i-lucide-image',
+  label: 'Add image',
+  variant: 'soft'
+}], [{
   icon: 'i-lucide-heading',
   content: {
     align: 'start'
@@ -66,10 +71,6 @@ const items = [[{
   kind: 'mark',
   mark: 'code',
   icon: 'i-lucide-code'
-}], [{
-  kind: 'imageUpload',
-  icon: 'i-lucide-image',
-  label: 'Add image'
 }]] satisfies EditorToolbarItem<typeof customHandlers>[][]
 </script>
 
