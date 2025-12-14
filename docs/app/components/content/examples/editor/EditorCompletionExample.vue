@@ -6,7 +6,7 @@ const editorRef = useTemplateRef('editorRef')
 
 const value = ref(`# AI Completion
 
-This editor demonstrates how to add AI-powered features using the Vercel AI SDK. It includes ghost text autocompletion that appears as you type (press Tab to accept) and text transformation actions.
+This editor demonstrates how to add AI-powered features using the [Vercel AI SDK](https://ai-sdk.dev/). It includes ghost text autocompletion that appears as you type (press Tab to accept) and text transformation actions.
 
 Try selecting some text and using the AI dropdown to fix grammar, extend, or simplify it.`)
 
