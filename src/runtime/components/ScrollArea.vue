@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ComponentPublicInstance, CSSProperties } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { VirtualItem, VirtualizerOptions, Key } from '@tanstack/vue-virtual'
+import type { VirtualItem, VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '#build/ui/scroll-area'
 import type { ComponentConfig } from '../types/tv'
 
@@ -277,7 +277,7 @@ function requireVirtualization(method: string) {
   return true
 }
 
-function getItemKey(item: T, index: number): Key {
+function getItemKey(item: T, index: number) {
   if (virtualizerProps.value.getItemKey) {
     return virtualizerProps.value.getItemKey(index)
   }
