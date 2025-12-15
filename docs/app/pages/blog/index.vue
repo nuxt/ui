@@ -10,15 +10,15 @@ const { data: posts } = await useAsyncData('blog-posts', () =>
   queryCollection('posts').order('date', 'DESC').all()
 )
 
-const title = page.value.seo?.title || page.value.title
-const description = page.value.seo?.description || page.value.description
-
 useSeoMeta({
-  title,
-  description,
-  ogTitle: title,
-  ogDescription: description
+  titleTemplate: '%s - Nuxt UI',
+  title: page.value.title,
+  description: page.value.description,
+  ogTitle: `${page.value.title} - Nuxt UI`,
+  ogDescription: page.value.description
 })
+
+defineOgImageComponent('Docs')
 
 function formatDate(date: string) {
   return new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -33,11 +33,11 @@ function formatDate(date: string) {
       <div aria-hidden="true" class="absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
       <template #title>
-        <MDC :value="page.title" unwrap="p" cache-key="pro-templates-hero-title" />
+        <MDC :value="page.hero.title" unwrap="p" cache-key="blog-hero-title" />
       </template>
 
       <template #description>
-        <MDC :value="page.description" unwrap="p" cache-key="pro-templates-hero-description" />
+        <MDC :value="page.hero.description" unwrap="p" cache-key="blog-hero-description" />
       </template>
     </UPageHero>
 
