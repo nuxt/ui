@@ -30,14 +30,14 @@ export default (options: Required<NuxtOptions['ui']>) => ({
     color,
     to: true,
     class: {
-      base: `hover:bg-${color}/10 hover:border-${color}`,
+      base: `hover:bg-${color}/10 hover:border-${color} has-focus-visible:border-${color}`,
       externalIcon: `group-hover:text-${color}`
     }
   })), {
     color: 'neutral',
     to: true,
     class: {
-      base: 'hover:bg-elevated/50 hover:border-inverted',
+      base: 'hover:bg-elevated/50 hover:border-inverted has-focus-visible:border-inverted',
       externalIcon: 'group-hover:text-highlighted'
     }
   }],
