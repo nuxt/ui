@@ -12,9 +12,9 @@ date: 2025-12-09T10:00:00.000Z
 category: Tutorial
 ---
 
-Building AI-powered applications has never been more accessible. In this tutorial, you'll learn how to create a full-featured AI chatbot using Nuxt, Nuxt UI, and the Vercel AI SDK. We'll build everything from scratch, step by step, so you understand how each piece works together.
+Building AI-powered applications has never been more accessible. This guide walks through creating a full-featured AI chatbot using Nuxt, Nuxt UI, and the Vercel AI SDK. Each step is explained in detail so you understand how every piece works together.
 
-## What We're Building
+## What we're building
 
 By the end of this tutorial, you'll have a fully functional AI chatbot with:
 
@@ -35,16 +35,16 @@ Before we start, make sure you have:
 - Node.js 20+ installed
 - A [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) API key (provides access to multiple AI providers through a single endpoint)
 
-## Project Setup
+## Project setup
 
-Let's start by creating a new Nuxt project:
+Start by creating a new Nuxt project:
 
 ```bash
 npx nuxi@latest init nuxt-ai-chat
 cd nuxt-ai-chat
 ```
 
-### Installing Dependencies
+### Installing dependencies
 
 Install Nuxt UI and the AI-specific dependencies:
 
@@ -111,7 +111,7 @@ Create the main CSS file to import Tailwind CSS and Nuxt UI:
 ```
 ::
 
-### Setting Up the App
+### Setting up the app
 
 Nuxt UI requires wrapping your app with `UApp` for modals, toasts, and overlays to work properly:
 
@@ -139,9 +139,9 @@ AI_GATEWAY_API_KEY=your-api-key-here
 With [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), you don't need individual API keys for OpenAI, Anthropic, or Google. The AI Gateway provides a unified API to access hundreds of models through a single endpoint.
 ::
 
-### Setting Up the Database
+### Setting up the database
 
-[NuxtHub](https://hub.nuxt.com) provides a zero-config database powered by Drizzle ORM. Let's create the schema for our chat application:
+[NuxtHub](https://hub.nuxt.com) provides a zero-config database powered by [Drizzle ORM](https://orm.drizzle.team). Here is the schema for the chat application:
 
 ::code-tree-intersection
 :::code-collapse
@@ -191,13 +191,200 @@ npx nuxt db generate
 Migrations are automatically applied when you start the development server with `npx nuxt dev`. NuxtHub uses SQLite locally, so no external database is required during development.
 ::
 
-## Building the Chat UI
+## Building the backend
+
+This section covers integrating AI on the server. The following API endpoints handle chat creation, AI streaming, and data persistence using [Nitro](https://nitro.build).
+
+### Creating a chat
+
+First, create the endpoint that initializes a new chat and saves the first message to the database. This uses the [`UIMessage`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/ui-message) type from the AI SDK:
+
+::code-tree-intersection
+```ts [server/api/chats.post.ts]
+import type { UIMessage } from 'ai'
+import { db, schema } from 'hub:db'
+import { z } from 'zod'
+
+export default defineEventHandler(async (event) => {
+  const { message } = await readValidatedBody(event, z.object({
+    message: z.custom<UIMessage>()
+  }).parse)
+
+  // Create a new chat
+  const [chat] = await db.insert(schema.chats).values({}).returning()
+
+  // Save the first user message
+  await db.insert(schema.messages).values({
+    chatId: chat.id,
+    role: 'user',
+    parts: message.parts
+  })
+
+  return chat
+})
+```
+::
+
+### Streaming AI responses
+
+Next, create the endpoint that handles the AI conversation. This endpoint uses [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text), [`createUIMessageStream`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/create-ui-message-stream), and [`createUIMessageStreamResponse`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/create-ui-message-stream-response) from the AI SDK:
+
+::code-tree-intersection
+:::code-collapse
+
+```ts [server/api/chats/[id].post.ts]
+import { db, schema } from 'hub:db'
+import {
+  convertToModelMessages,
+  createUIMessageStream,
+  createUIMessageStreamResponse,
+  generateText,
+  streamText
+} from 'ai'
+import type { UIMessage } from 'ai'
+import { eq } from 'drizzle-orm'
+import { z } from 'zod'
+
+export default defineEventHandler(async (event) => {
+  const { id } = await getValidatedRouterParams(event, z.object({
+    id: z.string()
+  }).parse)
+
+  const { model, messages } = await readValidatedBody(event, z.object({
+    model: z.string().default('openai/gpt-4o-mini'),
+    messages: z.array(z.custom<UIMessage>())
+  }).parse)
+
+  // Fetch the chat from the database
+  const chat = await db.query.chats.findFirst({
+    where: (chat, { eq }) => eq(chat.id, id as string)
+  })
+
+  if (!chat) {
+    throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
+  }
+
+  // Generate a title for the chat if it doesn't have one
+  if (!chat.title) {
+    const { text: title } = await generateText({
+      model: 'openai/gpt-4o-mini',
+      system: `Generate a short title (max 30 characters) based on the user's message. No quotes or punctuation.`,
+      prompt: JSON.stringify(messages[0])
+    })
+
+    await db.update(schema.chats).set({ title }).where(eq(schema.chats.id, id))
+  }
+
+  // Save the user message if it's a follow-up
+  const lastMessage = messages[messages.length - 1]
+  if (lastMessage?.role === 'user' && messages.length > 1) {
+    await db.insert(schema.messages).values({
+      chatId: id,
+      role: 'user',
+      parts: lastMessage.parts
+    })
+  }
+
+  // Create the streaming response
+  const stream = createUIMessageStream({
+    execute: ({ writer }) => {
+      const result = streamText({
+        model,
+        system: `You are a helpful AI assistant. Be concise and friendly.`,
+        messages: convertToModelMessages(messages)
+      })
+
+      // Notify the client that a title was generated
+      if (!chat.title) {
+        writer.write({
+          type: 'data-chat-title',
+          data: { message: 'Title generated' },
+          transient: true
+        })
+      }
+
+      writer.merge(result.toUIMessageStream())
+    },
+    onFinish: async ({ messages }) => {
+      // Save the assistant's response to the database
+      await db.insert(schema.messages).values(messages.map(message => ({
+        chatId: chat.id,
+        role: message.role as 'user' | 'assistant',
+        parts: message.parts
+      })))
+    }
+  })
+
+  return createUIMessageStreamResponse({ stream })
+})
+```
+
+:::
+::
+
+Here's what each part does:
+
+**AI Gateway**
+
+Thanks to [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), we can use any AI model supported by the gateway just by specifying the model name.
+
+**Automatic Title Generation**
+
+When a chat doesn't have a title yet, we use [`generateText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/generate-text#generatetext) to create one based on the first message. This provides a better UX by showing meaningful titles in the chat history instead of "Untitled".
+
+**Streaming with streamText**
+
+The [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text) function generates a streaming response from the AI model. Key options include:
+- `model`: The AI model to use
+- `system`: Instructions that guide the AI's behavior
+- `messages`: The conversation history
+
+**UIMessageStream**
+
+The [`createUIMessageStream`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/create-ui-message-stream#createuimessagestream) and [`createUIMessageStreamResponse`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/create-ui-message-stream-response#createuimessagestreamresponse) functions create a stream that the AI SDK client can consume. The response streams chunks as they're generated, creating the real-time typing effect.
+
+The `writer.write()` method allows sending custom data events to the client (like `data-chat-title`), while `onFinish` is called when streaming completes, perfect for persisting the assistant's response.
+
+### Fetching a chat
+
+Add an endpoint to fetch existing chat data from your database:
+
+::code-tree-intersection
+```ts [server/api/chats/[id].get.ts]
+import { db, schema } from 'hub:db'
+import { asc, eq } from 'drizzle-orm'
+import { z } from 'zod'
+
+export default defineEventHandler(async (event) => {
+  const { id } = await getValidatedRouterParams(event, z.object({
+    id: z.string()
+  }).parse)
+
+  const chat = await db.query.chats.findFirst({
+    where: (eq(schema.chats.id, id)),
+    with: {
+      messages: {
+        orderBy: () => asc(schema.messages.createdAt)
+      }
+    }
+  })
+
+  if (!chat) {
+    throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
+  }
+
+  return chat
+})
+```
+::
+
+## Wire up the UI
 
 Nuxt UI provides purpose-built components for AI chat interfaces: [`UChatPrompt`](/docs/components/chat-prompt) for the input area and [`UChatMessages`](/docs/components/chat-messages) for displaying the conversation.
 
-### Creating the Home Page
+### Creating the home page
 
-Let's create the home page where users can start a new conversation. The [`UChatPrompt`](/docs/components/chat-prompt) component provides a beautiful textarea with auto-resize, keyboard shortcuts, and a submit button:
+The home page is where users start a new conversation. The [`UChatPrompt`](/docs/components/chat-prompt) component provides a textarea with auto-resize, keyboard shortcuts, and a submit button:
 
 ::code-tree-intersection
 ```vue [app/pages/index.vue] {34-42}
@@ -250,15 +437,15 @@ async function createChat() {
 ```
 ::
 
-The `UChatPrompt` component automatically handles:
+The [`UChatPrompt`](/docs/components/chat-prompt) component automatically handles:
 - Form submission when pressing :kbd{value="enter"}
 - Auto-resizing as you type
 - A loading state when `status` is set to `streaming`
 - Focus management and keyboard shortcuts
 
-## Creating the Chat Page
+## Creating the chat page
 
-Now let's build the chat page where the actual conversation happens. This is where we'll integrate the AI SDK's [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) class for real-time streaming.
+The chat page is where the actual conversation happens. It integrates the AI SDK's [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class and [`DefaultChatTransport`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/default-chat-transport) for real-time streaming.
 
 ::code-tree-intersection
 ::code-collapse
@@ -361,11 +548,11 @@ onMounted(() => {
 ::
 ::
 
-Let's break down the key parts:
+Here's a breakdown of the key parts:
 
 **The Chat Class**
 
-The `Chat` class from `@ai-sdk/vue` manages the entire conversation state. It handles:
+The [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class from `@ai-sdk/vue` manages the entire conversation state. It handles:
 - Message history with `chat.messages`
 - Connection status with `chat.status` (`ready`, `submitted`, `streaming`, `error`)
 - Sending messages with `chat.sendMessage()`
@@ -376,7 +563,7 @@ The `onData` callback receives custom data events from the server (like `data-ch
 
 **UChatMessages Component**
 
-The `UChatMessages` component is purpose-built for AI chatbots with:
+The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built for AI chatbots with:
 - Auto-scroll to bottom on load
 - Continuous scrolling as messages stream in
 - A loading indicator while the assistant processes
@@ -384,7 +571,7 @@ The `UChatMessages` component is purpose-built for AI chatbots with:
 
 **Rendering Markdown with MDC**
 
-AI models often respond with markdown formatting (code blocks, lists, bold text, etc.). We use the `MDC` component from `@nuxtjs/mdc` to render this content beautifully. The `getTextFromMessage` utility from `@nuxt/ui/utils/ai` extracts the text content from AI SDK v5 message parts.
+AI models often respond with markdown formatting (code blocks, lists, bold text, etc.). We use the [`MDC`](https://nuxt.com/modules/mdc) component from `@nuxtjs/mdc` to render this content beautifully. The [`getTextFromMessage`](/docs/utils/get-text-from-message) utility extracts the text content from AI SDK v5 message parts.
 
 ::note{to="/docs/typography"}
 Nuxt UI provides pre-styled prose components, so your markdown content will be automatically styled to match your theme.
@@ -392,203 +579,16 @@ Nuxt UI provides pre-styled prose components, so your markdown content will be a
 
 **UChatPromptSubmit Component**
 
-This component adapts based on the chat status:
+The [`UChatPromptSubmit`](/docs/components/chat-prompt-submit) component adapts based on the chat status:
 - Shows a send button when ready
 - Shows a stop button while streaming
 - Shows a reload button after an error
 
-## Building the Server API
+## Adding chat history
 
-Now for the exciting part: integrating AI on the server. We'll create API endpoints using Nitro.
+This section adds a dropdown menu to list previous chats and navigate between them.
 
-### Creating a Chat
-
-First, let's create the endpoint that initializes a new chat and saves the first message to the database:
-
-::code-tree-intersection
-```ts [server/api/chats.post.ts]
-import type { UIMessage } from 'ai'
-import { db, schema } from 'hub:db'
-import { z } from 'zod'
-
-export default defineEventHandler(async (event) => {
-  const { message } = await readValidatedBody(event, z.object({
-    message: z.custom<UIMessage>()
-  }).parse)
-
-  // Create a new chat
-  const [chat] = await db.insert(schema.chats).values({}).returning()
-
-  // Save the first user message
-  await db.insert(schema.messages).values({
-    chatId: chat.id,
-    role: 'user',
-    parts: message.parts
-  })
-
-  return chat
-})
-```
-::
-
-### Streaming AI Responses
-
-Now let's create the endpoint that handles the AI conversation:
-
-::code-tree-intersection
-:::code-collapse
-
-```ts [server/api/chats/[id].post.ts]
-import { db, schema } from 'hub:db'
-import {
-  convertToModelMessages,
-  createUIMessageStream,
-  createUIMessageStreamResponse,
-  generateText,
-  streamText
-} from 'ai'
-import type { UIMessage } from 'ai'
-import { eq } from 'drizzle-orm'
-import { z } from 'zod'
-
-export default defineEventHandler(async (event) => {
-  const { id } = await getValidatedRouterParams(event, z.object({
-    id: z.string()
-  }).parse)
-
-  const { model, messages } = await readValidatedBody(event, z.object({
-    model: z.string().default('openai/gpt-4o-mini'),
-    messages: z.array(z.custom<UIMessage>())
-  }).parse)
-
-  // Fetch the chat from the database
-  const chat = await db.query.chats.findFirst({
-    where: (chat, { eq }) => eq(chat.id, id as string)
-  })
-
-  if (!chat) {
-    throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
-  }
-
-  // Generate a title for the chat if it doesn't have one
-  if (!chat.title) {
-    const { text: title } = await generateText({
-      model: 'openai/gpt-4o-mini',
-      system: `Generate a short title (max 30 characters) based on the user's message. No quotes or punctuation.`,
-      prompt: JSON.stringify(messages[0])
-    })
-
-    await db.update(schema.chats).set({ title }).where(eq(schema.chats.id, id))
-  }
-
-  // Save the user message if it's a follow-up
-  const lastMessage = messages[messages.length - 1]
-  if (lastMessage?.role === 'user' && messages.length > 1) {
-    await db.insert(schema.messages).values({
-      chatId: id,
-      role: 'user',
-      parts: lastMessage.parts
-    })
-  }
-
-  // Create the streaming response
-  const stream = createUIMessageStream({
-    execute: ({ writer }) => {
-      const result = streamText({
-        model,
-        system: `You are a helpful AI assistant. Be concise and friendly.`,
-        messages: convertToModelMessages(messages)
-      })
-
-      // Notify the client that a title was generated
-      if (!chat.title) {
-        writer.write({
-          type: 'data-chat-title',
-          data: { message: 'Title generated' },
-          transient: true
-        })
-      }
-
-      writer.merge(result.toUIMessageStream())
-    },
-    onFinish: async ({ messages }) => {
-      // Save the assistant's response to the database
-      await db.insert(schema.messages).values(messages.map(message => ({
-        chatId: chat.id,
-        role: message.role as 'user' | 'assistant',
-        parts: message.parts
-      })))
-    }
-  })
-
-  return createUIMessageStreamResponse({ stream })
-})
-```
-
-:::
-::
-
-Let's understand what's happening:
-
-**AI Gateway**
-
-Thanks to [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), we can use any AI model supported by the gateway just by specifying the model name.
-
-**Automatic Title Generation**
-
-When a chat doesn't have a title yet, we use [`generateText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/generate-text#generatetext) to create one based on the first message. This provides a better UX by showing meaningful titles in the chat history instead of "Untitled".
-
-**Streaming with streamText**
-
-The [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text) function generates a streaming response from the AI model. Key options include:
-- `model`: The AI model to use
-- `system`: Instructions that guide the AI's behavior
-- `messages`: The conversation history
-
-**UIMessageStream**
-
-The [`createUIMessageStream`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/create-ui-message-stream#createuimessagestream) and [`createUIMessageStreamResponse`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/create-ui-message-stream-response#createuimessagestreamresponse) functions create a stream that the AI SDK client can consume. The response streams chunks as they're generated, creating the real-time typing effect.
-
-The `writer.write()` method allows sending custom data events to the client (like `data-chat-title`), while `onFinish` is called when streaming completes, perfect for persisting the assistant's response.
-
-### Fetching a Chat
-
-Add an endpoint to fetch existing chat data from your database:
-
-::code-tree-intersection
-```ts [server/api/chats/[id].get.ts]
-import { db, schema } from 'hub:db'
-import { asc, eq } from 'drizzle-orm'
-import { z } from 'zod'
-
-export default defineEventHandler(async (event) => {
-  const { id } = await getValidatedRouterParams(event, z.object({
-    id: z.string()
-  }).parse)
-
-  const chat = await db.query.chats.findFirst({
-    where: (eq(schema.chats.id, id)),
-    with: {
-      messages: {
-        orderBy: () => asc(schema.messages.createdAt)
-      }
-    }
-  })
-
-  if (!chat) {
-    throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
-  }
-
-  return chat
-})
-```
-::
-
-## Managing Chat History
-
-Let's add a dropdown menu to list previous chats and navigate between them.
-
-### Listing Chats API
+### Listing chats API
 
 First, create an endpoint to fetch all chats:
 
@@ -605,9 +605,9 @@ export default defineEventHandler(async () => {
 ```
 ::
 
-### Creating a Chats Composable
+### Creating a chats composable
 
-Create a composable to fetch and cache the chat list:
+Create a composable using [`useFetch`](https://nuxt.com/docs/api/composables/use-fetch) to fetch and cache the chat list:
 
 ::code-tree-intersection
 ```ts [app/composables/useChats.ts]
@@ -625,7 +625,9 @@ export function useChats() {
 ```
 ::
 
-### Building the Chats History Dropdown
+### Building the chats history dropdown
+
+The component uses [`UDropdownMenu`](/docs/components/dropdown-menu) with a [`UButton`](/docs/components/button) as trigger:
 
 ::code-tree-intersection
 ```vue [app/components/ChatsHistory.vue]
@@ -662,7 +664,7 @@ const items = computed(() => [
 ```
 ::
 
-## Adding the Chats History to the Home Page
+## Integrating history in the home page
 
 ::code-tree-intersection
 :::code-collapse
@@ -722,7 +724,7 @@ async function createChat() {
 :::
 ::
 
-## Adding the Chats History to the Chat Page
+## Integrating history in the chat page
 
 ::code-tree-intersection
 :::code-collapse
@@ -830,11 +832,13 @@ onMounted(() => {
 
 The `refreshNuxtData('chats')` call in the chat page's `onData` callback (as shown earlier) ensures the chat list updates automatically when a new title is generated.
 
-## Switching Between AI Models
+## Adding multi-model support
 
-One of the benefits of using AI Gateway is the ability to switch between models seamlessly. Let's add a model selector to our chat.
+One of the benefits of using [AI Gateway](https://vercel.com/docs/ai-gateway) is the ability to switch between models seamlessly. This section adds a model selector to the chat.
 
-### Creating a Models Composable
+### Creating a models composable
+
+Define the available models and persist the user's selection using [`useCookie`](https://nuxt.com/docs/api/composables/use-cookie):
 
 ::code-tree-intersection
 ```ts [app/composables/useModels.ts]
@@ -857,7 +861,9 @@ export function useModels() {
 ```
 ::
 
-### Building the Model Selector
+### Building the model selector
+
+Create a [`USelectMenu`](/docs/components/select-menu) component that displays the available models:
 
 ::code-tree-intersection
 ```vue [app/components/ModelSelect.vue]
@@ -883,7 +889,7 @@ const selectedModel = computed(() =>
 ```
 ::
 
-### Integrating with the Chat
+### Integrating with the chat
 
 Update the chat page to include the model selector and pass the selected model to the server:
 
@@ -995,7 +1001,7 @@ onMounted(() => {
 :::
 ::
 
-## Going Further
+## Going further
 
 You now have a working AI chatbot with database persistence! To take it further, consider adding:
 
@@ -1005,7 +1011,7 @@ Add authentication with [nuxt-auth-utils](https://github.com/atinux/nuxt-auth-ut
 
 **AI Tools**
 
-Extend your chatbot with tools that can fetch real-time data, generate charts, or interact with external APIs:
+Extend your chatbot with [AI SDK tools](https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling) that can fetch real-time data, generate charts, or interact with external APIs:
 
 ```ts
 import { tool } from 'ai'
@@ -1063,4 +1069,4 @@ The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat 
 - [AI Gateway Documentation](https://vercel.com/docs/ai-gateway)
 - [AI Chat Template](https://github.com/nuxt-ui-templates/chat)
 
-We're excited to see what you'll build!
+Happy building!
