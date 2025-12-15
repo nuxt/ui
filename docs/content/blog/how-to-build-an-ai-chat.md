@@ -571,7 +571,7 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 
 **Rendering Markdown with MDC**
 
-AI models often respond with markdown formatting (code blocks, lists, bold text, etc.). We use the [`MDC`](https://github.com/nuxt-content/mdc#mdc) component from [`@nuxtjs/mdc`](https://github.com/nuxt-content/mdc) to render this content beautifully. The [`getTextFromMessage`](/docs/utils/get-text-from-message) utility extracts the text content from AI SDK v5 message parts.
+AI models often respond with markdown formatting (code blocks, lists, bold text, etc.). We use the [`MDC`](https://github.com/nuxt-content/mdc#mdc) component from [`@nuxtjs/mdc`](https://github.com/nuxt-content/mdc) to render this content beautifully. The `getTextFromMessage` utility extracts the text content from AI SDK v5 message parts.
 
 ::note{to="/docs/typography"}
 Nuxt UI provides pre-styled prose components, so your markdown content will be automatically styled to match your theme.
