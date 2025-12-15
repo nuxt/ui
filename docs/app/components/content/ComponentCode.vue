@@ -348,6 +348,9 @@ ${props.slots?.default}
 
 const codeKey = computed(() => `component-code-${name}-${hash(props)}`)
 
+const wrapperContainer = ref<HTMLElement | null>(null)
+const componentContainer = ref<HTMLElement | null>(null)
+
 const { data: ast } = await useAsyncData(codeKey, async () => {
   if (!props.prettier) {
     return parseMarkdown(code.value)
@@ -371,7 +374,7 @@ const { data: ast } = await useAsyncData(codeKey, async () => {
 
 <template>
   <div class="my-5" :style="{ '--ui-header-height': '4rem' }">
-    <div class="relative">
+    <div ref="wrapperContainer" class="relative group/component">
       <div v-if="options.length" class="flex flex-wrap items-center gap-2.5 border border-muted border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">
           <UFormField
@@ -420,7 +423,7 @@ const { data: ast } = await useAsyncData(codeKey, async () => {
         </template>
       </div>
 
-      <div v-if="component" class="flex justify-center border border-b-0 border-muted relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden, 'dark:bg-neutral-950/50': props.elevated }]">
+      <div v-if="component" ref="componentContainer" class="flex justify-center border border-b-0 border-muted relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden, 'dark:bg-neutral-950/50': props.elevated }]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">
@@ -429,6 +432,15 @@ const { data: ast } = await useAsyncData(codeKey, async () => {
           </template>
         </component>
       </div>
+
+      <ClientOnly>
+        <LazyComponentThemeVisualizer
+          :container="componentContainer"
+          :position-container="wrapperContainer"
+          :slug="props.slug"
+          :prose="props.prose"
+        />
+      </ClientOnly>
     </div>
 
     <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
