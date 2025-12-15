@@ -133,7 +133,7 @@ Nuxt UI provides purpose-built components for AI chat interfaces: `UChatPrompt` 
 Let's create the home page where users can start a new conversation. The `UChatPrompt` component provides a beautiful textarea with auto-resize, keyboard shortcuts, and a submit button:
 
 ::code-tree-intersection
-```vue [app/pages/index.vue]
+```vue [app/pages/index.vue] {27-35}
 <script setup lang="ts">
 const input = ref('')
 const loading = ref(false)
@@ -185,7 +185,7 @@ The `UChatPrompt` component automatically handles:
 Now let's build the chat page where the actual conversation happens. This is where we'll integrate the AI SDK's `Chat` class for real-time streaming.
 
 ::code-tree-intersection
-```vue [app/pages/chat/[id].vue]
+```vue [app/pages/chat/[id].vue] {2-4,19-38}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
 import { DefaultChatTransport } from 'ai'
@@ -322,7 +322,7 @@ Now for the exciting part: integrating AI on the server. We'll create API endpoi
 First, let's create the endpoint that initializes a new chat and saves the first message to the database:
 
 ::code-tree-intersection
-```ts [server/api/chats.post.ts]
+```ts [server/api/chats.post.ts] {4,7,10-14}
 export default defineEventHandler(async (event) => {
   const { message } = await readBody(event)
 
@@ -345,10 +345,10 @@ export default defineEventHandler(async (event) => {
 
 ### Streaming AI Responses
 
-Now let's create the endpoint that handles the AI conversation. This is where the magic happens:
+Now let's create the endpoint that handles the AI conversation:
 
 ::code-tree-intersection
-```ts [server/api/chats/[id].post.ts]
+```ts [server/api/chats/[id].post.ts] {1-10,34-36,40-46,60-87}
 import { createGateway } from '@ai-sdk/gateway'
 import {
   convertToModelMessages,
@@ -473,7 +473,7 @@ The `writer.write()` method allows sending custom data events to the client (lik
 Add an endpoint to fetch existing chat data from your database:
 
 ::code-tree-intersection
-```ts [server/api/chats/[id].get.ts]
+```ts [server/api/chats/[id].get.ts] {6-13}
 export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event)
 
@@ -559,7 +559,7 @@ const selectedModel = computed(() =>
 Update the chat page to include the model selector and pass the selected model to the server:
 
 ::code-tree-intersection
-```vue [app/pages/chat/[id].vue]
+```vue [app/pages/chat/[id].vue] {7,18-20,36-38}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
 import { DefaultChatTransport } from 'ai'
@@ -608,15 +608,11 @@ const chat = new Chat({
 
 ## Going Further
 
-You now have a working AI chatbot! For production applications, you'll want to add:
-
-**Chat History Persistence**
-
-Store conversations in a database using [Drizzle ORM](https://orm.drizzle.team) with PostgreSQL or SQLite.
+You now have a working AI chatbot with database persistence! To take it further, consider adding:
 
 **User Authentication**
 
-Add authentication with [nuxt-auth-utils](https://github.com/atinux/nuxt-auth-utils) to let users access their chat history across devices.
+Add authentication with [nuxt-auth-utils](https://github.com/atinux/nuxt-auth-utils) to let users access their chat history across devices and keep conversations private.
 
 **AI Tools**
 
