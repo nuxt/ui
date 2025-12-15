@@ -564,6 +564,90 @@ export default defineEventHandler(async (event) => {
 ```
 ::
 
+## Managing Chat History
+
+Let's add a dropdown menu to list previous chats and navigate between them.
+
+### Listing Chats API
+
+First, create an endpoint to fetch all chats:
+
+::code-tree-intersection
+```ts [server/api/chats.get.ts]
+import { db, schema } from 'hub:db'
+import { desc } from 'drizzle-orm'
+
+export default defineEventHandler(async () => {
+  return await db.query.chats.findMany({
+    orderBy: () => desc(schema.chats.createdAt)
+  })
+})
+```
+::
+
+### Creating a Chats Composable
+
+Create a composable to fetch and cache the chat list:
+
+::code-tree-intersection
+```ts [app/composables/useChats.ts]
+export function useChats() {
+  const { data: chats, refresh } = useFetch('/api/chats', {
+    key: 'chats',
+    default: () => []
+  })
+
+  return {
+    chats,
+    refresh
+  }
+}
+```
+::
+
+### Building the Chat List Dropdown
+
+::code-tree-intersection
+```vue [app/components/ChatHistory.vue]
+<script setup lang="ts">
+const route = useRoute()
+const { chats } = useChats()
+
+const items = computed(() => chats.value.map(chat => ({
+  label: chat.title || 'Untitled',
+  to: `/chat/${chat.id}`,
+  active: route.params.id === chat.id
+})))
+</script>
+
+<template>
+  <UDropdownMenu :items="items">
+    <UButton
+      icon="i-lucide-messages-square"
+      variant="ghost"
+      color="neutral"
+      label="Chats history"
+    />
+  </UDropdownMenu>
+</template>
+```
+::
+
+## Adding the Chat History to the Chat Page
+
+::code-tree-intersection
+```vue [app/app.vue] {3}
+<template>
+  <UApp>
+    <ChatHistory class="fixed top-4 left-4 z-50" />
+    <NuxtPage />
+  </UApp>
+</template>
+```
+::
+
+The `refreshNuxtData('chats')` call in the chat page's `onData` callback (as shown earlier) ensures the chat list updates automatically when a new title is generated.
+
 ## Switching Between AI Models
 
 One of the benefits of using AI Gateway is the ability to switch between models seamlessly. Let's add a model selector to our chat.
