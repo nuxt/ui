@@ -61,7 +61,7 @@ name: 'chat-palette-content-search-example'
 ::
 
 ::tip
-You can enhance your chatbot with tool calling capabilities using the [Model Context Protocol](https://ai-sdk.dev/docs/ai-sdk-core/mcp) (`@ai-sdk/mcp`). This allows the AI to search your documentation or perform other actions:
+You can enhance your chatbot with tool calling capabilities using the [Model Context Protocol](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) (`@ai-sdk/mcp`). This allows the AI to search your documentation or perform other actions:
 
 ::code-collapse
 
