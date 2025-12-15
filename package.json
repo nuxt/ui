@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "2.22.3",
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.25.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -66,15 +66,15 @@
     "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^1.11.0",
+    "@nuxt/eslint-config": "^1.12.1",
     "@nuxt/module-builder": "^1.0.2",
     "@nuxt/test-utils": "^3.21.0",
-    "@release-it/conventional-changelog": "^10.0.2",
+    "@release-it/conventional-changelog": "^10.0.3",
     "@vue/test-utils": "^2.4.6",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.2",
     "happy-dom": "^20.0.11",
     "nuxt": "^4.1.2",
-    "release-it": "^19.0.6",
+    "release-it": "^19.1.0",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4",
     "vitest-environment-nuxt": "^1.0.1",
