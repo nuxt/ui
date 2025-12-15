@@ -144,6 +144,8 @@ With [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), you don't need ind
 [NuxtHub](https://hub.nuxt.com) provides a zero-config database powered by Drizzle ORM. Let's create the schema for our chat application:
 
 ::code-tree-intersection
+:::code-collapse
+
 ```ts [server/db/schema.ts]
 import { relations } from 'drizzle-orm'
 import { sqliteTable, text, integer, index } from 'drizzle-orm/sqlite-core'
@@ -175,6 +177,8 @@ export const messagesRelations = relations(messages, ({ one }) => ({
   })
 }))
 ```
+
+:::
 ::
 
 Generate the database migrations from your schema:
@@ -257,6 +261,8 @@ The `UChatPrompt` component automatically handles:
 Now let's build the chat page where the actual conversation happens. This is where we'll integrate the AI SDK's [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) class for real-time streaming.
 
 ::code-tree-intersection
+::code-collapse
+
 ```vue [app/pages/chat/[id].vue] {2-4,19-38}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
@@ -351,6 +357,8 @@ onMounted(() => {
   </UDashboardPanel>
 </template>
 ```
+
+::
 ::
 
 Let's break down the key parts:
@@ -428,6 +436,8 @@ export default defineEventHandler(async (event) => {
 Now let's create the endpoint that handles the AI conversation:
 
 ::code-tree-intersection
+:::code-collapse
+
 ```ts [server/api/chats/[id].post.ts]
 import { db, schema } from 'hub:db'
 import {
@@ -514,6 +524,8 @@ export default defineEventHandler(async (event) => {
   return createUIMessageStreamResponse({ stream })
 })
 ```
+
+:::
 ::
 
 Let's understand what's happening:
@@ -653,6 +665,8 @@ const items = computed(() => [
 ## Adding the Chats History to the Home Page
 
 ::code-tree-intersection
+:::code-collapse
+
 ```vue [app/pages/index.vue] {28-30}
 <script setup lang="ts">
 const input = ref('')
@@ -704,11 +718,15 @@ async function createChat() {
   </UDashboardPanel>
 </template>
 ```
+
+:::
 ::
 
 ## Adding the Chats History to the Chat Page
 
 ::code-tree-intersection
+:::code-collapse
+
 ```vue [app/pages/chat/[id].vue] {58-60}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
@@ -806,6 +824,8 @@ onMounted(() => {
   </UDashboardPanel>
 </template>
 ```
+
+:::
 ::
 
 The `refreshNuxtData('chats')` call in the chat page's `onData` callback (as shown earlier) ensures the chat list updates automatically when a new title is generated.
@@ -868,16 +888,23 @@ const selectedModel = computed(() =>
 Update the chat page to include the model selector and pass the selected model to the server:
 
 ::code-tree-intersection
-```vue [app/pages/chat/[id].vue] {7,18-20,36-38}
+:::code-collapse
+
+```vue [app/pages/chat/[id].vue] {8,23-25,85-87}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
 import { DefaultChatTransport } from 'ai'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
 const route = useRoute()
+const toast = useToast()
 const { model } = useModels()
 
 const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
+
+if (!chatData.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+}
 
 const input = ref('')
 
@@ -889,34 +916,83 @@ const chat = new Chat({
     body: {
       model: model.value // Pass the selected model
     }
-  })
+  }),
+  onData(dataPart) {
+    if (dataPart.type === 'data-chat-title') {
+      refreshNuxtData('chats')
+    }
+  },
+  onError(error) {
+    toast.add({
+      title: 'Error',
+      description: error.message,
+      color: 'error'
+    })
+  }
 })
 
-// ... rest of the component
+function handleSubmit(e: Event) {
+  e.preventDefault()
+  if (input.value.trim()) {
+    chat.sendMessage({ text: input.value })
+    input.value = ''
+  }
+}
+
+onMounted(() => {
+  if (chatData.value?.messages.length === 1) {
+    chat.regenerate()
+  }
+})
 </script>
 
 <template>
   <UDashboardPanel :ui="{ body: 'p-0 sm:p-0' }">
+    <template #header>
+      <ChatsHistory />
+    </template>
     <template #body>
       <UContainer class="min-h-dvh flex flex-col py-4 sm:py-6">
-        <UChatMessages :messages="chat.messages" :status="chat.status" should-auto-scroll class="flex-1">
+        <UChatMessages
+          :messages="chat.messages"
+          :status="chat.status"
+          should-auto-scroll
+          class="flex-1"
+        >
           <template #content="{ message }">
-            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" class="*:first:mt-0 *:last:mb-0" />
+            <MDC
+              :value="getTextFromMessage(message)"
+              :cache-key="message.id"
+              class="*:first:mt-0 *:last:mb-0"
+            />
           </template>
         </UChatMessages>
 
-        <UChatPrompt v-model="input" :error="chat.error" variant="subtle" @submit="handleSubmit">
+        <UChatPrompt
+          v-model="input"
+          :error="chat.error"
+          variant="subtle"
+          class="sticky bottom-0"
+          @submit="handleSubmit"
+        >
           <template #footer>
             <ModelSelect v-model="model" />
           </template>
 
-          <UChatPromptSubmit :status="chat.status" color="neutral" @stop="chat.stop()" @reload="chat.regenerate()" />
+          <UChatPromptSubmit
+            :status="chat.status"
+            color="neutral"
+            @stop="chat.stop()"
+            @reload="chat.regenerate()"
+          />
         </UChatPrompt>
       </UContainer>
     </template>
   </UDashboardPanel>
 </template>
 ```
+
+:::
 ::
 
 ## Going Further
