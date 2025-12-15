@@ -8,7 +8,7 @@ authors:
     avatar:
       src: https://github.com/hugorcd.png
     to: https://x.com/hugorcd
-date: 2025-12-09T10:00:00.000Z
+date: 2025-12-16T10:00:00.000Z
 category: Tutorial
 ---
 
@@ -448,7 +448,7 @@ The [`UChatPrompt`](/docs/components/chat-prompt) component automatically handle
 The chat page is where the actual conversation happens. It integrates the AI SDK's [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class and [`DefaultChatTransport`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/default-chat-transport) for real-time streaming.
 
 ::code-tree-intersection
-::code-collapse
+:::code-collapse
 
 ```vue [app/pages/chat/[id].vue] {2-4,19-38}
 <script setup lang="ts">
@@ -545,7 +545,7 @@ onMounted(() => {
 </template>
 ```
 
-::
+:::
 ::
 
 Here's a breakdown of the key parts:
@@ -559,7 +559,7 @@ The [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class from `@ai-s
 - Stopping generation with `chat.stop()`
 - Regenerating responses with `chat.regenerate()`
 
-The `onData` callback receives custom data events from the server (like `data-chat-title`), allowing you to react to server-side events during streaming.
+The `onData` callback receives [custom data events](https://ai-sdk.dev/docs/ai-sdk-ui/streaming-data) from the server (like `data-chat-title`), allowing you to react to server-side events during streaming.
 
 **UChatMessages Component**
 
@@ -571,7 +571,7 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 
 **Rendering Markdown with MDC**
 
-AI models often respond with markdown formatting (code blocks, lists, bold text, etc.). We use the [`MDC`](https://nuxt.com/modules/mdc) component from `@nuxtjs/mdc` to render this content beautifully. The [`getTextFromMessage`](/docs/utils/get-text-from-message) utility extracts the text content from AI SDK v5 message parts.
+AI models often respond with markdown formatting (code blocks, lists, bold text, etc.). We use the [`MDC`](https://github.com/nuxt-content/mdc#mdc) component from [`@nuxtjs/mdc`](https://github.com/nuxt-content/mdc) to render this content beautifully. The [`getTextFromMessage`](/docs/utils/get-text-from-message) utility extracts the text content from AI SDK v5 message parts.
 
 ::note{to="/docs/typography"}
 Nuxt UI provides pre-styled prose components, so your markdown content will be automatically styled to match your theme.
@@ -1052,12 +1052,11 @@ Learn more about setting up AI Gateway in the **Vercel AI Gateway documentation*
 
 You've built a complete AI chatbot with:
 
-- **A beautiful chat interface** using Nuxt UI components
+- **A complete chat interface** using Nuxt UI components
 - **Real-time streaming responses** with the AI SDK
 - **Markdown rendering** with MDC for rich content display
 - **Multi-model support** via AI Gateway
 - **Database persistence** with NuxtHub and Drizzle ORM
-- **Server-side AI integration** with Nitro
 
 The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat components, NuxtHub's zero-config database, and the AI SDK's streaming infrastructure makes building AI applications straightforward and enjoyable.
 
@@ -1069,4 +1068,4 @@ The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat 
 - [AI Gateway Documentation](https://vercel.com/docs/ai-gateway)
 - [AI Chat Template](https://github.com/nuxt-ui-templates/chat)
 
-Happy building!
+We're excited to see what you'll build!
