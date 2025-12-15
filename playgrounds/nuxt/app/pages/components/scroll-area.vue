@@ -1,42 +1,31 @@
 <script setup lang="ts">
-const virtualize = ref(false)
+const virtualize = ref(true)
 const orientation = ref<'vertical' | 'horizontal'>('vertical')
-const itemCount = ref(100)
-const estimateSize = ref(100)
-const gap = ref(12)
-const padding = ref(12)
-const lanes = ref(3)
+const estimateSize = ref(480)
+const gap = ref(16)
+const lanes = ref(4)
 
-type Item = {
-  id: number
-  title: string
-  url?: string
-  description?: string
-  aspectRatio?: number
-  color?: string
+const heights = [320, 480, 640, 800]
+
+// Pseudo-random height selection with longer cycle to avoid alignment patterns
+function getHeight(index: number) {
+  const seed = (index * 11 + 7) % 17
+  return heights[seed % heights.length]!
 }
 
-// Generate items with variable sizes for dynamic sizing demo
-const items = computed<Item[]>(() => {
-  return Array.from({ length: itemCount.value }, (_, i) => {
-    const aspectRatios = ['1/1', '4/3', '16/9']
-    const descriptions = [
-      `Item ${i + 1}`,
-      `Item ${i + 1} with some additional text.`,
-      `This is item number ${i + 1} with quite a bit more description text that demonstrates dynamic sizing with variable height content in masonry layouts.`,
-      `Item ${i + 1} - short one.`
-    ]
+const items = computed(() => {
+  return Array.from({ length: 1000 }, (_, index) => {
+    const height = getHeight(index)
     return {
-      id: i + 1,
-      url: `https://picsum.photos/300/${aspectRatios[i % aspectRatios.length] === '1/1' ? 300 : aspectRatios[i % aspectRatios.length] === '4/3' ? 400 : 200}?random=${i}`,
-      title: `Image ${i + 1}`,
-      description: descriptions[i % descriptions.length],
-      aspectRatio: aspectRatios[i % aspectRatios.length] === '1/1' ? 1 : aspectRatios[i % aspectRatios.length] === '4/3' ? 4 / 3 : 16 / 9
+      id: index,
+      title: `Item ${index + 1}`,
+      src: `https://picsum.photos/640/${height}?v=${index}`,
+      width: 640,
+      height
     }
   })
 })
 
-// For virtualized mode, pass layout options (gap, padding, lanes)
 const virtualizeOptions = computed(() => {
   if (!virtualize.value) {
     return false
@@ -44,10 +33,7 @@ const virtualizeOptions = computed(() => {
   return {
     estimateSize: estimateSize.value,
     gap: gap.value,
-    paddingStart: padding.value,
-    paddingEnd: padding.value,
-    lanes: lanes.value,
-    enabled: true
+    lanes: lanes.value
   }
 })
 </script>
@@ -63,7 +49,7 @@ const virtualizeOptions = computed(() => {
         active-variant="solid"
         active-color="primary"
         :active="orientation === 'vertical'"
-        icon="i-lucide-arrow-down"
+        icon="i-lucide-move-vertical"
         @click="orientation = 'vertical'"
       />
       <UButton
@@ -72,26 +58,10 @@ const virtualizeOptions = computed(() => {
         active-variant="solid"
         active-color="primary"
         :active="orientation === 'horizontal'"
-        icon="i-lucide-arrow-right"
+        icon="i-lucide-move-horizontal"
         @click="orientation = 'horizontal'"
       />
     </UFieldGroup>
-
-    <UInput
-      v-model.number="itemCount"
-      type="number"
-      icon="i-lucide-image"
-      :min="10"
-      :max="100000"
-    />
-
-    <!-- <UInput
-        v-model.number="estimateSize"
-        type="number"
-        :min="20"
-        :max="500"
-        class="w-24"
-      /> -->
 
     <template v-if="virtualize">
       <UInput
@@ -99,15 +69,7 @@ const virtualizeOptions = computed(() => {
         type="number"
         :min="0"
         icon="i-lucide-between-vertical-start"
-        :max="50"
-      />
-
-      <UInput
-        v-model.number="padding"
-        type="number"
-        :min="0"
-        :max="200"
-        icon="i-lucide-square-dashed"
+        :max="48"
       />
 
       <UInput
@@ -120,57 +82,20 @@ const virtualizeOptions = computed(() => {
     </template>
   </Navbar>
 
-  <UCard :ui="{ body: '!p-0 h-full' }" class="max-w-5xl w-full h-full">
-    <UScrollArea
-      :items="items"
-      :orientation="orientation"
-      :virtualize="virtualizeOptions"
-      class="size-full"
-      :ui="{ viewport: `${orientation === 'vertical' ? 'w-full' : 'h-full'}` }"
+  <UScrollArea
+    v-slot="{ item }"
+    :items="items"
+    :orientation="orientation"
+    :virtualize="virtualizeOptions"
+    class="size-full p-4"
+  >
+    <img
+      :src="item.src"
+      :alt="item.title"
+      :width="item.width"
+      :height="item.height"
+      loading="lazy"
+      class="rounded-md size-full object-cover"
     >
-      <template v-if="orientation === 'horizontal'" #default="{ item }">
-        <div class="grid grid-rows-[1fr_min-content] h-full w-max gap-2">
-          <div class="bg-elevated rounded-lg overflow-hidden h-full w-max">
-            <img
-              :src="item!.url"
-              :alt="item!.title"
-              class="h-full object-cover"
-              :style="{ aspectRatio: item!.aspectRatio?.toString() }"
-            >
-          </div>
-
-          <p class="text-sm text-center">
-            {{ item!.title }}
-          </p>
-        </div>
-      </template>
-
-      <template v-else #default="{ item, index }">
-        <UCard
-          :ui="{
-            root: `bg-${item!.color || 'blue'}-500/10 border-${item!.color || 'blue'}-500/20`,
-            body: 'p-0 sm:p-0'
-          }"
-        >
-          <template #header>
-            <div class="flex items-center justify-between">
-              <h3 class="font-semibold">
-                {{ item!.title }}
-              </h3>
-              <span class="text-xs text-muted">
-                #{{ index }}
-              </span>
-            </div>
-          </template>
-          <div class="bg-elevated overflow-hidden h-full">
-            <img
-              :src="item!.url"
-              :alt="item!.title"
-              class="w-full h-full object-cover"
-            >
-          </div>
-        </UCard>
-      </template>
-    </UScrollArea>
-  </UCard>
+  </UScrollArea>
 </template>

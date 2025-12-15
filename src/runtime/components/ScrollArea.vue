@@ -9,13 +9,8 @@ type ScrollArea = ComponentConfig<typeof theme, AppConfig, 'scrollArea'>
 
 export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
   VirtualizerOptions<Element, Element>,
-  'count' | 'getScrollElement' | 'horizontal' | 'enabled' | 'isRtl' | 'estimateSize' | 'lanes'
+  'count' | 'getScrollElement' | 'horizontal' | 'isRtl' | 'estimateSize' | 'lanes'
 >> {
-  /**
-   * Enable or disable virtualization while still applying layout options.
-   * @defaultValue true
-   */
-  enabled?: boolean
   /**
    * Estimated size (in px) of each item along the scroll axis. Can be a number or a function.
    * @defaultValue 100
@@ -116,15 +111,6 @@ const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
 const isRtl = computed(() => dir.value === 'rtl')
 const isHorizontal = computed(() => props.orientation === 'horizontal')
 const isVertical = computed(() => !isHorizontal.value)
-const isVirtualizerEnabled = computed(() => {
-  if (!props.virtualize) {
-    return false
-  }
-  if (typeof props.virtualize === 'boolean') {
-    return props.virtualize
-  }
-  return props.virtualize.enabled !== false
-})
 
 const virtualizerProps = toRef(() => {
   const options = typeof props.virtualize === 'boolean' ? {} : props.virtualize
@@ -132,9 +118,9 @@ const virtualizerProps = toRef(() => {
   return defu(options, {
     estimateSize: 100,
     overscan: 12,
-    gap: 16,
-    paddingStart: 16,
-    paddingEnd: 16,
+    gap: 0,
+    paddingStart: 0,
+    paddingEnd: 0,
     scrollMargin: 0,
     loadMoreThreshold: 5
   })
@@ -145,10 +131,8 @@ const lanes = computed(() => {
   return typeof value === 'number' ? value : undefined
 })
 
-const virtualizer = useVirtualizer({
-  get enabled() {
-    return isVirtualizerEnabled.value
-  },
+const virtualizer = !!props.virtualize && useVirtualizer({
+  ...virtualizerProps.value,
   get overscan() {
     return virtualizerProps.value.overscan
   },
@@ -167,33 +151,24 @@ const virtualizer = useVirtualizer({
   get lanes() {
     return lanes.value
   },
-  getItemKey: virtualizerProps.value.getItemKey,
   get isRtl() {
     return isRtl.value
   },
   get count() {
     return props.items?.length || 0
   },
-  getScrollElement: (): Element | null => rootRef.value?.$el || null,
+  getScrollElement: () => rootRef.value?.$el,
   get horizontal() {
     return isHorizontal.value
   },
-  estimateSize: typeof virtualizerProps.value.estimateSize === 'function'
-    ? virtualizerProps.value.estimateSize
-    : () => virtualizerProps.value.estimateSize as number
+  estimateSize: (index: number) => {
+    const estimate = virtualizerProps.value.estimateSize
+    return typeof estimate === 'function' ? estimate(index) : estimate
+  }
 })
 
-const virtualItems = computed<VirtualItem[]>(() => isVirtualizerEnabled.value ? virtualizer.value.getVirtualItems() : [])
-const totalSize = computed(() => isVirtualizerEnabled.value ? virtualizer.value.getTotalSize() : 0)
-
-const virtualRootStyle = computed<CSSProperties>(() => {
-  const gap = virtualizerProps.value.gap ?? 0
-  const halfGap = gap ? `${gap / 2}px` : undefined
-
-  return isHorizontal.value
-    ? { paddingBlock: halfGap }
-    : { paddingInline: halfGap }
-})
+const virtualItems = computed<VirtualItem[]>(() => virtualizer ? virtualizer.value.getVirtualItems() : [])
+const totalSize = computed(() => virtualizer ? virtualizer.value.getTotalSize() : 0)
 
 const virtualViewportStyle = computed<CSSProperties>(() => ({
   position: 'relative',
@@ -203,27 +178,25 @@ const virtualViewportStyle = computed<CSSProperties>(() => ({
 
 function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
   const hasLanes = lanes.value !== undefined && lanes.value > 1
-  const laneSize = lanes.value ? 100 / lanes.value : 100
   const lane = virtualItem.lane
   const gap = virtualizerProps.value.gap ?? 0
-  const halfGap = gap ? `${gap / 2}px` : undefined
+
+  // For cross-axis gaps: calculate size and position accounting for gaps between lanes
+  // laneSize = (100% - (lanes - 1) * gap) / lanes
+  // lanePosition = lane * (laneSize + gap)
+  const laneSize = hasLanes
+    ? `calc((100% - ${(lanes.value! - 1) * gap}px) / ${lanes.value})`
+    : '100%'
+  const lanePosition = hasLanes && lane !== undefined
+    ? `calc(${lane} * ((100% - ${(lanes.value! - 1) * gap}px) / ${lanes.value} + ${gap}px))`
+    : 0
 
   return {
     position: 'absolute',
-    insetBlockStart: isHorizontal.value && hasLanes && lane !== undefined
-      ? `${(lane * 100) / lanes.value!}%`
-      : 0,
-    insetInlineStart: isVertical.value && hasLanes && lane !== undefined
-      ? `${(lane * 100) / lanes.value!}%`
-      : 0,
-    blockSize: isHorizontal.value && hasLanes && lane !== undefined
-      ? `${laneSize}%`
-      : isHorizontal.value ? '100%' : undefined,
-    inlineSize: isVertical.value && hasLanes && lane !== undefined
-      ? `${laneSize}%`
-      : isVertical.value ? '100%' : undefined,
-    paddingBlock: isHorizontal.value ? halfGap : undefined,
-    paddingInline: isVertical.value ? halfGap : undefined,
+    insetBlockStart: isHorizontal.value && hasLanes ? lanePosition : 0,
+    insetInlineStart: isVertical.value && hasLanes ? lanePosition : 0,
+    blockSize: isHorizontal.value ? (hasLanes ? laneSize : '100%') : undefined,
+    inlineSize: isVertical.value ? (hasLanes ? laneSize : '100%') : undefined,
     transform: isHorizontal.value
       ? `translateX(${isRtl.value ? -virtualItem.start : virtualItem.start}px)`
       : `translateY(${virtualItem.start}px)`
@@ -232,13 +205,13 @@ function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
 
 // Remeasure when lanes change
 watch(lanes, () => {
-  if (isVirtualizerEnabled.value) {
+  if (virtualizer) {
     virtualizer.value.measure()
   }
 }, { flush: 'sync' })
 
 function measureElement(el: Element | ComponentPublicInstance | null) {
-  if (el && isVirtualizerEnabled.value) {
+  if (el && virtualizer) {
     const element = el instanceof Element ? el : (el as ComponentPublicInstance).$el as Element
     virtualizer.value.measureElement(element)
   }
@@ -246,14 +219,14 @@ function measureElement(el: Element | ComponentPublicInstance | null) {
 
 // Emit scroll state changes
 watch(
-  () => (isVirtualizerEnabled.value ? virtualizer.value.isScrolling : false),
+  () => (virtualizer ? virtualizer.value.isScrolling : false),
   isScrolling => emits('scroll', isScrolling)
 )
 
 // Emit loadMore when scrolling near the end (infinite scroll support)
 watch(
   () => {
-    if (!isVirtualizerEnabled.value) return -1
+    if (!virtualizer) return -1
     const items = virtualizer.value.getVirtualItems()
     return items.length > 0 ? items[items.length - 1]?.index ?? -1 : -1
   },
@@ -267,16 +240,6 @@ watch(
   }
 )
 
-type ScrollToOptions = { align?: 'start' | 'center' | 'end' | 'auto', behavior?: 'auto' | 'smooth' | 'instant' }
-
-function requireVirtualization(method: string) {
-  if (!isVirtualizerEnabled.value) {
-    console.warn(`${method} requires virtualization to be enabled`)
-    return false
-  }
-  return true
-}
-
 function getItemKey(item: T, index: number) {
   if (virtualizerProps.value.getItemKey) {
     return virtualizerProps.value.getItemKey(index)
@@ -288,34 +251,7 @@ function getItemKey(item: T, index: number) {
 }
 
 defineExpose({
-  virtualizer: computed(() => isVirtualizerEnabled.value ? virtualizer.value : null),
-  scrollToOffset(offset: number, options?: ScrollToOptions) {
-    if (requireVirtualization('scrollToOffset')) {
-      virtualizer.value.scrollToOffset(offset, options as any)
-    }
-  },
-  scrollToIndex(index: number, options?: ScrollToOptions) {
-    if (requireVirtualization('scrollToIndex')) {
-      virtualizer.value.scrollToIndex(index, options as any)
-    }
-  },
-  getTotalSize() {
-    return requireVirtualization('getTotalSize') ? virtualizer.value.getTotalSize() : 0
-  },
-  measure() {
-    if (requireVirtualization('measure')) {
-      virtualizer.value.measure()
-    }
-  },
-  getScrollOffset() {
-    return isVirtualizerEnabled.value ? virtualizer.value.scrollOffset ?? 0 : 0
-  },
-  isScrolling() {
-    return isVirtualizerEnabled.value ? virtualizer.value.isScrolling : false
-  },
-  getScrollDirection() {
-    return isVirtualizerEnabled.value ? virtualizer.value.scrollDirection ?? null : null
-  }
+  virtualizer: virtualizer || undefined
 })
 </script>
 
@@ -324,10 +260,10 @@ defineExpose({
     ref="rootRef"
     :as="as"
     data-slot="root"
+    :data-orientation="orientation"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :style="isVirtualizerEnabled ? virtualRootStyle : undefined"
   >
-    <template v-if="isVirtualizerEnabled">
+    <template v-if="virtualizer">
       <div
         data-slot="viewport"
         :class="ui.viewport({ class: props.ui?.viewport })"

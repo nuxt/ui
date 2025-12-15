@@ -1,7 +1,16 @@
 <script setup lang="ts">
+withDefaults(defineProps<{
+  orientation?: 'vertical' | 'horizontal'
+  lanes?: number
+  gap?: number
+}>(), {
+  orientation: 'vertical',
+  lanes: 3,
+  gap: 16
+})
+
 const heights = [320, 480, 640, 800]
 
-// Pseudo-random height selection with longer cycle to avoid alignment patterns
 function getHeight(index: number) {
   const seed = (index * 11 + 7) % 17
   return heights[seed % heights.length]!
@@ -24,10 +33,10 @@ const items = Array.from({ length: 1000 }).map((_, index) => {
   <UScrollArea
     v-slot="{ item }"
     :items="items"
-    orientation="vertical"
+    :orientation="orientation"
     :virtualize="{
-      gap: 16,
-      lanes: 3,
+      gap,
+      lanes,
       estimateSize: 480
     }"
     class="w-full h-128 p-4"

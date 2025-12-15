@@ -27,7 +27,6 @@ describe('ScrollArea', () => {
     ['with virtualize lanes', { props: { items: testItems, virtualize: { lanes: 3 } } }],
     ['with virtualize scrollMargin', { props: { items: testItems, virtualize: { scrollMargin: 10 } } }],
     ['with virtualize loadMoreThreshold', { props: { items: testItems, virtualize: { loadMoreThreshold: 10 } } }],
-    ['with virtualize enabled false', { props: { items: testItems, virtualize: { enabled: false } } }],
 
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]

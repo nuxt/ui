@@ -1,8 +1,4 @@
 <script setup lang="ts">
-defineProps<{
-  orientation?: 'vertical' | 'horizontal'
-}>()
-
 const items = Array.from({ length: 30 }, (_, i) => ({
   id: i + 1,
   title: `Item ${i + 1}`,
@@ -14,8 +10,7 @@ const items = Array.from({ length: 30 }, (_, i) => ({
   <UScrollArea
     v-slot="{ item, index }"
     :items="items"
-    :orientation="orientation"
-    class="w-full data-[orientation=vertical]:h-96"
+    class="w-full h-96"
   >
     <UPageCard
       v-bind="item"

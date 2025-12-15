@@ -51,7 +51,15 @@ provide('components', components)
         </template>
       </UDashboardSidebar>
 
-      <UDashboardPanel :ui="{ body: ['justify-center items-center', route.path.startsWith('/components') && 'mt-16'] }">
+      <UDashboardPanel
+        :ui="{
+          body: [
+            'justify-center items-center',
+            route.path.startsWith('/components') && 'mt-16',
+            route.path.startsWith('/components/scroll-area') && 'p-0!'
+          ]
+        }"
+      >
         <template #body>
           <NuxtPage />
         </template>

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { UButton } from '#components'
-
 type Recipe = {
   id: number
   name: string
@@ -52,30 +50,35 @@ function loadMore() {
 
 <template>
   <UScrollArea
+    v-slot="{ item }"
     :items="recipes"
     :virtualize="{
-      estimateSize: 120,
+      estimateSize: 88,
       loadMoreThreshold: 5
     }"
     class="h-96 w-full"
     @load-more="loadMore"
   >
-    <template #default="{ item }">
-      <UPageCard :description="`${item.cuisine} • ${item.difficulty}`" orientation="horizontal" :ui="{ container: 'lg:flex flex-row' }">
-        <template #header>
-          <UUser
-            :name="item.name"
-            :description="`${item.prepTimeMinutes + item.cookTimeMinutes} min • ${item.reviewCount} reviews`"
-            :avatar="{ src: item.image, alt: item.name }"
-          />
-        </template>
-        <UButton color="neutral" variant="subtle" size="xl" class="fit-content justify-self-end">
-          <UIcon name="i-lucide-star" class="size-3" />
-          {{ item.rating }}
-        </UButton>
-      </UPageCard>
-    </template>
+    <UPageCard
+      orientation="horizontal"
+      class="rounded-none"
+    >
+      <UUser
+        :name="item.name"
+        :description="`${item.prepTimeMinutes + item.cookTimeMinutes} min • ${item.reviewCount} reviews`"
+        :avatar="{ src: item.image, alt: item.name }"
+        size="lg"
+      />
+
+      <UButton color="neutral" variant="subtle" icon="i-lucide-star" :label="String(item.rating)" class="justify-self-end" />
+    </UPageCard>
   </UScrollArea>
 
-  <UIcon v-if="status === 'pending'" name="i-lucide-loader-circle" class="animate-spin size-5 absolute bottom-4 left-0 right-0 mx-auto" />
+  <UProgress
+    v-if="status === 'pending'"
+    indeterminate
+    size="xs"
+    class="absolute top-0 inset-x-0 z-1"
+    :ui="{ base: 'bg-default' }"
+  />
 </template>
