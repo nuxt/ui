@@ -1,5 +1,9 @@
-title: Blog
+seo:
+  title: Nuxt UI Blog
+  description: Learn how to build things with Nuxt UI.
+title: Nuxt [UI]{.text-primary} Blog
 description: Learn how to build things with Nuxt UI.
-navigation: false
 hero:
-  title: Blog
+  title: Nuxt [UI]{.text-primary} Blog
+  description: Learn how to build things with Nuxt UI.
+navigation: false

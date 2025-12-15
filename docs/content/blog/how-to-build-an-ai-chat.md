@@ -98,8 +98,6 @@ export default defineNuxtConfig({
       anchorLinks: false // Disable anchor links in AI responses
     }
   },
-
-  compatibilityDate: '2025-01-01'
 })
 ```
 ::
