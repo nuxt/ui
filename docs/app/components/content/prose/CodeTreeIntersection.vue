@@ -38,6 +38,13 @@ function addToTree() {
 onMounted(() => {
   if (props.default) {
     addToTree()
+    return
+  }
+
+  // If element is already above or in the viewport (e.g., page refresh in the middle), add it to the tree immediately
+  const rect = target.value?.getBoundingClientRect()
+  if (rect && rect.top < window.innerHeight) {
+    addToTree()
   }
 })
 

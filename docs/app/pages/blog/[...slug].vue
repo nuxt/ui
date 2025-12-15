@@ -82,7 +82,7 @@ const items = computed(() => Object.entries(tree.value).map(([key, value]) => ({
       <div>
         <UContentToc :links="page.body.toc?.links" class="z-2 block lg:hidden" />
         <nav class="h-full sticky top-(--ui-header-height) max-h-[calc(100vh-var(--ui-header-height))] hidden lg:block">
-          <ProseCodeTree :model-value="activePath" class="lg:h-full my-0 rounded-none border-y-0" :items="items" />
+          <ProseCodeTree :model-value="activePath" class="lg:h-full my-0 rounded-none border-y-0" :items="items" expand-all />
         </nav>
       </div>
     </template>

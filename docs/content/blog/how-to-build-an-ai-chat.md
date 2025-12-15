@@ -605,10 +605,10 @@ export function useChats() {
 ```
 ::
 
-### Building the Chat List Dropdown
+### Building the Chats History Dropdown
 
 ::code-tree-intersection
-```vue [app/components/ChatHistory.vue]
+```vue [app/components/ChatsHistory.vue]
 <script setup lang="ts">
 const route = useRoute()
 const { chats } = useChats()
@@ -633,13 +633,13 @@ const items = computed(() => chats.value.map(chat => ({
 ```
 ::
 
-## Adding the Chat History to the Chat Page
+## Adding the Chats History to the Chat Page
 
 ::code-tree-intersection
 ```vue [app/app.vue] {3}
 <template>
   <UApp>
-    <ChatHistory class="fixed top-4 left-4 z-50" />
+    <ChatsHistory class="fixed top-4 left-4 z-50" />
     <NuxtPage />
   </UApp>
 </template>
