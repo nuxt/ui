@@ -60,7 +60,56 @@ function setLibrary(name: string) {
       upload: 'i-ph-upload',
       warning: 'i-ph-warning'
     }
+  } else if (name === 'tabler') {
+    custom.value = {
+      arrowDown: 'i-tabler-arrow-down',
+      arrowLeft: 'i-tabler-arrow-left',
+      arrowRight: 'i-tabler-arrow-right',
+      arrowUp: 'i-tabler-arrow-up',
+      caution: 'i-tabler-alert-square-rounded',
+      check: 'i-tabler-check',
+      chevronDoubleLeft: 'i-tabler-chevrons-left',
+      chevronDoubleRight: 'i-tabler-chevrons-right',
+      chevronDown: 'i-tabler-chevron-down',
+      chevronLeft: 'i-tabler-chevron-left',
+      chevronRight: 'i-tabler-chevron-right',
+      chevronUp: 'i-tabler-chevron-up',
+      close: 'i-tabler-x',
+      copy: 'i-tabler-copy',
+      copyCheck: 'i-tabler-copy-check',
+      dark: 'i-tabler-moon',
+      drag: 'i-tabler-grip-vertical',
+      ellipsis: 'i-tabler-dots',
+      error: 'i-tabler-square-rounded-x',
+      external: 'i-tabler-external-link',
+      eye: 'i-tabler-eye',
+      eyeOff: 'i-tabler-eye-off',
+      file: 'i-tabler-file',
+      folder: 'i-tabler-folder',
+      folderOpen: 'i-tabler-folder-open',
+      hash: 'i-tabler-hash',
+      info: 'i-tabler-info-square-rounded',
+      light: 'i-tabler-sun',
+      loading: 'i-tabler-loader-2',
+      menu: 'i-tabler-menu',
+      minus: 'i-tabler-minus',
+      panelClose: 'i-tabler-layout-sidebar-left-collapse',
+      panelOpen: 'i-tabler-layout-sidebar-left-expand',
+      plus: 'i-tabler-plus',
+      reload: 'i-tabler-reload',
+      search: 'i-tabler-search',
+      stop: 'i-tabler-player-stop',
+      success: 'i-tabler-square-rounded-check',
+      system: 'i-tabler-device-desktop',
+      tip: 'i-tabler-bulb',
+      upload: 'i-tabler-upload',
+      warning: 'i-tabler-alert-triangle'
+    }
   }
+  toast.add({
+    title: `Preset ${name} defined`,
+    icon: 'i-lucide-check-circle'
+  })
 }
 
 function copyToClipboard() {
@@ -75,13 +124,14 @@ ${Object.entries(custom.value).map(([key, value]) => `  ${key}: '${value}',`).jo
 </script>
 
 <template>
-  <UModal fullscreen :ui="{ title: 'space-x-4' }" title="Icons Theme configurator">
-    <UButton label="Icons Theme configurator" icon="i-lucide-brush" />
+  <UModal fullscreen :ui="{ title: 'space-x-4' }" title="Icons Theme Configurator">
+    <UButton label="Icons Theme Configurator" icon="i-lucide-brush" />
     <template #body>
       <div class="flex justify-between">
         <UFieldGroup>
-          <UButton color="neutral" variant="subtle" label="Set default library" />
+          <UButton color="neutral" variant="subtle" label="Set a library preset" />
           <UButton color="neutral" variant="outline" label="Phosphor" @click="setLibrary('phosphor')" />
+          <UButton color="neutral" variant="outline" label="Tabler" @click="setLibrary('tabler')" />
         </UFieldGroup>
 
         <UButton label="Copy configuration" color="neutral" :icon="appConfig.ui.icons.copy" @click="copyToClipboard()" />
