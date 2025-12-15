@@ -37,67 +37,59 @@ Before we start, make sure you have:
 
 ## Project Setup
 
-Let's start by creating a new Nuxt project using the [Nuxt UI starter template](https://github.com/nuxt/starter/tree/ui). This gives us Nuxt UI pre-configured with Tailwind CSS, color mode support, and the `UApp` wrapper already in place.
+Let's start by creating a new Nuxt project:
 
 ```bash
-npx nuxi@latest init -t ui nuxt-ai-chat
+npx nuxi@latest init nuxt-ai-chat
 cd nuxt-ai-chat
 ```
 
-::code-tree-intersection{default}
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  modules: ['@nuxt/ui'],
+### Installing Dependencies
 
-  css: ['~/assets/css/main.css'],
-
-  compatibilityDate: '2025-01-01'
-})
-```
-
-```vue [app/app.vue]
-<template>
-  <UApp>
-    <NuxtPage />
-  </UApp>
-</template>
-```
-
-```css [app/assets/css/main.css]
-@import "tailwindcss";
-@import "@nuxt/ui";
-```
-::
-
-Install the AI-specific dependencies:
+Install Nuxt UI and the AI-specific dependencies:
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
-pnpm add @nuxtjs/mdc ai @ai-sdk/vue @ai-sdk/gateway zod
+pnpm add @nuxt/ui @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [yarn]
-yarn add @nuxtjs/mdc ai @ai-sdk/vue @ai-sdk/gateway zod
+yarn add @nuxt/ui @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [npm]
-npm install @nuxtjs/mdc ai @ai-sdk/vue @ai-sdk/gateway zod
+npm install @nuxt/ui @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [bun]
-bun add @nuxtjs/mdc ai @ai-sdk/vue @ai-sdk/gateway zod
+bun add @nuxt/ui @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 ::
 
-Update your `nuxt.config.ts` to add the MDC module for markdown rendering:
+::warning{icon="i-simple-icons-pnpm"}
+If you're using **pnpm**, create a `.npmrc` file at the root of your project with `shamefully-hoist=true`:
+
+```bash [.npmrc]
+shamefully-hoist=true
+```
+::
+
+### Configuration
+
+Update your `nuxt.config.ts` to register the modules:
 
 ::code-tree-intersection
-```ts [nuxt.config.ts] {4}
+```ts [nuxt.config.ts]
 export default defineNuxtConfig({
   modules: [
     '@nuxt/ui',
-    '@nuxtjs/mdc'
+    '@nuxtjs/mdc',
+    '@nuxthub/core'
   ],
+
+  hub: {
+    db: 'sqlite'
+  },
 
   css: ['~/assets/css/main.css'],
 
@@ -109,6 +101,29 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2025-01-01'
 })
+```
+::
+
+Create the main CSS file to import Tailwind CSS and Nuxt UI:
+
+::code-tree-intersection
+```css [app/assets/css/main.css]
+@import "tailwindcss";
+@import "@nuxt/ui";
+```
+::
+
+### Setting Up the App
+
+Nuxt UI requires wrapping your app with `UApp` for modals, toasts, and overlays to work properly:
+
+::code-tree-intersection
+```vue [app/app.vue]
+<template>
+  <UApp>
+    <NuxtPage />
+  </UApp>
+</template>
 ```
 ::
 
@@ -124,6 +139,54 @@ AI_GATEWAY_API_KEY=your-api-key-here
 With [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), you don't need individual API keys for OpenAI, Anthropic, or Google. The AI Gateway provides a unified API to access hundreds of models through a single endpoint.
 ::
 
+### Setting Up the Database
+
+[NuxtHub](https://hub.nuxt.com) provides a zero-config database powered by Drizzle ORM. Let's create the schema for our chat application:
+
+::code-tree-intersection
+```ts [server/db/schema.ts]
+import { relations } from 'drizzle-orm'
+import { sqliteTable, text, integer, index } from 'drizzle-orm/sqlite-core'
+
+export const chats = sqliteTable('chats', {
+  id: text().primaryKey().$defaultFn(() => crypto.randomUUID()),
+  title: text(),
+  createdAt: integer({ mode: 'timestamp' }).notNull().$defaultFn(() => new Date())
+})
+
+export const chatsRelations = relations(chats, ({ many }) => ({
+  messages: many(messages)
+}))
+
+export const messages = sqliteTable('messages', {
+  id: text('id').primaryKey().$defaultFn(() => crypto.randomUUID()),
+  chatId: text('chat_id').notNull().references(() => chats.id, { onDelete: 'cascade' }),
+  role: text('role', { enum: ['user', 'assistant', 'system'] }).notNull(),
+  parts: text('parts', { mode: 'json' }),
+  createdAt: integer({ mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
+}, table => [
+  index('messages_chat_id_idx').on(table.chatId)
+])
+
+export const messagesRelations = relations(messages, ({ one }) => ({
+  chat: one(chats, {
+    fields: [messages.chatId],
+    references: [chats.id]
+  })
+}))
+```
+::
+
+Generate the database migrations from your schema:
+
+```bash
+npx nuxt db generate
+```
+
+::tip
+Migrations are automatically applied when you start the development server with `npx nuxt dev`. NuxtHub uses SQLite locally, so no external database is required during development.
+::
+
 ## Building the Chat UI
 
 Nuxt UI provides purpose-built components for AI chat interfaces: `UChatPrompt` for the input area and `UChatMessages` for displaying the conversation.
@@ -133,7 +196,7 @@ Nuxt UI provides purpose-built components for AI chat interfaces: `UChatPrompt` 
 Let's create the home page where users can start a new conversation. The `UChatPrompt` component provides a beautiful textarea with auto-resize, keyboard shortcuts, and a submit button:
 
 ::code-tree-intersection
-```vue [app/pages/index.vue] {27-35}
+```vue [app/pages/index.vue] {32-40}
 <script setup lang="ts">
 const input = ref('')
 const loading = ref(false)
@@ -146,7 +209,12 @@ async function createChat() {
   // Create a new chat on the server
   const chat = await $fetch('/api/chats', {
     method: 'POST',
-    body: { message: input.value }
+    body: {
+      message: {
+        role: 'user',
+        parts: [{ type: 'text', text: input.value }]
+      }
+    }
   })
 
   // Navigate to the chat page
@@ -322,20 +390,24 @@ Now for the exciting part: integrating AI on the server. We'll create API endpoi
 First, let's create the endpoint that initializes a new chat and saves the first message to the database:
 
 ::code-tree-intersection
-```ts [server/api/chats.post.ts] {4,7,10-14}
-export default defineEventHandler(async (event) => {
-  const { message } = await readBody(event)
+```ts [server/api/chats.post.ts]
+import type { UIMessage } from 'ai'
+import { db, schema } from 'hub:db'
+import { z } from 'zod'
 
-  const db = useDrizzle()
+export default defineEventHandler(async (event) => {
+  const { message } = await readValidatedBody(event, z.object({
+    message: z.custom<UIMessage>()
+  }).parse)
 
   // Create a new chat
-  const [chat] = await db.insert(tables.chats).values({}).returning()
+  const [chat] = await db.insert(schema.chats).values({}).returning()
 
   // Save the first user message
-  await db.insert(tables.messages).values({
+  await db.insert(schema.messages).values({
     chatId: chat.id,
     role: 'user',
-    parts: [{ type: 'text', text: message }]
+    parts: message.parts
   })
 
   return chat
@@ -348,8 +420,8 @@ export default defineEventHandler(async (event) => {
 Now let's create the endpoint that handles the AI conversation:
 
 ::code-tree-intersection
-```ts [server/api/chats/[id].post.ts] {1-10,34-36,40-46,60-87}
-import { createGateway } from '@ai-sdk/gateway'
+```ts [server/api/chats/[id].post.ts]
+import { db, schema } from 'hub:db'
 import {
   convertToModelMessages,
   createUIMessageStream,
@@ -358,6 +430,7 @@ import {
   streamText
 } from 'ai'
 import type { UIMessage } from 'ai'
+import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
@@ -370,8 +443,6 @@ export default defineEventHandler(async (event) => {
     messages: z.array(z.custom<UIMessage>())
   }).parse)
 
-  const db = useDrizzle()
-
   // Fetch the chat from the database
   const chat = await db.query.chats.findFirst({
     where: (chat, { eq }) => eq(chat.id, id as string)
@@ -381,26 +452,21 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
   }
 
-  // Initialize the AI Gateway
-  const gateway = createGateway({
-    apiKey: process.env.AI_GATEWAY_API_KEY
-  })
-
   // Generate a title for the chat if it doesn't have one
   if (!chat.title) {
     const { text: title } = await generateText({
-      model: gateway('openai/gpt-4o-mini'),
+      model: 'openai/gpt-4o-mini',
       system: `Generate a short title (max 30 characters) based on the user's message. No quotes or punctuation.`,
       prompt: JSON.stringify(messages[0])
     })
 
-    await db.update(tables.chats).set({ title }).where(eq(tables.chats.id, id))
+    await db.update(schema.chats).set({ title }).where(eq(schema.chats.id, id))
   }
 
   // Save the user message if it's a follow-up
   const lastMessage = messages[messages.length - 1]
   if (lastMessage?.role === 'user' && messages.length > 1) {
-    await db.insert(tables.messages).values({
+    await db.insert(schema.messages).values({
       chatId: id,
       role: 'user',
       parts: lastMessage.parts
@@ -411,7 +477,7 @@ export default defineEventHandler(async (event) => {
   const stream = createUIMessageStream({
     execute: ({ writer }) => {
       const result = streamText({
-        model: gateway(model),
+        model,
         system: `You are a helpful AI assistant. Be concise and friendly.`,
         messages: convertToModelMessages(messages)
       })
@@ -429,7 +495,7 @@ export default defineEventHandler(async (event) => {
     },
     onFinish: async ({ messages }) => {
       // Save the assistant's response to the database
-      await db.insert(tables.messages).values(messages.map(message => ({
+      await db.insert(schema.messages).values(messages.map(message => ({
         chatId: chat.id,
         role: message.role as 'user' | 'assistant',
         parts: message.parts
@@ -446,10 +512,7 @@ Let's understand what's happening:
 
 **AI Gateway**
 
-The `createGateway` function creates a unified interface to access any AI model. You specify the model using the format `provider/model-name`:
-- `openai/gpt-4o-mini`
-- `anthropic/claude-3-5-sonnet-latest`
-- `google/gemini-2.0-flash`
+Thanks to [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), we can use any AI model supported by the gateway just by specifying the model name.
 
 **Automatic Title Generation**
 
@@ -473,17 +536,21 @@ The `writer.write()` method allows sending custom data events to the client (lik
 Add an endpoint to fetch existing chat data from your database:
 
 ::code-tree-intersection
-```ts [server/api/chats/[id].get.ts] {6-13}
-export default defineEventHandler(async (event) => {
-  const { id } = getRouterParams(event)
+```ts [server/api/chats/[id].get.ts]
+import { db, schema } from 'hub:db'
+import { asc, eq } from 'drizzle-orm'
+import { z } from 'zod'
 
-  const db = useDrizzle()
+export default defineEventHandler(async (event) => {
+  const { id } = await getValidatedRouterParams(event, z.object({
+    id: z.string()
+  }).parse)
 
   const chat = await db.query.chats.findFirst({
-    where: (chat, { eq }) => eq(chat.id, id as string),
+    where: (eq(schema.chats.id, id)),
     with: {
       messages: {
-        orderBy: (message, { asc }) => asc(message.createdAt)
+        orderBy: () => asc(schema.messages.createdAt)
       }
     }
   })
@@ -495,10 +562,6 @@ export default defineEventHandler(async (event) => {
   return chat
 })
 ```
-::
-
-::note
-This example uses [Drizzle ORM](https://orm.drizzle.team) with a `chats` and `messages` schema. Check the [AI Chat template](https://github.com/nuxt-ui-templates/chat) for a complete database setup with PostgreSQL.
 ::
 
 ## Switching Between AI Models
@@ -661,13 +724,15 @@ You've built a complete AI chatbot with:
 - **Real-time streaming responses** with the AI SDK
 - **Markdown rendering** with MDC for rich content display
 - **Multi-model support** via AI Gateway
+- **Database persistence** with NuxtHub and Drizzle ORM
 - **Server-side AI integration** with Nitro
 
-The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat components, and the AI SDK's streaming infrastructure makes building AI applications straightforward and enjoyable.
+The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat components, NuxtHub's zero-config database, and the AI SDK's streaming infrastructure makes building AI applications straightforward and enjoyable.
 
 **Resources:**
 
 - [Nuxt UI Chat Components](https://ui.nuxt.com/components/chat-messages)
+- [NuxtHub Database](https://hub.nuxt.com/docs/features/database)
 - [AI SDK Documentation](https://ai-sdk.dev)
 - [AI Gateway Documentation](https://vercel.com/docs/ai-gateway)
 - [AI Chat Template](https://github.com/nuxt-ui-templates/chat)
