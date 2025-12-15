@@ -116,10 +116,12 @@ Create the main CSS file to import Tailwind CSS and Nuxt UI:
 Nuxt UI requires wrapping your app with `UApp` for modals, toasts, and overlays to work properly:
 
 ::code-tree-intersection
-```vue [app/app.vue]
+```vue [app/app.vue] {2,6}
 <template>
   <UApp>
-    <NuxtPage />
+    <UDashboardGroup unit="rem">
+      <NuxtPage />
+    </UDashboardGroup>
   </UApp>
 </template>
 ```
@@ -187,14 +189,14 @@ Migrations are automatically applied when you start the development server with 
 
 ## Building the Chat UI
 
-Nuxt UI provides purpose-built components for AI chat interfaces: `UChatPrompt` for the input area and `UChatMessages` for displaying the conversation.
+Nuxt UI provides purpose-built components for AI chat interfaces: [`UChatPrompt`](/docs/components/chat-prompt) for the input area and [`UChatMessages`](/docs/components/chat-messages) for displaying the conversation.
 
 ### Creating the Home Page
 
-Let's create the home page where users can start a new conversation. The `UChatPrompt` component provides a beautiful textarea with auto-resize, keyboard shortcuts, and a submit button:
+Let's create the home page where users can start a new conversation. The [`UChatPrompt`](/docs/components/chat-prompt) component provides a beautiful textarea with auto-resize, keyboard shortcuts, and a submit button:
 
 ::code-tree-intersection
-```vue [app/pages/index.vue] {32-40}
+```vue [app/pages/index.vue] {34-42}
 <script setup lang="ts">
 const input = ref('')
 const loading = ref(false)
@@ -221,34 +223,38 @@ async function createChat() {
 </script>
 
 <template>
-  <UContainer class="min-h-dvh flex flex-col justify-center gap-6 py-8">
-    <h1 class="text-3xl sm:text-4xl text-highlighted font-bold">
-      How can I help you today?
-    </h1>
+  <UDashboardPanel :ui="{ body: 'p-0 sm:p-0' }">
+    <template #body>
+      <UContainer class="min-h-dvh flex flex-col justify-center gap-6 py-8">
+        <h1 class="text-3xl sm:text-4xl text-highlighted font-bold">
+          How can I help you today?
+        </h1>
 
-    <UChatPrompt
-      v-model="input"
-      :status="loading ? 'streaming' : 'ready'"
-      variant="subtle"
-      placeholder="Ask me anything..."
-      @submit="createChat"
-    >
-      <UChatPromptSubmit color="neutral" />
-    </UChatPrompt>
-  </UContainer>
+        <UChatPrompt
+          v-model="input"
+          :status="loading ? 'streaming' : 'ready'"
+          variant="subtle"
+          placeholder="Ask me anything..."
+          @submit="createChat"
+        >
+          <UChatPromptSubmit color="neutral" />
+        </UChatPrompt>
+      </UContainer>
+    </template>
+  </UDashboardPanel>
 </template>
 ```
 ::
 
 The `UChatPrompt` component automatically handles:
-- Form submission when pressing `Enter`
+- Form submission when pressing :kbd{value="enter"}
 - Auto-resizing as you type
 - A loading state when `status` is set to `streaming`
 - Focus management and keyboard shortcuts
 
 ## Creating the Chat Page
 
-Now let's build the chat page where the actual conversation happens. This is where we'll integrate the AI SDK's `Chat` class for real-time streaming.
+Now let's build the chat page where the actual conversation happens. This is where we'll integrate the AI SDK's [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) class for real-time streaming.
 
 ::code-tree-intersection
 ```vue [app/pages/chat/[id].vue] {2-4,19-38}
@@ -308,37 +314,41 @@ onMounted(() => {
 </script>
 
 <template>
-  <UContainer class="min-h-dvh flex flex-col py-4 sm:py-6">
-    <UChatMessages
-      :messages="chat.messages"
-      :status="chat.status"
-      should-auto-scroll
-      class="flex-1"
-    >
-      <template #content="{ message }">
-        <MDC
-          :value="getTextFromMessage(message)"
-          :cache-key="message.id"
-          class="*:first:mt-0 *:last:mb-0"
-        />
-      </template>
-    </UChatMessages>
+  <UDashboardPanel :ui="{ body: 'p-0 sm:p-0' }">
+    <template #body>
+      <UContainer class="min-h-dvh flex flex-col py-4 sm:py-6">
+        <UChatMessages
+          :messages="chat.messages"
+          :status="chat.status"
+          should-auto-scroll
+          class="flex-1"
+        >
+          <template #content="{ message }">
+            <MDC
+              :value="getTextFromMessage(message)"
+              :cache-key="message.id"
+              class="*:first:mt-0 *:last:mb-0"
+            />
+          </template>
+        </UChatMessages>
 
-    <UChatPrompt
-      v-model="input"
-      :error="chat.error"
-      variant="subtle"
-      class="sticky bottom-0"
-      @submit="handleSubmit"
-    >
-      <UChatPromptSubmit
-        :status="chat.status"
-        color="neutral"
-        @stop="chat.stop()"
-        @reload="chat.regenerate()"
-      />
-    </UChatPrompt>
-  </UContainer>
+        <UChatPrompt
+          v-model="input"
+          :error="chat.error"
+          variant="subtle"
+          class="sticky bottom-0"
+          @submit="handleSubmit"
+        >
+          <UChatPromptSubmit
+            :status="chat.status"
+            color="neutral"
+            @stop="chat.stop()"
+            @reload="chat.regenerate()"
+          />
+        </UChatPrompt>
+      </UContainer>
+    </template>
+  </UDashboardPanel>
 </template>
 ```
 ::
@@ -368,7 +378,7 @@ The `UChatMessages` component is purpose-built for AI chatbots with:
 
 AI models often respond with markdown formatting (code blocks, lists, bold text, etc.). We use the `MDC` component from `@nuxtjs/mdc` to render this content beautifully. The `getTextFromMessage` utility from `@nuxt/ui/utils/ai` extracts the text content from AI SDK v5 message parts.
 
-::note
+::note{to="/docs/typography"}
 Nuxt UI provides pre-styled prose components, so your markdown content will be automatically styled to match your theme.
 ::
 
@@ -514,18 +524,18 @@ Thanks to [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), we can use an
 
 **Automatic Title Generation**
 
-When a chat doesn't have a title yet, we use `generateText` to create one based on the first message. This provides a better UX by showing meaningful titles in the chat history instead of "Untitled".
+When a chat doesn't have a title yet, we use [`generateText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/generate-text#generatetext) to create one based on the first message. This provides a better UX by showing meaningful titles in the chat history instead of "Untitled".
 
 **Streaming with streamText**
 
-The `streamText` function generates a streaming response from the AI model. Key options include:
+The [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text) function generates a streaming response from the AI model. Key options include:
 - `model`: The AI model to use
 - `system`: Instructions that guide the AI's behavior
 - `messages`: The conversation history
 
 **UIMessageStream**
 
-The `createUIMessageStream` and `createUIMessageStreamResponse` functions create a stream that the AI SDK client can consume. The response streams chunks as they're generated, creating the real-time typing effect.
+The [`createUIMessageStream`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/create-ui-message-stream#createuimessagestream) and [`createUIMessageStreamResponse`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/create-ui-message-stream-response#createuimessagestreamresponse) functions create a stream that the AI SDK client can consume. The response streams chunks as they're generated, creating the real-time typing effect.
 
 The `writer.write()` method allows sending custom data events to the client (like `data-chat-title`), while `onFinish` is called when streaming completes, perfect for persisting the assistant's response.
 
@@ -611,22 +621,87 @@ export function useChats() {
 const route = useRoute()
 const { chats } = useChats()
 
-const items = computed(() => chats.value.map(chat => ({
-  label: chat.title || 'Untitled',
-  to: `/chat/${chat.id}`,
-  active: route.params.id === chat.id
-})))
+const items = computed(() => [
+  {
+    label: 'New chat',
+    to: '/',
+    icon: 'i-lucide-plus-square',
+    active: route.name === 'index'
+  },
+  ...chats.value.map(chat => ({
+    label: chat.title || 'Untitled',
+    to: `/chat/${chat.id}`,
+    active: route.params.id === chat.id
+  }))
+])
 </script>
 
 <template>
-  <UDropdownMenu :items="items">
+  <UDropdownMenu :items="items" class="m-2">
     <UButton
       icon="i-lucide-messages-square"
       variant="ghost"
+      label="Chats History"
       color="neutral"
-      label="Chats history"
+      class="w-fit"
     />
   </UDropdownMenu>
+</template>
+```
+::
+
+## Adding the Chats History to the Home Page
+
+::code-tree-intersection
+```vue [app/pages/index.vue] {28-30}
+<script setup lang="ts">
+const input = ref('')
+const loading = ref(false)
+
+async function createChat() {
+  if (!input.value.trim()) return
+
+  loading.value = true
+
+  // Create a new chat on the server
+  const chat = await $fetch('/api/chats', {
+    method: 'POST',
+    body: {
+      message: {
+        role: 'user',
+        parts: [{ type: 'text', text: input.value }]
+      }
+    }
+  })
+
+  // Navigate to the chat page
+  navigateTo(`/chat/${chat.id}`)
+}
+</script>
+
+<template>
+  <UDashboardPanel :ui="{ body: 'p-0 sm:p-0' }">
+    <template #header>
+      <ChatsHistory />
+    </template>
+    <template #body>
+      <UContainer class="min-h-dvh flex flex-col justify-center gap-6 py-8">
+        <h1 class="text-3xl sm:text-4xl text-highlighted font-bold">
+          How can I help you today?
+        </h1>
+
+        <UChatPrompt
+          v-model="input"
+          :status="loading ? 'streaming' : 'ready'"
+          variant="subtle"
+          placeholder="Ask me anything..."
+          @submit="createChat"
+        >
+          <UChatPromptSubmit color="neutral" />
+        </UChatPrompt>
+      </UContainer>
+    </template>
+  </UDashboardPanel>
 </template>
 ```
 ::
@@ -634,12 +709,101 @@ const items = computed(() => chats.value.map(chat => ({
 ## Adding the Chats History to the Chat Page
 
 ::code-tree-intersection
-```vue [app/app.vue] {3}
+```vue [app/pages/chat/[id].vue] {58-60}
+<script setup lang="ts">
+import { Chat } from '@ai-sdk/vue'
+import { DefaultChatTransport } from 'ai'
+import { getTextFromMessage } from '@nuxt/ui/utils/ai'
+
+const route = useRoute()
+const toast = useToast()
+
+// Fetch existing chat data
+const { data: chatData } = await useFetch(`/api/chats/${route.params.id}`)
+
+if (!chatData.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
+}
+
+const input = ref('')
+
+// Initialize the Chat class from AI SDK
+const chat = new Chat({
+  id: chatData.value.id,
+  messages: chatData.value.messages,
+  transport: new DefaultChatTransport({
+    api: `/api/chats/${chatData.value.id}`
+  }),
+  onData(dataPart) {
+    // Refresh the chat list when a title is generated
+    if (dataPart.type === 'data-chat-title') {
+      refreshNuxtData('chats')
+    }
+  },
+  onError(error) {
+    toast.add({
+      title: 'Error',
+      description: error.message,
+      color: 'error'
+    })
+  }
+})
+
+function handleSubmit(e: Event) {
+  e.preventDefault()
+  if (input.value.trim()) {
+    chat.sendMessage({ text: input.value })
+    input.value = ''
+  }
+}
+
+// Auto-generate response for first message
+onMounted(() => {
+  if (chatData.value?.messages.length === 1) {
+    chat.regenerate()
+  }
+})
+</script>
+
 <template>
-  <UApp>
-    <ChatsHistory class="fixed top-4 left-4 z-50" />
-    <NuxtPage />
-  </UApp>
+  <UDashboardPanel :ui="{ body: 'p-0 sm:p-0' }">
+    <template #header>
+      <ChatsHistory />
+    </template>
+    <template #body>
+      <UContainer class="min-h-dvh flex flex-col py-4 sm:py-6">
+        <UChatMessages
+          :messages="chat.messages"
+          :status="chat.status"
+          should-auto-scroll
+          class="flex-1"
+        >
+          <template #content="{ message }">
+            <MDC
+              :value="getTextFromMessage(message)"
+              :cache-key="message.id"
+              class="*:first:mt-0 *:last:mb-0"
+            />
+          </template>
+        </UChatMessages>
+
+        <UChatPrompt
+          v-model="input"
+          :error="chat.error"
+          variant="subtle"
+          class="sticky bottom-0"
+          @submit="handleSubmit"
+        >
+          <UChatPromptSubmit
+            :status="chat.status"
+            color="neutral"
+            @stop="chat.stop()"
+            @reload="chat.regenerate()"
+          />
+        </UChatPrompt>
+      </UContainer>
+    </template>
+  </UDashboardPanel>
 </template>
 ```
 ::
@@ -732,21 +896,25 @@ const chat = new Chat({
 </script>
 
 <template>
-  <UContainer class="min-h-dvh flex flex-col py-4 sm:py-6">
-    <UChatMessages :messages="chat.messages" :status="chat.status" should-auto-scroll class="flex-1">
-      <template #content="{ message }">
-        <MDC :value="getTextFromMessage(message)" :cache-key="message.id" class="*:first:mt-0 *:last:mb-0" />
-      </template>
-    </UChatMessages>
+  <UDashboardPanel :ui="{ body: 'p-0 sm:p-0' }">
+    <template #body>
+      <UContainer class="min-h-dvh flex flex-col py-4 sm:py-6">
+        <UChatMessages :messages="chat.messages" :status="chat.status" should-auto-scroll class="flex-1">
+          <template #content="{ message }">
+            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" class="*:first:mt-0 *:last:mb-0" />
+          </template>
+        </UChatMessages>
 
-    <UChatPrompt v-model="input" :error="chat.error" variant="subtle" @submit="handleSubmit">
-      <template #footer>
-        <ModelSelect v-model="model" />
-      </template>
+        <UChatPrompt v-model="input" :error="chat.error" variant="subtle" @submit="handleSubmit">
+          <template #footer>
+            <ModelSelect v-model="model" />
+          </template>
 
-      <UChatPromptSubmit :status="chat.status" color="neutral" @stop="chat.stop()" @reload="chat.regenerate()" />
-    </UChatPrompt>
-  </UContainer>
+          <UChatPromptSubmit :status="chat.status" color="neutral" @stop="chat.stop()" @reload="chat.regenerate()" />
+        </UChatPrompt>
+      </UContainer>
+    </template>
+  </UDashboardPanel>
 </template>
 ```
 ::
