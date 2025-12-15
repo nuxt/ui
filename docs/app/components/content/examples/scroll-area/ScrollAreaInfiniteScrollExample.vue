@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useInfiniteScroll } from '@vueuse/core'
+
 type Recipe = {
   id: number
   name: string
@@ -19,11 +21,10 @@ type RecipeResponse = {
 }
 
 const skip = ref(0)
-const limit = 10
 
 const { data, status, execute } = await useFetch('https://dummyjson.com/recipes?limit=10&select=name,image,difficulty,cuisine,rating,reviewCount,prepTimeMinutes,cookTimeMinutes', {
   key: 'scroll-area-recipes-infinite-scroll',
-  params: { skip, limit },
+  params: { skip },
   transform: (data?: RecipeResponse) => {
     return data?.recipes
   },
@@ -41,23 +42,25 @@ watch(data, () => {
 
 execute()
 
-function loadMore() {
-  if (status.value !== 'pending') {
-    skip.value += limit
-  }
-}
+const scrollArea = useTemplateRef('scrollArea')
+
+onMounted(() => {
+  useInfiniteScroll(scrollArea.value?.$el, () => {
+    skip.value += 10
+  }, {
+    distance: 200,
+    canLoadMore: () => status.value !== 'pending'
+  })
+})
 </script>
 
 <template>
   <UScrollArea
+    ref="scrollArea"
     v-slot="{ item }"
     :items="recipes"
-    :virtualize="{
-      estimateSize: 88,
-      loadMoreThreshold: 5
-    }"
+    :virtualize="{ estimateSize: 88 }"
     class="h-96 w-full"
-    @load-more="loadMore"
   >
     <UPageCard
       orientation="horizontal"

@@ -4,33 +4,31 @@ import type { ScrollAreaProps, ScrollAreaSlots } from '../../src/runtime/compone
 import ComponentRender from '../component-render'
 
 describe('ScrollArea', () => {
-  const testItems = [
+  const items = [
     { id: 1, name: 'Item 1' },
     { id: 2, name: 'Item 2' },
     { id: 3, name: 'Item 3' }
   ]
 
+  const props = { items }
+
   it.each([
-    // Basic Props
-    ['with as', { props: { as: 'section' } }],
-    ['with class', { props: { class: 'custom-class' } }],
-    ['with ui', { props: { ui: { root: 'custom-root' } } }],
-    ['with items', { props: { items: testItems } }],
-    ['with orientation vertical', { props: { orientation: 'vertical' as const } }],
-    ['with orientation horizontal', { props: { orientation: 'horizontal' as const } }],
-
-    // Virtualization
-    ['with virtualize boolean', { props: { items: testItems, virtualize: true } }],
-    ['with virtualize object', { props: { items: testItems, virtualize: { overscan: 5, estimateSize: 50 } } }],
-    ['with virtualize gap', { props: { items: testItems, virtualize: { gap: 10 } } }],
-    ['with virtualize padding', { props: { items: testItems, virtualize: { paddingStart: 20, paddingEnd: 20 } } }],
-    ['with virtualize lanes', { props: { items: testItems, virtualize: { lanes: 3 } } }],
-    ['with virtualize scrollMargin', { props: { items: testItems, virtualize: { scrollMargin: 10 } } }],
-    ['with virtualize loadMoreThreshold', { props: { items: testItems, virtualize: { loadMoreThreshold: 10 } } }],
-
+    // Props
+    ['with items', { props }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ['with orientation horizontal', { props: { ...props, orientation: 'horizontal' as const } }],
+    ['with virtualize boolean', { props: { ...props, virtualize: true } }],
+    ['with virtualize object', { props: { ...props, virtualize: { overscan: 5, estimateSize: 50 } } }],
+    ['with virtualize gap', { props: { ...props, virtualize: { gap: 10 } } }],
+    ['with virtualize padding', { props: { ...props, virtualize: { paddingStart: 20, paddingEnd: 20 } } }],
+    ['with virtualize lanes', { props: { ...props, virtualize: { lanes: 3 } } }],
+    ['with virtualize scrollMargin', { props: { ...props, virtualize: { scrollMargin: 10 } } }],
+    ['with as', { props: { ...props, as: 'section' } }],
+    ['with class', { props: { ...props, class: 'absolute' } }],
+    ['with ui', { props: { ...props, ui: { viewport: 'gap-4' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ScrollAreaProps<any>, slots?: Partial<ScrollAreaSlots<any>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ScrollAreaProps, slots?: Partial<ScrollAreaSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ScrollArea)
     expect(html).toMatchSnapshot()
   })

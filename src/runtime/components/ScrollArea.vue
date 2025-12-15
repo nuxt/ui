@@ -27,11 +27,6 @@ export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
    * @defaultValue undefined
    */
   lanes?: number
-  /**
-   * Number of items from the end to trigger loadMore event (for infinite scroll)
-   * @defaultValue 5
-   */
-  loadMoreThreshold?: number
 }
 
 export type ScrollAreaItem = any
@@ -75,11 +70,6 @@ export interface ScrollAreaEmits {
    * @param isScrolling - Whether the list is currently being scrolled
    */
   scroll: [isScrolling: boolean]
-  /**
-   * Emitted when user scrolls near the end of the list (for infinite scroll)
-   * @param lastIndex - The index of the last visible item
-   */
-  loadMore: [lastIndex: number]
 }
 </script>
 
@@ -121,8 +111,7 @@ const virtualizerProps = toRef(() => {
     gap: 0,
     paddingStart: 0,
     paddingEnd: 0,
-    scrollMargin: 0,
-    loadMoreThreshold: 5
+    scrollMargin: 0
   })
 })
 
@@ -223,23 +212,6 @@ watch(
   isScrolling => emits('scroll', isScrolling)
 )
 
-// Emit loadMore when scrolling near the end (infinite scroll support)
-watch(
-  () => {
-    if (!virtualizer) return -1
-    const items = virtualizer.value.getVirtualItems()
-    return items.length > 0 ? items[items.length - 1]?.index ?? -1 : -1
-  },
-  (lastVisibleIndex) => {
-    if (lastVisibleIndex === -1 || !props.items?.length) return
-
-    const threshold = virtualizerProps.value.loadMoreThreshold ?? 5
-    if (lastVisibleIndex >= props.items.length - threshold) {
-      emits('loadMore', lastVisibleIndex)
-    }
-  }
-)
-
 function getItemKey(item: T, index: number) {
   if (virtualizerProps.value.getItemKey) {
     return virtualizerProps.value.getItemKey(index)
@@ -251,6 +223,9 @@ function getItemKey(item: T, index: number) {
 }
 
 defineExpose({
+  get $el() {
+    return rootRef.value?.$el as HTMLElement
+  },
   virtualizer: virtualizer || undefined
 })
 </script>

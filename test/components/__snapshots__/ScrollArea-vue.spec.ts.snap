@@ -2,13 +2,21 @@
 
 exports[`ScrollArea > renders with as correctly 1`] = `
 "<section data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col"></div>
+  <div data-slot="viewport" class="relative flex flex-col">
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+  </div>
 </section>"
 `;
 
 exports[`ScrollArea > renders with class correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden custom-class">
-  <div data-slot="viewport" class="relative flex flex-col"></div>
+"<div data-slot="root" data-orientation="vertical" class="overflow-y-auto overflow-x-hidden absolute">
+  <div data-slot="viewport" class="relative flex flex-col">
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+  </div>
 </div>"
 `;
 
@@ -30,19 +38,31 @@ exports[`ScrollArea > renders with items correctly 1`] = `
 
 exports[`ScrollArea > renders with orientation horizontal correctly 1`] = `
 "<div data-slot="root" data-orientation="horizontal" class="relative overflow-x-auto overflow-y-hidden">
-  <div data-slot="viewport" class="relative flex flex-row"></div>
+  <div data-slot="viewport" class="relative flex flex-row">
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+  </div>
 </div>"
 `;
 
 exports[`ScrollArea > renders with orientation vertical correctly 1`] = `
 "<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col"></div>
+  <div data-slot="viewport" class="relative flex flex-col">
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+  </div>
 </div>"
 `;
 
 exports[`ScrollArea > renders with ui correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden custom-root">
-  <div data-slot="viewport" class="relative flex flex-col"></div>
+"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
+  <div data-slot="viewport" class="relative flex flex-col gap-4">
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+  </div>
 </div>"
 `;
 
@@ -61,12 +81,6 @@ exports[`ScrollArea > renders with virtualize gap correctly 1`] = `
 exports[`ScrollArea > renders with virtualize lanes correctly 1`] = `
 "<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
   <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 100px;"></div>
-</div>"
-`;
-
-exports[`ScrollArea > renders with virtualize loadMoreThreshold correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 300px;"></div>
 </div>"
 `;
 

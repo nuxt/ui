@@ -89,7 +89,7 @@ options:
 
 ## Examples
 
-### With masonry layout
+### As masonry layout
 
 Use the `virtualize` prop with `lanes`, `gap`, and `estimateSize` options to create Pinterest-style masonry layouts with variable height items.
 
@@ -153,7 +153,7 @@ class: '!p-0'
 
 ### With infinite scroll
 
-Use the `@load-more` event to load more data as the user scrolls when virtualization is enabled.
+Use [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) from VueUse to load more data as the user scrolls.
 
 ::component-example
 ---
@@ -163,10 +163,6 @@ overflowHidden: true
 name: 'scroll-area-infinite-scroll-example'
 class: '!p-0'
 ---
-::
-
-::tip
-The `@load-more` event fires when the user scrolls within `loadMoreThreshold` items from the end (default: 5). Use a loading flag to prevent multiple simultaneous requests and always use spread syntax (`[...items, ...newItems]`) for reactive updates.
 ::
 
 ### With default slot
@@ -217,6 +213,7 @@ This will give you access to the following:
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
+| `$el`{lang="ts-type"} | `HTMLElement`{lang="ts-type"} | The root element of the component. |
 | `virtualizer`{lang="ts-type"} | `Ref<Virtualizer> \| undefined`{lang="ts-type"} | The [TanStack Virtual](https://tanstack.com/virtual/latest/docs/api/virtualizer) virtualizer instance (`undefined` if virtualization is disabled). |
 
 ## Theme
