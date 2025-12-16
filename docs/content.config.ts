@@ -57,20 +57,6 @@ const Page = z.object({
 })
 
 export const collections = {
-  docs: defineCollection({
-    type: 'page',
-    source: [{
-      include: 'docs/**/*'
-    }],
-    schema: z.object({
-      category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay', 'dashboard', 'page', 'chat', 'editor', 'color-mode', 'i18n']).optional(),
-      framework: z.enum(['nuxt', 'vue']).optional(),
-      navigation: z.object({
-        title: z.string().optional()
-      }),
-      links: z.array(Button)
-    })
-  }),
   index: defineCollection({
     type: 'page',
     source: 'index.yml',
@@ -90,6 +76,20 @@ export const collections = {
       }),
       templates: PageSection,
       community: PageSection
+    })
+  }),
+  docs: defineCollection({
+    type: 'page',
+    source: [{
+      include: 'docs/**/*'
+    }],
+    schema: z.object({
+      category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay', 'dashboard', 'page', 'chat', 'editor', 'color-mode', 'i18n']).optional(),
+      framework: z.enum(['nuxt', 'vue']).optional(),
+      navigation: z.object({
+        title: z.string().optional()
+      }),
+      links: z.array(Button)
     })
   }),
   figma: defineCollection({
@@ -188,6 +188,26 @@ export const collections = {
     type: 'page',
     source: 'team.yml',
     schema: Page
+  }),
+  blog: defineCollection({
+    type: 'page',
+    source: 'blog.yml',
+    schema: Page
+  }),
+  posts: defineCollection({
+    type: 'page',
+    source: [{
+      include: 'blog/**/*'
+    }],
+    schema: z.object({
+      image: z.string(),
+      date: z.string(),
+      authors: z.array(z.object({
+        name: z.string(),
+        avatar: Avatar.optional(),
+        to: z.string().optional()
+      })).optional()
+    })
   }),
   releases: defineCollection({
     type: 'page',

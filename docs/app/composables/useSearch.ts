@@ -85,9 +85,15 @@ export function useSearch() {
     icon: 'i-lucide-users',
     to: '/team'
   }, {
+    label: 'Blog',
+    description: 'Learn how to build things with Nuxt UI.',
+    icon: 'i-lucide-newspaper',
+    to: '/blog',
+    active: route.path.startsWith('/blog')
+  }, {
     label: 'Releases',
     description: 'Stay up to date with the newest features, enhancements, and fixes for Nuxt UI.',
-    icon: 'i-lucide-newspaper',
+    icon: 'i-lucide-rocket',
     to: '/releases'
   }, {
     label: 'GitHub',
