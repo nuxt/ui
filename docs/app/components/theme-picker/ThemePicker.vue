@@ -187,7 +187,7 @@ function resetTheme() {
 </script>
 
 <template>
-  <UPopover :ui="{ content: 'w-72 px-6 py-4 flex flex-col gap-3 overflow-y-auto max-h-[calc(100vh-5rem)]' }">
+  <UPopover :ui="{ content: 'w-72 px-6 py-4 flex flex-col gap-4 overflow-y-auto max-h-[calc(100vh-5rem)]' }">
     <template #default="{ open }">
       <UButton
         icon="i-lucide-swatch-book"
@@ -201,8 +201,18 @@ function resetTheme() {
 
     <template #content>
       <fieldset>
-        <legend class="text-[11px] leading-none font-semibold mb-2 select-none">
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
           Primary
+
+          <UButton
+            to="/docs/getting-started/theme/css-variables#colors"
+            size="xs"
+            color="neutral"
+            variant="link"
+            icon="i-lucide-help-circle"
+            class="p-0 -my-0.5"
+            :ui="{ leadingIcon: 'size-3' }"
+          />
         </legend>
 
         <div class="grid grid-cols-3 gap-1 -mx-2">
@@ -228,8 +238,18 @@ function resetTheme() {
       </fieldset>
 
       <fieldset>
-        <legend class="text-[11px] leading-none font-semibold mb-2 select-none">
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
           Neutral
+
+          <UButton
+            to="/docs/getting-started/theme/css-variables#text"
+            size="xs"
+            color="neutral"
+            variant="link"
+            icon="i-lucide-help-circle"
+            class="p-0 -my-0.5"
+            :ui="{ leadingIcon: 'size-3' }"
+          />
         </legend>
 
         <div class="grid grid-cols-3 gap-1 -mx-2">
@@ -245,8 +265,18 @@ function resetTheme() {
       </fieldset>
 
       <fieldset>
-        <legend class="text-[11px] leading-none font-semibold mb-2 select-none">
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
           Radius
+
+          <UButton
+            to="/docs/getting-started/theme/css-variables#radius"
+            size="xs"
+            color="neutral"
+            variant="link"
+            icon="i-lucide-help-circle"
+            class="p-0 -my-0.5"
+            :ui="{ leadingIcon: 'size-3' }"
+          />
         </legend>
 
         <div class="grid grid-cols-5 gap-1 -mx-2">
@@ -262,8 +292,18 @@ function resetTheme() {
       </fieldset>
 
       <fieldset>
-        <legend class="text-[11px] leading-none font-semibold mb-2 select-none">
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
           Font
+
+          <UButton
+            to="/docs/getting-started/integrations/fonts"
+            size="xs"
+            color="neutral"
+            variant="link"
+            icon="i-lucide-help-circle"
+            class="p-0 -my-0.5"
+            :ui="{ leadingIcon: 'size-3' }"
+          />
         </legend>
 
         <div class="-mx-2">
@@ -273,15 +313,25 @@ function resetTheme() {
             color="neutral"
             icon="i-lucide-type"
             :items="fonts"
-            class="w-full ring-default rounded-sm hover:bg-elevated/50 text-[11px]"
+            class="w-full ring-default rounded-sm hover:bg-elevated/50 text-[11px] data-[state=open]:bg-elevated/50"
             :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
           />
         </div>
       </fieldset>
 
       <fieldset>
-        <legend class="text-[11px] leading-none font-semibold mb-2 select-none">
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
           Icons
+
+          <UButton
+            to="/docs/getting-started/integrations/icons"
+            size="xs"
+            color="neutral"
+            variant="link"
+            icon="i-lucide-help-circle"
+            class="p-0 -my-0.5"
+            :ui="{ leadingIcon: 'size-3' }"
+          />
         </legend>
 
         <div class="-mx-2">
@@ -291,15 +341,25 @@ function resetTheme() {
             color="neutral"
             :icon="icons.find(i => i.value === icon)?.icon"
             :items="icons"
-            class="w-full ring-default rounded-sm hover:bg-elevated/50 capitalize text-[11px]"
+            class="w-full ring-default rounded-sm hover:bg-elevated/50 capitalize text-[11px] data-[state=open]:bg-elevated/50"
             :ui="{ item: 'capitalize text-[11px]', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
           />
         </div>
       </fieldset>
 
       <fieldset>
-        <legend class="text-[11px] leading-none font-semibold mb-2 select-none">
-          Theme
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
+          Color Mode
+
+          <UButton
+            to="/docs/getting-started/integrations/color-mode"
+            size="xs"
+            color="neutral"
+            variant="link"
+            icon="i-lucide-help-circle"
+            class="p-0 -my-0.5"
+            :ui="{ leadingIcon: 'size-3' }"
+          />
         </legend>
 
         <div class="grid grid-cols-3 gap-1 -mx-2">
@@ -322,21 +382,21 @@ function resetTheme() {
           <UButton
             v-if="hasCSSChanges"
             color="neutral"
-            variant="subtle"
+            variant="soft"
             size="sm"
             label="main.css"
-            class="flex-1"
+            class="flex-1 text-[11px]"
             :icon="copiedCSS ? 'i-lucide-copy-check' : 'i-lucide-copy'"
             @click="exportCSS"
           />
           <UButton
             v-if="hasAppConfigChanges"
             color="neutral"
-            variant="subtle"
+            variant="soft"
             size="sm"
             label="app.config.ts"
             :icon="copiedAppConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
-            class="flex-1"
+            class="flex-1 text-[11px]"
             @click="exportAppConfig"
           />
           <UTooltip text="Reset theme">
@@ -345,7 +405,7 @@ function resetTheme() {
               variant="outline"
               size="sm"
               icon="i-lucide-rotate-ccw"
-              class="ms-auto"
+              class="ms-auto ring-default hover:bg-elevated/50"
               @click="resetTheme"
             />
           </UTooltip>
