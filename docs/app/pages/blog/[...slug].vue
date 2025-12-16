@@ -43,7 +43,7 @@ const items = computed(() => Object.entries(tree.value).map(([key, value]) => ({
 </script>
 
 <template>
-  <UPage v-if="page" :ui="{ center: 'lg:col-span-5 px-4 sm:pl-6 lg:pl-8', right: 'lg:col-span-5' }" class="lg:gap-8">
+  <UPage v-if="page" :ui="{ center: 'lg:col-span-5 px-4 sm:px-6 lg:pl-8 lg:pr-0', right: 'lg:col-span-5' }" class="lg:gap-8">
     <UPageHeader :title="page.title" :description="page.description" :ui="{ title: 'relative flex items-center' }">
       <template #headline>
         <UButton
