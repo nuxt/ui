@@ -42,7 +42,7 @@ const items = computed(() => Object.entries(tree.value).map(([key, value]) => ({
 </script>
 
 <template>
-  <UPage v-if="page" :ui="{ center: 'lg:col-span-5', right: 'lg:col-span-5' }" class="lg:gap-16">
+  <UPage v-if="page" :ui="{ center: 'lg:col-span-5 pl-4 sm:pl-6 lg:pl-8', right: 'lg:col-span-5' }" class="lg:gap-8">
     <UPageHeader :title="page.title" :description="page.description" :ui="{ title: 'relative flex items-center' }">
       <template #headline>
         <UButton
@@ -80,9 +80,20 @@ const items = computed(() => Object.entries(tree.value).map(([key, value]) => ({
 
     <template #right>
       <div>
-        <UContentToc :links="page.body.toc?.links" class="z-2 block lg:hidden" />
+        <UContentToc :links="page.body.toc?.links" class="z-2 block lg:hidden px-8 sm:px-12" />
+
         <nav class="h-full sticky top-(--ui-header-height) max-h-[calc(100vh-var(--ui-header-height))] hidden lg:block">
-          <ProseCodeTree :model-value="activePath" class="lg:h-full my-0 rounded-none border-y-0" :items="items" expand-all />
+          <ProseCodeTree
+            v-if="activePath"
+            :model-value="activePath"
+            class="lg:h-full my-0 rounded-none border-y-0 border-r-0 border-default"
+            :items="items"
+            expand-all
+            :ui="{ list: 'border-default', content: '[&>div>pre]:bg-muted/50 [&>div>pre]:border-default [&>div>pre]:rounded-none' }"
+          />
+          <div v-else class="size-full border-l border-default flex items-center justify-center">
+            <UIcon name="i-lucide-arrow-down" class="size-12 text-dimmed animate-bounce" />
+          </div>
         </nav>
       </div>
     </template>
