@@ -8,6 +8,10 @@ authors:
     avatar:
       src: https://github.com/hugorcd.png
     to: https://x.com/hugorcd
+  - name: Benjamin Canac
+    avatar:
+      src: https://github.com/benjamincanac.png
+    to: https://x.com/benjamincanac
 date: 2025-12-16T10:00:00.000Z
 category: Tutorial
 ---
@@ -1042,11 +1046,15 @@ The official **AI Chat template** includes all these features and more. Get star
 Deploy your chatbot to Vercel with zero configuration:
 
 ```bash
-npx vercel
+npx vercel deploy
 ```
 
-Make sure to add your environment variables in the Vercel dashboard:
-- `AI_GATEWAY_API_KEY`: Your Vercel AI Gateway API key
+Then, in the Vercel dashboard:
+
+- Enable **AI Gateway** and add credits so requests can be processed.
+- Add a **Turso** database from the Vercel Marketplace and connect it to your project (it will provision the database and add the required environment variables automatically).
+
+> Note: On Vercel, you **don’t need to manually add `AI_GATEWAY_API_KEY`** — Vercel handles the gateway configuration for deployments. Keep using `.env` locally for development.
 
 ::note{to="https://vercel.com/docs/ai-gateway" target="_blank"}
 Learn more about setting up AI Gateway in the **Vercel AI Gateway documentation**.
@@ -1060,9 +1068,9 @@ You've built a complete AI chatbot with:
 - **Real-time streaming responses** with the AI SDK
 - **Markdown rendering** with MDC for rich content display
 - **Multi-model support** via AI Gateway
-- **Database persistence** with NuxtHub and Drizzle ORM
+- **Database persistence** with SQLite (local) / Turso (production) and Drizzle ORM
 
-The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat components, NuxtHub's zero-config database, and the AI SDK's streaming infrastructure makes building AI applications straightforward and enjoyable.
+The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat components, a local SQLite dev database with a production Turso database, and the AI SDK's streaming infrastructure makes building AI applications straightforward and enjoyable.
 
 **Resources:**
 
