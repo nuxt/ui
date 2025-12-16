@@ -2,9 +2,9 @@ export default {
   slots: {
     root: '',
     wrapper: '',
-    labelWrapper: 'flex content-center items-center justify-between',
+    labelWrapper: 'flex content-center items-center justify-between gap-1',
     label: 'block font-medium text-default',
-    container: 'mt-1 relative',
+    container: 'relative',
     description: 'text-muted',
     error: 'mt-2 text-error',
     hint: 'text-muted',
@@ -24,11 +24,11 @@ export default {
       }
     },
     orientation: {
-      vertical: {},
+      vertical: {
+        container: 'mt-1'
+      },
       horizontal: {
-        root: 'flex items-center justify-between',
-        wrapper: 'flex-none',
-        container: 'mt-0'
+        root: 'flex justify-between place-items-baseline gap-2'
       }
     }
   },
