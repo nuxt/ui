@@ -9,7 +9,7 @@ type ScrollArea = ComponentConfig<typeof theme, AppConfig, 'scrollArea'>
 
 export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
   VirtualizerOptions<Element, Element>,
-  'count' | 'getScrollElement' | 'horizontal' | 'isRtl' | 'estimateSize' | 'lanes'
+  'count' | 'getScrollElement' | 'horizontal' | 'isRtl' | 'estimateSize' | 'lanes' | 'enabled'
 >> {
   /**
    * Estimated size (in px) of each item along the scroll axis. Can be a number or a function.
@@ -41,7 +41,7 @@ export interface ScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
    * The scroll direction.
    * @defaultValue 'vertical'
    */
-  orientation?: 'vertical' | 'horizontal'
+  orientation?: ScrollArea['variants']['orientation']
   /**
    * Array of items to render.
    */
