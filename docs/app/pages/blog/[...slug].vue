@@ -16,10 +16,11 @@ const title = page.value.seo?.title || page.value.title
 const description = page.value.seo?.description || page.value.description
 
 useSeoMeta({
+  titleTemplate: '%s - Nuxt UI',
   title,
+  ogTitle: `${title} - Nuxt UI`,
   description,
-  ogDescription: description,
-  ogTitle: title
+  ogDescription: description
 })
 
 if (page.value.image) {
