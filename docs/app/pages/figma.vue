@@ -121,9 +121,7 @@ onMounted(async () => {
     <UPageHero
       :links="page.hero.links"
       class="relative"
-      :ui="{
-        container: 'relative !pb-0 lg:py-32'
-      }"
+      :ui="{ container: 'relative py-10 sm:py-16 lg:py-24 !pb-0' }"
     >
       <template #title>
         <MDC :value="page.hero.title" unwrap="p" cache-key="figma-hero-title" />

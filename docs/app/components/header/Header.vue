@@ -4,7 +4,10 @@ const { desktopLinks } = useHeader()
 </script>
 
 <template>
-  <UHeader :ui="{ left: 'min-w-0' }" class="flex flex-col">
+  <UHeader
+    :ui="{ left: 'min-w-0', container: [route.path.startsWith('/blog/') ? 'max-w-none' : ''] }"
+    class="flex flex-col"
+  >
     <template #left>
       <HeaderLogo />
 
