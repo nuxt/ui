@@ -1,9 +1,9 @@
 seo:
   title: Blog
-  description: Learn how to build things with Nuxt UI.
+  description: Tutorials, guides, and insights to help you build beautiful applications with Nuxt UI.
 title: Blog
-description: Learn how to build things with Nuxt UI.
+description: Tutorials, guides, and insights to help you build beautiful applications with Nuxt UI.
 hero:
   title: Nuxt [UI]{.text-primary} Blog
-  description: Learn how to build things with Nuxt UI.
+  description: Tutorials, guides, and insights to help you build beautiful applications with Nuxt UI.
 navigation: false
