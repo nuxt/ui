@@ -21,7 +21,7 @@ useSeoMeta({
 defineOgImageComponent('Docs')
 
 function formatDate(date: string) {
-  return new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  return new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
 }
 </script>
 
@@ -57,11 +57,11 @@ function formatDate(date: string) {
               class="flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-6 hover:bg-muted/30 transition-all duration-200 gap-4 sm:gap-6"
             >
               <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 flex-1 min-w-0">
-                <div class="text-xs text-muted font-mono shrink-0 sm:min-w-[60px]">
-                  {{ formatDate(post.date) }}
-                </div>
-
                 <div class="flex-1 min-w-0">
+                  <div class="text-xs text-muted font-mono shrink-0 mb-1">
+                    {{ formatDate(post.date) }}
+                  </div>
+
                   <h3 class="font-medium text-highlighted group-hover:text-primary transition-colors duration-200 truncate sm:text-base">
                     {{ post.title }}
                   </h3>
@@ -72,6 +72,7 @@ function formatDate(date: string) {
               </div>
 
               <div class="flex items-center justify-between sm:justify-end gap-3 sm:gap-2 shrink-0">
+
                 <UAvatarGroup v-if="post.authors?.length" size="sm" class="sm:size-sm">
                   <UAvatar
                     v-for="author in post.authors.slice(0, 3)"

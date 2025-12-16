@@ -78,7 +78,7 @@ useIntersectionObserver(target, ([entry]) => {
   if (entry?.isIntersecting) {
     addToTree()
   }
-})
+}, { rootMargin: '-200px' })
 </script>
 
 <template>
