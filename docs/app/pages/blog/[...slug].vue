@@ -43,7 +43,7 @@ const items = computed(() => Object.entries(tree.value).map(([key, value]) => ({
 </script>
 
 <template>
-  <UPage v-if="page" :ui="{ center: 'lg:col-span-5 pl-4 sm:pl-6 lg:pl-8', right: 'lg:col-span-5' }" class="lg:gap-8">
+  <UPage v-if="page" :ui="{ center: 'lg:col-span-5 px-4 sm:pl-6 lg:pl-8', right: 'lg:col-span-5' }" class="lg:gap-8">
     <UPageHeader :title="page.title" :description="page.description" :ui="{ title: 'relative flex items-center' }">
       <template #headline>
         <UButton
@@ -81,7 +81,10 @@ const items = computed(() => Object.entries(tree.value).map(([key, value]) => ({
 
     <template #right>
       <div>
-        <UContentToc :links="page.body.toc?.links" class="z-2 block lg:hidden px-8 sm:px-12" />
+        <UContentToc
+          :links="page.body.toc?.links"
+          class="z-2 lg:hidden mx-0!"
+        />
 
         <nav class="h-full sticky top-(--ui-header-height) max-h-[calc(100vh-var(--ui-header-height))] hidden lg:block">
           <ProseCodeTree

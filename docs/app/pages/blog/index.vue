@@ -26,7 +26,7 @@ function formatDate(date: string) {
 </script>
 
 <template>
-  <div v-if="page" class="relative grid grid-rows-[auto_auto_1fr] min-h-[calc(100vh-150px)]">
+  <div v-if="page" class="relative flex flex-col min-h-[calc(100vh-150px)]">
     <UPageHero :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }">
       <LazyStarsBg />
 
@@ -94,7 +94,7 @@ function formatDate(date: string) {
       </UContainer>
     </UPageBody>
 
-    <UContainer class="relative min-h-24">
+    <UContainer class="relative min-h-24 grow">
       <div aria-hidden="true" class="absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UContainer>
   </div>
