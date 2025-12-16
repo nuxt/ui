@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { camelCase, upperFirst } from 'scule'
+import { camelCase, kebabCase, upperFirst } from 'scule'
 
 const props = defineProps<{
   prefix?: string
@@ -8,11 +8,15 @@ const props = defineProps<{
 const route = useRoute()
 const name = route.path.split('/').pop() ?? ''
 const camelName = upperFirst(camelCase(name))
+const kebabName = kebabCase(name)
 
 const { data: commits } = await useLazyFetch('/api/github/commits', {
   key: `component-changelog-${name}`,
   query: {
-    path: `src/runtime/components/${props.prefix ? `${props.prefix}/` : ''}${camelName}.vue`
+    path: [
+      `src/runtime/components/${props.prefix ? `${props.prefix}/` : ''}${camelName}.vue`,
+      `src/theme/${props.prefix ? `${props.prefix}/` : ''}${kebabName}.ts`
+    ]
   }
 })
 
