@@ -22,7 +22,7 @@ const items = Array.from({ length: 1000 }).map((_, index) => {
 
 <template>
   <UScrollArea
-    v-slot="{ item }"
+    v-slot="{ item, index }"
     :items="items"
     orientation="vertical"
     :virtualize="{
@@ -37,7 +37,7 @@ const items = Array.from({ length: 1000 }).map((_, index) => {
       :alt="item.title"
       :width="item.width"
       :height="item.height"
-      loading="lazy"
+      :loading="index > 8 ? 'lazy' : 'eager'"
       class="rounded-md size-full object-cover"
     >
   </UScrollArea>

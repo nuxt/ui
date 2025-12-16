@@ -1,20 +1,17 @@
 <script setup lang="ts">
 import { useInfiniteScroll } from '@vueuse/core'
 
-type Recipe = {
+type User = {
   id: number
-  name: string
+  firstName: string
+  lastName: string
+  username: string
+  email: string
   image: string
-  difficulty: string
-  cuisine: string
-  rating: number
-  reviewCount: number
-  prepTimeMinutes: number
-  cookTimeMinutes: number
 }
 
-type RecipeResponse = {
-  recipes: Recipe[]
+type UserResponse = {
+  users: User[]
   total: number
   skip: number
   limit: number
@@ -22,22 +19,23 @@ type RecipeResponse = {
 
 const skip = ref(0)
 
-const { data, status, execute } = await useFetch('https://dummyjson.com/recipes?limit=10&select=name,image,difficulty,cuisine,rating,reviewCount,prepTimeMinutes,cookTimeMinutes', {
-  key: 'scroll-area-recipes-infinite-scroll',
+const { data, status, execute } = await useFetch('https://dummyjson.com/users?limit=10&select=firstName,lastName,username,email,image', {
+  key: 'scroll-area-users-infinite-scroll',
   params: { skip },
-  transform: (data?: RecipeResponse) => {
-    return data?.recipes
+  transform: (data?: UserResponse) => {
+    return data?.users
   },
   lazy: true,
   immediate: false
 })
 
-const recipes = ref<Recipe[]>([])
+const users = ref<User[]>([])
 
 watch(data, () => {
-  if (data.value) {
-    recipes.value = [...recipes.value, ...data.value]
-  }
+  users.value = [
+    ...users.value,
+    ...(data.value || [])
+  ]
 })
 
 execute()
@@ -49,7 +47,9 @@ onMounted(() => {
     skip.value += 10
   }, {
     distance: 200,
-    canLoadMore: () => status.value !== 'pending'
+    canLoadMore: () => {
+      return status.value !== 'pending'
+    }
   })
 })
 </script>
@@ -58,7 +58,7 @@ onMounted(() => {
   <UScrollArea
     ref="scrollArea"
     v-slot="{ item }"
-    :items="recipes"
+    :items="users"
     :virtualize="{ estimateSize: 88 }"
     class="h-96 w-full"
   >
@@ -67,13 +67,11 @@ onMounted(() => {
       class="rounded-none"
     >
       <UUser
-        :name="item.name"
-        :description="`${item.prepTimeMinutes + item.cookTimeMinutes} min • ${item.reviewCount} reviews`"
-        :avatar="{ src: item.image, alt: item.name }"
+        :name="`${item.firstName} ${item.lastName}`"
+        :description="item.email"
+        :avatar="{ src: item.image, alt: item.firstName, loading: 'lazy' }"
         size="lg"
       />
-
-      <UButton color="neutral" variant="subtle" icon="i-lucide-star" :label="String(item.rating)" class="justify-self-end" />
     </UPageCard>
   </UScrollArea>
 

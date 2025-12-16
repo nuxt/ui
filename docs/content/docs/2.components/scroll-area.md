@@ -1,7 +1,7 @@
 ---
 title: ScrollArea
 description: A flexible scroll container with virtualization support.
-category: layout
+category: data
 links:
   - label: TanStack Virtual
     avatar:
@@ -117,13 +117,13 @@ options:
 ---
 ::
 
-::note
-Provide an accurate `estimateSize` close to the average item height for better initial rendering performance. Increase `overscan` for smoother scrolling at the cost of rendering more off-screen items.
+::tip
+For optimal performance, set `estimateSize` close to your average item height. Increasing `overscan` improves scrolling smoothness but renders more off-screen items.
 ::
 
 ### With responsive lanes
 
-Make the `lanes` option reactive to create responsive multi-column layouts.
+You can use the [`useWindowSize`](https://vueuse.org/core/useWindowSize/) (for viewport-based) or [`useElementSize`](https://vueuse.org/core/useElementSize/) (for container-based) composables to make the `lanes` reactive.
 
 ::component-example
 ---
@@ -134,13 +134,9 @@ class: '!p-0'
 ---
 ::
 
-::tip
-Use [`useWindowSize`](https://vueuse.org/core/useWindowSize/) for viewport-based or [`useElementSize`](https://vueuse.org/core/useElementSize/) for container-based responsive lanes.
-::
-
 ### With programmatic scroll
 
-Use the exposed `virtualizer` to programmatically control scroll position.
+You can use the exposed `virtualizer` to programmatically control scroll position.
 
 ::component-example
 ---
@@ -153,7 +149,7 @@ class: '!p-0'
 
 ### With infinite scroll
 
-Use [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) from VueUse to load more data as the user scrolls.
+You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
 
 ::component-example
 ---
@@ -167,7 +163,7 @@ class: '!p-0'
 
 ### With default slot
 
-Use the default slot without the `items` prop to render custom scrollable content directly.
+You can use the default slot without the `items` prop to render custom scrollable content directly.
 
 ::component-example
 ---
