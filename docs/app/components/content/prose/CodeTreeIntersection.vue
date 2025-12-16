@@ -67,9 +67,9 @@ onMounted(() => {
     return
   }
 
-  // If element is already above or in the viewport (e.g., page refresh in the middle), add it to the tree immediately
+  // If element is already above or in the top 50% of the viewport (e.g., page refresh in the middle), add it to the tree immediately
   const rect = target.value?.getBoundingClientRect()
-  if (rect && rect.top < window.innerHeight) {
+  if (rect && rect.top < window.innerHeight * 0.5) {
     addToTree()
   }
 })
@@ -78,6 +78,8 @@ useIntersectionObserver(target, ([entry]) => {
   if (entry?.isIntersecting) {
     addToTree()
   }
+}, {
+  rootMargin: '0px 0px -50% 0px'
 })
 </script>
 
