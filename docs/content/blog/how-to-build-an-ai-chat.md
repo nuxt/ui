@@ -613,35 +613,19 @@ export default defineEventHandler(async () => {
 ```
 ::
 
-### Creating a chats composable
-
-Create a composable using [`useFetch`](https://nuxt.com/docs/api/composables/use-fetch) to fetch and cache the chat list:
-
-::code-tree-intersection
-```ts [app/composables/useChats.ts]
-export function useChats() {
-  const { data: chats, refresh } = useFetch('/api/chats', {
-    key: 'chats',
-    default: () => []
-  })
-
-  return {
-    chats,
-    refresh
-  }
-}
-```
-::
-
 ### Building the chats history dropdown
 
-The component uses [`UDropdownMenu`](/docs/components/dropdown-menu) with a [`UButton`](/docs/components/button) as trigger:
+The component uses [`UDropdownMenu`](/docs/components/dropdown-menu) with a [`UButton`](/docs/components/button) as trigger. Use [`useFetch`](https://nuxt.com/docs/api/composables/use-fetch) with a `key` to fetch and cache the chat list:
 
 ::code-tree-intersection
 ```vue [app/components/ChatsHistory.vue]
 <script setup lang="ts">
 const route = useRoute()
-const { chats } = useChats()
+
+const { data: chats } = useFetch('/api/chats', {
+  key: 'chats',
+  default: () => []
+})
 
 const items = computed(() => [
   {
