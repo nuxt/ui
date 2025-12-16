@@ -258,6 +258,18 @@ export default defineNuxtConfig({
     }
   },
 
+  fonts: {
+    processCSSVariables: true,
+    families: [
+      { name: 'Public Sans', provider: 'google', global: true },
+      { name: 'DM Sans', provider: 'google', global: true },
+      { name: 'Geist', provider: 'google', global: true },
+      { name: 'Inter', provider: 'google', global: true },
+      { name: 'Poppins', provider: 'google', global: true },
+      { name: 'Roboto', provider: 'google', global: true }
+    ]
+  },
+
   icon: {
     customCollections: [{
       prefix: 'custom',
