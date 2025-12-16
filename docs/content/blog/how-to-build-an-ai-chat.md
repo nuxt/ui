@@ -147,8 +147,8 @@ With [Vercel AI Gateway](https://vercel.com/docs/ai-gateway), you don't need ind
 :::code-collapse
 
 ```ts [server/db/schema.ts]
-import { relations } from 'drizzle-orm'
 import { sqliteTable, text, integer, index } from 'drizzle-orm/sqlite-core'
+import { relations } from 'drizzle-orm'
 
 export const chats = sqliteTable('chats', {
   id: text().primaryKey().$defaultFn(() => crypto.randomUUID()),
@@ -201,6 +201,7 @@ First, create the endpoint that initializes a new chat and saves the first messa
 
 ::code-tree-intersection
 ```ts [server/api/chats.post.ts]
+import { defineEventHandler, readValidatedBody } from 'h3'
 import type { UIMessage } from 'ai'
 import { db, schema } from 'hub:db'
 import { z } from 'zod'
@@ -233,7 +234,10 @@ Next, create the endpoint that handles the AI conversation. This endpoint uses [
 :::code-collapse
 
 ```ts [server/api/chats/[id].post.ts]
+import { createError, defineEventHandler, getValidatedRouterParams, readValidatedBody } from 'h3'
+import { eq } from 'drizzle-orm'
 import { db, schema } from 'hub:db'
+import { z } from 'zod'
 import {
   convertToModelMessages,
   createUIMessageStream,
@@ -242,8 +246,6 @@ import {
   streamText
 } from 'ai'
 import type { UIMessage } from 'ai'
-import { eq } from 'drizzle-orm'
-import { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
   const { id } = await getValidatedRouterParams(event, z.object({
@@ -351,8 +353,9 @@ Add an endpoint to fetch existing chat data from your database:
 
 ::code-tree-intersection
 ```ts [server/api/chats/[id].get.ts]
-import { db, schema } from 'hub:db'
+import { createError, defineEventHandler, getValidatedRouterParams } from 'h3'
 import { asc, eq } from 'drizzle-orm'
+import { db, schema } from 'hub:db'
 import { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
@@ -452,9 +455,9 @@ The chat page is where the actual conversation happens. It integrates the AI SDK
 
 ```vue [app/pages/chat/[id].vue] {2-4,19-38}
 <script setup lang="ts">
-import { Chat } from '@ai-sdk/vue'
-import { DefaultChatTransport } from 'ai'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
+import { DefaultChatTransport } from 'ai'
+import { Chat } from '@ai-sdk/vue'
 
 const route = useRoute()
 const toast = useToast()
@@ -594,6 +597,7 @@ First, create an endpoint to fetch all chats:
 
 ::code-tree-intersection
 ```ts [server/api/chats.get.ts]
+import { defineEventHandler } from 'h3'
 import { db, schema } from 'hub:db'
 import { desc } from 'drizzle-orm'
 
@@ -731,9 +735,9 @@ async function createChat() {
 
 ```vue [app/pages/chat/[id].vue] {58-60}
 <script setup lang="ts">
-import { Chat } from '@ai-sdk/vue'
-import { DefaultChatTransport } from 'ai'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
+import { DefaultChatTransport } from 'ai'
+import { Chat } from '@ai-sdk/vue'
 
 const route = useRoute()
 const toast = useToast()
@@ -898,9 +902,9 @@ Update the chat page to include the model selector and pass the selected model t
 
 ```vue [app/pages/chat/[id].vue] {8,23-25,85-87}
 <script setup lang="ts">
-import { Chat } from '@ai-sdk/vue'
-import { DefaultChatTransport } from 'ai'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
+import { DefaultChatTransport } from 'ai'
+import { Chat } from '@ai-sdk/vue'
 
 const route = useRoute()
 const toast = useToast()
