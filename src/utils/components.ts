@@ -65,7 +65,7 @@ function resolveComponentDependencies(
  * Detect components used in the project by scanning source files
  */
 export async function detectUsedComponents(
-  rootDir: string,
+  dirs: string[],
   prefix: string,
   componentDir: string,
   includeComponents?: string[]
@@ -79,12 +79,6 @@ export async function detectUsedComponents(
     }
   }
 
-  // Scan all source files for component usage
-  const appFiles = globSync(['**/*.{vue,ts,js,tsx,jsx}'], {
-    cwd: rootDir,
-    ignore: ['node_modules/**', '.nuxt/**', 'dist/**']
-  })
-
   // Pattern to match:
   // - <UButton in templates
   // - UButton in script (imports, usage)
@@ -92,20 +86,28 @@ export async function detectUsedComponents(
   // - LazyUButton in script
   const componentPattern = new RegExp(`<(?:Lazy)?${prefix}([A-Z][a-zA-Z]+)|\\b(?:Lazy)?${prefix}([A-Z][a-zA-Z]+)\\b`, 'g')
 
-  for (const file of appFiles) {
-    try {
-      const filePath = join(rootDir, file)
-      const content = await readFile(filePath, 'utf-8')
-      const matches = content.matchAll(componentPattern)
+  // Scan all source files for component usage across all layers
+  for (const dir of dirs) {
+    const appFiles = globSync(['**/*.{vue,ts,js,tsx,jsx}'], {
+      cwd: dir,
+      ignore: ['node_modules/**', '.nuxt/**', 'dist/**']
+    })
 
-      for (const match of matches) {
-        const componentName = match[1] || match[2]
-        if (componentName) {
-          detectedComponents.add(componentName)
+    for (const file of appFiles) {
+      try {
+        const filePath = join(dir, file)
+        const content = await readFile(filePath, 'utf-8')
+        const matches = content.matchAll(componentPattern)
+
+        for (const match of matches) {
+          const componentName = match[1] || match[2]
+          if (componentName) {
+            detectedComponents.add(componentName)
+          }
         }
+      } catch {
+        // Ignore files that can't be read
       }
-    } catch {
-      // Ignore files that can't be read
     }
   }
 

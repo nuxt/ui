@@ -85,9 +85,15 @@ export function useSearch() {
     icon: 'i-lucide-users',
     to: '/team'
   }, {
+    label: 'Blog',
+    description: 'Learn how to build things with Nuxt UI.',
+    icon: 'i-lucide-newspaper',
+    to: '/blog',
+    active: route.path.startsWith('/blog')
+  }, {
     label: 'Releases',
     description: 'Stay up to date with the newest features, enhancements, and fixes for Nuxt UI.',
-    icon: 'i-lucide-newspaper',
+    icon: 'i-lucide-rocket',
     to: '/releases'
   }, {
     label: 'GitHub',
@@ -101,16 +107,21 @@ export function useSearch() {
     id: 'ai',
     label: 'AI',
     ignoreFilter: true,
-    items: searchTerm.value
-      ? [{
-          label: `Ask AI for “${searchTerm.value}”`,
-          icon: 'i-lucide-bot',
-          ui: {
-            itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
-          },
-          onSelect
-        }]
-      : []
+    postFilter: (searchTerm: string, items: any[]) => {
+      if (!searchTerm) {
+        return []
+      }
+
+      return items
+    },
+    items: [{
+      label: 'Ask AI',
+      icon: 'i-lucide-bot',
+      ui: {
+        itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
+      },
+      onSelect
+    }]
   }, {
     id: 'framework',
     label: 'Framework',

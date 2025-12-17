@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -44,9 +44,6 @@ jobs:
 
       - name: Test
         run: pnpm run test run
-
-      - name: Test (vue)
-        run: pnpm run test:vue run
 
       - name: Publish
         run: ./scripts/release.sh

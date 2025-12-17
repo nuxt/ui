@@ -41,17 +41,7 @@ describe('Slider', () => {
 
       }
     })
-    expect(await axe(wrapper.element, {
-      rules: {
-        // "ARIA input fields must have an accessible name (aria-input-field-name)"
-
-        // Fix any of the following:
-        //   aria-label attribute does not exist or is empty
-        //   aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
-        //   Element has no title attribute
-        'aria-input-field-name': { enabled: false }
-      }
-    })).toHaveNoViolations()
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {

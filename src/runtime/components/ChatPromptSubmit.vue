@@ -2,12 +2,12 @@
 import type { ChatStatus } from 'ai'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt-submit'
-import type { ButtonProps, ButtonSlots, IconProps } from '../types'
+import type { ButtonProps, ButtonSlots, IconProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatPromptSubmit = ComponentConfig<typeof theme, AppConfig, 'chatPromptSubmit'>
 
-export interface ChatPromptSubmitProps extends Omit<ButtonProps, 'icon' | 'color' | 'variant'> {
+export interface ChatPromptSubmitProps extends Omit<ButtonProps, LinkPropsKeys | 'icon' | 'color' | 'variant'> {
   status?: ChatStatus
   /**
    * The icon displayed in the button when the status is `ready`.
@@ -78,8 +78,8 @@ export interface ChatPromptSubmitProps extends Omit<ButtonProps, 'icon' | 'color
 }
 
 export interface ChatPromptSubmitEmits {
-  stop: []
-  reload: []
+  stop: [event: MouseEvent]
+  reload: [event: MouseEvent]
 }
 </script>
 
@@ -123,27 +123,27 @@ const statusButtonProps = computed(() => ({
     icon: props.submittedIcon || appConfig.ui.icons.stop,
     color: props.submittedColor,
     variant: props.submittedVariant,
-    onClick() {
-      emits('stop')
+    onClick(e) {
+      emits('stop', e)
     }
   },
   streaming: {
     icon: props.streamingIcon || appConfig.ui.icons.stop,
     color: props.streamingColor,
     variant: props.streamingVariant,
-    onClick() {
-      emits('stop')
+    onClick(e) {
+      emits('stop', e)
     }
   },
   error: {
     icon: props.errorIcon || appConfig.ui.icons.reload,
     color: props.errorColor,
     variant: props.errorVariant,
-    onClick() {
-      emits('reload')
+    onClick(e) {
+      emits('reload', e)
     }
   }
-})[props.status])
+} satisfies { [key: string]: ButtonProps })[props.status])
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPromptSubmit || {}) })())

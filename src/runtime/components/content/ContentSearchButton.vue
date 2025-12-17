@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-search-button'
-import type { ButtonProps, ButtonSlots, IconProps, KbdProps, TooltipProps } from '../../types'
+import type { ButtonProps, ButtonSlots, IconProps, KbdProps, TooltipProps, LinkPropsKeys } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentSearchButton = ComponentConfig<typeof theme, AppConfig, 'contentSearchButton'>
 
-export interface ContentSearchButtonProps extends Omit<ButtonProps, 'icon' | 'label' | 'color' | 'variant'> {
+export interface ContentSearchButtonProps extends Omit<ButtonProps, LinkPropsKeys | 'icon' | 'label' | 'color' | 'variant'> {
   /**
    * The icon displayed in the button.
    * @defaultValue appConfig.ui.icons.search
@@ -84,8 +84,9 @@ const { t } = useLocale()
 const { open } = useContentSearch()
 const appConfig = useAppConfig() as ContentSearchButton['AppConfig']
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearchButton || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearchButton || {}) })({
+  collapsed: props.collapsed
+}))
 </script>
 
 <template>
@@ -98,7 +99,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
         ...buttonProps,
         ...(collapsed ? {
           'square': true,
-          'label': undefined,
           'aria-label': label || t('contentSearchButton.label')
         } : {}),
         ...$attrs
@@ -111,8 +111,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
         <slot :name="name" v-bind="slotData" />
       </template>
 
-      <template v-if="!collapsed" #trailing="{ ui: uiProxy }">
-        <div :class="ui.trailing({ class: props.ui?.trailing })">
+      <template #trailing="{ ui: uiProxy }">
+        <div data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :ui="uiProxy">
             <template v-if="kbds?.length">
               <UKbd v-for="(kbd, index) in kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />

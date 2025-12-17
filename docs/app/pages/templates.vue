@@ -18,9 +18,7 @@ defineOgImageComponent('Docs')
 <template>
   <div v-if="page">
     <UPageHero
-      :ui="{
-        container: 'relative lg:py-32'
-      }"
+      :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }"
     >
       <template #title>
         <MDC :value="page.hero.title" unwrap="p" cache-key="pro-templates-hero-title" />

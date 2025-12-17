@@ -63,6 +63,7 @@ describe('FileUpload', () => {
     ['with multiple', { props: { ...props, multiple: true } }],
     ['without dropzone', { props: { dropzone: false } }],
     ['without interactive', { props: { interactive: false } }],
+    ['without preview', { props: { ...props, preview: false } }],
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with fileIcon', { props: { ...props, fileIcon: 'i-lucide-house' } }],
@@ -97,23 +98,13 @@ describe('FileUpload', () => {
         label: 'Upload files',
         description: 'Select files to upload',
         required: true
+      },
+      attrs: {
+        'aria-label': 'Choose a file'
       }
     })
 
-    expect(await axe(wrapper.element, {
-      rules: {
-        // "Form elements must have labels (label)"
-        // Fix any of the following:
-        //  Element does not have an implicit (wrapped) <label>
-        //  Element does not have an explicit <label>
-        //  aria-label attribute does not exist or is empty
-        //  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
-        //  Element has no title attribute
-        //  Element has no placeholder attribute
-        //  Element's default semantics were not overridden with role="none" or role="presentation"
-        label: { enabled: false }
-      }
-    })).toHaveNoViolations()
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {

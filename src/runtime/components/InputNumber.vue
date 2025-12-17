@@ -2,7 +2,7 @@
 import type { NumberFieldRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-number'
-import type { ButtonProps, IconProps } from '../types'
+import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { InputHTMLAttributes } from '../types/html'
 import type { ModelModifiers } from '../types/input'
 import type { ComponentConfig } from '../types/tv'
@@ -33,7 +33,7 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue>
    * Configure the increment button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  increment?: boolean | ButtonProps
+  increment?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed to increment the value.
    * @defaultValue appConfig.ui.icons.plus
@@ -46,7 +46,7 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue>
    * Configure the decrement button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  decrement?: boolean | ButtonProps
+  decrement?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed to decrement the value.
    * @defaultValue appConfig.ui.icons.minus
@@ -58,11 +58,6 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue>
   autofocus?: boolean
   autofocusDelay?: number
   modelModifiers?: Pick<ModelModifiers<T>, 'optional'>
-  /**
-   * The locale to use for formatting and parsing numbers.
-   * @defaultValue UApp.locale.code
-   */
-  locale?: string
   class?: any
   ui?: InputNumber['slots']
 }
@@ -102,7 +97,7 @@ defineSlots<InputNumberSlots>()
 
 const modelValue = useVModel<InputNumberProps<T>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
 
-const { t, code: codeLocale } = useLocale()
+const { t } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'readonly'), emits)
@@ -110,7 +105,6 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue',
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps<T>>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps<T>>(props)
 
-const locale = computed(() => props.locale || codeLocale.value)
 const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber || {}) })({
@@ -169,10 +163,10 @@ defineExpose({
     v-bind="rootProps"
     :id="id"
     :model-value="modelValue"
+    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :name="name"
     :disabled="disabled"
-    :locale="locale"
     @update:model-value="onUpdate"
   >
     <NumberFieldInput
@@ -180,12 +174,13 @@ defineExpose({
       ref="inputRef"
       :placeholder="placeholder"
       :required="required"
+      data-slot="base"
       :class="ui.base({ class: props.ui?.base })"
       @blur="onBlur"
       @focus="emitFormFocus"
     />
 
-    <div v-if="!!increment" :class="ui.increment({ class: props.ui?.increment })">
+    <div v-if="!!increment" data-slot="increment" :class="ui.increment({ class: props.ui?.increment })">
       <NumberFieldIncrement as-child :disabled="disabled || incrementDisabled">
         <slot name="increment">
           <UButton
@@ -200,7 +195,7 @@ defineExpose({
       </NumberFieldIncrement>
     </div>
 
-    <div v-if="!!decrement" :class="ui.decrement({ class: props.ui?.decrement })">
+    <div v-if="!!decrement" data-slot="decrement" :class="ui.decrement({ class: props.ui?.decrement })">
       <NumberFieldDecrement as-child :disabled="disabled || decrementDisabled">
         <slot name="decrement">
           <UButton

@@ -108,8 +108,8 @@ export type DropdownMenuSlots<
   'item-label': (props: { item: T, active?: boolean, index: number }) => any
   'item-description': (props: { item: T, active?: boolean, index: number }) => any
   'item-trailing': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
+  'content-top': (props: { sub: boolean }) => any
+  'content-bottom': (props: { sub: boolean }) => any
 }
 & DynamicSlots<MergeTypes<T>, 'label' | 'description', { active?: boolean, index: number }>
 & DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean, index: number, ui: DropdownMenu['ui'] }>
@@ -171,7 +171,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
         <slot :name="(name as keyof DropdownMenuSlots<T>)" v-bind="slotData" />
       </template>
 
-      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
+      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
     </UDropdownMenuContent>
   </DropdownMenuRoot>
 </template>

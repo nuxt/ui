@@ -30,7 +30,7 @@ In this example, we use the [NavigationMenu](/docs/components/navigation-menu) c
 ::
 
 ::tip{to="/docs/components/footer-columns"}
-You can use the [FooterColumns](/docs/components/footer-columns) component to display a list of links inside the `top` slot.
+You can use the `FooterColumns` component to display a list of links inside the `top` slot.
 ::
 
 ## Examples
