@@ -118,20 +118,29 @@ const contentEvents = computed(() => {
     }, {} as Record<typeof events[number], (e: Event) => void>)
   }
 
-  if (props.scrollable) {
-    return {
-      // FIXME: This is a workaround to prevent the modal from closing when clicking on the scrollbar https://reka-ui.com/docs/components/dialog#scrollable-overlay but it's not working on Mac OS.
-      pointerDownOutside: (e: any) => {
-        const originalEvent = e.detail.originalEvent
-        const target = originalEvent.target as HTMLElement
-        if (originalEvent.offsetX > target.clientWidth || originalEvent.offsetY > target.clientHeight) {
-          e.preventDefault()
-        }
+  const handlePointerDownOutside = (e: any) => {
+    const originalEvent = e.detail.originalEvent
+    const target = originalEvent.target as HTMLElement
+
+    // Fix for touch devices: prevent modal from closing when the target is part of another overlay layer (toast, popover, etc.)
+    // or when the target is no longer in the DOM (e.g., toast was dismissed)
+    if (!target || !document.body.contains(target) || target.closest('[data-dismissable-layer]')) {
+      e.preventDefault()
+      return
+    }
+
+    // Scrollable mode: prevent closing when clicking on scrollbar
+    // FIXME: This is a workaround to prevent the modal from closing when clicking on the scrollbar https://reka-ui.com/docs/components/dialog#scrollable-overlay but it's not working on Mac OS.
+    if (props.scrollable) {
+      if (originalEvent.offsetX > target.clientWidth || originalEvent.offsetY > target.clientHeight) {
+        e.preventDefault()
       }
     }
   }
 
-  return {}
+  return {
+    pointerDownOutside: handlePointerDownOutside
+  }
 })
 
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
