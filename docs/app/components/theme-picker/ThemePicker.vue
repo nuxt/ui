@@ -45,7 +45,7 @@ const radius = computed({
   }
 })
 
-const fonts = ['Public Sans', 'DM Sans', 'Geist', 'Inter', 'Poppins', 'Roboto']
+const fonts = ['Public Sans', 'DM Sans', 'Geist', 'Inter', 'Poppins', 'Outfit', 'Raleway']
 const font = computed({
   get() {
     return appConfig.theme.font
