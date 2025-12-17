@@ -56,7 +56,7 @@ watch(file, async (newFile) => {
         <UAvatar
           :icon="loading ? 'i-lucide-loader-circle' : 'i-lucide-image'"
           size="xl"
-          :class="[loading && 'animate-spin']"
+          :ui="{ icon: [loading && 'animate-spin'] }"
         />
       </template>
     </UFileUpload>

@@ -23,6 +23,7 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
+const { track } = useAnalytics()
 
 const camelName = computed(() => camelCase(props.slug ?? route.path.split('/').pop() ?? ''))
 const componentTheme = computed(() => ((props.prose ? theme.prose : theme) as any)[camelName.value])
@@ -136,6 +137,7 @@ function getSlotRenderLocation(slotName: string): 'container' | 'portal' | 'none
 // Initialize position when popover opens, clear when closes
 watch(open, (isOpen) => {
   if (isOpen) {
+    track('Theme Visualizer Opened', { component: camelName.value })
     initializePosition()
   } else {
     clearHighlight()

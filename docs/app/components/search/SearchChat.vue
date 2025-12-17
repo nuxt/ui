@@ -20,6 +20,7 @@ const emits = defineEmits<{
 const input = ref('')
 
 const toast = useToast()
+const { track } = useAnalytics()
 
 const chat = new Chat({
   messages: messages.value,
@@ -45,6 +46,8 @@ function onSubmit() {
   if (!input.value.trim()) {
     return
   }
+
+  track('AI Chat Message Sent')
 
   chat.sendMessage({ text: input.value })
 

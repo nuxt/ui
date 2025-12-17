@@ -1,29 +1,16 @@
 import { ref, onScopeDispose } from 'vue'
 import type { Ref, Plugin as VuePlugin } from 'vue'
 import { createHooks } from 'hookable'
-import { usePage } from '@inertiajs/vue3'
 import { useColorMode as useColorModeVueUse } from '@vueuse/core'
 import appConfig from '#build/app.config'
 import type { NuxtApp } from '#app'
 
 export { useHead } from '@unhead/vue'
 
-export { useAppConfig } from '../vue/composables/useAppConfig'
-export { defineShortcuts } from '../composables/defineShortcuts'
-export { defineLocale } from '../composables/defineLocale'
-export { useLocale } from '../composables/useLocale'
-
-export const useRoute = () => {
-  const page = usePage()
-
-  return {
-    fullPath: page.url
-  }
-}
-
-export const useRouter = () => {
-
-}
+export { useAppConfig } from '../composables/useAppConfig'
+export { defineShortcuts } from '../../composables/defineShortcuts'
+export { defineLocale } from '../../composables/defineLocale'
+export { useLocale } from '../../composables/useLocale'
 
 export const clearError = () => {
 
@@ -78,7 +65,7 @@ const hooks = createHooks()
 export function useNuxtApp() {
   return {
     isHydrating: true,
-    payload: { serverRendered: typeof window === 'undefined' },
+    payload: { serverRendered: import.meta.env.SSR || false },
     hooks,
     hook: hooks.hook
   }
