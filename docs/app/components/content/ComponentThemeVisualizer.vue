@@ -156,9 +156,10 @@ watch(open, (isOpen) => {
         :icon="open ? 'i-lucide-x' : 'i-lucide-scan-eye'"
         color="neutral"
         variant="outline"
+        label="Slots"
         size="sm"
-        class="absolute -top-[11px] -right-[11px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
-        :class="[open && 'lg:opacity-100 bg-elevated']"
+        class="absolute -top-[11px] -right-[11px] z-1 rounded-full ring-muted transition-opacity duration-200"
+        :class="[open && 'bg-elevated']"
       />
 
       <template #content>
