@@ -2,8 +2,8 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { RouterLinkProps } from 'vue-router'
 import theme from '#build/ui/link'
-import type { ButtonHTMLAttributes, AnchorHTMLAttributes } from '../../types/html'
-import type { ComponentConfig } from '../../types/tv'
+import type { ButtonHTMLAttributes, AnchorHTMLAttributes } from '../../../types/html'
+import type { ComponentConfig } from '../../../types/tv'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
 
@@ -69,10 +69,10 @@ import { reactiveOmit } from '@vueuse/core'
 import { hasProtocol } from 'ufo'
 import { useRoute, RouterLink } from 'vue-router'
 import { useAppConfig } from '#imports'
-import { tv } from '../../utils/tv'
-import { mergeClasses } from '../../utils'
-import { isPartiallyEqual } from '../../utils/link'
-import ULinkBase from '../../components/LinkBase.vue'
+import { tv } from '../../../utils/tv'
+import { mergeClasses } from '../../../utils'
+import { isPartiallyEqual } from '../../../utils/link'
+import ULinkBase from '../../../components/LinkBase.vue'
 
 defineOptions({ inheritAttrs: false })
 

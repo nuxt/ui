@@ -75,11 +75,6 @@ export const runtimeDir = normalize(fileURLToPath(new URL('./runtime', import.me
 export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options = {}, meta) => {
   const options = defu(_options, { fonts: false }, defaultOptions)
 
-  // Handle backwards compatibility and deprecation warning
-  if (options.inertia === true && options.router === undefined) {
-    console.warn('[Nuxt UI] The `inertia` option is deprecated. Use `router: \'inertia\'` instead.')
-  }
-
   options.theme = options.theme || {}
   options.theme.colors = resolveColors(options.theme.colors)
 

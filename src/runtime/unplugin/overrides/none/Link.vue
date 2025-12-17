@@ -1,27 +1,20 @@
 <script lang="ts">
+import type { ButtonHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { InertiaLinkProps } from '@inertiajs/vue3'
 import theme from '#build/ui/link'
-import type { ButtonHTMLAttributes, AnchorHTMLAttributes } from '../../types/html'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../../types/tv'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
 
-export interface LinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onClick'>>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
-  /**
-   * The element or component this component should render as when not a link.
-   * @defaultValue 'button'
-   */
-  as?: any
-  activeClass?: string
+interface BaseLinkProps {
   /**
    * Route Location the link should navigate to when clicked on.
    */
-  to?: string // need to manually type to avoid breaking typedPages
+  to?: string
   /**
    * An alias for `to`. If used with `to`, `href` will be ignored
    */
-  href?: LinkProps['to']
+  href?: string
   /**
    * Forces the link to be considered as external (true) or internal (false). This is helpful to handle edge-cases
    */
@@ -38,12 +31,14 @@ export interface LinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onCl
    * If set to true, no rel attribute will be added to the link
    */
   noRel?: boolean
+}
+
+export interface LinkProps extends BaseLinkProps {
   /**
-   * Value passed to the attribute `aria-current` when the link is exact active.
-   *
-   * @defaultValue `'page'`
+   * The element or component this component should render as when not a link.
+   * @defaultValue 'button'
    */
-  ariaCurrentValue?: 'page' | 'step' | 'location' | 'date' | 'time' | 'true' | 'false'
+  as?: any
   /**
    * The type of the button when not a link.
    * @defaultValue 'button'
@@ -54,8 +49,16 @@ export interface LinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onCl
   active?: boolean
   /** Will only be active if the current route is an exact match. */
   exact?: boolean
+  /** Allows controlling how the current route query sets the link as active. */
+  exactQuery?: boolean | 'partial'
+  /** Will only be active if the current route hash is an exact match. */
+  exactHash?: boolean
   /** The class to apply when the link is inactive. */
   inactiveClass?: string
+  /** The class to apply when the link is active. */
+  activeClass?: string
+  /** The value of the `aria-current` attribute when the link is active. */
+  ariaCurrentValue?: string
   custom?: boolean
   /** When `true`, only styles from `class`, `activeClass`, and `inactiveClass` will be applied. */
   raw?: boolean
@@ -70,14 +73,11 @@ export interface LinkSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { defu } from 'defu'
-import { useForwardProps } from 'reka-ui'
-import { reactiveOmit } from '@vueuse/core'
-import { usePage } from '@inertiajs/vue3'
 import { hasProtocol } from 'ufo'
 import { useAppConfig } from '#imports'
-import { tv } from '../../utils/tv'
-import { mergeClasses } from '../../utils'
-import ULinkBase from '../../components/LinkBase.vue'
+import { mergeClasses } from '../../../utils'
+import { tv } from '../../../utils/tv'
+import ULinkBase from '../../../components/LinkBase.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -89,11 +89,7 @@ const props = withDefaults(defineProps<LinkProps>(), {
 })
 defineSlots<LinkSlots>()
 
-const page = usePage()
-
 const appConfig = useAppConfig() as Link['AppConfig']
-
-const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'noRel'))
 
 const ui = computed(() => tv({
   extend: tv(theme),
@@ -122,45 +118,12 @@ const isExternal = computed(() => {
     return false
   }
 
-  return typeof href.value === 'string' && hasProtocol(href.value, { acceptRelative: true })
-})
-
-const hasTarget = computed(() => !!props.target && props.target !== '_self')
-
-const rel = computed(() => {
-  // If noRel is explicitly set, return null
-  if (props.noRel) {
-    return null
-  }
-
-  // If rel is explicitly set, use it
-  if (props.rel !== undefined) {
-    return props.rel || null
-  }
-
-  // Default to "noopener noreferrer" for external links or links with target
-  if (isExternal.value || hasTarget.value) {
-    return 'noopener noreferrer'
-  }
-
-  return null
+  return hasProtocol(href.value, { acceptRelative: true })
 })
 
 const isLinkActive = computed(() => {
   if (props.active !== undefined) {
     return props.active
-  }
-
-  if (!href.value) {
-    return false
-  }
-
-  if (props.exact && page.url === href.value) {
-    return true
-  }
-
-  if (!props.exact && page.url.startsWith(href.value)) {
-    return true
   }
 
   return false
@@ -175,6 +138,22 @@ const linkClass = computed(() => {
 
   return ui.value({ class: props.class, active, disabled: props.disabled })
 })
+
+const linkRel = computed(() => {
+  if (props.noRel) {
+    return null
+  }
+
+  if (props.rel) {
+    return props.rel
+  }
+
+  if (isExternal.value) {
+    return 'noopener noreferrer'
+  }
+
+  return null
+})
 </script>
 
 <template>
@@ -182,15 +161,15 @@ const linkClass = computed(() => {
     <slot
       v-bind="{
         ...$attrs,
-        ...routerLinkProps,
         as,
         type,
         disabled,
-        href,
-        rel,
-        target,
-        active: isLinkActive,
-        isExternal
+        href: href,
+        navigate: undefined,
+        rel: linkRel,
+        target: target || (isExternal ? '_blank' : undefined),
+        isExternal,
+        active: isLinkActive
       }"
     />
   </template>
@@ -198,13 +177,13 @@ const linkClass = computed(() => {
     v-else
     v-bind="{
       ...$attrs,
-      ...routerLinkProps,
       as,
       type,
       disabled,
-      href,
-      rel,
-      target,
+      href: href,
+      navigate: undefined,
+      rel: linkRel,
+      target: target || (isExternal ? '_blank' : undefined),
       isExternal
     }"
     :class="linkClass"

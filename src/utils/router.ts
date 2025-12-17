@@ -1,6 +1,6 @@
 import type { NuxtUIOptions } from '../unplugin'
 
-export type RouterMode = 'vue' | 'inertia' | 'none'
+export type RouterMode = 'vue-router' | 'inertia' | 'none'
 
 export function resolveRouterMode(options: NuxtUIOptions): RouterMode {
   if (options.router === false) {
@@ -16,5 +16,5 @@ export function resolveRouterMode(options: NuxtUIOptions): RouterMode {
     return 'inertia'
   }
 
-  return 'vue'
+  return 'vue-router'
 }

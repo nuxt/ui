@@ -7,51 +7,10 @@ import type { NuxtApp } from '#app'
 
 export { useHead } from '@unhead/vue'
 
-export { useAppConfig } from '../vue/composables/useAppConfig'
-export { defineShortcuts } from '../composables/defineShortcuts'
-export { defineLocale } from '../composables/defineLocale'
-export { useLocale } from '../composables/useLocale'
-
-export const useRoute = () => {
-  return {
-    fullPath: '/',
-    path: '/',
-    name: null,
-    params: {},
-    query: {},
-    hash: '',
-    meta: {},
-    matched: [],
-    redirectedFrom: undefined
-  }
-}
-
-export const useRouter = () => {
-  return {
-    push: () => Promise.resolve(),
-    replace: () => Promise.resolve(),
-    go: () => {},
-    back: () => {},
-    forward: () => {},
-    beforeEach: () => () => {},
-    beforeResolve: () => () => {},
-    afterEach: () => () => {},
-    onError: () => () => {},
-    isReady: () => Promise.resolve(true),
-    currentRoute: ref({
-      fullPath: '/',
-      path: '/',
-      name: null,
-      params: {},
-      query: {},
-      hash: '',
-      meta: {},
-      matched: [],
-      redirectedFrom: undefined
-    }),
-    options: {}
-  }
-}
+export { useAppConfig } from '../composables/useAppConfig'
+export { defineShortcuts } from '../../composables/defineShortcuts'
+export { defineLocale } from '../../composables/defineLocale'
+export { useLocale } from '../../composables/useLocale'
 
 export const clearError = () => {
 
@@ -106,7 +65,7 @@ const hooks = createHooks()
 export function useNuxtApp() {
   return {
     isHydrating: true,
-    payload: { serverRendered: false },
+    payload: { serverRendered: import.meta.env.SSR || false },
     hooks,
     hook: hooks.hook
   }
