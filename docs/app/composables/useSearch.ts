@@ -3,6 +3,7 @@ import type { UIMessage } from 'ai'
 export function useSearch() {
   const route = useRoute()
   const { frameworks } = useFrameworks()
+  const { track } = useAnalytics()
 
   const chat = ref(false)
   const fullscreen = ref(false)
@@ -11,6 +12,8 @@ export function useSearch() {
 
   function onSelect(e: any) {
     e.preventDefault()
+
+    track('AI Chat Opened', { hasSearchTerm: !!searchTerm.value })
 
     messages.value = searchTerm.value
       ? [{
@@ -85,9 +88,15 @@ export function useSearch() {
     icon: 'i-lucide-users',
     to: '/team'
   }, {
+    label: 'Blog',
+    description: 'Learn how to build things with Nuxt UI.',
+    icon: 'i-lucide-newspaper',
+    to: '/blog',
+    active: route.path.startsWith('/blog')
+  }, {
     label: 'Releases',
     description: 'Stay up to date with the newest features, enhancements, and fixes for Nuxt UI.',
-    icon: 'i-lucide-newspaper',
+    icon: 'i-lucide-rocket',
     to: '/releases'
   }, {
     label: 'GitHub',

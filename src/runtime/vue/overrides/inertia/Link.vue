@@ -1,18 +1,23 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { RouterLinkProps } from 'vue-router'
+import type { InertiaLinkProps } from '@inertiajs/vue3'
 import theme from '#build/ui/link'
-import type { ButtonHTMLAttributes, AnchorHTMLAttributes } from '../../types/html'
-import type { ComponentConfig } from '../../types/tv'
+import type { ButtonHTMLAttributes, AnchorHTMLAttributes } from '../../../types/html'
+import type { ComponentConfig } from '../../../types/tv'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
 
-export interface LinkProps extends Partial<Omit<RouterLinkProps, 'custom'>>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
+export interface LinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onClick'>>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
   /**
    * The element or component this component should render as when not a link.
    * @defaultValue 'button'
    */
   as?: any
+  activeClass?: string
+  /**
+   * Route Location the link should navigate to when clicked on.
+   */
+  to?: string // need to manually type to avoid breaking typedPages
   /**
    * An alias for `to`. If used with `to`, `href` will be ignored
    */
@@ -34,6 +39,12 @@ export interface LinkProps extends Partial<Omit<RouterLinkProps, 'custom'>>, /**
    */
   noRel?: boolean
   /**
+   * Value passed to the attribute `aria-current` when the link is exact active.
+   *
+   * @defaultValue `'page'`
+   */
+  ariaCurrentValue?: 'page' | 'step' | 'location' | 'date' | 'time' | 'true' | 'false'
+  /**
    * The type of the button when not a link.
    * @defaultValue 'button'
    */
@@ -43,10 +54,6 @@ export interface LinkProps extends Partial<Omit<RouterLinkProps, 'custom'>>, /**
   active?: boolean
   /** Will only be active if the current route is an exact match. */
   exact?: boolean
-  /** Will only be active if the current route query is an exact match. */
-  exactQuery?: boolean | 'partial'
-  /** Will only be active if the current route hash is an exact match. */
-  exactHash?: boolean
   /** The class to apply when the link is inactive. */
   inactiveClass?: string
   custom?: boolean
@@ -63,16 +70,14 @@ export interface LinkSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { defu } from 'defu'
-import { isEqual } from 'ohash/utils'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
+import { usePage } from '@inertiajs/vue3'
 import { hasProtocol } from 'ufo'
-import { useRoute, RouterLink } from 'vue-router'
 import { useAppConfig } from '#imports'
-import { tv } from '../../utils/tv'
-import { mergeClasses } from '../../utils'
-import { isPartiallyEqual } from '../../utils/link'
-import ULinkBase from '../../components/LinkBase.vue'
+import { tv } from '../../../utils/tv'
+import { mergeClasses } from '../../../utils'
+import ULinkBase from './LinkBase.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -84,11 +89,11 @@ const props = withDefaults(defineProps<LinkProps>(), {
 })
 defineSlots<LinkSlots>()
 
-const route = useRoute()
+const page = usePage()
 
 const appConfig = useAppConfig() as Link['AppConfig']
 
-const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'noRel'))
+const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'noRel'))
 
 const ui = computed(() => tv({
   extend: tv(theme),
@@ -102,18 +107,22 @@ const ui = computed(() => tv({
   }, appConfig.ui?.link || {})
 }))
 
-const to = computed(() => props.to ?? props.href)
+const href = computed(() => props.to ?? props.href)
 
 const isExternal = computed(() => {
+  if (props.target === '_blank') {
+    return true
+  }
+
   if (props.external) {
     return true
   }
 
-  if (!to.value) {
+  if (!href.value) {
     return false
   }
 
-  return typeof to.value === 'string' && hasProtocol(to.value, { acceptRelative: true })
+  return typeof href.value === 'string' && hasProtocol(href.value, { acceptRelative: true })
 })
 
 const hasTarget = computed(() => !!props.target && props.target !== '_self')
@@ -137,120 +146,69 @@ const rel = computed(() => {
   return null
 })
 
-function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
+const isLinkActive = computed(() => {
   if (props.active !== undefined) {
     return props.active
   }
 
-  if (!to.value) {
+  if (!href.value) {
     return false
   }
 
-  if (props.exactQuery === 'partial') {
-    if (!isPartiallyEqual(linkRoute.query, route.query)) return false
-  } else if (props.exactQuery === true) {
-    if (!isEqual(linkRoute.query, route.query)) return false
-  }
-
-  if (props.exactHash && linkRoute.hash !== route.hash) {
-    return false
-  }
-
-  if (props.exact && isExactActive) {
+  if (props.exact && page.url === href.value) {
     return true
   }
 
-  if (!props.exact && isActive) {
+  if (!props.exact && page.url.startsWith(href.value)) {
     return true
   }
 
   return false
-}
+})
 
-function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
-  const active = isLinkActive({ route, isActive, isExactActive })
+const linkClass = computed(() => {
+  const active = isLinkActive.value
 
   if (props.raw) {
     return [props.class, active ? props.activeClass : props.inactiveClass]
   }
 
   return ui.value({ class: props.class, active, disabled: props.disabled })
-}
+})
 </script>
 
-<!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <template v-if="!isExternal && !!to">
-    <RouterLink v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive }" v-bind="routerLinkProps" :to="to" custom>
-      <template v-if="custom">
-        <slot
-          v-bind="{
-            ...$attrs,
-            ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
-            as,
-            type,
-            disabled,
-            href,
-            navigate,
-            rel,
-            target,
-            isExternal,
-            active: isLinkActive({ route: linkRoute, isActive, isExactActive })
-          }"
-        />
-      </template>
-      <ULinkBase
-        v-else
-        v-bind="{
-          ...$attrs,
-          ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
-          as,
-          type,
-          disabled,
-          href,
-          navigate,
-          rel,
-          target,
-          isExternal
-        }"
-        :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
-      >
-        <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
-      </ULinkBase>
-    </RouterLink>
-  </template>
-
-  <template v-else>
-    <template v-if="custom">
-      <slot
-        v-bind="{
-          ...$attrs,
-          as,
-          type,
-          disabled,
-          href: to,
-          rel,
-          target,
-          active,
-          isExternal
-        }"
-      />
-    </template>
-    <ULinkBase
-      v-else
+  <template v-if="custom">
+    <slot
       v-bind="{
         ...$attrs,
+        ...routerLinkProps,
         as,
         type,
         disabled,
-        href: (to as string),
+        href,
         rel,
         target,
+        active: isLinkActive,
         isExternal
       }"
-      :class="resolveLinkClass()"
-    >
-      <slot :active="active" />
-    </ULinkBase>
+    />
   </template>
+  <ULinkBase
+    v-else
+    v-bind="{
+      ...$attrs,
+      ...routerLinkProps,
+      as,
+      type,
+      disabled,
+      href,
+      rel,
+      target,
+      isExternal
+    }"
+    :class="linkClass"
+  >
+    <slot :active="isLinkActive" />
+  </ULinkBase>
 </template>

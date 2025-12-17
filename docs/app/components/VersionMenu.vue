@@ -1,11 +1,24 @@
 <script setup lang="ts">
 const config = useRuntimeConfig().public
+const { track } = useAnalytics()
 
 const items = computed(() => {
   return [
     { label: `v${config.version}`, active: true, color: 'primary' as const, checked: true, type: 'checkbox' as const },
-    { label: 'v3.x', to: 'https://ui3.nuxt.com' },
-    { label: 'v2.x', to: 'https://ui2.nuxt.com' }
+    {
+      label: 'v3.x',
+      to: 'https://ui3.nuxt.com',
+      onSelect() {
+        track('Version Switched', { version: 'v3.x' })
+      }
+    },
+    {
+      label: 'v2.x',
+      to: 'https://ui2.nuxt.com',
+      onSelect() {
+        track('Version Switched', { version: 'v2.x' })
+      }
+    }
   ]
 })
 </script>

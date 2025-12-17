@@ -29,6 +29,11 @@ export interface SlideoverProps extends DialogRootProps {
    */
   side?: Slideover['variants']['side']
   /**
+   * Whether to inset the slideover from the edges.
+   * @defaultValue false
+   */
+  inset?: boolean
+  /**
    * Render the slideover in a portal.
    * @defaultValue true
    */
@@ -119,7 +124,8 @@ const contentEvents = computed(() => {
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover || {}) })({
   transition: props.transition,
-  side: props.side
+  side: props.side,
+  inset: props.inset
 }))
 </script>
 

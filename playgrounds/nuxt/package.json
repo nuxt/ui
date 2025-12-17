@@ -10,16 +10,16 @@
   },
   "dependencies": {
     "@ai-sdk/gateway": "^2.0.21",
-    "@ai-sdk/vue": "^2.0.113",
+    "@ai-sdk/vue": "^2.0.114",
     "@iconify-json/lucide": "^1.2.81",
     "@iconify-json/simple-icons": "^1.2.63",
-    "@internationalized/date": "^3.10.0",
+    "@internationalized/date": "^3.10.1",
     "@nuxt/ui": "workspace:*",
     "@tiptap/extension-emoji": "3.13.0",
     "@tiptap/extension-text-align": "3.13.0",
-    "ai": "^5.0.113",
+    "ai": "^5.0.114",
     "nuxt": "^4.2.2",
-    "zod": "^4.2.0"
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "typescript": "^5.8.3",
