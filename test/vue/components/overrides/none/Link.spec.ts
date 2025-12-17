@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import LinkNoRouter from '../../src/runtime/no-router/components/Link.vue'
-import type { LinkProps, LinkSlots } from '../../src/runtime/no-router/components/Link.vue'
-import ComponentRender from '../component-render'
+import LinkNoRouter from '../../../../../src/runtime/vue/overrides/none/Link.vue'
+import type { LinkProps, LinkSlots } from '../../../../../src/runtime/vue/overrides/none/Link.vue'
+import ComponentRender from '../../../../component-render'
 
-describe('Link (No Router)', () => {
+describe('Link (router: `none`)', () => {
   it.each([
     // Basic props
     ['with href', { props: { href: '/test' } }],
