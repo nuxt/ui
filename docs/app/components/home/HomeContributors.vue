@@ -100,7 +100,7 @@ const { width } = useElementSize(el)
 }
 
 .dark .circle:after {
-  --highlight-color: var(--color-white);
+  --highlight-color: white;
 }
 
 .animation-paused.circle:after,

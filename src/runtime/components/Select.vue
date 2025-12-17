@@ -4,12 +4,15 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { ModelModifiers } from '../types/input'
+import type { ButtonHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>
 
 export type SelectValue = AcceptableValue
+
 export type SelectItem = SelectValue | {
   label?: string
   description?: string
@@ -32,7 +35,7 @@ export type SelectItem = SelectValue | {
   [key: string]: any
 }
 
-export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
+export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -95,6 +98,7 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   defaultValue?: GetModelValue<T, VK, M>
   /** The controlled value of the Select. Can be bind as `v-model`. */
   modelValue?: GetModelValue<T, VK, M>
+  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
@@ -133,7 +137,7 @@ export interface SelectSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false">
-import { ref, computed, onMounted, toRef } from 'vue'
+import { useTemplateRef, computed, onMounted, toRef } from 'vue'
 import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
@@ -142,7 +146,7 @@ import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { usePortal } from '../composables/usePortal'
-import { get, getDisplayValue, isArrayOfArray } from '../utils'
+import { get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -212,7 +216,7 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
   })
 }
 
-const triggerRef = ref<InstanceType<typeof SelectTrigger> | null>(null)
+const triggerRef = useTemplateRef('triggerRef')
 
 function autoFocus() {
   if (props.autofocus) {
@@ -229,6 +233,22 @@ onMounted(() => {
 })
 
 function onUpdate(value: any) {
+  if (props.modelModifiers?.trim) {
+    value = value?.trim() ?? null
+  }
+
+  if (props.modelModifiers?.number) {
+    value = looseToNumber(value)
+  }
+
+  if (props.modelModifiers?.nullable) {
+    value ??= null
+  }
+
+  if (props.modelModifiers?.optional) {
+    value ??= undefined
+  }
+
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
@@ -253,7 +273,7 @@ function isSelectItem(item: SelectItem): item is Exclude<SelectItem, SelectValue
 }
 
 defineExpose({
-  triggerRef
+  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement)
 })
 </script>
 
@@ -273,49 +293,51 @@ defineExpose({
     <SelectTrigger
       :id="id"
       ref="triggerRef"
+      data-slot="base"
       :class="ui.base({ class: [props.ui?.base, props.class] })"
       v-bind="{ ...$attrs, ...ariaAttrs }"
     >
-      <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+      <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
-          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-          <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+          <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
       <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
         <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
-          <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" :class="ui.value({ class: props.ui?.value })">
+          <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" data-slot="value" :class="ui.value({ class: props.ui?.value })">
             {{ displayedModelValue }}
           </span>
-          <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
+          <span v-else data-slot="placeholder" :class="ui.placeholder({ class: props.ui?.placeholder })">
             {{ placeholder ?? '&nbsp;' }}
           </span>
         </template>
       </slot>
 
-      <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+      <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
         <slot name="trailing" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
-          <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+          <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </span>
     </SelectTrigger>
 
     <SelectPortal v-bind="portalProps">
-      <SelectContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
+      <SelectContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <slot name="content-top" />
 
-        <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
-          <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
+        <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+          <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
+              <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
                 {{ get(item, props.labelKey as string) }}
               </SelectLabel>
 
-              <SelectSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
+              <SelectSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" data-slot="separator" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
 
               <RSelectItem
                 v-else
+                data-slot="item"
                 :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
                 :disabled="isSelectItem(item) && item.disabled"
                 :value="isSelectItem(item) ? get(item, props.valueKey as string) : item"
@@ -323,37 +345,38 @@ defineExpose({
               >
                 <slot name="item" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
                   <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
-                    <UIcon v-if="isSelectItem(item) && item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
-                    <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
+                    <UIcon v-if="isSelectItem(item) && item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
+                    <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
                     <UChip
                       v-else-if="isSelectItem(item) && item.chip"
                       :size="((item.ui?.itemLeadingChipSize || props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
                       inset
                       standalone
                       v-bind="item.chip"
+                      data-slot="itemLeadingChip"
                       :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, item.ui?.itemLeadingChip] })"
                     />
                   </slot>
 
-                  <span :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })">
-                    <SelectItemText :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
+                  <span data-slot="itemWrapper" :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })">
+                    <SelectItemText data-slot="itemLabel" :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
                       <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
                         {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
                       </slot>
                     </SelectItemText>
 
-                    <span v-if="isSelectItem(item) && (get(item, props.descriptionKey as string) || !!slots['item-description'])" :class="ui.itemDescription({ class: [props.ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })">
+                    <span v-if="isSelectItem(item) && (get(item, props.descriptionKey as string) || !!slots['item-description'])" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })">
                       <slot name="item-description" :item="(item as NestedItem<T>)" :index="index">
                         {{ get(item, props.descriptionKey as string) }}
                       </slot>
                     </span>
                   </span>
 
-                  <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
+                  <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
                     <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" :ui="ui" />
 
                     <SelectItemIndicator as-child>
-                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
+                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
                     </SelectItemIndicator>
                   </span>
                 </slot>
@@ -364,7 +387,7 @@ defineExpose({
 
         <slot name="content-bottom" />
 
-        <SelectArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
+        <SelectArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
       </SelectContent>
     </SelectPortal>
   </SelectRoot>

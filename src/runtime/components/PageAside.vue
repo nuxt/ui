@@ -40,14 +40,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageAside ||
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.top" :class="ui.top({ class: props.ui?.top })">
-        <div :class="ui.topHeader({ class: props.ui?.topHeader })" />
-        <div :class="ui.topBody({ class: props.ui?.topBody })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: props.ui?.top })">
+        <div data-slot="topHeader" :class="ui.topHeader({ class: props.ui?.topHeader })" />
+        <div data-slot="topBody" :class="ui.topBody({ class: props.ui?.topBody })">
           <slot name="top" />
         </div>
-        <div :class="ui.topFooter({ class: props.ui?.topFooter })" />
+        <div data-slot="topFooter" :class="ui.topFooter({ class: props.ui?.topFooter })" />
       </div>
 
       <slot />

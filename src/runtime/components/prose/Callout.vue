@@ -51,7 +51,6 @@ const target = computed(() => props.target || (!!props.to && typeof props.to ===
       v-if="to"
       v-bind="{ to, target, ...$attrs }"
       class="focus:outline-none"
-      tabindex="-1"
       raw
     >
       <span class="absolute inset-0" aria-hidden="true" />

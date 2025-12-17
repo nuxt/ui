@@ -69,31 +69,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-for="i in repeat" :key="i" :class="ui.content({ class: [props.ui?.content] })">
+  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-for="i in repeat" :key="i" data-slot="content" :class="ui.content({ class: [props.ui?.content] })">
       <slot />
     </div>
   </Primitive>
 </template>
-
-<style>
-@keyframes marquee {
-  from { transform: translate3d(0, 0, 0); will-change: transform; }
-  to { transform: translate3d(calc(-100% - var(--gap)), 0, 0); will-change: transform; }
-}
-
-@keyframes marquee-rtl {
-  from { transform: translate3d(0, 0, 0); will-change: transform; }
-  to { transform: translate3d(calc(100% + var(--gap)), 0, 0); will-change: transform; }
-}
-
-@keyframes marquee-vertical {
-  from { transform: translate3d(0, 0, 0); will-change: transform; }
-  to { transform: translate3d(0, calc(-100% - var(--gap)), 0); will-change: transform; }
-}
-
-@keyframes marquee-vertical-rtl {
-  from { transform: translate3d(0, calc(-100% - var(--gap)), 0); will-change: transform; }
-  to { transform: translate3d(0, calc(-100% * var(--gap)), 0); will-change: transform; }
-}
-</style>

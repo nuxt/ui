@@ -58,7 +58,7 @@ props:
 Use the `interactive` prop to enable/disable the clickable area. Defaults to `true`.
 
 ::tip{to="#with-files-bottom-slot"}
-This can be useful when adding a [`Button`](/docs/components/button) component in the `#actions` slot.
+This can be useful when adding a `Button` component in the `#actions` slot.
 ::
 
 ::component-code
@@ -322,6 +322,10 @@ name: 'file-upload-files-top-slot-example'
 ### Props
 
 :component-props
+
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+This component also supports all native `<input>` HTML attributes.
+::
 
 ### Slots
 

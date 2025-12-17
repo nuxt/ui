@@ -96,6 +96,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :key="component.path"
             class="relative group/link aspect-video border-default w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
             :to="component.path"
+            tabindex="-1"
           >
             <UColorModeImage
               :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
@@ -125,6 +126,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :key="component.path"
             class="relative group/link aspect-video border-default w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
             :to="component.path"
+            tabindex="-1"
           >
             <UColorModeImage
               :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
@@ -156,7 +158,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           :in-view-options="{ once: true }"
           class="flex items-start gap-x-3 relative group"
         >
-          <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10">
+          <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10 focus-visible:outline-primary">
             <span class="sr-only">Go to {{ feature.title }}</span>
           </NuxtLink>
 
@@ -257,6 +259,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           target="_blank"
           variant="subtle"
           class="group rounded-md"
+          tabindex="-1"
           :ui="{
             container: 'p-4 sm:p-4',
             wrapper: 'flex-row items-center gap-1.5',
@@ -288,7 +291,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
     >
       <template #features>
         <li>
-          <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0 group">
+          <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0 group focus-visible:outline-primary">
             <p class="text-4xl font-semibold truncate text-highlighted group-hover:text-primary transition-colors">
               {{ format(module?.stats?.downloads ?? 0) }}+
             </p>
@@ -297,7 +300,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </li>
 
         <li>
-          <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0 group">
+          <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0 group focus-visible:outline-primary">
             <p class="text-4xl font-semibold text-highlighted truncate group-hover:text-primary transition-colors">
               {{ format(module?.stats?.stars ?? 0) }}+
             </p>
@@ -306,7 +309,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </li>
 
         <li>
-          <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0 group">
+          <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0 group focus-visible:outline-primary">
             <p class="text-4xl font-semibold text-highlighted truncate group-hover:text-primary transition-colors">
               250+
             </p>

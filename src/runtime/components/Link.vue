@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { ButtonHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { RouterLinkProps, RouteLocationRaw } from 'vue-router'
 import theme from '#build/ui/link'
+import type { ButtonHTMLAttributes, AnchorHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
@@ -11,7 +11,7 @@ interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
   /**
    * Route Location the link should navigate to when clicked on.
    */
-  to?: RouteLocationRaw // need to manually type to avoid breaking typedPages
+  to?: RouteLocationRaw
   /**
    * An alias for `to`. If used with `to`, `href` will be ignored
    */
@@ -51,9 +51,14 @@ interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
    * Escape hatch to disable `prefetch` attribute.
    */
   noPrefetch?: boolean
+  /**
+   * An option to either add or remove trailing slashes in the `href` for this specific link.
+   * Overrides the global `trailingSlash` option if provided.
+   */
+  trailingSlash?: 'append' | 'remove'
 }
 
-export interface LinkProps extends NuxtLinkProps {
+export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
   /**
    * The element or component this component should render as when not a link.
    * @defaultValue 'button'
@@ -80,6 +85,12 @@ export interface LinkProps extends NuxtLinkProps {
   raw?: boolean
   class?: any
 }
+
+/**
+ * Link-related props that can be omitted from ButtonProps when link functionality is not needed.
+ * Use this with `Omit<ButtonProps, LinkPropsKeys>` in components where buttons should not act as links.
+ */
+export type LinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media'
 
 export interface LinkSlots {
   default(props: { active: boolean }): any

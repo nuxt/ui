@@ -166,19 +166,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!isIndeterminate && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!isIndeterminate && (status || !!slots.status)" data-slot="status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
       </slot>
     </div>
 
-    <ProgressRoot v-bind="rootProps" :max="realMax" :class="ui.base({ class: props.ui?.base })" style="transform: translateZ(0)">
-      <ProgressIndicator :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+    <ProgressRoot v-bind="rootProps" :max="realMax" data-slot="base" :class="ui.base({ class: props.ui?.base })" style="transform: translateZ(0)">
+      <ProgressIndicator data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
     </ProgressRoot>
 
-    <div v-if="hasSteps" :class="ui.steps({ class: props.ui?.steps })">
-      <div v-for="(step, index) in max" :key="index" :class="ui.step({ class: props.ui?.step, step: stepVariant(index) })">
+    <div v-if="hasSteps" data-slot="steps" :class="ui.steps({ class: props.ui?.steps })">
+      <div v-for="(step, index) in max" :key="index" data-slot="step" :class="ui.step({ class: props.ui?.step, step: stepVariant(index) })">
         <slot :name="`step-${index}`" :step="step">
           {{ step }}
         </slot>

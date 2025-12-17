@@ -11,7 +11,9 @@ const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs', {
+  ignoredTags: ['style']
+}), {
   server: false
 })
 
@@ -58,7 +60,7 @@ provide('navigation', rootNavigation)
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
     <div :class="[route.path.startsWith('/docs/') && 'root']">
-      <Banner />
+      <!-- <Banner /> -->
 
       <Header />
 

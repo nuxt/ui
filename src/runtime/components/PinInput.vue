@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { ComponentPublicInstance } from 'vue'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pin-input'
@@ -48,7 +49,6 @@ export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T
 </script>
 
 <script setup lang="ts" generic="T extends PinInputType">
-import type { ComponentPublicInstance } from 'vue'
 import { ref, computed, onMounted } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
@@ -118,7 +118,8 @@ defineExpose({
     :name="name"
     :placeholder="placeholder"
     :model-value="(modelValue as PinInputValue<T>)"
-    :default-value="(defaultValue as PinInputValue<T>[])"
+    :default-value="(defaultValue as PinInputValue<T>)"
+    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="emitFormInput()"
     @complete="onComplete"
@@ -128,6 +129,7 @@ defineExpose({
       :key="ids"
       :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
       :index="index"
+      data-slot="base"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       @blur="onBlur"

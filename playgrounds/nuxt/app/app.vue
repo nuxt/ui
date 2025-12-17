@@ -12,7 +12,7 @@ useHead({
   ],
   htmlAttrs: {
     lang: 'en',
-    dir: computed(() => appConfig.dir as 'ltr' | 'rtl')
+    dir: computed(() => appConfig.dir)
   }
 })
 
@@ -22,29 +22,44 @@ provide('components', components)
 <template>
   <UApp :toaster="appConfig.toaster" :dir="appConfig.dir">
     <UDashboardGroup unit="rem">
-      <UDashboardSidebar class="bg-elevated/25">
-        <template #header>
-          <NuxtLink to="/" class="text-highlighted" aria-label="Home">
-            <Logo class="h-5 w-auto" />
+      <UDashboardSidebar
+        class="bg-elevated/25"
+        resizable
+        collapsible
+        :toggle="{ size: 'sm', variant: 'outline', class: 'ring-default' }"
+      >
+        <template #header="{ collapsed }">
+          <NuxtLink to="/" class="text-highlighted inline-flex" aria-label="Home">
+            <Logo class="h-5 w-auto" :collapsed="collapsed" />
           </NuxtLink>
 
-          <div class="flex items-center ms-auto">
+          <div v-if="!collapsed" class="flex items-center ms-auto">
             <ThemeDropdown />
 
             <UColorModeButton />
           </div>
         </template>
 
-        <UDashboardSearchButton />
+        <template #default="{ collapsed }">
+          <UDashboardSearchButton :collapsed="collapsed" />
 
-        <UNavigationMenu :items="items" orientation="vertical" />
+          <UNavigationMenu :collapsed="collapsed" :items="items" orientation="vertical" />
 
-        <USeparator type="dashed" />
+          <USeparator type="dashed" />
 
-        <UNavigationMenu :items="components" orientation="vertical" />
+          <UNavigationMenu :collapsed="collapsed" :items="components" orientation="vertical" />
+        </template>
       </UDashboardSidebar>
 
-      <UDashboardPanel :ui="{ body: ['justify-center items-center', route.path.startsWith('/components') && 'mt-16'] }">
+      <UDashboardPanel
+        :ui="{
+          body: [
+            'justify-center items-center',
+            route.path.startsWith('/components') && 'mt-16',
+            route.path.startsWith('/components/scroll-area') && 'p-0!'
+          ]
+        }"
+      >
         <template #body>
           <NuxtPage />
         </template>

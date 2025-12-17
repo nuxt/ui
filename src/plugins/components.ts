@@ -47,11 +47,19 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
   const noRouterOverrideNames = new Set(noRouterOverrides.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
 
   const routerMode = resolveRouterMode(options)
+  const packagesToScan = [
+    '@nuxt/ui',
+    '@compodium/examples',
+    ...(Array.isArray(options.scanPackages) ? options.scanPackages : [])
+  ]
+  const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const packagesRegex = packagesToScan.map(escapeRegex).join('|')
+  const excludeRegex = new RegExp(`[\\\\/]node_modules[\\\\/](?!\\.pnpm|${packagesRegex})`)
 
   const pluginOptions = defu(options.components, <ComponentsOptions>{
     dts: options.dts ?? true,
     exclude: [
-      /[\\/]node_modules[\\/](?!\.pnpm|@nuxt\/ui|@compodium\/examples)/,
+      excludeRegex,
       /[\\/]\.git[\\/]/,
       /[\\/]\.nuxt[\\/]/
     ],

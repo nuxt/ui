@@ -80,12 +80,8 @@ props:
 
 ## Examples
 
-::note{to="https://ai-sdk.dev/docs/getting-started/nuxt" target="_blank"}
-These chat components are designed to be used with the **AI SDK v5** from **Vercel AI SDK**.
-::
-
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/chat" target="_blank"}
-Check out the source code of our **AI Chat template** on GitHub for a real-life example.
+::tip{to="/docs/components/chat-messages#examples"}
+Check the **ChatMessages** documentation for server API setup and installation instructions.
 ::
 
 ### Within a page
@@ -129,7 +125,7 @@ function onSubmit() {
     <template #footer>
       <UContainer class="pb-4 sm:pb-6">
         <UChatPrompt v-model="input" :error="chat.error" @submit="onSubmit">
-          <UChatPromptSubmit :status="chat.status" @stop="chat.stop" @reload="chat.regenerate" />
+          <UChatPromptSubmit :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
         </UChatPrompt>
       </UContainer>
     </template>
@@ -178,6 +174,10 @@ async function onSubmit() {
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attributes" target="_blank"}
+This component also supports all native `<textarea>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots
@@ -185,6 +185,14 @@ async function onSubmit() {
 ### Emits
 
 :component-emits
+
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `textareaRef`{lang="ts-type"} | `Ref<HTMLTextAreaElement \| null>`{lang="ts-type"} |
 
 ## Theme
 
