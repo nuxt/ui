@@ -12,7 +12,7 @@ import { runtimeDir } from '../unplugin'
 export default function AutoImportPlugin(options: NuxtUIOptions, meta: UnpluginContextMeta): UnpluginOptions {
   const pluginOptions = defu(options.autoImport, <AutoImportOptions>{
     dts: options.dts ?? true,
-    dirs: [join(runtimeDir, 'composables'), join(runtimeDir, 'unplugin/composables')]
+    dirs: [join(runtimeDir, 'composables'), join(runtimeDir, 'vue/composables')]
   })
 
   return AutoImport.raw(pluginOptions, meta) as UnpluginOptions

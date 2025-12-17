@@ -47,13 +47,13 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
 
   // Component sources in priority order (first match wins)
   const routerOverrides: Record<string, ComponentSource> = {
-    'vue-router': createComponentSource(join(runtimeDir, 'unplugin/overrides/vue-router'), options.prefix),
-    'inertia': createComponentSource(join(runtimeDir, 'unplugin/overrides/inertia'), options.prefix),
-    'none': createComponentSource(join(runtimeDir, 'unplugin/overrides/none'), options.prefix)
+    'vue-router': createComponentSource(join(runtimeDir, 'vue/overrides/vue-router'), options.prefix),
+    'inertia': createComponentSource(join(runtimeDir, 'vue/overrides/inertia'), options.prefix),
+    'none': createComponentSource(join(runtimeDir, 'vue/overrides/none'), options.prefix)
   }
 
   const unpluginComponents = createComponentSource(
-    join(runtimeDir, 'unplugin/components'),
+    join(runtimeDir, 'vue/components'),
     options.prefix,
     colorModeIgnore
   )

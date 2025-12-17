@@ -11,7 +11,7 @@ import { resolveRouterMode } from '../utils/router'
  */
 export default function NuxtEnvironmentPlugin(options: NuxtUIOptions) {
   const routerMode = resolveRouterMode(options)
-  const stubsPath = `../runtime/unplugin/stubs/${routerMode}`
+  const stubsPath = `../runtime/vue/stubs/${routerMode}`
 
   const stubPath = resolvePathSync(stubsPath, { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url })
 
