@@ -83,7 +83,7 @@ exports[`DashboardPanel > renders with resizable correctly 1`] = `
   <div id="dashboard-panel-v-0-0-0" data-dragging="false" data-slot="root" class="relative flex flex-col min-w-0 min-h-svh lg:not-last:border-e lg:not-last:border-default flex-1">
     <div data-slot="body" class="flex flex-col gap-4 sm:gap-6 flex-1 overflow-y-auto p-4 sm:p-6"></div>
   </div>
-  <div role="separator" class="hidden lg:block touch-none select-none cursor-ew-resize relative before:absolute before:inset-y-0 before:-left-1.5 before:-right-1.5" aria-controls="dashboard-panel-v-0-0-0" data-slot="handle"></div>
+  <div role="separator" class="hidden lg:block touch-none select-none cursor-ew-resize relative before:absolute before:inset-y-0 before:-left-1.5 before:-right-1.5 before:z-1" aria-controls="dashboard-panel-v-0-0-0" data-slot="handle"></div>
 </div>"
 `;
 

@@ -40,9 +40,7 @@ const { data: versions } = await useFetch('https://ungh.cc/repos/nuxt/ui/release
       :description="page.hero.description"
       :links="page.hero.links"
       class="md:border-b border-default"
-      :ui="{
-        container: 'relative lg:py-32'
-      }"
+      :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }"
     >
       <template #top>
         <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
