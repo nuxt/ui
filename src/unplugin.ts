@@ -56,9 +56,9 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    */
   inertia?: boolean
   /**
-   * External packages that should be scanned for Nuxt UI components
+   * Additional packages to scan for components using Nuxt UI
    */
-  allowedPackages?: string[]
+  scanPackages?: string[]
 }
 
 export const runtimeDir = normalize(fileURLToPath(new URL('./runtime', import.meta.url)))

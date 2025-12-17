@@ -44,15 +44,14 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
   })
   const inertiaOverrideNames = new Set(inertiaOverrides.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
 
-  const allowlist = [
+  const packagesToScan = [
     '@nuxt/ui',
     '@compodium/examples',
-    ...(Array.isArray(options.allowedPackages) ? options.allowedPackages : [])
+    ...(Array.isArray(options.scanPackages) ? options.scanPackages : [])
   ]
-  const allowlistRegexGroup = allowlist.map(pkg =>
-    pkg.replace(/\//g, '\\/')
-  ).join('|')
-  const excludeRegex = new RegExp(`[\\\\/]node_modules[\\\\/](?!\\.pnpm|${allowlistRegexGroup})`)
+  const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const packagesRegex = packagesToScan.map(escapeRegex).join('|')
+  const excludeRegex = new RegExp(`[\\\\/]node_modules[\\\\/](?!\\.pnpm|${packagesRegex})`)
 
   const pluginOptions = defu(options.components, <ComponentsOptions>{
     dts: options.dts ?? true,
