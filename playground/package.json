@@ -11,16 +11,16 @@
   "dependencies": {
     "@iconify-json/lucide": "^1.2.81",
     "@iconify-json/simple-icons": "^1.2.63",
-    "@internationalized/date": "^3.10.0",
+    "@internationalized/date": "^3.10.1",
     "@nuxt/ui": "workspace:*",
-    "@nuxthub/core": "^0.10.1",
+    "@nuxthub/core": "^0.10.2",
     "nuxt": "^4.2.2",
-    "zod": "^4.2.0"
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "typescript": "^5.8.3",
     "vue-tsc": "^3.1.5",
-    "wrangler": "^4.54.0"
+    "wrangler": "^4.55.0"
   },
   "resolutions": {
     "unimport": "4.1.1"
