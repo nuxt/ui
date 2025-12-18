@@ -60,18 +60,21 @@ const FormFieldWrapper = defineComponent({
 })
 
 describe('FormField', () => {
-  const sizes = Object.keys(theme.variants.size) as any
-  const orientations = Object.keys(theme.variants.orientation) as any
+  type Size = keyof typeof theme.variants.size
+  type Orientation = keyof typeof theme.variants.orientation
 
-  it.each([
+  const sizes = Object.keys(theme.variants.size) as Size[]
+  const orientations = Object.keys(theme.variants.orientation) as Orientation[]
+
+  const testCases: Array<[string, { props?: FormFieldProps, slots?: Partial<FormFieldSlots> }]> = [
     // Props
     ['with label and description', { props: { label: 'Username', description: 'Enter your username' } }],
     ['with required', { props: { label: 'Username', required: true } }],
     ['with help', { props: { help: 'Username must be unique' } }],
     ['with error', { props: { error: 'Username is already taken' } }],
     ['with hint', { props: { hint: 'Use letters, numbers, and special characters' } }],
-    ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Username', description: 'Enter your username', size } }]),
-    ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { label: 'Username', description: 'Enter your username', orientation } }]),
+    ...sizes.map((size): [string, { props: FormFieldProps }] => [`with size ${size}`, { props: { label: 'Username', description: 'Enter your username', size } }]),
+    ...orientations.map((orientation): [string, { props: FormFieldProps }] => [`with orientation ${orientation}`, { props: { label: 'Username', description: 'Enter your username', orientation } }]),
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'relative' } }],
     ['with ui', { props: { ui: { label: 'text-highlighted' } } }],
@@ -82,7 +85,9 @@ describe('FormField', () => {
     ['with error slot', { slots: { error: () => 'Error slot' } }],
     ['with hint slot', { slots: { hint: () => 'Hint slot' } }],
     ['with help slot', { slots: { help: () => 'Help slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FormFieldProps, slots?: Partial<FormFieldSlots> }) => {
+  ]
+
+  it.each(testCases)('renders %s correctly', async (nameOrHtml: string, options: { props?: FormFieldProps, slots?: Partial<FormFieldSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, FormFieldWrapper)
     expect(html).toMatchSnapshot()
   })
