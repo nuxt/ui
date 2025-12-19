@@ -10,6 +10,22 @@ overrides:
   typescript: 5.8.3
   unplugin: ^2.3.11
   c12: ^3.3.2
+  '@tiptap/core': ^3.14.0
+  '@tiptap/pm': ^3.14.0
+  '@tiptap/vue-3': ^3.14.0
+  '@tiptap/starter-kit': ^3.14.0
+  '@tiptap/extension-bubble-menu': ^3.14.0
+  '@tiptap/extension-collaboration': ^3.14.0
+  '@tiptap/extension-drag-handle': ^3.14.0
+  '@tiptap/extension-drag-handle-vue-3': ^3.14.0
+  '@tiptap/extension-floating-menu': ^3.14.0
+  '@tiptap/extension-horizontal-rule': ^3.14.0
+  '@tiptap/extension-image': ^3.14.0
+  '@tiptap/extension-mention': ^3.14.0
+  '@tiptap/extension-node-range': ^3.14.0
+  '@tiptap/extension-placeholder': ^3.14.0
+  '@tiptap/markdown': ^3.14.0
+  '@tiptap/suggestion': ^3.14.0
 
 importers:
 
@@ -2763,9 +2779,9 @@ packages:
   '@tiptap/extension-emoji@3.13.0':
     resolution: {integrity: sha512-MY+6ZPmDjqTzaP8XJVPQVKyiVuGIrZfnvmF3yIKA+h+dxBoNkfsbaoVKYGYrs/K93YLnxlzhxBLei8Phb3zZfQ==}
     peerDependencies:
-      '@tiptap/core': ^3.13.0
-      '@tiptap/pm': ^3.13.0
-      '@tiptap/suggestion': ^3.13.0
+      '@tiptap/core': ^3.14.0
+      '@tiptap/pm': ^3.14.0
+      '@tiptap/suggestion': ^3.14.0
 
   '@tiptap/extension-floating-menu@3.14.0':
     resolution: {integrity: sha512-+ErwDF74NzX4JV0nXMSIUT9V8FDdo85r0SaBZ8lb2NLmElaA3LDklcNV7SsoKlRcwsAXtFkqQbDwXLNGQLYSPQ==}
@@ -2863,7 +2879,7 @@ packages:
   '@tiptap/extension-text-align@3.13.0':
     resolution: {integrity: sha512-hebIus9tdXWb+AmhO+LTeUxZLdb0tqwdeaL/0wYxJQR5DeCTlJe6huXacMD/BkmnlEpRhxzQH0FrmXAd0d4Wgg==}
     peerDependencies:
-      '@tiptap/core': ^3.13.0
+      '@tiptap/core': ^3.14.0
 
   '@tiptap/extension-text@3.14.0':
     resolution: {integrity: sha512-XlpnD87LQ7lLcDcBenHgzxv3uivQzPdVHM16CY4lXR4aKDIp2mxjPZr4twHT+cOnRQHc8VYpRgkEo6LLX6VylA==}
