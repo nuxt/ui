@@ -243,26 +243,6 @@
     "unplugin": "^2.3.11",
     "c12": "^3.3.2"
   },
-  "pnpm": {
-    "overrides": {
-      "@tiptap/core": "$@tiptap/core",
-      "@tiptap/pm": "$@tiptap/pm",
-      "@tiptap/vue-3": "$@tiptap/vue-3",
-      "@tiptap/starter-kit": "$@tiptap/starter-kit",
-      "@tiptap/extension-bubble-menu": "$@tiptap/extension-bubble-menu",
-      "@tiptap/extension-collaboration": "$@tiptap/extension-collaboration",
-      "@tiptap/extension-drag-handle": "$@tiptap/extension-drag-handle",
-      "@tiptap/extension-drag-handle-vue-3": "$@tiptap/extension-drag-handle-vue-3",
-      "@tiptap/extension-floating-menu": "$@tiptap/extension-floating-menu",
-      "@tiptap/extension-horizontal-rule": "$@tiptap/extension-horizontal-rule",
-      "@tiptap/extension-image": "$@tiptap/extension-image",
-      "@tiptap/extension-mention": "$@tiptap/extension-mention",
-      "@tiptap/extension-node-range": "$@tiptap/extension-node-range",
-      "@tiptap/extension-placeholder": "$@tiptap/extension-placeholder",
-      "@tiptap/markdown": "$@tiptap/markdown",
-      "@tiptap/suggestion": "$@tiptap/suggestion"
-    }
-  },
   "keywords": [
     "nuxt-ui",
     "nuxt",
