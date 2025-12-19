@@ -3,7 +3,7 @@ const { icon, icons } = useTheme()
 </script>
 
 <template>
-  <UFormField label="Theme preset">
+  <UFormField label="Icons preset">
     <USelect
       v-model="icon"
       color="neutral"

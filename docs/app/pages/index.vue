@@ -7,6 +7,7 @@ if (!page.value) {
 }
 
 const { url } = useSiteConfig()
+const appConfig = useAppConfig()
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
@@ -178,7 +179,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           <div class="flex flex-col">
             <h2 class="font-medium text-highlighted inline-flex items-center gap-x-1">
               {{ feature.title }}
-              <UIcon v-if="feature.to" name="i-lucide-arrow-right" class="size-4 shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
+              <UIcon v-if="feature.to" :name="appConfig.ui.icons.arrowRight" class="size-4 shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
             </h2>
             <p class="text-sm text-muted">
               {{ feature.description }}
