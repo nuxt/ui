@@ -4,6 +4,7 @@ import colors from 'tailwindcss/colors'
 
 export function useTheme() {
   const appConfig = useAppConfig()
+  const colorMode = useColorMode()
   const { track } = useAnalytics()
 
   const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone']
