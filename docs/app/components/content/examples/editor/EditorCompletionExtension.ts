@@ -117,7 +117,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
         // Insert the suggestion text.
         // IMPORTANT: when the editor is in markdown mode, we want to parse markdown tokens (e.g. **bold**)
         // into TipTap nodes/marks instead of inserting raw asterisks.
-        const markdownManager = (editor as any).markdown
+        const markdownManager = editor.markdown
         const canParseMarkdown = !!markdownManager && typeof markdownManager.parse === 'function'
 
         if (canParseMarkdown) {

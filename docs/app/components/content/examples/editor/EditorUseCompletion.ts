@@ -51,7 +51,7 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
   }
 
   function getInsertableContent(editor: Editor, markdownText: string, preferInline: boolean | undefined) {
-    const markdownManager = (editor as any).markdown
+    const markdownManager = editor.markdown
     const canParseMarkdown = !!markdownManager && typeof markdownManager.parse === 'function'
 
     if (!canParseMarkdown) {
