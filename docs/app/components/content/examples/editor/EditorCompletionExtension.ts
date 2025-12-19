@@ -45,7 +45,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
 
   addOptions() {
     return {
-      debounce: 250,
+      debounce: 2500,
       triggerCharacters: ['/', ':', '@'],
       onTrigger: undefined,
       onAccept: undefined,
@@ -114,8 +114,32 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
         // Force decoration update
         editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
 
-        // Insert the suggestion text
-        editor.chain().focus().insertContentAt(position, suggestion).run()
+        // Insert the suggestion text.
+        // IMPORTANT: when the editor is in markdown mode, we want to parse markdown tokens (e.g. **bold**)
+        // into TipTap nodes/marks instead of inserting raw asterisks.
+        const markdownManager = (editor as any).markdown
+        const canParseMarkdown = !!markdownManager && typeof markdownManager.parse === 'function'
+
+        if (canParseMarkdown) {
+          const parsed = markdownManager.parse(String(suggestion))
+          const content = parsed && Array.isArray(parsed.content) ? parsed.content : null
+
+          if (content) {
+            // If we're inserting inside a textblock, unwrap a single paragraph to keep it inline.
+            const $pos = editor.state.doc.resolve(position)
+            const preferInline = $pos.parent?.isTextblock
+
+            if (preferInline && content.length === 1 && content[0]?.type === 'paragraph' && Array.isArray(content[0].content)) {
+              editor.chain().focus().insertContentAt(position, content[0].content).run()
+            } else {
+              editor.chain().focus().insertContentAt(position, content).run()
+            }
+          } else {
+            editor.chain().focus().insertContentAt(position, suggestion).run()
+          }
+        } else {
+          editor.chain().focus().insertContentAt(position, suggestion).run()
+        }
 
         this.options.onAccept?.()
         return true

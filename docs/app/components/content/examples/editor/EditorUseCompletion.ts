@@ -14,9 +14,122 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
   const insertState = ref<{
     pos: number
     deleteRange?: { from: number, to: number }
+    // Latest streamed completion (full text), committed onFinish
+    result?: string
+    // Whether we should prefer inline insertion (unwrap single paragraph)
+    preferInline?: boolean
+    // Whether the initial deleteRange has been applied
+    selectionDeleted?: boolean
+    // Current range of the inserted streamed content (so we can replace it on each chunk)
+    insertedRange?: { from: number, to: number }
+    // Optional prefix (e.g. leading space for continue mode)
+    prefix?: string
   }>()
   const mode = ref<CompletionMode>('continue')
   const language = ref<string>()
+
+  function normalizeMarkdownForMode(raw: string, editor: Editor | undefined, state: NonNullable<typeof insertState.value>) {
+    let markdownText = String(raw)
+
+    // For single-paragraph transforms, replace all line breaks with spaces
+    if (['fix', 'simplify', 'translate'].includes(mode.value)) {
+      markdownText = markdownText.replace(/[\r\n]+/g, ' ').replace(/\s{2,}/g, ' ')
+    }
+
+    // For "continue" mode, add a space before if needed (computed once and reused for all chunks)
+    if (mode.value === 'continue' && editor) {
+      if (state.prefix === undefined) {
+        const insertPos = state.insertedRange?.from ?? state.deleteRange?.from ?? state.pos
+        const textBefore = editor.state.doc.textBetween(Math.max(0, insertPos - 1), insertPos)
+        const needsSpace = !!(textBefore && !/\s/.test(textBefore) && markdownText && !/^\s/.test(markdownText))
+        state.prefix = needsSpace ? ' ' : ''
+      }
+      markdownText = (state.prefix || '') + markdownText
+    }
+
+    return markdownText
+  }
+
+  function getInsertableContent(editor: Editor, markdownText: string, preferInline: boolean | undefined) {
+    const markdownManager = (editor as any).markdown
+    const canParseMarkdown = !!markdownManager && typeof markdownManager.parse === 'function'
+
+    if (!canParseMarkdown) {
+      return markdownText
+    }
+
+    const parsed = markdownManager.parse(markdownText)
+    const content = parsed && Array.isArray(parsed.content) ? parsed.content : null
+    if (!content) {
+      return markdownText
+    }
+
+    if (preferInline && content.length === 1 && content[0]?.type === 'paragraph' && Array.isArray(content[0].content)) {
+      return content[0].content
+    }
+    return content
+  }
+
+  // Throttle heavy editor updates while streaming
+  function createThrottle<T extends (...args: any[]) => void>(fn: T, waitMs: number) {
+    let last = 0
+    let timer: ReturnType<typeof setTimeout> | undefined
+    let pendingArgs: any[] | undefined
+
+    const run = () => {
+      timer = undefined
+      last = Date.now()
+      if (pendingArgs) {
+        const args = pendingArgs
+        pendingArgs = undefined
+        fn(...args)
+      }
+    }
+
+    return (...args: Parameters<T>) => {
+      const now = Date.now()
+      const elapsed = now - last
+      pendingArgs = args
+
+      if (elapsed >= waitMs) {
+        if (timer) {
+          clearTimeout(timer)
+          timer = undefined
+        }
+        run()
+        return
+      }
+
+      if (!timer) {
+        timer = setTimeout(run, waitMs - elapsed)
+      }
+    }
+  }
+
+  function applyStreamedInsert(editor: Editor, state: NonNullable<typeof insertState.value>, rawCompletion: string) {
+    const markdownText = normalizeMarkdownForMode(rawCompletion, editor, state)
+
+    const replaceFrom = state.insertedRange?.from ?? state.deleteRange?.from ?? state.pos
+    const replaceTo = state.insertedRange?.to ?? state.deleteRange?.to ?? state.pos
+    const content = getInsertableContent(editor, markdownText, state.preferInline)
+
+    const beforeSize = editor.state.doc.content.size
+
+    editor
+      .chain()
+      .focus()
+      .deleteRange({ from: replaceFrom, to: replaceTo })
+      .insertContentAt(replaceFrom, content)
+      .run()
+
+    const afterSize = editor.state.doc.content.size
+    const deletedSize = replaceTo - replaceFrom
+    const insertedSize = afterSize - beforeSize + deletedSize
+    state.insertedRange = { from: replaceFrom, to: replaceFrom + Math.max(0, insertedSize) }
+    state.selectionDeleted = true
+  }
+
+  const throttledApplyStreamedInsert = createThrottle(applyStreamedInsert, 50)
 
   // Helper to get completion storage
   function getCompletionStorage() {
@@ -37,66 +150,42 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
       if (mode.value === 'continue' && storage?.visible) {
         return
       }
+
+      // For direct insertion/transform mode, keep streaming updates; ensure we flush the last chunk.
+      const editor = editorRef.value?.editor
+      const state = insertState.value
+
+      if (editor && state?.result) {
+        // Flush any pending throttled updates by applying the final text immediately.
+        applyStreamedInsert(editor, state, state.result)
+      }
+
       insertState.value = undefined
+      setCompletion('')
     },
     onError: (error) => {
       console.error('AI completion error:', error)
       insertState.value = undefined
       getCompletionStorage()?.clearSuggestion()
+      setCompletion('')
     }
   })
 
   // Watch completion for inline suggestion updates
-  watch(completion, (newCompletion, oldCompletion) => {
+  watch(completion, (newCompletion, _oldCompletion) => {
     const editor = editorRef.value?.editor
     if (!editor || !newCompletion) return
 
     const storage = getCompletionStorage()
     if (storage?.visible) {
       // Update inline suggestion
-      // Add space prefix if needed (so preview matches what will be inserted)
-      let suggestionText = newCompletion
-      if (storage.position !== undefined) {
-        const textBefore = editor.state.doc.textBetween(Math.max(0, storage.position - 1), storage.position)
-        if (textBefore && !/\s/.test(textBefore) && !suggestionText.startsWith(' ')) {
-          suggestionText = ' ' + suggestionText
-        }
-      }
-      storage.setSuggestion(suggestionText)
+      storage.setSuggestion(newCompletion)
       editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
     } else if (insertState.value) {
       // Direct insertion/transform mode (from toolbar actions)
-
-      // If this is the first chunk and we have a selection to replace, delete it first
-      if (insertState.value.deleteRange && !oldCompletion) {
-        editor.chain()
-          .focus()
-          .deleteRange(insertState.value.deleteRange)
-          .run()
-        insertState.value.deleteRange = undefined
-      }
-
-      let delta = newCompletion.slice(oldCompletion?.length || 0)
-      if (delta) {
-        // For single-paragraph transforms, replace all line breaks with spaces
-        if (['fix', 'simplify', 'translate'].includes(mode.value)) {
-          delta = delta.replace(/[\r\n]+/g, ' ').replace(/\s{2,}/g, ' ')
-        }
-
-        // For "continue" mode, add a space before if needed (first chunk only)
-        if (mode.value === 'continue' && !oldCompletion) {
-          const textBefore = editor.state.doc.textBetween(Math.max(0, insertState.value.pos - 1), insertState.value.pos)
-          if (textBefore && !/\s/.test(textBefore)) {
-            delta = ' ' + delta
-          }
-        }
-
-        editor.chain().focus().command(({ tr }) => {
-          tr.insertText(delta, insertState.value!.pos)
-          return true
-        }).run()
-        insertState.value.pos += delta.length
-      }
+      // Replace inserted content incrementally while streaming (parsed as markdown).
+      insertState.value.result = newCompletion
+      throttledApplyStreamedInsert(editor, insertState.value, newCompletion)
     }
   })
 
@@ -115,7 +204,15 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
     const selectedText = state.doc.textBetween(selection.from, selection.to)
 
     // Replace the selected text with the transformed version
-    insertState.value = { pos: selection.from, deleteRange: { from: selection.from, to: selection.to } }
+    insertState.value = {
+      pos: selection.from,
+      deleteRange: { from: selection.from, to: selection.to },
+      result: undefined,
+      preferInline: selection.$from.sameParent(selection.$to) && selection.$from.parent.isTextblock,
+      selectionDeleted: false,
+      insertedRange: undefined,
+      prefix: undefined
+    }
 
     complete(selectedText)
   }
@@ -131,12 +228,26 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
     if (selection.empty) {
       // No selection: continue from cursor position
       const textBefore = state.doc.textBetween(0, selection.from, '\n')
-      insertState.value = { pos: selection.from }
+      insertState.value = {
+        pos: selection.from,
+        result: undefined,
+        preferInline: true,
+        selectionDeleted: false,
+        insertedRange: undefined,
+        prefix: undefined
+      }
       complete(textBefore)
     } else {
       // Text selected: append completion after the selection
       const selectedText = state.doc.textBetween(selection.from, selection.to)
-      insertState.value = { pos: selection.to }
+      insertState.value = {
+        pos: selection.to,
+        result: undefined,
+        preferInline: selection.$from.sameParent(selection.$to) && selection.$from.parent.isTextblock,
+        selectionDeleted: false,
+        insertedRange: undefined,
+        prefix: undefined
+      }
       complete(selectedText)
     }
   }
