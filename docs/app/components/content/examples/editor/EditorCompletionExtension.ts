@@ -45,7 +45,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
 
   addOptions() {
     return {
-      debounce: 2500,
+      debounce: 250,
       triggerCharacters: ['/', ':', '@'],
       onTrigger: undefined,
       onAccept: undefined,
