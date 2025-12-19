@@ -1,13 +1,10 @@
 import { themeIcons } from '../utils/theme'
-import { omit } from "#ui/utils"
+import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
 
 export function useTheme() {
   const appConfig = useAppConfig()
   const { track } = useAnalytics()
-
-  const { copy: copyCSS, copied: copiedCSS } = useClipboard()
-  const { copy: copyAppConfig, copied: copiedAppConfig } = useClipboard()
 
   const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone']
   const neutral = computed({
@@ -119,7 +116,7 @@ export function useTheme() {
       || appConfig.theme.icons !== 'lucide'
   })
 
-  function exportCSS() {
+  function exportCSS(): string {
     track('Theme Exported', { type: 'CSS' })
 
     const lines = [
@@ -147,10 +144,10 @@ export function useTheme() {
       lines.push('', '.dark {', '  --ui-primary: white;', '}')
     }
 
-    copyCSS(lines.join('\n'))
+    return lines.join('\n')
   }
 
-  function exportAppConfig() {
+  function exportAppConfig(): string {
     track('Theme Exported', { type: 'AppConfig' })
 
     const config: Record<string, any> = {}
@@ -176,9 +173,7 @@ export function useTheme() {
       .replace(/"([^"]+)":/g, '$1:')
       .replace(/"/g, '\'')
 
-    const output = `export default defineAppConfig(${configString})`
-
-    copyAppConfig(output)
+    return `export default defineAppConfig(${configString})`
   }
 
   function resetTheme() {

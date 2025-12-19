@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { useClipboard } from '@vueuse/core'
-
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 const { track } = useAnalytics()
+
+const { copy: copyCSS, copied: copiedCSS } = useClipboard()
+const { copy: copyAppConfig, copied: copiedAppConfig } = useClipboard()
+
 const {
   neutralColors,
   neutral,
@@ -235,7 +237,7 @@ watch(open, (isOpen) => {
             label="main.css"
             class="flex-1 text-[11px]"
             :icon="copiedCSS ? 'i-lucide-copy-check' : 'i-lucide-copy'"
-            @click="exportCSS"
+            @click="copyCSS(exportCSS())"
           />
           <UButton
             v-if="hasAppConfigChanges"
@@ -245,7 +247,7 @@ watch(open, (isOpen) => {
             label="app.config.ts"
             :icon="copiedAppConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
             class="flex-1 text-[11px]"
-            @click="exportAppConfig"
+            @click="copyAppConfig(exportAppConfig())"
           />
           <UTooltip text="Reset theme">
             <UButton
