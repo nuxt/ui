@@ -154,14 +154,18 @@ watch(open, (isOpen) => {
       :ui="{ content: 'w-64 max-h-72 overflow-y-auto' }"
       :dismissible="false"
     >
-      <UButton
-        :icon="open ? 'i-lucide-x' : 'i-lucide-scan-eye'"
-        color="neutral"
-        variant="outline"
-        size="sm"
-        class="absolute -top-[11px] -right-[11px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
-        :class="[open && 'lg:opacity-100 bg-elevated']"
-      />
+      <UTooltip text="Inspect theme slots" :disabled="open" :content="{ side: 'right' }">
+        <UButton
+          color="neutral"
+          variant="outline"
+          size="sm"
+          square
+          class="absolute -top-[11px] -right-[11px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
+          :class="[open && 'lg:opacity-100 bg-elevated']"
+        >
+          <ComponentThemeVisualizerIcon :open="open" />
+        </UButton>
+      </UTooltip>
 
       <template #content>
         <div ref="popoverContentRef" class="px-2.5 py-1.5 text-xs font-semibold text-highlighted border-b border-default">
