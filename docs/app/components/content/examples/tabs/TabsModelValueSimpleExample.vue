@@ -14,5 +14,5 @@ const items: TabsItem[] = [
 </script>
 
 <template>
-  <UTabs defaultValue="account" :content="false" :items="items" class="w-full" />
+  <UTabs default-value="account" :content="false" :items="items" class="w-full" />
 </template>
