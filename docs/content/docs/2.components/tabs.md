@@ -223,13 +223,13 @@ props:
 
 You can control the active item by using the `default-value` prop or the `v-model` directive with the `value` of the item. If no `value` is provided, it defaults to the index **as a string**.
 
-Here's an example of setting the default tab using the `default-value` prop:
-
-:component-example{name="tabs-model-value-simple-example"}
-
-And another example of setting the active tab by a URL query parameter, using `route.query.tab`:
-
 :component-example{name="tabs-model-value-example"}
+
+### With route query
+
+You can control the active item by a URL query parameter, using `route.query.tab` as the `value` of the item.
+
+:component-example{name="tabs-route-query-example"}
 
 ### With content slot
 
@@ -245,7 +245,12 @@ You will have access to the following slots:
 
 - `#{{ item.slot }}`{lang="ts-type"}
 
-:component-example{name="tabs-custom-slot-example"}
+::component-example
+---
+collapse: true
+name: 'tabs-custom-slot-example'
+---
+::
 
 ## API
 
