@@ -221,9 +221,9 @@ props:
 
 ### Control active item
 
-You can control the active item by using the `default-value` prop or `v-model` directive, corresponding to the `value` property in the `items` array.
+You can control the active item by using the `default-value` prop or the `v-model` directive with the `value` of the item. If no `value` is provided, it defaults to the index **as a string**.
 
-Here is a simple example of setting the active tab to be the first item in the `items` array:
+Here's an example of setting the default tab using the `default-value` prop:
 
 :component-example{name="tabs-model-value-simple-example"}
 
