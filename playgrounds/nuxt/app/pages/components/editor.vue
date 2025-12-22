@@ -5,9 +5,7 @@ import type { JSONContent } from '@tiptap/vue-3'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import { TextAlign } from '@tiptap/extension-text-align'
-import { ImageUpload } from '../../../../../docs/app/components/content/examples/editor/EditorImageUpload'
-import { useEditorCompletion } from '../../../../../docs/app/components/content/examples/editor/EditorUseCompletion'
-import EditorLinkPopover from '../../../../../docs/app/components/content/examples/editor/EditorLinkPopover.vue'
+import { ImageUpload } from '../../components/editor/EditorImageUpload'
 
 const editorRef = useTemplateRef('editorRef')
 
