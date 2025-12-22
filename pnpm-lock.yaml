@@ -227,8 +227,8 @@ importers:
   docs:
     dependencies:
       '@ai-sdk/vue':
-        specifier: ^1.2.12
-        version: 1.2.12(vue@3.5.25(typescript@5.8.3))(zod@4.2.1)
+        specifier: ^3.0.1
+        version: 3.0.1(vue@3.5.25(typescript@5.8.3))(zod@4.2.1)
       '@iconify-json/logos':
         specifier: ^1.2.10
         version: 1.2.10
@@ -393,14 +393,30 @@ importers:
 
 packages:
 
+  '@ai-sdk/gateway@3.0.0':
+    resolution: {integrity: sha512-JcjePYVpbezv+XOxkxPemwnorjWpgDiiKWMYy6FXTCG2rFABIK2Co1bFxIUSDT4vYO6f1448x9rKbn38vbhDiA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
+
   '@ai-sdk/provider-utils@2.2.8':
     resolution: {integrity: sha512-fqhG+4sCVv8x7nFzYnFo19ryhAa3w096Kmc3hWxMQfW/TubPOmt3A6tYZhl4mUfQWWQMsuSkLrtjlWuXBVSGQA==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.23.8
 
+  '@ai-sdk/provider-utils@4.0.0':
+    resolution: {integrity: sha512-HyCyOls9I3a3e38+gtvOJOEjuw9KRcvbBnCL5GBuSmJvS9Jh9v3fz7pRC6ha1EUo/ZH1zwvLWYXBMtic8MTguA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
+
   '@ai-sdk/provider@1.1.3':
     resolution: {integrity: sha512-qZMxYJ0qqX/RfnuIaab+zp8UAeJn/ygXXAffR5I4N0n1IrvA6qBsjc8hXLmBiMV2zoXlifkacF7sEFnYnjBcqg==}
+    engines: {node: '>=18'}
+
+  '@ai-sdk/provider@3.0.0':
+    resolution: {integrity: sha512-m9ka3ptkPQbaHHZHqDXDF9C9B5/Mav0KTdky1k2HZ3/nrW2t1AgObxIVPyGDWQNS9FXT/FS6PIoSjpcP/No8rQ==}
     engines: {node: '>=18'}
 
   '@ai-sdk/react@1.2.12':
@@ -427,6 +443,12 @@ packages:
     peerDependenciesMeta:
       vue:
         optional: true
+
+  '@ai-sdk/vue@3.0.1':
+    resolution: {integrity: sha512-vhyTU3pmKNDcCiBUlHkhDkKzxLx+7r6L3CtW1V5eQ2RyQ/+ajLPWU/xAAVoOlL/4bbiH9XqjKggsoBaBV5YPCQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      vue: ^3.3.4
 
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
@@ -3285,6 +3307,10 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
+  '@vercel/oidc@3.0.5':
+    resolution: {integrity: sha512-fnYhv671l+eTTp48gB4zEsTW/YtRgRPnkI2nT7x6qw5rkI1Lq2hTmQIpHPgyThI0znLK+vX2n9XxKdXZ7BUbbw==}
+    engines: {node: '>= 20'}
+
   '@vitejs/plugin-vue-jsx@5.1.2':
     resolution: {integrity: sha512-3a2BOryRjG/Iih87x87YXz5c8nw27eSlHytvSKYfp8ZIsp5+FgFQoKeA7k2PnqWpjJrv6AoVTMnvmuKUXb771A==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -3572,6 +3598,12 @@ packages:
     peerDependenciesMeta:
       react:
         optional: true
+
+  ai@6.0.1:
+    resolution: {integrity: sha512-g/jPakC6h4vUJKDww0d6+VaJmfMC38UqH3kKsngiP+coT0uvCUdQ7lpFDJ0mNmamaOyRMaY2zwEB2RnTAaJU/w==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
 
   ajv@6.12.6:
     resolution: {integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==}
@@ -4696,6 +4728,10 @@ packages:
   events@3.3.0:
     resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
     engines: {node: '>=0.8.x'}
+
+  eventsource-parser@3.0.6:
+    resolution: {integrity: sha512-Vo1ab+QXPzZ4tCa8SwIHJFaSzy4R6SHf7BY79rFBDf0idraZWAkYrDjDj8uWaSm3S2TK+hJ7/t1CEmZ7jXw+pg==}
+    engines: {node: '>=18.0.0'}
 
   execa@8.0.1:
     resolution: {integrity: sha512-VyhnebXciFV2DESc+p6B+y0LjSm0krU4OgJN44qFAhBY0TJ+1V61tYD2+wHusZ6F9n5K+vl8k0sTy7PEfV4qpg==}
@@ -8071,6 +8107,13 @@ packages:
 
 snapshots:
 
+  '@ai-sdk/gateway@3.0.0(zod@4.2.1)':
+    dependencies:
+      '@ai-sdk/provider': 3.0.0
+      '@ai-sdk/provider-utils': 4.0.0(zod@4.2.1)
+      '@vercel/oidc': 3.0.5
+      zod: 4.2.1
+
   '@ai-sdk/provider-utils@2.2.8(zod@4.2.1)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
@@ -8078,7 +8121,18 @@ snapshots:
       secure-json-parse: 2.7.0
       zod: 4.2.1
 
+  '@ai-sdk/provider-utils@4.0.0(zod@4.2.1)':
+    dependencies:
+      '@ai-sdk/provider': 3.0.0
+      '@standard-schema/spec': 1.1.0
+      eventsource-parser: 3.0.6
+      zod: 4.2.1
+
   '@ai-sdk/provider@1.1.3':
+    dependencies:
+      json-schema: 0.4.0
+
+  '@ai-sdk/provider@3.0.0':
     dependencies:
       json-schema: 0.4.0
 
@@ -8105,6 +8159,15 @@ snapshots:
       '@ai-sdk/ui-utils': 1.2.11(zod@4.2.1)
       swrv: 1.1.0(vue@3.5.25(typescript@5.8.3))
     optionalDependencies:
+      vue: 3.5.25(typescript@5.8.3)
+    transitivePeerDependencies:
+      - zod
+
+  '@ai-sdk/vue@3.0.1(vue@3.5.25(typescript@5.8.3))(zod@4.2.1)':
+    dependencies:
+      '@ai-sdk/provider-utils': 4.0.0(zod@4.2.1)
+      ai: 6.0.1(zod@4.2.1)
+      swrv: 1.1.0(vue@3.5.25(typescript@5.8.3))
       vue: 3.5.25(typescript@5.8.3)
     transitivePeerDependencies:
       - zod
@@ -11234,6 +11297,8 @@ snapshots:
       - rollup
       - supports-color
 
+  '@vercel/oidc@3.0.5': {}
+
   '@vitejs/plugin-vue-jsx@5.1.2(vite@7.2.7(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.2))(vue@3.5.25(typescript@5.8.3))':
     dependencies:
       '@babel/core': 7.28.5
@@ -11587,6 +11652,14 @@ snapshots:
       zod: 4.2.1
     optionalDependencies:
       react: 19.2.0
+
+  ai@6.0.1(zod@4.2.1):
+    dependencies:
+      '@ai-sdk/gateway': 3.0.0(zod@4.2.1)
+      '@ai-sdk/provider': 3.0.0
+      '@ai-sdk/provider-utils': 4.0.0(zod@4.2.1)
+      '@opentelemetry/api': 1.9.0
+      zod: 4.2.1
 
   ajv@6.12.6:
     dependencies:
@@ -12801,6 +12874,8 @@ snapshots:
       bare-events: 2.7.0
 
   events@3.3.0: {}
+
+  eventsource-parser@3.0.6: {}
 
   execa@8.0.1:
     dependencies:

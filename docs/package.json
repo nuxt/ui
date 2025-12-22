@@ -9,7 +9,7 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@ai-sdk/vue": "^1.2.12",
+    "@ai-sdk/vue": "^3.0.1",
     "@iconify-json/logos": "^1.2.10",
     "@iconify-json/lucide": "^1.2.82",
     "@iconify-json/simple-icons": "^1.2.63",
