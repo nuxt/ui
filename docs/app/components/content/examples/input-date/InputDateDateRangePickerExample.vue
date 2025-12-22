@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { CalendarDate } from '@internationalized/date'
 
-const inputDateRef = useTemplateRef('inputDateRef')
+const inputDate = useTemplateRef('inputDate')
 
 const modelValue = shallowRef({
   start: new CalendarDate(2022, 1, 10),
@@ -10,9 +10,9 @@ const modelValue = shallowRef({
 </script>
 
 <template>
-  <UInputDate ref="inputDateRef" v-model="modelValue" range>
+  <UInputDate ref="inputDate" v-model="modelValue" range>
     <template #trailing>
-      <UPopover :reference="inputDateRef?.inputsRef[0]?.$el">
+      <UPopover :reference="inputDate?.inputsRef[0]?.$el">
         <UButton
           color="neutral"
           variant="link"

@@ -13,16 +13,21 @@ export default {
   variants: {
     side: {
       top: {
-        content: 'inset-x-0 top-0 max-h-full'
+        content: ''
       },
       right: {
-        content: 'right-0 inset-y-0 w-full max-w-md'
+        content: 'max-w-md'
       },
       bottom: {
-        content: 'inset-x-0 bottom-0 max-h-full'
+        content: ''
       },
       left: {
-        content: 'left-0 inset-y-0 w-full max-w-md'
+        content: 'max-w-md'
+      }
+    },
+    inset: {
+      true: {
+        content: 'rounded-lg'
       }
     },
     transition: {
@@ -32,6 +37,54 @@ export default {
     }
   },
   compoundVariants: [{
+    side: 'top',
+    inset: true,
+    class: {
+      content: 'max-h-[calc(100%-2rem)] inset-x-4 top-4'
+    }
+  }, {
+    side: 'top',
+    inset: false,
+    class: {
+      content: 'max-h-full inset-x-0 top-0'
+    }
+  }, {
+    side: 'right',
+    inset: true,
+    class: {
+      content: 'w-[calc(100%-2rem)] inset-y-4 right-4'
+    }
+  }, {
+    side: 'right',
+    inset: false,
+    class: {
+      content: 'w-full inset-y-0 right-0'
+    }
+  }, {
+    side: 'bottom',
+    inset: true,
+    class: {
+      content: 'max-h-[calc(100%-2rem)] inset-x-4 bottom-4'
+    }
+  }, {
+    side: 'bottom',
+    inset: false,
+    class: {
+      content: 'max-h-full inset-x-0 bottom-0'
+    }
+  }, {
+    side: 'left',
+    inset: true,
+    class: {
+      content: 'w-[calc(100%-2rem)] inset-y-4 left-4'
+    }
+  }, {
+    side: 'left',
+    inset: false,
+    class: {
+      content: 'w-full inset-y-0 left-0'
+    }
+  }, {
     transition: true,
     side: 'top',
     class: {

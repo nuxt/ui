@@ -18,6 +18,10 @@ export function useHeader() {
     label: 'Community',
     to: '/community'
   }, {
+    label: 'Blog',
+    to: '/blog',
+    active: route.path.startsWith('/blog')
+  }, {
     label: 'Releases',
     to: '/releases'
   }])
@@ -63,8 +67,13 @@ export function useHeader() {
     icon: 'i-lucide-users',
     to: '/team'
   }, {
-    label: 'Releases',
+    label: 'Blog',
     icon: 'i-lucide-newspaper',
+    to: '/blog',
+    active: route.path.startsWith('/blog')
+  }, {
+    label: 'Releases',
+    icon: 'i-lucide-rocket',
     to: '/releases'
   }, {
     label: 'GitHub',

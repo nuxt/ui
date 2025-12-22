@@ -1,3 +1,5 @@
+import { themeIcons } from '../utils/theme'
+
 export default defineNuxtPlugin({
   enforce: 'post',
   setup() {
@@ -25,11 +27,31 @@ export default defineNuxtPlugin({
         }
       }
 
+      function updateFont() {
+        const font = localStorage.getItem('nuxt-ui-font')
+        if (font) {
+          appConfig.theme.font = font
+        }
+      }
+
       updateColor('primary')
       updateColor('neutral')
       updateRadius()
       updateBlackAsPrimary()
+      updateFont()
     }
+
+    onNuxtReady(() => {
+      function updateIcons() {
+        const icons = localStorage.getItem('nuxt-ui-icons')
+        if (icons) {
+          appConfig.theme.icons = icons
+          appConfig.ui.icons = themeIcons[icons as keyof typeof themeIcons] as any
+        }
+      }
+
+      updateIcons()
+    })
 
     if (import.meta.server) {
       useHead({
@@ -72,6 +94,13 @@ export default defineNuxtPlugin({
               document.querySelector('style#nuxt-ui-black-as-primary').innerHTML = ':root { --ui-primary: black; } .dark { --ui-primary: white; }';
             } else {
               document.querySelector('style#nuxt-ui-black-as-primary').innerHTML = '';
+            }
+          `.replace(/\s+/g, ' ')
+        }, {
+          innerHTML: `
+            if (localStorage.getItem('nuxt-ui-font')) {
+              const font = localStorage.getItem('nuxt-ui-font');
+              document.querySelector('style#nuxt-ui-font').innerHTML = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';
             }
           `.replace(/\s+/g, ' ')
         }]
