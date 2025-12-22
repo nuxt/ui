@@ -61,6 +61,7 @@ const FormFieldWrapper = defineComponent({
 
 describe('FormField', () => {
   const sizes = Object.keys(theme.variants.size) as any
+  const orientations = Object.keys(theme.variants.orientation) as any
 
   it.each([
     // Props
@@ -70,6 +71,7 @@ describe('FormField', () => {
     ['with error', { props: { error: 'Username is already taken' } }],
     ['with hint', { props: { hint: 'Use letters, numbers, and special characters' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Username', description: 'Enter your username', size } }]),
+    ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { label: 'Username', description: 'Enter your username', orientation } }]),
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'relative' } }],
     ['with ui', { props: { ui: { label: 'text-highlighted' } } }],

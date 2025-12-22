@@ -69,8 +69,8 @@ export default defineAppConfig({
     "nuxt": "^4.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.8.2",
-    "vue-tsc": "^2.2.10"
+    "typescript": "^5.8.3",
+    "vue-tsc": "^3.1.5"
   }
 }
 ```
@@ -220,8 +220,8 @@ export default defineAppConfig({
     "nuxt": "^4.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.8.2",
-    "vue-tsc": "^2.2.10"
+    "typescript": "^5.8.3",
+    "vue-tsc": "^3.1.5"
   }
 }
 ```

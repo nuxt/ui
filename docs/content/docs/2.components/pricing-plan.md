@@ -37,7 +37,7 @@ class: 'w-96'
 ::
 
 ::tip{to="/docs/components/pricing-plans"}
-Use the [`PricingPlans`](/docs/components/pricing-plans) component to display multiple pricing plans in a responsive grid layout.
+Use the `PricingPlans` component to display multiple pricing plans in a responsive grid layout.
 ::
 
 ### Title

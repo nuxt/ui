@@ -2,7 +2,7 @@
 import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/modal'
-import type { ButtonProps, IconProps } from '../types'
+import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -18,6 +18,11 @@ export interface ModalProps extends DialogRootProps {
    * @defaultValue true
    */
   overlay?: boolean
+  /**
+   * When `true`, enables scrollable overlay mode where content scrolls within the overlay.
+   * @defaultValue false
+   */
+  scrollable?: boolean
   /**
    * Animate the modal when opening or closing.
    * @defaultValue true
@@ -38,7 +43,7 @@ export interface ModalProps extends DialogRootProps {
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: boolean | Partial<ButtonProps>
+  close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -76,7 +81,7 @@ export interface ModalSlots {
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
@@ -113,26 +118,44 @@ const contentEvents = computed(() => {
     }, {} as Record<typeof events[number], (e: Event) => void>)
   }
 
+  if (props.scrollable) {
+    return {
+      // FIXME: This is a workaround to prevent the modal from closing when clicking on the scrollbar https://reka-ui.com/docs/components/dialog#scrollable-overlay but it's not working on Mac OS.
+      pointerDownOutside: (e: any) => {
+        const originalEvent = e.detail.originalEvent
+        const target = originalEvent.target as HTMLElement
+        if (originalEvent.offsetX > target.clientWidth || originalEvent.offsetY > target.clientHeight) {
+          e.preventDefault()
+        }
+      }
+    }
+  }
+
   return {}
 })
 
+const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
+
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {}) })({
   transition: props.transition,
-  fullscreen: props.fullscreen
-}))
+  fullscreen: props.fullscreen,
+  overlay: props.overlay,
+  scrollable: props.scrollable
+} as any))
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <DialogRoot v-slot="{ open, close }" v-bind="rootProps">
-    <DialogTrigger v-if="!!slots.default" as-child :class="props.class">
-      <slot :open="open" />
-    </DialogTrigger>
-
-    <DialogPortal v-bind="portalProps">
-      <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
-
-      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-enter="emits('after:enter')" @after-leave="emits('after:leave')" v-on="contentEvents">
+    <DefineContentTemplate>
+      <DialogContent
+        data-slot="content"
+        :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
+        v-bind="contentProps"
+        @after-enter="emits('after:enter')"
+        @after-leave="emits('after:leave')"
+        v-on="contentEvents"
+      >
         <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
           <DialogTitle v-if="title || !!slots.title">
             <slot name="title">
@@ -148,16 +171,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
         </VisuallyHidden>
 
         <slot name="content" :close="close">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
+          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
             <slot name="header" :close="close">
-              <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-                <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+              <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+                <DialogTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
                   <slot name="title">
                     {{ title }}
                   </slot>
                 </DialogTitle>
 
-                <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+                <DialogDescription v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
                   <slot name="description">
                     {{ description }}
                   </slot>
@@ -174,7 +197,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('modal.close')"
-                    v-bind="(typeof props.close === 'object' ? props.close as Partial<ButtonProps> : {})"
+                    v-bind="(typeof props.close === 'object' ? props.close : {})"
+                    data-slot="close"
                     :class="ui.close({ class: props.ui?.close })"
                   />
                 </slot>
@@ -182,15 +206,33 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
             </slot>
           </div>
 
-          <div v-if="!!slots.body" :class="ui.body({ class: props.ui?.body })">
+          <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: props.ui?.body })">
             <slot name="body" :close="close" />
           </div>
 
-          <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+          <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
             <slot name="footer" :close="close" />
           </div>
         </slot>
       </DialogContent>
+    </DefineContentTemplate>
+
+    <DialogTrigger v-if="!!slots.default" as-child :class="props.class">
+      <slot :open="open" />
+    </DialogTrigger>
+
+    <DialogPortal v-bind="portalProps">
+      <template v-if="scrollable">
+        <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })">
+          <ReuseContentTemplate />
+        </DialogOverlay>
+      </template>
+
+      <template v-else>
+        <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
+
+        <ReuseContentTemplate />
+      </template>
     </DialogPortal>
   </DialogRoot>
 </template>

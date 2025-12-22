@@ -248,6 +248,16 @@ name: 'input-number-currency-example'
 ---
 ::
 
+### Without buttons
+
+You can use the `increment` and `decrement` props to control visibility of the buttons.
+
+::component-example
+---
+name: 'input-number-without-buttons-example'
+---
+::
+
 ### Within a FormField
 
 You can use the InputNumber within a [FormField](/docs/components/form-field) component to display a label, help text, required indicator, etc.
@@ -274,6 +284,10 @@ name: 'input-number-slots-example'
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+This component also supports all native `<input>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots
@@ -286,9 +300,9 @@ name: 'input-number-slots-example'
 
 When accessing the component via a template ref, you can use the following:
 
-| Name                       | Type                                            |
-| -------------------------- | ----------------------------------------------- |
-| `inputRef`{lang="ts-type"} | `Ref<InstanceType<typeof NumberFieldInput> \| null>`{lang="ts-type"} |
+| Name | Type |
+| ---- | ---- |
+| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

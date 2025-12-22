@@ -102,3 +102,12 @@ export type EmitsToProps<T> = {
     ? (...args: Args) => void
     : never
 }
+
+export type NonUnion<T> = [T] extends [infer U]
+  ? _NonUnion<U, U>
+  : never
+type _NonUnion<T, U> = U extends any
+  ? [T] extends [U]
+      ? unknown
+      : never
+  : never

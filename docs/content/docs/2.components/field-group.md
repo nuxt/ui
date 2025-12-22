@@ -89,7 +89,7 @@ You can use a [Tooltip](/components/tooltip) within a field group.
 
 :component-example{name="field-group-tooltip-example"}
 
-### With dropdown
+### With dropdown menu
 
 You can use a [DropdownMenu](/components/dropdown-menu) within a field group.
 

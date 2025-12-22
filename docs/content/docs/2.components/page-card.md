@@ -275,7 +275,7 @@ name: 'page-card-testimonial-example'
 ::
 
 ::tip{to="/docs/components/page-columns"}
-You can use the [`PageColumns`](/docs/components/page-columns) component to display multiple PageCard in a multi-column layout.
+You can use the `PageColumns` component to display multiple PageCard in a multi-column layout.
 ::
 
 ## API

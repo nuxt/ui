@@ -75,19 +75,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator ||
 </script>
 
 <template>
-  <Separator v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.border({ class: props.ui?.border })" />
+  <Separator v-bind="rootProps" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div data-slot="border" :class="ui.border({ class: props.ui?.border })" />
 
     <template v-if="label || icon || avatar || !!slots.default">
-      <div :class="ui.container({ class: props.ui?.container })">
+      <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
         <slot :ui="ui">
-          <span v-if="label" :class="ui.label({ class: props.ui?.label })">{{ label }}</span>
-          <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
-          <UAvatar v-else-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+          <span v-if="label" data-slot="label" :class="ui.label({ class: props.ui?.label })">{{ label }}</span>
+          <UIcon v-else-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+          <UAvatar v-else-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
         </slot>
       </div>
 
-      <div :class="ui.border({ class: props.ui?.border })" />
+      <div data-slot="border" :class="ui.border({ class: props.ui?.border })" />
     </template>
   </Separator>
 </template>

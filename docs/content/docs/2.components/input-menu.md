@@ -782,7 +782,7 @@ name: 'input-menu-filter-fields-example'
 ---
 ::
 
-### With virtualization :badge{label="Soon"}
+### With virtualization :badge{label="4.1+" class="align-text-top"}
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 
@@ -841,6 +841,10 @@ name: 'input-menu-countries-example'
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+This component also supports all native `<input>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots
@@ -855,7 +859,7 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `inputRef`{lang="ts-type"} | `Ref<InstanceType<typeof ComboboxTrigger> \| null>`{lang="ts-type"} |
+| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

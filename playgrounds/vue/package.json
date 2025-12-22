@@ -11,14 +11,16 @@
   },
   "dependencies": {
     "@nuxt/ui": "workspace:*",
-    "vue": "^3.5.22",
+    "@tiptap/extension-emoji": "^3.14.0",
+    "@tiptap/extension-text-align": "^3.14.0",
+    "vue": "^3.5.25",
     "vue-router": "^4.6.3",
-    "zod": "^4.1.12"
+    "zod": "^4.2.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.1",
+    "@vitejs/plugin-vue": "^6.0.2",
     "typescript": "^5.8.3",
-    "vite": "^7.1.11",
-    "vue-tsc": "^3.1.1"
+    "vite": "^7.2.7",
+    "vue-tsc": "^3.1.5"
   }
 }

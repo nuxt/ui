@@ -11,7 +11,19 @@ type TreeNode = {
   children?: TreeNode[]
 }
 
+type TreeItem = {
+  label: string
+  icon?: string
+  component: any
+}
+
 export interface ProseCodeTreeProps {
+  items?: TreeItem[]
+  /**
+   * The selected path.
+   * @example 'package.json'
+   */
+  modelValue?: string
   /**
    * The default path to select.
    * @example 'package.json'
@@ -26,13 +38,17 @@ export interface ProseCodeTreeProps {
   ui?: ProseCodeTree['slots']
 }
 
+export interface ProseCodeTreeEmits {
+  'update:modelValue': [value: string | undefined]
+}
+
 export interface ProseCodeTreeSlots {
   default(props?: {}): any
 }
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watch, onBeforeUpdate } from 'vue'
+import { computed, watch, onBeforeUpdate, ref } from 'vue'
 import { TreeRoot, TreeItem } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -43,6 +59,7 @@ import UIcon from '../Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = defineProps<ProseCodeTreeProps>()
+const emits = defineEmits<ProseCodeTreeEmits>()
 const slots = defineSlots<ProseCodeTreeSlots>()
 
 const appConfig = useAppConfig() as ProseCodeTree['AppConfig']
@@ -52,20 +69,36 @@ const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items: 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeTree || {}) })())
 
-const model = ref(props.defaultValue ? { path: props.defaultValue } : undefined)
+const initialPath = props.modelValue ?? props.defaultValue
+const model = ref(initialPath ? { path: initialPath } : undefined)
 const lastSelectedItem = ref()
+
+watch(model, (value) => {
+  if (value?.path !== props.modelValue) {
+    emits('update:modelValue', value?.path)
+  }
+})
+watch(() => props.modelValue, (value) => {
+  if (value === model.value?.path) return
+
+  model.value = value ? { path: value } : undefined
+  // Expand the tree to show the selected item
+  const pathsToExpand = getExpandedPaths(value)
+  for (const path of pathsToExpand) {
+    if (!expanded.value.includes(path)) {
+      expanded.value.push(path)
+    }
+  }
+})
 const rerenderCount = ref(1)
 
-const flatItems = computed<{
-  index: number
-  label: string
-  icon: string
-  component: any
-}[]>(() => {
+const flatItems = computed<TreeItem[]>(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   rerenderCount.value
-  return slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
+  return props.items || slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
 })
+
+// eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => buildTree(flatItems.value))
 
 function buildTree(items: { label: string }[]): TreeNode[] {
@@ -100,7 +133,7 @@ function buildTree(items: { label: string }[]): TreeNode[] {
   return sort(root)
 }
 
-function transformSlot(slot: any, index: number) {
+function transformSlot(slot: any, index: number): TreeItem {
   if (typeof slot.type === 'symbol') {
     return slot.children?.map(transformSlot)
   }
@@ -112,7 +145,7 @@ function transformSlot(slot: any, index: number) {
   }
 }
 
-const expanded = computed(() => {
+function getExpandedPaths(path?: string) {
   if (props.expandAll) {
     const allPaths = new Set<string>()
     flatItems.value.forEach((item) => {
@@ -124,14 +157,22 @@ const expanded = computed(() => {
     return Array.from(allPaths)
   }
 
-  const path = model.value?.path
   if (!path) {
     return []
   }
 
   const parts = path.split('/')
-  return parts.map((_, index) => parts.slice(0, index + 1).join('/'))
-})
+  return parts.slice(0, -1).map((_, index) => parts.slice(0, index + 1).join('/'))
+}
+
+const expanded = ref(getExpandedPaths(model.value?.path))
+
+// Re-expand all when flatItems change and expandAll is true
+watch(flatItems, () => {
+  if (props.expandAll) {
+    expanded.value = getExpandedPaths()
+  }
+}, { immediate: true })
 
 watch(model, (value) => {
   const item = flatItems.value.find(item => value?.path === item.label)
@@ -199,10 +240,10 @@ onBeforeUpdate(() => rerenderCount.value++)
   <div v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <TreeRoot
       v-model="model"
+      v-model:expanded="expanded"
       :class="ui.list({ class: props.ui?.list })"
       :items="items"
       :get-key="(item) => item.path"
-      :default-expanded="expanded"
     >
       <ReuseTreeTemplate :items="items" :level="1" />
     </TreeRoot>

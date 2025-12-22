@@ -147,9 +147,9 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
   <DefineListTemplate v-slot="{ links, level }">
     <ul :class="level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
       <li v-for="(link, index) in links" :key="index" :class="link.children && link.children.length > 0 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, link.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, link.ui?.item] })">
-        <a :href="`#${link.id}`" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active: activeHeadings.includes(link.id) })" @click.prevent="scrollToHeading(link.id)">
+        <a :href="`#${link.id}`" data-slot="link" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active: activeHeadings.includes(link.id) })" @click.prevent="scrollToHeading(link.id)">
           <slot name="link" :link="link">
-            <span :class="ui.linkText({ class: [props.ui?.linkText, link.ui?.linkText] })">
+            <span data-slot="linkText" :class="ui.linkText({ class: [props.ui?.linkText, link.ui?.linkText] })">
               {{ link.text }}
             </span>
           </slot>
@@ -163,42 +163,42 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
   <DefineTriggerTemplate v-slot="{ open }">
     <slot name="leading" :open="open" :ui="ui" />
 
-    <span :class="ui.title({ class: props.ui?.title })">
+    <span data-slot="title" :class="ui.title({ class: props.ui?.title })">
       <slot :open="open">{{ title || t('contentToc.title') }}</slot>
     </span>
 
-    <span :class="ui.trailing({ class: props.ui?.trailing })">
+    <span data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :open="open" :ui="ui">
-        <UIcon :name="trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <UIcon :name="trailingIcon || appConfig.ui.icons.chevronDown" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </DefineTriggerTemplate>
 
-  <CollapsibleRoot v-slot="{ open }" v-bind="{ ...rootProps, ...$attrs }" :default-open="defaultOpen" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.top" :class="ui.top({ class: props.ui?.top })">
+  <CollapsibleRoot v-slot="{ open }" v-bind="{ ...rootProps, ...$attrs }" :default-open="defaultOpen" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: props.ui?.top })">
         <slot name="top" :links="links" />
       </div>
 
       <template v-if="links?.length">
-        <CollapsibleTrigger :class="ui.trigger({ class: 'lg:hidden' })">
+        <CollapsibleTrigger data-slot="trigger" :class="ui.trigger({ class: 'lg:hidden' })">
           <ReuseTriggerTemplate :open="open" />
         </CollapsibleTrigger>
 
-        <CollapsibleContent :class="ui.content({ class: [props.ui?.content, 'lg:hidden'] })">
-          <div v-if="highlight" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+        <CollapsibleContent data-slot="content" :class="ui.content({ class: [props.ui?.content, 'lg:hidden'] })">
+          <div v-if="highlight" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
 
           <slot name="content" :links="links">
             <ReuseListTemplate :links="links" :level="0" />
           </slot>
         </CollapsibleContent>
 
-        <p :class="ui.trigger({ class: 'hidden lg:flex' })">
+        <p data-slot="trigger" :class="ui.trigger({ class: 'hidden lg:flex' })">
           <ReuseTriggerTemplate :open="open" />
         </p>
 
-        <div :class="ui.content({ class: [props.ui?.content, 'hidden lg:flex'] })">
-          <div v-if="highlight" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+        <div data-slot="content" :class="ui.content({ class: [props.ui?.content, 'hidden lg:flex'] })">
+          <div v-if="highlight" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
 
           <slot name="content" :links="links">
             <ReuseListTemplate :links="links" :level="0" />
@@ -206,7 +206,7 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
         </div>
       </template>
 
-      <div v-if="!!slots.bottom" :class="ui.bottom({ class: props.ui?.bottom, body: !!slots.top || !!links?.length })">
+      <div v-if="!!slots.bottom" data-slot="bottom" :class="ui.bottom({ class: props.ui?.bottom, body: !!slots.top || !!links?.length })">
         <slot name="bottom" :links="links" />
       </div>
     </div>

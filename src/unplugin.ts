@@ -11,7 +11,7 @@ import type colors from 'tailwindcss/colors'
 
 import type * as ui from '#build/ui'
 
-import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
+import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
 import type { ModuleOptions } from './module'
 import type icons from './theme/icons'
 
@@ -31,6 +31,7 @@ type AppConfigUI = {
   // TODO: add type hinting for colors from `options.theme.colors`
   colors?: Record<string, Color> & { neutral?: NeutralColor }
   icons?: Partial<typeof icons>
+  prefix?: string
 } & TVConfig<typeof ui>
 
 export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'> {
@@ -51,9 +52,22 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    */
   components?: Partial<ComponentsOptions>
   /**
+   * Router integration mode
+   * - `true` (default): Use vue-router integration
+   * - `false`: Disable routing, use anchor tags
+   * - `'inertia'`: Use Inertia.js compatibility layer
+   * @defaultValue `true`
+   */
+  router?: boolean | 'inertia'
+  /**
    * Enables compatibility layer for InertiaJS
+   * @deprecated Use `router: 'inertia'` instead
    */
   inertia?: boolean
+  /**
+   * Additional packages to scan for components using Nuxt UI
+   */
+  scanPackages?: string[]
 }
 
 export const runtimeDir = normalize(fileURLToPath(new URL('./runtime', import.meta.url)))
@@ -64,7 +78,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
   options.theme = options.theme || {}
   options.theme.colors = resolveColors(options.theme.colors)
 
-  const appConfig = defu({ ui: options.ui, colorMode: options.colorMode }, { ui: getDefaultUiConfig(options.theme.colors) })
+  const appConfig = defu({ ui: options.ui, colorMode: options.colorMode }, { ui: getDefaultConfig(options.theme) })
 
   return [
     NuxtEnvironmentPlugin(options),

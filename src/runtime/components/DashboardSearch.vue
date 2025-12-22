@@ -3,7 +3,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/dashboard-search'
-import type { ButtonProps, InputProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps } from '../types'
+import type { ButtonProps, InputProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch'>
@@ -39,7 +39,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
    * @emits 'update:open'
    * @defaultValue true
    */
-  close?: boolean | Partial<ButtonProps>
+  close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -155,6 +155,8 @@ const groups = computed(() => {
   return groups
 })
 
+const commandPaletteRef = useTemplateRef('commandPaletteRef')
+
 function onSelect(item: CommandPaletteItem) {
   if (item.disabled) {
     return
@@ -173,8 +175,6 @@ defineShortcuts({
   }
 })
 
-const commandPaletteRef = useTemplateRef('commandPaletteRef')
-
 defineExpose({
   commandPaletteRef
 })
@@ -186,6 +186,7 @@ defineExpose({
     :title="title || t('dashboardSearch.title')"
     :description="description || t('dashboardSearch.description')"
     v-bind="modalProps"
+    data-slot="modal"
     :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
     <template #content="contentData">

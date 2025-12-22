@@ -75,20 +75,20 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageCTA || {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="top" />
 
-    <UContainer :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || !!slots.body || !!slots.footer || (links?.length || !!slots.links)" :class="ui.wrapper({ class: props.ui?.wrapper })">
-        <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)" :class="ui.header({ class: props.ui?.header })">
+    <UContainer data-slot="container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || !!slots.body || !!slots.footer || (links?.length || !!slots.links)" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+        <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
           <slot name="header">
-            <h2 v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+            <h2 v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
               <slot name="title">
                 {{ title }}
               </slot>
             </h2>
 
-            <div v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+            <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
               <slot name="description">
                 {{ description }}
               </slot>
@@ -96,13 +96,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageCTA || {
           </slot>
         </div>
 
-        <div v-if="!!slots.body" :class="ui.body({ class: props.ui?.body })">
+        <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: props.ui?.body })">
           <slot name="body" />
         </div>
 
-        <div v-if="!!slots.footer || (links?.length || !!slots.links)" :class="ui.footer({ class: props.ui?.footer })">
+        <div v-if="!!slots.footer || (links?.length || !!slots.links)" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
           <slot name="footer">
-            <div v-if="links?.length || !!slots.links" :class="ui.links({ class: props.ui?.links })">
+            <div v-if="links?.length || !!slots.links" data-slot="links" :class="ui.links({ class: props.ui?.links })">
               <slot name="links">
                 <UButton v-for="(link, index) in links" :key="index" size="lg" v-bind="link" />
               </slot>
