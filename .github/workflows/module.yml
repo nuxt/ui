@@ -101,12 +101,12 @@ jobs:
           node-version: 22
           cache: pnpm
 
+      - name: Install latest nuxt/ui
+        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
+
       - name: Isolate playground from workspace
         working-directory: .
         run: rm -f pnpm-workspace.yaml pnpm-lock.yaml
-
-      - name: Install latest nuxt/ui
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
 
       - name: Install dependencies
         run: pnpm install
