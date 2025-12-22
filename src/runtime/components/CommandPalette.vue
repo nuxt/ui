@@ -517,13 +517,13 @@ function onSelect(e: Event, item: T) {
     <ListboxFilter v-if="input" v-model="searchTerm" as-child>
       <UInput
         variant="none"
+        v-bind="typeof props.input === 'object' ? props.input : {}"
         :placeholder="placeholder"
         :autofocus="autofocus"
         :loading="loading"
         :loading-icon="loadingIcon"
         :trailing-icon="trailingIcon"
         :icon="icon || appConfig.ui.icons.search"
-        v-bind="typeof props.input === 'object' ? props.input : {}"
         data-slot="input"
         :class="ui.input({ class: props.ui?.input })"
         @keydown.backspace="onBackspace"
