@@ -4,7 +4,7 @@
   "type": "module",
   "dependencies": {
     "@iconify-json/heroicons": "^1.2.3",
-    "@iconify-json/lucide": "^1.2.81",
+    "@iconify-json/lucide": "^1.2.82",
     "@iconify-json/simple-icons": "^1.2.63",
     "@iconify-json/vscode-icons": "^1.2.37",
     "@nuxt/content": "^2.13.4",
