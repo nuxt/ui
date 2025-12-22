@@ -106,7 +106,9 @@ jobs:
 
       - name: Isolate playground from workspace
         working-directory: .
-        run: rm -f pnpm-workspace.yaml pnpm-lock.yaml
+        run: |
+          rm -f pnpm-workspace.yaml pnpm-lock.yaml
+          rm -rf node_modules
 
       - name: Install dependencies
         run: pnpm install

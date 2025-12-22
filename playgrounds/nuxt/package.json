@@ -24,5 +24,12 @@
   "devDependencies": {
     "typescript": "^5.8.3",
     "vue-tsc": "^3.1.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "@tiptap/core": "3.14.0",
+      "@tiptap/pm": "3.14.0",
+      "@tiptap/vue-3": "3.14.0"
+    }
   }
 }
