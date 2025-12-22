@@ -524,8 +524,8 @@ function onSelect(e: Event, item: T) {
   </DefineItemTemplate>
 
   <ListboxRoot
-    v-bind="rootProps"
-    ref="listboxRootRef"
+    v-bind="{ ...rootProps, ...$attrs }"
+    ref="rootRef"
     :by="(by as any)"
     :selection-behavior="selectionBehavior"
     data-slot="root"
