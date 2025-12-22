@@ -104,14 +104,8 @@ jobs:
       - name: Install latest nuxt/ui
         run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
 
-      - name: Isolate playground from workspace
-        working-directory: .
-        run: |
-          rm -f pnpm-workspace.yaml pnpm-lock.yaml
-          rm -rf node_modules
-
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --ignore-workspace
 
       - name: Prepare
         run: pnpm nuxt prepare
