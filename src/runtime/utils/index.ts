@@ -188,4 +188,9 @@ export function transformUI(ui: any, uiProp?: any) {
   }, uiProp || {})
 }
 
+export function wrapInArray<T>(item: T) {
+  if (!Array.isArray(item)) return [item]
+  return item
+}
+
 export * from './content'

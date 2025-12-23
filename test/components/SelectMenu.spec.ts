@@ -334,4 +334,41 @@ describe('SelectMenu', () => {
       })).toEqualTypeOf<[(string | number)[]]>()
     })
   })
+
+  describe('caching', () => {
+    test('should display correct label even items is empty', async () => {
+      const items = [{ id: 1, label: 'Option 1' }, { id: 2, label: 'Option 2' }]
+      const wrapper = mount(SelectMenu, {
+        props: {
+          items,
+          modelValue: 1,
+          valueKey: 'id'
+        }
+      })
+
+      wrapper.setProps({
+        items: []
+      })
+
+      expect(wrapper.text()).toBe('Option 1')
+    })
+
+    test('should display (Multiple) correct label even items is empty', async () => {
+      const items = [{ id: 1, label: 'Option 1' }, { id: 2, label: 'Option 2' }]
+      const wrapper = mount(SelectMenu, {
+        props: {
+          items,
+          multiple: true,
+          modelValue: [1, 2],
+          valueKey: 'id'
+        }
+      })
+
+      wrapper.setProps({
+        items: []
+      })
+
+      expect(wrapper.text()).toBe('Option 1, Option 2')
+    })
+  })
 })
