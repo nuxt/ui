@@ -150,10 +150,10 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
      */
     overscan?: number
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 32
      */
-    estimateSize?: number
+    estimateSize?: number | ((index: number) => number)
   }
   /**
    * The key used to get the label from the item.
@@ -243,7 +243,7 @@ const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
   return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-    estimateSize: getEstimateSize(filteredItems.value, 'md', props.descriptionKey as string)
+    estimateSize: getEstimateSize(filteredItems.value, 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
 
