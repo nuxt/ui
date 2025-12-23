@@ -17,7 +17,10 @@ export default (options: Required<NuxtOptions['ui']>) => ({
     itemWithChildren: '',
     link: 'group relative text-sm flex items-center focus-visible:outline-primary py-1',
     linkText: 'truncate',
-    indicator: 'absolute ms-2.5 transition-[translate,height] duration-200 h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full'
+    indicator: 'absolute ms-2.5 transition-[translate,height] duration-200 h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full',
+    circuitOverlay: 'absolute start-0 top-0 rtl:-scale-x-100',
+    circuitLine: 'absolute inset-0 bg-muted',
+    circuitActiveHighlight: 'absolute w-full transition-[transform,height] duration-200 ease-out'
   },
   variants: {
     color: {
@@ -26,10 +29,12 @@ export default (options: Required<NuxtOptions['ui']>) => ({
     },
     highlightColor: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `bg-${color}`
+        indicator: `bg-${color}`,
+        circuitActiveHighlight: `bg-${color}`
       }])),
       neutral: {
-        indicator: 'bg-inverted'
+        indicator: 'bg-inverted',
+        circuitActiveHighlight: 'bg-inverted'
       }
     },
     active: {

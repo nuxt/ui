@@ -252,14 +252,14 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
           <div
             v-if="circuitMaskStyle"
             data-slot="circuitOverlay"
-            class="absolute start-0 top-0 rtl:-scale-x-100"
+            :class="ui.circuitOverlay({ class: props.ui?.circuitOverlay })"
             :style="{ ...circuitMaskStyle, ...indicatorStyle }"
           >
-            <div class="absolute inset-0 bg-muted" />
+            <div data-slot="circuitLine" :class="ui.circuitLine({ class: props.ui?.circuitLine })" />
             <div
               v-if="indicatorStyle"
-              class="absolute w-full transition-[transform,height] duration-200 ease-out"
-              :class="`bg-${props.highlightColor || props.color || 'primary'}`"
+              data-slot="circuitActiveHighlight"
+              :class="ui.circuitActiveHighlight({ class: props.ui?.circuitActiveHighlight })"
               :style="{ transform: `translateY(var(--indicator-position))`, height: 'var(--indicator-size)' }"
             />
           </div>
@@ -279,14 +279,14 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
           <div
             v-if="circuitMaskStyle"
             data-slot="circuitOverlay"
-            class="absolute start-0 top-0 rtl:-scale-x-100"
+            :class="ui.circuitOverlay({ class: props.ui?.circuitOverlay })"
             :style="{ ...circuitMaskStyle, ...indicatorStyle }"
           >
-            <div class="absolute inset-0 bg-muted" />
+            <div data-slot="circuitLine" :class="ui.circuitLine({ class: props.ui?.circuitLine })" />
             <div
               v-if="indicatorStyle"
-              class="absolute w-full transition-[transform,height] duration-200 ease-out"
-              :class="`bg-${props.highlightColor || props.color || 'primary'}`"
+              data-slot="circuitActiveHighlight"
+              :class="ui.circuitActiveHighlight({ class: props.ui?.circuitActiveHighlight })"
               :style="{ transform: `translateY(var(--indicator-position))`, height: 'var(--indicator-size)' }"
             />
           </div>
