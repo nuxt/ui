@@ -21,7 +21,7 @@ watch(file, async (newFile) => {
     }
 
     // Simulate upload delay
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    await new Promise(resolve => setTimeout(resolve, 1000))
 
     const pos = props.getPos()
     if (typeof pos !== 'number') {
@@ -56,7 +56,7 @@ watch(file, async (newFile) => {
         <UAvatar
           :icon="loading ? 'i-lucide-loader-circle' : 'i-lucide-image'"
           size="xl"
-          :class="[loading && 'animate-spin']"
+          :ui="{ icon: [loading && 'animate-spin'] }"
         />
       </template>
     </UFileUpload>

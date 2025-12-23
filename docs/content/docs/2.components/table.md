@@ -13,7 +13,7 @@ links:
 
 ## Usage
 
-The Table component is built on top of [TanStack Table](https://tanstack.com/table/latest) and is powered by the [useVueTable](https://tanstack.com/table/latest/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API. *Some features of TanStack Table are not supported yet, we'll add more over time.*
+The Table component is built on top of [TanStack Table](https://tanstack.com/table/latest) and is powered by the [useVueTable](https://tanstack.com/table/latest/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API.
 
 ::component-example
 ---
@@ -561,7 +561,7 @@ class: '!p-0'
 
 ### With infinite scroll
 
-If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data when scrolling.
+If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data  as the user scrolls.
 
 ::component-example
 ---

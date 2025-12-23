@@ -96,6 +96,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   /**
    * Enable virtualization for large datasets.
    * Note: when enabled, the divider between rows and sticky properties are not supported.
+   * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
    * @defaultValue false
    */
   virtualize?: boolean | (Partial<Omit<VirtualizerOptions<Element, Element>, 'getScrollElement' | 'count' | 'estimateSize' | 'overscan'>> & {
