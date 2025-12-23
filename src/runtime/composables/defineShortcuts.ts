@@ -95,6 +95,9 @@ export function extractShortcuts(items: any[] | any[][], separator: '_' | '-' = 
 
 export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: ShortcutsOptions = {}) {
   const chainedInputs = ref<string[]>([])
+  const pendingShortcut = ref<Shortcut | null>(null)
+  let pendingTimer: ReturnType<typeof setTimeout> | null = null
+
   const clearChainedInput = () => {
     chainedInputs.value.splice(0, chainedInputs.value.length)
   }
@@ -113,23 +116,31 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       return
     }
 
+    const keyValue = layoutIndependent ? e.code : e.key.toLowerCase()
+
     const alphabetKey = layoutIndependent ? /^Key[A-Z]$/i.test(e.code) : /^[a-z]{1}$/i.test(e.key)
     const shiftableKey = layoutIndependent ? shiftableCodes.includes(e.code) : shiftableKeys.includes(e.key.toLowerCase())
 
     let chainedKey
+
     // push either code or key depending on layoutIndependent flag
     chainedInputs.value.push(layoutIndependent ? e.code : e.key)
+    
     // try matching a chained shortcut
     if (chainedInputs.value.length >= 2) {
       chainedKey = chainedInputs.value.slice(-2).join('-')
 
       for (const shortcut of shortcuts.value.filter(s => s.chained)) {
-        if (shortcut.key !== chainedKey) {
-          continue
-        }
+        if (shortcut.key !== chainedKey) continue
 
         if (shortcut.enabled) {
           e.preventDefault()
+          // Cancel any pending single-key shortcut
+          if (pendingTimer) {
+            clearTimeout(pendingTimer)
+            pendingTimer = null
+            pendingShortcut.value = null
+          }
           shortcut.handler(e)
         }
         clearChainedInput()
@@ -139,34 +150,34 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
 
     // try matching a standard shortcut
     for (const shortcut of shortcuts.value.filter(s => !s.chained)) {
-      if (layoutIndependent) {
-        // compare by code
-        if (e.code !== shortcut.key) {
-          continue
-        }
-      } else {
-        if (e.key.toLowerCase() !== shortcut.key) {
-          continue
-        }
+      if (layoutIndependent ? e.code !== shortcut.key : e.key.toLowerCase() !== shortcut.key) continue
+      if (e.metaKey !== shortcut.metaKey) continue
+      if (e.ctrlKey !== shortcut.ctrlKey) continue
+      if ((alphabetKey || shiftableKey) && e.shiftKey !== shortcut.shiftKey) continue
+      if (!shortcut.enabled) {
+        chainedInputs.value = []
+        return
       }
 
-      if (e.metaKey !== shortcut.metaKey) {
-        continue
-      }
-      if (e.ctrlKey !== shortcut.ctrlKey) {
-        continue
-      }
-      // shift modifier is only checked in combination with alphabet keys and some extra keys
-      // (shift with special characters would change the key)
-      if ((alphabetKey || shiftableKey) && e.shiftKey !== shortcut.shiftKey) {
-        continue
-      }
-
-      if (shortcut.enabled) {
+      // Delay if this key is a chain prefix
+      if (isChainPrefix(keyValue)) {
         e.preventDefault()
-        shortcut.handler(e)
+        pendingShortcut.value = shortcut
+
+        if (pendingTimer) clearTimeout(pendingTimer)
+        pendingTimer = setTimeout(() => {
+          pendingShortcut.value?.handler(e)
+          pendingShortcut.value = null
+          chainedInputs.value = []
+        }, options.chainDelay ?? 800)
+
+        return
       }
-      clearChainedInput()
+
+      // Otherwise, fire immediately
+      e.preventDefault()
+      shortcut.handler(e)
+      chainedInputs.value = []
       return
     }
 
@@ -270,6 +281,12 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       return shortcut
     }).filter(Boolean) as Shortcut[]
   })
+
+  function isChainPrefix(key: string) {
+    return shortcuts.value.some(s =>
+      s.chained && s.key.split('-')[0] === key
+    )
+  }
 
   return useEventListener('keydown', onKeyDown)
 }
