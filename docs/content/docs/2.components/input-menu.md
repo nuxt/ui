@@ -488,6 +488,67 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
+### Clear :badge{label="Soon" class="align-text-top"}
+
+Use the `clear` prop to display a clear button when a value is selected.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  clear: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+### Clear Icon :badge{label="Soon" class="align-text-top"}
+
+Use the `clear-icon` prop to customize the clear button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  clear: true
+  clearIcon: 'i-lucide-trash'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
+::
+
 ### Avatar
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the InputMenu.

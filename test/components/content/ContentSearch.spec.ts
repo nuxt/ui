@@ -59,12 +59,12 @@ describe('ContentSearch', () => {
     content: 'We\'ve transitioned from Headless UI to Reka UI as our core component foundation. This shift brings several key advantages: Extensive Component Library: With 55+ primitives, Reka UI significantly expands our component offerings.Active Development: Reka UI\'s growing popularity ensures ongoing improvements and updates.Enhanced Accessibility: Built-in accessibility features align with our commitment to inclusive design.Vue 3 Optimization: Seamless integration with Vue 3 and the Composition API. This transition empowers Nuxt UI to become a more comprehensive and flexible UI library, offering developers greater power and customization options.',
     level: 2
   }, {
-    id: '/getting-started#tailwind-css-v4',
-    title: 'Tailwind CSS v4',
+    id: '/getting-started#tailwind-css',
+    title: 'Tailwind CSS',
     titles: [
       'Introduction'
     ],
-    content: 'Nuxt UI integrates the latest Tailwind CSS v4, bringing significant improvements: Built for performance: Full builds in the new engine are up to 5x faster, and incremental builds are over 100x faster — and measured in microseconds.Unified toolchain: Built-in import handling, vendor prefixing, and syntax transforms, with no additional tooling required.CSS-first configuration: A reimagined developer experience where you customize and extend the framework directly in CSS instead of a JavaScript configuration file.Designed for the modern web: Built on native cascade layers, wide-gamut colors, and including first-class support for modern CSS features like container queries, @starting-style, popovers, and more. Learn about all the breaking changes in Tailwind CSS v4.',
+    content: 'Nuxt UI integrates the latest Tailwind CSS, bringing significant improvements: Built for performance: Full builds in the new engine are up to 5x faster, and incremental builds are over 100x faster — and measured in microseconds.Unified toolchain: Built-in import handling, vendor prefixing, and syntax transforms, with no additional tooling required.CSS-first configuration: A reimagined developer experience where you customize and extend the framework directly in CSS instead of a JavaScript configuration file.Designed for the modern web: Built on native cascade layers, wide-gamut colors, and including first-class support for modern CSS features like container queries, @starting-style, popovers, and more. Learn about all the breaking changes in Tailwind CSS.',
     level: 2
   }, {
     id: '/getting-started#tailwind-variants',

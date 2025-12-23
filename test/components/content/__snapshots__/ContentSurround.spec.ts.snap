@@ -8,7 +8,7 @@ exports[`ContentSurround > renders with as correctly 1`] = `
   </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
     <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
     <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Theme</p>
-    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS v4, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
   </a></section>"
 `;
 
@@ -20,7 +20,7 @@ exports[`ContentSurround > renders with class correctly 1`] = `
   </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
     <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
     <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Theme</p>
-    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS v4, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
   </a></div>"
 `;
 
@@ -34,7 +34,7 @@ exports[`ContentSurround > renders with link-leading slot correctly 1`] = `
   </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
     <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition">Link leading slot</div>
     <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Theme</p>
-    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS v4, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
   </a></div>"
 `;
 
@@ -46,7 +46,7 @@ exports[`ContentSurround > renders with link-title slot correctly 1`] = `
   </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
     <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
     <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Link title slot</p>
-    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS v4, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
   </a></div>"
 `;
 
@@ -58,7 +58,7 @@ exports[`ContentSurround > renders with nextIcon correctly 1`] = `
   </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
     <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:chevron-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
     <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Theme</p>
-    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS v4, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
   </a></div>"
 `;
 
@@ -70,7 +70,7 @@ exports[`ContentSurround > renders with prevIcon correctly 1`] = `
   </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
     <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
     <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Theme</p>
-    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS v4, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
   </a></div>"
 `;
 
@@ -82,7 +82,7 @@ exports[`ContentSurround > renders with surround correctly 1`] = `
   </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
     <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
     <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Theme</p>
-    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS v4, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
   </a></div>"
 `;
 
@@ -94,6 +94,6 @@ exports[`ContentSurround > renders with ui correctly 1`] = `
   </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
     <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
     <p data-slot="linkTitle" class="font-medium text-highlighted mb-1 truncate text-xl">Theme</p>
-    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS v4, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
   </a></div>"
 `;

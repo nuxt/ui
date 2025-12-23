@@ -231,7 +231,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           href: to,
           rel,
           target,
-          active,
+          active: active ?? false,
           isExternal
         }"
       />
@@ -250,7 +250,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
       }"
       :class="resolveLinkClass()"
     >
-      <slot :active="active" />
+      <slot :active="active ?? false" />
     </ULinkBase>
   </template>
 </template>

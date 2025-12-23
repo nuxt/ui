@@ -2,7 +2,7 @@
 const cards = ref([
   {
     title: 'Theme',
-    description: 'Learn how to customize Nuxt UI components using Tailwind CSS v4.',
+    description: 'Learn how to customize Nuxt UI components using Tailwind CSS.',
     icon: 'i-lucide-swatch-book',
     to: '/docs/getting-started/theme/design-system',
     class: 'lg:col-span-2',

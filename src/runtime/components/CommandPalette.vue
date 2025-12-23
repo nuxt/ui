@@ -124,6 +124,11 @@ export interface CommandPaletteProps<T extends CommandPaletteItem = CommandPalet
    * @IconifyIcon
    */
   backIcon?: IconProps['name']
+  /**
+   * Configure the input or hide it with `false`.
+   * @defaultValue true
+   */
+  input?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   groups?: G[]
   /** The value of the InputMenu when initially rendered. Use when you do not need to control the state of the InputMenu. */
   defaultValue?: GetModelValue<T, VK, M>
@@ -154,10 +159,10 @@ export interface CommandPaletteProps<T extends CommandPaletteItem = CommandPalet
      */
     overscan?: number
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 32
      */
-    estimateSize?: number
+    estimateSize?: number | ((index: number) => number)
   }
   /**
    * The key used to get the label from the item.
@@ -213,7 +218,7 @@ export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteIte
 
 <script setup lang="ts" generic="T extends CommandPaletteItem, G extends CommandPaletteGroup<T>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
 import { computed, ref, useTemplateRef, toRef } from 'vue'
-import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
+import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate, refThrottled } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
@@ -238,6 +243,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<CommandPaletteProps<T, G, VK, M>>(), {
   labelKey: 'label',
   descriptionKey: 'description',
+  input: true,
   autofocus: true,
   back: true,
   preserveGroupOrder: false,
@@ -253,12 +259,11 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
-const inputProps = useForwardProps(reactivePick(props, 'loading'))
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
   return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-    estimateSize: getEstimateSize(filteredItems.value, 'md', props.descriptionKey as string)
+    estimateSize: getEstimateSize(filteredItems.value, 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
 
@@ -490,7 +495,7 @@ function onSelect(e: Event, item: T) {
                 </slot>
               </span>
 
-              <span v-if="get(item, props.descriptionKey as string)" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
+              <span v-if="get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<T, G>]" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
                 <slot :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<T, G>)" :item="(item as any)" :index="index" :ui="ui">
                   {{ get(item, props.descriptionKey as string) }}
                 </slot>
@@ -531,12 +536,13 @@ function onSelect(e: Event, item: T) {
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
-    <ListboxFilter v-model="searchTerm" as-child>
+    <ListboxFilter v-if="input" v-model="searchTerm" as-child>
       <UInput
-        :placeholder="placeholder"
         variant="none"
+        v-bind="typeof props.input === 'object' ? props.input : {}"
+        :placeholder="placeholder"
         :autofocus="autofocus"
-        v-bind="inputProps"
+        :loading="loading"
         :loading-icon="loadingIcon"
         :trailing-icon="trailingIcon"
         :icon="icon || appConfig.ui.icons.search"
