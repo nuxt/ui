@@ -196,14 +196,14 @@ exports[`Button > renders with loadingPosition center correctly 1`] = `
 `;
 
 exports[`Button > renders with loadingPosition leading correctly 1`] = `
-"<button type="button" disabled="" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><span class="iconify i-lucide:loader-circle shrink-0 size-5 animate-spin" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Button</span>
+"<button type="button" disabled="" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><span class="iconify i-lucide:loader-circle shrink-0 size-5 animate-spin" aria-hidden="true" data-slot="loadingIcon"></span><span data-slot="label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
 `;
 
 exports[`Button > renders with loadingPosition trailing correctly 1`] = `
 "<button type="button" disabled="" data-slot="base" class="rounded-md font-medium inline-flex items-center rtl:flex-row-reverse disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-  <!--v-if--><span data-slot="label" class="truncate">Button</span><span class="iconify i-lucide:loader-circle shrink-0 size-5 animate-spin" aria-hidden="true" data-slot="trailingIcon"></span>
+  <!--v-if--><span data-slot="label" class="truncate">Button</span><span class="iconify i-lucide:loader-circle shrink-0 size-5 animate-spin" aria-hidden="true" data-slot="loadingIcon"></span>
 </button>"
 `;
 

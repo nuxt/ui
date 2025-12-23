@@ -95,31 +95,39 @@ const loadingPosition = computed(() => {
   return props.trailing ? 'trailing' : 'leading'
 })
 
+const hasExplicitLoadingPosition = computed(() => {
+  return props.loadingPosition !== undefined
+})
+
 const iconProps = computed(() => {
-  const baseProps = { ...props, loading: isLoading.value }
-
-  if (isLoading.value) {
-    if (loadingPosition.value === 'trailing') {
-      return { ...baseProps, trailing: true }
-    } else if (loadingPosition.value === 'leading') {
-      return { ...baseProps, trailing: false }
-    }
-    return { ...baseProps, trailing: false }
+  if (isLoading.value && hasExplicitLoadingPosition.value && loadingPosition.value !== 'center') {
+    return { ...props, loading: false }
   }
-
-  return baseProps
+  return { ...props, loading: isLoading.value }
 })
 
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(iconProps)
 
+const loadingIconName = computed(() => {
+  return props.loadingIcon || appConfig.ui.icons.loading
+})
+
 const centerLoadingIcon = computed(() => {
   if (isLoading.value && loadingPosition.value === 'center') {
-    return props.loadingIcon || appConfig.ui.icons.loading
+    return loadingIconName.value
   }
   return undefined
 })
 
-const ui = computed(() => tv({
+const showLeadingLoadingIcon = computed(() => {
+  return isLoading.value && loadingPosition.value === 'leading' && hasExplicitLoadingPosition.value
+})
+
+const showTrailingLoadingIcon = computed(() => {
+  return isLoading.value && loadingPosition.value === 'trailing' && hasExplicitLoadingPosition.value
+})
+
+const uiForRegularIcons = computed(() => tv({
   extend: tv(theme),
   ...defu({
     variants: {
@@ -137,13 +145,54 @@ const ui = computed(() => tv({
   color: props.color,
   variant: props.variant,
   size: buttonSize.value,
-  loading: isLoading.value,
+  loading: false,
   block: props.block,
   square: props.square || (!slots.default && !props.label),
   leading: isLeading.value,
   trailing: isTrailing.value,
   fieldGroup: orientation.value
 }))
+
+const ui = computed(() => {
+  let leadingForUi = isLeading.value
+  let trailingForUi = isTrailing.value
+
+  if (isLoading.value && hasExplicitLoadingPosition.value && loadingPosition.value !== 'center') {
+    if (loadingPosition.value === 'leading') {
+      leadingForUi = true
+      trailingForUi = false
+    } else if (loadingPosition.value === 'trailing') {
+      leadingForUi = false
+      trailingForUi = true
+    }
+  }
+
+  return tv({
+    extend: tv(theme),
+    ...defu({
+      variants: {
+        active: {
+          true: {
+            base: mergeClasses(appConfig.ui?.button?.variants?.active?.true?.base, props.activeClass)
+          },
+          false: {
+            base: mergeClasses(appConfig.ui?.button?.variants?.active?.false?.base, props.inactiveClass)
+          }
+        }
+      }
+    }, appConfig.ui?.button || {})
+  })({
+    color: props.color,
+    variant: props.variant,
+    size: buttonSize.value,
+    loading: isLoading.value,
+    block: props.block,
+    square: props.square || (!slots.default && !props.label),
+    leading: leadingForUi,
+    trailing: trailingForUi,
+    fieldGroup: orientation.value
+  })
+})
 </script>
 
 <template>
@@ -166,8 +215,9 @@ const ui = computed(() => tv({
       @click="onClickWrapper"
     >
       <slot name="leading" :ui="ui">
-        <UIcon v-if="loadingPosition !== 'center' && isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
-        <UAvatar v-else-if="loadingPosition !== 'center' && !!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
+        <UIcon v-if="showLeadingLoadingIcon" :name="loadingIconName" data-slot="loadingIcon" :class="ui.loadingIcon({ class: props.ui?.loadingIcon, active })" />
+        <UIcon v-else-if="!(loadingPosition === 'center' && isLoading) && isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="(hasExplicitLoadingPosition ? uiForRegularIcons : ui).leadingIcon({ class: props.ui?.leadingIcon, active })" />
+        <UAvatar v-else-if="!(loadingPosition === 'center' && isLoading) && !!avatar" :size="((props.ui?.leadingAvatarSize || (hasExplicitLoadingPosition ? uiForRegularIcons : ui).leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="(hasExplicitLoadingPosition ? uiForRegularIcons : ui).leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
       </slot>
 
       <slot :ui="ui">
@@ -187,7 +237,8 @@ const ui = computed(() => tv({
       </slot>
 
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="loadingPosition !== 'center' && isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
+        <UIcon v-if="showTrailingLoadingIcon" :name="loadingIconName" data-slot="loadingIcon" :class="ui.loadingIcon({ class: props.ui?.loadingIcon, active })" />
+        <UIcon v-else-if="!(loadingPosition === 'center' && isLoading) && isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="(hasExplicitLoadingPosition ? uiForRegularIcons : ui).trailingIcon({ class: props.ui?.trailingIcon, active })" />
       </slot>
     </ULinkBase>
   </ULink>
