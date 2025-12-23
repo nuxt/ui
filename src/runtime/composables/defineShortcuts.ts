@@ -125,7 +125,7 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
 
     // push either code or key depending on layoutIndependent flag
     chainedInputs.value.push(layoutIndependent ? e.code : e.key)
-    
+
     // try matching a chained shortcut
     if (chainedInputs.value.length >= 2) {
       chainedKey = chainedInputs.value.slice(-2).join('-')
