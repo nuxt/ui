@@ -16,9 +16,9 @@ We've transitioned from [Headless UI](https://headlessui.com/) to [Reka UI](http
 - **Future-Proof Development**: Benefit from Reka UI's growing popularity and continuous improvements
 - **First-Class Accessibility**: Built-in accessibility features aligned with our commitment to inclusive design
 
-### 🚀 Tailwind CSS v4 Integration
+### 🚀 Tailwind CSS Integration
 
-Nuxt UI now leverages the latest [Tailwind CSS v4](https://tailwindcss.com), delivering:
+Nuxt UI now leverages the latest [Tailwind CSS](https://tailwindcss.com), delivering:
 
 - **Exceptional Performance**: Full builds up to 5× faster, with incremental builds over 100× faster
 - **Streamlined Toolchain**: Built-in import handling, vendor prefixing, and syntax transforms with zero additional tooling
@@ -49,7 +49,7 @@ This release represents thousands of hours of work from our team and the communi
 
 const version = {
   title: 'Introducing Nuxt UI v3',
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.',
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.',
   date: '2025-03-12T00:00:00.000Z',
   badge: 'Release',
   to: 'https://nuxt.com/blog/nuxt-ui-v3',

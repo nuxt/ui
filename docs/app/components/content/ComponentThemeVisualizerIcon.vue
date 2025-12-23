@@ -110,6 +110,7 @@ const currentState = computed(() => props.open ? 'open' : 'closed')
       :animate="currentState"
       :style="{ transformOrigin: 'center' }"
       class="outline-none"
+      tabindex="-1"
     />
     <motion.line
       x1="4"
@@ -120,6 +121,7 @@ const currentState = computed(() => props.open ? 'open' : 'closed')
       :animate="currentState"
       :style="{ transformOrigin: 'center' }"
       class="outline-none"
+      tabindex="-1"
     />
 
     <!-- Eye shape (with blink) -->
@@ -130,6 +132,7 @@ const currentState = computed(() => props.open ? 'open' : 'closed')
       :animate="currentState"
       :style="{ transformOrigin: 'center' }"
       class="outline-none"
+      tabindex="-1"
     />
 
     <!-- Pupil -->
@@ -142,6 +145,7 @@ const currentState = computed(() => props.open ? 'open' : 'closed')
       :animate="currentState"
       :style="{ transformOrigin: 'center' }"
       class="outline-none"
+      tabindex="-1"
     />
   </svg>
 </template>
