@@ -121,7 +121,7 @@ const communityLinks = computed(() => [{
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>
-      <UContentToc :links="page.body.toc.links" class="z-[2]">
+      <UContentToc :links="page.body.toc.links" class="z-2">
         <template #bottom>
           <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
 

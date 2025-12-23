@@ -38,10 +38,11 @@ export default (options: Required<NuxtOptions['ui']>) => ({
       }
     },
     highlight: {
-      true: {
-        list: 'ms-2.5 ps-4 border-s border-default',
-        item: '-ms-px'
-      }
+      true: ''
+    },
+    highlightVariant: {
+      straight: '',
+      circuit: ''
     },
     body: {
       true: {
@@ -63,9 +64,25 @@ export default (options: Required<NuxtOptions['ui']>) => ({
       link: 'text-highlighted',
       linkLeadingIcon: 'text-highlighted'
     }
+  }, {
+    highlight: true,
+    highlightVariant: 'straight',
+    class: {
+      list: 'ms-2.5 ps-4 border-s border-default',
+      item: '-ms-px'
+    }
+  }, {
+    highlight: true,
+    highlightVariant: 'circuit',
+    class: {
+      content: 'relative',
+      link: 'ps-3.5',
+      listWithChildren: 'ms-0 ps-2.5'
+    }
   }],
   defaultVariants: {
     color: 'primary',
-    highlightColor: 'primary'
+    highlightColor: 'primary',
+    highlightVariant: 'straight'
   }
 })

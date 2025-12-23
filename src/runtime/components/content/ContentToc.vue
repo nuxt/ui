@@ -40,6 +40,11 @@ export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> exte
    */
   highlight?: boolean
   /**
+   * The variant of the highlight indicator.
+   * @defaultValue 'straight'
+   */
+  highlightVariant?: ContentToc['variants']['highlightVariant']
+  /**
    * @defaultValue 'primary'
    */
   highlightColor?: ContentToc['variants']['highlightColor']
@@ -98,9 +103,13 @@ const [DefineListTemplate, ReuseListTemplate] = createReusableTemplate<{ links: 
 })
 const [DefineTriggerTemplate, ReuseTriggerTemplate] = createReusableTemplate<{ open: boolean }>()
 
+const highlight = computed(() => props.highlight || !!props.highlightVariant)
+const highlightVariant = computed(() => props.highlightVariant || 'straight')
+
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentToc || {}) })({
   color: props.color,
-  highlight: props.highlight,
+  highlight: highlight.value,
+  highlightVariant: highlight.value ? highlightVariant.value : undefined,
   highlightColor: props.highlightColor || props.color
 }))
 
@@ -114,6 +123,15 @@ function flattenLinks(links: T[]): T[] {
   return links.flatMap(link => [link, ...(link.children ? flattenLinks(link.children as T[]) : [])])
 }
 
+function flattenLinksWithLevel(links: T[], level = 0): { link: T, level: number }[] {
+  return links.flatMap(link => [
+    { link, level },
+    ...(link.children ? flattenLinksWithLevel(link.children as T[], level + 1) : [])
+  ])
+}
+
+const linkHeight = 28
+
 const indicatorStyle = computed(() => {
   if (!activeHeadings.value?.length) {
     return
@@ -121,12 +139,55 @@ const indicatorStyle = computed(() => {
 
   const flatLinks = flattenLinks(props.links || [])
   const activeIndex = flatLinks.findIndex(link => activeHeadings.value.includes(link.id))
-  const linkHeight = 28
   const gapSize = 0
 
   return {
     '--indicator-size': `${(linkHeight * activeHeadings.value.length) + (gapSize * (activeHeadings.value.length - 1))}px`,
     '--indicator-position': activeIndex >= 0 ? `${activeIndex * (linkHeight + gapSize)}px` : '0px'
+  }
+})
+
+// Generate SVG path for the circuit line structure
+const circuitMaskStyle = computed(() => {
+  if (!highlight.value || highlightVariant.value !== 'circuit' || !props.links?.length) {
+    return
+  }
+
+  const flatLinks = flattenLinksWithLevel(props.links || [])
+  const totalHeight = flatLinks.length * linkHeight
+  const x0 = 1 // Level 0 line x position
+  const x1 = 11 // Level 1+ line x position
+
+  // Build the SVG path
+  let path = ''
+  let currentX = x0
+  let y = 0
+
+  flatLinks.forEach((item, index) => {
+    const targetX = item.level > 0 ? x1 : x0
+    const nextY = y + linkHeight
+
+    if (index === 0) {
+      path += `M${targetX} ${y}`
+      currentX = targetX
+    }
+
+    if (targetX !== currentX) {
+      // Diagonal transition
+      path += ` L${targetX} ${y + 6}`
+      currentX = targetX
+    }
+
+    path += ` L${currentX} ${nextY - (index < flatLinks.length - 1 && flatLinks[index + 1]?.level !== item.level ? 6 : 0)}`
+    y = nextY
+  })
+
+  const svgPath = encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 ${totalHeight}'><path d='${path}' stroke='black' stroke-width='1' fill='none'/></svg>`)
+
+  return {
+    width: '12px',
+    height: `${totalHeight}px`,
+    maskImage: `url("data:image/svg+xml,${svgPath}")`
   }
 })
 
@@ -186,7 +247,22 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
         </CollapsibleTrigger>
 
         <CollapsibleContent data-slot="content" :class="ui.content({ class: [props.ui?.content, 'lg:hidden'] })">
-          <div v-if="highlight" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+          <div v-if="highlight && highlightVariant === 'straight'" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+
+          <div
+            v-if="circuitMaskStyle"
+            data-slot="circuitOverlay"
+            class="absolute start-0 top-0 rtl:-scale-x-100"
+            :style="{ ...circuitMaskStyle, ...indicatorStyle }"
+          >
+            <div class="absolute inset-0 bg-muted" />
+            <div
+              v-if="indicatorStyle"
+              class="absolute w-full transition-[transform,height] duration-200 ease-out"
+              :class="`bg-${props.highlightColor || props.color || 'primary'}`"
+              :style="{ transform: `translateY(var(--indicator-position))`, height: 'var(--indicator-size)' }"
+            />
+          </div>
 
           <slot name="content" :links="links">
             <ReuseListTemplate :links="links" :level="0" />
@@ -198,7 +274,22 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
         </p>
 
         <div data-slot="content" :class="ui.content({ class: [props.ui?.content, 'hidden lg:flex'] })">
-          <div v-if="highlight" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+          <div v-if="highlight && highlightVariant === 'straight'" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+
+          <div
+            v-if="circuitMaskStyle"
+            data-slot="circuitOverlay"
+            class="absolute start-0 top-0 rtl:-scale-x-100"
+            :style="{ ...circuitMaskStyle, ...indicatorStyle }"
+          >
+            <div class="absolute inset-0 bg-muted" />
+            <div
+              v-if="indicatorStyle"
+              class="absolute w-full transition-[transform,height] duration-200 ease-out"
+              :class="`bg-${props.highlightColor || props.color || 'primary'}`"
+              :style="{ transform: `translateY(var(--indicator-position))`, height: 'var(--indicator-size)' }"
+            />
+          </div>
 
           <slot name="content" :links="links">
             <ReuseListTemplate :links="links" :level="0" />
