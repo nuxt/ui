@@ -17,7 +17,7 @@ The ChangelogVersion component provides a flexible way to display an `<article>`
 ::u-changelog-version
 ---
 title: 'Introducing Nuxt UI v3'
-description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
 image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
 date: 2025-03-12
 authors:
@@ -84,7 +84,7 @@ ignore:
   - title
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   class: 'w-full'
   ui.container: 'max-w-lg'
 ---
@@ -110,7 +110,7 @@ ignore:
   - description
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   class: 'w-full'
   ui.container: 'max-w-lg'
@@ -134,7 +134,7 @@ ignore:
   - date
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   badge: 'Release'
   class: 'w-full'
@@ -160,7 +160,7 @@ ignore:
   - badge.variant
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   badge:
     label: 'Release'
@@ -192,7 +192,7 @@ ignore:
   - date
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
   class: 'w-full'
@@ -230,7 +230,7 @@ ignore:
   - authors
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
   authors:
@@ -276,7 +276,7 @@ ignore:
   - target
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
   to: 'https://nuxt.com/blog/nuxt-ui-v3'
@@ -304,7 +304,7 @@ ignore:
   - image
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
   indicator: false
