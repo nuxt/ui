@@ -92,39 +92,46 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.banner || {}
 const instanceId = useId()
 const id = computed(() => `banner-${props.id || instanceId}`)
 const isVisible = ref(true)
+const hasPersistence = computed(() => !!props.id)
 
 onMounted(() => {
-  if (typeof localStorage !== 'undefined') {
+  if (hasPersistence.value && typeof localStorage !== 'undefined') {
     const isClosed = localStorage.getItem(id.value) === 'true'
     isVisible.value = !isClosed
   }
 })
 
-useHead({
-  script: [{
-    key: `prehydrate-banner-${id.value}`,
-    innerHTML: `
-      (function() {
-        try {
-          if (localStorage.getItem(${JSON.stringify(id.value)}) === 'true') {
-            document.documentElement.style.setProperty('--banner-${id.value}-display', 'none');
-          }
-        } catch (e) {}
-      })();
-    `.replace(/\s+/g, ' '),
-    type: 'text/javascript',
-    tagPosition: 'head'
-  }],
-  style: [{
-    key: `banner-style-${id.value}`,
-    innerHTML: `.banner[data-banner-id="${id.value}"] { display: var(--banner-${id.value}-display, block); }`,
-    tagPosition: 'head'
-  }]
+useHead(() => {
+  if (!hasPersistence.value) return {}
+  
+  return {
+    script: [{
+      key: `prehydrate-banner-${id.value}`,
+      innerHTML: `
+        (function() {
+          try {
+            if (localStorage.getItem(${JSON.stringify(id.value)}) === 'true') {
+              document.documentElement.style.setProperty('--banner-${id.value}-display', 'none');
+            }
+          } catch (e) {}
+        })();
+      `.replace(/\s+/g, ' '),
+      type: 'text/javascript',
+      tagPosition: 'head'
+    }],
+    style: [{
+      key: `banner-style-${id.value}`,
+      innerHTML: `.banner[data-banner-id="${id.value}"] { display: var(--banner-${id.value}-display, block); }`,
+      tagPosition: 'head'
+    }]
+  }
 })
 
 function onClose() {
-  localStorage.setItem(id.value, 'true')
-  document.documentElement.style.setProperty(`--banner-${id.value}-display`, 'none')
+  if (hasPersistence.value) {
+    localStorage.setItem(id.value, 'true')
+    document.documentElement.style.setProperty(`--banner-${id.value}-display`, 'none')
+  }
   isVisible.value = false
   emits('close')
 }

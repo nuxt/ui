@@ -31,12 +31,12 @@ const attrs = reactive({
       v-bind="props"
     />
     <UBanner
-      title="Try to close me! I'm another banner!"
+      title="Close me - I'll reappear on page reload (no id prop)"
       :close="true"
       v-bind="props"
     />
     <UBanner
-      title="Try to close me too! I'm the banner with custom id!"
+      title="Close me - I'll stay closed permanently (id='banner3')"
       :close="true"
       id="banner3"
       v-bind="props"
