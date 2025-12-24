@@ -17,7 +17,7 @@
     "@iconify-json/simple-icons": "^1.2.63",
     "@iconify-json/vscode-icons": "^1.2.37",
     "@modelcontextprotocol/sdk": "^1.25.1",
-    "@nuxt/content": "https://pkg.pr.new/@nuxt/content@9d73fbd",
+    "@nuxt/content": "https://pkg.pr.new/@nuxt/content@8894da6",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "workspace:*",
     "@nuxtjs/mcp-toolkit": "^0.6.0",
