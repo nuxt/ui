@@ -251,15 +251,15 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
 
           <div
             v-if="circuitMaskStyle"
-            data-slot="circuitOverlay"
-            :class="ui.circuitOverlay({ class: props.ui?.circuitOverlay })"
+            data-slot="highlightOverlay"
+            :class="ui.highlightOverlay({ class: props.ui?.highlightOverlay })"
             :style="{ ...circuitMaskStyle, ...indicatorStyle }"
           >
-            <div data-slot="circuitLine" :class="ui.circuitLine({ class: props.ui?.circuitLine })" />
+            <div data-slot="highlightLine" :class="ui.highlightLine({ class: props.ui?.highlightLine })" />
             <div
               v-if="indicatorStyle"
-              data-slot="circuitActiveHighlight"
-              :class="ui.circuitActiveHighlight({ class: props.ui?.circuitActiveHighlight })"
+              data-slot="highlightActive"
+              :class="ui.highlightActive({ class: props.ui?.highlightActive })"
               :style="{ transform: `translateY(var(--indicator-position))`, height: 'var(--indicator-size)' }"
             />
           </div>
@@ -278,15 +278,15 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
 
           <div
             v-if="circuitMaskStyle"
-            data-slot="circuitOverlay"
-            :class="ui.circuitOverlay({ class: props.ui?.circuitOverlay })"
+            data-slot="highlightOverlay"
+            :class="ui.highlightOverlay({ class: props.ui?.highlightOverlay })"
             :style="{ ...circuitMaskStyle, ...indicatorStyle }"
           >
-            <div data-slot="circuitLine" :class="ui.circuitLine({ class: props.ui?.circuitLine })" />
+            <div data-slot="highlightLine" :class="ui.highlightLine({ class: props.ui?.highlightLine })" />
             <div
               v-if="indicatorStyle"
-              data-slot="circuitActiveHighlight"
-              :class="ui.circuitActiveHighlight({ class: props.ui?.circuitActiveHighlight })"
+              data-slot="highlightActive"
+              :class="ui.highlightActive({ class: props.ui?.highlightActive })"
               :style="{ transform: `translateY(var(--indicator-position))`, height: 'var(--indicator-size)' }"
             />
           </div>
