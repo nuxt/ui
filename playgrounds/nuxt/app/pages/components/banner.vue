@@ -30,5 +30,17 @@ const attrs = reactive({
       }]"
       v-bind="props"
     />
+    <UBanner
+      id="banner2"
+      title="Try to close me! I'm the banner 2!"
+      :close="true"
+      v-bind="props"
+    />
+    <UBanner
+      id="banner3"
+      title="Try to close me too! I'm the banner 3!"
+      :close="true"
+      v-bind="props"
+    />
   </Matrix>
 </template>

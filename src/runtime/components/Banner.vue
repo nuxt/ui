@@ -65,7 +65,7 @@ export interface BannerEmits {
 </script>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useHead, useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -90,36 +90,54 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.banner || {}
 }))
 
 const id = computed(() => `banner-${props.id || '1'}`)
+const isVisible = ref(true)
 
-watch(id, (newId) => {
-  if (typeof document === 'undefined' || typeof localStorage === 'undefined') return
-
-  const isClosed = localStorage.getItem(newId) === 'true'
-  const htmlElement = document.querySelector('html')
-
-  htmlElement?.classList.toggle('hide-banner', isClosed)
+onMounted(() => {
+  if (typeof localStorage !== 'undefined') {
+    const isClosed = localStorage.getItem(id.value) === 'true'
+    isVisible.value = !isClosed
+  }
 })
 
 useHead({
   script: [{
-    key: 'prehydrate-template-banner',
+    key: `prehydrate-banner-${id.value}`,
     innerHTML: `
-            if (localStorage.getItem(${JSON.stringify(id.value)}) === 'true') {
-              document.querySelector('html').classList.add('hide-banner')
-            }`.replace(/\s+/g, ' '),
-    type: 'text/javascript'
+      (function() {
+        try {
+          if (localStorage.getItem(${JSON.stringify(id.value)}) === 'true') {
+            document.documentElement.style.setProperty('--banner-${id.value}-display', 'none');
+          }
+        } catch (e) {}
+      })();
+    `.replace(/\s+/g, ' '),
+    type: 'text/javascript',
+    tagPosition: 'head'
+  }],
+  style: [{
+    key: `banner-style-${id.value}`,
+    innerHTML: `.banner[data-banner-id="${id.value}"] { display: var(--banner-${id.value}-display, block); }`,
+    tagPosition: 'head'
   }]
 })
 
 function onClose() {
   localStorage.setItem(id.value, 'true')
-  document.querySelector('html')?.classList.add('hide-banner')
+  document.documentElement.style.setProperty(`--banner-${id.value}-display`, 'none')
+  isVisible.value = false
   emits('close')
 }
 </script>
 
 <template>
-  <Primitive :as="as" class="banner" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive
+    v-show="isVisible"
+    :as="as"
+    class="banner"
+    :data-banner-id="id"
+    data-slot="root"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+  >
     <ULink
       v-if="to"
       :aria-label="title"
@@ -171,9 +189,3 @@ function onClose() {
     </UContainer>
   </Primitive>
 </template>
-
-<style scoped>
-.hide-banner .banner {
-  display: none;
-}
-</style>
