@@ -55,7 +55,7 @@ defineShortcuts({
             </template>
 
             <UContentNavigation
-              :key="route.path"
+              :key="route.path + searchTerm"
               :collapsible="false"
               :navigation="filteredNavigation"
               highlight
