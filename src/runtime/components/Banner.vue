@@ -103,7 +103,7 @@ onMounted(() => {
 
 useHead(() => {
   if (!hasPersistence.value) return {}
-  
+
   return {
     script: [{
       key: `prehydrate-banner-${id.value}`,

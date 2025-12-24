@@ -36,9 +36,9 @@ const attrs = reactive({
       v-bind="props"
     />
     <UBanner
+      id="banner3"
       title="Close me - I'll stay closed permanently (id='banner3')"
       :close="true"
-      id="banner3"
       v-bind="props"
     />
   </Matrix>
