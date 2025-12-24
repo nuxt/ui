@@ -31,15 +31,14 @@ const attrs = reactive({
       v-bind="props"
     />
     <UBanner
-      id="banner2"
-      title="Try to close me! I'm the banner 2!"
+      title="Try to close me! I'm another banner!"
       :close="true"
       v-bind="props"
     />
     <UBanner
-      id="banner3"
-      title="Try to close me too! I'm the banner 3!"
+      title="Try to close me too! I'm the banner with custom id!"
       :close="true"
+      id="banner3"
       v-bind="props"
     />
   </Matrix>

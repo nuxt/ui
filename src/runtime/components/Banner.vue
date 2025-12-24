@@ -65,7 +65,7 @@ export interface BannerEmits {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, useId } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useHead, useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -89,7 +89,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.banner || {}
   to: !!props.to
 }))
 
-const id = computed(() => `banner-${props.id || '1'}`)
+const instanceId = useId()
+const id = computed(() => `banner-${props.id || instanceId}`)
 const isVisible = ref(true)
 
 onMounted(() => {
