@@ -22,7 +22,7 @@ props:
   value: '12,345'
   trend: 12.5
   trendDirection: up
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -41,7 +41,7 @@ props:
   value: '$45,231'
   trend: 8.2
   trendDirection: down
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -58,7 +58,7 @@ props:
   icon: 'i-lucide-dollar-sign'
   title: 'Revenue'
   value: '$125,430'
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -76,7 +76,7 @@ props:
   title: 'Active Sessions'
   value: '1,234'
   trend: 15.3
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -95,7 +95,7 @@ props:
   title: 'Completed'
   value: '98.5%'
   trend: 2.1
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -110,7 +110,7 @@ props:
   title: 'Pending'
   value: '23'
   trend: 5.4
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -126,7 +126,108 @@ props:
   value: '12'
   trend: 3.2
   trendDirection: down
-  class: 'w-full'
+  class: 'max-w-xl'
+---
+::
+
+### Progress Bar
+
+Use the `current` and `max` props to display a progress bar. The `show-label` prop controls whether to show the "current / max" label.
+
+::component-code
+---
+external:
+  - current
+props:
+  icon: 'i-lucide-dollar-sign'
+  title: 'Monthly Budget'
+  current: 8000
+  max: 10000
+  class: 'max-w-xl'
+---
+::
+
+Without label:
+
+::component-code
+---
+external:
+  - current
+props:
+  icon: 'i-lucide-hard-drive'
+  title: 'Storage Used'
+  current: 65
+  max: 100
+  showLabel: false
+  class: 'max-w-xl'
+---
+::
+
+With trend:
+
+::component-code
+---
+external:
+  - current
+props:
+  icon: 'i-lucide-target'
+  title: 'Sales Target'
+  current: 7500
+  max: 10000
+  trend: 12.5
+  trendDirection: up
+  class: 'max-w-xl'
+---
+::
+
+### Sparkline Chart
+
+Use the `data` prop to display a sparkline chart. The `show-area` prop controls whether to show the area under the line.
+
+::component-code
+---
+external:
+  - data
+props:
+  icon: 'i-lucide-trending-up'
+  title: 'Sales Trend'
+  value: '$45,231'
+  data: [20, 35, 30, 45, 50, 40, 55, 60, 55, 65, 70, 75]
+  class: 'max-w-xl'
+---
+::
+
+With area:
+
+::component-code
+---
+external:
+  - data
+props:
+  icon: 'i-lucide-bar-chart'
+  title: 'Growth'
+  value: '24.5%'
+  data: [15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70]
+  showArea: true
+  class: 'max-w-xl'
+---
+::
+
+With trend:
+
+::component-code
+---
+external:
+  - data
+props:
+  icon: 'i-lucide-line-chart'
+  title: 'Performance'
+  value: '98.5%'
+  data: [85, 90, 88, 92, 95, 97, 98]
+  trend: 12.5
+  trendDirection: up
+  showArea: true
+  class: 'max-w-xl'
 ---
 ::
 
@@ -145,7 +246,7 @@ props:
   title: 'Users'
   value: '1,234'
   trend: 5.2
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -160,7 +261,7 @@ props:
   title: 'Users'
   value: '1,234'
   trend: 5.2
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -175,7 +276,7 @@ props:
   title: 'Users'
   value: '1,234'
   trend: 5.2
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -190,7 +291,7 @@ props:
   title: 'Users'
   value: '1,234'
   trend: 5.2
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -205,7 +306,7 @@ props:
   title: 'Users'
   value: '1,234'
   trend: 5.2
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -224,7 +325,7 @@ props:
   title: 'Users'
   value: '1,234'
   trend: 5.2
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -239,7 +340,7 @@ props:
   title: 'Users'
   value: '1,234'
   trend: 5.2
-  class: 'w-full'
+  class: 'max-w-xl'
 ---
 ::
 
@@ -258,10 +359,10 @@ props:
   icon: 'i-lucide-trending-up'
   title: 'Growth'
   value: '24.5%'
-  class: 'w-full'
+  class: 'max-w-xl'
 slots:
   trend: |
-    <span class="text-xs text-muted">vs last month</span>
+    vs last month
 ---
 ::
 
@@ -277,7 +378,7 @@ hide:
 external:
   - class
 props:
-  class: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full'
+  class: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl'
 ---
 ::
 

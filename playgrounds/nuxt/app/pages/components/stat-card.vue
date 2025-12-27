@@ -203,7 +203,7 @@ const stat4 = ref({
       <h2 class="font-semibold text-highlighted">
         Different Variants
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
         <UStatCard
           icon="i-lucide-users"
           title="Outline (default)"
@@ -239,6 +239,24 @@ const stat4 = ref({
           :color="color"
           :size="size"
           variant="subtle"
+        />
+        <UStatCard
+          icon="i-lucide-users"
+          title="Ghost"
+          value="1,234"
+          :trend="5.2"
+          :color="color"
+          :size="size"
+          variant="ghost"
+        />
+        <UStatCard
+          icon="i-lucide-users"
+          title="Naked"
+          value="1,234"
+          :trend="5.2"
+          :color="color"
+          :size="size"
+          variant="naked"
         />
       </div>
     </div>
@@ -283,6 +301,134 @@ const stat4 = ref({
             </span>
           </template>
         </UStatCard>
+      </div>
+    </div>
+
+    <USeparator />
+
+    <div class="flex flex-col gap-4">
+      <h2 class="font-semibold text-highlighted">
+        With Progress Bar
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+        <UStatCard
+          icon="i-lucide-dollar-sign"
+          title="Outline"
+          :current="8000"
+          :max="10000"
+          :color="color"
+          :size="size"
+          variant="outline"
+        />
+        <UStatCard
+          icon="i-lucide-dollar-sign"
+          title="Solid"
+          :current="8000"
+          :max="10000"
+          :color="color"
+          :size="size"
+          variant="solid"
+        />
+        <UStatCard
+          icon="i-lucide-dollar-sign"
+          title="Soft"
+          :current="8000"
+          :max="10000"
+          :color="color"
+          :size="size"
+          variant="soft"
+        />
+        <UStatCard
+          icon="i-lucide-dollar-sign"
+          title="Subtle"
+          :current="8000"
+          :max="10000"
+          :color="color"
+          :size="size"
+          variant="subtle"
+        />
+        <UStatCard
+          icon="i-lucide-dollar-sign"
+          title="Ghost"
+          :current="8000"
+          :max="10000"
+          :color="color"
+          :size="size"
+          variant="ghost"
+        />
+        <UStatCard
+          icon="i-lucide-dollar-sign"
+          title="Naked"
+          :current="8000"
+          :max="10000"
+          :color="color"
+          :size="size"
+          variant="naked"
+        />
+      </div>
+    </div>
+
+    <USeparator />
+
+    <div class="flex flex-col gap-4">
+      <h2 class="font-semibold text-highlighted">
+        With Sparkline Chart
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+        <UStatCard
+          icon="i-lucide-trending-up"
+          title="Outline"
+          value="$45,231"
+          :data="[20, 35, 30, 45, 50, 40, 55, 60, 55, 65, 70, 75]"
+          :color="color"
+          :size="size"
+          variant="outline"
+        />
+        <UStatCard
+          icon="i-lucide-trending-up"
+          title="Solid"
+          value="$45,231"
+          :data="[20, 35, 30, 45, 50, 40, 55, 60, 55, 65, 70, 75]"
+          :color="color"
+          :size="size"
+          variant="solid"
+        />
+        <UStatCard
+          icon="i-lucide-trending-up"
+          title="Soft"
+          value="$45,231"
+          :data="[20, 35, 30, 45, 50, 40, 55, 60, 55, 65, 70, 75]"
+          :color="color"
+          :size="size"
+          variant="soft"
+        />
+        <UStatCard
+          icon="i-lucide-trending-up"
+          title="Subtle"
+          value="$45,231"
+          :data="[20, 35, 30, 45, 50, 40, 55, 60, 55, 65, 70, 75]"
+          :color="color"
+          :size="size"
+          variant="subtle"
+        />
+        <UStatCard
+          icon="i-lucide-trending-up"
+          title="Ghost"
+          value="$45,231"
+          :data="[20, 35, 30, 45, 50, 40, 55, 60, 55, 65, 70, 75]"
+          :color="color"
+          :size="size"
+          variant="ghost"
+        />
+        <UStatCard
+          icon="i-lucide-trending-up"
+          title="Naked"
+          value="$45,231"
+          :data="[20, 35, 30, 45, 50, 40, 55, 60, 55, 65, 70, 75]"
+          :color="color"
+          :size="size"
+          variant="naked"
+        />
       </div>
     </div>
 

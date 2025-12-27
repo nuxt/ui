@@ -1,0 +1,129 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`StatGroup > renders with actions slot correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <div data-slot="header" class="flex items-center justify-between gap-4 mb-4">
+    <!--v-if-->
+    <div data-slot="actions" class="flex items-center gap-2">Actions</div>
+  </div>
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with as correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with class correctly 1`] = `
+"<section data-slot="root" class="flex flex-col w-full">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with cols 1 correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with cols 2 correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1 sm:grid-cols-2"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with cols 3 correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with cols 4 correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with default slot correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">Content</div>
+</section>"
+`;
+
+exports[`StatGroup > renders with gap lg correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with gap md correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with gap sm correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with gap xl correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with gap xs correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with header slot correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <div data-slot="header" class="flex items-center justify-between gap-4 mb-4">Custom Header</div>
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with title correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <div data-slot="header" class="flex items-center justify-between gap-4 mb-4">
+    <div data-slot="title" class="text-lg font-semibold text-highlighted">Dashboard</div>
+    <!--v-if-->
+  </div>
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with title slot correctly 1`] = `
+"<section data-slot="root" class="flex flex-col">
+  <div data-slot="header" class="flex items-center justify-between gap-4 mb-4">
+    <div data-slot="title" class="text-lg font-semibold text-highlighted">Custom Title</div>
+    <!--v-if-->
+  </div>
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;
+
+exports[`StatGroup > renders with ui correctly 1`] = `
+"<section data-slot="root" class="flex flex-col p-4">
+  <!--v-if-->
+  <div data-slot="grid" class="grid w-full gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"></div>
+</section>"
+`;

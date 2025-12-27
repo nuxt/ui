@@ -74,6 +74,7 @@ const components = [
   'slideover',
   'slider',
   'stat-card',
+  'stat-group',
   'stepper',
   'switch',
   'table',
