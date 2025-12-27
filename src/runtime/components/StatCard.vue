@@ -143,7 +143,7 @@ const effectiveTrendDirection = computed(() => {
 
 const trendColor = computed(() => {
   if (props.trend === undefined || props.trend === null) return ''
-  return effectiveTrendDirection.value === 'up' ? 'text-success-500 dark:text-success-400' : 'text-error-500 dark:text-error-400'
+  return effectiveTrendDirection.value === 'up' ? '!text-success-500 dark:!text-success-400' : '!text-error-500 dark:!text-error-400'
 })
 
 const trendIcon = computed(() => {

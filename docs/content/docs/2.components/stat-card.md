@@ -202,8 +202,10 @@ Use the `data` prop to display a sparkline chart. The `show-area` prop controls 
 
 ::component-code
 ---
-external:
+ignore:
   - data
+hide:
+  - class
 props:
   icon: 'i-lucide-trending-up'
   title: 'Sales Trend'
@@ -217,8 +219,10 @@ With area:
 
 ::component-code
 ---
-external:
+ignore:
   - data
+hide:
+  - class
 props:
   icon: 'i-lucide-bar-chart'
   title: 'Growth'
@@ -233,8 +237,10 @@ With trend:
 
 ::component-code
 ---
-external:
+ignore:
   - data
+hide:
+  - class
 props:
   icon: 'i-lucide-line-chart'
   title: 'Performance'
