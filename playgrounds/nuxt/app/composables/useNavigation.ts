@@ -72,6 +72,7 @@ const components = [
   'skeleton',
   'slideover',
   'slider',
+  'star-rating',
   'stepper',
   'switch',
   'table',
