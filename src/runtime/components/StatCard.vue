@@ -30,8 +30,8 @@ export interface StatCardProps {
    */
   trend?: number
   /**
-   * The direction of the trend.
-   * @defaultValue 'up'
+   * The direction of the trend. If not provided, it will be automatically
+   * calculated based on the trend value (negative = 'down', positive/zero = 'up').
    */
   trendDirection?: 'up' | 'down'
   /**
@@ -109,7 +109,6 @@ import UProgress from './Progress.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<StatCardProps>(), {
-  trendDirection: 'up',
   max: 100,
   showLabel: true,
   strokeWidth: 2,
@@ -129,13 +128,26 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.statCard || 
   variant: props.variant
 }))
 
+// Auto-calculate trendDirection from trend value if not explicitly provided
+const effectiveTrendDirection = computed(() => {
+  // If explicitly provided, use it
+  if (props.trendDirection !== undefined) {
+    return props.trendDirection
+  }
+  // Otherwise, infer from trend value
+  if (props.trend !== undefined && props.trend !== null) {
+    return props.trend >= 0 ? 'up' : 'down'
+  }
+  return 'up'
+})
+
 const trendColor = computed(() => {
   if (props.trend === undefined || props.trend === null) return ''
-  return props.trendDirection === 'up' ? 'text-success-500 dark:text-success-400' : 'text-error-500 dark:text-error-400'
+  return effectiveTrendDirection.value === 'up' ? 'text-success-500 dark:text-success-400' : 'text-error-500 dark:text-error-400'
 })
 
 const trendIcon = computed(() => {
-  return props.trendDirection === 'up' ? 'i-lucide-arrow-up' : 'i-lucide-arrow-down'
+  return effectiveTrendDirection.value === 'up' ? 'i-lucide-arrow-up' : 'i-lucide-arrow-down'
 })
 
 const formattedTrend = computed(() => {
@@ -231,7 +243,7 @@ const sparklineData = computed(() => {
         </div>
 
         <div v-if="(trend !== undefined && trend !== null) || !!slots.trend" data-slot="trend" :class="[ui.trend({ class: props.ui?.trend }), trendColor]">
-          <slot name="trend" :trend="trend" :trend-direction="trendDirection" :ui="ui">
+          <slot name="trend" :trend="trend" :trend-direction="effectiveTrendDirection" :ui="ui">
             <UIcon :name="trendIcon" data-slot="trendIcon" :class="[ui.trendIcon({ class: props.ui?.trendIcon }), trendColor]" />
             <span data-slot="trendValue" :class="ui.trendValue({ class: props.ui?.trendValue })">
               {{ formattedTrend }}

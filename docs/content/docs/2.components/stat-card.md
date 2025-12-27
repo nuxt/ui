@@ -21,14 +21,13 @@ props:
   title: 'Total Users'
   value: '12,345'
   trend: 12.5
-  trendDirection: up
   class: 'max-w-xl'
 ---
 ::
 
-### With Trend Down
+### Automatic Trend Direction
 
-Use the `trend-direction` prop set to `down` to display a negative trend.
+The `trend-direction` is automatically calculated based on the trend value. Positive values show a green up arrow, negative values show a red down arrow.
 
 ::component-code
 ---
@@ -39,7 +38,25 @@ props:
   icon: 'i-lucide-shopping-cart'
   title: 'Sales'
   value: '$45,231'
-  trend: 8.2
+  trend: -8.2
+  class: 'max-w-xl'
+---
+::
+
+### Override Trend Direction
+
+You can explicitly set `trend-direction` to override the automatic calculation. This is useful when you want to show a positive number as "down" or vice versa.
+
+::component-code
+---
+prettier: true
+hide:
+  - class
+props:
+  icon: 'i-lucide-dollar-sign'
+  title: 'Expenses'
+  value: '$12,500'
+  trend: 15.3
   trendDirection: down
   class: 'max-w-xl'
 ---
@@ -175,7 +192,6 @@ props:
   current: 7500
   max: 10000
   trend: 12.5
-  trendDirection: up
   class: 'max-w-xl'
 ---
 ::
@@ -225,7 +241,6 @@ props:
   value: '98.5%'
   data: [85, 90, 88, 92, 95, 97, 98]
   trend: 12.5
-  trendDirection: up
   showArea: true
   class: 'max-w-xl'
 ---
