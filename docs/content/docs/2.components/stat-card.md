@@ -210,7 +210,7 @@ props:
   icon: 'i-lucide-trending-up'
   title: 'Sales Trend'
   value: '$45,231'
-  data: [20, 35, 30, 45, 50, 40, 55, 60, 55, 65, 70, 75]
+  data: [20, -35, 30, 45, 50, 40, 55, 60, 55, 65, 70, 75]
   class: 'max-w-xl'
 ---
 ::

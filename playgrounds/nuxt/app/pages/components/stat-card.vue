@@ -436,6 +436,48 @@ const stat4 = ref({
 
     <div class="flex flex-col gap-4">
       <h2 class="font-semibold text-highlighted">
+        With Negative Values (Zero Line)
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+        <UStatCard
+          icon="i-lucide-trending-up"
+          title="Net Profit"
+          value="$12,450"
+          :data="[15, -20, 25, -30, 35, 40, 45, 50, 55, 60, 65, 70]"
+          :trend="366.7"
+          :color="color"
+          :size="size"
+          variant="outline"
+        />
+        <UStatCard
+          icon="i-lucide-line-chart"
+          title="Revenue Change"
+          value="+24.5%"
+          :data="[-10, -5, 5, -8, 12, 15, 20, 18, 25, 30, 35, 40]"
+          :trend="500"
+          show-area
+          :color="color"
+          :size="size"
+          variant="outline"
+        />
+        <UStatCard
+          icon="i-lucide-bar-chart"
+          title="Growth Rate"
+          value="8.2%"
+          :data="[-15, 10, -5, 20, -10, 15, 25, 30, 35, 40, 45, 50]"
+          :trend="433.3"
+          show-area
+          :color="color"
+          :size="size"
+          variant="outline"
+        />
+      </div>
+    </div>
+
+    <USeparator />
+
+    <div class="flex flex-col gap-4">
+      <h2 class="font-semibold text-highlighted">
         Dashboard Example
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">

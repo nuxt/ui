@@ -8,7 +8,7 @@ exports[`StatCard > renders with all props correctly 1`] = `
       <div data-slot="title" class="font-medium text-sm text-muted">Users</div>
       <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">1,234</div>
       <!--v-if-->
-      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-success-500 dark:text-success-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trendIcon" class="shrink-0 text-primary-500 dark:text-primary-400 text-success-500 dark:text-success-400"></svg><span data-slot="trendValue" class="">+5.2%</span></div>
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 !text-success-500 dark:!text-success-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trendIcon" class="shrink-0 text-primary-500 dark:text-primary-400 !text-success-500 dark:!text-success-400"></svg><span data-slot="trendValue" class="">+5.2%</span></div>
     </div>
   </div>
   <!--v-if-->
@@ -312,7 +312,7 @@ exports[`StatCard > renders with trend down correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-error-500 dark:text-error-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trendIcon" class="shrink-0 text-primary-500 dark:text-primary-400 text-error-500 dark:text-error-400"></svg><span data-slot="trendValue" class="">+8.2%</span></div>
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 !text-error-500 dark:!text-error-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trendIcon" class="shrink-0 text-primary-500 dark:text-primary-400 !text-error-500 dark:!text-error-400"></svg><span data-slot="trendValue" class="">+8.2%</span></div>
     </div>
   </div>
   <!--v-if-->
@@ -344,7 +344,7 @@ exports[`StatCard > renders with trend up correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-success-500 dark:text-success-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trendIcon" class="shrink-0 text-primary-500 dark:text-primary-400 text-success-500 dark:text-success-400"></svg><span data-slot="trendValue" class="">+12.5%</span></div>
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 !text-success-500 dark:!text-success-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trendIcon" class="shrink-0 text-primary-500 dark:text-primary-400 !text-success-500 dark:!text-success-400"></svg><span data-slot="trendValue" class="">+12.5%</span></div>
     </div>
   </div>
   <!--v-if-->

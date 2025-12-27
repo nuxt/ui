@@ -92,7 +92,7 @@ export interface StatCardSlots {
   value(props: { value?: string | number, ui: StatCard['ui'] }): any
   label(props: { current: number, max: number, ui: StatCard['ui'] }): any
   progress(props: { current: number, max: number, percent: number, ui: StatCard['ui'] }): any
-  sparkline(props: { path: string, areaPath: string, viewBox: string, ui: StatCard['ui'] }): any
+  sparkline(props: { path: string, areaPath: string, viewBox: string, zeroLine: string | null, ui: StatCard['ui'] }): any
   trend(props: { trend?: number, trendDirection?: 'up' | 'down', ui: StatCard['ui'] }): any
   default(props: { ui: StatCard['ui'] }): any
 }
@@ -165,7 +165,7 @@ const progressColor = computed(() => props.progressColor || props.color)
 
 // Sparkline calculations
 const sparklineData = computed(() => {
-  if (!props.data || props.data.length === 0) return { path: '', areaPath: '', viewBox: '0 0 100 40' }
+  if (!props.data || props.data.length === 0) return { path: '', areaPath: '', viewBox: '0 0 100 40', zeroLine: null }
 
   const values = props.data
   const min = Math.min(...values)
@@ -175,6 +175,24 @@ const sparklineData = computed(() => {
   const width = 100
   const height = props.height || 40
   const padding = 2
+
+  // Check if we need to show zero line (when there are negative values)
+  const hasNegativeValues = min < 0
+  let zeroLineY: number | null = null
+
+  if (hasNegativeValues && max > 0 && range > 0) {
+    // Calculate where zero should be positioned
+    // Normalize zero value: (0 - min) / range gives us where zero is in the range [0, 1]
+    const normalizedZero = (0 - min) / range
+    // Convert to Y coordinate: invert because SVG Y increases downward
+    // We want zero at the bottom when it's the minimum, at the top when it's the maximum
+    const availableHeight = height - padding * 2
+    zeroLineY = height - padding - (normalizedZero * availableHeight)
+
+    // Ensure zeroLineY is within bounds
+    if (zeroLineY < padding) zeroLineY = padding
+    if (zeroLineY > height - padding) zeroLineY = height - padding
+  }
 
   const points: string[] = []
 
@@ -188,24 +206,24 @@ const sparklineData = computed(() => {
     points.push(`${x},${y}`)
   })
 
-  if (points.length === 0) return { path: '', areaPath: '', viewBox: `0 0 ${width} ${height}` }
+  if (points.length === 0) return { path: '', areaPath: '', viewBox: `0 0 ${width} ${height}`, zeroLine: null }
 
   const path = `M ${points.join(' L ')}`
   const firstPoint = points[0]
   const lastPoint = points[points.length - 1]
 
-  if (!firstPoint || !lastPoint) return { path: '', areaPath: '', viewBox: `0 0 ${width} ${height}` }
+  if (!firstPoint || !lastPoint) return { path: '', areaPath: '', viewBox: `0 0 ${width} ${height}`, zeroLine: null }
 
   const firstXStr = firstPoint.split(',')[0]
   const lastXStr = lastPoint.split(',')[0]
 
-  if (!firstXStr || !lastXStr) return { path: '', areaPath: '', viewBox: `0 0 ${width} ${height}` }
+  if (!firstXStr || !lastXStr) return { path: '', areaPath: '', viewBox: `0 0 ${width} ${height}`, zeroLine: null }
 
   const firstX = Number.parseFloat(firstXStr)
   const areaPath = `M ${firstPoint} L ${points.join(' L ')} L ${lastXStr},${height} L ${firstX},${height} Z`
   const viewBox = `0 0 ${width} ${height}`
 
-  return { path, areaPath, viewBox }
+  return { path, areaPath, viewBox, zeroLine: zeroLineY !== null ? `M ${padding},${zeroLineY} L ${width - padding},${zeroLineY}` : null }
 })
 </script>
 
@@ -260,7 +278,14 @@ const sparklineData = computed(() => {
     </div>
 
     <div v-if="!!slots.sparkline || (data && data.length > 0)" data-slot="sparkline" :class="(ui as any).sparkline({ class: (props.ui as any)?.sparkline })">
-      <slot name="sparkline" :path="sparklineData.path" :area-path="sparklineData.areaPath" :view-box="sparklineData.viewBox" :ui="ui">
+      <slot
+        name="sparkline"
+        :path="sparklineData.path"
+        :area-path="sparklineData.areaPath"
+        :view-box="sparklineData.viewBox"
+        :zero-line="sparklineData.zeroLine"
+        :ui="ui"
+      >
         <svg
           data-slot="sparklineSvg"
           :class="(ui as any).sparklineSvg({ class: (props.ui as any)?.sparklineSvg })"
@@ -268,6 +293,15 @@ const sparklineData = computed(() => {
           preserveAspectRatio="none"
           :style="{ height: `${props.height || 40}px` }"
         >
+          <path
+            v-if="sparklineData.zeroLine"
+            data-slot="sparklineZeroLine"
+            :d="sparklineData.zeroLine"
+            :class="(ui as any).sparklineZeroLine?.({ class: (props.ui as any)?.sparklineZeroLine }) || 'stroke-default dark:stroke-default'"
+            fill="none"
+            stroke-width="1"
+            stroke-dasharray="3 3"
+          />
           <path
             v-if="showArea"
             data-slot="sparklineArea"

@@ -15,6 +15,7 @@ export default (options: Required<ModuleOptions>) => ({
     sparklineSvg: 'w-full',
     sparklinePath: 'fill-none transition-all duration-300',
     sparklineArea: 'transition-opacity duration-300',
+    sparklineZeroLine: 'stroke-default dark:stroke-default',
     trend: 'flex items-center gap-1 text-xs font-medium mt-1',
     trendIcon: 'shrink-0',
     trendValue: ''
