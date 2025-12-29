@@ -9,7 +9,7 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@ai-sdk/vue": "^1.2.12",
+    "@ai-sdk/vue": "^3.0.3",
     "@iconify-json/logos": "^1.2.10",
     "@iconify-json/lucide": "^1.2.82",
     "@iconify-json/simple-icons": "^1.2.64",
@@ -24,7 +24,7 @@
     "@vercel/analytics": "^1.6.1",
     "@vueuse/integrations": "^14.1.0",
     "@vueuse/nuxt": "^14.1.0",
-    "ai": "^4.3.19",
+    "ai": "^6.0.3",
     "better-sqlite3": "^12.5.0",
     "capture-website": "^5.1.0",
     "joi": "^18.0.2",
