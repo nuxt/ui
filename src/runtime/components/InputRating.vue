@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/star-rating'
+import theme from '#build/ui/input-rating'
 import type { IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
-type StarRating = ComponentConfig<typeof theme, AppConfig, 'starRating'>
+type InputRating = ComponentConfig<typeof theme, AppConfig, 'inputRating'>
 
-export interface StarRatingProps {
+export interface InputRatingProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -57,11 +57,11 @@ export interface StarRatingProps {
   /**
    * @defaultValue 'primary'
    */
-  color?: StarRating['variants']['color']
+  color?: InputRating['variants']['color']
   /**
    * @defaultValue 'md'
    */
-  size?: StarRating['variants']['size']
+  size?: InputRating['variants']['size']
   /** Form field name. */
   name?: string
   /** Form field id. */
@@ -69,15 +69,15 @@ export interface StarRatingProps {
   /** Form field required. */
   required?: boolean
   class?: any
-  ui?: StarRating['slots']
+  ui?: InputRating['slots']
 }
 
-export interface StarRatingEmits {
+export interface InputRatingEmits {
   'update:modelValue': [value: number]
   'change': [event: Event]
 }
 
-export interface StarRatingSlots {
+export interface InputRatingSlots {
   star(props: { index: number, value: number, filled: boolean, half: boolean }): any
 }
 </script>
@@ -93,31 +93,31 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<StarRatingProps>(), {
+const props = withDefaults(defineProps<InputRatingProps>(), {
   max: 5,
   allowHalf: false,
   readonly: false,
   defaultValue: 0
 })
 
-const emits = defineEmits<StarRatingEmits>()
-defineSlots<StarRatingSlots>()
+const emits = defineEmits<InputRatingEmits>()
+defineSlots<InputRatingSlots>()
 
 const modelValue = useVModel(props, 'modelValue', emits, {
   defaultValue: props.defaultValue,
   passive: false
 })
 
-const appConfig = useAppConfig() as StarRating['AppConfig']
+const appConfig = useAppConfig() as InputRating['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'as'))
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled: formDisabled, ariaAttrs } = useFormField<StarRatingProps>(props)
+const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled: formDisabled, ariaAttrs } = useFormField<InputRatingProps>(props)
 const fieldId = _id.value ?? useId()
 
 const disabled = computed(() => formDisabled.value || props.disabled || props.readonly)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.starRating || {}) })({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputRating || {}) })({
   size: size.value,
   color: color.value,
   readonly: props.readonly,
@@ -200,8 +200,9 @@ function handleStarClick(event: MouseEvent, index: number) {
           :class="ui.star({ class: props.ui?.star })"
           @click="(e) => handleStarClick(e, star)"
         >
-          <!-- Empty star (background) -->
+          <!-- Empty star (background) - only show when not completely filled -->
           <UIcon
+            v-if="!getStarState(star).filled"
             :name="emptyStarIcon"
             :class="ui.star({ class: props.ui?.star })"
             class="text-muted"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import theme from '#build/ui/star-rating'
+import theme from '#build/ui/input-rating'
 
 const colors = Object.keys(theme.variants.color)
 const sizes = Object.keys(theme.variants.size)
@@ -31,13 +31,13 @@ const readonlyRating = ref(4.5)
           <p class="text-sm text-muted mb-2">
             Rating: {{ rating1 }}
           </p>
-          <UStarRating v-model="rating1" :color="color" :size="size" />
+          <UInputRating v-model="rating1" :color="color" :size="size" />
         </div>
         <div>
           <p class="text-sm text-muted mb-2">
             Rating: {{ rating2 }}
           </p>
-          <UStarRating v-model="rating2" :color="color" :size="size" />
+          <UInputRating v-model="rating2" :color="color" :size="size" />
         </div>
       </div>
     </div>
@@ -53,13 +53,13 @@ const readonlyRating = ref(4.5)
           <p class="text-sm text-muted mb-2">
             Rating: {{ rating3 }} (with half stars)
           </p>
-          <UStarRating v-model="rating3" allow-half :color="color" :size="size" />
+          <UInputRating v-model="rating3" allow-half :color="color" :size="size" />
         </div>
         <div>
           <p class="text-sm text-muted mb-2">
             Rating: {{ rating5 }} (with half stars)
           </p>
-          <UStarRating v-model="rating5" allow-half :color="color" :size="size" />
+          <UInputRating v-model="rating5" allow-half :color="color" :size="size" />
         </div>
       </div>
     </div>
@@ -75,13 +75,13 @@ const readonlyRating = ref(4.5)
           <p class="text-sm text-muted mb-2">
             Rating: {{ readonlyRating }} (readonly)
           </p>
-          <UStarRating :model-value="readonlyRating" readonly :color="color" :size="size" />
+          <UInputRating :model-value="readonlyRating" readonly :color="color" :size="size" />
         </div>
         <div>
           <p class="text-sm text-muted mb-2">
             Rating: 5 (readonly, full stars)
           </p>
-          <UStarRating :model-value="5" readonly :color="color" :size="size" />
+          <UInputRating :model-value="5" readonly :color="color" :size="size" />
         </div>
       </div>
     </div>
@@ -97,13 +97,13 @@ const readonlyRating = ref(4.5)
           <p class="text-sm text-muted mb-2">
             Hearts
           </p>
-          <UStarRating v-model="rating4" icon="i-lucide-heart" :color="color" :size="size" />
+          <UInputRating v-model="rating4" icon="i-lucide-heart" :color="color" :size="size" />
         </div>
         <div>
           <p class="text-sm text-muted mb-2">
             Stars (default)
           </p>
-          <UStarRating v-model="rating4" icon="i-lucide-star" :color="color" :size="size" />
+          <UInputRating v-model="rating4" icon="i-lucide-star" :color="color" :size="size" />
         </div>
       </div>
     </div>
@@ -119,25 +119,25 @@ const readonlyRating = ref(4.5)
           <p class="text-sm text-muted mb-2">
             Primary
           </p>
-          <UStarRating :model-value="4" readonly color="primary" :size="size" />
+          <UInputRating :model-value="4" readonly color="primary" :size="size" />
         </div>
         <div>
           <p class="text-sm text-muted mb-2">
             Success
           </p>
-          <UStarRating :model-value="4" readonly color="success" :size="size" />
+          <UInputRating :model-value="4" readonly color="success" :size="size" />
         </div>
         <div>
           <p class="text-sm text-muted mb-2">
             Warning
           </p>
-          <UStarRating :model-value="4" readonly color="warning" :size="size" />
+          <UInputRating :model-value="4" readonly color="warning" :size="size" />
         </div>
         <div>
           <p class="text-sm text-muted mb-2">
             Error
           </p>
-          <UStarRating :model-value="4" readonly color="error" :size="size" />
+          <UInputRating :model-value="4" readonly color="error" :size="size" />
         </div>
       </div>
     </div>
@@ -153,31 +153,31 @@ const readonlyRating = ref(4.5)
           <p class="text-sm text-muted mb-2">
             Extra Small
           </p>
-          <UStarRating :model-value="4" readonly :color="color" size="xs" />
+          <UInputRating :model-value="4" readonly :color="color" size="xs" />
         </div>
         <div>
           <p class="text-sm text-muted mb-2">
             Small
           </p>
-          <UStarRating :model-value="4" readonly :color="color" size="sm" />
+          <UInputRating :model-value="4" readonly :color="color" size="sm" />
         </div>
         <div>
           <p class="text-sm text-muted mb-2">
             Medium (default)
           </p>
-          <UStarRating :model-value="4" readonly :color="color" size="md" />
+          <UInputRating :model-value="4" readonly :color="color" size="md" />
         </div>
         <div>
           <p class="text-sm text-muted mb-2">
             Large
           </p>
-          <UStarRating :model-value="4" readonly :color="color" size="lg" />
+          <UInputRating :model-value="4" readonly :color="color" size="lg" />
         </div>
         <div>
           <p class="text-sm text-muted mb-2">
             Extra Large
           </p>
-          <UStarRating :model-value="4" readonly :color="color" size="xl" />
+          <UInputRating :model-value="4" readonly :color="color" size="xl" />
         </div>
       </div>
     </div>
@@ -193,7 +193,7 @@ const readonlyRating = ref(4.5)
           <p class="text-sm text-muted mb-2">
             10 stars (rating: 7.5)
           </p>
-          <UStarRating
+          <UInputRating
             :model-value="7.5"
             readonly
             :max="10"
@@ -206,7 +206,7 @@ const readonlyRating = ref(4.5)
           <p class="text-sm text-muted mb-2">
             3 stars (rating: 2)
           </p>
-          <UStarRating :model-value="2" readonly :max="3" :color="color" :size="size" />
+          <UInputRating :model-value="2" readonly :max="3" :color="color" :size="size" />
         </div>
       </div>
     </div>

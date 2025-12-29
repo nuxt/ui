@@ -1,650 +1,812 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`StarRating > renders with allowHalf correctly 1`] = `
+exports[`InputRating > renders with allowHalf correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!-- Half star (overlay with clip) -->
     <div data-slot="starHalf" class="absolute inset-0 pointer-events-none overflow-hidden text-primary-500 dark:text-primary-400" style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 absolute inset-0 pointer-events-none overflow-hidden text-primary-500 dark:text-primary-400"></svg></div>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with as correctly 1`] = `"<span id="v-0" data-slot="root" class="inline-flex items-center gap-0.5"><div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"><!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) --><div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div></div><div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"><!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) --><div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div></div><div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"><!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) --><div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div></div><div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"><!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) --><!--v-if--></div><div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"><!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) --><!--v-if--></div></span>"`;
+exports[`InputRating > renders with as correctly 1`] = `"<span id="v-0" data-slot="root" class="inline-flex items-center gap-0.5"><div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"><!-- Empty star (background) - only show when not completely filled --><!--v-if--><!-- Filled star (overlay) --><div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div></div><div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"><!-- Empty star (background) - only show when not completely filled --><!--v-if--><!-- Filled star (overlay) --><div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div></div><div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"><!-- Empty star (background) - only show when not completely filled --><!--v-if--><!-- Filled star (overlay) --><div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div></div><div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"><!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) --><!--v-if--></div><div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"><!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) --><!--v-if--></div></span>"`;
 
-exports[`StarRating > renders with class correctly 1`] = `
+exports[`InputRating > renders with class correctly 1`] = `
 "<div id="v-0" data-slot="root" class="items-center gap-0.5 inline-flex">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with color error correctly 1`] = `
+exports[`InputRating > renders with color error correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-error-500 dark:text-error-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-error-500 dark:text-error-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-error-500 dark:text-error-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with color info correctly 1`] = `
+exports[`InputRating > renders with color info correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-info-500 dark:text-info-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-info-500 dark:text-info-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-info-500 dark:text-info-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with color neutral correctly 1`] = `
+exports[`InputRating > renders with color neutral correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-gray-500 dark:text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-gray-500 dark:text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-gray-500 dark:text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with color primary correctly 1`] = `
+exports[`InputRating > renders with color primary correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with color secondary correctly 1`] = `
+exports[`InputRating > renders with color secondary correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-secondary-500 dark:text-secondary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-secondary-500 dark:text-secondary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-secondary-500 dark:text-secondary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with color success correctly 1`] = `
+exports[`InputRating > renders with color success correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-success-500 dark:text-success-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-success-500 dark:text-success-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-success-500 dark:text-success-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with color warning correctly 1`] = `
+exports[`InputRating > renders with color warning correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-warning-500 dark:text-warning-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-warning-500 dark:text-warning-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-warning-500 dark:text-warning-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with defaultValue correctly 1`] = `
+exports[`InputRating > renders with defaultValue correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with disabled correctly 1`] = `
+exports[`InputRating > renders with disabled correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5 opacity-75 cursor-not-allowed">
   <div data-slot="star-1" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 hover:scale-110 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with emptyIcon correctly 1`] = `
+exports[`InputRating > renders with emptyIcon correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with icon correctly 1`] = `
+exports[`InputRating > renders with icon correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with id correctly 1`] = `
+exports[`InputRating > renders with id correctly 1`] = `
 "<div id="rating-id" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with max correctly 1`] = `
+exports[`InputRating > renders with max correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-6" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-7" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-8" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-9" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-10" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with modelValue correctly 1`] = `
+exports[`InputRating > renders with modelValue correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with name correctly 1`] = `
+exports[`InputRating > renders with name correctly 1`] = `
 "<div id="v-0" name="rating-name" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with readonly correctly 1`] = `
+exports[`InputRating > renders with readonly correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5 opacity-75 cursor-not-allowed">
   <div data-slot="star-1" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed"></svg></div>
   </div>
   <div data-slot="star-5" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block transition-colors select-none size-5 cursor-not-allowed text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with required correctly 1`] = `
+exports[`InputRating > renders with required correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with size lg correctly 1`] = `
+exports[`InputRating > renders with size lg correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-6 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with size md correctly 1`] = `
+exports[`InputRating > renders with size md correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with size sm correctly 1`] = `
+exports[`InputRating > renders with size sm correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-4 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with size xl correctly 1`] = `
+exports[`InputRating > renders with size xl correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-7 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with size xs correctly 1`] = `
+exports[`InputRating > renders with size xs correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-3 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"
 `;
 
-exports[`StarRating > renders with star slot correctly 1`] = `"<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">⭐⭐⭐⭐⭐</div>"`;
+exports[`InputRating > renders with star slot correctly 1`] = `"<div id="v-0" data-slot="root" class="inline-flex items-center gap-0.5">⭐⭐⭐⭐⭐</div>"`;
 
-exports[`StarRating > renders with ui correctly 1`] = `
+exports[`InputRating > renders with ui correctly 1`] = `
 "<div id="v-0" data-slot="root" class="inline-flex items-center gap-1">
   <div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-3" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled -->
+    <!--v-if-->
+    <!-- Filled star (overlay) -->
     <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110"></svg></div>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110">
-    <!-- Empty star (background) --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="relative inline-block cursor-pointer transition-colors select-none size-5 hover:scale-110 text-muted"></svg><!-- Filled star (overlay) -->
     <!--v-if-->
   </div>
 </div>"

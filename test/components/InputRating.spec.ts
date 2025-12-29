@@ -2,14 +2,14 @@ import { describe, it, expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { mount, flushPromises } from '@vue/test-utils'
-import StarRating from '../../src/runtime/components/StarRating.vue'
-import type { StarRatingProps, StarRatingSlots } from '../../src/runtime/components/StarRating.vue'
+import InputRating from '../../src/runtime/components/InputRating.vue'
+import type { InputRatingProps, InputRatingSlots } from '../../src/runtime/components/InputRating.vue'
 import type { FormInputEvents } from '../../src/module'
 import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
-import theme from '#build/ui/star-rating'
+import theme from '#build/ui/input-rating'
 
-describe('StarRating', () => {
+describe('InputRating', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const colors = Object.keys(theme.variants.color) as any
 
@@ -33,13 +33,13 @@ describe('StarRating', () => {
     ['with ui', { props: { ui: { root: 'gap-1' }, modelValue: 3 } }],
     // Slots
     ['with star slot', { slots: { star: () => '⭐' }, props: { modelValue: 3 } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: StarRatingProps, slots?: Partial<StarRatingSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, StarRating)
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputRatingProps, slots?: Partial<InputRatingSlots> }) => {
+    const html = await ComponentRender(nameOrHtml, options, InputRating)
     expect(html).toMatchSnapshot()
   })
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(StarRating, {
+    const wrapper = await mountSuspended(InputRating, {
       props: {
         modelValue: 3
       }
@@ -50,7 +50,7 @@ describe('StarRating', () => {
 
   describe('emits', () => {
     test('update:modelValue event on click', async () => {
-      const wrapper = mount(StarRating, {
+      const wrapper = mount(InputRating, {
         props: {
           modelValue: 0
         }
@@ -67,7 +67,7 @@ describe('StarRating', () => {
     })
 
     test('change event on click', async () => {
-      const wrapper = mount(StarRating, {
+      const wrapper = mount(InputRating, {
         props: {
           modelValue: 0
         }
@@ -83,7 +83,7 @@ describe('StarRating', () => {
     })
 
     test('half star with allowHalf', async () => {
-      const wrapper = mount(StarRating, {
+      const wrapper = mount(InputRating, {
         props: {
           allowHalf: true,
           modelValue: 0
@@ -130,7 +130,7 @@ describe('StarRating', () => {
 
   describe('readonly behavior', () => {
     test('does not emit events when readonly', async () => {
-      const wrapper = mount(StarRating, {
+      const wrapper = mount(InputRating, {
         props: {
           readonly: true,
           modelValue: 3
@@ -149,7 +149,7 @@ describe('StarRating', () => {
 
   describe('disabled behavior', () => {
     test('does not emit events when disabled', async () => {
-      const wrapper = mount(StarRating, {
+      const wrapper = mount(InputRating, {
         props: {
           disabled: true,
           modelValue: 2
@@ -180,11 +180,11 @@ describe('StarRating', () => {
         },
         slotTemplate: `
         <UFormField name="rating">
-          <UStarRating v-model="state.rating" />
+          <UInputRating v-model="state.rating" />
         </UFormField>
         `
       })
-      const rating = wrapper.findComponent(StarRating)
+      const rating = wrapper.findComponent(InputRating)
       return {
         wrapper,
         rating
@@ -195,7 +195,7 @@ describe('StarRating', () => {
       const { rating, wrapper } = await createForm(['change'])
 
       if (!rating.exists()) {
-        throw new Error('StarRating component not found')
+        throw new Error('InputRating component not found')
       }
 
       // Set rating to 2 (should fail validation) by clicking second star
@@ -219,7 +219,7 @@ describe('StarRating', () => {
       const { rating, wrapper } = await createForm(['input'])
 
       if (!rating.exists()) {
-        throw new Error('StarRating component not found')
+        throw new Error('InputRating component not found')
       }
 
       // Set rating to 2 (should fail validation) by clicking second star

@@ -1,15 +1,15 @@
 ---
-description: A component to display and collect star ratings from users.
+description: A component to display and collect ratings from users.
 category: form
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/StarRating.vue
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputRating.vue
 ---
 
 ## Usage
 
-Use the `v-model` directive to control the rating value of the StarRating component.
+Use the `v-model` directive to control the rating value of the InputRating component.
 
 ::component-code
 ---
@@ -211,7 +211,7 @@ props:
 
 ### Disabled
 
-Use the `disabled` prop to disable the StarRating component.
+Use the `disabled` prop to disable the InputRating component.
 
 ::component-code
 ---
@@ -227,7 +227,7 @@ props:
 
 ### With Form Integration
 
-The StarRating component integrates seamlessly with forms and supports form validation.
+The InputRating component integrates seamlessly with forms and supports form validation.
 
 ::component-code
 ---
@@ -259,7 +259,7 @@ watch(rating, (value) => {
 </script>
 
 <template>
-  <UStarRating v-model="rating" />
+  <UInputRating v-model="rating" />
   <p>Current rating: {{ rating }}</p>
 </template>
 ```
