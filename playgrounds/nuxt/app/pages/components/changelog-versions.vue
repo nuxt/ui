@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const containerRef = ref<HTMLElement>()
-const targetRef = ref<HTMLElement>()
+const container = ref<HTMLElement>()
 
 const versions = ref([
   {
@@ -44,14 +43,12 @@ const versions = ref([
 
 <template>
   <Navbar />
-  <div ref="containerRef" class="w-full h-full overflow-auto">
+  <div ref="container" class="relative w-full h-96 overflow-auto">
     <UChangelogVersions
-      target="targetRef"
       :versions="versions"
       :indicator="{
-        target: targetRef,
-        container: containerRef,
-        offset: ['start start', 'end end']
+        container,
+        offset: ['start end', 'end end']
       }"
     />
   </div>

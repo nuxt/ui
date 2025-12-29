@@ -17,6 +17,7 @@ export interface ChangelogVersionsProps<T extends ChangelogVersionProps = Change
   versions?: T[]
   /**
    * Display an indicator bar on the left.
+   * By default, the indicator will track the scroll of the page. (https://motion.dev/docs/vue-use-scroll#page-scroll)
    * @defaultValue true
    * @see https://motion.dev/docs/vue-use-scroll#api
    */
@@ -66,9 +67,8 @@ const getProxySlots = () => omit(slots, ['default', 'indicator'])
 
 const appConfig = useAppConfig() as ChangelogVersions['AppConfig']
 
-const rootRef = ref<InstanceType<typeof Primitive>>()
 const springOptions = computed(() => defu(typeof props.indicatorMotion === 'object' ? props.indicatorMotion : {}, { damping: 30, restDelta: 0.001 }))
-const scrollOptions = computed(() => defu(typeof props.indicator === 'object' ? props.indicator : {}, {} as UseScrollOptions))
+const scrollOptions = computed(() => defu(typeof props.indicator === 'object' ? props.indicator : {}, {}))
 
 const { scrollYProgress } = useScroll(scrollOptions.value)
 const y = useSpring(scrollYProgress, springOptions)
@@ -79,7 +79,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.changelogVer
 </script>
 
 <template>
-  <Primitive ref="rootRef" :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="!!props.indicator || !!slots.indicator" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
       <slot name="indicator">
         <Motion v-if="!!props.indicatorMotion" data-slot="beam" :class="ui.beam({ class: props.ui?.beam })" :style="{ height }" />
