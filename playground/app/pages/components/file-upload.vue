@@ -62,25 +62,21 @@ const schema = z.object({
     )
 })
 
-type schema = z.output<typeof schema>
+type Schema = z.output<typeof schema>
 
-const state = reactive<Partial<schema>>({
+const state = reactive<Partial<Schema>>({
   avatar: undefined
 })
 
 const value = ref<File | null>(null)
 const valueMultiple = ref<File[]>([])
 
-const upload = useUpload('/api/blob', { method: 'PUT' })
-
 function createObjectUrl(file: File): string {
   return URL.createObjectURL(file)
 }
 
-async function onSubmit(event: FormSubmitEvent<schema>) {
-  const res = await upload(event.data.avatar)
-
-  console.log(res)
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+  console.log(event.data)
 }
 </script>
 

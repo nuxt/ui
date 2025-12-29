@@ -1,7 +1,6 @@
 export default defineNuxtConfig({
   modules: [
-    '@nuxt/ui',
-    '@nuxthub/core'
+    '@nuxt/ui'
   ],
 
   devtools: {
