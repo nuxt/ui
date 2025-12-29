@@ -297,7 +297,7 @@ export default defineEventHandler(async (event) => {
       const result = streamText({
         model,
         system: `You are a helpful AI assistant. Be concise and friendly.`,
-        messages: convertToModelMessages(messages)
+        messages: await convertToModelMessages(messages)
       })
 
       // Notify the client that a title was generated
