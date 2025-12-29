@@ -36,15 +36,19 @@ describe('InputMenu', () => {
     icon: 'i-lucide-circle-x'
   }]
 
+  const itemsWithDescription = [...items.map(item => ({ ...item, description: 'Description' }))]
+
   const props = { open: true, portal: false, items }
 
   it.each([
     // Props
     ['with items', { props }],
+    ['with items with description', { props: { ...props, items: itemsWithDescription } }],
     ['with modelValue', { props: { ...props, modelValue: items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
     ['with valueKey', { props: { ...props, valueKey: 'value' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
+    ['with descriptionKey', { props: { ...props, descriptionKey: 'description' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
     ['with multiple and modelValue', { props: { ...props, multiple: true, modelValue: [items[0], items[1]] } }],
     ['with id', { props: { ...props, id: 'id' } }],
@@ -67,6 +71,8 @@ describe('InputMenu', () => {
     ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-chevron-down' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-check' } }],
+    ['with clear', { props: { ...props, clear: true, modelValue: items[0] } }],
+    ['with clear and clearIcon', { props: { ...props, clear: true, clearIcon: 'i-lucide-x', modelValue: items[0] } }],
     ['with arrow', { props: { ...props, arrow: true } }],
     ['with virtualize', { props: { ...props, virtualize: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
@@ -83,11 +89,28 @@ describe('InputMenu', () => {
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
+    ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputMenuProps, slots?: Partial<InputMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputMenu)
     expect(html).toMatchSnapshot()
+  })
+
+  it.each([
+    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+    ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
+    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
+  ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
+    const wrapper = mount(InputMenu, {
+      ...options
+    })
+
+    const input = wrapper.findComponent({ name: 'ComboboxRoot' })
+    await input.setValue(spec.input)
+
+    expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
   })
 
   it('passes accessibility tests', async () => {

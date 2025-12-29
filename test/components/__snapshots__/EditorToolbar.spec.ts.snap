@@ -1,0 +1,169 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`EditorToolbar > renders with as correctly 1`] = `
+"<section role="toolbar" data-slot="base" class="flex items-stretch gap-1.5">
+  <div role="group" data-slot="group" class="flex items-center gap-0.5"><button type="button" disabled="" id="reka-dropdown-menu-trigger-v-0-0-0" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Headings" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:heading shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+    <!---->
+    <!--teleport start-->
+    <!--teleport end-->
+  </div>
+  <div data-orientation="vertical" aria-orientation="vertical" role="separator" data-slot="separator" class="w-px self-stretch bg-border"></div>
+  <div role="group" data-slot="group" class="flex items-center gap-0.5"><button type="button" disabled="" aria-label="Bold" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:bold shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Italic" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:italic shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Underline" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:underline shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Strikethrough" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:strikethrough shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Code" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:code shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</section>"
+`;
+
+exports[`EditorToolbar > renders with class correctly 1`] = `
+"<div role="toolbar" data-slot="base" class="flex items-stretch gap-1.5 overflow-x-auto">
+  <div role="group" data-slot="group" class="flex items-center gap-0.5"><button type="button" disabled="" id="reka-dropdown-menu-trigger-v-0-0-0" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Headings" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:heading shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+    <!---->
+    <!--teleport start-->
+    <!--teleport end-->
+  </div>
+  <div data-orientation="vertical" aria-orientation="vertical" role="separator" data-slot="separator" class="w-px self-stretch bg-border"></div>
+  <div role="group" data-slot="group" class="flex items-center gap-0.5"><button type="button" disabled="" aria-label="Bold" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:bold shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Italic" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:italic shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Underline" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:underline shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Strikethrough" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:strikethrough shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Code" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:code shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`EditorToolbar > renders with item slot correctly 1`] = `
+"<div role="toolbar" data-slot="base" class="flex items-stretch gap-1.5">
+  <div role="group" data-slot="group" class="flex items-center gap-0.5">Item slot</div>
+  <div data-orientation="vertical" aria-orientation="vertical" role="separator" data-slot="separator" class="w-px self-stretch bg-border"></div>
+  <div role="group" data-slot="group" class="flex items-center gap-0.5">Item slotItem slotItem slotItem slotItem slot</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`EditorToolbar > renders with layout bubble correctly 1`] = `
+"<div tabindex="-1" class="focus:outline-none" style="visibility: hidden; position: absolute;">
+  <div role="toolbar" data-slot="base" class="flex items-stretch gap-1.5 bg-default border border-default rounded-lg p-1">
+    <div role="group" data-slot="group" class="flex items-center gap-0.5"><button type="button" disabled="" id="reka-dropdown-menu-trigger-v-0-0-0" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Headings" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:heading shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!--teleport end-->
+    </div>
+    <div data-orientation="vertical" aria-orientation="vertical" role="separator" data-slot="separator" class="w-px self-stretch bg-border"></div>
+    <div role="group" data-slot="group" class="flex items-center gap-0.5"><button type="button" disabled="" aria-label="Bold" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:bold shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Italic" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:italic shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Underline" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:underline shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Strikethrough" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:strikethrough shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Code" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:code shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`EditorToolbar > renders with layout floating correctly 1`] = `
+"<div tabindex="-1" class="focus:outline-none" style="visibility: hidden; position: absolute;">
+  <div role="toolbar" data-slot="base" class="flex items-stretch gap-1.5 bg-default border border-default rounded-lg p-1">
+    <div role="group" data-slot="group" class="flex items-center gap-0.5"><button type="button" disabled="" id="reka-dropdown-menu-trigger-v-0-0-0" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Headings" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:heading shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!--teleport end-->
+    </div>
+    <div data-orientation="vertical" aria-orientation="vertical" role="separator" data-slot="separator" class="w-px self-stretch bg-border"></div>
+    <div role="group" data-slot="group" class="flex items-center gap-0.5"><button type="button" disabled="" aria-label="Bold" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:bold shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Italic" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:italic shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Underline" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:underline shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Strikethrough" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:strikethrough shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Code" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:code shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`EditorToolbar > renders with ui correctly 1`] = `
+"<div role="toolbar" data-slot="base" class="flex items-stretch gap-1.5">
+  <div role="group" data-slot="group" class="flex items-center gap-0.5"><button type="button" disabled="" id="reka-dropdown-menu-trigger-v-0-0-0" aria-haspopup="menu" aria-expanded="false" data-state="closed" aria-label="Headings" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:heading shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+    <!---->
+    <!--teleport start-->
+    <!--teleport end-->
+  </div>
+  <div data-orientation="vertical" aria-orientation="vertical" role="separator" data-slot="separator" class="w-px self-stretch bg-default"></div>
+  <div role="group" data-slot="group" class="flex items-center gap-0.5"><button type="button" disabled="" aria-label="Bold" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:bold shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Italic" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:italic shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Underline" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:underline shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Strikethrough" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:strikethrough shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Code" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:code shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;

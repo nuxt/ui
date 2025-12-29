@@ -22,22 +22,27 @@ const items = [[{ label: 'Fruits', type: 'label' as const }, ...fruits], [{ labe
 const statuses = [{
   label: 'Backlog',
   value: 'backlog',
+  description: 'Issues that have been identified but not yet prioritized',
   icon: 'i-lucide-circle-help'
 }, {
   label: 'Todo',
   value: 'todo',
+  description: 'Issues that are ready to be worked on',
   icon: 'i-lucide-circle-plus'
 }, {
   label: 'In Progress',
   value: 'in_progress',
+  description: 'Issues that are currently being worked on',
   icon: 'i-lucide-circle-arrow-up'
 }, {
   label: 'Done',
   value: 'done',
+  description: 'Issues that have been completed successfully',
   icon: 'i-lucide-circle-check'
 }, {
   label: 'Canceled',
   value: 'canceled',
+  description: 'Issues that have been cancelled or rejected',
   icon: 'i-lucide-circle-x'
 }] satisfies InputMenuItem[]
 
@@ -65,9 +70,16 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
 
   <Matrix v-slot="props" :attrs="attrs">
     <UInputMenu v-model="value" :items="items" autofocus v-bind="props" />
-    <UInputMenu :default-value="value" :items="items" v-bind="props" />
+    <UInputMenu :default-value="value" :items="items" v-bind="props" clear />
     <UInputMenu v-model="valueMultiple" multiple placeholder="Multiple" :items="items" v-bind="props" />
-    <UInputMenu :default-value="valueMultiple" multiple placeholder="Multiple" :items="items" v-bind="props" />
+    <UInputMenu
+      :default-value="valueMultiple"
+      multiple
+      placeholder="Multiple"
+      :items="items"
+      v-bind="props"
+      clear
+    />
     <UInputMenu placeholder="Highlight" highlight :items="items" v-bind="props" />
     <UInputMenu placeholder="Disabled" disabled :items="items" v-bind="props" />
     <UInputMenu placeholder="Required" required :items="items" v-bind="props" />

@@ -307,6 +307,40 @@ The `size` prop will not be proxied to the Button, you need to set it yourself.
 When using the same size, the DropdownMenu items will be perfectly aligned with the Button.
 ::
 
+### Modal
+
+Use the `modal` prop to control whether the DropdownMenu blocks interaction with outside content. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - ui.content
+external:
+  - items
+externalTypes:
+  - DropdownMenuItem[]
+props:
+  modal: false
+  items:
+    - label: Profile
+      icon: i-lucide-user
+    - label: Billing
+      icon: i-lucide-credit-card
+    - label: Settings
+      icon: i-lucide-cog
+  ui:
+    content: 'w-48'
+slots:
+  default: |
+
+    <UButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
+---
+
+:u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+::
+
 ### Disabled
 
 Use the `disabled` prop to disable the DropdownMenu.
@@ -432,9 +466,7 @@ export default defineAppConfig({
 
 ### Extract shortcuts
 
-When you have some items with `kbds` property (displaying some [Kbd](/docs/components/kbd)), you can easily make them work with the [defineShortcuts](/docs/composables/define-shortcuts) composable.
-
-Inside the `defineShortcuts` composable, there is an `extractShortcuts` utility that will extract the shortcuts recursively from the items and return an object that you can pass to `defineShortcuts`. It will automatically call the `select` function of the item when the shortcut is pressed.
+Use the [extractShortcuts](/docs/composables/extract-shortcuts) utility to automatically define shortcuts from menu items with a `kbds` property. It recursively extracts shortcuts and returns an object compatible with [defineShortcuts](/docs/composables/define-shortcuts).
 
 ```vue
 <script setup lang="ts">

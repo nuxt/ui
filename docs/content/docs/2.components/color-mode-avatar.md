@@ -35,6 +35,10 @@ Switch between light and dark mode to see the different images: :u-color-mode-se
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attributes" target="_blank"}
+This component also supports all native `<img>` HTML attributes.
+::
+
 ## Changelog
 
 :component-changelog{prefix="color-mode"}

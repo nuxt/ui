@@ -3,7 +3,7 @@ const items = [
   {
     label: 'Is Nuxt UI free to use?',
     icon: 'i-lucide-circle-help',
-    content: 'Yes! Nuxt UI is completely free and open source under the MIT license. All 100+ components are available to everyone.'
+    content: 'Yes! Nuxt UI is completely free and open source under the MIT license. All 125+ components are available to everyone.'
   },
   {
     label: 'Can I use Nuxt UI with Vue without Nuxt?',

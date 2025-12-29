@@ -26,13 +26,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -51,9 +51,6 @@ jobs:
 
       - name: Test
         run: pnpm run test run
-
-      - name: Test (vue)
-        run: pnpm run test:vue run
 
       - name: Build
         run: pnpm run build
@@ -89,7 +86,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Store commit SHA
         run: |
@@ -99,7 +96,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: pnpm
@@ -132,7 +129,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: nuxt-ui-templates/starter
 
@@ -144,7 +141,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -177,7 +174,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: nuxt-ui-templates/starter-vue
 
@@ -189,7 +186,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -222,7 +219,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: nuxt-ui-templates/landing
 
@@ -234,7 +231,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -267,7 +264,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: nuxt-ui-templates/docs
 
@@ -279,7 +276,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -312,7 +309,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: nuxt-ui-templates/saas
 
@@ -324,7 +321,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -357,7 +354,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: nuxt-ui-templates/dashboard
 
@@ -369,7 +366,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -402,7 +399,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: nuxt-ui-templates/dashboard-vue
 
@@ -414,7 +411,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -447,7 +444,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: nuxt-ui-templates/chat
 
@@ -459,7 +456,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -492,7 +489,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: nuxt-ui-templates/portfolio
 
@@ -504,7 +501,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -537,7 +534,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: nuxt-ui-templates/changelog
 
@@ -549,7 +546,52 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+
+      - name: Install latest nuxt/ui
+        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
+
+  editor:
+    needs: build
+
+    runs-on: ${{ matrix.os }}
+
+    permissions:
+      contents: read
+      pull-requests: read
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest] # macos-latest, windows-latest
+        node: [22]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          repository: nuxt-ui-templates/editor
+
+      - name: Store commit SHA
+        run: |
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install node
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm

@@ -488,6 +488,67 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
+### Clear :badge{label="Soon" class="align-text-top"}
+
+Use the `clear` prop to display a clear button when a value is selected.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  clear: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+### Clear Icon :badge{label="Soon" class="align-text-top"}
+
+Use the `clear-icon` prop to customize the clear button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  clear: true
+  clearIcon: 'i-lucide-trash'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
+::
+
 ### Avatar
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the InputMenu.
@@ -782,7 +843,7 @@ name: 'input-menu-filter-fields-example'
 ---
 ::
 
-### With virtualization :badge{label="Soon"}
+### With virtualization :badge{label="4.1+" class="align-text-top"}
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 
@@ -841,6 +902,10 @@ name: 'input-menu-countries-example'
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+This component also supports all native `<input>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots
@@ -855,7 +920,7 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `inputRef`{lang="ts-type"} | `Ref<InstanceType<typeof ComboboxTrigger> \| null>`{lang="ts-type"} |
+| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

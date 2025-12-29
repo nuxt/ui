@@ -12,8 +12,9 @@ function getColor(color: keyof typeof colors, shade: typeof shades[number]): str
   return ''
 }
 
-function generateShades(key: string, value: string) {
-  return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--color-${value === 'neutral' ? 'old-neutral' : value}-${shade}, ${getColor(value as keyof typeof colors, shade)});`).join('\n  ')}`
+function generateShades(key: string, value: string, prefix?: string) {
+  const prefixStr = prefix ? `${prefix}-` : ''
+  return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--${prefixStr}color-${value === 'neutral' ? 'old-neutral' : value}-${shade}, ${getColor(value as keyof typeof colors, shade)});`).join('\n  ')}`
 }
 function generateColor(key: string, shade: number) {
   return `--ui-${key}: var(--ui-color-${key}-${shade});`
@@ -25,12 +26,13 @@ export default defineNuxtPlugin(() => {
 
   const root = computed(() => {
     const { neutral, ...colors } = appConfig.ui.colors
+    const prefix = (appConfig.ui as { prefix?: string }).prefix
 
-    return `@layer base {
-  :root {
-  ${Object.entries(appConfig.ui.colors).map(([key, value]: [string, string]) => generateShades(key, value)).join('\n  ')}
+    return `@layer theme {
+  :root, :host {
+  ${Object.entries(appConfig.ui.colors).map(([key, value]: [string, string]) => generateShades(key, value, prefix)).join('\n  ')}
   }
-  :root, .light {
+  :root, :host, .light {
   ${Object.keys(colors).map(key => generateColor(key, 500)).join('\n  ')}
   }
   .dark {

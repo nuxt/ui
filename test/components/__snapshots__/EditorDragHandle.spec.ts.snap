@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`EditorDragHandle > renders with as correctly 1`] = `
+"<div class="hidden sm:flex items-center justify-center transition-all duration-200 ease-out" style="visibility: hidden; position: absolute;" data-dragging="false" data-slot="root">
+  <section data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 cursor-grab px-1"><span class="iconify i-lucide:grip-vertical shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </section>
+</div>"
+`;
+
+exports[`EditorDragHandle > renders with class correctly 1`] = `
+"<div class="hidden sm:flex justify-center transition-all duration-200 ease-out items-start" style="visibility: hidden; position: absolute;" data-dragging="false" data-slot="root"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 cursor-grab px-1 items-start"><span class="iconify i-lucide:grip-vertical shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button></div>"
+`;
+
+exports[`EditorDragHandle > renders with default slot correctly 1`] = `"<div class="hidden sm:flex items-center justify-center transition-all duration-200 ease-out" style="visibility: hidden; position: absolute;" data-dragging="false" data-slot="root">Default slot</div>"`;
+
+exports[`EditorDragHandle > renders with ui correctly 1`] = `
+"<div class="hidden sm:flex items-center justify-center transition-all duration-200 ease-out" style="visibility: hidden; position: absolute;" data-dragging="false" data-slot="root"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 cursor-grab px-4"><span class="iconify i-lucide:grip-vertical shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button></div>"
+`;

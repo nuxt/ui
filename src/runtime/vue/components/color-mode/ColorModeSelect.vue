@@ -1,23 +1,28 @@
 <script lang="ts">
-import type { SelectMenuProps } from '../../../types'
+import type { SelectMenuProps, SelectMenuItem } from '../../../types'
 
-export interface ColorModeSelectProps extends /** @vue-ignore */ Pick<SelectMenuProps<any>, 'color' | 'variant' | 'size' | 'trailingIcon' | 'selectedIcon' | 'content' | 'arrow' | 'portal' | 'disabled' | 'ui'> {
+export interface ColorModeSelectProps extends Omit<SelectMenuProps<SelectMenuItem[]>, 'icon' | 'items' | 'modelValue'> {
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useForwardProps } from 'reka-ui'
 import { useAppConfig, useColorMode } from '#imports'
 import { useLocale } from '../../../composables/useLocale'
 import USelectMenu from '../../../components/SelectMenu.vue'
 
 defineOptions({ inheritAttrs: false })
 
-defineProps<ColorModeSelectProps>()
+const props = withDefaults(defineProps<ColorModeSelectProps>(), {
+  searchInput: false
+})
 
 const { t } = useLocale()
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
+
+const selectMenuProps = useForwardProps(props)
 
 const items = computed(() => [
   { label: t('colorMode.system'), value: 'system', icon: appConfig.ui.icons.system },
@@ -39,8 +44,7 @@ const preference = computed({
   <USelectMenu
     v-model="preference"
     :icon="preference?.icon"
-    :search-input="false"
-    v-bind="$attrs"
+    v-bind="{ ...(selectMenuProps as any), ...$attrs }"
     :items="items"
   />
 </template>
