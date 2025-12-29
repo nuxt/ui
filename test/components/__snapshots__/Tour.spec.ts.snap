@@ -1,0 +1,623 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tour > renders with actions slot correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step 1</div>
+        <p class="text-sm text-muted leading-relaxed">First step description</p>
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <div class="mt-2 text-sm text-default leading-relaxed">Step body content</div>
+    <footer class="mt-4 flex items-center justify-between gap-3">Actions slot</footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with body slot correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step 1</div>
+        <p class="text-sm text-muted leading-relaxed">First step description</p>
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <div class="mt-2 text-sm text-default leading-relaxed">Body slot</div>
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Next
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with class correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto shadow-xl" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step 1</div>
+        <p class="text-sm text-muted leading-relaxed">First step description</p>
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <div class="mt-2 text-sm text-default leading-relaxed">Step body content</div>
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Next
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with default slot correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">Default slot<span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span></div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with description slot correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step 1</div>
+        <p class="text-sm text-muted leading-relaxed">Description slot</p>
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <div class="mt-2 text-sm text-default leading-relaxed">Step body content</div>
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Next
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with footer slot correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step 1</div>
+        <p class="text-sm text-muted leading-relaxed">First step description</p>
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <div class="mt-2 text-sm text-default leading-relaxed">Step body content</div>
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Next
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with initialStep correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">2 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step 2</div>
+        <p class="text-sm text-muted leading-relaxed">Second step description</p>
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <!--v-if-->
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
+          <!--v-if-->Previous
+          <!--v-if-->
+        </button><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Finish
+          <!--v-if-->
+        </button></div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with loop correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step 1</div>
+        <p class="text-sm text-muted leading-relaxed">First step description</p>
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <div class="mt-2 text-sm text-default leading-relaxed">Step body content</div>
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Next
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with open correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="reka-popover-content-v-0-0-1" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="--reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none; pointer-events: auto;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step 1</div>
+        <p class="text-sm text-muted leading-relaxed">First step description</p>
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <div class="mt-2 text-sm text-default leading-relaxed">Step body content</div>
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Next
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with step arrow correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 1</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step</div>
+        <!--v-if-->
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <!--v-if-->
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Finish
+          <!--v-if-->
+        </button>
+      </div>
+    </footer>
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with step finishLabel correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 1</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step</div>
+        <!--v-if-->
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <!--v-if-->
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Done
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with step nextLabel correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 1</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step</div>
+        <!--v-if-->
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <!--v-if-->
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Continue
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with step prevLabel correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 1</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step</div>
+        <!--v-if-->
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <!--v-if-->
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Finish
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with title slot correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Title slot</div>
+        <p class="text-sm text-muted leading-relaxed">First step description</p>
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <div class="mt-2 text-sm text-default leading-relaxed">Step body content</div>
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Next
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders with ui correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step 1</div>
+        <p class="text-sm text-muted leading-relaxed">First step description</p>
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <div class="mt-2 text-sm text-default leading-relaxed">Step body content</div>
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Next
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders without arrow correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step 1</div>
+        <p class="text-sm text-muted leading-relaxed">First step description</p>
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <div class="mt-2 text-sm text-default leading-relaxed">Step body content</div>
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Next
+          <!--v-if-->
+        </button>
+      </div>
+    </footer>
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders without close correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step 1</div>
+        <p class="text-sm text-muted leading-relaxed">First step description</p>
+      </div>
+      <!--v-if-->
+    </header>
+    <div class="mt-2 text-sm text-default leading-relaxed">Step body content</div>
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Next
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Tour > renders without dismissible correctly 1`] = `
+"<span id="reka-popover-trigger-v-0-0-0" type="button" aria-haspopup="dialog" aria-expanded="true" aria-controls="" data-state="open" aria-hidden="true"></span>
+<!--teleport start-->
+<!--v-if-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="shadow-xl/30 shadow-primary-500/50 p-4 bg-default rounded-lg ring ring-default max-w-sm w-[min(360px,calc(100vw-2rem))] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) pointer-events-auto" id="reka-popover-content-v-0-0-1" data-state="open" aria-labelledby="reka-popover-trigger-v-0-0-0" role="dialog" data-side="bottom" data-align="center">
+    <header class="flex items-start gap-3">
+      <div class="text-xs text-muted font-medium">1 / 2</div>
+      <div class="flex-1 space-y-1">
+        <div class="text-base font-semibold text-highlighted leading-tight">Step 1</div>
+        <p class="text-sm text-muted leading-relaxed">First step description</p>
+      </div><button type="button" aria-label="Skip" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1"><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+    </header>
+    <div class="mt-2 text-sm text-default leading-relaxed">Step body content</div>
+    <footer class="mt-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <!--v-if-->Next
+          <!--v-if-->
+        </button>
+      </div>
+    </footer><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;

@@ -2,6 +2,7 @@ import type { Ref, MaybeRef } from 'vue'
 import type { Locale, Direction } from '../types/locale'
 import { computed, isRef, ref, unref } from 'vue'
 import { get } from './index'
+import en from '../locale/en'
 
 export type TranslatorOption = Record<string, string | number>
 export type Translator = (path: string, option?: TranslatorOption) => string
@@ -13,12 +14,22 @@ export type LocaleContext<M> = {
   t: Translator
 }
 
-export function buildTranslator<M>(locale: MaybeRef<Locale<M>>): Translator {
-  return (path, option) => translate(path, option, unref(locale))
+export function buildTranslator<M>(locale: MaybeRef<Locale<M>>, fallbackLocale?: Locale<M>): Translator {
+  return (path, option) => translate(path, option, unref(locale), fallbackLocale)
 }
 
-export function translate<M>(path: string, option: undefined | TranslatorOption, locale: Locale<M>): string {
-  const prop: string = get(locale, `messages.${path}`, path)
+export function translate<M>(path: string, option: undefined | TranslatorOption, locale: Locale<M>, fallbackLocale?: Locale<M>): string {
+  let prop: string = get(locale, `messages.${path}`, undefined)
+
+  // If translation not found and it's not the fallback path itself, try fallback locale
+  if (prop === undefined || prop === path) {
+    const fallback = fallbackLocale || (locale.code !== 'en' ? en as Locale<M> : undefined)
+    if (fallback) {
+      prop = get(fallback, `messages.${path}`, path)
+    } else {
+      prop = path
+    }
+  }
 
   return prop.replace(
     /\{(\w+)\}/g,
@@ -26,17 +37,18 @@ export function translate<M>(path: string, option: undefined | TranslatorOption,
   )
 }
 
-export function buildLocaleContext<M>(locale: MaybeRef<Locale<M>>): LocaleContext<M> {
+export function buildLocaleContext<M>(locale: MaybeRef<Locale<M>>, fallbackLocale?: Locale<M>): LocaleContext<M> {
   const lang = computed(() => unref(locale).name)
   const code = computed(() => unref(locale).code)
   const dir = computed(() => unref(locale).dir)
   const localeRef = isRef(locale) ? locale : ref(locale) as Ref<Locale<M>>
+  const fallback = fallbackLocale || (unref(locale).code !== 'en' ? en as Locale<M> : undefined)
 
   return {
     lang,
     code,
     dir,
     locale: localeRef,
-    t: buildTranslator(locale)
+    t: buildTranslator(locale, fallback)
   }
 }

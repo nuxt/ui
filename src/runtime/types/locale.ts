@@ -135,6 +135,12 @@ export type Messages = {
   toast: {
     close: string
   }
+  tour: {
+    next: string
+    previous: string
+    finish: string
+    close: string
+  }
 }
 
 export type Direction = 'ltr' | 'rtl'
