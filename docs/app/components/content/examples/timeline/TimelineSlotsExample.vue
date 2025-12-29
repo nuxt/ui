@@ -54,7 +54,7 @@ const items = [{
     </template>
 
     <template #date="{ item }">
-      {{ useTimeAgoIntl(new Date(item.date)) }}
+      {{ useTimeAgoIntl(new Date(item.date), { locale: 'fr' }) }}
     </template>
   </UTimeline>
 </template>
