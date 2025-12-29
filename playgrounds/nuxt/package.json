@@ -12,7 +12,7 @@
     "@ai-sdk/gateway": "^2.0.23",
     "@ai-sdk/vue": "^2.0.116",
     "@iconify-json/lucide": "^1.2.82",
-    "@iconify-json/simple-icons": "^1.2.63",
+    "@iconify-json/simple-icons": "^1.2.64",
     "@internationalized/date": "^3.10.1",
     "@nuxt/ui": "workspace:*",
     "@tiptap/extension-emoji": "^3.14.0",
