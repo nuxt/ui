@@ -1,3 +1,4 @@
+import type { CollectionSource } from '@nuxt/content'
 import { defineCollection, z } from '@nuxt/content'
 import { resolve } from 'node:path'
 
@@ -40,10 +41,13 @@ const pro = process.env.NUXT_UI_PRO_PATH
     }
   : process.env.NUXT_GITHUB_TOKEN
     ? {
-        repository: 'https://github.com/nuxt/ui-pro/tree/v3',
+        repository: {
+          url: 'https://github.com/nuxt/ui-pro',
+          branch: 'v3',
+          auth: process.env.NUXT_GITHUB_TOKEN
+        },
         include: 'docs/content/**',
-        prefix: '/',
-        authToken: process.env.NUXT_GITHUB_TOKEN
+        prefix: '/'
       }
     : undefined
 
@@ -52,7 +56,7 @@ export const collections = {
     type: 'page',
     source: [{
       include: '**/*'
-    }, pro!].filter(Boolean),
+    }, pro as CollectionSource].filter(Boolean),
     schema
   }),
   showcase: defineCollection({
