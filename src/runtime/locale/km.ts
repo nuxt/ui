@@ -130,6 +130,12 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'បិទ'
+    },
+    tour: {
+      next: 'Next',
+      previous: 'Previous',
+      finish: 'Finish',
+      close: 'Skip'
     }
   }
 })

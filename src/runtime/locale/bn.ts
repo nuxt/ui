@@ -130,6 +130,12 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'বন্ধ করুন'
+    },
+    tour: {
+      next: 'Next',
+      previous: 'Previous',
+      finish: 'Finish',
+      close: 'Skip'
     }
   }
 })

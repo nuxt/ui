@@ -129,7 +129,13 @@ export default defineLocale<Messages>({
       noData: 'Маълумот нест'
     },
     toast: {
-      close: 'Бастан'
+      close: 'Пӯшидан'
+    },
+    tour: {
+      next: 'Next',
+      previous: 'Previous',
+      finish: 'Finish',
+      close: 'Skip'
     }
   }
 })

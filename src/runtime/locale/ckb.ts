@@ -131,6 +131,12 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'داخستن'
+    },
+    tour: {
+      next: 'Next',
+      previous: 'Previous',
+      finish: 'Finish',
+      close: 'Skip'
     }
   }
 })

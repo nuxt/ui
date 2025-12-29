@@ -132,6 +132,12 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'დახურვა'
+    },
+    tour: {
+      next: 'Next',
+      previous: 'Previous',
+      finish: 'Finish',
+      close: 'Skip'
     }
   }
 })
