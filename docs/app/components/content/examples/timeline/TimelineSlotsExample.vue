@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { TimelineItem } from '@nuxt/ui'
-import { useTimeAgo } from '@vueuse/core'
+import { useTimeAgoIntl } from '@vueuse/core'
 
 const items = [{
   username: 'J-Michalek',
@@ -54,7 +54,7 @@ const items = [{
     </template>
 
     <template #date="{ item }">
-      {{ useTimeAgo(new Date(item.date)) }}
+      {{ useTimeAgoIntl(new Date(item.date)) }}
     </template>
   </UTimeline>
 </template>
