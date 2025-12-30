@@ -19,7 +19,7 @@ export default (options: Required<NuxtOptions['ui']>) => ({
     linkText: 'truncate',
     indicator: 'absolute ms-2.5 transition-[translate,height] duration-200 h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full',
     highlightOverlay: 'absolute start-0 top-0 rtl:-scale-x-100',
-    highlightLine: 'absolute inset-0 bg-muted',
+    highlightLine: 'absolute inset-0 bg-(--ui-border)',
     highlightActive: 'absolute w-full transition-[transform,height] duration-200 ease-out'
   },
   variants: {
