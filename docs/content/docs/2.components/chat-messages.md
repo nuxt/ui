@@ -423,7 +423,7 @@ export default defineEventHandler(async (event) => {
     model: gateway('openai/gpt-4o-mini'),
     maxOutputTokens: 10000,
     system: 'You are a helpful assistant.',
-    messages: convertToModelMessages(messages)
+    messages: await convertToModelMessages(messages)
   }).toUIMessageStreamResponse()
 })
 ```
