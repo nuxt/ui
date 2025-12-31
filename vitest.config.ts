@@ -27,7 +27,8 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'nuxt',
-          include: ['./test/components/**/**.spec.ts', './test/composables/**.spec.ts', './test/utils/**/**.spec.ts'],
+          dir: './test',
+          include: ['components/**/*.spec.ts', 'composables/**/*.spec.ts', 'utils/**/*.spec.ts'],
           environment: 'nuxt',
           environmentOptions: {
             nuxt: {
@@ -42,7 +43,8 @@ export default defineConfig({
         test: {
           name: 'vue',
           environment: 'happy-dom',
-          include: ['./test/components/**.spec.ts', './test/composables/**.spec.ts', './test/utils/**/**.spec.ts'],
+          dir: './test',
+          include: ['components/**/*.spec.ts', 'composables/**/*.spec.ts', 'utils/**/*.spec.ts'],
           setupFiles: ['./test/utils/setup.ts']
         },
         plugins: [
