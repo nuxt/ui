@@ -27,7 +27,7 @@ export default defineConfig({
         test: {
           name: 'nuxt',
           dir: './test',
-          include: ['components/**/*.spec.ts', 'composables/**/*.spec.ts', 'utils/**/*.spec.ts'],
+          include: ['components/**/**.spec.ts', 'composables/**.spec.ts', 'utils/**/**.spec.ts'],
           environment: 'nuxt',
           environmentOptions: {
             nuxt: {
@@ -43,7 +43,7 @@ export default defineConfig({
           name: 'vue',
           environment: 'happy-dom',
           dir: './test',
-          include: ['components/**/*.spec.ts', 'composables/**/*.spec.ts', 'utils/**/*.spec.ts'],
+          include: ['components/**.spec.ts', 'composables/**.spec.ts', 'utils/**/**.spec.ts'],
           setupFiles: ['./test/utils/setup.ts']
         },
         plugins: [
@@ -67,7 +67,7 @@ export default defineConfig({
               }
             },
             load(id) {
-              if (id === '#components' || id === '?#components') {
+              if (id === '#components' || id === '?import#components') {
                 const resolvedComponents = [...vueRouterOverrides, ...vueComponents, ...components]
                 const renderedComponents = new Set<string>()
                 return resolvedComponents.map((file) => {
