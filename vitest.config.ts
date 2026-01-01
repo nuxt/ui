@@ -3,7 +3,6 @@ import { defineVitestProject } from '@nuxt/test-utils/config'
 import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 import ui from './src/vite'
-import { resolve } from 'pathe'
 import { glob } from 'tinyglobby'
 
 const components = await glob('./src/runtime/components/*.vue', { absolute: true })
@@ -55,7 +54,7 @@ export default defineConfig({
             enforce: 'pre',
             resolveId(id) {
               if (id === '@nuxt/test-utils/runtime') {
-                return resolve('./test/utils/mount')
+                return fileURLToPath(new URL('test/utils/mount.ts', import.meta.url))
               }
             }
           },
