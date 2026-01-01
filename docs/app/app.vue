@@ -54,7 +54,6 @@ provide('navigation', rootNavigation)
 <template>
   <UApp :toaster="appConfig.toaster">
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
-    <Analytics />
 
     <Analytics />
     <SpeedInsights />
