@@ -6,37 +6,7 @@ export default defineLocale<Messages>({
   code: 'ar',
   dir: 'rtl',
   messages: {
-    inputMenu: {
-      noMatch: 'لا توجد نتائج مطابقة',
-      noData: 'لا توجد بيانات',
-      create: 'إنشاء "{label}"'
-    },
-    calendar: {
-      prevYear: 'السنة السابقة',
-      nextYear: 'السنة المقبلة',
-      prevMonth: 'الشهر السابق',
-      nextMonth: 'الشهر المقبل',
-      week: 'أسبوع',
-      weekShort: 'أسب.'
-    },
-    inputNumber: {
-      increment: 'زيادة',
-      decrement: 'تقليل'
-    },
-    commandPalette: {
-      placeholder: 'اكتب أمرًا أو ابحث...',
-      noMatch: 'لا توجد نتائج مطابقة',
-      noData: 'لا توجد بيانات',
-      close: 'إغلاق',
-      back: 'رجوع'
-    },
-    selectMenu: {
-      noMatch: 'لا توجد نتائج مطابقة',
-      noData: 'لا توجد بيانات',
-      create: 'إنشاء "{label}"',
-      search: 'بحث...'
-    },
-    toast: {
+    alert: {
       close: 'إغلاق'
     },
     authForm: {
