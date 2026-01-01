@@ -75,8 +75,7 @@ export default (options: Required<ModuleOptions>) => ({
     weekNumbers: {
       true: {
         gridRow: 'grid-cols-8',
-        gridWeekDaysRow: 'grid-cols-8'
-
+        gridWeekDaysRow: 'grid-cols-8 [&>*:first-child]:col-start-2'
       }
     }
   },

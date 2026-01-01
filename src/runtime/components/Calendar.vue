@@ -129,7 +129,7 @@ const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
 const emits = defineEmits<CalendarEmits<R, M>>()
 defineSlots<CalendarSlots>()
 
-const { dir, t } = useLocale()
+const { dir, t, locale } = useLocale()
 const appConfig = useAppConfig() as Calendar['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
@@ -193,26 +193,18 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
         :class="ui.grid({ class: props.ui?.grid })"
       >
         <Calendar.GridHead>
-          <<<<<<< HEAD
-          <Calendar.GridRow :class="ui.gridWeekDaysRow({ class: props.ui?.gridWeekDaysRow })">
-            <th v-if="weekNumbers" :aria-label="t('calendar.week')" :class="ui.headCellWeek({ class: props.ui?.headCellWeek })">
-              {{ t('calendar.weekShort') }}
-            </th>
-            =======
-            <Calendar.GridRow data-slot="gridWeekDaysRow" :class="ui.gridWeekDaysRow({ class: props.ui?.gridWeekDaysRow })">
-              >>>>>>> 0a6c24e09d100401b8253f7668b8eb3a1816041f
-              <Calendar.HeadCell
-                v-for="day in weekDays"
-                :key="day"
-                data-slot="headCell"
-                :class="ui.headCell({ class: props.ui?.headCell })"
-              >
-                <slot name="week-day" :day="day">
-                  {{ day }}
-                </slot>
-              </Calendar.HeadCell>
-            </Calendar.GridRow>
-          </calendar.gridrow>
+          <Calendar.GridRow data-slot="gridWeekDaysRow" :class="ui.gridWeekDaysRow({ class: props.ui?.gridWeekDaysRow })">
+            <Calendar.HeadCell
+              v-for="day in weekDays"
+              :key="day"
+              data-slot="headCell"
+              :class="ui.headCell({ class: props.ui?.headCell })"
+            >
+              <slot name="week-day" :day="day">
+                {{ day }}
+              </slot>
+            </Calendar.HeadCell>
+          </Calendar.GridRow>
         </Calendar.GridHead>
         <Calendar.GridBody data-slot="gridBody" :class="ui.gridBody({ class: props.ui?.gridBody })">
           <Calendar.GridRow
@@ -222,7 +214,7 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
             :class="ui.gridRow({ class: props.ui?.gridRow })"
           >
             <td v-if="weekNumbers && weekDates[0]" role="gridcell" :class="ui.cellWeek({ class: props.ui?.cellWeek })">
-              {{ getWeekNumber(weekDates[0], locale) }}
+              {{ getWeekNumber(weekDates[0], locale.code) }}
             </td>
             <Calendar.Cell
               v-for="weekDate in weekDates"
