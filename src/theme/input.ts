@@ -1,5 +1,5 @@
 import type { ModuleOptions } from '../module'
-import { buttonGroupVariantWithRoot } from './button-group'
+import { fieldGroupVariantWithRoot } from './field-group'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
@@ -13,7 +13,7 @@ export default (options: Required<ModuleOptions>) => ({
     trailingIcon: 'shrink-0 text-dimmed'
   },
   variants: {
-    ...buttonGroupVariantWithRoot,
+    ...fieldGroupVariantWithRoot,
     size: {
       xs: {
         base: 'px-2 py-1 text-xs gap-1',

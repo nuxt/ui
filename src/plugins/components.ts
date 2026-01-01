@@ -1,42 +1,92 @@
+import { defu } from 'defu'
 import { join, normalize } from 'pathe'
-import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
 import { globSync } from 'tinyglobby'
+import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
 import AutoImportComponents from 'unplugin-vue-components'
 import type { Options as ComponentsOptions } from 'unplugin-vue-components/types'
-
-import { runtimeDir } from '../unplugin'
 import type { NuxtUIOptions } from '../unplugin'
-import { defu } from 'defu'
+import { runtimeDir } from '../unplugin'
+import { resolveRouterMode } from '../utils/router'
+
+interface ComponentSource {
+  has: (name: string) => boolean
+  resolve: (name: string) => { name: string, from: string } | undefined
+  resolveFile: (filename: string) => string | undefined
+}
+
+function createComponentSource(cwd: string, prefix: string, ignore: string[] = []): ComponentSource {
+  const files = globSync('**/*.vue', { cwd, ignore: ignore.filter(Boolean) as string[] })
+  const names = new Set(files.map(c => `${prefix}${c.split('/').pop()?.replace(/\.vue$/, '')}`))
+  const paths = new Map(files.map((c) => {
+    const componentName = `${prefix}${c.split('/').pop()?.replace(/\.vue$/, '')}`
+    return [componentName, c] as const
+  }))
+
+  return {
+    has: name => names.has(name),
+    resolve: (componentName) => {
+      const relativePath = paths.get(componentName)
+      if (!relativePath) return
+      return { name: 'default', from: join(cwd, relativePath) }
+    },
+    resolveFile: (filename) => {
+      const componentName = `${prefix}${filename}`
+      const relativePath = paths.get(componentName)
+      if (!relativePath) return
+      return join(cwd, relativePath)
+    }
+  }
+}
 
 /**
  * This plugin adds all the Nuxt UI components as auto-imports.
  */
-export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix: NonNullable<NuxtUIOptions['prefix']>, extraRuntimeDir?: string }, meta: UnpluginContextMeta) {
-  const components = globSync('**/*.vue', { cwd: join(runtimeDir, 'components') })
-  const componentNames = new Set(components.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
+export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix: NonNullable<NuxtUIOptions['prefix']> }, meta: UnpluginContextMeta) {
+  const colorModeIgnore = !options.colorMode ? ['color-mode/**/*.vue'] : []
+  const routerMode = resolveRouterMode(options)
 
-  const overrides = globSync('**/*.vue', { cwd: join(runtimeDir, 'vue/components') })
-  const overrideNames = new Set(overrides.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
+  // Component sources in priority order (first match wins)
+  const routerOverrides: Record<string, ComponentSource> = {
+    'vue-router': createComponentSource(join(runtimeDir, 'vue/overrides/vue-router'), options.prefix),
+    'inertia': createComponentSource(join(runtimeDir, 'vue/overrides/inertia'), options.prefix),
+    'none': createComponentSource(join(runtimeDir, 'vue/overrides/none'), options.prefix)
+  }
 
-  const inertiaOverrides = globSync('**/*.vue', { cwd: join(runtimeDir, 'inertia/components') })
-  const inertiaOverrideNames = new Set(inertiaOverrides.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
+  const unpluginComponents = createComponentSource(
+    join(runtimeDir, 'vue/components'),
+    options.prefix,
+    colorModeIgnore
+  )
+
+  const defaultComponents = createComponentSource(
+    join(runtimeDir, 'components'),
+    options.prefix,
+    [...colorModeIgnore, 'content/*.vue', 'prose/**/*.vue']
+  )
+
+  const sources = [routerOverrides[routerMode], unpluginComponents, defaultComponents].filter((s): s is ComponentSource => !!s)
+  const packagesToScan = [
+    '@nuxt/ui',
+    '@compodium/examples',
+    ...(Array.isArray(options.scanPackages) ? options.scanPackages : [])
+  ]
+  const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const packagesRegex = packagesToScan.map(escapeRegex).join('|')
+  const excludeRegex = new RegExp(`[\\\\/]node_modules[\\\\/](?!\\.pnpm|${packagesRegex})`)
 
   const pluginOptions = defu(options.components, <ComponentsOptions>{
     dts: options.dts ?? true,
     exclude: [
-      /[\\/]node_modules[\\/](?!\.pnpm|@nuxt\/ui|@compodium\/examples)/,
+      excludeRegex,
       /[\\/]\.git[\\/]/,
       /[\\/]\.nuxt[\\/]/
     ],
     resolvers: [
       (componentName) => {
-        if (options.inertia && inertiaOverrideNames.has(componentName)) {
-          return { name: 'default', from: join(runtimeDir, 'inertia/components', `${componentName.slice(options.prefix.length)}.vue`) }
+        for (const source of sources) {
+          const resolved = source.resolve(componentName)
+          if (resolved) return resolved
         }
-        if (overrideNames.has(componentName))
-          return { name: 'default', from: join(runtimeDir, 'vue/components', `${componentName.slice(options.prefix.length)}.vue`) }
-        if (componentNames.has(componentName))
-          return { name: 'default', from: join(runtimeDir, 'components', `${componentName.slice(options.prefix.length)}.vue`) }
       }
     ]
   })
@@ -50,24 +100,22 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
       name: 'nuxt:ui:components',
       enforce: 'pre',
       resolveId(id, importer) {
-        if (!importer) {
-          return
-        }
-        if (!normalize(importer).includes(runtimeDir) && (!options.extraRuntimeDir || !normalize(importer).includes(options.extraRuntimeDir))) {
+        // only apply to runtime nuxt ui components
+        if (!importer || !normalize(importer).includes(runtimeDir)) {
           return
         }
 
-        // only apply to relative imports or nuxt ui runtime components
-        if (!RELATIVE_IMPORT_RE.test(id) && !id.startsWith('@nuxt/ui/components/')) {
+        // only apply to relative imports
+        if (!RELATIVE_IMPORT_RE.test(id)) {
           return
         }
 
         const filename = id.match(/([^/]+)\.vue$/)?.[1]
-        if (filename && options.inertia && inertiaOverrideNames.has(`${options.prefix}${filename}`)) {
-          return join(runtimeDir, 'inertia/components', `${filename}.vue`)
-        }
-        if (filename && overrideNames.has(`${options.prefix}${filename}`)) {
-          return join(runtimeDir, 'vue/components', `${filename}.vue`)
+        if (filename) {
+          for (const source of sources) {
+            const resolved = source.resolveFile(filename)
+            if (resolved) return resolved
+          }
         }
       }
     },

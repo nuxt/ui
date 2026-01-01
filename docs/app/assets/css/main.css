@@ -1,8 +1,7 @@
 @import "tailwindcss" theme(static) source("../../../..");
-@import "@nuxt/ui-pro";
+@import "@nuxt/ui";
 
 @source "../../../content/**/*";
-@source "../../../node_modules/.c12";
 
 @theme static {
   --container-8xl: 90rem;
@@ -27,8 +26,22 @@
 }
 
 html[data-framework="nuxt"] .vue-only,
-html[data-framework="vue"] .nuxt-only,
-html[data-module="ui-pro"] .ui-only,
-html[data-module="ui"] .ui-pro-only {
+html[data-framework="vue"] .nuxt-only {
   display: none;
+}
+
+/* Shiki icon highlight transformer styles */
+.shiki-icon-highlight {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: -0.25em;
+  margin-right: 0.125em;
+  background-color: var(--ui-text-highlighted);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-image: var(--shiki-icon-url);
+  mask-image: var(--shiki-icon-url);
 }

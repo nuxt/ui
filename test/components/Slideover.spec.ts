@@ -1,9 +1,14 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Slideover from '../../src/runtime/components/Slideover.vue'
 import type { SlideoverProps, SlideoverSlots } from '../../src/runtime/components/Slideover.vue'
 import ComponentRender from '../component-render'
+import theme from '#build/ui/slideover'
 
 describe('Slideover', () => {
+  const sides = Object.keys(theme.variants.side) as any
+
   const props = { open: true, portal: false }
 
   it.each([
@@ -11,9 +16,8 @@ describe('Slideover', () => {
     ['with open', { props }],
     ['with title', { props: { ...props, title: 'Title' } }],
     ['with description', { props: { ...props, title: 'Title', description: 'Description' } }],
-    ['with left side', { props: { ...props, side: 'left' as const, title: 'Title', description: 'Description' } }],
-    ['with top side', { props: { ...props, side: 'top' as const, title: 'Title', description: 'Description' } }],
-    ['with bottom side', { props: { ...props, side: 'bottom' as const, title: 'Title', description: 'Description' } }],
+    ...sides.map((side: string) => [`with ${side} side`, { props: { ...props, side, title: 'Title', description: 'Description' } }]),
+    ...sides.map((side: string) => [`with ${side} side inset`, { props: { ...props, side, inset: true, title: 'Title', description: 'Description' } }]),
     ['without overlay', { props: { ...props, overlay: false, title: 'Title', description: 'Description' } }],
     ['without transition', { props: { ...props, transition: false, title: 'Title', description: 'Description' } }],
     ['without close', { props: { ...props, close: false, title: 'Title', description: 'Description' } }],
@@ -33,5 +37,17 @@ describe('Slideover', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SlideoverProps, slots?: Partial<SlideoverSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Slideover)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Slideover, {
+      props: {
+        ...props,
+        title: 'Title',
+        description: 'Description'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

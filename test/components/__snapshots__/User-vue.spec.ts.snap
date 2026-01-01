@@ -1,0 +1,230 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`User > renders with as correctly 1`] = `
+"<section data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</section>"
+`;
+
+exports[`User > renders with avatar correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with avatar slot correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2">Avatar slot<div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with chip correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2">
+  <div data-slot="root" class="relative inline-flex items-center justify-center shrink-0"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="base" class="rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap bg-success h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute"></span></div>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with class correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="group/user flex items-center gap-2 absolute"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with default slot correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->Default slot
+  </div>
+</div>"
+`;
+
+exports[`User > renders with description correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2">
+  <!--v-if-->
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with description slot correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Description slot</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with name correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2">
+  <!--v-if-->
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`User > renders with name slot correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Name slot</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with orientation horizontal correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with orientation vertical correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative group/user flex flex-col gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with size 2xl correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-3"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-11 text-[22px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="44" height="44" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-base">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-base">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with size 2xs correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="flex items-center gap-1.5">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-xs">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with size 3xl correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-3"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-12 text-2xl shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="48" height="48" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-lg">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-base">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with size 3xs correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-1"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-4 text-[8px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="16" height="16" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="flex items-center gap-1">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-xs">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with size lg correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-9 text-lg shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="36" height="36" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-sm">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with size md correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-sm">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with size sm correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-7 text-sm shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="28" height="28" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-xs">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with size xl correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-10 text-xl shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="40" height="40" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-base">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-sm">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with size xs correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-6 text-xs shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="24" height="24" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="flex items-center gap-1.5">
+    <!--v-if-->
+    <p data-slot="name" class="font-medium text-highlighted text-xs">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with to correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0 transform transition-transform duration-200 group-hover/user:scale-115 group-has-focus-visible/user:scale-115"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class=""><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Benjamin Canac" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+    <p data-slot="name" class="font-medium text-default peer-hover:text-highlighted peer-focus-visible:text-highlighted transition-colors text-sm">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted peer-hover:text-toned peer-focus-visible:text-toned transition-colors text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;
+
+exports[`User > renders with ui correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative group/user flex items-center gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" alt="User avatar" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+  <div data-slot="wrapper" class="">
+    <!--v-if-->
+    <p data-slot="name" class="text-highlighted text-sm font-bold">Benjamin Canac</p>
+    <p data-slot="description" class="text-muted text-xs">Software Engineer</p>
+  </div>
+</div>"
+`;

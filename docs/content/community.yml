@@ -1,0 +1,101 @@
+title: Community
+description: Explore amazing projects built around Nuxt UI by the community.
+navigation: false
+hero:
+  title: Community
+  description: Explore amazing projects built around Nuxt UI by the community.
+items:
+  - label: 'Compodium'
+    description: 'Preview, customize, and generate Nuxt UI component code directly within Nuxt DevTools for faster development.'
+    avatar:
+      src: 'https://compodium.dev/favicon.svg'
+      ui:
+        image: 'p-2.5'
+    to: 'https://compodium.dev/'
+    target: '_blank'
+    user:
+      name: 'romhml'
+      to: 'https://github.com/romhml'
+      target: '_blank'
+      avatar:
+        src: 'https://github.com/romhml.png'
+  - label: 'Raycast Extension'
+    description: 'Quickly search, browse, and copy Nuxt UI component code snippets without leaving your editor.'
+    avatar:
+      src: 'https://github.com/raycast.png'
+    to: 'https://www.raycast.com/HugoRCD/nuxt'
+    target: '_blank'
+    user:
+      name: 'HugoRDC'
+      to: 'https://github.com/HugoRCD'
+      target: '_blank'
+      avatar:
+        src: 'https://github.com/HugoRCD.png'
+  - label: 'Figma to Code'
+    description: 'Transform your Figma designs into production-ready Nuxt UI components with one click.'
+    avatar:
+      icon: 'i-logos-figma'
+    to: 'https://github.com/Justineo/tempad-dev-plugin-nuxt-ui'
+    target: '_blank'
+    user:
+      name: 'Justineo'
+      to: 'https://github.com/Justineo'
+      target: '_blank'
+      avatar:
+        src: 'https://github.com/Justineo.png'
+  - label: 'Nuxt Auto Form'
+    description: 'Auto-generate Nuxt UI forms from your Zod 4 schemas with zero boilerplate.'
+    avatar:
+      src: 'https://nuxt-auto-form.norbiros.dev/logo.png'
+      ui:
+        image: 'p-2.5'
+    to: 'https://nuxt-auto-form.norbiros.dev/'
+    target: '_blank'
+    user:
+      name: 'Norbiros'
+      to: 'https://github.com/Norbiros'
+      target: '_blank'
+      avatar:
+        src: 'https://github.com/Norbiros.png'
+  - label: 'Nuxt Charts'
+    description: 'Build interactive, responsive charts and data visualizations seamlessly integrated with Nuxt UI.'
+    avatar:
+      src: 'https://nuxtcharts.com/favicons/favicon-96x96.png'
+      ui:
+        image: 'p-2.5'
+    to: 'https://nuxtcharts.com/'
+    target: '_blank'
+    user:
+      name: 'dennisadriaans'
+      to: 'https://github.com/dennisadriaans'
+      target: '_blank'
+      avatar:
+        src: 'https://github.com/dennisadriaans.png'
+  - label: 'Nuxt QRCode'
+    description: 'Generate and read QR codes with Nuxt, a perfect addition to your Nuxt UI projects.'
+    avatar:
+      src: 'https://qrcode.s94.dev/favicon.svg'
+      ui:
+        image: 'p-2.5'
+    to: 'https://qrcode.s94.dev/'
+    target: '_blank'
+    user:
+      name: 'sandros94'
+      to: 'https://github.com/sandros94'
+      target: '_blank'
+      avatar:
+        src: 'https://github.com/sandros94.png'
+  - label: 'UnoCSS Preset'
+    description: 'The preset that makes using UnoCSS with Nuxt UI effortless.'
+    avatar:
+      src: 'https://unocss-preset-nuxt-ui.netlify.app/logo.svg'
+      ui:
+        image: 'p-1.5'
+    to: 'https://github.com/lehuuphuc/unocss-preset-nuxt-ui'
+    target: '_blank'
+    user:
+      name: 'lehuuphuc'
+      to: 'https://github.com/lehuuphuc'
+      target: '_blank'
+      avatar:
+        src: 'https://github.com/lehuuphuc.png'

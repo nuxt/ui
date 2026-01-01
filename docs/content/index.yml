@@ -1,0 +1,264 @@
+title: The Intuitive Vue UI Library
+description: A comprehensive Vue UI component library (Nuxt optional) with 125+ accessible, Tailwind CSS components for building modern web applications. Works with Nuxt and plain Vue apps (Vite, Inertia, SSR).
+hero:
+  title: The Intuitive Vue UI Library
+  description: A comprehensive Vue UI component library (Nuxt optional) with 125+ accessible, Tailwind CSS components for building modern web applications. Works with Nuxt and plain Vue apps (Vite, Inertia, SSR).
+  links:
+    - label: Get started
+      to: /docs/getting-started/installation/nuxt
+      class: 'nuxt-only'
+    - label: Get started
+      to: /docs/getting-started/installation/vue
+      class: 'vue-only'
+    - label: Explore components
+      to: /docs/components
+      variant: outline
+      color: neutral
+      trailingIcon: i-lucide-arrow-right
+  features:
+    - icon: i-logos-tailwindcss-icon
+      title: Styled with Tailwind CSS
+      description: Beautifully styled by default, overwrite any style you want.
+    - icon: i-custom-reka-ui
+      title: Accessible with Reka UI
+      description: Robust accessibility out of the box.
+    - icon: i-logos-typescript-icon
+      title: Type-safe with TypeScript
+      description: Auto-complete and type safety for all components.
+features:
+  - title: Build for the modern web
+    description: A complete design system powered by Tailwind CSS and Reka UI for top performance and accessibility.
+    icon: i-lucide-rocket
+    to: /docs/getting-started
+  - title: Large icons sets
+    description: Access to over 200,000 customizable icons from Iconify powered by @nuxt/icon.
+    icon: i-lucide-smile
+    to: /docs/getting-started/integrations/icons
+  - title: Easy font customization
+    description: Performance-optimized fonts with first-class @nuxt/fonts integration.
+    icon: i-lucide-a-large-small
+    to: /docs/getting-started/integrations/fonts
+  - title: Light & dark mode
+    description: Dark mode-ready components with @nuxtjs/color-mode module integration.
+    icon: i-lucide-sun-moon
+    to: /docs/getting-started/integrations/color-mode
+  - title: Internationalization (i18n)
+    description: Translated into 50+ languages, works well with i18n and multi-directional support (LTR/RTL).
+    icon: i-lucide-languages
+    to: /docs/getting-started/integrations/i18n
+  - title: Beautiful typography
+    description: Integrates with @nuxt/content to deliver beautiful typography and consistent component styling.
+    icon: i-simple-icons-markdown
+    to: /docs/getting-started/integrations/content
+design_system:
+  title: Flexible design system
+  description: Build faster with Nuxt UI's CSS-first design system powered by Tailwind CSS and its semantic color system combined with a runtime configuration.
+  links:
+    - label: Customize design system
+      to: /docs/getting-started/theme/design-system
+      variant: outline
+      color: neutral
+      trailingIcon: i-lucide-arrow-right
+  features:
+    - title: CSS-first configuration
+      description: Define fonts, colors, and breakpoints with the @theme directive directly in your CSS. This makes your theme portable, maintainable and easy to customize.
+      icon: i-simple-icons-css
+    - title: Semantic color system
+      description: Configure 7 semantic color aliases (primary, secondary, success, info, warning, error, neutral) that describe the purpose of colors rather than specific values.
+      icon: i-lucide-palette
+    - title: Runtime color configuration
+      description: Change colors, icons and more at runtime through AppConfig without rebuilding your application, perfect for multi-tenant applications or dynamic theming.
+      icon: i-lucide-settings
+  code: |
+    ::code-group
+
+    ```css [main.css]
+    @import "tailwindcss";
+    @import "@nuxt/ui";
+
+    @theme static {
+      --font-sans: 'Public Sans', system-ui, sans-serif;
+
+      --color-brand-50: #f0f9ff;
+      --color-brand-100: #e0f2fe;
+      --color-brand-200: #bae6fd;
+      --color-brand-300: #7dd3fc;
+      --color-brand-400: #38bdf8;
+      --color-brand-500: #3b82f6;
+      --color-brand-600: #2563eb;
+      --color-brand-700: #1d4ed8;
+      --color-brand-800: #1e40af;
+      --color-brand-900: #1e3a8a;
+      --color-brand-950: #172554;
+    }
+    ```
+
+    ```ts [app.config.ts]
+    export default defineAppConfig({
+      ui: {
+        colors: {
+          primary: 'brand',
+          secondary: 'purple',
+          success: 'green',
+          info: 'blue',
+          warning: 'yellow',
+          error: 'red',
+          neutral: 'zinc'
+        },
+        icons: {
+          loading: 'i-lucide-loader-circle',
+          search: 'i-lucide-search',
+          menu: 'i-lucide-menu'
+        }
+      }
+    })
+    ```
+
+    ::
+css_variables:
+  title: Consistent design tokens
+  description: Use CSS variables as design tokens for consistent theming with semantic utility classes that automatically adapt to light and dark modes.
+  links:
+    - label: Customize CSS variables
+      to: /docs/getting-started/theme/css-variables
+      variant: outline
+      color: neutral
+      trailingIcon: i-lucide-arrow-right
+  features:
+    - title: Semantic color utilities
+      description: Use utility classes like text-primary, bg-success, or border-error that automatically adapt to light and dark modes via CSS variables.
+      icon: i-lucide-palette
+    - title: Text and background tokens
+      description: Complete set of utility classes for text (text-dimmed, text-muted, text-highlighted), backgrounds (bg-default, bg-elevated, bg-accented) and borders.
+      icon: i-lucide-layers
+    - title: Global layout variables
+      description: Customize global styles with --ui-radius for border rounding, --ui-container for layout widths, and --ui-header-height for consistent spacing.
+      icon: i-lucide-settings
+  code: |
+    ::code-group{class="lg:[&_pre]:min-h-[362px]"}
+
+    ```css [main.css]
+    @import "tailwindcss";
+    @import "@nuxt/ui";
+
+    :root {
+      --ui-primary: black;
+      --ui-radius: 0.5rem;
+      --ui-container: var(--container-5xl);
+      --ui-header-height: --spacing(24);
+    }
+
+    .dark {
+      --ui-primary: white;
+      --ui-bg: var(--ui-color-neutral-950);
+    }
+    ```
+
+    ```vue [Component.vue]
+    <template>
+      <div class="bg-default border border-default rounded-lg p-4">
+        <span class="text-primary">Primary text</span>
+
+        <span class="text-dimmed">Dimmed text</span>
+
+        <div class="bg-elevated p-3 rounded-md mt-2">
+          <span class="text-muted">Elevated background</span>
+        </div>
+      </div>
+    </template>
+    ```
+
+    ::
+components:
+  title: Tailor components to your needs
+  description: Use the Tailwind Variants API with slots, variants, and compound variants for powerful component theming with intelligent class merging.
+  links:
+    - label: Customize components
+      to: /docs/getting-started/theme/components
+      variant: outline
+      color: neutral
+      trailingIcon: i-lucide-arrow-right
+  features:
+    - title: Tailwind Variants API
+      description: Components use slots for flexible styling, variants for prop-based styles, and compound variants for complex conditional styling with intelligent class merging.
+      icon: i-lucide-layout-grid
+    - title: Global theme configuration
+      description: Override component themes globally in app.config.ts using slots, variants, compound variants, and default variants for consistent styling across your application.
+      icon: i-lucide-settings-2
+    - title: Per-component customization
+      description: Fine-tune individual components with the ui prop for slot-specific styling and class prop for root element overrides, providing maximum flexibility.
+      icon: i-lucide-component
+  code: |
+    ::code-group{class="lg:[&_pre]:min-h-[482px]"}
+
+    ```ts [app.config.ts]
+    export default defineAppConfig({
+      ui: {
+        button: {
+          slots: {
+            base: 'font-bold'
+          },
+          variants: {
+            size: {
+              md: {
+                base: 'px-4 py-2 text-sm'
+              }
+            }
+          },
+          defaultVariants: {
+            color: 'neutral'
+          }
+        }
+      }
+    })
+    ```
+
+    ```vue [Button.vue]
+    <template>
+      <UButton
+        label="Button"
+        size="md"
+        variant="outline"
+        trailing-icon="i-lucide-chevron-right"
+        :ui="{
+          trailingIcon: 'rotate-90'
+        }"
+        class="rounded-full"
+      />
+    </template>
+    ```
+
+    ::
+templates:
+  title: Ship faster with production-ready templates
+  description: Start with our fully responsive, accessible, and easy to customize templates, so you can launch your project quickly and effortlessly.
+  links:
+    - label: Explore templates
+      to: /templates
+      variant: outline
+      color: neutral
+      trailingIcon: i-lucide-arrow-right
+  features:
+    - title: Production-ready templates
+      description: All templates are built with best practices, SEO optimized, performance tuned, and ready to deploy to production immediately with minimal configuration.
+      icon: i-lucide-rocket
+    - title: Nuxt & Vue support
+      description: Templates available for both Nuxt and Vue applications with framework-specific optimizations, choose the one that best fits your project needs.
+      icon: i-simple-icons-vuedotjs
+    - title: Fully customizable
+      description: Built on top of Nuxt UI components with complete source code access, easily customize colors, fonts, layouts, and components to match your brand identity.
+      icon: i-lucide-palette
+community:
+  title: Join the Nuxt UI community
+  description: Join our thriving open-source community to contribute code, report issues, suggest features, or help with documentation. Every contribution makes Nuxt UI better for everyone in the ecosystem.
+  links:
+    - label: Star on GitHub
+      color: neutral
+      to: https://github.com/nuxt/ui
+      target: _blank
+      icon: i-lucide-star
+    - label: Meet the team
+      color: neutral
+      variant: outline
+      to: /team
+      trailingIcon: i-lucide-arrow-right

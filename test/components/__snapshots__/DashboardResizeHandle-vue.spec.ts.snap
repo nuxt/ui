@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DashboardResizeHandle > renders with as correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <section role="separator" class="hidden lg:block touch-none select-none cursor-ew-resize relative before:absolute before:inset-y-0 before:-left-1.5 before:-right-1.5 before:z-1"></section>
+</div>"
+`;
+
+exports[`DashboardResizeHandle > renders with class correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <div role="separator" class="hidden lg:block touch-none select-none cursor-ew-resize before:absolute before:inset-y-0 before:-left-1.5 before:-right-1.5 before:z-1 absolute"></div>
+</div>"
+`;
+
+exports[`DashboardResizeHandle > renders with default slot correctly 1`] = `
+"<div class="fixed inset-0 flex overflow-hidden">
+  <div role="separator" class="hidden lg:block touch-none select-none cursor-ew-resize relative before:absolute before:inset-y-0 before:-left-1.5 before:-right-1.5 before:z-1">Default slot</div>
+</div>"
+`;

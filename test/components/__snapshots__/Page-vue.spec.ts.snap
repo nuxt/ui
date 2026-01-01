@@ -1,0 +1,48 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Page > renders with all slots correctly 1`] = `"<div data-slot="root" class="flex flex-col lg:grid lg:grid-cols-10 lg:gap-10">Left slot<div data-slot="center" class="lg:col-span-6">Default slot</div>Right slot</div>"`;
+
+exports[`Page > renders with as correctly 1`] = `
+"<section data-slot="root" class="flex flex-col lg:grid lg:grid-cols-10 lg:gap-10">
+  <!--v-if-->
+  <div data-slot="center" class="lg:col-span-10"></div>
+  <!--v-if-->
+</section>"
+`;
+
+exports[`Page > renders with class correctly 1`] = `
+"<div data-slot="root" class="flex flex-col lg:grid lg:grid-cols-10 lg:gap-4">
+  <!--v-if-->
+  <div data-slot="center" class="lg:col-span-10"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Page > renders with default slot correctly 1`] = `
+"<div data-slot="root" class="flex flex-col lg:grid lg:grid-cols-10 lg:gap-10">
+  <!--v-if-->
+  <div data-slot="center" class="lg:col-span-10">Default slot</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Page > renders with left slot correctly 1`] = `
+"<div data-slot="root" class="flex flex-col lg:grid lg:grid-cols-10 lg:gap-10">Left slot<div data-slot="center" class="lg:col-span-8"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Page > renders with right slot correctly 1`] = `
+"<div data-slot="root" class="flex flex-col lg:grid lg:grid-cols-10 lg:gap-10">
+  <!--v-if-->
+  <div data-slot="center" class="lg:col-span-8"></div>Right slot
+</div>"
+`;
+
+exports[`Page > renders with ui correctly 1`] = `
+"<div data-slot="root" class="flex flex-col lg:grid lg:grid-cols-10 lg:gap-10">
+  <!--v-if-->
+  <div data-slot="center" class="lg:col-span-10"></div>
+  <!--v-if-->
+</div>"
+`;

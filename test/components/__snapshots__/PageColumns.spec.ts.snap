@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageColumns > renders with as correctly 1`] = `"<section class="relative column-1 md:columns-2 lg:columns-3 gap-8 space-y-8 *:break-inside-avoid-column *:will-change-transform"></section>"`;
+
+exports[`PageColumns > renders with class correctly 1`] = `"<div class="relative column-1 md:columns-2 lg:columns-3 gap-8 space-y-8 *:break-inside-avoid-column *:will-change-transform xl:columns-4"></div>"`;
+
+exports[`PageColumns > renders with default slot correctly 1`] = `"<div class="relative column-1 md:columns-2 lg:columns-3 gap-8 space-y-8 *:break-inside-avoid-column *:will-change-transform">Default slot</div>"`;

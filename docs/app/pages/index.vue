@@ -1,26 +1,32 @@
 <script setup lang="ts">
 import { joinURL } from 'ufo'
-// @ts-expect-error yaml is not typed
-import page from '.index.yml'
+
+const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
 
 const { url } = useSiteConfig()
 
 useSeoMeta({
-  titleTemplate: `%s - Nuxt UI`,
-  title: page.title,
-  description: page.description,
-  ogTitle: `${page.title} - Nuxt UI`,
-  ogDescription: page.description,
+  titleTemplate: '%s - Nuxt UI',
+  title: page.value.title,
+  description: page.value.description,
+  ogTitle: `${page.value.title} - Nuxt UI`,
+  ogDescription: page.value.description,
   ogImage: joinURL(url, '/og-image.png')
 })
 
-const { data: components } = await useAsyncData('ui-components', () => {
-  return queryCollection('content')
-    .where('path', 'LIKE', '/components/%')
+const { data: components } = await useAsyncData('index-components', () => {
+  return queryCollection('docs')
+    .where('path', 'LIKE', '/docs/components/%')
     .where('extension', '=', 'md')
-    .where('module', 'IS NULL')
-    .select('path', 'title', 'description', 'category', 'module')
+    .select('path', 'title', 'description', 'category')
     .all()
+})
+
+const { data: templates } = await useAsyncData('index-templates', () => queryCollection('templates').first(), {
+  transform: data => data?.items?.filter(template => template.framework === 'nuxt') || []
 })
 
 const { data: module } = await useFetch('/api/module.json')
@@ -37,7 +43,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 </script>
 
 <template>
-  <UMain>
+  <div v-if="page">
     <UPageHero
       orientation="horizontal"
       :ui="{
@@ -77,7 +83,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       <LazySkyBg is-index />
 
       <div class="h-[344px] lg:h-full lg:relative w-full lg:min-h-[calc(100vh-var(--ui-header-height)-1px)] overflow-hidden">
-        <UPageMarquee
+        <UMarquee
           pause-on-hover
           :overlay="false"
           :ui="{
@@ -90,10 +96,11 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :key="component.path"
             class="relative group/link aspect-video border-default w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
             :to="component.path"
+            tabindex="-1"
           >
             <UColorModeImage
-              :light="`${component.path.replace('/components/', '/components/light/')}.png`"
-              :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
+              :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
+              :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"
               :alt="`${component.title} preview`"
               width="290"
               height="163"
@@ -103,9 +110,9 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             />
             <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
           </ULink>
-        </UPageMarquee>
+        </UMarquee>
 
-        <UPageMarquee
+        <UMarquee
           pause-on-hover
           reverse
           :overlay="false"
@@ -119,10 +126,11 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :key="component.path"
             class="relative group/link aspect-video border-default w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
             :to="component.path"
+            tabindex="-1"
           >
             <UColorModeImage
-              :light="`${component.path.replace('/components/', '/components/light/')}.png`"
-              :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
+              :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
+              :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"
               :alt="`${component.title} preview`"
               width="290"
               height="163"
@@ -132,13 +140,13 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             />
             <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
           </ULink>
-        </UPageMarquee>
+        </UMarquee>
       </div>
     </UPageHero>
 
     <USeparator />
 
-    <UPageSection :ui="{ container: 'lg:py-16' }">
+    <UPageSection :ui="{ container: 'lg:py-16', root: 'bg-muted/25' }">
       <ul class="grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 lg:gap-x-8 lg:gap-y-8 xl:gap-y-10">
         <Motion
           v-for="(feature, index) in page?.features"
@@ -150,7 +158,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           :in-view-options="{ once: true }"
           class="flex items-start gap-x-3 relative group"
         >
-          <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10">
+          <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10 focus-visible:outline-primary">
             <span class="sr-only">Go to {{ feature.title }}</span>
           </NuxtLink>
 
@@ -195,16 +203,81 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
     <USeparator />
 
     <UPageSection
-      :title="page.component_customization.title"
-      :features="page.component_customization.features"
-      :links="page.component_customization.links"
+      :title="page.css_variables.title"
+      :description="page.css_variables.description"
+      :features="page.css_variables.features"
+      :links="page.css_variables.links"
+      orientation="horizontal"
+      :ui="{ root: 'bg-muted/25' }"
+    >
+      <MDC :value="page.css_variables.code" cache-key="index-css-variables-code" />
+    </UPageSection>
+
+    <USeparator />
+
+    <UPageSection
+      :title="page.components.title"
+      :features="page.components.features"
+      :links="page.components.links"
       orientation="horizontal"
     >
       <template #description>
-        <MDC :value="page.component_customization.description" cache-key="index-component-customization-description" />
+        <MDC :value="page.components.description" cache-key="index-components-description" />
       </template>
 
-      <MDC :value="page.component_customization.code" cache-key="index-component-customization-code" />
+      <MDC :value="page.components.code" cache-key="index-components-code" />
+    </UPageSection>
+
+    <USeparator />
+
+    <UPageSection
+      :title="page.templates.title"
+      :description="page.templates.description"
+      :links="page.templates.links"
+      :features="page.templates.features"
+      orientation="horizontal"
+      :ui="{ root: 'bg-muted/25' }"
+    >
+      <UCarousel
+        v-slot="{ item }"
+        loop
+        dots
+        fade
+        wheel-gestures
+        :contain-scroll="false"
+        :autoplay="{ delay: 3000 }"
+        :items="templates"
+        :ui="{
+          container: 'py-px',
+          viewport: 'px-px'
+        }"
+      >
+        <UPageCard
+          :to="item.links?.[0]?.to"
+          :icon="item.icon"
+          :title="item.title"
+          target="_blank"
+          variant="subtle"
+          class="group rounded-md"
+          tabindex="-1"
+          :ui="{
+            container: 'p-4 sm:p-4',
+            wrapper: 'flex-row items-center gap-1.5',
+            leading: 'mb-0',
+            leadingIcon: 'text-highlighted'
+          }"
+        >
+          <UColorModeImage
+            :light="`/assets/templates/${item.framework}/${item.title.toLowerCase()}-light.png`"
+            :dark="`/assets/templates/${item.framework}/${item.title.toLowerCase()}-dark.png`"
+            :alt="`Template ${item.title} screenshot`"
+            width="620"
+            height="348"
+            loading="lazy"
+            class="rounded-lg w-full border border-default aspect-video"
+          />
+        </UPageCard>
+      </UCarousel>
     </UPageSection>
 
     <USeparator />
@@ -215,12 +288,11 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :links="page.community.links"
       orientation="horizontal"
       :ui="{ features: 'flex items-center gap-4 lg:gap-8' }"
-      class="border-b border-default"
     >
       <template #features>
         <li>
-          <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0">
-            <p class="text-4xl font-semibold text-highlighted truncate">
+          <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0 group focus-visible:outline-primary">
+            <p class="text-4xl font-semibold truncate text-highlighted group-hover:text-primary transition-colors">
               {{ format(module?.stats?.downloads ?? 0) }}+
             </p>
             <p class="text-muted text-sm truncate">monthly downloads</p>
@@ -228,8 +300,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </li>
 
         <li>
-          <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0">
-            <p class="text-4xl font-semibold text-highlighted truncate">
+          <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0 group focus-visible:outline-primary">
+            <p class="text-4xl font-semibold text-highlighted truncate group-hover:text-primary transition-colors">
               {{ format(module?.stats?.stars ?? 0) }}+
             </p>
             <p class="text-muted text-sm truncate">GitHub stars</p>
@@ -237,9 +309,9 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </li>
 
         <li>
-          <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0">
-            <p class="text-4xl font-semibold text-highlighted truncate">
-              250+
+          <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0 group focus-visible:outline-primary">
+            <p class="text-4xl font-semibold text-highlighted truncate group-hover:text-primary transition-colors">
+              300+
             </p>
             <p class="text-muted text-sm truncate">Contributors</p>
           </NuxtLink>
@@ -250,64 +322,5 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView || isContributorsHovered" />
       </div>
     </UPageSection>
-
-    <UPageSection :ui="{ container: 'relative !pb-0 overflow-hidden' }">
-      <template #title>
-        Build faster with Nuxt UI <span class="text-primary">Pro</span>.
-      </template>
-      <template #description>
-        A collection of premium Vue components, composables and utils built on top of Nuxt UI. <br> Focused on structure and layout, these <span class="text-default">responsive components</span> are designed to be the perfect <span class="text-default">building blocks for your next idea</span>.
-      </template>
-      <template #links>
-        <UButton to="/pro" size="lg">
-          Discover Nuxt UI Pro
-        </UButton>
-        <UButton to="/pro/templates" size="lg" variant="outline" trailing-icon="i-lucide-arrow-right" color="neutral">
-          Explore templates
-        </UButton>
-      </template>
-
-      <LazyStarsBg />
-
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-      <div class="relative h-[400px] border border-default bg-muted overflow-hidden border-x-0 -mx-4 sm:-mx-6 lg:mx-0 lg:border-x w-screen lg:w-full">
-        <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -left-[100px] -top-[300px] h-[940px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
-          <img
-            v-for="i in 4"
-            :key="i"
-            :src="`/pro/blocks/image${i}.png`"
-            width="460"
-            height="258"
-            loading="lazy"
-            :alt="`Nuxt UI Pro Screenshot ${i}`"
-            class="aspect-video border border-default rounded-lg bg-white"
-          >
-        </UPageMarquee>
-        <UPageMarquee orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -top-[400px] left-[480px] h-[1160px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
-          <img
-            v-for="i in [5, 6, 7, 8]"
-            :key="i"
-            :src="`/pro/blocks/image${i}.png`"
-            width="460"
-            height="258"
-            loading="lazy"
-            :alt="`Nuxt UI Pro Screenshot ${i}`"
-            class="aspect-video border border-default rounded-lg bg-white"
-          >
-        </UPageMarquee>
-        <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: 'hidden md:flex [--duration:40s] absolute w-[460px] -top-[300px] left-[1020px] h-[1060px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
-          <img
-            v-for="i in [9, 10, 11, 12]"
-            :key="i"
-            :src="`/pro/blocks/image${i}.png`"
-            width="460"
-            height="258"
-            loading="lazy"
-            :alt="`Nuxt UI Pro Screenshot ${i}`"
-            class="aspect-video border border-default rounded-lg bg-white"
-          >
-        </UPageMarquee>
-      </div>
-    </UPageSection>
-  </UMain>
+  </div>
 </template>

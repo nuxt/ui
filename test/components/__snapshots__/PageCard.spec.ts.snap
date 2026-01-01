@@ -1,0 +1,944 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageCard > renders with as correctly 1`] = `
+"<section data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</section>"
+`;
+
+exports[`PageCard > renders with body slot correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">Body slot</div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with class correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex bg-default ring ring-default rounded-xl">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with default slot correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>Default slot
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with description correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <!--v-if-->
+      <div data-slot="body" class="flex-1">
+        <!--v-if-->
+        <div data-slot="description" class="text-[15px] text-pretty text-muted">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with description slot correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description slot</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with footer slot correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <div data-slot="footer" class="pt-4 mt-auto">Footer slot</div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with header slot correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <div data-slot="header" class="mb-4">Header slot</div>
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with highlight color error correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring-2 ring-error">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with highlight color info correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring-2 ring-info">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with highlight color neutral correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring-2 ring-inverted">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with highlight color neutral correctly 2`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring-2 ring-inverted">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with highlight color primary correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring-2 ring-primary">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with highlight color secondary correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring-2 ring-secondary">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with highlight color success correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring-2 ring-success">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with highlight color warning correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring-2 ring-warning">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with highlight correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring-2 ring-primary">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with icon correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with leading slot correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5">Leading slot</div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with orientation horizontal correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 lg:grid-cols-2 lg:items-center">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with orientation horizontal reverse correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 lg:grid-cols-2 lg:items-center">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start order-last">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with orientation vertical correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with orientation vertical reverse correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start order-last">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with spotlight color error correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <div data-slot="spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with spotlight color info correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <div data-slot="spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with spotlight color neutral correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <div data-slot="spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with spotlight color neutral correctly 2`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <div data-slot="spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with spotlight color primary correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <div data-slot="spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with spotlight color secondary correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <div data-slot="spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with spotlight color success correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <div data-slot="spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with spotlight color warning correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <div data-slot="spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with spotlight correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <div data-slot="spotlight" class="absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90"></div>
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with title correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <!--v-if-->
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with title slot correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title slot</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with to correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default has-focus-visible:ring-2 has-focus-visible:ring-primary transition hover:bg-elevated/50">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <!--v-if-->
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Card link" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+</div>"
+`;
+
+exports[`PageCard > renders with ui correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty text-highlighted font-bold">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant ghost correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant ghost highlight correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg ring-2 ring-primary">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant ghost to correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg has-focus-visible:ring-2 has-focus-visible:ring-primary transition hover:bg-elevated/50">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+</div>"
+`;
+
+exports[`PageCard > renders with variant naked correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-0 sm:p-0">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant naked highlight correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg ring-2 ring-primary">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-0 sm:p-0">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant naked to correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg has-focus-visible:ring-2 has-focus-visible:ring-primary transition">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-0 sm:p-0">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+</div>"
+`;
+
+exports[`PageCard > renders with variant outline correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant outline highlight correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring-2 ring-primary">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant outline to correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default has-focus-visible:ring-2 has-focus-visible:ring-primary transition hover:bg-elevated/50">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+</div>"
+`;
+
+exports[`PageCard > renders with variant soft correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-elevated/50">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-toned mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant soft highlight correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-elevated/50 ring-2 ring-primary">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-toned mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant soft to correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-elevated/50 has-focus-visible:ring-2 has-focus-visible:ring-primary transition hover:bg-elevated">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-toned mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+</div>"
+`;
+
+exports[`PageCard > renders with variant solid correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-inverted text-inverted">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-inverted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-dimmed mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant solid highlight correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-inverted text-inverted ring-2 ring-primary">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-inverted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-dimmed mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant solid to correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-inverted text-inverted has-focus-visible:ring-2 has-focus-visible:ring-primary transition hover:bg-inverted/90">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-inverted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-dimmed mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+</div>"
+`;
+
+exports[`PageCard > renders with variant subtle correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-elevated/50 ring ring-default">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-toned mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant subtle highlight correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-elevated/50 ring-2 ring-primary">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-toned mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageCard > renders with variant subtle to correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-elevated/50 ring ring-default has-focus-visible:ring-2 has-focus-visible:ring-primary transition hover:bg-elevated hover:ring-accented">
+  <!--v-if-->
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+      <!--v-if-->
+      <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+      <div data-slot="body" class="flex-1">
+        <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+        <div data-slot="description" class="text-[15px] text-pretty text-toned mt-1">Description</div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
+</div>"
+`;

@@ -1,0 +1,145 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageAnchors > renders with as correctly 1`] = `
+"<div data-slot="root" class="">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Playground<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Roadmap<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Releases<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLabelExternalIcon" class="size-3 absolute top-0 text-dimmed"></svg></span>
+      </a></li>
+  </ul>
+</div>"
+`;
+
+exports[`PageAnchors > renders with class correctly 1`] = `
+"<nav data-slot="root" class="lg:mb-12">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Playground<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Roadmap<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Releases<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLabelExternalIcon" class="size-3 absolute top-0 text-dimmed"></svg></span>
+      </a></li>
+  </ul>
+</nav>"
+`;
+
+exports[`PageAnchors > renders with link slot correctly 1`] = `
+"<nav data-slot="root" class="">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">Link slot</a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">Link slot</a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">Link slot</a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">Link slot</a></li>
+  </ul>
+</nav>"
+`;
+
+exports[`PageAnchors > renders with link-label slot correctly 1`] = `
+"<nav data-slot="root" class="">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Link label slot<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Link label slot<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Link label slot<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Link label slot<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLabelExternalIcon" class="size-3 absolute top-0 text-dimmed"></svg></span>
+      </a></li>
+  </ul>
+</nav>"
+`;
+
+exports[`PageAnchors > renders with link-leading slot correctly 1`] = `
+"<nav data-slot="root" class="">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition">Link leading slot</div><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition">Link leading slot</div><span data-slot="linkLabel" class="truncate">Playground<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted">Link leading slot</div><span data-slot="linkLabel" class="truncate">Roadmap<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition">Link leading slot</div><span data-slot="linkLabel" class="truncate">Releases<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLabelExternalIcon" class="size-3 absolute top-0 text-dimmed"></svg></span>
+      </a></li>
+  </ul>
+</nav>"
+`;
+
+exports[`PageAnchors > renders with link-trailing slot correctly 1`] = `
+"<nav data-slot="root" class="">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>Link trailing slot
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Playground<!--v-if--></span>Link trailing slot
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Roadmap<!--v-if--></span>Link trailing slot
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Releases<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLabelExternalIcon" class="size-3 absolute top-0 text-dimmed"></svg></span>Link trailing slot
+      </a></li>
+  </ul>
+</nav>"
+`;
+
+exports[`PageAnchors > renders with links correctly 1`] = `
+"<nav data-slot="root" class="">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Playground<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Roadmap<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Releases<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLabelExternalIcon" class="size-3 absolute top-0 text-dimmed"></svg></span>
+      </a></li>
+  </ul>
+</nav>"
+`;
+
+exports[`PageAnchors > renders with ui correctly 1`] = `
+"<nav data-slot="root" class="">
+  <ul data-slot="list" class="gap-6">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Playground<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Roadmap<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLeadingIcon" class="size-4 shrink-0"></svg></div><span data-slot="linkLabel" class="truncate">Releases<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="linkLabelExternalIcon" class="size-3 absolute top-0 text-dimmed"></svg></span>
+      </a></li>
+  </ul>
+</nav>"
+`;

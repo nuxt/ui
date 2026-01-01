@@ -35,6 +35,9 @@ export default (options: Required<ModuleOptions>) => ({
       true: {
         content: 'rounded-lg after:hidden overflow-hidden [--initial-transform:calc(100%+1.5rem)]'
       }
+    },
+    snapPoints: {
+      true: ''
     }
   },
   compoundVariants: [{
@@ -44,12 +47,25 @@ export default (options: Required<ModuleOptions>) => ({
       handle: '!w-12 !h-1.5 mx-auto'
     }
   }, {
+    direction: ['top', 'bottom'],
+    snapPoints: true,
+    class: {
+      content: 'h-full'
+    }
+  }, {
     direction: ['right', 'left'],
     class: {
       content: 'w-auto max-w-[calc(100%-2rem)]',
       handle: '!h-12 !w-1.5 mt-auto mb-auto'
     }
   }, {
+    direction: ['right', 'left'],
+    snapPoints: true,
+    class: {
+      content: 'w-full'
+    }
+  },
+  {
     direction: 'top',
     inset: true,
     class: {

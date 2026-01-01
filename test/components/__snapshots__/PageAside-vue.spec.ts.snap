@@ -1,0 +1,53 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageAside > renders with as correctly 1`] = `
+"<div data-slot="root" class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) py-8 lg:ps-4 lg:-ms-4 lg:pe-6.5">
+  <div data-slot="container" class="relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`PageAside > renders with bottom slot correctly 1`] = `
+"<aside data-slot="root" class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) py-8 lg:ps-4 lg:-ms-4 lg:pe-6.5">
+  <div data-slot="container" class="relative">
+    <!--v-if-->Bottom slot
+  </div>
+</aside>"
+`;
+
+exports[`PageAside > renders with class correctly 1`] = `
+"<aside data-slot="root" class="hidden overflow-y-auto lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) py-8 lg:ps-4 lg:-ms-4 lg:pe-6.5 lg:flex">
+  <div data-slot="container" class="relative">
+    <!--v-if-->
+  </div>
+</aside>"
+`;
+
+exports[`PageAside > renders with default slot correctly 1`] = `
+"<aside data-slot="root" class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) py-8 lg:ps-4 lg:-ms-4 lg:pe-6.5">
+  <div data-slot="container" class="relative">
+    <!--v-if-->Default slot
+  </div>
+</aside>"
+`;
+
+exports[`PageAside > renders with top slot correctly 1`] = `
+"<aside data-slot="root" class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) py-8 lg:ps-4 lg:-ms-4 lg:pe-6.5">
+  <div data-slot="container" class="relative">
+    <div data-slot="top" class="sticky -top-8 -mt-8 pointer-events-none z-[1]">
+      <div data-slot="topHeader" class="h-8 bg-default -mx-4 px-4"></div>
+      <div data-slot="topBody" class="bg-default relative pointer-events-auto flex flex-col -mx-4 px-4">Top slot</div>
+      <div data-slot="topFooter" class="h-8 bg-gradient-to-b from-default -mx-4 px-4"></div>
+    </div>
+  </div>
+</aside>"
+`;
+
+exports[`PageAside > renders with ui correctly 1`] = `
+"<aside data-slot="root" class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) py-8 lg:ps-4 lg:-ms-4 lg:pe-6.5">
+  <div data-slot="container" class="absolute">
+    <!--v-if-->
+  </div>
+</aside>"
+`;

@@ -6,7 +6,9 @@ const state = reactive({
   password: undefined
 })
 
-const validate = (state: any): FormError[] => {
+type Schema = typeof state
+
+function validate(state: Partial<Schema>): FormError[] {
   const errors = []
   if (!state.email) errors.push({ name: 'email', message: 'Required' })
   if (!state.password) errors.push({ name: 'password', message: 'Required' })
@@ -14,7 +16,7 @@ const validate = (state: any): FormError[] => {
 }
 
 const toast = useToast()
-async function onSubmit(event: FormSubmitEvent<typeof state>) {
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
   console.log(event.data)
 }

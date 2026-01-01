@@ -1,5 +1,5 @@
 import type { ModuleOptions } from '../module'
-import { buttonGroupVariant } from './button-group'
+import { fieldGroupVariant } from './field-group'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
@@ -11,7 +11,7 @@ export default (options: Required<ModuleOptions>) => ({
     trailingIcon: 'shrink-0'
   },
   variants: {
-    ...buttonGroupVariant,
+    ...fieldGroupVariant,
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
       neutral: ''

@@ -1,0 +1,99 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ContentSurround > renders with as correctly 1`] = `
+"<section data-slot="root" class="grid grid-cols-1 sm:grid-cols-2 gap-8"><a href="/getting-started" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-left size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:-translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Introduction</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Nuxt UI harnesses the combined strengths of Reka UI, Tailwind CSS, and Tailwind Variants to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.</p>
+  </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Theme</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+  </a></section>"
+`;
+
+exports[`ContentSurround > renders with class correctly 1`] = `
+"<div data-slot="root" class="grid grid-cols-1 sm:grid-cols-2 gap-12"><a href="/getting-started" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-left size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:-translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Introduction</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Nuxt UI harnesses the combined strengths of Reka UI, Tailwind CSS, and Tailwind Variants to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.</p>
+  </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Theme</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+  </a></div>"
+`;
+
+exports[`ContentSurround > renders with link slot correctly 1`] = `"<div data-slot="root" class="grid grid-cols-1 sm:grid-cols-2 gap-8"><a href="/getting-started" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors">Link slot</a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">Link slot</a></div>"`;
+
+exports[`ContentSurround > renders with link-leading slot correctly 1`] = `
+"<div data-slot="root" class="grid grid-cols-1 sm:grid-cols-2 gap-8"><a href="/getting-started" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition">Link leading slot</div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Introduction</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Nuxt UI harnesses the combined strengths of Reka UI, Tailwind CSS, and Tailwind Variants to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.</p>
+  </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition">Link leading slot</div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Theme</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+  </a></div>"
+`;
+
+exports[`ContentSurround > renders with link-title slot correctly 1`] = `
+"<div data-slot="root" class="grid grid-cols-1 sm:grid-cols-2 gap-8"><a href="/getting-started" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-left size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:-translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Link title slot</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Nuxt UI harnesses the combined strengths of Reka UI, Tailwind CSS, and Tailwind Variants to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.</p>
+  </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Link title slot</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+  </a></div>"
+`;
+
+exports[`ContentSurround > renders with nextIcon correctly 1`] = `
+"<div data-slot="root" class="grid grid-cols-1 sm:grid-cols-2 gap-8"><a href="/getting-started" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-left size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:-translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Introduction</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Nuxt UI harnesses the combined strengths of Reka UI, Tailwind CSS, and Tailwind Variants to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.</p>
+  </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:chevron-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Theme</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+  </a></div>"
+`;
+
+exports[`ContentSurround > renders with prevIcon correctly 1`] = `
+"<div data-slot="root" class="grid grid-cols-1 sm:grid-cols-2 gap-8"><a href="/getting-started" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:chevron-left size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:-translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Introduction</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Nuxt UI harnesses the combined strengths of Reka UI, Tailwind CSS, and Tailwind Variants to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.</p>
+  </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Theme</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+  </a></div>"
+`;
+
+exports[`ContentSurround > renders with surround correctly 1`] = `
+"<div data-slot="root" class="grid grid-cols-1 sm:grid-cols-2 gap-8"><a href="/getting-started" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-left size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:-translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Introduction</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Nuxt UI harnesses the combined strengths of Reka UI, Tailwind CSS, and Tailwind Variants to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.</p>
+  </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-[15px] text-highlighted mb-1 truncate">Theme</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+  </a></div>"
+`;
+
+exports[`ContentSurround > renders with ui correctly 1`] = `
+"<div data-slot="root" class="grid grid-cols-1 sm:grid-cols-2 gap-8"><a href="/getting-started" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-left size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:-translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-highlighted mb-1 truncate text-xl">Introduction</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Nuxt UI harnesses the combined strengths of Reka UI, Tailwind CSS, and Tailwind Variants to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.</p>
+  </a><a href="/getting-started/theme" data-slot="link" class="group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary transition-colors text-right">
+    <div data-slot="linkLeading" class="inline-flex items-center rounded-full p-1.5 bg-elevated group-hover:bg-primary/10 ring ring-accented mb-4 group-hover:ring-primary/50 transition"><span class="iconify i-lucide:arrow-right size-5 shrink-0 text-highlighted group-hover:text-primary transition-[color,translate] group-active:translate-x-0.5" aria-hidden="true" data-slot="linkLeadingIcon"></span></div>
+    <p data-slot="linkTitle" class="font-medium text-highlighted mb-1 truncate text-xl">Theme</p>
+    <p data-slot="linkDescription" class="text-sm text-muted line-clamp-2">Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.</p>
+  </a></div>"
+`;

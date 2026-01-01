@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageGrid > renders with as correctly 1`] = `"<section class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></section>"`;
+
+exports[`PageGrid > renders with class correctly 1`] = `"<div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 xl:grid-cols-4"></div>"`;
+
+exports[`PageGrid > renders with default slot correctly 1`] = `"<div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">Default slot</div>"`;

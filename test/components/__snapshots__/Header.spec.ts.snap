@@ -1,0 +1,402 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Header > renders with as correctly 1`] = `
+"<section data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</section>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with body slot correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with bottom slot correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>Bottom slot
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with class correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-default h-(--ui-header-height) sticky top-0 z-50 border-b-0">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with content slot correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with default slot correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex">Default slot</div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with left slot correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if-->Left slot
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with mode drawer correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Close menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" data-vaul-overlay="" data-vaul-snap-points="false" data-vaul-snap-points-overlay="true" data-slot="overlay" class="fixed inset-0 bg-elevated/75 lg:hidden"></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="bottom" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none mt-24 flex-col h-auto max-h-[96%] inset-x-0 bottom-0 rounded-t-lg lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+  <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">header.title</h2><p id="reka-dialog-description-v-0-0-1">header.description</p></span>
+  <!--v-if-->
+  <div data-slot="body" class="p-4 sm:p-6 overflow-y-auto"></div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with mode modal correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Close menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+
+
+
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 bg-elevated/75 lg:hidden"></div>
+<div data-dismissable-layer="" tabindex="-1" data-slot="content" class="bg-default divide-y divide-default flex flex-col focus:outline-none inset-0 fixed lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" style="pointer-events: auto;"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">header.title</h2><p id="reka-dialog-description-v-0-0-1">header.description</p></span>
+  <div data-slot="header" class="px-4 sm:px-6 h-(--ui-header-height) shrink-0 flex items-center justify-between gap-3">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Close menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+  <div data-slot="body" class="p-4 sm:p-6 overflow-y-auto"></div>
+</div>
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with mode slideover correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Close menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in] lg:hidden"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="right" data-slot="content" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none max-w-md w-full inset-y-0 right-0 data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out] lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0-0-0">header.title</h2><p id="reka-dialog-description-v-0-0-1">header.description</p></span>
+  <div data-slot="header" class="px-4 sm:px-6 h-(--ui-header-height) shrink-0 flex items-center justify-between gap-3">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Close menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+  <div data-slot="body" class="p-4 sm:p-6 overflow-y-auto"></div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with right slot correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5">Right slot<button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with title correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Documentation" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Documentation</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with title slot correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Title slot" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Title slot</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with to correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/docs" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with toggle correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with toggle slot correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5">Toggle slot</div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with toggleSide correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -ms-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a></div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with top slot correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">Top slot<div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with ui correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full gap-1.5" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;
+
+exports[`Header > renders without toggle correctly 1`] = `
+"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+    <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
+      <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
+    </div>
+    <div data-slot="center" class="hidden lg:flex"></div>
+    <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5">
+      <!--v-if-->
+    </div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+<!--teleport end-->"
+`;

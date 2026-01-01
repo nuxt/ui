@@ -1,11 +1,10 @@
+import { defu } from 'defu'
 import { join } from 'pathe'
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
-import { defu } from 'defu'
-
-import { runtimeDir } from '../unplugin'
-import type { NuxtUIOptions } from '../unplugin'
 import AutoImport from 'unplugin-auto-import'
 import type { Options as AutoImportOptions } from 'unplugin-auto-import/types'
+import type { NuxtUIOptions } from '../unplugin'
+import { runtimeDir } from '../unplugin'
 
 /**
  * This plugin adds all the Nuxt UI composables as auto-imports.

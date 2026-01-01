@@ -1,0 +1,194 @@
+name: follow-up
+
+on:
+  schedule:
+    - cron: "23 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    env:
+      DAYS_WAIT: "7"
+      FLAG_LABEL: "follow up"
+      EXEMPT_LABELS: "release,stale,needs reproduction,p0-critical,p1-high,p2-medium,p3-low"
+      POST_COMMENT: "true"
+      DRY_RUN: "true"
+
+    steps:
+      - uses: actions/github-script@v8
+        with:
+          script: |
+            const DAYS_WAIT = parseInt(process.env.DAYS_WAIT || "7", 10);
+            const FLAG_LABEL = (process.env.FLAG_LABEL || "follow up").trim();
+            const EXEMPT_LABELS = (process.env.EXEMPT_LABELS || "")
+              .split(",").map(s => s.trim().toLowerCase()).filter(Boolean);
+            const POST_COMMENT = (process.env.POST_COMMENT || "true").toLowerCase() === "true";
+            const DRY_RUN = (process.env.DRY_RUN || "false").toLowerCase() === "true";
+
+            const OWNER_TYPES = new Set(["OWNER", "MEMBER", "COLLABORATOR"]);
+            const now = new Date();
+
+            async function ensureLabel(number) {
+              try {
+                if (DRY_RUN) { core.info(`[DRY] Would add label '${FLAG_LABEL}' to #${number}`); return; }
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: number,
+                  labels: [FLAG_LABEL],
+                });
+              } catch (e) {
+                if (e.status !== 422) throw e; // 422 = already has label
+              }
+            }
+
+            async function removeLabelIfPresent(number) {
+              try {
+                if (DRY_RUN) { core.info(`[DRY] Would remove label '${FLAG_LABEL}' from #${number}`); return; }
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: number,
+                  name: FLAG_LABEL,
+                });
+              } catch (e) {
+                if (e.status !== 404) throw e; // 404 = label not present
+              }
+            }
+
+            async function postNudgeComment(number, issueAuthor, lastMaintainerAt) {
+              if (!POST_COMMENT) return;
+              const days = DAYS_WAIT;
+              const body =
+                `Hi @${issueAuthor}! A maintainer responded on ${new Date(lastMaintainerAt).toISOString().slice(0,10)}.\n\n` +
+                `If the answer solved your problem, please consider closing this issue. ` +
+                `Otherwise, feel free to reply with more details so we can help.\n\n` +
+                `_(Label: \`${FLAG_LABEL}\` — added after ${days} day${days === 1 ? '' : 's'} without a follow-up from the author.)_`;
+
+              if (DRY_RUN) { core.info(`[DRY] Would comment on #${number}: ${body}`); return; }
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: number,
+                body,
+              });
+            }
+
+            const issues = await github.paginate(
+              github.rest.issues.listForRepo,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: "open",
+                per_page: 100,
+              }
+            );
+
+            let flagged = 0, unflagged = 0, skipped = 0;
+
+            for (const issue of issues) {
+              if (issue.pull_request) { skipped++; continue; }
+
+              const number = issue.number;
+              const author = issue.user?.login;
+              const authorAssoc = String(issue.author_association || "").toUpperCase();
+              const issueLabels = (issue.labels || []).map(l => (typeof l === 'string' ? l : l.name).toLowerCase());
+
+              // Skip issues created by a maintainer
+              if (OWNER_TYPES.has(authorAssoc)) {
+                if (issueLabels.includes(FLAG_LABEL.toLowerCase())) {
+                  await removeLabelIfPresent(number);
+                  unflagged++;
+                } else {
+                  skipped++;
+                }
+                continue;
+              }
+
+              // Skip exempt labels
+              if (issueLabels.some(l => EXEMPT_LABELS.includes(l))) { skipped++; continue; }
+
+              // Fetch comments
+              const comments = await github.paginate(
+                github.rest.issues.listComments,
+                {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: number,
+                  per_page: 100,
+                }
+              );
+
+              if (comments.length === 0) {
+                if (issueLabels.includes(FLAG_LABEL.toLowerCase())) {
+                  await removeLabelIfPresent(number);
+                  unflagged++;
+                } else {
+                  skipped++;
+                }
+                continue;
+              }
+
+              const lastComment = comments[comments.length - 1];
+
+              // If last comment is by issue author, remove label
+              if (lastComment.user?.login === author) {
+                if (issueLabels.includes(FLAG_LABEL.toLowerCase())) {
+                  await removeLabelIfPresent(number);
+                  unflagged++;
+                } else {
+                  skipped++;
+                }
+                continue;
+              }
+
+              // Find last maintainer comment
+              const maintainerComments = comments.filter(c =>
+                OWNER_TYPES.has(String(c.author_association).toUpperCase())
+              );
+              if (maintainerComments.length === 0) {
+                if (issueLabels.includes(FLAG_LABEL.toLowerCase())) {
+                  await removeLabelIfPresent(number);
+                  unflagged++;
+                } else {
+                  skipped++;
+                }
+                continue;
+              }
+
+              const lastMaintainer = maintainerComments[maintainerComments.length - 1];
+              const lastMaintainerAt = new Date(lastMaintainer.created_at);
+
+              // Did the author reply after that?
+              const authorFollowUp = comments.some(c =>
+                c.user?.login === author && new Date(c.created_at) > lastMaintainerAt
+              );
+
+              if (authorFollowUp) {
+                if (issueLabels.includes(FLAG_LABEL.toLowerCase())) {
+                  await removeLabelIfPresent(number);
+                  unflagged++;
+                } else {
+                  skipped++;
+                }
+                continue;
+              }
+
+              // No author follow-up since maintainer reply
+              const elapsedDays = Math.floor((now - lastMaintainerAt) / (1000 * 60 * 60 * 24));
+              if (elapsedDays >= DAYS_WAIT) {
+                await ensureLabel(number);
+                await postNudgeComment(number, author, lastMaintainerAt);
+                flagged++;
+              } else {
+                skipped++;
+              }
+            }
+
+            core.info(`Done. Flagged: ${flagged}, Unflagged: ${unflagged}, Skipped: ${skipped}`);

@@ -1,0 +1,145 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageAnchors > renders with as correctly 1`] = `
+"<div data-slot="root" class="">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-lucide:book-open size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-simple-icons:stackblitz size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Playground<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted"><span class="iconify i-lucide:map size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Roadmap<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-lucide:rocket size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Releases<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
+      </a></li>
+  </ul>
+</div>"
+`;
+
+exports[`PageAnchors > renders with class correctly 1`] = `
+"<nav data-slot="root" class="lg:mb-12">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-lucide:book-open size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-simple-icons:stackblitz size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Playground<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted"><span class="iconify i-lucide:map size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Roadmap<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-lucide:rocket size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Releases<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
+      </a></li>
+  </ul>
+</nav>"
+`;
+
+exports[`PageAnchors > renders with link slot correctly 1`] = `
+"<nav data-slot="root" class="">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">Link slot</a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">Link slot</a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">Link slot</a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">Link slot</a></li>
+  </ul>
+</nav>"
+`;
+
+exports[`PageAnchors > renders with link-label slot correctly 1`] = `
+"<nav data-slot="root" class="">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-lucide:book-open size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Link label slot<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-simple-icons:stackblitz size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Link label slot<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted"><span class="iconify i-lucide:map size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Link label slot<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-lucide:rocket size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
+      </a></li>
+  </ul>
+</nav>"
+`;
+
+exports[`PageAnchors > renders with link-leading slot correctly 1`] = `
+"<nav data-slot="root" class="">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition">Link leading slot</div><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition">Link leading slot</div><span data-slot="linkLabel" class="truncate">Playground<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted">Link leading slot</div><span data-slot="linkLabel" class="truncate">Roadmap<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition">Link leading slot</div><span data-slot="linkLabel" class="truncate">Releases<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
+      </a></li>
+  </ul>
+</nav>"
+`;
+
+exports[`PageAnchors > renders with link-trailing slot correctly 1`] = `
+"<nav data-slot="root" class="">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-lucide:book-open size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>Link trailing slot
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-simple-icons:stackblitz size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Playground<!--v-if--></span>Link trailing slot
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted"><span class="iconify i-lucide:map size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Roadmap<!--v-if--></span>Link trailing slot
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-lucide:rocket size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Releases<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>Link trailing slot
+      </a></li>
+  </ul>
+</nav>"
+`;
+
+exports[`PageAnchors > renders with links correctly 1`] = `
+"<nav data-slot="root" class="">
+  <ul data-slot="list" class="">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-lucide:book-open size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-simple-icons:stackblitz size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Playground<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted"><span class="iconify i-lucide:map size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Roadmap<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-lucide:rocket size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Releases<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
+      </a></li>
+  </ul>
+</nav>"
+`;
+
+exports[`PageAnchors > renders with ui correctly 1`] = `
+"<nav data-slot="root" class="">
+  <ul data-slot="list" class="gap-6">
+    <li data-slot="item" class="relative"><a href="/docs" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-lucide:book-open size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/playground" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-simple-icons:stackblitz size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Playground<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="/roadmap" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-primary font-semibold">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-primary ring-primary text-inverted"><span class="iconify i-lucide:map size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Roadmap<!--v-if--></span>
+      </a></li>
+    <li data-slot="item" class="relative"><a href="https://github.com/nuxt/ui/releases" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary text-muted hover:text-default font-medium transition-colors">
+        <div data-slot="linkLeading" class="rounded-md p-1 inline-flex ring-inset ring bg-elevated/50 ring-accented text-dimmed group-hover:bg-primary group-hover:ring-primary group-hover:text-inverted transition"><span class="iconify i-lucide:rocket size-4 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span></div><span data-slot="linkLabel" class="truncate">Releases<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
+      </a></li>
+  </ul>
+</nav>"
+`;

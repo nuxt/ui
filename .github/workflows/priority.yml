@@ -1,0 +1,101 @@
+name: priority
+
+on:
+  issues:
+    types: [opened, labeled, unlabeled, reopened, edited]
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+# Avoid label race conditions with other workflows (issue-labeler, etc.)
+concurrency:
+  group: priority-${{ github.event.issue.number || github.event.comment.issue_url }}
+  cancel-in-progress: false
+
+jobs:
+  manage:
+    if: ${{ github.event.issue.pull_request == null }} # ignore PRs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v8
+        with:
+          script: |
+            const TRIAGE = "triage";
+            const QUESTION = "question";
+            const RELEASE = "release";
+            const DOCUMENTATION = "documentation";
+            const PRIORITIES = ["p0-critical","p1-high","p2-medium","p3-low"];
+            const WORD_TO_LABEL = { critical:"p0-critical", high:"p1-high", medium:"p2-medium", low:"p3-low" };
+            const NUM_TO_LABEL  = ["p0-critical","p1-high","p2-medium","p3-low"];
+
+            const issue = context.payload.issue;
+            if (!issue?.number) return;
+
+            const getLabels = async () => {
+              const { data } = await github.rest.issues.listLabelsOnIssue({ ...context.repo, issue_number: issue.number });
+              return data.map(l => l.name);
+            };
+            const addLabels = async (labels=[]) => labels.length && github.rest.issues.addLabels({ ...context.repo, issue_number: issue.number, labels });
+            const removeLabel = async (name) => github.rest.issues.removeLabel({ ...context.repo, issue_number: issue.number, name }).catch(()=>{});
+
+            // ---- Slash command: /p <0-3|critical|high|medium|low> ----
+            if (context.eventName === "issue_comment") {
+              const body = (context.payload.comment?.body || "").trim();
+              let target = null;
+
+              const mNum = body.match(/^\/p\s*([0-3])\b/i);
+              if (mNum) target = NUM_TO_LABEL[Number(mNum[1])];
+
+              const mWord = body.match(/^\/p\s*(critical|high|medium|low)\b/i);
+              if (mWord) target = WORD_TO_LABEL[mWord[1].toLowerCase()] || target;
+
+              if (target) {
+                // allow maintainers (write+) only
+                const username = context.payload.comment.user.login;
+                const { data: perm } = await github.rest.repos.getCollaboratorPermissionLevel({ ...context.repo, username });
+                if (!["admin","write","maintain"].includes(perm.permission)) return;
+
+                const current = await getLabels();
+                for (const l of current) if (PRIORITIES.includes(l) && l !== target) await removeLabel(l);
+                if (!current.includes(target)) await addLabels([target]);
+                if (current.includes(TRIAGE)) await removeLabel(TRIAGE);
+
+                // Delete the command comment after processing
+                await github.rest.issues.deleteComment({ ...context.repo, comment_id: context.payload.comment.id });
+
+                return;
+              }
+            }
+
+            // ---- Enforcement on label/open/reopen/edit ----
+            const labels = await getLabels();
+            const present = labels.filter(l => PRIORITIES.includes(l));
+
+            // keep a single highest priority (p0 first)
+            if (present.length > 1) {
+              const rank = l => PRIORITIES.indexOf(l);
+              present.sort((a,b) => rank(a) - rank(b));
+              const keep = present[0];
+              for (const l of present.slice(1)) await removeLabel(l);
+              await github.rest.issues.createComment({ ...context.repo, issue_number: issue.number, body: `Keeping single priority → **${keep}**.` });
+            }
+
+            const labelsNow = await getLabels();
+            const hasPriority = labelsNow.some(l => PRIORITIES.includes(l));
+            const hasTriage   = labelsNow.includes(TRIAGE);
+            const hasQuestion = labelsNow.includes(QUESTION);
+            const hasRelease = labelsNow.includes(RELEASE);
+            const hasDocumentation = labelsNow.includes(DOCUMENTATION);
+            // Check if the issue was created by a bot
+            const isBot = issue.user?.type === "Bot" || issue.user?.login?.endsWith("[bot]");
+            // Check if the issue has upstream-related labels
+            const hasUpstream = labelsNow.some(l => l.startsWith("upstream"));
+
+            // priority present → remove triage
+            if (hasPriority && hasTriage) await removeLabel(TRIAGE);
+
+            // no priority & no triage & not a question & not a release & not created by bot & no upstream labels → add triage (so your stale job still sees it)
+            if (!hasPriority && !hasTriage && !hasQuestion && !hasRelease && !hasDocumentation && !isBot && !hasUpstream && issue.state === "open") await addLabels([TRIAGE]);

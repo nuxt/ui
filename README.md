@@ -14,15 +14,25 @@
 Nuxt UI harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
 
 > [!NOTE]
-> You are on the `v3` branch, check out the [v4 branch](https://github.com/nuxt/ui/tree/v4) for Nuxt UI v4 or [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
-
-> [!TIP]
-> **Looking for more components ?**
-> Check out [Nuxt UI Pro](https://ui.nuxt.com/pro), a collection of premium Vue components, composables, and utilities built on top of Nuxt UI for faster and more powerful app development.
+> You are on the `v4` branch, check out the [v3 branch](https://github.com/nuxt/ui/tree/v3) for Nuxt UI v3 or [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
 
 ## Documentation
 
 Visit https://ui.nuxt.com to explore the documentation.
+
+## Templates
+
+Kickstart your project with one of our ready-to-use Nuxt UI templates or follow the [Installation Guide](https://ui.nuxt.com/getting-started/installation/nuxt). Explore all available templates on the [official templates page](https://ui.nuxt.com/templates).
+
+- [Starter](https://github.com/nuxt-ui-templates/starter) — A minimal template to get started with Nuxt UI.
+- [Landing](https://github.com/nuxt-ui-templates/landing) — A modern landing page template powered by Nuxt Content.
+- [Docs](https://github.com/nuxt-ui-templates/docs) — A documentation template powered by Nuxt Content.
+- [SaaS](https://github.com/nuxt-ui-templates/saas) — A SaaS template with landing, pricing, docs and blog powered by Nuxt Content.
+- [Dashboard](https://github.com/nuxt-ui-templates/dashboard) — A dashboard template with multi-column layout.
+- [Chat](https://github.com/nuxt-ui-templates/chat) — An AI chatbot template with GitHub authentication and persistent chat history powered by Vercel AI SDK.
+- [Portfolio](https://github.com/nuxt-ui-templates/portfolio) — A sleek portfolio template to showcase your work, skills and blog powered by Nuxt Content.
+- [Changelog](https://github.com/nuxt-ui-templates/changelog) — A changelog template to display your repository releases notes from GitHub powered by Nuxt MDC.
+- [Editor](https://github.com/nuxt-ui-templates/editor) — A rich text editor template powered by TipTap with support for markdown, HTML, and JSON content types.
 
 ## Installation
 
@@ -59,7 +69,7 @@ export default defineNuxtConfig({
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui.nuxt.com/getting-started/installation/nuxt).
+Learn more in the [installation guide](https://ui.nuxt.com/docs/getting-started/installation/nuxt).
 
 ### Vue
 
@@ -106,18 +116,18 @@ app.mount('#app')
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui.nuxt.com/getting-started/installation/vue).
+Learn more in the [installation guide](https://ui.nuxt.com/docs/getting-started/installation/vue).
 
 ## Contribution
 
 Thank you for considering contributing to Nuxt UI. Here are a few ways you can get involved:
 
 - Reporting Bugs: If you come across any bugs or issues, please check out the reporting bugs guide to learn how to submit a bug report.
-- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/getting-started/contribution) to share your suggestions.
+- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/docs/getting-started/contribution) to share your suggestions.
 
 ## Local Development
 
-Follow the docs to [set up your local development environment](https://ui.nuxt.com/getting-started/contribution#local-development) and contribute.
+Follow the docs to [set up your local development environment](https://ui.nuxt.com/docs/getting-started/contribution#local-development) and contribute.
 
 ## Credits
 
@@ -131,17 +141,17 @@ Follow the docs to [set up your local development environment](https://ui.nuxt.c
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v3/LICENSE.md).
+Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v4/LICENSE.md).
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-version-href]: https://npmjs.com/package/@nuxt/ui
 
 [npm-downloads-src]: https://img.shields.io/npm/dm/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-downloads-href]: https://npm.chart.dev/@nuxt/ui
 
 [license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://github.com/nuxt/ui/blob/v3/LICENSE.md
+[license-href]: https://github.com/nuxt/ui/blob/v4/LICENSE.md
 
-[nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
+[nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt
 [nuxt-href]: https://nuxt.com

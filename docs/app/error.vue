@@ -6,19 +6,21 @@ const props = defineProps<{
   error: NuxtError
 }>()
 
+const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework', 'module']))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs', {
+  ignoredTags: ['style']
+}), {
   server: false
 })
 
-const links = useLinks()
-const searchLinks = useSearchLinks()
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
 const blackAsPrimary = computed(() => appConfig.theme.blackAsPrimary ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
+const font = computed(() => `:root { --font-sans: '${appConfig.theme.font}', sans-serif; }`)
 
 useHead({
   meta: [
@@ -30,7 +32,8 @@ useHead({
   ],
   style: [
     { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 },
-    { innerHTML: blackAsPrimary, id: 'nuxt-ui-black-as-primary', tagPriority: -2 }
+    { innerHTML: blackAsPrimary, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
+    { innerHTML: font, id: 'nuxt-ui-font', tagPriority: -2 }
   ],
   htmlAttrs: {
     lang: 'en'
@@ -49,40 +52,27 @@ useServerSeoMeta({
 
 useFaviconFromTheme()
 
-const { frameworks, modules } = useSharedData()
-const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
+const { rootNavigation, navigationByFramework } = useNavigation(navigation)
 
-provide('navigation', mappedNavigation)
+provide('navigation', rootNavigation)
 </script>
 
 <template>
   <UApp>
-    <NuxtLoadingIndicator color="#FFF" />
+    <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
-    <Banner />
+    <div :class="[route.path.startsWith('/docs/') && 'root']">
+      <!-- <Banner /> -->
 
-    <Header :links="links" />
+      <Header />
 
-    <UError :error="error" />
+      <UError :error="error" />
 
-    <Footer />
+      <Footer />
 
-    <ClientOnly>
-      <LazyUContentSearch
-        :links="searchLinks"
-        :files="files"
-        :groups="[{
-          id: 'framework',
-          label: 'Framework',
-          items: frameworks
-        }, {
-          id: 'module',
-          label: 'Module',
-          items: modules
-        }]"
-        :navigation="filteredNavigation"
-        :fuse="{ resultLimit: 100 }"
-      />
-    </ClientOnly>
+      <ClientOnly>
+        <Search :files="files" :navigation="navigationByFramework" />
+      </ClientOnly>
+    </div>
   </UApp>
 </template>

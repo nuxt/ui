@@ -8,7 +8,7 @@ const props = defineProps<{
 
 const route = useRoute()
 
-const links = computed(() => props.prop.tags?.filter((tag: any) => tag.name === 'link'))
+const links = computed(() => props.prop.tags?.filter((tag: any) => tag.name === 'link' || tag.name === 'see'))
 </script>
 
 <template>

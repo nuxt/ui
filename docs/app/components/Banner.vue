@@ -1,17 +1,16 @@
 <template>
   <UBanner
-    id="nuxtlabs-join-vercel"
-    title="NuxtLabs is joining Vercel"
-    icon="i-simple-icons-vercel"
-    to="https://nuxtlabs.com/?utm_source=nuxt-ui&utm_medium=banner&utm_campaign=nuxtlabs-vercel"
-    target="_blank"
+    id="nuxt-ui-v4"
+    title="Nuxt UI v4 is officially released!"
+    to="https://github.com/nuxt/ui/releases/tag/v4.0.0"
+    icon="i-lucide-rocket"
     close
     :actions="[{
-      label: 'Read the announcement',
+      label: 'Read the post',
       color: 'neutral',
       variant: 'outline',
       trailingIcon: 'i-lucide-arrow-right',
-      to: 'https://nuxtlabs.com/?utm_source=nuxt-ui&utm_medium=banner&utm_campaign=nuxtlabs-vercel',
+      to: 'https://nuxt.com/blog/nuxt-ui-v4',
       target: '_blank',
       class: 'ring-0'
     }]"

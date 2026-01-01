@@ -3,7 +3,8 @@ import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipCo
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tooltip'
 import type { KbdProps } from '../types'
-import type { EmitsToProps, ComponentConfig } from '../types/utils'
+import type { EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Tooltip = ComponentConfig<typeof theme, AppConfig, 'tooltip'>
 
@@ -41,7 +42,7 @@ export interface TooltipEmits extends TooltipRootEmits {}
 
 export interface TooltipSlots {
   default(props: { open: boolean }): any
-  content(props?: {}): any
+  content(props: { ui: Tooltip['ui'] }): any
 }
 </script>
 
@@ -81,16 +82,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {
     </TooltipTrigger>
 
     <TooltipPortal v-bind="portalProps">
-      <TooltipContent v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
-        <slot name="content">
-          <span v-if="text" :class="ui.text({ class: props.ui?.text })">{{ text }}</span>
+      <TooltipContent v-bind="contentProps" data-slot="content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
+        <slot name="content" :ui="ui">
+          <span v-if="text" data-slot="text" :class="ui.text({ class: props.ui?.text })">{{ text }}</span>
 
-          <span v-if="kbds?.length" :class="ui.kbds({ class: props.ui?.kbds })">
+          <span v-if="kbds?.length" data-slot="kbds" :class="ui.kbds({ class: props.ui?.kbds })">
             <UKbd v-for="(kbd, index) in kbds" :key="index" :size="((props.ui?.kbdsSize || ui.kbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
 
-        <TooltipArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
+        <TooltipArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
       </TooltipContent>
     </TooltipPortal>
   </TooltipRoot>
