@@ -293,7 +293,7 @@ export default defineEventHandler(async (event) => {
 
   // Create the streaming response
   const stream = createUIMessageStream({
-    execute: ({ writer }) => {
+    execute: async ({ writer }) => {
       const result = streamText({
         model,
         system: `You are a helpful AI assistant. Be concise and friendly.`,
