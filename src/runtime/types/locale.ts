@@ -116,6 +116,13 @@ export type Messages = {
       copy: string
     }
   }
+  repeater: {
+    dragToReorder: string
+    moveUp: string
+    moveDown: string
+    remove: string
+    add: string
+  }
   selectMenu: {
     create: string
     noData: string

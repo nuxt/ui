@@ -126,6 +126,8 @@ export interface RepeaterSlots<T> {
 import { computed, ref, useId } from 'vue'
 import { useSortable } from '@vueuse/integrations/useSortable'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
+
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UButton from './Button.vue'
@@ -156,6 +158,7 @@ const props = withDefaults(defineProps<RepeaterProps>(), {
 const emits = defineEmits<RepeaterEmits>()
 const slots = defineSlots<RepeaterSlots<T>>()
 
+const { t } = useLocale()
 const appConfig = useAppConfig() as Repeater['AppConfig']
 const instanceId = useId()
 const uniqueHandleClass = `drag-handle-${instanceId}`
@@ -239,6 +242,7 @@ defineExpose(actions)
               v-if="dragEnabled && !disabled"
               type="button"
               :class="[uniqueHandleClass, ui.handle({ class: props.ui?.handle })]"
+              :aria-label="t('repeater.dragToReorder')"
               style="touch-action: none"
             >
               <UIcon :name="handleIcon" :class="ui.handleIcon({ class: props.ui?.handleIcon })" />
@@ -282,6 +286,7 @@ defineExpose(actions)
                   color="neutral"
                   variant="ghost"
                   size="xs"
+                  :aria-label="t('repeater.moveUp')"
                   :disabled="index === 0 || disabled"
                   @click="actions.move(index, -1)"
                 />
@@ -290,6 +295,7 @@ defineExpose(actions)
                   color="neutral"
                   variant="ghost"
                   size="xs"
+                  :aria-label="t('repeater.moveDown')"
                   :disabled="index === items.length - 1 || disabled"
                   @click="actions.move(index, 1)"
                 />
@@ -301,6 +307,7 @@ defineExpose(actions)
                 color="error"
                 variant="ghost"
                 size="xs"
+                :aria-label="t('repeater.remove')"
                 :disabled="!canRemove || disabled"
                 @click="actions.remove(index)"
               />
@@ -323,6 +330,7 @@ defineExpose(actions)
           :icon="addIcon"
           variant="soft"
           color="neutral"
+          :aria-label="t('repeater.add')"
           :disabled="!canAdd || disabled"
           @click="actions.add"
         />
