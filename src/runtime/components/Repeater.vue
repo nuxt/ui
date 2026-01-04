@@ -106,12 +106,9 @@ export interface RepeaterProps {
 }
 
 export interface RepeaterEmits {
-  (e: 'update:modelValue', value: any[]): void
-  (e: 'item-added', item: any, index: number): void
-  (e: 'item-removed', item: any, index: number): void
-  (e: 'order-changed', value: any[]): void
-  (e: 'drag-start', event: any): void
-  (e: 'drag-end', event: any): void
+  (e: 'update:modelValue' | 'order-changed', value: any[]): void
+  (e: 'item-added' | 'item-removed', item: any, index: number): void
+  (e: 'drag-start' | 'drag-end', event: any): void
 }
 
 export interface RepeaterSlots<T> {
@@ -126,7 +123,7 @@ export interface RepeaterSlots<T> {
 </script>
 
 <script setup lang="ts" generic="T extends Record<string, any>">
-import { computed, ref, useId, toRef } from 'vue'
+import { computed, ref, useId } from 'vue'
 import { useSortable } from '@vueuse/integrations/useSortable'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
@@ -207,7 +204,7 @@ const actions = {
   }
 }
 
-const { stop } = useSortable(containerRef, items, {
+useSortable(containerRef, items, {
   handle: `.${uniqueHandleClass}`,
   disabled: !props.dragEnabled || props.disabled,
   animation: props.animation,
