@@ -25,8 +25,8 @@ props:
 You can pass any property from the HTML `<img>` element such as `alt`, `loading`, etc.
 ::
 
-::note
-To opt-out of `@nuxt/image`, use `:as="{ img: 'img' }"`
+::tip
+To opt-out of `@nuxt/image`, use the `as` prop: `:as="{ img: 'img' }"`.
 ::
 
 ### Src
