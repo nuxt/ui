@@ -20,11 +20,11 @@ const filteredNavigation = computed(() => {
 })
 
 const searchTerm = ref('')
-const isActiveSearch = computed(() => route.path.startsWith('/docs/components'))
+const isSearchActive = computed(() => route.path.startsWith('/docs/components'))
 const navigationKey = computed(() => `${route.path}-${searchTerm.value ? 'filtered' : 'unfiltered'}`)
 
 watch(() => route.path, () => {
-  if (!isActiveSearch.value) {
+  if (!isSearchActive.value) {
     searchTerm.value = ''
   }
 })
@@ -47,7 +47,7 @@ defineShortcuts({
       <UPage>
         <template #left>
           <UPageAside>
-            <template v-if="isActiveSearch" #top>
+            <template v-if="isSearchActive" #top>
               <UInput ref="input" v-model="searchTerm" variant="soft" placeholder="Filter..." class="group">
                 <template #trailing>
                   <UKbd value="/" variant="subtle" class="ring-muted bg-transparent text-muted" />
