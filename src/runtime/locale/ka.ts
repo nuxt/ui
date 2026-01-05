@@ -114,6 +114,13 @@ export default defineLocale<Messages>({
         copy: 'კოდის კოპირება ბუფერში'
       }
     },
+    repeater: {
+      dragToReorder: 'გადააადგილეთ თანმიმდევრობის შესაცვლელად',
+      moveUp: 'ზევით გადატანა',
+      moveDown: 'ქვევით გადატანა',
+      remove: 'ელემენტის წაშლა',
+      add: 'ელემენტის დამატება'
+    },
     selectMenu: {
       create: 'დაამატე "{label}"', // "Create" translates as "შექმნა", but since we are simply adding new choice, creating sounds wrong, thus I chose to use "დაამატე", meaning "add".
       noData: 'მონაცემები არ არის',

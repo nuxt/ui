@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
         copy: 'لەبەرگرتنەوەی کۆد'
       }
     },
+    repeater: {
+      dragToReorder: 'بۆ ڕیزبەندی ڕایبکێشە',
+      moveUp: 'بردنە سەرەوە',
+      moveDown: 'بردنە خوارەوە',
+      remove: 'لابردنی ئایتم',
+      add: 'زیادکردنی ئایتم'
+    },
     selectMenu: {
       create: '"{label}" زیادکردنی',
       noData: 'هیچ داتایەک نییە',

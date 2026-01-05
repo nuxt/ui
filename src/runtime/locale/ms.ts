@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Salin kod ke papan klip'
       }
     },
+    repeater: {
+      dragToReorder: 'Seret untuk susun semula',
+      moveUp: 'Gerak ke atas',
+      moveDown: 'Gerak ke bawah',
+      remove: 'Buang item',
+      add: 'Tambah item'
+    },
     selectMenu: {
       create: 'Cipta "{label}"',
       noData: 'Tiada data',

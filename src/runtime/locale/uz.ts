@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Koddan buferga nusxa olish'
       }
     },
+    repeater: {
+      dragToReorder: 'Tartibni o‘zgartirish uchun sudrab olib o‘ting',
+      moveUp: 'Yuqoriga ko‘chirish',
+      moveDown: 'Pastga ko‘chirish',
+      remove: 'O‘chirish',
+      add: 'Qo‘shish'
+    },
     selectMenu: {
       create: '"{label}" yaratish',
       noData: 'Maʼlumot yoʻq',

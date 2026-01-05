@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Αντιγραφή κώδικα στο πρόχειρο'
       }
     },
+    repeater: {
+      dragToReorder: 'Σύρετε για αναδιάταξη',
+      moveUp: 'Μετακίνηση πάνω',
+      moveDown: 'Μετακίνηση κάτω',
+      remove: 'Αφαίρεση στοιχείου',
+      add: 'Προσθήκη στοιχείου'
+    },
     selectMenu: {
       create: 'Δημιουργία "{label}"',
       noData: 'Δεν υπάρχουν δεδομένα',

@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopiatu kodea clipboard-era'
       }
     },
+    repeater: {
+      dragToReorder: 'Arrastatu berrordenatzeko',
+      moveUp: 'Mugitu gora',
+      moveDown: 'Mugitu behera',
+      remove: 'Ezabatu elementua',
+      add: 'Gehitu elementua'
+    },
     selectMenu: {
       create: 'Sortu {label}',
       noData: 'Daturik gabe',

@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'コードをクリップボードにコピー'
       }
     },
+    repeater: {
+      dragToReorder: 'ドラッグして並べ替え',
+      moveUp: '上に移動',
+      moveDown: '下に移動',
+      remove: '削除',
+      add: '項目を追加'
+    },
     selectMenu: {
       create: '"{label}"を作成',
       noData: 'データがありません',

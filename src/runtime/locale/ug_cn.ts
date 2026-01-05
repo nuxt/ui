@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
         copy: 'كۆچۈرۈش'
       }
     },
+    repeater: {
+      dragToReorder: 'سۆرەپ تەرتىپىنى ئۆزگەرتىڭ',
+      moveUp: 'ئۈستىگە يۆتكەش',
+      moveDown: 'ئاستىغا يۆتكەش',
+      remove: 'تۈرنى ئۆچۈرۈش',
+      add: 'تۈر قوشۇش'
+    },
     selectMenu: {
       create: '"{label}" نى قۇرۇش',
       noData: 'سانلىق مەلۇمات يوق',

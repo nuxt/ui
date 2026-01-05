@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopiera kod till urklipp'
       }
     },
+    repeater: {
+      dragToReorder: 'Dra för att ändra ordning',
+      moveUp: 'Flytta uppåt',
+      moveDown: 'Flytta nedåt',
+      remove: 'Ta bort objekt',
+      add: 'Lägg till objekt'
+    },
     selectMenu: {
       create: 'Skapa "{label}"',
       noData: 'Inga data',

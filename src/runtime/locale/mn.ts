@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Кодыг санах ойд хуулах'
       }
     },
+    repeater: {
+      dragToReorder: 'Чирч дарааллыг өөрчлөх',
+      moveUp: 'Дээшлүүлэх',
+      moveDown: 'Доошлуулах',
+      remove: 'Устгах',
+      add: 'Нэмэх'
+    },
     selectMenu: {
       create: '"{label}" үүсгэх',
       noData: 'Мэдээлэл байхгүй',

@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopjo kodin në kujtesë'
       }
     },
+    repeater: {
+      dragToReorder: 'Zvaritni për të rirenditur',
+      moveUp: 'Lëvize lart',
+      moveDown: 'Lëvize poshtë',
+      remove: 'Hiq elementin',
+      add: 'Shto element'
+    },
     selectMenu: {
       create: 'Krijo "{label}"',
       noData: 'Nuk ka të dhëna',

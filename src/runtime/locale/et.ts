@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopeeri kood lõikelauale'
       }
     },
+    repeater: {
+      dragToReorder: 'Lohista ümberjärjestamiseks',
+      moveUp: 'Liiguta üles',
+      moveDown: 'Liiguta alla',
+      remove: 'Eemalda element',
+      add: 'Lisa element'
+    },
     selectMenu: {
       create: 'Loo "{label}"',
       noData: 'Pole andmeid',

@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopijuoti kodą į iškarpinę'
       }
     },
+    repeater: {
+      dragToReorder: 'Vilkite, kad pakeistumėte tvarką',
+      moveUp: 'Perkelti aukštyn',
+      moveDown: 'Perkelti žemyn',
+      remove: 'Pašalinti elementą',
+      add: 'Pridėti elementą'
+    },
     selectMenu: {
       create: 'Sukurti „{label}"',
       noData: 'Nėra duomenų',

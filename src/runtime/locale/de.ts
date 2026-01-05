@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Code in die Zwischenablage kopieren'
       }
     },
+    repeater: {
+      dragToReorder: 'Zum Sortieren ziehen',
+      moveUp: 'Nach oben verschieben',
+      moveDown: 'Nach unten verschieben',
+      remove: 'Element entfernen',
+      add: 'Element hinzufügen'
+    },
     selectMenu: {
       create: '"{label}" erstellen',
       noData: 'Keine Daten',

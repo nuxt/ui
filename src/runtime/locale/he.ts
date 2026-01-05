@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
         copy: 'העתק קוד ללוח'
       }
     },
+    repeater: {
+      dragToReorder: 'גרור לשינוי סדר',
+      moveUp: 'הזז למעלה',
+      moveDown: 'הזז למטה',
+      remove: 'הסר פריט',
+      add: 'הוסף פריט'
+    },
     selectMenu: {
       create: 'צור "{label}"',
       noData: 'אין נתונים',

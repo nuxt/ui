@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Скопировать код в буфер обмена'
       }
     },
+    repeater: {
+      dragToReorder: 'Перетащите для изменения порядка',
+      moveUp: 'Переместить вверх',
+      moveDown: 'Переместить вниз',
+      remove: 'Удалить элемент',
+      add: 'Добавить элемент'
+    },
     selectMenu: {
       create: 'Создать "{label}"',
       noData: 'Нет данных',

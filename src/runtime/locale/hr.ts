@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopiraj kod u međuspremnik'
       }
     },
+    repeater: {
+      dragToReorder: 'Povucite za promjenu redoslijeda',
+      moveUp: 'Pomakni gore',
+      moveDown: 'Pomakni dolje',
+      remove: 'Ukloni stavku',
+      add: 'Dodaj stavku'
+    },
     selectMenu: {
       create: 'Stvori "{label}"',
       noData: 'Nema podataka',

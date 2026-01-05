@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Code naar klembord kopiëren'
       }
     },
+    repeater: {
+      dragToReorder: 'Sleep om de volgorde te wijzigen',
+      moveUp: 'Omhoog verplaatsen',
+      moveDown: 'Omlaag verplaatsen',
+      remove: 'Item verwijderen',
+      add: 'Item toevoegen'
+    },
     selectMenu: {
       create: '"{label}" creëren',
       noData: 'Geen gegevens',
