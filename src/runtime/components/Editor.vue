@@ -208,7 +208,7 @@ watch(() => props.modelValue, (newVal) => {
     const currentPos = currentSelection.from
 
     // Set the new content
-    editor.value.commands.setContent(newVal)
+    editor.value.commands.setContent(newVal, { contentType: contentType.value })
 
     // Restore cursor position if the position is still valid in the new content
     const newDoc = editor.value.state.doc

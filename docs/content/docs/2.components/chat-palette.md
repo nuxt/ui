@@ -86,7 +86,7 @@ export default defineEventHandler(async (event) => {
     model: gateway('anthropic/claude-sonnet-4.5'),
     maxOutputTokens: 10000,
     system: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
-    messages: convertToModelMessages(messages),
+    messages: await convertToModelMessages(messages),
     stopWhen: stepCountIs(6),
     tools,
     onFinish: async () => {

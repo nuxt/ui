@@ -35,6 +35,14 @@ const { desktopLinks } = useHeader()
       </UTooltip>
     </template>
 
+    <template #toggle="{ open, toggle, ui }">
+      <HeaderToggleButton
+        :open="open"
+        :class="ui.toggle({ toggleSide: 'right' })"
+        @click="toggle"
+      />
+    </template>
+
     <template #body>
       <HeaderBody />
     </template>

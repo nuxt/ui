@@ -1,8 +1,8 @@
 title: The Intuitive Vue UI Library
-description: Create beautiful, responsive & accessible web apps quickly with Vue or Nuxt. Nuxt UI is an open-source UI library of 100+ customizable components built with Tailwind CSS and Reka UI.
+description: A comprehensive Vue UI component library (Nuxt optional) with 125+ accessible, Tailwind CSS components for building modern web applications. Works with Nuxt and plain Vue apps (Vite, Inertia, SSR).
 hero:
   title: The Intuitive Vue UI Library
-  description: Create beautiful, responsive & accessible web apps quickly with Vue or Nuxt. Nuxt UI is an open-source UI library of 100+ customizable components built with Tailwind CSS and Reka UI.
+  description: A comprehensive Vue UI component library (Nuxt optional) with 125+ accessible, Tailwind CSS components for building modern web applications. Works with Nuxt and plain Vue apps (Vite, Inertia, SSR).
   links:
     - label: Get started
       to: /docs/getting-started/installation/nuxt
@@ -27,7 +27,7 @@ hero:
       description: Auto-complete and type safety for all components.
 features:
   - title: Build for the modern web
-    description: Powered by Tailwind CSS and Reka UI for top performance and accessibility.
+    description: A complete design system powered by Tailwind CSS and Reka UI for top performance and accessibility.
     icon: i-lucide-rocket
     to: /docs/getting-started
   - title: Large icons sets

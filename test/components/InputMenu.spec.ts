@@ -71,6 +71,8 @@ describe('InputMenu', () => {
     ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-chevron-down' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-check' } }],
+    ['with clear', { props: { ...props, clear: true, modelValue: items[0] } }],
+    ['with clear and clearIcon', { props: { ...props, clear: true, clearIcon: 'i-lucide-x', modelValue: items[0] } }],
     ['with arrow', { props: { ...props, arrow: true } }],
     ['with virtualize', { props: { ...props, virtualize: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
