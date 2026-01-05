@@ -15,6 +15,13 @@ defineProps<{
 }>()
 
 const { links, groups, fullscreen, chat, searchTerm, messages } = useSearch()
+const { track } = useAnalytics()
+
+watchDebounced(searchTerm, (term) => {
+  if (term) {
+    track('Search Performed', { term })
+  }
+}, { debounce: 500 })
 
 function onClose() {
   chat.value = false

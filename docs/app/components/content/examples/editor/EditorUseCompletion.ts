@@ -54,7 +54,15 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
     const storage = getCompletionStorage()
     if (storage?.visible) {
       // Update inline suggestion
-      storage.setSuggestion(newCompletion)
+      // Add space prefix if needed (so preview matches what will be inserted)
+      let suggestionText = newCompletion
+      if (storage.position !== undefined) {
+        const textBefore = editor.state.doc.textBetween(Math.max(0, storage.position - 1), storage.position)
+        if (textBefore && !/\s/.test(textBefore) && !suggestionText.startsWith(' ')) {
+          suggestionText = ' ' + suggestionText
+        }
+      }
+      storage.setSuggestion(suggestionText)
       editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
     } else if (insertState.value) {
       // Direct insertion/transform mode (from toolbar actions)

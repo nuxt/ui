@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { LinkProps } from '../../types'
+import type { LinkProps } from '../../../types'
 
 export interface LinkBaseProps {
   as?: string

@@ -33,7 +33,7 @@ props:
     content: 'text-muted'
   items:
     - label: 'Is Nuxt UI free to use?'
-      content: 'Yes! Nuxt UI is completely free and open source under the MIT license. All 100+ components are available to everyone.'
+      content: 'Yes! Nuxt UI is completely free and open source under the MIT license. All 125+ components are available to everyone.'
     - label: 'Can I use Nuxt UI with Vue without Nuxt?'
       content: 'Yes! While optimized for Nuxt, Nuxt UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.'
     - label: 'Is Nuxt UI production-ready?'

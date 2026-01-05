@@ -6,63 +6,86 @@ import AutoImportComponents from 'unplugin-vue-components'
 import type { Options as ComponentsOptions } from 'unplugin-vue-components/types'
 import type { NuxtUIOptions } from '../unplugin'
 import { runtimeDir } from '../unplugin'
+import { resolveRouterMode } from '../utils/router'
+
+interface ComponentSource {
+  has: (name: string) => boolean
+  resolve: (name: string) => { name: string, from: string } | undefined
+  resolveFile: (filename: string) => string | undefined
+}
+
+function createComponentSource(cwd: string, prefix: string, ignore: string[] = []): ComponentSource {
+  const files = globSync('**/*.vue', { cwd, ignore: ignore.filter(Boolean) as string[] })
+  const names = new Set(files.map(c => `${prefix}${c.split('/').pop()?.replace(/\.vue$/, '')}`))
+  const paths = new Map(files.map((c) => {
+    const componentName = `${prefix}${c.split('/').pop()?.replace(/\.vue$/, '')}`
+    return [componentName, c] as const
+  }))
+
+  return {
+    has: name => names.has(name),
+    resolve: (componentName) => {
+      const relativePath = paths.get(componentName)
+      if (!relativePath) return
+      return { name: 'default', from: join(cwd, relativePath) }
+    },
+    resolveFile: (filename) => {
+      const componentName = `${prefix}${filename}`
+      const relativePath = paths.get(componentName)
+      if (!relativePath) return
+      return join(cwd, relativePath)
+    }
+  }
+}
 
 /**
  * This plugin adds all the Nuxt UI components as auto-imports.
  */
 export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix: NonNullable<NuxtUIOptions['prefix']> }, meta: UnpluginContextMeta) {
-  const components = globSync('**/*.vue', {
-    cwd: join(runtimeDir, 'components'),
-    ignore: [
-      !options.colorMode && 'color-mode/**/*.vue',
-      'content/*.vue',
-      'prose/**/*.vue'
-    ].filter(Boolean) as string[]
-  })
-  const componentNames = new Set(components.map(c => `${options.prefix}${c.split('/').pop()?.replace(/\.vue$/, '')}`))
-  const componentPaths = new Map(components.map((c) => {
-    const name = c.replace(/\.vue$/, '')
-    const componentName = `${options.prefix}${name.split('/').pop()}`
-    return [componentName, c]
-  }))
+  const colorModeIgnore = !options.colorMode ? ['color-mode/**/*.vue'] : []
+  const routerMode = resolveRouterMode(options)
 
-  const overrides = globSync('**/*.vue', {
-    cwd: join(runtimeDir, 'vue/components'),
-    ignore: [
-      !options.colorMode && 'color-mode/**/*.vue'
-    ].filter(Boolean) as string[]
-  })
-  const overrideNames = new Set(overrides.map(c => `${options.prefix}${c.split('/').pop()?.replace(/\.vue$/, '')}`))
-  const overridePaths = new Map(overrides.map((c) => {
-    const name = c.replace(/\.vue$/, '')
-    const componentName = `${options.prefix}${name.split('/').pop()}`
-    return [componentName, c]
-  }))
+  // Component sources in priority order (first match wins)
+  const routerOverrides: Record<string, ComponentSource> = {
+    'vue-router': createComponentSource(join(runtimeDir, 'vue/overrides/vue-router'), options.prefix),
+    'inertia': createComponentSource(join(runtimeDir, 'vue/overrides/inertia'), options.prefix),
+    'none': createComponentSource(join(runtimeDir, 'vue/overrides/none'), options.prefix)
+  }
 
-  const inertiaOverrides = globSync('**/*.vue', {
-    cwd: join(runtimeDir, 'inertia/components')
-  })
-  const inertiaOverrideNames = new Set(inertiaOverrides.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
+  const unpluginComponents = createComponentSource(
+    join(runtimeDir, 'vue/components'),
+    options.prefix,
+    colorModeIgnore
+  )
+
+  const defaultComponents = createComponentSource(
+    join(runtimeDir, 'components'),
+    options.prefix,
+    [...colorModeIgnore, 'content/*.vue', 'prose/**/*.vue']
+  )
+
+  const sources = [routerOverrides[routerMode], unpluginComponents, defaultComponents].filter((s): s is ComponentSource => !!s)
+  const packagesToScan = [
+    '@nuxt/ui',
+    '@compodium/examples',
+    ...(Array.isArray(options.scanPackages) ? options.scanPackages : [])
+  ]
+  const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const packagesRegex = packagesToScan.map(escapeRegex).join('|')
+  const excludeRegex = new RegExp(`[\\\\/]node_modules[\\\\/](?!\\.pnpm|${packagesRegex})`)
 
   const pluginOptions = defu(options.components, <ComponentsOptions>{
     dts: options.dts ?? true,
     exclude: [
-      /[\\/]node_modules[\\/](?!\.pnpm|@nuxt\/ui|@compodium\/examples)/,
+      excludeRegex,
       /[\\/]\.git[\\/]/,
       /[\\/]\.nuxt[\\/]/
     ],
     resolvers: [
       (componentName) => {
-        if (options.inertia && inertiaOverrideNames.has(componentName)) {
-          return { name: 'default', from: join(runtimeDir, 'inertia/components', `${componentName.slice(options.prefix.length)}.vue`) }
-        }
-        if (overrideNames.has(componentName)) {
-          const relativePath = overridePaths.get(componentName)
-          return { name: 'default', from: join(runtimeDir, 'vue/components', relativePath as string) }
-        }
-        if (componentNames.has(componentName)) {
-          const relativePath = componentPaths.get(componentName)
-          return { name: 'default', from: join(runtimeDir, 'components', relativePath as string) }
+        for (const source of sources) {
+          const resolved = source.resolve(componentName)
+          if (resolved) return resolved
         }
       }
     ]
@@ -88,12 +111,11 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
         }
 
         const filename = id.match(/([^/]+)\.vue$/)?.[1]
-        if (filename && options.inertia && inertiaOverrideNames.has(`${options.prefix}${filename}`)) {
-          return join(runtimeDir, 'inertia/components', `${filename}.vue`)
-        }
-        if (filename && overrideNames.has(`${options.prefix}${filename}`)) {
-          const relativePath = overridePaths.get(`${options.prefix}${filename}`)
-          return join(runtimeDir, 'vue/components', relativePath as string)
+        if (filename) {
+          for (const source of sources) {
+            const resolved = source.resolveFile(filename)
+            if (resolved) return resolved
+          }
         }
       }
     },
