@@ -6,9 +6,9 @@ const route = useRoute()
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
+const { contains } = useFilter({ sensitivity: 'base' })
 const { navigationByCategory } = useNavigation(navigation!)
 
-const { contains } = useFilter({ sensitivity: 'base' })
 const filteredNavigation = computed(() => {
   if (!searchTerm.value) {
     return navigationByCategory.value
@@ -20,15 +20,17 @@ const filteredNavigation = computed(() => {
   })).filter(item => item.children && item.children.length > 0)
 })
 
-const input = useTemplateRef('input')
-const isActiveSearch = computed(() => route.path.startsWith('/docs/components'))
 const searchTerm = ref('')
+const isActiveSearch = computed(() => route.path.startsWith('/docs/components'))
+const navigationKey = computed(() => `${route.path}-${searchTerm.value ? 'filtered' : 'unfiltered'}`)
 
 watch(() => route.path, () => {
   if (!isActiveSearch.value) {
     searchTerm.value = ''
   }
 })
+
+const input = useTemplateRef('input')
 
 defineShortcuts({
   '/': {
@@ -55,7 +57,7 @@ defineShortcuts({
             </template>
 
             <UContentNavigation
-              :key="route.path + searchTerm"
+              :key="navigationKey"
               :collapsible="false"
               :navigation="filteredNavigation"
               highlight
