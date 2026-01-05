@@ -3,6 +3,14 @@ const appConfig = useAppConfig()
 const colorMode = useColorMode()
 const { track } = useAnalytics()
 
+const open = ref(false)
+
+watch(open, (isOpen) => {
+  if (isOpen) {
+    track('Theme Picker Opened')
+  }
+})
+
 const { copy: copyCSS, copied: copiedCSS } = useClipboard()
 const { copy: copyAppConfig, copied: copiedAppConfig } = useClipboard()
 
@@ -26,14 +34,6 @@ const {
   exportAppConfig,
   resetTheme
 } = useTheme()
-
-const open = ref(false)
-
-watch(open, (isOpen) => {
-  if (isOpen) {
-    track('Theme Picker Opened')
-  }
-})
 </script>
 
 <template>
