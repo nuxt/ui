@@ -2,10 +2,9 @@
 import { useFilter } from 'reka-ui'
 import type { ContentNavigationItem } from '@nuxt/content'
 
-const route = useRoute()
-
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
+const route = useRoute()
 const { contains } = useFilter({ sensitivity: 'base' })
 const { navigationByCategory } = useNavigation(navigation!)
 
