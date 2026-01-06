@@ -1,6 +1,6 @@
 import { useCompletion } from '@ai-sdk/vue'
-import { Completion } from '../components/editor/EditorCompletion'
-import type { CompletionStorage } from '../components/editor/EditorCompletion'
+import { Completion } from '../components/editor/EditorCompletionExtension'
+import type { CompletionStorage } from '../components/editor/EditorCompletionExtension'
 
 type CompletionMode = 'continue' | 'fix' | 'extend' | 'reduce' | 'simplify' | 'summarize' | 'translate'
 

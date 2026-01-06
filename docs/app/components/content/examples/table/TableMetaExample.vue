@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
-
-const UButton = resolveComponent('UButton')
-const UBadge = resolveComponent('UBadge')
+import type { TableMeta, Row } from '@tanstack/vue-table'
 
 type Payment = {
   id: string
@@ -46,22 +43,14 @@ const data = ref<Payment[]>([{
 }])
 
 const columns: TableColumn<Payment>[] = [{
-  id: 'expand',
-  cell: ({ row }) => h(UButton, {
-    'color': 'neutral',
-    'variant': 'ghost',
-    'icon': 'i-lucide-chevron-down',
-    'square': true,
-    'aria-label': 'Expand',
-    'ui': {
-      leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-200 rotate-180' : '']
-    },
-    'onClick': () => row.toggleExpanded()
-  })
-}, {
   accessorKey: 'id',
-  header: '#',
-  cell: ({ row }) => `#${row.getValue('id')}`
+  header: 'ID',
+  meta: {
+    class: {
+      th: 'text-center font-semibold',
+      td: 'text-center font-mono'
+    }
+  }
 }, {
   accessorKey: 'date',
   header: 'Date',
@@ -77,49 +66,64 @@ const columns: TableColumn<Payment>[] = [{
 }, {
   accessorKey: 'status',
   header: 'Status',
+  meta: {
+    class: {
+      th: 'text-center',
+      td: 'text-center'
+    }
+  },
   cell: ({ row }) => {
-    const color = ({
-      paid: 'success' as const,
-      failed: 'error' as const,
-      refunded: 'neutral' as const
-    })[row.getValue('status') as string]
-
-    return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
+    const status = row.getValue('status') as string
+    const colorMap = {
+      paid: 'text-success',
+      failed: 'text-error',
+      refunded: 'text-warning'
+    }
+    return h('span', { class: `font-semibold capitalize ${colorMap[status as keyof typeof colorMap]}` }, status)
   }
 }, {
   accessorKey: 'email',
-  header: 'Email'
+  header: 'Email',
+  meta: {
+    class: {
+      th: 'text-left',
+      td: 'text-left'
+    }
+  }
 }, {
   accessorKey: 'amount',
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium'
+      th: 'text-right font-bold text-primary',
+      td: 'text-right font-mono'
     }
   },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
-    return new Intl.NumberFormat('en-US', {
+    const formatted = new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'EUR'
+      currency: 'USD'
     }).format(amount)
+    return h('span', { class: 'font-semibold text-success' }, formatted)
   }
 }]
 
-const expanded = ref({ 1: true })
+const meta: TableMeta<Payment> = {
+  class: {
+    tr: (row: Row<Payment>) => {
+      if (row.original.status === 'failed') {
+        return 'bg-error/10'
+      }
+      if (row.original.status === 'refunded') {
+        return 'bg-warning/10'
+      }
+      return ''
+    }
+  }
+}
 </script>
 
 <template>
-  <UTable
-    v-model:expanded="expanded"
-    :data="data"
-    :columns="columns"
-    :ui="{ tr: 'data-[expanded=true]:bg-elevated/50' }"
-    class="flex-1"
-  >
-    <template #expanded="{ row }">
-      <pre>{{ row.original }}</pre>
-    </template>
-  </UTable>
+  <UTable :data="data" :columns="columns" :meta="meta" class="flex-1" />
 </template>

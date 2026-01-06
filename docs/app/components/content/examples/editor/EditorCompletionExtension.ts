@@ -11,6 +11,11 @@ export interface CompletionOptions {
    */
   debounce?: number
   /**
+   * Whether to automatically trigger completion while typing
+   * @defaultValue false
+   */
+  autoTrigger?: boolean
+  /**
    * Characters that should prevent completion from triggering
    * @defaultValue ['/', ':', '@']
    */
@@ -46,6 +51,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
   addOptions() {
     return {
       debounce: 250,
+      autoTrigger: false,
       triggerCharacters: ['/', ':', '@'],
       onTrigger: undefined,
       onAccept: undefined,
@@ -99,7 +105,17 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
 
   addKeyboardShortcuts() {
     return {
-      Tab: ({ editor }) => {
+      'Mod-j': ({ editor }) => {
+        // Clear any existing suggestion first to avoid flickering
+        if (this.storage.visible) {
+          this.storage.clearSuggestion()
+          this.options.onDismiss?.()
+        }
+        // Manually trigger completion
+        this.storage.debouncedTrigger?.(editor as Editor)
+        return true
+      },
+      'Tab': ({ editor }) => {
         if (!this.storage.visible || !this.storage.suggestion || this.storage.position === undefined) {
           return false
         }
@@ -120,7 +136,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
         this.options.onAccept?.()
         return true
       },
-      Escape: ({ editor }) => {
+      'Escape': ({ editor }) => {
         if (this.storage.visible) {
           this.storage.clearSuggestion()
           // Force decoration update
@@ -137,16 +153,22 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
     // Clear suggestion on any edit
     if (this.storage.visible) {
       this.storage.clearSuggestion()
+      // Force decoration update
+      editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
       this.options.onDismiss?.()
     }
 
-    // Debounced trigger check
-    this.storage.debouncedTrigger?.(editor as unknown as Editor)
+    // Debounced trigger check (only if autoTrigger is enabled)
+    if (this.options.autoTrigger) {
+      this.storage.debouncedTrigger?.(editor as Editor)
+    }
   },
 
-  onSelectionUpdate() {
+  onSelectionUpdate({ editor }) {
     if (this.storage.visible) {
       this.storage.clearSuggestion()
+      // Force decoration update
+      editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
       this.options.onDismiss?.()
     }
   },

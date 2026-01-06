@@ -16,13 +16,6 @@
   ],
   "packageRules": [
     {
-      "groupName": "ai",
-      "matchPackageNames": [
-        "ai",
-        "@ai-sdk/**"
-      ]
-    },
-    {
       "groupName": "tailwindcss",
       "matchPackageNames": [
         "tailwindcss",
