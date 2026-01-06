@@ -29,6 +29,26 @@ class: 'relative h-176 overflow-y-auto !p-0 rounded-b-md'
 This example demonstrates a production-ready Editor component. Check out the source code on GitHub.
 ::
 
+::warning
+If you encounter prosemirror-related errors such as `Adding different instances of a keyed plugin` when using the Editor component or its extensions, you may need to add prosemirror packages to the `vite.optimizeDeps.include` list in your `nuxt.config.ts` file. This ensures Vite pre-bundles these dependencies to avoid loading multiple instances.
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  vite: {
+    optimizeDeps: {
+      include: [
+        'prosemirror-state',
+        'prosemirror-transform',
+        'prosemirror-model',
+        'prosemirror-view',
+        'prosemirror-gapcursor'
+      ]
+    }
+  }
+})
+```
+::
+
 ### Content
 
 Use the `v-model` directive to control the value of the Editor.
@@ -414,20 +434,6 @@ collapse: true
 lang: 'ts'
 name: 'editor-image-upload'
 ---
-::
-
-::warning
-If you encounter a `Adding different instances of a keyed plugin` error when creating a custom extension, you may need to add `prosemirror-state` to the vite `optimizeDeps` include list in your `nuxt.config.ts` file.
-
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  vite: {
-    optimizeDeps: {
-      include: ['prosemirror-state']
-    }
-  }
-})
-```
 ::
 
 3. Use the custom extension in the Editor:

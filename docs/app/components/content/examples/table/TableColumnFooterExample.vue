@@ -77,26 +77,27 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Email'
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium'
+    }
+  },
   footer: ({ column }) => {
     const total = column.getFacetedRowModel().rows.reduce((acc: number, row: TableRow<Payment>) => acc + Number.parseFloat(row.getValue('amount')), 0)
-
     const formatted = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR'
     }).format(total)
-
-    return h('div', { class: 'text-right font-medium' }, `Total: ${formatted}`)
+    return `Total: ${formatted}`
   },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR'
     }).format(amount)
-
-    return h('div', { class: 'text-right font-medium' }, formatted)
   }
 }]
 </script>

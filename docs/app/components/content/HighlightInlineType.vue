@@ -24,7 +24,7 @@ const type = computed(() => {
 const ast = ref<any>(null)
 
 onMounted(async () => {
-  ast.value = await parseMarkdown(`\`${type.value}\`{lang="ts-type"}`)
+  ast.value = await parseMarkdown(`\`\` ${type.value} \`\`{lang="ts-type"}`)
 })
 </script>
 
