@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   return streamText({
-    model: gateway('openai/gpt-4o-mini'),
+    model: gateway('google/gemini-2.5-flash'),
     maxOutputTokens: 10000,
     system: 'You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue.',
     messages: await convertToModelMessages(messages),
@@ -13,7 +13,15 @@ export default defineEventHandler(async (event) => {
       openai: {
         reasoningEffort: 'low',
         reasoningSummary: 'detailed'
+      },
+      google: {
+        thinkingConfig: {
+          includeThoughts: true,
+          thinkingBudget: 2048
+        }
       }
     }
-  }).toUIMessageStreamResponse()
+  }).toUIMessageStreamResponse({
+    sendReasoning: true
+  })
 })

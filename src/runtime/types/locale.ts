@@ -116,6 +116,11 @@ export type Messages = {
       copy: string
     }
   }
+  reasoning: {
+    thinking: string
+    thoughtFewSeconds: string
+    thoughtSeconds: string
+  }
   selectMenu: {
     create: string
     noData: string

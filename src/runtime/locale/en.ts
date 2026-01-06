@@ -112,6 +112,11 @@ export default defineLocale<Messages>({
         copy: 'Copy code to clipboard'
       }
     },
+    reasoning: {
+      thinking: 'Thinking...',
+      thoughtFewSeconds: 'Thought for a few seconds',
+      thoughtSeconds: 'Thought for {duration} seconds'
+    },
     selectMenu: {
       create: 'Create "{label}"',
       noData: 'No data',

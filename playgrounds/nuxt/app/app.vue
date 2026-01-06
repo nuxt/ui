@@ -54,8 +54,9 @@ provide('components', components)
       <UDashboardPanel
         :ui="{
           body: [
-            'justify-center items-center',
+            route.path !== '/chat' && 'justify-center items-center',
             route.path.startsWith('/components') && 'mt-16',
+            route.path === '/chat' && 'flex-col p-0! sm:p-0!',
             route.path.startsWith('/components/scroll-area') && 'p-0!'
           ]
         }"
