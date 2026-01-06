@@ -1,4 +1,4 @@
-import { describe, it, expect, test, vi } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { mount, flushPromises } from '@vue/test-utils'
@@ -56,9 +56,9 @@ describe('InputRating', () => {
         }
       })
 
-      const stars = wrapper.findAll('[data-slot^="star-"]')
-      if (stars.length > 0) {
-        await stars[2]!.trigger('click') // Click on third star (index 2 = star 3)
+      const item = wrapper.find('button[role="radio"][value="3"]')
+      if (item.exists()) {
+        await item.trigger('click')
         await flushPromises()
 
         expect(wrapper.emitted()).toHaveProperty('update:modelValue')
@@ -73,9 +73,9 @@ describe('InputRating', () => {
         }
       })
 
-      const stars = wrapper.findAll('[data-slot^="star-"]')
-      if (stars.length > 0) {
-        await stars[3]!.trigger('click') // Click on fourth star
+      const item = wrapper.find('button[role="radio"][value="4"]')
+      if (item.exists()) {
+        await item.trigger('click')
         await flushPromises()
 
         expect(wrapper.emitted()).toHaveProperty('change')
@@ -90,40 +90,15 @@ describe('InputRating', () => {
         }
       })
 
-      const stars = wrapper.findAll('[data-slot^="star-"]')
-      if (stars.length > 0) {
-        const starElement = stars[0]!.element as HTMLElement
+      const item = wrapper.find('button[role="radio"][value="0.5"]')
+      if (item.exists()) {
+        await item.trigger('click')
+        await flushPromises()
 
-        // Mock getBoundingClientRect to simulate click on left half
-        const mockRect = { left: 100, width: 40, top: 100, height: 40, right: 140, bottom: 140 }
-        const getBoundingClientRectSpy = vi.spyOn(starElement, 'getBoundingClientRect')
-        getBoundingClientRectSpy.mockReturnValue(mockRect as DOMRect)
-
-        // Create a click event with clientX in the left half (110 < 120, which is left + width/2)
-        const clickEvent = {
-          currentTarget: starElement,
-          clientX: 110, // Left half: 110 < (100 + 40/2) = 120
-          clientY: 120,
-          preventDefault: () => {},
-          stopPropagation: () => {}
-        } as unknown as MouseEvent
-
-        // Manually call the click handler by accessing the component instance
-        const componentInstance = wrapper.vm as any
-        if (componentInstance.handleStarClick) {
-          await componentInstance.handleStarClick(clickEvent, 1)
-          await flushPromises()
-
-          expect(wrapper.emitted()).toHaveProperty('update:modelValue')
-          // Should emit 0.5 for half star (index 1 - 0.5)
-          const emitted = wrapper.emitted('update:modelValue')
-          expect(emitted?.[0]?.[0]).toBe(0.5)
-        } else {
-          // Fallback: just test that clicking emits a value when allowHalf is true
-          await stars[0]!.trigger('click')
-          await flushPromises()
-          expect(wrapper.emitted()).toHaveProperty('update:modelValue')
-        }
+        expect(wrapper.emitted()).toHaveProperty('update:modelValue')
+        // Should emit 0.5 for half star
+        const emitted = wrapper.emitted('update:modelValue')
+        expect(emitted?.[0]?.[0]).toBe(0.5)
       }
     })
   })
@@ -137,9 +112,9 @@ describe('InputRating', () => {
         }
       })
 
-      const stars = wrapper.findAll('[data-slot^="star-"]')
-      if (stars.length > 0) {
-        await stars[4]!.trigger('click') // Try to click on fifth star
+      const item = wrapper.find('button[role="radio"][value="5"]')
+      if (item.exists()) {
+        await item.trigger('click')
         await flushPromises()
 
         expect(wrapper.emitted('update:modelValue')).toBeUndefined()
@@ -156,9 +131,9 @@ describe('InputRating', () => {
         }
       })
 
-      const stars = wrapper.findAll('[data-slot^="star-"]')
-      if (stars.length > 0) {
-        await stars[4]!.trigger('click') // Try to click on fifth star
+      const item = wrapper.find('button[role="radio"][value="5"]')
+      if (item.exists()) {
+        await item.trigger('click')
         await flushPromises()
 
         expect(wrapper.emitted('update:modelValue')).toBeUndefined()
@@ -199,17 +174,18 @@ describe('InputRating', () => {
       }
 
       // Set rating to 2 (should fail validation) by clicking second star
-      const stars = rating.findAll('[data-slot^="star-"]')
-      if (stars.length > 1) {
-        await stars[1]!.trigger('click') // Click second star (value = 2)
+      const item2 = rating.find('button[role="radio"][value="2"]')
+      if (item2.exists()) {
+        await item2.trigger('click')
         await flushPromises()
       }
 
       expect(wrapper.text()).toContain('Rating must be at least 3')
 
       // Set rating to 4 (should pass validation) by clicking fourth star
-      if (stars.length > 3) {
-        await stars[3]!.trigger('click') // Click fourth star (value = 4)
+      const item4 = rating.find('button[role="radio"][value="4"]')
+      if (item4.exists()) {
+        await item4.trigger('click')
         await flushPromises()
       }
       expect(wrapper.text()).not.toContain('Rating must be at least 3')
@@ -223,17 +199,18 @@ describe('InputRating', () => {
       }
 
       // Set rating to 2 (should fail validation) by clicking second star
-      const stars = rating.findAll('[data-slot^="star-"]')
-      if (stars.length > 1) {
-        await stars[1]!.trigger('click') // Click second star (value = 2)
+      const item2 = rating.find('button[role="radio"][value="2"]')
+      if (item2.exists()) {
+        await item2.trigger('click')
         await flushPromises()
       }
 
       expect(wrapper.text()).toContain('Rating must be at least 3')
 
       // Set rating to 4 (should pass validation) by clicking fourth star
-      if (stars.length > 3) {
-        await stars[3]!.trigger('click') // Click fourth star (value = 4)
+      const item4 = rating.find('button[role="radio"][value="4"]')
+      if (item4.exists()) {
+        await item4.trigger('click')
         await flushPromises()
       }
       expect(wrapper.text()).not.toContain('Rating must be at least 3')

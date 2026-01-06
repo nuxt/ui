@@ -83,8 +83,8 @@ export interface InputRatingSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, useId } from 'vue'
-import { Primitive, useForwardProps } from 'reka-ui'
+import { computed, ref, useId } from 'vue'
+import { RadioGroupRoot, RadioGroupItem, useForwardProps } from 'reka-ui'
 import { reactivePick, useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
@@ -108,6 +108,8 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   passive: false
 })
 
+const hoveredValue = ref(0)
+
 const appConfig = useAppConfig() as InputRating['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'as'))
@@ -115,13 +117,16 @@ const rootProps = useForwardProps(reactivePick(props, 'as'))
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled: formDisabled, ariaAttrs } = useFormField<InputRatingProps>(props)
 const fieldId = _id.value ?? useId()
 
+// Functional disabled: includes readonly for interaction blocking
 const disabled = computed(() => formDisabled.value || props.disabled || props.readonly)
+// Visual disabled: only when explicitly disabled (not readonly)
+const isVisuallyDisabled = computed(() => formDisabled.value || props.disabled)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputRating || {}) })({
   size: size.value,
   color: color.value,
-  readonly: props.readonly,
-  disabled: disabled.value
+  readonly: props.readonly && !props.disabled, // Only apply readonly styles if not disabled
+  disabled: isVisuallyDisabled.value // Only apply disabled styles when explicitly disabled
 }))
 
 const currentValue = computed(() => {
@@ -135,12 +140,31 @@ const emptyStarIcon = computed(() => {
   return starIcon.value
 })
 
+const iconSizeClass = computed(() => {
+  const sizeMap: Record<string, string> = {
+    xs: 'size-3',
+    sm: 'size-4',
+    md: 'size-5',
+    lg: 'size-6',
+    xl: 'size-7'
+  }
+  return sizeMap[size.value || 'md'] || 'size-5'
+})
+
 const stars = computed(() => {
   return Array.from({ length: props.max }, (_, i) => i + 1)
 })
 
+function getStepsForStar(star: number) {
+  if (props.allowHalf) {
+    return [star - 0.5, star]
+  }
+  return [star]
+}
+
 function getStarState(index: number): { filled: boolean, half: boolean } {
-  const value = currentValue.value
+  // Don't show hover effect when disabled
+  const value = (disabled.value ? 0 : hoveredValue.value) || currentValue.value
   const starValue = index
 
   if (value >= starValue) {
@@ -154,21 +178,8 @@ function getStarState(index: number): { filled: boolean, half: boolean } {
   return { filled: false, half: false }
 }
 
-function handleStarClick(event: MouseEvent, index: number) {
-  if (disabled.value) return
-
-  let newValue: number
-
-  if (props.allowHalf) {
-    const target = event.currentTarget as HTMLElement
-    const rect = target.getBoundingClientRect()
-    const clickX = event.clientX - rect.left
-    const isHalf = clickX < rect.width / 2
-    newValue = isHalf ? index - 0.5 : index
-  } else {
-    newValue = index
-  }
-
+function onUpdate(value: string) {
+  const newValue = Number(value)
   modelValue.value = newValue
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -180,14 +191,24 @@ function handleStarClick(event: MouseEvent, index: number) {
 </script>
 
 <template>
-  <Primitive
+  <RadioGroupRoot
+    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="fieldId"
+    :model-value="(modelValue ?? 0).toString()"
     :name="name"
+    :disabled="disabled"
+    :orientation="'horizontal'"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
+    @update:model-value="onUpdate"
+    @mouseleave="hoveredValue = 0"
   >
-    <template v-for="(star, index) in stars" :key="index">
+    <div
+      v-for="star in stars"
+      :key="star"
+      :data-slot="`star-${star}`"
+      :class="ui.star({ class: props.ui?.star })"
+    >
       <slot
         name="star"
         :index="star"
@@ -195,45 +216,55 @@ function handleStarClick(event: MouseEvent, index: number) {
         :filled="getStarState(star).filled"
         :half="getStarState(star).half"
       >
+        <!-- Empty star (background) - only show when not completely filled -->
+        <UIcon
+          v-if="!getStarState(star).filled"
+          :name="emptyStarIcon"
+          :class="[iconSizeClass, 'text-muted']"
+        />
+
+        <!-- Filled star (overlay) -->
         <div
-          :data-slot="`star-${star}`"
-          :class="ui.star({ class: props.ui?.star })"
-          @click="(e) => handleStarClick(e, star)"
+          v-if="getStarState(star).filled"
+          data-slot="starFilled"
+          :class="ui.starFilled({ class: props.ui?.starFilled })"
         >
-          <!-- Empty star (background) - only show when not completely filled -->
           <UIcon
-            v-if="!getStarState(star).filled"
-            :name="emptyStarIcon"
-            :class="ui.star({ class: props.ui?.star })"
-            class="text-muted"
+            :name="starIcon"
+            :class="iconSizeClass"
           />
-
-          <!-- Filled star (overlay) -->
-          <div
-            v-if="getStarState(star).filled"
-            data-slot="starFilled"
-            :class="ui.starFilled({ class: props.ui?.starFilled })"
-          >
-            <UIcon
-              :name="starIcon"
-              :class="ui.star({ class: props.ui?.star })"
-            />
-          </div>
-
-          <!-- Half star (overlay with clip) -->
-          <div
-            v-else-if="getStarState(star).half"
-            data-slot="starHalf"
-            :class="ui.starHalf({ class: props.ui?.starHalf })"
-            style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);"
-          >
-            <UIcon
-              :name="starIcon"
-              :class="[ui.star({ class: props.ui?.star }), ui.starHalf({ class: props.ui?.starHalf })]"
-            />
-          </div>
         </div>
+
+        <!-- Half star (overlay with clip) -->
+        <div
+          v-else-if="getStarState(star).half"
+          data-slot="starHalf"
+          :class="ui.starHalf({ class: props.ui?.starHalf })"
+        >
+          <UIcon
+            :name="starIcon"
+            :class="[iconSizeClass, ui.starHalf({ class: props.ui?.starHalf })]"
+          />
+        </div>
+
+        <RadioGroupItem
+          v-for="step in getStepsForStar(star)"
+          :key="step"
+          :value="step.toString()"
+          :aria-label="`Rate ${step} ${step === 1 ? 'star' : 'stars'} out of ${props.max}`"
+          class="absolute inset-0 focus:outline-none"
+          :class="[
+            allowHalf && step % 1 !== 0
+              ? 'w-1/2 left-0'
+              : allowHalf
+                ? 'w-1/2 left-1/2'
+                : 'w-full'
+          ]"
+          @mouseenter="!disabled && (hoveredValue = step)"
+          @focus="!disabled && (hoveredValue = step)"
+          @blur="hoveredValue = 0"
+        />
       </slot>
-    </template>
-  </Primitive>
+    </div>
+  </RadioGroupRoot>
 </template>

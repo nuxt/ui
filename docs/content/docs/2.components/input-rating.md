@@ -47,7 +47,7 @@ props:
 
 ### Readonly
 
-Use the `readonly` prop to display a rating without allowing user interaction. This is useful for displaying existing ratings.
+Use the `readonly` prop to display a rating without allowing user interaction. This is useful for displaying existing ratings. The component maintains its normal appearance but prevents user interaction.
 
 ::component-code
 ---
@@ -211,7 +211,7 @@ props:
 
 ### Disabled
 
-Use the `disabled` prop to disable the InputRating component.
+Use the `disabled` prop to disable the InputRating component. When disabled, the component has reduced opacity (75%) and shows a `not-allowed` cursor to indicate it's not interactive.
 
 ::component-code
 ---
@@ -221,6 +221,52 @@ props:
   disabled: true
   modelValue: 3
 ---
+::
+
+### Readonly vs Disabled
+
+Both `readonly` and `disabled` prevent user interaction, but they have different visual appearances:
+
+- **`readonly`**: Maintains normal appearance (full opacity, default cursor). Use when you want to display a rating that cannot be changed but should look normal.
+- **`disabled`**: Shows reduced opacity (75%) and a `not-allowed` cursor. Use when you want to clearly indicate that the rating is temporarily unavailable or inactive.
+
+::component-code
+---
+external:
+  - modelValue
+props:
+  readonly: true
+  modelValue: 4.5
+---
+::
+
+::component-code
+---
+external:
+  - modelValue
+props:
+  disabled: true
+  modelValue: 4.5
+---
+::
+
+### Focus Ring
+
+The InputRating component displays a focus ring by default for accessibility purposes, helping keyboard users identify the focused element. If you need to remove the focus ring for design reasons, you can override it using the `ui` prop:
+
+::component-code
+---
+external:
+  - modelValue
+props:
+  modelValue: 3
+  ui:
+    star: 'focus-within:ring-0 focus-within:ring-offset-0'
+---
+::
+
+::note
+Removing the focus ring may impact accessibility for keyboard users. Consider providing alternative visual indicators when removing the default focus ring.
 ::
 
 ## Examples

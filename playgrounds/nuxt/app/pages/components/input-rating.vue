@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import * as z from 'zod'
 import theme from '#build/ui/input-rating'
+
+const toast = useToast()
 
 const colors = Object.keys(theme.variants.color)
 const sizes = Object.keys(theme.variants.size)
@@ -8,11 +11,27 @@ const color = ref(theme.defaultVariants.color)
 const size = ref(theme.defaultVariants.size)
 
 const rating1 = ref(0)
-const rating2 = ref(3.5)
+const rating2 = ref(3)
 const rating3 = ref(4)
 const rating4 = ref(0)
 const rating5 = ref(2.5)
 const readonlyRating = ref(4.5)
+const formRating = ref(0)
+const ratingNoRing = ref(0)
+
+const formSchema = z.object({
+  rating: z.number().min(1, 'Please select a rating')
+})
+
+type FormSchema = z.input<typeof formSchema>
+
+const formState = reactive<Partial<FormSchema>>({
+  rating: formRating.value
+})
+
+watch(formRating, (value) => {
+  formState.rating = value
+})
 </script>
 
 <template>
@@ -21,7 +40,7 @@ const readonlyRating = ref(4.5)
     <USelect v-model="size" :items="sizes" placeholder="Size" />
   </Navbar>
 
-  <div class="flex flex-col gap-8 min-h-0">
+  <div class="flex flex-col gap-8 min-h-0 min-w-2xl">
     <div class="flex flex-col gap-4">
       <h2 class="font-semibold text-highlighted">
         Basic Usage
@@ -38,6 +57,17 @@ const readonlyRating = ref(4.5)
             Rating: {{ rating2 }}
           </p>
           <UInputRating v-model="rating2" :color="color" :size="size" />
+        </div>
+        <div>
+          <p class="text-sm text-muted mb-2">
+            Rating: {{ ratingNoRing }} (no focus ring)
+          </p>
+          <UInputRating
+            v-model="ratingNoRing"
+            :color="color"
+            :size="size"
+            :ui="{ star: 'focus-within:ring-0 focus-within:ring-offset-0' }"
+          />
         </div>
       </div>
     </div>
@@ -82,6 +112,28 @@ const readonlyRating = ref(4.5)
             Rating: 5 (readonly, full stars)
           </p>
           <UInputRating :model-value="5" readonly :color="color" :size="size" />
+        </div>
+      </div>
+    </div>
+
+    <USeparator />
+
+    <div class="flex flex-col gap-4">
+      <h2 class="font-semibold text-highlighted">
+        Disabled
+      </h2>
+      <div class="flex flex-col gap-4">
+        <div>
+          <p class="text-sm text-muted mb-2">
+            Rating: {{ readonlyRating }} (disabled)
+          </p>
+          <UInputRating :model-value="readonlyRating" disabled :color="color" :size="size" />
+        </div>
+        <div>
+          <p class="text-sm text-muted mb-2">
+            Rating: 5 (disabled, full stars)
+          </p>
+          <UInputRating :model-value="5" disabled :color="color" :size="size" />
         </div>
       </div>
     </div>
@@ -209,6 +261,39 @@ const readonlyRating = ref(4.5)
           <UInputRating :model-value="2" readonly :max="3" :color="color" :size="size" />
         </div>
       </div>
+    </div>
+
+    <USeparator />
+
+    <div class="pb-8">
+      <UPageCard title="Form Integration with Required">
+        <UForm
+          :state="formState"
+          :schema="formSchema"
+          class="flex flex-col gap-4 max-w-md"
+          @submit="(event) => {
+            event.preventDefault()
+            toast.add({
+              title: 'Rating submitted',
+              description: `Your rating of ${event.data.rating} ${event.data.rating === 1 ? 'star' : 'stars'} has been saved.`,
+              icon: 'i-lucide-check-circle',
+              color: 'success'
+            })
+          }"
+        >
+          <UFormField label="Rating" name="rating" required>
+            <UInputRating v-model="formRating" :color="color" :size="size" />
+          </UFormField>
+          <div class="flex items-center gap-2">
+            <UButton type="submit">
+              Submit
+            </UButton>
+            <p class="text-sm text-muted">
+              Current rating value: <span class="font-semibold text-highlighted">{{ formRating }}</span>
+            </p>
+          </div>
+        </UForm>
+      </UPageCard>
     </div>
   </div>
 </template>
