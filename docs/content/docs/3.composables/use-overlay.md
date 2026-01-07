@@ -299,3 +299,114 @@ const modal = overlay.create(LazyModalExample, {
 })
 </script>
 ```
+
+## Recipes
+### Confirm dialog
+
+Create a custom `useDialog` composable that wraps `useOverlay` to simplify common dialog patterns. This approach enables opinionated dialogs tailored to specific business requirements and design preferences. The following example demonstrates a reusable confirm dialog:
+
+```vue [DialogConfirm.vue]
+<script lang="ts" setup>
+  interface DialogConfirmProps {
+    title?: string
+    description?: string
+    onConfirm?: () => void
+    onDismiss?: () => void
+  }
+
+  const props = withDefaults(defineProps<DialogConfirmProps>(), {    
+    onConfirm: () => {},
+    onDismiss: () => {},
+  })
+
+  const emits = defineEmits<{
+    close: [value?: any]
+  }>()
+
+  const handleConfirm = () => {
+    props.onConfirm()
+    emits("close")
+  }
+
+  const handleDismiss = () => {
+    props.onDismiss()
+    emits("close")
+  }
+</script>
+
+<template>
+  <UModal :dismissible="false" :close="false">
+    <template #header>
+      <div class="relative w-full flex items-start gap-3">
+        <div class="flex-1 min-w-0">
+          <div class="text-base font-semibold">{{ title }}</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ description }}</div>
+        </div>
+        <UButton icon="i-lucide-x" @click="handleDismiss" />
+      </div>
+    </template>
+
+    <template #footer>
+      <div class="flex gap-4">
+        <UButton label="No" @click="handleDismiss" />
+        <UButton label="Yes" @click="handleConfirm" />
+      </div>
+    </template>
+  </UModal>
+</template>
+```
+
+```ts [useConfirm.ts]
+import DialogConfirm from "#components"
+
+export interface DialogConfirmOptions {
+  title: string
+  description?: string
+  onConfirm?: () => void
+  onDismiss?: () => void
+}
+
+export const useDialog = () => {
+  const overlay = useOverlay()
+
+  const confirm = (options: DialogConfirmOptions): void => {
+    const modal = overlay.create(DialogConfirm, {
+      destroyOnClose: true,
+      props: options,
+    })
+
+    modal.open()
+  }
+
+  return { confirm }
+}
+
+```
+
+#### Basic Usage
+
+```vue
+<script setup lang="ts">
+const { confirm } = useDialog()
+
+const handleDelete = () => {
+  confirm({
+    title: "Delete Item",
+    description: "Are you sure you want to delete this item?",
+    onConfirm: () => {
+      // User clicked "Yes"
+      console.log("Item deleted")
+      deleteItem()
+    },
+    onDismiss: () => {
+      // User clicked "No" or X button
+      console.log("Deletion cancelled")
+    }
+  })
+}
+</script>
+
+<template>
+  <UButton @click="handleDelete" label="Delete Item" />
+</template>
+```
