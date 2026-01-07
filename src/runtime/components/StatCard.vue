@@ -254,7 +254,7 @@ const sparklineData = computed(() => {
           </slot>
         </div>
 
-        <div v-if="showLabel && (current !== undefined && current !== null) || !!slots.label" data-slot="label" :class="ui.label({ class: props.ui?.label })">
+        <div v-if="showLabel && ((current !== undefined && current !== null) || !!slots.label)" data-slot="label" :class="ui.label({ class: props.ui?.label })">
           <slot name="label" :current="current!" :max="max" :ui="ui">
             {{ current }} / {{ max }}
           </slot>
