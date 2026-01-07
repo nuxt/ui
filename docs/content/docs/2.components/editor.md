@@ -29,6 +29,26 @@ class: 'relative h-176 overflow-y-auto !p-0 rounded-b-md'
 This example demonstrates a production-ready Editor component. Check out the source code on GitHub.
 ::
 
+::warning
+If you encounter prosemirror-related errors such as `Adding different instances of a keyed plugin` when using the Editor component or its extensions, you may need to add prosemirror packages to the `vite.optimizeDeps.include` list in your `nuxt.config.ts` file. This ensures Vite pre-bundles these dependencies to avoid loading multiple instances.
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  vite: {
+    optimizeDeps: {
+      include: [
+        'prosemirror-state',
+        'prosemirror-transform',
+        'prosemirror-model',
+        'prosemirror-view',
+        'prosemirror-gapcursor'
+      ]
+    }
+  }
+})
+```
+::
+
 ### Content
 
 Use the `v-model` directive to control the value of the Editor.
@@ -153,12 +173,32 @@ external:
   - modelValue
 class: 'p-8'
 props:
-  modelValue: |
-    <h1>Hello World</h1>
-    <p></p>
+  modelValue: ''
   placeholder: 'Start writing...'
-  class: 'w-full min-h-21'
+  class: 'w-full min-h-7'
 ---
+::
+
+::note
+The `placeholder` prop accepts a string or an object with [PlaceholderOptions](https://tiptap.dev/docs/editor/extensions/functionality/placeholder) and an additional `mode` property:
+- `everyLine`: Display placeholder on every empty line when focused (default).
+- `firstLine`: Display placeholder only on the first line when the editor is empty.
+
+```vue
+<template>
+  <UEditor :placeholder="{ placeholder: 'Start writing...', mode: 'firstLine' }" />
+</template>
+```
+::
+
+::tip
+By default, placeholders only appear on top-level empty nodes. To show placeholders in nested elements like list items, set `includeChildren` to `true`:
+
+```vue
+<template>
+  <UEditor :placeholder="{ placeholder: 'Start writing...', includeChildren: true }" />
+</template>
+```
 ::
 
 ::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/functionality/placeholder" target="_blank"}
@@ -412,22 +452,8 @@ name: 'editor-image-upload-node'
 preview: false
 collapse: true
 lang: 'ts'
-name: 'editor-image-upload'
+name: 'editor-image-upload-extension'
 ---
-::
-
-::warning
-If you encounter a `Adding different instances of a keyed plugin` error when creating a custom extension, you may need to add `prosemirror-state` to the vite `optimizeDeps` include list in your `nuxt.config.ts` file.
-
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  vite: {
-    optimizeDeps: {
-      include: ['prosemirror-state']
-    }
-  }
-})
-```
 ::
 
 3. Use the custom extension in the Editor:
@@ -576,6 +602,10 @@ prettier: true
 name: 'editor-completion-example'
 class: '!p-0'
 ---
+::
+
+::note
+The completion extension can be configured with `autoTrigger: true` to automatically suggest completions while typing (disabled by default). You can also manually trigger it with :kbd{value="meta"} :kbd{value="j" class="ms-px"}.
 ::
 
 ::callout{icon="i-simple-icons-vercel" to="https://ai-sdk.dev/" target="_blank"}

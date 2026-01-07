@@ -87,10 +87,10 @@ export function applyDefaultVariants(result: any, defaultVariants?: { color?: st
     return result
   }
 
-  if (result.defaultVariants?.color && defaultVariants.color) {
+  if (defaultVariants.color && result.defaultVariants?.color && result.defaultVariants.color === 'primary') {
     result.defaultVariants.color = defaultVariants.color
   }
-  if (result.defaultVariants?.size && defaultVariants.size) {
+  if (defaultVariants.size && result.defaultVariants?.size && result.defaultVariants.size === 'md') {
     result.defaultVariants.size = defaultVariants.size
   }
 

@@ -104,7 +104,7 @@ useHead({
   script: [{
     key: 'prehydrate-template-banner',
     innerHTML: `
-            if (localStorage.getItem('${id.value}') === 'true') {
+            if (localStorage.getItem(${JSON.stringify(id.value)}) === 'true') {
               document.querySelector('html').classList.add('hide-banner')
             }`.replace(/\s+/g, ' '),
     type: 'text/javascript'

@@ -101,24 +101,25 @@ export function createLinkHandler() {
     execute: (editor: Editor, cmd: any) => {
       const chain = editor.chain()
       const previousUrl = editor.getAttributes('link').href
+      const hasCode = editor.isActive('code')
 
       // If link is already active, unset it
       if (previousUrl) {
         return chain.focus().unsetLink()
       }
 
-      // If href is provided in cmd, use it
-      if (cmd?.href) {
-        return chain.focus().setLink({ href: cmd.href })
+      // If href is provided in cmd, use it, otherwise prompt
+      const href = cmd?.href || prompt('Enter the URL:')
+      if (!href) {
+        return chain
       }
 
-      // Otherwise prompt for URL
-      const href = prompt('Enter the URL:')
-      if (href) {
-        return chain.focus().setLink({ href })
+      // When linking code, extend the code mark range first to select the full code
+      if (hasCode) {
+        return chain.focus().extendMarkRange('code').setLink({ href })
       }
 
-      return chain
+      return chain.focus().setLink({ href })
     },
     isActive: (editor: Editor) => editor.isActive('link'),
     isDisabled: (editor: Editor) => {

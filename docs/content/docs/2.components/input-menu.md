@@ -501,6 +501,10 @@ ignore:
 external:
   - items
   - modelValue
+items:
+  clear:
+    - true
+    - false
 props:
   modelValue: 'Backlog'
   clear: true
@@ -525,6 +529,10 @@ ignore:
 external:
   - items
   - modelValue
+items:
+  clear:
+    - true
+    - false
 props:
   modelValue: 'Backlog'
   clear: true

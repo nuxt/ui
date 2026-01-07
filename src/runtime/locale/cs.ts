@@ -50,7 +50,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Odkazy',
-      theme: 'Téma'
+      theme: 'Barevný režim'
     },
     contentSearchButton: {
       label: 'Hledat…'
@@ -59,7 +59,7 @@ export default defineLocale<Messages>({
       title: 'Na této stránce'
     },
     dashboardSearch: {
-      theme: 'Téma'
+      theme: 'Barevný režim'
     },
     dashboardSearchButton: {
       label: 'Hledat…'

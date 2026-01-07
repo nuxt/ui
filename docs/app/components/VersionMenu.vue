@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const config = useRuntimeConfig().public
 const { track } = useAnalytics()
+const appConfig = useAppConfig()
 
 const items = computed(() => {
   return [
@@ -35,7 +36,7 @@ const items = computed(() => {
     <UButton
       :label="`v${config.version}`"
       variant="subtle"
-      trailing-icon="i-lucide-chevron-down"
+      :trailing-icon="appConfig.ui.icons.chevronDown"
       size="xs"
       class="-mb-[6px] font-semibold rounded-full truncate"
       :class="[open && 'bg-primary/15']"

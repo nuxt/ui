@@ -404,7 +404,7 @@ defineShortcuts(extractShortcuts(items))
 ```
 
 ::note
-In this example, :kbd{value="meta"} :kbd{value="S"}, :kbd{value="shift"} :kbd{value="meta"} :kbd{value="D"}, :kbd{value="option"} :kbd{value="meta"} :kbd{value="U"}, :kbd{value="option"} :kbd{value="meta"} :kbd{value="I"}, :kbd{value="option"} :kbd{value="meta"} :kbd{value="C"} and :kbd{value="option"} :kbd{value="meta"} :kbd{value="J"} would trigger the `select` function of the corresponding item.
+In this example, :kbd{value="meta"} :kbd{value="S" class="ms-px"}, :kbd{value="shift"} :kbd{value="meta" class="ms-px"} :kbd{value="D" class="ms-px"}, :kbd{value="option"} :kbd{value="meta" class="ms-px"} :kbd{value="U" class="ms-px"}, :kbd{value="option"} :kbd{value="meta" class="ms-px"} :kbd{value="I" class="ms-px"}, :kbd{value="option"} :kbd{value="meta" class="ms-px"} :kbd{value="C" class="ms-px"} and :kbd{value="option"} :kbd{value="meta" class="ms-px"} :kbd{value="J" class="ms-px"} would trigger the `select` function of the corresponding item.
 ::
 
 ## API
