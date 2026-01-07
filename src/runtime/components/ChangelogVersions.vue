@@ -85,6 +85,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.changelogVer
         <Motion v-if="!!props.indicatorMotion" data-slot="beam" :class="ui.beam({ class: props.ui?.beam })" :style="{ height }" />
       </slot>
     </div>
+
     <div v-if="versions?.length || !!slots.default" data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <slot>
         <UChangelogVersion
