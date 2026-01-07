@@ -84,21 +84,29 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Email'
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium'
+    }
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR'
     }).format(amount)
-
-    return h('div', { class: 'text-right font-medium' }, formatted)
   }
 }, {
   id: 'actions',
+  meta: {
+    class: {
+      td: 'text-right'
+    }
+  },
   cell: ({ row }) => {
-    return h('div', { class: 'text-right' }, h(UDropdownMenu, {
+    return h(UDropdownMenu, {
       'content': {
         align: 'end'
       },
@@ -108,9 +116,8 @@ const columns: TableColumn<Payment>[] = [{
       'icon': 'i-lucide-ellipsis-vertical',
       'color': 'neutral',
       'variant': 'ghost',
-      'class': 'ml-auto',
       'aria-label': 'Actions dropdown'
-    })))
+    }))
   }
 }]
 

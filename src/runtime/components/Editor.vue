@@ -28,32 +28,42 @@ export interface EditorProps<T extends Content = Content, H extends EditorCustom
   contentType?: EditorContentType
   /**
    * The starter kit options to configure the editor.
-   * @defaultValue { headings: { levels: [1, 2, 3, 4] }, link: { openOnClick: false }, dropcursor: { color: 'var(--ui-primary)', width: 2 } }
+   * @defaultValue { horizontalRule: false, headings: { levels: [1, 2, 3, 4] }, link: { openOnClick: false }, dropcursor: { color: 'var(--ui-primary)', width: 2 } }
    * @see https://tiptap.dev/docs/editor/extensions/functionality/starterkit
    */
   starterKit?: Partial<StarterKitOptions>
   /**
-   * The placeholder text to show in empty paragraphs.
-   * `{ showOnlyWhenEditable: false, showOnlyCurrent: true }`{lang="ts-type"}
-   * Can be a string or PlaceholderOptions from `@tiptap/extension-placeholder`.
+   * The placeholder text to show in empty paragraphs. Can be a string or PlaceholderOptions from `@tiptap/extension-placeholder`.
+   * @defaultValue { showOnlyWhenEditable: false, showOnlyCurrent: true, mode: 'everyLine' }
    * @see https://tiptap.dev/docs/editor/extensions/functionality/placeholder
    */
-  placeholder?: string | Partial<PlaceholderOptions>
+  placeholder?: string | (Partial<PlaceholderOptions> & {
+    /**
+     * Control how placeholders are displayed in the editor.
+     * - `firstLine`: Display placeholder only on the first line when the editor is empty.
+     * - `everyLine`: Display placeholder on every empty line when focused.
+     * @defaultValue 'everyLine'
+     */
+    mode?: 'firstLine' | 'everyLine'
+  })
   /**
    * The markdown extension options to configure markdown parsing and serialization.
+   * @defaultValue { markedOptions: { gfm: true } }
    * @see https://tiptap.dev/docs/editor/extensions/functionality/markdown
    */
   markdown?: Partial<MarkdownExtensionOptions>
   /**
-   * The image extension options to configure image handling.
+   * The image extension options to configure image handling. Set to `false` to disable the extension.
+   * @defaultValue {}
    * @see https://tiptap.dev/docs/editor/extensions/nodes/image
    */
-  image?: Partial<ImageOptions>
+  image?: boolean | Partial<ImageOptions>
   /**
-   * The mention extension options to configure mention handling.
+   * The mention extension options to configure mention handling. Set to `false` to disable the extension.
+   * @defaultValue { HTMLAttributes: { class: 'mention' } }
    * @see https://tiptap.dev/docs/editor/extensions/nodes/mention
    */
-  mention?: Partial<MentionOptions>
+  mention?: boolean | Partial<MentionOptions>
   /**
    * Custom item handlers to override or extend the default handlers.
    * These handlers are provided to all child components (toolbar, suggestion menu, etc.).
@@ -91,7 +101,10 @@ import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<EditorProps<T, H>>()
+const props = withDefaults(defineProps<EditorProps<T, H>>(), {
+  image: true,
+  mention: true
+})
 const emits = defineEmits<EditorEmits<T>>()
 defineSlots<EditorSlots<H>>()
 
@@ -99,8 +112,9 @@ const attrs = useAttrs()
 
 const appConfig = useAppConfig() as Editor['AppConfig']
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editor || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editor || {}) })({
+  placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined
+}))
 
 const rootProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'editorProps', 'contentType', 'class', 'placeholder', 'markdown', 'image', 'mention', 'handlers'))
 
@@ -127,17 +141,22 @@ const starterKit = computed(() => defu(props.starterKit, {
     openOnClick: false
   }
 } as Partial<StarterKitOptions>))
-const placeholder = computed(() => defu(typeof props.placeholder === 'string' ? { placeholder: props.placeholder } : props.placeholder, {
-  showOnlyWhenEditable: false,
-  showOnlyCurrent: true
-} as Partial<PlaceholderOptions>))
+const placeholder = computed(() => {
+  const options = typeof props.placeholder === 'string' ? { placeholder: props.placeholder } : props.placeholder
+  const { mode, ...rest } = options || {}
+
+  return defu(rest, {
+    showOnlyWhenEditable: false,
+    showOnlyCurrent: true
+  } as Partial<PlaceholderOptions>)
+})
 const markdown = computed(() => defu(props.markdown, {
   markedOptions: {
     gfm: true
   }
 } as Partial<MarkdownExtensionOptions>))
-const image = computed(() => defu(props.image, {} as Partial<ImageOptions>))
-const mention = computed(() => defu(props.mention, {
+const image = computed(() => typeof props.image === 'boolean' ? {} : props.image)
+const mention = computed(() => defu(typeof props.mention === 'boolean' ? {} : props.mention, {
   HTMLAttributes: {
     class: 'mention'
   }
@@ -155,9 +174,9 @@ const extensions = computed(() => [
       ]
     }
   }),
-  Image.configure(image.value),
+  props.image !== false && Image.configure(image.value),
+  props.mention !== false && Mention.configure(mention.value),
   props.placeholder && Placeholder.configure(placeholder.value),
-  Mention.configure(mention.value),
   ...(props.extensions || [])
 ].filter(extension => !!extension))
 
@@ -167,6 +186,12 @@ const editor = useEditor({
   contentType: contentType.value,
   extensions: extensions.value,
   editorProps: editorProps.value,
+  onCreate: ({ editor }) => {
+    // Force placeholder decorations to render immediately without needing focus
+    if (props.placeholder) {
+      editor.view.dispatch(editor.state.tr)
+    }
+  },
   onUpdate: ({ editor }) => {
     let value
     try {

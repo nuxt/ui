@@ -198,23 +198,35 @@ const columns: TableColumn<Payment>[] = [{
       onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
     })
   },
-  cell: ({ row }) => h('div', { class: 'lowercase' }, row.getValue('email'))
+  meta: {
+    class: {
+      td: 'lowercase'
+    }
+  }
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium'
+    }
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR'
     }).format(amount)
-
-    return h('div', { class: 'text-right font-medium' }, formatted)
   }
 }, {
   id: 'actions',
   enableHiding: false,
+  meta: {
+    class: {
+      td: 'text-right'
+    }
+  },
   cell: ({ row }) => {
     const items = [{
       type: 'label',
@@ -243,7 +255,7 @@ const columns: TableColumn<Payment>[] = [{
       label: 'View payment details'
     }]
 
-    return h('div', { class: 'text-right' }, h(UDropdownMenu, {
+    return h(UDropdownMenu, {
       'content': {
         align: 'end'
       },
@@ -253,9 +265,8 @@ const columns: TableColumn<Payment>[] = [{
       'icon': 'i-lucide-ellipsis-vertical',
       'color': 'neutral',
       'variant': 'ghost',
-      'class': 'ml-auto',
       'aria-label': 'Actions dropdown'
-    })))
+    }))
   }
 }]
 
