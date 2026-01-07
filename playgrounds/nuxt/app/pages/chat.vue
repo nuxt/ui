@@ -94,60 +94,43 @@ function clearMessages() {
   }
 }
 
-function resetToInitial() {
-  mockChat.value = createMockChat(initialMockMessages)
-}
-
 function addUserMessage() {
-  const newMessage: UIMessage = {
-    id: `msg-${Date.now()}`,
-    role: 'user',
-    parts: [{ type: 'text', text: 'This is a test user message.' }]
-  }
-  mockChat.value.messages.push(newMessage)
+  mockChat.value = createMockChat([
+    ...mockChat.value.messages,
+    {
+      id: `msg-${Date.now()}`,
+      role: 'user',
+      parts: [{ type: 'text', text: 'This is a test user message.' }]
+    }
+  ])
 }
 
 function addAssistantMessage() {
-  const newMessage: UIMessage = {
-    id: `msg-${Date.now()}`,
-    role: 'assistant',
-    parts: [
-      {
-        type: 'reasoning',
-        text: 'Processing the request...\n\n- Analyzing the context\n- Formulating a response\n- Checking for accuracy',
-        state: 'done'
-      },
-      {
-        type: 'text',
-        text: 'This is a test assistant response with **markdown** support.'
-      }
-    ]
-  }
-  mockChat.value.messages.push(newMessage)
-}
-
-function addStreamingReasoning() {
-  const newMessage: UIMessage = {
-    id: `msg-${Date.now()}`,
-    role: 'assistant',
-    parts: [
-      {
-        type: 'reasoning',
-        text: 'Currently thinking about the problem...',
-        state: 'streaming'
-      }
-    ]
-  }
-  mockChat.value.messages.push(newMessage)
+  mockChat.value = createMockChat([
+    ...mockChat.value.messages,
+    {
+      id: `msg-${Date.now()}`,
+      role: 'assistant',
+      parts: [
+        {
+          type: 'reasoning',
+          text: 'Processing the request...\n\n- Analyzing the context\n- Formulating a response\n- Checking for accuracy',
+          state: 'done'
+        },
+        {
+          type: 'text',
+          text: 'This is a test assistant response with **markdown** support.'
+        }
+      ]
+    }
+  ])
 }
 
 const mockActions = [
   { label: 'Simulate Stream', icon: 'i-lucide-play', onClick: () => chat.value.sendMessage({ text: 'Test streaming' }) },
   { label: 'Add User Message', icon: 'i-lucide-user', onClick: addUserMessage },
   { label: 'Add Assistant Message', icon: 'i-lucide-bot', onClick: addAssistantMessage },
-  { label: 'Add Streaming Reasoning', icon: 'i-lucide-brain', onClick: addStreamingReasoning },
   { type: 'separator' as const },
-  { label: 'Reset to Initial', icon: 'i-lucide-history', onClick: resetToInitial },
   { label: 'Clear All', icon: 'i-lucide-trash-2', onClick: clearMessages }
 ]
 
@@ -224,7 +207,6 @@ const messageActions = [
   </UDashboardNavbar>
 
   <div class="flex-1 flex flex-col min-h-0 w-full pt-20">
-    <UShimmer text="Thinking about the problem..." class="w-fit" />
     <UChatMessages
       should-auto-scroll
       :messages="messages"
@@ -243,6 +225,7 @@ const messageActions = [
             v-if="part.type === 'reasoning'"
             :text="part.text"
             :is-streaming="status === 'streaming' && index === message.parts.length - 1 && message.id === messages[messages.length - 1]?.id"
+            :unmount-on-hide="false"
             class="mb-4"
           >
             <template #body>

@@ -68,6 +68,7 @@ const components = [
   'select-menu',
   'select',
   'separator',
+  'shimmer',
   'shortcuts',
   'skeleton',
   'slideover',

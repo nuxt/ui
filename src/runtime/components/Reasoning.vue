@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { CollapsibleRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/reasoning'
 import type { IconProps } from '../types'
@@ -6,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Reasoning = ComponentConfig<typeof theme, AppConfig, 'reasoning'>
 
-export interface ReasoningProps {
+export interface ReasoningProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
   /**
    * The reasoning text content to display.
    */
@@ -21,16 +22,17 @@ export interface ReasoningProps {
    */
   duration?: number
   /**
-   * Whether the collapsible is open by default.
-   * @defaultValue false
-   */
-  defaultOpen?: boolean
-  /**
-   * The icon displayed in the trigger.
+   * The icon displayed on the left side of the trigger.
    * @defaultValue appConfig.ui.icons.reasoning
    * @IconifyIcon
    */
   icon?: IconProps['name']
+  /**
+   * The icon displayed on the right side of the trigger.
+   * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
+   */
+  trailingIcon?: IconProps['name']
   /**
    * The text displayed while streaming/thinking.
    * @defaultValue t('reasoning.thinking')
@@ -64,6 +66,8 @@ export interface ReasoningSlots {
 
 <script setup lang="ts">
 import { ref, computed, watch, useSlots } from 'vue'
+import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
+import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -72,7 +76,8 @@ import UShimmer from './Shimmer.vue'
 
 const props = withDefaults(defineProps<ReasoningProps>(), {
   defaultOpen: false,
-  isStreaming: false
+  isStreaming: false,
+  unmountOnHide: true
 })
 const emits = defineEmits<ReasoningEmits>()
 const slots = useSlots()
@@ -80,35 +85,32 @@ const slots = useSlots()
 const { t } = useLocale()
 const appConfig = useAppConfig() as Reasoning['AppConfig']
 
-// Check if there's content to display
+const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'disabled', 'unmountOnHide'), emits)
+
 const hasContent = computed(() => {
   return !!props.text || !!slots.default || !!slots.body
 })
 
-// Open state
-const isOpen = ref(props.defaultOpen)
+const streamingOpen = ref<boolean | null>(props.isStreaming ? true : null)
 
-// Auto-open when streaming starts, auto-close when it ends
 watch(() => props.isStreaming, (streaming, wasStreaming) => {
-  if (streaming && hasContent.value) {
-    // Open when streaming starts
-    isOpen.value = true
-    emits('update:open', true)
-  } else if (wasStreaming === true && !streaming) {
-    // Close when streaming ends (with a small delay)
+  if (streaming && !wasStreaming) {
+    streamingOpen.value = true
+  } else if (!streaming && wasStreaming) {
     setTimeout(() => {
-      isOpen.value = false
-      emits('update:open', false)
+      streamingOpen.value = false
+      setTimeout(() => {
+        streamingOpen.value = null
+      }, 300)
     }, 500)
   }
-}, { immediate: true })
+})
 
-function toggle() {
-  if (hasContent.value) {
-    isOpen.value = !isOpen.value
-    emits('update:open', isOpen.value)
-  }
-}
+const controlledOpen = computed(() => {
+  if (streamingOpen.value !== null) return streamingOpen.value
+  if (props.open !== undefined) return props.open
+  return undefined
+})
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.reasoning || {}) })())
@@ -129,46 +131,43 @@ const thinkingMessage = computed(() => {
 </script>
 
 <template>
-  <div
+  <CollapsibleRoot
+    v-slot="{ open }"
+    v-bind="rootProps"
+    :open="controlledOpen"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
-    <slot name="trigger" :open="isOpen" :is-streaming="isStreaming" :duration="duration">
-      <button
-        type="button"
-        data-slot="trigger"
-        :class="ui.trigger({ class: props.ui?.trigger })"
-        :disabled="!hasContent"
-        @click="toggle"
-      >
-        <UIcon :name="props.icon" data-slot="triggerIcon" :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" />
+    <CollapsibleTrigger as-child :disabled="!hasContent">
+      <slot name="trigger" :open="open" :is-streaming="isStreaming" :duration="duration">
+        <button
+          type="button"
+          data-slot="trigger"
+          :class="ui.trigger({ class: props.ui?.trigger })"
+        >
+          <UIcon :name="props.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
 
-        <UShimmer v-if="isStreaming" :text="thinkingMessage" />
-        <span v-else>{{ thinkingMessage }}</span>
+          <UShimmer v-if="isStreaming" :text="thinkingMessage" />
+          <span v-else>{{ thinkingMessage }}</span>
 
-        <UIcon
-          v-if="hasContent"
-          :name="appConfig.ui.icons.chevronDown"
-          :data-state="isOpen ? 'open' : 'closed'"
-          data-slot="triggerChevron"
-          :class="ui.triggerChevron({ class: props.ui?.triggerChevron })"
-        />
-      </button>
-    </slot>
+          <UIcon
+            v-if="hasContent"
+            :name="trailingIcon || appConfig.ui.icons.chevronDown"
+            data-slot="trailingIcon"
+            :class="ui.trailingIcon({ class: props.ui?.trailingIcon })"
+          />
+        </button>
+      </slot>
+    </CollapsibleTrigger>
 
-    <div
-      v-if="hasContent"
-      v-show="isOpen"
-      data-slot="content"
-      :class="ui.content({ class: props.ui?.content })"
-    >
+    <CollapsibleContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
       <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
-        <slot name="body" :open="isOpen">
-          <slot :open="isOpen">
+        <slot name="body" :open="open">
+          <slot :open="open">
             {{ text }}
           </slot>
         </slot>
       </div>
-    </div>
-  </div>
+    </CollapsibleContent>
+  </CollapsibleRoot>
 </template>
