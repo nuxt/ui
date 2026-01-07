@@ -5,7 +5,7 @@ import type { JSONContent } from '@tiptap/vue-3'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import { TextAlign } from '@tiptap/extension-text-align'
-import { ImageUpload } from '../../components/editor/EditorImageUpload'
+import { ImageUpload } from '../../components/editor/EditorImageUploadExtension'
 
 const editorRef = useTemplateRef('editorRef')
 

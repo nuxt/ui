@@ -6,9 +6,6 @@ export default (options: Required<NuxtOptions['ui']>) => ({
     content: 'relative size-full flex-1',
     base: [
       'w-full outline-none *:my-5 *:first:mt-0 *:last:mb-0 sm:px-8 selection:bg-primary/20',
-      // Placeholder
-      '[&_:is(p,h1,h2,h3,h4).is-empty]:before:content-[attr(data-placeholder)] [&_:is(p,h1,h2,h3,h4).is-empty]:before:text-dimmed [&_:is(p,h1,h2,h3,h4).is-empty]:before:float-left [&_:is(p,h1,h2,h3,h4).is-empty]:before:h-0 [&_:is(p,h1,h2,h3,h4).is-empty]:before:pointer-events-none',
-      '[&_li_.is-empty]:before:content-none',
       // Paragraph
       '[&_p]:leading-7',
       // Links
@@ -46,5 +43,18 @@ export default (options: Required<NuxtOptions['ui']>) => ({
       // Selected nodes
       '[&_.ProseMirror-selectednode:not(img):not(pre):not([data-node-view-wrapper])]:bg-primary/20'
     ]
+  },
+  variants: {
+    placeholderMode: {
+      firstLine: {
+        base: '[&_:is(p,h1,h2,h3,h4).is-editor-empty:first-child]:before:content-[attr(data-placeholder)] [&_:is(p,h1,h2,h3,h4).is-editor-empty:first-child]:before:text-dimmed [&_:is(p,h1,h2,h3,h4).is-editor-empty:first-child]:before:float-left [&_:is(p,h1,h2,h3,h4).is-editor-empty:first-child]:before:h-0 [&_:is(p,h1,h2,h3,h4).is-editor-empty:first-child]:before:pointer-events-none'
+      },
+      everyLine: {
+        base: '[&_:is(p,h1,h2,h3,h4).is-empty]:before:content-[attr(data-placeholder)] [&_:is(p,h1,h2,h3,h4).is-empty]:before:text-dimmed [&_:is(p,h1,h2,h3,h4).is-empty]:before:float-left [&_:is(p,h1,h2,h3,h4).is-empty]:before:h-0 [&_:is(p,h1,h2,h3,h4).is-empty]:before:pointer-events-none'
+      }
+    }
+  },
+  defaultVariants: {
+    placeholderMode: 'everyLine'
   }
 })
