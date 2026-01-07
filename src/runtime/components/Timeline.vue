@@ -49,6 +49,10 @@ export interface TimelineProps<T extends TimelineItem = TimelineItem> {
 
 type SlotProps<T extends TimelineItem> = (props: { item: T }) => any
 
+export interface TimelineEmits<T extends TimelineItem = TimelineItem> {
+  select: [item: T, event: Event]
+}
+
 export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
   indicator: SlotProps<T>
   date: SlotProps<T>
@@ -68,6 +72,7 @@ import UAvatar from './Avatar.vue'
 const props = withDefaults(defineProps<TimelineProps<T>>(), {
   orientation: 'vertical'
 })
+const emits = defineEmits<TimelineEmits<T>>()
 const slots = defineSlots<TimelineSlots<T>>()
 
 const modelValue = defineModel<string | number>()
@@ -105,6 +110,10 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
     return index < currentStepIndex.value ? 'completed' : undefined
   }
 }
+
+function onSelect(item: T, event: Event) {
+  emits('select', item, event)
+}
 </script>
 
 <template>
@@ -115,6 +124,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
       data-slot="item"
       :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
       :data-state="getItemState(index)"
+      @click="onSelect(item, $event)"
     >
       <div data-slot="container" :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
         <UAvatar
