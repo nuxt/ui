@@ -68,6 +68,11 @@ export interface InputRatingProps {
   id?: string
   /** Form field required. */
   required?: boolean
+  /**
+   * The orientation of the rating.
+   * @defaultValue 'horizontal'
+   */
+  orientation?: 'horizontal' | 'vertical'
   class?: any
   ui?: InputRating['slots']
 }
@@ -97,7 +102,8 @@ const props = withDefaults(defineProps<InputRatingProps>(), {
   max: 5,
   allowHalf: false,
   readonly: false,
-  defaultValue: 0
+  defaultValue: 0,
+  orientation: 'horizontal'
 })
 
 const emits = defineEmits<InputRatingEmits>()
@@ -125,12 +131,13 @@ const isVisuallyDisabled = computed(() => formDisabled.value || props.disabled)
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputRating || {}) })({
   size: size.value,
   color: color.value,
+  orientation: props.orientation,
   readonly: props.readonly && !props.disabled, // Only apply readonly styles if not disabled
   disabled: isVisuallyDisabled.value // Only apply disabled styles when explicitly disabled
 }))
 
 const currentValue = computed(() => {
-  const value = modelValue.value ?? props.defaultValue ?? 0
+  const value = modelValue.value ?? 0
   return Math.max(0, Math.min(value, props.max))
 })
 
@@ -140,43 +147,31 @@ const emptyStarIcon = computed(() => {
   return starIcon.value
 })
 
-const iconSizeClass = computed(() => {
-  const sizeMap: Record<string, string> = {
-    xs: 'size-3',
-    sm: 'size-4',
-    md: 'size-5',
-    lg: 'size-6',
-    xl: 'size-7'
-  }
-  return sizeMap[size.value || 'md'] || 'size-5'
-})
-
-const stars = computed(() => {
-  return Array.from({ length: props.max }, (_, i) => i + 1)
-})
-
-function getStepsForStar(star: number) {
-  if (props.allowHalf) {
-    return [star - 0.5, star]
-  }
-  return [star]
-}
-
-function getStarState(index: number): { filled: boolean, half: boolean } {
+const starsWithState = computed(() => {
   // Don't show hover effect when disabled
   const value = (disabled.value ? 0 : hoveredValue.value) || currentValue.value
-  const starValue = index
 
-  if (value >= starValue) {
-    return { filled: true, half: false }
-  }
+  return Array.from({ length: props.max }, (_, i) => {
+    const starValue = i + 1
+    let filled = false
+    let half = false
 
-  if (props.allowHalf && value >= starValue - 0.5) {
-    return { filled: false, half: true }
-  }
+    if (value >= starValue) {
+      filled = true
+    } else if (props.allowHalf && value >= starValue - 0.5) {
+      half = true
+    }
 
-  return { filled: false, half: false }
-}
+    const steps = props.allowHalf ? [starValue - 0.5, starValue] : [starValue]
+
+    return {
+      index: starValue,
+      filled,
+      half,
+      steps
+    }
+  })
+})
 
 function onUpdate(value: string) {
   const newValue = Number(value)
@@ -197,58 +192,58 @@ function onUpdate(value: string) {
     :model-value="(modelValue ?? 0).toString()"
     :name="name"
     :disabled="disabled"
-    :orientation="'horizontal'"
+    :orientation="orientation"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
     @mouseleave="hoveredValue = 0"
   >
     <div
-      v-for="star in stars"
-      :key="star"
-      :data-slot="`star-${star}`"
+      v-for="star in starsWithState"
+      :key="star.index"
+      :data-slot="`star-${star.index}`"
       :class="ui.star({ class: props.ui?.star })"
     >
       <slot
         name="star"
-        :index="star"
+        :index="star.index"
         :value="currentValue"
-        :filled="getStarState(star).filled"
-        :half="getStarState(star).half"
+        :filled="star.filled"
+        :half="star.half"
       >
         <!-- Empty star (background) - only show when not completely filled -->
         <UIcon
-          v-if="!getStarState(star).filled"
+          v-if="!star.filled"
           :name="emptyStarIcon"
-          :class="[iconSizeClass, 'text-muted']"
+          :class="[ui.icon({ class: props.ui?.icon }), 'text-muted']"
         />
 
         <!-- Filled star (overlay) -->
         <div
-          v-if="getStarState(star).filled"
+          v-if="star.filled"
           data-slot="starFilled"
           :class="ui.starFilled({ class: props.ui?.starFilled })"
         >
           <UIcon
             :name="starIcon"
-            :class="iconSizeClass"
+            :class="ui.icon({ class: props.ui?.icon })"
           />
         </div>
 
         <!-- Half star (overlay with clip) -->
         <div
-          v-else-if="getStarState(star).half"
+          v-else-if="star.half"
           data-slot="starHalf"
           :class="ui.starHalf({ class: props.ui?.starHalf })"
         >
           <UIcon
             :name="starIcon"
-            :class="[iconSizeClass, ui.starHalf({ class: props.ui?.starHalf })]"
+            :class="[ui.icon({ class: props.ui?.icon }), ui.starHalf({ class: props.ui?.starHalf })]"
           />
         </div>
 
         <RadioGroupItem
-          v-for="step in getStepsForStar(star)"
+          v-for="step in star.steps"
           :key="step"
           :value="step.toString()"
           :aria-label="`Rate ${step} ${step === 1 ? 'star' : 'stars'} out of ${props.max}`"

@@ -6,7 +6,7 @@ exports[`InputRating > renders with allowHalf correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 0.5 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-0" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="0.5">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 0.5 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-0" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="0.5">
       <!--v-if-->
     </button><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-1/2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
@@ -16,7 +16,7 @@ exports[`InputRating > renders with allowHalf correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1.5 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-0" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1.5">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1.5 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-0" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1.5">
       <!--v-if-->
     </button><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-1/2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
@@ -26,23 +26,23 @@ exports[`InputRating > renders with allowHalf correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2.5 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-0" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2.5">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2.5 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-0" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2.5">
       <!--v-if-->
     </button><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-1/2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!-- Half star (overlay with clip) -->
-    <div data-slot="starHalf" class="absolute inset-0 pointer-events-none overflow-hidden [clip-path:polygon(0_0,50%_0,50%_100%,0_100%)] [-webkit-clip-path:polygon(0_0,50%_0,50%_100%,0_100%)] text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5 absolute inset-0 pointer-events-none overflow-hidden [clip-path:polygon(0_0,50%_0,50%_100%,0_100%)] [-webkit-clip-path:polygon(0_0,50%_0,50%_100%,0_100%)] text-primary-500 dark:text-primary-400" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3.5 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-0" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3.5">
+    <div data-slot="starHalf" class="absolute inset-0 pointer-events-none overflow-hidden [clip-path:polygon(0_0,50%_0,50%_100%,0_100%)] [-webkit-clip-path:polygon(0_0,50%_0,50%_100%,0_100%)] text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full absolute inset-0 pointer-events-none overflow-hidden [clip-path:polygon(0_0,50%_0,50%_100%,0_100%)] [-webkit-clip-path:polygon(0_0,50%_0,50%_100%,0_100%)] text-primary-500 dark:text-primary-400" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3.5 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-0" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3.5">
       <!--v-if-->
     </button><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-1/2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4.5 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-0" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4.5">
       <!--v-if-->
     </button><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-1/2 left-1/2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
@@ -54,14 +54,14 @@ exports[`InputRating > renders with allowHalf correctly 1`] = `
 `;
 
 exports[`InputRating > renders with as correctly 1`] = `
-"<span id="v-0-0" data-slot="root" class="inline-flex items-center gap-0.5" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="horizontal" aria-required="false"><div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110"><!-- Empty star (background) - only show when not completely filled --><!--v-if--><!-- Filled star (overlay) --><div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+"<span id="v-0-0" data-slot="root" class="inline-flex items-center gap-0.5" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="horizontal" aria-required="false"><div data-slot="star-1" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110"><!-- Empty star (background) - only show when not completely filled --><!--v-if--><!-- Filled star (overlay) --><div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
   <!--v-if-->
 </button></div>
 <div data-slot="star-2" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
   <!-- Empty star (background) - only show when not completely filled -->
   <!--v-if-->
   <!-- Filled star (overlay) -->
-  <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+  <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
     <!--v-if-->
   </button>
 </div>
@@ -69,18 +69,18 @@ exports[`InputRating > renders with as correctly 1`] = `
   <!-- Empty star (background) - only show when not completely filled -->
   <!--v-if-->
   <!-- Filled star (overlay) -->
-  <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+  <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
     <!--v-if-->
   </button>
 </div>
 <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-  <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+  <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
   <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
     <!--v-if-->
   </button>
 </div>
 <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-  <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+  <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
   <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
     <!--v-if-->
   </button>
@@ -94,7 +94,7 @@ exports[`InputRating > renders with class correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -102,7 +102,7 @@ exports[`InputRating > renders with class correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -110,18 +110,18 @@ exports[`InputRating > renders with class correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -136,7 +136,7 @@ exports[`InputRating > renders with color error correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-error-500 dark:text-error-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-error-500 dark:text-error-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -144,7 +144,7 @@ exports[`InputRating > renders with color error correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-error-500 dark:text-error-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-error-500 dark:text-error-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -152,18 +152,18 @@ exports[`InputRating > renders with color error correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-error-500 dark:text-error-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-error-500 dark:text-error-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-error-500 dark:focus-within:ring-error-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-error-500 dark:focus-within:ring-error-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -178,7 +178,7 @@ exports[`InputRating > renders with color info correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-info-500 dark:text-info-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-info-500 dark:text-info-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -186,7 +186,7 @@ exports[`InputRating > renders with color info correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-info-500 dark:text-info-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-info-500 dark:text-info-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -194,18 +194,18 @@ exports[`InputRating > renders with color info correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-info-500 dark:text-info-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-info-500 dark:text-info-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-info-500 dark:focus-within:ring-info-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-info-500 dark:focus-within:ring-info-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -220,7 +220,7 @@ exports[`InputRating > renders with color neutral correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-gray-500 dark:text-gray-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-gray-500 dark:text-gray-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -228,7 +228,7 @@ exports[`InputRating > renders with color neutral correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-gray-500 dark:text-gray-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-gray-500 dark:text-gray-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -236,18 +236,18 @@ exports[`InputRating > renders with color neutral correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-gray-500 dark:text-gray-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-gray-500 dark:text-gray-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-gray-500 dark:focus-within:ring-gray-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-gray-500 dark:focus-within:ring-gray-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -262,7 +262,7 @@ exports[`InputRating > renders with color primary correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -270,7 +270,7 @@ exports[`InputRating > renders with color primary correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -278,18 +278,18 @@ exports[`InputRating > renders with color primary correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -304,7 +304,7 @@ exports[`InputRating > renders with color secondary correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-secondary-500 dark:text-secondary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-secondary-500 dark:text-secondary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -312,7 +312,7 @@ exports[`InputRating > renders with color secondary correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-secondary-500 dark:text-secondary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-secondary-500 dark:text-secondary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -320,18 +320,18 @@ exports[`InputRating > renders with color secondary correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-secondary-500 dark:text-secondary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-secondary-500 dark:text-secondary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-secondary-500 dark:focus-within:ring-secondary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-secondary-500 dark:focus-within:ring-secondary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -346,7 +346,7 @@ exports[`InputRating > renders with color success correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-success-500 dark:text-success-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-success-500 dark:text-success-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -354,7 +354,7 @@ exports[`InputRating > renders with color success correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-success-500 dark:text-success-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-success-500 dark:text-success-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -362,18 +362,18 @@ exports[`InputRating > renders with color success correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-success-500 dark:text-success-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-success-500 dark:text-success-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-success-500 dark:focus-within:ring-success-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-success-500 dark:focus-within:ring-success-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -388,7 +388,7 @@ exports[`InputRating > renders with color warning correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-warning-500 dark:text-warning-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-warning-500 dark:text-warning-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -396,7 +396,7 @@ exports[`InputRating > renders with color warning correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-warning-500 dark:text-warning-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-warning-500 dark:text-warning-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -404,18 +404,18 @@ exports[`InputRating > renders with color warning correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-warning-500 dark:text-warning-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-warning-500 dark:text-warning-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-warning-500 dark:focus-within:ring-warning-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-warning-500 dark:focus-within:ring-warning-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -430,7 +430,7 @@ exports[`InputRating > renders with defaultValue correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -438,7 +438,7 @@ exports[`InputRating > renders with defaultValue correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -446,18 +446,18 @@ exports[`InputRating > renders with defaultValue correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -472,7 +472,7 @@ exports[`InputRating > renders with disabled correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -480,7 +480,7 @@ exports[`InputRating > renders with disabled correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -488,18 +488,18 @@ exports[`InputRating > renders with disabled correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" data-disabled="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" disabled="" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" data-disabled="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" disabled="" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 cursor-not-allowed pointer-events-none">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 cursor-not-allowed pointer-events-none">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -514,7 +514,7 @@ exports[`InputRating > renders with emptyIcon correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -522,7 +522,7 @@ exports[`InputRating > renders with emptyIcon correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -530,18 +530,18 @@ exports[`InputRating > renders with emptyIcon correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star-off size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star-off w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star-off size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star-off w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -556,7 +556,7 @@ exports[`InputRating > renders with icon correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:heart size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:heart w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -564,7 +564,7 @@ exports[`InputRating > renders with icon correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:heart size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:heart w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -572,7 +572,7 @@ exports[`InputRating > renders with icon correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:heart size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:heart w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
@@ -580,12 +580,12 @@ exports[`InputRating > renders with icon correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:heart size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="4">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:heart w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:heart size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:heart w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -600,7 +600,7 @@ exports[`InputRating > renders with id correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -608,7 +608,7 @@ exports[`InputRating > renders with id correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -616,18 +616,18 @@ exports[`InputRating > renders with id correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -642,7 +642,7 @@ exports[`InputRating > renders with max correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -650,7 +650,7 @@ exports[`InputRating > renders with max correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -658,7 +658,7 @@ exports[`InputRating > renders with max correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 3 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 3 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
@@ -666,7 +666,7 @@ exports[`InputRating > renders with max correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
@@ -674,7 +674,7 @@ exports[`InputRating > renders with max correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
   </div>
@@ -682,7 +682,7 @@ exports[`InputRating > renders with max correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 6 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="6">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 6 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="6">
       <!--v-if-->
     </button>
   </div>
@@ -690,24 +690,24 @@ exports[`InputRating > renders with max correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 7 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="7">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 7 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="7">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-8" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 8 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="8">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-9" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 9 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="9">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-10" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 10 stars out of 10" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="10">
       <!--v-if-->
     </button>
@@ -722,7 +722,7 @@ exports[`InputRating > renders with modelValue correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -730,7 +730,7 @@ exports[`InputRating > renders with modelValue correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -738,18 +738,18 @@ exports[`InputRating > renders with modelValue correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -764,7 +764,7 @@ exports[`InputRating > renders with name correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -772,7 +772,7 @@ exports[`InputRating > renders with name correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -780,18 +780,18 @@ exports[`InputRating > renders with name correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -806,7 +806,7 @@ exports[`InputRating > renders with readonly correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -814,7 +814,7 @@ exports[`InputRating > renders with readonly correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -822,7 +822,7 @@ exports[`InputRating > renders with readonly correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
@@ -830,12 +830,12 @@ exports[`InputRating > renders with readonly correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" data-disabled="" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" disabled="" data-state="checked" required="false" value="4">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" data-disabled="" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" disabled="" data-state="checked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 cursor-default hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-disabled="" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -850,7 +850,7 @@ exports[`InputRating > renders with required correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -858,7 +858,7 @@ exports[`InputRating > renders with required correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -866,18 +866,18 @@ exports[`InputRating > renders with required correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -892,7 +892,7 @@ exports[`InputRating > renders with size lg correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-6" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -900,7 +900,7 @@ exports[`InputRating > renders with size lg correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-6" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -908,18 +908,18 @@ exports[`InputRating > renders with size lg correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-6" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-6 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-6 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-6 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-6 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -934,7 +934,7 @@ exports[`InputRating > renders with size md correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -942,7 +942,7 @@ exports[`InputRating > renders with size md correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -950,18 +950,18 @@ exports[`InputRating > renders with size md correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -976,7 +976,7 @@ exports[`InputRating > renders with size sm correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-4" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -984,7 +984,7 @@ exports[`InputRating > renders with size sm correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-4" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -992,18 +992,18 @@ exports[`InputRating > renders with size sm correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-4" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-4 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-4 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-4 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-4 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -1018,7 +1018,7 @@ exports[`InputRating > renders with size xl correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-7" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -1026,7 +1026,7 @@ exports[`InputRating > renders with size xl correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-7" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -1034,18 +1034,18 @@ exports[`InputRating > renders with size xl correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-7" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-7 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-7 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-7 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-7 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -1060,7 +1060,7 @@ exports[`InputRating > renders with size xs correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-3" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -1068,7 +1068,7 @@ exports[`InputRating > renders with size xs correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-3" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -1076,18 +1076,18 @@ exports[`InputRating > renders with size xs correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-3" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-3 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-3 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-3 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-3 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>
@@ -1113,7 +1113,7 @@ exports[`InputRating > renders with ui correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 1 star out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1">
       <!--v-if-->
     </button>
   </div>
@@ -1121,7 +1121,7 @@ exports[`InputRating > renders with ui correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 2 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2">
       <!--v-if-->
     </button>
   </div>
@@ -1129,18 +1129,18 @@ exports[`InputRating > renders with ui correctly 1`] = `
     <!-- Empty star (background) - only show when not completely filled -->
     <!--v-if-->
     <!-- Filled star (overlay) -->
-    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star size-5" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
+    <div data-slot="starFilled" class="absolute inset-0 pointer-events-none text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:star w-full h-full" aria-hidden="true"></span></div><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" aria-label="Rate 3 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="3">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-4" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 4 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="4">
       <!--v-if-->
     </button>
   </div>
   <div data-slot="star-5" class="relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm size-5 focus-within:ring-primary-500 dark:focus-within:ring-primary-400 hover:scale-110">
-    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star size-5 text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
+    <!-- Empty star (background) - only show when not completely filled --><span class="iconify i-lucide:star w-full h-full text-muted" aria-hidden="true"></span><!-- Filled star (overlay) -->
     <!--v-if--><button data-reka-collection-item="" tabindex="-1" data-orientation="horizontal" aria-label="Rate 5 stars out of 5" class="absolute inset-0 focus:outline-none w-full" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="5">
       <!--v-if-->
     </button>

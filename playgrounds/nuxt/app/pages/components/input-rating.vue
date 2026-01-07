@@ -238,6 +238,34 @@ watch(formRating, (value) => {
 
     <div class="flex flex-col gap-4">
       <h2 class="font-semibold text-highlighted">
+        Orientation
+      </h2>
+      <div class="flex flex-col gap-4">
+        <div>
+          <p class="text-sm text-muted mb-2">
+            Horizontal (default)
+          </p>
+          <UInputRating :model-value="4" readonly :color="color" :size="size" orientation="horizontal" />
+        </div>
+        <div>
+          <p class="text-sm text-muted mb-2">
+            Vertical
+          </p>
+          <UInputRating
+            :model-value="4"
+            readonly
+            :color="color"
+            :size="size"
+            orientation="vertical"
+          />
+        </div>
+      </div>
+    </div>
+
+    <USeparator />
+
+    <div class="flex flex-col gap-4">
+      <h2 class="font-semibold text-highlighted">
         Custom Max Value
       </h2>
       <div class="flex flex-col gap-4">

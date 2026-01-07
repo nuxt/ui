@@ -45,21 +45,9 @@ props:
 ---
 ::
 
-### Readonly
-
-Use the `readonly` prop to display a rating without allowing user interaction. This is useful for displaying existing ratings. The component maintains its normal appearance but prevents user interaction.
-
-::component-code
----
-props:
-  readonly: true
-  modelValue: 4.5
----
-::
-
 ### Custom Icons
 
-Use the `icon` prop to customize the icon used for stars. Defaults to `i-lucide-star`.
+Use the `icon` prop to customize the icon used for stars. Defaults to `i-lucide-star`. Use the `empty-icon` prop to customize the icon used for empty stars. If not provided, uses the same icon as `icon`.
 
 ::component-code
 ---
@@ -70,8 +58,6 @@ props:
   modelValue: 4
 ---
 ::
-
-Use the `empty-icon` prop to customize the icon used for empty stars. If not provided, uses the same icon as `icon`.
 
 ::component-code
 ---
@@ -125,62 +111,19 @@ props:
 ---
 ::
 
-::component-code
----
-external:
-  - modelValue
-props:
-  color: success
-  modelValue: 4
----
-::
-
-::component-code
----
-external:
-  - modelValue
-props:
-  color: warning
-  modelValue: 4
----
-::
-
-::component-code
----
-external:
-  - modelValue
-props:
-  color: error
-  modelValue: 4
----
-::
-
 ### Size
 
 Use the `size` prop to change the size of the stars.
 
 ::component-code
 ---
-external:
-  - modelValue
-props:
-  size: xs
-  modelValue: 4
----
-::
-
-::component-code
----
-external:
-  - modelValue
-props:
-  size: sm
-  modelValue: 4
----
-::
-
-::component-code
----
+items:
+  size:
+    - xs
+    - sm
+    - md
+    - lg
+    - xl
 external:
   - modelValue
 props:
@@ -189,12 +132,16 @@ props:
 ---
 ::
 
+### Orientation
+
+Use the `orientation` prop to change the orientation of the rating. Defaults to `horizontal`.
+
 ::component-code
 ---
 external:
   - modelValue
 props:
-  size: lg
+  orientation: horizontal
   modelValue: 4
 ---
 ::
@@ -203,9 +150,11 @@ props:
 ---
 external:
   - modelValue
+  - class
 props:
-  size: xl
+  orientation: vertical
   modelValue: 4
+  class: 'h-48'
 ---
 ::
 
@@ -223,12 +172,9 @@ props:
 ---
 ::
 
-### Readonly vs Disabled
+### Readonly
 
-Both `readonly` and `disabled` prevent user interaction, but they have different visual appearances:
-
-- **`readonly`**: Maintains normal appearance (full opacity, default cursor). Use when you want to display a rating that cannot be changed but should look normal.
-- **`disabled`**: Shows reduced opacity (75%) and a `not-allowed` cursor. Use when you want to clearly indicate that the rating is temporarily unavailable or inactive.
+Use the `readonly` prop to display a rating without allowing user interaction. Unlike `disabled`, it maintains normal appearance (full opacity, default cursor). Use when you want to display a rating that cannot be changed but should look normal.
 
 ::component-code
 ---
@@ -289,26 +235,6 @@ props:
   modelValue: 0
 ---
 ::
-
-### Reading the Value
-
-You can read the `modelValue` externally to use it in your application logic.
-
-```vue
-<script setup lang="ts">
-const rating = ref(0)
-
-watch(rating, (value) => {
-  console.log('Rating changed:', value)
-  // Save to database, update state, etc.
-})
-</script>
-
-<template>
-  <UInputRating v-model="rating" />
-  <p>Current rating: {{ rating }}</p>
-</template>
-```
 
 ## API
 

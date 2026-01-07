@@ -2,12 +2,21 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'inline-flex items-center gap-0.5',
+    root: '',
     star: 'relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm',
     starFilled: 'absolute inset-0 pointer-events-none',
-    starHalf: 'absolute inset-0 pointer-events-none overflow-hidden [clip-path:polygon(0_0,50%_0,50%_100%,0_100%)] [-webkit-clip-path:polygon(0_0,50%_0,50%_100%,0_100%)]'
+    starHalf: 'absolute inset-0 pointer-events-none overflow-hidden [clip-path:polygon(0_0,50%_0,50%_100%,0_100%)] [-webkit-clip-path:polygon(0_0,50%_0,50%_100%,0_100%)]',
+    icon: 'w-full h-full'
   },
   variants: {
+    orientation: {
+      horizontal: {
+        root: 'inline-flex items-center gap-0.5'
+      },
+      vertical: {
+        root: 'inline-flex flex-col items-center gap-0.5'
+      }
+    },
     size: {
       xs: {
         star: 'size-3'
@@ -56,6 +65,7 @@ export default (options: Required<ModuleOptions>) => ({
   },
   defaultVariants: {
     size: 'md',
-    color: 'primary'
+    color: 'primary',
+    orientation: 'horizontal'
   }
 })
