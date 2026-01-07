@@ -108,7 +108,6 @@ watch(() => props.isStreaming, (streaming, wasStreaming) => {
 
 const controlledOpen = computed(() => {
   if (streamingOpen.value !== null) return streamingOpen.value
-  if (props.open !== undefined) return props.open
   return undefined
 })
 
