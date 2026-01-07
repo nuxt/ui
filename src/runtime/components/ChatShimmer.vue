@@ -1,11 +1,11 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/shimmer'
+import theme from '#build/ui/chat-shimmer'
 import type { ComponentConfig } from '../types/tv'
 
-type Shimmer = ComponentConfig<typeof theme, AppConfig, 'shimmer'>
+type ChatShimmer = ComponentConfig<typeof theme, AppConfig, 'chatShimmer'>
 
-export interface ShimmerProps {
+export interface ChatShimmerProps {
   /**
    * The text content to display with shimmer effect.
    */
@@ -26,7 +26,7 @@ export interface ShimmerProps {
    */
   spread?: number
   class?: any
-  ui?: Shimmer['slots']
+  ui?: ChatShimmer['slots']
 }
 </script>
 
@@ -36,16 +36,16 @@ import { motion } from 'motion-v'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<ShimmerProps>(), {
+const props = withDefaults(defineProps<ChatShimmerProps>(), {
   as: 'span',
   duration: 2,
   spread: 2
 })
 
-const appConfig = useAppConfig() as Shimmer['AppConfig']
+const appConfig = useAppConfig() as ChatShimmer['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.shimmer || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatShimmer || {}) })())
 
 const dynamicSpread = computed(() => props.text.length * props.spread)
 

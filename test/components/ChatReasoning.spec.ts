@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import Reasoning from '../../src/runtime/components/Reasoning.vue'
-import type { ReasoningProps, ReasoningSlots } from '../../src/runtime/components/Reasoning.vue'
+import ChatReasoning from '../../src/runtime/components/ChatReasoning.vue'
+import type { ChatReasoningProps, ChatReasoningSlots } from '../../src/runtime/components/ChatReasoning.vue'
 import ComponentRender from '../component-render'
 
-describe('Reasoning', () => {
+describe('ChatReasoning', () => {
   const props = { text: 'This is the reasoning content.' }
 
   it.each([
@@ -27,13 +27,13 @@ describe('Reasoning', () => {
     ['with default slot', { props: { open: true }, slots: { default: () => 'Default slot content' } }],
     ['with body slot', { props: { open: true }, slots: { body: () => 'Body slot content' } }],
     ['with trigger slot', { props, slots: { trigger: () => 'Custom trigger' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ReasoningProps, slots?: Partial<ReasoningSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Reasoning)
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatReasoningProps, slots?: Partial<ChatReasoningSlots> }) => {
+    const html = await ComponentRender(nameOrHtml, options, ChatReasoning)
     expect(html).toMatchSnapshot()
   })
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(Reasoning, {
+    const wrapper = await mountSuspended(ChatReasoning, {
       props: {
         text: 'Reasoning content for accessibility test',
         open: true

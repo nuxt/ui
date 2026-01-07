@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { CollapsibleRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/reasoning'
+import theme from '#build/ui/chat-reasoning'
 import type { IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
-type Reasoning = ComponentConfig<typeof theme, AppConfig, 'reasoning'>
+type ChatReasoning = ComponentConfig<typeof theme, AppConfig, 'chatReasoning'>
 
-export interface ReasoningProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
+export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
   /**
    * The reasoning text content to display.
    */
@@ -23,7 +23,7 @@ export interface ReasoningProps extends Pick<CollapsibleRootProps, 'defaultOpen'
   duration?: number
   /**
    * The icon displayed on the left side of the trigger.
-   * @defaultValue appConfig.ui.icons.reasoning
+   * @defaultValue appConfig.ui.icons.chatReasoning
    * @IconifyIcon
    */
   icon?: IconProps['name']
@@ -35,29 +35,29 @@ export interface ReasoningProps extends Pick<CollapsibleRootProps, 'defaultOpen'
   trailingIcon?: IconProps['name']
   /**
    * The text displayed while streaming/thinking.
-   * @defaultValue t('reasoning.thinking')
+   * @defaultValue t('chatReasoning.thinking')
    */
   thinkingText?: string
   /**
    * The text displayed when thinking is complete (without duration).
-   * @defaultValue t('reasoning.thoughtFewSeconds')
+   * @defaultValue t('chatReasoning.thoughtFewSeconds')
    */
   thoughtText?: string
   /**
    * The text displayed when thinking is complete (with duration).
    * Use {duration} as placeholder for the duration value.
-   * @defaultValue t('reasoning.thoughtSeconds')
+   * @defaultValue t('chatReasoning.thoughtSeconds')
    */
   thoughtDurationText?: string
   class?: any
-  ui?: Reasoning['slots']
+  ui?: ChatReasoning['slots']
 }
 
-export interface ReasoningEmits {
+export interface ChatReasoningEmits {
   'update:open': [value: boolean]
 }
 
-export interface ReasoningSlots {
+export interface ChatReasoningSlots {
   default(props: { open: boolean }): any
   trigger(props: { open: boolean, isStreaming: boolean, duration: number | undefined }): any
   body(props: { open: boolean }): any
@@ -72,18 +72,18 @@ import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
-import UShimmer from './Shimmer.vue'
+import UChatShimmer from './ChatShimmer.vue'
 
-const props = withDefaults(defineProps<ReasoningProps>(), {
+const props = withDefaults(defineProps<ChatReasoningProps>(), {
   defaultOpen: false,
   isStreaming: false,
   unmountOnHide: true
 })
-const emits = defineEmits<ReasoningEmits>()
+const emits = defineEmits<ChatReasoningEmits>()
 const slots = useSlots()
 
 const { t } = useLocale()
-const appConfig = useAppConfig() as Reasoning['AppConfig']
+const appConfig = useAppConfig() as ChatReasoning['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'disabled', 'unmountOnHide'), emits)
 
@@ -112,16 +112,16 @@ const controlledOpen = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.reasoning || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatReasoning || {}) })())
 
 const thinkingMessage = computed(() => {
   if (props.isStreaming) {
-    return props.thinkingText || t('reasoning.thinking')
+    return props.thinkingText || t('chatReasoning.thinking')
   }
   if (props.duration === undefined) {
-    return props.thoughtText || t('reasoning.thoughtFewSeconds')
+    return props.thoughtText || t('chatReasoning.thoughtFewSeconds')
   }
-  const template = props.thoughtDurationText || t('reasoning.thoughtSeconds', { duration: props.duration })
+  const template = props.thoughtDurationText || t('chatReasoning.thoughtSeconds', { duration: props.duration })
   if (props.thoughtDurationText) {
     return template.replace('{duration}', String(props.duration))
   }
@@ -146,7 +146,7 @@ const thinkingMessage = computed(() => {
         >
           <UIcon :name="props.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
 
-          <UShimmer v-if="isStreaming" :text="thinkingMessage" />
+          <UChatShimmer v-if="isStreaming" :text="thinkingMessage" />
           <span v-else>{{ thinkingMessage }}</span>
 
           <UIcon

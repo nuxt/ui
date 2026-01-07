@@ -31,7 +31,7 @@ const asElement = ref('span')
   </Navbar>
 
   <div class="flex flex-col items-center gap-6">
-    <UShimmer
+    <UChatShimmer
       :key="`${duration}-${spread}`"
       :text="text"
       :duration="duration"
@@ -39,7 +39,7 @@ const asElement = ref('span')
       :as="asElement"
       class="text-xl"
     />
-    <UShimmer text="AI is thinking..." :duration="1.5" class="text-lg" />
-    <UShimmer text="Processing..." :duration="3" class="text-base" />
+    <UChatShimmer text="AI is thinking..." :duration="1.5" class="text-lg" />
+    <UChatShimmer text="Processing..." :duration="3" class="text-base" />
   </div>
 </template>

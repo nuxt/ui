@@ -221,7 +221,7 @@ const messageActions = [
           v-for="(part, index) in message.parts"
           :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${part.state}` : ''}`"
         >
-          <UReasoning
+          <UChatReasoning
             v-if="part.type === 'reasoning'"
             :text="part.text"
             :is-streaming="status === 'streaming' && index === message.parts.length - 1 && message.id === messages[messages.length - 1]?.id"
@@ -235,7 +235,7 @@ const messageActions = [
                 class="*:first:mt-0 *:last:mb-0"
               />
             </template>
-          </UReasoning>
+          </UChatReasoning>
 
           <MDC
             v-else-if="part.type === 'text'"

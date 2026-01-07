@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import Shimmer from '../../src/runtime/components/Shimmer.vue'
-import type { ShimmerProps } from '../../src/runtime/components/Shimmer.vue'
+import ChatShimmer from '../../src/runtime/components/ChatShimmer.vue'
+import type { ChatShimmerProps } from '../../src/runtime/components/ChatShimmer.vue'
 import ComponentRender from '../component-render'
 
-describe('Shimmer', () => {
+describe('ChatShimmer', () => {
   const props = { text: 'Loading...' }
 
   it.each([
@@ -16,13 +16,13 @@ describe('Shimmer', () => {
     ['with spread', { props: { ...props, spread: 4 } }],
     ['with class', { props: { ...props, class: 'text-lg' } }],
     ['with ui', { props: { ...props, ui: { base: 'font-bold' } } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ShimmerProps }) => {
-    const html = await ComponentRender(nameOrHtml, options, Shimmer)
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatShimmerProps }) => {
+    const html = await ComponentRender(nameOrHtml, options, ChatShimmer)
     expect(html).toMatchSnapshot()
   })
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(Shimmer, {
+    const wrapper = await mountSuspended(ChatShimmer, {
       props: {
         text: 'Loading content...'
       }

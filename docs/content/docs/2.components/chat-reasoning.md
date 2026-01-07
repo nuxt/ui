@@ -4,7 +4,7 @@ category: data
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Reasoning.vue
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ChatReasoning.vue
 ---
 
 ::callout{icon="i-lucide-construction" to="/getting-started/roadmap"}

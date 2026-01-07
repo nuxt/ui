@@ -116,7 +116,7 @@ export type Messages = {
       copy: string
     }
   }
-  reasoning: {
+  chatReasoning: {
     thinking: string
     thoughtFewSeconds: string
     thoughtSeconds: string

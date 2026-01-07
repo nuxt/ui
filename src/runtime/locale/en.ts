@@ -112,7 +112,7 @@ export default defineLocale<Messages>({
         copy: 'Copy code to clipboard'
       }
     },
-    reasoning: {
+    chatReasoning: {
       thinking: 'Thinking...',
       thoughtFewSeconds: 'Thought for a few seconds',
       thoughtSeconds: 'Thought for {duration} seconds'
