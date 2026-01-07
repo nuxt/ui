@@ -146,18 +146,6 @@ props:
 ---
 ::
 
-::component-code
----
-external:
-  - modelValue
-  - class
-props:
-  orientation: vertical
-  modelValue: 4
-  class: 'h-48'
----
-::
-
 ### Disabled
 
 Use the `disabled` prop to disable the InputRating component. When disabled, the component has reduced opacity (75%) and shows a `not-allowed` cursor to indicate it's not interactive.
