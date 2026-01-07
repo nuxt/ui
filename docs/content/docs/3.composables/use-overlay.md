@@ -300,21 +300,21 @@ const modal = overlay.create(LazyModalExample, {
 </script>
 ```
 
-## Recipes
+## Recipes`
 ### Confirm dialog
 
-Create a custom `useDialog` composable that wraps `useOverlay` to simplify common dialog patterns. This approach enables opinionated dialogs tailored to specific business requirements and design preferences. The following example demonstrates a reusable confirm dialog:
+Create a custom `useConfirmDialog` composable that wraps `useOverlay` to simplify common dialog patterns. This approach enables opinionated dialogs tailored to specific business requirements and design preferences. The following example demonstrates a reusable confirm dialog:
 
-```vue [DialogConfirm.vue]
+```vue [ConfirmDialog.vue]
 <script lang="ts" setup>
-  interface DialogConfirmProps {
+  interface ConfirmDialogProps {
     title?: string
     description?: string
     onConfirm?: () => void
     onDismiss?: () => void
   }
 
-  const props = withDefaults(defineProps<DialogConfirmProps>(), {    
+  const props = withDefaults(defineProps<ConfirmDialogProps>(), {    
     onConfirm: () => {},
     onDismiss: () => {},
   })
@@ -356,29 +356,27 @@ Create a custom `useDialog` composable that wraps `useOverlay` to simplify commo
 </template>
 ```
 
-```ts [useConfirm.ts]
-import DialogConfirm from "#components"
+```ts [useConfirmDialog.ts]
+import { ConfirmDialog } from "#components"
 
-export interface DialogConfirmOptions {
+export interface ConfirmDialogOptions {
   title: string
   description?: string
   onConfirm?: () => void
   onDismiss?: () => void
 }
 
-export const useDialog = () => {
+export const useConfirmDialog = () => {
   const overlay = useOverlay()
 
-  const confirm = (options: DialogConfirmOptions): void => {
-    const modal = overlay.create(DialogConfirm, {
+  return (options: ConfirmDialogOptions): void => {
+    const modal = overlay.create(ConfirmDialog, {
       destroyOnClose: true,
       props: options,
     })
 
     modal.open()
   }
-
-  return { confirm }
 }
 
 ```
@@ -387,7 +385,7 @@ export const useDialog = () => {
 
 ```vue
 <script setup lang="ts">
-const { confirm } = useDialog()
+const confirm = useConfirmDialog()
 
 const handleDelete = () => {
   confirm({
