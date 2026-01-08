@@ -43,7 +43,7 @@ export interface ButtonSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, inject } from 'vue'
+import { computed, ref, inject, callWithAsyncErrorHandling, ErrorCodes } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
 import { useAppConfig } from '#imports'
@@ -131,7 +131,7 @@ const ui = computed(() => tv({
         ...(active && activeVariant ? { variant: activeVariant } : {}),
         ...(active && activeColor ? { color: activeColor } : {})
       })"
-      @click="onClickWrapper"
+      @click="callWithAsyncErrorHandling(onClickWrapper, $, ErrorCodes.COMPONENT_EVENT_HANDLER, [$event])"
     >
       <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
