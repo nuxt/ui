@@ -33,6 +33,7 @@ Use the `data` prop as an array of objects, the columns will be generated based 
 
 ::component-code
 ---
+prettier: true
 collapse: true
 class: '!p-0'
 ignore:
@@ -101,7 +102,7 @@ class: '!p-0'
 name: 'table-columns-example'
 highlights:
   - 53
-  - 105
+  - 108
 ---
 ::
 
@@ -122,8 +123,11 @@ Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/latest/
 ---
 prettier: true
 collapse: true
-name: 'table-custom-meta-example'
+name: 'table-meta-example'
 class: '!p-0'
+highlights:
+  - 128
+  - 140
 ---
 ::
 
@@ -133,6 +137,7 @@ Use the `loading` prop to display a loading state, the `loading-color` prop to c
 
 ::component-code
 ---
+prettier: true
 collapse: true
 class: '!p-0'
 ignore:
@@ -180,6 +185,7 @@ Use the `sticky` prop to make the header or footer sticky.
 
 ::component-code
 ---
+prettier: true
 collapse: true
 class: '!p-0'
 ignore:
@@ -245,8 +251,8 @@ prettier: true
 collapse: true
 name: 'table-row-actions-example'
 highlights:
-  - 110
-  - 134
+  - 115
+  - 141
 class: '!p-0'
 ---
 ::
@@ -266,7 +272,7 @@ collapse: true
 name: 'table-row-expandable-example'
 highlights:
   - 55
-  - 71
+  - 72
 class: '!p-0'
 ---
 ::
@@ -297,8 +303,8 @@ prettier: true
 collapse: true
 name: 'table-grouped-rows-example'
 highlights:
-  - 159
-  - 169
+  - 157
+  - 160
 class: '!p-0'
 ---
 ::
@@ -337,8 +343,8 @@ prettier: true
 collapse: true
 name: 'table-row-select-event-example'
 highlights:
-  - 123
-  - 130
+  - 124
+  - 131
 class: '!p-0'
 ---
 ::
@@ -361,8 +367,8 @@ prettier: true
 collapse: true
 name: 'table-row-context-menu-event-example'
 highlights:
-  - 130
-  - 170
+  - 133
+  - 173
 class: '!p-0'
 ---
 ::
@@ -381,8 +387,8 @@ prettier: true
 collapse: true
 name: 'table-row-hover-event-example'
 highlights:
-  - 126
-  - 149
+  - 129
+  - 152
 class: '!p-0'
 ---
 ::
@@ -401,8 +407,8 @@ prettier: true
 collapse: true
 name: 'table-column-footer-example'
 highlights:
-  - 94
-  - 108
+  - 100
+  - 112
 class: '!p-0'
 ---
 ::
@@ -460,8 +466,8 @@ collapse: true
 overflowHidden: true
 name: 'table-column-pinning-example'
 highlights:
-  - 100
-  - 113
+  - 108
+  - 126
 class: '!p-0 overflow-clip'
 ---
 ::
@@ -480,8 +486,8 @@ prettier: true
 collapse: true
 name: 'table-column-visibility-example'
 highlights:
-  - 135
-  - 142
+  - 121
+  - 146
 class: '!p-0'
 ---
 ::
@@ -500,8 +506,8 @@ prettier: true
 collapse: true
 name: 'table-column-filters-example'
 highlights:
-  - 135
-  - 142
+  - 123
+  - 128
 class: '!p-0'
 ---
 ::
@@ -520,6 +526,8 @@ prettier: true
 collapse: true
 name: 'table-global-filter-example'
 class: '!p-0'
+highlights:
+  - 116
 ---
 ::
 
@@ -539,6 +547,9 @@ prettier: true
 collapse: true
 name: 'table-pagination-example'
 class: '!p-0'
+highlights:
+  - 204
+  - 209
 ---
 ::
 
@@ -555,6 +566,9 @@ You can fetch data from an API and use them in the Table.
 prettier: true
 collapse: true
 name: 'table-fetch-example'
+highlights:
+  - 15
+  - 26
 class: '!p-0'
 ---
 ::
@@ -589,8 +603,8 @@ Since the table ref doesn't expose the tbody element, add a unique class to it v
 prettier: true
 collapse: true
 highlights:
-  - 76
-  - 78
+  - 81
+  - 83
 name: 'table-drag-and-drop-example'
 class: '!p-0'
 ---

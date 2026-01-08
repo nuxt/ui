@@ -5,7 +5,8 @@ import { upperFirst } from 'scule'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import { TextAlign } from '@tiptap/extension-text-align'
-import { ImageUpload } from './EditorImageUpload'
+import { CodeBlockShiki } from 'tiptap-extension-code-block-shiki'
+import { ImageUpload } from './EditorImageUploadExtension'
 import { useEditorCompletion } from './EditorUseCompletion'
 import EditorLinkPopover from './EditorLinkPopover.vue'
 
@@ -44,7 +45,7 @@ Try out these powerful capabilities:
 
 Perfect for technical documentation:
 
-\`\`\`
+\`\`\`vue
 <template>
   <UEditor v-model="value" content-type="markdown" />
 </template>
@@ -573,6 +574,13 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
       Emoji,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
       ImageUpload,
+      CodeBlockShiki.configure({
+        defaultTheme: 'material-theme',
+        themes: {
+          light: 'material-theme-lighter',
+          dark: 'material-theme-palenight'
+        }
+      }),
       completionExtension
     ]"
     :handlers="customHandlers"
@@ -652,3 +660,11 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
     <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
   </UEditor>
 </template>
+
+<style>
+html.dark .tiptap .shiki,
+html.dark .tiptap .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--ui-bg-muted) !important;
+}
+</style>
