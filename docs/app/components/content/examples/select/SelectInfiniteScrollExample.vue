@@ -35,10 +35,10 @@ watch(data, () => {
 
 execute()
 
-const selectMenu = useTemplateRef('selectMenu')
+const select = useTemplateRef('select')
 
 onMounted(() => {
-  useInfiniteScroll(() => selectMenu.value?.viewportRef, () => {
+  useInfiniteScroll(() => select.value?.viewportRef, () => {
     skip.value += 10
   }, {
     canLoadMore: () => {
@@ -49,8 +49,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <USelectMenu
-    ref="selectMenu"
+  <USelect
+    ref="select"
     placeholder="Select user"
     :items="users"
   />

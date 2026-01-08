@@ -963,7 +963,6 @@ name: 'select-menu-infinite-scroll-example'
 ---
 ::
 
-
 ## API
 
 ### Props
