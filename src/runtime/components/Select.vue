@@ -329,7 +329,7 @@ defineExpose({
       <SelectContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <slot name="content-top" />
 
-        <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })" ref="viewportRef">
+        <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
           <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
