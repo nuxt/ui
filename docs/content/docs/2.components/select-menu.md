@@ -947,6 +947,21 @@ name: 'select-menu-countries-example'
 ---
 ::
 
+### With infinite scroll
+
+If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data  as the user scrolls.
+
+::component-example
+---
+prettier: true
+collapse: true
+highlights:
+  - 41
+  - 51
+overflowHidden: true
+name: 'select-menu-infinite-scroll-example'
+---
+::
 
 
 ## API
