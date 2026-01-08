@@ -909,6 +909,22 @@ name: 'select-menu-virtualize-example'
 ---
 ::
 
+### With infinite scroll :badge{label="Soon" class="align-text-top"}
+
+You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
+
+::component-example
+---
+prettier: true
+collapse: true
+highlights:
+  - 41
+  - 51
+overflowHidden: true
+name: 'select-menu-infinite-scroll-example'
+---
+::
+
 ### With full content width
 
 You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
@@ -944,22 +960,6 @@ This example demonstrates using the SelectMenu as a country picker with lazy loa
 ---
 collapse: true
 name: 'select-menu-countries-example'
----
-::
-
-### With infinite scroll
-
-If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data  as the user scrolls.
-
-::component-example
----
-prettier: true
-collapse: true
-highlights:
-  - 41
-  - 51
-overflowHidden: true
-name: 'select-menu-infinite-scroll-example'
 ---
 ::
 
