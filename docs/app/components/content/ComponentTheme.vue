@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { markRaw } from 'vue'
 import json5 from 'json5'
 import { camelCase } from 'scule'
 import { hash } from 'ohash'
@@ -119,7 +120,7 @@ Some colors in \`compoundVariants\` are omitted for readability. Check out the s
   : ''}
 `
 
-  return parseMarkdown(md)
+  return markRaw(await parseMarkdown(md))
 }, { watch: [framework] })
 </script>
 

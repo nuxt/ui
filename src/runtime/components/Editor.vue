@@ -87,6 +87,7 @@ import { computed, provide, useAttrs, watch } from 'vue'
 import { defu } from 'defu'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { mergeAttributes } from '@tiptap/core'
+import Code from '@tiptap/extension-code'
 import HorizontalRule from '@tiptap/extension-horizontal-rule'
 import Image from '@tiptap/extension-image'
 import Mention from '@tiptap/extension-mention'
@@ -129,6 +130,7 @@ const editorProps = computed(() => defu(props.editorProps, {
 } as EditorOptions['editorProps']))
 const contentType = computed(() => props.contentType || (typeof props.modelValue === 'string' ? 'html' : 'json'))
 const starterKit = computed(() => defu(props.starterKit, {
+  code: false,
   horizontalRule: false,
   headings: {
     levels: [1, 2, 3, 4]
@@ -165,6 +167,9 @@ const mention = computed(() => defu(typeof props.mention === 'boolean' ? {} : pr
 const extensions = computed(() => [
   contentType.value === 'markdown' && Markdown.configure(markdown.value),
   StarterKit.configure(starterKit.value),
+  Code.extend({
+    excludes: 'code'
+  }),
   HorizontalRule.extend({
     renderHTML() {
       return [

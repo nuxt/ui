@@ -21,9 +21,9 @@ export interface CompletionOptions {
    */
   triggerCharacters?: string[]
   /**
-   * Called when completion should be triggered, receives the text before cursor
+   * Called when completion should be triggered, receives the editor instance
    */
-  onTrigger?: (textBefore: string) => void
+  onTrigger?: (editor: Editor) => void
   /**
    * Called when suggestion is accepted
    */
@@ -205,9 +205,8 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
       storage.position = selection.from
       storage.visible = true
 
-      // Get text before cursor as context
-      const textBefore = state.doc.textBetween(0, selection.from, '\n')
-      options.onTrigger(textBefore)
+      // Pass editor to let the handler extract content (e.g., as markdown)
+      options.onTrigger(editor)
     }, options.debounce || 250)
   },
 

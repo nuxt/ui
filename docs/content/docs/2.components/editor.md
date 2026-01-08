@@ -604,6 +604,10 @@ class: '!p-0'
 ---
 ::
 
+::note
+The completion extension can be configured with `autoTrigger: true` to automatically suggest completions while typing (disabled by default). You can also manually trigger it with :kbd{value="meta"} :kbd{value="j" class="ms-px"}.
+::
+
 ::callout{icon="i-simple-icons-vercel" to="https://ai-sdk.dev/" target="_blank"}
 Learn more about the Vercel AI SDK and available providers.
 ::
