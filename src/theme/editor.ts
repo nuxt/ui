@@ -11,6 +11,9 @@ export default (options: Required<NuxtOptions['ui']>) => ({
       // Links
       '[&_a]:text-primary [&_a]:border-b [&_a]:border-transparent [&_a]:hover:border-primary [&_a]:font-medium',
       options.theme?.transitions && '[&_a]:transition-colors',
+      // Code inside links
+      '[&_a>code]:border-dashed [&_a:hover>code]:border-primary [&_a:hover>code]:text-primary',
+      options.theme?.transitions && '[&_a>code]:transition-colors',
       // Mentions
       '[&_.mention]:text-primary [&_.mention]:font-medium',
       // Headings - shared styles

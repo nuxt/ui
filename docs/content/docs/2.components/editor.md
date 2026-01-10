@@ -256,6 +256,7 @@ The Editor component provides these default handlers, which you can reference in
 | `blockquote`{lang="ts-type"} | Toggle blockquotes | |
 | `bulletList`{lang="ts-type"} | Toggle bullet lists | Handles list conversions |
 | `orderedList`{lang="ts-type"} | Toggle ordered lists | Handles list conversions |
+| `taskList`{lang="ts-type"} | Toggle task lists | Handles list conversions |
 | `codeBlock`{lang="ts-type"} | Toggle code blocks | |
 | `horizontalRule`{lang="ts-type"} | Insert horizontal rules | |
 | `paragraph`{lang="ts-type"} | Set paragraph format | |
@@ -269,6 +270,10 @@ The Editor component provides these default handlers, which you can reference in
 | `suggestion`{lang="ts-type"} | Trigger suggestion menu | Inserts `/` character |
 | `mention`{lang="ts-type"} | Trigger mention menu | Inserts `@` character |
 | `emoji`{lang="ts-type"} | Trigger emoji picker | Inserts `:` character |
+
+::warning
+The `taskList` and `textAlign` handlers only work when their respective extensions are installed, as they are not included in the Editor by default.
+::
 
 Here's how to use default handlers in toolbar or suggestion menu items:
 
