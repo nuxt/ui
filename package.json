@@ -16,6 +16,12 @@
       "style": "./dist/runtime/index.css",
       "import": "./dist/module.mjs"
     },
+    "./sources": {
+      "style": "./dist/runtime/sources.css"
+    },
+    "./theme": {
+      "style": "./dist/runtime/theme.css"
+    },
     "./unplugin": {
       "types": "./dist/unplugin.d.mts",
       "import": "./dist/unplugin.mjs"
@@ -88,7 +94,9 @@
     }
   },
   "imports": {
-    "#build/ui.css": "./.nuxt/ui.css"
+    "#build/ui.css": "./.nuxt/ui.css",
+    "#build/ui-sources.css": "./.nuxt/ui-sources.css",
+    "#build/ui-theme.css": "./.nuxt/ui-theme.css"
   },
   "bin": {
     "nuxt-ui": "./cli/index.mjs"
