@@ -23,5 +23,5 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.hr ||
 </script>
 
 <template>
-  <hr :class="ui({ class: props.class })">
+  <hr :class="ui.base({ class: props.class })">
 </template>

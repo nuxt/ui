@@ -33,7 +33,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.steps
 </script>
 
 <template>
-  <div :class="ui({ class: props.class, level: props.level })">
+  <div :class="ui.base({ class: props.class, level: props.level })">
     <slot />
   </div>
 </template>

@@ -30,7 +30,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.accor
 </script>
 
 <template>
-  <div :class="ui({ class: props.class })">
+  <div :class="ui.base({ class: props.class })">
     <slot>
       {{ description }}
     </slot>

@@ -28,7 +28,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.p || 
 </script>
 
 <template>
-  <p :class="ui({ class: props.class })">
+  <p :class="ui.base({ class: props.class })">
     <slot />
   </p>
 </template>

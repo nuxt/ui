@@ -37,7 +37,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageList || 
 </script>
 
 <template>
-  <Primitive :as="as" role="list" :class="ui({ class: props.class, divide: props.divide })">
+  <Primitive :as="as" role="list" :class="ui.base({ class: props.class, divide: props.divide })">
     <slot />
   </Primitive>
 </template>

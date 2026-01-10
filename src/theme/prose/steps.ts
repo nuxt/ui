@@ -1,5 +1,7 @@
 export default {
-  base: 'ms-4 border-s border-default ps-8 [counter-reset:step]',
+  slots: {
+    base: 'ms-4 border-s border-default ps-8 [counter-reset:step]'
+  },
   variants: {
     level: {
       2: '[&>h2]:[counter-increment:step] [&>h2]:relative [&>h2]:before:absolute [&>h2]:before:size-8 [&>h2]:before:bg-elevated [&>h2]:before:rounded-full [&>h2]:before:font-semibold [&>h2]:before:text-sm [&>h2]:before:tabular-nums [&>h2]:before:inline-flex [&>h2]:before:items-center [&>h2]:before:justify-center [&>h2]:before:ring-4 [&>h2]:before:ring-bg [&>h2]:before:-ms-[48.5px] [&>h2]:before:-mt-0 [&>h2]:before:content-[counter(step)] [&>h2>a>span.absolute]:hidden',

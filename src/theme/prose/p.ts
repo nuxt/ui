@@ -1,3 +1,5 @@
 export default {
-  base: 'my-5 leading-7 text-pretty'
+  slots: {
+    base: 'my-5 leading-7 text-pretty'
+  }
 }

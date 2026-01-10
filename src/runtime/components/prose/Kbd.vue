@@ -25,5 +25,5 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.kbd |
 </script>
 
 <template>
-  <UKbd :value="value" :class="ui({ class: props.class })" />
+  <UKbd :value="value" :class="ui.base({ class: props.class })" />
 </template>

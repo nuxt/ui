@@ -33,7 +33,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.code 
 </script>
 
 <template>
-  <code :class="ui({ class: (props.class || '').split(',').join(' '), color: props.color })">
+  <code :class="ui.base({ class: (props.class || '').split(',').join(' '), color: props.color })">
     <slot />
   </code>
 </template>

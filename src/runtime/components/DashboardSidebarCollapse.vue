@@ -56,7 +56,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSid
       'aria-label': sidebarCollapsed ? t('dashboardSidebarCollapse.expand') : t('dashboardSidebarCollapse.collapse'),
       ...$attrs
     }"
-    :class="ui({ class: props.class, side: props.side })"
+    :class="ui.base({ class: props.class, side: props.side })"
     @click="collapseSidebar?.(!sidebarCollapsed)"
   />
 </template>

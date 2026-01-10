@@ -96,3 +96,42 @@ export function applyDefaultVariants(result: any, defaultVariants?: { color?: st
 
   return result
 }
+
+/**
+ * Normalize theme config to support backward compatibility with flat base structure
+ * Converts { base: '...' } to { slots: { base: '...' } } for components that were migrated
+ * @param config - The theme config from app.config
+ * @returns The normalized config with slots structure
+ */
+export function normalizeThemeConfig(config: any): any {
+  if (!config) return config
+
+  // Already has slots structure - no normalization needed
+  if (config.slots) {
+    // Handle edge case: both base and slots.base exist
+    if (config.base) {
+      const { base, ...rest } = config
+      return {
+        ...rest,
+        slots: {
+          ...config.slots,
+          base: Array.isArray(config.slots.base)
+            ? [...config.slots.base, base]
+            : [config.slots.base, base]
+        }
+      }
+    }
+    return config
+  }
+
+  // Normalize flat base to slots.base
+  if (config.base) {
+    const { base, ...rest } = config
+    return {
+      ...rest,
+      slots: { base }
+    }
+  }
+
+  return config
+}

@@ -25,5 +25,5 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.icon 
 </script>
 
 <template>
-  <UIcon :name="name" :class="ui({ class: props.class })" />
+  <UIcon :name="name" :class="ui.base({ class: props.class })" />
 </template>

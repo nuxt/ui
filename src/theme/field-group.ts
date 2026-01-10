@@ -19,7 +19,9 @@ export const fieldGroupVariantWithRoot = {
 }
 
 export default {
-  base: 'relative',
+  slots: {
+    base: 'relative'
+  },
   variants: {
     size: {
       xs: '',

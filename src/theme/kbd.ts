@@ -1,7 +1,9 @@
 import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
-  base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase',
+  slots: {
+    base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase'
+  },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),

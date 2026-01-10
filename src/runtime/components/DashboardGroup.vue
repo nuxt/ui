@@ -63,7 +63,7 @@ provideDashboardContext({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: props.class })">
+  <Primitive :as="as" :class="ui.base({ class: props.class })">
     <slot />
   </Primitive>
 </template>

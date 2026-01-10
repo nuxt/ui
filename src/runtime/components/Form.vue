@@ -448,7 +448,7 @@ defineExpose(api)
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
-    :class="ui({ class: props.class })"
+    :class="ui.base({ class: props.class })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot :errors="errors" :loading="loading" />

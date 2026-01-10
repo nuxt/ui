@@ -31,7 +31,7 @@ defineSlots<ProseASlots>()
 </script>
 
 <template>
-  <ULink :href="href" :target="target" :class="ui({ class: props.class })" raw>
+  <ULink :href="href" :target="target" :class="ui.base({ class: props.class })" raw>
     <slot />
   </ULink>
 </template>

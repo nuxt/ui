@@ -29,7 +29,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.badge
 </script>
 
 <template>
-  <UBadge color="primary" variant="subtle" :class="ui({ class: props.class })">
+  <UBadge color="primary" variant="subtle" :class="ui.base({ class: props.class })">
     <slot mdc-unwrap="p" />
   </UBadge>
 </template>

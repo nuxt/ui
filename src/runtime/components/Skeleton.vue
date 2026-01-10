@@ -35,7 +35,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.skeleton || 
     aria-label="loading"
     aria-live="polite"
     role="alert"
-    :class="ui({ class: props.class })"
+    :class="ui.base({ class: props.class })"
   >
     <slot />
   </Primitive>

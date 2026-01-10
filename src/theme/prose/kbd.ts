@@ -1,3 +1,5 @@
 export default {
-  base: 'align-text-top'
+  slots: {
+    base: 'align-text-top'
+  }
 }

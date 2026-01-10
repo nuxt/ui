@@ -24,17 +24,18 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
+import { normalizeThemeConfig } from '../../utils/theme'
 
 const props = defineProps<ContainerProps>()
 defineSlots<ContainerSlots>()
 
 const appConfig = useAppConfig() as Container['AppConfig']
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.container || {}) }))
+const ui = computed(() => tv({ extend: tv(theme), ...normalizeThemeConfig(appConfig.ui?.container || {}) }))
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: props.class })">
+  <Primitive :as="as" :class="ui.base({ class: props.class })">
     <slot />
   </Primitive>
 </template>

@@ -28,7 +28,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.block
 </script>
 
 <template>
-  <blockquote :class="ui({ class: props.class })">
+  <blockquote :class="ui.base({ class: props.class })">
     <slot />
   </blockquote>
 </template>

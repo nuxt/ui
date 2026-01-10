@@ -1,7 +1,9 @@
 import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
-  base: 'focus-visible:outline-primary',
+  slots: {
+    base: 'focus-visible:outline-primary'
+  },
   variants: {
     active: {
       true: 'text-primary',

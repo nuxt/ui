@@ -37,7 +37,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardRes
   <Primitive
     :as="as"
     role="separator"
-    :class="ui({ class: props.class })"
+    :class="ui.base({ class: props.class })"
   >
     <slot />
   </Primitive>
