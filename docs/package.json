@@ -17,7 +17,6 @@
     "@vercel/analytics": "^1.6.1",
     "@vueuse/nuxt": "^13.9.0",
     "date-fns": "^4.1.0",
-    "h3": "1.15.4",
     "joi": "^18.0.2",
     "nuxt": "^4.1.2",
     "nuxt-component-meta": "^0.16.0",
