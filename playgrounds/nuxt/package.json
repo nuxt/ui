@@ -19,6 +19,7 @@
     "@tiptap/extension-text-align": "^3.15.3",
     "ai": "^6.0.3",
     "nuxt": "^4.2.2",
+    "tailwindcss": "^4.1.18",
     "zod": "^4.2.1"
   },
   "devDependencies": {

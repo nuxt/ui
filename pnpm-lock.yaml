@@ -442,12 +442,18 @@ importers:
       superstruct:
         specifier: ^2.0.2
         version: 2.0.2
+      tailwindcss:
+        specifier: ^4.1.18
+        version: 4.1.18
       tiptap-extension-code-block-shiki:
         specifier: ^1.0.0
         version: 1.0.0(@tiptap/core@3.15.3(@tiptap/pm@3.15.3))(@tiptap/pm@3.15.3)(shiki@3.20.0)
       ufo:
         specifier: ^1.6.1
         version: 1.6.1
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
       valibot:
         specifier: ^1.2.0
         version: 1.2.0(typescript@5.8.3)
@@ -493,6 +499,9 @@ importers:
       nuxt:
         specifier: ^4.2.2
         version: 4.2.2(@parcel/watcher@2.5.1)(@types/node@24.7.0)(@vue/compiler-sfc@3.5.25)(better-sqlite3@12.5.0)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.5.0))(eslint@9.39.2(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.5.1)(meow@13.2.0)(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vite@7.2.7(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.2))(vue-tsc@3.2.1(typescript@5.8.3))(yaml@2.8.2)
+      tailwindcss:
+        specifier: ^4.1.18
+        version: 4.1.18
       zod:
         specifier: ^4.2.1
         version: 4.2.1
@@ -515,6 +524,9 @@ importers:
       '@tiptap/extension-text-align':
         specifier: ^3.15.3
         version: 3.15.3(@tiptap/core@3.15.3(@tiptap/pm@3.15.3))
+      tailwindcss:
+        specifier: ^4.1.18
+        version: 4.1.18
       vue:
         specifier: ^3.5.25
         version: 3.5.25(typescript@5.8.3)
