@@ -2,8 +2,7 @@
 <script lang="ts">
 import type { Ref, WatchOptions, ComponentPublicInstance } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { Cell, Column, Header, RowData, TableMeta } from '@tanstack/table-core'
-import type {
+import type { Cell, Column, Header, RowData, TableMeta,
   CellContext,
   ColumnDef,
   ColumnFiltersOptions,
