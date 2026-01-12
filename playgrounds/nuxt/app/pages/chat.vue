@@ -237,11 +237,14 @@ const messageActions = [
           </UChatReasoning>
 
           <MDC
-            v-else-if="part.type === 'text'"
+            v-if="part.type === 'text' && message.role === 'assistant'"
             :value="part.text"
             :cache-key="`${message.id}-${index}-${part.text.length}`"
             class="*:first:mt-0 *:last:mb-0"
           />
+          <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">
+            {{ part.text }}
+          </p>
         </template>
       </template>
     </UChatMessages>
