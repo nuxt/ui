@@ -37,19 +37,19 @@ Kickstart your project with one of our ready-to-use Nuxt UI templates or follow 
 ## Installation
 
 ```bash [pnpm]
-pnpm add @nuxt/ui
+pnpm add @nuxt/ui tailwindcss
 ```
 
 ```bash [yarn]
-yarn add @nuxt/ui
+yarn add @nuxt/ui tailwindcss
 ```
 
 ```bash [npm]
-npm install @nuxt/ui
+npm install @nuxt/ui tailwindcss
 ```
 
 ```bash [bun]
-bun add @nuxt/ui
+bun add @nuxt/ui tailwindcss
 ```
 
 ### Nuxt
