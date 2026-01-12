@@ -394,9 +394,6 @@ importers:
       capture-website:
         specifier: ^5.1.0
         version: 5.1.0(typescript@5.8.3)
-      h3:
-        specifier: ^1.15.4
-        version: 1.15.4
       joi:
         specifier: ^18.0.2
         version: 18.0.2
