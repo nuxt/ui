@@ -484,6 +484,9 @@ importers:
       '@internationalized/date':
         specifier: ^3.10.1
         version: 3.10.1
+      '@nuxt/content':
+        specifier: ^3.10.0
+        version: 3.10.0(better-sqlite3@12.5.0)(magicast@0.5.1)(valibot@1.2.0(typescript@5.8.3))
       '@nuxt/ui':
         specifier: workspace:*
         version: link:../..
