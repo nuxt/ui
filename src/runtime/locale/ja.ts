@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'コードをクリップボードにコピー'
       }
     },
+    chatReasoning: {
+      thinking: '考え中...',
+      thoughtFewSeconds: '数秒間考えました',
+      thoughtSeconds: '{duration}秒間考えました',
+      thoughtMinute: '{duration}分間考えました',
+      thoughtMinutes: '{duration}分間考えました'
+    },
     selectMenu: {
       create: '"{label}"を作成',
       noData: 'データがありません',

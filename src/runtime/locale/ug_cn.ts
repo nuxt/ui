@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
         copy: 'كۆچۈرۈش'
       }
     },
+    chatReasoning: {
+      thinking: 'ئويلاۋاتىدۇ...',
+      thoughtFewSeconds: 'بىر نەچچە سېكۇنت ئويلىدى',
+      thoughtSeconds: '{duration} سېكۇنت ئويلىدى',
+      thoughtMinute: '{duration} مىنۇت ئويلىدى',
+      thoughtMinutes: '{duration} مىنۇت ئويلىدى'
+    },
     selectMenu: {
       create: '"{label}" نى قۇرۇش',
       noData: 'سانلىق مەلۇمات يوق',

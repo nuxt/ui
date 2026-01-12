@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopijuoti kodą į iškarpinę'
       }
     },
+    chatReasoning: {
+      thinking: 'Galvoja...',
+      thoughtFewSeconds: 'Galvojo kelias sekundes',
+      thoughtSeconds: 'Galvojo {duration} sekundes',
+      thoughtMinute: 'Galvojo {duration} minutę',
+      thoughtMinutes: 'Galvojo {duration} minutes'
+    },
     selectMenu: {
       create: 'Sukurti „{label}"',
       noData: 'Nėra duomenų',

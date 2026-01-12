@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopiatu kodea clipboard-era'
       }
     },
+    chatReasoning: {
+      thinking: 'Pentsatzen...',
+      thoughtFewSeconds: 'Segundo batzuk pentsatu du',
+      thoughtSeconds: '{duration} segundo pentsatu du',
+      thoughtMinute: '{duration} minutu pentsatu du',
+      thoughtMinutes: '{duration} minutu pentsatu du'
+    },
     selectMenu: {
       create: 'Sortu {label}',
       noData: 'Daturik gabe',

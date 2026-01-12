@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kodu panoya kopyala'
       }
     },
+    chatReasoning: {
+      thinking: 'Düşünüyor...',
+      thoughtFewSeconds: 'Birkaç saniye düşündü',
+      thoughtSeconds: '{duration} saniye düşündü',
+      thoughtMinute: '{duration} dakika düşündü',
+      thoughtMinutes: '{duration} dakika düşündü'
+    },
     selectMenu: {
       create: '"{label}" oluştur',
       noData: 'Veri yok',

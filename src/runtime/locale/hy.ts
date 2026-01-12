@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Պատճենել կոդը սեղմատախտակին'
       }
     },
+    chatReasoning: {
+      thinking: 'Thinking...',
+      thoughtFewSeconds: 'Thought for a few seconds',
+      thoughtSeconds: 'Thought for {duration} seconds',
+      thoughtMinute: 'Thought for {duration} minute',
+      thoughtMinutes: 'Thought for {duration} minutes'
+    },
     selectMenu: {
       create: 'Ստեղծել "{label}"',
       noData: 'Տվյալներ չկան',

@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
         copy: 'نسخ الكود إلى الحافظة'
       }
     },
+    chatReasoning: {
+      thinking: 'يفكر...',
+      thoughtFewSeconds: 'فكر لبضع ثوانٍ',
+      thoughtSeconds: 'فكر لمدة {duration} ثانية',
+      thoughtMinute: 'فكر لمدة {duration} دقيقة',
+      thoughtMinutes: 'فكر لمدة {duration} دقائق'
+    },
     selectMenu: {
       create: 'إنشاء "{label}"',
       noData: 'لا توجد بيانات',

@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Copiar código ao portapapeis'
       }
     },
+    chatReasoning: {
+      thinking: 'Pensando...',
+      thoughtFewSeconds: 'Pensou uns segundos',
+      thoughtSeconds: 'Pensou {duration} segundos',
+      thoughtMinute: 'Pensou {duration} minuto',
+      thoughtMinutes: 'Pensou {duration} minutos'
+    },
     selectMenu: {
       create: 'Crear "{label}"',
       noData: 'Sen datos',

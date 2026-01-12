@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
         copy: 'העתק קוד ללוח'
       }
     },
+    chatReasoning: {
+      thinking: 'חושב...',
+      thoughtFewSeconds: 'חשב כמה שניות',
+      thoughtSeconds: 'חשב {duration} שניות',
+      thoughtMinute: 'חשב {duration} דקה',
+      thoughtMinutes: 'חשב {duration} דקות'
+    },
     selectMenu: {
       create: 'צור "{label}"',
       noData: 'אין נתונים',

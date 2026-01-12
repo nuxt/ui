@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Кодду алмашуу буферине көчүрүү'
       }
     },
+    chatReasoning: {
+      thinking: 'Ойлонуп жатат...',
+      thoughtFewSeconds: 'Бир нече секунд ойлонду',
+      thoughtSeconds: '{duration} секунд ойлонду',
+      thoughtMinute: '{duration} мүнөт ойлонду',
+      thoughtMinutes: '{duration} мүнөт ойлонду'
+    },
     selectMenu: {
       create: '"{label}" жасоо',
       noData: 'Маалымат жок',

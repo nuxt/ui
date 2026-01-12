@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Koddan buferga nusxa olish'
       }
     },
+    chatReasoning: {
+      thinking: 'O\'ylayapti...',
+      thoughtFewSeconds: 'Bir necha soniya o\'yladi',
+      thoughtSeconds: '{duration} soniya o\'yladi',
+      thoughtMinute: '{duration} daqiqa o\'yladi',
+      thoughtMinutes: '{duration} daqiqa o\'yladi'
+    },
     selectMenu: {
       create: '"{label}" yaratish',
       noData: 'Maʼlumot yoʻq',

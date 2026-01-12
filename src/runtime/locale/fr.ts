@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Copier le code dans le presse-papiers'
       }
     },
+    chatReasoning: {
+      thinking: 'Réflexion...',
+      thoughtFewSeconds: 'A réfléchi quelques secondes',
+      thoughtSeconds: 'A réfléchi {duration} secondes',
+      thoughtMinute: 'A réfléchi {duration} minute',
+      thoughtMinutes: 'A réfléchi {duration} minutes'
+    },
     selectMenu: {
       create: 'Créer "{label}"',
       noData: 'Aucune donnée',

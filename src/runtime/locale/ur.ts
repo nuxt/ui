@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
         copy: 'کوڈ کاپی کریں'
       }
     },
+    chatReasoning: {
+      thinking: 'سوچ رہا ہے...',
+      thoughtFewSeconds: 'چند سیکنڈ سوچا',
+      thoughtSeconds: '{duration} سیکنڈ سوچا',
+      thoughtMinute: '{duration} منٹ سوچا',
+      thoughtMinutes: '{duration} منٹ سوچا'
+    },
     selectMenu: {
       create: '"{label}" بنائیں',
       noData: 'کوئی ڈیٹا نہیں',

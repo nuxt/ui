@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Copiază codul în clipboard'
       }
     },
+    chatReasoning: {
+      thinking: 'Gândește...',
+      thoughtFewSeconds: 'A gândit câteva secunde',
+      thoughtSeconds: 'A gândit {duration} secunde',
+      thoughtMinute: 'A gândit {duration} minut',
+      thoughtMinutes: 'A gândit {duration} minute'
+    },
     selectMenu: {
       create: 'Creează "{label}"',
       noData: 'Nu există date',

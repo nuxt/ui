@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Salin kode ke clipboard'
       }
     },
+    chatReasoning: {
+      thinking: 'Berpikir...',
+      thoughtFewSeconds: 'Berpikir beberapa detik',
+      thoughtSeconds: 'Berpikir {duration} detik',
+      thoughtMinute: 'Berpikir {duration} menit',
+      thoughtMinutes: 'Berpikir {duration} menit'
+    },
     selectMenu: {
       create: 'Buat "{label}"',
       noData: 'Tidak ada data',

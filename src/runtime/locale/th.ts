@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'คัดลอกโค้ดไปยังคลิปบอร์ด'
       }
     },
+    chatReasoning: {
+      thinking: 'กำลังคิด...',
+      thoughtFewSeconds: 'คิดไปสักครู่',
+      thoughtSeconds: 'คิดไป {duration} วินาที',
+      thoughtMinute: 'คิดไป {duration} นาที',
+      thoughtMinutes: 'คิดไป {duration} นาที'
+    },
     selectMenu: {
       create: 'สร้าง "{label}"',
       noData: 'ไม่มีข้อมูล',

@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'ចម្លងកូដទៅក្ដារតម្បៀតខ្ទាស់'
       }
     },
+    chatReasoning: {
+      thinking: 'កំពុងគិត...',
+      thoughtFewSeconds: 'បានគិតប៉ុន្មានវិនាទី',
+      thoughtSeconds: 'បានគិត {duration} វិនាទី',
+      thoughtMinute: 'បានគិត {duration} នាទី',
+      thoughtMinutes: 'បានគិត {duration} នាទី'
+    },
     selectMenu: {
       create: 'បង្កើត "{label}"',
       noData: 'មិនមានទិន្នន័យ',

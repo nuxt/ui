@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Кодыг санах ойд хуулах'
       }
     },
+    chatReasoning: {
+      thinking: 'Бодож байна...',
+      thoughtFewSeconds: 'Хэдэн секунд бодсон',
+      thoughtSeconds: '{duration} секунд бодсон',
+      thoughtMinute: '{duration} минут бодсон',
+      thoughtMinutes: '{duration} минут бодсон'
+    },
     selectMenu: {
       create: '"{label}" үүсгэх',
       noData: 'Мэдээлэл байхгүй',

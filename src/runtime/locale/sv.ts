@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopiera kod till urklipp'
       }
     },
+    chatReasoning: {
+      thinking: 'Tänker...',
+      thoughtFewSeconds: 'Tänkte i några sekunder',
+      thoughtSeconds: 'Tänkte i {duration} sekunder',
+      thoughtMinute: 'Tänkte i {duration} minut',
+      thoughtMinutes: 'Tänkte i {duration} minuter'
+    },
     selectMenu: {
       create: 'Skapa "{label}"',
       noData: 'Inga data',

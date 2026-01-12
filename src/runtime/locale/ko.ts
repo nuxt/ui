@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: '코드를 클립보드에 복사'
       }
     },
+    chatReasoning: {
+      thinking: '생각 중...',
+      thoughtFewSeconds: '몇 초 동안 생각했습니다',
+      thoughtSeconds: '{duration}초 동안 생각했습니다',
+      thoughtMinute: '{duration}분 동안 생각했습니다',
+      thoughtMinutes: '{duration}분 동안 생각했습니다'
+    },
     selectMenu: {
       create: '"{label}" 생성',
       noData: '데이터가 없습니다.',

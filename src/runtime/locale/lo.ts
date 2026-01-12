@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'ຄັດລອກໂຄ້ດ'
       }
     },
+    chatReasoning: {
+      thinking: 'ກຳລັງຄິດ...',
+      thoughtFewSeconds: 'ຄິດສອງສາມວິນາທີ',
+      thoughtSeconds: 'ຄິດ {duration} ວິນາທີ',
+      thoughtMinute: 'ຄິດ {duration} ນາທີ',
+      thoughtMinutes: 'ຄິດ {duration} ນາທີ'
+    },
     selectMenu: {
       create: 'ສ້າງ "{label}"',
       noData: 'ບໍ່ມີຂໍ້ມູນ',

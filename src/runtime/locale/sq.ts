@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopjo kodin në kujtesë'
       }
     },
+    chatReasoning: {
+      thinking: 'Duke menduar...',
+      thoughtFewSeconds: 'Mendoi disa sekonda',
+      thoughtSeconds: 'Mendoi {duration} sekonda',
+      thoughtMinute: 'Mendoi {duration} minutë',
+      thoughtMinutes: 'Mendoi {duration} minuta'
+    },
     selectMenu: {
       create: 'Krijo "{label}"',
       noData: 'Nuk ka të dhëna',

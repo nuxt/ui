@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kód másolása a vágólapra'
       }
     },
+    chatReasoning: {
+      thinking: 'Gondolkodik...',
+      thoughtFewSeconds: 'Néhány másodpercig gondolkodott',
+      thoughtSeconds: '{duration} másodpercig gondolkodott',
+      thoughtMinute: '{duration} percig gondolkodott',
+      thoughtMinutes: '{duration} percig gondolkodott'
+    },
     selectMenu: {
       create: '"{label}" létrehozása',
       noData: 'Nincs adat',

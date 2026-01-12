@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
         copy: 'کپی کد در کلیپ‌بورد'
       }
     },
+    chatReasoning: {
+      thinking: 'در حال فکر کردن...',
+      thoughtFewSeconds: 'چند ثانیه فکر کرد',
+      thoughtSeconds: '{duration} ثانیه فکر کرد',
+      thoughtMinute: '{duration} دقیقه فکر کرد',
+      thoughtMinutes: '{duration} دقیقه فکر کرد'
+    },
     selectMenu: {
       create: 'ایجاد "{label}"',
       noData: 'داده‌ای موجود نیست',

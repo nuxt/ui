@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Code naar klembord kopiëren'
       }
     },
+    chatReasoning: {
+      thinking: 'Denkt na...',
+      thoughtFewSeconds: 'Dacht een paar seconden na',
+      thoughtSeconds: 'Dacht {duration} seconden na',
+      thoughtMinute: 'Dacht {duration} minuut na',
+      thoughtMinutes: 'Dacht {duration} minuten na'
+    },
     selectMenu: {
       create: '"{label}" creëren',
       noData: 'Geen gegevens',

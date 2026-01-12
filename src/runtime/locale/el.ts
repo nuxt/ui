@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Αντιγραφή κώδικα στο πρόχειρο'
       }
     },
+    chatReasoning: {
+      thinking: 'Σκέφτεται...',
+      thoughtFewSeconds: 'Σκέφτηκε για λίγα δευτερόλεπτα',
+      thoughtSeconds: 'Σκέφτηκε για {duration} δευτερόλεπτα',
+      thoughtMinute: 'Σκέφτηκε για {duration} λεπτό',
+      thoughtMinutes: 'Σκέφτηκε για {duration} λεπτά'
+    },
     selectMenu: {
       create: 'Δημιουργία "{label}"',
       noData: 'Δεν υπάρχουν δεδομένα',

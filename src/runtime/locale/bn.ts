@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'কোড ক্লিপবোর্ডে কপি করুন'
       }
     },
+    chatReasoning: {
+      thinking: 'চিন্তা করছে...',
+      thoughtFewSeconds: 'কয়েক সেকেন্ড চিন্তা করেছে',
+      thoughtSeconds: '{duration} সেকেন্ড চিন্তা করেছে',
+      thoughtMinute: '{duration} মিনিট চিন্তা করেছে',
+      thoughtMinutes: '{duration} মিনিট চিন্তা করেছে'
+    },
     selectMenu: {
       create: '"{label}" তৈরি করুন',
       noData: 'কোন তথ্য নেই',

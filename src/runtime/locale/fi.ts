@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopioi koodi leikepöydälle'
       }
     },
+    chatReasoning: {
+      thinking: 'Ajattelee...',
+      thoughtFewSeconds: 'Ajatteli muutaman sekunnin',
+      thoughtSeconds: 'Ajatteli {duration} sekuntia',
+      thoughtMinute: 'Ajatteli {duration} minuutin',
+      thoughtMinutes: 'Ajatteli {duration} minuuttia'
+    },
     selectMenu: {
       create: 'Luo "{label}"',
       noData: 'Ei tietoja',

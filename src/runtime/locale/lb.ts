@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Code an d\'Zwëschspäicher kopéieren'
       }
     },
+    chatReasoning: {
+      thinking: 'Denkt no...',
+      thoughtFewSeconds: 'Huet e puer Sekonnen nogeduecht',
+      thoughtSeconds: 'Huet {duration} Sekonnen nogeduecht',
+      thoughtMinute: 'Huet {duration} Minutt nogeduecht',
+      thoughtMinutes: 'Huet {duration} Minutten nogeduecht'
+    },
     selectMenu: {
       create: '"{label}" erstellen',
       noData: 'Keng Donnéeën',

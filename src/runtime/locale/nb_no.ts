@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopier kode til utklippstavle'
       }
     },
+    chatReasoning: {
+      thinking: 'Tenker...',
+      thoughtFewSeconds: 'Tenkte i noen sekunder',
+      thoughtSeconds: 'Tenkte i {duration} sekunder',
+      thoughtMinute: 'Tenkte i {duration} minutt',
+      thoughtMinutes: 'Tenkte i {duration} minutter'
+    },
     selectMenu: {
       create: 'Opprett "{label}"',
       noData: 'Ingen data',

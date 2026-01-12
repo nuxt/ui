@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Копирай кода в клипборда'
       }
     },
+    chatReasoning: {
+      thinking: 'Мисли...',
+      thoughtFewSeconds: 'Мисли няколко секунди',
+      thoughtSeconds: 'Мисли {duration} секунди',
+      thoughtMinute: 'Мисли {duration} минута',
+      thoughtMinutes: 'Мисли {duration} минути'
+    },
     selectMenu: {
       create: 'Създайте "{label}"',
       noData: 'Няма данни',

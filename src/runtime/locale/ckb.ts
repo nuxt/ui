@@ -113,6 +113,13 @@ export default defineLocale<Messages>({
         copy: 'لەبەرگرتنەوەی کۆد'
       }
     },
+    chatReasoning: {
+      thinking: 'بیرکردنەوە...',
+      thoughtFewSeconds: 'چەند چرکەیەک بیری کردەوە',
+      thoughtSeconds: '{duration} چرکە بیری کردەوە',
+      thoughtMinute: '{duration} خولەک بیری کردەوە',
+      thoughtMinutes: '{duration} خولەک بیری کردەوە'
+    },
     selectMenu: {
       create: '"{label}" زیادکردنی',
       noData: 'هیچ داتایەک نییە',

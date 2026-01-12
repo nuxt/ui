@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Скопировать код в буфер обмена'
       }
     },
+    chatReasoning: {
+      thinking: 'Думает...',
+      thoughtFewSeconds: 'Думал несколько секунд',
+      thoughtSeconds: 'Думал {duration} секунд',
+      thoughtMinute: 'Думал {duration} минуту',
+      thoughtMinutes: 'Думал {duration} минут'
+    },
     selectMenu: {
       create: 'Создать "{label}"',
       noData: 'Нет данных',

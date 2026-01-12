@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopeeri kood lõikelauale'
       }
     },
+    chatReasoning: {
+      thinking: 'Mõtleb...',
+      thoughtFewSeconds: 'Mõtles mõne sekundi',
+      thoughtSeconds: 'Mõtles {duration} sekundit',
+      thoughtMinute: 'Mõtles {duration} minuti',
+      thoughtMinutes: 'Mõtles {duration} minutit'
+    },
     selectMenu: {
       create: 'Loo "{label}"',
       noData: 'Pole andmeid',

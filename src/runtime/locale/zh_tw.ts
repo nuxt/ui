@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: '複製程式碼到剪貼簿'
       }
     },
+    chatReasoning: {
+      thinking: '思考中...',
+      thoughtFewSeconds: '思考了幾秒鐘',
+      thoughtSeconds: '思考了 {duration} 秒',
+      thoughtMinute: '思考了 {duration} 分鐘',
+      thoughtMinutes: '思考了 {duration} 分鐘'
+    },
     selectMenu: {
       create: '建立「{label}」',
       noData: '沒有資料',

@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopiraj kod u međuspremnik'
       }
     },
+    chatReasoning: {
+      thinking: 'Razmišlja...',
+      thoughtFewSeconds: 'Razmišljao nekoliko sekundi',
+      thoughtSeconds: 'Razmišljao {duration} sekundi',
+      thoughtMinute: 'Razmišljao {duration} minutu',
+      thoughtMinutes: 'Razmišljao {duration} minuta'
+    },
     selectMenu: {
       create: 'Stvori "{label}"',
       noData: 'Nema podataka',

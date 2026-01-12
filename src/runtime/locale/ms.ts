@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Salin kod ke papan klip'
       }
     },
+    chatReasoning: {
+      thinking: 'Berfikir...',
+      thoughtFewSeconds: 'Berfikir beberapa saat',
+      thoughtSeconds: 'Berfikir {duration} saat',
+      thoughtMinute: 'Berfikir {duration} minit',
+      thoughtMinutes: 'Berfikir {duration} minit'
+    },
     selectMenu: {
       create: 'Cipta "{label}"',
       noData: 'Tiada data',

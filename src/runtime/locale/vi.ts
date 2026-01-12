@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Sao chép mã vào bộ nhớ tạm'
       }
     },
+    chatReasoning: {
+      thinking: 'Đang suy nghĩ...',
+      thoughtFewSeconds: 'Đã suy nghĩ vài giây',
+      thoughtSeconds: 'Đã suy nghĩ {duration} giây',
+      thoughtMinute: 'Đã suy nghĩ {duration} phút',
+      thoughtMinutes: 'Đã suy nghĩ {duration} phút'
+    },
     selectMenu: {
       create: 'Tạo "{label}"',
       noData: 'Không có dữ liệu',

@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Kopírovať kód do schránky'
       }
     },
+    chatReasoning: {
+      thinking: 'Premýšľa...',
+      thoughtFewSeconds: 'Premýšľal niekoľko sekúnd',
+      thoughtSeconds: 'Premýšľal {duration} sekúnd',
+      thoughtMinute: 'Premýšľal {duration} minútu',
+      thoughtMinutes: 'Premýšľal {duration} minút'
+    },
     selectMenu: {
       create: 'Vytvoriť "{label}"',
       noData: 'Žiadne dáta',

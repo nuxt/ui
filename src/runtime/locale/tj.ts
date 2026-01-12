@@ -112,6 +112,13 @@ export default defineLocale<Messages>({
         copy: 'Нусха бардоштан'
       }
     },
+    chatReasoning: {
+      thinking: 'Фикр мекунад...',
+      thoughtFewSeconds: 'Якчанд сония фикр кард',
+      thoughtSeconds: '{duration} сония фикр кард',
+      thoughtMinute: '{duration} дақиқа фикр кард',
+      thoughtMinutes: '{duration} дақиқа фикр кард'
+    },
     selectMenu: {
       create: '"{label}" созед',
       noData: 'Маълумот нест',
