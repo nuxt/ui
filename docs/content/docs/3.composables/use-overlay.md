@@ -236,9 +236,11 @@ function updateModalTitle() {
 </script>
 ```
 
-## Example
+## Examples
 
-Here's a complete example of how to use the `useOverlay` composable:
+### With multiple overlays
+
+This example demonstrates how to manage multiple overlays and pass data between them:
 
 ```vue
 <script setup lang="ts">
@@ -247,9 +249,8 @@ import { ModalA, ModalB, SlideoverA } from '#components'
 const overlay = useOverlay()
 
 // Create with default props
-const modalA = overlay.create(ModalA, { title: 'Welcome' })
+const modalA = overlay.create(ModalA, { props: { title: 'Welcome' } })
 const modalB = overlay.create(ModalB)
-
 const slideoverA = overlay.create(SlideoverA)
 
 const openModalA = () => {
@@ -259,9 +260,7 @@ const openModalA = () => {
 
 const openModalB = async () => {
   // Open modalB, and wait for its result
-  const modalBInstance = modalB.open()
-
-  const input = await modalBInstance
+  const input = await modalB.open()
 
   // Pass the result from modalB to the slideover, and open it
   slideoverA.open({ input })
@@ -269,11 +268,93 @@ const openModalB = async () => {
 </script>
 
 <template>
-  <button @click="openModalA">Open Modal</button>
+  <UButton label="Open Modal" @click="openModalA" />
 </template>
 ```
 
 In this example, we're using the `useOverlay` composable to control multiple modals and slideovers.
+
+### Confirm dialog
+
+This example demonstrates how to create a reusable confirm dialog pattern using a custom `useConfirmDialog` composable that wraps `useOverlay`. This approach enables opinionated dialogs tailored to specific business requirements and design preferences.
+
+1. Create a `ConfirmDialog` component that emits a boolean value when closed:
+
+```vue [components/ConfirmDialog.vue]
+<script lang="ts" setup>
+interface ConfirmDialogProps {
+  title?: string
+  description?: string
+}
+
+defineProps<ConfirmDialogProps>()
+
+const emits = defineEmits<{
+  close: [value: boolean]
+}>()
+</script>
+
+<template>
+  <UModal
+    :title="title"
+    :description="description"
+    :dismissible="false"
+    :ui="{ footer: 'justify-end' }"
+  >
+    <template #footer>
+      <UButton label="Cancel" color="neutral" variant="outline" @click="emits('close', false)" />
+      <UButton label="Confirm" color="neutral" @click="emits('close', true)" />
+    </template>
+  </UModal>
+</template>
+```
+
+2. Create a `useConfirmDialog` composable that returns a Promise:
+
+```ts [composables/useConfirmDialog.ts]
+import { ConfirmDialog } from '#components'
+
+export interface ConfirmDialogOptions {
+  title: string
+  description?: string
+}
+
+export const useConfirmDialog = () => {
+  const overlay = useOverlay()
+
+  return (options: ConfirmDialogOptions): Promise<boolean> => {
+    const modal = overlay.create(ConfirmDialog, {
+      destroyOnClose: true,
+      props: options
+    })
+
+    return modal.open()
+  }
+}
+```
+
+3. Use the composable in your components:
+
+```vue
+<script setup lang="ts">
+const confirm = useConfirmDialog()
+
+const handleDelete = async () => {
+  const confirmed = await confirm({
+    title: 'Delete item',
+    description: 'Are you sure you want to delete this item?'
+  })
+
+  if (confirmed) {
+    console.log('Item deleted')
+  }
+}
+</script>
+
+<template>
+  <UButton label="Delete item" @click="handleDelete" />
+</template>
+```
 
 ## Caveats
 
@@ -298,113 +379,4 @@ const modal = overlay.create(LazyModalExample, {
   }
 })
 </script>
-```
-
-## Recipes`
-### Confirm dialog
-
-Create a custom `useConfirmDialog` composable that wraps `useOverlay` to simplify common dialog patterns. This approach enables opinionated dialogs tailored to specific business requirements and design preferences. The following example demonstrates a reusable confirm dialog:
-
-```vue [ConfirmDialog.vue]
-<script lang="ts" setup>
-  interface ConfirmDialogProps {
-    title?: string
-    description?: string
-    onConfirm?: () => void
-    onDismiss?: () => void
-  }
-
-  const props = withDefaults(defineProps<ConfirmDialogProps>(), {    
-    onConfirm: () => {},
-    onDismiss: () => {},
-  })
-
-  const emits = defineEmits<{
-    close: [value?: any]
-  }>()
-
-  const handleConfirm = () => {
-    props.onConfirm()
-    emits("close")
-  }
-
-  const handleDismiss = () => {
-    props.onDismiss()
-    emits("close")
-  }
-</script>
-
-<template>
-  <UModal :dismissible="false" :close="false">
-    <template #header>
-      <div class="relative w-full flex items-start gap-3">
-        <div class="flex-1 min-w-0">
-          <div class="text-base font-semibold">{{ title }}</div>
-          <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ description }}</div>
-        </div>
-        <UButton icon="i-lucide-x" @click="handleDismiss" />
-      </div>
-    </template>
-
-    <template #footer>
-      <div class="flex gap-4">
-        <UButton label="No" @click="handleDismiss" />
-        <UButton label="Yes" @click="handleConfirm" />
-      </div>
-    </template>
-  </UModal>
-</template>
-```
-
-```ts [useConfirmDialog.ts]
-import { ConfirmDialog } from "#components"
-
-export interface ConfirmDialogOptions {
-  title: string
-  description?: string
-  onConfirm?: () => void
-  onDismiss?: () => void
-}
-
-export const useConfirmDialog = () => {
-  const overlay = useOverlay()
-
-  return (options: ConfirmDialogOptions): void => {
-    const modal = overlay.create(ConfirmDialog, {
-      destroyOnClose: true,
-      props: options,
-    })
-
-    modal.open()
-  }
-}
-
-```
-
-#### Basic Usage
-
-```vue
-<script setup lang="ts">
-const confirm = useConfirmDialog()
-
-const handleDelete = () => {
-  confirm({
-    title: "Delete Item",
-    description: "Are you sure you want to delete this item?",
-    onConfirm: () => {
-      // User clicked "Yes"
-      console.log("Item deleted")
-      deleteItem()
-    },
-    onDismiss: () => {
-      // User clicked "No" or X button
-      console.log("Deletion cancelled")
-    }
-  })
-}
-</script>
-
-<template>
-  <UButton @click="handleDelete" label="Delete Item" />
-</template>
 ```
