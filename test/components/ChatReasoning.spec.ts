@@ -18,12 +18,11 @@ describe('ChatReasoning', () => {
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with icon', { props: { ...props, icon: 'i-lucide-brain' } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-chevron-right' } }],
-    ['with thinkingText', { props: { ...props, isStreaming: true, thinkingText: 'Processing...' } }],
-    ['with thoughtText', { props: { ...props, thoughtText: 'Done thinking' } }],
-    ['with thoughtDurationText', { props: { ...props, duration: 10, thoughtDurationText: 'Thought for {duration}s' } }],
+    ['with getThinkingMessage', { props: { ...props, getThinkingMessage: (isStreaming: boolean, duration?: number) => isStreaming ? 'Processing...' : `Done in ${duration}s` } }],
+    // Slots
+    ['with thinkingMessage slot', { props: { ...props, isStreaming: true }, slots: { thinkingMessage: () => 'Custom thinking message' } }],
     ['with class', { props: { ...props, class: 'my-4' } }],
     ['with ui', { props: { ...props, ui: { root: 'bg-muted' } } }],
-    // Slots
     ['with default slot', { props: { open: true }, slots: { default: () => 'Default slot content' } }],
     ['with body slot', { props: { open: true }, slots: { body: () => 'Body slot content' } }],
     ['with trigger slot', { props, slots: { trigger: () => 'Custom trigger' } }]

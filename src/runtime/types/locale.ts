@@ -120,6 +120,8 @@ export type Messages = {
     thinking: string
     thoughtFewSeconds: string
     thoughtSeconds: string
+    thoughtMinutes: string
+    thoughtMinute: string
   }
   selectMenu: {
     create: string

@@ -231,7 +231,6 @@ const messageActions = [
             <template #body>
               <MDC
                 :value="part.text"
-                :cache-key="`${message.id}-reasoning-${index}-${part.text.length}`"
                 class="*:first:mt-0 *:last:mb-0"
               />
             </template>

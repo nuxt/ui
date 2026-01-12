@@ -19,6 +19,7 @@ export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultO
   isStreaming?: boolean
   /**
    * The duration in seconds that the AI spent reasoning.
+   * If not provided, it will be calculated automatically based on streaming time.
    */
   duration?: number
   /**
@@ -34,21 +35,17 @@ export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultO
    */
   trailingIcon?: IconProps['name']
   /**
-   * The text displayed while streaming/thinking.
-   * @defaultValue t('chatReasoning.thinking')
+   * Optional function to customize the thinking message.
+   * @param isStreaming - Whether reasoning is currently streaming
+   * @param duration - Duration in seconds (undefined during streaming, calculated after)
    */
-  thinkingText?: string
+  getThinkingMessage?: (isStreaming: boolean, duration?: number) => string
   /**
-   * The text displayed when thinking is complete (without duration).
-   * @defaultValue t('chatReasoning.thoughtFewSeconds')
+   * The delay in milliseconds before auto-closing when streaming ends.
+   * Set to 0 to disable auto-close.
+   * @defaultValue 1000
    */
-  thoughtText?: string
-  /**
-   * The text displayed when thinking is complete (with duration).
-   * Use {duration} as placeholder for the duration value.
-   * @defaultValue t('chatReasoning.thoughtSeconds')
-   */
-  thoughtDurationText?: string
+  autoCloseDelay?: number
   class?: any
   ui?: ChatReasoning['slots']
 }
@@ -61,6 +58,7 @@ export interface ChatReasoningSlots {
   default(props: { open: boolean }): any
   trigger(props: { open: boolean, isStreaming: boolean, duration: number | undefined }): any
   body(props: { open: boolean }): any
+  thinkingMessage(props: { isStreaming: boolean, duration: number | undefined }): any
 }
 </script>
 
@@ -77,7 +75,8 @@ import UChatShimmer from './ChatShimmer.vue'
 const props = withDefaults(defineProps<ChatReasoningProps>(), {
   defaultOpen: false,
   isStreaming: false,
-  unmountOnHide: true
+  unmountOnHide: true,
+  autoCloseDelay: 1000
 })
 const emits = defineEmits<ChatReasoningEmits>()
 const slots = useSlots()
@@ -92,19 +91,32 @@ const hasContent = computed(() => {
 })
 
 const streamingOpen = ref<boolean | null>(props.isStreaming ? true : null)
+const startTime = ref<number | null>(props.isStreaming ? Date.now() : null)
+const internalDuration = ref<number | undefined>(undefined)
 
 watch(() => props.isStreaming, (streaming, wasStreaming) => {
   if (streaming && !wasStreaming) {
     streamingOpen.value = true
+    startTime.value = Date.now()
   } else if (!streaming && wasStreaming) {
-    setTimeout(() => {
-      streamingOpen.value = false
+    if (startTime.value !== null) {
+      internalDuration.value = Math.ceil((Date.now() - startTime.value) / 1000)
+      startTime.value = null
+    }
+    if (props.autoCloseDelay > 0) {
       setTimeout(() => {
-        streamingOpen.value = null
-      }, 300)
-    }, 500)
+        streamingOpen.value = false
+        setTimeout(() => {
+          streamingOpen.value = null
+        }, 300)
+      }, props.autoCloseDelay)
+    } else {
+      streamingOpen.value = null
+    }
   }
 })
+
+const actualDuration = computed(() => props.duration ?? internalDuration.value)
 
 const controlledOpen = computed(() => {
   if (streamingOpen.value !== null) return streamingOpen.value
@@ -115,17 +127,26 @@ const controlledOpen = computed(() => {
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatReasoning || {}) })())
 
 const thinkingMessage = computed(() => {
-  if (props.isStreaming) {
-    return props.thinkingText || t('chatReasoning.thinking')
+  if (props.getThinkingMessage) {
+    return props.getThinkingMessage(props.isStreaming, actualDuration.value)
   }
-  if (props.duration === undefined) {
-    return props.thoughtText || t('chatReasoning.thoughtFewSeconds')
+
+  if (props.isStreaming || actualDuration.value === 0) {
+    return t('chatReasoning.thinking')
   }
-  const template = props.thoughtDurationText || t('chatReasoning.thoughtSeconds', { duration: props.duration })
-  if (props.thoughtDurationText) {
-    return template.replace('{duration}', String(props.duration))
+  if (actualDuration.value === undefined) {
+    return t('chatReasoning.thoughtFewSeconds')
   }
-  return template
+
+  const duration = actualDuration.value
+  if (duration < 60) {
+    return t('chatReasoning.thoughtSeconds', { duration })
+  }
+
+  const minutes = Math.floor(duration / 60)
+  return minutes === 1
+    ? t('chatReasoning.thoughtMinute', { duration: minutes })
+    : t('chatReasoning.thoughtMinutes', { duration: minutes })
 })
 </script>
 
@@ -138,7 +159,7 @@ const thinkingMessage = computed(() => {
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
     <CollapsibleTrigger as-child :disabled="!hasContent">
-      <slot name="trigger" :open="open" :is-streaming="isStreaming" :duration="duration">
+      <slot name="trigger" :open="open" :is-streaming="isStreaming" :duration="actualDuration">
         <button
           type="button"
           data-slot="trigger"
@@ -146,8 +167,10 @@ const thinkingMessage = computed(() => {
         >
           <UIcon :name="props.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
 
-          <UChatShimmer v-if="isStreaming" :text="thinkingMessage" />
-          <span v-else>{{ thinkingMessage }}</span>
+          <slot name="thinkingMessage" :is-streaming="isStreaming" :duration="actualDuration">
+            <UChatShimmer v-if="isStreaming" :text="thinkingMessage" />
+            <span v-else>{{ thinkingMessage }}</span>
+          </slot>
 
           <UIcon
             v-if="hasContent"

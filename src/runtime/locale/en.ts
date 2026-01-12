@@ -115,7 +115,9 @@ export default defineLocale<Messages>({
     chatReasoning: {
       thinking: 'Thinking...',
       thoughtFewSeconds: 'Thought for a few seconds',
-      thoughtSeconds: 'Thought for {duration} seconds'
+      thoughtSeconds: 'Thought for {duration} seconds',
+      thoughtMinutes: 'Thought for {duration} minutes',
+      thoughtMinute: 'Thought for {duration} minute'
     },
     selectMenu: {
       create: 'Create "{label}"',
