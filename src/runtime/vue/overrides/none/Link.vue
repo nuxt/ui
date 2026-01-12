@@ -71,7 +71,7 @@ export interface LinkSlots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 import { defu } from 'defu'
 import { hasProtocol } from 'ufo'
 import { useAppConfig } from '#imports'
@@ -154,6 +154,20 @@ const linkRel = computed(() => {
 
   return null
 })
+
+const handleNavigation = inject<((event: MouseEvent, context: { href: string, external: boolean, target?: string | null }) => void) | undefined>('nuxtui:router:function')
+
+function navigate(e: MouseEvent) {
+  if (!handleNavigation) {
+    return
+  }
+
+  handleNavigation(e, {
+    href: href.value || '',
+    external: isExternal.value,
+    target: props.target || (isExternal.value ? '_blank' : undefined)
+  })
+}
 </script>
 
 <template>
@@ -165,7 +179,7 @@ const linkRel = computed(() => {
         type,
         disabled,
         href: href,
-        navigate: undefined,
+        navigate: navigate,
         rel: linkRel,
         target: target || (isExternal ? '_blank' : undefined),
         isExternal,
@@ -181,7 +195,7 @@ const linkRel = computed(() => {
       type,
       disabled,
       href: href,
-      navigate: undefined,
+      navigate: navigate,
       rel: linkRel,
       target: target || (isExternal ? '_blank' : undefined),
       isExternal
