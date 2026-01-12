@@ -43,7 +43,7 @@ export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultO
   /**
    * The delay in milliseconds before auto-closing when streaming ends.
    * Set to 0 to disable auto-close.
-   * @defaultValue 1000
+   * @defaultValue 500
    */
   autoCloseDelay?: number
   class?: any
@@ -63,9 +63,8 @@ export interface ChatReasoningSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, useSlots } from 'vue'
-import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
+import { ref, computed, watch, useSlots, onUnmounted } from 'vue'
+import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -76,7 +75,7 @@ const props = withDefaults(defineProps<ChatReasoningProps>(), {
   defaultOpen: false,
   isStreaming: false,
   unmountOnHide: true,
-  autoCloseDelay: 1000
+  autoCloseDelay: 500
 })
 const emits = defineEmits<ChatReasoningEmits>()
 const slots = useSlots()
@@ -84,43 +83,60 @@ const slots = useSlots()
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatReasoning['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'disabled', 'unmountOnHide'), emits)
-
 const hasContent = computed(() => {
-  return !!props.text || !!slots.default || !!slots.body
+  return !!props.text || !!slots.default || !!slots.body || props.isStreaming
 })
 
-const streamingOpen = ref<boolean | null>(props.isStreaming ? true : null)
+const internalOpen = ref(props.open ?? (props.isStreaming ? true : props.defaultOpen))
 const startTime = ref<number | null>(props.isStreaming ? Date.now() : null)
 const internalDuration = ref<number | undefined>(undefined)
+const autoCloseTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 
 watch(() => props.isStreaming, (streaming, wasStreaming) => {
-  if (streaming && !wasStreaming) {
-    streamingOpen.value = true
-    startTime.value = Date.now()
-  } else if (!streaming && wasStreaming) {
+  if (streaming) {
+    if (autoCloseTimeout.value) {
+      clearTimeout(autoCloseTimeout.value)
+      autoCloseTimeout.value = null
+    }
+    if (!wasStreaming) {
+      internalOpen.value = true
+      startTime.value = Date.now()
+    }
+  } else if (wasStreaming) {
     if (startTime.value !== null) {
       internalDuration.value = Math.ceil((Date.now() - startTime.value) / 1000)
       startTime.value = null
     }
     if (props.autoCloseDelay > 0) {
-      setTimeout(() => {
-        streamingOpen.value = false
-        setTimeout(() => {
-          streamingOpen.value = null
-        }, 300)
+      autoCloseTimeout.value = setTimeout(() => {
+        internalOpen.value = false
+        autoCloseTimeout.value = null
       }, props.autoCloseDelay)
-    } else {
-      streamingOpen.value = null
     }
+  }
+}, { immediate: true })
+
+watch(() => props.open, (value) => {
+  if (value !== undefined) {
+    internalOpen.value = value
   }
 })
 
 const actualDuration = computed(() => props.duration ?? internalDuration.value)
 
-const controlledOpen = computed(() => {
-  if (streamingOpen.value !== null) return streamingOpen.value
-  return undefined
+function onOpenChange(value: boolean) {
+  if (autoCloseTimeout.value) {
+    clearTimeout(autoCloseTimeout.value)
+    autoCloseTimeout.value = null
+  }
+  internalOpen.value = value
+  emits('update:open', value)
+}
+
+onUnmounted(() => {
+  if (autoCloseTimeout.value) {
+    clearTimeout(autoCloseTimeout.value)
+  }
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -153,10 +169,12 @@ const thinkingMessage = computed(() => {
 <template>
   <CollapsibleRoot
     v-slot="{ open }"
-    v-bind="rootProps"
-    :open="controlledOpen"
+    :open="internalOpen"
+    :disabled="props.disabled"
+    :unmount-on-hide="props.unmountOnHide"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
+    @update:open="onOpenChange"
   >
     <CollapsibleTrigger as-child :disabled="!hasContent">
       <slot name="trigger" :open="open" :is-streaming="isStreaming" :duration="actualDuration">

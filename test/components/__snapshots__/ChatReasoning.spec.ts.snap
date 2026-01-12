@@ -1,0 +1,146 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ChatReasoning > renders with body slot correctly 1`] = `
+"<div data-state="open" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="true" data-state="open" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!----><span>Thought for a few seconds</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">
+    <div data-slot="body" class="pt-2 text-sm text-muted">Body slot content</div>
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with class correctly 1`] = `
+"<div data-state="closed" data-slot="root" class="my-4"><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!----><span>Thought for a few seconds</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with default slot correctly 1`] = `
+"<div data-state="open" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="true" data-state="open" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!----><span>Thought for a few seconds</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">
+    <div data-slot="body" class="pt-2 text-sm text-muted">Default slot content</div>
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with defaultOpen correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!----><span>Thought for a few seconds</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with disabled correctly 1`] = `
+"<div data-state="closed" data-disabled="" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-disabled="" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!----><span>Thought for a few seconds</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" data-disabled="" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with duration correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!----><span>Thought for 5 seconds</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with getThinkingMessage correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!----><span>Done in undefineds</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with icon correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors"><span class="iconify i-lucide:brain size-4 shrink-0" aria-hidden="true" data-slot="leadingIcon"></span><span>Thought for a few seconds</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span></button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with isStreaming correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!----><span data-slot="base" class="relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--color-neutral-100),#0000_calc(50%+var(--spread)))]" style="--spread: 22px; background-position: 100% center;">Thinking...</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with open correctly 1`] = `
+"<div data-state="open" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="true" data-state="open" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!----><span>Thought for a few seconds</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">
+    <div data-slot="body" class="pt-2 text-sm text-muted">This is the reasoning content.</div>
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with text correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!----><span>Thought for a few seconds</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with thinkingMessage slot correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!---->Custom thinking message<span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with trailingIcon correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!----><span>Thought for a few seconds</span><span class="iconify i-lucide:chevron-right size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with trigger slot correctly 1`] = `
+"<div data-state="closed" data-slot="root" class="">Custom trigger<div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with ui correctly 1`] = `
+"<div data-state="closed" data-slot="root" class="bg-muted"><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+    <!----><span>Thought for a few seconds</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <!--v-if-->
+  </div>
+</div>"
+`;

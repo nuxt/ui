@@ -219,7 +219,7 @@ const messageActions = [
       <template #content="{ message }">
         <template
           v-for="(part, index) in message.parts"
-          :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${part.state}` : ''}`"
+          :key="`${message.id}-${part.type}-${index}`"
         >
           <UChatReasoning
             v-if="part.type === 'reasoning'"
