@@ -27,7 +27,6 @@ async function openModal() {
 In order to return a value from the overlay, the `overlay.open()` can be awaited. In order for this to work, however, the **overlay component must emit a `close` event**. See example below for details.
 ::
 
-
 ## API
 
 `useOverlay()`{lang="ts-type"}
@@ -104,9 +103,15 @@ Close an overlay by its `id`.
   ::
 ::
 
+### closeAll()
+
+`closeAll(): void`{lang="ts-type"}
+
+Close all open overlays.
+
 ### patch()
 
-`patch(id: symbol, props: ComponentProps<T>): void`{lang="ts-type"}
+`patch(id: symbol, props: Partial<ComponentProps<T>>): void`{lang="ts-type"}
 
 Update an overlay by its `id`.
 
@@ -117,7 +122,7 @@ Update an overlay by its `id`.
   The identifier of the overlay.
   ::
 
-  ::field{name="props" type="ComponentProps<T>" required}
+  ::field{name="props" type="Partial<ComponentProps<T>>" required}
   An object of props to update on the rendered component.
   ::
 ::
@@ -160,9 +165,9 @@ In-memory list of all overlays that were created.
 
 ### open()
 
-`open(props?: ComponentProps<T>): Promise<OpenedOverlay<T>>`{lang="ts-type"}
+`open(props?: ComponentProps<T>): OpenedOverlay<T>`{lang="ts-type"}
 
-Open the overlay.
+Open the overlay. Returns an `OpenedOverlay` which is a Promise that resolves with the value emitted by the `close` event.
 
 #### Parameters
 
@@ -204,14 +209,14 @@ Close the overlay.
 
 ### patch()
 
-`patch(props: ComponentProps<T>): void`{lang="ts-type"}
+`patch(props: Partial<ComponentProps<T>>): void`{lang="ts-type"}
 
 Update the props of the overlay.
 
 #### Parameters
 
 ::field-group
-  ::field{name="props" type="ComponentProps<T>" required}
+  ::field{name="props" type="Partial<ComponentProps<T>>" required}
   An object of props to update on the rendered component.
   ::
 ::
@@ -223,7 +228,7 @@ import { LazyModalExample } from '#components'
 const overlay = useOverlay()
 
 const modal = overlay.create(LazyModalExample, {
-  title: 'Welcome'
+  props: { title: 'Welcome' }
 })
 
 function openModal() {
@@ -236,9 +241,11 @@ function updateModalTitle() {
 </script>
 ```
 
-## Example
+## Examples
 
-Here's a complete example of how to use the `useOverlay` composable:
+### With multiple overlays
+
+This example demonstrates how to manage multiple overlays and pass data between them:
 
 ```vue
 <script setup lang="ts">
@@ -247,9 +254,8 @@ import { ModalA, ModalB, SlideoverA } from '#components'
 const overlay = useOverlay()
 
 // Create with default props
-const modalA = overlay.create(ModalA, { title: 'Welcome' })
+const modalA = overlay.create(ModalA, { props: { title: 'Welcome' } })
 const modalB = overlay.create(ModalB)
-
 const slideoverA = overlay.create(SlideoverA)
 
 const openModalA = () => {
@@ -259,9 +265,7 @@ const openModalA = () => {
 
 const openModalB = async () => {
   // Open modalB, and wait for its result
-  const modalBInstance = modalB.open()
-
-  const input = await modalBInstance
+  const input = await modalB.open()
 
   // Pass the result from modalB to the slideover, and open it
   slideoverA.open({ input })
@@ -269,11 +273,91 @@ const openModalB = async () => {
 </script>
 
 <template>
-  <button @click="openModalA">Open Modal</button>
+  <UButton label="Open Modal" @click="openModalA" />
 </template>
 ```
 
-In this example, we're using the `useOverlay` composable to control multiple modals and slideovers.
+### Confirm dialog
+
+This example demonstrates how to create a reusable confirm dialog pattern using a custom `useConfirmDialog` composable that wraps `useOverlay`. This approach enables opinionated dialogs tailored to specific business requirements and design preferences.
+
+1. Create a `ConfirmDialog` component that emits a boolean value when closed:
+
+```vue [components/ConfirmDialog.vue]
+<script lang="ts" setup>
+interface ConfirmDialogProps {
+  title?: string
+  description?: string
+}
+
+defineProps<ConfirmDialogProps>()
+
+const emits = defineEmits<{
+  close: [value: boolean]
+}>()
+</script>
+
+<template>
+  <UModal
+    :title="title"
+    :description="description"
+    :dismissible="false"
+    :ui="{ footer: 'justify-end' }"
+  >
+    <template #footer>
+      <UButton label="Cancel" color="neutral" variant="outline" @click="emits('close', false)" />
+      <UButton label="Confirm" color="neutral" @click="emits('close', true)" />
+    </template>
+  </UModal>
+</template>
+```
+
+2. Create a `useConfirmDialog` composable that returns a Promise:
+
+```ts [composables/useConfirmDialog.ts]
+import { ConfirmDialog } from '#components'
+
+export interface ConfirmDialogOptions {
+  title: string
+  description?: string
+}
+
+export const useConfirmDialog = () => {
+  const overlay = useOverlay()
+
+  return (options: ConfirmDialogOptions): Promise<boolean> => {
+    const modal = overlay.create(ConfirmDialog, {
+      destroyOnClose: true,
+      props: options
+    })
+
+    return modal.open()
+  }
+}
+```
+
+3. Use the composable in your components:
+
+```vue
+<script setup lang="ts">
+const confirm = useConfirmDialog()
+
+const handleDelete = async () => {
+  const confirmed = await confirm({
+    title: 'Delete item',
+    description: 'Are you sure you want to delete this item?'
+  })
+
+  if (confirmed) {
+    console.log('Item deleted')
+  }
+}
+</script>
+
+<template>
+  <UButton label="Delete item" @click="handleDelete" />
+</template>
+```
 
 ## Caveats
 
@@ -293,8 +377,7 @@ const providedValue = inject('valueProvidedInPage')
 
 const modal = overlay.create(LazyModalExample, {
   props: {
-    providedValue,
-    otherData: someValue
+    providedValue
   }
 })
 </script>

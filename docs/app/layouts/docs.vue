@@ -42,7 +42,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <UMain as="main">
+  <UMain>
     <UContainer>
       <UPage>
         <template #left>
