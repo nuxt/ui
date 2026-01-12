@@ -58,27 +58,19 @@ Install Nuxt UI:
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
-pnpm add @nuxt/ui
+pnpm add @nuxt/ui tailwindcss
 ```
 
 ```bash [yarn]
-yarn add @nuxt/ui
+yarn add @nuxt/ui tailwindcss
 ```
 
 ```bash [npm]
-npm install @nuxt/ui
+npm install @nuxt/ui tailwindcss
 ```
 
 ```bash [bun]
-bun add @nuxt/ui
-```
-::
-
-::warning{icon="i-simple-icons-pnpm"}
-If you're using **pnpm**, create a `.npmrc` file at the root of your project with `shamefully-hoist=true`:
-
-```bash [.npmrc]
-shamefully-hoist=true
+bun add @nuxt/ui tailwindcss
 ```
 ::
 
