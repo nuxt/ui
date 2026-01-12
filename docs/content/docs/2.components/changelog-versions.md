@@ -206,6 +206,26 @@ props:
 ---
 ::
 
+### With scroll container :badge{label="Soon" class="align-text-top"}
+
+Pass an object to the `indicator` prop to configure the scroll container. By default, the indicator tracks the window/page scroll (https://motion.dev/docs/vue-use-scroll#page-scroll).
+
+```vue
+<script setup lang="ts">
+const scrollContainer = ref<HTMLElement>()
+</script>
+
+<template>
+  <div ref="scrollContainer" class="max-h-96 overflow-y-auto">
+    <UChangelogVersions v-if="scrollContainer" :indicator="{ container: scrollContainer }" />
+  </div>
+</template>
+```
+
+::warning
+When using a custom `container`, make sure the container element is mounted before `UChangelogVersions`.
+::
+
 ## API
 
 ### Props

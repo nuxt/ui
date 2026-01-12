@@ -866,6 +866,22 @@ name: 'input-menu-virtualize-example'
 ---
 ::
 
+### With infinite scroll :badge{label="Soon" class="align-text-top"}
+
+You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
+
+::component-example
+---
+prettier: true
+collapse: true
+highlights:
+  - 41
+  - 51
+overflowHidden: true
+name: 'input-menu-infinite-scroll-example'
+---
+::
+
 ### With full content width
 
 You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
@@ -929,6 +945,7 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
+| `viewportRef`{lang="ts-type"} | `Ref<HTMLDivElement \| null>`{lang="ts-type"} |
 
 ## Theme
 
