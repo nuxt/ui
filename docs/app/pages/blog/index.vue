@@ -7,7 +7,7 @@ if (!page.value) {
 }
 
 const { data: posts } = await useAsyncData('blog-posts', () =>
-  queryCollection('posts').order('date', 'DESC').all()
+  queryCollection('posts').order('date', 'ASC').all()
 )
 
 useSeoMeta({
