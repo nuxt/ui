@@ -27,7 +27,6 @@ async function openModal() {
 In order to return a value from the overlay, the `overlay.open()` can be awaited. In order for this to work, however, the **overlay component must emit a `close` event**. See example below for details.
 ::
 
-
 ## API
 
 `useOverlay()`{lang="ts-type"}
@@ -104,9 +103,15 @@ Close an overlay by its `id`.
   ::
 ::
 
+### closeAll()
+
+`closeAll(): void`{lang="ts-type"}
+
+Close all open overlays.
+
 ### patch()
 
-`patch(id: symbol, props: ComponentProps<T>): void`{lang="ts-type"}
+`patch(id: symbol, props: Partial<ComponentProps<T>>): void`{lang="ts-type"}
 
 Update an overlay by its `id`.
 
@@ -117,7 +122,7 @@ Update an overlay by its `id`.
   The identifier of the overlay.
   ::
 
-  ::field{name="props" type="ComponentProps<T>" required}
+  ::field{name="props" type="Partial<ComponentProps<T>>" required}
   An object of props to update on the rendered component.
   ::
 ::
@@ -160,9 +165,9 @@ In-memory list of all overlays that were created.
 
 ### open()
 
-`open(props?: ComponentProps<T>): Promise<OpenedOverlay<T>>`{lang="ts-type"}
+`open(props?: ComponentProps<T>): OpenedOverlay<T>`{lang="ts-type"}
 
-Open the overlay.
+Open the overlay. Returns an `OpenedOverlay` which is a Promise that resolves with the value emitted by the `close` event.
 
 #### Parameters
 
@@ -204,14 +209,14 @@ Close the overlay.
 
 ### patch()
 
-`patch(props: ComponentProps<T>): void`{lang="ts-type"}
+`patch(props: Partial<ComponentProps<T>>): void`{lang="ts-type"}
 
 Update the props of the overlay.
 
 #### Parameters
 
 ::field-group
-  ::field{name="props" type="ComponentProps<T>" required}
+  ::field{name="props" type="Partial<ComponentProps<T>>" required}
   An object of props to update on the rendered component.
   ::
 ::
@@ -223,7 +228,7 @@ import { LazyModalExample } from '#components'
 const overlay = useOverlay()
 
 const modal = overlay.create(LazyModalExample, {
-  title: 'Welcome'
+  props: { title: 'Welcome' }
 })
 
 function openModal() {
@@ -271,8 +276,6 @@ const openModalB = async () => {
   <UButton label="Open Modal" @click="openModalA" />
 </template>
 ```
-
-In this example, we're using the `useOverlay` composable to control multiple modals and slideovers.
 
 ### Confirm dialog
 
@@ -374,8 +377,7 @@ const providedValue = inject('valueProvidedInPage')
 
 const modal = overlay.create(LazyModalExample, {
   props: {
-    providedValue,
-    otherData: someValue
+    providedValue
   }
 })
 </script>
