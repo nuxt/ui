@@ -54,27 +54,19 @@ Install Nuxt UI and the AI-specific dependencies:
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
-pnpm add @nuxt/ui @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+pnpm add @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [yarn]
-yarn add @nuxt/ui @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+yarn add @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [npm]
-npm install @nuxt/ui @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+npm install @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [bun]
-bun add @nuxt/ui @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
-```
-::
-
-::warning{icon="i-simple-icons-pnpm"}
-If you're using **pnpm**, create a `.npmrc` file at the root of your project with `shamefully-hoist=true`:
-
-```bash [.npmrc]
-shamefully-hoist=true
+bun add @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 ::
 

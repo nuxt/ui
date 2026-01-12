@@ -14,11 +14,13 @@
     "@iconify-json/lucide": "^1.2.82",
     "@iconify-json/simple-icons": "^1.2.64",
     "@internationalized/date": "^3.10.1",
+    "@nuxt/content": "^3.10.0",
     "@nuxt/ui": "workspace:*",
-    "@tiptap/extension-emoji": "^3.15.2",
-    "@tiptap/extension-text-align": "^3.15.2",
+    "@tiptap/extension-emoji": "^3.15.3",
+    "@tiptap/extension-text-align": "^3.15.3",
     "ai": "^6.0.3",
     "nuxt": "^4.2.2",
+    "tailwindcss": "^4.1.18",
     "zod": "^4.2.1"
   },
   "devDependencies": {

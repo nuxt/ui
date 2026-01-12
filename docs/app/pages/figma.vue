@@ -86,7 +86,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="page" class="relative">
+  <main v-if="page" class="relative">
     <div id="cursor1" class="absolute z-10 pointer-events-none" :style="{ opacity: 0 }">
       <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" class="absolute top-0 left-0 drop-shadow-[0_1px_2px_rgb(0,0,0,0.25)] text-inverted">
         <path
@@ -215,7 +215,7 @@ onMounted(async () => {
       <div aria-hidden="true" class="absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center border border-default border-b-0 sm:divide-x divide-y lg:divide-y-0 divide-default">
         <li v-for="(step, index) in page?.section4.steps" :key="step.title" class="relative flex flex-col gap-y-4 justify-start group h-full p-4 bg-default" :class="{ 'hover:bg-muted/50': step.to }">
-          <ULink :to="step.to" target="_blank" class="absolute inset-0 z-10" />
+          <ULink v-if="step.to" :to="step.to" :aria-label="`Open ${step.title}`" target="_blank" class="absolute inset-0 z-10" />
           <NuxtImg v-if="step.image" v-bind="step.image" class="rounded-sm" loading="lazy" />
           <div>
             <h2 class="font-semibold inline-flex items-center gap-x-1">
@@ -252,5 +252,5 @@ onMounted(async () => {
         </template>
       </UAccordion>
     </UPageSection>
-  </div>
+  </main>
 </template>
