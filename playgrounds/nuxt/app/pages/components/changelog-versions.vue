@@ -43,6 +43,7 @@ const versions = ref([
 
 <template>
   <Navbar />
+
   <div ref="container" class="relative w-full h-96 overflow-auto">
     <UChangelogVersions
       v-if="container"

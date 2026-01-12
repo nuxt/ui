@@ -206,7 +206,7 @@ props:
 ---
 ::
 
-### With scroll container
+### With scroll container :badge{label="Soon" class="align-text-top"}
 
 Pass an object to the `indicator` prop to configure the scroll container. By default, the indicator tracks the window/page scroll (https://motion.dev/docs/vue-use-scroll#page-scroll).
 
