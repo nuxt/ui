@@ -204,6 +204,7 @@
     }
   },
   "resolutions": {
+    "@nuxt/content": "3.9.0",
     "@nuxt/kit": "^4.2.2",
     "@nuxt/module-builder": "1.0.1",
     "@nuxt/ui": "workspace:*",
