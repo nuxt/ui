@@ -207,6 +207,7 @@
     "@nuxt/kit": "^4.2.2",
     "@nuxt/module-builder": "1.0.1",
     "@nuxt/ui": "workspace:*",
+    "h3": "1.15.4",
     "typescript": "5.8.3",
     "unplugin": "^2.3.11"
   },

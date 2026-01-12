@@ -20,8 +20,5 @@
     "typescript": "^5.8.3",
     "vue-tsc": "^3.2.1",
     "wrangler": "^4.58.0"
-  },
-  "resolutions": {
-    "unimport": "4.1.1"
   }
 }
