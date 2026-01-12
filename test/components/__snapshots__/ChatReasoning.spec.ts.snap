@@ -79,11 +79,11 @@ exports[`ChatReasoning > renders with icon correctly 1`] = `
 `;
 
 exports[`ChatReasoning > renders with isStreaming correctly 1`] = `
-"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+"<div data-state="open" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="true" data-state="open" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
     <!----><span data-slot="base" class="relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--color-neutral-100),#0000_calc(50%+var(--spread)))]" style="--spread: 22px; background-position: 100% center;">Thinking...</span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
-    <!--v-if-->
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">
+    <div data-slot="body" class="pt-2 text-sm text-muted">This is the reasoning content.</div>
   </div>
 </div>"
 `;
@@ -109,11 +109,11 @@ exports[`ChatReasoning > renders with text correctly 1`] = `
 `;
 
 exports[`ChatReasoning > renders with thinkingMessage slot correctly 1`] = `
-"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
+"<div data-state="open" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="true" data-state="open" data-slot="trigger" class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors">
     <!---->Custom thinking message<span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
-    <!--v-if-->
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">
+    <div data-slot="body" class="pt-2 text-sm text-muted">This is the reasoning content.</div>
   </div>
 </div>"
 `;

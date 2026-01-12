@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ChatShimmer > renders with as correctly 1`] = `"<div data-slot="base" class="relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--color-neutral-100),#0000_calc(50%+var(--spread)))]" style="--spread: 20px; background-position: 100% center;">Loading...</div>"`;
+
+exports[`ChatShimmer > renders with class correctly 1`] = `"<span data-slot="base" class="relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] text-lg [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--color-neutral-100),#0000_calc(50%+var(--spread)))]" style="--spread: 20px; background-position: 100% center;">Loading...</span>"`;
+
+exports[`ChatShimmer > renders with duration correctly 1`] = `"<span data-slot="base" class="relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--color-neutral-100),#0000_calc(50%+var(--spread)))]" style="--spread: 20px; background-position: 100% center;">Loading...</span>"`;
+
+exports[`ChatShimmer > renders with spread correctly 1`] = `"<span data-slot="base" class="relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--color-neutral-100),#0000_calc(50%+var(--spread)))]" style="--spread: 40px; background-position: 100% center;">Loading...</span>"`;
+
+exports[`ChatShimmer > renders with text correctly 1`] = `"<span data-slot="base" class="relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--color-neutral-100),#0000_calc(50%+var(--spread)))]" style="--spread: 20px; background-position: 100% center;">Loading...</span>"`;
+
+exports[`ChatShimmer > renders with ui correctly 1`] = `"<span data-slot="base" class="relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] font-bold [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--color-neutral-100),#0000_calc(50%+var(--spread)))]" style="--spread: 20px; background-position: 100% center;">Loading...</span>"`;
