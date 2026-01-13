@@ -104,7 +104,7 @@ const [DefineListTemplate, ReuseListTemplate] = createReusableTemplate<{ links: 
 const [DefineTriggerTemplate, ReuseTriggerTemplate] = createReusableTemplate<{ open: boolean }>()
 
 const highlight = computed(() => props.highlight || !!props.highlightVariant)
-const highlightVariant = computed(() => props.highlightVariant || 'straight')
+const highlightVariant = computed(() => props.highlightVariant)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentToc || {}) })({
   color: props.color,
