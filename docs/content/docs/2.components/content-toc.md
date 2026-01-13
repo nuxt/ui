@@ -144,7 +144,7 @@ props:
 ---
 ::
 
-### Highlight Variant
+### Highlight Variant :badge{label="Soon" class="align-text-top"}
 
 Use the `highlight-variant` prop to change the style of the highlight. Defaults to `straight`.
 
