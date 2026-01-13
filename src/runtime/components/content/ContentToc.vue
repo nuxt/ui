@@ -108,8 +108,8 @@ const highlightVariant = computed(() => props.highlightVariant)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentToc || {}) })({
   color: props.color,
-  highlight: props.highlight,
-  highlightVariant: props.highlightVariant,
+  highlight: highlight.value,
+  highlightVariant: highlightVariant.value,
   highlightColor: props.highlightColor || props.color
 }))
 
