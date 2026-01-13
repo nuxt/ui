@@ -42,10 +42,12 @@ describe('Stepper', () => {
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with indicator slot', { props, slots: { indicator: () => 'Indicator slot' } }],
+    ['with wrapper slot', { props, slots: { wrapper: () => 'Wrapper slot' } }],
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
-    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
+    ['with custom slot', { props: { ...props, defaultValue: 2 }, slots: { custom: () => 'Custom slot' } }],
+    ['with custom-wrapper slot', { props, slots: { 'custom-wrapper': () => 'Custom wrapper slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: StepperProps, slots?: Partial<StepperSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Stepper)
     expect(html).toMatchSnapshot()
