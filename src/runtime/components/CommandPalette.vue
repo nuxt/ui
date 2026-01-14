@@ -537,6 +537,7 @@ function onSelect(e: Event, item: T) {
         <template v-if="history?.length && (back || !!slots.back)" #leading>
           <slot name="back" :ui="ui">
             <UButton
+              :size="size"
               :icon="backIcon || appConfig.ui.icons.arrowLeft"
               color="neutral"
               variant="link"
@@ -553,6 +554,7 @@ function onSelect(e: Event, item: T) {
           <slot name="close" :ui="ui">
             <UButton
               v-if="close"
+              :size="size"
               :icon="closeIcon || appConfig.ui.icons.close"
               color="neutral"
               variant="ghost"

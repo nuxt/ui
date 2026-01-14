@@ -11,7 +11,7 @@ const open = ref(false)
 const searchTerm = ref('')
 // const searchTermDebounced = refDebounced(searchTerm, 200)
 const selected = ref([])
-const virtualize = ref(true)
+const virtualize = ref(false)
 const preserveGroupOrder = ref(false)
 
 const sizes = Object.keys(theme.variants.size)
