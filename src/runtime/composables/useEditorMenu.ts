@@ -224,6 +224,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   }
 
   // Watch for external items changes when ignoreFilter is true (for async items)
+  // Use flush: 'sync' to ensure filteredItems is updated before filteredGroups is accessed
   if (options.ignoreFilter) {
     watch(() => unref(options.items), (newItems) => {
       // Only update if menu is open
@@ -259,7 +260,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
       if (element) {
         updatePosition(element)
       }
-    }, { deep: true })
+    }, { deep: true, flush: 'sync' })
   }
 
   // Create the menu component using plain divs (not Reka UI components)
