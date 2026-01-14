@@ -1,4 +1,4 @@
-import { ref, h, computed, unref } from 'vue'
+import { ref, h, computed, unref, watch } from 'vue'
 import type { Ref, ComputedRef, MaybeRef } from 'vue'
 import { defu } from 'defu'
 import { useFilter } from 'reka-ui'
@@ -37,10 +37,20 @@ export interface EditorMenuOptions<T = any> {
    */
   filter?: (items: T[], query: string) => T[]
   /**
+   * Whether to ignore the default filtering.
+   * When `true`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
+   * @defaultValue false
+   */
+  ignoreFilter?: boolean
+  /**
    * Maximum number of items to display
    * @defaultValue 42
    */
   limit?: number
+  /**
+   * Ref to sync the current query with
+   */
+  query?: Ref<string>
   /**
    * Function to execute when an item is selected
    */
@@ -74,6 +84,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   const filteredItems: Ref<T[]> = ref([])
   const selectedIndex = ref(0)
   const menuState = ref<'closed' | 'open'>('closed')
+  const query = options.query ?? ref('')
   let renderer: VueRenderer | null = null
   let element: HTMLElement | null = null
   let handleMouseDown: ((e: MouseEvent) => void) | null = null
@@ -159,7 +170,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   const filteredGroups = computed<T[][]>(() => {
     if (!filteredItems.value.length) return []
 
-    // Map each group and filter its items
+    // Map each group and filter its items to only include those in filteredItems
+    // This respects the limit since filteredItems is already sliced
     return groups.value
       .map(group => group.filter(item => filteredItems.value.includes(item)))
       .filter(group => group.length > 0)
@@ -209,6 +221,45 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
       element.style.left = '0'
       element.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`
     })
+  }
+
+  // Watch for external items changes when ignoreFilter is true (for async items)
+  if (options.ignoreFilter) {
+    watch(() => unref(options.items), (newItems) => {
+      // Only update if menu is open
+      if (menuState.value !== 'open') return
+
+      // Normalize items (handle both flat and grouped arrays)
+      const normalizedItems = newItems?.length
+        ? isArrayOfArray(newItems)
+          ? (newItems as T[][]).flat()
+          : (newItems as T[])
+        : []
+
+      // Update filtered items with the new items (sliced to limit)
+      filteredItems.value = normalizedItems.slice(0, limit)
+
+      // Reset selected index if out of bounds
+      if (selectedIndex.value >= selectableItems.value.length) {
+        selectedIndex.value = Math.max(0, selectableItems.value.length - 1)
+      }
+
+      // Update the renderer if it exists (use filteredGroups which respects the limit)
+      if (renderer) {
+        renderer.updateProps({
+          groups: filteredGroups.value,
+          selectedIndex: selectedIndex.value,
+          onSelect: commandFn,
+          onHover: handleHover!,
+          state: menuState.value
+        })
+      }
+
+      // Update position
+      if (element) {
+        updatePosition(element)
+      }
+    }, { deep: true })
   }
 
   // Create the menu component using plain divs (not Reka UI components)
@@ -312,8 +363,16 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     pluginKey: pluginKeyInstance,
     editor: options.editor,
     char: options.char,
-    items: ({ query }: { query: string }) => {
-      const filtered = filter(items.value, query)
+    items: ({ query: q }: { query: string }) => {
+      // Update the query ref for external access
+      query.value = q
+
+      // When ignoreFilter is true, return items as-is (for async filtering)
+      if (options.ignoreFilter) {
+        return items.value.slice(0, limit)
+      }
+
+      const filtered = filter(items.value, q)
       return filtered.slice(0, limit)
     },
     command: ({ editor, range, props }: any) => {
@@ -375,7 +434,10 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
       const handlers = {
         onStart: (suggestionProps: SuggestionProps) => {
-          filteredItems.value = suggestionProps.items as T[]
+          // When ignoreFilter is true, always use fresh items from the reactive source
+          filteredItems.value = options.ignoreFilter
+            ? items.value.slice(0, limit)
+            : suggestionProps.items as T[]
 
           // Start at first selectable item (index 0 in selectableItems)
           selectedIndex.value = 0
@@ -473,7 +535,10 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           updatePosition(element)
         },
         onUpdate: (suggestionProps: SuggestionProps) => {
-          filteredItems.value = suggestionProps.items as T[]
+          // When ignoreFilter is true, always use fresh items from the reactive source
+          filteredItems.value = options.ignoreFilter
+            ? items.value.slice(0, limit)
+            : suggestionProps.items as T[]
 
           // Update the command function
           commandFn = (item: T) => suggestionProps.command(item)
@@ -574,14 +639,12 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
               element.appendChild(renderer.element)
             }
           } else {
-          // Update existing renderer
+            // Update existing renderer
             renderer.updateProps({
               groups: filteredGroups.value,
               selectedIndex: selectedIndex.value,
               onSelect: commandFn,
-              onHover: (index: number) => {
-                selectedIndex.value = index
-              },
+              onHover: handleHover!,
               state: menuState.value
             })
           }
@@ -595,6 +658,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           cleanupMenu()
           // Clear the stored trigger position
           triggerClientRect = null
+          // Reset query
+          query.value = ''
         }
       }
       return handlers
@@ -634,6 +699,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   return {
     plugin,
     destroy,
-    filteredItems
+    filteredItems,
+    query
   }
 }

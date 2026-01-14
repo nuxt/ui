@@ -20,7 +20,7 @@ export interface EditorMentionMenuItem {
   [key: string]: any
 }
 
-export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = EditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'appendTo'>> {
+export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = EditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'appendTo' | 'ignoreFilter'>> {
   items?: T[] | T[][]
   class?: any
   ui?: EditorMentionMenu['slots']
@@ -42,6 +42,8 @@ const props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
   char: '@'
 })
 
+const query = defineModel<string>('query', { default: '' })
+
 const appConfig = useAppConfig() as EditorMentionMenu['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -62,9 +64,11 @@ onMounted(async () => {
     pluginKey: props.pluginKey,
     items: toRef(() => props.items),
     filterFields: props.filterFields,
+    ignoreFilter: props.ignoreFilter,
     limit: props.limit,
     options: props.options,
     appendTo: props.appendTo,
+    query,
     ui,
     onSelect: (editor, range, item) => {
       // Delete the trigger character and query text, then insert the mention
