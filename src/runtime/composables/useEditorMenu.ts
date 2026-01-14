@@ -95,6 +95,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   let triggerClientRect: (() => DOMRect | null) | null = null
   let handleHover: ((index: number) => void) | null = null
   let scrollHandler: (() => void) | null = null
+  let stopItemsWatch: (() => void) | null = null
 
   const { contains } = useFilter({ sensitivity: 'base' })
 
@@ -226,7 +227,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   // Watch for external items changes when ignoreFilter is true (for async items)
   // Use flush: 'sync' to ensure filteredItems is updated before filteredGroups is accessed
   if (options.ignoreFilter) {
-    watch(() => unref(options.items), (newItems) => {
+    stopItemsWatch = watch(() => unref(options.items), (newItems) => {
       // Only update if menu is open
       if (menuState.value !== 'open') return
 
@@ -694,6 +695,10 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     if (element) {
       element.remove()
       element = null
+    }
+    if (stopItemsWatch) {
+      stopItemsWatch()
+      stopItemsWatch = null
     }
   }
 
