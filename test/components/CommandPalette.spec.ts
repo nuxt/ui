@@ -4,8 +4,11 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import CommandPalette from '../../src/runtime/components/CommandPalette.vue'
 import type { CommandPaletteProps, CommandPaletteSlots } from '../../src/runtime/components/CommandPalette.vue'
 import ComponentRender from '../component-render'
+import theme from '#build/ui/command-palette'
 
 describe('CommandPalette', () => {
+  const sizes = Object.keys(theme.variants.size) as any
+
   const groups = [{
     id: 'actions',
     items: [{
@@ -104,6 +107,7 @@ describe('CommandPalette', () => {
     ['with groups', { props }],
     ['with groups with description', { props: { groups: groupsWithDescription } }],
     ['without groups', {}],
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with modelValue', { props: { ...props, modelValue: groups[2]?.items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: groups[2]?.items[0] } }],
     ['with searchTerm', { props: { ...props, searchTerm: 'f' } }],
