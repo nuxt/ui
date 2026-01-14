@@ -84,7 +84,7 @@ export interface EditorSlots<H extends EditorCustomHandlers = EditorCustomHandle
 
 <script setup lang="ts" generic="T extends Content, H extends EditorCustomHandlers">
 import { computed, provide, useAttrs, watch } from 'vue'
-import { defu } from 'defu'
+import { defu, defuFn } from 'defu'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { mergeAttributes } from '@tiptap/core'
 import Code from '@tiptap/extension-code'
@@ -129,11 +129,11 @@ const editorProps = computed(() => defu(props.editorProps, {
   }
 } as EditorOptions['editorProps']))
 const contentType = computed(() => props.contentType || (typeof props.modelValue === 'string' ? 'html' : 'json'))
-const starterKit = computed(() => defu(props.starterKit, {
+const starterKit = computed(() => defuFn(props.starterKit ?? {}, {
   code: false,
   horizontalRule: false,
-  headings: {
-    levels: () => [1, 2, 3, 4]
+  heading: {
+    levels: [1, 2, 3, 4]
   },
   dropcursor: {
     color: 'var(--ui-primary)',
@@ -142,7 +142,8 @@ const starterKit = computed(() => defu(props.starterKit, {
   link: {
     openOnClick: false
   }
-} as Partial<StarterKitOptions>))
+} satisfies Partial<StarterKitOptions>))
+
 const placeholder = computed(() => {
   const options = typeof props.placeholder === 'string' ? { placeholder: props.placeholder } : props.placeholder
   const { mode, ...rest } = options || {}
