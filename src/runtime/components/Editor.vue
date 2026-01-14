@@ -133,7 +133,7 @@ const starterKit = computed(() => defu(props.starterKit, {
   code: false,
   horizontalRule: false,
   headings: {
-    levels: [1, 2, 3, 4]
+    levels: () => [1, 2, 3, 4]
   },
   dropcursor: {
     color: 'var(--ui-primary)',
