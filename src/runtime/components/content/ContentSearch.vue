@@ -39,7 +39,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   /**
    * @defaultValue 'md'
    */
-  size?: CommandPaletteProps['size']
+  size?: ContentSearch['variants']['size']
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
@@ -149,6 +149,7 @@ const fuse = computed(() => defu({}, props.fuse, {
 } as UseFuseOptions<T>))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })({
+  size: props.size,
   fullscreen: props.fullscreen
 }))
 

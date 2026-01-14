@@ -12,7 +12,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
   /**
    * @defaultValue 'md'
    */
-  size?: CommandPaletteProps['size']
+  size?: DashboardSearch['variants']['size']
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
@@ -119,6 +119,7 @@ const fuse = computed(() => defu({}, props.fuse, {
 }))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearch || {}) })({
+  size: props.size,
   fullscreen: props.fullscreen
 }))
 
