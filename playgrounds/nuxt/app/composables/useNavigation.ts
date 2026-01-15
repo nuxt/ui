@@ -42,6 +42,7 @@ const components = [
   'input-number',
   'input-tags',
   'input-time',
+  'input-time-range',
   'input',
   'kbd',
   'link',
