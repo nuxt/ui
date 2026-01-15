@@ -13,7 +13,7 @@ links:
 
 ## Usage
 
-Use the `v-model` directive to control the selected date.
+Use the `v-model` directive to control the selected time.
 
 ::component-code
 ---
@@ -44,7 +44,28 @@ props:
 ::
 
 ::note
-This component relies on the [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/index.html) package which provides objects and functions for representing and manipulating dates and times in a locale-aware manner. Format of date depends on the [`locale`](/docs/getting-started/integrations/i18n) installed in your application.
+This component relies on the [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/index.html) package which provides objects and functions for representing and manipulating dates and times in a locale-aware manner. Format of time depends on the [`locale`](/docs/getting-started/integrations/i18n) installed in your application.
+::
+
+### Range
+
+Use the `range` prop to select a range of times instead of a single time. When `range` is set, the `v-model` and `default-value` props accept an object with `start` and `end` properties.
+
+::component-code
+---
+cast:
+  modelValue: TimeRange
+ignore:
+  - range
+  - modelValue
+external:
+  - modelValue
+props:
+  range: true
+  modelValue:
+    start: [9, 0, 0]
+    end: [17, 30, 0]
+---
 ::
 
 ### Hour Cycle

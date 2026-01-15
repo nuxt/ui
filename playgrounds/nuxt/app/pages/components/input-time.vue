@@ -13,6 +13,7 @@ const attrs = reactive({
 })
 
 const value = shallowRef(new Time(12, 30))
+const rangeValue = shallowRef({ start: new Time(9, 0), end: new Time(17, 30) })
 </script>
 
 <template>
@@ -34,5 +35,16 @@ const value = shallowRef(new Time(12, 30))
     <UInputTime loading v-bind="props" />
     <UInputTime loading trailing v-bind="props" />
     <UInputTime loading icon="i-lucide-clock" trailing-icon="i-lucide-chevron-down" v-bind="props" />
+  </Matrix>
+
+  <USeparator label="Range Mode" />
+
+  <Matrix v-slot="props" :attrs="attrs">
+    <UInputTime v-model="rangeValue" range v-bind="props" :hour-cycle="24" />
+    <UInputTime :default-value="{ start: new Time(9, 0), end: new Time(17, 30) }" range v-bind="props" />
+    <UInputTime range highlight v-bind="props" />
+    <UInputTime range disabled v-bind="props" />
+    <UInputTime range icon="i-lucide-clock" separator-icon="i-lucide-arrow-right" :hour-cycle="24" v-bind="props" />
+    <UInputTime range loading v-bind="props" />
   </Matrix>
 </template>
