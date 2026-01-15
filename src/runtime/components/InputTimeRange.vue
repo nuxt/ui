@@ -1,22 +1,11 @@
 <script lang="ts">
 import type { ComponentPublicInstance } from 'vue'
-import type { TimeRangeFieldRootProps, TimeRangeFieldRootEmits } from 'reka-ui'
+import type { TimeRangeFieldRootProps, TimeRangeFieldRootEmits, TimeRangeFieldInputProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-time-range'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
-
-type SegmentPart
-  = | 'day'
-    | 'month'
-    | 'year'
-    | 'hour'
-    | 'minute'
-    | 'second'
-    | 'dayPeriod'
-    | 'literal'
-    | 'timeZoneName'
 
 type InputTimeRange = ComponentConfig<
   typeof theme,
@@ -148,7 +137,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName }
   = useComponentIcons(props)
 
 const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
-  segments?: { part: SegmentPart, value: string }[]
+  segments?: { part: TimeRangeFieldInputProps['part'], value: string }[]
   type?: 'start' | 'end'
 }>()
 
