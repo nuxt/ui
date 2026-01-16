@@ -69,7 +69,6 @@ const appConfig = useAppConfig() as EditorSuggestionMenu['AppConfig']
 
 const handlers = inject('editorHandlers', computed(() => createHandlers()))
 
-// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorSuggestionMenu || {}) })({
   size: props.size
 }))

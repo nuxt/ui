@@ -48,7 +48,6 @@ const props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
 
 const appConfig = useAppConfig() as EditorMentionMenu['AppConfig']
 
-// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorMentionMenu || {}) })({
   size: props.size
 }))

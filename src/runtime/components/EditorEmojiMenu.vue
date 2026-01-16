@@ -43,7 +43,6 @@ const props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
 
 const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig']
 
-// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorEmojiMenu || {}) })({
   size: props.size
 }))

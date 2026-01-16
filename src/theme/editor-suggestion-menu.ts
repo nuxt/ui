@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'w-full flex items-center font-semibold text-highlighted',
     separator: '-mx-1 my-1 h-px bg-border',
     item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
-    itemLeadingIcon: 'shrink-0 flex items-center justify-center text-base',
+    itemLeadingIcon: 'shrink-0 flex items-center justify-center',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingAvatarSize: '',
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',
@@ -21,31 +21,31 @@ export default (options: Required<ModuleOptions>) => ({
       xs: {
         label: 'p-1 text-[10px]/3 gap-1',
         item: 'p-1 text-xs gap-1',
-        itemLeadingIcon: 'size-4',
+        itemLeadingIcon: 'size-4 text-sm',
         itemLeadingAvatarSize: '3xs'
       },
       sm: {
         label: 'p-1.5 text-[10px]/3 gap-1.5',
         item: 'p-1.5 text-xs gap-1.5',
-        itemLeadingIcon: 'size-4',
+        itemLeadingIcon: 'size-4 text-sm',
         itemLeadingAvatarSize: '3xs'
       },
       md: {
         label: 'p-1.5 text-xs gap-1.5',
         item: 'p-1.5 text-sm gap-1.5',
-        itemLeadingIcon: 'size-5',
+        itemLeadingIcon: 'size-5 text-base',
         itemLeadingAvatarSize: '2xs'
       },
       lg: {
         label: 'p-2 text-xs gap-2',
         item: 'p-2 text-sm gap-2',
-        itemLeadingIcon: 'size-5',
+        itemLeadingIcon: 'size-5 text-base',
         itemLeadingAvatarSize: '2xs'
       },
       xl: {
         label: 'p-2 text-sm gap-2',
         item: 'p-2 text-base gap-2',
-        itemLeadingIcon: 'size-6',
+        itemLeadingIcon: 'size-6 text-xl',
         itemLeadingAvatarSize: 'xs'
       }
     },
