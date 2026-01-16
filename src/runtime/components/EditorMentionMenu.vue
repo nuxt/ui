@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
   char: '@'
 })
 
-const query = defineModel<string>('query', { default: '' })
+const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig() as EditorMentionMenu['AppConfig']
 
@@ -73,7 +73,7 @@ onMounted(async () => {
     limit: props.limit,
     options: props.options,
     appendTo: props.appendTo,
-    query,
+    searchTerm,
     ui,
     onSelect: (editor, range, item) => {
       // Delete the trigger character and query text, then insert the mention

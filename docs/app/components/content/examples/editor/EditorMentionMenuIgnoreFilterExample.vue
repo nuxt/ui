@@ -1,54 +1,19 @@
 <script setup lang="ts">
-import { watchDebounced } from '@vueuse/core'
-import type { EditorMentionMenuItem } from '@nuxt/ui'
+import { refDebounced } from '@vueuse/core'
 
 const value = ref(`# Async Mention Menu
 
 Type @ to mention someone. Results are fetched from an API as you type.`)
 
-type User = {
-  firstName: string
-  lastName: string
-  image: string
-}
+const searchTerm = ref('')
+const searchTermDebounced = refDebounced(searchTerm, 200)
 
-const query = ref('')
-const results = ref<User[]>([])
-
-watchDebounced(query, async (query: string) => {
-  if (!query) {
-    results.value = []
-    return
-  }
-
-  try {
-    const response = await $fetch<{ users: User[] }>(`https://dummyjson.com/users/search?q=${query}&limit=10`)
-    results.value = response.users || []
-  } catch {
-    results.value = []
-  }
-}, { debounce: 300 })
-
-const defaultItems: EditorMentionMenuItem[] = [{
-  label: 'Emily Johnson',
-  avatar: { src: 'https://dummyjson.com/icon/emilys/128' }
-}, {
-  label: 'Michael Williams',
-  avatar: { src: 'https://dummyjson.com/icon/michaelw/128' }
-}, {
-  label: 'Sophia Brown',
-  avatar: { src: 'https://dummyjson.com/icon/sophiab/128' }
-}]
-
-const items = computed<EditorMentionMenuItem[]>(() => {
-  if (!query.value || !results.value.length) {
-    return defaultItems
-  }
-
-  return results.value.map(user => ({
-    label: `${user.firstName} ${user.lastName}`,
-    avatar: { src: user.image }
-  }))
+const { data: items } = await useFetch('https://dummyjson.com/users/search?limit=10', {
+  params: { q: searchTermDebounced },
+  transform: (data: { users: { id: number, firstName: string, lastName: string, image: string }[] }) => {
+    return data.users?.map(user => ({ id: user.id, label: `${user.firstName} ${user.lastName}`, avatar: { src: user.image } })) || []
+  },
+  lazy: true
 })
 
 // SSR-safe function to append menus to body (avoids z-index issues in docs)
@@ -64,7 +29,7 @@ const appendToBody = import.meta.client ? () => document.body : undefined
     class="w-full min-h-21"
   >
     <UEditorMentionMenu
-      v-model:query="query"
+      v-model:search-term="searchTerm"
       :editor="editor"
       :items="items"
       :append-to="appendToBody"

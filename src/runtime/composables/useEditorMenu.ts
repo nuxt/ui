@@ -48,9 +48,9 @@ export interface EditorMenuOptions<T = any> {
    */
   limit?: number
   /**
-   * Ref to sync the current query with
+   * Ref to sync the current search term with
    */
-  query?: Ref<string>
+  searchTerm?: Ref<string>
   /**
    * Function to execute when an item is selected
    */
@@ -84,7 +84,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   const filteredItems: Ref<T[]> = ref([])
   const selectedIndex = ref(0)
   const menuState = ref<'closed' | 'open'>('closed')
-  const query = options.query ?? ref('')
+  const searchTerm = options.searchTerm ?? ref('')
   let renderer: VueRenderer | null = null
   let element: HTMLElement | null = null
   let handleMouseDown: ((e: MouseEvent) => void) | null = null
@@ -171,6 +171,13 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   const filteredGroups = computed<T[][]>(() => {
     if (!filteredItems.value.length) return []
 
+    // When ignoreFilter is true, filteredItems IS the source of truth
+    // We wrap it in a single group to avoid object reference mismatches
+    // (the external computed may create new object references on each access)
+    if (options.ignoreFilter) {
+      return [filteredItems.value]
+    }
+
     // Map each group and filter its items to only include those in filteredItems
     // This respects the limit since filteredItems is already sliced
     return groups.value
@@ -228,8 +235,9 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   // Use flush: 'sync' to ensure filteredItems is updated before filteredGroups is accessed
   if (options.ignoreFilter) {
     stopItemsWatch = watch(() => unref(options.items), (newItems) => {
-      // Only update if menu is open
-      if (menuState.value !== 'open') return
+      // Only update if we're in an active suggestion session
+      // (triggerClientRect is set in onStart and cleared in onExit)
+      if (!triggerClientRect) return
 
       // Normalize items (handle both flat and grouped arrays)
       const normalizedItems = newItems?.length
@@ -241,9 +249,63 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
       // Update filtered items with the new items (sliced to limit)
       filteredItems.value = normalizedItems.slice(0, limit)
 
+      // Hide menu if no items
+      if (!filteredItems.value.length) {
+        cleanupMenu()
+        return
+      }
+
       // Reset selected index if out of bounds
       if (selectedIndex.value >= selectableItems.value.length) {
         selectedIndex.value = Math.max(0, selectableItems.value.length - 1)
+      }
+
+      // If menu was closed but we have items now, reopen it
+      if (menuState.value === 'closed' && filteredItems.value.length) {
+        menuState.value = 'open'
+
+        // Recreate the renderer
+        handleHover = (index: number) => {
+          selectedIndex.value = index
+          if (renderer) {
+            renderer.updateProps({
+              groups: filteredGroups.value,
+              selectedIndex: index,
+              onSelect: commandFn,
+              onHover: handleHover!,
+              state: menuState.value
+            })
+          }
+        }
+
+        renderer = new VueRenderer(MenuComponent, {
+          props: {
+            groups: filteredGroups.value,
+            selectedIndex: selectedIndex.value,
+            onSelect: commandFn,
+            onHover: handleHover,
+            state: menuState.value
+          },
+          editor: options.editor
+        })
+
+        element = document.createElement('div')
+        element.style.position = floatingUIOptions.strategy
+        element.style.zIndex = '50'
+
+        handleMouseDown = (e: MouseEvent) => {
+          e.preventDefault()
+        }
+        element.addEventListener('mousedown', handleMouseDown)
+
+        const appendToElement = typeof options.appendTo === 'function' ? options.appendTo() : options.appendTo
+        ;(appendToElement ?? options.editor.view.dom.parentElement)?.appendChild(element)
+        if (renderer.element) {
+          element.appendChild(renderer.element)
+        }
+
+        updatePosition(element)
+        return
       }
 
       // Update the renderer if it exists (use filteredGroups which respects the limit)
@@ -366,8 +428,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     editor: options.editor,
     char: options.char,
     items: ({ query: q }: { query: string }) => {
-      // Update the query ref for external access
-      query.value = q
+      // Update the searchTerm ref for external access
+      searchTerm.value = q
 
       // When ignoreFilter is true, return items as-is (for async filtering)
       if (options.ignoreFilter) {
@@ -660,8 +722,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           cleanupMenu()
           // Clear the stored trigger position
           triggerClientRect = null
-          // Reset query
-          query.value = ''
+          // Reset search term
+          searchTerm.value = ''
         }
       }
       return handlers
@@ -706,6 +768,6 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     plugin,
     destroy,
     filteredItems,
-    query
+    searchTerm
   }
 }
