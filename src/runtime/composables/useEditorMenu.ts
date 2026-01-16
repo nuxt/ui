@@ -153,6 +153,9 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   const filter = options.filter || defaultFilter
   const limit = options.limit ?? 42
 
+  // Create the plugin key instance early (needed by showMenu helper)
+  const pluginKeyInstance = typeof options.pluginKey === 'string' ? new PluginKey(options.pluginKey) : options.pluginKey
+
   // Normalize items into groups first
   const groups = computed<T[][]>(() => {
     const items = unref(options.items)
@@ -208,7 +211,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   const middleware = buildFloatingUIMiddleware(floatingUIOptions)
 
   // Helper function to update menu position using floating-ui
-  const updatePosition = (element: HTMLElement) => {
+  const updatePosition = (el: HTMLElement) => {
     if (!triggerClientRect) return
 
     const rect = triggerClientRect()
@@ -218,17 +221,102 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
       getBoundingClientRect: () => rect
     }
 
-    computePosition(virtualElement, element, {
+    computePosition(virtualElement, el, {
       placement: floatingUIOptions.placement,
       strategy: floatingUIOptions.strategy,
       middleware
     }).then(({ x, y, strategy }) => {
-      element.style.width = 'max-content'
-      element.style.position = strategy
-      element.style.top = '0'
-      element.style.left = '0'
-      element.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`
+      el.style.width = 'max-content'
+      el.style.position = strategy
+      el.style.top = '0'
+      el.style.left = '0'
+      el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`
     })
+  }
+
+  // Helper function to show menu (creates renderer, element, and event listeners)
+  const showMenu = () => {
+    menuState.value = 'open'
+
+    // Add global keyboard listener for navigation
+    if (!globalKeyHandler) {
+      globalKeyHandler = (e: KeyboardEvent) => {
+        if (keyDownHandler) {
+          const handled = keyDownHandler({ event: e })
+          if (handled) {
+            e.preventDefault()
+            e.stopPropagation()
+          }
+        }
+      }
+      document.addEventListener('keydown', globalKeyHandler, true)
+    }
+
+    // Add blur listener to close menu when editor loses focus
+    if (!blurHandler) {
+      blurHandler = () => {
+        setTimeout(() => {
+          if (menuState.value === 'open') {
+            // Dispatch exit transaction to properly close the suggestion session
+            const tr = options.editor.view.state.tr.setMeta(pluginKeyInstance, { exit: true })
+            options.editor.view.dispatch(tr)
+          }
+        }, 0)
+      }
+      options.editor.view.dom.addEventListener('blur', blurHandler)
+    }
+
+    // Add scroll listener to update position on scroll
+    if (!scrollHandler) {
+      scrollHandler = () => {
+        if (element) {
+          updatePosition(element)
+        }
+      }
+      window.addEventListener('scroll', scrollHandler, true)
+    }
+
+    // Define onHover handler that updates both state and renderer
+    handleHover = (index: number) => {
+      selectedIndex.value = index
+      if (renderer) {
+        renderer.updateProps({
+          groups: filteredGroups.value,
+          selectedIndex: index,
+          onSelect: commandFn,
+          onHover: handleHover!,
+          state: menuState.value
+        })
+      }
+    }
+
+    renderer = new VueRenderer(MenuComponent, {
+      props: {
+        groups: filteredGroups.value,
+        selectedIndex: selectedIndex.value,
+        onSelect: commandFn,
+        onHover: handleHover,
+        state: menuState.value
+      },
+      editor: options.editor
+    })
+
+    element = document.createElement('div')
+    element.style.position = floatingUIOptions.strategy
+    element.style.zIndex = '50'
+
+    handleMouseDown = (e: MouseEvent) => {
+      e.preventDefault()
+    }
+    element.addEventListener('mousedown', handleMouseDown)
+
+    const appendToElement = typeof options.appendTo === 'function' ? options.appendTo() : options.appendTo
+    ;(appendToElement ?? options.editor.view.dom.parentElement)?.appendChild(element)
+    if (renderer.element) {
+      element.appendChild(renderer.element)
+    }
+
+    updatePosition(element)
   }
 
   // Watch for external items changes when ignoreFilter is true (for async items)
@@ -262,53 +350,11 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
       // If menu was closed but we have items now, reopen it
       if (menuState.value === 'closed' && filteredItems.value.length) {
-        menuState.value = 'open'
-
-        // Recreate the renderer
-        handleHover = (index: number) => {
-          selectedIndex.value = index
-          if (renderer) {
-            renderer.updateProps({
-              groups: filteredGroups.value,
-              selectedIndex: index,
-              onSelect: commandFn,
-              onHover: handleHover!,
-              state: menuState.value
-            })
-          }
-        }
-
-        renderer = new VueRenderer(MenuComponent, {
-          props: {
-            groups: filteredGroups.value,
-            selectedIndex: selectedIndex.value,
-            onSelect: commandFn,
-            onHover: handleHover,
-            state: menuState.value
-          },
-          editor: options.editor
-        })
-
-        element = document.createElement('div')
-        element.style.position = floatingUIOptions.strategy
-        element.style.zIndex = '50'
-
-        handleMouseDown = (e: MouseEvent) => {
-          e.preventDefault()
-        }
-        element.addEventListener('mousedown', handleMouseDown)
-
-        const appendToElement = typeof options.appendTo === 'function' ? options.appendTo() : options.appendTo
-        ;(appendToElement ?? options.editor.view.dom.parentElement)?.appendChild(element)
-        if (renderer.element) {
-          element.appendChild(renderer.element)
-        }
-
-        updatePosition(element)
+        showMenu()
         return
       }
 
-      // Update the renderer if it exists (use filteredGroups which respects the limit)
+      // Update the renderer if it exists
       if (renderer) {
         renderer.updateProps({
           groups: filteredGroups.value,
@@ -421,8 +467,6 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   }
 
   // Create the suggestion plugin
-  const pluginKeyInstance = typeof options.pluginKey === 'string' ? new PluginKey(options.pluginKey) : options.pluginKey
-
   const plugin = Suggestion({
     pluginKey: pluginKeyInstance,
     editor: options.editor,
@@ -517,86 +561,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
             return
           }
 
-          // Set state to open for animation
-          menuState.value = 'open'
-
-          // Add global keyboard listener to capture Enter/arrows
-          globalKeyHandler = (e: KeyboardEvent) => {
-            if (keyDownHandler) {
-              const handled = keyDownHandler({ event: e })
-              if (handled) {
-                e.preventDefault()
-                e.stopPropagation()
-              }
-            }
-          }
-          document.addEventListener('keydown', globalKeyHandler, true) // Use capture phase
-
-          // Add blur listener to close menu when editor loses focus
-          blurHandler = () => {
-            // Small delay to allow clicks on menu items to be processed first
-            setTimeout(() => {
-              // Only close if still in open state (not already closing from item selection)
-              if (menuState.value === 'open') {
-                const tr = suggestionProps.editor.view.state.tr.setMeta(pluginKeyInstance, { exit: true })
-                suggestionProps.editor.view.dispatch(tr)
-              }
-            }, 0)
-          }
-          suggestionProps.editor.view.dom.addEventListener('blur', blurHandler)
-
-          // Add scroll listener to update position on scroll
-          scrollHandler = () => {
-            if (element) {
-              updatePosition(element)
-            }
-          }
-          window.addEventListener('scroll', scrollHandler, true)
-
-          // Define onHover handler that updates both state and renderer
-          handleHover = (index: number) => {
-            selectedIndex.value = index
-            // Trigger re-render with updated selectedIndex
-            if (renderer) {
-              renderer.updateProps({
-                groups: filteredGroups.value,
-                selectedIndex: index,
-                onSelect: commandFn,
-                onHover: handleHover!,
-                state: menuState.value
-              })
-            }
-          }
-
-          renderer = new VueRenderer(MenuComponent, {
-            props: {
-              groups: filteredGroups.value,
-              selectedIndex: selectedIndex.value,
-              onSelect: commandFn,
-              onHover: handleHover,
-              state: menuState.value
-            },
-            editor: suggestionProps.editor
-          })
-
-          element = document.createElement('div')
-          element.style.position = floatingUIOptions.strategy
-          element.style.zIndex = '50'
-
-          // Prevent the menu from capturing mouse down events which would steal focus
-          handleMouseDown = (e: MouseEvent) => {
-            e.preventDefault()
-          }
-          element.addEventListener('mousedown', handleMouseDown)
-
-          // Attach to appendTo or editor's parent element
-          const appendToElement = typeof options.appendTo === 'function' ? options.appendTo() : options.appendTo
-          ;(appendToElement ?? suggestionProps.editor.view.dom.parentElement)?.appendChild(element)
-          if (renderer.element) {
-            element.appendChild(renderer.element)
-          }
-
-          updatePosition(element)
+          showMenu()
         },
         onUpdate: (suggestionProps: SuggestionProps) => {
           // When ignoreFilter is true, always use fresh items from the reactive source
@@ -620,88 +585,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
           // Show menu if it was hidden
           if (!renderer) {
-            // Set state to open for animation
-            menuState.value = 'open'
-
-            // Re-add global keyboard listener
-            if (!globalKeyHandler) {
-              globalKeyHandler = (e: KeyboardEvent) => {
-                if (keyDownHandler) {
-                  const handled = keyDownHandler({ event: e })
-                  if (handled) {
-                    e.preventDefault()
-                    e.stopPropagation()
-                  }
-                }
-              }
-              document.addEventListener('keydown', globalKeyHandler, true)
-            }
-
-            // Re-add blur listener
-            if (!blurHandler) {
-              blurHandler = () => {
-                setTimeout(() => {
-                  if (menuState.value === 'open') {
-                    const tr = suggestionProps.editor.view.state.tr.setMeta(pluginKeyInstance, { exit: true })
-                    suggestionProps.editor.view.dispatch(tr)
-                  }
-                }, 0)
-              }
-              suggestionProps.editor.view.dom.addEventListener('blur', blurHandler)
-            }
-
-            // Re-add scroll listener
-            if (!scrollHandler) {
-              scrollHandler = () => {
-                if (element) {
-                  updatePosition(element)
-                }
-              }
-              window.addEventListener('scroll', scrollHandler, true)
-            }
-
-            // Define onHover handler that updates both state and renderer
-            handleHover = (index: number) => {
-              selectedIndex.value = index
-              // Trigger re-render with updated selectedIndex
-              if (renderer) {
-                renderer.updateProps({
-                  groups: filteredGroups.value,
-                  selectedIndex: index,
-                  onSelect: commandFn,
-                  onHover: handleHover!,
-                  state: menuState.value
-                })
-              }
-            }
-
-            renderer = new VueRenderer(MenuComponent, {
-              props: {
-                groups: filteredGroups.value,
-                selectedIndex: selectedIndex.value,
-                onSelect: commandFn,
-                onHover: handleHover,
-                state: menuState.value
-              },
-              editor: suggestionProps.editor
-            })
-
-            element = document.createElement('div')
-            element.style.position = floatingUIOptions.strategy
-            element.style.zIndex = '50'
-
-            // Prevent the menu from capturing mouse down events which would steal focus
-            handleMouseDown = (e: MouseEvent) => {
-              e.preventDefault()
-            }
-            element.addEventListener('mousedown', handleMouseDown)
-
-            // Attach to appendTo or editor's parent element
-            const appendToElement = typeof options.appendTo === 'function' ? options.appendTo() : options.appendTo
-            ;(appendToElement ?? suggestionProps.editor.view.dom.parentElement)?.appendChild(element)
-            if (renderer.element) {
-              element.appendChild(renderer.element)
-            }
+            showMenu()
           } else {
             // Update existing renderer
             renderer.updateProps({
