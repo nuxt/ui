@@ -228,7 +228,7 @@ function onUpdate(files: File[], reset = false) {
       modelValue.value = [...existingFiles, ...(files || [])] as (M extends true ? File[] : File) | null
     }
   } else {
-    modelValue.value = files?.[0] as (M extends true ? File[] : File) | null
+    modelValue.value = (files?.[0] ?? null) as (M extends true ? File[] : File) | null
   }
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'

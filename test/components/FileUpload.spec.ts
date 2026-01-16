@@ -118,6 +118,12 @@ describe('FileUpload', () => {
       expect(wrapper.emitted('update:modelValue')).toBeTruthy()
     })
 
+    test('update:modelValue emits null when removing a single file', async () => {
+      const wrapper = mount(FileUpload, { props })
+      await wrapper.find('button').trigger('click')
+      expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBeNull()
+    })
+
     test('change event', async () => {
       const wrapper = mount(FileUpload)
       const input = wrapper.find('input')
