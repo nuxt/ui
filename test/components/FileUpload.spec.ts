@@ -64,6 +64,7 @@ describe('FileUpload', () => {
     ['without dropzone', { props: { dropzone: false } }],
     ['without interactive', { props: { interactive: false } }],
     ['without preview', { props: { ...props, preview: false } }],
+    ['without preview with multiple', { props: { ...props, preview: false, multiple: true } }],
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with fileIcon', { props: { ...props, fileIcon: 'i-lucide-house' } }],
