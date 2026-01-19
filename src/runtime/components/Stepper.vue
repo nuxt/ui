@@ -145,7 +145,7 @@ defineExpose({
     <div data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <StepperItem
         v-for="(item, count) in items"
-        :key="get(item, props.valueKey as string) ?? count"
+        :key="count"
         :step="count"
         :disabled="item.disabled || props.disabled"
         data-slot="item"

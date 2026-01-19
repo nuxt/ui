@@ -119,7 +119,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
   <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div
       v-for="(item, index) in items"
-      :key="get(item, props.valueKey as string) ?? index"
+      :key="index"
       data-slot="item"
       :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
       :data-state="getItemState(index)"
