@@ -64,7 +64,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
 }
 
 type SingleOrMultipleType = 'single' | 'multiple'
-type Orientation = NavigationMenuRootProps['orientation']
+type Orientation = NavigationMenu['variants']['orientation']
 
 type NavigationMenuModelValue<
   K extends SingleOrMultipleType = SingleOrMultipleType,
