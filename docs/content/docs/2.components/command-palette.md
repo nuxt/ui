@@ -799,7 +799,7 @@ props:
 ::
 
 ::tip
-Use the `value-key` prop to select a field of an item to use as the value instead of the object itself.
+Use the `value-key` prop to select a field of an item to use as the value instead of the object itself. Use the `by` prop to compare objects by a field instead of reference.
 ::
 
 ### Control search term

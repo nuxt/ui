@@ -94,6 +94,43 @@ exports[`Select > renders with avatar correctly 1`] = `
 <!--v-if-->"
 `;
 
+exports[`Select > renders with by correctly 1`] = `
+"<button data-slot="base" class="relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus:ring-2 focus:ring-inset focus:ring-primary pe-9" role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open">
+  <!--v-if--><span data-slot="value" class="truncate pointer-events-none">Backlog</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
+</button>
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div style="box-sizing: border-box; --reka-select-content-transform-origin: var(--reka-popper-transform-origin); --reka-select-content-available-width: var(--reka-popper-available-width); --reka-select-content-available-height: var(--reka-popper-available-height); --reka-select-trigger-width: var(--reka-popper-anchor-width); --reka-select-trigger-height: var(--reka-popper-anchor-height); pointer-events: auto; display: flex; flex-direction: column; animation: none; outline-color: none; outline-style: none; outline-width: initial;" data-dismissable-layer="" tabindex="-1" data-slot="content" class="max-h-60 w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col" position="popper" bodylock="true" disableoutsidepointerevents="true" id="reka-select-content-v-0-0-0" role="listbox" data-state="open" dir="ltr" data-side="bottom" data-align="start">
+    <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
+      <div role="group" aria-labelledby="reka-select-group-v-0-0-1" data-slot="group" class="p-1 isolate">
+        <div data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" role="option" aria-labelledby="reka-select-item-text-v-0-0-2" aria-selected="false" data-state="unchecked" tabindex="-1"><span class="iconify i-lucide:circle-help shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col min-w-0"><span id="reka-select-item-text-v-0-0-2" data-slot="itemLabel" class="truncate">Backlog</span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--></span>
+        </div>
+        <div data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" role="option" aria-labelledby="reka-select-item-text-v-0-0-3" aria-selected="false" data-state="unchecked" tabindex="-1"><span class="iconify i-lucide:circle-plus shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col min-w-0"><span id="reka-select-item-text-v-0-0-3" data-slot="itemLabel" class="truncate">Todo</span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--></span>
+        </div>
+        <div data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" role="option" aria-labelledby="reka-select-item-text-v-0-0-4" aria-selected="false" data-state="unchecked" tabindex="-1"><span class="iconify i-lucide:circle-arrow-up shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col min-w-0"><span id="reka-select-item-text-v-0-0-4" data-slot="itemLabel" class="truncate">In Progress</span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--></span>
+        </div>
+        <div data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" role="option" aria-labelledby="reka-select-item-text-v-0-0-5" aria-selected="false" data-state="unchecked" tabindex="-1"><span class="iconify i-lucide:circle-check shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col min-w-0"><span id="reka-select-item-text-v-0-0-5" data-slot="itemLabel" class="truncate">Done</span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--></span>
+        </div>
+        <div data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" role="option" aria-labelledby="reka-select-item-text-v-0-0-6" aria-selected="false" data-state="unchecked" tabindex="-1"><span class="iconify i-lucide:circle-x shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col min-w-0"><span id="reka-select-item-text-v-0-0-6" data-slot="itemLabel" class="truncate">Canceled</span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--></span>
+        </div>
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->
+<!--v-if-->"
+`;
+
 exports[`Select > renders with class correctly 1`] = `
 "<button data-slot="base" class="relative group inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus:ring-2 focus:ring-inset focus:ring-primary pe-9 rounded-full" role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="">
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>

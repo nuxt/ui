@@ -113,6 +113,7 @@ describe('CommandPalette', () => {
     ['with searchTerm', { props: { ...props, searchTerm: 'f' } }],
     ['with searchTerm and preserveGroupOrder', { props: { ...props, searchTerm: 'f', preserveGroupOrder: true } }],
     ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Add new file' } }],
+    ['with by', { props: { ...props, by: 'label', defaultValue: groups[0]?.items[0] } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with descriptionKey', { props: { groups: groupsWithDescription, descriptionKey: 'label' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
