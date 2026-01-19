@@ -182,7 +182,7 @@
     "ufo": "^1.6.3",
     "unplugin": "^2.3.11",
     "unplugin-auto-import": "^20.3.0",
-    "unplugin-vue-components": "^30.0.0",
+    "unplugin-vue-components": "^31.0.0",
     "vaul-vue": "0.4.1",
     "vue-component-type-helpers": "^3.2.2"
   },
