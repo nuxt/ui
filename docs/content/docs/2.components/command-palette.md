@@ -273,6 +273,37 @@ props:
 ---
 ::
 
+### Size :badge{label="Soon" class="align-text-top"}
+
+Use the `size` prop to change the size of the CommandPalette.
+
+::component-code
+---
+collapse: true
+hide:
+  - autofocus
+ignore:
+  - class
+  - groups
+external:
+  - groups
+class: '!p-0'
+props:
+  autofocus: false
+  size: 'xl'
+  groups:
+    - id: 'apps'
+      items:
+        - label: 'Calendar'
+          icon: 'i-lucide-calendar'
+        - label: 'Music'
+          icon: 'i-lucide-music'
+        - label: 'Maps'
+          icon: 'i-lucide-map'
+  class: 'flex-1'
+---
+::
+
 ### Icon
 
 Use the `icon` prop to customize the input [Icon](/docs/components/icon). Defaults to `i-lucide-search`.

@@ -66,6 +66,10 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   as?: any
   /**
+   * @defaultValue 'md'
+   */
+  size?: CommandPalette['variants']['size']
+  /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
    * @IconifyIcon
@@ -270,6 +274,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: C
 })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })({
+  size: props.size,
   virtualize: !!props.virtualize
 }))
 
@@ -517,6 +522,7 @@ function onSelect(e: Event, item: T) {
     <ListboxFilter v-if="input" v-model="searchTerm" as-child>
       <UInput
         variant="none"
+        :size="size"
         v-bind="typeof props.input === 'object' ? props.input : {}"
         :placeholder="placeholder"
         :autofocus="autofocus"
@@ -531,6 +537,7 @@ function onSelect(e: Event, item: T) {
         <template v-if="history?.length && (back || !!slots.back)" #leading>
           <slot name="back" :ui="ui">
             <UButton
+              :size="size"
               :icon="backIcon || appConfig.ui.icons.arrowLeft"
               color="neutral"
               variant="link"
@@ -547,6 +554,7 @@ function onSelect(e: Event, item: T) {
           <slot name="close" :ui="ui">
             <UButton
               v-if="close"
+              :size="size"
               :icon="closeIcon || appConfig.ui.icons.close"
               color="neutral"
               variant="ghost"

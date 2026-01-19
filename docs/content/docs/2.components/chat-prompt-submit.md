@@ -248,7 +248,6 @@ Pass the `status` prop and listen to the `stop` and `reload` events to control t
 ```vue [pages/\[id\\].vue] {2,7-11,35}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
-import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
 const input = ref('')
 
@@ -271,7 +270,10 @@ function onSubmit() {
       <UContainer>
         <UChatMessages :messages="chat.messages" :status="chat.status">
           <template #content="{ message }">
-            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" class="*:first:mt-0 *:last:mb-0" />
+            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+              <MDC v-if="part.type === 'text' && message.role === 'assistant'" :value="part.text" :cache-key="`${message.id}-${index}`" class="*:first:mt-0 *:last:mb-0" />
+              <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">{{ part.text }}</p>
+            </template>
           </template>
         </UChatMessages>
       </UContainer>

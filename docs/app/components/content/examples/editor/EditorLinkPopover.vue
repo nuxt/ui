@@ -43,12 +43,19 @@ function setLink() {
 
   const { selection } = props.editor.state
   const isEmpty = selection.empty
+  const hasCode = props.editor.isActive('code')
 
   let chain = props.editor.chain().focus()
-  chain = chain.extendMarkRange('link').setLink({ href: url.value })
 
-  if (isEmpty) {
-    chain = chain.insertContent({ type: 'text', text: url.value })
+  // When linking code, extend the code mark range first to select the full code
+  if (hasCode && !isEmpty) {
+    chain = chain.extendMarkRange('code').setLink({ href: url.value })
+  } else {
+    chain = chain.extendMarkRange('link').setLink({ href: url.value })
+
+    if (isEmpty) {
+      chain = chain.insertContent({ type: 'text', text: url.value })
+    }
   }
 
   chain.run()

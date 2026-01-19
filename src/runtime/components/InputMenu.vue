@@ -485,8 +485,11 @@ function onClear() {
   emits('clear')
 }
 
+const viewportRef = useTemplateRef('viewportRef')
+
 defineExpose({
-  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement)
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement),
+  viewportRef: toRef(() => viewportRef.value)
 })
 </script>
 
@@ -667,7 +670,7 @@ defineExpose({
           </slot>
         </ComboboxEmpty>
 
-        <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+        <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
           <template v-if="!!virtualize">
             <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 

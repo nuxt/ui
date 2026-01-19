@@ -3,6 +3,7 @@ import { reactive, markRaw, shallowReactive } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
 import type { ComponentProps, ComponentEmit } from 'vue-component-type-helpers'
 
+type CloseEventArgTypeSimple<T> = T extends (event: 'close', arg_0: infer Arg, ...args: any[]) => void ? Arg : never
 /**
  * This is a workaround for a design limitation in TypeScript.
  *
@@ -12,7 +13,7 @@ import type { ComponentProps, ComponentEmit } from 'vue-component-type-helpers'
  *
  * @see https://github.com/microsoft/TypeScript/issues/32164
  */
-type CloseEventArgType<T> = T extends {
+type CloseEventArgTypeComplex<T> = T extends {
   (event: 'close', arg_0: infer Arg, ...args: any[]): void
   (...args: any[]): void
   (...args: any[]): void
@@ -31,6 +32,9 @@ type CloseEventArgType<T> = T extends {
   (...args: any[]): void
   (...args: any[]): void
 } ? Arg : never
+
+type CloseEventArgType<T> = CloseEventArgTypeSimple<T> | CloseEventArgTypeComplex<T>
+
 export type OverlayOptions<OverlayAttrs = Record<string, any>> = {
   defaultOpen?: boolean
   props?: OverlayAttrs

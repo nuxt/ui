@@ -8,7 +8,7 @@ import ComponentRender from '../component-render'
 describe('Main', () => {
   it.each([
     // Props
-    ['with as', { props: { as: 'main' } }],
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'min-h-full' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
