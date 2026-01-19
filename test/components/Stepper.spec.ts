@@ -32,6 +32,7 @@ describe('Stepper', () => {
     ['with items', { props }],
     ['with defaultValue', { props: { ...props, defaultValue: 1 } }],
     ['with modelValue', { props: { ...props, modelValue: 1 } }],
+    ['with valueKey', { props: { ...props, valueKey: 'title', defaultValue: 'Address' } }],
     ['with neutral color', { props: { ...props, color: 'neutral' } }],
     ...sizes.map((size: string) => [`with size ${size} horizontal`, { props: { ...props, size } }]),
     ...sizes.map((size: string) => [`with size ${size} vertical`, { props: { ...props, size, orientation: 'vertical' } }]),

@@ -798,6 +798,10 @@ props:
 ---
 ::
 
+::tip
+Use the `value-key` prop to select a field of an item to use as the value instead of the object itself.
+::
+
 ### Control search term
 
 Use the `v-model:search-term` directive to control the search term.

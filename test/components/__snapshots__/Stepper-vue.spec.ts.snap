@@ -1005,6 +1005,48 @@ exports[`Stepper > renders with ui correctly 1`] = `
 </div>"
 `;
 
+exports[`Stepper > renders with valueKey correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" data-slot="root" class="flex gap-4 flex-col">
+  <div data-slot="header" class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" data-slot="item" class="group text-center relative w-full">
+      <div data-slot="container" class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" data-slot="trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div data-slot="indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-5"></svg></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" data-slot="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div data-slot="wrapper" class="mt-2.5">
+        <div id="reka-stepper-item-title-v-0" data-slot="title" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-1" data-slot="description" class="text-muted text-wrap text-sm">Add your address here</div>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" data-slot="item" class="group text-center relative w-full">
+      <div data-slot="container" class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" data-slot="trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div data-slot="indicator" class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-5"></svg></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" data-slot="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div data-slot="wrapper" class="mt-2.5">
+        <div id="reka-stepper-item-title-v-2" data-slot="title" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-3" data-slot="description" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" data-slot="item" class="group text-center relative w-full">
+      <div data-slot="container" class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-5" aria-labelledby="reka-stepper-item-title-v-4" data-slot="trigger" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div data-slot="indicator" class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="mt-2.5">
+        <div id="reka-stepper-item-title-v-4" data-slot="title" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-5" data-slot="description" class="text-muted text-wrap text-sm">Confirm your order</div>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
 exports[`Stepper > renders with wrapper slot correctly 1`] = `
 "<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" data-slot="root" class="flex gap-4 flex-col">
   <div data-slot="header" class="flex">

@@ -43,6 +43,7 @@ describe('Timeline', () => {
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: 'design' } }],
     ['with defaultValue', { props: { ...props, defaultValue: 'design' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'title', defaultValue: 'Design Phase' } }],
     ['with neutral color', { props: { ...props, color: 'neutral' } }],
     ...sizes.map((size: string) => [`with size ${size} horizontal`, { props: { ...props, size } }]),
     ...sizes.map((size: string) => [`with size ${size} vertical`, { props: { ...props, size, orientation: 'vertical' } }]),
