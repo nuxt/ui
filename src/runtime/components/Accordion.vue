@@ -104,7 +104,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
       v-for="(item, index) in props.items"
       v-slot="{ open }"
       :key="index"
-      :value="get(item, props.valueKey as string) || String(index)"
+      :value="get(item, props.valueKey as string) ?? String(index)"
       :disabled="item.disabled"
       data-slot="item"
       :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"

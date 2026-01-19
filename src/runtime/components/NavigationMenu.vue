@@ -296,7 +296,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
 function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
   const indexes = list.reduce((acc: string[], item, index) => {
     if (item.defaultOpen || item.open) {
-      acc.push(get(item, props.valueKey as string) || (level > 0 ? `item-${level}-${index}` : `item-${index}`))
+      acc.push(get(item, props.valueKey as string) ?? (level > 0 ? `item-${level}-${index}` : `item-${index}`))
     }
     return acc
   }, [])
@@ -355,7 +355,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
     <component
       :is="(orientation === 'vertical' && !collapsed) ? AccordionItem : NavigationMenuItem"
       as="li"
-      :value="get(item, props.valueKey as string) || (level > 0 ? `item-${level}-${index}` : `item-${index}`)"
+      :value="get(item, props.valueKey as string) ?? (level > 0 ? `item-${level}-${index}` : `item-${index}`)"
     >
       <div v-if="orientation === 'vertical' && item.type === 'label' && !collapsed" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
         <ReuseLinkTemplate :item="item" :index="index" />
