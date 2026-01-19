@@ -155,7 +155,7 @@ const linkRel = computed(() => {
   return null
 })
 
-const handleNavigation = inject<((event: MouseEvent, context: { href: string, external: boolean, target?: string | null }) => void) | undefined>('nuxtui:router')
+const handleNavigation = inject<((event: MouseEvent, context: { href: string, external: boolean, target?: string | null }) => void) | undefined>('nuxtui:router', undefined)
 
 const navigate = handleNavigation
   ? (e: MouseEvent) => {

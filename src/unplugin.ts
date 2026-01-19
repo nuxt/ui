@@ -25,8 +25,6 @@ import AutoImportPlugin from './plugins/auto-import'
 import type { TVConfig } from './runtime/types/tv'
 
 type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
-
-export type RouterFunction = (event: MouseEvent, context: { href: string, external: boolean, target?: string | null }) => void
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {
@@ -58,10 +56,9 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    * - `true` (default): Use vue-router integration
    * - `false`: Disable routing, use anchor tags
    * - `'inertia'`: Use Inertia.js compatibility layer
-   * - `function`: Custom navigation handler for frameworks like Hybridly
    * @defaultValue `true`
    */
-  router?: boolean | 'inertia' | RouterFunction
+  router?: boolean | 'inertia'
   /**
    * Enables compatibility layer for InertiaJS
    * @deprecated Use `router: 'inertia'` instead
