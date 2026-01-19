@@ -90,7 +90,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.banner || {}
 }))
 
 const instanceId = useId()
-const id = computed(() => `banner-${props.id || instanceId}`)
+const id = computed(() => {
+  const rawId = props.id || instanceId
+  // Sanitize to only allow safe characters for CSS custom properties and selectors
+  return `banner-${rawId.replace(/[^a-zA-Z0-9_-]/g, '-')}`
+})
 const isVisible = ref(true)
 const hasPersistence = computed(() => !!props.id)
 
