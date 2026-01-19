@@ -14,8 +14,7 @@ export interface BannerProps {
   as?: any
   /**
    * A unique id saved to local storage to remember if the banner has been dismissed.
-   * Change this value to show the banner again.
-   * @defaultValue '1'
+   * Without an explicit id, the banner will not be persisted and will reappear on page reload.
    */
   id?: string
   /**
