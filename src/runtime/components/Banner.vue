@@ -111,7 +111,7 @@ useHead(() => {
         (function() {
           try {
             if (localStorage.getItem(${JSON.stringify(id.value)}) === 'true') {
-              document.documentElement.style.setProperty('--banner-${id.value}-display', 'none');
+              document.documentElement.style.setProperty('--${id.value}-display', 'none');
             }
           } catch (e) {}
         })();
@@ -121,7 +121,7 @@ useHead(() => {
     }],
     style: [{
       key: `banner-style-${id.value}`,
-      innerHTML: `.banner[data-banner-id="${id.value}"] { display: var(--banner-${id.value}-display, block); }`,
+      innerHTML: `.banner[data-banner-id="${id.value}"] { display: var(--${id.value}-display, block); }`,
       tagPosition: 'head'
     }]
   }
@@ -130,7 +130,7 @@ useHead(() => {
 function onClose() {
   if (hasPersistence.value) {
     localStorage.setItem(id.value, 'true')
-    document.documentElement.style.setProperty(`--banner-${id.value}-display`, 'none')
+    document.documentElement.style.setProperty(`--${id.value}-display`, 'none')
   }
   isVisible.value = false
   emits('close')
