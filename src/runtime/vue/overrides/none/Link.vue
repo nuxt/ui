@@ -155,19 +155,17 @@ const linkRel = computed(() => {
   return null
 })
 
-const handleNavigation = inject<((event: MouseEvent, context: { href: string, external: boolean, target?: string | null }) => void) | undefined>('nuxtui:router:function')
+const handleNavigation = inject<((event: MouseEvent, context: { href: string, external: boolean, target?: string | null }) => void) | undefined>('nuxtui:router')
 
-function navigate(e: MouseEvent) {
-  if (!handleNavigation) {
-    return
-  }
-
-  handleNavigation(e, {
-    href: href.value || '',
-    external: isExternal.value,
-    target: props.target || (isExternal.value ? '_blank' : undefined)
-  })
-}
+const navigate = handleNavigation
+  ? (e: MouseEvent) => {
+      handleNavigation(e, {
+        href: href.value || '',
+        external: isExternal.value,
+        target: props.target || (isExternal.value ? '_blank' : undefined)
+      })
+    }
+  : undefined
 </script>
 
 <template>
@@ -178,8 +176,8 @@ function navigate(e: MouseEvent) {
         as,
         type,
         disabled,
-        href: href,
-        navigate: navigate,
+        href,
+        navigate,
         rel: linkRel,
         target: target || (isExternal ? '_blank' : undefined),
         isExternal,
@@ -194,8 +192,8 @@ function navigate(e: MouseEvent) {
       as,
       type,
       disabled,
-      href: href,
-      navigate: navigate,
+      href,
+      navigate,
       rel: linkRel,
       target: target || (isExternal ? '_blank' : undefined),
       isExternal
