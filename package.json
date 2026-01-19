@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "3.3.7",
-  "packageManager": "pnpm@10.28.0",
+  "packageManager": "pnpm@10.28.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -163,7 +163,7 @@
     "@vue/test-utils": "^2.4.6",
     "embla-carousel": "^8.6.0",
     "eslint": "^9.39.2",
-    "happy-dom": "^20.1.0",
+    "happy-dom": "^20.3.3",
     "nuxt": "^4.2.2",
     "release-it": "^19.2.3",
     "vitest": "^3.2.4",
