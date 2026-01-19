@@ -7,6 +7,7 @@ if (!page.value) {
 }
 
 const { url } = useSiteConfig()
+const appConfig = useAppConfig()
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
@@ -43,7 +44,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 </script>
 
 <template>
-  <div v-if="page">
+  <main v-if="page">
     <UPageHero
       orientation="horizontal"
       :ui="{
@@ -178,7 +179,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           <div class="flex flex-col">
             <h2 class="font-medium text-highlighted inline-flex items-center gap-x-1">
               {{ feature.title }}
-              <UIcon v-if="feature.to" name="i-lucide-arrow-right" class="size-4 shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
+              <UIcon v-if="feature.to" :name="appConfig.ui.icons.arrowRight" class="size-4 shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
             </h2>
             <p class="text-sm text-muted">
               {{ feature.description }}
@@ -311,7 +312,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         <li>
           <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0 group focus-visible:outline-primary">
             <p class="text-4xl font-semibold text-highlighted truncate group-hover:text-primary transition-colors">
-              250+
+              300+
             </p>
             <p class="text-muted text-sm truncate">Contributors</p>
           </NuxtLink>
@@ -322,5 +323,5 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView || isContributorsHovered" />
       </div>
     </UPageSection>
-  </div>
+  </main>
 </template>

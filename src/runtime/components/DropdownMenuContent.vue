@@ -103,7 +103,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
           <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" data-slot="itemLabelExternalIcon" :class="ui.itemLabelExternalIcon({ class: [uiOverride?.itemLabelExternalIcon, item.ui?.itemLabelExternalIcon], color: item?.color, active })" />
         </span>
 
-        <span v-if="get(item, props.descriptionKey as string)" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiOverride?.itemDescription, item.ui?.itemDescription] })">
+        <span v-if="get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description`: 'item-description') as keyof DropdownMenuContentSlots<T>]" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiOverride?.itemDescription, item.ui?.itemDescription] })">
           <slot :name="((item.slot ? `${item.slot}-description`: 'item-description') as keyof DropdownMenuContentSlots<T>)" :item="(item as Extract<NestedItem<T>, { slot: string; }>)" :active="active" :index="index">
             {{ get(item, props.descriptionKey as string) }}
           </slot>
@@ -182,19 +182,18 @@ const groups = computed<DropdownMenuItem[][]>(() =>
             >
               <ReuseItemTemplate :item="item" :index="index" />
             </DropdownMenu.CheckboxItem>
-            <DropdownMenu.Item
-              v-else
-              as-child
-              :disabled="item.disabled"
-              :text-value="get(item, props.labelKey as string)"
-              @select="item.onSelect"
-            >
-              <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<DropdownMenuItem, 'type'>)" custom>
+            <ULink v-else v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<DropdownMenuItem, 'type'>)" custom>
+              <DropdownMenu.Item
+                as-child
+                :disabled="item.disabled"
+                :text-value="get(item, props.labelKey as string)"
+                @select="item.onSelect"
+              >
                 <ULinkBase v-bind="slotProps" data-slot="item" :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color, active })">
                   <ReuseItemTemplate :item="item" :active="active" :index="index" />
                 </ULinkBase>
-              </ULink>
-            </DropdownMenu.Item>
+              </DropdownMenu.Item>
+            </ULink>
           </template>
         </DropdownMenu.Group>
       </div>

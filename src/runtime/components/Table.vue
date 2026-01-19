@@ -2,9 +2,10 @@
 <script lang="ts">
 import type { Ref, WatchOptions, ComponentPublicInstance } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { Cell, Column, Header, RowData, TableMeta } from '@tanstack/table-core'
 import type {
+  Cell,
   CellContext,
+  Column,
   ColumnDef,
   ColumnFiltersOptions,
   ColumnFiltersState,
@@ -21,16 +22,19 @@ import type {
   GlobalFilterOptions,
   GroupingOptions,
   GroupingState,
+  Header,
   HeaderContext,
   PaginationOptions,
   PaginationState,
   Row,
+  RowData,
   RowPinningOptions,
   RowPinningState,
   RowSelectionOptions,
   RowSelectionState,
   SortingOptions,
   SortingState,
+  TableMeta,
   Updater,
   VisibilityOptions,
   VisibilityState

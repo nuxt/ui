@@ -39,7 +39,7 @@ Guidelines:
 - You have up to 6 tool calls to find the answer, so be strategic: start broad, then get specific if needed.
 - Format responses in a conversational way, not as documentation sections.
     `,
-    messages: convertToModelMessages(messages),
+    messages: await convertToModelMessages(messages),
     stopWhen: stepCountIs(6),
     tools,
     onFinish: async () => {

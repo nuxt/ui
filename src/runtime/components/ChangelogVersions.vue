@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { SpringOptions } from 'motion-v'
+import type { SpringOptions, UseScrollOptions } from 'motion-v'
 import theme from '#build/ui/changelog-versions'
 import type { ChangelogVersionProps, ChangelogVersionSlots } from '../types'
 import type { ComponentConfig } from '../types/tv'
@@ -17,9 +17,11 @@ export interface ChangelogVersionsProps<T extends ChangelogVersionProps = Change
   versions?: T[]
   /**
    * Display an indicator bar on the left.
+   * By default, the indicator will track the scroll of the page. (https://motion.dev/docs/vue-use-scroll#page-scroll)
    * @defaultValue true
+   * @see https://motion.dev/docs/vue-use-scroll#api
    */
-  indicator?: boolean
+  indicator?: boolean | UseScrollOptions
   /**
    * Enable scrolling motion effect on the indicator bar.
    * `{ damping: 30, restDelta: 0.001 }`{lang="ts-type"}
@@ -66,8 +68,9 @@ const getProxySlots = () => omit(slots, ['default', 'indicator'])
 const appConfig = useAppConfig() as ChangelogVersions['AppConfig']
 
 const springOptions = computed(() => defu(typeof props.indicatorMotion === 'object' ? props.indicatorMotion : {}, { damping: 30, restDelta: 0.001 }))
+const scrollOptions = computed(() => typeof props.indicator === 'object' ? props.indicator : {})
 
-const { scrollYProgress } = useScroll()
+const { scrollYProgress } = useScroll(scrollOptions.value)
 const y = useSpring(scrollYProgress, springOptions)
 const height = useTransform(() => `${y.get() * 100}%`)
 

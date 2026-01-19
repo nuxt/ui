@@ -31,6 +31,7 @@ export type EditorHandlers<H extends EditorCustomHandlers = EditorCustomHandlers
   blockquote: EditorHandler
   bulletList: EditorHandler
   orderedList: EditorHandler
+  taskList: EditorHandler
   codeBlock: EditorHandler
   horizontalRule: EditorHandler
   paragraph: EditorHandler
@@ -54,5 +55,5 @@ export type EditorItem<H extends EditorCustomHandlers = EditorCustomHandlers>
     | { kind: 'image', src?: string }
     | { kind: 'duplicate' | 'delete' | 'moveUp' | 'moveDown', pos: number }
     | { kind: 'clearFormatting' | 'suggestion', pos?: number }
-    | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'codeBlock' | 'horizontalRule' | 'paragraph' | 'undo' | 'redo' | 'mention' | 'emoji' }
+    | { kind: 'blockquote' | 'bulletList' | 'orderedList' | 'taskList' | 'codeBlock' | 'horizontalRule' | 'paragraph' | 'undo' | 'redo' | 'mention' | 'emoji' }
     | { kind: keyof H }

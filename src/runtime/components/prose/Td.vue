@@ -6,6 +6,7 @@ import theme from '#build/ui/prose/td'
 type ProseTd = ComponentConfig<typeof theme, AppConfig, 'td', 'ui.prose'>
 
 export interface ProseTdProps {
+  align?: 'left' | 'center' | 'right'
   class?: any
 }
 
@@ -28,7 +29,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.td ||
 </script>
 
 <template>
-  <td :class="ui({ class: props.class })">
+  <td :class="ui({ align: props.align, class: props.class })">
     <slot />
   </td>
 </template>
