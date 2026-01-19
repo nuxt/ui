@@ -42,32 +42,35 @@ Extracts keyboard shortcuts from an array of menu items and returns a configurat
 #### Parameters
 
 ::field-group
+
   ::field{name="items" type="any[] | any[][]" required}
   An array of menu items (or nested arrays) containing shortcut definitions. Each item can have the following properties:
 
-  ::collapsible
-    ::field-group
-      ::field{name="kbds" type="string[]"}
-      An array of keyboard keys that form the shortcut (e.g., `['meta', 'S']`).
-      ::
+    ::collapsible
 
-      ::field{name="onSelect" type="() => void"}
-      A callback function to execute when the shortcut is triggered.
-      ::
+      ::field-group
 
-      ::field{name="onClick" type="() => void"}
-      An alternative callback function (used if `onSelect` is not defined).
-      ::
+        ::field{name="kbds" type="string[]"}
+        An array of keyboard keys that form the shortcut (e.g., `['meta', 'S']`).
+        ::
 
-      ::field{name="children" type="any[]"}
-      Nested menu items to recursively extract shortcuts from.
-      ::
+        ::field{name="onSelect" type="() => void"}
+        A callback function to execute when the shortcut is triggered.
+        ::
 
-      ::field{name="items" type="any[]"}
-      Alternative property for nested menu items.
+        ::field{name="onClick" type="() => void"}
+        An alternative callback function (used if `onSelect` is not defined).
+        ::
+
+        ::field{name="children" type="any[]"}
+        Nested menu items to recursively extract shortcuts from.
+        ::
+
+        ::field{name="items" type="any[]"}
+        Alternative property for nested menu items.
+        ::
       ::
     ::
-  ::
   ::
 
   ::field{name="separator" type="'_' | '-'"}

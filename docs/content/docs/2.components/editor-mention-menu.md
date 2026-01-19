@@ -88,6 +88,25 @@ Use the `options` prop to customize the positioning behavior using [Floating UI 
 </template>
 ```
 
+## Examples
+
+### With ignore filter :badge{label="Soon" class="align-text-top"}
+
+You can set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic. Use `v-model:search-term` to access the current search term and fetch items from an API.
+
+::component-example
+---
+elevated: true
+collapse: true
+name: 'editor-mention-menu-ignore-filter-example'
+class: 'p-8'
+---
+::
+
+::note
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/) to debounce the API calls.
+::
+
 ## API
 
 ### Props

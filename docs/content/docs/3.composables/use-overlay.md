@@ -42,6 +42,7 @@ Create an overlay, and return a factory instance.
 #### Parameters
 
 ::field-group
+
   ::field{name="component" type="T" required}
   The overlay component to render.
   ::
@@ -49,21 +50,22 @@ Create an overlay, and return a factory instance.
   ::field{name="options" type="OverlayOptions"}
   Configuration options for the overlay.
 
-  ::collapsible
-    ::field-group
-    ::field{name="defaultOpen" type="boolean"}
-    Open the overlay immediately after being created. Defaults to `false`.
-    ::
+    ::collapsible
 
-    ::field{name="props" type="ComponentProps"}
-    An optional object of props to pass to the rendered component.
-    ::
+      ::field-group
+        ::field{name="defaultOpen" type="boolean"}
+        Open the overlay immediately after being created. Defaults to `false`.
+        ::
 
-    ::field{name="destroyOnClose" type="boolean"}
-    Removes the overlay from memory when closed. Defaults to `false`.
+        ::field{name="props" type="ComponentProps"}
+        An optional object of props to pass to the rendered component.
+        ::
+
+        ::field{name="destroyOnClose" type="boolean"}
+        Removes the overlay from memory when closed. Defaults to `false`.
+        ::
+      ::
     ::
-    ::
-  ::
   ::
 ::
 
