@@ -225,6 +225,10 @@ You can control the active item by using the `default-value` prop or the `v-mode
 
 :component-example{name="tabs-model-value-example"}
 
+::tip
+Use the `value-key` prop to change the key used to match items when a `v-model` or `default-value` is provided.
+::
+
 ### With content slot
 
 Use the `#content` slot to customize the content of each item.

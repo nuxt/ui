@@ -2,8 +2,11 @@ import { describe, it, expect } from 'vitest'
 import ContentSearch from '../../../src/runtime/components/content/ContentSearch.vue'
 import type { ContentSearchProps } from '../../../src/runtime/components/content/ContentSearch.vue'
 import ComponentRender from '../../component-render'
+import theme from '#build/ui/content/content-search'
 
 describe('ContentSearch', () => {
+  const sizes = Object.keys(theme.variants.size) as any
+
   const links = [{
     label: 'Docs',
     to: '/getting-started',
@@ -127,6 +130,7 @@ describe('ContentSearch', () => {
     ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loading' } }],
     ['without colorMode', { props: { ...props, colorMode: false } }],
     ['with fullscreen', { props: { ...props, fullscreen: true } }],
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with ui', { props: { ...props, ui: { input: '[&>input]:text-lg' } } }],
     ['with class', { props: { ...props, class: 'sm:max-w-5xl' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentSearchProps }) => {

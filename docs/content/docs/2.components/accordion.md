@@ -270,6 +270,10 @@ props:
 ---
 ::
 
+::tip
+Use the `value-key` prop to change the key used to match items when a `v-model` or `default-value` is provided.
+::
+
 ::caution
 When `type="multiple"`, ensure to pass an array to the `default-value` prop or the `v-model` directive.
 ::

@@ -1,6 +1,42 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Error > renders with as correctly 1`] = `
+"<section data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
+  <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
+  <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
+  <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
+  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
+      <!--v-if-->
+    </button></div>
+</section>"
+`;
+
+exports[`Error > renders with class correctly 1`] = `
+"<main data-slot="root" class="flex flex-col items-center justify-center text-center min-h-full">
+  <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
+  <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
+  <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
+  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
+      <!--v-if-->
+    </button></div>
+</main>"
+`;
+
+exports[`Error > renders with clear correctly 1`] = `
+"<main data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
+  <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
+  <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
+  <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
+  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <!--v-if--><span data-slot="label" class="truncate">Home</span>
+      <!--v-if-->
+    </button></div>
+</main>"
+`;
+
+exports[`Error > renders with default slot correctly 1`] = `
 "<main data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
@@ -12,44 +48,8 @@ exports[`Error > renders with as correctly 1`] = `
 </main>"
 `;
 
-exports[`Error > renders with class correctly 1`] = `
-"<div data-slot="root" class="flex flex-col items-center justify-center text-center min-h-full">
-  <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
-  <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
-  <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
-  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-      <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
-      <!--v-if-->
-    </button></div>
-</div>"
-`;
-
-exports[`Error > renders with clear correctly 1`] = `
-"<div data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
-  <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
-  <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
-  <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
-  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-      <!--v-if--><span data-slot="label" class="truncate">Home</span>
-      <!--v-if-->
-    </button></div>
-</div>"
-`;
-
-exports[`Error > renders with default slot correctly 1`] = `
-"<div data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
-  <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
-  <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
-  <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
-  <div data-slot="links" class="mt-8 flex items-center justify-center gap-6"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-      <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
-      <!--v-if-->
-    </button></div>
-</div>"
-`;
-
 exports[`Error > renders with error correctly 1`] = `
-"<div data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
+"<main data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
@@ -57,20 +57,20 @@ exports[`Error > renders with error correctly 1`] = `
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
-</div>"
+</main>"
 `;
 
 exports[`Error > renders with links slot correctly 1`] = `
-"<div data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
+"<main data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
   <div data-slot="links" class="mt-8 flex items-center justify-center gap-6">Links slot</div>
-</div>"
+</main>"
 `;
 
 exports[`Error > renders with message slot correctly 1`] = `
-"<div data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
+"<main data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">Message slot</p>
@@ -78,11 +78,11 @@ exports[`Error > renders with message slot correctly 1`] = `
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
-</div>"
+</main>"
 `;
 
 exports[`Error > renders with redirect correctly 1`] = `
-"<div data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
+"<main data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
@@ -90,11 +90,11 @@ exports[`Error > renders with redirect correctly 1`] = `
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
-</div>"
+</main>"
 `;
 
 exports[`Error > renders with statusCode slot correctly 1`] = `
-"<div data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
+"<main data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
   <p data-slot="statusCode" class="text-base font-semibold text-primary">Status code slot</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
@@ -102,11 +102,11 @@ exports[`Error > renders with statusCode slot correctly 1`] = `
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
-</div>"
+</main>"
 `;
 
 exports[`Error > renders with statusMessage slot correctly 1`] = `
-"<div data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
+"<main data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Status message slot</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
@@ -114,11 +114,11 @@ exports[`Error > renders with statusMessage slot correctly 1`] = `
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
-</div>"
+</main>"
 `;
 
 exports[`Error > renders with ui correctly 1`] = `
-"<div data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
+"<main data-slot="root" class="min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center">
   <p data-slot="statusCode" class="text-base font-semibold text-primary">404</p>
   <h1 data-slot="statusMessage" class="mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance">Not Found</h1>
   <p data-slot="message" class="mt-4 text-lg text-muted text-balance">The page you are looking for does not exist.</p>
@@ -126,5 +126,5 @@ exports[`Error > renders with ui correctly 1`] = `
       <!--v-if--><span data-slot="label" class="truncate">Back to home</span>
       <!--v-if-->
     </button></div>
-</div>"
+</main>"
 `;

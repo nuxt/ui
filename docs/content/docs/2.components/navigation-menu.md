@@ -1205,6 +1205,10 @@ name: 'navigation-menu-model-value-example'
 ---
 ::
 
+::tip
+Use the `value-key` prop to change the key used to match items when a `v-model` or `default-value` is provided.
+::
+
 ::note
 In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can switch the active item by pressing :kbd{value="1"}, :kbd{value="2"}, or :kbd{value="3"}.
 ::
