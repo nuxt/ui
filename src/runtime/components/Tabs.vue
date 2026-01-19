@@ -55,7 +55,7 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
    * The orientation of the tabs.
    * @defaultValue 'horizontal'
    */
-  orientation?: TabsRootProps['orientation']
+  orientation?: Tabs['variants']['orientation']
   /**
    * The content of the tabs, can be disabled to prevent rendering the content.
    * @defaultValue true

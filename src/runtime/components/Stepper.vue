@@ -97,7 +97,7 @@ const modelValue = defineModel<string | number>()
 
 const appConfig = useAppConfig() as Stepper['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'linear') as any)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'linear'))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.stepper || {}) })({
   orientation: props.orientation,
@@ -141,7 +141,7 @@ defineExpose({
 </script>
 
 <template>
-  <StepperRoot v-bind="rootProps" v-model="currentStepIndex" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <StepperRoot v-bind="rootProps" v-model="currentStepIndex" :orientation="orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <StepperItem
         v-for="(item, count) in items"
