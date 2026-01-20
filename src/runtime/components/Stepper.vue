@@ -4,7 +4,7 @@ import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/stepper'
 import type { IconProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Stepper = ComponentConfig<typeof theme, AppConfig, 'stepper'>
@@ -46,6 +46,11 @@ export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<
    */
   orientation?: Stepper['variants']['orientation']
   /**
+   * The key used to get the value from the item.
+   * @defaultValue 'value'
+   */
+  valueKey?: GetItemKeys<T>
+  /**
    * The value of the step that should be active when initially rendered. Use when you do not need to control the state of the steps.
    */
   defaultValue?: string | number
@@ -77,11 +82,13 @@ import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSepa
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
+import { get } from '../utils'
 import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<StepperProps<T>>(), {
   orientation: 'horizontal',
-  linear: true
+  linear: true,
+  valueKey: 'value'
 })
 const emits = defineEmits<StepperEmits<T>>()
 const slots = defineSlots<StepperSlots<T>>()
@@ -90,7 +97,7 @@ const modelValue = defineModel<string | number>()
 
 const appConfig = useAppConfig() as Stepper['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'linear'))
+const rootProps = useForwardProps(reactivePick(props, 'as', 'linear'))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.stepper || {}) })({
   orientation: props.orientation,
@@ -103,11 +110,11 @@ const currentStepIndex = computed({
     const value = modelValue.value ?? props.defaultValue
 
     return ((typeof value === 'string')
-      ? props.items.findIndex(item => item.value === value)
+      ? props.items.findIndex(item => get(item, props.valueKey as string) === value)
       : value) ?? 0
   },
   set(value: number) {
-    modelValue.value = props.items?.[value]?.value ?? value
+    modelValue.value = get(props.items?.[value], props.valueKey as string) ?? value
   }
 })
 
@@ -134,11 +141,11 @@ defineExpose({
 </script>
 
 <template>
-  <StepperRoot v-bind="rootProps" v-model="currentStepIndex" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <StepperRoot v-bind="rootProps" v-model="currentStepIndex" :orientation="orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <StepperItem
         v-for="(item, count) in items"
-        :key="item.value ?? count"
+        :key="count"
         :step="count"
         :disabled="item.disabled || props.disabled"
         data-slot="item"

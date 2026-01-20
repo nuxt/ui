@@ -92,6 +92,8 @@ describe('NavigationMenu', () => {
     // Props
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: 'item-0' } }],
+    ['with defaultValue', { props: { ...props, defaultValue: 'item-0' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Documentation' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with arrow', { props: { ...props, arrow: true, modelValue: 'item-0' } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const, modelValue: 'item-0' } }],

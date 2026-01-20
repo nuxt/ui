@@ -156,6 +156,10 @@ props:
 ---
 ::
 
+::tip
+Use the `by` prop to compare objects by a field instead of reference when the `model-value` is an object.
+::
+
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections, the selected items will be displayed as tags.

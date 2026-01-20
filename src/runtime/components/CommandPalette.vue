@@ -59,7 +59,7 @@ export interface CommandPaletteGroup<T extends CommandPaletteItem = CommandPalet
   highlightedIcon?: IconProps['name']
 }
 
-export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'selectionBehavior'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'selectionBehavior' | 'by'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -165,6 +165,11 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
     estimateSize?: number | ((index: number) => number)
   }
   /**
+   * When `items` is an array of objects, select the field to use as the value instead of the object itself.
+   * @defaultValue undefined
+   */
+  valueKey?: GetItemKeys<T>
+  /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
@@ -229,7 +234,6 @@ import UKbd from './Kbd.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
-  modelValue: '',
   labelKey: 'label',
   descriptionKey: 'description',
   input: true,
@@ -247,7 +251,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'by'), emits)
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
@@ -450,7 +454,7 @@ function onSelect(e: Event, item: T) {
   <DefineItemTemplate v-slot="{ item, index, group }">
     <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
       <ListboxItem
-        :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
+        :value="props.valueKey ? get(item, props.valueKey as string) : omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
         :disabled="item.disabled"
         as-child
         @select="onSelect($event, item as T)"
