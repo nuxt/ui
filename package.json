@@ -9,6 +9,9 @@
   },
   "homepage": "https://ui.nuxt.com",
   "type": "module",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "license": "MIT",
   "exports": {
     ".": {
