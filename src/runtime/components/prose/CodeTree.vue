@@ -167,12 +167,18 @@ function getExpandedPaths(path?: string) {
 
 const expanded = ref(getExpandedPaths(model.value?.path))
 
-// Re-expand all when flatItems change and expandAll is true
-watch(flatItems, () => {
-  if (props.expandAll) {
+// Re-expand all when flatItems actually change and expandAll is true
+watch(flatItems, (newItems, oldItems) => {
+  if (!props.expandAll) return
+
+  // Compare labels to detect actual changes (not just re-renders from rerenderCount)
+  const newLabels = newItems.map(i => i.label).join('\n')
+  const oldLabels = oldItems?.map(i => i.label).join('\n') ?? ''
+
+  if (newLabels !== oldLabels) {
     expanded.value = getExpandedPaths()
   }
-}, { immediate: true })
+})
 
 watch(model, (value) => {
   const item = flatItems.value.find(item => value?.path === item.label)

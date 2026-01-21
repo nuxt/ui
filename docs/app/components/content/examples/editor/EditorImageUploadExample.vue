@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { EditorCustomHandlers, EditorToolbarItem } from '@nuxt/ui'
 import type { Editor } from '@tiptap/vue-3'
-import { ImageUpload } from './EditorImageUpload'
+import { ImageUpload } from './EditorImageUploadExtension'
 
 const value = ref(`# Image Upload
 

@@ -158,7 +158,8 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       }
       // shift modifier is only checked in combination with alphabet keys and some extra keys
       // (shift with special characters would change the key)
-      if ((alphabetKey || shiftableKey) && e.shiftKey !== shortcut.shiftKey) {
+      // also check shift if the shortcut explicitly requires it or if shift is pressed
+      if ((alphabetKey || shiftableKey || shortcut.shiftKey || e.shiftKey) && e.shiftKey !== shortcut.shiftKey) {
         continue
       }
 

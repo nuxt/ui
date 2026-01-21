@@ -16,7 +16,7 @@ defineOgImageComponent('Docs')
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <div v-if="page">
+  <main v-if="page">
     <UPageHero
       :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }"
     >
@@ -98,5 +98,5 @@ defineOgImageComponent('Docs')
         </Motion>
       </div>
     </UPageSection>
-  </div>
+  </main>
 </template>

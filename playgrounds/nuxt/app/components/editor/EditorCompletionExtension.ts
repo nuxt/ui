@@ -10,14 +10,19 @@ export interface CompletionOptions {
    */
   debounce?: number
   /**
+   * Whether to automatically trigger completion while typing
+   * @defaultValue false
+   */
+  autoTrigger?: boolean
+  /**
    * Characters that should prevent completion from triggering
    * @defaultValue ['/', ':', '@']
    */
   triggerCharacters?: string[]
   /**
-   * Called when completion should be triggered, receives the text before cursor
+   * Called when completion should be triggered, receives the editor instance
    */
-  onTrigger?: (textBefore: string) => void
+  onTrigger?: (editor: any) => void
   /**
    * Called when suggestion is accepted
    */
@@ -45,6 +50,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
   addOptions() {
     return {
       debounce: 250,
+      autoTrigger: false,
       triggerCharacters: ['/', ':', '@'],
       onTrigger: undefined,
       onAccept: undefined,
@@ -98,7 +104,17 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
 
   addKeyboardShortcuts() {
     return {
-      Tab: ({ editor }) => {
+      'Mod-j': ({ editor }) => {
+        // Clear any existing suggestion first to avoid flickering
+        if (this.storage.visible) {
+          this.storage.clearSuggestion()
+          this.options.onDismiss?.()
+        }
+        // Manually trigger completion
+        this.storage.debouncedTrigger?.(editor as any)
+        return true
+      },
+      'Tab': ({ editor }) => {
         if (!this.storage.visible || !this.storage.suggestion || this.storage.position === undefined) {
           return false
         }
@@ -119,7 +135,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
         this.options.onAccept?.()
         return true
       },
-      Escape: ({ editor }) => {
+      'Escape': ({ editor }) => {
         if (this.storage.visible) {
           this.storage.clearSuggestion()
           // Force decoration update
@@ -136,16 +152,22 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
     // Clear suggestion on any edit
     if (this.storage.visible) {
       this.storage.clearSuggestion()
+      // Force decoration update
+      editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
       this.options.onDismiss?.()
     }
 
-    // Debounced trigger check
-    this.storage.debouncedTrigger?.(editor as any)
+    // Debounced trigger check (only if autoTrigger is enabled)
+    if (this.options.autoTrigger) {
+      this.storage.debouncedTrigger?.(editor as any)
+    }
   },
 
-  onSelectionUpdate() {
+  onSelectionUpdate({ editor }) {
     if (this.storage.visible) {
       this.storage.clearSuggestion()
+      // Force decoration update
+      editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
       this.options.onDismiss?.()
     }
   },
@@ -182,9 +204,8 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
       storage.position = selection.from
       storage.visible = true
 
-      // Get text before cursor as context
-      const textBefore = state.doc.textBetween(0, selection.from, '\n')
-      options.onTrigger(textBefore)
+      // Pass editor to let the handler extract content (e.g., as markdown)
+      options.onTrigger(editor)
     }, options.debounce || 250)
   },
 

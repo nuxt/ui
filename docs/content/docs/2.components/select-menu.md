@@ -172,6 +172,10 @@ props:
 ---
 ::
 
+::tip
+Use the `by` prop to compare objects by a field instead of reference when the `model-value` is an object.
+::
+
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections, the selected items will be separated by a comma in the trigger.
@@ -541,6 +545,10 @@ ignore:
 external:
   - items
   - modelValue
+items:
+  clear:
+    - true
+    - false
 props:
   modelValue: 'Backlog'
   clear: true
@@ -567,6 +575,10 @@ ignore:
 external:
   - items
   - modelValue
+items:
+  clear:
+    - true
+    - false
 props:
   modelValue: 'Backlog'
   clear: true
@@ -901,6 +913,22 @@ name: 'select-menu-virtualize-example'
 ---
 ::
 
+### With infinite scroll :badge{label="Soon" class="align-text-top"}
+
+You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
+
+::component-example
+---
+prettier: true
+collapse: true
+highlights:
+  - 41
+  - 51
+overflowHidden: true
+name: 'select-menu-infinite-scroll-example'
+---
+::
+
 ### With full content width
 
 You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
@@ -939,8 +967,6 @@ name: 'select-menu-countries-example'
 ---
 ::
 
-
-
 ## API
 
 ### Props
@@ -966,6 +992,7 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `triggerRef`{lang="ts-type"} | `Ref<HTMLButtonElement \| null>`{lang="ts-type"} |
+| `viewportRef`{lang="ts-type"} | `Ref<HTMLDivElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

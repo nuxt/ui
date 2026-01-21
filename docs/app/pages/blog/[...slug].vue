@@ -6,6 +6,7 @@ definePageMeta({
 })
 
 const route = useRoute()
+const appConfig = useAppConfig()
 
 const { data: page } = await useAsyncData(kebabCase(route.path), () => queryCollection('posts').path(route.path).first())
 if (!page.value) {
@@ -47,7 +48,7 @@ const items = computed(() => Object.entries(tree.value).map(([key, value]) => ({
     <UPageHeader :title="page.title" :description="page.description" :ui="{ title: 'relative flex items-center' }">
       <template #headline>
         <UButton
-          icon="i-lucide-arrow-left"
+          :icon="appConfig.ui.icons.arrowLeft"
           label="Back to blog"
           to="/blog"
           variant="link"
@@ -96,7 +97,7 @@ const items = computed(() => Object.entries(tree.value).map(([key, value]) => ({
             :ui="{ list: 'border-default', content: '[&>div>pre]:bg-muted/50 [&>div>pre]:border-default [&>div>pre]:rounded-none' }"
           />
           <div v-else class="size-full border-l border-default flex items-center justify-center">
-            <UIcon name="i-lucide-arrow-down" class="size-12 text-dimmed animate-bounce" />
+            <UIcon :name="appConfig.ui.icons.arrowDown" class="size-12 text-dimmed animate-bounce" />
           </div>
         </nav>
       </div>

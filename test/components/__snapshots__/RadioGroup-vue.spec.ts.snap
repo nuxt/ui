@@ -1138,8 +1138,7 @@ exports[`RadioGroup > renders with valueKey correctly 1`] = `
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
     <!--v-if-->
     <div data-slot="item" class="flex items-start flex-row text-sm">
-      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:Option 1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="Option 1" aria-label="Option 1">
-          <!---->
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:Option 1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="Option 1" aria-label="Option 1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
           <!--v-if-->
         </button></div>
       <div data-slot="wrapper" class="w-full ms-2"><label for="v-0:Option 1" data-slot="label" class="block font-medium text-default">Option 1</label>

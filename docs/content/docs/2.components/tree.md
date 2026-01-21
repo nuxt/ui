@@ -458,6 +458,10 @@ props:
 ---
 ::
 
+::tip
+Use the `get-key` prop to change the function used to get the unique key from each item when a `v-model` or `default-value` is provided.
+::
+
 If you want to prevent an item from being selected, you can use the `item.onSelect()`{lang="ts-type"} property or the global `select` event:
 
 ::component-example

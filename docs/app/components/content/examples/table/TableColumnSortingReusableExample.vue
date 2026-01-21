@@ -80,16 +80,19 @@ const columns: TableColumn<Payment>[] = [{
   header: ({ column }) => getHeader(column, 'Email')
 }, {
   accessorKey: 'amount',
-  header: ({ column }) => h('div', { class: 'text-right' }, getHeader(column, 'Amount')),
+  header: ({ column }) => getHeader(column, 'Amount'),
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium'
+    }
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR'
     }).format(amount)
-
-    return h('div', { class: 'text-right font-medium' }, formatted)
   }
 }]
 
