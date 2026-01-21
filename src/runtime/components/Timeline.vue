@@ -55,7 +55,7 @@ export interface TimelineProps<T extends TimelineItem = TimelineItem> {
 type SlotProps<T extends TimelineItem> = (props: { item: T }) => any
 
 export interface TimelineEmits<T extends TimelineItem = TimelineItem> {
-  select: [item: T, event: Event]
+  select: [event: Event, item: T]
 }
 
 export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
@@ -119,8 +119,8 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
   }
 }
 
-function onSelect(item: T, event: Event) {
-  emits('select', item, event)
+function onSelect(event: Event, item: T) {
+  emits('select', event, item)
 }
 </script>
 
@@ -132,7 +132,7 @@ function onSelect(item: T, event: Event) {
       data-slot="item"
       :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
       :data-state="getItemState(index)"
-      @click="onSelect(item, $event)"
+      @click="onSelect($event, item)"
     >
       <div data-slot="container" :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
         <UAvatar

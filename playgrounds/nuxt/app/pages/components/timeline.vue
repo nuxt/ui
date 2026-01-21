@@ -39,9 +39,8 @@ const items = [{
 
 const value = ref('kickoff')
 
-function onSelect(item: TimelineItem) {
-  // @ts-expect-error proper string value
-  value.value = item.value
+function onSelect(_e: Event, item: TimelineItem) {
+  value.value = item.value as string
 }
 </script>
 
