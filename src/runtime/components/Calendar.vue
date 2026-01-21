@@ -213,7 +213,12 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
             data-slot="gridRow"
             :class="ui.gridRow({ class: props.ui?.gridRow })"
           >
-            <td v-if="weekNumbers && weekDates[0]" role="gridcell" :class="ui.cellWeek({ class: props.ui?.cellWeek })">
+            <td
+              v-if="weekNumbers && weekDates[0]"
+              role="gridcell"
+              data-slot="cellWeek"
+              :class="ui.cellWeek({ class: props.ui?.cellWeek })"
+            >
               {{ getWeekNumber(weekDates[0], locale.code) }}
             </td>
             <Calendar.Cell
