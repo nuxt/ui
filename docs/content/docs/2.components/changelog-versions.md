@@ -35,6 +35,8 @@ ignore:
   - versions
 external:
   - versions
+externalTypes:
+  - ChangelogVersionProps[]
 hide:
   - class
 props:
@@ -75,6 +77,8 @@ ignore:
   - versions
 external:
   - versions
+externalTypes:
+  - ChangelogVersionProps[]
 hide:
   - class
 props:
@@ -116,6 +120,8 @@ ignore:
   - versions
 external:
   - versions
+externalTypes:
+  - ChangelogVersionProps[]
 hide:
   - class
 items:

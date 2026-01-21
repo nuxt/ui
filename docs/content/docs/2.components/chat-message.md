@@ -195,6 +195,8 @@ Use the `actions` prop to display actions below the message that will be display
 prettier: true
 external:
   - actions
+externalTypes:
+  - ButtonProps[]
 ignore:
   - parts
   - actions

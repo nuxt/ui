@@ -24,6 +24,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[]
 props:
   items:
     - label: Guide

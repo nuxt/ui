@@ -24,6 +24,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - StepperItem[]
 props:
   items:
     - title: 'Address'
