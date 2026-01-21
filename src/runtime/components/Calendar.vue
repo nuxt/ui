@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootProps, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'reka-ui'
+import { getWeekNumber } from 'reka-ui/date'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/calendar'
@@ -94,6 +95,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
   yearControls?: boolean
   defaultValue?: CalendarDefaultValue<R, M>
   modelValue?: CalendarModelValue<R, M>
+  weekNumbers?: boolean
   class?: any
   ui?: Calendar['slots']
 }
@@ -127,7 +129,7 @@ const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
 const emits = defineEmits<CalendarEmits<R, M>>()
 defineSlots<CalendarSlots>()
 
-const { dir, t } = useLocale()
+const { dir, t, locale } = useLocale()
 const appConfig = useAppConfig() as Calendar['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
@@ -139,8 +141,9 @@ const prevMonthIcon = computed(() => props.prevMonthIcon || (dir.value === 'rtl'
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })({
   color: props.color,
+  size: props.size,
   variant: props.variant,
-  size: props.size
+  weekNumbers: props.weekNumbers
 }))
 
 function paginateYear(date: DateValue, sign: -1 | 1) {
@@ -210,6 +213,14 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
             data-slot="gridRow"
             :class="ui.gridRow({ class: props.ui?.gridRow })"
           >
+            <td
+              v-if="weekNumbers && weekDates[0]"
+              role="gridcell"
+              data-slot="cellWeek"
+              :class="ui.cellWeek({ class: props.ui?.cellWeek })"
+            >
+              {{ getWeekNumber(weekDates[0], locale.code) }}
+            </td>
             <Calendar.Cell
               v-for="weekDate in weekDates"
               :key="weekDate.toString()"

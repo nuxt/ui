@@ -1,194 +1,44 @@
 <script setup lang="ts">
-import colors from 'tailwindcss/colors'
-import { useClipboard } from '@vueuse/core'
-import { themeIcons } from '../../utils/theme'
-import { omit } from '#ui/utils'
-
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
+const { track } = useAnalytics()
+
+const open = ref(false)
+
+watch(open, (isOpen) => {
+  if (isOpen) {
+    track('Theme Picker Opened')
+  }
+})
 
 const { copy: copyCSS, copied: copiedCSS } = useClipboard()
 const { copy: copyAppConfig, copied: copiedAppConfig } = useClipboard()
 
-const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone']
-const neutral = computed({
-  get() {
-    return appConfig.ui.colors.neutral
-  },
-  set(option) {
-    appConfig.ui.colors.neutral = option
-    window.localStorage.setItem('nuxt-ui-neutral', appConfig.ui.colors.neutral)
-  }
-})
-
-const colorsToOmit = ['inherit', 'current', 'transparent', 'black', 'white', ...neutralColors]
-const primaryColors = Object.keys(omit(colors, colorsToOmit as any))
-const primary = computed({
-  get() {
-    return appConfig.ui.colors.primary
-  },
-  set(option) {
-    appConfig.ui.colors.primary = option
-    window.localStorage.setItem('nuxt-ui-primary', appConfig.ui.colors.primary)
-    setBlackAsPrimary(false)
-  }
-})
-
-const radiuses = [0, 0.125, 0.25, 0.375, 0.5]
-const radius = computed({
-  get() {
-    return appConfig.theme.radius
-  },
-  set(option) {
-    appConfig.theme.radius = option
-    window.localStorage.setItem('nuxt-ui-radius', String(appConfig.theme.radius))
-  }
-})
-
-const fonts = ['Public Sans', 'DM Sans', 'Geist', 'Inter', 'Poppins', 'Outfit', 'Raleway']
-const font = computed({
-  get() {
-    return appConfig.theme.font
-  },
-  set(option) {
-    appConfig.theme.font = option
-    window.localStorage.setItem('nuxt-ui-font', appConfig.theme.font)
-  }
-})
-
-const icons = [{
-  label: 'Lucide',
-  icon: 'i-lucide-feather',
-  value: 'lucide'
-}, {
-  label: 'Phosphor',
-  icon: 'i-ph-phosphor-logo',
-  value: 'phosphor'
-}, {
-  label: 'Tabler',
-  icon: 'i-tabler-brand-tabler',
-  value: 'tabler'
-}]
-const icon = computed({
-  get() {
-    return appConfig.theme.icons
-  },
-  set(option) {
-    appConfig.theme.icons = option
-    appConfig.ui.icons = themeIcons[option as keyof typeof themeIcons] as any
-    window.localStorage.setItem('nuxt-ui-icons', appConfig.theme.icons)
-  }
-})
-
-const modes = [
-  { label: 'light', icon: appConfig.ui.icons.light },
-  { label: 'dark', icon: appConfig.ui.icons.dark },
-  { label: 'system', icon: appConfig.ui.icons.system }
-]
-const mode = computed({
-  get() {
-    return colorMode.value
-  },
-  set(option) {
-    colorMode.preference = option
-  }
-})
-
-function setBlackAsPrimary(value: boolean) {
-  appConfig.theme.blackAsPrimary = value
-  window.localStorage.setItem('nuxt-ui-black-as-primary', String(value))
-}
-
-const hasCSSChanges = computed(() => {
-  return appConfig.theme.radius !== 0.25
-    || appConfig.theme.blackAsPrimary
-    || appConfig.theme.font !== 'Public Sans'
-})
-
-const hasAppConfigChanges = computed(() => {
-  return appConfig.ui.colors.primary !== 'green'
-    || appConfig.ui.colors.neutral !== 'slate'
-    || appConfig.theme.icons !== 'lucide'
-})
-
-function exportCSS() {
-  const lines = [
-    '@import "tailwindcss";',
-    '@import "@nuxt/ui";'
-  ]
-
-  if (appConfig.theme.font !== 'Public Sans') {
-    lines.push('', '@theme {', `  --font-sans: '${appConfig.theme.font}', sans-serif;`, '}')
-  }
-
-  const rootLines: string[] = []
-  if (appConfig.theme.radius !== 0.25) {
-    rootLines.push(`  --ui-radius: ${appConfig.theme.radius}rem;`)
-  }
-  if (appConfig.theme.blackAsPrimary) {
-    rootLines.push('  --ui-primary: black;')
-  }
-
-  if (rootLines.length) {
-    lines.push('', ':root {', ...rootLines, '}')
-  }
-
-  if (appConfig.theme.blackAsPrimary) {
-    lines.push('', '.dark {', '  --ui-primary: white;', '}')
-  }
-
-  copyCSS(lines.join('\n'))
-}
-
-function exportAppConfig() {
-  const config: Record<string, any> = {}
-
-  if (appConfig.ui.colors.primary !== 'green' || appConfig.ui.colors.neutral !== 'slate') {
-    config.ui = { colors: {} }
-    if (appConfig.ui.colors.primary !== 'green') {
-      config.ui.colors.primary = appConfig.ui.colors.primary
-    }
-    if (appConfig.ui.colors.neutral !== 'slate') {
-      config.ui.colors.neutral = appConfig.ui.colors.neutral
-    }
-  }
-
-  if (appConfig.theme.icons !== 'lucide') {
-    const iconSet = appConfig.theme.icons
-    const icons = themeIcons[iconSet as keyof typeof themeIcons]
-    config.ui = config.ui || {}
-    config.ui.icons = icons
-  }
-
-  const configString = JSON.stringify(config, null, 2)
-    .replace(/"([^"]+)":/g, '$1:')
-    .replace(/"/g, '\'')
-
-  const output = `export default defineAppConfig(${configString})`
-
-  copyAppConfig(output)
-}
-
-function resetTheme() {
-  primary.value = 'green'
-  neutral.value = 'slate'
-  radius.value = 0.25
-  font.value = 'Public Sans'
-  icon.value = 'lucide'
-  setBlackAsPrimary(false)
-
-  window.localStorage.removeItem('nuxt-ui-primary')
-  window.localStorage.removeItem('nuxt-ui-neutral')
-  window.localStorage.removeItem('nuxt-ui-radius')
-  window.localStorage.removeItem('nuxt-ui-font')
-  window.localStorage.removeItem('nuxt-ui-icons')
-  window.localStorage.removeItem('nuxt-ui-black-as-primary')
-}
+const {
+  neutralColors,
+  neutral,
+  primaryColors,
+  primary,
+  setBlackAsPrimary,
+  radiuses,
+  radius,
+  fonts,
+  font,
+  icon,
+  icons,
+  modes,
+  mode,
+  hasCSSChanges,
+  hasAppConfigChanges,
+  exportCSS,
+  exportAppConfig,
+  resetTheme
+} = useTheme()
 </script>
 
 <template>
-  <UPopover :ui="{ content: 'w-72 px-6 py-4 flex flex-col gap-4 overflow-y-auto max-h-[calc(100vh-5rem)]' }">
-    <template #default="{ open }">
+  <UPopover v-model:open="open" :ui="{ content: 'w-72 px-6 py-4 flex flex-col gap-4 overflow-y-auto max-h-[calc(100vh-5rem)]' }">
+    <template #default>
       <UButton
         icon="i-lucide-swatch-book"
         color="neutral"
@@ -387,7 +237,7 @@ function resetTheme() {
             label="main.css"
             class="flex-1 text-[11px]"
             :icon="copiedCSS ? 'i-lucide-copy-check' : 'i-lucide-copy'"
-            @click="exportCSS"
+            @click="copyCSS(exportCSS())"
           />
           <UButton
             v-if="hasAppConfigChanges"
@@ -397,7 +247,7 @@ function resetTheme() {
             label="app.config.ts"
             :icon="copiedAppConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
             class="flex-1 text-[11px]"
-            @click="exportAppConfig"
+            @click="copyAppConfig(exportAppConfig())"
           />
           <UTooltip text="Reset theme">
             <UButton

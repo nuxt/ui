@@ -55,8 +55,8 @@ provide('navigation', rootNavigation)
   <UApp :toaster="appConfig.toaster">
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
-    <Analytics :debug="false" />
-    <SpeedInsights :debug="false" />
+    <Analytics />
+    <SpeedInsights />
 
     <div :class="[route.path.startsWith('/docs/') && 'root']">
       <template v-if="!route.path.startsWith('/examples')">

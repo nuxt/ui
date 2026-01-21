@@ -246,6 +246,55 @@ exports[`NavigationMenu > renders with custom slot correctly 1`] = `
 </nav>"
 `;
 
+exports[`NavigationMenu > renders with defaultValue correctly 1`] = `
+"<nav data-collapsed="false" data-slot="root" class="relative flex gap-1.5 [&amp;>div]:min-w-0 items-center justify-between" aria-label="Main" data-orientation="horizontal" dir="ltr" data-reka-navigation-menu="">
+  <div style="position: relative;">
+    <ul data-slot="list" class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" data-slot="item" class="min-w-0 py-2"></li>
+      <li data-menu-item="" data-slot="item" class="min-w-0 py-2"><button type="button" data-reka-collection-item="" id="reka-navigation-menu-v-0-0-0-trigger-item-1" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="reka-navigation-menu-v-0-0-0-content-item-1" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors data-[state=open]:text-highlighted data-[state=open]:before:bg-elevated/50"><span class="iconify i-lucide:book-open shrink-0 size-5 text-dimmed group-hover:text-default transition-colors group-data-[state=open]:text-default" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span><span as="span" data-slot="linkTrailing" class="group ms-auto inline-flex gap-1.5 items-center"><span data-slot="linkTrailingBadge" class="font-medium inline-flex items-center text-[10px]/3 px-1.5 py-1 gap-1 rounded-sm ring ring-inset ring-accented text-default bg-default shrink-0"><!--v-if--><span data-slot="label" class="truncate">10</span>
+          <!--v-if--></span><span class="iconify i-lucide:chevron-down size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="linkTrailingIcon"></span></span>
+        </button>
+        <!--v-if-->
+        <!--teleport start-->
+        <!--teleport end-->
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" data-slot="item" class="min-w-0 py-2"><button type="button" data-reka-collection-item="" id="reka-navigation-menu-v-0-0-0-trigger-item-2" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="reka-navigation-menu-v-0-0-0-content-item-2" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary before:bg-elevated"><span class="iconify i-lucide:box shrink-0 size-5 text-primary group-data-[state=open]:text-primary" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Components<!--v-if--></span><span as="span" data-slot="linkTrailing" class="group ms-auto inline-flex gap-1.5 items-center"><!--v-if--><span class="iconify i-lucide:chevron-down size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="linkTrailingIcon"></span></span></button>
+        <!--v-if-->
+        <!--teleport start-->
+        <!--teleport end-->
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul data-slot="list" class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" data-slot="item" class="min-w-0 py-2"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" data-reka-collection-item="" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors data-[state=open]:text-highlighted data-[state=open]:before:bg-elevated/50"><span class="iconify i-simple-icons:github shrink-0 size-5 text-dimmed group-hover:text-default transition-colors group-data-[state=open]:text-default" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">GitHub<span class="iconify i-lucide:arrow-up-right inline-block size-3 align-top text-dimmed" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" data-slot="item" class="min-w-0 py-2"><button type="button" disabled="" data-reka-collection-item="" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-muted cursor-not-allowed opacity-75"><span class="iconify i-lucide:circle-help shrink-0 size-5 text-dimmed" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div data-slot="viewportWrapper" class="absolute top-full left-0 flex w-full justify-center">
+    <!--v-if-->
+    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-[1]" data-state="open" data-orientation="horizontal">
+      <!---->
+      <!---->
+    </div>
+  </div>
+</nav>"
+`;
+
 exports[`NavigationMenu > renders with externalIcon correctly 1`] = `
 "<nav data-collapsed="false" data-slot="root" class="relative flex gap-1.5 [&amp;>div]:min-w-0 items-center justify-between" aria-label="Main" data-orientation="horizontal" dir="ltr" data-reka-navigation-menu="">
   <div style="position: relative;">
@@ -1405,6 +1454,89 @@ exports[`NavigationMenu > renders with unmountOnHide correctly 1`] = `
             </a></li>
         </ul>
       </div>
+    </div>
+  </div>
+</nav>"
+`;
+
+exports[`NavigationMenu > renders with valueKey correctly 1`] = `
+"<nav data-collapsed="false" data-slot="root" class="relative flex gap-1.5 [&amp;>div]:min-w-0 items-center justify-between" aria-label="Main" data-orientation="horizontal" dir="ltr" data-reka-navigation-menu="">
+  <div style="position: relative;">
+    <ul data-slot="list" class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" data-slot="item" class="min-w-0 py-2"></li>
+      <li data-menu-item="" data-slot="item" class="min-w-0 py-2"><button type="button" data-reka-collection-item="" id="reka-navigation-menu-v-0-0-0-trigger-Documentation" data-state="open" data-navigation-menu-trigger="" aria-expanded="true" aria-controls="reka-navigation-menu-v-0-0-0-content-Documentation" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors data-[state=open]:text-highlighted data-[state=open]:before:bg-elevated/50"><span class="iconify i-lucide:book-open shrink-0 size-5 text-dimmed group-hover:text-default transition-colors group-data-[state=open]:text-default" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span><span as="span" data-slot="linkTrailing" class="group ms-auto inline-flex gap-1.5 items-center"><span data-slot="linkTrailingBadge" class="font-medium inline-flex items-center text-[10px]/3 px-1.5 py-1 gap-1 rounded-sm ring ring-inset ring-accented text-default bg-default shrink-0"><!--v-if--><span data-slot="label" class="truncate">10</span>
+          <!--v-if--></span><span class="iconify i-lucide:chevron-down size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="linkTrailingIcon"></span></span>
+        </button><span aria-hidden="true" tabindex="0" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"></span><span aria-owns="reka-navigation-menu-v-0-0-0-content-Documentation"></span>
+        <!--teleport start-->
+        <!--teleport end-->
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" data-slot="item" class="min-w-0 py-2"><button type="button" data-reka-collection-item="" id="reka-navigation-menu-v-0-0-0-trigger-Components" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="reka-navigation-menu-v-0-0-0-content-Components" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-primary before:bg-elevated"><span class="iconify i-lucide:box shrink-0 size-5 text-primary group-data-[state=open]:text-primary" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Components<!--v-if--></span><span as="span" data-slot="linkTrailing" class="group ms-auto inline-flex gap-1.5 items-center"><!--v-if--><span class="iconify i-lucide:chevron-down size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="linkTrailingIcon"></span></span></button>
+        <!--v-if-->
+        <!--teleport start-->
+        <!--teleport end-->
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul data-slot="list" class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" data-slot="item" class="min-w-0 py-2"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" data-reka-collection-item="" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors data-[state=open]:text-highlighted data-[state=open]:before:bg-elevated/50"><span class="iconify i-simple-icons:github shrink-0 size-5 text-dimmed group-hover:text-default transition-colors group-data-[state=open]:text-default" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">GitHub<span class="iconify i-lucide:arrow-up-right inline-block size-3 align-top text-dimmed" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" data-slot="item" class="min-w-0 py-2"><button type="button" disabled="" data-reka-collection-item="" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-muted cursor-not-allowed opacity-75"><span class="iconify i-lucide:circle-help shrink-0 size-5 text-dimmed" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div data-slot="viewportWrapper" class="absolute top-full left-0 flex w-full justify-center">
+    <!--v-if-->
+    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-[1]" data-state="open" data-orientation="horizontal">
+      <div data-dismissable-layer="" id="reka-navigation-menu-v-0-0-0-content-Documentation" aria-labelledby="reka-navigation-menu-v-0-0-0-trigger-Documentation" data-state="open" data-orientation="horizontal" data-slot="content" class="absolute top-0 left-0 w-full max-h-[70vh] overflow-y-auto data-[motion=from-start]:animate-[enter-from-left_200ms_ease] data-[motion=from-end]:animate-[enter-from-right_200ms_ease] data-[motion=to-start]:animate-[exit-to-left_200ms_ease] data-[motion=to-end]:animate-[exit-to-right_200ms_ease]">
+        <ul data-slot="childList" class="isolate grid p-2 grid-cols-2 gap-2">
+          <li data-slot="childItem" class=""><button type="button" data-reka-collection-item="" data-slot="childLink" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors"><span class="iconify i-lucide:house size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true" data-slot="childLinkIcon"></span>
+              <div data-slot="childLinkWrapper" class="min-w-0">
+                <p data-slot="childLinkLabel" class="truncate font-medium">Introduction
+                  <!--v-if-->
+                </p>
+                <p data-slot="childLinkDescription" class="text-muted">Fully styled and customizable components for Nuxt.</p>
+              </div>
+            </button></li>
+          <li data-slot="childItem" class=""><button type="button" data-reka-collection-item="" data-slot="childLink" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors"><span class="iconify i-lucide:cloud-download size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true" data-slot="childLinkIcon"></span>
+              <div data-slot="childLinkWrapper" class="min-w-0">
+                <p data-slot="childLinkLabel" class="truncate font-medium">Installation
+                  <!--v-if-->
+                </p>
+                <p data-slot="childLinkDescription" class="text-muted">Learn how to install and configure Nuxt UI in your application.</p>
+              </div>
+            </button></li>
+          <li data-slot="childItem" class=""><button type="button" data-reka-collection-item="" data-slot="childLink" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors"><span class="iconify i-lucide:swatch-book size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true" data-slot="childLinkIcon"></span>
+              <div data-slot="childLinkWrapper" class="min-w-0">
+                <p data-slot="childLinkLabel" class="truncate font-medium">Theming
+                  <!--v-if-->
+                </p>
+                <p data-slot="childLinkDescription" class="text-muted">Learn how to customize the look and feel of the components.</p>
+              </div>
+            </button></li>
+          <li data-slot="childItem" class=""><button type="button" data-reka-collection-item="" data-slot="childLink" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors"><span class="iconify i-lucide:monitor size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true" data-slot="childLinkIcon"></span>
+              <div data-slot="childLinkWrapper" class="min-w-0">
+                <p data-slot="childLinkLabel" class="truncate font-medium">Shortcuts
+                  <!--v-if-->
+                </p>
+                <p data-slot="childLinkDescription" class="text-muted">Learn how to display and define keyboard shortcuts in your app.</p>
+              </div>
+            </button></li>
+        </ul>
+      </div>
+      <!---->
     </div>
   </div>
 </nav>"

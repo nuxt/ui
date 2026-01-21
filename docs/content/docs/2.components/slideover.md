@@ -197,7 +197,7 @@ slots:
 :placeholder{class="h-full min-h-48"}
 ::
 
-### Inset :badge{label="Soon" class="align-text-top"}
+### Inset :badge{label="4.3+" class="align-text-top"}
 
 Use the `inset` prop to inset the Slideover from the edges.
 
