@@ -17,14 +17,16 @@ export default (options: Required<NuxtOptions['ui']>) => ({
       // Mentions
       '[&_.mention]:text-primary [&_.mention]:font-medium',
       // Headings - shared styles
-      '[&_:is(h1,h2,h3,h4)]:text-highlighted [&_:is(h1,h2,h3,h4)]:font-bold',
+      '[&_:is(h1,h2,h3,h4,h5,h6)]:text-highlighted [&_:is(h1,h2,h3,h4,h5,h6)]:font-bold',
       // Headings - unique styles
       '[&_h1]:text-3xl',
       '[&_h2]:text-2xl',
       '[&_h3]:text-xl',
       '[&_h4]:text-lg',
+      '[&_h5]:text-base',
+      '[&_h6]:text-base',
       // Code inside headings
-      '[&_:is(h1,h2,h3,h4)>code]:border-dashed [&_:is(h1,h2,h3,h4)>code]:font-bold',
+      '[&_:is(h1,h2,h3,h4,h5,h6)>code]:border-dashed [&_:is(h1,h2,h3,h4,h5,h6)>code]:font-bold',
       '[&_h2>code]:text-xl/6',
       '[&_h3>code]:text-lg/5',
       // Blockquote & HR
@@ -50,10 +52,10 @@ export default (options: Required<NuxtOptions['ui']>) => ({
   variants: {
     placeholderMode: {
       firstLine: {
-        base: '[&_:is(p,h1,h2,h3,h4).is-editor-empty:first-child]:before:content-[attr(data-placeholder)] [&_:is(p,h1,h2,h3,h4).is-editor-empty:first-child]:before:text-dimmed [&_:is(p,h1,h2,h3,h4).is-editor-empty:first-child]:before:float-left [&_:is(p,h1,h2,h3,h4).is-editor-empty:first-child]:before:h-0 [&_:is(p,h1,h2,h3,h4).is-editor-empty:first-child]:before:pointer-events-none'
+        base: '[&_:is(p,h1,h2,h3,h4,h5,h6).is-editor-empty:first-child]:before:content-[attr(data-placeholder)] [&_:is(p,h1,h2,h3,h4,h5,h6).is-editor-empty:first-child]:before:text-dimmed [&_:is(p,h1,h2,h3,h4,h5,h6).is-editor-empty:first-child]:before:float-left [&_:is(p,h1,h2,h3,h4,h5,h6).is-editor-empty:first-child]:before:h-0 [&_:is(p,h1,h2,h3,h4,h5,h6).is-editor-empty:first-child]:before:pointer-events-none'
       },
       everyLine: {
-        base: '[&_:is(p,h1,h2,h3,h4).is-empty]:before:content-[attr(data-placeholder)] [&_:is(p,h1,h2,h3,h4).is-empty]:before:text-dimmed [&_:is(p,h1,h2,h3,h4).is-empty]:before:float-left [&_:is(p,h1,h2,h3,h4).is-empty]:before:h-0 [&_:is(p,h1,h2,h3,h4).is-empty]:before:pointer-events-none'
+        base: '[&_:is(p,h1,h2,h3,h4,h5,h6).is-empty]:before:content-[attr(data-placeholder)] [&_:is(p,h1,h2,h3,h4,h5,h6).is-empty]:before:text-dimmed [&_:is(p,h1,h2,h3,h4,h5,h6).is-empty]:before:float-left [&_:is(p,h1,h2,h3,h4,h5,h6).is-empty]:before:h-0 [&_:is(p,h1,h2,h3,h4,h5,h6).is-empty]:before:pointer-events-none'
       }
     }
   },

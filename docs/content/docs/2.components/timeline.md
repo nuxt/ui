@@ -261,6 +261,21 @@ You can control the active item by using the `default-value` prop or the `v-mode
 Use the `value-key` prop to change the key used to match items when a `v-model` or `default-value` is provided.
 ::
 
+### With select event
+
+You can add a `@select` listener to make items clickable.
+
+::note
+The handler function receives the `Event` and `TimelineItem` as the first and second arguments respectively.
+::
+
+::component-example
+---
+prettier: true
+name: 'timeline-select-example'
+---
+::
+
 ### With alternating layout
 
 Use the `ui` prop to create a Timeline with alternating layout.
