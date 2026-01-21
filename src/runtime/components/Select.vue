@@ -101,6 +101,11 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
+  /**
+   * Use a custom comparator to compare objects.
+   * This can be a string (key) or a function that compares two objects.
+   */
+  by?: string | ((a: any, b: any) => boolean)
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   autofocus?: boolean
@@ -166,7 +171,7 @@ const slots = defineSlots<SelectSlots<T, VK, M>>()
 
 const appConfig = useAppConfig() as Select['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple', 'by'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
@@ -203,7 +208,8 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
     const displayedValues = value
       .map(item => getDisplayValue<T[], GetItemValue<T, VK>>(items.value, item, {
         labelKey: props.labelKey,
-        valueKey: props.valueKey
+        valueKey: props.valueKey,
+        by: props.by
       }))
       .filter((v): v is string => v != null && v !== '')
 
@@ -212,7 +218,8 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
 
   return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value as GetItemValue<T, VK>, {
     labelKey: props.labelKey,
-    valueKey: props.valueKey
+    valueKey: props.valueKey,
+    by: props.by
   })
 }
 
@@ -272,8 +279,11 @@ function isSelectItem(item: SelectItem): item is Exclude<SelectItem, SelectValue
   return typeof item === 'object' && item !== null
 }
 
+const viewportRef = useTemplateRef('viewportRef')
+
 defineExpose({
-  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement)
+  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
+  viewportRef: toRef(() => viewportRef.value)
 })
 </script>
 
@@ -326,7 +336,7 @@ defineExpose({
       <SelectContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <slot name="content-top" />
 
-        <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+        <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
           <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">

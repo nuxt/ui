@@ -42,6 +42,7 @@ describe('Accordion', () => {
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Getting Started' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with type', { props: { ...props, type: 'multiple' as const } }],

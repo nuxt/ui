@@ -257,6 +257,10 @@ You can control the active item by using the `default-value` prop or the `v-mode
 
 :component-example{name="timeline-model-value-example" prettier}
 
+::tip
+Use the `value-key` prop to change the key used to match items when a `v-model` or `default-value` is provided.
+::
+
 ### With alternating layout
 
 Use the `ui` prop to create a Timeline with alternating layout.

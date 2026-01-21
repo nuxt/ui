@@ -2,6 +2,7 @@
 // import { createReusableTemplate, refDebounced } from '@vueuse/core'
 import { createReusableTemplate } from '@vueuse/core'
 import type { User } from '~/types'
+import theme from '#build/ui/command-palette'
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 const toast = useToast()
@@ -12,6 +13,9 @@ const searchTerm = ref('')
 const selected = ref([])
 const virtualize = ref(false)
 const preserveGroupOrder = ref(false)
+
+const sizes = Object.keys(theme.variants.size)
+const size = ref(theme.defaultVariants.size)
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   // params: { q: searchTermDebounced },
@@ -159,6 +163,7 @@ defineShortcuts({
   <Navbar>
     <USwitch v-model="virtualize" label="Virtualize" />
     <USwitch v-model="preserveGroupOrder" label="Preserve order" />
+    <USelect v-model="size" :items="sizes" />
 
     <UModal v-model:open="open">
       <UButton label="Open modal" color="neutral" variant="outline" />
@@ -180,7 +185,12 @@ defineShortcuts({
       <UButton label="Select label (popover)" color="neutral" variant="outline" />
 
       <template #content>
-        <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }" />
+        <UCommandPalette
+          v-model="label"
+          :size="size"
+          placeholder="Search labels..."
+          :groups="[{ id: 'labels', items: labels }]"
+        />
       </template>
     </UPopover>
   </Navbar>
@@ -189,6 +199,7 @@ defineShortcuts({
     <UCommandPalette
       v-model="selected"
       v-model:search-term="searchTerm"
+      :size="size"
       :loading="status === 'pending'"
       :groups="groups"
       :fuse="{
@@ -229,6 +240,7 @@ defineShortcuts({
     <UCommandPalette
       v-if="virtualize"
       virtualize
+      :size="size"
       :fuse="{ resultLimit: 1000 }"
       placeholder="Search virtualized items..."
       :groups="[{ id: 'items', items: Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i, icon: 'i-lucide-file' })) }]"

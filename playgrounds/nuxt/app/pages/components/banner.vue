@@ -30,5 +30,16 @@ const attrs = reactive({
       }]"
       v-bind="props"
     />
+    <UBanner
+      title="Close me - I'll reappear on page reload (no id prop)"
+      :close="true"
+      v-bind="props"
+    />
+    <UBanner
+      id="banner3"
+      title="Close me - I'll stay closed permanently (id='banner3')"
+      :close="true"
+      v-bind="props"
+    />
   </Matrix>
 </template>
