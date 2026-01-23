@@ -16,14 +16,25 @@ export default {
         content: ''
       },
       right: {
-        content: 'max-w-md'
+        content: ''
       },
       bottom: {
         content: ''
       },
       left: {
-        content: 'max-w-md'
+        content: ''
       }
+    },
+    size: {
+      xs: '',
+      sm: '',
+      md: '',
+      lg: '',
+      xl: ''
+    },
+    fullscreen: {
+      true: '',
+      false: ''
     },
     inset: {
       true: {
@@ -108,5 +119,160 @@ export default {
     class: {
       content: 'data-[state=open]:animate-[slide-in-from-left_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-left_200ms_ease-in-out]'
     }
-  }]
+  },
+  // Size variants for left/right sides (width)
+  {
+    side: 'left',
+    size: 'xs',
+    class: {
+      content: 'max-w-xs'
+    }
+  }, {
+    side: 'left',
+    size: 'sm',
+    class: {
+      content: 'max-w-sm'
+    }
+  }, {
+    side: 'left',
+    size: 'md',
+    class: {
+      content: 'max-w-md'
+    }
+  }, {
+    side: 'left',
+    size: 'lg',
+    class: {
+      content: 'max-w-1/2'
+    }
+  }, {
+    side: 'left',
+    size: 'xl',
+    class: {
+      content: 'max-w-3/4'
+    }
+  }, {
+    side: 'right',
+    size: 'xs',
+    class: {
+      content: 'max-w-xs'
+    }
+  }, {
+    side: 'right',
+    size: 'sm',
+    class: {
+      content: 'max-w-sm'
+    }
+  }, {
+    side: 'right',
+    size: 'md',
+    class: {
+      content: 'max-w-md'
+    }
+  }, {
+    side: 'right',
+    size: 'lg',
+    class: {
+      content: 'max-w-1/2'
+    }
+  }, {
+    side: 'right',
+    size: 'xl',
+    class: {
+      content: 'max-w-3/4'
+    }
+  },
+  // Size variants for top/bottom sides (height)
+  {
+    side: 'top',
+    size: 'xs',
+    class: {
+      content: 'max-h-48'
+    }
+  }, {
+    side: 'top',
+    size: 'sm',
+    class: {
+      content: 'max-h-64'
+    }
+  }, {
+    side: 'top',
+    size: 'md',
+    class: {
+      content: 'max-h-96'
+    }
+  }, {
+    side: 'top',
+    size: 'lg',
+    class: {
+      content: 'max-h-1/2'
+    }
+  }, {
+    side: 'top',
+    size: 'xl',
+    class: {
+      content: 'max-h-3/4'
+    }
+  }, {
+    side: 'bottom',
+    size: 'xs',
+    class: {
+      content: 'max-h-48'
+    }
+  }, {
+    side: 'bottom',
+    size: 'sm',
+    class: {
+      content: 'max-h-64'
+    }
+  }, {
+    side: 'bottom',
+    size: 'md',
+    class: {
+      content: 'max-h-96'
+    }
+  }, {
+    side: 'bottom',
+    size: 'lg',
+    class: {
+      content: 'max-h-1/2'
+    }
+  }, {
+    side: 'bottom',
+    size: 'xl',
+    class: {
+      content: 'max-h-3/4'
+    }
+  },
+  // Fullscreen variants (override size)
+  {
+    side: 'left',
+    fullscreen: true,
+    class: {
+      content: 'max-w-full'
+    }
+  }, {
+    side: 'right',
+    fullscreen: true,
+    class: {
+      content: 'max-w-full'
+    }
+  }, {
+    side: 'top',
+    fullscreen: true,
+    class: {
+      content: 'max-h-full'
+    }
+  }, {
+    side: 'bottom',
+    fullscreen: true,
+    class: {
+      content: 'max-h-full'
+    }
+  }],
+  defaultVariants: {
+    side: 'right',
+    size: 'md',
+    fullscreen: false
+  }
 }

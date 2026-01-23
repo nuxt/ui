@@ -29,6 +29,16 @@ export interface SlideoverProps extends DialogRootProps {
    */
   side?: Slideover['variants']['side']
   /**
+   * The size of the slideover.
+   * @defaultValue 'md'
+   */
+  size?: Slideover['variants']['size']
+  /**
+   * Render the slideover fullscreen.
+   * @defaultValue false
+   */
+  fullscreen?: boolean
+  /**
    * Whether to inset the slideover from the edges.
    * @defaultValue false
    */
@@ -95,7 +105,9 @@ const props = withDefaults(defineProps<SlideoverProps>(), {
   transition: true,
   modal: true,
   dismissible: true,
-  side: 'right'
+  side: 'right',
+  size: 'md',
+  fullscreen: false
 })
 const emits = defineEmits<SlideoverEmits>()
 const slots = defineSlots<SlideoverSlots>()
@@ -125,6 +137,8 @@ const contentEvents = computed(() => {
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover || {}) })({
   transition: props.transition,
   side: props.side,
+  size: props.size,
+  fullscreen: props.fullscreen,
   inset: props.inset
 }))
 </script>

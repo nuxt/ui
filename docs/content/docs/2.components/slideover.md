@@ -197,6 +197,67 @@ slots:
 :placeholder{class="h-full min-h-48"}
 ::
 
+### Size
+
+Use the `size` prop to change the size of the Slideover. Defaults to `md`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  size: 'lg'
+  title: 'Slideover with size'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <Placeholder class="h-full" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:placeholder{class="h-full"}
+::
+
+::note
+For `left` and `right` sides, the size controls the `max-width`. For `top` and `bottom` sides, it controls the `max-height`.
+::
+
+### Fullscreen
+
+Use the `fullscreen` prop to make the Slideover take the full width or height of the screen.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+  - fullscreen
+props:
+  fullscreen: true
+  title: 'Slideover fullscreen'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <Placeholder class="h-full" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:placeholder{class="h-full"}
+::
+
 ### Inset :badge{label="4.3+" class="align-text-top"}
 
 Use the `inset` prop to inset the Slideover from the edges.
