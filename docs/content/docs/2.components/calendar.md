@@ -197,7 +197,7 @@ props:
 ---
 ::
 
-### Week Numbers
+### Week Numbers :badge{label="4.4+" class="align-text-top"}
 
 Use the `week-numbers` prop to display week numbers in the calendar.
 
