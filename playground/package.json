@@ -13,7 +13,7 @@
     "@iconify-json/simple-icons": "^1.2.68",
     "@internationalized/date": "^3.10.1",
     "@nuxt/ui": "workspace:*",
-    "nuxt": "^4.2.2",
+    "nuxt": "^4.3.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
