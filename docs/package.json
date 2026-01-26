@@ -34,7 +34,6 @@
     "@vueuse/integrations": "^14.1.0",
     "@vueuse/nuxt": "^14.1.0",
     "ai": "^6.0.49",
-    "better-sqlite3": "^12.6.2",
     "capture-website": "^5.1.0",
     "joi": "^18.0.2",
     "json5": "^2.2.3",

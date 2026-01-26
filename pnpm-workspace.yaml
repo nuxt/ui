@@ -14,7 +14,6 @@ ignoredBuiltDependencies:
   - vue-demi
 
 onlyBuiltDependencies:
-  - better-sqlite3
   - puppeteer
   - sharp
 
