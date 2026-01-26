@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         os: ${{ github.event_name == 'pull_request' && fromJSON('["ubuntu-latest"]') || fromJSON('["ubuntu-latest", "windows-latest"]') }} # macos-latest
-        node: [22]
+        node: [24]
 
     env:
       NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
@@ -82,7 +82,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
@@ -125,7 +125,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
@@ -170,7 +170,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
@@ -215,7 +215,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
@@ -260,7 +260,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
@@ -305,7 +305,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
@@ -350,7 +350,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
@@ -395,7 +395,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
@@ -440,7 +440,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
@@ -485,7 +485,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
@@ -530,7 +530,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
@@ -575,7 +575,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
