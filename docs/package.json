@@ -4,11 +4,11 @@
   "type": "module",
   "dependencies": {
     "@iconify-json/heroicons": "^1.2.3",
-    "@iconify-json/lucide": "^1.2.86",
-    "@iconify-json/simple-icons": "^1.2.67",
+    "@iconify-json/lucide": "^1.2.87",
+    "@iconify-json/simple-icons": "^1.2.68",
     "@iconify-json/vscode-icons": "^1.2.40",
     "@nuxt/content": "^2.13.4",
-    "@nuxt/fonts": "^0.12.1",
+    "@nuxt/fonts": "^0.13.0",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "latest",
     "@nuxt/ui-pro": "^1.8.2",
@@ -21,11 +21,11 @@
     "nuxt": "^4.1.2",
     "nuxt-component-meta": "^0.17.1",
     "nuxt-og-image": "^5.1.13",
-    "prettier": "^3.8.0",
+    "prettier": "^3.8.1",
     "ufo": "^1.6.3",
     "v-calendar": "^3.1.2",
     "valibot": "^1.2.0",
     "yup": "^1.7.1",
-    "zod": "^4.3.5"
+    "zod": "^4.3.6"
   }
 }
