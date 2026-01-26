@@ -66,15 +66,15 @@
     "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^1.12.1",
+    "@nuxt/eslint-config": "^1.13.0",
     "@nuxt/module-builder": "^1.0.2",
     "@nuxt/test-utils": "^3.23.0",
     "@release-it/conventional-changelog": "^10.0.4",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^9.39.2",
-    "happy-dom": "^20.3.3",
+    "happy-dom": "^20.3.9",
     "nuxt": "^4.1.2",
-    "release-it": "^19.2.3",
+    "release-it": "^19.2.4",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4",
     "vitest-environment-nuxt": "^1.0.1",
