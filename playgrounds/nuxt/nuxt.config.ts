@@ -9,6 +9,12 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  content: {
+    experimental: {
+      sqliteConnector: 'native'
+    }
+  },
+
   routeRules: {
     '/docs/components/**': { redirect: { to: '/components/**', statusCode: 301 }, prerender: false }
   },
