@@ -665,7 +665,7 @@ defineExpose({
       <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps" @focus-outside.prevent>
         <slot name="content-top" />
 
-        <ComboboxEmpty data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
+        <ComboboxEmpty v-if="!props.loading" data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
             {{ searchTerm ? t('inputMenu.noMatch', { searchTerm }) : t('inputMenu.noData') }}
           </slot>

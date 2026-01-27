@@ -51,6 +51,7 @@ onMounted(() => {
 <template>
   <USelectMenu
     ref="selectMenu"
+    :loading="status === 'pending'"
     placeholder="Select user"
     :items="users"
   />

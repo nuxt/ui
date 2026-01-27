@@ -620,7 +620,7 @@ defineExpose({
             />
           </ComboboxInput>
 
-          <ComboboxEmpty data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
+          <ComboboxEmpty v-if="!props.loading" data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty" :search-term="searchTerm">
               {{ searchTerm ? t('selectMenu.noMatch', { searchTerm }) : t('selectMenu.noData') }}
             </slot>

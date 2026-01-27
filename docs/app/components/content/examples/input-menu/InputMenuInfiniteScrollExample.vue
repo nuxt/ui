@@ -51,6 +51,7 @@ onMounted(() => {
 <template>
   <UInputMenu
     ref="inputMenu"
+    :loading="status === 'pending'"
     placeholder="Select user"
     :items="users"
   />
