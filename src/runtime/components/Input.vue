@@ -32,7 +32,7 @@ export interface InputProps<T extends AcceptableValue = AcceptableValue> extends
    */
   size?: Input['variants']['size']
   required?: boolean
-  autocomplete?: InputHTMLAttributes['autocomplete']
+  autocomplete?: 'on' | 'off' | (string & {})
   autofocus?: boolean
   autofocusDelay?: number
   disabled?: boolean
