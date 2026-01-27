@@ -25,10 +25,10 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue>
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /**
-   * The orientation of the input menu.
+   * The orientation of the input number.
    * @defaultValue 'horizontal'
    */
-  orientation?: 'vertical' | 'horizontal'
+  orientation?: InputNumber['variants']['orientation']
   /**
    * Configure the increment button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
@@ -186,7 +186,7 @@ defineExpose({
           <UButton
             :icon="incrementIcon"
             :color="color"
-            :size="size"
+            :size="inputSize"
             variant="link"
             :aria-label="t('inputNumber.increment')"
             v-bind="typeof increment === 'object' ? increment : undefined"
@@ -201,7 +201,7 @@ defineExpose({
           <UButton
             :icon="decrementIcon"
             :color="color"
-            :size="size"
+            :size="inputSize"
             variant="link"
             :aria-label="t('inputNumber.decrement')"
             v-bind="typeof decrement === 'object' ? decrement : undefined"

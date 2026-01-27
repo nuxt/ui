@@ -230,6 +230,8 @@ hide:
   - class
 external:
   - features
+externalTypes:
+  - PricingPlanFeature[]
 ignore:
   - title
   - description

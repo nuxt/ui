@@ -43,8 +43,16 @@ props:
 ---
 ::
 
-::note
-This component relies on the [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/index.html) package which provides objects and functions for representing and manipulating dates and times in a locale-aware manner. Format of date depends on the [`locale`](/docs/getting-started/integrations/i18n) installed in your application.
+::framework-only
+#nuxt
+:::note{to="/docs/getting-started/integrations/i18n/nuxt#locale"}
+This component uses the `@internationalized/date` package for locale-aware formatting. The date format is determined by the `locale` prop of the App component.
+:::
+
+#vue
+:::note{to="/docs/getting-started/integrations/i18n/vue#locale"}
+This component uses the `@internationalized/date` package for locale-aware formatting. The date format is determined by the `locale` prop of the App component.
+:::
 ::
 
 ### Range

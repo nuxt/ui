@@ -16,7 +16,7 @@ defineOgImageComponent('Docs')
 </script>
 
 <template>
-  <div v-if="page">
+  <main v-if="page">
     <UPageHero
       :title="page.hero.title"
       :description="page.hero.description"
@@ -46,13 +46,16 @@ defineOgImageComponent('Docs')
             :ui="{ footer: 'pointer-events-auto z-[1]' }"
           >
             <template #leading>
-              <UAvatar v-bind="item.avatar" size="3xl" class="mx-auto" loading="lazy" />
+              <UAvatar v-bind="item.avatar" :alt="`${item.label} logo`" size="3xl" class="mx-auto" loading="lazy" />
             </template>
 
             <template v-if="item.user" #footer>
               <UButton
                 :label="item.user.name"
-                :avatar="item.user.avatar"
+                :avatar="{
+                  ...item.user.avatar,
+                  alt: `${item.user.name} avatar`
+                }"
                 :to="item.user.to"
                 target="_blank"
                 size="sm"
@@ -65,5 +68,5 @@ defineOgImageComponent('Docs')
         </UPageGrid>
       </div>
     </UPageSection>
-  </div>
+  </main>
 </template>

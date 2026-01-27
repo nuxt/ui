@@ -7,16 +7,6 @@ export default defineNitroPlugin((nitroApp) => {
   })
 
   nitroApp.hooks.hook('llms:generate', (_, { sections }) => {
-    // Transform links except for "Documentation Sets"
-    sections.forEach((section) => {
-      if (section.title !== 'Documentation Sets') {
-        section.links = section.links.map(link => ({
-          ...link,
-          href: transformRawLink(link.href)
-        }))
-      }
-    })
-
     // Move "Documentation Sets" to the end
     const docSetIdx = sections.findIndex(s => s.title === 'Documentation Sets')
     if (docSetIdx !== -1) {
@@ -25,7 +15,3 @@ export default defineNitroPlugin((nitroApp) => {
     }
   })
 })
-
-function transformRawLink(href: string) {
-  return `${href.replace(/^https:\/\/ui.nuxt.com/, 'https://ui.nuxt.com/raw')}.md`
-}

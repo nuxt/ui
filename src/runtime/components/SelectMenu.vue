@@ -34,7 +34,7 @@ export type SelectMenuItem = SelectMenuValue | {
   [key: string]: any
 }
 
-export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -239,7 +239,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as SelectMenu['AppConfig']
 const { contains } = useFilter({ sensitivity: 'base' })
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'by'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
@@ -291,7 +291,8 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
     const displayedValues = value
       .map(item => getDisplayValue<T[], GetItemValue<T, VK>>(items.value, item, {
         labelKey: props.labelKey,
-        valueKey: props.valueKey
+        valueKey: props.valueKey,
+        by: props.by
       }))
       .filter((v): v is string => v != null && v !== '')
 
@@ -300,7 +301,8 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
 
   return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value as GetItemValue<T, VK>, {
     labelKey: props.labelKey,
-    valueKey: props.valueKey
+    valueKey: props.valueKey,
+    by: props.by
   })
 }
 
@@ -352,7 +354,7 @@ const createItem = computed(() => {
   const newItem = props.valueKey ? { [props.valueKey]: searchTerm.value } as NestedItem<T> : searchTerm.value
 
   if ((typeof props.createItem === 'object' && props.createItem.when === 'always') || props.createItem === 'always') {
-    return !filteredItems.value.find(item => compare(item, newItem, props.valueKey as string))
+    return !filteredItems.value.find(item => compare(item, newItem, (props.by ?? props.valueKey) as string | undefined))
   }
 
   return !filteredItems.value.length
@@ -468,8 +470,11 @@ function onClear() {
   emits('clear')
 }
 
+const viewportRef = useTemplateRef('viewportRef')
+
 defineExpose({
-  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement)
+  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
+  viewportRef: toRef(() => viewportRef.value)
 })
 </script>
 
@@ -582,6 +587,7 @@ defineExpose({
               <UButton
                 as="span"
                 :icon="clearIcon || appConfig.ui.icons.close"
+                :size="selectSize"
                 variant="link"
                 color="neutral"
                 tabindex="-1"
@@ -607,7 +613,7 @@ defineExpose({
             <UInput
               autofocus
               autocomplete="off"
-              :size="size"
+              :size="selectSize"
               v-bind="searchInputProps"
               data-slot="input"
               :class="ui.input({ class: props.ui?.input })"
@@ -621,7 +627,7 @@ defineExpose({
             </slot>
           </ComboboxEmpty>
 
-          <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+          <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
             <template v-if="!!virtualize">
               <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
