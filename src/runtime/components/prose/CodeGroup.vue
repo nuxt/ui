@@ -49,6 +49,7 @@ const items = computed<{
   index: number
   label: string
   icon: string
+  iconPosition: string
   component: any
 }[]>(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -64,6 +65,7 @@ function transformSlot(slot: any, index: number) {
   return {
     label: slot.props?.filename || slot.props?.label || `${index}`,
     icon: slot.props?.icon,
+    iconPosition: slot.props?.iconPosition,
     component: slot
   }
 }
@@ -97,9 +99,11 @@ onBeforeUpdate(() => rerenderCount.value++)
       <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
 
       <TabsTrigger v-for="(item, index) of items" :key="index" :value="String(index)" :class="ui.trigger({ class: props.ui?.trigger })">
-        <UCodeIcon :icon="item.icon" :filename="item.label" :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" />
+        <UCodeIcon v-if="item.iconPosition !== 'right'" :icon="item.icon" :filename="item.label" :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" />
 
         <span :class="ui.triggerLabel({ class: props.ui?.triggerLabel })">{{ item.label }}</span>
+
+        <UCodeIcon v-if="item.iconPosition === 'right'" :icon="item.icon" :filename="item.label" :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" />
       </TabsTrigger>
     </TabsList>
 
