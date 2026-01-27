@@ -65,8 +65,8 @@ const props = withDefaults(defineProps<EditorDragHandleProps>(), {
 defineSlots<EditorDragHandleSlots>()
 const emit = defineEmits<EditorDragHandleEmits>()
 
-const dragHandleProps = useForwardProps(reactivePick(props, 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement'))
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class', 'ui'))
+const dragHandleProps = useForwardProps(reactivePick(props, 'pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class', 'ui'))
 
 const appConfig = useAppConfig() as EditorDragHandle['AppConfig']
 
