@@ -1,6 +1,6 @@
-import type { NuxtOptions } from '@nuxt/schema'
+import type { ModuleOptions } from '../module'
 
-export default (options: Required<NuxtOptions['ui']>) => ({
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative',
     container: 'flex flex-col mx-auto max-w-2xl',
