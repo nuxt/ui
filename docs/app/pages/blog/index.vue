@@ -26,7 +26,7 @@ function formatDate(date: string) {
 </script>
 
 <template>
-  <div v-if="page" class="relative flex flex-col min-h-[calc(100vh-150px)]">
+  <main v-if="page" class="relative flex flex-col min-h-[calc(100vh-150px)]">
     <UPageHero :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }">
       <LazyStarsBg />
 
@@ -62,9 +62,9 @@ function formatDate(date: string) {
                     {{ formatDate(post.date) }}
                   </div>
 
-                  <h3 class="font-medium text-highlighted group-hover:text-primary transition-colors duration-200 truncate sm:text-base">
+                  <h2 class="font-medium text-highlighted group-hover:text-primary transition-colors duration-200 truncate sm:text-base">
                     {{ post.title }}
-                  </h3>
+                  </h2>
                   <p class="text-sm text-muted mt-1 line-clamp-2 sm:line-clamp-1">
                     {{ post.description }}
                   </p>
@@ -97,5 +97,5 @@ function formatDate(date: string) {
     <UContainer class="relative min-h-24 grow">
       <div aria-hidden="true" class="absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UContainer>
-  </div>
+  </main>
 </template>

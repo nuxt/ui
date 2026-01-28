@@ -1,6 +1,6 @@
-import type { NuxtOptions } from '@nuxt/schema'
+import type { ModuleOptions } from '../../module'
 
-export default (options: Required<NuxtOptions['ui']>) => ({
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'grid grid-cols-1 sm:grid-cols-2 gap-8',
     link: ['group block px-6 py-8 rounded-lg border border-default hover:bg-elevated/50 focus-visible:outline-primary', options.theme.transitions && 'transition-colors'],

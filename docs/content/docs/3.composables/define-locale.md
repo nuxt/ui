@@ -41,28 +41,31 @@ Creates a new locale object with the provided options.
 #### Parameters
 
 ::field-group
+
   ::field{name="options" type="DefineLocaleOptions<M>" required}
   The locale configuration object with the following properties:
 
-  ::collapsible
-    ::field-group
-      ::field{name="name" type="string" required}
-      The display name of the locale (e.g., `'English'`, `'Français'`).
-      ::
+    ::collapsible
 
-      ::field{name="code" type="string" required}
-      The ISO code of the locale (e.g., `'en'`, `'fr'`, `'de-AT'`).
-      ::
+      ::field-group
 
-      ::field{name="dir" type="'ltr' | 'rtl'"}
-      The text direction of the locale. Defaults to `'ltr'`.
-      ::
+        ::field{name="name" type="string" required}
+        The display name of the locale (e.g., `'English'`, `'Français'`).
+        ::
 
-      ::field{name="messages" type="M" required}
-      The translation messages object. Use the `Messages` type from `@nuxt/ui` for type safety.
+        ::field{name="code" type="string" required}
+        The ISO code of the locale (e.g., `'en'`, `'fr'`, `'de-AT'`).
+        ::
+
+        ::field{name="dir" type="'ltr' | 'rtl'"}
+        The text direction of the locale. Defaults to `'ltr'`.
+        ::
+
+        ::field{name="messages" type="M" required}
+        The translation messages object. Use the `Messages` type from `@nuxt/ui` for type safety.
+        ::
       ::
     ::
-  ::
   ::
 ::
 

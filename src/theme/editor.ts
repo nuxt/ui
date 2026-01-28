@@ -1,30 +1,32 @@
-import type { NuxtOptions } from '@nuxt/schema'
+import type { ModuleOptions } from '../module'
 
-export default (options: Required<NuxtOptions['ui']>) => ({
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: '',
     content: 'relative size-full flex-1',
     base: [
       'w-full outline-none *:my-5 *:first:mt-0 *:last:mb-0 sm:px-8 selection:bg-primary/20',
-      // Placeholder
-      '[&_:is(p,h1,h2,h3,h4).is-empty]:before:content-[attr(data-placeholder)] [&_:is(p,h1,h2,h3,h4).is-empty]:before:text-dimmed [&_:is(p,h1,h2,h3,h4).is-empty]:before:float-left [&_:is(p,h1,h2,h3,h4).is-empty]:before:h-0 [&_:is(p,h1,h2,h3,h4).is-empty]:before:pointer-events-none',
-      '[&_li_.is-empty]:before:content-none',
       // Paragraph
       '[&_p]:leading-7',
       // Links
       '[&_a]:text-primary [&_a]:border-b [&_a]:border-transparent [&_a]:hover:border-primary [&_a]:font-medium',
       options.theme?.transitions && '[&_a]:transition-colors',
+      // Code inside links
+      '[&_a>code]:border-dashed [&_a:hover>code]:border-primary [&_a:hover>code]:text-primary',
+      options.theme?.transitions && '[&_a>code]:transition-colors',
       // Mentions
       '[&_.mention]:text-primary [&_.mention]:font-medium',
       // Headings - shared styles
-      '[&_:is(h1,h2,h3,h4)]:text-highlighted [&_:is(h1,h2,h3,h4)]:font-bold',
+      '[&_:is(h1,h2,h3,h4,h5,h6)]:text-highlighted [&_:is(h1,h2,h3,h4,h5,h6)]:font-bold',
       // Headings - unique styles
       '[&_h1]:text-3xl',
       '[&_h2]:text-2xl',
       '[&_h3]:text-xl',
       '[&_h4]:text-lg',
+      '[&_h5]:text-base',
+      '[&_h6]:text-base',
       // Code inside headings
-      '[&_:is(h1,h2,h3,h4)>code]:border-dashed [&_:is(h1,h2,h3,h4)>code]:font-bold',
+      '[&_:is(h1,h2,h3,h4,h5,h6)>code]:border-dashed [&_:is(h1,h2,h3,h4,h5,h6)>code]:font-bold',
       '[&_h2>code]:text-xl/6',
       '[&_h3>code]:text-lg/5',
       // Blockquote & HR
@@ -46,5 +48,18 @@ export default (options: Required<NuxtOptions['ui']>) => ({
       // Selected nodes
       '[&_.ProseMirror-selectednode:not(img):not(pre):not([data-node-view-wrapper])]:bg-primary/20'
     ]
+  },
+  variants: {
+    placeholderMode: {
+      firstLine: {
+        base: '[&_:is(p,h1,h2,h3,h4,h5,h6).is-editor-empty:first-child]:before:content-[attr(data-placeholder)] [&_:is(p,h1,h2,h3,h4,h5,h6).is-editor-empty:first-child]:before:text-dimmed [&_:is(p,h1,h2,h3,h4,h5,h6).is-editor-empty:first-child]:before:float-left [&_:is(p,h1,h2,h3,h4,h5,h6).is-editor-empty:first-child]:before:h-0 [&_:is(p,h1,h2,h3,h4,h5,h6).is-editor-empty:first-child]:before:pointer-events-none'
+      },
+      everyLine: {
+        base: '[&_:is(p,h1,h2,h3,h4,h5,h6).is-empty]:before:content-[attr(data-placeholder)] [&_:is(p,h1,h2,h3,h4,h5,h6).is-empty]:before:text-dimmed [&_:is(p,h1,h2,h3,h4,h5,h6).is-empty]:before:float-left [&_:is(p,h1,h2,h3,h4,h5,h6).is-empty]:before:h-0 [&_:is(p,h1,h2,h3,h4,h5,h6).is-empty]:before:pointer-events-none'
+      }
+    }
+  },
+  defaultVariants: {
+    placeholderMode: 'everyLine'
   }
 })

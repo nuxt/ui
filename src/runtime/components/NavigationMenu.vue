@@ -64,7 +64,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
 }
 
 type SingleOrMultipleType = 'single' | 'multiple'
-type Orientation = NavigationMenuRootProps['orientation']
+type Orientation = NavigationMenu['variants']['orientation']
 
 type NavigationMenuModelValue<
   K extends SingleOrMultipleType = SingleOrMultipleType,
@@ -171,6 +171,11 @@ export interface NavigationMenuProps<
    */
   arrow?: boolean
   /**
+   * The key used to get the value from the item.
+   * @defaultValue 'value'
+   */
+  valueKey?: GetItemKeys<T>
+  /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
@@ -238,6 +243,7 @@ const props = withDefaults(defineProps<NavigationMenuProps<T, K, O>>(), {
   type: 'multiple' as never,
   collapsible: true,
   unmountOnHide: true,
+  valueKey: 'value',
   labelKey: 'label'
 })
 const emits = defineEmits<NavigationMenuEmits<K, O>>()
@@ -290,7 +296,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
 function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
   const indexes = list.reduce((acc: string[], item, index) => {
     if (item.defaultOpen || item.open) {
-      acc.push(item.value || (level > 0 ? `item-${level}-${index}` : `item-${index}`))
+      acc.push(get(item, props.valueKey as string) ?? (level > 0 ? `item-${level}-${index}` : `item-${index}`))
     }
     return acc
   }, [])
@@ -349,7 +355,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
     <component
       :is="(orientation === 'vertical' && !collapsed) ? AccordionItem : NavigationMenuItem"
       as="li"
-      :value="item.value || (level > 0 ? `item-${level}-${index}` : `item-${index}`)"
+      :value="get(item, props.valueKey as string) ?? (level > 0 ? `item-${level}-${index}` : `item-${index}`)"
     >
       <div v-if="orientation === 'vertical' && item.type === 'label' && !collapsed" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
         <ReuseLinkTemplate :item="item" :index="index" />
