@@ -496,5 +496,9 @@ export function buildFloatingUIMiddleware(options: FloatingUIOptions): Middlewar
     middleware.push(inline(typeof options.inline !== 'boolean' ? options.inline : undefined))
   }
 
+  if (options.custom) {
+    middleware.push(...options.custom)
+  }
+
   return middleware
 }
