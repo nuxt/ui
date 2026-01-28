@@ -1,6 +1,6 @@
-import type { NuxtOptions } from '@nuxt/schema'
+import type { ModuleOptions } from '../module'
 
-export default (options: Required<NuxtOptions['ui']>) => ({
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'flex flex-col gap-3',
     title: 'text-sm font-semibold flex items-center gap-1.5',

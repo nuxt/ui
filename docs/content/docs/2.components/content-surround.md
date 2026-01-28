@@ -37,6 +37,8 @@ ignore:
   - surround
 external:
   - surround
+externalTypes:
+  - ContentSurroundLink[]
 props:
   prevIcon: 'i-lucide-chevron-left'
   nextIcon: 'i-lucide-chevron-right'

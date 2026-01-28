@@ -39,6 +39,8 @@ ignore:
   - links
 external:
   - links
+externalTypes:
+  - ContentTocLink[]
 props:
   title: 'On this page'
   class: 'w-full'
@@ -86,6 +88,8 @@ ignore:
   - links
 external:
   - links
+externalTypes:
+  - ContentTocLink[]
 props:
   color: 'neutral'
   class: 'w-full'
@@ -122,6 +126,8 @@ ignore:
   - links
 external:
   - links
+externalTypes:
+  - ContentTocLink[]
 props:
   highlight: true
   highlightColor: 'neutral'

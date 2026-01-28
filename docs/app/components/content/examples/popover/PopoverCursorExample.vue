@@ -26,7 +26,7 @@ const reference = computed(() => ({
       class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72"
       @pointerenter="open = true"
       @pointerleave="open = false"
-      @pointermove="(ev) => {
+      @pointermove="(ev: PointerEvent) => {
         anchor.x = ev.clientX
         anchor.y = ev.clientY
       }"

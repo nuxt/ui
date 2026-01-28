@@ -114,6 +114,8 @@ prettier: true
 collapse: true
 external:
   - tiers
+externalTypes:
+  - PricingTableTier[]
 hide:
   - class
 ignore:
@@ -168,6 +170,9 @@ collapse: true
 external:
   - tiers
   - sections
+externalTypes:
+  - PricingTableTier[]
+  - PricingTableSection[]
 hide:
   - class
 ignore:

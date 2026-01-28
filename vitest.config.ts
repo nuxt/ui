@@ -8,6 +8,7 @@ import { glob } from 'tinyglobby'
 
 const components = await glob('./src/runtime/components/*.vue', { absolute: true })
 const vueComponents = await glob('./src/runtime/vue/components/*.vue', { absolute: true })
+const vueRouterOverrides = await glob('./src/runtime/vue/overrides/vue-router/*.vue', { absolute: true })
 
 export default defineConfig({
   test: {
@@ -41,7 +42,7 @@ export default defineConfig({
         test: {
           name: 'vue',
           environment: 'happy-dom',
-          include: ['./test/components/**.spec.ts', './test/composables/**.spec.ts'],
+          include: ['./test/components/**.spec.ts', './test/composables/**.spec.ts', './test/utils/**/**.spec.ts'],
           setupFiles: ['./test/utils/setup.ts']
         },
         plugins: [
@@ -66,7 +67,7 @@ export default defineConfig({
             },
             load(id) {
               if (id === '#components' || id === '?#components') {
-                const resolvedComponents = [...vueComponents, ...components]
+                const resolvedComponents = [...vueRouterOverrides, ...vueComponents, ...components]
                 const renderedComponents = new Set<string>()
                 return resolvedComponents.map((file) => {
                   const componentName = file.split('/').pop()!.replace('.vue', '')

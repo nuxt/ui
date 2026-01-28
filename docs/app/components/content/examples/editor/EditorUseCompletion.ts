@@ -31,12 +31,34 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
       mode: mode.value,
       language: language.value
     })),
-    onFinish: () => {
+    onFinish: (_prompt, completionText) => {
       // For inline suggestion mode, don't clear - let user accept with Tab
       const storage = getCompletionStorage()
       if (mode.value === 'continue' && storage?.visible) {
         return
       }
+
+      // For transform modes, insert the full completion with markdown parsing
+      const transformModes = ['fix', 'extend', 'reduce', 'simplify', 'summarize', 'translate']
+      if (transformModes.includes(mode.value) && insertState.value && completionText) {
+        const editor = editorRef.value?.editor
+        if (editor) {
+          // Delete the original selection if not already done
+          if (insertState.value.deleteRange) {
+            editor.chain()
+              .focus()
+              .deleteRange(insertState.value.deleteRange)
+              .run()
+          }
+
+          // Insert with markdown parsing
+          editor.chain()
+            .focus()
+            .insertContentAt(insertState.value.pos, completionText, { contentType: 'markdown' })
+            .run()
+        }
+      }
+
       insertState.value = undefined
     },
     onError: (error) => {
@@ -54,10 +76,25 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
     const storage = getCompletionStorage()
     if (storage?.visible) {
       // Update inline suggestion
-      storage.setSuggestion(newCompletion)
+      // Add space prefix if needed (so preview matches what will be inserted)
+      let suggestionText = newCompletion
+      if (storage.position !== undefined) {
+        const textBefore = editor.state.doc.textBetween(Math.max(0, storage.position - 1), storage.position)
+        if (textBefore && !/\s/.test(textBefore) && !suggestionText.startsWith(' ')) {
+          suggestionText = ' ' + suggestionText
+        }
+      }
+      storage.setSuggestion(suggestionText)
       editor.view.dispatch(editor.state.tr.setMeta('completionUpdate', true))
     } else if (insertState.value) {
       // Direct insertion/transform mode (from toolbar actions)
+
+      // Transform modes use markdown insertion - wait for full completion
+      const transformModes = ['fix', 'extend', 'reduce', 'simplify', 'summarize', 'translate']
+      if (transformModes.includes(mode.value)) {
+        // Don't stream - will be handled in onFinish
+        return
+      }
 
       // If this is the first chunk and we have a selection to replace, delete it first
       if (insertState.value.deleteRange && !oldCompletion) {
@@ -112,6 +149,17 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
     complete(selectedText)
   }
 
+  function getMarkdownBefore(editor: Editor, pos: number): string {
+    const { state } = editor
+    const serializer = (editor.storage.markdown as { serializer?: { serialize: (content: unknown) => string } })?.serializer
+    if (serializer) {
+      const slice = state.doc.slice(0, pos)
+      return serializer.serialize(slice.content)
+    }
+    // Fallback to plain text
+    return state.doc.textBetween(0, pos, '\n')
+  }
+
   function triggerContinue(editor: Editor) {
     if (isLoading.value) return
 
@@ -122,22 +170,23 @@ export function useEditorCompletion(editorRef: Ref<{ editor: Editor | undefined 
 
     if (selection.empty) {
       // No selection: continue from cursor position
-      const textBefore = state.doc.textBetween(0, selection.from, '\n')
+      const textBefore = getMarkdownBefore(editor, selection.from)
       insertState.value = { pos: selection.from }
       complete(textBefore)
     } else {
       // Text selected: append completion after the selection
-      const selectedText = state.doc.textBetween(selection.from, selection.to)
+      const textBefore = getMarkdownBefore(editor, selection.to)
       insertState.value = { pos: selection.to }
-      complete(selectedText)
+      complete(textBefore)
     }
   }
 
   // Configure Completion extension
   const extension = Completion.configure({
-    onTrigger: (textBefore) => {
+    onTrigger: (editor) => {
       if (isLoading.value) return
       mode.value = 'continue'
+      const textBefore = getMarkdownBefore(editor, editor.state.selection.from)
       complete(textBefore)
     },
     onAccept: () => {

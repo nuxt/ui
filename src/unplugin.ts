@@ -52,7 +52,16 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    */
   components?: Partial<ComponentsOptions>
   /**
+   * Router integration mode
+   * - `true` (default): Use vue-router integration
+   * - `false`: Disable routing, use anchor tags
+   * - `'inertia'`: Use Inertia.js compatibility layer
+   * @defaultValue `true`
+   */
+  router?: boolean | 'inertia'
+  /**
    * Enables compatibility layer for InertiaJS
+   * @deprecated Use `router: 'inertia'` instead
    */
   inertia?: boolean
   /**

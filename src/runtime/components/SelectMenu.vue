@@ -3,7 +3,7 @@ import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, Combob
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { AvatarProps, ButtonProps, ChipProps, IconProps, InputProps, LinkPropsKeys } from '../types'
 import type { ModelModifiers } from '../types/input'
 import type { ButtonHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
@@ -34,7 +34,7 @@ export type SelectMenuItem = SelectMenuValue | {
   [key: string]: any
 }
 
-export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -71,6 +71,18 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    */
   selectedIcon?: IconProps['name']
   /**
+   * Display a clear button to reset the model value.
+   * Can be an object to pass additional props to the Button.
+   * @defaultValue false
+   */
+  clear?: boolean | Partial<Omit<ButtonProps, LinkPropsKeys>>
+  /**
+   * The icon displayed in the clear button.
+   * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
+   */
+  clearIcon?: IconProps['name']
+  /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
    */
@@ -98,10 +110,10 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
      */
     overscan?: number
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 32
      */
-    estimateSize?: number
+    estimateSize?: number | ((index: number) => number)
   }
   /**
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
@@ -154,6 +166,7 @@ export type SelectMenuEmits<A extends ArrayOrNested<SelectMenuItem>, VK extends 
   blur: [event: FocusEvent]
   focus: [event: FocusEvent]
   create: [item: string]
+  clear: []
   /** Event handler when highlighted element changes. */
   highlight: [payload: {
     ref: HTMLElement
@@ -186,7 +199,7 @@ export interface SelectMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
 import { useTemplateRef, computed, onMounted, toRef, toRaw } from 'vue'
-import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
+import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -200,6 +213,7 @@ import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+import UButton from './Button.vue'
 import UChip from './Chip.vue'
 import UInput from './Input.vue'
 
@@ -212,6 +226,7 @@ const props = withDefaults(defineProps<SelectMenuProps<T, VK, M>>(), {
   descriptionKey: 'description',
   resetSearchTermOnBlur: true,
   resetSearchTermOnSelect: true,
+  resetModelValueOnClear: true,
   autofocusDelay: 0,
   virtualize: false
 })
@@ -224,15 +239,17 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as SelectMenu['AppConfig']
 const { contains } = useFilter({ sensitivity: 'base' })
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'highlightOnHover'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'by'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
+const clearProps = computed(() => typeof props.clear === 'object' ? props.clear : {} as Partial<Omit<ButtonProps, LinkPropsKeys>>)
+
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
   return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-    estimateSize: getEstimateSize(items.value, props.size || 'md', props.descriptionKey as string)
+    estimateSize: getEstimateSize(filteredItems.value, selectSize.value || 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
 const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps)
@@ -274,7 +291,8 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
     const displayedValues = value
       .map(item => getDisplayValue<T[], GetItemValue<T, VK>>(items.value, item, {
         labelKey: props.labelKey,
-        valueKey: props.valueKey
+        valueKey: props.valueKey,
+        by: props.by
       }))
       .filter((v): v is string => v != null && v !== '')
 
@@ -283,7 +301,8 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
 
   return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value as GetItemValue<T, VK>, {
     labelKey: props.labelKey,
-    valueKey: props.valueKey
+    valueKey: props.valueKey,
+    by: props.by
   })
 }
 
@@ -335,7 +354,7 @@ const createItem = computed(() => {
   const newItem = props.valueKey ? { [props.valueKey]: searchTerm.value } as NestedItem<T> : searchTerm.value
 
   if ((typeof props.createItem === 'object' && props.createItem.when === 'always') || props.createItem === 'always') {
-    return !filteredItems.value.find(item => compare(item, newItem, props.valueKey as string))
+    return !filteredItems.value.find(item => compare(item, newItem, (props.by ?? props.valueKey) as string | undefined))
   }
 
   return !filteredItems.value.length
@@ -440,8 +459,22 @@ function isSelectItem(item: SelectMenuItem): item is Exclude<SelectMenuItem, Sel
   return typeof item === 'object' && item !== null
 }
 
+function isModelValueEmpty(modelValue: GetModelValue<T, VK, M>): boolean {
+  if (props.multiple && Array.isArray(modelValue)) {
+    return modelValue.length === 0
+  }
+  return modelValue === undefined || modelValue === null || modelValue === ''
+}
+
+function onClear() {
+  emits('clear')
+}
+
+const viewportRef = useTemplateRef('viewportRef')
+
 defineExpose({
-  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement)
+  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
+  viewportRef: toRef(() => viewportRef.value)
 })
 </script>
 
@@ -548,9 +581,24 @@ defineExpose({
           </template>
         </slot>
 
-        <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+        <span v-if="isTrailing || !!slots.trailing || !!clear" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
-            <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+            <ComboboxCancel v-if="!!clear && !isModelValueEmpty(modelValue as GetModelValue<T, VK, M>)" as-child>
+              <UButton
+                as="span"
+                :icon="clearIcon || appConfig.ui.icons.close"
+                :size="selectSize"
+                variant="link"
+                color="neutral"
+                tabindex="-1"
+                v-bind="clearProps"
+                data-slot="trailingClear"
+                :class="ui.trailingClear({ class: props.ui?.trailingClear })"
+                @click.stop="onClear"
+              />
+            </ComboboxCancel>
+
+            <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
           </slot>
         </span>
       </ComboboxTrigger>
@@ -565,7 +613,7 @@ defineExpose({
             <UInput
               autofocus
               autocomplete="off"
-              :size="size"
+              :size="selectSize"
               v-bind="searchInputProps"
               data-slot="input"
               :class="ui.input({ class: props.ui?.input })"
@@ -579,7 +627,7 @@ defineExpose({
             </slot>
           </ComboboxEmpty>
 
-          <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+          <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
             <template v-if="!!virtualize">
               <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 

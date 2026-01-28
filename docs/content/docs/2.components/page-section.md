@@ -123,6 +123,8 @@ You can pass any property from the [Link](/docs/components/link#props) component
 prettier: true
 external:
   - features
+externalTypes:
+  - PageFeatureProps[]
 ignore:
   - title
   - description
@@ -155,6 +157,8 @@ Use the `links` prop to display a list of [Button](/docs/components/button) unde
 prettier: true
 external:
   - links
+externalTypes:
+  - ButtonProps[]
 ignore:
   - title
   - description
@@ -185,6 +189,9 @@ prettier: true
 external:
   - features
   - links
+externalTypes:
+  - PageFeatureProps[]
+  - ButtonProps[]
 ignore:
   - title
   - description
@@ -234,6 +241,9 @@ prettier: true
 external:
   - features
   - links
+externalTypes:
+  - PageFeatureProps[]
+  - ButtonProps[]
 ignore:
   - title
   - description

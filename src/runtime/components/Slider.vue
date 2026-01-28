@@ -25,7 +25,7 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
    * The orientation of the slider.
    * @defaultValue 'horizontal'
    */
-  orientation?: SliderRootProps['orientation']
+  orientation?: Slider['variants']['orientation']
   /**
    * Display a tooltip around the slider thumbs with the current value.
    * `{ disableClosingTrigger: true }`{lang="ts-type"}
