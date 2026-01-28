@@ -83,7 +83,7 @@ The offset is automatically calculated to center the handle for small blocks and
 
 Use the default slot to add a [DropdownMenu](/docs/components/dropdown-menu) with block-level actions like duplicate, delete, move up/down, or transform blocks into different types.
 
-Listen to the `@node-changed` event to track the currently hovered node and its position, then use `editor.chain().setMeta('lockDragHandle', open).run()`{lang="ts-type"} to lock the handle position while the menu is open.
+Listen to the `@node-change` event to track the currently hovered node and its position, then use `editor.chain().setMeta('lockDragHandle', open).run()`{lang="ts-type"} to lock the handle position while the menu is open.
 
 ::component-example
 ---

@@ -92,7 +92,7 @@ const items = (editor: Editor): DropdownMenuItem[][] => {
     content-type="markdown"
     class="w-full min-h-19"
   >
-    <UEditorDragHandle v-slot="{ ui }" :editor="editor" @node-changed="selectedNode = $event">
+    <UEditorDragHandle v-slot="{ ui }" :editor="editor" @node-change="selectedNode = $event">
       <UDropdownMenu
         v-slot="{ open }"
         :modal="false"

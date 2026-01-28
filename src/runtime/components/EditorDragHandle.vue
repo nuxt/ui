@@ -2,7 +2,6 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { Placement, Strategy } from '@floating-ui/dom'
 import type { Editor, JSONContent } from '@tiptap/vue-3'
-import type { Node } from '@tiptap/pm/model'
 import type { DragHandleProps } from '@tiptap/extension-drag-handle-vue-3'
 import theme from '#build/ui/editor-drag-handle'
 import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
@@ -40,7 +39,8 @@ export interface EditorDragHandleSlots {
 }
 
 export interface EditorDragHandleEmits {
-  nodeChanged: [{ node: JSONContent, pos: number }]
+  nodeChange: [{ node: JSONContent, pos: number }]
+  hover: [{ node: JSONContent, pos: number }]
 }
 </script>
 
@@ -112,29 +112,33 @@ const computePositionConfig = computed<DragHandleProps['computePositionConfig']>
 }))
 
 const currentNodePos = ref<number | null>(null)
-const currentNode = ref<Node | null>(null)
 
-const onNodeChange = ({ pos, node }: { pos: number, node: Node | null }) => {
+const onNodeChange = ({ pos }: { pos: number }) => {
   currentNodePos.value = pos
-  currentNode.value = node
+  if (pos == null || pos < 0) return
 
-  if (!node) return
-
-  emit('nodeChanged', { node: node.toJSON(), pos })
+  const node = props.editor.state.doc.nodeAt(pos)
+  if (node) {
+    emit('hover', { node: node.toJSON(), pos })
+  }
 }
 
 function onClick() {
   if (!props.editor) return
 
   const pos = currentNodePos.value
-  const node = currentNode.value
+  if (pos == null || pos < 0) return
 
-  if (pos === null || !node) return
+  const node = props.editor.state.doc.nodeAt(pos)
+  if (node) {
+    const selectedNode = { node: node.toJSON(), pos }
 
-  const selectedNode = { node: node.toJSON(), pos }
-  props.editor.chain().setNodeSelection(pos).run()
+    emit('nodeChange', selectedNode)
 
-  return selectedNode
+    props.editor.chain().setNodeSelection(pos).run()
+
+    return selectedNode
+  }
 }
 </script>
 
