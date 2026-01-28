@@ -620,7 +620,7 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
       }"
     />
 
-    <UEditorDragHandle v-slot="{ ui, onClick }" :editor="editor" @node-change="selectedNode = $event">
+    <UEditorDragHandle v-slot="{ ui, onClick }" :editor="editor" @node-changed="selectedNode = $event">
       <UButton
         icon="i-lucide-plus"
         color="neutral"

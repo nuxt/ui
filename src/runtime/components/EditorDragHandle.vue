@@ -40,7 +40,7 @@ export interface EditorDragHandleSlots {
 }
 
 export interface EditorDragHandleEmits {
-  nodeChange: [{ node: JSONContent, pos: number }]
+  nodeChanged: [{ node: JSONContent, pos: number }]
 }
 </script>
 
@@ -120,7 +120,7 @@ const onNodeChange = ({ pos, node }: { pos: number, node: Node | null }) => {
 
   if (!node) return
 
-  emit('nodeChange', { node: node.toJSON(), pos })
+  emit('nodeChanged', { node: node.toJSON(), pos })
 }
 
 function onClick() {
