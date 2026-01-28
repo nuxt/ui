@@ -3,7 +3,7 @@ import type { CheckboxGroupRootProps, CheckboxGroupRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox-group'
 import type { CheckboxProps } from '../types'
-import type { AcceptableValue, GetItemKeys, GetModelValue } from '../types/utils'
+import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>
@@ -64,9 +64,9 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGrou
   ui?: CheckboxGroup['slots'] & CheckboxProps['ui']
 }
 
-export type CheckboxGroupEmits<T extends CheckboxGroupItem[] = CheckboxGroupItem[]> = CheckboxGroupRootEmits<T[number]> & {
+export type CheckboxGroupEmits<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> = Omit<CheckboxGroupRootEmits, 'update:modelValue'> & {
   change: [event: Event]
-}
+} & GetModelValueEmits<T, VK, true>
 
 type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => any
 
@@ -93,7 +93,7 @@ const props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
   valueKey: 'value' as never,
   orientation: 'vertical'
 })
-const emits = defineEmits<CheckboxGroupEmits<T>>()
+const emits = defineEmits<CheckboxGroupEmits<T, VK>>()
 const slots = defineSlots<CheckboxGroupSlots<T>>()
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']

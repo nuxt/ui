@@ -94,7 +94,7 @@ props:
           to: /docs/components/progress
     - label: GitHub
       icon: i-simple-icons-github
-      badge: 3.8k
+      badge: 6k
       to: https://github.com/nuxt/ui
       target: _blank
     - label: Help
@@ -205,7 +205,7 @@ props:
           to: /docs/components/progress
     - label: GitHub
       icon: i-simple-icons-github
-      badge: 3.8k
+      badge: 6k
       to: https://github.com/nuxt/ui
       target: _blank
     - label: Help
@@ -318,7 +318,7 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
@@ -430,7 +430,7 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
@@ -526,7 +526,7 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
@@ -572,7 +572,7 @@ props:
         active: true
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
   class: 'w-full'
@@ -609,7 +609,7 @@ props:
         active: true
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
   class: 'w-full'
@@ -1072,13 +1072,13 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
         tooltip:
           text: 'Open on GitHub'
           kbds:
-            - 3.8k
+            - 6k
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
@@ -1179,13 +1179,13 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
         tooltip:
           text: 'Open on GitHub'
           kbds:
-            - 3.8k
+            - 6k
       - label: Help
         icon: i-lucide-circle-help
         disabled: true

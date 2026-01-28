@@ -197,6 +197,18 @@ props:
 ---
 ::
 
+### Week Numbers :badge{label="4.4+" class="align-text-top"}
+
+Use the `week-numbers` prop to display week numbers in the calendar.
+
+::component-code
+---
+props:
+  weekNumbers: true
+  fixedWeeks: true
+---
+::
+
 ## Examples
 
 ### With chip events

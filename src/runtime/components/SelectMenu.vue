@@ -587,6 +587,7 @@ defineExpose({
               <UButton
                 as="span"
                 :icon="clearIcon || appConfig.ui.icons.close"
+                :size="selectSize"
                 variant="link"
                 color="neutral"
                 tabindex="-1"
@@ -612,7 +613,7 @@ defineExpose({
             <UInput
               autofocus
               autocomplete="off"
-              :size="size"
+              :size="selectSize"
               v-bind="searchInputProps"
               data-slot="input"
               :class="ui.input({ class: props.ui?.input })"
