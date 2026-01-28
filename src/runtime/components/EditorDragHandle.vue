@@ -2,6 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { Placement, Strategy } from '@floating-ui/dom'
 import type { Editor, JSONContent } from '@tiptap/vue-3'
+import type { Node } from '@tiptap/pm/model'
 import type { DragHandleProps } from '@tiptap/extension-drag-handle-vue-3'
 import theme from '#build/ui/editor-drag-handle'
 import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
@@ -110,28 +111,30 @@ const computePositionConfig = computed<DragHandleProps['computePositionConfig']>
   middleware: middleware.value
 }))
 
-const currentNodePos = ref<number | null>()
+const currentNodePos = ref<number | null>(null)
+const currentNode = ref<Node | null>(null)
 
-function onNodeChange({ pos }: { pos: number }) {
+const onNodeChange = ({ pos, node }: { pos: number, node: Node | null }) => {
   currentNodePos.value = pos
+  currentNode.value = node
+
+  if (!node) return
+
+  emit('nodeChange', { node: node.toJSON(), pos })
 }
 
 function onClick() {
   if (!props.editor) return
 
   const pos = currentNodePos.value
-  if (pos == null) return
+  const node = currentNode.value
 
-  const node = props.editor.state.doc.nodeAt(pos)
-  if (node) {
-    const selectedNode = { node: node.toJSON(), pos }
+  if (pos === null || !node) return
 
-    emit('nodeChange', selectedNode)
+  const selectedNode = { node: node.toJSON(), pos }
+  props.editor.chain().setNodeSelection(pos).run()
 
-    props.editor.chain().setNodeSelection(pos).run()
-
-    return selectedNode
-  }
+  return selectedNode
 }
 </script>
 
@@ -143,7 +146,6 @@ function onClick() {
     :on-node-change="onNodeChange"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    @click="onClick"
   >
     <slot :ui="ui" :on-click="onClick">
       <UButton
