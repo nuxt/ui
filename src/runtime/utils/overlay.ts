@@ -25,7 +25,8 @@ export function pointerDownOutside(e: PointerDownOutsideEvent, options: PointerD
   // Fix for touch devices: on touch, Reka UI defers the event dispatch to the click event.
   // If the target element was removed from DOM between pointerdown and click (e.g., toast dismissed),
   // we should prevent the overlay from closing.
-  if (!target || !document.body.contains(target)) {
+  // Using `isConnected` instead of `document.body.contains()` to correctly handle Shadow DOM elements.
+  if (!target?.isConnected) {
     e.preventDefault()
     return
   }
