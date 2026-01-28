@@ -11,18 +11,6 @@ export interface FloatingUIOptions {
   autoPlacement?: AutoPlacementOptions | boolean
   hide?: HideOptions | boolean
   inline?: InlineOptions | boolean
-
-  /**
-   * Custom middleware to be added to DragHandle's FloatingUI middleware stack.
-   *
-   * Allows for exact control over the positioning behavior, in cases where styling
-   * is insufficient for proper placement and alignment. Especially useful, is that
-   * this allows for dynamic positioning based on external factors, such as the nesting
-   * level of the editor instance (not provided out of the box when nesting drag handles).
-   *
-   * https://floating-ui.com/docs/computeposition#custom
-   */
-  custom?: Middleware[]
 }
 
 export interface EditorHandler {

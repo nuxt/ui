@@ -111,9 +111,9 @@ const computePositionConfig = computed<DragHandleProps['computePositionConfig']>
   middleware: middleware.value
 }))
 
-const currentNodePos = ref<number | null>(null)
+const currentNodePos = ref<number | null>()
 
-const onNodeChange = ({ pos }: { pos: number }) => {
+function onNodeChange({ pos }: { pos: number }) {
   currentNodePos.value = pos
   if (pos == null || pos < 0) return
 
