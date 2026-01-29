@@ -102,7 +102,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSurro
         </p>
       </slot>
     </ULink>
-    <span v-else class="hidden lg:block">&nbsp;</span>
+    <span v-else class="hidden sm:block">&nbsp;</span>
   </DefineLinkTemplate>
 
   <Primitive v-if="surround" :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">

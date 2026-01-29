@@ -1,6 +1,6 @@
-import type { NuxtOptions } from '@nuxt/schema'
+import type { ModuleOptions } from '../module'
 
-export default (options: Required<NuxtOptions['ui']>) => ({
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative group/blog-post flex flex-col rounded-lg overflow-hidden',
     header: 'relative overflow-hidden aspect-[16/9] w-full pointer-events-none',

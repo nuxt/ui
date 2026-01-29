@@ -1,6 +1,6 @@
-import type { NuxtOptions } from '@nuxt/schema'
+import type { ModuleOptions } from '../../module'
 
-export default (options: Required<NuxtOptions['ui']>) => ({
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     base: ['group relative block my-5 p-4 sm:p-6 border border-default rounded-md bg-default', options.theme.transitions && 'transition-colors'],
     icon: 'size-6 mb-2 block',

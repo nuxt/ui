@@ -43,6 +43,11 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> extends
    */
   trailingIcon?: IconProps['name']
   /**
+   * The key used to get the value from the item.
+   * @defaultValue 'value'
+   */
+  valueKey?: GetItemKeys<T>
+  /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
@@ -78,6 +83,7 @@ const props = withDefaults(defineProps<AccordionProps<T>>(), {
   type: 'single',
   collapsible: true,
   unmountOnHide: true,
+  valueKey: 'value',
   labelKey: 'label'
 })
 const emits = defineEmits<AccordionEmits>()
@@ -98,7 +104,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
       v-for="(item, index) in props.items"
       v-slot="{ open }"
       :key="index"
-      :value="item.value || String(index)"
+      :value="get(item, props.valueKey as string) ?? String(index)"
       :disabled="item.disabled"
       data-slot="item"
       :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"

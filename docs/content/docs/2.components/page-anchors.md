@@ -20,6 +20,8 @@ ignore:
   - links
 external:
   - links
+externalTypes:
+  - PageAnchor[]
 props:
   links:
     - label: 'Documentation'

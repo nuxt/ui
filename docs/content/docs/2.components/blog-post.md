@@ -186,6 +186,8 @@ hide:
   - class
 external:
   - authors
+externalTypes:
+  - UserProps[]
 ignore:
   - title
   - description
@@ -217,6 +219,8 @@ hide:
   - class
 external:
   - authors
+externalTypes:
+  - UserProps[]
 ignore:
   - title
   - description

@@ -110,13 +110,16 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
       <template #content="{ message }">
         <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${part.state}` : ''}`">
           <MDCCached
-            v-if="part.type === 'text'"
+            v-if="part.type === 'text' && message.role === 'assistant'"
             :value="part.text"
             :cache-key="`${message.id}-${index}`"
             :components="components"
             :parser-options="{ highlight: false }"
             class="[&_.my-5]:my-2.5 *:first:!mt-0 *:last:!mb-0 [&_.leading-7]:!leading-6"
           />
+          <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">
+            {{ part.text }}
+          </p>
 
           <p v-else-if="part.type === 'dynamic-tool'" class="text-muted text-sm leading-6 my-1.5">
             {{ getCachedToolMessage(part.state, part.toolName, JSON.stringify(part.input || {})) }}

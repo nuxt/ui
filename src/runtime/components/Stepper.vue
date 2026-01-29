@@ -4,7 +4,7 @@ import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/stepper'
 import type { IconProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Stepper = ComponentConfig<typeof theme, AppConfig, 'stepper'>
@@ -46,6 +46,11 @@ export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<
    */
   orientation?: Stepper['variants']['orientation']
   /**
+   * The key used to get the value from the item.
+   * @defaultValue 'value'
+   */
+  valueKey?: GetItemKeys<T>
+  /**
    * The value of the step that should be active when initially rendered. Use when you do not need to control the state of the steps.
    */
   defaultValue?: string | number
@@ -63,10 +68,11 @@ type SlotProps<T extends StepperItem> = (props: { item: T }) => any
 
 export type StepperSlots<T extends StepperItem = StepperItem> = {
   indicator(props: { item: T, ui: Stepper['ui'] }): any
+  wrapper: SlotProps<T>
   title: SlotProps<T>
   description: SlotProps<T>
   content: SlotProps<T>
-} & DynamicSlots<T>
+} & DynamicSlots<T, 'wrapper' | 'title' | 'description', { item: T }>
 
 </script>
 
@@ -76,11 +82,13 @@ import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSepa
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
+import { get } from '../utils'
 import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<StepperProps<T>>(), {
   orientation: 'horizontal',
-  linear: true
+  linear: true,
+  valueKey: 'value'
 })
 const emits = defineEmits<StepperEmits<T>>()
 const slots = defineSlots<StepperSlots<T>>()
@@ -89,7 +97,7 @@ const modelValue = defineModel<string | number>()
 
 const appConfig = useAppConfig() as Stepper['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'linear'))
+const rootProps = useForwardProps(reactivePick(props, 'as', 'linear'))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.stepper || {}) })({
   orientation: props.orientation,
@@ -102,11 +110,11 @@ const currentStepIndex = computed({
     const value = modelValue.value ?? props.defaultValue
 
     return ((typeof value === 'string')
-      ? props.items.findIndex(item => item.value === value)
+      ? props.items.findIndex(item => get(item, props.valueKey as string) === value)
       : value) ?? 0
   },
   set(value: number) {
-    modelValue.value = props.items?.[value]?.value ?? value
+    modelValue.value = get(props.items?.[value], props.valueKey as string) ?? value
   }
 })
 
@@ -133,11 +141,11 @@ defineExpose({
 </script>
 
 <template>
-  <StepperRoot v-bind="rootProps" v-model="currentStepIndex" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <StepperRoot v-bind="rootProps" v-model="currentStepIndex" :orientation="orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <StepperItem
         v-for="(item, count) in items"
-        :key="item.value ?? count"
+        :key="count"
         :step="count"
         :disabled="item.disabled || props.disabled"
         data-slot="item"
@@ -163,21 +171,23 @@ defineExpose({
         </div>
 
         <div data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
-          <StepperTitle as="div" data-slot="title" :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
-            <slot name="title" :item="item">
-              {{ item.title }}
-            </slot>
-          </StepperTitle>
-          <StepperDescription as="div" data-slot="description" :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
-            <slot name="description" :item="item">
-              {{ item.description }}
-            </slot>
-          </StepperDescription>
+          <slot :name="((item.slot ? `${item.slot}-wrapper` : 'wrapper') as keyof StepperSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
+            <StepperTitle v-if="item.title || !!slots[(item.slot ? `${item.slot}-title` : 'title') as keyof StepperSlots<T>]" as="div" data-slot="title" :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
+              <slot :name="((item.slot ? `${item.slot}-title` : 'title') as keyof StepperSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
+                {{ item.title }}
+              </slot>
+            </StepperTitle>
+            <StepperDescription v-if="item.description || !!slots[(item.slot ? `${item.slot}-description` : 'description') as keyof StepperSlots<T>]" as="div" data-slot="description" :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
+              <slot :name="((item.slot ? `${item.slot}-description` : 'description') as keyof StepperSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
+                {{ item.description }}
+              </slot>
+            </StepperDescription>
+          </slot>
         </div>
       </StepperItem>
     </div>
 
-    <div v-if="currentStep?.content || !!slots.content || currentStep?.slot" data-slot="content" :class="ui.content({ class: props.ui?.content })">
+    <div v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot as keyof StepperSlots<T>])" data-slot="content" :class="ui.content({ class: props.ui?.content })">
       <slot
         :name="((currentStep?.slot || 'content') as keyof StepperSlots<T>)"
         :item="(currentStep as Extract<T, { slot: string }>)"

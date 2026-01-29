@@ -34,9 +34,10 @@ describe('Tabs', () => {
   it.each([
     // Props
     ['with items', { props }],
-    ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Tab1' } }],
+    ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),

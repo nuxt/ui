@@ -10,6 +10,10 @@ type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch
 
 export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
   /**
+   * @defaultValue 'md'
+   */
+  size?: DashboardSearch['variants']['size']
+  /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
    * @IconifyIcon
@@ -104,7 +108,7 @@ const { t } = useLocale()
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as DashboardSearch['AppConfig']
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
+const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
 
 const getProxySlots = () => omit(slots, ['content'])
@@ -115,6 +119,7 @@ const fuse = computed(() => defu({}, props.fuse, {
 }))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearch || {}) })({
+  size: props.size,
   fullscreen: props.fullscreen
 }))
 

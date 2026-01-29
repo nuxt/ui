@@ -35,6 +35,7 @@ describe('Calendar', () => {
     ['with nextMonth', { props: { nextMonth: { size: 'lg', color: 'primary' } } }],
     ['with prevYear', { props: { prevYear: { size: 'lg', color: 'primary' } } }],
     ['with prevMonth', { props: { prevMonth: { size: 'lg', color: 'primary' } } }],
+    ['with weekNumbers', { props: { weekNumbers: true } }],
     ['without fixedWeeks', { props: { fixedWeeks: false } }],
     ['without monthControls', { props: { monthControls: false } }],
     ['without yearControls', { props: { yearControls: false } }],
