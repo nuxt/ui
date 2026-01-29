@@ -115,7 +115,7 @@ const currentNodePos = ref<number | null>()
 
 function onNodeChange({ pos }: { pos: number }) {
   currentNodePos.value = pos
-  if (pos == null) return
+  if (pos == null || pos < 0) return
 
   const node = props.editor.state.doc.nodeAt(pos)
   if (node) {
@@ -127,7 +127,7 @@ function onClick() {
   if (!props.editor) return
 
   const pos = currentNodePos.value
-  if (pos == null) return
+  if (pos == null || pos < 0) return
 
   const node = props.editor.state.doc.nodeAt(pos)
   if (node) {
