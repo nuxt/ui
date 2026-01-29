@@ -150,6 +150,7 @@ function onClick() {
     :on-node-change="onNodeChange"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
+    @click="onClick"
   >
     <slot :ui="ui" :on-click="onClick">
       <UButton
