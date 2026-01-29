@@ -11,7 +11,7 @@ type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>
 
 type InputNumberValue = number | null
 
-export interface InputNumberProps<T extends InputNumberValue = InputNumberValue> extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'min' | 'max' | 'readonly' | 'required' | 'step' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size'> {
+export interface InputNumberProps<T extends InputNumberValue = InputNumberValue> extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly' | 'focusOnChange'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'min' | 'max' | 'readonly' | 'required' | 'step' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -100,7 +100,7 @@ const modelValue = useVModel<InputNumberProps<T>, 'modelValue', 'update:modelVal
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'readonly'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'readonly', 'focusOnChange'), emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps<T>>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps<T>>(props)

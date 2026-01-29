@@ -265,10 +265,11 @@ function getButtonProps(item: EditorToolbarItem) {
 }
 
 function getDropdownProps(item: EditorToolbarDropdownItem) {
-  const baseProps = pick(item as any, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'ui'])
+  const baseProps = pick(item as any, ['size', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'ui'])
 
   return defu(baseProps, {
-    modal: false
+    modal: false,
+    size: props.size
   })
 }
 
