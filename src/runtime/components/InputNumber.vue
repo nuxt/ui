@@ -186,7 +186,7 @@ defineExpose({
           <UButton
             :icon="incrementIcon"
             :color="color"
-            :size="size"
+            :size="inputSize"
             variant="link"
             :aria-label="t('inputNumber.increment')"
             v-bind="typeof increment === 'object' ? increment : undefined"
@@ -201,7 +201,7 @@ defineExpose({
           <UButton
             :icon="decrementIcon"
             :color="color"
-            :size="size"
+            :size="inputSize"
             variant="link"
             :aria-label="t('inputNumber.decrement')"
             v-bind="typeof decrement === 'object' ? decrement : undefined"

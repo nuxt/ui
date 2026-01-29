@@ -69,6 +69,7 @@ import { DrawerRoot, DrawerRootNested, DrawerTrigger, DrawerPortal, DrawerOverla
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { usePortal } from '../composables/usePortal'
+import { pointerDownOutside } from '../utils/overlay'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
@@ -100,7 +101,9 @@ const contentEvents = computed(() => {
     }, {} as Record<typeof events[number], (e: Event) => void>)
   }
 
-  return {}
+  return {
+    pointerDownOutside
+  }
 })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })({

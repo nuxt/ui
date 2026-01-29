@@ -646,6 +646,7 @@ defineExpose({
             <UButton
               as="span"
               :icon="clearIcon || appConfig.ui.icons.close"
+              :size="inputSize"
               variant="link"
               color="neutral"
               tabindex="-1"

@@ -1,6 +1,6 @@
-import type { NuxtOptions } from '@nuxt/schema'
+import type { ModuleOptions } from '../../module'
 
-export default (options: Required<NuxtOptions['ui']>) => ({
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative lg:h-[450px] my-5 grid lg:grid-cols-3 border border-muted rounded-md',
     list: 'isolate relative p-2 border-b lg:border-b-0 lg:border-e border-muted overflow-y-auto',
