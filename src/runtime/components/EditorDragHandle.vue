@@ -40,6 +40,7 @@ export interface EditorDragHandleSlots {
 
 export interface EditorDragHandleEmits {
   nodeChange: [{ node: JSONContent, pos: number }]
+  hover: [{ node: JSONContent, pos: number }]
 }
 </script>
 
@@ -65,8 +66,8 @@ const props = withDefaults(defineProps<EditorDragHandleProps>(), {
 defineSlots<EditorDragHandleSlots>()
 const emit = defineEmits<EditorDragHandleEmits>()
 
-const dragHandleProps = useForwardProps(reactivePick(props, 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement'))
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class', 'ui'))
+const dragHandleProps = useForwardProps(reactivePick(props, 'pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class', 'ui'))
 
 const appConfig = useAppConfig() as EditorDragHandle['AppConfig']
 
@@ -114,13 +115,19 @@ const currentNodePos = ref<number | null>()
 
 function onNodeChange({ pos }: { pos: number }) {
   currentNodePos.value = pos
+  if (pos == null || pos < 0) return
+
+  const node = props.editor.state.doc.nodeAt(pos)
+  if (node) {
+    emit('hover', { node: node.toJSON(), pos })
+  }
 }
 
 function onClick() {
   if (!props.editor) return
 
   const pos = currentNodePos.value
-  if (pos == null) return
+  if (pos == null || pos < 0) return
 
   const node = props.editor.state.doc.nodeAt(pos)
   if (node) {

@@ -38,6 +38,10 @@ const items = [{
 }] satisfies TimelineItem[]
 
 const value = ref('kickoff')
+
+function onSelect(_e: Event, item: TimelineItem) {
+  value.value = item.value as string
+}
 </script>
 
 <template>
@@ -57,5 +61,6 @@ const value = ref('kickoff')
     :items="items"
     :reverse="reverse"
     class="data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-96 min-h-0"
+    @select="onSelect"
   />
 </template>

@@ -14,6 +14,7 @@ const components = [
   'card',
   'carousel',
   'changelog-version',
+  'changelog-versions',
   'checkbox-group',
   'checkbox',
   'chip',

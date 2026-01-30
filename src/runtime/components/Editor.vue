@@ -28,7 +28,7 @@ export interface EditorProps<T extends Content = Content, H extends EditorCustom
   contentType?: EditorContentType
   /**
    * The starter kit options to configure the editor.
-   * @defaultValue { horizontalRule: false, headings: { levels: [1, 2, 3, 4] }, link: { openOnClick: false }, dropcursor: { color: 'var(--ui-primary)', width: 2 } }
+   * @defaultValue { horizontalRule: false, link: { openOnClick: false }, dropcursor: { color: 'var(--ui-primary)', width: 2 } }
    * @see https://tiptap.dev/docs/editor/extensions/functionality/starterkit
    */
   starterKit?: Partial<StarterKitOptions>
@@ -132,9 +132,6 @@ const contentType = computed(() => props.contentType || (typeof props.modelValue
 const starterKit = computed(() => defu(props.starterKit, {
   code: false,
   horizontalRule: false,
-  headings: {
-    levels: [1, 2, 3, 4]
-  },
   dropcursor: {
     color: 'var(--ui-primary)',
     width: 2

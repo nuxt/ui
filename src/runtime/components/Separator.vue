@@ -38,7 +38,7 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
    * The orientation of the separator.
    * @defaultValue 'horizontal'
    */
-  orientation?: _SeparatorProps['orientation']
+  orientation?: Separator['variants']['orientation']
   class?: any
   ui?: Separator['slots']
 }

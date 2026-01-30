@@ -126,15 +126,16 @@ export function getDisplayValue<T extends Array<any>, V>(
   options: {
     valueKey?: GetItemKeys<T>
     labelKey?: GetItemKeys<T>
+    by?: string | ((a: any, b: any) => boolean)
   } = {}
 ): string | undefined {
-  const { valueKey, labelKey } = options
+  const { valueKey, labelKey, by } = options
 
   const foundItem = items.find((item) => {
     const itemValue = (typeof item === 'object' && item !== null && valueKey)
       ? get(item, valueKey as string)
       : item
-    return compare(itemValue, value)
+    return compare(itemValue, value, by)
   })
 
   if (isEmpty(value) && foundItem) {
