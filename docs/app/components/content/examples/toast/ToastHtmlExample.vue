@@ -3,13 +3,17 @@ const toast = useToast()
 
 function showToast() {
   toast.add({
-    title: 'Item Deleted',
-    description: h('span', {}, [
-      'You have successfully deleted the item ',
+    title: h('span', {}, [
+      'Item ',
       h('span', { class: 'text-primary font-bold' }, '#15'),
-      ' from your account.'
+      ' deleted'
     ]),
-    icon: 'i-lucide-delete'
+    description: h('span', {}, [
+      'You have successfully deleted the item from your ',
+      h('span', { class: 'font-bold' }, 'account'),
+      '.'
+    ]),
+    icon: 'i-lucide-trash-2'
   })
 }
 </script>
