@@ -336,6 +336,17 @@ name: 'toast-callback-example'
 ---
 ::
 
+### With HTML content
+
+Define the toast description using the [h() Vue.js render function](https://vuejs.org/api/render-function.html#h). Use custom HTML elements or Vue components, and set custom props such as classes or component props.
+
+::component-example
+---
+collapse: true
+name: 'toast-html-example'
+---
+::
+
 ## API
 
 ### Props
