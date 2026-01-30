@@ -13,31 +13,108 @@ export default defineLocale<Messages>({
       showPassword: 'Паказаць пароль',
       submit: 'Працягнуць'
     },
+    banner: {
+      close: 'Закрыць'
+    },
     calendar: {
-      cancel: 'Скасаваць',
-      ok: 'ОК',
-      today: 'Сёння'
+      nextMonth: 'Наступны месяц',
+      nextYear: 'Наступны год',
+      prevMonth: 'Папярэдні месяц',
+      prevYear: 'Папярэдні год'
+    },
+    carousel: {
+      dots: 'Выберыце слайд для адлюстравання',
+      goto: 'Перайсці да {slide}',
+      next: 'Далей',
+      prev: 'Назад'
+    },
+    chatPrompt: {
+      placeholder: 'Увядзіце сваё паведамленне тут…'
+    },
+    chatPromptSubmit: {
+      label: 'Адправіць'
+    },
+    colorMode: {
+      dark: 'Цёмная',
+      light: 'Светлая',
+      switchToDark: 'Пераключыцца на цёмны рэжым',
+      switchToLight: 'Пераключыцца на светлы рэжым',
+      system: 'Сістэмная'
     },
     commandPalette: {
-      placeholder: 'Увядзіце каманду або пошук…'
+      back: 'Назад',
+      close: 'Закрыць',
+      noData: 'Няма даных',
+      noMatch: 'Супадзенняў не знойдзена',
+      placeholder: 'Увядзіце каманду або выканайце пошук…'
     },
-    dropdown: {
-      select: 'Выбраць'
+    contentSearch: {
+      links: 'Спасылкі',
+      theme: 'Тэма'
     },
-    empty: {
-      noData: 'Няма даных'
+    contentSearchButton: {
+      label: 'Пошук…'
     },
-    input: {
-      clear: 'Ачысціць'
+    contentToc: {
+      title: 'На гэтай старонцы'
+    },
+    dashboardSearch: {
+      theme: 'Тэма'
+    },
+    dashboardSearchButton: {
+      label: 'Пошук…'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'Згарнуць бакавую панэль',
+      expand: 'Разгарнуць бакавую панэль'
+    },
+    dashboardSidebarToggle: {
+      close: 'Закрыць бакавую панэль',
+      open: 'Адкрыць бакавую панэль'
+    },
+    error: {
+      clear: 'Вярнуцца на галоўную'
+    },
+    fileUpload: {
+      removeFile: 'Выдаліць {filename}'
+    },
+    header: {
+      close: 'Закрыць меню',
+      open: 'Адкрыць меню'
+    },
+    inputMenu: {
+      create: 'Стварыць "{label}"',
+      noData: 'Няма даных',
+      noMatch: 'Супадзенняў не знойдзена'
+    },
+    inputNumber: {
+      decrement: 'Паменшыць',
+      increment: 'Павялічыць'
     },
     modal: {
       close: 'Закрыць'
     },
-    pagination: {
-      next: 'Далей',
-      prev: 'Назад'
+    pricingTable: {
+      caption: 'Параўнанне платных планаў'
     },
-    select: {
+    prose: {
+      codeCollapse: {
+        closeText: 'Згарнуць',
+        name: 'код',
+        openText: 'Разгарнуць'
+      },
+      collapsible: {
+        closeText: 'Схаваць',
+        name: 'ўласцівасці',
+        openText: 'Паказаць'
+      },
+      pre: {
+        copy: 'Скапіяваць код у буфер абмену'
+      }
+    },
+    selectMenu: {
+      create: 'Стварыць "{label}"',
+      noData: 'Няма даных',
       noMatch: 'Супадзенняў не знойдзена',
       search: 'Пошук…'
     },
