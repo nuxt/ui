@@ -59,7 +59,7 @@ export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
   ui?: ChatMessages['slots']
 }
 
-type ExtendSlotWithVersion<K extends keyof ChatMessageSlots, T extends UIMessage[]>
+type ExtendSlotWithVersion<K extends keyof ChatMessageSlots, T extends UIMessage[] = UIMessage[]>
   = ChatMessageSlots[K] extends (props: infer P) => any
     ? (props: P & { message: T[number] }) => any
     : ChatMessageSlots[K]

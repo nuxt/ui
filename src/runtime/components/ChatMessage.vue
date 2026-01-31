@@ -55,7 +55,7 @@ export interface ChatMessageSlots<METADATA = unknown, DATA_PARTS extends UIDataT
 }
 </script>
 
-<script setup lang="ts" generic="METADATA = unknown, DATA_PARTS extends UIDataTypes = UIDataTypes, TOOLS extends UITools = UITools">
+<script setup lang="ts" generic="METADATA, DATA_PARTS extends UIDataTypes, TOOLS extends UITools">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
