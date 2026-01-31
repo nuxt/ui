@@ -336,6 +336,17 @@ name: 'toast-callback-example'
 ---
 ::
 
+### With HTML content
+
+Use the [`h()` render function](https://vuejs.org/api/render-function.html#h) in the `title` or `description` fields to render HTML elements or Vue components with custom styling.
+
+::component-example
+---
+collapse: true
+name: 'toast-html-example'
+---
+::
+
 ## API
 
 ### Props
