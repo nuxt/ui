@@ -90,6 +90,8 @@ Use the `links` prop to display a list of [Button](/docs/components/button) unde
 prettier: true
 external:
   - links
+externalTypes:
+  - ButtonProps[]
 ignore:
   - title
   - description
@@ -116,6 +118,8 @@ Use the `variant` prop to change the style of the CTA.
 prettier: true
 external:
   - links
+externalTypes:
+  - ButtonProps[]
 ignore:
   - title
   - description
@@ -147,6 +151,8 @@ Use the `orientation` prop to change the orientation with the default slot. Defa
 prettier: true
 external:
   - links
+externalTypes:
+  - ButtonProps[]
 ignore:
   - title
   - description
@@ -180,6 +186,8 @@ Use the `reverse` prop to reverse the orientation of the default slot.
 prettier: true
 external:
   - links
+externalTypes:
+  - ButtonProps[]
 ignore:
   - title
   - description

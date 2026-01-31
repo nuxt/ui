@@ -1,6 +1,6 @@
-import type { NuxtOptions } from '@nuxt/schema'
+import type { ModuleOptions } from '../../module'
 
-export default (options: Required<NuxtOptions['ui']>) => ({
+export default (options: Required<ModuleOptions>) => ({
   base: 'px-1.5 py-0.5 text-sm font-mono font-medium rounded-md inline-block',
   variants: {
     color: {

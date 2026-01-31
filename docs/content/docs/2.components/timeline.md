@@ -24,6 +24,8 @@ ignore:
   - defaultValue
 external:
   - items
+externalTypes:
+  - TimelineItem[]
 props:
   defaultValue: 2
   items:

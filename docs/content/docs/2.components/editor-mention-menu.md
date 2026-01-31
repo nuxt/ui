@@ -90,7 +90,7 @@ Use the `options` prop to customize the positioning behavior using [Floating UI 
 
 ## Examples
 
-### With ignore filter :badge{label="Soon" class="align-text-top"}
+### With ignore filter :badge{label="4.4+" class="align-text-top"}
 
 You can set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic. Use `v-model:search-term` to access the current search term and fetch items from an API.
 

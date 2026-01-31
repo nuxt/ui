@@ -101,11 +101,6 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
-  /**
-   * Use a custom comparator to compare objects.
-   * This can be a string (key) or a function that compares two objects.
-   */
-  by?: string | ((a: any, b: any) => boolean)
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   autofocus?: boolean
@@ -171,7 +166,7 @@ const slots = defineSlots<SelectSlots<T, VK, M>>()
 
 const appConfig = useAppConfig() as Select['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple', 'by'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
@@ -208,8 +203,7 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
     const displayedValues = value
       .map(item => getDisplayValue<T[], GetItemValue<T, VK>>(items.value, item, {
         labelKey: props.labelKey,
-        valueKey: props.valueKey,
-        by: props.by
+        valueKey: props.valueKey
       }))
       .filter((v): v is string => v != null && v !== '')
 
@@ -218,8 +212,7 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
 
   return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value as GetItemValue<T, VK>, {
     labelKey: props.labelKey,
-    valueKey: props.valueKey,
-    by: props.by
+    valueKey: props.valueKey
   })
 }
 

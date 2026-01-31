@@ -291,6 +291,9 @@ export default defineNuxtConfig({
     domain: 'https://ui.nuxt.com',
     title: 'Nuxt UI',
     description: 'A comprehensive Vue UI component library (Nuxt optional) with 125+ accessible, production-ready, Tailwind CSS components for building modern web applications.',
+    // Disable content module's built-in raw markdown route - we use our own custom handler
+    // in server/routes/raw/[...slug].md.get.ts that applies MDC transformations
+    contentRawMarkdown: false,
     full: {
       title: 'Nuxt UI Full Documentation',
       description: 'This is the full documentation for Nuxt UI. It includes all the Markdown files written with the MDC syntax.'

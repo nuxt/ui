@@ -728,7 +728,7 @@ collapse: true
 ---
 ::
 
-### With infinite scroll :badge{label="Soon" class="align-text-top"}
+### With infinite scroll :badge{label="4.4+" class="align-text-top"}
 
 You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
 
