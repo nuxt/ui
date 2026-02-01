@@ -260,7 +260,7 @@ name: 'toast-example'
 In this example, we use the `AppConfig` to configure the `duration` prop of the `Toaster` component globally.
 ::
 
-### Change global max :badge{label="4.1+"}
+### Change global max :badge{label="4.1+" class="align-text-top"}
 
 Change the `toaster.max` prop on the [App](/docs/components/app#props) component to change the max number of toasts displayed at once.
 
@@ -322,6 +322,29 @@ name: 'toast-example'
 
 ::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L6"}
 In this example, we use the `AppConfig` to configure the `expand` prop of the `Toaster` component globally.
+::
+
+
+### With callback
+
+Pass an `onUpdateOpen` field to execute a callback when the toast is closed (either by expiration or user dismissal).
+
+::component-example
+---
+collapse: true
+name: 'toast-callback-example'
+---
+::
+
+### With HTML content
+
+Use the [`h()` render function](https://vuejs.org/api/render-function.html#h) in the `title` or `description` fields to render HTML elements or Vue components with custom styling.
+
+::component-example
+---
+collapse: true
+name: 'toast-html-example'
+---
 ::
 
 ## API

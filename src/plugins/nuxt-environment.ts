@@ -4,12 +4,16 @@ import { resolvePathSync } from 'mlly'
 import type { UnpluginOptions } from 'unplugin'
 import type { NuxtUIOptions } from '../unplugin'
 import { runtimeDir } from '../unplugin'
+import { resolveRouterMode } from '../utils/router'
 
 /**
  * This plugin normalises Nuxt environment (#imports) and `import.meta.client` within the Nuxt UI components.
  */
 export default function NuxtEnvironmentPlugin(options: NuxtUIOptions) {
-  const stubPath = resolvePathSync(options.inertia ? '../runtime/inertia/stubs' : '../runtime/vue/stubs', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url })
+  const routerMode = resolveRouterMode(options)
+  const stubsPath = `../runtime/vue/stubs/${routerMode}`
+
+  const stubPath = resolvePathSync(stubsPath, { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url })
 
   return {
     name: 'nuxt:ui',

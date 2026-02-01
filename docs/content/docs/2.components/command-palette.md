@@ -31,6 +31,8 @@ ignore:
 external:
   - groups
   - modelValue
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   modelValue: {}
@@ -128,6 +130,8 @@ ignore:
 external:
   - groups
   - modelValue
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   modelValue: {}
@@ -193,6 +197,8 @@ ignore:
 external:
   - groups
   - modelValue
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   multiple: true
@@ -256,10 +262,45 @@ ignore:
   - groups
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
   placeholder: 'Search an app...'
+  groups:
+    - id: 'apps'
+      items:
+        - label: 'Calendar'
+          icon: 'i-lucide-calendar'
+        - label: 'Music'
+          icon: 'i-lucide-music'
+        - label: 'Maps'
+          icon: 'i-lucide-map'
+  class: 'flex-1'
+---
+::
+
+### Size :badge{label="4.4+" class="align-text-top"}
+
+Use the `size` prop to change the size of the CommandPalette.
+
+::component-code
+---
+collapse: true
+hide:
+  - autofocus
+ignore:
+  - class
+  - groups
+external:
+  - groups
+externalTypes:
+  - CommandPaletteGroup[]
+class: '!p-0'
+props:
+  autofocus: false
+  size: 'xl'
   groups:
     - id: 'apps'
       items:
@@ -287,6 +328,8 @@ ignore:
   - groups
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -333,6 +376,8 @@ ignore:
 external:
   - groups
   - modelValue
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   multiple: true
@@ -410,6 +455,8 @@ ignore:
   - class
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -456,6 +503,8 @@ ignore:
   - groups
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -487,6 +536,8 @@ ignore:
   - groups
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -536,6 +587,8 @@ ignore:
   - close
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -568,6 +621,8 @@ ignore:
   - class
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -603,6 +658,8 @@ ignore:
   - close
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -651,6 +708,8 @@ ignore:
   - class
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -687,6 +746,8 @@ ignore:
   - back
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -734,6 +795,8 @@ ignore:
   - class
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -765,6 +828,10 @@ class: '!p-0'
 props:
   autofocus: false
 ---
+::
+
+::tip
+Use the `value-key` prop to select a field of an item to use as the value instead of the object itself. Use the `by` prop to compare objects by a field instead of reference.
 ::
 
 ### Control search term
@@ -889,7 +956,7 @@ props:
 ---
 ::
 
-### With virtualization :badge{label="4.1+"}
+### With virtualization :badge{label="4.1+" class="align-text-top"}
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 

@@ -1,68 +1,44 @@
 <script setup lang="ts">
-import colors from 'tailwindcss/colors'
-import { omit } from '#ui/utils'
-
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
+const { track } = useAnalytics()
 
-const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone']
-const neutral = computed({
-  get() {
-    return appConfig.ui.colors.neutral
-  },
-  set(option) {
-    appConfig.ui.colors.neutral = option
-    window.localStorage.setItem('nuxt-ui-neutral', appConfig.ui.colors.neutral)
+const open = ref(false)
+
+watch(open, (isOpen) => {
+  if (isOpen) {
+    track('Theme Picker Opened')
   }
 })
 
-const colorsToOmit = ['inherit', 'current', 'transparent', 'black', 'white', ...neutralColors]
-const primaryColors = Object.keys(omit(colors, colorsToOmit as any))
-const primary = computed({
-  get() {
-    return appConfig.ui.colors.primary
-  },
-  set(option) {
-    appConfig.ui.colors.primary = option
-    window.localStorage.setItem('nuxt-ui-primary', appConfig.ui.colors.primary)
-    setBlackAsPrimary(false)
-  }
-})
+const { copy: copyCSS, copied: copiedCSS } = useClipboard()
+const { copy: copyAppConfig, copied: copiedAppConfig } = useClipboard()
 
-const radiuses = [0, 0.125, 0.25, 0.375, 0.5]
-const radius = computed({
-  get() {
-    return appConfig.theme.radius
-  },
-  set(option) {
-    appConfig.theme.radius = option
-    window.localStorage.setItem('nuxt-ui-radius', String(appConfig.theme.radius))
-  }
-})
-
-const modes = [
-  { label: 'light', icon: appConfig.ui.icons.light },
-  { label: 'dark', icon: appConfig.ui.icons.dark },
-  { label: 'system', icon: appConfig.ui.icons.system }
-]
-const mode = computed({
-  get() {
-    return colorMode.value
-  },
-  set(option) {
-    colorMode.preference = option
-  }
-})
-
-function setBlackAsPrimary(value: boolean) {
-  appConfig.theme.blackAsPrimary = value
-  window.localStorage.setItem('nuxt-ui-black-as-primary', String(value))
-}
+const {
+  neutralColors,
+  neutral,
+  primaryColors,
+  primary,
+  setBlackAsPrimary,
+  radiuses,
+  radius,
+  fonts,
+  font,
+  icon,
+  icons,
+  modes,
+  mode,
+  hasCSSChanges,
+  hasAppConfigChanges,
+  exportCSS,
+  exportAppConfig,
+  resetTheme
+} = useTheme()
 </script>
 
 <template>
-  <UPopover :ui="{ content: 'w-72 px-6 py-4 flex flex-col gap-4' }">
-    <template #default="{ open }">
+  <UPopover v-model:open="open" :ui="{ content: 'w-72 px-6 py-4 flex flex-col gap-4 overflow-y-auto max-h-[calc(100vh-5rem)]' }">
+    <template #default>
       <UButton
         icon="i-lucide-swatch-book"
         color="neutral"
@@ -75,8 +51,18 @@ function setBlackAsPrimary(value: boolean) {
 
     <template #content>
       <fieldset>
-        <legend class="text-[11px] leading-none font-semibold mb-2">
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
           Primary
+
+          <UButton
+            to="/docs/getting-started/theme/css-variables#colors"
+            size="xs"
+            color="neutral"
+            variant="link"
+            icon="i-lucide-help-circle"
+            class="p-0 -my-0.5"
+            :ui="{ leadingIcon: 'size-3' }"
+          />
         </legend>
 
         <div class="grid grid-cols-3 gap-1 -mx-2">
@@ -102,8 +88,18 @@ function setBlackAsPrimary(value: boolean) {
       </fieldset>
 
       <fieldset>
-        <legend class="text-[11px] leading-none font-semibold mb-2">
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
           Neutral
+
+          <UButton
+            to="/docs/getting-started/theme/css-variables#text"
+            size="xs"
+            color="neutral"
+            variant="link"
+            icon="i-lucide-help-circle"
+            class="p-0 -my-0.5"
+            :ui="{ leadingIcon: 'size-3' }"
+          />
         </legend>
 
         <div class="grid grid-cols-3 gap-1 -mx-2">
@@ -119,8 +115,18 @@ function setBlackAsPrimary(value: boolean) {
       </fieldset>
 
       <fieldset>
-        <legend class="text-[11px] leading-none font-semibold mb-2">
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
           Radius
+
+          <UButton
+            to="/docs/getting-started/theme/css-variables#radius"
+            size="xs"
+            color="neutral"
+            variant="link"
+            icon="i-lucide-help-circle"
+            class="p-0 -my-0.5"
+            :ui="{ leadingIcon: 'size-3' }"
+          />
         </legend>
 
         <div class="grid grid-cols-5 gap-1 -mx-2">
@@ -136,8 +142,74 @@ function setBlackAsPrimary(value: boolean) {
       </fieldset>
 
       <fieldset>
-        <legend class="text-[11px] leading-none font-semibold mb-2">
-          Theme
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
+          Font
+
+          <UButton
+            to="/docs/getting-started/integrations/fonts"
+            size="xs"
+            color="neutral"
+            variant="link"
+            icon="i-lucide-help-circle"
+            class="p-0 -my-0.5"
+            :ui="{ leadingIcon: 'size-3' }"
+          />
+        </legend>
+
+        <div class="-mx-2">
+          <USelect
+            v-model="font"
+            size="sm"
+            color="neutral"
+            icon="i-lucide-type"
+            :items="fonts"
+            class="w-full ring-default rounded-sm hover:bg-elevated/50 text-[11px] data-[state=open]:bg-elevated/50"
+            :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+          />
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
+          Icons
+
+          <UButton
+            to="/docs/getting-started/integrations/icons"
+            size="xs"
+            color="neutral"
+            variant="link"
+            icon="i-lucide-help-circle"
+            class="p-0 -my-0.5"
+            :ui="{ leadingIcon: 'size-3' }"
+          />
+        </legend>
+
+        <div class="-mx-2">
+          <USelect
+            v-model="icon"
+            size="sm"
+            color="neutral"
+            :icon="icons.find(i => i.value === icon)?.icon"
+            :items="icons"
+            class="w-full ring-default rounded-sm hover:bg-elevated/50 capitalize text-[11px] data-[state=open]:bg-elevated/50"
+            :ui="{ item: 'capitalize text-[11px]', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+          />
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
+          Color Mode
+
+          <UButton
+            to="/docs/getting-started/integrations/color-mode"
+            size="xs"
+            color="neutral"
+            variant="link"
+            icon="i-lucide-help-circle"
+            class="p-0 -my-0.5"
+            :ui="{ leadingIcon: 'size-3' }"
+          />
         </legend>
 
         <div class="grid grid-cols-3 gap-1 -mx-2">
@@ -148,6 +220,45 @@ function setBlackAsPrimary(value: boolean) {
             :selected="colorMode.preference === m.label"
             @click="mode = m.label"
           />
+        </div>
+      </fieldset>
+
+      <fieldset v-if="hasCSSChanges || hasAppConfigChanges">
+        <legend class="text-[11px] leading-none font-semibold mb-2 select-none">
+          Export
+        </legend>
+
+        <div class="flex items-center justify-between gap-1 -mx-2">
+          <UButton
+            v-if="hasCSSChanges"
+            color="neutral"
+            variant="soft"
+            size="sm"
+            label="main.css"
+            class="flex-1 text-[11px]"
+            :icon="copiedCSS ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+            @click="copyCSS(exportCSS())"
+          />
+          <UButton
+            v-if="hasAppConfigChanges"
+            color="neutral"
+            variant="soft"
+            size="sm"
+            label="app.config.ts"
+            :icon="copiedAppConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+            class="flex-1 text-[11px]"
+            @click="copyAppConfig(exportAppConfig())"
+          />
+          <UTooltip text="Reset theme">
+            <UButton
+              color="neutral"
+              variant="outline"
+              size="sm"
+              icon="i-lucide-rotate-ccw"
+              class="ms-auto ring-default hover:bg-elevated/50"
+              @click="resetTheme"
+            />
+          </UTooltip>
         </div>
       </fieldset>
     </template>

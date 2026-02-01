@@ -10,7 +10,7 @@ type Error = ComponentConfig<typeof theme, AppConfig, 'error'>
 export interface ErrorProps {
   /**
    * The element or component this component should render as.
-   * @defaultValue 'div'
+   * @defaultValue 'main'
    */
   as?: any
   error?: Partial<NuxtError & { message: string }>
@@ -24,7 +24,7 @@ export interface ErrorProps {
    * `{ size: 'lg', color: 'primary', variant: 'solid', label: 'Back to home' }`{lang="ts-type"}
    * @defaultValue true
    */
-  clear?: boolean | Partial<ButtonProps>
+  clear?: boolean | ButtonProps
   class?: any
   ui?: Error['slots']
 }
@@ -47,6 +47,7 @@ import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<ErrorProps>(), {
+  as: 'main',
   redirect: '/',
   clear: true
 })
@@ -89,7 +90,7 @@ function handleError() {
           color="primary"
           variant="solid"
           :label="t('error.clear')"
-          v-bind="(typeof clear === 'object' ? clear as Partial<ButtonProps> : {})"
+          v-bind="(typeof clear === 'object' ? clear : {})"
           @click="handleError"
         />
       </slot>

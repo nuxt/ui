@@ -32,7 +32,7 @@ avatar:
 ::
 
 ::tip{to="/docs/components/chat-messages"}
-Use the [`ChatMessages`](/docs/components/chat-messages) component to display a list of chat messages.
+Use the `ChatMessages` component to display a list of chat messages.
 ::
 
 ### Parts
@@ -195,6 +195,8 @@ Use the `actions` prop to display actions below the message that will be display
 prettier: true
 external:
   - actions
+externalTypes:
+  - ButtonProps[]
 ignore:
   - parts
   - actions

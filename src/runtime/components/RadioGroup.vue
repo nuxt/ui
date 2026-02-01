@@ -62,7 +62,7 @@ export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], 
    * The orientation the radio buttons are laid out.
    * @defaultValue 'vertical'
    */
-  orientation?: RadioGroupRootProps['orientation']
+  orientation?: RadioGroup['variants']['orientation']
   /**
    * Position of the indicator.
    * @defaultValue 'start'

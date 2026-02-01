@@ -95,10 +95,10 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], M extends boolean 
      */
     overscan?: number
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 32
      */
-    estimateSize?: number
+    estimateSize?: number | ((index: number) => number)
   }
   onSelect?: (e: TreeItemSelectEvent<T[number]>, item: T[number]) => void
   onToggle?: (e: TreeItemToggleEvent<T[number]>, item: T[number]) => void

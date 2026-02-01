@@ -92,7 +92,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
           <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" data-slot="itemLabelExternalIcon" :class="ui.itemLabelExternalIcon({ class: [uiOverride?.itemLabelExternalIcon, item.ui?.itemLabelExternalIcon], color: item?.color, active })" />
         </span>
 
-        <span v-if="get(item, props.descriptionKey as string)" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiOverride?.itemDescription, item.ui?.itemDescription] })">
+        <span v-if="get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description`: 'item-description') as keyof ContextMenuSlots<T>]" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiOverride?.itemDescription, item.ui?.itemDescription] })">
           <slot :name="((item.slot ? `${item.slot}-description`: 'item-description') as keyof ContextMenuSlots<T>)" :item="item" :active="active" :index="index">
             {{ get(item, props.descriptionKey as string) }}
           </slot>
@@ -116,7 +116,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
 
   <ContextMenu.Portal v-bind="portalProps">
     <component :is="sub ? ContextMenu.SubContent : ContextMenu.Content" data-slot="content" :class="ui.content({ class: [uiOverride?.content, props.class] })" v-bind="contentProps">
-      <slot name="content-top" />
+      <slot name="content-top" :sub="sub ?? false" />
 
       <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiOverride?.viewport })">
         <ContextMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: uiOverride?.group })">
@@ -169,26 +169,25 @@ const groups = computed<ContextMenuItem[][]>(() =>
             >
               <ReuseItemTemplate :item="item" :index="index" />
             </ContextMenu.CheckboxItem>
-            <ContextMenu.Item
-              v-else
-              as-child
-              :disabled="item.disabled"
-              :text-value="get(item, props.labelKey as string)"
-              @select="item.onSelect"
-            >
-              <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<ContextMenuItem, 'type'>)" custom>
+            <ULink v-else v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<ContextMenuItem, 'type'>)" custom>
+              <ContextMenu.Item
+                as-child
+                :disabled="item.disabled"
+                :text-value="get(item, props.labelKey as string)"
+                @select="item.onSelect"
+              >
                 <ULinkBase v-bind="slotProps" data-slot="item" :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], active, color: item?.color })">
                   <ReuseItemTemplate :item="item" :active="active" :index="index" />
                 </ULinkBase>
-              </ULink>
-            </ContextMenu.Item>
+              </ContextMenu.Item>
+            </ULink>
           </template>
         </ContextMenu.Group>
       </div>
 
       <slot />
 
-      <slot name="content-bottom" />
+      <slot name="content-bottom" :sub="sub ?? false" />
     </component>
   </ContextMenu.Portal>
 </template>

@@ -96,33 +96,43 @@ describe('Table', () => {
         onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
       })
     },
-    cell: ({ row }) => h('div', { class: 'lowercase' }, row.getValue('email'))
+    meta: {
+      class: {
+        td: 'lowercase'
+      }
+    }
   }, {
     accessorKey: 'amount',
-    header: () => h('div', { class: 'text-right' }, 'Amount'),
+    header: 'Amount',
+    meta: {
+      class: {
+        th: 'text-right',
+        td: 'text-right font-medium'
+      }
+    },
     footer: ({ column }) => {
       const total = column.getFacetedRowModel().rows.reduce((acc: number, row: TableRow<typeof data[number]>) => acc + Number.parseFloat(row.getValue('amount')), 0)
-
       const formatted = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'EUR'
       }).format(total)
-
-      return h('div', { class: 'text-right font-medium' }, `Total: ${formatted}`)
+      return `Total: ${formatted}`
     },
     cell: ({ row }) => {
       const amount = Number.parseFloat(row.getValue('amount'))
-
-      const formatted = new Intl.NumberFormat('en-US', {
+      return new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'EUR'
       }).format(amount)
-
-      return h('div', { class: 'text-right font-medium' }, formatted)
     }
   }, {
     id: 'actions',
     enableHiding: false,
+    meta: {
+      class: {
+        td: 'text-right'
+      }
+    },
     cell: ({ row }) => {
       const items = [{
         type: 'label',
@@ -139,7 +149,7 @@ describe('Table', () => {
         label: 'View payment details'
       }]
 
-      return h('div', { class: 'text-right' }, h<any>(UDropdownMenu, {
+      return h<any>(UDropdownMenu, {
         content: {
           align: 'end'
         },
@@ -148,9 +158,8 @@ describe('Table', () => {
         'icon': 'i-lucide-ellipsis-vertical',
         'color': 'neutral',
         'variant': 'ghost',
-        'class': 'ml-auto',
         'aria-label': 'Actions'
-      })))
+      }))
     }
   }]
 

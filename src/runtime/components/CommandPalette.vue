@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, LinkProps, IconProps } from '../types'
+import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, LinkProps, IconProps, LinkPropsKeys } from '../types'
 import type { GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -59,12 +59,16 @@ export interface CommandPaletteGroup<T extends CommandPaletteItem = CommandPalet
   highlightedIcon?: IconProps['name']
 }
 
-export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'selectionBehavior'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'selectionBehavior' | 'by'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'md'
+   */
+  size?: CommandPalette['variants']['size']
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
@@ -105,7 +109,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @emits 'update:open'
    * @defaultValue false
    */
-  close?: boolean | Partial<ButtonProps>
+  close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -117,13 +121,18 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @defaultValue true
    */
-  back?: boolean | ButtonProps
+  back?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the back button.
    * @defaultValue appConfig.ui.icons.arrowLeft
    * @IconifyIcon
    */
   backIcon?: IconProps['name']
+  /**
+   * Configure the input or hide it with `false`.
+   * @defaultValue true
+   */
+  input?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   groups?: G[]
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).
@@ -150,11 +159,16 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
      */
     overscan?: number
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 32
      */
-    estimateSize?: number
+    estimateSize?: number | ((index: number) => number)
   }
+  /**
+   * When `items` is an array of objects, select the field to use as the value instead of the object itself.
+   * @defaultValue undefined
+   */
+  valueKey?: GetItemKeys<T>
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
@@ -197,7 +211,7 @@ export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPalett
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
 import { computed, ref, useTemplateRef, toRef } from 'vue'
-import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
+import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate, refThrottled } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
@@ -220,9 +234,9 @@ import UKbd from './Kbd.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
-  modelValue: '',
   labelKey: 'label',
   descriptionKey: 'description',
+  input: true,
   autofocus: true,
   back: true,
   preserveGroupOrder: false,
@@ -238,13 +252,12 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
 const uiProp = useComponentUI('commandPalette', props)
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
-const inputProps = useForwardProps(reactivePick(props, 'loading'))
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'by'), emits)
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
   return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-    estimateSize: getEstimateSize(filteredItems.value, 'md', props.descriptionKey as string)
+    estimateSize: getEstimateSize(filteredItems.value, 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
 
@@ -266,6 +279,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: C
 })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })({
+  size: props.size,
   virtualize: !!props.virtualize
 }))
 
@@ -439,13 +453,13 @@ function onSelect(e: Event, item: T) {
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <DefineItemTemplate v-slot="{ item, index, group }">
-    <ListboxItem
-      :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
-      :disabled="item.disabled"
-      as-child
-      @select="onSelect($event, item as T)"
-    >
-      <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
+    <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
+      <ListboxItem
+        :value="props.valueKey ? get(item, props.valueKey as string) : omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
+        :disabled="item.disabled"
+        as-child
+        @select="onSelect($event, item as T)"
+      >
         <ULinkBase v-bind="slotProps" data-slot="item" :class="ui.item({ class: [uiProp?.item, item.ui?.item, item.class], active: active || item.active })">
           <slot :name="((item.slot || group?.slot || 'item') as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
             <slot :name="((item.slot ? `${item.slot}-leading` : group?.slot ? `${group.slot}-leading` : `item-leading`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
@@ -476,7 +490,7 @@ function onSelect(e: Event, item: T) {
                 </slot>
               </span>
 
-              <span v-if="get(item, props.descriptionKey as string)" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiProp?.itemDescription, item.ui?.itemDescription] })">
+              <span v-if="get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>]" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiProp?.itemDescription, item.ui?.itemDescription] })">
                 <slot :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
                   {{ get(item, props.descriptionKey as string) }}
                 </slot>
@@ -505,17 +519,19 @@ function onSelect(e: Event, item: T) {
             </span>
           </slot>
         </ULinkBase>
-      </ULink>
-    </ListboxItem>
+      </ListboxItem>
+    </ULink>
   </DefineItemTemplate>
 
   <ListboxRoot v-bind="{ ...rootProps, ...$attrs }" ref="rootRef" :selection-behavior="selectionBehavior" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <ListboxFilter v-model="searchTerm" as-child>
+    <ListboxFilter v-if="input" v-model="searchTerm" as-child>
       <UInput
-        :placeholder="placeholder"
         variant="none"
+        :size="size"
+        v-bind="typeof props.input === 'object' ? props.input : {}"
+        :placeholder="placeholder"
         :autofocus="autofocus"
-        v-bind="inputProps"
+        :loading="loading"
         :loading-icon="loadingIcon"
         :trailing-icon="trailingIcon"
         :icon="icon || appConfig.ui.icons.search"
@@ -526,11 +542,12 @@ function onSelect(e: Event, item: T) {
         <template v-if="history?.length && (back || !!slots.back)" #leading>
           <slot name="back" :ui="ui">
             <UButton
+              :size="size"
               :icon="backIcon || appConfig.ui.icons.arrowLeft"
               color="neutral"
               variant="link"
               :aria-label="t('commandPalette.back')"
-              v-bind="(typeof back === 'object' ? back as Partial<ButtonProps> : {})"
+              v-bind="(typeof back === 'object' ? back : {})"
               data-slot="back"
               :class="ui.back({ class: uiProp?.back })"
               @click="navigateBack"
@@ -542,11 +559,12 @@ function onSelect(e: Event, item: T) {
           <slot name="close" :ui="ui">
             <UButton
               v-if="close"
+              :size="size"
               :icon="closeIcon || appConfig.ui.icons.close"
               color="neutral"
               variant="ghost"
               :aria-label="t('commandPalette.close')"
-              v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
+              v-bind="(typeof close === 'object' ? close : {})"
               data-slot="close"
               :class="ui.close({ class: uiProp?.close })"
               @click="emits('update:open', false)"

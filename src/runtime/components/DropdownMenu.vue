@@ -108,8 +108,8 @@ export type DropdownMenuSlots<
   'item-label': (props: { item: T, active?: boolean, index: number }) => any
   'item-description': (props: { item: T, active?: boolean, index: number }) => any
   'item-trailing': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
+  'content-top': (props: { sub: boolean }) => any
+  'content-bottom': (props: { sub: boolean }) => any
 }
 & DynamicSlots<MergeTypes<T>, 'label' | 'description', { active?: boolean, index: number }>
 & DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean, index: number, ui: DropdownMenu['ui'] }>

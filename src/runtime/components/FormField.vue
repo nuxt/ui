@@ -33,6 +33,11 @@ export interface FormFieldProps {
    * @defaultValue `300`
    */
   validateOnInputDelay?: number
+  /**
+   * The orientation of the form field.
+   * @defaultValue 'vertical'
+   */
+  orientation?: FormField['variants']['orientation']
   class?: any
   ui?: FormField['slots']
 }
@@ -55,7 +60,9 @@ import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, for
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
-const props = defineProps<FormFieldProps>()
+const props = withDefaults(defineProps<FormFieldProps>(), {
+  error: undefined
+})
 const slots = defineSlots<FormFieldSlots>()
 
 const appConfig = useAppConfig() as FormField['AppConfig']
@@ -63,7 +70,8 @@ const uiProp = useComponentUI('formField', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.formField || {}) })({
   size: props.size,
-  required: props.required
+  required: props.required,
+  orientation: props.orientation
 }))
 
 const formErrors = inject<Ref<FormError[]> | null>(formErrorsInjectionKey, null)
@@ -99,7 +107,7 @@ provide(formFieldInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
       <div v-if="label || !!slots.label" data-slot="labelWrapper" :class="ui.labelWrapper({ class: uiProp?.labelWrapper })">
         <Label :for="id" data-slot="label" :class="ui.label({ class: uiProp?.label })">
@@ -123,8 +131,7 @@ provide(formFieldInjectionKey, computed(() => ({
 
     <div :class="[(label || !!slots.label || description || !!slots.description) && ui.container({ class: uiProp?.container })]">
       <slot :error="error" />
-
-      <div v-if="(typeof error === 'string' && error) || !!slots.error" :id="`${ariaId}-error`" data-slot="error" :class="ui.error({ class: uiProp?.error })">
+      <div v-if="props.error !== false && ((typeof error === 'string' && error) || !!slots.error)" :id="`${ariaId}-error`" data-slot="error" :class="ui.error({ class: uiProp?.error })">
         <slot name="error" :error="error">
           {{ error }}
         </slot>

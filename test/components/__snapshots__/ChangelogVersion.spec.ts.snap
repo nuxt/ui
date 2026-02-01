@@ -439,7 +439,7 @@ exports[`ChangelogVersion > renders with to & image correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <div data-slot="imageWrapper" class="relative overflow-hidden rounded-lg aspect-[16/9] mt-5 group/changelog-version-image"><img src="https://picsum.photos/640/360" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/changelog-version-image:scale-105"><a href="/changelog" tabindex="-1" aria-label="Version link" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a></div>
+      <div data-slot="imageWrapper" class="relative overflow-hidden rounded-lg aspect-[16/9] mt-5 group/changelog-version-image"><img src="https://picsum.photos/640/360" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/changelog-version-image:scale-105 group-has-focus-visible/changelog-version-image:scale-105"><a href="/changelog" aria-label="Version link" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a></div>
     </div>
     <!--v-if-->
   </div>

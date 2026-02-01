@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
-import type { ButtonProps, IconProps } from '../types'
+import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { InputHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
@@ -86,7 +86,7 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
    * When `layout` is `grid`, the default is `{ color: 'neutral', variant: 'solid', size: 'xs' }`{lang="ts-type"}
    * When `layout` is `list`, the default is `{ color: 'neutral', variant: 'link' }`{lang="ts-type"}
    */
-  fileDelete?: boolean | Partial<ButtonProps>
+  fileDelete?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed to delete a file.
    * @defaultValue appConfig.ui.icons.close
@@ -229,7 +229,7 @@ function onUpdate(files: File[], reset = false) {
       modelValue.value = [...existingFiles, ...(files || [])] as (M extends true ? File[] : File) | null
     }
   } else {
-    modelValue.value = files?.[0] as (M extends true ? File[] : File) | null
+    modelValue.value = (files?.[0] ?? null) as (M extends true ? File[] : File) | null
   }
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -354,7 +354,7 @@ defineExpose({
       >
         <ReuseFilesTemplate v-if="position === 'inside'" />
 
-        <div v-if="position === 'inside' ? (multiple ? !(modelValue as File[])?.length : !modelValue) : true" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+        <div v-if="position === 'inside' ? (!props.preview || (multiple ? !(modelValue as File[])?.length : !modelValue)) : true" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
           <slot name="leading" :ui="ui">
             <UIcon v-if="variant === 'button'" :name="icon || appConfig.ui.icons.upload" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
             <UAvatar v-else :icon="icon || appConfig.ui.icons.upload" :size="props.size" data-slot="avatar" :class="ui.avatar({ class: uiProp?.avatar })" />

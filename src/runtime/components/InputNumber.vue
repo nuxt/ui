@@ -2,7 +2,7 @@
 import type { NumberFieldRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-number'
-import type { ButtonProps, IconProps } from '../types'
+import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { InputHTMLAttributes } from '../types/html'
 import type { ModelModifiers } from '../types/input'
 import type { ComponentConfig } from '../types/tv'
@@ -11,7 +11,7 @@ type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>
 
 type InputNumberValue = number | null
 
-export interface InputNumberProps<T extends InputNumberValue = InputNumberValue> extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'min' | 'max' | 'readonly' | 'required' | 'step' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size'> {
+export interface InputNumberProps<T extends InputNumberValue = InputNumberValue> extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly' | 'focusOnChange'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'min' | 'max' | 'readonly' | 'required' | 'step' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -25,15 +25,15 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue>
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /**
-   * The orientation of the input menu.
+   * The orientation of the input number.
    * @defaultValue 'horizontal'
    */
-  orientation?: 'vertical' | 'horizontal'
+  orientation?: InputNumber['variants']['orientation']
   /**
    * Configure the increment button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  increment?: boolean | ButtonProps
+  increment?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed to increment the value.
    * @defaultValue appConfig.ui.icons.plus
@@ -46,7 +46,7 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue>
    * Configure the decrement button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  decrement?: boolean | ButtonProps
+  decrement?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed to decrement the value.
    * @defaultValue appConfig.ui.icons.minus
@@ -101,7 +101,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
 const uiProp = useComponentUI('inputNumber', props)
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'readonly'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'readonly', 'focusOnChange'), emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps<T>>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps<T>>(props)
@@ -187,7 +187,7 @@ defineExpose({
           <UButton
             :icon="incrementIcon"
             :color="color"
-            :size="size"
+            :size="inputSize"
             variant="link"
             :aria-label="t('inputNumber.increment')"
             v-bind="typeof increment === 'object' ? increment : undefined"
@@ -202,7 +202,7 @@ defineExpose({
           <UButton
             :icon="decrementIcon"
             :color="color"
-            :size="size"
+            :size="inputSize"
             variant="link"
             :aria-label="t('inputNumber.decrement')"
             v-bind="typeof decrement === 'object' ? decrement : undefined"

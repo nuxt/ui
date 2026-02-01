@@ -9,7 +9,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputDate.vue
-navigation.badge: New
 ---
 
 ## Usage
@@ -42,6 +41,18 @@ external:
 props:
   defaultValue: [2022, 2, 6]
 ---
+::
+
+::framework-only
+#nuxt
+:::note{to="/docs/getting-started/integrations/i18n/nuxt#locale"}
+This component uses the `@internationalized/date` package for locale-aware formatting. The date format is determined by the `locale` prop of the App component.
+:::
+
+#vue
+:::note{to="/docs/getting-started/integrations/i18n/vue#locale"}
+This component uses the `@internationalized/date` package for locale-aware formatting. The date format is determined by the `locale` prop of the App component.
+:::
 ::
 
 ### Range

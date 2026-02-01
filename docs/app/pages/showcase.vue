@@ -4,6 +4,8 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
+const appConfig = useAppConfig()
+
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
   title: page.value.title,
@@ -16,14 +18,12 @@ defineOgImageComponent('Docs')
 </script>
 
 <template>
-  <div v-if="page">
+  <main v-if="page">
     <UPageHero
       :title="page.hero.title"
       :description="page.hero.description"
       :links="page.hero.links"
-      :ui="{
-        container: 'relative lg:py-32'
-      }"
+      :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }"
     >
       <template #top>
         <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
@@ -63,11 +63,11 @@ defineOgImageComponent('Docs')
               <span class="text-sm text-white font-medium">
                 {{ item.name }}
               </span>
-              <UIcon name="i-lucide-arrow-up-right" class="size-4 shrink-0 text-white" />
+              <UIcon :name="appConfig.ui.icons.external" class="size-4 shrink-0 text-white" />
             </div>
           </li>
         </ul>
       </div>
     </UPageSection>
-  </div>
+  </main>
 </template>

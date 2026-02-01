@@ -24,6 +24,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - StepperItem[]
 props:
   items:
     - title: 'Address'
@@ -211,6 +213,10 @@ You can add additional controls for the stepper using buttons.
 You can control the active item by using the `default-value` prop or the `v-model` directive with the `value` of the item. If no `value` is provided, it defaults to the index.
 
 :component-example{name="stepper-model-value-example"}
+
+::tip
+Use the `value-key` prop to change the key used to match items when a `v-model` or `default-value` is provided.
+::
 
 ### With content slot
 

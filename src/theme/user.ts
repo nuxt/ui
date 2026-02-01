@@ -1,6 +1,6 @@
-import type { NuxtOptions } from '@nuxt/schema'
+import type { ModuleOptions } from '../module'
 
-export default (options: Required<NuxtOptions['ui']>) => ({
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative group/user',
     wrapper: '',
@@ -19,9 +19,9 @@ export default (options: Required<NuxtOptions['ui']>) => ({
     },
     to: {
       true: {
-        name: ['text-default peer-hover:text-highlighted', options.theme.transitions && 'transition-colors'],
-        description: ['peer-hover:text-toned', options.theme.transitions && 'transition-colors'],
-        avatar: 'transform transition-transform duration-200 group-hover/user:scale-115'
+        name: ['text-default peer-hover:text-highlighted peer-focus-visible:text-highlighted', options.theme.transitions && 'transition-colors'],
+        description: ['peer-hover:text-toned peer-focus-visible:text-toned', options.theme.transitions && 'transition-colors'],
+        avatar: 'transform transition-transform duration-200 group-hover/user:scale-115 group-has-focus-visible/user:scale-115'
       },
       false: {
         name: 'text-highlighted',

@@ -52,11 +52,14 @@ function onSubmit() {
           :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${part.state}` : ''}`"
         >
           <MDC
-            v-if="part.type === 'text'"
+            v-if="part.type === 'text' && message.role === 'assistant'"
             :value="part.text"
             :cache-key="`${message.id}-${index}`"
             class="*:first:mt-0 *:last:mb-0"
           />
+          <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">
+            {{ part.text }}
+          </p>
           <p
             v-else-if="part.type === 'reasoning'"
             class="text-sm text-muted my-5"
