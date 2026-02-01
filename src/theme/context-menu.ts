@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
     group: 'p-1 isolate',
     label: 'w-full flex items-center font-semibold text-highlighted',
     separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
+    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
     itemLeadingIcon: 'shrink-0',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingAvatarSize: '',
@@ -15,7 +15,9 @@ export default (options: Required<ModuleOptions>) => ({
     itemTrailingIcon: 'shrink-0',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0',
     itemTrailingKbdsSize: '',
+    itemWrapper: 'flex-1 flex flex-col text-start min-w-0',
     itemLabel: 'truncate',
+    itemDescription: 'truncate text-muted',
     itemLabelExternalIcon: 'inline-block size-3 align-top text-dimmed'
   },
   variants: {

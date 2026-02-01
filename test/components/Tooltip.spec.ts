@@ -1,9 +1,12 @@
 import { defineComponent } from 'vue'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { TooltipProvider } from 'reka-ui'
 import Tooltip from '../../src/runtime/components/Tooltip.vue'
 import type { TooltipProps, TooltipSlots } from '../../src/runtime/components/Tooltip.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 const TooltipWrapper = defineComponent({
   components: {
@@ -36,5 +39,29 @@ describe('Tooltip', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TooltipProps, slots?: Partial<TooltipSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, TooltipWrapper)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(TooltipWrapper, {
+      props: {
+        ...props,
+        arrow: true,
+        kbds: ['meta', 'K']
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { TooltipWrapper, UTheme },
+      template: `
+        <UTheme :theme="{ tooltip: { slots: { content: 'test-theme-class' } } }">
+          <TooltipWrapper text="Test" :open="true" :portal="false" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="content"]').classes()).toContain('test-theme-class')
   })
 })

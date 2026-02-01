@@ -256,21 +256,17 @@ name: 'toast-example'
 :toaster-duration-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L5"}
+::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L4"}
 In this example, we use the `AppConfig` to configure the `duration` prop of the `Toaster` component globally.
 ::
 
-### Stacked toasts
+### Change global max :badge{label="4.1+"}
 
-Set the `toaster.expand` prop to `false` on the [App](/docs/components/app#props) component to display stacked toasts.
-
-::tip
-You can hover over the toasts to expand them. This will also pause the timer of the toasts.
-::
+Change the `toaster.max` prop on the [App](/docs/components/app#props) component to change the max number of toasts displayed at once.
 
 ```vue [app.vue]
 <script setup lang="ts">
-const toaster = { expand: true }
+const toaster = { max: 3 }
 </script>
 
 <template>
@@ -287,10 +283,44 @@ name: 'toast-example'
 ---
 
 #options
+:toaster-max-example
+::
+
+::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L5"}
+In this example, we use the `AppConfig` to configure the `max` prop of the `Toaster` component globally.
+::
+
+### Stacked toasts
+
+Set the `toaster.expand` prop to `false` on the [App](/docs/components/app#props) component to display stacked toasts (inspired by [Sonner](https://sonner.emilkowal.ski/)).
+
+```vue [app.vue]
+<script setup lang="ts">
+const toaster = { expand: true }
+</script>
+
+<template>
+  <UApp :toaster="toaster">
+    <NuxtPage />
+  </UApp>
+</template>
+```
+
+::tip
+You can hover over the toasts to expand them. This will also pause the timer of the toasts.
+::
+
+::component-example
+---
+prettier: true
+name: 'toast-example'
+---
+
+#options
 :toaster-expand-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L4"}
+::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L6"}
 In this example, we use the `AppConfig` to configure the `expand` prop of the `Toaster` component globally.
 ::
 
@@ -307,6 +337,14 @@ In this example, we use the `AppConfig` to configure the `expand` prop of the `T
 ### Emits
 
 :component-emits
+
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `height`{lang="ts-type"} | `Ref<number>`{lang="ts-type"} |
 
 ## Theme
 

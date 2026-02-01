@@ -1,8 +1,8 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Ref, WatchOptions } from 'vue'
+import type { Ref, WatchOptions, ComponentPublicInstance } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { Cell, Header, RowData, TableMeta } from '@tanstack/table-core'
+import type { Cell, Column, Header, RowData, TableMeta } from '@tanstack/table-core'
 import type {
   CellContext,
   ColumnDef,
@@ -35,7 +35,9 @@ import type {
   VisibilityOptions,
   VisibilityState
 } from '@tanstack/vue-table'
+import type { VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '#build/ui/table'
+import type { TableHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 declare module '@tanstack/table-core' {
@@ -81,7 +83,7 @@ export interface TableOptions<T extends TableData = TableData> extends Omit<Core
   renderFallbackValue?: CoreOptions<T>['renderFallbackValue']
 }
 
-export interface TableProps<T extends TableData = TableData> extends TableOptions<T> {
+export interface TableProps<T extends TableData = TableData> extends TableOptions<T>, /** @vue-ignore */ TableHTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -92,12 +94,30 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   caption?: string
   meta?: TableMeta<T>
   /**
+   * Enable virtualization for large datasets.
+   * Note: when enabled, the divider between rows and sticky properties are not supported.
+   * @defaultValue false
+   */
+  virtualize?: boolean | (Partial<Omit<VirtualizerOptions<Element, Element>, 'getScrollElement' | 'count' | 'estimateSize' | 'overscan'>> & {
+    /**
+     * Number of items rendered outside the visible area
+     * @defaultValue 12
+     */
+    overscan?: number
+    /**
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
+     * @defaultValue 65
+     */
+    estimateSize?: number | ((index: number) => number)
+  })
+  /**
    * The text to display when the table is empty.
    * @defaultValue t('table.noData')
    */
   empty?: string
   /**
    * Whether the table should have a sticky header or footer. True for both, 'header' for header only, 'footer' for footer only.
+   * Note: this prop is not supported when `virtualize` is true.
    * @defaultValue false
    */
   sticky?: boolean | 'header' | 'footer'
@@ -178,7 +198,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
    */
   facetedOptions?: FacetedOptions<T>
-  onSelect?: (row: TableRow<T>, e?: Event) => void
+  onSelect?: (e: Event, row: TableRow<T>) => void
   onHover?: (e: Event, row: TableRow<T> | null) => void
   onContextmenu?: ((e: Event, row: TableRow<T>) => void) | Array<((e: Event, row: TableRow<T>) => void)>
   class?: any
@@ -201,25 +221,30 @@ export type TableSlots<T extends TableData = TableData> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, ref, watch } from 'vue'
+import { ref, computed, useTemplateRef, watch, toRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
+import { defu } from 'defu'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
-import { reactiveOmit } from '@vueuse/core'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useVirtualizer } from '@tanstack/vue-virtual'
+import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
+import { useAppConfig, useComponentUI } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TableProps<T>>(), {
   watchOptions: () => ({
     deep: true
-  })
+  }),
+  virtualize: false
 })
 const slots = defineSlots<TableSlots<T>>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Table['AppConfig']
-const uiTheme = useComponentUiTheme('table', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('table', props)
 
 const data = ref(props.data ?? []) as Ref<T[]>
 const meta = computed(() => props.meta ?? {})
@@ -248,11 +273,26 @@ function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
 }
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })({
-  sticky: props.sticky,
+  sticky: props.virtualize ? false : props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,
-  loadingAnimation: props.loadingAnimation
+  loadingAnimation: props.loadingAnimation,
+  virtualize: !!props.virtualize
 }))
+
+const [DefineTableTemplate, ReuseTableTemplate] = createReusableTemplate()
+const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{ row: TableRow<T>, style?: Record<string, string> }>({
+  props: {
+    row: {
+      type: Object,
+      required: true
+    },
+    style: {
+      type: Object,
+      required: false
+    }
+  }
+})
 
 const hasFooter = computed(() => {
   function hasFooterRecursive(columns: TableColumn<T>[]): boolean {
@@ -284,10 +324,11 @@ const groupingState = defineModel<GroupingState>('grouping', { default: [] })
 const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 const paginationState = defineModel<PaginationState>('pagination', { default: {} })
 
-const tableRef = ref<HTMLTableElement | null>(null)
+const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
+const tableRef = useTemplateRef<HTMLTableElement>('tableRef')
 
 const tableApi = useVueTable({
-  ...reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
+  ...reactiveOmit(props, 'as', 'data', 'columns', 'virtualize', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
   data,
   get columns() {
     return columns.value
@@ -365,6 +406,39 @@ const tableApi = useVueTable({
   }
 })
 
+const rows = computed(() => tableApi.getRowModel().rows)
+
+const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+  estimateSize: 65,
+  overscan: 12
+}))
+
+const virtualizer = !!props.virtualize && useVirtualizer({
+  ...virtualizerProps.value,
+  get count() {
+    return rows.value.length
+  },
+  getScrollElement: () => rootRef.value?.$el,
+  estimateSize: (index: number) => {
+    const estimate = virtualizerProps.value.estimateSize
+    return typeof estimate === 'function' ? estimate(index) : estimate
+  }
+})
+
+const renderedSize = computed(() => {
+  if (!virtualizer) {
+    return 0
+  }
+
+  const virtualItems = virtualizer.value.getVirtualItems()
+  if (!virtualItems?.length) {
+    return 0
+  }
+
+  // Sum up the actual sizes of virtual items
+  return virtualItems.reduce((sum: number, item: any) => sum + item.size, 0)
+})
+
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
 }
@@ -382,8 +456,7 @@ function onRowSelect(e: Event, row: TableRow<T>) {
   e.preventDefault()
   e.stopPropagation()
 
-  // FIXME: `e` should be the first argument for consistency
-  props.onSelect(row, e)
+  props.onSelect(e, row)
 }
 
 function onRowHover(e: Event, row: TableRow<T> | null) {
@@ -414,29 +487,95 @@ function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T |
   return prop
 }
 
-watch(
-  () => props.data, () => {
-    data.value = props.data ? [...props.data] : []
-  }, props.watchOptions
-)
+function getColumnStyles(column: Column<T>): Record<string, string> {
+  const styles: Record<string, string> = {}
+
+  const pinned = column.getIsPinned()
+  if (pinned === 'left') {
+    styles.left = `${column.getStart('left')}px`
+  } else if (pinned === 'right') {
+    styles.right = `${column.getAfter('right')}px`
+  }
+
+  return styles
+}
+
+watch(() => props.data, () => {
+  data.value = props.data ? [...props.data] : []
+}, props.watchOptions)
 
 defineExpose({
+  get $el() {
+    return rootRef.value?.$el as HTMLElement
+  },
   tableRef,
   tableApi
 })
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
-    <table ref="tableRef" :class="ui.base({ class: [uiTheme?.slots?.base] })">
-      <caption v-if="caption || !!slots.caption" :class="ui.caption({ class: [uiTheme?.slots?.caption] })">
+  <DefineRowTemplate v-slot="{ row, style }">
+    <tr
+      :data-selected="row.getIsSelected()"
+      :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
+      :data-expanded="row.getIsExpanded()"
+      :role="props.onSelect ? 'button' : undefined"
+      :tabindex="props.onSelect ? 0 : undefined"
+      data-slot="tr"
+      :class="ui.tr({
+        class: [
+          uiProp?.tr,
+          resolveValue(tableApi.options.meta?.class?.tr, row)
+        ]
+      })"
+      :style="[resolveValue(tableApi.options.meta?.style?.tr, row), style]"
+      @click="onRowSelect($event, row)"
+      @pointerenter="onRowHover($event, row)"
+      @pointerleave="onRowHover($event, null)"
+      @contextmenu="onRowContextmenu($event, row)"
+    >
+      <td
+        v-for="cell in row.getVisibleCells()"
+        :key="cell.id"
+        :data-pinned="cell.column.getIsPinned()"
+        :colspan="resolveValue(cell.column.columnDef.meta?.colspan?.td, cell)"
+        :rowspan="resolveValue(cell.column.columnDef.meta?.rowspan?.td, cell)"
+        data-slot="td"
+        :class="ui.td({
+          class: [
+            uiProp?.td,
+            resolveValue(cell.column.columnDef.meta?.class?.td, cell)
+          ],
+          pinned: !!cell.column.getIsPinned()
+        })"
+        :style="[
+          getColumnStyles(cell.column),
+          resolveValue(cell.column.columnDef.meta?.style?.td, cell)
+        ]"
+      >
+        <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
+          <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
+        </slot>
+      </td>
+    </tr>
+
+    <tr v-if="row.getIsExpanded()" data-slot="tr" :class="ui.tr({ class: [uiProp?.tr] })">
+      <td :colspan="row.getAllCells().length" data-slot="td" :class="ui.td({ class: [uiProp?.td] })">
+        <slot name="expanded" :row="row" />
+      </td>
+    </tr>
+  </DefineRowTemplate>
+
+  <DefineTableTemplate>
+    <table ref="tableRef" data-slot="base" :class="ui.base({ class: [uiProp?.base] })">
+      <caption v-if="caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [uiProp?.caption] })">
         <slot name="caption">
           {{ caption }}
         </slot>
       </caption>
 
-      <thead :class="ui.thead({ class: [uiTheme?.slots?.thead] })">
-        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" :class="ui.tr({ class: [uiTheme?.slots?.tr] })">
+      <thead data-slot="thead" :class="ui.thead({ class: [uiProp?.thead] })">
+        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" data-slot="tr" :class="ui.tr({ class: [uiProp?.tr] })">
           <th
             v-for="header in headerGroup.headers"
             :key="header.id"
@@ -444,13 +583,18 @@ defineExpose({
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            data-slot="th"
             :class="ui.th({
               class: [
-                uiTheme?.slots?.th,
+                uiProp?.th,
                 resolveValue(header.column.columnDef.meta?.class?.th, header)
               ],
               pinned: !!header.column.getIsPinned()
             })"
+            :style="[
+              getColumnStyles(header.column),
+              resolveValue(header.column.columnDef.meta?.style?.th, header)
+            ]"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
@@ -458,68 +602,38 @@ defineExpose({
           </th>
         </tr>
 
-        <tr :class="ui.separator({ class: [uiTheme?.slots?.separator] })" />
+        <tr data-slot="separator" :class="ui.separator({ class: [uiProp?.separator] })" />
       </thead>
 
-      <tbody :class="ui.tbody({ class: [uiTheme?.slots?.tbody] })">
+      <tbody data-slot="tbody" :class="ui.tbody({ class: [uiProp?.tbody] })">
         <slot name="body-top" />
 
-        <template v-if="tableApi.getRowModel().rows?.length">
-          <template v-for="row in tableApi.getRowModel().rows" :key="row.id">
-            <tr
-              :data-selected="row.getIsSelected()"
-              :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
-              :data-expanded="row.getIsExpanded()"
-              :role="props.onSelect ? 'button' : undefined"
-              :tabindex="props.onSelect ? 0 : undefined"
-              :class="ui.tr({
-                class: [
-                  uiTheme?.slots?.tr,
-                  resolveValue(tableApi.options.meta?.class?.tr, row)
-                ]
-              })"
-              :style="resolveValue(tableApi.options.meta?.style?.tr, row)"
-              @click="onRowSelect($event, row)"
-              @pointerenter="onRowHover($event, row)"
-              @pointerleave="onRowHover($event, null)"
-              @contextmenu="onRowContextmenu($event, row)"
-            >
-              <td
-                v-for="cell in row.getVisibleCells()"
-                :key="cell.id"
-                :data-pinned="cell.column.getIsPinned()"
-                :colspan="resolveValue(cell.column.columnDef.meta?.colspan?.td, cell)"
-                :rowspan="resolveValue(cell.column.columnDef.meta?.rowspan?.td, cell)"
-                :class="ui.td({
-                  class: [
-                    uiTheme?.slots?.td,
-                    resolveValue(cell.column.columnDef.meta?.class?.td, cell)
-                  ],
-                  pinned: !!cell.column.getIsPinned()
-                })"
-                :style="resolveValue(cell.column.columnDef.meta?.style?.td, cell)"
-              >
-                <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
-                  <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
-                </slot>
-              </td>
-            </tr>
-            <tr v-if="row.getIsExpanded()" :class="ui.tr({ class: [uiTheme?.slots?.tr] })">
-              <td :colspan="row.getAllCells().length" :class="ui.td({ class: [uiTheme?.slots?.td] })">
-                <slot name="expanded" :row="row" />
-              </td>
-            </tr>
+        <template v-if="rows.length">
+          <template v-if="virtualizer">
+            <template v-for="(virtualRow, index) in virtualizer.getVirtualItems()" :key="rows[virtualRow.index]?.id">
+              <ReuseRowTemplate
+                :row="rows[virtualRow.index]!"
+                :style="{
+                  height: `${virtualRow.size}px`,
+                  transform: `translateY(${virtualRow.start - index * virtualRow.size}px)`
+                }"
+              />
+            </template>
+          </template>
+
+          <template v-else>
+            <ReuseRowTemplate v-for="row in rows" :key="row.id" :row="row" />
           </template>
         </template>
 
         <tr v-else-if="loading && !!slots['loading']">
-          <td :colspan="tableApi.getAllLeafColumns().length" :class="ui.loading({ class: uiTheme?.slots?.loading })">
+          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="loading" :class="ui.loading({ class: uiProp?.loading })">
             <slot name="loading" />
           </td>
         </tr>
 
         <tr v-else>
-          <td :colspan="tableApi.getAllLeafColumns().length" :class="ui.empty({ class: uiTheme?.slots?.empty })">
+          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="empty" :class="ui.empty({ class: uiProp?.empty })">
             <slot name="empty">
               {{ empty || t('table.noData') }}
             </slot>
@@ -529,24 +643,35 @@ defineExpose({
         <slot name="body-bottom" />
       </tbody>
 
-      <tfoot v-if="hasFooter" :class="ui.tfoot({ class: [uiTheme?.slots?.tfoot] })">
-        <tr :class="ui.separator({ class: [uiTheme?.slots?.separator] })" />
+      <tfoot
+        v-if="hasFooter"
+        data-slot="tfoot"
+        :class="ui.tfoot({ class: [uiProp?.tfoot] })"
+        :style="virtualizer ? {
+          transform: `translateY(${virtualizer.getTotalSize() - renderedSize}px)`
+        } : undefined"
+      >
+        <tr data-slot="separator" :class="ui.separator({ class: [uiProp?.separator] })" />
 
-        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" :class="ui.tr({ class: [uiTheme?.slots?.tr] })">
+        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" data-slot="tr" :class="ui.tr({ class: [uiProp?.tr] })">
           <th
             v-for="header in footerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            data-slot="th"
             :class="ui.th({
               class: [
-                uiTheme?.slots?.th,
+                uiProp?.th,
                 resolveValue(header.column.columnDef.meta?.class?.th, header)
               ],
               pinned: !!header.column.getIsPinned()
             })"
-            :style="resolveValue(header.column.columnDef.meta?.style?.th, header)"
+            :style="[
+              getColumnStyles(header.column),
+              resolveValue(header.column.columnDef.meta?.style?.th, header)
+            ]"
           >
             <slot :name="`${header.id}-footer`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.footer" :props="header.getContext()" />
@@ -555,5 +680,17 @@ defineExpose({
         </tr>
       </tfoot>
     </table>
+  </DefineTableTemplate>
+
+  <Primitive ref="rootRef" :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div
+      v-if="virtualizer"
+      :style="{
+        height: `${virtualizer.getTotalSize()}px`
+      }"
+    >
+      <ReuseTableTemplate />
+    </div>
+    <ReuseTableTemplate v-else />
   </Primitive>
 </template>

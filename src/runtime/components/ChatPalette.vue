@@ -24,28 +24,28 @@ export interface ChatPaletteSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { tv } from '../utils/tv'
 
 const props = defineProps<ChatPaletteProps>()
 const slots = defineSlots<ChatPaletteSlots>()
 
 const appConfig = useAppConfig() as ChatPalette['AppConfig']
-const uiTheme = useComponentUiTheme('chatPalette', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('chatPalette', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPalette || {}) })())
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
-    <div :class="ui.content({ class: uiTheme?.slots?.content })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div data-slot="content" :class="ui.content({ class: uiProp?.content })">
       <Slot compact>
         <slot />
       </Slot>
     </div>
 
-    <Slot v-if="!!slots.prompt" :class="ui.prompt({ class: uiTheme?.slots?.prompt })">
+    <Slot v-if="!!slots.prompt" data-slot="prompt" :class="ui.prompt({ class: uiProp?.prompt })">
       <slot name="prompt" />
     </Slot>
   </Primitive>

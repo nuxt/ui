@@ -47,7 +47,7 @@ export interface ChipSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 
@@ -63,7 +63,7 @@ const show = defineModel<boolean>('show', { default: true })
 
 const { size } = useAvatarGroup(props)
 const appConfig = useAppConfig() as Chip['AppConfig']
-const uiTheme = useComponentUiTheme('chip', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('chip', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) })({
   color: props.color,
@@ -75,12 +75,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) 
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <Slot v-bind="$attrs">
       <slot />
     </Slot>
 
-    <span v-if="show" :class="ui.base({ class: uiTheme?.slots?.base })">
+    <span v-if="show" data-slot="base" :class="ui.base({ class: uiProp?.base })">
       <slot name="content">
         {{ text }}
       </slot>

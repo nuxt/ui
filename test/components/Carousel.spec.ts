@@ -1,26 +1,29 @@
 import { defineComponent } from 'vue'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Carousel from '../../src/runtime/components/Carousel.vue'
 import type { CarouselProps, CarouselSlots } from '../../src/runtime/components/Carousel.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 const CarouselWrapper = defineComponent({
   components: {
     UCarousel: Carousel as any
   },
   template: `<UCarousel v-slot="{ item }">
-  <img :src="item.src" width="300" height="300" class="rounded-lg">
+  <img :src="item.src" :alt="item.alt" width="300" height="300" class="rounded-lg">
 </UCarousel>`
 })
 
 describe('Carousel', () => {
   const items = [
-    { src: 'https://picsum.photos/600/600?random=1' },
-    { src: 'https://picsum.photos/600/600?random=2' },
-    { src: 'https://picsum.photos/600/600?random=3' },
-    { src: 'https://picsum.photos/600/600?random=4' },
-    { src: 'https://picsum.photos/600/600?random=5' },
-    { src: 'https://picsum.photos/600/600?random=6' }
+    { src: 'https://picsum.photos/600/600?random=1', alt: 'Image 1' },
+    { src: 'https://picsum.photos/600/600?random=2', alt: 'Image 2' },
+    { src: 'https://picsum.photos/600/600?random=3', alt: 'Image 3' },
+    { src: 'https://picsum.photos/600/600?random=4', alt: 'Image 4' },
+    { src: 'https://picsum.photos/600/600?random=5', alt: 'Image 5' },
+    { src: 'https://picsum.photos/600/600?random=6', alt: 'Image 6' }
   ]
 
   const props = { items }
@@ -41,5 +44,30 @@ describe('Carousel', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CarouselProps, slots?: Partial<CarouselSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, CarouselWrapper)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(CarouselWrapper, {
+      props: {
+        items,
+        arrows: true,
+        dots: true
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Carousel, UTheme },
+      template: `
+        <UTheme :theme="{ carousel: { slots: { root: 'test-theme-class' } } }">
+          <Carousel :items="[{ src: 'test.jpg', alt: 'Test' }]" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

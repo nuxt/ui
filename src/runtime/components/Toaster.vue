@@ -27,6 +27,11 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
    * @defaultValue true
    */
   portal?: boolean | string | HTMLElement
+  /**
+   * Maximum number of toasts to display at once.
+   * @defaultValue 5
+   */
+  max?: number
   class?: any
   ui?: Toaster['slots']
 }
@@ -41,11 +46,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, toRef } from 'vue'
+import { ref, computed, toRef, provide } from 'vue'
 import { ToastProvider, ToastViewport, ToastPortal, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig, useComponentUiTheme } from '#imports'
-import { useToast } from '../composables/useToast'
+import { useAppConfig, useComponentUI } from '#imports'
+import { useToast, toastMaxInjectionKey } from '../composables/useToast'
 import { usePortal } from '../composables/usePortal'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -55,15 +60,18 @@ const props = withDefaults(defineProps<ToasterProps>(), {
   expand: true,
   portal: true,
   duration: 5000,
-  progress: true
+  progress: true,
+  max: 5
 })
 defineSlots<ToasterSlots>()
 
 const { toasts, remove } = useToast()
 const appConfig = useAppConfig() as Toaster['AppConfig']
-const uiTheme = useComponentUiTheme('toaster', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('toaster', props)
 
-const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold'))
+provide(toastMaxInjectionKey, toRef(() => props.max))
+
+const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold', 'disableSwipe'))
 const portalProps = usePortal(toRef(() => props.portal))
 
 const swipeDirection = computed(() => {
@@ -129,7 +137,8 @@ function getOffset(index: number) {
         '--translate': expanded ? 'calc(var(--offset) * var(--translate-factor))' : 'calc(var(--before) * var(--gap))',
         '--transform': 'translateY(var(--translate)) scale(var(--scale))'
       }"
-      :class="ui.base({ class: [uiTheme?.slots?.base, toast.onClick ? 'cursor-pointer' : undefined] })"
+      data-slot="base"
+      :class="ui.base({ class: [uiProp?.base, toast.onClick ? 'cursor-pointer' : undefined] })"
       @update:open="onUpdateOpen($event, toast.id)"
       @click="toast.onClick && toast.onClick(toast)"
     />
@@ -137,7 +146,8 @@ function getOffset(index: number) {
     <ToastPortal v-bind="portalProps">
       <ToastViewport
         :data-expanded="expanded"
-        :class="ui.viewport({ class: [uiTheme?.slots?.viewport, props.class] })"
+        data-slot="viewport"
+        :class="ui.viewport({ class: [uiProp?.viewport, props.class] })"
         :style="{
           '--scale-factor': '0.05',
           '--translate-factor': position?.startsWith('top') ? '1px' : '-1px',

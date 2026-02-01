@@ -31,7 +31,7 @@ export interface AvatarGroupSlots {
 <script setup lang="ts">
 import { computed, provide } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { avatarGroupInjectionKey } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
@@ -40,7 +40,7 @@ const props = defineProps<AvatarGroupProps>()
 const slots = defineSlots<AvatarGroupSlots>()
 
 const appConfig = useAppConfig() as AvatarGroup['AppConfig']
-const uiTheme = useComponentUiTheme('avatarGroup', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('avatarGroup', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatarGroup || {}) })({
   size: props.size
@@ -94,8 +94,8 @@ provide(avatarGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
-    <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" :class="ui.base({ class: uiTheme?.slots?.base })" />
-    <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" :class="ui.base({ class: uiTheme?.slots?.base })" />
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" data-slot="base" :class="ui.base({ class: uiProp?.base })" />
+    <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" data-slot="base" :class="ui.base({ class: uiProp?.base })" />
   </Primitive>
 </template>

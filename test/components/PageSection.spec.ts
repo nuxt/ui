@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageSection from '../../src/runtime/components/PageSection.vue'
 import type { PageSectionProps, PageSectionSlots } from '../../src/runtime/components/PageSection.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('PageSection', () => {
   it.each([
@@ -39,5 +42,33 @@ describe('PageSection', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageSectionProps, slots?: Partial<PageSectionSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PageSection)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PageSection, {
+      props: {
+        headline: 'News',
+        icon: 'i-lucide-newspaper',
+        title: 'Title',
+        description: 'Description',
+        links: [{ label: 'Read More', to: '/read' }],
+        features: [{ title: 'Feature', description: 'Feature description', icon: 'i-lucide-check' }]
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { PageSection, UTheme },
+      template: `
+        <UTheme :theme="{ pageSection: { slots: { root: 'test-theme-class' } } }">
+          <PageSection title="Test" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('section').classes()).toContain('test-theme-class')
   })
 })

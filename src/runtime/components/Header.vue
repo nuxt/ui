@@ -45,11 +45,11 @@ export interface HeaderSlots {
   left(props?: {}): any
   default(props?: {}): any
   right(props?: {}): any
-  toggle(props: { open: boolean, toggle: () => void }): any
+  toggle(props: { open: boolean, toggle: () => void, ui: Header['ui'] }): any
   top(props?: {}): any
   bottom(props?: {}): any
   body(props?: {}): any
-  content(props?: {}): any
+  content(props: { close?: () => void }): any
 }
 </script>
 
@@ -58,7 +58,7 @@ import { computed, watch, toRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig, useRoute, useComponentUiTheme } from '#imports'
+import { useAppConfig, useRoute, useComponentUI } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
@@ -86,7 +86,7 @@ const open = defineModel<boolean>('open', { default: false })
 const route = useRoute()
 const { t } = useLocale()
 const appConfig = useAppConfig() as Header['AppConfig']
-const uiTheme = useComponentUiTheme('header', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('header', props)
 
 const [DefineLeftTemplate, ReuseLeftTemplate] = createReusableTemplate()
 const [DefineRightTemplate, ReuseRightTemplate] = createReusableTemplate()
@@ -123,7 +123,7 @@ function toggleOpen() {
 
 <template>
   <DefineToggleTemplate>
-    <slot name="toggle" :open="open" :toggle="toggleOpen">
+    <slot name="toggle" :open="open" :toggle="toggleOpen" :ui="ui">
       <UButton
         v-if="toggle"
         color="neutral"
@@ -131,18 +131,19 @@ function toggleOpen() {
         :aria-label="open ? t('header.close') : t('header.open')"
         :icon="open ? appConfig.ui.icons.close : appConfig.ui.icons.menu"
         v-bind="(typeof toggle === 'object' ? toggle as Partial<ButtonProps> : {})"
-        :class="ui.toggle({ class: uiTheme?.slots?.toggle, toggleSide })"
+        data-slot="toggle"
+        :class="ui.toggle({ class: uiProp?.toggle, toggleSide })"
         @click="toggleOpen"
       />
     </slot>
   </DefineToggleTemplate>
 
   <DefineLeftTemplate>
-    <div :class="ui.left({ class: uiTheme?.slots?.left })">
+    <div data-slot="left" :class="ui.left({ class: uiProp?.left })">
       <ReuseToggleTemplate v-if="toggleSide === 'left'" />
 
       <slot name="left">
-        <ULink :to="to" :aria-label="ariaLabel" :class="ui.title({ class: uiTheme?.slots?.title })">
+        <ULink :to="to" :aria-label="ariaLabel" data-slot="title" :class="ui.title({ class: uiProp?.title })">
           <slot name="title">
             {{ title }}
           </slot>
@@ -152,20 +153,20 @@ function toggleOpen() {
   </DefineLeftTemplate>
 
   <DefineRightTemplate>
-    <div :class="ui.right({ class: uiTheme?.slots?.right })">
+    <div data-slot="right" :class="ui.right({ class: uiProp?.right })">
       <slot name="right" />
 
       <ReuseToggleTemplate v-if="toggleSide === 'right'" />
     </div>
   </DefineRightTemplate>
 
-  <Primitive :as="as" v-bind="$attrs" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+  <Primitive :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <slot name="top" />
 
-    <UContainer :class="ui.container({ class: uiTheme?.slots?.container })">
+    <UContainer data-slot="container" :class="ui.container({ class: uiProp?.container })">
       <ReuseLeftTemplate />
 
-      <div :class="ui.center({ class: uiTheme?.slots?.center })">
+      <div data-slot="center" :class="ui.center({ class: uiProp?.center })">
         <slot />
       </div>
 
@@ -181,19 +182,19 @@ function toggleOpen() {
     :description="t('header.description')"
     v-bind="menuProps"
     :ui="{
-      overlay: ui.overlay({ class: uiTheme?.slots?.overlay }),
-      content: ui.content({ class: uiTheme?.slots?.content })
+      overlay: ui.overlay({ class: uiProp?.overlay }),
+      content: ui.content({ class: uiProp?.content })
     }"
   >
-    <template #content>
-      <slot name="content">
-        <div v-if="mode !== 'drawer'" :class="ui.header({ class: uiTheme?.slots?.header })">
+    <template #content="contentData">
+      <slot name="content" v-bind="contentData">
+        <div v-if="mode !== 'drawer'" data-slot="header" :class="ui.header({ class: uiProp?.header })">
           <ReuseLeftTemplate />
 
           <ReuseRightTemplate />
         </div>
 
-        <div :class="ui.body({ class: uiTheme?.slots?.body })">
+        <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
           <slot name="body" />
         </div>
       </slot>

@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { ButtonProps } from '@nuxt/ui'
+import type { ButtonProps } from '../../types'
 
-export interface ColorModeButtonProps extends /** @vue-ignore */ Pick<ButtonProps, 'as' | 'size' | 'disabled' | 'ui'> {
+export interface ColorModeButtonProps extends Omit<ButtonProps, 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */
@@ -15,23 +15,26 @@ export interface ColorModeButtonProps extends /** @vue-ignore */ Pick<ButtonProp
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useColorMode, useAppConfig } from '#imports'
+import { useForwardProps } from 'reka-ui'
+import { reactiveOmit } from '@vueuse/core'
+import { useColorMode, useAppConfig, useComponentUI } from '#imports'
 import { useLocale } from '../../composables/useLocale'
 import UButton from '../Button.vue'
+import UIcon from '../Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-withDefaults(defineProps<ColorModeButtonProps>(), {
+const props = withDefaults(defineProps<ColorModeButtonProps>(), {
   color: 'neutral',
   variant: 'ghost'
 })
-defineSlots<{
-  fallback(props?: {}): any
-}>()
 
 const { t } = useLocale()
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
+const uiProp = useComponentUI('button', props)
+
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon'))
 
 const isDark = computed({
   get() {
@@ -44,20 +47,17 @@ const isDark = computed({
 </script>
 
 <template>
-  <ClientOnly v-if="!colorMode?.forced">
-    <UButton
-      :icon="isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light"
-      :color="color"
-      :variant="variant"
-      :aria-label="isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark')"
-      v-bind="$attrs"
-      @click="isDark = !isDark"
-    />
-
-    <template #fallback>
-      <slot name="fallback">
-        <div class="size-8" />
-      </slot>
+  <UButton
+    v-bind="{
+      ...buttonProps,
+      'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
+      ...$attrs
+    }"
+    @click="isDark = !isDark"
+  >
+    <template #leading="{ ui }">
+      <UIcon :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" class="hidden dark:inline" :name="appConfig.ui.icons.dark" />
+      <UIcon :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" class="inline dark:hidden" :name="appConfig.ui.icons.light" />
     </template>
-  </ClientOnly>
+  </UButton>
 </template>

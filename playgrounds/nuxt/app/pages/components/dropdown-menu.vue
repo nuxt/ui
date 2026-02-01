@@ -13,6 +13,7 @@ const items = computed(() => [
   }],
   [{
     label: 'Profile',
+    description: 'View your profile',
     icon: 'i-lucide-user',
     slot: 'custom' as const,
     onSelect(e: Event) {
@@ -21,6 +22,7 @@ const items = computed(() => [
     }
   }, {
     label: 'Billing',
+    description: 'Manage billing',
     icon: 'i-lucide-credit-card',
     kbds: ['meta', 'b'],
     onSelect() {
@@ -52,6 +54,7 @@ const items = computed(() => [
       }
     }], [{
       label: 'More',
+      description: 'Import from more sources',
       icon: 'i-lucide-circle-plus',
       children: [{
         label: 'Import from Slack',

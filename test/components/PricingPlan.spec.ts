@@ -1,8 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PricingPlan from '../../src/runtime/components/PricingPlan.vue'
 import type { PricingPlanProps, PricingPlanSlots } from '../../src/runtime/components/PricingPlan.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/pricing-plan'
+import { UTheme } from '#components'
 
 describe('PricingPlan', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -67,5 +70,33 @@ describe('PricingPlan', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PricingPlanProps, slots?: Partial<PricingPlanSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PricingPlan)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PricingPlan, {
+      props: {
+        title: 'Title',
+        description: 'Description',
+        price: '$99',
+        features: ['Feature 1', 'Feature 2'],
+        badge: 'Badge',
+        discount: '30$'
+
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { PricingPlan, UTheme },
+      template: `
+        <UTheme :theme="{ pricingPlan: { slots: { root: 'test-theme-class' } } }">
+          <PricingPlan title="Title" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

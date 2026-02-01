@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { ComponentPublicInstance } from 'vue'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pin-input'
@@ -48,11 +49,10 @@ export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T
 </script>
 
 <script setup lang="ts" generic="T extends PinInputType">
-import type { ComponentPublicInstance } from 'vue'
 import { ref, computed, onMounted } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
@@ -65,7 +65,7 @@ const props = withDefaults(defineProps<PinInputProps<T>>(), {
 const emits = defineEmits<PinInputEmits<T>>()
 
 const appConfig = useAppConfig() as PinInput['AppConfig']
-const uiTheme = useComponentUiTheme('pinInput', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('pinInput', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'), emits)
 
@@ -120,7 +120,8 @@ defineExpose({
     :placeholder="placeholder"
     :model-value="(modelValue as PinInputValue<T>)"
     :default-value="(defaultValue as PinInputValue<T>[])"
-    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
+    data-slot="root"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     @update:model-value="emitFormInput()"
     @complete="onComplete"
   >
@@ -129,7 +130,8 @@ defineExpose({
       :key="ids"
       :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
       :index="index"
-      :class="ui.base({ class: uiTheme?.slots?.base })"
+      data-slot="base"
+      :class="ui.base({ class: uiProp?.base })"
       :disabled="disabled"
       @blur="onBlur"
       @focus="emitFormFocus"

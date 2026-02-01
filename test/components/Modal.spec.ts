@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Modal from '../../src/runtime/components/Modal.vue'
 import type { ModalProps, ModalSlots } from '../../src/runtime/components/Modal.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('Modal', () => {
   const props = { open: true, portal: false }
@@ -14,6 +17,9 @@ describe('Modal', () => {
     ['with fullscreen', { props: { ...props, fullscreen: true, title: 'Title', description: 'Description' } }],
     ['without overlay', { props: { ...props, overlay: false, title: 'Title', description: 'Description' } }],
     ['without transition', { props: { ...props, transition: false, title: 'Title', description: 'Description' } }],
+    ['with scrollable', { props: { ...props, scrollable: true, title: 'Title', description: 'Description' } }],
+    ['with scrollable and fullscreen', { props: { ...props, scrollable: true, fullscreen: true, title: 'Title', description: 'Description' } }],
+    ['with scrollable and without overlay', { props: { ...props, scrollable: true, overlay: false, title: 'Title', description: 'Description' } }],
     ['without close', { props: { ...props, close: false, title: 'Title', description: 'Description' } }],
     ['with closeIcon', { props: { ...props, closeIcon: 'i-lucide-trash' } }],
     ['with class', { props: { ...props, class: 'bg-elevated' } }],
@@ -31,5 +37,31 @@ describe('Modal', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ModalProps, slots?: Partial<ModalSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Modal)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Modal, {
+      props: {
+        open: true,
+        portal: false,
+        title: 'Modal Title',
+        description: 'This is a modal description'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Modal, UTheme },
+      template: `
+        <UTheme :theme="{ modal: { slots: { content: 'test-theme-class' } } }">
+          <Modal :open="true" :portal="false" title="Title" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="content"]').classes()).toContain('test-theme-class')
   })
 })

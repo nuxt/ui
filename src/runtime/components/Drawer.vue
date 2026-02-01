@@ -67,7 +67,7 @@ import { computed, toRef } from 'vue'
 import { VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
 import { DrawerRoot, DrawerRootNested, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { usePortal } from '../composables/usePortal'
 import { tv } from '../utils/tv'
 
@@ -83,16 +83,12 @@ const emits = defineEmits<DrawerEmits>()
 const slots = defineSlots<DrawerSlots>()
 
 const appConfig = useAppConfig() as Drawer['AppConfig']
-const uiTheme = useComponentUiTheme('drawer', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('drawer', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
-  const defaultEvents = {
-    closeAutoFocus: (e: Event) => e.preventDefault()
-  }
-
   if (!props.dismissible) {
     const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
 
@@ -102,10 +98,10 @@ const contentEvents = computed(() => {
         emits('close:prevent')
       }
       return acc
-    }, defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (e: Event) => void>)
+    }, {} as Record<typeof events[number], (e: Event) => void>)
   }
 
-  return defaultEvents
+  return {}
 })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })({
@@ -122,10 +118,10 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
     </DrawerTrigger>
 
     <DrawerPortal v-bind="portalProps">
-      <DrawerOverlay v-if="overlay" :class="ui.overlay({ class: uiTheme?.slots?.overlay })" />
+      <DrawerOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })" />
 
-      <DrawerContent :class="ui.content({ class: [!slots.default && props.class, uiTheme?.slots?.content] })" v-bind="contentProps" v-on="contentEvents">
-        <DrawerHandle v-if="handle" :class="ui.handle({ class: uiTheme?.slots?.handle })" />
+      <DrawerContent data-slot="content" :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })" v-bind="contentProps" v-on="contentEvents">
+        <DrawerHandle v-if="handle" data-slot="handle" :class="ui.handle({ class: uiProp?.handle })" />
 
         <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
           <DrawerTitle v-if="title || !!slots.title">
@@ -142,16 +138,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
         </VisuallyHidden>
 
         <slot name="content">
-          <div :class="ui.container({ class: uiTheme?.slots?.container })">
-            <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)" :class="ui.header({ class: uiTheme?.slots?.header })">
+          <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
+            <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)" data-slot="header" :class="ui.header({ class: uiProp?.header })">
               <slot name="header">
-                <DrawerTitle v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
+                <DrawerTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
                   <slot name="title">
                     {{ title }}
                   </slot>
                 </DrawerTitle>
 
-                <DrawerDescription v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
+                <DrawerDescription v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
                   <slot name="description">
                     {{ description }}
                   </slot>
@@ -159,11 +155,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
               </slot>
             </div>
 
-            <div v-if="!!slots.body" :class="ui.body({ class: uiTheme?.slots?.body })">
+            <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: uiProp?.body })">
               <slot name="body" />
             </div>
 
-            <div v-if="!!slots.footer" :class="ui.footer({ class: uiTheme?.slots?.footer })">
+            <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
               <slot name="footer" />
             </div>
           </div>

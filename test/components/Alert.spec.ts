@@ -1,8 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Alert from '../../src/runtime/components/Alert.vue'
 import type { AlertProps, AlertSlots } from '../../src/runtime/components/Alert.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/alert'
+import { UTheme } from '#components'
 
 describe('Alert', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -33,5 +36,36 @@ describe('Alert', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AlertProps, slots?: Partial<AlertSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Alert)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Alert, {
+      props: {
+        title: 'Alert',
+        icon: 'i-lucide-lightbulb',
+        description: 'This is a description',
+        actions: [{ label: 'Action' }],
+        close: true,
+        avatar: {
+          src: 'https://github.com/benjamincanac.png',
+          alt: 'Benjamin Canac'
+        }
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Alert, UTheme },
+      template: `
+        <UTheme :theme="{ alert: { slots: { root: 'test-theme-class' } } }">
+          <Alert title="Themed" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

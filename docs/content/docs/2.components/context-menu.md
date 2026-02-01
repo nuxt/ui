@@ -95,8 +95,8 @@ Use the `items` prop as an array of objects with the following properties:
 - [`checked?: boolean`{lang="ts-type"}](#with-checkbox-items)
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `onSelect?(e: Event): void`{lang="ts-type"}
-- [`onUpdateChecked?(checked: boolean): void`{lang="ts-type"}](#with-checkbox-items)
+- `onSelect?: (e: Event) => void`{lang="ts-type"}
+- [`onUpdateChecked?: (checked: boolean) => void`{lang="ts-type"}](#with-checkbox-items)
 - `children?: ContextMenuItem[] | ContextMenuItem[][]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
@@ -217,6 +217,43 @@ slots:
 
 :div{class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72"}[Right click here]
 ::
+
+### Modal
+
+Use the `modal` prop to control whether the ContextMenu blocks interaction with outside content. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - ui.content
+external:
+  - items
+externalTypes:
+  - ContextMenuItem[]
+props:
+  modal: false
+  items:
+    - label: System
+      icon: i-lucide-monitor
+    - label: Light
+      icon: i-lucide-sun
+    - label: Dark
+      icon: i-lucide-moon
+  ui:
+    content: 'w-48'
+slots:
+  default: |
+
+    <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
+      Right click here
+    </div>
+---
+
+:div{class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72"}[Right click here]
+::
+
 
 ### Disabled
 

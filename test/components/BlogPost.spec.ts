@@ -1,8 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import BlogPost from '../../src/runtime/components/BlogPost.vue'
 import type { BlogPostProps, BlogPostSlots } from '../../src/runtime/components/BlogPost.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/blog-post'
+import { UTheme } from '#components'
 
 describe('BlogPost', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -59,5 +62,29 @@ describe('BlogPost', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BlogPostProps, slots?: Partial<BlogPostSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, BlogPost)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(BlogPost, {
+      props: {
+        ...props,
+        authors: [author1, author2]
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { BlogPost, UTheme },
+      template: `
+        <UTheme :theme="{ blogPost: { slots: { root: 'test-theme-class' } } }">
+          <BlogPost title="Test" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('article').classes()).toContain('test-theme-class')
   })
 })

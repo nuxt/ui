@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Accordion from '../../src/runtime/components/Accordion.vue'
 import type { AccordionProps, AccordionSlots } from '../../src/runtime/components/Accordion.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('Accordion', () => {
   const items = [{
@@ -61,5 +64,27 @@ describe('Accordion', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps, slots?: Partial<AccordionSlots & { custom: () => 'Custom slot' } & { 'custom-body': () => 'Custom body slot' }> }) => {
     const html = await ComponentRender(nameOrHtml, options, Accordion)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Accordion, {
+      props: { items, modelValue: '1' }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Accordion, UTheme },
+      setup: () => ({ items }),
+      template: `
+        <UTheme :theme="{ accordion: { slots: { root: 'test-theme-class' } } }">
+          <Accordion :items="items" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

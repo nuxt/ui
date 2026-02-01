@@ -1,10 +1,12 @@
 import { defineComponent } from 'vue'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Toaster from '../../src/runtime/components/Toaster.vue'
 import Toast from '../../src/runtime/components/Toast.vue'
 import type { ToastProps, ToastSlots } from '../../src/runtime/components/Toast.vue'
 import ComponentRender from '../component-render'
-import { ClientOnly } from '#components'
+import { ClientOnly, UTheme } from '#components'
 
 const ToastWrapper = defineComponent({
   components: {
@@ -51,5 +53,48 @@ describe('Toast', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ToastProps, slots?: Partial<ToastSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ToastWrapper)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(ToastWrapper, {
+      props: {
+        title: 'Title',
+        description: 'Description',
+        avatar: { src: 'https://github.com/benjamincanac.png', alt: 'Benjamin Canac' },
+        actions: [{ label: 'Action' }]
+      }
+    })
+    expect(await axe(wrapper.element, {
+      rules: {
+        // "ARIA role should be appropriate for the element (aria-allowed-role)"
+
+        // Fix any of the following:
+        //   ARIA role alert is not allowed for given element
+        'aria-allowed-role': { enabled: false },
+        // "ARIA hidden element must not be focusable or contain focusable elements (aria-hidden-focus)"
+
+        // Fix all of the following:
+        //   Focusable content should have tabindex="-1" or be removed from the DOM
+        'aria-hidden-focus': { enabled: false },
+        // "<ul> and <ol> must only directly contain <li>, <script> or <template> elements (list)"
+
+        // Fix all of the following:
+        //   List element has direct children that are not allowed: [role=alert]
+        'list': { enabled: false }
+      }
+    })).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { ToastWrapper, UTheme },
+      template: `
+        <UTheme :theme="{ toast: { slots: { root: 'test-theme-class' } } }">
+          <ToastWrapper title="Test" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[role="alert"]').classes()).toContain('test-theme-class')
   })
 })

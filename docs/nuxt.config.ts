@@ -182,11 +182,17 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       // prevents reloading page when navigating between components
-      include: ['@internationalized/date', '@vueuse/shared', '@vueuse/integrations/useFuse', '@tanstack/vue-table', 'reka-ui', 'reka-ui/namespaced', 'embla-carousel-vue', 'embla-carousel-autoplay', 'embla-carousel-auto-scroll', 'embla-carousel-auto-height', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-wheel-gestures', 'colortranslator', 'tailwindcss/colors', 'tailwind-variants', 'ufo', 'zod', 'vaul-vue', 'scule', 'motion-v', 'json5', 'ohash', 'shiki-transformer-color-highlight']
+      include: ['@ai-sdk/vue', '@internationalized/date', '@nuxt/content/utils', '@tanstack/vue-table', '@vercel/analytics/nuxt', '@vercel/speed-insights/nuxt', '@vue/devtools-core', '@vue/devtools-kit', '@vueuse/integrations/useFuse', '@vueuse/shared', 'ai', 'colortranslator', 'embla-carousel-auto-height', 'embla-carousel-auto-scroll', 'embla-carousel-autoplay', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-vue', 'embla-carousel-wheel-gestures', 'json5', 'motion-v', 'ohash', 'ohash/utils', 'prettier', 'reka-ui', 'reka-ui/namespaced', 'scule', 'shiki', 'shiki-stream/vue', 'shiki-transformer-color-highlight', 'shiki/engine-javascript.mjs', 'tailwind-variants', 'tailwindcss/colors', 'ufo', 'vaul-vue', 'zod']
     }
   },
 
   componentMeta: {
+    transformers: [(component, code) => {
+      // Simplify ui in slot prop types: `leading(props: { ui: Button['ui'] })` -> `leading(props: { ui: object })`
+      code = code.replace(/ui:[^}]+(?=\})/g, 'ui: object')
+
+      return { component, code }
+    }],
     exclude: [
       '@nuxt/content',
       '@nuxt/icon',
@@ -201,8 +207,8 @@ export default defineNuxtConfig({
     metaFields: {
       type: false,
       props: true,
-      slots: true,
-      events: true,
+      slots: 'no-schema',
+      events: 'no-schema',
       exposed: false
     }
   },

@@ -1,4 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Tree from '../../src/runtime/components/Tree.vue'
 import type { TreeProps, TreeSlots, TreeItem } from '../../src/runtime/components/Tree.vue'
 import ComponentRender from '../component-render'
@@ -45,6 +47,10 @@ describe('Tree', () => {
     ['with multiple and defaultValue', { props: { ...props, multiple: true, defaultValue: [items[0], items[1]] } }],
     // Disabled
     ['with disabled', { props: { ...props, disabled: true } }],
+    // Nested
+    ['without nested', { props: { ...props, nested: false } }],
+    // Virtualize
+    ['with virtualize', { props: { ...props, virtualize: true } }],
     // Item properties
     ['with defautExpanded item', { props: { items: [{ label: 'Default Expanded', defaultExpanded: true, children: items }] } }],
     ['with disabled item', { props: { items: [{ label: 'Disabled item', disabled: true, children: items }] } }],
@@ -68,6 +74,17 @@ describe('Tree', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: Partial<TreeProps>, slots?: Partial<TreeSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Tree)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        ...props,
+        modelValue: items[0],
+        expanded: [items[0] as any]
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   test('should have the correct types', () => {

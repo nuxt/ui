@@ -21,8 +21,10 @@ function send() {
       <UPopover arrow :content="{ side: 'top' }">
         <UButton label="Click me top" color="neutral" variant="outline" />
 
-        <template #content>
-          <div class="w-48 h-16" />
+        <template #content="{ close }">
+          <div class="flex justify-center gap-2 p-4 w-48">
+            <UButton label="Close" color="neutral" @click="close" />
+          </div>
         </template>
       </UPopover>
 

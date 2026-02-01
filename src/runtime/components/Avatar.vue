@@ -2,11 +2,12 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
 import type { ChipProps, IconProps } from '../types'
+import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type Avatar = ComponentConfig<typeof theme, AppConfig, 'avatar'>
 
-export interface AvatarProps {
+export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 'src' | 'alt'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'span'
@@ -38,7 +39,7 @@ export interface AvatarSlots {
 import { ref, computed, watch } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
 import { defu } from 'defu'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import ImageComponent from '#build/ui-image-component'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
@@ -60,7 +61,7 @@ const as = computed(() => {
 const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
 
 const appConfig = useAppConfig() as Avatar['AppConfig']
-const uiTheme = useComponentUiTheme('avatar', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('avatar', props)
 const { size } = useAvatarGroup(props)
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -98,7 +99,8 @@ function onError() {
     :is="props.chip ? UChip : Primitive"
     :as="as.root"
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
-    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
+    data-slot="root"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     :style="props.style"
   >
     <component
@@ -109,14 +111,15 @@ function onError() {
       :width="sizePx"
       :height="sizePx"
       v-bind="$attrs"
-      :class="ui.image({ class: uiTheme?.slots?.image })"
+      data-slot="image"
+      :class="ui.image({ class: uiProp?.image })"
       @error="onError"
     />
 
     <Slot v-else v-bind="$attrs">
       <slot>
-        <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: uiTheme?.slots?.icon })" />
-        <span v-else :class="ui.fallback({ class: uiTheme?.slots?.fallback })">{{ fallback || '&nbsp;' }}</span>
+        <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
+        <span v-else data-slot="fallback" :class="ui.fallback({ class: uiProp?.fallback })">{{ fallback || '&nbsp;' }}</span>
       </slot>
     </Slot>
   </component>

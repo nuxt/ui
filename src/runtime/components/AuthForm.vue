@@ -4,21 +4,23 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
 import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps } from '../types'
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
+import type { FormHTMLAttributes } from '../types/html'
+import type { NonUnion } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type AuthForm = ComponentConfig<typeof theme, AppConfig, 'authForm'>
 
-type AuthFormCheckboxField = Omit<FormFieldProps, 'name'> & CheckboxProps & {
+export type AuthFormCheckboxField = Omit<FormFieldProps, 'name'> & CheckboxProps & {
   name: string
   type: 'checkbox'
 }
 
-type AuthFormSelectField = Omit<FormFieldProps, 'name'> & SelectMenuProps & {
+export type AuthFormSelectField = Omit<FormFieldProps, 'name'> & SelectMenuProps & {
   name: string
   type: 'select'
 }
 
-type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type' | 'otp'> & {
+export type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type' | 'otp'> & {
   name: string
   type: 'otp'
   /**
@@ -29,23 +31,16 @@ type AuthFormOtpField = Omit<FormFieldProps, 'name'> & Omit<PinInputProps, 'type
   otp?: boolean | PinInputProps
 }
 
-type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number'
+export type AuthFormInputFieldType = 'password' | 'text' | 'email' | 'number'
 
-type AuthFormInputField<T extends AuthFormInputFieldType = AuthFormInputFieldType> = Omit<FormFieldProps, 'name'> & InputProps & {
+export type AuthFormInputField<T extends AuthFormInputFieldType & NonUnion<T> = 'text'> = Omit<FormFieldProps, 'name'> & Omit<InputProps, 'type'> & {
   name: string
   type: T
 }
 
-type AuthFormFieldType = 'checkbox' | 'select' | 'otp' | 'password' | 'text' | 'email' | 'number'
+export type AuthFormField = AuthFormCheckboxField | AuthFormSelectField | AuthFormOtpField | AuthFormInputField<'password'> | AuthFormInputField<'text'> | AuthFormInputField<'email'> | AuthFormInputField<'number'>
 
-export type AuthFormField<T extends AuthFormFieldType = AuthFormFieldType>
-  = T extends 'checkbox' ? AuthFormCheckboxField
-    : T extends 'select' ? AuthFormSelectField
-      : T extends 'otp' ? AuthFormOtpField
-        : T extends AuthFormInputFieldType ? AuthFormInputField<T>
-          : never
-
-export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> {
+export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> extends /** @vue-ignore */ FormHTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -96,7 +91,7 @@ type DynamicFormFieldSlots<T> = Record<string, (props?: {}) => any> & Record<`${
 
 export type AuthFormSlots<T extends object = object, F extends AuthFormField = AuthFormField> = {
   header(props?: {}): any
-  leading(props?: {}): any
+  leading(props: { ui: AuthForm['ui'] }): any
   title(props?: {}): any
   description(props?: {}): any
   providers(props?: {}): any
@@ -110,7 +105,7 @@ export type AuthFormSlots<T extends object = object, F extends AuthFormField = A
 <script setup lang="ts" generic="T extends FormSchema, F extends AuthFormField">
 import { reactive, ref, computed, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { omit, pick } from '../utils'
 import { tv } from '../utils/tv'
@@ -123,6 +118,8 @@ import UCheckbox from './Checkbox.vue'
 import USelectMenu from './SelectMenu.vue'
 import UInput from './Input.vue'
 import UPinInput from './PinInput.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<AuthFormProps<T, F>>(), {
   separator: 'or'
@@ -147,18 +144,14 @@ const slots = defineSlots<AuthFormSlots<typeof state, F>>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as AuthForm['AppConfig']
-const uiTheme = useComponentUiTheme('authForm', () => ({ slots: props.ui }))
-
-const formRef = useTemplateRef('formRef')
-const passwordVisibility = ref(false)
+const uiProp = useComponentUI('authForm', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.authForm || {}) })())
 
-defineExpose({
-  formRef,
-  state
-})
+const formRef = useTemplateRef('formRef')
+const passwordVisibility = ref(false)
+const passwordRef = useTemplateRef('passwordRef')
 
 function pickFieldProps(field: F) {
   const fields = ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as (keyof F)[]
@@ -186,25 +179,30 @@ function omitFieldProps(field: F) {
 
   return omit(field, [...fields, 'label', 'description'])
 }
+
+defineExpose({
+  formRef,
+  state
+})
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
-    <div v-if="(icon || !!slots.icon) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header" :class="ui.header({ class: uiTheme?.slots?.header })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div v-if="(icon || !!slots.leading) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header" data-slot="header" :class="ui.header({ class: uiProp?.header })">
       <slot name="header">
-        <div v-if="icon || !!slots.leading" :class="ui.leading({ class: uiTheme?.slots?.leading })">
-          <slot name="leading">
-            <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: uiTheme?.slots?.leadingIcon })" />
+        <div v-if="icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
+          <slot name="leading" :ui="ui">
+            <UIcon v-if="icon" :name="icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
           </slot>
         </div>
 
-        <div v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
+        <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
           <slot name="title">
             {{ title }}
           </slot>
         </div>
 
-        <div v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
+        <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
           <slot name="description">
             {{ description }}
           </slot>
@@ -212,8 +210,8 @@ function omitFieldProps(field: F) {
       </slot>
     </div>
 
-    <div :class="ui.body({ class: uiTheme?.slots?.body })">
-      <div v-if="providers?.length || !!slots.providers" :class="ui.providers({ class: uiTheme?.slots?.providers })">
+    <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
+      <div v-if="providers?.length || !!slots.providers" data-slot="providers" :class="ui.providers({ class: uiProp?.providers })">
         <slot name="providers">
           <UButton
             v-for="(provider, index) in providers"
@@ -229,7 +227,8 @@ function omitFieldProps(field: F) {
       <USeparator
         v-if="providers?.length && fields?.length"
         v-bind="typeof separator === 'object' ? separator : { label: separator }"
-        :class="ui.separator({ class: uiTheme?.slots?.separator })"
+        data-slot="separator"
+        :class="ui.separator({ class: uiProp?.separator })"
       />
 
       <UForm
@@ -239,9 +238,11 @@ function omitFieldProps(field: F) {
         :schema="schema"
         :validate="validate"
         :validate-on="validateOn"
-        :class="ui.form({ class: uiTheme?.slots?.form })"
         :disabled="disabled"
         :loading-auto="loadingAuto"
+        data-slot="form"
+        :class="ui.form({ class: uiProp?.form })"
+        v-bind="$attrs"
         @submit="onSubmit"
       >
         <UFormField
@@ -253,30 +254,32 @@ function omitFieldProps(field: F) {
             <UCheckbox
               v-if="field.type === 'checkbox'"
               v-model="state[field.name]"
-              :class="ui.checkbox({ class: uiTheme?.slots?.checkbox })"
-              v-bind="(omitFieldProps(field) as AuthFormCheckboxField)"
+              data-slot="checkbox"
+              :class="ui.checkbox({ class: uiProp?.checkbox })"
+              v-bind="(omitFieldProps(field))"
             />
             <USelectMenu
               v-else-if="field.type === 'select'"
               v-model="state[field.name]"
-              :class="ui.select({ class: uiTheme?.slots?.select })"
+              data-slot="select"
+              :class="ui.select({ class: uiProp?.select })"
               v-bind="(omitFieldProps(field) as AuthFormSelectField)"
             />
             <UPinInput
               v-else-if="field.type === 'otp'"
               :id="field.name"
               v-model="state[field.name]"
-              :class="ui.otp({ class: uiTheme?.slots?.otp })"
-              v-bind="{
-                ...(omitFieldProps(field) as Omit<AuthFormOtpField, 'type'>),
-                ...(typeof field.otp === 'object' ? field.otp : {})
-              }"
+              data-slot="otp"
+              :class="ui.otp({ class: uiProp?.otp })"
+              v-bind="(Object.assign({}, omitFieldProps(field), typeof (field as AuthFormOtpField).otp === 'object' ? (field as AuthFormOtpField).otp : {}) as any)"
               otp
             />
             <UInput
               v-else-if="field.type === 'password'"
+              ref="passwordRef"
               v-model="state[field.name]"
-              :class="ui.password({ class: uiTheme?.slots?.password })"
+              data-slot="password"
+              :class="ui.password({ class: uiProp?.password })"
               v-bind="(omitFieldProps(field) as AuthFormInputField<'password'>)"
               :type="passwordVisibility ? 'text' : 'password'"
             >
@@ -288,7 +291,7 @@ function omitFieldProps(field: F) {
                   :icon="passwordVisibility ? appConfig.ui.icons.eyeOff : appConfig.ui.icons.eye"
                   :aria-label="passwordVisibility ? t('authForm.hidePassword') : t('authForm.showPassword')"
                   :aria-pressed="passwordVisibility"
-                  aria-controls="password"
+                  :aria-controls="passwordRef?.[0]?.inputRef?.id"
                   @click="passwordVisibility = !passwordVisibility"
                 />
               </template>
@@ -296,7 +299,8 @@ function omitFieldProps(field: F) {
             <UInput
               v-else
               v-model="state[field.name]"
-              :class="ui.input({ class: uiTheme?.slots?.input })"
+              data-slot="input"
+              :class="ui.input({ class: uiProp?.input })"
               v-bind="(omitFieldProps(field) as AuthFormInputField)"
             />
           </slot>
@@ -333,7 +337,7 @@ function omitFieldProps(field: F) {
       </UForm>
     </div>
 
-    <div v-if="!!slots.footer" :class="ui.footer({ class: uiTheme?.slots?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Header from '../../src/runtime/components/Header.vue'
 import type { HeaderProps, HeaderSlots } from '../../src/runtime/components/Header.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('Header', () => {
   it.each([
@@ -30,5 +33,29 @@ describe('Header', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: HeaderProps, slots?: Partial<HeaderSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Header)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Header, {
+      props: {
+        title: 'Documentation',
+        to: '/docs'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Header, UTheme },
+      template: `
+        <UTheme :theme="{ header: { slots: { root: 'test-theme-class' } } }">
+          <Header />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('header').classes()).toContain('test-theme-class')
   })
 })

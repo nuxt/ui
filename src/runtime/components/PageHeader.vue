@@ -36,7 +36,7 @@ export interface PageHeaderSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -44,7 +44,7 @@ const props = defineProps<PageHeaderProps>()
 const slots = defineSlots<PageHeaderSlots>()
 
 const appConfig = useAppConfig() as PageHeader['AppConfig']
-const uiTheme = useComponentUiTheme('pageHeader', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('pageHeader', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageHeader || {}) })({
   title: !!props.title || !!slots.title
@@ -52,29 +52,29 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageHeader |
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
-    <div v-if="headline || !!slots.headline" :class="ui.headline({ class: uiTheme?.slots?.headline })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div v-if="headline || !!slots.headline" data-slot="headline" :class="ui.headline({ class: uiProp?.headline })">
       <slot name="headline">
         {{ headline }}
       </slot>
     </div>
 
-    <div :class="ui.container({ class: uiTheme?.slots?.container })">
-      <div :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
-        <h1 v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
+    <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
+      <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+        <h1 v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
           <slot name="title">
             {{ title }}
           </slot>
         </h1>
 
-        <div v-if="links?.length || !!slots.links" :class="ui.links({ class: uiTheme?.slots?.links })">
+        <div v-if="links?.length || !!slots.links" data-slot="links" :class="ui.links({ class: uiProp?.links })">
           <slot name="links">
             <UButton v-for="(link, index) in links" :key="index" color="neutral" variant="outline" v-bind="link" />
           </slot>
         </div>
       </div>
 
-      <div v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
+      <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
         <slot name="description">
           {{ description }}
         </slot>

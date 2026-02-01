@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import AuthForm from '../../src/runtime/components/AuthForm.vue'
 import type { AuthFormProps, AuthFormSlots } from '../../src/runtime/components/AuthForm.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('AuthForm', () => {
   const fields = [{
@@ -43,5 +46,34 @@ describe('AuthForm', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props: AuthFormProps, slots?: Partial<AuthFormSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, AuthForm)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(AuthForm, {
+      props: {
+        fields,
+        title: 'Title',
+        description: 'Description',
+        icon: 'i-lucide-user',
+        providers: [{ label: 'Google', icon: 'i-simple-icons-google' }],
+        separator: 'or',
+        submit: { label: 'Submit' }
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { AuthForm, UTheme },
+      template: `
+        <UTheme :theme="{ authForm: { slots: { root: 'test-theme-class' } } }">
+          <AuthForm :fields="[]" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

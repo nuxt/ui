@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { Ref } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form-field'
 import type { ComponentConfig } from '../types/tv'
@@ -48,9 +49,8 @@ export interface FormFieldSlots {
 
 <script setup lang="ts">
 import { computed, ref, inject, provide, useId, watch } from 'vue'
-import type { Ref } from 'vue'
 import { Primitive, Label } from 'reka-ui'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, formInputsInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
@@ -59,7 +59,7 @@ const props = defineProps<FormFieldProps>()
 const slots = defineSlots<FormFieldSlots>()
 
 const appConfig = useAppConfig() as FormField['AppConfig']
-const uiTheme = useComponentUiTheme('formField', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('formField', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.formField || {}) })({
   size: props.size,
@@ -99,37 +99,37 @@ provide(formFieldInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
-    <div :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
-      <div v-if="label || !!slots.label" :class="ui.labelWrapper({ class: uiTheme?.slots?.labelWrapper })">
-        <Label :for="id" :class="ui.label({ class: uiTheme?.slots?.label })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+      <div v-if="label || !!slots.label" data-slot="labelWrapper" :class="ui.labelWrapper({ class: uiProp?.labelWrapper })">
+        <Label :for="id" data-slot="label" :class="ui.label({ class: uiProp?.label })">
           <slot name="label" :label="label">
             {{ label }}
           </slot>
         </Label>
-        <span v-if="hint || !!slots.hint" :id="`${ariaId}-hint`" :class="ui.hint({ class: uiTheme?.slots?.hint })">
+        <span v-if="hint || !!slots.hint" :id="`${ariaId}-hint`" data-slot="hint" :class="ui.hint({ class: uiProp?.hint })">
           <slot name="hint" :hint="hint">
             {{ hint }}
           </slot>
         </span>
       </div>
 
-      <p v-if="description || !!slots.description" :id="`${ariaId}-description`" :class="ui.description({ class: uiTheme?.slots?.description })">
+      <p v-if="description || !!slots.description" :id="`${ariaId}-description`" data-slot="description" :class="ui.description({ class: uiProp?.description })">
         <slot name="description" :description="description">
           {{ description }}
         </slot>
       </p>
     </div>
 
-    <div :class="[(label || !!slots.label || description || !!slots.description) && ui.container({ class: uiTheme?.slots?.container })]">
+    <div :class="[(label || !!slots.label || description || !!slots.description) && ui.container({ class: uiProp?.container })]">
       <slot :error="error" />
 
-      <div v-if="(typeof error === 'string' && error) || !!slots.error" :id="`${ariaId}-error`" :class="ui.error({ class: uiTheme?.slots?.error })">
+      <div v-if="(typeof error === 'string' && error) || !!slots.error" :id="`${ariaId}-error`" data-slot="error" :class="ui.error({ class: uiProp?.error })">
         <slot name="error" :error="error">
           {{ error }}
         </slot>
       </div>
-      <div v-else-if="help || !!slots.help" :id="`${ariaId}-help`" :class="ui.help({ class: uiTheme?.slots?.help })">
+      <div v-else-if="help || !!slots.help" :id="`${ariaId}-help`" data-slot="help" :class="ui.help({ class: uiProp?.help })">
         <slot name="help" :help="help">
           {{ help }}
         </slot>

@@ -1,10 +1,13 @@
 import { defineComponent } from 'vue'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Avatar from '../../src/runtime/components/Avatar.vue'
 import AvatarGroup from '../../src/runtime/components/AvatarGroup.vue'
 import type { AvatarGroupProps, AvatarGroupSlots } from '../../src/runtime/components/AvatarGroup.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/avatar-group'
+import { UTheme } from '#components'
 
 const AvatarGroupWrapper = defineComponent({
   components: {
@@ -33,5 +36,31 @@ describe('AvatarGroup', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarGroupProps, slots?: Partial<AvatarGroupSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, AvatarGroupWrapper)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(AvatarGroupWrapper, {
+      props: {
+        max: 2
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { AvatarGroup, Avatar, UTheme },
+      template: `
+        <UTheme :theme="{ avatarGroup: { slots: { root: 'test-theme-class' } } }">
+          <AvatarGroup>
+            <Avatar alt="Test 1" />
+            <Avatar alt="Test 2" />
+          </AvatarGroup>
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

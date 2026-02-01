@@ -103,7 +103,7 @@ export type PricingTableSlots<T extends PricingTableTier = PricingTableTier> = {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UBadge from './Badge.vue'
@@ -117,7 +117,7 @@ const slots = defineSlots<PricingTableSlots<T>>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as PricingTable['AppConfig']
-const uiTheme = useComponentUiTheme('pricingTable', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('pricingTable', props)
 
 const formatSlotName = (item: { id?: string, title: string }): string => {
   if (item.id) return item.id
@@ -150,8 +150,8 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
   <DefineTierTemplate v-slot="{ tier }">
     <slot :name="(tier.id as keyof PricingTableSlots<T>)" :tier="(tier as T)">
       <slot name="tier" :tier="(tier as T)">
-        <div :class="ui.tierTitleWrapper({ class: uiTheme?.slots?.tierTitleWrapper })">
-          <div :class="ui.tierTitle({ class: uiTheme?.slots?.tierTitle })">
+        <div data-slot="tierTitleWrapper" :class="ui.tierTitleWrapper({ class: uiProp?.tierTitleWrapper })">
+          <div data-slot="tierTitle" :class="ui.tierTitle({ class: uiProp?.tierTitle })">
             <slot :name="(`${tier.id}-title` as keyof PricingTableSlots<T>)" :tier="tier">
               <slot name="tier-title" :tier="(tier as T)">
                 {{ tier.title }}
@@ -166,13 +166,14 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
                 color="primary"
                 variant="subtle"
                 v-bind="typeof tier.badge === 'string' ? { label: tier.badge } : tier.badge"
-                :class="ui.tierBadge({ class: uiTheme?.slots?.tierBadge })"
+                data-slot="tierBadge"
+                :class="ui.tierBadge({ class: uiProp?.tierBadge })"
               />
             </slot>
           </slot>
         </div>
 
-        <div v-if="tier.description || !!slots['tier-description'] || !!slots[(`${tier.id}-description` as keyof PricingTableSlots<T>)]" :class="ui.tierDescription({ class: uiTheme?.slots?.tierDescription })">
+        <div v-if="tier.description || !!slots['tier-description'] || !!slots[(`${tier.id}-description` as keyof PricingTableSlots<T>)]" data-slot="tierDescription" :class="ui.tierDescription({ class: uiProp?.tierDescription })">
           <slot :name="(`${tier.id}-description` as keyof PricingTableSlots<T>)" :tier="tier">
             <slot name="tier-description" :tier="(tier as T)">
               {{ tier.description }}
@@ -180,8 +181,8 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
           </slot>
         </div>
 
-        <div v-if="tier.discount || tier.price || !!slots['tier-discount'] || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-price'] || !!slots[(`${tier.id}-price` as keyof PricingTableSlots<T>)] || tier.billingCycle || tier.billingPeriod || !!slots['tier-billing'] || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)]" :class="ui.tierPriceWrapper({ class: uiTheme?.slots?.tierPriceWrapper })">
-          <div v-if="(tier.discount && tier.price) || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-discount']" :class="ui.tierDiscount({ class: uiTheme?.slots?.tierDiscount })">
+        <div v-if="tier.discount || tier.price || !!slots['tier-discount'] || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-price'] || !!slots[(`${tier.id}-price` as keyof PricingTableSlots<T>)] || tier.billingCycle || tier.billingPeriod || !!slots['tier-billing'] || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)]" data-slot="tierPriceWrapper" :class="ui.tierPriceWrapper({ class: uiProp?.tierPriceWrapper })">
+          <div v-if="(tier.discount && tier.price) || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-discount']" data-slot="tierDiscount" :class="ui.tierDiscount({ class: uiProp?.tierDiscount })">
             <slot :name="(`${tier.id}-discount` as keyof PricingTableSlots<T>)" :tier="tier">
               <slot name="tier-discount" :tier="(tier as T)">
                 {{ tier.price }}
@@ -189,7 +190,7 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
             </slot>
           </div>
 
-          <div v-if="(tier.discount || tier.price) || !!slots[(`${tier.id}-price` as keyof PricingTableSlots<T>)] || !!slots['tier-price']" :class="ui.tierPrice({ class: uiTheme?.slots?.tierPrice })">
+          <div v-if="(tier.discount || tier.price) || !!slots[(`${tier.id}-price` as keyof PricingTableSlots<T>)] || !!slots['tier-price']" data-slot="tierPrice" :class="ui.tierPrice({ class: uiProp?.tierPrice })">
             <slot :name="(`${tier.id}-price` as keyof PricingTableSlots<T>)" :tier="tier">
               <slot name="tier-price" :tier="(tier as T)">
                 {{ tier.discount || tier.price }}
@@ -197,14 +198,14 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
             </slot>
           </div>
 
-          <div v-if="tier.billingCycle || tier.billingPeriod || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)] || !!slots['tier-billing']" :class="ui.tierBilling({ class: uiTheme?.slots?.tierBilling })">
+          <div v-if="tier.billingCycle || tier.billingPeriod || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)] || !!slots['tier-billing']" data-slot="tierBilling" :class="ui.tierBilling({ class: uiProp?.tierBilling })">
             <slot :name="(`${tier.id}-billing` as keyof PricingTableSlots<T>)" :tier="tier">
               <slot name="tier-billing" :tier="(tier as T)">
-                <span :class="ui.tierBillingPeriod({ class: uiTheme?.slots?.tierBillingPeriod })">
+                <span data-slot="tierBillingPeriod" :class="ui.tierBillingPeriod({ class: uiProp?.tierBillingPeriod })">
                   {{ tier.billingPeriod || '&nbsp;' }}
                 </span>
 
-                <span v-if="tier.billingCycle" :class="ui.tierBillingCycle({ class: uiTheme?.slots?.tierBillingCycle })">
+                <span v-if="tier.billingCycle" data-slot="tierBillingCycle" :class="ui.tierBillingCycle({ class: uiProp?.tierBillingCycle })">
                   {{ tier.billingCycle }}
                 </span>
               </slot>
@@ -212,7 +213,7 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
           </div>
         </div>
 
-        <div v-if="!!slots[(`${tier.id}-button` as keyof PricingTableSlots<T>)] || !!slots['tier-button'] || tier.button" :class="ui.tierButton({ class: uiTheme?.slots?.tierButton })">
+        <div v-if="!!slots[(`${tier.id}-button` as keyof PricingTableSlots<T>)] || !!slots['tier-button'] || tier.button" data-slot="tierButton" :class="ui.tierButton({ class: uiProp?.tierButton })">
           <slot :name="(`${tier.id}-button` as keyof PricingTableSlots<T>)" :tier="tier">
             <slot name="tier-button" :tier="(tier as T)">
               <UButton v-if="tier.button" block size="lg" v-bind="tier.button" />
@@ -225,43 +226,44 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
 
   <DefineFeatureTemplate v-slot="{ feature, tier }">
     <template v-if="feature.tiers?.[tier.id]">
-      <UIcon v-if="typeof feature.tiers[tier.id] === 'boolean'" :name="appConfig.ui.icons.success" :class="ui.tierFeatureIcon({ class: uiTheme?.slots?.tierFeatureIcon, active: true })" />
+      <UIcon v-if="typeof feature.tiers[tier.id] === 'boolean'" :name="appConfig.ui.icons.success" data-slot="tierFeatureIcon" :class="ui.tierFeatureIcon({ class: uiProp?.tierFeatureIcon, active: true })" />
       <template v-else>
         {{ feature.tiers[tier.id] }}
       </template>
     </template>
 
-    <UIcon v-else :name="appConfig.ui.icons.minus" :class="ui.tierFeatureIcon({ class: uiTheme?.slots?.tierFeatureIcon })" />
+    <UIcon v-else :name="appConfig.ui.icons.minus" data-slot="tierFeatureIcon" :class="ui.tierFeatureIcon({ class: uiProp?.tierFeatureIcon })" />
   </DefineFeatureTemplate>
 
-  <Primitive :as="as" v-bind="$attrs" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
-    <table :class="ui.table({ class: uiTheme?.slots?.table })">
-      <caption v-if="caption || !!slots.caption" :class="ui.caption({ class: [uiTheme?.slots?.caption] })">
+  <Primitive :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <table data-slot="table" :class="ui.table({ class: uiProp?.table })">
+      <caption v-if="caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [uiProp?.caption] })">
         <slot name="caption">
           {{ caption || t('pricingTable.caption') }}
         </slot>
       </caption>
 
-      <thead :class="ui.thead({ class: uiTheme?.slots?.thead })">
-        <tr :class="ui.tr({ class: uiTheme?.slots?.tr })">
+      <thead data-slot="thead" :class="ui.thead({ class: uiProp?.thead })">
+        <tr data-slot="tr" :class="ui.tr({ class: uiProp?.tr })">
           <td />
 
           <th
             v-for="(tier, index) in tiers"
             :key="index"
             scope="col"
-            :class="ui.tier({ class: uiTheme?.slots?.tier, highlight: tier.highlight })"
+            data-slot="tier"
+            :class="ui.tier({ class: uiProp?.tier, highlight: tier.highlight })"
           >
             <ReuseTierTemplate :tier="tier" />
           </th>
         </tr>
       </thead>
 
-      <tbody :class="ui.tbody({ class: uiTheme?.slots?.tbody })">
+      <tbody data-slot="tbody" :class="ui.tbody({ class: uiProp?.tbody })">
         <template v-for="(section, sectionIndex) in sections" :key="sectionIndex">
-          <tr :class="ui.tr({ class: uiTheme?.slots?.tr, section: sectionIndex > 0 })">
-            <th scope="row" :class="ui.th({ class: uiTheme?.slots?.th })">
-              <div v-if="section.title || !!slots['section-title'] || !!slots[(`section-${formatSlotName(section)}-title` as keyof PricingTableSlots<T>)]" :class="ui.sectionTitle({ class: uiTheme?.slots?.sectionTitle })">
+          <tr data-slot="tr" :class="ui.tr({ class: uiProp?.tr, section: sectionIndex > 0 })">
+            <th scope="row" data-slot="th" :class="ui.th({ class: uiProp?.th })">
+              <div v-if="section.title || !!slots['section-title'] || !!slots[(`section-${formatSlotName(section)}-title` as keyof PricingTableSlots<T>)]" data-slot="sectionTitle" :class="ui.sectionTitle({ class: uiProp?.sectionTitle })">
                 <slot :name="(`section-${formatSlotName(section)}-title` as keyof PricingTableSlots<T>)" :section="section">
                   <slot name="section-title" :section="section">
                     {{ section.title }}
@@ -273,13 +275,14 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
             <td
               v-for="(tier, index) in tiers"
               :key="`${sectionIndex}-tier-${index}`"
-              :class="ui.td({ class: uiTheme?.slots?.td, highlight: tier.highlight })"
+              data-slot="td"
+              :class="ui.td({ class: uiProp?.td, highlight: tier.highlight })"
             />
           </tr>
 
           <tr v-for="(feature, featureIndex) in section.features" :key="`${sectionIndex}-feature-${featureIndex}`">
-            <th scope="row" :class="ui.th({ class: uiTheme?.slots?.th })">
-              <div :class="ui.featureTitle({ class: uiTheme?.slots?.featureTitle })">
+            <th scope="row" data-slot="th" :class="ui.th({ class: uiProp?.th })">
+              <div data-slot="featureTitle" :class="ui.featureTitle({ class: uiProp?.featureTitle })">
                 <slot :name="(`feature-${formatSlotName(feature)}-title` as keyof PricingTableSlots<T>)" :feature="feature" :section="section">
                   <slot name="feature-title" :feature="feature" :section="section">
                     {{ feature.title }}
@@ -291,9 +294,10 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
             <td
               v-for="(tier, index) in tiers"
               :key="`${sectionIndex}-feature-${featureIndex}-tier-${index}`"
-              :class="ui.td({ class: uiTheme?.slots?.td, highlight: tier.highlight })"
+              data-slot="td"
+              :class="ui.td({ class: uiProp?.td, highlight: tier.highlight })"
             >
-              <div :class="ui.featureValue({ class: uiTheme?.slots?.featureValue })">
+              <div data-slot="featureValue" :class="ui.featureValue({ class: uiProp?.featureValue })">
                 <slot :name="(`feature-${formatSlotName(feature)}-value` as keyof PricingTableSlots<T>)" :feature="feature" :tier="(tier as T)" :section="section">
                   <slot name="feature-value" :feature="feature" :tier="(tier as T)" :section="section">
                     <ReuseFeatureTemplate :tier="tier" :feature="feature" />
@@ -306,12 +310,12 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
       </tbody>
     </table>
 
-    <ul :class="ui.list({ class: uiTheme?.slots?.list })">
-      <li v-for="(tier, index) in tiers" :key="index" :class="ui.item({ class: uiTheme?.slots?.item, highlight: tier.highlight })">
+    <ul data-slot="list" :class="ui.list({ class: uiProp?.list })">
+      <li v-for="(tier, index) in tiers" :key="index" data-slot="item" :class="ui.item({ class: uiProp?.item, highlight: tier.highlight })">
         <ReuseTierTemplate :tier="tier" />
 
-        <div v-for="(section, sectionIndex) in sections" :key="`section-${sectionIndex}`" :class="ui.section({ class: uiTheme?.slots?.section })">
-          <div v-if="section.title" :class="ui.sectionTitle({ class: uiTheme?.slots?.sectionTitle })">
+        <div v-for="(section, sectionIndex) in sections" :key="`section-${sectionIndex}`" data-slot="section" :class="ui.section({ class: uiProp?.section })">
+          <div v-if="section.title" data-slot="sectionTitle" :class="ui.sectionTitle({ class: uiProp?.sectionTitle })">
             <slot :name="(`section-${formatSlotName(section)}-title` as keyof PricingTableSlots<T>)" :section="section">
               <slot name="section-title" :section="section">
                 {{ section.title }}
@@ -319,8 +323,8 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
             </slot>
           </div>
 
-          <div v-for="(feature, featureIndex) in section.features" :key="`section-${sectionIndex}-feature-${featureIndex}`" :class="ui.feature({ class: uiTheme?.slots?.feature })">
-            <div :class="ui.featureTitle({ class: uiTheme?.slots?.featureTitle })">
+          <div v-for="(feature, featureIndex) in section.features" :key="`section-${sectionIndex}-feature-${featureIndex}`" data-slot="feature" :class="ui.feature({ class: uiProp?.feature })">
+            <div data-slot="featureTitle" :class="ui.featureTitle({ class: uiProp?.featureTitle })">
               <slot :name="(`feature-${formatSlotName(feature)}-title` as keyof PricingTableSlots<T>)" :feature="feature" :section="section">
                 <slot name="feature-title" :feature="feature" :section="section">
                   {{ feature.title }}
@@ -328,7 +332,7 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
               </slot>
             </div>
 
-            <div :class="ui.featureValue({ class: uiTheme?.slots?.featureValue })">
+            <div data-slot="featureValue" :class="ui.featureValue({ class: uiProp?.featureValue })">
               <slot :name="(`feature-${formatSlotName(feature)}-value` as keyof PricingTableSlots<T>)" :feature="feature" :tier="(tier as T)" :section="section">
                 <slot name="feature-value" :feature="feature" :tier="(tier as T)" :section="section">
                   <ReuseFeatureTemplate :tier="tier" :feature="feature" />

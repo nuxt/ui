@@ -1,11 +1,14 @@
 import { describe, it, expect, vi, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { mount } from '@vue/test-utils'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
 import type { FileUploadProps, FileUploadSlots } from '../../src/runtime/components/FileUpload.vue'
+import type { FormInputEvents } from '../../src/module'
 import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '../../src/module'
 import theme from '#build/ui/file-upload'
+import { UTheme } from '#components'
 
 // Mock URL.createObjectURL to return deterministic blob URLs
 URL.createObjectURL = vi.fn((file: File | Blob) => {
@@ -61,6 +64,7 @@ describe('FileUpload', () => {
     ['with multiple', { props: { ...props, multiple: true } }],
     ['without dropzone', { props: { dropzone: false } }],
     ['without interactive', { props: { interactive: false } }],
+    ['without preview', { props: { ...props, preview: false } }],
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with fileIcon', { props: { ...props, fileIcon: 'i-lucide-house' } }],
@@ -87,6 +91,21 @@ describe('FileUpload', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FileUploadProps, slots?: Partial<FileUploadSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, FileUpload)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(FileUpload, {
+      props: {
+        label: 'Upload files',
+        description: 'Select files to upload',
+        required: true
+      },
+      attrs: {
+        'aria-label': 'Choose a file'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {
@@ -155,5 +174,18 @@ describe('FileUpload', () => {
       await setFilesOnInput(input, [new File(['foo'], 'valid', { type: 'text/plain' })])
       expect(wrapper.text()).not.toContain('Error message')
     })
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { FileUpload, UTheme },
+      template: `
+        <UTheme :theme="{ fileUpload: { slots: { root: 'test-theme-class' } } }">
+          <FileUpload />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

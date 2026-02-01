@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/accordion'
+import type { AccordionProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseAccordion = ComponentConfig<typeof theme, AppConfig, 'accordion', 'ui.prose'>
@@ -8,6 +9,7 @@ type ProseAccordion = ComponentConfig<typeof theme, AppConfig, 'accordion', 'ui.
 export interface ProseAccordionProps {
   type?: 'single' | 'multiple'
   class?: any
+  ui?: ProseAccordion['slots'] & AccordionProps['ui']
 }
 
 export interface ProseAccordionSlots {
@@ -29,6 +31,7 @@ const slots = defineSlots<ProseAccordionSlots>()
 
 const appConfig = useAppConfig() as ProseAccordion['AppConfig']
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.accordion || {}) }))
 
 const rerenderCount = ref(1)
@@ -62,7 +65,7 @@ onBeforeUpdate(() => rerenderCount.value++)
 </script>
 
 <template>
-  <UAccordion :type="type" :items="items" :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui())">
+  <UAccordion :type="type" :items="items" :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui(), props.ui)">
     <template #content="{ item }">
       <component :is="item.component" />
     </template>

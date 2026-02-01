@@ -25,7 +25,7 @@ export interface BlogPostProps {
   /** The authors of the blog post. */
   authors?: UserProps[]
   /** The image of the blog post. Can be a string or an object. */
-  image?: string | Partial<HTMLImageElement>
+  image?: string | (Partial<HTMLImageElement> & { [key: string]: any })
   /**
    * The orientation of the blog post.
    * @defaultValue 'vertical'
@@ -47,8 +47,8 @@ export interface BlogPostSlots {
   badge(props?: {}): any
   title(props?: {}): any
   description(props?: {}): any
-  authors(props?: {}): any
-  header(props?: {}): any
+  authors(props: { ui: BlogPost['ui'] }): any
+  header(props: { ui: BlogPost['ui'] }): any
   body(props?: {}): any
   footer(props?: {}): any
 }
@@ -58,7 +58,7 @@ export interface BlogPostSlots {
 import { computed } from 'vue'
 import { Primitive, useDateFormatter } from 'reka-ui'
 import ImageComponent from '#build/ui-image-component'
-import { useLocale, useAppConfig, useComponentUiTheme } from '#imports'
+import { useLocale, useAppConfig, useComponentUI } from '#imports'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -77,7 +77,7 @@ const slots = defineSlots<BlogPostSlots>()
 
 const { locale } = useLocale()
 const appConfig = useAppConfig() as BlogPost['AppConfig']
-const uiTheme = useComponentUiTheme('blogPost', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('blogPost', props)
 const formatter = useDateFormatter(locale.value.code)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPost || {}) })({
@@ -116,18 +116,19 @@ const ariaLabel = computed(() => {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })" @click="onClick">
-    <div v-if="image || !!slots.header" :class="ui.header({ class: uiTheme?.slots?.header })">
-      <slot name="header">
+  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })" @click="onClick">
+    <div v-if="image || !!slots.header" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+      <slot name="header" :ui="ui">
         <component
           :is="ImageComponent"
           v-bind="typeof image === 'string' ? { src: image, alt: title } : { alt: title, ...image }"
-          :class="ui.image({ class: uiTheme?.slots?.image, to: !!to })"
+          data-slot="image"
+          :class="ui.image({ class: uiProp?.image, to: !!to })"
         />
       </slot>
     </div>
 
-    <div :class="ui.body({ class: uiTheme?.slots?.body })">
+    <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
       <ULink
         v-if="to"
         :aria-label="ariaLabel"
@@ -140,32 +141,39 @@ const ariaLabel = computed(() => {
       </ULink>
 
       <slot name="body">
-        <div v-if="(date || !!slots.date) || (badge || !!slots.badge)" :class="ui.meta({ class: uiTheme?.slots?.meta })">
+        <div v-if="(date || !!slots.date) || (badge || !!slots.badge)" data-slot="meta" :class="ui.meta({ class: uiProp?.meta })">
           <slot name="badge">
-            <UBadge v-if="badge" color="neutral" variant="subtle" v-bind="typeof badge === 'string' ? { label: badge } : badge" :class="ui.badge({ class: uiTheme?.slots?.badge })" />
+            <UBadge
+              v-if="badge"
+              color="neutral"
+              variant="subtle"
+              v-bind="typeof badge === 'string' ? { label: badge } : badge"
+              data-slot="badge"
+              :class="ui.badge({ class: uiProp?.badge })"
+            />
           </slot>
 
-          <time v-if="date || !!slots.date" :datetime="datetime" :class="ui.date({ class: uiTheme?.slots?.date })">
+          <time v-if="date || !!slots.date" :datetime="datetime" data-slot="date" :class="ui.date({ class: uiProp?.date })">
             <slot name="date">
               {{ date }}
             </slot>
           </time>
         </div>
 
-        <h2 v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
+        <h2 v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
           <slot name="title">
             {{ title }}
           </slot>
         </h2>
 
-        <div v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
+        <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
           <slot name="description">
             {{ description }}
           </slot>
         </div>
 
-        <div v-if="authors?.length || !!slots.authors" :class="ui.authors({ class: uiTheme?.slots?.authors })">
-          <slot name="authors">
+        <div v-if="authors?.length || !!slots.authors" data-slot="authors" :class="ui.authors({ class: uiProp?.authors })">
+          <slot name="authors" :ui="ui">
             <template v-if="authors?.length">
               <UAvatarGroup v-if="authors.length > 1">
                 <ULink
@@ -173,7 +181,8 @@ const ariaLabel = computed(() => {
                   :key="index"
                   :to="author.to"
                   :target="author.target"
-                  :class="ui.avatar({ class: uiTheme?.slots?.avatar, to: !!author.to })"
+                  data-slot="avatar"
+                  :class="ui.avatar({ class: uiProp?.avatar, to: !!author.to })"
                   raw
                 >
                   <UAvatar v-bind="author.avatar" />
@@ -186,7 +195,7 @@ const ariaLabel = computed(() => {
       </slot>
     </div>
 
-    <div v-if="!!slots.footer" :class="ui.footer({ class: uiTheme?.slots?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

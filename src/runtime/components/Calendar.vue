@@ -77,6 +77,10 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    */
   color?: Calendar['variants']['color']
   /**
+   * @defaultValue 'solid'
+   */
+  variant?: Calendar['variants']['variant']
+  /**
    * @defaultValue 'md'
    */
   size?: Calendar['variants']['size']
@@ -110,7 +114,7 @@ import { computed } from 'vue'
 import { useForwardPropsEmits } from 'reka-ui'
 import { Calendar as SingleCalendar, RangeCalendar } from 'reka-ui/namespaced'
 import { reactiveOmit } from '@vueuse/core'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -123,11 +127,11 @@ const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
 const emits = defineEmits<CalendarEmits<R, M>>()
 defineSlots<CalendarSlots>()
 
-const { code: locale, dir, t } = useLocale()
+const { dir, t } = useLocale()
 const appConfig = useAppConfig() as Calendar['AppConfig']
-const uiTheme = useComponentUiTheme('calendar', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('calendar', props)
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
 
 const nextYearIcon = computed(() => props.nextYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
 const nextMonthIcon = computed(() => props.nextMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
@@ -136,6 +140,7 @@ const prevMonthIcon = computed(() => props.prevMonthIcon || (dir.value === 'rtl'
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })({
   color: props.color,
+  variant: props.variant,
   size: props.size
 }))
 
@@ -156,18 +161,17 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
     v-bind="rootProps"
     :model-value="(modelValue as DateValue | DateValue[])"
     :default-value="(defaultValue as DateValue)"
-    :locale="locale"
-    :dir="dir"
-    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
+    data-slot="root"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
   >
-    <Calendar.Header :class="ui.header({ class: uiTheme?.slots?.header })">
+    <Calendar.Header data-slot="header" :class="ui.header({ class: uiProp?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>
         <UButton :icon="prevYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevYear" />
       </Calendar.Prev>
       <Calendar.Prev v-if="props.monthControls" :aria-label="t('calendar.prevMonth')" as-child>
         <UButton :icon="prevMonthIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevMonth" />
       </Calendar.Prev>
-      <Calendar.Heading v-slot="{ headingValue }" :class="ui.heading({ class: uiTheme?.slots?.heading })">
+      <Calendar.Heading v-slot="{ headingValue }" data-slot="heading" :class="ui.heading({ class: uiProp?.heading })">
         <slot name="heading" :value="headingValue">
           {{ headingValue }}
         </slot>
@@ -179,18 +183,20 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
         <UButton :icon="nextYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.nextYear" />
       </Calendar.Next>
     </Calendar.Header>
-    <div :class="ui.body({ class: uiTheme?.slots?.body })">
+    <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
       <Calendar.Grid
         v-for="month in grid"
         :key="month.value.toString()"
-        :class="ui.grid({ class: uiTheme?.slots?.grid })"
+        data-slot="grid"
+        :class="ui.grid({ class: uiProp?.grid })"
       >
         <Calendar.GridHead>
-          <Calendar.GridRow :class="ui.gridWeekDaysRow({ class: uiTheme?.slots?.gridWeekDaysRow })">
+          <Calendar.GridRow data-slot="gridWeekDaysRow" :class="ui.gridWeekDaysRow({ class: uiProp?.gridWeekDaysRow })">
             <Calendar.HeadCell
               v-for="day in weekDays"
               :key="day"
-              :class="ui.headCell({ class: uiTheme?.slots?.headCell })"
+              data-slot="headCell"
+              :class="ui.headCell({ class: uiProp?.headCell })"
             >
               <slot name="week-day" :day="day">
                 {{ day }}
@@ -198,22 +204,25 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
             </Calendar.HeadCell>
           </Calendar.GridRow>
         </Calendar.GridHead>
-        <Calendar.GridBody :class="ui.gridBody({ class: uiTheme?.slots?.gridBody })">
+        <Calendar.GridBody data-slot="gridBody" :class="ui.gridBody({ class: uiProp?.gridBody })">
           <Calendar.GridRow
             v-for="(weekDates, index) in month.rows"
             :key="`weekDate-${index}`"
-            :class="ui.gridRow({ class: uiTheme?.slots?.gridRow })"
+            data-slot="gridRow"
+            :class="ui.gridRow({ class: uiProp?.gridRow })"
           >
             <Calendar.Cell
               v-for="weekDate in weekDates"
               :key="weekDate.toString()"
               :date="weekDate"
-              :class="ui.cell({ class: uiTheme?.slots?.cell })"
+              data-slot="cell"
+              :class="ui.cell({ class: uiProp?.cell })"
             >
               <Calendar.CellTrigger
                 :day="weekDate"
                 :month="month.value"
-                :class="ui.cellTrigger({ class: uiTheme?.slots?.cellTrigger })"
+                data-slot="cellTrigger"
+                :class="ui.cellTrigger({ class: uiProp?.cellTrigger })"
               >
                 <slot name="day" :day="weekDate">
                   {{ weekDate.day }}

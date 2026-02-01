@@ -1,8 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Avatar from '../../src/runtime/components/Avatar.vue'
 import type { AvatarProps, AvatarSlots } from '../../src/runtime/components/Avatar.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/avatar'
+import { UTheme } from '#components'
 
 describe('Avatar', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -25,5 +28,29 @@ describe('Avatar', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarProps, slots?: AvatarSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Avatar)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Avatar, {
+      props: {
+        alt: 'Benjamin Canac',
+        src: 'https://github.com/benjamincanac.png'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Avatar, UTheme },
+      template: `
+        <UTheme :theme="{ avatar: { slots: { root: 'test-theme-class' } } }">
+          <Avatar alt="Test" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

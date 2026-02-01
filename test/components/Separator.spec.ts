@@ -1,4 +1,7 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { UTheme } from '#components'
 import Separator from '../../src/runtime/components/Separator.vue'
 import type { SeparatorProps, SeparatorSlots } from '../../src/runtime/components/Separator.vue'
 import ComponentRender from '../component-render'
@@ -24,5 +27,29 @@ describe('Separator', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SeparatorProps, slots?: Partial<SeparatorSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Separator)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Separator, {
+      props: {
+        label: '+1',
+        icon: 'i-lucide-image'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Separator, UTheme },
+      template: `
+        <UTheme :theme="{ separator: { slots: { root: 'test-theme-class' } } }">
+          <Separator />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

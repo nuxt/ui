@@ -1,8 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Chip from '../../src/runtime/components/Chip.vue'
 import type { ChipProps, ChipSlots } from '../../src/runtime/components/Chip.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/chip'
+import { UTheme } from '#components'
 
 describe('Chip', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -25,5 +28,28 @@ describe('Chip', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChipProps, slots?: Partial<ChipSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Chip)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Chip, {
+      props: {
+        text: 'Text'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Chip, UTheme },
+      template: `
+        <UTheme :theme="{ chip: { slots: { base: 'test-theme-class' } } }">
+          <Chip text="5" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('span').classes()).toContain('test-theme-class')
   })
 })

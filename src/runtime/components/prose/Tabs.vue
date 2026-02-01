@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/tabs'
+import type { TabsProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseTabs = ComponentConfig<typeof theme, AppConfig, 'tabs', 'ui.prose'>
@@ -20,6 +21,7 @@ export interface ProseTabsProps {
    */
   hash?: string
   class?: any
+  ui?: ProseTabs['slots'] & TabsProps['ui']
 }
 
 export interface ProseTabsSlots {
@@ -43,6 +45,7 @@ const model = defineModel<string>()
 
 const appConfig = useAppConfig() as ProseTabs['AppConfig']
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.tabs || {}) }))
 
 const rerenderCount = ref(1)
@@ -112,7 +115,7 @@ onBeforeUpdate(() => rerenderCount.value++)
     :items="items"
     :class="props.class"
     :unmount-on-hide="false"
-    :ui="transformUI(ui())"
+    :ui="transformUI(ui(), props.ui)"
     @update:model-value="onUpdateModelValue"
   >
     <template #content="{ item }">

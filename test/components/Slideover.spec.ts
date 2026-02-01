@@ -1,4 +1,7 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { UTheme } from '#components'
 import Slideover from '../../src/runtime/components/Slideover.vue'
 import type { SlideoverProps, SlideoverSlots } from '../../src/runtime/components/Slideover.vue'
 import ComponentRender from '../component-render'
@@ -33,5 +36,30 @@ describe('Slideover', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SlideoverProps, slots?: Partial<SlideoverSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Slideover)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Slideover, {
+      props: {
+        ...props,
+        title: 'Title',
+        description: 'Description'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Slideover, UTheme },
+      template: `
+        <UTheme :theme="{ slideover: { slots: { content: 'test-theme-class' } } }">
+          <Slideover :open="true" :portal="false" title="Title" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[role="dialog"]').classes()).toContain('test-theme-class')
   })
 })

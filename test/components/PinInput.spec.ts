@@ -1,12 +1,14 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises, mount } from '@vue/test-utils'
 import PinInput from '../../src/runtime/components/PinInput.vue'
 import type { PinInputProps } from '../../src/runtime/components/PinInput.vue'
-import ComponentRender from '../component-render'
-import theme from '#build/ui/pin-input'
-
-import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '../../src/module'
+import ComponentRender from '../component-render'
+import { renderForm } from '../utils/form'
+import theme from '#build/ui/pin-input'
+import { UTheme } from '#components'
 
 describe('PinInput', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -126,7 +128,33 @@ describe('PinInput', () => {
 
       await input.vm.$emit('update:modelValue', ['1', '2', '3', '4', '5'])
       await flushPromises()
-      expect(wrapper.text()).not.toContain('Error message')
+      expect(wrapper.html()).not.toContain('Error message')
     })
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PinInput, {
+      props: {
+        length: 4,
+        placeholder: '*',
+        required: true,
+        otp: true
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { PinInput, UTheme },
+      template: `
+        <UTheme :theme="{ pinInput: { slots: { root: 'test-theme-class' } } }">
+          <PinInput />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

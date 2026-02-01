@@ -1,18 +1,18 @@
 <script setup lang="ts">
-const title = 'Meet the Team'
-const description = 'The development of Nuxt UI is led by a community of developers from all over the world.'
+const { data: page } = await useAsyncData('team', () => queryCollection('team').first())
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
-  title,
-  description,
-  ogTitle: `${title} - Nuxt UI`,
-  ogDescription: description
+  title: page.value.title,
+  description: page.value.description,
+  ogTitle: `${page.value.title} - Nuxt UI`,
+  ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs', {
-  headline: 'Community'
-})
+defineOgImageComponent('Docs')
 
 const { data: module } = await useFetch('/api/module.json')
 
@@ -32,13 +32,15 @@ const icons = {
 </script>
 
 <template>
-  <UMain>
+  <div v-if="page">
     <UPageHero
-      :title="title"
-      :description="description"
+      :title="page.hero.title"
+      :description="page.hero.description"
       class="relative"
-      orientation="vertical"
-      :ui="{ title: 'text-balance', container: 'relative' }"
+      :ui="{
+        title: 'text-balance',
+        container: 'relative lg:py-32'
+      }"
     >
       <template #top>
         <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
@@ -154,5 +156,5 @@ const icons = {
         </UPageCard>
       </UPageGrid>
     </UPageSection>
-  </UMain>
+  </div>
 </template>

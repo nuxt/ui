@@ -94,7 +94,7 @@ Use the ChatPrompt component with the `Chat` class from AI SDK v5 to display a c
 
 Pass the `input` prop alongside the `error` prop to disable the textarea when an error occurs.
 
-```vue [pages/\[id\\].vue] {2-4,7,11-15,19}
+```vue [pages/\[id\\].vue] {2,5,13-17,34,36}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
@@ -103,13 +103,13 @@ const input = ref('')
 
 const chat = new Chat({
   onError(error) {
-    console.error('Chat error:', error)
+    console.error(error)
   }
 })
 
-const handleSubmit = (e: Event) => {
-  e.preventDefault()
+function onSubmit() {
   chat.sendMessage({ text: input.value })
+
   input.value = ''
 }
 </script>
@@ -120,16 +120,16 @@ const handleSubmit = (e: Event) => {
       <UContainer>
         <UChatMessages :messages="chat.messages" :status="chat.status">
           <template #content="{ message }">
-            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
+            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" class="*:first:mt-0 *:last:mb-0" />
           </template>
         </UChatMessages>
       </UContainer>
     </template>
 
     <template #footer>
-      <UContainer>
-        <UChatPrompt v-model="input" :error="chat.error" @submit="handleSubmit">
-          <UChatPromptSubmit :status="chat.status" @stop="chat.stop" @reload="chat.regenerate" />
+      <UContainer class="pb-4 sm:pb-6">
+        <UChatPrompt v-model="input" :error="chat.error" @submit="onSubmit">
+          <UChatPromptSubmit :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
         </UChatPrompt>
       </UContainer>
     </template>
@@ -139,18 +139,16 @@ const handleSubmit = (e: Event) => {
 
 You can also use it as a starting point for a chat interface.
 
-```vue [pages/index.vue] {2,5,9-12}
+```vue [pages/index.vue] {2,4,8-15,24,26}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
 
 const input = ref('')
+
 const chat = new Chat()
 
 async function onSubmit() {
-  const userInput = input.value
-  input.value = ''
-
-  chat.sendMessage({ text: userInput })
+  chat.sendMessage({ text: input.value })
 
   // Navigate to chat page after first message
   if (chat.messages.length === 1) {
@@ -180,6 +178,10 @@ async function onSubmit() {
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attributes" target="_blank"}
+This component also supports all native `<textarea>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots
@@ -187,6 +189,14 @@ async function onSubmit() {
 ### Emits
 
 :component-emits
+
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `textareaRef`{lang="ts-type"} | `Ref<HTMLTextAreaElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

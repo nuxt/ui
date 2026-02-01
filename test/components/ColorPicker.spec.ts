@@ -1,9 +1,11 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ColorPicker from '../../src/runtime/components/ColorPicker.vue'
 import type { ColorPickerProps } from '../../src/runtime/components/ColorPicker.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/color-picker'
+import { UTheme } from '#components'
 
 describe('ColorPicker', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -28,6 +30,12 @@ describe('ColorPicker', () => {
     expect(html).toMatchSnapshot()
   })
 
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(ColorPicker)
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = await mountSuspended(ColorPicker)
@@ -35,5 +43,18 @@ describe('ColorPicker', () => {
 
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['#00C16A']] })
     })
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { ColorPicker, UTheme },
+      template: `
+        <UTheme :theme="{ colorPicker: { slots: { root: 'test-theme-class' } } }">
+          <ColorPicker />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

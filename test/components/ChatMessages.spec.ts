@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChatMessages from '../../src/runtime/components/ChatMessages.vue'
 import type { ChatMessagesProps, ChatMessagesSlots } from '../../src/runtime/components/ChatMessages.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('ChatMessages', () => {
   const statuses = ['ready', 'submitted', 'streaming', 'error'] as any
@@ -10,11 +13,11 @@ describe('ChatMessages', () => {
     messages: [{
       id: '6045235a-a435-46b8-989d-2df38ca2eb47',
       role: 'user' as const,
-      parts: [{ type: 'text', text: 'Hello, how are you?' }]
+      parts: [{ type: 'text' as const, text: 'Hello, how are you?' }]
     }, {
       id: '6045235a-a435-46b8-989d-2df38ca2eb47',
       role: 'assistant' as const,
-      parts: [{ type: 'text', text: 'I am fine, thank you!' }]
+      parts: [{ type: 'text' as const, text: 'I am fine, thank you!' }]
     }]
   }
 
@@ -35,5 +38,26 @@ describe('ChatMessages', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatMessagesProps, slots?: Partial<ChatMessagesSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ChatMessages)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(ChatMessages, {
+      props
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { ChatMessages, UTheme },
+      template: `
+        <UTheme :theme="{ chatMessages: { slots: { root: 'test-theme-class' } } }">
+          <ChatMessages :messages="[{ id: '1', role: 'user', parts: [{ type: 'text', text: 'Hello' }] }]" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

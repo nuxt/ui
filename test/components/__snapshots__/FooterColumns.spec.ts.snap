@@ -1,55 +1,55 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`FooterColumns > renders with as correctly 1`] = `
-"<section class="xl:grid xl:grid-cols-3 xl:gap-8">
+"<section data-slot="root" class="xl:grid xl:grid-cols-3 xl:gap-8">
   <!--v-if-->
-  <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
+  <div data-slot="center" class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
     <div>
-      <h3 class="text-sm font-semibold">Community</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true"></span><span class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Community</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Documentation<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Design Kit<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Design Kit<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Enterprise</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Support<!--v-if--></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Enterprise</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Support<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Agencies<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Agencies<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Jobs<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Jobs<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Sponsors<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Sponsors<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Solutions</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Solutions</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
       </ul>
     </div>
@@ -59,55 +59,55 @@ exports[`FooterColumns > renders with as correctly 1`] = `
 `;
 
 exports[`FooterColumns > renders with class correctly 1`] = `
-"<nav class="xl:grid xl:grid-cols-3 xl:gap-8 px-10">
+"<nav data-slot="root" class="xl:grid xl:grid-cols-3 xl:gap-8 px-10">
   <!--v-if-->
-  <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
+  <div data-slot="center" class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
     <div>
-      <h3 class="text-sm font-semibold">Community</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true"></span><span class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Community</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Documentation<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Design Kit<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Design Kit<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Enterprise</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Support<!--v-if--></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Enterprise</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Support<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Agencies<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Agencies<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Jobs<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Jobs<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Sponsors<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Sponsors<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Solutions</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Solutions</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
       </ul>
     </div>
@@ -117,55 +117,55 @@ exports[`FooterColumns > renders with class correctly 1`] = `
 `;
 
 exports[`FooterColumns > renders with column-label slot correctly 1`] = `
-"<nav class="xl:grid xl:grid-cols-3 xl:gap-8">
+"<nav data-slot="root" class="xl:grid xl:grid-cols-3 xl:gap-8">
   <!--v-if-->
-  <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
+  <div data-slot="center" class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
     <div>
-      <h3 class="text-sm font-semibold">Column label slot</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true"></span><span class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Column label slot</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Documentation<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Design Kit<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Design Kit<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Column label slot</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Support<!--v-if--></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Column label slot</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Support<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Agencies<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Agencies<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Jobs<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Jobs<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Sponsors<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Sponsors<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Column label slot</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Column label slot</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
       </ul>
     </div>
@@ -175,55 +175,55 @@ exports[`FooterColumns > renders with column-label slot correctly 1`] = `
 `;
 
 exports[`FooterColumns > renders with columns correctly 1`] = `
-"<nav class="xl:grid xl:grid-cols-3 xl:gap-8">
+"<nav data-slot="root" class="xl:grid xl:grid-cols-3 xl:gap-8">
   <!--v-if-->
-  <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
+  <div data-slot="center" class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
     <div>
-      <h3 class="text-sm font-semibold">Community</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true"></span><span class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Community</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Documentation<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Design Kit<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Design Kit<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Enterprise</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Support<!--v-if--></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Enterprise</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Support<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Agencies<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Agencies<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Jobs<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Jobs<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Sponsors<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Sponsors<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Solutions</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Solutions</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
       </ul>
     </div>
@@ -233,63 +233,63 @@ exports[`FooterColumns > renders with columns correctly 1`] = `
 `;
 
 exports[`FooterColumns > renders with default slot correctly 1`] = `
-"<nav class="xl:grid xl:grid-cols-3 xl:gap-8">
+"<nav data-slot="root" class="xl:grid xl:grid-cols-3 xl:gap-8">
   <!--v-if-->
-  <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">Default slot</div>
+  <div data-slot="center" class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">Default slot</div>
   <!--v-if-->
 </nav>"
 `;
 
 exports[`FooterColumns > renders with left slot correctly 1`] = `
-"<nav class="xl:grid xl:grid-cols-3 xl:gap-8">
-  <div class="mb-10 xl:mb-0">Left slot</div>
-  <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
+"<nav data-slot="root" class="xl:grid xl:grid-cols-3 xl:gap-8">
+  <div data-slot="left" class="mb-10 xl:mb-0">Left slot</div>
+  <div data-slot="center" class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
     <div>
-      <h3 class="text-sm font-semibold">Community</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true"></span><span class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Community</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Documentation<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Design Kit<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Design Kit<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Enterprise</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Support<!--v-if--></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Enterprise</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Support<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Agencies<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Agencies<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Jobs<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Jobs<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Sponsors<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Sponsors<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Solutions</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Solutions</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
       </ul>
     </div>
@@ -299,34 +299,34 @@ exports[`FooterColumns > renders with left slot correctly 1`] = `
 `;
 
 exports[`FooterColumns > renders with link slot correctly 1`] = `
-"<nav class="xl:grid xl:grid-cols-3 xl:gap-8">
+"<nav data-slot="root" class="xl:grid xl:grid-cols-3 xl:gap-8">
   <!--v-if-->
-  <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
+  <div data-slot="center" class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
     <div>
-      <h3 class="text-sm font-semibold">Community</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</a></li>
-        <li class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</a></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</button></li>
+      <h3 data-slot="label" class="text-sm font-semibold">Community</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</a></li>
+        <li data-slot="item" class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</a></li>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</button></li>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Enterprise</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</button></li>
+      <h3 data-slot="label" class="text-sm font-semibold">Enterprise</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</button></li>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</button></li>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</button></li>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Solutions</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</a></li>
-        <li class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</a></li>
-        <li class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</a></li>
-        <li class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</a></li>
+      <h3 data-slot="label" class="text-sm font-semibold">Solutions</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</a></li>
+        <li data-slot="item" class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</a></li>
+        <li data-slot="item" class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</a></li>
+        <li data-slot="item" class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link slot</a></li>
       </ul>
     </div>
   </div>
@@ -335,55 +335,55 @@ exports[`FooterColumns > renders with link slot correctly 1`] = `
 `;
 
 exports[`FooterColumns > renders with link-label slot correctly 1`] = `
-"<nav class="xl:grid xl:grid-cols-3 xl:gap-8">
+"<nav data-slot="root" class="xl:grid xl:grid-cols-3 xl:gap-8">
   <!--v-if-->
-  <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
+  <div data-slot="center" class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
     <div>
-      <h3 class="text-sm font-semibold">Community</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true"></span><span class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Community</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Link label slot<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Link label slot<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Link label slot<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Link label slot<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Enterprise</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Link label slot<!--v-if--></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Enterprise</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Link label slot<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Link label slot<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Link label slot<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Link label slot<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Link label slot<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Link label slot<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Link label slot<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Solutions</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Solutions</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Link label slot<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
       </ul>
     </div>
@@ -393,34 +393,34 @@ exports[`FooterColumns > renders with link-label slot correctly 1`] = `
 `;
 
 exports[`FooterColumns > renders with link-leading slot correctly 1`] = `
-"<nav class="xl:grid xl:grid-cols-3 xl:gap-8">
+"<nav data-slot="root" class="xl:grid xl:grid-cols-3 xl:gap-8">
   <!--v-if-->
-  <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
+  <div data-slot="center" class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
     <div>
-      <h3 class="text-sm font-semibold">Community</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span class="truncate">Documentation<!--v-if--></span></button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span class="truncate">Design Kit<!--v-if--></span></button></li>
+      <h3 data-slot="label" class="text-sm font-semibold">Community</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span data-slot="linkLabel" class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span data-slot="linkLabel" class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span></button></li>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span data-slot="linkLabel" class="truncate">Design Kit<!--v-if--></span></button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Enterprise</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span class="truncate">Support<!--v-if--></span></button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span class="truncate">Agencies<!--v-if--></span></button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span class="truncate">Jobs<!--v-if--></span></button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span class="truncate">Sponsors<!--v-if--></span></button></li>
+      <h3 data-slot="label" class="text-sm font-semibold">Enterprise</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span data-slot="linkLabel" class="truncate">Support<!--v-if--></span></button></li>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span data-slot="linkLabel" class="truncate">Agencies<!--v-if--></span></button></li>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span data-slot="linkLabel" class="truncate">Jobs<!--v-if--></span></button></li>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span data-slot="linkLabel" class="truncate">Sponsors<!--v-if--></span></button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Solutions</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
+      <h3 data-slot="label" class="text-sm font-semibold">Solutions</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span data-slot="linkLabel" class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span data-slot="linkLabel" class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span data-slot="linkLabel" class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">Link leading slot<span data-slot="linkLabel" class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
       </ul>
     </div>
   </div>
@@ -429,55 +429,55 @@ exports[`FooterColumns > renders with link-leading slot correctly 1`] = `
 `;
 
 exports[`FooterColumns > renders with link-trailing slot correctly 1`] = `
-"<nav class="xl:grid xl:grid-cols-3 xl:gap-8">
+"<nav data-slot="root" class="xl:grid xl:grid-cols-3 xl:gap-8">
   <!--v-if-->
-  <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
+  <div data-slot="center" class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
     <div>
-      <h3 class="text-sm font-semibold">Community</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true"></span><span class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>Link trailing slot</a></li>
-        <li class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>Link trailing slot
+      <h3 data-slot="label" class="text-sm font-semibold">Community</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>Link trailing slot</a></li>
+        <li data-slot="item" class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>Link trailing slot
           </a></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Documentation<!--v-if--></span>Link trailing slot
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>Link trailing slot
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Design Kit<!--v-if--></span>Link trailing slot
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Design Kit<!--v-if--></span>Link trailing slot
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Enterprise</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Support<!--v-if--></span>Link trailing slot
+      <h3 data-slot="label" class="text-sm font-semibold">Enterprise</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Support<!--v-if--></span>Link trailing slot
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Agencies<!--v-if--></span>Link trailing slot
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Agencies<!--v-if--></span>Link trailing slot
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Jobs<!--v-if--></span>Link trailing slot
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Jobs<!--v-if--></span>Link trailing slot
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Sponsors<!--v-if--></span>Link trailing slot
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Sponsors<!--v-if--></span>Link trailing slot
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Solutions</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>Link trailing slot
+      <h3 data-slot="label" class="text-sm font-semibold">Solutions</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>Link trailing slot
           </a></li>
-        <li class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>Link trailing slot
+        <li data-slot="item" class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>Link trailing slot
           </a></li>
-        <li class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>Link trailing slot
+        <li data-slot="item" class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>Link trailing slot
           </a></li>
-        <li class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>Link trailing slot
+        <li data-slot="item" class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>Link trailing slot
           </a></li>
       </ul>
     </div>
@@ -487,113 +487,113 @@ exports[`FooterColumns > renders with link-trailing slot correctly 1`] = `
 `;
 
 exports[`FooterColumns > renders with right slot correctly 1`] = `
-"<nav class="xl:grid xl:grid-cols-3 xl:gap-8">
+"<nav data-slot="root" class="xl:grid xl:grid-cols-3 xl:gap-8">
   <!--v-if-->
-  <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
+  <div data-slot="center" class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
     <div>
-      <h3 class="text-sm font-semibold">Community</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true"></span><span class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Community</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Documentation<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Design Kit<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Design Kit<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Enterprise</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Support<!--v-if--></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Enterprise</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Support<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Agencies<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Agencies<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Jobs<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Jobs<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Sponsors<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Sponsors<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Solutions</h3>
-      <ul class="mt-6 space-y-4">
-        <li class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Solutions</h3>
+      <ul data-slot="list" class="mt-6 space-y-4">
+        <li data-slot="item" class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
       </ul>
     </div>
   </div>
-  <div class="mt-10 xl:mt-0">Right slot</div>
+  <div data-slot="right" class="mt-10 xl:mt-0">Right slot</div>
 </nav>"
 `;
 
 exports[`FooterColumns > renders with ui correctly 1`] = `
-"<nav class="xl:grid xl:grid-cols-3 xl:gap-8">
+"<nav data-slot="root" class="xl:grid xl:grid-cols-3 xl:gap-8">
   <!--v-if-->
-  <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
+  <div data-slot="center" class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
     <div>
-      <h3 class="text-sm font-semibold">Community</h3>
-      <ul class="mt-6 space-y-4 lg:gap-1.5">
-        <li class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true"></span><span class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span></a></li>
-        <li class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Community</h3>
+      <ul data-slot="list" class="mt-6 space-y-4 lg:gap-1.5">
+        <li data-slot="item" class="relative"><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors"><span class="iconify i-lucide:users size-5 shrink-0" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Nuxters<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span></a></li>
+        <li data-slot="item" class="relative"><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt on GitHub<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Documentation<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Documentation<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Design Kit<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Design Kit<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Enterprise</h3>
-      <ul class="mt-6 space-y-4 lg:gap-1.5">
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Support<!--v-if--></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Enterprise</h3>
+      <ul data-slot="list" class="mt-6 space-y-4 lg:gap-1.5">
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Support<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Agencies<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Agencies<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Jobs<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Jobs<!--v-if--></span>
           </button></li>
-        <li class="relative"><button type="button" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Sponsors<!--v-if--></span>
+        <li data-slot="item" class="relative"><button type="button" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Sponsors<!--v-if--></span>
           </button></li>
       </ul>
     </div>
     <div>
-      <h3 class="text-sm font-semibold">Solutions</h3>
-      <ul class="mt-6 space-y-4 lg:gap-1.5">
-        <li class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+      <h3 data-slot="label" class="text-sm font-semibold">Solutions</h3>
+      <ul data-slot="list" class="mt-6 space-y-4 lg:gap-1.5">
+        <li data-slot="item" class="relative"><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Content<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt Image<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
-        <li class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
-            <!--v-if--><span class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true"></span></span>
+        <li data-slot="item" class="relative"><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank" data-slot="link" class="group text-sm flex items-center gap-1.5 focus-visible:outline-primary text-muted hover:text-default transition-colors">
+            <!--v-if--><span data-slot="linkLabel" class="truncate">Nuxt UI<span class="iconify i-lucide:arrow-up-right size-3 absolute top-0 text-dimmed inline-block" aria-hidden="true" data-slot="linkLabelExternalIcon"></span></span>
           </a></li>
       </ul>
     </div>

@@ -67,7 +67,7 @@ export interface SlideoverSlots {
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { close: () => void, ui: { [K in keyof Required<Slideover['slots']>]: (props?: Record<string, any>) => string } }): any
+  close(props: { ui: Slideover['ui'] }): any
   body(props: { close: () => void }): any
   footer(props: { close: () => void }): any
 }
@@ -77,7 +77,7 @@ export interface SlideoverSlots {
 import { computed, toRef } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { tv } from '../utils/tv'
@@ -97,16 +97,12 @@ const slots = defineSlots<SlideoverSlots>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Slideover['AppConfig']
-const uiTheme = useComponentUiTheme('slideover', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('slideover', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
-  const defaultEvents = {
-    closeAutoFocus: (e: Event) => e.preventDefault()
-  }
-
   if (!props.dismissible) {
     const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
 
@@ -116,10 +112,10 @@ const contentEvents = computed(() => {
         emits('close:prevent')
       }
       return acc
-    }, defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (e: Event) => void>)
+    }, {} as Record<typeof events[number], (e: Event) => void>)
   }
 
-  return defaultEvents
+  return {}
 })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover || {}) })({
@@ -136,11 +132,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
     </DialogTrigger>
 
     <DialogPortal v-bind="portalProps">
-      <DialogOverlay v-if="overlay" :class="ui.overlay({ class: uiTheme?.slots?.overlay })" />
+      <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })" />
 
       <DialogContent
         :data-side="side"
-        :class="ui.content({ class: [!slots.default && props.class, uiTheme?.slots?.content] })"
+        data-slot="content"
+        :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })"
         v-bind="contentProps"
         @after-enter="emits('after:enter')"
         @after-leave="emits('after:leave')"
@@ -161,16 +158,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
         </VisuallyHidden>
 
         <slot name="content" :close="close">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" :class="ui.header({ class: uiTheme?.slots?.header })">
+          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" data-slot="header" :class="ui.header({ class: uiProp?.header })">
             <slot name="header" :close="close">
-              <div :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
-                <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
+              <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+                <DialogTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
                   <slot name="title">
                     {{ title }}
                   </slot>
                 </DialogTitle>
 
-                <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
+                <DialogDescription v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
                   <slot name="description">
                     {{ description }}
                   </slot>
@@ -180,7 +177,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
               <slot name="actions" />
 
               <DialogClose v-if="props.close || !!slots.close" as-child>
-                <slot name="close" :close="close" :ui="ui">
+                <slot name="close" :ui="ui">
                   <UButton
                     v-if="props.close"
                     :icon="closeIcon || appConfig.ui.icons.close"
@@ -188,18 +185,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
                     variant="ghost"
                     :aria-label="t('slideover.close')"
                     v-bind="(typeof props.close === 'object' ? props.close as Partial<ButtonProps> : {})"
-                    :class="ui.close({ class: uiTheme?.slots?.close })"
+                    data-slot="close"
+                    :class="ui.close({ class: uiProp?.close })"
                   />
                 </slot>
               </DialogClose>
             </slot>
           </div>
 
-          <div :class="ui.body({ class: uiTheme?.slots?.body })">
+          <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
             <slot name="body" :close="close" />
           </div>
 
-          <div v-if="!!slots.footer" :class="ui.footer({ class: uiTheme?.slots?.footer })">
+          <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
             <slot name="footer" :close="close" />
           </div>
         </slot>

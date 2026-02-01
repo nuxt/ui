@@ -99,7 +99,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
 }
 
 export type ContentSearchSlots = CommandPaletteSlots<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem> & {
-  content(props?: {}): any
+  content(props: { close: () => void }): any
 }
 
 </script>
@@ -109,7 +109,7 @@ import { computed, useTemplateRef } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig, useColorMode, useComponentUiTheme, defineShortcuts } from '#imports'
+import { useAppConfig, useColorMode, defineShortcuts, useComponentUI } from '#imports'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
 import { omit, transformUI } from '../../utils'
@@ -128,11 +128,11 @@ const slots = defineSlots<ContentSearchSlots>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const { open } = useContentSearch()
+const { open, mapNavigationItems, postFilter } = useContentSearch()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
-const uiTheme = useComponentUiTheme('contentSearch', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('contentSearch', props)
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
@@ -143,105 +143,101 @@ const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
     includeMatches: true
   }
-}))
+} as UseFuseOptions<T>))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })({
   fullscreen: props.fullscreen
 }))
 
-function mapLinksItems(links: T[]): ContentSearchItem[] {
-  return links.flatMap(link => [{
+const commandPaletteRef = useTemplateRef('commandPaletteRef')
+
+const mappedLinksItems = computed(() => {
+  if (!props.links?.length) {
+    return []
+  }
+
+  return props.links.flatMap(link => [{
     ...link,
     suffix: link.description,
-    icon: link.icon || appConfig.ui.icons.file
+    description: undefined,
+    icon: link.icon || appConfig.ui.icons.file,
+    children: undefined
   }, ...(link.children?.map(child => ({
     ...child,
     prefix: link.label + ' >',
     suffix: child.description,
+    description: undefined,
     icon: child.icon || link.icon || appConfig.ui.icons.file
   })) || [])])
-}
+})
 
-function mapNavigationItems(children: ContentNavigationItem[], parent?: ContentNavigationItem): ContentSearchItem[] {
-  return children.flatMap((link) => {
-    if (link.children?.length) {
-      return mapNavigationItems(link.children, link)
-    }
+const mappedNavigationGroups = computed(() => {
+  if (!props.navigation?.length) {
+    return []
+  }
 
-    return props.files?.filter(file => file.id === link.path || file.id.startsWith(`${link.path}#`))?.map(file => mapFile(file, link, parent)) || []
-  })
-}
+  if (props.navigation.some(link => !!link.children?.length)) {
+    return props.navigation.map(group => ({
+      id: group.path,
+      label: group.title,
+      items: mapNavigationItems(group.children || [], props.files || []),
+      postFilter
+    }))
+  } else {
+    return [{ id: 'docs', items: mapNavigationItems(props.navigation, props.files || []), postFilter }]
+  }
+})
 
-function mapFile(file: ContentSearchFile, link: ContentNavigationItem, parent?: ContentNavigationItem): ContentSearchItem {
-  const prefix = [...new Set([parent?.title, ...file.titles].filter(Boolean))]
+const themeGroup = computed(() => {
+  if (!props.colorMode || colorMode?.forced) {
+    return null
+  }
 
   return {
-    prefix: prefix?.length ? (prefix.join(' > ') + ' >') : undefined,
-    label: file.id === link.path ? link.title : file.title,
-    suffix: file.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
-    to: file.id,
-    icon: (link.icon || parent?.icon || (file.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
-    level: file.level
+    id: 'theme',
+    label: t('contentSearch.theme'),
+    items: [{
+      label: t('colorMode.system'),
+      icon: appConfig.ui.icons.system,
+      active: colorMode.preference === 'system',
+      onSelect: () => {
+        colorMode.preference = 'system'
+      }
+    }, {
+      label: t('colorMode.light'),
+      icon: appConfig.ui.icons.light,
+      active: colorMode.preference === 'light',
+      onSelect: () => {
+        colorMode.preference = 'light'
+      }
+    }, {
+      label: t('colorMode.dark'),
+      icon: appConfig.ui.icons.dark,
+      active: colorMode.preference === 'dark',
+      onSelect: () => {
+        colorMode.preference = 'dark'
+      }
+    }]
   }
-}
+})
 
 const groups = computed(() => {
   const groups = []
 
-  if (props.links?.length) {
-    groups.push({ id: 'links', label: t('contentSearch.links'), items: mapLinksItems(props.links) })
+  if (mappedLinksItems.value.length) {
+    groups.push({ id: 'links', label: t('contentSearch.links'), items: mappedLinksItems.value })
   }
 
-  if (props.navigation?.length) {
-    if (props.navigation.some(link => !!link.children?.length)) {
-      groups.push(...props.navigation.map(group => ({ id: group.path, label: group.title, items: mapNavigationItems(group.children || []), postFilter })))
-    } else {
-      groups.push({ id: 'docs', items: mapNavigationItems(props.navigation), postFilter })
-    }
-  }
+  groups.push(...mappedNavigationGroups.value)
 
   groups.push(...(props.groups || []))
 
-  if (props.colorMode && !colorMode?.forced) {
-    groups.push({
-      id: 'theme',
-      label: t('contentSearch.theme'),
-      items: [{
-        label: t('colorMode.system'),
-        icon: appConfig.ui.icons.system,
-        active: colorMode.preference === 'system',
-        onSelect: () => {
-          colorMode.preference = 'system'
-        }
-      }, {
-        label: t('colorMode.light'),
-        icon: appConfig.ui.icons.light,
-        active: colorMode.preference === 'light',
-        onSelect: () => {
-          colorMode.preference = 'light'
-        }
-      }, {
-        label: t('colorMode.dark'),
-        icon: appConfig.ui.icons.dark,
-        active: colorMode.preference === 'dark',
-        onSelect: () => {
-          colorMode.preference = 'dark'
-        }
-      }]
-    })
+  if (themeGroup.value) {
+    groups.push(themeGroup.value)
   }
 
   return groups
 })
-
-function postFilter(query: string, items: ContentSearchItem[]) {
-  // Filter only first level items if no query
-  if (!query) {
-    return items?.filter(item => item.level === 1)
-  }
-
-  return items
-}
 
 function onSelect(item: ContentSearchItem) {
   if (item.disabled) {
@@ -261,8 +257,6 @@ defineShortcuts({
   }
 })
 
-const commandPaletteRef = useTemplateRef('commandPaletteRef')
-
 defineExpose({
   commandPaletteRef
 })
@@ -274,17 +268,18 @@ defineExpose({
     :title="title || t('contentSearch.title')"
     :description="description || t('contentSearch.description')"
     v-bind="modalProps"
-    :class="ui.modal({ class: [uiTheme?.slots?.modal, props.class] })"
+    data-slot="modal"
+    :class="ui.modal({ class: [uiProp?.modal, props.class] })"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot name="content" v-bind="contentData">
         <UCommandPalette
           ref="commandPaletteRef"
           v-model:search-term="searchTerm"
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :ui="transformUI(omit(ui, ['modal']), props.ui)"
+          :ui="transformUI(omit(ui, ['modal']), uiProp)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >

@@ -2,7 +2,7 @@
 import type * as ui from '#build/ui'
 import type { TVConfig } from '../types/tv'
 import { computed } from 'vue'
-import { provideUTheme } from '../composables/useComponentUiTheme'
+import { provideUTheme } from '../composables/useComponentUI'
 
 type UIConfig = TVConfig<typeof ui>
 

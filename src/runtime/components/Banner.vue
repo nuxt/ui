@@ -53,10 +53,10 @@ export interface BannerProps {
 }
 
 export interface BannerSlots {
-  leading(props?: {}): any
+  leading(props: { ui: Banner['ui'] }): any
   title(props?: {}): any
   actions(props?: {}): any
-  close(props: { ui: any }): any
+  close(props: { ui: Banner['ui'] }): any
 }
 
 export interface BannerEmits {
@@ -67,7 +67,7 @@ export interface BannerEmits {
 <script setup lang="ts">
 import { computed, watch } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useHead, useAppConfig, useComponentUiTheme } from '#imports'
+import { useHead, useAppConfig, useComponentUI } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -83,7 +83,7 @@ const emits = defineEmits<BannerEmits>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Banner['AppConfig']
-const uiTheme = useComponentUiTheme('banner', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('banner', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.banner || {}) })({
   color: props.color,
@@ -120,7 +120,7 @@ function onClose() {
 </script>
 
 <template>
-  <Primitive :as="as" class="banner" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+  <Primitive :as="as" class="banner" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <ULink
       v-if="to"
       :aria-label="title"
@@ -132,28 +132,28 @@ function onClose() {
       <span class="absolute inset-0 " aria-hidden="true" />
     </ULink>
 
-    <UContainer :class="ui.container({ class: uiTheme?.slots?.container })">
-      <div :class="ui.left({ class: uiTheme?.slots?.left })" />
+    <UContainer data-slot="container" :class="ui.container({ class: uiProp?.container })">
+      <div data-slot="left" :class="ui.left({ class: uiProp?.left })" />
 
-      <div :class="ui.center({ class: uiTheme?.slots?.center })">
-        <slot name="leading">
-          <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: uiTheme?.slots?.icon })" />
+      <div data-slot="center" :class="ui.center({ class: uiProp?.center })">
+        <slot name="leading" :ui="ui">
+          <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
         </slot>
 
-        <div v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
+        <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
           <slot name="title">
             {{ title }}
           </slot>
         </div>
 
-        <div v-if="actions?.length || !!slots.actions" :class="ui.actions({ class: uiTheme?.slots?.actions })">
+        <div v-if="actions?.length || !!slots.actions" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
           <slot name="actions">
             <UButton v-for="(action, index) in actions" :key="index" color="neutral" size="xs" v-bind="action" />
           </slot>
         </div>
       </div>
 
-      <div :class="ui.right({ class: uiTheme?.slots?.right })">
+      <div data-slot="right" :class="ui.right({ class: uiProp?.right })">
         <slot name="close" :ui="ui">
           <UButton
             v-if="close"
@@ -163,7 +163,8 @@ function onClose() {
             variant="ghost"
             :aria-label="t('banner.close')"
             v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
-            :class="ui.close({ class: uiTheme?.slots?.close })"
+            data-slot="close"
+            :class="ui.close({ class: uiProp?.close })"
             @click="onClose"
           />
         </slot>

@@ -49,10 +49,10 @@ const schema = z.object({
             const img = new Image()
             img.onload = () => {
               const meetsDimensions
-                  = img.width >= MIN_DIMENSIONS.width
-                    && img.height >= MIN_DIMENSIONS.height
-                    && img.width <= MAX_DIMENSIONS.width
-                    && img.height <= MAX_DIMENSIONS.height
+                = img.width >= MIN_DIMENSIONS.width
+                  && img.height >= MIN_DIMENSIONS.height
+                  && img.width <= MAX_DIMENSIONS.width
+                  && img.height <= MAX_DIMENSIONS.height
               resolve(meetsDimensions)
             }
             img.src = e.target?.result as string

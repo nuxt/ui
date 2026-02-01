@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Banner from '../../src/runtime/components/Banner.vue'
 import type { BannerProps, BannerSlots } from '../../src/runtime/components/Banner.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('Banner', () => {
   const props = { id: 'banner' }
@@ -28,5 +31,32 @@ describe('Banner', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BannerProps, slots?: Partial<BannerSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Banner)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Banner, {
+      props: {
+        id: 'banner',
+        title: 'Title',
+        icon: 'i-lucide-rocket',
+        actions: [{ label: 'Learn more', trailingIcon: 'i-lucide-arrow-right' }],
+        close: true
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Banner, UTheme },
+      template: `
+        <UTheme :theme="{ banner: { slots: { root: 'test-theme-class' } } }">
+          <Banner id="test-banner" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('.banner').classes()).toContain('test-theme-class')
   })
 })

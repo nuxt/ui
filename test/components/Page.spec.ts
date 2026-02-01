@@ -1,7 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Page from '../../src/runtime/components/Page.vue'
 import type { PageProps, PageSlots } from '../../src/runtime/components/Page.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('Page', () => {
   it.each([
@@ -17,5 +20,30 @@ describe('Page', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageProps, slots?: Partial<PageSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Page)
     expect(html).toMatchSnapshot()
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Page, {
+      slots: {
+        default: () => 'Default slot',
+        left: () => 'Left slot',
+        right: () => 'Right slot'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Page, UTheme },
+      template: `
+        <UTheme :theme="{ page: { slots: { root: 'test-theme-class' } } }">
+          <Page>Content</Page>
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

@@ -33,16 +33,16 @@ export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'lo
 }
 
 export interface BadgeSlots {
-  leading(props?: {}): any
-  default(props?: {}): any
-  trailing(props?: {}): any
+  leading(props: { ui: Badge['ui'] }): any
+  default(props: { ui: Badge['ui'] }): any
+  trailing(props: { ui: Badge['ui'] }): any
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { tv } from '../utils/tv'
@@ -55,7 +55,7 @@ const props = withDefaults(defineProps<BadgeProps>(), {
 const slots = defineSlots<BadgeSlots>()
 
 const appConfig = useAppConfig() as Badge['AppConfig']
-const uiTheme = useComponentUiTheme('badge', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('badge', props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<BadgeProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
@@ -69,20 +69,20 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.badge || {})
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.base({ class: [uiTheme?.slots?.base, props.class] })">
-    <slot name="leading">
-      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: uiTheme?.slots?.leadingIcon })" />
-      <UAvatar v-else-if="!!avatar" :size="((uiTheme?.slots?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: uiTheme?.slots?.leadingAvatar })" />
+  <Primitive :as="as" data-slot="base" :class="ui.base({ class: [uiProp?.base, props.class] })">
+    <slot name="leading" :ui="ui">
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
+      <UAvatar v-else-if="!!avatar" :size="((uiProp?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: uiProp?.leadingAvatar })" />
     </slot>
 
-    <slot>
-      <span v-if="label !== undefined && label !== null" :class="ui.label({ class: uiTheme?.slots?.label })">
+    <slot :ui="ui">
+      <span v-if="label !== undefined && label !== null" data-slot="label" :class="ui.label({ class: uiProp?.label })">
         {{ label }}
       </span>
     </slot>
 
-    <slot name="trailing">
-      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: uiTheme?.slots?.trailingIcon })" />
+    <slot name="trailing" :ui="ui">
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon })" />
     </slot>
   </Primitive>
 </template>

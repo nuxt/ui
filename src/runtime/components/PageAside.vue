@@ -25,7 +25,7 @@ export interface PageAsideSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<PageAsideProps>(), {
@@ -34,21 +34,21 @@ const props = withDefaults(defineProps<PageAsideProps>(), {
 const slots = defineSlots<PageAsideSlots>()
 
 const appConfig = useAppConfig() as PageAside['AppConfig']
-const uiTheme = useComponentUiTheme('pageAside', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('pageAside', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageAside || {}) })())
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
-    <div :class="ui.container({ class: uiTheme?.slots?.container })">
-      <div v-if="!!slots.top" :class="ui.top({ class: uiTheme?.slots?.top })">
-        <div :class="ui.topHeader({ class: uiTheme?.slots?.topHeader })" />
-        <div :class="ui.topBody({ class: uiTheme?.slots?.topBody })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
+      <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: uiProp?.top })">
+        <div data-slot="topHeader" :class="ui.topHeader({ class: uiProp?.topHeader })" />
+        <div data-slot="topBody" :class="ui.topBody({ class: uiProp?.topBody })">
           <slot name="top" />
         </div>
-        <div :class="ui.topFooter({ class: uiTheme?.slots?.topFooter })" />
+        <div data-slot="topFooter" :class="ui.topFooter({ class: uiProp?.topFooter })" />
       </div>
 
       <slot />

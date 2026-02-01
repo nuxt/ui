@@ -32,7 +32,7 @@ export interface PageFeatureProps {
 }
 
 export interface PageFeatureSlots {
-  leading(props?: {}): any
+  leading(props: { ui: PageFeature['ui'] }): any
   title(props?: {}): any
   description(props?: {}): any
   default(props?: {}): any
@@ -42,7 +42,7 @@ export interface PageFeatureSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -56,7 +56,7 @@ const props = withDefaults(defineProps<PageFeatureProps>(), {
 const slots = defineSlots<PageFeatureSlots>()
 
 const appConfig = useAppConfig() as PageFeature['AppConfig']
-const uiTheme = useComponentUiTheme('pageFeature', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('pageFeature', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageFeature || {}) })({
   orientation: props.orientation,
@@ -70,14 +70,14 @@ const ariaLabel = computed(() => {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })" @click="onClick">
-    <div v-if="icon || !!slots.leading" :class="ui.leading({ class: uiTheme?.slots?.leading })">
-      <slot name="leading">
-        <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: uiTheme?.slots?.leadingIcon })" />
+  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })" @click="onClick">
+    <div v-if="icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
+      <slot name="leading" :ui="ui">
+        <UIcon v-if="icon" :name="icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
       </slot>
     </div>
 
-    <div :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
+    <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
       <ULink
         v-if="to"
         :aria-label="ariaLabel"
@@ -90,13 +90,13 @@ const ariaLabel = computed(() => {
       </ULink>
 
       <slot>
-        <div v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
+        <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
           <slot name="title">
             {{ title }}
           </slot>
         </div>
 
-        <div v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
+        <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
           <slot name="description">
             {{ description }}
           </slot>

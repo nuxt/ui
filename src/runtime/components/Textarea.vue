@@ -3,6 +3,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/textarea'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
+import type { TextareaHTMLAttributes } from '../types/html'
 import type { ModelModifiers } from '../types/input'
 import type { ComponentConfig } from '../types/tv'
 
@@ -10,7 +11,7 @@ type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>
 
 type TextareaValue = string | number | null
 
-export interface TextareaProps<T extends TextareaValue = TextareaValue> extends UseComponentIconsProps {
+export interface TextareaProps<T extends TextareaValue = TextareaValue> extends UseComponentIconsProps, /** @vue-ignore */ Omit<TextareaHTMLAttributes, 'name' | 'placeholder' | 'required' | 'autofocus' | 'disabled' | 'rows'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -44,7 +45,7 @@ export interface TextareaProps<T extends TextareaValue = TextareaValue> extends 
   highlight?: boolean
   modelValue?: T
   defaultValue?: T
-  modelModifiers?: ModelModifiers
+  modelModifiers?: ModelModifiers<T>
   class?: any
   ui?: Textarea['slots']
 }
@@ -56,17 +57,17 @@ export interface TextareaEmits<T extends TextareaValue = TextareaValue> {
 }
 
 export interface TextareaSlots {
-  leading(props?: {}): any
-  default(props?: {}): any
-  trailing(props?: {}): any
+  leading(props: { ui: Textarea['ui'] }): any
+  default(props: { ui: Textarea['ui'] }): any
+  trailing(props: { ui: Textarea['ui'] }): any
 }
 </script>
 
 <script setup lang="ts" generic="T extends TextareaValue">
-import { ref, computed, onMounted, nextTick, watch } from 'vue'
+import { useTemplateRef, computed, onMounted, nextTick, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
@@ -88,7 +89,7 @@ const slots = defineSlots<TextareaSlots>()
 const modelValue = useVModel<TextareaProps<T>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
 
 const appConfig = useAppConfig() as Textarea['AppConfig']
-const uiTheme = useComponentUiTheme('textarea', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('textarea', props)
 
 const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps<T>>(props, { deferInputValidation: true })
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
@@ -104,7 +105,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.textarea || 
   trailing: isTrailing.value || !!slots.trailing
 }))
 
-const textareaRef = ref<HTMLTextAreaElement | null>(null)
+const textareaRef = useTemplateRef('textareaRef')
 
 // Custom function to handle the v-model properties
 function updateInput(value: string | null | undefined) {
@@ -205,7 +206,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <textarea
       :id="id"
       ref="textareaRef"
@@ -213,7 +214,8 @@ defineExpose({
       :name="name"
       :rows="rows"
       :placeholder="placeholder"
-      :class="ui.base({ class: uiTheme?.slots?.base })"
+      data-slot="base"
+      :class="ui.base({ class: uiProp?.base })"
       :disabled="disabled"
       :required="required"
       v-bind="{ ...$attrs, ...ariaAttrs }"
@@ -223,18 +225,18 @@ defineExpose({
       @focus="emitFormFocus"
     />
 
-    <slot />
+    <slot :ui="ui" />
 
-    <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: uiTheme?.slots?.leading })">
-      <slot name="leading">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: uiTheme?.slots?.leadingIcon })" />
-        <UAvatar v-else-if="!!avatar" :size="((uiTheme?.slots?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: uiTheme?.slots?.leadingAvatar })" />
+    <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
+      <slot name="leading" :ui="ui">
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
+        <UAvatar v-else-if="!!avatar" :size="((uiProp?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: uiProp?.leadingAvatar })" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: uiTheme?.slots?.trailing })">
-      <slot name="trailing">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: uiTheme?.slots?.trailingIcon })" />
+    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
+      <slot name="trailing" :ui="ui">
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon })" />
       </slot>
     </span>
   </Primitive>

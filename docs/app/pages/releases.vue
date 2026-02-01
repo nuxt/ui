@@ -1,4 +1,19 @@
 <script setup lang="ts">
+const { data: page } = await useAsyncData('releases', () => queryCollection('releases').first())
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
+
+useSeoMeta({
+  titleTemplate: '%s - Nuxt UI',
+  title: page.value.title,
+  description: page.value.description,
+  ogTitle: `${page.value.title} - Nuxt UI`,
+  ogDescription: page.value.description
+})
+
+defineOgImageComponent('Docs')
+
 const { data: versions } = await useFetch('https://ungh.cc/repos/nuxt/ui/releases', {
   transform: (data: {
     releases: {
@@ -19,25 +34,26 @@ const { data: versions } = await useFetch('https://ungh.cc/repos/nuxt/ui/release
 </script>
 
 <template>
-  <div class="relative">
+  <div v-if="page">
     <UPageHero
-      title="Releases"
-      description="Stay up to date with the newest features, enhancements, and fixes for Nuxt UI."
+      :title="page.hero.title"
+      :description="page.hero.description"
+      :links="page.hero.links"
       class="md:border-b border-default"
       :ui="{
-        container: 'relative'
+        container: 'relative lg:py-32'
       }"
     >
+      <template #top>
+        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+      </template>
+
       <LazyStarsBg />
 
       <div aria-hidden="true" class="hidden md:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
 
-    <UPageSection
-      :ui="{
-        container: '!py-0'
-      }"
-    >
+    <UPageSection :ui="{ container: '!py-0' }">
       <div class="py-4 md:py-8 lg:py-16 md:border-x border-default">
         <UContainer class="max-w-5xl">
           <UChangelogVersions>

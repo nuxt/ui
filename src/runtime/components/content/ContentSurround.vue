@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { PropType } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-surround'
@@ -40,7 +41,7 @@ export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSur
   ui?: ContentSurround['slots']
 }
 
-type SlotProps<T> = (props: { link: T }) => any
+type SlotProps<T> = (props: { link: T, ui: ContentSurround['ui'] }) => any
 
 export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSurroundLink> {
   'link': SlotProps<T>
@@ -51,11 +52,10 @@ export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSur
 </script>
 
 <script setup lang="ts" generic="T extends ContentSurroundLink">
-import type { PropType } from 'vue'
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { tv } from '../../utils/tv'
 import ULink from '../Link.vue'
 import UIcon from '../Icon.vue'
@@ -66,7 +66,7 @@ const props = defineProps<ContentSurroundProps<T>>()
 defineSlots<ContentSurroundSlots<T>>()
 
 const appConfig = useAppConfig() as ContentSurround['AppConfig']
-const uiTheme = useComponentUiTheme('contentSurround', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('contentSurround', props)
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: ContentSurroundLink, icon: IconProps['name'], direction: 'left' | 'right' }>({
   props: {
@@ -82,22 +82,22 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSurro
 
 <template>
   <DefineLinkTemplate v-slot="{ link, icon, direction }">
-    <ULink v-if="link" :to="link.path" raw :class="ui.link({ class: [uiTheme?.slots?.link, link.ui?.link, link.class], direction })">
-      <slot name="link" :link="(link as T)">
-        <div :class="ui.linkLeading({ class: [uiTheme?.slots?.linkLeading, link.ui?.linkLeading] })">
-          <slot name="link-leading" :link="(link as T)">
-            <UIcon :name="link.icon || icon" :class="ui.linkLeadingIcon({ class: [uiTheme?.slots?.linkLeadingIcon, link.ui?.linkLeadingIcon], direction })" />
+    <ULink v-if="link" :to="link.path" raw data-slot="link" :class="ui.link({ class: [uiProp?.link, link.ui?.link, link.class], direction })">
+      <slot name="link" :link="(link as T)" :ui="ui">
+        <div data-slot="linkLeading" :class="ui.linkLeading({ class: [uiProp?.linkLeading, link.ui?.linkLeading] })">
+          <slot name="link-leading" :link="(link as T)" :ui="ui">
+            <UIcon :name="link.icon || icon" data-slot="linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [uiProp?.linkLeadingIcon, link.ui?.linkLeadingIcon], direction })" />
           </slot>
         </div>
 
-        <p :class="ui.linkTitle({ class: [uiTheme?.slots?.linkTitle, link.ui?.linkTitle] })">
-          <slot name="link-title" :link="(link as T)">
+        <p data-slot="linkTitle" :class="ui.linkTitle({ class: [uiProp?.linkTitle, link.ui?.linkTitle] })">
+          <slot name="link-title" :link="(link as T)" :ui="ui">
             {{ link.title }}
           </slot>
         </p>
 
-        <p :class="ui.linkDescription({ class: [uiTheme?.slots?.linkDescription, link.ui?.linkDescription] })">
-          <slot name="link-description" :link="(link as T)">
+        <p data-slot="linkDescription" :class="ui.linkDescription({ class: [uiProp?.linkDescription, link.ui?.linkDescription] })">
+          <slot name="link-description" :link="(link as T)" :ui="ui">
             {{ link.description }}
           </slot>
         </p>
@@ -106,7 +106,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSurro
     <span v-else class="hidden lg:block">&nbsp;</span>
   </DefineLinkTemplate>
 
-  <Primitive v-if="surround" :as="as" v-bind="$attrs" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
+  <Primitive v-if="surround" :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <ReuseLinkTemplate :link="surround[0]" :icon="prevIcon || appConfig.ui.icons.arrowLeft" direction="left" />
     <ReuseLinkTemplate :link="surround[1]" :icon="nextIcon || appConfig.ui.icons.arrowRight" direction="right" />
   </Primitive>

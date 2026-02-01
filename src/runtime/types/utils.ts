@@ -103,6 +103,14 @@ export type EmitsToProps<T> = {
     : never
 }
 
+export type NonUnion<T> = [T] extends [infer U]
+  ? _NonUnion<U, U>
+  : never
+type _NonUnion<T, U> = U extends any
+  ? [T] extends [U]
+      ? unknown
+      : never
+  : never
 export type RefOrGetter<T> = Ref<T> | (() => T)
 
 export * from './tv'

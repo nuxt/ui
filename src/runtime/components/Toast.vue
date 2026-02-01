@@ -62,19 +62,19 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
 export interface ToastEmits extends ToastRootEmits {}
 
 export interface ToastSlots {
-  leading(props?: {}): any
+  leading(props: { ui: Toast['ui'] }): any
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { ui: { [K in keyof Required<Toast['slots']>]: (props?: Record<string, any>) => string } }): any
+  close(props: { ui: Toast['ui'] }): any
 }
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { ref, computed, onMounted, nextTick, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -92,7 +92,7 @@ const slots = defineSlots<ToastSlots>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Toast['AppConfig']
-const uiTheme = useComponentUiTheme('toast', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('toast', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
 
@@ -102,16 +102,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.toast || {})
   title: !!props.title || !!slots.title
 }))
 
-const el = ref()
+const rootRef = useTemplateRef('rootRef')
 const height = ref(0)
 
 onMounted(() => {
-  if (!el.value) {
+  if (!rootRef.value) {
     return
   }
 
   nextTick(() => {
-    height.value = el.value?.$el?.getBoundingClientRect()?.height
+    height.value = rootRef.value?.$el?.getBoundingClientRect()?.height
   })
 })
 
@@ -122,20 +122,21 @@ defineExpose({
 
 <template>
   <ToastRoot
-    ref="el"
+    ref="rootRef"
     v-slot="{ remaining, duration, open }"
     v-bind="rootProps"
     :data-orientation="orientation"
-    :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })"
+    data-slot="root"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     :style="{ '--height': height }"
   >
-    <slot name="leading">
-      <UAvatar v-if="avatar" :size="((uiTheme?.slots?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: uiTheme?.slots?.avatar })" />
-      <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: uiTheme?.slots?.icon })" />
+    <slot name="leading" :ui="ui">
+      <UAvatar v-if="avatar" :size="((uiProp?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="avatar" :class="ui.avatar({ class: uiProp?.avatar })" />
+      <UIcon v-else-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
     </slot>
 
-    <div :class="ui.wrapper({ class: uiTheme?.slots?.wrapper })">
-      <ToastTitle v-if="title || !!slots.title" :class="ui.title({ class: uiTheme?.slots?.title })">
+    <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+      <ToastTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
         <slot name="title">
           <component :is="title()" v-if="typeof title === 'function'" />
           <component :is="title" v-else-if="typeof title === 'object'" />
@@ -144,7 +145,7 @@ defineExpose({
           </template>
         </slot>
       </ToastTitle>
-      <ToastDescription v-if="description || !!slots.description" :class="ui.description({ class: uiTheme?.slots?.description })">
+      <ToastDescription v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
         <slot name="description">
           <component :is="description()" v-if="typeof description === 'function'" />
           <component :is="description" v-else-if="typeof description === 'object'" />
@@ -154,7 +155,7 @@ defineExpose({
         </slot>
       </ToastDescription>
 
-      <div v-if="orientation === 'vertical' && (actions?.length || !!slots.actions)" :class="ui.actions({ class: uiTheme?.slots?.actions })">
+      <div v-if="orientation === 'vertical' && (actions?.length || !!slots.actions)" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
         <slot name="actions">
           <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
             <UButton size="xs" :color="color" v-bind="action" />
@@ -163,7 +164,7 @@ defineExpose({
       </div>
     </div>
 
-    <div v-if="(orientation === 'horizontal' && (actions?.length || !!slots.actions)) || close" :class="ui.actions({ class: uiTheme?.slots?.actions, orientation: 'horizontal' })">
+    <div v-if="(orientation === 'horizontal' && (actions?.length || !!slots.actions)) || close" data-slot="actions" :class="ui.actions({ class: uiProp?.actions, orientation: 'horizontal' })">
       <template v-if="orientation === 'horizontal' && (actions?.length || !!slots.actions)">
         <slot name="actions">
           <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
@@ -181,7 +182,8 @@ defineExpose({
             variant="link"
             :aria-label="t('toast.close')"
             v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
-            :class="ui.close({ class: uiTheme?.slots?.close })"
+            data-slot="close"
+            :class="ui.close({ class: uiProp?.close })"
             @click.stop
           />
         </slot>
@@ -194,7 +196,8 @@ defineExpose({
       :color="color"
       v-bind="(typeof progress === 'object' ? progress as Partial<ProgressProps> : {})"
       size="sm"
-      :class="ui.progress({ class: uiTheme?.slots?.progress })"
+      data-slot="progress"
+      :class="ui.progress({ class: uiProp?.progress })"
     />
   </ToastRoot>
 </template>

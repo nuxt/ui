@@ -67,7 +67,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
 }
 
 export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem> & {
-  content(props?: {}): any
+  content(props: { close: () => void }): any
 }
 
 </script>
@@ -77,7 +77,7 @@ import { computed, useTemplateRef } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig, useColorMode, defineShortcuts, useRuntimeHook, useComponentUiTheme } from '#imports'
+import { useAppConfig, useColorMode, defineShortcuts, useRuntimeHook, useComponentUI } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
@@ -103,7 +103,7 @@ const { t } = useLocale()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as DashboardSearch['AppConfig']
-const uiTheme = useComponentUiTheme('dashboardSearch', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('dashboardSearch', props)
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
@@ -156,6 +156,8 @@ const groups = computed(() => {
   return groups
 })
 
+const commandPaletteRef = useTemplateRef('commandPaletteRef')
+
 function onSelect(item: CommandPaletteItem) {
   if (item.disabled) {
     return
@@ -174,8 +176,6 @@ defineShortcuts({
   }
 })
 
-const commandPaletteRef = useTemplateRef('commandPaletteRef')
-
 defineExpose({
   commandPaletteRef
 })
@@ -187,17 +187,18 @@ defineExpose({
     :title="title || t('dashboardSearch.title')"
     :description="description || t('dashboardSearch.description')"
     v-bind="modalProps"
-    :class="ui.modal({ class: [uiTheme?.slots?.modal, props.class] })"
+    data-slot="modal"
+    :class="ui.modal({ class: [uiProp?.modal, props.class] })"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot name="content" v-bind="contentData">
         <UCommandPalette
           ref="commandPaletteRef"
           v-model:search-term="searchTerm"
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :ui="transformUI(omit(ui, ['modal']), props.ui)"
+          :ui="transformUI(omit(ui, ['modal']), uiProp)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >

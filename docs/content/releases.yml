@@ -1,0 +1,13 @@
+title: Releases
+description: Stay up to date with the newest features, enhancements, and fixes for Nuxt UI.
+navigation: false
+hero:
+  title: Releases
+  description: Stay up to date with the newest features, enhancements, and fixes for Nuxt UI.
+  links:
+    - label: Star on GitHub
+      color: neutral
+      variant: outline
+      to: https://github.com/nuxt/ui
+      target: _blank
+      icon: i-lucide-star

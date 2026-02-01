@@ -48,7 +48,7 @@ export interface MarqueeSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<MarqueeProps>(), {
@@ -59,7 +59,7 @@ const props = withDefaults(defineProps<MarqueeProps>(), {
 defineSlots<MarqueeSlots>()
 
 const appConfig = useAppConfig() as Marquee['AppConfig']
-const uiTheme = useComponentUiTheme('marquee', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('marquee', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {}) })({
   pauseOnHover: props.pauseOnHover,
@@ -70,31 +70,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [uiTheme?.slots?.root, props.class] })">
-    <div v-for="i in repeat" :key="i" :class="ui.content({ class: [uiTheme?.slots?.content] })">
+  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div v-for="i in repeat" :key="i" data-slot="content" :class="ui.content({ class: [uiProp?.content] })">
       <slot />
     </div>
   </Primitive>
 </template>
-
-<style>
-@keyframes marquee {
-  from { transform: translate3d(0, 0, 0); will-change: transform; }
-  to { transform: translate3d(calc(-100% - var(--gap)), 0, 0); will-change: transform; }
-}
-
-@keyframes marquee-rtl {
-  from { transform: translate3d(0, 0, 0); will-change: transform; }
-  to { transform: translate3d(calc(100% + var(--gap)), 0, 0); will-change: transform; }
-}
-
-@keyframes marquee-vertical {
-  from { transform: translate3d(0, 0, 0); will-change: transform; }
-  to { transform: translate3d(0, calc(-100% - var(--gap)), 0); will-change: transform; }
-}
-
-@keyframes marquee-vertical-rtl {
-  from { transform: translate3d(0, calc(-100% - var(--gap)), 0); will-change: transform; }
-  to { transform: translate3d(0, calc(-100% * var(--gap)), 0); will-change: transform; }
-}
-</style>

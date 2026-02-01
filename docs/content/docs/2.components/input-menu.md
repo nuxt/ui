@@ -73,7 +73,7 @@ You can also pass an array of objects with the following properties:
 - [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
 - [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
 - `disabled?: boolean`{lang="ts-type"}
-- `onSelect?(e: Event): void`{lang="ts-type"}
+- `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { tagsItem?: ClassNameValue, tagsItemText?: ClassNameValue, tagsItemDelete?: ClassNameValue, tagsItemDeleteIcon?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
 
@@ -782,6 +782,21 @@ name: 'input-menu-filter-fields-example'
 ---
 ::
 
+### With virtualization :badge{label="4.1+"}
+
+Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
+
+::warning{to="https://github.com/unovue/reka-ui/issues/1885" target="_blank"}
+When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
+::
+
+::component-example
+---
+prettier: true
+name: 'input-menu-virtualize-example'
+---
+::
+
 ### With full content width
 
 You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
@@ -826,6 +841,10 @@ name: 'input-menu-countries-example'
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+This component also supports all native `<input>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots
@@ -840,7 +859,7 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `inputRef`{lang="ts-type"} | `Ref<InstanceType<typeof ComboboxTrigger> \| null>`{lang="ts-type"} |
+| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

@@ -6,7 +6,7 @@ import captureWebsite from 'capture-website'
 interface ContentFile {
   id?: string
   body?: {
-    templates: TemplateItem[]
+    items: TemplateItem[]
   }
 }
 
@@ -34,10 +34,10 @@ export default defineNuxtModule((_, nuxt) => {
     if (!file.id?.includes('templates')) {
       return
     }
-    if (!file.body?.templates?.length) {
+    if (!file.body?.items?.length) {
       return
     }
-    for (const template of file.body.templates) {
+    for (const template of file.body.items) {
       const url = template.links?.[0]?.to
       if (!url) {
         console.error(`Template ${template.title} has no "to" to take a screenshot from`)
