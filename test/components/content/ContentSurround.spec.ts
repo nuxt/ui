@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import ContentSurround from '../../../src/runtime/components/content/ContentSurround.vue'
 import type { ContentSurroundProps, ContentSurroundSlots } from '../../../src/runtime/components/content/ContentSurround.vue'
 import ComponentRender from '../../component-render'
+import { UTheme } from '#components'
 
 describe('ContentSurround', () => {
   const surround = [{
@@ -31,5 +32,19 @@ describe('ContentSurround', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentSurroundProps, slots?: Partial<ContentSurroundSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ContentSurround)
     expect(html).toMatchSnapshot()
+  })
+
+  test('with theme works', async () => {
+    const { mountSuspended } = await import('@nuxt/test-utils/runtime')
+    const wrapper = await mountSuspended({
+      components: { ContentSurround, UTheme },
+      template: `
+        <UTheme :theme="{ contentSurround: { slots: { root: 'test-theme-class' } } }">
+          <ContentSurround :surround="[{ path: '/prev', title: 'Prev' }, { path: '/next', title: 'Next' }]" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

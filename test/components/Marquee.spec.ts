@@ -1,9 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Marquee from '../../src/runtime/components/Marquee.vue'
 import type { MarqueeProps, MarqueeSlots } from '../../src/runtime/components/Marquee.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('Marquee', () => {
   it.each([
@@ -31,5 +32,18 @@ describe('Marquee', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Marquee, UTheme },
+      template: `
+        <UTheme :theme="{ marquee: { slots: { root: 'test-theme-class' } } }">
+          <Marquee />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

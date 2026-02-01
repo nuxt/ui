@@ -9,6 +9,7 @@ import { renderForm } from '../utils/form'
 import theme from '#build/ui/checkbox-group'
 import themeCheckbox from '#build/ui/checkbox'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { UTheme } from '#components'
 
 describe('CheckboxGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -139,5 +140,18 @@ describe('CheckboxGroup', () => {
       const formFieldLabel = wrapper.findAll('label').map(label => label.attributes()).filter(label => !label.for?.includes(':'))[0]
       expect(formFieldLabel?.for).toBeUndefined()
     })
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { CheckboxGroup, UTheme },
+      template: `
+        <UTheme :theme="{ checkboxGroup: { slots: { root: 'test-theme-class' } } }">
+          <CheckboxGroup :items="['Option 1', 'Option 2']" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

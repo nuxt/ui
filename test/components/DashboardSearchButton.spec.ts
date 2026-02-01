@@ -1,9 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardSearchButton from '../../src/runtime/components/DashboardSearchButton.vue'
 import type { DashboardSearchButtonProps } from '../../src/runtime/components/DashboardSearchButton.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('DashboardSearchButton', () => {
   it.each([
@@ -28,5 +29,18 @@ describe('DashboardSearchButton', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { DashboardSearchButton, UTheme },
+      template: `
+        <UTheme :theme="{ dashboardSearchButton: { slots: { base: 'test-theme-class' } } }">
+          <DashboardSearchButton label="Search" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('button').classes()).toContain('test-theme-class')
   })
 })

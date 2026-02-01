@@ -1,10 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Tabs from '../../src/runtime/components/Tabs.vue'
 import type { TabsProps, TabsSlots } from '../../src/runtime/components/Tabs.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/tabs'
+import { UTheme } from '#components'
 
 describe('Tabs', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -66,5 +67,18 @@ describe('Tabs', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Tabs, UTheme },
+      template: `
+        <UTheme :theme="{ tabs: { slots: { root: 'test-theme-class' } } }">
+          <Tabs :items="[{ label: 'Tab1' }]" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

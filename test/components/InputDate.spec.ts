@@ -6,6 +6,7 @@ import InputDate from '../../src/runtime/components/InputDate.vue'
 import type { InputDateProps, InputDateSlots } from '../../src/runtime/components/InputDate.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input-date'
+import { UTheme } from '#components'
 
 describe('InputDate', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -72,5 +73,18 @@ describe('InputDate', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { InputDate, UTheme },
+      template: `
+        <UTheme :theme="{ inputDate: { slots: { base: 'test-theme-class' } } }">
+          <InputDate />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="base"]').classes()).toContain('test-theme-class')
   })
 })

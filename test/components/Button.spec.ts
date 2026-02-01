@@ -7,7 +7,7 @@ import Button from '../../src/runtime/components/Button.vue'
 import type { ButtonProps, ButtonSlots } from '../../src/runtime/components/Button.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/button'
-import { UForm } from '#components'
+import { UForm, UTheme } from '#components'
 
 describe('Button', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -124,5 +124,18 @@ describe('Button', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Button, UTheme },
+      template: `
+        <UTheme :theme="{ button: { slots: { base: 'test-theme-class' } } }">
+          <Button label="Themed" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('button').classes()).toContain('test-theme-class')
   })
 })

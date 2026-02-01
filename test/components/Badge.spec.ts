@@ -1,10 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Badge from '../../src/runtime/components/Badge.vue'
 import type { BadgeProps, BadgeSlots } from '../../src/runtime/components/Badge.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/badge'
+import { UTheme } from '#components'
 
 describe('Badge', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -49,5 +50,18 @@ describe('Badge', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Badge, UTheme },
+      template: `
+        <UTheme :theme="{ badge: { slots: { base: 'test-theme-class' } } }">
+          <Badge label="Themed" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('span').classes()).toContain('test-theme-class')
   })
 })

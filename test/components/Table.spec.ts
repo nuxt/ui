@@ -1,9 +1,9 @@
 import { h, ref, computed } from 'vue'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
+import { UCheckbox, UButton, UBadge, UDropdownMenu, UTheme } from '#components'
 import Table from '../../src/runtime/components/Table.vue'
 import type { TableProps, TableSlots, TableColumn, TableRow } from '../../src/runtime/components/Table.vue'
 import ComponentRender from '../component-render'
@@ -244,5 +244,18 @@ describe('Table', () => {
     await flushPromises()
 
     expect(wrapper.find('[data-test-th="amount"]').exists()).toBeTruthy()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Table, UTheme },
+      template: `
+        <UTheme :theme="{ table: { slots: { base: 'test-theme-class' } } }">
+          <Table :data="[{ id: 1 }]" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('table').classes()).toContain('test-theme-class')
   })
 })

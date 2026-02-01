@@ -8,6 +8,7 @@ import type { FormInputEvents } from '../../src/module'
 import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/file-upload'
+import { UTheme } from '#components'
 
 // Mock URL.createObjectURL to return deterministic blob URLs
 URL.createObjectURL = vi.fn((file: File | Blob) => {
@@ -173,5 +174,18 @@ describe('FileUpload', () => {
       await setFilesOnInput(input, [new File(['foo'], 'valid', { type: 'text/plain' })])
       expect(wrapper.text()).not.toContain('Error message')
     })
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { FileUpload, UTheme },
+      template: `
+        <UTheme :theme="{ fileUpload: { slots: { root: 'test-theme-class' } } }">
+          <FileUpload />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

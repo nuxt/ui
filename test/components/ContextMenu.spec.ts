@@ -8,6 +8,7 @@ import type { ContextMenuProps, ContextMenuSlots } from '../../src/runtime/compo
 import type { ComponentConfig } from '../../src/runtime/types/tv'
 import { expectSlotProps } from '../utils/types'
 import theme from '#build/ui/context-menu'
+import { UTheme } from '#components'
 
 type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 
@@ -169,5 +170,22 @@ describe('ContextMenu', () => {
     expectSlotProps('item', () => ContextMenu({
       items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]]
     })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean, ui: ContextMenu['ui'] }>()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { ContextMenu, UTheme },
+      template: `
+        <UTheme :theme="{ contextMenu: { slots: { content: 'test-theme-class' } } }">
+          <ContextMenu :items="[[{ label: 'Item' }]]" :portal="false">
+            <span>Right Click</span>
+          </ContextMenu>
+        </UTheme>
+      `
+    })
+
+    await wrapper.find('span').trigger('click.right')
+
+    expect(wrapper.find('[data-slot="content"]').classes()).toContain('test-theme-class')
   })
 })

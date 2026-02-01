@@ -1,9 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Popover from '../../src/runtime/components/Popover.vue'
 import type { PopoverProps, PopoverSlots } from '../../src/runtime/components/Popover.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('Popover', () => {
   const props = { open: true, portal: false }
@@ -49,5 +50,20 @@ describe('Popover', () => {
         'aria-dialog-name': { enabled: false }
       }
     })).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Popover, UTheme },
+      template: `
+        <UTheme :theme="{ popover: { slots: { content: 'test-theme-class' } } }">
+          <Popover :open="true" :portal="false">
+            <template #content>Content</template>
+          </Popover>
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="content"]').classes()).toContain('test-theme-class')
   })
 })

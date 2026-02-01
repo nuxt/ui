@@ -1,9 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageAnchors from '../../src/runtime/components/PageAnchors.vue'
 import type { PageAnchorsProps, PageAnchorsSlots } from '../../src/runtime/components/PageAnchors.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('PageAnchors', () => {
   const links = [{
@@ -52,5 +53,18 @@ describe('PageAnchors', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { PageAnchors, UTheme },
+      template: `
+        <UTheme :theme="{ pageAnchors: { slots: { root: 'test-theme-class' } } }">
+          <PageAnchors :links="[{ label: 'Link', to: '/test' }]" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

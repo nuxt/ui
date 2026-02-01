@@ -8,6 +8,7 @@ import type { FormInputEvents } from '../../src/module'
 import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/pin-input'
+import { UTheme } from '#components'
 
 describe('PinInput', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -142,5 +143,18 @@ describe('PinInput', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { PinInput, UTheme },
+      template: `
+        <UTheme :theme="{ pinInput: { slots: { root: 'test-theme-class' } } }">
+          <PinInput />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

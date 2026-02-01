@@ -8,6 +8,7 @@ import type { ComponentConfig } from '../../src/runtime/types/tv'
 import ComponentRender from '../component-render'
 import { expectSlotProps } from '../utils/types'
 import theme from '#build/ui/dropdown-menu'
+import { UTheme } from '#components'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 
@@ -180,5 +181,18 @@ describe('DropdownMenu', () => {
     expectSlotProps('item', () => DropdownMenu({
       items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]]
     })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean, ui: DropdownMenu['ui'] }>()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { DropdownMenu, UTheme },
+      template: `
+        <UTheme :theme="{ dropdownMenu: { slots: { content: 'test-theme-class' } } }">
+          <DropdownMenu :items="[{ label: 'Item' }]" :open="true" :portal="false" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="content"]').classes()).toContain('test-theme-class')
   })
 })

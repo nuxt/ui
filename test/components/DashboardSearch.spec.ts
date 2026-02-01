@@ -1,10 +1,11 @@
 import { defineComponent } from 'vue'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardSearch from '../../src/runtime/components/DashboardSearch.vue'
 import type { DashboardSearchProps } from '../../src/runtime/components/DashboardSearch.vue'
+import { UTheme } from '#components'
 
 const DashboardWrapper = defineComponent({
   components: {
@@ -65,5 +66,20 @@ describe('DashboardSearch', () => {
         'aria-input-field-name': { enabled: false }
       }
     })).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { DashboardSearch, DashboardGroup, UTheme },
+      template: `
+        <UTheme :theme="{ dashboardSearch: { slots: { modal: 'test-theme-class' } } }">
+          <DashboardGroup>
+            <DashboardSearch :groups="[{ id: 'test', items: [{ label: 'Test' }] }]" :open="true" :portal="false" />
+          </DashboardGroup>
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('div[role="dialog"]').classes()).toContain('test-theme-class')
   })
 })

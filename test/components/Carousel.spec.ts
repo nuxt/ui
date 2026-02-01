@@ -1,10 +1,11 @@
 import { defineComponent } from 'vue'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Carousel from '../../src/runtime/components/Carousel.vue'
 import type { CarouselProps, CarouselSlots } from '../../src/runtime/components/Carousel.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 const CarouselWrapper = defineComponent({
   components: {
@@ -55,5 +56,18 @@ describe('Carousel', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Carousel, UTheme },
+      template: `
+        <UTheme :theme="{ carousel: { slots: { root: 'test-theme-class' } } }">
+          <Carousel :items="[{ src: 'test.jpg', alt: 'Test' }]" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

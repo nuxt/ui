@@ -1,10 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChatMessage from '../../src/runtime/components/ChatMessage.vue'
 import type { ChatMessageProps, ChatMessageSlots } from '../../src/runtime/components/ChatMessage.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/chat-message'
+import { UTheme } from '#components'
 
 describe('ChatMessage', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -40,5 +41,18 @@ describe('ChatMessage', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { ChatMessage, UTheme },
+      template: `
+        <UTheme :theme="{ chatMessage: { slots: { root: 'test-theme-class' } } }">
+          <ChatMessage id="1" role="user" :parts="[{ type: 'text', text: 'Hello' }]" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('article').classes()).toContain('test-theme-class')
   })
 })

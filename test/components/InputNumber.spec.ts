@@ -9,6 +9,7 @@ import type { FormInputEvents } from '../../src/module'
 import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/input-number'
+import { UTheme } from '#components'
 
 describe('InputNumber', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -145,5 +146,18 @@ describe('InputNumber', () => {
       await flushPromises()
       expect(wrapper.html()).not.toContain('Error message')
     })
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { InputNumber, UTheme },
+      template: `
+        <UTheme :theme="{ inputNumber: { slots: { root: 'test-theme-class' } } }">
+          <InputNumber />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

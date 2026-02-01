@@ -1,10 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import InputTags from '../../src/runtime/components/InputTags.vue'
 import type { InputTagsProps, InputTagsSlots } from '../../src/runtime/components/InputTags.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
+import { UTheme } from '#components'
 
 describe('InputTags', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -54,5 +55,18 @@ describe('InputTags', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { InputTags, UTheme },
+      template: `
+        <UTheme :theme="{ inputTags: { slots: { base: 'test-theme-class' } } }">
+          <InputTags />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

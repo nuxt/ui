@@ -1,9 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardToolbar from '../../src/runtime/components/DashboardToolbar.vue'
 import type { DashboardToolbarProps, DashboardToolbarSlots } from '../../src/runtime/components/DashboardToolbar.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('DashboardToolbar', () => {
   it.each([
@@ -24,5 +25,18 @@ describe('DashboardToolbar', () => {
     const wrapper = await mountSuspended(DashboardToolbar)
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { DashboardToolbar, UTheme },
+      template: `
+        <UTheme :theme="{ dashboardToolbar: { slots: { root: 'test-theme-class' } } }">
+          <DashboardToolbar />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

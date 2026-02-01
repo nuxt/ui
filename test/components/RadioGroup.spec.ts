@@ -1,6 +1,7 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { UTheme } from '#components'
 import RadioGroup from '../../src/runtime/components/RadioGroup.vue'
 import type { RadioGroupProps, RadioGroupSlots } from '../../src/runtime/components/RadioGroup.vue'
 import ComponentRender from '../component-render'
@@ -133,5 +134,18 @@ describe('RadioGroup', () => {
       const formFieldLabel = wrapper.findAll('label').map(label => label.attributes()).filter(label => !label.for?.includes('Option'))[0]
       expect(formFieldLabel?.for).toBeUndefined()
     })
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { RadioGroup, UTheme },
+      template: `
+        <UTheme :theme="{ radioGroup: { slots: { root: 'test-theme-class' } } }">
+          <RadioGroup :items="['Option 1', 'Option 2']" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[role="radiogroup"]').classes()).toContain('test-theme-class')
   })
 })

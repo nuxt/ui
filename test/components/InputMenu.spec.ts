@@ -9,6 +9,7 @@ import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import { expectEmitPayloadType } from '../utils/types'
 import theme from '#build/ui/input'
+import { UTheme } from '#components'
 
 describe('InputMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -317,5 +318,18 @@ describe('InputMenu', () => {
         valueKey: 'value'
       })).toEqualTypeOf<[(string | number)[]]>()
     })
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { InputMenu, UTheme },
+      template: `
+        <UTheme :theme="{ inputMenu: { slots: { root: 'test-theme-class' } } }">
+          <InputMenu :items="['Item 1', 'Item 2']" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

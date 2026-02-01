@@ -49,7 +49,7 @@ export type PricingPlansSlots<T extends PricingPlanProps = PricingPlanProps> = {
 <script setup lang="ts" generic="T extends PricingPlanProps">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUI } from '#imports'
+import { useAppConfig } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UPricingPlan from './PricingPlan.vue'

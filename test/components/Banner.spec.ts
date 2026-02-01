@@ -1,9 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Banner from '../../src/runtime/components/Banner.vue'
 import type { BannerProps, BannerSlots } from '../../src/runtime/components/Banner.vue'
 import ComponentRender from '../component-render'
+import { UTheme } from '#components'
 
 describe('Banner', () => {
   const props = { id: 'banner' }
@@ -44,5 +45,18 @@ describe('Banner', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  test('with theme works', async () => {
+    const wrapper = await mountSuspended({
+      components: { Banner, UTheme },
+      template: `
+        <UTheme :theme="{ banner: { slots: { root: 'test-theme-class' } } }">
+          <Banner id="test-banner" />
+        </UTheme>
+      `
+    })
+
+    expect(wrapper.find('.banner').classes()).toContain('test-theme-class')
   })
 })
