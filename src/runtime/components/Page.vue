@@ -25,13 +25,14 @@ export interface PageSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { tv } from '../utils/tv'
 
 const props = defineProps<PageProps>()
 const slots = defineSlots<PageSlots>()
 
 const appConfig = useAppConfig() as Page['AppConfig']
+const uiProp = useComponentUI('page', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.page || {}) })({
@@ -41,16 +42,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.page || {}) 
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <Slot v-if="!!slots.left" data-slot="left" :class="ui.left({ class: props.ui?.left })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <Slot v-if="!!slots.left" data-slot="left" :class="ui.left({ class: uiProp?.left })">
       <slot name="left" />
     </Slot>
 
-    <div data-slot="center" :class="ui.center({ class: props.ui?.center })">
+    <div data-slot="center" :class="ui.center({ class: uiProp?.center })">
       <slot />
     </div>
 
-    <Slot v-if="!!slots.right" data-slot="right" :class="ui.right({ class: props.ui?.right })">
+    <Slot v-if="!!slots.right" data-slot="right" :class="ui.right({ class: uiProp?.right })">
       <slot name="right" />
     </Slot>
   </Primitive>

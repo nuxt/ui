@@ -109,7 +109,7 @@ import { computed, useTemplateRef } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
+import { useAppConfig, useColorMode, defineShortcuts, useComponentUI } from '#imports'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
 import { omit, transformUI } from '../../utils'
@@ -132,6 +132,7 @@ const { open, mapNavigationItems, postFilter } = useContentSearch()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
+const uiProp = useComponentUI('contentSearch', props)
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
@@ -268,7 +269,7 @@ defineExpose({
     :description="description || t('contentSearch.description')"
     v-bind="modalProps"
     data-slot="modal"
-    :class="ui.modal({ class: [props.ui?.modal, props.class] })"
+    :class="ui.modal({ class: [uiProp?.modal, props.class] })"
   >
     <template #content="contentData">
       <slot name="content" v-bind="contentData">
@@ -278,7 +279,7 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :ui="transformUI(omit(ui, ['modal']), props.ui)"
+          :ui="transformUI(omit(ui, ['modal']), uiProp)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >

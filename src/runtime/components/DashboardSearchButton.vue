@@ -54,7 +54,7 @@ import { computed, toRef } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { useDashboard } from '../utils/dashboard'
 import { omit, transformUI } from '../utils'
@@ -82,6 +82,7 @@ const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : 
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSearchButton['AppConfig']
+const uiProp = useComponentUI('dashboardSearchButton', props)
 const { toggleSearch } = useDashboard({ toggleSearch: () => {} })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearchButton || {}) })({
@@ -103,8 +104,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSea
         } : {}),
         ...$attrs
       }"
-      :class="ui.base({ class: [props.ui?.base, props.class] })"
-      :ui="transformUI(ui, props.ui)"
+      :class="ui.base({ class: [uiProp?.base, props.class] })"
+      :ui="transformUI(ui, uiProp)"
       @click="toggleSearch"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
@@ -112,7 +113,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSea
       </template>
 
       <template #trailing="{ ui: uiProxy }">
-        <div data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+        <div data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
           <slot name="trailing" :ui="uiProxy">
             <template v-if="kbds?.length">
               <UKbd v-for="(kbd, index) in kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />

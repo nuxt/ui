@@ -50,7 +50,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { Motion, useScroll, useSpring, useTransform } from 'motion-v'
 import { defu } from 'defu'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UChangelogVersion from './ChangelogVersion.vue'
@@ -64,6 +64,7 @@ const slots = defineSlots<ChangelogVersionsSlots<T>>()
 const getProxySlots = () => omit(slots, ['default', 'indicator'])
 
 const appConfig = useAppConfig() as ChangelogVersions['AppConfig']
+const uiProp = useComponentUI('changelogVersions', props)
 
 const springOptions = computed(() => defu(typeof props.indicatorMotion === 'object' ? props.indicatorMotion : {}, { damping: 30, restDelta: 0.001 }))
 
@@ -76,14 +77,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.changelogVer
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!props.indicator || !!slots.indicator" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div v-if="!!props.indicator || !!slots.indicator" data-slot="indicator" :class="ui.indicator({ class: uiProp?.indicator })">
       <slot name="indicator">
-        <Motion v-if="!!props.indicatorMotion" data-slot="beam" :class="ui.beam({ class: props.ui?.beam })" :style="{ height }" />
+        <Motion v-if="!!props.indicatorMotion" data-slot="beam" :class="ui.beam({ class: uiProp?.beam })" :style="{ height }" />
       </slot>
     </div>
 
-    <div v-if="versions?.length || !!slots.default" data-slot="container" :class="ui.container({ class: props.ui?.container })">
+    <div v-if="versions?.length || !!slots.default" data-slot="container" :class="ui.container({ class: uiProp?.container })">
       <slot>
         <UChangelogVersion
           v-for="(version, index) in versions"

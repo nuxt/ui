@@ -25,26 +25,27 @@ export interface DashboardToolbarSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { tv } from '../utils/tv'
 
 const props = defineProps<DashboardToolbarProps>()
 defineSlots<DashboardToolbarSlots>()
 
 const appConfig = useAppConfig() as DashboardToolbar['AppConfig']
+const uiProp = useComponentUI('dashboardToolbar', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardToolbar || {}) })())
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <slot>
-      <div data-slot="left" :class="ui.left({ class: [props.ui?.left] })">
+      <div data-slot="left" :class="ui.left({ class: [uiProp?.left] })">
         <slot name="left" />
       </div>
 
-      <div data-slot="right" :class="ui.right({ class: [props.ui?.right] })">
+      <div data-slot="right" :class="ui.right({ class: [uiProp?.right] })">
         <slot name="right" />
       </div>
     </slot>
