@@ -60,7 +60,8 @@ export type BreadcrumbSlots<T extends BreadcrumbItem = BreadcrumbItem> = {
 <script setup lang="ts" generic="T extends BreadcrumbItem">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUI } from '#imports'
+import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
 import { get } from '../utils'
 import { tv } from '../utils/tv'

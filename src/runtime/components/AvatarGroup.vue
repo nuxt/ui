@@ -31,7 +31,8 @@ export interface AvatarGroupSlots {
 <script setup lang="ts">
 import { computed, provide } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUI } from '#imports'
+import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { avatarGroupInjectionKey } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'

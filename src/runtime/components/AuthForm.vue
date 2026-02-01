@@ -105,7 +105,8 @@ export type AuthFormSlots<T extends object = object, F extends AuthFormField = A
 <script setup lang="ts" generic="T extends FormSchema, F extends AuthFormField">
 import { reactive, ref, computed, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUI } from '#imports'
+import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
 import { omit, pick } from '../utils'
 import { tv } from '../utils/tv'

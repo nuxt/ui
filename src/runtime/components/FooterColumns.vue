@@ -49,7 +49,8 @@ export interface FooterColumnsSlots<T extends FooterColumnLink = FooterColumnLin
 <script setup lang="ts" generic="T extends FooterColumnLink">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUI } from '#imports'
+import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { pickLinkProps } from '../utils/link'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'

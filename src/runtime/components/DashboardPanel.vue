@@ -22,7 +22,8 @@ export interface DashboardPanelSlots {
 
 <script setup lang="ts">
 import { computed, useId, toRef } from 'vue'
-import { useAppConfig, useComponentUI } from '#imports'
+import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useResizable } from '../composables/useResizable'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'

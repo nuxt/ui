@@ -66,7 +66,8 @@ export interface BannerEmits {
 <script setup lang="ts">
 import { computed, ref, onMounted, useId } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useHead, useAppConfig, useComponentUI } from '#imports'
+import { useHead, useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
