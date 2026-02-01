@@ -51,13 +51,12 @@ const slots = defineSlots<BlogPostsSlots<T>>()
 const getProxySlots = () => omit(slots, ['default'])
 
 const appConfig = useAppConfig() as BlogPosts['AppConfig']
-const uiTheme = useComponentUiTheme('blogPosts', () => ({ slots: props.ui }))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPosts || {}) }))
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: uiTheme?.slots?.class || props.class })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: props.class })">
     <slot>
       <UBlogPost
         v-for="(post, index) in posts"

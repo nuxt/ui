@@ -64,7 +64,6 @@ const slots = defineSlots<PricingPlansSlots<T>>()
 const getProxySlots = () => omit(slots, ['default'])
 
 const appConfig = useAppConfig() as PricingPlans['AppConfig']
-const uiTheme = useComponentUiTheme('pricingPlans', () => ({ slots: props.ui }))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingPlans || {}) }))
 

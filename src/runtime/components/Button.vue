@@ -64,7 +64,6 @@ const slots = defineSlots<ButtonSlots>()
 const appConfig = useAppConfig() as Button['AppConfig']
 const uiProp = useComponentUI('button', props)
 const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(props)
-const uiTheme = useComponentUiTheme('button', () => ({ slots: props.ui }))
 
 const linkProps = useForwardProps(pickLinkProps(props))
 

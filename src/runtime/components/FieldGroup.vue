@@ -32,7 +32,7 @@ export interface FieldGroupSlots {
 <script setup lang="ts">
 import { provide, computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useAppConfig, useComponentUiTheme } from '#imports'
+import { useAppConfig, useComponentUI } from '#imports'
 import { fieldGroupInjectionKey } from '../composables/useFieldGroup'
 import { tv } from '../utils/tv'
 
@@ -42,7 +42,7 @@ const props = withDefaults(defineProps<FieldGroupProps>(), {
 defineSlots<FieldGroupSlots>()
 
 const appConfig = useAppConfig() as FieldGroup['AppConfig']
-const uiTheme = useComponentUiTheme('fieldGroup', () => ({ slots: props.ui }))
+const uiProp = useComponentUI('fieldGroup', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fieldGroup || {}) }))
@@ -54,7 +54,7 @@ provide(fieldGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: props.class })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: [uiProp?.class, props.class] })">
     <slot />
   </Primitive>
 </template>
