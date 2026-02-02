@@ -14,8 +14,7 @@ export interface BannerProps {
   as?: any
   /**
    * A unique id saved to local storage to remember if the banner has been dismissed.
-   * Change this value to show the banner again.
-   * @defaultValue '1'
+   * Without an explicit id, the banner will not be persisted and will reappear on page reload.
    */
   id?: string
   /**
@@ -65,7 +64,7 @@ export interface BannerEmits {
 </script>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed, ref, onMounted, useId } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useHead, useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -89,37 +88,67 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.banner || {}
   to: !!props.to
 }))
 
-const id = computed(() => `banner-${props.id || '1'}`)
+const instanceId = useId()
+const id = computed(() => {
+  const rawId = props.id || instanceId
+  // Sanitize to only allow safe characters for CSS custom properties and selectors
+  return `banner-${rawId.replace(/[^\w-]/g, '-')}`
+})
+const isVisible = ref(true)
+const hasPersistence = computed(() => !!props.id)
 
-watch(id, (newId) => {
-  if (typeof document === 'undefined' || typeof localStorage === 'undefined') return
-
-  const isClosed = localStorage.getItem(newId) === 'true'
-  const htmlElement = document.querySelector('html')
-
-  htmlElement?.classList.toggle('hide-banner', isClosed)
+onMounted(() => {
+  if (hasPersistence.value && typeof localStorage !== 'undefined') {
+    const isClosed = localStorage.getItem(id.value) === 'true'
+    isVisible.value = !isClosed
+  }
 })
 
-useHead({
-  script: [{
-    key: 'prehydrate-template-banner',
-    innerHTML: `
+useHead(() => {
+  if (!hasPersistence.value) return {}
+
+  return {
+    script: [{
+      key: `prehydrate-banner-${id.value}`,
+      innerHTML: `
+        (function() {
+          try {
             if (localStorage.getItem(${JSON.stringify(id.value)}) === 'true') {
-              document.querySelector('html').classList.add('hide-banner')
-            }`.replace(/\s+/g, ' '),
-    type: 'text/javascript'
-  }]
+              document.documentElement.style.setProperty('--${id.value}-display', 'none');
+            }
+          } catch (e) {}
+        })();
+      `.replace(/\s+/g, ' '),
+      type: 'text/javascript',
+      tagPosition: 'head'
+    }],
+    style: [{
+      key: `banner-style-${id.value}`,
+      innerHTML: `.banner[data-banner-id="${id.value}"] { display: var(--${id.value}-display, block); }`,
+      tagPosition: 'head'
+    }]
+  }
 })
 
 function onClose() {
-  localStorage.setItem(id.value, 'true')
-  document.querySelector('html')?.classList.add('hide-banner')
+  if (hasPersistence.value) {
+    localStorage.setItem(id.value, 'true')
+    document.documentElement.style.setProperty(`--${id.value}-display`, 'none')
+  }
+  isVisible.value = false
   emits('close')
 }
 </script>
 
 <template>
-  <Primitive :as="as" class="banner" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive
+    v-show="isVisible"
+    :as="as"
+    class="banner"
+    :data-banner-id="id"
+    data-slot="root"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+  >
     <ULink
       v-if="to"
       :aria-label="title"
@@ -171,9 +200,3 @@ function onClose() {
     </UContainer>
   </Primitive>
 </template>
-
-<style scoped>
-.hide-banner .banner {
-  display: none;
-}
-</style>

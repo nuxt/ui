@@ -16,7 +16,10 @@ export type FormHTMLAttributes = Pick<VueFormHTMLAttributes, 'acceptcharset' | '
 
 export type ImgHTMLAttributes = Pick<VueImgHTMLAttributes, 'alt' | 'crossorigin' | 'decoding' | 'height' | 'loading' | 'referrerpolicy' | 'sizes' | 'src' | 'srcset' | 'usemap' | 'width'>
 
-export type InputHTMLAttributes = Pick<VueInputHTMLAttributes, 'autocomplete' | 'autofocus' | 'disabled' | 'enterKeyHint' | 'form' | 'formaction' | 'formenctype' | 'formmethod' | 'formnovalidate' | 'formtarget' | 'list' | 'max' | 'maxlength' | 'min' | 'minlength' | 'name' | 'pattern' | 'placeholder' | 'readonly' | 'required' | 'size' | 'step' | 'type'>
+// Note: 'autocomplete' is defined with simpler types to avoid TS2590 complexity issues with Nuxt 4.3+
+export type InputHTMLAttributes = Pick<VueInputHTMLAttributes, 'autofocus' | 'disabled' | 'enterKeyHint' | 'form' | 'formaction' | 'formenctype' | 'formmethod' | 'formnovalidate' | 'formtarget' | 'list' | 'max' | 'maxlength' | 'min' | 'minlength' | 'name' | 'pattern' | 'placeholder' | 'readonly' | 'required' | 'size' | 'step' | 'type'> & {
+  autocomplete?: 'on' | 'off' | (string & {})
+}
 
 export type TableHTMLAttributes = Pick<VueTableHTMLAttributes, 'cellpadding' | 'cellspacing' | 'summary' | 'width'>
 

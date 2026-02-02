@@ -15,6 +15,7 @@ const components = [
   'carousel',
   'chat-shimmer',
   'changelog-version',
+  'changelog-versions',
   'checkbox-group',
   'checkbox',
   'chip',

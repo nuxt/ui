@@ -85,6 +85,8 @@ Use the `links` prop to display a list of [Button](/docs/components/button) in t
 prettier: true
 external:
   - links
+externalTypes:
+  - ButtonProps[]
 ignore:
   - title
   - description

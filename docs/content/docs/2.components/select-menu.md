@@ -172,6 +172,10 @@ props:
 ---
 ::
 
+::tip
+Use the `by` prop to compare objects by a field instead of reference when the `model-value` is an object.
+::
+
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections, the selected items will be separated by a comma in the trigger.
@@ -527,7 +531,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
-### Clear :badge{label="Soon" class="align-text-top"}
+### Clear :badge{label="4.4+" class="align-text-top"}
 
 Use the `clear` prop to display a clear button when a value is selected.
 
@@ -557,7 +561,7 @@ props:
 ---
 ::
 
-### Clear Icon :badge{label="Soon" class="align-text-top"}
+### Clear Icon :badge{label="4.4+" class="align-text-top"}
 
 Use the `clear-icon` prop to customize the clear button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 
@@ -909,7 +913,7 @@ name: 'select-menu-virtualize-example'
 ---
 ::
 
-### With infinite scroll :badge{label="Soon" class="align-text-top"}
+### With infinite scroll :badge{label="4.4+" class="align-text-top"}
 
 You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
 

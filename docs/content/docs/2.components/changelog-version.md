@@ -222,6 +222,8 @@ hide:
   - ui.container
 external:
   - authors
+externalTypes:
+  - UserProps[]
 ignore:
   - title
   - description

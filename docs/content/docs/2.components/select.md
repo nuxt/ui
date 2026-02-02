@@ -165,6 +165,10 @@ props:
 ---
 ::
 
+::tip
+Use the `by` prop to compare objects by a field instead of reference when the `model-value` is an object.
+::
+
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections, the selected items will be separated by a comma in the trigger.
@@ -724,7 +728,7 @@ collapse: true
 ---
 ::
 
-### With infinite scroll :badge{label="Soon" class="align-text-top"}
+### With infinite scroll :badge{label="4.4+" class="align-text-top"}
 
 You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
 

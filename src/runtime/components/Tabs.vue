@@ -55,12 +55,17 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
    * The orientation of the tabs.
    * @defaultValue 'horizontal'
    */
-  orientation?: TabsRootProps['orientation']
+  orientation?: Tabs['variants']['orientation']
   /**
    * The content of the tabs, can be disabled to prevent rendering the content.
    * @defaultValue true
    */
   content?: boolean
+  /**
+   * The key used to get the value from the item.
+   * @defaultValue 'value'
+   */
+  valueKey?: GetItemKeys<T>
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
@@ -101,6 +106,7 @@ const props = withDefaults(defineProps<TabsProps<T>>(), {
   defaultValue: '0',
   orientation: 'horizontal',
   unmountOnHide: true,
+  valueKey: 'value',
   labelKey: 'label'
 })
 const emits = defineEmits<TabsEmits>()
@@ -143,7 +149,7 @@ defineExpose({
         v-for="(item, index) of items"
         :key="index"
         :ref="el => (triggersRef[index] = el as ComponentPublicInstance)"
-        :value="item.value ?? String(index)"
+        :value="get(item, props.valueKey as string) ?? String(index)"
         :disabled="item.disabled"
         data-slot="trigger"
         :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger] })"
@@ -174,7 +180,7 @@ defineExpose({
     </TabsList>
 
     <template v-if="!!content">
-      <TabsContent v-for="(item, index) of items" :key="index" :value="item.value ?? String(index)" data-slot="content" :class="ui.content({ class: [props.ui?.content, item.ui?.content, item.class] })">
+      <TabsContent v-for="(item, index) of items" :key="index" :value="get(item, props.valueKey as string) ?? String(index)" data-slot="content" :class="ui.content({ class: [props.ui?.content, item.ui?.content, item.class] })">
         <slot :name="((item.slot || 'content') as keyof TabsSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :ui="ui">
           {{ item.content }}
         </slot>
