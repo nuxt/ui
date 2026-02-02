@@ -8,9 +8,6 @@ const links = [{
   label: 'Roadmap',
   to: '/roadmap'
 }, {
-  label: 'Terms',
-  to: '/pro/terms'
-}, {
   label: 'Releases',
   to: 'https://github.com/nuxt/ui/releases',
   target: '_blank'
