@@ -110,10 +110,6 @@ const communityLinks = computed(() => [{
   icon: 'i-lucide-git-pull-request-arrow',
   label: 'Contribution',
   to: '/getting-started/contribution'
-}, {
-  label: 'Roadmap',
-  icon: 'i-lucide-map',
-  to: '/roadmap'
 }].filter(Boolean) as PageLink[])
 </script>
 
