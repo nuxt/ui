@@ -126,6 +126,7 @@
     "@unhead/vue": "^2.1.2",
     "@vueuse/core": "^14.1.0",
     "@vueuse/integrations": "^14.1.0",
+    "@vueuse/shared": "^14.2.0",
     "colortranslator": "^5.0.0",
     "consola": "^3.4.2",
     "defu": "^6.1.4",

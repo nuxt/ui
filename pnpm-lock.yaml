@@ -64,6 +64,9 @@ importers:
       '@vueuse/integrations':
         specifier: ^14.1.0
         version: 14.1.0(axios@1.12.2)(change-case@5.4.4)(fuse.js@7.1.0)(sortablejs@1.15.6)(vue@3.5.27(typescript@5.8.3))
+      '@vueuse/shared':
+        specifier: ^14.2.0
+        version: 14.2.0(vue@3.5.27(typescript@5.8.3))
       colortranslator:
         specifier: ^5.0.0
         version: 5.0.0
@@ -3487,6 +3490,11 @@ packages:
 
   '@vueuse/shared@14.1.0':
     resolution: {integrity: sha512-EcKxtYvn6gx1F8z9J5/rsg3+lTQnvOruQd8fUecW99DCK04BkWD7z5KQ/wTAx+DazyoEE9dJt/zV8OIEQbM6kw==}
+    peerDependencies:
+      vue: ^3.5.0
+
+  '@vueuse/shared@14.2.0':
+    resolution: {integrity: sha512-Z0bmluZTlAXgUcJ4uAFaML16JcD8V0QG00Db3quR642I99JXIDRa2MI2LGxiLVhcBjVnL1jOzIvT5TT2lqJlkA==}
     peerDependencies:
       vue: ^3.5.0
 
@@ -11106,6 +11114,10 @@ snapshots:
     dependencies:
       vue: 3.5.27(typescript@5.8.3)
 
+  '@vueuse/shared@14.2.0(vue@3.5.27(typescript@5.8.3))':
+    dependencies:
+      vue: 3.5.27(typescript@5.8.3)
+
   '@webcontainer/env@1.1.1': {}
 
   abbrev@2.0.0: {}
@@ -14985,7 +14997,7 @@ snapshots:
       '@internationalized/number': 3.6.5
       '@tanstack/vue-virtual': 3.13.12(vue@3.5.27(typescript@5.8.3))
       '@vueuse/core': 14.1.0(vue@3.5.27(typescript@5.8.3))
-      '@vueuse/shared': 14.1.0(vue@3.5.27(typescript@5.8.3))
+      '@vueuse/shared': 14.2.0(vue@3.5.27(typescript@5.8.3))
       aria-hidden: 1.2.6
       defu: 6.1.4
       ohash: 2.0.11
