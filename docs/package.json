@@ -60,5 +60,8 @@
     "vue-component-meta": "^3.2.4",
     "yup": "^1.7.1",
     "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/sortablejs": "^1.15.9"
   }
 }
