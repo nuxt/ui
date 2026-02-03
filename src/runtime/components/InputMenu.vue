@@ -500,6 +500,12 @@ watch(
     flush: 'post'
   }
 )
+function onInputEnter(e: Event) {
+  if (comboboxRootRef.value?.highlightedElement) {
+    return
+  }
+  onCreate(e)
+}
 
 defineExpose({
   inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement),
@@ -628,7 +634,7 @@ defineExpose({
             data-slot="tagsInput"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
             @change.stop
-            @keydown.enter.stop.prevent
+            @keydown.enter.stop.prevent="onInputEnter"
           />
         </ComboboxInput>
       </TagsInputRoot>
@@ -646,6 +652,7 @@ defineExpose({
         @focus="onFocus"
         @change.stop
         @update:model-value="searchTerm = $event"
+        @keydown.enter="onInputEnter"
       />
 
       <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">

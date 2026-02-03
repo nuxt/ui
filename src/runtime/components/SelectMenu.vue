@@ -484,6 +484,12 @@ watch(
     flush: 'post'
   }
 )
+function onInputEnter(e: Event) {
+  if (comboboxRootRef.value?.highlightedElement) {
+    return
+  }
+  onCreate(e)
+}
 
 defineExpose({
   triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
@@ -632,6 +638,7 @@ defineExpose({
               data-slot="input"
               :class="ui.input({ class: props.ui?.input })"
               @change.stop
+              @keydown.enter="onInputEnter"
             />
           </ComboboxInput>
 
