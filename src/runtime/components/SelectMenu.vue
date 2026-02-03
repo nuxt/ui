@@ -496,6 +496,10 @@ function onInputEnter(e: Event) {
     e.stopPropagation()
     return
   }
+  // In case creation is not allowed skip
+  if (!createItem.value) {
+    return
+  }
   onCreate(e)
 }
 
