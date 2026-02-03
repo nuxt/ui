@@ -198,7 +198,7 @@ export interface SelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { useTemplateRef, computed, onMounted, toRef, toRaw } from 'vue'
+import { useTemplateRef, computed, onMounted, toRef, toRaw, watch } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
@@ -472,6 +472,19 @@ function onClear() {
 
 const viewportRef = useTemplateRef('viewportRef')
 
+const comboboxRootRef = useTemplateRef('comboboxRootRef')
+watch(
+  () => props.items,
+  () => {
+    if (props.ignoreFilter && createItem.value) {
+      comboboxRootRef.value?.highlightFirstItem?.()
+    }
+  },
+  {
+    flush: 'post'
+  }
+)
+
 defineExpose({
   triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
   viewportRef: toRef(() => viewportRef.value)
@@ -554,6 +567,7 @@ defineExpose({
     :id="id"
     v-slot="{ modelValue, open }"
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
+    ref="comboboxRootRef"
     ignore-filter
     as-child
     :name="name"

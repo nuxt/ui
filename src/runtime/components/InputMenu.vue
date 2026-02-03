@@ -205,7 +205,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { computed, useTemplateRef, toRef, onMounted, toRaw, nextTick } from 'vue'
+import { computed, useTemplateRef, toRef, onMounted, toRaw, nextTick, watch } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
@@ -488,6 +488,19 @@ function onClear() {
 
 const viewportRef = useTemplateRef('viewportRef')
 
+const comboboxRootRef = useTemplateRef('comboboxRootRef')
+watch(
+  () => props.items,
+  () => {
+    if (props.ignoreFilter && createItem.value) {
+      comboboxRootRef.value?.highlightFirstItem?.()
+    }
+  },
+  {
+    flush: 'post'
+  }
+)
+
 defineExpose({
   inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement),
   viewportRef: toRef(() => viewportRef.value)
@@ -569,6 +582,7 @@ defineExpose({
   <ComboboxRoot
     v-slot="{ modelValue, open }"
     v-bind="rootProps"
+    ref="comboboxRootRef"
     :name="name"
     :disabled="disabled"
     data-slot="root"
@@ -614,6 +628,7 @@ defineExpose({
             data-slot="tagsInput"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
             @change.stop
+            @keydown.enter.stop.prevent
           />
         </ComboboxInput>
       </TagsInputRoot>

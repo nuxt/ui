@@ -57,6 +57,25 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   lazy: true
 })
 
+const searchTermCreate = ref('')
+const searchTermDebouncedCreate = refDebounced(searchTermCreate, 200)
+
+const { data: usersCreate, status: statusCreate } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+  params: { q: searchTermDebouncedCreate },
+  transform: (data: User[]) => {
+    return data?.map(user => ({
+      id: user.id,
+      label: user.name,
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` }
+    }))
+  },
+  lazy: true
+})
+
+function onUserCreate(newStr: string) {
+  console.log('onUserCreate', newStr)
+}
+
 const value = ref('Apple')
 const valueMultiple = ref([fruits[0]!, vegetables[0]!])
 </script>
@@ -120,6 +139,18 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
         <UAvatar v-if="modelValue" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="modelValue.avatar" />
       </template>
     </USelectMenu>
+    <USelectMenu
+      v-model:search-term="searchTermCreate"
+      placeholder="Multiple search users with create..."
+      icon="i-lucide-user"
+      ignore-filter
+      :loading="statusCreate === 'pending'"
+      :items="usersCreate"
+      v-bind="props"
+      :multiple="true"
+      :create-item="'always'"
+      @create="onUserCreate"
+    />
     <USelectMenu
       icon="i-lucide-layout-list"
       placeholder="Search virtualized..."
