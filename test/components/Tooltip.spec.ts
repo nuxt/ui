@@ -56,7 +56,7 @@ describe('Tooltip', () => {
     const wrapper = await mountSuspended({
       components: { TooltipWrapper, UTheme },
       template: `
-        <UTheme :theme="{ tooltip: { slots: { content: 'test-theme-class' } } }">
+        <UTheme :ui="{ tooltip: { slots: { content: 'test-theme-class' } } }">
           <TooltipWrapper text="Test" :open="true" :portal="false" />
         </UTheme>
       `

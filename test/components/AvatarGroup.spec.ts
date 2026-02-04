@@ -52,7 +52,7 @@ describe('AvatarGroup', () => {
     const wrapper = await mountSuspended({
       components: { AvatarGroup, Avatar, UTheme },
       template: `
-        <UTheme :theme="{ avatarGroup: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ avatarGroup: { slots: { root: 'test-theme-class' } } }">
           <AvatarGroup>
             <Avatar alt="Test 1" />
             <Avatar alt="Test 2" />

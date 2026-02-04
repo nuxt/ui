@@ -76,7 +76,7 @@ describe('DashboardSearch', () => {
     const wrapper = await mountSuspended({
       components: { DashboardSearch, DashboardGroup, UTheme },
       template: `
-        <UTheme :theme="{ dashboardSearch: { slots: { modal: 'test-theme-class' } } }">
+        <UTheme :ui="{ dashboardSearch: { slots: { modal: 'test-theme-class' } } }">
           <DashboardGroup>
             <DashboardSearch :groups="[{ id: 'test', items: [{ label: 'Test' }] }]" :open="true" :portal="false" />
           </DashboardGroup>

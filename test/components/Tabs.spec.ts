@@ -74,7 +74,7 @@ describe('Tabs', () => {
     const wrapper = await mountSuspended({
       components: { Tabs, UTheme },
       template: `
-        <UTheme :theme="{ tabs: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ tabs: { slots: { root: 'test-theme-class' } } }">
           <Tabs :items="[{ label: 'Tab1' }]" />
         </UTheme>
       `

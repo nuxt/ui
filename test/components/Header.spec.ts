@@ -50,7 +50,7 @@ describe('Header', () => {
     const wrapper = await mountSuspended({
       components: { Header, UTheme },
       template: `
-        <UTheme :theme="{ header: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ header: { slots: { root: 'test-theme-class' } } }">
           <Header />
         </UTheme>
       `

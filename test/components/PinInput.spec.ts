@@ -149,7 +149,7 @@ describe('PinInput', () => {
     const wrapper = await mountSuspended({
       components: { PinInput, UTheme },
       template: `
-        <UTheme :theme="{ pinInput: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ pinInput: { slots: { root: 'test-theme-class' } } }">
           <PinInput />
         </UTheme>
       `

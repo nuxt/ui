@@ -259,7 +259,7 @@ describe('Table', () => {
     const wrapper = await mountSuspended({
       components: { Table, UTheme },
       template: `
-        <UTheme :theme="{ table: { slots: { base: 'test-theme-class' } } }">
+        <UTheme :ui="{ table: { slots: { base: 'test-theme-class' } } }">
           <Table :data="[{ id: 1 }]" />
         </UTheme>
       `

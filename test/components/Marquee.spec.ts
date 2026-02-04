@@ -38,7 +38,7 @@ describe('Marquee', () => {
     const wrapper = await mountSuspended({
       components: { Marquee, UTheme },
       template: `
-        <UTheme :theme="{ marquee: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ marquee: { slots: { root: 'test-theme-class' } } }">
           <Marquee />
         </UTheme>
       `

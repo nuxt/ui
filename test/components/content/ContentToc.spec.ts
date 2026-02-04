@@ -77,7 +77,7 @@ describe('ContentToc', () => {
     const wrapper = await mountSuspended({
       components: { ContentToc, UTheme },
       template: `
-        <UTheme :theme="{ contentToc: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ contentToc: { slots: { root: 'test-theme-class' } } }">
           <ContentToc :links="[{ id: 'test', depth: 2, text: 'Test' }]" />
         </UTheme>
       `

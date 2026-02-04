@@ -59,7 +59,7 @@ describe('Breadcrumb', () => {
     const wrapper = await mountSuspended({
       components: { Breadcrumb, UTheme },
       template: `
-        <UTheme :theme="{ breadcrumb: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ breadcrumb: { slots: { root: 'test-theme-class' } } }">
           <Breadcrumb :items="[{ label: 'Home' }]" />
         </UTheme>
       `

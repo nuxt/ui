@@ -51,7 +51,7 @@ describe('Banner', () => {
     const wrapper = await mountSuspended({
       components: { Banner, UTheme },
       template: `
-        <UTheme :theme="{ banner: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ banner: { slots: { root: 'test-theme-class' } } }">
           <Banner id="test-banner" />
         </UTheme>
       `

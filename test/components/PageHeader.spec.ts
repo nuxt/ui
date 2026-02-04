@@ -44,7 +44,7 @@ describe('PageHeader', () => {
     const wrapper = await mountSuspended({
       components: { PageHeader, UTheme },
       template: `
-        <UTheme :theme="{ pageHeader: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ pageHeader: { slots: { root: 'test-theme-class' } } }">
           <PageHeader title="Title" />
         </UTheme>
       `

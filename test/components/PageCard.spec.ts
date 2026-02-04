@@ -69,7 +69,7 @@ describe('PageCard', () => {
     const wrapper = await mountSuspended({
       components: { PageCard, UTheme },
       template: `
-        <UTheme :theme="{ pageCard: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ pageCard: { slots: { root: 'test-theme-class' } } }">
           <PageCard title="Title" />
         </UTheme>
       `

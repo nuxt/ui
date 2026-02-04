@@ -187,7 +187,7 @@ describe('FileUpload', () => {
     const wrapper = await mountSuspended({
       components: { FileUpload, UTheme },
       template: `
-        <UTheme :theme="{ fileUpload: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ fileUpload: { slots: { root: 'test-theme-class' } } }">
           <FileUpload />
         </UTheme>
       `

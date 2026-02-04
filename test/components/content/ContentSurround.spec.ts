@@ -39,7 +39,7 @@ describe('ContentSurround', () => {
     const wrapper = await mountSuspended({
       components: { ContentSurround, UTheme },
       template: `
-        <UTheme :theme="{ contentSurround: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ contentSurround: { slots: { root: 'test-theme-class' } } }">
           <ContentSurround :surround="[{ path: '/prev', title: 'Prev' }, { path: '/next', title: 'Next' }]" />
         </UTheme>
       `

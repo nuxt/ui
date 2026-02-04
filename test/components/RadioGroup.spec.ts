@@ -140,7 +140,7 @@ describe('RadioGroup', () => {
     const wrapper = await mountSuspended({
       components: { RadioGroup, UTheme },
       template: `
-        <UTheme :theme="{ radioGroup: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ radioGroup: { slots: { root: 'test-theme-class' } } }">
           <RadioGroup :items="['Option 1', 'Option 2']" />
         </UTheme>
       `

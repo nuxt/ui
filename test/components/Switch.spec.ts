@@ -123,7 +123,7 @@ describe('Switch', () => {
     const wrapper = await mountSuspended({
       components: { Switch, UTheme },
       template: `
-        <UTheme :theme="{ switch: { slots: { base: 'test-theme-class' } } }">
+        <UTheme :ui="{ switch: { slots: { base: 'test-theme-class' } } }">
           <Switch />
         </UTheme>
       `

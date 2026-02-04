@@ -45,7 +45,7 @@ describe('Avatar', () => {
     const wrapper = await mountSuspended({
       components: { Avatar, UTheme },
       template: `
-        <UTheme :theme="{ avatar: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ avatar: { slots: { root: 'test-theme-class' } } }">
           <Avatar alt="Test" />
         </UTheme>
       `

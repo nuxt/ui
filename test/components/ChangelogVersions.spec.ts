@@ -54,7 +54,7 @@ describe('ChangelogVersions', () => {
     const wrapper = await mountSuspended({
       components: { ChangelogVersions, UTheme },
       template: `
-        <UTheme :theme="{ changelogVersions: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ changelogVersions: { slots: { root: 'test-theme-class' } } }">
           <ChangelogVersions :versions="[{ title: 'Title' }]" />
         </UTheme>
       `

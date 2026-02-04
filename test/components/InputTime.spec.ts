@@ -74,7 +74,7 @@ describe('InputTime', () => {
     const wrapper = await mountSuspended({
       components: { InputTime, UTheme },
       template: `
-        <UTheme :theme="{ inputTime: { slots: { base: 'test-theme-class' } } }">
+        <UTheme :ui="{ inputTime: { slots: { base: 'test-theme-class' } } }">
           <InputTime />
         </UTheme>
       `

@@ -60,7 +60,7 @@ describe('Alert', () => {
     const wrapper = await mountSuspended({
       components: { Alert, UTheme },
       template: `
-        <UTheme :theme="{ alert: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ alert: { slots: { root: 'test-theme-class' } } }">
           <Alert title="Themed" />
         </UTheme>
       `

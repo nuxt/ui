@@ -176,7 +176,7 @@ describe('ContextMenu', () => {
     const wrapper = await mountSuspended({
       components: { ContextMenu, UTheme },
       template: `
-        <UTheme :theme="{ contextMenu: { slots: { content: 'test-theme-class' } } }">
+        <UTheme :ui="{ contextMenu: { slots: { content: 'test-theme-class' } } }">
           <ContextMenu :items="[[{ label: 'Item' }]]" :portal="false">
             <span>Right Click</span>
           </ContextMenu>

@@ -187,7 +187,7 @@ describe('DropdownMenu', () => {
     const wrapper = await mountSuspended({
       components: { DropdownMenu, UTheme },
       template: `
-        <UTheme :theme="{ dropdownMenu: { slots: { content: 'test-theme-class' } } }">
+        <UTheme :ui="{ dropdownMenu: { slots: { content: 'test-theme-class' } } }">
           <DropdownMenu :items="[{ label: 'Item' }]" :open="true" :portal="false" />
         </UTheme>
       `

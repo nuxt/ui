@@ -81,7 +81,7 @@ describe('Timeline', () => {
     const wrapper = await mountSuspended({
       components: { Timeline, UTheme },
       template: `
-        <UTheme :theme="{ timeline: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ timeline: { slots: { root: 'test-theme-class' } } }">
           <Timeline :items="[{ title: 'Item 1' }]" />
         </UTheme>
       `

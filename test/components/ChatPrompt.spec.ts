@@ -40,7 +40,7 @@ describe('ChatPrompt', () => {
     const wrapper = await mountSuspended({
       components: { ChatPrompt, UTheme },
       template: `
-        <UTheme :theme="{ chatPrompt: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ chatPrompt: { slots: { root: 'test-theme-class' } } }">
           <ChatPrompt placeholder="Placeholder" />
         </UTheme>
       `

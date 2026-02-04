@@ -55,7 +55,7 @@ describe('Empty', () => {
     const wrapper = await mountSuspended({
       components: { Empty, UTheme },
       template: `
-        <UTheme :theme="{ empty: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ empty: { slots: { root: 'test-theme-class' } } }">
           <Empty title="Empty" />
         </UTheme>
       `

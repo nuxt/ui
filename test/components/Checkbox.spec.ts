@@ -125,7 +125,7 @@ describe('Checkbox', () => {
     const wrapper = await mountSuspended({
       components: { Checkbox, UTheme },
       template: `
-        <UTheme :theme="{ checkbox: { slots: { base: 'test-theme-class' } } }">
+        <UTheme :ui="{ checkbox: { slots: { base: 'test-theme-class' } } }">
           <Checkbox />
         </UTheme>
       `

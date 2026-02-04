@@ -35,7 +35,7 @@ describe('DashboardSearchButton', () => {
     const wrapper = await mountSuspended({
       components: { DashboardSearchButton, UTheme },
       template: `
-        <UTheme :theme="{ dashboardSearchButton: { slots: { base: 'test-theme-class' } } }">
+        <UTheme :ui="{ dashboardSearchButton: { slots: { base: 'test-theme-class' } } }">
           <DashboardSearchButton label="Search" />
         </UTheme>
       `

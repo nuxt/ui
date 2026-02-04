@@ -70,7 +70,7 @@ describe('Stepper', () => {
     const wrapper = await mountSuspended({
       components: { Stepper, UTheme },
       template: `
-        <UTheme :theme="{ stepper: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ stepper: { slots: { root: 'test-theme-class' } } }">
           <Stepper :items="[{ title: 'Step 1' }, { title: 'Step 2' }]" />
         </UTheme>
       `

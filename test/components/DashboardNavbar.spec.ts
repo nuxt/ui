@@ -60,7 +60,7 @@ describe('DashboardNavbar', () => {
     const wrapper = await mountSuspended({
       components: { DashboardNavbar, DashboardGroup, UTheme },
       template: `
-        <UTheme :theme="{ dashboardNavbar: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ dashboardNavbar: { slots: { root: 'test-theme-class' } } }">
           <DashboardGroup>
             <DashboardNavbar title="Test" />
           </DashboardGroup>

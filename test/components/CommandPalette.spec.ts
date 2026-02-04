@@ -173,7 +173,7 @@ describe('CommandPalette', () => {
     const wrapper = await mountSuspended({
       components: { CommandPalette, UTheme },
       template: `
-        <UTheme :theme="{ commandPalette: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ commandPalette: { slots: { root: 'test-theme-class' } } }">
           <CommandPalette />
         </UTheme>
       `

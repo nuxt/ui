@@ -9,7 +9,7 @@ type UIConfig = TVConfig<typeof ui>
 type UIConfigEntry<TName extends keyof UIConfig> = NonNullable<UIConfig[TName]>
 type UIConfigSlots<TName extends keyof UIConfig> = UIConfigEntry<TName> extends { slots?: infer S } ? S : Record<string, any>
 export type ThemeRootContext = {
-  theme: ComputedRef<UIConfig>
+  ui: ComputedRef<UIConfig>
 }
 
 const [inject, provide] = createContext<ThemeRootContext>('UTheme', 'RootContext')
@@ -21,9 +21,9 @@ type ComponentUiProps<TName extends keyof UIConfig> = {
 }
 
 export function useComponentUI<TName extends keyof UIConfig>(name: TName, props: ComponentUiProps<TName>): ComputedRef<UIConfigSlots<TName>> {
-  const { theme } = inject({ theme: computed(() => ({})) })
+  const { ui } = inject({ ui: computed(() => ({})) })
   return computed(() => {
-    const themeEntry = (theme.value[name] || {}) as UIConfigEntry<TName>
+    const themeEntry = (ui.value[name] || {}) as UIConfigEntry<TName>
     const themeSlots = ('slots' in themeEntry ? (themeEntry as { slots?: UIConfigSlots<TName> }).slots : undefined) || {}
     return defu(props.ui ?? {}, themeSlots) as UIConfigSlots<TName>
   })

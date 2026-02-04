@@ -63,7 +63,7 @@ describe('PageSection', () => {
     const wrapper = await mountSuspended({
       components: { PageSection, UTheme },
       template: `
-        <UTheme :theme="{ pageSection: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ pageSection: { slots: { root: 'test-theme-class' } } }">
           <PageSection title="Test" />
         </UTheme>
       `

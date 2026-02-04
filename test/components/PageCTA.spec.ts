@@ -54,7 +54,7 @@ describe('PageCTA', () => {
     const wrapper = await mountSuspended({
       components: { PageCTA, UTheme },
       template: `
-        <UTheme :theme="{ pageCTA: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ pageCTA: { slots: { root: 'test-theme-class' } } }">
           <PageCTA title="Title" />
         </UTheme>
       `

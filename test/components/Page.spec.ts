@@ -38,7 +38,7 @@ describe('Page', () => {
     const wrapper = await mountSuspended({
       components: { Page, UTheme },
       template: `
-        <UTheme :theme="{ page: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ page: { slots: { root: 'test-theme-class' } } }">
           <Page>Content</Page>
         </UTheme>
       `

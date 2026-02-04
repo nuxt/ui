@@ -58,7 +58,7 @@ describe('DashboardPanel', () => {
     const wrapper = await mountSuspended({
       components: { DashboardPanel, DashboardGroup, UTheme },
       template: `
-        <UTheme :theme="{ dashboardPanel: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ dashboardPanel: { slots: { root: 'test-theme-class' } } }">
           <DashboardGroup>
             <DashboardPanel />
           </DashboardGroup>

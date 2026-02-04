@@ -56,7 +56,7 @@ describe('Modal', () => {
     const wrapper = await mountSuspended({
       components: { Modal, UTheme },
       template: `
-        <UTheme :theme="{ modal: { slots: { content: 'test-theme-class' } } }">
+        <UTheme :ui="{ modal: { slots: { content: 'test-theme-class' } } }">
           <Modal :open="true" :portal="false" title="Title" />
         </UTheme>
       `

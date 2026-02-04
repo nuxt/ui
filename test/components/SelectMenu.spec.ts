@@ -343,7 +343,7 @@ describe('SelectMenu', () => {
     const wrapper = await mountSuspended({
       components: { SelectMenu, UTheme },
       template: `
-        <UTheme :theme="{ selectMenu: { slots: { base: 'test-theme-class' } } }">
+        <UTheme :ui="{ selectMenu: { slots: { base: 'test-theme-class' } } }">
           <SelectMenu :items="['Option 1', 'Option 2']" />
         </UTheme>
       `

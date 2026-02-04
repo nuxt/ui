@@ -49,7 +49,7 @@ describe('ColorPicker', () => {
     const wrapper = await mountSuspended({
       components: { ColorPicker, UTheme },
       template: `
-        <UTheme :theme="{ colorPicker: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ colorPicker: { slots: { root: 'test-theme-class' } } }">
           <ColorPicker />
         </UTheme>
       `

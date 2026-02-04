@@ -49,7 +49,7 @@ describe('Progress', () => {
     const wrapper = await mountSuspended({
       components: { Progress, UTheme },
       template: `
-        <UTheme :theme="{ progress: { slots: { base: 'test-theme-class' } } }">
+        <UTheme :ui="{ progress: { slots: { base: 'test-theme-class' } } }">
           <Progress :model-value="50" />
         </UTheme>
       `

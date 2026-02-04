@@ -120,7 +120,7 @@ describe('Slider', () => {
     const wrapper = await mountSuspended({
       components: { Slider, UTheme },
       template: `
-        <UTheme :theme="{ slider: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ slider: { slots: { root: 'test-theme-class' } } }">
           <Slider :model-value="50" />
         </UTheme>
       `

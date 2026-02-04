@@ -51,7 +51,7 @@ describe('PageHero', () => {
     const wrapper = await mountSuspended({
       components: { PageHero, UTheme },
       template: `
-        <UTheme :theme="{ pageHero: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ pageHero: { slots: { root: 'test-theme-class' } } }">
           <PageHero title="Test" />
         </UTheme>
       `

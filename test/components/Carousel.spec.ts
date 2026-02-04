@@ -62,7 +62,7 @@ describe('Carousel', () => {
     const wrapper = await mountSuspended({
       components: { Carousel, UTheme },
       template: `
-        <UTheme :theme="{ carousel: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ carousel: { slots: { root: 'test-theme-class' } } }">
           <Carousel :items="[{ src: 'test.jpg', alt: 'Test' }]" />
         </UTheme>
       `

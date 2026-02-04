@@ -91,7 +91,7 @@ describe('PricingPlan', () => {
     const wrapper = await mountSuspended({
       components: { PricingPlan, UTheme },
       template: `
-        <UTheme :theme="{ pricingPlan: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ pricingPlan: { slots: { root: 'test-theme-class' } } }">
           <PricingPlan title="Title" />
         </UTheme>
       `

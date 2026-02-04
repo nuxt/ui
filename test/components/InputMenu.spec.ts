@@ -343,7 +343,7 @@ describe('InputMenu', () => {
     const wrapper = await mountSuspended({
       components: { InputMenu, UTheme },
       template: `
-        <UTheme :theme="{ inputMenu: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ inputMenu: { slots: { root: 'test-theme-class' } } }">
           <InputMenu :items="['Item 1', 'Item 2']" />
         </UTheme>
       `

@@ -80,7 +80,7 @@ describe('Accordion', () => {
       components: { Accordion, UTheme },
       setup: () => ({ items }),
       template: `
-        <UTheme :theme="{ accordion: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ accordion: { slots: { root: 'test-theme-class' } } }">
           <Accordion :items="items" />
         </UTheme>
       `

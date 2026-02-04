@@ -52,7 +52,7 @@ describe('ChatMessages', () => {
     const wrapper = await mountSuspended({
       components: { ChatMessages, UTheme },
       template: `
-        <UTheme :theme="{ chatMessages: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ chatMessages: { slots: { root: 'test-theme-class' } } }">
           <ChatMessages :messages="[{ id: '1', role: 'user', parts: [{ type: 'text', text: 'Hello' }] }]" />
         </UTheme>
       `

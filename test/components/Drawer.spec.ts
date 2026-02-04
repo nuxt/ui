@@ -52,7 +52,7 @@ describe('Drawer', () => {
     const wrapper = await mountSuspended({
       components: { Drawer, UTheme },
       template: `
-        <UTheme :theme="{ drawer: { slots: { content: 'test-theme-class' } } }">
+        <UTheme :ui="{ drawer: { slots: { content: 'test-theme-class' } } }">
           <Drawer :open="true" :portal="false" />
         </UTheme>
       `

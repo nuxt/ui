@@ -30,7 +30,7 @@ describe('ChatPalette', () => {
     const wrapper = await mountSuspended({
       components: { ChatPalette, UTheme },
       template: `
-        <UTheme :theme="{ chatPalette: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ chatPalette: { slots: { root: 'test-theme-class' } } }">
           <ChatPalette />
         </UTheme>
       `

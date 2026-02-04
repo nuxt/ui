@@ -56,7 +56,7 @@ describe('Badge', () => {
     const wrapper = await mountSuspended({
       components: { Badge, UTheme },
       template: `
-        <UTheme :theme="{ badge: { slots: { base: 'test-theme-class' } } }">
+        <UTheme :ui="{ badge: { slots: { base: 'test-theme-class' } } }">
           <Badge label="Themed" />
         </UTheme>
       `

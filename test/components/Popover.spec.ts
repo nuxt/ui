@@ -54,7 +54,7 @@ describe('Popover', () => {
     const wrapper = await mountSuspended({
       components: { Popover, UTheme },
       template: `
-        <UTheme :theme="{ popover: { slots: { content: 'test-theme-class' } } }">
+        <UTheme :ui="{ popover: { slots: { content: 'test-theme-class' } } }">
           <Popover :open="true" :portal="false">
             <template #content>Content</template>
           </Popover>

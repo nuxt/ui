@@ -44,7 +44,7 @@ describe('Separator', () => {
     const wrapper = await mountSuspended({
       components: { Separator, UTheme },
       template: `
-        <UTheme :theme="{ separator: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ separator: { slots: { root: 'test-theme-class' } } }">
           <Separator />
         </UTheme>
       `

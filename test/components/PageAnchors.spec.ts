@@ -59,7 +59,7 @@ describe('PageAnchors', () => {
     const wrapper = await mountSuspended({
       components: { PageAnchors, UTheme },
       template: `
-        <UTheme :theme="{ pageAnchors: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ pageAnchors: { slots: { root: 'test-theme-class' } } }">
           <PageAnchors :links="[{ label: 'Link', to: '/test' }]" />
         </UTheme>
       `

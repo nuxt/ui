@@ -56,7 +56,7 @@ describe('Slideover', () => {
     const wrapper = await mountSuspended({
       components: { Slideover, UTheme },
       template: `
-        <UTheme :theme="{ slideover: { slots: { content: 'test-theme-class' } } }">
+        <UTheme :ui="{ slideover: { slots: { content: 'test-theme-class' } } }">
           <Slideover :open="true" :portal="false" title="Title" />
         </UTheme>
       `

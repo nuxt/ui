@@ -79,7 +79,7 @@ describe('InputDate', () => {
     const wrapper = await mountSuspended({
       components: { InputDate, UTheme },
       template: `
-        <UTheme :theme="{ inputDate: { slots: { base: 'test-theme-class' } } }">
+        <UTheme :ui="{ inputDate: { slots: { base: 'test-theme-class' } } }">
           <InputDate />
         </UTheme>
       `

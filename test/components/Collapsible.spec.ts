@@ -39,7 +39,7 @@ describe('Collapsible', () => {
     const wrapper = await mountSuspended({
       components: { Collapsible, UTheme },
       template: `
-        <UTheme :theme="{ collapsible: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ collapsible: { slots: { root: 'test-theme-class' } } }">
           <Collapsible :open="true" />
         </UTheme>
       `

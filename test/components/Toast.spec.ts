@@ -89,7 +89,7 @@ describe('Toast', () => {
     const wrapper = await mountSuspended({
       components: { ToastWrapper, UTheme },
       template: `
-        <UTheme :theme="{ toast: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ toast: { slots: { root: 'test-theme-class' } } }">
           <ToastWrapper title="Test" />
         </UTheme>
       `

@@ -61,7 +61,7 @@ describe('InputTags', () => {
     const wrapper = await mountSuspended({
       components: { InputTags, UTheme },
       template: `
-        <UTheme :theme="{ inputTags: { slots: { base: 'test-theme-class' } } }">
+        <UTheme :ui="{ inputTags: { slots: { base: 'test-theme-class' } } }">
           <InputTags />
         </UTheme>
       `

@@ -42,7 +42,7 @@ describe('PageLogos', () => {
     const wrapper = await mountSuspended({
       components: { PageLogos, UTheme },
       template: `
-        <UTheme :theme="{ pageLogos: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ pageLogos: { slots: { root: 'test-theme-class' } } }">
           <PageLogos title="Test" />
         </UTheme>
       `

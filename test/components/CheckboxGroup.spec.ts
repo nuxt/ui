@@ -146,7 +146,7 @@ describe('CheckboxGroup', () => {
     const wrapper = await mountSuspended({
       components: { CheckboxGroup, UTheme },
       template: `
-        <UTheme :theme="{ checkboxGroup: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ checkboxGroup: { slots: { root: 'test-theme-class' } } }">
           <CheckboxGroup :items="['Option 1', 'Option 2']" />
         </UTheme>
       `

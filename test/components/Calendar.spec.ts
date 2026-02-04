@@ -90,7 +90,7 @@ describe('Calendar', () => {
     const wrapper = await mountSuspended({
       components: { Calendar, UTheme },
       template: `
-        <UTheme :theme="{ calendar: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ calendar: { slots: { root: 'test-theme-class' } } }">
           <Calendar />
         </UTheme>
       `

@@ -65,7 +65,7 @@ describe('Pagination', () => {
     const wrapper = await mountSuspended({
       components: { Pagination, UTheme },
       template: `
-        <UTheme :theme="{ pagination: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ pagination: { slots: { root: 'test-theme-class' } } }">
           <Pagination :total="100" />
         </UTheme>
       `

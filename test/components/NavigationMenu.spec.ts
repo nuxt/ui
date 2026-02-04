@@ -160,7 +160,7 @@ describe('NavigationMenu', () => {
     const wrapper = await mountSuspended({
       components: { NavigationMenu, UTheme },
       template: `
-        <UTheme :theme="{ navigationMenu: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ navigationMenu: { slots: { root: 'test-theme-class' } } }">
           <NavigationMenu :items="[{ label: 'Home' }]" />
         </UTheme>
       `

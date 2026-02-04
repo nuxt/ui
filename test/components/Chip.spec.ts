@@ -44,7 +44,7 @@ describe('Chip', () => {
     const wrapper = await mountSuspended({
       components: { Chip, UTheme },
       template: `
-        <UTheme :theme="{ chip: { slots: { base: 'test-theme-class' } } }">
+        <UTheme :ui="{ chip: { slots: { base: 'test-theme-class' } } }">
           <Chip text="5" />
         </UTheme>
       `

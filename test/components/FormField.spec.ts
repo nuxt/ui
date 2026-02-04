@@ -201,7 +201,7 @@ describe('FormField', () => {
     const wrapper = await mountSuspended({
       components: { UFormField, UTheme },
       template: `
-        <UTheme :theme="{ formField: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ formField: { slots: { root: 'test-theme-class' } } }">
           <UFormField label="Label" />
         </UTheme>
       `

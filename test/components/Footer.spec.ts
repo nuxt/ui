@@ -41,7 +41,7 @@ describe('Footer', () => {
     const wrapper = await mountSuspended({
       components: { Footer, UTheme },
       template: `
-        <UTheme :theme="{ footer: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ footer: { slots: { root: 'test-theme-class' } } }">
           <Footer />
         </UTheme>
       `

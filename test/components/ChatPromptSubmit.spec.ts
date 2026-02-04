@@ -33,7 +33,7 @@ describe('ChatPromptSubmit', () => {
     const wrapper = await mountSuspended({
       components: { ChatPromptSubmit, UTheme },
       template: `
-        <UTheme :theme="{ chatPromptSubmit: { slots: { base: 'test-theme-class' } } }">
+        <UTheme :ui="{ chatPromptSubmit: { slots: { base: 'test-theme-class' } } }">
           <ChatPromptSubmit status="ready" />
         </UTheme>
       `

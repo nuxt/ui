@@ -79,7 +79,7 @@ describe('BlogPost', () => {
     const wrapper = await mountSuspended({
       components: { BlogPost, UTheme },
       template: `
-        <UTheme :theme="{ blogPost: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ blogPost: { slots: { root: 'test-theme-class' } } }">
           <BlogPost title="Test" />
         </UTheme>
       `

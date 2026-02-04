@@ -50,7 +50,7 @@ describe('Error', () => {
     const wrapper = await mountSuspended({
       components: { Error, UTheme },
       template: `
-        <UTheme :theme="{ error: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ error: { slots: { root: 'test-theme-class' } } }">
           <Error :error="{ statusCode: 404 }" />
         </UTheme>
       `

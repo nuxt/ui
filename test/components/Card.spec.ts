@@ -35,7 +35,7 @@ describe('Card', () => {
     const wrapper = await mountSuspended({
       components: { Card, UTheme },
       template: `
-        <UTheme :theme="{ card: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ card: { slots: { root: 'test-theme-class' } } }">
           <Card />
         </UTheme>
       `

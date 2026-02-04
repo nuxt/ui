@@ -79,7 +79,7 @@ describe('ContentNavigation', () => {
     const wrapper = await mountSuspended({
       components: { ContentNavigation, UTheme },
       template: `
-        <UTheme :theme="{ contentNavigation: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ contentNavigation: { slots: { root: 'test-theme-class' } } }">
           <ContentNavigation :navigation="[{ title: 'Test', path: '/test' }]" />
         </UTheme>
       `

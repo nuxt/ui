@@ -68,7 +68,7 @@ describe('AuthForm', () => {
     const wrapper = await mountSuspended({
       components: { AuthForm, UTheme },
       template: `
-        <UTheme :theme="{ authForm: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ authForm: { slots: { root: 'test-theme-class' } } }">
           <AuthForm :fields="[]" />
         </UTheme>
       `

@@ -31,7 +31,7 @@ describe('DashboardToolbar', () => {
     const wrapper = await mountSuspended({
       components: { DashboardToolbar, UTheme },
       template: `
-        <UTheme :theme="{ dashboardToolbar: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ dashboardToolbar: { slots: { root: 'test-theme-class' } } }">
           <DashboardToolbar />
         </UTheme>
       `

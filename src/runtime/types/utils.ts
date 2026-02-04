@@ -1,4 +1,4 @@
-import type { Ref, VNode } from 'vue'
+import type { VNode } from 'vue'
 import type { AcceptableValue as _AcceptableValue } from 'reka-ui'
 
 export type DeepPartial<T> = {
@@ -111,6 +111,3 @@ type _NonUnion<T, U> = U extends any
       ? unknown
       : never
   : never
-export type RefOrGetter<T> = Ref<T> | (() => T)
-
-export * from './tv'

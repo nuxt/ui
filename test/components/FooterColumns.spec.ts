@@ -89,7 +89,7 @@ describe('FooterColumns', () => {
     const wrapper = await mountSuspended({
       components: { FooterColumns, UTheme },
       template: `
-        <UTheme :theme="{ footerColumns: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ footerColumns: { slots: { root: 'test-theme-class' } } }">
           <FooterColumns :columns="[]" />
         </UTheme>
       `

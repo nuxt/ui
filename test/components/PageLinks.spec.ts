@@ -62,7 +62,7 @@ describe('PageLinks', () => {
     const wrapper = await mountSuspended({
       components: { PageLinks, UTheme },
       template: `
-        <UTheme :theme="{ pageLinks: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ pageLinks: { slots: { root: 'test-theme-class' } } }">
           <PageLinks :links="[{ label: 'Test', to: '/' }]" />
         </UTheme>
       `

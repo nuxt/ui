@@ -203,7 +203,7 @@ describe('Input', () => {
     const wrapper = await mountSuspended({
       components: { Input, UTheme },
       template: `
-        <UTheme :theme="{ input: { slots: { root: 'test-theme-class' } } }">
+        <UTheme :ui="{ input: { slots: { root: 'test-theme-class' } } }">
           <Input placeholder="Input" />
         </UTheme>
       `
