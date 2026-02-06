@@ -29,6 +29,7 @@ defineSlots<ProseTabsItemSlots>()
 const appConfig = useAppConfig() as ProseTabsItem['AppConfig']
 const uiProp = useComponentUI('prose.tabsItem', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.tabsItem || {}) }))
 </script>
 

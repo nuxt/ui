@@ -27,6 +27,7 @@ defineSlots<ProseCardGroupSlots>()
 const appConfig = useAppConfig() as ProseCardGroup['AppConfig']
 const uiProp = useComponentUI('prose.cardGroup', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.cardGroup || {}) }))
 </script>
 

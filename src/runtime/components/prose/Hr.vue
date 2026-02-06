@@ -22,6 +22,7 @@ const props = defineProps<ProseHrProps>()
 const appConfig = useAppConfig() as ProseHr['AppConfig']
 const uiProp = useComponentUI('prose.hr', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.hr || {}) }))
 </script>
 

@@ -9,8 +9,8 @@ import { get } from '../utils'
 
 type UIConfig = TVConfig<typeof ui>
 type ExtractUISlots<C> = C extends { slots?: infer S } ? NonNullable<S> : never
-type UIConfigSlots<T extends keyof UIConfig> =
-  'slots' extends keyof NonNullable<UIConfig[T]>
+type UIConfigSlots<T extends keyof UIConfig>
+  = 'slots' extends keyof NonNullable<UIConfig[T]>
     ? ExtractUISlots<NonNullable<UIConfig[T]>>
     : { base?: ClassValue }
 
@@ -34,7 +34,9 @@ type ComponentUiProps<T extends keyof UIConfig> = {
   ui?: UIConfigSlots<T>
 }
 
-export function useComponentUI<T extends keyof UIConfig>(name: T | (string & {}), props: ComponentUiProps<T>): ComputedRef<UIConfigSlots<T>> {
+export function useComponentUI<T extends keyof UIConfig>(name: T, props: ComponentUiProps<T>): ComputedRef<UIConfigSlots<T>>
+export function useComponentUI(name: string, props: { ui?: any }): ComputedRef<any>
+export function useComponentUI(name: string, props: { ui?: any }): ComputedRef<any> {
   const { ui } = injectThemeContext({ ui: computed(() => ({})) })
 
   return computed(() => {

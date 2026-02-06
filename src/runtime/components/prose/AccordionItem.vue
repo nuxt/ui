@@ -29,6 +29,7 @@ defineSlots<ProseAccordionItemSlots>()
 const appConfig = useAppConfig() as ProseAccordionItem['AppConfig']
 const uiProp = useComponentUI('prose.accordionItem', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.accordionItem || {}) }))
 </script>
 

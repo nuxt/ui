@@ -27,6 +27,7 @@ defineSlots<ProseEmSlots>()
 const appConfig = useAppConfig() as ProseEm['AppConfig']
 const uiProp = useComponentUI('prose.em', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.em || {}) }))
 </script>
 

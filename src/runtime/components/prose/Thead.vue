@@ -27,6 +27,7 @@ defineSlots<ProseTheadSlots>()
 const appConfig = useAppConfig() as ProseThead['AppConfig']
 const uiProp = useComponentUI('prose.thead', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.thead || {}) }))
 </script>
 

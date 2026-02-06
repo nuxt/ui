@@ -27,6 +27,7 @@ defineSlots<ProseBlockquoteSlots>()
 const appConfig = useAppConfig() as ProseBlockquote['AppConfig']
 const uiProp = useComponentUI('prose.blockquote', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.blockquote || {}) }))
 </script>
 

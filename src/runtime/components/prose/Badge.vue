@@ -28,6 +28,7 @@ defineSlots<ProseBadgeSlots>()
 const appConfig = useAppConfig() as ProseBadge['AppConfig']
 const uiProp = useComponentUI('prose.badge', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.badge || {}) }))
 </script>
 

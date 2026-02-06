@@ -33,6 +33,7 @@ defineSlots<ProseFieldGroupSlots>()
 const appConfig = useAppConfig() as ProseFieldGroup['AppConfig']
 const uiProp = useComponentUI('prose.fieldGroup', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.fieldGroup || {}) }))
 </script>
 

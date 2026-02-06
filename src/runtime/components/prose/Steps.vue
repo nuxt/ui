@@ -32,6 +32,7 @@ defineSlots<ProseStepsSlots>()
 const appConfig = useAppConfig() as ProseSteps['AppConfig']
 const uiProp = useComponentUI('prose.steps', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.steps || {}) }))
 </script>
 
