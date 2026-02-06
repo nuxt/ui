@@ -105,7 +105,7 @@ export default defineLocale<Messages>({
       },
       collapsible: {
         closeText: 'Схаваць',
-        name: 'ўласцівасці',
+        name: 'уласцівасці',
         openText: 'Паказаць'
       },
       pre: {
