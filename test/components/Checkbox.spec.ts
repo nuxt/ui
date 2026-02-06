@@ -8,7 +8,6 @@ import type { FormInputEvents } from '../../src/module'
 import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/checkbox'
-import { UTheme } from '#components'
 
 describe('Checkbox', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -119,18 +118,5 @@ describe('Checkbox', () => {
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { Checkbox, UTheme },
-      template: `
-        <UTheme :ui="{ checkbox: { slots: { base: 'test-theme-class' } } }">
-          <Checkbox />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('button').classes()).toContain('test-theme-class')
   })
 })

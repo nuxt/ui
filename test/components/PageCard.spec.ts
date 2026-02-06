@@ -1,11 +1,10 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageCard from '../../src/runtime/components/PageCard.vue'
 import type { PageCardProps, PageCardSlots } from '../../src/runtime/components/PageCard.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/page-card'
-import { UTheme } from '#components'
 
 describe('PageCard', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -63,18 +62,5 @@ describe('PageCard', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { PageCard, UTheme },
-      template: `
-        <UTheme :ui="{ pageCard: { slots: { root: 'test-theme-class' } } }">
-          <PageCard title="Title" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

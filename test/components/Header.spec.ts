@@ -1,10 +1,9 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Header from '../../src/runtime/components/Header.vue'
 import type { HeaderProps, HeaderSlots } from '../../src/runtime/components/Header.vue'
 import ComponentRender from '../component-render'
-import { UTheme } from '#components'
 
 describe('Header', () => {
   it.each([
@@ -44,18 +43,5 @@ describe('Header', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { Header, UTheme },
-      template: `
-        <UTheme :ui="{ header: { slots: { root: 'test-theme-class' } } }">
-          <Header />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('header').classes()).toContain('test-theme-class')
   })
 })

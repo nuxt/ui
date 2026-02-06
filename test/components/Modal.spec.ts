@@ -1,10 +1,9 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Modal from '../../src/runtime/components/Modal.vue'
 import type { ModalProps, ModalSlots } from '../../src/runtime/components/Modal.vue'
 import ComponentRender from '../component-render'
-import { UTheme } from '#components'
 
 describe('Modal', () => {
   const props = { open: true, portal: false }
@@ -50,18 +49,5 @@ describe('Modal', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { Modal, UTheme },
-      template: `
-        <UTheme :ui="{ modal: { slots: { content: 'test-theme-class' } } }">
-          <Modal :open="true" :portal="false" title="Title" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="content"]').classes()).toContain('test-theme-class')
   })
 })

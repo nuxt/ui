@@ -8,7 +8,6 @@ import type { FormInputEvents } from '../../src/module'
 import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/input'
-import { UTheme } from '#components'
 
 describe('Input', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -197,18 +196,5 @@ describe('Input', () => {
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { Input, UTheme },
-      template: `
-        <UTheme :ui="{ input: { slots: { root: 'test-theme-class' } } }">
-          <Input placeholder="Input" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

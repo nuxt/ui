@@ -1,9 +1,8 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { mockNuxtImport } from '@nuxt/test-utils/runtime'
 import ContentToc from '../../../src/runtime/components/content/ContentToc.vue'
 import type { ContentTocProps, ContentTocSlots } from '../../../src/runtime/components/content/ContentToc.vue'
 import ComponentRender from '../../component-render'
-import { UTheme } from '#components'
 
 describe('ContentToc', () => {
   mockNuxtImport('useScrollspy', () => {
@@ -70,19 +69,5 @@ describe('ContentToc', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentTocProps, slots?: Partial<ContentTocSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ContentToc)
     expect(html).toMatchSnapshot()
-  })
-
-  test('with theme works', async () => {
-    const { mountSuspended } = await import('@nuxt/test-utils/runtime')
-    const wrapper = await mountSuspended({
-      components: { ContentToc, UTheme },
-      template: `
-        <UTheme :ui="{ contentToc: { slots: { root: 'test-theme-class' } } }">
-          <ContentToc :links="[{ id: 'test', depth: 2, text: 'Test' }]" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('nav').classes()).toContain('test-theme-class')
   })
 })

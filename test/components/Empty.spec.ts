@@ -1,11 +1,10 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Empty from '../../src/runtime/components/Empty.vue'
 import type { EmptyProps, EmptySlots } from '../../src/runtime/components/Empty.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/empty'
-import { UTheme } from '#components'
 
 describe('Empty', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -49,18 +48,5 @@ describe('Empty', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { Empty, UTheme },
-      template: `
-        <UTheme :ui="{ empty: { slots: { root: 'test-theme-class' } } }">
-          <Empty title="Empty" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

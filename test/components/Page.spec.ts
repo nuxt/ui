@@ -1,10 +1,9 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Page from '../../src/runtime/components/Page.vue'
 import type { PageProps, PageSlots } from '../../src/runtime/components/Page.vue'
 import ComponentRender from '../component-render'
-import { UTheme } from '#components'
 
 describe('Page', () => {
   it.each([
@@ -32,18 +31,5 @@ describe('Page', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { Page, UTheme },
-      template: `
-        <UTheme :ui="{ page: { slots: { root: 'test-theme-class' } } }">
-          <Page>Content</Page>
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

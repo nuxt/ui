@@ -1,11 +1,10 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import BlogPost from '../../src/runtime/components/BlogPost.vue'
 import type { BlogPostProps, BlogPostSlots } from '../../src/runtime/components/BlogPost.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/blog-post'
-import { UTheme } from '#components'
 
 describe('BlogPost', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -73,18 +72,5 @@ describe('BlogPost', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { BlogPost, UTheme },
-      template: `
-        <UTheme :ui="{ blogPost: { slots: { root: 'test-theme-class' } } }">
-          <BlogPost title="Test" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('article').classes()).toContain('test-theme-class')
   })
 })

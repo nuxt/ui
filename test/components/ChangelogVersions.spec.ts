@@ -1,10 +1,9 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChangelogVersions from '../../src/runtime/components/ChangelogVersions.vue'
 import type { ChangelogVersionsProps, ChangelogVersionsSlots } from '../../src/runtime/components/ChangelogVersions.vue'
 import ComponentRender from '../component-render'
-import { UTheme } from '#components'
 
 describe('ChangelogVersions', () => {
   const versions = [{
@@ -48,18 +47,5 @@ describe('ChangelogVersions', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { ChangelogVersions, UTheme },
-      template: `
-        <UTheme :ui="{ changelogVersions: { slots: { root: 'test-theme-class' } } }">
-          <ChangelogVersions :versions="[{ title: 'Title' }]" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

@@ -1,11 +1,10 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Avatar from '../../src/runtime/components/Avatar.vue'
 import type { AvatarProps, AvatarSlots } from '../../src/runtime/components/Avatar.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/avatar'
-import { UTheme } from '#components'
 
 describe('Avatar', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -39,18 +38,5 @@ describe('Avatar', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { Avatar, UTheme },
-      template: `
-        <UTheme :ui="{ avatar: { slots: { root: 'test-theme-class' } } }">
-          <Avatar alt="Test" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

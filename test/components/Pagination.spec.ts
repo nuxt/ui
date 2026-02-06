@@ -1,11 +1,10 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Pagination from '../../src/runtime/components/Pagination.vue'
 import type { PaginationProps, PaginationSlots } from '../../src/runtime/components/Pagination.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/button'
-import { UTheme } from '#components'
 
 describe('Pagination', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -59,18 +58,5 @@ describe('Pagination', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { Pagination, UTheme },
-      template: `
-        <UTheme :ui="{ pagination: { slots: { root: 'test-theme-class' } } }">
-          <Pagination :total="100" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

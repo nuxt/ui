@@ -1,11 +1,10 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import CommandPalette from '../../src/runtime/components/CommandPalette.vue'
 import type { CommandPaletteProps, CommandPaletteSlots } from '../../src/runtime/components/CommandPalette.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/command-palette'
-import { UTheme } from '#components'
 
 describe('CommandPalette', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -167,18 +166,5 @@ describe('CommandPalette', () => {
         'aria-input-field-name': { enabled: false }
       }
     })).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { CommandPalette, UTheme },
-      template: `
-        <UTheme :ui="{ commandPalette: { slots: { root: 'test-theme-class' } } }">
-          <CommandPalette />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

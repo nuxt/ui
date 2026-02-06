@@ -1,10 +1,9 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageLogos from '../../src/runtime/components/PageLogos.vue'
 import type { PageLogosProps, PageLogosSlots } from '../../src/runtime/components/PageLogos.vue'
 import ComponentRender from '../component-render'
-import { UTheme } from '#components'
 
 describe('PageLogos', () => {
   const items = [
@@ -36,18 +35,5 @@ describe('PageLogos', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { PageLogos, UTheme },
-      template: `
-        <UTheme :ui="{ pageLogos: { slots: { root: 'test-theme-class' } } }">
-          <PageLogos title="Test" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

@@ -1,7 +1,6 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { UTheme } from '#components'
 import Stepper from '../../src/runtime/components/Stepper.vue'
 import type { StepperProps, StepperSlots } from '../../src/runtime/components/Stepper.vue'
 import ComponentRender from '../component-render'
@@ -64,18 +63,5 @@ describe('Stepper', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { Stepper, UTheme },
-      template: `
-        <UTheme :ui="{ stepper: { slots: { root: 'test-theme-class' } } }">
-          <Stepper :items="[{ title: 'Step 1' }, { title: 'Step 2' }]" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

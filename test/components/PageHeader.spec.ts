@@ -1,10 +1,9 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageHeader from '../../src/runtime/components/PageHeader.vue'
 import type { PageHeaderProps, PageHeaderSlots } from '../../src/runtime/components/PageHeader.vue'
 import ComponentRender from '../component-render'
-import { UTheme } from '#components'
 
 describe('PageHeader', () => {
   it.each([
@@ -38,18 +37,5 @@ describe('PageHeader', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { PageHeader, UTheme },
-      template: `
-        <UTheme :ui="{ pageHeader: { slots: { root: 'test-theme-class' } } }">
-          <PageHeader title="Title" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

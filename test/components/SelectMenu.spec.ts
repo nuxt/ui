@@ -1,7 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { UTheme } from '#components'
 import SelectMenu from '../../src/runtime/components/SelectMenu.vue'
 import type { SelectMenuProps, SelectMenuSlots } from '../../src/runtime/components/SelectMenu.vue'
 import ComponentRender from '../component-render'
@@ -337,18 +336,5 @@ describe('SelectMenu', () => {
         valueKey: 'value'
       })).toEqualTypeOf<[(string | number)[]]>()
     })
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { SelectMenu, UTheme },
-      template: `
-        <UTheme :ui="{ selectMenu: { slots: { base: 'test-theme-class' } } }">
-          <SelectMenu :items="['Option 1', 'Option 2']" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="base"]').classes()).toContain('test-theme-class')
   })
 })

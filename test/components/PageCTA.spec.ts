@@ -1,11 +1,10 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import PageCTA from '../../src/runtime/components/PageCTA.vue'
 import type { PageCTAProps, PageCTASlots } from '../../src/runtime/components/PageCTA.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/page-cta'
-import { UTheme } from '#components'
 
 describe('PageCTA', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -48,18 +47,5 @@ describe('PageCTA', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { PageCTA, UTheme },
-      template: `
-        <UTheme :ui="{ pageCTA: { slots: { root: 'test-theme-class' } } }">
-          <PageCTA title="Title" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

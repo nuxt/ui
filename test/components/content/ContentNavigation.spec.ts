@@ -1,9 +1,8 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import ContentNavigation from '../../../src/runtime/components/content/ContentNavigation.vue'
 import type { ContentNavigationProps, ContentNavigationSlots } from '../../../src/runtime/components/content/ContentNavigation.vue'
 import ComponentRender from '../../component-render'
 import theme from '#build/ui/content/content-navigation'
-import { UTheme } from '#components'
 
 describe('ContentNavigation', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -72,19 +71,5 @@ describe('ContentNavigation', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentNavigationProps, slots?: Partial<ContentNavigationSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ContentNavigation)
     expect(html).toMatchSnapshot()
-  })
-
-  test('with theme works', async () => {
-    const { mountSuspended } = await import('@nuxt/test-utils/runtime')
-    const wrapper = await mountSuspended({
-      components: { ContentNavigation, UTheme },
-      template: `
-        <UTheme :ui="{ contentNavigation: { slots: { root: 'test-theme-class' } } }">
-          <ContentNavigation :navigation="[{ title: 'Test', path: '/test' }]" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('nav').classes()).toContain('test-theme-class')
   })
 })

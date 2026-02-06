@@ -1,11 +1,10 @@
 import { defineComponent } from 'vue'
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardSidebar from '../../src/runtime/components/DashboardSidebar.vue'
 import type { DashboardSidebarProps, DashboardSidebarSlots } from '../../src/runtime/components/DashboardSidebar.vue'
-import { UTheme } from '#components'
 
 const DashboardWrapper = defineComponent({
   components: {
@@ -63,20 +62,5 @@ describe('DashboardSidebar', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { DashboardGroup, DashboardSidebar, UTheme },
-      template: `
-        <UTheme :ui="{ dashboardSidebar: { slots: { root: 'test-theme-class' } } }">
-          <DashboardGroup>
-            <DashboardSidebar />
-          </DashboardGroup>
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

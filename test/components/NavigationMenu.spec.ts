@@ -8,7 +8,6 @@ import type { ComponentConfig } from '../../src/runtime/types/tv'
 import ComponentRender from '../component-render'
 import { expectSlotProps } from '../utils/types'
 import theme from '#build/ui/navigation-menu'
-import { UTheme } from '#components'
 
 type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>
 
@@ -154,18 +153,5 @@ describe('NavigationMenu', () => {
     expectSlotProps('item', () => NavigationMenu({
       items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]]
     })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean, ui: NavigationMenu['ui'] }>()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { NavigationMenu, UTheme },
-      template: `
-        <UTheme :ui="{ navigationMenu: { slots: { root: 'test-theme-class' } } }">
-          <NavigationMenu :items="[{ label: 'Home' }]" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

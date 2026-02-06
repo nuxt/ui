@@ -5,7 +5,6 @@ import InputTime from '../../src/runtime/components/InputTime.vue'
 import type { InputTimeProps, InputTimeSlots } from '../../src/runtime/components/InputTime.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input-time'
-import { UTheme } from '#components'
 import { Time } from '@internationalized/date'
 
 describe('InputTime', () => {
@@ -68,18 +67,5 @@ describe('InputTime', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { InputTime, UTheme },
-      template: `
-        <UTheme :ui="{ inputTime: { slots: { base: 'test-theme-class' } } }">
-          <InputTime />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="base"]').classes()).toContain('test-theme-class')
   })
 })

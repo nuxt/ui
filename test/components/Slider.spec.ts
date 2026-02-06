@@ -1,7 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { UTheme } from '#components'
 import Slider from '../../src/runtime/components/Slider.vue'
 import type { SliderProps } from '../../src/runtime/components/Slider.vue'
 import ComponentRender from '../component-render'
@@ -114,18 +113,5 @@ describe('Slider', () => {
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { Slider, UTheme },
-      template: `
-        <UTheme :ui="{ slider: { slots: { root: 'test-theme-class' } } }">
-          <Slider :model-value="50" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

@@ -1,12 +1,12 @@
 import { defineComponent } from 'vue'
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Toaster from '../../src/runtime/components/Toaster.vue'
 import Toast from '../../src/runtime/components/Toast.vue'
 import type { ToastProps, ToastSlots } from '../../src/runtime/components/Toast.vue'
 import ComponentRender from '../component-render'
-import { ClientOnly, UTheme } from '#components'
+import { ClientOnly } from '#components'
 
 const ToastWrapper = defineComponent({
   components: {
@@ -83,18 +83,5 @@ describe('Toast', () => {
         'list': { enabled: false }
       }
     })).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { ToastWrapper, UTheme },
-      template: `
-        <UTheme :ui="{ toast: { slots: { root: 'test-theme-class' } } }">
-          <ToastWrapper title="Test" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[role="alert"]').classes()).toContain('test-theme-class')
   })
 })

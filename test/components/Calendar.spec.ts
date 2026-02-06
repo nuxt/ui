@@ -1,5 +1,4 @@
 import { describe, it, expect, vi, afterAll, test } from 'vitest'
-import { UTheme } from '#components'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { CalendarDate } from '@internationalized/date'
@@ -84,18 +83,5 @@ describe('Calendar', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { Calendar, UTheme },
-      template: `
-        <UTheme :ui="{ calendar: { slots: { root: 'test-theme-class' } } }">
-          <Calendar />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

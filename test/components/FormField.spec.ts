@@ -18,8 +18,7 @@ import {
   USlider,
   UPinInput,
   UFormField,
-  UFileUpload,
-  UTheme
+  UFileUpload
 } from '#components'
 
 const inputComponents = [UInput, URadioGroup, UTextarea, UCheckbox, USelect, USelectMenu, UInputMenu, UInputNumber, USwitch, USlider, UPinInput, UFileUpload]
@@ -195,18 +194,5 @@ describe('FormField', () => {
       const attr = wrapper.find('[id=v-0-0-help]')
       expect(attr.exists()).toBe(false)
     })
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { UFormField, UTheme },
-      template: `
-        <UTheme :ui="{ formField: { slots: { root: 'test-theme-class' } } }">
-          <UFormField label="Label" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })

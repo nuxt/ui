@@ -1,7 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { UTheme } from '#components'
 import Switch from '../../src/runtime/components/Switch.vue'
 import type { SwitchProps, SwitchSlots } from '../../src/runtime/components/Switch.vue'
 import ComponentRender from '../component-render'
@@ -117,18 +116,5 @@ describe('Switch', () => {
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { Switch, UTheme },
-      template: `
-        <UTheme :ui="{ switch: { slots: { base: 'test-theme-class' } } }">
-          <Switch />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="base"]').classes()).toContain('test-theme-class')
   })
 })

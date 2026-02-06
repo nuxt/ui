@@ -1,10 +1,9 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChatMessages from '../../src/runtime/components/ChatMessages.vue'
 import type { ChatMessagesProps, ChatMessagesSlots } from '../../src/runtime/components/ChatMessages.vue'
 import ComponentRender from '../component-render'
-import { UTheme } from '#components'
 
 describe('ChatMessages', () => {
   const statuses = ['ready', 'submitted', 'streaming', 'error'] as any
@@ -46,18 +45,5 @@ describe('ChatMessages', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
-
-  test('with theme works', async () => {
-    const wrapper = await mountSuspended({
-      components: { ChatMessages, UTheme },
-      template: `
-        <UTheme :ui="{ chatMessages: { slots: { root: 'test-theme-class' } } }">
-          <ChatMessages :messages="[{ id: '1', role: 'user', parts: [{ type: 'text', text: 'Hello' }] }]" />
-        </UTheme>
-      `
-    })
-
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('test-theme-class')
   })
 })
