@@ -19,12 +19,14 @@ export interface ProseH4Slots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRuntimeConfig, useAppConfig } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { tv } from '../../utils/tv'
 
 const props = defineProps<ProseH4Props>()
 defineSlots<ProseH4Slots>()
 
 const appConfig = useAppConfig() as ProseH4['AppConfig']
+const uiProp = useComponentUI('prose.h4', props)
 const { headings } = useRuntimeConfig().public?.mdc || {}
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -35,7 +37,7 @@ const generate = computed(() => props.id && typeof headings?.anchorLinks === 'ob
 
 <template>
   <h4 :id="id" :class="ui.base({ class: props.class })">
-    <a v-if="id && generate" :href="`#${id}`" :class="ui.link({ class: props.ui?.link })">
+    <a v-if="id && generate" :href="`#${id}`" :class="ui.link({ class: uiProp?.link })">
       <slot />
     </a>
     <slot v-else />

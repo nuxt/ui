@@ -101,6 +101,7 @@ import { defu } from 'defu'
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { isArrayOfArray, pick, omit } from '../utils'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
@@ -121,6 +122,7 @@ const props = withDefaults(defineProps<EditorToolbarProps<T>>(), {
 defineSlots<EditorToolbarSlots<T>>()
 
 const appConfig = useAppConfig() as EditorToolbar['AppConfig']
+const uiProp = useComponentUI('editorToolbar', props)
 
 const handlers = inject('editorHandlers', computed(() => createHandlers()))
 
@@ -311,7 +313,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
     v-bind="Component !== 'template' ? {
       editor,
       tabindex: -1,
-      class: ui.root({ class: props.ui?.root }),
+      class: ui.root({ class: uiProp?.root }),
       ...rootProps,
       options,
       ...$attrs
@@ -319,9 +321,9 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
       ...$attrs
     }"
   >
-    <Primitive :as="as" role="toolbar" data-slot="base" :class="ui.base({ class: [props.ui?.base, props.class] })">
+    <Primitive :as="as" role="toolbar" data-slot="base" :class="ui.base({ class: [uiProp?.base, props.class] })">
       <template v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`">
-        <div role="group" data-slot="group" :class="ui.group({ class: props.ui?.group })">
+        <div role="group" data-slot="group" :class="ui.group({ class: uiProp?.group })">
           <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
             <slot
               :name="((item.slot || 'item') as keyof EditorToolbarSlots<T>)"
@@ -368,7 +370,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
         <Separator
           v-if="groupIndex < groups.length - 1"
           data-slot="separator"
-          :class="ui.separator({ class: props.ui?.separator })"
+          :class="ui.separator({ class: uiProp?.separator })"
           orientation="vertical"
         />
       </template>
