@@ -8,7 +8,11 @@ import type * as ui from '#build/ui'
 import { get } from '../utils'
 
 type UIConfig = TVConfig<typeof ui>
-type UIConfigSlots<T extends keyof UIConfig> = NonNullable<UIConfig[T]> extends { slots?: infer S } ? S : Record<string, any>
+type ExtractUISlots<C> = C extends { slots?: infer S } ? NonNullable<S> : never
+type UIConfigSlots<T extends keyof UIConfig> =
+  'slots' extends keyof NonNullable<UIConfig[T]>
+    ? ExtractUISlots<NonNullable<UIConfig[T]>>
+    : { base?: ClassValue }
 
 type ThemeSlotOverrides<T> = T extends { slots: infer S extends Record<string, any> }
   ? { [K in keyof S]?: ClassValue }

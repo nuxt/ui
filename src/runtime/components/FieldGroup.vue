@@ -21,7 +21,7 @@ export interface FieldGroupProps {
    */
   orientation?: FieldGroup['variants']['orientation']
   class?: any
-  ui?: FieldGroup['slots']
+  ui?: { base?: any }
 }
 
 export interface FieldGroupSlots {
@@ -55,7 +55,7 @@ provide(fieldGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: [uiProp?.class, props.class] })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: [uiProp?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

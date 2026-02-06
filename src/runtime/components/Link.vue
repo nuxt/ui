@@ -84,6 +84,7 @@ export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Button
   /** When `true`, only styles from `class`, `activeClass`, and `inactiveClass` will be applied. */
   raw?: boolean
   class?: any
+  ui?: { base?: any }
 }
 
 /**
@@ -106,6 +107,7 @@ import { reactiveOmit } from '@vueuse/core'
 import { useRoute, useAppConfig } from '#imports'
 import { mergeClasses } from '../utils'
 import { tv } from '../utils/tv'
+import { useComponentUI } from '../composables/useComponentUI'
 import { isPartiallyEqual } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
 
@@ -121,9 +123,11 @@ defineSlots<LinkSlots>()
 
 const route = useRoute()
 const appConfig = useAppConfig() as Link['AppConfig']
+const uiProp = useComponentUI('link', props)
 
 const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class'))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({
   extend: tv(theme),
   ...defu({
@@ -171,7 +175,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
     return [props.class, active ? props.activeClass : props.inactiveClass]
   }
 
-  return ui.value({ class: props.class, active, disabled: props.disabled })
+  return ui.value({ class: [uiProp.value?.base, props.class], active, disabled: props.disabled })
 }
 </script>
 

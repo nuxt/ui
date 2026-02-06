@@ -31,6 +31,7 @@ export interface PricingPlansProps {
    */
   scale?: boolean
   class?: any
+  ui?: { base?: any }
 }
 
 type ExtendSlotWithPlan<T extends PricingPlanProps, K extends keyof PricingPlanSlots>
@@ -52,6 +53,7 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
+import { useComponentUI } from '../composables/useComponentUI'
 import UPricingPlan from './PricingPlan.vue'
 
 const props = withDefaults(defineProps<PricingPlansProps>(), {
@@ -64,7 +66,9 @@ const slots = defineSlots<PricingPlansSlots<T>>()
 const getProxySlots = () => omit(slots, ['default'])
 
 const appConfig = useAppConfig() as PricingPlans['AppConfig']
+const uiProp = useComponentUI('pricingPlans', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingPlans || {}) }))
 
 const count = computed(() => props.plans?.length || slots.default?.()?.flatMap(mapSlot).filter(Boolean)?.length || 3)
@@ -83,7 +87,7 @@ function mapSlot(slot: any) {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ class: props.class, compact, scale, orientation })" :style="{ '--count': count }">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui({ class: [uiProp?.base, props.class], compact, scale, orientation })" :style="{ '--count': count }">
     <slot>
       <UPricingPlan
         v-for="(plan, index) in plans"
