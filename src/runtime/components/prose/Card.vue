@@ -54,7 +54,7 @@ const ariaLabel = computed(() => (props.title || 'Card link').trim())
 </script>
 
 <template>
-  <div :class="ui.base({ class: props.class })">
+  <div :class="ui.base({ class: [uiProp?.base, props.class] })">
     <ULink
       v-if="to"
       :aria-label="ariaLabel"

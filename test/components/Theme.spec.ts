@@ -86,7 +86,7 @@ describe('Theme', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: CaseOptions, contains: string[] = []) => {
     const html = await ComponentRender(nameOrHtml, options, Theme)
     expect(html).toMatchSnapshot()
-    contains.forEach(c => expect(html).toContain(c))
+    contains.forEach((c) => { expect(html).toContain(c) })
   })
 
   test('applies theme classes to child component', async () => {

@@ -518,7 +518,7 @@ defineExpose({
           <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="((item.ui?.itemLeadingAvatarSize || uiProp?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiProp?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
           <UChip
             v-else-if="isSelectItem(item) && item.chip"
-            :size="((uiProp?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
+            :size="((item.ui?.itemLeadingChipSize || uiProp?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
             inset
             standalone
             v-bind="item.chip"

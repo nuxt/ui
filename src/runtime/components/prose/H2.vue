@@ -37,7 +37,7 @@ const generate = computed(() => props.id && typeof headings?.anchorLinks === 'ob
 </script>
 
 <template>
-  <h2 :id="id" :class="ui.base({ class: props.class })">
+  <h2 :id="id" :class="ui.base({ class: [uiProp?.base, props.class] })">
     <a v-if="id && generate" :href="`#${id}`" :class="ui.link({ class: uiProp?.link })">
       <span :class="ui.leading({ class: uiProp?.leading })">
         <UIcon :name="appConfig.ui.icons.hash" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />

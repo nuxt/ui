@@ -48,7 +48,7 @@ const target = computed(() => props.target || (!!props.to && typeof props.to ===
 </script>
 
 <template>
-  <div :class="ui.base({ class: props.class })">
+  <div :class="ui.base({ class: [uiProp?.base, props.class] })">
     <ULink
       v-if="to"
       v-bind="{ to, target, ...$attrs }"

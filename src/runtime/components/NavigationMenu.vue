@@ -453,7 +453,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
           } as AccordionRootProps)"
           as="ul"
           data-slot="childList"
-          :class="ui.childList({ class: uiProp?.childList })"
+          :class="ui.childList({ class: [uiProp?.childList, item.ui?.childList] })"
         >
           <ReuseItemTemplate
             v-for="(childItem, childIndex) in item.children"
