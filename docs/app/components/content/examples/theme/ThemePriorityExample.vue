@@ -1,9 +1,7 @@
 <script setup lang="ts">
 const ui = {
   button: {
-    slots: {
-      base: 'rounded-full'
-    }
+    base: 'rounded-full'
   }
 }
 </script>

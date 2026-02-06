@@ -1,17 +1,13 @@
 <script setup lang="ts">
 const outerUi = {
   button: {
-    slots: {
-      base: 'rounded-full'
-    }
+    base: 'rounded-full'
   }
 }
 
 const innerUi = {
   button: {
-    slots: {
-      base: 'font-bold'
-    }
+    base: 'font-bold'
   }
 }
 </script>

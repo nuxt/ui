@@ -1,13 +1,10 @@
 <script lang="ts">
-import type * as theme from '#build/ui'
-import type { TVConfig } from '../types/tv'
 import { computed } from 'vue'
 import { provideThemeContext } from '../composables/useComponentUI'
-
-type UIConfig = TVConfig<typeof theme>
+import type { ThemeUI } from '../composables/useComponentUI'
 
 export interface ThemeProps {
-  ui: UIConfig
+  ui: ThemeUI
 }
 
 export interface ThemeSlots {

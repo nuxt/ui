@@ -25,7 +25,7 @@ describe('Theme', () => {
     [
       'with theme applied to button base slot',
       {
-        props: { ui: { button: { slots: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } } },
+        props: { ui: { button: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } },
         slots: { default: () => h(Button, { label: 'Button' }) }
       } satisfies CaseOptions,
       ['px-[1.234rem]', 'text-[#ff0]']
@@ -33,7 +33,7 @@ describe('Theme', () => {
     [
       'with ui prop taking priority over theme',
       {
-        props: { ui: { button: { slots: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } } },
+        props: { ui: { button: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } },
         slots: { default: () => h(Button, { label: 'Button', ui: { base: 'px-[2.234rem]' } }) }
       } satisfies CaseOptions,
       ['px-[2.234rem]']
@@ -41,15 +41,15 @@ describe('Theme', () => {
     [
       'with nested theme overriding outer theme',
       {
-        props: { ui: { button: { slots: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } } },
-        slots: { default: () => h(Theme, { ui: { button: { slots: { label: 'text-[#000]', base: 'px-[2.234rem]' } } } }, () => h(Button, { label: 'Button' })) }
+        props: { ui: { button: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } },
+        slots: { default: () => h(Theme, { ui: { button: { label: 'text-[#000]', base: 'px-[2.234rem]' } } }, () => h(Button, { label: 'Button' })) }
       } satisfies CaseOptions,
       ['px-[2.234rem]', 'text-[#000]']
     ],
     [
       'with theme applied to badge',
       {
-        props: { ui: { badge: { slots: { base: 'rounded-[1.234rem]' } } } },
+        props: { ui: { badge: { base: 'rounded-[1.234rem]' } } },
         slots: { default: () => h(Badge, { label: 'Badge' }) }
       } satisfies CaseOptions,
       ['rounded-[1.234rem]']
@@ -57,7 +57,7 @@ describe('Theme', () => {
     [
       'with theme applied to alert',
       {
-        props: { ui: { alert: { slots: { root: 'border-[3px]' } } } },
+        props: { ui: { alert: { root: 'border-[3px]' } } },
         slots: { default: () => h(Alert, { title: 'Alert' }) }
       } satisfies CaseOptions,
       ['border-[3px]']
@@ -65,7 +65,7 @@ describe('Theme', () => {
     [
       'with theme applied to multiple component types',
       {
-        props: { ui: { button: { slots: { base: 'px-[1.234rem]' } }, badge: { slots: { base: 'rounded-[1.234rem]' } } } },
+        props: { ui: { button: { base: 'px-[1.234rem]' }, badge: { base: 'rounded-[1.234rem]' } } },
         slots: {
           default: () => [
             h(Button, { label: 'Button' }),
@@ -78,7 +78,7 @@ describe('Theme', () => {
     [
       'with theme not affecting unrelated component',
       {
-        props: { ui: { badge: { slots: { base: 'rounded-[1.234rem]' } } } },
+        props: { ui: { badge: { base: 'rounded-[1.234rem]' } } },
         slots: { default: () => h(Button, { label: 'Button' }) }
       } satisfies CaseOptions,
       []
@@ -93,7 +93,7 @@ describe('Theme', () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
       template: `
-        <Theme :ui="{ button: { slots: { base: 'test-theme-class' } } }">
+        <Theme :ui="{ button: { base: 'test-theme-class' } }">
           <Button label="Themed" />
         </Theme>
       `
@@ -106,7 +106,7 @@ describe('Theme', () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
       template: `
-        <Theme :ui="{ button: { slots: { base: 'theme-class' } } }">
+        <Theme :ui="{ button: { base: 'theme-class' } }">
           <Button label="Themed" :ui="{ base: 'ui-prop-class' }" />
         </Theme>
       `
@@ -120,8 +120,8 @@ describe('Theme', () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
       template: `
-        <Theme :ui="{ button: { slots: { base: 'outer-theme-class' } } }">
-          <Theme :ui="{ button: { slots: { base: 'inner-theme-class' } } }">
+        <Theme :ui="{ button: { base: 'outer-theme-class' } }">
+          <Theme :ui="{ button: { base: 'inner-theme-class' } }">
             <Button label="Themed" />
           </Theme>
         </Theme>
@@ -136,9 +136,9 @@ describe('Theme', () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
       template: `
-        <Theme :ui="{ button: { slots: { base: 'level-1-class' } } }">
-          <Theme :ui="{ button: { slots: { base: 'level-2-class' } } }">
-            <Theme :ui="{ button: { slots: { base: 'level-3-class' } } }">
+        <Theme :ui="{ button: { base: 'level-1-class' } }">
+          <Theme :ui="{ button: { base: 'level-2-class' } }">
+            <Theme :ui="{ button: { base: 'level-3-class' } }">
               <Button label="Themed" />
             </Theme>
           </Theme>
@@ -155,7 +155,7 @@ describe('Theme', () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
       template: `
-        <Theme :ui="{ button: { slots: { base: 'shared-theme-class' } } }">
+        <Theme :ui="{ button: { base: 'shared-theme-class' } }">
           <Button label="First" />
           <Button label="Second" />
         </Theme>
@@ -173,7 +173,7 @@ describe('Theme', () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button, Badge },
       template: `
-        <Theme :ui="{ button: { slots: { base: 'button-theme-class' } }, badge: { slots: { base: 'badge-theme-class' } } }">
+        <Theme :ui="{ button: { base: 'button-theme-class' }, badge: { base: 'badge-theme-class' } }">
           <Button label="Themed Button" />
           <Badge label="Themed Badge" />
         </Theme>
@@ -189,7 +189,7 @@ describe('Theme', () => {
       components: { Theme, Button },
       template: `
         <div>
-          <Theme :ui="{ button: { slots: { base: 'inside-theme-class' } } }">
+          <Theme :ui="{ button: { base: 'inside-theme-class' } }">
             <Button label="Inside" class="inside-btn" />
           </Theme>
           <Button label="Outside" class="outside-btn" />
@@ -202,7 +202,7 @@ describe('Theme', () => {
   })
 
   test('reacts to theme prop changes', async () => {
-    const ui = ref<any>({ button: { slots: { base: 'initial-class' } } })
+    const ui = ref<any>({ button: { base: 'initial-class' } })
 
     const wrapper = await mountSuspended({
       components: { Theme, Button },
@@ -216,7 +216,7 @@ describe('Theme', () => {
 
     expect(wrapper.find('button').classes()).toContain('initial-class')
 
-    ui.value = { button: { slots: { base: 'updated-class' } } }
+    ui.value = { button: { base: 'updated-class' } }
     await nextTick()
 
     expect(wrapper.find('button').classes()).toContain('updated-class')
@@ -227,7 +227,7 @@ describe('Theme', () => {
     const wrapper = await mountSuspended({
       components: { Theme, Input },
       template: `
-        <Theme :ui="{ input: { slots: { root: 'input-theme-class' } } }">
+        <Theme :ui="{ input: { root: 'input-theme-class' } }">
           <Input placeholder="Themed input" />
         </Theme>
       `
