@@ -1,30 +1,32 @@
-import { createContext } from 'reka-ui'
-import type * as ui from '#build/ui'
-import type { TVConfig } from '../types/tv'
 import type { ComputedRef } from 'vue'
 import { computed } from 'vue'
 import defu from 'defu'
+import { createContext } from 'reka-ui'
+import type { TVConfig } from '../types/tv'
+import type * as ui from '#build/ui'
 
 type UIConfig = TVConfig<typeof ui>
-type UIConfigEntry<TName extends keyof UIConfig> = NonNullable<UIConfig[TName]>
-type UIConfigSlots<TName extends keyof UIConfig> = UIConfigEntry<TName> extends { slots?: infer S } ? S : Record<string, any>
+type UIConfigEntry<T extends keyof UIConfig> = NonNullable<UIConfig[T]>
+type UIConfigSlots<T extends keyof UIConfig> = UIConfigEntry<T> extends { slots?: infer S } ? S : Record<string, any>
 export type ThemeRootContext = {
   ui: ComputedRef<UIConfig>
 }
 
-const [inject, provide] = createContext<ThemeRootContext>('UTheme', 'RootContext')
+const [injectThemeContext, provideThemeContext] = createContext<ThemeRootContext>('UTheme', 'RootContext')
 
-export const provideUTheme = provide
+export { provideThemeContext }
 
-type ComponentUiProps<TName extends keyof UIConfig> = {
-  ui?: UIConfigSlots<TName>
+type ComponentUiProps<T extends keyof UIConfig> = {
+  ui?: UIConfigSlots<T>
 }
 
-export function useComponentUI<TName extends keyof UIConfig>(name: TName, props: ComponentUiProps<TName>): ComputedRef<UIConfigSlots<TName>> {
-  const { ui } = inject({ ui: computed(() => ({})) })
+export function useComponentUI<T extends keyof UIConfig>(name: T, props: ComponentUiProps<T>): ComputedRef<UIConfigSlots<T>> {
+  const { ui } = injectThemeContext({ ui: computed(() => ({})) })
+
   return computed(() => {
-    const themeEntry = (ui.value[name] || {}) as UIConfigEntry<TName>
-    const themeSlots = ('slots' in themeEntry ? (themeEntry as { slots?: UIConfigSlots<TName> }).slots : undefined) || {}
-    return defu(props.ui ?? {}, themeSlots) as UIConfigSlots<TName>
+    const themeEntry = (ui.value[name] || {}) as UIConfigEntry<T>
+    const themeSlots = ('slots' in themeEntry ? (themeEntry as { slots?: UIConfigSlots<T> }).slots : undefined) || {}
+
+    return defu(props.ui ?? {}, themeSlots) as UIConfigSlots<T>
   })
 }
