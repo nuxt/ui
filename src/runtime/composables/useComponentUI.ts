@@ -30,18 +30,18 @@ const [injectThemeContext, provideThemeContext] = createContext<ThemeRootContext
 
 export { provideThemeContext }
 
-type ComponentUiProps<T extends keyof UIConfig> = {
+type ComponentUIProps<T extends keyof UIConfig> = {
   ui?: UIConfigSlots<T>
 }
 
-export function useComponentUI<T extends keyof UIConfig>(name: T, props: ComponentUiProps<T>): ComputedRef<UIConfigSlots<T>>
+export function useComponentUI<T extends keyof UIConfig>(name: T, props: ComponentUIProps<T>): ComputedRef<UIConfigSlots<T>>
 export function useComponentUI(name: string, props: { ui?: any }): ComputedRef<any>
 export function useComponentUI(name: string, props: { ui?: any }): ComputedRef<any> {
   const { ui } = injectThemeContext({ ui: computed(() => ({})) })
 
   return computed(() => {
-    const themeOverrides = (get(ui.value, name as string) || {}) as UIConfigSlots<T>
+    const themeOverrides = (get(ui.value, name as string) || {})
 
-    return defu(props.ui ?? {} as Record<string, any>, themeOverrides as Record<string, any>) as UIConfigSlots<T>
+    return defu(props.ui ?? {}, themeOverrides)
   })
 }
