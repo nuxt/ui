@@ -106,6 +106,7 @@ const uiProp = useComponentUI('form', props)
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) }))
 
 const formId = props.id ?? useId() as string
+const formEl = ref<HTMLElement>()
 
 const bus = useEventBus<FormEvent<I>>(`form-${formId}`)
 
@@ -403,6 +404,9 @@ const api = {
   },
 
   async submit() {
+    if (formEl.value instanceof HTMLFormElement && formEl.value.reportValidity() === false) {
+      return
+    }
     await onSubmitWrapper(new Event('submit'))
   },
 
@@ -452,6 +456,7 @@ defineExpose(api)
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
+    ref="formEl"
     :class="ui({ class: [uiProp?.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
