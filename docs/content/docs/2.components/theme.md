@@ -1,5 +1,5 @@
 ---
-description: A renderless component to theme child components.
+description: A headless component to theme child components.
 category: layout
 links:
   - label: GitHub
@@ -10,7 +10,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The Theme component allows you to override the theme of all child components without modifying each component individually. It's a renderless component that provides theme overrides through Vue's provide/inject mechanism.
+The Theme component allows you to override the theme of all child components without modifying each component individually. It's a headless component that provides theme overrides through Vue's provide/inject mechanism.
 
 Use the `ui` prop to pass an object where keys are component names and values are their slot class overrides.
 
@@ -52,6 +52,21 @@ The `ui` prop on individual components takes priority over the Theme component. 
 ---
 name: 'theme-priority-example'
 ---
+::
+
+#### Works deeply
+
+The Theme component uses Vue's provide/inject mechanism to provide the theme overrides to the child components.
+This means that the theme overrides are available to all child components, regardless of how deeply nested they are.
+
+::component-example
+---
+name: 'theme-deep-example'
+---
+::
+
+::note
+For app-level theme configuration, we still recommend using the `app.config.ts` file.
 ::
 
 ## Examples
