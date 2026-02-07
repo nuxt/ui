@@ -296,7 +296,7 @@ onMounted(() => {
       <UChatMessage
         v-for="message in messages"
         :key="message.id"
-        v-bind="{ ...message, ...(message.role === 'user' ? userProps : assistantProps) }"
+        v-bind="{ ...(message.role === 'user' ? userProps : assistantProps), ...message }"
         :ref="(el) => registerMessageRef(message.id, el as ComponentPublicInstance)"
         :compact="compact"
       >
