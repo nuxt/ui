@@ -68,17 +68,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}
   size: size.value
 }))
 
-const sizePx = computed(() => ({
-  '3xs': 16,
-  '2xs': 20,
-  'xs': 24,
-  'sm': 28,
-  'md': 32,
-  'lg': 36,
-  'xl': 40,
-  '2xl': 44,
-  '3xl': 48
-})[props.size || 'md'])
+const rootClass = computed(() => ui.value.root({ class: [props.ui?.root, props.class] }))
+
+const sizePx = computed(() => {
+  const sizeClass = rootClass.value.split(' ').find(c => c.startsWith('size-'))
+  const numericValue = sizeClass ? Number.parseFloat(sizeClass.split('-')[1]) : null
+
+  return !Number.isNaN(numericValue) ? numericValue * 4 : 32
+})
 
 const error = ref(false)
 
@@ -99,7 +96,7 @@ function onError() {
     :as="as.root"
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
     data-slot="root"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="rootClass"
     :style="props.style"
   >
     <component
