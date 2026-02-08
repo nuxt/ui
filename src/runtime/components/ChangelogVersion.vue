@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
+import type { ImgHTMLAttributes as VueImgHTMLAttributes } from 'vue'
 import theme from '#build/ui/changelog-version'
 import type { BadgeProps, LinkProps, UserProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
@@ -25,7 +26,7 @@ export interface ChangelogVersionProps {
   /** The authors of the changelog version. */
   authors?: UserProps[]
   /** The image of the changelog version. Can be a string or an object. */
-  image?: string | (Partial<HTMLImageElement> & { [key: string]: any })
+  image?: string | (Partial<VueImgHTMLAttributes> & { [key: string]: any })
   /**
    * Display an indicator dot on the left.
    * @defaultValue true
