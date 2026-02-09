@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "3.3.7",
-  "packageManager": "pnpm@10.28.2",
+  "packageManager": "pnpm@10.29.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -112,7 +112,7 @@
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
-    "@internationalized/date": "^3.10.1",
+    "@internationalized/date": "^3.11.0",
     "@internationalized/number": "^3.6.5",
     "@nuxt/fonts": "^0.13.0",
     "@nuxt/icon": "^1.15.0",
@@ -123,7 +123,7 @@
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/vue-table": "^8.21.3",
-    "@unhead/vue": "^2.1.2",
+    "@unhead/vue": "^2.1.4",
     "@vueuse/core": "^14.2.0",
     "@vueuse/integrations": "^14.2.0",
     "@vueuse/shared": "^14.2.0",
@@ -157,14 +157,14 @@
     "vue-component-type-helpers": "^3.2.4"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^1.13.0",
+    "@nuxt/eslint-config": "^1.14.0",
     "@nuxt/module-builder": "^1.0.2",
     "@nuxt/test-utils": "^3.23.0",
-    "@release-it/conventional-changelog": "^10.0.4",
+    "@release-it/conventional-changelog": "^10.0.5",
     "@vue/test-utils": "^2.4.6",
     "embla-carousel": "^8.6.0",
     "eslint": "^9.39.2",
-    "happy-dom": "^20.5.0",
+    "happy-dom": "^20.5.3",
     "nuxt": "^4.3.0",
     "release-it": "^19.2.4",
     "vitest": "^3.2.4",
