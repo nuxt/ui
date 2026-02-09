@@ -125,6 +125,9 @@ Thank you for considering contributing to Nuxt UI. Here are a few ways you can g
 - Reporting Bugs: If you come across any bugs or issues, please check out the reporting bugs guide to learn how to submit a bug report.
 - Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/docs/getting-started/contribution) to share your suggestions.
 
+> [!TIP]
+> We provide a [contributing skill](https://github.com/nuxt/ui/tree/v4/.claude/skills/contributing) for AI assistants to help you contribute to Nuxt UI. It will automatically guide you through component structure, theming patterns, testing conventions, and documentation guidelines when working in this repository.
+
 ## Local Development
 
 Follow the docs to [set up your local development environment](https://ui.nuxt.com/docs/getting-started/contribution#local-development) and contribute.
