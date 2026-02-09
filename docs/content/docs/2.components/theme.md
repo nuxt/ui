@@ -54,7 +54,7 @@ name: 'theme-priority-example'
 ---
 ::
 
-#### Works deeply
+### Deep
 
 The Theme component uses Vue's provide/inject mechanism to provide the theme overrides to the child components.
 This means that the theme overrides are available to all child components, regardless of how deeply nested they are.
