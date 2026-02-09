@@ -199,7 +199,7 @@
     "@vue/test-utils": "^2.4.6",
     "ai": "^6.0.77",
     "embla-carousel": "^8.6.0",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "happy-dom": "^20.5.3",
     "nuxt": "^4.3.0",
     "release-it": "^19.2.4",
