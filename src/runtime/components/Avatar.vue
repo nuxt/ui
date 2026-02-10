@@ -72,7 +72,7 @@ const rootClass = computed(() => ui.value.root({ class: [props.ui?.root, props.c
 
 const sizePx = computed(() => {
   const sizeClass = rootClass.value.split(' ').find(c => c.startsWith('size-'))
-  const numericValue = sizeClass ? Number.parseFloat(sizeClass.split('-')[1] ?? '') : NaN
+  const numericValue = sizeClass ? Number.parseFloat(sizeClass.split('-')[1] ?? '') : Number.NaN
 
   return !Number.isNaN(numericValue) ? numericValue * 4 : 32
 })
