@@ -256,7 +256,7 @@ const slots = defineSlots<TableSlots<T>>()
 const { t } = useLocale()
 const appConfig = useAppConfig() as Table['AppConfig']
 
-const data = createRef(props.data ?? [], props.shallowData)
+const data = createRef(props.data ?? [], !props.shallowData)
 const meta = computed(() => props.meta ?? {})
 const columns = computed<TableColumn<T>[]>(() => processColumns(props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) }))))
 
