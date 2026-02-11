@@ -8,7 +8,7 @@
   >
     <div class="flex items-center gap-2">
       <UButton label="Themed" />
-      <UButton label="Overrided" :ui="{ base: 'rounded-none' }" />
+      <UButton label="Overridden" :ui="{ base: 'rounded-none' }" />
     </div>
   </UTheme>
 </template>
