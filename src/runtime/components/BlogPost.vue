@@ -2,6 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-post'
 import type { BadgeProps, LinkProps, UserProps } from '../types'
+import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type BlogPost = ComponentConfig<typeof theme, AppConfig, 'blogPost'>
@@ -25,7 +26,7 @@ export interface BlogPostProps {
   /** The authors of the blog post. */
   authors?: UserProps[]
   /** The image of the blog post. Can be a string or an object. */
-  image?: string | (Partial<HTMLImageElement> & { [key: string]: any })
+  image?: string | (Partial<ImgHTMLAttributes> & { [key: string]: any })
   /**
    * The orientation of the blog post.
    * @defaultValue 'vertical'
