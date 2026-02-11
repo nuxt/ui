@@ -7,8 +7,9 @@
     }"
   >
     <div class="flex items-center gap-2">
-      <UButton label="Button" />
       <UButton label="Button" color="neutral" />
+      <UButton label="Button" color="neutral" variant="outline" />
+      <UButton label="Button" color="neutral" variant="subtle" />
     </div>
   </UTheme>
 </template>
