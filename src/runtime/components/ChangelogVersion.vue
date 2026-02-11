@@ -2,6 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/changelog-version'
 import type { BadgeProps, LinkProps, UserProps } from '../types'
+import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type ChangelogVersion = ComponentConfig<typeof theme, AppConfig, 'changelogVersion'>
@@ -25,7 +26,7 @@ export interface ChangelogVersionProps {
   /** The authors of the changelog version. */
   authors?: UserProps[]
   /** The image of the changelog version. Can be a string or an object. */
-  image?: string | (Partial<HTMLImageElement> & { [key: string]: any })
+  image?: string | (Partial<ImgHTMLAttributes> & { [key: string]: any })
   /**
    * Display an indicator dot on the left.
    * @defaultValue true

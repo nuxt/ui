@@ -1,5 +1,5 @@
 ---
-name: ui
+name: nuxt-ui
 description: Build UIs with @nuxt/ui v4 — 125+ accessible Vue components with Tailwind CSS theming. Use when creating interfaces, customizing themes to match a brand, building forms, or composing layouts like dashboards, docs sites, and chat interfaces.
 ---
 
@@ -202,8 +202,9 @@ toast.add({ title: 'Saved', color: 'success', icon: 'i-lucide-check' })
 
 // Programmatic overlays
 const overlay = useOverlay()
-const modal = overlay.create(MyModal, { props: { title: 'Confirm' } })
-const result = await modal.result
+const modal = overlay.create(MyModal)
+const { result } = modal.open({ title: 'Confirm' })
+await result
 
 // Keyboard shortcuts
 defineShortcuts({
@@ -269,11 +270,19 @@ function onSubmit() {
   <template #body>Content</template>
 </USlideover>
 
-<!-- Dropdown menu -->
+<!-- Dropdown menu (flat array) -->
 <UDropdownMenu :items="[
   { label: 'Edit', icon: 'i-lucide-pencil' },
   { type: 'separator' },
   { label: 'Delete', icon: 'i-lucide-trash', color: 'error' }
+]">
+  <UButton icon="i-lucide-ellipsis-vertical" variant="ghost" />
+</UDropdownMenu>
+
+<!-- Dropdown menu (nested array — groups with automatic separators) -->
+<UDropdownMenu :items="[
+  [{ label: 'Edit', icon: 'i-lucide-pencil' }, { label: 'Duplicate', icon: 'i-lucide-copy' }],
+  [{ label: 'Delete', icon: 'i-lucide-trash', color: 'error' }]
 ]">
   <UButton icon="i-lucide-ellipsis-vertical" variant="ghost" />
 </UDropdownMenu>

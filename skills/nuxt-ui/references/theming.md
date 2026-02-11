@@ -95,28 +95,46 @@ Then assign it: `ui: { colors: { tertiary: 'indigo' } }` and use it via the `col
 
 ### Text
 
-| Class | Use |
-|---|---|
-| `text-default` | Body text |
-| `text-muted` | Secondary text |
-| `text-dimmed` | Placeholders, hints |
-| `text-toned` | Subtitles |
-| `text-highlighted` | Headings, emphasis |
-| `text-inverted` | On dark/light backgrounds |
+| Class | Use | Light value | Dark value |
+|---|---|---|---|
+| `text-default` | Body text | `neutral-700` | `neutral-200` |
+| `text-muted` | Secondary text | `neutral-500` | `neutral-400` |
+| `text-dimmed` | Placeholders, hints | `neutral-400` | `neutral-500` |
+| `text-toned` | Subtitles | `neutral-600` | `neutral-300` |
+| `text-highlighted` | Headings, emphasis | `neutral-900` | `white` |
+| `text-inverted` | On dark/light backgrounds | `white` | `neutral-900` |
 
 ### Background
 
-| Class | Use |
-|---|---|
-| `bg-default` | Page background |
-| `bg-muted` | Subtle sections |
-| `bg-elevated` | Cards, modals |
-| `bg-accented` | Hover states |
-| `bg-inverted` | Inverted sections |
+| Class | Use | Light value | Dark value |
+|---|---|---|---|
+| `bg-default` | Page background | `white` | `neutral-900` |
+| `bg-muted` | Subtle sections | `neutral-50` | `neutral-800` |
+| `bg-elevated` | Cards, modals | `neutral-100` | `neutral-800` |
+| `bg-accented` | Hover states | `neutral-200` | `neutral-700` |
+| `bg-inverted` | Inverted sections | `neutral-900` | `white` |
 
 ### Border
 
-`border-default`, `border-muted`, `border-accented`, `border-inverted`
+| Class | Use | Light value | Dark value |
+|---|---|---|---|
+| `border-default` | Default borders | `neutral-200` | `neutral-800` |
+| `border-muted` | Subtle borders | `neutral-200` | `neutral-700` |
+| `border-accented` | Emphasized borders | `neutral-300` | `neutral-700` |
+| `border-inverted` | Inverted borders | `neutral-900` | `white` |
+
+### Semantic color utilities
+
+Each semantic color (`primary`, `secondary`, `success`, `info`, `warning`, `error`) is available as a Tailwind utility: `text-primary`, `bg-primary`, `border-primary`, `ring-primary`, etc.
+
+They resolve to shade **500** in light mode and shade **400** in dark mode (via `--ui-<color>` CSS variables). This is generated at runtime by the colors plugin — you don't need to write dark-mode variants manually.
+
+To adjust which shade is used, override `--ui-primary` (or any semantic color) in your `main.css`:
+
+```css
+:root { --ui-primary: var(--ui-color-primary-600); }
+.dark { --ui-primary: var(--ui-color-primary-300); }
+```
 
 ### CSS variables
 
@@ -124,9 +142,9 @@ All customizable in `main.css`:
 
 ```css
 :root {
-  --ui-radius: 0.25rem;          /* base radius for all components */
-  --ui-container: 80rem;         /* UContainer max-width */
-  --ui-header-height: 4rem;      /* UHeader height */
+  --ui-radius: 0.25rem;               /* base radius for all components */
+  --ui-container: 80rem;              /* UContainer max-width */
+  --ui-header-height: 4rem;            /* UHeader height */
   --ui-primary: var(--ui-color-primary-500); /* adjust shade used */
 }
 

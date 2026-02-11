@@ -12,8 +12,8 @@ toast.add({
   description: 'Item saved',
   color: 'success',       // primary, success, error, warning, info
   icon: 'i-lucide-check-circle',
-  timeout: 5000,          // 0 = never dismiss
-  actions: [{ label: 'Undo', click: () => {} }]
+  duration: 5000,         // 0 = never dismiss
+  actions: [{ label: 'Undo', onClick: () => {} }]
 })
 
 toast.remove('toast-id')
@@ -27,15 +27,21 @@ Programmatically create modals, slideovers, drawers.
 ```ts
 const overlay = useOverlay()
 
-const modal = overlay.create(MyComponent, {
-  props: { title: 'Confirm' },
-  events: {
-    confirm: () => modal.close(true),
-    cancel: () => modal.close(false)
-  }
-})
+// create() returns a reusable instance with open(), close(), patch()
+const modal = overlay.create(MyComponent)
 
-const result = await modal.result
+// open() accepts props and returns an object with .result (a Promise)
+const { result } = modal.open({ title: 'Confirm' })
+
+if (await result) {
+  // User confirmed
+}
+
+// Inside the overlay component, emit close with a value:
+// emit('close', true) or emit('close', false)
+
+// You can also close from outside:
+modal.close(false)
 ```
 
 ## defineShortcuts
@@ -103,8 +109,8 @@ Extract shortcut keys from a list of items (e.g., dropdown menu items) into a sh
 
 ```ts
 const items = [
-  { label: 'New file', shortcuts: ['meta', 'n'], click: () => newFile() },
-  { label: 'Save', shortcuts: ['meta', 's'], click: () => save() }
+  { label: 'New file', kbds: ['meta', 'n'], onSelect: () => newFile() },
+  { label: 'Save', kbds: ['meta', 's'], onSelect: () => save() }
 ]
 
 defineShortcuts(extractShortcuts(items))
