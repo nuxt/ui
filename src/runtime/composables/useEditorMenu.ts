@@ -158,8 +158,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           let matchType = 3
           if (startsWith(v, query) || startsWith(normalized, query)) {
             matchType = (v.length === query.length || normalized.length === query.length) ? 0 : 1
-          }
-          else if (contains(v, query) || contains(normalized, query)) {
+          } else if (contains(v, query) || contains(normalized, query)) {
             matchType = 2
           }
 
