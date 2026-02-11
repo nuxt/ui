@@ -416,7 +416,9 @@ function onFocus(event: FocusEvent) {
   emitFormFocus()
 }
 
+let isDropdownOpened = false
 function onUpdateOpen(value: boolean) {
+  isDropdownOpened = value
   let timeoutId
 
   if (!value) {
@@ -492,7 +494,7 @@ const comboboxRootRef = useTemplateRef('comboboxRootRef')
 watch(
   () => props.items,
   () => {
-    if (props.ignoreFilter && createItem.value) {
+    if (isDropdownOpened && props.ignoreFilter && createItem.value) {
       comboboxRootRef.value?.highlightFirstItem?.()
     }
   },
