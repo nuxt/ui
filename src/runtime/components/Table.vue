@@ -137,12 +137,6 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    */
   loadingAnimation?: Table['variants']['loadingAnimation']
   /**
-   * Whether to use shallow data for the table.
-   * @see [API](https://vueuse.org/shared/createRef/#usage)
-   * @defaultValue false
-   */
-  shallowData?: boolean
-  /**
    * Use the `watchOptions` prop to customize reactivity (for ex: disable deep watching for changes in your data or limiting the max traversal depth). This can improve performance by reducing unnecessary re-renders, but it should be used with caution as it may lead to unexpected behavior if not managed properly.
    * @see [API](https://vuejs.org/api/options-state.html#watch)
    * @see [Guide](https://vuejs.org/guide/essentials/watchers.html)
@@ -256,7 +250,7 @@ const slots = defineSlots<TableSlots<T>>()
 const { t } = useLocale()
 const appConfig = useAppConfig() as Table['AppConfig']
 
-const data = createRef(props.data ?? [], !props.shallowData)
+const data = createRef(props.data ?? [], props.watchOptions?.deep !== false)
 const meta = computed(() => props.meta ?? {})
 const columns = computed<TableColumn<T>[]>(() => processColumns(props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) }))))
 
