@@ -583,7 +583,7 @@ defineExpose({
         <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [uiProp?.itemTrailing, isInputItem(item) && item.ui?.itemTrailing] })">
           <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" :ui="ui" />
 
-          <Component.ItemIndicator as-child>
+          <Component.ItemIndicator v-if="!autocomplete" as-child>
             <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiProp?.itemTrailingIcon, isInputItem(item) && item.ui?.itemTrailingIcon] })" />
           </Component.ItemIndicator>
         </span>
