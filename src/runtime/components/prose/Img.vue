@@ -26,10 +26,10 @@ import { DialogRoot, DialogPortal, DialogTrigger } from 'reka-ui'
 import { AnimatePresence, Motion } from 'motion-v'
 import { useEventListener, createReusableTemplate } from '@vueuse/core'
 import { useRuntimeConfig, useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
 import ImageComponent from '#build/ui-image-component'
-import { tv } from '../../utils/tv'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { resolveBaseURL } from '../../utils'
+import { tv } from '../../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 

@@ -58,8 +58,8 @@ export interface BlogPostSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive, useDateFormatter } from 'reka-ui'
-import ImageComponent from '#build/ui-image-component'
 import { useLocale, useAppConfig } from '#imports'
+import ImageComponent from '#build/ui-image-component'
 import { useComponentUI } from '../composables/useComponentUI'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
