@@ -17,25 +17,18 @@ defineOptions({ inheritAttrs: false })
 
 const props = defineProps<ColorModeImageProps>()
 
-const refinedLight = computed(() => {
-  if (props.light?.startsWith('/') && !props.light.startsWith('//')) {
+function withBase(path: string): string {
+  if (path.startsWith('/') && !path.startsWith('//')) {
     const _base = withLeadingSlash(withTrailingSlash(useRuntimeConfig().app.baseURL))
-    if (_base !== '/' && !props.light.startsWith(_base)) {
-      return joinURL(_base, props.light)
+    if (_base !== '/' && !path.startsWith(_base)) {
+      return joinURL(_base, path)
     }
   }
-  return props.light
-})
+  return path
+}
 
-const refinedDark = computed(() => {
-  if (props.dark?.startsWith('/') && !props.dark.startsWith('//')) {
-    const _base = withLeadingSlash(withTrailingSlash(useRuntimeConfig().app.baseURL))
-    if (_base !== '/' && !props.dark.startsWith(_base)) {
-      return joinURL(_base, props.dark)
-    }
-  }
-  return props.dark
-})
+const refinedLight = computed(() => withBase(props.light))
+const refinedDark = computed(() => withBase(props.dark))
 </script>
 
 <template>
