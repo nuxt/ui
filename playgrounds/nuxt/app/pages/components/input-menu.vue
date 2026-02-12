@@ -59,6 +59,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 
 const value = ref('Apple')
 const valueMultiple = ref([fruits[0]!, vegetables[0]!])
+const valueMaxValue = ref([fruits[0]!, fruits[1]!, vegetables[0]!, vegetables[1]!])
 </script>
 
 <template>
@@ -80,6 +81,23 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
       v-bind="props"
       clear
     />
+    <UInputMenu
+      :default-value="valueMaxValue"
+      multiple
+      :collapse-tags="2"
+      placeholder="Collapse"
+      :items="items"
+      v-bind="props"
+      />
+    <UInputMenu
+      :default-value="valueMaxValue"
+      multiple
+      :collapse-tags="2"
+      placeholder="Collapse with hover"
+      :items="items"
+      collapse-hover
+      v-bind="props"
+      />
     <UInputMenu placeholder="Highlight" highlight :items="items" v-bind="props" />
     <UInputMenu placeholder="Disabled" disabled :items="items" v-bind="props" />
     <UInputMenu placeholder="Required" required :items="items" v-bind="props" />

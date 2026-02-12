@@ -231,6 +231,43 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 :::
 ::
 
+### Collapse tags
+With ``multiple`` enabled, you can set a maximum number of selected items to display as tags. Any additional selected items will be shown in a counter.
+
+::component-code
+---
+prettier: true ignore:
+- modelValue :
+  - backlog
+  - Todo
+- mutliple external:
+- collapse-tags: 2
+- items :
+  - Backlog
+  - Todo
+  - In Progress
+  - Done
+---
+::
+### Collapse hover
+With ``multiple`` and ``collapse-tags`` enabled, hovering over the counter in the tags will display the remaining selected items.
+
+::component-code
+---
+prettier: true ignore:
+- modelValue:
+  - backlog
+  - Todo
+- multiple external:
+- collapse-tags: 2
+- collapse-hover external:
+- items :
+  - Backlog
+  - Todo
+  - In Progress
+  - Done
+---
+::
 ### Placeholder
 
 Use the `placeholder` prop to set a placeholder text.

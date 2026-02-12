@@ -145,6 +145,16 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
   modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
+  /** Maximum number of selected options the input should display.
+   * If the number of selected options exceeds this value, a counter shows how many additional options have been selected.
+   * @defaultValue undefined
+  */
+  collapseTags?: number
+
+  /** If `collapseTags` is defined, the remaining selected items are shown when hovering over the counter. 
+   * @defaultValue false
+   */
+  collapseHover?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /**
@@ -593,18 +603,71 @@ defineExpose({
         @focus="onFocus"
         @remove-tag="onRemoveTag($event, modelValue as GetModelValue<T, VK, true>)"
       >
-        <TagsInputItem v-for="(item, index) in tags" :key="index" :value="item" data-slot="tagsItem" :class="ui.tagsItem({ class: [uiProp?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
-          <TagsInputItemText data-slot="tagsItemText" :class="ui.tagsItemText({ class: [uiProp?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
-            <slot name="tags-item-text" :item="(item as NestedItem<T>)" :index="index">
-              {{ displayValue(item as GetItemValue<T, VK>) }}
-            </slot>
-          </TagsInputItemText>
 
-          <TagsInputItemDelete data-slot="tagsItemDelete" :class="ui.tagsItemDelete({ class: [uiProp?.tagsItemDelete, isInputItem(item) && item.ui?.tagsItemDelete] })" :disabled="disabled">
-            <slot name="tags-item-delete" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
-              <UIcon :name="deleteIcon || appConfig.ui.icons.close" data-slot="tagsItemDeleteIcon" :class="ui.tagsItemDeleteIcon({ class: [uiProp?.tagsItemDeleteIcon, isInputItem(item) && item.ui?.tagsItemDeleteIcon] })" />
-            </slot>
-          </TagsInputItemDelete>
+        <template v-for="(item, index) in tags" :key="index">
+          <TagsInputItem 
+            v-if="!collapseTags || collapseTags > index" 
+            :value="item" data-slot="tagsItem"
+            :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })"
+          >
+            <TagsInputItemText 
+              data-slot="tagsItemText"
+              :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })"
+            >
+              <slot 
+                name="tags-item-text" 
+                :item="(item as NestedItem<T>)" 
+                :index="index"
+              >
+                {{ displayValue((item as GetItemValue<T,VK>)) }}
+              </slot>
+            </TagsInputItemText>
+            <TagsInputItemDelete 
+              data-slot="tagsItemDelete"
+              :class="ui.tagsItemDelete({ class: [props.ui?.tagsItemDelete, isInputItem(item) && item.ui?.tagsItemDelete] })"
+              :disabled="disabled">
+              <slot 
+                name="tags-item-delete" 
+                :item="(item as NestedItem<T>)" 
+                :index="index" 
+                :ui="ui"
+              >
+                <UIcon 
+                  :name="deleteIcon || appConfig.ui.icons.close" 
+                  data-slot="tagsItemDeleteIcon"
+                  :class="ui.tagsItemDeleteIcon({ class: [props.ui?.tagsItemDeleteIcon, isInputItem(item) && item.ui?.tagsItemDeleteIcon] })" 
+                />
+              </slot>
+            </TagsInputItemDelete>
+          </TagsInputItem>
+        </template>
+        <TagsInputItem 
+          v-if="!!collapseTags && collapseTags < tags.length"
+          :value="tags.length - collapseTags" 
+          data-slot="tagsCollapse" 
+          :class="ui.tagsItem({ class: [props.ui?.tagsItem, 'group relative cursor-pointer'] })">
+          <TagsInputItemText data-slot="tagsCollapseText" :class="ui.tagsItemText({ class: [props.ui?.tagsItemText] })">
+            <slot name="tags-item-text" :item="(tags.length - collapseTags as NestedItem<T>)" :index="tags.length - collapseTags">
+              +{{ displayValue((tags.length - collapseTags as GetItemValue<T,VK>)) }}</slot>
+          </TagsInputItemText>
+            <div v-if="collapseHover == true"
+              class="absolute top-[100%] translate-x-[-50%] pt-[.5em] opacity-0 z-99 invisible group-hover:visible group-hover:opacity-100 transition duration-300">
+              <div class="bg-default ring ring-inset ring-accented p-[.5em] rounded-md space-y-[.5em]">
+                <template 
+                  v-for="(item, index) in tags"
+                >
+                <div 
+                  v-if="index + 1 > collapseTags" 
+                  :class="ui.tagsItem({ class: [props.ui?.tagsItem] })">
+                  <div 
+                    :class="ui.tagsItemText({ class: [props.ui?.tagsItemText] })">
+                    {{ item }}
+                  </div>
+                </div>
+              </template>
+              </div>
+              
+            </div>
         </TagsInputItem>
 
         <ComboboxInput v-model="searchTerm" as-child>
