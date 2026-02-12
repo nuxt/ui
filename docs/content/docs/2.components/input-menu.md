@@ -255,7 +255,7 @@ props:
 ---
 ::
 
-### Autocomplete
+### Autocomplete :badge{label="Soon" class="align-text-top"}
 
 Use the `autocomplete` prop to turn the InputMenu into a free-form text input with suggestions. The `modelValue` becomes the input text (`string`) instead of a selected item.
 
