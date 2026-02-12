@@ -9,26 +9,16 @@ export interface ColorModeImageProps extends /** @vue-ignore */ Omit<ImgHTMLAttr
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { withTrailingSlash, withLeadingSlash, joinURL } from 'ufo'
 import { useRuntimeConfig } from '#imports'
 import ImageComponent from '#build/ui-image-component'
+import { resolveBaseURL } from '../../utils'
 
 defineOptions({ inheritAttrs: false })
 
 const props = defineProps<ColorModeImageProps>()
 
-function withBase(path: string): string {
-  if (path.startsWith('/') && !path.startsWith('//')) {
-    const _base = withLeadingSlash(withTrailingSlash(useRuntimeConfig().app.baseURL))
-    if (_base !== '/' && !path.startsWith(_base)) {
-      return joinURL(_base, path)
-    }
-  }
-  return path
-}
-
-const refinedLight = computed(() => withBase(props.light))
-const refinedDark = computed(() => withBase(props.dark))
+const refinedLight = computed(() => resolveBaseURL(props.light, useRuntimeConfig().app.baseURL))
+const refinedDark = computed(() => resolveBaseURL(props.dark, useRuntimeConfig().app.baseURL))
 </script>
 
 <template>

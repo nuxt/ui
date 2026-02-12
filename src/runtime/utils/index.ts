@@ -1,4 +1,5 @@
 import { isEqual } from 'ohash/utils'
+import { withTrailingSlash, withLeadingSlash, joinURL } from 'ufo'
 import type { GetItemKeys } from '../types/utils'
 
 export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Keys[]): Pick<Data, Keys> {
@@ -187,6 +188,16 @@ export function transformUI(ui: any, uiProp?: any) {
     acc[key] = typeof value === 'function' ? value({ class: uiProp?.[key] }) : value
     return acc
   }, uiProp || {})
+}
+
+export function resolveBaseURL(path?: string, baseURL?: string): string | undefined {
+  if (path?.startsWith('/') && !path.startsWith('//')) {
+    const _base = withLeadingSlash(withTrailingSlash(baseURL || '/'))
+    if (_base !== '/' && !path.startsWith(_base)) {
+      return joinURL(_base, path)
+    }
+  }
+  return path
 }
 
 export * from './content'

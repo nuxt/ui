@@ -22,7 +22,6 @@ export interface ProseImgProps {
 
 <script setup lang="ts">
 import { ref, computed, useId } from 'vue'
-import { withTrailingSlash, withLeadingSlash, joinURL } from 'ufo'
 import { DialogRoot, DialogPortal, DialogTrigger } from 'reka-ui'
 import { AnimatePresence, Motion } from 'motion-v'
 import { useEventListener, createReusableTemplate } from '@vueuse/core'
@@ -30,6 +29,7 @@ import { useRuntimeConfig, useAppConfig } from '#imports'
 import { useComponentUI } from '../../composables/useComponentUI'
 import ImageComponent from '#build/ui-image-component'
 import { tv } from '../../utils/tv'
+import { resolveBaseURL } from '../../utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -50,15 +50,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.img |
   open: open.value
 }))
 
-const refinedSrc = computed(() => {
-  if (props.src?.startsWith('/') && !props.src.startsWith('//')) {
-    const _base = withLeadingSlash(withTrailingSlash(useRuntimeConfig().app.baseURL))
-    if (_base !== '/' && !props.src.startsWith(_base)) {
-      return joinURL(_base, props.src)
-    }
-  }
-  return props.src
-})
+const refinedSrc = computed(() => resolveBaseURL(props.src, useRuntimeConfig().app.baseURL))
 
 const layoutId = computed(() => `${refinedSrc.value}::${useId()}`)
 
