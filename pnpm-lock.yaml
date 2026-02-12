@@ -10,7 +10,7 @@ overrides:
   '@nuxt/module-builder': 1.0.1
   '@nuxt/ui': workspace:*
   typescript: 5.8.3
-  unplugin: ^2.3.11
+  unplugin: ^3.0.0
 
 importers:
 
@@ -146,8 +146,8 @@ importers:
         specifier: 5.8.3
         version: 5.8.3
       unplugin:
-        specifier: ^2.3.11
-        version: 2.3.11
+        specifier: ^3.0.0
+        version: 3.0.0
       unplugin-auto-import:
         specifier: ^21.0.0
         version: 21.0.0(@nuxt/kit@4.3.0(magicast@0.5.1))(@vueuse/core@14.2.0(vue@3.5.27(typescript@5.8.3)))
@@ -7470,9 +7470,9 @@ packages:
       vue-router:
         optional: true
 
-  unplugin@2.3.11:
-    resolution: {integrity: sha512-5uKD0nqiYVzlmCRs01Fhs2BdkEgBS3SAVP6ndrBsuK42iC2+JHyxM05Rm9G8+5mkmRtzMZGY8Ct5+mliZxU/Ww==}
-    engines: {node: '>=18.12.0'}
+  unplugin@3.0.0:
+    resolution: {integrity: sha512-0Mqk3AT2TZCXWKdcoaufeXNukv2mTrEZExeXlHIOZXdqYoHHr4n51pymnwV8x2BOVxwXbK2HLlI7usrqMpycdg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
 
   unrs-resolver@1.11.1:
     resolution: {integrity: sha512-bSjt9pjaEBnNiGgc9rUiHGKv5l4/TGzDmYw3RhnkJGtLhbnnA/5qJj7x3dNDCRx/PJxu774LlH8lCOlB4hEfKg==}
@@ -9198,7 +9198,7 @@ snapshots:
       unified: 11.0.5
       unist-util-stringify-position: 4.0.0
       unist-util-visit: 5.0.0
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       zod: 3.25.76
       zod-to-json-schema: 3.25.0(zod@3.25.76)
     optionalDependencies:
@@ -9343,7 +9343,7 @@ snapshots:
       tinyglobby: 0.2.15
       ufo: 1.6.3
       unifont: 0.6.0
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       unstorage: 1.17.4(db0@0.3.4(better-sqlite3@12.6.2))(ioredis@5.9.2)
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -9590,7 +9590,7 @@ snapshots:
       std-env: 3.10.0
       tinyexec: 1.0.2
       ufo: 1.6.3
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       vitest-environment-nuxt: 1.0.1(@vue/test-utils@2.4.6)(happy-dom@20.5.3)(magicast@0.5.1)(playwright-core@1.57.0)(typescript@5.8.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.0)(happy-dom@20.5.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.2))
       vue: 3.5.27(typescript@5.8.3)
     optionalDependencies:
@@ -9623,7 +9623,7 @@ snapshots:
       scule: 1.3.0
       tinyglobby: 0.2.15
       typescript: 5.8.3
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       unplugin-auto-import: 20.3.0(@nuxt/kit@4.3.0(magicast@0.5.1))(@vueuse/core@13.9.0(vue@3.5.27(typescript@5.8.3)))
       unplugin-vue-components: 30.0.0(@babel/parser@7.28.5)(@nuxt/kit@4.3.0(magicast@0.5.1))(vue@3.5.27(typescript@5.8.3))
     optionalDependencies:
@@ -12498,7 +12498,7 @@ snapshots:
       magic-string: 0.30.21
       pathe: 2.0.3
       ufo: 1.6.3
-      unplugin: 2.3.11
+      unplugin: 3.0.0
 
   fontaine@0.8.0:
     dependencies:
@@ -12508,7 +12508,7 @@ snapshots:
       magic-string: 0.30.21
       pathe: 2.0.3
       ufo: 1.6.3
-      unplugin: 2.3.11
+      unplugin: 3.0.0
 
   fontkit@2.0.4:
     dependencies:
@@ -12985,7 +12985,7 @@ snapshots:
       exsolve: 1.0.8
       mocked-exports: 0.1.1
       pathe: 2.0.3
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       unplugin-utils: 0.2.5
 
   imurmurhash@0.1.4: {}
@@ -13427,7 +13427,7 @@ snapshots:
       regexp-tree: 0.1.27
       type-level-regexp: 0.1.17
       ufo: 1.6.3
-      unplugin: 2.3.11
+      unplugin: 3.0.0
 
   magic-regexp@0.8.0:
     dependencies:
@@ -13437,7 +13437,7 @@ snapshots:
       regexp-tree: 0.1.27
       type-level-regexp: 0.1.17
       ufo: 1.6.3
-      unplugin: 2.3.11
+      unplugin: 3.0.0
 
   magic-string-ast@1.0.2:
     dependencies:
@@ -14153,7 +14153,7 @@ snapshots:
       std-env: 3.10.0
       strip-literal: 3.1.0
       ufo: 1.6.3
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       unstorage: 1.17.4(db0@0.3.4(better-sqlite3@12.6.2))(ioredis@5.9.2)
       unwasm: 0.5.3
       yoga-wasm-web: 0.3.3
@@ -14242,7 +14242,7 @@ snapshots:
       uncrypto: 0.1.3
       unctx: 2.5.0
       unimport: 5.6.0
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       unplugin-vue-router: 0.19.2(@vue/compiler-sfc@3.5.27)(vue-router@4.6.4(vue@3.5.27(typescript@5.8.3)))(vue@3.5.27(typescript@5.8.3))
       untyped: 2.0.0
       vue: 3.5.27(typescript@5.8.3)
@@ -15844,7 +15844,7 @@ snapshots:
       acorn: 8.15.0
       estree-walker: 3.0.3
       magic-string: 0.30.21
-      unplugin: 2.3.11
+      unplugin: 3.0.0
 
   undici-types@6.21.0: {}
 
@@ -15908,7 +15908,7 @@ snapshots:
       scule: 1.3.0
       strip-literal: 3.1.0
       tinyglobby: 0.2.15
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       unplugin-utils: 0.3.1
 
   unist-builder@4.0.0:
@@ -15951,7 +15951,7 @@ snapshots:
       magic-string: 0.30.21
       picomatch: 4.0.3
       unimport: 5.6.0
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       unplugin-utils: 0.3.1
     optionalDependencies:
       '@nuxt/kit': 4.3.0(magicast@0.5.1)
@@ -15963,7 +15963,7 @@ snapshots:
       magic-string: 0.30.21
       picomatch: 4.0.3
       unimport: 5.6.0
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       unplugin-utils: 0.3.1
     optionalDependencies:
       '@nuxt/kit': 4.3.0(magicast@0.5.1)
@@ -15987,7 +15987,7 @@ snapshots:
       magic-string: 0.30.21
       mlly: 1.8.0
       tinyglobby: 0.2.15
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       unplugin-utils: 0.3.1
       vue: 3.5.27(typescript@5.8.3)
     optionalDependencies:
@@ -16005,7 +16005,7 @@ snapshots:
       obug: 2.1.1
       picomatch: 4.0.3
       tinyglobby: 0.2.15
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       unplugin-utils: 0.3.1
       vue: 3.5.27(typescript@5.8.3)
     optionalDependencies:
@@ -16028,7 +16028,7 @@ snapshots:
       picomatch: 4.0.3
       scule: 1.3.0
       tinyglobby: 0.2.15
-      unplugin: 2.3.11
+      unplugin: 3.0.0
       unplugin-utils: 0.3.1
       yaml: 2.8.2
     optionalDependencies:
@@ -16036,10 +16036,9 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  unplugin@2.3.11:
+  unplugin@3.0.0:
     dependencies:
       '@jridgewell/remapping': 2.3.5
-      acorn: 8.15.0
       picomatch: 4.0.3
       webpack-virtual-modules: 0.6.2
 
