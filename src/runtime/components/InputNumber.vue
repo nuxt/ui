@@ -79,6 +79,7 @@ import { onMounted, computed, useTemplateRef, toRef } from 'vue'
 import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
@@ -99,6 +100,7 @@ const modelValue = useVModel<InputNumberProps<T>, 'modelValue', 'update:modelVal
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
+const uiProp = useComponentUI('inputNumber', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'readonly', 'focusOnChange'), emits)
 
@@ -164,7 +166,7 @@ defineExpose({
     :id="id"
     :model-value="modelValue"
     data-slot="root"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     :name="name"
     :disabled="disabled"
     @update:model-value="onUpdate"
@@ -175,12 +177,12 @@ defineExpose({
       :placeholder="placeholder"
       :required="required"
       data-slot="base"
-      :class="ui.base({ class: props.ui?.base })"
+      :class="ui.base({ class: uiProp?.base })"
       @blur="onBlur"
       @focus="emitFormFocus"
     />
 
-    <div v-if="!!increment" data-slot="increment" :class="ui.increment({ class: props.ui?.increment })">
+    <div v-if="!!increment" data-slot="increment" :class="ui.increment({ class: uiProp?.increment })">
       <NumberFieldIncrement as-child :disabled="disabled || incrementDisabled">
         <slot name="increment">
           <UButton
@@ -195,7 +197,7 @@ defineExpose({
       </NumberFieldIncrement>
     </div>
 
-    <div v-if="!!decrement" data-slot="decrement" :class="ui.decrement({ class: props.ui?.decrement })">
+    <div v-if="!!decrement" data-slot="decrement" :class="ui.decrement({ class: uiProp?.decrement })">
       <NumberFieldDecrement as-child :disabled="disabled || decrementDisabled">
         <slot name="decrement">
           <UButton

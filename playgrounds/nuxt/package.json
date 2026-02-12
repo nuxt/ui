@@ -9,16 +9,16 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@ai-sdk/gateway": "^3.0.32",
-    "@ai-sdk/vue": "^3.0.68",
-    "@iconify-json/lucide": "^1.2.87",
-    "@iconify-json/simple-icons": "^1.2.69",
-    "@internationalized/date": "^3.10.1",
-    "@nuxt/content": "^3.11.0",
+    "@ai-sdk/gateway": "^3.0.39",
+    "@ai-sdk/vue": "^3.0.77",
+    "@iconify-json/lucide": "^1.2.89",
+    "@iconify-json/simple-icons": "^1.2.70",
+    "@internationalized/date": "^3.11.0",
+    "@nuxt/content": "^3.11.2",
     "@nuxt/ui": "workspace:*",
     "@tiptap/extension-emoji": "^3.19.0",
     "@tiptap/extension-text-align": "^3.19.0",
-    "ai": "^6.0.68",
+    "ai": "^6.0.77",
     "nuxt": "^4.3.0",
     "tailwindcss": "^4.1.18",
     "zod": "^4.3.6"

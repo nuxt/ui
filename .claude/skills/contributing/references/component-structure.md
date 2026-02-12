@@ -48,6 +48,7 @@ export interface ComponentNameSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
 
 // 7. Props with withDefaults for runtime defaults
@@ -59,7 +60,10 @@ const slots = defineSlots<ComponentNameSlots>()
 // 8. App config
 const appConfig = useAppConfig() as ComponentName['AppConfig']
 
-// 9. Computed UI - always computed for reactivity
+// 9. Theme-aware ui prop - merges Theme context with component ui prop
+const uiProp = useComponentUI('componentName', props)
+
+// 10. Computed UI - always computed for reactivity
 const ui = computed(() => tv({ 
   extend: tv(theme), 
   ...(appConfig.ui?.componentName || {}) 
@@ -70,8 +74,8 @@ const ui = computed(() => tv({
 </script>
 
 <template>
-  <!-- 10. data-slot on all elements -->
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <!-- 11. data-slot on all elements, use uiProp instead of props.ui -->
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <slot :ui="ui" />
   </Primitive>
 </template>
@@ -110,6 +114,7 @@ import { computed, toRef } from 'vue'
 import { DialogRoot, DialogPortal, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<ModalProps>(), {
@@ -120,6 +125,7 @@ const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()
 
 const appConfig = useAppConfig() as Modal['AppConfig']
+const uiProp = useComponentUI('modal', props)
 
 // Forward only Reka UI props
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)

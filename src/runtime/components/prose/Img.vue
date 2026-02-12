@@ -27,6 +27,7 @@ import { DialogRoot, DialogPortal, DialogTrigger } from 'reka-ui'
 import { AnimatePresence, Motion } from 'motion-v'
 import { useEventListener, createReusableTemplate } from '@vueuse/core'
 import { useRuntimeConfig, useAppConfig } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import ImageComponent from '#build/ui-image-component'
 import { tv } from '../../utils/tv'
 
@@ -37,6 +38,7 @@ const props = withDefaults(defineProps<ProseImgProps>(), {
 })
 
 const appConfig = useAppConfig() as ProseImg['AppConfig']
+const uiProp = useComponentUI('prose.img', props)
 
 const [DefineImageTemplate, ReuseImageTemplate] = createReusableTemplate()
 const [DefineZoomedImageTemplate, ReuseZoomedImageTemplate] = createReusableTemplate()
@@ -76,7 +78,7 @@ if (props.zoom) {
       :width="width"
       :height="height"
       v-bind="$attrs"
-      :class="ui.base({ class: [props.ui?.base, props.class] })"
+      :class="ui.base({ class: [uiProp?.base, props.class] })"
     />
   </DefineImageTemplate>
 
@@ -86,7 +88,7 @@ if (props.zoom) {
       :src="refinedSrc"
       :alt="alt"
       v-bind="$attrs"
-      :class="ui.zoomedImage({ class: [props.ui?.zoomedImage] })"
+      :class="ui.zoomedImage({ class: [uiProp?.zoomedImage] })"
     />
   </DefineZoomedImageTemplate>
 
@@ -99,9 +101,9 @@ if (props.zoom) {
 
     <DialogPortal>
       <AnimatePresence>
-        <Motion v-if="open" :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :exit="{ opacity: 0 }" :class="ui.overlay({ class: [props.ui?.overlay] })" />
+        <Motion v-if="open" :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :exit="{ opacity: 0 }" :class="ui.overlay({ class: [uiProp?.overlay] })" />
 
-        <div v-if="open" :class="ui.content({ class: [props.ui?.content] })" @click="close">
+        <div v-if="open" :class="ui.content({ class: [uiProp?.content] })" @click="close">
           <Motion as-child :layout-id="layoutId" :transition="{ type: 'spring', bounce: 0.15, duration: 0.5, ease: 'easeInOut' }">
             <ReuseZoomedImageTemplate />
           </Motion>

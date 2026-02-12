@@ -97,6 +97,7 @@ import StarterKit from '@tiptap/starter-kit'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
 
@@ -112,6 +113,7 @@ defineSlots<EditorSlots<H>>()
 const attrs = useAttrs()
 
 const appConfig = useAppConfig() as Editor['AppConfig']
+const uiProp = useComponentUI('editor', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editor || {}) })({
   placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined
@@ -125,7 +127,7 @@ const editorProps = computed(() => defu(props.editorProps, {
     autocorrect: 'off',
     autocapitalize: 'off',
     ...attrs,
-    class: ui.value.base({ class: props.ui?.base })
+    class: ui.value.base({ class: uiProp.value?.base })
   }
 } as EditorOptions['editorProps']))
 const contentType = computed(() => props.contentType || (typeof props.modelValue === 'string' ? 'html' : 'json'))
@@ -258,7 +260,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <template v-if="editor">
       <slot :editor="editor" :handlers="handlers" />
 
@@ -266,7 +268,7 @@ defineExpose({
         role="presentation"
         :editor="editor"
         data-slot="content"
-        :class="ui.content({ class: props.ui?.content })"
+        :class="ui.content({ class: uiProp?.content })"
       />
     </template>
   </Primitive>

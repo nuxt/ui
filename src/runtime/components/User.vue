@@ -44,6 +44,7 @@ export interface UserSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
 import UChip from './Chip.vue'
 import UAvatar from './Avatar.vue'
@@ -57,6 +58,7 @@ const props = withDefaults(defineProps<UserProps>(), {
 const slots = defineSlots<UserSlots>()
 
 const appConfig = useAppConfig() as User['AppConfig']
+const uiProp = useComponentUI('user', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) })({
   size: props.size,
@@ -66,10 +68,10 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) 
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="onClick">
+  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })" @click="onClick">
     <slot name="avatar" :ui="ui">
       <UChip v-if="chip && avatar" inset v-bind="typeof chip === 'object' ? chip : {}" :size="size">
-        <UAvatar :alt="name" v-bind="avatar" :size="size" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+        <UAvatar :alt="name" v-bind="avatar" :size="size" data-slot="avatar" :class="ui.avatar({ class: uiProp?.avatar })" />
       </UChip>
       <UAvatar
         v-else-if="avatar"
@@ -77,11 +79,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) 
         v-bind="avatar"
         :size="size"
         data-slot="avatar"
-        :class="ui.avatar({ class: props.ui?.avatar })"
+        :class="ui.avatar({ class: uiProp?.avatar })"
       />
     </slot>
 
-    <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+    <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
       <ULink
         v-if="to"
         :aria-label="name"
@@ -93,12 +95,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) 
       </ULink>
 
       <slot>
-        <p v-if="name || !!slots.name" data-slot="name" :class="ui.name({ class: props.ui?.name })">
+        <p v-if="name || !!slots.name" data-slot="name" :class="ui.name({ class: uiProp?.name })">
           <slot name="name">
             {{ name }}
           </slot>
         </p>
-        <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+        <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
           <slot name="description">
             {{ description }}
           </slot>

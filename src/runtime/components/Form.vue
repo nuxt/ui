@@ -60,6 +60,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
    */
   loadingAuto?: boolean
   class?: any
+  ui?: { base?: any }
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>)
 } & /** @vue-ignore */ Omit<FormHTMLAttributes, 'name'>
 
@@ -79,6 +80,7 @@ import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
+import { useComponentUI } from '../composables/useComponentUI'
 import { validateSchema, getAtPath, setAtPath } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
@@ -98,7 +100,9 @@ const emits = defineEmits<FormEmits<S, T>>()
 defineSlots<FormSlots>()
 
 const appConfig = useAppConfig() as FormConfig['AppConfig']
+const uiProp = useComponentUI('form', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) }))
 
 const formId = props.id ?? useId() as string
@@ -448,7 +452,7 @@ defineExpose(api)
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
-    :class="ui({ class: props.class })"
+    :class="ui({ class: [uiProp?.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot :errors="errors" :loading="loading" />

@@ -234,6 +234,7 @@ import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, ge
 import { useVirtualizer } from '@tanstack/vue-virtual'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
@@ -249,6 +250,7 @@ const slots = defineSlots<TableSlots<T>>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Table['AppConfig']
+const uiProp = useComponentUI('table', props)
 
 const data = ref(props.data ?? []) as Ref<T[]>
 const meta = computed(() => props.meta ?? {})
@@ -532,7 +534,7 @@ defineExpose({
       data-slot="tr"
       :class="ui.tr({
         class: [
-          props.ui?.tr,
+          uiProp?.tr,
           resolveValue(tableApi.options.meta?.class?.tr, row)
         ]
       })"
@@ -551,7 +553,7 @@ defineExpose({
         data-slot="td"
         :class="ui.td({
           class: [
-            props.ui?.td,
+            uiProp?.td,
             resolveValue(cell.column.columnDef.meta?.class?.td, cell)
           ],
           pinned: !!cell.column.getIsPinned()
@@ -567,23 +569,23 @@ defineExpose({
       </td>
     </tr>
 
-    <tr v-if="row.getIsExpanded()" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
-      <td :colspan="row.getAllCells().length" data-slot="td" :class="ui.td({ class: [props.ui?.td] })">
+    <tr v-if="row.getIsExpanded()" data-slot="tr" :class="ui.tr({ class: [uiProp?.tr] })">
+      <td :colspan="row.getAllCells().length" data-slot="td" :class="ui.td({ class: [uiProp?.td] })">
         <slot name="expanded" :row="row" />
       </td>
     </tr>
   </DefineRowTemplate>
 
   <DefineTableTemplate>
-    <table ref="tableRef" data-slot="base" :class="ui.base({ class: [props.ui?.base] })">
-      <caption v-if="caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [props.ui?.caption] })">
+    <table ref="tableRef" data-slot="base" :class="ui.base({ class: [uiProp?.base] })">
+      <caption v-if="caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [uiProp?.caption] })">
         <slot name="caption">
           {{ caption }}
         </slot>
       </caption>
 
-      <thead data-slot="thead" :class="ui.thead({ class: [props.ui?.thead] })">
-        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
+      <thead data-slot="thead" :class="ui.thead({ class: [uiProp?.thead] })">
+        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" data-slot="tr" :class="ui.tr({ class: [uiProp?.tr] })">
           <th
             v-for="header in headerGroup.headers"
             :key="header.id"
@@ -594,7 +596,7 @@ defineExpose({
             data-slot="th"
             :class="ui.th({
               class: [
-                props.ui?.th,
+                uiProp?.th,
                 resolveValue(header.column.columnDef.meta?.class?.th, header)
               ],
               pinned: !!header.column.getIsPinned()
@@ -610,10 +612,10 @@ defineExpose({
           </th>
         </tr>
 
-        <tr data-slot="separator" :class="ui.separator({ class: [props.ui?.separator] })" />
+        <tr data-slot="separator" :class="ui.separator({ class: [uiProp?.separator] })" />
       </thead>
 
-      <tbody data-slot="tbody" :class="ui.tbody({ class: [props.ui?.tbody] })">
+      <tbody data-slot="tbody" :class="ui.tbody({ class: [uiProp?.tbody] })">
         <slot name="body-top" />
 
         <template v-if="rows.length">
@@ -635,13 +637,13 @@ defineExpose({
         </template>
 
         <tr v-else-if="loading && !!slots['loading']">
-          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
+          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="loading" :class="ui.loading({ class: uiProp?.loading })">
             <slot name="loading" />
           </td>
         </tr>
 
         <tr v-else>
-          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
+          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="empty" :class="ui.empty({ class: uiProp?.empty })">
             <slot name="empty">
               {{ empty || t('table.noData') }}
             </slot>
@@ -654,14 +656,14 @@ defineExpose({
       <tfoot
         v-if="hasFooter"
         data-slot="tfoot"
-        :class="ui.tfoot({ class: [props.ui?.tfoot] })"
+        :class="ui.tfoot({ class: [uiProp?.tfoot] })"
         :style="virtualizer ? {
           transform: `translateY(${virtualizer.getTotalSize() - renderedSize}px)`
         } : undefined"
       >
-        <tr data-slot="separator" :class="ui.separator({ class: [props.ui?.separator] })" />
+        <tr data-slot="separator" :class="ui.separator({ class: [uiProp?.separator] })" />
 
-        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
+        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" data-slot="tr" :class="ui.tr({ class: [uiProp?.tr] })">
           <th
             v-for="header in footerGroup.headers"
             :key="header.id"
@@ -671,7 +673,7 @@ defineExpose({
             data-slot="th"
             :class="ui.th({
               class: [
-                props.ui?.th,
+                uiProp?.th,
                 resolveValue(header.column.columnDef.meta?.class?.th, header)
               ],
               pinned: !!header.column.getIsPinned()
@@ -690,7 +692,7 @@ defineExpose({
     </table>
   </DefineTableTemplate>
 
-  <Primitive ref="rootRef" :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive ref="rootRef" :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <div
       v-if="virtualizer"
       :style="{
