@@ -48,6 +48,7 @@ import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentVariant } from '../composables/useComponentVariant'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
@@ -64,6 +65,8 @@ const slots = defineSlots<ButtonSlots>()
 
 const appConfig = useAppConfig() as Button['AppConfig']
 const uiProp = useComponentUI('button', props)
+const variantProp = useComponentVariant('button', props)
+
 const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(props)
 
 const linkProps = useForwardProps(pickLinkProps(props))
@@ -104,12 +107,12 @@ const ui = computed(() => tv({
     }
   }, appConfig.ui?.button || {})
 })({
-  color: props.color,
-  variant: props.variant,
+  color: variantProp.value.color,
+  variant: variantProp.value.variant,
   size: buttonSize.value,
   loading: isLoading.value,
-  block: props.block,
-  square: props.square || (!slots.default && !props.label),
+  block: variantProp.value.block,
+  square: variantProp.value.square || (!slots.default && !props.label),
   leading: isLeading.value,
   trailing: isTrailing.value,
   fieldGroup: orientation.value

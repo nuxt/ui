@@ -2,9 +2,11 @@
 import { computed } from 'vue'
 import { provideThemeContext } from '../composables/useComponentUI'
 import type { ThemeUI } from '../composables/useComponentUI'
+import { provideVariantContext, type VariantUI } from '../composables/useComponentVariant'
 
 export interface ThemeProps {
-  ui: ThemeUI
+  ui?: ThemeUI
+  variants?: VariantUI
 }
 
 export interface ThemeSlots {
@@ -16,7 +18,11 @@ export interface ThemeSlots {
 const props = defineProps<ThemeProps>()
 
 provideThemeContext({
-  ui: computed(() => props.ui)
+  ui: computed(() => props.ui ?? {}),
+})
+
+provideVariantContext({
+  variant: computed(() => props.variants ?? {})
 })
 </script>
 

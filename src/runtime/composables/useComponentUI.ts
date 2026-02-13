@@ -22,11 +22,11 @@ export type ThemeUI = {
   [K in keyof typeof ui]?: ThemeSlotOverrides<(typeof ui)[K]>
 }
 
-export type ThemeRootContext = {
+export type ThemeUIContext = {
   ui: ComputedRef<ThemeUI>
 }
 
-const [injectThemeContext, provideThemeContext] = createContext<ThemeRootContext>('UTheme', 'RootContext')
+const [injectThemeContext, provideThemeContext] = createContext<ThemeUIContext>('UThemeUI', 'RootContext')
 
 export { provideThemeContext }
 
