@@ -43,6 +43,16 @@ export interface InputRatingProps {
    */
   disabled?: boolean
   /**
+   * Allow clearing the rating by clicking on the current value.
+   * @defaultValue false
+   */
+  clearable?: boolean
+  /**
+   * Show hover preview.
+   * @defaultValue true
+   */
+  hoverable?: boolean
+  /**
    * The icon to use for stars.
    * @defaultValue appConfig.ui.icons.star
    * @IconifyIcon
@@ -88,8 +98,8 @@ export interface InputRatingSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, useId } from 'vue'
-import { RadioGroupRoot, RadioGroupItem, useForwardProps } from 'reka-ui'
+import { computed, useId } from 'vue'
+import { RatingRoot, RatingItem, RatingItemIndicator, useForwardProps } from 'reka-ui'
 import { reactivePick, useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
@@ -103,7 +113,9 @@ const props = withDefaults(defineProps<InputRatingProps>(), {
   allowHalf: false,
   readonly: false,
   defaultValue: 0,
-  orientation: 'horizontal'
+  orientation: 'horizontal',
+  hoverable: true,
+  clearable: false
 })
 
 const emits = defineEmits<InputRatingEmits>()
@@ -113,8 +125,6 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   defaultValue: props.defaultValue,
   passive: false
 })
-
-const hoveredValue = ref(0)
 
 const appConfig = useAppConfig() as InputRating['AppConfig']
 
@@ -136,49 +146,17 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputRating 
   disabled: isVisuallyDisabled.value // Only apply disabled styles when explicitly disabled
 }))
 
-const currentValue = computed(() => {
-  const value = modelValue.value ?? 0
-  return Math.max(0, Math.min(value, props.max))
-})
-
 const starIcon = computed(() => props.icon || (appConfig.ui.icons as any).star || 'i-lucide-star')
 const emptyStarIcon = computed(() => {
   if (props.emptyIcon) return props.emptyIcon
   return starIcon.value
 })
 
-const starsWithState = computed(() => {
-  // Don't show hover effect when disabled
-  const value = (disabled.value ? 0 : hoveredValue.value) || currentValue.value
-
-  return Array.from({ length: props.max }, (_, i) => {
-    const starValue = i + 1
-    let filled = false
-    let half = false
-
-    if (value >= starValue) {
-      filled = true
-    } else if (props.allowHalf && value >= starValue - 0.5) {
-      half = true
-    }
-
-    const steps = props.allowHalf ? [starValue - 0.5, starValue] : [starValue]
-
-    return {
-      index: starValue,
-      filled,
-      half,
-      steps
-    }
-  })
-})
-
-function onUpdate(value: string) {
-  const newValue = Number(value)
-  modelValue.value = newValue
+function onUpdate(value: number) {
+  modelValue.value = value
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
-  const changeEvent = new Event('change', { target: { value: newValue } })
+  const changeEvent = new Event('change', { target: { value } })
   emits('change', changeEvent)
   emitFormChange()
   emitFormInput()
@@ -186,80 +164,59 @@ function onUpdate(value: string) {
 </script>
 
 <template>
-  <RadioGroupRoot
+  <RatingRoot
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="fieldId"
-    :model-value="(modelValue ?? 0).toString()"
-    :name="name"
+    v-model="modelValue"
+    :length="props.max"
+    :step="props.allowHalf ? 0.5 : 1"
     :disabled="disabled"
+    :hoverable="props.hoverable && !disabled"
+    :clearable="props.clearable"
     :orientation="orientation"
+    :name="name"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
-    @mouseleave="hoveredValue = 0"
   >
-    <div
-      v-for="star in starsWithState"
-      :key="star.index"
-      :data-slot="`star-${star.index}`"
-      :class="ui.star({ class: props.ui?.star })"
-    >
-      <slot
-        name="star"
-        :index="star.index"
-        :value="currentValue"
-        :filled="star.filled"
-        :half="star.half"
+    <template #default="{ items }">
+      <RatingItem
+        v-for="item in items"
+        :key="item"
+        :item="item"
+        data-slot="star"
+        :class="ui.star({ class: props.ui?.star })"
       >
-        <!-- Empty star (background) - only show when not completely filled -->
-        <UIcon
-          v-if="!star.filled"
-          :name="emptyStarIcon"
-          :class="[ui.icon({ class: props.ui?.icon }), 'text-muted']"
-        />
+        <template #default="{ steps }">
+          <slot
+            name="star"
+            :index="item"
+            :value="modelValue ?? 0"
+            :filled="(modelValue ?? 0) >= item"
+            :half="!!props.allowHalf && (modelValue ?? 0) >= item - 0.5 && (modelValue ?? 0) < item"
+          >
+            <!-- Empty icon as background -->
+            <UIcon
+              :name="emptyStarIcon"
+              :class="ui.emptyIcon({ class: props.ui?.emptyIcon })"
+            />
 
-        <!-- Filled star (overlay) -->
-        <div
-          v-if="star.filled"
-          data-slot="starFilled"
-          :class="ui.starFilled({ class: props.ui?.starFilled })"
-        >
-          <UIcon
-            :name="starIcon"
-            :class="ui.icon({ class: props.ui?.icon })"
-          />
-        </div>
-
-        <!-- Half star (overlay with clip) -->
-        <div
-          v-else-if="star.half"
-          data-slot="starHalf"
-          :class="ui.starHalf({ class: props.ui?.starHalf })"
-        >
-          <UIcon
-            :name="starIcon"
-            :class="[ui.icon({ class: props.ui?.icon }), ui.starHalf({ class: props.ui?.starHalf })]"
-          />
-        </div>
-
-        <RadioGroupItem
-          v-for="step in star.steps"
-          :key="step"
-          :value="step.toString()"
-          :aria-label="`Rate ${step} ${step === 1 ? 'star' : 'stars'} out of ${props.max}`"
-          class="absolute inset-0 focus:outline-none"
-          :class="[
-            allowHalf && step % 1 !== 0
-              ? 'w-1/2 left-0'
-              : allowHalf
-                ? 'w-1/2 left-1/2'
-                : 'w-full'
-          ]"
-          @mouseenter="!disabled && (hoveredValue = step)"
-          @focus="!disabled && (hoveredValue = step)"
-          @blur="hoveredValue = 0"
-        />
-      </slot>
-    </div>
-  </RadioGroupRoot>
+            <!-- Indicators overlaid for each step -->
+            <RatingItemIndicator
+              v-for="step in steps"
+              :key="step"
+              :step="step"
+              :aria-label="`Rate ${step} ${step === 1 ? 'star' : 'stars'} out of ${props.max}`"
+              :class="ui.indicator({ class: props.ui?.indicator })"
+            >
+              <UIcon
+                :name="starIcon"
+                :class="ui.icon({ class: props.ui?.icon })"
+              />
+            </RatingItemIndicator>
+          </slot>
+        </template>
+      </RatingItem>
+    </template>
+  </RatingRoot>
 </template>

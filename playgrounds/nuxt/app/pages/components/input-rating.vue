@@ -18,6 +18,7 @@ const rating5 = ref(2.5)
 const readonlyRating = ref(4.5)
 const formRating = ref(0)
 const ratingNoRing = ref(0)
+const ratingClearable = ref(3)
 
 const formSchema = z.object({
   rating: z.number().min(1, 'Please select a rating')
@@ -90,6 +91,22 @@ watch(formRating, (value) => {
             Rating: {{ rating5 }} (with half stars)
           </p>
           <UInputRating v-model="rating5" allow-half :color="color" :size="size" />
+        </div>
+      </div>
+    </div>
+
+    <USeparator />
+
+    <div class="flex flex-col gap-4">
+      <h2 class="font-semibold text-highlighted">
+        Clearable
+      </h2>
+      <div class="flex flex-col gap-4">
+        <div>
+          <p class="text-sm text-muted mb-2">
+            Rating: {{ ratingClearable }} (click same star to clear)
+          </p>
+          <UInputRating v-model="ratingClearable" clearable :color="color" :size="size" />
         </div>
       </div>
     </div>

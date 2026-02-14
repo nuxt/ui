@@ -146,6 +146,20 @@ props:
 ---
 ::
 
+### Clearable
+
+Use the `clearable` prop to allow users to clear the rating by clicking on the currently selected value. Defaults to `false`.
+
+::component-code
+---
+external:
+  - modelValue
+props:
+  clearable: true
+  modelValue: 3
+---
+::
+
 ### Disabled
 
 Use the `disabled` prop to disable the InputRating component. When disabled, the component has reduced opacity (75%) and shows a `not-allowed` cursor to indicate it's not interactive.

@@ -21,6 +21,8 @@ describe('InputRating', () => {
     ['with allowHalf', { props: { allowHalf: true, modelValue: 3.5 } }],
     ['with readonly', { props: { readonly: true, modelValue: 4 } }],
     ['with disabled', { props: { disabled: true, modelValue: 3 } }],
+    ['with clearable', { props: { clearable: true, modelValue: 3 } }],
+    ['with hoverable false', { props: { hoverable: false, modelValue: 3 } }],
     ['with icon', { props: { icon: 'i-lucide-heart', modelValue: 4 } }],
     ['with emptyIcon', { props: { emptyIcon: 'i-lucide-star-off', modelValue: 3 } }],
     ['with id', { props: { id: 'rating-id', modelValue: 3 } }],

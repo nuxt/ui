@@ -4,9 +4,9 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: '',
     star: 'relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm',
-    starFilled: 'absolute inset-0 pointer-events-none',
-    starHalf: 'absolute inset-0 pointer-events-none overflow-hidden [clip-path:polygon(0_0,50%_0,50%_100%,0_100%)] [-webkit-clip-path:polygon(0_0,50%_0,50%_100%,0_100%)]',
-    icon: 'w-full h-full'
+    indicator: 'absolute inset-0 overflow-hidden w-[var(--reka-rating-item-step-width)] opacity-[var(--reka-rating-item-step-opacity)] z-[var(--reka-rating-item-step-z-index)]',
+    icon: 'block',
+    emptyIcon: 'w-full h-full text-muted pointer-events-none'
   },
   variants: {
     orientation: {
@@ -19,30 +19,33 @@ export default (options: Required<ModuleOptions>) => ({
     },
     size: {
       xs: {
-        star: 'size-3'
+        star: 'size-3',
+        icon: 'size-3'
       },
       sm: {
-        star: 'size-4'
+        star: 'size-4',
+        icon: 'size-4'
       },
       md: {
-        star: 'size-5'
+        star: 'size-5',
+        icon: 'size-5'
       },
       lg: {
-        star: 'size-6'
+        star: 'size-6',
+        icon: 'size-6'
       },
       xl: {
-        star: 'size-7'
+        star: 'size-7',
+        icon: 'size-7'
       }
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        starFilled: `text-${color}-500 dark:text-${color}-400`,
-        starHalf: `text-${color}-500 dark:text-${color}-400`,
+        indicator: `data-[state=active]:text-${color}-500 dark:data-[state=active]:text-${color}-400`,
         star: `focus-within:ring-${color}-500 dark:focus-within:ring-${color}-400`
       }])),
       neutral: {
-        starFilled: 'text-gray-500 dark:text-gray-400',
-        starHalf: 'text-gray-500 dark:text-gray-400',
+        indicator: 'data-[state=active]:text-gray-500 dark:data-[state=active]:text-gray-400',
         star: 'focus-within:ring-gray-500 dark:focus-within:ring-gray-400'
       }
     },

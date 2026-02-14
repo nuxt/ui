@@ -5,6 +5,8 @@ packages:
   - playgrounds/nuxt
   - playgrounds/vue
 
+ignoreWorkspaceRootCheck: true
+
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - '@tailwindcss/oxide'
@@ -18,4 +20,5 @@ onlyBuiltDependencies:
   - puppeteer
   - sharp
 
-ignoreWorkspaceRootCheck: true
+patchedDependencies:
+  reka-ui: patches/reka-ui.patch
