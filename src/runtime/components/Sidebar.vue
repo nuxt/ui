@@ -116,6 +116,9 @@ const isMobile = useMediaQuery('(max-width: 1023px)')
 const modelOpen = defineModel<boolean>('open', { default: true })
 const openMobile = ref(false)
 
+// Saved desktop state so viewport transitions don't lose it
+const desktopOpen = ref(modelOpen.value)
+
 const open = computed({
   get: () => isMobile.value ? openMobile.value : modelOpen.value,
   set: (value: boolean) => {
@@ -127,24 +130,29 @@ const open = computed({
   }
 })
 
-// Sync model changes into internal state
+// Handle viewport transitions and initial mobile state
+watch(isMobile, (mobile) => {
+  if (mobile) {
+    // Save desktop state and align model to mobile (closed)
+    desktopOpen.value = modelOpen.value
+    modelOpen.value = false
+  } else {
+    // Restore desktop state
+    modelOpen.value = desktopOpen.value
+  }
+}, { immediate: true })
+
+// Sync model changes into mobile state
 watch(modelOpen, (value) => {
   if (isMobile.value) {
     openMobile.value = value
   }
 })
 
-// Sync mobile state back to model so parent toggle stays in sync
+// Sync mobile dismissal (overlay click, swipe) back to model so toggle stays in sync
 watch(openMobile, (value) => {
   if (isMobile.value) {
     modelOpen.value = value
-  }
-})
-
-// When transitioning to mobile, align model with mobile state (closed)
-watch(isMobile, (mobile) => {
-  if (mobile) {
-    modelOpen.value = openMobile.value
   }
 })
 
