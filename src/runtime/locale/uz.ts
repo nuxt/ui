@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Yopish'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Keyingi',
+      previous: 'Oldingi',
+      finish: 'Tugatish',
+      close: 'O\'tkazib yuborish'
     }
   }
 })

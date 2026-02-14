@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Закрити'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Далі',
+      previous: 'Назад',
+      finish: 'Завершити',
+      close: 'Пропустити'
     }
   }
 })

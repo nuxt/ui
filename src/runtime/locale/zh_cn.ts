@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: '关闭'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: '下一步',
+      previous: '上一步',
+      finish: '完成',
+      close: '跳过'
     }
   }
 })

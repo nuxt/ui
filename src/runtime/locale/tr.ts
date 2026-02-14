@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Kapat'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Sonraki',
+      previous: 'Önceki',
+      finish: 'Bitir',
+      close: 'Atla'
     }
   }
 })

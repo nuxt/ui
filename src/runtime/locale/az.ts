@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Bağla'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Növbəti',
+      previous: 'Əvvəlki',
+      finish: 'Bitir',
+      close: 'Keç'
     }
   }
 })

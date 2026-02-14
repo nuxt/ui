@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'বন্ধ করুন'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'পরবর্তী',
+      previous: 'পূর্ববর্তী',
+      finish: 'সমাপ্ত',
+      close: 'এড়িয়ে যান'
     }
   }
 })

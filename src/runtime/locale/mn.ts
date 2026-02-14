@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Хаах'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Дараах',
+      previous: 'Өмнөх',
+      finish: 'Дуусгах',
+      close: 'Алгасах'
     }
   }
 })

@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Пӯшидан'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Баъдӣ',
+      previous: 'Қаблӣ',
+      finish: 'Анҷом',
+      close: 'Гузаштан'
     }
   }
 })

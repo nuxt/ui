@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: '閉じる'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: '次へ',
+      previous: '前へ',
+      finish: '完了',
+      close: 'スキップ'
     }
   }
 })

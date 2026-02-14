@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'ປິດ'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'ຕໍ່ໄປ',
+      previous: 'ກ່ອນໜ້າ',
+      finish: 'ສຳເລັດ',
+      close: 'ຂ້າມ'
     }
   }
 })

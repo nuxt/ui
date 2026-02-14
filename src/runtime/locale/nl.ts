@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Sluiten'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Volgende',
+      previous: 'Vorige',
+      finish: 'Voltooien',
+      close: 'Overslaan'
     }
   }
 })

@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Sulje'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Seuraava',
+      previous: 'Edellinen',
+      finish: 'Valmis',
+      close: 'Ohita'
     }
   }
 })

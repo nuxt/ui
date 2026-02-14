@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Жабу'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Келесі',
+      previous: 'Алдыңғы',
+      finish: 'Аяқтау',
+      close: 'Өткізіп жіберу'
     }
   }
 })

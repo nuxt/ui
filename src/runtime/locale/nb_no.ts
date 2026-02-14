@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Lukk'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Neste',
+      previous: 'Forrige',
+      finish: 'Fullfør',
+      close: 'Hopp over'
     }
   }
 })

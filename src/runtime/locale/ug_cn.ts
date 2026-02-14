@@ -133,10 +133,10 @@ export default defineLocale<Messages>({
       close: 'تاقاش'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'كېيىنكى',
+      previous: 'ئالدىنقى',
+      finish: 'تامام',
+      close: 'ئاتلاش'
     }
   }
 })

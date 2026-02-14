@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Κλείσιμο'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Επόμενο',
+      previous: 'Προηγούμενο',
+      finish: 'Ολοκλήρωση',
+      close: 'Παράλειψη'
     }
   }
 })

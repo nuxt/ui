@@ -134,10 +134,10 @@ export default defineLocale<Messages>({
       close: 'დახურვა'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'შემდეგი',
+      previous: 'წინა',
+      finish: 'დასრულება',
+      close: 'გამოტოვება'
     }
   }
 })

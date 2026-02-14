@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Itxi'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Hurrengoa',
+      previous: 'Aurrekoa',
+      finish: 'Amaitu',
+      close: 'Saltatu'
     }
   }
 })

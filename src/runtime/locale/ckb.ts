@@ -133,10 +133,10 @@ export default defineLocale<Messages>({
       close: 'داخستن'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'دواتر',
+      previous: 'پێشتر',
+      finish: 'تەواوکردن',
+      close: 'تێپەڕین'
     }
   }
 })

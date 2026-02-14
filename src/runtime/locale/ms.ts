@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Tutup'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Seterusnya',
+      previous: 'Sebelum',
+      finish: 'Selesai',
+      close: 'Langkau'
     }
   }
 })

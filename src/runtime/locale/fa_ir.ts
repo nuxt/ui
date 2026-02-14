@@ -133,10 +133,10 @@ export default defineLocale<Messages>({
       close: 'بستن'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'بعدی',
+      previous: 'قبلی',
+      finish: 'پایان',
+      close: 'رد شدن'
     }
   }
 })

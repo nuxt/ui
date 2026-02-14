@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Mbyll'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Tjetri',
+      previous: 'Para',
+      finish: 'Përfundo',
+      close: 'Kalo'
     }
   }
 })

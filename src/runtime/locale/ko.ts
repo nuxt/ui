@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: '닫기'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: '다음',
+      previous: '이전',
+      finish: '완료',
+      close: '건너뛰기'
     }
   }
 })

@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Zoumaachen'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Weider',
+      previous: 'Zréck',
+      finish: 'Fäerdeg',
+      close: 'Iwwersprangen'
     }
   }
 })

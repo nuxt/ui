@@ -133,10 +133,10 @@ export default defineLocale<Messages>({
       close: 'סגור'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'הבא',
+      previous: 'הקודם',
+      finish: 'סיום',
+      close: 'דלג'
     }
   }
 })

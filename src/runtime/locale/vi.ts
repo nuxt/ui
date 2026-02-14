@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Đóng'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Tiếp theo',
+      previous: 'Quay lại',
+      finish: 'Hoàn thành',
+      close: 'Bỏ qua'
     }
   }
 })

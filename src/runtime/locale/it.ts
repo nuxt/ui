@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Chiudi'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Successivo',
+      previous: 'Precedente',
+      finish: 'Fine',
+      close: 'Salta'
     }
   }
 })

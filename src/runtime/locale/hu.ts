@@ -132,10 +132,10 @@ export default defineLocale<Messages>({
       close: 'Bezárás'
     },
     tour: {
-      next: 'Next',
-      previous: 'Previous',
-      finish: 'Finish',
-      close: 'Skip'
+      next: 'Következő',
+      previous: 'Előző',
+      finish: 'Befejezés',
+      close: 'Kihagyás'
     }
   }
 })
