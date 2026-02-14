@@ -116,6 +116,9 @@ export type Messages = {
       copy: string
     }
   }
+  sidebar: {
+    close: string
+  }
   selectMenu: {
     create: string
     noData: string

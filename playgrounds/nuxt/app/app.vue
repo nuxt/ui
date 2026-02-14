@@ -51,7 +51,9 @@ provide('components', components)
         </template>
       </UDashboardSidebar>
 
+      <NuxtPage v-if="route.path.startsWith('/components/sidebar')" />
       <UDashboardPanel
+        v-else
         :ui="{
           body: [
             'justify-center items-center',

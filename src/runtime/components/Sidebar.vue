@@ -1,0 +1,281 @@
+<script lang="ts">
+import type { AppConfig } from '@nuxt/schema'
+import theme from '#build/ui/sidebar'
+import type { ButtonProps, DrawerProps, IconProps, ModalProps, SlideoverProps, LinkPropsKeys } from '../types'
+import type { ComponentConfig } from '../types/tv'
+
+type Sidebar = ComponentConfig<typeof theme, AppConfig, 'sidebar'>
+
+type SidebarMode = 'modal' | 'slideover' | 'drawer'
+type SidebarMenu<T> = T extends 'modal' ? ModalProps : T extends 'slideover' ? SlideoverProps : T extends 'drawer' ? DrawerProps : never
+
+export interface SidebarProps<T extends SidebarMode = SidebarMode> {
+  /**
+   * The visual variant of the sidebar.
+   * @defaultValue 'sidebar'
+   */
+  variant?: Sidebar['variants']['variant']
+  /**
+   * The collapse behavior of the sidebar.
+   * - `offcanvas`: The sidebar slides out of view completely.
+   * - `icon`: The sidebar shrinks to icon-only width.
+   * - `none`: The sidebar is not collapsible.
+   * @defaultValue 'none'
+   */
+  collapsible?: Sidebar['variants']['collapsible']
+  /**
+   * The side to render the sidebar on.
+   * @defaultValue 'left'
+   */
+  side?: 'left' | 'right'
+  /**
+   * The title displayed in the sidebar header.
+   */
+  title?: string
+  /**
+   * The description displayed in the sidebar header.
+   */
+  description?: string
+  /**
+   * Display a close button to collapse the sidebar.
+   * Only renders when `collapsible` is not `none`.
+   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * @defaultValue false
+   */
+  close?: boolean | Omit<ButtonProps, LinkPropsKeys>
+  /**
+   * The icon displayed in the close button.
+   * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
+   */
+  closeIcon?: IconProps['name']
+  /**
+   * The mode of the sidebar menu on mobile.
+   * @defaultValue 'slideover'
+   */
+  mode?: T
+  /**
+   * The props for the sidebar menu component on mobile.
+   */
+  menu?: SidebarMenu<T>
+  /**
+   * The width of the sidebar.
+   * @defaultValue '16rem'
+   */
+  width?: string
+  /**
+   * The width of the sidebar when collapsed to icon mode.
+   * @defaultValue '3rem'
+   */
+  iconWidth?: string
+  class?: any
+  ui?: Sidebar['slots']
+}
+
+export interface SidebarSlots {
+  header(props: { state: 'expanded' | 'collapsed', open: boolean, close: () => void }): any
+  title(props?: {}): any
+  description(props?: {}): any
+  close(props: { ui: Sidebar['ui'] }): any
+  body(props: { state: 'expanded' | 'collapsed', open: boolean, close: () => void }): any
+  default(props: { state: 'expanded' | 'collapsed', open: boolean, close: () => void }): any
+  footer(props: { state: 'expanded' | 'collapsed', open: boolean, close: () => void }): any
+  content(props: { close: () => void }): any
+}
+</script>
+
+<script setup lang="ts" generic="T extends SidebarMode">
+import { computed, ref, toRef, watch } from 'vue'
+import { defu } from 'defu'
+import { useMediaQuery } from '@vueuse/core'
+import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
+import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
+import UButton from './Button.vue'
+import USlideover from './Slideover.vue'
+import UModal from './Modal.vue'
+import UDrawer from './Drawer.vue'
+
+defineOptions({ inheritAttrs: false })
+
+const props = withDefaults(defineProps<SidebarProps<T>>(), {
+  variant: 'sidebar',
+  collapsible: 'none',
+  side: 'left',
+  close: false,
+  mode: 'slideover' as never,
+  width: '16rem',
+  iconWidth: '3rem'
+})
+const slots = defineSlots<SidebarSlots>()
+
+const isMobile = useMediaQuery('(max-width: 1023px)')
+
+// Viewport-aware open model: on desktop controls expanded/collapsed, on mobile controls the sheet
+const modelOpen = defineModel<boolean>('open', { default: true })
+const openMobile = ref(false)
+
+const open = computed({
+  get: () => isMobile.value ? openMobile.value : modelOpen.value,
+  set: (value: boolean) => {
+    if (isMobile.value) {
+      openMobile.value = value
+    } else {
+      modelOpen.value = value
+    }
+  }
+})
+
+// Sync model changes into internal state
+watch(modelOpen, (value) => {
+  if (isMobile.value) {
+    openMobile.value = value
+  }
+})
+
+// Sync mobile state back to model so parent toggle stays in sync
+watch(openMobile, (value) => {
+  if (isMobile.value) {
+    modelOpen.value = value
+  }
+})
+
+// When transitioning to mobile, align model with mobile state (closed)
+watch(isMobile, (mobile) => {
+  if (mobile) {
+    modelOpen.value = openMobile.value
+  }
+})
+
+const { t } = useLocale()
+const appConfig = useAppConfig() as Sidebar['AppConfig']
+const uiProp = useComponentUI('sidebar', props)
+
+const state = computed<'expanded' | 'collapsed'>(() => modelOpen.value ? 'expanded' : 'collapsed')
+
+// Close button only works when collapsible is not 'none'
+const canClose = computed(() => props.close && props.collapsible !== 'none')
+
+function closeSidebar() {
+  open.value = false
+}
+
+const hasHeader = computed(() => !!slots.header || props.title || !!slots.title || props.description || !!slots.description || canClose.value || !!slots.close)
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.sidebar || {}) })({
+  side: props.side,
+  variant: props.variant,
+  collapsible: props.collapsible
+}))
+
+const Menu = computed(() => ({
+  slideover: USlideover,
+  modal: UModal,
+  drawer: UDrawer
+})[props.mode as SidebarMode])
+
+const menuProps = toRef(() => defu(props.menu, {
+  title: props.title,
+  description: props.description,
+  close: props.close,
+  closeIcon: props.closeIcon,
+  content: {
+    onOpenAutoFocus: (e: Event) => e.preventDefault()
+  }
+}, props.mode === 'modal' ? { fullscreen: true, transition: false } : props.mode === 'slideover' ? { side: props.side } : {}) as SidebarMenu<T>)
+</script>
+
+<template>
+  <div
+    v-bind="$attrs"
+    data-slot="root"
+    :data-state="state"
+    :data-collapsible="state === 'collapsed' && collapsible !== 'none' ? collapsible : undefined"
+    :data-variant="variant"
+    :data-side="side"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :style="{ '--sidebar-width': width, '--sidebar-width-icon': iconWidth }"
+  >
+    <!-- Gap spacer: reserves layout space for the fixed sidebar -->
+    <div
+      data-slot="gap"
+      :data-state="state"
+      :class="ui.gap({ class: uiProp?.gap })"
+    />
+
+    <!-- Fixed container: the actual visible sidebar -->
+    <div
+      data-slot="container"
+      :data-state="state"
+      :class="ui.container({ class: uiProp?.container })"
+    >
+      <div data-slot="inner" :class="ui.inner({ class: uiProp?.inner })">
+        <div v-if="hasHeader" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+          <slot name="header" :state="state" :open="open" :close="closeSidebar">
+            <div v-if="title || !!slots.title || description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+              <p v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
+                <slot name="title">
+                  {{ title }}
+                </slot>
+              </p>
+
+              <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+                <slot name="description">
+                  {{ description }}
+                </slot>
+              </p>
+            </div>
+
+            <slot name="close" :ui="ui">
+              <UButton
+                v-if="canClose"
+                :icon="closeIcon || appConfig.ui.icons.close"
+                color="neutral"
+                variant="ghost"
+                :aria-label="t('sidebar.close')"
+                v-bind="(typeof props.close === 'object' ? props.close : {})"
+                data-slot="close"
+                :class="ui.close({ class: uiProp?.close })"
+                @click="closeSidebar"
+              />
+            </slot>
+          </slot>
+        </div>
+
+        <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
+          <slot name="body" :state="state" :open="open" :close="closeSidebar">
+            <slot :state="state" :open="open" :close="closeSidebar" />
+          </slot>
+        </div>
+
+        <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
+          <slot name="footer" :state="state" :open="open" :close="closeSidebar" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <Menu
+    v-model:open="openMobile"
+    v-bind="menuProps"
+    :ui="{
+      overlay: ui.overlay({ class: uiProp?.overlay })
+    }"
+  >
+    <template v-if="!!slots.content" #content="contentData">
+      <slot name="content" v-bind="contentData" />
+    </template>
+
+    <template #body>
+      <slot name="body" :state="'expanded'" :open="true" :close="closeSidebar">
+        <slot :state="'expanded'" :open="true" :close="closeSidebar" />
+      </slot>
+    </template>
+
+    <template v-if="!!slots.footer" #footer>
+      <slot name="footer" :state="'expanded'" :open="true" :close="closeSidebar" />
+    </template>
+  </Menu>
+</template>
