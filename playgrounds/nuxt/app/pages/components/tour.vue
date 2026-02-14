@@ -2,6 +2,7 @@
 const open = ref(true)
 const step = ref(0)
 const loop = ref(false)
+const overlay = ref(false)
 
 const profileCard = ref<HTMLElement>()
 const shortcuts = ref<HTMLElement>()
@@ -43,6 +44,10 @@ const steps = computed(() => [
     <div class="flex items-center gap-2 text-sm text-muted">
       Loop
       <USwitch v-model="loop" size="sm" />
+    </div>
+    <div class="flex items-center gap-2 text-sm text-muted">
+      Overlay
+      <USwitch v-model="overlay" size="sm" />
     </div>
   </Navbar>
 
@@ -136,5 +141,12 @@ const steps = computed(() => [
     </div>
   </div>
 
-  <UTour v-model:open="open" v-model:step="step" :steps="steps" :loop="loop" class="max-w-sm" />
+  <UTour
+    v-model:open="open"
+    v-model:step="step"
+    :steps="steps"
+    :loop="loop"
+    :overlay="overlay"
+    class="max-w-sm"
+  />
 </template>

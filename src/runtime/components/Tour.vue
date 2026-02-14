@@ -25,6 +25,11 @@ export interface TourStep {
    */
   arrow?: boolean | Omit<PopoverArrowProps, 'as' | 'asChild'>
   /**
+   * When `true`, darkens the rest of the page to create a spotlight effect on the target element.
+   * @defaultValue inherit from Tour props
+   */
+  overlay?: boolean
+  /**
    * When `false`, the tour step will not close when clicking outside or pressing escape.
    * @defaultValue inherit from Tour props
    */
@@ -60,6 +65,11 @@ export interface TourProps extends Pick<PopoverRootProps, 'open' | 'defaultOpen'
    * @defaultValue true
    */
   portal?: boolean | string | HTMLElement
+  /**
+   * When `true`, darkens the rest of the page to create a spotlight effect on the target element.
+   * @defaultValue false
+   */
+  overlay?: boolean
   /**
    * When `false`, the tour will not close when clicking outside or pressing escape.
    * @defaultValue true
@@ -125,6 +135,7 @@ import UButton from './Button.vue'
 const props = withDefaults(defineProps<TourProps>(), {
   initialStep: 0,
   loop: false,
+  overlay: false,
   portal: true,
   dismissible: true,
   arrow: true,
@@ -201,6 +212,8 @@ const contentEvents = computed(() => {
 
   return {}
 })
+
+const showOverlay = computed(() => currentStep.value?.overlay ?? props.overlay)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tour || {}) })({}))
@@ -334,6 +347,12 @@ defineExpose({
 
     <Teleport :to="portalProps.to || 'body'" :disabled="portalProps.disabled">
       <div
+        v-if="showOverlay && open && !highlightRect"
+        data-slot="overlay"
+        :style="{ zIndex: 2147483645 }"
+        :class="ui.overlay({ class: (currentStep?.ui)?.overlay })"
+      />
+      <div
         v-if="highlightRect && open"
         :style="{
           position: 'fixed',
@@ -342,7 +361,8 @@ defineExpose({
           width: `${highlightRect.width}px`,
           height: `${highlightRect.height}px`,
           pointerEvents: 'none',
-          zIndex: 2147483646
+          zIndex: 2147483646,
+          ...(showOverlay ? { boxShadow: '0 0 0 9999px rgba(0, 0, 0, 0.5)' } : {})
         }"
         :class="ui.highlight({ class: (currentStep?.ui)?.highlight })"
       />
@@ -352,6 +372,7 @@ defineExpose({
       <Popover.Content
         data-slot="content"
         v-bind="contentProps"
+        :style="showOverlay ? { zIndex: 2147483647 } : undefined"
         :class="ui.content({ class: [props.class, currentStep?.class, currentStep?.ui?.content] })"
         v-on="contentEvents"
       >

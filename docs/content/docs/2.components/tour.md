@@ -31,6 +31,7 @@ Each step can also include:
 - `content` - Popover positioning options
 - `dismissible` - Whether the step can be dismissed
 - `arrow` - Whether to show an arrow
+- `overlay` - Whether to show a spotlight overlay
 
 ### Loop
 
@@ -39,6 +40,10 @@ Use the `loop` prop to automatically restart the tour when reaching the last ste
 ### Custom Labels
 
 You can customize button labels for each step using `nextLabel`, `prevLabel`, and `finishLabel` properties on individual steps.
+
+### Overlay
+
+Use the `overlay` prop to darken the rest of the page and create a spotlight effect on the highlighted element. When a step has no target, a fullscreen overlay is displayed instead. You can also override `overlay` on individual steps.
 
 ### Modal
 
@@ -61,6 +66,12 @@ name: 'tour-loop-example'
 ::component-example
 ---
 name: 'tour-custom-labels-example'
+---
+::
+
+::component-example
+---
+name: 'tour-overlay-example'
 ---
 ::
 

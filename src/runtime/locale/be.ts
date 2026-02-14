@@ -130,6 +130,12 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Закрыць'
+    },
+    tour: {
+      next: 'Далей',
+      previous: 'Назад',
+      finish: 'Завяршыць',
+      close: 'Прапусціць'
     }
   }
 })

@@ -32,11 +32,13 @@ describe('Tour', () => {
     ['without dismissible', { props: { ...props, dismissible: false } }],
     ['with class', { props: { ...props, class: 'shadow-xl' } }],
     ['with ui', { props: { ...props, ui: { content: 'shadow-xl' } } }],
+    ['with overlay', { props: { ...props, overlay: true } }],
     // Steps with custom props
     ['with step arrow', { props: { ...props, steps: [{ target: '#test-target', title: 'Step', arrow: false }] } }],
     ['with step nextLabel', { props: { ...props, steps: [{ target: '#test-target', title: 'Step', nextLabel: 'Continue' }] } }],
     ['with step prevLabel', { props: { ...props, steps: [{ target: '#test-target', title: 'Step', prevLabel: 'Back' }] } }],
     ['with step finishLabel', { props: { ...props, steps: [{ target: '#test-target', title: 'Step', finishLabel: 'Done' }] } }],
+    ['with step overlay', { props: { ...props, steps: [{ target: '#test-target', title: 'Step', overlay: true }] } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
