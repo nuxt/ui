@@ -20,7 +20,7 @@ describe('Tour', () => {
     }
   ]
 
-  const props = { open: true, portal: false, steps }
+  const props = { open: true, portal: false, modal: false, steps }
 
   it.each([
     // Props
@@ -56,6 +56,7 @@ describe('Tour', () => {
       props: {
         open: true,
         portal: false,
+        modal: false,
         steps: [
           {
             target: '#test-target',
