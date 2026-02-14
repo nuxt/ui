@@ -127,7 +127,7 @@
     "@iconify/vue": "^5.0.0",
     "@internationalized/date": "^3.11.0",
     "@internationalized/number": "^3.6.5",
-    "@nuxt/fonts": "^0.13.0",
+    "@nuxt/fonts": "https://pkg.pr.new/@nuxt/fonts@fce0318",
     "@nuxt/icon": "^2.2.1",
     "@nuxt/kit": "^4.3.0",
     "@nuxt/schema": "^4.3.0",
