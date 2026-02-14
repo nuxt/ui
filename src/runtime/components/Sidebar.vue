@@ -27,7 +27,7 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
    * The side to render the sidebar on.
    * @defaultValue 'left'
    */
-  side?: 'left' | 'right'
+  side?: Sidebar['variants']['side']
   /**
    * The title displayed in the sidebar header.
    */

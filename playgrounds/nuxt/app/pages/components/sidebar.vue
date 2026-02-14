@@ -57,7 +57,7 @@ function onSubmit() {
         <UChatMessages
           :messages="chat.messages"
           :status="chat.status"
-          :user="{ avatar: { src: 'https://github.com/benjamincanac.png' } }"
+          compact
         />
       </template>
 
