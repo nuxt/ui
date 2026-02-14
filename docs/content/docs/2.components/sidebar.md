@@ -10,9 +10,13 @@ links:
 
 ## Usage
 
-The Sidebar component provides a fixed sidebar with a gap-based layout pattern. It uses CSS variables for width control and data attributes for styling.
+The Sidebar component is a standalone, fixed sidebar that pushes the page content. On desktop, it renders inline and can be collapsed; on mobile, it opens as a sheet (Modal, Slideover or Drawer).
 
-Use the `title`, `description` and `close` props to customize the sidebar header just like the [Modal](/docs/components/modal), [Slideover](/docs/components/slideover) and [Drawer](/docs/components/drawer) components. On desktop it renders inline, on mobile it renders inside the sheet menu.
+::tip{to="/docs/components/dashboard-sidebar"}
+If you're building a dashboard layout with drag-to-resize, state persistence and integration with `DashboardGroup`, `DashboardPanel` and `DashboardNavbar`, use the [DashboardSidebar](/docs/components/dashboard-sidebar) instead. The **Sidebar** component is designed for standalone use cases like a chat panel or a settings panel on any page.
+::
+
+Use the `title`, `description` and `close` props to customize the sidebar header just like the [Modal](/docs/components/modal), [Slideover](/docs/components/slideover) and [Drawer](/docs/components/drawer) components.
 
 Use the `body`, `default` and `footer` slots to customize the sidebar content. The `v-model:open` directive is viewport-aware: on desktop it controls the expanded/collapsed state, on mobile it controls the sheet menu.
 
