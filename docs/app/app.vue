@@ -58,24 +58,28 @@ provide('navigation', rootNavigation)
     <Analytics />
     <SpeedInsights />
 
-    <div :class="[route.path.startsWith('/docs/') && 'root']">
-      <template v-if="!route.path.startsWith('/examples')">
-        <!-- <Banner /> -->
+    <div class="flex">
+      <div :class="[route.path.startsWith('/docs/') && 'root']">
+        <template v-if="!route.path.startsWith('/examples')">
+          <!-- <Banner /> -->
 
-        <Header />
-      </template>
+          <Header />
+        </template>
 
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
+        <NuxtLayout>
+          <NuxtPage />
+        </NuxtLayout>
 
-      <template v-if="!route.path.startsWith('/examples')">
-        <Footer />
+        <template v-if="!route.path.startsWith('/examples')">
+          <Footer />
 
-        <ClientOnly>
-          <Search :files="files" :navigation="navigationByFramework" />
-        </ClientOnly>
-      </template>
+          <ClientOnly>
+            <Search :files="files" :navigation="navigationByFramework" />
+          </ClientOnly>
+        </template>
+      </div>
+
+      <USidebar side="right" />
     </div>
   </UApp>
 </template>
