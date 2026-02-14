@@ -30,6 +30,11 @@ items:
         to: https://editor-template.nuxt.dev
         target: _blank
         icon: i-lucide-link
+    open_links:
+      - label: v0
+        to: https://v0.dev/chat/api/open?url=https://github.com/nuxt-ui-templates/editor
+        target: _blank
+        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/editor
         target: _blank
@@ -59,6 +64,11 @@ items:
         to: https://changelog-template.nuxt.dev
         target: _blank
         icon: i-lucide-link
+    open_links:
+      - label: v0
+        to: https://v0.dev/chat/api/open?url=https://github.com/nuxt-ui-templates/changelog
+        target: _blank
+        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/changelog
         target: _blank
@@ -88,6 +98,11 @@ items:
         to: https://portfolio-template.nuxt.dev
         target: _blank
         icon: i-lucide-link
+    open_links:
+      - label: v0
+        to: https://v0.dev/chat/api/open?url=https://github.com/nuxt-ui-templates/portfolio
+        target: _blank
+        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/portfolio
         target: _blank
@@ -117,6 +132,11 @@ items:
         to: https://chat-template.nuxt.dev
         target: _blank
         icon: i-lucide-link
+    open_links:
+      - label: v0
+        to: https://v0.dev/chat/api/open?url=https://github.com/nuxt-ui-templates/chat
+        target: _blank
+        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/chat
         target: _blank
@@ -146,6 +166,11 @@ items:
         to: https://dashboard-template.nuxt.dev
         target: _blank
         icon: i-lucide-link
+    open_links:
+      - label: v0
+        to: https://v0.dev/chat/api/open?url=https://github.com/nuxt-ui-templates/dashboard
+        target: _blank
+        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/dashboard
         target: _blank
@@ -173,6 +198,11 @@ items:
         to: https://dashboard-vue-template.nuxt.dev
         target: _blank
         icon: i-lucide-link
+    open_links:
+      - label: v0
+        to: https://v0.dev/chat/api/open?url=https://github.com/nuxt-ui-templates/dashboard-vue
+        target: _blank
+        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/dashboard-vue
         target: _blank
@@ -202,6 +232,11 @@ items:
         to: https://saas-template.nuxt.dev
         target: _blank
         icon: i-lucide-link
+    open_links:
+      - label: v0
+        to: https://v0.dev/chat/api/open?url=https://github.com/nuxt-ui-templates/saas
+        target: _blank
+        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/saas
         target: _blank
@@ -231,6 +266,11 @@ items:
         to: https://landing-template.nuxt.dev
         target: _blank
         icon: i-lucide-link
+    open_links:
+      - label: v0
+        to: https://v0.dev/chat/api/open?url=https://github.com/nuxt-ui-templates/landing
+        target: _blank
+        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/landing
         target: _blank
@@ -260,6 +300,11 @@ items:
         to: https://docs-template.nuxt.dev
         target: _blank
         icon: i-lucide-link
+    open_links:
+      - label: v0
+        to: https://v0.dev/chat/api/open?url=https://github.com/nuxt-ui-templates/docs
+        target: _blank
+        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/docs
         target: _blank
@@ -287,6 +332,11 @@ items:
         to: https://starter-template.nuxt.dev
         target: _blank
         icon: i-lucide-link
+    open_links:
+      - label: v0
+        to: https://v0.dev/chat/api/open?url=https://github.com/nuxt-ui-templates/starter
+        target: _blank
+        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/starter
         target: _blank
@@ -314,6 +364,11 @@ items:
         to: https://starter-vue-template.nuxt.dev
         target: _blank
         icon: i-lucide-link
+    open_links:
+      - label: v0
+        to: https://v0.dev/chat/api/open?url=https://github.com/nuxt-ui-templates/starter-vue
+        target: _blank
+        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/starter-vue
         target: _blank

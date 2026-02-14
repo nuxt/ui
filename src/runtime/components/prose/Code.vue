@@ -12,6 +12,7 @@ export interface ProseCodeProps {
    */
   color?: ProseCode['variants']['color']
   class?: any
+  ui?: { base?: any }
 }
 
 export interface ProseCodeSlots {
@@ -22,18 +23,21 @@ export interface ProseCodeSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { tv } from '../../utils/tv'
 
 const props = defineProps<ProseCodeProps>()
 defineSlots<ProseCodeSlots>()
 
 const appConfig = useAppConfig() as ProseCode['AppConfig']
+const uiProp = useComponentUI('prose.code', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.code || {}) }))
 </script>
 
 <template>
-  <code :class="ui({ class: (props.class || '').split(',').join(' '), color: props.color })">
+  <code :class="ui({ class: [uiProp?.base, (props.class || '').split(',').join(' ')], color: props.color })">
     <slot />
   </code>
 </template>

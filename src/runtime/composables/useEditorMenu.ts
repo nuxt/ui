@@ -97,7 +97,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   let scrollHandler: (() => void) | null = null
   let stopItemsWatch: (() => void) | null = null
 
-  const { contains } = useFilter({ sensitivity: 'base' })
+  const { contains, startsWith } = useFilter({ sensitivity: 'base' })
 
   // Helper function to cleanup menu immediately (no animation)
   const cleanupMenu = () => {
@@ -136,18 +136,51 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
   const filterFields = options.filterFields ?? ['label']
 
+  // matchType: 0 = exact, 1 = startsWith, 2 = contains (lower = better)
   const defaultFilter = (items: T[], query: string) => {
     if (!query) return items
 
-    return items.filter((item: any) => {
-      return filterFields.some((field) => {
-        const value = get(item, field)
-        if (value === undefined || value === null) return false
+    const matched: { item: T, fieldIndex: number, matchType: number }[] = []
 
-        const stringValue = Array.isArray(value) ? value.join(' ') : String(value)
-        return contains(stringValue, query) || contains(stringValue.replace(/[\s_-]/g, ''), query)
-      })
+    for (const item of items) {
+      let bestMatchType = 3
+      let bestFieldIndex = filterFields.length
+
+      for (let i = 0; i < filterFields.length; i++) {
+        const value = get(item as any, filterFields[i]!)
+        if (value === undefined || value === null) continue
+
+        const values = Array.isArray(value) ? value.map(String) : [String(value)]
+
+        for (const v of values) {
+          const normalized = v.replace(/[\s_-]/g, '')
+
+          let matchType = 3
+          if (startsWith(v, query) || startsWith(normalized, query)) {
+            matchType = (v.length === query.length || normalized.length === query.length) ? 0 : 1
+          } else if (contains(v, query) || contains(normalized, query)) {
+            matchType = 2
+          }
+
+          if (matchType < bestMatchType || (matchType === bestMatchType && i < bestFieldIndex)) {
+            bestMatchType = matchType
+            bestFieldIndex = i
+          }
+        }
+      }
+
+      if (bestMatchType < 3) {
+        matched.push({ item, fieldIndex: bestFieldIndex, matchType: bestMatchType })
+      }
+    }
+
+    // Sort: by match specificity first (exact > startsWith > contains), then by field index
+    matched.sort((a, b) => {
+      if (a.matchType !== b.matchType) return a.matchType - b.matchType
+      return a.fieldIndex - b.fieldIndex
     })
+
+    return matched.map(({ item }) => item)
   }
 
   const filter = options.filter || defaultFilter
@@ -182,9 +215,13 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     }
 
     // Map each group and filter its items to only include those in filteredItems
-    // This respects the limit since filteredItems is already sliced
+    // Sort within each group to respect the filter's ranking order
     return groups.value
-      .map(group => group.filter(item => filteredItems.value.includes(item)))
+      .map((group) => {
+        const filtered = group.filter(item => filteredItems.value.includes(item))
+        filtered.sort((a, b) => filteredItems.value.indexOf(a) - filteredItems.value.indexOf(b))
+        return filtered
+      })
       .filter(group => group.length > 0)
   })
 
