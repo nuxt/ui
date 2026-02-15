@@ -7,7 +7,7 @@ exports[`PricingPlans > renders with as correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -29,7 +29,7 @@ exports[`PricingPlans > renders with as correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -51,7 +51,7 @@ exports[`PricingPlans > renders with as correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -78,7 +78,7 @@ exports[`PricingPlans > renders with class correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -100,7 +100,7 @@ exports[`PricingPlans > renders with class correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -122,7 +122,7 @@ exports[`PricingPlans > renders with class correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -149,7 +149,7 @@ exports[`PricingPlans > renders with compact and scale correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -171,7 +171,7 @@ exports[`PricingPlans > renders with compact and scale correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -193,7 +193,7 @@ exports[`PricingPlans > renders with compact and scale correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -220,7 +220,7 @@ exports[`PricingPlans > renders with compact correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -242,7 +242,7 @@ exports[`PricingPlans > renders with compact correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -264,7 +264,7 @@ exports[`PricingPlans > renders with compact correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -293,7 +293,7 @@ exports[`PricingPlans > renders with one plan correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -320,7 +320,7 @@ exports[`PricingPlans > renders with orientation vertical correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -347,7 +347,7 @@ exports[`PricingPlans > renders with orientation vertical correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -374,7 +374,7 @@ exports[`PricingPlans > renders with orientation vertical correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -406,7 +406,7 @@ exports[`PricingPlans > renders with scale correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -428,7 +428,7 @@ exports[`PricingPlans > renders with scale correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -450,7 +450,7 @@ exports[`PricingPlans > renders with scale correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -477,7 +477,7 @@ exports[`PricingPlans > renders with three plans correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -499,7 +499,7 @@ exports[`PricingPlans > renders with three plans correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -521,7 +521,7 @@ exports[`PricingPlans > renders with three plans correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Enterprise</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -548,7 +548,7 @@ exports[`PricingPlans > renders with two plans correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Basic</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -570,7 +570,7 @@ exports[`PricingPlans > renders with two plans correctly 1`] = `
     <!--v-if-->
     <div data-slot="body" class="flex flex-col min-w-0">
       <div data-slot="titleWrapper" class="flex items-center gap-3">
-        <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
+        <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Pro</div>
         <!--v-if-->
       </div>
       <!--v-if-->
