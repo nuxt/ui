@@ -122,11 +122,11 @@ function updateInput(value: string | null | undefined) {
   }
 
   if (props.modelModifiers?.nullable) {
-    value ||= null
+    value ??= null
   }
 
   if (props.modelModifiers?.optional) {
-    value ||= undefined
+    value ??= undefined
   }
 
   modelValue.value = value as T
