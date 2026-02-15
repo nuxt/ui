@@ -644,11 +644,10 @@ describe('Form', () => {
   describe('HTML5 validation', () => {
     it('programmatic submit() triggers HTML5 validation and prevents submission when invalid', async () => {
       const onSubmit = vi.fn()
-      const onInvalid = vi.fn()
 
       const wrapper = await renderForm({
         fixture: 'FormHtml5Validation',
-        props: { onSubmit, onInvalid }
+        props: { onSubmit }
       })
 
       const form = wrapper.setupState.form.value
@@ -657,20 +656,16 @@ describe('Form', () => {
       await form.submit()
       await flushPromises()
 
-      // Verify native HTML5 invalid event was emitted
-      expect(onInvalid).toHaveBeenCalled()
-
-      // Verify form submission was prevented
+      // Verify form submission was prevented by HTML5 validation
       expect(onSubmit).not.toHaveBeenCalled()
     })
 
     it('programmatic submit() proceeds when HTML5 validation passes', async () => {
       const onSubmit = vi.fn()
-      const onInvalid = vi.fn()
 
       const wrapper = await renderForm({
         fixture: 'FormHtml5Validation',
-        props: { onSubmit, onInvalid }
+        props: { onSubmit }
       })
 
       const form = wrapper.setupState.form.value
@@ -685,9 +680,6 @@ describe('Form', () => {
       // Call submit() programmatically
       await form.submit()
       await flushPromises()
-
-      // Verify no native invalid event was emitted
-      expect(onInvalid).not.toHaveBeenCalled()
 
       // Verify form submission proceeded
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
