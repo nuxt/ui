@@ -50,6 +50,7 @@ import { ref, computed, toRef, provide } from 'vue'
 import { ToastProvider, ToastViewport, ToastPortal, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useToast, toastMaxInjectionKey } from '../composables/useToast'
 import { usePortal } from '../composables/usePortal'
 import { omit } from '../utils'
@@ -67,6 +68,7 @@ defineSlots<ToasterSlots>()
 
 const { toasts, remove } = useToast()
 const appConfig = useAppConfig() as Toaster['AppConfig']
+const uiProp = useComponentUI('toaster', props)
 
 provide(toastMaxInjectionKey, toRef(() => props.max))
 
@@ -124,10 +126,11 @@ function getOffset(index: number) {
       :key="toast.id"
       ref="refs"
       :progress="progress"
-      v-bind="omit(toast, ['id', 'close'])"
+      v-bind="omit(toast, ['id', 'close', '_duplicate'])"
       :close="(toast.close as boolean)"
       :data-expanded="expanded"
       :data-front="!expanded && index === toasts.length - 1"
+      :data-pulsing="toast._duplicate ? (toast._duplicate % 2 === 0 ? 'even' : 'odd') : undefined"
       :style="{
         '--index': (index - toasts.length) + toasts.length,
         '--before': toasts.length - 1 - index,
@@ -137,7 +140,7 @@ function getOffset(index: number) {
         '--transform': 'translateY(var(--translate)) scale(var(--scale))'
       }"
       data-slot="base"
-      :class="ui.base({ class: [props.ui?.base, toast.onClick ? 'cursor-pointer' : undefined] })"
+      :class="ui.base({ class: [uiProp?.base, toast.onClick ? 'cursor-pointer' : undefined] })"
       @update:open="onUpdateOpen($event, toast.id)"
       @click="toast.onClick && toast.onClick(toast)"
     />
@@ -146,7 +149,7 @@ function getOffset(index: number) {
       <ToastViewport
         :data-expanded="expanded"
         data-slot="viewport"
-        :class="ui.viewport({ class: [props.ui?.viewport, props.class] })"
+        :class="ui.viewport({ class: [uiProp?.viewport, props.class] })"
         :style="{
           '--scale-factor': '0.05',
           '--translate-factor': position?.startsWith('top') ? '1px' : '-1px',

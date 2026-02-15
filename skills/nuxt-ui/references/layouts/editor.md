@@ -70,7 +70,7 @@ const content = ref({
 ## Key components
 
 - `UEditor` — Rich text editor (`v-model` accepts JSON, HTML, or markdown via `content-type` prop)
-- `UEditorToolbar` — Toolbar with `mode`: `'fixed'` (default), `'bubble'` (on selection), `'floating'` (on empty lines)
+- `UEditorToolbar` — Toolbar with `layout`: `'fixed'` (default), `'bubble'` (on selection), `'floating'` (on empty lines)
 - `UEditorDragHandle` — Block drag-and-drop handle
 - `UEditorSuggestionMenu` — Slash command menu
 - `UEditorMentionMenu` — @ mention menu
@@ -86,12 +86,12 @@ const content = ref({
 
 <!-- Bubble (appears on text selection) -->
 <UEditor v-model="content">
-  <UEditorToolbar mode="bubble" />
+  <UEditorToolbar layout="bubble" />
 </UEditor>
 
 <!-- Floating (appears on empty lines) -->
 <UEditor v-model="content">
-  <UEditorToolbar mode="floating" />
+  <UEditorToolbar layout="floating" />
 </UEditor>
 ```
 

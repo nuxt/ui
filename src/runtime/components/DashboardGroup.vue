@@ -13,6 +13,7 @@ export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' |
    */
   as?: any
   class?: any
+  ui?: { base?: any }
 }
 
 export interface DashboardGroupSlots {
@@ -26,6 +27,7 @@ import { Primitive } from 'reka-ui'
 import { useNuxtApp, useAppConfig } from '#imports'
 import { provideDashboardContext } from '../utils/dashboard'
 import { tv } from '../utils/tv'
+import { useComponentUI } from '../composables/useComponentUI'
 
 const props = withDefaults(defineProps<DashboardGroupProps>(), {
   storage: 'cookie',
@@ -37,7 +39,9 @@ defineSlots<DashboardGroupSlots>()
 
 const nuxtApp = useNuxtApp()
 const appConfig = useAppConfig() as DashboardGroup['AppConfig']
+const uiProp = useComponentUI('dashboardGroup', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardGroup || {}) }))
 
 const sidebarOpen = ref(false)
@@ -63,7 +67,7 @@ provideDashboardContext({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: props.class })">
+  <Primitive :as="as" :class="ui({ class: [uiProp?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

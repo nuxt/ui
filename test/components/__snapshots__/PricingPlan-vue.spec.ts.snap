@@ -5,7 +5,7 @@ exports[`PricingPlan > renders with as correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -36,7 +36,7 @@ exports[`PricingPlan > renders with badge correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <!--v-if-->
@@ -52,7 +52,7 @@ exports[`PricingPlan > renders with badge object correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <!--v-if-->
@@ -68,7 +68,7 @@ exports[`PricingPlan > renders with badge slot correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div>Badge slot
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div>Badge slot
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
     <div data-slot="priceWrapper" class="flex items-center gap-1 mt-6">
@@ -140,7 +140,7 @@ exports[`PricingPlan > renders with billing slot correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -209,7 +209,7 @@ exports[`PricingPlan > renders with button slot correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -236,7 +236,7 @@ exports[`PricingPlan > renders with class correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -283,7 +283,7 @@ exports[`PricingPlan > renders with description slot correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description slot</div>
@@ -334,7 +334,7 @@ exports[`PricingPlan > renders with discount slot correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -405,7 +405,7 @@ exports[`PricingPlan > renders with features slot correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -432,7 +432,7 @@ exports[`PricingPlan > renders with footer slot correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -456,7 +456,7 @@ exports[`PricingPlan > renders with header slot correctly 1`] = `
   <div data-slot="header" class="">Header slot</div>
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -487,7 +487,7 @@ exports[`PricingPlan > renders with highlight correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -518,7 +518,7 @@ exports[`PricingPlan > renders with orientation horizontal correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -549,7 +549,7 @@ exports[`PricingPlan > renders with orientation vertical correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -600,7 +600,7 @@ exports[`PricingPlan > renders with price slot correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -631,7 +631,7 @@ exports[`PricingPlan > renders with scale correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -683,7 +683,7 @@ exports[`PricingPlan > renders with tagline slot correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -735,7 +735,7 @@ exports[`PricingPlan > renders with terms slot correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -766,7 +766,7 @@ exports[`PricingPlan > renders with title correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -782,7 +782,7 @@ exports[`PricingPlan > renders with title slot correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title slot</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title slot</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -813,7 +813,7 @@ exports[`PricingPlan > renders with ui correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -844,7 +844,7 @@ exports[`PricingPlan > renders with variant outline correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -875,7 +875,7 @@ exports[`PricingPlan > renders with variant soft correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>
@@ -906,7 +906,7 @@ exports[`PricingPlan > renders with variant solid correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-2xl sm:text-3xl text-pretty font-semibold text-inverted">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="truncate text-2xl sm:text-3xl text-pretty font-semibold text-inverted">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-base text-pretty mt-2 text-dimmed">Description</div>
@@ -937,7 +937,7 @@ exports[`PricingPlan > renders with variant subtle correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
-      <div data-slot="title" class="text-highlighted text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
+      <div data-slot="title" class="text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold">Title</div><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span>
     </div>
     <div data-slot="description" class="text-muted text-base text-pretty mt-2">Description</div>

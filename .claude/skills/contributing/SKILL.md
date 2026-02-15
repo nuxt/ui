@@ -103,6 +103,7 @@ PR Review:
 | Props defaults | Use `withDefaults()` for runtime, JSDoc `@defaultValue` for docs |
 | Template slots | Add `data-slot="name"` attributes on all elements |
 | Computed ui | Always use `computed(() => tv(...))` for reactive theming |
+| Theme support | Use `useComponentUI(name, props)` to merge Theme context with component `ui` prop |
 | Semantic colors | Use `text-default`, `bg-elevated`, etc. - never Tailwind palette |
 | Reka UI props | Use `reactivePick` + `useForwardPropsEmits` to forward props |
 | Form components | Use `useFormField` and `useFieldGroup` composables |

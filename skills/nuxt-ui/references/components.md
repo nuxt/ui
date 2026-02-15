@@ -34,7 +34,7 @@ Essential UI building blocks.
 | `USeparator` | `label`, `icon`, `orientation`, `type` |
 | `USkeleton` | `class` — loading placeholder |
 | `UProgress` | `value`, `max`, `color`, `size` |
-| `UCalendar` | `v-model`, `mode` (single/multiple/range) |
+| `UCalendar` | `v-model`, `range` (boolean), `multiple` (boolean) |
 | `UCollapsible` | `v-model:open` — animated expand/collapse |
 | `UFieldGroup` | Groups form inputs horizontally/vertically |
 
@@ -46,12 +46,12 @@ Comprehensive form components for user input.
 |---|---|
 | `UInput` | `v-model`, `type`, `placeholder`, `icon`, `loading` |
 | `UTextarea` | `v-model`, `rows`, `autoresize`, `maxrows` |
-| `USelect` | `v-model`, `items`, `placeholder` |
-| `USelectMenu` | `v-model`, `items`, `searchable`, `multiple` |
-| `UInputMenu` | `v-model`, `items`, `searchable` — autocomplete |
+| `USelect` | `v-model`, `items` (flat `T[]` or grouped `T[][]`), `placeholder` |
+| `USelectMenu` | `v-model`, `items` (flat `T[]` or grouped `T[][]`), `searchable`, `multiple` |
+| `UInputMenu` | `v-model`, `items` (flat `T[]` or grouped `T[][]`), `searchable` — autocomplete |
 | `UInputNumber` | `v-model`, `min`, `max`, `step` |
-| `UInputDate` | `v-model`, `mode` (single/range), `locale` |
-| `UInputTime` | `v-model`, `hour-cycle` (12/24), `step`, `granularity` |
+| `UInputDate` | `v-model`, `range` (boolean for range selection), `locale` |
+| `UInputTime` | `v-model`, `hour-cycle` (12/24), `granularity` |
 | `UInputTags` | `v-model`, `max`, `placeholder` |
 | `UPinInput` | `v-model`, `length`, `type`, `mask` |
 | `UCheckbox` | `v-model`, `label`, `description` |
@@ -59,7 +59,7 @@ Comprehensive form components for user input.
 | `URadioGroup` | `v-model`, `items`, `orientation` |
 | `USwitch` | `v-model`, `label`, `on-icon`, `off-icon` |
 | `USlider` | `v-model`, `min`, `max`, `step` |
-| `UColorPicker` | `v-model`, `format`, `swatches` |
+| `UColorPicker` | `v-model`, `format` (hex/rgb/hsl/cmyk/lab), `size` |
 | `UFileUpload` | `v-model`, `accept`, `multiple`, `variant` (area/button) |
 | `UForm` | `schema`, `state`, `@submit` — validation wrapper |
 | `UFormField` | `name`, `label`, `description`, `hint`, `required` |
@@ -143,7 +143,7 @@ Components for displaying and organizing data.
 | `UTree` | `items` — hierarchical tree |
 | `UUser` | `name`, `description`, `avatar` — user display |
 | `UEmpty` | `icon`, `title`, `description` — empty state |
-| `UMarquee` | `duration`, `reverse` — infinite scroll |
+| `UMarquee` | `repeat`, `reverse`, `orientation`, `pauseOnHover` — infinite scroll |
 | `UScrollArea` | Custom scrollbar wrapper |
 
 ## Navigation
@@ -152,13 +152,13 @@ Components for user navigation and wayfinding.
 
 | Component | Key props |
 |---|---|
-| `UNavigationMenu` | `items`, `orientation` (horizontal/vertical) |
+| `UNavigationMenu` | `items` (flat `T[]` or grouped `T[][]`), `orientation` (horizontal/vertical) |
 | `UBreadcrumb` | `items` |
 | `UTabs` | `items`, `orientation`, `variant` |
 | `UStepper` | `items`, `orientation`, `color` |
 | `UPagination` | `v-model`, `total`, `items-per-page` |
 | `ULink` | `to`, `active`, `inactive` — styled NuxtLink |
-| `UCommandPalette` | `v-model:open`, `groups`, `placeholder` |
+| `UCommandPalette` | `v-model:open`, `groups` (`{ id, label, items }[]`), `placeholder` |
 
 ## Overlay
 
@@ -169,10 +169,10 @@ Floating UI elements that appear above the main content. **All require `<UApp>` 
 | `UModal` | `v-model:open`, `title`, `description`, `fullscreen`, `scrollable` |
 | `USlideover` | `v-model:open`, `title`, `side` (left/right/top/bottom) |
 | `UDrawer` | `v-model:open`, `title`, `handle` |
-| `UPopover` | `side`, `align`, `arrow`, `delay` |
-| `UTooltip` | `text`, `side`, `delay` |
-| `UDropdownMenu` | `items` (supports nested `children`) |
-| `UContextMenu` | `items` — right-click menu |
+| `UPopover` | `arrow`, `content: { side, align }`, `openDelay`, `closeDelay` |
+| `UTooltip` | `text`, `content: { side }`, `delayDuration` |
+| `UDropdownMenu` | `items` (flat `T[]` or grouped `T[][]` with separators, supports nested `children`) |
+| `UContextMenu` | `items` (flat `T[]` or grouped `T[][]`) — right-click menu |
 | `UToast` | Used via `useToast()` composable |
 
 ### Modal
@@ -207,11 +207,22 @@ Slots: `#content`, `#header`, `#body`, `#footer`
 
 ### DropdownMenu
 
+Items accept a flat array or a nested array (each sub-array is rendered as a group separated by dividers):
+
 ```vue
+<!-- Flat array -->
 <UDropdownMenu :items="[
-  { label: 'Edit', icon: 'i-lucide-pencil', click: () => edit() },
+  { label: 'Edit', icon: 'i-lucide-pencil', onSelect: () => edit() },
   { type: 'separator' },
   { label: 'Delete', icon: 'i-lucide-trash', color: 'error' }
+]">
+  <UButton icon="i-lucide-ellipsis-vertical" variant="ghost" />
+</UDropdownMenu>
+
+<!-- Nested array (groups with automatic separators) -->
+<UDropdownMenu :items="[
+  [{ label: 'Edit', icon: 'i-lucide-pencil' }, { label: 'Duplicate', icon: 'i-lucide-copy' }],
+  [{ label: 'Delete', icon: 'i-lucide-trash', color: 'error' }]
 ]">
   <UButton icon="i-lucide-ellipsis-vertical" variant="ghost" />
 </UDropdownMenu>
@@ -227,8 +238,8 @@ toast.add({
   description: 'Changes saved',
   color: 'success',
   icon: 'i-lucide-check-circle',
-  timeout: 5000,
-  actions: [{ label: 'Undo', click: () => undo() }]
+  duration: 5000,
+  actions: [{ label: 'Undo', onClick: () => undo() }]
 })
 ```
 
@@ -237,17 +248,21 @@ toast.add({
 ```ts
 const overlay = useOverlay()
 
-const modal = overlay.create(ConfirmDialog, {
-  props: { title: 'Delete?', message: 'This cannot be undone.' },
-  events: {
-    confirm: () => modal.close(true),
-    cancel: () => modal.close(false)
-  }
+// create() returns a reusable instance
+const confirmDialog = overlay.create(ConfirmDialog)
+
+// open() returns an object with .result (a Promise)
+const { result } = confirmDialog.open({
+  title: 'Delete?',
+  message: 'This cannot be undone.'
 })
 
-if (await modal.result) {
+if (await result) {
   // User confirmed
 }
+
+// Inside the overlay component, emit close with a value:
+// emit('close', true) or emit('close', false)
 ```
 
 ### CommandPalette
@@ -255,10 +270,10 @@ if (await modal.result) {
 ```vue
 <script setup>
 const groups = [{
-  key: 'actions',
+  id: 'actions',
   label: 'Actions',
   items: [
-    { label: 'New file', icon: 'i-lucide-file-plus', click: () => {} },
+    { label: 'New file', icon: 'i-lucide-file-plus', onSelect: () => {} },
     { label: 'Settings', to: '/settings' }
   ]
 }]
@@ -333,7 +348,7 @@ Rich text editor powered by [TipTap](https://tiptap.dev/).
 | Component | Purpose |
 |---|---|
 | `UEditor` | Editor (`v-model`, `content-type`: json/html/markdown) |
-| `UEditorToolbar` | Toolbar (`mode`: fixed/bubble/floating) |
+| `UEditorToolbar` | Toolbar (`layout`: fixed/bubble/floating) |
 | `UEditorDragHandle` | Block drag-and-drop |
 | `UEditorSuggestionMenu` | Slash command menu |
 | `UEditorMentionMenu` | @ mention menu |

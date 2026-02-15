@@ -79,6 +79,15 @@ export function useRuntimeHook(name: string, fn: (...args: any[]) => void): void
   onScopeDispose(unregister)
 }
 
+export function useRuntimeConfig() {
+  return {
+    app: {
+      baseURL: '/'
+    },
+    public: {}
+  }
+}
+
 export function defineNuxtPlugin(plugin: (nuxtApp: NuxtApp) => void) {
   return {
     install(app) {

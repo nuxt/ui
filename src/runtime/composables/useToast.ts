@@ -9,6 +9,8 @@ export const toastMaxInjectionKey: InjectionKey<Ref<number | undefined>> = Symbo
 export interface Toast extends Omit<ToastProps, 'defaultOpen'>, EmitsToProps<ToastEmits> {
   id: string | number
   onClick?: (toast: Toast) => void
+  /** @internal */
+  _duplicate?: number
 }
 
 export function useToast() {
@@ -44,6 +46,17 @@ export function useToast() {
       open: true,
       ...toast
     } as Toast
+
+    const existingIndex = toasts.value.findIndex((t: Toast) => t.id === body.id)
+    if (existingIndex !== -1) {
+      toasts.value[existingIndex] = {
+        ...toasts.value[existingIndex] as Toast,
+        ...body,
+        _duplicate: ((toasts.value[existingIndex] as Toast)._duplicate || 0) + 1
+      }
+
+      return body
+    }
 
     queue.push(body)
 
