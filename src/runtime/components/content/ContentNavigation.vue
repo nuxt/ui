@@ -225,7 +225,7 @@ const defaultValue = computed(() => {
               :ui="uiProp"
             >
               <template v-for="(_, name) in slots" #[name]="slotData">
-                <slot :name="name" v-bind="{ ...slotData, link: link as T }" />
+                <slot :name="name" v-bind="{ ...slotData, link: slotData.link as T }" />
               </template>
             </UContentNavigation>
           </AccordionContent>
