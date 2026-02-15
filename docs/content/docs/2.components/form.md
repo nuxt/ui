@@ -159,8 +159,16 @@ props:
 
 When calling `form.submit()` programmatically, the Form component automatically triggers native HTML5 validation before submission.
 
-::tip
+::note
 This is particularly useful when the submit button is outside the form element, such as in a modal footer.
+::
+
+::component-example
+---
+name: 'form-example-html5-validation'
+props:
+  class: 'w-60'
+---
 ::
 
 ### Nesting forms
