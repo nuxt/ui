@@ -35,8 +35,11 @@ export type SelectMenuItem = SelectMenuValue | {
 }
 
 type ExcludeItem = { type: 'label' | 'separator' }
+type IsClearUsed<M extends boolean, C extends boolean | object> = M extends false
+  ? (C extends true ? null : C extends object ? null : never)
+  : never
 
-export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -77,7 +80,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * Can be an object to pass additional props to the Button.
    * @defaultValue false
    */
-  clear?: boolean | Partial<Omit<ButtonProps, LinkPropsKeys>>
+  clear?: (C & boolean) | (C & Partial<Omit<ButtonProps, LinkPropsKeys>>)
   /**
    * The icon displayed in the clear button.
    * @defaultValue appConfig.ui.icons.close
@@ -134,9 +137,9 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   descriptionKey?: GetItemKeys<T>
   items?: T
   /** The value of the SelectMenu when initially rendered. Use when you do not need to control the state of the SelectMenu. */
-  defaultValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>
+  defaultValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
   /** The controlled value of the SelectMenu. Can be binded-with with `v-model`. */
-  modelValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>
+  modelValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
   modelModifiers?: Mod
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
@@ -167,7 +170,8 @@ export interface SelectMenuEmits<
   A extends ArrayOrNested<SelectMenuItem>,
   VK extends GetItemKeys<A> | undefined,
   M extends boolean,
-  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+  C extends boolean | object = false
 > extends Pick<ComboboxRootEmits, 'update:open'> {
   'change': [event: Event]
   'blur': [event: FocusEvent]
@@ -177,9 +181,9 @@ export interface SelectMenuEmits<
   /** Event handler when highlighted element changes. */
   'highlight': [payload: {
     ref: HTMLElement
-    value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>
+    value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
   } | undefined]
-  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>]
+  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>]
 }
 
 type SlotProps<T extends SelectMenuItem> = (props: { item: T, index: number, ui: SelectMenu['ui'] }) => any
@@ -189,11 +193,24 @@ export interface SelectMenuSlots<
   VK extends GetItemKeys<A> | undefined = undefined,
   M extends boolean = false,
   Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+  C extends boolean | object = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: SelectMenu['ui'] }): any
-  'default'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: SelectMenu['ui'] }): any
-  'trailing'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: SelectMenu['ui'] }): any
+  'leading'(props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
+    open: boolean
+    ui: SelectMenu['ui']
+  }): any
+  'default'(props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
+    open: boolean
+    ui: SelectMenu['ui']
+  }): any
+  'trailing'(props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
+    open: boolean
+    ui: SelectMenu['ui']
+  }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -206,7 +223,7 @@ export interface SelectMenuSlots<
 }
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
+<script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
 import { useTemplateRef, computed, onMounted, toRef, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
@@ -229,7 +246,7 @@ import UInput from './Input.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<SelectMenuProps<T, VK, M, Mod>>(), {
+const props = withDefaults(defineProps<SelectMenuProps<T, VK, M, Mod, C>>(), {
   portal: true,
   searchInput: true,
   labelKey: 'label',
@@ -240,8 +257,8 @@ const props = withDefaults(defineProps<SelectMenuProps<T, VK, M, Mod>>(), {
   autofocusDelay: 0,
   virtualize: false
 })
-const emits = defineEmits<SelectMenuEmits<T, VK, M, Mod>>()
-const slots = defineSlots<SelectMenuSlots<T, VK, M, Mod>>()
+const emits = defineEmits<SelectMenuEmits<T, VK, M, Mod, C>>()
+const slots = defineSlots<SelectMenuSlots<T, VK, M, Mod, C>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
