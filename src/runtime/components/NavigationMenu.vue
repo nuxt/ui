@@ -135,7 +135,8 @@ export interface NavigationMenuProps<
   orientation?: O
   /**
    * Collapse the navigation menu to only show icons.
-   * Only works when `orientation` is `vertical`.
+   * In `vertical`, all labels and trailing content are hidden.
+   * In `horizontal`, only tooltip-enabled items are collapsed to icon-only.
    * @defaultValue false
    */
   collapsed?: boolean
@@ -259,6 +260,8 @@ const accordionProps = useForwardPropsEmits(reactivePick(props, 'collapsible', '
 const contentProps = toRef(() => props.content)
 const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as TooltipProps)
 const popoverProps = toRef(() => defu(typeof props.popover === 'boolean' ? {} : props.popover, { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }) as PopoverProps)
+const hasHorizontalTooltip = (item: NavigationMenuItem): boolean => !!item.tooltip
+const shouldHideLabel = (item: NavigationMenuItem): boolean => !!props.collapsed && (props.orientation === 'vertical' || (props.orientation === 'horizontal' && hasHorizontalTooltip(item)))
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean }>()
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number }>({
@@ -310,7 +313,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
       <span
         v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>]"
         data-slot="linkLabel"
-        :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })"
+        :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel, shouldHideLabel(item) && 'hidden'] })"
       >
         <slot :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index">
           {{ get(item, props.labelKey as string) }}
@@ -324,7 +327,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
         v-if="(item.badge || item.badge === 0) || (orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>]"
         as="span"
         data-slot="linkTrailing"
-        :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing] })"
+        :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing, shouldHideLabel(item) && 'hidden'] })"
         @click.stop.prevent
       >
         <slot :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
@@ -399,7 +402,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
               </slot>
             </template>
           </UPopover>
-          <UTooltip v-else-if="orientation === 'vertical' && collapsed && (!!props.tooltip || !!item.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
+          <UTooltip v-else-if="(orientation === 'vertical' && collapsed && (!!props.tooltip || !!item.tooltip)) || (orientation === 'horizontal' && collapsed && hasHorizontalTooltip(item))" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
             <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })">
               <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
             </ULinkBase>
