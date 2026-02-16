@@ -2,6 +2,8 @@
   "extends": [
     "github>nuxt/renovate-config-nuxt"
   ],
+  "timezone": "Europe/Paris",
+  "schedule": ["* 6-9 * * 1"],
   "lockFileMaintenance": {
     "enabled": true
   },
