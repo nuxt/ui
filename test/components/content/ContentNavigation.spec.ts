@@ -63,10 +63,10 @@ describe('ContentNavigation', () => {
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots
-    ['with item slot', { props, slots: { item: () => 'Item slot' } }],
-    ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
-    ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
-    ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
+    ['with link slot', { props, slots: { link: () => 'Link slot' } }],
+    ['with link-leading slot', { props, slots: { 'link-leading': () => 'Link leading slot' } }],
+    ['with link-title slot', { props, slots: { 'link-title': () => 'Link title slot' } }],
+    ['with link-trailing slot', { props, slots: { 'link-trailing': () => 'Link trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentNavigationProps, slots?: Partial<ContentNavigationSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ContentNavigation)
