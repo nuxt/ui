@@ -9,7 +9,6 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/image',
     '@nuxt/a11y',
-    '@nuxtjs/plausible',
     '@nuxtjs/mcp-toolkit',
     '@vueuse/nuxt',
     'nuxt-component-meta',
@@ -244,7 +243,6 @@ export default defineNuxtConfig({
       '@nuxt/image',
       '@nuxtjs/color-mode',
       '@nuxtjs/mdc',
-      '@nuxtjs/plausible',
       'nuxt/dist',
       'nuxt-og-image',
       resolve('./app/components')

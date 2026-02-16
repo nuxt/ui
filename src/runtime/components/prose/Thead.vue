@@ -7,6 +7,7 @@ type ProseThead = ComponentConfig<typeof theme, AppConfig, 'thead', 'ui.prose'>
 
 export interface ProseTheadProps {
   class?: any
+  ui?: { base?: any }
 }
 
 export interface ProseTheadSlots {
@@ -17,18 +18,21 @@ export interface ProseTheadSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { tv } from '../../utils/tv'
 
 const props = defineProps<ProseTheadProps>()
 defineSlots<ProseTheadSlots>()
 
 const appConfig = useAppConfig() as ProseThead['AppConfig']
+const uiProp = useComponentUI('prose.thead', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.thead || {}) }))
 </script>
 
 <template>
-  <thead :class="ui({ class: props.class })">
+  <thead :class="ui({ class: [uiProp?.base, props.class] })">
     <slot />
   </thead>
 </template>

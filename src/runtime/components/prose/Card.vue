@@ -29,6 +29,7 @@ export interface ProseCardSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { tv } from '../../utils/tv'
 import ULink from '../Link.vue'
 import UIcon from '../Icon.vue'
@@ -39,6 +40,7 @@ const props = defineProps<ProseCardProps>()
 const slots = defineSlots<ProseCardSlots>()
 
 const appConfig = useAppConfig() as ProseCard['AppConfig']
+const uiProp = useComponentUI('prose.card', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.card || {}) })({
   color: props.color,
@@ -52,7 +54,7 @@ const ariaLabel = computed(() => (props.title || 'Card link').trim())
 </script>
 
 <template>
-  <div :class="ui.base({ class: props.class })">
+  <div :class="ui.base({ class: [uiProp?.base, props.class] })">
     <ULink
       v-if="to"
       :aria-label="ariaLabel"
@@ -63,16 +65,16 @@ const ariaLabel = computed(() => (props.title || 'Card link').trim())
       <span class="absolute inset-0" aria-hidden="true" />
     </ULink>
 
-    <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
-    <UIcon v-if="!!to && target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.externalIcon({ class: props.ui?.externalIcon })" />
+    <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: uiProp?.icon })" />
+    <UIcon v-if="!!to && target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.externalIcon({ class: uiProp?.externalIcon })" />
 
-    <p v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+    <p v-if="title || !!slots.title" :class="ui.title({ class: uiProp?.title })">
       <slot name="title" mdc-unwrap="p">
         {{ title }}
       </slot>
     </p>
 
-    <div v-if="!!slots.default" :class="ui.description({ class: props.ui?.description })">
+    <div v-if="!!slots.default" :class="ui.description({ class: uiProp?.description })">
       <slot>
         {{ description }}
       </slot>

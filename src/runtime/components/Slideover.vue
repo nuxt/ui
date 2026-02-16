@@ -83,6 +83,7 @@ import { computed, toRef } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { pointerDownOutside } from '../utils/overlay'
@@ -103,6 +104,7 @@ const slots = defineSlots<SlideoverSlots>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Slideover['AppConfig']
+const uiProp = useComponentUI('slideover', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
@@ -140,12 +142,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
     </DialogTrigger>
 
     <DialogPortal v-bind="portalProps">
-      <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
+      <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })" />
 
       <DialogContent
         :data-side="side"
         data-slot="content"
-        :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
+        :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })"
         v-bind="contentProps"
         @after-enter="emits('after:enter')"
         @after-leave="emits('after:leave')"
@@ -166,16 +168,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
         </VisuallyHidden>
 
         <slot name="content" :close="close">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" data-slot="header" :class="ui.header({ class: uiProp?.header })">
             <slot name="header" :close="close">
-              <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-                <DialogTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+              <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+                <DialogTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
                   <slot name="title">
                     {{ title }}
                   </slot>
                 </DialogTitle>
 
-                <DialogDescription v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+                <DialogDescription v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
                   <slot name="description">
                     {{ description }}
                   </slot>
@@ -194,18 +196,18 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
                     :aria-label="t('slideover.close')"
                     v-bind="(typeof props.close === 'object' ? props.close : {})"
                     data-slot="close"
-                    :class="ui.close({ class: props.ui?.close })"
+                    :class="ui.close({ class: uiProp?.close })"
                   />
                 </slot>
               </DialogClose>
             </slot>
           </div>
 
-          <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
+          <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
             <slot name="body" :close="close" />
           </div>
 
-          <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+          <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
             <slot name="footer" :close="close" />
           </div>
         </slot>

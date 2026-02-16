@@ -42,6 +42,7 @@ export interface ErrorSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { clearError, useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -55,6 +56,7 @@ const slots = defineSlots<ErrorSlots>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Error['AppConfig']
+const uiProp = useComponentUI('error', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.error || {}) })())
@@ -65,23 +67,23 @@ function handleError() {
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <p v-if="!!props.error?.statusCode || !!slots.statusCode" data-slot="statusCode" :class="ui.statusCode({ class: props.ui?.statusCode })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <p v-if="!!props.error?.statusCode || !!slots.statusCode" data-slot="statusCode" :class="ui.statusCode({ class: uiProp?.statusCode })">
       <slot name="statusCode">
         {{ props.error?.statusCode }}
       </slot>
     </p>
-    <h1 v-if="!!props.error?.statusMessage || !!slots.statusMessage" data-slot="statusMessage" :class="ui.statusMessage({ class: props.ui?.statusMessage })">
+    <h1 v-if="!!props.error?.statusMessage || !!slots.statusMessage" data-slot="statusMessage" :class="ui.statusMessage({ class: uiProp?.statusMessage })">
       <slot name="statusMessage">
         {{ props.error?.statusMessage }}
       </slot>
     </h1>
-    <p v-if="(props.error?.message && props.error.message !== props.error.statusMessage) || !!slots.message" data-slot="message" :class="ui.message({ class: props.ui?.message })">
+    <p v-if="(props.error?.message && props.error.message !== props.error.statusMessage) || !!slots.message" data-slot="message" :class="ui.message({ class: uiProp?.message })">
       <slot name="message">
         {{ props.error?.message }}
       </slot>
     </p>
-    <div v-if="!!clear || !!slots.links" data-slot="links" :class="ui.links({ class: props.ui?.links })">
+    <div v-if="!!clear || !!slots.links" data-slot="links" :class="ui.links({ class: uiProp?.links })">
       <slot name="links">
         <UButton
           v-if="clear"
