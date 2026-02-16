@@ -24,7 +24,6 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'nuxt-og-image',
     module,
-    '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta'
   ],
