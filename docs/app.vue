@@ -31,7 +31,6 @@
 
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
-import { debounce } from 'perfect-debounce'
 import type { ParsedContent } from '@nuxt/content'
 import { Analytics } from '@vercel/analytics/nuxt'
 
@@ -74,16 +73,6 @@ const links = computed(() => {
     to: '/releases'
   }].filter(Boolean)
 })
-
-// Watch
-
-watch(() => searchRef.value?.commandPaletteRef?.query, debounce((query: string) => {
-  if (!query) {
-    return
-  }
-
-  useTrackEvent('Search', { props: { query: `${query} - ${searchRef.value?.commandPaletteRef.results.length} results` } })
-}, 500))
 
 // Head
 
