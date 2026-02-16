@@ -32,7 +32,7 @@ Use it inside the default slot of the [DashboardGroup](/docs/components/dashboar
 ```
 
 ::tip
-You can open the CommandPalette by pressing :kbd{value="meta"} :kbd{value="K"}, by using the [DashboardSearchButton](/docs/components/dashboard-search-button) component or by using a `v-model:open`{lang="ts"} directive.
+You can open the CommandPalette by pressing :kbd{value="meta"} :kbd{value="K" class="ms-px"}, by using the [DashboardSearchButton](/docs/components/dashboard-search-button) component or by using a `v-model:open`{lang="ts"} directive.
 ::
 
 ### Shortcut

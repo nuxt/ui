@@ -134,12 +134,20 @@ const columns: TableColumn<Payment>[] = [{
 }, {
   accessorKey: 'firstName',
   header: ({ column }) => getPinnedHeader(column, 'First Name', 'left'),
-  cell: ({ row }) => h('div', { class: 'capitalize' }, row.getValue('firstName')),
+  meta: {
+    class: {
+      td: 'capitalize'
+    }
+  },
   size: 128
 }, {
   accessorKey: 'lastName',
   header: ({ column }) => getPinnedHeader(column, 'Last Name', 'left'),
-  cell: ({ row }) => h('div', { class: 'capitalize' }, row.getValue('lastName')),
+  meta: {
+    class: {
+      td: 'capitalize'
+    }
+  },
   size: 128
 }, {
   accessorKey: 'email',
@@ -155,36 +163,46 @@ const columns: TableColumn<Payment>[] = [{
       onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
     })
   },
-  cell: ({ row }) => h('div', { class: 'lowercase' }, row.getValue('email'))
+  meta: {
+    class: {
+      td: 'lowercase'
+    }
+  }
 }, {
   accessorKey: 'amount',
-  header: ({ column }) => h('div', { class: 'text-right' }, getPinnedHeader(column, 'Amount', 'right')),
+  header: ({ column }) => getPinnedHeader(column, 'Amount', 'right'),
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium'
+    }
+  },
   footer: ({ column }) => {
     const total = column.getFacetedRowModel().rows.reduce((acc: number, row: TableRow<Payment>) => acc + Number.parseFloat(row.getValue('amount')), 0)
-
     const formatted = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR'
     }).format(total)
-
-    return h('div', { class: 'text-right font-medium' }, `Total: ${formatted}`)
+    return `Total: ${formatted}`
   },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR'
     }).format(amount)
-
-    return h('div', { class: 'text-right font-medium' }, formatted)
   },
   size: 117
 }, {
   id: 'actions',
   enableHiding: false,
+  meta: {
+    class: {
+      td: 'text-right'
+    }
+  },
   cell: ({ row }) => {
-    return h('div', { class: 'text-right' }, h(UDropdownMenu, {
+    return h(UDropdownMenu, {
       'content': {
         align: 'end'
       },
@@ -194,9 +212,8 @@ const columns: TableColumn<Payment>[] = [{
       'icon': 'i-lucide-ellipsis-vertical',
       'color': 'neutral',
       'variant': 'ghost',
-      'class': 'ms-auto',
       'aria-label': 'Actions dropdown'
-    })))
+    }))
   },
   size: 64
 }]

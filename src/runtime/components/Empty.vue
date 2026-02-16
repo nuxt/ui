@@ -51,6 +51,7 @@ export interface EmptySlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
@@ -59,6 +60,7 @@ const props = defineProps<EmptyProps>()
 const slots = defineSlots<EmptySlots>()
 
 const appConfig = useAppConfig() as Empty['AppConfig']
+const uiProp = useComponentUI('empty', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.empty || {}) })({
   variant: props.variant,
@@ -67,20 +69,20 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.empty || {})
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.header || (icon || avatar || !!slots.leading) || (title || !!slots.title) || (description || !!slots.description)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div v-if="!!slots.header || (icon || avatar || !!slots.leading) || (title || !!slots.title) || (description || !!slots.description)" data-slot="header" :class="ui.header({ class: uiProp?.header })">
       <slot name="header">
         <slot name="leading" :ui="ui">
-          <UAvatar v-if="icon || avatar" :icon="icon" v-bind="typeof avatar === 'object' ? avatar : {}" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+          <UAvatar v-if="icon || avatar" :icon="icon" v-bind="typeof avatar === 'object' ? avatar : {}" data-slot="avatar" :class="ui.avatar({ class: uiProp?.avatar })" />
         </slot>
 
-        <h2 v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <h2 v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
           <slot name="title">
             {{ title }}
           </slot>
         </h2>
 
-        <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+        <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
           <slot name="description">
             {{ description }}
           </slot>
@@ -88,9 +90,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.empty || {})
       </slot>
     </div>
 
-    <div v-if="!!slots.body || (actions?.length || !!slots.actions)" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+    <div v-if="!!slots.body || (actions?.length || !!slots.actions)" data-slot="body" :class="ui.body({ class: uiProp?.body })">
       <slot name="body">
-        <div v-if="actions?.length || !!slots.actions" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
+        <div v-if="actions?.length || !!slots.actions" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
           <slot name="actions">
             <UButton v-for="(action, index) in actions" :key="index" :size="size" v-bind="action" />
           </slot>
@@ -98,7 +100,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.empty || {})
       </slot>
     </div>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

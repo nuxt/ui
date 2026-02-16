@@ -20,6 +20,7 @@ export interface BlogPostsProps<T extends BlogPostProps = BlogPostProps> {
    */
   orientation?: BlogPosts['variants']['orientation']
   class?: any
+  ui?: { base?: any }
 }
 
 type ExtendSlotWithPost<T extends BlogPostProps, K extends keyof BlogPostSlots>
@@ -41,6 +42,7 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
+import { useComponentUI } from '../composables/useComponentUI'
 import UBlogPost from './BlogPost.vue'
 
 const props = withDefaults(defineProps<BlogPostsProps>(), {
@@ -51,12 +53,14 @@ const slots = defineSlots<BlogPostsSlots<T>>()
 const getProxySlots = () => omit(slots, ['default'])
 
 const appConfig = useAppConfig() as BlogPosts['AppConfig']
+const uiProp = useComponentUI('blogPosts', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPosts || {}) }))
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: props.class })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: [uiProp?.base, props.class] })">
     <slot>
       <UBlogPost
         v-for="(post, index) in posts"

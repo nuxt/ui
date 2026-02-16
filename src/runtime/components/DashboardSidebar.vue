@@ -50,6 +50,7 @@ import { ref, computed, toRef, useId, watch } from 'vue'
 import { defu } from 'defu'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig, useRuntimeHook, useRoute } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useResizable } from '../composables/useResizable'
 import { useLocale } from '../composables/useLocale'
 import { useDashboard } from '../utils/dashboard'
@@ -82,6 +83,7 @@ const collapsed = defineModel<boolean>('collapsed', { default: false })
 const route = useRoute()
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebar['AppConfig']
+const uiProp = useComponentUI('dashboardSidebar', props)
 
 const dashboardContext = useDashboard({
   storageKey: 'dashboard',
@@ -141,7 +143,7 @@ function toggleOpen() {
         v-bind="(typeof toggle === 'object' ? toggle : {})"
         :side="toggleSide"
         data-slot="toggle"
-        :class="ui.toggle({ class: props.ui?.toggle, toggleSide })"
+        :class="ui.toggle({ class: uiProp?.toggle, toggleSide })"
       />
     </slot>
   </DefineToggleTemplate>
@@ -152,7 +154,7 @@ function toggleOpen() {
         v-if="resizable"
         :aria-controls="id"
         data-slot="handle"
-        :class="ui.handle({ class: props.ui?.handle })"
+        :class="ui.handle({ class: uiProp?.handle })"
         @mousedown="onMouseDown"
         @touchstart="onTouchStart"
         @dblclick="onDoubleClick"
@@ -169,18 +171,18 @@ function toggleOpen() {
     :data-collapsed="isCollapsed"
     :data-dragging="isDragging"
     data-slot="root"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     :style="{ '--width': `${size || 0}${dashboardContext.unit}` }"
   >
-    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: uiProp?.header })">
       <slot name="header" :collapsed="isCollapsed" :collapse="collapse" />
     </div>
 
-    <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
+    <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
       <slot :collapsed="isCollapsed" :collapse="collapse" />
     </div>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
       <slot name="footer" :collapsed="isCollapsed" :collapse="collapse" />
     </div>
   </div>
@@ -193,13 +195,13 @@ function toggleOpen() {
     :description="t('dashboardSidebar.description')"
     v-bind="menuProps"
     :ui="{
-      overlay: ui.overlay({ class: props.ui?.overlay }),
-      content: ui.content({ class: props.ui?.content })
+      overlay: ui.overlay({ class: uiProp?.overlay }),
+      content: ui.content({ class: uiProp?.content })
     }"
   >
     <template #content="contentData">
       <slot name="content" v-bind="contentData">
-        <div v-if="!!slots.header || mode !== 'drawer'" data-slot="header" :class="ui.header({ class: props.ui?.header, menu: true })">
+        <div v-if="!!slots.header || mode !== 'drawer'" data-slot="header" :class="ui.header({ class: uiProp?.header, menu: true })">
           <ReuseToggleTemplate v-if="mode !== 'drawer' && toggleSide === 'left'" />
 
           <slot name="header" />
@@ -207,11 +209,11 @@ function toggleOpen() {
           <ReuseToggleTemplate v-if="mode !== 'drawer' && toggleSide === 'right'" />
         </div>
 
-        <div data-slot="body" :class="ui.body({ class: props.ui?.body, menu: true })">
+        <div data-slot="body" :class="ui.body({ class: uiProp?.body, menu: true })">
           <slot />
         </div>
 
-        <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer, menu: true })">
+        <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer, menu: true })">
           <slot name="footer" />
         </div>
       </slot>

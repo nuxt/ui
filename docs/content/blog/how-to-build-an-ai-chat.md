@@ -54,27 +54,19 @@ Install Nuxt UI and the AI-specific dependencies:
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
-pnpm add @nuxt/ui @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+pnpm add @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [yarn]
-yarn add @nuxt/ui @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+yarn add @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [npm]
-npm install @nuxt/ui @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+npm install @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [bun]
-bun add @nuxt/ui @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
-```
-::
-
-::warning{icon="i-simple-icons-pnpm"}
-If you're using **pnpm**, create a `.npmrc` file at the root of your project with `shamefully-hoist=true`:
-
-```bash [.npmrc]
-shamefully-hoist=true
+bun add @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 ::
 
@@ -459,7 +451,6 @@ The chat page is where the actual conversation happens. It integrates the AI SDK
 
 ```vue [app/pages/chat/[id].vue] {2-4,19-38}
 <script setup lang="ts">
-import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 import { DefaultChatTransport } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 
@@ -524,11 +515,10 @@ onMounted(() => {
           class="flex-1"
         >
           <template #content="{ message }">
-            <MDC
-              :value="getTextFromMessage(message)"
-              :cache-key="message.id"
-              class="*:first:mt-0 *:last:mb-0"
-            />
+            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+              <MDC v-if="part.type === 'text' && message.role === 'assistant'" :value="part.text" :cache-key="`${message.id}-${index}`" class="*:first:mt-0 *:last:mb-0" />
+              <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">{{ part.text }}</p>
+            </template>
           </template>
         </UChatMessages>
 
@@ -723,7 +713,6 @@ async function createChat() {
 
 ```vue [app/pages/chat/[id].vue] {58-60}
 <script setup lang="ts">
-import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 import { DefaultChatTransport } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 
@@ -791,11 +780,10 @@ onMounted(() => {
           class="flex-1"
         >
           <template #content="{ message }">
-            <MDC
-              :value="getTextFromMessage(message)"
-              :cache-key="message.id"
-              class="*:first:mt-0 *:last:mb-0"
-            />
+            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+              <MDC v-if="part.type === 'text' && message.role === 'assistant'" :value="part.text" :cache-key="`${message.id}-${index}`" class="*:first:mt-0 *:last:mb-0" />
+              <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">{{ part.text }}</p>
+            </template>
           </template>
         </UChatMessages>
 
@@ -890,7 +878,6 @@ Update the chat page to include the model selector and pass the selected model t
 
 ```vue [app/pages/chat/[id].vue] {8,23-25,85-87}
 <script setup lang="ts">
-import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 import { DefaultChatTransport } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 
@@ -958,11 +945,10 @@ onMounted(() => {
           class="flex-1"
         >
           <template #content="{ message }">
-            <MDC
-              :value="getTextFromMessage(message)"
-              :cache-key="message.id"
-              class="*:first:mt-0 *:last:mb-0"
-            />
+            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+              <MDC v-if="part.type === 'text' && message.role === 'assistant'" :value="part.text" :cache-key="`${message.id}-${index}`" class="*:first:mt-0 *:last:mb-0" />
+              <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">{{ part.text }}</p>
+            </template>
           </template>
         </UChatMessages>
 

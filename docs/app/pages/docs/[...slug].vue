@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { joinURL } from 'ufo'
 import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
 
@@ -71,6 +72,20 @@ if (route.path.startsWith('/docs/components/')) {
   })
 }
 
+// Pre-render the markdown path + add it to alternate links
+const site = useSiteConfig()
+const path = computed(() => route.path.replace(/\/$/, ''))
+prerenderRoutes([joinURL('/raw', `${path.value}.md`)])
+useHead({
+  link: [
+    {
+      rel: 'alternate',
+      href: joinURL(site.url, 'raw', `${path.value}.md`),
+      type: 'text/markdown'
+    }
+  ]
+})
+
 const communityLinks = computed(() => [{
   icon: 'i-lucide-file-pen',
   label: 'Edit this page',
@@ -86,9 +101,21 @@ const communityLinks = computed(() => [{
 
 <template>
   <UPage v-if="page">
-    <UPageHeader :title="page.title">
+    <UPageHeader>
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
+      </template>
+
+      <template #title>
+        {{ page.title }}
+
+        <UBadge
+          v-if="page.navigation?.badge"
+          :label="page.navigation?.badge"
+          variant="subtle"
+          size="lg"
+          class="rounded-full align-middle"
+        />
       </template>
 
       <template #description>

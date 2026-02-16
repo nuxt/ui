@@ -143,6 +143,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.hook('vite:extend', async ({ config }) => {
       const plugin = await import('@tailwindcss/vite').then(r => r.default)
       config.plugins ||= []
+      // @ts-expect-error - Vite Plugin type mismatch between @tailwindcss/vite and @nuxt/vite-builder
       config.plugins.push(plugin())
     })
     if (nuxt.options.builder !== '@nuxt/vite-builder') {

@@ -18,6 +18,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - BreadcrumbItem[]
 props:
   items:
     - label: 'Docs'

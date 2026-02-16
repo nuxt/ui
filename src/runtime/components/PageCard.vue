@@ -72,6 +72,7 @@ import { computed, ref, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useMouseInElement, pausableFilter } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -88,6 +89,7 @@ const cardRef = ref<HTMLElement>()
 const motionControl = pausableFilter()
 
 const appConfig = useAppConfig() as PageCard['AppConfig']
+const uiProp = useComponentUI('pageCard', props)
 const { elementX, elementY } = useMouseInElement(cardRef, {
   eventFilter: motionControl.eventFilter
 })
@@ -126,33 +128,33 @@ const ariaLabel = computed(() => {
     :as="as"
     :data-orientation="orientation"
     data-slot="root"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     :style="spotlight && { '--spotlight-x': `${elementX}px`, '--spotlight-y': `${elementY}px` }"
     @click="onClick"
   >
-    <div v-if="props.spotlight" data-slot="spotlight" :class="ui.spotlight({ class: props.ui?.spotlight })" />
+    <div v-if="props.spotlight" data-slot="spotlight" :class="ui.spotlight({ class: uiProp?.spotlight })" />
 
-    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.header || (icon || !!slots.leading) || !!slots.body || (title || !!slots.title) || (description || !!slots.description) || !!slots.footer" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-        <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+    <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
+      <div v-if="!!slots.header || (icon || !!slots.leading) || !!slots.body || (title || !!slots.title) || (description || !!slots.description) || !!slots.footer" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+        <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: uiProp?.header })">
           <slot name="header" />
         </div>
 
-        <div v-if="icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+        <div v-if="icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
           <slot name="leading" :ui="ui">
-            <UIcon v-if="icon" :name="icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+            <UIcon v-if="icon" :name="icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
           </slot>
         </div>
 
-        <div v-if="!!slots.body || (title || !!slots.title) || (description || !!slots.description)" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+        <div v-if="!!slots.body || (title || !!slots.title) || (description || !!slots.description)" data-slot="body" :class="ui.body({ class: uiProp?.body })">
           <slot name="body">
-            <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+            <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
               <slot name="title">
                 {{ title }}
               </slot>
             </div>
 
-            <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+            <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
               <slot name="description">
                 {{ description }}
               </slot>
@@ -160,7 +162,7 @@ const ariaLabel = computed(() => {
           </slot>
         </div>
 
-        <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+        <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
           <slot name="footer" />
         </div>
       </div>

@@ -22,6 +22,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
   - ui
@@ -268,6 +270,10 @@ name: 'accordion-model-value-example'
 props:
   class: 'px-4'
 ---
+::
+
+::tip
+Use the `value-key` prop to change the key used to match items when a `v-model` or `default-value` is provided.
 ::
 
 ::caution
