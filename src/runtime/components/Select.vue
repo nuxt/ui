@@ -319,7 +319,7 @@ defineExpose({
       </span>
 
       <slot :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-        <template v-for="displayedModelValue in [displayValue(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)]" :key="displayedModelValue">
+        <template v-for="displayedModelValue in [displayValue(modelValue as any)]" :key="displayedModelValue">
           <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" data-slot="value" :class="ui.value({ class: uiProp?.value })">
             {{ displayedModelValue }}
           </span>
