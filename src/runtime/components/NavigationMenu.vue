@@ -28,7 +28,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
    */
   badge?: string | number | BadgeProps
   /**
-   * Display a tooltip on the item when `collapsed` hides the label (vertical or horizontal).
+   * Display a tooltip on the item when the menu is collapsed with the label of the item.
    * This has priority over the global `tooltip` prop.
    */
   tooltip?: boolean | TooltipProps
@@ -135,12 +135,12 @@ export interface NavigationMenuProps<
   orientation?: O
   /**
    * Collapse the navigation menu to only show icons.
-   * Labels and trailing content are hidden while icons stay visible, regardless of orientation.
+   * Only works when `orientation` is `vertical`.
    * @defaultValue false
    */
   collapsed?: boolean
   /**
-   * Display a tooltip on the items when `collapsed` hides their labels (vertical or horizontal).
+   * Display a tooltip on the items when the menu is collapsed with the label of the item.
    * `{ delayDuration: 0, content: { side: 'right' } }`{lang="ts-type"}
    * @defaultValue false
    */
@@ -260,8 +260,6 @@ const contentProps = toRef(() => props.content)
 const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as TooltipProps)
 const popoverProps = toRef(() => defu(typeof props.popover === 'boolean' ? {} : props.popover, { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }) as PopoverProps)
 const hasTooltip = (item: NavigationMenuItem): boolean => !!props.tooltip || !!item.tooltip
-const shouldHideLabel = (item: NavigationMenuItem): boolean =>
-  props.collapsed && (props.orientation === 'vertical' || hasTooltip(item))
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean }>()
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number }>({
@@ -313,7 +311,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
       <span
         v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>]"
         data-slot="linkLabel"
-        :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel, shouldHideLabel(item) && 'hidden'] })"
+        :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })"
       >
         <slot :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index">
           {{ get(item, props.labelKey as string) }}
@@ -327,7 +325,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
         v-if="(item.badge || item.badge === 0) || (orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>]"
         as="span"
         data-slot="linkTrailing"
-        :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing, shouldHideLabel(item) && 'hidden'] })"
+        :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing] })"
         @click.stop.prevent
       >
         <slot :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
