@@ -257,9 +257,6 @@ importers:
       '@nuxt/ui-pro':
         specifier: ^3.3.7
         version: 3.3.7(@babel/parser@7.28.5)(joi@18.0.2)(magicast@0.5.1)(react@19.2.0)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.2.0(typescript@5.8.3))(vue@3.5.27(typescript@5.8.3))(yup@1.7.1)(zod@4.3.6)
-      '@nuxtjs/plausible':
-        specifier: ^2.0.1
-        version: 2.0.1(magicast@0.5.1)
       '@octokit/rest':
         specifier: ^22.0.1
         version: 22.0.1
@@ -563,9 +560,6 @@ packages:
   '@babel/types@7.28.5':
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
-
-  '@barbapapazes/plausible-tracker@0.5.6':
-    resolution: {integrity: sha512-GRZxn3ZngYQ1+QbdP8d66D/lQg+T2oEevG8kBGfNwVbt9VZB67sgMx/gkRo/Ww2lH7QelgjUNzvOeG+DsJX2HQ==}
 
   '@bomb.sh/tab@0.0.11':
     resolution: {integrity: sha512-RSqyreeicYBALcMaNxIUJTBknftXsyW45VRq5gKDNwKroh0Re5SDoWwXZaphb+OTEzVdpm/BA8Uq6y0P+AtVYw==}
@@ -1864,9 +1858,6 @@ packages:
 
   '@nuxtjs/mdc@0.19.2':
     resolution: {integrity: sha512-mtwBb9D5U7H1R3kpqEmqwML1RudN6qOJqJwebrqLxk+EWhtGUXAdUBXC2L/kPWiCNA4Yz/EO+tSfSQV8Idh5nw==}
-
-  '@nuxtjs/plausible@2.0.1':
-    resolution: {integrity: sha512-Edr7oFIeZ9Og2lS21NhC3MRgcR7X9H1Hyjve8EsM2CycJGBlCcGKHs0+vi4KpbCVi33VlTXUUYNRPtGyeUX6Fw==}
 
   '@octokit/auth-token@6.0.0':
     resolution: {integrity: sha512-P4YJBPdPSpWTQ1NU4XYdvHvXJJDxM6YwpS0FZHRgP7YFkdVxsWcpWGy/NVqlAA7PcPCnMacXlRm1y2PFZRWL/w==}
@@ -8247,8 +8238,6 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
-  '@barbapapazes/plausible-tracker@0.5.6': {}
-
   '@bomb.sh/tab@0.0.11(cac@6.7.14)(citty@0.1.6)':
     optionalDependencies:
       cac: 6.7.14
@@ -9758,15 +9747,6 @@ snapshots:
     transitivePeerDependencies:
       - magicast
       - supports-color
-
-  '@nuxtjs/plausible@2.0.1(magicast@0.5.1)':
-    dependencies:
-      '@barbapapazes/plausible-tracker': 0.5.6
-      '@nuxt/kit': 4.3.0(magicast@0.5.1)
-      defu: 6.1.4
-      ufo: 1.6.3
-    transitivePeerDependencies:
-      - magicast
 
   '@octokit/auth-token@6.0.0': {}
 
