@@ -204,7 +204,7 @@
     "nuxt": "^4.3.1",
     "release-it": "^19.2.4",
     "unbuild": "^3.6.1",
-    "vitest": "^3.2.4",
+    "vitest": "^4.0.18",
     "vitest-axe": "^0.1.0",
     "vitest-environment-nuxt": "^1.0.1",
     "vue": "^3.5.28",
