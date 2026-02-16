@@ -134,7 +134,7 @@ function onUpdate(value: any) {
           {{ label }}
         </slot>
       </Label>
-      <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+      <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })" @click="modelValue = !modelValue">
         <slot name="description" :description="description">
           {{ description }}
         </slot>

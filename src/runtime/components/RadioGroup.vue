@@ -162,6 +162,15 @@ const normalizedItems = computed(() => {
   return props.items.map(normalizeItem)
 })
 
+function handleDescriptionClick(itemId: string, itemValue: any, isDisabled: boolean) {
+  if (isDisabled) return
+
+  const radioElement = document.getElementById(itemId)
+  if (radioElement) {
+    radioElement.click()
+  }
+}
+
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -210,7 +219,7 @@ function onUpdate(value: any) {
               {{ item.label }}
             </slot>
           </component>
-          <p v-if="item.description || !!slots.description" data-slot="description" :class="ui.description({ class: [uiProp?.description, item.ui?.description], disabled: item.disabled || disabled })">
+          <p v-if="item.description || !!slots.description" data-slot="description" :class="ui.description({ class: [uiProp?.description, item.ui?.description], disabled: item.disabled || disabled })" @click="handleDescriptionClick(item.id, item.value, item.disabled || disabled)">
             <slot name="description" :item="item" :model-value="(modelValue as RadioGroupValue)">
               {{ item.description }}
             </slot>
