@@ -81,6 +81,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pinInput || 
 
 const inputsRef = ref<ComponentPublicInstance[]>([])
 
+function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  inputsRef.value[index] = el
+}
+
 const completed = ref(false)
 function onComplete(value: string[] | number[]) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -129,7 +134,7 @@ defineExpose({
     <PinInputInput
       v-for="(ids, index) in looseToNumber(props.length)"
       :key="ids"
-      :ref="el => (inputsRef[index as number] = el as ComponentPublicInstance)"
+      :ref="el => setInputRef(index as number, el)"
       :index="(index as number)"
       data-slot="base"
       :class="ui.base({ class: uiProp?.base })"

@@ -299,7 +299,7 @@ onMounted(() => {
         v-for="message in messages"
         :key="message.id"
         v-bind="{ ...(message.role === 'user' ? userProps : assistantProps), ...message }"
-        :ref="(el) => registerMessageRef(message.id, el as ComponentPublicInstance)"
+        :ref="el => registerMessageRef(message.id, el as ComponentPublicInstance)"
         :compact="compact"
       >
         <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
