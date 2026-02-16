@@ -6,7 +6,7 @@ import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
 import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { ButtonHTMLAttributes } from '../types/html'
-import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, NestedItem, EmitsToProps } from '../types/utils'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetModelValue, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>
@@ -209,10 +209,10 @@ const groups = computed<SelectItem[][]>(() =>
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
-function displayValue(value: ApplyModifiers<GetItemValue<T, VK, ExcludeItem>, Mod> | ApplyModifiers<GetItemValue<T, VK, ExcludeItem>, Mod>[]): string | undefined {
+function displayValue(value: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>[]): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map(item => getDisplayValue<T[], ApplyModifiers<GetItemValue<T, VK, ExcludeItem>, Mod>>(items.value, item, {
+      .map(item => getDisplayValue<T[], ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>(items.value, item, {
         labelKey: props.labelKey,
         valueKey: props.valueKey
       }))
@@ -221,7 +221,7 @@ function displayValue(value: ApplyModifiers<GetItemValue<T, VK, ExcludeItem>, Mo
     return displayedValues.length > 0 ? displayedValues.join(', ') : undefined
   }
 
-  return getDisplayValue<T[], ApplyModifiers<GetItemValue<T, VK, ExcludeItem>, Mod>>(items.value, value as ApplyModifiers<GetItemValue<T, VK, ExcludeItem>, Mod>, {
+  return getDisplayValue<T[], ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>(items.value, value as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>, {
     labelKey: props.labelKey,
     valueKey: props.valueKey
   })
@@ -244,7 +244,7 @@ onMounted(() => {
 })
 
 function onUpdate(value: any) {
-  if (props.modelModifiers?.trim) {
+  if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
     value = value?.trim() ?? null
   }
 

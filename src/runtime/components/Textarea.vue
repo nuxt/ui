@@ -110,7 +110,7 @@ const textareaRef = useTemplateRef('textareaRef')
 
 // Custom function to handle the v-model properties
 function updateInput(value: string | null | undefined) {
-  if (props.modelModifiers?.trim) {
+  if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
     value = value?.trim() ?? null
   }
 
@@ -126,7 +126,7 @@ function updateInput(value: string | null | undefined) {
     value ||= undefined
   }
 
-  modelValue.value = value as T
+  modelValue.value = value as ApplyModifiers<T, Mod>
   emitFormInput()
 }
 

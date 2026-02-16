@@ -396,7 +396,7 @@ function onUpdate(value: any) {
     return
   }
 
-  if (props.modelModifiers?.trim) {
+  if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
     value = value?.trim() ?? null
   }
 
