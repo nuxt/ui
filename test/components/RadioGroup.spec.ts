@@ -26,7 +26,7 @@ describe('RadioGroup', () => {
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
-    ['with valueKey', { props: { ...props, valueKey: 'label' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Option 1' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with descriptionKey', { props: { ...props, descriptionKey: 'value' } }],
     ['with disabled', { props: { ...props, disabled: true } }],

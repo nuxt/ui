@@ -7,6 +7,7 @@ type ProseBadge = ComponentConfig<typeof theme, AppConfig, 'badge', 'ui.prose'>
 
 export interface ProseBadgeProps {
   class?: any
+  ui?: { base?: any }
 }
 
 export interface ProseBadgeSlots {
@@ -17,6 +18,7 @@ export interface ProseBadgeSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { tv } from '../../utils/tv'
 import UBadge from '../Badge.vue'
 
@@ -24,12 +26,14 @@ const props = defineProps<ProseBadgeProps>()
 defineSlots<ProseBadgeSlots>()
 
 const appConfig = useAppConfig() as ProseBadge['AppConfig']
+const uiProp = useComponentUI('prose.badge', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.badge || {}) }))
 </script>
 
 <template>
-  <UBadge color="primary" variant="subtle" :class="ui({ class: props.class })">
+  <UBadge color="primary" variant="subtle" :class="ui({ class: [uiProp?.base, props.class] })">
     <slot mdc-unwrap="p" />
   </UBadge>
 </template>

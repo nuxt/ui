@@ -64,6 +64,7 @@ describe('FileUpload', () => {
     ['without dropzone', { props: { dropzone: false } }],
     ['without interactive', { props: { interactive: false } }],
     ['without preview', { props: { ...props, preview: false } }],
+    ['without preview with multiple', { props: { ...props, preview: false, multiple: true } }],
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with fileIcon', { props: { ...props, fileIcon: 'i-lucide-house' } }],
@@ -115,6 +116,12 @@ describe('FileUpload', () => {
       const file2 = new File(['bar'], 'file2.txt', { type: 'text/plain' })
       await setFilesOnInput(input, [file1, file2])
       expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+    })
+
+    test('update:modelValue emits null when removing a single file', async () => {
+      const wrapper = mount(FileUpload, { props })
+      await wrapper.find('button').trigger('click')
+      expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBeNull()
     })
 
     test('change event', async () => {

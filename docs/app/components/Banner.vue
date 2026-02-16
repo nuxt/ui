@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const appConfig = useAppConfig()
+</script>
+
 <template>
   <UBanner
     id="nuxt-ui-v4"
@@ -9,7 +13,7 @@
       label: 'Read the post',
       color: 'neutral',
       variant: 'outline',
-      trailingIcon: 'i-lucide-arrow-right',
+      trailingIcon: appConfig.ui.icons.arrowRight,
       to: 'https://nuxt.com/blog/nuxt-ui-v4',
       target: '_blank',
       class: 'ring-0'

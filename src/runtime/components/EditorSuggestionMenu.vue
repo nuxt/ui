@@ -40,6 +40,10 @@ export type EditorSuggestionMenuItem<H extends EditorCustomHandlers = EditorCust
     | EditorSuggestionMenuActionItem<H>
 
 export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'appendTo'>> {
+  /**
+   * @defaultValue 'md'
+   */
+  size?: EditorSuggestionMenu['variants']['size']
   items?: T[] | T[][]
   class?: any
   ui?: EditorSuggestionMenu['slots']
@@ -65,8 +69,9 @@ const appConfig = useAppConfig() as EditorSuggestionMenu['AppConfig']
 
 const handlers = inject('editorHandlers', computed(() => createHandlers()))
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorSuggestionMenu || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorSuggestionMenu || {}) })({
+  size: props.size
+}))
 
 let menu: ReturnType<typeof useEditorMenu> | null = null
 
