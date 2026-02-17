@@ -97,6 +97,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}
   disabled: disabled.value || props.loading
 }))
 
+function handleDescriptionClick() {
+  if (!disabled.value) {
+    window.document.getElementById(id)?.click()
+  }
+}
+
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -134,7 +140,7 @@ function onUpdate(value: any) {
           {{ label }}
         </slot>
       </Label>
-      <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })" @click="modelValue = !modelValue">
+      <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })" @click="handleDescriptionClick">
         <slot name="description" :description="description">
           {{ description }}
         </slot>
