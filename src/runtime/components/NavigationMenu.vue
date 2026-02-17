@@ -323,6 +323,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
           :size="((item.ui?.linkLeadingChipSize || uiProp?.linkLeadingChipSize || ui.linkLeadingChipSize()) as ChipProps['size'])"
           inset
           v-bind="typeof item.chip === 'object' ? item.chip : {}"
+          data-slot="linkLeadingChip"
         >
           <UIcon :name="item.icon" data-slot="linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [uiProp?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })" />
         </UChip>
