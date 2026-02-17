@@ -336,7 +336,7 @@ Groups will be spaced when orientation is `horizontal` and separated when orient
 
 ### Collapsed
 
-When the menu is `collapsed`, in `vertical` orientation labels and trailing content are hidden for all items. In `horizontal` orientation, only tooltip-enabled items are collapsed to icon-only.
+In `vertical` orientation, use the `collapsed` prop to collapse the NavigationMenu, this can be useful in a sidebar for example.
 
 ::note
 You can use the [`tooltip`](#with-tooltip-in-items) and [`popover`](#with-popover-in-items) props to display more information on the collapsed items.
@@ -984,7 +984,7 @@ You can inspect the DOM to see each item's content being rendered.
 
 ### With tooltip in items
 
-When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/components/tooltip) around items with their label. In `horizontal` orientation, use `tooltip` on each item to collapse and display a tooltip only on those specific items.
+When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip. In `horizontal` orientation, you can use the `tooltip` property on each item to display a [Tooltip](/docs/components/tooltip) around items.
 
 You can pass any property from the [Tooltip](/docs/components/tooltip) component globally or on each item.
 
