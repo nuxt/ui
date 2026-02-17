@@ -98,7 +98,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}
 }))
 
 function handleDescriptionClick() {
-  if (!disabled.value) {
+  if (!disabled.value && !props.loading) {
     window.document.getElementById(id)?.click()
   }
 }
