@@ -14,10 +14,10 @@ export default (options: Required<ModuleOptions>) => ({
         base: 'size-7 text-xs'
       },
       md: {
-        base: 'size-8 text-sm'
+        base: 'size-8 text-base/5 md:text-sm'
       },
       lg: {
-        base: 'size-9 text-sm'
+        base: 'size-9 text-base/5 md:text-sm'
       },
       xl: {
         base: 'size-10 text-base'

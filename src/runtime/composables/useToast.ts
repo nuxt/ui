@@ -11,6 +11,8 @@ export interface Toast extends Omit<ToastProps, 'defaultOpen'>, EmitsToProps<Toa
   onClick?: (toast: Toast) => void
   /** @internal */
   _duplicate?: number
+  /** @internal */
+  _updated?: boolean
 }
 
 export function useToast() {
@@ -70,13 +72,30 @@ export function useToast() {
     if (index !== -1) {
       toasts.value[index] = {
         ...toasts.value[index] as Toast,
-        ...toast
+        ...toast,
+        duration: toast.duration,
+        open: true,
+        _updated: true
       }
+
+      nextTick(() => {
+        const i = toasts.value.findIndex((t: Toast) => t.id === id)
+        if (i !== -1 && toasts.value[i]!._updated) {
+          toasts.value[i] = {
+            ...toasts.value[i] as Toast,
+            _updated: undefined
+          }
+        }
+      })
     }
   }
 
   function remove(id: string | number) {
     const index = toasts.value.findIndex((t: Toast) => t.id === id)
+    if (index !== -1 && toasts.value[index]!._updated) {
+      return
+    }
+
     if (index !== -1) {
       toasts.value[index] = {
         ...toasts.value[index] as Toast,

@@ -21,8 +21,8 @@ export default (options: Required<ModuleOptions>) => {
       size: {
         xs: 'px-2 py-1 text-xs gap-1',
         sm: 'px-2.5 py-1.5 text-xs gap-1.5',
-        md: 'px-2.5 py-1.5 text-sm gap-1.5',
-        lg: 'px-3 py-2 text-sm gap-2',
+        md: 'px-2.5 py-1.5 text-base/5 md:text-sm gap-1.5',
+        lg: 'px-3 py-2 text-base/5 md:text-sm gap-2',
         xl: 'px-3 py-2 text-base gap-2'
       },
       variant: {

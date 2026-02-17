@@ -2,20 +2,23 @@
 const toast = useToast()
 
 function showToast() {
-  toast.add({
+  const t = toast.add({
     'title': 'Uploading file...',
     'description': 'Your file is being uploaded.',
     'icon': 'i-lucide-cloud-upload',
     'duration': 3000,
-    'onUpdate:open': (open) => {
-      if (!open) {
-        toast.add({
-          title: 'File uploaded!',
-          description: 'Your file has been successfully uploaded.',
-          icon: 'i-lucide-check',
-          color: 'success'
-        })
+    'onUpdate:open': (open: boolean) => {
+      if (open) {
+        return
       }
+
+      toast.update(t.id, {
+        'title': 'File uploaded!',
+        'description': 'Your file has been successfully uploaded.',
+        'icon': 'i-lucide-check',
+        'color': 'success',
+        'onUpdate:open': undefined
+      })
     }
   })
 }
