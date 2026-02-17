@@ -33,8 +33,9 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
    */
   chip?: boolean | ChipProps
   /**
-   * Display a tooltip on the item when the menu is collapsed with the label of the item.
-   * This has priority over the global `tooltip` prop.
+   * Display a tooltip on the item with the label of the item.
+   * In `vertical` orientation, only works when the menu is `collapsed`.
+   * In `horizontal` orientation, works on any item.
    */
   tooltip?: boolean | TooltipProps
   /**
@@ -145,7 +146,8 @@ export interface NavigationMenuProps<
    */
   collapsed?: boolean
   /**
-   * Display a tooltip on the items when the menu is collapsed with the label of the item.
+   * Display a tooltip on the items with the label of the item.
+   * Only works when `orientation` is `vertical` and `collapsed` is `true`.
    * `{ delayDuration: 0, content: { side: 'right' } }`{lang="ts-type"}
    * @defaultValue false
    */
@@ -271,7 +273,7 @@ const rootProps = useForwardPropsEmits(computed(() => ({
 })), emits)
 const accordionProps = useForwardPropsEmits(reactivePick(props, 'collapsible', 'disabled', 'type', 'unmountOnHide'), emits)
 const contentProps = toRef(() => props.content)
-const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as TooltipProps)
+const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { ...(props.orientation === 'vertical' && { delayDuration: 0, content: { side: 'right' } }) }) as TooltipProps)
 const popoverProps = toRef(() => defu(typeof props.popover === 'boolean' ? {} : props.popover, { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }) as PopoverProps)
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean }>()
@@ -422,7 +424,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
               </slot>
             </template>
           </UPopover>
-          <UTooltip v-else-if="orientation === 'vertical' && collapsed && (!!props.tooltip || !!item.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
+          <UTooltip v-else-if="(orientation === 'vertical' && collapsed && (!!props.tooltip || !!item.tooltip)) || (orientation === 'horizontal' && !!item.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
             <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [uiProp?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })">
               <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
             </ULinkBase>

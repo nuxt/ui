@@ -38,6 +38,46 @@
   }
 }
 
+@keyframes toast-slide-in-from-top {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: var(--transform);
+  }
+}
+
+@keyframes toast-slide-in-from-bottom {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: var(--transform);
+  }
+}
+
+@keyframes toast-slide-up {
+  from {
+    transform: translateX(0) translateY(var(--translate));
+  }
+
+  to {
+    transform: translateX(0) translateY(calc(var(--translate) - 100%));
+  }
+}
+
+@keyframes toast-slide-down {
+  from {
+    transform: translateX(0) translateY(var(--translate));
+  }
+
+  to {
+    transform: translateX(0) translateY(calc(var(--translate) + 100%));
+  }
+}
+
 @keyframes toast-pulse-a {
   0%,
   100% {

@@ -71,7 +71,7 @@ export interface ToastSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick, useTemplateRef } from 'vue'
+import { ref, computed, onMounted, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -107,13 +107,11 @@ const rootRef = useTemplateRef('rootRef')
 const height = ref(0)
 
 onMounted(() => {
-  if (!rootRef.value) {
+  if (!rootRef.value?.$el?.getBoundingClientRect) {
     return
   }
 
-  nextTick(() => {
-    height.value = rootRef.value?.$el?.getBoundingClientRect()?.height
-  })
+  height.value = rootRef.value.$el.getBoundingClientRect().height
 })
 
 defineExpose({

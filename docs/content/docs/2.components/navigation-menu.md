@@ -984,7 +984,11 @@ You can inspect the DOM to see each item's content being rendered.
 
 ### With tooltip in items
 
-When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip.
+When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip. In `horizontal` orientation, you can use the `tooltip` property on each item to display a [Tooltip](/docs/components/tooltip) around items.
+
+::note
+The `tooltip` property on an item will always display a tooltip regardless of the global `tooltip` prop.
+::
 
 You can pass any property from the [Tooltip](/docs/components/tooltip) component globally or on each item.
 
@@ -993,7 +997,6 @@ You can pass any property from the [Tooltip](/docs/components/tooltip) component
 collapse: true
 ignore:
   - items
-  - orientation
   - class
 external:
   - items
@@ -1090,6 +1093,10 @@ props:
 ### With popover in items
 
 When orientation is `vertical` and the menu is `collapsed`, you can set the `popover` prop to `true` to display a [Popover](/docs/components/popover) around items with their children but you can also use the `popover` property on each item to override the default popover.
+
+::note
+The `popover` property on an item will always display a popover regardless of the global `popover` prop.
+::
 
 You can pass any property from the [Popover](/docs/components/popover) component globally or on each item.
 
