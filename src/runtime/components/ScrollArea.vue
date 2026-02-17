@@ -80,7 +80,7 @@ export interface ScrollAreaEmits {
 </script>
 
 <script setup lang="ts" generic="T extends ScrollAreaItem">
-import { computed, toRef, useTemplateRef, watch } from 'vue'
+import { computed, onMounted, onUnmounted, toRef, useTemplateRef, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useVirtualizer } from '@tanstack/vue-virtual'
@@ -204,12 +204,24 @@ function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
   }
 }
 
-// Remeasure when lanes change
-watch(lanes, () => {
+// Recalculate layout on container resize (e.g. estimateSize depends on lane width)
+let resizeObserver: ResizeObserver | null = null
+
+onMounted(() => {
   if (virtualizer) {
-    virtualizer.value.measure()
+    const el = rootRef.value?.$el
+    if (el) {
+      resizeObserver = new ResizeObserver(() => {
+        virtualizer.value.measure()
+      })
+      resizeObserver.observe(el)
+    }
   }
-}, { flush: 'sync' })
+})
+
+onUnmounted(() => {
+  resizeObserver?.disconnect()
+})
 
 function measureElement(el: Element | ComponentPublicInstance | null) {
   if (el && virtualizer && dynamicSize.value) {

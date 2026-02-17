@@ -7,10 +7,13 @@ const items = Array.from({ length: 1000 }).map((_, index) => ({
   height: 480
 }))
 
+const gap = 16
 const scrollArea = useTemplateRef('scrollArea')
 const { width } = useElementSize(() => scrollArea.value?.$el)
 
 const lanes = computed(() => Math.max(1, Math.min(4, Math.floor(width.value / 200))))
+const laneWidth = computed(() => (width.value - (lanes.value - 1) * gap) / lanes.value)
+const estimateSize = computed(() => laneWidth.value * (480 / 640))
 </script>
 
 <template>
@@ -20,8 +23,8 @@ const lanes = computed(() => Math.max(1, Math.min(4, Math.floor(width.value / 20
     :items="items"
     :virtualize="{
       lanes,
-      estimateSize: 148,
-      gap: 16
+      estimateSize,
+      gap
     }"
     class="w-full h-96 p-4"
   >
