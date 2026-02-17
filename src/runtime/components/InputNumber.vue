@@ -131,9 +131,9 @@ const decrementIcon = computed(() => props.decrementIcon || (props.orientation =
 
 const inputRef = useTemplateRef('inputRef')
 
-function onUpdate(value: number | null | undefined) {
+function onUpdate(value: ApplyModifiers<T, Mod> | undefined) {
   if (props.modelModifiers?.optional) {
-    value = value ?? undefined
+    modelValue.value = value = value ?? undefined
   }
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -179,7 +179,7 @@ defineExpose({
     :class="ui.root({ class: [uiProp?.root, props.class] })"
     :name="name"
     :disabled="disabled"
-    @update:model-value="onUpdate"
+    @update:model-value="(val) => onUpdate(val as ApplyModifiers<T, Mod>)"
   >
     <NumberFieldInput
       v-bind="{ ...$attrs, ...ariaAttrs }"
