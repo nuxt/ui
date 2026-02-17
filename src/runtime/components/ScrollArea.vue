@@ -207,12 +207,12 @@ function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
 
 // Recalculate layout on container resize (e.g. estimateSize depends on lane width)
 let resizeObserver: ResizeObserver | null = null
+let rafId: number | null = null
 
 onMounted(() => {
   if (virtualizer) {
     const el = rootRef.value?.$el
     if (el) {
-      let rafId: number | null = null
       resizeObserver = new ResizeObserver(() => {
         if (rafId !== null) return
         rafId = requestAnimationFrame(() => {
@@ -226,6 +226,10 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  if (rafId !== null) {
+    cancelAnimationFrame(rafId)
+    rafId = null
+  }
   resizeObserver?.disconnect()
 })
 
