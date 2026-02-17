@@ -61,7 +61,7 @@ type DotPathValue<T, P extends DotPathKeys<T> | (string & {})>
       ? DotPathValue<NonNullable<T[K]>, Rest>
       : never
     : P extends keyof T
-      ? NonNullable<T[P]>
+      ? T[P]
       : never
 
 export type GetItemKeys<I> = keyof Extract<NestedItem<I>, object> | DotPathKeys<Extract<NestedItem<I>, object>>
