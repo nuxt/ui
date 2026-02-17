@@ -88,7 +88,11 @@ const items = [
     label: 'GitHub',
     icon: 'i-simple-icons-github',
     to: 'https://github.com/nuxt/ui',
-    target: '_blank'
+    target: '_blank',
+    tooltip: {
+      text: 'Open on GitHub',
+      kbds: ['meta', 'G']
+    }
   }, {
     label: 'Help',
     icon: 'i-lucide-circle-help',
