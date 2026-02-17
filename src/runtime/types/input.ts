@@ -12,7 +12,7 @@ type _Nullable<T, M> = M extends { nullable: true } ? T | null : T
 type _Optional<T, M> = M extends { optional: true } ? T | undefined : T
 type _Number<T, M> = M extends { number: true } ? T | number : T
 type _Trim<T, M> = M extends { trim: true }
-  ? string extends T
+  ? T extends string
     ? T
     : never
   : T
