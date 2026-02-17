@@ -183,7 +183,7 @@
     "tailwindcss": "^4.1.18",
     "tinyglobby": "^0.2.15",
     "ufo": "^1.6.3",
-    "unplugin": "^2.3.11",
+    "unplugin": "^3.0.0",
     "unplugin-auto-import": "^21.0.0",
     "unplugin-vue-components": "^31.0.0",
     "vaul-vue": "0.4.1",
@@ -253,7 +253,7 @@
     "@nuxt/ui": "workspace:*",
     "nitropack": "^2.13.0",
     "typescript": "5.8.3",
-    "unplugin": "^2.3.11",
+    "unplugin": "^3.0.0",
     "c12": "^3.3.2"
   },
   "keywords": [

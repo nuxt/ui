@@ -10,6 +10,7 @@ export default (options: Required<ModuleOptions>) => ({
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
+    linkLeadingChipSize: 'sm',
     linkTrailing: 'group ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0',
     linkTrailingBadgeSize: 'sm',

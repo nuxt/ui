@@ -268,15 +268,17 @@ onMounted(() => {
 
   lastScrollTop.value = parent.value.scrollTop
 
-  // Wait for content to fully render (especially MDC components in ChatPalette)
-  setTimeout(() => {
-    if (props.shouldScrollToBottom) {
-      // Scroll to bottom on mount without smooth animation when `props.shouldScrollToBottom` is true
+  if (props.shouldScrollToBottom) {
+    // Scroll to bottom immediately to avoid flash, then again after a delay to account for async content (e.g. MDC)
+    scrollToBottom(false)
+    setTimeout(() => {
       scrollToBottom(false)
-    } else {
+    }, 100)
+  } else {
+    nextTick(() => {
       checkScrollPosition()
-    }
-  }, 100)
+    })
+  }
 
   // Add event listener to check scroll position to show the auto scroll button
   useEventListener(parent, 'scroll', checkScrollPosition)
