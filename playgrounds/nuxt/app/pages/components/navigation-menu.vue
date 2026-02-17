@@ -27,6 +27,7 @@ const items = [
     label: 'Documentation',
     icon: 'i-lucide-book-open',
     badge: 10,
+    chip: true,
     children: [{
       label: 'Introduction',
       description: 'Fully styled and customizable components for Nuxt.',
