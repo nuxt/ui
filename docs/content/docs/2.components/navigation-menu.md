@@ -993,7 +993,6 @@ You can pass any property from the [Tooltip](/docs/components/tooltip) component
 collapse: true
 ignore:
   - items
-  - orientation
   - class
 external:
   - items
