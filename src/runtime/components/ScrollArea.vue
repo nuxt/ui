@@ -27,6 +27,12 @@ export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
    * @defaultValue undefined
    */
   lanes?: number
+  /**
+   * Enable per-item DOM measurement for variable-height items (e.g., masonry layouts).
+   * When `false` (default), uses `estimateSize` for better performance with uniform items.
+   * @defaultValue false
+   */
+  dynamicSize?: boolean
 }
 
 export type ScrollAreaItem = any
@@ -122,6 +128,10 @@ const lanes = computed(() => {
   return typeof value === 'number' ? value : undefined
 })
 
+const dynamicSize = computed(() => {
+  return typeof props.virtualize === 'object' && props.virtualize.dynamicSize === true
+})
+
 const virtualizer = !!props.virtualize && useVirtualizer({
   ...virtualizerProps.value,
   get overscan() {
@@ -202,7 +212,7 @@ watch(lanes, () => {
 }, { flush: 'sync' })
 
 function measureElement(el: Element | ComponentPublicInstance | null) {
-  if (el && virtualizer) {
+  if (el && virtualizer && dynamicSize.value) {
     const element = el instanceof Element ? el : (el as ComponentPublicInstance).$el as Element
     virtualizer.value.measureElement(element)
   }
