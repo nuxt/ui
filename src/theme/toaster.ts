@@ -35,13 +35,13 @@ export default {
     position: ['top-left', 'top-center', 'top-right'],
     class: {
       viewport: 'top-4',
-      base: 'top-0 data-[state=open]:animate-[slide-in-from-top_200ms_ease-in-out]'
+      base: 'top-0 data-[state=open]:animate-[toast-slide-in-from-top_200ms_ease-in-out]'
     }
   }, {
     position: ['bottom-left', 'bottom-center', 'bottom-right'],
     class: {
       viewport: 'bottom-4',
-      base: 'bottom-0 data-[state=open]:animate-[slide-in-from-bottom_200ms_ease-in-out]'
+      base: 'bottom-0 data-[state=open]:animate-[toast-slide-in-from-bottom_200ms_ease-in-out]'
     }
   }, {
     swipeDirection: ['left', 'right'],
