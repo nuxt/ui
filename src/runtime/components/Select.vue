@@ -256,7 +256,7 @@ function onUpdate(value: any) {
     value ??= null
   }
 
-  if (props.modelModifiers?.optional) {
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
     value ??= undefined
   }
 

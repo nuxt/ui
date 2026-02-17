@@ -132,7 +132,7 @@ const decrementIcon = computed(() => props.decrementIcon || (props.orientation =
 const inputRef = useTemplateRef('inputRef')
 
 function onUpdate(value: number | null | undefined) {
-  if (props.modelModifiers?.optional) {
+  if (props.modelModifiers?.optional && value !== null) {
     value = value ?? undefined
   }
 
