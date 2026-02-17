@@ -280,7 +280,7 @@ const virtualizerProps = toRef(() => {
     estimateSize: getEstimateSize(filteredItems.value, selectSize.value || 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
-const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps<SelectMenuValue, Mod>)
+const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps<string>)
 
 const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)
@@ -643,7 +643,9 @@ defineExpose({
               autocomplete="off"
               :size="selectSize"
               v-bind="searchInputProps"
-              :model-modifiers="modelModifiers"
+              :model-modifiers="{
+                trim: modelModifiers?.trim
+              }"
               data-slot="input"
               :class="ui.input({ class: uiProp?.input })"
               @change.stop
