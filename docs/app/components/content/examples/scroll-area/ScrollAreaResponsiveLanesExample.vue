@@ -22,9 +22,10 @@ const estimateSize = computed(() => laneWidth.value * (480 / 640))
     v-slot="{ item }"
     :items="items"
     :virtualize="{
+      gap,
       lanes,
       estimateSize,
-      gap
+      skipMeasurement: true
     }"
     class="w-full h-96 p-4"
   >

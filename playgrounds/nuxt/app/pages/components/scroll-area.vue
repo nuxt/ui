@@ -33,8 +33,7 @@ const virtualizeOptions = computed(() => {
   return {
     estimateSize: estimateSize.value,
     gap: gap.value,
-    lanes: lanes.value,
-    dynamicSize: true
+    lanes: lanes.value
   }
 })
 </script>

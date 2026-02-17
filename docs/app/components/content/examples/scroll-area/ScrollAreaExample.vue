@@ -28,8 +28,7 @@ const items = Array.from({ length: 1000 }).map((_, index) => {
     :virtualize="{
       gap: 16,
       lanes: 3,
-      estimateSize: 480,
-      dynamicSize: true
+      estimateSize: 480
     }"
     class="w-full h-128 p-4"
   >

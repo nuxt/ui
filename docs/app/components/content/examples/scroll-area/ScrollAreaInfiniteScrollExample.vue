@@ -59,7 +59,10 @@ onMounted(() => {
     ref="scrollArea"
     v-slot="{ item }"
     :items="users"
-    :virtualize="{ estimateSize: 88 }"
+    :virtualize="{
+      estimateSize: 88,
+      skipMeasurement: true
+    }"
     class="h-96 w-full"
   >
     <UPageCard

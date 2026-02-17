@@ -27,7 +27,10 @@ function scrollToItem(index: number) {
       v-slot="{ item, index }"
       ref="scrollArea"
       :items="items"
-      :virtualize="{ estimateSize: 72 }"
+      :virtualize="{
+        estimateSize: 72,
+        skipMeasurement: true
+      }"
       class="h-96 w-full"
     >
       <UPageCard

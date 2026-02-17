@@ -28,11 +28,12 @@ export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
    */
   lanes?: number
   /**
-   * Enable per-item DOM measurement for variable-height items (e.g., masonry layouts).
-   * When `false` (default), uses `estimateSize` for better performance with uniform items.
+   * Skip per-item DOM measurement for uniform-height items.
+   * When `true`, uses `estimateSize` only — significantly improving performance for uniform items.
+   * When `false` (default), measures each item for variable-height layouts (e.g., masonry).
    * @defaultValue false
    */
-  dynamicSize?: boolean
+  skipMeasurement?: boolean
 }
 
 export type ScrollAreaItem = any
@@ -128,8 +129,8 @@ const lanes = computed(() => {
   return typeof value === 'number' ? value : undefined
 })
 
-const dynamicSize = computed(() => {
-  return typeof props.virtualize === 'object' && props.virtualize.dynamicSize === true
+const skipMeasurement = computed(() => {
+  return typeof props.virtualize === 'object' && props.virtualize.skipMeasurement === true
 })
 
 const virtualizer = !!props.virtualize && useVirtualizer({
@@ -211,8 +212,13 @@ onMounted(() => {
   if (virtualizer) {
     const el = rootRef.value?.$el
     if (el) {
+      let rafId: number | null = null
       resizeObserver = new ResizeObserver(() => {
-        virtualizer.value.measure()
+        if (rafId !== null) return
+        rafId = requestAnimationFrame(() => {
+          rafId = null
+          virtualizer.value.measure()
+        })
       })
       resizeObserver.observe(el)
     }
@@ -224,7 +230,7 @@ onUnmounted(() => {
 })
 
 function measureElement(el: Element | ComponentPublicInstance | null) {
-  if (el && virtualizer && dynamicSize.value) {
+  if (el && virtualizer && !skipMeasurement.value) {
     const element = el instanceof Element ? el : (el as ComponentPublicInstance).$el as Element
     virtualizer.value.measureElement(element)
   }
