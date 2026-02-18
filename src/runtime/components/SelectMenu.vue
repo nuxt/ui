@@ -4,9 +4,9 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ButtonProps, ChipProps, IconProps, InputProps, LinkPropsKeys } from '../types'
-import type { ModelModifiers } from '../types/input'
+import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { ButtonHTMLAttributes } from '../types/html'
-import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type SelectMenu = ComponentConfig<typeof theme, AppConfig, 'selectMenu'>
@@ -35,8 +35,11 @@ export type SelectMenuItem = SelectMenuValue | {
 }
 
 type ExcludeItem = { type: 'label' | 'separator' }
+type IsClearUsed<M extends boolean, C extends boolean | object> = M extends false
+  ? (C extends true ? null : C extends object ? null : never)
+  : never
 
-export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -77,7 +80,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * Can be an object to pass additional props to the Button.
    * @defaultValue false
    */
-  clear?: boolean | Partial<Omit<ButtonProps, LinkPropsKeys>>
+  clear?: (C & boolean) | (C & Partial<Omit<ButtonProps, LinkPropsKeys>>)
   /**
    * The icon displayed in the clear button.
    * @defaultValue appConfig.ui.icons.close
@@ -134,10 +137,10 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   descriptionKey?: GetItemKeys<T>
   items?: T
   /** The value of the SelectMenu when initially rendered. Use when you do not need to control the state of the SelectMenu. */
-  defaultValue?: GetModelValue<T, VK, M, ExcludeItem>
+  defaultValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
   /** The controlled value of the SelectMenu. Can be binded-with with `v-model`. */
-  modelValue?: GetModelValue<T, VK, M, ExcludeItem>
-  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M, ExcludeItem>>, 'lazy'>
+  modelValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
+  modelModifiers?: Mod
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
@@ -163,18 +166,25 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   ui?: SelectMenu['slots']
 }
 
-export type SelectMenuEmits<A extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
-  change: [event: Event]
-  blur: [event: FocusEvent]
-  focus: [event: FocusEvent]
-  create: [item: string]
-  clear: []
+export interface SelectMenuEmits<
+  A extends ArrayOrNested<SelectMenuItem>,
+  VK extends GetItemKeys<A> | undefined,
+  M extends boolean,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+  C extends boolean | object = false
+> extends Pick<ComboboxRootEmits, 'update:open'> {
+  'change': [event: Event]
+  'blur': [event: FocusEvent]
+  'focus': [event: FocusEvent]
+  'create': [item: string]
+  'clear': []
   /** Event handler when highlighted element changes. */
-  highlight: [payload: {
+  'highlight': [payload: {
     ref: HTMLElement
-    value: GetModelValue<A, VK, M, ExcludeItem>
+    value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
   } | undefined]
-} & GetModelValueEmits<A, VK, M, ExcludeItem>
+  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>]
+}
 
 type SlotProps<T extends SelectMenuItem> = (props: { item: T, index: number, ui: SelectMenu['ui'] }) => any
 
@@ -182,11 +192,25 @@ export interface SelectMenuSlots<
   A extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>,
   VK extends GetItemKeys<A> | undefined = undefined,
   M extends boolean = false,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+  C extends boolean | object = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>, open: boolean, ui: SelectMenu['ui'] }): any
-  'default'(props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>, open: boolean, ui: SelectMenu['ui'] }): any
-  'trailing'(props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>, open: boolean, ui: SelectMenu['ui'] }): any
+  'leading'(props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
+    open: boolean
+    ui: SelectMenu['ui']
+  }): any
+  'default'(props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
+    open: boolean
+    ui: SelectMenu['ui']
+  }): any
+  'trailing'(props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
+    open: boolean
+    ui: SelectMenu['ui']
+  }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -199,7 +223,7 @@ export interface SelectMenuSlots<
 }
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
+<script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
 import { useTemplateRef, computed, onMounted, toRef, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
@@ -223,7 +247,7 @@ import UInput from './Input.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<SelectMenuProps<T, VK, M>>(), {
+const props = withDefaults(defineProps<SelectMenuProps<T, VK, M, Mod, C>>(), {
   portal: true,
   searchInput: true,
   labelKey: 'label',
@@ -234,8 +258,8 @@ const props = withDefaults(defineProps<SelectMenuProps<T, VK, M>>(), {
   autofocusDelay: 0,
   virtualize: false
 })
-const emits = defineEmits<SelectMenuEmits<T, VK, M>>()
-const slots = defineSlots<SelectMenuSlots<T, VK, M>>()
+const emits = defineEmits<SelectMenuEmits<T, VK, M, Mod, C>>()
+const slots = defineSlots<SelectMenuSlots<T, VK, M, Mod, C>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -256,7 +280,7 @@ const virtualizerProps = toRef(() => {
     estimateSize: getEstimateSize(filteredItems.value, selectSize.value || 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
-const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps)
+const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps<string>)
 
 const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)
@@ -370,7 +394,7 @@ function onUpdate(value: any) {
     return
   }
 
-  if (props.modelModifiers?.trim) {
+  if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
     value = value?.trim() ?? null
   }
 
@@ -382,7 +406,7 @@ function onUpdate(value: any) {
     value ??= null
   }
 
-  if (props.modelModifiers?.optional) {
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
     value ??= undefined
   }
 
@@ -447,7 +471,7 @@ function isSelectItem(item: SelectMenuItem): item is Exclude<SelectMenuItem, Sel
   return typeof item === 'object' && item !== null
 }
 
-function isModelValueEmpty(modelValue: GetModelValue<T, VK, M, ExcludeItem>): boolean {
+function isModelValueEmpty(modelValue: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>): boolean {
   if (props.multiple && Array.isArray(modelValue)) {
     return modelValue.length === 0
   }
@@ -552,14 +576,14 @@ defineExpose({
     <ComboboxAnchor as-child>
       <ComboboxTrigger ref="triggerRef" data-slot="base" :class="ui.base({ class: [uiProp?.base, props.class] })" tabindex="0">
         <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
-          <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)" :open="open" :ui="ui">
+          <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
             <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
             <UAvatar v-else-if="!!avatar" :size="((uiProp?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: uiProp?.itemLeadingAvatar })" />
           </slot>
         </span>
 
-        <slot :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)" :open="open" :ui="ui">
-          <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M, ExcludeItem>)]" :key="displayedModelValue">
+        <slot :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
+          <template v-for="displayedModelValue in [displayValue(modelValue as any)]" :key="displayedModelValue">
             <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" data-slot="value" :class="ui.value({ class: uiProp?.value })">
               {{ displayedModelValue }}
             </span>
@@ -570,8 +594,8 @@ defineExpose({
         </slot>
 
         <span v-if="isTrailing || !!slots.trailing || !!clear" data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
-          <slot name="trailing" :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)" :open="open" :ui="ui">
-            <ComboboxCancel v-if="!!clear && !isModelValueEmpty(modelValue as GetModelValue<T, VK, M, ExcludeItem>)" as-child>
+          <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
+            <ComboboxCancel v-if="!!clear && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" as-child>
               <UButton
                 as="span"
                 :icon="clearIcon || appConfig.ui.icons.close"
@@ -603,6 +627,9 @@ defineExpose({
               autocomplete="off"
               :size="selectSize"
               v-bind="searchInputProps"
+              :model-modifiers="{
+                trim: modelModifiers?.trim
+              }"
               data-slot="input"
               :class="ui.input({ class: uiProp?.input })"
               @change.stop

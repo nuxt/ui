@@ -50,7 +50,7 @@ type DotPathKeys<T> = T extends Array<any>
     ? {
         [K in keyof T & string]:
         T[K] extends Record<string, any>
-          ? K | `${K}.${DotPathKeys<T[K]>}`
+          ? K | `${K}.${DotPathKeys<NonNullable<T[K]>>}`
           : K
       }[keyof T & string]
     : never
@@ -58,7 +58,7 @@ type DotPathKeys<T> = T extends Array<any>
 type DotPathValue<T, P extends DotPathKeys<T> | (string & {})>
   = P extends `${infer K}.${infer Rest}`
     ? K extends keyof T
-      ? DotPathValue<T[K], Rest>
+      ? DotPathValue<NonNullable<T[K]>, Rest>
       : never
     : P extends keyof T
       ? T[P]
