@@ -1,489 +1,389 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Sidebar > renders with body slot correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2">Body slot</div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6">Body slot</div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with class correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block custom-class" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem] custom-class">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with close correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
-  <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
-      <div data-slot="header" class="flex items-center gap-1.5 p-4">
+  <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear data-[state=collapsed]:w-(--sidebar-width-icon)"></div><!-- Fixed container: the actual visible sidebar -->
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default data-[state=collapsed]:w-(--sidebar-width-icon)">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
+      <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16 group-data-[state=collapsed]/sidebar:overflow-hidden group-data-[state=collapsed]/sidebar:p-2">
         <div data-slot="wrapper" class="">
           <p data-slot="title" class="text-highlighted font-semibold">Sidebar Title</p>
           <!--v-if-->
-        </div>
-        <!--v-if-->
+        </div><button type="button" aria-label="Close sidebar" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
+          <!--v-if-->
+          <!--v-if-->
+        </button>
       </div>
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6 group-data-[state=collapsed]/sidebar:overflow-hidden"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with collapsed icon correctly 1`] = `
-"<div data-slot="root" data-state="collapsed" data-collapsible="icon" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="collapsed" data-collapsible="icon" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="collapsed" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear data-[state=collapsed]:w-(--sidebar-width-icon)"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="collapsed" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default data-[state=collapsed]:w-(--sidebar-width-icon)">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="collapsed" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default data-[state=collapsed]:w-(--sidebar-width-icon)">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2 group-data-[state=collapsed]/sidebar:overflow-hidden"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6 group-data-[state=collapsed]/sidebar:overflow-hidden"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with collapsed offcanvas correctly 1`] = `
-"<div data-slot="root" data-state="collapsed" data-collapsible="offcanvas" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="collapsed" data-collapsible="offcanvas" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="collapsed" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear data-[state=collapsed]:w-0"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="collapsed" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default data-[state=collapsed]:w-0 data-[state=collapsed]:-left-(--sidebar-width)">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="collapsed" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default data-[state=collapsed]:w-0 data-[state=collapsed]:-left-(--sidebar-width)">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with collapsible icon correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear data-[state=collapsed]:w-(--sidebar-width-icon)"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default data-[state=collapsed]:w-(--sidebar-width-icon)">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default data-[state=collapsed]:w-(--sidebar-width-icon)">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2 group-data-[state=collapsed]/sidebar:overflow-hidden"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6 group-data-[state=collapsed]/sidebar:overflow-hidden"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with collapsible none correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with collapsible offcanvas correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear data-[state=collapsed]:w-0"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default data-[state=collapsed]:w-0 data-[state=collapsed]:-left-(--sidebar-width)">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default data-[state=collapsed]:w-0 data-[state=collapsed]:-left-(--sidebar-width)">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with content slot correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with default slot correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2">Default slot</div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6">Default slot</div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with description correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
-      <div data-slot="header" class="flex items-center gap-1.5 p-4">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
+      <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
         <div data-slot="wrapper" class="">
           <p data-slot="title" class="text-highlighted font-semibold">Sidebar Title</p>
           <p data-slot="description" class="mt-1 text-muted text-sm">Sidebar Description</p>
         </div>
         <!--v-if-->
       </div>
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with footer slot correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
-      <div data-slot="footer" class="flex flex-col gap-2 p-4">Footer slot</div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
+      <div data-slot="footer" class="flex items-center gap-1.5 p-4 sm:px-6">Footer slot</div>
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with header slot correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
-      <div data-slot="header" class="flex items-center gap-1.5 p-4">Header slot</div>
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
+      <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">Header slot</div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
-`;
-
-exports[`Sidebar > renders with iconWidth correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 4rem;">
-  <!-- Gap spacer: reserves layout space for the fixed sidebar -->
-  <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
-      <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
-      <!--v-if-->
-    </div>
-  </div>
-</div>
-<!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with mode drawer correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-
-
-<!---->
-<!---->
-
-
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with mode modal correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-
-
-
-<!---->
-<!---->
-
-
-
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with mode slideover correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-
-
-<!---->
-<!---->
-
-
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with side left correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with side right correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="right" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="right" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex right-0 border-s border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col right-0 border-s border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with title correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
-      <div data-slot="header" class="flex items-center gap-1.5 p-4">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
+      <div data-slot="header" class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
         <div data-slot="wrapper" class="">
           <p data-slot="title" class="text-highlighted font-semibold">Sidebar Title</p>
           <!--v-if-->
         </div>
         <!--v-if-->
       </div>
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with ui correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-4"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6 py-4"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with variant floating correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="floating" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="floating" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default p-2">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default rounded-lg border border-default shadow-sm">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-default p-2 border-0">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default rounded-lg border border-default shadow-sm">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with variant inset correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="inset" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="inset" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default p-2">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default rounded-lg">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-default p-2 border-0">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default rounded-lg">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;
 
 exports[`Sidebar > renders with variant sidebar correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;">
+"<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]">
   <!-- Gap spacer: reserves layout space for the fixed sidebar -->
   <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex flex-col left-0 border-e border-default">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
       <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6"></div>
       <!--v-if-->
     </div>
   </div>
-</div>
+</aside>
 <!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
-`;
-
-exports[`Sidebar > renders with width correctly 1`] = `
-"<div data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="group/sidebar peer text-default hidden lg:block" style="--sidebar-width: 20rem; --sidebar-width-icon: 3rem;">
-  <!-- Gap spacer: reserves layout space for the fixed sidebar -->
-  <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear"></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex left-0 border-e border-default">
-    <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default">
-      <!--v-if-->
-      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2"></div>
-      <!--v-if-->
-    </div>
-  </div>
-</div>
-<!-- Mobile menu -->
-<!--v-if-->
-<!--teleport start-->
-<!--teleport end-->"
+<!--v-if-->"
 `;

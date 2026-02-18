@@ -6,6 +6,7 @@ const route = useRoute()
 const variant = computed(() => (route.query.variant as 'sidebar' | 'floating' | 'inset') || 'sidebar')
 const collapsible = computed(() => (route.query.collapsible as 'offcanvas' | 'icon' | 'none') || 'icon')
 const side = computed(() => (route.query.side as 'left' | 'right') || 'left')
+const mode = computed(() => (route.query.mode as 'modal' | 'slideover' | 'drawer') || 'slideover')
 
 const open = ref(true)
 
@@ -33,6 +34,7 @@ const items: NavigationMenuItem[] = [{
       :variant="variant"
       :collapsible="collapsible"
       :side="side"
+      :mode="mode"
       title="Navigation"
       close
     >

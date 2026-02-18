@@ -1,16 +1,16 @@
 export default {
   slots: {
-    root: 'group/sidebar peer text-default hidden lg:block',
+    root: 'group/sidebar peer text-default hidden lg:block [--sidebar-width:28rem] [--sidebar-width-icon:4rem]',
     gap: 'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',
     container: 'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex',
-    inner: 'flex size-full flex-col overflow-hidden bg-default',
-    header: 'flex items-center gap-1.5 p-4',
+    inner: 'flex size-full flex-col overflow-hidden bg-default divide-y divide-default',
+    header: 'flex items-center gap-1.5 p-4 sm:px-6 min-h-16',
     wrapper: '',
     title: 'text-highlighted font-semibold',
     description: 'mt-1 text-muted text-sm',
-    close: 'ms-auto',
-    body: 'flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-2',
-    footer: 'flex flex-col gap-2 p-4',
+    close: 'absolute top-4 end-4',
+    body: 'flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 sm:p-6',
+    footer: 'flex items-center gap-1.5 p-4 sm:px-6',
     overlay: 'lg:hidden'
   },
   variants: {
@@ -39,11 +39,11 @@ export default {
     variant: {
       sidebar: {},
       floating: {
-        container: 'p-2',
+        container: 'p-2 border-0',
         inner: 'rounded-lg border border-default shadow-sm'
       },
       inset: {
-        container: 'p-2',
+        container: 'p-2 border-0',
         inner: 'rounded-lg'
       }
     }

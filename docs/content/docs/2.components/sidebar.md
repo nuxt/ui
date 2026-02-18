@@ -13,7 +13,7 @@ links:
 The Sidebar component is a standalone, fixed sidebar that pushes the page content. On desktop, it renders inline and can be collapsed; on mobile, it opens as a sheet (Modal, Slideover or Drawer).
 
 ::tip{to="/docs/components/dashboard-sidebar"}
-If you're building a dashboard layout with drag-to-resize, state persistence and integration with `DashboardGroup`, `DashboardPanel` and `DashboardNavbar`, use the [DashboardSidebar](/docs/components/dashboard-sidebar) instead. The **Sidebar** component is designed for standalone use cases like a chat panel or a settings panel on any page.
+**Sidebar vs DashboardSidebar**: This component is a simple, standalone sidebar you can drop anywhere (chat panel, settings, navigation). If you need drag-to-resize, state persistence and integration with [DashboardGroup](/docs/components/dashboard-group), use [DashboardSidebar](/docs/components/dashboard-sidebar) instead.
 ::
 
 Use the `title`, `description` and `close` props to customize the sidebar header just like the [Modal](/docs/components/modal), [Slideover](/docs/components/slideover) and [Drawer](/docs/components/drawer) components.
@@ -111,9 +111,71 @@ options:
 ---
 ::
 
-### Title / Description / Close
+### Title
 
-Use the `title`, `description` and `close` props to customize the sidebar header.
+Use the `title` prop to set the title of the sidebar header.
+
+::component-example
+---
+collapse: true
+name: 'sidebar-title-example'
+class: '!p-0 !justify-start'
+iframe:
+  height: 500px;
+iframeMobile: true
+overflowHidden: true
+---
+::
+
+### Description
+
+Use the `description` prop to set the description of the sidebar header.
+
+::component-example
+---
+collapse: true
+name: 'sidebar-description-example'
+class: '!p-0 !justify-start'
+iframe:
+  height: 500px;
+iframeMobile: true
+overflowHidden: true
+---
+::
+
+### Close
+
+Use the `close` prop to display a close button in the sidebar header. The close button is only rendered when `collapsible` is not `none`.
+
+You can pass any property from the [Button](/docs/components/button) component to customize it.
+
+::component-example
+---
+collapse: true
+name: 'sidebar-close-example'
+class: '!p-0 !justify-start'
+iframe:
+  height: 500px;
+iframeMobile: true
+overflowHidden: true
+---
+::
+
+### Close Icon
+
+Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+
+::component-example
+---
+collapse: true
+name: 'sidebar-close-icon-example'
+class: '!p-0 !justify-start'
+iframe:
+  height: 500px;
+iframeMobile: true
+overflowHidden: true
+---
+::
 
 ::tip
 You can use the `#title`, `#description` and `#close` slots to customize them.
@@ -121,13 +183,54 @@ You can use the `#title`, `#description` and `#close` slots to customize them.
 
 ### Width
 
-Use the `width` prop to change the width of the sidebar. Defaults to `16rem`.
+The sidebar width is controlled by the `--sidebar-width` CSS variable (defaults to `28rem`). The collapsed icon width is controlled by `--sidebar-width-icon` (defaults to `4rem`).
 
-Use the `icon-width` prop to change the width of the sidebar when collapsed to icon mode. Defaults to `3rem`.
+Override them globally in your CSS or per-instance with the `style` attribute:
+
+```vue
+<USidebar :style="{ '--sidebar-width': '20rem' }" />
+```
+
+### With Navbar
+
+To position the sidebar below a fixed navbar, customize the container position using the `ui` prop:
+
+```vue
+<USidebar
+  :ui="{
+    gap: 'h-[calc(100vh-var(--ui-header-height))]',
+    container: 'top-[var(--ui-header-height)] bottom-0 h-[calc(100vh-var(--ui-header-height))]'
+  }"
+/>
+```
+
+::note
+The `--ui-header-height` variable defaults to `4rem` and is used by the [Header](/docs/components/header) and [DashboardNavbar](/docs/components/dashboard-navbar) components. Adjust it if your navbar uses a different height.
+::
 
 ### Mode
 
 Use the `mode` prop to change the mode of the sidebar menu on mobile. Defaults to `slideover`.
+
+::component-example
+---
+collapse: true
+name: 'sidebar-example'
+class: '!p-0 !justify-start'
+iframe:
+  height: 500px;
+iframeMobile: true
+overflowHidden: true
+options:
+  - name: 'mode'
+    label: 'mode'
+    default: 'slideover'
+    items:
+      - modal
+      - slideover
+      - drawer
+---
+::
 
 ::tip{to="#props"}
 You can use the `menu` prop to customize the menu of the sidebar, it will adapt depending on the mode you choose.
@@ -152,6 +255,25 @@ overflowHidden: true
 
 ::note
 In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the open state of the Sidebar by pressing :kbd{value="O"}.
+::
+
+### Persist open state
+
+Use [`useLocalStorage`](https://vueuse.org/core/useLocalStorage/) from VueUse or [`useCookie`](https://nuxt.com/docs/4.x/api/composables/use-cookie) instead of `ref` to persist the sidebar state across page reloads.
+
+::component-example
+---
+name: 'sidebar-persist-example'
+class: '!p-0 !justify-start'
+iframe:
+  height: 500px;
+iframeMobile: true
+overflowHidden: true
+---
+::
+
+::note
+The only difference with the previous example is replacing `ref(true)` with `useLocalStorage('sidebar-open', true)`.
 ::
 
 ## API

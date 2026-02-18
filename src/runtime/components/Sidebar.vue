@@ -6,10 +6,16 @@ import type { ComponentConfig } from '../types/tv'
 
 type Sidebar = ComponentConfig<typeof theme, AppConfig, 'sidebar'>
 
+type SidebarState = 'expanded' | 'collapsed'
 type SidebarMode = 'modal' | 'slideover' | 'drawer'
 type SidebarMenu<T> = T extends 'modal' ? ModalProps : T extends 'slideover' ? SlideoverProps : T extends 'drawer' ? DrawerProps : never
 
 export interface SidebarProps<T extends SidebarMode = SidebarMode> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'aside'
+   */
+  as?: any
   /**
    * The visual variant of the sidebar.
    * @defaultValue 'sidebar'
@@ -58,34 +64,25 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
    * The props for the sidebar menu component on mobile.
    */
   menu?: SidebarMenu<T>
-  /**
-   * The width of the sidebar.
-   * @defaultValue '16rem'
-   */
-  width?: string
-  /**
-   * The width of the sidebar when collapsed to icon mode.
-   * @defaultValue '3rem'
-   */
-  iconWidth?: string
   class?: any
   ui?: Sidebar['slots']
 }
 
 export interface SidebarSlots {
-  header(props: { state: 'expanded' | 'collapsed', open: boolean, close: () => void }): any
+  header(props: { state: SidebarState, open: boolean, close: () => void }): any
   title(props?: {}): any
   description(props?: {}): any
   close(props: { ui: Sidebar['ui'] }): any
-  body(props: { state: 'expanded' | 'collapsed', open: boolean, close: () => void }): any
-  default(props: { state: 'expanded' | 'collapsed', open: boolean, close: () => void }): any
-  footer(props: { state: 'expanded' | 'collapsed', open: boolean, close: () => void }): any
+  body(props: { state: SidebarState, open: boolean, close: () => void }): any
+  default(props: { state: SidebarState, open: boolean, close: () => void }): any
+  footer(props: { state: SidebarState, open: boolean, close: () => void }): any
   content(props: { close: () => void }): any
 }
 </script>
 
 <script setup lang="ts" generic="T extends SidebarMode">
 import { computed, ref, toRef, watch } from 'vue'
+import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useMediaQuery } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -100,13 +97,12 @@ import UDrawer from './Drawer.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SidebarProps<T>>(), {
+  as: 'aside',
   variant: 'sidebar',
   collapsible: 'none',
   side: 'left',
   close: false,
-  mode: 'slideover' as never,
-  width: '16rem',
-  iconWidth: '3rem'
+  mode: 'slideover' as never
 })
 const slots = defineSlots<SidebarSlots>()
 
@@ -160,7 +156,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as Sidebar['AppConfig']
 const uiProp = useComponentUI('sidebar', props)
 
-const state = computed<'expanded' | 'collapsed'>(() => modelOpen.value ? 'expanded' : 'collapsed')
+const state = computed<SidebarState>(() => modelOpen.value ? 'expanded' : 'collapsed')
 
 // Close button only works when collapsible is not 'none'
 const canClose = computed(() => props.close && props.collapsible !== 'none')
@@ -195,7 +191,8 @@ const menuProps = toRef(() => defu(props.menu, {
 </script>
 
 <template>
-  <div
+  <Primitive
+    :as="as"
     v-bind="$attrs"
     data-slot="root"
     :data-state="state"
@@ -203,7 +200,6 @@ const menuProps = toRef(() => defu(props.menu, {
     :data-variant="variant"
     :data-side="side"
     :class="ui.root({ class: [uiProp?.root, props.class] })"
-    :style="{ '--sidebar-width': width, '--sidebar-width-icon': iconWidth }"
   >
     <!-- Gap spacer: reserves layout space for the fixed sidebar -->
     <div
@@ -235,6 +231,8 @@ const menuProps = toRef(() => defu(props.menu, {
               </p>
             </div>
 
+            <slot name="actions" />
+
             <slot name="close" :ui="ui">
               <UButton
                 v-if="canClose"
@@ -262,10 +260,11 @@ const menuProps = toRef(() => defu(props.menu, {
         </div>
       </div>
     </div>
-  </div>
+  </Primitive>
 
   <!-- Mobile menu -->
   <Menu
+    v-if="isMobile"
     v-model:open="openMobile"
     v-bind="menuProps"
     :ui="{
@@ -273,17 +272,17 @@ const menuProps = toRef(() => defu(props.menu, {
     }"
   >
     <template v-if="!!slots.content" #content="contentData">
-      <slot name="content" v-bind="contentData" />
+      <slot name="content" v-bind="contentData" :close="closeSidebar" />
     </template>
 
     <template #body>
-      <slot name="body" :state="'expanded'" :open="true" :close="closeSidebar">
+      <slot name="body" state="expanded" :open="true" :close="closeSidebar">
         <slot :state="'expanded'" :open="true" :close="closeSidebar" />
       </slot>
     </template>
 
     <template v-if="!!slots.footer" #footer>
-      <slot name="footer" :state="'expanded'" :open="true" :close="closeSidebar" />
+      <slot name="footer" state="expanded" :open="true" :close="closeSidebar" />
     </template>
   </Menu>
 </template>

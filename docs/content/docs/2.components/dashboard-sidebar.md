@@ -13,7 +13,7 @@ links:
 The DashboardSidebar component is used to display a sidebar in a dashboard layout. It supports drag-to-resize, state persistence and integrates with [DashboardGroup](/docs/components/dashboard-group), [DashboardPanel](/docs/components/dashboard-panel) and [DashboardNavbar](/docs/components/dashboard-navbar).
 
 ::tip{to="/docs/components/sidebar"}
-For a standalone sidebar that doesn't require a dashboard layout (e.g., a chat panel or settings panel), use the [Sidebar](/docs/components/sidebar) component instead.
+**DashboardSidebar vs Sidebar**: This component is designed for dashboard layouts with drag-to-resize, state persistence and `DashboardGroup` integration. For a simple, standalone sidebar (chat panel, settings, navigation), use [Sidebar](/docs/components/sidebar) instead.
 ::
 
 Its state (size, collapsed, etc.) will be saved based on the `storage` and `storage-key` props you provide to the [DashboardGroup](/docs/components/dashboard-group#props) component.

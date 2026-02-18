@@ -27,21 +27,23 @@ function onSubmit() {
 </script>
 
 <template>
-  <div class="flex flex-1 overflow-hidden relative">
+  <div class="flex flex-1">
     <div class="flex-1 flex flex-col">
-      <Navbar>
-        <template #trailing>
-          <UButton
-            icon="i-lucide-panel-right"
-            color="neutral"
-            variant="ghost"
-            size="sm"
-            @click="open = !open"
-          />
-        </template>
+      <Navbar class="relative w-full">
+        <UButton
+          icon="i-lucide-panel-right"
+          color="neutral"
+          variant="ghost"
+          size="sm"
+          @click="open = !open"
+        />
+
+        <USlideover title="AI Chat" side="right" :transition="false" :overlay="false">
+          <UButton label="Open" color="neutral" variant="subtle" />
+        </USlideover>
       </Navbar>
 
-      <div class="flex-1 p-6 mt-16">
+      <div class="flex-1 p-6">
         <USkeleton class="size-full animate-pulse" />
       </div>
     </div>
@@ -58,6 +60,7 @@ function onSubmit() {
           :messages="chat.messages"
           :status="chat.status"
           compact
+          class="px-0"
         />
       </template>
 
