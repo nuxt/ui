@@ -95,6 +95,13 @@ export type LinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'extern
 export interface LinkSlots {
   default(props: { active: boolean }): any
 }
+
+// from upstream NuxtLink
+interface NuxtLinkDefaultSlotProps {
+  rel: string | null
+  target: '_blank' | '_parent' | '_self' | '_top' | (string & {}) | null
+  isExternal: boolean
+}
 </script>
 
 <script setup lang="ts">
@@ -176,7 +183,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
 </script>
 
 <template>
-  <NuxtLink v-slot="{ href, navigate, route: linkRoute, rel, target, isExternal, isActive, isExactActive }" v-bind="nuxtLinkProps" :to="to" custom>
+  <NuxtLink v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive, ...rest }" v-bind="nuxtLinkProps" :to="to" custom>
     <template v-if="custom">
       <slot
         v-bind="{
@@ -187,9 +194,9 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
           disabled,
           href,
           navigate,
-          rel,
-          target,
-          isExternal,
+          rel: (rest as NuxtLinkDefaultSlotProps).rel,
+          target: (rest as NuxtLinkDefaultSlotProps).target,
+          isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal,
           active: isLinkActive({ route: linkRoute, isActive, isExactActive })
         }"
       />
@@ -204,9 +211,9 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
         disabled,
         href,
         navigate,
-        rel,
-        target,
-        isExternal
+        rel: (rest as NuxtLinkDefaultSlotProps).rel,
+        target: (rest as NuxtLinkDefaultSlotProps).target,
+        isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal
       }"
       :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
     >

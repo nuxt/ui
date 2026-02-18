@@ -3,7 +3,7 @@
 import type { NavigationMenuRootProps, NavigationMenuContentProps, NavigationMenuContentEmits, AccordionRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/navigation-menu'
-import type { AvatarProps, BadgeProps, IconProps, LinkProps, PopoverProps, TooltipProps } from '../types'
+import type { AvatarProps, BadgeProps, ChipProps, IconProps, LinkProps, PopoverProps, TooltipProps } from '../types'
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -28,8 +28,14 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
    */
   badge?: string | number | BadgeProps
   /**
-   * Display a tooltip on the item when the menu is collapsed with the label of the item.
-   * This has priority over the global `tooltip` prop.
+   * Display a chip around the icon of the item.
+   * `{ inset: true }`{lang="ts-type"}
+   */
+  chip?: boolean | ChipProps
+  /**
+   * Display a tooltip on the item with the label of the item.
+   * In `vertical` orientation, only works when the menu is `collapsed`.
+   * In `horizontal` orientation, works on any item.
    */
   tooltip?: boolean | TooltipProps
   /**
@@ -59,7 +65,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   open?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<NavigationMenu['slots'], 'item' | 'linkLeadingAvatarSize' | 'linkLeadingAvatar' | 'linkLeadingIcon' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkTrailing' | 'linkTrailingBadgeSize' | 'linkTrailingBadge' | 'linkTrailingIcon' | 'label' | 'link' | 'content' | 'childList' | 'childLabel' | 'childItem' | 'childLink' | 'childLinkIcon' | 'childLinkWrapper' | 'childLinkLabel' | 'childLinkLabelExternalIcon' | 'childLinkDescription'>
+  ui?: Pick<NavigationMenu['slots'], 'item' | 'linkLeadingAvatarSize' | 'linkLeadingAvatar' | 'linkLeadingIcon' | 'linkLeadingChipSize' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkTrailing' | 'linkTrailingBadgeSize' | 'linkTrailingBadge' | 'linkTrailingIcon' | 'label' | 'link' | 'content' | 'childList' | 'childLabel' | 'childItem' | 'childLink' | 'childLinkIcon' | 'childLinkWrapper' | 'childLinkLabel' | 'childLinkLabelExternalIcon' | 'childLinkDescription'>
   [key: string]: any
 }
 
@@ -140,7 +146,8 @@ export interface NavigationMenuProps<
    */
   collapsed?: boolean
   /**
-   * Display a tooltip on the items when the menu is collapsed with the label of the item.
+   * Display a tooltip on the items with the label of the item.
+   * Only works when `orientation` is `vertical` and `collapsed` is `true`.
    * `{ delayDuration: 0, content: { side: 'right' } }`{lang="ts-type"}
    * @defaultValue false
    */
@@ -231,6 +238,7 @@ import ULink from './Link.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UBadge from './Badge.vue'
+import UChip from './Chip.vue'
 import UPopover from './Popover.vue'
 import UTooltip from './Tooltip.vue'
 
@@ -265,7 +273,7 @@ const rootProps = useForwardPropsEmits(computed(() => ({
 })), emits)
 const accordionProps = useForwardPropsEmits(reactivePick(props, 'collapsible', 'disabled', 'type', 'unmountOnHide'), emits)
 const contentProps = toRef(() => props.content)
-const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as TooltipProps)
+const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { ...(props.orientation === 'vertical' && { delayDuration: 0, content: { side: 'right' } }) }) as TooltipProps)
 const popoverProps = toRef(() => defu(typeof props.popover === 'boolean' ? {} : props.popover, { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }) as PopoverProps)
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean }>()
@@ -312,6 +320,15 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
     <slot :name="((item.slot || 'item') as keyof NavigationMenuSlots<T>)" :item="item" :index="index" :active="active" :ui="ui">
       <slot :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
         <UAvatar v-if="item.avatar" :size="((item.ui?.linkLeadingAvatarSize || uiProp?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="linkLeadingAvatar" :class="ui.linkLeadingAvatar({ class: [uiProp?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active, disabled: !!item.disabled })" />
+        <UChip
+          v-else-if="item.icon && item.chip"
+          :size="((item.ui?.linkLeadingChipSize || uiProp?.linkLeadingChipSize || ui.linkLeadingChipSize()) as ChipProps['size'])"
+          inset
+          v-bind="typeof item.chip === 'object' ? item.chip : {}"
+          data-slot="linkLeadingChip"
+        >
+          <UIcon :name="item.icon" data-slot="linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [uiProp?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })" />
+        </UChip>
         <UIcon v-else-if="item.icon" :name="item.icon" data-slot="linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [uiProp?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })" />
       </slot>
 
@@ -407,7 +424,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
               </slot>
             </template>
           </UPopover>
-          <UTooltip v-else-if="orientation === 'vertical' && collapsed && (!!props.tooltip || !!item.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
+          <UTooltip v-else-if="(orientation === 'vertical' && collapsed && (!!props.tooltip || !!item.tooltip)) || (orientation === 'horizontal' && !!item.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
             <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [uiProp?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })">
               <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
             </ULinkBase>

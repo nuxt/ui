@@ -5,7 +5,7 @@ export default {
     body: 'flex flex-col min-w-0',
     footer: 'flex flex-col gap-6 items-center',
     titleWrapper: 'flex items-center gap-3',
-    title: 'text-highlighted text-2xl sm:text-3xl text-pretty font-semibold',
+    title: 'text-highlighted truncate text-2xl sm:text-3xl text-pretty font-semibold',
     description: 'text-muted text-base text-pretty mt-2',
     priceWrapper: 'flex items-center gap-1',
     price: 'text-highlighted text-3xl sm:text-4xl font-semibold',

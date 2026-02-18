@@ -30,7 +30,13 @@ playgrounds/
 
 ## CLI for Scaffolding
 
-Always use the CLI when creating new components:
+Link the CLI first (one-time setup):
+
+```bash
+npm link
+```
+
+Then use it to create new components:
 
 ```bash
 nuxt-ui make component <name> [options]
@@ -111,6 +117,7 @@ PR Review:
 ## Commands
 
 ```bash
+pnpm run dev:prepare  # Generate type stubs (run after install)
 pnpm run dev          # Nuxt playground
 pnpm run dev:vue      # Vue playground
 pnpm run docs         # Documentation site

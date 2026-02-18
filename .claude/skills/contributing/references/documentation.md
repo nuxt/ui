@@ -312,6 +312,11 @@ Configure icons in your Vite config.
 4. **Document all props** with examples
 5. **Include `class` and `ui` examples** in every component doc
 6. **Link to related components** when relevant
+7. **Mark unreleased features** - When documenting a new feature that has not yet been released, append `:badge{label="Soon" class="align-text-top"}` to the heading. This signals to users that the feature is upcoming. The maintainer will replace `Soon` with the actual version number (e.g., `4.4+`) at release time.
+
+```md
+### With chip in items :badge{label="Soon" class="align-text-top"}
+```
 
 ## Categories
 

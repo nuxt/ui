@@ -87,7 +87,8 @@ export const collections = {
       category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay', 'dashboard', 'page', 'chat', 'editor', 'color-mode', 'i18n']).optional(),
       framework: z.enum(['nuxt', 'vue']).optional(),
       navigation: z.object({
-        title: z.string().optional()
+        title: z.string().optional(),
+        badge: z.string().optional()
       }),
       links: z.array(Button)
     })

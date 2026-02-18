@@ -91,6 +91,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTime ||
 
 const inputsRef = ref<ComponentPublicInstance[]>([])
 
+function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  inputsRef.value[index] = el
+}
+
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -143,7 +148,7 @@ defineExpose({
     <TimeFieldInput
       v-for="(segment, index) in segments"
       :key="`${segment.part}-${index}`"
-      :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
+      :ref="el => setInputRef(index, el)"
       :part="segment.part"
       data-slot="segment"
       :class="ui.segment({ class: uiProp?.segment })"

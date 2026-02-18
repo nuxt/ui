@@ -104,6 +104,7 @@ describe('NavigationMenu', () => {
     ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { ...props, variant, color: 'neutral', highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant} highlight neutral`, { props: { ...props, variant, color: 'neutral', highlight: true, highlightColor: 'neutral' } }]),
+    ['with chip', { props: { items: [[{ label: 'Guide', icon: 'i-lucide-book-open', chip: true }, { label: 'Components', icon: 'i-lucide-box', chip: { color: 'error' } }]] } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-plus' } }],
     ['with externalIcon', { props: { ...props, externalIcon: 'i-lucide-external-link' } }],
     ['without externalIcon', { props: { ...props, externalIcon: false } }],
