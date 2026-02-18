@@ -73,10 +73,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}
 const rootClass = computed(() => ui.value.root({ class: [uiProp.value?.root, props.class] }))
 
 const sizePx = computed(() => {
-  const sizeClass = rootClass.value.split(' ').find(c => c.startsWith('size-'))
-  const numericValue = sizeClass ? Number.parseFloat(sizeClass.split('-')[1] ?? '') : Number.NaN
+  const classes = ui.value.root({ class: [uiProp.value?.root, props.class] })
+  const sizeClass = classes.split(' ').find(c => /^size-\d/.test(c))
+  if (sizeClass) {
+    const num = Number.parseFloat(sizeClass.split('-')[1] ?? '')
+    if (!Number.isNaN(num)) return num * 4
+  }
 
-  return !Number.isNaN(numericValue) ? numericValue * 4 : 32
+  const sizeMap: Record<string, number> = {
+    '3xs': 16, '2xs': 20, 'xs': 24, 'sm': 28,
+    'md': 32, 'lg': 36, 'xl': 40, '2xl': 44, '3xl': 48
+  }
+
+  return sizeMap[size.value || 'md']
 })
 
 const error = ref(false)

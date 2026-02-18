@@ -696,7 +696,7 @@ exports[`FileUpload > renders with size lg correctly 1`] = `
     </div>
   </div>
   <div data-slot="files" class="">
-    <div data-slot="file" class="text-sm gap-2 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-lg shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div data-slot="file" class="text-sm gap-2 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-lg shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="36" height="36" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate text-xs">0B</span></div><button type="button" aria-label="Remove file.txt" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="trailingIcon"></span>
@@ -714,7 +714,7 @@ exports[`FileUpload > renders with size lg variant button correctly 1`] = `
     </div>
   </button>
   <div data-slot="files" class="">
-    <div data-slot="file" class="text-sm gap-2 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-lg shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div data-slot="file" class="text-sm gap-2 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-lg shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="36" height="36" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate text-xs">0B</span></div><button type="button" aria-label="Remove file.txt" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="trailingIcon"></span>
@@ -774,7 +774,7 @@ exports[`FileUpload > renders with size sm correctly 1`] = `
     </div>
   </div>
   <div data-slot="files" class="">
-    <div data-slot="file" class="text-xs gap-1.5 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-sm shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div data-slot="file" class="text-xs gap-1.5 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-sm shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="28" height="28" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="min-w-0 flex-row gap-1 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" aria-label="Remove file.txt" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="trailingIcon"></span>
@@ -792,7 +792,7 @@ exports[`FileUpload > renders with size sm variant button correctly 1`] = `
     </div>
   </button>
   <div data-slot="files" class="">
-    <div data-slot="file" class="text-xs gap-1.5 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-sm shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div data-slot="file" class="text-xs gap-1.5 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-sm shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="28" height="28" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="min-w-0 flex-row gap-1 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" aria-label="Remove file.txt" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="trailingIcon"></span>
@@ -813,7 +813,7 @@ exports[`FileUpload > renders with size xl correctly 1`] = `
     </div>
   </div>
   <div data-slot="files" class="">
-    <div data-slot="file" class="text-sm gap-2 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-xl shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div data-slot="file" class="text-sm gap-2 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-xl shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="40" height="40" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" aria-label="Remove file.txt" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="trailingIcon"></span>
@@ -831,7 +831,7 @@ exports[`FileUpload > renders with size xl variant button correctly 1`] = `
     </div>
   </button>
   <div data-slot="files" class="">
-    <div data-slot="file" class="text-sm gap-2 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-xl shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div data-slot="file" class="text-sm gap-2 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-xl shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="40" height="40" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" aria-label="Remove file.txt" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="trailingIcon"></span>
@@ -852,7 +852,7 @@ exports[`FileUpload > renders with size xs correctly 1`] = `
     </div>
   </div>
   <div data-slot="files" class="">
-    <div data-slot="file" class="text-xs gap-1 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-xs shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div data-slot="file" class="text-xs gap-1 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-xs shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="24" height="24" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="min-w-0 flex-row gap-1 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" aria-label="Remove file.txt" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="trailingIcon"></span>
@@ -870,7 +870,7 @@ exports[`FileUpload > renders with size xs variant button correctly 1`] = `
     </div>
   </button>
   <div data-slot="files" class="">
-    <div data-slot="file" class="text-xs gap-1 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-xs shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div data-slot="file" class="text-xs gap-1 absolute inset-0 p-0"><span data-slot="root" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-xs shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" width="24" height="24" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="min-w-0 flex-row gap-1 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" aria-label="Remove file.txt" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true" data-slot="trailingIcon"></span>
