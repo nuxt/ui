@@ -86,16 +86,24 @@ useHead({
   ]
 })
 
-const communityLinks = computed(() => [{
+const { open, messages } = useChat()
+
+const links = computed(() => [{
   icon: 'i-lucide-file-pen',
   label: 'Edit this page',
   to: `https://github.com/nuxt/ui/edit/v4/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
-  icon: 'i-lucide-star',
-  label: 'Star on GitHub',
-  to: `https://github.com/nuxt/ui`,
-  target: '_blank'
+  icon: 'i-lucide-bot',
+  label: 'Explain with AI',
+  onClick: () => {
+    messages.value = [{
+      id: String(Date.now()),
+      role: 'user',
+      parts: [{ type: 'text', text: `Read the documentation page at ${page.value?.path} and summarize it. I want to ask questions about it.` }]
+    }]
+    open.value = true
+  }
 }])
 </script>
 
@@ -148,11 +156,11 @@ const communityLinks = computed(() => [{
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>
-      <UContentToc :links="page.body.toc.links" class="z-[2]">
+      <UContentToc :links="page.body.toc.links" class="z-2">
         <template #bottom>
           <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
 
-          <UPageLinks title="Community" :links="communityLinks" />
+          <UPageLinks :links="links" />
 
           <USeparator type="dashed" />
 

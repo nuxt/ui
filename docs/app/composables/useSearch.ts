@@ -1,18 +1,12 @@
-import type { UIMessage } from 'ai'
-
 export function useSearch() {
   const route = useRoute()
   const { frameworks } = useFrameworks()
   const { track } = useAnalytics()
+  const { open, messages } = useChat()
 
-  const chat = ref(false)
-  const fullscreen = ref(false)
   const searchTerm = ref('')
-  const messages = ref<UIMessage[]>([])
 
-  function onSelect(e: any) {
-    e.preventDefault()
-
+  function onSelect() {
     track('AI Chat Opened', { hasSearchTerm: !!searchTerm.value })
 
     messages.value = searchTerm.value
@@ -27,7 +21,7 @@ export function useSearch() {
           parts: [{ type: 'text', text: 'Hello, how can I help you today?' }]
         }]
 
-    chat.value = true
+    open.value = true
   }
 
   const links = computed(() => [!searchTerm.value && {
@@ -134,9 +128,6 @@ export function useSearch() {
   return {
     links,
     groups,
-    chat,
-    fullscreen,
-    searchTerm,
-    messages
+    searchTerm
   }
 }

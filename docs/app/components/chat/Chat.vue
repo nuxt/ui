@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DefineComponent } from 'vue'
 import { Chat } from '@ai-sdk/vue'
-import type { UIMessage, UIToolInvocation } from 'ai'
+import type { UIToolInvocation } from 'ai'
 import { DefaultChatTransport } from 'ai'
 import { splitByCase, upperFirst } from 'scule'
 import ProseStreamPre from '../prose/PreStream.vue'
@@ -10,12 +10,7 @@ const components = {
   pre: ProseStreamPre as unknown as DefineComponent
 }
 
-const messages = defineModel<UIMessage[]>('messages')
-const fullscreen = defineModel<boolean>('fullscreen')
-
-const emits = defineEmits<{
-  close: []
-}>()
+const { open, messages } = useChat()
 
 const input = ref('')
 
@@ -54,13 +49,7 @@ function onSubmit() {
   input.value = ''
 }
 
-function onClose(e: Event) {
-  e.preventDefault()
-
-  emits('close')
-}
-
-onMounted(() => {
+watch(messages, () => {
   if (chat.lastMessage?.role === 'user') {
     chat.regenerate()
   }
@@ -99,56 +88,79 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
 </script>
 
 <template>
-  <UChatPalette>
-    <UChatMessages
-      should-auto-scroll
-      :messages="chat.messages"
-      :status="chat.status"
-      :user="{ side: 'left', variant: 'naked', icon: 'i-lucide-user' }"
-      :assistant="{ icon: 'i-lucide-bot' }"
-    >
-      <template #content="{ message }">
-        <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${part.state}` : ''}`">
-          <MDCCached
-            v-if="part.type === 'text' && message.role === 'assistant'"
-            :value="part.text"
-            :cache-key="`${message.id}-${index}`"
-            :components="components"
-            :parser-options="{ highlight: false }"
-            class="[&_.my-5]:my-2.5 *:first:!mt-0 *:last:!mb-0 [&_.leading-7]:!leading-6"
-          />
-          <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">
-            {{ part.text }}
-          </p>
+  <USidebar
+    v-model:open="open"
+    side="right"
+    collapsible="offcanvas"
+    title="AI Assistant"
+    close
+    :ui="{ footer: 'sm:px-4' }"
+  >
+    <template #body>
+      <UTheme
+        :ui="{
+          prose: {
+            p: { base: 'my-2.5 text-sm/6' },
+            li: { base: 'my-0.5 text-sm/6' },
+            ul: { base: 'my-2.5' },
+            ol: { base: 'my-2.5' },
+            h1: { base: 'text-xl mb-4' },
+            h2: { base: 'text-lg mt-6 mb-3' },
+            h3: { base: 'text-base mt-4 mb-2' },
+            h4: { base: 'text-sm mt-3 mb-1.5' },
+            code: { base: 'text-xs' },
+            pre: { root: 'my-2.5', base: 'text-xs/5' },
+            table: { root: 'my-2.5' },
+            hr: { base: 'my-5' }
+          }
+        }"
+      >
+        <UChatMessages
+          should-auto-scroll
+          :messages="chat.messages"
+          :status="chat.status"
+          compact
+          class="px-0"
+          :user="{ ui: { content: 'text-sm/6', container: 'pb-2.5' } }"
+        >
+          <template #content="{ message }">
+            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${part.state}` : ''}`">
+              <MDCCached
+                v-if="part.type === 'text' && message.role === 'assistant'"
+                :value="part.text"
+                :cache-key="`${message.id}-${index}`"
+                :components="components"
+                :parser-options="{ highlight: false }"
+                class="*:first:mt-0! *:last:mb-0!"
+              />
+              <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">
+                {{ part.text }}
+              </p>
 
-          <p v-else-if="part.type === 'dynamic-tool'" class="text-muted text-sm leading-6 my-1.5">
-            {{ getCachedToolMessage(part.state, part.toolName, JSON.stringify(part.input || {})) }}
-          </p>
-        </template>
-      </template>
-    </UChatMessages>
+              <p v-else-if="part.type === 'dynamic-tool'" class="text-muted text-sm leading-6 my-1.5">
+                {{ getCachedToolMessage(part.state, part.toolName, JSON.stringify(part.input || {})) }}
+              </p>
+            </template>
+          </template>
+        </UChatMessages>
+      </UTheme>
+    </template>
 
-    <template #prompt>
+    <template #footer>
       <UChatPrompt
         v-model="input"
-        icon="i-lucide-message-circle"
-        variant="naked"
         :error="chat.error"
-        :ui="{ trailing: 'items-center' }"
+        :ui="{ body: 'items-center', base: 'px-0' }"
         @submit="onSubmit"
-        @close="onClose"
       >
-        <template #trailing>
-          <UButton
-            :icon="fullscreen ? 'i-lucide-maximize' : 'i-lucide-minimize'"
-            color="neutral"
-            variant="ghost"
-            class="group"
-            :ui="{ leadingIcon: 'text-dimmed group-hover:text-muted transition' }"
-            @click="fullscreen = !fullscreen"
-          />
-        </template>
+        <UChatPromptSubmit
+          color="neutral"
+          size="sm"
+          :status="chat.status"
+          @stop="chat.stop()"
+          @reload="chat.regenerate()"
+        />
       </UChatPrompt>
     </template>
-  </UChatPalette>
+  </USidebar>
 </template>

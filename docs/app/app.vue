@@ -59,7 +59,7 @@ provide('navigation', rootNavigation)
     <SpeedInsights />
 
     <div class="flex">
-      <div :class="[route.path.startsWith('/docs/') && 'root']">
+      <div class="flex-1" :class="[route.path.startsWith('/docs/') && 'root']">
         <template v-if="!route.path.startsWith('/examples')">
           <!-- <Banner /> -->
 
@@ -79,7 +79,7 @@ provide('navigation', rootNavigation)
         </template>
       </div>
 
-      <USidebar side="right" />
+      <Chat />
     </div>
   </UApp>
 </template>
