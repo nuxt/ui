@@ -35,6 +35,8 @@ export type SelectItem = SelectValue | {
   [key: string]: any
 }
 
+type ExcludeItem = { type: 'label' | 'separator' }
+
 export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string
   /** The placeholder text when the select is empty. */
@@ -95,10 +97,10 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   descriptionKey?: GetItemKeys<T>
   items?: T
   /** The value of the Select when initially rendered. Use when you do not need to control the state of the Select. */
-  defaultValue?: GetModelValue<T, VK, M>
+  defaultValue?: GetModelValue<T, VK, M, ExcludeItem>
   /** The controlled value of the Select. Can be bind as `v-model`. */
-  modelValue?: GetModelValue<T, VK, M>
-  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>
+  modelValue?: GetModelValue<T, VK, M, ExcludeItem>
+  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M, ExcludeItem>>, 'lazy'>
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
@@ -113,7 +115,7 @@ export type SelectEmits<A extends ArrayOrNested<SelectItem>, VK extends GetItemK
   change: [event: Event]
   blur: [event: FocusEvent]
   focus: [event: FocusEvent]
-} & GetModelValueEmits<A, VK, M>
+} & GetModelValueEmits<A, VK, M, ExcludeItem>
 
 type SlotProps<T extends SelectItem> = (props: { item: T, index: number, ui: Select['ui'] }) => any
 
@@ -123,9 +125,9 @@ export interface SelectSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: Select['ui'] }): any
-  'default'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: Select['ui'] }): any
-  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: Select['ui'] }): any
+  'leading'(props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>, open: boolean, ui: Select['ui'] }): any
+  'default'(props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>, open: boolean, ui: Select['ui'] }): any
+  'trailing'(props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>, open: boolean, ui: Select['ui'] }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label'(props: { item: T, index: number }): any
@@ -200,10 +202,10 @@ const groups = computed<SelectItem[][]>(() =>
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
-function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
+function displayValue(value: GetItemValue<T, VK, ExcludeItem> | GetItemValue<T, VK, ExcludeItem>[]): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map(item => getDisplayValue<T[], GetItemValue<T, VK>>(items.value, item, {
+      .map(item => getDisplayValue<T[], GetItemValue<T, VK, ExcludeItem>>(items.value, item, {
         labelKey: props.labelKey,
         valueKey: props.valueKey
       }))
@@ -212,7 +214,7 @@ function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): strin
     return displayedValues.length > 0 ? displayedValues.join(', ') : undefined
   }
 
-  return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value as GetItemValue<T, VK>, {
+  return getDisplayValue<T[], GetItemValue<T, VK, ExcludeItem>>(items.value, value as GetItemValue<T, VK, ExcludeItem>, {
     labelKey: props.labelKey,
     valueKey: props.valueKey
   })
@@ -303,14 +305,14 @@ defineExpose({
       v-bind="{ ...$attrs, ...ariaAttrs }"
     >
       <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
-        <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
+        <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
           <UAvatar v-else-if="!!avatar" :size="((uiProp?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: uiProp?.itemLeadingAvatar })" />
         </slot>
       </span>
 
-      <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
-        <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
+      <slot :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)" :open="open" :ui="ui">
+        <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M, ExcludeItem>)]" :key="displayedModelValue">
           <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" data-slot="value" :class="ui.value({ class: uiProp?.value })">
             {{ displayedModelValue }}
           </span>
@@ -321,7 +323,7 @@ defineExpose({
       </slot>
 
       <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
-        <slot name="trailing" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
+        <slot name="trailing" :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)" :open="open" :ui="ui">
           <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon })" />
         </slot>
       </span>

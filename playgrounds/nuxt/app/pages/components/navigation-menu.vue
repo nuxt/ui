@@ -27,6 +27,7 @@ const items = [
     label: 'Documentation',
     icon: 'i-lucide-book-open',
     badge: 10,
+    chip: true,
     children: [{
       label: 'Introduction',
       description: 'Fully styled and customizable components for Nuxt.',
@@ -87,7 +88,11 @@ const items = [
     label: 'GitHub',
     icon: 'i-simple-icons-github',
     to: 'https://github.com/nuxt/ui',
-    target: '_blank'
+    target: '_blank',
+    tooltip: {
+      text: 'Open on GitHub',
+      kbds: ['meta', 'G']
+    }
   }, {
     label: 'Help',
     icon: 'i-lucide-circle-help',
