@@ -152,6 +152,8 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   /**
    * Determines if custom user input that does not exist in options can be added.
    * @defaultValue false
@@ -302,6 +304,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
   size: inputSize?.value,
   loading: props.loading,
   highlight: highlight.value,
+  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   multiple: props.multiple,

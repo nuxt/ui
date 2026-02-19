@@ -16,7 +16,7 @@ export default (options: Required<ModuleOptions>) => ({
     ...fieldGroupVariantWithRoot,
     size: {
       xs: {
-        base: 'px-2 py-1 text-xs gap-1',
+        base: 'px-2 py-1 text-sm/4 gap-1',
         leading: 'ps-2',
         trailing: 'pe-2',
         leadingIcon: 'size-4',
@@ -24,7 +24,7 @@ export default (options: Required<ModuleOptions>) => ({
         trailingIcon: 'size-4'
       },
       sm: {
-        base: 'px-2.5 py-1.5 text-xs gap-1.5',
+        base: 'px-2.5 py-1.5 text-sm/4 gap-1.5',
         leading: 'ps-2.5',
         trailing: 'pe-2.5',
         leadingIcon: 'size-4',
@@ -32,7 +32,7 @@ export default (options: Required<ModuleOptions>) => ({
         trailingIcon: 'size-4'
       },
       md: {
-        base: 'px-2.5 py-1.5 text-base/5 md:text-sm gap-1.5',
+        base: 'px-2.5 py-1.5 text-base/5 gap-1.5',
         leading: 'ps-2.5',
         trailing: 'pe-2.5',
         leadingIcon: 'size-5',
@@ -40,7 +40,7 @@ export default (options: Required<ModuleOptions>) => ({
         trailingIcon: 'size-5'
       },
       lg: {
-        base: 'px-3 py-2 text-base/5 md:text-sm gap-2',
+        base: 'px-3 py-2 text-base/5 gap-2',
         leading: 'ps-3',
         trailing: 'pe-3',
         leadingIcon: 'size-5',
@@ -78,6 +78,9 @@ export default (options: Required<ModuleOptions>) => ({
     },
     highlight: {
       true: ''
+    },
+    fixed: {
+      false: ''
     },
     type: {
       file: 'file:me-1.5 file:font-medium file:text-muted file:outline-none'
@@ -152,6 +155,22 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       trailingIcon: 'animate-spin'
     }
+  }, {
+    fixed: false,
+    size: 'xs',
+    class: 'md:text-xs'
+  }, {
+    fixed: false,
+    size: 'sm',
+    class: 'md:text-xs'
+  }, {
+    fixed: false,
+    size: 'md',
+    class: 'md:text-sm'
+  }, {
+    fixed: false,
+    size: 'lg',
+    class: 'md:text-sm'
   }],
   defaultVariants: {
     size: 'md',

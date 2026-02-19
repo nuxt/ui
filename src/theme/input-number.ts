@@ -19,10 +19,10 @@ export default (options: Required<ModuleOptions>) => {
         neutral: ''
       },
       size: {
-        xs: 'px-2 py-1 text-xs gap-1',
-        sm: 'px-2.5 py-1.5 text-xs gap-1.5',
-        md: 'px-2.5 py-1.5 text-base/5 md:text-sm gap-1.5',
-        lg: 'px-3 py-2 text-base/5 md:text-sm gap-2',
+        xs: 'px-2 py-1 text-sm/4 gap-1',
+        sm: 'px-2.5 py-1.5 text-sm/4 gap-1.5',
+        md: 'px-2.5 py-1.5 text-base/5 gap-1.5',
+        lg: 'px-3 py-2 text-base/5 gap-2',
         xl: 'px-3 py-2 text-base gap-2'
       },
       variant: {
@@ -47,6 +47,9 @@ export default (options: Required<ModuleOptions>) => {
       },
       highlight: {
         true: ''
+      },
+      fixed: {
+        false: ''
       },
       increment: {
         false: ''
@@ -115,6 +118,22 @@ export default (options: Required<ModuleOptions>) => {
       increment: true,
       size: 'xl',
       class: 'pe-11'
+    }, {
+      fixed: false,
+      size: 'xs',
+      class: 'md:text-xs'
+    }, {
+      fixed: false,
+      size: 'sm',
+      class: 'md:text-xs'
+    }, {
+      fixed: false,
+      size: 'md',
+      class: 'md:text-sm'
+    }, {
+      fixed: false,
+      size: 'lg',
+      class: 'md:text-sm'
     }],
     defaultVariants: {
       size: 'md',

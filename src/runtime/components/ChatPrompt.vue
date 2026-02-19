@@ -106,6 +106,7 @@ defineExpose({
       :placeholder="placeholder || t('chatPrompt.placeholder')"
       :disabled="Boolean(error) || disabled"
       variant="none"
+      fixed
       v-bind="{ ...textareaProps, ...$attrs }"
       :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), uiProp)"
       data-slot="body"
