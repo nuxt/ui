@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => {
   return defuFn({
     slots: {
       root: () => undefined,
-      base: () => ['relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+      base: () => ['relative group rounded-md inline-flex items-center outline-transparent disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
       value: 'truncate pointer-events-none',
       placeholder: 'truncate text-dimmed',
       arrow: 'fill-default',
@@ -94,6 +94,9 @@ export default (options: Required<ModuleOptions>) => {
         }
       }
     },
+    color: (prev: Record<string, string>) => Object.fromEntries(
+      Object.entries(prev).map(([key, value]) => [key, replaceFocus(value)])
+    ),
     compoundVariants: (prev: Record<string, any>[]) => prev.map(item => ({
       ...item,
       class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class

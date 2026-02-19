@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
     indicator: 'absolute transition-[translate,width] duration-200',
-    trigger: ['group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+    trigger: ['group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md outline-transparent disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     leadingAvatarSize: '',
@@ -27,8 +27,7 @@ export default (options: Required<ModuleOptions>) => ({
       },
       link: {
         list: 'border-default',
-        indicator: 'rounded-full',
-        trigger: 'focus:outline-none'
+        indicator: 'rounded-full'
       }
     },
     orientation: {
@@ -103,28 +102,28 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'pill',
     class: {
       indicator: `bg-${color}`,
-      trigger: `data-[state=active]:text-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}`
+      trigger: `data-[state=active]:text-inverted focus-visible:outline-2 focus-visible:outline-${color}/25 focus-visible:ring focus-visible:ring-inset focus-visible:ring-${color}/50`
     }
   })), {
     color: 'neutral',
     variant: 'pill',
     class: {
       indicator: 'bg-inverted',
-      trigger: 'data-[state=active]:text-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted'
+      trigger: 'data-[state=active]:text-inverted focus-visible:outline-2 focus-visible:outline-primary/25 focus-visible:ring focus-visible:ring-inset focus-visible:ring-primary/50'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'link',
     class: {
       indicator: `bg-${color}`,
-      trigger: `data-[state=active]:text-${color} focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`
+      trigger: `data-[state=active]:text-${color} focus-visible:outline-2 focus-visible:outline-${color}/25 focus-visible:ring focus-visible:ring-inset focus-visible:ring-${color}/50`
     }
   })), {
     color: 'neutral',
     variant: 'link',
     class: {
       indicator: 'bg-inverted',
-      trigger: 'data-[state=active]:text-highlighted focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted'
+      trigger: 'data-[state=active]:text-highlighted focus-visible:outline-2 focus-visible:outline-primary/25 focus-visible:ring focus-visible:ring-inset focus-visible:ring-primary/50'
     }
   }],
   defaultVariants: {

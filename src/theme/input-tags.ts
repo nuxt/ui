@@ -36,6 +36,9 @@ export default (options: Required<ModuleOptions>) => {
           itemDeleteIcon: 'size-4'
         }
       },
+      color: (prev: Record<string, string>) => Object.fromEntries(
+        Object.entries(prev).map(([key, value]) => [key, replaceFocus(value)])
+      ),
       variant: (prev: Record<string, string>) => Object.fromEntries(
         Object.entries(prev).map(([key, value]) => [key, replaceFocus(value)])
       )

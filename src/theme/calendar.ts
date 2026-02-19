@@ -13,18 +13,18 @@ export default (options: Required<ModuleOptions>) => ({
     headCell: 'rounded-md',
     headCellWeek: 'rounded-md text-muted',
     cell: 'relative text-center',
-    cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold data-[outside-view]:text-muted', options.theme.transitions && 'transition'],
+    cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap outline-transparent focus-visible:outline-2 focus-visible:ring focus-visible:ring-inset data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold data-[outside-view]:text-muted', options.theme.transitions && 'transition'],
     cellWeek: 'relative text-center text-muted'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
         headCell: `text-${color}`,
-        cellTrigger: `focus-visible:ring-${color}`
+        cellTrigger: `focus-visible:outline-${color}/25 focus-visible:ring-${color}/50`
       }])),
       neutral: {
         headCell: 'text-highlighted',
-        cellTrigger: 'focus-visible:ring-inverted'
+        cellTrigger: 'focus-visible:outline-primary/25 focus-visible:ring-primary/50'
       }
     },
     variant: {

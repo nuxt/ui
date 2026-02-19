@@ -4,7 +4,7 @@ import { fieldGroupVariantWithRoot } from './field-group'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative inline-flex items-center',
-    base: ['w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+    base: ['w-full rounded-md appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 outline-transparent focus-visible:outline-2 focus-visible:outline-offset-0', options.theme.transitions && 'transition-colors'],
     leading: 'absolute inset-y-0 start-0 flex items-center',
     leadingIcon: 'shrink-0 text-dimmed',
     leadingAvatar: 'shrink-0',
@@ -61,11 +61,11 @@ export default (options: Required<ModuleOptions>) => ({
       soft: 'text-highlighted bg-elevated/50 hover:bg-elevated focus:bg-elevated disabled:bg-elevated/50',
       subtle: 'text-highlighted bg-elevated ring ring-inset ring-accented',
       ghost: 'text-highlighted bg-transparent hover:bg-elevated focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent',
-      none: 'text-highlighted bg-transparent'
+      none: 'text-highlighted bg-transparent focus-visible:outline-none'
     },
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `focus-visible:outline-${color}/25`])),
+      neutral: 'focus-visible:outline-primary/25'
     },
     leading: {
       true: ''
@@ -88,20 +88,22 @@ export default (options: Required<ModuleOptions>) => ({
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
-    variant: ['outline', 'subtle'],
-    class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`
-  })), ...(options.theme.colors || []).map((color: string) => ({
-    color,
     highlight: true,
     class: `ring ring-inset ring-${color}`
+  })), ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    highlight: false,
+    variant: ['outline', 'soft', 'subtle', 'ghost'],
+    class: `focus-visible:ring focus-visible:ring-inset focus-visible:ring-${color}/50`
   })), {
-    color: 'neutral',
-    variant: ['outline', 'subtle'],
-    class: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted'
-  }, {
     color: 'neutral',
     highlight: true,
     class: 'ring ring-inset ring-inverted'
+  }, {
+    color: 'neutral',
+    highlight: false,
+    variant: ['outline', 'soft', 'subtle', 'ghost'],
+    class: 'focus-visible:ring focus-visible:ring-inset focus-visible:ring-primary/50'
   }, {
     leading: true,
     size: 'xs',

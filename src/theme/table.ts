@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     base: 'min-w-full',
     caption: 'sr-only',
     thead: 'relative',
-    tbody: 'isolate [&>tr]:data-[selectable=true]:hover:bg-elevated/50 [&>tr]:data-[selectable=true]:focus-visible:outline-primary',
+    tbody: 'isolate [&>tr]:data-[selectable=true]:hover:bg-elevated/50 [&>tr]:data-[selectable=true]:focus-visible:outline-2 [&>tr]:data-[selectable=true]:focus-visible:outline-primary/25 [&>tr]:data-[selectable=true]:focus-visible:ring [&>tr]:data-[selectable=true]:focus-visible:ring-inset [&>tr]:data-[selectable=true]:focus-visible:ring-primary/50',
     tfoot: 'relative',
     tr: 'data-[selected=true]:bg-elevated/50',
     th: 'px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pe-0',

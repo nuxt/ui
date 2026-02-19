@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     item: 'w-full',
     listWithChildren: 'border-s border-default',
     itemWithChildren: 'ps-1.5 -ms-px',
-    link: 'relative group w-full flex items-center text-sm select-none before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'relative group w-full flex items-center text-sm select-none before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md before:outline-transparent focus-visible:before:outline-2 focus-visible:before:ring focus-visible:before:ring-inset',
     linkLeadingIcon: 'shrink-0 relative',
     linkLabel: 'truncate',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
@@ -20,10 +20,10 @@ export default (options: Required<ModuleOptions>) => ({
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        link: `focus-visible:before:ring-${color}`
+        link: `focus-visible:before:outline-${color}/25 focus-visible:before:ring-${color}/50`
       }])),
       neutral: {
-        link: 'focus-visible:before:ring-inverted'
+        link: 'focus-visible:before:outline-primary/25 focus-visible:before:ring-primary/50'
       }
     },
     size: {

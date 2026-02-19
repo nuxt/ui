@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     list: 'isolate min-w-0',
     label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 text-highlighted px-2.5 py-1.5',
     item: 'min-w-0',
-    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md before:outline-transparent focus-visible:before:outline-2 focus-visible:before:ring focus-visible:before:ring-inset',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
@@ -20,7 +20,7 @@ export default (options: Required<ModuleOptions>) => ({
     childList: 'isolate',
     childLabel: 'text-xs text-highlighted',
     childItem: '',
-    childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md before:outline-transparent focus-visible:before:outline-2 focus-visible:before:ring focus-visible:before:ring-inset',
     childLinkWrapper: 'min-w-0',
     childLinkIcon: 'size-5 shrink-0',
     childLinkLabel: 'truncate',
@@ -36,12 +36,12 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        link: `focus-visible:before:ring-${color}`,
-        childLink: `focus-visible:before:ring-${color}`
+        link: `focus-visible:before:outline-${color}/25 focus-visible:before:ring-${color}/50`,
+        childLink: `focus-visible:before:outline-${color}/25 focus-visible:before:ring-${color}/50`
       }])),
       neutral: {
-        link: 'focus-visible:before:ring-inverted',
-        childLink: 'focus-visible:before:ring-inverted'
+        link: 'focus-visible:before:outline-primary/25 focus-visible:before:ring-primary/50',
+        childLink: 'focus-visible:before:outline-primary/25 focus-visible:before:ring-primary/50'
       }
     },
     highlightColor: {

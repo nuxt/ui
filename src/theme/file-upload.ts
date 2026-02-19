@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex flex-col',
-    base: ['w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2', options.theme.transitions && 'transition-[background]'],
+    base: ['w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg outline-transparent focus-visible:outline-2', options.theme.transitions && 'transition-[background]'],
     wrapper: 'flex flex-col items-center justify-center text-center',
     icon: 'shrink-0',
     avatar: 'shrink-0',
@@ -96,14 +96,14 @@ export default (options: Required<ModuleOptions>) => ({
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
-    class: `focus-visible:outline-${color}`
+    class: `focus-visible:outline-${color}/25 focus-visible:ring focus-visible:ring-inset focus-visible:ring-${color}/50`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     highlight: true,
     class: `border-${color}`
   })), {
     color: 'neutral',
-    class: 'focus-visible:outline-inverted'
+    class: 'focus-visible:outline-primary/25 focus-visible:ring focus-visible:ring-inset focus-visible:ring-primary/50'
   }, {
     color: 'neutral',
     highlight: true,

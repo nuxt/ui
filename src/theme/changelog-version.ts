@@ -31,7 +31,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     to: {
       true: {
-        title: ['has-focus-visible:ring-2 has-focus-visible:ring-primary rounded-xs', options.theme.transitions && 'transition'],
+        title: ['outline-transparent has-focus-visible:outline-2 has-focus-visible:outline-primary/25 has-focus-visible:ring has-focus-visible:ring-inset has-focus-visible:ring-primary/50 rounded-xs', options.theme.transitions && 'transition'],
         image: 'transform transition-transform duration-200 group-hover/changelog-version-image:scale-105 group-has-focus-visible/changelog-version-image:scale-105'
       }
     },

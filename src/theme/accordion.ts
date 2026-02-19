@@ -3,7 +3,7 @@ export default {
     root: 'w-full',
     item: 'border-b border-default last:border-b-0',
     header: 'flex',
-    trigger: 'group flex-1 flex items-center gap-1.5 font-medium text-sm py-3.5 focus-visible:outline-primary min-w-0',
+    trigger: 'group flex-1 flex items-center gap-1.5 font-medium text-sm py-3.5 rounded-lg outline-transparent focus-visible:outline-2 focus-visible:outline-primary/25 focus-visible:ring focus-visible:ring-inset focus-visible:ring-primary/50 min-w-0',
     content: 'data-[state=open]:animate-[accordion-down_200ms_ease-out] data-[state=closed]:animate-[accordion-up_200ms_ease-out] overflow-hidden focus:outline-none',
     body: 'text-sm pb-3.5',
     leadingIcon: 'shrink-0 size-5',

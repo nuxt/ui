@@ -8,15 +8,15 @@ export default (options: Required<ModuleOptions>) => {
   return {
     slots: {
       root: 'relative inline-flex items-center',
-      base: ['w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+      base: ['w-full rounded-md placeholder:text-dimmed outline-transparent disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
       increment: 'absolute flex items-center',
       decrement: 'absolute flex items-center'
     },
     variants: {
       ...fieldGroupVariantWithRoot,
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-        neutral: ''
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `focus-visible:outline-2 focus-visible:outline-${color}/25`])),
+        neutral: 'focus-visible:outline-2 focus-visible:outline-primary/25'
       },
       size: {
         xs: 'px-2 py-1 text-sm/4 gap-1',
@@ -60,20 +60,20 @@ export default (options: Required<ModuleOptions>) => {
     },
     compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
       color,
-      variant: ['outline', 'subtle'],
-      class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`
-    })), ...(options.theme.colors || []).map((color: string) => ({
-      color,
       highlight: true,
       class: `ring ring-inset ring-${color}`
+    })), ...(options.theme.colors || []).map((color: string) => ({
+      color,
+      highlight: false,
+      class: `focus-visible:ring focus-visible:ring-inset focus-visible:ring-${color}/50`
     })), {
-      color: 'neutral',
-      variant: ['outline', 'subtle'],
-      class: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted'
-    }, {
       color: 'neutral',
       highlight: true,
       class: 'ring ring-inset ring-inverted'
+    }, {
+      color: 'neutral',
+      highlight: false,
+      class: 'focus-visible:ring focus-visible:ring-inset focus-visible:ring-primary/50'
     }, {
       orientation: 'horizontal',
       decrement: false,

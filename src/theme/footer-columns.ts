@@ -9,7 +9,7 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'text-sm font-semibold',
     list: 'mt-6 space-y-4',
     item: 'relative',
-    link: 'group text-sm flex items-center gap-1.5 focus-visible:outline-primary',
+    link: 'group text-sm flex items-center gap-1.5 outline-transparent focus-visible:outline-2 focus-visible:outline-primary/25 focus-visible:ring focus-visible:ring-inset focus-visible:ring-primary/50',
     linkLeadingIcon: 'size-5 shrink-0',
     linkLabel: 'truncate',
     linkLabelExternalIcon: 'size-3 absolute top-0 text-dimmed inline-block'
