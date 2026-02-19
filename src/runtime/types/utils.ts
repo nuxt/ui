@@ -64,22 +64,32 @@ type DotPathValue<T, P extends DotPathKeys<T> | (string & {})>
       ? T[P]
       : never
 
-export type GetItemKeys<I> = keyof Extract<NestedItem<I>, object> | DotPathKeys<Extract<NestedItem<I>, object>>
+// Non-recursive 2-level unwrap used as a fast-path so TypeScript can eagerly resolve branded/complex types.
+type _FlatItem<I> = I extends readonly (infer Item)[]
+  ? Item extends readonly (infer SubItem)[] ? SubItem : Item
+  : I
+
+export type GetItemKeys<I>
+  = | keyof Extract<_FlatItem<I>, object>
+    | keyof Extract<NestedItem<I>, object>
+    | DotPathKeys<Extract<NestedItem<I>, object>>
 
 export type GetItemValue<
   I,
   VK extends GetItemKeys<I> | undefined,
   O extends object | undefined = undefined,
-  T extends NestedItem<I> = NestedItem<I>
+  T extends _FlatItem<I> = _FlatItem<I>
 >
   = T extends object
     ? VK extends undefined
       ? T extends O
         ? never
         : T
-      : VK extends DotPathKeys<T>
-        ? DotPathValue<T, VK>
-        : never
+      : VK extends keyof T
+        ? T[VK]
+        : VK extends DotPathKeys<T>
+          ? DotPathValue<T, VK>
+          : never
     : T
 
 export type GetModelValue<
