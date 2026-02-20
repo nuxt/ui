@@ -50,6 +50,8 @@ function onSubmit() {
 }
 
 watch(messages, (newMessages) => {
+  if (newMessages === chat.messages) return
+
   chat.messages = newMessages
   if (chat.lastMessage?.role === 'user') {
     chat.regenerate()
@@ -95,7 +97,8 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
     collapsible="offcanvas"
     title="AI Assistant"
     close
-    :ui="{ footer: 'sm:px-4' }"
+    :ui="{ footer: 'sm:px-4', container: 'sticky' }"
+    :style="{ '--sidebar-width': '20rem' }"
   >
     <template #body>
       <UTheme
@@ -151,7 +154,9 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
       <UChatPrompt
         v-model="input"
         :error="chat.error"
-        :ui="{ body: 'items-center', base: 'px-0' }"
+        size="sm"
+        :autoresize="open"
+        :ui="{ base: 'px-0' }"
         @submit="onSubmit"
       >
         <UChatPromptSubmit
