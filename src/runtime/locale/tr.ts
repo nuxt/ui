@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Kodu panoya kopyala'
       }
     },
+    sidebar: {
+      close: 'Kapat'
+    },
     selectMenu: {
       create: '"{label}" oluştur',
       noData: 'Veri yok',

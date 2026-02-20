@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Αντιγραφή κώδικα στο πρόχειρο'
       }
     },
+    sidebar: {
+      close: 'Κλείσιμο'
+    },
     selectMenu: {
       create: 'Δημιουργία "{label}"',
       noData: 'Δεν υπάρχουν δεδομένα',

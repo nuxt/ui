@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Kopiér kode til udklipsholder'
       }
     },
+    sidebar: {
+      close: 'Luk'
+    },
     selectMenu: {
       create: 'Opret "{label}"',
       noData: 'Ingen data',

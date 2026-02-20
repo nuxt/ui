@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Salin kod ke papan klip'
       }
     },
+    sidebar: {
+      close: 'Tutup'
+    },
     selectMenu: {
       create: 'Cipta "{label}"',
       noData: 'Tiada data',

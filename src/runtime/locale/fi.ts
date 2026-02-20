@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Kopioi koodi leikepöydälle'
       }
     },
+    sidebar: {
+      close: 'Sulje'
+    },
     selectMenu: {
       create: 'Luo "{label}"',
       noData: 'Ei tietoja',

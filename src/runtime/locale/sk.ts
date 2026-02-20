@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Kopírovať kód do schránky'
       }
     },
+    sidebar: {
+      close: 'Zatvoriť'
+    },
     selectMenu: {
       create: 'Vytvoriť "{label}"',
       noData: 'Žiadne dáta',

@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Copiar codi al portapapers'
       }
     },
+    sidebar: {
+      close: 'Tancar'
+    },
     selectMenu: {
       create: 'Crear "{label}"',
       noData: 'Sense dades',

@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Скопировать код в буфер обмена'
       }
     },
+    sidebar: {
+      close: 'Закрыть'
+    },
     selectMenu: {
       create: 'Создать "{label}"',
       noData: 'Нет данных',

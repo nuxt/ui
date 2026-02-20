@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Kopiera kod till urklipp'
       }
     },
+    sidebar: {
+      close: 'Stäng'
+    },
     selectMenu: {
       create: 'Skapa "{label}"',
       noData: 'Inga data',

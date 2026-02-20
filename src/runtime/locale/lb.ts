@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Code an d\'Zwëschspäicher kopéieren'
       }
     },
+    sidebar: {
+      close: 'Zoumaachen'
+    },
     selectMenu: {
       create: '"{label}" erstellen',
       noData: 'Keng Donnéeën',

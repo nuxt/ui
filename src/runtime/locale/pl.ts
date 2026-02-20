@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Kopiuj kod do schowka'
       }
     },
+    sidebar: {
+      close: 'Zamknij'
+    },
     selectMenu: {
       create: 'Utwórz "{label}"',
       noData: 'Brak danych',

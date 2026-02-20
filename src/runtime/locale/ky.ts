@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Кодду алмашуу буферине көчүрүү'
       }
     },
+    sidebar: {
+      close: 'Жабуу'
+    },
     selectMenu: {
       create: '"{label}" жасоо',
       noData: 'Маалымат жок',

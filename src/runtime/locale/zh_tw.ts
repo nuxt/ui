@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: '複製程式碼到剪貼簿'
       }
     },
+    sidebar: {
+      close: '關閉'
+    },
     selectMenu: {
       create: '建立「{label}」',
       noData: '沒有資料',

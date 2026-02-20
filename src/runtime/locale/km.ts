@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'ចម្លងកូដទៅក្ដារតម្បៀតខ្ទាស់'
       }
     },
+    sidebar: {
+      close: 'បិទ'
+    },
     selectMenu: {
       create: 'បង្កើត "{label}"',
       noData: 'មិនមានទិន្នន័យ',

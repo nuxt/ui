@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: '코드를 클립보드에 복사'
       }
     },
+    sidebar: {
+      close: '닫기'
+    },
     selectMenu: {
       create: '"{label}" 생성',
       noData: '데이터가 없습니다.',

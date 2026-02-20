@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'コードをクリップボードにコピー'
       }
     },
+    sidebar: {
+      close: '閉じる'
+    },
     selectMenu: {
       create: '"{label}"を作成',
       noData: 'データがありません',

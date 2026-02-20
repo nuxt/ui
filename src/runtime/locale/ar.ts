@@ -113,6 +113,9 @@ export default defineLocale<Messages>({
         copy: 'نسخ الكود إلى الحافظة'
       }
     },
+    sidebar: {
+      close: 'إغلاق'
+    },
     selectMenu: {
       create: 'إنشاء "{label}"',
       noData: 'لا توجد بيانات',

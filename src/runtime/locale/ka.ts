@@ -114,6 +114,9 @@ export default defineLocale<Messages>({
         copy: 'კოდის კოპირება ბუფერში'
       }
     },
+    sidebar: {
+      close: 'დახურვა'
+    },
     selectMenu: {
       create: 'დაამატე "{label}"', // "Create" translates as "შექმნა", but since we are simply adding new choice, creating sounds wrong, thus I chose to use "დაამატე", meaning "add".
       noData: 'მონაცემები არ არის',

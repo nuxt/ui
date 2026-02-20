@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Нусха бардоштан'
       }
     },
+    sidebar: {
+      close: 'Бастан'
+    },
     selectMenu: {
       create: '"{label}" созед',
       noData: 'Маълумот нест',

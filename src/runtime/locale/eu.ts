@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Kopiatu kodea clipboard-era'
       }
     },
+    sidebar: {
+      close: 'Itxi'
+    },
     selectMenu: {
       create: 'Sortu {label}',
       noData: 'Daturik gabe',

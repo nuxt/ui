@@ -112,6 +112,9 @@ export default defineLocale<Messages>({
         copy: 'Kopjo kodin në kujtesë'
       }
     },
+    sidebar: {
+      close: 'Mbyll'
+    },
     selectMenu: {
       create: 'Krijo "{label}"',
       noData: 'Nuk ka të dhëna',
