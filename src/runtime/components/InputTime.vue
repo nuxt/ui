@@ -29,6 +29,8 @@ export interface InputTimeProps extends Omit<TimeFieldRootProps, 'as' | 'asChild
   size?: InputTime['variants']['size']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   autofocus?: boolean
   autofocusDelay?: number
   class?: any
@@ -70,7 +72,7 @@ const slots = defineSlots<InputTimeSlots>()
 const appConfig = useAppConfig() as InputTime['AppConfig']
 const uiProp = useComponentUI('inputTime', props)
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'color', 'variant', 'size', 'highlight', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'class', 'ui'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'class', 'ui'), emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputTimeProps>(props)
@@ -84,6 +86,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTime ||
   size: inputSize.value,
   loading: props.loading,
   highlight: highlight.value,
+  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value

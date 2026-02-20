@@ -28,6 +28,8 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue,
   size?: InputNumber['variants']['size']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   /**
    * The orientation of the input number.
    * @defaultValue 'horizontal'
@@ -120,6 +122,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber 
   variant: props.variant,
   size: inputSize.value,
   highlight: highlight.value,
+  fixed: props.fixed,
   orientation: props.orientation,
   fieldGroup: orientation.value,
   increment: props.orientation === 'vertical' ? (!!props.increment || !!props.decrement) : !!props.increment,

@@ -42,6 +42,8 @@ export interface InputProps<T extends InputValue = InputValue, Mod extends Model
   disabled?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   modelValue?: ApplyModifiers<T, Mod>
   defaultValue?: ApplyModifiers<T, Mod>
   modelModifiers?: Mod
@@ -104,6 +106,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {})
   size: inputSize?.value,
   loading: props.loading,
   highlight: highlight.value,
+  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value

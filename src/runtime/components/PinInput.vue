@@ -37,6 +37,8 @@ export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<Pin
   autofocus?: boolean
   autofocusDelay?: number
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   class?: any
   ui?: PinInput['slots']
 }
@@ -76,7 +78,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pinInput || 
   color: color.value,
   variant: props.variant,
   size: size.value,
-  highlight: highlight.value
+  highlight: highlight.value,
+  fixed: props.fixed
 }))
 
 const inputsRef = ref<ComponentPublicInstance[]>([])

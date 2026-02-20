@@ -8,16 +8,16 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     size: {
       xs: {
-        base: 'size-6 text-xs'
+        base: 'size-6 text-sm/4'
       },
       sm: {
-        base: 'size-7 text-xs'
+        base: 'size-7 text-sm/4'
       },
       md: {
-        base: 'size-8 text-base/5 md:text-sm'
+        base: 'size-8 text-base/5'
       },
       lg: {
-        base: 'size-9 text-base/5 md:text-sm'
+        base: 'size-9 text-base/5'
       },
       xl: {
         base: 'size-10 text-base'
@@ -36,6 +36,9 @@ export default (options: Required<ModuleOptions>) => ({
     },
     highlight: {
       true: ''
+    },
+    fixed: {
+      false: ''
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
@@ -54,6 +57,22 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'neutral',
     highlight: true,
     class: 'ring ring-inset ring-inverted'
+  }, {
+    fixed: false,
+    size: 'xs',
+    class: 'md:text-xs'
+  }, {
+    fixed: false,
+    size: 'sm',
+    class: 'md:text-xs'
+  }, {
+    fixed: false,
+    size: 'md',
+    class: 'md:text-sm'
+  }, {
+    fixed: false,
+    size: 'lg',
+    class: 'md:text-sm'
   }],
   defaultVariants: {
     size: 'md',

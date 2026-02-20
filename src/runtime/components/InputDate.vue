@@ -35,6 +35,8 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
   size?: InputDate['variants']['size']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   autofocus?: boolean
   autofocusDelay?: number
   /**
@@ -91,7 +93,7 @@ const slots = defineSlots<InputDateSlots>()
 const appConfig = useAppConfig() as InputDate['AppConfig']
 const uiProp = useComponentUI('inputDate', props)
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputDateProps<R>>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
@@ -108,6 +110,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputDate ||
   variant: props.variant,
   size: inputSize.value,
   highlight: highlight.value,
+  fixed: props.fixed,
   loading: props.loading,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,

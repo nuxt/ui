@@ -285,6 +285,7 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
+          :input="{ fixed: true }"
           :ui="transformUI(omit(ui, ['modal']), uiProp)"
           @update:model-value="onSelect"
           @update:open="open = $event"
