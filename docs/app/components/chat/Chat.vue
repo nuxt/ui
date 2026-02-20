@@ -49,7 +49,8 @@ function onSubmit() {
   input.value = ''
 }
 
-watch(messages, () => {
+watch(messages, (newMessages) => {
+  chat.messages = newMessages
   if (chat.lastMessage?.role === 'user') {
     chat.regenerate()
   }
