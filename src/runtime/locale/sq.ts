@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Mbyll'
+      close: 'Mbyll',
+      toggle: 'Ndërro'
     },
     selectMenu: {
       create: 'Krijo "{label}"',

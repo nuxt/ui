@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Uždaryti'
+      close: 'Uždaryti',
+      toggle: 'Perjungti'
     },
     selectMenu: {
       create: 'Sukurti „{label}"',

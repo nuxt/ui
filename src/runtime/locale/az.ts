@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Bağla'
+      close: 'Bağla',
+      toggle: 'Dəyişdir'
     },
     selectMenu: {
       create: '"{label}" yarat',

@@ -97,6 +97,7 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
     collapsible="offcanvas"
     title="AI Assistant"
     close
+    close-icon="i-lucide-chevron-right"
     :ui="{ footer: 'sm:px-4', container: 'sticky' }"
     :style="{ '--sidebar-width': '20rem' }"
   >

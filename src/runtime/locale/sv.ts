@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Stäng'
+      close: 'Stäng',
+      toggle: 'Växla'
     },
     selectMenu: {
       create: 'Skapa "{label}"',

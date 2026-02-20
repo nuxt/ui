@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Zatvori'
+      close: 'Zatvori',
+      toggle: 'Prebaci'
     },
     selectMenu: {
       create: 'Stvori "{label}"',

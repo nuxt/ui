@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Κλείσιμο'
+      close: 'Κλείσιμο',
+      toggle: 'Εναλλαγή'
     },
     selectMenu: {
       create: 'Δημιουργία "{label}"',

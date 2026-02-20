@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Zavřít'
+      close: 'Zavřít',
+      toggle: 'Přepnout'
     },
     selectMenu: {
       create: 'Vytvořit "{label}"',

@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Хаах'
+      close: 'Хаах',
+      toggle: 'Сэлгэх'
     },
     selectMenu: {
       create: '"{label}" үүсгэх',

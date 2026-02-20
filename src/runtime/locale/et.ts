@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Sulge'
+      close: 'Sulge',
+      toggle: 'Lülita'
     },
     selectMenu: {
       create: 'Loo "{label}"',

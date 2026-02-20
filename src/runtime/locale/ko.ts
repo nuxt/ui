@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: '닫기'
+      close: '닫기',
+      toggle: '토글'
     },
     selectMenu: {
       create: '"{label}" 생성',

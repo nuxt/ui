@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Cerrar'
+      close: 'Cerrar',
+      toggle: 'Alternar'
     },
     selectMenu: {
       create: 'Crear "{label}"',

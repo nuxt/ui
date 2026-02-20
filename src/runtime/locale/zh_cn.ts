@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: '关闭'
+      close: '关闭',
+      toggle: '切换'
     },
     selectMenu: {
       create: '创建 "{label}"',

@@ -114,7 +114,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'بستن'
+      close: 'بستن',
+      toggle: 'تغییر وضعیت'
     },
     selectMenu: {
       create: 'ایجاد "{label}"',

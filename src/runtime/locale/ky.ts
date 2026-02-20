@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Жабуу'
+      close: 'Жабуу',
+      toggle: 'Которуу'
     },
     selectMenu: {
       create: '"{label}" жасоо',

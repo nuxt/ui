@@ -114,7 +114,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'סגור'
+      close: 'סגור',
+      toggle: 'החלף'
     },
     selectMenu: {
       create: 'צור "{label}"',

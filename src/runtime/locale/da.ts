@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Luk'
+      close: 'Luk',
+      toggle: 'Skift'
     },
     selectMenu: {
       create: 'Opret "{label}"',

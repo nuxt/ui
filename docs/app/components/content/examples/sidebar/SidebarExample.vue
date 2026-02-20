@@ -28,7 +28,7 @@ const items: NavigationMenuItem[] = [{
 </script>
 
 <template>
-  <div class="flex h-svh w-full">
+  <div class="flex h-full w-full [contain:paint]">
     <USidebar
       v-model:open="open"
       :variant="variant"
@@ -37,6 +37,7 @@ const items: NavigationMenuItem[] = [{
       :mode="mode"
       title="Navigation"
       close
+      :ui="{ container: 'absolute' }"
     >
       <template #default="{ state }">
         <UNavigationMenu

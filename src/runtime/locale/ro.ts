@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Închide'
+      close: 'Închide',
+      toggle: 'Comutare'
     },
     selectMenu: {
       create: 'Creează "{label}"',

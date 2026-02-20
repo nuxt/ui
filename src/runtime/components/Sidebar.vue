@@ -56,6 +56,12 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
    */
   closeIcon?: IconProps['name']
   /**
+   * Display a rail on the sidebar edge to toggle collapse.
+   * Only renders when `collapsible` is not `none`.
+   * @defaultValue false
+   */
+  rail?: boolean
+  /**
    * The mode of the sidebar menu on mobile.
    * @defaultValue 'slideover'
    */
@@ -77,6 +83,7 @@ export interface SidebarSlots {
   body(props: { state: SidebarState, open: boolean, close: () => void }): any
   default(props: { state: SidebarState, open: boolean, close: () => void }): any
   footer(props: { state: SidebarState, open: boolean, close: () => void }): any
+  rail(props: { ui: Sidebar['ui'] }): any
   content(props: { close: () => void }): any
 }
 </script>
@@ -103,6 +110,7 @@ const props = withDefaults(defineProps<SidebarProps<T>>(), {
   collapsible: 'none',
   side: 'left',
   close: false,
+  rail: false,
   mode: 'slideover' as never
 })
 const slots = defineSlots<SidebarSlots>()
@@ -280,6 +288,17 @@ const menuProps = toRef(() => defu(props.menu, {
         :class="ui.container({ class: uiProp?.container })"
       >
         <ReuseInnerTemplate />
+
+        <slot v-if="rail" name="rail" :ui="ui">
+          <button
+            data-slot="rail"
+            :data-state="state"
+            :aria-label="t('sidebar.toggle')"
+            :tabindex="-1"
+            :class="ui.rail({ class: uiProp?.rail })"
+            @click="open = !open"
+          />
+        </slot>
       </div>
     </Primitive>
 

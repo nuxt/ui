@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Yopish'
+      close: 'Yopish',
+      toggle: 'Almashtirish'
     },
     selectMenu: {
       create: '"{label}" yaratish',

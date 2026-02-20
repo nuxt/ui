@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Lukk'
+      close: 'Lukk',
+      toggle: 'Veksle'
     },
     selectMenu: {
       create: 'Opprett "{label}"',

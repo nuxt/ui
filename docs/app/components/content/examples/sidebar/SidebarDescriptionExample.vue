@@ -18,12 +18,13 @@ const items: NavigationMenuItem[] = [{
 </script>
 
 <template>
-  <div class="flex h-svh w-full">
+  <div class="flex h-full w-full [contain:paint]">
     <USidebar
       v-model:open="open"
       collapsible="offcanvas"
       title="Navigation"
       description="Browse your workspace"
+      :ui="{ container: 'absolute' }"
     >
       <UNavigationMenu
         :items="items"

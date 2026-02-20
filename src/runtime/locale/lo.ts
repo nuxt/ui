@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'ປິດ'
+      close: 'ປິດ',
+      toggle: 'ສະລັບ'
     },
     selectMenu: {
       create: 'ສ້າງ "{label}"',

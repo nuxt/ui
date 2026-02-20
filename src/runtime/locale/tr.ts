@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Kapat'
+      close: 'Kapat',
+      toggle: 'Değiştir'
     },
     selectMenu: {
       create: '"{label}" oluştur',

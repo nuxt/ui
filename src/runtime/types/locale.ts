@@ -118,6 +118,7 @@ export type Messages = {
   }
   sidebar: {
     close: string
+    toggle: string
   }
   selectMenu: {
     create: string

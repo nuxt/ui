@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'បិទ'
+      close: 'បិទ',
+      toggle: 'បិទ/បើក'
     },
     selectMenu: {
       create: 'បង្កើត "{label}"',

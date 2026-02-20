@@ -114,7 +114,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'إغلاق'
+      close: 'إغلاق',
+      toggle: 'تبديل'
     },
     selectMenu: {
       create: 'إنشاء "{label}"',

@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Затворете'
+      close: 'Затворете',
+      toggle: 'Превключване'
     },
     selectMenu: {
       create: 'Създайте "{label}"',

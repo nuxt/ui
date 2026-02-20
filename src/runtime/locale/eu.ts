@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Itxi'
+      close: 'Itxi',
+      toggle: 'Txandakatu'
     },
     selectMenu: {
       create: 'Sortu {label}',

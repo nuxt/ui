@@ -114,7 +114,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'تاقاش'
+      close: 'تاقاش',
+      toggle: 'ئالماشتۇرۇش'
     },
     selectMenu: {
       create: '"{label}" نى قۇرۇش',

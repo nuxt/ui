@@ -33,7 +33,14 @@ function onSubmit() {
 
 <template>
   <div class="flex flex-1">
-    <USidebar v-model:open="openLeft" side="left" :variant="variant" collapsible="icon" :ui="{ container: 'relative' }">
+    <USidebar
+      v-model:open="openLeft"
+      side="left"
+      :variant="variant"
+      collapsible="icon"
+      rail
+      :ui="{ container: 'relative' }"
+    >
       <UNavigationMenu
         :items="[{ label: 'Home', icon: 'i-lucide-home', to: '/' }, { label: 'Chat', icon: 'i-lucide-message-circle', to: '/chat' }]"
         orientation="vertical"
@@ -73,6 +80,7 @@ function onSubmit() {
       :variant="variant"
       title="AI Chat"
       close
+      rail
       :style="{ '--sidebar-width': '20rem' }"
     >
       <template #body>

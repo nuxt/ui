@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'बंद करें'
+      close: 'बंद करें',
+      toggle: 'टॉगल करें'
     },
     selectMenu: {
       create: '"{label}" बनाएँ',

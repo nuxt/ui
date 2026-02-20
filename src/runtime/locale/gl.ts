@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Pechar'
+      close: 'Pechar',
+      toggle: 'Alternar'
     },
     selectMenu: {
       create: 'Crear "{label}"',

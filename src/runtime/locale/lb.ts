@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Zoumaachen'
+      close: 'Zoumaachen',
+      toggle: 'Ëmschalten'
     },
     selectMenu: {
       create: '"{label}" erstellen',

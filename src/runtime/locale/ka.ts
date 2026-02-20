@@ -115,7 +115,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'დახურვა'
+      close: 'დახურვა',
+      toggle: 'გადართვა'
     },
     selectMenu: {
       create: 'დაამატე "{label}"', // "Create" translates as "შექმნა", but since we are simply adding new choice, creating sounds wrong, thus I chose to use "დაამატე", meaning "add".

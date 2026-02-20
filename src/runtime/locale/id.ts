@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Tutup'
+      close: 'Tutup',
+      toggle: 'Alihkan'
     },
     selectMenu: {
       create: 'Buat "{label}"',

@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Bezárás'
+      close: 'Bezárás',
+      toggle: 'Váltás'
     },
     selectMenu: {
       create: '"{label}" létrehozása',

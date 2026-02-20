@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Fechar'
+      close: 'Fechar',
+      toggle: 'Alternar'
     },
     selectMenu: {
       create: 'Criar "{label}"',

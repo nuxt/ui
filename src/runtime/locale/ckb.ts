@@ -114,7 +114,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'داخستن'
+      close: 'داخستن',
+      toggle: 'گۆڕین'
     },
     selectMenu: {
       create: '"{label}" زیادکردنی',

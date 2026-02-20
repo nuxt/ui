@@ -113,7 +113,8 @@ export default defineLocale<Messages>({
       }
     },
     sidebar: {
-      close: 'Бастан'
+      close: 'Бастан',
+      toggle: 'Иваз кардан'
     },
     selectMenu: {
       create: '"{label}" созед',
