@@ -1,12 +1,41 @@
-<template>
-  <UDashboardNavbar class="absolute top-0 inset-x-0 lg:border-b-0" />
+<script setup>
+const toast = useToast()
 
-  <div class="text-center space-y-4">
-    <h1 class="text-2xl font-bold text-primary">
-      Playground
-    </h1>
-    <p class="max-w-sm mx-auto text-muted">
-      Explore and test all Nuxt UI components in an interactive environment.
-    </p>
-  </div>
+function showToast() {
+  toast.add({
+    title: 'Toast displayed!',
+    description: 'This toast was triggered from the drawer.',
+    color: 'success',
+    icon: 'i-lucide-check-circle'
+  })
+}
+</script>
+
+<template>
+  <UApp>
+    <div class="flex items-center justify-center min-h-screen">
+      <UDrawer title="Drawer with Overlay" description="Bug repro: touch only">
+        <UButton label="Open Drawer" color="primary" />
+
+        <template #body>
+          <div class="flex flex-col items-center gap-4 py-4">
+            <p class="text-center text-muted">
+              Steps to reproduce (touch only):
+            </p>
+            <ol class="text-sm text-muted list-decimal list-inside space-y-1">
+              <li>Open the drawer</li>
+              <li>Tap the toast button to close toast</li>
+              <li>Tap the toast button again → Drawer closes (bug)</li>
+            </ol>
+            <UButton
+              label="Show Toast"
+              color="success"
+              icon="i-lucide-bell"
+              @click="showToast"
+            />
+          </div>
+        </template>
+      </UDrawer>
+    </div>
+  </UApp>
 </template>

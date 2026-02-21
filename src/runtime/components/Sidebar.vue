@@ -220,21 +220,23 @@ const menuProps = toRef(() => defu(props.menu, {
             </p>
           </div>
 
-          <slot name="actions" />
+          <div v-if="!!slots.actions || canClose" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
+            <slot name="actions" />
 
-          <slot name="close" :ui="ui">
-            <UButton
-              v-if="canClose"
-              :icon="closeIcon || appConfig.ui.icons.close"
-              color="neutral"
-              variant="ghost"
-              :aria-label="t('sidebar.close')"
-              v-bind="(typeof props.close === 'object' ? props.close : {})"
-              data-slot="close"
-              :class="ui.close({ class: uiProp?.close })"
-              @click="closeSidebar"
-            />
-          </slot>
+            <slot name="close" :ui="ui">
+              <UButton
+                v-if="canClose"
+                :icon="closeIcon || appConfig.ui.icons.close"
+                color="neutral"
+                variant="ghost"
+                :aria-label="t('sidebar.close')"
+                v-bind="(typeof props.close === 'object' ? props.close : {})"
+                data-slot="close"
+                :class="ui.close({ class: uiProp?.close })"
+                @click="closeSidebar"
+              />
+            </slot>
+          </div>
         </slot>
       </div>
 

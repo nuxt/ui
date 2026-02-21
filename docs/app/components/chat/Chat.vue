@@ -88,6 +88,11 @@ function getToolMessage(state: State, toolName: string, input: any) {
 const getCachedToolMessage = useMemoize((state: State, toolName: string, input: string) =>
   getToolMessage(state, toolName, JSON.parse(input))
 )
+
+function clearMessages() {
+  messages.value = []
+  chat.messages = []
+}
 </script>
 
 <template>
@@ -96,11 +101,16 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
     side="right"
     collapsible="offcanvas"
     title="AI Assistant"
+    description="Ask me anything about Nuxt UI"
     close
-    close-icon="i-lucide-chevron-right"
+    close-icon="i-lucide-square-chevron-right"
     :ui="{ footer: 'sm:px-4', container: 'sticky' }"
     :style="{ '--sidebar-width': '20rem' }"
   >
+    <template #actions>
+      <UButton icon="i-lucide-trash" color="neutral" variant="ghost" @click="clearMessages" />
+    </template>
+
     <template #body>
       <UTheme
         :ui="{

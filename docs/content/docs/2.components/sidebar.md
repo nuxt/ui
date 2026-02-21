@@ -25,9 +25,8 @@ Use the `body`, `default` and `footer` slots to customize the sidebar content. T
 ---
 collapse: true
 name: 'sidebar-example'
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px]'
 overflowHidden: true
-containerClass: 'h-[500px]'
 ---
 ::
 
@@ -39,9 +38,8 @@ Use the `variant` prop to change the visual style of the sidebar. Defaults to `s
 ---
 collapse: true
 name: 'sidebar-example'
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px]'
 overflowHidden: true
-containerClass: 'h-[500px]'
 options:
   - name: 'variant'
     label: 'variant'
@@ -65,9 +63,8 @@ Use the `collapsible` prop to change the collapse behavior of the sidebar. Defau
 ---
 collapse: true
 name: 'sidebar-example'
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px]'
 overflowHidden: true
-containerClass: 'h-[500px]'
 options:
   - name: 'collapsible'
     label: 'collapsible'
@@ -91,9 +88,8 @@ Use the `side` prop to change the side of the sidebar. Defaults to `left`.
 ---
 collapse: true
 name: 'sidebar-example'
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px]'
 overflowHidden: true
-containerClass: 'h-[500px]'
 options:
   - name: 'side'
     label: 'side'
@@ -112,9 +108,8 @@ Use the `title` prop to set the title of the sidebar header.
 ---
 collapse: true
 name: 'sidebar-title-example'
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px]'
 overflowHidden: true
-containerClass: 'h-[500px]'
 ---
 ::
 
@@ -126,9 +121,8 @@ Use the `description` prop to set the description of the sidebar header.
 ---
 collapse: true
 name: 'sidebar-description-example'
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px]'
 overflowHidden: true
-containerClass: 'h-[500px]'
 ---
 ::
 
@@ -142,9 +136,8 @@ You can pass any property from the [Button](/docs/components/button) component t
 ---
 collapse: true
 name: 'sidebar-close-example'
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px]'
 overflowHidden: true
-containerClass: 'h-[500px]'
 ---
 ::
 
@@ -156,41 +149,13 @@ Use the `close-icon` prop to customize the close button [Icon](/docs/components/
 ---
 collapse: true
 name: 'sidebar-close-icon-example'
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px]'
 overflowHidden: true
-containerClass: 'h-[500px]'
 ---
 ::
 
 ::tip
 You can use the `#title`, `#description` and `#close` slots to customize them.
-::
-
-### Width
-
-The sidebar width is controlled by the `--sidebar-width` CSS variable (defaults to `28rem`). The collapsed icon width is controlled by `--sidebar-width-icon` (defaults to `4rem`).
-
-Override them globally in your CSS or per-instance with the `style` attribute:
-
-```vue
-<USidebar :style="{ '--sidebar-width': '20rem' }" />
-```
-
-### With Navbar
-
-To position the sidebar below a fixed navbar, customize the container position using the `ui` prop:
-
-```vue
-<USidebar
-  :ui="{
-    gap: 'h-[calc(100vh-var(--ui-header-height))]',
-    container: 'top-[var(--ui-header-height)] bottom-0 h-[calc(100vh-var(--ui-header-height))]'
-  }"
-/>
-```
-
-::note
-The `--ui-header-height` variable defaults to `4rem` and is used by the [Header](/docs/components/header) and [DashboardNavbar](/docs/components/dashboard-navbar) components. Adjust it if your navbar uses a different height.
 ::
 
 ### Mode
@@ -201,9 +166,8 @@ Use the `mode` prop to change the mode of the sidebar menu on mobile. Defaults t
 ---
 collapse: true
 name: 'sidebar-example'
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px]'
 overflowHidden: true
-containerClass: 'h-[500px]'
 options:
   - name: 'mode'
     label: 'mode'
@@ -221,6 +185,36 @@ You can use the `menu` prop to customize the menu of the sidebar, it will adapt 
 
 ## Examples
 
+### With custom width
+
+The sidebar width is controlled by the `--sidebar-width` CSS variable (defaults to `16rem`). The collapsed icon width is controlled by `--sidebar-width-icon` (defaults to `4rem`).
+
+Override them globally in your CSS or per-instance with the `style` attribute.
+
+::component-example
+---
+name: 'sidebar-width-example'
+class: '!p-0 !justify-start h-[500px]'
+overflowHidden: true
+---
+::
+
+### With Navbar
+
+To position the sidebar below a fixed navbar, customize the `gap` and `container` using the `ui` prop.
+
+::component-example
+---
+name: 'sidebar-navbar-example'
+class: '!p-0 !justify-start h-[500px]'
+overflowHidden: true
+---
+::
+
+::note
+The `--ui-header-height` variable defaults to `4rem` and is used by the [Header](/docs/components/header) and [DashboardNavbar](/docs/components/dashboard-navbar) components. Adjust it if your navbar uses a different height.
+::
+
 ### Control open state
 
 You can control the open state by using the `open` prop or the `v-model:open` directive. On desktop it controls the expanded/collapsed state, on mobile it opens/closes the sheet menu.
@@ -228,9 +222,8 @@ You can control the open state by using the `open` prop or the `v-model:open` di
 ::component-example
 ---
 name: 'sidebar-open-example'
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px]'
 overflowHidden: true
-containerClass: 'h-[500px]'
 ---
 ::
 
@@ -245,9 +238,8 @@ Use [`useLocalStorage`](https://vueuse.org/core/useLocalStorage/) from VueUse or
 ::component-example
 ---
 name: 'sidebar-persist-example'
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px]'
 overflowHidden: true
-containerClass: 'h-[500px]'
 ---
 ::
 
