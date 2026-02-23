@@ -31,6 +31,11 @@ export interface DashboardSidebarProps<T extends DashboardSidebarMode = Dashboar
    * @defaultValue 'left'
    */
   toggleSide?: 'left' | 'right'
+  /**
+   * Automatically close when route changes on mobile/drawer
+   * @defaultValue false
+   */
+  autoClose?: boolean
   class?: any
   ui?: DashboardSidebar['slots']
 }
@@ -111,7 +116,7 @@ watch(open, () => dashboardContext.sidebarOpen!.value = open.value, { immediate:
 watch(isCollapsed, () => dashboardContext.sidebarCollapsed!.value = isCollapsed.value, { immediate: true })
 
 watch(() => route.fullPath, () => {
-  open.value = false
+  if (props?.autoClose) open.value = false
 })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSidebar || {}) })({
