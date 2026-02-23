@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Pirmyn',
       previous: 'Atgal',
       finish: 'Baigti',
-      close: 'Praleisti'
+      close: 'Uždaryti'
     }
   }
 })

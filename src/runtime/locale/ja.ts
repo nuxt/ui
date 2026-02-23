@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: '次へ',
       previous: '前へ',
       finish: '完了',
-      close: 'スキップ'
+      close: '閉じる'
     }
   }
 })

@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Keyingi',
       previous: 'Oldingi',
       finish: 'Tugatish',
-      close: 'O\'tkazib yuborish'
+      close: 'Yopish'
     }
   }
 })

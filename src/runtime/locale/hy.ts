@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Առաջ',
       previous: 'Նախորդ',
       finish: 'Ավարտել',
-      close: 'Բաց թողնել'
+      close: 'Փակել'
     }
   }
 })

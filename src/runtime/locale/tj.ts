@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Баъдӣ',
       previous: 'Қаблӣ',
       finish: 'Анҷом',
-      close: 'Гузаштан'
+      close: 'Пӯшидан'
     }
   }
 })

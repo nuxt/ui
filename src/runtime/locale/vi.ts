@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Tiếp theo',
       previous: 'Quay lại',
       finish: 'Hoàn thành',
-      close: 'Bỏ qua'
+      close: 'Đóng'
     }
   }
 })

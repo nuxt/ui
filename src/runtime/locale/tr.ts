@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Sonraki',
       previous: 'Önceki',
       finish: 'Bitir',
-      close: 'Atla'
+      close: 'Kapat'
     }
   }
 })

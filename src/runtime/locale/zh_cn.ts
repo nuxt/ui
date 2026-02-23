@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: '下一步',
       previous: '上一步',
       finish: '完成',
-      close: '跳过'
+      close: '关闭'
     }
   }
 })

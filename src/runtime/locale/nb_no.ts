@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Neste',
       previous: 'Forrige',
       finish: 'Fullfør',
-      close: 'Hopp over'
+      close: 'Lukk'
     }
   }
 })

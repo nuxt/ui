@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Weider',
       previous: 'Zréck',
       finish: 'Fäerdeg',
-      close: 'Iwwersprangen'
+      close: 'Zoumaachen'
     }
   }
 })

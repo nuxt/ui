@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Дараах',
       previous: 'Өмнөх',
       finish: 'Дуусгах',
-      close: 'Алгасах'
+      close: 'Хаах'
     }
   }
 })

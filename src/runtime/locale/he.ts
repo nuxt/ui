@@ -136,7 +136,7 @@ export default defineLocale<Messages>({
       next: 'הבא',
       previous: 'הקודם',
       finish: 'סיום',
-      close: 'דלג'
+      close: 'סגור'
     }
   }
 })

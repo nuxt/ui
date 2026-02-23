@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Următor',
       previous: 'Anterior',
       finish: 'Finalizare',
-      close: 'Omite'
+      close: 'Închide'
     }
   }
 })

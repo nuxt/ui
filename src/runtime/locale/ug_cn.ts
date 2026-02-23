@@ -136,7 +136,7 @@ export default defineLocale<Messages>({
       next: 'كېيىنكى',
       previous: 'ئالدىنقى',
       finish: 'تامام',
-      close: 'ئاتلاش'
+      close: 'تاقاش'
     }
   }
 })

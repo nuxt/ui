@@ -137,7 +137,7 @@ export default defineLocale<Messages>({
       next: 'შემდეგი',
       previous: 'წინა',
       finish: 'დასრულება',
-      close: 'გამოტოვება'
+      close: 'დახურვა'
     }
   }
 })

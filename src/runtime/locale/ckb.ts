@@ -136,7 +136,7 @@ export default defineLocale<Messages>({
       next: 'دواتر',
       previous: 'پێشتر',
       finish: 'تەواوکردن',
-      close: 'تێپەڕین'
+      close: 'داخستن'
     }
   }
 })

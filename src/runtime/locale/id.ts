@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Berikutnya',
       previous: 'Sebelumnya',
       finish: 'Selesai',
-      close: 'Lewati'
+      close: 'Tutup'
     }
   }
 })

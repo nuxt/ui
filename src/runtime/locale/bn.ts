@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'পরবর্তী',
       previous: 'পূর্ববর্তী',
       finish: 'সমাপ্ত',
-      close: 'এড়িয়ে যান'
+      close: 'বন্ধ করুন'
     }
   }
 })

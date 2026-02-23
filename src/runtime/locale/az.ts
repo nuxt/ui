@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Növbəti',
       previous: 'Əvvəlki',
       finish: 'Bitir',
-      close: 'Keç'
+      close: 'Bağla'
     }
   }
 })

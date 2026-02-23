@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Seuraava',
       previous: 'Edellinen',
       finish: 'Valmis',
-      close: 'Ohita'
+      close: 'Sulje'
     }
   }
 })

@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Келесі',
       previous: 'Алдыңғы',
       finish: 'Аяқтау',
-      close: 'Өткізіп жіберу'
+      close: 'Жабу'
     }
   }
 })

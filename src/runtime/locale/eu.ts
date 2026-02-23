@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Hurrengoa',
       previous: 'Aurrekoa',
       finish: 'Amaitu',
-      close: 'Saltatu'
+      close: 'Itxi'
     }
   }
 })

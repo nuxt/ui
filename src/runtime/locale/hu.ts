@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Következő',
       previous: 'Előző',
       finish: 'Befejezés',
-      close: 'Kihagyás'
+      close: 'Bezárás'
     }
   }
 })

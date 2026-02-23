@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: '다음',
       previous: '이전',
       finish: '완료',
-      close: '건너뛰기'
+      close: '닫기'
     }
   }
 })

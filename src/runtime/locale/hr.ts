@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Sljedeći',
       previous: 'Prethodni',
       finish: 'Završi',
-      close: 'Preskoči'
+      close: 'Zatvori'
     }
   }
 })

@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Successivo',
       previous: 'Precedente',
       finish: 'Fine',
-      close: 'Salta'
+      close: 'Chiudi'
     }
   }
 })

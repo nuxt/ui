@@ -19,10 +19,9 @@ export function buildTranslator<M>(locale: MaybeRef<Locale<M>>, fallbackLocale?:
 }
 
 export function translate<M>(path: string, option: undefined | TranslatorOption, locale: Locale<M>, fallbackLocale?: Locale<M>): string {
-  let prop: string = get(locale, `messages.${path}`, undefined)
+  let prop: string | undefined = get(locale, `messages.${path}`, undefined)
 
-  // If translation not found and it's not the fallback path itself, try fallback locale
-  if (prop === undefined || prop === path) {
+  if (prop === undefined) {
     const fallback = fallbackLocale || (locale.code !== 'en' ? en as Locale<M> : undefined)
     if (fallback) {
       prop = get(fallback, `messages.${path}`, path)
@@ -31,7 +30,7 @@ export function translate<M>(path: string, option: undefined | TranslatorOption,
     }
   }
 
-  return prop.replace(
+  return (prop ?? path).replace(
     /\{(\w+)\}/g,
     (_, key) => `${option?.[key] ?? `{${key}}`}`
   )

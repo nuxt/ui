@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Nästa',
       previous: 'Föregående',
       finish: 'Slutför',
-      close: 'Hoppa över'
+      close: 'Stäng'
     }
   }
 })

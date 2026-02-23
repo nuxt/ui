@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Järgmine',
       previous: 'Eelmine',
       finish: 'Lõpeta',
-      close: 'Jäta vahele'
+      close: 'Sulge'
     }
   }
 })

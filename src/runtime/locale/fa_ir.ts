@@ -136,7 +136,7 @@ export default defineLocale<Messages>({
       next: 'بعدی',
       previous: 'قبلی',
       finish: 'پایان',
-      close: 'رد شدن'
+      close: 'بستن'
     }
   }
 })

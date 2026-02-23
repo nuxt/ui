@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'បន្ទាប់',
       previous: 'មុន',
       finish: 'បញ្ចប់',
-      close: 'រំលង'
+      close: 'បិទ'
     }
   }
 })

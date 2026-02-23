@@ -135,7 +135,7 @@ export default defineLocale<Messages>({
       next: 'Tjetri',
       previous: 'Para',
       finish: 'Përfundo',
-      close: 'Kalo'
+      close: 'Mbyll'
     }
   }
 })
