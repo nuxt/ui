@@ -33,7 +33,7 @@ export interface DashboardSidebarProps<T extends DashboardSidebarMode = Dashboar
   toggleSide?: 'left' | 'right'
   /**
    * Automatically close when route changes on mobile/drawer
-   * @defaultValue false
+   * @defaultValue true
    */
   autoClose?: boolean
   class?: any
@@ -78,7 +78,8 @@ const props = withDefaults(defineProps<DashboardSidebarProps<T>>(), {
   defaultSize: 15,
   resizable: false,
   collapsible: false,
-  collapsedSize: 0
+  collapsedSize: 0,
+  autoClose: true
 })
 const slots = defineSlots<DashboardSidebarSlots>()
 
