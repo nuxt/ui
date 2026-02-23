@@ -105,7 +105,6 @@ export interface TourSlots {
   title(props: TourSlotProps): any
   description(props: TourSlotProps): any
   body(props: TourSlotProps): any
-  footer(props: TourSlotProps): any
   actions(props: TourSlotProps): any
 }
 
@@ -122,11 +121,12 @@ export interface TourSlotProps {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect, toValue, toRef, nextTick, watch } from 'vue'
+import { computed, ref, watchEffect, toRef, nextTick, watch } from 'vue'
 import { defu } from 'defu'
 import { useEventListener, useVModel } from '@vueuse/core'
 import { Popover } from 'reka-ui/namespaced'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { usePortal } from '../composables/usePortal'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -146,6 +146,7 @@ const emits = defineEmits<TourEmits>()
 const slots = defineSlots<TourSlots>()
 
 const appConfig = useAppConfig() as Tour['AppConfig']
+const uiProp = useComponentUI('tour', props)
 const { t } = useLocale()
 
 const open = useVModel<TourProps, 'open', 'update:open'>(props, 'open', emits, { defaultValue: props.defaultOpen })
@@ -196,21 +197,19 @@ const contentProps = computed(() => defu(
 
 const arrowProps = computed(() => (currentStep.value?.arrow ?? props.arrow) as PopoverArrowProps | boolean)
 const dismissible = computed(() => currentStep.value?.dismissible ?? props.dismissible)
-// When modal is true, we should also prevent dismissal to ensure proper behavior
-const shouldPreventDismissal = computed(() => !dismissible.value || props.modal)
 const contentEvents = computed(() => {
-  if (shouldPreventDismissal.value) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
+  const events: Record<string, (e: Event) => void> = {}
+  const prevent = (e: Event) => e.preventDefault()
 
-    return events.reduce((acc, curr) => {
-      acc[curr] = (e: Event) => {
-        e.preventDefault()
-      }
-      return acc
-    }, {} as Record<typeof events[number], (e: Event) => void>)
+  if (props.modal || !dismissible.value) {
+    events.pointerDownOutside = prevent
+    events.interactOutside = prevent
+  }
+  if (!dismissible.value) {
+    events.escapeKeyDown = prevent
   }
 
-  return {}
+  return events
 })
 
 const showOverlay = computed(() => currentStep.value?.overlay ?? props.overlay)
@@ -229,30 +228,24 @@ const slotProps = computed<TourSlotProps>(() => ({
   goTo
 }))
 
-function resolveTarget(target?: TourTarget) {
-  const value = toValue(target) as TourTarget
+function resolveTarget(target?: TourTarget): ReferenceElement | null | undefined {
+  if (!target || typeof window === 'undefined') {
+    return undefined
+  }
 
-  if (!value || typeof window === 'undefined') {
+  const value = typeof target === 'function' ? target() : target
+
+  if (!value) {
     return undefined
   }
 
   if (typeof value === 'string') {
-    const direct = document.querySelector(value) as ReferenceElement | null
-
-    if (direct) {
-      return direct
-    }
-
     const selector = value.startsWith('#') || value.startsWith('.') ? value : `#${value}`
 
     return document.querySelector(selector) as ReferenceElement | null
   }
 
-  if (typeof value === 'function') {
-    return value() ?? undefined
-  }
-
-  return value ?? undefined
+  return value
 }
 
 function hasRect(target?: ReferenceElement): target is ReferenceElement & { getBoundingClientRect: () => DOMRect } {
@@ -267,8 +260,7 @@ function updateHighlight() {
 
   const rect = reference.value.getBoundingClientRect()
 
-  // outline-offset-2 in Tailwind equals 8px (0.5rem)
-  // We need to expand the overlay to account for the outline offset
+  // Expand the highlight rect to account for the outline + shadow around the target
   const outlineOffset = 8
 
   // For position: fixed, use viewport coordinates directly (no scroll offset needed)
@@ -295,8 +287,7 @@ function next() {
     return
   }
 
-  // If loop is enabled OR if there's a custom nextLabel on the last step, restart the tour
-  if (props.loop || currentStep.value?.nextLabel) {
+  if (props.loop) {
     currentIndex.value = 0
     emits('next', currentIndex.value)
     nextTick(updateHighlight)
@@ -350,10 +341,11 @@ defineExpose({
         v-if="showOverlay && open && !highlightRect"
         data-slot="overlay"
         :style="{ zIndex: 2147483645 }"
-        :class="ui.overlay({ class: (currentStep?.ui)?.overlay })"
+        :class="ui.overlay({ class: [uiProp?.overlay, (currentStep?.ui)?.overlay] })"
       />
       <div
         v-if="highlightRect && open"
+        data-slot="highlight"
         :style="{
           position: 'fixed',
           left: `${highlightRect.left}px`,
@@ -364,7 +356,7 @@ defineExpose({
           zIndex: 2147483646,
           ...(showOverlay ? { boxShadow: '0 0 0 9999px rgba(0, 0, 0, 0.5)' } : {})
         }"
-        :class="ui.highlight({ class: (currentStep?.ui)?.highlight })"
+        :class="ui.highlight({ class: [uiProp?.highlight, (currentStep?.ui)?.highlight] })"
       />
     </Teleport>
 
@@ -373,21 +365,21 @@ defineExpose({
         data-slot="content"
         v-bind="contentProps"
         :style="showOverlay ? { zIndex: 2147483647 } : undefined"
-        :class="ui.content({ class: [props.class, currentStep?.class, currentStep?.ui?.content] })"
+        :class="ui.content({ class: [uiProp?.content, props.class, currentStep?.class, currentStep?.ui?.content] })"
         v-on="contentEvents"
       >
         <slot name="default" v-bind="slotProps">
-          <header :class="ui.header({ class: currentStep?.ui?.header })">
-            <div :class="ui.indicator({ class: currentStep?.ui?.indicator })">
+          <header data-slot="header" :class="ui.header({ class: [uiProp?.header, currentStep?.ui?.header] })">
+            <div data-slot="indicator" :class="ui.indicator({ class: [uiProp?.indicator, currentStep?.ui?.indicator] })">
               {{ currentIndex + 1 }} / {{ totalSteps }}
             </div>
-            <div class="flex-1 space-y-1">
-              <div v-if="currentStep?.title || !!slots.title" :class="ui.title({ class: currentStep?.ui?.title })">
+            <div data-slot="wrapper" class="flex-1 space-y-1">
+              <div v-if="currentStep?.title || !!slots.title" data-slot="title" :class="ui.title({ class: [uiProp?.title, currentStep?.ui?.title] })">
                 <slot name="title" v-bind="slotProps">
                   {{ currentStep?.title }}
                 </slot>
               </div>
-              <p v-if="currentStep?.description || !!slots.description" :class="ui.description({ class: currentStep?.ui?.description })">
+              <p v-if="currentStep?.description || !!slots.description" data-slot="description" :class="ui.description({ class: [uiProp?.description, currentStep?.ui?.description] })">
                 <slot name="description" v-bind="slotProps">
                   {{ currentStep?.description }}
                 </slot>
@@ -398,7 +390,7 @@ defineExpose({
               size="xs"
               color="neutral"
               variant="link"
-              :class="ui.close({ class: currentStep?.ui?.close })"
+              :class="ui.close({ class: [uiProp?.close, currentStep?.ui?.close] })"
               v-bind="(typeof props.close === 'object' ? props.close : {})"
               icon="i-lucide-x"
               :aria-label="t('tour.close')"
@@ -406,22 +398,21 @@ defineExpose({
             />
           </header>
 
-          <div v-if="currentStep?.body || !!slots.body" :class="ui.body({ class: currentStep?.ui?.body })">
+          <div v-if="currentStep?.body || !!slots.body" data-slot="body" :class="ui.body({ class: [uiProp?.body, currentStep?.ui?.body] })">
             <slot name="body" v-bind="slotProps">
               {{ currentStep?.body }}
             </slot>
           </div>
 
-          <footer :class="ui.footer({ class: currentStep?.ui?.footer })">
+          <footer data-slot="footer" :class="ui.footer({ class: [uiProp?.footer, currentStep?.ui?.footer] })">
             <slot name="actions" v-bind="slotProps">
-              <div :class="ui.controls({ class: currentStep?.ui?.controls })">
+              <div data-slot="controls" :class="ui.controls({ class: [uiProp?.controls, currentStep?.ui?.controls] })">
                 <UButton
                   v-if="hasPrev"
                   size="xs"
                   color="neutral"
                   variant="ghost"
-                  :disabled="!hasPrev"
-                  :class="ui.prev({ class: currentStep?.ui?.prev })"
+                  :class="ui.prev({ class: [uiProp?.prev, currentStep?.ui?.prev] })"
                   @click="prev"
                 >
                   {{ currentStep?.prevLabel || t('tour.previous') }}
@@ -429,7 +420,7 @@ defineExpose({
                 <UButton
                   size="xs"
                   color="primary"
-                  :class="ui.next({ class: currentStep?.ui?.next })"
+                  :class="ui.next({ class: [uiProp?.next, currentStep?.ui?.next] })"
                   @click="next"
                 >
                   {{ hasNext || props.loop || currentStep?.nextLabel
@@ -441,7 +432,7 @@ defineExpose({
           </footer>
         </slot>
 
-        <Popover.Arrow v-if="arrowProps" v-bind="arrowProps === true ? {} : arrowProps" data-slot="arrow" :class="ui.arrow({ class: currentStep?.ui?.arrow })" />
+        <Popover.Arrow v-if="arrowProps" v-bind="arrowProps === true ? {} : arrowProps" data-slot="arrow" :class="ui.arrow({ class: [uiProp?.arrow, currentStep?.ui?.arrow] })" />
       </Popover.Content>
     </Popover.Portal>
   </Popover.Root>

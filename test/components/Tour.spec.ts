@@ -44,7 +44,6 @@ describe('Tour', () => {
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with body slot', { props, slots: { body: () => 'Body slot' } }],
-    ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }],
     ['with actions slot', { props, slots: { actions: () => 'Actions slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TourProps, slots?: Partial<TourSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Tour)

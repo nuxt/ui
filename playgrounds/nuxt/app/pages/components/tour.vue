@@ -38,7 +38,7 @@ const steps = computed(() => [
 <template>
   <Navbar>
     <UButton icon="i-lucide-wand-2" color="primary" variant="soft" @click="open = true">
-      Avvia tour
+      Start tour
     </UButton>
 
     <div class="flex items-center gap-2 text-sm text-muted">
