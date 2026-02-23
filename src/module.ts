@@ -159,7 +159,7 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     await registerModule('@nuxt/icon', 'icon', {
-      cssLayer: 'components'
+      cssLayer: 'base'
     })
     if (options.fonts) {
       await registerModule('@nuxt/fonts', 'fonts', {
