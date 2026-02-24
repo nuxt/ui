@@ -159,10 +159,10 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       if (e.altKey !== shortcut.altKey) {
         continue
       }
-      // shift modifier is only checked in combination with alphabet keys and some extra keys
-      // (shift with special characters would change the key)
-      // also check shift if the shortcut explicitly requires it or if shift is pressed
-      if ((alphabetKey || shiftableKey || shortcut.shiftKey || e.shiftKey) && e.shiftKey !== shortcut.shiftKey) {
+      // Shift modifier is checked for alphabet keys, shiftable keys, explicit shift shortcuts,
+      // or when shift is pressed alongside meta/ctrl (where shift doesn't transform the key value).
+      // Without meta/ctrl, shift changes the key itself (e.g. / -> ?) so the check is skipped.
+      if ((alphabetKey || shiftableKey || shortcut.shiftKey || (e.shiftKey && (e.metaKey || e.ctrlKey))) && e.shiftKey !== shortcut.shiftKey) {
         continue
       }
 

@@ -31,6 +31,11 @@ export interface DashboardSidebarProps<T extends DashboardSidebarMode = Dashboar
    * @defaultValue 'left'
    */
   toggleSide?: 'left' | 'right'
+  /**
+   * Automatically close when route changes.
+   * @defaultValue true
+   */
+  autoClose?: boolean
   class?: any
   ui?: DashboardSidebar['slots']
 }
@@ -66,6 +71,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<DashboardSidebarProps<T>>(), {
   side: 'left',
   mode: 'slideover' as never,
+  autoClose: true,
   toggle: true,
   toggleSide: 'left',
   minSize: 10,
@@ -111,6 +117,8 @@ watch(open, () => dashboardContext.sidebarOpen!.value = open.value, { immediate:
 watch(isCollapsed, () => dashboardContext.sidebarCollapsed!.value = isCollapsed.value, { immediate: true })
 
 watch(() => route.fullPath, () => {
+  if (!props.autoClose) return
+
   open.value = false
 })
 
