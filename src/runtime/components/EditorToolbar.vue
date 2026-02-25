@@ -145,11 +145,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorToolba
   layout: props.layout
 }))
 
-const groups = computed<EditorToolbarItem[][]>(() =>
+const groups = computed(() =>
   props.items?.length
     ? isArrayOfArray(props.items)
       ? props.items
-      : [props.items]
+      : [props.items as NestedItem<T>[]]
     : []
 )
 
