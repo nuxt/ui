@@ -1,44 +1,96 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
-
-const route = useRoute()
-
-const variant = computed(() => (route.query.variant as 'sidebar' | 'floating' | 'inset') || 'sidebar')
-const collapsible = computed(() => (route.query.collapsible as 'offcanvas' | 'icon' | 'none') || 'icon')
-const side = computed(() => (route.query.side as 'left' | 'right') || 'left')
-const mode = computed(() => (route.query.mode as 'modal' | 'slideover' | 'drawer') || 'slideover')
+import type { DropdownMenuItem, NavigationMenuItem } from '@nuxt/ui'
 
 const open = ref(true)
 
-const items: NavigationMenuItem[] = [{
-  label: 'Home',
-  icon: 'i-lucide-house',
-  active: true
+const teams = ref([{
+  label: 'Nuxt',
+  avatar: {
+    src: 'https://github.com/nuxt.png',
+    alt: 'Nuxt'
+  }
 }, {
+  label: 'Vue',
+  avatar: {
+    src: 'https://github.com/vuejs.png',
+    alt: 'Vue'
+  }
+}, {
+  label: 'UnJS',
+  avatar: {
+    src: 'https://github.com/unjs.png',
+    alt: 'UnJS'
+  }
+}])
+const selectedTeam = ref(teams.value[0])
+
+const teamsItems = computed<DropdownMenuItem[][]>(() => {
+  return [teams.value.map((team, index) => ({
+    ...team,
+    kbds: ['meta', String(index + 1)],
+    onSelect() {
+      selectedTeam.value = team
+    }
+  })), [{
+    label: 'Create team',
+    icon: 'i-lucide-circle-plus'
+  }]]
+})
+
+const items: NavigationMenuItem[] = [{
   label: 'Inbox',
   icon: 'i-lucide-inbox',
   badge: '4'
 }, {
-  label: 'Contacts',
-  icon: 'i-lucide-users'
+  label: 'Issues',
+  icon: 'i-lucide-square-dot'
+}, {
+  label: 'Activity',
+  icon: 'i-lucide-square-activity'
 }, {
   label: 'Settings',
-  icon: 'i-lucide-settings'
+  icon: 'i-lucide-settings',
+  defaultOpen: true,
+  children: [{
+    label: 'General',
+    icon: 'i-lucide-house'
+  }, {
+    label: 'Team',
+    icon: 'i-lucide-users'
+  }, {
+    label: 'Billing',
+    icon: 'i-lucide-credit-card'
+  }]
 }]
+
+defineShortcuts(extractShortcuts(teamsItems.value))
 </script>
 
 <template>
-  <div class="flex h-full w-full [contain:paint]">
+  <div class="flex h-full w-full contain-[paint]">
     <USidebar
       v-model:open="open"
-      :variant="variant"
-      :collapsible="collapsible"
-      :side="side"
-      :mode="mode"
-      title="Navigation"
-      close
-      :ui="{ container: 'absolute' }"
+      collapsible="icon"
+      :ui="{ inner: 'divide-y-0 bg-muted' }"
     >
+      <template #header>
+        <UDropdownMenu
+          :items="teamsItems"
+          :content="{ align: 'start', collisionPadding: 12 }"
+          :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-56' }"
+        >
+          <UButton
+            v-bind="selectedTeam"
+            trailing-icon="i-lucide-chevrons-up-down"
+            color="neutral"
+            variant="ghost"
+            block
+            class="overflow-hidden data-[state=open]:bg-elevated transition-[width,height,padding] duration-200 ease-linear group-data-[state=collapsed]/sidebar:size-8! group-data-[state=collapsed]/sidebar:p-0!"
+            :ui="{ trailingIcon: 'text-dimmed' }"
+          />
+        </UDropdownMenu>
+      </template>
+
       <template #default="{ state }">
         <UNavigationMenu
           :collapsed="state === 'collapsed'"
@@ -47,13 +99,13 @@ const items: NavigationMenuItem[] = [{
         />
       </template>
 
-      <template #footer="{ state }">
+      <template #footer>
         <UButton
           :avatar="{ src: 'https://github.com/benjamincanac.png' }"
-          :label="state === 'collapsed' ? undefined : 'Benjamin'"
+          label="Benjamin"
           color="neutral"
           variant="ghost"
-          class="w-full"
+          class="w-full overflow-hidden transition-[width,height,padding] duration-200 ease-linear group-data-[state=collapsed]/sidebar:size-8! group-data-[state=collapsed]/sidebar:p-0!"
         />
       </template>
     </USidebar>

@@ -94,7 +94,7 @@ const links = computed(() => [{
   to: `https://github.com/nuxt/ui/edit/v4/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
-  icon: 'i-lucide-bot',
+  icon: 'i-lucide-bot-message-square',
   label: 'Explain with AI',
   onClick: () => {
     messages.value = [...messages.value, {

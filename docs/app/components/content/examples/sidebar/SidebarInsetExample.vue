@@ -14,17 +14,24 @@ const items: NavigationMenuItem[] = [{
 }, {
   label: 'Contacts',
   icon: 'i-lucide-users'
+}, {
+  label: 'Settings',
+  icon: 'i-lucide-settings'
 }]
 </script>
 
 <template>
-  <div class="flex h-full w-full contain-[paint]">
+  <div class="flex h-full w-full [contain:paint]">
     <USidebar
       v-model:open="open"
+      variant="inset"
       collapsible="icon"
-      :style="{ '--sidebar-width': '20rem' }"
       :ui="{ container: 'absolute' }"
     >
+      <template #header>
+        <Logo class="h-5 shrink-0" />
+      </template>
+
       <template #default="{ state }">
         <UNavigationMenu
           :collapsed="state === 'collapsed'"
@@ -32,9 +39,19 @@ const items: NavigationMenuItem[] = [{
           orientation="vertical"
         />
       </template>
+
+      <template #footer>
+        <UButton
+          :avatar="{ src: 'https://github.com/benjamincanac.png' }"
+          label="Benjamin"
+          color="neutral"
+          variant="ghost"
+          class="w-full overflow-hidden transition-[width,height,padding] duration-200 ease-linear group-data-[state=collapsed]/sidebar:size-8! group-data-[state=collapsed]/sidebar:p-0!"
+        />
+      </template>
     </USidebar>
 
-    <div class="flex-1 flex flex-col">
+    <div class="flex-1 flex flex-col overflow-hidden lg:peer-data-[variant=inset]:my-2 lg:peer-data-[variant=inset]:ms-0 lg:peer-data-[variant=inset]:rounded-xl lg:peer-data-[variant=inset]:shadow-sm lg:peer-data-[variant=inset]:ring lg:peer-data-[variant=inset]:ring-default">
       <div class="h-(--ui-header-height) shrink-0 flex items-center gap-2 px-4 border-b border-default">
         <UButton
           icon="i-lucide-panel-left"

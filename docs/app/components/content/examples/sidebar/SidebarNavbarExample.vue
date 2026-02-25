@@ -18,7 +18,7 @@ const items: NavigationMenuItem[] = [{
 </script>
 
 <template>
-  <div class="flex flex-col h-full w-full [contain:paint]">
+  <div class="flex flex-col h-full w-full contain-[paint]">
     <div class="h-(--ui-header-height) shrink-0 flex items-center gap-2 px-4 border-b border-default">
       <UButton
         icon="i-lucide-panel-left"

@@ -21,10 +21,10 @@ const items: NavigationMenuItem[] = [{
 </script>
 
 <template>
-  <div class="flex h-full w-full [contain:paint]">
+  <div class="flex h-full w-full contain-[paint]">
     <USidebar v-model:open="open" collapsible="icon" :ui="{ container: 'absolute' }">
-      <template #header="{ state }">
-        <span v-if="state === 'expanded'" class="font-semibold text-sm">Navigation</span>
+      <template #header>
+        <span class="font-semibold text-sm">Navigation</span>
       </template>
 
       <UNavigationMenu
