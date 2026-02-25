@@ -6,9 +6,21 @@ const props = withDefaults(defineProps<{
   isStreaming?: boolean
   duration?: number
   icon?: string
+  /**
+   * The position of the chevron icon.
+   * @defaultValue 'trailing'
+   */
+  chevron?: 'leading' | 'trailing'
+  /**
+   * The icon used for the chevron.
+   * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
+   */
+  chevronIcon?: string
   autoCloseDelay?: number
 }>(), {
   isStreaming: false,
+  chevron: 'trailing',
   autoCloseDelay: 500
 })
 
@@ -81,6 +93,8 @@ onUnmounted(() => {
 })
 
 const hasContent = computed(() => !!props.text || props.isStreaming)
+
+const chevronIconName = computed(() => props.chevronIcon || (appConfig.ui as any).icons?.chevronDown || 'i-lucide-chevron-down')
 </script>
 
 <template>
@@ -88,8 +102,7 @@ const hasContent = computed(() => !!props.text || props.isStreaming)
     v-slot="{ open }"
     :open="internalOpen"
     :unmount-on-hide="true"
-    data-slot="reasoning"
-    class="my-1.5"
+    data-slot="root"
     @update:open="onOpenChange"
   >
     <CollapsibleTrigger
@@ -98,27 +111,37 @@ const hasContent = computed(() => !!props.text || props.isStreaming)
     >
       <button
         type="button"
-        data-slot="reasoning-trigger"
-        class="group flex w-full items-center gap-2 text-muted text-sm hover:text-default cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors"
+        data-slot="trigger"
+        class="group flex w-full items-center gap-1.5 text-muted hover:text-default text-sm cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors"
       >
-        <UIcon :name="icon" class="size-4 shrink-0" />
+        <span v-if="hasContent && chevron === 'leading'" class="relative size-4 shrink-0">
+          <UIcon
+            :name="icon"
+            class="absolute inset-0 size-4 transition-opacity group-hover:opacity-0"
+          />
+          <UIcon
+            :name="chevronIconName"
+            class="absolute inset-0 size-4 opacity-0 transition-all group-hover:opacity-100 group-data-[state=open]:rotate-180"
+          />
+        </span>
+        <UIcon v-else :name="icon" class="size-4 shrink-0" />
 
         <ChatShimmer v-if="isStreaming" :text="thinkingMessage" />
         <span v-else>{{ thinkingMessage }}</span>
 
         <UIcon
-          v-if="hasContent"
-          :name="(appConfig.ui as any).icons?.chevronDown || 'i-lucide-chevron-down'"
+          v-if="hasContent && chevron === 'trailing'"
+          :name="chevronIconName"
           class="size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200"
         />
       </button>
     </CollapsibleTrigger>
 
     <CollapsibleContent
-      data-slot="reasoning-content"
+      data-slot="content"
       class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden"
     >
-      <div data-slot="reasoning-body" class="pt-2 text-sm text-muted whitespace-pre-wrap">
+      <div data-slot="body" class="pt-2 text-sm text-muted whitespace-pre-wrap">
         <slot :open="open">
           {{ text }}
         </slot>

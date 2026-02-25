@@ -16,7 +16,7 @@ const applyThemeTool = {
       warning: { type: 'string', description: 'Warning color name' },
       error: { type: 'string', description: 'Error color name' },
       radius: { type: 'number', description: 'Border radius in rem: 0, 0.125, 0.25, 0.375, 0.5' },
-      font: { type: 'string', description: 'Font family: Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Raleway' },
+      font: { type: 'string', description: 'Font family name (any Google Font works, e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Raleway, etc.)' },
       blackAsPrimary: { type: 'boolean', description: 'Use solid black/white as primary color for a monochrome look' },
       customColors: {
         type: 'object',
@@ -84,7 +84,10 @@ export default defineEventHandler(async (event) => {
     maxOutputTokens: 16000,
     providerOptions: {
       anthropic: {
-        thinking: { type: 'enabled', budgetTokens: 10000 }
+        thinking: {
+          type: 'enabled',
+          budgetTokens: 2000
+        }
       }
     },
     system: `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Use your knowledge base tools to search for relevant information before answering questions.
@@ -111,7 +114,7 @@ Guidelines:
 
 **LIVE THEME CUSTOMIZATION:**
 
-When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
+When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed. When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST also set the semantic colors (secondary, success, info, warning, error) in addition to primary and neutral — pick colors that fit the overall aesthetic.
 
 When users ask to reset, revert, or restore the default theme, use the \`resetTheme\` tool. This resets primary to green, neutral to slate, radius to 0.25rem, font to Public Sans, and removes any custom colors.
 
@@ -121,7 +124,7 @@ There are two types of customization:
 
 The main.css file uses Tailwind CSS directives to configure design tokens:
 
-*Fonts* — use the \`@theme\` directive:
+*Fonts* — use the \`@theme\` directive. Any Google Font works, \`@nuxt/fonts\` will automatically load and optimize it:
 \`\`\`css
 @theme {
   --font-sans: 'Inter', sans-serif;
@@ -184,13 +187,15 @@ export default defineAppConfig({
 
 **Other options:**
 - Radius: 0, 0.125, 0.25, 0.375, 0.5 (in rem)
-- Font: Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Raleway
+- Font: any Google Font (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Raleway). \`@nuxt/fonts\` auto-loads it — just set the CSS variable
 - blackAsPrimary: true for monochrome black/white primary
 - ui: Component-level theme overrides (slots, variants, compoundVariants, defaultVariants)
 
 **Component Theme Lookup:**
 
 When users ask about component-specific customization, use the \`getComponentTheme\` tool to get the exact slots, variants, and defaults for that component. This lets you suggest precise app.config.ts overrides.
+
+When users ask for a complete/broad theme change, also use \`getComponentTheme\` to look up 2-3 key components (e.g. button, badge, card) and include component-level \`ui\` overrides in the \`applyTheme\` call that match the overall aesthetic.
 
 Available components: ${componentNames.join(', ')}
 

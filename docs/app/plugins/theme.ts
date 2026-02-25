@@ -56,11 +56,33 @@ export default defineNuxtPlugin({
         }
       }
 
+      function restoreAiTheme() {
+        const raw = localStorage.getItem('nuxt-ui-ai-theme')
+        if (!raw) return
+
+        try {
+          const extras = JSON.parse(raw)
+          if (extras.colors) {
+            for (const [key, value] of Object.entries(extras.colors)) {
+              (appConfig.ui.colors as any)[key] = value
+            }
+          }
+          if (extras.ui) {
+            for (const [key, value] of Object.entries(extras.ui)) {
+              if (key === 'colors' || key === 'icons') continue
+              ;(appConfig.ui as any)[key] = value
+            }
+          }
+        }
+        catch {}
+      }
+
       updateColor('primary')
       updateColor('neutral')
       updateRadius()
       updateBlackAsPrimary()
       updateFont()
+      restoreAiTheme()
     }
 
     onNuxtReady(() => {

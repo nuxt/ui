@@ -10,8 +10,8 @@ export function useSearch() {
     track('AI Chat Opened', { hasSearchTerm: !!searchTerm.value })
 
     if (searchTerm.value) {
-      messages.value = [{
-        id: '1',
+      messages.value = [...messages.value, {
+        id: String(Date.now()),
         role: 'user',
         parts: [{ type: 'text', text: searchTerm.value }]
       }]
@@ -24,6 +24,7 @@ export function useSearch() {
     label: 'Ask AI',
     description: 'Ask the AI assistant powered by our custom MCP server for help.',
     icon: 'i-lucide-bot',
+    kbds: ['meta', 'i'],
     ui: {
       itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
     },

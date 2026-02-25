@@ -23,7 +23,9 @@ const {
   radius,
   font,
   setBlackAsPrimary,
-  resetTheme
+  resetTheme,
+  hasCSSChanges,
+  hasAppConfigChanges
 } = useTheme()
 
 const _themeApplied = new Set<string>()
@@ -102,18 +104,26 @@ function applyThemeSettings(settings: Record<string, any>) {
 
   const appConfig = useAppConfig()
   const colorKeys = ['secondary', 'success', 'info', 'warning', 'error'] as const
+  const savedExtras: Record<string, any> = JSON.parse(localStorage.getItem('nuxt-ui-ai-theme') || '{}')
+
   for (const color of colorKeys) {
     if (settings[color]) {
       (appConfig.ui.colors as any)[color] = settings[color]
+      savedExtras.colors = savedExtras.colors || {}
+      savedExtras.colors[color] = settings[color]
     }
   }
 
   if (settings.ui) {
+    savedExtras.ui = savedExtras.ui || {}
     for (const [key, value] of Object.entries(settings.ui)) {
       if (key === 'colors' || key === 'icons') continue
       ;(appConfig.ui as any)[key] = value
+      savedExtras.ui[key] = value
     }
   }
+
+  localStorage.setItem('nuxt-ui-ai-theme', JSON.stringify(savedExtras))
 
   track('AI Theme Applied')
 }
@@ -174,9 +184,35 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
   getToolMessage(state, toolName, JSON.parse(input))
 )
 
-function getToolDisplayText(part: any) {
+function getToolText(part: any) {
   const toolName = part.type === 'dynamic-tool' ? part.toolName : part.type.replace('tool-', '')
   return getCachedToolMessage(part.state, toolName, JSON.stringify(part.input || {}))
+}
+
+function isToolPart(part: any): boolean {
+  return part.type.startsWith('tool-') || part.type === 'dynamic-tool'
+}
+
+function isToolLoading(part: any): boolean {
+  return !('state' in part && part.state === 'output-available')
+}
+
+function getToolIcon(part: any): string {
+  const toolName = part.type === 'dynamic-tool' ? part.toolName : part.type.replace('tool-', '')
+
+  const iconMap: Record<string, string> = {
+    get_component: 'i-lucide-file-text',
+    get_component_metadata: 'i-lucide-file-text',
+    get_template: 'i-lucide-file-text',
+    get_documentation_page: 'i-lucide-file-text',
+    get_migration_guide: 'i-lucide-file-text',
+    get_example: 'i-lucide-file-text',
+    getComponentTheme: 'i-lucide-file-text',
+    applyTheme: 'i-lucide-palette',
+    resetTheme: 'i-lucide-palette'
+  }
+
+  return iconMap[toolName] || 'i-lucide-search'
 }
 
 function getReasoningText(message: any): string {
@@ -205,17 +241,25 @@ const suggestions = [
   {
     category: 'Components',
     items: [
-      'How do I use the Modal component?',
-      'Show me Button variants and sizes',
-      'How to create a form with validation?'
+      'How to create a form with validation?',
+      'How to build a table with pagination?',
+      'How to build a dashboard layout?'
+    ]
+  },
+  {
+    category: 'Composables',
+    items: [
+      'How to show toast notifications?',
+      'How to define keyboard shortcuts?',
+      'How do I open a modal programmatically?'
     ]
   },
   {
     category: 'Theme',
     items: [
-      'Change the primary color to indigo',
-      'Make the theme more rounded with Inter font',
-      'Create a monochrome black & white theme'
+      'Design a sakura-inspired theme with a custom color palette',
+      'Create a monochrome black & white theme with rounded corners',
+      'Change all colors, the font, the radius and customize a few components'
     ]
   }
 ]
@@ -225,9 +269,37 @@ function clearMessages() {
   chat.messages = []
   _themeApplied.clear()
 
+  resetTheme()
+
+  const appConfig = useAppConfig()
+  const aiTheme = localStorage.getItem('nuxt-ui-ai-theme')
+  if (aiTheme) {
+    try {
+      const extras = JSON.parse(aiTheme)
+      if (extras.colors) {
+        const defaultColors: Record<string, string> = { secondary: 'blue', success: 'green', info: 'blue', warning: 'yellow', error: 'red' }
+        for (const key of Object.keys(extras.colors)) {
+          (appConfig.ui.colors as any)[key] = defaultColors[key] || (appConfig.ui.colors as any)[key]
+        }
+      }
+      if (extras.ui) {
+        for (const key of Object.keys(extras.ui)) {
+          ;(appConfig.ui as any)[key] = undefined
+        }
+      }
+    } catch {
+      // ignore malformed localStorage
+    }
+  }
+
   localStorage.removeItem('nuxt-ui-custom-colors')
+  localStorage.removeItem('nuxt-ui-ai-theme')
   document.getElementById('chat-custom-colors')?.remove()
 }
+
+defineShortcuts({
+  meta_i: () => open.value = !open.value
+})
 </script>
 
 <template>
@@ -236,31 +308,39 @@ function clearMessages() {
     side="right"
     collapsible="offcanvas"
     title="AI Assistant"
-    close
+    :close="{ size: 'sm' }"
     close-icon="i-lucide-square-chevron-right"
-    :ui="{ footer: 'sm:px-4' }"
     :style="{ '--sidebar-width': '24rem' }"
   >
     <template #actions>
-      <UButton icon="i-lucide-trash" color="neutral" variant="ghost" @click="clearMessages" />
+      <UTooltip text="Clear history & reset theme">
+        <UButton
+          icon="i-lucide-square-x"
+          color="neutral"
+          variant="ghost"
+          size="sm"
+          :disabled="!chat.messages.length && !hasCSSChanges && !hasAppConfigChanges"
+          @click="clearMessages"
+        />
+      </UTooltip>
     </template>
 
     <template #body>
       <UTheme
         :ui="{
           prose: {
-            p: { base: 'my-2.5 text-sm/6' },
+            p: { base: 'my-2 text-sm/6' },
             li: { base: 'my-0.5 text-sm/6' },
-            ul: { base: 'my-2.5' },
-            ol: { base: 'my-2.5' },
+            ul: { base: 'my-2' },
+            ol: { base: 'my-2' },
             h1: { base: 'text-xl mb-4' },
             h2: { base: 'text-lg mt-6 mb-3' },
             h3: { base: 'text-base mt-4 mb-2' },
             h4: { base: 'text-sm mt-3 mb-1.5' },
             code: { base: 'text-xs' },
-            pre: { root: 'my-2.5', base: 'text-xs/5' },
-            table: { root: 'my-2.5' },
-            hr: { base: 'my-5' }
+            pre: { root: 'my-2', base: 'text-xs/5' },
+            table: { root: 'my-2' },
+            hr: { base: 'my-4' }
           }
         }"
       >
@@ -270,43 +350,41 @@ function clearMessages() {
           :messages="chat.messages"
           :status="chat.status"
           compact
-          class="px-0"
-          :user="{ ui: { content: 'text-sm/6', container: 'pb-2.5' } }"
+          class="px-0 gap-2"
+          :user="{ ui: { container: 'pb-0' } }"
+          :assistant="{ ui: { content: 'flex flex-col gap-2' } }"
         >
           <template #content="{ message }">
             <ChatReasoning
               v-if="message.role === 'assistant' && hasReasoning(message)"
+              icon="i-lucide-brain"
+              chevron="leading"
               :text="getReasoningText(message)"
               :is-streaming="isReasoningStreaming(message)"
             />
 
-            <ChatMessageParts :message="message">
-              <template #text="{ part, index, message: msg }">
-                <MDCCached
-                  v-if="msg.role === 'assistant'"
-                  :value="part.text"
-                  :cache-key="`${msg.id}-${index}`"
-                  :components="components"
-                  :parser-options="{ highlight: false }"
-                  class="*:first:mt-0! *:last:mb-0!"
-                />
-                <p v-else class="whitespace-pre-wrap">
-                  {{ part.text }}
-                </p>
-              </template>
-              <!-- <template #tool="{ part, loading }">
-                <p class="text-muted text-sm leading-6 my-1.5">
-                  <span v-if="!loading">{{ getToolDisplayText(part) }}</span>
-                  <ChatShimmer v-else :text="getToolDisplayText(part)" />
-                </p>
-              </template> -->
-            </ChatMessageParts>
+            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${(part as any).state}` : ''}`">
+              <MDCCached
+                v-if="part.type === 'text'"
+                :value="part.text"
+                :cache-key="`${message.id}-${index}`"
+                :components="components"
+                :parser-options="{ highlight: false }"
+                class="*:first:mt-0! *:last:mb-0!"
+              />
+              <ChatTool
+                v-else-if="isToolPart(part)"
+                :text="getToolText(part)"
+                :icon="getToolIcon(part)"
+                :loading="isToolLoading(part)"
+              />
+            </template>
           </template>
         </UChatMessages>
 
-        <div v-else class="flex flex-col gap-5">
-          <div v-for="category in suggestions" :key="category.category" data-slot="suggestion-group" class="flex flex-col gap-1.5">
-            <p class="text-xs font-medium uppercase tracking-wide text-dimmed">
+        <div v-else class="flex flex-col gap-2.5">
+          <div v-for="category in suggestions" :key="category.category" class="flex flex-col gap-1.5">
+            <p class="text-xs font-semibold uppercase tracking-wide text-dimmed">
               {{ category.category }}
             </p>
 
@@ -316,7 +394,8 @@ function clearMessages() {
                 :key="question"
                 :label="question"
                 color="neutral"
-                variant="ghost"
+                variant="link"
+                class="font-normal"
                 @click="askQuestion(question)"
               />
             </div>
@@ -335,9 +414,9 @@ function clearMessages() {
         @submit="onSubmit"
       >
         <UChatPromptSubmit
-          color="neutral"
           size="sm"
           :status="chat.status"
+          :disabled="!input.trim()"
           @stop="chat.stop()"
           @reload="chat.regenerate()"
         />

@@ -97,7 +97,7 @@ const links = computed(() => [{
   icon: 'i-lucide-bot',
   label: 'Explain with AI',
   onClick: () => {
-    messages.value = [{
+    messages.value = [...messages.value, {
       id: String(Date.now()),
       role: 'user',
       parts: [{ type: 'text', text: `Read the documentation page at ${page.value?.path} and summarize it. I want to ask questions about it.` }]
