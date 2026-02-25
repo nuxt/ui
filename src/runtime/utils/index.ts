@@ -193,7 +193,7 @@ export function transformUI(ui: any, uiProp?: any) {
   return Object.entries(ui).reduce((acc, [key, value]) => {
     acc[key] = typeof value === 'function' ? value({ class: uiProp?.[key] }) : value
     return acc
-  }, uiProp || {})
+  }, { ...(uiProp || {}) })
 }
 
 export function resolveBaseURL(path?: string, baseURL?: string): string | undefined {
