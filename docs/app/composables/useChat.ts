@@ -1,9 +1,9 @@
 import type { UIMessage } from 'ai'
-import { createSharedComposable } from '@vueuse/core'
+import { createSharedComposable, useLocalStorage } from '@vueuse/core'
 
 export const useChat = createSharedComposable(() => {
   const open = useCookie('chat-open', { default: () => false })
-  const messages = ref<UIMessage[]>([])
+  const messages = useLocalStorage<UIMessage[]>('chat-messages', [])
 
   return {
     open,

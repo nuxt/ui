@@ -6,6 +6,28 @@ export default defineNuxtPlugin({
     const appConfig = useAppConfig()
 
     if (import.meta.client) {
+      function restoreCustomColors() {
+        const raw = localStorage.getItem('nuxt-ui-custom-colors')
+        if (!raw) return
+
+        try {
+          const customColors = JSON.parse(raw)
+          const vars = Object.entries(customColors).flatMap(([name, shades]) =>
+            Object.entries(shades as Record<string, string>).map(([shade, hex]) => `--color-${name}-${shade}: ${hex};`)
+          )
+
+          if (vars.length) {
+            const styleEl = document.createElement('style')
+            styleEl.id = 'chat-custom-colors'
+            document.head.appendChild(styleEl)
+            styleEl.textContent = `:root { ${vars.join(' ')} }`
+          }
+        }
+        catch {}
+      }
+
+      restoreCustomColors()
+
       function updateColor(type: 'primary' | 'neutral') {
         const color = localStorage.getItem(`nuxt-ui-${type}`)
         if (color) {
@@ -56,6 +78,31 @@ export default defineNuxtPlugin({
     if (import.meta.server) {
       useHead({
         script: [{
+          innerHTML: `
+            (function() {
+              var raw = localStorage.getItem('nuxt-ui-custom-colors');
+              if (raw) {
+                try {
+                  var colors = JSON.parse(raw);
+                  var vars = [];
+                  for (var name in colors) {
+                    for (var shade in colors[name]) {
+                      vars.push('--color-' + name + '-' + shade + ': ' + colors[name][shade] + ';');
+                    }
+                  }
+                  if (vars.length) {
+                    var s = document.createElement('style');
+                    s.id = 'chat-custom-colors';
+                    s.textContent = ':root { ' + vars.join(' ') + ' }';
+                    document.head.appendChild(s);
+                  }
+                } catch(e) {}
+              }
+            })();
+          `.replace(/\s+/g, ' '),
+          type: 'text/javascript',
+          tagPriority: -2
+        }, {
           innerHTML: `
             let html = document.querySelector('style#nuxt-ui-colors').innerHTML;
 

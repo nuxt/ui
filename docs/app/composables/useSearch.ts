@@ -9,17 +9,13 @@ export function useSearch() {
   function onSelect() {
     track('AI Chat Opened', { hasSearchTerm: !!searchTerm.value })
 
-    messages.value = searchTerm.value
-      ? [{
-          id: '1',
-          role: 'user',
-          parts: [{ type: 'text', text: searchTerm.value }]
-        }]
-      : [{
-          id: '1',
-          role: 'assistant',
-          parts: [{ type: 'text', text: 'Hello, how can I help you today?' }]
-        }]
+    if (searchTerm.value) {
+      messages.value = [{
+        id: '1',
+        role: 'user',
+        parts: [{ type: 'text', text: searchTerm.value }]
+      }]
+    }
 
     open.value = true
   }
