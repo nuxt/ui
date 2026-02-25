@@ -170,10 +170,28 @@ export function createListHandler(listType: 'bulletList' | 'orderedList' | 'task
   const fnName = fnNameMap[listType]
   const listItemType = listType === 'taskList' ? 'taskItem' : 'listItem'
 
+  // All known list node types - only those registered as extensions will be used at runtime
+  const allListTypes = ['bulletList', 'orderedList', 'taskList'] as const
+
+  /** Returns the list types actually available in the editor's schema */
+  function getAvailableListTypes(editor: Editor) {
+    return allListTypes.filter(type => isExtensionAvailable(editor, type))
+  }
+
+  /** Lifts content out of all available list wrappers */
+  function liftFromLists(chain: any, editor: Editor) {
+    for (const type of getAvailableListTypes(editor)) {
+      chain = chain.lift(type)
+    }
+    return chain
+  }
+
   return {
     canExecute: (editor: Editor) => {
       // Can execute if the toggle command works OR we're in any list type (to allow conversion)
-      return (editor.can() as any)[fnName]() || editor.isActive('bulletList') || editor.isActive('orderedList') || editor.isActive('taskList') || editor.isActive('taskItem') || editor.isActive('listItem')
+      return (editor.can() as any)[fnName]()
+        || editor.isActive('listItem')
+        || getAvailableListTypes(editor).some(type => editor.isActive(type))
     },
     execute: (editor: Editor) => {
       const { state } = editor
@@ -198,23 +216,15 @@ export function createListHandler(listType: 'bulletList' | 'orderedList' | 'task
 
       if (editor.isActive(listType)) {
         // Unwrap list if same type is active
-        return chain
-          .liftListItem(listItemType)
-          .lift('bulletList')
-          .lift('orderedList')
-          .lift('taskList')
-          .selectTextblockEnd()
+        return liftFromLists(chain.liftListItem(listItemType), editor).selectTextblockEnd()
       }
 
       // Check if a different list type is active and convert
-      const currentListItemType = editor.isActive('taskList') ? 'taskItem' : 'listItem'
-      if (editor.isActive('bulletList') || editor.isActive('orderedList') || editor.isActive('taskList')) {
+      const activeListTypes = getAvailableListTypes(editor)
+      if (activeListTypes.some(type => editor.isActive(type))) {
+        const currentListItemType = editor.isActive('taskList') ? 'taskItem' : 'listItem'
         // First unwrap the current list, then wrap in the new list type
-        const unwrapped = chain
-          .liftListItem(currentListItemType)
-          .lift('bulletList')
-          .lift('orderedList')
-          .lift('taskList')
+        const unwrapped = liftFromLists(chain.liftListItem(currentListItemType), editor)
         return (unwrapped as any)[fnName]().selectTextblockEnd()
       }
 
