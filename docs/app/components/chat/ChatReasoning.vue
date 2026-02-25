@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import type { UIMessage } from 'ai'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
+import { useScroll } from '@vueuse/core'
 
 const props = withDefaults(defineProps<{
-  text?: string
-  isStreaming?: boolean
+  message: UIMessage
+  streaming?: boolean
   duration?: number
   icon?: string
   /**
@@ -19,9 +21,26 @@ const props = withDefaults(defineProps<{
   chevronIcon?: string
   autoCloseDelay?: number
 }>(), {
-  isStreaming: false,
+  streaming: false,
   chevron: 'trailing',
   autoCloseDelay: 500
+})
+
+const reasoningText = computed(() => {
+  return (props.message.parts || [])
+    .filter((p: any) => p.type === 'reasoning')
+    .map((p: any) => p.text)
+    .join('\n\n')
+})
+
+const hasReasoning = computed(() => {
+  return (props.message.parts || []).some((p: any) => p.type === 'reasoning')
+})
+
+const isStreaming = computed(() => {
+  if (!props.streaming) return false
+  const lastPart = props.message.parts?.at(-1)
+  return lastPart?.type === 'reasoning'
 })
 
 defineEmits<{
@@ -30,12 +49,12 @@ defineEmits<{
 
 const appConfig = useAppConfig()
 
-const internalOpen = ref(props.isStreaming)
-const startTime = ref<number | null>(props.isStreaming ? Date.now() : null)
+const internalOpen = ref(isStreaming.value)
+const startTime = ref<number | null>(isStreaming.value ? Date.now() : null)
 const internalDuration = ref<number | undefined>(undefined)
 const autoCloseTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 
-watch(() => props.isStreaming, (streaming, wasStreaming) => {
+watch(isStreaming, (streaming, wasStreaming) => {
   if (streaming) {
     if (autoCloseTimeout.value) {
       clearTimeout(autoCloseTimeout.value)
@@ -62,7 +81,7 @@ watch(() => props.isStreaming, (streaming, wasStreaming) => {
 const actualDuration = computed(() => props.duration ?? internalDuration.value)
 
 const thinkingMessage = computed(() => {
-  if (props.isStreaming || actualDuration.value === 0) {
+  if (isStreaming.value || actualDuration.value === 0) {
     return 'Thinking...'
   }
   if (actualDuration.value === undefined) {
@@ -92,13 +111,25 @@ onUnmounted(() => {
   }
 })
 
-const hasContent = computed(() => !!props.text || props.isStreaming)
+const hasContent = computed(() => !!reasoningText.value || isStreaming.value)
 
-const chevronIconName = computed(() => props.chevronIcon || (appConfig.ui as any).icons?.chevronDown || 'i-lucide-chevron-down')
+const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.chevronDown)
+
+const bodyRef = ref<HTMLElement>()
+const { arrivedState } = useScroll(bodyRef)
+const isOverflowing = ref(false)
+
+useResizeObserver(bodyRef, (entries) => {
+  const el = entries[0]?.target as HTMLElement | undefined
+  if (el) {
+    isOverflowing.value = el.scrollHeight > el.clientHeight
+  }
+})
 </script>
 
 <template>
   <CollapsibleRoot
+    v-if="hasReasoning"
     v-slot="{ open }"
     :open="internalOpen"
     :unmount-on-hide="true"
@@ -112,16 +143,16 @@ const chevronIconName = computed(() => props.chevronIcon || (appConfig.ui as any
       <button
         type="button"
         data-slot="trigger"
-        class="group flex w-full items-center gap-1.5 text-muted hover:text-default text-sm cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors"
+        class="group flex w-full items-center gap-1.5 text-muted hover:text-default text-sm cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         <span v-if="hasContent && chevron === 'leading'" class="relative size-4 shrink-0">
           <UIcon
             :name="icon"
-            class="absolute inset-0 size-4 transition-opacity group-hover:opacity-0"
+            class="absolute inset-0 size-4 transition-opacity group-hover:opacity-0 group-data-[state=open]:opacity-0"
           />
           <UIcon
             :name="chevronIconName"
-            class="absolute inset-0 size-4 opacity-0 transition-all group-hover:opacity-100 group-data-[state=open]:rotate-180"
+            class="absolute inset-0 size-4 opacity-0 transition-all group-hover:opacity-100 group-data-[state=open]:opacity-100 group-data-[state=open]:rotate-180"
           />
         </span>
         <UIcon v-else :name="icon" class="size-4 shrink-0" />
@@ -141,10 +172,14 @@ const chevronIconName = computed(() => props.chevronIcon || (appConfig.ui as any
       data-slot="content"
       class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden"
     >
-      <div data-slot="body" class="pt-2 text-sm text-muted whitespace-pre-wrap">
-        <slot :open="open">
-          {{ text }}
-        </slot>
+      <div class="relative pt-2">
+        <div v-if="isOverflowing && !arrivedState.top" class="absolute inset-x-0 top-2 h-6 bg-linear-to-b from-default to-transparent pointer-events-none" />
+        <div ref="bodyRef" data-slot="body" class="max-h-[200px] overflow-y-auto text-sm text-muted whitespace-pre-wrap">
+          <slot :open="open">
+            {{ reasoningText }}
+          </slot>
+        </div>
+        <div v-if="isOverflowing && !arrivedState.bottom" class="absolute inset-x-0 bottom-0 h-6 bg-linear-to-t from-default to-transparent pointer-events-none" />
       </div>
     </CollapsibleContent>
   </CollapsibleRoot>

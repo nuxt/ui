@@ -39,8 +39,12 @@ function onSubmit() {
       :variant="variant"
       collapsible="icon"
       rail
-      :ui="{ container: 'relative' }"
+      :ui="{ container: 'relative', body: 'py-2' }"
     >
+      <template #header="{ state }">
+        <Logo class="h-5 min-w-12" :collapsed="state === 'collapsed'" />
+      </template>
+
       <UNavigationMenu
         :items="[{ label: 'Home', icon: 'i-lucide-home', to: '/' }, { label: 'Chat', icon: 'i-lucide-message-circle', to: '/chat' }]"
         orientation="vertical"

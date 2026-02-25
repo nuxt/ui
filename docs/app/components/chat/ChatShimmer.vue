@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { motion } from 'motion-v'
+import { Motion } from 'motion-v'
 
 const props = withDefaults(defineProps<{
   text: string
@@ -19,15 +19,14 @@ const shimmerStyle = computed(() => ({
 </script>
 
 <template>
-  <component
-    :is="(motion as any).span"
+  <Motion
     :initial="{ backgroundPosition: '100% center' }"
     :animate="{ backgroundPosition: '0% center' }"
     :transition="{ repeat: Infinity, duration, ease: 'linear' }"
     :style="shimmerStyle"
-    data-slot="shimmer"
+    data-slot="base"
     class="inline-block bg-size-[250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--color-neutral-100),#0000_calc(50%+var(--spread)))]"
   >
     {{ text }}
-  </component>
+  </Motion>
 </template>
