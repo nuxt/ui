@@ -160,7 +160,13 @@ export function getDisplayValue<T extends Array<any>, V>(
   return String(source)
 }
 
-export function isArrayOfArray<A>(item: A[] | A[][]): item is A[][] {
+export function isArrayOfArray<
+  A extends any[] | any[][]
+>(item: A): item is A extends Array<infer T>
+  ? T extends any[]
+    ? T[]
+    : never
+  : never {
   return Array.isArray(item[0])
 }
 
