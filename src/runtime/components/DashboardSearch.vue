@@ -72,7 +72,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
 }
 
 export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem> & {
-  content(props: { close: () => void }): VNode[]
+  content?(props: { close: () => void }): VNode[]
 }
 
 </script>

@@ -17,7 +17,7 @@ export interface PageColumnsProps {
 }
 
 export interface PageColumnsSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

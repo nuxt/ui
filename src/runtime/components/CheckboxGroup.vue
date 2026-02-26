@@ -72,9 +72,9 @@ export type CheckboxGroupEmits<T extends CheckboxGroupItem[] = CheckboxGroupItem
 type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => VNode[]
 
 export interface CheckboxGroupSlots<T extends CheckboxGroupItem[] = CheckboxGroupItem[]> {
-  legend(props?: {}): VNode[]
-  label: SlotProps<T[number]>
-  description: SlotProps<T[number]>
+  legend?(props?: {}): VNode[]
+  label?: SlotProps<T[number]>
+  description?: SlotProps<T[number]>
 }
 </script>
 

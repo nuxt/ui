@@ -33,10 +33,10 @@ export interface PageFeatureProps {
 }
 
 export interface PageFeatureSlots {
-  leading(props: { ui: PageFeature['ui'] }): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  default(props?: {}): VNode[]
+  leading?(props: { ui: PageFeature['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

@@ -44,9 +44,9 @@ export interface InputTimeEmits extends TimeFieldRootEmits {
 }
 
 export interface InputTimeSlots {
-  leading(props: { ui: InputTime['ui'] }): VNode[]
-  default(props: { ui: InputTime['ui'] }): VNode[]
-  trailing(props: { ui: InputTime['ui'] }): VNode[]
+  leading?(props: { ui: InputTime['ui'] }): VNode[]
+  default?(props: { ui: InputTime['ui'] }): VNode[]
+  trailing?(props: { ui: InputTime['ui'] }): VNode[]
 }
 </script>
 

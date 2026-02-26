@@ -12,7 +12,7 @@ export interface AppProps<T extends Messages = Messages> extends Omit<ConfigProv
 }
 
 export interface AppSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 
 export default {

@@ -40,10 +40,10 @@ type ExtendSlotWithVersion<T extends ChangelogVersionProps, K extends keyof Chan
     : ChangelogVersionSlots[K]
 
 export type ChangelogVersionsSlots<T extends ChangelogVersionProps = ChangelogVersionProps> = {
-  [K in keyof ChangelogVersionSlots]: ExtendSlotWithVersion<T, K>
+  [K in keyof ChangelogVersionSlots]?: ExtendSlotWithVersion<T, K>
 } & {
-  default(props?: {}): VNode[]
-  indicator(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  indicator?(props?: {}): VNode[]
 }
 
 </script>

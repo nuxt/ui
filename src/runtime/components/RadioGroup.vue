@@ -79,12 +79,12 @@ export type RadioGroupEmits<T extends RadioGroupItem[] = RadioGroupItem[], VK ex
 
 type NormalizeItem<T extends RadioGroupItem> = Exclude<T & { id: string }, RadioGroupValue>
 
-type SlotProps<T extends RadioGroupItem> = (props: { item: NormalizeItem<T>, modelValue?: RadioGroupValue }) => VNode[]
+type SlotProps<T extends RadioGroupItem> = (props: { item: NormalizeItem<T>, modelValue: RadioGroupValue }) => VNode[]
 
 export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> {
-  legend(props?: {}): VNode[]
-  label: SlotProps<T[number]>
-  description: SlotProps<T[number]>
+  legend?(props?: {}): VNode[]
+  label?: SlotProps<T[number]>
+  description?: SlotProps<T[number]>
 }
 </script>
 

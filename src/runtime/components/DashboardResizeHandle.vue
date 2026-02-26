@@ -17,7 +17,7 @@ export interface DashboardResizeHandleProps {
 }
 
 export interface DashboardResizeHandleSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

@@ -20,8 +20,8 @@ export interface CollapsibleProps extends Pick<CollapsibleRootProps, 'defaultOpe
 export interface CollapsibleEmits extends CollapsibleRootEmits {}
 
 export interface CollapsibleSlots {
-  default(props: { open: boolean }): VNode[]
-  content(props?: {}): VNode[]
+  default?(props: { open: boolean }): VNode[]
+  content?(props?: {}): VNode[]
 }
 </script>
 

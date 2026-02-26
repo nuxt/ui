@@ -34,10 +34,10 @@ export interface UserProps {
 }
 
 export interface UserSlots {
-  avatar(props: { ui: User['ui'] }): VNode[]
-  name(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  default(props?: {}): VNode[]
+  avatar?(props: { ui: User['ui'] }): VNode[]
+  name?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

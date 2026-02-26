@@ -21,9 +21,9 @@ export interface CardProps {
 }
 
 export interface CardSlots {
-  header(props?: {}): VNode[]
-  default(props?: {}): VNode[]
-  footer(props?: {}): VNode[]
+  header?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 

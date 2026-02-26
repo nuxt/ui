@@ -206,19 +206,19 @@ export interface InputMenuSlots<
   C extends boolean | object = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, open: boolean, ui: InputMenu['ui'] }): VNode[]
-  'trailing'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, open: boolean, ui: InputMenu['ui'] }): VNode[]
-  'empty'(props: { searchTerm?: string }): VNode[]
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label'(props: { item: T, index: number }): VNode[]
-  'item-description'(props: { item: T, index: number }): VNode[]
-  'item-trailing': SlotProps<T>
-  'tags-item-text'(props: { item: T, index: number }): VNode[]
-  'tags-item-delete': SlotProps<T>
-  'content-top': (props?: {}) => VNode[]
-  'content-bottom': (props?: {}) => VNode[]
-  'create-item-label'(props: { item: string }): VNode[]
+  'leading'?(props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, open: boolean, ui: InputMenu['ui'] }): VNode[]
+  'trailing'?(props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, open: boolean, ui: InputMenu['ui'] }): VNode[]
+  'empty'?(props: { searchTerm: string }): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?(props: { item: T, index: number }): VNode[]
+  'item-description'?(props: { item: T, index: number }): VNode[]
+  'item-trailing'?: SlotProps<T>
+  'tags-item-text'?(props: { item: T, index: number }): VNode[]
+  'tags-item-delete'?: SlotProps<T>
+  'content-top'?: (props?: {}) => VNode[]
+  'content-bottom'?: (props?: {}) => VNode[]
+  'create-item-label'?(props: { item: string }): VNode[]
 }
 </script>
 

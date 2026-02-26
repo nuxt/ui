@@ -44,10 +44,10 @@ export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSur
 type SlotProps<T> = (props: { link: T, ui: ContentSurround['ui'] }) => VNode[]
 
 export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSurroundLink> {
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-title': SlotProps<T>
-  'link-description': SlotProps<T>
+  'link'?: SlotProps<T>
+  'link-leading'?: SlotProps<T>
+  'link-title'?: SlotProps<T>
+  'link-description'?: SlotProps<T>
 }
 </script>
 

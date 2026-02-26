@@ -82,18 +82,18 @@ export interface PricingTableProps<T extends PricingTableTier = PricingTableTier
 type SlotProps<T extends PricingTableTier> = (props: { tier: T }) => VNode[]
 
 export type PricingTableSlots<T extends PricingTableTier = PricingTableTier> = {
-  'caption': (props?: {}) => VNode[]
-  'tier': SlotProps<T>
-  'tier-title': SlotProps<T>
-  'tier-description': SlotProps<T>
-  'tier-badge': SlotProps<T>
-  'tier-button': SlotProps<T>
-  'tier-billing': SlotProps<T>
-  'tier-discount': SlotProps<T>
-  'tier-price': SlotProps<T>
-  'section-title': (props: { section: PricingTableSection<T> }) => VNode[]
-  'feature-title': (props: { feature: PricingTableSectionFeature<T>, section: PricingTableSection<T> }) => VNode[]
-  'feature-value': (props: { feature: PricingTableSectionFeature<T>, tier: T, section: PricingTableSection<T> }) => VNode[]
+  'caption'?: (props?: {}) => VNode[]
+  'tier'?: SlotProps<T>
+  'tier-title'?: SlotProps<T>
+  'tier-description'?: SlotProps<T>
+  'tier-badge'?: SlotProps<T>
+  'tier-button'?: SlotProps<T>
+  'tier-billing'?: SlotProps<T>
+  'tier-discount'?: SlotProps<T>
+  'tier-price'?: SlotProps<T>
+  'section-title'?: (props: { section: PricingTableSection<T> }) => VNode[]
+  'feature-title'?: (props: { feature: PricingTableSectionFeature<T>, section: PricingTableSection<T> }) => VNode[]
+  'feature-value'?: (props: { feature: PricingTableSectionFeature<T>, tier: T, section: PricingTableSection<T> }) => VNode[]
 } & DynamicSlots<T, 'title' | 'description' | 'badge' | 'button' | 'billing' | 'discount' | 'price'>
 & FeatureDynamicSlots<PricingTableSectionFeature<T>, 'title' | 'value'>
 & SectionDynamicSlots<PricingTableSection<T>, 'title'>

@@ -94,7 +94,7 @@ export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Button
 export type LinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media'
 
 export interface LinkSlots {
-  default(props: { active: boolean }): VNode[]
+  default?(props: { active: boolean }): VNode[]
 }
 
 // from upstream NuxtLink

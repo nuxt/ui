@@ -63,11 +63,11 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
 export interface ToastEmits extends ToastRootEmits {}
 
 export interface ToastSlots {
-  leading(props: { ui: Toast['ui'] }): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  actions(props?: {}): VNode[]
-  close(props: { ui: Toast['ui'] }): VNode[]
+  leading?(props: { ui: Toast['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  close?(props: { ui: Toast['ui'] }): VNode[]
 }
 </script>
 

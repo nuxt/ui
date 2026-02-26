@@ -38,13 +38,13 @@ export interface DashboardNavbarProps {
 type DashboardNavbarSlotsProps = Omit<DashboardContext, 'storage' | 'storageKey' | 'persistent' | 'unit'>
 
 export interface DashboardNavbarSlots {
-  title(props?: {}): VNode[]
-  leading(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): VNode[]
-  trailing(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): VNode[]
-  left(props: DashboardNavbarSlotsProps): VNode[]
-  default(props: DashboardNavbarSlotsProps): VNode[]
-  right(props: DashboardNavbarSlotsProps): VNode[]
-  toggle(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  leading?(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): VNode[]
+  trailing?(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): VNode[]
+  left?(props: DashboardNavbarSlotsProps): VNode[]
+  default?(props: DashboardNavbarSlotsProps): VNode[]
+  right?(props: DashboardNavbarSlotsProps): VNode[]
+  toggle?(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): VNode[]
 }
 </script>
 

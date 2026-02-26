@@ -60,11 +60,11 @@ export interface TimelineEmits<T extends TimelineItem = TimelineItem> {
 }
 
 export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
-  indicator: SlotProps<T>
-  wrapper: SlotProps<T>
-  date: SlotProps<T>
-  title: SlotProps<T>
-  description: SlotProps<T>
+  indicator?: SlotProps<T>
+  wrapper?: SlotProps<T>
+  date?: SlotProps<T>
+  title?: SlotProps<T>
+  description?: SlotProps<T>
 } & DynamicSlots<T, 'indicator' | 'wrapper' | 'date' | 'title' | 'description', { item: T }>
 
 </script>

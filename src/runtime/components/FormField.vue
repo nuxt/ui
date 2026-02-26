@@ -43,12 +43,12 @@ export interface FormFieldProps {
 }
 
 export interface FormFieldSlots {
-  label(props: { label?: string }): VNode[]
-  hint(props: { hint?: string }): VNode[]
-  description(props: { description?: string }): VNode[]
-  help(props: { help?: string }): VNode[]
-  error(props: { error?: boolean | string }): VNode[]
-  default(props: { error?: boolean | string }): VNode[]
+  label?(props: { label: string | undefined }): VNode[]
+  hint?(props: { hint: string | undefined }): VNode[]
+  description?(props: { description: string | undefined }): VNode[]
+  help?(props: { help: string | undefined }): VNode[]
+  error?(props: { error: string | true | undefined }): VNode[]
+  default?(props: { error: string | true | undefined }): VNode[]
 }
 </script>
 

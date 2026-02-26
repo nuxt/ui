@@ -17,8 +17,8 @@ export interface ChatPaletteProps {
 }
 
 export interface ChatPaletteSlots {
-  default(props?: {}): VNode[]
-  prompt(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  prompt?(props?: {}): VNode[]
 }
 </script>
 

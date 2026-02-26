@@ -25,7 +25,7 @@ export interface AvatarGroupProps {
 }
 
 export interface AvatarGroupSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

@@ -41,17 +41,17 @@ export interface ChangelogVersionProps {
 }
 
 export interface ChangelogVersionSlots {
-  header(props?: {}): VNode[]
-  badge(props: { ui: ChangelogVersion['ui'] }): VNode[]
-  date(props?: {}): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  image(props: { ui: ChangelogVersion['ui'] }): VNode[]
-  body(props?: {}): VNode[]
-  footer(props?: {}): VNode[]
-  authors(props?: {}): VNode[]
-  actions(props?: {}): VNode[]
-  indicator(props: { ui: ChangelogVersion['ui'] }): VNode[]
+  header?(props?: {}): VNode[]
+  badge?(props: { ui: ChangelogVersion['ui'] }): VNode[]
+  date?(props?: {}): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  image?(props: { ui: ChangelogVersion['ui'] }): VNode[]
+  body?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
+  authors?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  indicator?(props: { ui: ChangelogVersion['ui'] }): VNode[]
 }
 </script>
 

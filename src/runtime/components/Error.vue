@@ -31,11 +31,11 @@ export interface ErrorProps {
 }
 
 export interface ErrorSlots {
-  default(props?: {}): VNode[]
-  statusCode(props?: {}): VNode[]
-  statusMessage(props?: {}): VNode[]
-  message(props?: {}): VNode[]
-  links(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  statusCode?(props?: {}): VNode[]
+  statusMessage?(props?: {}): VNode[]
+  message?(props?: {}): VNode[]
+  links?(props?: {}): VNode[]
 }
 </script>
 

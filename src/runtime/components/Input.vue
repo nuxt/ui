@@ -59,9 +59,9 @@ export interface InputEmits<T extends InputValue = InputValue, Mod extends Model
 }
 
 export interface InputSlots {
-  leading(props: { ui: Input['ui'] }): VNode[]
-  default(props: { ui: Input['ui'] }): VNode[]
-  trailing(props: { ui: Input['ui'] }): VNode[]
+  leading?(props: { ui: Input['ui'] }): VNode[]
+  default?(props: { ui: Input['ui'] }): VNode[]
+  trailing?(props: { ui: Input['ui'] }): VNode[]
 }
 </script>
 

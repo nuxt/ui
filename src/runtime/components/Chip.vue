@@ -40,8 +40,8 @@ export interface ChipEmits {
 }
 
 export interface ChipSlots {
-  default(props?: {}): VNode[]
-  content(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  content?(props?: {}): VNode[]
 }
 </script>
 

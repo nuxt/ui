@@ -17,7 +17,7 @@ export interface ContainerProps {
 }
 
 export interface ContainerSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

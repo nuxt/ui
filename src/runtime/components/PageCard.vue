@@ -58,13 +58,13 @@ export interface PageCardProps {
 }
 
 export interface PageCardSlots {
-  header(props?: {}): VNode[]
-  body(props?: {}): VNode[]
-  leading(props: { ui: PageCard['ui'] }): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  footer(props?: {}): VNode[]
-  default(props?: {}): VNode[]
+  header?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  leading?(props: { ui: PageCard['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

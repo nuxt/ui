@@ -48,18 +48,18 @@ export interface PageSectionProps {
 }
 
 export interface PageSectionSlots {
-  top(props?: {}): VNode[]
-  header(props?: {}): VNode[]
-  leading(props: { ui: PageSection['ui'] }): VNode[]
-  headline(props?: {}): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  body(props?: {}): VNode[]
-  features(props?: {}): VNode[]
-  footer(props?: {}): VNode[]
-  links(props?: {}): VNode[]
-  default(props?: {}): VNode[]
-  bottom(props?: {}): VNode[]
+  top?(props?: {}): VNode[]
+  header?(props?: {}): VNode[]
+  leading?(props: { ui: PageSection['ui'] }): VNode[]
+  headline?(props?: {}): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  features?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
+  links?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  bottom?(props?: {}): VNode[]
 }
 </script>
 

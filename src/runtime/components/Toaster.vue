@@ -38,7 +38,7 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
 }
 
 export interface ToasterSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 
 export default {

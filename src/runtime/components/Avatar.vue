@@ -32,7 +32,7 @@ export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 
 }
 
 export interface AvatarSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

@@ -53,13 +53,13 @@ export interface DrawerEmits extends DrawerRootEmits {
 }
 
 export interface DrawerSlots {
-  default(props?: {}): VNode[]
-  content(props?: {}): VNode[]
-  header(props?: {}): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  body(props?: {}): VNode[]
-  footer(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  content?(props?: {}): VNode[]
+  header?(props?: {}): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 

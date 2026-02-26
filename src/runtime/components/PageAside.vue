@@ -17,9 +17,9 @@ export interface PageAsideProps {
 }
 
 export interface PageAsideSlots {
-  top(props?: {}): VNode[]
-  default(props?: {}): VNode[]
-  bottom(props?: {}): VNode[]
+  top?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  bottom?(props?: {}): VNode[]
 }
 </script>
 

@@ -91,14 +91,14 @@ type DynamicFieldSlots<T, F, SlotProps = { field: F, state: T }> = Record<`${key
 type DynamicFormFieldSlots<T> = Record<`${keyof T extends string ? keyof T : never}-${'label' | 'description' | 'hint' | 'help' | 'error'}` | (string & {}), (props?: {}) => VNode[]>
 
 export type AuthFormSlots<T extends object = object, F extends AuthFormField = AuthFormField> = {
-  header(props?: {}): VNode[]
-  leading(props: { ui: AuthForm['ui'] }): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  providers(props?: {}): VNode[]
-  validation(props?: {}): VNode[]
-  submit(props: { loading: boolean }): VNode[]
-  footer(props?: {}): VNode[]
+  header?(props?: {}): VNode[]
+  leading?(props: { ui: AuthForm['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  providers?(props?: {}): VNode[]
+  validation?(props?: {}): VNode[]
+  submit?(props: { loading: boolean }): VNode[]
+  footer?(props?: {}): VNode[]
 } & DynamicFieldSlots<T, F> & DynamicFormFieldSlots<T>
 
 </script>

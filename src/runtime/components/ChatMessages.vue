@@ -65,11 +65,11 @@ type ExtendSlotWithVersion<K extends keyof ChatMessageSlots>
     : ChatMessageSlots[K]
 
 export type ChatMessagesSlots = {
-  [K in keyof ChatMessageSlots]: ExtendSlotWithVersion<K>
+  [K in keyof ChatMessageSlots]?: ExtendSlotWithVersion<K>
 } & {
-  default(props?: {}): VNode[]
-  indicator(props: { ui: ChatMessages['ui'] }): VNode[]
-  viewport(props: { ui: ChatMessages['ui'], onClick: () => void }): VNode[]
+  default?(props?: {}): VNode[]
+  indicator?(props: { ui: ChatMessages['ui'] }): VNode[]
+  viewport?(props: { ui: ChatMessages['ui'], onClick: () => void }): VNode[]
 }
 
 </script>

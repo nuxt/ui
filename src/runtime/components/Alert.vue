@@ -62,11 +62,11 @@ export interface AlertEmits {
 }
 
 export interface AlertSlots {
-  leading(props: { ui: Alert['ui'] }): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  actions(props?: {}): VNode[]
-  close(props: { ui: Alert['ui'] }): VNode[]
+  leading?(props: { ui: Alert['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  close?(props: { ui: Alert['ui'] }): VNode[]
 }
 </script>
 

@@ -59,11 +59,11 @@ export interface InputTagsEmits<T extends InputTagItem> extends TagsInputRootEmi
 type SlotProps<T extends InputTagItem> = (props: { item: T, index: number, ui: InputTags['ui'] }) => VNode[]
 
 export interface InputTagsSlots<T extends InputTagItem = InputTagItem> {
-  'leading'(props: { ui: InputTags['ui'] }): VNode[]
-  'default'(props: { ui: InputTags['ui'] }): VNode[]
-  'trailing'(props: { ui: InputTags['ui'] }): VNode[]
-  'item-text': SlotProps<T>
-  'item-delete': SlotProps<T>
+  'leading'?(props: { ui: InputTags['ui'] }): VNode[]
+  'default'?(props: { ui: InputTags['ui'] }): VNode[]
+  'trailing'?(props: { ui: InputTags['ui'] }): VNode[]
+  'item-text'?: SlotProps<T>
+  'item-delete'?: SlotProps<T>
 }
 </script>
 

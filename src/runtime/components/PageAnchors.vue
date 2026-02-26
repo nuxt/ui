@@ -31,10 +31,10 @@ export interface PageAnchorsProps<T extends PageAnchor = PageAnchor> {
 type SlotProps<T> = (props: { link: T, active: boolean, ui: PageAnchors['ui'] }) => VNode[]
 
 export interface PageAnchorsSlots<T extends PageAnchor = PageAnchor> {
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-label'(props: { link: T, active: boolean }): VNode[]
-  'link-trailing'(props: { link: T, active: boolean }): VNode[]
+  'link'?: SlotProps<T>
+  'link-leading'?: SlotProps<T>
+  'link-label'?(props: { link: T, active: boolean }): VNode[]
+  'link-trailing'?(props: { link: T, active: boolean }): VNode[]
 }
 </script>
 

@@ -214,12 +214,12 @@ type DynamicHeaderFooterSlots<T, K = keyof T> = Record<`${K extends string ? K :
 type DynamicCellSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-cell` | (string & {}), (props: CellContext<T, unknown>) => VNode[]>
 
 export type TableSlots<T extends TableData = TableData> = {
-  'expanded': (props: { row: Row<T> }) => VNode[]
-  'empty': (props?: {}) => VNode[]
-  'loading': (props?: {}) => VNode[]
-  'caption': (props?: {}) => VNode[]
-  'body-top': (props?: {}) => VNode[]
-  'body-bottom': (props?: {}) => VNode[]
+  'expanded'?: (props: { row: Row<T> }) => VNode[]
+  'empty'?: (props?: {}) => VNode[]
+  'loading'?: (props?: {}) => VNode[]
+  'caption'?: (props?: {}) => VNode[]
+  'body-top'?: (props?: {}) => VNode[]
+  'body-bottom'?: (props?: {}) => VNode[]
 } & DynamicHeaderFooterSlots<T> & DynamicCellSlots<T>
 
 </script>

@@ -26,11 +26,11 @@ export interface PageHeaderProps {
 }
 
 export interface PageHeaderSlots {
-  headline(props?: {}): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  links(props?: {}): VNode[]
-  default(props?: {}): VNode[]
+  headline?(props?: {}): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  links?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

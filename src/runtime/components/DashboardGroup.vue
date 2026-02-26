@@ -18,7 +18,7 @@ export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' |
 }
 
 export interface DashboardGroupSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

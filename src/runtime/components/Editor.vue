@@ -80,7 +80,7 @@ export interface EditorEmits<T extends Content = Content> {
 }
 
 export interface EditorSlots<H extends EditorCustomHandlers = EditorCustomHandlers> {
-  default(props: { editor: TiptapEditor, handlers: EditorHandlers<H> }): VNode[]
+  default?(props: { editor: TiptapEditor, handlers: EditorHandlers<H> }): VNode[]
 }
 </script>
 

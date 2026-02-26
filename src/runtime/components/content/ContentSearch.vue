@@ -104,7 +104,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
 }
 
 export type ContentSearchSlots = CommandPaletteSlots<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem> & {
-  content(props: { close: () => void }): VNode[]
+  content?(props: { close: () => void }): VNode[]
 }
 
 </script>

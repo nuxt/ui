@@ -41,9 +41,9 @@ type ExtendSlotWithPlan<T extends PricingPlanProps, K extends keyof PricingPlanS
     : PricingPlanSlots[K]
 
 export type PricingPlansSlots<T extends PricingPlanProps = PricingPlanProps> = {
-  [K in keyof PricingPlanSlots]: ExtendSlotWithPlan<T, K>
+  [K in keyof PricingPlanSlots]?: ExtendSlotWithPlan<T, K>
 } & {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 
 </script>

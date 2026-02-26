@@ -97,23 +97,23 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number, ui: DropdownMenu['ui'] }) => VNode[]
+type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active: boolean, index: number, ui: DropdownMenu['ui'] }) => VNode[]
 
 export type DropdownMenuSlots<
   A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  'default'(props: { open: boolean }): VNode[]
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': (props: { item: T, active?: boolean, index: number }) => VNode[]
-  'item-description': (props: { item: T, active?: boolean, index: number }) => VNode[]
-  'item-trailing': SlotProps<T>
-  'content-top': (props: { sub: boolean }) => VNode[]
-  'content-bottom': (props: { sub: boolean }) => VNode[]
+  'default'?(props: { open: boolean }): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: (props: { item: T, active: boolean, index: number }) => VNode[]
+  'item-description'?: (props: { item: T, active: boolean, index: number }) => VNode[]
+  'item-trailing'?: SlotProps<T>
+  'content-top'?: (props: { sub: boolean }) => VNode[]
+  'content-bottom'?: (props: { sub: boolean }) => VNode[]
 }
-& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active?: boolean, index: number }>
-& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean, index: number, ui: DropdownMenu['ui'] }>
+& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active: boolean, index: number }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active: boolean, index: number, ui: DropdownMenu['ui'] }>
 
 </script>
 

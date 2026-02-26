@@ -93,19 +93,19 @@ export interface PricingPlanProps {
 }
 
 export interface PricingPlanSlots {
-  badge(props: { ui: PricingPlan['ui'] }): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  price(props?: {}): VNode[]
-  discount(props?: {}): VNode[]
-  billing(props: { ui: PricingPlan['ui'] }): VNode[]
-  features(props?: {}): VNode[]
-  button(props: { ui: PricingPlan['ui'] }): VNode[]
-  header(props?: {}): VNode[]
-  body(props?: {}): VNode[]
-  footer(props?: {}): VNode[]
-  tagline(props?: {}): VNode[]
-  terms(props?: {}): VNode[]
+  badge?(props: { ui: PricingPlan['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  price?(props?: {}): VNode[]
+  discount?(props?: {}): VNode[]
+  billing?(props: { ui: PricingPlan['ui'] }): VNode[]
+  features?(props?: {}): VNode[]
+  button?(props: { ui: PricingPlan['ui'] }): VNode[]
+  header?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
+  tagline?(props?: {}): VNode[]
+  terms?(props?: {}): VNode[]
 }
 </script>
 

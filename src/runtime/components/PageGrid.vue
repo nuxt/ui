@@ -17,7 +17,7 @@ export interface PageGridProps {
 }
 
 export interface PageGridSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

@@ -42,7 +42,7 @@ export interface MarqueeProps {
 }
 
 export interface MarqueeSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

@@ -102,7 +102,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
 }
 
 export type CarouselSlots<T extends CarouselItem = CarouselItem> = {
-  default(props: { item: T, index: number }): VNode[]
+  default?(props: { item: T, index: number }): VNode[]
 }
 
 export interface CarouselEmits {

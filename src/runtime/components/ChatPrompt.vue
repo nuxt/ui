@@ -33,8 +33,8 @@ export interface ChatPromptEmits {
 }
 
 export interface ChatPromptSlots extends TextareaSlots {
-  header(props?: {}): VNode[]
-  footer(props?: {}): VNode[]
+  header?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 

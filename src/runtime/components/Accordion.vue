@@ -62,11 +62,11 @@ export interface AccordionEmits extends AccordionRootEmits {}
 type SlotProps<T extends AccordionItem> = (props: { item: T, index: number, open: boolean, ui: Accordion['ui'] }) => VNode[]
 
 export type AccordionSlots<T extends AccordionItem = AccordionItem> = {
-  leading: SlotProps<T>
-  default(props: { item: T, index: number, open: boolean }): VNode[]
-  trailing: SlotProps<T>
-  content: SlotProps<T>
-  body: SlotProps<T>
+  default?(props: { item: T, index: number, open: boolean }): VNode[]
+  leading?: SlotProps<T>
+  trailing?: SlotProps<T>
+  content?: SlotProps<T>
+  body?: SlotProps<T>
 } & DynamicSlots<T, 'body', { index: number, open: boolean, ui: Accordion['ui'] }>
 
 </script>

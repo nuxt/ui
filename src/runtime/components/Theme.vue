@@ -8,7 +8,7 @@ export interface ThemeProps {
 }
 
 export interface ThemeSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

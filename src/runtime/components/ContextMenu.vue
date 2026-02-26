@@ -89,23 +89,23 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
 
 export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
-type SlotProps<T extends ContextMenuItem> = (props: { item: T, active?: boolean, index: number, ui: ContextMenu['ui'] }) => VNode[]
+type SlotProps<T extends ContextMenuItem> = (props: { item: T, active: boolean, index: number, ui: ContextMenu['ui'] }) => VNode[]
 
 export type ContextMenuSlots<
   A extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  'default'(props?: {}): VNode[]
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': (props: { item: T, active?: boolean, index: number }) => VNode[]
-  'item-description': (props: { item: T, active?: boolean, index: number }) => VNode[]
-  'item-trailing': SlotProps<T>
-  'content-top': (props: { sub: boolean }) => VNode[]
-  'content-bottom': (props: { sub: boolean }) => VNode[]
+  'default'?(props?: {}): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: (props: { item: T, active: boolean, index: number }) => VNode[]
+  'item-description'?: (props: { item: T, active: boolean, index: number }) => VNode[]
+  'item-trailing'?: SlotProps<T>
+  'content-top'?: (props: { sub: boolean }) => VNode[]
+  'content-bottom'?: (props: { sub: boolean }) => VNode[]
 }
-& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active?: boolean, index: number }>
-& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean, index: number, ui: ContextMenu['ui'] }>
+& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active: boolean, index: number }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active: boolean, index: number, ui: ContextMenu['ui'] }>
 
 </script>
 

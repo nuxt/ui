@@ -197,15 +197,15 @@ export type CommandPaletteEmits<T extends CommandPaletteItem = CommandPaletteIte
 type SlotProps<T> = (props: { item: T, index: number, ui: CommandPalette['ui'] }) => VNode[]
 
 export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> = {
-  'empty'(props: { searchTerm?: string }): VNode[]
-  'footer'(props: { ui: CommandPalette['ui'] }): VNode[]
-  'back'(props: { ui: CommandPalette['ui'] }): VNode[]
-  'close'(props: { ui: CommandPalette['ui'] }): VNode[]
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-description': SlotProps<T>
-  'item-trailing': SlotProps<T>
+  'empty'?(props: { searchTerm: string }): VNode[]
+  'footer'?(props: { ui: CommandPalette['ui'] }): VNode[]
+  'back'?(props: { ui: CommandPalette['ui'] }): VNode[]
+  'close'?(props: { ui: CommandPalette['ui'] }): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: SlotProps<T>
+  'item-description'?: SlotProps<T>
+  'item-trailing'?: SlotProps<T>
 } & Record<string, SlotProps<G>> & Record<string, SlotProps<T>>
 
 </script>

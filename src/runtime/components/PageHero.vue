@@ -36,16 +36,16 @@ export interface PageHeroProps {
 }
 
 export interface PageHeroSlots {
-  top(props?: {}): VNode[]
-  header(props?: {}): VNode[]
-  headline(props?: {}): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  body(props?: {}): VNode[]
-  footer(props?: {}): VNode[]
-  links(props?: {}): VNode[]
-  default(props?: {}): VNode[]
-  bottom(props?: {}): VNode[]
+  top?(props?: {}): VNode[]
+  header?(props?: {}): VNode[]
+  headline?(props?: {}): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
+  links?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  bottom?(props?: {}): VNode[]
 }
 </script>
 

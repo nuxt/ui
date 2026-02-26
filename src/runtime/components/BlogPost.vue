@@ -45,14 +45,14 @@ export interface BlogPostProps {
 }
 
 export interface BlogPostSlots {
-  date(props?: {}): VNode[]
-  badge(props?: {}): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  authors(props: { ui: BlogPost['ui'] }): VNode[]
-  header(props: { ui: BlogPost['ui'] }): VNode[]
-  body(props?: {}): VNode[]
-  footer(props?: {}): VNode[]
+  date?(props?: {}): VNode[]
+  badge?(props?: {}): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  authors?(props: { ui: BlogPost['ui'] }): VNode[]
+  header?(props: { ui: BlogPost['ui'] }): VNode[]
+  body?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 

@@ -60,9 +60,9 @@ export interface TextareaEmits<T extends TextareaValue = TextareaValue, Mod exte
 }
 
 export interface TextareaSlots {
-  leading(props: { ui: Textarea['ui'] }): VNode[]
-  default(props: { ui: Textarea['ui'] }): VNode[]
-  trailing(props: { ui: Textarea['ui'] }): VNode[]
+  leading?(props: { ui: Textarea['ui'] }): VNode[]
+  default?(props: { ui: Textarea['ui'] }): VNode[]
+  trailing?(props: { ui: Textarea['ui'] }): VNode[]
 }
 </script>
 

@@ -31,7 +31,7 @@ export interface KbdProps {
 }
 
 export interface KbdSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

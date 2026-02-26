@@ -55,8 +55,8 @@ export type CheckboxEmits = {
 }
 
 export interface CheckboxSlots {
-  label(props: { label?: string }): VNode[]
-  description(props: { description?: string }): VNode[]
+  label?(props: { label: string | undefined }): VNode[]
+  description?(props: { description: string | undefined }): VNode[]
 }
 </script>
 

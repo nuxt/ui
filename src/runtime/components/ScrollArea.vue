@@ -64,10 +64,10 @@ export interface ScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
 }
 
 export interface ScrollAreaSlots<T extends ScrollAreaItem = ScrollAreaItem> {
-  default(
+  default?(
     props:
       | { item: T, index: number, virtualItem?: VirtualItem }
-      | Record<string, never>,
+      | { item: T, index: 0 },
   ): VNode[]
 }
 
@@ -298,7 +298,7 @@ defineExpose({
 
     <template v-else>
       <div data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
-        <template v-if="items?.length">
+        <template v-if="items">
           <div
             v-for="(item, index) in items"
             :key="getItemKey(item, index)"
@@ -310,7 +310,7 @@ defineExpose({
         </template>
 
         <template v-else>
-          <slot />
+          <slot :item="({} as T)" :index="0" />
         </template>
       </div>
     </template>

@@ -49,9 +49,9 @@ export interface ChatMessageProps extends UIMessage {
 }
 
 export interface ChatMessageSlots {
-  leading(props: { avatar: ChatMessageProps['avatar'], ui: ChatMessage['ui'] }): VNode[]
+  leading?(props: { avatar: ChatMessageProps['avatar'], ui: ChatMessage['ui'] }): VNode[]
   content(props: ChatMessageProps): VNode[]
-  actions(props: { actions: ChatMessageProps['actions'] }): VNode[]
+  actions?(props: { actions: ChatMessageProps['actions'] }): VNode[]
 }
 </script>
 

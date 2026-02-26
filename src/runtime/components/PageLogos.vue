@@ -26,7 +26,7 @@ export interface PageLogosProps {
 }
 
 export interface PageLogosSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

@@ -53,10 +53,10 @@ export interface BannerProps {
 }
 
 export interface BannerSlots {
-  leading(props: { ui: Banner['ui'] }): VNode[]
-  title(props?: {}): VNode[]
-  actions(props?: {}): VNode[]
-  close(props: { ui: Banner['ui'] }): VNode[]
+  leading?(props: { ui: Banner['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  close?(props: { ui: Banner['ui'] }): VNode[]
 }
 
 export interface BannerEmits {

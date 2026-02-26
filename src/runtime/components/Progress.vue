@@ -45,7 +45,7 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
 export interface ProgressEmits extends ProgressRootEmits {}
 
 export type ProgressSlots = {
-  status(props: { percent?: number }): VNode[]
+  status?(props: { percent?: number }): VNode[]
 } & {
   [key: string]: (props: { step: number }) => VNode[]
 }

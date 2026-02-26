@@ -26,7 +26,7 @@ export interface FieldGroupProps {
 }
 
 export interface FieldGroupSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

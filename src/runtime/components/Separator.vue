@@ -45,7 +45,7 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
 }
 
 export interface SeparatorSlots {
-  default(props: { ui: Separator['ui'] }): VNode[]
+  default?(props: { ui: Separator['ui'] }): VNode[]
 }
 </script>
 

@@ -36,14 +36,14 @@ export interface FooterColumnsProps<T extends FooterColumnLink = FooterColumnLin
 type SlotProps<T> = (props: { link: T, active: boolean, ui: FooterColumns['ui'] }) => VNode[]
 
 export interface FooterColumnsSlots<T extends FooterColumnLink = FooterColumnLink> {
-  'left'(props?: {}): VNode[]
-  'default'(props?: {}): VNode[]
-  'right'(props?: {}): VNode[]
+  'left'?(props?: {}): VNode[]
+  'default'?(props?: {}): VNode[]
+  'right'?(props?: {}): VNode[]
   'column-label'?: (props: { column: FooterColumn<T> }) => VNode[]
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-label'(props: { link: T, active: boolean }): VNode[]
-  'link-trailing'(props: { link: T, active: boolean }): VNode[]
+  'link'?: SlotProps<T>
+  'link-leading'?: SlotProps<T>
+  'link-label'?(props: { link: T, active: boolean }): VNode[]
+  'link-trailing'?(props: { link: T, active: boolean }): VNode[]
 }
 </script>
 

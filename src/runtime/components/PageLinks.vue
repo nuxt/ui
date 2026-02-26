@@ -32,11 +32,11 @@ export interface PageLinksProps<T extends PageLink = PageLink> {
 type SlotProps<T> = (props: { link: T, active: boolean, ui: PageLinks['ui'] }) => VNode[]
 
 export interface PageLinksSlots<T extends PageLink = PageLink> {
-  'title'(props?: {}): VNode[]
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-label'(props: { link: T, active: boolean }): VNode[]
-  'link-trailing'(props: { link: T, active: boolean }): VNode[]
+  'title'?(props?: {}): VNode[]
+  'link'?: SlotProps<T>
+  'link-leading'?: SlotProps<T>
+  'link-label'?(props: { link: T, active: boolean }): VNode[]
+  'link-trailing'?(props: { link: T, active: boolean }): VNode[]
 }
 </script>
 

@@ -42,8 +42,8 @@ export interface TooltipProps extends TooltipRootProps {
 export interface TooltipEmits extends TooltipRootEmits {}
 
 export interface TooltipSlots {
-  default(props: { open: boolean }): VNode[]
-  content(props: { ui: Tooltip['ui'] }): VNode[]
+  default?(props: { open: boolean }): VNode[]
+  content?(props: { ui: Tooltip['ui'] }): VNode[]
 }
 </script>
 

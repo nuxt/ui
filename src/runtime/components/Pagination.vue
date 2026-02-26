@@ -82,12 +82,12 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
 export interface PaginationEmits extends PaginationRootEmits {}
 
 export interface PaginationSlots {
-  first(props?: {}): VNode[]
-  prev(props?: {}): VNode[]
-  next(props?: {}): VNode[]
-  last(props?: {}): VNode[]
-  ellipsis(props: { ui: Pagination['ui'] }): VNode[]
-  item(props: {
+  first?(props?: {}): VNode[]
+  prev?(props?: {}): VNode[]
+  next?(props?: {}): VNode[]
+  last?(props?: {}): VNode[]
+  ellipsis?(props: { ui: Pagination['ui'] }): VNode[]
+  item?(props: {
     page: number
     pageCount: number
     item: {

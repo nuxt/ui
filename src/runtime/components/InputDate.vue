@@ -61,10 +61,10 @@ export interface InputDateEmits<R extends boolean> extends Omit<DateFieldRootEmi
 }
 
 export interface InputDateSlots {
-  leading(props: { ui: InputDate['ui'] }): VNode[]
-  default(props: { ui: InputDate['ui'] }): VNode[]
-  trailing(props: { ui: InputDate['ui'] }): VNode[]
-  separator(props: { ui: InputDate['ui'] }): VNode[]
+  leading?(props: { ui: InputDate['ui'] }): VNode[]
+  default?(props: { ui: InputDate['ui'] }): VNode[]
+  trailing?(props: { ui: InputDate['ui'] }): VNode[]
+  separator?(props: { ui: InputDate['ui'] }): VNode[]
 }
 </script>
 

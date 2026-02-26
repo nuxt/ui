@@ -17,9 +17,9 @@ export interface DashboardToolbarProps {
 }
 
 export interface DashboardToolbarSlots {
-  default(props?: {}): VNode[]
-  left(props?: {}): VNode[]
-  right(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  left?(props?: {}): VNode[]
+  right?(props?: {}): VNode[]
 }
 </script>
 

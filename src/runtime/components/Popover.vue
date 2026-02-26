@@ -52,9 +52,9 @@ export interface PopoverEmits extends PopoverRootEmits {
 type SlotProps<M extends PopoverMode = PopoverMode> = [M] extends ['hover'] ? {} : { close: () => void }
 
 export interface PopoverSlots<M extends PopoverMode = PopoverMode> {
-  default(props: { open: boolean }): VNode[]
-  content(props: SlotProps<M>): VNode[]
-  anchor(props: SlotProps<M>): VNode[]
+  default?(props: { open: boolean }): VNode[]
+  content?(props: SlotProps<M>): VNode[]
+  anchor?(props: SlotProps<M>): VNode[]
 }
 </script>
 

@@ -47,15 +47,15 @@ export interface HeaderProps<T extends HeaderMode = HeaderMode> {
 }
 
 export interface HeaderSlots {
-  title(props?: {}): VNode[]
-  left(props?: {}): VNode[]
-  default(props?: {}): VNode[]
-  right(props?: {}): VNode[]
-  toggle(props: { open: boolean, toggle: () => void, ui: Header['ui'] }): VNode[]
-  top(props?: {}): VNode[]
-  bottom(props?: {}): VNode[]
-  body(props?: {}): VNode[]
-  content(props: { close?: () => void }): VNode[]
+  title?(props?: {}): VNode[]
+  left?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  right?(props?: {}): VNode[]
+  toggle?(props: { open: boolean, toggle: () => void, ui: Header['ui'] }): VNode[]
+  top?(props?: {}): VNode[]
+  bottom?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  content?(props: { close?: () => void }): VNode[]
 }
 </script>
 

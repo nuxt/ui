@@ -36,9 +36,9 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
 }
 
 export interface ButtonSlots {
-  leading(props: { ui: Button['ui'] }): VNode[]
-  default(props: { ui: Button['ui'] }): VNode[]
-  trailing(props: { ui: Button['ui'] }): VNode[]
+  leading?(props: { ui: Button['ui'] }): VNode[]
+  default?(props: { ui: Button['ui'] }): VNode[]
+  trailing?(props: { ui: Button['ui'] }): VNode[]
 }
 </script>
 

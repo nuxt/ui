@@ -106,9 +106,9 @@ export interface CalendarEmits<R extends boolean, M extends boolean> extends Omi
 }
 
 export interface CalendarSlots {
-  'heading': (props: { value: string }) => VNode[]
-  'day': (props: Pick<CalendarCellTriggerProps, 'day'>) => VNode[]
-  'week-day': (props: { day: string }) => VNode[]
+  'heading'?: (props: { value: string }) => VNode[]
+  'day'?: (props: Pick<CalendarCellTriggerProps, 'day'>) => VNode[]
+  'week-day'?: (props: { day: string }) => VNode[]
 }
 </script>
 

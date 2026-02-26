@@ -38,13 +38,13 @@ export interface EmptyProps {
 }
 
 export interface EmptySlots {
-  header(props?: {}): VNode[]
-  leading(props: { ui: Empty['ui'] }): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  body(props?: {}): VNode[]
-  actions(props?: {}): VNode[]
-  footer(props?: {}): VNode[]
+  header?(props?: {}): VNode[]
+  leading?(props: { ui: Empty['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 

@@ -17,7 +17,7 @@ export interface PageBodyProps {
 }
 
 export interface PageBodySlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

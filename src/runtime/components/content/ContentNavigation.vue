@@ -81,13 +81,13 @@ export interface ContentNavigationProps<T extends ContentNavigationLink = Conten
 
 export interface ContentNavigationEmits extends AccordionRootEmits {}
 
-type SlotProps<T> = (props: { link: T, active?: boolean, ui: ContentNavigation['ui'] }) => VNode[]
+type SlotProps<T> = (props: { link: T, active: boolean, ui: ContentNavigation['ui'] }) => VNode[]
 
 export interface ContentNavigationSlots<T extends ContentNavigationLink = ContentNavigationLink> {
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-title': SlotProps<T>
-  'link-trailing': SlotProps<T>
+  'link'?: SlotProps<T>
+  'link-leading'?: SlotProps<T>
+  'link-title'?: SlotProps<T>
+  'link-trailing'?: SlotProps<T>
 }
 </script>
 
@@ -126,7 +126,7 @@ const route = useRoute()
 const appConfig = useAppConfig() as ContentNavigation['AppConfig']
 const uiProp = useComponentUI('contentNavigation', props)
 
-const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link: ContentNavigationLink, active?: boolean }>()
+const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link: ContentNavigationLink, active: boolean }>()
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentNavigation || {}) })({
   color: props.color,
@@ -209,7 +209,7 @@ const defaultValue = computed(() => {
               ui.trigger({ class: [uiProp?.trigger, link.ui?.trigger], disabled })
             ]"
           >
-            <ReuseLinkTemplate :link="link" :active="link.active" />
+            <ReuseLinkTemplate :link="link" :active="link.active || false" />
           </AccordionTrigger>
 
           <AccordionContent data-slot="content" :class="ui.content({ class: [uiProp?.content, link.ui?.content] })">

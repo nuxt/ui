@@ -133,16 +133,16 @@ export interface SelectSlots<
   Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: Select['ui'] }): VNode[]
-  'default'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: Select['ui'] }): VNode[]
-  'trailing'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: Select['ui'] }): VNode[]
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label'(props: { item: T, index: number }): VNode[]
-  'item-description'(props: { item: T, index: number }): VNode[]
-  'item-trailing': SlotProps<T>
-  'content-top': (props?: {}) => VNode[]
-  'content-bottom': (props?: {}) => VNode[]
+  'leading'?(props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: Select['ui'] }): VNode[]
+  'default'?(props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: Select['ui'] }): VNode[]
+  'trailing'?(props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: Select['ui'] }): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?(props: { item: T, index: number }): VNode[]
+  'item-description'?(props: { item: T, index: number }): VNode[]
+  'item-trailing'?: SlotProps<T>
+  'content-top'?: (props?: {}) => VNode[]
+  'content-bottom'?: (props?: {}) => VNode[]
 }
 </script>
 

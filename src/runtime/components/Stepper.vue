@@ -68,11 +68,11 @@ export type StepperEmits<T extends StepperItem = StepperItem> = Omit<StepperRoot
 type SlotProps<T extends StepperItem> = (props: { item: T }) => VNode[]
 
 export type StepperSlots<T extends StepperItem = StepperItem> = {
-  indicator(props: { item: T, ui: Stepper['ui'] }): VNode[]
-  wrapper: SlotProps<T>
-  title: SlotProps<T>
-  description: SlotProps<T>
-  content: SlotProps<T>
+  indicator?(props: { item: T, ui: Stepper['ui'] }): VNode[]
+  wrapper?: SlotProps<T>
+  title?: SlotProps<T>
+  description?: SlotProps<T>
+  content?: SlotProps<T>
 } & DynamicSlots<T, 'wrapper' | 'title' | 'description', { item: T }>
 
 </script>

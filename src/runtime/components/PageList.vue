@@ -18,7 +18,7 @@ export interface PageListProps {
 }
 
 export interface PageListSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

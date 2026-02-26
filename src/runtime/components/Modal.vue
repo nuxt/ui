@@ -67,15 +67,15 @@ export interface ModalEmits extends DialogRootEmits {
 }
 
 export interface ModalSlots {
-  default(props: { open: boolean }): VNode[]
-  content(props: { close: () => void }): VNode[]
-  header(props: { close: () => void }): VNode[]
-  title(props?: {}): VNode[]
-  description(props?: {}): VNode[]
-  actions(props?: {}): VNode[]
-  close(props: { ui: Modal['ui'] }): VNode[]
-  body(props: { close: () => void }): VNode[]
-  footer(props: { close: () => void }): VNode[]
+  default?(props: { open: boolean }): VNode[]
+  content?(props: { close: () => void }): VNode[]
+  header?(props: { close: () => void }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  close?(props: { ui: Modal['ui'] }): VNode[]
+  body?(props: { close: () => void }): VNode[]
+  footer?(props: { close: () => void }): VNode[]
 }
 </script>
 

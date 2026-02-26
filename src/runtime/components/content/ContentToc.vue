@@ -56,13 +56,13 @@ export type ContentTocEmits = CollapsibleRootEmits & {
 type SlotProps<T> = (props: { link: T }) => VNode[]
 
 export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
-  leading(props: { open: boolean, ui: ContentToc['ui'] }): VNode[]
-  default(props: { open: boolean }): VNode[]
-  trailing(props: { open: boolean, ui: ContentToc['ui'] }): VNode[]
-  content(props: { links: T[] }): VNode[]
-  link: SlotProps<T>
-  top(props: { links?: T[] }): VNode[]
-  bottom(props: { links?: T[] }): VNode[]
+  leading?(props: { open: boolean, ui: ContentToc['ui'] }): VNode[]
+  default?(props: { open: boolean }): VNode[]
+  trailing?(props: { open: boolean, ui: ContentToc['ui'] }): VNode[]
+  content?(props: { links: T[] }): VNode[]
+  link?: SlotProps<T>
+  top?(props: { links?: T[] }): VNode[]
+  bottom?(props: { links?: T[] }): VNode[]
 }
 </script>
 

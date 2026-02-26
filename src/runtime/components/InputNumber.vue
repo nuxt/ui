@@ -78,8 +78,8 @@ export interface InputNumberEmits<T extends InputNumberValue = InputNumberValue,
 }
 
 export interface InputNumberSlots {
-  increment(props?: {}): VNode[]
-  decrement(props?: {}): VNode[]
+  increment?(props?: {}): VNode[]
+  decrement?(props?: {}): VNode[]
 }
 </script>
 

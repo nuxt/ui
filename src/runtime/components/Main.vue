@@ -17,7 +17,7 @@ export interface MainProps {
 }
 
 export interface MainSlots {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

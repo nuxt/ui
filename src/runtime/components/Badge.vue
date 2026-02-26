@@ -34,9 +34,9 @@ export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'lo
 }
 
 export interface BadgeSlots {
-  leading(props: { ui: Badge['ui'] }): VNode[]
-  default(props: { ui: Badge['ui'] }): VNode[]
-  trailing(props: { ui: Badge['ui'] }): VNode[]
+  leading?(props: { ui: Badge['ui'] }): VNode[]
+  default?(props: { ui: Badge['ui'] }): VNode[]
+  trailing?(props: { ui: Badge['ui'] }): VNode[]
 }
 </script>
 

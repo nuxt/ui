@@ -17,11 +17,11 @@ export interface FooterProps {
 }
 
 export interface FooterSlots {
-  left(props?: {}): VNode[]
-  default(props?: {}): VNode[]
-  right(props?: {}): VNode[]
-  top(props?: {}): VNode[]
-  bottom(props?: {}): VNode[]
+  left?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  right?(props?: {}): VNode[]
+  top?(props?: {}): VNode[]
+  bottom?(props?: {}): VNode[]
 }
 </script>
 

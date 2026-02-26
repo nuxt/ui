@@ -36,7 +36,7 @@ export interface EditorDragHandleProps extends Omit<DragHandleProps, 'editor' | 
 }
 
 export interface EditorDragHandleSlots {
-  default(props: { ui: EditorDragHandle['ui'], onClick: () => { node: JSONContent, pos: number } | undefined }): VNode[]
+  default?(props: { ui: EditorDragHandle['ui'], onClick: () => { node: JSONContent, pos: number } | undefined }): VNode[]
 }
 
 export interface EditorDragHandleEmits {

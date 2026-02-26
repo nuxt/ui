@@ -205,22 +205,22 @@ export type NavigationMenuEmits<
   'update:modelValue': [value: NavigationMenuModelValue<K, O> | undefined]
 }
 
-type SlotProps<T extends NavigationMenuItem> = (props: { item: T, index: number, active?: boolean, ui: NavigationMenu['ui'] }) => VNode[]
+type SlotProps<T extends NavigationMenuItem> = (props: { item: T, index: number, active: boolean, ui: NavigationMenu['ui'] }) => VNode[]
 
 export type NavigationMenuSlots<
   A extends ArrayOrNested<NavigationMenuItem> = ArrayOrNested<NavigationMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': (props: { item: T, index: number, active?: boolean }) => VNode[]
-  'item-trailing': SlotProps<T>
-  'item-content': SlotProps<T> & { close?: () => void }
-  'list-leading': (props?: {}) => VNode[]
-  'list-trailing': (props?: {}) => VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: (props: { item: T, index: number, active: boolean }) => VNode[]
+  'item-trailing'?: SlotProps<T>
+  'item-content'?: SlotProps<T> & { close: () => void }
+  'list-leading'?: (props?: {}) => VNode[]
+  'list-trailing'?: (props?: {}) => VNode[]
 }
-& DynamicSlots<MergeTypes<T>, 'label', { index: number, active?: boolean, ui: NavigationMenu['ui'] }>
-& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing' | 'content', { index: number, active?: boolean, ui: NavigationMenu['ui'] }>
+& DynamicSlots<MergeTypes<T>, 'label', { index: number, active: boolean, ui: NavigationMenu['ui'] }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing' | 'content', { index: number, active: boolean, ui: NavigationMenu['ui'] }>
 
 </script>
 

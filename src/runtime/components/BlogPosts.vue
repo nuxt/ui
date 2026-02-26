@@ -30,9 +30,9 @@ type ExtendSlotWithPost<T extends BlogPostProps, K extends keyof BlogPostSlots>
     : BlogPostSlots[K]
 
 export type BlogPostsSlots<T extends BlogPostProps = BlogPostProps> = {
-  [K in keyof BlogPostSlots]: ExtendSlotWithPost<T, K>
+  [K in keyof BlogPostSlots]?: ExtendSlotWithPost<T, K>
 } & {
-  default(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 
 </script>

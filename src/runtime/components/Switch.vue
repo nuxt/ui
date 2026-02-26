@@ -52,8 +52,8 @@ export type SwitchEmits = {
 }
 
 export interface SwitchSlots {
-  label(props: { label?: string }): VNode[]
-  description(props: { description?: string }): VNode[]
+  label?(props: { label: string | undefined }): VNode[]
+  description?(props: { description: string | undefined }): VNode[]
 }
 </script>
 

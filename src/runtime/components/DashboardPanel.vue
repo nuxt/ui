@@ -13,11 +13,11 @@ export interface DashboardPanelProps extends Pick<UseResizableProps, 'id' | 'min
 }
 
 export interface DashboardPanelSlots {
-  'default'(props?: {}): VNode[]
-  'header'(props?: {}): VNode[]
-  'body'(props?: {}): VNode[]
-  'footer'(props?: {}): VNode[]
-  'resize-handle'(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): VNode[]
+  'default'?(props?: {}): VNode[]
+  'header'?(props?: {}): VNode[]
+  'body'?(props?: {}): VNode[]
+  'footer'?(props?: {}): VNode[]
+  'resize-handle'?(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): VNode[]
 }
 </script>
 
