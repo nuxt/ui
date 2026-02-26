@@ -86,9 +86,9 @@ export type AuthFormEmits<T extends object> = {
   submit: [payload: FormSubmitEvent<T>]
 }
 
-type DynamicFieldSlots<T, F, SlotProps = { field: F, state: T }> = Record<string, (props: SlotProps) => VNode[]> & Record<`${keyof T extends string ? keyof T : never}-field`, (props: SlotProps) => VNode[]>
+type DynamicFieldSlots<T, F, SlotProps = { field: F, state: T }> = Record<`${keyof T extends string ? keyof T : never}-field` | (string & {}), (props: SlotProps) => VNode[]>
 
-type DynamicFormFieldSlots<T> = Record<string, (props?: {}) => VNode[]> & Record<`${keyof T extends string ? keyof T : never}-${'label' | 'description' | 'hint' | 'help' | 'error'}`, (props?: {}) => VNode[]>
+type DynamicFormFieldSlots<T> = Record<`${keyof T extends string ? keyof T : never}-${'label' | 'description' | 'hint' | 'help' | 'error'}` | (string & {}), (props?: {}) => VNode[]>
 
 export type AuthFormSlots<T extends object = object, F extends AuthFormField = AuthFormField> = {
   header(props?: {}): VNode[]
