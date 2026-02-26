@@ -59,13 +59,18 @@ export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
   ui?: ChatMessages['slots']
 }
 
-type ExtendSlotWithVersion<K extends keyof ChatMessageSlots, T extends UIMessage[] = UIMessage[]>
-  = ChatMessageSlots[K] extends (props: infer P) => any
+type SlotBase<T extends UIMessage[]>
+  = T[number] extends UIMessage<infer M, infer D, infer U>
+    ? ChatMessageSlots<M, D, U>
+    : ChatMessageSlots
+
+type ExtendSlotWithVersion<K extends keyof SlotBase<T>, T extends UIMessage[] = UIMessage[]>
+  = SlotBase<T>[K] extends (props: infer P) => any
     ? (props: P & { message: T[number] }) => any
-    : ChatMessageSlots[K]
+    : SlotBase<T>[K]
 
 export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
-  [K in keyof ChatMessageSlots]: ExtendSlotWithVersion<K, T>
+  [K in keyof SlotBase<T>]: ExtendSlotWithVersion<K, T>
 } & {
   default(props?: {}): any
   indicator(props: { ui: ChatMessages['ui'] }): any
@@ -305,7 +310,7 @@ onMounted(() => {
         :compact="compact"
       >
         <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
-          <slot :name="name" v-bind="(slotData as any)" :message="message" />
+          <slot :name="(name as keyof ChatMessagesSlots<T>)" v-bind="(slotData as any)" :message="message" />
         </template>
       </UChatMessage>
     </slot>
