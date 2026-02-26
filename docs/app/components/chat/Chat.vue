@@ -19,6 +19,7 @@ const { resetTheme, applyThemeSettings, hasCSSChanges, hasAppConfigChanges } = u
 
 const hasThemeChanges = computed(() => hasCSSChanges.value || hasAppConfigChanges.value)
 
+let _skipSync = false
 const _themeApplied = new Set<string>()
 function processThemeToolCalls() {
   for (const message of chat.messages) {
@@ -58,7 +59,9 @@ const chat = new Chat({
   },
   onFinish: () => {
     processThemeToolCalls()
+    _skipSync = true
     messages.value = chat.messages
+    nextTick(() => { _skipSync = false })
   }
 })
 
@@ -83,7 +86,7 @@ function onSubmit() {
 }
 
 watch(messages, (newMessages) => {
-  if (newMessages === chat.messages) return
+  if (_skipSync) return
 
   chat.messages = newMessages
   if (chat.lastMessage?.role === 'user') {
@@ -281,24 +284,13 @@ defineShortcuts({
           </template>
         </UChatMessages>
 
-        <div v-else class="flex flex-col gap-2.5">
-          <div v-for="category in suggestions" :key="category.category" class="flex flex-col gap-1.5">
-            <p class="text-xs font-semibold uppercase tracking-wide text-dimmed">
-              {{ category.category }}
-            </p>
-
-            <div class="flex flex-col -mx-2.5">
-              <UButton
-                v-for="question in category.items"
-                :key="question"
-                :label="question"
-                color="neutral"
-                variant="link"
-                class="font-normal"
-                @click="askQuestion(question)"
-              />
-            </div>
-          </div>
+        <div v-else class="flex flex-col gap-3">
+          <UPageLinks
+            v-for="category in suggestions"
+            :key="category.category"
+            :title="category.category"
+            :links="category.items.map(item => ({ label: item, onClick: () => askQuestion(item) }))"
+          />
         </div>
       </UTheme>
     </template>
@@ -312,12 +304,12 @@ defineShortcuts({
         size="sm"
         autofocus
         :ui="{ base: 'px-0' }"
-        class="px-4 gap-1"
+        class="px-4"
         @submit="onSubmit"
       >
         <template #footer>
           <p class="text-xs text-muted flex items-center gap-1">
-            Press <UKbd value="meta" size="sm" /> <UKbd value="i" size="sm" /> to toggle the chat
+            Press <UKbd value="meta" size="sm" variant="soft" /> <UKbd value="i" size="sm" variant="soft" /> to toggle the chat
           </p>
 
           <UChatPromptSubmit
