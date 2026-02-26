@@ -7,8 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChatMessage = ComponentConfig<typeof theme, AppConfig, 'chatMessage'>
 
-export interface ChatMessageProps<METADATA = unknown, DATA_PARTS extends UIDataTypes = UIDataTypes, TOOLS extends UITools = UITools>
-  extends UIMessage<METADATA, DATA_PARTS, TOOLS> {
+export interface ChatMessageProps<TMetadata = unknown, TDataParts extends UIDataTypes = UIDataTypes, TTools extends UITools = UITools> extends UIMessage<TMetadata, TDataParts, TTools> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'article'
@@ -32,7 +31,7 @@ export interface ChatMessageProps<METADATA = unknown, DATA_PARTS extends UIDataT
    * The `label` will be used in a tooltip.
    * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  actions?: (Omit<ButtonProps, 'onClick'> & { onClick?: (e: MouseEvent, message: UIMessage<METADATA, DATA_PARTS, TOOLS>) => void })[]
+  actions?: (Omit<ButtonProps, 'onClick'> & { onClick?: (e: MouseEvent, message: UIMessage<TMetadata, TDataParts, TTools>) => void })[]
   /**
    * Render the message in a compact style.
    * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
@@ -48,14 +47,14 @@ export interface ChatMessageProps<METADATA = unknown, DATA_PARTS extends UIDataT
   ui?: ChatMessage['slots']
 }
 
-export interface ChatMessageSlots<METADATA = unknown, DATA_PARTS extends UIDataTypes = UIDataTypes, TOOLS extends UITools = UITools> {
-  leading(props: { avatar: ChatMessageProps<METADATA, DATA_PARTS, TOOLS>['avatar'], ui: ChatMessage['ui'] }): any
-  content(props: Pick<ChatMessageProps<METADATA, DATA_PARTS, TOOLS>, 'id' | 'role' | 'parts' | 'metadata' | 'content'>): any
-  actions(props: { actions: ChatMessageProps<METADATA, DATA_PARTS, TOOLS>['actions'] }): any
+export interface ChatMessageSlots<TMetadata = unknown, TDataParts extends UIDataTypes = UIDataTypes, TTools extends UITools = UITools> {
+  leading(props: { avatar: ChatMessageProps<TMetadata, TDataParts, TTools>['avatar'], ui: ChatMessage['ui'] }): any
+  content(props: Pick<ChatMessageProps<TMetadata, TDataParts, TTools>, 'id' | 'role' | 'parts' | 'metadata' | 'content'>): any
+  actions(props: { actions: ChatMessageProps<TMetadata, TDataParts, TTools>['actions'] }): any
 }
 </script>
 
-<script setup lang="ts" generic="METADATA, DATA_PARTS extends UIDataTypes, TOOLS extends UITools">
+<script setup lang="ts" generic="TMetadata, TDataParts extends UIDataTypes, TTools extends UITools">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
@@ -67,10 +66,10 @@ import UTooltip from './Tooltip.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 
-const props = withDefaults(defineProps<ChatMessageProps<METADATA, DATA_PARTS, TOOLS>>(), {
+const props = withDefaults(defineProps<ChatMessageProps<TMetadata, TDataParts, TTools>>(), {
   as: 'article'
 })
-const slots = defineSlots<ChatMessageSlots<METADATA, DATA_PARTS, TOOLS>>()
+const slots = defineSlots<ChatMessageSlots<TMetadata, TDataParts, TTools>>()
 
 const appConfig = useAppConfig() as ChatMessage['AppConfig']
 const uiProp = useComponentUI('chatMessage', props)
