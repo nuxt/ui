@@ -71,9 +71,10 @@ defineShortcuts(extractShortcuts(teamsItems.value))
     <USidebar
       v-model:open="open"
       collapsible="icon"
+      rail
       :ui="{ inner: 'divide-y-0 bg-muted' }"
     >
-      <template #header>
+      <template #header="{ state }">
         <UDropdownMenu
           :items="teamsItems"
           :content="{ align: 'start', collisionPadding: 12 }"
@@ -85,8 +86,9 @@ defineShortcuts(extractShortcuts(teamsItems.value))
             color="neutral"
             variant="ghost"
             block
-            class="overflow-hidden data-[state=open]:bg-elevated transition-[width,height,padding] duration-200 ease-linear group-data-[state=collapsed]/sidebar:size-8! group-data-[state=collapsed]/sidebar:p-0!"
-            :ui="{ trailingIcon: 'text-dimmed' }"
+            :square="state === 'collapsed'"
+            class="overflow-hidden data-[state=open]:bg-elevated"
+            :ui="{ trailingIcon: 'text-dimmed group-data-[state=collapsed]/sidebar:hidden' }"
           />
         </UDropdownMenu>
       </template>
@@ -99,13 +101,14 @@ defineShortcuts(extractShortcuts(teamsItems.value))
         />
       </template>
 
-      <template #footer>
+      <template #footer="{ state }">
         <UButton
           :avatar="{ src: 'https://github.com/benjamincanac.png' }"
           label="Benjamin"
           color="neutral"
           variant="ghost"
-          class="w-full overflow-hidden transition-[width,height,padding] duration-200 ease-linear group-data-[state=collapsed]/sidebar:size-8! group-data-[state=collapsed]/sidebar:p-0!"
+          :square="state === 'collapsed'"
+          class="w-full overflow-hidden"
         />
       </template>
     </USidebar>

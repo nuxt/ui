@@ -1,4 +1,4 @@
-import { themeIcons } from '../utils/theme'
+import { themeIcons, cssVariableDefaults } from '../utils/theme'
 
 export default defineNuxtPlugin({
   enforce: 'post',
@@ -17,16 +17,53 @@ export default defineNuxtPlugin({
           )
 
           if (vars.length) {
-            const styleEl = document.createElement('style')
-            styleEl.id = 'chat-custom-colors'
-            document.head.appendChild(styleEl)
+            let styleEl = document.getElementById('chat-custom-colors') as HTMLStyleElement | null
+            if (!styleEl) {
+              styleEl = document.createElement('style')
+              styleEl.id = 'chat-custom-colors'
+              document.head.appendChild(styleEl)
+            }
             styleEl.textContent = `:root { ${vars.join(' ')} }`
           }
+        } catch {
+          // ignore malformed localStorage
         }
-        catch {}
       }
 
       restoreCustomColors()
+
+      function restoreCSSVariables() {
+        const raw = localStorage.getItem('nuxt-ui-css-variables')
+        if (!raw) return
+
+        try {
+          const cssVars = JSON.parse(raw) as { light?: Record<string, string>, dark?: Record<string, string> }
+
+          const parts: string[] = []
+          if (Object.keys(cssVars.light || {}).length) {
+            const full = { ...cssVariableDefaults.light, ...cssVars.light }
+            parts.push(`.light { ${Object.entries(full).map(([k, v]) => `${k}: ${v};`).join(' ')} }`)
+          }
+          if (Object.keys(cssVars.dark || {}).length) {
+            const full = { ...cssVariableDefaults.dark, ...cssVars.dark }
+            parts.push(`.dark { ${Object.entries(full).map(([k, v]) => `${k}: ${v};`).join(' ')} }`)
+          }
+
+          if (parts.length) {
+            let styleEl = document.getElementById('chat-css-variables') as HTMLStyleElement | null
+            if (!styleEl) {
+              styleEl = document.createElement('style')
+              styleEl.id = 'chat-css-variables'
+              document.head.appendChild(styleEl)
+            }
+            styleEl.textContent = parts.join(' ')
+          }
+        } catch {
+          // ignore malformed localStorage
+        }
+      }
+
+      restoreCSSVariables()
 
       function updateColor(type: 'primary' | 'neutral') {
         const color = localStorage.getItem(`nuxt-ui-${type}`)
@@ -73,8 +110,9 @@ export default defineNuxtPlugin({
               ;(appConfig.ui as any)[key] = value
             }
           }
+        } catch {
+          // ignore malformed localStorage
         }
-        catch {}
       }
 
       updateColor('primary')
@@ -116,6 +154,39 @@ export default defineNuxtPlugin({
                     var s = document.createElement('style');
                     s.id = 'chat-custom-colors';
                     s.textContent = ':root { ' + vars.join(' ') + ' }';
+                    document.head.appendChild(s);
+                  }
+                } catch(e) {}
+              }
+            })();
+          `.replace(/\s+/g, ' '),
+          type: 'text/javascript',
+          tagPriority: -2
+        }, {
+          innerHTML: `
+            (function() {
+              var raw = localStorage.getItem('nuxt-ui-css-variables');
+              if (raw) {
+                try {
+                  var cssVars = JSON.parse(raw);
+                  var defaults = ${JSON.stringify(cssVariableDefaults)};
+                  function merge(defs, overrides) {
+                    var result = [];
+                    for (var key in defs) { result.push(key + ': ' + (overrides[key] || defs[key]) + ';'); }
+                    for (var key in overrides) { if (!defs[key]) result.push(key + ': ' + overrides[key] + ';'); }
+                    return result;
+                  }
+                  var parts = [];
+                  if (cssVars.light && Object.keys(cssVars.light).length) {
+                    parts.push('.light { ' + merge(defaults.light, cssVars.light).join(' ') + ' }');
+                  }
+                  if (cssVars.dark && Object.keys(cssVars.dark).length) {
+                    parts.push('.dark { ' + merge(defaults.dark, cssVars.dark).join(' ') + ' }');
+                  }
+                  if (parts.length) {
+                    var s = document.createElement('style');
+                    s.id = 'chat-css-variables';
+                    s.textContent = parts.join(' ');
                     document.head.appendChild(s);
                   }
                 } catch(e) {}

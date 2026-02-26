@@ -125,6 +125,14 @@ useResizeObserver(bodyRef, (entries) => {
     isOverflowing.value = el.scrollHeight > el.clientHeight
   }
 })
+
+watch(reasoningText, () => {
+  if (isStreaming.value && bodyRef.value) {
+    nextTick(() => {
+      bodyRef.value!.scrollTop = bodyRef.value!.scrollHeight
+    })
+  }
+})
 </script>
 
 <template>
@@ -148,11 +156,11 @@ useResizeObserver(bodyRef, (entries) => {
         <span v-if="hasContent && chevron === 'leading'" class="relative size-4 shrink-0">
           <UIcon
             :name="icon"
-            class="absolute inset-0 size-4 transition-opacity group-hover:opacity-0 group-data-[state=open]:opacity-0"
+            class="absolute inset-0 size-4 transition-opacity group-hover:opacity-0 group-data-[state=open]:opacity-0 duration-200"
           />
           <UIcon
             :name="chevronIconName"
-            class="absolute inset-0 size-4 opacity-0 transition-all group-hover:opacity-100 group-data-[state=open]:opacity-100 group-data-[state=open]:rotate-180"
+            class="absolute inset-0 size-4 opacity-0 transition-all group-hover:opacity-100 group-data-[state=open]:opacity-100 group-data-[state=open]:rotate-180 duration-200"
           />
         </span>
         <UIcon v-else :name="icon" class="size-4 shrink-0" />

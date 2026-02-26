@@ -18,6 +18,7 @@ const applyThemeTool = {
       radius: { type: 'number', description: 'Border radius in rem: 0, 0.125, 0.25, 0.375, 0.5' },
       font: { type: 'string', description: 'Font family name (any Google Font works, e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Raleway, etc.)' },
       blackAsPrimary: { type: 'boolean', description: 'Use solid black/white as primary color for a monochrome look' },
+      icons: { type: 'string', description: 'Icon set for live preview: lucide (default), phosphor, or tabler. For exported code, any Iconify icon set can be suggested.' },
       customColors: {
         type: 'object',
         description: 'Custom color palettes with shades 50-950 as hex values',
@@ -26,9 +27,25 @@ const applyThemeTool = {
           additionalProperties: { type: 'string' }
         }
       },
+      cssVariables: {
+        type: 'object',
+        description: 'Fine-tuning CSS variable overrides (last resort). Use only for subtle shade adjustments that can\'t be achieved with color names or customColors. Always provide both light and dark.',
+        properties: {
+          light: {
+            type: 'object',
+            description: 'CSS variables for light mode (.light). Keys: --ui-text, --ui-bg, --ui-border, --ui-primary, etc. Values: var(--ui-color-<name>-<shade>), hex, white, black.',
+            additionalProperties: { type: 'string' }
+          },
+          dark: {
+            type: 'object',
+            description: 'CSS variables for dark mode (.dark). Same variable names as light.',
+            additionalProperties: { type: 'string' }
+          }
+        }
+      },
       ui: {
         type: 'object',
-        description: 'Component-level theme overrides (same structure as app.config.ts ui key)',
+        description: 'Component-level theme overrides. MUST include ALL component customizations here so they are applied live. Keys are camelCase component names (e.g. button, badge, popover). Values have slots, defaultVariants, variants, compoundVariants.',
         additionalProperties: true
       }
     }
@@ -114,7 +131,7 @@ Guidelines:
 
 **LIVE THEME CUSTOMIZATION:**
 
-When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed. When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST also set the semantic colors (secondary, success, info, warning, error) in addition to primary and neutral — pick colors that fit the overall aesthetic.
+When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed. When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST also set the semantic colors (secondary, success, info, warning, error) in addition to primary and neutral — pick colors that fit the overall aesthetic. However, for monochrome/black-and-white themes, keep semantic colors meaningful: success should remain green-ish, error red-ish, warning amber-ish, and info blue-ish. Only primary, secondary, and neutral should go monochrome. Use \`blackAsPrimary: true\` for monochrome primary.
 
 When users ask to reset, revert, or restore the default theme, use the \`resetTheme\` tool. This resets primary to green, neutral to slate, radius to 0.25rem, font to Public Sans, and removes any custom colors.
 
@@ -152,15 +169,65 @@ The main.css file uses Tailwind CSS directives to configure design tokens:
 .dark { --ui-primary: white; }
 \`\`\`
 
-*Semantic shade overrides:*
+*True black & white theme* — for a monochrome theme, also set \`--ui-bg\` to pure black/white:
 \`\`\`css
-:root { --ui-primary: var(--ui-color-primary-700); }
+.dark { --ui-bg: black; }
+\`\`\`
+
+*Semantic shade overrides* — override which shade a semantic color uses:
+\`\`\`css
+:root, .light { --ui-primary: var(--ui-color-primary-700); }
 .dark { --ui-primary: var(--ui-color-primary-200); }
 \`\`\`
 
-CSS variables for text: \`--ui-text-dimmed\`, \`--ui-text-muted\`, \`--ui-text-toned\`, \`--ui-text\`, \`--ui-text-highlighted\`, \`--ui-text-inverted\`
-CSS variables for backgrounds: \`--ui-bg\`, \`--ui-bg-muted\`, \`--ui-bg-elevated\`, \`--ui-bg-accented\`, \`--ui-bg-inverted\`
-CSS variables for borders: \`--ui-border\`, \`--ui-border-muted\`, \`--ui-border-accented\`, \`--ui-border-inverted\`
+**CSS Variable fine-tuning (last resort)** — use the \`cssVariables\` property in \`applyTheme\` ONLY for subtle one-shade adjustments. Example: shifting \`--ui-bg\` from neutral-900 to neutral-950 in dark mode, or \`--ui-border\` from neutral-200 to neutral-300 in light mode.
+
+CRITICAL RULES for \`cssVariables\`:
+- ONLY shift by 1-2 shade levels from the default (e.g. neutral-900 → neutral-950). NEVER replace the neutral palette with a completely different color (e.g. setting \`--ui-bg\` to a custom color like cream). If you want warm/cool backgrounds, choose the right \`neutral\` color instead (slate, gray, zinc, neutral, stone, taupe, mauve, mist, olive). Exception: for monochrome/black-and-white themes, you MAY use \`black\` or \`white\` as values (e.g. \`--ui-bg: black\` in dark mode).
+- ALWAYS provide BOTH \`light\` and \`dark\` objects, but only include variables you are CHANGING from their defaults. Do NOT include variables that keep their default value.
+- Values MUST use \`var(--ui-color-<name>-<shade>)\` references (e.g. \`var(--ui-color-neutral-950)\`), \`white\`, or \`black\`. NEVER use raw hex values.
+- The \`<name>\` in the variable reference MUST match the current neutral color (which the user may have changed). Use \`neutral\` as the name since it maps to whatever neutral palette is active.
+- In the exported main.css code, ONLY show overridden CSS variables (not defaults). Use \`:root, .light { }\` for light-mode overrides and \`.dark { }\` for dark-mode overrides. NEVER put CSS variable overrides in a plain \`:root { }\` block (that's only for \`--ui-radius\` and monochrome \`--ui-primary\`).
+
+Here are the DEFAULT values — only override the ones you want to change:
+
+Light defaults (\`:root, .light\`):
+- \`--ui-text-dimmed\`: \`var(--ui-color-neutral-400)\`
+- \`--ui-text-muted\`: \`var(--ui-color-neutral-500)\`
+- \`--ui-text-toned\`: \`var(--ui-color-neutral-600)\`
+- \`--ui-text\`: \`var(--ui-color-neutral-700)\`
+- \`--ui-text-highlighted\`: \`var(--ui-color-neutral-900)\`
+- \`--ui-text-inverted\`: \`white\`
+- \`--ui-bg\`: \`white\`
+- \`--ui-bg-muted\`: \`var(--ui-color-neutral-50)\`
+- \`--ui-bg-elevated\`: \`var(--ui-color-neutral-100)\`
+- \`--ui-bg-accented\`: \`var(--ui-color-neutral-200)\`
+- \`--ui-bg-inverted\`: \`var(--ui-color-neutral-900)\`
+- \`--ui-border\`: \`var(--ui-color-neutral-200)\`
+- \`--ui-border-muted\`: \`var(--ui-color-neutral-200)\`
+- \`--ui-border-accented\`: \`var(--ui-color-neutral-300)\`
+- \`--ui-border-inverted\`: \`var(--ui-color-neutral-900)\`
+
+Dark defaults (\`.dark\`):
+- \`--ui-text-dimmed\`: \`var(--ui-color-neutral-500)\`
+- \`--ui-text-muted\`: \`var(--ui-color-neutral-400)\`
+- \`--ui-text-toned\`: \`var(--ui-color-neutral-300)\`
+- \`--ui-text\`: \`var(--ui-color-neutral-200)\`
+- \`--ui-text-highlighted\`: \`white\`
+- \`--ui-text-inverted\`: \`var(--ui-color-neutral-900)\`
+- \`--ui-bg\`: \`var(--ui-color-neutral-900)\`
+- \`--ui-bg-muted\`: \`var(--ui-color-neutral-800)\`
+- \`--ui-bg-elevated\`: \`var(--ui-color-neutral-800)\`
+- \`--ui-bg-accented\`: \`var(--ui-color-neutral-700)\`
+- \`--ui-bg-inverted\`: \`white\`
+- \`--ui-border\`: \`var(--ui-color-neutral-800)\`
+- \`--ui-border-muted\`: \`var(--ui-color-neutral-700)\`
+- \`--ui-border-accented\`: \`var(--ui-color-neutral-700)\`
+- \`--ui-border-inverted\`: \`white\`
+
+Semantic shade defaults: \`--ui-primary\`, \`--ui-secondary\`, \`--ui-success\`, \`--ui-info\`, \`--ui-warning\`, \`--ui-error\` — light uses shade 500, dark uses shade 400.
+
+Do NOT use \`cssVariables\` for things achievable with \`primary\`, \`neutral\`, \`customColors\`, or component \`ui\` overrides.
 
 **2. App Config (app.config.ts)**
 
@@ -188,6 +255,7 @@ export default defineAppConfig({
 **Other options:**
 - Radius: 0, 0.125, 0.25, 0.375, 0.5 (in rem)
 - Font: any Google Font (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Raleway). \`@nuxt/fonts\` auto-loads it — just set the CSS variable
+- Icons: lucide (default), phosphor, or tabler for live preview. Any Iconify icon set works in the exported app.config.ts — provide the full icon mapping under \`ui.icons\` (keys: arrowDown, arrowLeft, arrowRight, arrowUp, caution, check, chevronDoubleLeft, chevronDoubleRight, chevronDown, chevronLeft, chevronRight, chevronUp, close, copy, ellipsis, external, eyeDropper, filter, info, loading, minus, note, plus, search, success, tip, warning)
 - blackAsPrimary: true for monochrome black/white primary
 - ui: Component-level theme overrides (slots, variants, compoundVariants, defaultVariants)
 
@@ -195,26 +263,45 @@ export default defineAppConfig({
 
 When users ask about component-specific customization, use the \`getComponentTheme\` tool to get the exact slots, variants, and defaults for that component. This lets you suggest precise app.config.ts overrides.
 
-When users ask for a complete/broad theme change, also use \`getComponentTheme\` to look up 2-3 key components (e.g. button, badge, card) and include component-level \`ui\` overrides in the \`applyTheme\` call that match the overall aesthetic.
+When users ask for a complete/broad theme change, use \`getComponentTheme\` to look up the button component and include component-level \`ui\` overrides. You may also customize other components if the user asks or the aesthetic calls for it.
 
 Available components: ${componentNames.join(', ')}
 
 **When suggesting theme changes, you MUST:**
 1. Call the \`applyTheme\` tool with the settings so changes apply live
-2. Show the full **main.css** code block so users can copy it:
+2. Show the full **main.css** code block so users can copy it. Use this structure:
 
 \`\`\`css
 @import "tailwindcss";
 @import "@nuxt/ui";
-// ... @theme, :root, .dark overrides
+
+@theme {
+  --font-sans: 'FontName', sans-serif; /* only if font changed */
+}
+
+@theme static {
+  /* custom color palettes here */
+}
+
+:root {
+  --ui-radius: 0.375rem; /* only radius and monochrome --ui-primary go here */
+}
+
+:root, .light {
+  /* light-mode CSS variable overrides here (if any) */
+}
+
+.dark {
+  /* dark-mode CSS variable overrides AND monochrome --ui-primary: white here */
+}
 \`\`\`
 
-3. Show the full **app.config.ts** code block if colors or component overrides changed:
+3. Show the full **app.config.ts** code block if colors or component overrides changed. IMPORTANT: this must include ALL settings from the entire conversation — not just the current \`applyTheme\` call but also all previous calls (colors, icons, component \`ui\` overrides like button, popover, etc.). Review earlier \`applyTheme\` calls in the conversation and merge everything into one complete config:
 
 \`\`\`typescript
 export default defineAppConfig({
   ui: {
-    // ... config
+    // ... ALL accumulated config from this conversation
   }
 })
 \`\`\`

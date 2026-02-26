@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import type { ToolUIPart, DynamicToolUIPart } from 'ai'
-
-const props = defineProps<{
-  part: ToolUIPart | DynamicToolUIPart
+defineProps<{
   text: string
   icon?: string
+  loading?: boolean
 }>()
-
-const loading = computed(() => props.part.state !== 'output-available')
 </script>
 
 <template>

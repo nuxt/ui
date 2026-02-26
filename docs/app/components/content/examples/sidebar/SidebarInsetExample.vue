@@ -46,7 +46,7 @@ const items: NavigationMenuItem[] = [{
           label="Benjamin"
           color="neutral"
           variant="ghost"
-          class="w-full overflow-hidden transition-[width,height,padding] duration-200 ease-linear group-data-[state=collapsed]/sidebar:size-8! group-data-[state=collapsed]/sidebar:p-0!"
+          class="w-full overflow-hidden group-data-[state=collapsed]/sidebar:size-8! group-data-[state=collapsed]/sidebar:p-0!"
         />
       </template>
     </USidebar>

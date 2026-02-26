@@ -17,6 +17,8 @@ const { track } = useAnalytics()
 const { open, messages } = useChat()
 const { resetTheme, applyThemeSettings, hasCSSChanges, hasAppConfigChanges } = useTheme()
 
+const hasThemeChanges = computed(() => hasCSSChanges.value || hasAppConfigChanges.value)
+
 const _themeApplied = new Set<string>()
 function processThemeToolCalls() {
   for (const message of chat.messages) {
@@ -66,7 +68,7 @@ watchEffect(() => {
   }
 })
 
-const canClear = computed(() => messages.value.length > 0 || hasCSSChanges.value || hasAppConfigChanges.value)
+const canClear = computed(() => messages.value.length > 0)
 
 function onSubmit() {
   if (!input.value.trim()) {
@@ -98,22 +100,22 @@ function getToolMessage(state: ToolState, toolName: string, input: Record<string
   const applyVerb = state === 'output-available' ? 'Applied' : 'Applying'
 
   return {
-    list_components: `${searchVerb} components`,
-    list_composables: `${searchVerb} composables`,
-    get_component: `${readVerb} ${upperName(input.componentName || '')} component`,
-    get_component_metadata: `${readVerb} metadata for component ${upperName(input.componentName || '')}`,
-    list_templates: `${searchVerb} templates${input.category ? ` in ${input.category} category` : ''}`,
-    get_template: `${readVerb} template ${upperName(input.templateName || '')}`,
-    get_documentation_page: `${readVerb} ${input.path || ''} page`,
-    list_documentation_pages: `${searchVerb} documentation pages`,
-    list_getting_started_guides: `${searchVerb} documentation guides`,
-    get_migration_guide: `${readVerb} migration guide${input.version ? ` for ${input.version}` : ''}`,
-    list_examples: `${searchVerb} examples`,
-    get_example: `${readVerb} ${upperName(input.exampleName || '')} example`,
-    search_components_by_category: `${searchVerb} components${input.category ? ` in ${input.category} category` : ''}${input.search ? ` for "${input.search}"` : ''}`,
-    getComponentTheme: `${readVerb} ${upperName(input.componentName || '')} theme`,
-    applyTheme: `${applyVerb} theme changes`,
-    resetTheme: `${state === 'output-available' ? 'Reset' : 'Resetting'} theme to defaults`
+    'list-components': `${searchVerb} components`,
+    'list-composables': `${searchVerb} composables`,
+    'get-component': `${readVerb} ${upperName(input.componentName || '')} component`,
+    'get-component-metadata': `${readVerb} metadata for component ${upperName(input.componentName || '')}`,
+    'list-templates': `${searchVerb} templates${input.category ? ` in ${input.category} category` : ''}`,
+    'get-template': `${readVerb} template ${upperName(input.templateName || '')}`,
+    'get-documentation-page': `${readVerb} ${input.path || ''} page`,
+    'list-documentation-pages': `${searchVerb} documentation pages`,
+    'list-getting-started-guides': `${searchVerb} documentation guides`,
+    'get-migration-guide': `${readVerb} migration guide${input.version ? ` for ${input.version}` : ''}`,
+    'list-examples': `${searchVerb} examples`,
+    'get-example': `${readVerb} ${upperName(input.exampleName || '')} example`,
+    'search-components-by-category': `${searchVerb} components${input.category ? ` in ${input.category} category` : ''}${input.search ? ` for "${input.search}"` : ''}`,
+    'getComponentTheme': `${readVerb} ${upperName(input.componentName || '')} theme`,
+    'applyTheme': `${applyVerb} theme changes`,
+    'resetTheme': `${state === 'output-available' ? 'Reset' : 'Resetting'} theme to defaults`
   }[toolName] || `${searchVerb} ${toolName}`
 }
 
@@ -129,15 +131,15 @@ function getToolIcon(part: ToolPart): string {
   const toolName = getToolName(part)
 
   const iconMap: Record<string, string> = {
-    get_component: 'i-lucide-file-text',
-    get_component_metadata: 'i-lucide-file-text',
-    get_template: 'i-lucide-file-text',
-    get_documentation_page: 'i-lucide-file-text',
-    get_migration_guide: 'i-lucide-file-text',
-    get_example: 'i-lucide-file-text',
-    getComponentTheme: 'i-lucide-file-text',
-    applyTheme: 'i-lucide-palette',
-    resetTheme: 'i-lucide-palette'
+    'get-component': 'i-lucide-file-text',
+    'get-component-metadata': 'i-lucide-file-text',
+    'get-template': 'i-lucide-file-text',
+    'get-documentation-page': 'i-lucide-file-text',
+    'get-migration-guide': 'i-lucide-file-text',
+    'get-example': 'i-lucide-file-text',
+    'getComponentTheme': 'i-lucide-file-text',
+    'applyTheme': 'i-lucide-palette',
+    'resetTheme': 'i-lucide-palette'
   }
 
   return iconMap[toolName] || 'i-lucide-search'
@@ -168,9 +170,9 @@ const suggestions = [
   {
     category: 'Theme',
     items: [
-      'Design a sakura-inspired theme with a custom color palette',
-      'Create a monochrome black & white theme with rounded corners',
-      'Change all colors, the font, the radius and customize a few components'
+      'Create a black & white theme',
+      'Design a sakura-inspired theme',
+      'Surprise me with a creative and unique theme'
     ]
   }
 ]
@@ -179,12 +181,15 @@ function clearMessages() {
   messages.value = []
   chat.messages = []
   _themeApplied.clear()
-
-  resetTheme()
 }
 
 defineShortcuts({
-  meta_i: () => open.value = !open.value
+  meta_i: {
+    handler: () => {
+      open.value = !open.value
+    },
+    usingInput: true
+  }
 })
 </script>
 
@@ -194,19 +199,26 @@ defineShortcuts({
     side="right"
     collapsible="offcanvas"
     title="AI Assistant"
-    :close="{ size: 'sm' }"
-    close-icon="i-lucide-square-chevron-right"
+    close
+    close-icon="i-lucide-chevron-right"
     :style="{ '--sidebar-width': '24rem' }"
-    :ui="{ footer: 'p-0', actions: 'gap-0' }"
+    :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
   >
     <template #actions>
-      <UTooltip text="Clear history & reset theme">
+      <UTooltip v-if="hasThemeChanges" text="Reset theme">
         <UButton
-          icon="i-lucide-square-x"
+          icon="i-lucide-undo-2"
           color="neutral"
           variant="ghost"
-          size="sm"
-          :disabled="!canClear"
+          @click="resetTheme"
+        />
+      </UTooltip>
+
+      <UTooltip v-if="canClear" text="Clear history">
+        <UButton
+          icon="i-lucide-trash"
+          color="neutral"
+          variant="ghost"
           @click="clearMessages"
         />
       </UTooltip>
@@ -238,7 +250,7 @@ defineShortcuts({
           :status="chat.status"
           compact
           class="px-0 gap-2"
-          :user="{ ui: { container: 'pb-0' } }"
+          :user="{ ui: { container: 'max-w-full' } }"
           :assistant="{ ui: { content: 'flex flex-col gap-2' } }"
         >
           <template #content="{ message }">
@@ -250,7 +262,7 @@ defineShortcuts({
               chevron="leading"
             />
 
-            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${(part as any).state}` : ''}`">
+            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
               <MDCCached
                 v-if="part.type === 'text'"
                 :value="part.text"
@@ -261,9 +273,9 @@ defineShortcuts({
               />
               <ChatTool
                 v-else-if="isToolUIPart(part)"
-                :part="part"
                 :text="getToolText(part)"
                 :icon="getToolIcon(part)"
+                :loading="part.state !== 'output-available'"
               />
             </template>
           </template>
@@ -296,10 +308,11 @@ defineShortcuts({
         v-model="input"
         :error="chat.error"
         placeholder="Ask me anything..."
-        :autoresize="open"
         variant="naked"
+        size="sm"
+        autofocus
         :ui="{ base: 'px-0' }"
-        class="px-4"
+        class="px-4 gap-1"
         @submit="onSubmit"
       >
         <template #footer>

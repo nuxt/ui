@@ -79,7 +79,11 @@ provide('navigation', rootNavigation)
         </template>
       </div>
 
-      <Chat />
+      <template v-if="!route.path.startsWith('/examples')">
+        <ClientOnly>
+          <Chat />
+        </ClientOnly>
+      </template>
     </div>
   </UApp>
 </template>
