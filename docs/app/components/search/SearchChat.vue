@@ -115,7 +115,7 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
             :cache-key="`${message.id}-${index}`"
             :components="components"
             :parser-options="{ highlight: false }"
-            class="[&_.my-5]:my-2.5 *:first:!mt-0 *:last:!mb-0 [&_.leading-7]:!leading-6"
+            class="[&_.my-5]:my-2.5 *:first:mt-0! *:last:mb-0! [&_.leading-7]:leading-6!"
           />
           <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">
             {{ part.text }}
