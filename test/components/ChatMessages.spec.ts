@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import ChatMessages from '../../src/runtime/components/ChatMessages.vue'
-import type { ChatMessagesProps, ChatMessagesSlots } from '../../src/runtime/components/ChatMessages.vue'
-import ComponentRender from '../component-render'
 
 describe('ChatMessages', () => {
   const statuses = ['ready', 'submitted', 'streaming', 'error'] as any
@@ -20,7 +19,7 @@ describe('ChatMessages', () => {
     }]
   }
 
-  it.each([
+  renderEach(ChatMessages, [
     // Props
     ['with messages', { props }],
     ['with user', { props: { ...props, user: { avatar: { src: 'https://github.com/benjamincanac.png' }, variant: 'soft', side: 'right' } } }],
@@ -34,10 +33,7 @@ describe('ChatMessages', () => {
     ['with indicator slot', { props: { ...props, status: 'submitted' }, slots: { indicator: () => 'Indicator slot' } }],
     ['with viewport slot', { props, slots: { viewport: () => 'Viewport slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatMessagesProps, slots?: Partial<ChatMessagesSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, ChatMessages)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ChatMessages, {
