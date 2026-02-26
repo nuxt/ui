@@ -19,7 +19,7 @@ export type DynamicSlots<
 > = {
   [K in DynamicSlotsKeys<T['slot'], Suffix>]: (
     props: { item: Extract<T, { slot: K extends `${infer Base}-${Suffix}` ? Base : K }> } & ExtraProps
-  ) => any
+  ) => VNode[]
 }
 
 export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extends Record<string, any>

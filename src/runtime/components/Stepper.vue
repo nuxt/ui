@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/stepper'
 import type { IconProps } from '../types'
@@ -64,10 +65,10 @@ export type StepperEmits<T extends StepperItem = StepperItem> = Omit<StepperRoot
   prev: [value: T]
 }
 
-type SlotProps<T extends StepperItem> = (props: { item: T }) => any
+type SlotProps<T extends StepperItem> = (props: { item: T }) => VNode[]
 
 export type StepperSlots<T extends StepperItem = StepperItem> = {
-  indicator(props: { item: T, ui: Stepper['ui'] }): any
+  indicator(props: { item: T, ui: Stepper['ui'] }): VNode[]
   wrapper: SlotProps<T>
   title: SlotProps<T>
   description: SlotProps<T>

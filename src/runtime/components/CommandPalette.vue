@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { ListboxRootProps, ListboxRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
@@ -193,13 +194,13 @@ export type CommandPaletteEmits<T extends CommandPaletteItem = CommandPaletteIte
   'update:open': [value: boolean]
 }
 
-type SlotProps<T> = (props: { item: T, index: number, ui: CommandPalette['ui'] }) => any
+type SlotProps<T> = (props: { item: T, index: number, ui: CommandPalette['ui'] }) => VNode[]
 
 export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> = {
-  'empty'(props: { searchTerm?: string }): any
-  'footer'(props: { ui: CommandPalette['ui'] }): any
-  'back'(props: { ui: CommandPalette['ui'] }): any
-  'close'(props: { ui: CommandPalette['ui'] }): any
+  'empty'(props: { searchTerm?: string }): VNode[]
+  'footer'(props: { ui: CommandPalette['ui'] }): VNode[]
+  'back'(props: { ui: CommandPalette['ui'] }): VNode[]
+  'close'(props: { ui: CommandPalette['ui'] }): VNode[]
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>

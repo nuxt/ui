@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectContentEmits, SelectArrowProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -123,7 +124,7 @@ export interface SelectEmits<
   'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>]
 }
 
-type SlotProps<T extends SelectItem> = (props: { item: T, index: number, ui: Select['ui'] }) => any
+type SlotProps<T extends SelectItem> = (props: { item: T, index: number, ui: Select['ui'] }) => VNode[]
 
 export interface SelectSlots<
   A extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>,
@@ -132,16 +133,16 @@ export interface SelectSlots<
   Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: Select['ui'] }): any
-  'default'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: Select['ui'] }): any
-  'trailing'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: Select['ui'] }): any
+  'leading'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: Select['ui'] }): VNode[]
+  'default'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: Select['ui'] }): VNode[]
+  'trailing'(props: { modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>, open: boolean, ui: Select['ui'] }): VNode[]
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
-  'item-label'(props: { item: T, index: number }): any
-  'item-description'(props: { item: T, index: number }): any
+  'item-label'(props: { item: T, index: number }): VNode[]
+  'item-description'(props: { item: T, index: number }): VNode[]
   'item-trailing': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
+  'content-top': (props?: {}) => VNode[]
+  'content-bottom': (props?: {}) => VNode[]
 }
 </script>
 

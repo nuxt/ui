@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/dashboard-search'
@@ -71,7 +72,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
 }
 
 export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem> & {
-  content(props: { close: () => void }): any
+  content(props: { close: () => void }): VNode[]
 }
 
 </script>

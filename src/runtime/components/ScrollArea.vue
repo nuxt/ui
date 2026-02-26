@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ComponentPublicInstance, CSSProperties } from 'vue'
+import type { ComponentPublicInstance, CSSProperties, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { VirtualItem, VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '#build/ui/scroll-area'
@@ -68,7 +68,7 @@ export interface ScrollAreaSlots<T extends ScrollAreaItem = ScrollAreaItem> {
     props:
       | { item: T, index: number, virtualItem?: VirtualItem }
       | Record<string, never>,
-  ): any
+  ): VNode[]
 }
 
 export interface ScrollAreaEmits {

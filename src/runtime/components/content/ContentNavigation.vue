@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ContentNavigationItem } from '@nuxt/content'
 import theme from '#build/ui/content/content-navigation'
@@ -80,7 +81,7 @@ export interface ContentNavigationProps<T extends ContentNavigationLink = Conten
 
 export interface ContentNavigationEmits extends AccordionRootEmits {}
 
-type SlotProps<T> = (props: { link: T, active?: boolean, ui: ContentNavigation['ui'] }) => any
+type SlotProps<T> = (props: { link: T, active?: boolean, ui: ContentNavigation['ui'] }) => VNode[]
 
 export interface ContentNavigationSlots<T extends ContentNavigationLink = ContentNavigationLink> {
   'link': SlotProps<T>

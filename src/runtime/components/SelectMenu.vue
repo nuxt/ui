@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -186,7 +187,7 @@ export interface SelectMenuEmits<
   'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>]
 }
 
-type SlotProps<T extends SelectMenuItem> = (props: { item: T, index: number, ui: SelectMenu['ui'] }) => any
+type SlotProps<T extends SelectMenuItem> = (props: { item: T, index: number, ui: SelectMenu['ui'] }) => VNode[]
 
 export interface SelectMenuSlots<
   A extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>,
@@ -200,26 +201,26 @@ export interface SelectMenuSlots<
     modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
     open: boolean
     ui: SelectMenu['ui']
-  }): any
+  }): VNode[]
   'default'(props: {
     modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
     open: boolean
     ui: SelectMenu['ui']
-  }): any
+  }): VNode[]
   'trailing'(props: {
     modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
     open: boolean
     ui: SelectMenu['ui']
-  }): any
-  'empty'(props: { searchTerm?: string }): any
+  }): VNode[]
+  'empty'(props: { searchTerm?: string }): VNode[]
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
-  'item-label'(props: { item: T, index: number }): any
-  'item-description'(props: { item: T, index: number }): any
+  'item-label'(props: { item: T, index: number }): VNode[]
+  'item-description'(props: { item: T, index: number }): VNode[]
   'item-trailing': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
-  'create-item-label'(props: { item: string }): any
+  'content-top': (props?: {}) => VNode[]
+  'content-bottom': (props?: {}) => VNode[]
+  'create-item-label'(props: { item: string }): VNode[]
 }
 </script>
 

@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
@@ -103,7 +104,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
 }
 
 export type ContentSearchSlots = CommandPaletteSlots<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem> & {
-  content(props: { close: () => void }): any
+  content(props: { close: () => void }): VNode[]
 }
 
 </script>
