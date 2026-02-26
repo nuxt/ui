@@ -34,6 +34,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
 import UMarquee from './Marquee.vue'
 import UAvatar from './Avatar.vue'
@@ -49,6 +50,7 @@ const props = withDefaults(defineProps<PageLogosProps>(), {
 const slots = defineSlots<PageLogosSlots>()
 
 const appConfig = useAppConfig() as PageLogos['AppConfig']
+const uiProp = useComponentUI('pageLogos', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageLogos || {}) })())
@@ -64,20 +66,20 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageLogos ||
           :src="item.src"
           :alt="item.alt"
           data-slot="logo"
-          :class="ui.logo({ class: props.ui?.logo })"
+          :class="ui.logo({ class: uiProp?.logo })"
         />
         <UIcon
           v-else
           :name="item"
           data-slot="logo"
-          :class="ui.logo({ class: props.ui?.logo })"
+          :class="ui.logo({ class: uiProp?.logo })"
         />
       </template>
     </template>
   </DefineCreateItemTemplate>
 
-  <Primitive :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <h2 v-if="title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+  <Primitive :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <h2 v-if="title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
       {{ title }}
     </h2>
 
@@ -85,11 +87,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageLogos ||
       v-if="marquee"
       v-bind="typeof marquee === 'object' ? marquee : {}"
       data-slot="logos"
-      :class="ui.logos({ class: props.ui?.logos, marquee: true })"
+      :class="ui.logos({ class: uiProp?.logos, marquee: true })"
     >
       <ReuseCreateItemTemplate :items="items" />
     </UMarquee>
-    <div v-else data-slot="logos" :class="ui.logos({ class: props.ui?.logos })">
+    <div v-else data-slot="logos" :class="ui.logos({ class: uiProp?.logos })">
       <ReuseCreateItemTemplate :items="items" />
     </div>
   </Primitive>

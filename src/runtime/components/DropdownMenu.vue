@@ -122,6 +122,7 @@ import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
@@ -137,6 +138,7 @@ const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
 
 const appConfig = useAppConfig() as DropdownMenu['AppConfig']
+const uiProp = useComponentUI('dropdownMenu', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
@@ -155,14 +157,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
     </DropdownMenuTrigger>
 
     <UDropdownMenuContent
-      :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
+      :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })"
       :ui="ui"
-      :ui-override="props.ui"
+      :ui-override="uiProp"
       v-bind="contentProps"
       :items="items"
       :portal="portal"
-      :label-key="(labelKey as keyof NestedItem<T>)"
-      :description-key="(descriptionKey as keyof NestedItem<T>)"
+      :label-key="(labelKey as string & keyof NestedItem<T>)"
+      :description-key="(descriptionKey as string & keyof NestedItem<T>)"
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
@@ -171,7 +173,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
         <slot :name="(name as keyof DropdownMenuSlots<T>)" v-bind="slotData" />
       </template>
 
-      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
+      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
     </UDropdownMenuContent>
   </DropdownMenuRoot>
 </template>

@@ -10,7 +10,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ScrollArea.vue
-navigation.badge: New
 ---
 
 ## Usage
@@ -69,6 +68,10 @@ Use the `virtualize` prop to render only the items currently in view, significan
 
 ::note
 When virtualization is **enabled**, customize spacing via the `virtualize` prop options like `gap`, `paddingStart`, and `paddingEnd`. Otherwise, use the `ui` prop to apply classes like `gap p-4` on the `viewport` slot.
+::
+
+::tip
+If all your items have the **same height**, set `skipMeasurement` to `true` in the `virtualize` prop to skip per-item DOM measurement and rely on `estimateSize` instead. This significantly improves performance for large uniform lists.
 ::
 
 ::component-example

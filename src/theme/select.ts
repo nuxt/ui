@@ -31,8 +31,14 @@ export default (options: Required<ModuleOptions>) => {
     },
     variants: {
       ...fieldGroupVariant,
+      variant: (prev: Record<string, string>) => ({
+        ...prev,
+        outline: [prev.outline, 'hover:bg-elevated disabled:bg-default'].join(' '),
+        subtle: [prev.subtle, 'hover:bg-accented/75 disabled:bg-elevated'].join(' ')
+      }),
       size: {
         xs: {
+          base: 'px-2 py-1 text-xs gap-1',
           label: 'p-1 text-[10px]/3 gap-1',
           item: 'p-1 text-xs gap-1',
           itemLeadingIcon: 'size-4',
@@ -43,6 +49,7 @@ export default (options: Required<ModuleOptions>) => {
           empty: 'p-1 text-xs'
         },
         sm: {
+          base: 'px-2.5 py-1.5 text-xs gap-1.5',
           label: 'p-1.5 text-[10px]/3 gap-1.5',
           item: 'p-1.5 text-xs gap-1.5',
           itemLeadingIcon: 'size-4',
@@ -53,6 +60,7 @@ export default (options: Required<ModuleOptions>) => {
           empty: 'p-1.5 text-xs'
         },
         md: {
+          base: 'px-2.5 py-1.5 text-sm gap-1.5',
           label: 'p-1.5 text-xs gap-1.5',
           item: 'p-1.5 text-sm gap-1.5',
           itemLeadingIcon: 'size-5',
@@ -63,6 +71,7 @@ export default (options: Required<ModuleOptions>) => {
           empty: 'p-1.5 text-sm'
         },
         lg: {
+          base: 'px-3 py-2 text-sm gap-2',
           label: 'p-2 text-xs gap-2',
           item: 'p-2 text-sm gap-2',
           itemLeadingIcon: 'size-5',
@@ -73,6 +82,7 @@ export default (options: Required<ModuleOptions>) => {
           empty: 'p-2 text-sm'
         },
         xl: {
+          base: 'px-3 py-2 text-base gap-2',
           label: 'p-2 text-sm gap-2',
           item: 'p-2 text-base gap-2',
           itemLeadingIcon: 'size-6',

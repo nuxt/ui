@@ -640,4 +640,86 @@ describe('Form', () => {
     expect(wrapper.html()).toContain('Error on field2')
     expect(wrapper.html()).toContain('General error')
   })
+
+  describe('HTML5 validation', () => {
+    it('programmatic submit() triggers HTML5 validation and prevents submission when invalid', async () => {
+      const onSubmit = vi.fn()
+
+      const wrapper = await renderForm({
+        fixture: 'FormHtml5Validation',
+        props: { onSubmit }
+      })
+
+      const form = wrapper.setupState.form.value
+
+      // Call submit() programmatically (simulates usage in modals with footer buttons)
+      await form.submit()
+      await flushPromises()
+
+      // Verify form submission was prevented by HTML5 validation
+      expect(onSubmit).not.toHaveBeenCalled()
+    })
+
+    it('programmatic submit() proceeds when HTML5 validation passes', async () => {
+      const onSubmit = vi.fn()
+
+      const wrapper = await renderForm({
+        fixture: 'FormHtml5Validation',
+        props: { onSubmit }
+      })
+
+      const form = wrapper.setupState.form.value
+      const state = wrapper.setupState.state
+
+      // Set valid values
+      state.email = 'test@example.com'
+      state.age = '25'
+      state.username = 'validuser'
+      await nextTick()
+
+      // Call submit() programmatically
+      await form.submit()
+      await flushPromises()
+
+      // Verify form submission proceeded
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
+        data: {
+          email: 'test@example.com',
+          age: '25',
+          username: 'validuser'
+        }
+      }))
+    })
+
+    it('handles nested forms gracefully (renders as div, no HTML5 validation)', async () => {
+      const onSubmit = vi.fn()
+      // Create a nested form scenario
+      const wrapper = await renderForm({
+        fixture: 'FormNested',
+        props: { onSubmit }
+      })
+
+      const form = wrapper.setupState.form.value
+      const state = wrapper.setupState.state
+
+      // Set valid values for all fields
+      state.email = 'test@example.com'
+      state.password = 'strongpassword'
+      state.nested = { field: 'value' }
+
+      // Nested forms render as divs, so reportValidity should not be called
+      // and submit should work normally
+      await form.submit()
+      await flushPromises()
+
+      // Verify form submission proceeded (no HTML5 validation on div elements)
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
+        data: {
+          email: 'test@example.com',
+          password: 'strongpassword',
+          nested: { field: 'value' }
+        }
+      }))
+    })
+  })
 })

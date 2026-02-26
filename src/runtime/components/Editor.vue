@@ -60,10 +60,11 @@ export interface EditorProps<T extends Content = Content, H extends EditorCustom
   image?: boolean | Partial<ImageOptions>
   /**
    * The mention extension options to configure mention handling. Set to `false` to disable the extension.
+   * The `suggestion` and `suggestions` options are omitted as they are managed by the `EditorMentionMenu` component.
    * @defaultValue { HTMLAttributes: { class: 'mention' } }
    * @see https://tiptap.dev/docs/editor/extensions/nodes/mention
    */
-  mention?: boolean | Partial<MentionOptions>
+  mention?: boolean | Partial<Omit<MentionOptions, 'suggestion' | 'suggestions'>>
   /**
    * Custom item handlers to override or extend the default handlers.
    * These handlers are provided to all child components (toolbar, suggestion menu, etc.).
@@ -97,6 +98,7 @@ import StarterKit from '@tiptap/starter-kit'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
 
@@ -112,6 +114,7 @@ defineSlots<EditorSlots<H>>()
 const attrs = useAttrs()
 
 const appConfig = useAppConfig() as Editor['AppConfig']
+const uiProp = useComponentUI('editor', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editor || {}) })({
   placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined
@@ -125,7 +128,7 @@ const editorProps = computed(() => defu(props.editorProps, {
     autocorrect: 'off',
     autocapitalize: 'off',
     ...attrs,
-    class: ui.value.base({ class: props.ui?.base })
+    class: ui.value.base({ class: uiProp.value?.base })
   }
 } as EditorOptions['editorProps']))
 const contentType = computed(() => props.contentType || (typeof props.modelValue === 'string' ? 'html' : 'json'))
@@ -158,6 +161,16 @@ const image = computed(() => typeof props.image === 'boolean' ? {} : props.image
 const mention = computed(() => defu(typeof props.mention === 'boolean' ? {} : props.mention, {
   HTMLAttributes: {
     class: 'mention'
+  },
+  renderText({ node }: { node: any }) {
+    return `${node.attrs.mentionSuggestionChar ?? '@'}${node.attrs.label ?? node.attrs.id}`
+  },
+  renderHTML({ options, node }: { options: any, node: any }) {
+    return [
+      'span',
+      mergeAttributes({ 'data-type': 'mention' }, options.HTMLAttributes),
+      `${node.attrs.mentionSuggestionChar ?? '@'}${node.attrs.label ?? node.attrs.id}`
+    ]
   }
 } as Partial<MentionOptions>))
 
@@ -258,7 +271,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <template v-if="editor">
       <slot :editor="editor" :handlers="handlers" />
 
@@ -266,7 +279,7 @@ defineExpose({
         role="presentation"
         :editor="editor"
         data-slot="content"
-        :class="ui.content({ class: props.ui?.content })"
+        :class="ui.content({ class: uiProp?.content })"
       />
     </template>
   </Primitive>

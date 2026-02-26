@@ -12,6 +12,7 @@ export interface ContainerProps {
    */
   as?: any
   class?: any
+  ui?: { base?: any }
 }
 
 export interface ContainerSlots {
@@ -24,17 +25,20 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
+import { useComponentUI } from '../composables/useComponentUI'
 
 const props = defineProps<ContainerProps>()
 defineSlots<ContainerSlots>()
 
 const appConfig = useAppConfig() as Container['AppConfig']
+const uiProp = useComponentUI('container', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.container || {}) }))
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: props.class })">
+  <Primitive :as="as" :class="ui({ class: [uiProp?.base, props.class] })">
     <slot />
   </Primitive>
 </template>
