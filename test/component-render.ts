@@ -23,10 +23,34 @@ async function componentRender<T>(nameOrHtml: string, options: MountSuspendedOpt
   return html
 }
 
-function renderEach<T>(component: T, cases: ReadonlyArray<[string, MountSuspendedOptions<T>]>) {
-  return it.each(cases)('renders %s correctly', async (nameOrHtml: string, options) => {
-    const html = await componentRender<T>(nameOrHtml, options, component)
-    expect(html).toMatchSnapshot()
+type ExtractRestArgs<T, Cases> = Cases extends ReadonlyArray<infer Case>
+  ? Case extends [string, MountSuspendedOptions<T>, ...infer Rest]
+    ? Rest extends [] ? never
+      : unknown[] extends Rest ? never
+        : Rest
+    : never
+  : never
+
+type RenderEachRest<T, Cases> = [ExtractRestArgs<T, Cases>] extends [never] ? [] : ExtractRestArgs<T, Cases>
+
+type RenderEachFn<T, A extends any[]> = (nameOrHtml: string, options: MountSuspendedOptions<T>, ...args: A) => void | Promise<void>
+
+function renderEach<T, const C extends ReadonlyArray<[string, MountSuspendedOptions<T>, ...any[]]>>(
+  component: T,
+  cases: C,
+  fnOrTestName?: string | RenderEachFn<T, RenderEachRest<T, C>>,
+  fn?: RenderEachFn<T, RenderEachRest<T, C>>
+) {
+  const testName = typeof fnOrTestName === 'string' ? fnOrTestName : 'renders %s correctly'
+  const callback = typeof fnOrTestName === 'function' ? fnOrTestName : fn
+
+  return it.each(cases as ReadonlyArray<[string, MountSuspendedOptions<T>, ...any[]]>)(testName, async (nameOrHtml: string, options: MountSuspendedOptions<T>, ...args: RenderEachRest<T, C>) => {
+    if (callback) {
+      await callback(nameOrHtml, options, ...args)
+    } else {
+      const html = await componentRender<T>(nameOrHtml, options, component)
+      expect(html).toMatchSnapshot()
+    }
   })
 }
 
