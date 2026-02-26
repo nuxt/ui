@@ -94,7 +94,7 @@ props:
           to: /docs/components/progress
     - label: GitHub
       icon: i-simple-icons-github
-      badge: 3.8k
+      badge: 6k
       to: https://github.com/nuxt/ui
       target: _blank
     - label: Help
@@ -112,7 +112,9 @@ Use the `items` prop as an array of objects with the following properties:
 - `icon?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `badge?: string | number | BadgeProps`{lang="ts-type"}
-- `tooltip?: TooltipProps`{lang="ts-type"}
+- [`chip?: boolean | ChipProps`{lang="ts-type"}](#with-chip-in-items)
+- [`tooltip?: TooltipProps`{lang="ts-type"}](#with-tooltip-in-items)
+- [`popover?: PopoverProps`{lang="ts-type"}](#with-popover-in-items)
 - `trailingIcon?: string`{lang="ts-type"}
 - `type?: 'label' | 'trigger' | 'link'`{lang="ts-type"}
 - `defaultOpen?: boolean`{lang="ts-type"}
@@ -123,7 +125,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `children?: NavigationMenuChildItem[]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
+- `ui?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLeadingChipSize?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
@@ -205,7 +207,7 @@ props:
           to: /docs/components/progress
     - label: GitHub
       icon: i-simple-icons-github
-      badge: 3.8k
+      badge: 6k
       to: https://github.com/nuxt/ui
       target: _blank
     - label: Help
@@ -318,7 +320,7 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
@@ -430,7 +432,7 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
@@ -526,7 +528,7 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
@@ -572,7 +574,7 @@ props:
         active: true
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
   class: 'w-full'
@@ -609,7 +611,7 @@ props:
         active: true
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
   class: 'w-full'
@@ -982,7 +984,11 @@ You can inspect the DOM to see each item's content being rendered.
 
 ### With tooltip in items
 
-When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip.
+When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip. In `horizontal` orientation, you can use the `tooltip` property on each item to display a [Tooltip](/docs/components/tooltip) around items.
+
+::note
+The `tooltip` property on an item will always display a tooltip regardless of the global `tooltip` prop.
+::
 
 You can pass any property from the [Tooltip](/docs/components/tooltip) component globally or on each item.
 
@@ -991,7 +997,6 @@ You can pass any property from the [Tooltip](/docs/components/tooltip) component
 collapse: true
 ignore:
   - items
-  - orientation
   - class
 external:
   - items
@@ -1072,13 +1077,13 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
         tooltip:
           text: 'Open on GitHub'
           kbds:
-            - 3.8k
+            - 6k
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
@@ -1088,6 +1093,10 @@ props:
 ### With popover in items
 
 When orientation is `vertical` and the menu is `collapsed`, you can set the `popover` prop to `true` to display a [Popover](/docs/components/popover) around items with their children but you can also use the `popover` property on each item to override the default popover.
+
+::note
+The `popover` property on an item will always display a popover regardless of the global `popover` prop.
+::
 
 You can pass any property from the [Popover](/docs/components/popover) component globally or on each item.
 
@@ -1179,13 +1188,13 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
         tooltip:
           text: 'Open on GitHub'
           kbds:
-            - 3.8k
+            - 6k
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
@@ -1194,6 +1203,48 @@ props:
 
 ::tip{to="#with-content-slot"}
 You can use the `#content` slot to customize the content of the popover in the `vertical` orientation.
+::
+
+### With chip in items :badge{label="4.5+" class="align-text-top"}
+
+Use the `chip` property to display a [Chip](/docs/components/chip) around the icon of the items, you can pass any of its props.
+
+::component-code
+---
+collapse: true
+ignore:
+  - items
+  - class
+external:
+  - items
+externalTypes:
+  - NavigationMenuItem[][]
+props:
+  collapsed: true
+  orientation: 'vertical'
+  items:
+    - - label: Guide
+        icon: i-lucide-book-open
+        chip:
+          color: error
+      - label: Composables
+        icon: i-lucide-database
+        chip:
+          color: info
+          text: 3
+      - label: Components
+        icon: i-lucide-box
+        to: /docs/components
+        active: true
+        chip: true
+    - - label: GitHub
+        icon: i-simple-icons-github
+        to: https://github.com/nuxt/ui
+        target: _blank
+      - label: Help
+        icon: i-lucide-circle-help
+        disabled: true
+---
 ::
 
 ### Control active item

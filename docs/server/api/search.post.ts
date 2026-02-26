@@ -6,9 +6,10 @@ import { gateway } from '@ai-sdk/gateway'
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
-  const httpTransport = new StreamableHTTPClientTransport(
-    new URL(import.meta.dev ? 'http://localhost:3000/mcp' : 'https://ui.nuxt.com/mcp')
-  )
+  const mcpUrl = import.meta.dev
+    ? new URL('/mcp', getRequestURL(event).origin)
+    : new URL('https://ui.nuxt.com/mcp')
+  const httpTransport = new StreamableHTTPClientTransport(mcpUrl)
   const httpClient = await experimental_createMCPClient({
     transport: httpTransport
   })

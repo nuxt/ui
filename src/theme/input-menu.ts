@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => {
   return defuFn({
     slots: {
       base: () => ['rounded-md', options.theme.transitions && 'transition-colors'],
-      trailing: 'group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75',
+      trailing: 'group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
       trailingClear: 'p-0',
       arrow: 'fill-default',
       content: 'max-h-60 w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col',

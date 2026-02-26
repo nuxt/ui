@@ -37,6 +37,8 @@ export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<Pin
   autofocus?: boolean
   autofocusDelay?: number
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   class?: any
   ui?: PinInput['slots']
 }
@@ -53,6 +55,7 @@ import { ref, computed, onMounted } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
@@ -65,6 +68,7 @@ const props = withDefaults(defineProps<PinInputProps<T>>(), {
 const emits = defineEmits<PinInputEmits<T>>()
 
 const appConfig = useAppConfig() as PinInput['AppConfig']
+const uiProp = useComponentUI('pinInput', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'), emits)
 
@@ -74,10 +78,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pinInput || 
   color: color.value,
   variant: props.variant,
   size: size.value,
-  highlight: highlight.value
+  highlight: highlight.value,
+  fixed: props.fixed
 }))
 
 const inputsRef = ref<ComponentPublicInstance[]>([])
+
+function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  inputsRef.value[index] = el
+}
 
 const completed = ref(false)
 function onComplete(value: string[] | number[]) {
@@ -120,17 +130,17 @@ defineExpose({
     :model-value="(modelValue as PinInputValue<T>)"
     :default-value="(defaultValue as PinInputValue<T>)"
     data-slot="root"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     @update:model-value="emitFormInput()"
     @complete="onComplete"
   >
     <PinInputInput
       v-for="(ids, index) in looseToNumber(props.length)"
       :key="ids"
-      :ref="el => (inputsRef[index as number] = el as ComponentPublicInstance)"
+      :ref="el => setInputRef(index as number, el)"
       :index="(index as number)"
       data-slot="base"
-      :class="ui.base({ class: props.ui?.base })"
+      :class="ui.base({ class: uiProp?.base })"
       :disabled="disabled"
       @blur="onBlur"
       @focus="emitFormFocus"
