@@ -21,7 +21,7 @@ const items: NavigationMenuItem[] = [{
 </script>
 
 <template>
-  <div class="flex h-full w-full contain-[paint]">
+  <div class="flex flex-1">
     <USidebar v-model:open="open" collapsible="icon" :ui="{ container: 'absolute' }">
       <template #header>
         <span class="font-semibold text-sm">Navigation</span>
@@ -43,7 +43,7 @@ const items: NavigationMenuItem[] = [{
           @click="open = !open"
         />
 
-        <span class="font-semibold text-sm">Page Title</span>
+        <span class="text-highlighted font-semibold">Dashboard</span>
       </div>
 
       <div class="flex-1" />

@@ -17,15 +17,14 @@ The Sidebar component is a standalone, fixed sidebar that pushes the page conten
 **Sidebar vs DashboardSidebar**: This component is a simple, standalone sidebar you can drop anywhere (chat panel, settings, navigation). If you need drag-to-resize, state persistence and integration with [DashboardGroup](/docs/components/dashboard-group), use [DashboardSidebar](/docs/components/dashboard-sidebar) instead.
 ::
 
-Use the `title`, `description` and `close` props to customize the sidebar header just like the [Modal](/docs/components/modal), [Slideover](/docs/components/slideover) and [Drawer](/docs/components/drawer) components.
-
 Use the `body`, `default` and `footer` slots to customize the sidebar content. The `v-model:open` directive is viewport-aware: on desktop it controls the expanded/collapsed state, on mobile it controls the sheet menu.
 
 ::component-example
 ---
 collapse: true
 name: 'sidebar-example'
-class: '!p-0 !justify-start h-[500px]'
+overflowHidden: true
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 ::
 
@@ -43,13 +42,12 @@ items:
 hide:
   - class
 props:
-  variant: sidebar
-  class: 'h-72'
+  variant: floating
 slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 
 :placeholder{class="h-full"}
@@ -75,16 +73,11 @@ hide:
   - class
 props:
   collapsible: icon
-  class: 'h-72'
-  ui:
-    root: 'block h-72 w-(--sidebar-width) border-e border-default'
-    gap: 'hidden'
-    container: 'relative flex h-full w-(--sidebar-width) border-0'
 slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 
 :placeholder{class="h-full"}
@@ -108,12 +101,11 @@ hide:
   - class
 props:
   side: left
-  class: 'h-72'
 slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 
 :placeholder{class="h-full"}
@@ -129,12 +121,11 @@ hide:
   - class
 props:
   title: Navigation
-  class: 'h-72'
 slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 
 :placeholder{class="h-full"}
@@ -151,12 +142,11 @@ hide:
 props:
   title: Navigation
   description: Browse your workspace
-  class: 'h-72'
 slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 
 :placeholder{class="h-full"}
@@ -180,16 +170,11 @@ props:
   close: true
   title: Navigation
   collapsible: offcanvas
-  class: 'h-72'
-  ui:
-    root: 'block h-72 w-(--sidebar-width) border-e border-default'
-    gap: 'hidden'
-    container: 'relative flex h-full w-(--sidebar-width) border-0'
 slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 
 :placeholder{class="h-full"}
@@ -213,16 +198,11 @@ props:
   closeIcon: i-lucide-arrow-left
   title: Navigation
   collapsible: offcanvas
-  class: 'h-72'
-  ui:
-    root: 'block h-72 w-(--sidebar-width) border-e border-default'
-    gap: 'hidden'
-    container: 'relative flex h-full w-(--sidebar-width) border-0'
 slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 
 :placeholder{class="h-full"}
@@ -247,12 +227,11 @@ hide:
   - class
 props:
   mode: slideover
-  class: 'h-72'
 slots:
   default: |
 
     <Placeholder class="h-full" />
-class: '!p-0 !justify-start'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 
 :placeholder{class="h-full"}
@@ -264,58 +243,6 @@ You can use the `menu` prop to customize the menu of the sidebar, it will adapt 
 
 ## Examples
 
-### With inset variant
-
-Use the `inset` variant with `peer` data-attribute classes on the content panel to create a visually inset layout where the content area adapts to the sidebar variant.
-
-::component-example
----
-collapse: true
-name: 'sidebar-inset-example'
-class: '!p-0 !justify-start h-[500px]'
----
-::
-
-### With chat
-
-Use the sidebar on the right side with [ChatMessages](/docs/components/chat-messages) and [ChatPrompt](/docs/components/chat-prompt) to create an AI chat panel.
-
-::component-example
----
-collapse: true
-name: 'sidebar-chat-example'
-class: '!p-0 !justify-start h-[500px]'
----
-::
-
-### With custom width
-
-The sidebar width is controlled by the `--sidebar-width` CSS variable (defaults to `16rem`). The collapsed icon width is controlled by `--sidebar-width-icon` (defaults to `4rem`).
-
-Override them globally in your CSS or per-instance with the `style` attribute.
-
-::component-example
----
-name: 'sidebar-width-example'
-class: '!p-0 !justify-start h-[500px]'
----
-::
-
-### With Navbar
-
-To position the sidebar below a fixed navbar, customize the `gap` and `container` using the `ui` prop.
-
-::component-example
----
-name: 'sidebar-navbar-example'
-class: '!p-0 !justify-start h-[500px]'
----
-::
-
-::note
-The `--ui-header-height` variable defaults to `4rem` and is used by the [Header](/docs/components/header) and [DashboardNavbar](/docs/components/dashboard-navbar) components. Adjust it if your navbar uses a different height.
-::
-
 ### Control open state
 
 You can control the open state by using the `open` prop or the `v-model:open` directive. On desktop it controls the expanded/collapsed state, on mobile it opens/closes the sheet menu.
@@ -323,7 +250,7 @@ You can control the open state by using the `open` prop or the `v-model:open` di
 ::component-example
 ---
 name: 'sidebar-open-example'
-class: '!p-0 !justify-start h-[500px]'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 ::
 
@@ -338,12 +265,65 @@ Use [`useLocalStorage`](https://vueuse.org/core/useLocalStorage/) from VueUse or
 ::component-example
 ---
 name: 'sidebar-persist-example'
-class: '!p-0 !justify-start h-[500px]'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 ::
 
 ::note
 The only difference with the previous example is replacing `ref(true)` with `useLocalStorage('sidebar-open', true)`.
+::
+
+### With peer content
+
+When using the `inset` variant, you can use the `peer` data-attribute classes on the content panel to create a visually inset layout where the content area adapts to the sidebar variant.
+
+::component-example
+---
+collapse: true
+name: 'sidebar-inset-example'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
+---
+::
+
+### With AI chat
+
+Use the sidebar on the right side with [ChatMessages](/docs/components/chat-messages) and [ChatPrompt](/docs/components/chat-prompt) to create an AI chat panel.
+
+::component-example
+---
+collapse: true
+name: 'sidebar-chat-example'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
+---
+::
+
+### With custom width
+
+The sidebar width is controlled by the `--sidebar-width` CSS variable (defaults to `16rem`). The collapsed icon width is controlled by `--sidebar-width-icon` (defaults to `4rem`).
+
+Override them globally in your CSS or per-instance with the `style` attribute.
+
+::component-example
+---
+name: 'sidebar-width-example'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
+overflowHidden: true
+---
+::
+
+### With fixed navbar
+
+To position the sidebar below a fixed navbar, customize the `gap` and `container` using the `ui` prop.
+
+::component-example
+---
+name: 'sidebar-navbar-example'
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
+---
+::
+
+::note
+The `--ui-header-height` variable defaults to `4rem` and is used by the [Header](/docs/components/header) and [DashboardNavbar](/docs/components/dashboard-navbar) components. Adjust it if your navbar uses a different height.
 ::
 
 ## API

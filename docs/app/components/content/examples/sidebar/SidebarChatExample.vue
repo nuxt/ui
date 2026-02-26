@@ -27,10 +27,10 @@ function onSubmit() {
 </script>
 
 <template>
-  <div class="flex h-full w-full [contain:paint]">
+  <div class="flex flex-1">
     <div class="flex-1 flex flex-col">
       <div class="h-(--ui-header-height) shrink-0 flex items-center justify-end gap-2 px-4 border-b border-default">
-        <span class="font-semibold text-sm me-auto">Page Title</span>
+        <span class="font-semibold text-sm me-auto">Dashboard</span>
 
         <UButton
           icon="i-lucide-panel-right"

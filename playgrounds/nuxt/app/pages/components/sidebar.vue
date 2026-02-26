@@ -42,7 +42,7 @@ function onSubmit() {
       :ui="{ container: 'relative', body: 'py-2' }"
     >
       <template #header="{ state }">
-        <Logo class="h-5 min-w-12" :collapsed="state === 'collapsed'" />
+        <Logo class="h-5 w-auto" :collapsed="state === 'collapsed'" />
       </template>
 
       <UNavigationMenu

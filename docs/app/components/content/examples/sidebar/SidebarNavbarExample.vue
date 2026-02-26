@@ -18,7 +18,7 @@ const items: NavigationMenuItem[] = [{
 </script>
 
 <template>
-  <div class="flex flex-col h-full w-full contain-[paint]">
+  <div class="flex flex-col flex-1">
     <div class="h-(--ui-header-height) shrink-0 flex items-center gap-2 px-4 border-b border-default">
       <UButton
         icon="i-lucide-panel-left"
@@ -27,7 +27,7 @@ const items: NavigationMenuItem[] = [{
         @click="open = !open"
       />
 
-      <span class="font-semibold text-sm">Page Title</span>
+      <span class="text-highlighted font-semibold">Dashboard</span>
     </div>
 
     <div class="flex flex-1 min-h-0">
@@ -44,6 +44,7 @@ const items: NavigationMenuItem[] = [{
             :collapsed="state === 'collapsed'"
             :items="items"
             orientation="vertical"
+            :ui="{ link: 'p-1.5' }"
           />
         </template>
       </USidebar>

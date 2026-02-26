@@ -67,18 +67,21 @@ defineShortcuts(extractShortcuts(teamsItems.value))
 </script>
 
 <template>
-  <div class="flex h-full w-full contain-[paint]">
+  <div class="flex flex-1">
     <USidebar
       v-model:open="open"
       collapsible="icon"
       rail
-      :ui="{ inner: 'divide-y-0 bg-muted' }"
+      :ui="{
+        header: 'min-w-0',
+        inner: 'bg-elevated/25'
+      }"
     >
       <template #header="{ state }">
         <UDropdownMenu
           :items="teamsItems"
-          :content="{ align: 'start', collisionPadding: 12 }"
-          :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-56' }"
+          :content="{ align: 'start' }"
+          :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-48' }"
         >
           <UButton
             v-bind="selectedTeam"
@@ -86,29 +89,24 @@ defineShortcuts(extractShortcuts(teamsItems.value))
             color="neutral"
             variant="ghost"
             block
-            :square="state === 'collapsed'"
-            class="overflow-hidden data-[state=open]:bg-elevated"
-            :ui="{ trailingIcon: 'text-dimmed group-data-[state=collapsed]/sidebar:hidden' }"
+            class="w-full data-[state=open]:bg-elevated p-1.5"
+            :ui="{
+              trailingIcon: 'text-dimmed group-data-[state=collapsed]/sidebar:hidden'
+            }"
           />
         </UDropdownMenu>
       </template>
 
       <template #default="{ state }">
         <UNavigationMenu
-          :collapsed="state === 'collapsed'"
           :items="items"
           orientation="vertical"
-        />
-      </template>
-
-      <template #footer="{ state }">
-        <UButton
-          :avatar="{ src: 'https://github.com/benjamincanac.png' }"
-          label="Benjamin"
-          color="neutral"
-          variant="ghost"
-          :square="state === 'collapsed'"
-          class="w-full overflow-hidden"
+          tooltip
+          popover
+          :ui="{
+            item: 'overflow-hidden',
+            link: 'p-1.5'
+          }"
         />
       </template>
     </USidebar>
@@ -122,7 +120,7 @@ defineShortcuts(extractShortcuts(teamsItems.value))
           @click="open = !open"
         />
 
-        <span class="font-semibold text-sm">Page Title</span>
+        <span class="text-highlighted font-semibold">Dashboard</span>
       </div>
 
       <div class="flex-1" />
