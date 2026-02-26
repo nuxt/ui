@@ -61,7 +61,9 @@ const chat = new Chat({
     processThemeToolCalls()
     _skipSync = true
     messages.value = chat.messages
-    nextTick(() => { _skipSync = false })
+    nextTick(() => {
+      _skipSync = false
+    })
   }
 })
 
@@ -157,9 +159,9 @@ const suggestions = [
   {
     category: 'Components',
     items: [
-      'How to create a form with validation?',
+      'How to build a dashboard layout?',
       'How to build a table with pagination?',
-      'How to build a dashboard layout?'
+      'How to create a form with validation?'
     ]
   },
   {
@@ -174,7 +176,7 @@ const suggestions = [
     category: 'Theme',
     items: [
       'Create a black & white theme',
-      'Design a sakura-inspired theme',
+      'Design a beautiful sakura-inspired theme',
       'Surprise me with a creative and unique theme'
     ]
   }
@@ -284,7 +286,7 @@ defineShortcuts({
           </template>
         </UChatMessages>
 
-        <div v-else class="flex flex-col gap-3">
+        <div v-else class="flex flex-col gap-6">
           <UPageLinks
             v-for="category in suggestions"
             :key="category.category"

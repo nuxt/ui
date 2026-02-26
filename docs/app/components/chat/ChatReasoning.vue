@@ -151,7 +151,7 @@ watch(reasoningText, () => {
       <button
         type="button"
         data-slot="trigger"
-        class="group flex w-full items-center gap-1.5 text-muted hover:text-default text-sm cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors focus-visible:outline-offset-2 focus-visible:outline-primary"
+        class="group flex w-full items-center gap-1.5 text-muted hover:text-default text-sm cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0"
       >
         <span v-if="hasContent && chevron === 'leading'" class="relative size-4 shrink-0">
           <UIcon
@@ -165,8 +165,8 @@ watch(reasoningText, () => {
         </span>
         <UIcon v-else :name="icon" class="size-4 shrink-0" />
 
-        <ChatShimmer v-if="isStreaming" :text="thinkingMessage" />
-        <span v-else>{{ thinkingMessage }}</span>
+        <ChatShimmer v-if="isStreaming" :text="thinkingMessage" class="truncate" />
+        <span v-else class="truncate">{{ thinkingMessage }}</span>
 
         <UIcon
           v-if="hasContent && chevron === 'trailing'"
