@@ -203,13 +203,13 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
             <div v-if="tier.billingCycle || tier.billingPeriod || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)] || !!slots['tier-billing']" data-slot="tierBilling" :class="ui.tierBilling({ class: uiProp?.tierBilling })">
               <slot :name="(`${tier.id}-billing` as keyof PricingTableSlots<T>)" :tier="tier">
                 <slot name="tier-billing" :tier="(tier as T)">
-                <span data-slot="tierBillingPeriod" :class="ui.tierBillingPeriod({ class: uiProp?.tierBillingPeriod })">
-                  {{ tier.billingPeriod || '&nbsp;' }}
-                </span>
+                  <span data-slot="tierBillingPeriod" :class="ui.tierBillingPeriod({ class: uiProp?.tierBillingPeriod })">
+                    {{ tier.billingPeriod || '&nbsp;' }}
+                  </span>
 
                   <span v-if="tier.billingCycle" data-slot="tierBillingCycle" :class="ui.tierBillingCycle({ class: uiProp?.tierBillingCycle })">
-                  {{ tier.billingCycle }}
-                </span>
+                    {{ tier.billingCycle }}
+                  </span>
                 </slot>
               </slot>
             </div>
