@@ -13,10 +13,7 @@ Nuxt UI is a component library built on [Reka UI](https://reka-ui.com/), [Tailwi
 ## Key Conventions
 
 - **Conventional commits**: All commit messages must follow [conventional commits](https://conventionalcommits.org) (e.g. `fix(Button): resolve hover state`, `feat(Modal): add fullscreen prop`).
-- **Type imports**: Always use separate `import type { X }` statements.
 - **Semantic colors**: Use `text-default`, `bg-elevated`, etc. — never raw Tailwind palette colors like `text-gray-500`.
-- **Template slots**: Add `data-slot="name"` attributes on all template elements.
-- **Component theming**: Use `computed(() => tv(...))` for reactive theming with Tailwind Variants.
 
 ## Project Structure
 
