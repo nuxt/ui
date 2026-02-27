@@ -956,9 +956,9 @@ export default defineAppConfig({
 ```
 ::
 
-### As a CountryPicker
+### As a country picker
 
-This example demonstrates using the SelectMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
+You can use the SelectMenu as a country picker with lazy loading. Countries are only fetched when the menu is first opened.
 
 ::component-example
 ---
