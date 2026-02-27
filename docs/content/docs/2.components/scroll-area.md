@@ -6,6 +6,7 @@ links:
   - label: TanStack Virtual
     avatar:
       src: https://github.com/tanstack.png
+      loading: lazy
     to: https://tanstack.com/virtual/latest
   - label: GitHub
     icon: i-simple-icons-github

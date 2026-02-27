@@ -45,34 +45,42 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
+            loading: lazy
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
+            loading: lazy
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
             src: 'https://github.com/atinux.png'
+            loading: lazy
         - label: 'Hugo Richard'
           suffix: 'HugoRCD'
           avatar:
             src: 'https://github.com/HugoRCD.png'
+            loading: lazy
         - label: 'Sandro Circi'
           suffix: 'sandros94'
           avatar:
             src: 'https://github.com/sandros94.png'
+            loading: lazy
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
+            loading: lazy
         - label: 'Jakub Michálek'
           suffix: 'J-Michalek'
           avatar:
             src: 'https://github.com/J-Michalek.png'
+            loading: lazy
         - label: 'Eugen Istoc'
           suffix: 'genu'
           avatar:
             src: 'https://github.com/genu.png'
+            loading: lazy
   class: 'flex-1 h-80'
 ---
 ::
@@ -144,34 +152,42 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
+            loading: lazy
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
+            loading: lazy
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
             src: 'https://github.com/atinux.png'
+            loading: lazy
         - label: 'Hugo Richard'
           suffix: 'HugoRCD'
           avatar:
             src: 'https://github.com/HugoRCD.png'
+            loading: lazy
         - label: 'Sandro Circi'
           suffix: 'sandros94'
           avatar:
             src: 'https://github.com/sandros94.png'
+            loading: lazy
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
+            loading: lazy
         - label: 'Jakub Michálek'
           suffix: 'J-Michalek'
           avatar:
             src: 'https://github.com/J-Michalek.png'
+            loading: lazy
         - label: 'Eugen Istoc'
           suffix: 'genu'
           avatar:
             src: 'https://github.com/genu.png'
+            loading: lazy
   class: 'flex-1'
 ---
 ::
@@ -212,34 +228,42 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
+            loading: lazy
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
+            loading: lazy
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
             src: 'https://github.com/atinux.png'
+            loading: lazy
         - label: 'Hugo Richard'
           suffix: 'HugoRCD'
           avatar:
             src: 'https://github.com/HugoRCD.png'
+            loading: lazy
         - label: 'Sandro Circi'
           suffix: 'sandros94'
           avatar:
             src: 'https://github.com/sandros94.png'
+            loading: lazy
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
+            loading: lazy
         - label: 'Jakub Michálek'
           suffix: 'J-Michalek'
           avatar:
             src: 'https://github.com/J-Michalek.png'
+            loading: lazy
         - label: 'Eugen Istoc'
           suffix: 'genu'
           avatar:
             src: 'https://github.com/genu.png'
+            loading: lazy
   class: 'flex-1'
 ---
 ::
@@ -387,6 +411,7 @@ props:
       suffix: 'benjamincanac'
       avatar:
         src: 'https://github.com/benjamincanac.png'
+        loading: lazy
   selectedIcon: 'i-lucide-circle-check'
   groups:
     - id: 'users'
@@ -396,34 +421,42 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
+            loading: lazy
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
+            loading: lazy
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
             src: 'https://github.com/atinux.png'
+            loading: lazy
         - label: 'Hugo Richard'
           suffix: 'HugoRCD'
           avatar:
             src: 'https://github.com/HugoRCD.png'
+            loading: lazy
         - label: 'Sandro Circi'
           suffix: 'sandros94'
           avatar:
             src: 'https://github.com/sandros94.png'
+            loading: lazy
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
+            loading: lazy
         - label: 'Jakub Michálek'
           suffix: 'J-Michalek'
           avatar:
             src: 'https://github.com/J-Michalek.png'
+            loading: lazy
         - label: 'Eugen Istoc'
           suffix: 'genu'
           avatar:
             src: 'https://github.com/genu.png'
+            loading: lazy
   class: 'flex-1'
 ---
 ::
