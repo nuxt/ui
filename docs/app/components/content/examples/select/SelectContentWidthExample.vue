@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const value = ref<string>()
 
-const { data: users } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+const { data: users } = useFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'typicode-users-email',
   transform: (data: { id: number, name: string, email: string }[]) => {
     return data?.map(user => ({

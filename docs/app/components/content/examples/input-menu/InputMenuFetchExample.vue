@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { AvatarProps } from '@nuxt/ui'
 
-const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+const { data: users, status } = useFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'typicode-users',
   transform: (data: { id: number, name: string }[]) => {
     return data?.map(user => ({
@@ -18,7 +18,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 <template>
   <UInputMenu
     :items="users"
-    :loading="status === 'pending'"
+    :loading="status !== 'success'"
     icon="i-lucide-user"
     placeholder="Select user"
   >

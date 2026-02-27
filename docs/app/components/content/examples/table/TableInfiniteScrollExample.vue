@@ -21,7 +21,7 @@ type UserResponse = {
 
 const skip = ref(0)
 
-const { data, status, execute } = await useFetch('https://dummyjson.com/users?limit=10&select=firstName,username,email,image', {
+const { data, status, execute } = useFetch('https://dummyjson.com/users?limit=10&select=firstName,username,email,image', {
   key: 'table-users-infinite-scroll',
   params: { skip },
   transform: (data?: UserResponse) => {
@@ -80,7 +80,7 @@ onMounted(() => {
     ref="table"
     :data="users"
     :columns="columns"
-    :loading="status === 'pending'"
+    :loading="status !== 'success'"
     sticky
     class="flex-1 h-80"
   />

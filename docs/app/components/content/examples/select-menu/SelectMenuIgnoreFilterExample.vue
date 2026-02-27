@@ -5,7 +5,7 @@ import type { AvatarProps } from '@nuxt/ui'
 const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
 
-const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+const { data: users, status } = useFetch('https://jsonplaceholder.typicode.com/users', {
   params: { q: searchTermDebounced },
   transform: (data: { id: number, name: string }[]) => {
     return data?.map(user => ({
@@ -23,7 +23,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   <USelectMenu
     v-model:search-term="searchTerm"
     :items="users"
-    :loading="status === 'pending'"
+    :loading="status !== 'success'"
     ignore-filter
     icon="i-lucide-user"
     placeholder="Select user"

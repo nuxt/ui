@@ -12,7 +12,7 @@ type User = {
   company: { name: string }
 }
 
-const { data, status } = await useFetch<User[]>('https://jsonplaceholder.typicode.com/users', {
+const { data, status } = useFetch<User[]>('https://jsonplaceholder.typicode.com/users', {
   key: 'table-users',
   transform: (data) => {
     return data?.map(user => ({
@@ -53,5 +53,5 @@ const columns: TableColumn<User>[] = [{
 </script>
 
 <template>
-  <UTable :data="data" :columns="columns" :loading="status === 'pending'" class="flex-1 h-80" />
+  <UTable :data="data" :columns="columns" :loading="status !== 'success'" class="flex-1 h-80" />
 </template>

@@ -19,7 +19,7 @@ type UserResponse = {
 
 const skip = ref(0)
 
-const { data, status, execute } = await useFetch('https://dummyjson.com/users?limit=10&select=firstName,lastName,username,email,image', {
+const { data, status, execute } = useFetch('https://dummyjson.com/users?limit=10&select=firstName,lastName,username,email,image', {
   key: 'scroll-area-users-infinite-scroll',
   params: { skip },
   transform: (data?: UserResponse) => {
@@ -80,7 +80,7 @@ onMounted(() => {
   </UScrollArea>
 
   <UProgress
-    v-if="status === 'pending'"
+    v-if="status !== 'success'"
     indeterminate
     size="xs"
     class="absolute top-0 inset-x-0 z-1"

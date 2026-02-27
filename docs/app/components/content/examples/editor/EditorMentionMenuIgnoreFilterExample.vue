@@ -8,7 +8,7 @@ Type @ to mention someone. Results are fetched from an API as you type.`)
 const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
 
-const { data: items } = await useFetch('https://dummyjson.com/users/search?limit=10', {
+const { data: items } = useFetch('https://dummyjson.com/users/search?limit=10', {
   params: { q: searchTermDebounced },
   transform: (data: { users: { id: number, firstName: string, lastName: string, image: string }[] }) => {
     return data.users?.map(user => ({ id: user.id, label: `${user.firstName} ${user.lastName}`, avatar: { src: user.image, loading: 'lazy' as const } })) || []

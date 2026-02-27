@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const searchTerm = ref('')
 
-const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+const { data: users, status } = useFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'command-palette-users',
   params: { q: searchTerm },
   transform: (data: { id: number, name: string, email: string }[]) => {
@@ -31,7 +31,7 @@ const groups = computed(() => [{
     <template #content>
       <UCommandPalette
         v-model:search-term="searchTerm"
-        :loading="status === 'pending'"
+        :loading="status !== 'success'"
         :groups="groups"
         placeholder="Search users..."
         class="h-80"
