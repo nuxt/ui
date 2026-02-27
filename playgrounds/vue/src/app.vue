@@ -64,16 +64,17 @@ provide('components', components)
       <UDashboardPanel
         :ui="{
           body: [
-            'justify-center items-center',
             route.path.startsWith('/components') && 'mt-16',
             route.path.startsWith('/components/scroll-area') && 'p-0!'
           ]
         }"
       >
         <template #body>
-          <Suspense>
-            <RouterView />
-          </Suspense>
+          <div class="flex flex-col items-center justify-center min-h-full shrink-0">
+            <Suspense>
+              <RouterView />
+            </Suspense>
+          </div>
         </template>
       </UDashboardPanel>
 
