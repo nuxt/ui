@@ -71,7 +71,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
   ui?: DashboardSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem>['ui']
 }
 
-export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem> & {
+export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteItem> & {
   content?(props: { close: () => void }): VNode[]
 }
 

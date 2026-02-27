@@ -196,7 +196,7 @@ export type CommandPaletteEmits<T extends CommandPaletteItem = CommandPaletteIte
 
 type SlotProps<T> = (props: { item: T, index: number, ui: CommandPalette['ui'] }) => VNode[]
 
-export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> = {
+export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteItem> = {
   'empty'?(props: { searchTerm: string }): VNode[]
   'footer'?(props: { ui: CommandPalette['ui'] }): VNode[]
   'back'?(props: { ui: CommandPalette['ui'] }): VNode[]
@@ -206,7 +206,7 @@ export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPalett
   'item-label'?: SlotProps<T>
   'item-description'?: SlotProps<T>
   'item-trailing'?: SlotProps<T>
-} & Record<string, SlotProps<G>> & Record<string, SlotProps<T>>
+} & Record<string, SlotProps<T>>
 
 </script>
 
@@ -246,7 +246,7 @@ const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   highlightOnHover: true
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
-const slots = defineSlots<CommandPaletteSlots<G, T>>()
+const slots = defineSlots<CommandPaletteSlots<T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -463,8 +463,8 @@ function onSelect(e: Event, item: T) {
         @select="onSelect($event, item as T)"
       >
         <ULinkBase v-bind="slotProps" data-slot="item" :class="ui.item({ class: [uiProp?.item, item.ui?.item, item.class], active: active || item.active })">
-          <slot :name="((item.slot || group?.slot || 'item') as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
-            <slot :name="((item.slot ? `${item.slot}-leading` : group?.slot ? `${group.slot}-leading` : `item-leading`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
+          <slot :name="((item.slot || group?.slot || 'item') as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
+            <slot :name="((item.slot ? `${item.slot}-leading` : group?.slot ? `${group.slot}-leading` : `item-leading`) as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
               <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiProp?.itemLeadingIcon, item.ui?.itemLeadingIcon], loading: true })" />
               <UIcon v-else-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiProp?.itemLeadingIcon, item.ui?.itemLeadingIcon], active: active || item.active })" />
               <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || uiProp?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiProp?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active: active || item.active })" />
@@ -479,9 +479,9 @@ function onSelect(e: Event, item: T) {
               />
             </slot>
 
-            <span v-if="(item.prefix || (item.labelHtml || get(item, props.labelKey as string)) || (item.suffixHtml || item.suffix) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>]) || (get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>])" data-slot="itemWrapper" :class="ui.itemWrapper({ class: [uiProp?.itemWrapper, item.ui?.itemWrapper] })">
+            <span v-if="(item.prefix || (item.labelHtml || get(item, props.labelKey as string)) || (item.suffixHtml || item.suffix) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<T>]) || (get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<T>])" data-slot="itemWrapper" :class="ui.itemWrapper({ class: [uiProp?.itemWrapper, item.ui?.itemWrapper] })">
               <span data-slot="itemLabel" :class="ui.itemLabel({ class: [uiProp?.itemLabel, item.ui?.itemLabel], active: active || item.active })">
-                <slot :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
+                <slot :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
                   <span v-if="item.prefix" data-slot="itemLabelPrefix" :class="ui.itemLabelPrefix({ class: [uiProp?.itemLabelPrefix, item.ui?.itemLabelPrefix] })">{{ item.prefix }}</span>
 
                   <span v-if="item.labelHtml" data-slot="itemLabelBase" :class="ui.itemLabelBase({ class: [uiProp?.itemLabelBase, item.ui?.itemLabelBase], active: active || item.active })" v-html="item.labelHtml" />
@@ -492,15 +492,15 @@ function onSelect(e: Event, item: T) {
                 </slot>
               </span>
 
-              <span v-if="get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>]" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiProp?.itemDescription, item.ui?.itemDescription] })">
-                <slot :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
+              <span v-if="get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<T>]" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiProp?.itemDescription, item.ui?.itemDescription] })">
+                <slot :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
                   {{ get(item, props.descriptionKey as string) }}
                 </slot>
               </span>
             </span>
 
             <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [uiProp?.itemTrailing, item.ui?.itemTrailing] })">
-              <slot :name="((item.slot ? `${item.slot}-trailing` : group?.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
+              <slot :name="((item.slot ? `${item.slot}-trailing` : group?.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
                 <UIcon
                   v-if="item.children && item.children.length > 0"
                   :name="childrenIcon || appConfig.ui.icons.chevronRight"

@@ -103,7 +103,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   ui?: ContentSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>['ui']
 }
 
-export type ContentSearchSlots = CommandPaletteSlots<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem> & {
+export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
   content?(props: { close: () => void }): VNode[]
 }
 
