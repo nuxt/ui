@@ -141,7 +141,7 @@ onMounted(async () => {
         />
         <div v-if="!played" class="group cursor-pointer absolute inset-0 flex items-center justify-center backdrop-blur-xs" @click="video?.play(); played = true">
           <UButton
-            icon="i-heroicons-play-20-solid"
+            icon="i-lucide-play"
             size="xl"
             color="neutral"
             variant="solid"
