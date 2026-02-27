@@ -89,6 +89,7 @@ defineShortcuts(extractShortcuts(teamsItems.value))
             color="neutral"
             variant="ghost"
             block
+            :square="state === 'collapsed'"
             class="w-full data-[state=open]:bg-elevated p-1.5"
             :ui="{
               trailingIcon: 'text-dimmed group-data-[state=collapsed]/sidebar:hidden'
@@ -100,14 +101,10 @@ defineShortcuts(extractShortcuts(teamsItems.value))
       <template #default="{ state }">
         <UNavigationMenu
           :items="items"
+          :collapsed="state === 'collapsed'"
           orientation="vertical"
           tooltip
           popover
-          variant="link"
-          :ui="{
-            item: 'overflow-hidden',
-            link: 'p-1.5'
-          }"
         />
       </template>
     </USidebar>
