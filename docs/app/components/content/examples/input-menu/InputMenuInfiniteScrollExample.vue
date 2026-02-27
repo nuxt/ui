@@ -21,7 +21,8 @@ const { data, status, execute } = await useFetch('https://dummyjson.com/users?li
     return data?.users.map(user => user.firstName)
   },
   lazy: true,
-  immediate: false
+  immediate: false,
+  server: false
 })
 
 const users = ref<string[]>([])

@@ -26,7 +26,8 @@ const { data, status, execute } = await useFetch('https://dummyjson.com/users?li
     return data?.users
   },
   lazy: true,
-  immediate: false
+  immediate: false,
+  server: false
 })
 
 const users = ref<User[]>([])
@@ -72,7 +73,7 @@ onMounted(() => {
       <UUser
         :name="`${item.firstName} ${item.lastName}`"
         :description="item.email"
-        :avatar="{ src: item.image, alt: item.firstName, loading: 'lazy' }"
+        :avatar="{ src: item.image, alt: item.firstName, loading: 'lazy' as const }"
         size="lg"
       />
     </UPageCard>

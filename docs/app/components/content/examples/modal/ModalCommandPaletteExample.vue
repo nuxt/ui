@@ -5,9 +5,10 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   key: 'command-palette-users',
   params: { q: searchTerm },
   transform: (data: { id: number, name: string, email: string }[]) => {
-    return data?.map(user => ({ id: user.id, label: user.name, suffix: user.email, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
+    return data?.map(user => ({ id: user.id, label: user.name, suffix: user.email, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const } })) || []
   },
-  lazy: true
+  lazy: true,
+  server: false
 })
 
 const groups = computed(() => [{

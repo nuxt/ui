@@ -28,7 +28,8 @@ const { data, status, execute } = await useFetch('https://dummyjson.com/users?li
     return data?.users
   },
   lazy: true,
-  immediate: false
+  immediate: false,
+  server: false
 })
 
 const columns: TableColumn<User>[] = [{
@@ -37,7 +38,7 @@ const columns: TableColumn<User>[] = [{
 }, {
   accessorKey: 'image',
   header: 'Avatar',
-  cell: ({ row }) => h(UAvatar, { src: row.original.image })
+  cell: ({ row }) => h(UAvatar, { src: row.original.image, loading: 'lazy' })
 }, {
   accessorKey: 'firstName',
   header: 'First name'

@@ -6,10 +6,11 @@ const { data: users } = await useFetch('https://jsonplaceholder.typicode.com/use
       label: user.name,
       email: user.email,
       value: String(user.id),
-      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` }
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const }
     }))
   },
-  lazy: true
+  lazy: true,
+  server: false
 })
 </script>
 
