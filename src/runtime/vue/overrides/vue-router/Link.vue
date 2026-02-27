@@ -57,7 +57,7 @@ export interface LinkProps extends Partial<Omit<RouterLinkProps, 'custom'>>, /**
 }
 
 export interface LinkSlots {
-  default(props: { active: boolean }): VNode[]
+  default?(props: { active: boolean }): VNode[]
 }
 </script>
 

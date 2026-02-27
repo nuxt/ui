@@ -66,7 +66,7 @@ export interface LinkProps extends BaseLinkProps {
 }
 
 export interface LinkSlots {
-  default(props: { active: boolean }): VNode[]
+  default?(props: { active: boolean }): VNode[]
 }
 </script>
 

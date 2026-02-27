@@ -64,7 +64,7 @@ export interface LinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onCl
 }
 
 export interface LinkSlots {
-  default(props: { active: boolean }): VNode[]
+  default?(props: { active: boolean }): VNode[]
 }
 </script>
 
