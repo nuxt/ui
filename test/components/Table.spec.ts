@@ -190,7 +190,8 @@ describe('Table', () => {
     ['with loading slot', { props: { columns, loading: true }, slots: { loading: () => 'Loading slot' } }],
     ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }],
     ['with body-top slot', { props, slots: { 'body-top': () => 'Body top slot' } }],
-    ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }]
+    ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }],
+    ['with row pinning', { props: { ...props, rowPinning: { top: ['2'], bottom: ['3'] } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps, slots?: Partial<TableSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Table)
     expect(html).toMatchSnapshot()
