@@ -215,7 +215,7 @@ export type NavigationMenuSlots<
   'item-leading'?: SlotProps<T>
   'item-label'?: (props: { item: T, index: number, active: boolean }) => VNode[]
   'item-trailing'?: SlotProps<T>
-  'item-content'?: (props: { item: T, index: number, active: boolean, ui: NavigationMenu['ui'], close?: () => void }) => VNode[]
+  'item-content'?: (props: { item: T, index: number, active: boolean, ui: NavigationMenu['ui'], close: (() => void) | undefined }) => VNode[]
   'list-leading'?: (props?: {}) => VNode[]
   'list-trailing'?: (props?: {}) => VNode[]
 }
