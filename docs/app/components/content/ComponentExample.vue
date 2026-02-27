@@ -90,15 +90,8 @@ const { width } = useElementSize(el)
 const camelName = camelCase(props.name)
 
 const exampleModules = import.meta.glob('~/components/content/examples/**/*.vue')
-
-const resolvedComponent = computed(() => {
-  const name = upperFirst(camelName)
-  const match = Object.entries(exampleModules).find(([path]) => path.endsWith(`/${name}.vue`))
-  if (match) {
-    return defineAsyncComponent(match[1] as any)
-  }
-  return undefined
-})
+const exampleMatch = Object.entries(exampleModules).find(([path]) => path.endsWith(`/${upperFirst(camelName)}.vue`))
+const resolvedComponent = exampleMatch ? defineAsyncComponent(exampleMatch[1] as any) : undefined
 
 const { data } = await useFetchComponentExample(camelName)
 

@@ -8,15 +8,8 @@ const appConfig = useAppConfig()
 const name = route.params.slug?.[0]
 
 const exampleModules = import.meta.glob('~/components/content/examples/**/*.vue')
-
-const resolvedComponent = computed(() => {
-  const pascalName = upperFirst(camelCase(name || ''))
-  const match = Object.entries(exampleModules).find(([path]) => path.endsWith(`/${pascalName}.vue`))
-  if (match) {
-    return defineAsyncComponent(match[1] as any)
-  }
-  return undefined
-})
+const exampleMatch = Object.entries(exampleModules).find(([path]) => path.endsWith(`/${upperFirst(camelCase(name || ''))}.vue`))
+const resolvedComponent = exampleMatch ? defineAsyncComponent(exampleMatch[1] as any) : undefined
 
 if (route.query.theme) {
   colorMode.preference = route.query.theme === 'light' ? 'light' : 'dark'

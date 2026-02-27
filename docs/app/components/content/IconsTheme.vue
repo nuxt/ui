@@ -45,7 +45,7 @@ export default defineConfig({
 ::
 `
 
-  return cachedParseMarkdown(md, { })
+  return cachedParseMarkdown(md)
 }, { lazy: import.meta.client, watch: [icons] })
 </script>
 
