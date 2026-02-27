@@ -123,12 +123,11 @@ const indicatorStyle = computed(() => {
 
   const flatLinks = flattenLinks(props.links || [])
   const activeIndex = flatLinks.findIndex(link => activeHeadings.value.includes(link.id))
-  const linkHeight = 28
-  const gapSize = 0
+  const linkHeight = 1.75 // text-sm line-height (1.25rem) + py-1 (0.5rem)
 
   return {
-    '--indicator-size': `${(linkHeight * activeHeadings.value.length) + (gapSize * (activeHeadings.value.length - 1))}px`,
-    '--indicator-position': activeIndex >= 0 ? `${activeIndex * (linkHeight + gapSize)}px` : '0px'
+    '--indicator-size': `${linkHeight * activeHeadings.value.length}rem`,
+    '--indicator-position': activeIndex >= 0 ? `${activeIndex * linkHeight}rem` : '0rem'
   }
 })
 
