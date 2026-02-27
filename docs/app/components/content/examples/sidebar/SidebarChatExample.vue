@@ -50,7 +50,7 @@ function onSubmit() {
       title="AI Chat"
       close
       :style="{ '--sidebar-width': '20rem' }"
-      :ui="{ container: 'absolute', footer: 'p-0' }"
+      :ui="{ footer: 'p-0' }"
     >
       <template #body>
         <UChatMessages

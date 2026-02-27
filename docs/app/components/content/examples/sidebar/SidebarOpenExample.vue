@@ -22,7 +22,7 @@ const items: NavigationMenuItem[] = [{
 
 <template>
   <div class="flex flex-1">
-    <USidebar v-model:open="open" collapsible="icon" :ui="{ container: 'absolute' }">
+    <USidebar v-model:open="open" collapsible="icon">
       <template #header>
         <span class="font-semibold text-sm">Navigation</span>
       </template>

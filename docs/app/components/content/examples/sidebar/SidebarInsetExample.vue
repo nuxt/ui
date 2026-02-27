@@ -26,7 +26,6 @@ const items: NavigationMenuItem[] = [{
       v-model:open="open"
       variant="inset"
       collapsible="icon"
-      :ui="{ container: 'absolute' }"
     >
       <template #header>
         <Logo class="h-5 shrink-0" />
@@ -51,7 +50,7 @@ const items: NavigationMenuItem[] = [{
       </template>
     </USidebar>
 
-    <div class="flex-1 flex flex-col overflow-hidden lg:peer-data-[variant=inset]:my-2 lg:peer-data-[variant=inset]:ms-0 lg:peer-data-[variant=inset]:rounded-xl lg:peer-data-[variant=inset]:shadow-sm lg:peer-data-[variant=inset]:ring lg:peer-data-[variant=inset]:ring-default">
+    <div class="flex-1 flex flex-col overflow-hidden lg:peer-data-[variant=inset]:m-4 lg:peer-data-[variant=inset]:rounded-xl lg:peer-data-[variant=inset]:shadow-sm lg:peer-data-[variant=inset]:ring lg:peer-data-[variant=inset]:ring-default lg:peer-data-[variant=inset]:bg-default/75">
       <div class="h-(--ui-header-height) shrink-0 flex items-center gap-2 px-4 border-b border-default">
         <UButton
           icon="i-lucide-panel-left"

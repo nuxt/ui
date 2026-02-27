@@ -103,6 +103,7 @@ defineShortcuts(extractShortcuts(teamsItems.value))
           orientation="vertical"
           tooltip
           popover
+          variant="link"
           :ui="{
             item: 'overflow-hidden',
             link: 'p-1.5'
