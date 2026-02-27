@@ -476,6 +476,27 @@ class: '!p-0 overflow-clip'
 You can use the `column-pinning` prop to control the pinning state of the columns (can be binded with `v-model`).
 ::
 
+### With row pinning
+
+You can add a column that renders a [Button](/docs/components/button) component inside the `cell` to toggle the pinning state of a row using the TanStack Table [Row Pinning APIs](https://tanstack.com/table/latest/docs/api/features/row-pinning). Pinned rows will stay at the top or bottom of the table regardless of sorting or filtering.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-row-pinning-example'
+highlights:
+  - 49
+  - 64
+  - 115
+class: '!p-0'
+---
+::
+
+::tip
+You can use the `row-pinning` prop to control the pinning state of the rows (can be binded with `v-model`).
+::
+
 ### With column visibility
 
 You can use a [DropdownMenu](/docs/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/latest/docs/api/features/column-visibility).
