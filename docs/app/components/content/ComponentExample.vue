@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ChipProps } from '@nuxt/ui'
-import { camelCase } from 'scule'
+import { camelCase, upperFirst } from 'scule'
 import { hash } from 'ohash'
 import { useElementSize } from '@vueuse/core'
 import { get, set } from '#ui/utils'
@@ -89,7 +89,18 @@ const { width } = useElementSize(el)
 
 const camelName = camelCase(props.name)
 
-const data = await fetchComponentExample(camelName)
+const exampleModules = import.meta.glob('~/components/content/examples/**/*.vue')
+
+const resolvedComponent = computed(() => {
+  const name = upperFirst(camelName)
+  const match = Object.entries(exampleModules).find(([path]) => path.endsWith(`/${name}.vue`))
+  if (match) {
+    return defineAsyncComponent(match[1] as any)
+  }
+  return undefined
+})
+
+const { data } = await useFetchComponentExample(camelName)
 
 const componentProps = reactive({ ...(props.props || {}) })
 
@@ -101,8 +112,8 @@ const code = computed(() => {
 `
   }
 
-  code += `\`\`\`${props.lang} ${props.preview ? '' : ` [${props.filename ?? data.pascalName}.${props.lang}]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
-${data?.code ?? ''}
+  code += `\`\`\`${props.lang} ${props.preview ? '' : ` [${props.filename ?? data.value?.pascalName}.${props.lang}]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
+${data.value?.code ?? ''}
 \`\`\``
 
   if (props.collapse) {
@@ -113,9 +124,9 @@ ${data?.code ?? ''}
   return code
 })
 
-const { data: ast } = await useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
+const { data: ast } = useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
   if (!props.prettier) {
-    return parseMarkdown(code.value)
+    return cachedParseMarkdown(code.value)
   }
 
   let formatted = ''
@@ -130,8 +141,8 @@ const { data: ast } = await useAsyncData(`component-example-${camelName}${hash({
     formatted = code.value
   }
 
-  return parseMarkdown(formatted)
-}, { watch: [code] })
+  return cachedParseMarkdown(formatted)
+}, { lazy: import.meta.client, watch: [code] })
 
 const optionsValues = ref(props.options?.reduce((acc, option) => {
   if (option.name) {
@@ -226,7 +237,7 @@ const urlSearchParams = computed(() => {
             :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
           />
           <div v-else ref="componentContainer" class="flex justify-center p-4" :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }]">
-            <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
+            <component :is="resolvedComponent" v-bind="{ ...componentProps, ...optionsValues }" />
           </div>
         </div>
 
