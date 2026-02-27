@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableColumn } from '@nuxt/ui'
+import type { AvatarProps, TableColumn } from '@nuxt/ui'
 
 const UAvatar = resolveComponent('UAvatar')
 
@@ -8,7 +8,7 @@ type User = {
   name: string
   username: string
   email: string
-  avatar: { src: string }
+  avatar: AvatarProps
   company: { name: string }
 }
 
