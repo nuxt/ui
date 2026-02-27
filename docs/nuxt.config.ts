@@ -166,7 +166,6 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      concurrency: 5,
       routes: [
         '/docs/getting-started',
         '/api/countries.json',
