@@ -60,9 +60,9 @@ export interface ChatMessagesProps {
 }
 
 type ExtendSlotWithVersion<K extends keyof ChatMessageSlots>
-  = ChatMessageSlots[K] extends (props: infer P) => VNode[]
+  = Required<ChatMessageSlots>[K] extends (props: infer P) => VNode[]
     ? (props: P & { message: UIMessage }) => VNode[]
-    : ChatMessageSlots[K]
+    : Required<ChatMessageSlots>[K]
 
 export type ChatMessagesSlots = {
   [K in keyof ChatMessageSlots]?: ExtendSlotWithVersion<K>

@@ -25,9 +25,9 @@ export interface BlogPostsProps<T extends BlogPostProps = BlogPostProps> {
 }
 
 type ExtendSlotWithPost<T extends BlogPostProps, K extends keyof BlogPostSlots>
-  = BlogPostSlots[K] extends (props: infer P) => VNode[]
+  = Required<BlogPostSlots>[K] extends (props: infer P) => VNode[]
     ? (props: P & { post: T }) => VNode[]
-    : BlogPostSlots[K]
+    : Required<BlogPostSlots>[K]
 
 export type BlogPostsSlots<T extends BlogPostProps = BlogPostProps> = {
   [K in keyof BlogPostSlots]?: ExtendSlotWithPost<T, K>
