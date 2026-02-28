@@ -1,5 +1,26 @@
 import { Octokit } from '@octokit/rest'
 
+const MAX_RETRIES = 3
+const REQUEST_TIMEOUT = 10_000
+
+async function fetchCommitsForPath(octokit: Octokit, path: string, retries = MAX_RETRIES): Promise<any[]> {
+  try {
+    return await octokit.paginate(octokit.rest.repos.listCommits, {
+      owner: 'nuxt',
+      repo: 'ui',
+      path,
+      since: '2025-03-12T14:33:00Z',
+      request: { timeout: REQUEST_TIMEOUT }
+    })
+  } catch (error: any) {
+    if (retries > 0 && (error.status === 500 || error.status >= 502 || error.message?.includes('socket') || error.message?.includes('ECONNRESET') || error.message?.includes('TLS'))) {
+      await new Promise(resolve => setTimeout(resolve, 1000 * (MAX_RETRIES - retries + 1)))
+      return fetchCommitsForPath(octokit, path, retries - 1)
+    }
+    throw error
+  }
+}
+
 export default defineCachedEventHandler(async (event) => {
   if (!process.env.NUXT_GITHUB_TOKEN) {
     return []
@@ -18,14 +39,7 @@ export default defineCachedEventHandler(async (event) => {
   const octokit = new Octokit({ auth: process.env.NUXT_GITHUB_TOKEN })
 
   const allCommits = await Promise.all(
-    paths.map(path =>
-      octokit.paginate(octokit.rest.repos.listCommits, {
-        owner: 'nuxt',
-        repo: 'ui',
-        path,
-        since: '2025-03-12T14:33:00Z'
-      })
-    )
+    paths.map(path => fetchCommitsForPath(octokit, path))
   )
 
   const uniqueCommits = new Map<string, { sha: string, date: string, message: string }>()
