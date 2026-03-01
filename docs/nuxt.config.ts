@@ -160,6 +160,7 @@ export default defineNuxtConfig({
 
   experimental: {
     asyncContext: true,
+    emitRouteChunkError: 'automatic',
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'
