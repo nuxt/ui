@@ -663,6 +663,10 @@ props:
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
+::note
+The loading icon is rendered within the `leading` slot. Keep that in mind when using a custom leading slot.
+::
+
 ::component-code
 ---
 prettier: true
