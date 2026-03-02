@@ -9,7 +9,6 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/image',
     '@nuxt/a11y',
-    '@nuxtjs/plausible',
     '@nuxtjs/mcp-toolkit',
     '@vueuse/nuxt',
     'nuxt-component-meta',
@@ -175,6 +174,7 @@ export default defineNuxtConfig({
       routes: [
         '/docs/getting-started',
         '/api/countries.json',
+        '/api/phone-codes.json',
         '/api/locales.json',
         '/api/module.json'
         // '/api/github/pulls.json',
@@ -244,7 +244,6 @@ export default defineNuxtConfig({
       '@nuxt/image',
       '@nuxtjs/color-mode',
       '@nuxtjs/mdc',
-      '@nuxtjs/plausible',
       'nuxt/dist',
       'nuxt-og-image',
       resolve('./app/components')

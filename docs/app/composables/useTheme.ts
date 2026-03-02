@@ -7,7 +7,7 @@ export function useTheme() {
   const colorMode = useColorMode()
   const { track } = useAnalytics()
 
-  const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone']
+  const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
   const neutral = computed({
     get() {
       return appConfig.ui.colors.neutral

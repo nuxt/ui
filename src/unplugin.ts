@@ -24,7 +24,7 @@ import AutoImportPlugin from './plugins/auto-import'
 
 import type { TVConfig } from './runtime/types/tv'
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {

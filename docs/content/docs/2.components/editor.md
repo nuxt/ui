@@ -9,7 +9,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Editor.vue
-navigation.badge: New
 ---
 
 ## Usage

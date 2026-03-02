@@ -7,16 +7,16 @@ hero:
 items:
   - name: CodeSnap
     url: https://codesnap.dev/
+  - name: DefenceMore
+    url: https://defencemore.com/
   - name: Details
     url: https://details.team/
   - name: Directus Docs
     url: https://docs.directus.io/
-  - name: DefenceMore
-    url: https://defencemore.com/
-  - name: Espace Asso by Benevolt
-    url: https://asso.benevolt.fr/
   - name: Eleven Spectacles
     url: https://elevenspectacles.com/
+  - name: Espace Asso by Benevolt
+    url: https://asso.benevolt.fr/
   - name: JSON DeepL
     url: https://jsondeepl.com/
   - name: Juno.one
@@ -31,6 +31,8 @@ items:
     url: https://mawrble.com/
   - name: Meet Sponsors
     url: https://meetsponsors.com/
+  - name: NuxtStart
+    url: https://www.nuxtstart.com/
   - name: Ovatu
     url: https://ovatu.com/
   - name: Pallyy
@@ -53,10 +55,10 @@ items:
     url: https://supersaas.dev/
   - name: The Companies API
     url: https://www.thecompaniesapi.com/
-  - name: TresJS
-    url: https://tresjs.org/
   - name: Thuprai
     url: https://thuprai.com/
+  - name: TresJS
+    url: https://tresjs.org/
   - name: Uneed
     url: https://uneed.best/
   - name: Wiredash

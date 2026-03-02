@@ -1,10 +1,9 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { flushPromises, mount } from '@vue/test-utils'
 import Select from '../../src/runtime/components/Select.vue'
-import type { SelectProps, SelectSlots } from '../../src/runtime/components/Select.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '../../src/module'
@@ -40,7 +39,7 @@ describe('Select', () => {
 
   const props = { open: true, portal: false, items }
 
-  it.each([
+  renderEach(Select, [
     // Props
     ['with items', { props }],
     ['with items with description', { props: { ...props, items: itemsWithDescription } }],
@@ -86,26 +85,28 @@ describe('Select', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps, slots?: Partial<SelectSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Select)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
-  it.each([
-    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
-    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
-    ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
-    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
-  ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
-    const wrapper = mount(Select, {
-      ...options
-    })
+  renderEach(
+    Select,
+    [
+      ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+      ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+      ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
+      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
+    ],
+    '%s works',
+    async (_, options, spec) => {
+      const wrapper = mount(Select, {
+        ...options
+      })
 
-    const select = wrapper.findComponent({ name: 'SelectRoot' })
-    await select.setValue(spec.input)
+      const select = wrapper.findComponent({ name: 'SelectRoot' })
+      await select.setValue(spec.input)
 
-    expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
-  })
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+    }
+  )
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Select, {

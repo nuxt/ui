@@ -1,9 +1,8 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Switch from '../../src/runtime/components/Switch.vue'
-import type { SwitchProps, SwitchSlots } from '../../src/runtime/components/Switch.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/switch'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
@@ -12,7 +11,7 @@ import type { FormInputEvents } from '../../src/module'
 describe('Switch', () => {
   const sizes = Object.keys(theme.variants.size) as any
 
-  it.each([
+  renderEach(Switch, [
     // Props
     ['with modelValue', { props: { modelValue: true } }],
     ['with defaultValue', { props: { defaultValue: true } }],
@@ -36,10 +35,7 @@ describe('Switch', () => {
     // Slots
     ['with label slot', { slots: { label: () => 'Label slot' } }],
     ['with description slot', { slots: { label: () => 'Description slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SwitchProps, slots?: Partial<SwitchSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Switch)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Switch, {

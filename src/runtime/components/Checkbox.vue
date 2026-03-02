@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { CheckboxRootProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox'
 import type { IconProps } from '../types'
@@ -54,16 +55,17 @@ export type CheckboxEmits = {
 }
 
 export interface CheckboxSlots {
-  label(props: { label?: string }): any
-  description(props: { description?: string }): any
+  label?(props: { label: string | undefined }): VNode[]
+  description?(props: { description: string | undefined }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
-import { computed, useId } from 'vue'
+import { computed, useAttrs, useId } from 'vue'
 import { Primitive, CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -77,11 +79,19 @@ const emits = defineEmits<CheckboxEmits>()
 const modelValue = defineModel<boolean | 'indeterminate'>({ default: undefined })
 
 const appConfig = useAppConfig() as Checkbox['AppConfig']
+const uiProp = useComponentUI('checkbox', props)
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
 
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<CheckboxProps>(props)
 const id = _id.value ?? useId()
+
+const attrs = useAttrs()
+// Omit `data-state` to prevent conflicts with parent components (e.g. TooltipTrigger)
+const forwardedAttrs = computed(() => {
+  const { 'data-state': _, ...rest } = attrs
+  return rest
+})
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.checkbox || {}) })({
   size: size.value,
@@ -103,34 +113,34 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <Primitive :as="(!variant || variant === 'list') ? as : Label" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
+  <Primitive :as="(!variant || variant === 'list') ? as : Label" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
       <CheckboxRoot
         :id="id"
-        v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
+        v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
         v-model="modelValue"
         :name="name"
         :disabled="disabled"
         data-slot="base"
-        :class="ui.base({ class: props.ui?.base })"
+        :class="ui.base({ class: uiProp?.base })"
         @update:model-value="onUpdate"
       >
         <template #default="{ modelValue }">
-          <CheckboxIndicator data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
-            <UIcon v-if="modelValue === 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
-            <UIcon v-else :name="icon || appConfig.ui.icons.check" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+          <CheckboxIndicator data-slot="indicator" :class="ui.indicator({ class: uiProp?.indicator })">
+            <UIcon v-if="modelValue === 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
+            <UIcon v-else :name="icon || appConfig.ui.icons.check" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
           </CheckboxIndicator>
         </template>
       </CheckboxRoot>
     </div>
 
-    <div v-if="(label || !!slots.label) || (description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <component :is="(!variant || variant === 'list') ? Label : 'p'" v-if="label || !!slots.label" :for="id" data-slot="label" :class="ui.label({ class: props.ui?.label })">
+    <div v-if="(label || !!slots.label) || (description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+      <component :is="(!variant || variant === 'list') ? Label : 'p'" v-if="label || !!slots.label" :for="id" data-slot="label" :class="ui.label({ class: uiProp?.label })">
         <slot name="label" :label="label">
           {{ label }}
         </slot>
       </component>
-      <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+      <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
         <slot name="description" :description="description">
           {{ description }}
         </slot>

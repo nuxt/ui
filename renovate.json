@@ -2,16 +2,15 @@
   "extends": [
     "github>nuxt/renovate-config-nuxt"
   ],
+  "timezone": "Europe/Paris",
+  "schedule": ["* 6-9 * * 1"],
   "lockFileMaintenance": {
     "enabled": true
   },
   "baseBranchPatterns": [
-    "v2",
-    "v3",
     "v4"
   ],
   "ignoreDeps": [
-    "typescript",
     "actions/stale"
   ],
   "packageRules": [
