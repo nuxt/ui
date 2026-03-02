@@ -25,6 +25,14 @@ describe('ScrollArea', () => {
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { viewport: 'gap-4' } } }],
+    ['with type auto', { props: { ...props, type: 'auto' } }],
+    ['with type always', { props: { ...props, type: 'always' } }],
+    ['with type scroll', { props: { ...props, type: 'scroll' } }],
+    ['with type hover', { props: { ...props, type: 'hover' } }],
+    ['with scrollHideDelay', { props: { ...props, type: 'scroll', scrollHideDelay: 1000 } }],
+    ['with ui scrollbar', { props: { ...props, ui: { scrollbar: 'w-4' } } }],
+    ['with ui thumb', { props: { ...props, ui: { thumb: 'bg-red-500' } } }],
+    ['with ui corner', { props: { ...props, ui: { corner: 'bg-gray-100' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
   ])

@@ -1,103 +1,598 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ScrollArea > renders with as correctly 1`] = `
-"<section data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col">
-    <div data-slot="item" class=""></div>
-    <div data-slot="item" class=""></div>
-    <div data-slot="item" class=""></div>
+"<section dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
   </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </section>"
 `;
 
 exports[`ScrollArea > renders with class correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="overflow-y-auto overflow-x-hidden absolute">
-  <div data-slot="viewport" class="relative flex flex-col">
-    <div data-slot="item" class=""></div>
-    <div data-slot="item" class=""></div>
-    <div data-slot="item" class=""></div>
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden absolute">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
   </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ScrollArea > renders with default slot correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col">Default slot</div>
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">Default slot</div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ScrollArea > renders with items correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col">
-    <div data-slot="item" class=""></div>
-    <div data-slot="item" class=""></div>
-    <div data-slot="item" class=""></div>
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
   </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ScrollArea > renders with orientation horizontal correctly 1`] = `
-"<div data-slot="root" data-orientation="horizontal" class="relative overflow-x-auto overflow-y-hidden">
-  <div data-slot="viewport" class="relative flex flex-row">
-    <div data-slot="item" class=""></div>
-    <div data-slot="item" class=""></div>
-    <div data-slot="item" class=""></div>
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="horizontal" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-row">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
   </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ScrollArea > renders with orientation vertical correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col">
-    <div data-slot="item" class=""></div>
-    <div data-slot="item" class=""></div>
-    <div data-slot="item" class=""></div>
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
   </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ScrollArea > renders with scrollHideDelay correctly 1`] = `
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <div style="position: absolute; top: 0px; right: 0px; bottom: var(--reka-scroll-area-corner-height); --reka-scroll-area-thumb-height: 18px;" data-scrollbarimpl="" data-orientation="vertical" data-slot="scrollbar" class="flex touch-none select-none p-0.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:flex-col transition-opacity duration-160 ease-out data-[state=visible]:opacity-100 data-[state=hidden]:opacity-0" data-state="hidden">
+    <div data-state="visible" style="width: var(--reka-scroll-area-thumb-width); height: var(--reka-scroll-area-thumb-height);" data-slot="thumb" class="relative rounded-full bg-[var(--ui-bg-accented)]"></div>
+  </div>
+  <div style="position: absolute; bottom: 0px; left: 0px; right: var(--reka-scroll-area-corner-width); --reka-scroll-area-thumb-width: 18px;" data-scrollbarimpl="" data-orientation="horizontal" data-slot="scrollbar" class="flex touch-none select-none p-0.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:flex-col transition-opacity duration-160 ease-out data-[state=visible]:opacity-100 data-[state=hidden]:opacity-0" data-state="hidden">
+    <div data-state="visible" style="width: var(--reka-scroll-area-thumb-width); height: var(--reka-scroll-area-thumb-height);" data-slot="thumb" class="relative rounded-full bg-[var(--ui-bg-accented)]"></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ScrollArea > renders with type always correctly 1`] = `
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <div style="position: absolute; top: 0px; right: 0px; bottom: var(--reka-scroll-area-corner-height); --reka-scroll-area-thumb-height: 18px;" data-scrollbarimpl="" data-orientation="vertical" data-slot="scrollbar" class="flex touch-none select-none p-0.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:flex-col transition-opacity duration-160 ease-out data-[state=visible]:opacity-100 data-[state=hidden]:opacity-0" data-state="visible">
+    <div data-state="visible" style="width: var(--reka-scroll-area-thumb-width); height: var(--reka-scroll-area-thumb-height);" data-slot="thumb" class="relative rounded-full bg-[var(--ui-bg-accented)]"></div>
+  </div>
+  <div style="position: absolute; bottom: 0px; left: 0px; right: var(--reka-scroll-area-corner-width); --reka-scroll-area-thumb-width: 18px;" data-scrollbarimpl="" data-orientation="horizontal" data-slot="scrollbar" class="flex touch-none select-none p-0.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:flex-col transition-opacity duration-160 ease-out data-[state=visible]:opacity-100 data-[state=hidden]:opacity-0" data-state="visible">
+    <div data-state="visible" style="width: var(--reka-scroll-area-thumb-width); height: var(--reka-scroll-area-thumb-height);" data-slot="thumb" class="relative rounded-full bg-[var(--ui-bg-accented)]"></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ScrollArea > renders with type auto correctly 1`] = `
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <div style="position: absolute; top: 0px; right: 0px; bottom: var(--reka-scroll-area-corner-height); --reka-scroll-area-thumb-height: 18px;" data-scrollbarimpl="" data-orientation="vertical" data-slot="scrollbar" class="flex touch-none select-none p-0.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:flex-col transition-opacity duration-160 ease-out data-[state=visible]:opacity-100 data-[state=hidden]:opacity-0" data-state="hidden">
+    <div data-state="visible" style="width: var(--reka-scroll-area-thumb-width); height: var(--reka-scroll-area-thumb-height);" data-slot="thumb" class="relative rounded-full bg-[var(--ui-bg-accented)]"></div>
+  </div>
+  <div style="position: absolute; bottom: 0px; left: 0px; right: var(--reka-scroll-area-corner-width); --reka-scroll-area-thumb-width: 18px;" data-scrollbarimpl="" data-orientation="horizontal" data-slot="scrollbar" class="flex touch-none select-none p-0.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:flex-col transition-opacity duration-160 ease-out data-[state=visible]:opacity-100 data-[state=hidden]:opacity-0" data-state="hidden">
+    <div data-state="visible" style="width: var(--reka-scroll-area-thumb-width); height: var(--reka-scroll-area-thumb-height);" data-slot="thumb" class="relative rounded-full bg-[var(--ui-bg-accented)]"></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ScrollArea > renders with type hover correctly 1`] = `
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ScrollArea > renders with type scroll correctly 1`] = `
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <div style="position: absolute; top: 0px; right: 0px; bottom: var(--reka-scroll-area-corner-height); --reka-scroll-area-thumb-height: 18px;" data-scrollbarimpl="" data-orientation="vertical" data-slot="scrollbar" class="flex touch-none select-none p-0.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:flex-col transition-opacity duration-160 ease-out data-[state=visible]:opacity-100 data-[state=hidden]:opacity-0" data-state="hidden">
+    <div data-state="visible" style="width: var(--reka-scroll-area-thumb-width); height: var(--reka-scroll-area-thumb-height);" data-slot="thumb" class="relative rounded-full bg-[var(--ui-bg-accented)]"></div>
+  </div>
+  <div style="position: absolute; bottom: 0px; left: 0px; right: var(--reka-scroll-area-corner-width); --reka-scroll-area-thumb-width: 18px;" data-scrollbarimpl="" data-orientation="horizontal" data-slot="scrollbar" class="flex touch-none select-none p-0.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:flex-col transition-opacity duration-160 ease-out data-[state=visible]:opacity-100 data-[state=hidden]:opacity-0" data-state="hidden">
+    <div data-state="visible" style="width: var(--reka-scroll-area-thumb-width); height: var(--reka-scroll-area-thumb-height);" data-slot="thumb" class="relative rounded-full bg-[var(--ui-bg-accented)]"></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ScrollArea > renders with ui corner correctly 1`] = `
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ScrollArea > renders with ui correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col gap-4">
-    <div data-slot="item" class=""></div>
-    <div data-slot="item" class=""></div>
-    <div data-slot="item" class=""></div>
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col gap-4">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
   </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ScrollArea > renders with ui scrollbar correctly 1`] = `
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ScrollArea > renders with ui thumb correctly 1`] = `
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ScrollArea > renders with virtualize boolean correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 300px;"></div>
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 300px;"></div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ScrollArea > renders with virtualize gap correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 320px;"></div>
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 320px;"></div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ScrollArea > renders with virtualize lanes correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 100px;"></div>
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 100px;"></div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ScrollArea > renders with virtualize object correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 150px;"></div>
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 150px;"></div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ScrollArea > renders with virtualize padding correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 340px;"></div>
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 340px;"></div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ScrollArea > renders with virtualize scrollMargin correctly 1`] = `
-"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
-  <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 300px;"></div>
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col" style="position: relative; inline-size: 100%; block-size: 300px;"></div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
 </div>"
 `;

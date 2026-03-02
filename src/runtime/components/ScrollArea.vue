@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { ComponentPublicInstance, CSSProperties, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
+import type { ScrollAreaRootProps } from 'reka-ui'
 import type { VirtualItem, VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '#build/ui/scroll-area'
 import type { ComponentConfig } from '../types/tv'
@@ -38,7 +39,8 @@ export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
 
 export type ScrollAreaItem = any
 
-export interface ScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
+export interface ScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem>
+  extends Pick<ScrollAreaRootProps, 'type' | 'scrollHideDelay'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -82,7 +84,12 @@ export interface ScrollAreaEmits {
 
 <script setup lang="ts" generic="T extends ScrollAreaItem">
 import { computed, onMounted, onUnmounted, toRef, useTemplateRef, watch } from 'vue'
-import { Primitive } from 'reka-ui'
+import {
+  ScrollAreaRoot, ScrollAreaViewport,
+  ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaCorner,
+  useForwardProps
+} from 'reka-ui'
+import { reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
 import { useVirtualizer } from '@tanstack/vue-virtual'
 import { useAppConfig } from '#imports'
@@ -105,7 +112,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.scrollArea |
   orientation: props.orientation
 }))
 
-const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
+const rootProps = useForwardProps(reactivePick(props, 'as', 'type', 'scrollHideDelay'))
+const rootRef = useTemplateRef<InstanceType<typeof ScrollAreaRoot>>('rootRef')
+const viewportRef = useTemplateRef<InstanceType<typeof ScrollAreaViewport>>('viewportRef')
 
 const isRtl = computed(() => dir.value === 'rtl')
 const isHorizontal = computed(() => props.orientation === 'horizontal')
@@ -159,7 +168,7 @@ const virtualizer = !!props.virtualize && useVirtualizer({
   get count() {
     return props.items?.length || 0
   },
-  getScrollElement: () => rootRef.value?.$el,
+  getScrollElement: () => viewportRef.value?.viewportElement as Element ?? null,
   get horizontal() {
     return isHorizontal.value
   },
@@ -173,9 +182,10 @@ const virtualItems = computed<VirtualItem[]>(() => virtualizer ? virtualizer.val
 const totalSize = computed(() => virtualizer ? virtualizer.value.getTotalSize() : 0)
 
 const virtualViewportStyle = computed<CSSProperties>(() => ({
-  position: 'relative',
+  position: isHorizontal.value ? 'absolute' : 'relative',
+  insetBlock: isHorizontal.value ? 0 : undefined,
   inlineSize: isHorizontal.value ? `${totalSize.value}px` : '100%',
-  blockSize: isVertical.value ? `${totalSize.value}px` : '100%'
+  blockSize: isVertical.value ? `${totalSize.value}px` : undefined
 }))
 
 function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
@@ -211,7 +221,7 @@ let rafId: number | null = null
 
 onMounted(() => {
   if (virtualizer) {
-    const el = rootRef.value?.$el
+    const el = viewportRef.value?.viewportElement
     if (el) {
       resizeObserver = new ResizeObserver(() => {
         if (rafId !== null) return
@@ -258,61 +268,89 @@ function getItemKey(item: T, index: number) {
 
 defineExpose({
   get $el() {
-    return rootRef.value?.$el as HTMLElement
+    return rootRef.value?.viewport as HTMLElement | undefined
   },
-  virtualizer: virtualizer || undefined
+  get viewport() {
+    return rootRef.value?.viewport as HTMLElement | undefined
+  },
+  virtualizer: virtualizer || undefined,
+  scrollTop: () => rootRef.value?.scrollTop(),
+  scrollTopLeft: () => rootRef.value?.scrollTopLeft()
 })
 </script>
 
 <template>
-  <Primitive
+  <ScrollAreaRoot
     ref="rootRef"
-    :as="as"
+    v-bind="rootProps"
+    :dir="dir"
     data-slot="root"
     :data-orientation="orientation"
     :class="ui.root({ class: [uiProp?.root, props.class] })"
   >
-    <template v-if="virtualizer">
-      <div
-        data-slot="viewport"
-        :class="ui.viewport({ class: uiProp?.viewport })"
-        :style="virtualViewportStyle"
-      >
+    <ScrollAreaViewport ref="viewportRef" class="size-full">
+      <template v-if="virtualizer">
         <div
-          v-for="virtualItem in virtualItems"
-          :key="String(virtualItem.key)"
-          :ref="measureElement"
-          :data-index="virtualItem.index"
-          data-slot="item"
-          :class="ui.item({ class: uiProp?.item })"
-          :style="getVirtualItemStyle(virtualItem)"
+          data-slot="viewport"
+          :class="ui.viewport({ class: uiProp?.viewport })"
+          :style="virtualViewportStyle"
         >
-          <slot
-            :item="(items?.[virtualItem.index] as T)"
-            :index="virtualItem.index"
-            :virtual-item="virtualItem"
-          />
-        </div>
-      </div>
-    </template>
-
-    <template v-else>
-      <div data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
-        <template v-if="items">
           <div
-            v-for="(item, index) in items"
-            :key="getItemKey(item, index)"
+            v-for="virtualItem in virtualItems"
+            :key="String(virtualItem.key)"
+            :ref="measureElement"
+            :data-index="virtualItem.index"
             data-slot="item"
             :class="ui.item({ class: uiProp?.item })"
+            :style="getVirtualItemStyle(virtualItem)"
           >
-            <slot :item="item" :index="index" />
+            <slot
+              :item="(items?.[virtualItem.index] as T)"
+              :index="virtualItem.index"
+              :virtual-item="virtualItem"
+            />
           </div>
-        </template>
+        </div>
+      </template>
 
-        <template v-else>
-          <slot :item="({} as T)" :index="0" />
-        </template>
-      </div>
-    </template>
-  </Primitive>
+      <template v-else>
+        <div data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
+          <template v-if="items">
+            <div
+              v-for="(item, index) in items"
+              :key="getItemKey(item, index)"
+              data-slot="item"
+              :class="ui.item({ class: uiProp?.item })"
+            >
+              <slot :item="item" :index="index" />
+            </div>
+          </template>
+
+          <template v-else>
+            <slot :item="({} as T)" :index="0" />
+          </template>
+        </div>
+      </template>
+    </ScrollAreaViewport>
+
+    <ScrollAreaScrollbar
+      force-mount
+      orientation="vertical"
+      data-slot="scrollbar"
+      :class="ui.scrollbar({ class: uiProp?.scrollbar })"
+    >
+      <ScrollAreaThumb data-slot="thumb" :class="ui.thumb({ class: uiProp?.thumb })" />
+    </ScrollAreaScrollbar>
+
+    <ScrollAreaScrollbar
+      force-mount
+      orientation="horizontal"
+      data-slot="scrollbar"
+      :class="ui.scrollbar({ class: uiProp?.scrollbar })"
+    >
+      <ScrollAreaThumb data-slot="thumb" :class="ui.thumb({ class: uiProp?.thumb })" />
+    </ScrollAreaScrollbar>
+
+    <ScrollAreaCorner data-slot="corner" :class="ui.corner({ class: uiProp?.corner })" />
+  </ScrollAreaRoot>
 </template>

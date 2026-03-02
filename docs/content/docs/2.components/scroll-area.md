@@ -3,6 +3,11 @@ title: ScrollArea
 description: A flexible scroll container with virtualization support.
 category: data
 links:
+  - label: Reka UI
+    avatar:
+      src: https://github.com/unovue.png
+      loading: lazy
+    to: https://reka-ui.com/docs/components/scroll-area
   - label: TanStack Virtual
     avatar:
       src: https://github.com/tanstack.png
@@ -62,6 +67,20 @@ options:
       - horizontal
 ---
 ::
+
+### Type
+
+Use the `type` prop to control the scrollbar visibility behavior. Defaults to `hover`.
+
+- `auto` - Scrollbars are visible when content overflows.
+- `always` - Scrollbars are always visible regardless of overflow.
+- `scroll` - Scrollbars are visible when the user is scrolling.
+- `hover` - Scrollbars are visible when scrolling or hovering over the scroll area.
+- `glimpse` - Briefly shows scrollbars when entering the scroll area, then hides them.
+
+### Scroll Hide Delay
+
+Use the `scroll-hide-delay` prop to control the delay (in milliseconds) before scrollbars hide after the user stops interacting. Only applies when `type` is `scroll` or `hover`. Defaults to `600`.
 
 ### Virtualize
 
@@ -217,8 +236,15 @@ This will give you access to the following:
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| `$el`{lang="ts-type"} | `HTMLElement`{lang="ts-type"} | The root element of the component. |
+| `$el`{lang="ts-type"} | `HTMLElement \| undefined`{lang="ts-type"} | The scrollable viewport element. Alias for `viewport`. |
+| `viewport`{lang="ts-type"} | `HTMLElement \| undefined`{lang="ts-type"} | The scrollable viewport element. Use this for composables like `useInfiniteScroll` or `useElementSize`. |
 | `virtualizer`{lang="ts-type"} | `Ref<Virtualizer> \| undefined`{lang="ts-type"} | The [TanStack Virtual](https://tanstack.com/virtual/latest/docs/api/virtualizer) virtualizer instance (`undefined` if virtualization is disabled). |
+| `scrollTop()`{lang="ts-type"} | `() => void`{lang="ts-type"} | Scroll the viewport to the top. |
+| `scrollTopLeft()`{lang="ts-type"} | `() => void`{lang="ts-type"} | Scroll the viewport to the top-left corner. |
+
+::note
+The scrollbar appearance can be customized via the `ui` prop using the `scrollbar` and `thumb` slots.
+::
 
 ## Theme
 
