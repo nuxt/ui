@@ -63,7 +63,7 @@ exports[`InputMenu > renders with arrow correctly 1`] = `
           </div>
         </div>
         <!--v-if-->
-      </div><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+      </div><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-bg stroke-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
     </div>
   </div>
   <!--teleport end-->
