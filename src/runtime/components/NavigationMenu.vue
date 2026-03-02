@@ -319,6 +319,19 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0, listInd
 
   return props.type === 'single' ? indexes[0] : indexes
 }
+
+function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
+  if (!item.children?.length) {
+    return
+  }
+
+  if (props.orientation === 'horizontal') {
+    e.preventDefault()
+  } else if (props.orientation === 'vertical' && !props.collapsed) {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+}
 </script>
 
 <template>
@@ -356,12 +369,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0, listInd
         :as="orientation === 'vertical' && item.children?.length && !collapsed ? 'span' : undefined"
         data-slot="linkTrailing"
         :class="ui.linkTrailing({ class: [uiProp?.linkTrailing, item.ui?.linkTrailing] })"
-        @click="(e: Event) => {
-          if (orientation === 'vertical' && item.children?.length && !collapsed) {
-            e.preventDefault()
-            e.stopPropagation()
-          }
-        }"
+        @click="(e: Event) => onLinkTrailingClick(e, item)"
       >
         <slot :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index" :ui="ui">
           <UBadge
