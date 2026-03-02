@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page'
 import type { ComponentConfig } from '../types/tv'
@@ -16,9 +17,9 @@ export interface PageProps {
 }
 
 export interface PageSlots {
-  left(props?: {}): any
-  default(props?: {}): any
-  right(props?: {}): any
+  left?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  right?(props?: {}): VNode[]
 }
 </script>
 

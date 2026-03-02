@@ -1,16 +1,15 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Chip from '../../src/runtime/components/Chip.vue'
-import type { ChipProps, ChipSlots } from '../../src/runtime/components/Chip.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/chip'
 
 describe('Chip', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const positions = Object.keys(theme.variants.position) as any
 
-  it.each([
+  renderEach(Chip, [
     // Props
     ['with text', { props: { text: 'Text' } }],
     ['with inset', { props: { inset: true } }],
@@ -24,10 +23,7 @@ describe('Chip', () => {
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChipProps, slots?: Partial<ChipSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Chip)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Chip, {

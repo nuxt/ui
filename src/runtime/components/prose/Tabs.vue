@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/tabs'
 import type { TabsProps } from '../../types'
@@ -25,7 +26,7 @@ export interface ProseTabsProps {
 }
 
 export interface ProseTabsSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 

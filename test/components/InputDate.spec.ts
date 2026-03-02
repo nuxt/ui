@@ -1,10 +1,9 @@
 import { describe, it, expect, vi, afterAll, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { CalendarDate } from '@internationalized/date'
 import InputDate from '../../src/runtime/components/InputDate.vue'
-import type { InputDateProps, InputDateSlots } from '../../src/runtime/components/InputDate.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/input-date'
 
 describe('InputDate', () => {
@@ -18,7 +17,7 @@ describe('InputDate', () => {
     vi.useRealTimers()
   })
 
-  it.each([
+  renderEach(InputDate, [
     // Props
     ['with modelValue', { props: { modelValue: new CalendarDate(2025, 1, 1) } }],
     ['with default value', { props: { defaultValue: new CalendarDate(2025, 1, 1) } }],
@@ -40,10 +39,7 @@ describe('InputDate', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
     ['with separator slot', { slots: { separator: () => '=' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputDateProps, slots?: Partial<InputDateSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, InputDate)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   describe('emits', () => {
     test('update:modelValue event single', async () => {

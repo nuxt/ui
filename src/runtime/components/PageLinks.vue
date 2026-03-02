@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-links'
 import type { IconProps, LinkProps } from '../types'
@@ -28,14 +29,14 @@ export interface PageLinksProps<T extends PageLink = PageLink> {
   ui?: PageLinks['slots']
 }
 
-type SlotProps<T> = (props: { link: T, active: boolean, ui: PageLinks['ui'] }) => any
+type SlotProps<T> = (props: { link: T, active: boolean, ui: PageLinks['ui'] }) => VNode[]
 
 export interface PageLinksSlots<T extends PageLink = PageLink> {
-  'title'(props?: {}): any
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-label'(props: { link: T, active: boolean }): any
-  'link-trailing'(props: { link: T, active: boolean }): any
+  'title'?(props?: {}): VNode[]
+  'link'?: SlotProps<T>
+  'link-leading'?: SlotProps<T>
+  'link-label'?(props: { link: T, active: boolean }): VNode[]
+  'link-trailing'?(props: { link: T, active: boolean }): VNode[]
 }
 </script>
 
