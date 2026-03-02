@@ -174,6 +174,7 @@ export default defineNuxtConfig({
       routes: [
         '/docs/getting-started',
         '/api/countries.json',
+        '/api/phone-codes.json',
         '/api/locales.json',
         '/api/module.json'
         // '/api/github/pulls.json',
