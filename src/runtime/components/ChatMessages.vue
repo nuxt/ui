@@ -64,18 +64,11 @@ type SlotBase<T extends UIMessage[]>
     ? ChatMessageSlots<M, D, U>
     : ChatMessageSlots
 
-type ExtendSlotWithVersion<K extends keyof SlotBase<T>, T extends UIMessage[] = UIMessage[]>
-  = SlotBase<T>[K] extends (props: infer P) => VNode[]
-    ? (props: P & { message: T[number] }) => VNode[]
-    : SlotBase<T>[K]
-
 export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
-  [K in keyof SlotBase<T>]?: ExtendSlotWithVersion<K, T>
-} & {
   default?(props?: {}): VNode[]
   indicator?(props: { ui: ChatMessages['ui'] }): VNode[]
   viewport?(props: { ui: ChatMessages['ui'], onClick: () => void }): VNode[]
-}
+} & SlotBase<T>
 
 </script>
 
@@ -86,7 +79,6 @@ import { defu } from 'defu'
 import { useElementBounding, useEventListener, watchThrottled } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
-import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UChatMessage from './ChatMessage.vue'
 import UButton from './Button.vue'
@@ -99,7 +91,10 @@ const props = withDefaults(defineProps<ChatMessagesProps<T>>(), {
 })
 const slots = defineSlots<ChatMessagesSlots<T>>()
 
-const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
+function getSlotsKeys() {
+  const omitKeys = ['default', 'indicator', 'viewport']
+  return Object.keys(slots).filter(key => !omitKeys.includes(key)) as (keyof SlotBase<T>)[]
+}
 
 const appConfig = useAppConfig() as ChatMessages['AppConfig']
 const uiProp = useComponentUI('chatMessages', props)
@@ -309,8 +304,8 @@ onMounted(() => {
         :ref="el => registerMessageRef(message.id, el as ComponentPublicInstance)"
         :compact="compact"
       >
-        <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
-          <slot :name="(name as keyof ChatMessagesSlots<T>)" v-bind="(slotData as any)" :message="message" />
+        <template v-for="name in getSlotsKeys()" #[name]="messageOrData">
+          <slot :name="name" v-bind="messageOrData" />
         </template>
       </UChatMessage>
     </slot>
