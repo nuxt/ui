@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import ChangelogVersions from '../../src/runtime/components/ChangelogVersions.vue'
-import type { ChangelogVersionsProps, ChangelogVersionsSlots } from '../../src/runtime/components/ChangelogVersions.vue'
-import ComponentRender from '../component-render'
 
 describe('ChangelogVersions', () => {
   const versions = [{
@@ -26,7 +25,7 @@ describe('ChangelogVersions', () => {
 
   const props = { versions }
 
-  it.each([
+  renderEach(ChangelogVersions, [
     // Props
     ['with versions', { props }],
     ['without indicator', { props: { ...props, indicator: false } }],
@@ -36,10 +35,7 @@ describe('ChangelogVersions', () => {
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with indicator slot', { props, slots: { indicator: () => 'Indicator slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChangelogVersionsProps, slots?: Partial<ChangelogVersionsSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, ChangelogVersions)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ChangelogVersions, {

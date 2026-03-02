@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverContentProps, PopoverContentEmits, PopoverArrowProps, HoverCardTriggerProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/popover'
 import type { EmitsToProps } from '../types/utils'
@@ -21,6 +22,7 @@ export interface PopoverProps<M extends PopoverMode = PopoverMode> extends Popov
   content?: Omit<PopoverContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<PopoverContentEmits>>
   /**
    * Display an arrow alongside the popover.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
   arrow?: boolean | Omit<PopoverArrowProps, 'as' | 'asChild'>
@@ -48,12 +50,12 @@ export interface PopoverEmits extends PopoverRootEmits {
   'close:prevent': []
 }
 
-type SlotProps<M extends PopoverMode = PopoverMode> = [M] extends ['hover'] ? {} : { close: () => void }
+type SlotProps<M extends PopoverMode = PopoverMode> = [M] extends ['hover'] ? { close: undefined } : { close: () => void }
 
 export interface PopoverSlots<M extends PopoverMode = PopoverMode> {
-  default(props: { open: boolean }): any
-  content(props: SlotProps<M>): any
-  anchor(props: SlotProps<M>): any
+  default?(props: { open: boolean }): VNode[]
+  content?(props: SlotProps<M>): VNode[]
+  anchor?(props: SlotProps<M>): VNode[]
 }
 </script>
 
@@ -103,7 +105,7 @@ const contentEvents = computed(() => {
     pointerDownOutside
   }
 })
-const arrowProps = toRef(() => props.arrow as PopoverArrowProps)
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as PopoverArrowProps)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.popover || {}) })({

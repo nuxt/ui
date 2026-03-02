@@ -13,8 +13,7 @@ import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ComponentName from '../../src/runtime/components/ComponentName.vue'
-import type { ComponentNameProps, ComponentNameSlots } from '../../src/runtime/components/ComponentName.vue'
-import ComponentRender from '../component-render'
+import { renderEach } from '../component-render'
 import theme from '#build/ui/component-name'
 
 describe('ComponentName', () => {
@@ -22,7 +21,7 @@ describe('ComponentName', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
 
-  it.each([
+  renderEach(ComponentName, [
     // Props
     ['with label', { props: { label: 'Label' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Label', size } }]),
@@ -36,10 +35,7 @@ describe('ComponentName', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ComponentNameProps, slots?: Partial<ComponentNameSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, ComponentName)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   // Accessibility test
   it('passes accessibility tests', async () => {
@@ -61,7 +57,7 @@ describe('ComponentName', () => {
 Test all significant prop combinations:
 
 ```ts
-it.each([
+renderEach(Button, [
   // Basic props
   ['with label', { props: { label: 'Button' } }],
 
@@ -88,10 +84,7 @@ it.each([
   // Customization
   ['with class', { props: { label: 'Button', class: 'rounded-full font-bold' } }],
   ['with ui', { props: { label: 'Button', ui: { label: 'font-bold' } } }]
-])('renders %s correctly', async (nameOrHtml, options) => {
-  const html = await ComponentRender(nameOrHtml, options, Button)
-  expect(html).toMatchSnapshot()
-})
+])
 ```
 
 ### Slots Testing

@@ -1,9 +1,8 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import RadioGroup from '../../src/runtime/components/RadioGroup.vue'
-import type { RadioGroupProps, RadioGroupSlots } from '../../src/runtime/components/RadioGroup.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/radio-group'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
@@ -22,7 +21,7 @@ describe('RadioGroup', () => {
 
   const props = { items }
 
-  it.each([
+  renderEach(RadioGroup, [
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
@@ -45,10 +44,7 @@ describe('RadioGroup', () => {
     ['with legend slot', { props, slots: { label: () => 'Legend slot' } }],
     ['with label slot', { props, slots: { label: () => 'Label slot' } }],
     ['with description slot', { props, slots: { label: () => 'Description slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: RadioGroupProps, slots?: Partial<RadioGroupSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, RadioGroup)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(RadioGroup, {

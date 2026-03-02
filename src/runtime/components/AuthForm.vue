@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
 import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps, LinkPropsKeys } from '../types'
@@ -85,19 +86,19 @@ export type AuthFormEmits<T extends object> = {
   submit: [payload: FormSubmitEvent<T>]
 }
 
-type DynamicFieldSlots<T, F, SlotProps = { field: F, state: T }> = Record<string, (props: SlotProps) => any> & Record<`${keyof T extends string ? keyof T : never}-field`, (props: SlotProps) => any>
+type DynamicFieldSlots<T, F, SlotProps = { field: F, state: T }> = Record<`${keyof T extends string ? keyof T : never}-field` | (string & {}), (props: SlotProps) => VNode[]>
 
-type DynamicFormFieldSlots<T> = Record<string, (props?: {}) => any> & Record<`${keyof T extends string ? keyof T : never}-${'label' | 'description' | 'hint' | 'help' | 'error'}`, (props?: {}) => any>
+type DynamicFormFieldSlots<T> = Record<`${keyof T extends string ? keyof T : never}-${'label' | 'description' | 'hint' | 'help' | 'error'}` | (string & {}), (props?: {}) => VNode[]>
 
 export type AuthFormSlots<T extends object = object, F extends AuthFormField = AuthFormField> = {
-  header(props?: {}): any
-  leading(props: { ui: AuthForm['ui'] }): any
-  title(props?: {}): any
-  description(props?: {}): any
-  providers(props?: {}): any
-  validation(props?: {}): any
-  submit(props: { loading: boolean }): any
-  footer(props?: {}): any
+  header?(props?: {}): VNode[]
+  leading?(props: { ui: AuthForm['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  providers?(props?: {}): VNode[]
+  validation?(props?: {}): VNode[]
+  submit?(props: { loading: boolean }): VNode[]
+  footer?(props?: {}): VNode[]
 } & DynamicFieldSlots<T, F> & DynamicFormFieldSlots<T>
 
 </script>

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UIDataTypes, UIMessage, UITools } from 'ai'
 import theme from '#build/ui/chat-message'
@@ -48,9 +49,9 @@ export interface ChatMessageProps<TMetadata = unknown, TDataParts extends UIData
 }
 
 export interface ChatMessageSlots<TMetadata = unknown, TDataParts extends UIDataTypes = UIDataTypes, TTools extends UITools = UITools> {
-  leading(props: { avatar: ChatMessageProps<TMetadata, TDataParts, TTools>['avatar'], ui: ChatMessage['ui'] }): any
-  content(props: Pick<ChatMessageProps<TMetadata, TDataParts, TTools>, 'id' | 'role' | 'parts' | 'metadata' | 'content'>): any
-  actions(props: { actions: ChatMessageProps<TMetadata, TDataParts, TTools>['actions'] }): any
+  leading?(props: { avatar: ChatMessageProps<TMetadata, TDataParts, TTools>['avatar'], ui: ChatMessage['ui'] }): VNode[]
+  content?(props: Pick<ChatMessageProps<TMetadata, TDataParts, TTools>, 'id' | 'role' | 'parts' | 'metadata' | 'content'>): VNode[]
+  actions?(props: { actions: ChatMessageProps<TMetadata, TDataParts, TTools>['actions'] }): VNode[]
 }
 </script>
 

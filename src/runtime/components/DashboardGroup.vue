@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-group'
 import type { UseResizableProps } from '../composables/useResizable'
@@ -17,7 +18,7 @@ export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' |
 }
 
 export interface DashboardGroupSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
 import type { ChipProps, IconProps } from '../types'
@@ -31,7 +32,7 @@ export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 
 }
 
 export interface AvatarSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
