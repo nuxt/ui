@@ -31,17 +31,20 @@ const name = route.path.split('/').pop() ?? ''
 const camelName = upperFirst(camelCase(name))
 const kebabName = kebabCase(name)
 
-const { data: commits } = await useLazyFetch('/api/github/commits', {
+const { data: commits } = useLazyFetch('/api/github/commits.json', {
   key: `component-changelog-${name}`,
   query: {
     path: [
       `src/runtime/components/${props.prefix ? `${props.prefix}/` : ''}${camelName}.vue`,
       `src/theme/${props.prefix ? `${props.prefix}/` : ''}${kebabName}.ts`
     ]
-  }
+  },
+  server: false
 })
 
-const { data: releases } = await useLazyFetch<Release[]>('/api/github/releases.json')
+const { data: releases } = useLazyFetch<Release[]>('/api/github/releases.json', {
+  server: false
+})
 
 const groupedByRelease = computed<ReleaseGroup[]>(() => {
   if (!commits.value?.length) return []
