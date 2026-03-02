@@ -445,6 +445,10 @@ name: 'modal-command-palette-example'
 ---
 ::
 
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the Modal opens.
+::
+
 ## API
 
 ### Props

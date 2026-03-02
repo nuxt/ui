@@ -23,7 +23,7 @@ function onSubmit() {
         <UChatMessages
           :messages="chat.messages"
           :status="chat.status"
-          :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png' } }"
+          :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const } }"
           :assistant="{ icon: 'i-lucide-bot' }"
         >
           <template #content="{ message }">

@@ -31,6 +31,7 @@ props:
     - - label: Benjamin
         avatar:
           src: 'https://github.com/benjamincanac.png'
+          loading: lazy
         type: label
     - - label: Profile
         icon: i-lucide-user
@@ -120,6 +121,7 @@ props:
     - - label: Benjamin
         avatar:
           src: 'https://github.com/benjamincanac.png'
+          loading: lazy
         type: label
     - - label: Profile
         icon: i-lucide-user

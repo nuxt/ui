@@ -1,5 +1,4 @@
 import type { H3Event } from 'h3'
-import { getRequestURL } from 'h3'
 import json5 from 'json5'
 import { camelCase, kebabCase } from 'scule'
 import { visit } from '@nuxt/content/runtime'
@@ -7,7 +6,7 @@ import { queryCollection } from '@nuxt/content/server'
 import * as theme from '../../.nuxt/ui'
 import meta from '#nuxt-component-meta'
 // @ts-expect-error - no types available
-import components from '#component-example/nitro'
+import { getComponentExample } from '#component-example/nitro'
 
 type ComponentAttributes = {
   ':prose'?: string
@@ -393,57 +392,23 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
   visitAndReplace(doc, 'component-example', (node) => {
     const camelName = camelCase(node[1]['name'])
     const name = camelName.charAt(0).toUpperCase() + camelName.slice(1)
-    const code = components[name].code
-    replaceNodeWithPre(node, 'vue', code, `${name}.vue`)
+    const component = getComponentExample(name)
+    if (component) {
+      replaceNodeWithPre(node, 'vue', component.code, `${name}.vue`)
+    }
   })
 
-  const changelogNodes: any[] = []
-  visit(doc.body, (node) => {
-    if (Array.isArray(node) && node[0] === 'component-changelog') {
-      changelogNodes.push(node)
-    }
-    return true
-  }, node => node)
-
-  for (const node of changelogNodes) {
-    const prefix = node[1]?.prefix
+  visitAndReplace(doc, 'component-changelog', (node) => {
+    const prefix = (node[1] as Record<string, string>)?.prefix
     const pascalName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
     const kebabName = kebabCase(componentName)
+    const componentPath = `src/runtime/components/${prefix ? `${prefix}/` : ''}${pascalName}.vue`
+    const themePath = `src/theme/${prefix ? `${prefix}/` : ''}${kebabName}.ts`
 
-    const paths = [
-      `src/runtime/components/${prefix ? `${prefix}/` : ''}${pascalName}.vue`,
-      `src/theme/${prefix ? `${prefix}/` : ''}${kebabName}.ts`
-    ]
-
-    try {
-      const requestUrl = getRequestURL(event)
-      const baseURL = `${requestUrl.protocol}//${requestUrl.host}`
-      const commits = await $fetch<Array<{ sha: string, message: string }>>('/api/github/commits', {
-        baseURL,
-        query: { path: paths }
-      })
-
-      if (!commits?.length) {
-        node[0] = 'p'
-        node[1] = {}
-        node[2] = 'No recent changes.'
-      } else {
-        const changelogLines = commits.map((commit) => {
-          const shortSha = commit.sha.slice(0, 5)
-          const message = commit.message.replace(/\(.*?\)/, '').replace(/#(\d+)/g, '[#$1](https://github.com/nuxt/ui/issues/$1)')
-          return `- [\`${shortSha}\`](https://github.com/nuxt/ui/commit/${commit.sha}) — ${message}`
-        }).join('\n')
-
-        node[0] = 'p'
-        node[1] = {}
-        node[2] = changelogLines
-      }
-    } catch {
-      node[0] = 'p'
-      node[1] = {}
-      node[2] = `See the [releases page](https://github.com/nuxt/ui/releases) for the latest changes.`
-    }
-  }
+    node[0] = 'p'
+    node[1] = {}
+    node[2] = `See commit history for [component](https://github.com/nuxt/ui/commits/v4/${componentPath}) and [theme](https://github.com/nuxt/ui/commits/v4/${themePath}).`
+  })
 
   // Transform callout components (tip, note, warning, caution, callout) to blockquotes
   const calloutTypes = ['tip', 'note', 'warning', 'caution', 'callout']

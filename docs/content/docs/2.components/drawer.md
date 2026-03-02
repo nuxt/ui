@@ -384,6 +384,10 @@ name: 'drawer-command-palette-example'
 ---
 ::
 
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the Drawer opens.
+::
+
 ## API
 
 ### Props
