@@ -107,7 +107,7 @@ const getCachedToolMessage = useMemoize((state: State, toolName: string, input: 
       :user="{ side: 'left', variant: 'naked', icon: 'i-lucide-user' }"
       :assistant="{ icon: 'i-lucide-bot' }"
     >
-      <template #content="{ message }">
+      <template #content="message">
         <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${part.state}` : ''}`">
           <MDCCached
             v-if="part.type === 'text' && message.role === 'assistant'"

@@ -73,7 +73,7 @@ function onSubmit() {
     <template #body>
       <UContainer>
         <UChatMessages :messages="chat.messages" :status="chat.status">
-          <template #content="{ message }">
+          <template #content="message">
             <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
               <MDC
                 v-if="part.type === 'text' && message.role === 'assistant'"

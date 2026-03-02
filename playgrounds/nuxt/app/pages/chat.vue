@@ -46,7 +46,7 @@ function onSubmit() {
       :user="{ avatar: { src: 'https://github.com/benjamincanac.png' } }"
       :spacing-offset="48"
     >
-      <template #content="{ message }">
+      <template #content="message">
         <template
           v-for="(part, index) in message.parts"
           :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${part.state}` : ''}`"

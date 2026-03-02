@@ -114,7 +114,7 @@ function onSubmit() {
     <template #body>
       <UContainer>
         <UChatMessages :messages="chat.messages" :status="chat.status">
-          <template #content="{ message }">
+          <template #content="message">
             <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
               <MDC v-if="part.type === 'text' && message.role === 'assistant'" :value="part.text" :cache-key="`${message.id}-${index}`" class="*:first:mt-0 *:last:mb-0" />
               <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">{{ part.text }}</p>

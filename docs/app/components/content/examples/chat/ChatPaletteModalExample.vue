@@ -26,7 +26,7 @@ function onSubmit() {
           :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png' } }"
           :assistant="{ icon: 'i-lucide-bot' }"
         >
-          <template #content="{ message }">
+          <template #content="message">
             <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
               <MDC
                 v-if="part.type === 'text' && message.role === 'assistant'"
