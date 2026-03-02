@@ -25,7 +25,7 @@ export interface ProseCodeGroupSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, watch, onMounted, onBeforeUpdate, shallowRef } from 'vue'
+import { computed, watch, onMounted } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent } from 'reka-ui'
 import { useState, useAppConfig } from '#imports'
 import { useComponentUI } from '../../composables/useComponentUI'
@@ -45,20 +45,15 @@ const uiProp = useComponentUI('prose.codeGroup', props)
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeGroup || {}) })())
 
-// Collect slot children in a shallowRef, seeded during setup for SSR/initial render,
-// then refreshed via onBeforeUpdate. This avoids calling slots.default?.() inside
-// computed, which would trigger:
-// "[Vue warn]: Slot "default" invoked outside of the render function"
-const slotChildren = shallowRef(slots.default?.())
+// Slot children are collected and transformed via getItems(), called from the template
+// (render function). This ensures slots.default?.() is invoked during the render phase,
+// avoiding: "[Vue warn]: Slot "default" invoked outside of the render function"
+let items: { label: string, icon: string, component: any }[] = []
 
-const items = computed<{
-  index: number
-  label: string
-  icon: string
-  component: any
-}[]>(() => {
-  return slotChildren.value?.flatMap(transformSlot).filter(Boolean) || []
-})
+function getItems() {
+  items = slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
+  return items
+}
 
 function transformSlot(slot: any, index: number) {
   if (typeof slot.type === 'symbol') {
@@ -91,10 +86,6 @@ onMounted(() => {
     })
   }
 })
-
-onBeforeUpdate(() => {
-  slotChildren.value = slots.default?.()
-})
 </script>
 
 <template>
@@ -102,7 +93,7 @@ onBeforeUpdate(() => {
     <TabsList :class="ui.list({ class: uiProp?.list })">
       <TabsIndicator :class="ui.indicator({ class: uiProp?.indicator })" />
 
-      <TabsTrigger v-for="(item, index) of items" :key="index" :value="String(index)" :class="ui.trigger({ class: uiProp?.trigger })">
+      <TabsTrigger v-for="(item, index) of getItems()" :key="index" :value="String(index)" :class="ui.trigger({ class: uiProp?.trigger })">
         <UCodeIcon :icon="item.icon" :filename="item.label" :class="ui.triggerIcon({ class: uiProp?.triggerIcon })" />
 
         <span :class="ui.triggerLabel({ class: uiProp?.triggerLabel })">{{ item.label }}</span>

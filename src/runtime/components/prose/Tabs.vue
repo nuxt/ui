@@ -30,7 +30,7 @@ export interface ProseTabsSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, watch, onMounted, onBeforeUpdate, shallowRef } from 'vue'
+import { computed, watch, onMounted } from 'vue'
 import { useState, useAppConfig } from '#imports'
 import { useComponentUI } from '../../composables/useComponentUI'
 import { transformUI } from '../../utils'
@@ -50,20 +50,12 @@ const uiProp = useComponentUI('prose.tabs', props)
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.tabs || {}) }))
 
-// Collect slot children in a shallowRef, seeded during setup for SSR/initial render,
-// then refreshed via onBeforeUpdate. This avoids calling slots.default?.() inside
-// computed, which would trigger:
-// "[Vue warn]: Slot "default" invoked outside of the render function"
-const slotChildren = shallowRef(slots.default?.())
-
-const items = computed<{
-  index: number
-  label: string
-  icon: string
-  component: any
-}[]>(() => {
-  return slotChildren.value?.flatMap(transformSlot).filter(Boolean) || []
-})
+// Slot children are collected and transformed via getItems(), called from the template
+// (render function). This ensures slots.default?.() is invoked during the render phase,
+// avoiding: "[Vue warn]: Slot "default" invoked outside of the render function"
+function getItems() {
+  return slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
+}
 
 function transformSlot(slot: any, index: number) {
   if (typeof slot.type === 'symbol') {
@@ -107,10 +99,6 @@ async function onUpdateModelValue() {
     }, 200)
   }
 }
-
-onBeforeUpdate(() => {
-  slotChildren.value = slots.default?.()
-})
 </script>
 
 <template>
@@ -118,7 +106,7 @@ onBeforeUpdate(() => {
     v-model="model"
     color="primary"
     variant="link"
-    :items="items"
+    :items="getItems()"
     :class="props.class"
     :unmount-on-hide="false"
     :ui="transformUI(ui(), uiProp)"

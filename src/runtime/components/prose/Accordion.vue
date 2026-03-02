@@ -18,7 +18,7 @@ export interface ProseAccordionSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, onBeforeUpdate, shallowRef } from 'vue'
+import { computed } from 'vue'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../../composables/useComponentUI'
 import { transformUI } from '../../utils'
@@ -36,20 +36,12 @@ const uiProp = useComponentUI('prose.accordion', props)
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.accordion || {}) }))
 
-// Collect slot children in a shallowRef, seeded during setup for SSR/initial render,
-// then refreshed via onBeforeUpdate. This avoids calling slots.default?.() inside
-// computed, which would trigger:
-// "[Vue warn]: Slot "default" invoked outside of the render function"
-const slotChildren = shallowRef(slots.default?.())
-
-const items = computed<{
-  index: number
-  label: string
-  icon: string
-  component: any
-}[]>(() => {
-  return slotChildren.value?.flatMap(transformSlot).filter(Boolean) || []
-})
+// Slot children are collected and transformed via getItems(), called from the template
+// (render function). This ensures slots.default?.() is invoked during the render phase,
+// avoiding: "[Vue warn]: Slot "default" invoked outside of the render function"
+function getItems() {
+  return slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
+}
 
 function transformSlot(slot: any, index: number) {
   if (typeof slot.type === 'symbol') {
@@ -64,14 +56,10 @@ function transformSlot(slot: any, index: number) {
     component: slot
   }
 }
-
-onBeforeUpdate(() => {
-  slotChildren.value = slots.default?.()
-})
 </script>
 
 <template>
-  <UAccordion :type="type" :items="items" :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui(), uiProp)">
+  <UAccordion :type="type" :items="getItems()" :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui(), uiProp)">
     <template #content="{ item }">
       <component :is="item.component" />
     </template>

@@ -48,7 +48,7 @@ export interface ProseCodeTreeSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, watch, onBeforeUpdate, ref, shallowRef } from 'vue'
+import { computed, watch, ref } from 'vue'
 import { TreeRoot, TreeItem } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -92,18 +92,38 @@ watch(() => props.modelValue, (value) => {
     }
   }
 })
-// Collect slot children in a shallowRef, seeded during setup for SSR/initial render,
-// then refreshed via onBeforeUpdate. This avoids calling slots.default?.() inside
-// computed, which would trigger:
+// Slot children are collected and transformed via getTreeItems(), called from the
+// template (render function). This ensures slots.default?.() is invoked during the
+// render phase, avoiding:
 // "[Vue warn]: Slot "default" invoked outside of the render function"
-const slotChildren = shallowRef(slots.default?.())
-
-const flatItems = computed<TreeItem[]>(() => {
-  return props.items || slotChildren.value?.flatMap(transformSlot).filter(Boolean) || []
-})
-
+let flatItems: TreeItem[] = []
 // eslint-disable-next-line vue/no-dupe-keys
-const items = computed(() => buildTree(flatItems.value))
+let items: TreeNode[] = []
+let prevLabels = ''
+
+function getTreeItems() {
+  const newFlatItems: TreeItem[] = props.items || slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
+  const newLabels = newFlatItems.map(i => i.label).join('\n')
+
+  if (newLabels !== prevLabels) {
+    // Re-expand all when flatItems actually change and expandAll is true
+    if (prevLabels && props.expandAll) {
+      expanded.value = getExpandedPaths(undefined, newFlatItems)
+    }
+
+    flatItems = newFlatItems
+    items = buildTree(flatItems)
+    prevLabels = newLabels
+
+    // Update lastSelectedItem when items change
+    const selectedItem = flatItems.find(item => model.value?.path === item.label)
+    if (selectedItem?.component) {
+      lastSelectedItem.value = selectedItem
+    }
+  }
+
+  return items
+}
 
 function buildTree(items: { label: string }[]): TreeNode[] {
   const map = new Map<string, TreeNode>()
@@ -149,10 +169,10 @@ function transformSlot(slot: any, index: number): TreeItem {
   }
 }
 
-function getExpandedPaths(path?: string) {
+function getExpandedPaths(path?: string, items?: TreeItem[]) {
   if (props.expandAll) {
     const allPaths = new Set<string>()
-    flatItems.value.forEach((item) => {
+    ;(items || flatItems).forEach((item) => {
       const parts = item.label.split('/')
       for (let i = 1; i < parts.length; i++) {
         allPaths.add(parts.slice(0, i).join('/'))
@@ -171,28 +191,11 @@ function getExpandedPaths(path?: string) {
 
 const expanded = ref(getExpandedPaths(model.value?.path))
 
-// Re-expand all when flatItems actually change and expandAll is true
-watch(flatItems, (newItems, oldItems) => {
-  if (!props.expandAll) return
-
-  // Compare labels to detect actual changes (not just re-renders from slot re-evaluation)
-  const newLabels = newItems.map(i => i.label).join('\n')
-  const oldLabels = oldItems?.map(i => i.label).join('\n') ?? ''
-
-  if (newLabels !== oldLabels) {
-    expanded.value = getExpandedPaths()
-  }
-})
-
 watch(model, (value) => {
-  const item = flatItems.value.find(item => value?.path === item.label)
+  const item = flatItems.find(item => value?.path === item.label)
   if (item?.component) {
     lastSelectedItem.value = item
   }
-}, { immediate: true })
-
-onBeforeUpdate(() => {
-  slotChildren.value = slots.default?.()
 })
 </script>
 
@@ -254,7 +257,7 @@ onBeforeUpdate(() => {
       v-model="model"
       v-model:expanded="expanded"
       :class="ui.list({ class: uiProp?.list })"
-      :items="items"
+      :items="getTreeItems()"
       :get-key="(item) => item.path"
     >
       <ReuseTreeTemplate :items="items" :level="1" />
