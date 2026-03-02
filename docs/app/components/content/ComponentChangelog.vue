@@ -31,6 +31,10 @@ const name = route.path.split('/').pop() ?? ''
 const camelName = upperFirst(camelCase(name))
 const kebabName = kebabCase(name)
 
+const { data: releases } = useLazyFetch<Release[]>('/api/github/releases.json', {
+  server: false
+})
+
 const { data: commits } = useLazyFetch('/api/github/commits.json', {
   key: `component-changelog-${name}`,
   query: {
@@ -39,10 +43,6 @@ const { data: commits } = useLazyFetch('/api/github/commits.json', {
       `src/theme/${props.prefix ? `${props.prefix}/` : ''}${kebabName}.ts`
     ]
   },
-  server: false
-})
-
-const { data: releases } = useLazyFetch<Release[]>('/api/github/releases.json', {
   server: false
 })
 

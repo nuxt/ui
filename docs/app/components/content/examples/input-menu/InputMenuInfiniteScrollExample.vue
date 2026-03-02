@@ -14,7 +14,7 @@ type UserResponse = {
 
 const skip = ref(0)
 
-const { data, status, execute } = useLazyFetch('https://dummyjson.com/users?limit=10&select=firstName', {
+const { data, status, execute } = await useLazyFetch('https://dummyjson.com/users?limit=10&select=firstName', {
   key: 'input-menu-users-infinite-scroll',
   params: { skip },
   transform: (data?: UserResponse) => {

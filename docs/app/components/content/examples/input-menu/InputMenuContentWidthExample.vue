@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: users, execute } = useLazyFetch('https://jsonplaceholder.typicode.com/users', {
+const { data: users, execute } = await useLazyFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'typicode-users-email',
   transform: (data: { id: number, name: string, email: string }[]) => {
     return data?.map(user => ({

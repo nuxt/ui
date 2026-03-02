@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { AvatarProps } from '@nuxt/ui'
 
-const { data: users, status, execute } = useLazyFetch('https://jsonplaceholder.typicode.com/users', {
+const { data: users, status, execute } = await useLazyFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'typicode-users-email',
   transform: (data: { id: number, name: string, email: string }[]) => {
     return data?.map(user => ({

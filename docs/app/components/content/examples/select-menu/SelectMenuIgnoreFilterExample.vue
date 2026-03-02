@@ -5,7 +5,7 @@ import type { AvatarProps } from '@nuxt/ui'
 const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
 
-const { data: users, status, execute } = useLazyFetch('https://jsonplaceholder.typicode.com/users', {
+const { data: users, status, execute } = await useLazyFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'select-menu-users-search',
   params: { q: searchTermDebounced },
   transform: (data: { id: number, name: string }[]) => {

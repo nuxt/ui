@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const searchTerm = ref('')
 
-const { data: users, status, execute } = useLazyFetch('https://jsonplaceholder.typicode.com/users', {
+const { data: users, status, execute } = await useLazyFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'modal-command-palette-users',
   params: { q: searchTerm },
   transform: (data: { id: number, name: string, email: string }[]) => {
