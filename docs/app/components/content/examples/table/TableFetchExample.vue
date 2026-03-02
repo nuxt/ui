@@ -12,15 +12,14 @@ type User = {
   company: { name: string }
 }
 
-const { data, status } = useFetch<User[]>('https://jsonplaceholder.typicode.com/users', {
+const { data, status } = useLazyFetch<User[]>('https://jsonplaceholder.typicode.com/users', {
   key: 'table-users',
   transform: (data) => {
     return data?.map(user => ({
       ...user,
-      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, alt: `${user.name} avatar`, loading: 'lazy' as const }
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, alt: `${user.name} avatar` }
     })) || []
   },
-  lazy: true,
   server: false
 })
 
@@ -34,6 +33,7 @@ const columns: TableColumn<User>[] = [{
     return h('div', { class: 'flex items-center gap-3' }, [
       h(UAvatar, {
         ...row.original.avatar,
+        loading: 'lazy',
         size: 'lg'
       }),
       h('div', undefined, [
@@ -53,5 +53,10 @@ const columns: TableColumn<User>[] = [{
 </script>
 
 <template>
-  <UTable :data="data" :columns="columns" :loading="status !== 'success'" class="flex-1 h-80" />
+  <UTable
+    :data="data"
+    :columns="columns"
+    :loading="status === 'pending' || status === 'idle'"
+    class="flex-1 h-80"
+  />
 </template>

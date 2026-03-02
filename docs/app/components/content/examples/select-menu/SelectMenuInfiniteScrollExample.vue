@@ -14,15 +14,13 @@ type UserResponse = {
 
 const skip = ref(0)
 
-const { data, status, execute } = useFetch('https://dummyjson.com/users?limit=10&select=firstName', {
+const { data, status, execute } = useLazyFetch('https://dummyjson.com/users?limit=10&select=firstName', {
   key: 'select-menu-users-infinite-scroll',
   params: { skip },
   transform: (data?: UserResponse) => {
     return data?.users.map(user => user.firstName)
   },
-  lazy: true,
-  immediate: false,
-  server: false
+  immediate: false
 })
 
 const users = ref<string[]>([])
@@ -34,7 +32,11 @@ watch(data, () => {
   ]
 })
 
-execute()
+function onOpen() {
+  if (!users.value?.length) {
+    execute()
+  }
+}
 
 const selectMenu = useTemplateRef('selectMenu')
 
@@ -54,5 +56,6 @@ onMounted(() => {
     ref="selectMenu"
     placeholder="Select user"
     :items="users"
+    @update:open="onOpen"
   />
 </template>

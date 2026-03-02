@@ -3,6 +3,8 @@ import { joinURL } from 'ufo'
 import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
 
+const isDev = import.meta.dev
+
 const route = useRoute()
 const { framework } = useFrameworks()
 
@@ -154,9 +156,11 @@ const communityLinks = computed(() => [{
 
           <UPageLinks title="Community" :links="communityLinks" />
 
-          <USeparator type="dashed" />
+          <template v-if="!isDev">
+            <USeparator type="dashed" />
 
-          <AdsCarbon />
+            <AdsCarbon />
+          </template>
         </template>
       </UContentToc>
     </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { AvatarProps } from '@nuxt/ui'
 
-const { data: users, status } = useFetch('https://jsonplaceholder.typicode.com/users', {
+const { data: users, status, execute } = useLazyFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'typicode-users',
   transform: (data: { id: number, name: string }[]) => {
     return data?.map(user => ({
@@ -10,18 +10,24 @@ const { data: users, status } = useFetch('https://jsonplaceholder.typicode.com/u
       avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const }
     }))
   },
-  lazy: true,
-  server: false
+  immediate: false
 })
+
+function onOpen() {
+  if (!users.value?.length) {
+    execute()
+  }
+}
 </script>
 
 <template>
   <USelectMenu
     :items="users"
-    :loading="status !== 'success'"
+    :loading="status === 'pending'"
     icon="i-lucide-user"
     placeholder="Select user"
     class="w-48"
+    @update:open="onOpen"
   >
     <template #leading="{ modelValue, ui }">
       <UAvatar
