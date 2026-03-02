@@ -45,10 +45,11 @@ const uiProp = useComponentUI('prose.codeGroup', props)
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeGroup || {}) })())
 
-// Collect slot children in a shallowRef so they are resolved during render lifecycle
-// hooks (onMounted/onBeforeUpdate) rather than inside computed, which would trigger:
+// Collect slot children in a shallowRef, seeded during setup for SSR/initial render,
+// then refreshed via onBeforeUpdate. This avoids calling slots.default?.() inside
+// computed, which would trigger:
 // "[Vue warn]: Slot "default" invoked outside of the render function"
-const slotChildren = shallowRef<ReturnType<typeof slots.default>>()
+const slotChildren = shallowRef(slots.default?.())
 
 const items = computed<{
   index: number
@@ -91,9 +92,6 @@ onMounted(() => {
   }
 })
 
-onMounted(() => {
-  slotChildren.value = slots.default?.()
-})
 onBeforeUpdate(() => {
   slotChildren.value = slots.default?.()
 })

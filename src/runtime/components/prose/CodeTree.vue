@@ -48,7 +48,7 @@ export interface ProseCodeTreeSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, watch, onBeforeUpdate, onMounted, ref, shallowRef } from 'vue'
+import { computed, watch, onBeforeUpdate, ref, shallowRef } from 'vue'
 import { TreeRoot, TreeItem } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -92,10 +92,11 @@ watch(() => props.modelValue, (value) => {
     }
   }
 })
-// Collect slot children in a shallowRef so they are resolved during render lifecycle
-// hooks (onBeforeUpdate) rather than inside computed, which would trigger:
+// Collect slot children in a shallowRef, seeded during setup for SSR/initial render,
+// then refreshed via onBeforeUpdate. This avoids calling slots.default?.() inside
+// computed, which would trigger:
 // "[Vue warn]: Slot "default" invoked outside of the render function"
-const slotChildren = shallowRef<ReturnType<typeof slots.default>>()
+const slotChildren = shallowRef(slots.default?.())
 
 const flatItems = computed<TreeItem[]>(() => {
   return props.items || slotChildren.value?.flatMap(transformSlot).filter(Boolean) || []
@@ -190,9 +191,6 @@ watch(model, (value) => {
   }
 }, { immediate: true })
 
-onMounted(() => {
-  slotChildren.value = slots.default?.()
-})
 onBeforeUpdate(() => {
   slotChildren.value = slots.default?.()
 })
