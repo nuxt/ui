@@ -48,7 +48,7 @@ export interface ProseCodeTreeSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, watch, onBeforeUpdate, ref } from 'vue'
+import { computed, watch, onBeforeUpdate, onMounted, ref, shallowRef } from 'vue'
 import { TreeRoot, TreeItem } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -92,12 +92,13 @@ watch(() => props.modelValue, (value) => {
     }
   }
 })
-const rerenderCount = ref(1)
+// Collect slot children in a shallowRef so they are resolved during render lifecycle
+// hooks (onBeforeUpdate) rather than inside computed, which would trigger:
+// "[Vue warn]: Slot "default" invoked outside of the render function"
+const slotChildren = shallowRef<ReturnType<typeof slots.default>>()
 
 const flatItems = computed<TreeItem[]>(() => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  rerenderCount.value
-  return props.items || slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
+  return props.items || slotChildren.value?.flatMap(transformSlot).filter(Boolean) || []
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -173,7 +174,7 @@ const expanded = ref(getExpandedPaths(model.value?.path))
 watch(flatItems, (newItems, oldItems) => {
   if (!props.expandAll) return
 
-  // Compare labels to detect actual changes (not just re-renders from rerenderCount)
+  // Compare labels to detect actual changes (not just re-renders from slot re-evaluation)
   const newLabels = newItems.map(i => i.label).join('\n')
   const oldLabels = oldItems?.map(i => i.label).join('\n') ?? ''
 
@@ -189,7 +190,12 @@ watch(model, (value) => {
   }
 }, { immediate: true })
 
-onBeforeUpdate(() => rerenderCount.value++)
+onMounted(() => {
+  slotChildren.value = slots.default?.()
+})
+onBeforeUpdate(() => {
+  slotChildren.value = slots.default?.()
+})
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->

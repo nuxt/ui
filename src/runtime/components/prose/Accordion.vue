@@ -18,7 +18,7 @@ export interface ProseAccordionSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, onBeforeUpdate } from 'vue'
+import { computed, onMounted, onBeforeUpdate, shallowRef } from 'vue'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../../composables/useComponentUI'
 import { transformUI } from '../../utils'
@@ -36,7 +36,10 @@ const uiProp = useComponentUI('prose.accordion', props)
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.accordion || {}) }))
 
-const rerenderCount = ref(1)
+// Collect slot children in a shallowRef so they are resolved during render lifecycle
+// hooks (onMounted/onBeforeUpdate) rather than inside computed, which would trigger:
+// "[Vue warn]: Slot "default" invoked outside of the render function"
+const slotChildren = shallowRef<ReturnType<typeof slots.default>>()
 
 const items = computed<{
   index: number
@@ -44,9 +47,7 @@ const items = computed<{
   icon: string
   component: any
 }[]>(() => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  rerenderCount.value
-  return slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
+  return slotChildren.value?.flatMap(transformSlot).filter(Boolean) || []
 })
 
 function transformSlot(slot: any, index: number) {
@@ -63,7 +64,12 @@ function transformSlot(slot: any, index: number) {
   }
 }
 
-onBeforeUpdate(() => rerenderCount.value++)
+onMounted(() => {
+  slotChildren.value = slots.default?.()
+})
+onBeforeUpdate(() => {
+  slotChildren.value = slots.default?.()
+})
 </script>
 
 <template>

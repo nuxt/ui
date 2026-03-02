@@ -25,7 +25,7 @@ export interface ProseCodeGroupSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, watch, onMounted, ref, onBeforeUpdate } from 'vue'
+import { computed, watch, onMounted, onBeforeUpdate, shallowRef } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent } from 'reka-ui'
 import { useState, useAppConfig } from '#imports'
 import { useComponentUI } from '../../composables/useComponentUI'
@@ -45,7 +45,10 @@ const uiProp = useComponentUI('prose.codeGroup', props)
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeGroup || {}) })())
 
-const rerenderCount = ref(1)
+// Collect slot children in a shallowRef so they are resolved during render lifecycle
+// hooks (onMounted/onBeforeUpdate) rather than inside computed, which would trigger:
+// "[Vue warn]: Slot "default" invoked outside of the render function"
+const slotChildren = shallowRef<ReturnType<typeof slots.default>>()
 
 const items = computed<{
   index: number
@@ -53,9 +56,7 @@ const items = computed<{
   icon: string
   component: any
 }[]>(() => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  rerenderCount.value
-  return slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
+  return slotChildren.value?.flatMap(transformSlot).filter(Boolean) || []
 })
 
 function transformSlot(slot: any, index: number) {
@@ -90,7 +91,12 @@ onMounted(() => {
   }
 })
 
-onBeforeUpdate(() => rerenderCount.value++)
+onMounted(() => {
+  slotChildren.value = slots.default?.()
+})
+onBeforeUpdate(() => {
+  slotChildren.value = slots.default?.()
+})
 </script>
 
 <template>
