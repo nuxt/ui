@@ -48,11 +48,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeG
 // Slot children are collected and transformed via getItems(), called from the template
 // (render function). This ensures slots.default?.() is invoked during the render phase,
 // avoiding: "[Vue warn]: Slot "default" invoked outside of the render function"
-let items: { label: string, icon: string, component: any }[] = []
-
 function getItems() {
-  items = slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
-  return items
+  return slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
 }
 
 function transformSlot(slot: any, index: number) {
@@ -100,7 +97,7 @@ onMounted(() => {
       </TabsTrigger>
     </TabsList>
 
-    <TabsContent v-for="(item, index) of items" :key="index" :value="String(index)" as-child>
+    <TabsContent v-for="(item, index) of getItems()" :key="index" :value="String(index)" as-child>
       <component :is="item.component" hide-header tabindex="-1" />
     </TabsContent>
   </TabsRoot>

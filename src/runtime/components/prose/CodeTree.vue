@@ -96,34 +96,44 @@ watch(() => props.modelValue, (value) => {
 // template (render function). This ensures slots.default?.() is invoked during the
 // render phase, avoiding:
 // "[Vue warn]: Slot "default" invoked outside of the render function"
-let flatItems: TreeItem[] = []
-// eslint-disable-next-line vue/no-dupe-keys
-let items: TreeNode[] = []
-let prevLabels = ''
+// Mutable state is wrapped inside the IIFE closure to prevent Vue from exposing it
+// to the template context, which would cause devalue serialization errors during SSR
+// (VNodes are non-POJO objects).
+const { getTreeItems, getFlatItems } = (() => {
+  let flatItems: TreeItem[] = []
+  let treeItems: TreeNode[] = []
+  let prevLabels = ''
 
-function getTreeItems() {
-  const newFlatItems: TreeItem[] = props.items || slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
-  const newLabels = newFlatItems.map(i => i.label).join('\n')
+  function getTreeItems() {
+    const newFlatItems: TreeItem[] = props.items || slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
+    const newLabels = newFlatItems.map(i => i.label).join('\n')
 
-  if (newLabels !== prevLabels) {
-    // Re-expand all when flatItems actually change and expandAll is true
-    if (prevLabels && props.expandAll) {
-      expanded.value = getExpandedPaths(undefined, newFlatItems)
+    if (newLabels !== prevLabels) {
+      // Re-expand all when flatItems actually change and expandAll is true
+      if (prevLabels && props.expandAll) {
+        expanded.value = getExpandedPaths(undefined, newFlatItems)
+      }
+
+      flatItems = newFlatItems
+      treeItems = buildTree(newFlatItems)
+      prevLabels = newLabels
+
+      // Update lastSelectedItem when items change
+      const selectedItem = newFlatItems.find(item => model.value?.path === item.label)
+      if (selectedItem?.component) {
+        lastSelectedItem.value = selectedItem
+      }
     }
 
-    flatItems = newFlatItems
-    items = buildTree(flatItems)
-    prevLabels = newLabels
-
-    // Update lastSelectedItem when items change
-    const selectedItem = flatItems.find(item => model.value?.path === item.label)
-    if (selectedItem?.component) {
-      lastSelectedItem.value = selectedItem
-    }
+    return treeItems
   }
 
-  return items
-}
+  function getFlatItems() {
+    return flatItems
+  }
+
+  return { getTreeItems, getFlatItems }
+})()
 
 function buildTree(items: { label: string }[]): TreeNode[] {
   const map = new Map<string, TreeNode>()
@@ -172,7 +182,7 @@ function transformSlot(slot: any, index: number): TreeItem {
 function getExpandedPaths(path?: string, items?: TreeItem[]) {
   if (props.expandAll) {
     const allPaths = new Set<string>()
-    ;(items || flatItems).forEach((item) => {
+    ;(items || getFlatItems()).forEach((item) => {
       const parts = item.label.split('/')
       for (let i = 1; i < parts.length; i++) {
         allPaths.add(parts.slice(0, i).join('/'))
@@ -192,7 +202,7 @@ function getExpandedPaths(path?: string, items?: TreeItem[]) {
 const expanded = ref(getExpandedPaths(model.value?.path))
 
 watch(model, (value) => {
-  const item = flatItems.find(item => value?.path === item.label)
+  const item = getFlatItems().find(item => value?.path === item.label)
   if (item?.component) {
     lastSelectedItem.value = item
   }
@@ -260,7 +270,7 @@ watch(model, (value) => {
       :items="getTreeItems()"
       :get-key="(item) => item.path"
     >
-      <ReuseTreeTemplate :items="items" :level="1" />
+      <ReuseTreeTemplate :items="getTreeItems()" :level="1" />
     </TreeRoot>
 
     <div :class="ui.content({ class: uiProp?.content })">
