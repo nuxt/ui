@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { NavigationMenuRootProps, NavigationMenuContentProps, NavigationMenuContentEmits, AccordionRootProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, ChipProps, IconProps, LinkProps, PopoverProps, TooltipProps } from '../types'
@@ -204,22 +205,22 @@ export type NavigationMenuEmits<
   'update:modelValue': [value: NavigationMenuModelValue<K, O> | undefined]
 }
 
-type SlotProps<T extends NavigationMenuItem> = (props: { item: T, index: number, active?: boolean, ui: NavigationMenu['ui'] }) => any
+type SlotProps<T extends NavigationMenuItem> = (props: { item: T, index: number, active: boolean, ui: NavigationMenu['ui'] }) => VNode[]
 
 export type NavigationMenuSlots<
   A extends ArrayOrNested<NavigationMenuItem> = ArrayOrNested<NavigationMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': (props: { item: T, index: number, active?: boolean }) => any
-  'item-trailing': SlotProps<T>
-  'item-content': SlotProps<T> & { close?: () => void }
-  'list-leading': (props?: {}) => any
-  'list-trailing': (props?: {}) => any
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: (props: { item: T, index: number, active: boolean }) => VNode[]
+  'item-trailing'?: SlotProps<T>
+  'item-content'?: (props: { item: T, index: number, active: boolean, ui: NavigationMenu['ui'], close: (() => void) | undefined }) => VNode[]
+  'list-leading'?: (props?: {}) => VNode[]
+  'list-trailing'?: (props?: {}) => VNode[]
 }
-& DynamicSlots<MergeTypes<T>, 'label', { index: number, active?: boolean, ui: NavigationMenu['ui'] }>
-& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing' | 'content', { index: number, active?: boolean, ui: NavigationMenu['ui'] }>
+& DynamicSlots<MergeTypes<T>, 'label', { index: number, active: boolean, ui: NavigationMenu['ui'] }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing' | 'content', { index: number, active: boolean, ui: NavigationMenu['ui'] }>
 
 </script>
 

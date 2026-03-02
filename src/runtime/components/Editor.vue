@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Editor as TiptapEditor, EditorOptions, Content } from '@tiptap/vue-3'
 import type { StarterKitOptions } from '@tiptap/starter-kit'
@@ -79,7 +80,7 @@ export interface EditorEmits<T extends Content = Content> {
 }
 
 export interface EditorSlots<H extends EditorCustomHandlers = EditorCustomHandlers> {
-  default(props: { editor: TiptapEditor, handlers: EditorHandlers<H> }): any
+  default?(props: { editor: TiptapEditor, handlers: EditorHandlers<H> }): VNode[]
 }
 </script>
 

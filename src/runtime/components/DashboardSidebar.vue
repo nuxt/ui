@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-sidebar'
 import type { UseResizableProps } from '../composables/useResizable'
@@ -41,12 +42,12 @@ export interface DashboardSidebarProps<T extends DashboardSidebarMode = Dashboar
 }
 
 export interface DashboardSidebarSlots {
-  'header'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
-  'default'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
-  'footer'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
-  'toggle'(props: { open: boolean, toggle: () => void, ui: DashboardSidebar['ui'] }): any
-  'content'(props: { close?: () => void }): any
-  'resize-handle'(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void, ui: DashboardSidebar['ui'] }): any
+  'header'?(props: { collapsed: boolean, collapse: (value: boolean) => void }): VNode[]
+  'default'?(props: { collapsed: boolean, collapse: (value: boolean) => void }): VNode[]
+  'footer'?(props: { collapsed: boolean, collapse: (value: boolean) => void }): VNode[]
+  'toggle'?(props: { open: boolean, toggle: () => void, ui: DashboardSidebar['ui'] }): VNode[]
+  'content'?(props: { close?: () => void }): VNode[]
+  'resize-handle'?(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void, ui: DashboardSidebar['ui'] }): VNode[]
 }
 </script>
 
@@ -212,17 +213,17 @@ function toggleOpen() {
         <div v-if="!!slots.header || mode !== 'drawer'" data-slot="header" :class="ui.header({ class: uiProp?.header, menu: true })">
           <ReuseToggleTemplate v-if="mode !== 'drawer' && toggleSide === 'left'" />
 
-          <slot name="header" />
+          <slot name="header" :collapsed="isCollapsed" :collapse="collapse" />
 
           <ReuseToggleTemplate v-if="mode !== 'drawer' && toggleSide === 'right'" />
         </div>
 
         <div data-slot="body" :class="ui.body({ class: uiProp?.body, menu: true })">
-          <slot />
+          <slot :collapsed="isCollapsed" :collapse="collapse" />
         </div>
 
         <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer, menu: true })">
-          <slot name="footer" />
+          <slot name="footer" :collapsed="isCollapsed" :collapse="collapse" />
         </div>
       </slot>
     </template>

@@ -82,7 +82,7 @@ exports[`SelectMenu > renders with arrow correctly 1`] = `
         </div>
         <!--v-if-->
       </div>
-    </div><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-default" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span>
+    </div><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="true" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-bg stroke-default" style="display: block;"><path d="M0 0L4.58579 4.58579C5.36683 5.36683 6.63316 5.36684 7.41421 4.58579L12 0"></path></svg></span>
   </div>
 </div>
 

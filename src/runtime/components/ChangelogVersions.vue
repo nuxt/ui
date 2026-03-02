@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { SpringOptions, UseScrollOptions } from 'motion-v'
 import theme from '#build/ui/changelog-versions'
@@ -34,15 +35,15 @@ export interface ChangelogVersionsProps<T extends ChangelogVersionProps = Change
 }
 
 type ExtendSlotWithVersion<T extends ChangelogVersionProps, K extends keyof ChangelogVersionSlots>
-  = ChangelogVersionSlots[K] extends (props: infer P) => any
-    ? (props: P & { version: T }) => any
-    : ChangelogVersionSlots[K]
+  = Required<ChangelogVersionSlots>[K] extends (props: infer P) => VNode[]
+    ? (props: P & { version: T }) => VNode[]
+    : Required<ChangelogVersionSlots>[K]
 
 export type ChangelogVersionsSlots<T extends ChangelogVersionProps = ChangelogVersionProps> = {
-  [K in keyof ChangelogVersionSlots]: ExtendSlotWithVersion<T, K>
+  [K in keyof ChangelogVersionSlots]?: ExtendSlotWithVersion<T, K>
 } & {
-  default(props?: {}): any
-  indicator(props?: {}): any
+  default?(props?: {}): VNode[]
+  indicator?(props?: {}): VNode[]
 }
 
 </script>

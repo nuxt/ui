@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
@@ -109,23 +110,23 @@ export interface FileUploadEmits {
 type FileUploadFiles<M> = (M extends true ? File[] : File) | null
 
 export interface FileUploadSlots<M extends boolean = false> {
-  'default'(props: {
+  'default'?(props: {
     open: UseFileDialogReturn['open']
     removeFile: (index?: number) => void
     ui: FileUpload['ui']
-  }): any
-  'leading'(props: { ui: FileUpload['ui'] }): any
-  'label'(props?: {}): any
-  'description'(props?: {}): any
-  'actions'(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): any
-  'files'(props: { files?: FileUploadFiles<M> }): any
-  'files-top'(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): any
-  'files-bottom'(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): any
-  'file'(props: { file: File, index: number }): any
-  'file-leading'(props: { file: File, index: number, ui: FileUpload['ui'] }): any
-  'file-name'(props: { file: File, index: number }): any
-  'file-size'(props: { file: File, index: number }): any
-  'file-trailing'(props: { file: File, index: number, ui: FileUpload['ui'] }): any
+  }): VNode[]
+  'leading'?(props: { ui: FileUpload['ui'] }): VNode[]
+  'label'?(props?: {}): VNode[]
+  'description'?(props?: {}): VNode[]
+  'actions'?(props: { files: FileUploadFiles<M> | undefined, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
+  'files'?(props: { files: FileUploadFiles<M> }): VNode[]
+  'files-top'?(props: { files: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
+  'files-bottom'?(props: { files: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
+  'file'?(props: { file: File, index: number }): VNode[]
+  'file-leading'?(props: { file: File, index: number, ui: FileUpload['ui'] }): VNode[]
+  'file-name'?(props: { file: File, index: number }): VNode[]
+  'file-size'?(props: { file: File, index: number }): VNode[]
+  'file-trailing'?(props: { file: File, index: number, ui: FileUpload['ui'] }): VNode[]
 }
 </script>
 
