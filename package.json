@@ -158,6 +158,7 @@
     "@vueuse/core": "^14.2.1",
     "@vueuse/integrations": "^14.2.1",
     "@vueuse/shared": "^14.2.1",
+    "better-sqlite3": "^12.6.2",
     "colortranslator": "^5.0.0",
     "consola": "^3.4.2",
     "defu": "^6.1.4",
@@ -270,5 +271,9 @@
     "tailwind",
     "framework",
     "ui-framework"
+  ],
+  "trustedDependencies": [
+    "@parcel/watcher",
+    "unrs-resolver"
   ]
 }
