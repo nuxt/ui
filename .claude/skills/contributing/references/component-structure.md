@@ -9,6 +9,7 @@ Components live in `src/runtime/components/` with PascalCase naming (e.g., `Butt
 ```vue
 <script lang="ts">
 // 1. Type imports first (always separate)
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../types/tv'
 
@@ -38,8 +39,9 @@ export interface ComponentNameProps {
 }
 
 // 5. Slots interface - always pass ui for customization
+//    Return type is VNode[], slots are optional with `?`
 export interface ComponentNameSlots {
-  default(props: { ui: ComponentName['ui'] }): any
+  default?(props: { ui: ComponentName['ui'] }): VNode[]
 }
 </script>
 
@@ -104,8 +106,8 @@ export interface ModalProps extends Pick<DialogRootProps, 'open' | 'defaultOpen'
 export interface ModalEmits extends DialogRootEmits {}
 
 export interface ModalSlots {
-  default(props?: {}): any
-  content(props: { close: () => void }): any
+  default?(props?: {}): VNode[]
+  content?(props: { close: () => void }): VNode[]
 }
 </script>
 

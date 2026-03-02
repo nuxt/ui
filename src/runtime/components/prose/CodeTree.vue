@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/code-tree'
 import type { ComponentConfig } from '../../types/tv'
@@ -43,7 +44,7 @@ export interface ProseCodeTreeEmits {
 }
 
 export interface ProseCodeTreeSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 

@@ -1,12 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Footer from '../../src/runtime/components/Footer.vue'
-import type { FooterProps, FooterSlots } from '../../src/runtime/components/Footer.vue'
-import ComponentRender from '../component-render'
 
 describe('Footer', () => {
-  it.each([
+  renderEach(Footer, [
     // Props
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'relative' } }],
@@ -17,10 +16,7 @@ describe('Footer', () => {
     ['with right slot', { slots: { right: () => 'Right slot' } }],
     ['with top slot', { slots: { top: () => 'Top slot' } }],
     ['with bottom slot', { slots: { bottom: () => 'Bottom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FooterProps, slots?: Partial<FooterSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Footer)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Footer, {

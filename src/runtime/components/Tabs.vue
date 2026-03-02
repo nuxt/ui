@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, VNode } from 'vue'
 import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tabs'
@@ -77,15 +77,15 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
 
 export interface TabsEmits extends TabsRootEmits<string | number> {}
 
-type SlotProps<T extends TabsItem> = (props: { item: T, index: number, ui: Tabs['ui'] }) => any
+type SlotProps<T extends TabsItem> = (props: { item: T, index: number, ui: Tabs['ui'] }) => VNode[]
 
 export type TabsSlots<T extends TabsItem = TabsItem> = {
-  'leading': SlotProps<T>
-  'default'(props: { item: T, index: number }): any
-  'trailing': SlotProps<T>
-  'content': SlotProps<T>
-  'list-leading'(props?: {}): any
-  'list-trailing'(props?: {}): any
+  'leading'?: SlotProps<T>
+  'default'?(props: { item: T, index: number }): VNode[]
+  'trailing'?: SlotProps<T>
+  'content'?: SlotProps<T>
+  'list-leading'?(props?: {}): VNode[]
+  'list-trailing'?(props?: {}): VNode[]
 } & DynamicSlots<T, undefined, { index: number, ui: Tabs['ui'] }>
 
 </script>

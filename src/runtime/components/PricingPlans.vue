@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plans'
 import type { PricingPlanProps, PricingPlanSlots } from '../types'
@@ -35,14 +36,14 @@ export interface PricingPlansProps {
 }
 
 type ExtendSlotWithPlan<T extends PricingPlanProps, K extends keyof PricingPlanSlots>
-  = PricingPlanSlots[K] extends (props: infer P) => any
-    ? (props: P & { plan: T }) => any
+  = PricingPlanSlots[K] extends (props: infer P) => VNode[]
+    ? (props: P & { plan: T }) => VNode[]
     : PricingPlanSlots[K]
 
 export type PricingPlansSlots<T extends PricingPlanProps = PricingPlanProps> = {
-  [K in keyof PricingPlanSlots]: ExtendSlotWithPlan<T, K>
+  [K in keyof PricingPlanSlots]?: ExtendSlotWithPlan<T, K>
 } & {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 
 </script>

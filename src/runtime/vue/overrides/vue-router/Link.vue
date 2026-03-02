@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { RouterLinkProps } from 'vue-router'
 import theme from '#build/ui/link'
@@ -56,7 +57,7 @@ export interface LinkProps extends Partial<Omit<RouterLinkProps, 'custom'>>, /**
 }
 
 export interface LinkSlots {
-  default(props: { active: boolean }): any
+  default?(props: { active: boolean }): VNode[]
 }
 </script>
 
