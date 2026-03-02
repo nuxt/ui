@@ -10,6 +10,6 @@ export function useFetchComponentExample(name: string) {
   return useAsyncData(`component-example-${name}`, () => $fetch(`/api/component-example/${name}.json`).catch(() => ({})), {
     lazy: import.meta.client,
     dedupe: 'defer',
-    getCachedData: key => useNuxtApp().payload.data[key]
+    getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key]
   })
 }

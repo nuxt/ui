@@ -12,6 +12,6 @@ export function useFetchComponentMeta(name: string) {
   return useAsyncData<{ meta: ComponentMeta }>(`component-meta-${name}`, () => $fetch(`/api/component-meta/${name}.json`).catch(() => ({}) as any), {
     lazy: import.meta.client,
     dedupe: 'defer',
-    getCachedData: key => useNuxtApp().payload.data[key]
+    getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key]
   })
 }

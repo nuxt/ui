@@ -32,7 +32,8 @@ const camelName = upperFirst(camelCase(name))
 const kebabName = kebabCase(name)
 
 const { data: releases } = useLazyFetch<Release[]>('/api/github/releases.json', {
-  server: false
+  server: false,
+  getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key]
 })
 
 const { data: commits } = useLazyFetch('/api/github/commits.json', {
@@ -43,7 +44,8 @@ const { data: commits } = useLazyFetch('/api/github/commits.json', {
       `src/theme/${props.prefix ? `${props.prefix}/` : ''}${kebabName}.ts`
     ]
   },
-  server: false
+  server: false,
+  getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key]
 })
 
 const groupedByRelease = computed<ReleaseGroup[]>(() => {
