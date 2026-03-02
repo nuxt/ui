@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import BlogPosts from '../../src/runtime/components/BlogPosts.vue'
-import type { BlogPostsProps, BlogPostsSlots } from '../../src/runtime/components/BlogPosts.vue'
-import ComponentRender from '../component-render'
 
 describe('BlogPosts', () => {
   const posts = [{
@@ -25,18 +24,15 @@ describe('BlogPosts', () => {
 
   const props = { posts }
 
-  it.each([
+  renderEach(BlogPosts, [
     // Props
     ['with posts', { props }],
-    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'gap-y-12' } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BlogPostsProps, slots?: Partial<BlogPostsSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, BlogPosts)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(BlogPosts, {

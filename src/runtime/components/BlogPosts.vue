@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-posts'
 import type { BlogPostProps, BlogPostSlots } from '../types'
@@ -24,14 +25,14 @@ export interface BlogPostsProps<T extends BlogPostProps = BlogPostProps> {
 }
 
 type ExtendSlotWithPost<T extends BlogPostProps, K extends keyof BlogPostSlots>
-  = BlogPostSlots[K] extends (props: infer P) => any
-    ? (props: P & { post: T }) => any
-    : BlogPostSlots[K]
+  = Required<BlogPostSlots>[K] extends (props: infer P) => VNode[]
+    ? (props: P & { post: T }) => VNode[]
+    : Required<BlogPostSlots>[K]
 
 export type BlogPostsSlots<T extends BlogPostProps = BlogPostProps> = {
-  [K in keyof BlogPostSlots]: ExtendSlotWithPost<T, K>
+  [K in keyof BlogPostSlots]?: ExtendSlotWithPost<T, K>
 } & {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 
 </script>

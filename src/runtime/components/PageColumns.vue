@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-columns'
 import type { ComponentConfig } from '../types/tv'
@@ -16,7 +17,7 @@ export interface PageColumnsProps {
 }
 
 export interface PageColumnsSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
