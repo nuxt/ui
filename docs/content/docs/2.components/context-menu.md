@@ -24,6 +24,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - ContextMenuItem[][]
 props:
   items:
     - - label: Appearance
@@ -95,8 +97,8 @@ Use the `items` prop as an array of objects with the following properties:
 - [`checked?: boolean`{lang="ts-type"}](#with-checkbox-items)
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `onSelect?(e: Event): void`{lang="ts-type"}
-- [`onUpdateChecked?(checked: boolean): void`{lang="ts-type"}](#with-checkbox-items)
+- `onSelect?: (e: Event) => void`{lang="ts-type"}
+- [`onUpdateChecked?: (checked: boolean) => void`{lang="ts-type"}](#with-checkbox-items)
 - `children?: ContextMenuItem[] | ContextMenuItem[][]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
@@ -218,6 +220,43 @@ slots:
 :div{class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72"}[Right click here]
 ::
 
+### Modal
+
+Use the `modal` prop to control whether the ContextMenu blocks interaction with outside content. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - ui.content
+external:
+  - items
+externalTypes:
+  - ContextMenuItem[]
+props:
+  modal: false
+  items:
+    - label: System
+      icon: i-lucide-monitor
+    - label: Light
+      icon: i-lucide-sun
+    - label: Dark
+      icon: i-lucide-moon
+  ui:
+    content: 'w-48'
+slots:
+  default: |
+
+    <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
+      Right click here
+    </div>
+---
+
+:div{class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72"}[Right click here]
+::
+
+
 ### Disabled
 
 Use the `disabled` prop to disable the ContextMenu.
@@ -304,9 +343,7 @@ You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing
 
 ### Extract shortcuts
 
-When you have some items with `kbds` property (displaying some [Kbd](/docs/components/kbd)), you can easily make them work with the [defineShortcuts](/docs/composables/define-shortcuts) composable.
-
-Inside the `defineShortcuts` composable, there is an `extractShortcuts` utility that will extract the shortcuts recursively from the items and return an object that you can pass to `defineShortcuts`. It will automatically call the `select` function of the item when the shortcut is pressed.
+Use the [extractShortcuts](/docs/composables/extract-shortcuts) utility to automatically define shortcuts from menu items with a `kbds` property. It recursively extracts shortcuts and returns an object compatible with [defineShortcuts](/docs/composables/define-shortcuts).
 
 ```vue
 <script setup lang="ts">
@@ -369,7 +406,7 @@ defineShortcuts(extractShortcuts(items))
 ```
 
 ::note
-In this example, :kbd{value="meta"} :kbd{value="S"}, :kbd{value="shift"} :kbd{value="meta"} :kbd{value="D"}, :kbd{value="option"} :kbd{value="meta"} :kbd{value="U"}, :kbd{value="option"} :kbd{value="meta"} :kbd{value="I"}, :kbd{value="option"} :kbd{value="meta"} :kbd{value="C"} and :kbd{value="option"} :kbd{value="meta"} :kbd{value="J"} would trigger the `select` function of the corresponding item.
+In this example, :kbd{value="meta"} :kbd{value="S" class="ms-px"}, :kbd{value="shift"} :kbd{value="meta" class="ms-px"} :kbd{value="D" class="ms-px"}, :kbd{value="option"} :kbd{value="meta" class="ms-px"} :kbd{value="U" class="ms-px"}, :kbd{value="option"} :kbd{value="meta" class="ms-px"} :kbd{value="I" class="ms-px"}, :kbd{value="option"} :kbd{value="meta" class="ms-px"} :kbd{value="C" class="ms-px"} and :kbd{value="option"} :kbd{value="meta" class="ms-px"} :kbd{value="J" class="ms-px"} would trigger the `select` function of the corresponding item.
 ::
 
 ## API

@@ -38,13 +38,76 @@
   }
 }
 
+@keyframes toast-slide-in-from-top {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: var(--transform);
+  }
+}
+
+@keyframes toast-slide-in-from-bottom {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: var(--transform);
+  }
+}
+
+@keyframes toast-slide-up {
+  from {
+    transform: translateX(0) translateY(var(--translate));
+  }
+
+  to {
+    transform: translateX(0) translateY(calc(var(--translate) - 100%));
+  }
+}
+
+@keyframes toast-slide-down {
+  from {
+    transform: translateX(0) translateY(var(--translate));
+  }
+
+  to {
+    transform: translateX(0) translateY(calc(var(--translate) + 100%));
+  }
+}
+
+@keyframes toast-pulse-a {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.04;
+  }
+}
+
+@keyframes toast-pulse-b {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.04;
+  }
+}
+
 @keyframes toast-collapsed-closed {
   from {
     transform: var(--transform);
   }
 
   to {
-    transform: translateY(calc((var(--before) - var(--height)) * var(--gap))) scale(var(--scale));
+    transform: translateY(calc((var(--before) - var(--height)) * var(--gap)))
+      scale(var(--scale));
   }
 }
 
@@ -54,7 +117,9 @@
   }
 
   to {
-    transform: translateY(calc((var(--offset) - var(--height)) * var(--translate-factor)));
+    transform: translateY(
+      calc((var(--offset) - var(--height)) * var(--translate-factor))
+    );
   }
 }
 
@@ -347,139 +412,128 @@
 }
 
 @keyframes carousel {
-
   0%,
   100% {
-    width: 50%
+    width: 50%;
   }
 
   0% {
-    transform: translateX(-100%)
+    transform: translateX(-100%);
   }
 
   100% {
-    transform: translateX(200%)
+    transform: translateX(200%);
   }
 }
-
 
 @keyframes carousel-rtl {
-
   0%,
   100% {
-    width: 50%
+    width: 50%;
   }
 
   0% {
-    transform: translateX(100%)
+    transform: translateX(100%);
   }
 
   100% {
-    transform: translateX(-200%)
+    transform: translateX(-200%);
   }
 }
 
-
 @keyframes carousel-vertical {
-
   0%,
   100% {
-    height: 50%
+    height: 50%;
   }
 
   0% {
-    transform: translateY(-100%)
+    transform: translateY(-100%);
   }
 
   100% {
-    transform: translateY(200%)
+    transform: translateY(200%);
   }
 }
 
 @keyframes carousel-inverse {
-
   0%,
   100% {
-    width: 50%
+    width: 50%;
   }
 
   0% {
-    transform: translateX(200%)
+    transform: translateX(200%);
   }
 
   100% {
-    transform: translateX(-100%)
+    transform: translateX(-100%);
   }
 }
 
 @keyframes carousel-inverse-rtl {
-
   0%,
   100% {
-    width: 50%
+    width: 50%;
   }
 
   0% {
-    transform: translateX(-200%)
+    transform: translateX(-200%);
   }
 
   100% {
-    transform: translateX(100%)
+    transform: translateX(100%);
   }
 }
 
 @keyframes carousel-inverse-vertical {
-
   0%,
   100% {
-    height: 50%
+    height: 50%;
   }
 
   0% {
-    transform: translateY(200%)
+    transform: translateY(200%);
   }
 
   100% {
-    transform: translateY(-100%)
+    transform: translateY(-100%);
   }
 }
 
 @keyframes swing {
-
   0%,
   100% {
-    width: 50%
+    width: 50%;
   }
 
   0%,
   100% {
-    transform: translateX(-25%)
+    transform: translateX(-25%);
   }
 
   50% {
-    transform: translateX(125%)
+    transform: translateX(125%);
   }
 }
 
 @keyframes swing-vertical {
-
   0%,
   100% {
-    height: 50%
+    height: 50%;
   }
 
   0%,
   100% {
-    transform: translateY(-25%)
+    transform: translateY(-25%);
   }
 
   50% {
-    transform: translateY(125%)
+    transform: translateY(125%);
   }
 }
 
 @keyframes elastic {
-
   /* Firefox doesn't do "margin: 0 auto", we have to play with margin-left */
   0%,
   100% {
@@ -494,7 +548,6 @@
 }
 
 @keyframes elastic-vertical {
-
   0%,
   100% {
     height: 50%;
@@ -504,5 +557,45 @@
   50% {
     height: 90%;
     margin-top: 5%;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(calc(-100% - var(--gap)), 0, 0);
+  }
+}
+
+@keyframes marquee-rtl {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(calc(100% + var(--gap)), 0, 0);
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, calc(-100% - var(--gap)), 0);
+  }
+}
+
+@keyframes marquee-vertical-rtl {
+  from {
+    transform: translate3d(0, calc(-100% - var(--gap)), 0);
+  }
+
+  to {
+    transform: translate3d(0, calc(-100% * var(--gap)), 0);
   }
 }

@@ -1,7 +1,9 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData } from '../types/form'
+import type { FormHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>
@@ -50,7 +52,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
    * If true, this form will attach to its parent Form and validate at the same time.
    * @defaultValue `false`
    */
-  nested?: N
+  nested?: N & boolean
 
   /**
    * When `true`, all form elements will be disabled on `@submit` event.
@@ -59,8 +61,9 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
    */
   loadingAuto?: boolean
   class?: any
+  ui?: { base?: any }
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>)
-}
+} & /** @vue-ignore */ Omit<FormHTMLAttributes, 'name'>
 
 export interface FormEmits<S extends FormSchema, T extends boolean = true> {
   submit: [event: FormSubmitEvent<FormData<S, T>>]
@@ -68,16 +71,17 @@ export interface FormEmits<S extends FormSchema, T extends boolean = true> {
 }
 
 export interface FormSlots {
-  default(props: { errors: FormError[], loading: boolean }): any
+  default?(props: { errors: FormError[], loading: boolean }): VNode[]
 }
 </script>
 
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true, N extends boolean = false">
-import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive } from 'vue'
+import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive, useTemplateRef } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
+import { useComponentUI } from '../composables/useComponentUI'
 import { validateSchema, getAtPath, setAtPath } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
@@ -97,22 +101,22 @@ const emits = defineEmits<FormEmits<S, T>>()
 defineSlots<FormSlots>()
 
 const appConfig = useAppConfig() as FormConfig['AppConfig']
+const uiProp = useComponentUI('form', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) }))
 
 const formId = props.id ?? useId() as string
+const formRef = useTemplateRef('formRef')
 
 const bus = useEventBus<FormEvent<I>>(`form-${formId}`)
 
-// The comparison with '' is needed because vue is not casting boolean correctly without
-// explicitly setting the prop to true (`:nested="true" works, but `nested` returns '')
-const isNested = props.nested?.toString() === '' || props.nested === true
-const parentBus = isNested && inject(
+const parentBus = props.nested === true && inject(
   formBusInjectionKey,
   undefined
 )
 
-const parentState = isNested ? inject(formStateInjectionKey, undefined) : undefined
+const parentState = props.nested === true ? inject(formStateInjectionKey, undefined) : undefined
 const state = computed(() => {
   if (parentState?.value) {
     return props.name ? getAtPath(parentState.value, props.name) : parentState.value
@@ -401,6 +405,10 @@ const api = {
   },
 
   async submit() {
+    if (formRef.value instanceof HTMLFormElement && formRef.value.reportValidity() === false) {
+      return
+    }
+
     await onSubmitWrapper(new Event('submit'))
   },
 
@@ -450,7 +458,8 @@ defineExpose(api)
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
-    :class="ui({ class: props.class })"
+    ref="formRef"
+    :class="ui({ class: [uiProp?.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot :errors="errors" :loading="loading" />

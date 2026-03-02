@@ -24,6 +24,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[]
 props:
   items:
     - label: Guide
@@ -92,7 +94,7 @@ props:
           to: /docs/components/progress
     - label: GitHub
       icon: i-simple-icons-github
-      badge: 3.8k
+      badge: 6k
       to: https://github.com/nuxt/ui
       target: _blank
     - label: Help
@@ -110,7 +112,9 @@ Use the `items` prop as an array of objects with the following properties:
 - `icon?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `badge?: string | number | BadgeProps`{lang="ts-type"}
-- `tooltip?: TooltipProps`{lang="ts-type"}
+- [`chip?: boolean | ChipProps`{lang="ts-type"}](#with-chip-in-items)
+- [`tooltip?: TooltipProps`{lang="ts-type"}](#with-tooltip-in-items)
+- [`popover?: PopoverProps`{lang="ts-type"}](#with-popover-in-items)
 - `trailingIcon?: string`{lang="ts-type"}
 - `type?: 'label' | 'trigger' | 'link'`{lang="ts-type"}
 - `defaultOpen?: boolean`{lang="ts-type"}
@@ -118,10 +122,10 @@ Use the `items` prop as an array of objects with the following properties:
 - `value?: string`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `onSelect?(e: Event): void`{lang="ts-type"}
+- `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `children?: NavigationMenuChildItem[]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
+- `ui?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLeadingChipSize?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
@@ -203,7 +207,7 @@ props:
           to: /docs/components/progress
     - label: GitHub
       icon: i-simple-icons-github
-      badge: 3.8k
+      badge: 6k
       to: https://github.com/nuxt/ui
       target: _blank
     - label: Help
@@ -223,7 +227,7 @@ Each item can take a `children` array of objects with the following properties t
 - `label: string`
 - `description?: string`
 - `icon?: string`
-- `onSelect?(e: Event): void`
+- `onSelect?: (e: Event) => void`
 - `class?: any`
 
 ::
@@ -287,6 +291,7 @@ props:
       - label: Components
         icon: i-lucide-box
         to: /docs/components
+        type: 'trigger'
         active: true
         defaultOpen: true
         children:
@@ -316,7 +321,7 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
@@ -428,7 +433,7 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
@@ -524,7 +529,7 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
@@ -548,6 +553,7 @@ Use the `color` prop to change the color of the NavigationMenu.
 
 ::component-code
 ---
+collapse: true
 ignore:
   - items
   - class
@@ -570,7 +576,7 @@ props:
         active: true
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
   class: 'w-full'
@@ -583,6 +589,7 @@ Use the `variant` prop to change the variant of the NavigationMenu.
 
 ::component-code
 ---
+collapse: true
 ignore:
   - items
   - class
@@ -607,7 +614,7 @@ props:
         active: true
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
   class: 'w-full'
@@ -978,9 +985,32 @@ You can inspect the DOM to see each item's content being rendered.
 
 ## Examples
 
+### Control active item
+
+You can control the active item(s) by using the `default-value` prop or the `v-model` directive with the `value` of the item. If no `value` is provided, it defaults to `item-${index}` for top-level items or `item-${level}-${index}` for nested items.
+
+::component-example
+---
+collapse: true
+name: 'navigation-menu-model-value-example'
+---
+::
+
+::tip
+Use the `value-key` prop to change the key used to match items when a `v-model` or `default-value` is provided.
+::
+
+::note
+In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can switch the active item by pressing :kbd{value="1"}, :kbd{value="2"}, or :kbd{value="3"}.
+::
+
 ### With tooltip in items
 
-When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip.
+When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip. In `horizontal` orientation, you can use the `tooltip` property on each item to display a [Tooltip](/docs/components/tooltip) around items.
+
+::note
+The `tooltip` property on an item will always display a tooltip regardless of the global `tooltip` prop.
+::
 
 You can pass any property from the [Tooltip](/docs/components/tooltip) component globally or on each item.
 
@@ -989,7 +1019,6 @@ You can pass any property from the [Tooltip](/docs/components/tooltip) component
 collapse: true
 ignore:
   - items
-  - orientation
   - class
 external:
   - items
@@ -1070,13 +1099,13 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
         tooltip:
           text: 'Open on GitHub'
           kbds:
-            - 3.8k
+            - 6k
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
@@ -1086,6 +1115,10 @@ props:
 ### With popover in items
 
 When orientation is `vertical` and the menu is `collapsed`, you can set the `popover` prop to `true` to display a [Popover](/docs/components/popover) around items with their children but you can also use the `popover` property on each item to override the default popover.
+
+::note
+The `popover` property on an item will always display a popover regardless of the global `popover` prop.
+::
 
 You can pass any property from the [Popover](/docs/components/popover) component globally or on each item.
 
@@ -1177,13 +1210,13 @@ props:
             to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
-        badge: 3.8k
+        badge: 6k
         to: https://github.com/nuxt/ui
         target: _blank
         tooltip:
           text: 'Open on GitHub'
           kbds:
-            - 3.8k
+            - 6k
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
@@ -1194,23 +1227,90 @@ props:
 You can use the `#content` slot to customize the content of the popover in the `vertical` orientation.
 ::
 
-### Control active item
+### With chip in items :badge{label="4.5+" class="align-text-top"}
 
-You can control the active item by using the `default-value` prop or the `v-model` directive with the index of the item.
+Use the `chip` property to display a [Chip](/docs/components/chip) around the icon of the items, you can pass any of its props.
+
+::component-code
+---
+collapse: true
+ignore:
+  - items
+  - class
+external:
+  - items
+externalTypes:
+  - NavigationMenuItem[][]
+props:
+  collapsed: true
+  orientation: 'vertical'
+  items:
+    - - label: Guide
+        icon: i-lucide-book-open
+        chip:
+          color: error
+      - label: Composables
+        icon: i-lucide-database
+        chip:
+          color: info
+          text: 3
+      - label: Components
+        icon: i-lucide-box
+        to: /docs/components
+        active: true
+        chip: true
+    - - label: GitHub
+        icon: i-simple-icons-github
+        to: https://github.com/nuxt/ui
+        target: _blank
+      - label: Help
+        icon: i-lucide-circle-help
+        disabled: true
+---
+::
+
+### With bottom tab bar
+
+Use the `ui` prop to transform the NavigationMenu into a mobile-style bottom tab bar with icons and small labels, similar to YouTube or Instagram.
 
 ::component-example
 ---
 collapse: true
-name: 'navigation-menu-model-value-example'
+name: 'navigation-menu-bottom-tab-bar-example'
 ---
 ::
 
-::note
-In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can switch the active item by pressing :kbd{value="1"}, :kbd{value="2"}, or :kbd{value="3"}.
+### With collapsed labels
+
+Use the `ui` prop to display a label underneath each icon when collapsed.
+
+::component-example
+---
+collapse: true
+name: 'navigation-menu-collapsed-label-example'
+---
 ::
 
 ::tip
-You can also pass the `value` of one of the items if provided.
+You can also do this globally through the `app.config.ts` using [`compoundVariants`](/docs/getting-started/theme/components#compound-variants):
+
+```ts [app.config.ts]
+export default defineAppConfig({
+  ui: {
+    navigationMenu: {
+      compoundVariants: [{
+        orientation: 'vertical',
+        collapsed: true,
+        class: {
+          link: 'flex-col',
+          linkLabel: 'block text-[10px]/3 text-center'
+        }
+      }]
+    }
+  }
+})
+```
+
 ::
 
 ### With custom slot
@@ -1227,12 +1327,24 @@ You will have access to the following slots:
 
 ::component-example
 ---
+collapse: true
 name: 'navigation-menu-custom-slot-example'
 ---
 ::
 
 ::tip{to="#slots"}
 You can also use the `#item`, `#item-leading`, `#item-label`, `#item-trailing` and `#item-content` slots to customize all items.
+::
+
+### With trailing slot
+
+Use the `#item-trailing` slot or the `slot` property (`#{{ item.slot }}-trailing`) to add a [DropdownMenu](/docs/components/dropdown-menu) that appears on hover, similar to Notion or Linear.
+
+::component-example
+---
+collapse: true
+name: 'navigation-menu-trailing-slot-example'
+---
 ::
 
 ### With content slot

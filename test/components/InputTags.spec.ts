@@ -1,14 +1,15 @@
 import { describe, it, expect } from 'vitest'
-import theme from '#build/ui/input'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import InputTags from '../../src/runtime/components/InputTags.vue'
-import type { InputTagsProps, InputTagsSlots } from '../../src/runtime/components/InputTags.vue'
-import ComponentRender from '../component-render'
+import theme from '#build/ui/input'
 
 describe('InputTags', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
 
-  it.each([
+  renderEach(InputTags, [
     // Props
     ['with modelValue', { props: { modelValue: ['test'] } }],
     ['with defaultValue', { props: { defaultValue: ['test'] } }],
@@ -36,8 +37,18 @@ describe('InputTags', () => {
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
     ['with item-text slot', { slots: { ['item-text']: () => 'Item Text slot' } }],
     ['with item-delete slot', { slots: { ['item-delete']: () => 'Item Delete slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputTagsProps, slots?: Partial<InputTagsSlots>, attrs?: Record<string, unknown> }) => {
-    const html = await ComponentRender(nameOrHtml, options, InputTags)
-    expect(html).toMatchSnapshot()
+  ])
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(InputTags, {
+      props: {
+        modelValue: ['tag1', 'tag2'],
+        placeholder: 'Add tags...',
+        required: true,
+        icon: 'i-lucide-tag'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

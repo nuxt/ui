@@ -25,6 +25,10 @@ props:
 You can pass any property from the HTML `<img>` element such as `alt`, `loading`, etc.
 ::
 
+::tip
+To opt-out of `@nuxt/image`, use the `as` prop: `:as="{ img: 'img' }"`.
+::
+
 ### Src
 
 Use the `src` prop to set the image URL.
@@ -130,6 +134,10 @@ You can use a CSS mask to display an Avatar with a custom shape instead of a sim
 ### Props
 
 :component-props
+
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attributes" target="_blank"}
+This component also supports all native `<img>` HTML attributes.
+::
 
 ## Theme
 

@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Progress from '../../src/runtime/components/Progress.vue'
-import type { ProgressProps, ProgressSlots } from '../../src/runtime/components/Progress.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/progress'
 
 describe('Progress', () => {
@@ -10,7 +11,7 @@ describe('Progress', () => {
   const animations = Object.keys(theme.variants.animation) as any
   const max = ['Waiting...', 'Cloning...', 'Migrating...', 'Deploying...', 'Done!']
 
-  it.each([
+  renderEach(Progress, [
     // Props
     ['with modelValue', { props: { modelValue: 50 } }],
     ['with status', { props: { modelValue: 50, status: true } }],
@@ -26,8 +27,16 @@ describe('Progress', () => {
     ['with ui', { props: { ui: { base: 'bg-default' } } }],
     // Slots
     ['with status slot', { slots: { status: () => 'Status slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ProgressProps, slots?: Partial<ProgressSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Progress)
-    expect(html).toMatchSnapshot()
+  ])
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Progress, {
+      props: {
+        modelValue: 75,
+        status: true
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

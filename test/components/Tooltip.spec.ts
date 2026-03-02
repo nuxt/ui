@@ -1,9 +1,10 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { TooltipProvider } from 'reka-ui'
 import Tooltip from '../../src/runtime/components/Tooltip.vue'
-import type { TooltipProps, TooltipSlots } from '../../src/runtime/components/Tooltip.vue'
-import ComponentRender from '../component-render'
 
 const TooltipWrapper = defineComponent({
   components: {
@@ -23,7 +24,7 @@ const TooltipWrapper = defineComponent({
 describe('Tooltip', () => {
   const props = { text: 'Tooltip', open: true, portal: false }
 
-  it.each([
+  renderEach(TooltipWrapper, [
     // Props
     ['with text', { props }],
     ['with arrow', { props: { ...props, arrow: true } }],
@@ -33,8 +34,16 @@ describe('Tooltip', () => {
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TooltipProps, slots?: Partial<TooltipSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, TooltipWrapper)
-    expect(html).toMatchSnapshot()
+  ])
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(TooltipWrapper, {
+      props: {
+        ...props,
+        arrow: true,
+        kbds: ['meta', 'K']
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

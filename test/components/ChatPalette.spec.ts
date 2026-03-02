@@ -1,10 +1,11 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import ChatPalette from '../../src/runtime/components/ChatPalette.vue'
-import type { ChatPaletteProps, ChatPaletteSlots } from '../../src/runtime/components/ChatPalette.vue'
-import ComponentRender from '../component-render'
 
 describe('ChatPalette', () => {
-  it.each([
+  renderEach(ChatPalette, [
     // Props
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'absolute' } }],
@@ -12,8 +13,11 @@ describe('ChatPalette', () => {
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with prompt slot', { slots: { prompt: () => 'Prompt slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatPaletteProps, slots?: Partial<ChatPaletteSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, ChatPalette)
-    expect(html).toMatchSnapshot()
+  ])
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(ChatPalette)
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

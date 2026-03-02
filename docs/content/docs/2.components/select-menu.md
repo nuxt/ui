@@ -79,7 +79,7 @@ You can also pass an array of objects with the following properties:
 - [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
 - [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
 - `disabled?: boolean`{lang="ts-type"}
-- `onSelect?(e: Event): void`{lang="ts-type"}
+- `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
 
@@ -170,6 +170,10 @@ props:
       id: 'done'
   class: 'w-48'
 ---
+::
+
+::tip
+Use the `by` prop to compare objects by a field instead of reference when the `model-value` is an object.
 ::
 
 ### Multiple
@@ -527,6 +531,79 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
+### Clear :badge{label="4.4+" class="align-text-top"}
+
+Use the `clear` prop to display a clear button when a value is selected.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+external:
+  - items
+  - modelValue
+items:
+  clear:
+    - true
+    - false
+props:
+  modelValue: 'Backlog'
+  clear: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
+### Clear Icon :badge{label="4.4+" class="align-text-top"}
+
+Use the `clear-icon` prop to customize the clear button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+external:
+  - items
+  - modelValue
+items:
+  clear:
+    - true
+    - false
+props:
+  modelValue: 'Backlog'
+  clear: true
+  clearIcon: 'i-lucide-trash'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
+::
+
 ### Avatar
 
 Use the `avatar` prop to display an [Avatar](/docs/components/avatar) inside the SelectMenu.
@@ -821,6 +898,37 @@ name: 'select-menu-filter-fields-example'
 ---
 ::
 
+### With virtualization :badge{label="4.1+" class="align-text-top"}
+
+Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
+
+::warning{to="https://github.com/unovue/reka-ui/issues/1885" target="_blank"}
+When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
+::
+
+::component-example
+---
+prettier: true
+name: 'select-menu-virtualize-example'
+---
+::
+
+### With infinite scroll :badge{label="4.4+" class="align-text-top"}
+
+You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
+
+::component-example
+---
+prettier: true
+collapse: true
+highlights:
+  - 41
+  - 51
+overflowHidden: true
+name: 'select-menu-infinite-scroll-example'
+---
+::
+
 ### With full content width
 
 You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
@@ -848,9 +956,9 @@ export default defineAppConfig({
 ```
 ::
 
-### As a CountryPicker
+### As a country picker
 
-This example demonstrates using the SelectMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
+You can use the SelectMenu as a country picker with lazy loading. Countries are only fetched when the menu is first opened.
 
 ::component-example
 ---
@@ -859,13 +967,15 @@ name: 'select-menu-countries-example'
 ---
 ::
 
-
-
 ## API
 
 ### Props
 
 :component-props
+
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+This component also supports all native `<button>` HTML attributes.
+::
 
 ### Slots
 
@@ -881,7 +991,8 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `triggerRef`{lang="ts-type"} | `Ref<InstanceType<typeof ComboboxTrigger> \| null>`{lang="ts-type"} |
+| `triggerRef`{lang="ts-type"} | `Ref<HTMLButtonElement \| null>`{lang="ts-type"} |
+| `viewportRef`{lang="ts-type"} | `Ref<HTMLDivElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

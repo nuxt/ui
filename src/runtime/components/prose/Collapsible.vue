@@ -1,7 +1,8 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/collapsible'
-import type { IconProps } from '../../types'
+import type { IconProps, CollapsibleProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseCollapsible = ComponentConfig<typeof theme, AppConfig, 'collapsible', 'ui.prose'>
@@ -28,17 +29,18 @@ export interface ProseCollapsibleProps {
    */
   closeText?: string
   class?: any
-  ui?: ProseCollapsible['slots']
+  ui?: ProseCollapsible['slots'] & CollapsibleProps['ui']
 }
 
 export interface ProseCollapsibleSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { useLocale } from '../../composables/useLocale'
 import { transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
@@ -50,18 +52,19 @@ defineSlots<ProseCollapsibleSlots>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ProseCollapsible['AppConfig']
+const uiProp = useComponentUI('prose.collapsible', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.collapsible || {}) })())
 </script>
 
 <template>
-  <UCollapsible :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui)">
+  <UCollapsible :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui, uiProp)">
     <template #default="{ open }">
-      <button :class="ui.trigger({ class: props.ui?.trigger })">
-        <UIcon :name="icon || appConfig.ui.icons.chevronDown" :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" />
+      <button :class="ui.trigger({ class: uiProp?.trigger })">
+        <UIcon :name="icon || appConfig.ui.icons.chevronDown" :class="ui.triggerIcon({ class: uiProp?.triggerIcon })" />
 
-        <span :class="ui.triggerLabel({ class: props.ui?.triggerLabel })">
+        <span :class="ui.triggerLabel({ class: uiProp?.triggerLabel })">
           {{ open ? (props.closeText || t('prose.collapsible.closeText')) : (props.openText || t('prose.collapsible.openText')) }} {{ props.name || t('prose.collapsible.name') }}
         </span>
       </button>

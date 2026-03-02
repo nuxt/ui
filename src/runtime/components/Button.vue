@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { Ref, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/button'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -35,18 +36,18 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
 }
 
 export interface ButtonSlots {
-  leading(props?: {}): any
-  default(props?: {}): any
-  trailing(props?: {}): any
+  leading?(props: { ui: Button['ui'] }): VNode[]
+  default?(props: { ui: Button['ui'] }): VNode[]
+  trailing?(props: { ui: Button['ui'] }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed, ref, inject } from 'vue'
-import type { Ref } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
@@ -62,6 +63,7 @@ const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
 const appConfig = useAppConfig() as Button['AppConfig']
+const uiProp = useComponentUI('button', props)
 const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(props)
 
 const linkProps = useForwardProps(pickLinkProps(props))
@@ -124,27 +126,28 @@ const ui = computed(() => tv({
   >
     <ULinkBase
       v-bind="slotProps"
+      data-slot="base"
       :class="ui.base({
-        class: [props.ui?.base, props.class],
+        class: [uiProp?.base, props.class],
         active,
         ...(active && activeVariant ? { variant: activeVariant } : {}),
         ...(active && activeColor ? { color: activeColor } : {})
       })"
       @click="onClickWrapper"
     >
-      <slot name="leading">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
-        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
+      <slot name="leading" :ui="ui">
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon, active })" />
+        <UAvatar v-else-if="!!avatar" :size="((uiProp?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: uiProp?.leadingAvatar, active })" />
       </slot>
 
-      <slot>
-        <span v-if="label !== undefined && label !== null" :class="ui.label({ class: props.ui?.label, active })">
+      <slot :ui="ui">
+        <span v-if="label !== undefined && label !== null" data-slot="label" :class="ui.label({ class: uiProp?.label, active })">
           {{ label }}
         </span>
       </slot>
 
-      <slot name="trailing">
-        <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
+      <slot name="trailing" :ui="ui">
+        <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon, active })" />
       </slot>
     </ULinkBase>
   </ULink>

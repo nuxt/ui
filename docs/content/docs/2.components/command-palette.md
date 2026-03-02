@@ -31,6 +31,8 @@ ignore:
 external:
   - groups
   - modelValue
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   modelValue: {}
@@ -43,31 +45,35 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
-        - label: 'Sylvain Marroufin'
-          suffix: 'smarroufin'
-          avatar:
-            src: 'https://github.com/smarroufin.png'
-        - label: 'Sébastien Chopin'
-          suffix: 'atinux'
-          avatar:
-            src: 'https://github.com/atinux.png'
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
-        - label: 'Haytham A. Salama'
-          suffix: 'Haythamasalama'
+        - label: 'Sébastien Chopin'
+          suffix: 'atinux'
           avatar:
-            src: 'https://github.com/Haythamasalama.png'
+            src: 'https://github.com/atinux.png'
+        - label: 'Hugo Richard'
+          suffix: 'HugoRCD'
+          avatar:
+            src: 'https://github.com/HugoRCD.png'
+        - label: 'Sandro Circi'
+          suffix: 'sandros94'
+          avatar:
+            src: 'https://github.com/sandros94.png'
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
-        - label: 'Neil Richter'
-          suffix: 'noook'
+        - label: 'Jakub Michálek'
+          suffix: 'J-Michalek'
           avatar:
-            src: 'https://github.com/noook.png'
-  class: 'flex-1'
+            src: 'https://github.com/J-Michalek.png'
+        - label: 'Eugen Istoc'
+          suffix: 'genu'
+          avatar:
+            src: 'https://github.com/genu.png'
+  class: 'flex-1 h-80'
 ---
 ::
 
@@ -106,7 +112,7 @@ Each group contains an `items` array of objects that define the commands. Each i
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `placeholder?: string`{lang="ts-type"}
 - `children?: CommandPaletteItem[]`{lang="ts-type"}
-- `onSelect?(e?: Event): void`{lang="ts-type"}
+- `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
 
@@ -124,6 +130,8 @@ ignore:
 external:
   - groups
   - modelValue
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   modelValue: {}
@@ -136,30 +144,34 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
-        - label: 'Sylvain Marroufin'
-          suffix: 'smarroufin'
-          avatar:
-            src: 'https://github.com/smarroufin.png'
-        - label: 'Sébastien Chopin'
-          suffix: 'atinux'
-          avatar:
-            src: 'https://github.com/atinux.png'
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
-        - label: 'Haytham A. Salama'
-          suffix: 'Haythamasalama'
+        - label: 'Sébastien Chopin'
+          suffix: 'atinux'
           avatar:
-            src: 'https://github.com/Haythamasalama.png'
+            src: 'https://github.com/atinux.png'
+        - label: 'Hugo Richard'
+          suffix: 'HugoRCD'
+          avatar:
+            src: 'https://github.com/HugoRCD.png'
+        - label: 'Sandro Circi'
+          suffix: 'sandros94'
+          avatar:
+            src: 'https://github.com/sandros94.png'
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
-        - label: 'Neil Richter'
-          suffix: 'noook'
+        - label: 'Jakub Michálek'
+          suffix: 'J-Michalek'
           avatar:
-            src: 'https://github.com/noook.png'
+            src: 'https://github.com/J-Michalek.png'
+        - label: 'Eugen Istoc'
+          suffix: 'genu'
+          avatar:
+            src: 'https://github.com/genu.png'
   class: 'flex-1'
 ---
 ::
@@ -185,6 +197,8 @@ ignore:
 external:
   - groups
   - modelValue
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   multiple: true
@@ -198,30 +212,34 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
-        - label: 'Sylvain Marroufin'
-          suffix: 'smarroufin'
-          avatar:
-            src: 'https://github.com/smarroufin.png'
-        - label: 'Sébastien Chopin'
-          suffix: 'atinux'
-          avatar:
-            src: 'https://github.com/atinux.png'
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
-        - label: 'Haytham A. Salama'
-          suffix: 'Haythamasalama'
+        - label: 'Sébastien Chopin'
+          suffix: 'atinux'
           avatar:
-            src: 'https://github.com/Haythamasalama.png'
+            src: 'https://github.com/atinux.png'
+        - label: 'Hugo Richard'
+          suffix: 'HugoRCD'
+          avatar:
+            src: 'https://github.com/HugoRCD.png'
+        - label: 'Sandro Circi'
+          suffix: 'sandros94'
+          avatar:
+            src: 'https://github.com/sandros94.png'
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
-        - label: 'Neil Richter'
-          suffix: 'noook'
+        - label: 'Jakub Michálek'
+          suffix: 'J-Michalek'
           avatar:
-            src: 'https://github.com/noook.png'
+            src: 'https://github.com/J-Michalek.png'
+        - label: 'Eugen Istoc'
+          suffix: 'genu'
+          avatar:
+            src: 'https://github.com/genu.png'
   class: 'flex-1'
 ---
 ::
@@ -244,10 +262,45 @@ ignore:
   - groups
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
   placeholder: 'Search an app...'
+  groups:
+    - id: 'apps'
+      items:
+        - label: 'Calendar'
+          icon: 'i-lucide-calendar'
+        - label: 'Music'
+          icon: 'i-lucide-music'
+        - label: 'Maps'
+          icon: 'i-lucide-map'
+  class: 'flex-1'
+---
+::
+
+### Size :badge{label="4.4+" class="align-text-top"}
+
+Use the `size` prop to change the size of the CommandPalette.
+
+::component-code
+---
+collapse: true
+hide:
+  - autofocus
+ignore:
+  - class
+  - groups
+external:
+  - groups
+externalTypes:
+  - CommandPaletteGroup[]
+class: '!p-0'
+props:
+  autofocus: false
+  size: 'xl'
   groups:
     - id: 'apps'
       items:
@@ -275,6 +328,8 @@ ignore:
   - groups
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -321,6 +376,8 @@ ignore:
 external:
   - groups
   - modelValue
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   multiple: true
@@ -339,30 +396,34 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
-        - label: 'Sylvain Marroufin'
-          suffix: 'smarroufin'
-          avatar:
-            src: 'https://github.com/smarroufin.png'
-        - label: 'Sébastien Chopin'
-          suffix: 'atinux'
-          avatar:
-            src: 'https://github.com/atinux.png'
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
-        - label: 'Haytham A. Salama'
-          suffix: 'Haythamasalama'
+        - label: 'Sébastien Chopin'
+          suffix: 'atinux'
           avatar:
-            src: 'https://github.com/Haythamasalama.png'
+            src: 'https://github.com/atinux.png'
+        - label: 'Hugo Richard'
+          suffix: 'HugoRCD'
+          avatar:
+            src: 'https://github.com/HugoRCD.png'
+        - label: 'Sandro Circi'
+          suffix: 'sandros94'
+          avatar:
+            src: 'https://github.com/sandros94.png'
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
-        - label: 'Neil Richter'
-          suffix: 'noook'
+        - label: 'Jakub Michálek'
+          suffix: 'J-Michalek'
           avatar:
-            src: 'https://github.com/noook.png'
+            src: 'https://github.com/J-Michalek.png'
+        - label: 'Eugen Istoc'
+          suffix: 'genu'
+          avatar:
+            src: 'https://github.com/genu.png'
   class: 'flex-1'
 ---
 ::
@@ -394,6 +455,8 @@ ignore:
   - class
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -440,6 +503,8 @@ ignore:
   - groups
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -471,6 +536,8 @@ ignore:
   - groups
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -520,6 +587,8 @@ ignore:
   - close
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -552,6 +621,8 @@ ignore:
   - class
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -587,6 +658,8 @@ ignore:
   - close
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -635,6 +708,8 @@ ignore:
   - class
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -671,6 +746,8 @@ ignore:
   - back
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -718,6 +795,8 @@ ignore:
   - class
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -749,6 +828,10 @@ class: '!p-0'
 props:
   autofocus: false
 ---
+::
+
+::tip
+Use the `value-key` prop to select a field of an item to use as the value instead of the object itself. Use the `by` prop to compare objects by a field instead of reference.
 ::
 
 ### Control search term
@@ -867,6 +950,24 @@ You can for example set `{ fuseOptions: { includeMatches: true } }`{lang="ts-typ
 ---
 collapse: true
 name: 'command-palette-fuse-example'
+class: '!p-0'
+props:
+  autofocus: false
+---
+::
+
+### With virtualization :badge{label="4.1+" class="align-text-top"}
+
+Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
+
+::warning{to="https://github.com/unovue/reka-ui/issues/1885" target="_blank"}
+When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
+::
+
+::component-example
+---
+collapse: true
+name: 'command-palette-virtualize-example'
 class: '!p-0'
 props:
   autofocus: false

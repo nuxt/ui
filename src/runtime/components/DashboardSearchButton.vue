@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-search-button'
-import type { ButtonProps, ButtonSlots, IconProps, KbdProps, TooltipProps } from '../types'
+import type { ButtonProps, ButtonSlots, IconProps, KbdProps, TooltipProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSearchButton = ComponentConfig<typeof theme, AppConfig, 'dashboardSearchButton'>
 
-export interface DashboardSearchButtonProps {
+export interface DashboardSearchButtonProps extends Omit<ButtonProps, LinkPropsKeys | 'icon' | 'label' | 'color' | 'variant'> {
   /**
    * The icon displayed in the button.
    * @defaultValue appConfig.ui.icons.search
@@ -28,7 +28,6 @@ export interface DashboardSearchButtonProps {
    * Defaults to 'outline' when not collapsed, 'ghost' when collapsed.
    */
   variant?: ButtonProps['variant']
-  size?: ButtonProps['size']
   /**
    * Whether the button is collapsed.
    * @defaultValue false
@@ -54,8 +53,9 @@ export interface DashboardSearchButtonProps {
 import { computed, toRef } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
 import { useDashboard } from '../utils/dashboard'
 import { omit, transformUI } from '../utils'
@@ -78,15 +78,17 @@ const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate()
 
 const getProxySlots = () => omit(slots, ['trailing'])
 
-const rootProps = useForwardProps(reactivePick(props, 'color', 'size'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'label', 'variant', 'collapsed', 'tooltip', 'kbds', 'class', 'ui'))
 const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as TooltipProps)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSearchButton['AppConfig']
+const uiProp = useComponentUI('dashboardSearchButton', props)
 const { toggleSearch } = useDashboard({ toggleSearch: () => {} })
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearchButton || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearchButton || {}) })({
+  collapsed: props.collapsed
+}))
 </script>
 
 <template>
@@ -96,25 +98,24 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSea
       :label="label || t('dashboardSearchButton.label')"
       :variant="variant || (collapsed ? 'ghost' : 'outline')"
       v-bind="{
-        ...rootProps,
+        ...buttonProps,
         ...(collapsed ? {
           'square': true,
-          'label': undefined,
           'aria-label': label || t('dashboardSearchButton.label')
         } : {}),
         ...$attrs
       }"
-      :class="ui.base({ class: [props.ui?.base, props.class] })"
-      :ui="transformUI(ui, props.ui)"
+      :class="ui.base({ class: [uiProp?.base, props.class] })"
+      :ui="transformUI(ui, uiProp)"
       @click="toggleSearch"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
         <slot :name="name" v-bind="slotData" />
       </template>
 
-      <template v-if="!collapsed" #trailing>
-        <div :class="ui.trailing({ class: props.ui?.trailing })">
-          <slot name="trailing">
+      <template #trailing="{ ui: uiProxy }">
+        <div data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
+          <slot name="trailing" :ui="uiProxy">
             <template v-if="kbds?.length">
               <UKbd v-for="(kbd, index) in kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
             </template>

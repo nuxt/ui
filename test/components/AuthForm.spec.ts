@@ -1,7 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import AuthForm from '../../src/runtime/components/AuthForm.vue'
-import type { AuthFormProps, AuthFormSlots } from '../../src/runtime/components/AuthForm.vue'
-import ComponentRender from '../component-render'
+import type { FormSchema } from '../../src/runtime/types/form'
+import type { AuthFormProps } from '../../src/runtime/components/AuthForm.vue'
+import { renderEach } from '../component-render'
 
 describe('AuthForm', () => {
   const fields = [{
@@ -13,11 +16,11 @@ describe('AuthForm', () => {
     name: 'password',
     label: 'Password',
     type: 'password' as const
-  }]
+  }] satisfies AuthFormProps['fields']
 
   const props = { fields }
 
-  it.each([
+  renderEach(AuthForm<FormSchema, typeof fields[number]>, [
     // Props
     ['with fields', { props }],
     ['with title', { props: { ...props, title: 'Title' } }],
@@ -40,8 +43,21 @@ describe('AuthForm', () => {
     ['with validation slot', { props, slots: { validation: () => 'Validation' } }],
     ['with submit slot', { props, slots: { submit: () => 'Submit' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props: AuthFormProps, slots?: Partial<AuthFormSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, AuthForm)
-    expect(html).toMatchSnapshot()
+  ])
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(AuthForm, {
+      props: {
+        fields,
+        title: 'Title',
+        description: 'Description',
+        icon: 'i-lucide-user',
+        providers: [{ label: 'Google', icon: 'i-simple-icons-google' }],
+        separator: 'or',
+        submit: { label: 'Submit' }
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

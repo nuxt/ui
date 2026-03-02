@@ -1,8 +1,9 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { flushPromises, mount } from '@vue/test-utils'
 import Select from '../../src/runtime/components/Select.vue'
-import type { SelectProps, SelectSlots } from '../../src/runtime/components/Select.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '../../src/module'
@@ -34,15 +35,19 @@ describe('Select', () => {
     icon: 'i-lucide-circle-x'
   }]
 
+  const itemsWithDescription = [...items.map(item => ({ ...item, description: 'Description' }))]
+
   const props = { open: true, portal: false, items }
 
-  it.each([
+  renderEach(Select, [
     // Props
     ['with items', { props }],
+    ['with items with description', { props: { ...props, items: itemsWithDescription } }],
     ['with modelValue', { props: { ...props, modelValue: items[0]?.value } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0]?.value } }],
-    ['with valueKey', { props: { ...props, valueKey: 'label' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Backlog' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
+    ['with descriptionKey', { props: { ...props, descriptionKey: 'description' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
     ['with multiple and modelValue', { props: { ...props, multiple: true, modelValue: [items[0], items[1]] } }],
     ['with id', { props: { ...props, id: 'id' } }],
@@ -78,10 +83,48 @@ describe('Select', () => {
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
+    ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps, slots?: Partial<SelectSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Select)
-    expect(html).toMatchSnapshot()
+  ])
+
+  renderEach(
+    Select,
+    [
+      ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+      ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+      ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
+      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
+    ],
+    '%s works',
+    async (_, options, spec) => {
+      const wrapper = mount(Select, {
+        ...options
+      })
+
+      const select = wrapper.findComponent({ name: 'SelectRoot' })
+      await select.setValue(spec.input)
+
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+    }
+  )
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Select, {
+      props: {
+        ...props,
+        modelValue: items[0]?.value,
+        required: true,
+        avatar: {
+          src: 'https://github.com/benjamincanac.png',
+          alt: 'Benjamin Canac'
+        }
+      },
+      attrs: {
+        'aria-label': 'Select an item'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('it should display correct label', () => {

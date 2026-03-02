@@ -235,12 +235,8 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.re
 
 ## Examples
 
-::note{to="https://ai-sdk.dev/docs/getting-started/nuxt" target="_blank"}
-These chat components are designed to be used with the **AI SDK v5** from **Vercel AI SDK**.
-::
-
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/chat" target="_blank"}
-Check out the source code of our **AI Chat template** on GitHub for a real-life example.
+::tip{to="/docs/components/chat-messages#examples"}
+Check the **ChatMessages** documentation for server API setup and installation instructions.
 ::
 
 ### Within a page
@@ -249,22 +245,21 @@ Use the ChatPromptSubmit component with the `Chat` class from AI SDK v5 to displ
 
 Pass the `status` prop and listen to the `stop` and `reload` events to control the chat.
 
-```vue [pages/\[id\\].vue] {2-4,7,11-15,19,24}
+```vue [pages/\[id\\].vue] {2,7-11,35}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
-import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
 const input = ref('')
 
 const chat = new Chat({
   onError(error) {
-    console.error('Chat error:', error)
+    console.error(error)
   }
 })
 
-const handleSubmit = (e: Event) => {
-  e.preventDefault()
+function onSubmit() {
   chat.sendMessage({ text: input.value })
+
   input.value = ''
 }
 </script>
@@ -275,16 +270,19 @@ const handleSubmit = (e: Event) => {
       <UContainer>
         <UChatMessages :messages="chat.messages" :status="chat.status">
           <template #content="{ message }">
-            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
+            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+              <MDC v-if="part.type === 'text' && message.role === 'assistant'" :value="part.text" :cache-key="`${message.id}-${index}`" class="*:first:mt-0 *:last:mb-0" />
+              <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">{{ part.text }}</p>
+            </template>
           </template>
         </UChatMessages>
       </UContainer>
     </template>
 
     <template #footer>
-      <UContainer>
-        <UChatPrompt v-model="input" :error="chat.error" @submit="handleSubmit">
-          <UChatPromptSubmit :status="chat.status" @stop="chat.stop" @reload="chat.regenerate" />
+      <UContainer class="pb-4 sm:pb-6">
+        <UChatPrompt v-model="input" :error="chat.error" @submit="onSubmit">
+          <UChatPromptSubmit :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
         </UChatPrompt>
       </UContainer>
     </template>
@@ -297,6 +295,10 @@ const handleSubmit = (e: Event) => {
 ### Props
 
 :component-props
+
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+This component also supports all native `<button>` HTML attributes.
+::
 
 ### Slots
 

@@ -322,11 +322,26 @@ name: 'input-field-group-example'
 ---
 ::
 
+### As a phone number input
+
+You can use the Input within a [FieldGroup](/docs/components/field-group) component alongside a [SelectMenu](/docs/components/select-menu) to create a phone number input with country code selection.
+
+::component-example
+---
+collapse: true
+name: 'input-phone-number-example'
+---
+::
+
 ## API
 
 ### Props
 
 :component-props
+
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+This component also supports all native `<input>` HTML attributes.
+::
 
 ### Slots
 

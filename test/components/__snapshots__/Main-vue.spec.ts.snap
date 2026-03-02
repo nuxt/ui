@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Main > renders with as correctly 1`] = `"<div class="min-h-[calc(100vh-var(--ui-header-height))]"></div>"`;
+exports[`Main > renders with as correctly 1`] = `"<section class="min-h-[calc(100vh-var(--ui-header-height))]"></section>"`;
 
 exports[`Main > renders with class correctly 1`] = `"<main class="min-h-full"></main>"`;
 

@@ -1,57 +1,78 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-posts'
-import type { BlogPostProps } from '../types'
+import type { BlogPostProps, BlogPostSlots } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type BlogPosts = ComponentConfig<typeof theme, AppConfig, 'blogPosts'>
 
-export interface BlogPostsProps {
+export interface BlogPostsProps<T extends BlogPostProps = BlogPostProps> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
-  posts?: BlogPostProps[]
+  posts?: T[]
   /**
    * The orientation of the blog posts.
    * @defaultValue 'horizontal'
    */
   orientation?: BlogPosts['variants']['orientation']
   class?: any
+  ui?: { base?: any }
 }
 
-export interface BlogPostsSlots {
-  default(props?: {}): any
+type ExtendSlotWithPost<T extends BlogPostProps, K extends keyof BlogPostSlots>
+  = Required<BlogPostSlots>[K] extends (props: infer P) => VNode[]
+    ? (props: P & { post: T }) => VNode[]
+    : Required<BlogPostSlots>[K]
+
+export type BlogPostsSlots<T extends BlogPostProps = BlogPostProps> = {
+  [K in keyof BlogPostSlots]?: ExtendSlotWithPost<T, K>
+} & {
+  default?(props?: {}): VNode[]
 }
+
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends BlogPostProps">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { omit } from '../utils'
 import { tv } from '../utils/tv'
+import { useComponentUI } from '../composables/useComponentUI'
 import UBlogPost from './BlogPost.vue'
 
 const props = withDefaults(defineProps<BlogPostsProps>(), {
   orientation: 'horizontal'
 })
-defineSlots<BlogPostsSlots>()
+const slots = defineSlots<BlogPostsSlots<T>>()
+
+const getProxySlots = () => omit(slots, ['default'])
 
 const appConfig = useAppConfig() as BlogPosts['AppConfig']
+const uiProp = useComponentUI('blogPosts', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPosts || {}) }))
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: props.class })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: [uiProp?.base, props.class] })">
     <slot>
       <UBlogPost
         v-for="(post, index) in posts"
         :key="index"
         :orientation="orientation === 'vertical' ? 'horizontal' : 'vertical'"
         v-bind="post"
-      />
+      >
+        <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
+          <slot :name="name" v-bind="(slotData as any)" :post="post" />
+        </template>
+      </UBlogPost>
     </slot>
   </Primitive>
 </template>

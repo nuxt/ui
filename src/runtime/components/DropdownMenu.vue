@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuContentEmits, DropdownMenuArrowProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, IconProps, KbdProps, LinkProps } from '../types'
@@ -11,13 +12,14 @@ type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 
 export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
+  description?: string
   /**
    * @IconifyIcon
    */
   icon?: IconProps['name']
   color?: DropdownMenu['variants']['color']
   avatar?: AvatarProps
-  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DropdownMenuContentEmits>>
+  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & { class?: any } & Partial<EmitsToProps<DropdownMenuContentEmits>>
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The item type.
@@ -31,10 +33,10 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   open?: boolean
   defaultOpen?: boolean
   children?: ArrayOrNested<DropdownMenuItem>
-  onSelect?(e: Event): void
-  onUpdateChecked?(checked: boolean): void
+  onSelect?: (e: Event) => void
+  onUpdateChecked?: (checked: boolean) => void
   class?: any
-  ui?: Pick<DropdownMenu['slots'], 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLabel' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>
+  ui?: Pick<DropdownMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>
   [key: string]: any
 }
 
@@ -70,6 +72,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
   content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DropdownMenuContentEmits>>
   /**
    * Display an arrow alongside the menu.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
   arrow?: boolean | Omit<DropdownMenuArrowProps, 'as' | 'asChild'>
@@ -83,6 +86,11 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>
+  /**
+   * The key used to get the description from the item.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>
   disabled?: boolean
   class?: any
   ui?: DropdownMenu['slots']
@@ -90,20 +98,23 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
+type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active: boolean, index: number, ui: DropdownMenu['ui'] }) => VNode[]
 
 export type DropdownMenuSlots<
   A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  'default'(props: { open: boolean }): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
-} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
+  'default'?(props: { open: boolean }): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: (props: { item: T, active: boolean, index: number }) => VNode[]
+  'item-description'?: (props: { item: T, active: boolean, index: number }) => VNode[]
+  'item-trailing'?: SlotProps<T>
+  'content-top'?: (props: { sub: boolean }) => VNode[]
+  'content-bottom'?: (props: { sub: boolean }) => VNode[]
+}
+& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active: boolean, index: number }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active: boolean, index: number, ui: DropdownMenu['ui'] }>
 
 </script>
 
@@ -113,6 +124,7 @@ import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
@@ -121,16 +133,18 @@ const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
   portal: true,
   modal: true,
   externalIcon: true,
-  labelKey: 'label'
+  labelKey: 'label',
+  descriptionKey: 'description'
 })
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
 
 const appConfig = useAppConfig() as DropdownMenu['AppConfig']
+const uiProp = useComponentUI('dropdownMenu', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
-const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as DropdownMenuArrowProps)
 const getProxySlots = () => omit(slots, ['default'])
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })({
@@ -145,13 +159,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
     </DropdownMenuTrigger>
 
     <UDropdownMenuContent
-      :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
+      :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })"
       :ui="ui"
-      :ui-override="props.ui"
+      :ui-override="uiProp"
       v-bind="contentProps"
       :items="items"
       :portal="portal"
-      :label-key="(labelKey as keyof NestedItem<T>)"
+      :label-key="(labelKey as string & keyof NestedItem<T>)"
+      :description-key="(descriptionKey as string & keyof NestedItem<T>)"
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
@@ -160,7 +175,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
         <slot :name="(name as keyof DropdownMenuSlots<T>)" v-bind="slotData" />
       </template>
 
-      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
+      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
     </UDropdownMenuContent>
   </DropdownMenuRoot>
 </template>

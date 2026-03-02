@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/field'
@@ -16,7 +17,7 @@ export interface ProseFieldProps {
    */
   name?: string
   /**
-   * Expected type of the field’s value
+   * Expected type of the field's value
    */
   type?: string
   /**
@@ -32,7 +33,7 @@ export interface ProseFieldProps {
 }
 
 export interface ProseFieldSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
@@ -40,36 +41,38 @@ export interface ProseFieldSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { tv } from '../../utils/tv'
 
 const props = defineProps<ProseFieldProps>()
 const slots = defineSlots<ProseFieldSlots>()
 
 const appConfig = useAppConfig() as ProseField['AppConfig']
+const uiProp = useComponentUI('prose.field', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.field || {}) })())
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.container({ class: props.ui?.container })">
-      <span v-if="name" :class="ui.name({ class: props.ui?.name })">
+  <Primitive :as="as" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div :class="ui.container({ class: uiProp?.container })">
+      <span v-if="name" :class="ui.name({ class: uiProp?.name })">
         {{ name }}
       </span>
 
-      <div v-if="type || required" :class="ui.wrapper({ class: props.ui?.wrapper })">
-        <span v-if="type" :class="ui.type({ class: props.ui?.type })">
+      <div v-if="type || required" :class="ui.wrapper({ class: uiProp?.wrapper })">
+        <span v-if="type" :class="ui.type({ class: uiProp?.type })">
           {{ type }}
         </span>
 
-        <span v-if="required" :class="ui.required({ class: props.ui?.required })">
+        <span v-if="required" :class="ui.required({ class: uiProp?.required })">
           required
         </span>
       </div>
     </div>
 
-    <div v-if="!!slots.default || description" :class="ui.description({ class: props.ui?.description })">
+    <div v-if="!!slots.default || description" :class="ui.description({ class: uiProp?.description })">
       <slot mdc-unwrap="p">
         {{ description }}
       </slot>

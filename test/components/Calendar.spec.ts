@@ -1,13 +1,14 @@
 import { describe, it, expect, vi, afterAll, test } from 'vitest'
+import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import Calendar from '../../src/runtime/components/Calendar.vue'
-import type { CalendarProps, CalendarSlots } from '../../src/runtime/components/Calendar.vue'
-import ComponentRender from '../component-render'
-import theme from '#build/ui/calendar'
 import { CalendarDate } from '@internationalized/date'
+import { renderEach } from '../component-render'
+import Calendar from '../../src/runtime/components/Calendar.vue'
+import theme from '#build/ui/calendar'
 
 describe('Calendar', () => {
   const sizes = Object.keys(theme.variants.size) as any
+  const variants = Object.keys(theme.variants.variant) as any
   const date = new Date('2025-01-01')
 
   vi.setSystemTime(date)
@@ -16,7 +17,7 @@ describe('Calendar', () => {
     vi.useRealTimers()
   })
 
-  it.each([
+  renderEach(Calendar, [
     // Props
     ['with modelValue', { props: { modelValue: new CalendarDate(2025, 1, 1) } }],
     ['with default value', { props: { defaultValue: new CalendarDate(2025, 1, 1) } }],
@@ -33,22 +34,21 @@ describe('Calendar', () => {
     ['with nextMonth', { props: { nextMonth: { size: 'lg', color: 'primary' } } }],
     ['with prevYear', { props: { prevYear: { size: 'lg', color: 'primary' } } }],
     ['with prevMonth', { props: { prevMonth: { size: 'lg', color: 'primary' } } }],
+    ['with weekNumbers', { props: { weekNumbers: true } }],
     ['without fixedWeeks', { props: { fixedWeeks: false } }],
     ['without monthControls', { props: { monthControls: false } }],
     ['without yearControls', { props: { yearControls: false } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
+    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant, defaultValue: new CalendarDate(2025, 1, 15) } }]),
     ['with color neutral', { props: { color: 'neutral' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'max-w-sm' } }],
     ['with ui', { props: { ui: { header: 'gap-4' } } }],
     // Slots
     ['with heading slot', { slots: { heading: () => 'Heading' } }],
-    ['with day slot', { slots: { day: ({ day }: Parameters<CalendarSlots['day']>[0]) => day.day } }],
-    ['with week-day slot', { slots: { 'week-day': ({ day }: Parameters<CalendarSlots['week-day']>[0]) => day } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CalendarProps<false, false>, slots?: Partial<CalendarSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Calendar)
-    expect(html).toMatchSnapshot()
-  })
+    ['with day slot', { slots: { day: ({ day }) => day.day } }],
+    ['with week-day slot', { slots: { 'week-day': ({ day }) => day } }]
+  ])
 
   describe('emits', () => {
     test('update:modelValue event single', async () => {
@@ -66,5 +66,18 @@ describe('Calendar', () => {
       await wrapper.setValue(date)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[date]] })
     })
+  })
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Calendar, {
+      props: {
+        modelValue: new CalendarDate(2025, 1, 1),
+        range: true,
+        multiple: true,
+        numberOfMonths: 2
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 })

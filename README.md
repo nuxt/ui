@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/91ceab67-89ce-4ef4-8678-4402a92baca5">
   <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/51526d6d-e5ec-41b4-aa37-242dec1cdb27">
-  <img alt="Nuxt UI" src="https://github.com/user-attachments/assets/51526d6d-e5ec-41b4-aa37-242dec1cdb27">
+  <img alt="Nuxt UI" width="830" height="436" src="https://github.com/user-attachments/assets/51526d6d-e5ec-41b4-aa37-242dec1cdb27">
 </picture>
 
 # Nuxt UI
@@ -32,23 +32,24 @@ Kickstart your project with one of our ready-to-use Nuxt UI templates or follow 
 - [Chat](https://github.com/nuxt-ui-templates/chat) — An AI chatbot template with GitHub authentication and persistent chat history powered by Vercel AI SDK.
 - [Portfolio](https://github.com/nuxt-ui-templates/portfolio) — A sleek portfolio template to showcase your work, skills and blog powered by Nuxt Content.
 - [Changelog](https://github.com/nuxt-ui-templates/changelog) — A changelog template to display your repository releases notes from GitHub powered by Nuxt MDC.
+- [Editor](https://github.com/nuxt-ui-templates/editor) — A rich text editor template powered by TipTap with support for markdown, HTML, and JSON content types.
 
 ## Installation
 
 ```bash [pnpm]
-pnpm add @nuxt/ui
+pnpm add @nuxt/ui tailwindcss
 ```
 
 ```bash [yarn]
-yarn add @nuxt/ui
+yarn add @nuxt/ui tailwindcss
 ```
 
 ```bash [npm]
-npm install @nuxt/ui
+npm install @nuxt/ui tailwindcss
 ```
 
 ```bash [bun]
-bun add @nuxt/ui
+bun add @nuxt/ui tailwindcss
 ```
 
 ### Nuxt
@@ -124,6 +125,9 @@ Thank you for considering contributing to Nuxt UI. Here are a few ways you can g
 - Reporting Bugs: If you come across any bugs or issues, please check out the reporting bugs guide to learn how to submit a bug report.
 - Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/docs/getting-started/contribution) to share your suggestions.
 
+> [!TIP]
+> We provide a [contributing skill](https://github.com/nuxt/ui/tree/v4/.claude/skills/contributing) for AI assistants to help you contribute to Nuxt UI. It will automatically guide you through component structure, theming patterns, testing conventions, and documentation guidelines when working in this repository.
+
 ## Local Development
 
 Follow the docs to [set up your local development environment](https://ui.nuxt.com/docs/getting-started/contribution#local-development) and contribute.
@@ -152,5 +156,5 @@ Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v4/LICENSE.md).
 [license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
 [license-href]: https://github.com/nuxt/ui/blob/v4/LICENSE.md
 
-[nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
+[nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt
 [nuxt-href]: https://nuxt.com

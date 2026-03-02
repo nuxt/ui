@@ -86,16 +86,19 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Email'
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium'
+    }
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR'
     }).format(amount)
-
-    return h('div', { class: 'text-right font-medium' }, formatted)
   }
 }]
 
@@ -103,11 +106,9 @@ const table = useTemplateRef('table')
 
 const rowSelection = ref<Record<string, boolean>>({ })
 
-function onSelect(row: TableRow<Payment>, e?: Event) {
+function onSelect(e: Event, row: TableRow<Payment>) {
   /* If you decide to also select the column you can do this  */
   row.toggleSelected(!row.getIsSelected())
-
-  console.log(e)
 }
 </script>
 

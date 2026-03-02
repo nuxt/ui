@@ -256,21 +256,17 @@ name: 'toast-example'
 :toaster-duration-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L5"}
+::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L4"}
 In this example, we use the `AppConfig` to configure the `duration` prop of the `Toaster` component globally.
 ::
 
-### Stacked toasts
+### Change global max :badge{label="4.1+" class="align-text-top"}
 
-Set the `toaster.expand` prop to `false` on the [App](/docs/components/app#props) component to display stacked toasts.
-
-::tip
-You can hover over the toasts to expand them. This will also pause the timer of the toasts.
-::
+Change the `toaster.max` prop on the [App](/docs/components/app#props) component to change the max number of toasts displayed at once.
 
 ```vue [app.vue]
 <script setup lang="ts">
-const toaster = { expand: true }
+const toaster = { max: 3 }
 </script>
 
 <template>
@@ -287,11 +283,78 @@ name: 'toast-example'
 ---
 
 #options
+:toaster-max-example
+::
+
+::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L5"}
+In this example, we use the `AppConfig` to configure the `max` prop of the `Toaster` component globally.
+::
+
+### Stacked toasts
+
+Set the `toaster.expand` prop to `false` on the [App](/docs/components/app#props) component to display stacked toasts (inspired by [Sonner](https://sonner.emilkowal.ski/)).
+
+```vue [app.vue]
+<script setup lang="ts">
+const toaster = { expand: true }
+</script>
+
+<template>
+  <UApp :toaster="toaster">
+    <NuxtPage />
+  </UApp>
+</template>
+```
+
+::tip
+You can hover over the toasts to expand them. This will also pause the timer of the toasts.
+::
+
+::component-example
+---
+prettier: true
+name: 'toast-example'
+---
+
+#options
 :toaster-expand-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L4"}
+::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L6"}
 In this example, we use the `AppConfig` to configure the `expand` prop of the `Toaster` component globally.
+::
+
+### Deduplicated toasts :badge{label="4.5+" class="align-text-top"}
+
+When calling `toast.add` with an `id` that already exists, the existing toast will pulse instead of creating a duplicate.
+
+::component-example
+---
+collapse: true
+name: 'toast-duplicate-example'
+---
+::
+
+### With callback
+
+Pass an `onUpdateOpen` field to execute a callback when the toast is closed (either by expiration or user dismissal).
+
+::component-example
+---
+collapse: true
+name: 'toast-callback-example'
+---
+::
+
+### With HTML content
+
+Use the [`h()` render function](https://vuejs.org/api/render-function.html#h) in the `title` or `description` fields to render HTML elements or Vue components with custom styling.
+
+::component-example
+---
+collapse: true
+name: 'toast-html-example'
+---
 ::
 
 ## API
@@ -307,6 +370,14 @@ In this example, we use the `AppConfig` to configure the `expand` prop of the `T
 ### Emits
 
 :component-emits
+
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `height`{lang="ts-type"} | `Ref<number>`{lang="ts-type"} |
 
 ## Theme
 

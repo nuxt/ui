@@ -19,10 +19,10 @@ export default (options: Required<ModuleOptions>) => {
         neutral: ''
       },
       size: {
-        xs: 'px-2 py-1 text-xs gap-1',
-        sm: 'px-2.5 py-1.5 text-xs gap-1.5',
-        md: 'px-2.5 py-1.5 text-sm gap-1.5',
-        lg: 'px-3 py-2 text-sm gap-2',
+        xs: 'px-2 py-1 text-sm/4 gap-1',
+        sm: 'px-2.5 py-1.5 text-sm/4 gap-1.5',
+        md: 'px-2.5 py-1.5 text-base/5 gap-1.5',
+        lg: 'px-3 py-2 text-base/5 gap-2',
         xl: 'px-3 py-2 text-base gap-2'
       },
       variant: {
@@ -47,6 +47,15 @@ export default (options: Required<ModuleOptions>) => {
       },
       highlight: {
         true: ''
+      },
+      fixed: {
+        false: ''
+      },
+      increment: {
+        false: ''
+      },
+      decrement: {
+        false: ''
       }
     },
     compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
@@ -67,44 +76,64 @@ export default (options: Required<ModuleOptions>) => {
       class: 'ring ring-inset ring-inverted'
     }, {
       orientation: 'horizontal',
+      decrement: false,
+      class: 'text-start'
+    }, {
+      decrement: true,
       size: 'xs',
-      class: 'px-7'
+      class: 'ps-7'
     }, {
-      orientation: 'horizontal',
+      decrement: true,
       size: 'sm',
-      class: 'px-8'
+      class: 'ps-8'
     }, {
-      orientation: 'horizontal',
+      decrement: true,
       size: 'md',
-      class: 'px-9'
+      class: 'ps-9'
     }, {
-      orientation: 'horizontal',
+      decrement: true,
       size: 'lg',
-      class: 'px-10'
+      class: 'ps-10'
     }, {
-      orientation: 'horizontal',
+      decrement: true,
       size: 'xl',
-      class: 'px-11'
+      class: 'ps-11'
     }, {
-      orientation: 'vertical',
+      increment: true,
       size: 'xs',
       class: 'pe-7'
     }, {
-      orientation: 'vertical',
+      increment: true,
       size: 'sm',
       class: 'pe-8'
     }, {
-      orientation: 'vertical',
+      increment: true,
       size: 'md',
       class: 'pe-9'
     }, {
-      orientation: 'vertical',
+      increment: true,
       size: 'lg',
       class: 'pe-10'
     }, {
-      orientation: 'vertical',
+      increment: true,
       size: 'xl',
       class: 'pe-11'
+    }, {
+      fixed: false,
+      size: 'xs',
+      class: 'md:text-xs'
+    }, {
+      fixed: false,
+      size: 'sm',
+      class: 'md:text-xs'
+    }, {
+      fixed: false,
+      size: 'md',
+      class: 'md:text-sm'
+    }, {
+      fixed: false,
+      size: 'lg',
+      class: 'md:text-sm'
     }],
     defaultVariants: {
       size: 'md',

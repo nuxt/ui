@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TableColumn } from '@nuxt/ui'
-import { useSortable } from '@vueuse/integrations/useSortable.mjs'
+import { useSortable } from '@vueuse/integrations/useSortable'
 
 type Payment = {
   id: string
@@ -52,14 +52,19 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Email'
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium'
+    }
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR'
     }).format(amount)
-    return h('div', { class: 'text-right font-medium' }, formatted)
   }
 }]
 
@@ -69,14 +74,13 @@ useSortable('.my-table-tbody', data, {
 </script>
 
 <template>
-  <div class="w-full">
-    <UTable
-      ref="table"
-      :data="data"
-      :columns="columns"
-      :ui="{
-        tbody: 'my-table-tbody'
-      }"
-    />
-  </div>
+  <UTable
+    ref="table"
+    :data="data"
+    :columns="columns"
+    :ui="{
+      tbody: 'my-table-tbody'
+    }"
+    class="flex-1"
+  />
 </template>

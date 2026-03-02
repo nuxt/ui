@@ -2,6 +2,7 @@
 // import { createReusableTemplate, refDebounced } from '@vueuse/core'
 import { createReusableTemplate } from '@vueuse/core'
 import type { User } from '~/types'
+import theme from '#build/ui/command-palette'
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 const toast = useToast()
@@ -10,6 +11,11 @@ const open = ref(false)
 const searchTerm = ref('')
 // const searchTermDebounced = refDebounced(searchTerm, 200)
 const selected = ref([])
+const virtualize = ref(false)
+const preserveGroupOrder = ref(false)
+
+const sizes = Object.keys(theme.variants.size)
+const size = ref(theme.defaultVariants.size)
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   // params: { q: searchTermDebounced },
@@ -76,6 +82,8 @@ const groups = computed(() => [{
     kbds: ['meta', 'L']
   }, {
     label: 'More actions',
+    description: 'More actions to perform on the current item.',
+    icon: 'i-lucide-ellipsis',
     placeholder: 'Search actions...',
     children: [{
       label: 'Create new file',
@@ -152,10 +160,46 @@ defineShortcuts({
 </script>
 
 <template>
+  <Navbar>
+    <USwitch v-model="virtualize" label="Virtualize" />
+    <USwitch v-model="preserveGroupOrder" label="Preserve order" />
+    <USelect v-model="size" :items="sizes" />
+
+    <UModal v-model:open="open">
+      <UButton label="Open modal" color="neutral" variant="outline" />
+
+      <template #content>
+        <ReuseTemplate :close="true" @update:open="open = $event" />
+      </template>
+    </UModal>
+
+    <UDrawer should-scale-background>
+      <UButton label="Open drawer" color="neutral" variant="outline" />
+
+      <template #content>
+        <ReuseTemplate class="border-t border-default mt-4" />
+      </template>
+    </UDrawer>
+
+    <UPopover :content="{ side: 'right', align: 'start' }">
+      <UButton label="Select label (popover)" color="neutral" variant="outline" />
+
+      <template #content>
+        <UCommandPalette
+          v-model="label"
+          :size="size"
+          placeholder="Search labels..."
+          :groups="[{ id: 'labels', items: labels }]"
+        />
+      </template>
+    </UPopover>
+  </Navbar>
+
   <DefineTemplate>
     <UCommandPalette
       v-model="selected"
       v-model:search-term="searchTerm"
+      :size="size"
       :loading="status === 'pending'"
       :groups="groups"
       :fuse="{
@@ -164,6 +208,7 @@ defineShortcuts({
         }
       }"
       multiple
+      :preserve-group-order="preserveGroupOrder"
       class="sm:max-h-96"
       @update:model-value="onSelect"
     >
@@ -191,33 +236,17 @@ defineShortcuts({
     </UCommandPalette>
   </DefineTemplate>
 
-  <Navbar>
-    <UModal v-model:open="open">
-      <UButton label="Open modal" color="neutral" variant="outline" />
+  <UCard :ui="{ body: '!p-0' }" class="w-xl">
+    <UCommandPalette
+      v-if="virtualize"
+      virtualize
+      :size="size"
+      :fuse="{ resultLimit: 1000 }"
+      placeholder="Search virtualized items..."
+      :groups="[{ id: 'items', items: Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i, icon: 'i-lucide-file' })) }]"
+      class="sm:max-h-96"
+    />
 
-      <template #content>
-        <ReuseTemplate :close="true" @update:open="open = $event" />
-      </template>
-    </UModal>
-
-    <UDrawer should-scale-background>
-      <UButton label="Open drawer" color="neutral" variant="outline" />
-
-      <template #content>
-        <ReuseTemplate class="border-t border-default mt-4" />
-      </template>
-    </UDrawer>
-
-    <UPopover :content="{ side: 'right', align: 'start' }">
-      <UButton label="Select label (popover)" color="neutral" variant="outline" />
-
-      <template #content>
-        <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }" />
-      </template>
-    </UPopover>
-  </Navbar>
-
-  <UCard :ui="{ body: '!p-0' }">
-    <ReuseTemplate />
+    <ReuseTemplate v-else />
   </UCard>
 </template>

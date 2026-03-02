@@ -1,18 +1,19 @@
 import { describe, it, expect, test } from 'vitest'
-import Checkbox from '../../src/runtime/components/Checkbox.vue'
-import type { CheckboxProps, CheckboxSlots } from '../../src/runtime/components/Checkbox.vue'
-import ComponentRender from '../component-render'
-import theme from '#build/ui/checkbox'
-import { renderForm } from '../utils/form'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { mount, flushPromises } from '@vue/test-utils'
+import Checkbox from '../../src/runtime/components/Checkbox.vue'
 import type { FormInputEvents } from '../../src/module'
+import { renderForm } from '../utils/form'
+import theme from '#build/ui/checkbox'
 
 describe('Checkbox', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
   const indicators = Object.keys(theme.variants.indicator) as any
 
-  it.each([
+  renderEach(Checkbox, [
     // Props
     ['with modelValue', { props: { modelValue: true } }],
     ['with defaultValue', { props: { defaultValue: true } }],
@@ -37,9 +38,16 @@ describe('Checkbox', () => {
     // Slots
     ['with label slot', { slots: { label: () => 'Label slot' } }],
     ['with description slot', { slots: { label: () => 'Description slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxProps, slots?: Partial<CheckboxSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Checkbox)
-    expect(html).toMatchSnapshot()
+  ])
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(Checkbox, {
+      props: {
+        label: 'Test checkbox'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe('emits', () => {

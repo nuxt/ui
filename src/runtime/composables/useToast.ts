@@ -1,16 +1,24 @@
-import { ref, nextTick } from 'vue'
+import type { Ref, InjectionKey } from 'vue'
+import { ref, nextTick, inject } from 'vue'
 import { useState } from '#imports'
 import type { ToastProps, ToastEmits } from '../types'
 import type { EmitsToProps } from '../types/utils'
 
+export const toastMaxInjectionKey: InjectionKey<Ref<number | undefined>> = Symbol('nuxt-ui.toast-max')
+
 export interface Toast extends Omit<ToastProps, 'defaultOpen'>, EmitsToProps<ToastEmits> {
   id: string | number
   onClick?: (toast: Toast) => void
+  /** @internal */
+  _duplicate?: number
+  /** @internal */
+  _updated?: boolean
 }
 
 export function useToast() {
   const toasts = useState<Toast[]>('toasts', () => [])
-  const maxToasts = 5
+  const max = inject(toastMaxInjectionKey, undefined)
+
   const running = ref(false)
   const queue: Toast[] = []
 
@@ -28,7 +36,7 @@ export function useToast() {
 
       await nextTick()
 
-      toasts.value = [...toasts.value, toast].slice(-maxToasts)
+      toasts.value = [...toasts.value, toast].slice(-(max?.value ?? 5))
     }
 
     running.value = false
@@ -40,6 +48,17 @@ export function useToast() {
       open: true,
       ...toast
     } as Toast
+
+    const existingIndex = toasts.value.findIndex((t: Toast) => t.id === body.id)
+    if (existingIndex !== -1) {
+      toasts.value[existingIndex] = {
+        ...toasts.value[existingIndex] as Toast,
+        ...body,
+        _duplicate: ((toasts.value[existingIndex] as Toast)._duplicate || 0) + 1
+      }
+
+      return body
+    }
 
     queue.push(body)
 
@@ -53,13 +72,30 @@ export function useToast() {
     if (index !== -1) {
       toasts.value[index] = {
         ...toasts.value[index] as Toast,
-        ...toast
+        ...toast,
+        duration: toast.duration,
+        open: true,
+        _updated: true
       }
+
+      nextTick(() => {
+        const i = toasts.value.findIndex((t: Toast) => t.id === id)
+        if (i !== -1 && toasts.value[i]!._updated) {
+          toasts.value[i] = {
+            ...toasts.value[i] as Toast,
+            _updated: undefined
+          }
+        }
+      })
     }
   }
 
   function remove(id: string | number) {
     const index = toasts.value.findIndex((t: Toast) => t.id === id)
+    if (index !== -1 && toasts.value[index]!._updated) {
+      return
+    }
+
     if (index !== -1) {
       toasts.value[index] = {
         ...toasts.value[index] as Toast,

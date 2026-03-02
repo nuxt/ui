@@ -1,10 +1,10 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect, test, vi } from 'vitest'
-import type { FormFieldProps, FormFieldSlots } from '../../src/runtime/components/FormField.vue'
-import ComponentRender from '../component-render'
-import theme from '#build/ui/form-field'
+import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-
+import { renderEach } from '../component-render'
+import type { FormFieldProps } from '../../src/runtime/components/FormField.vue'
+import theme from '#build/ui/form-field'
 import {
   UInput,
   URadioGroup,
@@ -61,8 +61,9 @@ const FormFieldWrapper = defineComponent({
 
 describe('FormField', () => {
   const sizes = Object.keys(theme.variants.size) as any
+  const orientations = Object.keys(theme.variants.orientation) as any
 
-  it.each([
+  renderEach(FormFieldWrapper, [
     // Props
     ['with label and description', { props: { label: 'Username', description: 'Enter your username' } }],
     ['with required', { props: { label: 'Username', required: true } }],
@@ -70,6 +71,7 @@ describe('FormField', () => {
     ['with error', { props: { error: 'Username is already taken' } }],
     ['with hint', { props: { hint: 'Use letters, numbers, and special characters' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Username', description: 'Enter your username', size } }]),
+    ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { label: 'Username', description: 'Enter your username', orientation } }]),
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'relative' } }],
     ['with ui', { props: { ui: { label: 'text-highlighted' } } }],
@@ -80,9 +82,20 @@ describe('FormField', () => {
     ['with error slot', { slots: { error: () => 'Error slot' } }],
     ['with hint slot', { slots: { hint: () => 'Hint slot' } }],
     ['with help slot', { slots: { help: () => 'Help slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FormFieldProps, slots?: Partial<FormFieldSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, FormFieldWrapper)
-    expect(html).toMatchSnapshot()
+  ])
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(FormFieldWrapper, {
+      props: {
+        label: 'Username',
+        description: 'Enter your username',
+        help: 'Username must be unique',
+        hint: 'Use letters, numbers, and special characters',
+        error: 'Username is already taken'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   describe.each(inputComponents.map(inputComponent => [(inputComponent as any).__name, inputComponent]))('%s integration', async (name: string, inputComponent: any) => {

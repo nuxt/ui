@@ -1,7 +1,9 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plans'
-import type { PricingPlanProps } from '../types'
+import type { PricingPlanProps, PricingPlanSlots } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type PricingPlans = ComponentConfig<typeof theme, AppConfig, 'pricingPlans'>
@@ -30,18 +32,29 @@ export interface PricingPlansProps {
    */
   scale?: boolean
   class?: any
+  ui?: { base?: any }
 }
 
-export interface PricingPlansSlots {
-  default(props?: {}): any
+type ExtendSlotWithPlan<T extends PricingPlanProps, K extends keyof PricingPlanSlots>
+  = PricingPlanSlots[K] extends (props: infer P) => VNode[]
+    ? (props: P & { plan: T }) => VNode[]
+    : PricingPlanSlots[K]
+
+export type PricingPlansSlots<T extends PricingPlanProps = PricingPlanProps> = {
+  [K in keyof PricingPlanSlots]?: ExtendSlotWithPlan<T, K>
+} & {
+  default?(props?: {}): VNode[]
 }
+
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends PricingPlanProps">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { omit } from '../utils'
 import { tv } from '../utils/tv'
+import { useComponentUI } from '../composables/useComponentUI'
 import UPricingPlan from './PricingPlan.vue'
 
 const props = withDefaults(defineProps<PricingPlansProps>(), {
@@ -49,10 +62,14 @@ const props = withDefaults(defineProps<PricingPlansProps>(), {
   compact: false,
   scale: false
 })
-const slots = defineSlots<PricingPlansSlots>()
+const slots = defineSlots<PricingPlansSlots<T>>()
+
+const getProxySlots = () => omit(slots, ['default'])
 
 const appConfig = useAppConfig() as PricingPlans['AppConfig']
+const uiProp = useComponentUI('pricingPlans', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingPlans || {}) }))
 
 const count = computed(() => props.plans?.length || slots.default?.()?.flatMap(mapSlot).filter(Boolean)?.length || 3)
@@ -71,14 +88,18 @@ function mapSlot(slot: any) {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ class: props.class, compact, scale, orientation })" :style="{ '--count': count }">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui({ class: [uiProp?.base, props.class], compact, scale, orientation })" :style="{ '--count': count }">
     <slot>
       <UPricingPlan
         v-for="(plan, index) in plans"
         :key="index"
         :orientation="orientation === 'vertical' ? 'horizontal' : 'vertical'"
         v-bind="plan"
-      />
+      >
+        <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
+          <slot :name="name" v-bind="(slotData as any)" :plan="plan" />
+        </template>
+      </UPricingPlan>
     </slot>
   </Primitive>
 </template>

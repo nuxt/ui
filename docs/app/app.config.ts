@@ -1,12 +1,15 @@
 export default defineAppConfig({
   toaster: {
     position: 'bottom-right' as const,
-    expand: true,
-    duration: 5000
+    duration: 5000,
+    max: 5,
+    expand: true
   },
   theme: {
     radius: 0.25,
-    blackAsPrimary: false
+    blackAsPrimary: false,
+    icons: 'lucide',
+    font: 'Public Sans'
   },
   ui: {
     colors: {

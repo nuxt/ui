@@ -1,8 +1,10 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UIMessage, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
-import type { ButtonProps, ChatMessageProps, IconProps } from '../types'
+import type { ButtonProps, ChatMessageProps, ChatMessageSlots, IconProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
@@ -25,7 +27,7 @@ export interface ChatMessagesProps {
    * `{ size: 'md', color: 'neutral', variant: 'outline' }`{lang="ts-type"}
    * @defaultValue true
    */
-  autoScroll?: boolean | Partial<ButtonProps>
+  autoScroll?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon displayed in the auto scroll button.
    * @defaultValue appConfig.ui.icons.arrowDown
@@ -36,12 +38,12 @@ export interface ChatMessagesProps {
    * The `user` messages props.
    * `{ side: 'right', variant: 'soft' }`{lang="ts-type"}
    */
-  user?: Pick<ChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions'>
+  user?: Pick<ChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'ui'>
   /**
    * The `assistant` messages props.
    * `{ side: 'left', variant: 'naked' }`{lang="ts-type"}
    */
-  assistant?: Pick<ChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions'>
+  assistant?: Pick<ChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'ui'>
   /**
    * Render the messages in a compact style.
    * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
@@ -57,23 +59,28 @@ export interface ChatMessagesProps {
   ui?: ChatMessages['slots']
 }
 
-export interface ChatMessagesSlots {
-  default(props?: {}): any
-  indicator(props?: {}): any
-  viewport(props: { onClick: () => void }): any
-  content(props: { message: UIMessage }): any
-  leading(props: { message: UIMessage }): any
-  actions(props: { message: UIMessage }): any
+type ExtendSlotWithVersion<K extends keyof ChatMessageSlots>
+  = Required<ChatMessageSlots>[K] extends (props: infer P) => VNode[]
+    ? (props: P & { message: UIMessage }) => VNode[]
+    : Required<ChatMessageSlots>[K]
+
+export type ChatMessagesSlots = {
+  [K in keyof ChatMessageSlots]?: ExtendSlotWithVersion<K>
+} & {
+  default?(props?: {}): VNode[]
+  indicator?(props: { ui: ChatMessages['ui'] }): VNode[]
+  viewport?(props: { ui: ChatMessages['ui'], onClick: () => void }): VNode[]
 }
+
 </script>
 
 <script setup lang="ts">
-import type { ComponentPublicInstance } from 'vue'
 import { ref, computed, watch, nextTick, toRef, onMounted } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'
 import { useElementBounding, useEventListener, watchThrottled } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UChatMessage from './ChatMessage.vue'
@@ -90,6 +97,7 @@ const slots = defineSlots<ChatMessagesSlots>()
 const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
 
 const appConfig = useAppConfig() as ChatMessages['AppConfig']
+const uiProp = useComponentUI('chatMessages', props)
 
 const userProps = toRef(() => defu(props.user, { side: 'right' as const, variant: 'soft' as const }))
 const assistantProps = toRef(() => defu(props.assistant, { side: 'left' as const, variant: 'naked' as const }))
@@ -105,6 +113,8 @@ const messagesRefs = ref(new Map<string, HTMLElement>())
 const showAutoScroll = ref(false)
 const lastMessageHeight = ref(0)
 const lastMessageSubmitted = ref(false)
+const lastScrollTop = ref(0)
+const userScrolledUp = ref(false)
 
 function registerMessageRef(id: string, element: ComponentPublicInstance | null) {
   const elInstance = element?.$el
@@ -137,14 +147,20 @@ watchThrottled([() => props.messages, () => props.status], ([_, status]) => {
     return
   }
 
-  if (props.shouldAutoScroll) {
-    // Scroll to bottom when message is streaming if `props.shouldAutoScroll` is true
-    requestAnimationFrame(() => nextTick(scrollToBottom))
-  } else {
-    // Check scroll position when message is streaming to show the auto scroll button
+  if (!props.shouldAutoScroll) {
     checkScrollPosition()
+    return
   }
-}, { deep: true, throttle: 100, leading: true })
+
+  // Scroll to bottom when message is streaming if `props.shouldAutoScroll` is true
+  nextTick(() => {
+    if (!parent.value || userScrolledUp.value) return
+
+    if ((parent.value.scrollHeight - parent.value.scrollTop - parent.value.clientHeight) < 150) {
+      scrollToBottom(false)
+    }
+  })
+}, { deep: true, throttle: 50, leading: true })
 
 watch(() => props.status, (status) => {
   if (status !== 'submitted') {
@@ -155,6 +171,8 @@ watch(() => props.status, (status) => {
   if (!lastMessage || lastMessage.role !== 'user') {
     return
   }
+
+  userScrolledUp.value = false
 
   nextTick(() => {
     lastMessageSubmitted.value = true
@@ -177,9 +195,19 @@ function checkScrollPosition() {
   const threshold = 100
 
   showAutoScroll.value = (scrollHeight - scrollPosition) >= threshold
+
+  // Detect user scrolling up
+  if (parent.value.scrollTop < lastScrollTop.value) {
+    userScrolledUp.value = true
+  } else if ((scrollHeight - scrollPosition) < threshold) {
+    userScrolledUp.value = false
+  }
+
+  lastScrollTop.value = parent.value.scrollTop
 }
 
 function onAutoScrollClick() {
+  userScrolledUp.value = false
   scrollToBottom()
 }
 
@@ -238,15 +266,19 @@ onMounted(() => {
     return
   }
 
-  // Wait for content to fully render (especially MDC components in ChatPalette)
-  setTimeout(() => {
-    if (props.shouldScrollToBottom) {
-      // Scroll to bottom on mount without smooth animation when `props.shouldScrollToBottom` is true
+  lastScrollTop.value = parent.value.scrollTop
+
+  if (props.shouldScrollToBottom) {
+    // Scroll to bottom immediately to avoid flash, then again after a delay to account for async content (e.g. MDC)
+    scrollToBottom(false)
+    setTimeout(() => {
       scrollToBottom(false)
-    } else {
+    }, 100)
+  } else {
+    nextTick(() => {
       checkScrollPosition()
-    }
-  }, 100)
+    })
+  }
 
   // Add event listener to check scroll position to show the auto scroll button
   useEventListener(parent, 'scroll', checkScrollPosition)
@@ -260,19 +292,20 @@ onMounted(() => {
   <div
     ref="el"
     :data-status="status"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    data-slot="root"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
     <slot>
       <UChatMessage
         v-for="message in messages"
         :key="message.id"
-        v-bind="{ ...message, ...(message.role === 'user' ? userProps : assistantProps) }"
-        :ref="(el) => registerMessageRef(message.id, el as ComponentPublicInstance)"
+        v-bind="{ ...(message.role === 'user' ? userProps : assistantProps), ...message }"
+        :ref="el => registerMessageRef(message.id, el as ComponentPublicInstance)"
         :compact="compact"
       >
-        <template v-for="(_, name) in getProxySlots()" #[name]>
-          <slot :name="name" v-bind="{ message }" />
+        <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
+          <slot :name="name" v-bind="(slotData as any)" :message="message" />
         </template>
       </UChatMessage>
     </slot>
@@ -285,8 +318,8 @@ onMounted(() => {
       :compact="compact"
     >
       <template #content>
-        <slot name="indicator">
-          <div :class="ui.indicator({ class: props.ui?.indicator })">
+        <slot name="indicator" :ui="ui">
+          <div data-slot="indicator" :class="ui.indicator({ class: uiProp?.indicator })">
             <span />
             <span />
             <span />
@@ -296,15 +329,16 @@ onMounted(() => {
     </UChatMessage>
 
     <Presence :present="showAutoScroll">
-      <div :data-state="showAutoScroll ? 'open' : 'closed'" :class="ui.viewport({ class: props.ui?.viewport })">
-        <slot name="viewport" :on-click="onAutoScrollClick">
+      <div :data-state="showAutoScroll ? 'open' : 'closed'" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
+        <slot name="viewport" :ui="ui" :on-click="onAutoScrollClick">
           <UButton
             v-if="autoScroll"
             :icon="autoScrollIcon || appConfig.ui.icons.arrowDown"
             color="neutral"
             variant="outline"
-            v-bind="(typeof autoScroll === 'object' ? autoScroll as Partial<ButtonProps> : {})"
-            :class="ui.autoScroll({ class: props.ui?.autoScroll })"
+            v-bind="(typeof autoScroll === 'object' ? autoScroll : {})"
+            data-slot="autoScroll"
+            :class="ui.autoScroll({ class: uiProp?.autoScroll })"
             @click="onAutoScrollClick"
           />
         </slot>

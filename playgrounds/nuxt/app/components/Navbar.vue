@@ -27,15 +27,28 @@ defineShortcuts({
 </script>
 
 <template>
-  <UDashboardNavbar :title="title" class="absolute top-0 inset-x-0 z-5 bg-default">
+  <UDashboardNavbar
+    :title="title"
+    :ui="{
+      left: 'shrink-0',
+      right: 'shrink overflow-x-auto py-2'
+    }"
+    class="absolute top-0 inset-x-0 z-5 bg-default"
+  >
+    <template #toggle>
+      <UDashboardSidebarToggle size="sm" variant="outline" class="ring-default" />
+      <UDashboardSidebarCollapse size="sm" variant="outline" class="ring-default" />
+    </template>
+
     <template #leading>
-      <UFieldGroup size="xs">
+      <UFieldGroup size="sm">
         <UButton
           icon="i-lucide-chevron-left"
           color="neutral"
           variant="outline"
           :disabled="index === 0"
           class="ring-default"
+          aria-label="Previous component"
           @click="navigate(index - 1)"
         />
         <UButton
@@ -44,6 +57,7 @@ defineShortcuts({
           variant="outline"
           :disabled="index === (components?.length ?? 0) - 1"
           class="ring-default"
+          aria-label="Next component"
           @click="navigate(index + 1)"
         />
       </UFieldGroup>
@@ -57,6 +71,7 @@ defineShortcuts({
           color="neutral"
           variant="ghost"
           size="xs"
+          aria-label="Open component in docs"
         />
       </slot>
     </template>

@@ -22,7 +22,7 @@ defaultValue:
 ---
 
 ::accordion-item{label="Is Nuxt UI free to use?" icon="i-lucide-circle-help"}
-Yes! Nuxt UI is completely free and open source under the MIT license. All 100+ components are available to everyone.
+Yes! Nuxt UI is completely free and open source under the MIT license. All 125+ components are available to everyone.
 ::
 
 ::accordion-item{label="Can I use Nuxt UI with Vue without Nuxt?" icon="i-lucide-circle-help"}
@@ -45,7 +45,7 @@ defaultValue:
 ---
 
 ::accordion-item{label="Is Nuxt UI free to use?" icon="i-lucide-circle-help"}
-Yes! Nuxt UI is completely free and open source under the MIT license. All 100+ components are available to everyone.
+Yes! Nuxt UI is completely free and open source under the MIT license. All 125+ components are available to everyone.
 ::
 
 ::accordion-item{label="Can I use Nuxt UI with Vue without Nuxt?" icon="i-lucide-circle-help"}

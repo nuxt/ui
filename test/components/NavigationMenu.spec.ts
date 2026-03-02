@@ -1,9 +1,14 @@
 import { describe, it, expect, test } from 'vitest'
+import { axe } from 'vitest-axe'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
+import type { AppConfig } from '@nuxt/schema'
 import NavigationMenu from '../../src/runtime/components/NavigationMenu.vue'
-import type { NavigationMenuProps, NavigationMenuSlots } from '../../src/runtime/components/NavigationMenu.vue'
-import ComponentRender from '../component-render'
-import theme from '#build/ui/navigation-menu'
+import type { ComponentConfig } from '../../src/runtime/types/tv'
 import { expectSlotProps } from '../utils/types'
+import theme from '#build/ui/navigation-menu'
+
+type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>
 
 describe('NavigationMenu', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -82,20 +87,23 @@ describe('NavigationMenu', () => {
 
   const props = { items }
 
-  it.each([
+  renderEach(NavigationMenu, [
     // Props
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: 'item-0' } }],
+    ['with defaultValue', { props: { ...props, defaultValue: 'item-0' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Documentation' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with arrow', { props: { ...props, arrow: true, modelValue: 'item-0' } }],
-    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const, modelValue: 'item-0' } }],
-    ['with orientation vertical and collapsed', { props: { ...props, orientation: 'vertical' as const, modelValue: 'item-0', collapsed: true } }],
-    ['with content orientation vertical', { props: { ...props, contentOrientation: 'vertical' as const, modelValue: 'item-0' } }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical', modelValue: 'item-0' } }],
+    ['with orientation vertical and collapsed', { props: { ...props, orientation: 'vertical', modelValue: 'item-0', collapsed: true } }],
+    ['with content orientation vertical', { props: { ...props, contentOrientation: 'vertical', modelValue: 'item-0' } }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { ...props, variant, color: 'neutral', highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant} highlight neutral`, { props: { ...props, variant, color: 'neutral', highlight: true, highlightColor: 'neutral' } }]),
+    ['with chip', { props: { items: [[{ label: 'Guide', icon: 'i-lucide-book-open', chip: true }, { label: 'Components', icon: 'i-lucide-box', chip: { color: 'error' } }]] } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-plus' } }],
     ['with externalIcon', { props: { ...props, externalIcon: 'i-lucide-external-link' } }],
     ['without externalIcon', { props: { ...props, externalIcon: false } }],
@@ -109,30 +117,38 @@ describe('NavigationMenu', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps, slots?: Partial<NavigationMenuSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, NavigationMenu)
-    expect(html).toMatchSnapshot()
+  ])
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        items,
+        modelValue: 'item-0'
+      }
+    })
+
+    expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
   test('should have the correct types', () => {
     // normal
     expectSlotProps('item', () => NavigationMenu({
       items: [{ label: 'foo', value: 'bar' }]
-    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active: boolean, ui: NavigationMenu['ui'] }>()
 
     // groups
     expectSlotProps('item', () => NavigationMenu({
       items: [[{ label: 'foo', value: 'bar' }]]
-    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active: boolean, ui: NavigationMenu['ui'] }>()
 
     // custom
     expectSlotProps('item', () => NavigationMenu({
       items: [{ label: 'foo', value: 'bar', custom: 'nice' }]
-    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active: boolean, ui: NavigationMenu['ui'] }>()
 
     // custom + groups
     expectSlotProps('item', () => NavigationMenu({
       items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]]
-    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active: boolean, ui: NavigationMenu['ui'] }>()
   })
 })

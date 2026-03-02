@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipContentEmits, TooltipArrowProps, TooltipTriggerProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tooltip'
 import type { KbdProps } from '../types'
@@ -20,6 +21,7 @@ export interface TooltipProps extends TooltipRootProps {
   content?: Omit<TooltipContentProps, 'as' | 'asChild'> & Partial<EmitsToProps<TooltipContentEmits>>
   /**
    * Display an arrow alongside the tooltip.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
   arrow?: boolean | Omit<TooltipArrowProps, 'as' | 'asChild'>
@@ -41,8 +43,8 @@ export interface TooltipProps extends TooltipRootProps {
 export interface TooltipEmits extends TooltipRootEmits {}
 
 export interface TooltipSlots {
-  default(props: { open: boolean }): any
-  content(props?: {}): any
+  default?(props: { open: boolean }): VNode[]
+  content?(props: { ui: Tooltip['ui'] }): VNode[]
 }
 </script>
 
@@ -52,6 +54,7 @@ import { defu } from 'defu'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { usePortal } from '../composables/usePortal'
 import { tv } from '../utils/tv'
 import UKbd from './Kbd.vue'
@@ -63,11 +66,12 @@ const emits = defineEmits<TooltipEmits>()
 const slots = defineSlots<TooltipSlots>()
 
 const appConfig = useAppConfig() as Tooltip['AppConfig']
+const uiProp = useComponentUI('tooltip', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration', 'disableHoverableContent', 'disableClosingTrigger', 'ignoreNonKeyboardFocus'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as TooltipContentProps)
-const arrowProps = toRef(() => props.arrow as TooltipArrowProps)
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as TooltipArrowProps)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })({
@@ -82,16 +86,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {
     </TooltipTrigger>
 
     <TooltipPortal v-bind="portalProps">
-      <TooltipContent v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
-        <slot name="content">
-          <span v-if="text" :class="ui.text({ class: props.ui?.text })">{{ text }}</span>
+      <TooltipContent v-bind="contentProps" data-slot="content" :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })">
+        <slot name="content" :ui="ui">
+          <span v-if="text" data-slot="text" :class="ui.text({ class: uiProp?.text })">{{ text }}</span>
 
-          <span v-if="kbds?.length" :class="ui.kbds({ class: props.ui?.kbds })">
-            <UKbd v-for="(kbd, index) in kbds" :key="index" :size="((props.ui?.kbdsSize || ui.kbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+          <span v-if="kbds?.length" data-slot="kbds" :class="ui.kbds({ class: uiProp?.kbds })">
+            <UKbd v-for="(kbd, index) in kbds" :key="index" :size="((uiProp?.kbdsSize || ui.kbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
 
-        <TooltipArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
+        <TooltipArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
       </TooltipContent>
     </TooltipPortal>
   </TooltipRoot>

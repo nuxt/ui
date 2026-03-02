@@ -2,7 +2,7 @@ import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
 import type { HookResult } from '@nuxt/schema'
 import { addTemplates } from './templates'
-import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
+import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
 import { name, version } from '../package.json'
 
 export type * from './runtime/types'
@@ -51,6 +51,10 @@ export interface ModuleOptions {
      */
     transitions?: boolean
 
+    /**
+     * The default variants to use for components
+     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themedefaultvariants
+     */
     defaultVariants?: {
       /**
        * The default color variant to use for components
@@ -64,6 +68,13 @@ export interface ModuleOptions {
        */
       size?: Size
     }
+
+    /**
+     * Prefix for Tailwind CSS utility classes
+     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themeprefix
+     * @example 'tw'
+     */
+    prefix?: string
   }
 
   /**
@@ -76,6 +87,22 @@ export interface ModuleOptions {
    * @defaultValue false
    */
   content?: boolean
+
+  /**
+   * Experimental features
+   */
+  experimental?: {
+    /**
+     * Enable automatic component detection for tree-shaking
+     * Only generates theme files for components actually used in your app
+     * - `true`: Enable automatic detection
+     * - `string[]`: Enable detection and include additional components (useful for dynamic components)
+     * @defaultValue false
+     * @example true
+     * @example ['Modal', 'Dropdown']
+     */
+    componentDetection?: boolean | string[]
+  }
 }
 
 declare module '#app' {
@@ -107,15 +134,16 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
-    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultUiConfig(options.theme.colors))
+    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme))
 
     // Isolate root node from portaled components
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
-    nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, 'isolate'].filter(Boolean).join(' ')
+    nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, `${options.theme?.prefix ? options.theme.prefix + ':' : ''}isolate`].filter(Boolean).join(' ')
 
     nuxt.hook('vite:extend', async ({ config }) => {
       const plugin = await import('@tailwindcss/vite').then(r => r.default)
       config.plugins ||= []
+      // @ts-expect-error - Vite Plugin type mismatch between @tailwindcss/vite and @nuxt/vite-builder
       config.plugins.push(plugin())
     })
     if (nuxt.options.builder !== '@nuxt/vite-builder') {
@@ -131,7 +159,7 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     await registerModule('@nuxt/icon', 'icon', {
-      cssLayer: 'components'
+      cssLayer: 'base'
     })
     if (options.fonts) {
       await registerModule('@nuxt/fonts', 'fonts', {

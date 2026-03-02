@@ -28,8 +28,8 @@ The Form will construct itself based on the `fields` prop and the state will be 
 
 Use the `fields` prop as an array of objects with the following properties:
 
-- `name?: string`{lang="ts-type"}
-- `type?: 'text' | 'password' | 'email' | 'number' | 'checkbox' | 'select' | 'otp'`{lang="ts-type"}
+- `name: string`{lang="ts-type"}
+- `type: 'checkbox' | 'select' | 'otp' | 'InputHTMLAttributes['type']'`{lang="ts-type"}
 
 Each field must include a `type` property, which determines the input component and any additional props applied: `checkbox` fields use [Checkbox](/docs/components/checkbox#props) props, `select` fields use [SelectMenu](/docs/components/select-menu#props) props, `otp` fields use [PinInput](/docs/components/pin-input#props) props, and all other types use [Input](/docs/components/input#props) props.
 
@@ -366,6 +366,10 @@ collapse: true
 ### Props
 
 :component-props
+
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attributes" target="_blank"}
+This component also supports all native `<form>` HTML attributes.
+::
 
 ### Slots
 

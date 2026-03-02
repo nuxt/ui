@@ -24,6 +24,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - DropdownMenuItem[][]
 props:
   items:
     - - label: Benjamin
@@ -94,8 +96,8 @@ Use the `items` prop as an array of objects with the following properties:
 - [`checked?: boolean`{lang="ts-type"}](#with-checkbox-items)
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `onSelect?(e: Event): void`{lang="ts-type"}
-- [`onUpdateChecked?(checked: boolean): void`{lang="ts-type"}](#with-checkbox-items)
+- `onSelect?: (e: Event) => void`{lang="ts-type"}
+- [`onUpdateChecked?: (checked: boolean) => void`{lang="ts-type"}](#with-checkbox-items)
 - `children?: DropdownMenuItem[] | DropdownMenuItem[][]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
@@ -307,6 +309,40 @@ The `size` prop will not be proxied to the Button, you need to set it yourself.
 When using the same size, the DropdownMenu items will be perfectly aligned with the Button.
 ::
 
+### Modal
+
+Use the `modal` prop to control whether the DropdownMenu blocks interaction with outside content. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - ui.content
+external:
+  - items
+externalTypes:
+  - DropdownMenuItem[]
+props:
+  modal: false
+  items:
+    - label: Profile
+      icon: i-lucide-user
+    - label: Billing
+      icon: i-lucide-credit-card
+    - label: Settings
+      icon: i-lucide-cog
+  ui:
+    content: 'w-48'
+slots:
+  default: |
+
+    <UButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
+---
+
+:u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+::
+
 ### Disabled
 
 Use the `disabled` prop to disable the DropdownMenu.
@@ -432,9 +468,7 @@ export default defineAppConfig({
 
 ### Extract shortcuts
 
-When you have some items with `kbds` property (displaying some [Kbd](/docs/components/kbd)), you can easily make them work with the [defineShortcuts](/docs/composables/define-shortcuts) composable.
-
-Inside the `defineShortcuts` composable, there is an `extractShortcuts` utility that will extract the shortcuts recursively from the items and return an object that you can pass to `defineShortcuts`. It will automatically call the `select` function of the item when the shortcut is pressed.
+Use the [extractShortcuts](/docs/composables/extract-shortcuts) utility to automatically define shortcuts from menu items with a `kbds` property. It recursively extracts shortcuts and returns an object compatible with [defineShortcuts](/docs/composables/define-shortcuts).
 
 ```vue
 <script setup lang="ts">
@@ -472,7 +506,7 @@ defineShortcuts(extractShortcuts(items))
 ```
 
 ::note
-In this example, :kbd{value="meta"} :kbd{value="E"}, :kbd{value="meta"} :kbd{value="I"} and :kbd{value="meta"} :kbd{value="N"} would trigger the `select` function of the corresponding item.
+In this example, :kbd{value="meta"} :kbd{value="E" class="ms-px"}, :kbd{value="meta"} :kbd{value="I" class="ms-px"} and :kbd{value="meta"} :kbd{value="N" class="ms-px"} would trigger the `select` function of the corresponding item.
 ::
 
 ## API
