@@ -94,8 +94,8 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   content?: Omit<ComboboxContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ComboboxContentEmits>>
   /**
    * Display an arrow alongside the menu.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
-   * @IconifyIcon
    */
   arrow?: boolean | Omit<ComboboxArrowProps, 'as' | 'asChild'>
   /**
@@ -270,7 +270,7 @@ const { filterGroups } = useFilter()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'by'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
-const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps)
 const clearProps = computed(() => typeof props.clear === 'object' ? props.clear : {} as Partial<Omit<ButtonProps, LinkPropsKeys>>)
 
 const virtualizerProps = toRef(() => {

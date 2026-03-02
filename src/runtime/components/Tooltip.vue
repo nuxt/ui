@@ -20,6 +20,7 @@ export interface TooltipProps extends TooltipRootProps {
   content?: Omit<TooltipContentProps, 'as' | 'asChild'> & Partial<EmitsToProps<TooltipContentEmits>>
   /**
    * Display an arrow alongside the tooltip.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
   arrow?: boolean | Omit<TooltipArrowProps, 'as' | 'asChild'>
@@ -69,7 +70,7 @@ const uiProp = useComponentUI('tooltip', props)
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration', 'disableHoverableContent', 'disableClosingTrigger', 'ignoreNonKeyboardFocus'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as TooltipContentProps)
-const arrowProps = toRef(() => props.arrow as TooltipArrowProps)
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as TooltipArrowProps)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })({

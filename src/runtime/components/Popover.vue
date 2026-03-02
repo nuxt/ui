@@ -21,6 +21,7 @@ export interface PopoverProps<M extends PopoverMode = PopoverMode> extends Popov
   content?: Omit<PopoverContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<PopoverContentEmits>>
   /**
    * Display an arrow alongside the popover.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
   arrow?: boolean | Omit<PopoverArrowProps, 'as' | 'asChild'>
@@ -103,7 +104,7 @@ const contentEvents = computed(() => {
     pointerDownOutside
   }
 })
-const arrowProps = toRef(() => props.arrow as PopoverArrowProps)
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as PopoverArrowProps)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.popover || {}) })({

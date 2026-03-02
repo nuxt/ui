@@ -72,6 +72,7 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   content?: Omit<SelectContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<SelectContentEmits>>
   /**
    * Display an arrow alongside the menu.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
   arrow?: boolean | Omit<SelectArrowProps, 'as' | 'asChild'>
@@ -180,7 +181,7 @@ const uiProp = useComponentUI('select', props)
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
-const arrowProps = toRef(() => props.arrow as SelectArrowProps)
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as SelectArrowProps)
 
 const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)

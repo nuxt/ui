@@ -71,6 +71,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
   content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DropdownMenuContentEmits>>
   /**
    * Display an arrow alongside the menu.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
   arrow?: boolean | Omit<DropdownMenuArrowProps, 'as' | 'asChild'>
@@ -142,7 +143,7 @@ const uiProp = useComponentUI('dropdownMenu', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
-const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as DropdownMenuArrowProps)
 const getProxySlots = () => omit(slots, ['default'])
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })({
