@@ -29,6 +29,7 @@ describe('ScrollArea', () => {
     ['with type always', { props: { ...props, type: 'always' } }],
     ['with type scroll', { props: { ...props, type: 'scroll' } }],
     ['with type hover', { props: { ...props, type: 'hover' } }],
+    ['with type glimpse', { props: { ...props, type: 'glimpse' } }],
     ['with scrollHideDelay', { props: { ...props, type: 'scroll', scrollHideDelay: 1000 } }],
     ['with ui scrollbar', { props: { ...props, ui: { scrollbar: 'w-4' } } }],
     ['with ui thumb', { props: { ...props, ui: { thumb: 'bg-red-500' } } }],

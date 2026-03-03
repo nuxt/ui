@@ -269,6 +269,35 @@ exports[`ScrollArea > renders with type auto correctly 1`] = `
 </div>"
 `;
 
+exports[`ScrollArea > renders with type glimpse correctly 1`] = `
+"<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
+  <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">
+    <div style="min-width: fit-content;">
+      <div data-slot="viewport" class="relative flex flex-col">
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+        <div data-slot="item" class=""></div>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+    [data-reka-scroll-area-viewport] {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    [data-reka-scroll-area-viewport]::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <!---->
+  <!---->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`ScrollArea > renders with type hover correctly 1`] = `
 "<div dir="ltr" style="position: relative; --reka-scroll-area-corner-width: 0px; --reka-scroll-area-corner-height: 0px;" data-slot="root" data-orientation="vertical" class="overflow-hidden">
   <div data-reka-scroll-area-viewport="" style="overflow-x: scroll; overflow-y: scroll;" class="size-full" tabindex="0">

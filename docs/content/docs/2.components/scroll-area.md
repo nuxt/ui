@@ -243,7 +243,7 @@ This will give you access to the following:
 | `scrollTopLeft()`{lang="ts-type"} | `() => void`{lang="ts-type"} | Scroll the viewport to the top-left corner. |
 
 ::note
-The scrollbar appearance can be customized via the `ui` prop using the `scrollbar` and `thumb` slots.
+The scrollbar appearance can be customized via the `ui` prop using the `scrollbar`, `thumb`, and `corner` slots.
 ::
 
 ## Theme
