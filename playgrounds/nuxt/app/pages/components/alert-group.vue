@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import theme from '#build/ui/alert-group'
 import type { AlertProps } from '@nuxt/ui'
 
 const alertItems: AlertProps[] = [
