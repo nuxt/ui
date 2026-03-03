@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { AlertProps } from '@nuxt/ui'
+import { reactive } from 'vue'
 
 const alertItems: AlertProps[] = [
   {
@@ -34,7 +35,7 @@ const alertItems: AlertProps[] = [
   }
 ]
 
-const attrs = reactive({
+const attrs = reactive<Record<string, any>>({
   expand: [false],
   max: [5]
 })
