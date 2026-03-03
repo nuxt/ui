@@ -25,7 +25,7 @@ export interface TabsItem {
   slot?: string
   content?: string
   /** A unique value for the tab item. Defaults to the index. */
-  value?: string | number
+  value?: string | number | boolean
   disabled?: boolean
   class?: any
   ui?: Pick<Tabs['slots'], 'trigger' | 'leadingIcon' | 'leadingAvatar' | 'leadingAvatarSize' | 'label' | 'trailingBadge' | 'trailingBadgeSize' | 'content'>
