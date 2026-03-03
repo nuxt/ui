@@ -1,23 +1,33 @@
 <script lang="ts">
 import theme from '#build/ui/alert-group'
 import type { AppConfig } from '@nuxt/schema'
+import type { AlertProps } from '@nuxt/ui'
 import type { ComponentConfig } from '../types/tv'
 
 type AlertGroup = ComponentConfig<typeof theme, AppConfig, 'alertGroup'>
+
+export interface AlertGroupProps {
+  items: AlertProps[]
+  /**
+   * @defaultValue false
+   */
+  expand?: boolean
+  /**
+   * @defaultValue 5
+   */
+  max?: number
+  class?: any
+  ui?: AlertGroup['slots']
+}
 </script>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { AlertProps } from '@nuxt/ui'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<{
-  items: AlertProps[]
-  expand?: boolean
-  max?: number
-}>(), {
+const props = withDefaults(defineProps<AlertGroupProps>(), {
   expand: false,
   max: 5
 })
@@ -25,7 +35,8 @@ const props = withDefaults(defineProps<{
 const appConfig = useAppConfig() as AlertGroup['AppConfig']
 const uiProp = useComponentUI('alertGroup', props)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.alertGroup || {}) }))
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.alertGroup || {}) })({}))
 
 const hovered = ref(false)
 const expanded = computed(() => props.expand || hovered.value)
@@ -50,7 +61,7 @@ const expanded = computed(() => props.expand || hovered.value)
       :data-front="index === 0"
       :class="ui.items({ class: [uiProp?.items, props.class] })"
       :style="{
-        width: expanded ? '100%' : `${100 - index * 3}%`,
+        width: expanded ? '100%' : `${Math.max(0, 100 - index * 3)}%`,
         marginTop: expanded || index === 0 ? '0' : (index >= props.max ? '-51px' : '-33px'),
         zIndex: props.items.length - index,
         maxHeight: !expanded && index !== 0 ? '51px' : undefined

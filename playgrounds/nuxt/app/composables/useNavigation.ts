@@ -3,6 +3,7 @@ import { upperName } from '../utils'
 const components = [
   'accordion',
   'alert',
+  'alert-group',
   'auth-form',
   'avatar',
   'badge',
