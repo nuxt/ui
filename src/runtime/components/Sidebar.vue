@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/sidebar'
 import type { ButtonProps, DrawerProps, IconProps, ModalProps, SlideoverProps, LinkPropsKeys } from '../types'
@@ -75,16 +76,15 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
 }
 
 export interface SidebarSlots {
-  header(props: { state: SidebarState, open: boolean, close: () => void }): any
-  title(props?: {}): any
-  description(props?: {}): any
-  actions(props?: {}): any
-  close(props: { ui: Sidebar['ui'] }): any
-  body(props: { state: SidebarState, open: boolean, close: () => void }): any
-  default(props: { state: SidebarState, open: boolean, close: () => void }): any
-  footer(props: { state: SidebarState, open: boolean, close: () => void }): any
-  rail(props: { ui: Sidebar['ui'] }): any
-  content(props: { close: () => void }): any
+  header?(props: { state: SidebarState, open: boolean, close: () => void }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  close?(props: { ui: Sidebar['ui'] }): VNode[]
+  default?(props: { state: SidebarState, open: boolean, close: () => void }): VNode[]
+  footer?(props: { state: SidebarState, open: boolean, close: () => void }): VNode[]
+  rail?(props: { ui: Sidebar['ui'] }): VNode[]
+  content?(props: { close: () => void }): VNode[]
 }
 </script>
 
@@ -167,7 +167,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as Sidebar['AppConfig']
 const uiProp = useComponentUI('sidebar', props)
 
-const state = computed<SidebarState>(() => modelOpen.value ? 'expanded' : 'collapsed')
+const state = computed<SidebarState>(() => open.value ? 'expanded' : 'collapsed')
 
 // Close button only works when collapsible is not 'none'
 const canClose = computed(() => props.close && props.collapsible !== 'none')
@@ -241,9 +241,7 @@ const menuProps = toRef(() => defu(props.menu, {
       </div>
 
       <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
-        <slot name="body" :state="state" :open="open" :close="closeSidebar">
-          <slot :state="state" :open="open" :close="closeSidebar" />
-        </slot>
+        <slot :state="state" :open="open" :close="closeSidebar" />
       </div>
 
       <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
@@ -313,18 +311,52 @@ const menuProps = toRef(() => defu(props.menu, {
         overlay: ui.overlay({ class: uiProp?.overlay })
       }"
     >
-      <template v-if="!!slots.content" #content="contentData">
-        <slot name="content" v-bind="contentData" :close="closeSidebar" />
-      </template>
+      <template #content="contentData">
+        <slot name="content" v-bind="contentData" :close="closeSidebar">
+          <div v-if="hasHeader" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+            <slot name="header" :state="state" :open="open" :close="closeSidebar">
+              <div v-if="title || !!slots.title || description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+                <p v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
+                  <slot name="title">
+                    {{ title }}
+                  </slot>
+                </p>
 
-      <template #body>
-        <slot name="body" :state="'expanded'" :open="true" :close="closeSidebar">
-          <slot :state="'expanded'" :open="true" :close="closeSidebar" />
+                <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+                  <slot name="description">
+                    {{ description }}
+                  </slot>
+                </p>
+              </div>
+
+              <div v-if="!!slots.actions || canClose" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
+                <slot name="actions" />
+
+                <slot name="close" :ui="ui">
+                  <UButton
+                    v-if="canClose"
+                    :icon="closeIcon || appConfig.ui.icons.close"
+                    color="neutral"
+                    variant="ghost"
+                    :aria-label="t('sidebar.close')"
+                    v-bind="(typeof props.close === 'object' ? props.close : {})"
+                    data-slot="close"
+                    :class="ui.close({ class: uiProp?.close })"
+                    @click="closeSidebar"
+                  />
+                </slot>
+              </div>
+            </slot>
+          </div>
+
+          <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
+            <slot :state="state" :open="open" :close="closeSidebar" />
+          </div>
+
+          <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
+            <slot name="footer" :state="state" :open="open" :close="closeSidebar" />
+          </div>
         </slot>
-      </template>
-
-      <template v-if="!!slots.footer" #footer>
-        <slot name="footer" :state="'expanded'" :open="true" :close="closeSidebar" />
       </template>
     </Menu>
   </template>

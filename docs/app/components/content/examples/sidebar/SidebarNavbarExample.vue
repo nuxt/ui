@@ -19,16 +19,16 @@ const items: NavigationMenuItem[] = [{
 
 <template>
   <div class="flex flex-col flex-1">
-    <div class="h-(--ui-header-height) shrink-0 flex items-center gap-2 px-4 border-b border-default">
-      <UButton
-        icon="i-lucide-panel-left"
-        color="neutral"
-        variant="ghost"
-        @click="open = !open"
-      />
-
-      <span class="text-highlighted font-semibold">Dashboard</span>
-    </div>
+    <UHeader toggle-side="left" :ui="{ container: 'px-4!' }">
+      <template #toggle>
+        <UButton
+          icon="i-lucide-panel-left"
+          color="neutral"
+          variant="ghost"
+          @click="open = !open"
+        />
+      </template>
+    </UHeader>
 
     <div class="flex flex-1 min-h-0">
       <USidebar
@@ -39,17 +39,16 @@ const items: NavigationMenuItem[] = [{
           container: 'absolute top-(--ui-header-height) bottom-0 h-[calc(100%-var(--ui-header-height))]'
         }"
       >
-        <template #default="{ state }">
-          <UNavigationMenu
-            :collapsed="state === 'collapsed'"
-            :items="items"
-            orientation="vertical"
-            :ui="{ link: 'p-1.5' }"
-          />
-        </template>
+        <UNavigationMenu
+          :items="items"
+          orientation="vertical"
+          :ui="{ link: 'p-1.5 overflow-hidden' }"
+        />
       </USidebar>
 
-      <div class="flex-1" />
+      <div class="flex-1 p-4">
+        <USkeleton class="size-full animate-pulse" />
+      </div>
     </div>
   </div>
 </template>

@@ -87,14 +87,12 @@ function onSubmit() {
       rail
       :style="{ '--sidebar-width': '20rem' }"
     >
-      <template #body>
-        <UChatMessages
-          :messages="chat.messages"
-          :status="chat.status"
-          compact
-          class="px-0"
-        />
-      </template>
+      <UChatMessages
+        :messages="chat.messages"
+        :status="chat.status"
+        compact
+        class="px-0"
+      />
 
       <template #footer>
         <UChatPrompt

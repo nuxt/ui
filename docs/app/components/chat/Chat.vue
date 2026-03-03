@@ -229,7 +229,7 @@ defineShortcuts({
       </UTooltip>
     </template>
 
-    <template #body>
+    <template #default>
       <UTheme
         :ui="{
           prose: {

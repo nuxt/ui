@@ -29,18 +29,20 @@ function onSubmit() {
 <template>
   <div class="flex flex-1">
     <div class="flex-1 flex flex-col">
-      <div class="h-(--ui-header-height) shrink-0 flex items-center justify-end gap-2 px-4 border-b border-default">
-        <span class="font-semibold text-sm me-auto">Dashboard</span>
+      <UHeader>
+        <template #toggle>
+          <UButton
+            icon="i-lucide-panel-right"
+            color="neutral"
+            variant="ghost"
+            @click="open = !open"
+          />
+        </template>
+      </UHeader>
 
-        <UButton
-          icon="i-lucide-panel-right"
-          color="neutral"
-          variant="ghost"
-          @click="open = !open"
-        />
+      <div class="flex-1 p-4 sm:p-6 lg:p-8">
+        <USkeleton class="size-full animate-pulse" />
       </div>
-
-      <div class="flex-1" />
     </div>
 
     <USidebar
@@ -50,24 +52,21 @@ function onSubmit() {
       title="AI Chat"
       close
       :style="{ '--sidebar-width': '20rem' }"
-      :ui="{ footer: 'p-0' }"
+      :ui="{ container: 'h-full' }"
     >
-      <template #body>
-        <UChatMessages
-          :messages="chat.messages"
-          :status="chat.status"
-          compact
-          class="px-0"
-        />
-      </template>
+      <UChatMessages
+        :messages="chat.messages"
+        :status="chat.status"
+        compact
+        class="px-0"
+      />
 
       <template #footer>
         <UChatPrompt
           v-model="input"
           :error="chat.error"
-          variant="naked"
+          :autofocus="false"
           :ui="{ base: 'px-0' }"
-          class="px-4"
           @submit="onSubmit"
         >
           <UChatPromptSubmit :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />

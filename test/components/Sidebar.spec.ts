@@ -2,8 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Sidebar from '../../src/runtime/components/Sidebar.vue'
-import type { SidebarProps, SidebarSlots } from '../../src/runtime/components/Sidebar.vue'
-import ComponentRender from '../component-render'
+import { renderEach } from '../component-render'
 import theme from '#build/ui/sidebar'
 
 describe('Sidebar', () => {
@@ -11,7 +10,7 @@ describe('Sidebar', () => {
   const collapsibles = Object.keys(theme.variants.collapsible) as any
   const sides = Object.keys(theme.variants.side) as any
 
-  it.each([
+  renderEach(Sidebar, [
     // Props
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
     ...collapsibles.map((collapsible: string) => [`with collapsible ${collapsible}`, { props: { collapsible } }]),
@@ -29,14 +28,10 @@ describe('Sidebar', () => {
     // Slots
     ['with header slot', { slots: { header: () => 'Header slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }],
-    ['with body slot', { slots: { body: () => 'Body slot' } }],
     ['with actions slot', { slots: { actions: () => 'Actions slot' } }],
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }]
-  ])('renders %s correctly', async (_: string, options: { props?: SidebarProps, slots?: Partial<SidebarSlots> }) => {
-    const html = await ComponentRender(_, options, Sidebar)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Sidebar, {

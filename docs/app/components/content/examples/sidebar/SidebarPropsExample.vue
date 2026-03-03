@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+const props = withDefaults(defineProps<{
+  variant?: 'sidebar' | 'floating' | 'inset'
+  collapsible?: 'offcanvas' | 'icon' | 'none'
+  side?: 'left' | 'right'
+}>(), {
+  variant: 'sidebar',
+  collapsible: 'none',
+  side: 'left'
+})
+
 const open = ref(true)
 
 const items: NavigationMenuItem[] = [{
@@ -21,8 +31,10 @@ const items: NavigationMenuItem[] = [{
   <div class="flex flex-1">
     <USidebar
       v-model:open="open"
-      collapsible="icon"
-      :style="{ '--sidebar-width': '20rem' }"
+      :variant="props.variant"
+      :collapsible="props.collapsible"
+      :side="props.side"
+      title="Navigation"
     >
       <template #default="{ state }">
         <UNavigationMenu
@@ -34,7 +46,7 @@ const items: NavigationMenuItem[] = [{
       </template>
     </USidebar>
 
-    <div class="flex-1 flex flex-col">
+    <div class="flex-1 flex flex-col overflow-hidden lg:peer-data-[variant=inset]:my-2 lg:peer-data-[variant=floating]:my-2 lg:peer-data-[variant=inset]:ms-0 lg:peer-data-[variant=inset]:rounded-xl lg:peer-data-[variant=inset]:shadow-sm lg:peer-data-[variant=inset]:ring lg:peer-data-[variant=inset]:ring-default">
       <UHeader toggle-side="left" :ui="{ container: 'px-4!' }">
         <template #toggle>
           <UButton
