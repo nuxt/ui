@@ -5,6 +5,7 @@ links:
   - label: TanStack Table
     avatar:
       src: https://github.com/tanstack.png
+      loading: lazy
     to: https://tanstack.com/table/latest
   - label: GitHub
     icon: i-simple-icons-github
@@ -594,6 +595,10 @@ class: '!p-0'
 ---
 ::
 
+::note
+This example uses `useLazyFetch` with `server: false` to fetch data on the client without blocking the initial render. The loading state checks for both `pending` and `idle` status to display a loading indicator before and during the fetch.
+::
+
 ### With infinite scroll
 
 If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data  as the user scrolls.
@@ -609,6 +614,10 @@ overflowHidden: true
 name: 'table-infinite-scroll-example'
 class: '!p-0'
 ---
+::
+
+::note
+This example uses `useLazyFetch` with `server: false` to fetch data on the client without blocking the initial render. The loading state checks for both `pending` and `idle` status to display a loading indicator before and during the fetch. Additional pages are loaded as the user scrolls.
 ::
 
 ### With drag and drop

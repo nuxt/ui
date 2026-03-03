@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/breadcrumb'
 import type { AvatarProps, IconProps, LinkProps } from '../types'
@@ -43,17 +44,17 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
   ui?: Breadcrumb['slots']
 }
 
-type SlotProps<T extends BreadcrumbItem> = (props: { item: T, index: number, active?: boolean, ui: Breadcrumb['ui'] }) => any
+type SlotProps<T extends BreadcrumbItem> = (props: { item: T, index: number, active: boolean, ui: Breadcrumb['ui'] }) => VNode[]
 
 export type BreadcrumbSlots<T extends BreadcrumbItem = BreadcrumbItem> = {
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': (props: { item: T, index: number, active?: boolean }) => any
-  'item-trailing': (props: { item: T, index: number, active?: boolean }) => any
-  'separator': (props: { ui: Breadcrumb['ui'] }) => any
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: (props: { item: T, index: number, active: boolean }) => VNode[]
+  'item-trailing'?: (props: { item: T, index: number, active: boolean }) => VNode[]
+  'separator'?: (props: { ui: Breadcrumb['ui'] }) => VNode[]
 }
-& DynamicSlots<T, 'leading', { index: number, active?: boolean, ui: Breadcrumb['ui'] }>
-& DynamicSlots<T, 'label' | 'trailing', { index: number, active?: boolean }>
+& DynamicSlots<T, 'leading', { index: number, active: boolean, ui: Breadcrumb['ui'] }>
+& DynamicSlots<T, 'label' | 'trailing', { index: number, active: boolean }>
 
 </script>
 

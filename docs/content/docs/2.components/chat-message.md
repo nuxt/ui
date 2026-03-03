@@ -26,6 +26,7 @@ role: 'user'
 id: '1'
 avatar:
   src: 'https://github.com/benjamincanac.png'
+  loading: lazy
 ---
 ::
 
@@ -154,6 +155,7 @@ ignore:
 props:
   avatar:
     src: 'https://github.com/benjamincanac.png'
+    loading: lazy
   variant: 'soft'
   side: 'right'
   parts:

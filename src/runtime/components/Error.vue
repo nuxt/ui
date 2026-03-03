@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { NuxtError } from '#app'
 import theme from '#build/ui/error'
@@ -30,11 +31,11 @@ export interface ErrorProps {
 }
 
 export interface ErrorSlots {
-  default(props?: {}): any
-  statusCode(props?: {}): any
-  statusMessage(props?: {}): any
-  message(props?: {}): any
-  links(props?: {}): any
+  default?(props?: {}): VNode[]
+  statusCode?(props?: {}): VNode[]
+  statusMessage?(props?: {}): VNode[]
+  message?(props?: {}): VNode[]
+  links?(props?: {}): VNode[]
 }
 </script>
 

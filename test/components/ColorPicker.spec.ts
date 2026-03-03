@@ -1,9 +1,8 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import ColorPicker from '../../src/runtime/components/ColorPicker.vue'
-import type { ColorPickerProps } from '../../src/runtime/components/ColorPicker.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/color-picker'
 
 describe('ColorPicker', () => {
@@ -16,7 +15,7 @@ describe('ColorPicker', () => {
     ['cmyk', 'cmyk(100%, 0%, 45.08%, 24.31%)']
   ]
 
-  it.each([
+  renderEach(ColorPicker, [
     // Props
     ['with disabled', { props: { disabled: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
@@ -24,10 +23,7 @@ describe('ColorPicker', () => {
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-96' } }],
     ['with ui', { props: { ui: { picker: 'gap-8' } } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ColorPickerProps }) => {
-    const html = await ComponentRender(nameOrHtml, options, ColorPicker)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ColorPicker)

@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Ref, WatchOptions, ComponentPublicInstance } from 'vue'
+import type { Ref, WatchOptions, ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type {
   Cell,
@@ -210,18 +210,17 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   ui?: Table['slots']
 }
 
-type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => any>
-type DynamicFooterSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-footer`, (props: HeaderContext<T, unknown>) => any>
-type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => any>
+type DynamicHeaderFooterSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-header` | `${K extends string ? K : never}-footer` | (string & {}), (props: HeaderContext<T, unknown>) => VNode[]>
+type DynamicCellSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-cell` | (string & {}), (props: CellContext<T, unknown>) => VNode[]>
 
 export type TableSlots<T extends TableData = TableData> = {
-  'expanded': (props: { row: Row<T> }) => any
-  'empty': (props?: {}) => any
-  'loading': (props?: {}) => any
-  'caption': (props?: {}) => any
-  'body-top': (props?: {}) => any
-  'body-bottom': (props?: {}) => any
-} & DynamicHeaderSlots<T> & DynamicFooterSlots<T> & DynamicCellSlots<T>
+  'expanded'?: (props: { row: Row<T> }) => VNode[]
+  'empty'?: (props?: {}) => VNode[]
+  'loading'?: (props?: {}) => VNode[]
+  'caption'?: (props?: {}) => VNode[]
+  'body-top'?: (props?: {}) => VNode[]
+  'body-bottom'?: (props?: {}) => VNode[]
+} & DynamicHeaderFooterSlots<T> & DynamicCellSlots<T>
 
 </script>
 

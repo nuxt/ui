@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import PricingTable from '../../src/runtime/components/PricingTable.vue'
-import type { PricingTableProps, PricingTableSlots, PricingTableTier, PricingTableSection } from '../../src/runtime/components/PricingTable.vue'
-import ComponentRender from '../component-render'
+import type { PricingTableTier, PricingTableSection } from '../../src/runtime/components/PricingTable.vue'
 
 describe('PricingTable', () => {
   const tiers = [{
@@ -13,7 +13,7 @@ describe('PricingTable', () => {
     price: '$0',
     button: {
       label: 'Get started',
-      variant: 'subtle' as const
+      variant: 'subtle'
     }
   }, {
     id: 'pro' as const,
@@ -34,7 +34,7 @@ describe('PricingTable', () => {
     price: 'Custom',
     button: {
       label: 'Contact us',
-      variant: 'subtle' as const
+      variant: 'subtle'
     }
   }] satisfies PricingTableTier[]
 
@@ -63,7 +63,7 @@ describe('PricingTable', () => {
 
   const props = { tiers, sections }
 
-  it.each([
+  renderEach(PricingTable, [
     // Props
     ['with tiers and sections', { props }],
     ['with caption', { props: { ...props, caption: 'Caption' } }],
@@ -80,10 +80,7 @@ describe('PricingTable', () => {
     ['with tier-billing slot', { props, slots: { 'tier-billing': () => 'Tier billing slot' } }],
     ['with tier-discount slot', { props, slots: { 'tier-discount': () => 'Tier discount slot' } }],
     ['with tier-price slot', { props, slots: { 'tier-price': () => 'Tier price slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props: PricingTableProps, slots?: Partial<PricingTableSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PricingTable)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(PricingTable, {

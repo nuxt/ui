@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { PaginationRootProps, PaginationRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pagination'
 import type { ButtonProps, IconProps } from '../types'
@@ -81,12 +82,12 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
 export interface PaginationEmits extends PaginationRootEmits {}
 
 export interface PaginationSlots {
-  first(props?: {}): any
-  prev(props?: {}): any
-  next(props?: {}): any
-  last(props?: {}): any
-  ellipsis(props: { ui: Pagination['ui'] }): any
-  item(props: {
+  first?(props?: {}): VNode[]
+  prev?(props?: {}): VNode[]
+  next?(props?: {}): VNode[]
+  last?(props?: {}): VNode[]
+  ellipsis?(props: { ui: Pagination['ui'] }): VNode[]
+  item?(props: {
     page: number
     pageCount: number
     item: {
@@ -96,7 +97,7 @@ export interface PaginationSlots {
       value: number
     }
     index: number
-  }): any
+  }): VNode[]
 }
 </script>
 

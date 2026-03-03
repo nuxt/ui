@@ -1,8 +1,8 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, expect, test } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import type { ThemeProps, ThemeSlots } from '../../src/runtime/components/Theme.vue'
 import Theme from '../../src/runtime/components/Theme.vue'
-import ComponentRender from '../component-render'
+import { renderEach, componentRender } from '../component-render'
 import { h, ref, nextTick } from 'vue'
 import Button from '../../src/runtime/components/Button.vue'
 import Badge from '../../src/runtime/components/Badge.vue'
@@ -12,58 +12,60 @@ import Input from '../../src/runtime/components/Input.vue'
 type CaseOptions = { props?: ThemeProps, slots?: ThemeSlots }
 
 describe('Theme', () => {
-  it.each([
-    // Props
+  renderEach(
+    Theme,
     [
-      'with empty ui',
+    // Props
+      [
+        'with empty ui',
       {
         props: { ui: {} },
-        slots: { default: () => h(Button, { label: 'Button' }) }
+        slots: { default: () => [h(Button, { label: 'Button' })] }
       } satisfies CaseOptions,
       []
-    ],
-    [
-      'with theme applied to button base slot',
+      ],
+      [
+        'with theme applied to button base slot',
       {
         props: { ui: { button: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } },
-        slots: { default: () => h(Button, { label: 'Button' }) }
+        slots: { default: () => [h(Button, { label: 'Button' })] }
       } satisfies CaseOptions,
       ['px-[1.234rem]', 'text-[#ff0]']
-    ],
-    [
-      'with ui prop taking priority over theme',
+      ],
+      [
+        'with ui prop taking priority over theme',
       {
         props: { ui: { button: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } },
-        slots: { default: () => h(Button, { label: 'Button', ui: { base: 'px-[2.234rem]' } }) }
+        slots: { default: () => [h(Button, { label: 'Button', ui: { base: 'px-[2.234rem]' } })] }
       } satisfies CaseOptions,
       ['px-[2.234rem]']
-    ],
-    [
-      'with nested theme overriding outer theme',
+      ],
+      [
+        'with nested theme overriding outer theme',
       {
         props: { ui: { button: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } },
-        slots: { default: () => h(Theme, { ui: { button: { label: 'text-[#000]', base: 'px-[2.234rem]' } } }, () => h(Button, { label: 'Button' })) }
+        slots: { default: () => [h(Theme, { ui: { button: { label: 'text-[#000]', base: 'px-[2.234rem]' } } }, () => [h(Button, { label: 'Button' })])] }
       } satisfies CaseOptions,
       ['px-[2.234rem]', 'text-[#000]']
-    ],
-    [
-      'with theme applied to badge',
+      ],
+      [
+        'with theme applied to badge',
       {
         props: { ui: { badge: { base: 'rounded-[1.234rem]' } } },
-        slots: { default: () => h(Badge, { label: 'Badge' }) }
+        slots: { default: () => [h(Badge, { label: 'Badge' })] }
       } satisfies CaseOptions,
       ['rounded-[1.234rem]']
-    ],
-    [
-      'with theme applied to alert',
+      ],
+      [
+        'with theme applied to alert',
       {
         props: { ui: { alert: { root: 'border-[3px]' } } },
-        slots: { default: () => h(Alert, { title: 'Alert' }) }
+        slots: { default: () => [h(Alert, { title: 'Alert' })] }
       } satisfies CaseOptions,
       ['border-[3px]']
-    ],
-    [
-      'with theme applied to multiple component types',
+      ],
+      [
+        'with theme applied to multiple component types',
       {
         props: { ui: { button: { base: 'px-[1.234rem]' }, badge: { base: 'rounded-[1.234rem]' } } },
         slots: {
@@ -74,22 +76,24 @@ describe('Theme', () => {
         }
       } satisfies CaseOptions,
       ['px-[1.234rem]', 'rounded-[1.234rem]']
-    ],
-    [
-      'with theme not affecting unrelated component',
+      ],
+      [
+        'with theme not affecting unrelated component',
       {
         props: { ui: { badge: { base: 'rounded-[1.234rem]' } } },
-        slots: { default: () => h(Button, { label: 'Button' }) }
+        slots: { default: () => [h(Button, { label: 'Button' })] }
       } satisfies CaseOptions,
       []
-    ]
-  ])('renders %s correctly', async (nameOrHtml: string, options: CaseOptions, contains: string[] = []) => {
-    const html = await ComponentRender(nameOrHtml, options, Theme)
-    expect(html).toMatchSnapshot()
-    contains.forEach((c) => {
-      expect(html).toContain(c)
-    })
-  })
+      ]
+    ],
+    async (nameOrHtml, options, contains) => {
+      const html = await componentRender(nameOrHtml, options, Theme)
+      expect(html).toMatchSnapshot()
+      contains.forEach((c) => {
+        expect(html).toContain(c)
+      })
+    }
+  )
 
   test('applies theme classes to child component', async () => {
     const wrapper = await mountSuspended({

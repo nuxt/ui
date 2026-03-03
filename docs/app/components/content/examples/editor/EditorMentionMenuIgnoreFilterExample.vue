@@ -8,12 +8,13 @@ Type @ to mention someone. Results are fetched from an API as you type.`)
 const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
 
-const { data: items } = await useFetch('https://dummyjson.com/users/search?limit=10', {
+const { data: items } = useLazyFetch('https://dummyjson.com/users/search?limit=10', {
+  key: 'editor-mention-users-search',
   params: { q: searchTermDebounced },
   transform: (data: { users: { id: number, firstName: string, lastName: string, image: string }[] }) => {
-    return data.users?.map(user => ({ id: user.id, label: `${user.firstName} ${user.lastName}`, avatar: { src: user.image } })) || []
+    return data.users?.map(user => ({ id: user.id, label: `${user.firstName} ${user.lastName}`, avatar: { src: user.image, loading: 'lazy' as const } })) || []
   },
-  lazy: true
+  server: false
 })
 
 // SSR-safe function to append menus to body (avoids z-index issues in docs)
