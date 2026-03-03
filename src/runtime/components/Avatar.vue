@@ -79,12 +79,7 @@ const sizePx = computed(() => {
     if (!Number.isNaN(num)) return num * 4
   }
 
-  const sizeMap: Record<string, number> = {
-    '3xs': 16, '2xs': 20, 'xs': 24, 'sm': 28,
-    'md': 32, 'lg': 36, 'xl': 40, '2xl': 44, '3xl': 48
-  }
-
-  return sizeMap[size.value || 'md'] ?? 32
+  return null
 })
 
 const error = ref(false)
