@@ -67,7 +67,7 @@ defineOptions({ inheritAttrs: false })
 const props = defineProps<ContentSurroundProps<T>>()
 defineSlots<ContentSurroundSlots<T>>()
 
-const { dir, t } = useLocale()
+const { dir } = useLocale()
 const appConfig = useAppConfig() as ContentSurround['AppConfig']
 const uiProp = useComponentUI('contentSurround', props)
 
