@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Switch = ComponentConfig<typeof theme, AppConfig, 'switch'>
 
-export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface SwitchProps<T = boolean> extends Pick<SwitchRootProps<T>, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue' | 'trueValue' | 'falseValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -57,7 +57,7 @@ export interface SwitchSlots {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T = boolean">
 import { computed, useAttrs, useId } from 'vue'
 import { Primitive, SwitchRoot, SwitchThumb, useForwardProps, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
@@ -69,18 +69,18 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<SwitchProps>()
+const props = defineProps<SwitchProps<T>>()
 const slots = defineSlots<SwitchSlots>()
 const emits = defineEmits<SwitchEmits>()
 
-const modelValue = defineModel<boolean>({ default: undefined })
+const modelValue = defineModel<T>({ default: undefined })
 
 const appConfig = useAppConfig() as Switch['AppConfig']
 const uiProp = useComponentUI('switch', props)
 
-const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
+const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'trueValue', 'falseValue'))
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SwitchProps>(props)
+const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SwitchProps<T>>(props)
 const id = _id.value ?? useId()
 
 const attrs = useAttrs()

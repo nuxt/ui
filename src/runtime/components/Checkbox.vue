@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Checkbox = ComponentConfig<typeof theme, AppConfig, 'checkbox'>
 
-export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface CheckboxProps<T = boolean> extends Pick<CheckboxRootProps<T>, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue' | 'trueValue' | 'falseValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -60,7 +60,7 @@ export interface CheckboxSlots {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T = boolean">
 import { computed, useAttrs, useId } from 'vue'
 import { Primitive, CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
@@ -72,18 +72,18 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<CheckboxProps>()
+const props = defineProps<CheckboxProps<T>>()
 const slots = defineSlots<CheckboxSlots>()
 const emits = defineEmits<CheckboxEmits>()
 
-const modelValue = defineModel<boolean | 'indeterminate'>({ default: undefined })
+const modelValue = defineModel<T | 'indeterminate'>({ default: undefined })
 
 const appConfig = useAppConfig() as Checkbox['AppConfig']
 const uiProp = useComponentUI('checkbox', props)
 
-const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
+const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'trueValue', 'falseValue'))
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<CheckboxProps>(props)
+const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<CheckboxProps<T>>(props)
 const id = _id.value ?? useId()
 
 const attrs = useAttrs()
