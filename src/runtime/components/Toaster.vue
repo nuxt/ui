@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { ToastProviderProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toaster'
 import type { ComponentConfig } from '../types/tv'
@@ -37,7 +38,7 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
 }
 
 export interface ToasterSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 
 export default {
@@ -126,10 +127,11 @@ function getOffset(index: number) {
       :key="toast.id"
       ref="refs"
       :progress="progress"
-      v-bind="omit(toast, ['id', 'close'])"
+      v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated'])"
       :close="(toast.close as boolean)"
       :data-expanded="expanded"
       :data-front="!expanded && index === toasts.length - 1"
+      :data-pulsing="toast._duplicate ? (toast._duplicate % 2 === 0 ? 'even' : 'odd') : undefined"
       :style="{
         '--index': (index - toasts.length) + toasts.length,
         '--before': toasts.length - 1 - index,

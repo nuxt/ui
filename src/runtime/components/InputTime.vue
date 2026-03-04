@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, VNode } from 'vue'
 import type { TimeFieldRootProps, TimeFieldRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-time'
@@ -29,6 +29,8 @@ export interface InputTimeProps extends Omit<TimeFieldRootProps, 'as' | 'asChild
   size?: InputTime['variants']['size']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   autofocus?: boolean
   autofocusDelay?: number
   class?: any
@@ -42,9 +44,9 @@ export interface InputTimeEmits extends TimeFieldRootEmits {
 }
 
 export interface InputTimeSlots {
-  leading(props: { ui: InputTime['ui'] }): any
-  default(props: { ui: InputTime['ui'] }): any
-  trailing(props: { ui: InputTime['ui'] }): any
+  leading?(props: { ui: InputTime['ui'] }): VNode[]
+  default?(props: { ui: InputTime['ui'] }): VNode[]
+  trailing?(props: { ui: InputTime['ui'] }): VNode[]
 }
 </script>
 
@@ -70,7 +72,7 @@ const slots = defineSlots<InputTimeSlots>()
 const appConfig = useAppConfig() as InputTime['AppConfig']
 const uiProp = useComponentUI('inputTime', props)
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'color', 'variant', 'size', 'highlight', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'class', 'ui'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'class', 'ui'), emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputTimeProps>(props)
@@ -84,12 +86,18 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTime ||
   size: inputSize.value,
   loading: props.loading,
   highlight: highlight.value,
+  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value
 }))
 
 const inputsRef = ref<ComponentPublicInstance[]>([])
+
+function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  inputsRef.value[index] = el
+}
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -143,7 +151,7 @@ defineExpose({
     <TimeFieldInput
       v-for="(segment, index) in segments"
       :key="`${segment.part}-${index}`"
-      :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
+      :ref="el => setInputRef(index, el)"
       :part="segment.part"
       data-slot="segment"
       :class="ui.segment({ class: uiProp?.segment })"

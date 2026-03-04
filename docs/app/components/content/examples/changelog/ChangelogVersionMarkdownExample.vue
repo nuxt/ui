@@ -59,7 +59,8 @@ const version = {
     name: 'Benjamin Canac',
     avatar: {
       src: 'https://github.com/benjamincanac.png',
-      alt: 'Benjamin Canac'
+      alt: 'Benjamin Canac',
+      loading: 'lazy' as const
     },
     to: 'https://github.com/benjamincanac',
     target: '_blank'

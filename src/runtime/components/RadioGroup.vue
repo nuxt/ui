@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { RadioGroupRootProps, RadioGroupRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/radio-group'
 import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'
@@ -78,12 +79,12 @@ export type RadioGroupEmits<T extends RadioGroupItem[] = RadioGroupItem[], VK ex
 
 type NormalizeItem<T extends RadioGroupItem> = Exclude<T & { id: string }, RadioGroupValue>
 
-type SlotProps<T extends RadioGroupItem> = (props: { item: NormalizeItem<T>, modelValue?: RadioGroupValue }) => any
+type SlotProps<T extends RadioGroupItem> = (props: { item: NormalizeItem<T>, modelValue: RadioGroupValue }) => VNode[]
 
 export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> {
-  legend(props?: {}): any
-  label: SlotProps<T[number]>
-  description: SlotProps<T[number]>
+  legend?(props?: {}): VNode[]
+  label?: SlotProps<T[number]>
+  description?: SlotProps<T[number]>
 }
 </script>
 

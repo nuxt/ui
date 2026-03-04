@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PropType } from 'vue'
+import type { PropType, VNode } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-surround'
@@ -41,13 +41,13 @@ export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSur
   ui?: ContentSurround['slots']
 }
 
-type SlotProps<T> = (props: { link: T, ui: ContentSurround['ui'] }) => any
+type SlotProps<T> = (props: { link: T, ui: ContentSurround['ui'] }) => VNode[]
 
 export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSurroundLink> {
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-title': SlotProps<T>
-  'link-description': SlotProps<T>
+  'link'?: SlotProps<T>
+  'link-leading'?: SlotProps<T>
+  'link-title'?: SlotProps<T>
+  'link-description'?: SlotProps<T>
 }
 </script>
 
@@ -57,6 +57,7 @@ import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../../composables/useComponentUI'
+import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
 import ULink from '../Link.vue'
 import UIcon from '../Icon.vue'
@@ -66,6 +67,7 @@ defineOptions({ inheritAttrs: false })
 const props = defineProps<ContentSurroundProps<T>>()
 defineSlots<ContentSurroundSlots<T>>()
 
+const { dir } = useLocale()
 const appConfig = useAppConfig() as ContentSurround['AppConfig']
 const uiProp = useComponentUI('contentSurround', props)
 
@@ -79,6 +81,9 @@ const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: 
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSurround || {}) })())
+
+const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowRight : appConfig.ui.icons.arrowLeft))
+const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowLeft : appConfig.ui.icons.arrowRight))
 </script>
 
 <template>
@@ -108,7 +113,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSurro
   </DefineLinkTemplate>
 
   <Primitive v-if="surround" :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <ReuseLinkTemplate :link="surround[0]" :icon="prevIcon || appConfig.ui.icons.arrowLeft" direction="left" />
-    <ReuseLinkTemplate :link="surround[1]" :icon="nextIcon || appConfig.ui.icons.arrowRight" direction="right" />
+    <ReuseLinkTemplate :link="surround[0]" :icon="prevIcon" direction="left" />
+    <ReuseLinkTemplate :link="surround[1]" :icon="nextIcon" direction="right" />
   </Primitive>
 </template>

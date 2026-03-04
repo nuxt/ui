@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, VNode } from 'vue'
 import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateValue, SegmentPart } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -35,6 +35,8 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
   size?: InputDate['variants']['size']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   autofocus?: boolean
   autofocusDelay?: number
   /**
@@ -59,10 +61,10 @@ export interface InputDateEmits<R extends boolean> extends Omit<DateFieldRootEmi
 }
 
 export interface InputDateSlots {
-  leading(props: { ui: InputDate['ui'] }): any
-  default(props: { ui: InputDate['ui'] }): any
-  trailing(props: { ui: InputDate['ui'] }): any
-  separator(props: { ui: InputDate['ui'] }): any
+  leading?(props: { ui: InputDate['ui'] }): VNode[]
+  default?(props: { ui: InputDate['ui'] }): VNode[]
+  trailing?(props: { ui: InputDate['ui'] }): VNode[]
+  separator?(props: { ui: InputDate['ui'] }): VNode[]
 }
 </script>
 
@@ -91,7 +93,7 @@ const slots = defineSlots<InputDateSlots>()
 const appConfig = useAppConfig() as InputDate['AppConfig']
 const uiProp = useComponentUI('inputDate', props)
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputDateProps<R>>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
@@ -108,6 +110,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputDate ||
   variant: props.variant,
   size: inputSize.value,
   highlight: highlight.value,
+  fixed: props.fixed,
   loading: props.loading,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
@@ -115,6 +118,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputDate ||
 }))
 
 const inputsRef = ref<ComponentPublicInstance[]>([])
+
+function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  inputsRef.value[index] = el
+}
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -159,7 +167,7 @@ defineExpose({
     <DateField.Input
       v-for="(segment, index) in segments"
       :key="`${segment.part}-${index}`"
-      :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
+      :ref="el => setInputRef(index, el)"
       :type="type"
       :part="segment.part"
       data-slot="segment"

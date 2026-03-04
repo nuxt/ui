@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { TagsInputRootProps, TagsInputRootEmits, AcceptableInputValue } from 'reka-ui'
 import theme from '#build/ui/input-tags'
@@ -43,6 +44,8 @@ export interface InputTagsProps<T extends InputTagItem = InputTagItem> extends P
   deleteIcon?: IconProps['name']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   class?: any
   ui?: InputTags['slots']
 }
@@ -53,14 +56,14 @@ export interface InputTagsEmits<T extends InputTagItem> extends TagsInputRootEmi
   focus: [event: FocusEvent]
 }
 
-type SlotProps<T extends InputTagItem> = (props: { item: T, index: number, ui: InputTags['ui'] }) => any
+type SlotProps<T extends InputTagItem> = (props: { item: T, index: number, ui: InputTags['ui'] }) => VNode[]
 
 export interface InputTagsSlots<T extends InputTagItem = InputTagItem> {
-  'leading'(props: { ui: InputTags['ui'] }): any
-  'default'(props: { ui: InputTags['ui'] }): any
-  'trailing'(props: { ui: InputTags['ui'] }): any
-  'item-text': SlotProps<T>
-  'item-delete': SlotProps<T>
+  'leading'?(props: { ui: InputTags['ui'] }): VNode[]
+  'default'?(props: { ui: InputTags['ui'] }): VNode[]
+  'trailing'?(props: { ui: InputTags['ui'] }): VNode[]
+  'item-text'?: SlotProps<T>
+  'item-delete'?: SlotProps<T>
 }
 </script>
 
@@ -103,6 +106,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTags ||
   size: inputSize?.value,
   loading: props.loading,
   highlight: highlight.value,
+  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value

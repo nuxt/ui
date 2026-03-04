@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Ref, WatchOptions, ComponentPublicInstance } from 'vue'
+import type { Ref, WatchOptions, ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type {
   Cell,
@@ -210,29 +210,28 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   ui?: Table['slots']
 }
 
-type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => any>
-type DynamicFooterSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-footer`, (props: HeaderContext<T, unknown>) => any>
-type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => any>
+type DynamicHeaderFooterSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-header` | `${K extends string ? K : never}-footer` | (string & {}), (props: HeaderContext<T, unknown>) => VNode[]>
+type DynamicCellSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-cell` | (string & {}), (props: CellContext<T, unknown>) => VNode[]>
 
 export type TableSlots<T extends TableData = TableData> = {
-  'expanded': (props: { row: Row<T> }) => any
-  'empty': (props?: {}) => any
-  'loading': (props?: {}) => any
-  'caption': (props?: {}) => any
-  'body-top': (props?: {}) => any
-  'body-bottom': (props?: {}) => any
-} & DynamicHeaderSlots<T> & DynamicFooterSlots<T> & DynamicCellSlots<T>
+  'expanded'?: (props: { row: Row<T> }) => VNode[]
+  'empty'?: (props?: {}) => VNode[]
+  'loading'?: (props?: {}) => VNode[]
+  'caption'?: (props?: {}) => VNode[]
+  'body-top'?: (props?: {}) => VNode[]
+  'body-bottom'?: (props?: {}) => VNode[]
+} & DynamicHeaderFooterSlots<T> & DynamicCellSlots<T>
 
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { ref, computed, useTemplateRef, watch, toRef } from 'vue'
+import { computed, useTemplateRef, watch, toRef } from 'vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
 import { useVirtualizer } from '@tanstack/vue-virtual'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { reactivePick, createReusableTemplate, createRef } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
@@ -252,7 +251,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as Table['AppConfig']
 const uiProp = useComponentUI('table', props)
 
-const data = ref(props.data ?? []) as Ref<T[]>
+const data = createRef(props.data ?? [], props.watchOptions?.deep !== false)
 const meta = computed(() => props.meta ?? {})
 const columns = computed<TableColumn<T>[]>(() => processColumns(props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) }))))
 

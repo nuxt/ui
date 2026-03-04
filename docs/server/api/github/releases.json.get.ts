@@ -12,7 +12,7 @@ export default defineCachedEventHandler(async () => {
     repo: 'ui'
   })
 
-  return releases
+  return releases.filter(r => !r.tag_name.startsWith('v2'))
 }, {
   maxAge: 60 * 60, // 1 hour
   getKey: () => 'releases'

@@ -1,10 +1,11 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
 import type { InputHTMLAttributes } from '../types/html'
-import type { ModelModifiers } from '../types/input'
+import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { AcceptableValue } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -12,7 +13,7 @@ type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
 
 export type InputValue = AcceptableValue
 
-export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'type' | 'placeholder' | 'required' | 'autocomplete' | 'autofocus' | 'disabled'> {
+export interface InputProps<T extends InputValue = InputValue, Mod extends ModelModifiers = ModelModifiers> extends UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'type' | 'placeholder' | 'required' | 'autocomplete' | 'autofocus' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -42,27 +43,29 @@ export interface InputProps<T extends InputValue = InputValue> extends UseCompon
   disabled?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  modelValue?: T
-  defaultValue?: T
-  modelModifiers?: ModelModifiers<T>
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
+  modelValue?: ApplyModifiers<T, Mod>
+  defaultValue?: ApplyModifiers<T, Mod>
+  modelModifiers?: Mod
   class?: any
   ui?: Input['slots']
 }
 
-export interface InputEmits<T extends InputValue = InputValue> {
-  'update:modelValue': [value: T]
+export interface InputEmits<T extends InputValue = InputValue, Mod extends ModelModifiers = ModelModifiers> {
+  'update:modelValue': [value: ApplyModifiers<T, Mod>]
   'blur': [event: FocusEvent]
   'change': [event: Event]
 }
 
 export interface InputSlots {
-  leading(props: { ui: Input['ui'] }): any
-  default(props: { ui: Input['ui'] }): any
-  trailing(props: { ui: Input['ui'] }): any
+  leading?(props: { ui: Input['ui'] }): VNode[]
+  default?(props: { ui: Input['ui'] }): VNode[]
+  trailing?(props: { ui: Input['ui'] }): VNode[]
 }
 </script>
 
-<script setup lang="ts" generic="T extends InputValue">
+<script setup lang="ts" generic="T extends InputValue, Mod extends ModelModifiers">
 import { useTemplateRef, computed, onMounted } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
@@ -78,15 +81,15 @@ import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<InputProps<T>>(), {
+const props = withDefaults(defineProps<InputProps<T, Mod>>(), {
   type: 'text',
   autocomplete: 'off',
   autofocusDelay: 0
 })
-const emits = defineEmits<InputEmits<T>>()
+const emits = defineEmits<InputEmits<T, Mod>>()
 const slots = defineSlots<InputSlots>()
 
-const modelValue = useVModel<InputProps<T>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
+const modelValue = useVModel<InputProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
 
 const appConfig = useAppConfig() as Input['AppConfig']
 const uiProp = useComponentUI('input', props)
@@ -104,6 +107,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {})
   size: inputSize?.value,
   loading: props.loading,
   highlight: highlight.value,
+  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value
@@ -113,7 +117,7 @@ const inputRef = useTemplateRef('inputRef')
 
 // Custom function to handle the v-model properties
 function updateInput(value: string | null | undefined) {
-  if (props.modelModifiers?.trim) {
+  if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
     value = value?.trim() ?? null
   }
 
@@ -125,11 +129,11 @@ function updateInput(value: string | null | undefined) {
     value ||= null
   }
 
-  if (props.modelModifiers?.optional) {
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
     value ||= undefined
   }
 
-  modelValue.value = value as T
+  modelValue.value = value as ApplyModifiers<T, Mod>
   emitFormInput()
 }
 

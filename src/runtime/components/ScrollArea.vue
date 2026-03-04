@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ComponentPublicInstance, CSSProperties } from 'vue'
+import type { ComponentPublicInstance, CSSProperties, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { VirtualItem, VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '#build/ui/scroll-area'
@@ -27,6 +27,13 @@ export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
    * @defaultValue undefined
    */
   lanes?: number
+  /**
+   * Skip per-item DOM measurement for uniform-height items.
+   * When `true`, uses `estimateSize` only — significantly improving performance for uniform items.
+   * When `false` (default), measures each item for variable-height layouts (e.g., masonry).
+   * @defaultValue false
+   */
+  skipMeasurement?: boolean
 }
 
 export type ScrollAreaItem = any
@@ -57,11 +64,11 @@ export interface ScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
 }
 
 export interface ScrollAreaSlots<T extends ScrollAreaItem = ScrollAreaItem> {
-  default(
+  default?(
     props:
       | { item: T, index: number, virtualItem?: VirtualItem }
-      | Record<string, never>,
-  ): any
+      | { item: T, index: 0 },
+  ): VNode[]
 }
 
 export interface ScrollAreaEmits {
@@ -74,7 +81,7 @@ export interface ScrollAreaEmits {
 </script>
 
 <script setup lang="ts" generic="T extends ScrollAreaItem">
-import { computed, toRef, useTemplateRef, watch } from 'vue'
+import { computed, onMounted, onUnmounted, toRef, useTemplateRef, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useVirtualizer } from '@tanstack/vue-virtual'
@@ -120,6 +127,10 @@ const virtualizerProps = toRef(() => {
 const lanes = computed(() => {
   const value = virtualizerProps.value.lanes
   return typeof value === 'number' ? value : undefined
+})
+
+const skipMeasurement = computed(() => {
+  return typeof props.virtualize === 'object' && props.virtualize.skipMeasurement === true
 })
 
 const virtualizer = !!props.virtualize && useVirtualizer({
@@ -194,15 +205,36 @@ function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
   }
 }
 
-// Remeasure when lanes change
-watch(lanes, () => {
+// Recalculate layout on container resize (e.g. estimateSize depends on lane width)
+let resizeObserver: ResizeObserver | null = null
+let rafId: number | null = null
+
+onMounted(() => {
   if (virtualizer) {
-    virtualizer.value.measure()
+    const el = rootRef.value?.$el
+    if (el) {
+      resizeObserver = new ResizeObserver(() => {
+        if (rafId !== null) return
+        rafId = requestAnimationFrame(() => {
+          rafId = null
+          virtualizer.value.measure()
+        })
+      })
+      resizeObserver.observe(el)
+    }
   }
-}, { flush: 'sync' })
+})
+
+onUnmounted(() => {
+  if (rafId !== null) {
+    cancelAnimationFrame(rafId)
+    rafId = null
+  }
+  resizeObserver?.disconnect()
+})
 
 function measureElement(el: Element | ComponentPublicInstance | null) {
-  if (el && virtualizer) {
+  if (el && virtualizer && !skipMeasurement.value) {
     const element = el instanceof Element ? el : (el as ComponentPublicInstance).$el as Element
     virtualizer.value.measureElement(element)
   }
@@ -266,7 +298,7 @@ defineExpose({
 
     <template v-else>
       <div data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
-        <template v-if="items?.length">
+        <template v-if="items">
           <div
             v-for="(item, index) in items"
             :key="getItemKey(item, index)"
@@ -278,7 +310,7 @@ defineExpose({
         </template>
 
         <template v-else>
-          <slot />
+          <slot :item="({} as T)" :index="0" />
         </template>
       </div>
     </template>

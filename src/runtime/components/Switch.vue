@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { SwitchRootProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/switch'
 import type { IconProps } from '../types'
@@ -51,13 +52,13 @@ export type SwitchEmits = {
 }
 
 export interface SwitchSlots {
-  label(props: { label?: string }): any
-  description(props: { description?: string }): any
+  label?(props: { label: string | undefined }): VNode[]
+  description?(props: { description: string | undefined }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
-import { computed, useId } from 'vue'
+import { computed, useAttrs, useId } from 'vue'
 import { Primitive, SwitchRoot, SwitchThumb, useForwardProps, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -82,6 +83,13 @@ const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defa
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SwitchProps>(props)
 const id = _id.value ?? useId()
 
+const attrs = useAttrs()
+// Omit `data-state` to prevent conflicts with parent components (e.g. TooltipTrigger)
+const forwardedAttrs = computed(() => {
+  const { 'data-state': _, ...rest } = attrs
+  return rest
+})
+
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}) })({
   size: size.value,
   color: color.value,
@@ -104,7 +112,7 @@ function onUpdate(value: any) {
     <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
       <SwitchRoot
         :id="id"
-        v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
+        v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
         v-model="modelValue"
         :name="name"
         :disabled="disabled || loading"

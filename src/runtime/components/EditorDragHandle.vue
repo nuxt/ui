@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Placement, Strategy } from '@floating-ui/dom'
 import type { Editor, JSONContent } from '@tiptap/vue-3'
@@ -35,7 +36,7 @@ export interface EditorDragHandleProps extends Omit<DragHandleProps, 'editor' | 
 }
 
 export interface EditorDragHandleSlots {
-  default(props: { ui: EditorDragHandle['ui'], onClick: () => { node: JSONContent, pos: number } | undefined }): any
+  default?(props: { ui: EditorDragHandle['ui'], onClick: () => { node: JSONContent, pos: number } | undefined }): VNode[]
 }
 
 export interface EditorDragHandleEmits {
