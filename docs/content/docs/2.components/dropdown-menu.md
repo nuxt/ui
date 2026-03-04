@@ -100,7 +100,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `onSelect?: (e: Event) => void`{lang="ts-type"}
 - [`onUpdateChecked?: (checked: boolean) => void`{lang="ts-type"}](#with-checkbox-items)
 - `children?: DropdownMenuItem[] | DropdownMenuItem[][]`{lang="ts-type"}
-- [`filter?: boolean | InputProps`{lang="ts-type"}](#with-filtered-items)
+- [`filter?: boolean | InputProps`{lang="ts-type"}](#with-filter-items)
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
 
@@ -284,7 +284,7 @@ Use the `ignore-filter` prop to disable the internal search and use your own sea
 Use the `filter-fields` prop to specify which fields to filter by. By default, it uses the `labelKey` prop.
 ::
 
-::tip{to="#with-filtered-items"}
+::tip{to="#with-filter-items"}
 You can also enable the filter on specific sub-menus using the `filter` field on items with `children`.
 ::
 

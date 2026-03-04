@@ -108,7 +108,7 @@ const filteredGroups = computed(() => {
     return groups.value
   }
 
-  const fields = Array.isArray(props.filterFields) ? props.filterFields : [props.labelKey] as string[]
+  const fields = Array.isArray(props.filterFields) && props.filterFields.length ? props.filterFields : [props.labelKey] as string[]
 
   return filterGroups(groups.value, searchTerm.value, {
     fields,
