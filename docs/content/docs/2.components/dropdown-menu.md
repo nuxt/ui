@@ -231,6 +231,50 @@ slots:
 :u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
+### Filter
+
+Use the `filter` prop to display a filter input inside the DropdownMenu. Defaults to `false`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - ui.content
+external:
+  - items
+externalTypes:
+  - DropdownMenuItem[]
+props:
+  filter: true
+  items:
+    - label: Profile
+      icon: i-lucide-user
+    - label: Billing
+      icon: i-lucide-credit-card
+    - label: Settings
+      icon: i-lucide-cog
+    - label: Team
+      icon: i-lucide-users
+    - label: Invite users
+      icon: i-lucide-user-plus
+    - label: New team
+      icon: i-lucide-plus
+  ui:
+    content: 'w-48'
+slots:
+  default: |
+
+    <UButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
+---
+
+:u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+::
+
+::tip
+Use the `filter-fields` prop to specify which fields to filter by. By default, it uses the `labelKey` prop.
+::
+
 ### Arrow
 
 Use the `arrow` prop to display an arrow on the DropdownMenu.
