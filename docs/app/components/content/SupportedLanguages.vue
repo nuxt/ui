@@ -80,8 +80,7 @@ function getEmojiFlag(locale: string): string {
 
           <div class="text-sm">
             <div class="font-semibold">{{ locale.name }}</div>
-            <div class="mt-1">Code: <ProseCode class="text-xs">{{ locale.code }}</ProseCode>
-            </div>
+            <div class="mt-1">Code: <ProseCode class="text-xs">{{ locale.code }}</ProseCode></div>
           </div>
         </div>
       </div>
@@ -92,7 +91,6 @@ function getEmojiFlag(locale: string): string {
     </ProseNote>
     <ProseTip>
       You can use the <ProseCode>nuxt-ui</ProseCode> CLI to create a new locale:
-
       <ProsePre language="bash">nuxt-ui make locale --code "en" --name "English"</ProsePre>
     </ProseTip>
   </div>
