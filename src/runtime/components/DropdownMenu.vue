@@ -194,6 +194,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
+      :size="size"
       :filter="filter"
       :filter-fields="filterFields"
       :ignore-filter="ignoreFilter"

@@ -192,6 +192,7 @@ Use the `content` prop to control how the DropdownMenu content is rendered, like
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -236,17 +237,12 @@ slots:
 
 Use the `filter` prop to display a filter input inside the DropdownMenu. Defaults to `false`.
 
-::note{to="#with-ignore-filter"}
-Use the `ignore-filter` prop to disable the internal search and use your own search logic.
-::
-
-::note{to="#with-filter-fields"}
-Use the `filter-fields` prop to specify which fields to filter by. By default, it uses the `labelKey` prop.
-::
+You can pass any property from the [Input](/docs/components/input) component to customize it.
 
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -280,6 +276,14 @@ slots:
 :u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
+::note{to="#with-ignore-filter"}
+Use the `ignore-filter` prop to disable the internal search and use your own search logic.
+::
+
+::note{to="#with-filter-fields"}
+Use the `filter-fields` prop to specify which fields to filter by. By default, it uses the `labelKey` prop.
+::
+
 ::tip{to="#with-filtered-items"}
 You can also enable the filter on specific sub-menus using the `filter` field on items with `children`.
 ::
@@ -291,6 +295,7 @@ Use the `arrow` prop to display an arrow on the DropdownMenu.
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - arrow
   - items
@@ -326,6 +331,7 @@ Use the `size` prop to control the size of the DropdownMenu.
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - content.align
@@ -371,6 +377,7 @@ Use the `modal` prop to control whether the DropdownMenu blocks interaction with
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -405,6 +412,7 @@ Use the `disabled` prop to disable the DropdownMenu.
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -455,16 +463,18 @@ You can use the `color` property to highlight certain items with a color.
 
 ::component-example
 ---
+collapse: true
 name: 'dropdown-menu-color-items-example'
 ---
 ::
 
-### With filtered items :badge{label="Soon" class="align-text-top"}
+### With filter items :badge{label="Soon" class="align-text-top"}
 
 You can use the `filter` property on items with `children` to display a filter input inside the sub-menu.
 
 ::component-example
 ---
+collapse: true
 name: 'dropdown-menu-filter-items-example'
 ---
 ::
@@ -475,6 +485,7 @@ You can control the open state by using the `default-open` prop or the `v-model:
 
 ::component-example
 ---
+collapse: true
 name: 'dropdown-menu-open-example'
 ---
 ::
@@ -496,6 +507,7 @@ You will have access to the following slots:
 
 ::component-example
 ---
+collapse: true
 name: 'dropdown-menu-custom-slot-example'
 ---
 ::
@@ -510,9 +522,37 @@ You can use the `slot` property with a `#{{ slot }}-trailing` slot to render a [
 
 ::component-example
 ---
+collapse: true
 name: 'dropdown-menu-switch-items-example'
 ---
 ::
+
+### With ignore filter :badge{label="Soon" class="align-text-top"}
+
+When using the `filter` prop, you can set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
+
+::component-example
+---
+collapse: true
+name: 'dropdown-menu-ignore-filter-example'
+---
+::
+
+::note
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+::
+
+### With filter fields :badge{label="Soon" class="align-text-top"}
+
+When using the `filter` prop, you can set the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
+
+::component-example
+---
+collapse: true
+name: 'dropdown-menu-filter-fields-example'
+---
+::
+
 
 ### With trigger content width
 
@@ -539,32 +579,6 @@ export default defineAppConfig({
   }
 })
 ```
-::
-
-### With ignore filter :badge{label="Soon" class="align-text-top"}
-
-Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
-
-::component-example
----
-collapse: true
-name: 'dropdown-menu-ignore-filter-example'
----
-::
-
-::note
-This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
-::
-
-### With filter fields :badge{label="Soon" class="align-text-top"}
-
-Use the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
-
-::component-example
----
-collapse: true
-name: 'dropdown-menu-filter-fields-example'
----
 ::
 
 ### Extract shortcuts

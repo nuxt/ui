@@ -28,6 +28,7 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
    * @IconifyIcon
    */
   externalIcon?: boolean | IconProps['name']
+  size?: DropdownMenu['variants']['size']
   filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   filterFields?: string[]
   ignoreFilter?: boolean
@@ -89,10 +90,10 @@ const searchTerm = computed({
   }
 })
 
-const filterProps = toRef(() => defu(props.filter, { placeholder: t('dropdownMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+const inputProps = toRef(() => defu(props.filter, { placeholder: t('dropdownMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'filter', 'filterFields', 'ignoreFilter', 'searchTerm', 'class', 'ui', 'uiOverride'), emits)
+const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'size', 'filter', 'filterFields', 'ignoreFilter', 'searchTerm', 'class', 'ui', 'uiOverride'), emits)
 const getProxySlots = () => omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
@@ -163,9 +164,10 @@ const hasFilteredItems = computed(() => filteredGroups.value.some(group => group
         <UInput
           autofocus
           autocomplete="off"
-          v-bind="filterProps"
-          data-slot="filter"
-          :class="ui.filter({ class: uiOverride?.filter })"
+          :size="size"
+          v-bind="inputProps"
+          data-slot="input"
+          :class="ui.input({ class: uiOverride?.input })"
           @change.stop
         />
       </DropdownMenu.Filter>
