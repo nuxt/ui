@@ -32,7 +32,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   checked?: boolean
   open?: boolean
   defaultOpen?: boolean
-  input?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   children?: ArrayOrNested<DropdownMenuItem>
   onSelect?: (e: Event) => void
   onUpdateChecked?: (checked: boolean) => void
@@ -93,12 +93,12 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
    */
   descriptionKey?: GetItemKeys<T>
   /**
-   * Whether to display the input or not.
+   * Whether to display a filter input or not.
    * Can be an object to pass additional props to the input.
    * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
    * @defaultValue false
    */
-  input?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   /**
    * The fields to filter by.
    * @defaultValue [labelKey]
@@ -154,7 +154,7 @@ const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
   externalIcon: true,
   labelKey: 'label',
   descriptionKey: 'description',
-  input: false,
+  filter: false,
   ignoreFilter: false
 })
 const emits = defineEmits<DropdownMenuEmits>()
@@ -194,7 +194,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
-      :input="input"
+      :filter="filter"
       :filter-fields="filterFields"
       :ignore-filter="ignoreFilter"
     >

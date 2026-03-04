@@ -28,7 +28,7 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
    * @IconifyIcon
    */
   externalIcon?: boolean | IconProps['name']
-  input?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   filterFields?: string[]
   ignoreFilter?: boolean
   searchTerm?: string
@@ -89,24 +89,21 @@ const searchTerm = computed({
   }
 })
 
-const inputProps = toRef(() => defu(props.input, { placeholder: t('dropdownMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+const filterProps = toRef(() => defu(props.filter, { placeholder: t('dropdownMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'input', 'filterFields', 'ignoreFilter', 'searchTerm', 'class', 'ui', 'uiOverride'), emits)
+const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'filter', 'filterFields', 'ignoreFilter', 'searchTerm', 'class', 'ui', 'uiOverride'), emits)
 const getProxySlots = () => omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
 
 const childrenIcon = computed(() => dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight)
-const groups = computed<DropdownMenuItem[][]>(() =>
-  props.items?.length
-    ? isArrayOfArray(props.items)
-      ? props.items
-      : [props.items]
-    : []
-)
+const groups = computed(() => {
+  if (!props.items?.length) return [] as DropdownMenuItem[][]
+  return (isArrayOfArray(props.items) ? props.items : [props.items]) as DropdownMenuItem[][]
+})
 const filteredGroups = computed(() => {
-  if (!props.input || props.ignoreFilter || !searchTerm.value) {
+  if (!props.filter || props.ignoreFilter || !searchTerm.value) {
     return groups.value
   }
 
@@ -162,13 +159,13 @@ const hasFilteredItems = computed(() => filteredGroups.value.some(group => group
 
   <DropdownMenu.Portal v-bind="portalProps">
     <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" data-slot="content" :class="ui.content({ class: [uiOverride?.content, props.class] })" v-bind="contentProps">
-      <DropdownMenu.Filter v-if="!!input" v-model="searchTerm" as-child>
+      <DropdownMenu.Filter v-if="!!filter" v-model="searchTerm" as-child>
         <UInput
           autofocus
           autocomplete="off"
-          v-bind="inputProps"
-          data-slot="input"
-          :class="ui.input({ class: uiOverride?.input })"
+          v-bind="filterProps"
+          data-slot="filter"
+          :class="ui.filter({ class: uiOverride?.filter })"
           @change.stop
         />
       </DropdownMenu.Filter>
@@ -209,7 +206,7 @@ const hasFilteredItems = computed(() => filteredGroups.value.some(group => group
                 :checked-icon="checkedIcon"
                 :loading-icon="loadingIcon"
                 :external-icon="externalIcon"
-                :input="item.input"
+                :filter="item.filter"
                 v-bind="item.content"
               >
                 <template v-for="(_, name) in getProxySlots()" #[name]="slotData">

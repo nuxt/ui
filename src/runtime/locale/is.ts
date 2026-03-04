@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Á þessari síðu'
     },
+    dropdownMenu: {
+      noMatch: 'Engin gögn fundust',
+      search: 'Leita…'
+    },
     dashboardSearch: {
       theme: 'Þema'
     },

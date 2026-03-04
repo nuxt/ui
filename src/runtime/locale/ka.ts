@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'ამ გვერდზე'
     },
+    dropdownMenu: {
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      search: 'ძიება…'
+    },
     dashboardSearch: {
       theme: 'თემა'
     },

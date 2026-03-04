@@ -100,7 +100,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `onSelect?: (e: Event) => void`{lang="ts-type"}
 - [`onUpdateChecked?: (checked: boolean) => void`{lang="ts-type"}](#with-checkbox-items)
 - `children?: DropdownMenuItem[] | DropdownMenuItem[][]`{lang="ts-type"}
-- [`input?: boolean | InputProps`{lang="ts-type"}](#with-input-items)
+- [`filter?: boolean | InputProps`{lang="ts-type"}](#with-filtered-items)
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
 
@@ -232,9 +232,17 @@ slots:
 :u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
-### Input :badge{label="Soon" class="align-text-top"}
+### Filter :badge{label="Soon" class="align-text-top"}
 
-Use the `input` prop to display an input inside the DropdownMenu. Defaults to `false`.
+Use the `filter` prop to display a filter input inside the DropdownMenu. Defaults to `false`.
+
+::note{to="#with-ignore-filter"}
+Use the `ignore-filter` prop to disable the internal search and use your own search logic.
+::
+
+::note{to="#with-filter-fields"}
+Use the `filter-fields` prop to specify which fields to filter by. By default, it uses the `labelKey` prop.
+::
 
 ::component-code
 ---
@@ -247,7 +255,7 @@ external:
 externalTypes:
   - DropdownMenuItem[]
 props:
-  input: true
+  filter: true
   items:
     - label: Profile
       icon: i-lucide-user
@@ -272,12 +280,8 @@ slots:
 :u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
-::tip{to="#with-input-items"}
-You can also enable the input on specific sub-menus using the `input` field on items with `children`.
-::
-
-::tip
-Use the `filter-fields` prop to specify which fields to filter by. By default, it uses the `labelKey` prop.
+::tip{to="#with-filtered-items"}
+You can also enable the filter on specific sub-menus using the `filter` field on items with `children`.
 ::
 
 ### Arrow
@@ -445,26 +449,6 @@ name: 'dropdown-menu-checkbox-items-example'
 To ensure reactivity for the `checked` state of items, it's recommended to wrap your `items` array inside a `computed`.
 ::
 
-### With switch items
-
-You can use the `slot` property with a `#{{ slot }}-trailing` slot to render a [Switch](/docs/components/switch) inside an item.
-
-::component-example
----
-name: 'dropdown-menu-switch-items-example'
----
-::
-
-### With input items :badge{label="Soon" class="align-text-top"}
-
-You can use the `input` property on items with `children` to display an input inside the sub-menu.
-
-::component-example
----
-name: 'dropdown-menu-filter-items-example'
----
-::
-
 ### With color items
 
 You can use the `color` property to highlight certain items with a color.
@@ -472,6 +456,16 @@ You can use the `color` property to highlight certain items with a color.
 ::component-example
 ---
 name: 'dropdown-menu-color-items-example'
+---
+::
+
+### With filtered items :badge{label="Soon" class="align-text-top"}
+
+You can use the `filter` property on items with `children` to display a filter input inside the sub-menu.
+
+::component-example
+---
+name: 'dropdown-menu-filter-items-example'
 ---
 ::
 
@@ -510,6 +504,16 @@ name: 'dropdown-menu-custom-slot-example'
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
 ::
 
+### With switch in items
+
+You can use the `slot` property with a `#{{ slot }}-trailing` slot to render a [Switch](/docs/components/switch) inside an item.
+
+::component-example
+---
+name: 'dropdown-menu-switch-items-example'
+---
+::
+
 ### With trigger content width
 
 You can expand the content to the full width of its button by adding the `w-(--reka-dropdown-menu-trigger-width)` class on the `ui.content` slot.
@@ -535,6 +539,32 @@ export default defineAppConfig({
   }
 })
 ```
+::
+
+### With ignore filter :badge{label="Soon" class="align-text-top"}
+
+Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
+
+::component-example
+---
+collapse: true
+name: 'dropdown-menu-ignore-filter-example'
+---
+::
+
+::note
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+::
+
+### With filter fields :badge{label="Soon" class="align-text-top"}
+
+Use the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
+
+::component-example
+---
+collapse: true
+name: 'dropdown-menu-filter-fields-example'
+---
 ::
 
 ### Extract shortcuts

@@ -16,7 +16,7 @@ const items: DropdownMenuItem[][] = [[{
 }, {
   label: 'Invite users',
   icon: 'i-lucide-user-plus',
-  input: true,
+  filter: true,
   children: [{
     label: 'Invite by email',
     icon: 'i-lucide-mail'
