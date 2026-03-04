@@ -25,7 +25,7 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
    * The orientation of the slider.
    * @defaultValue 'horizontal'
    */
-  orientation?: SliderRootProps['orientation']
+  orientation?: Slider['variants']['orientation']
   /**
    * Display a tooltip around the slider thumbs with the current value.
    * `{ disableClosingTrigger: true }`{lang="ts-type"}
@@ -48,6 +48,7 @@ import { computed } from 'vue'
 import { SliderRoot, SliderRange, SliderTrack, SliderThumb, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UTooltip from './Tooltip.vue'
@@ -63,6 +64,7 @@ const emits = defineEmits<SliderEmits>()
 const modelValue = defineModel<T>()
 
 const appConfig = useAppConfig() as Slider['AppConfig']
+const uiProp = useComponentUI('slider', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'), emits)
 
@@ -111,13 +113,14 @@ function onChange(value: any) {
     v-model="sliderValue"
     :name="name"
     :disabled="disabled"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    data-slot="root"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     :default-value="defaultSliderValue"
     @update:model-value="emitFormInput()"
     @value-commit="onChange"
   >
-    <SliderTrack :class="ui.track({ class: props.ui?.track })">
-      <SliderRange :class="ui.range({ class: props.ui?.range })" />
+    <SliderTrack data-slot="track" :class="ui.track({ class: uiProp?.track })">
+      <SliderRange data-slot="range" :class="ui.range({ class: uiProp?.range })" />
     </SliderTrack>
 
     <template v-for="thumb in thumbs" :key="thumb">
@@ -127,9 +130,9 @@ function onChange(value: any) {
         disable-closing-trigger
         v-bind="(typeof tooltip === 'object' ? tooltip : {})"
       >
-        <SliderThumb :class="ui.thumb({ class: props.ui?.thumb })" />
+        <SliderThumb data-slot="thumb" :class="ui.thumb({ class: uiProp?.thumb })" :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`" />
       </UTooltip>
-      <SliderThumb v-else :class="ui.thumb({ class: props.ui?.thumb })" />
+      <SliderThumb v-else data-slot="thumb" :class="ui.thumb({ class: uiProp?.thumb })" :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`" />
     </template>
   </SliderRoot>
 </template>

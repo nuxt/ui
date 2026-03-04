@@ -22,23 +22,29 @@ function getSchemaProps(schema: PropertyMeta['schema']): any {
 }
 
 const schemaProps = computed(() => {
-  return getSchemaProps(props.prop.schema).map((prop: any) => {
-    const defaultValue = prop.default ?? prop.tags?.find((tag: any) => tag.name === 'defaultValue')?.text
-    let description = prop.description
-    if (defaultValue) {
-      description = description ? `${description} Defaults to \`${defaultValue}\`{lang="ts-type"}.` : `Defaults to \`${defaultValue}\`{lang="ts-type"}.`
+  const propsObject = getSchemaProps(props.prop.schema).reduce((acc: any, prop: any) => {
+    if (!acc[prop.name]) {
+      const defaultValue = prop.default ?? prop.tags?.find((tag: any) => tag.name === 'defaultValue')?.text
+      let description = prop.description
+      if (defaultValue) {
+        description = description ? `${description} Defaults to \`${defaultValue}\`{lang="ts-type"}.` : `Defaults to \`${defaultValue}\`{lang="ts-type"}.`
+      }
+
+      acc[prop.name] = {
+        ...prop,
+        description
+      }
     }
 
-    return {
-      ...prop,
-      description
-    }
-  })
+    return acc
+  }, {})
+
+  return Object.values(propsObject) as PropertyMeta[]
 })
 </script>
 
 <template>
-  <ProseCollapsible v-if="schemaProps?.length" class="mt-1 mb-0">
+  <ProseCollapsible v-if="schemaProps?.length" :unmount-on-hide="true" class="mt-1 mb-0">
     <ProseUl>
       <ProseLi v-for="schemaProp in schemaProps" :key="schemaProp.name">
         <HighlightInlineType :type="`${schemaProp.name}${schemaProp.required === false ? '?' : ''}: ${schemaProp.type}`" />

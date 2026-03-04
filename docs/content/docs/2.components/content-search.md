@@ -34,7 +34,7 @@ name: 'content-search-example'
 ::
 
 ::tip
-You can open the CommandPalette by pressing :kbd{value="meta"} :kbd{value="K"}, by using the [ContentSearchButton](/docs/components/content-search-button) component or by using the `useContentSearch` composable: `const { open } = useContentSearch()`{lang="ts"}.
+You can open the CommandPalette by pressing :kbd{value="meta"} :kbd{value="K" class="ms-px"}, by using the [ContentSearchButton](/docs/components/content-search-button) component or by using the `useContentSearch` composable: `const { open } = useContentSearch()`{lang="ts"}.
 ::
 
 ### Shortcut
@@ -150,6 +150,14 @@ It is recommended to wrap the `ContentSearch` component in a [ClientOnly](https:
 ### Emits
 
 :component-emits
+
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `commandPaletteRef`{lang="ts-type"} | `Ref<InstanceType<typeof UCommandPalette> \| null>`{lang="ts-type"} |
 
 ## Theme
 

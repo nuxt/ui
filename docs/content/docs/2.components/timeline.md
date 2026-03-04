@@ -24,6 +24,8 @@ ignore:
   - defaultValue
 external:
   - items
+externalTypes:
+  - TimelineItem[]
 props:
   defaultValue: 2
   items:
@@ -253,12 +255,27 @@ class: 'overflow-x-auto'
 
 ### Control active item
 
-You can control the active item by using the `default-value` prop or the `v-model` directive with the index of the item.
+You can control the active item by using the `default-value` prop or the `v-model` directive with the `value` of the item. If no `value` is provided, it defaults to the index.
 
 :component-example{name="timeline-model-value-example" prettier}
 
 ::tip
-You can also pass the `value` of one of the items if provided.
+Use the `value-key` prop to change the key used to match items when a `v-model` or `default-value` is provided.
+::
+
+### With select event
+
+You can add a `@select` listener to make items clickable.
+
+::note
+The handler function receives the `Event` and `TimelineItem` as the first and second arguments respectively.
+::
+
+::component-example
+---
+prettier: true
+name: 'timeline-select-example'
+---
 ::
 
 ### With alternating layout

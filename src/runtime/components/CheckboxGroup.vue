@@ -1,14 +1,16 @@
 <script lang="ts">
 import type { CheckboxGroupRootProps, CheckboxGroupRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox-group'
 import type { CheckboxProps } from '../types'
-import type { AcceptableValue, GetItemKeys, GetModelValue } from '../types/utils'
+import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>
 
 export type CheckboxGroupValue = AcceptableValue
+
 export type CheckboxGroupItem = CheckboxGroupValue | {
   label?: string
   description?: string
@@ -58,21 +60,21 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGrou
    * The orientation the checkbox buttons are laid out.
    * @defaultValue 'vertical'
    */
-  orientation?: CheckboxGroupRootProps['orientation']
+  orientation?: CheckboxGroup['variants']['orientation']
   class?: any
   ui?: CheckboxGroup['slots'] & CheckboxProps['ui']
 }
 
-export type CheckboxGroupEmits<T extends CheckboxGroupItem[] = CheckboxGroupItem[]> = CheckboxGroupRootEmits<T[number]> & {
+export type CheckboxGroupEmits<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> = Omit<CheckboxGroupRootEmits, 'update:modelValue'> & {
   change: [event: Event]
-}
+} & GetModelValueEmits<T, VK, true>
 
-type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => any
+type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => VNode[]
 
 export interface CheckboxGroupSlots<T extends CheckboxGroupItem[] = CheckboxGroupItem[]> {
-  legend(props?: {}): any
-  label: SlotProps<T[number]>
-  description: SlotProps<T[number]>
+  legend?(props?: {}): VNode[]
+  label?: SlotProps<T[number]>
+  description?: SlotProps<T[number]>
 }
 </script>
 
@@ -81,6 +83,7 @@ import { computed, useId } from 'vue'
 import { CheckboxGroupRoot, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useFormField } from '../composables/useFormField'
 import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
@@ -92,10 +95,11 @@ const props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
   valueKey: 'value' as never,
   orientation: 'vertical'
 })
-const emits = defineEmits<CheckboxGroupEmits<T>>()
+const emits = defineEmits<CheckboxGroupEmits<T, VK>>()
 const slots = defineSlots<CheckboxGroupSlots<T>>()
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
+const uiProp = useComponentUI('checkboxGroup', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator', 'icon'))
@@ -109,7 +113,8 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup ||
   required: props.required,
   orientation: props.orientation,
   color: props.color,
-  variant: props.variant
+  variant: props.variant,
+  disabled: disabled.value
 }))
 
 function normalizeItem(item: any) {
@@ -165,11 +170,12 @@ function onUpdate(value: any) {
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    data-slot="root"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     @update:model-value="onUpdate"
   >
-    <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
-      <legend v-if="legend || !!slots.legend" :class="ui.legend({ class: props.ui?.legend })">
+    <fieldset data-slot="fieldset" :class="ui.fieldset({ class: uiProp?.fieldset })" v-bind="ariaAttrs">
+      <legend v-if="legend || !!slots.legend" data-slot="legend" :class="ui.legend({ class: uiProp?.legend })">
         <slot name="legend">
           {{ legend }}
         </slot>
@@ -183,8 +189,9 @@ function onUpdate(value: any) {
         :size="size"
         :name="name"
         :disabled="item.disabled || disabled"
-        :ui="{ ...(props.ui ? omit(props.ui, ['root']) : undefined), ...(item.ui || {}) }"
-        :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
+        :ui="{ ...(uiProp ? omit(uiProp, ['root']) : undefined), ...(item.ui || {}) }"
+        data-slot="item"
+        :class="ui.item({ class: [uiProp?.item, item.ui?.item, item.class], disabled: item.disabled || disabled })"
       >
         <template v-for="(_, name) in getProxySlots()" #[name]>
           <slot :name="(name as keyof CheckboxGroupSlots<T>)" :item="item" />

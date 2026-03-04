@@ -169,6 +169,7 @@ ignore:
 props:
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   size: md
   variant: outline
   placeholder: 'Search...'
@@ -239,6 +240,10 @@ props:
 ### Props
 
 :component-props
+
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attributes" target="_blank"}
+This component also supports all native `<textarea>` HTML attributes.
+::
 
 ### Slots
 

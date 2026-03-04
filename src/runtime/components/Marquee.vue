@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/marquee'
 import type { ComponentConfig } from '../types/tv'
@@ -41,7 +42,7 @@ export interface MarqueeProps {
 }
 
 export interface MarqueeSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
@@ -49,6 +50,7 @@ export interface MarqueeSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<MarqueeProps>(), {
@@ -59,6 +61,7 @@ const props = withDefaults(defineProps<MarqueeProps>(), {
 defineSlots<MarqueeSlots>()
 
 const appConfig = useAppConfig() as Marquee['AppConfig']
+const uiProp = useComponentUI('marquee', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {}) })({
   pauseOnHover: props.pauseOnHover,
@@ -69,8 +72,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-for="i in repeat" :key="i" :class="ui.content({ class: [props.ui?.content] })">
+  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div v-for="i in repeat" :key="i" data-slot="content" :class="ui.content({ class: [uiProp?.content] })">
       <slot />
     </div>
   </Primitive>

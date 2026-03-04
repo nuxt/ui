@@ -70,9 +70,16 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
 
   <Matrix v-slot="props" :attrs="attrs">
     <USelectMenu v-model="value" :items="items" autofocus v-bind="props" />
-    <USelectMenu :default-value="value" :items="items" v-bind="props" />
+    <USelectMenu :default-value="value" :items="items" v-bind="props" clear />
     <USelectMenu v-model="valueMultiple" multiple placeholder="Multiple" :items="items" v-bind="props" />
-    <USelectMenu :default-value="valueMultiple" multiple placeholder="Multiple" :items="items" v-bind="props" />
+    <USelectMenu
+      :default-value="valueMultiple"
+      multiple
+      placeholder="Multiple"
+      :items="items"
+      v-bind="props"
+      clear
+    />
     <USelectMenu placeholder="Highlight" highlight :items="items" v-bind="props" />
     <USelectMenu placeholder="Disabled" disabled :items="items" v-bind="props" />
     <USelectMenu placeholder="Required" required :items="items" v-bind="props" />

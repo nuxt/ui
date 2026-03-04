@@ -107,6 +107,7 @@ prettier: true
 props:
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   size: md
   color: neutral
   variant: outline

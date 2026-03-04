@@ -157,6 +157,7 @@ props:
   modelValue: ['Vue']
   avatar:
     src: 'https://github.com/vuejs.png'
+    loading: lazy
   size: md
   variant: outline
 ---
@@ -274,6 +275,10 @@ name: 'input-tags-form-field-example'
 
 :component-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+This component also supports all native `<input>` HTML attributes.
+::
+
 ### Slots
 
 :component-slots
@@ -286,9 +291,9 @@ name: 'input-tags-form-field-example'
 
 When accessing the component via a template ref, you can use the following:
 
-| Name                       | Type                                            |
-| -------------------------- | ----------------------------------------------- |
-| `inputRef`{lang="ts-type"} | `Ref<InstanceType<typeof TagsInputInput> \| null>`{lang="ts-type"} |
+| Name | Type |
+| ---- | ---- |
+| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

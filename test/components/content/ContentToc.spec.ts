@@ -1,8 +1,7 @@
-import { describe, it, expect } from 'vitest'
+import { describe } from 'vitest'
 import { mockNuxtImport } from '@nuxt/test-utils/runtime'
 import ContentToc from '../../../src/runtime/components/content/ContentToc.vue'
-import type { ContentTocProps, ContentTocSlots } from '../../../src/runtime/components/content/ContentToc.vue'
-import ComponentRender from '../../component-render'
+import { renderEach } from '../../component-render'
 
 describe('ContentToc', () => {
   mockNuxtImport('useScrollspy', () => {
@@ -47,7 +46,7 @@ describe('ContentToc', () => {
 
   const props = { links }
 
-  it.each([
+  renderEach(ContentToc, [
     // Props
     ['with links', { props }],
     ['with title', { props: { ...props, title: 'On this page' } }],
@@ -66,8 +65,5 @@ describe('ContentToc', () => {
     ['with link slot', { props, slots: { link: () => 'Link slot' } }],
     ['with top slot', { props, slots: { top: () => 'Top slot' } }],
     ['with bottom slot', { props, slots: { bottom: () => 'Bottom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentTocProps, slots?: Partial<ContentTocSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, ContentToc)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 })

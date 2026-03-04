@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
 import colors from 'tailwindcss/colors'
-import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates } from '@nuxt/kit'
+import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, getLayerDirectories } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
@@ -110,11 +110,35 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   writeThemeTemplate(theme)
 
   async function generateSources() {
-    let sources = ''
+    if (!nuxt) {
+      return '@source "./ui";'
+    }
 
-    if (!!nuxt && !!resolve && options.experimental?.componentDetection) {
+    const sources: string[] = []
+    const layers = getLayerDirectories(nuxt).map(layer => layer.app)
+
+    // Add layer sources
+    for (const layer of layers) {
+      sources.push(`@source "${layer}**/*";`)
+    }
+
+    // Add inline sources from Nuxt config (classes defined in config)
+    const inlineConfigs = [
+      nuxt.options.app?.rootAttrs?.class,
+      nuxt.options.app?.head?.htmlAttrs?.class,
+      nuxt.options.app?.head?.bodyAttrs?.class
+    ]
+
+    for (const value of inlineConfigs) {
+      if (value && typeof value === 'string') {
+        sources.push(`@source inline(${JSON.stringify(value)});`)
+      }
+    }
+
+    // Add theme sources (component detection or all)
+    if (resolve && options.experimental?.componentDetection) {
       const detectedComponents = await detectUsedComponents(
-        nuxt.options.rootDir,
+        layers,
         options.prefix!,
         resolve('./runtime/components'),
         Array.isArray(options.experimental.componentDetection) ? options.experimental.componentDetection : undefined
@@ -134,10 +158,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
         previousDetectedComponents = detectedComponents
 
-        const sourcesList: string[] = []
-
         if (hasProse) {
-          sourcesList.push('@source "./ui/prose";')
+          sources.push('@source "./ui/prose";')
         }
 
         for (const component of detectedComponents) {
@@ -145,22 +167,24 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           const camelComponent = camelCase(component)
 
           if (hasContent && (themeContent as any)[camelComponent]) {
-            sourcesList.push(`@source "./ui/content/${kebabComponent}.ts";`)
+            sources.push(`@source "./ui/content/${kebabComponent}.ts";`)
           } else if ((theme as any)[camelComponent]) {
-            sourcesList.push(`@source "./ui/${kebabComponent}.ts";`)
+            sources.push(`@source "./ui/${kebabComponent}.ts";`)
           }
         }
-
-        sources = sourcesList.join('\n')
       } else {
         if (!previousDetectedComponents || previousDetectedComponents.size > 0) {
           logger.info('Nuxt UI detected no components in use, including all components')
         }
         previousDetectedComponents = new Set()
+
+        sources.push('@source "./ui";')
       }
+    } else {
+      sources.push('@source "./ui";')
     }
 
-    return sources || '@source "./ui";'
+    return sources.join('\n')
   }
 
   templates.push({
@@ -236,8 +260,10 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --divide-color-bg: var(--ui-bg);
   --outline-color-default: var(--ui-border);
   --outline-color-inverted: var(--ui-border-inverted);
+  --stroke-bg: var(--ui-bg);
   --stroke-default: var(--ui-border);
   --stroke-inverted: var(--ui-border-inverted);
+  --fill-bg: var(--ui-bg);
   --fill-default: var(--ui-border);
   --fill-inverted: var(--ui-border-inverted);
 }
@@ -269,7 +295,7 @@ import colors from 'tailwindcss/colors'
 
 type IconsConfig = Record<${iconUnion} | (string & {}), string>
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {

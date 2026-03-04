@@ -119,6 +119,7 @@ prettier: true
 props:
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   size: md
   color: neutral
   variant: outline
@@ -137,6 +138,7 @@ prettier: true
 props:
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   size: md
   color: neutral
   variant: outline
@@ -343,6 +345,10 @@ slots:
 ### Props
 
 :component-props
+
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+This component also supports all native `<button>` HTML attributes.
+::
 
 ::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v4/src/runtime/components/Link.vue#L13"}
 The `Button` component extends the `Link` component. Check out the source code on GitHub.

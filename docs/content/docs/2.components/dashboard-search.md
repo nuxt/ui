@@ -32,7 +32,7 @@ Use it inside the default slot of the [DashboardGroup](/docs/components/dashboar
 ```
 
 ::tip
-You can open the CommandPalette by pressing :kbd{value="meta"} :kbd{value="K"}, by using the [DashboardSearchButton](/docs/components/dashboard-search-button) component or by using a `v-model:open`{lang="ts"} directive.
+You can open the CommandPalette by pressing :kbd{value="meta"} :kbd{value="K" class="ms-px"}, by using the [DashboardSearchButton](/docs/components/dashboard-search-button) component or by using a `v-model:open`{lang="ts"} directive.
 ::
 
 ### Shortcut
@@ -88,6 +88,14 @@ You can disable this behavior by setting the `color-mode` prop to `false`:
 ### Emits
 
 :component-emits
+
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `commandPaletteRef`{lang="ts-type"} | `Ref<InstanceType<typeof UCommandPalette> \| null>`{lang="ts-type"} |
 
 ## Theme
 

@@ -26,13 +26,14 @@ role: 'user'
 id: '1'
 avatar:
   src: 'https://github.com/benjamincanac.png'
+  loading: lazy
 ---
 ::
 
 ::
 
 ::tip{to="/docs/components/chat-messages"}
-Use the [`ChatMessages`](/docs/components/chat-messages) component to display a list of chat messages.
+Use the `ChatMessages` component to display a list of chat messages.
 ::
 
 ### Parts
@@ -154,6 +155,7 @@ ignore:
 props:
   avatar:
     src: 'https://github.com/benjamincanac.png'
+    loading: lazy
   variant: 'soft'
   side: 'right'
   parts:
@@ -195,6 +197,8 @@ Use the `actions` prop to display actions below the message that will be display
 prettier: true
 external:
   - actions
+externalTypes:
+  - ButtonProps[]
 ignore:
   - parts
   - actions

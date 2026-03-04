@@ -3,10 +3,10 @@ import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
 import Table from '../../src/runtime/components/Table.vue'
-import type { TableProps, TableSlots, TableColumn, TableRow } from '../../src/runtime/components/Table.vue'
-import ComponentRender from '../component-render'
+import type { TableColumn, TableRow } from '../../src/runtime/components/Table.vue'
 import theme from '#build/ui/table'
 
 describe('Table', () => {
@@ -75,10 +75,10 @@ describe('Table', () => {
     header: 'Status',
     cell: ({ row }) => {
       const color = ({
-        paid: 'success' as const,
-        failed: 'error' as const,
-        refunded: 'neutral' as const
-      })[row.getValue('status') as string]
+        paid: 'success',
+        failed: 'error',
+        refunded: 'neutral'
+      } as const)[row.getValue('status') as string]
 
       return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
     }
@@ -96,33 +96,43 @@ describe('Table', () => {
         onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
       })
     },
-    cell: ({ row }) => h('div', { class: 'lowercase' }, row.getValue('email'))
+    meta: {
+      class: {
+        td: 'lowercase'
+      }
+    }
   }, {
     accessorKey: 'amount',
-    header: () => h('div', { class: 'text-right' }, 'Amount'),
+    header: 'Amount',
+    meta: {
+      class: {
+        th: 'text-right',
+        td: 'text-right font-medium'
+      }
+    },
     footer: ({ column }) => {
       const total = column.getFacetedRowModel().rows.reduce((acc: number, row: TableRow<typeof data[number]>) => acc + Number.parseFloat(row.getValue('amount')), 0)
-
       const formatted = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'EUR'
       }).format(total)
-
-      return h('div', { class: 'text-right font-medium' }, `Total: ${formatted}`)
+      return `Total: ${formatted}`
     },
     cell: ({ row }) => {
       const amount = Number.parseFloat(row.getValue('amount'))
-
-      const formatted = new Intl.NumberFormat('en-US', {
+      return new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'EUR'
       }).format(amount)
-
-      return h('div', { class: 'text-right font-medium' }, formatted)
     }
   }, {
     id: 'actions',
     enableHiding: false,
+    meta: {
+      class: {
+        td: 'text-right'
+      }
+    },
     cell: ({ row }) => {
       const items = [{
         type: 'label',
@@ -139,7 +149,7 @@ describe('Table', () => {
         label: 'View payment details'
       }]
 
-      return h('div', { class: 'text-right' }, h<any>(UDropdownMenu, {
+      return h<any>(UDropdownMenu, {
         content: {
           align: 'end'
         },
@@ -148,15 +158,14 @@ describe('Table', () => {
         'icon': 'i-lucide-ellipsis-vertical',
         'color': 'neutral',
         'variant': 'ghost',
-        'class': 'ml-auto',
         'aria-label': 'Actions'
-      })))
+      }))
     }
   }]
 
   const props = { data }
 
-  it.each([
+  renderEach(Table, [
     // Props
     ['with data', { props }],
     ['without data', {}],
@@ -182,10 +191,7 @@ describe('Table', () => {
     ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }],
     ['with body-top slot', { props, slots: { 'body-top': () => 'Body top slot' } }],
     ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps, slots?: Partial<TableSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Table)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Table, {

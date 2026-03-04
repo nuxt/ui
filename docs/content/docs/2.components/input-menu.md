@@ -156,6 +156,10 @@ props:
 ---
 ::
 
+::tip
+Use the `by` prop to compare objects by a field instead of reference when the `model-value` is an object.
+::
+
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections, the selected items will be displayed as tags.
@@ -488,6 +492,75 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
+### Clear :badge{label="4.4+" class="align-text-top"}
+
+Use the `clear` prop to display a clear button when a value is selected.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+external:
+  - items
+  - modelValue
+items:
+  clear:
+    - true
+    - false
+props:
+  modelValue: 'Backlog'
+  clear: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+### Clear Icon :badge{label="4.4+" class="align-text-top"}
+
+Use the `clear-icon` prop to customize the clear button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+external:
+  - items
+  - modelValue
+items:
+  clear:
+    - true
+    - false
+props:
+  modelValue: 'Backlog'
+  clear: true
+  clearIcon: 'i-lucide-trash'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
+::
+
 ### Avatar
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the InputMenu.
@@ -505,6 +578,7 @@ props:
   modelValue: 'Nuxt'
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   items:
     - Nuxt
     - NuxtHub
@@ -756,6 +830,10 @@ name: 'input-menu-fetch-example'
 ---
 ::
 
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the menu opens, avoiding unnecessary API calls on page load.
+::
+
 ### With ignore filter
 
 Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
@@ -768,7 +846,7 @@ name: 'input-menu-ignore-filter-example'
 ::
 
 ::note
-This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls. The fetch is deferred with `immediate: false` so no request is made until the user types.
 ::
 
 ### With filter fields
@@ -782,7 +860,11 @@ name: 'input-menu-filter-fields-example'
 ---
 ::
 
-### With virtualization :badge{label="4.1+"}
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the menu opens, avoiding unnecessary API calls on page load.
+::
+
+### With virtualization :badge{label="4.1+" class="align-text-top"}
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 
@@ -795,6 +877,26 @@ When enabled, all groups are flattened into a single list due to a limitation of
 prettier: true
 name: 'input-menu-virtualize-example'
 ---
+::
+
+### With infinite scroll :badge{label="4.4+" class="align-text-top"}
+
+You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
+
+::component-example
+---
+prettier: true
+collapse: true
+highlights:
+  - 41
+  - 51
+overflowHidden: true
+name: 'input-menu-infinite-scroll-example'
+---
+::
+
+::note
+This example uses `useLazyFetch` with `immediate: false` so data is only loaded as the user scrolls.
 ::
 
 ### With full content width
@@ -824,9 +926,9 @@ export default defineAppConfig({
 ```
 ::
 
-### As a CountryPicker
+### As a country picker
 
-This example demonstrates using the InputMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
+You can use the InputMenu as a country picker with lazy loading. Countries are only fetched when the menu is first opened.
 
 ::component-example
 ---
@@ -835,11 +937,19 @@ name: 'input-menu-countries-example'
 ---
 ::
 
+::note
+This example uses `useLazyFetch` with `immediate: false` to only load countries when the menu is first opened.
+::
+
 ## API
 
 ### Props
 
 :component-props
+
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+This component also supports all native `<input>` HTML attributes.
+::
 
 ### Slots
 
@@ -855,7 +965,8 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `inputRef`{lang="ts-type"} | `Ref<InstanceType<typeof ComboboxTrigger> \| null>`{lang="ts-type"} |
+| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
+| `viewportRef`{lang="ts-type"} | `Ref<HTMLDivElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

@@ -1,6 +1,6 @@
-import type { NuxtOptions } from '@nuxt/schema'
+import type { ModuleOptions } from '../../module'
 
-export default (options: Required<NuxtOptions['ui']>) => ({
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     base: ['group relative block my-5 p-4 sm:p-6 border border-default rounded-md bg-default', options.theme.transitions && 'transition-colors'],
     icon: 'size-6 mb-2 block',
@@ -30,14 +30,14 @@ export default (options: Required<NuxtOptions['ui']>) => ({
     color,
     to: true,
     class: {
-      base: `hover:bg-${color}/10 hover:border-${color}`,
+      base: `hover:bg-${color}/10 hover:border-${color} has-focus-visible:border-${color}`,
       externalIcon: `group-hover:text-${color}`
     }
   })), {
     color: 'neutral',
     to: true,
     class: {
-      base: 'hover:bg-elevated/50 hover:border-inverted',
+      base: 'hover:bg-elevated/50 hover:border-inverted has-focus-visible:border-inverted',
       externalIcon: 'group-hover:text-highlighted'
     }
   }],

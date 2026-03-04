@@ -7,7 +7,8 @@ const items = ref([
     value: 'benjamincanac',
     avatar: {
       src: 'https://github.com/benjamincanac.png',
-      alt: 'benjamincanac'
+      alt: 'benjamincanac',
+      loading: 'lazy' as const
     }
   },
   {
@@ -15,7 +16,8 @@ const items = ref([
     value: 'romhml',
     avatar: {
       src: 'https://github.com/romhml.png',
-      alt: 'romhml'
+      alt: 'romhml',
+      loading: 'lazy' as const
     }
   },
   {
@@ -23,7 +25,8 @@ const items = ref([
     value: 'noook',
     avatar: {
       src: 'https://github.com/noook.png',
-      alt: 'noook'
+      alt: 'noook',
+      loading: 'lazy' as const
     }
   },
   {
@@ -31,7 +34,8 @@ const items = ref([
     value: 'sandros94',
     avatar: {
       src: 'https://github.com/sandros94.png',
-      alt: 'sandros94'
+      alt: 'sandros94',
+      loading: 'lazy' as const
     }
   }
 ] satisfies InputMenuItem[])

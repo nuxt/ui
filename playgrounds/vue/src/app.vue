@@ -39,9 +39,9 @@ provide('components', components)
         :toggle="{ size: 'sm', variant: 'outline', class: 'ring-default' }"
       >
         <template #header="{ collapsed }">
-          <NuxtLink to="/" class="text-highlighted inline-flex" aria-label="Home">
+          <RouterLink to="/" class="text-highlighted inline-flex" aria-label="Home">
             <Logo class="h-5 w-auto" :collapsed="collapsed" />
-          </NuxtLink>
+          </RouterLink>
 
           <div v-if="!collapsed" class="flex items-center ms-auto">
             <ThemeDropdown />
@@ -61,7 +61,15 @@ provide('components', components)
         </template>
       </UDashboardSidebar>
 
-      <UDashboardPanel :ui="{ body: ['justify-center items-center', route.path.startsWith('/components') && 'mt-16'] }">
+      <UDashboardPanel
+        :ui="{
+          body: [
+            'justify-center items-center',
+            route.path.startsWith('/components') && 'mt-16',
+            route.path.startsWith('/components/scroll-area') && 'p-0!'
+          ]
+        }"
+      >
         <template #body>
           <Suspense>
             <RouterView />

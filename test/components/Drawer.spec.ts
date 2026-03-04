@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Drawer from '../../src/runtime/components/Drawer.vue'
-import type { DrawerProps, DrawerSlots } from '../../src/runtime/components/Drawer.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/drawer'
 
 describe('Drawer', () => {
@@ -11,7 +10,7 @@ describe('Drawer', () => {
 
   const props = { open: true, portal: false }
 
-  it.each([
+  renderEach(Drawer, [
     // Props
     ['with title', { props: { ...props, title: 'Title' } }],
     ['with description', { props: { ...props, title: 'Title', description: 'Description' } }],
@@ -29,10 +28,7 @@ describe('Drawer', () => {
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with body slot', { props, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DrawerProps, slots?: Partial<DrawerSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Drawer)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Drawer, {

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt'
 import type { TextareaProps, TextareaSlots } from '../types'
@@ -32,16 +33,17 @@ export interface ChatPromptEmits {
 }
 
 export interface ChatPromptSlots extends TextareaSlots {
-  header(props?: {}): any
-  footer(props?: {}): any
+  header?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
+import { computed, toRef, useTemplateRef } from 'vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
@@ -62,6 +64,7 @@ const model = defineModel<string>({ default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPrompt['AppConfig']
+const uiProp = useComponentUI('chatPrompt', props)
 
 const textareaProps = useForwardProps(reactivePick(props, 'rows', 'autofocus', 'autofocusDelay', 'autoresize', 'autoresizeDelay', 'maxrows', 'icon', 'avatar', 'loading', 'loadingIcon'))
 
@@ -70,6 +73,8 @@ const getProxySlots = () => omit(slots, ['header', 'footer'])
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPrompt || {}) })({
   variant: props.variant
 }))
+
+const textareaRef = useTemplateRef('textareaRef')
 
 function submit(e: Event) {
   if (model.value.trim() === '') {
@@ -80,33 +85,33 @@ function submit(e: Event) {
 }
 
 function blur(e: Event) {
-  textarea.value?.textareaRef?.blur()
+  textareaRef.value?.textareaRef?.blur()
 
   emits('close', e)
 }
 
-const textarea = useTemplateRef('textarea')
-
 defineExpose({
-  textareaRef: textarea.value?.textareaRef
+  textareaRef: toRef(() => textareaRef.value?.textareaRef)
 })
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })" @submit.prevent="submit">
-    <div v-if="!!slots.header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })" @submit.prevent="submit">
+    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: uiProp?.header })">
       <slot name="header" />
     </div>
 
     <UTextarea
-      ref="textarea"
+      ref="textareaRef"
       v-model="model"
       :placeholder="placeholder || t('chatPrompt.placeholder')"
       :disabled="Boolean(error) || disabled"
       variant="none"
+      fixed
       v-bind="{ ...textareaProps, ...$attrs }"
-      :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), props.ui)"
-      :class="ui.body({ class: props.ui?.body })"
+      :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), uiProp)"
+      data-slot="body"
+      :class="ui.body({ class: uiProp?.body })"
       @keydown.enter.exact.prevent="submit"
       @keydown.esc="blur"
     >
@@ -115,7 +120,7 @@ defineExpose({
       </template>
     </UTextarea>
 
-    <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

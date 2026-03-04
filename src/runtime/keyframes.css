@@ -38,6 +38,68 @@
   }
 }
 
+@keyframes toast-slide-in-from-top {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: var(--transform);
+  }
+}
+
+@keyframes toast-slide-in-from-bottom {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: var(--transform);
+  }
+}
+
+@keyframes toast-slide-up {
+  from {
+    transform: translateX(0) translateY(var(--translate));
+  }
+
+  to {
+    transform: translateX(0) translateY(calc(var(--translate) - 100%));
+  }
+}
+
+@keyframes toast-slide-down {
+  from {
+    transform: translateX(0) translateY(var(--translate));
+  }
+
+  to {
+    transform: translateX(0) translateY(calc(var(--translate) + 100%));
+  }
+}
+
+@keyframes toast-pulse-a {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.04;
+  }
+}
+
+@keyframes toast-pulse-b {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.04;
+  }
+}
+
 @keyframes toast-collapsed-closed {
   from {
     transform: var(--transform);

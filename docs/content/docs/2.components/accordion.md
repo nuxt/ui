@@ -22,6 +22,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
   - ui
@@ -33,7 +35,7 @@ props:
     content: 'text-muted'
   items:
     - label: 'Is Nuxt UI free to use?'
-      content: 'Yes! Nuxt UI is completely free and open source under the MIT license. All 100+ components are available to everyone.'
+      content: 'Yes! Nuxt UI is completely free and open source under the MIT license. All 125+ components are available to everyone.'
     - label: 'Can I use Nuxt UI with Vue without Nuxt?'
       content: 'Yes! While optimized for Nuxt, Nuxt UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.'
     - label: 'Is Nuxt UI production-ready?'
@@ -260,7 +262,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 ### Control active item(s)
 
-You can control the active item(s) by using the `default-value` prop or the `v-model` directive with the index of the item.
+You can control the active item by using the `default-value` prop or the `v-model` directive with the `value` of the item. If no `value` is provided, it defaults to the index **as a string**.
 
 ::component-example
 ---
@@ -271,7 +273,7 @@ props:
 ::
 
 ::tip
-You can also pass the `value` of one of the items if provided.
+Use the `value-key` prop to change the key used to match items when a `v-model` or `default-value` is provided.
 ::
 
 ::caution

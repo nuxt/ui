@@ -1,6 +1,6 @@
+import type { ComponentPublicInstance, MaybeRef } from 'vue'
 import { ref, computed, unref, onMounted, watch, reactive } from 'vue'
 import { useFileDialog, useDropZone } from '@vueuse/core'
-import type { MaybeRef } from '@vueuse/core'
 
 export interface UseFileUploadOptions {
   /**
@@ -45,12 +45,12 @@ export function useFileUpload(options: UseFileUploadOptions) {
     dropzone = true,
     onUpdate
   } = options
-  const inputRef = ref<HTMLInputElement>()
+  const inputRef = ref<ComponentPublicInstance>()
   const dropzoneRef = ref<HTMLDivElement>()
 
   const dataTypes = computed(() => parseAcceptToDataTypes(unref(accept)))
 
-  const onDrop = (files: FileList | File[] | null) => {
+  const onDrop = (files: FileList | File[] | null, fromDropZone = false) => {
     if (!files || files.length === 0) {
       return
     }
@@ -60,6 +60,18 @@ export function useFileUpload(options: UseFileUploadOptions) {
     if (files.length > 1 && !multiple) {
       files = [files[0]!]
     }
+
+    // Sync dropped files to the input element for proper native validation
+    if (fromDropZone && inputRef.value?.$el) {
+      try {
+        const dt = new DataTransfer()
+        files.forEach(file => dt.items.add(file))
+        inputRef.value.$el.files = dt.files
+      } catch (e) {
+        console.warn('Could not sync files to input element:', e)
+      }
+    }
+
     onUpdate(files)
   }
 
@@ -75,7 +87,7 @@ export function useFileUpload(options: UseFileUploadOptions) {
 
   onMounted(() => {
     const { isOverDropZone } = dropzone
-      ? useDropZone(dropzoneRef, { dataTypes: dataTypes.value, onDrop })
+      ? useDropZone(dropzoneRef, { dataTypes: dataTypes.value, onDrop: files => onDrop(files, true) })
       : { isOverDropZone: ref(false) }
 
     watch(isOverDropZone, (value) => {
@@ -85,13 +97,13 @@ export function useFileUpload(options: UseFileUploadOptions) {
     const { onChange, open } = useFileDialog({
       accept: unref(accept),
       multiple,
-      input: unref(inputRef),
+      input: unref(inputRef)?.$el,
       reset
     })
 
     fileDialog.open = open
 
-    onChange(fileList => onDrop(fileList))
+    onChange(fileList => onDrop(fileList, false))
   })
 
   return {
