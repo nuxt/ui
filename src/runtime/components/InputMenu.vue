@@ -235,7 +235,7 @@ import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, T
 import { Combobox, Autocomplete } from 'reka-ui/namespaced'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { reactivePick, reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
 import { useFieldGroup } from '../composables/useFieldGroup'
@@ -275,10 +275,8 @@ const appConfig = useAppConfig() as InputMenu['AppConfig']
 const uiProp = useComponentUI('inputMenu', props)
 const { filterGroups } = useFilter()
 
-const rootPropsPick = props.autocomplete
-  ? reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'resetSearchTermOnBlur', 'highlightOnHover', 'openOnClick', 'openOnFocus')
-  : reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'openOnClick', 'openOnFocus', 'by')
-const rootProps = useForwardPropsEmits(rootPropsPick, emits)
+const rootPropsPick = reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'openOnClick', 'openOnFocus', 'by')
+const rootProps = useForwardPropsEmits(props.autocomplete ? reactiveOmit(rootPropsPick, 'multiple', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'by') : rootPropsPick, emits)
 const Component = computed(() => props.autocomplete ? Autocomplete : Combobox)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
@@ -603,14 +601,14 @@ defineExpose({
     :disabled="disabled"
     data-slot="root"
     :class="ui.root({ class: [uiProp?.root, props.class] })"
-    :as-child="!!multiple"
+    :as-child="!!multiple && !autocomplete"
     ignore-filter
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
     <Component.Anchor :as-child="!multiple" data-slot="base" :class="ui.base({ class: uiProp?.base })">
       <TagsInputRoot
-        v-if="multiple"
+        v-if="multiple && !autocomplete"
         v-slot="{ modelValue: tags }"
         :model-value="(modelValue as string[])"
         :disabled="disabled"

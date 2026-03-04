@@ -266,7 +266,7 @@ name: 'input-menu-autocomplete-example'
 ::
 
 ::caution
-When `autocomplete` is `true`, `multiple`, `by`, `displayValue`, `resetSearchTermOnSelect` and `resetModelValueOnClear` are not applicable.
+When `autocomplete` is `true`, `multiple`, `by`, `resetSearchTermOnSelect` and `resetModelValueOnClear` are not applicable.
 ::
 
 ::tip
