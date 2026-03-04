@@ -16,17 +16,6 @@ exports[`Sidebar > renders with actions slot correctly 1`] = `
 </aside>"
 `;
 
-exports[`Sidebar > renders with body slot correctly 1`] = `
-"<!-- Non-collapsible: simple inline sidebar -->
-<aside data-slot="root" data-variant="sidebar" class="peer [--sidebar-width:16rem] [--sidebar-width-icon:4rem] h-full w-(--sidebar-width) border-e border-default">
-  <div data-slot="inner" class="flex size-full flex-col overflow-hidden bg-default divide-y divide-default">
-    <!--v-if-->
-    <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4">Body slot</div>
-    <!--v-if-->
-  </div>
-</aside>"
-`;
-
 exports[`Sidebar > renders with class correctly 1`] = `
 "<!-- Non-collapsible: simple inline sidebar -->
 <aside data-slot="root" data-variant="sidebar" class="peer [--sidebar-width:16rem] [--sidebar-width-icon:4rem] h-full w-(--sidebar-width) border-e border-default custom-class">

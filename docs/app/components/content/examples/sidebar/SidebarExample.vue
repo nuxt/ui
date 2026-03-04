@@ -110,16 +110,14 @@ defineShortcuts(extractShortcuts(teamsItems.value))
     </USidebar>
 
     <div class="flex-1 flex flex-col">
-      <UHeader toggle-side="left" :ui="{ container: 'px-4!' }">
-        <template #toggle>
-          <UButton
-            icon="i-lucide-panel-left"
-            color="neutral"
-            variant="ghost"
-            @click="open = !open"
-          />
-        </template>
-      </UHeader>
+      <div class="h-(--ui-header-height) shrink-0 flex items-center px-4 border-b border-default">
+        <UButton
+          icon="i-lucide-panel-left"
+          color="neutral"
+          variant="ghost"
+          @click="open = !open"
+        />
+      </div>
 
       <div class="flex-1 p-4">
         <USkeleton class="size-full animate-pulse" />
