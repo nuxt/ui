@@ -86,10 +86,11 @@ function getEmojiFlag(locale: string): string {
       </div>
     </div>
     <ProseNote to="https://github.com/nuxt/ui/tree/v4/src/runtime/locale" target="_blank">
-      If you need additional languages, you can contribute by creating a PR to add a new locale in <ProseCode> src/runtime/locale/</ProseCode>.
+      If you need additional languages, you can contribute by creating a PR to add a new locale in <ProseCode>src/runtime/locale/</ProseCode>.
     </ProseNote>
     <ProseTip>
       You can use the <ProseCode>nuxt-ui</ProseCode> CLI to create a new locale:
+      
       <ProsePre language="bash">nuxt-ui make locale --code "en" --name "English"</ProsePre>
     </ProseTip>
   </div>
