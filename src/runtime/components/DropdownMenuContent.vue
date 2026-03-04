@@ -103,6 +103,8 @@ const groups = computed(() => {
   if (!props.items?.length) return [] as DropdownMenuItem[][]
   return (isArrayOfArray(props.items) ? props.items : [props.items]) as DropdownMenuItem[][]
 })
+const isStructuralItem = (item: DropdownMenuItem) => !!item.type && ['label', 'separator'].includes(item.type)
+
 const filteredGroups = computed(() => {
   if (!props.filter || props.ignoreFilter || !searchTerm.value) {
     return groups.value
@@ -112,10 +114,10 @@ const filteredGroups = computed(() => {
 
   return filterGroups(groups.value, searchTerm.value, {
     fields,
-    isStructural: (item: DropdownMenuItem) => !!item.type && ['label', 'separator'].includes(item.type)
+    isStructural: isStructuralItem
   })
 })
-const hasFilteredItems = computed(() => filteredGroups.value.some(group => group.some(item => !item.type || !['label', 'separator'].includes(item.type))))
+const hasFilteredItems = computed(() => filteredGroups.value.some(group => group.some(item => !isStructuralItem(item))))
 </script>
 
 <template>
@@ -208,6 +210,7 @@ const hasFilteredItems = computed(() => filteredGroups.value.some(group => group
                 :checked-icon="checkedIcon"
                 :loading-icon="loadingIcon"
                 :external-icon="externalIcon"
+                :size="size"
                 :filter="item.filter"
                 v-bind="item.content"
               >
