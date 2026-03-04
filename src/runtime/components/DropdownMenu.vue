@@ -33,6 +33,8 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   open?: boolean
   defaultOpen?: boolean
   filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  filterFields?: string[]
+  ignoreFilter?: boolean
   children?: ArrayOrNested<DropdownMenuItem>
   onSelect?: (e: Event) => void
   onUpdateChecked?: (checked: boolean) => void

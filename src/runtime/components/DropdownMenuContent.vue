@@ -212,6 +212,8 @@ const hasFilteredItems = computed(() => filteredGroups.value.some(group => group
                 :external-icon="externalIcon"
                 :size="size"
                 :filter="item.filter"
+                :filter-fields="item.filterFields || filterFields"
+                :ignore-filter="item.ignoreFilter ?? ignoreFilter"
                 v-bind="item.content"
               >
                 <template v-for="(_, name) in getProxySlots()" #[name]="slotData">

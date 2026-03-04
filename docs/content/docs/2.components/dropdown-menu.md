@@ -101,6 +101,8 @@ Use the `items` prop as an array of objects with the following properties:
 - [`onUpdateChecked?: (checked: boolean) => void`{lang="ts-type"}](#with-checkbox-items)
 - `children?: DropdownMenuItem[] | DropdownMenuItem[][]`{lang="ts-type"}
 - [`filter?: boolean | InputProps`{lang="ts-type"}](#with-filter-items)
+- `filterFields?: string[]`{lang="ts-type"}
+- `ignoreFilter?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
 
