@@ -100,6 +100,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `onSelect?: (e: Event) => void`{lang="ts-type"}
 - [`onUpdateChecked?: (checked: boolean) => void`{lang="ts-type"}](#with-checkbox-items)
 - `children?: DropdownMenuItem[] | DropdownMenuItem[][]`{lang="ts-type"}
+- [`input?: boolean | InputProps`{lang="ts-type"}](#with-input-items)
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
 
@@ -231,9 +232,9 @@ slots:
 :u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
-### Filter
+### Input :badge{label="Soon" class="align-text-top"}
 
-Use the `filter` prop to display a filter input inside the DropdownMenu. Defaults to `false`.
+Use the `input` prop to display an input inside the DropdownMenu. Defaults to `false`.
 
 ::component-code
 ---
@@ -246,7 +247,7 @@ external:
 externalTypes:
   - DropdownMenuItem[]
 props:
-  filter: true
+  input: true
   items:
     - label: Profile
       icon: i-lucide-user
@@ -269,6 +270,10 @@ slots:
 ---
 
 :u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+::
+
+::tip{to="#with-input-items"}
+You can also enable the input on specific sub-menus using the `input` field on items with `children`.
 ::
 
 ::tip
@@ -438,6 +443,26 @@ name: 'dropdown-menu-checkbox-items-example'
 
 ::note
 To ensure reactivity for the `checked` state of items, it's recommended to wrap your `items` array inside a `computed`.
+::
+
+### With switch items
+
+You can use the `slot` property with a `#{{ slot }}-trailing` slot to render a [Switch](/docs/components/switch) inside an item.
+
+::component-example
+---
+name: 'dropdown-menu-switch-items-example'
+---
+::
+
+### With input items :badge{label="Soon" class="align-text-top"}
+
+You can use the `input` property on items with `children` to display an input inside the sub-menu.
+
+::component-example
+---
+name: 'dropdown-menu-filter-items-example'
+---
 ::
 
 ### With color items

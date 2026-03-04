@@ -60,7 +60,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'No matching data',
-      search: 'Filter…'
+      search: 'Search…'
     },
     dashboardSearch: {
       theme: 'Theme'

@@ -37,7 +37,30 @@ const items = computed(() => [
     }
   }], [{
     label: 'Team',
-    icon: 'i-lucide-users'
+    icon: 'i-lucide-users',
+    input: true,
+    children: [{
+      label: 'benjamincanac',
+      avatar: { src: 'https://github.com/benjamincanac.png' }
+    }, {
+      label: 'HugoRCD',
+      avatar: { src: 'https://github.com/HugoRCD.png' }
+    }, {
+      label: 'romhml',
+      avatar: { src: 'https://github.com/romhml.png' }
+    }, {
+      label: 'sandros94',
+      avatar: { src: 'https://github.com/sandros94.png' }
+    }, {
+      label: 'hywax',
+      avatar: { src: 'https://github.com/hywax.png' }
+    }, {
+      label: 'J-Michalek',
+      avatar: { src: 'https://github.com/J-Michalek.png' }
+    }, {
+      label: 'genu',
+      avatar: { src: 'https://github.com/genu.png' }
+    }]
   }, {
     label: 'Invite users',
     icon: 'i-lucide-user-plus',
@@ -144,7 +167,7 @@ defineShortcuts(extractShortcuts(items.value))
   </Navbar>
 
   <Matrix v-slot="props" :attrs="attrs">
-    <UDropdownMenu :items="items" :arrow="arrow" :content="{ side: 'bottom', align: 'start' }" v-bind="props">
+    <UDropdownMenu :items="items" :arrow="arrow" input :content="{ side: 'bottom', align: 'start' }" v-bind="props">
       <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
 
       <template #custom-trailing>
