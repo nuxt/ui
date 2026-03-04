@@ -15,7 +15,7 @@ export default (options: Required<ModuleOptions>) => ({
         linkLeadingIcon: [options.theme.transitions && 'group-active:-translate-x-0.5']
       },
       right: {
-        link: 'text-right',
+        link: 'text-end',
         linkLeadingIcon: [options.theme.transitions && 'group-active:translate-x-0.5']
       }
     }
