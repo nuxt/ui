@@ -24,6 +24,7 @@ function getEmojiFlag(locale: string): string {
     he: 'il', // Hebrew -> Israel
     hi: 'in', // Hindi -> India
     hy: 'am', // Armenian -> Armenia
+    is: 'is', // Icelandic -> Iceland
     ja: 'jp', // Japanese -> Japan
     ka: 'ge', // Georgian -> Georgia
     kk: 'kz', // Kazakh -> Kazakhstan
@@ -79,13 +80,15 @@ function getEmojiFlag(locale: string): string {
 
           <div class="text-sm">
             <div class="font-semibold">{{ locale.name }}</div>
-            <div class="mt-1">Code: <ProseCode class="text-xs">{{ locale.code }}</ProseCode></div>
+            <div class="mt-1">Code: <ProseCode class="text-xs">{{ locale.code }}</ProseCode>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <ProseNote to="https://github.com/nuxt/ui/tree/v4/src/runtime/locale" target="_blank">
-      If you need additional languages, you can contribute by creating a PR to add a new locale in <ProseCode>src/runtime/locale/</ProseCode>.
+      If you need additional languages, you can contribute by creating a PR to add a new locale in <ProseCode>
+        src/runtime/locale/</ProseCode>.
     </ProseNote>
     <ProseTip>
       You can use the <ProseCode>nuxt-ui</ProseCode> CLI to create a new locale:
