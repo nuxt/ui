@@ -90,7 +90,7 @@ function getEmojiFlag(locale: string): string {
     </ProseNote>
     <ProseTip>
       You can use the <ProseCode>nuxt-ui</ProseCode> CLI to create a new locale:
-      
+
       <ProsePre language="bash">nuxt-ui make locale --code "en" --name "English"</ProsePre>
     </ProseTip>
   </div>
