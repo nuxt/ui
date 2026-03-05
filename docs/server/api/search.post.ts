@@ -97,13 +97,12 @@ export default defineEventHandler(async (event) => {
   const mcpTools = await httpClient.tools()
 
   return streamText({
-    model: gateway('anthropic/claude-opus-4.6'),
+    model: gateway('anthropic/claude-sonnet-4.6'),
     maxOutputTokens: 16000,
     providerOptions: {
       anthropic: {
         thinking: {
-          type: 'enabled',
-          budgetTokens: 2000
+          type: 'adaptive'
         }
       }
     },
