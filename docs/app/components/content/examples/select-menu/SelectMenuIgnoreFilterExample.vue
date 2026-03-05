@@ -29,7 +29,10 @@ function onOpen() {
   <USelectMenu
     v-model:search-term="searchTerm"
     :items="users"
-    :loading="status === 'pending'"
+    :search-input="{
+      icon: 'i-lucide-search',
+      loading: status === 'pending'
+    }"
     ignore-filter
     icon="i-lucide-user"
     placeholder="Select user"

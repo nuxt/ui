@@ -28,13 +28,5 @@ const items: DropdownMenuItem[] = [{
     :ui="{ content: 'w-64' }"
   >
     <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
-
-    <template #item-label="{ item }">
-      {{ item.label }}
-
-      <span class="text-muted">
-        {{ item.description }}
-      </span>
-    </template>
   </UDropdownMenu>
 </template>

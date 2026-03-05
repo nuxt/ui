@@ -45,6 +45,37 @@ props:
         icon: i-lucide-monitor
     - - label: Team
         icon: i-lucide-users
+        filter:
+          placeholder: 'Search members...'
+        children:
+          - - label: benjamincanac
+              avatar:
+                src: 'https://github.com/benjamincanac.png'
+                loading: lazy
+            - label: HugoRCD
+              avatar:
+                src: 'https://github.com/HugoRCD.png'
+                loading: lazy
+            - label: romhml
+              avatar:
+                src: 'https://github.com/romhml.png'
+                loading: lazy
+            - label: sandros94
+              avatar:
+                src: 'https://github.com/sandros94.png'
+                loading: lazy
+            - label: hywax
+              avatar:
+                src: 'https://github.com/hywax.png'
+                loading: lazy
+            - label: J-Michalek
+              avatar:
+                src: 'https://github.com/J-Michalek.png'
+                loading: lazy
+            - label: genu
+              avatar:
+                src: 'https://github.com/genu.png'
+                loading: lazy
       - label: Invite users
         icon: i-lucide-user-plus
         children:
@@ -54,6 +85,15 @@ props:
               icon: i-lucide-message-square
           - - label: More
               icon: i-lucide-circle-plus
+              children:
+                - label: Import from Slack
+                  icon: i-simple-icons-slack
+                  to: 'https://slack.com'
+                  target: _blank
+                - label: Import from Trello
+                  icon: i-simple-icons-trello
+                - label: Import from Asana
+                  icon: i-simple-icons-asana
       - label: New team
         icon: i-lucide-plus
         kbds:
@@ -71,6 +111,7 @@ props:
         disabled: true
     - - label: Logout
         icon: i-lucide-log-out
+        color: error
         kbds:
           - shift
           - meta
@@ -147,6 +188,15 @@ props:
               icon: i-lucide-message-square
           - - label: More
               icon: i-lucide-circle-plus
+              children:
+                - label: Import from Slack
+                  icon: i-simple-icons-slack
+                  to: 'https://slack.com'
+                  target: _blank
+                - label: Import from Trello
+                  icon: i-simple-icons-trello
+                - label: Import from Asana
+                  icon: i-simple-icons-asana
       - label: New team
         icon: i-lucide-plus
         kbds:
@@ -239,6 +289,14 @@ slots:
 
 Use the `filter` prop to display a filter input inside the DropdownMenu. Defaults to `false`.
 
+::note{to="#with-ignore-filter"}
+Use the `ignore-filter` prop to disable the internal search and use your own search logic.
+::
+
+::note{to="#with-filter-fields"}
+Use the `filter-fields` prop to specify which fields to filter by. By default, it uses the `labelKey` prop.
+::
+
 You can pass any property from the [Input](/docs/components/input) component to customize it.
 
 ::component-code
@@ -247,13 +305,16 @@ prettier: true
 collapse: true
 ignore:
   - items
+  - filter.icon
+  - content.align
   - ui.content
 external:
   - items
 externalTypes:
   - DropdownMenuItem[]
 props:
-  filter: true
+  filter:
+    icon: i-lucide-search
   items:
     - label: Profile
       icon: i-lucide-user
@@ -267,6 +328,8 @@ props:
       icon: i-lucide-user-plus
     - label: New team
       icon: i-lucide-plus
+  content:
+    align: start
   ui:
     content: 'w-48'
 slots:
@@ -276,14 +339,6 @@ slots:
 ---
 
 :u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
-::
-
-::note{to="#with-ignore-filter"}
-Use the `ignore-filter` prop to disable the internal search and use your own search logic.
-::
-
-::note{to="#with-filter-fields"}
-Use the `filter-fields` prop to specify which fields to filter by. By default, it uses the `labelKey` prop.
 ::
 
 ::tip{to="#with-filter-items"}
@@ -531,7 +586,7 @@ name: 'dropdown-menu-switch-items-example'
 
 ### With ignore filter :badge{label="Soon" class="align-text-top"}
 
-When using the `filter` prop, you can set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
+When using the `filter` prop or the `filter` field on items with `children`, you can set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
 
 ::component-example
 ---
@@ -541,12 +596,12 @@ name: 'dropdown-menu-ignore-filter-example'
 ::
 
 ::note
-This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls. The fetch is deferred with `immediate: false` so no request is made until the menu opens.
 ::
 
 ### With filter fields :badge{label="Soon" class="align-text-top"}
 
-When using the `filter` prop, you can set the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
+When using the `filter` prop or the `filter` field on items with `children`, you can set the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
 
 ::component-example
 ---
@@ -554,7 +609,6 @@ collapse: true
 name: 'dropdown-menu-filter-fields-example'
 ---
 ::
-
 
 ### With trigger content width
 

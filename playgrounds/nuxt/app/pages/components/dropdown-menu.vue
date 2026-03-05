@@ -39,7 +39,9 @@ const items = computed(() => [
   }], [{
     label: 'Team',
     icon: 'i-lucide-users',
-    filter: true,
+    filter: {
+      placeholder: 'Search members...'
+    },
     children: [{
       label: 'benjamincanac',
       avatar: { src: 'https://github.com/benjamincanac.png' }
