@@ -45,7 +45,7 @@ function processThemeToolCalls() {
 const chat = new Chat({
   messages: messages.value,
   transport: new DefaultChatTransport({
-    api: '/api/search',
+    api: '/api/ai',
     headers: { [headerName]: csrf },
     body: { theme }
   }),

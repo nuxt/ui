@@ -67,7 +67,7 @@ export default defineNuxtConfig({
 
   routeRules: {
     // @ts-expect-error https://github.com/Morgbn/nuxt-csurf
-    '/api/search': { csurf: { methodsToProtect: ['POST'] } },
+    '/api/ai': { csurf: { methodsToProtect: ['POST'] } },
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
