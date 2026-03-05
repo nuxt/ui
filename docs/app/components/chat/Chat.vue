@@ -27,15 +27,16 @@ function processThemeToolCalls() {
     if (message.role !== 'assistant') continue
 
     for (const part of message.parts || []) {
-      const p = part as any
-      if (!p.toolCallId || _themeApplied.has(p.toolCallId)) continue
-      if (p.state !== 'output-available' && p.state !== 'input-available') continue
+      if (!isToolUIPart(part)) continue
+      if (_themeApplied.has(part.toolCallId)) continue
+      if (part.state !== 'output-available' && part.state !== 'input-available') continue
 
-      if (p.type === 'tool-applyTheme' && p.input) {
-        _themeApplied.add(p.toolCallId)
-        applyThemeSettings(p.input)
-      } else if (p.type === 'tool-resetTheme') {
-        _themeApplied.add(p.toolCallId)
+      const name = getToolName(part)
+      if (name === 'applyTheme' && part.input) {
+        _themeApplied.add(part.toolCallId)
+        applyThemeSettings(part.input)
+      } else if (name === 'resetTheme') {
+        _themeApplied.add(part.toolCallId)
         resetTheme()
       }
     }

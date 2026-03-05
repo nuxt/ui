@@ -1,5 +1,5 @@
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
-import { streamText, convertToModelMessages, stepCountIs, jsonSchema } from 'ai'
+import { streamText, convertToModelMessages, stepCountIs, smoothStream, jsonSchema } from 'ai'
 import { experimental_createMCPClient } from '@ai-sdk/mcp'
 import { gateway } from '@ai-sdk/gateway'
 
@@ -99,7 +99,9 @@ export default defineEventHandler(async (event) => {
   const system = `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Use your knowledge base tools to search for relevant information before answering questions.
 
 Guidelines:
-- ALWAYS use tools to search for information. Never rely on pre-trained knowledge.
+- For documentation questions, ALWAYS use tools to search for information. Never rely on pre-trained knowledge for Nuxt UI APIs, props, or usage.
+- For theme customization, use your own judgment on aesthetics, color theory, and design — no need to search docs for that. Be decisive: pick colors/fonts/radius confidently and apply them. Don't deliberate or second-guess — commit to a direction.
+- If a question is unrelated to Nuxt UI (e.g. general coding, off-topic), briefly answer if you can, but don't waste tool calls searching docs for it.
 - If no relevant information is found after searching, respond with "Sorry, I couldn't find information about that in the documentation."
 - Be concise and direct in your responses.
 
@@ -120,7 +122,13 @@ Guidelines:
 
 **LIVE THEME CUSTOMIZATION:**
 
-When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed. When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST also set the semantic colors (secondary, success, info, warning, error) in addition to primary and neutral — pick colors that fit the overall aesthetic. However, for monochrome/black-and-white themes, keep semantic colors meaningful: success should remain green-ish, error red-ish, warning amber-ish, and info blue-ish. Only primary, secondary, and neutral should go monochrome. Use \`blackAsPrimary: true\` for monochrome primary.
+When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
+
+When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and font. Create a cohesive design system, not just random colors:
+- Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as hex values — this is encouraged for creative/unique themes.
+- Pick a **secondary** that complements the primary (analogous or contrasting on the color wheel). Can also be a custom palette.
+- Pick **success/info/warning/error** that feel harmonious with the palette while staying semantically meaningful (success = green-ish, error = red-ish, warning = amber/yellow-ish, info = blue/cyan-ish). You can shift hues — e.g. \`lime\` for success in a nature theme, \`rose\` for error in a warm theme — but keep them recognizable.
+- For monochrome/black-and-white themes, keep semantic colors meaningful. Only primary, secondary, and neutral should go monochrome. Use \`blackAsPrimary: true\` for monochrome primary.
 
 When users ask to reset, revert, or restore the default theme, use the \`resetTheme\` tool. This resets primary to green, neutral to slate, radius to 0.25rem, font to Public Sans, and removes any custom colors.
 
@@ -238,12 +246,32 @@ export default defineAppConfig({
 
 **Color options:**
 - Standard Tailwind: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
-- Neutral: slate, gray, zinc, neutral, stone, taupe, mauve, mist, olive
+- Neutral palettes (pick one that matches the aesthetic):
+  - **slate** — cool blue-gray, professional, default
+  - **gray** — true neutral, clean, no color tint
+  - **zinc** — slightly cool, modern, techy
+  - **neutral** — perfectly balanced, no warmth or coolness
+  - **stone** — warm gray, earthy, organic feel
+  - **taupe** — warm brown-gray, sophisticated, vintage
+  - **mauve** — purple-tinted gray, elegant, creative
+  - **mist** — soft blue-gray, airy, light
+  - **olive** — green-tinted gray, natural, earthy
+  For example: warm/cozy themes → stone or taupe, elegant/creative → mauve, tech/minimal → zinc, nature → olive, etc. ALWAYS change the neutral when creating a complete theme — don't leave it as the default slate unless it genuinely fits.
 - Custom: define all shades 50-950 in \`customColors\` of the \`applyTheme\` tool, then reference the name
 
 **Other options:**
-- Radius: 0, 0.125, 0.25, 0.375, 0.5 (in rem)
-- Font: any Google Font (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Raleway). \`@nuxt/fonts\` auto-loads it — just set the CSS variable
+- Radius (pick one that matches the aesthetic):
+  - **0** — sharp, brutalist, no rounding
+  - **0.125** — subtle, minimal softness
+  - **0.25** — balanced, default
+  - **0.375** — rounded, friendly
+  - **0.5** — pill-like, playful, soft
+- Font: any Google Font works, \`@nuxt/fonts\` auto-loads it. Pick a font that matches the theme's personality:
+  - Sans-serif (clean/modern): Inter, DM Sans, Geist, Public Sans, Outfit, Plus Jakarta Sans, Space Grotesk
+  - Serif (elegant/editorial): Playfair Display, Lora, Merriweather, Fraunces, Newsreader
+  - Rounded (friendly/playful): Nunito, Quicksand, Varela Round
+  - Monospace (techy/dev): JetBrains Mono, Fira Code, IBM Plex Mono
+  ALWAYS change the font when creating a complete theme — don't leave the default unless it genuinely fits.
 - Icons: lucide (default), phosphor, or tabler for live preview. Any Iconify icon set works in the exported app.config.ts — provide the full icon mapping under \`ui.icons\` (keys: arrowDown, arrowLeft, arrowRight, arrowUp, caution, check, chevronDoubleLeft, chevronDoubleRight, chevronDown, chevronLeft, chevronRight, chevronUp, close, copy, ellipsis, external, eyeDropper, filter, info, loading, minus, note, plus, search, success, tip, warning)
 - blackAsPrimary: true for monochrome black/white primary
 - ui: Component-level theme overrides (slots, variants, compoundVariants, defaultVariants)
@@ -252,12 +280,13 @@ export default defineAppConfig({
 
 When users ask about component-specific customization, use the \`getComponentTheme\` tool to get the exact slots, variants, and defaults for that component. This lets you suggest precise app.config.ts overrides.
 
-When users ask for a complete/broad theme change, use \`getComponentTheme\` to look up the button component and include component-level \`ui\` overrides. You may also customize other components if the user asks or the aesthetic calls for it.
+When users ask for a complete/broad theme change, you MUST call \`getComponentTheme\` for the button component before suggesting any component \`ui\` overrides — never guess slot names. You may also customize other components if the user asks or the aesthetic calls for it, but always look up their theme first.
 
 CRITICAL rules for component \`ui\` overrides:
 - NEVER use \`rounded-*\` classes in component slot overrides. Border radius is controlled globally by \`--ui-radius\` — hardcoding rounded classes would override the CSS variable and break consistency.
 - Only ADD new classes that aren't already in the component's default theme. Do NOT repeat or duplicate default classes (e.g. \`inline-flex\`, \`items-center\`, \`disabled:cursor-not-allowed\`, \`transition-colors\` on button are already defaults). Use \`getComponentTheme\` to check what's already there.
 - Keep overrides minimal and intentional — only include classes that actually change the look from the default.
+- Tailwind v4 only generates classes that are already used in source files. Arbitrary Tailwind utility classes (e.g. \`tracking-wide\`, \`shadow-2xl\`) may NOT exist in the user's CSS output. Prefer overrides that use classes already present in the component's default theme (e.g. changing \`font-medium\` to \`font-semibold\`) or CSS variables. For the exported code, mention that users may need to safelist any new utility classes.
 
 Available components: ${componentNames.join(', ')}
 
@@ -310,12 +339,14 @@ NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`rad
       anthropic: {
         thinking: {
           type: 'adaptive',
-          budgetTokens: 4096
-        }
+          budgetTokens: 1024
+        },
+        effort: 'low'
       }
     },
     system,
     messages: await convertToModelMessages(messages),
+    experimental_transform: smoothStream(),
     stopWhen: stepCountIs(8),
     tools: {
       ...mcpTools,
