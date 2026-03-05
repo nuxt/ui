@@ -59,6 +59,7 @@ describe('InputMenu', () => {
     // Autocomplete
     ['with autocomplete', { props: { ...props, autocomplete: true } }],
     ['with autocomplete and modelValue', { props: { ...props, autocomplete: true, modelValue: 'Backlog' } }],
+    ['with autocomplete and defaultValue', { props: { ...props, autocomplete: true, defaultValue: 'Backlog' } }],
     ['with autocomplete and placeholder', { props: { ...props, autocomplete: true, placeholder: 'Type something...' } }],
     ['with autocomplete and content', { props: { ...props, autocomplete: true, content: { hideWhenEmpty: true } } }],
     ['with icon', { props: { icon: 'i-lucide-search' } }],

@@ -383,7 +383,7 @@ function autoFocus() {
 onMounted(() => {
   nextTick(() => {
     if (props.autocomplete) {
-      searchTerm.value = String(props.modelValue ?? '')
+      searchTerm.value = String(props.modelValue ?? props.defaultValue ?? '')
     } else {
       searchTerm.value = ''
     }
