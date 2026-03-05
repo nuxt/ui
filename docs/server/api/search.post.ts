@@ -3,7 +3,7 @@ import { streamText, convertToModelMessages, stepCountIs, jsonSchema } from 'ai'
 import { experimental_createMCPClient } from '@ai-sdk/mcp'
 import { gateway } from '@ai-sdk/gateway'
 
-const applyThemeTool = {
+const applyTheme = {
   description: 'Apply theme settings live on the docs site. Call this when users ask to change colors, radius, font, or other theme properties. Only include properties that changed.',
   inputSchema: jsonSchema<Record<string, any>>({
     type: 'object' as const,
@@ -53,7 +53,7 @@ const applyThemeTool = {
   execute: async (settings: Record<string, any>) => ({ applied: true, ...settings })
 }
 
-const resetThemeTool = {
+const resetTheme = {
   description: 'Reset the theme back to defaults (primary: green, neutral: slate, radius: 0.25rem, font: Public Sans). Call this when users ask to reset, revert, or restore the default theme.',
   inputSchema: jsonSchema<Record<string, never>>({
     type: 'object' as const,
@@ -67,7 +67,7 @@ export default defineEventHandler(async (event) => {
 
   const componentNames = theme ? Object.keys(theme) : []
 
-  const getComponentThemeTool = {
+  const getComponentTheme = {
     description: 'Get the theme definition (slots, variants, compoundVariants, defaultVariants) for a specific Nuxt UI component. Call this when you need to know the available slots and customization options to suggest component-level theming in app.config.ts.',
     inputSchema: jsonSchema<{ componentName: string }>({
       type: 'object' as const,
@@ -96,17 +96,7 @@ export default defineEventHandler(async (event) => {
   })
   const mcpTools = await httpClient.tools()
 
-  return streamText({
-    model: gateway('anthropic/claude-sonnet-4.6'),
-    maxOutputTokens: 16000,
-    providerOptions: {
-      anthropic: {
-        thinking: {
-          type: 'adaptive'
-        }
-      }
-    },
-    system: `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Use your knowledge base tools to search for relevant information before answering questions.
+  const system = `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Use your knowledge base tools to search for relevant information before answering questions.
 
 Guidelines:
 - ALWAYS use tools to search for information. Never rely on pre-trained knowledge.
@@ -264,6 +254,11 @@ When users ask about component-specific customization, use the \`getComponentThe
 
 When users ask for a complete/broad theme change, use \`getComponentTheme\` to look up the button component and include component-level \`ui\` overrides. You may also customize other components if the user asks or the aesthetic calls for it.
 
+CRITICAL rules for component \`ui\` overrides:
+- NEVER use \`rounded-*\` classes in component slot overrides. Border radius is controlled globally by \`--ui-radius\` — hardcoding rounded classes would override the CSS variable and break consistency.
+- Only ADD new classes that aren't already in the component's default theme. Do NOT repeat or duplicate default classes (e.g. \`inline-flex\`, \`items-center\`, \`disabled:cursor-not-allowed\`, \`transition-colors\` on button are already defaults). Use \`getComponentTheme\` to check what's already there.
+- Keep overrides minimal and intentional — only include classes that actually change the look from the default.
+
 Available components: ${componentNames.join(', ')}
 
 **When suggesting theme changes, you MUST:**
@@ -306,14 +301,27 @@ export default defineAppConfig({
 \`\`\`
 
 NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`radius\`, \`font\`) — those are internal to the docs site. Users should use CSS variables in main.css for radius, fonts, and monochrome primary.
-    `,
+    `
+
+  return streamText({
+    model: gateway('anthropic/claude-sonnet-4.6'),
+    maxOutputTokens: 16000,
+    providerOptions: {
+      anthropic: {
+        thinking: {
+          type: 'adaptive',
+          budgetTokens: 4096
+        }
+      }
+    },
+    system,
     messages: await convertToModelMessages(messages),
     stopWhen: stepCountIs(8),
     tools: {
       ...mcpTools,
-      applyTheme: applyThemeTool,
-      resetTheme: resetThemeTool,
-      getComponentTheme: getComponentThemeTool
+      applyTheme,
+      resetTheme,
+      getComponentTheme
     },
     onFinish: async () => {
       await httpClient.close()
@@ -323,7 +331,5 @@ NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`rad
 
       await httpClient.close()
     }
-  }).toUIMessageStreamResponse({
-    sendReasoning: true
-  })
+  }).toUIMessageStreamResponse()
 })

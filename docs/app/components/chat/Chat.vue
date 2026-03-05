@@ -2,7 +2,7 @@
 import type { DefineComponent } from 'vue'
 import { Chat } from '@ai-sdk/vue'
 import type { ToolUIPart, DynamicToolUIPart } from 'ai'
-import { DefaultChatTransport, isToolUIPart, getToolName } from 'ai'
+import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import * as theme from '#build/ui'
 import ProseStreamPre from '../prose/PreStream.vue'
 
@@ -261,17 +261,26 @@ defineShortcuts({
           :assistant="{ ui: { content: 'flex flex-col gap-2' } }"
         >
           <template #content="{ message }">
-            <ChatReasoning
-              v-if="message.role === 'assistant'"
-              :message="message"
-              :streaming="chat.status === 'streaming' && message.id === chat.messages.at(-1)?.id"
-              icon="i-lucide-brain"
-              chevron="leading"
-            />
-
             <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+              <ChatReasoning
+                v-if="isReasoningUIPart(part)"
+                :text="part.text"
+                :streaming="chat.status === 'streaming' && message.id === chat.messages.at(-1)?.id && index === message.parts.length - 1"
+                icon="i-lucide-brain"
+                chevron="leading"
+              >
+                <template #default="{ reasoningText }">
+                  <MDCCached
+                    v-if="reasoningText"
+                    :value="reasoningText"
+                    :cache-key="`reasoning-${message.id}-${index}`"
+                    :parser-options="{ highlight: false }"
+                    class="*:first:mt-0! *:last:mb-0!"
+                  />
+                </template>
+              </ChatReasoning>
               <MDCCached
-                v-if="part.type === 'text'"
+                v-else-if="isTextUIPart(part) && part.text.length > 0"
                 :value="part.text"
                 :cache-key="`${message.id}-${index}`"
                 :components="components"

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import type { UIMessage } from 'ai'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { useScroll } from '@vueuse/core'
 
 const props = withDefaults(defineProps<{
-  message: UIMessage
+  text?: string
   streaming?: boolean
+  open?: boolean
+  defaultOpen?: boolean
   duration?: number
   icon?: string
   /**
@@ -20,48 +21,34 @@ const props = withDefaults(defineProps<{
    */
   chevronIcon?: string
   autoCloseDelay?: number
+  class?: any
 }>(), {
+  open: undefined,
   streaming: false,
   chevron: 'trailing',
   autoCloseDelay: 500
 })
 
-const reasoningText = computed(() => {
-  return (props.message.parts || [])
-    .filter((p: any) => p.type === 'reasoning')
-    .map((p: any) => p.text)
-    .join('\n\n')
-})
-
-const hasReasoning = computed(() => {
-  return (props.message.parts || []).some((p: any) => p.type === 'reasoning')
-})
-
-const isStreaming = computed(() => {
-  if (!props.streaming) return false
-  const lastPart = props.message.parts?.at(-1)
-  return lastPart?.type === 'reasoning'
-})
-
-defineEmits<{
+const emit = defineEmits<{
   'update:open': [value: boolean]
 }>()
 
 const appConfig = useAppConfig()
 
-const internalOpen = ref(isStreaming.value)
-const startTime = ref<number | null>(isStreaming.value ? Date.now() : null)
+const isControlled = computed(() => props.open !== undefined)
+const internalOpen = ref(props.defaultOpen ?? props.streaming)
+const startTime = ref<number | null>(props.streaming ? Date.now() : null)
 const internalDuration = ref<number | undefined>(undefined)
 const autoCloseTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 
-watch(isStreaming, (streaming, wasStreaming) => {
+watch(() => props.streaming, (streaming, wasStreaming) => {
   if (streaming) {
     if (autoCloseTimeout.value) {
       clearTimeout(autoCloseTimeout.value)
       autoCloseTimeout.value = null
     }
     if (!wasStreaming) {
-      internalOpen.value = true
+      setOpen(true)
       startTime.value = Date.now()
     }
   } else if (wasStreaming) {
@@ -71,8 +58,7 @@ watch(isStreaming, (streaming, wasStreaming) => {
     }
     if (props.autoCloseDelay > 0) {
       autoCloseTimeout.value = setTimeout(() => {
-        internalOpen.value = false
-        autoCloseTimeout.value = null
+        setOpen(false)
       }, props.autoCloseDelay)
     }
   }
@@ -81,7 +67,7 @@ watch(isStreaming, (streaming, wasStreaming) => {
 const actualDuration = computed(() => props.duration ?? internalDuration.value)
 
 const thinkingMessage = computed(() => {
-  if (isStreaming.value || actualDuration.value === 0) {
+  if (props.streaming || actualDuration.value === 0) {
     return 'Thinking...'
   }
   if (actualDuration.value === undefined) {
@@ -97,12 +83,15 @@ const thinkingMessage = computed(() => {
   return `Thought for ${minutes} minute${minutes === 1 ? '' : 's'}`
 })
 
-function onOpenChange(value: boolean) {
+const resolvedOpen = computed(() => isControlled.value ? props.open : internalOpen.value)
+
+function setOpen(value: boolean) {
   if (autoCloseTimeout.value) {
     clearTimeout(autoCloseTimeout.value)
     autoCloseTimeout.value = null
   }
   internalOpen.value = value
+  emit('update:open', value)
 }
 
 onUnmounted(() => {
@@ -111,7 +100,7 @@ onUnmounted(() => {
   }
 })
 
-const hasContent = computed(() => !!reasoningText.value || isStreaming.value)
+const hasContent = computed(() => !!props.text || props.streaming)
 
 const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.chevronDown)
 
@@ -126,8 +115,8 @@ useResizeObserver(bodyRef, (entries) => {
   }
 })
 
-watch(reasoningText, () => {
-  if (isStreaming.value && bodyRef.value) {
+watch(() => props.text, () => {
+  if (props.streaming && bodyRef.value) {
     nextTick(() => {
       bodyRef.value!.scrollTop = bodyRef.value!.scrollHeight
     })
@@ -137,12 +126,13 @@ watch(reasoningText, () => {
 
 <template>
   <CollapsibleRoot
-    v-if="hasReasoning"
-    v-slot="{ open }"
-    :open="internalOpen"
+    v-if="hasContent"
+    v-slot="{ open: isOpen }"
+    :open="resolvedOpen"
     :unmount-on-hide="true"
     data-slot="root"
-    @update:open="onOpenChange"
+    :class="props.class"
+    @update:open="setOpen"
   >
     <CollapsibleTrigger
       as-child
@@ -165,7 +155,7 @@ watch(reasoningText, () => {
         </span>
         <UIcon v-else :name="icon" class="size-4 shrink-0" />
 
-        <ChatShimmer v-if="isStreaming" :text="thinkingMessage" class="truncate" />
+        <ChatShimmer v-if="streaming" :text="thinkingMessage" class="truncate" />
         <span v-else class="truncate">{{ thinkingMessage }}</span>
 
         <UIcon
@@ -183,8 +173,8 @@ watch(reasoningText, () => {
       <div class="relative pt-2">
         <div v-if="isOverflowing && !arrivedState.top" class="absolute inset-x-0 top-2 h-6 bg-linear-to-b from-default to-transparent pointer-events-none" />
         <div ref="bodyRef" data-slot="body" class="max-h-[200px] overflow-y-auto text-sm text-muted whitespace-pre-wrap">
-          <slot :open="open">
-            {{ reasoningText }}
+          <slot :open="isOpen" :reasoning-text="text || ''">
+            {{ text }}
           </slot>
         </div>
         <div v-if="isOverflowing && !arrivedState.bottom" class="absolute inset-x-0 bottom-0 h-6 bg-linear-to-t from-default to-transparent pointer-events-none" />
