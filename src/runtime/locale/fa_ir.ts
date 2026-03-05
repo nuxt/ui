@@ -59,6 +59,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'در این صفحه'
     },
+    dropdownMenu: {
+      noMatch: 'داده‌ای یافت نشد',
+      search: 'جستجو…'
+    },
     dashboardSearch: {
       theme: 'تم'
     },

@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'এই পৃষ্ঠায়'
     },
+    dropdownMenu: {
+      noMatch: 'কোন মিল পাওয়া যায়নি',
+      search: 'অনুসন্ধান করুন…'
+    },
     dashboardSearch: {
       theme: 'থিম'
     },

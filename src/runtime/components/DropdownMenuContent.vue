@@ -4,7 +4,7 @@ import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, Dropdown
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/dropdown-menu'
-import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots, IconProps } from '../types'
+import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots, IconProps, InputProps } from '../types'
 import type { ArrayOrNested, GetItemKeys, NestedItem, DynamicSlots, MergeTypes } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -28,17 +28,24 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
    * @IconifyIcon
    */
   externalIcon?: boolean | IconProps['name']
+  size?: DropdownMenu['variants']['size']
+  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  filterFields?: string[]
+  ignoreFilter?: boolean
+  searchTerm?: string
   class?: any
   ui: DropdownMenu['ui']
   uiOverride?: DropdownMenu['slots']
 }
 
-interface DropdownMenuContentEmits extends RekaDropdownMenuContentEmits {}
+interface DropdownMenuContentEmits extends RekaDropdownMenuContentEmits {
+  'update:searchTerm': [value: string]
+}
 
 type DropdownMenuContentSlots<
   A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
-> = Pick<DropdownMenuSlots<A>, 'item' | 'item-leading' | 'item-label' | 'item-description' | 'item-trailing' | 'content-top' | 'content-bottom'> & {
+> = Pick<DropdownMenuSlots<A>, 'item' | 'item-leading' | 'item-label' | 'item-description' | 'item-trailing' | 'empty' | 'content-top' | 'content-bottom'> & {
   default?(props?: {}): VNode[]
 }
 & DynamicSlots<MergeTypes<T>, 'label' | 'description', { active: boolean, index: number }>
@@ -47,11 +54,13 @@ type DropdownMenuContentSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<DropdownMenuItem>">
-import { computed, toRef } from 'vue'
+import { computed, ref, toRef } from 'vue'
+import { defu } from 'defu'
 import { DropdownMenu } from 'reka-ui/namespaced'
 import { useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useFilter } from '../composables/internal/useFilter'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { omit, get, isArrayOfArray } from '../utils'
@@ -60,6 +69,7 @@ import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
+import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
@@ -67,23 +77,47 @@ const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()
 const slots = defineSlots<DropdownMenuContentSlots<T>>()
 
-const { dir } = useLocale()
+const { t, dir } = useLocale()
 const appConfig = useAppConfig()
+const { filterGroups } = useFilter()
+
+const _searchTerm = ref('')
+const searchTerm = computed({
+  get: () => props.searchTerm ?? _searchTerm.value,
+  set: (value: string) => {
+    _searchTerm.value = value
+    emits('update:searchTerm', value)
+  }
+})
+
+const inputProps = toRef(() => defu(props.filter, { placeholder: t('dropdownMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
+const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'descriptionKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'size', 'filter', 'filterFields', 'ignoreFilter', 'searchTerm', 'class', 'ui', 'uiOverride'), emits)
 const getProxySlots = () => omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
 
 const childrenIcon = computed(() => dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight)
-const groups = computed<DropdownMenuItem[][]>(() =>
-  props.items?.length
-    ? isArrayOfArray(props.items)
-      ? props.items
-      : [props.items]
-    : []
-)
+const groups = computed(() => {
+  if (!props.items?.length) return [] as DropdownMenuItem[][]
+  return (isArrayOfArray(props.items) ? props.items : [props.items]) as DropdownMenuItem[][]
+})
+const isStructuralItem = (item: DropdownMenuItem) => !!item.type && ['label', 'separator'].includes(item.type)
+
+const filteredGroups = computed(() => {
+  if (!props.filter || props.ignoreFilter || !searchTerm.value) {
+    return groups.value
+  }
+
+  const fields = Array.isArray(props.filterFields) && props.filterFields.length ? props.filterFields : [props.labelKey] as string[]
+
+  return filterGroups(groups.value, searchTerm.value, {
+    fields,
+    isStructural: isStructuralItem
+  })
+})
+const hasFilteredItems = computed(() => filteredGroups.value.some(group => group.some(item => !isStructuralItem(item))))
 </script>
 
 <template>
@@ -128,10 +162,22 @@ const groups = computed<DropdownMenuItem[][]>(() =>
 
   <DropdownMenu.Portal v-bind="portalProps">
     <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" data-slot="content" :class="ui.content({ class: [uiOverride?.content, props.class] })" v-bind="contentProps">
+      <DropdownMenu.Filter v-if="!!filter" v-model="searchTerm" as-child>
+        <UInput
+          autofocus
+          autocomplete="off"
+          :size="size"
+          v-bind="inputProps"
+          data-slot="input"
+          :class="ui.input({ class: uiOverride?.input })"
+          @change.stop
+        />
+      </DropdownMenu.Filter>
+
       <slot name="content-top" :sub="sub ?? false" />
 
-      <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiOverride?.viewport })">
-        <DropdownMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: uiOverride?.group })">
+      <div v-if="!searchTerm || hasFilteredItems" role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiOverride?.viewport })">
+        <DropdownMenu.Group v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: uiOverride?.group })">
           <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
             <DropdownMenu.Label v-if="item.type === 'label'" data-slot="label" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class] })">
               <ReuseItemTemplate :item="item" :index="index" />
@@ -164,6 +210,10 @@ const groups = computed<DropdownMenuItem[][]>(() =>
                 :checked-icon="checkedIcon"
                 :loading-icon="loadingIcon"
                 :external-icon="externalIcon"
+                :size="size"
+                :filter="item.filter"
+                :filter-fields="item.filterFields || filterFields"
+                :ignore-filter="item.ignoreFilter ?? ignoreFilter"
                 v-bind="item.content"
               >
                 <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
@@ -197,6 +247,12 @@ const groups = computed<DropdownMenuItem[][]>(() =>
             </ULink>
           </template>
         </DropdownMenu.Group>
+      </div>
+
+      <div v-if="searchTerm && !hasFilteredItems" data-slot="empty" :class="ui.empty({ class: uiOverride?.empty })">
+        <slot name="empty" :search-term="searchTerm">
+          {{ t('dropdownMenu.noMatch', { searchTerm }) }}
+        </slot>
       </div>
 
       <slot />

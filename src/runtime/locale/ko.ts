@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: '이 페이지에서'
     },
+    dropdownMenu: {
+      noMatch: '일치하는 데이터가 없습니다.',
+      search: '검색…'
+    },
     dashboardSearch: {
       theme: '테마'
     },

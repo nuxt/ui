@@ -6,6 +6,9 @@ links:
   - label: Combobox
     icon: i-custom-reka-ui
     to: https://reka-ui.com/docs/components/combobox
+  - label: Autocomplete
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/autocomplete
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputMenu.vue
@@ -250,6 +253,24 @@ props:
     - In Progress
     - Done
 ---
+::
+
+### Autocomplete :badge{label="Soon" class="align-text-top"}
+
+Use the `autocomplete` prop to turn the InputMenu into a free-form text input with suggestions. The `modelValue` becomes the input text (`string`) instead of a selected item.
+
+::component-example
+---
+name: 'input-menu-autocomplete-example'
+---
+::
+
+::caution
+When `autocomplete` is `true`, `multiple`, `by`, `resetSearchTermOnSelect` and `resetModelValueOnClear` are not applicable.
+::
+
+::tip
+Use the `content.hideWhenEmpty` prop to hide the menu when there are no matching suggestions.
 ::
 
 ### Content
@@ -846,7 +867,7 @@ name: 'input-menu-ignore-filter-example'
 ::
 
 ::note
-This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls. The fetch is deferred with `immediate: false` so no request is made until the user types.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls. The fetch is deferred with `immediate: false` so no request is made until the menu opens.
 ::
 
 ### With filter fields
