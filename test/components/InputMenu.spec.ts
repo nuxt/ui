@@ -178,6 +178,16 @@ describe('InputMenu', () => {
       await input.setValue('Option 1')
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
     })
+
+    test('searchTerm syncs when parent updates modelValue in autocomplete mode', async () => {
+      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], autocomplete: true, modelValue: 'Option 1' } })
+
+      await wrapper.setProps({ modelValue: 'Option 2' })
+
+      const emissions = wrapper.emitted('update:searchTerm')
+      expect(emissions).toBeTruthy()
+      expect(emissions![emissions!.length - 1]).toEqual(['Option 2'])
+    })
   })
 
   describe('it should display correct label', () => {

@@ -230,7 +230,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { computed, useTemplateRef, toRef, onMounted, toRaw, nextTick } from 'vue'
+import { computed, useTemplateRef, toRef, onMounted, toRaw, nextTick, watch } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'reka-ui'
 import { Combobox, Autocomplete } from 'reka-ui/namespaced'
 import { defu } from 'defu'
@@ -392,6 +392,12 @@ onMounted(() => {
   setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
+})
+
+watch(() => props.modelValue, (newValue) => {
+  if (props.autocomplete) {
+    searchTerm.value = String(newValue ?? '')
+  }
 })
 
 function onUpdate(value: any) {
