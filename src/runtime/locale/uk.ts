@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'На цій сторінці'
     },
+    dropdownMenu: {
+      noMatch: 'Збігів не знайдено',
+      search: 'Пошук…'
+    },
     dashboardSearch: {
       theme: 'Тема'
     },

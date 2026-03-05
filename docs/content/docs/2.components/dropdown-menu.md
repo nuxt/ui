@@ -45,6 +45,37 @@ props:
         icon: i-lucide-monitor
     - - label: Team
         icon: i-lucide-users
+        filter:
+          placeholder: 'Search members...'
+        children:
+          - - label: benjamincanac
+              avatar:
+                src: 'https://github.com/benjamincanac.png'
+                loading: lazy
+            - label: HugoRCD
+              avatar:
+                src: 'https://github.com/HugoRCD.png'
+                loading: lazy
+            - label: romhml
+              avatar:
+                src: 'https://github.com/romhml.png'
+                loading: lazy
+            - label: sandros94
+              avatar:
+                src: 'https://github.com/sandros94.png'
+                loading: lazy
+            - label: hywax
+              avatar:
+                src: 'https://github.com/hywax.png'
+                loading: lazy
+            - label: J-Michalek
+              avatar:
+                src: 'https://github.com/J-Michalek.png'
+                loading: lazy
+            - label: genu
+              avatar:
+                src: 'https://github.com/genu.png'
+                loading: lazy
       - label: Invite users
         icon: i-lucide-user-plus
         children:
@@ -54,6 +85,15 @@ props:
               icon: i-lucide-message-square
           - - label: More
               icon: i-lucide-circle-plus
+              children:
+                - label: Import from Slack
+                  icon: i-simple-icons-slack
+                  to: 'https://slack.com'
+                  target: _blank
+                - label: Import from Trello
+                  icon: i-simple-icons-trello
+                - label: Import from Asana
+                  icon: i-simple-icons-asana
       - label: New team
         icon: i-lucide-plus
         kbds:
@@ -71,6 +111,7 @@ props:
         disabled: true
     - - label: Logout
         icon: i-lucide-log-out
+        color: error
         kbds:
           - shift
           - meta
@@ -100,6 +141,9 @@ Use the `items` prop as an array of objects with the following properties:
 - `onSelect?: (e: Event) => void`{lang="ts-type"}
 - [`onUpdateChecked?: (checked: boolean) => void`{lang="ts-type"}](#with-checkbox-items)
 - `children?: DropdownMenuItem[] | DropdownMenuItem[][]`{lang="ts-type"}
+- [`filter?: boolean | InputProps`{lang="ts-type"}](#with-filter-items)
+- `filterFields?: string[]`{lang="ts-type"}
+- `ignoreFilter?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
 
@@ -144,6 +188,15 @@ props:
               icon: i-lucide-message-square
           - - label: More
               icon: i-lucide-circle-plus
+              children:
+                - label: Import from Slack
+                  icon: i-simple-icons-slack
+                  to: 'https://slack.com'
+                  target: _blank
+                - label: Import from Trello
+                  icon: i-simple-icons-trello
+                - label: Import from Asana
+                  icon: i-simple-icons-asana
       - label: New team
         icon: i-lucide-plus
         kbds:
@@ -191,6 +244,7 @@ Use the `content` prop to control how the DropdownMenu content is rendered, like
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -231,6 +285,66 @@ slots:
 :u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
+### Filter :badge{label="Soon" class="align-text-top"}
+
+Use the `filter` prop to display a filter input inside the DropdownMenu. Defaults to `false`.
+
+::note{to="#with-ignore-filter"}
+Use the `ignore-filter` prop to disable the internal search and use your own search logic.
+::
+
+::note{to="#with-filter-fields"}
+Use the `filter-fields` prop to specify which fields to filter by. By default, it uses the `labelKey` prop.
+::
+
+You can pass any property from the [Input](/docs/components/input) component to customize it.
+
+::component-code
+---
+prettier: true
+collapse: true
+ignore:
+  - items
+  - filter.icon
+  - content.align
+  - ui.content
+external:
+  - items
+externalTypes:
+  - DropdownMenuItem[]
+props:
+  filter:
+    icon: i-lucide-search
+  items:
+    - label: Profile
+      icon: i-lucide-user
+    - label: Billing
+      icon: i-lucide-credit-card
+    - label: Settings
+      icon: i-lucide-cog
+    - label: Team
+      icon: i-lucide-users
+    - label: Invite users
+      icon: i-lucide-user-plus
+    - label: New team
+      icon: i-lucide-plus
+  content:
+    align: start
+  ui:
+    content: 'w-48'
+slots:
+  default: |
+
+    <UButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
+---
+
+:u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+::
+
+::tip{to="#with-filter-items"}
+You can also enable the filter on specific sub-menus using the `filter` field on items with `children`.
+::
+
 ### Arrow
 
 Use the `arrow` prop to display an arrow on the DropdownMenu.
@@ -238,6 +352,7 @@ Use the `arrow` prop to display an arrow on the DropdownMenu.
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - arrow
   - items
@@ -273,6 +388,7 @@ Use the `size` prop to control the size of the DropdownMenu.
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - content.align
@@ -318,6 +434,7 @@ Use the `modal` prop to control whether the DropdownMenu blocks interaction with
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -352,6 +469,7 @@ Use the `disabled` prop to disable the DropdownMenu.
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -402,7 +520,19 @@ You can use the `color` property to highlight certain items with a color.
 
 ::component-example
 ---
+collapse: true
 name: 'dropdown-menu-color-items-example'
+---
+::
+
+### With filter items :badge{label="Soon" class="align-text-top"}
+
+You can use the `filter` property on items with `children` to display a filter input inside the sub-menu.
+
+::component-example
+---
+collapse: true
+name: 'dropdown-menu-filter-items-example'
 ---
 ::
 
@@ -412,6 +542,7 @@ You can control the open state by using the `default-open` prop or the `v-model:
 
 ::component-example
 ---
+collapse: true
 name: 'dropdown-menu-open-example'
 ---
 ::
@@ -433,12 +564,50 @@ You will have access to the following slots:
 
 ::component-example
 ---
+collapse: true
 name: 'dropdown-menu-custom-slot-example'
 ---
 ::
 
 ::tip{to="#slots"}
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
+::
+
+### With switch in items
+
+You can use the `slot` property with a `#{{ slot }}-trailing` slot to render a [Switch](/docs/components/switch) inside an item.
+
+::component-example
+---
+collapse: true
+name: 'dropdown-menu-switch-items-example'
+---
+::
+
+### With ignore filter :badge{label="Soon" class="align-text-top"}
+
+When using the `filter` prop or the `filter` field on items with `children`, you can set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
+
+::component-example
+---
+collapse: true
+name: 'dropdown-menu-ignore-filter-example'
+---
+::
+
+::note
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls. The fetch is deferred with `immediate: false` so no request is made until the menu opens.
+::
+
+### With filter fields :badge{label="Soon" class="align-text-top"}
+
+When using the `filter` prop or the `filter` field on items with `children`, you can set the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
+
+::component-example
+---
+collapse: true
+name: 'dropdown-menu-filter-fields-example'
+---
 ::
 
 ### With trigger content width

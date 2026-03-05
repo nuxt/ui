@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: '本页内容'
     },
+    dropdownMenu: {
+      noMatch: '没有匹配的数据',
+      search: '搜索…'
+    },
     dashboardSearch: {
       theme: '主题'
     },

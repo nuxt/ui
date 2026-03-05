@@ -4,6 +4,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import type { AppConfig } from '@nuxt/schema'
 import DropdownMenu from '../../src/runtime/components/DropdownMenu.vue'
+import type { DropdownMenuItem } from '../../src/runtime/components/DropdownMenu.vue'
 import type { ComponentConfig } from '../../src/runtime/types/tv'
 import { expectSlotProps } from '../utils/types'
 import theme from '#build/ui/dropdown-menu'
@@ -13,7 +14,7 @@ type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 describe('DropdownMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any
 
-  const items = [
+  const items: DropdownMenuItem[][] = [
     [{
       label: 'My account',
       avatar: {
@@ -93,7 +94,7 @@ describe('DropdownMenu', () => {
     }]
   ]
 
-  const itemsWithDescription = [
+  const itemsWithDescription: DropdownMenuItem[][] = [
     [{
       label: 'My account',
       description: 'Account settings',
@@ -128,6 +129,8 @@ describe('DropdownMenu', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with externalIcon', { props: { ...props, externalIcon: 'i-lucide-external-link' } }],
     ['without externalIcon', { props: { ...props, externalIcon: false } }],
+    ['with filter', { props: { ...props, filter: true } }],
+    ['with filter and searchTerm', { props: { ...props, filter: true, searchTerm: 'No match value' } }],
     ['with class', { props: { ...props, class: 'min-w-96' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots

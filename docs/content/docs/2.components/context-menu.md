@@ -191,6 +191,7 @@ Use the `size` prop to change the size of the ContextMenu.
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -227,6 +228,7 @@ Use the `modal` prop to control whether the ContextMenu blocks interaction with 
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -264,6 +266,7 @@ Use the `disabled` prop to disable the ContextMenu.
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -316,6 +319,7 @@ You can use the `color` property to highlight certain items with a color.
 
 ::component-example
 ---
+collapse: true
 name: 'context-menu-color-items-example'
 ---
 ::
@@ -333,6 +337,7 @@ You will have access to the following slots:
 
 ::component-example
 ---
+collapse: true
 name: 'context-menu-custom-slot-example'
 ---
 ::

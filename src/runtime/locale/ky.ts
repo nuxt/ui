@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Бул бетте'
     },
+    dropdownMenu: {
+      noMatch: 'Сүйлөшкөн маалыматтар жок',
+      search: 'Издөө…'
+    },
     dashboardSearch: {
       theme: 'Тема'
     },

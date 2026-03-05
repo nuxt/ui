@@ -60,7 +60,7 @@ export default (options: Required<ModuleOptions>) => {
           itemTrailingIcon: 'size-4',
           tagsItem: 'text-[10px]/3',
           tagsItemDeleteIcon: 'size-3',
-          empty: 'p-1 text-xs'
+          empty: 'p-2 text-xs'
         },
         sm: {
           label: 'p-1.5 text-[10px]/3 gap-1.5',
@@ -72,7 +72,7 @@ export default (options: Required<ModuleOptions>) => {
           itemTrailingIcon: 'size-4',
           tagsItem: 'text-[10px]/3',
           tagsItemDeleteIcon: 'size-3',
-          empty: 'p-1.5 text-xs'
+          empty: 'p-2.5 text-xs'
         },
         md: {
           label: 'p-1.5 text-xs gap-1.5',
@@ -84,7 +84,7 @@ export default (options: Required<ModuleOptions>) => {
           itemTrailingIcon: 'size-5',
           tagsItem: 'text-xs',
           tagsItemDeleteIcon: 'size-3.5',
-          empty: 'p-1.5 text-sm'
+          empty: 'p-2.5 text-sm'
         },
         lg: {
           label: 'p-2 text-xs gap-2',
@@ -96,7 +96,7 @@ export default (options: Required<ModuleOptions>) => {
           itemTrailingIcon: 'size-5',
           tagsItem: 'text-xs',
           tagsItemDeleteIcon: 'size-3.5',
-          empty: 'p-2 text-sm'
+          empty: 'p-3 text-sm'
         },
         xl: {
           label: 'p-2 text-sm gap-2',
@@ -108,7 +108,7 @@ export default (options: Required<ModuleOptions>) => {
           itemTrailingIcon: 'size-6',
           tagsItem: 'text-sm',
           tagsItemDeleteIcon: 'size-4',
-          empty: 'p-2 text-base'
+          empty: 'p-3 text-base'
         }
       }
     },

@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Op dëser Säit'
     },
+    dropdownMenu: {
+      noMatch: 'Keng entspriechend Donnéeën',
+      search: 'Sichen..'
+    },
     dashboardSearch: {
       theme: 'Thema'
     },

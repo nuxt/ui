@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Ezen az oldalon'
     },
+    dropdownMenu: {
+      noMatch: 'Nincs találat',
+      search: 'Keresés…'
+    },
     dashboardSearch: {
       theme: 'Téma'
     },

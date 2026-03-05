@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Ushbu sahifada'
     },
+    dropdownMenu: {
+      noMatch: 'Mos keluvchi natija topilmadi',
+      search: 'Qidirish…'
+    },
     dashboardSearch: {
       theme: 'Mavzu'
     },

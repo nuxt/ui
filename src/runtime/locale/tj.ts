@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Мундариҷа'
     },
+    dropdownMenu: {
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
+      search: 'Ҷустуҷӯ…'
+    },
     dashboardSearch: {
       theme: 'Мавзӯъ'
     },

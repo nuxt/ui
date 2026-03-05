@@ -59,6 +59,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'مەزمۇن'
     },
+    dropdownMenu: {
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      search: 'ئىزدەش…'
+    },
     dashboardSearch: {
       theme: 'تېما'
     },

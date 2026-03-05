@@ -59,6 +59,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'لەم پەڕەیەدا'
     },
+    dropdownMenu: {
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
+      search: 'گەڕان…'
+    },
     dashboardSearch: {
       theme: 'ڕووکار'
     },

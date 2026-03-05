@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Na tej strani'
     },
+    dropdownMenu: {
+      noMatch: 'Ni ujemanj',
+      search: 'Išči…'
+    },
     dashboardSearch: {
       theme: 'Tema'
     },

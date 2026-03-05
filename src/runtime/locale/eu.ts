@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Orri honetan'
     },
+    dropdownMenu: {
+      noMatch: 'Ez da datu bat ere aurkitu',
+      search: 'Bilatu…'
+    },
     dashboardSearch: {
       theme: 'Gaia'
     },

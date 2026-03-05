@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Trong trang này'
     },
+    dropdownMenu: {
+      noMatch: 'Không có kết quả phù hợp',
+      search: 'Tìm kiếm…'
+    },
     dashboardSearch: {
       theme: 'Chủ đề'
     },

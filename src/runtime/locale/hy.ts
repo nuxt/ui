@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Այս էջում'
     },
+    dropdownMenu: {
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      search: 'Որոնում…'
+    },
     dashboardSearch: {
       theme: 'Թեմա'
     },
