@@ -209,6 +209,65 @@ props:
 ---
 ::
 
+### Type
+
+Use the `type` prop to change the calendar picker type. Defaults to `date`.
+
+Set `type="month"` for a month-only picker.
+
+::component-code
+---
+cast:
+  modelValue: DateValue
+ignore:
+  - modelValue
+  - type
+external:
+  - modelValue
+props:
+  type: month
+  modelValue: [2022, 3, 1]
+---
+::
+
+Set `type="year"` for a year-only picker.
+
+::component-code
+---
+cast:
+  modelValue: DateValue
+ignore:
+  - modelValue
+  - type
+external:
+  - modelValue
+props:
+  type: year
+  modelValue: [2022, 1, 1]
+---
+::
+
+### Default View
+
+Use the `default-view` prop to set the initial view. Defaults to `day` when `type="date"`.
+
+::component-code
+---
+cast:
+  defaultValue: DateValue
+ignore:
+  - defaultView
+  - defaultValue
+external:
+  - defaultValue
+props:
+  defaultView: month
+  defaultValue: [2022, 2, 3]
+---
+::
+
+When using `type="date"`, the heading buttons let users switch between day, month, and year views.
+
 ## Examples
 
 ### With chip events
@@ -272,6 +331,26 @@ You can control the calendar with external controls by manipulating the date pas
 ::component-example
 ---
 name: 'calendar-external-controls-example'
+---
+::
+
+### As a month picker
+
+Use `type="month"` with a [Popover](/docs/components/popover) to create a month picker.
+
+::component-example
+---
+name: 'calendar-month-picker-example'
+---
+::
+
+### As a year picker
+
+Use `type="year"` with a [Popover](/docs/components/popover) to create a year picker.
+
+::component-example
+---
+name: 'calendar-year-picker-example'
 ---
 ::
 
