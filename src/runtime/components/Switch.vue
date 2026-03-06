@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { SwitchRootProps } from 'reka-ui'
+import type { SwitchRootProps, SwitchRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/switch'
@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Switch = ComponentConfig<typeof theme, AppConfig, 'switch'>
 
-export interface SwitchProps<T = boolean> extends Pick<SwitchRootProps<T>, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue' | 'trueValue' | 'falseValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface SwitchProps<T = boolean> extends Pick<SwitchRootProps<T>, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue' | 'modelValue' | 'trueValue' | 'falseValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -47,7 +47,7 @@ export interface SwitchProps<T = boolean> extends Pick<SwitchRootProps<T>, 'disa
   ui?: Switch['slots']
 }
 
-export type SwitchEmits = {
+export interface SwitchEmits<T = boolean> extends Pick<SwitchRootEmits<T>, 'update:modelValue'> {
   change: [event: Event]
 }
 
@@ -71,14 +71,12 @@ defineOptions({ inheritAttrs: false })
 
 const props = defineProps<SwitchProps<T>>()
 const slots = defineSlots<SwitchSlots>()
-const emits = defineEmits<SwitchEmits>()
-
-const modelValue = defineModel<T>({ default: undefined })
+const emits = defineEmits<SwitchEmits<T>>()
 
 const appConfig = useAppConfig() as Switch['AppConfig']
 const uiProp = useComponentUI('switch', props)
 
-const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'trueValue', 'falseValue'))
+const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'))
 
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SwitchProps<T>>(props)
 const id = _id.value ?? useId()
@@ -113,7 +111,7 @@ function onUpdate(value: any) {
       <SwitchRoot
         :id="id"
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
-        v-model="modelValue"
+        :model-value="rootProps.modelValue"
         :name="name"
         :disabled="disabled || loading"
         data-slot="base"
