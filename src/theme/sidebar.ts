@@ -5,8 +5,8 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'peer [--sidebar-width:16rem] [--sidebar-width-icon:4rem]',
     gap: 'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',
     container: 'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex',
-    inner: 'flex size-full flex-col overflow-hidden bg-default divide-y divide-default',
-    header: 'flex items-center gap-1.5 overflow-hidden px-4 min-h-16',
+    inner: 'flex size-full flex-col overflow-hidden divide-y divide-default',
+    header: 'flex items-center gap-1.5 overflow-hidden px-4 min-h-(--ui-header-height)',
     wrapper: 'min-w-0 flex-1',
     title: 'text-highlighted font-semibold truncate',
     description: 'text-muted text-sm truncate',
@@ -20,10 +20,12 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     side: {
       left: {
-        container: 'left-0 border-e border-default'
+        container: 'left-0 border-e border-default',
+        rail: 'end-0 translate-x-1/2'
       },
       right: {
-        container: 'right-0 border-s border-default'
+        container: 'right-0 border-s border-default',
+        rail: '-start-px -translate-x-1/2'
       }
     },
     collapsible: {
@@ -44,88 +46,83 @@ export default (options: Required<ModuleOptions>) => ({
     variant: {
       sidebar: {},
       floating: {
-        container: 'p-2 border-0',
-        inner: 'rounded-lg border border-default shadow-sm'
+        container: 'p-4 border-transparent',
+        inner: 'rounded-lg ring ring-default shadow-lg',
+        rail: 'inset-y-4'
       },
       inset: {
-        container: 'p-2 border-0',
-        inner: 'rounded-lg'
+        container: 'py-4 border-transparent',
+        inner: 'divide-transparent',
+        rail: 'inset-y-4'
       }
     }
   },
   compoundVariants: [{
-    side: 'left' as const,
-    collapsible: 'offcanvas' as const,
+    side: 'left',
+    collapsible: ['offcanvas', 'icon'],
     class: {
-      rail: 'end-0 translate-x-1/2 data-[state=collapsed]:cursor-e-resize cursor-w-resize'
+      rail: 'cursor-w-resize data-[state=collapsed]:cursor-e-resize'
     }
   }, {
-    side: 'right' as const,
-    collapsible: 'offcanvas' as const,
+    side: 'right',
+    collapsible: ['offcanvas', 'icon'],
     class: {
-      rail: '-start-px -translate-x-1/2 data-[state=collapsed]:cursor-w-resize cursor-e-resize'
+      rail: 'cursor-e-resize data-[state=collapsed]:cursor-w-resize'
     }
   }, {
-    side: 'left' as const,
-    collapsible: 'icon' as const,
-    class: {
-      rail: 'end-0 translate-x-1/2 data-[state=collapsed]:cursor-e-resize cursor-w-resize'
-    }
-  }, {
-    side: 'right' as const,
-    collapsible: 'icon' as const,
-    class: {
-      rail: '-start-px -translate-x-1/2 data-[state=collapsed]:cursor-w-resize cursor-e-resize'
-    }
-  }, {
-    side: 'left' as const,
-    collapsible: 'none' as const,
+    side: 'left',
+    collapsible: 'none',
     class: {
       root: 'border-e border-default'
     }
   }, {
-    side: 'right' as const,
-    collapsible: 'none' as const,
+    side: 'right',
+    collapsible: 'none',
     class: {
       root: 'border-s border-default'
     }
   }, {
-    side: 'left' as const,
-    collapsible: 'offcanvas' as const,
+    side: 'left',
+    collapsible: 'offcanvas',
     class: {
       container: 'data-[state=collapsed]:-left-(--sidebar-width)'
     }
   }, {
-    side: 'right' as const,
-    collapsible: 'offcanvas' as const,
+    side: 'right',
+    collapsible: 'offcanvas',
     class: {
       container: 'data-[state=collapsed]:-right-(--sidebar-width)'
     }
   }, {
-    variant: 'floating' as const,
-    collapsible: 'icon' as const,
+    variant: 'floating',
+    collapsible: 'icon',
     class: {
-      gap: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+theme(spacing.4))]',
-      container: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+theme(spacing.4)+2px)]'
+      gap: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+--spacing(8))]',
+      container: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+--spacing(8)+2px)]'
     }
   }, {
-    variant: 'inset' as const,
-    collapsible: 'icon' as const,
+    variant: 'floating',
+    collapsible: 'none',
     class: {
-      gap: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+theme(spacing.4))]',
-      container: 'data-[state=collapsed]:w-[calc(var(--sidebar-width-icon)+theme(spacing.4)+2px)]'
+      root: 'p-4 border-0'
     }
   }, {
-    variant: 'floating' as const,
-    collapsible: 'none' as const,
+    variant: 'inset',
+    collapsible: 'none',
     class: {
-      root: 'p-2 border-0'
+      root: 'py-4 border-0'
     }
   }, {
-    variant: 'inset' as const,
-    collapsible: 'none' as const,
+    variant: 'floating',
+    side: 'left',
     class: {
-      root: 'p-2 border-0'
+      rail: 'end-4'
+    }
+  }, {
+    variant: 'floating',
+    side: 'right',
+    class: {
+      rail: 'start-[calc(--spacing(4)-1px)]'
     }
   }]
 })
