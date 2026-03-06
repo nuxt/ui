@@ -113,8 +113,7 @@ exports[`Checkbox > renders with indeterminateIcon correctly 1`] = `
 
 exports[`Checkbox > renders with indicator end correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row-reverse">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0" role="checkbox" type="button" aria-checked="1" aria-required="false" data-state="checked">
-      <!---->
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->
@@ -123,8 +122,7 @@ exports[`Checkbox > renders with indicator end correctly 1`] = `
 
 exports[`Checkbox > renders with indicator hidden correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sr-only size-4" id="v-0-0" role="checkbox" type="button" aria-checked="1" aria-required="false" data-state="checked">
-      <!---->
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sr-only size-4" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->
@@ -133,8 +131,7 @@ exports[`Checkbox > renders with indicator hidden correctly 1`] = `
 
 exports[`Checkbox > renders with indicator start correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0" role="checkbox" type="button" aria-checked="1" aria-required="false" data-state="checked">
-      <!---->
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->
@@ -186,8 +183,7 @@ exports[`Checkbox > renders with name correctly 1`] = `
 
 exports[`Checkbox > renders with neutral variant card correctly 1`] = `
 "<label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-inverted">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4" id="v-0-0" role="checkbox" type="button" aria-checked="1" aria-required="false" data-state="checked">
-      <!---->
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->
@@ -196,8 +192,7 @@ exports[`Checkbox > renders with neutral variant card correctly 1`] = `
 
 exports[`Checkbox > renders with neutral variant list correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4" id="v-0-0" role="checkbox" type="button" aria-checked="1" aria-required="false" data-state="checked">
-      <!---->
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->
@@ -206,8 +201,7 @@ exports[`Checkbox > renders with neutral variant list correctly 1`] = `
 
 exports[`Checkbox > renders with primary variant card correctly 1`] = `
 "<label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-primary">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0" role="checkbox" type="button" aria-checked="1" aria-required="false" data-state="checked">
-      <!---->
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->
@@ -216,8 +210,7 @@ exports[`Checkbox > renders with primary variant card correctly 1`] = `
 
 exports[`Checkbox > renders with primary variant list correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0" role="checkbox" type="button" aria-checked="1" aria-required="false" data-state="checked">
-      <!---->
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->
@@ -238,8 +231,7 @@ exports[`Checkbox > renders with required correctly 1`] = `
 
 exports[`Checkbox > renders with size lg correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4.5" id="v-0-0" role="checkbox" type="button" aria-checked="1" aria-required="false" data-state="checked">
-      <!---->
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4.5" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->
@@ -248,8 +240,7 @@ exports[`Checkbox > renders with size lg correctly 1`] = `
 
 exports[`Checkbox > renders with size md correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0" role="checkbox" type="button" aria-checked="1" aria-required="false" data-state="checked">
-      <!---->
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->
@@ -258,8 +249,7 @@ exports[`Checkbox > renders with size md correctly 1`] = `
 
 exports[`Checkbox > renders with size sm correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-4"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3.5" id="v-0-0" role="checkbox" type="button" aria-checked="1" aria-required="false" data-state="checked">
-      <!---->
+  <div data-slot="container" class="flex items-center h-4"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3.5" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->
@@ -268,8 +258,7 @@ exports[`Checkbox > renders with size sm correctly 1`] = `
 
 exports[`Checkbox > renders with size xl correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-6"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-5" id="v-0-0" role="checkbox" type="button" aria-checked="1" aria-required="false" data-state="checked">
-      <!---->
+  <div data-slot="container" class="flex items-center h-6"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-5" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->
@@ -278,8 +267,7 @@ exports[`Checkbox > renders with size xl correctly 1`] = `
 
 exports[`Checkbox > renders with size xs correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-4"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3" id="v-0-0" role="checkbox" type="button" aria-checked="1" aria-required="false" data-state="checked">
-      <!---->
+  <div data-slot="container" class="flex items-center h-4"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3" id="v-0-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->

@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Na této stránce'
     },
+    dropdownMenu: {
+      noMatch: 'Žádná shoda',
+      search: 'Hledat…'
+    },
     dashboardSearch: {
       theme: 'Barevný režim'
     },

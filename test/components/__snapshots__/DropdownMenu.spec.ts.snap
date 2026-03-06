@@ -8,67 +8,7 @@ exports[`DropdownMenu > renders with arrow correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
-    <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
-      <div role="group" data-slot="group" class="p-1 isolate">
-        <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
-          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
-        </div>
-      </div>
-      <div role="group" data-slot="group" class="p-1 isolate"><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:user shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Profile<!--v-if--></span>
-          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
-        </button><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:credit-card shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Billing<!--v-if--></span>
-          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span data-slot="itemTrailingKbds" class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">b</kbd></span>
-          <!----></span>
-        </button><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:cog shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Settings<!--v-if--></span>
-          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span data-slot="itemTrailingKbds" class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">?</kbd></span>
-          <!----></span>
-        </button></div>
-      <div role="group" data-slot="group" class="p-1 isolate"><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:users shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Team<!--v-if--></span>
-          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
-        </button><button data-reka-collection-item="" role="menuitem" tabindex="-1" type="button" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" id="reka-menu-sub-trigger-v-0-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed"><span class="iconify i-lucide:user-plus shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Invite users<!--v-if--></span>
-          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="itemTrailingIcon"></span>
-          <!----></span>
-        </button>
-        <!---->
-        <!--teleport start-->
-        <!---->
-        <!--teleport end--><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">New team<!--v-if--></span>
-          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span data-slot="itemTrailingKbds" class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">n</kbd></span>
-          <!----></span>
-        </button>
-      </div>
-      <div role="group" data-slot="group" class="p-1 isolate"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-reka-collection-item="" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-simple-icons:github shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">GitHub<span class="iconify i-lucide:arrow-up-right inline-block size-3 align-top text-dimmed" aria-hidden="true" data-slot="itemLabelExternalIcon"></span></span>
-          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
-        </a><a href="/components/dropdown-menu" role="menuitem" tabindex="-1" data-reka-collection-item="" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:life-buoy shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Support<!--v-if--></span>
-          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
-        </a>
-        <div role="separator" aria-orientation="horizontal" data-slot="separator" class="-mx-1 my-1 h-px bg-border"></div><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:key-round shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Keyboard Shortcuts<!--v-if--></span>
-          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
-        </button><button type="button" disabled="" data-reka-collection-item="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:box shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">API<!--v-if--></span>
-          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
-        </button>
-      </div>
-      <div role="group" data-slot="group" class="p-1 isolate"><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-highlighted transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-error data-highlighted:text-error data-highlighted:before:bg-error/10 data-[state=open]:before:bg-error/10"><span class="iconify i-lucide:log-out shrink-0 transition-colors size-5 text-error/75 group-data-highlighted:text-error group-data-[state=open]:text-error" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Logout<!--v-if--></span>
-          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span data-slot="itemTrailingKbds" class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">q</kbd></span>
-          <!----></span>
-        </button></div>
-    </div><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="true" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-bg stroke-default" style="display: block;"><path d="M0 0L4.58579 4.58579C5.36683 5.36683 6.63316 5.36684 7.41421 4.58579L12 0"></path></svg></span>
-  </div>
-</div>
-
-
-
-<!--teleport end-->"
-`;
-
-exports[`DropdownMenu > renders with class correctly 1`] = `
-"<!--v-if-->
-<!--teleport start-->
-
-
-
-<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col min-w-96" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -114,6 +54,70 @@ exports[`DropdownMenu > renders with class correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if--><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="true" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-bg stroke-default" style="display: block;"><path d="M0 0L4.58579 4.58579C5.36683 5.36683 6.63316 5.36684 7.41421 4.58579L12 0"></path></svg></span>
+  </div>
+</div>
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`DropdownMenu > renders with class correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col min-w-96" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
+    <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
+      <div role="group" data-slot="group" class="p-1 isolate">
+        <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </div>
+      </div>
+      <div role="group" data-slot="group" class="p-1 isolate"><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:user shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Profile<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </button><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:credit-card shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Billing<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span data-slot="itemTrailingKbds" class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">b</kbd></span>
+          <!----></span>
+        </button><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:cog shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Settings<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span data-slot="itemTrailingKbds" class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">?</kbd></span>
+          <!----></span>
+        </button></div>
+      <div role="group" data-slot="group" class="p-1 isolate"><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:users shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Team<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </button><button data-reka-collection-item="" role="menuitem" tabindex="-1" type="button" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" id="reka-menu-sub-trigger-v-0-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed"><span class="iconify i-lucide:user-plus shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Invite users<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="itemTrailingIcon"></span>
+          <!----></span>
+        </button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end--><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">New team<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span data-slot="itemTrailingKbds" class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">n</kbd></span>
+          <!----></span>
+        </button>
+      </div>
+      <div role="group" data-slot="group" class="p-1 isolate"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-reka-collection-item="" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-simple-icons:github shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">GitHub<span class="iconify i-lucide:arrow-up-right inline-block size-3 align-top text-dimmed" aria-hidden="true" data-slot="itemLabelExternalIcon"></span></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </a><a href="/components/dropdown-menu" role="menuitem" tabindex="-1" data-reka-collection-item="" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:life-buoy shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Support<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </a>
+        <div role="separator" aria-orientation="horizontal" data-slot="separator" class="-mx-1 my-1 h-px bg-border"></div><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:key-round shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Keyboard Shortcuts<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </button><button type="button" disabled="" data-reka-collection-item="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:box shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">API<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </button>
+      </div>
+      <div role="group" data-slot="group" class="p-1 isolate"><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-highlighted transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-error data-highlighted:text-error data-highlighted:before:bg-error/10 data-[state=open]:before:bg-error/10"><span class="iconify i-lucide:log-out shrink-0 transition-colors size-5 text-error/75 group-data-highlighted:text-error group-data-[state=open]:text-error" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Logout<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span data-slot="itemTrailingKbds" class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">q</kbd></span>
+          <!----></span>
+        </button></div>
+    </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -130,6 +134,7 @@ exports[`DropdownMenu > renders with custom slot correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -173,6 +178,7 @@ exports[`DropdownMenu > renders with custom slot correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -189,6 +195,7 @@ exports[`DropdownMenu > renders with default slot correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-1" aria-labelledby="reka-dropdown-menu-trigger-v-0-0-0" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -234,6 +241,7 @@ exports[`DropdownMenu > renders with default slot correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -250,6 +258,7 @@ exports[`DropdownMenu > renders with descriptionKey correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -295,6 +304,7 @@ exports[`DropdownMenu > renders with descriptionKey correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -311,6 +321,7 @@ exports[`DropdownMenu > renders with disabled correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -356,6 +367,7 @@ exports[`DropdownMenu > renders with disabled correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -372,6 +384,7 @@ exports[`DropdownMenu > renders with externalIcon correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -417,6 +430,95 @@ exports[`DropdownMenu > renders with externalIcon correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
+  </div>
+</div>
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`DropdownMenu > renders with filter and searchTerm correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" role="searchbox" value="No match value">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+    <div data-slot="empty" class="text-center text-muted p-2.5 text-sm">No matching data</div>
+  </div>
+</div>
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`DropdownMenu > renders with filter correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" role="searchbox" value="">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
+      <div role="group" data-slot="group" class="p-1 isolate">
+        <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </div>
+      </div>
+      <div role="group" data-slot="group" class="p-1 isolate"><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:user shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Profile<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </button><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:credit-card shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Billing<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span data-slot="itemTrailingKbds" class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">b</kbd></span>
+          <!----></span>
+        </button><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:cog shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Settings<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span data-slot="itemTrailingKbds" class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">?</kbd></span>
+          <!----></span>
+        </button></div>
+      <div role="group" data-slot="group" class="p-1 isolate"><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:users shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Team<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </button><button data-reka-collection-item="" role="menuitem" tabindex="-1" type="button" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" id="reka-menu-sub-trigger-v-0-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed"><span class="iconify i-lucide:user-plus shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Invite users<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="itemTrailingIcon"></span>
+          <!----></span>
+        </button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end--><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:plus shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">New team<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span data-slot="itemTrailingKbds" class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">n</kbd></span>
+          <!----></span>
+        </button>
+      </div>
+      <div role="group" data-slot="group" class="p-1 isolate"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-reka-collection-item="" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-simple-icons:github shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">GitHub<span class="iconify i-lucide:arrow-up-right inline-block size-3 align-top text-dimmed" aria-hidden="true" data-slot="itemLabelExternalIcon"></span></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </a><a href="/components/dropdown-menu" role="menuitem" tabindex="-1" data-reka-collection-item="" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:life-buoy shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Support<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </a>
+        <div role="separator" aria-orientation="horizontal" data-slot="separator" class="-mx-1 my-1 h-px bg-border"></div><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:key-round shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Keyboard Shortcuts<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </button><button type="button" disabled="" data-reka-collection-item="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5"><span class="iconify i-lucide:box shrink-0 text-dimmed group-data-highlighted:text-default group-data-[state=open]:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">API<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </button>
+      </div>
+      <div role="group" data-slot="group" class="p-1 isolate"><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-highlighted transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-error data-highlighted:text-error data-highlighted:before:bg-error/10 data-[state=open]:before:bg-error/10"><span class="iconify i-lucide:log-out shrink-0 transition-colors size-5 text-error/75 group-data-highlighted:text-error group-data-[state=open]:text-error" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Logout<!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><span data-slot="itemTrailingKbds" class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">q</kbd></span>
+          <!----></span>
+        </button></div>
+    </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -433,6 +535,7 @@ exports[`DropdownMenu > renders with item slot correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5">Item slot</div>
@@ -451,6 +554,7 @@ exports[`DropdownMenu > renders with item slot correctly 1`] = `
       </div>
       <div role="group" data-slot="group" class="p-1 isolate"><button type="button" data-reka-collection-item="" role="menuitem" tabindex="-1" data-slot="item" class="group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-highlighted transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-error data-highlighted:text-error data-highlighted:before:bg-error/10 data-[state=open]:before:bg-error/10">Item slot</button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -467,6 +571,7 @@ exports[`DropdownMenu > renders with item-description slot correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span><span data-slot="itemDescription" class="truncate text-muted">Item description slot</span></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span></div>
@@ -475,6 +580,7 @@ exports[`DropdownMenu > renders with item-description slot correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -491,6 +597,7 @@ exports[`DropdownMenu > renders with item-label slot correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">Item label slot<!--v-if--></span>
@@ -536,6 +643,7 @@ exports[`DropdownMenu > renders with item-label slot correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -552,6 +660,7 @@ exports[`DropdownMenu > renders with item-leading slot correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5">Item leading slot<span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -597,6 +706,7 @@ exports[`DropdownMenu > renders with item-leading slot correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -613,6 +723,7 @@ exports[`DropdownMenu > renders with item-trailing slot correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -653,6 +764,7 @@ exports[`DropdownMenu > renders with item-trailing slot correctly 1`] = `
           <!--v-if--></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center">Item trailing slot<!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -669,6 +781,7 @@ exports[`DropdownMenu > renders with items correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="--reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; pointer-events: auto; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -714,6 +827,7 @@ exports[`DropdownMenu > renders with items correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -730,6 +844,7 @@ exports[`DropdownMenu > renders with items with description correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span><span data-slot="itemDescription" class="truncate text-muted">Account settings</span></span><span data-slot="itemTrailing" class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span></div>
@@ -738,6 +853,7 @@ exports[`DropdownMenu > renders with items with description correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -754,6 +870,7 @@ exports[`DropdownMenu > renders with labelKey correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
@@ -799,6 +916,7 @@ exports[`DropdownMenu > renders with labelKey correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -815,6 +933,7 @@ exports[`DropdownMenu > renders with size lg correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-2 text-sm gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -860,6 +979,7 @@ exports[`DropdownMenu > renders with size lg correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -876,6 +996,7 @@ exports[`DropdownMenu > renders with size md correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -921,6 +1042,7 @@ exports[`DropdownMenu > renders with size md correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -937,6 +1059,7 @@ exports[`DropdownMenu > renders with size sm correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-xs gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-4 text-[8px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="16" height="16" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -982,6 +1105,7 @@ exports[`DropdownMenu > renders with size sm correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -998,6 +1122,7 @@ exports[`DropdownMenu > renders with size xl correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-2 text-base gap-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-6 text-xs shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="24" height="24" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -1043,6 +1168,7 @@ exports[`DropdownMenu > renders with size xl correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1059,6 +1185,7 @@ exports[`DropdownMenu > renders with size xs correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1 text-xs gap-1"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-4 text-[8px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="16" height="16" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -1104,6 +1231,7 @@ exports[`DropdownMenu > renders with size xs correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1120,6 +1248,7 @@ exports[`DropdownMenu > renders with ui correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -1165,6 +1294,7 @@ exports[`DropdownMenu > renders with ui correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1181,6 +1311,7 @@ exports[`DropdownMenu > renders without externalIcon correctly 1`] = `
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
+    <!--v-if-->
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
       <div role="group" data-slot="group" class="p-1 isolate">
         <div data-slot="label" class="w-full flex items-center font-semibold text-highlighted p-1.5 text-sm gap-1.5"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="20" height="20" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate">My account<!--v-if--></span>
@@ -1226,6 +1357,7 @@ exports[`DropdownMenu > renders without externalIcon correctly 1`] = `
           <!----></span>
         </button></div>
     </div>
+    <!--v-if-->
   </div>
 </div>
 

@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Pe această pagină'
     },
+    dropdownMenu: {
+      noMatch: 'Nu există date corespunzătoare',
+      search: 'Caută…'
+    },
     dashboardSearch: {
       theme: 'Temă'
     },

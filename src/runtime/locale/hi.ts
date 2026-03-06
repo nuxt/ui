@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'इस पृष्ठ पर'
     },
+    dropdownMenu: {
+      noMatch: 'कोई मेल खाता डेटा नहीं',
+      search: 'खोजें…'
+    },
     dashboardSearch: {
       theme: 'थीम'
     },

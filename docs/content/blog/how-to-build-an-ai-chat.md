@@ -612,7 +612,7 @@ The component uses [`UDropdownMenu`](/docs/components/dropdown-menu) with a [`UB
 <script setup lang="ts">
 const route = useRoute()
 
-const { data: chats } = useFetch('/api/chats', {
+const { data: chats } = await useFetch('/api/chats', {
   key: 'chats',
   default: () => []
 })

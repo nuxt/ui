@@ -40,7 +40,7 @@ function select(index: number) {
       class="w-full max-w-xs mx-auto"
       @select="onSelect"
     >
-      <img :src="item" width="320" height="320" class="rounded-lg">
+      <img :src="item" width="320" height="320" class="rounded-lg" loading="lazy">
     </UCarousel>
 
     <div class="flex gap-1 justify-between pt-4 max-w-xs mx-auto">
@@ -51,7 +51,7 @@ function select(index: number) {
         :class="{ 'opacity-100': activeIndex === index }"
         @click="select(index)"
       >
-        <img :src="item" width="44" height="44" class="rounded-lg">
+        <img :src="item" width="44" height="44" class="rounded-lg" loading="lazy">
       </div>
     </div>
   </div>

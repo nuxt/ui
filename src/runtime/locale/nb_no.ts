@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'På denne siden'
     },
+    dropdownMenu: {
+      noMatch: 'Ingen samsvarende data',
+      search: 'Søk…'
+    },
     dashboardSearch: {
       theme: 'Tema'
     },
