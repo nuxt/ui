@@ -113,7 +113,6 @@ function onUpdate(value: any) {
       <SwitchRoot
         :id="id"
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
-        :model-value="rootProps.modelValue"
         :name="name"
         :disabled="disabled || loading"
         data-slot="base"

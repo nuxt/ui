@@ -118,7 +118,6 @@ function onUpdate(value: any) {
       <CheckboxRoot
         :id="id"
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
-        :model-value="rootProps.modelValue"
         :name="name"
         :disabled="disabled"
         data-slot="base"
