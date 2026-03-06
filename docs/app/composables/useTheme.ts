@@ -47,11 +47,32 @@ export function useTheme() {
   })
 
   const fonts = ['Public Sans', 'DM Sans', 'Geist', 'Inter', 'Poppins', 'Outfit', 'Raleway']
+  const loadedFonts = new Set(fonts.map(f => f.toLowerCase()))
+
+  function loadFont(name: string) {
+    const key = name.toLowerCase()
+    if (loadedFonts.has(key)) return
+
+    const linkId = `font-${key.replace(/\s+/g, '-')}`
+    if (document.getElementById(linkId)) {
+      loadedFonts.add(key)
+      return
+    }
+
+    const link = document.createElement('link')
+    link.id = linkId
+    link.rel = 'stylesheet'
+    link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(name)}:wght@400;500;600;700&display=swap`
+    document.head.appendChild(link)
+    loadedFonts.add(key)
+  }
+
   const font = computed({
     get() {
       return appConfig.theme.font
     },
     set(option) {
+      if (import.meta.client) loadFont(option)
       appConfig.theme.font = option
       window.localStorage.setItem('nuxt-ui-font', appConfig.theme.font)
       track('Theme Changed', { setting: 'font', value: option })

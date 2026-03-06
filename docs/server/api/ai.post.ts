@@ -1,7 +1,9 @@
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
 import { streamText, convertToModelMessages, stepCountIs, smoothStream, jsonSchema } from 'ai'
+import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import { experimental_createMCPClient } from '@ai-sdk/mcp'
 import { gateway } from '@ai-sdk/gateway'
+import { themeIcons, cssVariableDefaults } from '../../app/utils/theme'
 
 const applyTheme = {
   description: 'Apply theme settings live on the docs site. Call this when users ask to change colors, radius, font, or other theme properties. Only include properties that changed.',
@@ -16,7 +18,7 @@ const applyTheme = {
       warning: { type: 'string', description: 'Warning color name' },
       error: { type: 'string', description: 'Error color name' },
       radius: { type: 'number', description: 'Border radius in rem: 0, 0.125, 0.25, 0.375, 0.5' },
-      font: { type: 'string', description: 'Font family name (any Google Font works, e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Raleway, etc.)' },
+      font: { type: 'string', description: 'Font family name — any Google Font works (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Raleway, Playfair Display, Nunito, JetBrains Mono, etc.)' },
       blackAsPrimary: { type: 'boolean', description: 'Use solid black/white as primary color for a monochrome look' },
       icons: { type: 'string', description: 'Icon set for live preview: lucide (default), phosphor, or tabler. For exported code, any Iconify icon set can be suggested.' },
       customColors: {
@@ -87,16 +89,27 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  const mcpUrl = import.meta.dev
-    ? new URL('/mcp', getRequestURL(event).origin)
-    : new URL('https://ui.nuxt.com/mcp')
-  const httpTransport = new StreamableHTTPClientTransport(mcpUrl)
-  const httpClient = await experimental_createMCPClient({
-    transport: httpTransport
-  })
-  const mcpTools = await httpClient.tools()
+  let httpClient
+  let mcpTools
+  try {
+    const mcpUrl = import.meta.dev
+      ? new URL('/mcp', getRequestURL(event).origin)
+      : new URL('https://ui.nuxt.com/mcp')
+    const httpTransport = new StreamableHTTPClientTransport(mcpUrl)
+    httpClient = await experimental_createMCPClient({
+      transport: httpTransport
+    })
+    mcpTools = await httpClient.tools()
+  } catch (error) {
+    console.error('MCP client error:', error)
 
-  const system = `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Use your knowledge base tools to search for relevant information before answering questions.
+    throw createError({
+      statusCode: 503,
+      message: 'Unable to connect to the documentation service. Please try again later.'
+    })
+  }
+
+  const system = `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
 
 Guidelines:
 - For documentation questions, ALWAYS use tools to search for information. Never rely on pre-trained knowledge for Nuxt UI APIs, props, or usage.
@@ -124,7 +137,7 @@ Guidelines:
 
 When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
 
-When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and font. Create a cohesive design system, not just random colors:
+When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and font. You may also change the icon set (lucide, phosphor, or tabler) if it fits the theme's personality, but lucide works well as the default. You can optionally include component-level \`ui\` overrides for a more polished result — if you do, look up the component theme first with \`getComponentTheme\`. Create a cohesive design system, not just random colors:
 - Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as hex values — this is encouraged for creative/unique themes.
 - Pick a **secondary** that complements the primary (analogous or contrasting on the color wheel). Can also be a custom palette.
 - Pick **success/info/warning/error** that feel harmonious with the palette while staying semantically meaningful (success = green-ish, error = red-ish, warning = amber/yellow-ish, info = blue/cyan-ish). You can shift hues — e.g. \`lime\` for success in a nature theme, \`rose\` for error in a warm theme — but keep them recognizable.
@@ -180,49 +193,21 @@ The main.css file uses Tailwind CSS directives to configure design tokens:
 **CSS Variable fine-tuning (last resort)** — use the \`cssVariables\` property in \`applyTheme\` ONLY for subtle one-shade adjustments. Example: shifting \`--ui-bg\` from neutral-900 to neutral-950 in dark mode, or \`--ui-border\` from neutral-200 to neutral-300 in light mode.
 
 CRITICAL RULES for \`cssVariables\`:
-- ONLY shift by 1-2 shade levels from the default (e.g. neutral-900 → neutral-950). NEVER replace the neutral palette with a completely different color (e.g. setting \`--ui-bg\` to a custom color like cream). If you want warm/cool backgrounds, choose the right \`neutral\` color instead (slate, gray, zinc, neutral, stone, taupe, mauve, mist, olive). Exception: for monochrome/black-and-white themes, you MAY use \`black\` or \`white\` as values (e.g. \`--ui-bg: black\` in dark mode).
+- ONLY shift by 1-2 shade levels from the default (e.g. neutral-900 → neutral-950). NEVER replace the neutral palette with a completely different color (e.g. setting \`--ui-bg\` to a custom color like cream). If you want warm/cool backgrounds, choose the right \`neutral\` color instead (see color options below). Exception: for monochrome/black-and-white themes, you MAY use \`black\` or \`white\` as values (e.g. \`--ui-bg: black\` in dark mode).
 - ALWAYS provide BOTH \`light\` and \`dark\` objects, but only include variables you are CHANGING from their defaults. Do NOT include variables that keep their default value.
 - Values MUST use \`var(--ui-color-<name>-<shade>)\` references (e.g. \`var(--ui-color-neutral-950)\`), \`white\`, or \`black\`. NEVER use raw hex values.
 - The \`<name>\` in the variable reference MUST match the current neutral color (which the user may have changed). Use \`neutral\` as the name since it maps to whatever neutral palette is active.
 - In the exported main.css code, ONLY show overridden CSS variables (not defaults). Use \`:root, .light { }\` for light-mode overrides and \`.dark { }\` for dark-mode overrides. NEVER put CSS variable overrides in a plain \`:root { }\` block (that's only for \`--ui-radius\` and monochrome \`--ui-primary\`).
 
-Here are the DEFAULT values — only override the ones you want to change:
+Default values — only override the ones you want to change:
 
 Light defaults (\`:root, .light\`):
-- \`--ui-text-dimmed\`: \`var(--ui-color-neutral-400)\`
-- \`--ui-text-muted\`: \`var(--ui-color-neutral-500)\`
-- \`--ui-text-toned\`: \`var(--ui-color-neutral-600)\`
-- \`--ui-text\`: \`var(--ui-color-neutral-700)\`
-- \`--ui-text-highlighted\`: \`var(--ui-color-neutral-900)\`
-- \`--ui-text-inverted\`: \`white\`
-- \`--ui-bg\`: \`white\`
-- \`--ui-bg-muted\`: \`var(--ui-color-neutral-50)\`
-- \`--ui-bg-elevated\`: \`var(--ui-color-neutral-100)\`
-- \`--ui-bg-accented\`: \`var(--ui-color-neutral-200)\`
-- \`--ui-bg-inverted\`: \`var(--ui-color-neutral-900)\`
-- \`--ui-border\`: \`var(--ui-color-neutral-200)\`
-- \`--ui-border-muted\`: \`var(--ui-color-neutral-200)\`
-- \`--ui-border-accented\`: \`var(--ui-color-neutral-300)\`
-- \`--ui-border-inverted\`: \`var(--ui-color-neutral-900)\`
+${Object.entries(cssVariableDefaults.light).map(([k, v]) => `- \`${k}\`: \`${v}\``).join('\n')}
 
 Dark defaults (\`.dark\`):
-- \`--ui-text-dimmed\`: \`var(--ui-color-neutral-500)\`
-- \`--ui-text-muted\`: \`var(--ui-color-neutral-400)\`
-- \`--ui-text-toned\`: \`var(--ui-color-neutral-300)\`
-- \`--ui-text\`: \`var(--ui-color-neutral-200)\`
-- \`--ui-text-highlighted\`: \`white\`
-- \`--ui-text-inverted\`: \`var(--ui-color-neutral-900)\`
-- \`--ui-bg\`: \`var(--ui-color-neutral-900)\`
-- \`--ui-bg-muted\`: \`var(--ui-color-neutral-800)\`
-- \`--ui-bg-elevated\`: \`var(--ui-color-neutral-800)\`
-- \`--ui-bg-accented\`: \`var(--ui-color-neutral-700)\`
-- \`--ui-bg-inverted\`: \`white\`
-- \`--ui-border\`: \`var(--ui-color-neutral-800)\`
-- \`--ui-border-muted\`: \`var(--ui-color-neutral-700)\`
-- \`--ui-border-accented\`: \`var(--ui-color-neutral-700)\`
-- \`--ui-border-inverted\`: \`white\`
+${Object.entries(cssVariableDefaults.dark).map(([k, v]) => `- \`${k}\`: \`${v}\``).join('\n')}
 
-Semantic shade defaults: \`--ui-primary\`, \`--ui-secondary\`, \`--ui-success\`, \`--ui-info\`, \`--ui-warning\`, \`--ui-error\` — light uses shade 500, dark uses shade 400.
+Semantic colors (\`--ui-primary\`, \`--ui-secondary\`, \`--ui-success\`, \`--ui-info\`, \`--ui-warning\`, \`--ui-error\`) default to shade 500 in light, 400 in dark.
 
 Do NOT use \`cssVariables\` for things achievable with \`primary\`, \`neutral\`, \`customColors\`, or component \`ui\` overrides.
 
@@ -272,15 +257,13 @@ export default defineAppConfig({
   - Rounded (friendly/playful): Nunito, Quicksand, Varela Round
   - Monospace (techy/dev): JetBrains Mono, Fira Code, IBM Plex Mono
   ALWAYS change the font when creating a complete theme — don't leave the default unless it genuinely fits.
-- Icons: lucide (default), phosphor, or tabler for live preview. Any Iconify icon set works in the exported app.config.ts — provide the full icon mapping under \`ui.icons\` (keys: arrowDown, arrowLeft, arrowRight, arrowUp, caution, check, chevronDoubleLeft, chevronDoubleRight, chevronDown, chevronLeft, chevronRight, chevronUp, close, copy, ellipsis, external, eyeDropper, filter, info, loading, minus, note, plus, search, success, tip, warning)
-- blackAsPrimary: true for monochrome black/white primary
-- ui: Component-level theme overrides (slots, variants, compoundVariants, defaultVariants)
+- Icons: lucide (default), phosphor, or tabler for live preview. Any Iconify icon set works in the exported app.config.ts. When suggesting a non-default icon set, include the FULL \`ui.icons\` mapping in the exported app.config.ts and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
 
 **Component Theme Lookup:**
 
 When users ask about component-specific customization, use the \`getComponentTheme\` tool to get the exact slots, variants, and defaults for that component. This lets you suggest precise app.config.ts overrides.
 
-When users ask for a complete/broad theme change, you MUST call \`getComponentTheme\` for the button component before suggesting any component \`ui\` overrides — never guess slot names. You may also customize other components if the user asks or the aesthetic calls for it, but always look up their theme first.
+When you want to suggest component \`ui\` overrides (e.g. customizing button styles), call \`getComponentTheme\` for that component first — never guess slot names. Only look up component themes when you actually plan to include \`ui\` overrides in the \`applyTheme\` call.
 
 CRITICAL rules for component \`ui\` overrides:
 - NEVER use \`rounded-*\` classes in component slot overrides. Border radius is controlled globally by \`--ui-radius\` — hardcoding rounded classes would override the CSS variable and break consistency.
@@ -319,7 +302,7 @@ Available components: ${componentNames.join(', ')}
 }
 \`\`\`
 
-3. Show the full **app.config.ts** code block if colors or component overrides changed. IMPORTANT: this must include ALL settings from the entire conversation — not just the current \`applyTheme\` call but also all previous calls (colors, icons, component \`ui\` overrides like button, popover, etc.). Review earlier \`applyTheme\` calls in the conversation and merge everything into one complete config:
+3. Show the full **app.config.ts** code block if colors, icons, or component overrides changed. IMPORTANT: this must include ALL settings from the entire conversation — not just the current \`applyTheme\` call but also all previous calls (colors, icons with full \`ui.icons\` mapping, component \`ui\` overrides like button, popover, etc.). If a non-default icon set was chosen, the exported config MUST include the complete \`ui.icons\` object with every key mapped. Review earlier \`applyTheme\` calls in the conversation and merge everything into one complete config:
 
 \`\`\`typescript
 export default defineAppConfig({
@@ -338,10 +321,12 @@ NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`rad
     providerOptions: {
       anthropic: {
         thinking: {
-          type: 'adaptive',
-          budgetTokens: 1024
+          type: 'adaptive'
         },
         effort: 'low'
+      } satisfies AnthropicLanguageModelOptions,
+      gateway: {
+        caching: 'auto'
       }
     },
     system,
@@ -354,13 +339,13 @@ NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`rad
       resetTheme,
       getComponentTheme
     },
-    onFinish: async () => {
-      await httpClient.close()
+    onFinish: () => {
+      event.waitUntil(httpClient?.close())
     },
-    onError: async (error) => {
-      console.error(error)
+    onError: (error) => {
+      console.error('streamText error:', error)
 
-      await httpClient.close()
+      event.waitUntil(httpClient?.close())
     }
   }).toUIMessageStreamResponse()
 })
