@@ -16,7 +16,6 @@ const toast = useToast()
 const { track } = useAnalytics()
 const { open, messages } = useChat()
 const { resetTheme, applyThemeSettings, hasCSSChanges, hasAppConfigChanges } = useTheme()
-const { csrf, headerName } = useCsrf()
 
 const hasThemeChanges = computed(() => hasCSSChanges.value || hasAppConfigChanges.value)
 
@@ -47,7 +46,6 @@ const chat = new Chat({
   messages: messages.value,
   transport: new DefaultChatTransport({
     api: '/api/ai',
-    headers: { [headerName]: csrf },
     body: { theme }
   }),
   onError: (error) => {

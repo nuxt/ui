@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     '@nuxtjs/mcp-toolkit',
     '@vueuse/nuxt',
     'nuxt-component-meta',
-    'nuxt-csurf',
     'nuxt-llms',
     'nuxt-og-image',
     'motion-v/nuxt'
@@ -66,8 +65,6 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    // @ts-expect-error https://github.com/Morgbn/nuxt-csurf
-    '/api/ai': { csurf: { methodsToProtect: ['POST'] } },
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
@@ -253,10 +250,6 @@ export default defineNuxtConfig({
       events: 'no-schema',
       exposed: false
     }
-  },
-
-  csurf: {
-    methodsToProtect: []
   },
 
   fonts: {
