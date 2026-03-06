@@ -50,8 +50,9 @@ export interface CheckboxProps<T = boolean> extends Pick<CheckboxRootProps<T>, '
   ui?: Checkbox['slots']
 }
 
-export interface CheckboxEmits<T = boolean> extends Pick<CheckboxRootEmits<T>, 'update:modelValue'> {
-  change: [event: Event]
+export interface CheckboxEmits<T = boolean> {
+  'update:modelValue': CheckboxRootEmits<T>['update:modelValue']
+  'change': [event: Event]
 }
 
 export interface CheckboxSlots {
@@ -104,6 +105,7 @@ function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
+  emits('update:modelValue', value)
   emitFormChange()
   emitFormInput()
 }

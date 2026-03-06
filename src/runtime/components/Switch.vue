@@ -47,8 +47,9 @@ export interface SwitchProps<T = boolean> extends Pick<SwitchRootProps<T>, 'disa
   ui?: Switch['slots']
 }
 
-export interface SwitchEmits<T = boolean> extends Pick<SwitchRootEmits<T>, 'update:modelValue'> {
-  change: [event: Event]
+export interface SwitchEmits<T = boolean> {
+  'update:modelValue': SwitchRootEmits<T>['update:modelValue']
+  'change': [event: Event]
 }
 
 export interface SwitchSlots {
@@ -100,6 +101,7 @@ function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
+  emits('update:modelValue', value)
   emitFormChange()
   emitFormInput()
 }
