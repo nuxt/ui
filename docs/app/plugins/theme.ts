@@ -99,12 +99,18 @@ export default defineNuxtPlugin({
             }
           `.replace(/\s+/g, ' ')
         }, {
-          innerHTML: `
-            if (localStorage.getItem('nuxt-ui-font')) {
-              const font = localStorage.getItem('nuxt-ui-font');
-              document.querySelector('style#nuxt-ui-font').innerHTML = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';
-            }
-          `.replace(/\s+/g, ' ')
+          innerHTML: [
+            `if (localStorage.getItem('nuxt-ui-font')) {`,
+            `var font = localStorage.getItem('nuxt-ui-font');`,
+            `document.querySelector('style#nuxt-ui-font').innerHTML = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';`,
+            `if (font !== 'Public Sans') {`,
+            `var lnk = document.createElement('link');`,
+            `lnk.rel = 'stylesheet';`,
+            `lnk.href = 'https://fonts.googleapis.com/css2?family=' + encodeURIComponent(font) + ':wght@400;500;600;700&display=swap';`,
+            `lnk.id = 'font-' + font.toLowerCase().replace(/\\s+/g, '-');`,
+            `document.head.appendChild(lnk);`,
+            `}}`
+          ].join(' ')
         }, {
           innerHTML: `
             (function() {
