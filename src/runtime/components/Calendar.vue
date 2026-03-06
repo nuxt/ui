@@ -208,7 +208,9 @@ const uiProp = useComponentUI('calendar', props)
 const formatter = shallowRef(useDateFormatter(code.value))
 
 watch(() => code.value, (value) => {
-  formatter.value = useDateFormatter(value)
+  if (formatter.value.getLocale() !== value) {
+    formatter.value.setLocale(value)
+  }
 })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })({
@@ -360,6 +362,8 @@ const switchToMonthsLabel = computed(() => translateWithFallback('calendar.switc
 const switchToYearsLabel = computed(() => translateWithFallback('calendar.switchToYears', 'Switch to year view'))
 
 function formatMonthLabel(date: DateValue) {
+  code.value
+
   try {
     return formatter.value.custom(date.toDate(getLocalTimeZone()), { month: 'long' })
   } catch {
@@ -368,6 +372,8 @@ function formatMonthLabel(date: DateValue) {
 }
 
 function formatYearLabel(date: DateValue) {
+  code.value
+
   try {
     return formatter.value.custom(date.toDate(getLocalTimeZone()), { year: 'numeric' })
   } catch {
