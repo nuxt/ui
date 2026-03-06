@@ -50,9 +50,8 @@ export interface CheckboxProps<T = boolean> extends Pick<CheckboxRootProps<T>, '
   ui?: Checkbox['slots']
 }
 
-export interface CheckboxEmits<T = boolean> {
-  'update:modelValue': CheckboxRootEmits<T>['update:modelValue']
-  'change': [event: Event]
+export type CheckboxEmits<T = boolean> = Pick<CheckboxRootEmits<T>, 'update:modelValue'> & {
+  change: [event: Event]
 }
 
 export interface CheckboxSlots {
@@ -63,7 +62,7 @@ export interface CheckboxSlots {
 
 <script setup lang="ts" generic="T = boolean">
 import { computed, useAttrs, useId } from 'vue'
-import { Primitive, CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'reka-ui'
+import { Primitive, CheckboxRoot, CheckboxIndicator, Label, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
@@ -80,7 +79,7 @@ const emits = defineEmits<CheckboxEmits<T>>()
 const appConfig = useAppConfig() as Checkbox['AppConfig']
 const uiProp = useComponentUI('checkbox', props)
 
-const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'))
+const rootProps = useForwardPropsEmits(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)
 
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<CheckboxProps<T>>(props)
 const id = _id.value ?? useId()
@@ -105,7 +104,6 @@ function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
-  emits('update:modelValue', value)
   emitFormChange()
   emitFormInput()
 }

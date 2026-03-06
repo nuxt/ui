@@ -47,9 +47,8 @@ export interface SwitchProps<T = boolean> extends Pick<SwitchRootProps<T>, 'disa
   ui?: Switch['slots']
 }
 
-export interface SwitchEmits<T = boolean> {
-  'update:modelValue': SwitchRootEmits<T>['update:modelValue']
-  'change': [event: Event]
+export type SwitchEmits<T = boolean> = Pick<SwitchRootEmits<T>, 'update:modelValue'> & {
+  change: [event: Event]
 }
 
 export interface SwitchSlots {
@@ -60,7 +59,7 @@ export interface SwitchSlots {
 
 <script setup lang="ts" generic="T = boolean">
 import { computed, useAttrs, useId } from 'vue'
-import { Primitive, SwitchRoot, SwitchThumb, useForwardProps, Label } from 'reka-ui'
+import { Primitive, SwitchRoot, SwitchThumb, useForwardPropsEmits, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
@@ -77,7 +76,7 @@ const emits = defineEmits<SwitchEmits<T>>()
 const appConfig = useAppConfig() as Switch['AppConfig']
 const uiProp = useComponentUI('switch', props)
 
-const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'))
+const rootProps = useForwardPropsEmits(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)
 
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SwitchProps<T>>(props)
 const id = _id.value ?? useId()
@@ -101,7 +100,6 @@ function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
-  emits('update:modelValue', value)
   emitFormChange()
   emitFormInput()
 }
