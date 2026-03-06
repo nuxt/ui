@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import { refDebounced } from '@vueuse/core'
-import type { AvatarProps } from '@nuxt/ui'
+import type { DropdownMenuItem } from '@nuxt/ui'
 
 const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
 
 const { data: users, status, execute } = await useLazyFetch('https://jsonplaceholder.typicode.com/users', {
-  key: 'select-menu-users-search',
+  key: 'dropdown-menu-users-search',
   params: { q: searchTermDebounced },
   transform: (data: { id: number, name: string }[]) => {
     return data?.map(user => ({
       label: user.name,
-      value: String(user.id),
       avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const }
-    }))
+    })) as DropdownMenuItem[]
   },
   immediate: false
 })
@@ -26,26 +25,18 @@ function onOpen() {
 </script>
 
 <template>
-  <USelectMenu
+  <UDropdownMenu
     v-model:search-term="searchTerm"
-    :items="users"
-    :search-input="{
+    :items="users || []"
+    :filter="{
       icon: 'i-lucide-search',
       loading: status === 'pending'
     }"
     ignore-filter
-    icon="i-lucide-user"
-    placeholder="Select user"
-    class="w-48"
+    :content="{ align: 'start' }"
+    :ui="{ content: 'w-48' }"
     @update:open="onOpen"
   >
-    <template #leading="{ modelValue, ui }">
-      <UAvatar
-        v-if="modelValue"
-        v-bind="modelValue.avatar"
-        :size="(ui.leadingAvatarSize() as AvatarProps['size'])"
-        :class="ui.leadingAvatar()"
-      />
-    </template>
-  </USelectMenu>
+    <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
+  </UDropdownMenu>
 </template>

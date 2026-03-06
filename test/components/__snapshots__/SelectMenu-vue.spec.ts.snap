@@ -2316,7 +2316,7 @@ exports[`SelectMenu > renders with virtualize correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div data-slot="empty" class="text-center text-muted p-1.5 text-sm">No data</div>
+      <div data-slot="empty" class="text-center text-muted p-2.5 text-sm">No data</div>
       <div role="presentation" data-slot="viewport" class="relative scroll-py-1 overflow-y-auto flex-1 p-1 isolate">
         <!--v-if-->
         <div data-reka-virtualizer="" style="position: relative; width: 100%; height: 160px;"></div>

@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Sellel lehel'
     },
+    dropdownMenu: {
+      noMatch: 'Pole vastavaid andmeid',
+      search: 'Otsi…'
+    },
     dashboardSearch: {
       theme: 'Teema'
     },
