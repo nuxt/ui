@@ -1,12 +1,31 @@
 import { defu } from 'defu'
+import { useLocalStorage } from '@vueuse/core'
 import { themeIcons, cssVariableDefaults } from '../utils/theme'
 import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
+
+function readLocalStorage<T>(key: string, fallback: T): T {
+  if (!import.meta.client) return fallback
+  try {
+    const raw = window.localStorage.getItem(key)
+    return raw ? JSON.parse(raw) : fallback
+  } catch {
+    return fallback
+  }
+}
 
 export function useTheme() {
   const appConfig = useAppConfig()
   const colorMode = useColorMode()
   const { track } = useAnalytics()
+
+  const aiThemeExtras = useState<Record<string, any>>('nuxt-ui-ai-theme', () => readLocalStorage('nuxt-ui-ai-theme', {}))
+  const customColorsData = useState<Record<string, Record<string, string>>>('nuxt-ui-custom-colors', () => readLocalStorage('nuxt-ui-custom-colors', {}))
+  const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => readLocalStorage('nuxt-ui-css-variables', {}))
+  const _radius = useLocalStorage('nuxt-ui-radius', 0.25)
+  const _font = useLocalStorage('nuxt-ui-font', 'Public Sans')
+  const _iconSet = useLocalStorage('nuxt-ui-icons', 'lucide')
+  const _blackAsPrimary = useLocalStorage('nuxt-ui-black-as-primary', false)
 
   const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
   const neutral = computed({
@@ -37,44 +56,22 @@ export function useTheme() {
   const radiuses = [0, 0.125, 0.25, 0.375, 0.5]
   const radius = computed({
     get() {
-      return appConfig.theme.radius
+      return _radius.value
     },
     set(option) {
-      appConfig.theme.radius = option
-      window.localStorage.setItem('nuxt-ui-radius', String(appConfig.theme.radius))
+      _radius.value = option
       track('Theme Changed', { setting: 'radius', value: option })
     }
   })
 
   const fonts = ['Public Sans', 'DM Sans', 'Geist', 'Inter', 'Poppins', 'Outfit', 'Raleway']
-  const loadedFonts = new Set(fonts.map(f => f.toLowerCase()))
-
-  function loadFont(name: string) {
-    const key = name.toLowerCase()
-    if (loadedFonts.has(key)) return
-
-    const linkId = `font-${key.replace(/\s+/g, '-')}`
-    if (document.getElementById(linkId)) {
-      loadedFonts.add(key)
-      return
-    }
-
-    const link = document.createElement('link')
-    link.id = linkId
-    link.rel = 'stylesheet'
-    link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(name)}:wght@400;500;600;700&display=swap`
-    document.head.appendChild(link)
-    loadedFonts.add(key)
-  }
 
   const font = computed({
     get() {
-      return appConfig.theme.font
+      return _font.value
     },
     set(option) {
-      if (import.meta.client) loadFont(option)
-      appConfig.theme.font = option
-      window.localStorage.setItem('nuxt-ui-font', appConfig.theme.font)
+      _font.value = option
       track('Theme Changed', { setting: 'font', value: option })
     }
   })
@@ -94,21 +91,20 @@ export function useTheme() {
   }]
   const icon = computed({
     get() {
-      return appConfig.theme.icons
+      return _iconSet.value
     },
     set(option) {
-      appConfig.theme.icons = option
+      _iconSet.value = option
       appConfig.ui.icons = themeIcons[option as keyof typeof themeIcons] as any
-      window.localStorage.setItem('nuxt-ui-icons', appConfig.theme.icons)
       track('Theme Changed', { setting: 'icons', value: option })
     }
   })
 
-  const modes = [
+  const modes = computed(() => [
     { label: 'light', icon: appConfig.ui.icons.light },
     { label: 'dark', icon: appConfig.ui.icons.dark },
     { label: 'system', icon: appConfig.ui.icons.system }
-  ]
+  ])
   const mode = computed({
     get() {
       return colorMode.value
@@ -119,33 +115,65 @@ export function useTheme() {
     }
   })
 
+  const blackAsPrimary = computed(() => _blackAsPrimary.value)
+
   function setBlackAsPrimary(value: boolean) {
-    appConfig.theme.blackAsPrimary = value
-    window.localStorage.setItem('nuxt-ui-black-as-primary', String(value))
+    _blackAsPrimary.value = value
     if (value) {
       track('Theme Changed', { setting: 'primary', value: 'black' })
     }
   }
 
-  const aiThemeExtras = ref<Record<string, any>>({})
-  const hasCustomColors = ref(false)
-  const hasCSSVariables = ref(false)
+  const hasCustomColors = computed(() => Object.keys(customColorsData.value).length > 0)
+  const hasCSSVariables = computed(() => Object.keys(cssVariablesData.value.light || {}).length > 0 || Object.keys(cssVariablesData.value.dark || {}).length > 0)
 
-  if (import.meta.client) {
-    try {
-      aiThemeExtras.value = JSON.parse(window.localStorage.getItem('nuxt-ui-ai-theme') || '{}')
-    } catch {
-      aiThemeExtras.value = {}
+  const radiusStyle = computed(() => `:root { --ui-radius: ${_radius.value}rem; }`)
+  const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
+  const fontStyle = computed(() => `:root { --font-sans: '${_font.value}', sans-serif; }`)
+  const customColorsStyle = computed(() => {
+    const entries = Object.entries(customColorsData.value)
+    if (!entries.length) return ''
+    const vars = entries.flatMap(([name, shades]) =>
+      Object.entries(shades).map(([shade, hex]) => `--color-${name}-${shade}: ${hex};`)
+    )
+    return `:root { ${vars.join(' ')} }`
+  })
+  const cssVariablesStyle = computed(() => {
+    const data = cssVariablesData.value
+    const parts: string[] = []
+    if (Object.keys(data.light || {}).length) {
+      const full = { ...cssVariableDefaults.light, ...data.light }
+      parts.push(`.light { ${Object.entries(full).map(([k, v]) => `${k}: ${v};`).join(' ')} }`)
     }
+    if (Object.keys(data.dark || {}).length) {
+      const full = { ...cssVariableDefaults.dark, ...data.dark }
+      parts.push(`.dark { ${Object.entries(full).map(([k, v]) => `${k}: ${v};`).join(' ')} }`)
+    }
+    return parts.join(' ')
+  })
 
-    hasCustomColors.value = !!window.localStorage.getItem('nuxt-ui-custom-colors')
-    hasCSSVariables.value = !!window.localStorage.getItem('nuxt-ui-css-variables')
-  }
+  const link = computed(() => {
+    const name = _font.value
+    if (fonts.includes(name)) return []
+    return [{
+      rel: 'stylesheet' as const,
+      href: `https://fonts.googleapis.com/css2?family=${encodeURIComponent(name)}:wght@400;500;600;700&display=swap`,
+      id: `font-${name.toLowerCase().replace(/\s+/g, '-')}`
+    }]
+  })
+
+  const style = [
+    { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
+    { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
+    { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
+    { innerHTML: customColorsStyle, id: 'chat-custom-colors', tagPriority: -2 },
+    { innerHTML: cssVariablesStyle, id: 'chat-css-variables', tagPriority: -2 }
+  ]
 
   const hasCSSChanges = computed(() => {
-    return appConfig.theme.radius !== 0.25
-      || appConfig.theme.blackAsPrimary
-      || appConfig.theme.font !== 'Public Sans'
+    return _radius.value !== 0.25
+      || _blackAsPrimary.value
+      || _font.value !== 'Public Sans'
       || hasCustomColors.value
       || hasCSSVariables.value
   })
@@ -153,7 +181,7 @@ export function useTheme() {
   const hasAppConfigChanges = computed(() => {
     return appConfig.ui.colors.primary !== 'green'
       || appConfig.ui.colors.neutral !== 'slate'
-      || appConfig.theme.icons !== 'lucide'
+      || _iconSet.value !== 'lucide'
       || !!aiThemeExtras.value.colors
       || !!aiThemeExtras.value.ui
   })
@@ -166,19 +194,12 @@ export function useTheme() {
       '@import "@nuxt/ui";'
     ]
 
-    if (appConfig.theme.font !== 'Public Sans') {
-      lines.push('', '@theme {', `  --font-sans: '${appConfig.theme.font}', sans-serif;`, '}')
+    if (_font.value !== 'Public Sans') {
+      lines.push('', '@theme {', `  --font-sans: '${_font.value}', sans-serif;`, '}')
     }
 
-    const customColors: Record<string, Record<string, string>> = (() => {
-      try {
-        return JSON.parse(window.localStorage.getItem('nuxt-ui-custom-colors') || '{}')
-      } catch {
-        return {}
-      }
-    })()
     const colorLines: string[] = []
-    for (const [name, shades] of Object.entries(customColors)) {
+    for (const [name, shades] of Object.entries(customColorsData.value)) {
       for (const [shade, hex] of Object.entries(shades)) {
         colorLines.push(`  --color-${name}-${shade}: ${hex};`)
       }
@@ -188,22 +209,14 @@ export function useTheme() {
       lines.push('', '@theme static {', ...colorLines, '}')
     }
 
-    const cssVariables: { light?: Record<string, string>, dark?: Record<string, string> } = (() => {
-      try {
-        return JSON.parse(window.localStorage.getItem('nuxt-ui-css-variables') || '{}')
-      } catch {
-        return {}
-      }
-    })()
-
-    const lightOverrides = Object.entries(cssVariables.light || {}).filter(([key, val]) => val !== cssVariableDefaults.light[key as keyof typeof cssVariableDefaults.light])
-    const darkOverrides = Object.entries(cssVariables.dark || {}).filter(([key, val]) => val !== cssVariableDefaults.dark[key as keyof typeof cssVariableDefaults.dark])
+    const lightOverrides = Object.entries(cssVariablesData.value.light || {}).filter(([key, val]) => val !== cssVariableDefaults.light[key as keyof typeof cssVariableDefaults.light])
+    const darkOverrides = Object.entries(cssVariablesData.value.dark || {}).filter(([key, val]) => val !== cssVariableDefaults.dark[key as keyof typeof cssVariableDefaults.dark])
 
     const rootLines: string[] = []
-    if (appConfig.theme.radius !== 0.25) {
-      rootLines.push(`  --ui-radius: ${appConfig.theme.radius}rem;`)
+    if (_radius.value !== 0.25) {
+      rootLines.push(`  --ui-radius: ${_radius.value}rem;`)
     }
-    if (appConfig.theme.blackAsPrimary) {
+    if (_blackAsPrimary.value) {
       rootLines.push('  --ui-primary: black;')
     }
 
@@ -216,7 +229,7 @@ export function useTheme() {
     }
 
     const darkLines: string[] = []
-    if (appConfig.theme.blackAsPrimary) {
+    if (_blackAsPrimary.value) {
       darkLines.push('  --ui-primary: white;')
     }
     if (darkOverrides.length) {
@@ -241,11 +254,10 @@ export function useTheme() {
       config.ui = { colors: Object.fromEntries(colorEntries.map(([key]) => [key, (appConfig.ui.colors as any)[key]])) }
     }
 
-    if (appConfig.theme.icons !== 'lucide') {
-      const iconSet = appConfig.theme.icons
-      const icons = themeIcons[iconSet as keyof typeof themeIcons]
+    if (_iconSet.value !== 'lucide') {
+      const iconMapping = themeIcons[_iconSet.value as keyof typeof themeIcons]
       config.ui = config.ui || {}
-      config.ui.icons = icons
+      config.ui.icons = iconMapping
     }
 
     const extras = aiThemeExtras.value
@@ -262,69 +274,27 @@ export function useTheme() {
   }
 
   function injectCustomColors(customColors: Record<string, Record<string, string>>) {
-    const existing: Record<string, Record<string, string>> = JSON.parse(window.localStorage.getItem('nuxt-ui-custom-colors') || '{}')
-    const merged = { ...existing, ...customColors }
+    const merged = { ...customColorsData.value, ...customColors }
+    customColorsData.value = merged
     window.localStorage.setItem('nuxt-ui-custom-colors', JSON.stringify(merged))
-
-    let styleEl = document.getElementById('chat-custom-colors') as HTMLStyleElement | null
-    if (!styleEl) {
-      styleEl = document.createElement('style')
-      styleEl.id = 'chat-custom-colors'
-      document.head.appendChild(styleEl)
-    }
-
-    const vars = Object.entries(merged).flatMap(([name, shades]) =>
-      Object.entries(shades).map(([shade, hex]) => `--color-${name}-${shade}: ${hex};`)
-    )
-
-    styleEl.textContent = `:root { ${vars.join(' ')} }`
   }
 
   function injectCSSVariables(cssVariables: { light?: Record<string, string>, dark?: Record<string, string> }) {
-    const existing: { light?: Record<string, string>, dark?: Record<string, string> } = (() => {
-      try {
-        return JSON.parse(window.localStorage.getItem('nuxt-ui-css-variables') || '{}')
-      } catch {
-        return {}
-      }
-    })()
     const merged = {
-      light: { ...existing.light, ...cssVariables.light },
-      dark: { ...existing.dark, ...cssVariables.dark }
+      light: { ...cssVariablesData.value.light, ...cssVariables.light },
+      dark: { ...cssVariablesData.value.dark, ...cssVariables.dark }
     }
+    cssVariablesData.value = merged
     window.localStorage.setItem('nuxt-ui-css-variables', JSON.stringify(merged))
-
-    let styleEl = document.getElementById('chat-css-variables') as HTMLStyleElement | null
-    if (!styleEl) {
-      styleEl = document.createElement('style')
-      styleEl.id = 'chat-css-variables'
-      document.head.appendChild(styleEl)
-    }
-
-    const parts: string[] = []
-    if (Object.keys(merged.light || {}).length) {
-      const full = { ...cssVariableDefaults.light, ...merged.light }
-      const lightVars = Object.entries(full).map(([key, val]) => `${key}: ${val};`)
-      parts.push(`.light { ${lightVars.join(' ')} }`)
-    }
-    if (Object.keys(merged.dark || {}).length) {
-      const full = { ...cssVariableDefaults.dark, ...merged.dark }
-      const darkVars = Object.entries(full).map(([key, val]) => `${key}: ${val};`)
-      parts.push(`.dark { ${darkVars.join(' ')} }`)
-    }
-
-    styleEl.textContent = parts.join(' ')
   }
 
   function applyThemeSettings(settings: Record<string, any>) {
     if (settings.customColors && typeof settings.customColors === 'object') {
       injectCustomColors(settings.customColors)
-      hasCustomColors.value = true
     }
 
     if (settings.cssVariables && typeof settings.cssVariables === 'object') {
       injectCSSVariables(settings.cssVariables)
-      hasCSSVariables.value = true
     }
 
     if (settings.primary) primary.value = settings.primary
@@ -335,7 +305,7 @@ export function useTheme() {
     if (settings.blackAsPrimary !== undefined) setBlackAsPrimary(settings.blackAsPrimary)
 
     const colorKeys = ['secondary', 'success', 'info', 'warning', 'error'] as const
-    const savedExtras: Record<string, any> = JSON.parse(window.localStorage.getItem('nuxt-ui-ai-theme') || '{}')
+    const savedExtras: Record<string, any> = { ...aiThemeExtras.value }
 
     for (const color of colorKeys) {
       if (settings[color]) {
@@ -350,14 +320,14 @@ export function useTheme() {
       for (const [key, value] of Object.entries(settings.ui)) {
         if (key === 'colors') continue
 
-        const merged = defu(value as Record<string, any>, savedExtras.ui[key] || {}) as Record<string, any>
+        const merged = defu(value as Record<string, any>, savedExtras.ui[key] || {})
         ;(appConfig.ui as any)[key] = merged
         savedExtras.ui[key] = merged
       }
     }
 
-    window.localStorage.setItem('nuxt-ui-ai-theme', JSON.stringify(savedExtras))
     aiThemeExtras.value = savedExtras
+    window.localStorage.setItem('nuxt-ui-ai-theme', JSON.stringify(savedExtras))
 
     track('AI Theme Applied')
   }
@@ -371,55 +341,46 @@ export function useTheme() {
     appConfig.ui.colors.neutral = 'slate'
     window.localStorage.removeItem('nuxt-ui-neutral')
 
-    appConfig.theme.radius = 0.25
-    window.localStorage.removeItem('nuxt-ui-radius')
-
-    appConfig.theme.font = 'Public Sans'
-    window.localStorage.removeItem('nuxt-ui-font')
-
-    appConfig.theme.icons = 'lucide'
+    _radius.value = 0.25
+    _font.value = 'Public Sans'
+    _iconSet.value = 'lucide'
     appConfig.ui.icons = themeIcons.lucide as any
-    window.localStorage.removeItem('nuxt-ui-icons')
-
-    appConfig.theme.blackAsPrimary = false
-    window.localStorage.removeItem('nuxt-ui-black-as-primary')
+    _blackAsPrimary.value = false
 
     const defaultColors: Record<string, string> = { secondary: 'blue', success: 'green', info: 'blue', warning: 'yellow', error: 'red' }
-    const aiTheme = window.localStorage.getItem('nuxt-ui-ai-theme')
-    if (aiTheme) {
-      try {
-        const extras = JSON.parse(aiTheme)
-        if (extras.colors) {
-          for (const key of Object.keys(extras.colors)) {
-            (appConfig.ui.colors as any)[key] = defaultColors[key] || (appConfig.ui.colors as any)[key]
-          }
-        }
-        if (extras.ui) {
-          for (const key of Object.keys(extras.ui)) {
-            if (key === 'colors' || key === 'icons') continue
-            ;(appConfig.ui as any)[key] = undefined
-          }
-        }
-      } catch {
-        // ignore malformed localStorage
+    const extras = aiThemeExtras.value
+    if (extras.colors) {
+      for (const key of Object.keys(extras.colors)) {
+        (appConfig.ui.colors as any)[key] = defaultColors[key] || (appConfig.ui.colors as any)[key]
+      }
+    }
+    if (extras.ui) {
+      for (const key of Object.keys(extras.ui)) {
+        if (key === 'colors' || key === 'icons') continue
+        (appConfig.ui as any)[key] = undefined
       }
     }
     window.localStorage.removeItem('nuxt-ui-ai-theme')
     window.localStorage.removeItem('nuxt-ui-custom-colors')
     window.localStorage.removeItem('nuxt-ui-css-variables')
-    document.getElementById('chat-custom-colors')?.remove()
-    document.getElementById('chat-css-variables')?.remove()
-
     aiThemeExtras.value = {}
-    hasCustomColors.value = false
-    hasCSSVariables.value = false
+    customColorsData.value = {}
+    cssVariablesData.value = {}
+
+    if (import.meta.client) {
+      document.getElementById('chat-css-variables')?.replaceChildren()
+      document.getElementById('chat-custom-colors')?.replaceChildren()
+    }
   }
 
   return {
+    style,
+    link,
     neutralColors,
     neutral,
     primaryColors,
     primary,
+    blackAsPrimary,
     setBlackAsPrimary,
     radiuses,
     radius,

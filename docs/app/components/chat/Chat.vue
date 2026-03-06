@@ -184,6 +184,9 @@ const suggestions = [
 ]
 
 function clearMessages() {
+  if (chat.status === 'streaming') {
+    chat.stop()
+  }
   messages.value = []
   chat.messages = []
   _themeApplied.clear()
