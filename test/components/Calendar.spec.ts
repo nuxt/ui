@@ -279,6 +279,23 @@ describe('Calendar', () => {
       expect(wrapper.emitted('update:view')?.[0]).toEqual(['month'])
     })
 
+    test('changing defaultView after mount does not reset uncontrolled view', async () => {
+      const wrapper = await mountSuspended(Calendar, {
+        props: { defaultValue: new CalendarDate(2025, 1, 1) }
+      })
+
+      const headingButtons = wrapper.findAll('[data-slot="heading"] button')
+      await headingButtons[0]!.trigger('click')
+      await wrapper.findAll('[data-slot="heading"] button')[1]!.trigger('click')
+
+      expect(wrapper.find('[data-slot="yearGrid"]').exists()).toBe(true)
+
+      await wrapper.setProps({ defaultView: 'month' })
+
+      expect(wrapper.find('[data-slot="yearGrid"]').exists()).toBe(true)
+      expect(wrapper.find('[data-slot="monthGrid"]').exists()).toBe(false)
+    })
+
     test('type="month" keeps the standalone picker heading static', async () => {
       const wrapper = await mountSuspended(Calendar, {
         props: {
@@ -289,6 +306,18 @@ describe('Calendar', () => {
 
       expect(wrapper.find('[data-slot="monthGrid"]').exists()).toBe(true)
       expect(wrapper.find('[data-slot="heading"] button').exists()).toBe(false)
+    })
+
+    test('type="month" forwards root props to the picker root', async () => {
+      const wrapper = await mountSuspended(Calendar, {
+        props: {
+          type: 'month',
+          as: 'section',
+          defaultValue: new CalendarDate(2025, 1, 1)
+        }
+      })
+
+      expect(wrapper.find('[data-slot="root"]').element.tagName).toBe('SECTION')
     })
   })
 

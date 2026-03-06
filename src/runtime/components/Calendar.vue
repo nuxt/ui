@@ -238,9 +238,14 @@ function getDefaultView(type: CalendarType = props.type, defaultView = props.def
 
 const internalView = ref<CalendarView>(getDefaultView())
 
-watch(() => [props.type, props.defaultView, props.view], ([type, defaultView, view]) => {
-  if (view === undefined) {
-    internalView.value = getDefaultView(type as CalendarType, defaultView as CalendarView | undefined)
+watch(() => [props.type, props.view] as const, ([type, view], [previousType]) => {
+  if (view !== undefined) {
+    internalView.value = view
+    return
+  }
+
+  if (type !== previousType) {
+    internalView.value = getDefaultView(type as CalendarType, props.defaultView)
   }
 })
 
@@ -362,8 +367,6 @@ const switchToMonthsLabel = computed(() => translateWithFallback('calendar.switc
 const switchToYearsLabel = computed(() => translateWithFallback('calendar.switchToYears', 'Switch to year view'))
 
 function formatMonthLabel(date: DateValue) {
-  code.value
-
   try {
     return formatter.value.custom(date.toDate(getLocalTimeZone()), { month: 'long' })
   } catch {
@@ -372,8 +375,6 @@ function formatMonthLabel(date: DateValue) {
 }
 
 function formatYearLabel(date: DateValue) {
-  code.value
-
   try {
     return formatter.value.custom(date.toDate(getLocalTimeZone()), { year: 'numeric' })
   } catch {
@@ -488,6 +489,15 @@ const pickerValueProps = computed<Record<string, any>>(() => isStandalonePicker.
       defaultValue: pickerDefaultValue.value
     }
   : {})
+const pickerRootProps = computed(() => ({
+  ...calendarRootProps.value,
+  ...pickerValueProps.value,
+  'placeholder': pickerPlaceholder.value,
+  'locale': code.value,
+  'dir': dir.value,
+  'onUpdate:modelValue': picker.value.onUpdate,
+  'onUpdate:placeholder': onPickerPlaceholderUpdate
+}))
 
 function onPickerPlaceholderUpdate(value: DateValue) {
   if (isStandalonePicker.value) {
@@ -620,18 +630,9 @@ function onPickerPlaceholderUpdate(value: DateValue) {
     :is="picker.root"
     v-else
     v-slot="{ grid, date }"
-    v-bind="pickerValueProps"
-    :placeholder="pickerPlaceholder"
-    :locale="code"
-    :dir="dir"
-    :min-value="minValue"
-    :max-value="maxValue"
-    :disabled="disabled"
-    :readonly="readonly"
+    v-bind="pickerRootProps"
     data-slot="root"
     :class="ui.root({ class: ['inline-flex w-fit flex-col gap-4', uiProp?.root, props.class] })"
-    @update:model-value="picker.onUpdate"
-    @update:placeholder="onPickerPlaceholderUpdate"
   >
     <component
       :is="picker.header"
