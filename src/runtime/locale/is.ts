@@ -116,6 +116,10 @@ export default defineLocale<Messages>({
         copy: 'Afrita kóða á klippiborð'
       }
     },
+    sidebar: {
+      close: 'Loka',
+      toggle: 'Skipta'
+    },
     selectMenu: {
       create: 'Búa til "{label}"',
       noData: 'Engin gögn',
