@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Editor } from '@tiptap/vue-3'
 import type { BubbleMenuPluginProps } from '@tiptap/extension-bubble-menu'
@@ -83,13 +84,13 @@ type SlotPropsProps = {
   isDisabled: (item: EditorToolbarItem) => boolean
   onClick: (e: MouseEvent, item: EditorToolbarItem) => void
 }
-type SlotProps<T extends EditorToolbarItem> = (props: { item: T } & SlotPropsProps) => any
+type SlotProps<T extends EditorToolbarItem> = (props: { item: T } & SlotPropsProps) => VNode[]
 
 export type EditorToolbarSlots<
   A extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  item: SlotProps<T>
+  item?: SlotProps<T>
 } & DynamicSlots<MergeTypes<T>, undefined, SlotPropsProps>
 
 </script>
@@ -275,7 +276,7 @@ function getDropdownProps(item: EditorToolbarDropdownItem) {
   })
 }
 
-function mapDropdownItem(item: EditorToolbarDropdownChildItem): any {
+function mapDropdownItem(item: EditorToolbarDropdownChildItem): DropdownMenuItem {
   // Recursively map children if present
   const children = 'children' in item && Array.isArray(item.children)
     ? item.children.map(mapDropdownItem)

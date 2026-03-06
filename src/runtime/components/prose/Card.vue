@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/card'
 import type { IconProps, LinkProps } from '../../types'
@@ -21,8 +22,8 @@ export interface ProseCardProps {
 }
 
 export interface ProseCardSlots {
-  default(props?: {}): any
-  title(props?: {}): any
+  default(props?: {}): VNode[]
+  title(props?: {}): VNode[]
 }
 </script>
 

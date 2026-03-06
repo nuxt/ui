@@ -54,6 +54,10 @@ export type Messages = {
   contentToc: {
     title: string
   }
+  dropdownMenu: {
+    noMatch: string
+    search: string
+  }
   dashboardSearch: {
     description?: string
     theme: string

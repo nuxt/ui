@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Σε αυτή τη σελίδα'
     },
+    dropdownMenu: {
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      search: 'Αναζήτηση…'
+    },
     dashboardSearch: {
       theme: 'Θέμα'
     },

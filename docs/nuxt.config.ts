@@ -14,12 +14,7 @@ export default defineNuxtConfig({
     'nuxt-component-meta',
     'nuxt-llms',
     'nuxt-og-image',
-    'motion-v/nuxt',
-    (_, nuxt) => {
-      nuxt.hook('components:dirs', (dirs) => {
-        dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
-      })
-    }
+    'motion-v/nuxt'
   ],
 
   $development: {
@@ -277,8 +272,7 @@ export default defineNuxtConfig({
     clientBundle: {
       scan: true,
       includeCustomCollections: true
-    },
-    provider: 'iconify'
+    }
   },
 
   image: {

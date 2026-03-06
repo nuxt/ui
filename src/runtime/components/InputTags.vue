@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { TagsInputRootProps, TagsInputRootEmits, AcceptableInputValue } from 'reka-ui'
 import theme from '#build/ui/input-tags'
@@ -55,14 +56,14 @@ export interface InputTagsEmits<T extends InputTagItem> extends TagsInputRootEmi
   focus: [event: FocusEvent]
 }
 
-type SlotProps<T extends InputTagItem> = (props: { item: T, index: number, ui: InputTags['ui'] }) => any
+type SlotProps<T extends InputTagItem> = (props: { item: T, index: number, ui: InputTags['ui'] }) => VNode[]
 
 export interface InputTagsSlots<T extends InputTagItem = InputTagItem> {
-  'leading'(props: { ui: InputTags['ui'] }): any
-  'default'(props: { ui: InputTags['ui'] }): any
-  'trailing'(props: { ui: InputTags['ui'] }): any
-  'item-text': SlotProps<T>
-  'item-delete': SlotProps<T>
+  'leading'?(props: { ui: InputTags['ui'] }): VNode[]
+  'default'?(props: { ui: InputTags['ui'] }): VNode[]
+  'trailing'?(props: { ui: InputTags['ui'] }): VNode[]
+  'item-text'?: SlotProps<T>
+  'item-delete'?: SlotProps<T>
 }
 </script>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/empty'
 import type { ComponentConfig } from '../types/tv'
@@ -37,13 +38,13 @@ export interface EmptyProps {
 }
 
 export interface EmptySlots {
-  header(props?: {}): any
-  leading(props: { ui: Empty['ui'] }): any
-  title(props?: {}): any
-  description(props?: {}): any
-  body(props?: {}): any
-  actions(props?: {}): any
-  footer(props?: {}): any
+  header?(props?: {}): VNode[]
+  leading?(props: { ui: Empty['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 

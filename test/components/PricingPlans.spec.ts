@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import PricingPlans from '../../src/runtime/components/PricingPlans.vue'
-import type { PricingPlansProps, PricingPlansSlots } from '../../src/runtime/components/PricingPlans.vue'
-import ComponentRender from '../component-render'
 
 describe('PricingPlans', () => {
   const plans = [{
@@ -22,12 +21,12 @@ describe('PricingPlans', () => {
 
   const props = { plans }
 
-  it.each([
+  renderEach(PricingPlans, [
     // Props
     ['with one plan', { props: { ...props, plans: [plans[0]!] } }],
     ['with two plans', { props: { ...props, plans: [plans[0]!, plans[1]!] } }],
     ['with three plans', { props }],
-    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical' } }],
     ['with compact', { props: { ...props, compact: true } }],
     ['with scale', { props: { ...props, scale: true } }],
     ['with compact and scale', { props: { ...props, compact: true, scale: true } }],
@@ -35,10 +34,7 @@ describe('PricingPlans', () => {
     ['with class', { props: { ...props, class: 'gap-y-12' } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PricingPlansProps, slots?: Partial<PricingPlansSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PricingPlans)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(PricingPlans, {

@@ -59,6 +59,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'בדף זה'
     },
+    dropdownMenu: {
+      noMatch: 'לא נמצאה התאמה',
+      search: 'חפש…'
+    },
     dashboardSearch: {
       theme: 'ערכת נושא'
     },

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/footer-columns'
 import type { IconProps, LinkProps } from '../types'
@@ -32,17 +33,17 @@ export interface FooterColumnsProps<T extends FooterColumnLink = FooterColumnLin
   ui?: FooterColumns['slots']
 }
 
-type SlotProps<T> = (props: { link: T, active: boolean, ui: FooterColumns['ui'] }) => any
+type SlotProps<T> = (props: { link: T, active: boolean, ui: FooterColumns['ui'] }) => VNode[]
 
 export interface FooterColumnsSlots<T extends FooterColumnLink = FooterColumnLink> {
-  'left'(props?: {}): any
-  'default'(props?: {}): any
-  'right'(props?: {}): any
-  'column-label'?: (props: { column: FooterColumn<T> }) => any
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-label'(props: { link: T, active: boolean }): any
-  'link-trailing'(props: { link: T, active: boolean }): any
+  'left'?(props?: {}): VNode[]
+  'default'?(props?: {}): VNode[]
+  'right'?(props?: {}): VNode[]
+  'column-label'?: (props: { column: FooterColumn<T> }) => VNode[]
+  'link'?: SlotProps<T>
+  'link-leading'?: SlotProps<T>
+  'link-label'?(props: { link: T, active: boolean }): VNode[]
+  'link-trailing'?(props: { link: T, active: boolean }): VNode[]
 }
 </script>
 

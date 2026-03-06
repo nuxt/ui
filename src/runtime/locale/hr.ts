@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Na ovoj stranici'
     },
+    dropdownMenu: {
+      noMatch: 'Nema odgovarajućih podataka',
+      search: 'Pretraživanje…'
+    },
     dashboardSearch: {
       theme: 'Tema'
     },

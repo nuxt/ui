@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.5.1](https://github.com/nuxt/ui/compare/v4.5.0...v4.5.1) (2026-03-02)
+
+### Bug Fixes
+
+* **components:** improve arrow styling with `stroke-default` and `fill-bg` ([#6095](https://github.com/nuxt/ui/issues/6095)) ([0e9198e](https://github.com/nuxt/ui/commit/0e9198e927dbce30daf211eb9d352cea3d978f62))
+* **components:** improve slots return types and tests ([#6109](https://github.com/nuxt/ui/issues/6109)) ([7d1e863](https://github.com/nuxt/ui/commit/7d1e8631ea4cf6ec81a1d22d074e5c86a53eda3f))
+* **components:** prevent `transformUI` from mutating cached `useComponentUI` value ([286738a](https://github.com/nuxt/ui/commit/286738a107f2fcc2978adc5cdaf165628356d2b1)), closes [#6104](https://github.com/nuxt/ui/issues/6104) [#4387](https://github.com/nuxt/ui/issues/4387)
+* **ContentToc:** add relative positioning to content slot ([fcdb231](https://github.com/nuxt/ui/commit/fcdb231aee0d1daf8ebe7784aa10aa10327c53e3)), closes [#6117](https://github.com/nuxt/ui/issues/6117)
+* **ContentToc:** use rem units for indicator size calculation ([d631853](https://github.com/nuxt/ui/commit/d6318532c4659b7762e521696e4020ff4e8f7ead))
+* **NavigationMenu:** prevent navigation when clicking trailing area in horizontal orientation ([8f84c90](https://github.com/nuxt/ui/commit/8f84c90c159cf17bc75f15fa012d2bebb198c20d)), closes [#6083](https://github.com/nuxt/ui/issues/6083)
+* **Page:** make slot presence reactive for variant computation ([082ea41](https://github.com/nuxt/ui/commit/082ea41ff74f81101df113eacd5bc73cef020b89))
+* **types:** resolve `isArrayOfArray` type return ([#6097](https://github.com/nuxt/ui/issues/6097)) ([04292d9](https://github.com/nuxt/ui/commit/04292d97728bb5f4d2f580ae4a5d5a42bacb043a))
+* **useResizable:** use function declaration to prevent false auto-import ([c22ecf4](https://github.com/nuxt/ui/commit/c22ecf405f7f2c116ef49b80fcdc1a6641014400))
+
 ## [4.5.0](https://github.com/nuxt/ui/compare/v4.4.0...v4.5.0) (2026-02-24)
 
 ### Features

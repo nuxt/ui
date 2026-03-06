@@ -2,13 +2,12 @@ import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises, mount } from '@vue/test-utils'
 import CheckboxGroup from '../../src/runtime/components/CheckboxGroup.vue'
-import type { CheckboxGroupProps, CheckboxGroupSlots } from '../../src/runtime/components/CheckboxGroup.vue'
 import type { FormInputEvents } from '../../src/module'
-import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/checkbox-group'
 import themeCheckbox from '#build/ui/checkbox'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 
 describe('CheckboxGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -23,7 +22,7 @@ describe('CheckboxGroup', () => {
 
   const props = { items }
 
-  it.each([
+  renderEach(CheckboxGroup, [
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: ['1'] } }],
     ['with defaultValue', { props: { ...props, defaultValue: ['1'] } }],
@@ -46,10 +45,7 @@ describe('CheckboxGroup', () => {
     ['with legend slot', { props, slots: { legend: () => 'Legend slot' } }],
     ['with label slot', { props, slots: { label: () => 'Label slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxGroupProps, slots?: Partial<CheckboxGroupSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, CheckboxGroup)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CheckboxGroup, {

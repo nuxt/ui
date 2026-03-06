@@ -1,7 +1,6 @@
-import { describe, it, expect } from 'vitest'
+import { describe } from 'vitest'
+import { renderEach } from '../../component-render'
 import ContentSearch from '../../../src/runtime/components/content/ContentSearch.vue'
-import type { ContentSearchProps } from '../../../src/runtime/components/content/ContentSearch.vue'
-import ComponentRender from '../../component-render'
 import theme from '#build/ui/content/content-search'
 
 describe('ContentSearch', () => {
@@ -121,7 +120,7 @@ describe('ContentSearch', () => {
 
   const props = { links, navigation, files, open: true, portal: false }
 
-  it.each([
+  renderEach(ContentSearch, [
     // Props
     ['with links', { props }],
     ['with icon', { props: { ...props, icon: 'i-lucide-home' } }],
@@ -133,8 +132,5 @@ describe('ContentSearch', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with ui', { props: { ...props, ui: { input: '[&>input]:text-lg' } } }],
     ['with class', { props: { ...props, class: 'sm:max-w-5xl' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentSearchProps }) => {
-    const html = await ComponentRender(nameOrHtml, options, ContentSearch)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 })

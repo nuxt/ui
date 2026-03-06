@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { ToasterProps } from '../types'
 import type { Locale, Messages } from '../types/locale'
 
@@ -11,7 +12,7 @@ export interface AppProps<T extends Messages = Messages> extends Omit<ConfigProv
 }
 
 export interface AppSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 
 export default {
