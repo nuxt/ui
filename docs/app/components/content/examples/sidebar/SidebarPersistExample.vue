@@ -23,9 +23,12 @@ const items: NavigationMenuItem[] = [{
 
 <template>
   <div class="flex flex-1">
-    <USidebar v-model:open="open" title="Navigation" collapsible="icon">
+    <USidebar v-model:open="open" collapsible="icon">
+      <template #header>
+        <span class="font-semibold text-sm">Navigation</span>
+      </template>
+
       <UNavigationMenu
-        :collapsed="!open"
         :items="items"
         orientation="vertical"
         :ui="{ link: 'p-1.5 overflow-hidden' }"

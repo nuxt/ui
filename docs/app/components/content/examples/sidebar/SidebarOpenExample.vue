@@ -28,14 +28,11 @@ const items: NavigationMenuItem[] = [{
         <span class="font-semibold text-sm">Navigation</span>
       </template>
 
-      <template #default="{ state }">
-        <UNavigationMenu
-          :collapsed="state === 'collapsed'"
-          :items="items"
-          orientation="vertical"
-          :ui="{ link: 'p-1.5 overflow-hidden' }"
-        />
-      </template>
+      <UNavigationMenu
+        :items="items"
+        orientation="vertical"
+        :ui="{ link: 'p-1.5 overflow-hidden' }"
+      />
     </USidebar>
 
     <div class="flex-1 flex flex-col">

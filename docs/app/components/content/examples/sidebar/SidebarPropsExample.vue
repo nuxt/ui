@@ -1,15 +1,7 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem, SidebarProps } from '@nuxt/ui'
 
-const props = withDefaults(defineProps<{
-  variant?: 'sidebar' | 'floating' | 'inset'
-  collapsible?: 'offcanvas' | 'icon' | 'none'
-  side?: 'left' | 'right'
-}>(), {
-  variant: 'sidebar',
-  collapsible: 'none',
-  side: 'left'
-})
+defineProps<SidebarProps>()
 
 const open = ref(true)
 
@@ -28,26 +20,32 @@ const items: NavigationMenuItem[] = [{
 </script>
 
 <template>
-  <div class="flex flex-1">
+  <div
+    class="flex flex-1"
+    :class="[
+      variant === 'inset' && 'bg-neutral-50 dark:bg-neutral-950',
+      side === 'right' && 'flex-row-reverse'
+    ]"
+  >
     <USidebar
       v-model:open="open"
-      :variant="props.variant"
-      :collapsible="props.collapsible"
-      :side="props.side"
+      :variant="variant"
+      :collapsible="collapsible"
+      :side="side"
       title="Navigation"
+      :ui="{
+        container: 'h-full'
+      }"
     >
-      <template #default="{ state }">
-        <UNavigationMenu
-          :collapsed="state === 'collapsed'"
-          :items="items"
-          orientation="vertical"
-          :ui="{ link: 'p-1.5 overflow-hidden' }"
-        />
-      </template>
+      <UNavigationMenu
+        :items="items"
+        orientation="vertical"
+        :ui="{ link: 'p-1.5 overflow-hidden' }"
+      />
     </USidebar>
 
-    <div class="flex-1 flex flex-col overflow-hidden lg:peer-data-[variant=inset]:my-2 lg:peer-data-[variant=floating]:my-2 lg:peer-data-[variant=inset]:ms-0 lg:peer-data-[variant=inset]:rounded-xl lg:peer-data-[variant=inset]:shadow-sm lg:peer-data-[variant=inset]:ring lg:peer-data-[variant=inset]:ring-default">
-      <div class="h-(--ui-header-height) shrink-0 flex items-center px-4 border-b border-default">
+    <div class="flex-1 flex flex-col overflow-hidden lg:peer-data-[variant=floating]:my-4 lg:peer-data-[variant=inset]:my-4 lg:peer-data-[variant=inset]:rounded-xl lg:peer-data-[variant=inset]:shadow lg:peer-data-[variant=inset]:ring lg:peer-data-[variant=inset]:ring-default bg-default">
+      <div class="h-(--ui-header-height) shrink-0 flex items-center px-4">
         <UButton
           icon="i-lucide-panel-left"
           color="neutral"

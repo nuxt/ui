@@ -81,7 +81,6 @@ function onSubmit() {
     <USidebar
       v-model:open="openRight"
       side="right"
-      collapsible="offcanvas"
       :variant="variant"
       title="AI Chat"
       close

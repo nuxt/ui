@@ -205,7 +205,6 @@ defineShortcuts({
   <USidebar
     v-model:open="open"
     side="right"
-    collapsible="offcanvas"
     title="AI Assistant"
     close
     close-icon="i-lucide-chevron-right"

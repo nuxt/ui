@@ -27,7 +27,7 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
    * - `offcanvas`: The sidebar slides out of view completely.
    * - `icon`: The sidebar shrinks to icon-only width.
    * - `none`: The sidebar is not collapsible.
-   * @defaultValue 'none'
+   * @defaultValue 'offcanvas'
    */
   collapsible?: Sidebar['variants']['collapsible']
   /**
@@ -107,7 +107,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<SidebarProps<T>>(), {
   as: 'aside',
   variant: 'sidebar',
-  collapsible: 'none',
+  collapsible: 'offcanvas',
   side: 'left',
   close: false,
   rail: false,

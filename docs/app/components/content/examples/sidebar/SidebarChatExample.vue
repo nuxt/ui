@@ -48,7 +48,6 @@ function onSubmit() {
     <USidebar
       v-model:open="open"
       side="right"
-      collapsible="offcanvas"
       title="AI Chat"
       close
       :style="{ '--sidebar-width': '20rem' }"
@@ -66,10 +65,12 @@ function onSubmit() {
           v-model="input"
           :error="chat.error"
           :autofocus="false"
+          variant="subtle"
+          size="sm"
           :ui="{ base: 'px-0' }"
           @submit="onSubmit"
         >
-          <UChatPromptSubmit :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
+          <UChatPromptSubmit size="sm" :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
         </UChatPrompt>
       </template>
     </USidebar>

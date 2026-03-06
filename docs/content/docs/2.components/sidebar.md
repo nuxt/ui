@@ -53,7 +53,7 @@ class: '!p-0 !justify-start h-[500px] contain-[paint]'
 
 ### Collapsible
 
-Use the `collapsible` prop to change the collapse behavior of the sidebar. Defaults to `none`.
+Use the `collapsible` prop to change the collapse behavior of the sidebar. Defaults to `offcanvas`.
 
 - `offcanvas`: The sidebar slides out of view completely.
 - `icon`: The sidebar shrinks to icon-only width.
@@ -97,7 +97,7 @@ options:
     items:
       - left
       - right
-    default: 'left'
+    default: 'right'
 class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 ::
@@ -111,8 +111,11 @@ Use the `title` prop to set the title of the sidebar header.
 prettier: true
 hide:
   - class
+  - ui.container
 props:
   title: Navigation
+  ui:
+    container: h-full
 slots:
   default: |
 
@@ -132,9 +135,14 @@ Use the `description` prop to set the description of the sidebar header.
 prettier: true
 hide:
   - class
+  - ui.container
+ignore:
+  - ui.container
 props:
   title: Navigation
   description: Browse your workspace
+  ui:
+    container: h-full
 slots:
   default: |
 
