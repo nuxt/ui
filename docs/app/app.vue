@@ -54,7 +54,7 @@ provide('navigation', rootNavigation)
     <SpeedInsights />
 
     <div class="flex">
-      <div class="flex-1" :class="[route.path.startsWith('/docs/') && 'root']">
+      <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">
         <template v-if="!route.path.startsWith('/examples')">
           <!-- <Banner /> -->
 
