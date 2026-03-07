@@ -254,7 +254,7 @@ const {
               color="neutral"
               variant="outline"
               size="sm"
-              icon="i-lucide-undo-2"
+              icon="i-lucide-rotate-ccw"
               class="ms-auto ring-default hover:bg-elevated/50"
               @click="resetTheme"
             />

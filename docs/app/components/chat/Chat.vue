@@ -217,27 +217,37 @@ defineShortcuts({
     v-model:open="open"
     side="right"
     title="AI Assistant"
-    close
-    close-icon="i-lucide-chevron-right"
     :style="{ '--sidebar-width': '24rem' }"
     :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
   >
     <template #actions>
       <UTooltip v-if="hasThemeChanges" text="Reset theme">
         <UButton
-          icon="i-lucide-undo-2"
+          icon="i-lucide-rotate-ccw"
           color="neutral"
           variant="ghost"
           @click="resetTheme"
         />
       </UTooltip>
 
-      <UTooltip v-if="canClear" text="Clear history">
+      <UTooltip v-if="canClear" text="Clear messages">
         <UButton
-          icon="i-lucide-trash"
+          icon="i-lucide-list-x"
           color="neutral"
           variant="ghost"
           @click="clearMessages"
+        />
+      </UTooltip>
+    </template>
+
+    <template #close>
+      <UTooltip text="Close" :kbds="['meta', 'i']">
+        <UButton
+          icon="i-lucide-panel-right-close"
+          color="neutral"
+          variant="ghost"
+          aria-label="Close"
+          @click="open = false"
         />
       </UTooltip>
     </template>
@@ -332,9 +342,11 @@ defineShortcuts({
         @submit="onSubmit"
       >
         <template #footer>
-          <p class="text-xs text-muted flex items-center gap-1">
-            Press <UKbd value="meta" size="sm" variant="soft" /> <UKbd value="i" size="sm" variant="soft" /> to toggle the chat
-          </p>
+          <div class="flex items-center gap-1.5 text-xs text-dimmed">
+            <NuxtLink to="https://vercel.com/ai-gateway" target="_blank" class="inline-flex items-center gap-1 hover:text-muted transition-colors">
+              Powered by <UIcon name="i-simple-icons-vercel" class="size-3" /> AI Gateway
+            </NuxtLink>
+          </div>
 
           <UChatPromptSubmit
             size="sm"
