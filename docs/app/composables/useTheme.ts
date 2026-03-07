@@ -320,7 +320,7 @@ export function useTheme() {
       for (const [key, value] of Object.entries(settings.ui)) {
         if (key === 'colors') continue
 
-        const merged = defu(value as Record<string, any>, savedExtras.ui[key] || {})
+        const merged = defu(value as Record<string, any>, (appConfig.ui as any)[key] || {}, savedExtras.ui[key] || {})
         ;(appConfig.ui as any)[key] = merged
         savedExtras.ui[key] = merged
       }

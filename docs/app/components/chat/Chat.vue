@@ -49,7 +49,14 @@ const chat = new Chat({
     body: { theme }
   }),
   onError: (error) => {
-    const { message } = typeof error.message === 'string' && error.message[0] === '{' ? JSON.parse(error.message) : error
+    let message = error.message
+    if (typeof message === 'string' && message[0] === '{') {
+      try {
+        message = JSON.parse(message).message || message
+      } catch {
+        // keep original message on malformed JSON
+      }
+    }
 
     toast.add({
       description: message,
@@ -88,6 +95,9 @@ function onSubmit() {
   input.value = ''
 }
 
+// Sync external messages (e.g. from search→chat flow) into the chat instance.
+// When the last synced message is from the user, auto-regenerate the assistant response.
+// _skipSync prevents loops when onFinish writes back to the shared messages ref.
 watch(messages, (newMessages) => {
   if (_skipSync) return
 

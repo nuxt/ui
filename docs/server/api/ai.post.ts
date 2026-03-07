@@ -67,6 +67,10 @@ const resetTheme = {
 export default defineEventHandler(async (event) => {
   const { messages, theme } = await readBody(event)
 
+  if (!messages || !Array.isArray(messages)) {
+    throw createError({ statusCode: 400, message: 'Invalid or missing messages array.' })
+  }
+
   const componentNames = theme ? Object.keys(theme) : []
 
   const getComponentTheme = {

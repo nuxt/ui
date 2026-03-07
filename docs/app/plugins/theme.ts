@@ -53,6 +53,11 @@ export default defineNuxtPlugin({
     }
 
     if (import.meta.server) {
+      // Inline scripts below intentionally duplicate logic from the client-side composable
+      // (useTheme / injectCustomColors / injectCSSVariables) to restore persisted theme
+      // settings on first paint and prevent a flash of unstyled content (FOUC).
+      // The script IDs (chat-custom-colors, chat-css-variables, nuxt-ui-radius, etc.)
+      // correspond to the <style> elements managed by useTheme via useHead.
       useHead({
         script: [{
           innerHTML: `
