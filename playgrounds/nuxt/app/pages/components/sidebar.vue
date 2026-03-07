@@ -62,6 +62,7 @@ function onSubmit() {
           color="neutral"
           variant="soft"
           size="sm"
+          aria-label="Toggle left sidebar"
           @click="openLeft = !openLeft"
         />
         <UButton
@@ -69,6 +70,7 @@ function onSubmit() {
           color="neutral"
           variant="soft"
           size="sm"
+          aria-label="Toggle right sidebar"
           @click="openRight = !openRight"
         />
       </Navbar>

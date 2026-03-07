@@ -37,6 +37,7 @@ const items: NavigationMenuItem[] = [{
           icon="i-lucide-panel-left"
           color="neutral"
           variant="ghost"
+          aria-label="Toggle sidebar"
           @click="open = !open"
         />
       </div>

@@ -35,6 +35,7 @@ function onSubmit() {
             icon="i-lucide-panel-right"
             color="neutral"
             variant="ghost"
+            aria-label="Toggle sidebar"
             @click="open = !open"
           />
         </template>
