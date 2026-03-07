@@ -129,7 +129,7 @@ watch(() => props.text, () => {
     v-if="hasContent"
     v-slot="{ open: isOpen }"
     :open="resolvedOpen"
-    :unmount-on-hide="true"
+    :unmount-on-hide="false"
     data-slot="root"
     :class="props.class"
     @update:open="setOpen"
@@ -172,7 +172,7 @@ watch(() => props.text, () => {
     >
       <div class="relative pt-2">
         <div v-if="isOverflowing && !arrivedState.top" class="absolute inset-x-0 top-2 h-6 bg-linear-to-b from-default to-transparent pointer-events-none" />
-        <div ref="bodyRef" data-slot="body" class="max-h-[200px] overflow-y-auto text-sm text-muted whitespace-pre-wrap">
+        <div ref="bodyRef" data-slot="body" class="max-h-[200px] overflow-y-auto text-sm text-dimmed whitespace-pre-wrap">
           <slot :open="isOpen" :reasoning-text="text || ''">
             {{ text }}
           </slot>
