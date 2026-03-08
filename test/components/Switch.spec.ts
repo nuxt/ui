@@ -67,31 +67,21 @@ describe('Switch', () => {
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
     })
 
-    test('update:modelValue with custom string trueValue/falseValue', async () => {
+    test('toggle with custom trueValue/falseValue via click', async () => {
       const wrapper = mount(Switch, {
         props: { trueValue: 'on', falseValue: 'off', defaultValue: 'off' }
       })
-      const input = wrapper.findComponent({ name: 'SwitchRoot' })
-      await input.vm.$emit('update:modelValue', 'on')
-      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['on']] })
-    })
+      const button = wrapper.find('button')
 
-    test('update:modelValue with custom number trueValue/falseValue', async () => {
-      const wrapper = mount(Switch, {
-        props: { trueValue: 1, falseValue: 0, defaultValue: 0 }
-      })
-      const input = wrapper.findComponent({ name: 'SwitchRoot' })
-      await input.vm.$emit('update:modelValue', 1)
-      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1]] })
-    })
+      await button.trigger('click')
+      await flushPromises()
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['on'])
+      expect(wrapper.emitted('change')).toHaveLength(1)
 
-    test('change event with custom trueValue/falseValue', async () => {
-      const wrapper = mount(Switch, {
-        props: { trueValue: 'on', falseValue: 'off', defaultValue: 'off' }
-      })
-      const input = wrapper.findComponent({ name: 'SwitchRoot' })
-      await input.vm.$emit('update:modelValue', 'on')
-      expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
+      await button.trigger('click')
+      await flushPromises()
+      expect(wrapper.emitted('update:modelValue')?.[1]).toEqual(['off'])
+      expect(wrapper.emitted('change')).toHaveLength(2)
     })
   })
 

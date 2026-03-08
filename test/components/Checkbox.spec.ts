@@ -68,31 +68,21 @@ describe('Checkbox', () => {
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
     })
 
-    test('update:modelValue with custom string trueValue/falseValue', async () => {
+    test('toggle with custom trueValue/falseValue via click', async () => {
       const wrapper = mount(Checkbox, {
         props: { trueValue: 'yes', falseValue: 'no', defaultValue: 'no' }
       })
-      const input = wrapper.findComponent({ name: 'CheckboxRoot' })
-      await input.vm.$emit('update:modelValue', 'yes')
-      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['yes']] })
-    })
+      const button = wrapper.find('button')
 
-    test('update:modelValue with custom number trueValue/falseValue', async () => {
-      const wrapper = mount(Checkbox, {
-        props: { trueValue: 1, falseValue: 0, defaultValue: 0 }
-      })
-      const input = wrapper.findComponent({ name: 'CheckboxRoot' })
-      await input.vm.$emit('update:modelValue', 1)
-      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1]] })
-    })
+      await button.trigger('click')
+      await flushPromises()
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['yes'])
+      expect(wrapper.emitted('change')).toHaveLength(1)
 
-    test('change event with custom trueValue/falseValue', async () => {
-      const wrapper = mount(Checkbox, {
-        props: { trueValue: 'yes', falseValue: 'no', defaultValue: 'no' }
-      })
-      const input = wrapper.findComponent({ name: 'CheckboxRoot' })
-      await input.vm.$emit('update:modelValue', 'yes')
-      expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
+      await button.trigger('click')
+      await flushPromises()
+      expect(wrapper.emitted('update:modelValue')?.[1]).toEqual(['no'])
+      expect(wrapper.emitted('change')).toHaveLength(2)
     })
   })
 
