@@ -21,12 +21,13 @@ const shimmerStyle = computed(() => ({
 
 <template>
   <Motion
+    as="span"
     :initial="{ backgroundPosition: '100% center' }"
     :animate="{ backgroundPosition: '0% center' }"
     :transition="{ repeat: Infinity, duration, ease: 'linear' }"
     :style="shimmerStyle"
     data-slot="base"
-    :class="[props.class, 'inline-block bg-size-[250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--ui-text-highlighted),#0000_calc(50%+var(--spread)))]']"
+    :class="[props.class, 'bg-size-[250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--ui-text-highlighted),#0000_calc(50%+var(--spread)))] will-change-transform']"
   >
     {{ text }}
   </Motion>

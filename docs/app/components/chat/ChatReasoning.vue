@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
-import { useScroll } from '@vueuse/core'
+import { useScroll, useResizeObserver } from '@vueuse/core'
+import ChatShimmer from './ChatShimmer.vue'
 
 const props = withDefaults(defineProps<{
   text?: string
@@ -116,7 +117,7 @@ useResizeObserver(bodyRef, (entries) => {
 })
 
 watch(() => props.text, () => {
-  if (props.streaming && bodyRef.value) {
+  if (props.streaming && bodyRef.value && arrivedState.bottom) {
     nextTick(() => {
       bodyRef.value!.scrollTop = bodyRef.value!.scrollHeight
     })
@@ -134,16 +135,13 @@ watch(() => props.text, () => {
     :class="props.class"
     @update:open="setOpen"
   >
-    <CollapsibleTrigger
-      as-child
-      :disabled="!hasContent"
-    >
+    <CollapsibleTrigger as-child :disabled="!hasContent">
       <button
         type="button"
         data-slot="trigger"
         class="group flex w-full items-center gap-1.5 text-muted hover:text-default text-sm cursor-pointer disabled:cursor-default disabled:hover:text-muted transition-colors focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0"
       >
-        <span v-if="hasContent && chevron === 'leading'" class="relative size-4 shrink-0">
+        <span v-if="hasContent && chevron === 'leading' && icon" class="relative size-4 shrink-0">
           <UIcon
             :name="icon"
             class="absolute inset-0 size-4 transition-opacity group-hover:opacity-0 group-data-[state=open]:opacity-0 duration-200"
@@ -153,7 +151,12 @@ watch(() => props.text, () => {
             class="absolute inset-0 size-4 opacity-0 transition-all group-hover:opacity-100 group-data-[state=open]:opacity-100 group-data-[state=open]:rotate-180 duration-200"
           />
         </span>
-        <UIcon v-else :name="icon" class="size-4 shrink-0" />
+        <UIcon
+          v-else-if="hasContent && chevron === 'leading'"
+          :name="chevronIconName"
+          class="size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200"
+        />
+        <UIcon v-else-if="icon" :name="icon" class="size-4 shrink-0" />
 
         <ChatShimmer v-if="streaming" :text="thinkingMessage" class="truncate" />
         <span v-else class="truncate">{{ thinkingMessage }}</span>

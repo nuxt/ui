@@ -312,7 +312,7 @@ defineShortcuts({
                 v-else-if="isToolUIPart(part)"
                 :text="getToolText(part)"
                 :icon="getToolIcon(part)"
-                :loading="part.state !== 'output-available'"
+                :streaming="part.state !== 'output-available'"
               />
             </template>
           </template>
