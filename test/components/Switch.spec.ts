@@ -29,6 +29,9 @@ describe('Switch', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with color neutral', { props: { color: 'neutral', defaultValue: true } }],
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
+    ['with trueValue/falseValue as string', { props: { trueValue: 'on', falseValue: 'off', defaultValue: 'on' } }],
+    ['with trueValue/falseValue as number', { props: { trueValue: 1, falseValue: 0, defaultValue: 1 } }],
+    ['with trueValue/falseValue unchecked', { props: { trueValue: 'on', falseValue: 'off', defaultValue: 'off' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'inline-flex' } }],
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
@@ -61,6 +64,33 @@ describe('Switch', () => {
       const wrapper = mount(Switch)
       const input = wrapper.findComponent({ name: 'SwitchRoot' })
       await input.vm.$emit('update:modelValue', true)
+      expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
+    })
+
+    test('update:modelValue with custom string trueValue/falseValue', async () => {
+      const wrapper = mount(Switch, {
+        props: { trueValue: 'on', falseValue: 'off', defaultValue: 'off' }
+      })
+      const input = wrapper.findComponent({ name: 'SwitchRoot' })
+      await input.vm.$emit('update:modelValue', 'on')
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['on']] })
+    })
+
+    test('update:modelValue with custom number trueValue/falseValue', async () => {
+      const wrapper = mount(Switch, {
+        props: { trueValue: 1, falseValue: 0, defaultValue: 0 }
+      })
+      const input = wrapper.findComponent({ name: 'SwitchRoot' })
+      await input.vm.$emit('update:modelValue', 1)
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1]] })
+    })
+
+    test('change event with custom trueValue/falseValue', async () => {
+      const wrapper = mount(Switch, {
+        props: { trueValue: 'on', falseValue: 'off', defaultValue: 'off' }
+      })
+      const input = wrapper.findComponent({ name: 'SwitchRoot' })
+      await input.vm.$emit('update:modelValue', 'on')
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
     })
   })
