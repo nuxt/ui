@@ -122,9 +122,9 @@ function onUpdate(value: any) {
         :class="ui.base({ class: uiProp?.base })"
         @update:model-value="onUpdate"
       >
-        <template #default="{ modelValue }">
+        <template #default="{ state }">
           <CheckboxIndicator data-slot="indicator" :class="ui.indicator({ class: uiProp?.indicator })">
-            <UIcon v-if="modelValue === 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
+            <UIcon v-if="state === 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
             <UIcon v-else :name="icon || appConfig.ui.icons.check" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
           </CheckboxIndicator>
         </template>
