@@ -77,8 +77,8 @@ export default (options: Required<ModuleOptions>) => ({
       },
       vertical: {
         viewport:
-          "sm:w-(--reka-navigation-menu-viewport-width) left-(--reka-navigation-menu-viewport-left) rtl:[left:auto] rtl:[right:calc(100%-var(--reka-navigation-menu-viewport-left)-var(--reka-navigation-menu-viewport-width))]",
-      },
+          'sm:w-(--reka-navigation-menu-viewport-width) left-(--reka-navigation-menu-viewport-left) rtl:[left:auto] rtl:[right:calc(100%-var(--reka-navigation-menu-viewport-left)-var(--reka-navigation-menu-viewport-width))]'
+      }
     },
     active: {
       true: {
