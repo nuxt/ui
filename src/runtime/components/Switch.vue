@@ -47,7 +47,7 @@ export interface SwitchProps<T = boolean> extends Pick<SwitchRootProps<T>, 'disa
   ui?: Switch['slots']
 }
 
-export type SwitchEmits<T = boolean> = Pick<SwitchRootEmits<T>, 'update:modelValue'> & {
+export interface SwitchEmits<T = boolean> extends SwitchRootEmits<T> {
   change: [event: Event]
 }
 

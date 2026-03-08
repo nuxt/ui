@@ -50,7 +50,7 @@ export interface CheckboxProps<T = boolean> extends Pick<CheckboxRootProps<T>, '
   ui?: Checkbox['slots']
 }
 
-export type CheckboxEmits<T = boolean> = Pick<CheckboxRootEmits<T>, 'update:modelValue'> & {
+export interface CheckboxEmits<T = boolean> extends CheckboxRootEmits<T> {
   change: [event: Event]
 }
 
