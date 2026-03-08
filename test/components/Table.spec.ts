@@ -42,14 +42,14 @@ describe('Table', () => {
 
   const columns: TableColumn<typeof data[number]>[] = [{
     id: 'select',
-    header: ({ table }) => h(UCheckbox, {
+    header: ({ table }) => h(UCheckbox<boolean>, {
       'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
-      'onUpdate:modelValue': (value: boolean | 'indeterminate' | undefined) => table.toggleAllPageRowsSelected(!!value),
+      'onUpdate:modelValue': value => table.toggleAllPageRowsSelected(!!value),
       'label': 'Select all'
     }),
-    cell: ({ row }) => h(UCheckbox, {
+    cell: ({ row }) => h(UCheckbox<boolean>, {
       'modelValue': row.getIsSelected(),
-      'onUpdate:modelValue': (value: boolean | 'indeterminate' | undefined) => row.toggleSelected(!!value),
+      'onUpdate:modelValue': value => row.toggleSelected(!!value),
       'aria-label': 'Select row'
     }),
     enableSorting: false,

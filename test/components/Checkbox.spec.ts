@@ -32,6 +32,9 @@ describe('Checkbox', () => {
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral', defaultValue: true } }]),
     ...indicators.map((indicator: string) => [`with indicator ${indicator}`, { props: { indicator, defaultValue: true } }]),
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
+    ['with trueValue/falseValue as string', { props: { trueValue: 'yes', falseValue: 'no', defaultValue: 'yes' } }],
+    ['with trueValue/falseValue as number', { props: { trueValue: 1, falseValue: 0, defaultValue: 1 } }],
+    ['with trueValue/falseValue unchecked', { props: { trueValue: 'yes', falseValue: 'no', defaultValue: 'no' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'inline-flex' } }],
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
@@ -63,6 +66,23 @@ describe('Checkbox', () => {
       const input = wrapper.findComponent({ name: 'CheckboxRoot' })
       await input.vm.$emit('update:modelValue', false)
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
+    })
+
+    test('toggle with custom trueValue/falseValue via click', async () => {
+      const wrapper = mount(Checkbox, {
+        props: { trueValue: 'yes', falseValue: 'no', defaultValue: 'no' }
+      })
+      const button = wrapper.find('button')
+
+      await button.trigger('click')
+      await flushPromises()
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['yes'])
+      expect(wrapper.emitted('change')).toHaveLength(1)
+
+      await button.trigger('click')
+      await flushPromises()
+      expect(wrapper.emitted('update:modelValue')?.[1]).toEqual(['no'])
+      expect(wrapper.emitted('change')).toHaveLength(2)
     })
   })
 
