@@ -47,7 +47,7 @@ const items: NavigationMenuItem[] = [{
       </div>
 
       <div class="flex-1 p-4">
-        <USkeleton class="size-full animate-pulse" />
+        <Placeholder class="size-full" />
       </div>
     </div>
   </div>

@@ -116,6 +116,7 @@ const props = withDefaults(defineProps<SidebarProps<T>>(), {
 const slots = defineSlots<SidebarSlots>()
 
 const [DefineInnerTemplate, ReuseInnerTemplate] = createReusableTemplate()
+const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
 const isMobile = useMediaQuery('(max-width: 1023px)')
 
@@ -170,7 +171,7 @@ const uiProp = useComponentUI('sidebar', props)
 const state = computed<SidebarState>(() => open.value ? 'expanded' : 'collapsed')
 
 // Close button only works when collapsible is not 'none'
-const canClose = computed(() => props.close && props.collapsible !== 'none')
+const canClose = computed(() => (props.close && props.collapsible !== 'none') || isMobile.value)
 
 function closeSidebar() {
   open.value = false
@@ -198,55 +199,59 @@ const menuProps = toRef(() => defu(props.menu, {
   content: {
     onOpenAutoFocus: (e: Event) => e.preventDefault()
   }
-}, props.mode === 'modal' ? { fullscreen: true, transition: false } : props.mode === 'slideover' ? { side: props.side } : {}) as SidebarMenu<T>)
+}, props.mode === 'modal' ? { } : props.mode === 'slideover' ? { side: props.side, inset: props.variant === 'inset' } : {}) as SidebarMenu<T>)
 </script>
 
 <template>
+  <DefineContentTemplate>
+    <div v-if="hasHeader" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+      <slot name="header" :state="state" :open="open" :close="closeSidebar">
+        <div v-if="title || !!slots.title || description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+          <p v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
+            <slot name="title">
+              {{ title }}
+            </slot>
+          </p>
+
+          <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+            <slot name="description">
+              {{ description }}
+            </slot>
+          </p>
+        </div>
+
+        <div v-if="!!slots.actions || canClose" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
+          <slot name="actions" />
+
+          <slot name="close" :ui="ui">
+            <UButton
+              v-if="canClose"
+              :icon="closeIcon || appConfig.ui.icons.close"
+              color="neutral"
+              variant="ghost"
+              :aria-label="t('sidebar.close')"
+              v-bind="(typeof props.close === 'object' ? props.close : {})"
+              data-slot="close"
+              :class="ui.close({ class: uiProp?.close })"
+              @click="closeSidebar"
+            />
+          </slot>
+        </div>
+      </slot>
+    </div>
+
+    <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
+      <slot :state="state" :open="open" :close="closeSidebar" />
+    </div>
+
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
+      <slot name="footer" :state="state" :open="open" :close="closeSidebar" />
+    </div>
+  </DefineContentTemplate>
+
   <DefineInnerTemplate>
     <div data-slot="inner" :class="ui.inner({ class: uiProp?.inner })">
-      <div v-if="hasHeader" data-slot="header" :class="ui.header({ class: uiProp?.header })">
-        <slot name="header" :state="state" :open="open" :close="closeSidebar">
-          <div v-if="title || !!slots.title || description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
-            <p v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
-              <slot name="title">
-                {{ title }}
-              </slot>
-            </p>
-
-            <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
-              <slot name="description">
-                {{ description }}
-              </slot>
-            </p>
-          </div>
-
-          <div v-if="!!slots.actions || canClose" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
-            <slot name="actions" />
-
-            <slot name="close" :ui="ui">
-              <UButton
-                v-if="canClose"
-                :icon="closeIcon || appConfig.ui.icons.close"
-                color="neutral"
-                variant="ghost"
-                :aria-label="t('sidebar.close')"
-                v-bind="(typeof props.close === 'object' ? props.close : {})"
-                data-slot="close"
-                :class="ui.close({ class: uiProp?.close })"
-                @click="closeSidebar"
-              />
-            </slot>
-          </div>
-        </slot>
-      </div>
-
-      <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
-        <slot :state="state" :open="open" :close="closeSidebar" />
-      </div>
-
-      <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
-        <slot name="footer" :state="state" :open="open" :close="closeSidebar" />
-      </div>
+      <ReuseContentTemplate />
     </div>
   </DefineInnerTemplate>
 
@@ -313,49 +318,7 @@ const menuProps = toRef(() => defu(props.menu, {
     >
       <template #content="contentData">
         <slot name="content" v-bind="contentData" :close="closeSidebar">
-          <div v-if="hasHeader" data-slot="header" :class="ui.header({ class: uiProp?.header })">
-            <slot name="header" :state="state" :open="open" :close="closeSidebar">
-              <div v-if="title || !!slots.title || description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
-                <p v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
-                  <slot name="title">
-                    {{ title }}
-                  </slot>
-                </p>
-
-                <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
-                  <slot name="description">
-                    {{ description }}
-                  </slot>
-                </p>
-              </div>
-
-              <div v-if="!!slots.actions || canClose" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
-                <slot name="actions" />
-
-                <slot name="close" :ui="ui">
-                  <UButton
-                    v-if="canClose"
-                    :icon="closeIcon || appConfig.ui.icons.close"
-                    color="neutral"
-                    variant="ghost"
-                    :aria-label="t('sidebar.close')"
-                    v-bind="(typeof props.close === 'object' ? props.close : {})"
-                    data-slot="close"
-                    :class="ui.close({ class: uiProp?.close })"
-                    @click="closeSidebar"
-                  />
-                </slot>
-              </div>
-            </slot>
-          </div>
-
-          <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
-            <slot :state="state" :open="open" :close="closeSidebar" />
-          </div>
-
-          <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
-            <slot name="footer" :state="state" :open="open" :close="closeSidebar" />
-          </div>
+          <ReuseContentTemplate />
         </slot>
       </template>
     </Menu>

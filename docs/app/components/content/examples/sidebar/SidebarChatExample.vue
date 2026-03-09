@@ -62,7 +62,7 @@ const ui = {
       </UHeader>
 
       <div class="flex-1 p-4 sm:p-6 lg:p-8">
-        <USkeleton class="size-full animate-pulse" />
+        <Placeholder class="size-full" />
       </div>
     </div>
 

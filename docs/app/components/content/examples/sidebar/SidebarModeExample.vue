@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem, SidebarProps } from '@nuxt/ui'
+
+// Ignore the props for the example
+defineProps<Pick<SidebarProps, 'mode'>>()
 
 const open = ref(true)
 
@@ -19,11 +22,7 @@ const items: NavigationMenuItem[] = [{
 
 <template>
   <div class="flex flex-1">
-    <USidebar
-      v-model:open="open"
-      collapsible="icon"
-      :style="{ '--sidebar-width': '20rem' }"
-    >
+    <USidebar v-model:open="open" :mode="mode" title="Navigation">
       <UNavigationMenu
         :items="items"
         orientation="vertical"

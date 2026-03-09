@@ -199,12 +199,13 @@ defineShortcuts(extractShortcuts(teamsItems.value))
           icon="i-lucide-panel-left"
           color="neutral"
           variant="ghost"
+          aria-label="Toggle sidebar"
           @click="open = !open"
         />
       </div>
 
       <div class="flex-1 p-4">
-        <USkeleton class="size-full animate-pulse" />
+        <Placeholder class="size-full" />
       </div>
     </div>
   </div>

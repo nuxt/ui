@@ -73,6 +73,13 @@ options:
       - icon
       - none
     default: 'icon'
+  - name: 'variant'
+    label: 'variant'
+    items:
+      - sidebar
+      - floating
+      - inset
+    default: 'sidebar'
 class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 ::
@@ -111,7 +118,6 @@ Use the `title` prop to set the title of the sidebar header.
 prettier: true
 hide:
   - class
-  - ui.container
 props:
   title: Navigation
   ui:
@@ -135,9 +141,6 @@ Use the `description` prop to set the description of the sidebar header.
 prettier: true
 hide:
   - class
-  - ui.container
-ignore:
-  - ui.container
 props:
   title: Navigation
   description: Browse your workspace
@@ -209,26 +212,34 @@ class: '!p-0 !justify-start h-[500px] contain-[paint]'
 :placeholder{class="h-full"}
 ::
 
-::tip
-You can use the `#title`, `#description` and `#close` slots to customize them.
+::framework-only
+#nuxt
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
 ::
 
-### Mode
+### Rail
 
-Use the `mode` prop to change the mode of the sidebar menu on mobile. Defaults to `slideover`.
+Use the `rail` prop to display a thin interactive edge on the sidebar that toggles the collapsed state on click. The rail is only rendered when `collapsible` is not `none`.
 
 ::component-code
 ---
 prettier: true
-items:
-  mode:
-    - modal
-    - slideover
-    - drawer
+ignore:
+  - collapsible
 hide:
+  - ui
   - class
 props:
-  mode: slideover
+  rail: true
+  title: Navigation
+  collapsible: offcanvas
 slots:
   default: |
 
@@ -237,6 +248,31 @@ class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 
 :placeholder{class="h-full"}
+::
+
+### Mode
+
+Use the `mode` prop to change the mode of the sidebar menu on mobile. Defaults to `slideover`.
+
+::component-example
+---
+collapse: true
+iframe:
+  height: 500px;
+iframeMobile: true
+overflowHidden: true
+name: 'sidebar-mode-example'
+options:
+  - name: 'mode'
+    label: 'mode'
+    default: 'slideover'
+    items:
+      - modal
+      - slideover
+      - drawer
+props:
+  class: 'w-full'
+---
 ::
 
 ::tip{to="#props"}
