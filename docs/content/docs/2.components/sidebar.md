@@ -297,15 +297,15 @@ class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 ::
 
-### With fixed navbar
+### With header
 
-To position the sidebar below a fixed navbar, customize the `gap` and `container` using the `ui` prop.
+To position the sidebar below a header, customize the `gap` and `container` using the `ui` prop.
 
 ::component-example
 ---
 collapse: true
 prettier: true
-name: 'sidebar-navbar-example'
+name: 'sidebar-header-example'
 overflowHidden: true
 class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
