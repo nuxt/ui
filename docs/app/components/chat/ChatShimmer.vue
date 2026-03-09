@@ -11,6 +11,11 @@ const props = withDefaults(defineProps<{
   spread: 2
 })
 
+const initial = { backgroundPosition: '100% center' }
+const animate = { backgroundPosition: '0% center' }
+
+const transition = computed(() => ({ repeat: Infinity, duration: props.duration, ease: 'linear' as const }))
+
 const dynamicSpread = computed(() => props.text.length * props.spread)
 
 const shimmerStyle = computed(() => ({
@@ -22,12 +27,12 @@ const shimmerStyle = computed(() => ({
 <template>
   <Motion
     as="span"
-    :initial="{ backgroundPosition: '100% center' }"
-    :animate="{ backgroundPosition: '0% center' }"
-    :transition="{ repeat: Infinity, duration, ease: 'linear' }"
+    :initial="initial"
+    :animate="animate"
+    :transition="transition"
     :style="shimmerStyle"
     data-slot="base"
-    :class="[props.class, 'bg-size-[250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--ui-text-highlighted),#0000_calc(50%+var(--spread)))] will-change-transform']"
+    :class="[props.class, 'bg-size-[250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--ui-text-highlighted),#0000_calc(50%+var(--spread)))] will-change-[background-position]']"
   >
     {{ text }}
   </Motion>
