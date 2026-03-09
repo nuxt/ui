@@ -1,27 +1,27 @@
 <script setup lang="ts">
+import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import type { UIMessage } from 'ai'
 import { Chat } from '@ai-sdk/vue'
+import ChatReasoning from '../../../../docs/app/components/chat/ChatReasoning.vue'
+import ChatTool from '../../../../docs/app/components/chat/ChatTool.vue'
 
 const toast = useToast()
 
-const messages: UIMessage[] = [{
-  id: '1',
-  role: 'user',
-  parts: [{ type: 'text', text: 'Hello, how are you?' }]
-}, {
-  id: '2',
-  role: 'assistant',
-  parts: [{ type: 'text', text: 'I\'m good, thank you! How can I help you today?' }]
-}]
+const messages: UIMessage[] = []
 const input = ref('')
 
 const chat = new Chat({
   messages,
   onError(error) {
-    const { message: description } = typeof error.message === 'string' && error.message[0] === '{' ? JSON.parse(error.message) : error
+    let message = error.message
+    try {
+      if (typeof message === 'string' && message[0] === '{') {
+        message = JSON.parse(message).message || message
+      }
+    } catch { /* keep original */ }
 
     toast.add({
-      description,
+      description: message,
       icon: 'i-lucide-alert-circle',
       color: 'error',
       duration: 0
@@ -30,9 +30,33 @@ const chat = new Chat({
 })
 
 function onSubmit() {
+  if (!input.value.trim()) return
+
   chat.sendMessage({ text: input.value })
 
   input.value = ''
+}
+
+function getDomain(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '')
+  } catch {
+    return url
+  }
+}
+
+function getFaviconUrl(url: string): string {
+  return `https://www.google.com/s2/favicons?sz=32&domain=${getDomain(url)}`
+}
+
+function isStreamingReasoning(message: UIMessage, index: number): boolean {
+  if (chat.status !== 'streaming') return false
+  if (message.id !== chat.messages.at(-1)?.id) return false
+
+  for (let i = index + 1; i < message.parts.length; i++) {
+    if (message.parts[i]!.type !== 'reasoning') return false
+  }
+  return true
 }
 </script>
 
@@ -43,29 +67,59 @@ function onSubmit() {
     <UChatMessages
       :messages="chat.messages"
       :status="chat.status"
-      :user="{ avatar: { src: 'https://github.com/benjamincanac.png' } }"
       :spacing-offset="48"
+      :assistant="{ ui: { content: 'flex flex-col gap-2.5' } }"
     >
       <template #content="{ message }">
-        <template
-          v-for="(part, index) in message.parts"
-          :key="`${message.id}-${part.type}-${index}${'state' in part ? `-${part.state}` : ''}`"
-        >
+        <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+          <ChatReasoning
+            v-if="isReasoningUIPart(part)"
+            :text="part.text"
+            :streaming="isStreamingReasoning(message, index)"
+            chevron="leading"
+          >
+            <template #default="{ reasoningText }">
+              <MDC
+                :value="reasoningText"
+                :cache-key="`${message.id}-${index}`"
+                class="*:first:mt-0 *:last:mb-0"
+              />
+            </template>
+          </ChatReasoning>
           <MDC
-            v-if="part.type === 'text' && message.role === 'assistant'"
+            v-else-if="isTextUIPart(part)"
             :value="part.text"
             :cache-key="`${message.id}-${index}`"
             class="*:first:mt-0 *:last:mb-0"
           />
-          <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">
-            {{ part.text }}
-          </p>
-          <p
-            v-else-if="part.type === 'reasoning'"
-            class="text-sm text-muted my-5"
+          <ChatTool
+            v-else-if="isToolUIPart(part) && getToolName(part) === 'web_search'"
+            :text="part.state !== 'output-available' ? 'Searching the web...' : 'Searched the web'"
+            :suffix="(part.input as { query?: string })?.query"
+            :streaming="part.state !== 'output-available'"
+            chevron="leading"
           >
-            {{ part.state === 'done' ? 'Thoughts' : 'Thinking...' }}
-          </p>
+            <div v-if="part.output && (part.output as any[]).length" class="p-1 border border-default rounded-md max-h-40 overflow-y-auto">
+              <a
+                v-for="source in (part.output as any[])"
+                :key="source.url"
+                :href="source.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2 px-2 py-1 text-sm text-muted hover:text-default hover:bg-elevated/50 transition-colors min-w-0 rounded-md"
+              >
+                <img
+                  :src="getFaviconUrl(source.url)"
+                  :alt="getDomain(source.url)"
+                  class="size-4 shrink-0 rounded-sm"
+                  loading="lazy"
+                  @error="($event.target as HTMLImageElement).style.display = 'none'"
+                >
+                <span class="truncate">{{ source.title || source.url }}</span>
+                <span class="text-xs text-dimmed ms-auto shrink-0">{{ getDomain(source.url) }}</span>
+              </a>
+            </div>
+          </ChatTool>
         </template>
       </template>
     </UChatMessages>

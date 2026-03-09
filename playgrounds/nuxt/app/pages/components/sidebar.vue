@@ -23,11 +23,16 @@ const messages: UIMessage[] = [{
 
 const chat = new Chat({
   messages,
-  onError() {}
+  onError(error) {
+    console.error(error)
+  }
 })
 
 function onSubmit() {
+  if (!input.value.trim()) return
+
   chat.sendMessage({ text: input.value })
+
   input.value = ''
 }
 </script>

@@ -1,13 +1,32 @@
 import { streamText, convertToModelMessages } from 'ai'
+import { anthropic } from '@ai-sdk/anthropic'
+import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import { gateway } from '@ai-sdk/gateway'
+
+const webSearchTool = anthropic.tools.webSearch_20250305({
+  maxUses: 5
+})
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   return streamText({
-    model: gateway('openai/gpt-4o-mini'),
-    maxOutputTokens: 10000,
-    system: 'You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue.',
-    messages: await convertToModelMessages(messages)
-  }).toUIMessageStreamResponse()
+    model: gateway('anthropic/claude-sonnet-4.6'),
+    system: 'You are a helpful assistant. When answering questions, search the web for up-to-date information when relevant.',
+    messages: await convertToModelMessages(messages),
+    tools: {
+      web_search: webSearchTool as any
+    },
+    providerOptions: {
+      anthropic: {
+        thinking: {
+          type: 'adaptive'
+        },
+        effort: 'low'
+      } satisfies AnthropicLanguageModelOptions
+    }
+  }).toUIMessageStreamResponse({
+    sendReasoning: true,
+    sendSources: true
+  })
 })

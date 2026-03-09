@@ -9,6 +9,7 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.58",
     "@ai-sdk/gateway": "^3.0.59",
     "@ai-sdk/vue": "^3.0.105",
     "@iconify-json/lucide": "^1.2.95",

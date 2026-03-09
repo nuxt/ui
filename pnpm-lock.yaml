@@ -473,6 +473,9 @@ importers:
 
   playgrounds/nuxt:
     dependencies:
+      '@ai-sdk/anthropic':
+        specifier: ^3.0.58
+        version: 3.0.58(zod@4.3.6)
       '@ai-sdk/gateway':
         specifier: ^3.0.59
         version: 3.0.59(zod@4.3.6)
