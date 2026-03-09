@@ -421,7 +421,7 @@ export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   return streamText({
-    model: gateway('openai/gpt-4o-mini'),
+    model: gateway('anthropic/claude-haiku-4.5'),
     maxOutputTokens: 10000,
     system: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)

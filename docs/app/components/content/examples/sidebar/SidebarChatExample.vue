@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { UIMessage } from 'ai'
+import { isTextUIPart } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 
 const open = ref(true)
@@ -16,13 +17,32 @@ const messages: UIMessage[] = [{
 }]
 
 const chat = new Chat({
-  messages,
-  onError() {}
+  messages
 })
 
 function onSubmit() {
+  if (!input.value.trim()) return
+
   chat.sendMessage({ text: input.value })
+
   input.value = ''
+}
+
+const ui = {
+  prose: {
+    p: { base: 'my-2 text-sm/6' },
+    li: { base: 'my-0.5 text-sm/6' },
+    ul: { base: 'my-2' },
+    ol: { base: 'my-2' },
+    h1: { base: 'text-xl mb-4' },
+    h2: { base: 'text-lg mt-6 mb-3' },
+    h3: { base: 'text-base mt-4 mb-2' },
+    h4: { base: 'text-sm mt-3 mb-1.5' },
+    code: { base: 'text-xs' },
+    pre: { root: 'my-2', base: 'text-xs/5' },
+    table: { root: 'my-2' },
+    hr: { base: 'my-4' }
+  }
 }
 </script>
 
@@ -54,12 +74,25 @@ function onSubmit() {
       :style="{ '--sidebar-width': '20rem' }"
       :ui="{ container: 'h-full' }"
     >
-      <UChatMessages
-        :messages="chat.messages"
-        :status="chat.status"
-        compact
-        class="px-0"
-      />
+      <UTheme :ui="ui">
+        <UChatMessages
+          :messages="chat.messages"
+          :status="chat.status"
+          compact
+          class="px-0"
+        >
+          <template #content="{ message }">
+            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+              <MDC
+                v-if="isTextUIPart(part)"
+                :value="part.text"
+                :cache-key="`${message.id}-${index}`"
+                class="*:first:mt-0 *:last:mb-0"
+              />
+            </template>
+          </template>
+        </UChatMessages>
+      </UTheme>
 
       <template #footer>
         <UChatPrompt
@@ -71,7 +104,12 @@ function onSubmit() {
           :ui="{ base: 'px-0' }"
           @submit="onSubmit"
         >
-          <UChatPromptSubmit size="sm" :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
+          <UChatPromptSubmit
+            size="sm"
+            :status="chat.status"
+            @stop="chat.stop()"
+            @reload="chat.regenerate()"
+          />
         </UChatPrompt>
       </template>
     </USidebar>

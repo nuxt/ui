@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   return streamText({
-    model: gateway('openai/gpt-4o-mini'),
+    model: gateway('anthropic/claude-haiku-4.5'),
     system: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
   }).toUIMessageStreamResponse()
@@ -46,6 +46,7 @@ export default defineEventHandler(async (event) => {
 
 ```vue [pages/chat/[id].vue]
 <script setup lang="ts">
+import { isTextUIPart } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 
 definePageMeta({ layout: 'dashboard' })
@@ -59,7 +60,10 @@ const chat = new Chat({
 })
 
 function onSubmit() {
+  if (!input.value.trim()) return
+
   chat.sendMessage({ text: input.value })
+
   input.value = ''
 }
 </script>
@@ -76,14 +80,11 @@ function onSubmit() {
           <template #content="{ message }">
             <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
               <MDC
-                v-if="part.type === 'text' && message.role === 'assistant'"
+                v-if="isTextUIPart(part)"
                 :value="part.text"
                 :cache-key="`${message.id}-${index}`"
                 class="*:first:mt-0 *:last:mb-0"
               />
-              <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">
-                {{ part.text }}
-              </p>
             </template>
           </template>
         </UChatMessages>

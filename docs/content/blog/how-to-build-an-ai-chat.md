@@ -249,7 +249,7 @@ export default defineEventHandler(async (event) => {
   }).parse)
 
   const { model, messages } = await readValidatedBody(event, z.object({
-    model: z.string().default('openai/gpt-4o-mini'),
+    model: z.string().default('anthropic/claude-haiku-4.5'),
     messages: z.array(z.custom<UIMessage>())
   }).parse)
 
@@ -265,7 +265,7 @@ export default defineEventHandler(async (event) => {
   // Generate a title for the chat if it doesn't have one
   if (!chat.title) {
     const { text: title } = await generateText({
-      model: 'openai/gpt-4o-mini',
+      model: 'anthropic/claude-haiku-4.5',
       system: `Generate a short title (max 30 characters) based on the user's message. No quotes or punctuation.`,
       prompt: JSON.stringify(messages[0])
     })
@@ -824,13 +824,12 @@ Define the available models and persist the user's selection using [`useCookie`]
 ```ts [app/composables/useModels.ts]
 export function useModels() {
   const models = [
-    { value: 'openai/gpt-4o-mini', label: 'GPT-4o Mini', icon: 'i-simple-icons-openai' },
-    { value: 'anthropic/claude-3-5-haiku-latest', label: 'Claude 3.5 Haiku', icon: 'i-simple-icons-anthropic' },
+    { value: 'anthropic/claude-haiku-4.5', label: 'Claude 4.5 Haiku', icon: 'i-simple-icons-anthropic' },
     { value: 'google/gemini-2.0-flash', label: 'Gemini 2.0 Flash', icon: 'i-simple-icons-google' }
   ]
 
   const model = useCookie<string>('ai-model', {
-    default: () => 'openai/gpt-4o-mini'
+    default: () => 'anthropic/claude-haiku-4.5'
   })
 
   return {

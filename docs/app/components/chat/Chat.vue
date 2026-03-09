@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { DefineComponent } from 'vue'
-import { Chat } from '@ai-sdk/vue'
 import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
+import { Chat } from '@ai-sdk/vue'
 import * as theme from '#build/ui'
 import ProseStreamPre from '../prose/PreStream.vue'
 
@@ -252,82 +252,80 @@ defineShortcuts({
       </UTooltip>
     </template>
 
-    <template #default>
-      <UTheme
-        :ui="{
-          prose: {
-            p: { base: 'my-2 text-sm/6' },
-            li: { base: 'my-0.5 text-sm/6' },
-            ul: { base: 'my-2' },
-            ol: { base: 'my-2' },
-            h1: { base: 'text-xl mb-4' },
-            h2: { base: 'text-lg mt-6 mb-3' },
-            h3: { base: 'text-base mt-4 mb-2' },
-            h4: { base: 'text-sm mt-3 mb-1.5' },
-            code: { base: 'text-xs' },
-            pre: { root: 'my-2', base: 'text-xs/5' },
-            table: { root: 'my-2' },
-            hr: { base: 'my-4' }
-          }
-        }"
+    <UTheme
+      :ui="{
+        prose: {
+          p: { base: 'my-2 text-sm/6' },
+          li: { base: 'my-0.5 text-sm/6' },
+          ul: { base: 'my-2' },
+          ol: { base: 'my-2' },
+          h1: { base: 'text-xl mb-4' },
+          h2: { base: 'text-lg mt-6 mb-3' },
+          h3: { base: 'text-base mt-4 mb-2' },
+          h4: { base: 'text-sm mt-3 mb-1.5' },
+          code: { base: 'text-xs' },
+          pre: { root: 'my-2', base: 'text-xs/5' },
+          table: { root: 'my-2' },
+          hr: { base: 'my-4' }
+        }
+      }"
+    >
+      <UChatMessages
+        v-if="chat.messages.length"
+        should-auto-scroll
+        :messages="chat.messages"
+        :status="chat.status"
+        compact
+        class="px-0 gap-2"
+        :user="{ ui: { container: 'max-w-full' } }"
+        :assistant="{ ui: { content: 'flex flex-col gap-2' } }"
       >
-        <UChatMessages
-          v-if="chat.messages.length"
-          should-auto-scroll
-          :messages="chat.messages"
-          :status="chat.status"
-          compact
-          class="px-0 gap-2"
-          :user="{ ui: { container: 'max-w-full' } }"
-          :assistant="{ ui: { content: 'flex flex-col gap-2' } }"
-        >
-          <template #content="{ message }">
-            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
-              <ChatReasoning
-                v-if="isReasoningUIPart(part)"
-                :text="part.text"
-                :streaming="chat.status === 'streaming' && message.id === chat.messages.at(-1)?.id && index === message.parts.length - 1"
-                icon="i-lucide-brain"
-                chevron="leading"
-              >
-                <template #default="{ reasoningText }">
-                  <MDCCached
-                    v-if="reasoningText"
-                    :value="reasoningText"
-                    :cache-key="`reasoning-${message.id}-${index}`"
-                    :parser-options="{ highlight: false }"
-                    class="*:first:mt-0! *:last:mb-0!"
-                  />
-                </template>
-              </ChatReasoning>
-              <MDCCached
-                v-else-if="isTextUIPart(part) && part.text.length > 0"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                :components="components"
-                :parser-options="{ highlight: false }"
-                class="*:first:mt-0! *:last:mb-0!"
-              />
-              <ChatTool
-                v-else-if="isToolUIPart(part)"
-                :text="getToolText(part)"
-                :icon="getToolIcon(part)"
-                :streaming="part.state !== 'output-available'"
-              />
-            </template>
+        <template #content="{ message }">
+          <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+            <ChatReasoning
+              v-if="isReasoningUIPart(part)"
+              :text="part.text"
+              :streaming="chat.status === 'streaming' && message.id === chat.messages.at(-1)?.id && index === message.parts.length - 1"
+              icon="i-lucide-brain"
+              chevron="leading"
+            >
+              <template #default="{ reasoningText }">
+                <MDCCached
+                  v-if="reasoningText"
+                  :value="reasoningText"
+                  :cache-key="`reasoning-${message.id}-${index}`"
+                  :parser-options="{ highlight: false }"
+                  class="*:first:mt-0 *:last:mb-0"
+                />
+              </template>
+            </ChatReasoning>
+            <MDCCached
+              v-else-if="isTextUIPart(part) && part.text.length > 0"
+              :value="part.text"
+              :cache-key="`${message.id}-${index}`"
+              :components="components"
+              :parser-options="{ highlight: false }"
+              class="*:first:mt-0 *:last:mb-0"
+            />
+            <ChatTool
+              v-else-if="isToolUIPart(part)"
+              :text="getToolText(part)"
+              :icon="getToolIcon(part)"
+              :streaming="part.state !== 'output-available'"
+            />
           </template>
-        </UChatMessages>
+        </template>
+      </UChatMessages>
 
-        <div v-else class="flex flex-col gap-6">
-          <UPageLinks
-            v-for="category in suggestions"
-            :key="category.category"
-            :title="category.category"
-            :links="category.items.map(item => ({ label: item, onClick: () => askQuestion(item) }))"
-          />
-        </div>
-      </UTheme>
-    </template>
+      <div v-else class="flex flex-col gap-6">
+        <UPageLinks
+          v-for="category in suggestions"
+          :key="category.category"
+          :title="category.category"
+          :links="category.items.map(item => ({ label: item, onClick: () => askQuestion(item) }))"
+        />
+      </div>
+    </UTheme>
 
     <template #footer>
       <UChatPrompt
