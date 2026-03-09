@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Kopioi koodi leikepöydälle'
       }
     },
+    repeater: {
+      dragToReorder: 'Raahaa järjestääksesi',
+      moveUp: 'Siirrä ylös',
+      moveDown: 'Siirrä alas',
+      remove: 'Poista kohde',
+      add: 'Lisää kohde'
+    },
     selectMenu: {
       create: 'Luo "{label}"',
       noData: 'Ei tietoja',

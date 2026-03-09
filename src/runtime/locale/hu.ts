@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Kód másolása a vágólapra'
       }
     },
+    repeater: {
+      dragToReorder: 'Húzza át a sorrend módosításához',
+      moveUp: 'Mozgatás felfelé',
+      moveDown: 'Mozgatás lefelé',
+      remove: 'Elem eltávolítása',
+      add: 'Elem hozzáadása'
+    },
     selectMenu: {
       create: '"{label}" létrehozása',
       noData: 'Nincs adat',

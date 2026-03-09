@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
         copy: 'کپی کد در کلیپ‌بورد'
       }
     },
+    repeater: {
+      dragToReorder: 'برای تغییر ترتیب بکشید',
+      moveUp: 'انتقال به بالا',
+      moveDown: 'انتقال به پایین',
+      remove: 'حذف آیتم',
+      add: 'افزودن آیتم'
+    },
     selectMenu: {
       create: 'ایجاد "{label}"',
       noData: 'داده‌ای موجود نیست',

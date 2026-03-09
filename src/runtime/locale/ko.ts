@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: '코드를 클립보드에 복사'
       }
     },
+    repeater: {
+      dragToReorder: '드래그하여 순서 변경',
+      moveUp: '위로 이동',
+      moveDown: '아래로 이동',
+      remove: '항목 삭제',
+      add: '항목 추가'
+    },
     selectMenu: {
       create: '"{label}" 생성',
       noData: '데이터가 없습니다.',

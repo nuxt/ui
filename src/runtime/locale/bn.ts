@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'কোড ক্লিপবোর্ডে কপি করুন'
       }
     },
+    repeater: {
+      dragToReorder: 'ক্রম পরিবর্তন করতে টানুন',
+      moveUp: 'উপরে সরান',
+      moveDown: 'নিচে সরান',
+      remove: 'আইটেম সরান',
+      add: 'আইটেম যোগ করুন'
+    },
     selectMenu: {
       create: '"{label}" তৈরি করুন',
       noData: 'কোন তথ্য নেই',

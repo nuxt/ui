@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: '复制代码到剪贴板'
       }
     },
+    repeater: {
+      dragToReorder: '拖拽以重新排序',
+      moveUp: '上移',
+      moveDown: '下移',
+      remove: '移除项目',
+      add: '添加项目'
+    },
     selectMenu: {
       create: '创建 "{label}"',
       noData: '没有数据',

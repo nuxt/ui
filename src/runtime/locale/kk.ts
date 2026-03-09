@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Кодты алмасу буферіне көшіру'
       }
     },
+    repeater: {
+      dragToReorder: 'Ретін өзгерту үшін сүйреңіз',
+      moveUp: 'Жоғары жылжыту',
+      moveDown: 'Төмен жылжыту',
+      remove: 'Элементті жою',
+      add: 'Элемент қосу'
+    },
     selectMenu: {
       create: '"{label}" жасау',
       noData: 'Деректер жоқ',

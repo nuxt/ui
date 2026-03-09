@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Нусха бардоштан'
       }
     },
+    repeater: {
+      dragToReorder: 'Барои тағйири тартиб кашед',
+      moveUp: 'Ба боло кӯчондан',
+      moveDown: 'Ба поён кӯчондан',
+      remove: 'Нобуд кардани элемент',
+      add: 'Илова кардани элемент'
+    },
     selectMenu: {
       create: '"{label}" созед',
       noData: 'Маълумот нест',

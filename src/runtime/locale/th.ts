@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'คัดลอกโค้ดไปยังคลิปบอร์ด'
       }
     },
+    repeater: {
+      dragToReorder: 'ลากเพื่อจัดลำดับใหม่',
+      moveUp: 'เลื่อนขึ้น',
+      moveDown: 'เลื่อนลง',
+      remove: 'ลบรายการ',
+      add: 'เพิ่มรายการ'
+    },
     selectMenu: {
       create: 'สร้าง "{label}"',
       noData: 'ไม่มีข้อมูล',

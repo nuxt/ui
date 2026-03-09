@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Պատճենել կոդը սեղմատախտակին'
       }
     },
+    repeater: {
+      dragToReorder: 'Քաշեք վերադասավորելու համար',
+      moveUp: 'Տեղափոխել վերև',
+      moveDown: 'Տեղափոխել ներքև',
+      remove: 'Հեռացնել տարրը',
+      add: 'Ավելացնել տարր'
+    },
     selectMenu: {
       create: 'Ստեղծել "{label}"',
       noData: 'Տվյալներ չկան',

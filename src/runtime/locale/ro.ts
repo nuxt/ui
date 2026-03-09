@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Copiază codul în clipboard'
       }
     },
+    repeater: {
+      dragToReorder: 'Trage pentru a reordona',
+      moveUp: 'Mută mai sus',
+      moveDown: 'Mută mai jos',
+      remove: 'Elimină elementul',
+      add: 'Adaugă element'
+    },
     selectMenu: {
       create: 'Creează "{label}"',
       noData: 'Nu există date',

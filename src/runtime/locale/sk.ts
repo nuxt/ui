@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Kopírovať kód do schránky'
       }
     },
+    repeater: {
+      dragToReorder: 'Potiahnutím zmeníte poradie',
+      moveUp: 'Posunúť nahor',
+      moveDown: 'Posunúť nadol',
+      remove: 'Odstrániť položku',
+      add: 'Pridať položku'
+    },
     selectMenu: {
       create: 'Vytvoriť "{label}"',
       noData: 'Žiadne dáta',

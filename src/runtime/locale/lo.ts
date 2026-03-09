@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'ຄັດລອກໂຄ້ດ'
       }
     },
+    repeater: {
+      dragToReorder: 'ລາກເພື່ອຈັດລໍາດັບໃໝ່',
+      moveUp: 'ຍ້າຍຂຶ້ນ',
+      moveDown: 'ຍ້າຍລົງ',
+      remove: 'ລຶບລາຍການ',
+      add: 'ເພີ່ມລາຍການ'
+    },
     selectMenu: {
       create: 'ສ້າງ "{label}"',
       noData: 'ບໍ່ມີຂໍ້ມູນ',

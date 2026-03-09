@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Copiar codi al portapapers'
       }
     },
+    repeater: {
+      dragToReorder: 'Arrossega per reordenar',
+      moveUp: 'Mou amunt',
+      moveDown: 'Mou avall',
+      remove: 'Elimina l\'element',
+      add: 'Afegeix un element'
+    },
     selectMenu: {
       create: 'Crear "{label}"',
       noData: 'Sense dades',

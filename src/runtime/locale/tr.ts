@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Kodu panoya kopyala'
       }
     },
+    repeater: {
+      dragToReorder: 'Sıralamayı değiştirmek için sürükleyin',
+      moveUp: 'Yukarı taşı',
+      moveDown: 'Aşağı taşı',
+      remove: 'Ögeyi kaldır',
+      add: 'Öge ekle'
+    },
     selectMenu: {
       create: '"{label}" oluştur',
       noData: 'Veri yok',

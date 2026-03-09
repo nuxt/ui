@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Sao chép mã vào bộ nhớ tạm'
       }
     },
+    repeater: {
+      dragToReorder: 'Kéo để thay đổi thứ tự',
+      moveUp: 'Di chuyển lên',
+      moveDown: 'Di chuyển xuống',
+      remove: 'Xóa mục',
+      add: 'Thêm mục'
+    },
     selectMenu: {
       create: 'Tạo "{label}"',
       noData: 'Không có dữ liệu',

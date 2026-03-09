@@ -117,6 +117,13 @@ export default defineLocale<Messages>({
         copy: 'کوڈ کاپی کریں'
       }
     },
+    repeater: {
+      dragToReorder: 'ترتیب بدلنے کے لیے گھسیٹیں',
+      moveUp: 'اوپر لے جائیں',
+      moveDown: 'نیچے لے جائیں',
+      remove: 'آئٹم حذف کریں',
+      add: 'آئٹم شامل کریں'
+    },
     selectMenu: {
       create: '"{label}" بنائیں',
       noData: 'کوئی ڈیٹا نہیں',

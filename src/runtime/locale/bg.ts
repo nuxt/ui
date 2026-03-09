@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Копирай кода в клипборда'
       }
     },
+    repeater: {
+      dragToReorder: 'Плъзнете за пренареждане',
+      moveUp: 'Премести нагоре',
+      moveDown: 'Премести надолу',
+      remove: 'Премахни елемента',
+      add: 'Добави елемент'
+    },
     selectMenu: {
       create: 'Създайте "{label}"',
       noData: 'Няма данни',

@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Code an d\'Zwëschspäicher kopéieren'
       }
     },
+    repeater: {
+      dragToReorder: 'Zéien fir nei ze sortéieren',
+      moveUp: 'No uewe réckelen',
+      moveDown: 'No ënne réckelen',
+      remove: 'Element läschen',
+      add: 'Element derbäisetzen'
+    },
     selectMenu: {
       create: '"{label}" erstellen',
       noData: 'Keng Donnéeën',

@@ -116,6 +116,13 @@ export default defineLocale<Messages>({
         copy: 'Kopiér kode til udklipsholder'
       }
     },
+    repeater: {
+      dragToReorder: 'Træk for at ændre rækkefølge',
+      moveUp: 'Flyt op',
+      moveDown: 'Flyt ned',
+      remove: 'Fjern element',
+      add: 'Tilføj element'
+    },
     selectMenu: {
       create: 'Opret "{label}"',
       noData: 'Ingen data',
