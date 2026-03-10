@@ -77,9 +77,9 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
 
 export interface SidebarSlots {
   header?(props: { state: SidebarState, open: boolean, close: () => void }): VNode[]
-  title?(props?: { state: SidebarState }): VNode[]
-  description?(props?: { state: SidebarState }): VNode[]
-  actions?(props?: { state: SidebarState }): VNode[]
+  title?(props: { state: SidebarState }): VNode[]
+  description?(props: { state: SidebarState }): VNode[]
+  actions?(props: { state: SidebarState }): VNode[]
   close?(props: { ui: Sidebar['ui'], state: SidebarState }): VNode[]
   default?(props: { state: SidebarState, open: boolean, close: () => void }): VNode[]
   footer?(props: { state: SidebarState, open: boolean, close: () => void }): VNode[]
@@ -226,7 +226,7 @@ const menuProps = toRef(() => defu(props.menu, {
         </div>
 
         <div v-if="!!slots.actions || canClose" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
-          <slot name="actions" />
+          <slot name="actions" :state="state" />
 
           <slot name="close" :state="state" :ui="ui">
             <UButton
