@@ -44,10 +44,11 @@ function onSubmit() {
       side="left"
       :variant="variant"
       collapsible="icon"
+      close
       rail
       :ui="{ container: 'relative', body: 'py-2' }"
     >
-      <template #header="{ state }">
+      <template #title="{ state }">
         <Logo class="h-5 w-auto" :collapsed="state === 'collapsed'" />
       </template>
 

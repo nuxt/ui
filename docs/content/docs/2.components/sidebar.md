@@ -46,7 +46,7 @@ options:
       - sidebar
       - floating
       - inset
-    default: 'floating'
+    default: 'inset'
 class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ---
 ::
@@ -118,6 +118,9 @@ Use the `title` prop to set the title of the sidebar header.
 prettier: true
 hide:
   - class
+  - ui
+ignore:
+  - ui.container
 props:
   title: Navigation
   ui:
@@ -141,11 +144,43 @@ Use the `description` prop to set the description of the sidebar header.
 prettier: true
 hide:
   - class
+  - ui
+ignore:
+  - title
+  - ui.container
 props:
   title: Navigation
   description: Browse your workspace
   ui:
     container: h-full
+slots:
+  default: |
+
+    <Placeholder class="h-full" />
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
+---
+
+:placeholder{class="h-full"}
+::
+
+### Rail
+
+Use the `rail` prop to display a thin interactive edge on the sidebar that toggles the collapsed state on click. The rail is only rendered when `collapsible` is not `none`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+  - ui.container
+hide:
+  - ui
+  - class
+props:
+  rail: true
+  collapsible: icon
+  title: Navigation
+  ui.container: h-full
 slots:
   default: |
 
@@ -166,14 +201,23 @@ You can pass any property from the [Button](/docs/components/button) component t
 ---
 prettier: true
 ignore:
-  - collapsible
+  - title
+  - rail
+  - ui.container
 hide:
   - ui
   - class
 props:
   close: true
+  rail: true
+  collapsible: icon
   title: Navigation
-  collapsible: offcanvas
+  ui:
+    container: h-full
+items:
+  close:
+    - true
+    - false
 slots:
   default: |
 
@@ -192,16 +236,27 @@ Use the `close-icon` prop to customize the close button [Icon](/docs/components/
 ---
 prettier: true
 ignore:
-  - collapsible
+  - title
+  - rail
+  - side
   - close
+  - ui.container
 hide:
   - ui
   - class
 props:
   close: true
-  closeIcon: i-lucide-arrow-left
+  closeIcon: i-lucide-panel-right-close
+  rail: true
+  collapsible: icon
+  side: right
   title: Navigation
-  collapsible: offcanvas
+  ui:
+    container: h-full
+items:
+  close:
+    - true
+    - false
 slots:
   default: |
 
@@ -222,32 +277,6 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.clo
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::
-::
-
-### Rail
-
-Use the `rail` prop to display a thin interactive edge on the sidebar that toggles the collapsed state on click. The rail is only rendered when `collapsible` is not `none`.
-
-::component-code
----
-prettier: true
-ignore:
-  - collapsible
-hide:
-  - ui
-  - class
-props:
-  rail: true
-  title: Navigation
-  collapsible: offcanvas
-slots:
-  default: |
-
-    <Placeholder class="h-full" />
-class: '!p-0 !justify-start h-[500px] contain-[paint]'
----
-
-:placeholder{class="h-full"}
 ::
 
 ### Mode
@@ -335,7 +364,7 @@ class: '!p-0 !justify-start h-[500px] contain-[paint]'
 
 ### With header
 
-To position the sidebar below a header, customize the `gap` and `container` using the `ui` prop.
+To position the sidebar below a [Header](/docs/components/header), customize the `gap` and `container` using the `ui` prop.
 
 ::component-example
 ---
@@ -348,7 +377,7 @@ class: '!p-0 !justify-start h-[500px] contain-[paint]'
 ::
 
 ::note
-The `--ui-header-height` variable defaults to `4rem` and is used by the [Header](/docs/components/header) and [DashboardNavbar](/docs/components/dashboard-navbar) components. Adjust it if your navbar uses a different height.
+The `--ui-header-height` variable defaults to `4rem` and is used by the Header. Adjust it if your navbar uses a different height.
 ::
 
 ### With AI chat

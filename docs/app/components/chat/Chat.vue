@@ -216,7 +216,8 @@ defineShortcuts({
   <USidebar
     v-model:open="open"
     side="right"
-    title="AI Assistant"
+    title="Ask AI"
+    rail
     :style="{ '--sidebar-width': '24rem' }"
     :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
   >

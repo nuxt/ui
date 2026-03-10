@@ -49,19 +49,17 @@ const ui = {
 <template>
   <div class="flex flex-1">
     <div class="flex-1 flex flex-col">
-      <UHeader>
-        <template #toggle>
-          <UButton
-            icon="i-lucide-panel-right"
-            color="neutral"
-            variant="ghost"
-            aria-label="Toggle sidebar"
-            @click="open = !open"
-          />
-        </template>
-      </UHeader>
+      <div class="h-(--ui-header-height) shrink-0 flex items-center justify-end px-4 border-b border-default">
+        <UButton
+          icon="i-lucide-panel-right"
+          color="neutral"
+          variant="ghost"
+          aria-label="Toggle sidebar"
+          @click="open = !open"
+        />
+      </div>
 
-      <div class="flex-1 p-4 sm:p-6 lg:p-8">
+      <div class="flex-1 p-4">
         <Placeholder class="size-full" />
       </div>
     </div>
