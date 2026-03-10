@@ -77,19 +77,19 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
 
 export interface SidebarSlots {
   header?(props: { state: SidebarState, open: boolean, close: () => void }): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  actions?(props?: {}): VNode[]
-  close?(props: { ui: Sidebar['ui'] }): VNode[]
+  title?(props?: { state: SidebarState }): VNode[]
+  description?(props?: { state: SidebarState }): VNode[]
+  actions?(props?: { state: SidebarState }): VNode[]
+  close?(props: { ui: Sidebar['ui'], state: SidebarState }): VNode[]
   default?(props: { state: SidebarState, open: boolean, close: () => void }): VNode[]
   footer?(props: { state: SidebarState, open: boolean, close: () => void }): VNode[]
-  rail?(props: { ui: Sidebar['ui'] }): VNode[]
+  rail?(props: { ui: Sidebar['ui'], state: SidebarState }): VNode[]
   content?(props: { close: () => void }): VNode[]
 }
 </script>
 
 <script setup lang="ts" generic="T extends SidebarMode">
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, onMounted, ref, toRef, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { createReusableTemplate, useMediaQuery } from '@vueuse/core'
@@ -118,7 +118,12 @@ const slots = defineSlots<SidebarSlots>()
 const [DefineInnerTemplate, ReuseInnerTemplate] = createReusableTemplate()
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
-const isMobile = useMediaQuery('(max-width: 1023px)')
+const mediaQuery = useMediaQuery('(max-width: 1023px)')
+const isMounted = ref(false)
+onMounted(() => {
+  isMounted.value = true
+})
+const isMobile = computed(() => isMounted.value && mediaQuery.value)
 
 // Viewport-aware open model: on desktop controls expanded/collapsed, on mobile controls the sheet
 const modelOpen = defineModel<boolean>('open', { default: true })
@@ -208,13 +213,13 @@ const menuProps = toRef(() => defu(props.menu, {
       <slot name="header" :state="state" :open="open" :close="closeSidebar">
         <div v-if="title || !!slots.title || description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
           <p v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
-            <slot name="title">
+            <slot name="title" :state="state">
               {{ title }}
             </slot>
           </p>
 
           <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
-            <slot name="description">
+            <slot name="description" :state="state">
               {{ description }}
             </slot>
           </p>
@@ -223,7 +228,7 @@ const menuProps = toRef(() => defu(props.menu, {
         <div v-if="!!slots.actions || canClose" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
           <slot name="actions" />
 
-          <slot name="close" :ui="ui">
+          <slot name="close" :state="state" :ui="ui">
             <UButton
               v-if="canClose"
               :icon="closeIcon || appConfig.ui.icons.close"
@@ -294,7 +299,7 @@ const menuProps = toRef(() => defu(props.menu, {
       >
         <ReuseInnerTemplate />
 
-        <slot v-if="rail" name="rail" :ui="ui">
+        <slot v-if="rail" name="rail" :state="state" :ui="ui">
           <button
             data-slot="rail"
             :data-state="state"
@@ -312,9 +317,6 @@ const menuProps = toRef(() => defu(props.menu, {
       v-if="isMobile"
       v-model:open="openMobile"
       v-bind="menuProps"
-      :ui="{
-        overlay: ui.overlay({ class: uiProp?.overlay })
-      }"
     >
       <template #content="contentData">
         <slot name="content" v-bind="contentData" :close="closeSidebar">

@@ -14,8 +14,7 @@ export default (options: Required<ModuleOptions>) => ({
     close: '',
     body: 'flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4',
     footer: 'flex items-center gap-1.5 overflow-hidden p-4',
-    rail: ['absolute inset-y-0 z-20 hidden w-4 transition-all ease-linear after:absolute after:inset-y-0 after:left-1/2 after:w-px lg:flex hover:after:bg-(--ui-border-accented)', options.theme.transitions && 'after:transition-colors'],
-    overlay: 'lg:hidden'
+    rail: ['absolute inset-y-0 z-20 hidden w-4 transition-all ease-linear after:absolute after:inset-y-0 after:left-1/2 after:w-px lg:flex hover:after:bg-(--ui-border-accented)', options.theme.transitions && 'after:transition-colors']
   },
   variants: {
     side: {
@@ -37,6 +36,7 @@ export default (options: Required<ModuleOptions>) => ({
         root: 'group/sidebar hidden lg:block',
         gap: 'data-[state=collapsed]:w-(--sidebar-width-icon)',
         container: 'data-[state=collapsed]:w-(--sidebar-width-icon)',
+        actions: 'group-data-[state=collapsed]/sidebar:hidden',
         body: 'group-data-[state=collapsed]/sidebar:overflow-hidden'
       },
       none: {
