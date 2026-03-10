@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
-import ChatShimmer from './ChatShimmer.vue'
 
 const props = withDefaults(defineProps<{
   text: string
@@ -88,7 +87,7 @@ const collapsible = computed(() => !!slots.default)
         />
 
         <span class="truncate">
-          <ChatShimmer v-if="streaming" :text="text" />
+          <UChatShimmer v-if="streaming" :label="text" />
           <template v-else>{{ text }}</template>
           <span v-if="suffix" class="text-dimmed ms-1">{{ suffix }}</span>
         </span>

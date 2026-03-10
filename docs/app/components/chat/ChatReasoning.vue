@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { useScroll, useResizeObserver } from '@vueuse/core'
-import ChatShimmer from './ChatShimmer.vue'
 
 const props = withDefaults(defineProps<{
   text?: string
@@ -158,7 +157,7 @@ watch(() => props.text, () => {
         />
         <UIcon v-else-if="icon" :name="icon" class="size-4 shrink-0" />
 
-        <ChatShimmer v-if="streaming" :text="thinkingMessage" class="truncate" />
+        <UChatShimmer v-if="streaming" :label="thinkingMessage" class="truncate" />
         <span v-else class="truncate">{{ thinkingMessage }}</span>
 
         <UIcon
