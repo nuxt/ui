@@ -211,7 +211,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload |
 }))
 
 function createObjectUrl(file: File): string | undefined {
-  if (props.fileImage) return undefined
+  if (!props.fileImage) return undefined
   return URL.createObjectURL(file)
 }
 
