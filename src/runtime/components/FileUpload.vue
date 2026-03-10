@@ -104,7 +104,7 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
    * When set false, only `fileIcon` is displayed
    * @defaultValue true
    */
-  previewFile?: boolean
+  fileImage?: boolean
   class?: any
   ui?: FileUpload['slots']
 }
@@ -161,7 +161,7 @@ const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   layout: 'grid',
   position: 'outside',
   preview: true,
-  previewFile: true
+  fileImage: true
 })
 const emits = defineEmits<FileUploadEmits>()
 const slots = defineSlots<FileUploadSlots<M>>()
@@ -211,7 +211,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload |
 }))
 
 function createObjectUrl(file: File): string | undefined {
-  if (props.previewFile) return URL.createObjectURL(file)
+  if (props.fileImage) return undefined
+  return URL.createObjectURL(file)
 }
 
 function formatFileSize(bytes: number): string {
