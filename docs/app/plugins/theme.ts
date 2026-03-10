@@ -16,7 +16,7 @@ export default defineNuxtPlugin({
       const icons = localStorage.getItem('nuxt-ui-icons')
       if (icons) appConfig.ui.icons = themeIcons[icons as keyof typeof themeIcons] as any
 
-      function restoreState<T>(key: string, _fallback?: T) {
+      function restoreState<T>(key: string) {
         try {
           const raw = localStorage.getItem(key)
           if (raw) {
@@ -28,9 +28,9 @@ export default defineNuxtPlugin({
         }
       }
 
-      restoreState('nuxt-ui-ai-theme', {})
-      restoreState('nuxt-ui-custom-colors', {})
-      restoreState('nuxt-ui-css-variables', {})
+      restoreState('nuxt-ui-ai-theme')
+      restoreState('nuxt-ui-custom-colors')
+      restoreState('nuxt-ui-css-variables')
 
       try {
         const extras = JSON.parse(localStorage.getItem('nuxt-ui-ai-theme') || '{}')

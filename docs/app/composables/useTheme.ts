@@ -301,8 +301,8 @@ export function useTheme() {
     if (settings.neutral) neutral.value = settings.neutral
     if (settings.radius !== undefined) radius.value = settings.radius
     if (settings.font) font.value = settings.font
-    if (settings.icons) icon.value = settings.icons
-    if (settings.blackAsPrimary !== undefined) setBlackAsPrimary(settings.blackAsPrimary)
+    if (settings.icons && settings.icons in themeIcons) icon.value = settings.icons
+    if (settings.blackAsPrimary !== undefined) setBlackAsPrimary(!!settings.blackAsPrimary)
 
     const colorKeys = ['secondary', 'success', 'info', 'warning', 'error'] as const
     const savedExtras: Record<string, any> = { ...aiThemeExtras.value }
