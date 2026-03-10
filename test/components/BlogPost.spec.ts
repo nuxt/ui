@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import BlogPost from '../../src/runtime/components/BlogPost.vue'
-import type { BlogPostProps, BlogPostSlots } from '../../src/runtime/components/BlogPost.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/blog-post'
 
 describe('BlogPost', () => {
@@ -32,7 +31,7 @@ describe('BlogPost', () => {
     badge: 'Badge'
   }
 
-  it.each([
+  renderEach(BlogPost, [
     // Props
     ['with title', { props: { title: 'Title' } }],
     ['with description', { props: { description: 'Description' } }],
@@ -41,7 +40,7 @@ describe('BlogPost', () => {
     ['with to & image', { props: { to: 'https://github.com/benjamincanac', image: 'https://picsum.photos/640/360' } }],
     ['with date', { props: { date: '2024-01-01' } }],
     ['with badge', { props: { badge: 'Badge' } }],
-    ['with badge object', { props: { badge: { label: 'Badge', color: 'primary' as const } } }],
+    ['with badge object', { props: { badge: { label: 'Badge', color: 'primary' } } }],
     ['with author', { props: { authors: [author1] } }],
     ['with authors', { props: { authors: [author1, author2] } }],
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { ...props, variant } }]),
@@ -58,10 +57,7 @@ describe('BlogPost', () => {
     ['with header slot', { props, slots: { header: () => 'Header slot' } }],
     ['with body slot', { props, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BlogPostProps, slots?: Partial<BlogPostSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, BlogPost)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(BlogPost, {

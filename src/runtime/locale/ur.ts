@@ -59,6 +59,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'اس صفحے پر'
     },
+    dropdownMenu: {
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
+      search: 'تلاش کریں…'
+    },
     dashboardSearch: {
       theme: 'تھیم'
     },
@@ -112,6 +116,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'کوڈ کاپی کریں'
       }
+    },
+    sidebar: {
+      close: 'بند کریں',
+      toggle: 'ٹوگل کریں'
     },
     selectMenu: {
       create: '"{label}" بنائیں',

@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Tällä sivulla'
     },
+    dropdownMenu: {
+      noMatch: 'Ei vastaavia tietoja',
+      search: 'Hae…'
+    },
     dashboardSearch: {
       theme: 'Teema'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopioi koodi leikepöydälle'
       }
+    },
+    sidebar: {
+      close: 'Sulje',
+      toggle: 'Vaihda'
     },
     selectMenu: {
       create: 'Luo "{label}"',

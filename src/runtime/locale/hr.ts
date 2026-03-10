@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Na ovoj stranici'
     },
+    dropdownMenu: {
+      noMatch: 'Nema odgovarajućih podataka',
+      search: 'Pretraživanje…'
+    },
     dashboardSearch: {
       theme: 'Tema'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopiraj kod u međuspremnik'
       }
+    },
+    sidebar: {
+      close: 'Zatvori',
+      toggle: 'Prebaci'
     },
     selectMenu: {
       create: 'Stvori "{label}"',

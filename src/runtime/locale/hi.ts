@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'इस पृष्ठ पर'
     },
+    dropdownMenu: {
+      noMatch: 'कोई मेल खाता डेटा नहीं',
+      search: 'खोजें…'
+    },
     dashboardSearch: {
       theme: 'थीम'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'कोड को क्लिपबोर्ड पर कॉपी करें'
       }
+    },
+    sidebar: {
+      close: 'बंद करें',
+      toggle: 'टॉगल करें'
     },
     selectMenu: {
       create: '"{label}" बनाएँ',

@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Šiame puslapyje'
     },
+    dropdownMenu: {
+      noMatch: 'Nėra atitinkančių duomenų',
+      search: 'Ieškoti…'
+    },
     dashboardSearch: {
       theme: 'Tema'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopijuoti kodą į iškarpinę'
       }
+    },
+    sidebar: {
+      close: 'Uždaryti',
+      toggle: 'Perjungti'
     },
     selectMenu: {
       create: 'Sukurti „{label}"',

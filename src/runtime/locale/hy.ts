@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Այս էջում'
     },
+    dropdownMenu: {
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      search: 'Որոնում…'
+    },
     dashboardSearch: {
       theme: 'Թեմա'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Պատճենել կոդը սեղմատախտակին'
       }
+    },
+    sidebar: {
+      close: 'Փակել',
+      toggle: 'Փոխարկել'
     },
     selectMenu: {
       create: 'Ստեղծել "{label}"',

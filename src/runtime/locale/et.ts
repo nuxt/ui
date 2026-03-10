@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Sellel lehel'
     },
+    dropdownMenu: {
+      noMatch: 'Pole vastavaid andmeid',
+      search: 'Otsi…'
+    },
     dashboardSearch: {
       theme: 'Teema'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopeeri kood lõikelauale'
       }
+    },
+    sidebar: {
+      close: 'Sulge',
+      toggle: 'Lülita'
     },
     selectMenu: {
       create: 'Loo "{label}"',

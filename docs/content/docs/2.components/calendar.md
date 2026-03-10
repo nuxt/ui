@@ -197,6 +197,18 @@ props:
 ---
 ::
 
+### Week Numbers :badge{label="4.4+" class="align-text-top"}
+
+Use the `week-numbers` prop to display week numbers in the calendar.
+
+::component-code
+---
+props:
+  weekNumbers: true
+  fixedWeeks: true
+---
+::
+
 ## Examples
 
 ### With chip events
@@ -263,7 +275,7 @@ name: 'calendar-external-controls-example'
 ---
 ::
 
-### As a DatePicker
+### As a date picker
 
 Use a [Button](/docs/components/button) and a [Popover](/docs/components/popover) component to create a date picker.
 
@@ -273,7 +285,7 @@ name: 'calendar-date-picker-example'
 ---
 ::
 
-### As a DateRangePicker
+### As a date range picker
 
 Use a [Button](/docs/components/button) and a [Popover](/docs/components/popover) component to create a date range picker.
 

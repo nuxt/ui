@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Съдържание'
     },
+    dropdownMenu: {
+      noMatch: 'Няма съвпадение на данни',
+      search: 'Потърсете…'
+    },
     dashboardSearch: {
       theme: 'Тема'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Копирай кода в клипборда'
       }
+    },
+    sidebar: {
+      close: 'Затворете',
+      toggle: 'Превключване'
     },
     selectMenu: {
       create: 'Създайте "{label}"',

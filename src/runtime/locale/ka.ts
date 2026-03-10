@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'ამ გვერდზე'
     },
+    dropdownMenu: {
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      search: 'ძიება…'
+    },
     dashboardSearch: {
       theme: 'თემა'
     },
@@ -113,6 +117,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'კოდის კოპირება ბუფერში'
       }
+    },
+    sidebar: {
+      close: 'დახურვა',
+      toggle: 'გადართვა'
     },
     selectMenu: {
       create: 'დაამატე "{label}"', // "Create" translates as "შექმნა", but since we are simply adding new choice, creating sounds wrong, thus I chose to use "დაამატე", meaning "add".

@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'In questa pagina'
     },
+    dropdownMenu: {
+      noMatch: 'Nessun dato corrispondente',
+      search: 'Cerca…'
+    },
     dashboardSearch: {
       theme: 'Tema'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Copia codice negli appunti'
       }
+    },
+    sidebar: {
+      close: 'Chiudi',
+      toggle: 'Alterna'
     },
     selectMenu: {
       create: 'Crea "{label}"',

@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'På denne siden'
     },
+    dropdownMenu: {
+      noMatch: 'Ingen samsvarende data',
+      search: 'Søk…'
+    },
     dashboardSearch: {
       theme: 'Tema'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopier kode til utklippstavle'
       }
+    },
+    sidebar: {
+      close: 'Lukk',
+      toggle: 'Veksle'
     },
     selectMenu: {
       create: 'Opprett "{label}"',

@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Σε αυτή τη σελίδα'
     },
+    dropdownMenu: {
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      search: 'Αναζήτηση…'
+    },
     dashboardSearch: {
       theme: 'Θέμα'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Αντιγραφή κώδικα στο πρόχειρο'
       }
+    },
+    sidebar: {
+      close: 'Κλείσιμο',
+      toggle: 'Εναλλαγή'
     },
     selectMenu: {
       create: 'Δημιουργία "{label}"',

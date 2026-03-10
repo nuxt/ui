@@ -59,6 +59,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'در این صفحه'
     },
+    dropdownMenu: {
+      noMatch: 'داده‌ای یافت نشد',
+      search: 'جستجو…'
+    },
     dashboardSearch: {
       theme: 'تم'
     },
@@ -112,6 +116,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'کپی کد در کلیپ‌بورد'
       }
+    },
+    sidebar: {
+      close: 'بستن',
+      toggle: 'تغییر وضعیت'
     },
     selectMenu: {
       create: 'ایجاد "{label}"',

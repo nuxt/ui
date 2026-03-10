@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'ໃນໜ້ານີ້'
     },
+    dropdownMenu: {
+      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
+      search: 'ຄົ້ນຫາ...'
+    },
     dashboardSearch: {
       theme: 'ທີມ'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'ຄັດລອກໂຄ້ດ'
       }
+    },
+    sidebar: {
+      close: 'ປິດ',
+      toggle: 'ສະລັບ'
     },
     selectMenu: {
       create: 'ສ້າງ "{label}"',

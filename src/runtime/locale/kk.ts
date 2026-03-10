@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Мазмұны'
     },
+    dropdownMenu: {
+      noMatch: 'Сәйкес келетін деректер жоқ',
+      search: 'Іздеу…'
+    },
     dashboardSearch: {
       theme: 'Тақырып'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Кодты алмасу буферіне көшіру'
       }
+    },
+    sidebar: {
+      close: 'Жабу',
+      toggle: 'Ауыстыру'
     },
     selectMenu: {
       create: '"{label}" жасау',

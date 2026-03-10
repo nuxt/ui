@@ -103,9 +103,9 @@ props:
 slots:
   default: |
 
-    <UAvatar src="https://github.com/benjamincanac.png" />
+    <UAvatar src="https://github.com/benjamincanac.png" loading="lazy" />
 ---
-:u-avatar{src="https://github.com/benjamincanac.png"}
+:u-avatar{src="https://github.com/benjamincanac.png" loading="lazy"}
 ::
 
 ### Standalone

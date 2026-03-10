@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'ในหน้านี้'
     },
+    dropdownMenu: {
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      search: 'ค้นหา…'
+    },
     dashboardSearch: {
       theme: 'ธีม'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'คัดลอกโค้ดไปยังคลิปบอร์ด'
       }
+    },
+    sidebar: {
+      close: 'ปิด',
+      toggle: 'สลับ'
     },
     selectMenu: {
       create: 'สร้าง "{label}"',

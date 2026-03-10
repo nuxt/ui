@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'На цій сторінці'
     },
+    dropdownMenu: {
+      noMatch: 'Збігів не знайдено',
+      search: 'Пошук…'
+    },
     dashboardSearch: {
       theme: 'Тема'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Копіювати код у буфер обміну'
       }
+    },
+    sidebar: {
+      close: 'Закрити',
+      toggle: 'Перемикнути'
     },
     selectMenu: {
       create: 'Створити "{label}"',

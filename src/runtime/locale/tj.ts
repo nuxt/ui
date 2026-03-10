@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Мундариҷа'
     },
+    dropdownMenu: {
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
+      search: 'Ҷустуҷӯ…'
+    },
     dashboardSearch: {
       theme: 'Мавзӯъ'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Нусха бардоштан'
       }
+    },
+    sidebar: {
+      close: 'Бастан',
+      toggle: 'Иваз кардан'
     },
     selectMenu: {
       create: '"{label}" созед',

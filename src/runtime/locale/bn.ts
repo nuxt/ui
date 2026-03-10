@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'এই পৃষ্ঠায়'
     },
+    dropdownMenu: {
+      noMatch: 'কোন মিল পাওয়া যায়নি',
+      search: 'অনুসন্ধান করুন…'
+    },
     dashboardSearch: {
       theme: 'থিম'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'কোড ক্লিপবোর্ডে কপি করুন'
       }
+    },
+    sidebar: {
+      close: 'বন্ধ করুন',
+      toggle: 'টগল করুন'
     },
     selectMenu: {
       create: '"{label}" তৈরি করুন',

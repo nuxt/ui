@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Orri honetan'
     },
+    dropdownMenu: {
+      noMatch: 'Ez da datu bat ere aurkitu',
+      search: 'Bilatu…'
+    },
     dashboardSearch: {
       theme: 'Gaia'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopiatu kodea clipboard-era'
       }
+    },
+    sidebar: {
+      close: 'Itxi',
+      toggle: 'Txandakatu'
     },
     selectMenu: {
       create: 'Sortu {label}',

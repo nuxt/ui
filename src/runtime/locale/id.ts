@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Pada halaman ini'
     },
+    dropdownMenu: {
+      noMatch: 'Tidak ada data yang cocok',
+      search: 'Cari…'
+    },
     dashboardSearch: {
       theme: 'Tema'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Salin kode ke clipboard'
       }
+    },
+    sidebar: {
+      close: 'Tutup',
+      toggle: 'Alihkan'
     },
     selectMenu: {
       create: 'Buat "{label}"',

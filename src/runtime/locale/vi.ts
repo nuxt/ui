@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Trong trang này'
     },
+    dropdownMenu: {
+      noMatch: 'Không có kết quả phù hợp',
+      search: 'Tìm kiếm…'
+    },
     dashboardSearch: {
       theme: 'Chủ đề'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Sao chép mã vào bộ nhớ tạm'
       }
+    },
+    sidebar: {
+      close: 'Đóng',
+      toggle: 'Chuyển đổi'
     },
     selectMenu: {
       create: 'Tạo "{label}"',

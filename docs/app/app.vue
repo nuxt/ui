@@ -7,6 +7,7 @@ import { SpeedInsights } from '@vercel/speed-insights/nuxt'
 const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
+const { style, link } = useTheme()
 
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs', {
@@ -16,24 +17,18 @@ const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSe
 })
 
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
-const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
-const blackAsPrimary = computed(() => appConfig.theme.blackAsPrimary ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
-const font = computed(() => `:root { --font-sans: '${appConfig.theme.font}', sans-serif; }`)
 
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
-  link: [
+  link: computed(() => [
     // { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
-  ],
-  style: [
-    { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 },
-    { innerHTML: blackAsPrimary, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
-    { innerHTML: font, id: 'nuxt-ui-font', tagPriority: -2 }
-  ],
+    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` },
+    ...link.value
+  ]),
+  style,
   htmlAttrs: {
     lang: 'en'
   }
@@ -58,22 +53,30 @@ provide('navigation', rootNavigation)
     <Analytics />
     <SpeedInsights />
 
-    <div :class="[route.path.startsWith('/docs/') && 'root']">
+    <div class="flex">
+      <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">
+        <template v-if="!route.path.startsWith('/examples')">
+          <!-- <Banner /> -->
+
+          <Header />
+        </template>
+
+        <NuxtLayout>
+          <NuxtPage />
+        </NuxtLayout>
+
+        <template v-if="!route.path.startsWith('/examples')">
+          <Footer />
+
+          <ClientOnly>
+            <Search :files="files" :navigation="navigationByFramework" />
+          </ClientOnly>
+        </template>
+      </div>
+
       <template v-if="!route.path.startsWith('/examples')">
-        <!-- <Banner /> -->
-
-        <Header />
-      </template>
-
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
-
-      <template v-if="!route.path.startsWith('/examples')">
-        <Footer />
-
         <ClientOnly>
-          <Search :files="files" :navigation="navigationByFramework" />
+          <Chat />
         </ClientOnly>
       </template>
     </div>

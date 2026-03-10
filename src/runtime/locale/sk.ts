@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Na tejto stránke'
     },
+    dropdownMenu: {
+      noMatch: 'Žiadna zhoda',
+      search: 'Hľadať…'
+    },
     dashboardSearch: {
       theme: 'Farebný režim'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopírovať kód do schránky'
       }
+    },
+    sidebar: {
+      close: 'Zatvoriť',
+      toggle: 'Prepnúť'
     },
     selectMenu: {
       create: 'Vytvoriť "{label}"',

@@ -25,6 +25,7 @@ authors:
     description: antfu7
     avatar:
       src: https://github.com/antfu.png
+      loading: lazy
     to: https://github.com/antfu
     target: _blank
 to: 'https://nuxt.com/blog/nuxt-icon-v1-0'
@@ -204,6 +205,7 @@ props:
       description: antfu7
       avatar:
         src: https://github.com/antfu.png
+        loading: lazy
       to: https://github.com/antfu
       target: _blank
   class: 'w-96'
@@ -237,12 +239,14 @@ props:
       description: antfu7
       avatar:
         src: https://github.com/antfu.png
+        loading: lazy
       to: https://github.com/antfu
       target: _blank
     - name: Benjamin Canac
       description: benjamincanac
       avatar:
         src: https://github.com/benjamincanac.png
+        loading: lazy
       to: https://github.com/benjamincanac
       target: _blank
   class: 'w-96'

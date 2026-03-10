@@ -83,7 +83,10 @@ onMounted(async () => {
         .deleteRange(range)
         .insertContent({
           type: 'mention',
-          attrs: item
+          attrs: {
+            ...item,
+            mentionSuggestionChar: props.char
+          }
         })
         .run()
     },

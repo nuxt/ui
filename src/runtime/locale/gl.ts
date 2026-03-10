@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Nesta páxina'
     },
+    dropdownMenu: {
+      noMatch: 'Non hai datos coincidentes',
+      search: 'Buscar…'
+    },
     dashboardSearch: {
       theme: 'Tema'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Copiar código ao portapapeis'
       }
+    },
+    sidebar: {
+      close: 'Pechar',
+      toggle: 'Alternar'
     },
     selectMenu: {
       create: 'Crear "{label}"',

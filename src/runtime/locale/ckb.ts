@@ -59,6 +59,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'لەم پەڕەیەدا'
     },
+    dropdownMenu: {
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
+      search: 'گەڕان…'
+    },
     dashboardSearch: {
       theme: 'ڕووکار'
     },
@@ -112,6 +116,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'لەبەرگرتنەوەی کۆد'
       }
+    },
+    sidebar: {
+      close: 'داخستن',
+      toggle: 'گۆڕین'
     },
     selectMenu: {
       create: '"{label}" زیادکردنی',

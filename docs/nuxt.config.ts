@@ -9,18 +9,12 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/image',
     '@nuxt/a11y',
-    '@nuxtjs/plausible',
     '@nuxtjs/mcp-toolkit',
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-llms',
     'nuxt-og-image',
-    'motion-v/nuxt',
-    (_, nuxt) => {
-      nuxt.hook('components:dirs', (dirs) => {
-        dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
-      })
-    }
+    'motion-v/nuxt'
   ],
 
   $development: {
@@ -175,6 +169,7 @@ export default defineNuxtConfig({
       routes: [
         '/docs/getting-started',
         '/api/countries.json',
+        '/api/phone-codes.json',
         '/api/locales.json',
         '/api/module.json'
         // '/api/github/pulls.json',
@@ -244,7 +239,6 @@ export default defineNuxtConfig({
       '@nuxt/image',
       '@nuxtjs/color-mode',
       '@nuxtjs/mdc',
-      '@nuxtjs/plausible',
       'nuxt/dist',
       'nuxt-og-image',
       resolve('./app/components')
@@ -258,18 +252,6 @@ export default defineNuxtConfig({
     }
   },
 
-  fonts: {
-    families: [
-      { name: 'Public Sans', provider: 'google', global: true },
-      { name: 'DM Sans', provider: 'google', global: true },
-      { name: 'Geist', provider: 'google', global: true },
-      { name: 'Inter', provider: 'google', global: true },
-      { name: 'Poppins', provider: 'google', global: true },
-      { name: 'Outfit', provider: 'google', global: true },
-      { name: 'Raleway', provider: 'google', global: true }
-    ]
-  },
-
   icon: {
     customCollections: [{
       prefix: 'custom',
@@ -278,8 +260,7 @@ export default defineNuxtConfig({
     clientBundle: {
       scan: true,
       includeCustomCollections: true
-    },
-    provider: 'iconify'
+    }
   },
 
   image: {

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/accordion'
 import type { AccordionProps } from '../../types'
@@ -13,13 +14,14 @@ export interface ProseAccordionProps {
 }
 
 export interface ProseAccordionSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed, ref, onBeforeUpdate } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
 import UAccordion from '../Accordion.vue'
@@ -30,6 +32,7 @@ const props = withDefaults(defineProps<ProseAccordionProps>(), {
 const slots = defineSlots<ProseAccordionSlots>()
 
 const appConfig = useAppConfig() as ProseAccordion['AppConfig']
+const uiProp = useComponentUI('prose.accordion', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.accordion || {}) }))
@@ -65,7 +68,7 @@ onBeforeUpdate(() => rerenderCount.value++)
 </script>
 
 <template>
-  <UAccordion :type="type" :items="items" :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui(), props.ui)">
+  <UAccordion :type="type" :items="items" :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui(), uiProp)">
     <template #content="{ item }">
       <component :is="item.component" />
     </template>

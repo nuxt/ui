@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'На этой странице'
     },
+    dropdownMenu: {
+      noMatch: 'Совпадений не найдено',
+      search: 'Поиск…'
+    },
     dashboardSearch: {
       theme: 'Тема'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Скопировать код в буфер обмена'
       }
+    },
+    sidebar: {
+      close: 'Закрыть',
+      toggle: 'Переключить'
     },
     selectMenu: {
       create: 'Создать "{label}"',

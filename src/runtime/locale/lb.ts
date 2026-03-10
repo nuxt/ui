@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Op dëser Säit'
     },
+    dropdownMenu: {
+      noMatch: 'Keng entspriechend Donnéeën',
+      search: 'Sichen..'
+    },
     dashboardSearch: {
       theme: 'Thema'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Code an d\'Zwëschspäicher kopéieren'
       }
+    },
+    sidebar: {
+      close: 'Zoumaachen',
+      toggle: 'Ëmschalten'
     },
     selectMenu: {
       create: '"{label}" erstellen',

@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Pe această pagină'
     },
+    dropdownMenu: {
+      noMatch: 'Nu există date corespunzătoare',
+      search: 'Caută…'
+    },
     dashboardSearch: {
       theme: 'Temă'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Copiază codul în clipboard'
       }
+    },
+    sidebar: {
+      close: 'Închide',
+      toggle: 'Comutare'
     },
     selectMenu: {
       create: 'Creează "{label}"',

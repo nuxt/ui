@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Ushbu sahifada'
     },
+    dropdownMenu: {
+      noMatch: 'Mos keluvchi natija topilmadi',
+      search: 'Qidirish…'
+    },
     dashboardSearch: {
       theme: 'Mavzu'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Koddan buferga nusxa olish'
       }
+    },
+    sidebar: {
+      close: 'Yopish',
+      toggle: 'Almashtirish'
     },
     selectMenu: {
       create: '"{label}" yaratish',

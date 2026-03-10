@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: '本頁內容'
     },
+    dropdownMenu: {
+      noMatch: '沒有相符的資料',
+      search: '搜尋…'
+    },
     dashboardSearch: {
       theme: '主題'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: '複製程式碼到剪貼簿'
       }
+    },
+    sidebar: {
+      close: '關閉',
+      toggle: '切換'
     },
     selectMenu: {
       create: '建立「{label}」',

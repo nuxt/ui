@@ -4,7 +4,7 @@ export default {
     header: 'flex items-center gap-1.5',
     body: 'items-start',
     footer: 'flex items-center justify-between gap-1.5',
-    base: 'text-base/5'
+    base: ''
   },
   variants: {
     variant: {

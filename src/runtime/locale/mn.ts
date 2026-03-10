@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Энэ хуудсанд'
     },
+    dropdownMenu: {
+      noMatch: 'Тохирох мэдээлэл олдсонгүй',
+      search: 'Хайх…'
+    },
     dashboardSearch: {
       theme: 'Загвар'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Кодыг санах ойд хуулах'
       }
+    },
+    sidebar: {
+      close: 'Хаах',
+      toggle: 'Сэлгэх'
     },
     selectMenu: {
       create: '"{label}" үүсгэх',

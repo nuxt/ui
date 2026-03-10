@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'Bu sayfada'
     },
+    dropdownMenu: {
+      noMatch: 'Eşleşen veri yok',
+      search: 'Ara…'
+    },
     dashboardSearch: {
       theme: 'Tema'
     },
@@ -111,6 +115,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kodu panoya kopyala'
       }
+    },
+    sidebar: {
+      close: 'Kapat',
+      toggle: 'Değiştir'
     },
     selectMenu: {
       create: '"{label}" oluştur',

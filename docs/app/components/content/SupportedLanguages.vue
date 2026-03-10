@@ -10,6 +10,7 @@ const props = withDefaults(defineProps<{
 function getEmojiFlag(locale: string): string {
   const languageToCountry: Record<string, string> = {
     ar: 'sa', // Arabic -> Saudi Arabia
+    be: 'by', // Belarusian -> Belarus
     bn: 'bd', // Bengali -> Bangladesh
     ca: 'es', // Catalan -> Spain
     ckb: 'iq', // Central Kurdish -> Iraq
@@ -23,6 +24,7 @@ function getEmojiFlag(locale: string): string {
     he: 'il', // Hebrew -> Israel
     hi: 'in', // Hindi -> India
     hy: 'am', // Armenian -> Armenia
+    is: 'is', // Icelandic -> Iceland
     ja: 'jp', // Japanese -> Japan
     ka: 'ge', // Georgian -> Georgia
     kk: 'kz', // Kazakh -> Kazakhstan
