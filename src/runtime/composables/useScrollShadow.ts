@@ -35,7 +35,7 @@ export function useScrollShadow(element: MaybeRef<HTMLElement | null | undefined
 
     const size = `${toValue(options.size) ?? 24}px`
 
-    const angle = orientation === 'horizontal' ? '270deg' : '180deg'
+    const angle = orientation === 'horizontal' ? '90deg' : '180deg'
 
     if (showStart && showEnd) {
       return { maskImage: `linear-gradient(${angle}, transparent, #000 ${size}, #000 calc(100% - ${size}), transparent)` }
