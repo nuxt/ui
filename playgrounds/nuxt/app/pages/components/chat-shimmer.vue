@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-4">
+  <div class="flex flex-col items-start gap-4">
     <UChatShimmer label="Thinking..." />
 
     <UChatShimmer label="Loading content..." :duration="4" />

@@ -32,7 +32,7 @@ export interface ChatShimmerProps {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Motion } from 'motion-v'
+import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
@@ -49,24 +49,19 @@ const uiProp = useComponentUI('chatShimmer', props)
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatShimmer || {}) }))
 
-const initial = { backgroundPosition: '100% center' }
-const animate = { backgroundPosition: '0% center' }
-
-const transition = computed(() => ({ repeat: Infinity, duration: props.duration, ease: 'linear' as const }))
-
-const dynamicSpread = computed(() => props.label.length * props.spread)
+const spread = computed(() => props.label.length * props.spread)
 </script>
 
 <template>
-  <Motion
+  <Primitive
     :as="as"
-    :initial="initial"
-    :animate="animate"
-    :transition="transition"
-    :style="{ '--spread': `${dynamicSpread}px` }"
+    :style="{
+      '--spread': `${spread}px`,
+      '--duration': `${duration}s`
+    }"
     data-slot="base"
     :class="ui({ class: [uiProp?.base, props.class] })"
   >
     {{ label }}
-  </Motion>
+  </Primitive>
 </template>

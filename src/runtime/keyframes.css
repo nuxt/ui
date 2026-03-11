@@ -599,3 +599,13 @@
     transform: translate3d(0, calc(-100% * var(--gap)), 0);
   }
 }
+
+@keyframes shimmer {
+  from {
+    background-position: 100% center;
+  }
+
+  to {
+    background-position: 0% center;
+  }
+}
