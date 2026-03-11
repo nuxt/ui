@@ -478,7 +478,7 @@ The chat page is where the actual conversation happens. It integrates the AI SDK
 ::code-tree-intersection
 :::code-collapse
 
-```vue [app/pages/chat/[id].vue] {2-4,20-39}
+```vue [app/pages/chat/[id].vue] {2-4,19-38}
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
 import { Chat } from '@ai-sdk/vue'
