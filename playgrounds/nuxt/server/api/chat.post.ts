@@ -4,7 +4,7 @@ import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import { gateway } from '@ai-sdk/gateway'
 
 const webSearchTool = anthropic.tools.webSearch_20250305({
-  maxUses: 5
+  maxUses: 1
 })
 
 export default defineEventHandler(async (event) => {
@@ -25,8 +25,5 @@ export default defineEventHandler(async (event) => {
         effort: 'low'
       } satisfies AnthropicLanguageModelOptions
     }
-  }).toUIMessageStreamResponse({
-    sendReasoning: true,
-    sendSources: true
-  })
+  }).toUIMessageStreamResponse()
 })
