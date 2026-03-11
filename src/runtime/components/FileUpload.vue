@@ -83,6 +83,12 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
    */
   fileIcon?: IconProps['name']
   /**
+   * Preview the file (currently only `<img>` is rendered)
+   * When set false, only `fileIcon` is displayed
+   * @defaultValue true
+   */
+  fileImage?: boolean
+  /**
    * Configure the delete button for the file.
    * When `layout` is `grid`, the default is `{ color: 'neutral', variant: 'solid', size: 'xs' }`{lang="ts-type"}
    * When `layout` is `list`, the default is `{ color: 'neutral', variant: 'link' }`{lang="ts-type"}
@@ -99,12 +105,6 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
    * @defaultValue true
    */
   preview?: boolean
-  /**
-   * Preview the file (currently only `<img>` is rendered)
-   * When set false, only `fileIcon` is displayed
-   * @defaultValue true
-   */
-  fileImage?: boolean
   class?: any
   ui?: FileUpload['slots']
 }
