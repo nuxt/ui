@@ -36,8 +36,8 @@ export default defineLocale<Messages>({
     },
     chatReasoning: {
       thinking: 'Myśli…',
-      thought: 'Przemyślał',
-      thoughtFor: 'Myślał przez {duration}'
+      thought: 'Myślenie zakończone',
+      thoughtFor: 'Myślenie zajęło {duration}'
     },
     colorMode: {
       dark: 'Ciemny',

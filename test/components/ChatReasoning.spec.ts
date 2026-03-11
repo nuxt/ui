@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChatReasoning from '../../src/runtime/components/ChatReasoning.vue'
@@ -30,5 +30,24 @@ describe('ChatReasoning', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('auto-opens when streaming starts and auto-closes when it ends', async () => {
+    const wrapper = await mountSuspended(ChatReasoning, {
+      props: { text: 'Thinking...', streaming: false }
+    })
+
+    const root = wrapper.find('[data-slot="root"]')
+    expect(root.attributes('data-state')).toBe('closed')
+
+    await wrapper.setProps({ streaming: true })
+    expect(root.attributes('data-state')).toBe('open')
+
+    vi.useFakeTimers()
+    await wrapper.setProps({ streaming: false })
+    vi.advanceTimersByTime(500)
+    vi.useRealTimers()
+    await wrapper.vm.$nextTick()
+    expect(root.attributes('data-state')).toBe('closed')
   })
 })

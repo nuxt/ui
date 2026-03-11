@@ -38,7 +38,7 @@ export default defineLocale<Messages>({
     chatReasoning: {
       thinking: 'در حال فکر کردن…',
       thought: 'فکر کرد',
-      thoughtFor: '{duration} فکر کرد'
+      thoughtFor: 'به مدت {duration} فکر کرد'
     },
     colorMode: {
       dark: 'تیره',

@@ -38,7 +38,7 @@ export default defineLocale<Messages>({
     chatReasoning: {
       thinking: 'بیرکردنەوە…',
       thought: 'بیری کردەوە',
-      thoughtFor: '{duration} بیری کردەوە'
+      thoughtFor: 'بە ماوەی {duration} بیری کردەوە'
     },
     colorMode: {
       dark: 'تاریک',

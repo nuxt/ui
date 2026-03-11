@@ -26,7 +26,6 @@ export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultO
   duration?: number
   /**
    * The icon displayed next to the trigger.
-   * @defaultValue appConfig.ui.icons.chatReasoning
    * @IconifyIcon
    */
   icon?: IconProps['name']
@@ -48,7 +47,7 @@ export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultO
    */
   autoCloseDelay?: number
   /**
-   * Customize the [`ChatShimmer`](/docs/components/chat-shimmer) component when streaming.
+   * Customize the [`ChatShimmer`](https://ui.nuxt.com/docs/components/chat-shimmer) component when streaming.
    */
   shimmer?: Partial<Omit<ChatShimmerProps, 'text'>>
   class?: any
