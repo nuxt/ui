@@ -25,6 +25,10 @@ class: 'h-[252px]'
 ---
 ::
 
+::note{to="/docs/composables/use-scroll-shadow"}
+The body content uses the `useScrollShadow` composable to apply fade shadows when overflowing.
+::
+
 ### Streaming
 
 Use the `streaming` prop to indicate active reasoning. The component auto-opens when streaming starts and auto-closes when it ends.

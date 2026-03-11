@@ -518,7 +518,7 @@ function onSubmit() {
 ```
 
 ::note
-In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) to render messages as markdown. As Nuxt UI provides pre-styled prose components, your content will be automatically styled. Reasoning parts are rendered using the [`ChatReasoning`](/docs/components/chat-reasoning) component.
+In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) to render messages as Markdown. As Nuxt UI provides pre-styled prose components, your content will be automatically styled. Reasoning parts are rendered using the [`ChatReasoning`](/docs/components/chat-reasoning) component.
 ::
 
 ### With indicator slot

@@ -244,12 +244,9 @@ import {
 import type { UIMessage } from 'ai'
 
 const MODELS = [
+  { value: 'openai/gpt-5-nano', label: 'GPT-5 Nano' },
   { value: 'anthropic/claude-haiku-4.5', label: 'Claude Haiku 4.5' },
-  { value: 'anthropic/claude-sonnet-4.6', label: 'Claude Sonnet 4.6' },
-  { value: 'openai/gpt-4o', label: 'GPT-4o' },
-  { value: 'openai/gpt-4o-mini', label: 'GPT-4o Mini' },
-  { value: 'openai/gpt-4', label: 'GPT-4' },
-  { value: 'openai/gpt-3.5-turbo', label: 'GPT-3.5 Turbo' }
+  { value: 'google/gemini-3-flash', label: 'Gemini 3 Flash' }
 ]
 
 export default defineEventHandler(async (event) => {
@@ -608,7 +605,7 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 
 **Rendering Markdown with MDC**
 
-AI models often respond with markdown formatting (code blocks, lists, bold text, etc.). We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering text with the [`MDC`](https://github.com/nuxt-content/mdc#mdc) component from [`@nuxtjs/mdc`](https://github.com/nuxt-content/mdc) and reasoning with [`UChatReasoning`](/docs/components/chat-reasoning). The `isStreamingPart` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
+AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering text with the [`MDC`](https://github.com/nuxt-content/mdc#mdc) component from [`@nuxtjs/mdc`](https://github.com/nuxt-content/mdc) and reasoning with [`UChatReasoning`](/docs/components/chat-reasoning). The `isStreamingPart` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
 
 ::note{to="/docs/typography"}
 Nuxt UI provides pre-styled prose components, so your markdown content will be automatically styled to match your theme.

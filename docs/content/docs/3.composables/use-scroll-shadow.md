@@ -64,7 +64,7 @@ const { style } = useScrollShadow(el)
   A reactive style object to bind on the scrollable element with `:style`. Contains `maskImage` when shadows are active, `undefined` otherwise.
   ::
 
-  ::field{name="isOverflowing" type="Ref<boolean>"}
+  ::field{name="isOverflowing" type="ComputedRef<boolean>"}
   Whether the element's content overflows its visible area.
   ::
 
