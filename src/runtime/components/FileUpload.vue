@@ -83,6 +83,12 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
    */
   fileIcon?: IconProps['name']
   /**
+   * Preview the file (currently only `<img>` is rendered)
+   * When set false, only `fileIcon` is displayed
+   * @defaultValue true
+   */
+  fileImage?: boolean
+  /**
    * Configure the delete button for the file.
    * When `layout` is `grid`, the default is `{ color: 'neutral', variant: 'solid', size: 'xs' }`{lang="ts-type"}
    * When `layout` is `list`, the default is `{ color: 'neutral', variant: 'link' }`{lang="ts-type"}
@@ -154,7 +160,8 @@ const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   fileDelete: true,
   layout: 'grid',
   position: 'outside',
-  preview: true
+  preview: true,
+  fileImage: true
 })
 const emits = defineEmits<FileUploadEmits>()
 const slots = defineSlots<FileUploadSlots<M>>()
@@ -203,7 +210,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload |
   disabled: props.disabled
 }))
 
-function createObjectUrl(file: File): string {
+function createObjectUrl(file: File): string | undefined {
+  if (!props.fileImage) return undefined
   return URL.createObjectURL(file)
 }
 

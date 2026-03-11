@@ -147,7 +147,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 
     <USeparator />
 
-    <UPageSection :ui="{ container: 'lg:py-16', root: 'bg-muted/25' }">
+    <UPageSection :ui="{ container: 'lg:py-16' }" class="bg-elevated/25">
       <ul class="grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 lg:gap-x-8 lg:gap-y-8 xl:gap-y-10">
         <Motion
           v-for="(feature, index) in page?.features"
@@ -209,7 +209,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :features="page.css_variables.features"
       :links="page.css_variables.links"
       orientation="horizontal"
-      :ui="{ root: 'bg-muted/25' }"
+      class="bg-elevated/25"
     >
       <MDC :value="page.css_variables.code" cache-key="index-css-variables-code" />
     </UPageSection>
@@ -237,7 +237,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :links="page.templates.links"
       :features="page.templates.features"
       orientation="horizontal"
-      :ui="{ root: 'bg-muted/25' }"
+      class="bg-elevated/25"
     >
       <UCarousel
         v-slot="{ item }"
@@ -255,14 +255,12 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       >
         <UPageCard
           :to="item.links?.[0]?.to"
-          :icon="item.icon"
-          :title="item.title"
           target="_blank"
           variant="subtle"
           class="group rounded-md"
           tabindex="-1"
           :ui="{
-            container: 'p-4 sm:p-4',
+            container: 'p-0!',
             wrapper: 'flex-row items-center gap-1.5',
             leading: 'mb-0',
             leadingIcon: 'text-highlighted'
@@ -275,7 +273,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             width="620"
             height="348"
             loading="lazy"
-            class="rounded-lg w-full border border-default aspect-video"
+            class="rounded-md w-full aspect-video"
           />
         </UPageCard>
       </UCarousel>
@@ -322,6 +320,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       <div ref="contributorsRef" class="p-4 sm:px-6 md:px-8 lg:px-12 xl:px-14 overflow-hidden flex relative">
         <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView || isContributorsHovered" />
       </div>
+
+      <LazyStarsBg />
     </UPageSection>
   </main>
 </template>
