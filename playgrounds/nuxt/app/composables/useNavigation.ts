@@ -13,6 +13,7 @@ const components = [
   'calendar',
   'card',
   'carousel',
+  'chat-shimmer',
   'changelog-version',
   'changelog-versions',
   'checkbox-group',
