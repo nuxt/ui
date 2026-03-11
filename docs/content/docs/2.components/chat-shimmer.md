@@ -13,6 +13,10 @@ navigation.badge: Soon
 
 The ChatShimmer component renders an element with an animated shimmer gradient over text, commonly used to indicate streaming or loading states in chat interfaces.
 
+### Text
+
+Use the `text` prop to set the shimmer text.
+
 ::component-code
 ---
 props:

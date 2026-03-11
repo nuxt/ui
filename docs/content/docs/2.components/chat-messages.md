@@ -425,8 +425,11 @@ export default defineEventHandler(async (event) => {
     model: gateway('anthropic/claude-haiku-4.5'),
     maxOutputTokens: 10000,
     system: 'You are a helpful assistant.',
-    messages: await convertToModelMessages(messages)
-  }).toUIMessageStreamResponse()
+    messages: await convertToModelMessages(messages),
+    providerOptions: {
+      anthropic: { thinking: { type: 'enabled', budgetTokens: 5000 } }
+    }
+  }).toUIMessageStreamResponse({ sendReasoning: true })
 })
 ```
 

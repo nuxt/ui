@@ -1,6 +1,6 @@
 ---
-title: ChatReasoning
-description: Display a collapsible AI reasoning or thinking process.
+title: ChatTool
+description: Display a collapsible AI tool invocation status.
 category: chat
 links:
   - label: Collapsible
@@ -8,58 +8,54 @@ links:
     to: https://reka-ui.com/docs/components/collapsible
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ChatReasoning.vue
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ChatTool.vue
 navigation.badge: Soon
 ---
 
 ## Usage
 
-The ChatReasoning component renders a collapsible block that displays AI reasoning or thinking content. It auto-opens during streaming and auto-closes after.
-
-::component-example
----
-collapse: true
-prettier: true
-name: 'chat-reasoning-example'
-class: 'h-[252px]'
----
-::
-
-::note{to="/docs/composables/use-scroll-shadow"}
-The body content uses the `useScrollShadow` composable to apply fade shadows when overflowing.
-::
+The ChatTool component renders a collapsible block that displays AI tool invocation status, such as "Searching components" or "Reading documentation". When a default slot is provided, it becomes collapsible to reveal tool output.
 
 ### Text
 
-Use the `text` prop to set the reasoning content. The text is displayed inside the collapsible body.
+Use the `text` prop to set the tool status text.
 
 ::component-code
 ---
-prettier: true
 hide:
   - class
-ignore:
-  - text
 props:
-  text: 'The user is asking about Vue components...'
+  text: 'Searched components'
+  class: 'w-60'
+---
+::
+
+### Suffix
+
+Use the `suffix` prop to display secondary text after the main label.
+
+::component-code
+---
+hide:
+  - class
+props:
+  text: 'Reading component'
+  suffix: 'Button'
   class: 'w-60'
 ---
 ::
 
 ### Streaming
 
-Use the `streaming` prop to indicate active reasoning. The component auto-opens when streaming starts and auto-closes when it ends.
+Use the `streaming` prop to indicate the tool is actively running. The text displays a shimmer animation.
 
 ::component-code
 ---
-prettier: true
 hide:
   - class
-ignore:
-  - text
 props:
   streaming: true
-  text: 'The user is asking about Vue components...'
+  text: 'Searching components...'
   class: 'w-60'
 ---
 ::
@@ -81,7 +77,7 @@ ignore:
   - text
 props:
   streaming: true
-  text: 'The user is asking about Vue components...'
+  text: 'Searching components...'
   shimmer:
     duration: 2
     spread: 2
@@ -95,14 +91,70 @@ Use the `icon` prop to display an [Icon](/docs/components/icon) component next t
 
 ::component-code
 ---
-prettier: true
 hide:
   - class
-ignore:
-  - text
 props:
-  icon: i-lucide-brain
-  text: 'The user is asking about Vue components...'
+  icon: i-lucide-search
+  text: 'Searched components'
+  class: 'w-60'
+---
+::
+
+### Loading
+
+Use the `loading` prop to show a loading indicator. Use the `loading-icon` prop to customize the loading icon.
+
+::component-code
+---
+hide:
+  - class
+props:
+  loading: true
+  icon: i-lucide-search
+  text: 'Searching components...'
+  class: 'w-60'
+---
+::
+
+### Loading Icon
+
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
+
+::component-code
+---
+hide:
+  - class
+props:
+  loading: true
+  loadingIcon: 'i-lucide-loader'
+  text: 'Searching components...'
+  class: 'w-60'
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+:::
+
+#vue
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+:::
+::
+
+### Variant
+
+Use the `variant` prop to change the visual style. Defaults to `inline`.
+
+::component-code
+---
+hide:
+  - class
+props:
+  variant: card
+  text: 'Searched components'
   class: 'w-60'
 ---
 ::
@@ -120,13 +172,15 @@ When `chevron` is set to `leading` with an `icon`, the icon swaps with the chevr
 prettier: true
 hide:
   - class
-ignore:
-  - text
 props:
   chevron: leading
-  icon: i-lucide-brain
-  text: 'The user is asking about Vue components...'
+  icon: i-lucide-search
+  text: 'Searched components'
   class: 'w-60'
+slots:
+  default: |
+
+    Tool output content
 ---
 ::
 
@@ -139,12 +193,14 @@ Use the `chevron-icon` prop to customize the chevron [Icon](/docs/components/ico
 prettier: true
 hide:
   - class
-ignore:
-  - text
 props:
   chevronIcon: 'i-lucide-arrow-down'
-  text: 'The user is asking about Vue components...'
+  text: 'Searched components'
   class: 'w-60'
+slots:
+  default: |
+
+    Tool output content
 ---
 ::
 
@@ -168,13 +224,13 @@ Check the **ChatMessages** documentation for server API setup and installation i
 
 ### Within a page
 
-Use the ChatReasoning component inside the [`ChatMessages`](/docs/components/chat-messages) `#content` slot to display reasoning blocks alongside regular message parts.
+Use the ChatTool component inside the [`ChatMessages`](/docs/components/chat-messages) `#content` slot to display tool invocation status alongside regular message parts.
 
-The AI SDK provides the [`isReasoningUIPart`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/is-reasoning-ui-part) helper to identify reasoning parts in a message.
+The AI SDK provides the [`isToolUIPart`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/is-tool-ui-part) helper to identify tool parts in a message.
 
-```vue [pages/\[id\\].vue] {2,4,34-44}
+```vue [pages/\[id\\].vue] {2-4,34-54}
 <script setup lang="ts">
-import { isReasoningUIPart, isTextUIPart } from 'ai'
+import { isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isStreamingPart } from '@nuxt/ui/utils/ai'
 
@@ -217,6 +273,13 @@ function onSubmit() {
                   class="*:first:mt-0 *:last:mb-0"
                 />
               </UChatReasoning>
+
+              <UChatTool
+                v-else-if="isToolUIPart(part)"
+                :text="getToolName(part)"
+                :icon="'i-lucide-search'"
+                :streaming="isStreamingPart(message, index, chat)"
+              />
 
               <MDC
                 v-else-if="isTextUIPart(part)"

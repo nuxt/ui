@@ -547,7 +547,13 @@ onMounted(() => {
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
                 :streaming="isStreamingPart(message, index, chat)"
-              />
+              >
+                <MDC
+                  :value="part.text"
+                  :cache-key="`reasoning-${message.id}-${index}`"
+                  class="*:first:mt-0 *:last:mb-0"
+                />
+              </UChatReasoning>
 
               <MDC
                 v-else-if="isTextUIPart(part)"
@@ -823,7 +829,13 @@ onMounted(() => {
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
                 :streaming="isStreamingPart(message, index, chat)"
-              />
+              >
+                <MDC
+                  :value="part.text"
+                  :cache-key="`reasoning-${message.id}-${index}`"
+                  class="*:first:mt-0 *:last:mb-0"
+                />
+              </UChatReasoning>
 
               <MDC
                 v-else-if="isTextUIPart(part)"
@@ -999,7 +1011,13 @@ onMounted(() => {
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
                 :streaming="isStreamingPart(message, index, chat)"
-              />
+              >
+                <MDC
+                  :value="part.text"
+                  :cache-key="`reasoning-${message.id}-${index}`"
+                  class="*:first:mt-0 *:last:mb-0"
+                />
+              </UChatReasoning>
 
               <MDC
                 v-else-if="isTextUIPart(part)"

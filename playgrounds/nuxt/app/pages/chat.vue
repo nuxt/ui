@@ -3,7 +3,6 @@ import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import type { UIMessage } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isStreamingPart } from '@nuxt/ui/utils/ai'
-import ChatTool from '../../../../docs/app/components/chat/ChatTool.vue'
 
 const toast = useToast()
 
@@ -79,7 +78,7 @@ function getFaviconUrl(url: string): string {
             :cache-key="`${message.id}-${index}`"
             class="*:first:mt-0 *:last:mb-0"
           />
-          <ChatTool
+          <UChatTool
             v-else-if="isToolUIPart(part) && getToolName(part) === 'web_search'"
             :text="part.state !== 'output-available' ? 'Searching the web...' : 'Searched the web'"
             :suffix="(part.input as { query?: string })?.query"
@@ -106,7 +105,7 @@ function getFaviconUrl(url: string): string {
                 <span class="text-xs text-dimmed ms-auto shrink-0">{{ getDomain(source.url) }}</span>
               </a>
             </div>
-          </ChatTool>
+          </UChatTool>
         </template>
       </template>
     </UChatMessages>

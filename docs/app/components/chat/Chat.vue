@@ -304,7 +304,7 @@ defineShortcuts({
               :parser-options="{ highlight: false }"
               class="*:first:mt-0 *:last:mb-0"
             />
-            <ChatTool
+            <UChatTool
               v-else-if="isToolUIPart(part)"
               :text="getToolText(part)"
               :icon="getToolIcon(part)"
