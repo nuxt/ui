@@ -87,7 +87,7 @@ const collapsible = computed(() => !!slots.default)
         />
 
         <span class="truncate">
-          <UChatShimmer v-if="streaming" :label="text" />
+          <UChatShimmer v-if="streaming" :text="text" />
           <template v-else>{{ text }}</template>
           <span v-if="suffix" class="text-dimmed ms-1">{{ suffix }}</span>
         </span>

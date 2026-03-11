@@ -90,9 +90,11 @@ Use the ChatPrompt component with the `Chat` class from AI SDK v5 to display a c
 
 Pass the `input` prop alongside the `error` prop to disable the textarea when an error occurs.
 
-```vue [pages/\[id\\].vue] {2,5,13-17,34,36}
+```vue [pages/\[id\\].vue] {2-4,6,14-18,60-64}
 <script setup lang="ts">
+import { isReasoningUIPart, isTextUIPart } from 'ai'
 import { Chat } from '@ai-sdk/vue'
+import { isStreamingPart } from '@nuxt/ui/utils/ai'
 
 const input = ref('')
 
@@ -113,11 +115,33 @@ function onSubmit() {
   <UDashboardPanel>
     <template #body>
       <UContainer>
-        <UChatMessages :messages="chat.messages" :status="chat.status">
+        <UChatMessages
+          :messages="chat.messages"
+          :status="chat.status"
+        >
           <template #content="{ message }">
-            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
-              <MDC v-if="part.type === 'text' && message.role === 'assistant'" :value="part.text" :cache-key="`${message.id}-${index}`" class="*:first:mt-0 *:last:mb-0" />
-              <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">{{ part.text }}</p>
+            <template
+              v-for="(part, index) in message.parts"
+              :key="`${message.id}-${part.type}-${index}`"
+            >
+              <UChatReasoning
+                v-if="isReasoningUIPart(part)"
+                :text="part.text"
+                :streaming="isStreamingPart(message, index, chat)"
+              >
+                <MDC
+                  :value="part.text"
+                  :cache-key="`reasoning-${message.id}-${index}`"
+                  class="*:first:mt-0 *:last:mb-0"
+                />
+              </UChatReasoning>
+
+              <MDC
+                v-else-if="isTextUIPart(part)"
+                :value="part.text"
+                :cache-key="`${message.id}-${index}`"
+                class="*:first:mt-0 *:last:mb-0"
+              />
             </template>
           </template>
         </UChatMessages>
@@ -126,8 +150,16 @@ function onSubmit() {
 
     <template #footer>
       <UContainer class="pb-4 sm:pb-6">
-        <UChatPrompt v-model="input" :error="chat.error" @submit="onSubmit">
-          <UChatPromptSubmit :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
+        <UChatPrompt
+          v-model="input"
+          :error="chat.error"
+          @submit="onSubmit"
+        >
+          <UChatPromptSubmit
+            :status="chat.status"
+            @stop="chat.stop()"
+            @reload="chat.regenerate()"
+          />
         </UChatPrompt>
       </UContainer>
     </template>

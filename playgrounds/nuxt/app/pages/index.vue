@@ -1,12 +1,15 @@
+<script setup lang="ts">
+const el = useTemplateRef('el')
+
+const { style } = useScrollShadow(el, { orientation: 'horizontal' })
+</script>
+
 <template>
   <UDashboardNavbar class="absolute top-0 inset-x-0 lg:border-b-0" />
 
-  <div class="text-center space-y-4">
-    <h1 class="text-2xl font-bold text-primary">
-      Playground
-    </h1>
-    <p class="max-w-sm mx-auto text-muted">
-      Explore and test all Nuxt UI components in an interactive environment.
-    </p>
+  <div ref="el" class="max-w-[500px] overflow-x-auto flex gap-4" :style="style">
+    <div v-for="i in 100" :key="i" class="size-50 ring ring-default rounded-lg p-4 text-center">
+      {{ i }}
+    </div>
   </div>
 </template>

@@ -2,7 +2,7 @@
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import type { UIMessage } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import ChatReasoning from '../../../../docs/app/components/chat/ChatReasoning.vue'
+import { isStreamingPart } from '@nuxt/ui/utils/ai'
 import ChatTool from '../../../../docs/app/components/chat/ChatTool.vue'
 
 const toast = useToast()
@@ -48,16 +48,6 @@ function getDomain(url: string): string {
 function getFaviconUrl(url: string): string {
   return `https://www.google.com/s2/favicons?sz=32&domain=${getDomain(url)}`
 }
-
-function isStreamingReasoning(message: UIMessage, index: number): boolean {
-  if (chat.status !== 'streaming') return false
-  if (message.id !== chat.messages.at(-1)?.id) return false
-
-  for (let i = index + 1; i < message.parts.length; i++) {
-    if (message.parts[i]!.type !== 'reasoning') return false
-  }
-  return true
-}
 </script>
 
 <template>
@@ -68,24 +58,21 @@ function isStreamingReasoning(message: UIMessage, index: number): boolean {
       :messages="chat.messages"
       :status="chat.status"
       :spacing-offset="48"
-      :assistant="{ ui: { content: 'flex flex-col gap-2.5' } }"
     >
       <template #content="{ message }">
         <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
-          <ChatReasoning
+          <UChatReasoning
             v-if="isReasoningUIPart(part)"
             :text="part.text"
-            :streaming="isStreamingReasoning(message, index)"
+            :streaming="isStreamingPart(message, index, chat)"
             chevron="leading"
           >
-            <template #default="{ reasoningText }">
-              <MDC
-                :value="reasoningText"
-                :cache-key="`${message.id}-${index}`"
-                class="*:first:mt-0 *:last:mb-0"
-              />
-            </template>
-          </ChatReasoning>
+            <MDC
+              :value="part.text"
+              :cache-key="`${message.id}-${index}`"
+              class="*:first:mt-0 *:last:mb-0"
+            />
+          </UChatReasoning>
           <MDC
             v-else-if="isTextUIPart(part)"
             :value="part.text"
