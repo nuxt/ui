@@ -6,15 +6,15 @@ import { renderEach } from '../component-render'
 
 describe('ChatShimmer', () => {
   const props = {
-    label: 'Loading...'
+    text: 'Loading...'
   }
 
   renderEach(ChatShimmer, [
     // Props
-    ['with label', { props }],
+    ['with text', { props }],
     ['with duration', { props: { ...props, duration: 3 } }],
     ['with spread', { props: { ...props, spread: 4 } }],
-    ['with class', { props: { ...props, class: 'custom-class' } }],
+    ['with class', { props: { ...props, class: 'font-bold' } }],
     ['with ui', { props: { ...props, ui: { base: 'font-bold' } } }]
   ])
 

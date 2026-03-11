@@ -16,7 +16,7 @@ The ChatShimmer component renders an element with an animated shimmer gradient o
 ::component-code
 ---
 props:
-  label: 'Thinking...'
+  text: 'Thinking...'
 ---
 ::
 
@@ -27,19 +27,19 @@ Use the `duration` prop to control the animation speed in seconds.
 ::component-code
 ---
 props:
-  label: 'Thinking...'
+  text: 'Thinking...'
   duration: 4
 ---
 ::
 
 ### Spread
 
-Use the `spread` prop to control the width of the shimmer highlight. The actual spread is computed as `label.length * spread` in pixels.
+Use the `spread` prop to control the width of the shimmer highlight. The actual spread is computed as `text.length * spread` in pixels.
 
 ::component-code
 ---
 props:
-  label: 'Thinking...'
+  text: 'Thinking...'
   spread: 5
 ---
 ::

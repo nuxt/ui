@@ -12,16 +12,16 @@ export interface ChatShimmerProps {
    */
   as?: any
   /**
-   * The label to display with the shimmer effect.
+   * The text to display with the shimmer effect.
    */
-  label: string
+  text: string
   /**
    * The duration of the shimmer animation in seconds.
    * @defaultValue 2
    */
   duration?: number
   /**
-   * The spread multiplier for the shimmer highlight. The actual spread is computed as `label.length * spread` in pixels.
+   * The spread multiplier for the shimmer highlight. The actual spread is computed as `text.length * spread` in pixels.
    * @defaultValue 2
    */
   spread?: number
@@ -49,7 +49,7 @@ const uiProp = useComponentUI('chatShimmer', props)
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatShimmer || {}) }))
 
-const spread = computed(() => props.label.length * props.spread)
+const spread = computed(() => props.text.length * props.spread)
 </script>
 
 <template>
@@ -62,6 +62,6 @@ const spread = computed(() => props.label.length * props.spread)
     data-slot="base"
     :class="ui({ class: [uiProp?.base, props.class] })"
   >
-    {{ label }}
+    {{ text }}
   </Primitive>
 </template>

@@ -1,9 +1,17 @@
+<script setup lang="ts">
+const duration = ref(2)
+const spread = ref(2)
+</script>
+
 <template>
-  <div class="flex flex-col items-start gap-4">
-    <UChatShimmer label="Thinking..." />
+  <Navbar>
+    <UFormField label="Duration" orientation="horizontal">
+      <UInputNumber v-model="duration" class="w-28" />
+    </UFormField>
+    <UFormField label="Spread" orientation="horizontal">
+      <UInputNumber v-model="spread" class="w-28" />
+    </UFormField>
+  </Navbar>
 
-    <UChatShimmer label="Loading content..." :duration="4" />
-
-    <UChatShimmer label="Generating response..." :spread="5" />
-  </div>
+  <UChatShimmer text="Thinking about it..." :duration="duration" :spread="spread" />
 </template>
