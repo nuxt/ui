@@ -5,5 +5,7 @@ import en from './en'
 export default defineLocale<Messages>({
   name: 'English (United Kingdom)',
   code: 'en-GB',
-  messages: en.messages
+  messages: {
+    ...en.messages
+  }
 })

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'ສົ່ງຄຳສັ່ງ'
     },
+    chatReasoning: {
+      thinking: 'ກຳລັງຄິດ…',
+      thought: 'ຄິດແລ້ວ',
+      thoughtFor: 'ຄິດເປັນເວລາ {duration}'
+    },
     colorMode: {
       dark: 'ມືດ',
       light: 'ແຈ້ງ',

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Senda fyrirspurn'
     },
+    chatReasoning: {
+      thinking: 'Hugsar…',
+      thought: 'Hugsaði',
+      thoughtFor: 'Hugsaði í {duration}'
+    },
     colorMode: {
       dark: 'Dökkt',
       light: 'Ljóst',

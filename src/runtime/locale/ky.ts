@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Билдирүү жөнөтүү'
     },
+    chatReasoning: {
+      thinking: 'Ойлонуда…',
+      thought: 'Ойлонду',
+      thoughtFor: '{duration} ойлонду'
+    },
     colorMode: {
       dark: 'Караңгы',
       light: 'Жарык',

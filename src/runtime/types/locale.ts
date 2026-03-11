@@ -120,6 +120,11 @@ export type Messages = {
       copy: string
     }
   }
+  chatReasoning: {
+    thinking: string
+    thought: string
+    thoughtFor: string
+  }
   sidebar: {
     close: string
     toggle: string

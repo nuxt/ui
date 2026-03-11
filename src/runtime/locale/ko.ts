@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: '전송'
     },
+    chatReasoning: {
+      thinking: '생각하는 중…',
+      thought: '생각했습니다',
+      thoughtFor: '{duration} 동안 생각했습니다'
+    },
     colorMode: {
       dark: '다크',
       light: '라이트',

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Gửi'
     },
+    chatReasoning: {
+      thinking: 'Đang suy nghĩ…',
+      thought: 'Đã suy nghĩ',
+      thoughtFor: 'Đã suy nghĩ {duration}'
+    },
     colorMode: {
       dark: 'Tối',
       light: 'Sáng',

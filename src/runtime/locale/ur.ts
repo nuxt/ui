@@ -35,6 +35,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'پیغام بھیجیں'
     },
+    chatReasoning: {
+      thinking: 'سوچ رہا ہے…',
+      thought: 'سوچا',
+      thoughtFor: '{duration} سوچا'
+    },
     colorMode: {
       dark: 'تاریک',
       light: 'روشن',

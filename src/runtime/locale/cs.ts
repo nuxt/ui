@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Odeslat'
     },
+    chatReasoning: {
+      thinking: 'Přemýšlí…',
+      thought: 'Přemýšlel',
+      thoughtFor: 'Přemýšlel {duration}'
+    },
     colorMode: {
       dark: 'Tmavý',
       light: 'Světlý',

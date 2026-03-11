@@ -35,6 +35,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'ناردن'
     },
+    chatReasoning: {
+      thinking: 'بیرکردنەوە…',
+      thought: 'بیری کردەوە',
+      thoughtFor: '{duration} بیری کردەوە'
+    },
     colorMode: {
       dark: 'تاریک',
       light: 'ڕووناک',

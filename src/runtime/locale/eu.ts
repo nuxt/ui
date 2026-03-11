@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Bidali'
     },
+    chatReasoning: {
+      thinking: 'Pentsatzen…',
+      thought: 'Pentsatu du',
+      thoughtFor: '{duration} pentsatzen'
+    },
     colorMode: {
       dark: 'Iluna',
       light: 'Argia',

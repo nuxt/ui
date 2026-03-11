@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Göndər'
     },
+    chatReasoning: {
+      thinking: 'Düşünür…',
+      thought: 'Düşündü',
+      thoughtFor: '{duration} düşündü'
+    },
     colorMode: {
       dark: 'Qaranlıq',
       light: 'İşıqlı',

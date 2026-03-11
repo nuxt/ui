@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Versturen'
     },
+    chatReasoning: {
+      thinking: 'Aan het denken…',
+      thought: 'Nagedacht',
+      thoughtFor: '{duration} nagedacht'
+    },
     colorMode: {
       dark: 'Donker',
       light: 'Licht',

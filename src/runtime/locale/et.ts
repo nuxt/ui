@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Saada'
     },
+    chatReasoning: {
+      thinking: 'Mõtleb…',
+      thought: 'Mõtles',
+      thoughtFor: 'Mõtles {duration}'
+    },
     colorMode: {
       dark: 'Tume',
       light: 'Hele',

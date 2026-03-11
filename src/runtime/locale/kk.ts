@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Жіберу'
     },
+    chatReasoning: {
+      thinking: 'Ойлануда…',
+      thought: 'Ойланды',
+      thoughtFor: '{duration} ойланды'
+    },
     colorMode: {
       dark: 'Қараңғы',
       light: 'Ашық',

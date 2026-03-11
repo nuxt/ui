@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Pošalji upit'
     },
+    chatReasoning: {
+      thinking: 'Razmišlja…',
+      thought: 'Razmislio',
+      thoughtFor: 'Razmišljao {duration}'
+    },
     colorMode: {
       dark: 'Tamno',
       light: 'Svijetlo',

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'भेजें'
     },
+    chatReasoning: {
+      thinking: 'सोच रहा है…',
+      thought: 'सोचा',
+      thoughtFor: '{duration} सोचा'
+    },
     colorMode: {
       dark: 'गहरा',
       light: 'हल्का',

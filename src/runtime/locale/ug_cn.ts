@@ -35,6 +35,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'يوللاش'
     },
+    chatReasoning: {
+      thinking: 'ئويلاۋاتىدۇ…',
+      thought: 'ئويلاندى',
+      thoughtFor: '{duration} ئويلاندى'
+    },
     colorMode: {
       dark: 'قاراڭغۇ',
       light: 'يورۇق',

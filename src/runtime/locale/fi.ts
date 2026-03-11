@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Lähetä'
     },
+    chatReasoning: {
+      thinking: 'Ajattelee…',
+      thought: 'Ajatteli',
+      thoughtFor: 'Ajatteli {duration}'
+    },
     colorMode: {
       dark: 'Tumma',
       light: 'Vaalea',

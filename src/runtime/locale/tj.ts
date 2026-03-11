@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Фиристодан'
     },
+    chatReasoning: {
+      thinking: 'Фикр мекунад…',
+      thought: 'Фикр кард',
+      thoughtFor: '{duration} фикр кард'
+    },
     colorMode: {
       dark: 'Торик',
       light: 'Рӯшно',

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Kirim'
     },
+    chatReasoning: {
+      thinking: 'Berpikir…',
+      thought: 'Telah berpikir',
+      thoughtFor: 'Berpikir selama {duration}'
+    },
     colorMode: {
       dark: 'Gelap',
       light: 'Terang',

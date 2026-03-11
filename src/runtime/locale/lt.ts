@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Siųsti žinutę'
     },
+    chatReasoning: {
+      thinking: 'Mąsto…',
+      thought: 'Pamąstė',
+      thoughtFor: 'Mąstė {duration}'
+    },
     colorMode: {
       dark: 'Tamsus',
       light: 'Šviesus',

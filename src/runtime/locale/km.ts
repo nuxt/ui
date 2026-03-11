@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'សាក់'
     },
+    chatReasoning: {
+      thinking: 'កំពុងគិត…',
+      thought: 'គិតរួចហើយ',
+      thoughtFor: 'គិតរយៈពេល {duration}'
+    },
     colorMode: {
       dark: 'ងងឹត',
       light: 'ភ្លឺ',

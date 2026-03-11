@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Küldés'
     },
+    chatReasoning: {
+      thinking: 'Gondolkodik…',
+      thought: 'Gondolkodott',
+      thoughtFor: '{duration} gondolkodott'
+    },
     colorMode: {
       dark: 'Sötét',
       light: 'Világos',

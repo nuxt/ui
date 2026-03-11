@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Trimite'
     },
+    chatReasoning: {
+      thinking: 'Se gândește…',
+      thought: 'A gândit',
+      thoughtFor: 'A gândit {duration}'
+    },
     colorMode: {
       dark: 'Întunecat',
       light: 'Luminos',
