@@ -28,8 +28,8 @@ By the end of this tutorial, you'll have a fully functional AI chatbot with:
 - **Multi-model support** allowing users to switch between OpenAI, Anthropic, and Google models
 - **Server-side AI integration** using Nitro API routes and the AI SDK
 
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/chat" target="_blank"}
-Check out the complete **AI Chat template** on GitHub for a production-ready implementation with authentication, database persistence, and more.
+::callout{icon="i-simple-icons-github"}
+Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat){target="_blank"} and [`Vue`](https://github.com/nuxt-ui-templates/chat-vue){target="_blank"} AI Chat templates on GitHub for production-ready implementations with authentication, database persistence, and more.
 ::
 
 ## Prerequisites
@@ -1084,10 +1084,6 @@ const weatherTool = tool({
 })
 ```
 
-::callout{icon="i-lucide-rocket" to="https://github.com/nuxt-ui-templates/chat" target="_blank"}
-The official **AI Chat template** includes all these features and more. Get started instantly with `npx nuxi@latest init -t ui/chat my-chat-app`.
-::
-
 ## Deploying to Vercel
 
 Deploy your chatbot to Vercel with zero configuration:
@@ -1121,10 +1117,11 @@ The combination of Nuxt's full-stack capabilities, Nuxt UI's purpose-built chat 
 
 **Resources:**
 
-- [Nuxt UI Chat Components](https://ui.nuxt.com/components/chat-messages)
+- [Nuxt UI Chat Components](https://ui.nuxt.com/components/chat)
 - [NuxtHub Database](https://hub.nuxt.com/docs/features/database)
 - [AI SDK Documentation](https://ai-sdk.dev)
 - [AI Gateway Documentation](https://vercel.com/docs/ai-gateway)
-- [AI Chat Template](https://github.com/nuxt-ui-templates/chat)
+- [Nuxt AI Chat Template](https://github.com/nuxt-ui-templates/chat)
+- [Vue AI Chat Template](https://github.com/nuxt-ui-templates/chat-vue)
 
 We're excited to see what you'll build!

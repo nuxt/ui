@@ -16,6 +16,14 @@ navigation.badge: Soon
 
 The ChatTool component renders a collapsible block that displays AI tool invocation status, such as "Searching components" or "Reading documentation". When a default slot is provided, it becomes collapsible to reveal tool output.
 
+::component-example
+---
+collapse: true
+prettier: true
+name: 'chat-tool-example'
+---
+::
+
 ### Text
 
 Use the `text` prop to set the tool status text.
@@ -38,6 +46,8 @@ Use the `suffix` prop to display secondary text after the main label.
 ---
 hide:
   - class
+ignore:
+  - text
 props:
   text: 'Reading component'
   suffix: 'Button'
@@ -53,6 +63,8 @@ Use the `streaming` prop to indicate the tool is actively running. The text disp
 ---
 hide:
   - class
+ignore:
+  - text
 props:
   streaming: true
   text: 'Searching components...'
@@ -60,8 +72,8 @@ props:
 ---
 ::
 
-::tip{to="#within-a-page"}
-Use the `isStreamingPart` utility from `@nuxt/ui/utils/ai` to determine if a specific message part is currently being streamed.
+::tip
+Tool parts have a built-in `state` property. Use `part.state !== 'output-available'` to determine if a tool is still running.
 ::
 
 ### Shimmer
@@ -93,6 +105,8 @@ Use the `icon` prop to display an [Icon](/docs/components/icon) component next t
 ---
 hide:
   - class
+ignore:
+  - text
 props:
   icon: i-lucide-search
   text: 'Searched components'
@@ -108,9 +122,10 @@ Use the `loading` prop to show a loading indicator. Use the `loading-icon` prop 
 ---
 hide:
   - class
+ignore:
+  - text
 props:
   loading: true
-  icon: i-lucide-search
   text: 'Searching components...'
   class: 'w-60'
 ---
@@ -124,6 +139,8 @@ Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide
 ---
 hide:
   - class
+ignore:
+  - text
 props:
   loading: true
   loadingIcon: 'i-lucide-loader'
@@ -144,21 +161,6 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.lo
 :::
 ::
 
-### Variant
-
-Use the `variant` prop to change the visual style. Defaults to `inline`.
-
-::component-code
----
-hide:
-  - class
-props:
-  variant: card
-  text: 'Searched components'
-  class: 'w-60'
----
-::
-
 ### Chevron
 
 Use the `chevron` prop to change the position of the chevron icon.
@@ -172,6 +174,8 @@ When `chevron` is set to `leading` with an `icon`, the icon swaps with the chevr
 prettier: true
 hide:
   - class
+ignore:
+  - text
 props:
   chevron: leading
   icon: i-lucide-search
@@ -193,6 +197,8 @@ Use the `chevron-icon` prop to customize the chevron [Icon](/docs/components/ico
 prettier: true
 hide:
   - class
+ignore:
+  - text
 props:
   chevronIcon: 'i-lucide-arrow-down'
   text: 'Searched components'
@@ -216,104 +222,35 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
-## Examples
+### Variant
 
-::tip{to="/docs/components/chat-messages#examples"}
-Check the **ChatMessages** documentation for server API setup and installation instructions.
+Use the `variant` prop to change the visual style. Defaults to `inline`.
+
+::component-code
+---
+prettier: true
+hide:
+  - class
+ignore:
+  - text
+  - icon
+props:
+  variant: card
+  text: 'Searched components'
+  icon: i-lucide-search
+  chevron: trailing
+  class: 'w-60'
+slots:
+  default: |
+
+    Tool output content
+---
 ::
 
-### Within a page
+## Examples
 
-Use the ChatTool component inside the [`ChatMessages`](/docs/components/chat-messages) `#content` slot to display tool invocation status alongside regular message parts.
-
-The AI SDK provides the [`isToolUIPart`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/is-tool-ui-part) helper to identify tool parts in a message.
-
-```vue [pages/\[id\\].vue] {2-4,34-54}
-<script setup lang="ts">
-import { isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
-import { Chat } from '@ai-sdk/vue'
-import { isStreamingPart } from '@nuxt/ui/utils/ai'
-
-const input = ref('')
-
-const chat = new Chat({
-  onError(error) {
-    console.error(error)
-  }
-})
-
-function onSubmit() {
-  chat.sendMessage({ text: input.value })
-
-  input.value = ''
-}
-</script>
-
-<template>
-  <UDashboardPanel>
-    <template #body>
-      <UContainer>
-        <UChatMessages
-          :messages="chat.messages"
-          :status="chat.status"
-        >
-          <template #content="{ message }">
-            <template
-              v-for="(part, index) in message.parts"
-              :key="`${message.id}-${part.type}-${index}`"
-            >
-              <UChatReasoning
-                v-if="isReasoningUIPart(part)"
-                :text="part.text"
-                :streaming="isStreamingPart(message, index, chat)"
-              >
-                <MDC
-                  :value="part.text"
-                  :cache-key="`reasoning-${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
-                />
-              </UChatReasoning>
-
-              <UChatTool
-                v-else-if="isToolUIPart(part)"
-                :text="getToolName(part)"
-                :icon="'i-lucide-search'"
-                :streaming="isStreamingPart(message, index, chat)"
-              />
-
-              <MDC
-                v-else-if="isTextUIPart(part)"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                class="*:first:mt-0 *:last:mb-0"
-              />
-            </template>
-          </template>
-        </UChatMessages>
-      </UContainer>
-    </template>
-
-    <template #footer>
-      <UContainer class="pb-4 sm:pb-6">
-        <UChatPrompt
-          v-model="input"
-          :error="chat.error"
-          @submit="onSubmit"
-        >
-          <UChatPromptSubmit
-            :status="chat.status"
-            @stop="chat.stop()"
-            @reload="chat.regenerate()"
-          />
-        </UChatPrompt>
-      </UContainer>
-    </template>
-  </UDashboardPanel>
-</template>
-```
-
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/chat" target="_blank"}
-Check out the source code of our **AI Chat template** on GitHub for a real-life example.
+::tip{to="/docs/components/chat"}
+Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
 ## API

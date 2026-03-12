@@ -3,10 +3,6 @@ title: ChatMessages
 description: 'Display a list of chat messages, designed to work seamlessly with Vercel AI SDK.'
 category: chat
 links:
-  - label: AI SDK
-    icon: i-simple-icons-vercel
-    to: https://ai-sdk.dev/
-    target: _blank
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ChatMessages.vue
@@ -107,7 +103,7 @@ props:
 ::
 
 ::note
-Here's the detail of the different statuses from the AI SDK v5 Chat class:
+Here's the detail of the different statuses from the AI SDK Chat class:
 
 - `submitted`: The message has been sent to the API and we're awaiting the start of the response stream.
 - `streaming`: The response is actively streaming in from the API, receiving chunks of data.
@@ -388,140 +384,8 @@ Use the `should-scroll-to-bottom` prop to enable/disable bottom auto scroll when
 
 ## Examples
 
-The Chat components are designed to be used with the [Vercel AI SDK](https://ai-sdk.dev/), specifically the [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) class for managing chat state and streaming responses.
-
-First, install the required dependencies:
-
-::code-group{sync="pm"}
-
-```bash [pnpm]
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue
-```
-
-```bash [yarn]
-yarn add ai @ai-sdk/gateway @ai-sdk/vue
-```
-
-```bash [npm]
-npm install ai @ai-sdk/gateway @ai-sdk/vue
-```
-
-```bash [bun]
-bun add ai @ai-sdk/gateway @ai-sdk/vue
-```
-
-::
-
-Then, create a server API endpoint to handle chat requests using [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text) from the AI SDK. You can use the [Vercel AI Gateway](https://vercel.com/ai-gateway) to access AI models through a centralized endpoint:
-
-```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
-
-  return streamText({
-    model: gateway('anthropic/claude-haiku-4.5'),
-    maxOutputTokens: 10000,
-    system: 'You are a helpful assistant.',
-    messages: await convertToModelMessages(messages),
-    providerOptions: {
-      anthropic: { thinking: { type: 'enabled', budgetTokens: 5000 } }
-    }
-  }).toUIMessageStreamResponse({ sendReasoning: true })
-})
-```
-
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/chat" target="_blank"}
-Check out the source code of our **AI Chat template** on GitHub for a real-life example.
-::
-
-### Within a page
-
-Use the ChatMessages component with the `Chat` class from AI SDK v5 to display a list of chat messages within a page.
-
-Pass the `messages` prop alongside the `status` prop that will be used for the auto scroll and the indicator display.
-
-```vue [pages/\[id\\].vue] {2-4,25-28}
-<script setup lang="ts">
-import { isReasoningUIPart, isTextUIPart } from 'ai'
-import { Chat } from '@ai-sdk/vue'
-import { isStreamingPart } from '@nuxt/ui/utils/ai'
-
-const input = ref('')
-
-const chat = new Chat({
-  onError(error) {
-    console.error(error)
-  }
-})
-
-function onSubmit() {
-  chat.sendMessage({ text: input.value })
-
-  input.value = ''
-}
-</script>
-
-<template>
-  <UDashboardPanel>
-    <template #body>
-      <UContainer>
-        <UChatMessages
-          :messages="chat.messages"
-          :status="chat.status"
-        >
-          <template #content="{ message }">
-            <template
-              v-for="(part, index) in message.parts"
-              :key="`${message.id}-${part.type}-${index}`"
-            >
-              <UChatReasoning
-                v-if="isReasoningUIPart(part)"
-                :text="part.text"
-                :streaming="isStreamingPart(message, index, chat)"
-              >
-                <MDC
-                  :value="part.text"
-                  :cache-key="`reasoning-${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
-                />
-              </UChatReasoning>
-
-              <MDC
-                v-else-if="isTextUIPart(part)"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                class="*:first:mt-0 *:last:mb-0"
-              />
-            </template>
-          </template>
-        </UChatMessages>
-      </UContainer>
-    </template>
-
-    <template #footer>
-      <UContainer class="pb-4 sm:pb-6">
-        <UChatPrompt
-          v-model="input"
-          :error="chat.error"
-          @submit="onSubmit"
-        >
-          <UChatPromptSubmit
-            :status="chat.status"
-            @stop="chat.stop()"
-            @reload="chat.regenerate()"
-          />
-        </UChatPrompt>
-      </UContainer>
-    </template>
-  </UDashboardPanel>
-</template>
-```
-
-::note
-In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) to render messages as Markdown. As Nuxt UI provides pre-styled prose components, your content will be automatically styled. Reasoning parts are rendered using the [`ChatReasoning`](/docs/components/chat-reasoning) component.
+::tip{to="/docs/components/chat"}
+Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
 ### With indicator slot
@@ -535,7 +399,6 @@ class: 'overflow-y-auto'
 collapse: true
 ---
 ::
-
 
 ## API
 

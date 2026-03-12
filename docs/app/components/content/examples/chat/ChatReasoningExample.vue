@@ -23,6 +23,6 @@ onMounted(simulateStreaming)
   <UChatReasoning
     :text="text"
     :streaming="streaming"
-    class="w-80"
+    class="w-60"
   />
 </template>

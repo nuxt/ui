@@ -38,8 +38,6 @@ Use the `text` prop to set the reasoning content. The text is displayed inside t
 prettier: true
 hide:
   - class
-ignore:
-  - text
 props:
   text: 'The user is asking about Vue components...'
   class: 'w-60'
@@ -64,7 +62,7 @@ props:
 ---
 ::
 
-::tip{to="#within-a-page"}
+::tip
 Use the `isStreamingPart` utility from `@nuxt/ui/utils/ai` to determine if a specific message part is currently being streamed.
 ::
 
@@ -162,95 +160,8 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 ## Examples
 
-::tip{to="/docs/components/chat-messages#examples"}
-Check the **ChatMessages** documentation for server API setup and installation instructions.
-::
-
-### Within a page
-
-Use the ChatReasoning component inside the [`ChatMessages`](/docs/components/chat-messages) `#content` slot to display reasoning blocks alongside regular message parts.
-
-The AI SDK provides the [`isReasoningUIPart`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/is-reasoning-ui-part) helper to identify reasoning parts in a message.
-
-```vue [pages/\[id\\].vue] {2,4,34-44}
-<script setup lang="ts">
-import { isReasoningUIPart, isTextUIPart } from 'ai'
-import { Chat } from '@ai-sdk/vue'
-import { isStreamingPart } from '@nuxt/ui/utils/ai'
-
-const input = ref('')
-
-const chat = new Chat({
-  onError(error) {
-    console.error(error)
-  }
-})
-
-function onSubmit() {
-  chat.sendMessage({ text: input.value })
-
-  input.value = ''
-}
-</script>
-
-<template>
-  <UDashboardPanel>
-    <template #body>
-      <UContainer>
-        <UChatMessages
-          :messages="chat.messages"
-          :status="chat.status"
-        >
-          <template #content="{ message }">
-            <template
-              v-for="(part, index) in message.parts"
-              :key="`${message.id}-${part.type}-${index}`"
-            >
-              <UChatReasoning
-                v-if="isReasoningUIPart(part)"
-                :text="part.text"
-                :streaming="isStreamingPart(message, index, chat)"
-              >
-                <MDC
-                  :value="part.text"
-                  :cache-key="`reasoning-${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
-                />
-              </UChatReasoning>
-
-              <MDC
-                v-else-if="isTextUIPart(part)"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                class="*:first:mt-0 *:last:mb-0"
-              />
-            </template>
-          </template>
-        </UChatMessages>
-      </UContainer>
-    </template>
-
-    <template #footer>
-      <UContainer class="pb-4 sm:pb-6">
-        <UChatPrompt
-          v-model="input"
-          :error="chat.error"
-          @submit="onSubmit"
-        >
-          <UChatPromptSubmit
-            :status="chat.status"
-            @stop="chat.stop()"
-            @reload="chat.regenerate()"
-          />
-        </UChatPrompt>
-      </UContainer>
-    </template>
-  </UDashboardPanel>
-</template>
-```
-
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/chat" target="_blank"}
-Check out the source code of our **AI Chat template** on GitHub for a real-life example.
+::tip{to="/docs/components/chat"}
+Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
 ## API

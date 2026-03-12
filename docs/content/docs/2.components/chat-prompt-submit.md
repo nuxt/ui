@@ -235,92 +235,9 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.re
 
 ## Examples
 
-::tip{to="/docs/components/chat-messages#examples"}
-Check the **ChatMessages** documentation for server API setup and installation instructions.
+::tip{to="/docs/components/chat"}
+Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
-
-### Within a page
-
-Use the ChatPromptSubmit component with the `Chat` class from AI SDK v5 to display a chat prompt within a page.
-
-Pass the `status` prop and listen to the `stop` and `reload` events to control the chat.
-
-```vue [pages/\[id\\].vue] {2-4,8-12,65-69}
-<script setup lang="ts">
-import { isReasoningUIPart, isTextUIPart } from 'ai'
-import { Chat } from '@ai-sdk/vue'
-import { isStreamingPart } from '@nuxt/ui/utils/ai'
-
-const input = ref('')
-
-const chat = new Chat({
-  onError(error) {
-    console.error(error)
-  }
-})
-
-function onSubmit() {
-  chat.sendMessage({ text: input.value })
-
-  input.value = ''
-}
-</script>
-
-<template>
-  <UDashboardPanel>
-    <template #body>
-      <UContainer>
-        <UChatMessages
-          :messages="chat.messages"
-          :status="chat.status"
-        >
-          <template #content="{ message }">
-            <template
-              v-for="(part, index) in message.parts"
-              :key="`${message.id}-${part.type}-${index}`"
-            >
-              <UChatReasoning
-                v-if="isReasoningUIPart(part)"
-                :text="part.text"
-                :streaming="isStreamingPart(message, index, chat)"
-              >
-                <MDC
-                  :value="part.text"
-                  :cache-key="`reasoning-${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
-                />
-              </UChatReasoning>
-
-              <MDC
-                v-else-if="isTextUIPart(part)"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                class="*:first:mt-0 *:last:mb-0"
-              />
-            </template>
-          </template>
-        </UChatMessages>
-      </UContainer>
-    </template>
-
-    <template #footer>
-      <UContainer class="pb-4 sm:pb-6">
-        <UChatPrompt
-          v-model="input"
-          :error="chat.error"
-          @submit="onSubmit"
-        >
-          <UChatPromptSubmit
-            :status="chat.status"
-            @stop="chat.stop()"
-            @reload="chat.regenerate()"
-          />
-        </UChatPrompt>
-      </UContainer>
-    </template>
-  </UDashboardPanel>
-</template>
-```
 
 ## API
 
