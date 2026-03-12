@@ -106,8 +106,7 @@
   }
 
   to {
-    transform: translateY(calc((var(--before) - var(--height)) * var(--gap)))
-      scale(var(--scale));
+    transform: translateY(calc((var(--before) - var(--height)) * var(--gap))) scale(var(--scale));
   }
 }
 
@@ -117,9 +116,7 @@
   }
 
   to {
-    transform: translateY(
-      calc((var(--offset) - var(--height)) * var(--translate-factor))
-    );
+    transform: translateY(calc((var(--offset) - var(--height)) * var(--translate-factor)));
   }
 }
 
@@ -607,5 +604,15 @@
 
   to {
     background-position: 0% center;
+  }
+}
+
+@keyframes shimmer-rtl {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: 100% center;
   }
 }
