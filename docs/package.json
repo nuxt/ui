@@ -41,7 +41,7 @@
     "maska": "^3.2.0",
     "minimark": "^0.2.0",
     "motion-v": "^1.10.3",
-    "nuxt": "^4.3.1",
+    "nuxt": "^4.4.2",
     "nuxt-component-meta": "^0.17.2",
     "nuxt-llms": "^0.2.0",
     "nuxt-og-image": "^5.1.13",
