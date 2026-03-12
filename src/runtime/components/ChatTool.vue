@@ -90,14 +90,15 @@ const props = withDefaults(defineProps<ChatToolProps>(), {
   unmountOnHide: false
 })
 const emits = defineEmits<ChatToolEmits>()
-defineSlots<ChatToolSlots>()
+const slots = defineSlots<ChatToolSlots>()
 
 const appConfig = useAppConfig() as ChatTool['AppConfig']
 const uiProp = useComponentUI('chatTool', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatTool || {}) })({
   variant: props.variant,
-  chevron: props.chevron
+  chevron: props.chevron,
+  loading: props.loading
 }))
 
 const isControlled = computed(() => props.open !== undefined)
@@ -109,16 +110,15 @@ function setOpen(value: boolean) {
   emits('update:open', value)
 }
 
-const collapsible = computed(() => !!props.text || props.streaming)
+const hasContent = computed(() => !!slots.default)
 
-const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.chevronDown)
 const resolvedLoadingIcon = computed(() => props.loadingIcon || appConfig.ui.icons?.loading)
 const resolvedIcon = computed(() => props.loading ? resolvedLoadingIcon.value : props.icon)
+const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.chevronDown)
 </script>
 
 <template>
   <CollapsibleRoot
-    v-if="collapsible"
     v-slot="{ open: isOpen }"
     :open="resolvedOpen"
     :disabled="disabled"
@@ -127,36 +127,26 @@ const resolvedIcon = computed(() => props.loading ? resolvedLoadingIcon.value : 
     :class="ui.root({ class: [uiProp?.root, props.class] })"
     @update:open="setOpen"
   >
-    <CollapsibleTrigger as-child :disabled="!$slots.default">
+    <CollapsibleTrigger as-child :disabled="!hasContent">
       <button
         type="button"
         data-slot="trigger"
         :class="ui.trigger({ class: uiProp?.trigger })"
       >
-        <span v-if="resolvedIcon && $slots.default && chevron === 'leading'" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
+        <span v-if="resolvedIcon || (hasContent && chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
           <UIcon
+            v-if="resolvedIcon"
             :name="resolvedIcon"
             data-slot="leadingIcon"
-            :class="[ui.leadingIcon({ class: uiProp?.leadingIcon, alone: false }), loading && 'animate-spin']"
+            :class="ui.leadingIcon({ class: uiProp?.leadingIcon, alone: !(hasContent && chevron === 'leading') })"
           />
           <UIcon
+            v-if="hasContent && chevron === 'leading'"
             :name="chevronIconName"
             data-slot="chevronIcon"
-            :class="ui.chevronIcon({ class: uiProp?.chevronIcon, alone: false })"
+            :class="ui.chevronIcon({ class: uiProp?.chevronIcon, alone: !resolvedIcon })"
           />
         </span>
-        <UIcon
-          v-else-if="$slots.default && chevron === 'leading'"
-          :name="chevronIconName"
-          data-slot="chevronIcon"
-          :class="ui.chevronIcon({ class: uiProp?.chevronIcon })"
-        />
-        <UIcon
-          v-else-if="resolvedIcon"
-          :name="resolvedIcon"
-          data-slot="leadingIcon"
-          :class="[ui.leadingIcon({ class: uiProp?.leadingIcon }), loading && 'animate-spin']"
-        />
 
         <span data-slot="label" :class="ui.label({ class: uiProp?.label })">
           <UChatShimmer v-if="streaming && text" :text="text" v-bind="props.shimmer" />
@@ -165,7 +155,7 @@ const resolvedIcon = computed(() => props.loading ? resolvedLoadingIcon.value : 
         </span>
 
         <UIcon
-          v-if="$slots.default && chevron === 'trailing'"
+          v-if="hasContent && chevron === 'trailing'"
           :name="chevronIconName"
           data-slot="trailingIcon"
           :class="ui.trailingIcon({ class: uiProp?.trailingIcon })"
@@ -173,7 +163,7 @@ const resolvedIcon = computed(() => props.loading ? resolvedLoadingIcon.value : 
       </button>
     </CollapsibleTrigger>
 
-    <CollapsibleContent v-if="$slots.default" data-slot="content" :class="ui.content({ class: uiProp?.content })">
+    <CollapsibleContent data-slot="content" :class="ui.content({ class: uiProp?.content })">
       <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
         <slot :open="isOpen" />
       </div>

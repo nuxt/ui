@@ -11,16 +11,18 @@ export default (options: Required<ModuleOptions>) => ({
     suffix: 'text-dimmed ms-1',
     trailingIcon: 'size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200',
     content: 'data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden',
-    body: 'relative pt-2'
+    body: 'text-sm text-dimmed whitespace-pre-wrap'
   },
   variants: {
     variant: {
-      inline: '',
+      inline: {
+        body: 'pt-2'
+      },
       card: {
         root: 'rounded-md ring ring-default overflow-hidden',
         trigger: 'px-2 py-1',
         trailingIcon: 'ms-auto',
-        body: 'border-t border-default p-2 pt-2'
+        body: 'border-t border-default p-2 max-h-[200px] overflow-y-auto'
       }
     },
     chevron: {
@@ -29,10 +31,15 @@ export default (options: Required<ModuleOptions>) => ({
       },
       trailing: ''
     },
+    loading: {
+      true: {
+        leadingIcon: 'animate-spin'
+      }
+    },
     alone: {
       false: {
         leadingIcon: ['absolute inset-0 group-data-[state=open]:opacity-0', options.theme.transitions && 'transition-opacity duration-200'],
-        chevronIcon: ['absolute inset-0 opacity-0 group-hover:opacity-100 group-data-[state=open]:opacity-100', options.theme.transitions && 'transition-[opacity,transform] duration-200']
+        chevronIcon: ['absolute inset-0 opacity-0 group-hover:opacity-100 group-data-[state=open]:opacity-100', options.theme.transitions && 'transition-[rotate,opacity] duration-200']
       }
     }
   },

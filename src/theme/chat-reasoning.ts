@@ -22,7 +22,7 @@ export default (options: Required<ModuleOptions>) => ({
     alone: {
       false: {
         leadingIcon: ['absolute inset-0 group-data-[state=open]:opacity-0', options.theme.transitions && 'transition-opacity duration-200'],
-        chevronIcon: ['absolute inset-0 opacity-0 group-hover:opacity-100 group-data-[state=open]:opacity-100', options.theme.transitions && 'transition-[opacity,transform] duration-200']
+        chevronIcon: ['absolute inset-0 opacity-0 group-hover:opacity-100 group-data-[state=open]:opacity-100', options.theme.transitions && 'transition-[rotate,opacity] duration-200']
       }
     }
   }

@@ -3,10 +3,6 @@ import { anthropic } from '@ai-sdk/anthropic'
 import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import { gateway } from '@ai-sdk/gateway'
 
-const webSearchTool = anthropic.tools.webSearch_20250305({
-  maxUses: 1
-})
-
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
@@ -15,7 +11,7 @@ export default defineEventHandler(async (event) => {
     system: 'You are a helpful assistant. When answering questions, search the web for up-to-date information when relevant.',
     messages: await convertToModelMessages(messages),
     tools: {
-      web_search: webSearchTool as any
+      web_search: anthropic.tools.webSearch_20250305()
     },
     providerOptions: {
       anthropic: {

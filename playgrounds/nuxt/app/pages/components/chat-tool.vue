@@ -1,19 +1,10 @@
 <script setup lang="ts">
-const streaming = ref(false)
-
-async function simulateStreaming() {
-  streaming.value = true
-  await new Promise(resolve => setTimeout(resolve, 3000))
-  streaming.value = false
-}
 </script>
 
 <template>
-  <Navbar>
-    <UButton label="Simulate streaming" color="neutral" variant="outline" @click="simulateStreaming" />
-  </Navbar>
+  <Navbar />
 
-  <div class="w-80 flex flex-col gap-4 items-start">
+  <div class="w-60 flex flex-col gap-4 items-start">
     <UChatTool
       text="Searched components"
       icon="i-lucide-search"
@@ -23,17 +14,18 @@ async function simulateStreaming() {
       text="Reading component"
       suffix="Button"
       icon="i-lucide-file-text"
+      streaming
     />
 
     <UChatTool
-      :text="streaming ? 'Searching components...' : 'Searched components'"
+      text="Searching components..."
       icon="i-lucide-search"
-      :loading="streaming"
-      :streaming="streaming"
+      streaming
+      loading
     />
 
     <UChatTool
-      text="Searched components"
+      text="Searching components"
       icon="i-lucide-search"
       chevron="leading"
     >
@@ -46,10 +38,9 @@ async function simulateStreaming() {
       text="Searched components"
       icon="i-lucide-search"
       variant="card"
+      class="w-full"
     >
-      <div class="text-sm text-muted">
-        Found 5 matching components.
-      </div>
+      Found 5 matching components.
     </UChatTool>
   </div>
 </template>
