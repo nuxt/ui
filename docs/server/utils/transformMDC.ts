@@ -618,6 +618,7 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     const components = await queryCollection(event, 'docs')
       .where('path', 'LIKE', '/docs/components/%')
       .where('extension', '=', 'md')
+      .where('index', 'IS NULL')
       .where('category', '=', category)
       .select('path', 'title')
       .all()

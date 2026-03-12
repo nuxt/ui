@@ -22,6 +22,7 @@ const { data: components } = await useAsyncData('index-components', () => {
   return queryCollection('docs')
     .where('path', 'LIKE', '/docs/components/%')
     .where('extension', '=', 'md')
+    .where('index', 'IS NULL')
     .select('path', 'title', 'description', 'category')
     .all()
 })
