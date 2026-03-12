@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
 <script setup lang="ts">
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isStreamingPart } from '@nuxt/ui/utils/ai'
+import { isReasoningStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 
 definePageMeta({ layout: 'dashboard' })
 
@@ -85,7 +85,7 @@ function onSubmit() {
               <UChatReasoning
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
-                :streaming="isStreamingPart(message, index, chat)"
+                :streaming="isReasoningStreaming(message, index, chat)"
               >
                 <MDC
                   :value="part.text"
@@ -97,8 +97,7 @@ function onSubmit() {
               <UChatTool
                 v-else-if="isToolUIPart(part)"
                 :text="getToolName(part)"
-                icon="i-lucide-search"
-                :streaming="part.state !== 'output-available'"
+                :streaming="isToolStreaming(part)"
               />
 
               <MDC
@@ -156,7 +155,7 @@ Collapsible block for AI reasoning / thinking process. Auto-opens during streami
 | `streaming` | Whether reasoning is actively streaming |
 | `open` | Controlled open state |
 
-Use `isStreamingPart(message, index, chat)` from `@nuxt/ui/utils/ai` to determine streaming state.
+Use `isReasoningStreaming(message, index, chat)` from `@nuxt/ui/utils/ai` to determine streaming state.
 
 ### ChatTool
 
@@ -172,7 +171,7 @@ Collapsible block for AI tool invocation status.
 | `variant` | `'inline'` (default), `'card'` |
 | `chevron` | `'trailing'` (default), `'leading'` |
 
-Use `part.state !== 'output-available'` to determine if a tool is still running.
+Use `isToolStreaming(part)` from `@nuxt/ui/utils/ai` to determine if a tool is still running.
 
 ### ChatShimmer
 

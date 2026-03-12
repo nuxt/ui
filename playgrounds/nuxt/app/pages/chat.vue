@@ -2,7 +2,7 @@
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import type { UIMessage } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isStreamingPart } from '@nuxt/ui/utils/ai'
+import { isReasoningStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 
 const toast = useToast()
 
@@ -63,12 +63,12 @@ function getFaviconUrl(url: string): string {
           <UChatReasoning
             v-if="isReasoningUIPart(part)"
             :text="part.text"
-            :streaming="isStreamingPart(message, index, chat)"
+            :streaming="isReasoningStreaming(message, index, chat)"
             chevron="leading"
           >
             <MDC
               :value="part.text"
-              :cache-key="`${message.id}-${index}`"
+              :cache-key="`reasoning-${message.id}-${index}`"
               class="*:first:mt-0 *:last:mb-0"
             />
           </UChatReasoning>
@@ -80,9 +80,9 @@ function getFaviconUrl(url: string): string {
           />
           <UChatTool
             v-else-if="isToolUIPart(part) && getToolName(part) === 'web_search'"
-            :text="part.state !== 'output-available' ? 'Searching the web...' : 'Searched the web'"
+            :text="isToolStreaming(part) ? 'Searching the web...' : 'Searched the web'"
             :suffix="(part.input as { query?: string })?.query"
-            :streaming="part.state !== 'output-available'"
+            :streaming="isToolStreaming(part)"
             chevron="leading"
           >
             <div v-if="part.output && (part.output as any[]).length" class="p-1 border border-default rounded-md max-h-40 overflow-y-auto">

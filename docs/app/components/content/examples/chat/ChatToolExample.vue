@@ -7,10 +7,16 @@ const result = ref(`$ pnpm run lint
 ✔ No lint errors found.
 `)
 
+let timer: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
-  setTimeout(() => {
+  timer = setTimeout(() => {
     streaming.value = false
   }, 5000)
+})
+
+onUnmounted(() => {
+  clearTimeout(timer)
 })
 </script>
 

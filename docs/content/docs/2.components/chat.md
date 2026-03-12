@@ -226,7 +226,7 @@ Use the `Chat` class from `@ai-sdk/vue` to manage chat state and connect to your
 import type { UIMessage } from 'ai'
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isStreamingPart } from '@nuxt/ui/utils/ai'
+import { isReasoningStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 
 const input = ref('')
 
@@ -256,7 +256,7 @@ function onSubmit() {
         <UChatReasoning
           v-if="isReasoningUIPart(part)"
           :text="part.text"
-          :streaming="isStreamingPart(message, index, chat)"
+          :streaming="isReasoningStreaming(message, index, chat)"
         >
           <MDC
             :value="part.text"
@@ -268,8 +268,7 @@ function onSubmit() {
         <UChatTool
           v-else-if="isToolUIPart(part)"
           :text="getToolName(part)"
-          :icon="'i-lucide-search'"
-          :streaming="part.state !== 'output-available'"
+          :streaming="isToolStreaming(part)"
         />
 
         <MDC

@@ -73,7 +73,7 @@ props:
 ::
 
 ::tip
-Tool parts have a built-in `state` property. Use `part.state !== 'output-available'` to determine if a tool is still running.
+Use the `isToolStreaming` utility from `@nuxt/ui/utils/ai` to determine if a tool part is still running.
 ::
 
 ### Shimmer

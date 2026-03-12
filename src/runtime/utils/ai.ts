@@ -17,12 +17,12 @@ export function getTextFromMessage(message: UIMessage) {
 }
 
 /**
- * Checks if a specific message part is currently being streamed.
+ * Checks if a reasoning part is currently being streamed.
  *
  * Returns `true` when the chat is streaming, the message is the last one,
  * and no parts of a different type follow the given part index.
  */
-export function isStreamingPart(
+export function isReasoningStreaming(
   message: UIMessage,
   partIndex: number,
   chat: { status: string, messages: UIMessage[] }
@@ -36,4 +36,13 @@ export function isStreamingPart(
     if (message.parts[i]!.type !== partType) return false
   }
   return true
+}
+
+/**
+ * Checks if a tool part is still streaming (hasn't reached a terminal state).
+ *
+ * Terminal states are `output-available`, `output-error`, and `output-denied`.
+ */
+export function isToolStreaming(part: { state: string }): boolean {
+  return !['output-available', 'output-error', 'output-denied'].includes(part.state)
 }
