@@ -160,8 +160,8 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       hookable:
-        specifier: ^5.5.3
-        version: 5.5.3
+        specifier: ^6.0.1
+        version: 6.0.1
       joi:
         specifier: ^18.0.0
         version: 18.0.2
@@ -290,7 +290,7 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1(@vue/test-utils@2.4.6)(happy-dom@20.8.3)(magicast@0.5.2)(playwright-core@1.58.2)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.0.18(@opentelemetry/api@1.9.0)(@types/node@25.3.0)(happy-dom@20.8.3)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))
       vue:
-        specifier: ^3.5.28
+        specifier: ^3.5.30
         version: 3.5.30(typescript@5.9.3)
       vue-tsc:
         specifier: ^3.2.5
@@ -538,11 +538,11 @@ importers:
         specifier: ^4.2.1
         version: 4.2.1
       vue:
-        specifier: ^3.5.28
+        specifier: ^3.5.30
         version: 3.5.30(typescript@5.9.3)
       vue-router:
-        specifier: ^4.6.4
-        version: 4.6.4(vue@3.5.30(typescript@5.9.3))
+        specifier: ^5.0.3
+        version: 5.0.3(@vue/compiler-sfc@3.5.30)(vue@3.5.30(typescript@5.9.3))
       zod:
         specifier: ^4.3.6
         version: 4.3.6
