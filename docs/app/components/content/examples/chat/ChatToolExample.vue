@@ -1,17 +1,10 @@
 <script setup lang="ts">
 const streaming = ref(true)
-const result = ref(`$ cd /Users/benjamincanac/GitHub/nuxt/ui && pnpm run lint 2>&1
+const result = ref(`$ pnpm run lint
 
-> @nuxt/ui@4.5.1 lint /Users/benjamincanac/GitHub/nuxt/ui
 > eslint .
 
-
-/Users/benjamincanac/GitHub/nuxt/ui/src/runtime/components/ChatTool.vue
-  151:22  error  This branch can never execute. Its condition is a duplicate or covered by previous conditions in the \`v-if\` / \`v-else-if\` chain  vue/no-dupe-v-else-if
-
-✖ 1 problem (1 error, 0 warnings)
-
-ELIFECYCLE Command failed with exit code 1.
+✔ No lint errors found.
 `)
 
 onMounted(() => {
