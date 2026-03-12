@@ -100,7 +100,7 @@ exports[`ChatTool > renders with loading correctly 1`] = `
 
 exports[`ChatTool > renders with streaming correctly 1`] = `
 "<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" disabled="" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0 transition-colors">
-    <!--v-if--><span data-slot="label" class="truncate"><span style="--spread: 40px; --duration: 2s;" data-slot="base" class="text-transparent bg-clip-text bg-no-repeat bg-size-[calc(200%+var(--spread)*2+2px)_100%,auto] bg-[image:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--ui-text-highlighted),#0000_calc(50%+var(--spread))),linear-gradient(var(--ui-text-muted),var(--ui-text-muted))] animate-[shimmer_var(--duration)_linear_infinite] will-change-[background-position]">Searching components</span>
+    <!--v-if--><span data-slot="label" class="truncate"><span style="--spread: 40px; --duration: 2s;" data-slot="base" class="text-transparent bg-clip-text bg-no-repeat bg-size-[calc(200%+var(--spread)*2+2px)_100%,auto] bg-[image:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--ui-text-highlighted),#0000_calc(50%+var(--spread))),linear-gradient(var(--ui-text-muted),var(--ui-text-muted))] animate-[shimmer_var(--duration)_linear_infinite] rtl:animate-[shimmer-rtl_var(--duration)_linear_infinite] will-change-[background-position]">Searching components</span>
     <!--v-if--></span>
     <!--v-if-->
   </button>
