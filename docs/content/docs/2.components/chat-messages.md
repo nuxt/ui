@@ -413,7 +413,7 @@ collapse: true
 ::tip
 You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
 
-```vue{5-15}
+```vue{4-13}
 <template>
   <UChatMessages :messages="messages" :status="status">
     <template #content="{ message }">
@@ -421,14 +421,7 @@ You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#s
         v-for="(part, index) in message.parts"
         :key="`${message.id}-${part.type}-${index}`"
       >
-        <UChatReasoning
-          v-if="isReasoningUIPart(part)"
-          :text="part.text"
-          :streaming="isStreamingPart(message, index, chat)"
-        />
-
         <MDC
-          v-else-if="isTextUIPart(part)"
           :value="part.text"
           :cache-key="`${message.id}-${index}`"
           class="*:first:mt-0 *:last:mb-0"
