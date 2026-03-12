@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
-import { Analytics } from '@vercel/analytics/nuxt'
-import { SpeedInsights } from '@vercel/speed-insights/nuxt'
 
 const route = useRoute()
 const appConfig = useAppConfig()
@@ -49,9 +47,6 @@ provide('navigation', rootNavigation)
 <template>
   <UApp :toaster="appConfig.toaster">
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
-
-    <Analytics />
-    <SpeedInsights />
 
     <div class="flex">
       <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">

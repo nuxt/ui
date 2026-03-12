@@ -14,7 +14,9 @@ export default defineNuxtConfig({
     'nuxt-component-meta',
     'nuxt-llms',
     'nuxt-og-image',
-    'motion-v/nuxt'
+    'motion-v/nuxt',
+    '@vercel/analytics',
+    '@vercel/speed-insights'
   ],
 
   $development: {
