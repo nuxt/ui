@@ -233,10 +233,18 @@ function getItemLabel<Item extends T[number]>(item: Item): string {
   return get(item, props.labelKey as string)
 }
 
+function getItemValueKey<Item extends T[number]>(item: Item): string | undefined {
+  const value = get(item, 'value')
+
+  if (typeof value === 'string' || typeof value === 'number') {
+    return String(value)
+  }
+}
+
 function getItemKey<Item extends T[number]>(item: Item): string {
   return props.getKey
-    ? props.getKey(item) || getItemLabel(item)
-    : getItemLabel(item)
+    ? props.getKey(item) || getItemValueKey(item) || getItemLabel(item)
+    : getItemValueKey(item) || getItemLabel(item)
 }
 
 function getDefaultOpenedItems(item: T[number]): string[] {
