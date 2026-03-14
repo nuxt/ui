@@ -15,16 +15,20 @@ export default defineCachedEventHandler(async (event) => {
     })
   }
 
-  const octokit = new Octokit({ auth: process.env.NUXT_GITHUB_TOKEN })
+  const octokit = new Octokit({
+    auth: process.env.NUXT_GITHUB_TOKEN,
+    request: { timeout: 10_000 }
+  })
 
   const allCommits = await Promise.all(
     paths.map(path =>
-      octokit.paginate(octokit.rest.repos.listCommits, {
+      octokit.rest.repos.listCommits({
         owner: 'nuxt',
         repo: 'ui',
         path,
-        since: '2025-03-12T14:33:00Z'
-      })
+        since: '2025-03-12T14:33:00Z',
+        per_page: 100
+      }).then(res => res.data).catch(() => [])
     )
   )
 

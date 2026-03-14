@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: '전송'
     },
+    chatReasoning: {
+      thinking: '생각하는 중…',
+      thought: '생각했습니다',
+      thoughtFor: '{duration} 동안 생각했습니다'
+    },
     colorMode: {
       dark: '다크',
       light: '라이트',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: '이 페이지에서'
+    },
+    dropdownMenu: {
+      noMatch: '일치하는 데이터가 없습니다.',
+      search: '검색…'
     },
     dashboardSearch: {
       theme: '테마'
@@ -111,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: '코드를 클립보드에 복사'
       }
+    },
+    sidebar: {
+      close: '닫기',
+      toggle: '토글'
     },
     selectMenu: {
       create: '"{label}" 생성',

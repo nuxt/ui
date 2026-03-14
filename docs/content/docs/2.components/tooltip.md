@@ -113,6 +113,10 @@ This can be configured globally through the `tooltip.delayDuration` option in th
 
 Use the `content` prop to control how the Tooltip content is rendered, like its `align` or `side` for example.
 
+::tip
+This can be configured globally through the `tooltip.content` option in the [`App`](/docs/components/app) component.
+::
+
 ::component-code
 ---
 prettier: true

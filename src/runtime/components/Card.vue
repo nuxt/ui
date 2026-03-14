@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/card'
 import type { ComponentConfig } from '../types/tv'
@@ -20,9 +21,9 @@ export interface CardProps {
 }
 
 export interface CardSlots {
-  header(props?: {}): any
-  default(props?: {}): any
-  footer(props?: {}): any
+  header?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 
@@ -30,12 +31,14 @@ export interface CardSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
 
 const props = defineProps<CardProps>()
 const slots = defineSlots<CardSlots>()
 
 const appConfig = useAppConfig() as Card['AppConfig']
+const uiProp = useComponentUI('card', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.card || {}) })({
   variant: props.variant
@@ -43,16 +46,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.card || {}) 
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: uiProp?.header })">
       <slot name="header" />
     </div>
 
-    <div v-if="!!slots.default" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+    <div v-if="!!slots.default" data-slot="body" :class="ui.body({ class: uiProp?.body })">
       <slot />
     </div>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

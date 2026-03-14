@@ -3,10 +3,10 @@ import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
 import Table from '../../src/runtime/components/Table.vue'
-import type { TableProps, TableSlots, TableColumn, TableRow } from '../../src/runtime/components/Table.vue'
-import ComponentRender from '../component-render'
+import type { TableColumn, TableRow } from '../../src/runtime/components/Table.vue'
 import theme from '#build/ui/table'
 
 describe('Table', () => {
@@ -42,14 +42,14 @@ describe('Table', () => {
 
   const columns: TableColumn<typeof data[number]>[] = [{
     id: 'select',
-    header: ({ table }) => h(UCheckbox, {
+    header: ({ table }) => h(UCheckbox<boolean>, {
       'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
-      'onUpdate:modelValue': (value: boolean | 'indeterminate' | undefined) => table.toggleAllPageRowsSelected(!!value),
+      'onUpdate:modelValue': value => table.toggleAllPageRowsSelected(!!value),
       'label': 'Select all'
     }),
-    cell: ({ row }) => h(UCheckbox, {
+    cell: ({ row }) => h(UCheckbox<boolean>, {
       'modelValue': row.getIsSelected(),
-      'onUpdate:modelValue': (value: boolean | 'indeterminate' | undefined) => row.toggleSelected(!!value),
+      'onUpdate:modelValue': value => row.toggleSelected(!!value),
       'aria-label': 'Select row'
     }),
     enableSorting: false,
@@ -75,10 +75,10 @@ describe('Table', () => {
     header: 'Status',
     cell: ({ row }) => {
       const color = ({
-        paid: 'success' as const,
-        failed: 'error' as const,
-        refunded: 'neutral' as const
-      })[row.getValue('status') as string]
+        paid: 'success',
+        failed: 'error',
+        refunded: 'neutral'
+      } as const)[row.getValue('status') as string]
 
       return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
     }
@@ -165,7 +165,7 @@ describe('Table', () => {
 
   const props = { data }
 
-  it.each([
+  renderEach(Table, [
     // Props
     ['with data', { props }],
     ['without data', {}],
@@ -191,10 +191,7 @@ describe('Table', () => {
     ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }],
     ['with body-top slot', { props, slots: { 'body-top': () => 'Body top slot' } }],
     ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps, slots?: Partial<TableSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Table)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Table, {

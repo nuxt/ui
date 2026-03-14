@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Dërgo mesazhin'
     },
+    chatReasoning: {
+      thinking: 'Po mendon…',
+      thought: 'Mendoi',
+      thoughtFor: 'Mendoi për {duration}'
+    },
     colorMode: {
       dark: 'Errët',
       light: 'Ndritshëm',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Në këtë faqe'
+    },
+    dropdownMenu: {
+      noMatch: 'Nuk ka të dhëna që përputhen',
+      search: 'Kërko…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -111,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopjo kodin në kujtesë'
       }
+    },
+    sidebar: {
+      close: 'Mbyll',
+      toggle: 'Ndërro'
     },
     selectMenu: {
       create: 'Krijo "{label}"',

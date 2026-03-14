@@ -260,8 +260,10 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --divide-color-bg: var(--ui-bg);
   --outline-color-default: var(--ui-border);
   --outline-color-inverted: var(--ui-border-inverted);
+  --stroke-bg: var(--ui-bg);
   --stroke-default: var(--ui-border);
   --stroke-inverted: var(--ui-border-inverted);
+  --fill-bg: var(--ui-bg);
   --fill-default: var(--ui-border);
   --fill-inverted: var(--ui-border-inverted);
 }
@@ -293,7 +295,7 @@ import colors from 'tailwindcss/colors'
 
 type IconsConfig = Record<${iconUnion} | (string & {}), string>
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {

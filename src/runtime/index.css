@@ -7,7 +7,9 @@
 
 @layer theme {
   :root, :host {
-    --ui-header-height: --spacing(16);
+    --ui-header-height: 4rem;
+    --ui-radius: 0.25rem;
+    --ui-container: 80rem;
   }
 
   :root, :host, .light {
@@ -28,9 +30,6 @@
     --ui-border-muted: var(--ui-color-neutral-200);
     --ui-border-accented: var(--ui-color-neutral-300);
     --ui-border-inverted: var(--ui-color-neutral-900);
-
-    --ui-radius: 0.25rem;
-    --ui-container: 80rem;
   }
 
   .dark {

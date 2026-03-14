@@ -1,11 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import CommandPalette from '../../src/runtime/components/CommandPalette.vue'
-import type { CommandPaletteProps, CommandPaletteSlots } from '../../src/runtime/components/CommandPalette.vue'
-import ComponentRender from '../component-render'
+import theme from '#build/ui/command-palette'
 
 describe('CommandPalette', () => {
+  const sizes = Object.keys(theme.variants.size) as any
+
   const groups = [{
     id: 'actions',
     items: [{
@@ -99,15 +101,18 @@ describe('CommandPalette', () => {
 
   const props = { groups }
 
-  it.each([
+  renderEach(CommandPalette, [
     // Props
     ['with groups', { props }],
     ['with groups with description', { props: { groups: groupsWithDescription } }],
     ['without groups', {}],
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with modelValue', { props: { ...props, modelValue: groups[2]?.items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: groups[2]?.items[0] } }],
     ['with searchTerm', { props: { ...props, searchTerm: 'f' } }],
     ['with searchTerm and preserveGroupOrder', { props: { ...props, searchTerm: 'f', preserveGroupOrder: true } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Add new file' } }],
+    ['with by', { props: { ...props, by: 'label', defaultValue: groups[0]?.items[0] } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with descriptionKey', { props: { groups: groupsWithDescription, descriptionKey: 'label' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
@@ -135,10 +140,7 @@ describe('CommandPalette', () => {
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
     ['with close slot', { props: { ...props, close: true }, slots: { close: () => 'Close slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps, slots?: Partial<CommandPaletteSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, CommandPalette)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CommandPalette, {

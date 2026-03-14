@@ -157,6 +157,7 @@ props:
   modelValue: ['Vue']
   avatar:
     src: 'https://github.com/vuejs.png'
+    loading: lazy
   size: md
   variant: outline
 ---

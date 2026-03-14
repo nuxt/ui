@@ -31,6 +31,8 @@ ignore:
 external:
   - groups
   - modelValue
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   modelValue: {}
@@ -43,34 +45,42 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
+            loading: lazy
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
+            loading: lazy
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
             src: 'https://github.com/atinux.png'
+            loading: lazy
         - label: 'Hugo Richard'
           suffix: 'HugoRCD'
           avatar:
             src: 'https://github.com/HugoRCD.png'
+            loading: lazy
         - label: 'Sandro Circi'
           suffix: 'sandros94'
           avatar:
             src: 'https://github.com/sandros94.png'
+            loading: lazy
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
+            loading: lazy
         - label: 'Jakub Michálek'
           suffix: 'J-Michalek'
           avatar:
             src: 'https://github.com/J-Michalek.png'
+            loading: lazy
         - label: 'Eugen Istoc'
           suffix: 'genu'
           avatar:
             src: 'https://github.com/genu.png'
+            loading: lazy
   class: 'flex-1 h-80'
 ---
 ::
@@ -128,6 +138,8 @@ ignore:
 external:
   - groups
   - modelValue
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   modelValue: {}
@@ -140,34 +152,42 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
+            loading: lazy
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
+            loading: lazy
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
             src: 'https://github.com/atinux.png'
+            loading: lazy
         - label: 'Hugo Richard'
           suffix: 'HugoRCD'
           avatar:
             src: 'https://github.com/HugoRCD.png'
+            loading: lazy
         - label: 'Sandro Circi'
           suffix: 'sandros94'
           avatar:
             src: 'https://github.com/sandros94.png'
+            loading: lazy
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
+            loading: lazy
         - label: 'Jakub Michálek'
           suffix: 'J-Michalek'
           avatar:
             src: 'https://github.com/J-Michalek.png'
+            loading: lazy
         - label: 'Eugen Istoc'
           suffix: 'genu'
           avatar:
             src: 'https://github.com/genu.png'
+            loading: lazy
   class: 'flex-1'
 ---
 ::
@@ -193,6 +213,8 @@ ignore:
 external:
   - groups
   - modelValue
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   multiple: true
@@ -206,34 +228,42 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
+            loading: lazy
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
+            loading: lazy
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
             src: 'https://github.com/atinux.png'
+            loading: lazy
         - label: 'Hugo Richard'
           suffix: 'HugoRCD'
           avatar:
             src: 'https://github.com/HugoRCD.png'
+            loading: lazy
         - label: 'Sandro Circi'
           suffix: 'sandros94'
           avatar:
             src: 'https://github.com/sandros94.png'
+            loading: lazy
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
+            loading: lazy
         - label: 'Jakub Michálek'
           suffix: 'J-Michalek'
           avatar:
             src: 'https://github.com/J-Michalek.png'
+            loading: lazy
         - label: 'Eugen Istoc'
           suffix: 'genu'
           avatar:
             src: 'https://github.com/genu.png'
+            loading: lazy
   class: 'flex-1'
 ---
 ::
@@ -256,10 +286,45 @@ ignore:
   - groups
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
   placeholder: 'Search an app...'
+  groups:
+    - id: 'apps'
+      items:
+        - label: 'Calendar'
+          icon: 'i-lucide-calendar'
+        - label: 'Music'
+          icon: 'i-lucide-music'
+        - label: 'Maps'
+          icon: 'i-lucide-map'
+  class: 'flex-1'
+---
+::
+
+### Size :badge{label="4.4+" class="align-text-top"}
+
+Use the `size` prop to change the size of the CommandPalette.
+
+::component-code
+---
+collapse: true
+hide:
+  - autofocus
+ignore:
+  - class
+  - groups
+external:
+  - groups
+externalTypes:
+  - CommandPaletteGroup[]
+class: '!p-0'
+props:
+  autofocus: false
+  size: 'xl'
   groups:
     - id: 'apps'
       items:
@@ -287,6 +352,8 @@ ignore:
   - groups
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -333,6 +400,8 @@ ignore:
 external:
   - groups
   - modelValue
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   multiple: true
@@ -342,6 +411,7 @@ props:
       suffix: 'benjamincanac'
       avatar:
         src: 'https://github.com/benjamincanac.png'
+        loading: lazy
   selectedIcon: 'i-lucide-circle-check'
   groups:
     - id: 'users'
@@ -351,34 +421,42 @@ props:
           suffix: 'benjamincanac'
           avatar:
             src: 'https://github.com/benjamincanac.png'
+            loading: lazy
         - label: 'Romain Hamel'
           suffix: 'romhml'
           avatar:
             src: 'https://github.com/romhml.png'
+            loading: lazy
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
             src: 'https://github.com/atinux.png'
+            loading: lazy
         - label: 'Hugo Richard'
           suffix: 'HugoRCD'
           avatar:
             src: 'https://github.com/HugoRCD.png'
+            loading: lazy
         - label: 'Sandro Circi'
           suffix: 'sandros94'
           avatar:
             src: 'https://github.com/sandros94.png'
+            loading: lazy
         - label: 'Daniel Roe'
           suffix: 'danielroe'
           avatar:
             src: 'https://github.com/danielroe.png'
+            loading: lazy
         - label: 'Jakub Michálek'
           suffix: 'J-Michalek'
           avatar:
             src: 'https://github.com/J-Michalek.png'
+            loading: lazy
         - label: 'Eugen Istoc'
           suffix: 'genu'
           avatar:
             src: 'https://github.com/genu.png'
+            loading: lazy
   class: 'flex-1'
 ---
 ::
@@ -410,6 +488,8 @@ ignore:
   - class
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -456,6 +536,8 @@ ignore:
   - groups
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -487,6 +569,8 @@ ignore:
   - groups
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -536,6 +620,8 @@ ignore:
   - close
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -568,6 +654,8 @@ ignore:
   - class
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -603,6 +691,8 @@ ignore:
   - close
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -651,6 +741,8 @@ ignore:
   - class
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -687,6 +779,8 @@ ignore:
   - back
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -734,6 +828,8 @@ ignore:
   - class
 external:
   - groups
+externalTypes:
+  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -765,6 +861,10 @@ class: '!p-0'
 props:
   autofocus: false
 ---
+::
+
+::tip
+Use the `value-key` prop to select a field of an item to use as the value instead of the object itself. Use the `by` prop to compare objects by a field instead of reference.
 ::
 
 ### Control search term
@@ -821,6 +921,10 @@ props:
 ---
 ::
 
+::note
+This example uses `useLazyFetch` with `server: false` to fetch data on the client without blocking the initial render. The loading state checks for both `pending` and `idle` status to display a loading indicator before and during the fetch.
+::
+
 ### With ignore filter
 
 You can set the `ignoreFilter` field to `true` on a group to disable the internal search and use your own search logic.
@@ -836,7 +940,7 @@ props:
 ::
 
 ::note
-This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls. The loading state checks for both `pending` and `idle` status to display a loading indicator before and during the fetch.
 ::
 
 ### With post-filtered items
@@ -933,6 +1037,10 @@ props:
 ---
 ::
 
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the Modal opens.
+::
+
 ### Within a Drawer
 
 You can use the CommandPalette component inside a [Drawer](/docs/components/drawer)'s content.
@@ -944,6 +1052,10 @@ name: 'drawer-command-palette-example'
 props:
   autofocus: false
 ---
+::
+
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the Drawer opens.
 ::
 
 ### Listen open state

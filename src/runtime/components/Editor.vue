@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Editor as TiptapEditor, EditorOptions, Content } from '@tiptap/vue-3'
 import type { StarterKitOptions } from '@tiptap/starter-kit'
@@ -28,7 +29,7 @@ export interface EditorProps<T extends Content = Content, H extends EditorCustom
   contentType?: EditorContentType
   /**
    * The starter kit options to configure the editor.
-   * @defaultValue { horizontalRule: false, headings: { levels: [1, 2, 3, 4] }, link: { openOnClick: false }, dropcursor: { color: 'var(--ui-primary)', width: 2 } }
+   * @defaultValue { horizontalRule: false, link: { openOnClick: false }, dropcursor: { color: 'var(--ui-primary)', width: 2 } }
    * @see https://tiptap.dev/docs/editor/extensions/functionality/starterkit
    */
   starterKit?: Partial<StarterKitOptions>
@@ -60,10 +61,11 @@ export interface EditorProps<T extends Content = Content, H extends EditorCustom
   image?: boolean | Partial<ImageOptions>
   /**
    * The mention extension options to configure mention handling. Set to `false` to disable the extension.
+   * The `suggestion` and `suggestions` options are omitted as they are managed by the `EditorMentionMenu` component.
    * @defaultValue { HTMLAttributes: { class: 'mention' } }
    * @see https://tiptap.dev/docs/editor/extensions/nodes/mention
    */
-  mention?: boolean | Partial<MentionOptions>
+  mention?: boolean | Partial<Omit<MentionOptions, 'suggestion' | 'suggestions'>>
   /**
    * Custom item handlers to override or extend the default handlers.
    * These handlers are provided to all child components (toolbar, suggestion menu, etc.).
@@ -78,7 +80,7 @@ export interface EditorEmits<T extends Content = Content> {
 }
 
 export interface EditorSlots<H extends EditorCustomHandlers = EditorCustomHandlers> {
-  default(props: { editor: TiptapEditor, handlers: EditorHandlers<H> }): any
+  default?(props: { editor: TiptapEditor, handlers: EditorHandlers<H> }): VNode[]
 }
 </script>
 
@@ -97,6 +99,7 @@ import StarterKit from '@tiptap/starter-kit'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
 
@@ -112,6 +115,7 @@ defineSlots<EditorSlots<H>>()
 const attrs = useAttrs()
 
 const appConfig = useAppConfig() as Editor['AppConfig']
+const uiProp = useComponentUI('editor', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editor || {}) })({
   placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined
@@ -125,16 +129,13 @@ const editorProps = computed(() => defu(props.editorProps, {
     autocorrect: 'off',
     autocapitalize: 'off',
     ...attrs,
-    class: ui.value.base({ class: props.ui?.base })
+    class: ui.value.base({ class: uiProp.value?.base })
   }
 } as EditorOptions['editorProps']))
 const contentType = computed(() => props.contentType || (typeof props.modelValue === 'string' ? 'html' : 'json'))
 const starterKit = computed(() => defu(props.starterKit, {
   code: false,
   horizontalRule: false,
-  headings: {
-    levels: [1, 2, 3, 4]
-  },
   dropcursor: {
     color: 'var(--ui-primary)',
     width: 2
@@ -161,6 +162,16 @@ const image = computed(() => typeof props.image === 'boolean' ? {} : props.image
 const mention = computed(() => defu(typeof props.mention === 'boolean' ? {} : props.mention, {
   HTMLAttributes: {
     class: 'mention'
+  },
+  renderText({ node }: { node: any }) {
+    return `${node.attrs.mentionSuggestionChar ?? '@'}${node.attrs.label ?? node.attrs.id}`
+  },
+  renderHTML({ options, node }: { options: any, node: any }) {
+    return [
+      'span',
+      mergeAttributes({ 'data-type': 'mention' }, options.HTMLAttributes),
+      `${node.attrs.mentionSuggestionChar ?? '@'}${node.attrs.label ?? node.attrs.id}`
+    ]
   }
 } as Partial<MentionOptions>))
 
@@ -261,7 +272,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <template v-if="editor">
       <slot :editor="editor" :handlers="handlers" />
 
@@ -269,7 +280,7 @@ defineExpose({
         role="presentation"
         :editor="editor"
         data-slot="content"
-        :class="ui.content({ class: props.ui?.content })"
+        :class="ui.content({ class: uiProp?.content })"
       />
     </template>
   </Primitive>

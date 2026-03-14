@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { joinURL } from 'ufo'
 import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
+
+const isDev = import.meta.dev
 
 const route = useRoute()
 const { framework } = useFrameworks()
@@ -71,24 +74,58 @@ if (route.path.startsWith('/docs/components/')) {
   })
 }
 
-const communityLinks = computed(() => [{
+// Pre-render the markdown path + add it to alternate links
+const site = useSiteConfig()
+const path = computed(() => route.path.replace(/\/$/, ''))
+prerenderRoutes([joinURL('/raw', `${path.value}.md`)])
+useHead({
+  link: [
+    {
+      rel: 'alternate',
+      href: joinURL(site.url, 'raw', `${path.value}.md`),
+      type: 'text/markdown'
+    }
+  ]
+})
+
+const { open, messages } = useChat()
+
+const links = computed(() => [{
   icon: 'i-lucide-file-pen',
   label: 'Edit this page',
   to: `https://github.com/nuxt/ui/edit/v4/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
-  icon: 'i-lucide-star',
-  label: 'Star on GitHub',
-  to: `https://github.com/nuxt/ui`,
-  target: '_blank'
+  icon: 'i-lucide-bot-message-square',
+  label: 'Explain with AI',
+  onClick: () => {
+    messages.value = [...messages.value, {
+      id: String(Date.now()),
+      role: 'user',
+      parts: [{ type: 'text', text: `Read the documentation page at ${page.value?.path} and summarize it. I want to ask questions about it.` }]
+    }]
+    open.value = true
+  }
 }])
 </script>
 
 <template>
   <UPage v-if="page">
-    <UPageHeader :title="page.title">
+    <UPageHeader>
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
+      </template>
+
+      <template #title>
+        {{ page.title }}
+
+        <UBadge
+          v-if="page.navigation?.badge"
+          :label="page.navigation?.badge"
+          variant="subtle"
+          size="lg"
+          class="rounded-full align-middle"
+        />
       </template>
 
       <template #description>
@@ -120,16 +157,18 @@ const communityLinks = computed(() => [{
       <UContentSurround :surround="(surround as any)" />
     </UPageBody>
 
-    <template v-if="page?.body?.toc?.links?.length" #right>
-      <UContentToc :links="page.body.toc.links" class="z-[2]">
+    <template v-if="page?.body?.toc?.links?.length && !open" #right>
+      <UContentToc :links="page.body.toc.links" class="z-2">
         <template #bottom>
           <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
 
-          <UPageLinks title="Community" :links="communityLinks" />
+          <UPageLinks :links="links" />
 
-          <USeparator type="dashed" />
+          <template v-if="!isDev">
+            <USeparator type="dashed" />
 
-          <AdsCarbon />
+            <AdsCarbon />
+          </template>
         </template>
       </UContentToc>
     </template>

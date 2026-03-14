@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-resize-handle'
 import type { ComponentConfig } from '../types/tv'
@@ -12,10 +13,11 @@ export interface DashboardResizeHandleProps {
    */
   as?: any
   class?: any
+  ui?: { base?: any }
 }
 
 export interface DashboardResizeHandleSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
@@ -24,12 +26,15 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
+import { useComponentUI } from '../composables/useComponentUI'
 
 const props = defineProps<DashboardResizeHandleProps>()
 defineSlots<DashboardResizeHandleSlots>()
 
 const appConfig = useAppConfig() as DashboardResizeHandle['AppConfig']
+const uiProp = useComponentUI('dashboardResizeHandle', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardResizeHandle || {}) }))
 </script>
 
@@ -37,7 +42,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardRes
   <Primitive
     :as="as"
     role="separator"
-    :class="ui({ class: props.class })"
+    :class="ui({ class: [uiProp?.base, props.class] })"
   >
     <slot />
   </Primitive>

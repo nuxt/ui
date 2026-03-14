@@ -20,8 +20,8 @@ interface Module {
 }
 
 export default defineCachedEventHandler(async () => {
-  const team = await $fetch<TeamMember[]>('https://api.nuxt.com/teams/ui')
-  const { stats, contributors } = await $fetch<Module>('https://api.nuxt.com/modules/ui')
+  const team = await $fetch<TeamMember[]>('https://nuxt.com/api/v1/teams/ui')
+  const { stats, contributors } = await $fetch<Module>('https://nuxt.com/api/v1/modules/ui')
 
   return {
     team,

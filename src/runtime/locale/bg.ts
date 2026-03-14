@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Изпрати'
     },
+    chatReasoning: {
+      thinking: 'Мисли…',
+      thought: 'Помисли',
+      thoughtFor: 'Мислил {duration}'
+    },
     colorMode: {
       dark: 'Тъмно',
       light: 'Светло',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Съдържание'
+    },
+    dropdownMenu: {
+      noMatch: 'Няма съвпадение на данни',
+      search: 'Потърсете…'
     },
     dashboardSearch: {
       theme: 'Тема'
@@ -111,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Копирай кода в клипборда'
       }
+    },
+    sidebar: {
+      close: 'Затворете',
+      toggle: 'Превключване'
     },
     selectMenu: {
       create: 'Създайте "{label}"',

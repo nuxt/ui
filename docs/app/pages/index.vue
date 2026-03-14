@@ -22,6 +22,7 @@ const { data: components } = await useAsyncData('index-components', () => {
   return queryCollection('docs')
     .where('path', 'LIKE', '/docs/components/%')
     .where('extension', '=', 'md')
+    .where('index', 'IS NULL')
     .select('path', 'title', 'description', 'category')
     .all()
 })
@@ -44,7 +45,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 </script>
 
 <template>
-  <div v-if="page">
+  <main v-if="page">
     <UPageHero
       orientation="horizontal"
       :ui="{
@@ -88,8 +89,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           pause-on-hover
           :overlay="false"
           :ui="{
-            root: '[--gap:--spacing(4)] [--duration:40s] border-default absolute w-full left-0 border-y lg:border-x lg:border-y-0 lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:flex-col',
-            content: 'lg:w-auto lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-[fit-content]'
+            root: '[--gap:--spacing(4)] [--duration:40s] border-default absolute w-full left-0 border-y lg:border-x lg:border-y-0 lg:w-[calc(50%-6px)] 2xl:max-w-[320px] lg:flex-col',
+            content: 'lg:w-auto lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-fit'
           }"
         >
           <ULink
@@ -118,8 +119,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           reverse
           :overlay="false"
           :ui="{
-            root: '[--gap:--spacing(4)] [--duration:40s] border-default absolute w-full mt-[180px] left-0 border-y lg:mt-auto lg:left-auto lg:border-y-0 lg:border-x lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:right-0 lg:flex-col',
-            content: 'lg:w-auto lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-[fit-content] lg:[animation-direction:reverse]'
+            root: '[--gap:--spacing(4)] [--duration:40s] border-default absolute w-full mt-[180px] left-0 border-y lg:mt-auto lg:left-auto lg:border-y-0 lg:border-x lg:w-[calc(50%-6px)] 2xl:max-w-[320px] lg:right-0 lg:flex-col',
+            content: 'lg:w-auto lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-fit lg:[animation-direction:reverse]'
           }"
         >
           <ULink
@@ -147,7 +148,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 
     <USeparator />
 
-    <UPageSection :ui="{ container: 'lg:py-16', root: 'bg-muted/25' }">
+    <UPageSection :ui="{ container: 'lg:py-16' }" class="bg-elevated/25">
       <ul class="grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 lg:gap-x-8 lg:gap-y-8 xl:gap-y-10">
         <Motion
           v-for="(feature, index) in page?.features"
@@ -209,7 +210,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :features="page.css_variables.features"
       :links="page.css_variables.links"
       orientation="horizontal"
-      :ui="{ root: 'bg-muted/25' }"
+      class="bg-elevated/25"
     >
       <MDC :value="page.css_variables.code" cache-key="index-css-variables-code" />
     </UPageSection>
@@ -237,7 +238,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :links="page.templates.links"
       :features="page.templates.features"
       orientation="horizontal"
-      :ui="{ root: 'bg-muted/25' }"
+      class="bg-elevated/25"
     >
       <UCarousel
         v-slot="{ item }"
@@ -255,14 +256,12 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       >
         <UPageCard
           :to="item.links?.[0]?.to"
-          :icon="item.icon"
-          :title="item.title"
           target="_blank"
           variant="subtle"
           class="group rounded-md"
           tabindex="-1"
           :ui="{
-            container: 'p-4 sm:p-4',
+            container: 'p-0!',
             wrapper: 'flex-row items-center gap-1.5',
             leading: 'mb-0',
             leadingIcon: 'text-highlighted'
@@ -275,7 +274,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             width="620"
             height="348"
             loading="lazy"
-            class="rounded-lg w-full border border-default aspect-video"
+            class="rounded-md w-full aspect-video"
           />
         </UPageCard>
       </UCarousel>
@@ -322,6 +321,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       <div ref="contributorsRef" class="p-4 sm:px-6 md:px-8 lg:px-12 xl:px-14 overflow-hidden flex relative">
         <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView || isContributorsHovered" />
       </div>
+
+      <LazyStarsBg />
     </UPageSection>
-  </div>
+  </main>
 </template>

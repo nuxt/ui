@@ -46,6 +46,7 @@ Extends an existing locale with the provided options, deeply merging the message
 #### Parameters
 
 ::field-group
+
   ::field{name="locale" type="Locale<M>" required}
   The base locale to extend. Import from `@nuxt/ui/locale`.
   ::
@@ -53,25 +54,27 @@ Extends an existing locale with the provided options, deeply merging the message
   ::field{name="options" type="Partial<DefineLocaleOptions<DeepPartial<M>>>" required}
   The properties to override:
 
-  ::collapsible
-    ::field-group
-      ::field{name="name" type="string"}
-      Override the display name of the locale.
-      ::
+    ::collapsible
 
-      ::field{name="code" type="string"}
-      Override the ISO code of the locale (e.g., `'en-GB'`, `'fr-CA'`).
-      ::
+      ::field-group
 
-      ::field{name="dir" type="'ltr' | 'rtl'"}
-      Override the text direction of the locale.
-      ::
+        ::field{name="name" type="string"}
+        Override the display name of the locale.
+        ::
 
-      ::field{name="messages" type="DeepPartial<M>"}
-      Partial messages object to merge with the base locale. Only specify the messages you want to override.
+        ::field{name="code" type="string"}
+        Override the ISO code of the locale (e.g., `'en-GB'`, `'fr-CA'`).
+        ::
+
+        ::field{name="dir" type="'ltr' | 'rtl'"}
+        Override the text direction of the locale.
+        ::
+
+        ::field{name="messages" type="DeepPartial<M>"}
+        Partial messages object to merge with the base locale. Only specify the messages you want to override.
+        ::
       ::
     ::
-  ::
   ::
 ::
 
