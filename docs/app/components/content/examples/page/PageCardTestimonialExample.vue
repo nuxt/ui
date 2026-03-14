@@ -5,7 +5,8 @@ const testimonial = ref({
     description: 'Author of Vue.js and Vite',
     avatar: {
       src: 'https://avatars.githubusercontent.com/u/499550?v=4',
-      alt: 'Evan You'
+      alt: 'Evan You',
+      loading: 'lazy' as const
     }
   },
   quote: '“Nuxt on Cloudflare infra with minimal effort - this is huge!”'

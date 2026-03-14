@@ -85,6 +85,7 @@ export const collections = {
     }],
     schema: z.object({
       category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay', 'dashboard', 'page', 'chat', 'editor', 'color-mode', 'i18n']).optional(),
+      index: z.boolean().optional(),
       framework: z.enum(['nuxt', 'vue']).optional(),
       navigation: z.object({
         title: z.string().optional(),

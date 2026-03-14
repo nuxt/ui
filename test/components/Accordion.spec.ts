@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Accordion from '../../src/runtime/components/Accordion.vue'
-import type { AccordionProps, AccordionSlots } from '../../src/runtime/components/Accordion.vue'
-import ComponentRender from '../component-render'
 
 describe('Accordion', () => {
   const items = [{
@@ -37,7 +36,7 @@ describe('Accordion', () => {
 
   const props = { items }
 
-  it.each([
+  renderEach(Accordion<typeof items[number]>, [
     // Props
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: '1' } }],
@@ -45,7 +44,7 @@ describe('Accordion', () => {
     ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Getting Started' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with as', { props: { ...props, as: 'section' } }],
-    ['with type', { props: { ...props, type: 'multiple' as const } }],
+    ['with type', { props: { ...props, type: 'multiple' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with collapsible', { props: { ...props, collapsible: false } }],
     ['with unmountOnHide', { props: { ...props, unmountOnHide: false } }],
@@ -61,10 +60,7 @@ describe('Accordion', () => {
     ['with body slot', { props: { ...props, modelValue: '1' }, slots: { body: () => 'Body slot' } }],
     ['with custom slot', { props: { ...props, modelValue: '5' }, slots: { custom: () => 'Custom slot' } }],
     ['with custom body slot', { props: { ...props, modelValue: '5' }, slots: { 'custom-body': () => 'Custom body slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps, slots?: Partial<AccordionSlots & { custom: () => 'Custom slot' } & { 'custom-body': () => 'Custom body slot' }> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Accordion)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Accordion, {

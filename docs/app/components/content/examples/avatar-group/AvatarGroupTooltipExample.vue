@@ -4,6 +4,7 @@
       <UAvatar
         src="https://github.com/benjamincanac.png"
         alt="Benjamin Canac"
+        loading="lazy"
       />
     </UTooltip>
 
@@ -11,6 +12,7 @@
       <UAvatar
         src="https://github.com/romhml.png"
         alt="Romain Hamel"
+        loading="lazy"
       />
     </UTooltip>
 
@@ -18,6 +20,7 @@
       <UAvatar
         src="https://github.com/noook.png"
         alt="Neil Richter"
+        loading="lazy"
       />
     </UTooltip>
   </UAvatarGroup>

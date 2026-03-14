@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { ToastProviderProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toaster'
 import type { ComponentConfig } from '../types/tv'
@@ -37,7 +38,7 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
 }
 
 export interface ToasterSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 
 export default {

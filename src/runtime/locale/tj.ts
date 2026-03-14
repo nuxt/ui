@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Фиристодан'
     },
+    chatReasoning: {
+      thinking: 'Фикр мекунад…',
+      thought: 'Фикр кард',
+      thoughtFor: '{duration} фикр кард'
+    },
     colorMode: {
       dark: 'Торик',
       light: 'Рӯшно',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Мундариҷа'
+    },
+    dropdownMenu: {
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
+      search: 'Ҷустуҷӯ…'
     },
     dashboardSearch: {
       theme: 'Мавзӯъ'
@@ -111,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Нусха бардоштан'
       }
+    },
+    sidebar: {
+      close: 'Бастан',
+      toggle: 'Иваз кардан'
     },
     selectMenu: {
       create: '"{label}" созед',

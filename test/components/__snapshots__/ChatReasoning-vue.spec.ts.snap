@@ -1,0 +1,99 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ChatReasoning > renders with chevron leading correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0 transition-colors"><span data-slot="leading" class="relative size-4 shrink-0"><!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="chevronIcon" class="size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200"></svg></span><span data-slot="label" class="truncate">Thought</span>
+    <!--v-if-->
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="max-h-[200px] pt-2 overflow-y-auto text-sm text-dimmed whitespace-pre-wrap">The user is asking about Vue components...</div>
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with chevronIcon correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0 transition-colors">
+    <!--v-if--><span data-slot="label" class="truncate">Thought</span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200"></svg>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="max-h-[200px] pt-2 overflow-y-auto text-sm text-dimmed whitespace-pre-wrap">The user is asking about Vue components...</div>
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with class correctly 1`] = `
+"<div data-state="closed" data-slot="root" class="my-5"><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0 transition-colors">
+    <!--v-if--><span data-slot="label" class="truncate">Thought</span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200"></svg>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="max-h-[200px] pt-2 overflow-y-auto text-sm text-dimmed whitespace-pre-wrap">The user is asking about Vue components...</div>
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with default slot correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0 transition-colors">
+    <!--v-if--><span data-slot="label" class="truncate">Thought</span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200"></svg>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="max-h-[200px] pt-2 overflow-y-auto text-sm text-dimmed whitespace-pre-wrap">Custom reasoning content</div>
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with defaultOpen correctly 1`] = `
+"<div data-state="open" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="true" data-state="open" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0 transition-colors">
+    <!--v-if--><span data-slot="label" class="truncate">Thought</span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200"></svg>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">
+    <div data-slot="body" class="max-h-[200px] pt-2 overflow-y-auto text-sm text-dimmed whitespace-pre-wrap">The user is asking about Vue components...</div>
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with duration correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0 transition-colors">
+    <!--v-if--><span data-slot="label" class="truncate">Thought for 5 seconds</span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200"></svg>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="max-h-[200px] pt-2 overflow-y-auto text-sm text-dimmed whitespace-pre-wrap">The user is asking about Vue components...</div>
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with icon correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0 transition-colors"><span data-slot="leading" class="relative size-4 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="size-4 shrink-0"></svg><!--v-if--></span><span data-slot="label" class="truncate">Thought</span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200"></svg></button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="max-h-[200px] pt-2 overflow-y-auto text-sm text-dimmed whitespace-pre-wrap">The user is asking about Vue components...</div>
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with streaming correctly 1`] = `
+"<div data-state="open" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="true" data-state="open" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0 transition-colors">
+    <!--v-if--><span style="--spread: 22px; --duration: 2s;" data-slot="label" class="text-transparent bg-clip-text bg-no-repeat bg-size-[calc(200%+var(--spread)*2+2px)_100%,auto] bg-[image:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--ui-text-highlighted),#0000_calc(50%+var(--spread))),linear-gradient(var(--ui-text-muted),var(--ui-text-muted))] animate-[shimmer_var(--duration)_linear_infinite] rtl:animate-[shimmer-rtl_var(--duration)_linear_infinite] will-change-[background-position] truncate">Thinking...</span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200"></svg>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">
+    <div data-slot="body" class="max-h-[200px] pt-2 overflow-y-auto text-sm text-dimmed whitespace-pre-wrap"></div>
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with text correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0 transition-colors">
+    <!--v-if--><span data-slot="label" class="truncate">Thought</span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200"></svg>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="max-h-[200px] pt-2 overflow-y-auto text-sm text-dimmed whitespace-pre-wrap">The user is asking about Vue components...</div>
+  </div>
+</div>"
+`;
+
+exports[`ChatReasoning > renders with ui correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0 transition-colors">
+    <!--v-if--><span data-slot="label" class="truncate">Thought</span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200"></svg>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="max-h-[200px] pt-2 overflow-y-auto text-sm whitespace-pre-wrap text-muted">The user is asking about Vue components...</div>
+  </div>
+</div>"
+`;

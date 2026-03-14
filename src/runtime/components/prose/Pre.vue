@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/pre'
 import type { IconProps } from '../../types'
@@ -19,7 +20,7 @@ export interface ProsePreProps {
 }
 
 export interface ProsePreSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
@@ -67,16 +68,3 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.pre |
     <pre :class="ui.base({ class: [uiProp?.base, props.class] })" v-bind="$attrs"><slot /></pre>
   </div>
 </template>
-
-<style>
-.shiki span.line {
-  display: block;
-}
-
-.shiki span.line.highlight {
-  margin: 0 -16px;
-  padding: 0 16px;
-
-  @apply bg-(--ui-bg-accented)/50;
-}
-</style>

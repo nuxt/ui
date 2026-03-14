@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/header'
 import type { ButtonProps, DrawerProps, ModalProps, SlideoverProps, LinkPropsKeys } from '../types'
@@ -46,15 +47,15 @@ export interface HeaderProps<T extends HeaderMode = HeaderMode> {
 }
 
 export interface HeaderSlots {
-  title(props?: {}): any
-  left(props?: {}): any
-  default(props?: {}): any
-  right(props?: {}): any
-  toggle(props: { open: boolean, toggle: () => void, ui: Header['ui'] }): any
-  top(props?: {}): any
-  bottom(props?: {}): any
-  body(props?: {}): any
-  content(props: { close?: () => void }): any
+  title?(props?: {}): VNode[]
+  left?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  right?(props?: {}): VNode[]
+  toggle?(props: { open: boolean, toggle: () => void, ui: Header['ui'] }): VNode[]
+  top?(props?: {}): VNode[]
+  bottom?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  content?(props: { close?: () => void }): VNode[]
 }
 </script>
 

@@ -1,12 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import ChangelogVersion from '../../src/runtime/components/ChangelogVersion.vue'
-import type { ChangelogVersionProps, ChangelogVersionSlots } from '../../src/runtime/components/ChangelogVersion.vue'
-import ComponentRender from '../component-render'
 
 describe('ChangelogVersion', () => {
-  it.each([
+  renderEach(ChangelogVersion, [
     // Props
     ['with title', { props: { title: 'Title' } }],
     ['with description', { props: { description: 'Description' } }],
@@ -15,7 +14,7 @@ describe('ChangelogVersion', () => {
     ['with to & image', { props: { to: '/changelog', image: 'https://picsum.photos/640/360' } }],
     ['with date', { props: { date: '2025-01-01' } }],
     ['with badge', { props: { badge: 'Badge' } }],
-    ['with badge object', { props: { badge: { label: 'Badge', color: 'primary' as const } } }],
+    ['with badge object', { props: { badge: { label: 'Badge', color: 'primary' } } }],
     ['with authors', { props: { authors: [{ name: 'Benjamin Canac', description: 'benjamincanac', avatar: { src: 'https://github.com/benjamincanac.png', alt: 'benjamincanac' } }] } }],
     ['without indicator', { props: { indicator: false } }],
     ['with as', { props: { as: 'section' } }],
@@ -35,10 +34,7 @@ describe('ChangelogVersion', () => {
     ['with authors slot', { slots: { authors: () => 'Authors slot' } }],
     ['with actions slot', { slots: { actions: () => 'Actions slot' } }],
     ['with indicator slot', { slots: { indicator: () => 'Indicator slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChangelogVersionProps, slots?: Partial<ChangelogVersionSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, ChangelogVersion)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ChangelogVersion, {

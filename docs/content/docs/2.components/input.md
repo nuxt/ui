@@ -149,6 +149,7 @@ ignore:
 props:
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   size: md
   variant: outline
   placeholder: 'Search...'

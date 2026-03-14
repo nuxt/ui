@@ -2,7 +2,7 @@ import type { ModuleOptions } from '../../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]',
+    root: 'sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]',
     container: 'pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col',
     top: '',
     bottom: 'hidden lg:flex lg:flex-col gap-6',
@@ -53,15 +53,13 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     active: true,
     class: {
-      link: `text-${color}`,
-      linkLeadingIcon: `text-${color}`
+      link: `text-${color}`
     }
   })), {
     color: 'neutral',
     active: true,
     class: {
-      link: 'text-highlighted',
-      linkLeadingIcon: 'text-highlighted'
+      link: 'text-highlighted'
     }
   }],
   defaultVariants: {

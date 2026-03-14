@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -49,7 +50,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
    * @defaultValue true
    */
-  searchInput?: boolean | InputProps
+  searchInput?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   /**
    * @defaultValue 'primary'
    */
@@ -94,8 +95,8 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   content?: Omit<ComboboxContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ComboboxContentEmits>>
   /**
    * Display an arrow alongside the menu.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
-   * @IconifyIcon
    */
   arrow?: boolean | Omit<ComboboxArrowProps, 'as' | 'asChild'>
   /**
@@ -186,7 +187,7 @@ export interface SelectMenuEmits<
   'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>]
 }
 
-type SlotProps<T extends SelectMenuItem> = (props: { item: T, index: number, ui: SelectMenu['ui'] }) => any
+type SlotProps<T extends SelectMenuItem> = (props: { item: T, index: number, ui: SelectMenu['ui'] }) => VNode[]
 
 export interface SelectMenuSlots<
   A extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>,
@@ -196,30 +197,30 @@ export interface SelectMenuSlots<
   C extends boolean | object = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: {
-    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
+  'leading'?(props: {
+    modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
     open: boolean
     ui: SelectMenu['ui']
-  }): any
-  'default'(props: {
-    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
+  }): VNode[]
+  'default'?(props: {
+    modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
     open: boolean
     ui: SelectMenu['ui']
-  }): any
-  'trailing'(props: {
-    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
+  }): VNode[]
+  'trailing'?(props: {
+    modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
     open: boolean
     ui: SelectMenu['ui']
-  }): any
-  'empty'(props: { searchTerm?: string }): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label'(props: { item: T, index: number }): any
-  'item-description'(props: { item: T, index: number }): any
-  'item-trailing': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
-  'create-item-label'(props: { item: string }): any
+  }): VNode[]
+  'empty'?(props: { searchTerm: string }): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?(props: { item: T, index: number }): VNode[]
+  'item-description'?(props: { item: T, index: number }): VNode[]
+  'item-trailing'?: SlotProps<T>
+  'content-top'?: (props?: {}) => VNode[]
+  'content-bottom'?: (props?: {}) => VNode[]
+  'create-item-label'?(props: { item: string }): VNode[]
 }
 </script>
 
@@ -270,7 +271,7 @@ const { filterGroups } = useFilter()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'by'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
-const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps)
 const clearProps = computed(() => typeof props.clear === 'object' ? props.clear : {} as Partial<Omit<ButtonProps, LinkPropsKeys>>)
 
 const virtualizerProps = toRef(() => {
@@ -280,7 +281,7 @@ const virtualizerProps = toRef(() => {
     estimateSize: getEstimateSize(filteredItems.value, selectSize.value || 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
-const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps<string>)
+const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)

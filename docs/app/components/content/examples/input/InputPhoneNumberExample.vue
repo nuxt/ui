@@ -13,6 +13,7 @@ const phone = ref('')
 const countryCode = ref('US')
 
 const { data: phoneCodes, status, execute } = await useLazyFetch<PhoneCode[]>('/api/phone-codes.json', {
+  key: 'api-phone-codes',
   immediate: false
 })
 

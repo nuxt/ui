@@ -1,9 +1,9 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Tree from '../../src/runtime/components/Tree.vue'
-import type { TreeProps, TreeSlots, TreeItem } from '../../src/runtime/components/Tree.vue'
-import ComponentRender from '../component-render'
+import type { TreeItem } from '../../src/runtime/components/Tree.vue'
 import theme from '#build/ui/tree'
 import { expectEmitPayloadType } from '../utils/types'
 
@@ -30,7 +30,7 @@ describe('Tree', () => {
 
   const props = { items }
 
-  it.each([
+  renderEach(Tree, [
     // Props
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: items[0] } }],
@@ -71,10 +71,7 @@ describe('Tree', () => {
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'leading slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'trailing slot' } }],
     ['with dynamic slot', { props, slots: { app: () => 'dynamic slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: Partial<TreeProps>, slots?: Partial<TreeSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Tree)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Tree, {

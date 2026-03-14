@@ -7,7 +7,8 @@ const users = ref([
     target: '_blank',
     avatar: {
       src: 'https://github.com/benjamincanac.png',
-      alt: 'benjamincanac'
+      alt: 'benjamincanac',
+      loading: 'lazy' as const
     }
   },
   {
@@ -17,7 +18,8 @@ const users = ref([
     target: '_blank',
     avatar: {
       src: 'https://github.com/romhml.png',
-      alt: 'romhml'
+      alt: 'romhml',
+      loading: 'lazy' as const
     }
   },
   {
@@ -27,7 +29,8 @@ const users = ref([
     target: '_blank',
     avatar: {
       src: 'https://github.com/atinux.png',
-      alt: 'atinux'
+      alt: 'atinux',
+      loading: 'lazy' as const
     }
   },
   {
@@ -37,7 +40,8 @@ const users = ref([
     target: '_blank',
     avatar: {
       src: 'https://github.com/HugoRCD.png',
-      alt: 'HugoRCD'
+      alt: 'HugoRCD',
+      loading: 'lazy' as const
     }
   },
   {
@@ -47,7 +51,8 @@ const users = ref([
     target: '_blank',
     avatar: {
       src: 'https://github.com/sandros94.png',
-      alt: 'sandros94'
+      alt: 'sandros94',
+      loading: 'lazy' as const
     }
   },
   {
@@ -57,7 +62,8 @@ const users = ref([
     target: '_blank',
     avatar: {
       src: 'https://github.com/danielroe.png',
-      alt: 'danielroe'
+      alt: 'danielroe',
+      loading: 'lazy' as const
     }
   },
   {
@@ -67,7 +73,8 @@ const users = ref([
     target: '_blank',
     avatar: {
       src: 'https://github.com/J-Michalek.png',
-      alt: 'J-Michalek'
+      alt: 'J-Michalek',
+      loading: 'lazy' as const
     }
   },
   {
@@ -77,7 +84,8 @@ const users = ref([
     target: '_blank',
     avatar: {
       src: 'https://github.com/genu.png',
-      alt: 'genu'
+      alt: 'genu',
+      loading: 'lazy' as const
     }
   }
 ])

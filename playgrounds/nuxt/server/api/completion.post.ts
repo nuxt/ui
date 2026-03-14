@@ -51,7 +51,7 @@ CRITICAL RULES:
   }
 
   return streamText({
-    model: gateway('openai/gpt-4o-mini'),
+    model: gateway('anthropic/claude-haiku-4.5'),
     system,
     prompt,
     maxOutputTokens
