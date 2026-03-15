@@ -84,6 +84,32 @@ describe('Tree', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
+  it('items with duplicate labels at different levels have independent expand state', async () => {
+    const duplicateItems: TreeItem[] = [
+      { label: 'references', defaultExpanded: true, children: [{ label: 'nuxt.md' }] },
+      { label: 'module', defaultExpanded: true, children: [
+        { label: 'references', defaultExpanded: true, children: [{ label: 'querying.md' }] }
+      ] }
+    ]
+
+    const wrapper = await mountSuspended(Tree, { props: { items: duplicateItems } })
+
+    // All 5 items should be visible (both "references" expanded + "module" expanded)
+    const links = wrapper.findAll('[data-slot="link"]')
+    expect(links.length).toBe(5)
+
+    // Click the nested "references" (3rd link with children: references, module, references)
+    const nestedReferences = links[3]!
+    expect(nestedReferences.find('[data-slot="linkLabel"]').text()).toBe('references')
+    await nestedReferences.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    // Root "references" children should still be visible
+    const updatedLinks = wrapper.findAll('[data-slot="link"]')
+    const labels = updatedLinks.map(l => l.find('[data-slot="linkLabel"]').text())
+    expect(labels).toContain('nuxt.md')
+  })
+
   test('should have the correct types', () => {
     expectEmitPayloadType('update:modelValue', () => Tree({
       items: [{ label: 'foo' }, { label: 'baz' }]

@@ -142,7 +142,7 @@ export type TreeSlots<
 </script>
 
 <script setup lang="ts" generic="T extends TreeItem[], M extends boolean = false">
-import { computed, toRef, useTemplateRef } from 'vue'
+import { computed, toRaw, toRef, useTemplateRef } from 'vue'
 import { TreeRoot, TreeItem, TreeVirtualizer, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { defu } from 'defu'
@@ -228,10 +228,22 @@ function getItemLabel<Item extends T[number]>(item: Item): string {
   return get(item, props.labelKey as string)
 }
 
+const itemPathMap = computed(() => {
+  const map = new WeakMap<object, string>()
+  function walk(items: T[number][], prefix: string) {
+    items?.forEach((item, i) => {
+      const path = prefix ? `${prefix}-${i}` : `${i}`
+      map.set(toRaw(item) as object, path)
+      if (item.children) walk(item.children, path)
+    })
+  }
+  walk(props.items as T[number][], '')
+  return map
+})
+
 function getItemKey<Item extends T[number]>(item: Item): string {
-  return props.getKey
-    ? props.getKey(item) || getItemLabel(item)
-    : getItemLabel(item)
+  if (props.getKey) return props.getKey(item) || getItemLabel(item)
+  return itemPathMap.value.get(toRaw(item) as object) ?? getItemLabel(item)
 }
 
 function getDefaultOpenedItems(item: T[number]): string[] {
