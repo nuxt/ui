@@ -136,6 +136,7 @@ defineShortcuts(extractShortcuts(teamsItems.value))
       v-model:open="open"
       collapsible="icon"
       rail
+      resizable
       :ui="{
         container: 'h-full',
         inner: 'bg-elevated/25 divide-transparent',

@@ -2,6 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/sidebar'
+import type { UseResizableProps } from '../composables/useResizable'
 import type { ButtonProps, DrawerProps, IconProps, ModalProps, SlideoverProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
@@ -11,7 +12,7 @@ type SidebarState = 'expanded' | 'collapsed'
 type SidebarMode = 'modal' | 'slideover' | 'drawer'
 type SidebarMenu<T> = T extends 'modal' ? ModalProps : T extends 'slideover' ? SlideoverProps : T extends 'drawer' ? DrawerProps : never
 
-export interface SidebarProps<T extends SidebarMode = SidebarMode> {
+export interface SidebarProps<T extends SidebarMode = SidebarMode> extends Pick<UseResizableProps, 'id' | 'minSize' | 'maxSize' | 'defaultSize' | 'collapsedSize'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'aside'
@@ -58,10 +59,18 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
   closeIcon?: IconProps['name']
   /**
    * Display a rail on the sidebar edge to toggle collapse.
-   * Only renders when `collapsible` is not `none`.
+   * When `resizable` is also enabled, the rail acts as a drag-to-resize handle.
    * @defaultValue false
    */
   rail?: boolean
+  /**
+   * Whether to allow the user to resize the sidebar by dragging the rail.
+   * Requires `rail` to be enabled. Drag to resize between `minSize` and `maxSize`.
+   * When `collapsible` is not `none`, dragging below `minSize` snaps to collapsed.
+   * Double-click the rail to reset to `defaultSize`.
+   * @defaultValue false
+   */
+  resizable?: boolean
   /**
    * The mode of the sidebar menu on mobile.
    * @defaultValue 'slideover'
@@ -89,13 +98,14 @@ export interface SidebarSlots {
 </script>
 
 <script setup lang="ts" generic="T extends SidebarMode">
-import { computed, onMounted, ref, toRef, watch } from 'vue'
+import { computed, onMounted, ref, toRef, useId, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { createReusableTemplate, useMediaQuery } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
+import { useResizable } from '../composables/useResizable'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import USlideover from './Slideover.vue'
@@ -111,6 +121,11 @@ const props = withDefaults(defineProps<SidebarProps<T>>(), {
   side: 'left',
   close: false,
   rail: false,
+  resizable: false,
+  minSize: 12,
+  maxSize: 24,
+  defaultSize: 16,
+  collapsedSize: 0,
   mode: 'slideover' as never
 })
 const slots = defineSlots<SidebarSlots>()
@@ -172,6 +187,59 @@ watch(openMobile, (value) => {
 const { t } = useLocale()
 const appConfig = useAppConfig() as Sidebar['AppConfig']
 const uiProp = useComponentUI('sidebar', props)
+
+// Resizable rail integration
+const isResizable = computed(() => props.rail && props.resizable)
+const canCollapse = computed(() => isResizable.value && props.collapsible !== 'none')
+const sidebarId = `sidebar-${props.id || useId()}`
+const desktopCollapsed = ref(!modelOpen.value)
+
+const { el: containerEl, size: sidebarSize, isDragging, isCollapsed, onMouseDown: handleMouseDown, onTouchStart: handleTouchStart, onDoubleClick: handleDoubleClick, collapse } = useResizable(sidebarId, computed(() => ({
+  side: props.side,
+  minSize: props.minSize,
+  maxSize: props.maxSize,
+  defaultSize: props.defaultSize,
+  resizable: isResizable.value,
+  collapsible: canCollapse.value,
+  collapsedSize: props.collapsedSize || Math.max(0, props.minSize - 8),
+  unit: 'rem' as const,
+  persistent: true,
+  storage: 'cookie' as const
+})), { collapsed: desktopCollapsed })
+
+// Track whether mousedown resulted in a drag (to distinguish click vs drag on the rail)
+let didDrag = false
+
+function onRailMouseDown(e: MouseEvent) {
+  didDrag = false
+  const startX = e.clientX
+  const onMove = (ev: MouseEvent) => { if (Math.abs(ev.clientX - startX) > 3) didDrag = true }
+  const onUp = () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp) }
+  document.addEventListener('mousemove', onMove)
+  document.addEventListener('mouseup', onUp)
+  handleMouseDown(e)
+}
+
+function onRailClick() {
+  if (!isResizable.value) return (open.value = !open.value)
+  if (!didDrag && canCollapse.value) collapse(!isCollapsed.value)
+}
+
+// Dynamic cursor: ew-resize (bidirectional) by default, directional at bounds
+const railCursor = computed(() => {
+  if (!isResizable.value) return undefined
+  if (isCollapsed.value) return props.side === 'left' ? 'e-resize' : 'w-resize'
+  if (expandedWidth.value >= props.maxSize) return props.side === 'left' ? 'w-resize' : 'e-resize'
+  return 'ew-resize'
+})
+
+// Track expanded width for --sidebar-width (so offcanvas slide-out uses the correct value when collapsed)
+const expandedWidth = ref(props.defaultSize)
+watch(sidebarSize, (v) => { if (!isCollapsed.value) expandedWidth.value = v }, { immediate: true })
+
+// Sync useResizable collapse ↔ open model
+watch(isCollapsed, (collapsed) => { if (!isMobile.value && canCollapse.value) modelOpen.value = !collapsed })
+watch(modelOpen, (v) => { if (!isMobile.value && canCollapse.value && isCollapsed.value === v) collapse(!v) })
 
 const state = computed<SidebarState>(() => open.value ? 'expanded' : 'collapsed')
 
@@ -279,7 +347,12 @@ const menuProps = toRef(() => defu(props.menu, {
       :data-collapsible="state === 'collapsed' ? collapsible : undefined"
       :data-variant="variant"
       :data-side="side"
+      :data-dragging="isDragging || undefined"
       :class="ui.root({ class: [uiProp?.root, props.class] })"
+      :style="isResizable ? {
+        '--sidebar-width': `${expandedWidth}rem`,
+        ...(props.collapsedSize && props.collapsible === 'icon' ? { '--sidebar-width-icon': `${props.collapsedSize}rem` } : {})
+      } : undefined"
     >
       <!-- Gap spacer: reserves layout space for the fixed sidebar -->
       <div
@@ -290,6 +363,7 @@ const menuProps = toRef(() => defu(props.menu, {
 
       <!-- Fixed container: the actual visible sidebar -->
       <div
+        :ref="isResizable ? (el: any) => { containerEl = el } : undefined"
         data-slot="container"
         :data-state="state"
         :class="ui.container({ class: uiProp?.container })"
@@ -303,7 +377,11 @@ const menuProps = toRef(() => defu(props.menu, {
             :aria-label="t('sidebar.toggle')"
             :tabindex="-1"
             :class="ui.rail({ class: uiProp?.rail })"
-            @click="open = !open"
+            :style="railCursor ? { cursor: railCursor } : undefined"
+            @mousedown="isResizable ? onRailMouseDown($event) : undefined"
+            @touchstart="isResizable && !isCollapsed ? handleTouchStart($event) : undefined"
+            @dblclick="isResizable ? handleDoubleClick($event) : undefined"
+            @click="onRailClick"
           />
         </slot>
       </div>

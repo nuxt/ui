@@ -14,7 +14,7 @@ navigation.badge: New
 The Sidebar component is a standalone, fixed sidebar that pushes the page content. On desktop, it renders inline and can be collapsed; on mobile, it opens a [Modal](/docs/components/modal), [Slideover](/docs/components/slideover) or [Drawer](/docs/components/drawer) component.
 
 ::tip{to="/docs/components/dashboard-sidebar"}
-**Sidebar vs DashboardSidebar**: This component is a simple, standalone sidebar you can drop anywhere (chat panel, settings, navigation). If you need drag-to-resize, state persistence and integration with [DashboardGroup](/docs/components/dashboard-group), use [DashboardSidebar](/docs/components/dashboard-sidebar) instead.
+**Sidebar vs DashboardSidebar**: This component is a standalone sidebar you can drop anywhere (chat panel, settings, navigation) with optional drag-to-resize and state persistence. If you need integration with [DashboardGroup](/docs/components/dashboard-group) use [DashboardSidebar](/docs/components/dashboard-sidebar) instead.
 ::
 
 Use the `header`, `default` and `footer` slots to customize the sidebar content. The `v-model:open` directive is viewport-aware: on desktop it controls the expanded/collapsed state, on mobile it controls the menu.
@@ -191,6 +191,84 @@ class: '!p-0 !justify-start h-[500px] contain-[paint]'
 :placeholder{class="h-full"}
 ::
 
+### Resizable
+
+Use the `resizable` prop to make the sidebar resizable by dragging the rail. Requires `rail` to be enabled.
+
+::component-code
+---
+prettier: true
+ignore:
+  - rail
+  - collapsible
+  - title
+  - ui.container
+hide:
+  - minSize
+  - defaultSize
+  - maxSize
+  - ui
+  - class
+props:
+  rail: true
+  resizable: true
+  collapsible: icon
+  minSize: 12
+  defaultSize: 16
+  maxSize: 24
+  title: Navigation
+  ui.container: h-full
+items:
+  resizable:
+    - true
+    - false
+slots:
+  default: |
+
+    <Placeholder class="h-full" />
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
+---
+
+:placeholder{class="h-full"}
+::
+
+When `collapsible` is not `none`, dragging below `min-size` snaps the sidebar to its collapsed state. Click the rail to toggle collapsed, or double-click to reset to `default-size`.
+
+### Size
+
+Use the `min-size`, `max-size`, `default-size` and `collapsed-size` props to customize the size of the sidebar in `rem`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - rail
+  - resizable
+  - title
+  - ui.container
+hide:
+  - ui
+  - class
+props:
+  rail: true
+  resizable: true
+  collapsible: icon
+  minSize: 14
+  defaultSize: 18
+  maxSize: 28
+  collapsedSize: 10
+  title: Navigation
+  ui.container: h-full
+slots:
+  default: |
+
+    <Placeholder class="h-full" />
+class: '!p-0 !justify-start h-[500px] contain-[paint]'
+---
+
+:placeholder{class="h-full"}
+::
+
 ### Close
 
 Use the `close` prop to display a close button in the sidebar header. The close button is only rendered when `collapsible` is not `none`.
@@ -348,9 +426,9 @@ The only difference with the previous example is replacing `ref(true)` with `use
 
 ### With custom width
 
-The sidebar width is controlled by the `--sidebar-width` CSS variable (defaults to `16rem`). The collapsed icon width is controlled by `--sidebar-width-icon` (defaults to `4rem`).
+When using the `resizable` prop, the sidebar width is controlled by the `default-size`, `min-size` and `max-size` props. Without `resizable`, the width is controlled by the `--sidebar-width` CSS variable (defaults to `16rem`). The collapsed icon width is controlled by `--sidebar-width-icon` (defaults to `4rem`).
 
-Override them globally in your CSS or per-instance with the `style` attribute.
+Override the CSS variables globally in your CSS or per-instance with the `style` attribute.
 
 ::component-example
 ---

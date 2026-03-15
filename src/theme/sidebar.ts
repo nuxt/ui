@@ -3,8 +3,8 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'peer [--sidebar-width:16rem] [--sidebar-width-icon:4rem]',
-    gap: 'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',
-    container: 'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear lg:flex',
+    gap: 'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-out group-data-[dragging=true]/sidebar:!duration-0',
+    container: 'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-out lg:flex group-data-[dragging=true]/sidebar:!duration-0',
     inner: 'flex size-full flex-col overflow-hidden divide-y divide-default',
     header: 'flex items-center gap-1.5 overflow-hidden px-4 min-h-(--ui-header-height)',
     wrapper: 'min-w-0 flex-1',
@@ -14,7 +14,7 @@ export default (options: Required<ModuleOptions>) => ({
     close: '',
     body: 'flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4',
     footer: 'flex items-center gap-1.5 overflow-hidden p-4',
-    rail: ['absolute inset-y-0 z-20 hidden w-4 transition-all ease-linear after:absolute after:inset-y-0 after:left-1/2 after:w-px lg:flex hover:after:bg-(--ui-border-accented)', options.theme.transitions && 'after:transition-colors']
+    rail: ['absolute inset-y-0 z-20 hidden w-4 transition-all ease-out after:absolute after:inset-y-0 after:left-1/2 after:w-px lg:flex hover:after:bg-(--ui-border-accented)', options.theme.transitions && 'after:transition-colors']
   },
   variants: {
     side: {
