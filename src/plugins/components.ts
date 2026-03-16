@@ -64,7 +64,17 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
     [...colorModeIgnore, 'content/*.vue', 'prose/**/*.vue']
   )
 
-  const sources = [routerOverrides[routerMode], unpluginComponents, defaultComponents].filter((s): s is ComponentSource => !!s)
+  const sources: (ComponentSource | undefined)[] = [routerOverrides[routerMode], unpluginComponents, defaultComponents]
+
+  if (options.prose || options.mdc || options.content) {
+    sources.push(createComponentSource(join(runtimeDir, 'components/prose'), 'Prose'))
+  }
+
+  if (options.content) {
+    sources.push(createComponentSource(join(runtimeDir, 'components/content'), options.prefix))
+  }
+
+  const filteredSources = sources.filter((s): s is ComponentSource => !!s)
   const packagesToScan = [
     '@nuxt/ui',
     '@compodium/examples',
@@ -92,7 +102,7 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
 
       const filename = id.match(/([^/]+)\.vue$/)?.[1]
       if (filename) {
-        for (const source of sources) {
+        for (const source of filteredSources) {
           const resolved = source.resolveFile(filename)
           if (resolved) return resolved
         }
@@ -113,7 +123,7 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
     ],
     resolvers: [
       (componentName) => {
-        for (const source of sources) {
+        for (const source of filteredSources) {
           const resolved = source.resolve(componentName)
           if (resolved) return resolved
         }

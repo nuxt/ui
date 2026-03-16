@@ -82,11 +82,20 @@ export interface ModuleOptions {
   /**
    * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
    * @defaultValue false
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#prose
+   */
+  prose?: boolean
+
+  /**
+   * @deprecated Use `prose` instead
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#mdc
    */
   mdc?: boolean
+
   /**
    * Force the import of content & prose components even if `@nuxt/content` is not installed
    * @defaultValue false
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#content
    */
   content?: boolean
 
@@ -152,7 +161,7 @@ export default defineNuxtModule<ModuleOptions>({
         }
       },
       '@nuxtjs/mdc': {
-        optional: !userUiOptions.mdc && !userUiOptions.content,
+        optional: !userUiOptions.prose && !userUiOptions.mdc && !userUiOptions.content,
         defaults: {
           highlight: {
             theme: {
@@ -219,7 +228,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
 
-    if (options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
+    if (options.prose || options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
       addComponentsDir({
         path: resolve('./runtime/components/prose'),
         pathPrefix: false,
@@ -251,7 +260,7 @@ export default defineNuxtModule<ModuleOptions>({
       path: resolve('./runtime/components'),
       pathPrefix: false,
       prefix: options.prefix,
-      ignore: ['color-mode/**', 'content/**', 'prose/**']
+      ignore: ['color-mode/**', 'content/**', 'prose/**', 'index.ts']
     })
 
     addImports(
