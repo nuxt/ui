@@ -213,8 +213,13 @@ let didDrag = false
 function onRailMouseDown(e: MouseEvent) {
   didDrag = false
   const startX = e.clientX
-  const onMove = (ev: MouseEvent) => { if (Math.abs(ev.clientX - startX) > 3) didDrag = true }
-  const onUp = () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp) }
+  const onMove = (ev: MouseEvent) => {
+    if (Math.abs(ev.clientX - startX) > 3) didDrag = true
+  }
+  const onUp = () => {
+    document.removeEventListener('mousemove', onMove)
+    document.removeEventListener('mouseup', onUp)
+  }
   document.addEventListener('mousemove', onMove)
   document.addEventListener('mouseup', onUp)
   handleMouseDown(e)
