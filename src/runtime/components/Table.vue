@@ -99,7 +99,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   meta?: TableMeta<T>
   /**
    * Enable virtualization for large datasets.
-   * Note: when enabled, the divider between rows and sticky properties are not supported.
+   * Note: when enabled, the divider between rows, sticky and row pinning properties are not supported.
    * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
    * @defaultValue false
    */
@@ -416,8 +416,8 @@ const tableApi = useVueTable({
 })
 
 const rows = computed(() => tableApi.getRowModel().rows)
-const topRows = computed(() => tableApi.getTopRows())
-const bottomRows = computed(() => tableApi.getBottomRows())
+const topRows = computed(() => props.virtualize ? [] : tableApi.getTopRows())
+const bottomRows = computed(() => props.virtualize ? [] : tableApi.getBottomRows())
 const centerRows = computed(() => topRows.value.length || bottomRows.value.length ? tableApi.getCenterRows() : rows.value)
 
 const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
