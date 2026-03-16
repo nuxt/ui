@@ -19,7 +19,7 @@ export default function AutoImportPlugin(options: NuxtUIOptions, meta: UnpluginC
     dts: options.dts ?? true,
     imports: [
       ...Object.entries(publicComposables).map(([file, names]) => ({
-        from: join(runtimeDir, 'composables', `${file}.ts`),
+        from: join(runtimeDir, 'composables', file),
         imports: names
       }))
     ],
