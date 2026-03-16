@@ -125,7 +125,7 @@ const props = withDefaults(defineProps<SidebarProps<T>>(), {
   minSize: 12,
   maxSize: 24,
   defaultSize: 16,
-  collapsedSize: 0,
+  collapsedSize: undefined,
   mode: 'slideover' as never
 })
 const slots = defineSlots<SidebarSlots>()
@@ -206,6 +206,11 @@ const { el: containerEl, size: sidebarSize, isDragging, isCollapsed, onMouseDown
   persistent: true,
   storage: 'cookie' as const
 })), { collapsed: desktopCollapsed })
+
+// Sync initial persisted collapsed state to open model
+if (!isMobile.value && canCollapse.value && isCollapsed.value) {
+  modelOpen.value = false
+}
 
 // Track whether mousedown resulted in a drag (to distinguish click vs drag on the rail)
 let didDrag = false
