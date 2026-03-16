@@ -17,10 +17,13 @@ export default function AutoImportPlugin(options: NuxtUIOptions, meta: UnpluginC
 
   const pluginOptions = defu(options.autoImport, <AutoImportOptions>{
     dts: options.dts ?? true,
-    dirs: [
-      ...Object.keys(publicComposables).map(name => join(runtimeDir, 'composables', `${name}.ts`)),
-      join(runtimeDir, 'vue/composables')
-    ]
+    imports: [
+      ...Object.entries(publicComposables).map(([file, names]) => ({
+        from: join(runtimeDir, 'composables', `${file}.ts`),
+        imports: names
+      }))
+    ],
+    dirs: [join(runtimeDir, 'vue/composables')]
   })
 
   return AutoImport.raw(pluginOptions, meta) as UnpluginOptions
