@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Küldés'
     },
+    chatReasoning: {
+      thinking: 'Gondolkodik…',
+      thought: 'Gondolkodott',
+      thoughtFor: '{duration} gondolkodott'
+    },
     colorMode: {
       dark: 'Sötét',
       light: 'Világos',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kód másolása a vágólapra'
       }
+    },
+    sidebar: {
+      close: 'Bezárás',
+      toggle: 'Váltás'
     },
     selectMenu: {
       create: '"{label}" létrehozása',

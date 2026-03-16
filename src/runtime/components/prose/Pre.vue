@@ -68,16 +68,3 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.pre |
     <pre :class="ui.base({ class: [uiProp?.base, props.class] })" v-bind="$attrs"><slot /></pre>
   </div>
 </template>
-
-<style>
-.shiki span.line {
-  display: block;
-}
-
-.shiki span.line.highlight {
-  margin: 0 -16px;
-  padding: 0 16px;
-
-  @apply bg-(--ui-bg-accented)/50;
-}
-</style>

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'প্রেরণ করুন'
     },
+    chatReasoning: {
+      thinking: 'ভাবছে…',
+      thought: 'ভেবেছে',
+      thoughtFor: '{duration} ভেবেছে'
+    },
     colorMode: {
       dark: 'গাঢ়',
       light: 'হালকা',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'কোড ক্লিপবোর্ডে কপি করুন'
       }
+    },
+    sidebar: {
+      close: 'বন্ধ করুন',
+      toggle: 'টগল করুন'
     },
     selectMenu: {
       create: '"{label}" তৈরি করুন',

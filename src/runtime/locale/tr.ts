@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Gönder'
     },
+    chatReasoning: {
+      thinking: 'Düşünüyor…',
+      thought: 'Düşündü',
+      thoughtFor: '{duration} düşündü'
+    },
     colorMode: {
       dark: 'Koyu',
       light: 'Açık',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kodu panoya kopyala'
       }
+    },
+    sidebar: {
+      close: 'Kapat',
+      toggle: 'Değiştir'
     },
     selectMenu: {
       create: '"{label}" oluştur',

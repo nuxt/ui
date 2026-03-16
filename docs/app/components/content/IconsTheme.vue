@@ -2,9 +2,9 @@
 import json5 from 'json5'
 import { themeIcons } from '../../utils/theme'
 
-const appConfig = useAppConfig()
+const { icon: iconSet } = useTheme()
 
-const icons = computed(() => themeIcons[appConfig.theme.icons as keyof typeof themeIcons || 'lucide'])
+const icons = computed(() => themeIcons[iconSet.value as keyof typeof themeIcons || 'lucide'])
 
 const { data: ast } = useAsyncData(`icons-theme`, async () => {
   const md = `

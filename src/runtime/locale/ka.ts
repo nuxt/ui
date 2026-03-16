@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'შეტყობინების გაგზავნა'
     },
+    chatReasoning: {
+      thinking: 'ფიქრობს…',
+      thought: 'იფიქრა',
+      thoughtFor: '{duration} ფიქრობდა'
+    },
     colorMode: {
       dark: 'ბნელი',
       light: 'ნათელი',
@@ -117,6 +122,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'კოდის კოპირება ბუფერში'
       }
+    },
+    sidebar: {
+      close: 'დახურვა',
+      toggle: 'გადართვა'
     },
     selectMenu: {
       create: 'დაამატე "{label}"', // "Create" translates as "შექმნა", but since we are simply adding new choice, creating sounds wrong, thus I chose to use "დაამატე", meaning "add".

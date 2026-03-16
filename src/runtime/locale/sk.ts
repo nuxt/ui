@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Odoslať'
     },
+    chatReasoning: {
+      thinking: 'Premýšľa…',
+      thought: 'Premýšľal',
+      thoughtFor: 'Premýšľal {duration}'
+    },
     colorMode: {
       dark: 'Tmavý',
       light: 'Svetlý',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopírovať kód do schránky'
       }
+    },
+    sidebar: {
+      close: 'Zatvoriť',
+      toggle: 'Prepnúť'
     },
     selectMenu: {
       create: 'Vytvoriť "{label}"',

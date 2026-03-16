@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Билдирүү жөнөтүү'
     },
+    chatReasoning: {
+      thinking: 'Ойлонуда…',
+      thought: 'Ойлонду',
+      thoughtFor: '{duration} ойлонду'
+    },
     colorMode: {
       dark: 'Караңгы',
       light: 'Жарык',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Кодду алмашуу буферине көчүрүү'
       }
+    },
+    sidebar: {
+      close: 'Жабуу',
+      toggle: 'Которуу'
     },
     selectMenu: {
       create: '"{label}" жасоо',

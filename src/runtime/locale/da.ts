@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Send'
     },
+    chatReasoning: {
+      thinking: 'Tænker…',
+      thought: 'Tænkte',
+      thoughtFor: 'Tænkte i {duration}'
+    },
     colorMode: {
       dark: 'Mørk',
       light: 'Lys',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopiér kode til udklipsholder'
       }
+    },
+    sidebar: {
+      close: 'Luk',
+      toggle: 'Skift'
     },
     selectMenu: {
       create: 'Opret "{label}"',

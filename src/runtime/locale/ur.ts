@@ -35,6 +35,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'پیغام بھیجیں'
     },
+    chatReasoning: {
+      thinking: 'سوچ رہا ہے…',
+      thought: 'سوچا',
+      thoughtFor: '{duration} سوچا'
+    },
     colorMode: {
       dark: 'تاریک',
       light: 'روشن',
@@ -116,6 +121,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'کوڈ کاپی کریں'
       }
+    },
+    sidebar: {
+      close: 'بند کریں',
+      toggle: 'ٹوگل کریں'
     },
     selectMenu: {
       create: '"{label}" بنائیں',

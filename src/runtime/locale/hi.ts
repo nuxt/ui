@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'भेजें'
     },
+    chatReasoning: {
+      thinking: 'सोच रहा है…',
+      thought: 'सोचा',
+      thoughtFor: '{duration} सोचा'
+    },
     colorMode: {
       dark: 'गहरा',
       light: 'हल्का',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'कोड को क्लिपबोर्ड पर कॉपी करें'
       }
+    },
+    sidebar: {
+      close: 'बंद करें',
+      toggle: 'टॉगल करें'
     },
     selectMenu: {
       create: '"{label}" बनाएँ',

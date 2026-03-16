@@ -14,7 +14,9 @@ export default defineNuxtConfig({
     'nuxt-component-meta',
     'nuxt-llms',
     'nuxt-og-image',
-    'motion-v/nuxt'
+    'motion-v/nuxt',
+    '@vercel/analytics',
+    '@vercel/speed-insights'
   ],
 
   $development: {
@@ -250,18 +252,6 @@ export default defineNuxtConfig({
       events: 'no-schema',
       exposed: false
     }
-  },
-
-  fonts: {
-    families: [
-      { name: 'Public Sans', provider: 'google', global: true },
-      { name: 'DM Sans', provider: 'google', global: true },
-      { name: 'Geist', provider: 'google', global: true },
-      { name: 'Inter', provider: 'google', global: true },
-      { name: 'Poppins', provider: 'google', global: true },
-      { name: 'Outfit', provider: 'google', global: true },
-      { name: 'Raleway', provider: 'google', global: true }
-    ]
   },
 
   icon: {
