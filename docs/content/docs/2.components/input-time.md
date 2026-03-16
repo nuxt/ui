@@ -1,11 +1,14 @@
 ---
 title: InputTime
-description: 'An input for selecting a time.'
+description: "An input for selecting a time."
 category: form
 links:
   - label: TimeField
     icon: i-custom-reka-ui
     to: https://reka-ui.com/docs/components/time-field
+  - label: TimeRangeField
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/time-range-field
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputTime.vue
@@ -15,32 +18,80 @@ links:
 
 Use the `v-model` directive to control the selected date.
 
-::component-code
----
+## ::component-code
+
 cast:
-  modelValue: TimeValue
+modelValue: TimeValue
 ignore:
-  - modelValue
-external:
-  - modelValue
-props:
+
+- modelValue
+  external:
+- modelValue
+  props:
   modelValue: [12, 30, 0]
+
 ---
+
 ::
 
 Use the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
----
+## ::component-code
+
 cast:
-  defaultValue: TimeValue
+defaultValue: TimeValue
 ignore:
-  - defaultValue
-external:
-  - defaultValue
-props:
+
+- defaultValue
+  external:
+- defaultValue
+  props:
   defaultValue: [12, 30, 0]
+
 ---
+
+::
+
+### Time Range
+
+Use the `range` prop to enable time range selection with start and end times.
+
+## ::component-code
+
+cast:
+modelValue: TimeRange
+ignore:
+
+- modelValue
+- range
+  external:
+- modelValue
+  props:
+  range: true
+  modelValue: { start: [9, 0, 0], end: [17, 30, 0] }
+
+---
+
+::
+
+Use the `default-value` prop to set the initial time range when you do not need to control its state.
+
+## ::component-code
+
+cast:
+defaultValue: TimeRange
+ignore:
+
+- defaultValue
+- range
+  external:
+- defaultValue
+  props:
+  range: true
+  defaultValue: { start: [8, 0, 0], end: [16, 30, 0] }
+
+---
+
 ::
 
 ::framework-only
@@ -59,31 +110,36 @@ This component uses the `@internationalized/date` package for locale-aware forma
 
 Use the `hour-cycle` prop to change the hour cycle of the InputTime. Defaults to `12`.
 
-::component-code
----
+## ::component-code
+
 cast:
-  defaultValue: TimeValue
+defaultValue: TimeValue
 ignore:
-  - hourCycle
-  - defaultValue
-external:
-  - defaultValue
-props:
+
+- hourCycle
+- defaultValue
+  external:
+- defaultValue
+  props:
   hourCycle: 24
   defaultValue: [16, 30, 0]
+
 ---
+
 ::
 
 ### Color
 
 Use the `color` prop to change the color of the InputTime.
 
-::component-code
----
+## ::component-code
+
 props:
-  color: neutral
-  highlight: true
+color: neutral
+highlight: true
+
 ---
+
 ::
 
 ::note
@@ -94,33 +150,39 @@ The `highlight` prop is used here to show the focus state. It's used internally 
 
 Use the `variant` prop to change the variant of the InputTime.
 
-::component-code
----
+## ::component-code
+
 props:
-  variant: subtle
+variant: subtle
+
 ---
+
 ::
 
 ### Size
 
 Use the `size` prop to change the size of the InputTime.
 
-::component-code
----
+## ::component-code
+
 props:
-  size: xl
+size: xl
+
 ---
+
 ::
 
 ### Icon
 
 Use the `icon` prop to show an [Icon](/docs/components/icon) inside the InputTime.
 
-::component-code
----
+## ::component-code
+
 props:
-  icon: 'i-lucide-clock'
+icon: 'i-lucide-clock'
+
 ---
+
 ::
 
 ::note
@@ -131,39 +193,67 @@ Use the `leading` and `trailing` props to set the icon position or the `leading-
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the InputTime.
 
-::component-code
----
+## ::component-code
+
 prettier: true
 props:
-  avatar:
-    src: 'https://github.com/vuejs.png'
-    loading: lazy
-  size: md
-  variant: outline
+avatar:
+src: 'https://github.com/vuejs.png'
+loading: lazy
+size: md
+variant: outline
+
 ---
+
 ::
 
 ### Disabled
 
 Use the `disabled` prop to disable the InputTime.
 
-::component-code
----
+## ::component-code
+
 props:
-  disabled: true
+disabled: true
+
 ---
+
 ::
 
 ## Examples
+
+### Time Range with Different Variants
+
+## ::component-example
+
+## name: 'input-time-range-variants-example'
+
+::
+
+### Time Range with Icons
+
+## ::component-example
+
+## name: 'input-time-range-icons-example'
+
+::
+
+### Time Range with Custom Separator
+
+## ::component-example
+
+## name: 'input-time-range-separator-example'
+
+::
 
 ### Within a FormField
 
 You can use the InputTime within a [FormField](/docs/components/form-field) component to display a label, help text, required indicator, etc.
 
-::component-example
----
-name: 'input-time-form-field-example'
----
+## ::component-example
+
+## name: 'input-time-form-field-example'
+
 ::
 
 ## API
