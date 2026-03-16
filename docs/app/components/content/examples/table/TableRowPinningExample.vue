@@ -100,7 +100,8 @@ const columns: TableColumn<Payment>[] = [{
       month: 'short',
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false
+      hour12: false,
+      timeZone: 'UTC'
     })
   }
 }, {
@@ -136,7 +137,7 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-const rowPinning = ref<RowPinningState>({ top: ['1', '3'], bottom: [] })
+const rowPinning = ref<RowPinningState>({ top: ['4599', '4597'], bottom: [] })
 </script>
 
 <template>
@@ -144,6 +145,7 @@ const rowPinning = ref<RowPinningState>({ top: ['1', '3'], bottom: [] })
     v-model:row-pinning="rowPinning"
     :data="data"
     :columns="columns"
+    :get-row-id="(row: Payment) => row.id"
     class="flex-1 h-96"
   />
 </template>

@@ -326,9 +326,10 @@ name: 'table-row-pinning-example'
 overflowHidden: true
 highlights:
   - 79
-  - 94
-  - 141
-  - 146
+  - 93
+  - 140
+  - 145
+  - 148
 class: '!p-0'
 ---
 ::
