@@ -44,6 +44,36 @@ const data = ref<Payment[]>([{
   status: 'paid',
   email: 'ethan.harris@example.com',
   amount: 639
+}, {
+  id: '4595',
+  date: '2024-03-10T13:40:00',
+  status: 'refunded',
+  email: 'ava.thomas@example.com',
+  amount: 428
+}, {
+  id: '4594',
+  date: '2024-03-10T09:15:00',
+  status: 'paid',
+  email: 'michael.wilson@example.com',
+  amount: 683
+}, {
+  id: '4593',
+  date: '2024-03-09T20:25:00',
+  status: 'failed',
+  email: 'olivia.taylor@example.com',
+  amount: 947
+}, {
+  id: '4592',
+  date: '2024-03-09T18:45:00',
+  status: 'paid',
+  email: 'benjamin.jackson@example.com',
+  amount: 851
+}, {
+  id: '4591',
+  date: '2024-03-09T16:05:00',
+  status: 'paid',
+  email: 'sophia.miller@example.com',
+  amount: 762
 }])
 
 const columns: TableColumn<Payment>[] = [{
