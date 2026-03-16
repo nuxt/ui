@@ -78,12 +78,10 @@ const data = ref<Payment[]>([{
 
 const columns: TableColumn<Payment>[] = [{
   id: 'pin',
-  header: '',
   cell: ({ row }) => h(UButton, {
     'icon': 'i-lucide-star',
     'color': row.getIsPinned() ? 'primary' : 'neutral',
     'variant': 'ghost',
-    'size': 'xs',
     'aria-label': row.getIsPinned() ? 'Unpin row' : 'Pin row to top',
     'onClick': () => {
       if (row.getIsPinned()) {
@@ -146,6 +144,6 @@ const rowPinning = ref<RowPinningState>({ top: ['1', '3'], bottom: [] })
     v-model:row-pinning="rowPinning"
     :data="data"
     :columns="columns"
-    class="flex-1"
+    class="flex-1 h-96"
   />
 </template>
