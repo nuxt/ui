@@ -36,6 +36,15 @@ exports[`ScrollArea > renders with items correctly 1`] = `
 </div>"
 `;
 
+exports[`ScrollArea > renders with leading slot correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">Leading content<div data-slot="viewport" class="relative flex flex-col">
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+  </div>
+</div>"
+`;
+
 exports[`ScrollArea > renders with orientation horizontal correctly 1`] = `
 "<div data-slot="root" data-orientation="horizontal" class="relative overflow-x-auto overflow-y-hidden">
   <div data-slot="viewport" class="relative flex flex-row">
@@ -53,6 +62,16 @@ exports[`ScrollArea > renders with orientation vertical correctly 1`] = `
     <div data-slot="item" class=""></div>
     <div data-slot="item" class=""></div>
   </div>
+</div>"
+`;
+
+exports[`ScrollArea > renders with trailing slot correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
+  <div data-slot="viewport" class="relative flex flex-col">
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+  </div>Trailing content
 </div>"
 `;
 

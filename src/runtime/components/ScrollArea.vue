@@ -64,11 +64,13 @@ export interface ScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
 }
 
 export interface ScrollAreaSlots<T extends ScrollAreaItem = ScrollAreaItem> {
+  leading?(): VNode[]
   default?(
     props:
       | { item: T, index: number, virtualItem?: VirtualItem }
       | { item: T, index: 0 },
   ): VNode[]
+  trailing?(): VNode[]
 }
 
 export interface ScrollAreaEmits {
@@ -272,6 +274,8 @@ defineExpose({
     :data-orientation="orientation"
     :class="ui.root({ class: [uiProp?.root, props.class] })"
   >
+    <slot name="leading" />
+
     <template v-if="virtualizer">
       <div
         data-slot="viewport"
@@ -314,5 +318,7 @@ defineExpose({
         </template>
       </div>
     </template>
+
+    <slot name="trailing" />
   </Primitive>
 </template>

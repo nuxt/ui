@@ -83,19 +83,32 @@ const virtualizeOptions = computed(() => {
   </Navbar>
 
   <UScrollArea
-    v-slot="{ item }"
     :items="items"
     :orientation="orientation"
     :virtualize="virtualizeOptions"
     class="size-full p-4"
   >
-    <img
-      :src="item.src"
-      :alt="item.title"
-      :width="item.width"
-      :height="item.height"
-      loading="lazy"
-      class="rounded-md size-full object-cover"
-    >
+    <template #leading>
+      <div class="p-4 text-sm font-medium text-muted">
+        {{ items.length }} items
+      </div>
+    </template>
+
+    <template #default="{ item }">
+      <img
+        :src="item.src"
+        :alt="item.title"
+        :width="item.width"
+        :height="item.height"
+        loading="lazy"
+        class="rounded-md size-full object-cover"
+      >
+    </template>
+
+    <template #trailing>
+      <div class="p-4 text-sm text-muted text-center">
+        End of list
+      </div>
+    </template>
   </UScrollArea>
 </template>

@@ -166,7 +166,24 @@ class: '!p-0'
 ::
 
 ::note
-This example uses `useLazyFetch` with `server: false` to fetch data on the client without blocking the initial render. The loading state checks for both `pending` and `idle` status to display a loading indicator before and during the fetch. Additional pages are loaded as the user scrolls.
+This example uses `useLazyFetch` with `server: false` to fetch data on the client without blocking the initial render. The `#trailing` slot displays a loading shimmer at the bottom of the list while fetching. Additional pages are loaded as the user scrolls.
+::
+
+### With leading/trailing
+
+Use the `#leading` and `#trailing` slots to render content before and after the scroll items. This is useful for headers, footers, or navigation within the scroll area.
+
+::component-example
+---
+collapse: true
+overflowHidden: true
+name: 'scroll-area-leading-trailing-example'
+class: '!p-0'
+---
+::
+
+::tip
+The `#leading` and `#trailing` slots render inside the scroll container, so they scroll with the content. Use `sticky` positioning if you want them to stay fixed.
 ::
 
 ### With default slot

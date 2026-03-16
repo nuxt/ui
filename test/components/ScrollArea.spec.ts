@@ -26,6 +26,8 @@ describe('ScrollArea', () => {
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { viewport: 'gap-4' } } }],
     // Slots
-    ['with default slot', { slots: { default: () => 'Default slot' } }]
+    ['with default slot', { slots: { default: () => 'Default slot' } }],
+    ['with leading slot', { props, slots: { leading: () => 'Leading content' } }],
+    ['with trailing slot', { props, slots: { trailing: () => 'Trailing content' } }]
   ])
 })

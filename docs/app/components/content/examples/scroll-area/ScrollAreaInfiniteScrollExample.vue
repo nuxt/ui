@@ -37,6 +37,8 @@ watch(data, () => {
   ]
 })
 
+const isLoading = computed(() => status.value === 'pending' || status.value === 'idle')
+
 const scrollArea = useTemplateRef('scrollArea')
 
 onMounted(() => {
@@ -54,7 +56,6 @@ onMounted(() => {
 <template>
   <UScrollArea
     ref="scrollArea"
-    v-slot="{ item }"
     :items="users"
     :virtualize="{
       estimateSize: 88,
@@ -62,24 +63,24 @@ onMounted(() => {
     }"
     class="h-96 w-full"
   >
-    <UPageCard
-      orientation="horizontal"
-      class="rounded-none"
-    >
-      <UUser
-        :name="`${item.firstName} ${item.lastName}`"
-        :description="item.email"
-        :avatar="{ src: item.image, alt: item.firstName, loading: 'lazy' as const }"
-        size="lg"
-      />
-    </UPageCard>
-  </UScrollArea>
+    <template #default="{ item }">
+      <UPageCard
+        orientation="horizontal"
+        class="rounded-none"
+      >
+        <UUser
+          :name="`${item.firstName} ${item.lastName}`"
+          :description="item.email"
+          :avatar="{ src: item.image, alt: item.firstName, loading: 'lazy' as const }"
+          size="lg"
+        />
+      </UPageCard>
+    </template>
 
-  <UProgress
-    v-if="status === 'pending' || status === 'idle'"
-    indeterminate
-    size="xs"
-    class="absolute top-0 inset-x-0 z-1"
-    :ui="{ base: 'bg-default' }"
-  />
+    <template #trailing>
+      <div v-if="isLoading" class="flex items-center justify-center p-4">
+        <UChatShimmer text="Loading..." />
+      </div>
+    </template>
+  </UScrollArea>
 </template>
