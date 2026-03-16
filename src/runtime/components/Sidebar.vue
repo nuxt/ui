@@ -201,7 +201,7 @@ const { el: containerEl, size: sidebarSize, isDragging, isCollapsed, onMouseDown
   defaultSize: props.defaultSize,
   resizable: isResizable.value,
   collapsible: canCollapse.value,
-  collapsedSize: props.collapsedSize || Math.max(0, props.minSize - 8),
+  collapsedSize: props.collapsedSize ?? Math.max(0, props.minSize - 8),
   unit: 'rem' as const,
   persistent: true,
   storage: 'cookie' as const
