@@ -325,11 +325,11 @@ collapse: true
 name: 'table-row-pinning-example'
 overflowHidden: true
 highlights:
-  - 79
-  - 93
-  - 140
-  - 145
-  - 148
+  - 91
+  - 107
+  - 160
+  - 165
+  - 168
 class: '!p-0'
 ---
 ::
