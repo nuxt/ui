@@ -235,11 +235,17 @@ const railCursor = computed(() => {
 
 // Track expanded width for --sidebar-width (so offcanvas slide-out uses the correct value when collapsed)
 const expandedWidth = ref(props.defaultSize)
-watch(sidebarSize, (v) => { if (!isCollapsed.value) expandedWidth.value = v }, { immediate: true })
+watch(sidebarSize, (v) => {
+  if (!isCollapsed.value) expandedWidth.value = v
+}, { immediate: true })
 
 // Sync useResizable collapse ↔ open model
-watch(isCollapsed, (collapsed) => { if (!isMobile.value && canCollapse.value) modelOpen.value = !collapsed })
-watch(modelOpen, (v) => { if (!isMobile.value && canCollapse.value && isCollapsed.value === v) collapse(!v) })
+watch(isCollapsed, (collapsed) => {
+  if (!isMobile.value && canCollapse.value) modelOpen.value = !collapsed
+})
+watch(modelOpen, (v) => {
+  if (!isMobile.value && canCollapse.value && isCollapsed.value === v) collapse(!v)
+})
 
 const state = computed<SidebarState>(() => open.value ? 'expanded' : 'collapsed')
 
