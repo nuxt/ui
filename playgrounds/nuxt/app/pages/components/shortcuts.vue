@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ShortcutsConfig } from '@nuxt/ui/composables/defineShortcuts'
+import type { ShortcutsConfig } from '@nuxt/ui/composables'
 
 const logs = ref<string[]>([])
 

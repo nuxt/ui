@@ -1,8 +1,9 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, hasNuxtModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, hasNuxtModule } from '@nuxt/kit'
 import type { HookResult } from '@nuxt/schema'
 import type { ModuleDependencies } from 'nuxt/schema'
 import { addTemplates } from './templates'
+import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
 import { name, version } from '../package.json'
 
@@ -253,7 +254,11 @@ export default defineNuxtModule<ModuleOptions>({
       ignore: ['color-mode/**', 'content/**', 'prose/**']
     })
 
-    addImportsDir(resolve('./runtime/composables'))
+    addImports(
+      Object.entries(publicComposables).flatMap(([file, exports]) =>
+        exports.map(name => ({ name, from: resolve(`./runtime/composables/${file}`) }))
+      )
+    )
 
     addTemplates(options, nuxt, resolve)
   }

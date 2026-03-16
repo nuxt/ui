@@ -30,55 +30,57 @@ provide('components', components)
 </script>
 
 <template>
-  <UApp :toaster="appConfig.toaster" :dir="appConfig.dir">
-    <UDashboardGroup unit="rem" storage="local">
-      <UDashboardSidebar
-        class="bg-elevated/25"
-        resizable
-        collapsible
-        :toggle="{ size: 'sm', variant: 'outline', class: 'ring-default' }"
-      >
-        <template #header="{ collapsed }">
-          <RouterLink to="/" class="text-highlighted inline-flex" aria-label="Home">
-            <Logo class="h-5 w-auto" :collapsed="collapsed" />
-          </RouterLink>
+  <Suspense>
+    <UApp :toaster="appConfig.toaster" :dir="appConfig.dir">
+      <UDashboardGroup unit="rem" storage="local">
+        <UDashboardSidebar
+          class="bg-elevated/25"
+          resizable
+          collapsible
+          :toggle="{ size: 'sm', variant: 'outline', class: 'ring-default' }"
+        >
+          <template #header="{ collapsed }">
+            <RouterLink to="/" class="text-highlighted inline-flex" aria-label="Home">
+              <Logo class="h-5 w-auto" :collapsed="collapsed" />
+            </RouterLink>
 
-          <div v-if="!collapsed" class="flex items-center ms-auto">
-            <ThemeDropdown />
+            <div v-if="!collapsed" class="flex items-center ms-auto">
+              <ThemeDropdown />
 
-            <UColorModeButton />
-          </div>
-        </template>
+              <UColorModeButton />
+            </div>
+          </template>
 
-        <template #default="{ collapsed }">
-          <UDashboardSearchButton :collapsed="collapsed" />
+          <template #default="{ collapsed }">
+            <UDashboardSearchButton :collapsed="collapsed" />
 
-          <UNavigationMenu :collapsed="collapsed" :items="items" orientation="vertical" />
+            <UNavigationMenu :collapsed="collapsed" :items="items" orientation="vertical" />
 
-          <USeparator type="dashed" />
+            <USeparator type="dashed" />
 
-          <UNavigationMenu :collapsed="collapsed" :items="components" orientation="vertical" />
-        </template>
-      </UDashboardSidebar>
+            <UNavigationMenu :collapsed="collapsed" :items="components" orientation="vertical" />
+          </template>
+        </UDashboardSidebar>
 
-      <UDashboardPanel
-        :ui="{
-          body: [
-            route.path.startsWith('/components') && 'mt-16',
-            route.path.startsWith('/components/scroll-area') && 'p-0!'
-          ]
-        }"
-      >
-        <template #body>
-          <div class="flex flex-col items-center justify-center min-h-full shrink-0">
-            <Suspense>
+        <RouterView v-if="route.path.startsWith('/components/sidebar')" />
+        <UDashboardPanel
+          v-else
+          :ui="{
+            body: [
+              route.path.startsWith('/components') && 'mt-16',
+              route.path.startsWith('/components/scroll-area') && 'p-0!'
+            ]
+          }"
+        >
+          <template #body>
+            <div class="flex flex-col items-center justify-center min-h-full shrink-0">
               <RouterView />
-            </Suspense>
-          </div>
-        </template>
-      </UDashboardPanel>
+            </div>
+          </template>
+        </UDashboardPanel>
 
-      <UDashboardSearch :groups="groups" :fuse="{ resultLimit: 100 }" />
-    </UDashboardGroup>
-  </UApp>
+        <UDashboardSearch :groups="groups" :fuse="{ resultLimit: 100 }" />
+      </UDashboardGroup>
+    </UApp>
+  </Suspense>
 </template>
