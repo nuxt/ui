@@ -5,14 +5,22 @@ import AutoImport from 'unplugin-auto-import'
 import type { Options as AutoImportOptions } from 'unplugin-auto-import/types'
 import type { NuxtUIOptions } from '../unplugin'
 import { runtimeDir } from '../unplugin'
+import { publicComposables } from '../imports'
 
 /**
  * This plugin adds all the Nuxt UI composables as auto-imports.
  */
 export default function AutoImportPlugin(options: NuxtUIOptions, meta: UnpluginContextMeta): UnpluginOptions {
+  if (options.autoImport === false) {
+    return { name: 'nuxt:ui:auto-import' }
+  }
+
   const pluginOptions = defu(options.autoImport, <AutoImportOptions>{
     dts: options.dts ?? true,
-    dirs: [join(runtimeDir, 'composables'), join(runtimeDir, 'vue/composables')]
+    dirs: [
+      ...Object.keys(publicComposables).map(name => join(runtimeDir, 'composables', `${name}.ts`)),
+      join(runtimeDir, 'vue/composables')
+    ]
   })
 
   return AutoImport.raw(pluginOptions, meta) as UnpluginOptions
