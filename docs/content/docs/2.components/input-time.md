@@ -66,7 +66,7 @@ Use the `range` prop to enable time range selection with start and end times.
 ---
 prettier: true
 cast:
-  modelValue: TimeRange
+  modelValue: TimeRangeValue
 ignore:
   - range
   - modelValue.start
@@ -87,7 +87,7 @@ Use the `default-value` prop to set the initial time range when you do not need 
 ---
 prettier: true
 cast:
-  defaultValue: TimeRange
+  defaultValue: TimeRangeValue
 ignore:
   - range
   - defaultValue.start

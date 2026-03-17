@@ -1,13 +1,16 @@
 <script lang="ts">
 import type { ComponentPublicInstance, VNode } from 'vue'
-import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, TimeRangeFieldRootProps, TimeValue } from 'reka-ui'
+import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, TimeRangeFieldRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-time'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+export type { TimeValue } from 'reka-ui'
 
 type InputTime = ComponentConfig<typeof theme, AppConfig, 'inputTime'>
+
+export type TimeRangeValue = TimeRangeFieldRootProps['modelValue']
 
 type InputTimeDefaultValue<R extends boolean = false> = R extends true
   ? TimeRangeFieldRootProps['defaultValue']
