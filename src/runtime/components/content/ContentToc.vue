@@ -41,14 +41,14 @@ export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> exte
    */
   highlight?: boolean
   /**
+   * @defaultValue 'primary'
+   */
+  highlightColor?: ContentToc['variants']['highlightColor']
+  /**
    * The variant of the highlight indicator.
    * @defaultValue 'straight'
    */
   highlightVariant?: ContentToc['variants']['highlightVariant']
-  /**
-   * @defaultValue 'primary'
-   */
-  highlightColor?: ContentToc['variants']['highlightColor']
   links?: T[]
   class?: any
   ui?: ContentToc['slots']
