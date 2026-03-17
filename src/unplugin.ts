@@ -44,13 +44,13 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    */
   colorMode?: boolean
   /**
-   * Override options for `unplugin-auto-import`
+   * Override options for `unplugin-auto-import`, or `false` to disable composable auto-imports
    */
-  autoImport?: Partial<AutoImportOptions>
+  autoImport?: false | Partial<AutoImportOptions>
   /**
-   * Override options for `unplugin-vue-components`
+   * Override options for `unplugin-vue-components`, or `false` to disable component auto-imports
    */
-  components?: Partial<ComponentsOptions>
+  components?: false | Partial<ComponentsOptions>
   /**
    * Router integration mode
    * - `true` (default): Use vue-router integration
@@ -94,10 +94,10 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
         configResolved(config) {
           const plugins = config.plugins || []
 
-          if (plugins.filter(i => i.name === 'unplugin-auto-import').length > 1) {
+          if (options.autoImport !== false && plugins.filter(i => i.name === 'unplugin-auto-import').length > 1) {
             throw new Error('[Nuxt UI] Multiple instances of `unplugin-auto-import` detected. Nuxt UI includes `unplugin-auto-import` already, and you can configure it using `autoImport` option in Nuxt UI module options.')
           }
-          if (plugins.filter(i => i.name === 'unplugin-vue-components').length > 1) {
+          if (options.components !== false && plugins.filter(i => i.name === 'unplugin-vue-components').length > 1) {
             throw new Error('[Nuxt UI] Multiple instances of `unplugin-vue-components` detected. Nuxt UI includes `unplugin-vue-components` already, and you can configure it using `components` option in Nuxt UI module options.')
           }
         }

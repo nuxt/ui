@@ -40,8 +40,8 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useKbd } from '../composables/useKbd'
-import { tv } from '../utils/tv'
 import { useComponentUI } from '../composables/useComponentUI'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<KbdProps>(), {
   as: 'kbd'

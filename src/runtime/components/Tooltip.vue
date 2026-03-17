@@ -16,6 +16,8 @@ export interface TooltipProps extends TooltipRootProps {
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The content of the tooltip.
+   *
+   * Inherits from the `tooltip.content` of the {@link AppProps} component when not provided.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
    */
   content?: Omit<TooltipContentProps, 'as' | 'asChild'> & Partial<EmitsToProps<TooltipContentEmits>>
@@ -51,7 +53,7 @@ export interface TooltipSlots {
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
-import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits } from 'reka-ui'
+import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits, injectTooltipProviderContext } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
@@ -68,9 +70,11 @@ const slots = defineSlots<TooltipSlots>()
 const appConfig = useAppConfig() as Tooltip['AppConfig']
 const uiProp = useComponentUI('tooltip', props)
 
+const providerContext = injectTooltipProviderContext()
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration', 'disableHoverableContent', 'disableClosingTrigger', 'ignoreNonKeyboardFocus'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as TooltipContentProps)
+const contentProps = toRef(() => defu(props.content, providerContext.content.value, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as TooltipContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as TooltipArrowProps)
 
 // eslint-disable-next-line vue/no-dupe-keys

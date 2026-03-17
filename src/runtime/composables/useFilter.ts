@@ -1,5 +1,5 @@
 import { useFilter as useRekaFilter } from 'reka-ui'
-import { get } from '../../utils'
+import { get } from '../utils'
 
 export function useFilter() {
   const { contains, startsWith } = useRekaFilter({ sensitivity: 'base' })

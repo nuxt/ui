@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import fsp from 'node:fs/promises'
-import { dirname, join } from 'pathe'
-import { defineNuxtModule, addTemplate, addServerHandler, createResolver } from '@nuxt/kit'
+import { join } from 'pathe'
+import { defineNuxtModule, addServerHandler, createResolver } from '@nuxt/kit'
 
 export default defineNuxtModule({
   meta: {
@@ -11,13 +11,20 @@ export default defineNuxtModule({
     const resolver = createResolver(import.meta.url)
     let _configResolved: any
     let components: Record<string, any>
-    const outputPath = join(nuxt.options.buildDir, 'component-example')
+    const outputDir = join(nuxt.options.buildDir, 'component-examples')
+
+    async function ensureOutputDir() {
+      if (!existsSync(outputDir)) {
+        await fsp.mkdir(outputDir, { recursive: true })
+      }
+    }
 
     async function stubOutput() {
-      if (existsSync(outputPath + '.mjs')) {
-        return
+      await ensureOutputDir()
+      const indexPath = join(outputDir, '_index.json')
+      if (!existsSync(indexPath)) {
+        await fsp.writeFile(indexPath, '[]', 'utf-8')
       }
-      await updateOutput('export default {}')
     }
 
     async function fetchComponent(component: string | any) {
@@ -46,20 +53,26 @@ export default defineNuxtModule({
         pascalName: component.pascalName
       }
     }
-    const getStringifiedComponents = () => JSON.stringify(components, null, 2)
 
-    const getVirtualModuleContent = () =>
-      `export default ${getStringifiedComponents()}`
+    async function writeComponentFile(name: string) {
+      const comp = components[name]
+      if (!comp?.code) return
+      await fsp.writeFile(
+        join(outputDir, `${name}.json`),
+        JSON.stringify({ code: comp.code, filePath: comp.filePath, pascalName: comp.pascalName }),
+        'utf-8'
+      )
+    }
 
-    async function updateOutput(content?: string) {
-      const path = outputPath + '.mjs'
-      if (!existsSync(dirname(path))) {
-        await fsp.mkdir(dirname(path), { recursive: true })
-      }
-      if (existsSync(path)) {
-        await fsp.unlink(path)
-      }
-      await fsp.writeFile(path, content || getVirtualModuleContent(), 'utf-8')
+    async function writeIndex() {
+      const names = Object.keys(components).filter(k => components[k]?.code)
+      await fsp.writeFile(join(outputDir, '_index.json'), JSON.stringify(names), 'utf-8')
+    }
+
+    async function updateOutput() {
+      await ensureOutputDir()
+      await Promise.all(Object.keys(components).map(writeComponentFile))
+      await writeIndex()
     }
 
     async function fetchComponents() {
@@ -74,12 +87,6 @@ export default defineNuxtModule({
           return acc
         }, {} as Record<string, any>)
       await stubOutput()
-    })
-
-    addTemplate({
-      filename: 'component-example.mjs',
-      getContents: () => 'export default {}',
-      write: true
     })
 
     nuxt.hook('vite:extend', (vite: any) => {
@@ -104,7 +111,14 @@ export default defineNuxtModule({
             )
           ) {
             await fetchComponent(file)
-            await updateOutput()
+            const entry = Object.entries(components).find(
+              ([, comp]: any) => comp.filePath === file
+            )
+            if (entry) {
+              await ensureOutputDir()
+              await writeComponentFile(entry[0])
+              await writeIndex()
+            }
           }
         }
       })
@@ -112,11 +126,50 @@ export default defineNuxtModule({
 
     nuxt.hook('nitro:config', (nitroConfig) => {
       nitroConfig.virtual = nitroConfig.virtual || {}
-      nitroConfig.virtual['#component-example/nitro'] = () =>
-        readFileSync(
-          join(nuxt.options.buildDir, '/component-example.mjs'),
-          'utf-8'
-        )
+      nitroConfig.virtual['#component-example/nitro'] = () => {
+        const indexPath = join(outputDir, '_index.json')
+        const names: string[] = existsSync(indexPath)
+          ? JSON.parse(readFileSync(indexPath, 'utf-8'))
+          : []
+
+        return `import { readFileSync } from 'node:fs'
+
+const basePath = ${JSON.stringify(outputDir)}
+const names = ${JSON.stringify(names)}
+const _cache = Object.create(null)
+
+function _load(name) {
+  if (!(name in _cache)) {
+    try {
+      _cache[name] = JSON.parse(readFileSync(basePath + '/' + name + '.json', 'utf-8'))
+    } catch {
+      _cache[name] = null
+    }
+  }
+  return _cache[name]
+}
+
+export function getComponentExample(name) {
+  return _load(name)
+}
+
+export function listComponentExamples() {
+  return names
+}
+
+export default new Proxy(Object.create(null), {
+  get(_, prop) {
+    if (typeof prop !== 'string') return undefined
+    return _load(prop)
+  },
+  ownKeys() { return names },
+  getOwnPropertyDescriptor(_, prop) {
+    if (names.includes(prop)) return { configurable: true, enumerable: true }
+    return undefined
+  }
+})
+`
+      }
     })
 
     addServerHandler({

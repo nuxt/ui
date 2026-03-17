@@ -11,11 +11,18 @@ describe('Error', () => {
     message: 'The page you are looking for does not exist.'
   }
 
+  const errorWithStatus = {
+    status: 500,
+    statusText: 'Internal Server Error',
+    message: 'Something went wrong.'
+  }
+
   const props = { error }
 
   renderEach(Error, [
     // Props
     ['with error', { props }],
+    ['with error using status/statusText', { props: { error: errorWithStatus } }],
     ['with redirect', { props: { ...props, redirect: '/blog' } }],
     ['with clear', { props: { ...props, clear: { label: 'Home' } } }],
     ['with as', { props: { ...props, as: 'section' } }],

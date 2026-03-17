@@ -50,7 +50,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
    * @defaultValue true
    */
-  searchInput?: boolean | InputProps
+  searchInput?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   /**
    * @defaultValue 'primary'
    */
@@ -234,7 +234,7 @@ import { useComponentUI } from '../composables/useComponentUI'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
-import { useFilter } from '../composables/internal/useFilter'
+import { useFilter } from '../composables/useFilter'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { compare, get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils'
@@ -281,7 +281,7 @@ const virtualizerProps = toRef(() => {
     estimateSize: getEstimateSize(filteredItems.value, selectSize.value || 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
-const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps<string>)
+const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)

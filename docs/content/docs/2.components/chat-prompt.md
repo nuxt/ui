@@ -35,21 +35,18 @@ class: 'rounded-full'
 ---
 placeholder: 'Select a model'
 variant: 'ghost'
-icon: 'i-simple-icons-openai'
-modelValue: 'gpt-4o'
+icon: 'i-simple-icons-anthropic'
+modelValue: 'claude-opus-4.6'
 items:
-  - label: 'Gemini 2.5 Pro'
-    value: 'gemini-2.5-pro'
-    icon: 'i-simple-icons-googlegemini'
-  - label: 'GPT-4o'
-    value: 'gpt-4o'
-    icon: 'i-simple-icons-openai'
-  - label: 'Claude 3.5 Sonnet'
-    value: 'claude-3.5-sonnet'
+  - label: 'Claude Opus 4.6'
+    value: 'claude-opus-4.6'
     icon: 'i-simple-icons-anthropic'
-  - label: 'Llama 4'
-    value: 'llama-4'
-    icon: 'i-simple-icons-ollama'
+  - label: 'Gemini 3 Pro'
+    value: 'gemini-3-pro'
+    icon: 'i-simple-icons-googlegemini'
+  - label: 'GPT-5'
+    value: 'gpt-5'
+    icon: 'i-simple-icons-openai'
 ---
 ::::
 
@@ -80,60 +77,11 @@ props:
 
 ## Examples
 
-::tip{to="/docs/components/chat-messages#examples"}
-Check the **ChatMessages** documentation for server API setup and installation instructions.
+::tip{to="/docs/components/chat"}
+Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
-### Within a page
-
-Use the ChatPrompt component with the `Chat` class from AI SDK v5 to display a chat prompt within a page.
-
-Pass the `input` prop alongside the `error` prop to disable the textarea when an error occurs.
-
-```vue [pages/\[id\\].vue] {2,5,13-17,34,36}
-<script setup lang="ts">
-import { Chat } from '@ai-sdk/vue'
-
-const input = ref('')
-
-const chat = new Chat({
-  onError(error) {
-    console.error(error)
-  }
-})
-
-function onSubmit() {
-  chat.sendMessage({ text: input.value })
-
-  input.value = ''
-}
-</script>
-
-<template>
-  <UDashboardPanel>
-    <template #body>
-      <UContainer>
-        <UChatMessages :messages="chat.messages" :status="chat.status">
-          <template #content="{ message }">
-            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
-              <MDC v-if="part.type === 'text' && message.role === 'assistant'" :value="part.text" :cache-key="`${message.id}-${index}`" class="*:first:mt-0 *:last:mb-0" />
-              <p v-else-if="part.type === 'text' && message.role === 'user'" class="whitespace-pre-wrap">{{ part.text }}</p>
-            </template>
-          </template>
-        </UChatMessages>
-      </UContainer>
-    </template>
-
-    <template #footer>
-      <UContainer class="pb-4 sm:pb-6">
-        <UChatPrompt v-model="input" :error="chat.error" @submit="onSubmit">
-          <UChatPromptSubmit :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
-        </UChatPrompt>
-      </UContainer>
-    </template>
-  </UDashboardPanel>
-</template>
-```
+### As a starting point
 
 You can also use it as a starting point for a chat interface.
 
