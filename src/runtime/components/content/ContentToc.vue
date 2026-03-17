@@ -153,7 +153,7 @@ const circuitMaskStyle = computed(() => {
     return
   }
 
-  const flatLinks = flattenLinksWithLevel(props.links || [])
+  const flatLinks = flattenLinksWithLevel(props.links)
   const svgUnit = 16 // SVG viewBox units per rem
   const svgLinkHeight = linkHeight * svgUnit
   const svgHeight = flatLinks.length * svgLinkHeight

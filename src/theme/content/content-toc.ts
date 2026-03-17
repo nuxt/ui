@@ -81,7 +81,7 @@ export default (options: Required<ModuleOptions>) => ({
       list: 'ps-6.5',
       item: '-ms-px',
       itemWithChildren: 'ps-px',
-      indicator: 'absolute ms-2.5 start-0 top-0',
+      indicator: 'absolute ms-2.5 start-0 top-0 rtl:-scale-x-100',
       indicatorLine: 'absolute inset-0 bg-(--ui-border)',
       indicatorActive: 'absolute w-full h-(--indicator-size) translate-y-(--indicator-position) transition-[translate,height] duration-200 ease-out'
     }
