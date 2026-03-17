@@ -1,24 +1,29 @@
 <script lang="ts">
 import type { ComponentPublicInstance, VNode } from 'vue'
-import type { TimeFieldRootProps, TimeFieldRootEmits, TimeRangeFieldRootProps, TimeRangeFieldRootEmits, TimeValue } from 'reka-ui'
+import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, TimeRangeFieldRootProps, TimeValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-time'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
-import type { GetModelValue, GetModelValueEmits } from '../types/utils'
-import type { ApplyModifiers, ModelModifiers } from '../types/input'
 
 type InputTime = ComponentConfig<typeof theme, AppConfig, 'inputTime'>
 
-export type TimeRangeType = {
-  start: TimeValue | undefined
-  end: TimeValue | undefined
-}
+type TimeRangeType = NonNullable<TimeRangeFieldRootProps['modelValue']>
 
-export type InputTimeValue = TimeValue | TimeRangeType
+type InputTimeDefaultValue<R extends boolean = false> = R extends true
+  ? TimeRangeFieldRootProps['defaultValue']
+  : TimeFieldRootProps['defaultValue']
 
-export interface InputTimeProps extends UseComponentIconsProps {
+type InputTimeModelValue<R extends boolean = false> = (R extends true
+  ? TimeRangeFieldRootProps['modelValue']
+  : TimeFieldRootProps['modelValue']) | undefined
+
+// Omit des props comme dans Calendar.vue / InputDate.vue
+type _TimeFieldRootProps = Omit<TimeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>
+type _TimeRangeFieldRootProps = Omit<TimeRangeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>
+
+export interface InputTimeProps<R extends boolean = false> extends UseComponentIconsProps, _TimeFieldRootProps, _TimeRangeFieldRootProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -44,32 +49,33 @@ export interface InputTimeProps extends UseComponentIconsProps {
    * Enable time range selection.
    * @defaultValue false
    */
-  range?: boolean
+  range?: R & boolean
   /** The value of the input when initially rendered. Use when you do not need to control the state of the input. */
-  defaultValue?: TimeValue | TimeRangeType
+  defaultValue?: InputTimeDefaultValue<R>
   /** The controlled value of the input. Can be bind as `v-model`. */
-  modelValue?: TimeValue | TimeRangeType | null
+  modelValue?: InputTimeModelValue<R>
   autofocus?: boolean
   autofocusDelay?: number
   class?: any
   ui?: InputTime['slots']
 }
 
-export interface InputTimeEmits extends GetModelValueEmits<InputTimeProps, 'modelValue', false> {
+export interface InputTimeEmits<R extends boolean = false> extends Omit<TimeFieldRootEmits & TimeRangeFieldRootEmits, 'update:modelValue'> {
   'change': [event: Event]
   'blur': [event: FocusEvent]
   'focus': [event: FocusEvent]
+  'update:modelValue': [value: InputTimeModelValue<R>]
 }
 
 export interface InputTimeSlots {
-  leading?(props: { ui: InputTime['ui'] }): VNode[]
-  default?(props: { ui: InputTime['ui'] }): VNode[]
-  trailing?(props: { ui: InputTime['ui'] }): VNode[]
-  'range-seperator'?(): VNode[]
+  'leading'?(props: { ui: InputTime['ui'] }): VNode[]
+  'default'?(props: { ui: InputTime['ui'] }): VNode[]
+  'trailing'?(props: { ui: InputTime['ui'] }): VNode[]
+  'range-separator'?(): VNode[]
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="R extends boolean">
 import { computed, onMounted, ref } from 'vue'
 import { TimeFieldRoot, TimeFieldInput, TimeRangeFieldRoot, TimeRangeFieldInput, useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
@@ -82,20 +88,19 @@ import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
-const props = withDefaults(defineProps<InputTimeProps>(), {
-  range: false,
+const props = withDefaults(defineProps<InputTimeProps<R>>(), {
   autofocusDelay: 0
 })
-const emits = defineEmits<InputTimeEmits>()
+const emits = defineEmits<InputTimeEmits<R>>()
 const slots = defineSlots<InputTimeSlots>()
 
 const appConfig = useAppConfig() as InputTime['AppConfig']
 const uiProp = useComponentUI('inputTime', props)
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'range', 'class', 'ui'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'range', 'class', 'ui', 'modelValue', 'defaultValue'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps>(props)
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputTimeProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps<R>>(props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputTimeProps<R>>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
@@ -163,6 +168,8 @@ defineExpose({
     v-slot="{ segments }"
     :name="name"
     :disabled="disabled"
+    :model-value="modelValue as unknown as TimeValue"
+    :default-value="defaultValue as TimeValue"
     data-slot="base"
     :class="ui.base({ class: [uiProp?.base, props.class] })"
     @update:model-value="onUpdate"
@@ -203,6 +210,8 @@ defineExpose({
     v-slot="{ segments }"
     :name="name"
     :disabled="disabled"
+    :model-value="modelValue as unknown as TimeRangeType"
+    :default-value="defaultValue as unknown as TimeRangeType"
     data-slot="base"
     :class="ui.base({ class: [uiProp?.base, props.class] })"
     @update:model-value="onUpdate"
@@ -222,7 +231,7 @@ defineExpose({
     </TimeRangeFieldInput>
 
     <span data-slot="range-separator" :class="ui.rangeSeparator({ class: uiProp?.rangeSeparator })">
-      <slot name="range-seperator">
+      <slot name="range-separator">
         –
       </slot>
     </span>
