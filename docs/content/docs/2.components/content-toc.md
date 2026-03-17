@@ -100,10 +100,10 @@ props:
         - id: highlight
           depth: 3
           text: Highlight
-        - id: highlightColor
+        - id: 'highlight-color'
           depth: 3
           text: Highlight Color
-        - id: highlightVariant
+        - id: 'highlight-variant'
           depth: 3
           text: Highlight Variant
 ---
