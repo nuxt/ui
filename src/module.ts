@@ -161,7 +161,7 @@ export default defineNuxtModule<ModuleOptions>({
         }
       },
       '@nuxtjs/mdc': {
-        optional: !userUiOptions.prose && !userUiOptions.mdc && !userUiOptions.content,
+        optional: !userUiOptions.mdc && !userUiOptions.content,
         defaults: {
           highlight: {
             theme: {
