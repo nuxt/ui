@@ -9,8 +9,6 @@ import type { ComponentConfig } from '../types/tv'
 
 type InputTime = ComponentConfig<typeof theme, AppConfig, 'inputTime'>
 
-type TimeRangeType = NonNullable<TimeRangeFieldRootProps['modelValue']>
-
 type InputTimeDefaultValue<R extends boolean = false> = R extends true
   ? TimeRangeFieldRootProps['defaultValue']
   : TimeFieldRootProps['defaultValue']
@@ -119,6 +117,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTime ||
 
 const inputsRef = ref<ComponentPublicInstance[]>([])
 
+const FieldRoot = computed(() => props.range ? TimeRangeFieldRoot : TimeFieldRoot)
+const rootModelValue = computed(() => props.range
+  ? props.modelValue as TimeRangeFieldRootProps['modelValue']
+  : props.modelValue as TimeFieldRootProps['modelValue'])
+const rootDefaultValue = computed(() => props.range
+  ? props.defaultValue as TimeRangeFieldRootProps['defaultValue']
+  : props.defaultValue as TimeFieldRootProps['defaultValue'])
+
 function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
   // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
   inputsRef.value[index] = el
@@ -161,31 +167,65 @@ defineExpose({
 </script>
 
 <template>
-  <TimeFieldRoot
-    v-if="!range"
+  <component
+    :is="FieldRoot"
     v-bind="{ ...rootProps, ...ariaAttrs }"
     :id="id"
     v-slot="{ segments }"
     :name="name"
     :disabled="disabled"
-    :model-value="modelValue as unknown as TimeValue"
-    :default-value="defaultValue as TimeValue"
+    :model-value="rootModelValue as any"
+    :default-value="rootDefaultValue as any"
     data-slot="base"
     :class="ui.base({ class: [uiProp?.base, props.class] })"
     @update:model-value="onUpdate"
     @blur="onBlur"
     @focus="onFocus"
   >
-    <TimeFieldInput
-      v-for="(segment, index) in segments"
-      :key="`${segment.part}-${index}`"
-      :ref="el => setInputRef(index, el)"
-      :part="segment.part"
-      data-slot="segment"
-      :class="ui.segment({ class: uiProp?.segment })"
-    >
-      {{ segment.value.trim() }}
-    </TimeFieldInput>
+    <template v-if="Array.isArray(segments)">
+      <TimeFieldInput
+        v-for="(segment, index) in segments"
+        :key="`${segment.part}-${index}`"
+        :ref="el => setInputRef(index, el)"
+        :part="segment.part"
+        data-slot="segment"
+        :class="ui.segment({ class: uiProp?.segment })"
+      >
+        {{ segment.value.trim() }}
+      </TimeFieldInput>
+    </template>
+
+    <template v-else>
+      <TimeRangeFieldInput
+        v-for="(segment, index) in segments.start"
+        :key="`start-${segment.part}-${index}`"
+        :ref="el => setInputRef(index, el)"
+        :part="segment.part"
+        type="start"
+        data-slot="segment"
+        :class="ui.segment({ class: uiProp?.segment })"
+      >
+        {{ segment.value.trim() }}
+      </TimeRangeFieldInput>
+
+      <span data-slot="range-separator" :class="ui.rangeSeparator({ class: uiProp?.rangeSeparator })">
+        <slot name="range-separator">
+          –
+        </slot>
+      </span>
+
+      <TimeRangeFieldInput
+        v-for="(segment, index) in segments.end"
+        :key="`end-${segment.part}-${index}`"
+        :ref="el => setInputRef(segments.start.length + 1 + index, el)"
+        :part="segment.part"
+        type="end"
+        data-slot="segment"
+        :class="ui.segment({ class: uiProp?.segment })"
+      >
+        {{ segment.value.trim() }}
+      </TimeRangeFieldInput>
+    </template>
 
     <slot :ui="ui" />
 
@@ -201,66 +241,5 @@ defineExpose({
         <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon })" />
       </slot>
     </span>
-  </TimeFieldRoot>
-
-  <TimeRangeFieldRoot
-    v-else
-    v-bind="{ ...rootProps, ...ariaAttrs }"
-    :id="id"
-    v-slot="{ segments }"
-    :name="name"
-    :disabled="disabled"
-    :model-value="modelValue as unknown as TimeRangeType"
-    :default-value="defaultValue as unknown as TimeRangeType"
-    data-slot="base"
-    :class="ui.base({ class: [uiProp?.base, props.class] })"
-    @update:model-value="onUpdate"
-    @blur="onBlur"
-    @focus="onFocus"
-  >
-    <TimeRangeFieldInput
-      v-for="(segment, index) in segments.start"
-      :key="`start-${segment.part}-${index}`"
-      :ref="el => setInputRef(index, el)"
-      :part="segment.part"
-      type="start"
-      data-slot="segment"
-      :class="ui.segment({ class: uiProp?.segment })"
-    >
-      {{ segment.value.trim() }}
-    </TimeRangeFieldInput>
-
-    <span data-slot="range-separator" :class="ui.rangeSeparator({ class: uiProp?.rangeSeparator })">
-      <slot name="range-separator">
-        –
-      </slot>
-    </span>
-
-    <TimeRangeFieldInput
-      v-for="(segment, index) in segments.end"
-      :key="`end-${segment.part}-${index}`"
-      :ref="el => setInputRef(segments.start.length + 1 + index, el)"
-      :part="segment.part"
-      type="end"
-      data-slot="segment"
-      :class="ui.segment({ class: uiProp?.segment })"
-    >
-      {{ segment.value.trim() }}
-    </TimeRangeFieldInput>
-
-    <slot :ui="ui" />
-
-    <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
-      <slot name="leading" :ui="ui">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
-        <UAvatar v-else-if="!!avatar" :size="((uiProp?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: uiProp?.leadingAvatar })" />
-      </slot>
-    </span>
-
-    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
-      <slot name="trailing" :ui="ui">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon })" />
-      </slot>
-    </span>
-  </TimeRangeFieldRoot>
+  </component>
 </template>
