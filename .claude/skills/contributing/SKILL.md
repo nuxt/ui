@@ -79,12 +79,13 @@ Progress:
 - [ ] 2. Implement component in src/runtime/components/
 - [ ] 3. Create theme in src/theme/
 - [ ] 4. Export types from src/runtime/types/index.ts
-- [ ] 5. Write tests in test/components/
-- [ ] 6. Create docs in docs/content/docs/2.components/
-- [ ] 7. Add playground page
-- [ ] 8. Run pnpm run lint
-- [ ] 9. Run pnpm run typecheck
-- [ ] 10. Run pnpm run test
+- [ ] 5. Add export to src/runtime/components/index.ts (or prose/index.ts)
+- [ ] 6. Write tests in test/components/
+- [ ] 7. Create docs in docs/content/docs/2.components/
+- [ ] 8. Add playground page
+- [ ] 9. Run pnpm run lint
+- [ ] 10. Run pnpm run typecheck
+- [ ] 11. Run pnpm run test
 ```
 
 ## PR Review Checklist
