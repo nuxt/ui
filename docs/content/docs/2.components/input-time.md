@@ -31,6 +31,18 @@ props:
 ---
 ::
 
+::framework-only
+#nuxt
+:::note{to="/docs/getting-started/integrations/i18n/nuxt#locale"}
+This component uses the `@internationalized/date` package for locale-aware formatting. The time format is determined by the `locale` prop of the App component.
+:::
+
+#vue
+:::note{to="/docs/getting-started/integrations/i18n/vue#locale"}
+This component uses the `@internationalized/date` package for locale-aware formatting. The time format is determined by the `locale` prop of the App component.
+:::
+::
+
 Use the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::component-code
@@ -89,12 +101,6 @@ props:
     end: [16, 30, 0]
 ---
 :::
-
-#vue
-:::note{to="/docs/getting-started/integrations/i18n/vue#locale"}
-This component uses the `@internationalized/date` package for locale-aware formatting. The time format is determined by the `locale` prop of the App component.
-:::
-::
 
 ### Color
 
