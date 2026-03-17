@@ -6,6 +6,7 @@ import theme from '#build/ui/input-time'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
+
 export type { TimeValue } from 'reka-ui'
 
 type InputTime = ComponentConfig<typeof theme, AppConfig, 'inputTime'>
