@@ -78,6 +78,5 @@ export default defineCommand({
       await appendFile(typesPath, `export * from '../components/${args.content ? 'content/' : ''}${splitByCase(name).map(p => upperFirst(p)).join('')}.vue'`)
       await sortFile(typesPath)
     }
-
   }
 })
