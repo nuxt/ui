@@ -105,14 +105,12 @@ const [DefineListTemplate, ReuseListTemplate] = createReusableTemplate<{ links: 
   }
 })
 const [DefineTriggerTemplate, ReuseTriggerTemplate] = createReusableTemplate<{ open: boolean }>()
-
-const highlight = computed(() => props.highlight || !!props.highlightVariant)
-const highlightVariant = computed(() => props.highlightVariant ?? appConfig.ui?.contentToc?.defaultVariants?.highlightVariant ?? 'straight')
+const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentToc || {}) })({
   color: props.color,
-  highlight: highlight.value,
-  highlightVariant: highlightVariant.value,
+  highlight: props.highlight,
+  highlightVariant: props.highlightVariant,
   highlightColor: props.highlightColor || props.color
 }))
 
@@ -133,7 +131,7 @@ function flattenLinksWithLevel(links: T[], level = 0): { link: T, level: number 
   ])
 }
 
-const linkHeight = 28
+const linkHeight = 1.75 // rem — text-sm line-height (1.25rem) + py-1 (0.5rem)
 
 const indicatorStyle = computed(() => {
   if (!activeHeadings.value?.length) {
@@ -142,8 +140,6 @@ const indicatorStyle = computed(() => {
 
   const flatLinks = flattenLinks(props.links || [])
   const activeIndex = flatLinks.findIndex(link => activeHeadings.value.includes(link.id))
-  const linkHeight = 1.75 // text-sm line-height (1.25rem) + py-1 (0.5rem)
-  const gapSize = 0
 
   return {
     '--indicator-size': `${linkHeight * activeHeadings.value.length}rem`,
@@ -153,23 +149,24 @@ const indicatorStyle = computed(() => {
 
 // Generate SVG path for the circuit line structure
 const circuitMaskStyle = computed(() => {
-  if (!highlight.value || highlightVariant.value !== 'circuit' || !props.links?.length) {
+  if (!props.highlight || props.highlightVariant !== 'circuit' || !props.links?.length) {
     return
   }
 
   const flatLinks = flattenLinksWithLevel(props.links || [])
-  const totalHeight = flatLinks.length * linkHeight
-  const x0 = 1 // Level 0 line x position
-  const x1 = 11 // Level 1+ line x position
+  const svgUnit = 16 // SVG viewBox units per rem
+  const svgLinkHeight = linkHeight * svgUnit
+  const svgHeight = flatLinks.length * svgLinkHeight
+  const x0 = 0.5
+  const x1 = 10.5
 
-  // Build the SVG path
   let path = ''
   let currentX = x0
   let y = 0
 
   flatLinks.forEach((item, index) => {
     const targetX = item.level > 0 ? x1 : x0
-    const nextY = y + linkHeight
+    const nextY = y + svgLinkHeight
 
     if (index === 0) {
       path += `M${targetX} ${y}`
@@ -177,7 +174,6 @@ const circuitMaskStyle = computed(() => {
     }
 
     if (targetX !== currentX) {
-      // Diagonal transition
       path += ` L${targetX} ${y + 6}`
       currentX = targetX
     }
@@ -186,11 +182,11 @@ const circuitMaskStyle = computed(() => {
     y = nextY
   })
 
-  const svgPath = encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 ${totalHeight}'><path d='${path}' stroke='black' stroke-width='1' fill='none'/></svg>`)
+  const svgPath = encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 ${svgHeight}'><path d='${path}' stroke='black' stroke-width='1' fill='none'/></svg>`)
 
   return {
-    width: '12px',
-    height: `${totalHeight}px`,
+    width: '0.75rem',
+    height: `${flatLinks.length * linkHeight}rem`,
     maskImage: `url("data:image/svg+xml,${svgPath}")`
   }
 })
@@ -239,6 +235,17 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
     </span>
   </DefineTriggerTemplate>
 
+  <DefineContentTemplate>
+    <div v-if="highlight" data-slot="indicator" :class="ui.indicator({ class: uiProp?.indicator })" :style="{ ...indicatorStyle, ...(circuitMaskStyle || {}) }">
+      <div data-slot="indicatorLine" :class="ui.indicatorLine({ class: uiProp?.indicatorLine })" />
+      <div v-if="indicatorStyle" data-slot="indicatorActive" :class="ui.indicatorActive({ class: uiProp?.indicatorActive })" />
+    </div>
+
+    <slot name="content" :links="links!">
+      <ReuseListTemplate :links="links!" :level="0" />
+    </slot>
+  </DefineContentTemplate>
+
   <CollapsibleRoot v-slot="{ open }" v-bind="{ ...rootProps, ...$attrs }" :default-open="defaultOpen" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
       <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: uiProp?.top })">
@@ -250,54 +257,16 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
           <ReuseTriggerTemplate :open="open" />
         </CollapsibleTrigger>
 
-        <CollapsibleContent data-slot="content" :class="ui.content({ class: [props.ui?.content, 'lg:hidden'] })">
-          <div v-if="highlight && highlightVariant === 'straight'" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
-
-          <div
-            v-if="circuitMaskStyle"
-            data-slot="highlightOverlay"
-            :class="ui.highlightOverlay({ class: props.ui?.highlightOverlay })"
-            :style="{ ...circuitMaskStyle, ...indicatorStyle }"
-          >
-            <div data-slot="highlightLine" :class="ui.highlightLine({ class: props.ui?.highlightLine })" />
-            <div
-              v-if="indicatorStyle"
-              data-slot="highlightActive"
-              :class="ui.highlightActive({ class: props.ui?.highlightActive })"
-              :style="{ transform: `translateY(var(--indicator-position))`, height: 'var(--indicator-size)' }"
-            />
-          </div>
-
-          <slot name="content" :links="links">
-            <ReuseListTemplate :links="links" :level="0" />
-          </slot>
+        <CollapsibleContent data-slot="content" :class="ui.content({ class: [uiProp?.content, 'lg:hidden'] })">
+          <ReuseContentTemplate />
         </CollapsibleContent>
 
         <p data-slot="trigger" :class="ui.trigger({ class: 'hidden lg:flex' })">
           <ReuseTriggerTemplate :open="open" />
         </p>
 
-        <div data-slot="content" :class="ui.content({ class: [props.ui?.content, 'hidden lg:flex'] })">
-          <div v-if="highlight && highlightVariant === 'straight'" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
-
-          <div
-            v-if="circuitMaskStyle"
-            data-slot="highlightOverlay"
-            :class="ui.highlightOverlay({ class: props.ui?.highlightOverlay })"
-            :style="{ ...circuitMaskStyle, ...indicatorStyle }"
-          >
-            <div data-slot="highlightLine" :class="ui.highlightLine({ class: props.ui?.highlightLine })" />
-            <div
-              v-if="indicatorStyle"
-              data-slot="highlightActive"
-              :class="ui.highlightActive({ class: props.ui?.highlightActive })"
-              :style="{ transform: `translateY(var(--indicator-position))`, height: 'var(--indicator-size)' }"
-            />
-          </div>
-
-          <slot name="content" :links="links">
-            <ReuseListTemplate :links="links" :level="0" />
-          </slot>
+        <div data-slot="content" :class="ui.content({ class: [uiProp?.content, 'hidden lg:flex'] })">
+          <ReuseContentTemplate />
         </div>
       </template>
 

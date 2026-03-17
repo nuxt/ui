@@ -50,11 +50,12 @@ describe('ContentToc', () => {
     // Props
     ['with links', { props }],
     ['with title', { props: { ...props, title: 'On this page' } }],
-    ['with as', { props: { ...props, as: 'div' } }],
     ['with neutral color', { props: { ...props, color: 'neutral' as const } }],
     ['with highlight', { props: { ...props, highlight: true } }],
-    ['with gray highlightColor', { props: { ...props, highlightColor: 'neutral' as const } }],
+    ['with highlight neutral color', { props: { ...props, highlight: true, highlightColor: 'neutral' as const } }],
+    ['with highlight circuit variant', { props: { ...props, highlight: true, highlightVariant: 'circuit' as const } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-plus' } }],
+    ['with as', { props: { ...props, as: 'div' } }],
     ['with class', { props: { ...props, class: 'lg:px-8' } }],
     ['with ui', { props: { ...props, ui: { trailingIcon: 'size-6' } } }],
     // Slots
