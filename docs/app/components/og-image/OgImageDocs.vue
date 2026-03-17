@@ -10,9 +10,9 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="bg-white w-full h-full flex flex-col">
-    <div class="absolute top-0 bottom-0 left-26 w-[2px] bg-slate-200" />
-    <div class="absolute top-0 bottom-0 right-26 w-[2px] bg-slate-200" />
+  <div class="bg-white size-full flex flex-col">
+    <div class="absolute inset-y-0 left-26 w-[2px] bg-slate-200" />
+    <div class="absolute inset-y-0 right-26 w-[2px] bg-slate-200" />
     <div class="absolute top-12 inset-x-0 h-[2px] bg-slate-200" />
     <div class="absolute bottom-26 inset-x-26 h-[2px] bg-slate-200" />
     <div class="absolute bottom-12 inset-x-0 h-[2px] bg-slate-200" />
@@ -26,7 +26,7 @@ withDefaults(defineProps<{
       <path fill-rule="evenodd" clip-rule="evenodd" d="M1000 60.0233L1020 60V77L1020 128V156.007L1020 181L1020 189.004C1020 192.938 1019.98 194.429 1017 197.001C1014.02 199.725 1009.56 200 1005 200H986.001V181.006L986 130.012V70.0215C986 66.1576 986.016 64.5494 989 62.023C991.819 59.6358 995.437 60.0233 1000 60.0233Z" fill="#00DC82" />
     </svg>
     <div class="mx-26 mt-24 border-y-2 border-slate-200 h-14 flex flex-row items-center">
-      <div class="h-full flex items-center border-r-2 border-slate-200 text-[#00C16A] px-6">
+      <div class="h-full flex items-center border-r-2 border-slate-200 text-green-500 px-6">
         <svg
           v-if="framework === 'nuxt'"
           class="h-[40px] w-[40px] mt-[10px]"
@@ -45,7 +45,7 @@ withDefaults(defineProps<{
           <g transform="matrix(1.3333 0 0 -1.3333 -76.311 313.34)"><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-75.491l98.16-170.02 98.16 170.02z" fill="#41b883" /></g><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-36.227l58.896-102.01 58.896 102.01z" fill="#34495e" /></g></g>
         </svg>
       </div>
-      <div class="h-full uppercase flex items-center border-r-2 border-slate-200 text-[#00C16A] text-[20px] font-semibold px-6 pt-1">
+      <div class="h-full uppercase flex items-center border-r-2 border-slate-200 text-green-500 text-[20px] font-semibold px-6 pt-1">
         {{ headline }}
       </div>
     </div>

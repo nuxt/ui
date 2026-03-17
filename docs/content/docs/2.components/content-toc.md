@@ -58,19 +58,12 @@ props:
     - id: highlight
       depth: 3
       text: Highlight
-  - id: api
-    depth: 2
-    text: API
-    children:
-    - id: props
+    - id: 'highlight-color'
       depth: 3
-      text: Props
-    - id: slots
+      text: Highlight Color
+    - id: 'highlight-variant'
       depth: 3
-      text: Slots
-  - id: theme
-    depth: 2
-    text: Theme
+      text: Highlight Variant
 ---
 ::
 
@@ -107,14 +100,18 @@ props:
         - id: highlight
           depth: 3
           text: Highlight
+        - id: 'highlight-color'
+          depth: 3
+          text: Highlight Color
+        - id: 'highlight-variant'
+          depth: 3
+          text: Highlight Variant
 ---
 ::
 
 ### Highlight
 
 Use the `highlight` prop to display a highlighted border for the active item.
-
-Use the `highlight-color` prop to change the color of the border. It defaults to the `color` prop.
 
 ::component-code{prefix="content"}
 ---
@@ -130,8 +127,6 @@ externalTypes:
   - ContentTocLink[]
 props:
   highlight: true
-  highlightColor: 'neutral'
-  color: 'neutral'
   class: 'w-full'
   links:
     - id: usage
@@ -147,6 +142,124 @@ props:
         - id: highlight
           depth: 3
           text: Highlight
+        - id: 'highlight-color'
+          depth: 3
+          text: Highlight Color
+        - id: 'highlight-variant'
+          depth: 3
+          text: Highlight Variant
+---
+::
+
+### Highlight Color
+
+Use the `highlight-color` prop to change the color of the highlight. It defaults to the `color` prop.
+
+::component-code{prefix="content"}
+---
+prettier: true
+collapse: true
+hide:
+  - class
+ignore:
+  - links
+  - highlight
+external:
+  - links
+externalTypes:
+  - ContentTocLink[]
+props:
+  highlight: true
+  highlightColor: 'neutral'
+  class: 'w-full'
+  links:
+    - id: usage
+      depth: 2
+      text: Usage
+      children:
+        - id: title
+          depth: 3
+          text: Title
+        - id: color
+          depth: 3
+          text: Color
+        - id: highlight
+          depth: 3
+          text: Highlight
+        - id: 'highlight-color'
+          depth: 3
+          text: Highlight Color
+        - id: 'highlight-variant'
+          depth: 3
+          text: Highlight Variant
+---
+::
+
+### Highlight Variant :badge{label="Soon" class="align-text-top"}
+
+Use the `highlight-variant` prop to change the style of the highlight. Defaults to `straight`.
+
+::component-code{prefix="content"}
+---
+prettier: true
+collapse: true
+hide:
+  - class
+ignore:
+  - links
+  - highlight
+external:
+  - links
+externalTypes:
+  - ContentTocLink[]
+props:
+  highlight: true
+  highlightColor: 'primary'
+  highlightVariant: 'circuit'
+  class: 'w-full'
+  links:
+    - id: usage
+      depth: 2
+      text: Usage
+      children:
+        - id: title
+          depth: 3
+          text: Title
+        - id: color
+          depth: 3
+          text: Color
+        - id: highlight
+          depth: 3
+          text: Highlight
+        - id: 'highlight-color'
+          depth: 3
+          text: Highlight Color
+        - id: 'highlight-variant'
+          depth: 3
+          text: Highlight Variant
+    - id: examples
+      depth: 2
+      text: Examples
+      children:
+        - id: within-a-page
+          depth: 3
+          text: Within a Page
+    - id: api
+      depth: 2
+      text: API
+      children:
+        - id: props
+          depth: 3
+          text: Props
+        - id: slots
+          depth: 3
+          text: Slots
+        - id: emits
+          depth: 3
+          text: Emits
+    - id: theme
+      depth: 2
+      text: Theme
 ---
 ::
 

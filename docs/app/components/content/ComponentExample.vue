@@ -169,7 +169,7 @@ const urlSearchParams = computed(() => {
   <div ref="el" class="my-5" :style="{ '--ui-header-height': '4rem' }">
     <template v-if="preview">
       <div ref="wrapperContainer" class="relative group/component">
-        <div class="border border-muted relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
+        <div class="border border-muted relative z-1" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
           <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-muted">
             <slot name="options" />
 
@@ -244,10 +244,10 @@ const urlSearchParams = computed(() => {
     </template>
 
     <template v-if="props.source">
-      <div v-if="!!slots.code" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0">
+      <div v-if="!!slots.code" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!">
         <slot name="code" />
       </div>
-      <MDCRenderer v-else-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+      <MDCRenderer v-else-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!" />
     </template>
   </div>
 </template>

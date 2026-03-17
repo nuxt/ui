@@ -2,7 +2,7 @@
 
 exports[`ContentToc > renders with as correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<div data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<div data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -43,7 +43,7 @@ exports[`ContentToc > renders with as correctly 1`] = `
 
 exports[`ContentToc > renders with bottom slot correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -84,7 +84,7 @@ exports[`ContentToc > renders with bottom slot correctly 1`] = `
 
 exports[`ContentToc > renders with class correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))] lg:px-8">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))] lg:px-8">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -125,7 +125,7 @@ exports[`ContentToc > renders with class correctly 1`] = `
 
 exports[`ContentToc > renders with content slot correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -142,7 +142,7 @@ exports[`ContentToc > renders with content slot correctly 1`] = `
 
 exports[`ContentToc > renders with default slot correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">Default slot</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -181,9 +181,9 @@ exports[`ContentToc > renders with default slot correctly 1`] = `
 </nav>"
 `;
 
-exports[`ContentToc > renders with gray highlightColor correctly 1`] = `
+exports[`ContentToc > renders with highlight circuit variant correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -191,26 +191,73 @@ exports[`ContentToc > renders with gray highlightColor correctly 1`] = `
     </div>
     <p data-slot="trigger" class="group text-sm font-semibold flex-1 items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary hidden lg:flex"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></p>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none hidden lg:flex">
-      <!--v-if-->
-      <ul class="min-w-0">
-        <li class="min-w-0"><a href="#installation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-primary"><span data-slot="linkText" class="truncate">Installation</span></a>
+      <div data-slot="indicator" class="absolute ms-2.5 start-0 top-0 rtl:-scale-x-100" style="width: 0.75rem; height: 12.25rem;">
+        <div data-slot="indicatorLine" class="absolute inset-0 bg-(--ui-border)"></div>
+        <!--v-if-->
+      </div>
+      <ul class="min-w-0 ps-6.5">
+        <li class="min-w-0 -ms-px"><a href="#installation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-primary"><span data-slot="linkText" class="truncate">Installation</span></a>
           <!--v-if-->
         </li>
-        <li class="min-w-0"><a href="#components" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Components</span></a>
+        <li class="min-w-0 -ms-px"><a href="#components" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Components</span></a>
           <!--v-if-->
         </li>
-        <li class="min-w-0"><a href="#typography" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Typography</span></a>
+        <li class="min-w-0 -ms-px"><a href="#typography" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Typography</span></a>
           <!--v-if-->
         </li>
-        <li class=""><a href="#utils" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Utils</span></a>
+        <li class="ps-px"><a href="#utils" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Utils</span></a>
           <ul class="ms-3">
-            <li class="min-w-0"><a href="#mapcontentnavigation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">mapContentNavigation</span></a>
+            <li class="min-w-0 -ms-px"><a href="#mapcontentnavigation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">mapContentNavigation</span></a>
               <!--v-if-->
             </li>
-            <li class="min-w-0"><a href="#findpageheadline" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">findPageHeadline</span></a>
+            <li class="min-w-0 -ms-px"><a href="#findpageheadline" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">findPageHeadline</span></a>
               <!--v-if-->
             </li>
-            <li class="min-w-0"><a href="#findpagebreadcrumb" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">findPageBreadcrumb</span></a>
+            <li class="min-w-0 -ms-px"><a href="#findpagebreadcrumb" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">findPageBreadcrumb</span></a>
+              <!--v-if-->
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!--v-if-->
+  </div>
+</nav>"
+`;
+
+exports[`ContentToc > renders with highlight circuit variant neutral color correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+  <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
+    <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
+    <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+      <!--v-if-->
+    </div>
+    <p data-slot="trigger" class="group text-sm font-semibold flex-1 items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary hidden lg:flex"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></p>
+    <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none hidden lg:flex">
+      <div data-slot="indicator" class="absolute ms-2.5 start-0 top-0 rtl:-scale-x-100" style="width: 0.75rem; height: 12.25rem;">
+        <div data-slot="indicatorLine" class="absolute inset-0 bg-(--ui-border)"></div>
+        <!--v-if-->
+      </div>
+      <ul class="min-w-0 ps-6.5">
+        <li class="min-w-0 -ms-px"><a href="#installation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-primary"><span data-slot="linkText" class="truncate">Installation</span></a>
+          <!--v-if-->
+        </li>
+        <li class="min-w-0 -ms-px"><a href="#components" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Components</span></a>
+          <!--v-if-->
+        </li>
+        <li class="min-w-0 -ms-px"><a href="#typography" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Typography</span></a>
+          <!--v-if-->
+        </li>
+        <li class="ps-px"><a href="#utils" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Utils</span></a>
+          <ul class="ms-3">
+            <li class="min-w-0 -ms-px"><a href="#mapcontentnavigation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">mapContentNavigation</span></a>
+              <!--v-if-->
+            </li>
+            <li class="min-w-0 -ms-px"><a href="#findpageheadline" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">findPageHeadline</span></a>
+              <!--v-if-->
+            </li>
+            <li class="min-w-0 -ms-px"><a href="#findpagebreadcrumb" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">findPageBreadcrumb</span></a>
               <!--v-if-->
             </li>
           </ul>
@@ -224,7 +271,7 @@ exports[`ContentToc > renders with gray highlightColor correctly 1`] = `
 
 exports[`ContentToc > renders with highlight correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -232,7 +279,142 @@ exports[`ContentToc > renders with highlight correctly 1`] = `
     </div>
     <p data-slot="trigger" class="group text-sm font-semibold flex-1 items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary hidden lg:flex"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></p>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none hidden lg:flex">
-      <div data-slot="indicator" class="absolute ms-2.5 transition-[translate,height] duration-200 h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full bg-primary"></div>
+      <div data-slot="indicator" class="absolute ms-2.5 transition-[translate,height] duration-200 h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full">
+        <div data-slot="indicatorLine" class="hidden"></div>
+        <!--v-if-->
+      </div>
+      <ul class="min-w-0 ms-2.5 ps-4 border-s border-default">
+        <li class="min-w-0 -ms-px"><a href="#installation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-primary"><span data-slot="linkText" class="truncate">Installation</span></a>
+          <!--v-if-->
+        </li>
+        <li class="min-w-0 -ms-px"><a href="#components" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Components</span></a>
+          <!--v-if-->
+        </li>
+        <li class="min-w-0 -ms-px"><a href="#typography" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Typography</span></a>
+          <!--v-if-->
+        </li>
+        <li class=""><a href="#utils" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Utils</span></a>
+          <ul class="ms-3">
+            <li class="min-w-0 -ms-px"><a href="#mapcontentnavigation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">mapContentNavigation</span></a>
+              <!--v-if-->
+            </li>
+            <li class="min-w-0 -ms-px"><a href="#findpageheadline" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">findPageHeadline</span></a>
+              <!--v-if-->
+            </li>
+            <li class="min-w-0 -ms-px"><a href="#findpagebreadcrumb" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">findPageBreadcrumb</span></a>
+              <!--v-if-->
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!--v-if-->
+  </div>
+</nav>"
+`;
+
+exports[`ContentToc > renders with highlight neutral color correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+  <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
+    <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
+    <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+      <!--v-if-->
+    </div>
+    <p data-slot="trigger" class="group text-sm font-semibold flex-1 items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary hidden lg:flex"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></p>
+    <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none hidden lg:flex">
+      <div data-slot="indicator" class="absolute ms-2.5 transition-[translate,height] duration-200 h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full">
+        <div data-slot="indicatorLine" class="hidden"></div>
+        <!--v-if-->
+      </div>
+      <ul class="min-w-0 ms-2.5 ps-4 border-s border-default">
+        <li class="min-w-0 -ms-px"><a href="#installation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-primary"><span data-slot="linkText" class="truncate">Installation</span></a>
+          <!--v-if-->
+        </li>
+        <li class="min-w-0 -ms-px"><a href="#components" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Components</span></a>
+          <!--v-if-->
+        </li>
+        <li class="min-w-0 -ms-px"><a href="#typography" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Typography</span></a>
+          <!--v-if-->
+        </li>
+        <li class=""><a href="#utils" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Utils</span></a>
+          <ul class="ms-3">
+            <li class="min-w-0 -ms-px"><a href="#mapcontentnavigation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">mapContentNavigation</span></a>
+              <!--v-if-->
+            </li>
+            <li class="min-w-0 -ms-px"><a href="#findpageheadline" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">findPageHeadline</span></a>
+              <!--v-if-->
+            </li>
+            <li class="min-w-0 -ms-px"><a href="#findpagebreadcrumb" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">findPageBreadcrumb</span></a>
+              <!--v-if-->
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!--v-if-->
+  </div>
+</nav>"
+`;
+
+exports[`ContentToc > renders with highlight straight variant correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+  <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
+    <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
+    <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+      <!--v-if-->
+    </div>
+    <p data-slot="trigger" class="group text-sm font-semibold flex-1 items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary hidden lg:flex"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></p>
+    <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none hidden lg:flex">
+      <div data-slot="indicator" class="absolute ms-2.5 transition-[translate,height] duration-200 h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full">
+        <div data-slot="indicatorLine" class="hidden"></div>
+        <!--v-if-->
+      </div>
+      <ul class="min-w-0 ms-2.5 ps-4 border-s border-default">
+        <li class="min-w-0 -ms-px"><a href="#installation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-primary"><span data-slot="linkText" class="truncate">Installation</span></a>
+          <!--v-if-->
+        </li>
+        <li class="min-w-0 -ms-px"><a href="#components" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Components</span></a>
+          <!--v-if-->
+        </li>
+        <li class="min-w-0 -ms-px"><a href="#typography" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Typography</span></a>
+          <!--v-if-->
+        </li>
+        <li class=""><a href="#utils" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">Utils</span></a>
+          <ul class="ms-3">
+            <li class="min-w-0 -ms-px"><a href="#mapcontentnavigation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">mapContentNavigation</span></a>
+              <!--v-if-->
+            </li>
+            <li class="min-w-0 -ms-px"><a href="#findpageheadline" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">findPageHeadline</span></a>
+              <!--v-if-->
+            </li>
+            <li class="min-w-0 -ms-px"><a href="#findpagebreadcrumb" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-muted hover:text-default transition-colors"><span data-slot="linkText" class="truncate">findPageBreadcrumb</span></a>
+              <!--v-if-->
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!--v-if-->
+  </div>
+</nav>"
+`;
+
+exports[`ContentToc > renders with highlight straight variant neutral color correctly 1`] = `
+"<!-- eslint-disable-next-line vue/no-template-shadow -->
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+  <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
+    <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
+    <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+      <!--v-if-->
+    </div>
+    <p data-slot="trigger" class="group text-sm font-semibold flex-1 items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary hidden lg:flex"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></p>
+    <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none hidden lg:flex">
+      <div data-slot="indicator" class="absolute ms-2.5 transition-[translate,height] duration-200 h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full">
+        <div data-slot="indicatorLine" class="hidden"></div>
+        <!--v-if-->
+      </div>
       <ul class="min-w-0 ms-2.5 ps-4 border-s border-default">
         <li class="min-w-0 -ms-px"><a href="#installation" data-slot="link" class="group relative text-sm flex items-center focus-visible:outline-primary py-1 text-primary"><span data-slot="linkText" class="truncate">Installation</span></a>
           <!--v-if-->
@@ -265,7 +447,7 @@ exports[`ContentToc > renders with highlight correctly 1`] = `
 
 exports[`ContentToc > renders with leading slot correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden">Leading slot<span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -306,7 +488,7 @@ exports[`ContentToc > renders with leading slot correctly 1`] = `
 
 exports[`ContentToc > renders with link slot correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -347,7 +529,7 @@ exports[`ContentToc > renders with link slot correctly 1`] = `
 
 exports[`ContentToc > renders with links correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -388,7 +570,7 @@ exports[`ContentToc > renders with links correctly 1`] = `
 
 exports[`ContentToc > renders with neutral color correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -429,7 +611,7 @@ exports[`ContentToc > renders with neutral color correctly 1`] = `
 
 exports[`ContentToc > renders with title correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -470,7 +652,7 @@ exports[`ContentToc > renders with title correctly 1`] = `
 
 exports[`ContentToc > renders with top slot correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <div data-slot="top" class="">Top slot</div><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -511,7 +693,7 @@ exports[`ContentToc > renders with top slot correctly 1`] = `
 
 exports[`ContentToc > renders with trailing slot correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center">Trailing slot</span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -552,7 +734,7 @@ exports[`ContentToc > renders with trailing slot correctly 1`] = `
 
 exports[`ContentToc > renders with trailingIcon correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:plus size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
@@ -593,7 +775,7 @@ exports[`ContentToc > renders with trailingIcon correctly 1`] = `
 
 exports[`ContentToc > renders with ui correctly 1`] = `
 "<!-- eslint-disable-next-line vue/no-template-shadow -->
-<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:-ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
+<nav data-state="closed" data-slot="root" class="sticky top-(--ui-header-height) z-10 bg-default/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 lg:ms-0 overflow-y-auto max-h-[calc(100vh-var(--ui-header-height))]">
   <div data-slot="container" class="pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-default lg:border-0 flex flex-col">
     <!--v-if--><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary lg:hidden"><span data-slot="title" class="truncate">On this page</span><span data-slot="trailing" class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180 lg:hidden size-6" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
     <div data-slot="content" class="relative data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden focus:outline-none lg:hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">

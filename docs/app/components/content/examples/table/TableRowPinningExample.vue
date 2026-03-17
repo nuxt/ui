@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
-import { upperFirst } from 'scule'
 import type { TableColumn } from '@nuxt/ui'
+import type { RowPinningState } from '@tanstack/table-core'
 
+const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
 
 type Payment = {
@@ -43,12 +44,53 @@ const data = ref<Payment[]>([{
   status: 'paid',
   email: 'ethan.harris@example.com',
   amount: 639
+}, {
+  id: '4595',
+  date: '2024-03-10T13:40:00',
+  status: 'refunded',
+  email: 'ava.thomas@example.com',
+  amount: 428
+}, {
+  id: '4594',
+  date: '2024-03-10T09:15:00',
+  status: 'paid',
+  email: 'michael.wilson@example.com',
+  amount: 683
+}, {
+  id: '4593',
+  date: '2024-03-09T20:25:00',
+  status: 'failed',
+  email: 'olivia.taylor@example.com',
+  amount: 947
+}, {
+  id: '4592',
+  date: '2024-03-09T18:45:00',
+  status: 'paid',
+  email: 'benjamin.jackson@example.com',
+  amount: 851
+}, {
+  id: '4591',
+  date: '2024-03-09T16:05:00',
+  status: 'paid',
+  email: 'sophia.miller@example.com',
+  amount: 762
 }])
 
 const columns: TableColumn<Payment>[] = [{
-  accessorKey: 'id',
-  header: '#',
-  cell: ({ row }) => `#${row.getValue('id')}`
+  id: 'pin',
+  cell: ({ row }) => h(UButton, {
+    'icon': 'i-lucide-star',
+    'color': row.getIsPinned() ? 'primary' : 'neutral',
+    'variant': 'ghost',
+    'aria-label': row.getIsPinned() ? 'Unpin row' : 'Pin row to top',
+    'onClick': () => {
+      if (row.getIsPinned()) {
+        row.pin(false)
+      } else {
+        row.pin('top')
+      }
+    }
+  })
 }, {
   accessorKey: 'date',
   header: 'Date',
@@ -58,7 +100,8 @@ const columns: TableColumn<Payment>[] = [{
       month: 'short',
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false
+      hour12: false,
+      timeZone: 'UTC'
     })
   }
 }, {
@@ -94,44 +137,15 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-const table = useTemplateRef('table')
-
-const columnVisibility = ref({
-  id: false
-})
+const rowPinning = ref<RowPinningState>({ top: ['4599', '4597'], bottom: [] })
 </script>
 
 <template>
-  <div class="flex flex-col flex-1 w-full">
-    <div class="flex justify-end px-4 py-3.5 border-b border-accented">
-      <UDropdownMenu
-        :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
-          label: upperFirst(column.id),
-          type: 'checkbox' as const,
-          checked: column.getIsVisible(),
-          onUpdateChecked(checked: boolean) {
-            table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
-          },
-          onSelect(e: Event) {
-            e.preventDefault()
-          }
-        }))"
-        :content="{ align: 'end' }"
-      >
-        <UButton
-          label="Columns"
-          color="neutral"
-          variant="outline"
-          trailing-icon="i-lucide-chevron-down"
-        />
-      </UDropdownMenu>
-    </div>
-
-    <UTable
-      ref="table"
-      v-model:column-visibility="columnVisibility"
-      :data="data"
-      :columns="columns"
-    />
-  </div>
+  <UTable
+    v-model:row-pinning="rowPinning"
+    :data="data"
+    :columns="columns"
+    :get-row-id="(row: Payment) => row.id"
+    class="flex-1 h-96"
+  />
 </template>

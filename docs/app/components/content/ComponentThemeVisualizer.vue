@@ -176,7 +176,7 @@ watch(open, (isOpen) => {
           <div
             v-for="slotName in themeSlots"
             :key="slotName"
-            class="p-1.5 cursor-default hover:bg-elevated/50 transition-colors rounded"
+            class="p-1.5 cursor-default hover:bg-elevated/50 transition-colors rounded-sm"
             :class="[highlightedSlot === slotName && 'bg-elevated/50']"
             @mouseenter="highlightSlot(slotName)"
             @mouseleave="clearHighlight"
@@ -198,7 +198,7 @@ watch(open, (isOpen) => {
       <div
         v-if="highlightStyle"
         :style="highlightStyle"
-        class="pointer-events-none border-2 border-dashed border-primary invert rounded transition-all duration-150"
+        class="pointer-events-none border-2 border-dashed border-primary invert rounded-sm transition-all duration-150"
         :class="[
           highlightedSlot ? 'opacity-100' : 'opacity-0',
           isPortalHighlight ? 'fixed z-2147483647' : 'absolute z-1'
@@ -206,7 +206,7 @@ watch(open, (isOpen) => {
       >
         <div
           v-if="highlightedSlot"
-          class="absolute -top-6 -left-0.5 px-1.5 py-0.5 text-xs font-medium font-mono bg-primary text-highlighted rounded whitespace-nowrap"
+          class="absolute -top-6 -left-0.5 px-1.5 py-0.5 text-xs font-medium font-mono bg-primary text-highlighted rounded-sm whitespace-nowrap"
         >
           {{ highlightedSlot }}
         </div>

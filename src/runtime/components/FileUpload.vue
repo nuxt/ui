@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { VNode } from 'vue'
+import type { VNode, MaybeRef } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
@@ -137,7 +137,7 @@ export interface FileUploadSlots<M extends boolean = false> {
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
-import { computed, toRef, watch } from 'vue'
+import { computed, toRef, toRefs, watch } from 'vue'
 import { Primitive, VisuallyHidden } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -176,10 +176,12 @@ const { t } = useLocale()
 
 const [DefineFilesTemplate, ReuseFilesTemplate] = createReusableTemplate()
 
+const { accept, multiple, reset } = toRefs(props)
+
 const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
-  accept: props.accept,
-  reset: props.reset,
-  multiple: props.multiple,
+  accept,
+  reset,
+  multiple: multiple as MaybeRef<boolean>,
   dropzone: props.dropzone,
   onUpdate
 })

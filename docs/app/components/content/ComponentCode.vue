@@ -423,7 +423,7 @@ const { data: ast } = useAsyncData(codeKey, async () => {
         </template>
       </div>
 
-      <div v-if="component" ref="componentContainer" class="flex justify-center border border-b-0 border-muted relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden, 'dark:bg-neutral-950/50': props.elevated }]">
+      <div v-if="component" ref="componentContainer" class="flex justify-center border border-b-0 border-muted relative p-4 z-1" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden, 'dark:bg-neutral-950/50': props.elevated }]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">
@@ -443,6 +443,6 @@ const { data: ast } = useAsyncData(codeKey, async () => {
       </ClientOnly>
     </div>
 
-    <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+    <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!" />
   </div>
 </template>

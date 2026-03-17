@@ -72,7 +72,7 @@ const {
             @click="setBlackAsPrimary(true)"
           >
             <template #leading>
-              <span class="inline-block w-2 h-2 rounded-full bg-black dark:bg-white" />
+              <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
             </template>
           </ThemePickerButton>
 

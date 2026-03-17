@@ -34,21 +34,24 @@ type AppConfigUI = {
   prefix?: string
 } & TVConfig<typeof ui>
 
-export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'> {
+export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode' | 'content' | 'experimental'> {
   /** Whether to generate declaration files for auto-imported components. */
   dts?: boolean
   ui?: AppConfigUI
   /**
    * Enable or disable `@vueuse/core` color-mode integration
    * @defaultValue `true`
+   * @see https://ui.nuxt.com/docs/getting-started/installation/vue#colormode
    */
   colorMode?: boolean
   /**
    * Override options for `unplugin-auto-import`, or `false` to disable composable auto-imports
+   * @see https://ui.nuxt.com/docs/getting-started/installation/vue#autoimport
    */
   autoImport?: false | Partial<AutoImportOptions>
   /**
    * Override options for `unplugin-vue-components`, or `false` to disable component auto-imports
+   * @see https://ui.nuxt.com/docs/getting-started/installation/vue#components
    */
   components?: false | Partial<ComponentsOptions>
   /**
@@ -57,6 +60,7 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    * - `false`: Disable routing, use anchor tags
    * - `'inertia'`: Use Inertia.js compatibility layer
    * @defaultValue `true`
+   * @see https://ui.nuxt.com/docs/getting-started/installation/vue#router
    */
   router?: boolean | 'inertia'
   /**
@@ -66,6 +70,7 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
   inertia?: boolean
   /**
    * Additional packages to scan for components using Nuxt UI
+   * @see https://ui.nuxt.com/docs/getting-started/installation/vue#scanpackages
    */
   scanPackages?: string[]
 }

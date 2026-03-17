@@ -104,6 +104,25 @@ describe('FileUpload', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
+  it('reactively changes multiple and accept attributes', async () => {
+    const wrapper = await mountSuspended(FileUpload, {
+      props: {
+        multiple: false,
+        accept: 'image/*'
+      }
+    })
+
+    const input = wrapper.find('input[type="file"]')
+
+    expect(input.attributes('accept')).toBe('image/*')
+    expect(input.attributes('multiple')).toBeUndefined()
+
+    await wrapper.setProps({ multiple: true, accept: 'application/pdf' })
+
+    expect(input.attributes('accept')).toBe('application/pdf')
+    expect(input.attributes('multiple')).toBe('')
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(FileUpload)

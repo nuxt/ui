@@ -1778,6 +1778,82 @@ exports[`Table > renders with meta prop correctly 1`] = `
 </div>"
 `;
 
+exports[`Table > renders with row pinning and virtualization correctly 1`] = `
+"<div data-slot="root" class="relative overflow-auto">
+  <div style="height: 325px;">
+    <table data-slot="base" class="min-w-full">
+      <!--v-if-->
+      <thead data-slot="thead" class="relative">
+        <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
+          <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+          <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+          <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+          <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        </tr>
+        <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      </thead>
+      <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary"></tbody>
+      <!--v-if-->
+    </table>
+  </div>
+</div>"
+`;
+
+exports[`Table > renders with row pinning correctly 1`] = `
+"<div data-slot="root" class="relative overflow-auto">
+  <table data-slot="base" class="min-w-full overflow-clip">
+    <!--v-if-->
+    <thead data-slot="thead" class="relative">
+      <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+      </tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+    </thead>
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" data-pinned="top" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">derv1ws0</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">837</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">processing</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">m5gr84i9</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">316</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">success</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">3u1reuv4</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">242</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">success</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">bhqecj4p</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">721</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">failed</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" data-pinned="bottom" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">5kma53ae</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">874</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">success</td>
+        <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
 exports[`Table > renders with sticky correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
   <table data-slot="base" class="min-w-full overflow-clip">
