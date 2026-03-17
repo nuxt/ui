@@ -45,7 +45,6 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
   const colorModeIgnore = !options.colorMode ? ['color-mode/**/*.vue'] : []
   const routerMode = resolveRouterMode(options)
 
-  // Component sources in priority order (first match wins)
   const routerOverrides: Record<string, ComponentSource> = {
     'vue-router': createComponentSource(join(runtimeDir, 'vue/overrides/vue-router'), options.prefix),
     'inertia': createComponentSource(join(runtimeDir, 'vue/overrides/inertia'), options.prefix),
@@ -58,31 +57,8 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
     colorModeIgnore
   )
 
-  const defaultComponents = createComponentSource(
-    join(runtimeDir, 'components'),
-    options.prefix,
-    [...colorModeIgnore, 'content/*.vue', 'prose/**/*.vue']
-  )
-
-  const sources: (ComponentSource | undefined)[] = [routerOverrides[routerMode], unpluginComponents, defaultComponents]
-
-  if (options.prose || options.mdc || options.content) {
-    sources.push(createComponentSource(join(runtimeDir, 'components/prose'), 'Prose'))
-  }
-
-  if (options.content) {
-    sources.push(createComponentSource(join(runtimeDir, 'components/content'), options.prefix))
-  }
-
-  const filteredSources = sources.filter((s): s is ComponentSource => !!s)
-  const packagesToScan = [
-    '@nuxt/ui',
-    '@compodium/examples',
-    ...(Array.isArray(options.scanPackages) ? options.scanPackages : [])
-  ]
-  const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  const packagesRegex = packagesToScan.map(escapeRegex).join('|')
-  const excludeRegex = new RegExp(`[\\\\/]node_modules[\\\\/](?!\\.pnpm|${packagesRegex})`)
+  // Override sources only: Vue-compatible replacements for Icon and Link
+  const overrideSources = [routerOverrides[routerMode], unpluginComponents].filter((s): s is ComponentSource => !!s)
 
   const internalResolverPlugin: UnpluginOptions = {
     /**
@@ -102,7 +78,7 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
 
       const filename = id.match(/([^/]+)\.vue$/)?.[1]
       if (filename) {
-        for (const source of filteredSources) {
+        for (const source of overrideSources) {
           const resolved = source.resolveFile(filename)
           if (resolved) return resolved
         }
@@ -113,6 +89,28 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
   if (options.components === false) {
     return [internalResolverPlugin] satisfies UnpluginOptions[]
   }
+
+  const defaultComponents = createComponentSource(
+    join(runtimeDir, 'components'),
+    options.prefix,
+    [...colorModeIgnore, 'content/*.vue', 'prose/**/*.vue']
+  )
+
+  const proseComponents = (options.prose || options.mdc)
+    ? createComponentSource(join(runtimeDir, 'components/prose'), 'Prose')
+    : undefined
+
+  const allSources: (ComponentSource | undefined)[] = [routerOverrides[routerMode], unpluginComponents, defaultComponents, proseComponents]
+  const filteredSources = allSources.filter((s): s is ComponentSource => !!s)
+
+  const packagesToScan = [
+    '@nuxt/ui',
+    '@compodium/examples',
+    ...(Array.isArray(options.scanPackages) ? options.scanPackages : [])
+  ]
+  const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const packagesRegex = packagesToScan.map(escapeRegex).join('|')
+  const excludeRegex = new RegExp(`[\\\\/]node_modules[\\\\/](?!\\.pnpm|${packagesRegex})`)
 
   const pluginOptions = defu(options.components, <ComponentsOptions>{
     dts: options.dts ?? true,
