@@ -79,15 +79,5 @@ export default defineCommand({
       await sortFile(typesPath)
     }
 
-    const upperName = splitByCase(name).map(p => upperFirst(p)).join('')
-    if (args.prose) {
-      const barrelPath = resolve(path, 'src/runtime/components/prose/index.ts')
-      await appendFile(barrelPath, `export { default as Prose${upperName} } from './${upperName}.vue'`)
-      await sortFile(barrelPath)
-    } else if (!args.content) {
-      const barrelPath = resolve(path, 'src/runtime/components/index.ts')
-      await appendFile(barrelPath, `export { default as ${upperName} } from './${upperName}.vue'`)
-      await sortFile(barrelPath)
-    }
   }
 })

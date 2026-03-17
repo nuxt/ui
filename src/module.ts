@@ -260,7 +260,7 @@ export default defineNuxtModule<ModuleOptions>({
       path: resolve('./runtime/components'),
       pathPrefix: false,
       prefix: options.prefix,
-      ignore: ['color-mode/**', 'content/**', 'prose/**', 'index.ts']
+      ignore: ['color-mode/**', 'content/**', 'prose/**']
     })
 
     addImports(

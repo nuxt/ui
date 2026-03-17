@@ -31,14 +31,6 @@
       "types": "./vue-plugin.d.ts"
     },
     "./runtime/*": "./dist/runtime/*",
-    "./components": {
-      "types": "./dist/runtime/components/index.d.ts",
-      "import": "./dist/runtime/components/index.js"
-    },
-    "./components/prose": {
-      "types": "./dist/runtime/components/prose/index.d.ts",
-      "import": "./dist/runtime/components/prose/index.js"
-    },
     "./components/*": "./dist/runtime/components/*",
     "./composables": {
       "types": "./dist/runtime/composables/index.d.ts",
@@ -77,12 +69,6 @@
       ],
       "runtime/*": [
         "./dist/runtime/*"
-      ],
-      "components": [
-        "./dist/runtime/components/index.d.ts"
-      ],
-      "components/prose": [
-        "./dist/runtime/components/prose/index.d.ts"
       ],
       "components/*": [
         "./dist/runtime/components/*"
