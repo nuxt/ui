@@ -20,6 +20,7 @@ export interface DashboardSidebarToggleProps extends Omit<ButtonProps, LinkProps
    * @defaultValue 'left'
    */
   side?: 'left' | 'right'
+  ui?: { base?: any }
 }
 </script>
 
@@ -29,6 +30,7 @@ import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
@@ -45,8 +47,10 @@ const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class')
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebarToggle['AppConfig']
+const uiProp = useComponentUI('dashboardSidebarToggle', props)
 const { sidebarOpen, toggleSidebar } = useDashboard({ sidebarOpen: ref(false), toggleSidebar: () => {} })
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSidebarToggle || {}) }))
 </script>
 
@@ -58,7 +62,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSid
       'aria-label': sidebarOpen ? t('dashboardSidebarToggle.close') : t('dashboardSidebarToggle.open'),
       ...$attrs
     }"
-    :class="ui({ class: props.class, side: props.side })"
+    :class="ui({ class: [uiProp?.base, props.class], side: props.side })"
     @click="toggleSidebar"
   />
 </template>

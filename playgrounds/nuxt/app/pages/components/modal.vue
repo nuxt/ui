@@ -6,6 +6,7 @@ const LazyModalExample = defineAsyncComponent(() => import('../../components/Mod
 const open = ref(false)
 const count = ref(0)
 const overlay = useOverlay()
+const toast = useToast()
 
 const modal = overlay.create(LazyModalExample, {
   props: {
@@ -17,6 +18,15 @@ function openModal() {
   count.value++
 
   modal.open({ count: count.value })
+}
+
+function showToast() {
+  toast.add({
+    title: 'Toast displayed!',
+    description: 'This toast was triggered from the modal.',
+    color: 'success',
+    icon: 'i-lucide-check-circle'
+  })
 }
 </script>
 
@@ -90,6 +100,20 @@ function openModal() {
 
       <template #footer="{ close }">
         <UButton label="Close with scoped slot close" @click="close" />
+      </template>
+    </UModal>
+
+    <UModal title="Modal with toast" description="Touch bug repro: tap 'Show Toast' multiple times, modal closes unexpectedly on touch devices.">
+      <UButton label="Open with toast" color="neutral" variant="subtle" />
+
+      <template #body>
+        <UButton
+          label="Show Toast"
+          color="neutral"
+          variant="outline"
+          icon="i-lucide-bell"
+          @click="showToast"
+        />
       </template>
     </UModal>
   </div>

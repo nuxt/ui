@@ -1,11 +1,10 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { flushPromises, mount } from '@vue/test-utils'
 import PinInput from '../../src/runtime/components/PinInput.vue'
-import type { PinInputProps } from '../../src/runtime/components/PinInput.vue'
 import type { FormInputEvents } from '../../src/module'
-import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/pin-input'
 
@@ -13,7 +12,7 @@ describe('PinInput', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
 
-  it.each([
+  renderEach(PinInput, [
     // Props
     ['with modelValue', { props: { modelValue: ['1'] } }],
     ['with defaultValue', { props: { defaultValue: ['1'] } }],
@@ -35,10 +34,7 @@ describe('PinInput', () => {
     ['with as', { props: { as: 'span' } }],
     ['with class', { props: { class: 'absolute' } }],
     ['with ui', { props: { ui: { base: 'rounded-full' } } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PinInputProps }) => {
-    const html = await ComponentRender(nameOrHtml, options, PinInput)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   describe('emits', () => {
     test('update:modelValue event', async () => {

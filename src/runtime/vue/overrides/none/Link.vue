@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ButtonHTMLAttributes } from 'vue'
+import type { ButtonHTMLAttributes, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/link'
 import type { ComponentConfig } from '../../../types/tv'
@@ -66,12 +66,12 @@ export interface LinkProps extends BaseLinkProps {
 }
 
 export interface LinkSlots {
-  default(props: { active: boolean }): any
+  default?(props: { active: boolean }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 import { defu } from 'defu'
 import { hasProtocol } from 'ufo'
 import { useAppConfig } from '#imports'
@@ -154,6 +154,18 @@ const linkRel = computed(() => {
 
   return null
 })
+
+const handleNavigation = inject<((event: MouseEvent, context: { href: string, external: boolean, target?: string | null }) => void) | undefined>('nuxtui:router', undefined)
+
+const navigate = handleNavigation
+  ? (e: MouseEvent) => {
+      handleNavigation(e, {
+        href: href.value || '',
+        external: isExternal.value,
+        target: props.target || (isExternal.value ? '_blank' : undefined)
+      })
+    }
+  : undefined
 </script>
 
 <template>
@@ -164,8 +176,8 @@ const linkRel = computed(() => {
         as,
         type,
         disabled,
-        href: href,
-        navigate: undefined,
+        href,
+        navigate,
         rel: linkRel,
         target: target || (isExternal ? '_blank' : undefined),
         isExternal,
@@ -180,8 +192,8 @@ const linkRel = computed(() => {
       as,
       type,
       disabled,
-      href: href,
-      navigate: undefined,
+      href,
+      navigate,
       rel: linkRel,
       target: target || (isExternal ? '_blank' : undefined),
       isExternal

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Odeslat'
     },
+    chatReasoning: {
+      thinking: 'Přemýšlí…',
+      thought: 'Přemýšlel',
+      thoughtFor: 'Přemýšlel {duration}'
+    },
     colorMode: {
       dark: 'Tmavý',
       light: 'Světlý',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Na této stránce'
+    },
+    dropdownMenu: {
+      noMatch: 'Žádná shoda',
+      search: 'Hledat…'
     },
     dashboardSearch: {
       theme: 'Barevný režim'
@@ -111,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopírovat kód do schránky'
       }
+    },
+    sidebar: {
+      close: 'Zavřít',
+      toggle: 'Přepnout'
     },
     selectMenu: {
       create: 'Vytvořit "{label}"',

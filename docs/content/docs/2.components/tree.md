@@ -23,6 +23,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - TreeItem[]
 props:
   items:
     - label: 'app/'

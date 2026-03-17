@@ -145,7 +145,7 @@ function setComponentProp(name: string, value: any) {
 }
 
 const componentTheme = ((props.prose ? theme.prose : theme) as any)[camelName]
-const meta = await fetchComponentMeta(name as any)
+const { data: meta } = await useFetchComponentMeta(name as any)
 
 function mapKeys(obj: object, parentKey = ''): any {
   return Object.entries(obj || {}).flatMap(([key, value]: [string, any]) => {
@@ -163,7 +163,7 @@ const options = computed(() => {
   const keys = mapKeys(props.props || {})
 
   return keys.map((key: string) => {
-    const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
+    const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
     const propItems = get(props.items, key, [])
     const items = propItems.length
       ? propItems.map((item: any) => ({
@@ -292,7 +292,7 @@ ${props.slots?.default}
       continue
     }
 
-    const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
+    const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
     const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name])
     const name = kebabCase(key)
 
@@ -351,9 +351,9 @@ const codeKey = computed(() => `component-code-${name}-${hash(props)}`)
 const wrapperContainer = ref<HTMLElement | null>(null)
 const componentContainer = ref<HTMLElement | null>(null)
 
-const { data: ast } = await useAsyncData(codeKey, async () => {
+const { data: ast } = useAsyncData(codeKey, async () => {
   if (!props.prettier) {
-    return parseMarkdown(code.value)
+    return cachedParseMarkdown(code.value)
   }
 
   let formatted = ''
@@ -368,8 +368,8 @@ const { data: ast } = await useAsyncData(codeKey, async () => {
     formatted = code.value
   }
 
-  return parseMarkdown(formatted)
-}, { watch: [code] })
+  return cachedParseMarkdown(formatted)
+}, { lazy: import.meta.client, watch: [code] })
 </script>
 
 <template>

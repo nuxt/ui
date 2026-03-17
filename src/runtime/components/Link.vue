@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { RouterLinkProps, RouteLocationRaw } from 'vue-router'
 import theme from '#build/ui/link'
@@ -93,7 +94,14 @@ export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Button
 export type LinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media'
 
 export interface LinkSlots {
-  default(props: { active: boolean }): any
+  default?(props: { active: boolean }): VNode[]
+}
+
+// from upstream NuxtLink
+interface NuxtLinkDefaultSlotProps {
+  rel: string | null
+  target: '_blank' | '_parent' | '_self' | '_top' | (string & {}) | null
+  isExternal: boolean
 }
 </script>
 
@@ -176,7 +184,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
 </script>
 
 <template>
-  <NuxtLink v-slot="{ href, navigate, route: linkRoute, rel, target, isExternal, isActive, isExactActive }" v-bind="nuxtLinkProps" :to="to" custom>
+  <NuxtLink v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive, ...rest }" v-bind="nuxtLinkProps" :to="to" custom>
     <template v-if="custom">
       <slot
         v-bind="{
@@ -187,9 +195,9 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
           disabled,
           href,
           navigate,
-          rel,
-          target,
-          isExternal,
+          rel: (rest as NuxtLinkDefaultSlotProps).rel,
+          target: (rest as NuxtLinkDefaultSlotProps).target,
+          isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal,
           active: isLinkActive({ route: linkRoute, isActive, isExactActive })
         }"
       />
@@ -204,9 +212,9 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
         disabled,
         href,
         navigate,
-        rel,
-        target,
-        isExternal
+        rel: (rest as NuxtLinkDefaultSlotProps).rel,
+        target: (rest as NuxtLinkDefaultSlotProps).target,
+        isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal
       }"
       :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
     >

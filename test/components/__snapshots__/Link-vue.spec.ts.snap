@@ -18,6 +18,6 @@ exports[`Link > renders with raw correctly 1`] = `"<button type="button" class="
 
 exports[`Link > renders with raw inactiveClass correctly 1`] = `"<button type="button" class="hover:text-primary"></button>"`;
 
-exports[`Link > renders with to correctly 1`] = `"<a href="/" class="focus-visible:outline-primary text-muted hover:text-default transition-colors"></a>"`;
+exports[`Link > renders with to correctly 1`] = `"<a href="/" class="focus-visible:outline-primary text-primary"></a>"`;
 
 exports[`Link > renders with type correctly 1`] = `"<button type="submit" class="focus-visible:outline-primary text-muted hover:text-default transition-colors"></button>"`;

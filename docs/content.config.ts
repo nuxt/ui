@@ -85,9 +85,11 @@ export const collections = {
     }],
     schema: z.object({
       category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay', 'dashboard', 'page', 'chat', 'editor', 'color-mode', 'i18n']).optional(),
+      index: z.boolean().optional(),
       framework: z.enum(['nuxt', 'vue']).optional(),
       navigation: z.object({
-        title: z.string().optional()
+        title: z.string().optional(),
+        badge: z.string().optional()
       }),
       links: z.array(Button)
     })
@@ -163,6 +165,7 @@ export const collections = {
         framework: z.enum(['nuxt', 'vue']),
         features: z.array(PageFeature).optional(),
         links: z.array(Button).optional(),
+        open_links: z.array(Button).optional(),
         deploy_links: z.array(Button).optional()
       }))
     })

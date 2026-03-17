@@ -70,6 +70,7 @@ class: 'p-8'
 props:
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
 ---
 ::
 

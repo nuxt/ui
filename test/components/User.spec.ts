@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import User from '../../src/runtime/components/User.vue'
-import type { UserProps, UserSlots } from '../../src/runtime/components/User.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/user'
 
 describe('User', () => {
@@ -16,7 +15,7 @@ describe('User', () => {
     avatar: { src: 'https://github.com/benjamincanac.png', alt: 'User avatar' }
   }
 
-  it.each([
+  renderEach(User, [
     // Props
     ['with name', { props: { name: props.name } }],
     ['with description', { props: { name: props.name, description: props.description } }],
@@ -33,10 +32,7 @@ describe('User', () => {
     ['with name slot', { props, slots: { name: () => 'Name slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: UserProps, slots?: Partial<UserSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, User)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(User, {

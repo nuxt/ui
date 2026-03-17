@@ -14,6 +14,7 @@ export default defineMcpTool({
     let query = queryCollection(event, 'docs')
       .where('path', 'LIKE', '/docs/components/%')
       .where('extension', '=', 'md')
+      .where('index', 'IS NULL')
       .select('id', 'title', 'description', 'path', 'category', 'links')
 
     if (category) {

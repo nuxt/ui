@@ -35,6 +35,8 @@ ignore:
   - versions
 external:
   - versions
+externalTypes:
+  - ChangelogVersionProps[]
 hide:
   - class
 props:
@@ -75,6 +77,8 @@ ignore:
   - versions
 external:
   - versions
+externalTypes:
+  - ChangelogVersionProps[]
 hide:
   - class
 props:
@@ -116,6 +120,8 @@ ignore:
   - versions
 external:
   - versions
+externalTypes:
+  - ChangelogVersionProps[]
 hide:
   - class
 items:
@@ -206,7 +212,7 @@ props:
 ---
 ::
 
-### With scroll container :badge{label="Soon" class="align-text-top"}
+### With scroll container :badge{label="4.4+" class="align-text-top"}
 
 Pass an object to the `indicator` prop to configure the scroll container. By default, the indicator tracks the window/page scroll (https://motion.dev/docs/vue-use-scroll#page-scroll).
 

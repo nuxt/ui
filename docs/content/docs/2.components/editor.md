@@ -9,7 +9,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Editor.vue
-navigation.badge: New
 ---
 
 ## Usage
@@ -587,7 +586,7 @@ CRITICAL RULES:
   }
 
   return streamText({
-    model: gateway('openai/gpt-4o-mini'),
+    model: gateway('anthropic/claude-haiku-4.5'),
     system,
     prompt,
     maxOutputTokens

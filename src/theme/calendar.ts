@@ -11,8 +11,10 @@ export default (options: Required<ModuleOptions>) => ({
     gridWeekDaysRow: 'mb-1 grid w-full grid-cols-7',
     gridBody: 'grid',
     headCell: 'rounded-md',
+    headCellWeek: 'rounded-md text-muted',
     cell: 'relative text-center',
-    cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold data-[outside-view]:text-muted', options.theme.transitions && 'transition']
+    cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold data-[outside-view]:text-muted', options.theme.transitions && 'transition'],
+    cellWeek: 'relative text-center text-muted'
   },
   variants: {
     color: {
@@ -35,31 +37,45 @@ export default (options: Required<ModuleOptions>) => ({
       xs: {
         heading: 'text-xs',
         cell: 'text-xs',
+        cellWeek: 'text-xs',
         headCell: 'text-[10px]',
+        headCellWeek: 'text-[10px]',
         cellTrigger: 'size-7',
         body: 'space-y-2 pt-2'
       },
       sm: {
         heading: 'text-xs',
         headCell: 'text-xs',
+        headCellWeek: 'text-xs',
+        cellWeek: 'text-xs',
         cell: 'text-xs',
         cellTrigger: 'size-7'
       },
       md: {
         heading: 'text-sm',
         headCell: 'text-xs',
+        headCellWeek: 'text-xs',
+        cellWeek: 'text-xs',
         cell: 'text-sm',
         cellTrigger: 'size-8'
       },
       lg: {
         heading: 'text-md',
         headCell: 'text-md',
+        headCellWeek: 'text-md',
         cellTrigger: 'size-9 text-md'
       },
       xl: {
         heading: 'text-lg',
         headCell: 'text-lg',
+        headCellWeek: 'text-lg',
         cellTrigger: 'size-10 text-lg'
+      }
+    },
+    weekNumbers: {
+      true: {
+        gridRow: 'grid-cols-8',
+        gridWeekDaysRow: 'grid-cols-8 [&>*:first-child]:col-start-2'
       }
     }
   },

@@ -20,6 +20,8 @@ ignore:
   - links
 external:
   - links
+externalTypes:
+  - PageLink[]
 props:
   links:
     - label: 'Edit this page'

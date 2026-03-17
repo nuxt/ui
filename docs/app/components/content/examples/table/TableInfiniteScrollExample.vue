@@ -21,14 +21,13 @@ type UserResponse = {
 
 const skip = ref(0)
 
-const { data, status, execute } = await useFetch('https://dummyjson.com/users?limit=10&select=firstName,username,email,image', {
+const { data, status } = useLazyFetch('https://dummyjson.com/users?limit=10&select=firstName,username,email,image', {
   key: 'table-users-infinite-scroll',
   params: { skip },
   transform: (data?: UserResponse) => {
     return data?.users
   },
-  lazy: true,
-  immediate: false
+  server: false
 })
 
 const columns: TableColumn<User>[] = [{
@@ -37,7 +36,7 @@ const columns: TableColumn<User>[] = [{
 }, {
   accessorKey: 'image',
   header: 'Avatar',
-  cell: ({ row }) => h(UAvatar, { src: row.original.image })
+  cell: ({ row }) => h(UAvatar, { src: row.original.image, loading: 'lazy' })
 }, {
   accessorKey: 'firstName',
   header: 'First name'
@@ -58,8 +57,6 @@ watch(data, () => {
   ]
 })
 
-execute()
-
 const table = useTemplateRef('table')
 
 onMounted(() => {
@@ -79,7 +76,7 @@ onMounted(() => {
     ref="table"
     :data="users"
     :columns="columns"
-    :loading="status === 'pending'"
+    :loading="status === 'pending' || status === 'idle'"
     sticky
     class="flex-1 h-80"
   />

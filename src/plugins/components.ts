@@ -45,7 +45,6 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
   const colorModeIgnore = !options.colorMode ? ['color-mode/**/*.vue'] : []
   const routerMode = resolveRouterMode(options)
 
-  // Component sources in priority order (first match wins)
   const routerOverrides: Record<string, ComponentSource> = {
     'vue-router': createComponentSource(join(runtimeDir, 'vue/overrides/vue-router'), options.prefix),
     'inertia': createComponentSource(join(runtimeDir, 'vue/overrides/inertia'), options.prefix),
@@ -58,13 +57,52 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
     colorModeIgnore
   )
 
+  // Override sources only: Vue-compatible replacements for Icon and Link
+  const overrideSources = [routerOverrides[routerMode], unpluginComponents].filter((s): s is ComponentSource => !!s)
+
+  const internalResolverPlugin: UnpluginOptions = {
+    /**
+     * This plugin aims to ensure we override certain components with Vue-compatible versions:
+     * <UIcon> and <ULink> currently.
+     */
+    name: 'nuxt:ui:components',
+    enforce: 'pre',
+    resolveId(id, importer) {
+      if (!importer || !normalize(importer).includes(runtimeDir)) {
+        return
+      }
+
+      if (!RELATIVE_IMPORT_RE.test(id)) {
+        return
+      }
+
+      const filename = id.match(/([^/]+)\.vue$/)?.[1]
+      if (filename) {
+        for (const source of overrideSources) {
+          const resolved = source.resolveFile(filename)
+          if (resolved) return resolved
+        }
+      }
+    }
+  }
+
+  if (options.components === false) {
+    return [internalResolverPlugin] satisfies UnpluginOptions[]
+  }
+
   const defaultComponents = createComponentSource(
     join(runtimeDir, 'components'),
     options.prefix,
     [...colorModeIgnore, 'content/*.vue', 'prose/**/*.vue']
   )
 
-  const sources = [routerOverrides[routerMode], unpluginComponents, defaultComponents].filter((s): s is ComponentSource => !!s)
+  const proseComponents = (options.prose || options.mdc)
+    ? createComponentSource(join(runtimeDir, 'components/prose'), 'Prose')
+    : undefined
+
+  const allSources: (ComponentSource | undefined)[] = [routerOverrides[routerMode], unpluginComponents, defaultComponents, proseComponents]
+  const filteredSources = allSources.filter((s): s is ComponentSource => !!s)
+
   const packagesToScan = [
     '@nuxt/ui',
     '@compodium/examples',
@@ -83,7 +121,7 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
     ],
     resolvers: [
       (componentName) => {
-        for (const source of sources) {
+        for (const source of filteredSources) {
           const resolved = source.resolve(componentName)
           if (resolved) return resolved
         }
@@ -92,33 +130,7 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
   })
 
   return [
-    /**
-     * This plugin aims to ensure we override certain components with Vue-compatible versions:
-     * <UIcon> and <ULink> currently.
-     */
-    {
-      name: 'nuxt:ui:components',
-      enforce: 'pre',
-      resolveId(id, importer) {
-        // only apply to runtime nuxt ui components
-        if (!importer || !normalize(importer).includes(runtimeDir)) {
-          return
-        }
-
-        // only apply to relative imports
-        if (!RELATIVE_IMPORT_RE.test(id)) {
-          return
-        }
-
-        const filename = id.match(/([^/]+)\.vue$/)?.[1]
-        if (filename) {
-          for (const source of sources) {
-            const resolved = source.resolveFile(filename)
-            if (resolved) return resolved
-          }
-        }
-      }
-    },
+    internalResolverPlugin,
     AutoImportComponents.raw(pluginOptions, meta) as UnpluginOptions
   ] satisfies UnpluginOptions[]
 }

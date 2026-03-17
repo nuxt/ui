@@ -10,9 +10,12 @@ export default defineMcpTool({
   async handler({ templateName }) {
     const event = useEvent()
 
-    const template = await queryCollection(event, 'templates')
-      .where('title', '=', templateName)
-      .first()
+    const templatesCollectionItems = await queryCollection(event, 'templates').first()
+    const templateListing = templatesCollectionItems?.items || []
+
+    const template = templateListing.find((t: any) =>
+      t.title.toLowerCase() === templateName.toLowerCase()
+    )
 
     if (!template) {
       return errorResult(`Template "${templateName}" not found. Use the list_templates tool to see all available templates.`)

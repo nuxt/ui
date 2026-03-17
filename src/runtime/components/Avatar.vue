@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
 import type { ChipProps, IconProps } from '../types'
@@ -31,7 +32,7 @@ export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 
 }
 
 export interface AvatarSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
@@ -41,6 +42,7 @@ import { Primitive, Slot } from 'reka-ui'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import ImageComponent from '#build/ui-image-component'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -61,6 +63,7 @@ const as = computed(() => {
 const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
 
 const appConfig = useAppConfig() as Avatar['AppConfig']
+const uiProp = useComponentUI('avatar', props)
 const { size } = useAvatarGroup(props)
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -68,17 +71,17 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}
   size: size.value
 }))
 
-const sizePx = computed(() => ({
-  '3xs': 16,
-  '2xs': 20,
-  'xs': 24,
-  'sm': 28,
-  'md': 32,
-  'lg': 36,
-  'xl': 40,
-  '2xl': 44,
-  '3xl': 48
-})[props.size || 'md'])
+const rootClass = computed(() => ui.value.root({ class: [uiProp.value?.root, props.class] }))
+
+const sizePx = computed(() => {
+  const sizeClass = rootClass.value.split(' ').find(c => /^size-\d+$/.test(c))
+  if (sizeClass) {
+    const num = Number.parseFloat(sizeClass.split('-')[1] ?? '')
+    if (!Number.isNaN(num)) return num * 4
+  }
+
+  return null
+})
 
 const error = ref(false)
 
@@ -99,7 +102,7 @@ function onError() {
     :as="as.root"
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
     data-slot="root"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="rootClass"
     :style="props.style"
   >
     <component
@@ -111,14 +114,14 @@ function onError() {
       :height="sizePx"
       v-bind="$attrs"
       data-slot="image"
-      :class="ui.image({ class: props.ui?.image })"
+      :class="ui.image({ class: uiProp?.image })"
       @error="onError"
     />
 
     <Slot v-else v-bind="$attrs">
       <slot>
-        <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
-        <span v-else data-slot="fallback" :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
+        <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
+        <span v-else data-slot="fallback" :class="ui.fallback({ class: uiProp?.fallback })">{{ fallback || '&nbsp;' }}</span>
       </slot>
     </Slot>
   </component>
