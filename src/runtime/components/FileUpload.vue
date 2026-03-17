@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { VNode } from 'vue'
+import type { VNode, MaybeRef } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
@@ -137,7 +137,7 @@ export interface FileUploadSlots<M extends boolean = false> {
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
-import { computed, toRef, toRefs, watch, type MaybeRef } from 'vue'
+import { computed, toRef, toRefs, watch } from 'vue'
 import { Primitive, VisuallyHidden } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
