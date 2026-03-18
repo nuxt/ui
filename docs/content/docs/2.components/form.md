@@ -239,9 +239,9 @@ This will give you access to the following:
 | `errors`{lang="ts-type"} | `Ref<FormErrorWithId[]>`{lang="ts-type"} <br> <div class="text-toned mt-1"><p>A reference to the array containing validation errors. Use this to access or manipulate the error information.</p></div> |
 | `disabled`{lang="ts-type"} | `Ref<boolean>`{lang="ts-type"} |
 | `dirty`{lang="ts-type"} | `Ref<boolean>`{lang="ts-type"} `true` if at least one form field has been updated by the user. |
-| `dirtyFields`{lang="ts-type"} | `DeepReadonly<Set<keyof T>>`{lang="ts-type"} Tracks fields that have been modified by the user. |
-| `touchedFields`{lang="ts-type"} | `DeepReadonly<Set<keyof T>>`{lang="ts-type"} Tracks fields that the user interacted with. |
-| `blurredFields`{lang="ts-type"} | `DeepReadonly<Set<keyof T>>`{lang="ts-type"} Tracks fields blurred by the user. |
+| `dirtyFields`{lang="ts-type"} | `ReadonlySet<DeepReadonly<keyof T>>`{lang="ts-type"} Tracks fields that have been modified by the user. |
+| `touchedFields`{lang="ts-type"} | `ReadonlySet<DeepReadonly<keyof T>>`{lang="ts-type"} Tracks fields that the user interacted with. |
+| `blurredFields`{lang="ts-type"} | `ReadonlySet<DeepReadonly<keyof T>>`{lang="ts-type"} Tracks fields blurred by the user. |
 
 ## Theme
 
