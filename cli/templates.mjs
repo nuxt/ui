@@ -26,6 +26,7 @@ const component = ({ name, primitive, prose, content }) => {
     contents: primitive
       ? `
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
 import type { ComponentConfig } from '../types/tv'
@@ -43,7 +44,7 @@ export interface ${upperName}Props {
 }
 
 export interface ${upperName}Slots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
@@ -144,23 +145,19 @@ import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ${upperName} from '../../${content ? '../' : ''}src/runtime/components/${content ? 'content/' : ''}${upperName}.vue'
-import type { ${upperName}Props, ${upperName}Slots } from '../../${content ? '../' : ''}src/runtime/components/${content ? 'content/' : ''}${upperName}.vue'
-import ComponentRender from '../${content ? '../' : ''}component-render'
+import { renderEach } from '../${content ? '../' : ''}component-render'
 
 describe('${upperName}', () => {
   const props = {}
 
-  it.each([
+  renderEach(${upperName}, [
     // Props
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: '' } }],
     ['with ui', { props: { ui: {} } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ${upperName}Props, slots?: Partial<${upperName}Slots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, ${upperName})
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(${upperName}, {

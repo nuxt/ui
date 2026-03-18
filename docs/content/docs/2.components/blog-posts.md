@@ -35,6 +35,8 @@ ignore:
   - posts
 external:
   - posts
+externalTypes:
+  - BlogPostProps[]
 props:
   posts:
     - title: Nuxt Icon v1
@@ -63,6 +65,8 @@ ignore:
   - posts
 external:
   - posts
+externalTypes:
+  - BlogPostProps[]
 props:
   orientation: vertical
   posts:

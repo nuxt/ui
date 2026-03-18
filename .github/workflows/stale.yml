@@ -14,12 +14,13 @@ jobs:
       issues: write
 
     steps:
-      - uses: actions/stale@4c023f01d613e60293d8004f251a18bfb9bbd71d
+      - uses: actions/stale@v10
         with:
           days-before-pr-stale: -1
           days-before-stale: 60
           days-before-close: 7
           any-of-labels: 'triage,question'
+          exempt-issue-labels: 'needs reproduction'
           stale-issue-label: 'stale'
           stale-issue-message: |
             Hi! 👋 This issue has been open for 60 days without activity and will be closed in 7 days. Please comment if it's still relevant.

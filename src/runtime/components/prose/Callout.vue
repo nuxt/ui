@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/callout'
 import type { IconProps, LinkProps } from '../../types'
@@ -19,13 +20,14 @@ export interface ProseCalloutProps {
 }
 
 export interface ProseCalloutSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { tv } from '../../utils/tv'
 import ULink from '../Link.vue'
 import UIcon from '../Icon.vue'
@@ -36,6 +38,7 @@ const props = defineProps<ProseCalloutProps>()
 defineSlots<ProseCalloutSlots>()
 
 const appConfig = useAppConfig() as ProseCallout['AppConfig']
+const uiProp = useComponentUI('prose.callout', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.callout || {}) })({
   color: props.color,
@@ -46,7 +49,7 @@ const target = computed(() => props.target || (!!props.to && typeof props.to ===
 </script>
 
 <template>
-  <div :class="ui.base({ class: props.class })">
+  <div :class="ui.base({ class: [uiProp?.base, props.class] })">
     <ULink
       v-if="to"
       v-bind="{ to, target, ...$attrs }"
@@ -56,8 +59,8 @@ const target = computed(() => props.target || (!!props.to && typeof props.to ===
       <span class="absolute inset-0" aria-hidden="true" />
     </ULink>
 
-    <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
-    <UIcon v-if="!!to && target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.externalIcon({ class: props.ui?.externalIcon })" />
+    <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: uiProp?.icon })" />
+    <UIcon v-if="!!to && target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.externalIcon({ class: uiProp?.externalIcon })" />
 
     <slot mdc-unwrap="p" />
   </div>

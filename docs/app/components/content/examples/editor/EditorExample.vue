@@ -5,7 +5,8 @@ import { upperFirst } from 'scule'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import { TextAlign } from '@tiptap/extension-text-align'
-import { ImageUpload } from './EditorImageUpload'
+import { CodeBlockShiki } from 'tiptap-extension-code-block-shiki'
+import { ImageUpload } from './EditorImageUploadExtension'
 import { useEditorCompletion } from './EditorUseCompletion'
 import EditorLinkPopover from './EditorLinkPopover.vue'
 
@@ -44,7 +45,7 @@ Try out these powerful capabilities:
 
 Perfect for technical documentation:
 
-\`\`\`
+\`\`\`vue
 <template>
   <UEditor v-model="value" content-type="markdown" />
 </template>
@@ -539,25 +540,25 @@ const suggestionItems = [[{
 
 const mentionItems: EditorMentionMenuItem[] = [{
   label: 'benjamincanac',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4', loading: 'lazy' as const }
 }, {
   label: 'HugoRCD',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/71938701?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/71938701?v=4', loading: 'lazy' as const }
 }, {
   label: 'romhml',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/25613751?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/25613751?v=4', loading: 'lazy' as const }
 }, {
   label: 'sandros94',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/13056429?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/13056429?v=4', loading: 'lazy' as const }
 }, {
   label: 'hywax',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/149865959?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/149865959?v=4', loading: 'lazy' as const }
 }, {
   label: 'J-Michalek',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/71264422?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/71264422?v=4', loading: 'lazy' as const }
 }, {
   label: 'genu',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/928780?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/928780?v=4', loading: 'lazy' as const }
 }]
 
 const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.name.startsWith('regional_indicator_'))
@@ -573,6 +574,13 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
       Emoji,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
       ImageUpload,
+      CodeBlockShiki.configure({
+        defaultTheme: 'material-theme',
+        themes: {
+          light: 'material-theme-lighter',
+          dark: 'material-theme-palenight'
+        }
+      }),
       completionExtension
     ]"
     :handlers="customHandlers"
@@ -612,6 +620,12 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
       }"
     />
 
+    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
+
+    <UEditorMentionMenu :editor="editor" :items="mentionItems" />
+
+    <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
+
     <UEditorDragHandle v-slot="{ ui, onClick }" :editor="editor" @node-change="selectedNode = $event">
       <UButton
         icon="i-lucide-plus"
@@ -646,9 +660,13 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
         />
       </UDropdownMenu>
     </UEditorDragHandle>
-
-    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
-    <UEditorMentionMenu :editor="editor" :items="mentionItems" />
-    <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
   </UEditor>
 </template>
+
+<style>
+html.dark .tiptap .shiki,
+html.dark .tiptap .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--ui-bg-muted) !important;
+}
+</style>

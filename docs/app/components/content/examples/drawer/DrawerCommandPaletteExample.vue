@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const searchTerm = ref('')
 
-const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
-  key: 'command-palette-users',
+const { data: users, status, execute } = await useLazyFetch('https://jsonplaceholder.typicode.com/users', {
+  key: 'drawer-command-palette-users',
   params: { q: searchTerm },
   transform: (data: { id: number, name: string, email: string }[]) => {
-    return data?.map(user => ({ id: user.id, label: user.name, suffix: user.email, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
+    return data?.map(user => ({ id: user.id, label: user.name, suffix: user.email, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const } })) || []
   },
-  lazy: true
+  immediate: false
 })
 
 const groups = computed(() => [{
@@ -16,10 +16,16 @@ const groups = computed(() => [{
   items: users.value || [],
   ignoreFilter: true
 }])
+
+function onOpen() {
+  if (!users.value?.length) {
+    execute()
+  }
+}
 </script>
 
 <template>
-  <UDrawer :handle="false">
+  <UDrawer :handle="false" @update:open="onOpen">
     <UButton
       label="Search users..."
       color="neutral"

@@ -5,9 +5,7 @@ import captureWebsite from 'capture-website'
 
 interface ContentFile {
   id?: string
-  body?: {
-    items: TemplateItem[]
-  }
+  items?: TemplateItem[]
 }
 
 interface TemplateItem {
@@ -22,10 +20,10 @@ export default defineNuxtModule((_, nuxt) => {
     if (!file.id?.includes('showcase')) {
       return
     }
-    if (!file.body?.items?.length) {
+    if (!file.items?.length) {
       return
     }
-    for (const template of file.body.items) {
+    for (const template of file.items) {
       const url = template.screenshotUrl || template.url
       if (!url) {
         console.error(`Template ${template.name} has no "url" or "screenshotUrl" to take a screenshot from`)

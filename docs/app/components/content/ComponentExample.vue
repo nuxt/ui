@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ChipProps } from '@nuxt/ui'
-import { camelCase } from 'scule'
+import { camelCase, upperFirst } from 'scule'
 import { hash } from 'ohash'
 import { useElementSize } from '@vueuse/core'
 import { get, set } from '#ui/utils'
@@ -44,6 +44,7 @@ const props = withDefaults(defineProps<{
    * A list of variable props to link to the component.
    */
   options?: Array<{
+    type?: string
     alias?: string
     name: string
     label: string
@@ -88,7 +89,11 @@ const { width } = useElementSize(el)
 
 const camelName = camelCase(props.name)
 
-const data = await fetchComponentExample(camelName)
+const exampleModules = import.meta.glob('~/components/content/examples/**/*.vue')
+const exampleMatch = Object.entries(exampleModules).find(([path]) => path.endsWith(`/${upperFirst(camelName)}.vue`))
+const resolvedComponent = exampleMatch ? defineAsyncComponent(exampleMatch[1] as any) : undefined
+
+const { data } = await useFetchComponentExample(camelName)
 
 const componentProps = reactive({ ...(props.props || {}) })
 
@@ -100,8 +105,8 @@ const code = computed(() => {
 `
   }
 
-  code += `\`\`\`${props.lang} ${props.preview ? '' : ` [${props.filename ?? data.pascalName}.${props.lang}]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
-${data?.code ?? ''}
+  code += `\`\`\`${props.lang} ${props.preview ? '' : ` [${props.filename ?? data.value?.pascalName}.${props.lang}]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
+${data.value?.code ?? ''}
 \`\`\``
 
   if (props.collapse) {
@@ -112,9 +117,9 @@ ${data?.code ?? ''}
   return code
 })
 
-const { data: ast } = await useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
+const { data: ast } = useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
   if (!props.prettier) {
-    return parseMarkdown(code.value)
+    return cachedParseMarkdown(code.value)
   }
 
   let formatted = ''
@@ -129,8 +134,8 @@ const { data: ast } = await useAsyncData(`component-example-${camelName}${hash({
     formatted = code.value
   }
 
-  return parseMarkdown(formatted)
-}, { watch: [code] })
+  return cachedParseMarkdown(formatted)
+}, { lazy: import.meta.client, watch: [code] })
 
 const optionsValues = ref(props.options?.reduce((acc, option) => {
   if (option.name) {
@@ -164,7 +169,7 @@ const urlSearchParams = computed(() => {
   <div ref="el" class="my-5" :style="{ '--ui-header-height': '4rem' }">
     <template v-if="preview">
       <div ref="wrapperContainer" class="relative group/component">
-        <div class="border border-muted relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
+        <div class="border border-muted relative z-1" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
           <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-muted">
             <slot name="options" />
 
@@ -208,6 +213,7 @@ const urlSearchParams = computed(() => {
               <UInput
                 v-else
                 :model-value="get(optionsValues, option.name)"
+                :type="option.type"
                 color="neutral"
                 variant="soft"
                 :ui="{ base: 'rounded-sm rounded-l-none min-w-12' }"
@@ -223,8 +229,8 @@ const urlSearchParams = computed(() => {
             class="relative w-full"
             :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
           />
-          <div v-else ref="componentContainer" class="flex justify-center p-4" :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }]">
-            <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
+          <div v-else-if="resolvedComponent" ref="componentContainer" class="flex justify-center p-4" :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }]">
+            <component :is="resolvedComponent" v-bind="{ ...componentProps, ...optionsValues }" />
           </div>
         </div>
 
@@ -238,10 +244,10 @@ const urlSearchParams = computed(() => {
     </template>
 
     <template v-if="props.source">
-      <div v-if="!!slots.code" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0">
+      <div v-if="!!slots.code" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!">
         <slot name="code" />
       </div>
-      <MDCRenderer v-else-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+      <MDCRenderer v-else-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!" />
     </template>
   </div>
 </template>

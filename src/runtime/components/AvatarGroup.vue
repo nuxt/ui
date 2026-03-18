@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar-group'
 import type { ComponentConfig } from '../types/tv'
@@ -24,7 +25,7 @@ export interface AvatarGroupProps {
 }
 
 export interface AvatarGroupSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
@@ -32,6 +33,7 @@ export interface AvatarGroupSlots {
 import { computed, provide } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { avatarGroupInjectionKey } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
@@ -40,6 +42,7 @@ const props = defineProps<AvatarGroupProps>()
 const slots = defineSlots<AvatarGroupSlots>()
 
 const appConfig = useAppConfig() as AvatarGroup['AppConfig']
+const uiProp = useComponentUI('avatarGroup', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatarGroup || {}) })({
   size: props.size
@@ -93,8 +96,8 @@ provide(avatarGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" data-slot="base" :class="ui.base({ class: props.ui?.base })" />
-    <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" data-slot="base" :class="ui.base({ class: props.ui?.base })" />
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" data-slot="base" :class="ui.base({ class: uiProp?.base })" />
+    <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" data-slot="base" :class="ui.base({ class: uiProp?.base })" />
   </Primitive>
 </template>

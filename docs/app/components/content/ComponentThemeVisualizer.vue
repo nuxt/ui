@@ -23,6 +23,7 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
+const { track } = useAnalytics()
 
 const camelName = computed(() => camelCase(props.slug ?? route.path.split('/').pop() ?? ''))
 const componentTheme = computed(() => ((props.prose ? theme.prose : theme) as any)[camelName.value])
@@ -136,6 +137,7 @@ function getSlotRenderLocation(slotName: string): 'container' | 'portal' | 'none
 // Initialize position when popover opens, clear when closes
 watch(open, (isOpen) => {
   if (isOpen) {
+    track('Theme Visualizer Opened', { component: camelName.value })
     initializePosition()
   } else {
     clearHighlight()
@@ -152,14 +154,19 @@ watch(open, (isOpen) => {
       :ui="{ content: 'w-64 max-h-72 overflow-y-auto' }"
       :dismissible="false"
     >
-      <UButton
-        :icon="open ? 'i-lucide-x' : 'i-lucide-scan-eye'"
-        color="neutral"
-        variant="outline"
-        size="sm"
-        class="absolute -top-[11px] -right-[11px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
-        :class="[open && 'lg:opacity-100 bg-elevated']"
-      />
+      <UTooltip text="Inspect theme slots" :disabled="open" :content="{ side: 'right' }">
+        <UButton
+          color="neutral"
+          variant="outline"
+          size="sm"
+          square
+          class="absolute -top-[11px] -right-[11px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
+          :class="[open && 'lg:opacity-100 bg-elevated']"
+          tabindex="-1"
+        >
+          <ComponentThemeVisualizerIcon :open="open" />
+        </UButton>
+      </UTooltip>
 
       <template #content>
         <div ref="popoverContentRef" class="px-2.5 py-1.5 text-xs font-semibold text-highlighted border-b border-default">
@@ -169,7 +176,7 @@ watch(open, (isOpen) => {
           <div
             v-for="slotName in themeSlots"
             :key="slotName"
-            class="p-1.5 cursor-default hover:bg-elevated/50 transition-colors rounded"
+            class="p-1.5 cursor-default hover:bg-elevated/50 transition-colors rounded-sm"
             :class="[highlightedSlot === slotName && 'bg-elevated/50']"
             @mouseenter="highlightSlot(slotName)"
             @mouseleave="clearHighlight"
@@ -191,7 +198,7 @@ watch(open, (isOpen) => {
       <div
         v-if="highlightStyle"
         :style="highlightStyle"
-        class="pointer-events-none border-2 border-dashed border-primary invert rounded transition-all duration-150"
+        class="pointer-events-none border-2 border-dashed border-primary invert rounded-sm transition-all duration-150"
         :class="[
           highlightedSlot ? 'opacity-100' : 'opacity-0',
           isPortalHighlight ? 'fixed z-2147483647' : 'absolute z-1'
@@ -199,7 +206,7 @@ watch(open, (isOpen) => {
       >
         <div
           v-if="highlightedSlot"
-          class="absolute -top-6 -left-0.5 px-1.5 py-0.5 text-xs font-medium font-mono bg-primary text-highlighted rounded whitespace-nowrap"
+          class="absolute -top-6 -left-0.5 px-1.5 py-0.5 text-xs font-medium font-mono bg-primary text-highlighted rounded-sm whitespace-nowrap"
         >
           {{ highlightedSlot }}
         </div>

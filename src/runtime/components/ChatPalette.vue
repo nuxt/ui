@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-palette'
 import type { ComponentConfig } from '../types/tv'
@@ -16,8 +17,8 @@ export interface ChatPaletteProps {
 }
 
 export interface ChatPaletteSlots {
-  default(props?: {}): any
-  prompt(props?: {}): any
+  default?(props?: {}): VNode[]
+  prompt?(props?: {}): VNode[]
 }
 </script>
 
@@ -25,26 +26,28 @@ export interface ChatPaletteSlots {
 import { computed } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
 
 const props = defineProps<ChatPaletteProps>()
 const slots = defineSlots<ChatPaletteSlots>()
 
 const appConfig = useAppConfig() as ChatPalette['AppConfig']
+const uiProp = useComponentUI('chatPalette', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPalette || {}) })())
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div data-slot="content" :class="ui.content({ class: props.ui?.content })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div data-slot="content" :class="ui.content({ class: uiProp?.content })">
       <Slot compact>
         <slot />
       </Slot>
     </div>
 
-    <Slot v-if="!!slots.prompt" data-slot="prompt" :class="ui.prompt({ class: props.ui?.prompt })">
+    <Slot v-if="!!slots.prompt" data-slot="prompt" :class="ui.prompt({ class: uiProp?.prompt })">
       <slot name="prompt" />
     </Slot>
   </Primitive>

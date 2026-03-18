@@ -17,7 +17,7 @@ The ChangelogVersion component provides a flexible way to display an `<article>`
 ::u-changelog-version
 ---
 title: 'Introducing Nuxt UI v3'
-description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
 image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
 date: 2025-03-12
 authors:
@@ -25,18 +25,21 @@ authors:
     description: '@benjamincanac'
     avatar:
       src: https://github.com/benjamincanac.png
+      loading: lazy
     to: https://x.com/benjamincanac
     target: _blank
   - name: Sebastien Chopin
     description: '@atinux'
     avatar:
       src: https://github.com/atinux.png
+      loading: lazy
     to: https://x.com/atinux
     target: _blank
   - name: Hugo Richard
     description: '@hugorcd__'
     avatar:
       src: https://github.com/hugorcd.png
+      loading: lazy
     to: https://x.com/hugorcd__
     target: _blank
 to: 'https://nuxt.com/blog/nuxt-ui-v3'
@@ -84,7 +87,7 @@ ignore:
   - title
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   class: 'w-full'
   ui.container: 'max-w-lg'
 ---
@@ -110,7 +113,7 @@ ignore:
   - description
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   class: 'w-full'
   ui.container: 'max-w-lg'
@@ -134,7 +137,7 @@ ignore:
   - date
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   badge: 'Release'
   class: 'w-full'
@@ -160,7 +163,7 @@ ignore:
   - badge.variant
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   badge:
     label: 'Release'
@@ -192,7 +195,7 @@ ignore:
   - date
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
   class: 'w-full'
@@ -222,6 +225,8 @@ hide:
   - ui.container
 external:
   - authors
+externalTypes:
+  - UserProps[]
 ignore:
   - title
   - description
@@ -230,7 +235,7 @@ ignore:
   - authors
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
   authors:
@@ -238,18 +243,21 @@ props:
       description: '@benjamincanac'
       avatar:
         src: https://github.com/benjamincanac.png
+        loading: lazy
       to: https://x.com/benjamincanac
       target: _blank
     - name: Sebastien Chopin
       description: '@atinux'
       avatar:
         src: https://github.com/atinux.png
+        loading: lazy
       to: https://x.com/atinux
       target: _blank
     - name: Hugo Richard
       description: '@hugorcd__'
       avatar:
         src: https://github.com/hugorcd.png
+        loading: lazy
       to: https://x.com/hugorcd__
       target: _blank
   class: 'w-full'
@@ -276,7 +284,7 @@ ignore:
   - target
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
   to: 'https://nuxt.com/blog/nuxt-ui-v3'
@@ -304,7 +312,7 @@ ignore:
   - image
 props:
   title: 'Introducing Nuxt UI v3'
-  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
+  description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS support, and full Vue compatibility.'
   date: 2025-03-12
   image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
   indicator: false

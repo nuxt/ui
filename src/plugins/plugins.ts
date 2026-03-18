@@ -14,10 +14,16 @@ import type { NuxtUIOptions } from '../unplugin'
 export default function PluginsPlugin(options: NuxtUIOptions) {
   const plugins = globSync(['**/*', '!*.d.ts'], { cwd: join(runtimeDir, 'plugins'), absolute: true })
 
+  plugins.unshift(resolvePathSync('../runtime/vue/plugins/router', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url }))
   plugins.unshift(resolvePathSync('../runtime/vue/plugins/head', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url }))
+
   if (options.colorMode) {
     plugins.push(resolvePathSync('../runtime/vue/plugins/color-mode', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url }))
   }
+
+  const proseComponents = (options.prose || options.mdc)
+    ? globSync(['**/*.vue'], { cwd: join(runtimeDir, 'components/prose'), absolute: true })
+    : []
 
   return {
     name: 'nuxt:ui:plugins',
@@ -42,11 +48,19 @@ export default function PluginsPlugin(options: NuxtUIOptions) {
     },
     loadInclude: id => id === 'virtual:nuxt-ui-plugins',
     load() {
+      const proseImports = proseComponents.map((p) => {
+        const name = `Prose${p.split('/').pop()?.replace(/\.vue$/, '')}`
+        return { name, path: p }
+      })
+
       return `
         ${plugins.map(p => `import ${genSafeVariableName(p)} from "${p}"`).join('\n')}
+        ${proseImports.map(c => `import ${c.name} from "${c.path}"`).join('\n')}
+
 export default {
-  install (app) {
-${plugins.map(p => `    app.use(${genSafeVariableName(p)})`).join('\n')}
+  install (app, pluginOptions = {}) {
+${plugins.map(p => `    app.use(${genSafeVariableName(p)}, pluginOptions)`).join('\n')}
+${proseImports.map(c => `    app.component('${c.name}', ${c.name})`).join('\n')}
   }
 }
         `

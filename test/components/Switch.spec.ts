@@ -1,9 +1,8 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Switch from '../../src/runtime/components/Switch.vue'
-import type { SwitchProps, SwitchSlots } from '../../src/runtime/components/Switch.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/switch'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
@@ -12,7 +11,7 @@ import type { FormInputEvents } from '../../src/module'
 describe('Switch', () => {
   const sizes = Object.keys(theme.variants.size) as any
 
-  it.each([
+  renderEach(Switch, [
     // Props
     ['with modelValue', { props: { modelValue: true } }],
     ['with defaultValue', { props: { defaultValue: true } }],
@@ -30,16 +29,16 @@ describe('Switch', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with color neutral', { props: { color: 'neutral', defaultValue: true } }],
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
+    ['with trueValue/falseValue as string', { props: { trueValue: 'on', falseValue: 'off', defaultValue: 'on' } }],
+    ['with trueValue/falseValue as number', { props: { trueValue: 1, falseValue: 0, defaultValue: 1 } }],
+    ['with trueValue/falseValue unchecked', { props: { trueValue: 'on', falseValue: 'off', defaultValue: 'off' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'inline-flex' } }],
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
     // Slots
     ['with label slot', { slots: { label: () => 'Label slot' } }],
     ['with description slot', { slots: { label: () => 'Description slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SwitchProps, slots?: Partial<SwitchSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Switch)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Switch, {
@@ -66,6 +65,23 @@ describe('Switch', () => {
       const input = wrapper.findComponent({ name: 'SwitchRoot' })
       await input.vm.$emit('update:modelValue', true)
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
+    })
+
+    test('toggle with custom trueValue/falseValue via click', async () => {
+      const wrapper = mount(Switch, {
+        props: { trueValue: 'on', falseValue: 'off', defaultValue: 'off' }
+      })
+      const button = wrapper.find('button')
+
+      await button.trigger('click')
+      await flushPromises()
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['on'])
+      expect(wrapper.emitted('change')).toHaveLength(1)
+
+      await button.trigger('click')
+      await flushPromises()
+      expect(wrapper.emitted('update:modelValue')?.[1]).toEqual(['off'])
+      expect(wrapper.emitted('change')).toHaveLength(2)
     })
   })
 

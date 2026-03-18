@@ -1,9 +1,8 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import SelectMenu from '../../src/runtime/components/SelectMenu.vue'
-import type { SelectMenuProps, SelectMenuSlots } from '../../src/runtime/components/SelectMenu.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import { flushPromises, mount } from '@vue/test-utils'
@@ -40,13 +39,14 @@ describe('SelectMenu', () => {
 
   const props = { open: true, portal: false, items }
 
-  it.each([
+  renderEach(SelectMenu, [
     // Props
     ['with items', { props }],
     ['with items with description', { props: { ...props, items: itemsWithDescription } }],
     ['with modelValue', { props: { ...props, modelValue: items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
-    ['with valueKey', { props: { ...props, valueKey: 'value' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Backlog' } }],
+    ['with by', { props: { ...props, by: 'value', defaultValue: items[0] } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with descriptionKey', { props: { ...props, descriptionKey: 'description' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
@@ -74,6 +74,8 @@ describe('SelectMenu', () => {
     ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-chevron-down' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-check' } }],
+    ['with clear', { props: { ...props, clear: true, modelValue: items[0] } }],
+    ['with clear and clearIcon', { props: { ...props, clear: true, clearIcon: 'i-lucide-x', modelValue: items[0] } }],
     ['with arrow', { props: { ...props, arrow: true } }],
     ['with virtualize', { props: { ...props, virtualize: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
@@ -92,26 +94,27 @@ describe('SelectMenu', () => {
     ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectMenuProps, slots?: Partial<SelectMenuSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, SelectMenu)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
-  it.each([
-    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
-    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
-    ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
-    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
-  ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
-    const wrapper = mount(SelectMenu, {
-      ...options
-    })
+  renderEach(
+    SelectMenu,
+    [
+      ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+      ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+      ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
+      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
+    ],
+    '%s works', async (_, options, spec) => {
+      const wrapper = mount(SelectMenu, {
+        ...options
+      })
 
-    const selectMenu = wrapper.findComponent({ name: 'ComboboxRoot' })
-    await selectMenu.setValue(spec.input)
+      const selectMenu = wrapper.findComponent({ name: 'ComboboxRoot' })
+      await selectMenu.setValue(spec.input)
 
-    expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
-  })
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+    }
+  )
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(SelectMenu, {

@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { upperFirst } from 'scule'
-import type { EditorToolbarItem, EditorMentionMenuItem, EditorEmojiMenuItem, DropdownMenuItem, EditorSuggestionMenuItem, EditorCustomHandlers } from '@nuxt/ui'
+import { refDebounced } from '@vueuse/core'
+import type { EditorToolbarItem, EditorEmojiMenuItem, DropdownMenuItem, EditorSuggestionMenuItem, EditorCustomHandlers } from '@nuxt/ui'
 import type { JSONContent } from '@tiptap/vue-3'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import { TextAlign } from '@tiptap/extension-text-align'
-import { ImageUpload } from '../../../../../docs/app/components/content/examples/editor/EditorImageUpload'
-import { useEditorCompletion } from '../../../../../docs/app/components/content/examples/editor/EditorUseCompletion'
-import EditorLinkPopover from '../../../../../docs/app/components/content/examples/editor/EditorLinkPopover.vue'
+import { ImageUpload } from '../../components/editor/EditorImageUploadExtension'
 
 const editorRef = useTemplateRef('editorRef')
 
@@ -451,28 +450,16 @@ const suggestionItems = [[{
   icon: 'i-lucide-separator-horizontal'
 }]] satisfies EditorSuggestionMenuItem<typeof customHandlers>[][]
 
-const mentionItems: EditorMentionMenuItem[] = [{
-  label: 'benjamincanac',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' }
-}, {
-  label: 'HugoRCD',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/71938701?v=4' }
-}, {
-  label: 'romhml',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/25613751?v=4' }
-}, {
-  label: 'sandros94',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/13056429?v=4' }
-}, {
-  label: 'hywax',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/149865959?v=4' }
-}, {
-  label: 'J-Michalek',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/71264422?v=4' }
-}, {
-  label: 'genu',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/928780?v=4' }
-}]
+const searchTerm = ref('')
+const searchTermDebounced = refDebounced(searchTerm, 200)
+
+const { data: mentionItems } = await useFetch('https://dummyjson.com/users/search?limit=10', {
+  params: { q: searchTermDebounced },
+  transform: (data: { users: { id: number, firstName: string, lastName: string, image: string }[] }) => {
+    return data.users?.map(user => ({ id: user.id, label: `${user.firstName} ${user.lastName}`, avatar: { src: user.image } })) || []
+  },
+  lazy: true
+})
 
 const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.name.startsWith('regional_indicator_'))
 </script>
@@ -531,6 +518,12 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
       }"
     />
 
+    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
+
+    <UEditorMentionMenu v-model:search-term="searchTerm" :editor="editor" :items="mentionItems" ignore-filter />
+
+    <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
+
     <UEditorDragHandle v-slot="{ ui, onClick }" :editor="editor" @node-change="selectedNode = $event">
       <UButton
         icon="i-lucide-plus"
@@ -565,9 +558,5 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
         />
       </UDropdownMenu>
     </UEditorDragHandle>
-
-    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
-    <UEditorMentionMenu :editor="editor" :items="mentionItems" />
-    <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
   </UEditor>
 </template>

@@ -24,6 +24,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - ContextMenuItem[][]
 props:
   items:
     - - label: Appearance
@@ -189,6 +191,7 @@ Use the `size` prop to change the size of the ContextMenu.
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -225,6 +228,7 @@ Use the `modal` prop to control whether the ContextMenu blocks interaction with 
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -262,6 +266,7 @@ Use the `disabled` prop to disable the ContextMenu.
 ::component-code
 ---
 prettier: true
+collapse: true
 ignore:
   - items
   - ui.content
@@ -314,6 +319,7 @@ You can use the `color` property to highlight certain items with a color.
 
 ::component-example
 ---
+collapse: true
 name: 'context-menu-color-items-example'
 ---
 ::
@@ -331,6 +337,7 @@ You will have access to the following slots:
 
 ::component-example
 ---
+collapse: true
 name: 'context-menu-custom-slot-example'
 ---
 ::
@@ -404,7 +411,7 @@ defineShortcuts(extractShortcuts(items))
 ```
 
 ::note
-In this example, :kbd{value="meta"} :kbd{value="S"}, :kbd{value="shift"} :kbd{value="meta"} :kbd{value="D"}, :kbd{value="option"} :kbd{value="meta"} :kbd{value="U"}, :kbd{value="option"} :kbd{value="meta"} :kbd{value="I"}, :kbd{value="option"} :kbd{value="meta"} :kbd{value="C"} and :kbd{value="option"} :kbd{value="meta"} :kbd{value="J"} would trigger the `select` function of the corresponding item.
+In this example, :kbd{value="meta"} :kbd{value="S" class="ms-px"}, :kbd{value="shift"} :kbd{value="meta" class="ms-px"} :kbd{value="D" class="ms-px"}, :kbd{value="option"} :kbd{value="meta" class="ms-px"} :kbd{value="U" class="ms-px"}, :kbd{value="option"} :kbd{value="meta" class="ms-px"} :kbd{value="I" class="ms-px"}, :kbd{value="option"} :kbd{value="meta" class="ms-px"} :kbd{value="C" class="ms-px"} and :kbd{value="option"} :kbd{value="meta" class="ms-px"} :kbd{value="J" class="ms-px"} would trigger the `select` function of the corresponding item.
 ::
 
 ## API

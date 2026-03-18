@@ -17,8 +17,9 @@ Use the Carousel component to display a list of items in a carousel.
 ::component-example
 ---
 collapse: true
-name: 'carousel-items-example'
-class: 'p-8'
+overflowHidden: true
+name: 'carousel-example'
+class: '!p-0'
 ---
 ::
 
