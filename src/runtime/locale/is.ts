@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Senda fyrirspurn'
     },
+    chatReasoning: {
+      thinking: 'Hugsar…',
+      thought: 'Hugsaði',
+      thoughtFor: 'Hugsaði í {duration}'
+    },
     colorMode: {
       dark: 'Dökkt',
       light: 'Ljóst',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Afrita kóða á klippiborð'
       }
+    },
+    sidebar: {
+      close: 'Loka',
+      toggle: 'Skipta'
     },
     selectMenu: {
       create: 'Búa til "{label}"',

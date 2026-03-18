@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { CheckboxRootProps } from 'reka-ui'
+import type { CheckboxRootProps, CheckboxRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox'
@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Checkbox = ComponentConfig<typeof theme, AppConfig, 'checkbox'>
 
-export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface CheckboxProps<T = boolean> extends Pick<CheckboxRootProps<T>, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue' | 'modelValue' | 'trueValue' | 'falseValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -50,7 +50,7 @@ export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'req
   ui?: Checkbox['slots']
 }
 
-export type CheckboxEmits = {
+export interface CheckboxEmits<T = boolean> extends CheckboxRootEmits<T> {
   change: [event: Event]
 }
 
@@ -60,9 +60,9 @@ export interface CheckboxSlots {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T = boolean">
 import { computed, useAttrs, useId } from 'vue'
-import { Primitive, CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'reka-ui'
+import { Primitive, CheckboxRoot, CheckboxIndicator, Label, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
@@ -72,18 +72,16 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<CheckboxProps>()
+const props = defineProps<CheckboxProps<T>>()
 const slots = defineSlots<CheckboxSlots>()
-const emits = defineEmits<CheckboxEmits>()
-
-const modelValue = defineModel<boolean | 'indeterminate'>({ default: undefined })
+const emits = defineEmits<CheckboxEmits<T>>()
 
 const appConfig = useAppConfig() as Checkbox['AppConfig']
 const uiProp = useComponentUI('checkbox', props)
 
-const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
+const rootProps = useForwardPropsEmits(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<CheckboxProps>(props)
+const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<CheckboxProps<T>>(props)
 const id = _id.value ?? useId()
 
 const attrs = useAttrs()
@@ -118,16 +116,15 @@ function onUpdate(value: any) {
       <CheckboxRoot
         :id="id"
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
-        v-model="modelValue"
         :name="name"
         :disabled="disabled"
         data-slot="base"
         :class="ui.base({ class: uiProp?.base })"
         @update:model-value="onUpdate"
       >
-        <template #default="{ modelValue }">
+        <template #default="{ state }">
           <CheckboxIndicator data-slot="indicator" :class="ui.indicator({ class: uiProp?.indicator })">
-            <UIcon v-if="modelValue === 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
+            <UIcon v-if="state === 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
             <UIcon v-else :name="icon || appConfig.ui.icons.check" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
           </CheckboxIndicator>
         </template>

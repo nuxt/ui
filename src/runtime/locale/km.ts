@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'សាក់'
     },
+    chatReasoning: {
+      thinking: 'កំពុងគិត…',
+      thought: 'គិតរួចហើយ',
+      thoughtFor: 'គិតរយៈពេល {duration}'
+    },
     colorMode: {
       dark: 'ងងឹត',
       light: 'ភ្លឺ',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'ចម្លងកូដទៅក្ដារតម្បៀតខ្ទាស់'
       }
+    },
+    sidebar: {
+      close: 'បិទ',
+      toggle: 'បិទ/បើក'
     },
     selectMenu: {
       create: 'បង្កើត "{label}"',

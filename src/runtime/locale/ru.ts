@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Отправить'
     },
+    chatReasoning: {
+      thinking: 'Размышляет…',
+      thought: 'Размышление завершено',
+      thoughtFor: 'Размышление заняло {duration}'
+    },
     colorMode: {
       dark: 'Тёмная',
       light: 'Светлая',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Скопировать код в буфер обмена'
       }
+    },
+    sidebar: {
+      close: 'Закрыть',
+      toggle: 'Переключить'
     },
     selectMenu: {
       create: 'Создать "{label}"',

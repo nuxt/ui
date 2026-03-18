@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Kirim'
     },
+    chatReasoning: {
+      thinking: 'Berpikir…',
+      thought: 'Telah berpikir',
+      thoughtFor: 'Berpikir selama {duration}'
+    },
     colorMode: {
       dark: 'Gelap',
       light: 'Terang',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Salin kode ke clipboard'
       }
+    },
+    sidebar: {
+      close: 'Tutup',
+      toggle: 'Alihkan'
     },
     selectMenu: {
       create: 'Buat "{label}"',

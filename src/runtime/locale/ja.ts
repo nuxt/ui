@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: '送信'
     },
+    chatReasoning: {
+      thinking: '考えています…',
+      thought: '考えました',
+      thoughtFor: '{duration}考えました'
+    },
     colorMode: {
       dark: 'ダーク',
       light: 'ライト',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'コードをクリップボードにコピー'
       }
+    },
+    sidebar: {
+      close: '閉じる',
+      toggle: '切り替え'
     },
     selectMenu: {
       create: '"{label}"を作成',

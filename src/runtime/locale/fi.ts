@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Lähetä'
     },
+    chatReasoning: {
+      thinking: 'Ajattelee…',
+      thought: 'Ajatteli',
+      thoughtFor: 'Ajatteli {duration}'
+    },
     colorMode: {
       dark: 'Tumma',
       light: 'Vaalea',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopioi koodi leikepöydälle'
       }
+    },
+    sidebar: {
+      close: 'Sulje',
+      toggle: 'Vaihda'
     },
     selectMenu: {
       create: 'Luo "{label}"',

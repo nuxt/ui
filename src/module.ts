@@ -1,8 +1,9 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, hasNuxtModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, hasNuxtModule } from '@nuxt/kit'
 import type { HookResult } from '@nuxt/schema'
 import type { ModuleDependencies } from 'nuxt/schema'
 import { addTemplates } from './templates'
+import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
 import { name, version } from '../package.json'
 
@@ -81,11 +82,20 @@ export interface ModuleOptions {
   /**
    * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
    * @defaultValue false
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#prose
+   */
+  prose?: boolean
+
+  /**
+   * @deprecated Use `prose` instead
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#mdc
    */
   mdc?: boolean
+
   /**
    * Force the import of content & prose components even if `@nuxt/content` is not installed
    * @defaultValue false
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#content
    */
   content?: boolean
 
@@ -210,7 +220,6 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.hook('vite:extend', async ({ config }) => {
       const plugin = await import('@tailwindcss/vite').then(r => r.default)
       config.plugins ||= []
-      // @ts-expect-error - Vite Plugin type mismatch between @tailwindcss/vite and @nuxt/vite-builder
       config.plugins.push(plugin())
     })
     if (nuxt.options.builder !== '@nuxt/vite-builder') {
@@ -219,7 +228,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
 
-    if (options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
+    if (options.prose || options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
       addComponentsDir({
         path: resolve('./runtime/components/prose'),
         pathPrefix: false,
@@ -254,7 +263,11 @@ export default defineNuxtModule<ModuleOptions>({
       ignore: ['color-mode/**', 'content/**', 'prose/**']
     })
 
-    addImportsDir(resolve('./runtime/composables'))
+    addImports(
+      Object.entries(publicComposables).flatMap(([file, exports]) =>
+        exports.map(name => ({ name, from: resolve(`./runtime/composables/${file}`) }))
+      )
+    )
 
     addTemplates(options, nuxt, resolve)
   }

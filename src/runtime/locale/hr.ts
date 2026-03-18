@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Pošalji upit'
     },
+    chatReasoning: {
+      thinking: 'Razmišlja…',
+      thought: 'Razmislio',
+      thoughtFor: 'Razmišljao {duration}'
+    },
     colorMode: {
       dark: 'Tamno',
       light: 'Svijetlo',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopiraj kod u međuspremnik'
       }
+    },
+    sidebar: {
+      close: 'Zatvori',
+      toggle: 'Prebaci'
     },
     selectMenu: {
       create: 'Stvori "{label}"',

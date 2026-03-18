@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Versturen'
     },
+    chatReasoning: {
+      thinking: 'Aan het denken…',
+      thought: 'Nagedacht',
+      thoughtFor: '{duration} nagedacht'
+    },
     colorMode: {
       dark: 'Donker',
       light: 'Licht',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Code naar klembord kopiëren'
       }
+    },
+    sidebar: {
+      close: 'Sluiten',
+      toggle: 'Schakelen'
     },
     selectMenu: {
       create: '"{label}" creëren',

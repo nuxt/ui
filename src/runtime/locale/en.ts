@@ -116,6 +116,15 @@ export default defineLocale<Messages>({
         copy: 'Copy code to clipboard'
       }
     },
+    chatReasoning: {
+      thinking: 'Thinking...',
+      thought: 'Thought',
+      thoughtFor: 'Thought for {duration}'
+    },
+    sidebar: {
+      close: 'Close',
+      toggle: 'Toggle'
+    },
     selectMenu: {
       create: 'Create "{label}"',
       noData: 'No data',

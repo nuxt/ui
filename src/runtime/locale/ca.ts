@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Enviar'
     },
+    chatReasoning: {
+      thinking: 'Pensant…',
+      thought: 'Ha pensat',
+      thoughtFor: 'Ha pensat durant {duration}'
+    },
     colorMode: {
       dark: 'Fosc',
       light: 'Clar',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Copiar codi al portapapers'
       }
+    },
+    sidebar: {
+      close: 'Tancar',
+      toggle: 'Canviar'
     },
     selectMenu: {
       create: 'Crear "{label}"',

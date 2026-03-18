@@ -98,7 +98,7 @@ onMounted(async () => {
           d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z"
         />
       </svg>
-      <UBadge color="info" class="absolute top-[18px] left-[18px] py-1 px-1 rounded-sm font-semibold leading-none">
+      <UBadge color="info" class="absolute top-[18px] left-[18px] p-1 rounded-sm font-semibold leading-none">
         Hugo
       </UBadge>
     </div>
@@ -113,7 +113,7 @@ onMounted(async () => {
           d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z"
         />
       </svg>
-      <UBadge color="success" class="absolute top-[18px] left-[18px] py-1 px-1 rounded-sm font-semibold leading-none">
+      <UBadge color="success" class="absolute top-[18px] left-[18px] p-1 rounded-sm font-semibold leading-none">
         Sarah
       </UBadge>
     </div>
@@ -168,7 +168,7 @@ onMounted(async () => {
         description: 'mt-2'
       }"
       orientation="horizontal"
-      class="rounded-none bg-gradient-to-b from-elevated/50 to-default"
+      class="rounded-none bg-linear-to-b from-elevated/50 to-default"
     >
       <template #title>
         <MDC :value="page.cta1.title" unwrap="p" cache-key="figma-cta-1-title" />

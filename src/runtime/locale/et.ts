@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Saada'
     },
+    chatReasoning: {
+      thinking: 'Mõtleb…',
+      thought: 'Mõtles',
+      thoughtFor: 'Mõtles {duration}'
+    },
     colorMode: {
       dark: 'Tume',
       light: 'Hele',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopeeri kood lõikelauale'
       }
+    },
+    sidebar: {
+      close: 'Sulge',
+      toggle: 'Lülita'
     },
     selectMenu: {
       create: 'Loo "{label}"',

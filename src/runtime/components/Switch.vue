@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { SwitchRootProps } from 'reka-ui'
+import type { SwitchRootProps, SwitchRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/switch'
@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Switch = ComponentConfig<typeof theme, AppConfig, 'switch'>
 
-export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface SwitchProps<T = boolean> extends Pick<SwitchRootProps<T>, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue' | 'modelValue' | 'trueValue' | 'falseValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -47,7 +47,7 @@ export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | '
   ui?: Switch['slots']
 }
 
-export type SwitchEmits = {
+export interface SwitchEmits<T = boolean> extends SwitchRootEmits<T> {
   change: [event: Event]
 }
 
@@ -57,9 +57,9 @@ export interface SwitchSlots {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T = boolean">
 import { computed, useAttrs, useId } from 'vue'
-import { Primitive, SwitchRoot, SwitchThumb, useForwardProps, Label } from 'reka-ui'
+import { Primitive, SwitchRoot, SwitchThumb, useForwardPropsEmits, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
@@ -69,18 +69,16 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<SwitchProps>()
+const props = defineProps<SwitchProps<T>>()
 const slots = defineSlots<SwitchSlots>()
-const emits = defineEmits<SwitchEmits>()
-
-const modelValue = defineModel<boolean>({ default: undefined })
+const emits = defineEmits<SwitchEmits<T>>()
 
 const appConfig = useAppConfig() as Switch['AppConfig']
 const uiProp = useComponentUI('switch', props)
 
-const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
+const rootProps = useForwardPropsEmits(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SwitchProps>(props)
+const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SwitchProps<T>>(props)
 const id = _id.value ?? useId()
 
 const attrs = useAttrs()
@@ -113,7 +111,6 @@ function onUpdate(value: any) {
       <SwitchRoot
         :id="id"
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
-        v-model="modelValue"
         :name="name"
         :disabled="disabled || loading"
         data-slot="base"

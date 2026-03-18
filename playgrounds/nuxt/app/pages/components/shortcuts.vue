@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ShortcutsConfig } from '@nuxt/ui/composables/defineShortcuts'
+import type { ShortcutsConfig } from '@nuxt/ui/composables'
 
 const logs = ref<string[]>([])
 
@@ -38,7 +38,7 @@ defineShortcuts(shortcuts)
 <template>
   <Navbar />
 
-  <div class="w-full flex flex-col justify-stretch items-stretch gap-4 h-full">
+  <div class="size-full flex flex-col justify-stretch items-stretch gap-4">
     <UCard :ui="{ header: 'flex items-center justify-between' }">
       <template #header>
         <h3 class="font-bold">

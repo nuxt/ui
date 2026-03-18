@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Շարունակել'
     },
+    chatReasoning: {
+      thinking: 'Մտածում է…',
+      thought: 'Մտածեց',
+      thoughtFor: 'Մտածեց {duration}'
+    },
     colorMode: {
       dark: 'Մուգ',
       light: 'Լուսավոր',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Պատճենել կոդը սեղմատախտակին'
       }
+    },
+    sidebar: {
+      close: 'Փակել',
+      toggle: 'Փոխարկել'
     },
     selectMenu: {
       create: 'Ստեղծել "{label}"',

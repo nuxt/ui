@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Jo\'natish'
     },
+    chatReasoning: {
+      thinking: 'O\'ylayapti…',
+      thought: 'O\'yladi',
+      thoughtFor: '{duration} o\'yladi'
+    },
     colorMode: {
       dark: 'Qorong\'i',
       light: 'Yorug\'',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Koddan buferga nusxa olish'
       }
+    },
+    sidebar: {
+      close: 'Yopish',
+      toggle: 'Almashtirish'
     },
     selectMenu: {
       create: '"{label}" yaratish',

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Αποστολή'
     },
+    chatReasoning: {
+      thinking: 'Σκέφτεται…',
+      thought: 'Σκέφτηκε',
+      thoughtFor: 'Σκέφτηκε για {duration}'
+    },
     colorMode: {
       dark: 'Σκοτεινό',
       light: 'Φωτεινό',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Αντιγραφή κώδικα στο πρόχειρο'
       }
+    },
+    sidebar: {
+      close: 'Κλείσιμο',
+      toggle: 'Εναλλαγή'
     },
     selectMenu: {
       create: 'Δημιουργία "{label}"',

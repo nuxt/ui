@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Siųsti žinutę'
     },
+    chatReasoning: {
+      thinking: 'Mąsto…',
+      thought: 'Pamąstė',
+      thoughtFor: 'Mąstė {duration}'
+    },
     colorMode: {
       dark: 'Tamsus',
       light: 'Šviesus',
@@ -115,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Kopijuoti kodą į iškarpinę'
       }
+    },
+    sidebar: {
+      close: 'Uždaryti',
+      toggle: 'Perjungti'
     },
     selectMenu: {
       create: 'Sukurti „{label}"',
