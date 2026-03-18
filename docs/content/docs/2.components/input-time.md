@@ -211,17 +211,17 @@ props:
 
 ## Examples
 
-### Time Range with Different Variants
+### Within a FormField
 
-Combine `range` with the `variant` prop to present multiple styles side by side.
+Use InputTime inside a [FormField](/docs/components/form-field) to inherit labels, descriptions, and validation messages.
 
 ::component-example
 ---
-name: 'input-time-range-variants-example'
+name: 'input-time-form-field-example'
 ---
 ::
 
-### Time range with icons
+### Time Range with icons
 
 Add icons to emphasize the start and end time fields.
 
@@ -231,23 +231,13 @@ name: 'input-time-range-icons-example'
 ---
 ::
 
-### Time range with custom separator
+### Time Range with custom separator
 
 Provide a custom separator UI for range inputs.
 
 ::component-example
 ---
 name: 'input-time-range-separator-example'
----
-::
-
-### Within a FormField
-
-Use InputTime inside a [FormField](/docs/components/form-field) to inherit labels, descriptions, and validation messages.
-
-::component-example
----
-name: 'input-time-form-field-example'
 ---
 ::
 
