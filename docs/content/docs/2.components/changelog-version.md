@@ -25,18 +25,21 @@ authors:
     description: '@benjamincanac'
     avatar:
       src: https://github.com/benjamincanac.png
+      loading: lazy
     to: https://x.com/benjamincanac
     target: _blank
   - name: Sebastien Chopin
     description: '@atinux'
     avatar:
       src: https://github.com/atinux.png
+      loading: lazy
     to: https://x.com/atinux
     target: _blank
   - name: Hugo Richard
     description: '@hugorcd__'
     avatar:
       src: https://github.com/hugorcd.png
+      loading: lazy
     to: https://x.com/hugorcd__
     target: _blank
 to: 'https://nuxt.com/blog/nuxt-ui-v3'
@@ -240,18 +243,21 @@ props:
       description: '@benjamincanac'
       avatar:
         src: https://github.com/benjamincanac.png
+        loading: lazy
       to: https://x.com/benjamincanac
       target: _blank
     - name: Sebastien Chopin
       description: '@atinux'
       avatar:
         src: https://github.com/atinux.png
+        loading: lazy
       to: https://x.com/atinux
       target: _blank
     - name: Hugo Richard
       description: '@hugorcd__'
       avatar:
         src: https://github.com/hugorcd.png
+        loading: lazy
       to: https://x.com/hugorcd__
       target: _blank
   class: 'w-full'

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/code-collapse'
 import type { IconProps } from '../../types'
@@ -32,7 +33,7 @@ export interface ProseCodeCollapseProps {
 }
 
 export interface ProseCodeCollapseSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 

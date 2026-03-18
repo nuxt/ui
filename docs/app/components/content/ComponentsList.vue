@@ -8,6 +8,7 @@ const { data: components } = await useAsyncData(`components-${props.category}`, 
     .where('path', 'LIKE', '/docs/components/%')
     .where('extension', '=', 'md')
     .where('category', '=', props.category)
+    .where('index', 'IS NULL')
     .select('path', 'title', 'description')
     .all()
 })
@@ -31,7 +32,7 @@ const { data: components } = await useAsyncData(`components-${props.category}`, 
       }"
     >
       <template #header>
-        <div class="rounded-md rounded-b-none border border-muted overflow-hidden aspect-[16/9] -m-px">
+        <div class="rounded-md rounded-b-none border border-muted overflow-hidden aspect-video -m-px">
           <UColorModeImage
             :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
             :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"

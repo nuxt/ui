@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useFilter } from 'reka-ui'
+import { useFilter } from '@nuxt/ui/composables'
 import type { ContentNavigationItem } from '@nuxt/content'
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 const route = useRoute()
-const { contains } = useFilter({ sensitivity: 'base' })
+const { scoreItem } = useFilter()
 const { navigationByCategory } = useNavigation(navigation!)
 
 const filteredNavigation = computed(() => {
@@ -15,7 +15,7 @@ const filteredNavigation = computed(() => {
 
   return navigationByCategory.value.map(item => ({
     ...item,
-    children: item.children?.filter(child => contains(child.title as string, cleanedSearchTerm.value) || contains(child.description as string, cleanedSearchTerm.value))
+    children: item.children?.filter(child => scoreItem(child, cleanedSearchTerm.value, ['title', 'description']) !== null)
   })).filter(item => item.children && item.children.length > 0)
 })
 

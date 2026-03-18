@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-post'
 import type { BadgeProps, LinkProps, UserProps } from '../types'
@@ -44,23 +45,24 @@ export interface BlogPostProps {
 }
 
 export interface BlogPostSlots {
-  date(props?: {}): any
-  badge(props?: {}): any
-  title(props?: {}): any
-  description(props?: {}): any
-  authors(props: { ui: BlogPost['ui'] }): any
-  header(props: { ui: BlogPost['ui'] }): any
-  body(props?: {}): any
-  footer(props?: {}): any
+  date?(props?: {}): VNode[]
+  badge?(props?: {}): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  authors?(props: { ui: BlogPost['ui'] }): VNode[]
+  header?(props: { ui: BlogPost['ui'] }): VNode[]
+  body?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive, useDateFormatter } from 'reka-ui'
-import { useLocale, useAppConfig } from '#imports'
-import ImageComponent from '#build/ui-image-component'
+import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import { useComponentUI } from '../composables/useComponentUI'
+import ImageComponent from '#build/ui-image-component'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'

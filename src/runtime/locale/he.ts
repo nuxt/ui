@@ -35,6 +35,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'שלח'
     },
+    chatReasoning: {
+      thinking: 'חושב…',
+      thought: 'חשב',
+      thoughtFor: 'חשב במשך {duration}'
+    },
     colorMode: {
       dark: 'כהה',
       light: 'בהיר',
@@ -58,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'בדף זה'
+    },
+    dropdownMenu: {
+      noMatch: 'לא נמצאה התאמה',
+      search: 'חפש…'
     },
     dashboardSearch: {
       theme: 'ערכת נושא'
@@ -112,6 +121,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'העתק קוד ללוח'
       }
+    },
+    sidebar: {
+      close: 'סגור',
+      toggle: 'החלף'
     },
     selectMenu: {
       create: 'צור "{label}"',

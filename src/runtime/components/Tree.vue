@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, VNode } from 'vue'
 import type { TreeRootProps, TreeRootEmits, TreeItemSelectEvent, TreeItemToggleEvent } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
@@ -118,16 +118,16 @@ type SlotProps<T extends TreeItem> = (props: {
   handleSelect: () => void
   handleToggle: () => void
   ui: Tree['ui']
-}) => any
+}) => VNode[]
 
 export type TreeSlots<
   T extends TreeItem[] = TreeItem[]
 > = {
-  'item-wrapper': SlotProps<T[number]>
-  'item': SlotProps<T[number]>
-  'item-leading': SlotProps<T[number]>
-  'item-label': SlotProps<T[number]>
-  'item-trailing': SlotProps<T[number]>
+  'item-wrapper'?: SlotProps<T[number]>
+  'item'?: SlotProps<T[number]>
+  'item-leading'?: SlotProps<T[number]>
+  'item-label'?: SlotProps<T[number]>
+  'item-trailing'?: SlotProps<T[number]>
 } & DynamicSlots<T[number], undefined, {
   index: number
   level: number

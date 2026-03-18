@@ -37,6 +37,7 @@ Use the `src` prop to set the image URL.
 ---
 props:
   src: 'https://github.com/benjamincanac.png'
+  loading: lazy
 ---
 ::
 
@@ -51,6 +52,7 @@ ignore:
 props:
   src: 'https://github.com/benjamincanac.png'
   size: xl
+  loading: lazy
 ---
 ::
 
@@ -110,6 +112,7 @@ ignore:
   - chip.inset
 props:
   src: 'https://github.com/benjamincanac.png'
+  loading: lazy
   chip:
     inset: true
 ---

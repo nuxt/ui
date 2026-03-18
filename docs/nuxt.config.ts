@@ -15,11 +15,8 @@ export default defineNuxtConfig({
     'nuxt-llms',
     'nuxt-og-image',
     'motion-v/nuxt',
-    (_, nuxt) => {
-      nuxt.hook('components:dirs', (dirs) => {
-        dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
-      })
-    }
+    '@vercel/analytics',
+    '@vercel/speed-insights'
   ],
 
   $development: {
@@ -174,6 +171,7 @@ export default defineNuxtConfig({
       routes: [
         '/docs/getting-started',
         '/api/countries.json',
+        '/api/phone-codes.json',
         '/api/locales.json',
         '/api/module.json'
         // '/api/github/pulls.json',
@@ -256,18 +254,6 @@ export default defineNuxtConfig({
     }
   },
 
-  fonts: {
-    families: [
-      { name: 'Public Sans', provider: 'google', global: true },
-      { name: 'DM Sans', provider: 'google', global: true },
-      { name: 'Geist', provider: 'google', global: true },
-      { name: 'Inter', provider: 'google', global: true },
-      { name: 'Poppins', provider: 'google', global: true },
-      { name: 'Outfit', provider: 'google', global: true },
-      { name: 'Raleway', provider: 'google', global: true }
-    ]
-  },
-
   icon: {
     customCollections: [{
       prefix: 'custom',
@@ -276,8 +262,7 @@ export default defineNuxtConfig({
     clientBundle: {
       scan: true,
       includeCustomCollections: true
-    },
-    provider: 'iconify'
+    }
   },
 
   image: {

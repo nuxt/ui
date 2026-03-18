@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ButtonHTMLAttributes } from 'vue'
+import type { ButtonHTMLAttributes, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/link'
 import type { ComponentConfig } from '../../../types/tv'
@@ -66,7 +66,7 @@ export interface LinkProps extends BaseLinkProps {
 }
 
 export interface LinkSlots {
-  default(props: { active: boolean }): any
+  default?(props: { active: boolean }): VNode[]
 }
 </script>
 

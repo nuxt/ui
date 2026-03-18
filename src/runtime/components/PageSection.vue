@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-section'
 import type { ButtonProps, IconProps, PageFeatureProps } from '../types'
@@ -47,18 +48,18 @@ export interface PageSectionProps {
 }
 
 export interface PageSectionSlots {
-  top(props?: {}): any
-  header(props?: {}): any
-  leading(props: { ui: PageSection['ui'] }): any
-  headline(props?: {}): any
-  title(props?: {}): any
-  description(props?: {}): any
-  body(props?: {}): any
-  features(props?: {}): any
-  footer(props?: {}): any
-  links(props?: {}): any
-  default(props?: {}): any
-  bottom(props?: {}): any
+  top?(props?: {}): VNode[]
+  header?(props?: {}): VNode[]
+  leading?(props: { ui: PageSection['ui'] }): VNode[]
+  headline?(props?: {}): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  features?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
+  links?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  bottom?(props?: {}): VNode[]
 }
 </script>
 

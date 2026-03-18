@@ -48,17 +48,18 @@ const content = ref({
     </UPageHeader>
 
     <UPageBody>
-      <UEditor v-model="content">
-        <UEditorToolbar />
-        <UEditorDragHandle />
-        <UEditorSuggestionMenu />
+      <UEditor v-slot="{ editor }" v-model="content">
+        <UEditorToolbar :editor="editor" />
+        <UEditorSuggestionMenu :editor="editor" />
         <UEditorMentionMenu
+          :editor="editor"
           :items="[
             { label: 'Benjamin', avatar: { src: 'https://github.com/benjamincanac.png' } },
             { label: 'Sébastien', avatar: { src: 'https://github.com/atinux.png' } }
           ]"
         />
-        <UEditorEmojiMenu />
+        <UEditorEmojiMenu :editor="editor" />
+        <UEditorDragHandle :editor="editor" />
       </UEditor>
     </UPageBody>
   </UPage>
@@ -155,11 +156,11 @@ const content = ref({ type: 'doc', content: [] })
     </template>
 
     <UContainer class="py-8">
-      <UEditor v-model="content">
-        <UEditorToolbar />
-        <UEditorDragHandle />
-        <UEditorSuggestionMenu />
-        <UEditorEmojiMenu />
+      <UEditor v-slot="{ editor }" v-model="content">
+        <UEditorToolbar :editor="editor" />
+        <UEditorSuggestionMenu :editor="editor" />
+        <UEditorEmojiMenu :editor="editor" />
+        <UEditorDragHandle :editor="editor" />
       </UEditor>
     </UContainer>
   </UDashboardPanel>

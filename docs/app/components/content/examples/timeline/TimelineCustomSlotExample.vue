@@ -23,9 +23,11 @@ const items = [{
   slot: 'development' as const,
   developers: [
     {
-      src: 'https://github.com/J-Michalek.png'
+      src: 'https://github.com/J-Michalek.png',
+      loading: 'lazy' as const
     }, {
-      src: 'https://github.com/benjamincanac.png'
+      src: 'https://github.com/benjamincanac.png',
+      loading: 'lazy' as const
     }
   ]
 }, {

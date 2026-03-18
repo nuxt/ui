@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'ສົ່ງຄຳສັ່ງ'
     },
+    chatReasoning: {
+      thinking: 'ກຳລັງຄິດ…',
+      thought: 'ຄິດແລ້ວ',
+      thoughtFor: 'ຄິດເປັນເວລາ {duration}'
+    },
     colorMode: {
       dark: 'ມືດ',
       light: 'ແຈ້ງ',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'ໃນໜ້ານີ້'
+    },
+    dropdownMenu: {
+      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
+      search: 'ຄົ້ນຫາ...'
     },
     dashboardSearch: {
       theme: 'ທີມ'
@@ -111,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'ຄັດລອກໂຄ້ດ'
       }
+    },
+    sidebar: {
+      close: 'ປິດ',
+      toggle: 'ສະລັບ'
     },
     selectMenu: {
       create: 'ສ້າງ "{label}"',

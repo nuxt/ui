@@ -19,14 +19,13 @@ type UserResponse = {
 
 const skip = ref(0)
 
-const { data, status, execute } = await useFetch('https://dummyjson.com/users?limit=10&select=firstName,lastName,username,email,image', {
+const { data, status } = useLazyFetch('https://dummyjson.com/users?limit=10&select=firstName,lastName,username,email,image', {
   key: 'scroll-area-users-infinite-scroll',
   params: { skip },
   transform: (data?: UserResponse) => {
     return data?.users
   },
-  lazy: true,
-  immediate: false
+  server: false
 })
 
 const users = ref<User[]>([])
@@ -37,8 +36,6 @@ watch(data, () => {
     ...(data.value || [])
   ]
 })
-
-execute()
 
 const scrollArea = useTemplateRef('scrollArea')
 
@@ -72,14 +69,14 @@ onMounted(() => {
       <UUser
         :name="`${item.firstName} ${item.lastName}`"
         :description="item.email"
-        :avatar="{ src: item.image, alt: item.firstName, loading: 'lazy' }"
+        :avatar="{ src: item.image, alt: item.firstName, loading: 'lazy' as const }"
         size="lg"
       />
     </UPageCard>
   </UScrollArea>
 
   <UProgress
-    v-if="status === 'pending'"
+    v-if="status === 'pending' || status === 'idle'"
     indeterminate
     size="xs"
     class="absolute top-0 inset-x-0 z-1"

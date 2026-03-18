@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/banner'
 import type { ButtonProps, IconProps, LinkProps, LinkPropsKeys } from '../types'
@@ -52,10 +53,10 @@ export interface BannerProps {
 }
 
 export interface BannerSlots {
-  leading(props: { ui: Banner['ui'] }): any
-  title(props?: {}): any
-  actions(props?: {}): any
-  close(props: { ui: Banner['ui'] }): any
+  leading?(props: { ui: Banner['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  close?(props: { ui: Banner['ui'] }): VNode[]
 }
 
 export interface BannerEmits {
@@ -159,7 +160,7 @@ function onClose() {
       tabindex="-1"
       raw
     >
-      <span class="absolute inset-0 " aria-hidden="true" />
+      <span class="absolute inset-0" aria-hidden="true" />
     </ULink>
 
     <UContainer data-slot="container" :class="ui.container({ class: uiProp?.container })">
