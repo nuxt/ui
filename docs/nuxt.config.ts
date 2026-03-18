@@ -184,8 +184,10 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    ssr: {
-      external: ['@vue/repl']
+    build: {
+      commonjsOptions: {
+        exclude: ['**/node_modules/@vue/repl/**']
+      }
     }
   },
 
