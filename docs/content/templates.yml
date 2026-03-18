@@ -31,14 +31,14 @@ items:
         target: _blank
         icon: i-lucide-link
     open_links:
-      - label: v0
-        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/editor
-        target: _blank
-        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/editor
         target: _blank
         icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/editor
+        target: _blank
+        icon: i-simple-icons-v0
   - title: 'Changelog'
     description: "A changelog template to display your repository releases notes from GitHub powered by Nuxt MDC."
     icon: i-lucide-newspaper
@@ -65,14 +65,14 @@ items:
         target: _blank
         icon: i-lucide-link
     open_links:
-      - label: v0
-        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/changelog
-        target: _blank
-        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/changelog
         target: _blank
         icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/changelog
+        target: _blank
+        icon: i-simple-icons-v0
   - title: 'Portfolio'
     description: "A sleek portfolio template to showcase your work, skills and blog powered by Nuxt Content."
     icon: i-lucide-user
@@ -99,16 +99,16 @@ items:
         target: _blank
         icon: i-lucide-link
     open_links:
-      - label: v0
-        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/portfolio
-        target: _blank
-        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/portfolio
         target: _blank
         icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/portfolio
+        target: _blank
+        icon: i-simple-icons-v0
   - title: 'Chat'
-    description: "An AI chatbot template to build your own chatbot powered by Nuxt MDC and Vercel AI SDK."
+    description: "An AI chatbot template to build your own chatbot powered by Vercel AI SDK."
     icon: i-lucide-message-circle
     framework: nuxt
     features:
@@ -133,14 +133,48 @@ items:
         target: _blank
         icon: i-lucide-link
     open_links:
-      - label: v0
-        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/chat
-        target: _blank
-        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/chat
         target: _blank
         icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/chat
+        target: _blank
+        icon: i-simple-icons-v0
+  - title: 'Chat'
+    description: "An AI chatbot template to build your own chatbot powered by Vercel AI SDK."
+    icon: i-lucide-message-circle
+    framework: vue
+    features:
+      - title: GitHub authentication
+        icon: i-lucide-lock
+      - title: Persistent chat history
+        icon: i-lucide-database
+      - title: Markdown syntax highlight
+        icon: i-lucide-palette
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=chat-vue&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fchat-vue&env=SESSION_SECRET,GITHUB_OAUTH_CLIENT_ID,GITHUB_OAUTH_CLIENT_SECRET&products=%5B%7B%22type%22%3A%22integration%22%2C%22group%22%3A%22postgres%22%7D%5D&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fvue%2Fchat-dark.png&demo-url=https%3A%2F%2Fchat-vue-template.nuxt.dev%2F&demo-title=Vue%20Chat%20Template&demo-description=An%20AI%20chatbot%20template%20to%20build%20your%20own%20chatbot%20powered%20by%20Vercel%20AI%20SDK.
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/chat-vue
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://chat-vue-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+    open_links:
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/chat-vue
+        target: _blank
+        icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/chat-vue
+        target: _blank
+        icon: i-simple-icons-v0
   - title: 'Dashboard'
     description: "A dashboard template with multi-column layout for building sophisticated admin interfaces."
     icon: i-lucide-bar-chart-big
@@ -167,14 +201,14 @@ items:
         target: _blank
         icon: i-lucide-link
     open_links:
-      - label: v0
-        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/dashboard
-        target: _blank
-        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/dashboard
         target: _blank
         icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/dashboard
+        target: _blank
+        icon: i-simple-icons-v0
   - title: 'Dashboard'
     description: "A dashboard template with multi-column layout for building sophisticated admin interfaces."
     icon: i-lucide-bar-chart-big
@@ -199,14 +233,14 @@ items:
         target: _blank
         icon: i-lucide-link
     open_links:
-      - label: v0
-        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/dashboard-vue
-        target: _blank
-        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/dashboard-vue
         target: _blank
         icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/dashboard-vue
+        target: _blank
+        icon: i-simple-icons-v0
   - title: 'SaaS'
     description: "A SaaS template with landing, pricing, docs and blog powered by Nuxt Content."
     icon: i-lucide-cloud
@@ -233,14 +267,14 @@ items:
         target: _blank
         icon: i-lucide-link
     open_links:
-      - label: v0
-        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/saas
-        target: _blank
-        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/saas
         target: _blank
         icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/saas
+        target: _blank
+        icon: i-simple-icons-v0
   - title: 'Landing'
     description: "A modern landing page template powered by Nuxt Content."
     icon: i-lucide-layout
@@ -267,14 +301,14 @@ items:
         target: _blank
         icon: i-lucide-link
     open_links:
-      - label: v0
-        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/landing
-        target: _blank
-        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/landing
         target: _blank
         icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/landing
+        target: _blank
+        icon: i-simple-icons-v0
   - title: 'Docs'
     description: "A documentation template powered by Nuxt Content."
     icon: i-lucide-book
@@ -301,14 +335,14 @@ items:
         target: _blank
         icon: i-lucide-link
     open_links:
-      - label: v0
-        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/docs
-        target: _blank
-        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/docs
         target: _blank
         icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/docs
+        target: _blank
+        icon: i-simple-icons-v0
   - title: 'Starter'
     description: "A minimal template to get started with Nuxt UI."
     icon: i-lucide-flower
@@ -333,14 +367,14 @@ items:
         target: _blank
         icon: i-lucide-link
     open_links:
-      - label: v0
-        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/starter
-        target: _blank
-        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/starter
         target: _blank
         icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/starter
+        target: _blank
+        icon: i-simple-icons-v0
   - title: 'Starter'
     description: "A minimal template to get started with Nuxt UI."
     icon: i-lucide-flower
@@ -365,11 +399,11 @@ items:
         target: _blank
         icon: i-lucide-link
     open_links:
-      - label: v0
-        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/starter-vue
-        target: _blank
-        icon: i-simple-icons-v0
       - label: GitHub
         to: https://github.com/nuxt-ui-templates/starter-vue
         target: _blank
         icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/starter-vue
+        target: _blank
+        icon: i-simple-icons-v0

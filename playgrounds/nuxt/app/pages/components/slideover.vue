@@ -31,7 +31,7 @@ function openSlideover() {
       <UButton color="neutral" variant="outline" label="Open with nested" />
 
       <template #body>
-        <Placeholder class="h-full w-full" />
+        <Placeholder class="size-full" />
       </template>
 
       <template #footer>
@@ -45,7 +45,7 @@ function openSlideover() {
       <UButton label="Open on left" color="neutral" variant="subtle" />
 
       <template #body>
-        <Placeholder class="h-full w-full" />
+        <Placeholder class="size-full" />
       </template>
     </USlideover>
 
@@ -67,7 +67,7 @@ function openSlideover() {
 
     <USlideover v-model:open="open" title="Slideover with v-model" description="This is useful to control the state yourself." :inset="inset">
       <template #body>
-        <Placeholder class="h-full w-full" />
+        <Placeholder class="size-full" />
       </template>
     </USlideover>
 
@@ -77,7 +77,7 @@ function openSlideover() {
       <UButton label="Open without overlay" color="neutral" variant="subtle" />
 
       <template #body>
-        <Placeholder class="h-full w-full" />
+        <Placeholder class="size-full" />
       </template>
     </USlideover>
 
@@ -85,7 +85,7 @@ function openSlideover() {
       <UButton label="Open without modal" color="neutral" variant="outline" />
 
       <template #body>
-        <Placeholder class="h-full w-full" />
+        <Placeholder class="size-full" />
       </template>
     </USlideover>
 
@@ -93,7 +93,7 @@ function openSlideover() {
       <UButton label="Open without transition" color="neutral" variant="subtle" />
 
       <template #body>
-        <Placeholder class="h-full w-full" />
+        <Placeholder class="size-full" />
       </template>
     </USlideover>
 
@@ -101,7 +101,7 @@ function openSlideover() {
       <UButton label="Open without portal" color="neutral" variant="outline" />
 
       <template #body>
-        <Placeholder class="h-full w-full" />
+        <Placeholder class="size-full" />
       </template>
     </USlideover>
 
@@ -116,7 +116,7 @@ function openSlideover() {
       <UButton label="Open unclosable" color="neutral" variant="subtle" />
 
       <template #body>
-        <Placeholder class="h-full w-full" />
+        <Placeholder class="size-full" />
       </template>
     </USlideover>
 
@@ -124,7 +124,7 @@ function openSlideover() {
       <UButton label="Open without close button" color="neutral" variant="outline" />
 
       <template #body>
-        <Placeholder class="h-full w-full" />
+        <Placeholder class="size-full" />
       </template>
     </USlideover>
 
@@ -132,7 +132,7 @@ function openSlideover() {
       <UButton label="Open with custom close button" color="neutral" variant="subtle" />
 
       <template #body>
-        <Placeholder class="h-full w-full" />
+        <Placeholder class="size-full" />
       </template>
     </USlideover>
 

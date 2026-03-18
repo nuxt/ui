@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { SeparatorProps as _SeparatorProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/separator'
 import type { AvatarProps, IconProps } from '../types'
@@ -44,7 +45,7 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
 }
 
 export interface SeparatorSlots {
-  default(props: { ui: Separator['ui'] }): any
+  default?(props: { ui: Separator['ui'] }): VNode[]
 }
 </script>
 

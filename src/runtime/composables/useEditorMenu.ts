@@ -1,7 +1,7 @@
 import { ref, h, computed, unref, watch } from 'vue'
 import type { Ref, ComputedRef, MaybeRef } from 'vue'
 import { defu } from 'defu'
-import { useFilter } from './internal/useFilter'
+import { useFilter } from './useFilter'
 import { computePosition } from '@floating-ui/dom'
 import type { Strategy, Placement } from '@floating-ui/dom'
 import type { Editor } from '@tiptap/vue-3'

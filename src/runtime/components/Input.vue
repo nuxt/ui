@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -58,9 +59,9 @@ export interface InputEmits<T extends InputValue = InputValue, Mod extends Model
 }
 
 export interface InputSlots {
-  leading(props: { ui: Input['ui'] }): any
-  default(props: { ui: Input['ui'] }): any
-  trailing(props: { ui: Input['ui'] }): any
+  leading?(props: { ui: Input['ui'] }): VNode[]
+  default?(props: { ui: Input['ui'] }): VNode[]
+  trailing?(props: { ui: Input['ui'] }): VNode[]
 }
 </script>
 

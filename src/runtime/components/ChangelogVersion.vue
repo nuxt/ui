@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/changelog-version'
 import type { BadgeProps, LinkProps, UserProps } from '../types'
@@ -40,17 +41,17 @@ export interface ChangelogVersionProps {
 }
 
 export interface ChangelogVersionSlots {
-  header(props?: {}): any
-  badge(props: { ui: ChangelogVersion['ui'] }): any
-  date(props?: {}): any
-  title(props?: {}): any
-  description(props?: {}): any
-  image(props: { ui: ChangelogVersion['ui'] }): any
-  body(props?: {}): any
-  footer(props?: {}): any
-  authors(props?: {}): any
-  actions(props?: {}): any
-  indicator(props: { ui: ChangelogVersion['ui'] }): any
+  header?(props?: {}): VNode[]
+  badge?(props: { ui: ChangelogVersion['ui'] }): VNode[]
+  date?(props?: {}): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  image?(props: { ui: ChangelogVersion['ui'] }): VNode[]
+  body?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
+  authors?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  indicator?(props: { ui: ChangelogVersion['ui'] }): VNode[]
 }
 </script>
 
@@ -58,9 +59,10 @@ export interface ChangelogVersionSlots {
 import { computed } from 'vue'
 import { Primitive, useDateFormatter } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useLocale, useAppConfig } from '#imports'
-import ImageComponent from '#build/ui-image-component'
+import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import { useComponentUI } from '../composables/useComponentUI'
+import ImageComponent from '#build/ui-image-component'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'

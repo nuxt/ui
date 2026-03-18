@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import PageLinks from '../../src/runtime/components/PageLinks.vue'
-import type { PageLinksProps, PageLinksSlots } from '../../src/runtime/components/PageLinks.vue'
-import ComponentRender from '../component-render'
 
 describe('PageLinks', () => {
   const links = [{
@@ -28,7 +27,7 @@ describe('PageLinks', () => {
 
   const props = { links }
 
-  it.each([
+  renderEach(PageLinks, [
     // Props
     ['with links', { props }],
     ['with title', { props: { ...props, title: 'Resources' } }],
@@ -41,10 +40,7 @@ describe('PageLinks', () => {
     ['with link-leading slot', { props, slots: { 'link-leading': () => 'Link leading slot' } }],
     ['with link-label slot', { props, slots: { 'link-label': () => 'Link label slot' } }],
     ['with link-trailing slot', { props, slots: { 'link-trailing': () => 'Link trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageLinksProps, slots?: Partial<PageLinksSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PageLinks)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(PageLinks, {

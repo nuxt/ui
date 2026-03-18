@@ -160,7 +160,13 @@ export function getDisplayValue<T extends Array<any>, V>(
   return String(source)
 }
 
-export function isArrayOfArray<A>(item: A[] | A[][]): item is A[][] {
+export function isArrayOfArray<
+  A extends any[] | any[][]
+>(item: A): item is A extends Array<infer T>
+  ? T extends any[]
+    ? T[]
+    : never
+  : never {
   return Array.isArray(item[0])
 }
 
@@ -187,7 +193,7 @@ export function transformUI(ui: any, uiProp?: any) {
   return Object.entries(ui).reduce((acc, [key, value]) => {
     acc[key] = typeof value === 'function' ? value({ class: uiProp?.[key] }) : value
     return acc
-  }, uiProp || {})
+  }, { ...(uiProp || {}) })
 }
 
 export function resolveBaseURL(path?: string, baseURL?: string): string | undefined {

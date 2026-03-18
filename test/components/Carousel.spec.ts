@@ -2,9 +2,8 @@ import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Carousel from '../../src/runtime/components/Carousel.vue'
-import type { CarouselProps, CarouselSlots } from '../../src/runtime/components/Carousel.vue'
-import ComponentRender from '../component-render'
 
 const CarouselWrapper = defineComponent({
   components: {
@@ -27,23 +26,20 @@ describe('Carousel', () => {
 
   const props = { items }
 
-  it.each([
+  renderEach(CarouselWrapper, [
     // Props
     ['with items', { props }],
-    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical' } }],
     ['with arrows', { props: { ...props, arrows: true } }],
-    ['with prev', { props: { ...props, arrows: true, prev: { color: 'primary' as const } } }],
+    ['with prev', { props: { ...props, arrows: true, prev: { color: 'primary' } } }],
     ['with prevIcon', { props: { ...props, arrows: true, prevIcon: 'i-lucide-arrow-left' } }],
-    ['with next', { props: { ...props, arrows: true, next: { color: 'primary' as const } } }],
+    ['with next', { props: { ...props, arrows: true, next: { color: 'primary' } } }],
     ['with nextIcon', { props: { ...props, arrows: true, nextIcon: 'i-lucide-arrow-right' } }],
     ['with dots', { props: { ...props, dots: true } }],
     ['with as', { props: { ...props, as: 'nav' } }],
     ['with class', { props: { ...props, class: 'w-full max-w-xs' } }],
     ['with ui', { props: { ...props, ui: { viewport: 'h-[320px]' } } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CarouselProps, slots?: Partial<CarouselSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, CarouselWrapper)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CarouselWrapper, {

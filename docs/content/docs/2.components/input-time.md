@@ -137,6 +137,7 @@ prettier: true
 props:
   avatar:
     src: 'https://github.com/vuejs.png'
+    loading: lazy
   size: md
   variant: outline
 ---

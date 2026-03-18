@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Tabs from '../../src/runtime/components/Tabs.vue'
-import type { TabsProps, TabsSlots } from '../../src/runtime/components/Tabs.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/tabs'
 
 describe('Tabs', () => {
@@ -31,14 +30,14 @@ describe('Tabs', () => {
 
   const props = { items }
 
-  it.each([
+  renderEach(Tabs, [
     // Props
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
     ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Tab1' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
-    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
@@ -53,10 +52,7 @@ describe('Tabs', () => {
     ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TabsProps, slots?: Partial<TabsSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Tabs)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Tabs, {

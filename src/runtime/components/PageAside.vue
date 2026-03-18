@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-aside'
 import type { ComponentConfig } from '../types/tv'
@@ -16,9 +17,9 @@ export interface PageAsideProps {
 }
 
 export interface PageAsideSlots {
-  top(props?: {}): any
-  default(props?: {}): any
-  bottom(props?: {}): any
+  top?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  bottom?(props?: {}): VNode[]
 }
 </script>
 
