@@ -6,21 +6,33 @@ export function useHeader() {
     to: '/docs',
     active: route.path.startsWith('/docs/')
   }, {
-    label: 'Figma',
-    to: '/figma'
+    label: 'Play',
+    to: '/play'
   }, {
     label: 'Templates',
     to: '/templates'
   }, {
-    label: 'Showcase',
-    to: '/showcase'
+    label: 'Resources',
+    active: route.path.startsWith('/showcase') || route.path.startsWith('/community') || route.path.startsWith('/blog'),
+    children: [{
+      label: 'Showcase',
+      description: 'Discover websites built with Nuxt UI.',
+      icon: 'i-lucide-presentation',
+      to: '/showcase'
+    }, {
+      label: 'Community',
+      description: 'Explore projects built around Nuxt UI.',
+      icon: 'i-lucide-globe',
+      to: '/community'
+    }, {
+      label: 'Blog',
+      description: 'Read the latest news and updates.',
+      icon: 'i-lucide-newspaper',
+      to: '/blog'
+    }]
   }, {
-    label: 'Community',
-    to: '/community'
-  }, {
-    label: 'Blog',
-    to: '/blog',
-    active: route.path.startsWith('/blog')
+    label: 'Figma',
+    to: '/figma'
   }, {
     label: 'Releases',
     to: '/releases'
@@ -47,9 +59,9 @@ export function useHeader() {
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
   }, {
-    label: 'Figma',
-    icon: 'i-simple-icons-figma',
-    to: '/figma'
+    label: 'Play',
+    icon: 'i-lucide-square-terminal',
+    to: '/play'
   }, {
     label: 'Templates',
     icon: 'i-lucide-panels-top-left',
@@ -71,6 +83,10 @@ export function useHeader() {
     icon: 'i-lucide-newspaper',
     to: '/blog',
     active: route.path.startsWith('/blog')
+  }, {
+    label: 'Figma',
+    icon: 'i-simple-icons-figma',
+    to: '/figma'
   }, {
     label: 'Releases',
     icon: 'i-lucide-rocket',

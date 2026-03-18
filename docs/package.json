@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.58",
+    "@vue/repl": "^4.7.1",
     "@ai-sdk/gateway": "^3.0.66",
     "@ai-sdk/mcp": "^1.0.25",
     "@ai-sdk/vue": "^3.0.116",

@@ -54,10 +54,10 @@ export function useSearch() {
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
   }, {
-    label: 'Figma',
-    description: 'Access the official Nuxt UI Figma design kit to streamline your design workflow.',
-    icon: 'i-simple-icons-figma',
-    to: '/figma'
+    label: 'Play',
+    description: 'Try Nuxt UI components live in your browser.',
+    icon: 'i-lucide-square-terminal',
+    to: '/play'
   }, {
     label: 'Templates',
     description: 'Explore official templates built with Nuxt UI.',
@@ -65,25 +65,30 @@ export function useSearch() {
     to: '/templates'
   }, {
     label: 'Showcase',
-    description: 'Explore some of the amazing projects built with Nuxt UI.',
+    description: 'Discover websites built with Nuxt UI.',
     icon: 'i-lucide-presentation',
     to: '/showcase'
   }, {
     label: 'Community',
-    description: 'Explore the amazing projects built around Nuxt UI.',
+    description: 'Explore projects built around Nuxt UI.',
     icon: 'i-lucide-globe',
     to: '/community'
-  }, {
-    label: 'Team',
-    description: 'Meet the team building and maintaining Nuxt UI.',
-    icon: 'i-lucide-users',
-    to: '/team'
   }, {
     label: 'Blog',
     description: 'Learn how to build things with Nuxt UI.',
     icon: 'i-lucide-newspaper',
     to: '/blog',
     active: route.path.startsWith('/blog')
+  }, {
+    label: 'Figma',
+    description: 'Access the official Nuxt UI Figma design kit to streamline your design workflow.',
+    icon: 'i-simple-icons-figma',
+    to: '/figma'
+  }, {
+    label: 'Team',
+    description: 'Meet the team building and maintaining Nuxt UI.',
+    icon: 'i-lucide-users',
+    to: '/team'
   }, {
     label: 'Releases',
     description: 'Stay up to date with the newest features, enhancements, and fixes for Nuxt UI.',
