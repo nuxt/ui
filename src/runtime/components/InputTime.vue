@@ -7,11 +7,7 @@ import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
-export type { TimeValue } from 'reka-ui'
-
 type InputTime = ComponentConfig<typeof theme, AppConfig, 'inputTime'>
-
-export type TimeRangeValue = TimeRangeFieldRootProps['modelValue']
 
 type InputTimeDefaultValue<R extends boolean = false> = R extends true
   ? TimeRangeFieldRootProps['defaultValue']
