@@ -1294,7 +1294,7 @@ name: 'navigation-menu-collapsed-label-example'
 ::tip
 You can also do this globally through the `app.config.ts` using [`compoundVariants`](/docs/getting-started/theme/components#compound-variants):
 
-```ts [app.config.ts]
+```ts [app/app.config.ts]
 export default defineAppConfig({
   ui: {
     navigationMenu: {

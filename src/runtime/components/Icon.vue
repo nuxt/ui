@@ -1,14 +1,11 @@
 <script lang="ts">
+import type { RuntimeOptions } from '@nuxt/icon'
+
 export interface IconProps {
   name: string | any
   mode?: 'svg' | 'css'
   size?: string | number
-  customize?: (
-    content: string,
-    name?: string,
-    prefix?: string,
-    provider?: string
-  ) => string
+  customize?: RuntimeOptions['customize'] | boolean | null
 }
 </script>
 

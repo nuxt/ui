@@ -8,6 +8,7 @@ import type { Options as ComponentsOptions } from 'unplugin-vue-components/types
 import { defu } from 'defu'
 import tailwind from '@tailwindcss/vite'
 import type colors from 'tailwindcss/colors'
+import type { RuntimeOptions } from '@nuxt/icon'
 
 import type * as ui from '#build/ui'
 
@@ -38,6 +39,10 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
   /** Whether to generate declaration files for auto-imported components. */
   dts?: boolean
   ui?: AppConfigUI
+  /**
+   * Default props for the `Icon` component
+   */
+  icon?: Pick<RuntimeOptions, 'customize' | 'size' | 'mode'>
   /**
    * Enable or disable `@vueuse/core` color-mode integration
    * @defaultValue `true`
@@ -83,7 +88,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
   options.theme = options.theme || {}
   options.theme.colors = resolveColors(options.theme.colors)
 
-  const appConfig = defu({ ui: options.ui, colorMode: options.colorMode }, { ui: getDefaultConfig(options.theme) })
+  const appConfig = defu({ ui: options.ui, colorMode: options.colorMode, icon: options.icon }, { ui: getDefaultConfig(options.theme) })
 
   return [
     NuxtEnvironmentPlugin(options),
