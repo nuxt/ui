@@ -124,11 +124,11 @@ const inputsRef = ref<ComponentPublicInstance[]>([])
 
 const FieldRoot = computed(() => props.range ? TimeRangeFieldRoot : TimeFieldRoot)
 const rootModelValue = computed(() => props.range
-  ? props.modelValue as TimeRangeFieldRootProps['modelValue']
-  : props.modelValue as TimeFieldRootProps['modelValue'])
+  ? props.modelValue
+  : props.modelValue)
 const rootDefaultValue = computed(() => props.range
-  ? props.defaultValue as TimeRangeFieldRootProps['defaultValue']
-  : props.defaultValue as TimeFieldRootProps['defaultValue'])
+  ? props.defaultValue
+  : props.defaultValue)
 
 function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
   // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
@@ -179,8 +179,8 @@ defineExpose({
     v-slot="{ segments }"
     :name="name"
     :disabled="disabled"
-    :model-value="rootModelValue as any"
-    :default-value="rootDefaultValue as any"
+    :model-value="rootModelValue as (R extends false ? TimeFieldRootProps['modelValue'] : TimeFieldRootProps['modelValue'])"
+    :default-value="rootDefaultValue as (R extends false ? TimeFieldRootProps['defaultValue'] : TimeFieldRootProps['defaultValue'])"
     data-slot="base"
     :class="ui.base({ class: [uiProp?.base, props.class] })"
     @update:model-value="onUpdate"
