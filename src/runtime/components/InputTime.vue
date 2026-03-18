@@ -4,7 +4,7 @@ import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, T
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-time'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps } from '../types'
+import type { AvatarProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 export type { TimeValue } from 'reka-ui'
@@ -52,6 +52,7 @@ export interface InputTimeProps<R extends boolean = false> extends UseComponentI
    * @defaultValue false
    */
   range?: R & boolean
+  separatorIcon?: IconProps['name']
   /** The value of the input when initially rendered. Use when you do not need to control the state of the input. */
   defaultValue?: InputTimeDefaultValue<R>
   /** The controlled value of the input. Can be bind as `v-model`. */
@@ -70,10 +71,10 @@ export interface InputTimeEmits<R extends boolean = false> extends Omit<TimeFiel
 }
 
 export interface InputTimeSlots {
-  'leading'?(props: { ui: InputTime['ui'] }): VNode[]
-  'default'?(props: { ui: InputTime['ui'] }): VNode[]
-  'trailing'?(props: { ui: InputTime['ui'] }): VNode[]
-  'range-separator'?(): VNode[]
+  leading?(props: { ui: InputTime['ui'] }): VNode[]
+  default?(props: { ui: InputTime['ui'] }): VNode[]
+  trailing?(props: { ui: InputTime['ui'] }): VNode[]
+  separator?(props: { ui: InputTime['ui'] }): VNode[]
 }
 </script>
 
@@ -213,8 +214,8 @@ defineExpose({
       </TimeRangeFieldInput>
 
       <span data-slot="range-separator" :class="ui.rangeSeparator({ class: uiProp?.rangeSeparator })">
-        <slot name="range-separator">
-          –
+        <slot name="separator" :ui="ui">
+          <UIcon :name="separatorIcon || appConfig.ui.icons.minus" data-slot="separatorIcon" :class="ui.separatorIcon({ class: uiProp?.separatorIcon })" />
         </slot>
       </span>
 

@@ -36,11 +36,9 @@ const rangeMode = ref(false)
     <USelect v-model="attrs.color" :items="colors" multiple />
     <USelect v-model="attrs.variant" :items="variants" multiple />
     <USelect v-model="attrs.size" :items="sizes" multiple />
-    <USwitch v-model="rangeMode">
-      <template #label>
-        Range
-      </template>
-    </USwitch>
+    <USwitch v-model="rangeMode" label="Range">
+      />
+    </uswitch>
   </Navbar>
 
   <Matrix v-slot="props" :attrs="attrs">

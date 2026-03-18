@@ -1,6 +1,6 @@
 ---
 title: InputTime
-description: "An input for selecting a time."
+description: 'An input for selecting a time.'
 category: form
 links:
   - label: TimeField
@@ -58,7 +58,7 @@ props:
 ---
 ::
 
-### Time Range
+### Range
 
 Use the `range` prop to enable time range selection with start and end times.
 
@@ -100,7 +100,7 @@ props:
     start: [8, 0, 0]
     end: [16, 30, 0]
 ---
-:::
+::
 
 ### Color
 
@@ -166,8 +166,8 @@ props:
   avatar:
     src: 'https://github.com/vuejs.png'
     loading: lazy
-    size: md
-    variant: outline
+  size: md
+  variant: outline
 ---
 ::
 
