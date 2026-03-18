@@ -6,9 +6,9 @@ import type { Struct as SuperstructSchema } from 'superstruct'
 export interface Form<S extends FormSchema> {
   validate<T extends boolean>(opts?: { name?: keyof FormData<S, false> | (keyof FormData<S, false>)[], silent?: boolean, nested?: boolean, transform?: T }): Promise<FormData<S, T> | false>
   clear (path?: keyof FormData<S, false> | string | RegExp): void
-  errors: Ref<FormError[]>
+  errors: Ref<FormErrorWithId[]>
   setErrors (errs: FormError[], name?: keyof FormData<S, false> | string | RegExp): void
-  getErrors (name?: keyof FormData<S, false> | string | RegExp): FormError[]
+  getErrors (name?: keyof FormData<S, false> | string | RegExp): FormErrorWithId[]
   submit (): Promise<void>
   disabled: ComputedRef<boolean>
   dirty: ComputedRef<boolean>
