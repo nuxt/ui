@@ -41,7 +41,7 @@ const customize = computed(() => resolveCustomizeFn(props.customize, appConfig.i
     :mode="mode"
     :width="size"
     :height="size"
-    :customize="customize"
+    :customise="customize"
   />
   <component :is="name" v-else />
 </template>
