@@ -183,6 +183,12 @@ export default defineNuxtConfig({
     }
   },
 
+  vite: {
+    ssr: {
+      external: ['@vue/repl']
+    }
+  },
+
   a11y: {
     logIssues: false
   },
