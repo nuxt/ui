@@ -21,6 +21,7 @@ interface Cast {
 
 type CastDateValue = [number, number, number]
 type CastTimeValue = [number, number, number]
+type CastTimeRangeValue = { start: CastTimeValue, end: CastTimeValue }
 
 const castMap: Record<string, Cast> = {
   'DateValue': {
@@ -52,6 +53,13 @@ const castMap: Record<string, Cast> = {
     get: (args: CastTimeValue) => new Time(...args),
     template: (value: Time) => {
       return value ? `new Time(${value.hour}, ${value.minute}, ${value.second})` : 'null'
+    },
+    imports: [{ name: 'Time', from: '@internationalized/date' }]
+  },
+  'TimeRangeValue': {
+    get: (args: CastTimeRangeValue) => ({ start: new Time(...args.start), end: new Time(...args.end) }),
+    template: (value: { start: Time, end: Time }) => {
+      return value ? `{ start: new Time(${value.start.hour}, ${value.start.minute}, ${value.start.second}), end: new Time(${value.end.hour}, ${value.end.minute}, ${value.end.second}) }` : 'null'
     },
     imports: [{ name: 'Time', from: '@internationalized/date' }]
   }
