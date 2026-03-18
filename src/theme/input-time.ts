@@ -10,7 +10,7 @@ export default (options: Required<ModuleOptions>) => {
       base: () => ['group relative inline-flex items-center rounded-md select-none', options.theme.transitions && 'transition-colors'],
       segment: ['rounded text-center outline-hidden data-placeholder:text-dimmed data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
       rangeSeparator: 'flex mx-1 text-muted',
-      separatorIcon: 'size-4 -mb-1'
+      separatorIcon: 'size-4'
     },
     variants: {
       ...fieldGroupVariant,
