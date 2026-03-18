@@ -227,7 +227,7 @@ const previewOptions = {
 .dark .CodeMirror {
   --base: var(--ui-text);
   --comment: var(--ui-text-dimmed);
-  --selected-bg: var(--ui-bg-elevated);
+  --selected-bg: var(--ui-bg-accented);
   --selected-bg-non-focus: var(--ui-bg-accented);
 }
 </style>
