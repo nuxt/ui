@@ -5,7 +5,7 @@ export interface IconProps {
   name: string | any
   mode?: 'svg' | 'css'
   size?: string | number
-  customize?: RuntimeOptions['customize']
+  customize?: RuntimeOptions['customize'] | boolean | null
 }
 </script>
 
