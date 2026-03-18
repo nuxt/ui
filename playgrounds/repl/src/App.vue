@@ -1,15 +1,8 @@
 <!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
+import { ref, computed, watchEffect } from 'vue'
 import { Repl, useStore, useVueImportMap } from '@vue/repl'
 import CodeMirror from '@vue/repl/codemirror-editor'
-
-useSeoMeta({
-  titleTemplate: '%s - Nuxt UI',
-  title: 'Playground',
-  description: 'Try Nuxt UI components live in your browser.',
-  ogTitle: 'Playground - Nuxt UI',
-  ogDescription: 'Try Nuxt UI components live in your browser.'
-})
 
 const {
   importMap: vueImportMap,
@@ -23,7 +16,7 @@ const {
 const builtinImportMap = computed(() => ({
   imports: {
     ...vueImportMap.value.imports,
-    '@nuxt/ui': '/play/nuxt-ui.js',
+    '@nuxt/ui': '/nuxt-ui.js',
     'zod': 'https://esm.sh/zod@3?external=vue'
   }
 }))
@@ -58,11 +51,11 @@ const schema = z.object({
   cardNumber: z
     .string({ error: 'Card number is required' })
     .nonempty('Card number is required')
-    .regex(/^[\d\s]{16,19}$/, 'Enter a valid 16-digit card number'),
+    .regex(/^[\\d\\s]{16,19}$/, 'Enter a valid 16-digit card number'),
   cvv: z
     .string({ error: 'CVV is required' })
     .nonempty('CVV is required')
-    .regex(/^\d{3,4}$/, 'Enter a valid CVV'),
+    .regex(/^\\d{3,4}$/, 'Enter a valid CVV'),
   month: z.string({ error: 'Month is required' }).nonempty('Select a month'),
   year: z.string({ error: 'Year is required' }).nonempty('Select a year'),
   sameAsShipping: z.boolean().default(true),
@@ -141,10 +134,12 @@ store.setFiles({
   'src/App.vue': defaultCode
 }, 'src/App.vue')
 
+watchEffect(() => history.replaceState({}, '', store.serialize()))
+
 const previewOptions = {
   headHTML: [
-    '<script>window.__VUE_PROD_DEVTOOLS__=false;<\/script>',
-    '<link rel="stylesheet" href="/play/nuxt-ui.css">',
+    '<script>window.__VUE_PROD_DEVTOOLS__=false<\/script>',
+    '<link rel="stylesheet" href="/nuxt-ui.css">',
     '<link rel="preconnect" href="https://fonts.bunny.net">',
     '<link href="https://fonts.bunny.net/css?family=public-sans:400,500,600,700" rel="stylesheet">',
     '<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"><\/script>',
@@ -158,10 +153,29 @@ const previewOptions = {
 </script>
 
 <template>
-  <div class="h-dvh flex flex-col">
-    <Header />
+  <UApp>
+    <div class="h-dvh flex flex-col">
+      <UHeader title="Nuxt UI Playground" :ui="{ container: 'max-w-none' }">
+        <template #left>
+          <Logo class="w-auto h-6 shrink-0 text-highlighted" />
+        </template>
 
-    <ClientOnly>
+        <template #right>
+          <UColorModeButton />
+
+          <UTooltip text="Open on GitHub">
+            <UButton
+              color="neutral"
+              variant="ghost"
+              to="https://github.com/nuxt/ui"
+              target="_blank"
+              icon="i-simple-icons:github"
+              aria-label="GitHub"
+            />
+          </UTooltip>
+        </template>
+      </UHeader>
+
       <Repl
         :store="store"
         :editor="CodeMirror"
@@ -172,21 +186,20 @@ const previewOptions = {
         :preview-options="previewOptions"
         class="flex-1"
       />
-    </ClientOnly>
-  </div>
+    </div>
+  </UApp>
 </template>
 
-<style scoped>
-.vue-repl {
+<style>
+.vue-repl,
+.dark .vue-repl {
   --bg: var(--ui-bg);
   --bg-soft: var(--ui-bg-muted);
   --border: var(--ui-border);
   --text-light: var(--ui-text-muted);
   --color-branding: var(--ui-primary);
   --color-branding-dark: var(--ui-primary);
-}
 
-:deep(.vue-repl) {
   & .file-selector {
     padding-inline: calc(var(--spacing) * 4);
 
@@ -210,9 +223,9 @@ const previewOptions = {
   }
 }
 
-:deep(.CodeMirror) {
+.CodeMirror,
+.dark .CodeMirror {
   --base: var(--ui-text);
-  /* --symbols: var(--ui-text-highlighted); */
   --comment: var(--ui-text-dimmed);
   --selected-bg: var(--ui-bg-elevated);
   --selected-bg-non-focus: var(--ui-bg-accented);

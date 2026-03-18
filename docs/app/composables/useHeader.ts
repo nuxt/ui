@@ -6,9 +6,6 @@ export function useHeader() {
     to: '/docs',
     active: route.path.startsWith('/docs/')
   }, {
-    label: 'Play',
-    to: '/play'
-  }, {
     label: 'Templates',
     to: '/templates'
   }, {
@@ -24,6 +21,12 @@ export function useHeader() {
       description: 'Explore projects built around Nuxt UI.',
       icon: 'i-lucide-globe',
       to: '/community'
+    }, {
+      label: 'Playground',
+      description: 'Try Nuxt UI components live in your browser.',
+      icon: 'i-lucide-square-terminal',
+      to: 'https://play.ui.nuxt.com',
+      target: '_blank'
     }, {
       label: 'Blog',
       description: 'Read the latest news and updates.',
@@ -59,10 +62,6 @@ export function useHeader() {
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
   }, {
-    label: 'Play',
-    icon: 'i-lucide-square-terminal',
-    to: '/play'
-  }, {
     label: 'Templates',
     icon: 'i-lucide-panels-top-left',
     to: '/templates'
@@ -75,9 +74,10 @@ export function useHeader() {
     icon: 'i-lucide-globe',
     to: '/community'
   }, {
-    label: 'Team',
-    icon: 'i-lucide-users',
-    to: '/team'
+    label: 'Playground',
+    icon: 'i-lucide-square-terminal',
+    to: 'https://play.ui.nuxt.com',
+    target: '_blank'
   }, {
     label: 'Blog',
     icon: 'i-lucide-newspaper',

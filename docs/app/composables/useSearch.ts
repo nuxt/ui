@@ -54,11 +54,6 @@ export function useSearch() {
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
   }, {
-    label: 'Play',
-    description: 'Try Nuxt UI components live in your browser.',
-    icon: 'i-lucide-square-terminal',
-    to: '/play'
-  }, {
     label: 'Templates',
     description: 'Explore official templates built with Nuxt UI.',
     icon: 'i-lucide-panels-top-left',
@@ -73,6 +68,12 @@ export function useSearch() {
     description: 'Explore projects built around Nuxt UI.',
     icon: 'i-lucide-globe',
     to: '/community'
+  }, {
+    label: 'Playground',
+    description: 'Try Nuxt UI components live in your browser.',
+    icon: 'i-lucide-square-terminal',
+    to: 'https://play.ui.nuxt.com',
+    target: '_blank'
   }, {
     label: 'Blog',
     description: 'Learn how to build things with Nuxt UI.',

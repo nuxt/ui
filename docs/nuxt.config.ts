@@ -67,8 +67,6 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/play': { ssr: false },
-
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
@@ -109,7 +107,8 @@ export default defineNuxtConfig({
     // v2 redirects
     '/getting-started/theming': { redirect: { to: '/getting-started/theme', statusCode: 301 }, prerender: false },
     '/pro/getting-started/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
-    '/playground': { redirect: { to: '/play', statusCode: 301 }, prerender: false },
+    '/play': { redirect: { to: 'https://play.ui.nuxt.com', statusCode: 302 }, prerender: false },
+    '/playground': { redirect: { to: 'https://play.ui.nuxt.com', statusCode: 301 }, prerender: false },
     '/pro/guide/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
     '/pro/prose/**': { redirect: { to: '/getting-started/typography#vue-components', statusCode: 301 }, prerender: false },
     '/components/range': { redirect: { to: '/components/slider', statusCode: 301 }, prerender: false },
@@ -180,14 +179,6 @@ export default defineNuxtConfig({
         // '/api/github/releases.json'
       ],
       crawlLinks: true
-    }
-  },
-
-  vite: {
-    build: {
-      commonjsOptions: {
-        exclude: ['**/node_modules/@vue/repl/**']
-      }
     }
   },
 

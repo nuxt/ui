@@ -50,7 +50,7 @@ provide('navigation', rootNavigation)
 
     <div class="flex">
       <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">
-        <template v-if="!route.path.startsWith('/examples') && !route.path.startsWith('/play')">
+        <template v-if="!route.path.startsWith('/examples')">
           <!-- <Banner /> -->
 
           <Header />
@@ -60,7 +60,7 @@ provide('navigation', rootNavigation)
           <NuxtPage />
         </NuxtLayout>
 
-        <template v-if="!route.path.startsWith('/examples') && !route.path.startsWith('/play')">
+        <template v-if="!route.path.startsWith('/examples')">
           <Footer />
 
           <ClientOnly>
@@ -69,7 +69,7 @@ provide('navigation', rootNavigation)
         </template>
       </div>
 
-      <template v-if="!route.path.startsWith('/examples') && !route.path.startsWith('/play')">
+      <template v-if="!route.path.startsWith('/examples')">
         <ClientOnly>
           <Chat />
         </ClientOnly>

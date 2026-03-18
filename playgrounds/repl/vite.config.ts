@@ -14,28 +14,15 @@ export default defineConfig({
         }
       },
       router: false,
-      autoImport: false,
-      components: false
+      autoImport: {
+        imports: ['vue']
+      }
     })
   ],
+  optimizeDeps: {
+    exclude: ['@vue/repl']
+  },
   build: {
-    lib: {
-      entry: resolve(__dirname, 'src/entry.ts'),
-      formats: ['es'],
-      fileName: 'nuxt-ui'
-    },
-    outDir: resolve(__dirname, '../../docs/public/play'),
-    emptyOutDir: true,
-    cssCodeSplit: false,
-    rollupOptions: {
-      external: ['vue'],
-      output: {
-        globals: {
-          vue: 'Vue'
-        },
-        assetFileNames: 'nuxt-ui.[ext]',
-        inlineDynamicImports: true
-      }
-    }
+    outDir: resolve(__dirname, 'dist')
   }
 })

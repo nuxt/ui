@@ -7,7 +7,7 @@ const { desktopLinks } = useHeader()
   <UHeader
     :ui="{
       left: 'min-w-0',
-      container: [route.path.startsWith('/blog/') || route.path.startsWith('/play') ? 'max-w-none' : '']
+      container: [route.path.startsWith('/blog/') ? 'max-w-none' : '']
     }"
     class="flex flex-col"
   >

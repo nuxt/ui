@@ -379,9 +379,6 @@ importers:
       '@vercel/speed-insights':
         specifier: ^2.0.0
         version: 2.0.0(nuxt@4.4.2(@babel/core@7.29.0)(@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.0))(@parcel/watcher@2.5.6)(@types/node@25.3.0)(@vue/compiler-sfc@3.5.30)(better-sqlite3@12.8.0)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.8.0))(eslint@10.0.3(jiti@2.6.1))(ioredis@5.9.3)(lightningcss@1.31.1)(magicast@0.5.2)(meow@13.2.0)(optionator@0.9.4)(rollup-plugin-visualizer@6.0.5(rollup@4.59.0))(rollup@4.59.0)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vue-tsc@3.2.5(typescript@5.9.3))(yaml@2.8.2))(vue-router@4.6.4(vue@3.5.30(typescript@5.9.3)))(vue@3.5.30(typescript@5.9.3))
-      '@vue/repl':
-        specifier: ^4.7.1
-        version: 4.7.1
       '@vueuse/integrations':
         specifier: ^14.2.1
         version: 14.2.1(axios@1.13.5)(change-case@5.4.4)(fuse.js@7.1.0)(sortablejs@1.15.7)(vue@3.5.30(typescript@5.9.3))
@@ -531,6 +528,9 @@ importers:
       '@nuxt/ui':
         specifier: workspace:*
         version: link:../..
+      '@vue/repl':
+        specifier: ^4.7.1
+        version: 4.7.1
       tailwindcss:
         specifier: ^4.2.1
         version: 4.2.1

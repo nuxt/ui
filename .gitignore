@@ -31,5 +31,8 @@ playgrounds/vue/components.d.ts
 playgrounds/vue/tsconfig.app.tsbuildinfo
 playgrounds/vue/tsconfig.node.tsbuildinfo
 
-# REPL playground build output
-docs/public/play/
+# REPL playground
+playgrounds/repl/auto-imports.d.ts
+playgrounds/repl/components.d.ts
+playgrounds/repl/public/nuxt-ui.*
+playgrounds/repl/dist/

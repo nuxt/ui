@@ -4,10 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "vite build"
+    "dev": "vite",
+    "bundle": "vite build --config vite.config.bundle.ts",
+    "build": "pnpm bundle && vite build"
   },
   "dependencies": {
     "@nuxt/ui": "workspace:*",
+    "@vue/repl": "^4.7.1",
     "tailwindcss": "^4.2.1",
     "vue": "^3.5.30"
   },
