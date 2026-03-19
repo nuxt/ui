@@ -52,7 +52,7 @@
     "simple-git": "^3.33.0",
     "sortablejs": "^1.15.7",
     "superstruct": "^2.0.2",
-    "tailwindcss": "^4.2.1",
+    "tailwindcss": "^4.2.2",
     "tiptap-extension-code-block-shiki": "^1.0.0",
     "ufo": "^1.6.3",
     "unist-util-visit": "^5.1.0",
