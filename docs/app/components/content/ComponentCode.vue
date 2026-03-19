@@ -113,6 +113,7 @@ const props = defineProps<{
 
 const route = useRoute()
 const { $prettier } = useNuxtApp()
+const { framework } = useFrameworks()
 
 const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '')
 const name = `${props.prose ? 'Prose' : 'U'}${upperFirst(camelName)}`
@@ -236,8 +237,20 @@ ${props.slots?.default}
     code += `
 <script setup lang="ts">
 `
-    // Collect imports from cast types
     const importsBySource = new Map<string, Set<string>>()
+
+    // Collect vue reactivity imports first so they appear before other imports
+    if (framework.value === 'vue') {
+      const vueImports = new Set<string>()
+      for (const key of props.external!) {
+        vueImports.add(props.cast?.[key] ? 'shallowRef' : 'ref')
+      }
+      if (vueImports.size) {
+        importsBySource.set('vue', vueImports)
+      }
+    }
+
+    // Collect imports from cast types
     for (const key of props.external) {
       const cast = props.cast?.[key]
       if (cast && castMap[cast]) {
@@ -354,7 +367,7 @@ ${props.slots?.default}
   return code
 })
 
-const codeKey = computed(() => `component-code-${name}-${hash(props)}`)
+const codeKey = computed(() => `component-code-${name}-${hash(props)}-${framework.value}`)
 
 const wrapperContainer = ref<HTMLElement | null>(null)
 const componentContainer = ref<HTMLElement | null>(null)

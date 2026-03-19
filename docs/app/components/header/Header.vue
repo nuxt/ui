@@ -5,7 +5,10 @@ const { desktopLinks } = useHeader()
 
 <template>
   <UHeader
-    :ui="{ left: 'min-w-0', container: [route.path.startsWith('/blog/') ? 'max-w-none' : ''] }"
+    :ui="{
+      left: 'min-w-0',
+      container: [route.path.startsWith('/blog/') ? 'max-w-none' : '']
+    }"
     class="flex flex-col"
   >
     <template #left>
@@ -14,7 +17,7 @@ const { desktopLinks } = useHeader()
       <VersionMenu />
     </template>
 
-    <UNavigationMenu :items="desktopLinks" variant="link" />
+    <UNavigationMenu :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
       <ThemePicker />

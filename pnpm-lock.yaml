@@ -523,6 +523,28 @@ importers:
         specifier: ^3.2.5
         version: 3.2.5(typescript@5.9.3)
 
+  playgrounds/repl:
+    dependencies:
+      '@nuxt/ui':
+        specifier: workspace:*
+        version: link:../..
+      '@vue/repl':
+        specifier: ^4.7.1
+        version: 4.7.1
+      tailwindcss:
+        specifier: ^4.2.1
+        version: 4.2.1
+      vue:
+        specifier: ^3.5.30
+        version: 3.5.30(typescript@5.9.3)
+    devDependencies:
+      '@vitejs/plugin-vue':
+        specifier: ^6.0.5
+        version: 6.0.5(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vue@3.5.30(typescript@5.9.3))
+      vite:
+        specifier: ^7.3.1
+        version: 7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2)
+
   playgrounds/vue:
     dependencies:
       '@nuxt/ui':
@@ -3659,6 +3681,9 @@ packages:
 
   '@vue/reactivity@3.5.30':
     resolution: {integrity: sha512-179YNgKATuwj9gB+66snskRDOitDiuOZqkYia7mHKJaidOMo/WJxHKF8DuGc4V4XbYTJANlfEKb0yxTQotnx4Q==}
+
+  '@vue/repl@4.7.1':
+    resolution: {integrity: sha512-8w5Z3cyqBJ5ufzXO2eut2stzb7aX/ZnSva2d3ee8eEINEB7FG2JYwc14eAHHHGGuoXOGN5v4cyb5ti/YZGcwlg==}
 
   '@vue/runtime-core@3.5.30':
     resolution: {integrity: sha512-e0Z+8PQsUTdwV8TtEsLzUM7SzC7lQwYKePydb7K2ZnmS6jjND+WJXkmmfh/swYzRyfP1EY3fpdesyYoymCzYfg==}
@@ -11611,6 +11636,8 @@ snapshots:
   '@vue/reactivity@3.5.30':
     dependencies:
       '@vue/shared': 3.5.30
+
+  '@vue/repl@4.7.1': {}
 
   '@vue/runtime-core@3.5.30':
     dependencies:
