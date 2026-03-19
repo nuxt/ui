@@ -99,7 +99,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   meta?: TableMeta<T>
   /**
    * Enable virtualization for large datasets.
-   * Note: when enabled, the divider between rows, sticky and row pinning properties are not supported.
+   * Note: when enabled, the divider between rows and row pinning properties are not supported.
    * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
    * @defaultValue false
    */
@@ -122,7 +122,6 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   empty?: string
   /**
    * Whether the table should have a sticky header or footer. True for both, 'header' for header only, 'footer' for footer only.
-   * Note: this prop is not supported when `virtualize` is true.
    * @defaultValue false
    */
   sticky?: boolean | 'header' | 'footer'
@@ -278,7 +277,7 @@ function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
 }
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })({
-  sticky: props.virtualize ? false : props.sticky,
+  sticky: props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,
   loadingAnimation: props.loadingAnimation,
@@ -437,18 +436,16 @@ const virtualizer = !!props.virtualize && useVirtualizer({
   }
 })
 
-const renderedSize = computed(() => {
-  if (!virtualizer) {
-    return 0
-  }
+const virtualPaddingTop = computed(() => {
+  if (!virtualizer) return 0
+  const items = virtualizer.value.getVirtualItems()
+  return items[0]?.start ?? 0
+})
 
-  const virtualItems = virtualizer.value.getVirtualItems()
-  if (!virtualItems?.length) {
-    return 0
-  }
-
-  // Sum up the actual sizes of virtual items
-  return virtualItems.reduce((sum: number, item: any) => sum + item.size, 0)
+const virtualPaddingBottom = computed(() => {
+  if (!virtualizer) return 0
+  const items = virtualizer.value.getVirtualItems()
+  return items.length > 0 ? virtualizer.value.getTotalSize() - (items[items.length - 1]?.end ?? 0) : 0
 })
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
@@ -625,15 +622,14 @@ defineExpose({
           <ReuseRowTemplate v-for="row in topRows" :key="row.id" :row="row" />
 
           <template v-if="virtualizer">
-            <template v-for="(virtualRow, index) in virtualizer.getVirtualItems()" :key="centerRows[virtualRow.index]?.id">
+            <tr v-if="virtualPaddingTop > 0" :style="{ height: `${virtualPaddingTop}px` }" aria-hidden="true" />
+            <template v-for="virtualRow in virtualizer.getVirtualItems()" :key="centerRows[virtualRow.index]?.id">
               <ReuseRowTemplate
                 :row="centerRows[virtualRow.index]!"
-                :style="{
-                  height: `${virtualRow.size}px`,
-                  transform: `translateY(${virtualRow.start - index * virtualRow.size}px)`
-                }"
+                :style="{ height: `${virtualRow.size}px` }"
               />
             </template>
+            <tr v-if="virtualPaddingBottom > 0" :style="{ height: `${virtualPaddingBottom}px` }" aria-hidden="true" />
           </template>
 
           <template v-else>
@@ -664,9 +660,6 @@ defineExpose({
         v-if="hasFooter"
         data-slot="tfoot"
         :class="ui.tfoot({ class: [uiProp?.tfoot] })"
-        :style="virtualizer ? {
-          transform: `translateY(${virtualizer.getTotalSize() - renderedSize}px)`
-        } : undefined"
       >
         <tr data-slot="separator" :class="ui.separator({ class: [uiProp?.separator] })" />
 
@@ -700,14 +693,6 @@ defineExpose({
   </DefineTableTemplate>
 
   <Primitive ref="rootRef" :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <div
-      v-if="virtualizer"
-      :style="{
-        height: `${virtualizer.getTotalSize()}px`
-      }"
-    >
-      <ReuseTableTemplate />
-    </div>
-    <ReuseTableTemplate v-else />
+    <ReuseTableTemplate />
   </Primitive>
 </template>
