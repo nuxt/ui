@@ -17,7 +17,7 @@ const builtinImportMap = computed(() => ({
   imports: {
     ...vueImportMap.value.imports,
     '@nuxt/ui': '/nuxt-ui.js',
-    'zod': 'https://esm.sh/zod@3?external=vue'
+    'zod': 'https://esm.sh/zod@4?external=vue'
   }
 }))
 
@@ -130,9 +130,11 @@ const state = reactive<Partial<Schema>>({
   </UApp>
 </template>`
 
-store.setFiles({
-  'src/App.vue': defaultCode
-}, 'src/App.vue')
+if (!location.hash) {
+  store.setFiles({
+    'src/App.vue': defaultCode
+  }, 'src/App.vue')
+}
 
 watchEffect(() => history.replaceState({}, '', store.serialize()))
 
@@ -143,7 +145,7 @@ const previewOptions = {
     '<link rel="preconnect" href="https://fonts.bunny.net">',
     '<link href="https://fonts.bunny.net/css?family=public-sans:400,500,600,700" rel="stylesheet">',
     '<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"><\/script>',
-    '<style type="text/tailwindcss">@theme static { --font-sans: \'Public Sans\', sans-serif; }</style>'
+    '<style type="text/tailwindcss">@theme { --font-sans: \'Public Sans\', sans-serif; }</style>'
   ].join(''),
   customCode: {
     importCode: 'import ui from \'@nuxt/ui\'',

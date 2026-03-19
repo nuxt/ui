@@ -72,7 +72,7 @@ export function useSearch() {
     label: 'Playground',
     description: 'Try Nuxt UI components live in your browser.',
     icon: 'i-lucide-square-terminal',
-    to: 'https://play.ui.nuxt.com',
+    to: '/play',
     target: '_blank'
   }, {
     label: 'Blog',
