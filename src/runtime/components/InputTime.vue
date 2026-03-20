@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { ComponentPublicInstance, VNode } from 'vue'
-import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, TimeRangeFieldRootProps, TimeValue } from 'reka-ui'
+import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, TimeRangeFieldRootProps, TimeValue, SegmentPart } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-time'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -42,6 +42,8 @@ export interface InputTimeProps<R extends boolean = false> extends UseComponentI
   highlight?: boolean
   /** Keep the mobile text size on all breakpoints. */
   fixed?: boolean
+  autofocus?: boolean
+  autofocusDelay?: number
   /**
    * The icon to use as a range separator.
    * @defaultValue appConfig.ui.icons.minus
@@ -57,17 +59,15 @@ export interface InputTimeProps<R extends boolean = false> extends UseComponentI
   defaultValue?: InputTimeDefaultValue<R>
   /** The controlled value of the input. Can be bind as `v-model`. */
   modelValue?: InputTimeModelValue<R>
-  autofocus?: boolean
-  autofocusDelay?: number
   class?: any
   ui?: InputTime['slots']
 }
 
 export interface InputTimeEmits<R extends boolean = false> extends Omit<TimeFieldRootEmits & TimeRangeFieldRootEmits, 'update:modelValue'> {
+  'update:modelValue': [value: InputTimeModelValue<R>]
   'change': [event: Event]
   'blur': [event: FocusEvent]
   'focus': [event: FocusEvent]
-  'update:modelValue': [value: InputTimeModelValue<R>]
 }
 
 export interface InputTimeSlots {
@@ -80,8 +80,9 @@ export interface InputTimeSlots {
 
 <script setup lang="ts" generic="R extends boolean">
 import { computed, onMounted, ref } from 'vue'
-import { TimeFieldRoot, TimeFieldInput, TimeRangeFieldRoot, TimeRangeFieldInput, useForwardPropsEmits } from 'reka-ui'
-import { reactiveOmit } from '@vueuse/core'
+import { TimeRangeFieldRoot, TimeRangeFieldInput, useForwardPropsEmits } from 'reka-ui'
+import { TimeField as SingleTimeField } from 'reka-ui/namespaced'
+import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
 import { useFieldGroup } from '../composables/useFieldGroup'
@@ -90,6 +91,8 @@ import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputTimeProps<R>>(), {
   autofocusDelay: 0
@@ -120,9 +123,17 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTime ||
   fieldGroup: orientation.value
 }))
 
+const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
+  segments?: { part: SegmentPart, value: string }[]
+  type?: 'start' | 'end'
+}>()
+
 const inputsRef = ref<ComponentPublicInstance[]>([])
 
-const FieldRoot = computed(() => props.range ? TimeRangeFieldRoot : TimeFieldRoot)
+// FIXME: Move to namespaced when exported in `reka-ui`
+const RangeTimeField = { Root: TimeRangeFieldRoot, Input: TimeRangeFieldInput }
+
+const TimeField = computed(() => props.range ? RangeTimeField : SingleTimeField)
 
 function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
   // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
@@ -166,9 +177,23 @@ defineExpose({
 </script>
 
 <template>
-  <component
-    :is="FieldRoot"
-    v-bind="{ ...rootProps, ...ariaAttrs }"
+  <DefineSegmentsTemplate v-slot="{ segments, type }">
+    <TimeField.Input
+      v-for="(segment, index) in segments"
+      :key="`${segment.part}-${index}`"
+      :ref="el => setInputRef(index, el)"
+      :type="type"
+      :part="segment.part"
+      data-slot="segment"
+      :class="ui.segment({ class: uiProp?.segment })"
+      :data-segment="segment.part"
+    >
+      {{ segment.value.trim() }}
+    </TimeField.Input>
+  </DefineSegmentsTemplate>
+
+  <TimeField.Root
+    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="id"
     v-slot="{ segments }"
     :name="name"
@@ -182,46 +207,14 @@ defineExpose({
     @focus="onFocus"
   >
     <template v-if="Array.isArray(segments)">
-      <TimeFieldInput
-        v-for="(segment, index) in segments"
-        :key="`${segment.part}-${index}`"
-        :ref="el => setInputRef(index, el)"
-        :part="segment.part"
-        data-slot="segment"
-        :class="ui.segment({ class: uiProp?.segment })"
-      >
-        {{ segment.value.trim() }}
-      </TimeFieldInput>
+      <ReuseSegmentsTemplate :segments="segments" />
     </template>
-
     <template v-else>
-      <TimeRangeFieldInput
-        v-for="(segment, index) in segments.start"
-        :key="`start-${segment.part}-${index}`"
-        :ref="el => setInputRef(index, el)"
-        :part="segment.part"
-        type="start"
-        data-slot="segment"
-        :class="ui.segment({ class: uiProp?.segment })"
-      >
-        {{ segment.value.trim() }}
-      </TimeRangeFieldInput>
-
+      <ReuseSegmentsTemplate :segments="segments.start" type="start" />
       <slot name="separator" :ui="ui">
         <UIcon :name="separatorIcon || appConfig.ui.icons.minus" data-slot="separatorIcon" :class="ui.separatorIcon({ class: uiProp?.separatorIcon })" />
       </slot>
-
-      <TimeRangeFieldInput
-        v-for="(segment, index) in segments.end"
-        :key="`end-${segment.part}-${index}`"
-        :ref="el => setInputRef(segments.start.length + 1 + index, el)"
-        :part="segment.part"
-        type="end"
-        data-slot="segment"
-        :class="ui.segment({ class: uiProp?.segment })"
-      >
-        {{ segment.value.trim() }}
-      </TimeRangeFieldInput>
+      <ReuseSegmentsTemplate :segments="segments.end" type="end" />
     </template>
 
     <slot :ui="ui" />
@@ -238,5 +231,5 @@ defineExpose({
         <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon })" />
       </slot>
     </span>
-  </component>
+  </TimeField.Root>
 </template>
