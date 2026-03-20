@@ -14,7 +14,6 @@ export default defineNuxtConfig({
     '@nuxt/ui-pro',
     '@nuxt/content',
     '@nuxt/image',
-    '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-og-image',
@@ -33,7 +32,7 @@ export default defineNuxtConfig({
   },
   $production: {
     site: {
-      url: 'https://ui.nuxt.com'
+      url: 'https://ui3.nuxt.com'
     }
   },
 
@@ -192,7 +191,6 @@ export default defineNuxtConfig({
       '@nuxt/image',
       '@nuxtjs/color-mode',
       '@nuxtjs/mdc',
-      '@nuxtjs/plausible',
       'nuxt/dist',
       'nuxt-og-image',
       resolve('./app/components'),
@@ -201,8 +199,8 @@ export default defineNuxtConfig({
     metaFields: {
       type: false,
       props: true,
-      slots: true,
-      events: true,
+      slots: 'no-schema',
+      events: 'no-schema',
       exposed: false
     }
   },
@@ -225,7 +223,7 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://ui.nuxt.com',
+    domain: 'https://ui3.nuxt.com',
     title: 'Nuxt UI',
     description: 'A comprehensive, Nuxt-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.',
     full: {

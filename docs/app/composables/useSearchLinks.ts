@@ -42,11 +42,6 @@ export function useSearchLinks() {
     icon: 'i-lucide-git-pull-request-arrow',
     to: '/getting-started/contribution'
   }, {
-    label: 'Community > Roadmap',
-    description: 'Track our development progress in real-time.',
-    icon: 'i-lucide-map',
-    to: '/roadmap'
-  }, {
     label: 'Community > Devtools',
     description: 'Integrate Nuxt UI with Nuxt Devtools with Compodium.',
     icon: 'i-lucide-code',

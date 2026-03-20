@@ -5,7 +5,7 @@ policy:
         block-list: []
         label:
           - name: 'v4'
-            keys: ['v4.0.0-alpha.x']
+            keys: ['v4.x']
           - name: 'v3'
             keys: ['v3.x']
           - name: 'v2'

@@ -134,7 +134,7 @@ defineExpose({
         v-for="(item, index) of items"
         :key="index"
         :ref="el => (triggersRef[index] = el as ComponentPublicInstance)"
-        :value="item.value || String(index)"
+        :value="item.value ?? String(index)"
         :disabled="item.disabled"
         :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger] })"
       >
@@ -163,7 +163,7 @@ defineExpose({
     </TabsList>
 
     <template v-if="!!content">
-      <TabsContent v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :class="ui.content({ class: [props.ui?.content, item.ui?.content, item.class] })">
+      <TabsContent v-for="(item, index) of items" :key="index" :value="item.value ?? String(index)" :class="ui.content({ class: [props.ui?.content, item.ui?.content, item.class] })">
         <slot :name="((item.slot || 'content') as keyof TabsSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index">
           {{ item.content }}
         </slot>

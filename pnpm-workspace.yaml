@@ -1,6 +1,19 @@
 packages:
-  - "./"
-  - "cli"
-  - "docs"
-  - "playground"
-  - "playground-vue"
+  - ./
+  - cli
+  - docs
+  - playground
+  - playground-vue
+
+ignoredBuiltDependencies:
+  - '@parcel/watcher'
+  - '@tailwindcss/oxide'
+  - esbuild
+  - unrs-resolver
+  - vue-demi
+  - workerd
+
+onlyBuiltDependencies:
+  - better-sqlite3
+  - puppeteer
+  - sharp

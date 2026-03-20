@@ -1,5 +1,46 @@
 # Changelog
 
+## [3.3.7](https://github.com/nuxt/ui/compare/v3.3.6...v3.3.7) (2025-10-23)
+
+### Bug Fixes
+
+* **FileUpload:** handle disabling file delete button ([8e506c4](https://github.com/nuxt/ui/commit/8e506c4c4abbb78b27a007167ff3966bcf4a07f2)), closes [#5249](https://github.com/nuxt/ui/issues/5249)
+* **FileUpload:** stuck focus while tabbing ([#5128](https://github.com/nuxt/ui/issues/5128)) ([1752f21](https://github.com/nuxt/ui/commit/1752f21b83d4420e5a9a496dcb280eaf61c97c30))
+* **NavigationMenu:** display trailing slot when badge not undefined ([ee9e02a](https://github.com/nuxt/ui/commit/ee9e02a6021b8007b706284345a5697c55a63d26)), closes [#4670](https://github.com/nuxt/ui/issues/4670)
+
+## [3.3.6](https://github.com/nuxt/ui/compare/v3.3.5...v3.3.6) (2025-10-03)
+
+### Bug Fixes
+
+* **App:** allow global portal disabling ([#5111](https://github.com/nuxt/ui/issues/5111)) ([43c119f](https://github.com/nuxt/ui/commit/43c119fdd9964902437978313922a7f37f2bb862))
+* **Carousel:** ensure plugins init after client-side navigation ([#5117](https://github.com/nuxt/ui/issues/5117)) ([0f7a1b7](https://github.com/nuxt/ui/commit/0f7a1b7c4f5febf34a90c155909fbb7a6ec206f3))
+* **Carousel:** invert arrow keys in RTL direction ([#5072](https://github.com/nuxt/ui/issues/5072)) ([27cb2b6](https://github.com/nuxt/ui/commit/27cb2b6fc26d900b1e4b5d6b256b5c871bedfbd5))
+* **Drawer:** prevent unwanted close when dismissible is false ([#5085](https://github.com/nuxt/ui/issues/5085)) ([027c06a](https://github.com/nuxt/ui/commit/027c06acce543284b06a45167a55d09bcd32b05a))
+* **Drawer:** use full height/width for snapPoints ([#5041](https://github.com/nuxt/ui/issues/5041)) ([8f21339](https://github.com/nuxt/ui/commit/8f21339fd46c72a432234fdb3ef8ecfbbf2d025b))
+* **Pagination:** make ellipsis non-interactive ([#5081](https://github.com/nuxt/ui/issues/5081)) ([ab168af](https://github.com/nuxt/ui/commit/ab168af668539117f7fc93f68693f38d7e03225d))
+* **Table:** empty cell value causing hydration errors ([#5069](https://github.com/nuxt/ui/issues/5069)) ([cd2662a](https://github.com/nuxt/ui/commit/cd2662a952ea249b95f7cea9144610e3b85bf040))
+* **useKbd:** update escape key from `⎋` to `Esc` ([#5076](https://github.com/nuxt/ui/issues/5076)) ([27aa80c](https://github.com/nuxt/ui/commit/27aa80cd83b6ad35c39cb2fe4a93c0faf1d12853))
+
+## [3.3.5](https://github.com/nuxt/ui/compare/v3.3.4...v3.3.5) (2025-09-23)
+
+### Bug Fixes
+
+* **InputMenu:** ensure to pass a string to items when multiple ([0031a75](https://github.com/nuxt/ui/commit/0031a75e3d10e2e0ea682a174d4bee981bf33d3a)), closes [#5018](https://github.com/nuxt/ui/issues/5018)
+* **InputTags:** add blur and focus event handlers on input ([#5007](https://github.com/nuxt/ui/issues/5007)) ([5db2708](https://github.com/nuxt/ui/commit/5db270804ce274b9c8eb7a2bff484905c829515b))
+* **Progress:** improve `status-position` when 0 ([#4994](https://github.com/nuxt/ui/issues/4994)) ([e0891ea](https://github.com/nuxt/ui/commit/e0891ea4f69ff4927ebf62e1d4d0b38b50062333))
+* **Tabs:** use nullish coalescing on item value ([a4ab796](https://github.com/nuxt/ui/commit/a4ab796d0e9482c03afeb655382d9736d9f5c60a)), closes [#4804](https://github.com/nuxt/ui/issues/4804)
+* **types:** allow arbitrary keys in tv config ([#4992](https://github.com/nuxt/ui/issues/4992)) ([8d859ea](https://github.com/nuxt/ui/commit/8d859ea73a4b1b27bfa803c1fb593a79495a8a2a))
+* **types:** resolve ambient declaration error in `icons` type ([#4991](https://github.com/nuxt/ui/issues/4991)) ([526cb81](https://github.com/nuxt/ui/commit/526cb816a550d2be99f2fa7882612ba5169c2387))
+
+## [3.3.4](https://github.com/nuxt/ui/compare/v3.3.3...v3.3.4) (2025-09-15)
+
+### Bug Fixes
+
+* **FileUpload:** add missing `button` type ([91f86d9](https://github.com/nuxt/ui/commit/91f86d9da2a614bd37a12f2ece9ff3ce176e8cb2)), closes [#4935](https://github.com/nuxt/ui/issues/4935)
+* **Form:** handling race condition on `clear` function ([#4843](https://github.com/nuxt/ui/issues/4843)) ([0a8ead7](https://github.com/nuxt/ui/commit/0a8ead72b53019969cf28d91549b9495ccc89f02))
+* **InputMenu/Select/SelectMenu:** show falsy value when model value is falsy ([#4882](https://github.com/nuxt/ui/issues/4882)) ([5b9d9d8](https://github.com/nuxt/ui/commit/5b9d9d8135fe5b4c3f9298161dbd0c59c511897a))
+* **locale:** improve `id` name ([#4890](https://github.com/nuxt/ui/issues/4890)) ([e5cb55b](https://github.com/nuxt/ui/commit/e5cb55be7d5ac2690c95f05f56462b16d453670f))
+
 ## [3.3.3](https://github.com/nuxt/ui/compare/v3.3.2...v3.3.3) (2025-09-01)
 
 ### Features

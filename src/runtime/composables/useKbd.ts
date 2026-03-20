@@ -19,7 +19,7 @@ export const kbdKeysMap = {
   enter: '↵',
   delete: '⌦',
   backspace: '⌫',
-  escape: '⎋',
+  escape: 'Esc',
   tab: '⇥',
   capslock: '⇪',
   arrowup: '↑',

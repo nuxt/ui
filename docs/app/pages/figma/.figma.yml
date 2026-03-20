@@ -7,8 +7,7 @@ hero:
   image: /figma/hero.png
   links:
     - label: Purchase Pro Kit
-      to: 'https://nuxt.lemonsqueezy.com/buy/17213c49-621b-4c2c-9478-3a50a099003d'
-      target: _blank
+      disabled: true
     - label: Free Figma Kit
       to: 'https://go.nuxt.com/figma-ui3'
       icon: i-logos-figma
@@ -119,7 +118,7 @@ section4:
   description: '**From download to deployment in simple steps.** :br Get instant access to production-ready components and start creating.'
   links:
     - label: Get access now
-      to: 'https://nuxt.lemonsqueezy.com/buy/17213c49-621b-4c2c-9478-3a50a099003d'
+      disabled: true
     - label: Preview UI Pro Design Kit
       to: 'https://go.nuxt.com/figma-ui-pro3'
       icon: i-logos-figma
@@ -191,7 +190,7 @@ pricing:
         - Lifetime Free Updates
       button:
         label: Buy now
-        to: https://nuxt.lemonsqueezy.com/buy/17213c49-621b-4c2c-9478-3a50a099003d
+        disabled: true
       extraButton:
         label: Preview in Figma
         to: 'https://go.nuxt.com/figma-ui-pro3'
@@ -213,7 +212,7 @@ pricing:
         - Lifetime free updates
       button:
         label: Buy now
-        to: https://nuxt.lemonsqueezy.com/buy/2979099c-b7a0-4ba1-90e0-a0d60509b92d
+        disabled: true
       extraButton:
         label: Preview in Figma
         to: 'https://go.nuxt.com/figma-ui-pro3'

@@ -40,7 +40,7 @@ const items = computed(() => {
   const uiPro1 = { label: 'v1.x', to: 'https://ui2.nuxt.com/pro' }
 
   return [
-    { label: 'v4.0.0-alpha.x', to: 'https://ui4.nuxt.com' },
+    { label: 'v4.x', to: 'https://ui.nuxt.com' },
     { label: `v${config.version}`, active: true, color: 'primary' as const, checked: true, type: 'checkbox' as const },
     route.path === '/' ? ui2 : route.path.startsWith('/pro') ? uiPro1 : module.value === 'ui-pro' ? uiPro1 : ui2
   ]

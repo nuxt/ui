@@ -18,28 +18,28 @@ Nuxt UI harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Ta
 
 > [!TIP]
 > **Looking for more components ?**
-> Check out [Nuxt UI Pro](https://ui.nuxt.com/pro), a collection of premium Vue components, composables, and utilities built on top of Nuxt UI for faster and more powerful app development.
+> Check out [Nuxt UI Pro](https://ui3.nuxt.com/pro), a collection of premium Vue components, composables, and utilities built on top of Nuxt UI for faster and more powerful app development.
 
 ## Documentation
 
-Visit https://ui.nuxt.com to explore the documentation.
+Visit https://ui3.nuxt.com to explore the documentation.
 
 ## Installation
 
 ```bash [pnpm]
-pnpm add @nuxt/ui
+pnpm add @nuxt/ui@3
 ```
 
 ```bash [yarn]
-yarn add @nuxt/ui
+yarn add @nuxt/ui@3
 ```
 
 ```bash [npm]
-npm install @nuxt/ui
+npm install @nuxt/ui@3
 ```
 
 ```bash [bun]
-bun add @nuxt/ui
+bun add @nuxt/ui@3
 ```
 
 ### Nuxt
@@ -59,7 +59,7 @@ export default defineNuxtConfig({
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui.nuxt.com/getting-started/installation/nuxt).
+Learn more in the [installation guide](https://ui3.nuxt.com/getting-started/installation/nuxt).
 
 ### Vue
 
@@ -106,18 +106,18 @@ app.mount('#app')
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui.nuxt.com/getting-started/installation/vue).
+Learn more in the [installation guide](https://ui3.nuxt.com/getting-started/installation/vue).
 
 ## Contribution
 
 Thank you for considering contributing to Nuxt UI. Here are a few ways you can get involved:
 
 - Reporting Bugs: If you come across any bugs or issues, please check out the reporting bugs guide to learn how to submit a bug report.
-- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/getting-started/contribution) to share your suggestions.
+- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui3.nuxt.com/getting-started/contribution) to share your suggestions.
 
 ## Local Development
 
-Follow the docs to [set up your local development environment](https://ui.nuxt.com/getting-started/contribution#local-development) and contribute.
+Follow the docs to [set up your local development environment](https://ui3.nuxt.com/getting-started/contribution#local-development) and contribute.
 
 ## Credits
 

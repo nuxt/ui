@@ -46,7 +46,9 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
   ui?: Drawer['slots']
 }
 
-export interface DrawerEmits extends DrawerRootEmits {}
+export interface DrawerEmits extends DrawerRootEmits {
+  (e: 'close:prevent'): void
+}
 
 export interface DrawerSlots {
   default(props?: {}): any
@@ -84,13 +86,30 @@ const appConfig = useAppConfig() as Drawer['AppConfig']
 const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
-const contentEvents = {
-  closeAutoFocus: (e: Event) => e.preventDefault()
-}
+const contentEvents = computed(() => {
+  const defaultEvents = {
+    closeAutoFocus: (e: Event) => e.preventDefault()
+  }
+
+  if (!props.dismissible) {
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
+
+    return events.reduce((acc, curr) => {
+      acc[curr] = (e: Event) => {
+        e.preventDefault()
+        emits('close:prevent')
+      }
+      return acc
+    }, defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (e: Event) => void>)
+  }
+
+  return defaultEvents
+})
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })({
   direction: props.direction,
-  inset: props.inset
+  inset: props.inset,
+  snapPoints: props.snapPoints && props.snapPoints.length > 0
 }))
 </script>
 

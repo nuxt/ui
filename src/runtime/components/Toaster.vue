@@ -62,7 +62,7 @@ defineSlots<ToasterSlots>()
 const { toasts, remove } = useToast()
 const appConfig = useAppConfig() as Toaster['AppConfig']
 
-const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold'))
+const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold', 'disableSwipe'))
 const portalProps = usePortal(toRef(() => props.portal))
 
 const swipeDirection = computed(() => {

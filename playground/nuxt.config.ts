@@ -1,7 +1,6 @@
 export default defineNuxtConfig({
   modules: [
-    '@nuxt/ui',
-    '@nuxthub/core'
+    '@nuxt/ui'
   ],
 
   devtools: {
@@ -11,10 +10,6 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   compatibilityDate: '2024-07-09',
-
-  hub: {
-    blob: true
-  },
 
   vite: {
     optimizeDeps: {

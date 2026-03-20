@@ -157,8 +157,6 @@ defineExpose({
     :name="name"
     :disabled="disabled"
     @update:model-value="onUpdate"
-    @blur="onBlur"
-    @focus="onFocus"
   >
     <TagsInputItem
       v-for="(item, index) in tags"
@@ -186,6 +184,8 @@ defineExpose({
       :placeholder="placeholder"
       :max-length="maxLength"
       :class="ui.input({ class: props.ui?.input })"
+      @blur="onBlur"
+      @focus="onFocus"
     />
 
     <slot />

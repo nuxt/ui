@@ -35,10 +35,10 @@ const schema = z.object({
             const img = new Image()
             img.onload = () => {
               const meetsDimensions
-                  = img.width >= MIN_DIMENSIONS.width
-                    && img.height >= MIN_DIMENSIONS.height
-                    && img.width <= MAX_DIMENSIONS.width
-                    && img.height <= MAX_DIMENSIONS.height
+                = img.width >= MIN_DIMENSIONS.width
+                  && img.height >= MIN_DIMENSIONS.height
+                  && img.width <= MAX_DIMENSIONS.width
+                  && img.height <= MAX_DIMENSIONS.height
               resolve(meetsDimensions)
             }
             img.src = e.target?.result as string
@@ -51,9 +51,9 @@ const schema = z.object({
     )
 })
 
-type schema = z.output<typeof schema>
+type Schema = z.output<typeof schema>
 
-const state = reactive<Partial<schema>>({
+const state = reactive<Partial<Schema>>({
   avatar: undefined
 })
 
@@ -61,7 +61,7 @@ function createObjectUrl(file: File): string {
   return URL.createObjectURL(file)
 }
 
-async function onSubmit(event: FormSubmitEvent<schema>) {
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data)
 }
 </script>

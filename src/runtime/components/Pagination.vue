@@ -152,8 +152,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pagination |
         </slot>
       </PaginationPrev>
 
-      <template v-for="(item, index) in items">
-        <PaginationListItem v-if="item.type === 'page'" :key="index" as-child :value="item.value" :class="ui.item({ class: props.ui?.item })">
+      <template v-for="(item, index) in items" :key="index">
+        <PaginationListItem v-if="item.type === 'page'" as-child :value="item.value" :class="ui.item({ class: props.ui?.item })">
           <slot name="item" v-bind="{ item, index, page, pageCount }">
             <UButton
               :color="page === item.value ? activeColor : color"
@@ -167,9 +167,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pagination |
           </slot>
         </PaginationListItem>
 
-        <PaginationEllipsis v-else :key="item.type" :index="index" as-child :class="ui.ellipsis({ class: props.ui?.ellipsis })">
+        <PaginationEllipsis v-else as-child :class="ui.ellipsis({ class: props.ui?.ellipsis })">
           <slot name="ellipsis">
-            <UButton :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" />
+            <UButton as="div" :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" />
           </slot>
         </PaginationEllipsis>
       </template>
