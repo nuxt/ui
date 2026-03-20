@@ -114,12 +114,12 @@ props:
 
 ### Icon
 
-Use the `icon` prop to show an [Icon](/docs/components/icon) inside the InputTime.
+Use the `icon` prop to show an [Icon](/docs/components/icon) inside the InputDate.
 
 ::component-code
 ---
 props:
-  icon: 'i-lucide-clock'
+  icon: 'i-lucide-calendar'
 ---
 ::
 
