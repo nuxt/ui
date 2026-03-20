@@ -90,7 +90,6 @@ const navigation = [{
   <Matrix v-slot="props" :attrs="attrs" class="gap-5">
     <UContentNavigation
       :navigation="navigation"
-      :default-open="false"
       :highlight="highlight"
       :highlight-color="highlightColor"
       :collapsible="collapsible"
