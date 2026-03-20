@@ -592,6 +592,7 @@ prettier: true
 ignore:
   - items
   - modelValue
+  - avatar.loading
 external:
   - items
   - modelValue

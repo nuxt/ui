@@ -152,6 +152,7 @@ ignore:
   - variant
   - role
   - id
+  - avatar.loading
 props:
   avatar:
     src: 'https://github.com/benjamincanac.png'

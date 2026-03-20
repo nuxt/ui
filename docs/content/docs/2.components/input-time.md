@@ -31,18 +31,6 @@ props:
 ---
 ::
 
-::framework-only
-#nuxt
-:::note{to="/docs/getting-started/integrations/i18n/nuxt#locale"}
-This component uses the `@internationalized/date` package for locale-aware formatting. The time format is determined by the `locale` prop of the App component.
-:::
-
-#vue
-:::note{to="/docs/getting-started/integrations/i18n/vue#locale"}
-This component uses the `@internationalized/date` package for locale-aware formatting. The time format is determined by the `locale` prop of the App component.
-:::
-::
-
 Use the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::component-code
@@ -56,6 +44,18 @@ external:
 props:
   defaultValue: [9, 45, 0]
 ---
+::
+
+::framework-only
+#nuxt
+:::note{to="/docs/getting-started/integrations/i18n/nuxt#locale"}
+This component uses the `@internationalized/date` package for locale-aware formatting. The time format is determined by the `locale` prop of the App component.
+:::
+
+#vue
+:::note{to="/docs/getting-started/integrations/i18n/vue#locale"}
+This component uses the `@internationalized/date` package for locale-aware formatting. The time format is determined by the `locale` prop of the App component.
+:::
 ::
 
 ### Range
@@ -81,24 +81,22 @@ props:
 ---
 ::
 
-Use the `default-value` prop to set the initial time range when you do not need to control its state.
+### Hour Cycle
+
+Use the `hour-cycle` prop to change the hour cycle of the InputTime. Defaults to `12`.
 
 ::component-code
 ---
-prettier: true
 cast:
-  defaultValue: TimeRangeValue
+  defaultValue: TimeValue
 ignore:
-  - range
-  - defaultValue.start
-  - defaultValue.end
+  - hourCycle
+  - defaultValue
 external:
   - defaultValue
 props:
-  range: true
-  defaultValue:
-    start: [8, 0, 0]
-    end: [16, 30, 0]
+  hourCycle: 24
+  defaultValue: [16, 30, 0]
 ---
 ::
 
@@ -155,6 +153,20 @@ props:
 Use the `leading` and `trailing` props to set the icon position or the `leading-icon` and `trailing-icon` props to set a different icon for each position.
 ::
 
+### Separator Icon
+
+Use the `separator-icon` prop to change the [Icon](/docs/components/icon) of the range separator. Defaults to `i-lucide-minus`.
+
+::component-code
+---
+ignore:
+  - range
+props:
+  range: true
+  separatorIcon: 'i-lucide-arrow-right'
+---
+::
+
 ### Avatar
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the InputTime.
@@ -162,6 +174,8 @@ Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the In
 ::component-code
 ---
 prettier: true
+ignore:
+  - avatar.loading
 props:
   avatar:
     src: 'https://github.com/vuejs.png'
@@ -182,33 +196,6 @@ props:
 ---
 ::
 
-### Class
-
-Use the `class` prop to tweak the root element without touching the theming API.
-
-::component-code
----
-props:
-  class: 'rounded-full border border-dashed border-default/40'
----
-::
-
-### UI
-
-Use the `ui` prop to override slot-level styles.
-
-::component-code
----
-prettier: true
-ignore:
-  - ui
-props:
-  ui:
-    segment: 'font-mono text-primary'
-    leadingIcon: 'text-muted'
----
-::
-
 ## Examples
 
 ### Within a FormField
@@ -218,26 +205,6 @@ Use InputTime inside a [FormField](/docs/components/form-field) to inherit label
 ::component-example
 ---
 name: 'input-time-form-field-example'
----
-::
-
-### Time Range with icons
-
-Add icons to emphasize the start and end time fields.
-
-::component-example
----
-name: 'input-time-range-icons-example'
----
-::
-
-### Time Range with custom separator
-
-Provide a custom separator UI for range inputs.
-
-::component-example
----
-name: 'input-time-range-separator-example'
 ---
 ::
 

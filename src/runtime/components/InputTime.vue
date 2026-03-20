@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { ComponentPublicInstance, VNode } from 'vue'
-import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, TimeRangeFieldRootProps } from 'reka-ui'
+import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, TimeRangeFieldRootProps, TimeValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-time'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -17,7 +17,6 @@ type InputTimeModelValue<R extends boolean = false> = (R extends true
   ? TimeRangeFieldRootProps['modelValue']
   : TimeFieldRootProps['modelValue']) | undefined
 
-// Omit des props comme dans Calendar.vue / InputDate.vue
 type _TimeFieldRootProps = Omit<TimeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>
 type _TimeRangeFieldRootProps = Omit<TimeRangeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>
 
@@ -44,11 +43,16 @@ export interface InputTimeProps<R extends boolean = false> extends UseComponentI
   /** Keep the mobile text size on all breakpoints. */
   fixed?: boolean
   /**
+   * The icon to use as a range separator.
+   * @defaultValue appConfig.ui.icons.minus
+   * @IconifyIcon
+   */
+  separatorIcon?: IconProps['name']
+  /**
    * Enable time range selection.
    * @defaultValue false
    */
   range?: R & boolean
-  separatorIcon?: IconProps['name']
   /** The value of the input when initially rendered. Use when you do not need to control the state of the input. */
   defaultValue?: InputTimeDefaultValue<R>
   /** The controlled value of the input. Can be bind as `v-model`. */
@@ -96,7 +100,7 @@ const slots = defineSlots<InputTimeSlots>()
 const appConfig = useAppConfig() as InputTime['AppConfig']
 const uiProp = useComponentUI('inputTime', props)
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'range', 'class', 'ui', 'modelValue', 'defaultValue'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps<R>>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputTimeProps<R>>(props)
@@ -119,12 +123,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTime ||
 const inputsRef = ref<ComponentPublicInstance[]>([])
 
 const FieldRoot = computed(() => props.range ? TimeRangeFieldRoot : TimeFieldRoot)
-const rootModelValue = computed(() => props.range
-  ? props.modelValue
-  : props.modelValue)
-const rootDefaultValue = computed(() => props.range
-  ? props.defaultValue
-  : props.defaultValue)
 
 function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
   // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
@@ -175,8 +173,8 @@ defineExpose({
     v-slot="{ segments }"
     :name="name"
     :disabled="disabled"
-    :model-value="rootModelValue as (R extends false ? TimeFieldRootProps['modelValue'] : TimeFieldRootProps['modelValue'])"
-    :default-value="rootDefaultValue as (R extends false ? TimeFieldRootProps['defaultValue'] : TimeFieldRootProps['defaultValue'])"
+    :model-value="(modelValue as TimeValue)"
+    :default-value="(defaultValue as TimeValue)"
     data-slot="base"
     :class="ui.base({ class: [uiProp?.base, props.class] })"
     @update:model-value="onUpdate"
@@ -209,11 +207,9 @@ defineExpose({
         {{ segment.value.trim() }}
       </TimeRangeFieldInput>
 
-      <span data-slot="range-separator" :class="ui.rangeSeparator({ class: uiProp?.rangeSeparator })">
-        <slot name="separator" :ui="ui">
-          <UIcon :name="separatorIcon || appConfig.ui.icons.minus" data-slot="separatorIcon" :class="ui.separatorIcon({ class: uiProp?.separatorIcon })" />
-        </slot>
-      </span>
+      <slot name="separator" :ui="ui">
+        <UIcon :name="separatorIcon || appConfig.ui.icons.minus" data-slot="separatorIcon" :class="ui.separatorIcon({ class: uiProp?.separatorIcon })" />
+      </slot>
 
       <TimeRangeFieldInput
         v-for="(segment, index) in segments.end"

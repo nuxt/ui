@@ -67,6 +67,8 @@ Use the `avatar` prop to display an avatar in the middle of the Separator.
 ---
 prettier: true
 class: 'p-8'
+ignore:
+  - avatar.loading
 props:
   avatar:
     src: 'https://github.com/nuxt.png'

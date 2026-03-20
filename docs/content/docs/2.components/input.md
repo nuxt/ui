@@ -146,6 +146,7 @@ Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the In
 prettier: true
 ignore:
   - placeholder
+  - avatar.loading
 props:
   avatar:
     src: 'https://github.com/nuxt.png'
