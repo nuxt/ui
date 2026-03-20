@@ -8,7 +8,8 @@ export default (options: Required<ModuleOptions>) => {
     slots: {
       root: () => undefined,
       base: () => ['group relative inline-flex items-center rounded-md select-none', options.theme.transitions && 'transition-colors'],
-      segment: ['rounded text-center outline-hidden data-placeholder:text-dimmed data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75', options.theme.transitions && 'transition-colors']
+      segment: ['rounded text-center outline-hidden data-placeholder:text-dimmed data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+      separatorIcon: 'shrink-0 size-4 text-muted'
     },
     variants: {
       ...fieldGroupVariant,

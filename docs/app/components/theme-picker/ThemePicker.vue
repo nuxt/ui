@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const appConfig = useAppConfig()
 const colorMode = useColorMode()
 const { track } = useAnalytics()
 
@@ -19,6 +18,7 @@ const {
   neutral,
   primaryColors,
   primary,
+  blackAsPrimary,
   setBlackAsPrimary,
   radiuses,
   radius,
@@ -68,11 +68,11 @@ const {
         <div class="grid grid-cols-3 gap-1 -mx-2">
           <ThemePickerButton
             label="Black"
-            :selected="appConfig.theme.blackAsPrimary"
+            :selected="blackAsPrimary"
             @click="setBlackAsPrimary(true)"
           >
             <template #leading>
-              <span class="inline-block w-2 h-2 rounded-full bg-black dark:bg-white" />
+              <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
             </template>
           </ThemePickerButton>
 
@@ -81,7 +81,7 @@ const {
             :key="color"
             :label="color"
             :chip="color"
-            :selected="!appConfig.theme.blackAsPrimary && primary === color"
+            :selected="!blackAsPrimary && primary === color"
             @click="primary = color"
           />
         </div>

@@ -615,6 +615,7 @@ ignore:
   - items
   - modelValue
   - class
+  - avatar.loading
 external:
   - items
   - modelValue
@@ -622,6 +623,7 @@ props:
   modelValue: 'Nuxt'
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   items:
     - Nuxt
     - NuxtHub
@@ -872,6 +874,10 @@ name: 'select-menu-fetch-example'
 ---
 ::
 
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the menu opens, avoiding unnecessary API calls on page load.
+::
+
 ### With ignore filter
 
 Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
@@ -884,7 +890,7 @@ name: 'select-menu-ignore-filter-example'
 ::
 
 ::note
-This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls. The fetch is deferred with `immediate: false` so no request is made until the menu opens.
 ::
 
 ### With filter fields
@@ -896,6 +902,10 @@ Use the `filter-fields` prop with an array of fields to filter on. Defaults to `
 collapse: true
 name: 'select-menu-filter-fields-example'
 ---
+::
+
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the menu opens, avoiding unnecessary API calls on page load.
 ::
 
 ### With virtualization :badge{label="4.1+" class="align-text-top"}
@@ -927,6 +937,10 @@ highlights:
 overflowHidden: true
 name: 'select-menu-infinite-scroll-example'
 ---
+::
+
+::note
+This example uses `useLazyFetch` with `immediate: false` so data is only loaded as the user scrolls.
 ::
 
 ### With full content width
@@ -965,6 +979,10 @@ You can use the SelectMenu as a country picker with lazy loading. Countries are 
 collapse: true
 name: 'select-menu-countries-example'
 ---
+::
+
+::note
+This example uses `useLazyFetch` with `immediate: false` to only load countries when the menu is first opened.
 ::
 
 ## API

@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, VNode } from 'vue'
 import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateValue, SegmentPart } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -53,18 +53,18 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
   ui?: InputDate['slots']
 }
 
-export interface InputDateEmits<R extends boolean> extends Omit<DateFieldRootEmits & DateRangeFieldRootEmits, 'update:modelValue'> {
-  'update:modelValue': [date: InputDateModelValue<R>]
+export interface InputDateEmits<R extends boolean = false> extends Omit<DateFieldRootEmits & DateRangeFieldRootEmits, 'update:modelValue'> {
+  'update:modelValue': [value: InputDateModelValue<R>]
   'change': [event: Event]
   'blur': [event: FocusEvent]
   'focus': [event: FocusEvent]
 }
 
 export interface InputDateSlots {
-  leading(props: { ui: InputDate['ui'] }): any
-  default(props: { ui: InputDate['ui'] }): any
-  trailing(props: { ui: InputDate['ui'] }): any
-  separator(props: { ui: InputDate['ui'] }): any
+  leading?(props: { ui: InputDate['ui'] }): VNode[]
+  default?(props: { ui: InputDate['ui'] }): VNode[]
+  trailing?(props: { ui: InputDate['ui'] }): VNode[]
+  separator?(props: { ui: InputDate['ui'] }): VNode[]
 }
 </script>
 

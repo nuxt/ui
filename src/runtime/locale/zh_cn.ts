@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: '发送'
     },
+    chatReasoning: {
+      thinking: '思考中…',
+      thought: '已思考',
+      thoughtFor: '思考了 {duration}'
+    },
     colorMode: {
       dark: '深色',
       light: '浅色',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: '本页内容'
+    },
+    dropdownMenu: {
+      noMatch: '没有匹配的数据',
+      search: '搜索…'
     },
     dashboardSearch: {
       theme: '主题'
@@ -111,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: '复制代码到剪贴板'
       }
+    },
+    sidebar: {
+      close: '关闭',
+      toggle: '切换'
     },
     selectMenu: {
       create: '创建 "{label}"',

@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipContentEmits, TooltipArrowProps, TooltipTriggerProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tooltip'
 import type { KbdProps } from '../types'
@@ -15,11 +16,14 @@ export interface TooltipProps extends TooltipRootProps {
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The content of the tooltip.
+   *
+   * Inherits from the `tooltip.content` of the {@link AppProps} component when not provided.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
    */
   content?: Omit<TooltipContentProps, 'as' | 'asChild'> & Partial<EmitsToProps<TooltipContentEmits>>
   /**
    * Display an arrow alongside the tooltip.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
   arrow?: boolean | Omit<TooltipArrowProps, 'as' | 'asChild'>
@@ -41,15 +45,15 @@ export interface TooltipProps extends TooltipRootProps {
 export interface TooltipEmits extends TooltipRootEmits {}
 
 export interface TooltipSlots {
-  default(props: { open: boolean }): any
-  content(props: { ui: Tooltip['ui'] }): any
+  default?(props: { open: boolean }): VNode[]
+  content?(props: { ui: Tooltip['ui'] }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
-import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits } from 'reka-ui'
+import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits, injectTooltipProviderContext } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
@@ -66,10 +70,12 @@ const slots = defineSlots<TooltipSlots>()
 const appConfig = useAppConfig() as Tooltip['AppConfig']
 const uiProp = useComponentUI('tooltip', props)
 
+const providerContext = injectTooltipProviderContext()
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration', 'disableHoverableContent', 'disableClosingTrigger', 'ignoreNonKeyboardFocus'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as TooltipContentProps)
-const arrowProps = toRef(() => props.arrow as TooltipArrowProps)
+const contentProps = toRef(() => defu(props.content, providerContext.content.value, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as TooltipContentProps)
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as TooltipArrowProps)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })({

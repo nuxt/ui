@@ -1,12 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import PageHeader from '../../src/runtime/components/PageHeader.vue'
-import type { PageHeaderProps, PageHeaderSlots } from '../../src/runtime/components/PageHeader.vue'
-import ComponentRender from '../component-render'
 
 describe('PageHeader', () => {
-  it.each([
+  renderEach(PageHeader, [
     // Props
     ['with title', { props: { title: 'Title' } }],
     ['with description', { props: { description: 'Description' } }],
@@ -21,10 +20,7 @@ describe('PageHeader', () => {
     ['with headline slot', { slots: { headline: () => 'Headline slot' } }],
     ['with links slot', { slots: { links: () => 'Links slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageHeaderProps, slots?: Partial<PageHeaderSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PageHeader)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(PageHeader, {

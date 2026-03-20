@@ -9,7 +9,8 @@ const members: UserProps[] = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/danielroe.png',
-      alt: 'danielroe'
+      alt: 'danielroe',
+      loading: 'lazy' as const
     }
   },
   {
@@ -19,7 +20,8 @@ const members: UserProps[] = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/pi0.png',
-      alt: 'pi0'
+      alt: 'pi0',
+      loading: 'lazy' as const
     }
   },
   {
@@ -29,7 +31,8 @@ const members: UserProps[] = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/atinux.png',
-      alt: 'atinux'
+      alt: 'atinux',
+      loading: 'lazy' as const
     }
   },
   {
@@ -39,7 +42,8 @@ const members: UserProps[] = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/benjamincanac.png',
-      alt: 'benjamincanac'
+      alt: 'benjamincanac',
+      loading: 'lazy' as const
     }
   }
 ]
@@ -58,8 +62,8 @@ const members: UserProps[] = [
   >
     <template #leading>
       <UAvatarGroup size="xl">
-        <UAvatar src="https://github.com/nuxt.png" alt="Nuxt" />
-        <UAvatar src="https://github.com/unjs.png" alt="Unjs" />
+        <UAvatar src="https://github.com/nuxt.png" alt="Nuxt" loading="lazy" />
+        <UAvatar src="https://github.com/unjs.png" alt="Unjs" loading="lazy" />
       </UAvatarGroup>
     </template>
 

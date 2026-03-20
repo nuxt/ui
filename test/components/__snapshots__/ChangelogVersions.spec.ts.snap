@@ -3,7 +3,7 @@
 exports[`ChangelogVersions > renders with as correctly 1`] = `
 "<section data-slot="root" class="relative">
   <div data-slot="indicator" class="absolute hidden lg:block overflow-hidden inset-y-3 start-32 h-full w-px bg-border -ms-[8.5px]">
-    <div data-slot="beam" class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
+    <div data-slot="beam" class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;" data-ap=""></div>
   </div>
   <div data-slot="container" class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->
@@ -47,7 +47,7 @@ exports[`ChangelogVersions > renders with as correctly 1`] = `
 exports[`ChangelogVersions > renders with class correctly 1`] = `
 "<div data-slot="root" class="absolute">
   <div data-slot="indicator" class="absolute hidden lg:block overflow-hidden inset-y-3 start-32 h-full w-px bg-border -ms-[8.5px]">
-    <div data-slot="beam" class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
+    <div data-slot="beam" class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;" data-ap=""></div>
   </div>
   <div data-slot="container" class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->
@@ -91,7 +91,7 @@ exports[`ChangelogVersions > renders with class correctly 1`] = `
 exports[`ChangelogVersions > renders with default slot correctly 1`] = `
 "<div data-slot="root" class="relative">
   <div data-slot="indicator" class="absolute hidden lg:block overflow-hidden inset-y-3 start-32 h-full w-px bg-border -ms-[8.5px]">
-    <div data-slot="beam" class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
+    <div data-slot="beam" class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;" data-ap=""></div>
   </div>
   <div data-slot="container" class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">Default slot</div>
 </div>"
@@ -142,7 +142,7 @@ exports[`ChangelogVersions > renders with indicator slot correctly 1`] = `
 exports[`ChangelogVersions > renders with ui correctly 1`] = `
 "<div data-slot="root" class="relative">
   <div data-slot="indicator" class="absolute hidden lg:block overflow-hidden inset-y-3 start-32 h-full w-px -ms-[8.5px] bg-primary">
-    <div data-slot="beam" class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
+    <div data-slot="beam" class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;" data-ap=""></div>
   </div>
   <div data-slot="container" class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->
@@ -186,7 +186,7 @@ exports[`ChangelogVersions > renders with ui correctly 1`] = `
 exports[`ChangelogVersions > renders with versions correctly 1`] = `
 "<div data-slot="root" class="relative">
   <div data-slot="indicator" class="absolute hidden lg:block overflow-hidden inset-y-3 start-32 h-full w-px bg-border -ms-[8.5px]">
-    <div data-slot="beam" class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
+    <div data-slot="beam" class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;" data-ap=""></div>
   </div>
   <div data-slot="container" class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->

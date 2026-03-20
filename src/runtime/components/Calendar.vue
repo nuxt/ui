@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootProps, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'reka-ui'
 import { getWeekNumber } from 'reka-ui/date'
+import type { VNode } from 'vue'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/calendar'
@@ -100,14 +101,14 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
   ui?: Calendar['slots']
 }
 
-export interface CalendarEmits<R extends boolean, M extends boolean> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
-  'update:modelValue': [date: CalendarModelValue<R, M>]
+export interface CalendarEmits<R extends boolean = false, M extends boolean = false> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
+  'update:modelValue': [value: CalendarModelValue<R, M>]
 }
 
 export interface CalendarSlots {
-  'heading': (props: { value: string }) => any
-  'day': (props: Pick<CalendarCellTriggerProps, 'day'>) => any
-  'week-day': (props: { day: string }) => any
+  'heading'?: (props: { value: string }) => VNode[]
+  'day'?: (props: Pick<CalendarCellTriggerProps, 'day'>) => VNode[]
+  'week-day'?: (props: { day: string }) => VNode[]
 }
 </script>
 

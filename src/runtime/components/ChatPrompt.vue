@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt'
 import type { TextareaProps, TextareaSlots } from '../types'
@@ -32,8 +33,8 @@ export interface ChatPromptEmits {
 }
 
 export interface ChatPromptSlots extends TextareaSlots {
-  header(props?: {}): any
-  footer(props?: {}): any
+  header?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 

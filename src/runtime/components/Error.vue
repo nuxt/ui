@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { NuxtError } from '#app'
 import theme from '#build/ui/error'
@@ -30,11 +31,11 @@ export interface ErrorProps {
 }
 
 export interface ErrorSlots {
-  default(props?: {}): any
-  statusCode(props?: {}): any
-  statusMessage(props?: {}): any
-  message(props?: {}): any
-  links(props?: {}): any
+  default?(props?: {}): VNode[]
+  statusCode?(props?: {}): VNode[]
+  statusMessage?(props?: {}): VNode[]
+  message?(props?: {}): VNode[]
+  links?(props?: {}): VNode[]
 }
 </script>
 
@@ -68,17 +69,17 @@ function handleError() {
 
 <template>
   <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <p v-if="!!props.error?.statusCode || !!slots.statusCode" data-slot="statusCode" :class="ui.statusCode({ class: uiProp?.statusCode })">
+    <p v-if="!!props.error?.statusCode || !!props.error?.status || !!slots.statusCode" data-slot="statusCode" :class="ui.statusCode({ class: uiProp?.statusCode })">
       <slot name="statusCode">
-        {{ props.error?.statusCode }}
+        {{ props.error?.statusCode || props.error?.status }}
       </slot>
     </p>
-    <h1 v-if="!!props.error?.statusMessage || !!slots.statusMessage" data-slot="statusMessage" :class="ui.statusMessage({ class: uiProp?.statusMessage })">
+    <h1 v-if="!!props.error?.statusMessage || !!props.error?.statusText || !!slots.statusMessage" data-slot="statusMessage" :class="ui.statusMessage({ class: uiProp?.statusMessage })">
       <slot name="statusMessage">
-        {{ props.error?.statusMessage }}
+        {{ props.error?.statusMessage || props.error?.statusText }}
       </slot>
     </h1>
-    <p v-if="(props.error?.message && props.error.message !== props.error.statusMessage) || !!slots.message" data-slot="message" :class="ui.message({ class: uiProp?.message })">
+    <p v-if="(props.error?.message && props.error.message !== (props.error.statusMessage || props.error.statusText)) || !!slots.message" data-slot="message" :class="ui.message({ class: uiProp?.message })">
       <slot name="message">
         {{ props.error?.message }}
       </slot>

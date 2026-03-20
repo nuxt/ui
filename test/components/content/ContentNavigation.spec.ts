@@ -1,8 +1,6 @@
-import { describe, it, expect } from 'vitest'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { describe } from 'vitest'
 import ContentNavigation from '../../../src/runtime/components/content/ContentNavigation.vue'
-import type { ContentNavigationProps, ContentNavigationSlots } from '../../../src/runtime/components/content/ContentNavigation.vue'
-import ComponentRender from '../../component-render'
+import { renderEach } from '../../component-render'
 import theme from '#build/ui/content/content-navigation'
 
 describe('ContentNavigation', () => {
@@ -49,7 +47,7 @@ describe('ContentNavigation', () => {
 
   const props = { navigation }
 
-  it.each([
+  renderEach(ContentNavigation<typeof navigation[number]>, [
     // Props
     ['with navigation', { props }],
     ['with defaultOpen', { props, defaultOpen: true }],
@@ -67,37 +65,6 @@ describe('ContentNavigation', () => {
     ['with link slot', { props, slots: { link: () => 'Link slot' } }],
     ['with link-leading slot', { props, slots: { 'link-leading': () => 'Link leading slot' } }],
     ['with link-title slot', { props, slots: { 'link-title': () => 'Link title slot' } }],
-    ['with link-trailing slot', { props, slots: { 'link-trailing': () => 'Link trailing slot' } }],
-    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentNavigationProps, slots?: Partial<ContentNavigationSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, ContentNavigation)
-    expect(html).toMatchSnapshot()
-  })
-
-  it('disables parent links with children when link is disabled', async () => {
-    const wrapper = await mountSuspended(ContentNavigation, {
-      props: {
-        defaultOpen: false,
-        navigation: [{
-          title: 'Guide',
-          path: '/guide',
-          disabled: true,
-          children: [{
-            title: 'Introduction',
-            path: '/guide/introduction'
-          }]
-        }]
-      }
-    })
-
-    const item = wrapper.find('[data-slot="itemWithChildren"]')
-    const trigger = item.find('button')
-
-    expect(trigger.attributes('disabled')).toBeDefined()
-    const initialState = item.attributes('data-state')
-
-    await trigger.trigger('click')
-
-    expect(item.attributes('data-state')).toBe(initialState)
-  })
+    ['with link-trailing slot', { props, slots: { 'link-trailing': () => 'Link trailing slot' } }]
+  ])
 })

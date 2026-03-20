@@ -112,15 +112,62 @@ props:
 ---
 ::
 
-### Separator Icon
+### Icon
 
-Use the `separator-icon` prop to change the icon of the range separator.
+Use the `icon` prop to show an [Icon](/docs/components/icon) inside the InputDate.
 
 ::component-code
 ---
 props:
+  icon: 'i-lucide-calendar'
+---
+::
+
+::note
+Use the `leading` and `trailing` props to set the icon position or the `leading-icon` and `trailing-icon` props to set a different icon for each position.
+::
+
+### Separator Icon
+
+Use the `separator-icon` prop to change the [Icon](/docs/components/icon) of the range separator. Defaults to `i-lucide-minus`.
+
+::component-code
+---
+ignore:
+  - range
+props:
   range: true
   separatorIcon: 'i-lucide-arrow-right'
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.minus` key.
+:::
+
+#vue
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.minus` key.
+:::
+::
+
+### Avatar
+
+Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the InputDate.
+
+::component-code
+---
+prettier: true
+ignore:
+  - avatar.loading
+props:
+  avatar:
+    src: 'https://github.com/vuejs.png'
+    loading: lazy
+  size: md
+  variant: outline
 ---
 ::
 

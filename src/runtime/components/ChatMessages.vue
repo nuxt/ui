@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UIMessage, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
@@ -60,16 +60,16 @@ export interface ChatMessagesProps {
 }
 
 type ExtendSlotWithVersion<K extends keyof ChatMessageSlots>
-  = ChatMessageSlots[K] extends (props: infer P) => any
-    ? (props: P & { message: UIMessage }) => any
-    : ChatMessageSlots[K]
+  = Required<ChatMessageSlots>[K] extends (props: infer P) => VNode[]
+    ? (props: P & { message: UIMessage }) => VNode[]
+    : Required<ChatMessageSlots>[K]
 
 export type ChatMessagesSlots = {
-  [K in keyof ChatMessageSlots]: ExtendSlotWithVersion<K>
+  [K in keyof ChatMessageSlots]?: ExtendSlotWithVersion<K>
 } & {
-  default(props?: {}): any
-  indicator(props: { ui: ChatMessages['ui'] }): any
-  viewport(props: { ui: ChatMessages['ui'], onClick: () => void }): any
+  default?(props?: {}): VNode[]
+  indicator?(props: { ui: ChatMessages['ui'] }): VNode[]
+  viewport?(props: { ui: ChatMessages['ui'], onClick: () => void }): VNode[]
 }
 
 </script>
