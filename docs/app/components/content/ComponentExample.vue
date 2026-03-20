@@ -85,7 +85,6 @@ const wrapperContainer = ref<HTMLElement | null>(null)
 const componentContainer = ref<HTMLElement | null>(null)
 
 const { $prettier } = useNuxtApp()
-const { framework } = useFrameworks()
 const { width } = useElementSize(el)
 
 const camelName = camelCase(props.name)
@@ -98,29 +97,38 @@ const { data } = await useFetchComponentExample(camelName)
 
 const componentProps = reactive({ ...(props.props || {}) })
 
-const code = computed(() => {
-  let code = ''
-
-  if (props.collapse) {
-    code += `::code-collapse
-`
-  }
-
-  const source = framework.value === 'vue' && props.lang === 'vue' ? addVueImports(data.value?.code ?? '') : (data.value?.code ?? '')
-
-  code += `\`\`\`${props.lang} ${props.preview ? '' : ` [${props.filename ?? data.value?.pascalName}.${props.lang}]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
+function buildCodeBlock(source: string, cssClass?: string) {
+  const codeFence = `\`\`\`${props.lang} ${props.preview ? '' : ` [${props.filename ?? data.value?.pascalName}.${props.lang}]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
 ${source}
 \`\`\``
 
   if (props.collapse) {
-    code += `
+    return `::code-collapse${cssClass ? `{class="${cssClass}"}` : ''}
+${codeFence}
 ::`
   }
 
-  return code
+  if (cssClass) {
+    return `::div{class="${cssClass}"}
+${codeFence}
+::`
+  }
+
+  return codeFence
+}
+
+const code = computed(() => {
+  const rawCode = data.value?.code ?? ''
+  const vueCode = addVueImports(rawCode)
+
+  if (vueCode !== rawCode) {
+    return buildCodeBlock(rawCode, 'nuxt-only') + '\n\n' + buildCodeBlock(vueCode, 'vue-only')
+  }
+
+  return buildCodeBlock(rawCode)
 })
 
-const { data: ast } = useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse, framework: framework.value })}`, async () => {
+const { data: ast } = useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
   if (!props.prettier) {
     return cachedParseMarkdown(code.value)
   }
@@ -153,6 +161,12 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
   }
   return acc
 }, {} as Record<string, any>) || {})
+
+const playgroundUrl = computed(() => {
+  const rawCode = data.value?.code
+  if (!rawCode) return null
+  return getPlaygroundUrl(addVueImports(rawCode))
+})
 
 const urlSearchParams = computed(() => {
   const params = {
@@ -238,6 +252,19 @@ const urlSearchParams = computed(() => {
         </div>
 
         <ClientOnly>
+          <UTooltip v-if="playgroundUrl" text="Open in playground" :content="{ side: 'right' }">
+            <UButton
+              :to="playgroundUrl"
+              target="_blank"
+              icon="i-lucide-play"
+              color="neutral"
+              variant="outline"
+              size="sm"
+              class="absolute -bottom-[13px] -right-[13px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
+              aria-label="Open in playground"
+            />
+          </UTooltip>
+
           <LazyComponentThemeVisualizer
             :container="componentContainer"
             :position-container="wrapperContainer"

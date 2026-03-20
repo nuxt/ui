@@ -113,7 +113,6 @@ const props = defineProps<{
 
 const route = useRoute()
 const { $prettier } = useNuxtApp()
-const { framework } = useFrameworks()
 
 const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '')
 const name = `${props.prose ? 'Prose' : 'U'}${upperFirst(camelName)}`
@@ -199,7 +198,7 @@ const options = computed(() => {
   })
 })
 
-const code = computed(() => {
+function buildCode() {
   let code = ''
 
   if (props.prose) {
@@ -238,17 +237,6 @@ ${props.slots?.default}
 <script setup lang="ts">
 `
     const importsBySource = new Map<string, Set<string>>()
-
-    // Collect vue reactivity imports first so they appear before other imports
-    if (framework.value === 'vue') {
-      const vueImports = new Set<string>()
-      for (const key of props.external!) {
-        vueImports.add(props.cast?.[key] ? 'shallowRef' : 'ref')
-      }
-      if (vueImports.size) {
-        importsBySource.set('vue', vueImports)
-      }
-    }
 
     // Collect imports from cast types
     for (const key of props.external) {
@@ -365,9 +353,35 @@ ${props.slots?.default}
   }
 
   return code
+}
+
+function wrapCode(markdown: string, cssClass: string) {
+  if (props.collapse) {
+    return markdown.replace('::code-collapse', `::code-collapse{class="${cssClass}"}`)
+  }
+  return `::div{class="${cssClass}"}\n${markdown}\n::`
+}
+
+const code = computed(() => {
+  const nuxtCode = buildCode()
+  const vueCode = addVueImports(nuxtCode)
+
+  if (vueCode !== nuxtCode) {
+    return wrapCode(nuxtCode, 'nuxt-only') + '\n\n' + wrapCode(vueCode, 'vue-only')
+  }
+
+  return nuxtCode
 })
 
-const codeKey = computed(() => `component-code-${name}-${hash(props)}-${framework.value}`)
+const playgroundUrl = computed(() => {
+  if (props.prose) return null
+  const rawMarkdown = buildCode()
+  const vueMarkdown = addVueImports(rawMarkdown)
+  const match = vueMarkdown.match(/```vue[^\n]*\n([\s\S]*?)\n```/)
+  return match?.[1] ? getPlaygroundUrl(match[1].trim()) : null
+})
+
+const codeKey = computed(() => `component-code-${name}-${hash(props)}`)
 
 const wrapperContainer = ref<HTMLElement | null>(null)
 const componentContainer = ref<HTMLElement | null>(null)
@@ -455,6 +469,19 @@ const { data: ast } = useAsyncData(codeKey, async () => {
       </div>
 
       <ClientOnly>
+        <UTooltip v-if="playgroundUrl" text="Open in playground" :content="{ side: 'right' }">
+          <UButton
+            :to="playgroundUrl"
+            target="_blank"
+            icon="i-lucide-play"
+            color="neutral"
+            variant="outline"
+            size="sm"
+            class="absolute -bottom-[13px] -right-[13px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
+            aria-label="Open in playground"
+          />
+        </UTooltip>
+
         <LazyComponentThemeVisualizer
           :container="componentContainer"
           :position-container="wrapperContainer"

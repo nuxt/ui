@@ -11,7 +11,7 @@
   "dependencies": {
     "@nuxt/ui": "workspace:*",
     "@vue/repl": "^4.7.1",
-    "tailwindcss": "^4.2.1",
+    "tailwindcss": "^4.2.2",
     "vue": "^3.5.30"
   },
   "devDependencies": {
