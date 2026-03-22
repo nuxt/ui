@@ -111,7 +111,7 @@ const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
+    const events = ['interactOutside', 'escapeKeyDown']
 
     return events.reduce((acc, curr) => {
       acc[curr] = (e: Event) => {

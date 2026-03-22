@@ -90,7 +90,7 @@ const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)
 const contentEvents = computed(() => {
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
+    const events = ['interactOutside', 'escapeKeyDown']
 
     return events.reduce((acc, curr) => {
       acc[curr] = (e: Event) => {
