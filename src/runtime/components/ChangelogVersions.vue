@@ -75,7 +75,7 @@ const scrollOptions = computed(() => typeof props.indicator === 'object' ? props
 
 const { scrollYProgress } = useScroll(scrollOptions.value)
 const y = useSpring(scrollYProgress, springOptions)
-const height = useTransform(() => `${y.get() * 100}%`)
+const height = useTransform(() => `${Number(y.get()) * 100}%`)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.changelogVersions || {}) })())
