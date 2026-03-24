@@ -83,7 +83,7 @@ export interface ScrollAreaEmits {
 </script>
 
 <script setup lang="ts" generic="T extends ScrollAreaItem">
-import { computed, onMounted, onUnmounted, toRef, useTemplateRef, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, toRef, useTemplateRef, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useVirtualizer } from '@tanstack/vue-virtual'
@@ -108,10 +108,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.scrollArea |
 }))
 
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
+const leadingRef = useTemplateRef<HTMLElement>('leadingRef')
 
 const isRtl = computed(() => dir.value === 'rtl')
 const isHorizontal = computed(() => props.orientation === 'horizontal')
 const isVertical = computed(() => !isHorizontal.value)
+
+const leadingSize = ref(0)
 
 const virtualizerProps = toRef(() => {
   const options = typeof props.virtualize === 'boolean' ? {} : props.virtualize
@@ -122,7 +125,7 @@ const virtualizerProps = toRef(() => {
     gap: 0,
     paddingStart: 0,
     paddingEnd: 0,
-    scrollMargin: 0
+    scrollMargin: leadingSize.value
   })
 })
 
@@ -209,7 +212,17 @@ function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
 
 // Recalculate layout on container resize (e.g. estimateSize depends on lane width)
 let resizeObserver: ResizeObserver | null = null
+let leadingObserver: ResizeObserver | null = null
 let rafId: number | null = null
+
+function measureLeadingSlot() {
+  const el = leadingRef.value
+  if (!el) {
+    leadingSize.value = 0
+    return
+  }
+  leadingSize.value = isHorizontal.value ? el.offsetWidth : el.offsetHeight
+}
 
 onMounted(() => {
   if (virtualizer) {
@@ -224,6 +237,17 @@ onMounted(() => {
       })
       resizeObserver.observe(el)
     }
+
+    // Auto-measure leading slot for scrollMargin when user hasn't set it explicitly
+    const userScrollMargin = typeof props.virtualize === 'object' ? props.virtualize.scrollMargin : undefined
+    if (userScrollMargin === undefined) {
+      measureLeadingSlot()
+      const leadingEl = leadingRef.value
+      if (leadingEl) {
+        leadingObserver = new ResizeObserver(measureLeadingSlot)
+        leadingObserver.observe(leadingEl)
+      }
+    }
   }
 })
 
@@ -233,6 +257,7 @@ onUnmounted(() => {
     rafId = null
   }
   resizeObserver?.disconnect()
+  leadingObserver?.disconnect()
 })
 
 function measureElement(el: Element | ComponentPublicInstance | null) {
@@ -274,7 +299,9 @@ defineExpose({
     :data-orientation="orientation"
     :class="ui.root({ class: [uiProp?.root, props.class] })"
   >
-    <slot name="leading" />
+    <div v-if="$slots.leading" ref="leadingRef" data-slot="leading">
+      <slot name="leading" />
+    </div>
 
     <template v-if="virtualizer">
       <div
@@ -319,6 +346,8 @@ defineExpose({
       </div>
     </template>
 
-    <slot name="trailing" />
+    <div v-if="$slots.trailing" data-slot="trailing">
+      <slot name="trailing" />
+    </div>
   </Primitive>
 </template>
