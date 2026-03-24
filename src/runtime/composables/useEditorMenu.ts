@@ -6,7 +6,7 @@ import { computePosition } from '@floating-ui/dom'
 import type { Strategy, Placement } from '@floating-ui/dom'
 import type { Editor } from '@tiptap/vue-3'
 import { VueRenderer } from '@tiptap/vue-3'
-import type { SuggestionProps } from '@tiptap/suggestion'
+import type { SuggestionOptions, SuggestionProps } from '@tiptap/suggestion'
 import Suggestion from '@tiptap/suggestion'
 import { PluginKey } from '@tiptap/pm/state'
 import type { FloatingUIOptions } from '../types/editor'
@@ -65,6 +65,10 @@ export interface EditorMenuOptions<T = any> {
    * @see https://floating-ui.com/docs/computePosition#options
    */
   options?: FloatingUIOptions
+  /**
+   * Optional TipTap Suggestion matching options.
+   */
+  suggestion?: Partial<SuggestionOptions>
   /**
    * The DOM element to append the menu to. Default is the editor's parent element.
    *
@@ -493,6 +497,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     pluginKey: pluginKeyInstance,
     editor: options.editor,
     char: options.char,
+    ...(options.suggestion || {}),
     items: ({ query: q }: { query: string }) => {
       // Update the searchTerm ref for external access
       searchTerm.value = q
