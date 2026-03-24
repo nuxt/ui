@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.6.1](https://github.com/nuxt/ui/compare/v4.6.0...v4.6.1) (2026-03-24)
+
+### Features
+
+* **EditorSuggestionMenu:** add `suggestion` prop to expose TipTap suggestion matching options ([#6233](https://github.com/nuxt/ui/issues/6233))
+
 ## [4.6.0](https://github.com/nuxt/ui/compare/v4.5.1...v4.6.0) (2026-03-23)
 
 ### ⚠ BREAKING CHANGES
