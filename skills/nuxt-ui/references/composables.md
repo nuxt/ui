@@ -1,5 +1,14 @@
 # Composables
 
+## Table of contents
+
+- [useToast](#usetoast)
+- [useOverlay](#useoverlay)
+- [defineShortcuts](#defineshortcuts)
+- [defineLocale / extendLocale](#definelocale--extendlocale)
+- [extractShortcuts](#extractshortcuts)
+- [Quick reference](#quick-reference)
+
 ## useToast
 
 Show notifications. Requires `<UApp>` wrapper.

@@ -2,6 +2,16 @@
 
 Build AI chat interfaces with message streams, reasoning, tool calling, and Vercel AI SDK integration.
 
+## Table of contents
+
+- [Component tree](#component-tree)
+- [Setup](#setup)
+- [Full page chat](#full-page-chat)
+- [Key components](#key-components)
+- [Chat in a modal](#chat-in-a-modal)
+- [With model selector](#with-model-selector)
+- [Conversation sidebar](#conversation-sidebar)
+
 ## Component tree
 
 ```

@@ -1,5 +1,16 @@
 # Theming
 
+## Table of contents
+
+- [Semantic colors](#semantic-colors)
+- [Configuring colors](#configuring-colors)
+- [Adding custom colors](#adding-custom-colors)
+- [CSS utilities](#css-utilities)
+- [Component theme customization](#component-theme-customization)
+- [Dark mode](#dark-mode)
+- [Fonts](#fonts)
+- [Brand customization playbook](#brand-customization-playbook)
+
 ## Semantic colors
 
 | Color | Default | Purpose |

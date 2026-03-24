@@ -2,6 +2,17 @@
 
 Build admin interfaces with resizable sidebars, multi-panel layouts, and toolbars.
 
+## Table of contents
+
+- [Component tree](#component-tree)
+- [Layout](#layout)
+- [Page](#page)
+- [Key components](#key-components)
+- [Multi-panel (list-detail)](#multi-panel-list-detail)
+- [With toolbar](#with-toolbar)
+- [With search](#with-search)
+- [Right sidebar](#right-sidebar)
+
 ## Component tree
 
 ```

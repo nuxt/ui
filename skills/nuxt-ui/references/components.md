@@ -2,6 +2,21 @@
 
 125+ Vue components powered by Tailwind CSS and Reka UI. For any component's theme slots, read the generated theme file (Nuxt: `.nuxt/ui/<component>.ts`, Vue: `node_modules/.nuxt-ui/ui/<component>.ts`).
 
+## Table of contents
+
+- [Layout](#layout)
+- [Element](#element)
+- [Form](#form)
+- [Data](#data)
+- [Navigation](#navigation)
+- [Overlay](#overlay)
+- [Page](#page)
+- [Dashboard](#dashboard)
+- [Chat](#chat)
+- [Editor](#editor)
+- [Content](#content)
+- [Color Mode](#color-mode)
+
 ## Layout
 
 Core structural components for organizing your application's layout.

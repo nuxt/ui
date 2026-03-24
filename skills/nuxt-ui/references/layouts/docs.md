@@ -4,6 +4,14 @@ Build documentation sites with sidebar navigation, table of contents, and surrou
 
 > Requires `@nuxt/content` module for navigation, search, and TOC.
 
+## Table of contents
+
+- [Component tree](#component-tree)
+- [App shell](#app-shell)
+- [Layout](#layout)
+- [Page](#page)
+- [Key components](#key-components)
+
 ## Component tree
 
 ```

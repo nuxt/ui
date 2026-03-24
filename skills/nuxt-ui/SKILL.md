@@ -7,6 +7,18 @@ description: Build UIs with @nuxt/ui v4 — 125+ accessible Vue components with 
 
 Vue component library built on [Reka UI](https://reka-ui.com/) + [Tailwind CSS](https://tailwindcss.com/) + [Tailwind Variants](https://www.tailwind-variants.org/). Works with Nuxt, Vue (Vite), Laravel (Inertia), and AdonisJS (Inertia).
 
+## Table of contents
+
+- [Installation](#installation)
+- [Icons](#icons)
+- [Theming & Branding](#theming--branding)
+- [Composables](#composables)
+- [Form validation](#form-validation)
+- [Overlays](#overlays)
+- [Layouts](#layouts)
+- [Templates](#templates)
+- [Additional references](#additional-references)
+
 ## Installation
 
 ### Nuxt

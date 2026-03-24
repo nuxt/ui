@@ -2,6 +2,16 @@
 
 Build public-facing pages — landing, blog, changelog, pricing — using the Header + Main + Footer shell with Page components.
 
+## Table of contents
+
+- [App shell](#app-shell)
+- [Landing page](#landing-page)
+- [Blog listing](#blog-listing)
+- [Blog article](#blog-article)
+- [Changelog](#changelog)
+- [Key components](#key-components)
+- [Variations](#variations)
+
 ## App shell
 
 ```vue [app.vue]

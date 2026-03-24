@@ -2,6 +2,15 @@
 
 Build a rich text editor with toolbars, slash commands, mentions, and drag-and-drop.
 
+## Table of contents
+
+- [Component tree](#component-tree)
+- [Page](#page)
+- [Key components](#key-components)
+- [Toolbar modes](#toolbar-modes)
+- [Content types](#content-types)
+- [With document sidebar](#with-document-sidebar)
+
 ## Component tree
 
 ```
