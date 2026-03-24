@@ -2,7 +2,7 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'peer [--sidebar-width:16rem] [--sidebar-width-icon:4rem]',
+    root: 'peer [--sidebar-width:16rem] [--sidebar-width-icon:4rem] data-[dragging=true]:select-none',
     gap: 'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-out group-data-[dragging=true]/sidebar:!duration-0',
     container: 'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-out lg:flex group-data-[dragging=true]/sidebar:!duration-0',
     inner: 'flex size-full flex-col overflow-hidden divide-y divide-default',

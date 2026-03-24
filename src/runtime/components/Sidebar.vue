@@ -92,7 +92,7 @@ export interface SidebarSlots {
   close?(props: { ui: Sidebar['ui'], state: SidebarState }): VNode[]
   default?(props: { state: SidebarState, open: boolean, close: () => void }): VNode[]
   footer?(props: { state: SidebarState, open: boolean, close: () => void }): VNode[]
-  rail?(props: { ui: Sidebar['ui'], state: SidebarState }): VNode[]
+  rail?(props: { ui: Sidebar['ui'], state: SidebarState, onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): VNode[]
   content?(props: { close: () => void }): VNode[]
 }
 </script>
@@ -194,6 +194,8 @@ const canCollapse = computed(() => isResizable.value && props.collapsible !== 'n
 const sidebarId = `sidebar-${props.id || useId()}`
 const desktopCollapsed = ref(!modelOpen.value)
 
+const effectiveCollapsedSize = computed(() => props.collapsedSize ?? 4)
+
 const { el: containerEl, size: sidebarSize, isDragging, isCollapsed, onMouseDown: handleMouseDown, onTouchStart: handleTouchStart, onDoubleClick: handleDoubleClick, collapse } = useResizable(sidebarId, computed(() => ({
   side: props.side,
   minSize: props.minSize,
@@ -201,7 +203,7 @@ const { el: containerEl, size: sidebarSize, isDragging, isCollapsed, onMouseDown
   defaultSize: props.defaultSize,
   resizable: isResizable.value,
   collapsible: canCollapse.value,
-  collapsedSize: props.collapsedSize ?? Math.max(0, props.minSize - 8),
+  collapsedSize: effectiveCollapsedSize.value,
   unit: 'rem' as const,
   persistent: true,
   storage: 'cookie' as const
@@ -212,27 +214,8 @@ if (!isMobile.value && canCollapse.value && isCollapsed.value) {
   modelOpen.value = false
 }
 
-// Track whether mousedown resulted in a drag (to distinguish click vs drag on the rail)
-let didDrag = false
-
-function onRailMouseDown(e: MouseEvent) {
-  didDrag = false
-  const startX = e.clientX
-  const onMove = (ev: MouseEvent) => {
-    if (Math.abs(ev.clientX - startX) > 3) didDrag = true
-  }
-  const onUp = () => {
-    document.removeEventListener('mousemove', onMove)
-    document.removeEventListener('mouseup', onUp)
-  }
-  document.addEventListener('mousemove', onMove)
-  document.addEventListener('mouseup', onUp)
-  handleMouseDown(e)
-}
-
 function onRailClick() {
-  if (!isResizable.value) return (open.value = !open.value)
-  if (!didDrag && canCollapse.value) collapse(!isCollapsed.value)
+  if (!isResizable.value) open.value = !open.value
 }
 
 // Dynamic cursor: ew-resize (bidirectional) by default, directional at bounds
@@ -367,7 +350,7 @@ const menuProps = toRef(() => defu(props.menu, {
       :class="ui.root({ class: [uiProp?.root, props.class] })"
       :style="isResizable ? {
         '--sidebar-width': `${expandedWidth}rem`,
-        ...(props.collapsedSize && props.collapsible === 'icon' ? { '--sidebar-width-icon': `${props.collapsedSize}rem` } : {})
+        ...(props.collapsible === 'icon' ? { '--sidebar-width-icon': `${effectiveCollapsedSize}rem` } : {})
       } : undefined"
     >
       <!-- Gap spacer: reserves layout space for the fixed sidebar -->
@@ -386,7 +369,15 @@ const menuProps = toRef(() => defu(props.menu, {
       >
         <ReuseInnerTemplate />
 
-        <slot v-if="rail" name="rail" :state="state" :ui="ui">
+        <slot
+          v-if="rail"
+          name="rail"
+          :state="state"
+          :ui="ui"
+          :on-mouse-down="handleMouseDown"
+          :on-touch-start="handleTouchStart"
+          :on-double-click="handleDoubleClick"
+        >
           <button
             data-slot="rail"
             :data-state="state"
@@ -394,8 +385,8 @@ const menuProps = toRef(() => defu(props.menu, {
             :tabindex="-1"
             :class="ui.rail({ class: uiProp?.rail })"
             :style="railCursor ? { cursor: railCursor } : undefined"
-            @mousedown="isResizable ? onRailMouseDown($event) : undefined"
-            @touchstart="isResizable && !isCollapsed ? handleTouchStart($event) : undefined"
+            @mousedown="isResizable ? handleMouseDown($event) : undefined"
+            @touchstart="isResizable ? handleTouchStart($event) : undefined"
             @dblclick="isResizable ? handleDoubleClick($event) : undefined"
             @click="onRailClick"
           />
