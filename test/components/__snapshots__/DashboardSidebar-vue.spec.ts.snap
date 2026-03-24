@@ -110,7 +110,7 @@ exports[`DashboardSidebar > renders with footer slot correctly 1`] = `
   <div id="dashboard-sidebar-v-0" data-collapsed="false" data-dragging="false" data-slot="root" class="relative hidden lg:flex flex-col min-h-svh min-w-16 w-(--width) shrink-0 border-e border-default" style="--width: 15%;">
     <!--v-if-->
     <div data-slot="body" class="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-2"></div>
-    <div data-slot="footer" class="shrink-0 flex items-center gap-1.5 px-4 py-2">Footer slot</div>
+    <div data-slot="footer" class="shrink-0 flex items-center gap-1.5 overflow-hidden px-4 py-2">Footer slot</div>
   </div>
   <!--v-if-->
   <!--v-if-->
