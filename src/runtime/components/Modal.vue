@@ -144,6 +144,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
       <DialogContent
         data-slot="content"
         :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })"
+        :aria-describedby="(!description && !slots.description) ? 'undefined' : undefined"
         v-bind="contentProps"
         @after-enter="emits('after:enter')"
         @after-leave="emits('after:leave')"
