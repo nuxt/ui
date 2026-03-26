@@ -627,6 +627,7 @@ defineExpose({
             </tr>
             <template v-for="virtualRow in virtualizer.getVirtualItems()" :key="centerRows[virtualRow.index]?.id">
               <ReuseRowTemplate
+                v-if="centerRows[virtualRow.index]"
                 :row="centerRows[virtualRow.index]!"
                 :style="{ height: `${virtualRow.size}px` }"
               />
