@@ -622,14 +622,18 @@ defineExpose({
           <ReuseRowTemplate v-for="row in topRows" :key="row.id" :row="row" />
 
           <template v-if="virtualizer">
-            <tr v-if="virtualPaddingTop > 0" :style="{ height: `${virtualPaddingTop}px` }" aria-hidden="true" />
+            <tr v-if="virtualPaddingTop > 0" :style="{ height: `${virtualPaddingTop}px` }" aria-hidden="true">
+              <td />
+            </tr>
             <template v-for="virtualRow in virtualizer.getVirtualItems()" :key="centerRows[virtualRow.index]?.id">
               <ReuseRowTemplate
                 :row="centerRows[virtualRow.index]!"
                 :style="{ height: `${virtualRow.size}px` }"
               />
             </template>
-            <tr v-if="virtualPaddingBottom > 0" :style="{ height: `${virtualPaddingBottom}px` }" aria-hidden="true" />
+            <tr v-if="virtualPaddingBottom > 0" :style="{ height: `${virtualPaddingBottom}px` }" aria-hidden="true">
+              <td />
+            </tr>
           </template>
 
           <template v-else>
