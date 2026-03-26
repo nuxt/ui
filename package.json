@@ -214,7 +214,7 @@
     "vue-tsc": "^3.2.6"
   },
   "peerDependencies": {
-    "@inertiajs/vue3": "^2.0.7",
+    "@inertiajs/vue3": "^2.0.7 || ^3.0.0",
     "@nuxt/content": "^3.0.0",
     "joi": "^18.0.0",
     "superstruct": "^2.0.0",
