@@ -1971,10 +1971,27 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <div data-slot="root" class="relative flex items-start flex-row">
+            <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+                <!---->
+                <!--v-if-->
+              </button></div>
+            <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0-0" data-slot="label" class="block font-medium text-default">Select all</label>
+              <!--v-if-->
+            </div>
+          </div>
+        </th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Date</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent -mx-2.5"><span class="iconify i-lucide:arrow-up-down shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Email</span>
+            <!--v-if-->
+          </button></th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1982,7 +1999,30 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
     </tbody>
-    <!--v-if-->
+    <tfoot data-slot="tfoot" class="sticky bottom-0 inset-x-0 bg-default/75 backdrop-blur z-1">
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Total: €2,990.00</th>
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+      </tr>
+    </tfoot>
   </table>
 </div>"
 `;
