@@ -1,4 +1,5 @@
 import { describe, it, expect, test } from 'vitest'
+import { h } from 'vue'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -128,6 +129,46 @@ describe('NavigationMenu', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('does not treat global item-content slot as a trigger for items without children', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'horizontal',
+        variant: 'link',
+        items: [[
+          { label: 'NoChildren', to: '/' },
+          { label: 'WithChildren', to: '/', children: [{ label: 'Child', to: '/child' }] }
+        ]]
+      },
+      slots: {
+        'item-content': ({ item }: { item: { children?: unknown[] } }) => h('div', item.children?.length ? 'custom' : '')
+      }
+    })
+
+    // Only the item with `children` uses NavigationMenuTrigger; the slot must not force a trigger on plain links.
+    expect(wrapper.findAll('[data-navigation-menu-trigger]')).toHaveLength(1)
+  })
+
+  it('item-trailing slot fully overrides default trailing icons', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'horizontal',
+        variant: 'link',
+        items: [[
+          { label: 'NoChildren', to: '/' },
+          { label: 'WithChildren', to: '/', children: [{ label: 'Child', to: '/child' }] }
+        ]]
+      },
+      slots: {
+        'item-trailing': ({ item }: { item: { children?: unknown[] } }) => item.children?.length
+          ? h('span', { 'data-testid': 'custom-trailing' }, 'V')
+          : undefined
+      }
+    })
+
+    expect(wrapper.findAll('[data-slot="linkTrailingIcon"]')).toHaveLength(0)
+    expect(wrapper.findAll('[data-testid="custom-trailing"]')).toHaveLength(1)
   })
 
   test('should have the correct types', () => {

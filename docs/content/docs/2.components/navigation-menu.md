@@ -1340,6 +1340,10 @@ You can also use the `#item`, `#item-leading`, `#item-label`, `#item-trailing` a
 
 Use the `#item-trailing` slot or the `slot` property (`#{{ item.slot }}-trailing`) to add a [DropdownMenu](/docs/components/dropdown-menu) that appears on hover, similar to Notion or Linear.
 
+::note
+When you pass `#item-trailing` (or `#{{ item.slot }}-trailing`), it replaces the default trailing UI for every item (badge and chevron). Use the slot props (`item`, `active`, etc.) to render different content per row.
+::
+
 ::component-example
 ---
 collapse: true
@@ -1350,6 +1354,10 @@ name: 'navigation-menu-trailing-slot-example'
 ### With content slot
 
 Use the `#item-content` slot or the `slot` property (`#{{ item.slot }}-content`) to customize the content of a specific item.
+
+::note
+In **horizontal** orientation, the menu trigger and panel are only rendered for items that define a `children` array. The `#item-content` slot customizes what appears inside that panel, it does not create a dropdown for items without `children`.
+::
 
 ::component-example
 ---
