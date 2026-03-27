@@ -256,8 +256,7 @@
     "@nuxt/ui": "workspace:*",
     "nitropack": "^2.13.0",
     "unplugin": "^3.0.0",
-    "c12": "^3.3.2",
-    "@nuxtjs/mdc": "https://pkg.pr.new/@nuxtjs/mdc@e14aa46"
+    "c12": "^3.3.2"
   },
   "keywords": [
     "nuxt-ui",
