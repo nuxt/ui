@@ -1,13 +1,22 @@
 import { z } from 'zod'
 import { camelCase, upperFirst, kebabCase } from 'scule'
 import { queryCollection } from '@nuxt/content/server'
-import { normalizeComponentName } from '~~/server/utils/normalizeComponentName'
 
 export default defineMcpTool({
   description: 'Retrieves detailed metadata for a Nuxt UI component including props, slots, and events',
+  annotations: {
+    readOnlyHint: true,
+    destructiveHint: false,
+    idempotentHint: true,
+    openWorldHint: false
+  },
   inputSchema: {
     componentName: z.string().describe('The name of the component (PascalCase)')
   },
+  inputExamples: [
+    { componentName: 'Button' },
+    { componentName: 'UTable' }
+  ],
   cache: '30m',
   async handler({ componentName }) {
     const event = useEvent()
@@ -26,16 +35,21 @@ export default defineMcpTool({
       .first()
 
     if (!page) {
-      return errorResult(`Component '${componentName}' not found in documentation`)
+      throw createError({ statusCode: 404, message: `Component '${componentName}' not found in documentation` })
     }
 
     // Use the same approach as the docs components for metadata
     const camelName = camelCase(normalizedName)
     const componentMetaName = `U${upperFirst(camelName)}`
 
-    const metadata = await $fetch<any>(`/api/component-meta/${componentMetaName}.json`)
+    let metadata
+    try {
+      metadata = await $fetch<Record<string, any>>(`/api/component-meta/${componentMetaName}.json`)
+    } catch {
+      throw createError({ statusCode: 404, message: `Metadata for component '${componentName}' not available` })
+    }
 
-    return jsonResult({
+    return {
       name: normalizedName,
       title: page.title,
       description: page.description,
@@ -48,6 +62,6 @@ export default defineMcpTool({
         slots: metadata.meta.slots,
         emits: metadata.meta.emits
       }
-    })
+    }
   }
 })
