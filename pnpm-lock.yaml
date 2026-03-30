@@ -428,8 +428,8 @@ importers:
         specifier: ^3.8.1
         version: 3.8.1
       shiki:
-        specifier: ^3.23.0
-        version: 3.23.0
+        specifier: ^4.0.2
+        version: 4.0.2
       shiki-stream:
         specifier: ^0.1.4
         version: 0.1.4(vue@3.5.30(typescript@6.0.2))
@@ -450,7 +450,7 @@ importers:
         version: 4.2.2
       tiptap-extension-code-block-shiki:
         specifier: ^1.1.0
-        version: 1.1.0(@tiptap/core@3.21.0(@tiptap/pm@3.21.0))(@tiptap/pm@3.21.0)(shiki@3.23.0)
+        version: 1.1.0(@tiptap/core@3.21.0(@tiptap/pm@3.21.0))(@tiptap/pm@3.21.0)(shiki@4.0.2)
       ufo:
         specifier: ^1.6.3
         version: 1.6.3
@@ -16603,11 +16603,11 @@ snapshots:
 
   tinyrainbow@3.1.0: {}
 
-  tiptap-extension-code-block-shiki@1.1.0(@tiptap/core@3.21.0(@tiptap/pm@3.21.0))(@tiptap/pm@3.21.0)(shiki@3.23.0):
+  tiptap-extension-code-block-shiki@1.1.0(@tiptap/core@3.21.0(@tiptap/pm@3.21.0))(@tiptap/pm@3.21.0)(shiki@4.0.2):
     dependencies:
       '@tiptap/core': 3.21.0(@tiptap/pm@3.21.0)
       '@tiptap/pm': 3.21.0
-      shiki: 3.23.0
+      shiki: 4.0.2
 
   tldts-core@7.0.23: {}
 
