@@ -1,6 +1,7 @@
 import { computed } from 'vue'
 import { beforeEach, describe, expect, it, vi, expectTypeOf } from 'vitest'
 import type { SuggestionOptions } from '@tiptap/suggestion'
+import { PluginKey } from '@tiptap/pm/state'
 import { useEditorMenu } from '../../src/runtime/composables/useEditorMenu'
 import type { EditorMenuOptions } from '../../src/runtime/composables/useEditorMenu'
 import type { EditorSuggestionMenuProps } from '../../src/runtime/components/EditorSuggestionMenu.vue'
@@ -98,6 +99,25 @@ describe('useEditorMenu', () => {
     expect(items).toEqual([{ label: 'Alpha' }])
   })
 
+  it('keeps plugin identity fields authoritative over suggestion overrides', () => {
+    const wrongPluginKey = new PluginKey('wrong-plugin-key')
+    const wrongEditor = createEditor()
+
+    useEditorMenu(createOptions({
+      suggestion: {
+        pluginKey: wrongPluginKey,
+        editor: wrongEditor,
+        char: '@'
+      } as Partial<SuggestionOptions>
+    }))
+
+    const config = getSuggestionConfig()
+
+    expect(config.pluginKey).not.toBe(wrongPluginKey)
+    expect(config.editor).not.toBe(wrongEditor)
+    expect(config.char).toBe(':')
+  })
+
   it('keeps menu callbacks authoritative over suggestion overrides', () => {
     const suggestionItems = vi.fn(() => [])
     const suggestionCommand = vi.fn()
@@ -119,7 +139,7 @@ describe('useEditorMenu', () => {
   })
 
   it('types suggestion options on the composable and component props', () => {
-    expectTypeOf<EditorMenuOptions<{ label: string }>['suggestion']>().toMatchTypeOf<Partial<SuggestionOptions> | undefined>()
-    expectTypeOf<EditorSuggestionMenuProps['suggestion']>().toMatchTypeOf<Partial<SuggestionOptions> | undefined>()
+    expectTypeOf<EditorMenuOptions<{ label: string }>['suggestion']>().toEqualTypeOf<Omit<Partial<SuggestionOptions>, 'pluginKey' | 'editor' | 'char' | 'items' | 'command' | 'render'> | undefined>()
+    expectTypeOf<EditorSuggestionMenuProps['suggestion']>().toEqualTypeOf<Omit<Partial<SuggestionOptions>, 'pluginKey' | 'editor' | 'char' | 'items' | 'command' | 'render'> | undefined>()
   })
 })

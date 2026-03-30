@@ -13,6 +13,11 @@ import type { FloatingUIOptions } from '../types/editor'
 import { buildFloatingUIMiddleware } from '../utils/editor'
 import { get, isArrayOfArray } from '../utils'
 
+type EditorMenuSuggestionOptions = Omit<
+  Partial<SuggestionOptions>,
+  'pluginKey' | 'editor' | 'char' | 'items' | 'command' | 'render'
+>
+
 export interface EditorMenuOptions<T = any> {
   editor: Editor
   /**
@@ -68,7 +73,7 @@ export interface EditorMenuOptions<T = any> {
   /**
    * Optional TipTap Suggestion matching options.
    */
-  suggestion?: Partial<SuggestionOptions>
+  suggestion?: EditorMenuSuggestionOptions
   /**
    * The DOM element to append the menu to. Default is the editor's parent element.
    *
@@ -337,7 +342,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     element.addEventListener('mousedown', handleMouseDown)
 
     const appendToElement = typeof options.appendTo === 'function' ? options.appendTo() : options.appendTo
-    ;(appendToElement ?? options.editor.view.dom.parentElement)?.appendChild(element)
+      ; (appendToElement ?? options.editor.view.dom.parentElement)?.appendChild(element)
     if (renderer.element) {
       element.appendChild(renderer.element)
     }
@@ -494,10 +499,10 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
   // Create the suggestion plugin
   const plugin = Suggestion({
+    ...(options.suggestion || {}),
     pluginKey: pluginKeyInstance,
     editor: options.editor,
     char: options.char,
-    ...(options.suggestion || {}),
     items: ({ query: q }: { query: string }) => {
       // Update the searchTerm ref for external access
       searchTerm.value = q
