@@ -9,17 +9,17 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^3.0.63",
-    "@ai-sdk/gateway": "^3.0.77",
-    "@ai-sdk/vue": "^3.0.134",
-    "@iconify-json/lucide": "^1.2.98",
+    "@ai-sdk/anthropic": "^3.0.64",
+    "@ai-sdk/gateway": "^3.0.83",
+    "@ai-sdk/vue": "^3.0.141",
+    "@iconify-json/lucide": "^1.2.100",
     "@iconify-json/simple-icons": "^1.2.75",
     "@internationalized/date": "^3.12.0",
     "@nuxt/content": "^3.12.0",
     "@nuxt/ui": "workspace:*",
     "@tiptap/extension-emoji": "^3.21.0",
     "@tiptap/extension-text-align": "^3.21.0",
-    "ai": "^6.0.134",
+    "ai": "^6.0.141",
     "nuxt": "^4.4.2",
     "tailwindcss": "^4.2.2",
     "zod": "^4.3.6"
