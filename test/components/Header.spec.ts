@@ -41,7 +41,7 @@ describe('Header', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
-  it('does not suppress auto-focus in modal menu props', async () => {
+  it('does not suppress auto-focus when modal menu opens', async () => {
     const wrapper = await mountSuspended(Header, {
       props: {
         open: true,
@@ -50,7 +50,7 @@ describe('Header', () => {
       }
     })
 
-    // Verify the modal content is rendered when open
-    expect(wrapper.html()).toBeTruthy()
+    const dialog = wrapper.find('[role="dialog"]')
+    expect(dialog.exists()).toBe(true)
   })
 })
