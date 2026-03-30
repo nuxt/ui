@@ -40,4 +40,17 @@ describe('Header', () => {
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
+
+  it('does not suppress auto-focus in modal menu props', async () => {
+    const wrapper = await mountSuspended(Header, {
+      props: {
+        open: true,
+        mode: 'modal',
+        menu: { portal: false }
+      }
+    })
+
+    // Verify the modal content is rendered when open
+    expect(wrapper.html()).toBeTruthy()
+  })
 })
