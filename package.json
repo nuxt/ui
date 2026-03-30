@@ -188,7 +188,7 @@
     "ufo": "^1.6.3",
     "unplugin": "^3.0.0",
     "unplugin-auto-import": "^21.0.0",
-    "unplugin-vue-components": "^31.1.0",
+    "unplugin-vue-components": "^32.0.0",
     "vaul-vue": "0.4.1",
     "vue-component-type-helpers": "^3.2.6"
   },
