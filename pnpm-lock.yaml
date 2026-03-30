@@ -353,8 +353,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxtjs/mcp-toolkit':
-        specifier: ^0.13.0
-        version: 0.13.0(h3@2.0.1-rc.11)(magicast@0.5.2)(zod@4.3.6)
+        specifier: https://pkg.pr.new/@nuxtjs/mcp-toolkit@196
+        version: https://pkg.pr.new/@nuxtjs/mcp-toolkit@196(h3@2.0.1-rc.11)(magicast@0.5.2)(zod@4.3.6)
       '@nuxtjs/mdc':
         specifier: ^0.21.0
         version: 0.21.0(magicast@0.5.2)
@@ -1835,8 +1835,9 @@ packages:
   '@nuxtjs/color-mode@3.5.2':
     resolution: {integrity: sha512-cC6RfgZh3guHBMLLjrBB2Uti5eUoGM9KyauOaYS9ETmxNWBMTvpgjvSiSJp1OFljIXPIqVTJ3xtJpSNZiO3ZaA==}
 
-  '@nuxtjs/mcp-toolkit@0.13.0':
-    resolution: {integrity: sha512-j5+491GyFwwvHBD4/iD7FlScfppJl28tlav46naYNZQ1gkqkmalhzwUdbUj/oekuIz4iQnN9XXR6UxFy3nn6FQ==}
+  '@nuxtjs/mcp-toolkit@https://pkg.pr.new/@nuxtjs/mcp-toolkit@196':
+    resolution: {integrity: sha512-RFewhY26dWGdVnCS8n3VCl9ODXkPwRTyh2rjC7AlamFNcZVLinq8P/QQYk1LoVCLi/aTvAnD8Bly9fcHybeYOQ==, tarball: https://pkg.pr.new/@nuxtjs/mcp-toolkit@196}
+    version: 0.13.0
     peerDependencies:
       agents: '>=0.8.7'
       h3: '>=1.15.10'
@@ -10012,7 +10013,7 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@nuxtjs/mcp-toolkit@0.13.0(h3@2.0.1-rc.11)(magicast@0.5.2)(zod@4.3.6)':
+  '@nuxtjs/mcp-toolkit@https://pkg.pr.new/@nuxtjs/mcp-toolkit@196(h3@2.0.1-rc.11)(magicast@0.5.2)(zod@4.3.6)':
     dependencies:
       '@modelcontextprotocol/sdk': 1.28.0(zod@4.3.6)
       '@nuxt/kit': 4.4.2(magicast@0.5.2)
