@@ -67,7 +67,7 @@ type ExtendSlotWithVersion<K extends keyof ChatMessageSlots>
 export type ChatMessagesSlots = {
   [K in keyof ChatMessageSlots]?: ExtendSlotWithVersion<K>
 } & {
-  default?(props?: {}): VNode[]
+  default?(props: { registerMessageRef: (id: string, element: ComponentPublicInstance | null) => void }): VNode[]
   indicator?(props: { ui: ChatMessages['ui'] }): VNode[]
   viewport?(props: { ui: ChatMessages['ui'], onClick: () => void }): VNode[]
 }
@@ -316,7 +316,7 @@ defineExpose({
     :class="ui.root({ class: [uiProp?.root, props.class] })"
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
-    <slot>
+    <slot :register-message-ref="registerMessageRef">
       <template v-for="message in messages" :key="message.id">
         <UChatMessage
           v-if="message.parts?.length"
