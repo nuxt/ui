@@ -166,9 +166,11 @@ Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Te
 prettier: true
 ignore:
   - placeholder
+  - avatar.loading
 props:
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   size: md
   variant: outline
   placeholder: 'Search...'

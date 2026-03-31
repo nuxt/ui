@@ -1,11 +1,10 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { mount, flushPromises } from '@vue/test-utils'
 import Checkbox from '../../src/runtime/components/Checkbox.vue'
-import type { CheckboxProps, CheckboxSlots } from '../../src/runtime/components/Checkbox.vue'
 import type { FormInputEvents } from '../../src/module'
-import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/checkbox'
 
@@ -14,7 +13,7 @@ describe('Checkbox', () => {
   const variants = Object.keys(theme.variants.variant) as any
   const indicators = Object.keys(theme.variants.indicator) as any
 
-  it.each([
+  renderEach(Checkbox, [
     // Props
     ['with modelValue', { props: { modelValue: true } }],
     ['with defaultValue', { props: { defaultValue: true } }],
@@ -28,21 +27,21 @@ describe('Checkbox', () => {
     ['with label', { props: { label: 'Label' } }],
     ['with required', { props: { label: 'Label', required: true } }],
     ['with description', { props: { label: 'Label', description: 'Description' } }],
-    ...sizes.map((size: string) => [`with size ${size}`, { props: { size, defaultValue: '1' } }]),
-    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant, defaultValue: '1' } }]),
-    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral', defaultValue: '1' } }]),
-    ...indicators.map((indicator: string) => [`with indicator ${indicator}`, { props: { indicator, defaultValue: '1' } }]),
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { size, defaultValue: true } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant, defaultValue: true } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral', defaultValue: true } }]),
+    ...indicators.map((indicator: string) => [`with indicator ${indicator}`, { props: { indicator, defaultValue: true } }]),
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
+    ['with trueValue/falseValue as string', { props: { trueValue: 'yes', falseValue: 'no', defaultValue: 'yes' } }],
+    ['with trueValue/falseValue as number', { props: { trueValue: 1, falseValue: 0, defaultValue: 1 } }],
+    ['with trueValue/falseValue unchecked', { props: { trueValue: 'yes', falseValue: 'no', defaultValue: 'no' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'inline-flex' } }],
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
     // Slots
     ['with label slot', { slots: { label: () => 'Label slot' } }],
     ['with description slot', { slots: { label: () => 'Description slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxProps, slots?: Partial<CheckboxSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Checkbox)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Checkbox, {
@@ -67,6 +66,23 @@ describe('Checkbox', () => {
       const input = wrapper.findComponent({ name: 'CheckboxRoot' })
       await input.vm.$emit('update:modelValue', false)
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
+    })
+
+    test('toggle with custom trueValue/falseValue via click', async () => {
+      const wrapper = mount(Checkbox, {
+        props: { trueValue: 'yes', falseValue: 'no', defaultValue: 'no' }
+      })
+      const button = wrapper.find('button')
+
+      await button.trigger('click')
+      await flushPromises()
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['yes'])
+      expect(wrapper.emitted('change')).toHaveLength(1)
+
+      await button.trigger('click')
+      await flushPromises()
+      expect(wrapper.emitted('update:modelValue')?.[1]).toEqual(['no'])
+      expect(wrapper.emitted('change')).toHaveLength(2)
     })
   })
 

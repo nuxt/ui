@@ -30,7 +30,13 @@ playgrounds/
 
 ## CLI for Scaffolding
 
-Always use the CLI when creating new components:
+Link the CLI first (one-time setup):
+
+```bash
+npm link
+```
+
+Then use it to create new components:
 
 ```bash
 nuxt-ui make component <name> [options]
@@ -103,6 +109,7 @@ PR Review:
 | Props defaults | Use `withDefaults()` for runtime, JSDoc `@defaultValue` for docs |
 | Template slots | Add `data-slot="name"` attributes on all elements |
 | Computed ui | Always use `computed(() => tv(...))` for reactive theming |
+| Theme support | Use `useComponentUI(name, props)` to merge Theme context with component `ui` prop |
 | Semantic colors | Use `text-default`, `bg-elevated`, etc. - never Tailwind palette |
 | Reka UI props | Use `reactivePick` + `useForwardPropsEmits` to forward props |
 | Form components | Use `useFormField` and `useFieldGroup` composables |
@@ -110,6 +117,7 @@ PR Review:
 ## Commands
 
 ```bash
+pnpm run dev:prepare  # Generate type stubs (run after install)
 pnpm run dev          # Nuxt playground
 pnpm run dev:vue      # Vue playground
 pnpm run docs         # Documentation site

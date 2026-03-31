@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Адправіць'
     },
+    chatReasoning: {
+      thinking: 'Думае…',
+      thought: 'Падумаў',
+      thoughtFor: 'Думаў {duration}'
+    },
     colorMode: {
       dark: 'Цёмная',
       light: 'Светлая',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'На гэтай старонцы'
+    },
+    dropdownMenu: {
+      noMatch: 'Супадзенняў не знойдзена',
+      search: 'Пошук…'
     },
     dashboardSearch: {
       theme: 'Тэма'
@@ -111,6 +120,10 @@ export default defineLocale<Messages>({
       pre: {
         copy: 'Скапіяваць код у буфер абмену'
       }
+    },
+    sidebar: {
+      close: 'Закрыць',
+      toggle: 'Пераключыць'
     },
     selectMenu: {
       create: 'Стварыць "{label}"',

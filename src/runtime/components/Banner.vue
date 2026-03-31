@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/banner'
 import type { ButtonProps, IconProps, LinkProps, LinkPropsKeys } from '../types'
@@ -52,10 +53,10 @@ export interface BannerProps {
 }
 
 export interface BannerSlots {
-  leading(props: { ui: Banner['ui'] }): any
-  title(props?: {}): any
-  actions(props?: {}): any
-  close(props: { ui: Banner['ui'] }): any
+  leading?(props: { ui: Banner['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  close?(props: { ui: Banner['ui'] }): VNode[]
 }
 
 export interface BannerEmits {
@@ -67,6 +68,7 @@ export interface BannerEmits {
 import { computed, ref, onMounted, useId } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useHead, useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -82,6 +84,7 @@ const emits = defineEmits<BannerEmits>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Banner['AppConfig']
+const uiProp = useComponentUI('banner', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.banner || {}) })({
   color: props.color,
@@ -147,7 +150,7 @@ function onClose() {
     class="banner"
     :data-banner-id="id"
     data-slot="root"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
   >
     <ULink
       v-if="to"
@@ -157,31 +160,31 @@ function onClose() {
       tabindex="-1"
       raw
     >
-      <span class="absolute inset-0 " aria-hidden="true" />
+      <span class="absolute inset-0" aria-hidden="true" />
     </ULink>
 
-    <UContainer data-slot="container" :class="ui.container({ class: props.ui?.container })">
-      <div data-slot="left" :class="ui.left({ class: props.ui?.left })" />
+    <UContainer data-slot="container" :class="ui.container({ class: uiProp?.container })">
+      <div data-slot="left" :class="ui.left({ class: uiProp?.left })" />
 
-      <div data-slot="center" :class="ui.center({ class: props.ui?.center })">
+      <div data-slot="center" :class="ui.center({ class: uiProp?.center })">
         <slot name="leading" :ui="ui">
-          <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+          <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
         </slot>
 
-        <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
           <slot name="title">
             {{ title }}
           </slot>
         </div>
 
-        <div v-if="actions?.length || !!slots.actions" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
+        <div v-if="actions?.length || !!slots.actions" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
           <slot name="actions">
             <UButton v-for="(action, index) in actions" :key="index" color="neutral" size="xs" v-bind="action" />
           </slot>
         </div>
       </div>
 
-      <div data-slot="right" :class="ui.right({ class: props.ui?.right })">
+      <div data-slot="right" :class="ui.right({ class: uiProp?.right })">
         <slot name="close" :ui="ui">
           <UButton
             v-if="close"
@@ -192,7 +195,7 @@ function onClose() {
             :aria-label="t('banner.close')"
             v-bind="(typeof close === 'object' ? close : {})"
             data-slot="close"
-            :class="ui.close({ class: props.ui?.close })"
+            :class="ui.close({ class: uiProp?.close })"
             @click="onClose"
           />
         </slot>

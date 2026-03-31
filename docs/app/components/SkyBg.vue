@@ -55,7 +55,7 @@ const twinkleDuration = computed(() => {
 </script>
 
 <template>
-  <div class="absolute pointer-events-none z-[-1] overflow-hidden" :class="isIndex ? 'inset-y-0 left-4 right-4 lg:right-[50%]' : 'inset-0'">
+  <div class="absolute pointer-events-none z-[-1] overflow-hidden" :class="isIndex ? 'inset-y-0 inset-x-4 lg:right-[50%]' : 'inset-0'">
     <div
       v-for="star in stars"
       :key="star.id"

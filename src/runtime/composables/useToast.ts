@@ -9,6 +9,10 @@ export const toastMaxInjectionKey: InjectionKey<Ref<number | undefined>> = Symbo
 export interface Toast extends Omit<ToastProps, 'defaultOpen'>, EmitsToProps<ToastEmits> {
   id: string | number
   onClick?: (toast: Toast) => void
+  /** @internal */
+  _duplicate?: number
+  /** @internal */
+  _updated?: boolean
 }
 
 export function useToast() {
@@ -45,6 +49,17 @@ export function useToast() {
       ...toast
     } as Toast
 
+    const existingIndex = toasts.value.findIndex((t: Toast) => t.id === body.id)
+    if (existingIndex !== -1) {
+      toasts.value[existingIndex] = {
+        ...toasts.value[existingIndex] as Toast,
+        ...body,
+        _duplicate: ((toasts.value[existingIndex] as Toast)._duplicate || 0) + 1
+      }
+
+      return body
+    }
+
     queue.push(body)
 
     processQueue()
@@ -57,13 +72,30 @@ export function useToast() {
     if (index !== -1) {
       toasts.value[index] = {
         ...toasts.value[index] as Toast,
-        ...toast
+        ...toast,
+        duration: toast.duration,
+        open: true,
+        _updated: true
       }
+
+      nextTick(() => {
+        const i = toasts.value.findIndex((t: Toast) => t.id === id)
+        if (i !== -1 && toasts.value[i]!._updated) {
+          toasts.value[i] = {
+            ...toasts.value[i] as Toast,
+            _updated: undefined
+          }
+        }
+      })
     }
   }
 
   function remove(id: string | number) {
     const index = toasts.value.findIndex((t: Toast) => t.id === id)
+    if (index !== -1 && toasts.value[index]!._updated) {
+      return
+    }
+
     if (index !== -1) {
       toasts.value[index] = {
         ...toasts.value[index] as Toast,

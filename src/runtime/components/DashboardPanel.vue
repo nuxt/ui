@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-panel'
 import type { UseResizableProps } from '../composables/useResizable'
@@ -12,17 +13,18 @@ export interface DashboardPanelProps extends Pick<UseResizableProps, 'id' | 'min
 }
 
 export interface DashboardPanelSlots {
-  'default'(props?: {}): any
-  'header'(props?: {}): any
-  'body'(props?: {}): any
-  'footer'(props?: {}): any
-  'resize-handle'(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): any
+  'default'?(props?: {}): VNode[]
+  'header'?(props?: {}): VNode[]
+  'body'?(props?: {}): VNode[]
+  'footer'?(props?: {}): VNode[]
+  'resize-handle'?(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed, useId, toRef } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useResizable } from '../composables/useResizable'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
@@ -37,6 +39,7 @@ const props = withDefaults(defineProps<DashboardPanelProps>(), {
 defineSlots<DashboardPanelSlots>()
 
 const appConfig = useAppConfig() as DashboardPanel['AppConfig']
+const uiProp = useComponentUI('dashboardPanel', props)
 const dashboardContext = useDashboard({ storageKey: 'dashboard', unit: '%' })
 
 const id = `${dashboardContext.storageKey}-panel-${props.id || useId()}`
@@ -56,13 +59,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardPan
     v-bind="$attrs"
     :data-dragging="isDragging"
     data-slot="root"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     :style="[size ? { '--width': `${size}${dashboardContext.unit}` } : undefined]"
   >
     <slot>
       <slot name="header" />
 
-      <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
+      <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
         <slot name="body" />
       </div>
 
@@ -75,7 +78,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardPan
       v-if="resizable"
       :aria-controls="id"
       data-slot="handle"
-      :class="ui.handle({ class: props.ui?.handle })"
+      :class="ui.handle({ class: uiProp?.handle })"
       @mousedown="onMouseDown"
       @touchstart="onTouchStart"
       @dblclick="onDoubleClick"

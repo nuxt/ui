@@ -11,17 +11,17 @@
   },
   "dependencies": {
     "@nuxt/ui": "workspace:*",
-    "@tiptap/extension-emoji": "^3.19.0",
-    "@tiptap/extension-text-align": "^3.19.0",
-    "tailwindcss": "^4.1.18",
-    "vue": "^3.5.25",
-    "vue-router": "^4.6.3",
+    "@tiptap/extension-emoji": "^3.21.0",
+    "@tiptap/extension-text-align": "^3.21.0",
+    "tailwindcss": "^4.2.2",
+    "vue": "^3.5.30",
+    "vue-router": "^5.0.4",
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.2",
-    "typescript": "^5.8.3",
-    "vite": "^7.2.7",
-    "vue-tsc": "^3.2.4"
+    "@vitejs/plugin-vue": "^6.0.5",
+    "typescript": "^6.0.2",
+    "vite": "^7.3.1",
+    "vue-tsc": "^3.2.6"
   }
 }

@@ -4,6 +4,7 @@ packages:
   - docs
   - playgrounds/nuxt
   - playgrounds/vue
+  - playgrounds/repl
 
 ignoredBuiltDependencies:
   - '@parcel/watcher'

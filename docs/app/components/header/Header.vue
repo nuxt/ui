@@ -1,11 +1,16 @@
 <script setup lang="ts">
 const route = useRoute()
 const { desktopLinks } = useHeader()
+const { open } = useChat()
 </script>
 
 <template>
   <UHeader
-    :ui="{ left: 'min-w-0', container: [route.path.startsWith('/blog/') ? 'max-w-none' : ''] }"
+    :ui="{
+      left: 'min-w-0',
+      right: 'gap-0.5',
+      container: [route.path.startsWith('/blog/') ? 'max-w-none' : '']
+    }"
     class="flex flex-col"
   >
     <template #left>
@@ -14,9 +19,19 @@ const { desktopLinks } = useHeader()
       <VersionMenu />
     </template>
 
-    <UNavigationMenu :items="desktopLinks" variant="link" />
+    <UNavigationMenu :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
+      <UTooltip text="Ask AI for help">
+        <UButton
+          color="neutral"
+          variant="ghost"
+          icon="i-lucide-bot-message-square"
+          aria-label="Ask AI for help"
+          @click="open = !open"
+        />
+      </UTooltip>
+
       <ThemePicker />
 
       <UTooltip text="Search" :kbds="['meta', 'K']">

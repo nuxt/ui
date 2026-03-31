@@ -1,9 +1,18 @@
-/* eslint-disable no-undef */
+let _prettier
+let _plugins
+
 self.onmessage = async function (event) {
-  self.postMessage({
-    uid: event.data.uid,
-    message: await handleMessage(event.data.message)
-  })
+  try {
+    self.postMessage({
+      uid: event.data.uid,
+      message: await handleMessage(event.data.message)
+    })
+  } catch (error) {
+    self.postMessage({
+      uid: event.data.uid,
+      error: error.message || String(error)
+    })
+  }
 }
 
 function handleMessage(message) {
@@ -14,23 +23,23 @@ function handleMessage(message) {
 }
 
 async function handleFormatMessage(message) {
-  if (!globalThis.prettier) {
-    await Promise.all([
-      import('https://cdn.jsdelivr.net/npm/prettier@3.7.4/standalone.js'),
-      import('https://cdn.jsdelivr.net/npm/prettier@3.7.4/plugins/babel.js'),
-      import('https://cdn.jsdelivr.net/npm/prettier@3.7.4/plugins/estree.js'),
-      import('https://cdn.jsdelivr.net/npm/prettier@3.7.4/plugins/html.js'),
-      import('https://cdn.jsdelivr.net/npm/prettier@3.7.4/plugins/markdown.js'),
-      import('https://cdn.jsdelivr.net/npm/prettier@3.7.4/plugins/typescript.js')
+  if (!_prettier) {
+    const [prettierModule, ...plugins] = await Promise.all([
+      import('https://cdn.jsdelivr.net/npm/prettier@3.7.4/standalone.mjs'),
+      import('https://cdn.jsdelivr.net/npm/prettier@3.7.4/plugins/babel.mjs'),
+      import('https://cdn.jsdelivr.net/npm/prettier@3.7.4/plugins/estree.mjs'),
+      import('https://cdn.jsdelivr.net/npm/prettier@3.7.4/plugins/html.mjs'),
+      import('https://cdn.jsdelivr.net/npm/prettier@3.7.4/plugins/markdown.mjs'),
+      import('https://cdn.jsdelivr.net/npm/prettier@3.7.4/plugins/typescript.mjs')
     ])
+    _prettier = prettierModule
+    _plugins = plugins
   }
 
   const { options, source } = message
-  const formatted = await prettier.format(source, {
+  return _prettier.format(source, {
     parser: 'markdown',
-    plugins: prettierPlugins,
+    plugins: _plugins,
     ...options
   })
-
-  return formatted
 }

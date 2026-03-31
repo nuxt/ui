@@ -8,22 +8,26 @@ Type @ to mention someone and select from the list of available users.`)
 const items: EditorMentionMenuItem[] = [{
   label: 'benjamincanac',
   avatar: {
-    src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+    src: 'https://avatars.githubusercontent.com/u/739984?v=4',
+    loading: 'lazy' as const
   }
 }, {
   label: 'atinux',
   avatar: {
-    src: 'https://avatars.githubusercontent.com/u/904724?v=4'
+    src: 'https://avatars.githubusercontent.com/u/904724?v=4',
+    loading: 'lazy' as const
   }
 }, {
   label: 'danielroe',
   avatar: {
-    src: 'https://avatars.githubusercontent.com/u/28706372?v=4'
+    src: 'https://avatars.githubusercontent.com/u/28706372?v=4',
+    loading: 'lazy' as const
   }
 }, {
   label: 'pi0',
   avatar: {
-    src: 'https://avatars.githubusercontent.com/u/5158436?v=4'
+    src: 'https://avatars.githubusercontent.com/u/5158436?v=4',
+    loading: 'lazy' as const
   }
 }]
 

@@ -77,7 +77,8 @@ const items: NavigationMenuItem[][] = [[{
     <template #footer="{ collapsed }">
       <UButton
         :avatar="{
-          src: 'https://github.com/benjamincanac.png'
+          src: 'https://github.com/benjamincanac.png',
+          loading: 'lazy' as const
         }"
         :label="collapsed ? undefined : 'Benjamin'"
         color="neutral"
