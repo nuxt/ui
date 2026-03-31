@@ -302,6 +302,10 @@ onMounted(() => {
   // Add event listener to update the last message height when the window is resized
   useEventListener(window, 'resize', () => nextTick(updateLastMessageHeight))
 })
+
+defineExpose({
+  registerMessageRef
+})
 </script>
 
 <template>
