@@ -543,7 +543,7 @@ function onInputEnter(e: Event) {
     return
   }
   // In case we have items but our focus is not within the combobox, just bring the focus back
-  if (props.items && props.items.length > 0) {
+  if (filteredItems.value && filteredItems.value.length > 0) {
     comboboxRootRef.value?.highlightFirstItem?.()
     e.preventDefault()
     e.stopPropagation()
