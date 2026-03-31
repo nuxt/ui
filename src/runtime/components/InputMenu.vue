@@ -539,11 +539,11 @@ watch(
 )
 function onInputEnter(e: Event) {
   // In case combobox has any focus, skip
-  if (comboboxRootRef.value?.highlightedElement) {
+  if (comboboxRootRef.value?.highlightedElement?.isConnected) {
     return
   }
   // In case we have items but our focus is not within the combobox, just bring the focus back
-  if ((props.items && props.items.length > 0)) {
+  if (props.items && props.items.length > 0) {
     comboboxRootRef.value?.highlightFirstItem?.()
     e.preventDefault()
     e.stopPropagation()
