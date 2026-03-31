@@ -59,6 +59,8 @@ import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
@@ -66,6 +68,7 @@ const appConfig = useAppConfig() as Button['AppConfig']
 const uiProp = useComponentUI('button', props)
 const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(props)
 
+const isLink = computed(() => !!(props.to || props.href))
 const linkProps = useForwardProps(pickLinkProps(props))
 
 const loadingAutoState = ref(false)
@@ -118,10 +121,11 @@ const ui = computed(() => tv({
 
 <template>
   <ULink
+    v-if="isLink"
     v-slot="{ active, ...slotProps }"
+    v-bind="{ ...$attrs, ...omit(linkProps, ['type', 'disabled', 'onClick']) }"
     :type="type"
     :disabled="disabled || isLoading"
-    v-bind="omit(linkProps, ['type', 'disabled', 'onClick'])"
     custom
   >
     <ULinkBase
@@ -151,4 +155,34 @@ const ui = computed(() => tv({
       </slot>
     </ULinkBase>
   </ULink>
+  <ULinkBase
+    v-else
+    v-bind="$attrs"
+    :as="as"
+    :type="type"
+    :disabled="disabled || isLoading"
+    data-slot="base"
+    :class="ui.base({
+      class: [uiProp?.base, props.class],
+      active: active ?? false,
+      ...(active && activeVariant ? { variant: activeVariant } : {}),
+      ...(active && activeColor ? { color: activeColor } : {})
+    })"
+    @click="onClickWrapper"
+  >
+    <slot name="leading" :ui="ui">
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon, active: active ?? false })" />
+      <UAvatar v-else-if="!!avatar" :size="((uiProp?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: uiProp?.leadingAvatar, active: active ?? false })" />
+    </slot>
+
+    <slot :ui="ui">
+      <span v-if="label !== undefined && label !== null" data-slot="label" :class="ui.label({ class: uiProp?.label, active: active ?? false })">
+        {{ label }}
+      </span>
+    </slot>
+
+    <slot name="trailing" :ui="ui">
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon, active: active ?? false })" />
+    </slot>
+  </ULinkBase>
 </template>
