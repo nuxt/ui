@@ -407,8 +407,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       minimark:
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^1.0.0
+        version: 1.0.0
       motion-v:
         specifier: ^2.2.0
         version: 2.2.0(@vueuse/core@14.2.1(vue@3.5.30(typescript@6.0.2)))(vue@3.5.30(typescript@6.0.2))
@@ -6199,6 +6199,9 @@ packages:
 
   minimark@0.2.0:
     resolution: {integrity: sha512-AmtWU9pO0C2/3AM2pikaVhJ//8E5rOpJ7+ioFQfjIq+wCsBeuZoxPd97hBFZ9qrI7DMHZudwGH3r8A7BMnsIew==}
+
+  minimark@1.0.0:
+    resolution: {integrity: sha512-4maJvB7opKTzIWeh0jIpWf6FbN/nU3UjsjDnlLuYixnLp4laKoQrCYfmKA71Qm+EV3SUsKvawO+1EBiu11+kBg==}
 
   minimatch@10.2.4:
     resolution: {integrity: sha512-oRjTw/97aTBN0RHbYCdtF1MQfvusSIBQM0IZEgzl6426+8jSC0nF1a/GmnVLpfB9yyr6g6FTqWqiZVbxrtaCIg==}
@@ -14546,6 +14549,11 @@ snapshots:
   min-indent@1.0.1: {}
 
   minimark@0.2.0: {}
+
+  minimark@1.0.0:
+    dependencies:
+      entities: 7.0.1
+      js-yaml: 4.1.1
 
   minimatch@10.2.4:
     dependencies:
