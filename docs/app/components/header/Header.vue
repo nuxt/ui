@@ -4,6 +4,7 @@ const { desktopLinks } = useHeader()
 const { open } = useChat()
 </script>
 
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
   <UHeader
     :ui="{
