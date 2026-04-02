@@ -75,7 +75,7 @@ export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
 import { useAppConfig, useNuxtApp, useRouter } from '#imports'
 import { createReusableTemplate, reactivePick } from '@vueuse/core'
 import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger, useForwardPropsEmits } from 'reka-ui'
-import { computed } from 'vue'
+import { computed, onUnmounted } from 'vue'
 import { useComponentUI } from '../../composables/useComponentUI'
 import { useLocale } from '../../composables/useLocale'
 import { useScrollspy } from '../../composables/useScrollspy'
@@ -193,24 +193,24 @@ const circuitMaskStyle = computed(() => {
 
 const nuxtApp = useNuxtApp()
 
-nuxtApp.hooks.hook("page:loading:end", () => {
-  const flatLinks = flattenLinks(props.links || []);
-  const headings = Array.from(
-    document.querySelectorAll(
-      flatLinks.map((l) => `#${CSS.escape(l.id)}`).join(", "),
-    ),
-  );
-  updateHeadings(headings);
-});
-nuxtApp.hooks.hook("page:transition:finish", () => {
-  const flatLinks = flattenLinks(props.links || []);
-  const headings = Array.from(
-    document.querySelectorAll(
-      flatLinks.map((l) => `#${CSS.escape(l.id)}`).join(", "),
-    ),
-  );
-  updateHeadings(headings);
-});
+function refreshHeadings() {
+  const flatLinks = flattenLinks(props.links || [])
+  if (!flatLinks.length) {
+    updateHeadings([])
+    return
+  }
+  const selector = flatLinks.map(l => `#${CSS.escape(l.id)}`).join(', ')
+  const headings = Array.from(document.querySelectorAll(selector))
+  updateHeadings(headings)
+}
+
+const offLoadingEnd = nuxtApp.hooks.hook('page:loading:end', refreshHeadings)
+const offTransitionFinish = nuxtApp.hooks.hook('page:transition:finish', refreshHeadings)
+
+onUnmounted(() => {
+  offLoadingEnd()
+  offTransitionFinish()
+})
 </script>
 
 <template>
