@@ -1,9 +1,9 @@
 <script lang="ts">
-import theme from '#build/ui/content/content-toc'
+import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { TocLink } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
-import type { CollapsibleRootEmits, CollapsibleRootProps } from 'reka-ui'
-import type { VNode } from 'vue'
+import theme from '#build/ui/content/content-toc'
 import type { IconProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
@@ -72,13 +72,13 @@ export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
 </script>
 
 <script setup lang="ts" generic="T extends ContentTocLink">
-import { useAppConfig, useNuxtApp, useRouter } from '#imports'
-import { createReusableTemplate, reactivePick } from '@vueuse/core'
-import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger, useForwardPropsEmits } from 'reka-ui'
 import { computed, onUnmounted } from 'vue'
+import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
+import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { useRouter, useAppConfig, useNuxtApp } from '#imports'
 import { useComponentUI } from '../../composables/useComponentUI'
-import { useLocale } from '../../composables/useLocale'
 import { useScrollspy } from '../../composables/useScrollspy'
+import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
 import UIcon from '../Icon.vue'
 
