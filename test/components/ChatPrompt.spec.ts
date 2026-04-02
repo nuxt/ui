@@ -21,6 +21,40 @@ describe('ChatPrompt', () => {
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }]
   ])
 
+  it('emits submit on Enter', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Hello' }
+    })
+
+    const textarea = wrapper.find('textarea')
+    await textarea.trigger('keydown', { key: 'Enter' })
+
+    expect(wrapper.emitted('submit')).toHaveLength(1)
+  })
+
+  it('does not emit submit on Enter during composition', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Hello' }
+    })
+
+    const textarea = wrapper.find('textarea')
+    await textarea.trigger('keydown', { key: 'Enter', isComposing: true })
+
+    expect(wrapper.emitted('submit')).toBeUndefined()
+  })
+
+  it('does not emit submit on Enter immediately after compositionend', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Hello' }
+    })
+
+    const textarea = wrapper.find('textarea')
+    await textarea.trigger('compositionend')
+    await textarea.trigger('keydown', { key: 'Enter' })
+
+    expect(wrapper.emitted('submit')).toBeUndefined()
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ChatPrompt, {
       props: {

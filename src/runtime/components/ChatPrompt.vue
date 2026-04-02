@@ -44,6 +44,7 @@ import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
+import { useIMEGuard } from '../composables/useIMEGuard'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
@@ -75,13 +76,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPrompt |
 }))
 
 const textareaRef = useTemplateRef('textareaRef')
-let compositionJustEnded = false
-
-function isComposing(event: KeyboardEvent) {
-  // `keyCode === 229` is a legacy IME fallback for keydown events where
-  // `isComposing` can be unreliable while composition is still active.
-  return event.isComposing || event.keyCode === 229
-}
 
 function submit(e: Event) {
   if (model.value.trim() === '') {
@@ -97,22 +91,9 @@ function blur(e: Event) {
   emits('close', e)
 }
 
-function onEnter(event: KeyboardEvent) {
-  // [Safari Bug](https://bugs.webkit.org/show_bug.cgi?id=165004)
-  if (compositionJustEnded || isComposing(event)) {
-    return
-  }
-
-  event.preventDefault()
+const { onKeydown: onEnter, onCompositionEnd } = useIMEGuard((event) => {
   submit(event)
-}
-
-function onCompositionEnd() {
-  compositionJustEnded = true
-  setTimeout(() => {
-    compositionJustEnded = false
-  }, 50)
-}
+})
 
 defineExpose({
   textareaRef: toRef(() => textareaRef.value?.textareaRef)
