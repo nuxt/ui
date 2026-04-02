@@ -75,6 +75,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPrompt |
 }))
 
 const textareaRef = useTemplateRef('textareaRef')
+let compositionJustEnded = false
+
+function isComposing(event: KeyboardEvent) {
+  // `keyCode === 229` is a legacy IME fallback for keydown events where
+  // `isComposing` can be unreliable while composition is still active.
+  return event.isComposing || event.keyCode === 229
+}
 
 function submit(e: Event) {
   if (model.value.trim() === '') {
@@ -88,6 +95,23 @@ function blur(e: Event) {
   textareaRef.value?.textareaRef?.blur()
 
   emits('close', e)
+}
+
+function onEnter(event: KeyboardEvent) {
+  // [Safari Bug](https://bugs.webkit.org/show_bug.cgi?id=165004)
+  if (compositionJustEnded || isComposing(event)) {
+    return
+  }
+
+  event.preventDefault()
+  submit(event)
+}
+
+function onCompositionEnd() {
+  compositionJustEnded = true
+  setTimeout(() => {
+    compositionJustEnded = false
+  }, 50)
 }
 
 defineExpose({
@@ -112,7 +136,8 @@ defineExpose({
       :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), uiProp)"
       data-slot="body"
       :class="ui.body({ class: uiProp?.body })"
-      @keydown.enter.exact.prevent="submit"
+      @keydown.enter.exact="onEnter"
+      @compositionend="onCompositionEnd"
       @keydown.esc="blur"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
