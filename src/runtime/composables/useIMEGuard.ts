@@ -20,9 +20,12 @@ export function useIMEGuard(callback: (event: KeyboardEvent) => void) {
     callback(event)
   }
 
+  let compositionEndTimer: ReturnType<typeof setTimeout>
+
   function onCompositionEnd() {
+    clearTimeout(compositionEndTimer)
     compositionJustEnded = true
-    setTimeout(() => {
+    compositionEndTimer = setTimeout(() => {
       compositionJustEnded = false
     }, 50)
   }
