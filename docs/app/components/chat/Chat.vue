@@ -3,7 +3,7 @@ import type { DefineComponent } from 'vue'
 import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import * as theme from '#build/ui'
 import ProseStreamPre from '../prose/PreStream.vue'
 
@@ -290,7 +290,7 @@ defineShortcuts({
             <UChatReasoning
               v-if="isReasoningUIPart(part)"
               :text="part.text"
-              :streaming="isReasoningStreaming(message, index, chat)"
+              :streaming="isPartStreaming(part)"
               icon="i-lucide-brain"
             >
               <MDCCached

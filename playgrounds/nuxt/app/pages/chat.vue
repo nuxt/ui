@@ -2,7 +2,7 @@
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import type { UIMessage } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 
 const toast = useToast()
 
@@ -63,7 +63,7 @@ function getFaviconUrl(url: string): string {
           <UChatReasoning
             v-if="isReasoningUIPart(part)"
             :text="part.text"
-            :streaming="isReasoningStreaming(message, index, chat)"
+            :streaming="isPartStreaming(part)"
             chevron="leading"
           >
             <MDC

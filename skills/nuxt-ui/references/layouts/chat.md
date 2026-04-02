@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
 <script setup lang="ts">
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 
 definePageMeta({ layout: 'dashboard' })
 
@@ -85,7 +85,7 @@ function onSubmit() {
               <UChatReasoning
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
-                :streaming="isReasoningStreaming(message, index, chat)"
+                :streaming="isPartStreaming(part)"
               >
                 <MDC
                   :value="part.text"
@@ -160,7 +160,7 @@ Collapsible block for AI reasoning / thinking process. Auto-opens during streami
 | `streaming` | Whether reasoning is actively streaming |
 | `open` | Controlled open state |
 
-Use `isReasoningStreaming(message, index, chat)` from `@nuxt/ui/utils/ai` to determine streaming state.
+Use `isPartStreaming(part)` from `@nuxt/ui/utils/ai` to determine streaming state.
 
 ### ChatTool
 

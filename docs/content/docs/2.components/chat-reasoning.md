@@ -63,7 +63,7 @@ props:
 ::
 
 ::tip
-Use the `isReasoningStreaming` utility from `@nuxt/ui/utils/ai` to determine if a reasoning part is currently being streamed.
+Use the `isPartStreaming` utility from `@nuxt/ui/utils/ai` to determine if a part is currently being streamed.
 ::
 
 ### Shimmer
