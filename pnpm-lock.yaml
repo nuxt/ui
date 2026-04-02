@@ -353,8 +353,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxtjs/mcp-toolkit':
-        specifier: ^0.13.1
-        version: 0.13.1(h3@2.0.1-rc.11)(magicast@0.5.2)(zod@4.3.6)
+        specifier: ^0.13.2
+        version: 0.13.2(h3@2.0.1-rc.11)(magicast@0.5.2)(zod@4.3.6)
       '@nuxtjs/mdc':
         specifier: ^0.21.0
         version: 0.21.0(magicast@0.5.2)
@@ -1631,6 +1631,16 @@ packages:
       '@cfworker/json-schema':
         optional: true
 
+  '@modelcontextprotocol/sdk@1.29.0':
+    resolution: {integrity: sha512-zo37mZA9hJWpULgkRpowewez1y6ML5GsXJPY8FI0tBBCd77HEvza4jDqRKOXgHNn867PVGCyTdzqpz0izu5ZjQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@cfworker/json-schema': ^4.1.1
+      zod: ^3.25 || ^4.0
+    peerDependenciesMeta:
+      '@cfworker/json-schema':
+        optional: true
+
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
 
@@ -1835,12 +1845,12 @@ packages:
   '@nuxtjs/color-mode@3.5.2':
     resolution: {integrity: sha512-cC6RfgZh3guHBMLLjrBB2Uti5eUoGM9KyauOaYS9ETmxNWBMTvpgjvSiSJp1OFljIXPIqVTJ3xtJpSNZiO3ZaA==}
 
-  '@nuxtjs/mcp-toolkit@0.13.1':
-    resolution: {integrity: sha512-eE2kxk+gb6RNVegyOpeu3rgbesvUQZDyWGTvYiusDihSaiL+vbJuclKqVO4gQcvUzCoaySvON5dohc3AroBPeA==}
+  '@nuxtjs/mcp-toolkit@0.13.2':
+    resolution: {integrity: sha512-/tkDra/GIew7kCPiC/6mbtFiT6TUYoMUL/ENvrDodSUZ3A/61EqNh8kT+mh5NbpJ3rohZfI1UPKwgxwo7Z+Kqw==}
     peerDependencies:
       agents: '>=0.8.7'
       h3: '>=1.15.10'
-      secure-exec: '>=0.1.0'
+      secure-exec: '>=0.2.1'
       zod: ^4.1.13
     peerDependenciesMeta:
       agents:
@@ -9423,6 +9433,28 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@modelcontextprotocol/sdk@1.29.0(zod@4.3.6)':
+    dependencies:
+      '@hono/node-server': 1.19.9(hono@4.12.2)
+      ajv: 8.18.0
+      ajv-formats: 3.0.1(ajv@8.18.0)
+      content-type: 1.0.5
+      cors: 2.8.6
+      cross-spawn: 7.0.6
+      eventsource: 3.0.7
+      eventsource-parser: 3.0.6
+      express: 5.2.1
+      express-rate-limit: 8.2.1(express@5.2.1)
+      hono: 4.12.2
+      jose: 6.1.3
+      json-schema-typed: 8.0.2
+      pkce-challenge: 5.0.1
+      raw-body: 3.0.2
+      zod: 4.3.6
+      zod-to-json-schema: 3.25.1(zod@4.3.6)
+    transitivePeerDependencies:
+      - supports-color
+
   '@napi-rs/wasm-runtime@0.2.12':
     dependencies:
       '@emnapi/core': 1.8.1
@@ -10012,9 +10044,9 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@nuxtjs/mcp-toolkit@0.13.1(h3@2.0.1-rc.11)(magicast@0.5.2)(zod@4.3.6)':
+  '@nuxtjs/mcp-toolkit@0.13.2(h3@2.0.1-rc.11)(magicast@0.5.2)(zod@4.3.6)':
     dependencies:
-      '@modelcontextprotocol/sdk': 1.28.0(zod@4.3.6)
+      '@modelcontextprotocol/sdk': 1.29.0(zod@4.3.6)
       '@nuxt/kit': 4.4.2(magicast@0.5.2)
       h3: 2.0.1-rc.11
       tinyglobby: 0.2.15
