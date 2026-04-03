@@ -329,6 +329,7 @@ onMounted(() => {
     <UChatMessage
       v-if="showIndicator"
       id="indicator"
+      as="div"
       role="assistant"
       v-bind="{ ...assistantProps, actions: undefined, parts: [] }"
       :compact="compact"
