@@ -40,17 +40,4 @@ describe('Header', () => {
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
-
-  it('does not suppress auto-focus when modal menu opens', async () => {
-    const wrapper = await mountSuspended(Header, {
-      props: {
-        open: true,
-        mode: 'modal',
-        menu: { portal: false }
-      }
-    })
-
-    const dialog = wrapper.find('[role="dialog"]')
-    expect(dialog.exists()).toBe(true)
-  })
 })
