@@ -154,14 +154,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
         @after-leave="emits('after:leave')"
         v-on="contentEvents"
       >
-        <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
-          <DialogTitle v-if="title || !!slots.title">
+        <VisuallyHidden v-if="(!title && !slots.title) || (!description && !slots.description) || !!slots.content">
+          <DialogTitle v-if="!title && !slots.title" />
+          <DialogTitle v-else-if="!!slots.content">
             <slot name="title">
               {{ title }}
             </slot>
           </DialogTitle>
 
-          <DialogDescription v-if="description || !!slots.description">
+          <DialogDescription v-if="!description && !slots.description" />
+          <DialogDescription v-else-if="!!slots.content">
             <slot name="description">
               {{ description }}
             </slot>

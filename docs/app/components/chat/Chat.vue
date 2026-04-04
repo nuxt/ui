@@ -310,7 +310,7 @@ defineShortcuts({
                 :parser-options="{ highlight: false }"
                 class="*:first:mt-0 *:last:mb-0"
               />
-              <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+              <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
                 {{ part.text }}
               </p>
             </template>

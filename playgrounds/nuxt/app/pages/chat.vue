@@ -36,6 +36,13 @@ function onSubmit() {
   input.value = ''
 }
 
+function clearMessages() {
+  if (chat.status === 'streaming') {
+    chat.stop()
+  }
+  chat.messages = []
+}
+
 function getDomain(url: string): string {
   try {
     return new URL(url).hostname.replace(/^www\./, '')
@@ -50,7 +57,18 @@ function getFaviconUrl(url: string): string {
 </script>
 
 <template>
-  <UDashboardNavbar class="absolute top-0 inset-x-0 z-5 border-b-0 lg:pointer-events-none" />
+  <UDashboardNavbar class="absolute top-0 inset-x-0 z-5 border-b-0 lg:pointer-events-none">
+    <template #right>
+      <UButton
+        v-if="chat.messages.length"
+        icon="i-lucide-list-x"
+        color="neutral"
+        variant="ghost"
+        class="pointer-events-auto"
+        @click="clearMessages"
+      />
+    </template>
+  </UDashboardNavbar>
 
   <div class="flex-1 flex flex-col gap-4 sm:gap-6 max-w-xl w-full mx-auto min-h-0">
     <UChatMessages

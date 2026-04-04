@@ -151,6 +151,14 @@ function scrollToBottom(smooth: boolean = true) {
 }
 
 watchThrottled([() => props.messages, () => props.status], ([_, status]) => {
+  if (!props.messages?.length) {
+    showAutoScroll.value = false
+    userScrolledUp.value = false
+    lastScrollTop.value = 0
+    messagesRefs.value.clear()
+    return
+  }
+
   if (status !== 'streaming') {
     return
   }

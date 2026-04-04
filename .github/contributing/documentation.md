@@ -178,6 +178,33 @@ slots:
 ::
 ```
 
+### Collapsed Code
+
+Use `collapse: true` to collapse the code block (useful for long examples):
+
+```md
+::component-code
+---
+collapse: true
+props:
+  color: neutral
+slots:
+  default: Content
+---
+::
+```
+
+This also works with `::component-example`:
+
+```md
+::component-example
+---
+collapse: true
+name: 'select-fetch-example'
+---
+::
+```
+
 ### Prettier Formatting
 
 For complex props, use prettier:

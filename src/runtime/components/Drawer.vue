@@ -128,14 +128,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
       <DrawerContent data-slot="content" :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })" v-bind="contentProps" v-on="contentEvents">
         <DrawerHandle v-if="handle" data-slot="handle" :class="ui.handle({ class: uiProp?.handle })" />
 
-        <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
-          <DrawerTitle v-if="title || !!slots.title">
+        <VisuallyHidden v-if="(!title && !slots.title) || (!description && !slots.description) || !!slots.content">
+          <DrawerTitle v-if="!title && !slots.title" />
+          <DrawerTitle v-else-if="!!slots.content">
             <slot name="title">
               {{ title }}
             </slot>
           </DrawerTitle>
 
-          <DrawerDescription v-if="description || !!slots.description">
+          <DrawerDescription v-if="!description && !slots.description" />
+          <DrawerDescription v-else-if="!!slots.content">
             <slot name="description">
               {{ description }}
             </slot>
