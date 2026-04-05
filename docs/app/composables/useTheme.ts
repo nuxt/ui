@@ -164,11 +164,11 @@ export function useTheme() {
   })
 
   const style = [
-    { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
-    { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
-    { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
-    { innerHTML: customColorsStyle, id: 'chat-custom-colors', tagPriority: -2 },
-    { innerHTML: cssVariablesStyle, id: 'chat-css-variables', tagPriority: -2 }
+    { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: 'critical' },
+    { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: 'critical' },
+    { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: 'critical' },
+    { innerHTML: customColorsStyle, id: 'chat-custom-colors', tagPriority: 'critical' },
+    { innerHTML: cssVariablesStyle, id: 'chat-css-variables', tagPriority: 'critical' }
   ]
 
   const hasCSSChanges = computed(() => {
