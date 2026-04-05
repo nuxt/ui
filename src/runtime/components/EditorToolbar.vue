@@ -1,6 +1,5 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Editor } from '@tiptap/vue-3'
 import type { BubbleMenuPluginProps } from '@tiptap/extension-bubble-menu'
@@ -84,7 +83,7 @@ type SlotPropsProps = {
   isDisabled: (item: EditorToolbarItem) => boolean
   onClick: (e: MouseEvent, item: EditorToolbarItem) => void
 }
-type SlotProps<T extends EditorToolbarItem> = (props: { item: T } & SlotPropsProps) => VNode[]
+type SlotProps<T extends EditorToolbarItem> = (props: { item: T } & SlotPropsProps) => import('vue').VNode[]
 
 export type EditorToolbarSlots<
   A extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>,
