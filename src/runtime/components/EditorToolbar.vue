@@ -95,7 +95,8 @@ export type EditorToolbarSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<EditorToolbarItem>">
-import { computed, inject, shallowRef, watch, type ShallowRef } from 'vue'
+import { computed, inject, shallowRef, watch } from 'vue'
+import type { ShallowRef } from 'vue'
 import { Primitive, Separator, useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
@@ -210,6 +211,18 @@ const itemKeyMap = computed(() => {
   for (const group of groups.value) {
     for (const entry of group) {
       map.set(entry.item as object, entry.key)
+    }
+  }
+
+  return map
+})
+
+const renderEntryMap = computed(() => {
+  const map = new Map<string, ToolbarRenderEntry>()
+
+  for (const group of renderGroups.value) {
+    for (const entry of group) {
+      map.set(entry.key, entry)
     }
   }
 
@@ -436,13 +449,7 @@ watch(() => props.editor, (editor, _, onCleanup) => {
 }, { immediate: true })
 
 function getRenderEntry(key: string) {
-  for (const group of renderGroups.value) {
-    for (const entry of group) {
-      if (entry.key === key) {
-        return entry
-      }
-    }
-  }
+  return renderEntryMap.value.get(key)
 }
 
 function isActive(item: EditorToolbarItem): boolean {

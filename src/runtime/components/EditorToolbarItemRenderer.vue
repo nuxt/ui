@@ -25,18 +25,27 @@ defineProps<EditorToolbarItemRendererProps>()
 <template>
   <UDropdownMenu
     v-if="('items' in item && item.items?.length)"
+    data-slot="dropdown"
     v-bind="dropdownProps?.value"
     :items="dropdownItems.value"
   >
-    <UTooltip v-if="tooltip" :disabled="state.value.disabled" v-bind="{ ...(tooltip || {}) }">
-      <UButton :active="state.value.active" :disabled="state.value.disabled" v-bind="buttonProps.value" @click="onClick($event, item)" />
+    <UTooltip v-if="tooltip" data-slot="tooltip" :disabled="state.value.disabled" v-bind="{ ...(tooltip || {}) }">
+      <UButton data-slot="button" :active="state.value.active" :disabled="state.value.disabled" v-bind="buttonProps.value" @click="onClick($event, item)" />
     </UTooltip>
 
-    <UButton v-else :active="state.value.active" :disabled="state.value.disabled" v-bind="buttonProps.value" @click="onClick($event, item)" />
+    <UButton
+      v-else
+      data-slot="button"
+      :active="state.value.active"
+      :disabled="state.value.disabled"
+      v-bind="buttonProps.value"
+      @click="onClick($event, item)"
+    />
   </UDropdownMenu>
 
-  <UTooltip v-else-if="tooltip" :disabled="state.value.disabled" v-bind="{ ...(tooltip || {}) }">
+  <UTooltip v-else-if="tooltip" data-slot="tooltip" :disabled="state.value.disabled" v-bind="{ ...(tooltip || {}) }">
     <UButton
+      data-slot="button"
       :active="state.value.active"
       :disabled="state.value.disabled"
       v-bind="buttonProps.value"
@@ -46,6 +55,7 @@ defineProps<EditorToolbarItemRendererProps>()
 
   <UButton
     v-else
+    data-slot="button"
     :active="state.value.active"
     :disabled="state.value.disabled"
     v-bind="buttonProps.value"
