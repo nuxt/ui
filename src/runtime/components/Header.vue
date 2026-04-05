@@ -172,7 +172,7 @@ function toggleOpen() {
   <Primitive :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <slot name="top" />
 
-    <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
+    <div :class="ui.container({ class: uiProp?.container })" data-slot="container">
       <ReuseLeftTemplate />
 
       <div data-slot="center" :class="ui.center({ class: uiProp?.center })">
