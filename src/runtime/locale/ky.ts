@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Жабуу'
+    },
+    transferList: {
+      noData: 'Маалымат жок',
+      noMatch: 'Сүйлөшкөн маалыматтар жок',
+      search: 'Издөө…',
+      transfer: 'Тандалган элементтерди которуу',
+      remove: 'Тандалган элементтерди алып салуу'
     }
   }
 })

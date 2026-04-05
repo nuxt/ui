@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Zoumaachen'
+    },
+    transferList: {
+      noData: 'Keng Donnéeën',
+      noMatch: 'Keng entspriechend Donnéeën',
+      search: 'Sichen..',
+      transfer: 'Ausgewielte Elementer transferéieren',
+      remove: 'Ausgewielte Elementer ewechhuelen'
     }
   }
 })

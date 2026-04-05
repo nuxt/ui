@@ -141,6 +141,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'დახურვა'
+    },
+    transferList: {
+      noData: 'მონაცემები არ არის',
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      search: 'ძიება…',
+      transfer: 'არჩეული ელემენტების გადატანა',
+      remove: 'არჩეული ელემენტების წაშლა'
     }
   }
 })

@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Tutup'
+    },
+    transferList: {
+      noData: 'Tidak ada data',
+      noMatch: 'Tidak ada data yang cocok',
+      search: 'Cari…',
+      transfer: 'Pindahkan item yang dipilih',
+      remove: 'Hapus item yang dipilih'
     }
   }
 })

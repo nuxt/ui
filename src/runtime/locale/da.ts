@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Luk'
+    },
+    transferList: {
+      noData: 'Ingen data',
+      noMatch: 'Ingen matchende data',
+      search: 'Søg…',
+      transfer: 'Overfør valgte elementer',
+      remove: 'Fjern valgte elementer'
     }
   }
 })

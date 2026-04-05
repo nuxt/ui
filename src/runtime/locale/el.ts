@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Κλείσιμο'
+    },
+    transferList: {
+      noData: 'Δεν υπάρχουν δεδομένα',
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      search: 'Αναζήτηση…',
+      transfer: 'Μεταφορά επιλεγμένων στοιχείων',
+      remove: 'Αφαίρεση επιλεγμένων στοιχείων'
     }
   }
 })

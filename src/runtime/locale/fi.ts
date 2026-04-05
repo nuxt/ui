@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Sulje'
+    },
+    transferList: {
+      noData: 'Ei tietoja',
+      noMatch: 'Ei vastaavia tietoja',
+      search: 'Hae…',
+      transfer: 'Siirrä valitut kohteet',
+      remove: 'Poista valitut kohteet'
     }
   }
 })

@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Fechar'
+    },
+    transferList: {
+      noData: 'Sem dados',
+      noMatch: 'Nenhum dado correspondente',
+      search: 'Pesquisar…',
+      transfer: 'Transferir itens selecionados',
+      remove: 'Remover itens selecionados'
     }
   }
 })

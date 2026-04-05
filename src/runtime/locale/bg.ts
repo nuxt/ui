@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Затворете'
+    },
+    transferList: {
+      noData: 'Няма данни',
+      noMatch: 'Няма съвпадение на данни',
+      search: 'Потърсете…',
+      transfer: 'Прехвърляне на избраните елементи',
+      remove: 'Премахване на избраните елементи'
     }
   }
 })

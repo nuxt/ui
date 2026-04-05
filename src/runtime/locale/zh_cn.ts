@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: '关闭'
+    },
+    transferList: {
+      noData: '没有数据',
+      noMatch: '没有匹配的数据',
+      search: '搜索…',
+      transfer: '转移选中项',
+      remove: '移除选中项'
     }
   }
 })

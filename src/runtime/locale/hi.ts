@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'बंद करें'
+    },
+    transferList: {
+      noData: 'कोई डेटा नहीं',
+      noMatch: 'कोई मेल खाता डेटा नहीं',
+      search: 'खोजें…',
+      transfer: 'चयनित आइटम स्थानांतरित करें',
+      remove: 'चयनित आइटम हटाएं'
     }
   }
 })

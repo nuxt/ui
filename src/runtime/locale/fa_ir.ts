@@ -140,6 +140,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'بستن'
+    },
+    transferList: {
+      noData: 'داده‌ای موجود نیست',
+      noMatch: 'داده‌ای یافت نشد',
+      search: 'جستجو…',
+      transfer: 'انتقال موارد انتخاب‌شده',
+      remove: 'حذف موارد انتخاب‌شده'
     }
   }
 })

@@ -140,6 +140,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'تاقاش'
+    },
+    transferList: {
+      noData: 'سانلىق مەلۇمات يوق',
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      search: 'ئىزدەش…',
+      transfer: 'تاللانغان تۈرلەرنى يۆتكەش',
+      remove: 'تاللانغان تۈرلەرنى ئۆچۈرۈش'
     }
   }
 })

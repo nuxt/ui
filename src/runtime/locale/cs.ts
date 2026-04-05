@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Zavřít'
+    },
+    transferList: {
+      noData: 'Žádná data',
+      noMatch: 'Žádná shoda',
+      search: 'Hledat…',
+      transfer: 'Přesunout vybrané položky',
+      remove: 'Odebrat vybrané položky'
     }
   }
 })

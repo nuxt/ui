@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: '閉じる'
+    },
+    transferList: {
+      noData: 'データがありません',
+      noMatch: '一致するデータがありません',
+      search: '検索…',
+      transfer: '選択した項目を転送',
+      remove: '選択した項目を削除'
     }
   }
 })

@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Închide'
+    },
+    transferList: {
+      noData: 'Nu există date',
+      noMatch: 'Nu există date corespunzătoare',
+      search: 'Caută…',
+      transfer: 'Transferă elementele selectate',
+      remove: 'Elimină elementele selectate'
     }
   }
 })

@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Kapat'
+    },
+    transferList: {
+      noData: 'Veri yok',
+      noMatch: 'Eşleşen veri yok',
+      search: 'Ara…',
+      transfer: 'Seçili öğeleri aktar',
+      remove: 'Seçili öğeleri kaldır'
     }
   }
 })

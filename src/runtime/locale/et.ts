@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Sulge'
+    },
+    transferList: {
+      noData: 'Pole andmeid',
+      noMatch: 'Pole vastavaid andmeid',
+      search: 'Otsi…',
+      transfer: 'Teisalda valitud elemendid',
+      remove: 'Eemalda valitud elemendid'
     }
   }
 })

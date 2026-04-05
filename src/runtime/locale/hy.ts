@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Փակել'
+    },
+    transferList: {
+      noData: 'Տվյալներ չկան',
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      search: 'Որոնում…',
+      transfer: 'Տեղափոխել ընտրված տառրերը',
+      remove: 'Հեռացնել ընտրված տառրերը'
     }
   }
 })

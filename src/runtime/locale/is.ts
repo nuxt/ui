@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Loka'
+    },
+    transferList: {
+      noData: 'Engin gögn',
+      noMatch: 'Engin gögn fundust',
+      search: 'Leita…',
+      transfer: 'Flytja valin atriði',
+      remove: 'Fjarlægja valin atriði'
     }
   }
 })

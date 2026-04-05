@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Mbyll'
+    },
+    transferList: {
+      noData: 'Nuk ka të dhëna',
+      noMatch: 'Nuk ka të dhëna që përputhen',
+      search: 'Kërko…',
+      transfer: 'Transfero artikujt e zgjedhur',
+      remove: 'Hiq artikujt e zgjedhur'
     }
   }
 })

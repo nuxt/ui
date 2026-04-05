@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Yopish'
+    },
+    transferList: {
+      noData: 'Maʼlumot yoʻq',
+      noMatch: 'Mos keluvchi natija topilmadi',
+      search: 'Qidirish…',
+      transfer: 'Tanlangan elementlarni koʻchirish',
+      remove: 'Tanlangan elementlarni olib tashlash'
     }
   }
 })

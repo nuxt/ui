@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Stäng'
+    },
+    transferList: {
+      noData: 'Inga data',
+      noMatch: 'Inga matchande data',
+      search: 'Sök…',
+      transfer: 'Överför valda objekt',
+      remove: 'Ta bort valda objekt'
     }
   }
 })

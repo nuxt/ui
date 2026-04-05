@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Tancar'
+    },
+    transferList: {
+      noData: 'Sense dades',
+      noMatch: 'No hi ha dades coincidents',
+      search: 'Cerca…',
+      transfer: 'Transferir els elements seleccionats',
+      remove: 'Eliminar els elements seleccionats'
     }
   }
 })

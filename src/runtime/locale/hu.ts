@@ -139,6 +139,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Bezárás'
+    },
+    transferList: {
+      noData: 'Nincs adat',
+      noMatch: 'Nincs találat',
+      search: 'Keresés…',
+      transfer: 'Kiválasztott elemek áthelyezése',
+      remove: 'Kiválasztott elemek eltávolítása'
     }
   }
 })

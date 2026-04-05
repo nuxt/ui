@@ -144,6 +144,13 @@ export type Messages = {
   toast: {
     close: string
   }
+  transferList: {
+    noData: string
+    noMatch: string
+    search: string
+    transfer: string
+    remove: string
+  }
 }
 
 export type Direction = 'ltr' | 'rtl'

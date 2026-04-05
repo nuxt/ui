@@ -140,6 +140,13 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'סגור'
+    },
+    transferList: {
+      noData: 'אין נתונים',
+      noMatch: 'לא נמצאה התאמה',
+      search: 'חפש…',
+      transfer: 'העבר פריטים נבחרים',
+      remove: 'הסר פריטים נבחרים'
     }
   }
 })
