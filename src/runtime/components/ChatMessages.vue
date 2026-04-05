@@ -248,7 +248,7 @@ function getScrollParent(node: HTMLElement | null): HTMLElement {
 }
 
 function updateLastMessageHeight() {
-  if (!el.value || !parent.value || !props.messages?.length || !lastMessageSubmitted.value || showIndicator.value) {
+  if (!el.value || !parent.value || !props.messages?.length || !lastMessageSubmitted.value) {
     return
   }
 
