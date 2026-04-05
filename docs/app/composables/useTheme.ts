@@ -18,6 +18,7 @@ export function useTheme() {
   const appConfig = useAppConfig()
   const colorMode = useColorMode()
   const { track } = useAnalytics()
+  const { framework } = useFrameworks()
 
   const aiThemeExtras = useState<Record<string, any>>('nuxt-ui-ai-theme', () => readLocalStorage('nuxt-ui-ai-theme', {}))
   const customColorsData = useState<Record<string, Record<string, string>>>('nuxt-ui-custom-colors', () => readLocalStorage('nuxt-ui-custom-colors', {}))
@@ -178,7 +179,7 @@ export function useTheme() {
       || hasCSSVariables.value
   })
 
-  const hasAppConfigChanges = computed(() => {
+  const hasConfigChanges = computed(() => {
     return appConfig.ui.colors.primary !== 'green'
       || appConfig.ui.colors.neutral !== 'slate'
       || _iconSet.value !== 'lucide'
@@ -269,6 +270,26 @@ export function useTheme() {
     const configString = JSON.stringify(config, null, 2)
       .replace(/"([^"]+)":/g, '$1:')
       .replace(/"/g, '\'')
+
+    if (framework.value === 'vue') {
+      const pluginConfig = config.ui
+        ? JSON.stringify({ ui: config.ui }, null, 2)
+            .replace(/"([^"]+)":/g, '$1:')
+            .replace(/"/g, '\'')
+        : '{}'
+      return [
+        'import { defineConfig } from \'vite\'',
+        'import vue from \'@vitejs/plugin-vue\'',
+        'import ui from \'@nuxt/ui/vite\'',
+        '',
+        `export default defineConfig({`,
+        '  plugins: [',
+        '    vue(),',
+        `    ui(${pluginConfig.split('\n').map((line, i) => i === 0 ? line : '    ' + line).join('\n')})`,
+        '  ]',
+        '})'
+      ].join('\n')
+    }
 
     return `export default defineAppConfig(${configString})`
   }
@@ -391,7 +412,8 @@ export function useTheme() {
     modes,
     mode,
     hasCSSChanges,
-    hasAppConfigChanges,
+    hasConfigChanges,
+    configLabel: computed(() => framework.value === 'vue' ? 'vite.config.ts' : 'app.config.ts'),
     exportCSS,
     exportAppConfig,
     applyThemeSettings,

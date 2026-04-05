@@ -16,9 +16,10 @@ const input = ref('')
 const toast = useToast()
 const { track } = useAnalytics()
 const { open, messages } = useChat()
-const { resetTheme, applyThemeSettings, hasCSSChanges, hasAppConfigChanges } = useTheme()
+const { framework } = useFrameworks()
+const { resetTheme, applyThemeSettings, hasCSSChanges, hasConfigChanges } = useTheme()
 
-const hasThemeChanges = computed(() => hasCSSChanges.value || hasAppConfigChanges.value)
+const hasThemeChanges = computed(() => hasCSSChanges.value || hasConfigChanges.value)
 
 let _skipSync = false
 const _themeApplied = new Set<string>()
@@ -47,7 +48,7 @@ const chat = new Chat({
   messages: messages.value,
   transport: new DefaultChatTransport({
     api: '/api/ai',
-    body: { theme }
+    body: () => ({ theme, framework: framework.value })
   }),
   onError: (error) => {
     let message = error.message
@@ -131,6 +132,7 @@ function getToolMessage(state: ToolState, toolName: string, input: Record<string
     'get-example': `${readVerb} ${upperName(input.exampleName || '')} example`,
     'search-components-by-category': `${searchVerb} components${input.category ? ` in ${input.category} category` : ''}${input.search ? ` for "${input.search}"` : ''}`,
     'getComponentTheme': `${readVerb} ${upperName(input.componentName || '')} theme`,
+    'getThemeGuide': `${readVerb} theme guide`,
     'applyTheme': `${applyVerb} theme changes`,
     'resetTheme': `${state === 'output-available' ? 'Reset' : 'Resetting'} theme to defaults`
   }[toolName] || `${searchVerb} ${toolName}`
@@ -155,6 +157,7 @@ function getToolIcon(part: ToolPart): string {
     'get-migration-guide': 'i-lucide-file-text',
     'get-example': 'i-lucide-file-text',
     'getComponentTheme': 'i-lucide-file-text',
+    'getThemeGuide': 'i-lucide-palette',
     'applyTheme': 'i-lucide-palette',
     'resetTheme': 'i-lucide-palette'
   }

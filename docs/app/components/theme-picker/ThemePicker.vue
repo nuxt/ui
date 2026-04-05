@@ -29,7 +29,8 @@ const {
   modes,
   mode,
   hasCSSChanges,
-  hasAppConfigChanges,
+  hasConfigChanges,
+  configLabel,
   exportCSS,
   exportAppConfig,
   resetTheme
@@ -223,7 +224,7 @@ const {
         </div>
       </fieldset>
 
-      <fieldset v-if="hasCSSChanges || hasAppConfigChanges">
+      <fieldset v-if="hasCSSChanges || hasConfigChanges">
         <legend class="text-[11px] leading-none font-semibold mb-2 select-none">
           Export
         </legend>
@@ -240,11 +241,11 @@ const {
             @click="copyCSS(exportCSS())"
           />
           <UButton
-            v-if="hasAppConfigChanges"
+            v-if="hasConfigChanges"
             color="neutral"
             variant="soft"
             size="sm"
-            label="app.config.ts"
+            :label="configLabel"
             :icon="copiedAppConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
             class="flex-1 text-[11px]"
             @click="copyAppConfig(exportAppConfig())"
