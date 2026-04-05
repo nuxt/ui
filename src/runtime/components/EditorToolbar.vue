@@ -96,7 +96,7 @@ export type EditorToolbarSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<EditorToolbarItem>">
-import { computed, inject } from 'vue'
+import { computed, inject, shallowRef, watch, type ShallowRef } from 'vue'
 import { Primitive, Separator, useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
@@ -106,9 +106,7 @@ import { useComponentUI } from '../composables/useComponentUI'
 import { isArrayOfArray, pick, omit } from '../utils'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
-import UButton from './Button.vue'
-import UDropdownMenu from './DropdownMenu.vue'
-import UTooltip from './Tooltip.vue'
+import EditorToolbarItemRenderer from './EditorToolbarItemRenderer.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -146,67 +144,116 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorToolba
   layout: props.layout
 }))
 
-const groups = computed(() =>
-  props.items?.length
-    ? isArrayOfArray(props.items)
-      ? props.items
-      : [props.items as NestedItem<T>[]]
-    : []
-)
-
-function isActive(item: EditorToolbarItem): boolean {
-  if (!props.editor?.isEditable) {
-    return false
-  }
-
-  // Check for dropdown (has items property)
-  if (('items' in item) && item.items?.length) {
-    return item.items?.some((item): boolean => isActive(item as EditorToolbarItem)) || false
-  }
-
-  // Check for plain button (no kind property)
-  if (!('kind' in item)) {
-    return item.active ?? false
-  }
-
-  // Check for editor item (has kind property)
-  const handler = handlers?.value?.[item.kind]
-  return handler?.isActive(props.editor, item as any) || false
+type ToolbarItemState = {
+  active: boolean
+  disabled: boolean
 }
 
-function isDisabled(item: EditorToolbarItem): boolean {
-  if (!props.editor?.isEditable) {
-    return true
+type ToolbarDropdownState = {
+  activeChildIcon?: string
+  activeChildLabel?: string
+  items: DropdownMenuItem[][]
+}
+
+type ToolbarGroupEntry = {
+  item: EditorToolbarItem
+  key: string
+  index: number
+}
+
+type ToolbarRenderEntry = ToolbarGroupEntry & {
+  buttonProps: ShallowRef<Record<string, any>>
+  dropdownState: ShallowRef<ToolbarDropdownState | undefined>
+  dropdownItems: ShallowRef<DropdownMenuItem[][]>
+  dropdownProps?: ShallowRef<Record<string, any> | undefined>
+  slotName: string
+  state: ShallowRef<ToolbarItemState>
+  tooltip?: TooltipProps
+}
+
+function createItemKey(groupIndex: number, path: number[]) {
+  return `${groupIndex}-${path.join('-')}`
+}
+
+function normalizeGroups(items: T | undefined): EditorToolbarItem[][] {
+  if (!items?.length) {
+    return []
   }
 
-  if ('items' in item && item.items?.length) {
-    const items = isArrayOfArray(item.items) ? item.items.flat() : item.items
-    // Filter out structural elements (separators, labels)
-    const actionableItems = items.filter((item: any) => item.type !== 'separator' && item.type !== 'label')
+  return isArrayOfArray(items)
+    ? items as EditorToolbarItem[][]
+    : [items as EditorToolbarItem[]]
+}
 
-    if (actionableItems.length === 0) {
-      return true
+function normalizeDropdownGroups(items: ArrayOrNested<EditorToolbarDropdownChildItem> | undefined): EditorToolbarDropdownChildItem[][] {
+  if (!items?.length) {
+    return []
+  }
+
+  return isArrayOfArray(items)
+    ? items as EditorToolbarDropdownChildItem[][]
+    : [items as EditorToolbarDropdownChildItem[]]
+}
+
+const groups = computed<ToolbarGroupEntry[][]>(() =>
+  normalizeGroups(props.items).map((group, groupIndex) =>
+    group.map((item, index) => ({
+      item,
+      index,
+      key: createItemKey(groupIndex, [index])
+    }))
+  )
+)
+
+const itemKeyMap = computed(() => {
+  const map = new WeakMap<object, string>()
+
+  for (const group of groups.value) {
+    for (const entry of group) {
+      map.set(entry.item as object, entry.key)
     }
+  }
 
-    return actionableItems.every((item: any) => isDisabled(item))
+  return map
+})
+
+function resolveBaseItemState(item: EditorToolbarItem): ToolbarItemState {
+  if (!props.editor?.isEditable) {
+    return {
+      active: false,
+      disabled: true
+    }
   }
 
   if (!('kind' in item)) {
-    return item.disabled ?? false
+    return {
+      active: item.active ?? false,
+      disabled: item.disabled ?? false
+    }
   }
 
   const handler = handlers?.value?.[item.kind]
   if (!handler) {
-    return false
+    return {
+      active: false,
+      disabled: false
+    }
   }
 
-  // Check item-specific disabled state
-  if (handler.isDisabled?.(props.editor, item)) {
-    return true
+  return {
+    active: handler.isActive(props.editor, item as any),
+    disabled: !!handler.isDisabled?.(props.editor, item as any) || !handler.canExecute(props.editor, item as any)
+  }
+}
+
+function resolveDropdownChildren(children: DropdownMenuItem['children']): DropdownMenuItem['children'] {
+  if (!Array.isArray(children)) {
+    return children
   }
 
-  // Check if item can be executed
-  return !handler.canExecute(props.editor, item)
+  return isArrayOfArray(children)
+    ? children.map(group => group.map(child => resolveDropdownChild(child as EditorToolbarDropdownChildItem).item))
+    : children.map(child => resolveDropdownChild(child as EditorToolbarDropdownChildItem).item)
 }
 
 function onClick(e: MouseEvent, item: EditorToolbarItem) {
@@ -229,33 +276,77 @@ function onClick(e: MouseEvent, item: EditorToolbarItem) {
   }
 }
 
-function getActiveChildItem(item: EditorToolbarDropdownItem): EditorToolbarItem | undefined {
-  if (!item.items) {
-    return undefined
+function resolveDropdownChild(item: EditorToolbarDropdownChildItem): { item: DropdownMenuItem, state: ToolbarItemState, actionable: boolean } {
+  const children: DropdownMenuItem['children'] = 'children' in item
+    ? resolveDropdownChildren(item.children)
+    : undefined
+
+  const state = resolveBaseItemState(item as EditorToolbarItem)
+
+  if (!('kind' in item)) {
+    return {
+      item: children ? { ...item, children } : item,
+      state,
+      actionable: item.type !== 'separator' && item.type !== 'label'
+    }
   }
 
-  const items = isArrayOfArray(item.items) ? item.items.flat() : item.items
-
-  return items.find((childItem: any): childItem is EditorToolbarItem => {
-    if (!('kind' in childItem)) {
-      return false
-    }
-    return isActive(childItem as EditorToolbarItem)
-  }) as EditorToolbarItem | undefined
+  return {
+    item: {
+      ...item,
+      ...(children && { children }),
+      active: state.active,
+      disabled: state.disabled,
+      onSelect: (e: Event) => onClick(e as MouseEvent, item as EditorToolbarItem)
+    },
+    state,
+    actionable: true
+  }
 }
 
-function getButtonProps(item: EditorToolbarItem) {
+function resolveToolbarItem(item: EditorToolbarItem): { state: ToolbarItemState, dropdown?: ToolbarDropdownState } {
+  if (!('items' in item) || !item.items?.length) {
+    return { state: resolveBaseItemState(item) }
+  }
+
+  const dropdownGroups = normalizeDropdownGroups(item.items)
+  const resolvedGroups = dropdownGroups.map(group => group.map(child => resolveDropdownChild(child)))
+  const resolvedItems = resolvedGroups.flat()
+  const actionableItems = resolvedItems.filter(({ actionable }) => actionable)
+  const activeChild = resolvedItems.find(({ item, state }) => {
+    return 'kind' in item && state.active
+  })?.item as EditorToolbarItem | undefined
+
+  return {
+    state: {
+      active: resolvedItems.some(({ state }) => state.active),
+      disabled: actionableItems.length === 0 || actionableItems.every(({ state }) => state.disabled)
+    },
+    dropdown: {
+      activeChildIcon: activeChild?.icon,
+      activeChildLabel: activeChild?.label,
+      items: resolvedGroups.map(group => group.map(({ item }) => item))
+    }
+  }
+}
+
+function sameToolbarItemState(a: ToolbarItemState, b: ToolbarItemState) {
+  return a.active === b.active && a.disabled === b.disabled
+}
+
+function sameDropdownButtonProps(a: ToolbarDropdownState | undefined, b: ToolbarDropdownState | undefined) {
+  return a?.activeChildIcon === b?.activeChildIcon
+    && a?.activeChildLabel === b?.activeChildLabel
+}
+
+function buildButtonProps(item: EditorToolbarItem, dropdownState?: ToolbarDropdownState) {
   const baseProps = omit(item as any, ['kind', 'mark', 'align', 'level', 'href', 'src', 'pos', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'tooltip', 'onClick'])
 
-  // For dropdown items, use the active child's icon if available
-  if ('items' in item && item.items?.length) {
-    const activeChild = getActiveChildItem(item)
-    if (activeChild?.icon) {
-      baseProps.icon = activeChild.icon
-    }
-    if (activeChild?.label && baseProps.label !== undefined) {
-      baseProps.label = activeChild.label
-    }
+  if (dropdownState?.activeChildIcon) {
+    baseProps.icon = dropdownState.activeChildIcon
+  }
+  if (dropdownState?.activeChildLabel && baseProps.label !== undefined) {
+    baseProps.label = dropdownState.activeChildLabel
   }
 
   return defu(baseProps, {
@@ -267,6 +358,112 @@ function getButtonProps(item: EditorToolbarItem) {
   })
 }
 
+function buildRenderGroups(): ToolbarRenderEntry[][] {
+  return groups.value.map(group =>
+    group.map((entry) => {
+      const resolved = resolveToolbarItem(entry.item)
+      const hasDropdown = 'items' in entry.item && entry.item.items?.length
+
+      return {
+        ...entry,
+        buttonProps: shallowRef(buildButtonProps(entry.item, resolved.dropdown)),
+        dropdownState: shallowRef(resolved.dropdown),
+        dropdownItems: shallowRef(resolved.dropdown?.items || []),
+        dropdownProps: shallowRef(hasDropdown ? getDropdownProps(entry.item as EditorToolbarDropdownItem) : undefined),
+        slotName: entry.item.slot || 'item',
+        state: shallowRef(resolved.state),
+        tooltip: entry.item.tooltip
+      }
+    })
+  )
+}
+
+const renderGroups = shallowRef<ToolbarRenderEntry[][]>(buildRenderGroups())
+
+function refreshState(force = false) {
+  for (const group of renderGroups.value) {
+    for (const entry of group) {
+      const resolved = resolveToolbarItem(entry.item)
+      const stateChanged = force || !sameToolbarItemState(entry.state.value, resolved.state)
+
+      if (stateChanged) {
+        entry.state.value = resolved.state
+      }
+
+      if ('items' in entry.item && entry.item.items?.length) {
+        const previousDropdownState = entry.dropdownState.value
+
+        // Always update dropdown items since child active/disabled states may change
+        entry.dropdownState.value = resolved.dropdown
+        entry.dropdownItems.value = resolved.dropdown?.items || []
+
+        // Only rebuild button props when activeChild icon/label changes
+        if (stateChanged || force || !sameDropdownButtonProps(previousDropdownState, resolved.dropdown)) {
+          entry.buttonProps.value = buildButtonProps(entry.item, resolved.dropdown)
+        }
+      }
+    }
+  }
+}
+
+watch(() => props.items, () => {
+  renderGroups.value = buildRenderGroups()
+}, { deep: true })
+
+watch(() => [props.color, props.variant, props.activeColor, props.activeVariant, props.size], () => {
+  renderGroups.value = buildRenderGroups()
+})
+
+watch(() => handlers.value, () => {
+  refreshState(true)
+}, { deep: true })
+
+watch(() => props.editor, (editor, _, onCleanup) => {
+  refreshState(true)
+
+  if (typeof (editor as any)?.on !== 'function' || typeof (editor as any)?.off !== 'function') {
+    return
+  }
+
+  const onTransaction = () => {
+    refreshState()
+  }
+
+  editor.on('transaction', onTransaction)
+
+  onCleanup(() => {
+    editor.off('transaction', onTransaction)
+  })
+}, { immediate: true })
+
+function getRenderEntry(key: string) {
+  for (const group of renderGroups.value) {
+    for (const entry of group) {
+      if (entry.key === key) {
+        return entry
+      }
+    }
+  }
+}
+
+function isActive(item: EditorToolbarItem): boolean {
+  const key = itemKeyMap.value.get(item as object)
+  const entry = key ? getRenderEntry(key) : undefined
+
+  return entry
+    ? entry.state.value.active
+    : resolveToolbarItem(item).state.active
+}
+
+function isDisabled(item: EditorToolbarItem): boolean {
+  const key = itemKeyMap.value.get(item as object)
+  const entry = key ? getRenderEntry(key) : undefined
+
+  return entry
+    ? entry.state.value.disabled
+    : resolveToolbarItem(item).state.disabled
+}
+
 function getDropdownProps(item: EditorToolbarDropdownItem) {
   const baseProps = pick(item as any, ['size', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'ui'])
 
@@ -274,37 +471,6 @@ function getDropdownProps(item: EditorToolbarDropdownItem) {
     modal: false,
     size: props.size
   })
-}
-
-function mapDropdownItem(item: EditorToolbarDropdownChildItem): DropdownMenuItem {
-  // Recursively map children if present
-  const children = 'children' in item && Array.isArray(item.children)
-    ? item.children.map(mapDropdownItem)
-    : undefined
-
-  // If it's a separator or label (no 'kind' property), return with mapped children
-  if (!('kind' in item)) {
-    return children ? { ...item, children } : item
-  }
-
-  const editorToolbarItem = item as EditorToolbarDropdownChildItem
-  return {
-    ...editorToolbarItem,
-    ...(children && { children }),
-    active: isActive(editorToolbarItem),
-    disabled: isDisabled(editorToolbarItem),
-    onSelect: (e: Event) => onClick(e as MouseEvent, editorToolbarItem)
-  }
-}
-
-function getDropdownItems(item: EditorToolbarDropdownItem) {
-  if (!item.items) {
-    return []
-  }
-
-  return isArrayOfArray(item.items)
-    ? item.items.map((group: any) => group.map(mapDropdownItem))
-    : [item.items.map(mapDropdownItem)]
 }
 </script>
 
@@ -323,53 +489,36 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
     }"
   >
     <Primitive :as="as" role="toolbar" data-slot="base" :class="ui.base({ class: [uiProp?.base, props.class] })">
-      <template v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`">
+      <template v-for="(group, groupIndex) in renderGroups" :key="`group-${groupIndex}`">
         <div role="group" data-slot="group" :class="ui.group({ class: uiProp?.group })">
-          <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-            <slot
-              :name="((item.slot || 'item') as keyof EditorToolbarSlots<T>)"
-              :item="(item as any)"
-              :index="index"
-              :is-active="isActive"
-              :is-disabled="isDisabled"
-              :on-click="onClick"
-            >
-              <UDropdownMenu
-                v-if="('items' in item && item.items?.length)"
-                v-bind="getDropdownProps(item as EditorToolbarDropdownItem)"
-                :items="getDropdownItems(item as EditorToolbarDropdownItem)"
-              >
-                <UTooltip v-if="item.tooltip" :disabled="isDisabled(item)" v-bind="{ ...(item.tooltip || {}) }">
-                  <UButton :active="isActive(item)" :disabled="isDisabled(item)" v-bind="getButtonProps(item)" @click="onClick($event, item)" />
-                </UTooltip>
-
-                <UButton v-else :active="isActive(item)" :disabled="isDisabled(item)" v-bind="getButtonProps(item)" @click="onClick($event, item)" />
-              </UDropdownMenu>
-
-              <UTooltip v-else-if="item.tooltip" :disabled="isDisabled(item)" v-bind="{ ...(item.tooltip || {}) }">
-                <UButton
-                  :active="isActive(item)"
-                  :disabled="isDisabled(item)"
-                  v-bind="getButtonProps(item)"
-                  :ui="item.ui"
-                  @click="onClick($event, item)"
-                />
-              </UTooltip>
-
-              <UButton
-                v-else
-                :active="isActive(item)"
-                :disabled="isDisabled(item)"
-                v-bind="getButtonProps(item)"
-                :ui="item.ui"
-                @click="onClick($event, item)"
+          <template v-for="entry in group" :key="entry.key">
+            <template v-if="$slots[entry.slotName]">
+              <slot
+                :name="(entry.slotName as keyof EditorToolbarSlots<T>)"
+                :item="(entry.item as any)"
+                :index="entry.index"
+                :is-active="isActive"
+                :is-disabled="isDisabled"
+                :on-click="onClick"
               />
-            </slot>
+            </template>
+
+            <template v-else>
+              <EditorToolbarItemRenderer
+                :item="entry.item"
+                :state="entry.state"
+                :button-props="entry.buttonProps"
+                :dropdown-items="entry.dropdownItems"
+                :dropdown-props="entry.dropdownProps"
+                :tooltip="entry.tooltip"
+                :on-click="onClick"
+              />
+            </template>
           </template>
         </div>
 
         <Separator
-          v-if="groupIndex < groups.length - 1"
+          v-if="groupIndex < renderGroups.length - 1"
           data-slot="separator"
           :class="ui.separator({ class: uiProp?.separator })"
           orientation="vertical"
