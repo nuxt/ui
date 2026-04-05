@@ -71,7 +71,6 @@ import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import ULink from './Link.vue'
-import UContainer from './Container.vue'
 import USlideover from './Slideover.vue'
 import UModal from './Modal.vue'
 import UDrawer from './Drawer.vue'
@@ -173,7 +172,7 @@ function toggleOpen() {
   <Primitive :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <slot name="top" />
 
-    <UContainer data-slot="container" :class="ui.container({ class: uiProp?.container })">
+    <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
       <ReuseLeftTemplate />
 
       <div data-slot="center" :class="ui.center({ class: uiProp?.center })">
@@ -181,7 +180,7 @@ function toggleOpen() {
       </div>
 
       <ReuseRightTemplate />
-    </UContainer>
+    </div>
 
     <slot name="bottom" />
   </Primitive>
