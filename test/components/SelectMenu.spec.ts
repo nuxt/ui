@@ -337,4 +337,18 @@ describe('SelectMenu', () => {
       })).toEqualTypeOf<[(string | number)[]]>()
     })
   })
+
+  describe('trailing prop', () => {
+    test('hides trailing chevron when trailing is false (e.g. disabled select without arrow)', () => {
+      const wrapper = mount(SelectMenu, {
+        props: {
+          ...props,
+          disabled: true,
+          trailing: false
+        }
+      })
+
+      expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+    })
+  })
 })
