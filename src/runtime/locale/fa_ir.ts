@@ -102,9 +102,9 @@ export default defineLocale<Messages>({
       increment: 'افزایش'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'داده‌ای موجود نیست',
+      noMatch: 'داده‌ای یافت نشد',
+      search: 'جستجو…'
     },
     modal: {
       close: 'بستن'

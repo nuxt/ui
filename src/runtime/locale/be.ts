@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Павялічыць'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Няма даных',
+      noMatch: 'Супадзенняў не знойдзена',
+      search: 'Пошук…'
     },
     modal: {
       close: 'Закрыць'

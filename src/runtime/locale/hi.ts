@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'बढ़ाना'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'कोई डेटा नहीं',
+      noMatch: 'कोई मेल खाता डेटा नहीं',
+      search: 'खोजें…'
     },
     modal: {
       close: 'बंद करें'

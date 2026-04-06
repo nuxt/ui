@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'বৃদ্ধি করুন'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'কোন তথ্য নেই',
+      noMatch: 'কোন মিল পাওয়া যায়নি',
+      search: 'অনুসন্ধান করুন…'
     },
     modal: {
       close: 'বন্ধ করুন'

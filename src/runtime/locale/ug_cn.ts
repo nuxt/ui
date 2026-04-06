@@ -102,9 +102,9 @@ export default defineLocale<Messages>({
       increment: 'كۆپەيتىش'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'سانلىق مەلۇمات يوق',
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      search: 'ئىزدەش…'
     },
     modal: {
       close: 'تاقاش'

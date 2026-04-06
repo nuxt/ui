@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Qoʻshish'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Maʼlumot yoʻq',
+      noMatch: 'Mos keluvchi natija topilmadi',
+      search: 'Qidirish…'
     },
     modal: {
       close: 'Yopish'

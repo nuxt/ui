@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Crește'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Nu există date',
+      noMatch: 'Nu există date corespunzătoare',
+      search: 'Caută…'
     },
     modal: {
       close: 'Închide'

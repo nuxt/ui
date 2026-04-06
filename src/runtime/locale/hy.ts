@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Ավելացնել'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Տվյալներ չկան',
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      search: 'Որոնում…'
     },
     modal: {
       close: 'Փակել'

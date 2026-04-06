@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Suurenda'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Pole andmeid',
+      noMatch: 'Pole vastavaid andmeid',
+      search: 'Otsi…'
     },
     modal: {
       close: 'Sulge'

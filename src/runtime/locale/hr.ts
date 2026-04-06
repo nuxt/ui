@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Povećaj'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Nema podataka',
+      noMatch: 'Nema odgovarajućih podataka',
+      search: 'Pretraživanje…'
     },
     modal: {
       close: 'Zatvori'

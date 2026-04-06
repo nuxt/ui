@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Augmenter'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Aucune donnée',
+      noMatch: 'Aucune donnée correspondante',
+      search: 'Rechercher…'
     },
     modal: {
       close: 'Fermer'

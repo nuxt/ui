@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Αύξηση'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Δεν υπάρχουν δεδομένα',
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      search: 'Αναζήτηση…'
     },
     modal: {
       close: 'Κλείσιμο'

@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Handitu'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Daturik gabe',
+      noMatch: 'Ez da datu bat ere aurkitu',
+      search: 'Bilatu…'
     },
     modal: {
       close: 'Itxi'

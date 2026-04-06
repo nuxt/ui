@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Növel'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Nincs adat',
+      noMatch: 'Nincs találat',
+      search: 'Keresés…'
     },
     modal: {
       close: 'Bezárás'

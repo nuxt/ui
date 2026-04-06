@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Auka'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Engin gögn',
+      noMatch: 'Engin gögn fundust',
+      search: 'Leita…'
     },
     modal: {
       close: 'Loka'

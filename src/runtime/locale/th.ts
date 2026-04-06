@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'เพิ่ม'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'ไม่มีข้อมูล',
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      search: 'ค้นหา…'
     },
     modal: {
       close: 'ปิด'

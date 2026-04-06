@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: '增加'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: '沒有資料',
+      noMatch: '沒有相符的資料',
+      search: '搜尋…'
     },
     modal: {
       close: '關閉'

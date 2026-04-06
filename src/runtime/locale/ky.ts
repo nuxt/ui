@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Кошуу'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Маалымат жок',
+      noMatch: 'Сүйлөшкөн маалыматтар жок',
+      search: 'Издөө…'
     },
     modal: {
       close: 'Жабуу'

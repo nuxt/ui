@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Kasvata'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Ei tietoja',
+      noMatch: 'Ei vastaavia tietoja',
+      search: 'Hae…'
     },
     modal: {
       close: 'Sulje'

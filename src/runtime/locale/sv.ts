@@ -101,9 +101,9 @@ export default defineLocale<Messages>({
       increment: 'Öka'
     },
     listbox: {
-      noData: 'No data',
-      noMatch: 'No matching data',
-      search: 'Search…'
+      noData: 'Inga data',
+      noMatch: 'Inga matchande data',
+      search: 'Sök…'
     },
     modal: {
       close: 'Stäng'
