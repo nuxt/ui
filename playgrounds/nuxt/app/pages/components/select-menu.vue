@@ -82,6 +82,7 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
     />
     <USelectMenu placeholder="Highlight" highlight :items="items" v-bind="props" />
     <USelectMenu placeholder="Disabled" disabled :items="items" v-bind="props" />
+    <USelectMenu placeholder="Disabled and trailing false" disabled :items="items" :trailing="false" v-bind="props" />
     <USelectMenu placeholder="Required" required :items="items" v-bind="props" />
     <USelectMenu placeholder="Search..." icon="i-lucide-search" :items="items" v-bind="props" />
     <USelectMenu placeholder="Search..." trailing-icon="i-lucide-search" :items="items" v-bind="props" />

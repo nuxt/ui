@@ -257,7 +257,8 @@ const props = withDefaults(defineProps<SelectMenuProps<T, VK, M, Mod, C>>(), {
   resetSearchTermOnSelect: true,
   resetModelValueOnClear: true,
   autofocusDelay: 0,
-  virtualize: false
+  virtualize: false,
+  trailing: undefined
 })
 const emits = defineEmits<SelectMenuEmits<T, VK, M, Mod, C>>()
 const slots = defineSlots<SelectMenuSlots<T, VK, M, Mod, C>>()
