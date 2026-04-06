@@ -132,7 +132,7 @@ export type ListboxSlots<T extends ListboxItem = ListboxItem> = {
 </script>
 
 <script setup lang="ts" generic="T extends ListboxItem, M extends boolean = false">
-import { ListboxRoot, ListboxContent, ListboxVirtualizer, ListboxItem, ListboxItemIndicator, ListboxFilter } from 'reka-ui'
+import { ListboxRoot, ListboxContent, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
@@ -251,7 +251,7 @@ const virtualizerProps = toRef(() => {
         :text-content="(item: any) => get(item, props.labelKey as string)"
         v-bind="virtualizerProps"
       >
-        <ListboxItem
+        <RekaListboxItem
           :value="item"
           :disabled="item.disabled"
           data-slot="item"
@@ -290,11 +290,11 @@ const virtualizerProps = toRef(() => {
               <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemSelectedIcon" :class="ui.itemSelectedIcon({ class: [uiProp?.itemSelectedIcon] })" />
             </ListboxItemIndicator>
           </slot>
-        </ListboxItem>
+        </RekaListboxItem>
       </ListboxVirtualizer>
 
       <template v-else>
-        <ListboxItem
+        <RekaListboxItem
           v-for="(item, index) in filteredItems"
           :key="index"
           :value="item"
@@ -335,7 +335,7 @@ const virtualizerProps = toRef(() => {
               <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemSelectedIcon" :class="ui.itemSelectedIcon({ class: [uiProp?.itemSelectedIcon] })" />
             </ListboxItemIndicator>
           </slot>
-        </ListboxItem>
+        </RekaListboxItem>
       </template>
     </ListboxContent>
   </ListboxRoot>
