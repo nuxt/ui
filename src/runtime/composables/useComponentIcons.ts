@@ -46,12 +46,7 @@ export function useComponentIcons(componentProps: MaybeRefOrGetter<UseComponentI
     if (props.value.trailing === false) {
       return false
     }
-
-    return (
-      !!props.value.trailingIcon
-      || (!!props.value.icon && props.value.trailing === true)
-      || (props.value.loading && props.value.trailing === true)
-    )
+    return (props.value.icon && props.value.trailing) || (props.value.loading && props.value.trailing) || !!props.value.trailingIcon
   })
 
   const leadingIconName = computed(() => {
