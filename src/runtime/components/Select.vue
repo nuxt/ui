@@ -171,7 +171,8 @@ const props = withDefaults(defineProps<SelectProps<T, VK, M, Mod>>(), {
   labelKey: 'label',
   descriptionKey: 'description',
   portal: true,
-  autofocusDelay: 0
+  autofocusDelay: 0,
+  trailing: undefined
 })
 const emits = defineEmits<SelectEmits<T, VK, M, Mod>>()
 const slots = defineSlots<SelectSlots<T, VK, M, Mod>>()
