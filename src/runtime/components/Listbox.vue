@@ -224,11 +224,11 @@ const virtualizerProps = toRef(() => {
       <UInput
         variant="none"
         :size="size"
-        v-bind="typeof searchable === 'object' ? searchable : {}"
         :placeholder="placeholder || t('listbox.search')"
         :icon="appConfig.ui.icons.search"
         data-slot="search"
         :class="ui.search({ class: uiProp?.search })"
+        v-bind="typeof searchable === 'object' ? searchable : {}"
       />
     </ListboxFilter>
 
