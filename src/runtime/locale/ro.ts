@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Scade',
       increment: 'Crește'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Închide'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Închide'
-    },
-    transferList: {
-      noData: 'Nu există date',
-      noMatch: 'Nu există date corespunzătoare',
-      search: 'Caută…',
-      transfer: 'Transferă elementele selectate',
-      remove: 'Elimină elementele selectate'
     }
   }
 })

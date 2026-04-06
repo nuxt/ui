@@ -48,6 +48,7 @@ const components = [
   'input',
   'kbd',
   'link',
+  'listbox',
   'locale',
   'marquee',
   'modal',
@@ -85,7 +86,6 @@ const components = [
   'timeline',
   'toast',
   'tooltip',
-  'transfer-list',
   'tree',
   'user'
 ].map(component => ({ label: upperName(component.split('/').pop() as string), icon: 'i-lucide-box', to: `/components/${component}` }))

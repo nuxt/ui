@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Μείωση',
       increment: 'Αύξηση'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Κλείσιμο'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Κλείσιμο'
-    },
-    transferList: {
-      noData: 'Δεν υπάρχουν δεδομένα',
-      noMatch: 'Δεν βρέθηκαν δεδομένα',
-      search: 'Αναζήτηση…',
-      transfer: 'Μεταφορά επιλεγμένων στοιχείων',
-      remove: 'Αφαίρεση επιλεγμένων στοιχείων'
     }
   }
 })

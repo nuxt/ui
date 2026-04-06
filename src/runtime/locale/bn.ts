@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'হ্রাস করুন',
       increment: 'বৃদ্ধি করুন'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'বন্ধ করুন'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'বন্ধ করুন'
-    },
-    transferList: {
-      noData: 'কোন তথ্য নেই',
-      noMatch: 'কোন মিল পাওয়া যায়নি',
-      search: 'অনুসন্ধান করুন…',
-      transfer: 'নির্বাচিত আইটেম স্থানান্তর করুন',
-      remove: 'নির্বাচিত আইটেম সরান'
     }
   }
 })

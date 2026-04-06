@@ -101,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'کمی',
       increment: 'اضافہ'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'بند کریں'
     },
@@ -140,13 +145,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'بند کریں'
-    },
-    transferList: {
-      noData: 'کوئی ڈیٹا نہیں',
-      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      search: 'تلاش کریں…',
-      transfer: 'منتخب آئٹمز منتقل کریں',
-      remove: 'منتخب آئٹمز ہٹائیں'
     }
   }
 })

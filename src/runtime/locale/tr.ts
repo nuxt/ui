@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Azalt',
       increment: 'Arttır'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Kapat'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Kapat'
-    },
-    transferList: {
-      noData: 'Veri yok',
-      noMatch: 'Eşleşen veri yok',
-      search: 'Ara…',
-      transfer: 'Seçili öğeleri aktar',
-      remove: 'Seçili öğeleri kaldır'
     }
   }
 })

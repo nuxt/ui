@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: '減らす',
       increment: '増やす'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: '閉じる'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: '閉じる'
-    },
-    transferList: {
-      noData: 'データがありません',
-      noMatch: '一致するデータがありません',
-      search: '検索…',
-      transfer: '選択した項目を転送',
-      remove: '選択した項目を削除'
     }
   }
 })

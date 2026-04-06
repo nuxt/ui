@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Vähenda',
       increment: 'Suurenda'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Sulge'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Sulge'
-    },
-    transferList: {
-      noData: 'Pole andmeid',
-      noMatch: 'Pole vastavaid andmeid',
-      search: 'Otsi…',
-      transfer: 'Teisalda valitud elemendid',
-      remove: 'Eemalda valitud elemendid'
     }
   }
 })

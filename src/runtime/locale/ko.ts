@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: '감소',
       increment: '증가'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: '닫기'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: '닫기'
-    },
-    transferList: {
-      noData: '데이터가 없습니다.',
-      noMatch: '일치하는 데이터가 없습니다.',
-      search: '검색…',
-      transfer: '선택한 항목 이동',
-      remove: '선택한 항목 제거'
     }
   }
 })

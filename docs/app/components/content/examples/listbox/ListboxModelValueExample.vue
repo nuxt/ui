@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { TransferListItem } from '@nuxt/ui'
+import type { ListboxItem } from '@nuxt/ui'
 
-const items: TransferListItem[] = [
+const items: ListboxItem[] = [
   { label: 'France', icon: 'i-lucide-map-pin', value: 'FR' },
   { label: 'Germany', icon: 'i-lucide-map-pin', value: 'DE' },
   { label: 'Italy', icon: 'i-lucide-map-pin', value: 'IT' },
@@ -10,14 +10,19 @@ const items: TransferListItem[] = [
   { label: 'Poland', icon: 'i-lucide-map-pin', value: 'PL' }
 ]
 
-const value = ref<TransferListItem[]>([])
+const value = ref<ListboxItem>(items[2]!)
 </script>
 
 <template>
-  <UTransferList
-    v-model="value"
-    class="w-full"
-    :items="items"
-    searchable
-  />
+  <div class="w-full flex flex-col gap-4">
+    <UListbox
+      v-model="value"
+      :items="items"
+      class="w-full"
+    />
+
+    <p class="text-sm text-muted">
+      Selected: {{ value?.label || 'None' }}
+    </p>
+  </div>
 </template>

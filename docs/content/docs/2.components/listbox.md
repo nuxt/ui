@@ -1,5 +1,5 @@
 ---
-description: A component to move items between two side-by-side lists.
+description: A selectable list of items with search, virtualization and rich item rendering.
 category: data
 links:
   - label: Listbox
@@ -7,13 +7,13 @@ links:
     to: https://reka-ui.com/docs/components/listbox
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/TransferList.vue
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Listbox.vue
 navigation.badge: Soon
 ---
 
 ## Usage
 
-Use the TransferList component to allow users to move items between a source (left) and target (right) list. The `v-model` represents the items in the target list.
+Use the Listbox component to display a selectable list of items. The `v-model` represents the selected item(s).
 
 ::component-code
 ---
@@ -25,7 +25,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - TransferListItem[]
+  - ListboxItem[]
 props:
   items:
     - label: 'France'
@@ -46,8 +46,6 @@ props:
     - label: 'Poland'
       icon: 'i-lucide-map-pin'
       value: 'PL'
-  sourceTitle: 'Available'
-  targetTitle: 'Selected'
   class: 'w-full'
 ---
 ::
@@ -75,7 +73,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - TransferListItem[]
+  - ListboxItem[]
 props:
   items:
     - label: 'France'
@@ -98,9 +96,9 @@ props:
 ---
 ::
 
-### Searchable
+### Multiple
 
-Use the `searchable` prop to enable a search input in both lists. You can also pass an object to customize the [Input](/docs/components/input) component.
+Use the `multiple` prop to allow selecting multiple items. When enabled, the `v-model` will be an array.
 
 ::component-code
 ---
@@ -112,7 +110,41 @@ ignore:
 external:
   - items
 externalTypes:
-  - TransferListItem[]
+  - ListboxItem[]
+props:
+  multiple: true
+  items:
+    - label: 'France'
+      icon: 'i-lucide-map-pin'
+      value: 'FR'
+    - label: 'Germany'
+      icon: 'i-lucide-map-pin'
+      value: 'DE'
+    - label: 'Italy'
+      icon: 'i-lucide-map-pin'
+      value: 'IT'
+    - label: 'Spain'
+      icon: 'i-lucide-map-pin'
+      value: 'ES'
+  class: 'w-full'
+---
+::
+
+### Searchable
+
+Use the `searchable` prop to enable a search input. You can also pass an object to customize the [Input](/docs/components/input) component.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+external:
+  - items
+externalTypes:
+  - ListboxItem[]
 props:
   searchable: true
   items:
@@ -140,7 +172,7 @@ props:
 
 ### Size
 
-Use the `size` prop to change the size of the TransferList.
+Use the `size` prop to change the size of the Listbox.
 
 ::component-code
 ---
@@ -152,7 +184,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - TransferListItem[]
+  - ListboxItem[]
 props:
   size: xl
   items:
@@ -174,7 +206,7 @@ props:
 
 ### Disabled
 
-Use the `disabled` prop to prevent any user interaction with the TransferList.
+Use the `disabled` prop to prevent any user interaction with the Listbox.
 
 ::component-code
 ---
@@ -186,7 +218,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - TransferListItem[]
+  - ListboxItem[]
 props:
   disabled: true
   items:
@@ -208,7 +240,7 @@ props:
 
 ### Loading
 
-Use the `source-loading` / `target-loading` props to display a loading indicator in each list independently. Use the `loading-icon` prop to customize the icon.
+Use the `loading` prop to display a loading indicator. Use the `loading-icon` prop to customize the icon.
 
 ::component-code
 ---
@@ -220,10 +252,9 @@ ignore:
 external:
   - items
 externalTypes:
-  - TransferListItem[]
+  - ListboxItem[]
 props:
-  sourceLoading: true
-  targetLoading: false
+  loading: true
   items:
     - label: 'France'
       icon: 'i-lucide-map-pin'
@@ -231,12 +262,6 @@ props:
     - label: 'Germany'
       icon: 'i-lucide-map-pin'
       value: 'DE'
-    - label: 'Italy'
-      icon: 'i-lucide-map-pin'
-      value: 'IT'
-    - label: 'Spain'
-      icon: 'i-lucide-map-pin'
-      value: 'ES'
   class: 'w-full'
 ---
 ::
@@ -245,11 +270,22 @@ props:
 
 ### Control selected items
 
-You can control the selected items by using the `default-value` prop or the `v-model` directive.
+You can control the selected item by using the `default-value` prop or the `v-model` directive.
 
 ::component-example
 ---
-name: 'transfer-list-model-value-example'
+name: 'listbox-model-value-example'
+collapse: true
+---
+::
+
+### With multiple selection
+
+Use the `multiple` prop to allow selecting multiple items.
+
+::component-example
+---
+name: 'listbox-multiple-example'
 collapse: true
 ---
 ::
@@ -260,7 +296,7 @@ Use the `description` property on items to display additional text below the lab
 
 ::component-example
 ---
-name: 'transfer-list-description-example'
+name: 'listbox-description-example'
 collapse: true
 ---
 ::
@@ -271,18 +307,7 @@ Use the `avatar` property on items to display an [Avatar](/docs/components/avata
 
 ::component-example
 ---
-name: 'transfer-list-avatar-example'
-collapse: true
----
-::
-
-### With custom buttons
-
-Use the `transfer` and `remove` props to customize the transfer buttons. These accept any [Button](/docs/components/button) props. Use `transfer-icon` and `remove-icon` to change the button icons.
-
-::component-example
----
-name: 'transfer-list-custom-buttons-example'
+name: 'listbox-avatar-example'
 collapse: true
 ---
 ::
@@ -293,7 +318,18 @@ Use the `virtualize` prop to enable virtualization for large lists as a boolean 
 
 ::component-example
 ---
-name: 'transfer-list-virtualize-example'
+name: 'listbox-virtualize-example'
+collapse: true
+---
+::
+
+### As a transfer list
+
+You can compose two Listbox components with [Button](/docs/components/button) controls to build a transfer list pattern.
+
+::component-example
+---
+name: 'listbox-transfer-list-example'
 collapse: true
 ---
 ::

@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Zvogëlo',
       increment: 'Rrit'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Mbyll'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Mbyll'
-    },
-    transferList: {
-      noData: 'Nuk ka të dhëna',
-      noMatch: 'Nuk ka të dhëna që përputhen',
-      search: 'Kërko…',
-      transfer: 'Transfero artikujt e zgjedhur',
-      remove: 'Hiq artikujt e zgjedhur'
     }
   }
 })

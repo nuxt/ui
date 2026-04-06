@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Պակասեցնել',
       increment: 'Ավելացնել'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Փակել'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Փակել'
-    },
-    transferList: {
-      noData: 'Տվյալներ չկան',
-      noMatch: 'Համընկնումներ չեն գտնվել',
-      search: 'Որոնում…',
-      transfer: 'Տեղափոխել ընտրված տառրերը',
-      remove: 'Հեռացնել ընտրված տառրերը'
     }
   }
 })

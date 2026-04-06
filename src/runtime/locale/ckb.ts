@@ -101,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'کەمکردنەوە',
       increment: 'زیادکردن'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'داخستن'
     },
@@ -140,13 +145,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'داخستن'
-    },
-    transferList: {
-      noData: 'هیچ داتایەک نییە',
-      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      search: 'گەڕان…',
-      transfer: 'گواستنەوەی بڕگە هەڵبژێردراوەکان',
-      remove: 'سڕینەوەی بڕگە هەڵبژێردراوەکان'
     }
   }
 })

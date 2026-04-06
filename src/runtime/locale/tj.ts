@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Кам кардан',
       increment: 'Зиёд кардан'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Бастан'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Бастан'
-    },
-    transferList: {
-      noData: 'Маълумот нест',
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      search: 'Ҷустуҷӯ…',
-      transfer: 'Интиқоли элементҳои интихобшуда',
-      remove: 'Нест кардани элементҳои интихобшуда'
     }
   }
 })

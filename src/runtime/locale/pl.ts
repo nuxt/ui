@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Zmniejsz',
       increment: 'Zwiększ'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Zamknij'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Zamknij'
-    },
-    transferList: {
-      noData: 'Brak danych',
-      noMatch: 'Brak pasujących danych',
-      search: 'Szukaj…',
-      transfer: 'Przenieś zaznaczone elementy',
-      remove: 'Usuń zaznaczone elementy'
     }
   }
 })

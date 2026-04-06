@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Азайтуу',
       increment: 'Кошуу'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Жабуу'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Жабуу'
-    },
-    transferList: {
-      noData: 'Маалымат жок',
-      noMatch: 'Сүйлөшкөн маалыматтар жок',
-      search: 'Издөө…',
-      transfer: 'Тандалган элементтерди которуу',
-      remove: 'Тандалган элементтерди алып салуу'
     }
   }
 })

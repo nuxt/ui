@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Giảm',
       increment: 'Tăng'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Đóng'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Đóng'
-    },
-    transferList: {
-      noData: 'Không có dữ liệu',
-      noMatch: 'Không có kết quả phù hợp',
-      search: 'Tìm kiếm…',
-      transfer: 'Chuyển các mục đã chọn',
-      remove: 'Xóa các mục đã chọn'
     }
   }
 })

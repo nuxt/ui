@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: '減少',
       increment: '增加'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: '關閉'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: '關閉'
-    },
-    transferList: {
-      noData: '沒有資料',
-      noMatch: '沒有相符的資料',
-      search: '搜尋…',
-      transfer: '轉移選取項目',
-      remove: '移除選取項目'
     }
   }
 })

@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Murriztu',
       increment: 'Handitu'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Itxi'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Itxi'
-    },
-    transferList: {
-      noData: 'Daturik gabe',
-      noMatch: 'Ez da datu bat ere aurkitu',
-      search: 'Bilatu…',
-      transfer: 'Transferitu hautatutako elementuak',
-      remove: 'Kendu hautatutako elementuak'
     }
   }
 })

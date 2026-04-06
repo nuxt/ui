@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Хасах',
       increment: 'Нэмэх'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Хаах'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Хаах'
-    },
-    transferList: {
-      noData: 'Мэдээлэл байхгүй',
-      noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      search: 'Хайх…',
-      transfer: 'Сонгосон зүйлсийг шилжүүлэх',
-      remove: 'Сонгосон зүйлсийг хасах'
     }
   }
 })

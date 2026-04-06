@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Minska',
       increment: 'Öka'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Stäng'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Stäng'
-    },
-    transferList: {
-      noData: 'Inga data',
-      noMatch: 'Inga matchande data',
-      search: 'Sök…',
-      transfer: 'Överför valda objekt',
-      remove: 'Ta bort valda objekt'
     }
   }
 })

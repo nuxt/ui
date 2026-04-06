@@ -101,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'הפחת',
       increment: 'הוסף'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'סגור'
     },
@@ -140,13 +145,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'סגור'
-    },
-    transferList: {
-      noData: 'אין נתונים',
-      noMatch: 'לא נמצאה התאמה',
-      search: 'חפש…',
-      transfer: 'העבר פריטים נבחרים',
-      remove: 'הסר פריטים נבחרים'
     }
   }
 })

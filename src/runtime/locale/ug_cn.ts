@@ -101,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'ئازايتىش',
       increment: 'كۆپەيتىش'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'تاقاش'
     },
@@ -140,13 +145,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'تاقاش'
-    },
-    transferList: {
-      noData: 'سانلىق مەلۇمات يوق',
-      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      search: 'ئىزدەش…',
-      transfer: 'تاللانغان تۈرلەرنى يۆتكەش',
-      remove: 'تاللانغان تۈرلەرنى ئۆچۈرۈش'
     }
   }
 })

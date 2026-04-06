@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Minnka',
       increment: 'Auka'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Loka'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Loka'
-    },
-    transferList: {
-      noData: 'Engin gögn',
-      noMatch: 'Engin gögn fundust',
-      search: 'Leita…',
-      transfer: 'Flytja valin atriði',
-      remove: 'Fjarlægja valin atriði'
     }
   }
 })

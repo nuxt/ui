@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Kurangkan',
       increment: 'Naikkan'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Tutup'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Tutup'
-    },
-    transferList: {
-      noData: 'Tiada data',
-      noMatch: 'Tiada data yang sepadan',
-      search: 'Cari…',
-      transfer: 'Pindahkan item yang dipilih',
-      remove: 'Buang item yang dipilih'
     }
   }
 })

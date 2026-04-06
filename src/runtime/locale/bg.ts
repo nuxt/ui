@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Намаляване',
       increment: 'Увеличаване'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Затворете'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Затворете'
-    },
-    transferList: {
-      noData: 'Няма данни',
-      noMatch: 'Няма съвпадение на данни',
-      search: 'Потърсете…',
-      transfer: 'Прехвърляне на избраните елементи',
-      remove: 'Премахване на избраните елементи'
     }
   }
 })

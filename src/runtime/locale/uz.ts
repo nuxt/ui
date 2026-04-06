@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Ayirish',
       increment: 'Qoʻshish'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Yopish'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Yopish'
-    },
-    transferList: {
-      noData: 'Maʼlumot yoʻq',
-      noMatch: 'Mos keluvchi natija topilmadi',
-      search: 'Qidirish…',
-      transfer: 'Tanlangan elementlarni koʻchirish',
-      remove: 'Tanlangan elementlarni olib tashlash'
     }
   }
 })

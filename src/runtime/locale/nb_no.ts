@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Reduser',
       increment: 'Øk'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search...'
+    },
     modal: {
       close: 'Lukk'
     },
@@ -139,13 +144,6 @@ export default defineLocale<Messages>({
     },
     toast: {
       close: 'Lukk'
-    },
-    transferList: {
-      noData: 'Ingen data',
-      noMatch: 'Ingen samsvarende data',
-      search: 'Søk…',
-      transfer: 'Overfør valgte elementer',
-      remove: 'Fjern valgte elementer'
     }
   }
 })
