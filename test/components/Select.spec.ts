@@ -313,5 +313,20 @@ describe('Select', () => {
 
       expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
     })
+
+    test.each([
+      ['trailing prop is omitted', {}],
+      ['trailing is true', { trailing: true }]
+    ])('shows trailing chevron when %s', (_, trailingProps) => {
+      const wrapper = mount(Select, {
+        props: {
+          ...props,
+          disabled: true,
+          ...trailingProps
+        }
+      })
+
+      expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(true)
+    })
   })
 })
