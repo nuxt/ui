@@ -96,6 +96,7 @@ export type AuthFormSlots<T extends object = object, F extends AuthFormField = A
   title?(props?: {}): VNode[]
   description?(props?: {}): VNode[]
   providers?(props?: {}): VNode[]
+  separator?(props?: {}): VNode[]
   validation?(props?: {}): VNode[]
   submit?(props: { loading: boolean }): VNode[]
   footer?(props?: {}): VNode[]
@@ -226,12 +227,13 @@ defineExpose({
         </slot>
       </div>
 
-      <USeparator
-        v-if="providers?.length && fields?.length"
-        v-bind="typeof separator === 'object' ? separator : { label: separator }"
-        data-slot="separator"
-        :class="ui.separator({ class: uiProp?.separator })"
-      />
+      <slot v-if="(providers?.length && fields?.length) || !!slots.separator" name="separator">
+        <USeparator
+          v-bind="typeof separator === 'object' ? separator : { label: separator }"
+          data-slot="separator"
+          :class="ui.separator({ class: uiProp?.separator })"
+        />
+      </slot>
 
       <UForm
         v-if="fields?.length"
