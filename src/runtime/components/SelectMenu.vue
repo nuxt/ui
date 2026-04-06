@@ -286,7 +286,8 @@ const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('s
 
 const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
+const { isLeading, isTrailing: isTrailingFromComponentIcons, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
+const isTrailing = computed(() => props.trailing === false ? false : isTrailingFromComponentIcons.value)
 
 const selectSize = computed(() => fieldGroupSize.value || formGroupSize.value)
 
