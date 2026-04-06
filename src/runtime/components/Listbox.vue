@@ -1,8 +1,8 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { ListboxRootProps } from 'reka-ui'
-import type { Ref, VNode } from 'vue'
-import { computed, ref, toRef } from 'vue'
+import type { VNode } from 'vue'
+import { computed, ref, toRef, useId } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/listbox'
@@ -28,6 +28,7 @@ export interface ListboxItem {
 }
 
 export interface ListboxProps<T extends ListboxItem = ListboxItem, M extends boolean = false> extends Pick<ListboxRootProps, 'by' | 'disabled' | 'selectionBehavior' | 'highlightOnHover' | 'orientation' | 'name'> {
+  id?: string
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -136,6 +137,7 @@ import { defu } from 'defu'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
+import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { get } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
@@ -161,19 +163,21 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as Listbox['AppConfig']
 const uiProp = useComponentUI('listbox', props)
 
+const { emitFormChange, emitFormInput, name, size, id: _id, disabled, ariaAttrs } = useFormField<ListboxProps<T>>(props, { bind: false })
+// eslint-disable-next-line vue/no-dupe-keys
+const id = _id.value ?? useId()
+
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.listbox || {}) })({
-  size: props.size,
-  disabled: props.disabled
+  size: size.value,
+  disabled: disabled.value
 }))
 
-const internalValue = ref<M extends true ? T[] : T>(props.defaultValue as any) as Ref<M extends true ? T[] : T>
-const modelValue = computed({
-  get: () => props.modelValue !== undefined ? props.modelValue : internalValue.value,
-  set: (value: M extends true ? T[] : T) => {
-    internalValue.value = value
-    emits('update:modelValue', value)
-  }
-})
+function onUpdate(value: any) {
+  emits('update:modelValue', value)
+  emitFormChange()
+  emitFormInput()
+}
 
 const searchTerm = ref('')
 
@@ -201,7 +205,9 @@ const virtualizerProps = toRef(() => {
 
 <template>
   <ListboxRoot
-    v-model="modelValue"
+    :id="id"
+    :model-value="modelValue"
+    :default-value="defaultValue"
     :as="as || 'div'"
     :multiple="multiple"
     :selection-behavior="selectionBehavior"
@@ -212,6 +218,7 @@ const virtualizerProps = toRef(() => {
     :name="name"
     data-slot="root"
     :class="ui.root({ class: [uiProp?.root, props.class] })"
+    @update:model-value="onUpdate"
   >
     <ListboxFilter v-if="searchable" v-model="searchTerm" as-child>
       <UInput
@@ -225,7 +232,7 @@ const virtualizerProps = toRef(() => {
       />
     </ListboxFilter>
 
-    <ListboxContent data-slot="content" :class="ui.content({ class: uiProp?.content })">
+    <ListboxContent data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="ariaAttrs">
       <div v-if="loading" data-slot="loading" :class="ui.loading({ class: uiProp?.loading })">
         <slot name="loading">
           <UIcon :name="loadingIcon || appConfig.ui.icons.loading" data-slot="loadingIcon" :class="ui.loadingIcon({ class: uiProp?.loadingIcon })" />

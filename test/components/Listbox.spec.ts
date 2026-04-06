@@ -1,8 +1,11 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { flushPromises } from '@vue/test-utils'
 import { renderEach } from '../component-render'
+import { renderForm } from '../utils/form'
 import theme from '#build/ui/listbox'
+import type { FormInputEvents } from '../../src/module'
 import Listbox from '../../src/runtime/components/Listbox.vue'
 
 describe('Listbox', () => {
@@ -68,5 +71,58 @@ describe('Listbox', () => {
         'aria-input-field-name': { enabled: false }
       }
     })).toHaveNoViolations()
+  })
+
+  describe('form integration', async () => {
+    const item1 = { label: 'Option 1', value: 'opt1' }
+    const item2 = { label: 'Option 2', value: 'opt2' }
+
+    async function createForm(validateOn?: FormInputEvents[]) {
+      const wrapper = await renderForm({
+        props: {
+          validateOn,
+          validateOnInputDelay: 0,
+          async validate(state: any) {
+            if (!state.value?.some((i: any) => i.value === 'opt2'))
+              return [{ name: 'value', message: 'Error message' }]
+            return []
+          }
+        },
+        slotVars: {
+          items: [item1, item2]
+        },
+        slotTemplate: `
+        <UFormField name="value" label="Listbox">
+          <UListbox id="input" v-model="state.value" :items="items" multiple />
+        </UFormField>
+        `
+      })
+      const input = wrapper.findComponent({ name: 'ListboxRoot' })
+      return { wrapper, input }
+    }
+
+    test('validate on change works', async () => {
+      const { input, wrapper } = await createForm(['change'])
+
+      input.setValue([item1])
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      input.setValue([item2])
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on input works', async () => {
+      const { input, wrapper } = await createForm(['input'])
+
+      input.setValue([item1])
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      input.setValue([item2])
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
   })
 })

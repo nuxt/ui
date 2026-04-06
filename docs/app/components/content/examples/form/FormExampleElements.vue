@@ -36,6 +36,12 @@ const schema = z.object({
   checkboxGroup: z.any().refine(values => !!values?.find((option: any) => option === 'option-2'), {
     message: 'Include Option 2'
   }),
+  listbox: z.any().refine(option => option?.value === 'option-2', {
+    message: 'Select Option 2'
+  }),
+  listboxMultiple: z.any().refine(values => !!values?.find((option: any) => option.value === 'option-2'), {
+    message: 'Include Option 2'
+  }),
   slider: z.number().max(20, { message: 'Must be less than 20' }),
   pin: z.string().regex(/^\d$/).array().length(5),
   file: z.file().min(1).max(1024 * 1024).mime('image/png')
@@ -120,6 +126,14 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <UCheckboxGroup v-model="state.checkboxGroup" legend="Checkbox group" :items="items" />
         </UFormField>
       </div>
+      <UFormField name="listbox" label="Listbox">
+        <UListbox v-model="state.listbox" :items="items" class="w-full" />
+      </UFormField>
+
+      <UFormField name="listboxMultiple" label="Listbox (Multiple)">
+        <UListbox v-model="state.listboxMultiple" :items="items" multiple class="w-full" />
+      </UFormField>
+
       <UFormField name="pin" label="Pin Input" :error-pattern="/(pin)\..*/">
         <UPinInput v-model="state.pin" />
       </UFormField>

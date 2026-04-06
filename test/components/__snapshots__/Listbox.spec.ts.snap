@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Listbox > renders with class correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden max-h-64">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden max-h-64">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -26,7 +26,7 @@ exports[`Listbox > renders with class correctly 1`] = `
 `;
 
 exports[`Listbox > renders with disabled correctly 1`] = `
-"<div dir="ltr" data-disabled="" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden opacity-75 pointer-events-none">
+"<div dir="ltr" data-disabled="" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden opacity-75 pointer-events-none">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="-1" aria-selected="false" disabled="" data-disabled="" data-state="unchecked"><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -51,7 +51,7 @@ exports[`Listbox > renders with disabled correctly 1`] = `
 `;
 
 exports[`Listbox > renders with item slot correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted="">Item slot</div>
@@ -64,7 +64,7 @@ exports[`Listbox > renders with item slot correctly 1`] = `
 `;
 
 exports[`Listbox > renders with item-description slot correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span><span data-slot="itemDescription" class="truncate text-muted">Item description slot</span></span>
@@ -85,7 +85,7 @@ exports[`Listbox > renders with item-description slot correctly 1`] = `
 `;
 
 exports[`Listbox > renders with item-label slot correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">Item label slot</span>
@@ -110,7 +110,7 @@ exports[`Listbox > renders with item-label slot correctly 1`] = `
 `;
 
 exports[`Listbox > renders with item-leading slot correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted="">Item leading slot<span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -135,7 +135,7 @@ exports[`Listbox > renders with item-leading slot correctly 1`] = `
 `;
 
 exports[`Listbox > renders with items correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -160,7 +160,7 @@ exports[`Listbox > renders with items correctly 1`] = `
 `;
 
 exports[`Listbox > renders with items with description correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span><span data-slot="itemDescription" class="truncate text-muted">Description</span></span>
@@ -181,7 +181,7 @@ exports[`Listbox > renders with items with description correctly 1`] = `
 `;
 
 exports[`Listbox > renders with loading correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="loading" class="flex items-center justify-center text-muted py-6"><span class="iconify i-lucide:loader-circle animate-spin shrink-0 size-5" aria-hidden="true" data-slot="loadingIcon"></span></div>
@@ -191,7 +191,7 @@ exports[`Listbox > renders with loading correctly 1`] = `
 `;
 
 exports[`Listbox > renders with loadingIcon correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="loading" class="flex items-center justify-center text-muted py-6"><span class="iconify i-lucide:loader animate-spin shrink-0 size-5" aria-hidden="true" data-slot="loadingIcon"></span></div>
@@ -201,7 +201,7 @@ exports[`Listbox > renders with loadingIcon correctly 1`] = `
 `;
 
 exports[`Listbox > renders with modelValue correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="true" data-state="checked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -225,7 +225,7 @@ exports[`Listbox > renders with modelValue correctly 1`] = `
 `;
 
 exports[`Listbox > renders with multiple and modelValue correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="true" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="true" data-state="checked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -248,7 +248,7 @@ exports[`Listbox > renders with multiple and modelValue correctly 1`] = `
 `;
 
 exports[`Listbox > renders with multiple correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="true" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -273,7 +273,7 @@ exports[`Listbox > renders with multiple correctly 1`] = `
 `;
 
 exports[`Listbox > renders with placeholder correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <div data-slot="root" class="relative inline-flex items-center [&amp;>input]:h-10"><input type="text" placeholder="Filter..." data-slot="search" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent ps-9 md:text-sm" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-0"><span data-slot="leading" class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="leadingIcon"></span></span>
     <!--v-if-->
   </div>
@@ -300,7 +300,7 @@ exports[`Listbox > renders with placeholder correctly 1`] = `
 `;
 
 exports[`Listbox > renders with searchable correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <div data-slot="root" class="relative inline-flex items-center [&amp;>input]:h-10"><input type="text" placeholder="Search..." data-slot="search" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent ps-9 md:text-sm" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-0"><span data-slot="leading" class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="leadingIcon"></span></span>
     <!--v-if-->
   </div>
@@ -327,7 +327,7 @@ exports[`Listbox > renders with searchable correctly 1`] = `
 `;
 
 exports[`Listbox > renders with selectedIcon correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -352,7 +352,7 @@ exports[`Listbox > renders with selectedIcon correctly 1`] = `
 `;
 
 exports[`Listbox > renders with size lg correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-2 text-sm gap-2" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -377,7 +377,7 @@ exports[`Listbox > renders with size lg correctly 1`] = `
 `;
 
 exports[`Listbox > renders with size md correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -402,7 +402,7 @@ exports[`Listbox > renders with size md correctly 1`] = `
 `;
 
 exports[`Listbox > renders with size sm correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-xs gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0 gap-1"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -427,7 +427,7 @@ exports[`Listbox > renders with size sm correctly 1`] = `
 `;
 
 exports[`Listbox > renders with size xl correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-2 text-base gap-2" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-6" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -452,7 +452,7 @@ exports[`Listbox > renders with size xl correctly 1`] = `
 `;
 
 exports[`Listbox > renders with size xs correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 p-1 focus:outline-none" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1 text-xs gap-1" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0 gap-1"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>
@@ -477,7 +477,7 @@ exports[`Listbox > renders with size xs correctly 1`] = `
 `;
 
 exports[`Listbox > renders with ui correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="v-0-0" data-slot="root" class="flex flex-col min-h-0 min-w-0 border border-default rounded-lg overflow-hidden">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-96 focus:outline-none p-2" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="item" class="group relative w-full flex items-center select-none outline-none data-disabled:cursor-not-allowed data-disabled:opacity-75 before:absolute before:z-[-1] before:inset-px before:rounded-md text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="" id="reka-listbox-item-v-0-0-0" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-highlighted=""><span class="iconify i-lucide:map-pin shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class="flex-1 flex flex-col text-start min-w-0"><span data-slot="itemLabel" class="truncate text-highlighted">France</span>

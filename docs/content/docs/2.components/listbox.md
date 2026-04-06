@@ -13,7 +13,7 @@ navigation.badge: Soon
 
 ## Usage
 
-Use the Listbox component to display a selectable list of items. The `v-model` represents the selected item(s).
+Use the `v-model` directive to control the value of the Listbox or the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::component-code
 ---
