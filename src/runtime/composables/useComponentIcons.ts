@@ -18,7 +18,7 @@ export interface UseComponentIconsProps {
    * @IconifyIcon
    */
   leadingIcon?: IconProps['name']
-  /** When `true`, the icon will be displayed on the right side. */
+  /** When `false`, the icon will not be displayed on the right side. */
   trailing?: boolean
   /**
    * Display an icon on the right side.
