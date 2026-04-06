@@ -104,7 +104,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'No data',
       noMatch: 'No matching data',
-      search: 'Search...'
+      search: 'Search…'
     },
     modal: {
       close: 'סגור'

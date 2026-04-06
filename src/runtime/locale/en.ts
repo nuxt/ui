@@ -98,7 +98,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'No data',
       noMatch: 'No matching data',
-      search: 'Search...'
+      search: 'Search…'
     },
     modal: {
       close: 'Close'
@@ -122,7 +122,7 @@ export default defineLocale<Messages>({
       }
     },
     chatReasoning: {
-      thinking: 'Thinking...',
+      thinking: 'Thinking…',
       thought: 'Thought',
       thoughtFor: 'Thought for {duration}'
     },

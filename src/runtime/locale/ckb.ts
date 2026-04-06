@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
       prev: 'پێشتر'
     },
     chatPrompt: {
-      placeholder: 'نامەکەت لێرە بنوسە...'
+      placeholder: 'نامەکەت لێرە بنوسە…'
     },
     chatPromptSubmit: {
       label: 'ناردن'
@@ -104,7 +104,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'No data',
       noMatch: 'No matching data',
-      search: 'Search...'
+      search: 'Search…'
     },
     modal: {
       close: 'داخستن'
