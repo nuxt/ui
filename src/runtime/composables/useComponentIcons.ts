@@ -18,7 +18,7 @@ export interface UseComponentIconsProps {
    * @IconifyIcon
    */
   leadingIcon?: IconProps['name']
-  /** When `false`, the icon will not be displayed on the right side. */
+  /** When `true`, the icon will be displayed on the right side. */
   trailing?: boolean
   /**
    * Display an icon on the right side.
@@ -42,10 +42,17 @@ export function useComponentIcons(componentProps: MaybeRefOrGetter<UseComponentI
 
   const isLeading = computed(() => (props.value.icon && props.value.leading) || (props.value.icon && !props.value.trailing) || (props.value.loading && !props.value.trailing) || !!props.value.leadingIcon)
 
-  const isTrailing = computed(() => (props.value.trailing === false
-    ? false
-    : (!!props.value.icon || props.value.loading || !!props.value.trailingIcon)
-  ))
+  const isTrailing = computed(() => {
+    if (props.value.trailing === false) {
+      return false
+    }
+
+    return (
+      !!props.value.trailingIcon
+      || (!!props.value.icon && props.value.trailing === true)
+      || (props.value.loading && props.value.trailing === true)
+    )
+  })
 
   const leadingIconName = computed(() => {
     if (props.value.loading) {
