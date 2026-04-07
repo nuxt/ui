@@ -64,82 +64,14 @@ const resetTheme = {
   execute: async () => ({ reset: true })
 }
 
-export default defineEventHandler(async (event) => {
-  const { messages, theme } = await readBody(event)
-
-  if (!messages || !Array.isArray(messages)) {
-    throw createError({ statusCode: 400, message: 'Invalid or missing messages array.' })
-  }
-
-  const componentNames = theme ? Object.keys(theme) : []
-
-  const getComponentTheme = {
-    description: 'Get the theme definition (slots, variants, compoundVariants, defaultVariants) for a specific Nuxt UI component. Call this when you need to know the available slots and customization options to suggest component-level theming in app.config.ts.',
-    inputSchema: jsonSchema<{ componentName: string }>({
-      type: 'object' as const,
-      properties: {
-        componentName: {
-          type: 'string',
-          description: `Component name in camelCase. Available: ${componentNames.join(', ')}`
-        }
-      },
-      required: ['componentName']
-    }),
-    execute: async ({ componentName }: { componentName: string }) => {
-      if (!theme?.[componentName]) {
-        return { error: `Component "${componentName}" not found`, availableComponents: componentNames }
-      }
-      return { componentName, theme: theme[componentName] }
-    }
-  }
-
-  let httpClient
-  let mcpTools
-  try {
-    const mcpUrl = import.meta.dev
-      ? new URL('/mcp', getRequestURL(event).origin)
-      : new URL('https://ui.nuxt.com/mcp')
-    const httpTransport = new StreamableHTTPClientTransport(mcpUrl)
-    httpClient = await experimental_createMCPClient({
-      transport: httpTransport
-    })
-    mcpTools = await httpClient.tools()
-  } catch (error) {
-    console.error('MCP client error:', error)
-
-    throw createError({
-      statusCode: 503,
-      message: 'Unable to connect to the documentation service. Please try again later.'
-    })
-  }
-
-  const system = `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
-
-Guidelines:
-- For documentation questions, ALWAYS use tools to search for information. Never rely on pre-trained knowledge for Nuxt UI APIs, props, or usage.
-- For theme customization, use your own judgment on aesthetics, color theory, and design — no need to search docs for that. Be decisive: pick colors/fonts/radius confidently and apply them. Don't deliberate or second-guess — commit to a direction.
-- If a question is unrelated to Nuxt UI (e.g. general coding, off-topic), briefly answer if you can, but don't waste tool calls searching docs for it.
-- If no relevant information is found after searching, respond with "Sorry, I couldn't find information about that in the documentation."
-- Be concise and direct in your responses.
-
-**FORMATTING RULES (CRITICAL):**
-- ABSOLUTELY NO MARKDOWN HEADINGS: Never use #, ##, ###, ####, #####, or ######
-- NO underline-style headings with === or ---
-- Use **bold text** for emphasis and section labels instead
-- Examples:
-  * Instead of "## Usage", write "**Usage:**" or just "Here's how to use it:"
-  * Instead of "# Complete Guide", write "**Complete Guide**" or start directly with content
-- Start all responses with content, never with a heading
-
-- Reference specific component names, props, or APIs when applicable.
-- If a question is ambiguous, ask for clarification rather than guessing.
-- When multiple relevant items are found, list them clearly using bullet points.
-- You have up to 5 tool calls to find the answer, so be strategic: start broad, then get specific if needed.
-- Format responses in a conversational way, not as documentation sections.
-
-**LIVE THEME CUSTOMIZATION:**
-
-When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
+const getThemeGuide = {
+  description: 'Get detailed instructions for applying live theme changes. Call this ONLY when you are about to use applyTheme (e.g. user says "make it blue", "create a dark theme"). Do NOT call for documentation questions about theming — search docs instead.',
+  inputSchema: jsonSchema<Record<string, never>>({
+    type: 'object' as const,
+    properties: {}
+  }),
+  execute: async () => ({
+    guide: `When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
 
 When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and font. You can change the icon set (lucide, phosphor, or tabler) if it really enhances the theme, but prefer keeping lucide as the default — it works well with most themes. You can optionally include component-level \`ui\` overrides for a more polished result — if you do, look up the component theme first with \`getComponentTheme\` and prefer \`defaultVariants\` (e.g. button size or variant) over slot class overrides. Create a cohesive design system, not just random colors:
 - Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as hex values — this is encouraged for creative/unique themes.
@@ -215,23 +147,22 @@ Semantic colors (\`--ui-primary\`, \`--ui-secondary\`, \`--ui-success\`, \`--ui-
 
 Do NOT use \`cssVariables\` for things achievable with \`primary\`, \`neutral\`, \`customColors\`, or component \`ui\` overrides.
 
-**2. App Config (app.config.ts)**
+**2. Config (app.config.ts for Nuxt / vite.config.ts for Vue)**
 
-For semantic color assignment and component-level theming:
-\`\`\`typescript
-export default defineAppConfig({
-  ui: {
-    colors: {
-      primary: 'blue',
-      neutral: 'zinc'
-    },
-    button: {
-      slots: { base: 'font-bold' },
-      defaultVariants: { size: 'lg' }
-    }
-  }
-})
+For semantic color assignment and component-level theming. The \`ui\` object is the same for both frameworks:
 \`\`\`
+ui: {
+  colors: {
+    primary: 'blue',
+    neutral: 'zinc'
+  },
+  button: {
+    slots: { base: 'font-bold' },
+    defaultVariants: { size: 'lg' }
+  }
+}
+\`\`\`
+For Nuxt, wrap in \`defineAppConfig({ ui: { ... } })\`. For Vue, pass as \`ui({ ui: { ... } })\` in the Vite plugin.
 
 **Color options:**
 - Standard Tailwind: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
@@ -261,11 +192,11 @@ export default defineAppConfig({
   - Rounded (friendly/playful): Nunito, Quicksand, Varela Round
   - Monospace (techy/dev): JetBrains Mono, Fira Code, IBM Plex Mono
   ALWAYS change the font when creating a complete theme — don't leave the default unless it genuinely fits.
-- Icons: lucide (default), phosphor, or tabler for live preview. Any Iconify icon set works in the exported app.config.ts. When suggesting a non-default icon set, include the FULL \`ui.icons\` mapping in the exported app.config.ts and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
+- Icons: lucide (default), phosphor, or tabler for live preview. Any Iconify icon set works in the exported config. When suggesting a non-default icon set, include the FULL \`ui.icons\` mapping in the exported config and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
 
 **Component Theme Lookup:**
 
-When users ask about component-specific customization, use the \`getComponentTheme\` tool to get the exact slots, variants, and defaults for that component. This lets you suggest precise app.config.ts overrides.
+When users ask about component-specific customization, use the \`getComponentTheme\` tool to get the exact slots, variants, and defaults for that component. This lets you suggest precise config overrides.
 
 When you want to suggest component \`ui\` overrides (e.g. customizing button styles), call \`getComponentTheme\` for that component first — never guess slot names. Only look up component themes when you actually plan to include \`ui\` overrides in the \`applyTheme\` call.
 
@@ -276,8 +207,6 @@ CRITICAL rules for component \`ui\` overrides:
 - Only ADD new classes that aren't already in the component's default theme. Do NOT repeat or duplicate default classes (e.g. \`inline-flex\`, \`items-center\`, \`disabled:cursor-not-allowed\`, \`transition-colors\` on button are already defaults). Use \`getComponentTheme\` to check what's already there.
 - Keep overrides minimal and intentional — only include classes that actually change the look from the default.
 - Tailwind v4 only generates classes that are already used in source files. Arbitrary Tailwind utility classes (e.g. \`tracking-wide\`, \`shadow-2xl\`) may NOT exist in the user's CSS output. Prefer overrides that use classes already present in the component's default theme (e.g. changing \`font-medium\` to \`font-semibold\`) or CSS variables. For the exported code, mention that users may need to safelist any new utility classes.
-
-Available components: ${componentNames.join(', ')}
 
 **When suggesting theme changes, you MUST:**
 1. Call the \`applyTheme\` tool with the settings so changes apply live
@@ -308,8 +237,9 @@ Available components: ${componentNames.join(', ')}
 }
 \`\`\`
 
-3. Show the full **app.config.ts** code block if colors, icons, or component overrides changed. IMPORTANT: this must include ALL settings from the entire conversation — not just the current \`applyTheme\` call but also all previous calls (colors, icons with full \`ui.icons\` mapping, component \`ui\` overrides like button, popover, etc.). If a non-default icon set was chosen, the exported config MUST include the complete \`ui.icons\` object with every key mapped. Review earlier \`applyTheme\` calls in the conversation and merge everything into one complete config:
+3. Show the config code block if colors, icons, or component overrides changed. Use **app.config.ts** for Nuxt or **vite.config.ts** for Vue (based on the user's framework). IMPORTANT: this must include ALL settings from the entire conversation — not just the current \`applyTheme\` call but also all previous calls (colors, icons with full \`ui.icons\` mapping, component \`ui\` overrides like button, popover, etc.). If a non-default icon set was chosen, the exported config MUST include the complete \`ui.icons\` object with every key mapped. Review earlier \`applyTheme\` calls in the conversation and merge everything into one complete config.
 
+For **Nuxt** — \`app.config.ts\`:
 \`\`\`typescript
 export default defineAppConfig({
   ui: {
@@ -318,7 +248,103 @@ export default defineAppConfig({
 })
 \`\`\`
 
-NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`radius\`, \`font\`) — those are internal to the docs site. Users should use CSS variables in main.css for radius, fonts, and monochrome primary.
+For **Vue** — \`vite.config.ts\`:
+\`\`\`typescript
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import ui from '@nuxt/ui/vite'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    ui({
+      ui: {
+        // ... ALL accumulated config from this conversation
+      }
+    })
+  ]
+})
+\`\`\`
+
+NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`radius\`, \`font\`) — those are internal to the docs site. Users should use CSS variables in main.css for radius, fonts, and monochrome primary.`
+  })
+}
+
+export default defineEventHandler(async (event) => {
+  const { messages, theme, framework } = await readBody(event)
+
+  if (!messages || !Array.isArray(messages)) {
+    throw createError({ statusCode: 400, message: 'Invalid or missing messages array.' })
+  }
+
+  const componentNames = theme ? Object.keys(theme) : []
+
+  const getComponentTheme = {
+    description: 'Get the theme definition (slots, variants, compoundVariants, defaultVariants) for a specific Nuxt UI component. Call this when you need to know the available slots and customization options to suggest component-level theming.',
+    inputSchema: jsonSchema<{ componentName: string }>({
+      type: 'object' as const,
+      properties: {
+        componentName: {
+          type: 'string',
+          description: `Component name in camelCase. Available: ${componentNames.join(', ')}`
+        }
+      },
+      required: ['componentName']
+    }),
+    execute: async ({ componentName }: { componentName: string }) => {
+      if (!theme?.[componentName]) {
+        return { error: `Component "${componentName}" not found`, availableComponents: componentNames }
+      }
+      return { componentName, theme: theme[componentName] }
+    }
+  }
+
+  let httpClient
+  let mcpTools
+  try {
+    const mcpUrl = import.meta.dev
+      ? new URL('/mcp', getRequestURL(event).origin)
+      : new URL('https://ui.nuxt.com/mcp')
+    const httpTransport = new StreamableHTTPClientTransport(mcpUrl)
+    httpClient = await experimental_createMCPClient({
+      transport: httpTransport
+    })
+    mcpTools = await httpClient.tools()
+  } catch (error) {
+    console.error('MCP client error:', error)
+
+    throw createError({
+      statusCode: 503,
+      message: 'Unable to connect to the documentation service. Please try again later.'
+    })
+  }
+
+  const system = `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
+
+The user is using **${framework === 'vue' ? 'Vue' : 'Nuxt'}**. Tailor your answers accordingly — ${framework === 'vue' ? 'use the Vite plugin setup, Vue Router, and vite.config.ts instead of Nuxt-specific features like modules or app.config.ts. IMPORTANT: The Vite plugin auto-imports components and Nuxt UI composables, but Vue core APIs and VueUse must be explicitly imported — always include these in code examples (e.g. `import { ref, computed } from \'vue\'`, `import { useColorMode } from \'@vueuse/core\'`).' : 'use Nuxt modules, auto-imports, app.config.ts, and other Nuxt-specific features. Nuxt auto-imports Vue APIs (ref, computed, etc.), composables, and components — do not include these imports in code examples.'}
+
+Guidelines:
+- For documentation questions, ALWAYS use tools to search for information. Never rely on pre-trained knowledge for Nuxt UI APIs, props, or usage.
+- For questions about how to customize themes (e.g. "how do I customize colors?", "how does theming work?"), search the documentation like any other docs question.
+- When users ask you to APPLY a theme change live (e.g. "make it blue", "create a sakura theme", "change the font"), call \`getThemeGuide\` first for detailed instructions, then use \`applyTheme\` / \`resetTheme\`. Use your own judgment on aesthetics, color theory, and design — no need to search docs for that. Be decisive: pick colors/fonts/radius confidently and apply them.
+- If a question is unrelated to Nuxt UI (e.g. general coding, off-topic), briefly answer if you can, but don't waste tool calls searching docs for it.
+- If no relevant information is found after searching, respond with "Sorry, I couldn't find information about that in the documentation."
+- Be concise and direct in your responses.
+
+**FORMATTING RULES (CRITICAL):**
+- ABSOLUTELY NO MARKDOWN HEADINGS: Never use #, ##, ###, ####, #####, or ######
+- NO underline-style headings with === or ---
+- Use **bold text** for emphasis and section labels instead
+- Examples:
+  * Instead of "## Usage", write "**Usage:**" or just "Here's how to use it:"
+  * Instead of "# Complete Guide", write "**Complete Guide**" or start directly with content
+- Start all responses with content, never with a heading
+
+- Reference specific component names, props, or APIs when applicable.
+- If a question is ambiguous, ask for clarification rather than guessing.
+- When multiple relevant items are found, list them clearly using bullet points.
+- You have up to 5 tool calls to find the answer, so be strategic: start broad, then get specific if needed.
+- Format responses in a conversational way, not as documentation sections.
     `
 
   return streamText({
@@ -338,9 +364,10 @@ NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`rad
     system,
     messages: await convertToModelMessages(messages),
     experimental_transform: smoothStream(),
-    stopWhen: stepCountIs(5),
+    stopWhen: stepCountIs(6),
     tools: {
       ...mcpTools,
+      getThemeGuide,
       applyTheme,
       resetTheme,
       getComponentTheme

@@ -22,7 +22,7 @@
     "@nuxt/content": "^3.12.0",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "workspace:*",
-    "@nuxtjs/mcp-toolkit": "^0.13.2",
+    "@nuxtjs/mcp-toolkit": "https://pkg.pr.new/@nuxtjs/mcp-toolkit@e682004",
     "@nuxtjs/mdc": "^0.21.0",
     "@octokit/rest": "^22.0.1",
     "@regle/core": "^1.21.2",
