@@ -22,7 +22,7 @@ export default defineMcpTool({
     const page = await queryCollection(event, 'docs')
       .where('path', 'LIKE', `%/migration/${version}`)
       .where('extension', '=', 'md')
-      .select('id', 'title', 'description', 'path')
+      .select('title', 'description', 'path')
       .first()
 
     if (!page) {

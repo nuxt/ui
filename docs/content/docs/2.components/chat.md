@@ -178,9 +178,29 @@ export default defineEventHandler(async (event) => {
 
 ::
 
-### Tool Calling (MCP)
+### Tool Calling with MCP
 
-You can enhance your chatbot with tool calling capabilities using the [Model Context Protocol](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) (`@ai-sdk/mcp`). This allows the AI to search your documentation or perform other actions:
+Empower your chatbot with advanced tool-calling features using the [Model Context Protocol (MCP)](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) from `@ai-sdk/mcp`. MCP enables your AI to perform dynamic actions, such as searching your documentation or executing custom tasks, to provide more relevant and accurate responses.
+
+To get started, install the MCP package:
+
+:::code-group
+
+```bash [npm]
+npm install @ai-sdk/mcp
+```
+
+```bash [pnpm]
+pnpm add @ai-sdk/mcp
+```
+
+```bash [yarn]
+yarn add @ai-sdk/mcp
+```
+
+:::
+
+Then, configure your server endpoint to use MCP tools:
 
 ```ts [server/api/chat.post.ts]
 import { streamText, convertToModelMessages, stepCountIs } from 'ai'

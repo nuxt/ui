@@ -17,13 +17,16 @@ export default defineMcpTool({
   ],
   cache: '30m',
   async handler({ exampleName }) {
-    let result
     try {
-      result = await $fetch<{ code: string }>(`/api/component-example/${exampleName}.json`)
-    } catch {
-      throw createError({ statusCode: 404, message: `Example '${exampleName}' not found. Use the list_examples tool to see all available examples.` })
+      const result = await $fetch<{ code: string }>(`/api/component-example/${exampleName}.json`)
+      return result.code
+    } catch (error: unknown) {
+      const err = error as { statusCode?: number, response?: { status?: number } }
+      const status = err?.statusCode ?? err?.response?.status
+      if (status === 404) {
+        throw createError({ statusCode: 404, message: `Example '${exampleName}' not found. Use the list_examples tool to see all available examples.` })
+      }
+      throw error
     }
-
-    return result.code
   }
 })

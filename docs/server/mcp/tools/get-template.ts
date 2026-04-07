@@ -23,8 +23,10 @@ export default defineMcpTool({
     const templatesCollectionItems = await queryCollection(event, 'templates').first()
     const templateListing = templatesCollectionItems?.items || []
 
-    const template = templateListing.find((t: Record<string, any>) =>
-      t.title.toLowerCase() === templateName.toLowerCase()
+    const normalizedTemplateName = templateName.toLowerCase()
+    const template = templateListing.find((t: { title?: unknown }) =>
+      typeof t.title === 'string'
+      && t.title.toLowerCase() === normalizedTemplateName
     )
 
     if (!template) {

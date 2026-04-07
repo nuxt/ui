@@ -10,10 +10,10 @@ export default defineMcpTool({
     openWorldHint: false
   },
   inputSchema: {
-    framework: z.string().optional().describe('Filter templates by framework (e.g., "Nuxt", "Vue")')
+    framework: z.string().optional().describe('Filter templates by framework (e.g., "nuxt", "vue")')
   },
   inputExamples: [
-    { framework: 'Nuxt' },
+    { framework: 'nuxt' },
     {}
   ],
   cache: '1h',
@@ -24,8 +24,12 @@ export default defineMcpTool({
 
     const templateListing = templatesCollectionItems?.items || []
 
-    const filteredTemplates = framework
-      ? templateListing.filter((template: Record<string, any>) => template.framework === framework)
+    const normalizedFramework = framework?.toLowerCase()
+    const filteredTemplates = normalizedFramework
+      ? templateListing.filter(
+          (template: { framework?: string }) =>
+            template.framework?.toLowerCase() === normalizedFramework
+        )
       : templateListing
 
     return {

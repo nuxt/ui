@@ -13,6 +13,10 @@ export function extractSections(markdown: string, sectionTitles: string[]): stri
   let inHeader = true
   for (const line of lines) {
     if (inHeader) {
+      if (line.startsWith('## ')) {
+        inHeader = false
+        break
+      }
       result.push(line)
       // Stop after the description blockquote
       if (line.startsWith('>') && result.length > 1) {
