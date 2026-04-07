@@ -183,19 +183,15 @@ export default defineEventHandler(async (event) => {
 You can enhance your chatbot with tool calling capabilities using the [Model Context Protocol](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) (`@ai-sdk/mcp`). This allows the AI to search your documentation or perform other actions:
 
 ```ts [server/api/chat.post.ts]
-import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
 import { streamText, convertToModelMessages, stepCountIs } from 'ai'
-import { experimental_createMCPClient } from '@ai-sdk/mcp'
+import { createMCPClient } from '@ai-sdk/mcp'
 import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
-  const httpTransport = new StreamableHTTPClientTransport(
-    new URL('https://your-app.com/mcp')
-  )
-  const httpClient = await experimental_createMCPClient({
-    transport: httpTransport
+  const httpClient = await createMCPClient({
+    transport: { type: 'http', url: 'https://your-app.com/mcp' }
   })
   const tools = await httpClient.tools()
 
