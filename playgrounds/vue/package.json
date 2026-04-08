@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@nuxt/ui": "workspace:*",
-    "@tiptap/extension-emoji": "^3.21.0",
-    "@tiptap/extension-text-align": "^3.21.0",
+    "@tiptap/extension-emoji": "^3.22.2",
+    "@tiptap/extension-text-align": "^3.22.2",
     "tailwindcss": "^4.2.2",
     "vue": "^3.5.30",
     "vue-router": "^5.0.4",

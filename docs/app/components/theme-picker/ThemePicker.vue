@@ -11,7 +11,7 @@ watch(open, (isOpen) => {
 })
 
 const { copy: copyCSS, copied: copiedCSS } = useClipboard()
-const { copy: copyAppConfig, copied: copiedAppConfig } = useClipboard()
+const { copy: copyConfig, copied: copiedConfig } = useClipboard()
 
 const {
   neutralColors,
@@ -32,7 +32,7 @@ const {
   hasConfigChanges,
   configLabel,
   exportCSS,
-  exportAppConfig,
+  exportConfig,
   resetTheme
 } = useTheme()
 </script>
@@ -246,9 +246,9 @@ const {
             variant="soft"
             size="sm"
             :label="configLabel"
-            :icon="copiedAppConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+            :icon="copiedConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
             class="flex-1 text-[11px]"
-            @click="copyAppConfig(exportAppConfig())"
+            @click="copyConfig(exportConfig())"
           />
           <UTooltip text="Reset theme">
             <UButton
