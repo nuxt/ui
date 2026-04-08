@@ -86,7 +86,7 @@ export default defineNuxtPlugin({
             }
             `.replace(/\s+/g, ' '),
           type: 'text/javascript',
-          tagPriority: -1
+          tagPriority: 'high'
         }, {
           innerHTML: `
             if (localStorage.getItem('nuxt-ui-radius')) {
@@ -94,7 +94,7 @@ export default defineNuxtPlugin({
             }
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
-          tagPriority: -1
+          tagPriority: 'high'
         }, {
           innerHTML: `
             if (localStorage.getItem('nuxt-ui-black-as-primary') === 'true') {
@@ -138,7 +138,7 @@ export default defineNuxtPlugin({
             })();
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
-          tagPriority: -1
+          tagPriority: 'high'
         }, {
           innerHTML: `
             (function() {
@@ -169,7 +169,7 @@ export default defineNuxtPlugin({
             })();
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
-          tagPriority: -1
+          tagPriority: 'high'
         }]
       })
     }
