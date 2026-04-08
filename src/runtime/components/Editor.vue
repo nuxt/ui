@@ -85,7 +85,7 @@ export interface EditorSlots<H extends EditorCustomHandlers = EditorCustomHandle
 </script>
 
 <script setup lang="ts" generic="T extends Content, H extends EditorCustomHandlers">
-import { computed, provide, useAttrs, watch } from 'vue'
+import { computed, provide, shallowRef, useAttrs, watch } from 'vue'
 import { defu } from 'defu'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { mergeAttributes } from '@tiptap/core'
@@ -133,6 +133,7 @@ const editorProps = computed(() => defu(props.editorProps, {
   }
 } as EditorOptions['editorProps']))
 const contentType = computed(() => props.contentType || (typeof props.modelValue === 'string' ? 'html' : 'json'))
+const lastSyncedContent = shallowRef(serializeContent(props.modelValue, contentType.value))
 const starterKit = computed(() => defu(props.starterKit, {
   code: false,
   horizontalRule: false,
@@ -222,42 +223,47 @@ const editor = useEditor({
       value = editor.getText()
     }
 
+    lastSyncedContent.value = serializeContent(value as T, contentType.value)
     emits('update:modelValue', value as T)
   }
 })
 
-watch(() => props.modelValue, (newVal) => {
+watch([() => props.modelValue, contentType], ([newVal, type]) => {
   if (!editor.value || newVal == null) {
     return
   }
 
-  const currentContent = contentType.value === 'html'
-    ? editor.value.getHTML()
-    : contentType.value === 'json'
-      ? JSON.stringify(editor.value.getJSON())
-      : contentType.value === 'markdown'
-        ? editor.value.getMarkdown()
-        : editor.value.getText()
+  const newContent = serializeContent(newVal, type)
 
-  const newContent = contentType.value === 'json' && typeof newVal === 'object'
-    ? JSON.stringify(newVal)
-    : String(newVal)
-
-  if (currentContent !== newContent) {
+  if (newContent !== lastSyncedContent.value) {
     // Store current cursor position
     const currentSelection = editor.value.state.selection
     const currentPos = currentSelection.from
 
     // Set the new content
-    editor.value.commands.setContent(newVal, { contentType: contentType.value })
+    editor.value.commands.setContent(newVal, { contentType: type })
 
     // Restore cursor position if the position is still valid in the new content
     const newDoc = editor.value.state.doc
     if (currentPos <= newDoc.content.size) {
       editor.value.commands.setTextSelection(currentPos)
     }
+
+    lastSyncedContent.value = newContent
   }
 })
+
+function serializeContent(value: Content | undefined, type: EditorContentType) {
+  if (value == null) {
+    return ''
+  }
+
+  if (type === 'json' && typeof value === 'object') {
+    return JSON.stringify(value)
+  }
+
+  return String(value)
+}
 
 const handlers = computed(() => ({
   ...createHandlers(),

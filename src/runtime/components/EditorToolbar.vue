@@ -95,7 +95,7 @@ export type EditorToolbarSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<EditorToolbarItem>">
-import { computed, inject, shallowRef, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, shallowRef, watch } from 'vue'
 import type { ShallowRef } from 'vue'
 import { Primitive, Separator, useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
@@ -391,6 +391,8 @@ function buildRenderGroups(): ToolbarRenderEntry[][] {
 }
 
 const renderGroups = shallowRef<ToolbarRenderEntry[][]>(buildRenderGroups())
+let pendingFrameId: number | null = null
+let pendingForceRefresh = false
 
 function refreshState(force = false) {
   for (const group of renderGroups.value) {
@@ -404,18 +406,53 @@ function refreshState(force = false) {
 
       if ('items' in entry.item && entry.item.items?.length) {
         const previousDropdownState = entry.dropdownState.value
+        const dropdownChanged = !sameDropdownButtonProps(previousDropdownState, resolved.dropdown)
 
-        // Always update dropdown items since child active/disabled states may change
-        entry.dropdownState.value = resolved.dropdown
-        entry.dropdownItems.value = resolved.dropdown?.items || []
+        if (force || stateChanged || dropdownChanged) {
+          entry.dropdownState.value = resolved.dropdown
+          entry.dropdownItems.value = resolved.dropdown?.items || []
+        }
 
         // Only rebuild button props when activeChild icon/label changes
-        if (stateChanged || force || !sameDropdownButtonProps(previousDropdownState, resolved.dropdown)) {
+        if (stateChanged || force || dropdownChanged) {
           entry.buttonProps.value = buildButtonProps(entry.item, resolved.dropdown)
         }
       }
     }
   }
+}
+
+function flushRefresh() {
+  const force = pendingForceRefresh
+  pendingForceRefresh = false
+  pendingFrameId = null
+  refreshState(force)
+}
+
+function scheduleRefresh(force = false) {
+  pendingForceRefresh ||= force
+
+  if (pendingFrameId !== null) {
+    return
+  }
+
+  if (typeof requestAnimationFrame === 'function') {
+    pendingFrameId = requestAnimationFrame(() => {
+      flushRefresh()
+    })
+    return
+  }
+
+  flushRefresh()
+}
+
+function cancelScheduledRefresh() {
+  if (pendingFrameId !== null && typeof cancelAnimationFrame === 'function') {
+    cancelAnimationFrame(pendingFrameId)
+  }
+
+  pendingFrameId = null
+  pendingForceRefresh = false
 }
 
 watch(() => props.items, () => {
@@ -427,26 +464,40 @@ watch(() => [props.color, props.variant, props.activeColor, props.activeVariant,
 })
 
 watch(() => handlers.value, () => {
-  refreshState(true)
+  scheduleRefresh(true)
 }, { deep: true })
 
 watch(() => props.editor, (editor, _, onCleanup) => {
-  refreshState(true)
+  scheduleRefresh(true)
 
   if (typeof (editor as any)?.on !== 'function' || typeof (editor as any)?.off !== 'function') {
     return
   }
 
-  const onTransaction = () => {
-    refreshState()
+  const onSelectionUpdate = () => {
+    scheduleRefresh()
   }
 
+  const onTransaction = () => {
+    scheduleRefresh()
+  }
+
+  editor.on('selectionUpdate', onSelectionUpdate)
+  editor.on('focus', onSelectionUpdate)
+  editor.on('blur', onSelectionUpdate)
   editor.on('transaction', onTransaction)
 
   onCleanup(() => {
+    editor.off('selectionUpdate', onSelectionUpdate)
+    editor.off('focus', onSelectionUpdate)
+    editor.off('blur', onSelectionUpdate)
     editor.off('transaction', onTransaction)
   })
 }, { immediate: true })
+
+onBeforeUnmount(() => {
+  cancelScheduledRefresh()
+})
 
 function getRenderEntry(key: string) {
   return renderEntryMap.value.get(key)

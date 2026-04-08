@@ -148,10 +148,19 @@ describe('EditorToolbar', () => {
     expect(isDisabled).toHaveBeenCalledTimes(initialIsDisabledCalls)
 
     editor.emit('transaction')
+    await new Promise<void>((resolve) => {
+      if (typeof requestAnimationFrame === 'function') {
+        requestAnimationFrame(() => resolve())
+        return
+      }
+      setTimeout(() => resolve(), 0)
+    })
     await nextTick()
 
     expect(isActive).toHaveBeenCalledTimes(initialIsActiveCalls + 1)
     expect(canExecute).toHaveBeenCalledTimes(initialCanExecuteCalls + 1)
     expect(isDisabled).toHaveBeenCalledTimes(initialIsDisabledCalls + 1)
+
+    wrapper.unmount()
   })
 })
