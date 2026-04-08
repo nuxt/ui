@@ -90,6 +90,7 @@ import { usePortal } from '../composables/usePortal'
 import { pointerDownOutside } from '../utils/overlay'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
+import UFieldGroupReset from './FieldGroupReset.vue'
 
 const props = withDefaults(defineProps<ModalProps>(), {
   close: true,
@@ -217,17 +218,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
     </DialogTrigger>
 
     <DialogPortal v-bind="portalProps">
-      <template v-if="scrollable">
-        <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })">
+      <UFieldGroupReset>
+        <template v-if="scrollable">
+          <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })">
+            <ReuseContentTemplate />
+          </DialogOverlay>
+        </template>
+
+        <template v-else>
+          <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })" />
+
           <ReuseContentTemplate />
-        </DialogOverlay>
-      </template>
-
-      <template v-else>
-        <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })" />
-
-        <ReuseContentTemplate />
-      </template>
+        </template>
+      </UFieldGroupReset>
     </DialogPortal>
   </DialogRoot>
 </template>

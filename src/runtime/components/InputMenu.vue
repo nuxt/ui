@@ -251,6 +251,7 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
 import UChip from './Chip.vue'
+import UFieldGroupReset from './FieldGroupReset.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -696,50 +697,52 @@ defineExpose({
     </Component.Anchor>
 
     <Component.Portal v-bind="portalProps">
-      <Component.Content data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps" @focus-outside.prevent>
-        <slot name="content-top" />
+      <UFieldGroupReset>
+        <Component.Content data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps" @focus-outside.prevent>
+          <slot name="content-top" />
 
-        <Component.Empty data-slot="empty" :class="ui.empty({ class: uiProp?.empty })">
-          <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? t('inputMenu.noMatch', { searchTerm }) : t('inputMenu.noData') }}
-          </slot>
-        </Component.Empty>
+          <Component.Empty data-slot="empty" :class="ui.empty({ class: uiProp?.empty })">
+            <slot name="empty" :search-term="searchTerm">
+              {{ searchTerm ? t('inputMenu.noMatch', { searchTerm }) : t('inputMenu.noData') }}
+            </slot>
+          </Component.Empty>
 
-        <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
-          <template v-if="!!virtualize">
-            <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
+          <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
+            <template v-if="!!virtualize">
+              <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
-            <Component.Virtualizer
-              v-slot="{ option: item, virtualItem }"
-              :options="(filteredItems as any[])"
-              :text-content="item => isInputItem(item) ? get(item, props.labelKey as string) : String(item)"
-              v-bind="virtualizerProps"
-            >
-              <ReuseItemTemplate :item="item" :index="virtualItem.index" />
-            </Component.Virtualizer>
+              <Component.Virtualizer
+                v-slot="{ option: item, virtualItem }"
+                :options="(filteredItems as any[])"
+                :text-content="item => isInputItem(item) ? get(item, props.labelKey as string) : String(item)"
+                v-bind="virtualizerProps"
+              >
+                <ReuseItemTemplate :item="item" :index="virtualItem.index" />
+              </Component.Virtualizer>
 
-            <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
-          </template>
+              <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
+            </template>
 
-          <template v-else>
-            <Component.Group v-if="createItem && createItemPosition === 'top'" data-slot="group" :class="ui.group({ class: uiProp?.group })">
-              <ReuseCreateItemTemplate />
-            </Component.Group>
+            <template v-else>
+              <Component.Group v-if="createItem && createItemPosition === 'top'" data-slot="group" :class="ui.group({ class: uiProp?.group })">
+                <ReuseCreateItemTemplate />
+              </Component.Group>
 
-            <Component.Group v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: uiProp?.group })">
-              <ReuseItemTemplate v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`" :item="item" :index="index" />
-            </Component.Group>
+              <Component.Group v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: uiProp?.group })">
+                <ReuseItemTemplate v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`" :item="item" :index="index" />
+              </Component.Group>
 
-            <Component.Group v-if="createItem && createItemPosition === 'bottom'" data-slot="group" :class="ui.group({ class: uiProp?.group })">
-              <ReuseCreateItemTemplate />
-            </Component.Group>
-          </template>
-        </div>
+              <Component.Group v-if="createItem && createItemPosition === 'bottom'" data-slot="group" :class="ui.group({ class: uiProp?.group })">
+                <ReuseCreateItemTemplate />
+              </Component.Group>
+            </template>
+          </div>
 
-        <slot name="content-bottom" />
+          <slot name="content-bottom" />
 
-        <Component.Arrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
-      </Component.Content>
+          <Component.Arrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
+        </Component.Content>
+      </UFieldGroupReset>
     </Component.Portal>
   </Component.Root>
 </template>
