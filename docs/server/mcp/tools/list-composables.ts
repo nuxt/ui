@@ -2,6 +2,12 @@ import { queryCollection } from '@nuxt/content/server'
 
 export default defineMcpTool({
   description: 'Lists all available Nuxt UI composables with their categories and basic information',
+  annotations: {
+    readOnlyHint: true,
+    destructiveHint: false,
+    idempotentHint: true,
+    openWorldHint: false
+  },
   cache: '1h',
   async handler() {
     const event = useEvent()
@@ -11,6 +17,6 @@ export default defineMcpTool({
       .select('path', 'title', 'description')
       .all()
 
-    return jsonResult(composables)
+    return composables
   }
 })

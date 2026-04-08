@@ -120,11 +120,7 @@ const Menu = computed(() => ({
   drawer: UDrawer
 })[props.mode as HeaderMode])
 
-const menuProps = toRef(() => defu(props.menu, {
-  content: {
-    onOpenAutoFocus: (e: Event) => e.preventDefault()
-  }
-}, props.mode === 'modal' ? { fullscreen: true, transition: false } : {}) as HeaderMenu<T>)
+const menuProps = toRef(() => defu(props.menu, {}, props.mode === 'modal' ? { fullscreen: true, transition: false } : {}) as HeaderMenu<T>)
 
 function toggleOpen() {
   open.value = !open.value

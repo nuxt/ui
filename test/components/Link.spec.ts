@@ -17,6 +17,10 @@ describe('Link', () => {
     ['with raw activeClass', { props: { raw: true, active: true, activeClass: 'text-highlighted' } }],
     ['with raw inactiveClass', { props: { raw: true, active: false, inactiveClass: 'hover:text-primary' } }],
     ['with class', { props: { class: 'font-medium' } }],
+    ['with external to', { props: { to: 'https://example.com' } }],
+    ['with external to and target', { props: { to: 'https://example.com', target: '_blank' } }],
+    ['with internal to and target', { props: { to: '/about', target: '_blank' } }],
+    ['with external prop', { props: { to: '/api/download', external: true } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
   ])

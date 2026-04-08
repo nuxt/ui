@@ -2,6 +2,14 @@
 const route = useRoute()
 const { desktopLinks } = useHeader()
 const { open } = useChat()
+const { track } = useAnalytics()
+
+function toggleChat() {
+  if (!open.value) {
+    track('AI Chat Opened', { source: 'header' })
+  }
+  open.value = !open.value
+}
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -29,7 +37,7 @@ const { open } = useChat()
           variant="ghost"
           icon="i-lucide-bot-message-square"
           aria-label="Ask AI for help"
-          @click="open = !open"
+          @click="toggleChat"
         />
       </UTooltip>
 
