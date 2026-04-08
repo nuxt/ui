@@ -554,7 +554,7 @@ function onSelect(e: Event, item: T) {
         :loading="loading"
         :loading-icon="loadingIcon"
         :trailing-icon="trailingIcon"
-        :icon="icon || appConfig.ui.icons.search"
+        :icon="icon ?? appConfig.ui.icons.search"
         data-slot="input"
         :class="ui.input({ class: uiProp?.input })"
         @keydown.backspace="onBackspace"

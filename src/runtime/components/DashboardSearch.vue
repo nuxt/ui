@@ -39,6 +39,11 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
   colorMode?: boolean
   class?: any
   ui?: DashboardSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem>['ui']
+  /**
+   * Configure the input or hide it with `false`.
+   * @defaultValue true
+   */
+  input?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
 }
 
 export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteItem> & {
@@ -82,7 +87,7 @@ const colorMode = useColorMode()
 const appConfig = useAppConfig() as DashboardSearch['AppConfig']
 const uiProp = useComponentUI('dashboardSearch', props)
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'searchDelay'))
+const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'searchDelay', 'input'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
 
 const getProxySlots = () => omit(slots, ['content'])
@@ -176,7 +181,7 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :input="{ fixed: true }"
+          :input="commandPaletteProps.input ?? { fixed: true }"
           :ui="transformUI(omit(ui, ['modal']), uiProp)"
           @update:model-value="onSelect"
           @update:open="open = $event"
