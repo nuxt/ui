@@ -40,6 +40,7 @@ import { ContextMenu } from 'reka-ui/namespaced'
 import { useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { omit, get, isArrayOfArray } from '../utils'
@@ -49,7 +50,6 @@ import ULink from './Link.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
-import UFieldGroupReset from './FieldGroupReset.vue'
 import UContextMenuContent from './ContextMenuContent.vue'
 
 const props = defineProps<ContextMenuContentProps<T>>()
@@ -116,7 +116,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
   </DefineItemTemplate>
 
   <ContextMenu.Portal v-bind="portalProps">
-    <UFieldGroupReset>
+    <FieldGroupReset>
       <component :is="sub ? ContextMenu.SubContent : ContextMenu.Content" data-slot="content" :class="ui.content({ class: [uiOverride?.content, props.class] })" v-bind="contentProps">
         <slot name="content-top" :sub="sub ?? false" />
 
@@ -191,6 +191,6 @@ const groups = computed<ContextMenuItem[][]>(() =>
 
         <slot name="content-bottom" :sub="sub ?? false" />
       </component>
-    </UFieldGroupReset>
+    </FieldGroupReset>
   </ContextMenu.Portal>
 </template>

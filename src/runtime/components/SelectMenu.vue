@@ -231,7 +231,7 @@ import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
-import { useFieldGroup } from '../composables/useFieldGroup'
+import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useFilter } from '../composables/useFilter'
@@ -245,7 +245,6 @@ import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
 import UChip from './Chip.vue'
 import UInput from './Input.vue'
-import UFieldGroupReset from './FieldGroupReset.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -619,7 +618,7 @@ defineExpose({
     </ComboboxAnchor>
 
     <ComboboxPortal v-bind="portalProps">
-      <UFieldGroupReset>
+      <FieldGroupReset>
         <ComboboxContent data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps">
           <FocusScope trapped data-slot="focusScope" :class="ui.focusScope({ class: uiProp?.focusScope })">
             <slot name="content-top" />
@@ -681,7 +680,7 @@ defineExpose({
 
           <ComboboxArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
         </ComboboxContent>
-      </UFieldGroupReset>
+      </FieldGroupReset>
     </ComboboxPortal>
   </ComboboxRoot>
 </template>

@@ -57,10 +57,10 @@ import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArro
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
+import { FieldGroupReset } from '../composables/useFieldGroup'
 import { usePortal } from '../composables/usePortal'
 import { tv } from '../utils/tv'
 import UKbd from './Kbd.vue'
-import UFieldGroupReset from './FieldGroupReset.vue'
 
 const props = withDefaults(defineProps<TooltipProps>(), {
   portal: true
@@ -91,7 +91,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {
     </TooltipTrigger>
 
     <TooltipPortal v-bind="portalProps">
-      <UFieldGroupReset>
+      <FieldGroupReset>
         <TooltipContent v-bind="contentProps" data-slot="content" :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })">
           <slot name="content" :ui="ui">
             <span v-if="text" data-slot="text" :class="ui.text({ class: uiProp?.text })">{{ text }}</span>
@@ -103,7 +103,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {
 
           <TooltipArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
         </TooltipContent>
-      </UFieldGroupReset>
+      </FieldGroupReset>
     </TooltipPortal>
   </TooltipRoot>
 </template>

@@ -60,6 +60,7 @@ import { DropdownMenu } from 'reka-ui/namespaced'
 import { useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useFilter } from '../composables/useFilter'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
@@ -71,7 +72,6 @@ import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
-import UFieldGroupReset from './FieldGroupReset.vue'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
 const props = defineProps<DropdownMenuContentProps<T>>()
@@ -162,7 +162,7 @@ const hasFilteredItems = computed(() => filteredGroups.value.some(group => group
   </DefineItemTemplate>
 
   <DropdownMenu.Portal v-bind="portalProps">
-    <UFieldGroupReset>
+    <FieldGroupReset>
       <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" data-slot="content" :class="ui.content({ class: [uiOverride?.content, props.class] })" v-bind="contentProps">
         <DropdownMenu.Filter v-if="!!filter" v-model="searchTerm" as-child>
           <UInput
@@ -261,6 +261,6 @@ const hasFilteredItems = computed(() => filteredGroups.value.some(group => group
 
         <slot name="content-bottom" :sub="sub ?? false" />
       </component>
-    </UFieldGroupReset>
+    </FieldGroupReset>
   </DropdownMenu.Portal>
 </template>

@@ -154,7 +154,7 @@ import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
-import { useFieldGroup } from '../composables/useFieldGroup'
+import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { usePortal } from '../composables/usePortal'
@@ -163,7 +163,6 @@ import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
-import UFieldGroupReset from './FieldGroupReset.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -340,7 +339,7 @@ defineExpose({
     </SelectTrigger>
 
     <SelectPortal v-bind="portalProps">
-      <UFieldGroupReset>
+      <FieldGroupReset>
         <SelectContent data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps">
           <slot name="content-top" />
 
@@ -407,7 +406,7 @@ defineExpose({
 
           <SelectArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
         </SelectContent>
-      </UFieldGroupReset>
+      </FieldGroupReset>
     </SelectPortal>
   </SelectRoot>
 </template>

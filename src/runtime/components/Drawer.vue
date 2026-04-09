@@ -70,10 +70,10 @@ import { DrawerRoot, DrawerRootNested, DrawerTrigger, DrawerPortal, DrawerOverla
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
+import { FieldGroupReset } from '../composables/useFieldGroup'
 import { usePortal } from '../composables/usePortal'
 import { pointerDownOutside } from '../utils/overlay'
 import { tv } from '../utils/tv'
-import UFieldGroupReset from './FieldGroupReset.vue'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
   direction: 'bottom',
@@ -124,7 +124,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
     </DrawerTrigger>
 
     <DrawerPortal v-bind="portalProps">
-      <UFieldGroupReset>
+      <FieldGroupReset>
         <DrawerOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })" />
 
         <DrawerContent data-slot="content" :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })" v-bind="contentProps" v-on="contentEvents">
@@ -174,7 +174,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
             </div>
           </slot>
         </DrawerContent>
-      </UFieldGroupReset>
+      </FieldGroupReset>
     </DrawerPortal>
   </component>
 </template>

@@ -85,12 +85,12 @@ import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, 
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
+import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { pointerDownOutside } from '../utils/overlay'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
-import UFieldGroupReset from './FieldGroupReset.vue'
 
 const props = withDefaults(defineProps<SlideoverProps>(), {
   close: true,
@@ -144,7 +144,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
     </DialogTrigger>
 
     <DialogPortal v-bind="portalProps">
-      <UFieldGroupReset>
+      <FieldGroupReset>
         <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })" />
 
         <DialogContent
@@ -217,7 +217,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
             </div>
           </slot>
         </DialogContent>
-      </UFieldGroupReset>
+      </FieldGroupReset>
     </DialogPortal>
   </DialogRoot>
 </template>

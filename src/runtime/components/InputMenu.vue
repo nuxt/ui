@@ -238,7 +238,7 @@ import { isEqual } from 'ohash/utils'
 import { reactivePick, reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
-import { useFieldGroup } from '../composables/useFieldGroup'
+import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useFilter } from '../composables/useFilter'
@@ -251,7 +251,6 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
 import UChip from './Chip.vue'
-import UFieldGroupReset from './FieldGroupReset.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -697,7 +696,7 @@ defineExpose({
     </Component.Anchor>
 
     <Component.Portal v-bind="portalProps">
-      <UFieldGroupReset>
+      <FieldGroupReset>
         <Component.Content data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps" @focus-outside.prevent>
           <slot name="content-top" />
 
@@ -742,7 +741,7 @@ defineExpose({
 
           <Component.Arrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
         </Component.Content>
-      </UFieldGroupReset>
+      </FieldGroupReset>
     </Component.Portal>
   </Component.Root>
 </template>
