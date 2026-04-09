@@ -195,18 +195,20 @@ export type CommandPaletteEmits<T extends CommandPaletteItem = CommandPaletteIte
 }
 
 type SlotProps<T> = (props: { item: T, index: number, ui: CommandPalette['ui'] }) => VNode[]
+type GroupSlotProps<T extends CommandPaletteItem = CommandPaletteItem, G extends CommandPaletteGroup<T> = CommandPaletteGroup<T>> = (props: { group: G, label: string, ui: CommandPalette['ui'] }) => VNode[]
 
-export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteItem> = {
+export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteItem, G extends CommandPaletteGroup<T> = CommandPaletteGroup<T>> = {
   'empty'?(props: { searchTerm: string }): VNode[]
   'footer'?(props: { ui: CommandPalette['ui'] }): VNode[]
   'back'?(props: { ui: CommandPalette['ui'] }): VNode[]
   'close'?(props: { ui: CommandPalette['ui'] }): VNode[]
+  'group-label'?: GroupSlotProps<T, G>
   'item'?: SlotProps<T>
   'item-leading'?: SlotProps<T>
   'item-label'?: SlotProps<T>
   'item-description'?: SlotProps<T>
   'item-trailing'?: SlotProps<T>
-} & Record<string, SlotProps<T>>
+} & Record<string, SlotProps<T>> & Record<string, GroupSlotProps<T, G>>
 
 </script>
 
@@ -246,7 +248,7 @@ const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   highlightOnHover: true
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
-const slots = defineSlots<CommandPaletteSlots<T>>()
+const slots = defineSlots<CommandPaletteSlots<T, G>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -590,8 +592,10 @@ function onSelect(e: Event, item: T) {
 
         <template v-else>
           <ListboxGroup v-for="group in filteredGroups" :key="`group-${group.id}`" data-slot="group" :class="ui.group({ class: uiProp?.group })">
-            <ListboxGroupLabel v-if="get(group, props.labelKey as string)" data-slot="label" :class="ui.label({ class: uiProp?.label })">
-              {{ get(group, props.labelKey as string) }}
+            <ListboxGroupLabel v-if="get(group, props.labelKey as string) || !!slots[(group.slot ? `${group.slot}-group-label` : 'group-label') as keyof CommandPaletteSlots<T, G>]" data-slot="label" :class="ui.label({ class: uiProp?.label })">
+              <slot :name="((group.slot ? `${group.slot}-group-label` : 'group-label'))" :group="group" :label="get(group, props.labelKey as string)" :ui="ui">
+                {{ get(group, props.labelKey as string) }}
+              </slot>
             </ListboxGroupLabel>
 
             <ReuseItemTemplate
