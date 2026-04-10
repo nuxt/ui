@@ -16,14 +16,16 @@ const presets = [
 const active = ref(7)
 const isCustom = computed(() => !presets.some(p => p.days === active.value))
 
-const dateRange = shallowRef<{ start: DateValue, end: DateValue }>({
-  start: today(tz).subtract({ days: 7 }),
-  end: today(tz)
-})
+function buildRange(days: number) {
+  const end = today(tz)
+  return { start: end.subtract({ days: Math.max(days - 1, 0) }), end }
+}
+
+const dateRange = shallowRef<{ start: DateValue, end: DateValue }>(buildRange(7))
 
 function selectPreset(days: number) {
   active.value = days
-  dateRange.value = { start: today(tz).subtract({ days }), end: today(tz) }
+  dateRange.value = buildRange(days)
 }
 
 const open = ref(false)
