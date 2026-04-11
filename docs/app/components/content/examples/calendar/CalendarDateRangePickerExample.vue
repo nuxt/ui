@@ -15,9 +15,10 @@ const ranges = [
   { label: 'Last year', years: 1 }
 ]
 
+const initialEnd = today(tz)
 const modelValue = shallowRef({
-  start: today(tz).subtract({ days: 14 }),
-  end: today(tz)
+  start: initialEnd.subtract({ days: 14 }),
+  end: initialEnd
 })
 
 const label = computed(() => {
@@ -33,6 +34,7 @@ function computeStart(range: typeof ranges[number]) {
 }
 
 function isRangeSelected(range: typeof ranges[number]) {
+  if (!modelValue.value?.start || !modelValue.value?.end) return false
   const { start, end } = computeStart(range)
   return modelValue.value.start.compare(start) === 0 && modelValue.value.end.compare(end) === 0
 }
