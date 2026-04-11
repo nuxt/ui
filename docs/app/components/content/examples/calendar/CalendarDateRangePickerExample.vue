@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { useMediaQuery } from '@vueuse/core'
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import { DateFormatter, getLocalTimeZone, today } from '@internationalized/date'
 
 const df = new DateFormatter('en-US', { dateStyle: 'medium' })
 const tz = getLocalTimeZone()
-const isDesktop = useMediaQuery('(min-width: 640px)')
+const breakpoints = useBreakpoints(breakpointsTailwind)
+const isDesktop = breakpoints.greaterOrEqual('sm')
 
 const ranges = [
   { label: 'Last 7 days', days: 7 },
@@ -52,7 +53,7 @@ function selectRange(range: typeof ranges[number]) {
 
     <template #content>
       <div class="flex items-stretch divide-x divide-(--ui-border)">
-        <div class="hidden sm:flex flex-col py-2">
+        <div class="hidden sm:flex flex-col justify-center py-2">
           <UButton
             v-for="(range, index) in ranges"
             :key="index"
