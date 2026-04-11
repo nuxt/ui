@@ -342,7 +342,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     element.addEventListener('mousedown', handleMouseDown)
 
     const appendToElement = typeof options.appendTo === 'function' ? options.appendTo() : options.appendTo
-      ; (appendToElement ?? options.editor.view.dom.parentElement)?.appendChild(element)
+    const container = appendToElement ?? options.editor.view.dom.parentElement
+    container?.appendChild(element)
     if (renderer.element) {
       element.appendChild(renderer.element)
     }
