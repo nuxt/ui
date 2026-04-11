@@ -37,12 +37,20 @@ describe('SelectMenu', () => {
 
   const itemsWithDescription = [...items.map(item => ({ ...item, description: 'Description' }))]
 
+  const itemsWithBadge = [
+    ...items.map((item, i) => ({
+      ...item,
+      badge: i % 2 === 0 ? 'Badge' : { color: 'primary', variant: 'solid', size: 'sm', content: 'B' }
+    }))
+  ]
+
   const props = { open: true, portal: false, items }
 
   renderEach(SelectMenu, [
     // Props
     ['with items', { props }],
     ['with items with description', { props: { ...props, items: itemsWithDescription } }],
+    ['with items with badge', { props: { ...props, items: itemsWithBadge } }],
     ['with modelValue', { props: { ...props, modelValue: items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
     ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Backlog' } }],
