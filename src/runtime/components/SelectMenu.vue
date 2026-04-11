@@ -549,7 +549,7 @@ defineExpose({
               {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
             </slot>
             <UBadge
-              v-if="isSelectItem(item) && item.badge"
+              v-if="isSelectItem(item) && item.badge !== undefined && item.badge !== null"
               color="neutral"
               variant="soft"
               :size="((item.ui?.itemBadgeSize || uiProp?.itemBadgeSize || ui.itemBadgeSize()) as BadgeProps['size'])"

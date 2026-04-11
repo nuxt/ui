@@ -40,7 +40,7 @@ describe('SelectMenu', () => {
   const itemsWithBadge = [
     ...items.map((item, i) => ({
       ...item,
-      badge: i % 2 === 0 ? 'Badge' : { color: 'primary', variant: 'solid', size: 'sm', content: 'B' }
+      badge: i % 2 === 0 ? 'Badge' : { color: 'primary', variant: 'solid', size: 'sm', label: 'Badge' }
     }))
   ]
 
