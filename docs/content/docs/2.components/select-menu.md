@@ -636,7 +636,7 @@ props:
 
 ### Badge
 
-Use the `badge` prop to show a [Badge](/docs/components/badge) inside the Select.
+Use the `badge` prop to show a [Badge](/docs/components/badge) inside the SelectMenu.
 
 ::component-code
 ---
@@ -649,7 +649,7 @@ external:
   - items
   - modelValue
 externalTypes:
-  - SelectItem[]
+  - SelectMenuItem[]
 props:
   modelValue: 'backlog'
   valueKey: 'id'
@@ -852,6 +852,7 @@ You can use the `badge` property to display a [Badge](/docs/components/badge) in
 collapse: true
 name: 'select-menu-items-badge-example'
 ---
+::
 
 ::tip
 You can also use the `#leading` slot to display the selected badge.

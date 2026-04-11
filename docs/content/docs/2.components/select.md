@@ -725,6 +725,7 @@ You can use the `badge` property to display a [Badge](/docs/components/badge) in
 collapse: true
 name: 'select-items-badge-example'
 ---
+::
 
 ::note
 In this example, the avatar is computed from the `value` property of the selected item.
