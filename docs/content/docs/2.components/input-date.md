@@ -224,17 +224,6 @@ name: 'input-date-date-range-picker-example'
 ---
 ::
 
-### As a date range filter
-
-Use [Button](/docs/components/button) presets with a [Popover](/docs/components/popover) and [Calendar](/docs/components/calendar) to create a date range filter with quick presets and a custom date picker.
-
-::component-example
----
-collapse: true
-name: 'input-date-date-range-filter-example'
----
-::
-
 ## API
 
 ### Props
