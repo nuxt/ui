@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { useMediaQuery } from '@vueuse/core'
 import { DateFormatter, getLocalTimeZone, today } from '@internationalized/date'
 
 const df = new DateFormatter('en-US', { dateStyle: 'medium' })
 const tz = getLocalTimeZone()
+const isDesktop = useMediaQuery('(min-width: 640px)')
 
 const ranges = [
   { label: 'Last 7 days', days: 7 },
@@ -48,7 +50,7 @@ function selectRange(range: typeof ranges[number]) {
 
     <template #content>
       <div class="flex items-stretch divide-x divide-(--ui-border)">
-        <div class="flex flex-col py-2">
+        <div class="hidden sm:flex flex-col py-2">
           <UButton
             v-for="(range, index) in ranges"
             :key="index"
@@ -62,7 +64,7 @@ function selectRange(range: typeof ranges[number]) {
           />
         </div>
 
-        <UCalendar v-model="modelValue" class="p-2" :number-of-months="2" range />
+        <UCalendar v-model="modelValue" class="p-2" :number-of-months="isDesktop ? 2 : 1" range />
       </div>
     </template>
   </UPopover>
