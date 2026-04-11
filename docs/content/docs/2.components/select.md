@@ -507,54 +507,6 @@ props:
 ---
 ::
 
-### Badge
-
-Use the `badge` prop to show a [Badge](/docs/components/badge) inside the Select.
-
-::component-code
----
-ignore:
-  - modelValue
-  - valueKey
-  - items
-  - class
-external:
-  - items
-  - modelValue
-externalTypes:
-  - SelectItem[]
-props:
-  modelValue: 'backlog'
-  valueKey: 'id'
-  items:
-    - label: 'Backlog'
-      id: 'backlog'
-      badge:
-        label: '4',
-        color: 'error'
-        variant: 'soft'
-    - label: 'Todo'
-      id: 'todo'
-      badge:
-        label: '2',
-        color: 'warning'
-        variant: 'soft'
-    - label: 'In Progress'
-      id: 'in_progress'
-      badge:
-        label: '1',
-        color: 'info'
-        variant: 'soft'
-    - label: 'Done'
-      id: 'done'
-      badge:
-        label: '0',
-        color: 'success'
-        variant: 'soft'
-  class: 'w-48'
----
-::
-
 ### Loading
 
 Use the `loading` prop to show a loading icon on the Select.
