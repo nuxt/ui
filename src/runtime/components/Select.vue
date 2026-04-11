@@ -25,7 +25,7 @@ export type SelectItem = SelectValue | {
   chip?: ChipProps
   /**
    * Display a badge on the item.
-   * `{ color: 'neutral', variant: 'outline', size: 'sm' }`{lang="ts-type"}
+   * `{ color: 'neutral', variant: 'soft', size: 'sm' }`{lang="ts-type"}
    */
   badge?: string | number | BadgeProps
   /**

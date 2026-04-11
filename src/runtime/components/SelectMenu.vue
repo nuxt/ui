@@ -25,7 +25,7 @@ export type SelectMenuItem = SelectMenuValue | {
   chip?: ChipProps
   /**
    * Display a badge on the item.
-   * `{ color: 'neutral', variant: 'outline', size: 'sm' }`{lang="ts-type"}
+   * `{ color: 'neutral', variant: 'soft', size: 'sm' }`{lang="ts-type"}
    */
   badge?: string | number | BadgeProps
   /**
@@ -551,7 +551,7 @@ defineExpose({
             <UBadge
               v-if="isSelectItem(item) && item.badge"
               color="neutral"
-              variant="outline"
+              variant="soft"
               :size="((item.ui?.itemBadgeSize || uiProp?.itemBadgeSize || ui.itemBadgeSize()) as BadgeProps['size'])"
               v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
               data-slot="itemLeadingBadge"
