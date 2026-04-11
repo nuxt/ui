@@ -26,8 +26,10 @@ export default (options: Required<ModuleOptions>) => {
       itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
       itemTrailingIcon: 'shrink-0',
       itemWrapper: 'flex-1 flex flex-col min-w-0',
-      itemLabel: 'truncate',
-      itemDescription: 'truncate text-muted'
+      itemLabel: 'truncate flex items-center gap-1',
+      itemDescription: 'truncate text-muted',
+      itemBadge: 'shrink-0',
+      itemBadgeSize: 'sm'
     },
     variants: {
       ...fieldGroupVariant,

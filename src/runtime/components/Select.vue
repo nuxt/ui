@@ -8,6 +8,7 @@ import type { AvatarProps } from './Avatar.vue'
 import type { ChipProps } from './Chip.vue'
 import type { IconProps } from './Icon.vue'
 import type { InputProps } from './Input.vue'
+import type { BadgeProps } from './Badge.vue'
 import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { ButtonHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetModelValue, NestedItem, EmitsToProps } from '../types/utils'
@@ -27,6 +28,11 @@ export type SelectItem = SelectValue | {
   avatar?: AvatarProps
   chip?: ChipProps
   /**
+   * Display a badge on the item.
+   * `{ color: 'neutral', variant: 'outline', size: 'sm' }`{lang="ts-type"}
+   */
+  badge?: string | number | BadgeProps
+  /**
    * The item type.
    * @defaultValue 'item'
    */
@@ -35,7 +41,7 @@ export type SelectItem = SelectValue | {
   disabled?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Partial<Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>>
+  ui?: Partial<Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon' | 'itemBadge' | 'itemBadgeSize'>>
   [key: string]: any
 }
 
@@ -432,6 +438,15 @@ defineExpose({
                         <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
                           {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
                         </slot>
+                        <UBadge
+                          v-if="isSelectItem(item) && item.badge"
+                          color="neutral"
+                          variant="outline"
+                          :size="((item.ui?.itemBadgeSize || uiProp?.itemBadgeSize || ui.itemBadgeSize()) as BadgeProps['size'])"
+                          v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
+                          data-slot="itemBadge"
+                          :class="ui.itemBadge({ class: [uiProp?.itemBadge, item.ui?.itemBadge] })"
+                        />
                       </SelectItemText>
 
                       <span v-if="isSelectItem(item) && (get(item, props.descriptionKey as string) || !!slots['item-description'])" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })">
