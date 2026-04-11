@@ -85,55 +85,66 @@ const ui = computed(() => tv({
 
 ## Reka UI Components
 
-For components wrapping Reka UI primitives:
+For components wrapping Reka UI primitives (example: `Collapsible.vue`):
 
 ```vue
 <script lang="ts">
-import type { DialogRootProps, DialogRootEmits } from 'reka-ui'
+import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/modal'
+import theme from '#build/ui/collapsible'
 import type { ComponentConfig } from '../types/tv'
 
-type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>
+type Collapsible = ComponentConfig<typeof theme, AppConfig, 'collapsible'>
 
-export interface ModalProps extends Pick<DialogRootProps, 'open' | 'defaultOpen' | 'modal'> {
-  title?: string
-  description?: string
+export interface CollapsibleProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
+  as?: any
   class?: any
-  ui?: Modal['slots']
+  ui?: Collapsible['slots']
 }
 
-export interface ModalEmits extends DialogRootEmits {}
+export interface CollapsibleEmits extends CollapsibleRootEmits {}
 
-export interface ModalSlots {
-  default?(props?: {}): VNode[]
-  content?(props: { close: () => void }): VNode[]
+export interface CollapsibleSlots {
+  default?(props: { open: boolean }): VNode[]
+  content?(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
-import { computed, toRef } from 'vue'
-import { DialogRoot, DialogPortal, useForwardPropsEmits } from 'reka-ui'
+import { computed } from 'vue'
+import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<ModalProps>(), {
-  overlay: true,
-  portal: true
+const props = withDefaults(defineProps<CollapsibleProps>(), {
+  unmountOnHide: true
 })
-const emits = defineEmits<ModalEmits>()
-const slots = defineSlots<ModalSlots>()
+const emits = defineEmits<CollapsibleEmits>()
+const slots = defineSlots<CollapsibleSlots>()
 
-const appConfig = useAppConfig() as Modal['AppConfig']
-const uiProp = useComponentUI('modal', props)
+const appConfig = useAppConfig() as Collapsible['AppConfig']
+const uiProp = useComponentUI('collapsible', props)
 
 // Forward only Reka UI props
-const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled', 'unmountOnHide'), emits)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.collapsible || {}) })())
 </script>
+
+<template>
+  <CollapsibleRoot v-slot="{ open }" v-bind="rootProps" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <CollapsibleTrigger v-if="!!slots.default" as-child>
+      <slot :open="open" />
+    </CollapsibleTrigger>
+
+    <CollapsibleContent data-slot="content" :class="ui.content({ class: uiProp?.content })">
+      <slot name="content" />
+    </CollapsibleContent>
+  </CollapsibleRoot>
+</template>
 ```
 
 ## Generic Components

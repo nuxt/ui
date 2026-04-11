@@ -390,11 +390,11 @@ Check the **Chat** overview page for installation instructions, server setup and
 
 ### With indicator slot
 
-You can customize the loading indicator that appears when the status is `submitted`.
+Use the `#indicator` slot to customize the loading indicator with a [`ChatShimmer`](/docs/components/chat-shimmer) effect.
 
 ::component-example
 ---
-name: "chat-messages-indicator-slot-example"
+name: 'chat-messages-indicator-slot-example'
 class: 'overflow-y-auto'
 collapse: true
 ---
@@ -413,7 +413,7 @@ collapse: true
 ::tip
 You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
 
-```vue{4-13}
+```vue{4-19}
 <template>
   <UChatMessages :messages="messages" :status="status">
     <template #content="{ message }">
@@ -421,11 +421,17 @@ You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#s
         v-for="(part, index) in message.parts"
         :key="`${message.id}-${part.type}-${index}`"
       >
-        <MDC
-          :value="part.text"
-          :cache-key="`${message.id}-${index}`"
-          class="*:first:mt-0 *:last:mb-0"
-        />
+        <template v-if="isTextUIPart(part)">
+          <MDC
+            v-if="message.role === 'assistant'"
+            :value="part.text"
+            :cache-key="`${message.id}-${index}`"
+            class="*:first:mt-0 *:last:mb-0"
+          />
+          <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+            {{ part.text }}
+          </p>
+        </template>
       </template>
     </template>
   </UChatMessages>

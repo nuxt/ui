@@ -6,6 +6,7 @@ exports[`DropdownMenu > renders with arrow correctly 1`] = `
 
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
     <!--v-if-->
@@ -60,12 +61,14 @@ exports[`DropdownMenu > renders with arrow correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with class correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -123,12 +126,14 @@ exports[`DropdownMenu > renders with class correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with custom slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -184,12 +189,14 @@ exports[`DropdownMenu > renders with custom slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with default slot correctly 1`] = `
 "Default slot
 <!--teleport start-->
+
 
 
 
@@ -247,12 +254,14 @@ exports[`DropdownMenu > renders with default slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with descriptionKey correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -307,6 +316,7 @@ exports[`DropdownMenu > renders with descriptionKey correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 
@@ -319,6 +329,7 @@ exports[`DropdownMenu > renders with disabled correctly 1`] = `
 
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-dropdown-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-dropdown-menu-content-available-width: var(--reka-popper-available-width); --reka-dropdown-menu-content-available-height: var(--reka-popper-available-height); --reka-dropdown-menu-trigger-width: var(--reka-popper-anchor-width); --reka-dropdown-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" id="reka-dropdown-menu-content-v-0-0-0" aria-labelledby="" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="bottom" data-align="center">
     <!--v-if-->
@@ -373,12 +384,14 @@ exports[`DropdownMenu > renders with disabled correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with externalIcon correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -436,12 +449,14 @@ exports[`DropdownMenu > renders with externalIcon correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with filter and searchTerm correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -458,12 +473,14 @@ exports[`DropdownMenu > renders with filter and searchTerm correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with filter correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -524,12 +541,14 @@ exports[`DropdownMenu > renders with filter correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with item slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -560,12 +579,14 @@ exports[`DropdownMenu > renders with item slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with item-description slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -586,12 +607,14 @@ exports[`DropdownMenu > renders with item-description slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with item-label slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -649,12 +672,14 @@ exports[`DropdownMenu > renders with item-label slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with item-leading slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -712,12 +737,14 @@ exports[`DropdownMenu > renders with item-leading slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with item-trailing slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -770,12 +797,14 @@ exports[`DropdownMenu > renders with item-trailing slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with items correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -833,12 +862,14 @@ exports[`DropdownMenu > renders with items correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with items with description correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -859,12 +890,14 @@ exports[`DropdownMenu > renders with items with description correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with labelKey correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -922,12 +955,14 @@ exports[`DropdownMenu > renders with labelKey correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with size lg correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -985,12 +1020,14 @@ exports[`DropdownMenu > renders with size lg correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with size md correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -1048,12 +1085,14 @@ exports[`DropdownMenu > renders with size md correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with size sm correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -1111,12 +1150,14 @@ exports[`DropdownMenu > renders with size sm correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with size xl correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -1174,12 +1215,14 @@ exports[`DropdownMenu > renders with size xl correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with size xs correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -1237,12 +1280,14 @@ exports[`DropdownMenu > renders with size xs correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders with ui correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -1300,12 +1345,14 @@ exports[`DropdownMenu > renders with ui correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`DropdownMenu > renders without externalIcon correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 
@@ -1360,6 +1407,7 @@ exports[`DropdownMenu > renders without externalIcon correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 

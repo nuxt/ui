@@ -126,7 +126,7 @@ Thank you for considering contributing to Nuxt UI. Here are a few ways you can g
 - Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/docs/getting-started/contribution) to share your suggestions.
 
 > [!TIP]
-> We provide a [contributing skill](https://github.com/nuxt/ui/tree/v4/.claude/skills/contributing) for AI assistants to help you contribute to Nuxt UI. It will automatically guide you through component structure, theming patterns, testing conventions, and documentation guidelines when working in this repository.
+> We provide contributing guidelines through [`AGENTS.md`](https://github.com/nuxt/ui/blob/v4/AGENTS.md) for AI assistants to help you contribute to Nuxt UI. It is automatically picked up by all AI coding agents and guides through component structure, theming patterns, testing conventions, and documentation guidelines.
 
 ## Local Development
 

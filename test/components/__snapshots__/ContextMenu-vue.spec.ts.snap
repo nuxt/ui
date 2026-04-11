@@ -6,6 +6,7 @@ exports[`ContextMenu > renders with class correctly 1`] = `
 
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-context-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="right" data-align="start">
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
@@ -55,6 +56,7 @@ exports[`ContextMenu > renders with class correctly 1`] = `
     </div>
   </div>
 </div>
+
 
 
 
@@ -67,6 +69,7 @@ exports[`ContextMenu > renders with custom slot correctly 1`] = `
 
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-context-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="right" data-align="start">
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
@@ -116,6 +119,7 @@ exports[`ContextMenu > renders with custom slot correctly 1`] = `
     </div>
   </div>
 </div>
+
 
 
 
@@ -128,6 +132,7 @@ exports[`ContextMenu > renders with default slot correctly 1`] = `
 
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-context-menu-content-transform-origin) flex flex-col" data-orientation="vertical" dir="ltr" role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" data-side="right" data-align="start">
     <div role="presentation" data-slot="viewport" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1">
@@ -180,12 +185,14 @@ exports[`ContextMenu > renders with default slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with descriptionKey correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -211,6 +218,7 @@ exports[`ContextMenu > renders with descriptionKey correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
@@ -220,7 +228,9 @@ exports[`ContextMenu > renders with disabled correctly 1`] = `
 
 
 
+
 <!---->
+
 
 
 
@@ -230,6 +240,7 @@ exports[`ContextMenu > renders with disabled correctly 1`] = `
 exports[`ContextMenu > renders with externalIcon correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -285,12 +296,14 @@ exports[`ContextMenu > renders with externalIcon correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with item slot correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -318,12 +331,14 @@ exports[`ContextMenu > renders with item slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with item-description slot correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -349,12 +364,14 @@ exports[`ContextMenu > renders with item-description slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with item-label slot correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -410,12 +427,14 @@ exports[`ContextMenu > renders with item-label slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with item-leading slot correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -463,12 +482,14 @@ exports[`ContextMenu > renders with item-leading slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with item-trailing slot correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -522,12 +543,14 @@ exports[`ContextMenu > renders with item-trailing slot correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with items correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -583,12 +606,14 @@ exports[`ContextMenu > renders with items correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with items with description correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -614,12 +639,14 @@ exports[`ContextMenu > renders with items with description correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with labelKey correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -675,12 +702,14 @@ exports[`ContextMenu > renders with labelKey correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with size lg correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -736,12 +765,14 @@ exports[`ContextMenu > renders with size lg correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with size md correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -797,12 +828,14 @@ exports[`ContextMenu > renders with size md correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with size sm correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -858,12 +891,14 @@ exports[`ContextMenu > renders with size sm correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with size xl correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -919,12 +954,14 @@ exports[`ContextMenu > renders with size xl correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with size xs correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -980,12 +1017,14 @@ exports[`ContextMenu > renders with size xs correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders with ui correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -1041,12 +1080,14 @@ exports[`ContextMenu > renders with ui correctly 1`] = `
 
 
 
+
 <!--teleport end-->"
 `;
 
 exports[`ContextMenu > renders without externalIcon correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
+
 
 
 
@@ -1099,6 +1140,7 @@ exports[`ContextMenu > renders without externalIcon correctly 1`] = `
     </div>
   </div>
 </div>
+
 
 
 

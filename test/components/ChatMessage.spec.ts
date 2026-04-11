@@ -28,7 +28,7 @@ describe('ChatMessage', () => {
     ['with ui', { props: { ...props, ui: {} } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
-    ['with files slot', { props, slots: { files: () => 'Files slot' } }],
+    ['with files slot', { props: { ...props, parts: [...props.parts, { type: 'file' as const, mediaType: 'text/plain', url: 'https://example.com/test.txt', filename: 'test.txt' }] }, slots: { files: () => 'Files slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
     ['with actions slot', { props, slots: { actions: () => 'Actions slot' } }]
   ])
