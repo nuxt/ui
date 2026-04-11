@@ -60,13 +60,11 @@ function createOptions(overrides: Partial<EditorMenuOptions<{ label: string }>> 
 }
 
 function getSuggestionConfig() {
-  const config = suggestionMock.mock.calls[0]?.[0]
-
-  if (!config) {
-    throw new Error('Suggestion should be called exactly once')
+  if (suggestionMock.mock.calls.length !== 1) {
+    throw new Error(`Suggestion should be called exactly once, but was called ${suggestionMock.mock.calls.length} times`)
   }
 
-  return config
+  return suggestionMock.mock.calls[0]![0]
 }
 
 describe('useEditorMenu', () => {
