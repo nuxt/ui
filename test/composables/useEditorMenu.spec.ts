@@ -5,6 +5,8 @@ import { PluginKey } from '@tiptap/pm/state'
 import { useEditorMenu } from '../../src/runtime/composables/useEditorMenu'
 import type { EditorMenuOptions } from '../../src/runtime/composables/useEditorMenu'
 import type { EditorSuggestionMenuProps } from '../../src/runtime/components/EditorSuggestionMenu.vue'
+import type { EditorMentionMenuProps } from '../../src/runtime/components/EditorMentionMenu.vue'
+import type { EditorEmojiMenuProps } from '../../src/runtime/components/EditorEmojiMenu.vue'
 
 const { suggestionMock } = vi.hoisted(() => ({
   suggestionMock: vi.fn((config: any) => config)
@@ -139,7 +141,11 @@ describe('useEditorMenu', () => {
   })
 
   it('types suggestion options on the composable and component props', () => {
-    expectTypeOf<EditorMenuOptions<{ label: string }>['suggestion']>().toEqualTypeOf<Omit<Partial<SuggestionOptions>, 'pluginKey' | 'editor' | 'char' | 'items' | 'command' | 'render'> | undefined>()
-    expectTypeOf<EditorSuggestionMenuProps['suggestion']>().toEqualTypeOf<Omit<Partial<SuggestionOptions>, 'pluginKey' | 'editor' | 'char' | 'items' | 'command' | 'render'> | undefined>()
+    type ExpectedType = Omit<Partial<SuggestionOptions>, 'pluginKey' | 'editor' | 'char' | 'items' | 'command' | 'render'> | undefined
+
+    expectTypeOf<EditorMenuOptions<{ label: string }>['suggestion']>().toEqualTypeOf<ExpectedType>()
+    expectTypeOf<EditorSuggestionMenuProps['suggestion']>().toEqualTypeOf<ExpectedType>()
+    expectTypeOf<EditorMentionMenuProps['suggestion']>().toEqualTypeOf<ExpectedType>()
+    expectTypeOf<EditorEmojiMenuProps['suggestion']>().toEqualTypeOf<ExpectedType>()
   })
 })
