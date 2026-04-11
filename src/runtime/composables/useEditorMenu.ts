@@ -13,11 +13,6 @@ import type { FloatingUIOptions } from '../types/editor'
 import { buildFloatingUIMiddleware } from '../utils/editor'
 import { get, isArrayOfArray } from '../utils'
 
-type EditorMenuSuggestionOptions = Omit<
-  Partial<SuggestionOptions>,
-  'pluginKey' | 'editor' | 'char' | 'items' | 'command' | 'render'
->
-
 export interface EditorMenuOptions<T = any> {
   editor: Editor
   /**
@@ -73,7 +68,7 @@ export interface EditorMenuOptions<T = any> {
   /**
    * Optional TipTap Suggestion matching options.
    */
-  suggestion?: EditorMenuSuggestionOptions
+  suggestion?: Omit<Partial<SuggestionOptions>, 'pluginKey' | 'editor' | 'char' | 'items' | 'command' | 'render'>
   /**
    * The DOM element to append the menu to. Default is the editor's parent element.
    *
