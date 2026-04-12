@@ -64,13 +64,13 @@ export default defineAppConfig({
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.18",
+    "@iconify-json/lucide": "^1.2.0",
     "@nuxt/ui": "^4.0.0",
     "nuxt": "^4.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "vue-tsc": "^3.1.5"
+    "typescript": "^6.0.0",
+    "vue-tsc": "^3.2.0"
   }
 }
 ```
@@ -215,13 +215,13 @@ export default defineAppConfig({
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.18",
+    "@iconify-json/lucide": "^1.2.0",
     "@nuxt/ui": "^4.0.0",
     "nuxt": "^4.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "vue-tsc": "^3.1.5"
+    "typescript": "^6.0.0",
+    "vue-tsc": "^3.2.0"
   }
 }
 ```

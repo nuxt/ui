@@ -200,10 +200,7 @@ const menuProps = toRef(() => defu(props.menu, {
   title: props.title,
   description: props.description,
   close: props.close,
-  closeIcon: props.closeIcon,
-  content: {
-    onOpenAutoFocus: (e: Event) => e.preventDefault()
-  }
+  closeIcon: props.closeIcon
 }, props.mode === 'modal' ? { } : props.mode === 'slideover' ? { side: props.side, inset: props.variant === 'inset' } : {}) as SidebarMenu<T>)
 </script>
 

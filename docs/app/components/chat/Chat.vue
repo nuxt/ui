@@ -3,7 +3,7 @@ import type { DefineComponent } from 'vue'
 import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import * as theme from '#build/ui'
 import ProseStreamPre from '../prose/PreStream.vue'
 
@@ -16,9 +16,10 @@ const input = ref('')
 const toast = useToast()
 const { track } = useAnalytics()
 const { open, messages } = useChat()
-const { resetTheme, applyThemeSettings, hasCSSChanges, hasAppConfigChanges } = useTheme()
+const { framework } = useFrameworks()
+const { resetTheme, applyThemeSettings, hasCSSChanges, hasConfigChanges } = useTheme()
 
-const hasThemeChanges = computed(() => hasCSSChanges.value || hasAppConfigChanges.value)
+const hasThemeChanges = computed(() => hasCSSChanges.value || hasConfigChanges.value)
 
 let _skipSync = false
 const _themeApplied = new Set<string>()
@@ -47,7 +48,7 @@ const chat = new Chat({
   messages: messages.value,
   transport: new DefaultChatTransport({
     api: '/api/ai',
-    body: { theme }
+    body: () => ({ theme, framework: framework.value })
   }),
   onError: (error) => {
     let message = error.message
@@ -131,6 +132,7 @@ function getToolMessage(state: ToolState, toolName: string, input: Record<string
     'get-example': `${readVerb} ${upperName(input.exampleName || '')} example`,
     'search-components-by-category': `${searchVerb} components${input.category ? ` in ${input.category} category` : ''}${input.search ? ` for "${input.search}"` : ''}`,
     'getComponentTheme': `${readVerb} ${upperName(input.componentName || '')} theme`,
+    'getThemeGuide': `${readVerb} theme guide`,
     'applyTheme': `${applyVerb} theme changes`,
     'resetTheme': `${state === 'output-available' ? 'Reset' : 'Resetting'} theme to defaults`
   }[toolName] || `${searchVerb} ${toolName}`
@@ -155,6 +157,7 @@ function getToolIcon(part: ToolPart): string {
     'get-migration-guide': 'i-lucide-file-text',
     'get-example': 'i-lucide-file-text',
     'getComponentTheme': 'i-lucide-file-text',
+    'getThemeGuide': 'i-lucide-palette',
     'applyTheme': 'i-lucide-palette',
     'resetTheme': 'i-lucide-palette'
   }
@@ -281,12 +284,16 @@ defineShortcuts({
         class="px-0 gap-2"
         :user="{ ui: { container: 'max-w-full' } }"
       >
+        <template #indicator>
+          <UChatTool icon="i-lucide-brain" text="Thinking..." streaming />
+        </template>
+
         <template #content="{ message }">
           <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
             <UChatReasoning
               v-if="isReasoningUIPart(part)"
               :text="part.text"
-              :streaming="isReasoningStreaming(message, index, chat)"
+              :streaming="isPartStreaming(part)"
               icon="i-lucide-brain"
             >
               <MDCCached
@@ -296,14 +303,21 @@ defineShortcuts({
                 class="*:first:mt-0 *:last:mb-0"
               />
             </UChatReasoning>
-            <MDCCached
-              v-else-if="isTextUIPart(part) && part.text.length > 0"
-              :value="part.text"
-              :cache-key="`${message.id}-${index}`"
-              :components="components"
-              :parser-options="{ highlight: false }"
-              class="*:first:mt-0 *:last:mb-0"
-            />
+
+            <template v-else-if="isTextUIPart(part) && part.text.length > 0">
+              <MDCCached
+                v-if="message.role === 'assistant'"
+                :value="part.text"
+                :cache-key="`${message.id}-${index}`"
+                :components="components"
+                :parser-options="{ highlight: false }"
+                class="*:first:mt-0 *:last:mb-0"
+              />
+              <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
+                {{ part.text }}
+              </p>
+            </template>
+
             <UChatTool
               v-else-if="isToolUIPart(part)"
               :text="getToolText(part)"

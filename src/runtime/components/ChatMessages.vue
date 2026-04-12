@@ -96,6 +96,14 @@ const slots = defineSlots<ChatMessagesSlots>()
 
 const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
 
+const showIndicator = computed(() => {
+  if (props.status === 'submitted') return true
+  if (props.status !== 'streaming') return false
+
+  const lastMessage = props.messages?.[props.messages.length - 1]
+  return lastMessage?.role === 'assistant' && !lastMessage.parts?.length
+})
+
 const appConfig = useAppConfig() as ChatMessages['AppConfig']
 const uiProp = useComponentUI('chatMessages', props)
 
@@ -143,6 +151,14 @@ function scrollToBottom(smooth: boolean = true) {
 }
 
 watchThrottled([() => props.messages, () => props.status], ([_, status]) => {
+  if (!props.messages?.length) {
+    showAutoScroll.value = false
+    userScrolledUp.value = false
+    lastScrollTop.value = 0
+    messagesRefs.value.clear()
+    return
+  }
+
   if (status !== 'streaming') {
     return
   }
@@ -297,21 +313,22 @@ onMounted(() => {
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
     <slot>
-      <UChatMessage
-        v-for="message in messages"
-        :key="message.id"
-        v-bind="{ ...(message.role === 'user' ? userProps : assistantProps), ...message }"
-        :ref="el => registerMessageRef(message.id, el as ComponentPublicInstance)"
-        :compact="compact"
-      >
-        <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
-          <slot :name="name" v-bind="(slotData as any)" :message="message" />
-        </template>
-      </UChatMessage>
+      <template v-for="message in messages" :key="message.id">
+        <UChatMessage
+          v-if="message.parts?.length"
+          v-bind="{ ...(message.role === 'user' ? userProps : assistantProps), ...message }"
+          :ref="el => registerMessageRef(message.id, el as ComponentPublicInstance)"
+          :compact="compact"
+        >
+          <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
+            <slot :name="name" v-bind="(slotData as any)" :message="message" />
+          </template>
+        </UChatMessage>
+      </template>
     </slot>
 
     <UChatMessage
-      v-if="status === 'submitted'"
+      v-if="showIndicator"
       id="indicator"
       role="assistant"
       v-bind="{ ...assistantProps, actions: undefined, parts: [] }"

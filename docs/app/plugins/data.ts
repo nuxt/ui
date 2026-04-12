@@ -27,7 +27,7 @@ export default defineNuxtPlugin({
           document.documentElement.setAttribute('data-framework', f || 'nuxt');
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
-          tagPriority: -1
+          tagPriority: 'high'
         }]
       })
     }

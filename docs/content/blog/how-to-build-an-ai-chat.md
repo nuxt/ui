@@ -479,7 +479,7 @@ The chat page is where the actual conversation happens. It integrates the AI SDK
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming } from '@nuxt/ui/utils/ai'
 
 const route = useRoute()
 const toast = useToast()
@@ -546,7 +546,7 @@ onMounted(() => {
               <UChatReasoning
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
-                :streaming="isReasoningStreaming(message, index, chat)"
+                :streaming="isPartStreaming(part)"
               >
                 <MDC
                   :value="part.text"
@@ -555,12 +555,17 @@ onMounted(() => {
                 />
               </UChatReasoning>
 
-              <MDC
-                v-else-if="isTextUIPart(part)"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                class="*:first:mt-0 *:last:mb-0"
-              />
+              <template v-else-if="isTextUIPart(part)">
+                <MDC
+                  v-if="message.role === 'assistant'"
+                  :value="part.text"
+                  :cache-key="`${message.id}-${index}`"
+                  class="*:first:mt-0 *:last:mb-0"
+                />
+                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+                  {{ part.text }}
+                </p>
+              </template>
             </template>
           </template>
         </UChatMessages>
@@ -611,7 +616,7 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 
 **Rendering Markdown with MDC**
 
-AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering text with the [`MDC`](https://github.com/nuxt-content/mdc#mdc) component from [`@nuxtjs/mdc`](https://github.com/nuxt-content/mdc) and reasoning with [`UChatReasoning`](/docs/components/chat-reasoning). The `isReasoningStreaming` utility from `@nuxt/ui/utils/ai` detects if a reasoning part is currently being streamed.
+AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering text with the [`MDC`](https://github.com/nuxt-content/mdc#mdc) component from [`@nuxtjs/mdc`](https://github.com/nuxt-content/mdc) and reasoning with [`UChatReasoning`](/docs/components/chat-reasoning). The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
 
 ::note{to="/docs/typography"}
 Nuxt UI provides pre-styled prose components, so your markdown content will be automatically styled to match your theme.
@@ -758,7 +763,7 @@ async function createChat() {
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming } from '@nuxt/ui/utils/ai'
 
 const route = useRoute()
 const toast = useToast()
@@ -828,7 +833,7 @@ onMounted(() => {
               <UChatReasoning
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
-                :streaming="isReasoningStreaming(message, index, chat)"
+                :streaming="isPartStreaming(part)"
               >
                 <MDC
                   :value="part.text"
@@ -837,12 +842,17 @@ onMounted(() => {
                 />
               </UChatReasoning>
 
-              <MDC
-                v-else-if="isTextUIPart(part)"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                class="*:first:mt-0 *:last:mb-0"
-              />
+              <template v-else-if="isTextUIPart(part)">
+                <MDC
+                  v-if="message.role === 'assistant'"
+                  :value="part.text"
+                  :cache-key="`${message.id}-${index}`"
+                  class="*:first:mt-0 *:last:mb-0"
+                />
+                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+                  {{ part.text }}
+                </p>
+              </template>
             </template>
           </template>
         </UChatMessages>
@@ -940,7 +950,7 @@ Update the chat page to include the model selector and pass the selected model t
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming } from '@nuxt/ui/utils/ai'
 
 const route = useRoute()
 const toast = useToast()
@@ -1010,7 +1020,7 @@ onMounted(() => {
               <UChatReasoning
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
-                :streaming="isReasoningStreaming(message, index, chat)"
+                :streaming="isPartStreaming(part)"
               >
                 <MDC
                   :value="part.text"
@@ -1019,12 +1029,17 @@ onMounted(() => {
                 />
               </UChatReasoning>
 
-              <MDC
-                v-else-if="isTextUIPart(part)"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                class="*:first:mt-0 *:last:mb-0"
-              />
+              <template v-else-if="isTextUIPart(part)">
+                <MDC
+                  v-if="message.role === 'assistant'"
+                  :value="part.text"
+                  :cache-key="`${message.id}-${index}`"
+                  class="*:first:mt-0 *:last:mb-0"
+                />
+                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+                  {{ part.text }}
+                </p>
+              </template>
             </template>
           </template>
         </UChatMessages>

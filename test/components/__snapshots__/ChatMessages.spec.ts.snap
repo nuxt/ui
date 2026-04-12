@@ -102,7 +102,7 @@ exports[`ChatMessages > renders with default slot correctly 1`] = `
 exports[`ChatMessages > renders with files slot correctly 1`] = `
 "<div data-slot="root" class="w-full flex flex-col gap-1 flex-1 px-2.5 [&amp;>article]:last-of-type:min-h-(--last-message-height)" style="--last-message-height: 0px;">
   <article data-role="user" data-slot="root" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
-    <div data-slot="files" class="flex items-center gap-1.5 mb-1.5 justify-end">Files slot</div>
+    <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
       <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
@@ -110,7 +110,7 @@ exports[`ChatMessages > renders with files slot correctly 1`] = `
     </div>
   </article>
   <article data-role="assistant" data-slot="root" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
-    <div data-slot="files" class="flex items-center gap-1.5 mb-1.5">Files slot</div>
+    <!--v-if-->
     <div data-slot="container" class="relative flex items-start gap-3 pb-8">
       <!--v-if-->
       <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 w-full">I am fine, thank you!</div>

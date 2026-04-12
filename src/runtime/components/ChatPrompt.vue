@@ -44,6 +44,7 @@ import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
+import { useIMEGuard } from '../composables/useIMEGuard'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
@@ -90,6 +91,10 @@ function blur(e: Event) {
   emits('close', e)
 }
 
+const { onKeydown: onEnter, onCompositionEnd } = useIMEGuard((event) => {
+  submit(event)
+})
+
 defineExpose({
   textareaRef: toRef(() => textareaRef.value?.textareaRef)
 })
@@ -112,7 +117,8 @@ defineExpose({
       :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), uiProp)"
       data-slot="body"
       :class="ui.body({ class: uiProp?.body })"
-      @keydown.enter.exact.prevent="submit"
+      @keydown.enter.exact="onEnter"
+      @compositionend="onCompositionEnd"
       @keydown.esc="blur"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">

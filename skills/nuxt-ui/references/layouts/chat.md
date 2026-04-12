@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
 <script setup lang="ts">
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 
 definePageMeta({ layout: 'dashboard' })
 
@@ -85,7 +85,7 @@ function onSubmit() {
               <UChatReasoning
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
-                :streaming="isReasoningStreaming(message, index, chat)"
+                :streaming="isPartStreaming(part)"
               >
                 <MDC
                   :value="part.text"
@@ -100,12 +100,17 @@ function onSubmit() {
                 :streaming="isToolStreaming(part)"
               />
 
-              <MDC
-                v-else-if="isTextUIPart(part)"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                class="*:first:mt-0 *:last:mb-0"
-              />
+              <template v-else-if="isTextUIPart(part)">
+                <MDC
+                  v-if="message.role === 'assistant'"
+                  :value="part.text"
+                  :cache-key="`${message.id}-${index}`"
+                  class="*:first:mt-0 *:last:mb-0"
+                />
+                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+                  {{ part.text }}
+                </p>
+              </template>
             </template>
           </template>
         </UChatMessages>
@@ -155,7 +160,7 @@ Collapsible block for AI reasoning / thinking process. Auto-opens during streami
 | `streaming` | Whether reasoning is actively streaming |
 | `open` | Controlled open state |
 
-Use `isReasoningStreaming(message, index, chat)` from `@nuxt/ui/utils/ai` to determine streaming state.
+Use `isPartStreaming(part)` from `@nuxt/ui/utils/ai` to determine streaming state.
 
 ### ChatTool
 

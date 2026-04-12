@@ -18,6 +18,7 @@ export function useTheme() {
   const appConfig = useAppConfig()
   const colorMode = useColorMode()
   const { track } = useAnalytics()
+  const { framework } = useFrameworks()
 
   const aiThemeExtras = useState<Record<string, any>>('nuxt-ui-ai-theme', () => readLocalStorage('nuxt-ui-ai-theme', {}))
   const customColorsData = useState<Record<string, Record<string, string>>>('nuxt-ui-custom-colors', () => readLocalStorage('nuxt-ui-custom-colors', {}))
@@ -163,11 +164,11 @@ export function useTheme() {
   })
 
   const style = [
-    { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
-    { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
-    { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
-    { innerHTML: customColorsStyle, id: 'chat-custom-colors', tagPriority: -2 },
-    { innerHTML: cssVariablesStyle, id: 'chat-css-variables', tagPriority: -2 }
+    { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: 'critical' as const },
+    { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: 'critical' as const },
+    { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: 'critical' as const },
+    { innerHTML: customColorsStyle, id: 'chat-custom-colors', tagPriority: 'critical' as const },
+    { innerHTML: cssVariablesStyle, id: 'chat-css-variables', tagPriority: 'critical' as const }
   ]
 
   const hasCSSChanges = computed(() => {
@@ -178,7 +179,7 @@ export function useTheme() {
       || hasCSSVariables.value
   })
 
-  const hasAppConfigChanges = computed(() => {
+  const hasConfigChanges = computed(() => {
     return appConfig.ui.colors.primary !== 'green'
       || appConfig.ui.colors.neutral !== 'slate'
       || _iconSet.value !== 'lucide'
@@ -243,8 +244,8 @@ export function useTheme() {
     return lines.join('\n')
   }
 
-  function exportAppConfig(): string {
-    track('Theme Exported', { type: 'AppConfig' })
+  function exportConfig(): string {
+    track('Theme Exported', { type: 'Config', framework: framework.value })
 
     const config: Record<string, any> = {}
 
@@ -269,6 +270,26 @@ export function useTheme() {
     const configString = JSON.stringify(config, null, 2)
       .replace(/"([^"]+)":/g, '$1:')
       .replace(/"/g, '\'')
+
+    if (framework.value === 'vue') {
+      const pluginConfig = config.ui
+        ? JSON.stringify({ ui: config.ui }, null, 2)
+            .replace(/"([^"]+)":/g, '$1:')
+            .replace(/"/g, '\'')
+        : '{}'
+      return [
+        'import { defineConfig } from \'vite\'',
+        'import vue from \'@vitejs/plugin-vue\'',
+        'import ui from \'@nuxt/ui/vite\'',
+        '',
+        `export default defineConfig({`,
+        '  plugins: [',
+        '    vue(),',
+        `    ui(${pluginConfig.split('\n').map((line, i) => i === 0 ? line : '    ' + line).join('\n')})`,
+        '  ]',
+        '})'
+      ].join('\n')
+    }
 
     return `export default defineAppConfig(${configString})`
   }
@@ -391,9 +412,10 @@ export function useTheme() {
     modes,
     mode,
     hasCSSChanges,
-    hasAppConfigChanges,
+    hasConfigChanges,
+    configLabel: computed(() => framework.value === 'vue' ? 'vite.config.ts' : 'app.config.ts'),
     exportCSS,
-    exportAppConfig,
+    exportConfig,
     applyThemeSettings,
     resetTheme
   }

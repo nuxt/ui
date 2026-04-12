@@ -133,11 +133,7 @@ const Menu = computed(() => ({
   drawer: UDrawer
 })[props.mode as DashboardSidebarMode])
 
-const menuProps = toRef(() => defu(props.menu, {
-  content: {
-    onOpenAutoFocus: (e: Event) => e.preventDefault()
-  }
-}, props.mode === 'modal' ? { fullscreen: true, transition: false } : props.mode === 'slideover' ? { side: 'left' } : {}) as DashboardSidebarMenu<T>)
+const menuProps = toRef(() => defu(props.menu, {}, props.mode === 'modal' ? { fullscreen: true, transition: false } : props.mode === 'slideover' ? { side: 'left' } : {}) as DashboardSidebarMenu<T>)
 
 function toggleOpen() {
   open.value = !open.value
@@ -213,17 +209,17 @@ function toggleOpen() {
         <div v-if="!!slots.header || mode !== 'drawer'" data-slot="header" :class="ui.header({ class: uiProp?.header, menu: true })">
           <ReuseToggleTemplate v-if="mode !== 'drawer' && toggleSide === 'left'" />
 
-          <slot name="header" :collapsed="isCollapsed" :collapse="collapse" />
+          <slot name="header" :collapsed="false" :collapse="() => {}" />
 
           <ReuseToggleTemplate v-if="mode !== 'drawer' && toggleSide === 'right'" />
         </div>
 
         <div data-slot="body" :class="ui.body({ class: uiProp?.body, menu: true })">
-          <slot :collapsed="isCollapsed" :collapse="collapse" />
+          <slot :collapsed="false" :collapse="() => {}" />
         </div>
 
         <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer, menu: true })">
-          <slot name="footer" :collapsed="isCollapsed" :collapse="collapse" />
+          <slot name="footer" :collapsed="false" :collapse="() => {}" />
         </div>
       </slot>
     </template>
