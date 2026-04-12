@@ -236,6 +236,7 @@ watch(sidebarSize, (v) => {
 watch(isCollapsed, (collapsed) => {
   if (!isMobile.value && canCollapse.value) modelOpen.value = !collapsed
 })
+// modelOpen and isCollapsed have inverted semantics — equal values means they're out of sync
 watch(modelOpen, (v) => {
   if (!isMobile.value && canCollapse.value && isCollapsed.value === v) collapse(!v)
 })
@@ -385,9 +386,9 @@ const menuProps = toRef(() => defu(props.menu, {
             :tabindex="-1"
             :class="ui.rail({ class: uiProp?.rail })"
             :style="railCursor ? { cursor: railCursor } : undefined"
-            @mousedown="isResizable ? handleMouseDown($event) : undefined"
-            @touchstart="isResizable ? handleTouchStart($event) : undefined"
-            @dblclick="isResizable ? handleDoubleClick($event) : undefined"
+            @mousedown="isResizable && handleMouseDown($event)"
+            @touchstart="isResizable && handleTouchStart($event)"
+            @dblclick="isResizable && handleDoubleClick($event)"
             @click="onRailClick"
           />
         </slot>
