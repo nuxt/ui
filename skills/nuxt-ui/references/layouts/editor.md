@@ -2,24 +2,24 @@
 
 Build a rich text editor with toolbars, slash commands, mentions, and drag-and-drop.
 
+## When to use
+
+- Note-taking apps, CMS editors
+- Collaborative editing interfaces
+- Any rich text editing need (supports JSON, HTML, and Markdown)
+
 ## Component tree
 
 ```
-UApp
-├── UHeader
-├── UMain
-│   └── NuxtPage
-│       └── UContainer
-│           └── UEditor
-│               ├── UEditorToolbar (fixed / bubble / floating)
-│               ├── UEditorDragHandle
-│               ├── UEditorSuggestionMenu
-│               ├── UEditorMentionMenu
-│               └── UEditorEmojiMenu
-└── UFooter
+UEditor
+├── UEditorToolbar (fixed / bubble / floating)
+├── UEditorDragHandle
+├── UEditorSuggestionMenu
+├── UEditorMentionMenu
+└── UEditorEmojiMenu
 ```
 
-## Page
+## Basic editor
 
 ```vue [pages/editor.vue]
 <script setup lang="ts">
@@ -70,30 +70,24 @@ const content = ref({
 
 ## Key components
 
-- `UEditor` — Rich text editor (`v-model` accepts JSON, HTML, or markdown via `content-type` prop)
-- `UEditorToolbar` — Toolbar with `layout`: `'fixed'` (default), `'bubble'` (on selection), `'floating'` (on empty lines)
-- `UEditorDragHandle` — Block drag-and-drop handle
-- `UEditorSuggestionMenu` — Slash command menu
-- `UEditorMentionMenu` — @ mention menu
-- `UEditorEmojiMenu` — Emoji picker
+- `UEditor` — rich text editor. `v-model` accepts JSON (default), HTML, or Markdown via `content-type` prop.
+- `UEditorToolbar` — toolbar with `layout`: `'fixed'` (default), `'bubble'` (on selection), `'floating'` (on empty lines).
+- `UEditorDragHandle` — block drag-and-drop handle.
+- `UEditorSuggestionMenu` — slash command menu (type `/` to open).
+- `UEditorMentionMenu` — `@` mention menu.
+- `UEditorEmojiMenu` — emoji picker (type `:` to open).
 
 ## Toolbar modes
 
 ```vue
-<!-- Fixed (default) -->
-<UEditor v-model="content">
-  <UEditorToolbar />
-</UEditor>
+<!-- Fixed (default) — always visible at top -->
+<UEditorToolbar :editor="editor" />
 
-<!-- Bubble (appears on text selection) -->
-<UEditor v-model="content">
-  <UEditorToolbar layout="bubble" />
-</UEditor>
+<!-- Bubble — appears on text selection -->
+<UEditorToolbar :editor="editor" layout="bubble" />
 
-<!-- Floating (appears on empty lines) -->
-<UEditor v-model="content">
-  <UEditorToolbar layout="floating" />
-</UEditor>
+<!-- Floating — appears on empty lines -->
+<UEditorToolbar :editor="editor" layout="floating" />
 ```
 
 ## Content types
@@ -111,7 +105,7 @@ const content = ref({
 
 ## With document sidebar
 
-Combine with Dashboard components for a multi-document editor with a sidebar.
+Combine with Dashboard layout for a multi-document editor:
 
 ```vue [layouts/editor.vue]
 <template>
