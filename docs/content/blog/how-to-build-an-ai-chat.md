@@ -54,19 +54,19 @@ Install Nuxt UI and the AI-specific dependencies:
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
-pnpm add @nuxt/ui tailwindcss @comark/nuxt @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+pnpm add @nuxt/ui tailwindcss @comark/nuxt @shikijs/langs @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [yarn]
-yarn add @nuxt/ui tailwindcss @comark/nuxt @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+yarn add @nuxt/ui tailwindcss @comark/nuxt @shikijs/langs @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [npm]
-npm install @nuxt/ui tailwindcss @comark/nuxt @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+npm install @nuxt/ui tailwindcss @comark/nuxt @shikijs/langs @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [bun]
-bun add @nuxt/ui tailwindcss @comark/nuxt @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+bun add @nuxt/ui tailwindcss @comark/nuxt @shikijs/langs @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 ::
 
@@ -273,7 +273,7 @@ export default defineEventHandler(async (event) => {
   // Generate a title for the chat if it doesn't have one
   if (!chat.title) {
     const { text: title } = await generateText({
-      model: 'anthropic/claude-haiku-4.5',
+      model: DEFAULT_MODEL,
       system: `Generate a short title (max 30 characters) based on the user's message. No quotes or punctuation.`,
       prompt: JSON.stringify(messages[0])
     })

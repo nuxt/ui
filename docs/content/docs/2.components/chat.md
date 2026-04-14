@@ -38,22 +38,40 @@ Install the required dependencies:
 ::code-group{sync="pm"}
 
 ```bash [pnpm]
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue
+pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
 ```
 
 ```bash [yarn]
-yarn add ai @ai-sdk/gateway @ai-sdk/vue
+yarn add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
 ```
 
 ```bash [npm]
-npm install ai @ai-sdk/gateway @ai-sdk/vue
+npm install ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
 ```
 
 ```bash [bun]
-bun add ai @ai-sdk/gateway @ai-sdk/vue
+bun add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
 ```
 
 ::
+
+Then add `@comark/nuxt` to your modules:
+
+::framework-only
+#nuxt
+:::div
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  modules: [
+    '@nuxt/ui',
+    '@comark/nuxt'
+  ]
+})
+```
+:::
+::
+
+[`@comark/nuxt`](https://comark.dev/rendering/nuxt) provides the `Comark` component used to render AI responses as streaming Markdown — it incrementally renders tokens as they arrive, avoiding the flicker and re-parsing that traditional Markdown renderers cause. It also automatically enables Nuxt UI's [prose components](/docs/typography) so your content is styled to match your theme.
 
 ## Server Setup
 
@@ -319,8 +337,8 @@ function onSubmit() {
 </template>
 ```
 
-::note
-In this example, we use the `Comark` component from [`@comark/nuxt`](https://comark.dev/rendering/nuxt) to render streaming Markdown. As Nuxt UI provides pre-styled prose components, your content will be automatically styled. For syntax highlighting in code blocks, pass the `highlight` plugin via the `:plugins` prop.
+::tip
+For syntax highlighting in code blocks, pass the `highlight` plugin from `@comark/nuxt/plugins/highlight` via the `:plugins` prop as shown above.
 ::
 
 ::tip{to="/blog/how-to-build-an-ai-chat"}

@@ -413,7 +413,13 @@ collapse: true
 ::tip
 You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
 
-```vue{4-19}
+```vue{7-22}
+<script setup lang="ts">
+import { isTextUIPart } from 'ai'
+import { isPartStreaming } from '@nuxt/ui/utils/ai'
+import highlight from '@comark/nuxt/plugins/highlight'
+</script>
+
 <template>
   <UChatMessages :messages="messages" :status="status">
     <template #content="{ message }">
