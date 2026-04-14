@@ -40,7 +40,6 @@ When you need to know **what a component accepts** or **how its API works**, use
 3. **Read generated theme files for slot names** — Nuxt: `.nuxt/ui/<component>.ts`, Vue: `node_modules/.nuxt-ui/ui/<component>.ts`. These show every slot, variant, and default class for any component.
 4. **Override priority** (highest wins): `ui` prop / `class` prop → global config → theme defaults.
 5. **Icons use `i-{collection}-{name}` format** — `lucide` is the default collection. Use the MCP `search_icons` tool to find icons, or browse at [icones.js.org](https://icones.js.org).
-6. **Items arrays**: flat `T[]` for plain lists, nested `T[][]` for groups with automatic separators between groups.
 
 ## How to use this skill
 
@@ -63,7 +62,6 @@ Based on the task, load the relevant reference files **before writing any code**
 
 **Recipes** — complete patterns for common tasks:
 - [data-tables](references/recipes/data-tables.md) — tables with filters, pagination, sorting, selection
-- [settings](references/recipes/settings.md) — settings page with tabs and forms
 - [auth](references/recipes/auth.md) — login, signup, forgot password forms
 - [overlays](references/recipes/overlays.md) — modals, slideovers, drawers, command palette
 - [navigation](references/recipes/navigation.md) — headers, sidebars, breadcrumbs, tabs
@@ -77,7 +75,7 @@ Based on the task, load the relevant reference files **before writing any code**
 |---|---|
 | Build a landing page | design-system, conventions, landing |
 | Build a dashboard / admin UI | conventions, component-selection, dashboard |
-| Add a settings page | conventions, forms, settings |
+| Add a settings page | conventions, forms |
 | Create a login / signup form | conventions, forms, auth |
 | Display data in a table | conventions, component-selection, data-tables |
 | Customize theme / brand colors | design-system |
@@ -132,7 +130,10 @@ import vue from '@vitejs/plugin-vue'
 import ui from '@nuxt/ui/vite'
 
 export default defineConfig({
-  plugins: [vue(), ui()]
+  plugins: [
+    vue(),
+    ui()
+  ]
 })
 ```
 
@@ -145,7 +146,11 @@ import ui from '@nuxt/ui/vue-plugin'
 import App from './App.vue'
 
 const app = createApp(App)
-const router = createRouter({ routes: [], history: createWebHistory() })
+const router = createRouter({
+  routes: [],
+  history: createWebHistory()
+})
+
 app.use(router)
 app.use(ui)
 app.mount('#app')

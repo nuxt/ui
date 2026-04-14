@@ -21,7 +21,7 @@ UEditor
 
 ## Basic editor
 
-```vue [pages/editor.vue]
+```vue
 <script setup lang="ts">
 const content = ref({
   type: 'doc',
@@ -40,29 +40,19 @@ const content = ref({
 </script>
 
 <template>
-  <UPage>
-    <UPageHeader title="Editor">
-      <template #actions>
-        <UButton label="Save" icon="i-lucide-save" />
-      </template>
-    </UPageHeader>
-
-    <UPageBody>
-      <UEditor v-slot="{ editor }" v-model="content">
-        <UEditorToolbar :editor="editor" />
-        <UEditorSuggestionMenu :editor="editor" />
-        <UEditorMentionMenu
-          :editor="editor"
-          :items="[
-            { label: 'Benjamin', avatar: { src: 'https://github.com/benjamincanac.png' } },
-            { label: 'Sébastien', avatar: { src: 'https://github.com/atinux.png' } }
-          ]"
-        />
-        <UEditorEmojiMenu :editor="editor" />
-        <UEditorDragHandle :editor="editor" />
-      </UEditor>
-    </UPageBody>
-  </UPage>
+  <UEditor v-slot="{ editor }" v-model="content">
+    <UEditorToolbar :editor="editor" />
+    <UEditorSuggestionMenu :editor="editor" />
+    <UEditorMentionMenu
+      :editor="editor"
+      :items="[
+        { label: 'Benjamin', avatar: { src: 'https://github.com/benjamincanac.png' } },
+        { label: 'Sébastien', avatar: { src: 'https://github.com/atinux.png' } }
+      ]"
+    />
+    <UEditorEmojiMenu :editor="editor" />
+    <UEditorDragHandle :editor="editor" />
+  </UEditor>
 </template>
 ```
 
@@ -70,7 +60,7 @@ const content = ref({
 
 ## Key components
 
-- `UEditor` — rich text editor. `v-model` accepts JSON (default), HTML, or Markdown via `content-type` prop.
+- `UEditor` — rich text editor. `v-model` accepts JSON (default), HTML, or Markdown via `content-type` prop. Default slot provides `{ editor, handlers }` — `editor` is the Tiptap instance, `handlers` contains action functions for toolbar/menus.
 - `UEditorToolbar` — toolbar with `layout`: `'fixed'` (default), `'bubble'` (on selection), `'floating'` (on empty lines).
 - `UEditorDragHandle` — block drag-and-drop handle.
 - `UEditorSuggestionMenu` — slash command menu (type `/` to open).

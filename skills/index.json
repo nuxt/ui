@@ -18,8 +18,7 @@
         "references/recipes/auth.md",
         "references/recipes/data-tables.md",
         "references/recipes/navigation.md",
-        "references/recipes/overlays.md",
-        "references/recipes/settings.md"
+        "references/recipes/overlays.md"
       ]
     }
   ]

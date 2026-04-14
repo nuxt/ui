@@ -60,6 +60,7 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 | File upload | `UFileUpload` | Button or drop area variants |
 
 ### Rules
+- Use `UAuthForm` for login/signup pages — handles fields, social providers, validation, and layout out of the box
 - Use `USelect` for short, known lists (country, status, role)
 - Use `USelectMenu` when the list is long or needs search
 - Use `UInputMenu` when the user might want to type a value that's not in the list
@@ -87,6 +88,7 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 | Need | Component | Why |
 |---|---|---|
 | Grouped content with header/body/footer | `UCard` | Bordered/shadow container with slots |
+| Rich content card with icon, badge, links | `UPageCard` | Extended card for grids — supports icon, badge, highlight, links |
 | Marketing page section | `UPageSection` | Full-width section with headline, title, features |
 | Page hero | `UPageHero` | Title + description + links + optional media |
 | Call to action | `UPageCTA` | Highlighted section with action links |
@@ -97,5 +99,6 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 
 ### Rules
 - Don't overuse `UCard` — plain content with spacing is often better than wrapping everything in cards
+- Use `UPageCard` instead of `UCard` when you need icon, badge, highlight, or links — it's designed for feature grids and landing pages
 - Use `UPageSection` for marketing/landing page sections, not for app UI
 - Use `UContainer` inside `UDashboardPanel` body for consistent content width

@@ -17,9 +17,9 @@ function confirmDelete() {
 <template>
   <UButton label="Delete" color="error" variant="soft" @click="isOpen = true" />
 
-  <UModal v-model:open="isOpen" title="Delete item" description="This action cannot be undone. Are you sure?">
-    <template #footer>
-      <UButton label="Cancel" color="neutral" variant="outline" @click="isOpen = false" />
+  <UModal v-model:open="isOpen" title="Delete item" description="This action cannot be undone. Are you sure?" :ui="{ footer: 'justify-end' }">
+    <template #footer="{ close }">
+      <UButton label="Cancel" color="neutral" variant="outline" @click="close" />
       <UButton label="Delete" color="error" @click="confirmDelete" />
     </template>
   </UModal>
@@ -43,7 +43,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <UModal :open="true" :title="title" :description="description" @update:open="emit('close', false)">
+  <UModal :close="{ onClick: () => emit('close', false) }" :title="title" :description="description">
     <template #footer>
       <UButton label="Cancel" color="neutral" variant="outline" @click="emit('close', false)" />
       <UButton label="Confirm" color="error" @click="emit('close', true)" />
@@ -58,12 +58,12 @@ const overlay = useOverlay()
 const confirm = overlay.create(ConfirmModal)
 
 async function deleteItem(item) {
-  const { result } = confirm.open({
+  const instance = confirm.open({
     title: 'Delete item',
     description: `Are you sure you want to delete "${item.name}"?`
   })
 
-  if (await result) {
+  if (await instance.result) {
     // user confirmed
   }
 }
@@ -73,13 +73,13 @@ async function deleteItem(item) {
 
 ```vue
 <script setup lang="ts">
-import { z } from 'zod'
+import * as z from 'zod'
 
 const isOpen = ref(false)
 
 const schema = z.object({
   name: z.string().min(1),
-  email: z.string().email()
+  email: z.email()
 })
 
 type Schema = z.output<typeof schema>
@@ -106,8 +106,8 @@ function onSave() {
       </UForm>
     </template>
 
-    <template #footer>
-      <UButton label="Cancel" color="neutral" variant="outline" @click="isOpen = false" />
+    <template #footer="{ close }">
+      <UButton label="Cancel" color="neutral" variant="outline" @click="close" />
       <UButton label="Save" @click="onSave" />
     </template>
   </USlideover>
@@ -165,11 +165,3 @@ const groups = [{
 </template>
 ```
 
-## Choosing the right overlay
-
-- **UModal** — focused tasks, confirmations, forms that need full attention
-- **USlideover** — detail panels, edit forms that don't interrupt the main view as much
-- **UDrawer** — mobile action sheets, bottom sheets
-- **UPopover** — contextual content attached to a trigger (no backdrop)
-- Use `mode="drawer"` on Modal/Slideover for automatic mobile drawer behavior
-- For reusable overlays, prefer `useOverlay()` over `v-model:open` state management

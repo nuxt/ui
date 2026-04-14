@@ -60,9 +60,9 @@ const items = computed<NavigationMenuItem[]>(() => [{
 
       <template #default="{ collapsed }">
         <UNavigationMenu
+          :collapsed="collapsed"
           :items="items"
           orientation="vertical"
-          :ui="{ link: collapsed ? 'justify-center' : undefined }"
         />
       </template>
 
@@ -93,6 +93,9 @@ definePageMeta({ layout: 'dashboard' })
   <UDashboardPanel>
     <template #header>
       <UDashboardNavbar title="Home">
+        <template #leading>
+          <UDashboardSidebarCollapse />
+        </template>
         <template #right>
           <UButton icon="i-lucide-plus" label="New" />
         </template>
@@ -134,7 +137,7 @@ Resizable, collapsible sidebar. Must be inside `DashboardGroup`.
 | `side` | `'left'` | `'left'` or `'right'` |
 | `mode` | `'slideover'` | Mobile: `'modal'`, `'slideover'`, `'drawer'` |
 
-All slots receive `{ collapsed }` prop. Use `v-model:collapsed` and `v-model:open` (mobile) for state control.
+All slots receive `{ collapsed, collapse }` — `collapsed` is the boolean state, `collapse(value)` toggles it programmatically. Use `v-model:collapsed` and `v-model:open` (mobile) for state control.
 
 ### DashboardPanel
 
@@ -142,8 +145,12 @@ Content panel with `#header`, `#body` (scrollable), `#footer`, and `#default` (r
 
 ### DashboardNavbar / DashboardToolbar
 
-Navbar: `#left`, `#default`, `#right` slots + `title` prop.
+Navbar: `#leading`, `#left`, `#default`, `#right` slots + `title` prop. Use `UDashboardSidebarCollapse` in `#leading` to toggle sidebar on mobile.
 Toolbar: same slots, sits below navbar for filters/actions.
+
+### UNavigationMenu in sidebar
+
+Always pass `:collapsed="collapsed"` to `UNavigationMenu` inside a collapsible sidebar — it auto-hides labels and centers icons. Use `NavigationMenuItem[][]` (array of arrays) for separate groups (main nav + footer links).
 
 ## Multi-panel (list-detail)
 

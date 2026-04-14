@@ -12,6 +12,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UFooterColumns` | Multi-column footer with link groups |
 | `UMain` | Main content area |
 | `UContainer` | Centered max-width container |
+| `ULink` | Enhanced link — NuxtLink/RouterLink with active states |
 
 ## Element
 
@@ -30,15 +31,24 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `USeparator` | Divider line with optional label |
 | `USkeleton` | Loading placeholder |
 | `UProgress` | Progress bar |
+| `UToast` | Toast notification (shown via `useToast`) |
 | `UCalendar` | Date calendar (single, range, multiple) |
 | `UCollapsible` | Animated expand/collapse |
 | `UFieldGroup` | Group form inputs horizontally |
 | `UMarquee` | Scrolling content ticker |
+| `UCarousel` | Image/content carousel with autoplay |
+| `UEmpty` | Empty state placeholder with icon, title, actions |
+| `UError` | Error display with retry action |
+| `UScrollArea` | Scrollable area with custom scrollbar |
+| `UTimeline` | Timeline display for events and activity |
+| `UUser` | User display — avatar + name + description |
+| `UTheme` | Theme provider — scoped color overrides for children |
 
 ## Form
 
 | Component | Purpose |
 |---|---|
+| `UAuthForm` | Pre-built auth form with social providers |
 | `UInput` | Text input — text, email, password, search |
 | `UTextarea` | Multi-line text with autoresize |
 | `USelect` | Native-like dropdown for small lists |
@@ -75,6 +85,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 
 | Component | Purpose |
 |---|---|
+| `USidebar` | Standalone sidebar with header/body/footer |
 | `UNavigationMenu` | Primary nav — horizontal or vertical |
 | `UTabs` | Tab switcher within a page |
 | `UBreadcrumb` | Location hierarchy |
@@ -103,6 +114,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UDashboardSidebarToggle` | Mobile sidebar toggle button |
 | `UDashboardSearchButton` | Search button for sidebar |
 | `UDashboardSearch` | Dashboard-level search overlay |
+| `UDashboardSidebarCollapse` | Collapse button for sidebar |
 
 ## Page (marketing)
 
@@ -122,6 +134,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UPageAside` | Sticky sidebar wrapper |
 | `UPageAnchors` | Simple anchor links |
 | `UPageLinks` | Related resource links |
+| `UPageList` | List layout for page items |
 
 ## Blog & Changelog
 
@@ -137,6 +150,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | Component | Purpose |
 |---|---|
 | `UPricingPlans` | Pricing plan cards |
+| `UPricingPlan` | Individual pricing plan card |
 | `UPricingTable` | Feature comparison table |
 
 ## Content (Nuxt Content)
@@ -180,4 +194,5 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UColorModeButton` | Toggle button (light/dark) |
 | `UColorModeSwitch` | Toggle switch (light/dark) |
 | `UColorModeSelect` | Dropdown (light/dark/system) |
+| `UColorModeAvatar` | Avatar that changes with color mode |
 | `UColorModeImage` | Image that changes with color mode |

@@ -50,6 +50,19 @@ ui({
 
 Only colors that exist in your theme work — either Tailwind's defaults or custom colors defined with `@theme`.
 
+Available color palettes:
+- **Standard Tailwind**: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
+- **Neutral palettes** (for `neutral` key — pick one that matches the aesthetic):
+  - `slate` — cool blue-gray, professional (default)
+  - `gray` — true neutral, clean
+  - `zinc` — slightly cool, modern, techy
+  - `neutral` — perfectly balanced
+  - `stone` — warm gray, earthy
+  - `taupe` — warm brown-gray, sophisticated
+  - `mauve` — purple-tinted gray, elegant
+  - `mist` — soft blue-gray, airy
+  - `olive` — green-tinted gray, natural
+
 ### Adding custom brand colors
 
 1. Define all 11 shades in CSS:
@@ -93,17 +106,19 @@ export default defineNuxtConfig({
 Use these everywhere instead of raw palette colors:
 
 ### Text
-- `text-default` — primary text (headings, labels)
+- `text-default` — primary body text
 - `text-muted` — secondary text (descriptions, hints)
+- `text-toned` — medium-emphasis text (between muted and default)
 - `text-dimmed` — tertiary text (placeholders, disabled)
-- `text-highlighted` — inverse/highlighted text (on colored backgrounds)
+- `text-highlighted` — emphasized text (headings, important labels)
+- `text-inverted` — text on inverted backgrounds (pair with `bg-inverted`)
 
 ### Backgrounds
 - `bg-default` — page background
-- `bg-elevated` — raised surfaces (cards, dropdowns)
 - `bg-muted` — subtle backgrounds (hover states, alternating rows)
+- `bg-elevated` — raised surfaces (cards, dropdowns)
+- `bg-accented` — accent backgrounds (active states, selected items)
 - `bg-inverted` — inverse background (dark on light, light on dark)
-- `bg-accented` — subtle accent backgrounds
 
 ### Borders
 - `border-default` — standard borders
@@ -130,13 +145,28 @@ Most components accept a `variant` prop. Choose based on visual weight:
 - **Destructive buttons** use `color="error"` but not necessarily `variant="solid"` — use `variant="soft"` or `"outline"` unless it's the primary action on a confirmation dialog
 - **Button groups** should use consistent variants — don't mix `solid` and `outline` siblings
 
-## The `ui` prop
+## Customizing components
 
-Every component accepts a `ui` prop to override theme slots after variants are computed — it wins over everything.
+### `ui` prop
+
+Override theme **slots** on a single instance — wins over global config and variants.
 
 ```vue
-<UButton :ui="{ base: 'rounded-none', trailingIcon: 'size-3 rotate-90' }" />
+<UButton :ui="{ base: 'font-bold', trailingIcon: 'size-3 rotate-90' }" />
 <UCard :ui="{ header: 'bg-muted', body: 'p-8' }" />
+```
+
+Rules for `ui` overrides:
+- **Prefer `defaultVariants`** over slot class overrides when possible (e.g., changing default button variant/size).
+- **Don't duplicate default classes** — check the generated theme file first to see what's already there.
+- Border radius defaults come from `--ui-radius`, but you can override with `rounded-*` classes in `ui` or `class` when you need a specific radius on a component.
+
+### `class` prop
+
+Override the **root** (or `base`) slot only — simpler than `ui` for single-slot changes.
+
+```vue
+<UButton class="font-bold" />
 ```
 
 ### Finding slot names
@@ -147,38 +177,180 @@ Read the generated theme file for any component:
 
 These files show every available slot name, variant combination, and default class.
 
-## Global config
+### Global config
 
-Override component defaults globally:
+Override `slots`, `variants`, `compoundVariants`, and `defaultVariants` globally in `app.config.ts` (Nuxt) or `vite.config.ts` (Vue):
 
 ```ts
 // Nuxt — app.config.ts
 export default defineAppConfig({
   ui: {
     button: {
-      defaultVariant: 'outline',
       slots: {
-        base: 'rounded-full'
+        base: 'font-bold'
+      },
+      compoundVariants: [{
+        color: 'neutral',
+        variant: 'outline',
+        class: 'ring-default hover:bg-accented'
+      }],
+      defaultVariants: {
+        color: 'neutral',
+        variant: 'outline'
       }
     }
   }
 })
 ```
 
-## CSS variables
+Tailwind Variants uses `tailwind-merge` under the hood — conflicting classes are resolved automatically.
 
-Nuxt UI exposes CSS variables you can override:
+### `UTheme` (scoped overrides)
+
+Override theme for a section of the component tree without affecting the rest of the app. Renders no DOM element — uses `provide`/`inject`:
+
+```vue
+<UTheme :ui="{ button: { slots: { base: 'rounded-full' } } }">
+  <UButton label="Rounded" />
+  <UButton label="Also rounded" />
+</UTheme>
+```
+
+### Global `defaultVariants`
+
+Override default `size` and `color` for **all** components at once:
+
+```ts
+// nuxt.config.ts
+export default defineNuxtConfig({
+  ui: {
+    theme: {
+      defaultVariants: {
+        size: 'lg',
+        color: 'neutral'
+      }
+    }
+  }
+})
+```
+
+### `theme.transitions`
+
+Controls whether interactive components get `transition-colors`. Enabled by default.
+
+```ts
+// nuxt.config.ts — disable transitions
+export default defineNuxtConfig({
+  ui: {
+    theme: {
+      transitions: false
+    }
+  }
+})
+```
+
+### `theme.prefix`
+
+When using Tailwind CSS with a prefix, configure the same prefix in Nuxt UI so component classes match:
+
+```ts
+// nuxt.config.ts
+export default defineNuxtConfig({
+  ui: {
+    theme: {
+      prefix: 'tw'
+    }
+  }
+})
+```
 
 ```css
-:root {
-  --ui-radius: var(--radius-lg);
-  --ui-container: 80rem;
+/* app/assets/css/main.css */
+@import "tailwindcss" prefix(tw);
+@import "@nuxt/ui";
+```
+
+### Tree-shaking with `experimental.componentDetection`
+
+Enable automatic component detection to only generate CSS for components you actually use:
+
+```ts
+// nuxt.config.ts
+export default defineNuxtConfig({
+  ui: {
+    experimental: {
+      componentDetection: true
+    }
+  }
+})
+```
+
+For dynamic components (e.g., `<component :is="...">`), pass an array of component names to guarantee they're included:
+
+```ts
+componentDetection: ['Modal', 'Dropdown', 'Popover']
+```
+
+## CSS `@theme` customization
+
+Customize Tailwind design tokens in `assets/css/main.css`:
+
+### Fonts
+
+```css
+@theme {
+  --font-sans: 'Public Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 ```
 
-## Dark mode
+In Nuxt, fonts defined here are automatically loaded by `@nuxt/fonts`.
 
-- Nuxt: automatic with `@nuxtjs/color-mode` (included by default)
-- Vue: add `dark` class to `<html>` element
-- Toggle with `UColorModeButton` or `UColorModeSwitch`
-- All semantic utilities adapt automatically — `text-default` is dark in light mode, light in dark mode
+### Breakpoints
+
+```css
+@theme {
+  --breakpoint-3xl: 1920px;
+}
+```
+
+## CSS variables
+
+Nuxt UI exposes CSS variables you can override in `main.css`:
+
+```css
+:root {
+  --ui-radius: 0.25rem;
+  --ui-container: 80rem;
+  --ui-header-height: 4rem;
+}
+```
+
+### Color shade overrides
+
+Each semantic color defaults to shade 500 in light mode, 400 in dark mode. Override per-mode:
+
+```css
+:root {
+  --ui-primary: var(--ui-color-primary-700);
+}
+.dark {
+  --ui-primary: var(--ui-color-primary-200);
+}
+```
+
+You can use `var(--ui-color-<name>-<shade>)` to reference shades from the active palette (e.g., `var(--ui-color-neutral-800)` maps to whichever neutral palette is configured).
+
+### Black/white as primary
+
+`black` and `white` have no shades, so they can't be used in config. Set them directly:
+
+```css
+:root {
+  --ui-primary: black;
+}
+.dark {
+  --ui-primary: white;
+}
+```
+

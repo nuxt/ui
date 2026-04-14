@@ -2,120 +2,37 @@
 
 Patterns for headers, sidebars, breadcrumbs, and tab navigation.
 
-## Responsive header with mobile menu
+## Header with mobile menu
 
-```vue [app.vue]
-<script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+`UHeader` default slot is desktop nav, `#body` is the mobile menu. Without `#body`, mobile users have no navigation.
 
-const items = computed<NavigationMenuItem[]>(() => [{
-  label: 'Features',
-  to: '#features'
-}, {
-  label: 'Pricing',
-  to: '/pricing'
-}, {
-  label: 'Docs',
-  to: '/docs'
-}])
-</script>
+```vue
+<UHeader>
+  <template #title>
+    <Logo class="h-6 w-auto" />
+  </template>
 
-<template>
-  <UApp>
-    <UHeader>
-      <template #title>
-        <Logo class="h-6 w-auto" />
-      </template>
+  <UNavigationMenu :items="items" />
 
-      <!-- Desktop nav (horizontal) -->
-      <UNavigationMenu :items="items" />
+  <template #right>
+    <UColorModeButton />
+    <UButton label="Sign in" color="neutral" variant="ghost" />
+  </template>
 
-      <template #right>
-        <UColorModeButton />
-        <UButton label="Sign in" color="neutral" variant="ghost" />
-        <UButton label="Get started" />
-      </template>
-
-      <!-- Mobile menu content (shown when hamburger is tapped) -->
-      <template #body>
-        <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
-      </template>
-    </UHeader>
-
-    <UMain>
-      <NuxtPage />
-    </UMain>
-  </UApp>
-</template>
+  <template #body>
+    <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+  </template>
+</UHeader>
 ```
 
-The `#body` slot is critical — without it, mobile users have no navigation. `UHeader` automatically shows a hamburger button on small screens that toggles the body content.
+> Full app shell example in [landing layout](../layouts/landing.md).
 
 ## Sidebar navigation (dashboard)
 
-```vue [layouts/dashboard.vue]
-<script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
-
-const items = computed<NavigationMenuItem[]>(() => [{
-  label: 'Home',
-  icon: 'i-lucide-house',
-  to: '/dashboard'
-}, {
-  label: 'Projects',
-  icon: 'i-lucide-folder',
-  to: '/dashboard/projects'
-}, {
-  label: 'Analytics',
-  icon: 'i-lucide-bar-chart-3',
-  to: '/dashboard/analytics'
-}, {
-  label: 'Settings',
-  icon: 'i-lucide-settings',
-  to: '/dashboard/settings'
-}])
-</script>
-
-<template>
-  <UDashboardGroup>
-    <UDashboardSidebar collapsible resizable>
-      <template #header="{ collapsed }">
-        <NuxtLink to="/dashboard" class="flex items-center gap-2">
-          <Logo class="size-6" />
-          <span v-if="!collapsed" class="font-semibold text-default">My App</span>
-        </NuxtLink>
-      </template>
-
-      <template #default="{ collapsed }">
-        <UNavigationMenu
-          :items="items"
-          orientation="vertical"
-          :ui="{ link: collapsed ? 'justify-center' : undefined }"
-        />
-      </template>
-
-      <template #footer="{ collapsed }">
-        <UDropdownMenu
-          :items="[
-            [{ label: 'Profile', icon: 'i-lucide-user', to: '/profile' }],
-            [{ label: 'Sign out', icon: 'i-lucide-log-out', onSelect: () => signOut() }]
-          ]"
-        >
-          <UButton
-            :icon="collapsed ? 'i-lucide-user' : undefined"
-            :label="collapsed ? undefined : 'John Doe'"
-            color="neutral"
-            variant="ghost"
-            block
-          />
-        </UDropdownMenu>
-      </template>
-    </UDashboardSidebar>
-
-    <slot />
-  </UDashboardGroup>
-</template>
-```
+See [dashboard layout](../layouts/dashboard.md) for the full sidebar pattern with `UDashboardSidebar` + `UNavigationMenu`. Key points:
+- Pass `:collapsed="collapsed"` to `UNavigationMenu` inside collapsible sidebars
+- Use `NavigationMenuItem[][]` (nested arrays) for separate nav groups
+- Use `#footer` slot for user menu with `UDropdownMenu`
 
 ## Breadcrumbs
 
@@ -171,11 +88,3 @@ const items = [{
 </template>
 ```
 
-## Choosing the right navigation pattern
-
-- **UHeader** + **UNavigationMenu** (horizontal) — public-facing sites, marketing pages
-- **UDashboardSidebar** + **UNavigationMenu** (vertical) — admin dashboards, apps
-- **UTabs** — switching views within a single page (no URL change needed)
-- **UBreadcrumb** — showing hierarchy in nested page structures
-- **UCommandPalette** — power-user search and keyboard navigation (Cmd+K)
-- **UDropdownMenu** — contextual actions on a trigger (user menu, action buttons)

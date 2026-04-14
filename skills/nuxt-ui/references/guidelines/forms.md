@@ -6,18 +6,20 @@ Nuxt UI forms use `UForm` + `UFormField` + Standard Schema validation (Zod, Vali
 
 ```vue
 <script setup lang="ts">
-import { z } from 'zod'
+import * as z from 'zod'
+import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = z.object({
-  email: z.string().email('Invalid email'),
+  email: z.email('Invalid email'),
   password: z.string().min(8, 'Min 8 characters')
 })
 
 type Schema = z.output<typeof schema>
 const state = reactive<Partial<Schema>>({ email: '', password: '' })
 
-function onSubmit() {
-  // UForm validates before emitting @submit — state is guaranteed valid here
+function onSubmit(event: FormSubmitEvent<Schema>) {
+  // UForm validates before emitting @submit — access validated data via event.data
+  console.log(event.data)
 }
 </script>
 
@@ -207,12 +209,12 @@ form.value?.clearErrors()
 
 ## Form in a modal
 
-Common pattern: form inside an overlay with save/cancel.
+Use `#footer="{ close }"` scoped slot for cancel/submit actions. Wrap the modal body in `UForm` with a `type="submit"` button in the footer so validation runs on submit.
 
 ```vue
-<UModal v-model:open="isOpen" title="Edit profile" description="Update your information.">
+<UModal v-model:open="isOpen" title="Edit profile" description="Update your information." :ui="{ footer: 'justify-end' }">
   <template #body>
-    <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSave">
+    <UForm id="profile-form" :schema="schema" :state="state" class="space-y-4" @submit="onSave">
       <UFormField name="name" label="Name">
         <UInput v-model="state.name" />
       </UFormField>
@@ -221,9 +223,9 @@ Common pattern: form inside an overlay with save/cancel.
       </UFormField>
     </UForm>
   </template>
-  <template #footer>
-    <UButton variant="ghost" label="Cancel" @click="isOpen = false" />
-    <UButton label="Save" @click="onSave" />
+  <template #footer="{ close }">
+    <UButton label="Cancel" color="neutral" variant="outline" @click="close" />
+    <UButton type="submit" form="profile-form" label="Save" />
   </template>
 </UModal>
 ```

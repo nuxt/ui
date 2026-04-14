@@ -99,36 +99,38 @@ Row selection uses TanStack Table's `rowSelection` state — a `Record<string, b
 
 ```vue
 <script setup lang="ts">
+const table = useTemplateRef('table')
 const rowSelection = ref<Record<string, boolean>>({})
-
-const selectedCount = computed(() => Object.keys(rowSelection.value).length)
 </script>
 
 <template>
-  <UTable v-model:row-selection="rowSelection" :data="rows" :columns="columns" />
+  <UTable ref="table" v-model:row-selection="rowSelection" :data="data" :columns="columns" />
 
-  <div v-if="selectedCount" class="flex items-center gap-2 p-4">
-    <span class="text-sm text-muted">{{ selectedCount }} selected</span>
-    <UButton label="Delete selected" color="error" variant="soft" size="sm" />
+  <div class="px-4 py-3.5 text-sm text-muted">
+    {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
+    {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
   </div>
 </template>
 ```
 
-Add a checkbox column using the `h` function:
+Add a checkbox column using the `h` function. Use tri-state `modelValue` (`true`, `false`, or `'indeterminate'`) for the "select all" header:
 
 ```ts
 import { h } from 'vue'
 
+const UCheckbox = resolveComponent('UCheckbox')
+
 const columns: TableColumn[] = [{
   id: 'select',
-  header: ({ table }) => h(resolveComponent('UCheckbox'), {
-    modelValue: table.getIsAllPageRowsSelected(),
-    indeterminate: table.getIsSomePageRowsSelected(),
-    'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(value)
+  header: ({ table }) => h(UCheckbox, {
+    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
+    'aria-label': 'Select all'
   }),
-  cell: ({ row }) => h(resolveComponent('UCheckbox'), {
-    modelValue: row.getIsSelected(),
-    'onUpdate:modelValue': (value: boolean) => row.toggleSelected(value)
+  cell: ({ row }) => h(UCheckbox, {
+    'modelValue': row.getIsSelected(),
+    'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
+    'aria-label': 'Select row'
   })
 },
 // ... other columns
@@ -137,29 +139,55 @@ const columns: TableColumn[] = [{
 
 ## With pagination
 
+Use `v-model:pagination` on `UTable` with TanStack's `getPaginationRowModel`, then wire `UPagination` to the table API. `UPagination`'s `total` is total **items** (not pages) — it calculates page count from `total / items-per-page`.
+
 ```vue
 <script setup lang="ts">
-const page = ref(1)
-const pageSize = 10
+import { getPaginationRowModel } from '@tanstack/vue-table'
 
-const paginatedRows = computed(() => {
-  const start = (page.value - 1) * pageSize
-  return filteredRows.value.slice(start, start + pageSize)
+const table = useTemplateRef('table')
+
+const pagination = ref({
+  pageIndex: 0,
+  pageSize: 5
 })
-
-const totalPages = computed(() => Math.ceil(filteredRows.value.length / pageSize))
 </script>
 
 <template>
-  <UTable :data="paginatedRows" :columns="columns" />
+  <UTable
+    ref="table"
+    v-model:pagination="pagination"
+    :data="data"
+    :columns="columns"
+    :pagination-options="{ getPaginationRowModel: getPaginationRowModel() }"
+  />
 
-  <div class="flex justify-center p-4">
-    <UPagination v-model="page" :total="totalPages" />
+  <div class="flex justify-end p-4">
+    <UPagination
+      :page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
+      :items-per-page="table?.tableApi?.getState().pagination.pageSize"
+      :total="table?.tableApi?.getFilteredRowModel().rows.length"
+      @update:page="(p) => table?.tableApi?.setPageIndex(p - 1)"
+    />
   </div>
 </template>
 ```
 
 ## With async data (Nuxt)
+
+Use `status === 'pending' || status === 'idle'` for loading state — `idle` covers the initial render before `useLazyFetch` starts.
+
+```vue
+<script setup lang="ts">
+const { data, status } = useLazyFetch('/api/users', { server: false })
+</script>
+
+<template>
+  <UTable :data="data" :columns="columns" :loading="status === 'pending' || status === 'idle'" />
+</template>
+```
+
+For server-side pagination:
 
 ```vue
 <script setup lang="ts">
@@ -175,8 +203,8 @@ const { data, status } = await useAsyncData(
 <template>
   <UTable :data="data?.items" :columns="columns" :loading="status === 'pending'" />
 
-  <div class="flex justify-center p-4">
-    <UPagination v-model="page" :total="data?.totalPages" />
+  <div class="flex justify-end p-4">
+    <UPagination v-model="page" :total="data?.total" :items-per-page="data?.pageSize" />
   </div>
 </template>
 ```

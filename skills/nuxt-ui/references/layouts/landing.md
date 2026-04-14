@@ -126,7 +126,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
 - `UPageFeature` — individual feature item.
 - `UPageLogos` — logo wall for social proof.
 - `UPricingPlans` / `UPricingTable` — pricing cards and comparison tables.
-- `UFooterColumns` — multi-column footer with link groups.
+- `UFooterColumns` — multi-column footer with link groups (used inside `UFooter`).
 
 ## Variations
 

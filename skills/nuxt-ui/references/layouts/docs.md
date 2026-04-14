@@ -8,7 +8,7 @@ Build documentation sites with sidebar navigation, table of contents, and surrou
 - Knowledge bases, help centers
 - Any content-heavy site with hierarchical navigation
 
-> Requires `@nuxt/content` module for navigation, search, and TOC.
+> Requires `@nuxt/content` — see [conventions](../guidelines/conventions.md#content-module-integration) for setup (module order + `@source`).
 
 ## Component tree
 
