@@ -29,7 +29,7 @@ By the end of this tutorial, you'll have a fully functional AI chatbot with:
 - **Server-side AI integration** using Nitro API routes and the AI SDK
 
 ::callout{icon="i-simple-icons-github"}
-Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat){target="_blank"} and [`Vue`](https://github.com/nuxt-ui-templates/chat-vue){target="_blank"} AI Chat templates on GitHub for production-ready implementations with authentication, database persistence, and more.
+Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat) and [`Vue`](https://github.com/nuxt-ui-templates/chat-vue) AI Chat templates on GitHub for production-ready implementations with authentication, database persistence, and more.
 ::
 
 ## Prerequisites
