@@ -9,6 +9,7 @@ const input = ref('')
 
 const toast = useToast()
 const { track } = useAnalytics()
+const route = useRoute()
 const { open, messages } = useChat()
 const { framework } = useFrameworks()
 const { resetTheme, applyThemeSettings, hasCSSChanges, hasConfigChanges } = useTheme()
@@ -42,7 +43,7 @@ const chat = new Chat({
   messages: messages.value,
   transport: new DefaultChatTransport({
     api: '/api/ai',
-    body: () => ({ theme, framework: framework.value })
+    body: () => ({ theme, framework: framework.value, currentPage: route.path.startsWith('/docs/') ? route.path : null })
   }),
   onError: (error) => {
     let message = error.message
@@ -112,19 +113,18 @@ function getToolMessage(state: ToolState, toolName: string, input: Record<string
   const applyVerb = state === 'output-available' ? 'Applied' : 'Applying'
 
   return {
-    'list-components': `${searchVerb} components`,
-    'list-composables': `${searchVerb} composables`,
+    'search-components': `${searchVerb} components${input.category ? ` in ${input.category} category` : ''}${input.search ? ` for "${input.search}"` : ''}`,
+    'search-composables': `${searchVerb} composables${input.search ? ` for "${input.search}"` : ''}`,
+    'search-documentation': `${searchVerb} documentation${input.section ? ` in ${input.section}` : ''}${input.search ? ` for "${input.search}"` : ''}`,
+    'search-icons': `${searchVerb} icons${input.query ? ` for "${input.query}"` : ''}`,
     'get-component': `${readVerb} ${upperName(input.componentName || '')} component`,
     'get-component-metadata': `${readVerb} metadata for component ${upperName(input.componentName || '')}`,
     'list-templates': `${searchVerb} templates${input.category ? ` in ${input.category} category` : ''}`,
     'get-template': `${readVerb} template ${upperName(input.templateName || '')}`,
     'get-documentation-page': `${readVerb} ${input.path || ''} page`,
-    'list-documentation-pages': `${searchVerb} documentation pages`,
-    'list-getting-started-guides': `${searchVerb} documentation guides`,
     'get-migration-guide': `${readVerb} migration guide${input.version ? ` for ${input.version}` : ''}`,
     'list-examples': `${searchVerb} examples`,
     'get-example': `${readVerb} ${upperName(input.exampleName || '')} example`,
-    'search-components-by-category': `${searchVerb} components${input.category ? ` in ${input.category} category` : ''}${input.search ? ` for "${input.search}"` : ''}`,
     'getComponentTheme': `${readVerb} ${upperName(input.componentName || '')} theme`,
     'getThemeGuide': `${readVerb} theme guide`,
     'applyTheme': `${applyVerb} theme changes`,

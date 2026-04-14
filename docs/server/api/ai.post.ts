@@ -1,4 +1,4 @@
-import { streamText, convertToModelMessages, stepCountIs, smoothStream, jsonSchema } from 'ai'
+import { streamText, convertToModelMessages, smoothStream, jsonSchema, stepCountIs } from 'ai'
 import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import { createMCPClient } from '@ai-sdk/mcp'
 import { gateway } from '@ai-sdk/gateway'
@@ -270,7 +270,7 @@ NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`rad
 }
 
 export default defineEventHandler(async (event) => {
-  const { messages, theme, framework } = await readBody(event)
+  const { messages, theme, framework, currentPage } = await readBody(event)
 
   if (!messages || !Array.isArray(messages)) {
     throw createError({ statusCode: 400, message: 'Invalid or missing messages array.' })
@@ -317,10 +317,15 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  const abortController = new AbortController()
+  event.node.req.on('close', () => abortController.abort())
+
+  const closeMcp = () => event.waitUntil(httpClient?.close())
+
   const system = `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
 
 The user is using **${framework === 'vue' ? 'Vue' : 'Nuxt'}**. Tailor your answers accordingly — ${framework === 'vue' ? 'use the Vite plugin setup, Vue Router, and vite.config.ts instead of Nuxt-specific features like modules or app.config.ts. IMPORTANT: The Vite plugin auto-imports components and Nuxt UI composables, but Vue core APIs and VueUse must be explicitly imported — always include these in code examples (e.g. `import { ref, computed } from \'vue\'`, `import { useColorMode } from \'@vueuse/core\'`).' : 'use Nuxt modules, auto-imports, app.config.ts, and other Nuxt-specific features. Nuxt auto-imports Vue APIs (ref, computed, etc.), composables, and components — do not include these imports in code examples.'}
-
+${currentPage ? `\nThe user is currently viewing the documentation page at \`${currentPage}\`. Use this context to provide more relevant answers (e.g. read that page first if the question seems related), but don't limit yourself to that page if the question is broader or unrelated.\n` : ''}
 Guidelines:
 - For documentation questions, ALWAYS use tools to search for information. Never rely on pre-trained knowledge for Nuxt UI APIs, props, or usage.
 - For questions about how to customize themes (e.g. "how do I customize colors?", "how does theming work?"), search the documentation like any other docs question.
@@ -348,6 +353,7 @@ Guidelines:
   return streamText({
     model: gateway('anthropic/claude-sonnet-4.6'),
     maxOutputTokens: 8000,
+    abortSignal: abortController.signal,
     providerOptions: {
       anthropic: {
         thinking: {
@@ -370,13 +376,11 @@ Guidelines:
       resetTheme,
       getComponentTheme
     },
-    onFinish: () => {
-      event.waitUntil(httpClient?.close())
-    },
+    onFinish: closeMcp,
+    onAbort: closeMcp,
     onError: (error) => {
       console.error('streamText error:', error)
-
-      event.waitUntil(httpClient?.close())
+      closeMcp()
     }
   }).toUIMessageStreamResponse()
 })
