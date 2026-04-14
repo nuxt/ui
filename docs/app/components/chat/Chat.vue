@@ -15,6 +15,7 @@ const input = ref('')
 
 const toast = useToast()
 const { track } = useAnalytics()
+const route = useRoute()
 const { open, messages } = useChat()
 const { framework } = useFrameworks()
 const { resetTheme, applyThemeSettings, hasCSSChanges, hasConfigChanges } = useTheme()
@@ -48,7 +49,7 @@ const chat = new Chat({
   messages: messages.value,
   transport: new DefaultChatTransport({
     api: '/api/ai',
-    body: () => ({ theme, framework: framework.value })
+    body: () => ({ theme, framework: framework.value, currentPage: route.path.startsWith('/docs/') ? route.path : null })
   }),
   onError: (error) => {
     let message = error.message

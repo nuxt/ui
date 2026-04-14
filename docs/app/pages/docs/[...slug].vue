@@ -102,7 +102,7 @@ const links = computed(() => [{
     messages.value = [...messages.value, {
       id: String(Date.now()),
       role: 'user',
-      parts: [{ type: 'text', text: `Read the documentation page at ${page.value?.path} and summarize it. I want to ask questions about it.` }]
+      parts: [{ type: 'text', text: 'Read this documentation page and summarize it. I want to ask questions about it.' }]
     }]
     open.value = true
   }
