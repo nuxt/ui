@@ -5,11 +5,11 @@ description: Build UIs with @nuxt/ui v4 — 125+ accessible Vue components with 
 
 # Nuxt UI
 
-Vue component library built on [Reka UI](https://reka-ui.com/) + [Tailwind CSS](https://tailwindcss.com/) + [Tailwind Variants](https://www.tailwind-variants.org/). Works with Nuxt, Vue (Vite), Laravel (Inertia), and AdonisJS (Inertia).
+Vue component library built on [Reka UI](https://reka-ui.com/) + [Tailwind CSS](https://tailwindcss.com/) + [Tailwind Variants](https://www.tailwind-variants.org/). Works with Nuxt, Vue (Vite), Laravel (Vite + Inertia), and AdonisJS (Vite + Inertia).
 
 ## MCP Server
 
-For component API details (props, slots, events, full documentation, examples), use the Nuxt UI MCP server. If not already configured, add it:
+For component API details (props, slots, events, full documentation, examples), use the [Nuxt UI MCP server](https://ui.nuxt.com/docs/getting-started/ai/mcp). If not already configured, add it:
 
 **Cursor** — `.cursor/mcp.json`:
 
@@ -24,11 +24,12 @@ claude mcp add --transport http nuxt-ui https://ui.nuxt.com/mcp
 ```
 
 Key MCP tools:
+- `search_components` — find components by name, description, or category (no params = list all)
+- `search_composables` — find composables by name or description (no params = list all)
+- `search_icons` — search Iconify icons (defaults to `lucide`), returns `i-{prefix}-{name}` names
 - `get_component` — full component documentation with usage examples
 - `get_component_metadata` — props, slots, events (lightweight, no docs content)
-- `search_components_by_category` — find components by category
 - `get_example` — real-world code examples
-- `list_components` / `list_composables` — browse everything available
 
 When you need to know **what a component accepts** or **how its API works**, use the MCP. This skill teaches you **when to use which component** and **how to build well**.
 
@@ -38,7 +39,7 @@ When you need to know **what a component accepts** or **how its API works**, use
 2. **Always use semantic colors** — `text-default`, `bg-elevated`, `border-muted`, etc. Never use raw Tailwind palette colors like `text-gray-500`.
 3. **Read generated theme files for slot names** — Nuxt: `.nuxt/ui/<component>.ts`, Vue: `node_modules/.nuxt-ui/ui/<component>.ts`. These show every slot, variant, and default class for any component.
 4. **Override priority** (highest wins): `ui` prop / `class` prop → global config → theme defaults.
-5. **Icons use `i-{collection}-{name}` format** — prefer the `lucide` collection. Browse at [icones.js.org](https://icones.js.org).
+5. **Icons use `i-{collection}-{name}` format** — `lucide` is the default collection. Use the MCP `search_icons` tool to find icons, or browse at [icones.js.org](https://icones.js.org).
 6. **Items arrays**: flat `T[]` for plain lists, nested `T[][]` for groups with automatic separators between groups.
 
 ## How to use this skill

@@ -1,6 +1,6 @@
 # Component Selection
 
-Decision matrices for choosing the right component. When in doubt, use the MCP `search_components_by_category` tool.
+Decision matrices for choosing the right component. When in doubt, use the MCP `search_components` tool.
 
 ## Overlays
 
