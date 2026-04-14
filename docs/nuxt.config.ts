@@ -170,7 +170,7 @@ export default defineNuxtConfig({
   nitro: {
     vercel: {
       functions: {
-        maxDuration: 120
+        maxDuration: 600
       }
     },
     prerender: {
