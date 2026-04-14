@@ -39,6 +39,11 @@ import type { TableColumn } from '@nuxt/ui'
 const search = ref('')
 const roleFilter = ref('All')
 
+const rows = ref([
+  { name: 'Alice', email: 'alice@example.com', role: 'Admin', status: 'Active' },
+  { name: 'Bob', email: 'bob@example.com', role: 'Editor', status: 'Inactive' }
+])
+
 const columns: TableColumn[] = [
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'email', header: 'Email' },

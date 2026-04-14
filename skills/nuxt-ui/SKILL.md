@@ -162,5 +162,14 @@ app.mount('#app')
 @import "@nuxt/ui";
 ```
 
+```vue
+<!-- src/App.vue -->
+<template>
+  <UApp>
+    <RouterView />
+  </UApp>
+</template>
+```
+
 > Add `class="isolate"` to your root `<div id="app">` in `index.html`.
 > For Inertia: use `ui({ router: 'inertia' })` in `vite.config.ts`.

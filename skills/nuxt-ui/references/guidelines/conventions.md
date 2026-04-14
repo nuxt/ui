@@ -98,12 +98,14 @@ Custom local collections (Nuxt only):
 
 ```ts
 // nuxt.config.ts
-icon: {
-  customCollections: [{
-    prefix: 'custom',
-    dir: './app/assets/icons'
-  }]
-}
+export default defineNuxtConfig({
+  icon: {
+    customCollections: [{
+      prefix: 'custom',
+      dir: './app/assets/icons'
+    }]
+  }
+})
 ```
 
 ### Default icon overrides
