@@ -3,6 +3,7 @@ import { isTextUIPart } from 'ai'
 import type { UIMessage } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
+import highlight from '@comark/nuxt/plugins/highlight'
 
 const messages: UIMessage[] = []
 const input = ref('')
@@ -87,6 +88,7 @@ const ui = {
                     v-if="message.role === 'assistant'"
                     :markdown="part.text"
                     :streaming="isPartStreaming(part)"
+                    :plugins="[highlight()]"
                     class="*:first:mt-0 *:last:mb-0"
                   />
                   <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap leading-6">
