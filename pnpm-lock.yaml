@@ -367,9 +367,6 @@ importers:
       '@regle/rules':
         specifier: ^1.21.8
         version: 1.21.8(vue@3.5.32(typescript@6.0.2))
-      '@shikijs/langs':
-        specifier: ^4.0.2
-        version: 4.0.2
       '@tiptap/extension-emoji':
         specifier: ^3.22.3
         version: 3.22.3(@tiptap/core@3.22.3(@tiptap/pm@3.22.3))(@tiptap/pm@3.22.3)(@tiptap/suggestion@3.22.3(@tiptap/core@3.22.3(@tiptap/pm@3.22.3))(@tiptap/pm@3.22.3))(emojibase@17.0.0)

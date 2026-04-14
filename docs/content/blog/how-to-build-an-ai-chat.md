@@ -54,19 +54,19 @@ Install Nuxt UI and the AI-specific dependencies:
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
-pnpm add @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+pnpm add @nuxt/ui tailwindcss @comark/nuxt @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [yarn]
-yarn add @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+yarn add @nuxt/ui tailwindcss @comark/nuxt @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [npm]
-npm install @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+npm install @nuxt/ui tailwindcss @comark/nuxt @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [bun]
-bun add @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+bun add @nuxt/ui tailwindcss @comark/nuxt @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 ::
 
@@ -79,7 +79,7 @@ Update your `nuxt.config.ts` to register the modules:
 export default defineNuxtConfig({
   modules: [
     '@nuxt/ui',
-    '@nuxtjs/mdc',
+    '@comark/nuxt',
     '@nuxthub/core'
   ],
 
@@ -88,14 +88,12 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
-
-  mdc: {
-    headings: {
-      anchorLinks: false // Disable anchor links in AI responses
-    }
-  },
 })
 ```
+::
+
+::note{to="/docs/typography"}
+`@comark/nuxt` automatically enables Nuxt UI's [prose components](/docs/typography), so Markdown rendered by Comark is styled to match your theme.
 ::
 
 Create the main CSS file to import Tailwind CSS and Nuxt UI:
@@ -243,6 +241,8 @@ import {
 } from 'ai'
 import type { UIMessage } from 'ai'
 
+const DEFAULT_MODEL = 'anthropic/claude-haiku-4.5'
+
 const MODELS = [
   { value: 'openai/gpt-5-nano', label: 'GPT-5 Nano' },
   { value: 'anthropic/claude-haiku-4.5', label: 'Claude Haiku 4.5' },
@@ -254,10 +254,10 @@ export default defineEventHandler(async (event) => {
     id: z.string()
   }).parse)
 
-  const { model, messages } = await readValidatedBody(event, z.object({
+  const { model = DEFAULT_MODEL, messages } = await readValidatedBody(event, z.object({
     model: z.string().refine(value => MODELS.some(m => m.value === value), {
       message: 'Invalid model'
-    }),
+    }).optional(),
     messages: z.array(z.custom<UIMessage>())
   }).parse)
 
@@ -468,6 +468,32 @@ The [`UChatPrompt`](/docs/components/chat-prompt) component automatically handle
 - A loading state when `status` is set to `streaming`
 - Focus management and keyboard shortcuts
 
+### Setting up Markdown rendering
+
+AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). Before building the chat page, create a custom [`Comark`](https://comark.dev) component that will handle streaming Markdown rendering. Using `defineComarkComponent` from `@comark/nuxt`, you can enable the `highlight` plugin for syntax highlighting in code blocks and register additional [Shiki](https://shiki.style) languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
+
+::code-tree-intersection
+```ts [app/components/chat/Comark.ts]
+import highlight from '@comark/nuxt/plugins/highlight'
+import python from '@shikijs/langs/python'
+import sql from '@shikijs/langs/sql'
+import go from '@shikijs/langs/go'
+import rust from '@shikijs/langs/rust'
+
+export default defineComarkComponent({
+  name: 'ChatComark',
+  plugins: [
+    highlight({
+      languages: [python, sql, go, rust]
+    })
+  ],
+  class: '*:first:mt-0 *:last:mb-0'
+})
+```
+::
+
+This creates a `<ChatComark>` component we'll use in the chat page to render assistant messages and reasoning content.
+
 ## Creating the chat page
 
 The chat page is where the actual conversation happens. It integrates the AI SDK's [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class and [`DefaultChatTransport`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/default-chat-transport) for real-time streaming.
@@ -612,37 +638,9 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 - A loading indicator while the assistant processes
 - An "Auto scroll" button when scrolled up
 
-**Rendering Markdown with Comark**
+**Rendering Message Parts**
 
-AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering text with the [`Comark`](https://comark.dev) component from [`@comark/nuxt`](https://comark.dev/rendering/nuxt) and reasoning with [`UChatReasoning`](/docs/components/chat-reasoning). Comark is purpose-built for streaming Markdown — it incrementally renders tokens as they arrive from the AI, avoiding the flicker and re-parsing that traditional Markdown renderers cause. The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
-
-::note{to="/docs/typography"}
-Nuxt UI provides pre-styled prose components, so your markdown content will be automatically styled to match your theme.
-::
-
-::tip
-For syntax highlighting in code blocks, create a custom component using `defineComarkComponent` with the `highlight` plugin. You can also register additional Shiki languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
-
-```ts [app/components/chat/Comark.ts]
-import highlight from '@comark/nuxt/plugins/highlight'
-import python from '@shikijs/langs/python'
-import sql from '@shikijs/langs/sql'
-import go from '@shikijs/langs/go'
-import rust from '@shikijs/langs/rust'
-
-export default defineComarkComponent({
-  name: 'ChatComark',
-  plugins: [
-    highlight({
-      languages: [python, sql, go, rust]
-    })
-  ],
-  class: '*:first:mt-0 *:last:mb-0'
-})
-```
-
-Then use `<ChatComark>` instead of `<Comark>` in your templates.
-::
+We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering assistant text with the `<ChatComark>` component we created earlier and reasoning content with [`UChatReasoning`](/docs/components/chat-reasoning). The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
 
 **UChatPromptSubmit Component**
 
