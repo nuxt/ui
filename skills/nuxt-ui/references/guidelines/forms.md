@@ -19,7 +19,6 @@ const state = reactive<Partial<Schema>>({ email: '', password: '' })
 
 function onSubmit(event: FormSubmitEvent<Schema>) {
   // UForm validates before emitting @submit — access validated data via event.data
-  console.log(event.data)
 }
 </script>
 
@@ -188,16 +187,19 @@ async function validateAndSubmit() {
   }
 }
 
-// Validate specific fields
-await form.value?.validate({ name: 'email' })
+async function validateEmail() {
+  await form.value?.validate({ name: 'email' })
+}
 
-// Set errors manually
-form.value?.setErrors([
-  { name: 'email', message: 'Email already taken' }
-])
+function setServerError() {
+  form.value?.setErrors([
+    { name: 'email', message: 'Email already taken' }
+  ])
+}
 
-// Clear errors
-form.value?.clearErrors()
+function resetErrors() {
+  form.value?.clearErrors()
+}
 </script>
 
 <template>

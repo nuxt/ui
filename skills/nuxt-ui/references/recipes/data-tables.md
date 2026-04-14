@@ -8,7 +8,12 @@ Complete patterns for displaying and managing tabular data.
 <script setup lang="ts">
 import type { TableColumn } from '@nuxt/ui'
 
-const columns: TableColumn<typeof data[number]>[] = [{
+const data = ref([
+  { name: 'Alice', email: 'alice@example.com', role: 'Admin' },
+  { name: 'Bob', email: 'bob@example.com', role: 'Editor' }
+])
+
+const columns: TableColumn<typeof data.value[number]>[] = [{
   accessorKey: 'name',
   header: 'Name'
 }, {
@@ -18,11 +23,6 @@ const columns: TableColumn<typeof data[number]>[] = [{
   accessorKey: 'role',
   header: 'Role'
 }]
-
-const data = ref([
-  { name: 'Alice', email: 'alice@example.com', role: 'Admin' },
-  { name: 'Bob', email: 'bob@example.com', role: 'Editor' }
-])
 </script>
 
 <template>

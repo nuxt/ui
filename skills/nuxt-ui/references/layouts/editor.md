@@ -105,8 +105,9 @@ Combine with Dashboard layout for a multi-document editor:
         <UButton icon="i-lucide-plus" label="New document" block />
       </template>
 
-      <template #default>
+      <template #default="{ collapsed }">
         <UNavigationMenu
+          :collapsed="collapsed"
           :items="documents.map(doc => ({
             label: doc.title,
             to: `/editor/${doc.id}`,

@@ -96,7 +96,7 @@ function onSave() {
 
   <USlideover v-model:open="isOpen" title="Add user" description="Fill in the details below.">
     <template #body>
-      <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSave">
+      <UForm id="user-form" :schema="schema" :state="state" class="space-y-4" @submit="onSave">
         <UFormField name="name" label="Name">
           <UInput v-model="state.name" />
         </UFormField>
@@ -108,7 +108,7 @@ function onSave() {
 
     <template #footer="{ close }">
       <UButton label="Cancel" color="neutral" variant="outline" @click="close" />
-      <UButton label="Save" @click="onSave" />
+      <UButton type="submit" form="user-form" label="Save" />
     </template>
   </USlideover>
 </template>
@@ -151,7 +151,13 @@ const groups = [{
 ## Drawer (bottom sheet)
 
 ```vue
+<script setup lang="ts">
+const isOpen = ref(false)
+</script>
+
 <template>
+  <UButton label="Options" @click="isOpen = true" />
+
   <UDrawer v-model:open="isOpen" title="Options">
     <template #body>
       <div class="space-y-2 p-4">

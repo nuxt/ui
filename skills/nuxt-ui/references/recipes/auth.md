@@ -45,7 +45,7 @@ const schema = z.object({
 type Schema = z.output<typeof schema>
 
 function onSubmit(payload: FormSubmitEvent<Schema>) {
-  console.log('Submitted', payload.data)
+  // payload.data contains validated fields
 }
 </script>
 
@@ -112,7 +112,7 @@ type Schema = z.output<typeof schema>
 const state = reactive<Partial<Schema>>({ email: '', password: '' })
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  console.log('Validated data:', event.data)
+  // event.data contains validated fields
 }
 </script>
 
