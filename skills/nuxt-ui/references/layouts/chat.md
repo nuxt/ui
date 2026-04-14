@@ -58,7 +58,7 @@ export default defineEventHandler(async (event) => {
 UDashboardPanel
 ├── #header → UDashboardNavbar
 ├── #body → UContainer → UChatMessages
-│                         ├── #content → UChatReasoning, UChatTool, MDC
+│                         ├── #content → UChatReasoning, UChatTool, Comark
 │                         └── #indicator (loading)
 └── #footer → UContainer → UChatPrompt
                             └── UChatPromptSubmit
@@ -71,6 +71,7 @@ UDashboardPanel
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import highlight from '@comark/nuxt/plugins/highlight'
 
 definePageMeta({ layout: 'dashboard' })
 
@@ -105,9 +106,10 @@ function onSubmit() {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <MDC
-                  :value="part.text"
-                  :cache-key="`reasoning-${message.id}-${index}`"
+                <Comark
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
+                  :plugins="[highlight()]"
                   class="*:first:mt-0 *:last:mb-0"
                 />
               </UChatReasoning>
@@ -119,10 +121,11 @@ function onSubmit() {
               />
 
               <template v-else-if="isTextUIPart(part)">
-                <MDC
+                <Comark
                   v-if="message.role === 'assistant'"
-                  :value="part.text"
-                  :cache-key="`${message.id}-${index}`"
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
+                  :plugins="[highlight()]"
                   class="*:first:mt-0 *:last:mb-0"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">

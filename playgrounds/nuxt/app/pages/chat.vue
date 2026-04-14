@@ -3,6 +3,7 @@ import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import type { UIMessage } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import highlight from '@comark/nuxt/plugins/highlight'
 
 const toast = useToast()
 
@@ -84,18 +85,20 @@ function getFaviconUrl(url: string): string {
             :streaming="isPartStreaming(part)"
             chevron="leading"
           >
-            <MDC
-              :value="part.text"
-              :cache-key="`reasoning-${message.id}-${index}`"
+            <Comark
+              :markdown="part.text"
+              :streaming="isPartStreaming(part)"
+              :plugins="[highlight()]"
               class="*:first:mt-0 *:last:mb-0"
             />
           </UChatReasoning>
 
           <template v-else-if="isTextUIPart(part)">
-            <MDC
+            <Comark
               v-if="message.role === 'assistant'"
-              :value="part.text"
-              :cache-key="`${message.id}-${index}`"
+              :markdown="part.text"
+              :streaming="isPartStreaming(part)"
+              :plugins="[highlight()]"
               class="*:first:mt-0 *:last:mb-0"
             />
             <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">

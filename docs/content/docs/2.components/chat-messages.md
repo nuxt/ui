@@ -422,10 +422,11 @@ You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#s
         :key="`${message.id}-${part.type}-${index}`"
       >
         <template v-if="isTextUIPart(part)">
-          <MDC
+          <Comark
             v-if="message.role === 'assistant'"
-            :value="part.text"
-            :cache-key="`${message.id}-${index}`"
+            :markdown="part.text"
+            :streaming="isPartStreaming(part)"
+            :plugins="[highlight()]"
             class="*:first:mt-0 *:last:mb-0"
           />
           <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">

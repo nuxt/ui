@@ -243,6 +243,7 @@ import type { UIMessage } from 'ai'
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import highlight from '@comark/nuxt/plugins/highlight'
 
 const input = ref('')
 
@@ -274,9 +275,10 @@ function onSubmit() {
           :text="part.text"
           :streaming="isPartStreaming(part)"
         >
-          <MDC
-            :value="part.text"
-            :cache-key="`reasoning-${message.id}-${index}`"
+          <Comark
+            :markdown="part.text"
+            :streaming="isPartStreaming(part)"
+            :plugins="[highlight()]"
             class="*:first:mt-0 *:last:mb-0"
           />
         </UChatReasoning>
@@ -288,10 +290,11 @@ function onSubmit() {
         />
 
         <template v-else-if="isTextUIPart(part)">
-          <MDC
+          <Comark
             v-if="message.role === 'assistant'"
-            :value="part.text"
-            :cache-key="`${message.id}-${index}`"
+            :markdown="part.text"
+            :streaming="isPartStreaming(part)"
+            :plugins="[highlight()]"
             class="*:first:mt-0 *:last:mb-0"
           />
           <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -317,7 +320,7 @@ function onSubmit() {
 ```
 
 ::note
-In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) to render messages as Markdown. As Nuxt UI provides pre-styled prose components, your content will be automatically styled.
+In this example, we use the `Comark` component from [`@comark/nuxt`](https://comark.dev/rendering/nuxt) to render streaming Markdown. As Nuxt UI provides pre-styled prose components, your content will be automatically styled. For syntax highlighting in code blocks, pass the `highlight` plugin via the `:plugins` prop.
 ::
 
 ::tip{to="/blog/how-to-build-an-ai-chat"}

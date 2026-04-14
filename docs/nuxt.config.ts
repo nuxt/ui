@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/a11y',
     '@nuxtjs/mcp-toolkit',
+    '@comark/nuxt',
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-llms',
@@ -246,7 +247,9 @@ export default defineNuxtConfig({
       '@nuxt/icon',
       '@nuxt/image',
       '@nuxtjs/color-mode',
+      '@nuxtjs/mcp-toolkit',
       '@nuxtjs/mdc',
+      '@comark/vue',
       'nuxt/dist',
       'nuxt-og-image',
       resolve('./app/components')

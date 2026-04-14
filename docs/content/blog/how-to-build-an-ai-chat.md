@@ -548,19 +548,17 @@ onMounted(() => {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <MDC
-                  :value="part.text"
-                  :cache-key="`reasoning-${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
+                <ChatComark
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
               <template v-else-if="isTextUIPart(part)">
-                <MDC
+                <ChatComark
                   v-if="message.role === 'assistant'"
-                  :value="part.text"
-                  :cache-key="`${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
                   {{ part.text }}
@@ -614,12 +612,36 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 - A loading indicator while the assistant processes
 - An "Auto scroll" button when scrolled up
 
-**Rendering Markdown with MDC**
+**Rendering Markdown with Comark**
 
-AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering text with the [`MDC`](https://github.com/nuxt-content/mdc#mdc) component from [`@nuxtjs/mdc`](https://github.com/nuxt-content/mdc) and reasoning with [`UChatReasoning`](/docs/components/chat-reasoning). The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
+AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering text with the [`Comark`](https://comark.dev) component from [`@comark/nuxt`](https://comark.dev/rendering/nuxt) and reasoning with [`UChatReasoning`](/docs/components/chat-reasoning). Comark is purpose-built for streaming Markdown — it incrementally renders tokens as they arrive from the AI, avoiding the flicker and re-parsing that traditional Markdown renderers cause. The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
 
 ::note{to="/docs/typography"}
 Nuxt UI provides pre-styled prose components, so your markdown content will be automatically styled to match your theme.
+::
+
+::tip
+For syntax highlighting in code blocks, create a custom component using `defineComarkComponent` with the `highlight` plugin. You can also register additional Shiki languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
+
+```ts [app/components/chat/Comark.ts]
+import highlight from '@comark/nuxt/plugins/highlight'
+import python from '@shikijs/langs/python'
+import sql from '@shikijs/langs/sql'
+import go from '@shikijs/langs/go'
+import rust from '@shikijs/langs/rust'
+
+export default defineComarkComponent({
+  name: 'ChatComark',
+  plugins: [
+    highlight({
+      languages: [python, sql, go, rust]
+    })
+  ],
+  class: '*:first:mt-0 *:last:mb-0'
+})
+```
+
+Then use `<ChatComark>` instead of `<Comark>` in your templates.
 ::
 
 **UChatPromptSubmit Component**
@@ -835,19 +857,17 @@ onMounted(() => {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <MDC
-                  :value="part.text"
-                  :cache-key="`reasoning-${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
+                <ChatComark
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
               <template v-else-if="isTextUIPart(part)">
-                <MDC
+                <ChatComark
                   v-if="message.role === 'assistant'"
-                  :value="part.text"
-                  :cache-key="`${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
                   {{ part.text }}
@@ -1022,19 +1042,17 @@ onMounted(() => {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <MDC
-                  :value="part.text"
-                  :cache-key="`reasoning-${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
+                <ChatComark
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
               <template v-else-if="isTextUIPart(part)">
-                <MDC
+                <ChatComark
                   v-if="message.role === 'assistant'"
-                  :value="part.text"
-                  :cache-key="`${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
                   {{ part.text }}
@@ -1124,7 +1142,7 @@ You've built a complete AI chatbot with:
 
 - **A complete chat interface** using Nuxt UI components
 - **Real-time streaming responses** with the AI SDK
-- **Markdown rendering** with MDC for rich content display
+- **Streaming Markdown rendering** with Comark for rich content display
 - **Multi-model support** via AI Gateway
 - **Database persistence** with SQLite (local) / Turso (production) and Drizzle ORM
 
