@@ -14,7 +14,6 @@
     "@ai-sdk/mcp": "^1.0.36",
     "@ai-sdk/vue": "^3.0.158",
     "@comark/nuxt": "^0.2.1",
-    "@shikijs/langs": "^4.0.2",
     "@iconify-json/logos": "^1.2.11",
     "@iconify-json/lucide": "^1.2.102",
     "@iconify-json/simple-icons": "^1.2.78",
