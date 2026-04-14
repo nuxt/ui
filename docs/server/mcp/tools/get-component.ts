@@ -42,7 +42,7 @@ export default defineMcpTool({
       throw createError({ statusCode: 404, message: `Component '${componentName}' not found in documentation` })
     }
 
-    const fullDocumentation = await $fetch<string>(`/raw${page.path}.md`)
+    const fullDocumentation = await event.$fetch<string>(`/raw${page.path}.md`)
 
     let documentation = fullDocumentation
 

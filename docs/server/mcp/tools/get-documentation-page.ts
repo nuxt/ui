@@ -18,9 +18,11 @@ export default defineMcpTool({
   ],
   cache: '30m',
   async handler({ path, sections }) {
+    const event = useEvent()
+
     let content
     try {
-      content = await $fetch<string>(`/raw${path}.md`)
+      content = await event.$fetch<string>(`/raw${path}.md`)
     } catch {
       throw createError({ statusCode: 404, message: `Documentation page not found at path: ${path}` })
     }

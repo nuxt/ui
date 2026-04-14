@@ -168,6 +168,11 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-01-14',
 
   nitro: {
+    vercel: {
+      functions: {
+        maxDuration: 120
+      }
+    },
     prerender: {
       routes: [
         '/docs/getting-started',

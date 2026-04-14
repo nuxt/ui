@@ -17,8 +17,10 @@ export default defineMcpTool({
   ],
   cache: '30m',
   async handler({ exampleName }) {
+    const event = useEvent()
+
     try {
-      const result = await $fetch<{ code: string }>(`/api/component-example/${exampleName}.json`)
+      const result = await event.$fetch<{ code: string }>(`/api/component-example/${exampleName}.json`)
       return result.code
     } catch (error: unknown) {
       const err = error as { statusCode?: number, response?: { status?: number } }

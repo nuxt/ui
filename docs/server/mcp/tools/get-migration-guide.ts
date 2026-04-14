@@ -29,7 +29,7 @@ export default defineMcpTool({
       throw createError({ statusCode: 404, message: `Migration guide for '${version}' not found` })
     }
 
-    const documentation = await $fetch<string>(`/raw${page.path}.md`)
+    const documentation = await event.$fetch<string>(`/raw${page.path}.md`)
 
     return {
       version,

@@ -44,7 +44,7 @@ export default defineMcpTool({
 
     let metadata
     try {
-      metadata = await $fetch<Record<string, any>>(`/api/component-meta/${componentMetaName}.json`)
+      metadata = await event.$fetch<Record<string, any>>(`/api/component-meta/${componentMetaName}.json`)
     } catch {
       throw createError({ statusCode: 404, message: `Metadata for component '${componentName}' not available` })
     }

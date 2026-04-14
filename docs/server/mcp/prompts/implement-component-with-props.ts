@@ -45,7 +45,7 @@ export default defineMcpPrompt({
 
     let metadata = null
     try {
-      metadata = await $fetch<any>(`/api/component-meta/${componentMetaName}.json`)
+      metadata = await event.$fetch<any>(`/api/component-meta/${componentMetaName}.json`)
     } catch {
       // Metadata not available
     }
