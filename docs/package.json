@@ -48,7 +48,6 @@
     "nuxt-og-image": "^5.1.13",
     "prettier": "^3.8.3",
     "shiki": "^4.0.2",
-    "shiki-stream": "^0.1.4",
     "shiki-transformer-color-highlight": "^1.1.0",
     "simple-git": "^3.36.0",
     "sortablejs": "^1.15.7",
