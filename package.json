@@ -215,6 +215,8 @@
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7 || ^3.0.0",
+    "@internationalized/date": "^3.0.0",
+    "@internationalized/number": "^3.0.0",
     "@nuxt/content": "^3.0.0",
     "joi": "^18.0.0",
     "superstruct": "^2.0.0",
@@ -227,6 +229,12 @@
   },
   "peerDependenciesMeta": {
     "@inertiajs/vue3": {
+      "optional": true
+    },
+    "@internationalized/date": {
+      "optional": true
+    },
+    "@internationalized/number": {
       "optional": true
     },
     "@nuxt/content": {
