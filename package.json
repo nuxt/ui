@@ -256,7 +256,8 @@
     "@nuxt/ui": "workspace:*",
     "nitropack": "^2.13.0",
     "unplugin": "^3.0.0",
-    "c12": "^3.3.2"
+    "c12": "^3.3.2",
+    "shiki": "^4.0.2"
   },
   "keywords": [
     "nuxt-ui",
