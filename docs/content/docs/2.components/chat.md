@@ -392,6 +392,7 @@ function onSubmit() {
 #vue
 ```vue
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { UIMessage } from 'ai'
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
