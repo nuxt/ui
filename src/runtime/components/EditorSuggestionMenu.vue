@@ -39,7 +39,7 @@ export type EditorSuggestionMenuItem<H extends EditorCustomHandlers = EditorCust
     | EditorSuggestionMenuSeparatorItem
     | EditorSuggestionMenuActionItem<H>
 
-export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'appendTo'>> {
+export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo'>> {
   /**
    * @defaultValue 'md'
    */
@@ -90,6 +90,7 @@ onMounted(async () => {
     filterFields: props.filterFields,
     limit: props.limit,
     options: props.options,
+    suggestion: props.suggestion,
     appendTo: props.appendTo,
     ui,
     onSelect: (editor, range, item) => {

@@ -1,24 +1,20 @@
 <script setup lang="ts">
-import type { DefineComponent } from 'vue'
 import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import * as theme from '#build/ui'
-import ProseStreamPre from '../prose/PreStream.vue'
-
-const components = {
-  pre: ProseStreamPre as unknown as DefineComponent
-}
 
 const input = ref('')
 
 const toast = useToast()
 const { track } = useAnalytics()
+const route = useRoute()
 const { open, messages } = useChat()
-const { resetTheme, applyThemeSettings, hasCSSChanges, hasAppConfigChanges } = useTheme()
+const { framework } = useFrameworks()
+const { resetTheme, applyThemeSettings, hasCSSChanges, hasConfigChanges } = useTheme()
 
-const hasThemeChanges = computed(() => hasCSSChanges.value || hasAppConfigChanges.value)
+const hasThemeChanges = computed(() => hasCSSChanges.value || hasConfigChanges.value)
 
 let _skipSync = false
 const _themeApplied = new Set<string>()
@@ -47,7 +43,7 @@ const chat = new Chat({
   messages: messages.value,
   transport: new DefaultChatTransport({
     api: '/api/ai',
-    body: { theme }
+    body: () => ({ theme, framework: framework.value, currentPage: route.path.startsWith('/docs/') ? route.path : null })
   }),
   onError: (error) => {
     let message = error.message
@@ -117,20 +113,20 @@ function getToolMessage(state: ToolState, toolName: string, input: Record<string
   const applyVerb = state === 'output-available' ? 'Applied' : 'Applying'
 
   return {
-    'list-components': `${searchVerb} components`,
-    'list-composables': `${searchVerb} composables`,
+    'search-components': `${searchVerb} components${input.category ? ` in ${input.category} category` : ''}${input.search ? ` for "${input.search}"` : ''}`,
+    'search-composables': `${searchVerb} composables${input.search ? ` for "${input.search}"` : ''}`,
+    'search-documentation': `${searchVerb} documentation${input.section ? ` in ${input.section}` : ''}${input.search ? ` for "${input.search}"` : ''}`,
+    'search-icons': `${searchVerb} icons${input.query ? ` for "${input.query}"` : ''}`,
     'get-component': `${readVerb} ${upperName(input.componentName || '')} component`,
     'get-component-metadata': `${readVerb} metadata for component ${upperName(input.componentName || '')}`,
     'list-templates': `${searchVerb} templates${input.category ? ` in ${input.category} category` : ''}`,
     'get-template': `${readVerb} template ${upperName(input.templateName || '')}`,
     'get-documentation-page': `${readVerb} ${input.path || ''} page`,
-    'list-documentation-pages': `${searchVerb} documentation pages`,
-    'list-getting-started-guides': `${searchVerb} documentation guides`,
     'get-migration-guide': `${readVerb} migration guide${input.version ? ` for ${input.version}` : ''}`,
     'list-examples': `${searchVerb} examples`,
     'get-example': `${readVerb} ${upperName(input.exampleName || '')} example`,
-    'search-components-by-category': `${searchVerb} components${input.category ? ` in ${input.category} category` : ''}${input.search ? ` for "${input.search}"` : ''}`,
     'getComponentTheme': `${readVerb} ${upperName(input.componentName || '')} theme`,
+    'getThemeGuide': `${readVerb} theme guide`,
     'applyTheme': `${applyVerb} theme changes`,
     'resetTheme': `${state === 'output-available' ? 'Reset' : 'Resetting'} theme to defaults`
   }[toolName] || `${searchVerb} ${toolName}`
@@ -155,6 +151,7 @@ function getToolIcon(part: ToolPart): string {
     'get-migration-guide': 'i-lucide-file-text',
     'get-example': 'i-lucide-file-text',
     'getComponentTheme': 'i-lucide-file-text',
+    'getThemeGuide': 'i-lucide-palette',
     'applyTheme': 'i-lucide-palette',
     'resetTheme': 'i-lucide-palette'
   }
@@ -293,22 +290,17 @@ defineShortcuts({
               :streaming="isPartStreaming(part)"
               icon="i-lucide-brain"
             >
-              <MDCCached
-                :value="part.text"
-                :cache-key="`reasoning-${message.id}-${index}`"
-                :parser-options="{ highlight: false }"
-                class="*:first:mt-0 *:last:mb-0"
+              <ChatComark
+                :markdown="part.text"
+                :streaming="isPartStreaming(part)"
               />
             </UChatReasoning>
 
             <template v-else-if="isTextUIPart(part) && part.text.length > 0">
-              <MDCCached
+              <ChatComark
                 v-if="message.role === 'assistant'"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                :components="components"
-                :parser-options="{ highlight: false }"
-                class="*:first:mt-0 *:last:mb-0"
+                :markdown="part.text"
+                :streaming="isPartStreaming(part)"
               />
               <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
                 {{ part.text }}

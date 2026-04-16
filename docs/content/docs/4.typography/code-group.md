@@ -1,7 +1,6 @@
 ---
 title: CodeGroup
 description: 'Group multiple code examples in tabbed interfaces for easy comparison.'
-framework: nuxt
 category: components
 links:
   - label: GitHub

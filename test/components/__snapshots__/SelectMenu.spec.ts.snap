@@ -7,6 +7,7 @@ exports[`SelectMenu > renders with ariaLabel correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -42,6 +43,7 @@ exports[`SelectMenu > renders with ariaLabel correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -51,6 +53,7 @@ exports[`SelectMenu > renders with arrow correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -87,6 +90,7 @@ exports[`SelectMenu > renders with arrow correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -119,6 +123,7 @@ exports[`SelectMenu > renders with by correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -154,6 +159,7 @@ exports[`SelectMenu > renders with by correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -163,6 +169,7 @@ exports[`SelectMenu > renders with class correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -200,6 +207,7 @@ exports[`SelectMenu > renders with class correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -211,6 +219,7 @@ exports[`SelectMenu > renders with clear and clearIcon correctly 1`] = `
   <!--v-if--></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -246,6 +255,7 @@ exports[`SelectMenu > renders with clear and clearIcon correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -261,6 +271,7 @@ exports[`SelectMenu > renders with clear correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -296,6 +307,7 @@ exports[`SelectMenu > renders with clear correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -305,6 +317,7 @@ exports[`SelectMenu > renders with create-item-label slot correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -327,6 +340,7 @@ exports[`SelectMenu > renders with create-item-label slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -336,6 +350,7 @@ exports[`SelectMenu > renders with default slot correctly 1`] = `
   <!--v-if-->Default slot<span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -373,6 +388,7 @@ exports[`SelectMenu > renders with default slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -382,6 +398,7 @@ exports[`SelectMenu > renders with defaultValue correctly 1`] = `
   <!--v-if--><span data-slot="value" class="truncate pointer-events-none">Backlog</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -419,6 +436,7 @@ exports[`SelectMenu > renders with defaultValue correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -428,6 +446,7 @@ exports[`SelectMenu > renders with descriptionKey correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -465,6 +484,7 @@ exports[`SelectMenu > renders with descriptionKey correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -474,6 +494,7 @@ exports[`SelectMenu > renders with disabled correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -511,6 +532,7 @@ exports[`SelectMenu > renders with disabled correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -527,6 +549,7 @@ exports[`SelectMenu > renders with id correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -564,6 +587,7 @@ exports[`SelectMenu > renders with id correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -573,6 +597,7 @@ exports[`SelectMenu > renders with item slot correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -600,6 +625,7 @@ exports[`SelectMenu > renders with item slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -609,6 +635,7 @@ exports[`SelectMenu > renders with item-description slot correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -636,6 +663,7 @@ exports[`SelectMenu > renders with item-description slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -645,6 +673,7 @@ exports[`SelectMenu > renders with item-label slot correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -682,6 +711,7 @@ exports[`SelectMenu > renders with item-label slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -691,6 +721,7 @@ exports[`SelectMenu > renders with item-leading slot correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -728,6 +759,7 @@ exports[`SelectMenu > renders with item-leading slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -737,6 +769,7 @@ exports[`SelectMenu > renders with item-trailing slot correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -772,6 +805,7 @@ exports[`SelectMenu > renders with item-trailing slot correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -785,6 +819,7 @@ exports[`SelectMenu > renders with items correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -820,6 +855,7 @@ exports[`SelectMenu > renders with items correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -829,6 +865,7 @@ exports[`SelectMenu > renders with items with description correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -856,6 +893,7 @@ exports[`SelectMenu > renders with items with description correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -865,6 +903,7 @@ exports[`SelectMenu > renders with labelKey correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -902,6 +941,7 @@ exports[`SelectMenu > renders with labelKey correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -916,6 +956,7 @@ exports[`SelectMenu > renders with leading and icon correctly 1`] = `
 exports[`SelectMenu > renders with leading slot correctly 1`] = `
 "<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" dir="ltr" style="pointer-events: auto;" data-slot="base" class="relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented hover:bg-elevated disabled:bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary ps-9 pe-9 md:text-sm"><span data-slot="leading" class="absolute inset-y-0 start-0 flex items-center ps-2.5">Leading slot</span><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -951,6 +992,7 @@ exports[`SelectMenu > renders with leading slot correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1008,6 +1050,7 @@ exports[`SelectMenu > renders with modelValue correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1043,6 +1086,7 @@ exports[`SelectMenu > renders with modelValue correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1052,6 +1096,7 @@ exports[`SelectMenu > renders with multiple and modelValue correctly 1`] = `
   <!--v-if--><span data-slot="value" class="truncate pointer-events-none">Backlog, Todo</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -1089,6 +1134,7 @@ exports[`SelectMenu > renders with multiple and modelValue correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1098,6 +1144,7 @@ exports[`SelectMenu > renders with multiple correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -1135,6 +1182,7 @@ exports[`SelectMenu > renders with multiple correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1144,6 +1192,7 @@ exports[`SelectMenu > renders with name correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -1179,6 +1228,7 @@ exports[`SelectMenu > renders with name correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1192,6 +1242,7 @@ exports[`SelectMenu > renders with neutral variant ghost correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1225,6 +1276,7 @@ exports[`SelectMenu > renders with neutral variant ghost correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1238,6 +1290,7 @@ exports[`SelectMenu > renders with neutral variant none correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1271,6 +1324,7 @@ exports[`SelectMenu > renders with neutral variant none correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1284,6 +1338,7 @@ exports[`SelectMenu > renders with neutral variant outline correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1317,6 +1372,7 @@ exports[`SelectMenu > renders with neutral variant outline correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1330,6 +1386,7 @@ exports[`SelectMenu > renders with neutral variant soft correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1363,6 +1420,7 @@ exports[`SelectMenu > renders with neutral variant soft correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1376,6 +1434,7 @@ exports[`SelectMenu > renders with neutral variant subtle correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1409,6 +1468,7 @@ exports[`SelectMenu > renders with neutral variant subtle correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1422,6 +1482,7 @@ exports[`SelectMenu > renders with placeholder correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1455,6 +1516,7 @@ exports[`SelectMenu > renders with placeholder correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1468,6 +1530,7 @@ exports[`SelectMenu > renders with primary variant ghost correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1501,6 +1564,7 @@ exports[`SelectMenu > renders with primary variant ghost correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1514,6 +1578,7 @@ exports[`SelectMenu > renders with primary variant none correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1547,6 +1612,7 @@ exports[`SelectMenu > renders with primary variant none correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1560,6 +1626,7 @@ exports[`SelectMenu > renders with primary variant outline correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1593,6 +1660,7 @@ exports[`SelectMenu > renders with primary variant outline correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1606,6 +1674,7 @@ exports[`SelectMenu > renders with primary variant soft correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1639,6 +1708,7 @@ exports[`SelectMenu > renders with primary variant soft correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1652,6 +1722,7 @@ exports[`SelectMenu > renders with primary variant subtle correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1685,6 +1756,7 @@ exports[`SelectMenu > renders with primary variant subtle correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1698,6 +1770,7 @@ exports[`SelectMenu > renders with required correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -1733,6 +1806,7 @@ exports[`SelectMenu > renders with required correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1742,6 +1816,7 @@ exports[`SelectMenu > renders with searchInput icon correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -1778,6 +1853,7 @@ exports[`SelectMenu > renders with searchInput icon correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1787,6 +1863,7 @@ exports[`SelectMenu > renders with searchInput placeholder correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -1824,6 +1901,7 @@ exports[`SelectMenu > renders with searchInput placeholder correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1833,6 +1911,7 @@ exports[`SelectMenu > renders with selectedIcon correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -1870,6 +1949,7 @@ exports[`SelectMenu > renders with selectedIcon correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1879,6 +1959,7 @@ exports[`SelectMenu > renders with size lg correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-3"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -1916,6 +1997,7 @@ exports[`SelectMenu > renders with size lg correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1925,6 +2007,7 @@ exports[`SelectMenu > renders with size md correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -1962,6 +2045,7 @@ exports[`SelectMenu > renders with size md correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1971,6 +2055,7 @@ exports[`SelectMenu > renders with size sm correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-4" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -2008,6 +2093,7 @@ exports[`SelectMenu > renders with size sm correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2017,6 +2103,7 @@ exports[`SelectMenu > renders with size xl correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-3"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-6" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -2054,6 +2141,7 @@ exports[`SelectMenu > renders with size xl correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2063,6 +2151,7 @@ exports[`SelectMenu > renders with size xs correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-4" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -2100,6 +2189,7 @@ exports[`SelectMenu > renders with size xs correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2118,6 +2208,7 @@ exports[`SelectMenu > renders with trailing slot correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5">Trailing slot</span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -2153,6 +2244,7 @@ exports[`SelectMenu > renders with trailing slot correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -2175,6 +2267,7 @@ exports[`SelectMenu > renders with trailingIcon correctly 2`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0-0-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
@@ -2210,6 +2303,7 @@ exports[`SelectMenu > renders with trailingIcon correctly 2`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2219,6 +2313,7 @@ exports[`SelectMenu > renders with ui correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -2256,6 +2351,7 @@ exports[`SelectMenu > renders with ui correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2265,6 +2361,7 @@ exports[`SelectMenu > renders with valueKey correctly 1`] = `
   <!--v-if--><span data-slot="value" class="truncate pointer-events-none">Backlog</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -2302,6 +2399,7 @@ exports[`SelectMenu > renders with valueKey correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2311,6 +2409,7 @@ exports[`SelectMenu > renders with virtualize correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -2332,6 +2431,7 @@ exports[`SelectMenu > renders with virtualize correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2341,6 +2441,7 @@ exports[`SelectMenu > renders without searchInput correctly 1`] = `
   <!--v-if--><span data-slot="placeholder" class="truncate text-dimmed">&nbsp;</span><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true" data-slot="trailingIcon"></span></span>
 </button>
 <!--teleport start-->
+
 
 
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
@@ -2373,6 +2474,7 @@ exports[`SelectMenu > renders without searchInput correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->

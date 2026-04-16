@@ -231,7 +231,7 @@ import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
-import { useFieldGroup } from '../composables/useFieldGroup'
+import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useFilter } from '../composables/useFilter'
@@ -283,11 +283,11 @@ const virtualizerProps = toRef(() => {
 })
 const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
-const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
-const selectSize = computed(() => fieldGroupSize.value || formGroupSize.value)
+const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: SelectMenuItem, index: number }>({
@@ -618,67 +618,69 @@ defineExpose({
     </ComboboxAnchor>
 
     <ComboboxPortal v-bind="portalProps">
-      <ComboboxContent data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps">
-        <FocusScope trapped data-slot="focusScope" :class="ui.focusScope({ class: uiProp?.focusScope })">
-          <slot name="content-top" />
+      <FieldGroupReset>
+        <ComboboxContent data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps">
+          <FocusScope trapped data-slot="focusScope" :class="ui.focusScope({ class: uiProp?.focusScope })">
+            <slot name="content-top" />
 
-          <ComboboxInput v-if="!!searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
-            <UInput
-              autofocus
-              autocomplete="off"
-              :size="selectSize"
-              v-bind="searchInputProps"
-              :model-modifiers="{
-                trim: modelModifiers?.trim
-              }"
-              data-slot="input"
-              :class="ui.input({ class: uiProp?.input })"
-              @change.stop
-            />
-          </ComboboxInput>
+            <ComboboxInput v-if="!!searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
+              <UInput
+                autofocus
+                autocomplete="off"
+                :size="selectSize"
+                v-bind="searchInputProps"
+                :model-modifiers="{
+                  trim: modelModifiers?.trim
+                }"
+                data-slot="input"
+                :class="ui.input({ class: uiProp?.input })"
+                @change.stop
+              />
+            </ComboboxInput>
 
-          <ComboboxEmpty data-slot="empty" :class="ui.empty({ class: uiProp?.empty })">
-            <slot name="empty" :search-term="searchTerm">
-              {{ searchTerm ? t('selectMenu.noMatch', { searchTerm }) : t('selectMenu.noData') }}
-            </slot>
-          </ComboboxEmpty>
+            <ComboboxEmpty data-slot="empty" :class="ui.empty({ class: uiProp?.empty })">
+              <slot name="empty" :search-term="searchTerm">
+                {{ searchTerm ? t('selectMenu.noMatch', { searchTerm }) : t('selectMenu.noData') }}
+              </slot>
+            </ComboboxEmpty>
 
-          <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
-            <template v-if="!!virtualize">
-              <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
+            <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
+              <template v-if="!!virtualize">
+                <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
-              <ComboboxVirtualizer
-                v-slot="{ option: item, virtualItem }"
-                :options="(filteredItems as any[])"
-                :text-content="item => isSelectItem(item) ? get(item, props.labelKey as string) : String(item)"
-                v-bind="virtualizerProps"
-              >
-                <ReuseItemTemplate :item="item" :index="virtualItem.index" />
-              </ComboboxVirtualizer>
+                <ComboboxVirtualizer
+                  v-slot="{ option: item, virtualItem }"
+                  :options="(filteredItems as any[])"
+                  :text-content="item => isSelectItem(item) ? get(item, props.labelKey as string) : String(item)"
+                  v-bind="virtualizerProps"
+                >
+                  <ReuseItemTemplate :item="item" :index="virtualItem.index" />
+                </ComboboxVirtualizer>
 
-              <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
-            </template>
+                <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
+              </template>
 
-            <template v-else>
-              <ComboboxGroup v-if="createItem && createItemPosition === 'top'" data-slot="group" :class="ui.group({ class: uiProp?.group })">
-                <ReuseCreateItemTemplate />
-              </ComboboxGroup>
+              <template v-else>
+                <ComboboxGroup v-if="createItem && createItemPosition === 'top'" data-slot="group" :class="ui.group({ class: uiProp?.group })">
+                  <ReuseCreateItemTemplate />
+                </ComboboxGroup>
 
-              <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: uiProp?.group })">
-                <ReuseItemTemplate v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`" :item="item" :index="index" />
-              </ComboboxGroup>
+                <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: uiProp?.group })">
+                  <ReuseItemTemplate v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`" :item="item" :index="index" />
+                </ComboboxGroup>
 
-              <ComboboxGroup v-if="createItem && createItemPosition === 'bottom'" data-slot="group" :class="ui.group({ class: uiProp?.group })">
-                <ReuseCreateItemTemplate />
-              </ComboboxGroup>
-            </template>
-          </div>
+                <ComboboxGroup v-if="createItem && createItemPosition === 'bottom'" data-slot="group" :class="ui.group({ class: uiProp?.group })">
+                  <ReuseCreateItemTemplate />
+                </ComboboxGroup>
+              </template>
+            </div>
 
-          <slot name="content-bottom" />
-        </FocusScope>
+            <slot name="content-bottom" />
+          </FocusScope>
 
-        <ComboboxArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
-      </ComboboxContent>
+          <ComboboxArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
+        </ComboboxContent>
+      </FieldGroupReset>
     </ComboboxPortal>
   </ComboboxRoot>
 </template>

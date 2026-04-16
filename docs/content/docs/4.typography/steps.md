@@ -1,7 +1,6 @@
 ---
 title: Steps
 description: 'Transform headings into numbered step-by-step guides and tutorials.'
-framework: nuxt
 category: components
 links:
   - label: GitHub
