@@ -12,8 +12,16 @@ Build AI chat interfaces with message streams, reasoning, tool calling, and Verc
 
 ### Install dependencies
 
+**Nuxt:**
+
 ```bash
 pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
+```
+
+**Vue (Vite):**
+
+```bash
+pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
 ```
 
 ### Register Comark module

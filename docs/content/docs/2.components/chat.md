@@ -309,7 +309,6 @@ Use the `Chat` class from `@ai-sdk/vue` to manage chat state and connect to your
 #nuxt
 ```vue
 <script setup lang="ts">
-import type { UIMessage } from 'ai'
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
@@ -393,7 +392,6 @@ function onSubmit() {
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { UIMessage } from 'ai'
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
