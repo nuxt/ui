@@ -12,7 +12,7 @@ export default {
       },
       false: {
         root: '[&_pre]:overflow-hidden',
-        footer: 'bg-gradient-to-t from-muted'
+        footer: 'bg-linear-to-t from-muted'
       }
     }
   }
