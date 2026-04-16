@@ -223,7 +223,7 @@ props:
 
 ### Content
 
-Use the `content` prop to control how the Select content is rendered, like its `align` or `side` for example.
+Use the `content` prop to control how the Select content is rendered, like its `position`, `align` or `side` for example.
 
 ::component-code
 ---
@@ -236,6 +236,9 @@ external:
   - items
   - modelValue
 items:
+  content.position:
+    - item-aligned
+    - popper
   content.align:
     - start
     - center
@@ -246,8 +249,9 @@ items:
     - top
     - bottom
 props:
-  modelValue: 'Backlog'
+  modelValue: 'Todo'
   content:
+    position: item-aligned
     align: center
     side: bottom
     sideOffset: 8
