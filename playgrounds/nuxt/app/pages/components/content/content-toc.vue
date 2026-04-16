@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Comark } from '@comark/vue'
+
 import theme from '#build/ui/content/content-toc'
 
 const highlight = ref(true)

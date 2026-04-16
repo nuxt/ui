@@ -3,7 +3,8 @@ import type { UIMessage } from 'ai'
 import { isTextUIPart } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
-import highlight from '@comark/nuxt/plugins/highlight'
+import { Comark } from '@comark/vue'
+import highlight from '@comark/vue/plugins/highlight'
 
 const open = ref(true)
 const input = ref('')

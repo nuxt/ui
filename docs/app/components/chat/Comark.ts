@@ -1,4 +1,5 @@
-import highlight from '@comark/nuxt/plugins/highlight'
+import { defineComarkComponent } from '@comark/vue'
+import highlight from '@comark/vue/plugins/highlight'
 
 export default defineComarkComponent({
   name: 'ChatComark',

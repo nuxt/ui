@@ -10,11 +10,24 @@ Build AI chat interfaces with message streams, reasoning, tool calling, and Verc
 
 ## Setup
 
-### Install AI SDK
+### Install dependencies
 
 ```bash
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue
+pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
 ```
+
+### Register Comark module
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  modules: [
+    '@nuxt/ui',
+    '@comark/nuxt'
+  ]
+})
+```
+
+`@comark/nuxt` provides the `Comark` component used to render AI responses as streaming Markdown — it incrementally renders tokens as they arrive and automatically enables Nuxt UI's prose components.
 
 ### Server endpoint
 
@@ -45,7 +58,7 @@ export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   return streamText({
-    model: openai('gpt-4o'),
+    model: openai('gpt-5-nano'),
     system: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
   }).toUIMessageStreamResponse()

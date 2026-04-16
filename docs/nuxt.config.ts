@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/a11y',
     '@nuxtjs/mcp-toolkit',
-    '@comark/nuxt',
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-llms',

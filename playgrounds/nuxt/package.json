@@ -12,7 +12,7 @@
     "@ai-sdk/anthropic": "^3.0.69",
     "@ai-sdk/gateway": "^3.0.98",
     "@ai-sdk/vue": "^3.0.161",
-    "@comark/nuxt": "^0.2.1",
+    "@comark/vue": "^0.2.1",
     "@iconify-json/lucide": "^1.2.102",
     "@iconify-json/simple-icons": "^1.2.78",
     "@internationalized/date": "^3.12.1",
