@@ -2,6 +2,9 @@
 import type { UIMessage } from 'ai'
 import { isTextUIPart } from 'ai'
 import { Chat } from '@ai-sdk/vue'
+import { isPartStreaming } from '@nuxt/ui/utils/ai'
+import { Comark } from '@comark/vue'
+import highlight from '@comark/vue/plugins/highlight'
 
 const open = ref(true)
 const input = ref('')
@@ -82,10 +85,11 @@ const ui = {
           <template #content="{ message }">
             <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
               <template v-if="isTextUIPart(part)">
-                <MDC
+                <Comark
                   v-if="message.role === 'assistant'"
-                  :value="part.text"
-                  :cache-key="`${message.id}-${index}`"
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
+                  :plugins="[highlight()]"
                   class="*:first:mt-0 *:last:mb-0"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">

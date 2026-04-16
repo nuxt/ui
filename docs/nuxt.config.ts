@@ -246,7 +246,9 @@ export default defineNuxtConfig({
       '@nuxt/icon',
       '@nuxt/image',
       '@nuxtjs/color-mode',
+      '@nuxtjs/mcp-toolkit',
       '@nuxtjs/mdc',
+      '@comark/vue',
       'nuxt/dist',
       'nuxt-og-image',
       resolve('./app/components')

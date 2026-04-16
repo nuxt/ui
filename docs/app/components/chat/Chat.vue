@@ -1,15 +1,9 @@
 <script setup lang="ts">
-import type { DefineComponent } from 'vue'
 import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import * as theme from '#build/ui'
-import ProseStreamPre from '../prose/PreStream.vue'
-
-const components = {
-  pre: ProseStreamPre as unknown as DefineComponent
-}
 
 const input = ref('')
 
@@ -296,22 +290,17 @@ defineShortcuts({
               :streaming="isPartStreaming(part)"
               icon="i-lucide-brain"
             >
-              <MDCCached
-                :value="part.text"
-                :cache-key="`reasoning-${message.id}-${index}`"
-                :parser-options="{ highlight: false }"
-                class="*:first:mt-0 *:last:mb-0"
+              <ChatComark
+                :markdown="part.text"
+                :streaming="isPartStreaming(part)"
               />
             </UChatReasoning>
 
             <template v-else-if="isTextUIPart(part) && part.text.length > 0">
-              <MDCCached
+              <ChatComark
                 v-if="message.role === 'assistant'"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                :components="components"
-                :parser-options="{ highlight: false }"
-                class="*:first:mt-0 *:last:mb-0"
+                :markdown="part.text"
+                :streaming="isPartStreaming(part)"
               />
               <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
                 {{ part.text }}

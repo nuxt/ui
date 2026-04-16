@@ -68,7 +68,7 @@ Available color palettes:
 1. Define all 11 shades in CSS:
 
 ```css
-/* assets/css/main.css */
+/* app/assets/css/main.css */
 @theme static {
   --color-brand-50: #fef2f2;
   --color-brand-100: #fee2e2;
@@ -293,7 +293,7 @@ componentDetection: ['Modal', 'Dropdown', 'Popover']
 
 ## CSS `@theme` customization
 
-Customize Tailwind design tokens in `assets/css/main.css`:
+Customize Tailwind design tokens in `main.css`:
 
 ### Fonts
 
@@ -353,4 +353,3 @@ You can use `var(--ui-color-<name>-<shade>)` to reference shades from the active
   --ui-primary: white;
 }
 ```
-

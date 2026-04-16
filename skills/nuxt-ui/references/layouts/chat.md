@@ -10,10 +10,49 @@ Build AI chat interfaces with message streams, reasoning, tool calling, and Verc
 
 ## Setup
 
-### Install AI SDK
+### Install dependencies
+
+**Nuxt:**
 
 ```bash
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue
+pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
+```
+
+**Vue (Vite):**
+
+```bash
+pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
+```
+
+### Register Comark module
+
+**Nuxt:**
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  modules: [
+    '@nuxt/ui',
+    '@comark/nuxt'
+  ]
+})
+```
+
+**Vue (Vite):** No module registration needed, import directly from `@comark/vue`.
+
+> `@comark/nuxt` (or `@comark/vue` for Vue projects) provides the `Comark` component used to render AI responses as streaming Markdown, it incrementally renders tokens as they arrive and automatically enables Nuxt UI's prose components.
+
+### Dark mode for syntax highlighting
+
+When using the `highlight` plugin, add the following CSS to your stylesheet:
+
+```css [main.css]
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
 ```
 
 ### Server endpoint
@@ -45,7 +84,7 @@ export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
   return streamText({
-    model: openai('gpt-4o'),
+    model: openai('gpt-5-nano'),
     system: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
   }).toUIMessageStreamResponse()
@@ -58,7 +97,7 @@ export default defineEventHandler(async (event) => {
 UDashboardPanel
 ├── #header → UDashboardNavbar
 ├── #body → UContainer → UChatMessages
-│                         ├── #content → UChatReasoning, UChatTool, MDC
+│                         ├── #content → UChatReasoning, UChatTool, Comark
 │                         └── #indicator (loading)
 └── #footer → UContainer → UChatPrompt
                             └── UChatPromptSubmit
@@ -71,6 +110,7 @@ UDashboardPanel
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import highlight from '@comark/nuxt/plugins/highlight'
 
 definePageMeta({ layout: 'dashboard' })
 
@@ -105,9 +145,10 @@ function onSubmit() {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <MDC
-                  :value="part.text"
-                  :cache-key="`reasoning-${message.id}-${index}`"
+                <Comark
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
+                  :plugins="[highlight()]"
                   class="*:first:mt-0 *:last:mb-0"
                 />
               </UChatReasoning>
@@ -119,10 +160,11 @@ function onSubmit() {
               />
 
               <template v-else-if="isTextUIPart(part)">
-                <MDC
+                <Comark
                   v-if="message.role === 'assistant'"
-                  :value="part.text"
-                  :cache-key="`${message.id}-${index}`"
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
+                  :plugins="[highlight()]"
                   class="*:first:mt-0 *:last:mb-0"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
