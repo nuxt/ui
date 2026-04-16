@@ -18,6 +18,8 @@ pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
 
 ### Register Comark module
 
+**Nuxt:**
+
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
   modules: [
@@ -27,7 +29,23 @@ export default defineNuxtConfig({
 })
 ```
 
-> `@comark/nuxt` provides the `Comark` component used to render AI responses as streaming Markdown, it incrementally renders tokens as they arrive and automatically enables Nuxt UI's prose components.
+**Vue (Vite):** No module registration needed, import directly from `@comark/vue`.
+
+> `@comark/nuxt` (or `@comark/vue` for Vue projects) provides the `Comark` component used to render AI responses as streaming Markdown, it incrementally renders tokens as they arrive and automatically enables Nuxt UI's prose components.
+
+### Dark mode for syntax highlighting
+
+When using the `highlight` plugin, add the following CSS to your stylesheet:
+
+```css [main.css]
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+```
 
 ### Server endpoint
 

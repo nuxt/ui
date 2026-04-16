@@ -12,7 +12,7 @@ links:
 
 Use markdown in the default slot of the `card` component to highlight your content.
 
-Use the `title`, `icon` and `color` props to customize it. You can also pass any property from the [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) component.
+Use the `title`, `icon` and `color` props to customize it. You can also pass any property from the [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) or [`<RouterLink>`](https://router.vuejs.org/api/interfaces/RouterLinkProps.html) component.
 
 ::component-code{slug="card" prose}
 ---

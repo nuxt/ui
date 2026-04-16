@@ -139,7 +139,7 @@ export default defineConfig({
 
 ```ts
 // src/main.ts
-import './assets/main.css'
+import './assets/css/main.css'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import ui from '@nuxt/ui/vue-plugin'
@@ -157,7 +157,7 @@ app.mount('#app')
 ```
 
 ```css
-/* assets/main.css */
+/* src/assets/css/main.css */
 @import "tailwindcss";
 @import "@nuxt/ui";
 ```

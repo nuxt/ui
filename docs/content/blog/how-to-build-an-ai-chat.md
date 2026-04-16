@@ -494,6 +494,18 @@ export default defineComarkComponent({
 
 This creates a `<ChatComark>` component we'll use in the chat page to render assistant messages and reasoning content.
 
+Since Comark uses Shiki with dual themes, you need to add the following CSS to your stylesheet for dark mode support:
+
+```css [app/assets/css/main.css]
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+```
+
 ## Creating the chat page
 
 The chat page is where the actual conversation happens. It integrates the AI SDK's [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class and [`DefaultChatTransport`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/default-chat-transport) for real-time streaming.
