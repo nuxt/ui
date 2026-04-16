@@ -1,7 +1,6 @@
 ---
 title: Callout
 description: 'Highlight important information with eye-catching colored boxes and icons.'
-framework: nuxt
 category: components
 links:
   - label: GitHub

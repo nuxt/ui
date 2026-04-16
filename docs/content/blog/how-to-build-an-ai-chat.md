@@ -470,7 +470,7 @@ The [`UChatPrompt`](/docs/components/chat-prompt) component automatically handle
 
 ### Setting up Markdown rendering
 
-AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). Before building the chat page, create a custom [`Comark`](https://comark.dev) component that will handle streaming Markdown rendering. Using `defineComarkComponent` from `@comark/nuxt`, you can enable the `highlight` plugin for syntax highlighting in code blocks and register additional [Shiki](https://shiki.style) languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
+AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). Before building the chat page, create a custom [`Comark`](https://comark.dev) component that will handle streaming Markdown rendering. Using [`defineComarkComponent`](https://comark.dev/rendering/vue#code-definecomarkcomponent), you can enable the `highlight` plugin for syntax highlighting in code blocks and register additional [Shiki](https://shiki.style) languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
 
 ::code-tree-intersection
 ```ts [app/components/chat/Comark.ts]

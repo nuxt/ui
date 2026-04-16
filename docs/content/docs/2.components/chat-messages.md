@@ -413,11 +413,9 @@ collapse: true
 ::tip
 You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
 
-```vue{7-22}
+```vue{7-15}
 <script setup lang="ts">
 import { isTextUIPart } from 'ai'
-import { isPartStreaming } from '@nuxt/ui/utils/ai'
-import highlight from '@comark/nuxt/plugins/highlight'
 </script>
 
 <template>
@@ -427,18 +425,9 @@ import highlight from '@comark/nuxt/plugins/highlight'
         v-for="(part, index) in message.parts"
         :key="`${message.id}-${part.type}-${index}`"
       >
-        <template v-if="isTextUIPart(part)">
-          <Comark
-            v-if="message.role === 'assistant'"
-            :markdown="part.text"
-            :streaming="isPartStreaming(part)"
-            :plugins="[highlight()]"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-          <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
-            {{ part.text }}
-          </p>
-        </template>
+        <p v-if="isTextUIPart(part)" class="whitespace-pre-wrap">
+          {{ part.text }}
+        </p>
       </template>
     </template>
   </UChatMessages>

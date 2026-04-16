@@ -27,7 +27,7 @@ export default defineNuxtConfig({
 })
 ```
 
-`@comark/nuxt` provides the `Comark` component used to render AI responses as streaming Markdown — it incrementally renders tokens as they arrive and automatically enables Nuxt UI's prose components.
+> `@comark/nuxt` provides the `Comark` component used to render AI responses as streaming Markdown, it incrementally renders tokens as they arrive and automatically enables Nuxt UI's prose components.
 
 ### Server endpoint
 

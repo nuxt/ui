@@ -1,7 +1,6 @@
 ---
 title: Card
 description: 'Create highlighted content blocks with optional links and navigation.'
-framework: nuxt
 category: components
 links:
   - label: GitHub
