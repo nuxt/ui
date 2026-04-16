@@ -17,10 +17,14 @@ export default defineLocale<Messages>({
       close: 'Close'
     },
     calendar: {
+      nextDecade: 'Next decade',
       nextMonth: 'Next month',
       nextYear: 'Next year',
+      prevDecade: 'Previous decade',
       prevMonth: 'Previous month',
-      prevYear: 'Previous year'
+      prevYear: 'Previous year',
+      switchToMonths: 'Switch to month view',
+      switchToYears: 'Switch to year view'
     },
     carousel: {
       dots: 'Choose slide to display',

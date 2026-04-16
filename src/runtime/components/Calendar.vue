@@ -177,16 +177,9 @@ watch(() => code.value, (value) => {
   }
 })
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })({
-  color: props.color,
-  size: props.size,
-  variant: props.variant,
-  weekNumbers: props.weekNumbers
-}))
-
-function getDefaultView(type: CalendarType = props.type, defaultView = props.defaultView) {
-  if (defaultView) {
-    return defaultView
+function getDefaultView(type: CalendarType = props.type) {
+  if (props.defaultView) {
+    return props.defaultView
   }
 
   if (type === 'month') {
@@ -209,7 +202,7 @@ watch(() => [props.type, props.view] as const, ([type, view], [previousType]) =>
   }
 
   if (type !== previousType) {
-    internalView.value = getDefaultView(type as CalendarType, props.defaultView)
+    internalView.value = getDefaultView(type as CalendarType)
   }
 })
 
@@ -235,6 +228,14 @@ const view = computed<CalendarView>({
   }
 })
 
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })({
+  color: props.color,
+  size: props.size,
+  variant: props.variant,
+  weekNumbers: props.weekNumbers,
+  type: view.value
+}))
+
 function resolveDateValue(value: DateValue | DateValue[] | DateRange | null | undefined) {
   if (Array.isArray(value)) {
     return value[0]
@@ -259,14 +260,6 @@ const localPlaceholder = shallowRef<DateValue | undefined>(props.placeholder)
 
 watch(() => props.placeholder, (value) => {
   localPlaceholder.value = value
-}, { immediate: true })
-
-const dayPlaceholder = computed(() => {
-  if (props.placeholder !== undefined || localPlaceholder.value !== undefined) {
-    return localPlaceholder.value
-  }
-
-  return undefined
 })
 
 const pickerPlaceholder = computed(() => {
@@ -316,43 +309,30 @@ const nextMonthIcon = computed(() => props.nextMonthIcon || (dir.value === 'rtl'
 const prevYearIcon = computed(() => props.prevYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft))
 const prevMonthIcon = computed(() => props.prevMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronRight : appConfig.ui.icons.chevronLeft))
 
-const translateWithFallback = (key: string, fallback: string) => {
-  const label = t(key)
-  return label === key ? fallback : label
-}
+const prevMonthLabel = computed(() => t('calendar.prevMonth'))
+const nextMonthLabel = computed(() => t('calendar.nextMonth'))
+const prevYearLabel = computed(() => t('calendar.prevYear'))
+const nextYearLabel = computed(() => t('calendar.nextYear'))
+const prevDecadeLabel = computed(() => t('calendar.prevDecade'))
+const nextDecadeLabel = computed(() => t('calendar.nextDecade'))
+const switchToMonthsLabel = computed(() => t('calendar.switchToMonths'))
+const switchToYearsLabel = computed(() => t('calendar.switchToYears'))
 
-const prevMonthLabel = computed(() => translateWithFallback('calendar.prevMonth', 'Previous month'))
-const nextMonthLabel = computed(() => translateWithFallback('calendar.nextMonth', 'Next month'))
-const prevYearLabel = computed(() => translateWithFallback('calendar.prevYear', 'Previous year'))
-const nextYearLabel = computed(() => translateWithFallback('calendar.nextYear', 'Next year'))
-const prevDecadeLabel = computed(() => translateWithFallback('calendar.prevDecade', prevYearLabel.value))
-const nextDecadeLabel = computed(() => translateWithFallback('calendar.nextDecade', nextYearLabel.value))
-const switchToMonthsLabel = computed(() => translateWithFallback('calendar.switchToMonths', 'Switch to month view'))
-const switchToYearsLabel = computed(() => translateWithFallback('calendar.switchToYears', 'Switch to year view'))
-
-function formatMonthLabel(date: DateValue) {
+function formatDatePart(date: DateValue, options: Intl.DateTimeFormatOptions, fallback: number) {
   try {
-    return formatter.value.custom(date.toDate(getLocalTimeZone()), { month: 'long' })
+    return formatter.value.custom(date.toDate(getLocalTimeZone()), options)
   } catch {
-    return String(date.month)
+    return String(fallback)
   }
 }
 
-function formatYearLabel(date: DateValue) {
-  try {
-    return formatter.value.custom(date.toDate(getLocalTimeZone()), { year: 'numeric' })
-  } catch {
-    return String(date.year)
-  }
-}
-
-function getHeadingValue(date: DateValue, value: Extract<CalendarView, 'month' | 'year'>) {
-  return value === 'month' ? formatMonthLabel(date) : formatYearLabel(date)
-}
+const formatMonthLabel = (date: DateValue) => formatDatePart(date, { month: 'long' }, date.month)
+const formatYearLabel = (date: DateValue) => formatDatePart(date, { year: 'numeric' }, date.year)
 
 function getHeadingLabel(date: DateValue, value: Extract<CalendarView, 'month' | 'year'>) {
+  const formatted = value === 'month' ? formatMonthLabel(date) : formatYearLabel(date)
   const actionLabel = value === 'month' ? switchToMonthsLabel.value : switchToYearsLabel.value
-  return `${getHeadingValue(date, value)}, ${actionLabel}`
+  return `${formatted}, ${actionLabel}`
 }
 
 function getHeadingButtonClass(active: boolean) {
@@ -368,9 +348,8 @@ function emitModelValue(value: DateValue | DateRange) {
 
 const DayCalendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
 const isMonthView = computed(() => view.value === 'month')
-const isYearView = computed(() => view.value === 'year')
 const isNavigationMonthView = computed(() => props.type === 'date' && isMonthView.value)
-const isNavigationYearView = computed(() => props.type === 'date' && isYearView.value)
+const isNavigationYearView = computed(() => props.type === 'date' && view.value === 'year')
 const isStandalonePicker = computed(() => props.type !== 'date')
 const showMonthNavigation = computed(() => props.type === 'date' && view.value === 'day' && props.monthControls)
 
@@ -396,53 +375,28 @@ function onYearUpdate(value: DateValue | DateRange) {
   emitModelValue(value)
 }
 
-const monthPicker = computed(() => ({
-  kind: 'month' as const,
-  root: props.range ? MonthRangePicker.Root : MonthPicker.Root,
-  header: props.range ? MonthRangePicker.Header : MonthPicker.Header,
-  heading: props.range ? MonthRangePicker.Heading : MonthPicker.Heading,
-  grid: props.range ? MonthRangePicker.Grid : MonthPicker.Grid,
-  gridBody: props.range ? MonthRangePicker.GridBody : MonthPicker.GridBody,
-  gridRow: props.range ? MonthRangePicker.GridRow : MonthPicker.GridRow,
-  cell: props.range ? MonthRangePicker.Cell : MonthPicker.Cell,
-  cellTrigger: props.range ? MonthRangePicker.CellTrigger : MonthPicker.CellTrigger,
-  prev: props.range ? MonthRangePicker.Prev : MonthPicker.Prev,
-  next: props.range ? MonthRangePicker.Next : MonthPicker.Next,
-  slotName: 'month-cell',
-  gridSlot: 'monthGrid',
-  rowSlot: 'monthGridRow',
-  cellSlot: 'monthCell',
-  triggerSlot: 'monthCellTrigger',
-  itemProp: 'month',
-  labelProp: 'monthValue',
-  previousLabel: prevYearLabel.value,
-  nextLabel: nextYearLabel.value,
-  onUpdate: onMonthUpdate
-}) as const)
+function createPickerConfig(kind: 'month' | 'year') {
+  const ns = kind === 'month'
+    ? { single: MonthPicker, range: MonthRangePicker }
+    : { single: YearPicker, range: YearRangePicker }
+  const source = props.range ? ns.range : ns.single
+  return {
+    kind,
+    root: source.Root, header: source.Header, heading: source.Heading,
+    grid: source.Grid, gridBody: source.GridBody, gridRow: source.GridRow,
+    cell: source.Cell, cellTrigger: source.CellTrigger,
+    prev: source.Prev, next: source.Next,
+    slotName: `${kind}-cell`,
+    itemProp: kind,
+    labelProp: `${kind}Value`,
+    previousLabel: kind === 'month' ? prevYearLabel.value : prevDecadeLabel.value,
+    nextLabel: kind === 'month' ? nextYearLabel.value : nextDecadeLabel.value,
+    onUpdate: kind === 'month' ? onMonthUpdate : onYearUpdate
+  } as const
+}
 
-const yearPicker = computed(() => ({
-  kind: 'year' as const,
-  root: props.range ? YearRangePicker.Root : YearPicker.Root,
-  header: props.range ? YearRangePicker.Header : YearPicker.Header,
-  heading: props.range ? YearRangePicker.Heading : YearPicker.Heading,
-  grid: props.range ? YearRangePicker.Grid : YearPicker.Grid,
-  gridBody: props.range ? YearRangePicker.GridBody : YearPicker.GridBody,
-  gridRow: props.range ? YearRangePicker.GridRow : YearPicker.GridRow,
-  cell: props.range ? YearRangePicker.Cell : YearPicker.Cell,
-  cellTrigger: props.range ? YearRangePicker.CellTrigger : YearPicker.CellTrigger,
-  prev: props.range ? YearRangePicker.Prev : YearPicker.Prev,
-  next: props.range ? YearRangePicker.Next : YearPicker.Next,
-  slotName: 'year-cell',
-  gridSlot: 'yearGrid',
-  rowSlot: 'yearGridRow',
-  cellSlot: 'yearCell',
-  triggerSlot: 'yearCellTrigger',
-  itemProp: 'year',
-  labelProp: 'yearValue',
-  previousLabel: prevDecadeLabel.value,
-  nextLabel: nextDecadeLabel.value,
-  onUpdate: onYearUpdate
-}) as const)
+const monthPicker = computed(() => createPickerConfig('month'))
+const yearPicker = computed(() => createPickerConfig('year'))
 
 const picker = computed<any>(() => isMonthView.value ? monthPicker.value : yearPicker.value)
 const pickerDefaultValue = computed(() => props.defaultValue as DateValue | DateRange | undefined)
@@ -480,7 +434,7 @@ function onPickerPlaceholderUpdate(value: DateValue) {
     v-bind="calendarRootProps"
     :model-value="(modelValue as DateValue | DateValue[])"
     :default-value="(defaultValue as DateValue)"
-    :placeholder="dayPlaceholder"
+    :placeholder="localPlaceholder"
     :locale="code"
     :dir="dir"
     data-slot="root"
@@ -654,10 +608,8 @@ function onPickerPlaceholderUpdate(value: DateValue) {
     <component
       :is="picker.grid"
       as="div"
-      :data-slot="picker.gridSlot"
-      :class="picker.kind === 'month'
-        ? ui.monthGrid({ class: uiProp?.monthGrid })
-        : ui.yearGrid({ class: uiProp?.yearGrid })"
+      data-slot="grid"
+      :class="ui.grid({ class: uiProp?.grid })"
     >
       <component :is="picker.gridBody" as="div">
         <component
@@ -665,10 +617,8 @@ function onPickerPlaceholderUpdate(value: DateValue) {
           v-for="(row, rowIndex) in grid.rows"
           :key="rowIndex"
           as="div"
-          :data-slot="picker.rowSlot"
-          :class="picker.kind === 'month'
-            ? ui.monthGridRow({ class: uiProp?.monthGridRow })
-            : ui.yearGridRow({ class: uiProp?.yearGridRow })"
+          data-slot="gridRow"
+          :class="ui.gridRow({ class: uiProp?.gridRow })"
         >
           <component
             :is="picker.cell"
@@ -676,19 +626,15 @@ function onPickerPlaceholderUpdate(value: DateValue) {
             :key="cellDate.toString()"
             as="div"
             :date="cellDate"
-            :data-slot="picker.cellSlot"
-            :class="picker.kind === 'month'
-              ? ui.monthCell({ class: uiProp?.monthCell })
-              : ui.yearCell({ class: uiProp?.yearCell })"
+            data-slot="cell"
+            :class="ui.cell({ class: uiProp?.cell })"
           >
             <component
               :is="picker.cellTrigger"
               v-slot="slotProps"
               v-bind="{ [picker.itemProp]: cellDate }"
-              :data-slot="picker.triggerSlot"
-              :class="picker.kind === 'month'
-                ? ui.monthCellTrigger({ class: uiProp?.monthCellTrigger })
-                : ui.yearCellTrigger({ class: uiProp?.yearCellTrigger })"
+              data-slot="cellTrigger"
+              :class="ui.cellTrigger({ class: uiProp?.cellTrigger })"
             >
               <slot v-if="picker.kind === 'month'" name="month-cell" :month="cellDate" :selected="slotProps.selected" :disabled="slotProps.disabled">
                 {{ slotProps.monthValue }}

@@ -344,16 +344,6 @@ name: 'calendar-month-picker-example'
 ---
 ::
 
-### As a year picker
-
-Use `type="year"` with a [Popover](/docs/components/popover) to create a year picker.
-
-::component-example
----
-name: 'calendar-year-picker-example'
----
-::
-
 ### As a date picker
 
 Use a [Button](/docs/components/button) and a [Popover](/docs/components/popover) component to create a date picker.

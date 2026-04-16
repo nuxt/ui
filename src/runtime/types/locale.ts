@@ -11,10 +11,14 @@ export type Messages = {
     close: string
   }
   calendar: {
+    nextDecade?: string
     nextMonth: string
     nextYear: string
+    prevDecade?: string
     prevMonth: string
     prevYear: string
+    switchToMonths?: string
+    switchToYears?: string
   }
   carousel: {
     dots: string
