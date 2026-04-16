@@ -1,7 +1,6 @@
 ---
 title: Icon
 description: 'Display icons from popular icon libraries to enhance your content.'
-framework: nuxt
 category: components
 links:
   - label: GitHub

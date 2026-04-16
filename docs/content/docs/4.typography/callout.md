@@ -1,7 +1,6 @@
 ---
 title: Callout
 description: 'Highlight important information with eye-catching colored boxes and icons.'
-framework: nuxt
 category: components
 links:
   - label: GitHub
@@ -13,7 +12,7 @@ links:
 
 Use markdown in the default slot of the `callout` component to add eye-catching context to your content.
 
-Use the `icon` and `color` props to customize it. You can also pass any property from the [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) component.
+Use the `icon` and `color` props to customize it. You can also pass any property from the [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) or [`<RouterLink>`](https://router.vuejs.org/api/interfaces/RouterLinkProps.html) component.
 
 ::component-code{slug="callout" prose}
 ---
