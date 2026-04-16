@@ -74,6 +74,7 @@ function getFaviconUrl(url: string): string {
 
   <div class="flex-1 flex flex-col gap-4 sm:gap-6 max-w-xl w-full mx-auto min-h-0">
     <UChatMessages
+      should-auto-scroll
       :messages="chat.messages"
       :status="chat.status"
       :spacing-offset="48"
