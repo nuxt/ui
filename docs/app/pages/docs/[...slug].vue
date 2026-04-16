@@ -114,7 +114,7 @@ const links = computed(() => [{
     v-if="page"
     :ui="open ? {
       center: 'lg:col-span-10',
-      right: 'lg:col-span-0'
+      right: 'lg:hidden'
     } : undefined"
   >
     <UPageHeader>
