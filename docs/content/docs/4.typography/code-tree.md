@@ -1,7 +1,6 @@
 ---
 title: CodeTree
 description: 'Visualize file and folder structures with syntax-highlighted code.'
-framework: nuxt
 category: components
 links:
   - label: GitHub

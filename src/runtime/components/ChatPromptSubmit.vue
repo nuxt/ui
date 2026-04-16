@@ -112,7 +112,9 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPromptSubmit['AppConfig']
 const uiProp = useComponentUI('chatPromptSubmit', props)
 
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'color', 'variant', 'status', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'color', 'variant', 'status', 'disabled', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'))
+
+const disabled = computed(() => props.status === 'ready' ? props.disabled : false)
 
 const statusButtonProps = computed(() => ({
   ready: {
@@ -156,6 +158,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPromptSu
     v-bind="{
       ...buttonProps,
       ...statusButtonProps,
+      disabled,
       'aria-label': t('chatPromptSubmit.label'),
       ...$attrs
     }"
