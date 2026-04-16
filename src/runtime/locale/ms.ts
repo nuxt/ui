@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Salin kod ke papan klip'
+      },
+      prompt: {
+        copy: 'Copy prompt to clipboard',
+        openIn: 'Open in {name}'
       }
     },
     sidebar: {

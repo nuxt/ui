@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'ចម្លងកូដទៅក្ដារតម្បៀតខ្ទាស់'
+      },
+      prompt: {
+        copy: 'Copy prompt to clipboard',
+        openIn: 'Open in {name}'
       }
     },
     sidebar: {

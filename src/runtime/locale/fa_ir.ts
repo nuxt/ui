@@ -120,6 +120,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'کپی کد در کلیپ‌بورد'
+      },
+      prompt: {
+        copy: 'Copy prompt to clipboard',
+        openIn: 'Open in {name}'
       }
     },
     sidebar: {

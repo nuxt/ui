@@ -121,6 +121,7 @@ export type Messages = {
     }
     prompt: {
       copy: string
+      openIn: string
     }
   }
   chatReasoning: {

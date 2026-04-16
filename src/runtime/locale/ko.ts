@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: '코드를 클립보드에 복사'
+      },
+      prompt: {
+        copy: 'Copy prompt to clipboard',
+        openIn: 'Open in {name}'
       }
     },
     sidebar: {

@@ -10,6 +10,10 @@ type ProsePrompt = ComponentConfig<typeof theme, AppConfig, 'prompt', 'ui.prose'
 export interface ProsePromptProps {
   description?: string
   icon?: IconProps['name']
+  /**
+   * @defaultValue '["copy"]'
+   */
+  actions?: ('copy' | 'cursor' | 'windsurf')[]
   class?: any
   ui?: ProsePrompt['slots']
 }
@@ -31,7 +35,9 @@ import UButton from '../Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<ProsePromptProps>()
+const props = withDefaults(defineProps<ProsePromptProps>(), {
+  actions: () => ['copy']
+})
 defineSlots<ProsePromptSlots>()
 
 const { t } = useLocale()
@@ -44,10 +50,26 @@ const contentRef = useTemplateRef('contentRef')
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.prompt || {}) })())
 
-function copyPrompt() {
-  const text = contentRef.value?.textContent ?? ''
+function getPromptText() {
+  return (contentRef.value?.textContent ?? '').trim()
+}
 
-  copy(text.trim())
+function copyPrompt() {
+  copy(getPromptText())
+}
+
+function openInCursor() {
+  const url = new URL('cursor://anysphere.cursor-deeplink/prompt')
+  url.searchParams.set('text', getPromptText())
+
+  window.open(url.toString(), '_self')
+}
+
+function openInWindsurf() {
+  const url = new URL('windsurf://cascade/newChat')
+  url.searchParams.set('prompt', getPromptText())
+
+  window.open(url.toString(), '_self')
 }
 </script>
 
@@ -67,12 +89,33 @@ function copyPrompt() {
 
     <div :class="ui.actions({ class: uiProp?.actions })">
       <UButton
+        v-if="actions.includes('copy')"
         :icon="copied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
         color="neutral"
         variant="ghost"
         size="sm"
         :aria-label="t('prose.prompt.copy')"
         @click="copyPrompt"
+      />
+
+      <UButton
+        v-if="actions.includes('cursor')"
+        icon="i-simple-icons-cursor"
+        color="neutral"
+        variant="ghost"
+        size="sm"
+        :aria-label="t('prose.prompt.openIn', { name: 'Cursor' })"
+        @click="openInCursor"
+      />
+
+      <UButton
+        v-if="actions.includes('windsurf')"
+        icon="i-simple-icons-windsurf"
+        color="neutral"
+        variant="ghost"
+        size="sm"
+        :aria-label="t('prose.prompt.openIn', { name: 'Windsurf' })"
+        @click="openInWindsurf"
       />
     </div>
   </div>
