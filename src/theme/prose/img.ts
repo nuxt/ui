@@ -12,7 +12,7 @@ export default {
     open: {
       true: ''
     },
-    hasWidth: {
+    width: {
       false: 'w-full'
     }
   },
