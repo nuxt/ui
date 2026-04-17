@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopiraj kodo v odložišče'
+      },
+      prompt: {
+        copy: 'Kopiraj poziv',
+        openIn: 'Odpri v {name}'
       }
     },
     sidebar: {

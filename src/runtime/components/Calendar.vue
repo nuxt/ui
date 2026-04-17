@@ -101,8 +101,8 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
   ui?: Calendar['slots']
 }
 
-export interface CalendarEmits<R extends boolean, M extends boolean> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
-  'update:modelValue': [date: CalendarModelValue<R, M>]
+export interface CalendarEmits<R extends boolean = false, M extends boolean = false> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
+  'update:modelValue': [value: CalendarModelValue<R, M>]
 }
 
 export interface CalendarSlots {

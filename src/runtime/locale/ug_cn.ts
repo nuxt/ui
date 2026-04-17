@@ -120,6 +120,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'كۆچۈرۈش'
+      },
+      prompt: {
+        copy: 'كۆچۈرۈش',
+        openIn: '{name} دا ئېچىش'
       }
     },
     sidebar: {

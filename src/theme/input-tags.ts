@@ -1,6 +1,7 @@
 import { defuFn } from 'defu'
 import type { ModuleOptions } from '../module'
 import input from './input'
+import { fieldGroupVariant } from './field-group'
 
 export default (options: Required<ModuleOptions>) => {
   return defuFn({
@@ -14,6 +15,7 @@ export default (options: Required<ModuleOptions>) => {
       input: 'flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
     },
     variants: {
+      ...fieldGroupVariant,
       size: {
         xs: {
           item: 'text-[10px]/3',

@@ -1,7 +1,6 @@
 ---
 title: CardGroup
 description: 'Organize multiple cards in responsive grid layouts for better content presentation.'
-framework: nuxt
 category: components
 links:
   - label: GitHub

@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Копирай кода в клипборда'
+      },
+      prompt: {
+        copy: 'Копирай подсказката',
+        openIn: 'Отвори в {name}'
       }
     },
     sidebar: {

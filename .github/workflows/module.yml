@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6
@@ -90,10 +90,10 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6
@@ -135,10 +135,10 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6
@@ -180,10 +180,10 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6
@@ -225,10 +225,10 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6
@@ -270,10 +270,10 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6
@@ -315,10 +315,10 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6
@@ -360,10 +360,10 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6
@@ -405,10 +405,10 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6
@@ -450,10 +450,10 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6
@@ -495,10 +495,10 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6
@@ -540,10 +540,10 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6
@@ -585,10 +585,10 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
 
       - name: Install node
         uses: actions/setup-node@v6

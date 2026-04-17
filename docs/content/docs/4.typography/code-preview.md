@@ -1,7 +1,6 @@
 ---
 title: CodePreview
 description: 'Display code examples with a preview and their source for clearer documentation.'
-framework: nuxt
 category: components
 links:
   - label: GitHub

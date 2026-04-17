@@ -149,7 +149,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
     <USeparator />
 
     <UPageSection :ui="{ container: 'lg:py-16' }" class="bg-elevated/25">
-      <ul class="grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 lg:gap-x-8 lg:gap-y-8 xl:gap-y-10">
+      <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 xl:gap-y-10">
         <Motion
           v-for="(feature, index) in page?.features"
           :key="feature.title"

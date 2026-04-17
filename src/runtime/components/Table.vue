@@ -99,7 +99,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   meta?: TableMeta<T>
   /**
    * Enable virtualization for large datasets.
-   * Note: when enabled, the divider between rows and sticky properties are not supported.
+   * Note: when enabled, the divider between rows, sticky and row pinning properties are not supported.
    * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
    * @defaultValue false
    */
@@ -416,6 +416,9 @@ const tableApi = useVueTable({
 })
 
 const rows = computed(() => tableApi.getRowModel().rows)
+const topRows = computed(() => props.virtualize ? [] : tableApi.getTopRows())
+const bottomRows = computed(() => props.virtualize ? [] : tableApi.getBottomRows())
+const centerRows = computed(() => topRows.value.length || bottomRows.value.length ? tableApi.getCenterRows() : rows.value)
 
 const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
   estimateSize: 65,
@@ -425,7 +428,7 @@ const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' 
 const virtualizer = !!props.virtualize && useVirtualizer({
   ...virtualizerProps.value,
   get count() {
-    return rows.value.length
+    return centerRows.value.length
   },
   getScrollElement: () => rootRef.value?.$el,
   estimateSize: (index: number) => {
@@ -528,6 +531,7 @@ defineExpose({
       :data-selected="row.getIsSelected()"
       :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
       :data-expanded="row.getIsExpanded()"
+      :data-pinned="row.getIsPinned() || undefined"
       :role="props.onSelect ? 'button' : undefined"
       :tabindex="props.onSelect ? 0 : undefined"
       data-slot="tr"
@@ -618,10 +622,12 @@ defineExpose({
         <slot name="body-top" />
 
         <template v-if="rows.length">
+          <ReuseRowTemplate v-for="row in topRows" :key="row.id" :row="row" />
+
           <template v-if="virtualizer">
-            <template v-for="(virtualRow, index) in virtualizer.getVirtualItems()" :key="rows[virtualRow.index]?.id">
+            <template v-for="(virtualRow, index) in virtualizer.getVirtualItems()" :key="centerRows[virtualRow.index]?.id">
               <ReuseRowTemplate
-                :row="rows[virtualRow.index]!"
+                :row="centerRows[virtualRow.index]!"
                 :style="{
                   height: `${virtualRow.size}px`,
                   transform: `translateY(${virtualRow.start - index * virtualRow.size}px)`
@@ -631,8 +637,10 @@ defineExpose({
           </template>
 
           <template v-else>
-            <ReuseRowTemplate v-for="row in rows" :key="row.id" :row="row" />
+            <ReuseRowTemplate v-for="row in centerRows" :key="row.id" :row="row" />
           </template>
+
+          <ReuseRowTemplate v-for="row in bottomRows" :key="row.id" :row="row" />
         </template>
 
         <tr v-else-if="loading && !!slots['loading']">

@@ -102,7 +102,7 @@ const links = computed(() => [{
     messages.value = [...messages.value, {
       id: String(Date.now()),
       role: 'user',
-      parts: [{ type: 'text', text: `Read the documentation page at ${page.value?.path} and summarize it. I want to ask questions about it.` }]
+      parts: [{ type: 'text', text: 'Read this documentation page and summarize it. I want to ask questions about it.' }]
     }]
     open.value = true
   }
@@ -110,7 +110,13 @@ const links = computed(() => [{
 </script>
 
 <template>
-  <UPage v-if="page">
+  <UPage
+    v-if="page"
+    :ui="open ? {
+      center: 'lg:col-span-10',
+      right: 'lg:hidden'
+    } : undefined"
+  >
     <UPageHeader>
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
@@ -157,7 +163,7 @@ const links = computed(() => [{
       <UContentSurround :surround="(surround as any)" />
     </UPageBody>
 
-    <template v-if="page?.body?.toc?.links?.length && !open" #right>
+    <template v-if="page?.body?.toc?.links?.length" #right>
       <UContentToc :links="page.body.toc.links" class="z-2">
         <template #bottom>
           <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />

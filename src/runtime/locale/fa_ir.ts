@@ -120,6 +120,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'کپی کد در کلیپ‌بورد'
+      },
+      prompt: {
+        copy: 'کپی دستور',
+        openIn: 'باز کردن در {name}'
       }
     },
     sidebar: {

@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopeeri kood lõikelauale'
+      },
+      prompt: {
+        copy: 'Kopeeri viip',
+        openIn: 'Ava rakenduses {name}'
       }
     },
     sidebar: {

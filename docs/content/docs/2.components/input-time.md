@@ -6,6 +6,9 @@ links:
   - label: TimeField
     icon: i-custom-reka-ui
     to: https://reka-ui.com/docs/components/time-field
+  - label: TimeRangeField
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/time-range-field
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputTime.vue
@@ -13,7 +16,7 @@ links:
 
 ## Usage
 
-Use the `v-model` directive to control the selected date.
+Use the `v-model` directive to control the selected time.
 
 ::component-code
 ---
@@ -39,7 +42,7 @@ ignore:
 external:
   - defaultValue
 props:
-  defaultValue: [12, 30, 0]
+  defaultValue: [9, 45, 0]
 ---
 ::
 
@@ -53,6 +56,29 @@ This component uses the `@internationalized/date` package for locale-aware forma
 :::note{to="/docs/getting-started/integrations/i18n/vue#locale"}
 This component uses the `@internationalized/date` package for locale-aware formatting. The time format is determined by the `locale` prop of the App component.
 :::
+::
+
+### Range
+
+Use the `range` prop to enable time range selection with start and end times.
+
+::component-code
+---
+prettier: true
+cast:
+  modelValue: TimeRangeValue
+ignore:
+  - range
+  - modelValue.start
+  - modelValue.end
+external:
+  - modelValue
+props:
+  range: true
+  modelValue:
+    start: [9, 0, 0]
+    end: [17, 30, 0]
+---
 ::
 
 ### Hour Cycle
@@ -127,6 +153,32 @@ props:
 Use the `leading` and `trailing` props to set the icon position or the `leading-icon` and `trailing-icon` props to set a different icon for each position.
 ::
 
+### Separator Icon
+
+Use the `separator-icon` prop to change the [Icon](/docs/components/icon) of the range separator. Defaults to `i-lucide-minus`.
+
+::component-code
+---
+ignore:
+  - range
+props:
+  range: true
+  separatorIcon: 'i-lucide-arrow-right'
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.minus` key.
+:::
+
+#vue
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.minus` key.
+:::
+::
+
 ### Avatar
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the InputTime.
@@ -134,6 +186,8 @@ Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the In
 ::component-code
 ---
 prettier: true
+ignore:
+  - avatar.loading
 props:
   avatar:
     src: 'https://github.com/vuejs.png'

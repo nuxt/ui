@@ -58,13 +58,14 @@ bun add @nuxt/ui tailwindcss
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
-  modules: ['@nuxt/ui']
+  modules: ['@nuxt/ui'],
+  css: ['~/assets/css/main.css']
 })
 ```
 
 2. Import Tailwind CSS and Nuxt UI in your CSS:
 
-```css [assets/css/main.css]
+```css [app/assets/css/main.css]
 @import "tailwindcss";
 @import "@nuxt/ui";
 ```
@@ -90,7 +91,9 @@ export default defineConfig({
 
 2. Use the Nuxt UI Vue plugin in your `main.ts`:
 
-```ts [main.ts]
+```ts [src/main.ts]
+import './assets/css/main.css'
+
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import ui from '@nuxt/ui/vue-plugin'
@@ -111,7 +114,7 @@ app.mount('#app')
 
 3. Import Tailwind CSS and Nuxt UI in your CSS:
 
-```css [assets/main.css]
+```css [src/assets/css/main.css]
 @import "tailwindcss";
 @import "@nuxt/ui";
 ```
@@ -126,7 +129,7 @@ Thank you for considering contributing to Nuxt UI. Here are a few ways you can g
 - Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/docs/getting-started/contribution) to share your suggestions.
 
 > [!TIP]
-> We provide a [contributing skill](https://github.com/nuxt/ui/tree/v4/.claude/skills/contributing) for AI assistants to help you contribute to Nuxt UI. It will automatically guide you through component structure, theming patterns, testing conventions, and documentation guidelines when working in this repository.
+> We provide contributing guidelines through [`AGENTS.md`](https://github.com/nuxt/ui/blob/v4/AGENTS.md) for AI assistants to help you contribute to Nuxt UI. It is automatically picked up by all AI coding agents and guides through component structure, theming patterns, testing conventions, and documentation guidelines.
 
 ## Local Development
 

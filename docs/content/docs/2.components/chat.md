@@ -13,7 +13,7 @@ links:
 Nuxt UI provides a set of components designed to build AI-powered chat interfaces. They integrate seamlessly with the [Vercel AI SDK](https://ai-sdk.dev/) for streaming responses, reasoning, tool calling, and more.
 
 ::callout{icon="i-simple-icons-github"}
-Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat){target="_blank"} and [`Vue`](https://github.com/nuxt-ui-templates/chat-vue){target="_blank"} AI Chat templates on GitHub for production-ready implementations.
+Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat) and [`Vue`](https://github.com/nuxt-ui-templates/chat-vue) AI Chat templates on GitHub for production-ready implementations.
 ::
 
 ## Components
@@ -35,23 +35,91 @@ The Chat components are designed to be used with the [Vercel AI SDK](https://ai-
 
 Install the required dependencies:
 
-::code-group{sync="pm"}
+::framework-only
+#nuxt
+:::div
+
+::::code-group{sync="pm"}
 
 ```bash [pnpm]
-pnpm add ai @ai-sdk/gateway @ai-sdk/vue
+pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
 ```
 
 ```bash [yarn]
-yarn add ai @ai-sdk/gateway @ai-sdk/vue
+yarn add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
 ```
 
 ```bash [npm]
-npm install ai @ai-sdk/gateway @ai-sdk/vue
+npm install ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
 ```
 
 ```bash [bun]
-bun add ai @ai-sdk/gateway @ai-sdk/vue
+bun add ai @ai-sdk/gateway @ai-sdk/vue @comark/nuxt
 ```
+
+::::
+
+Add `@comark/nuxt` to your modules:
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  modules: [
+    '@nuxt/ui',
+    '@comark/nuxt'
+  ]
+})
+```
+
+::::note
+[`@comark/nuxt`](https://comark.dev/rendering/nuxt) provides the `Comark` component used to render AI responses as streaming Markdown, it incrementally renders tokens as they arrive, avoiding the flicker and re-parsing that traditional Markdown renderers cause. It also automatically enables Nuxt UI's [prose components](/docs/typography) so your content is styled to match your theme.
+::::
+
+:::
+
+#vue
+:::div
+
+::::code-group{sync="pm"}
+
+```bash [pnpm]
+pnpm add ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
+```
+
+```bash [yarn]
+yarn add ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
+```
+
+```bash [npm]
+npm install ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
+```
+
+```bash [bun]
+bun add ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
+```
+
+::::
+
+::::note
+[`@comark/vue`](https://comark.dev/rendering/vue) provides the `Comark` component used to render AI responses as streaming Markdown, it incrementally renders tokens as they arrive, avoiding the flicker and re-parsing that traditional Markdown renderers cause.
+<br><br>To use Nuxt UI's [prose components](/docs/typography) with Comark, enable the `prose` option in your `vite.config.ts`:
+
+```ts [vite.config.ts] {9}
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import ui from '@nuxt/ui/vite'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    ui({
+      prose: true
+    })
+  ]
+})
+```
+::::
+
+:::
 
 ::
 
@@ -178,24 +246,40 @@ export default defineEventHandler(async (event) => {
 
 ::
 
-### Tool Calling (MCP)
+### MCP Client
 
-You can enhance your chatbot with tool calling capabilities using the [Model Context Protocol](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) (`@ai-sdk/mcp`). This allows the AI to search your documentation or perform other actions:
+Empower your chatbot with advanced tool-calling features using the [Model Context Protocol (MCP)](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) from `@ai-sdk/mcp`. MCP enables your AI to perform dynamic actions, such as searching your documentation or executing custom tasks, to provide more relevant and accurate responses.
+
+To get started, install the MCP package:
+
+:::code-group
+
+```bash [npm]
+npm install @ai-sdk/mcp
+```
+
+```bash [pnpm]
+pnpm add @ai-sdk/mcp
+```
+
+```bash [yarn]
+yarn add @ai-sdk/mcp
+```
+
+:::
+
+Then, configure your server endpoint to use MCP tools:
 
 ```ts [server/api/chat.post.ts]
-import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
 import { streamText, convertToModelMessages, stepCountIs } from 'ai'
-import { experimental_createMCPClient } from '@ai-sdk/mcp'
+import { createMCPClient } from '@ai-sdk/mcp'
 import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
-  const httpTransport = new StreamableHTTPClientTransport(
-    new URL('https://your-app.com/mcp')
-  )
-  const httpClient = await experimental_createMCPClient({
-    transport: httpTransport
+  const httpClient = await createMCPClient({
+    transport: { type: 'http', url: 'https://your-app.com/mcp' }
   })
   const tools = await httpClient.tools()
 
@@ -221,12 +305,14 @@ export default defineEventHandler(async (event) => {
 
 Use the `Chat` class from `@ai-sdk/vue` to manage chat state and connect to your server endpoint:
 
+::framework-only
+#nuxt
 ```vue
 <script setup lang="ts">
-import type { UIMessage } from 'ai'
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import highlight from '@comark/nuxt/plugins/highlight'
 
 const input = ref('')
 
@@ -256,11 +342,12 @@ function onSubmit() {
         <UChatReasoning
           v-if="isReasoningUIPart(part)"
           :text="part.text"
-          :streaming="isReasoningStreaming(message, index, chat)"
+          :streaming="isPartStreaming(part)"
         >
-          <MDC
-            :value="part.text"
-            :cache-key="`reasoning-${message.id}-${index}`"
+          <Comark
+            :markdown="part.text"
+            :streaming="isPartStreaming(part)"
+            :plugins="[highlight()]"
             class="*:first:mt-0 *:last:mb-0"
           />
         </UChatReasoning>
@@ -271,12 +358,18 @@ function onSubmit() {
           :streaming="isToolStreaming(part)"
         />
 
-        <MDC
-          v-else-if="isTextUIPart(part)"
-          :value="part.text"
-          :cache-key="`${message.id}-${index}`"
-          class="*:first:mt-0 *:last:mb-0"
-        />
+        <template v-else-if="isTextUIPart(part)">
+          <Comark
+            v-if="message.role === 'assistant'"
+            :markdown="part.text"
+            :streaming="isPartStreaming(part)"
+            :plugins="[highlight()]"
+            class="*:first:mt-0 *:last:mb-0"
+          />
+          <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+            {{ part.text }}
+          </p>
+        </template>
       </template>
     </template>
   </UChatMessages>
@@ -295,10 +388,140 @@ function onSubmit() {
 </template>
 ```
 
-::note
-In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) to render messages as Markdown. As Nuxt UI provides pre-styled prose components, your content will be automatically styled.
+#vue
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
+import { Chat } from '@ai-sdk/vue'
+import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { Comark } from '@comark/vue'
+import highlight from '@comark/vue/plugins/highlight'
+
+const input = ref('')
+
+const chat = new Chat({
+  onError(error) {
+    console.error(error)
+  }
+})
+
+function onSubmit() {
+  chat.sendMessage({ text: input.value })
+
+  input.value = ''
+}
+</script>
+
+<template>
+  <UChatMessages
+    :messages="chat.messages"
+    :status="chat.status"
+  >
+    <template #content="{ message }">
+      <template
+        v-for="(part, index) in message.parts"
+        :key="`${message.id}-${part.type}-${index}`"
+      >
+        <UChatReasoning
+          v-if="isReasoningUIPart(part)"
+          :text="part.text"
+          :streaming="isPartStreaming(part)"
+        >
+          <Comark
+            :markdown="part.text"
+            :streaming="isPartStreaming(part)"
+            :plugins="[highlight()]"
+            class="*:first:mt-0 *:last:mb-0"
+          />
+        </UChatReasoning>
+
+        <UChatTool
+          v-else-if="isToolUIPart(part)"
+          :text="getToolName(part)"
+          :streaming="isToolStreaming(part)"
+        />
+
+        <template v-else-if="isTextUIPart(part)">
+          <Comark
+            v-if="message.role === 'assistant'"
+            :markdown="part.text"
+            :streaming="isPartStreaming(part)"
+            :plugins="[highlight()]"
+            class="*:first:mt-0 *:last:mb-0"
+          />
+          <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+            {{ part.text }}
+          </p>
+        </template>
+      </template>
+    </template>
+  </UChatMessages>
+
+  <UChatPrompt
+    v-model="input"
+    :error="chat.error"
+    @submit="onSubmit"
+  >
+    <UChatPromptSubmit
+      :status="chat.status"
+      @stop="chat.stop()"
+      @reload="chat.regenerate()"
+    />
+  </UChatPrompt>
+</template>
+```
+
 ::
 
-::tip{to="/blog/how-to-build-an-ai-chat"}
+::tip
+For reusable Comark configuration (plugins, class, etc.), use [`defineComarkComponent`](https://comark.dev/rendering/vue#code-definecomarkcomponent) to create a custom component instead of passing props inline each time.
+
+::framework-only
+#nuxt
+:::div{class="*:my-0"}
+```ts [components/chat/Comark.ts]
+import highlight from '@comark/nuxt/plugins/highlight'
+
+export default defineComarkComponent({
+  name: 'ChatComark',
+  plugins: [highlight()],
+  class: '*:first:mt-0 *:last:mb-0'
+})
+```
+:::
+
+#vue
+:::div{class="*:my-0"}
+```ts [components/chat/Comark.ts]
+import { defineComarkComponent } from '@comark/vue'
+import highlight from '@comark/vue/plugins/highlight'
+
+export default defineComarkComponent({
+  name: 'ChatComark',
+  plugins: [highlight()],
+  class: '*:first:mt-0 *:last:mb-0'
+})
+```
+:::
+::
+
+::
+
+::note
+When using the `highlight` plugin, add the following CSS to your stylesheet to support dark mode:
+
+```css [main.css]
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+```
+::
+
+::note{to="/blog/how-to-build-an-ai-chat"}
 Read the full **Build an AI Chatbot** tutorial for a step-by-step guide.
 ::

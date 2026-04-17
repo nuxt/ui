@@ -201,12 +201,19 @@ const defaultValue = computed(() => {
   <Primitive :as="as" v-bind="$attrs" :as-child="level > 0" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <AccordionRoot as="ul" :disabled="disabled" v-bind="rootProps" :default-value="defaultValue" :class="level > 0 ? ui.listWithChildren({ class: uiProp?.listWithChildren }) : ui.list({ class: uiProp?.list })">
       <template v-for="(link, index) in navigation" :key="index">
-        <AccordionItem v-if="link.children?.length" as="li" data-slot="itemWithChildren" :class="ui.itemWithChildren({ class: [uiProp?.itemWithChildren, link.ui?.itemWithChildren], level: level > 0 })" :value="String(index)">
+        <AccordionItem
+          v-if="link.children?.length"
+          as="li"
+          :disabled="!!link.disabled"
+          data-slot="itemWithChildren"
+          :class="ui.itemWithChildren({ class: [uiProp?.itemWithChildren, link.ui?.itemWithChildren], level: level > 0 })"
+          :value="String(index)"
+        >
           <AccordionTrigger
             as="button"
             :class="[
               ui.link({ class: [uiProp?.link, link.ui?.link, link.class], active: link.active, disabled: !!link.disabled || disabled }),
-              ui.trigger({ class: [uiProp?.trigger, link.ui?.trigger], disabled })
+              ui.trigger({ class: [uiProp?.trigger, link.ui?.trigger], disabled: !!link.disabled || disabled })
             ]"
           >
             <ReuseLinkTemplate :link="link" :active="link.active || false" />

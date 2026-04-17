@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { UIMessage } from 'ai'
+import type { UIMessage, FileUIPart } from 'ai'
 import theme from '#build/ui/chat-message'
 import type { AvatarProps, ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
@@ -50,6 +50,7 @@ export interface ChatMessageProps extends UIMessage {
 
 export interface ChatMessageSlots {
   leading?(props: { avatar: ChatMessageProps['avatar'], ui: ChatMessage['ui'] }): VNode[]
+  files?(props: { parts: FileUIPart[] }): VNode[]
   content?(props: ChatMessageProps): VNode[]
   actions?(props: { actions: ChatMessageProps['actions'] }): VNode[]
 }
@@ -75,6 +76,8 @@ const slots = defineSlots<ChatMessageSlots>()
 const appConfig = useAppConfig() as ChatMessage['AppConfig']
 const uiProp = useComponentUI('chatMessage', props)
 
+const fileParts = computed(() => props.parts?.filter((part): part is FileUIPart => part.type === 'file') ?? [])
+
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage || {}) })({
   variant: props.variant,
   side: props.side,
@@ -86,6 +89,10 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
 
 <template>
   <Primitive :as="as" :data-role="role" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div v-if="!!slots.files && fileParts.length" data-slot="files" :class="ui.files({ class: uiProp?.files })">
+      <slot name="files" :parts="fileParts" />
+    </div>
+
     <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
       <div v-if="icon || avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
         <slot name="leading" :avatar="avatar" :ui="ui">

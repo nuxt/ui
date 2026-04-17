@@ -2,7 +2,13 @@
 
 Build documentation sites with sidebar navigation, table of contents, and surround links.
 
-> Requires `@nuxt/content` module for navigation, search, and TOC.
+## When to use
+
+- Technical documentation sites
+- Knowledge bases, help centers
+- Any content-heavy site with hierarchical navigation
+
+> Requires `@nuxt/content` — see [conventions](../guidelines/conventions.md#content-module-integration) for setup (module order + `@source`).
 
 ## Component tree
 
@@ -125,17 +131,22 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 </template>
 ```
 
-> The outer `UPage` in the layout handles the left sidebar. The inner `UPage` in the page handles the right sidebar. They nest correctly.
+### How nesting works
+
+The outer `UPage` in the layout handles the **left sidebar**. The inner `UPage` in the page handles the **right sidebar**. They nest correctly — this is intentional.
+
+### Common mistakes
+
+- Not providing navigation via `provide`/`inject` — the layout needs it from the app shell.
+- Forgetting `UContentSearch` in app.vue — search won't work without it.
+- Using `UContentSearchButton` without `UContentSearch` — the button opens search, but the search component must exist.
 
 ## Key components
 
-- `UPage` — Multi-column grid layout with `#left`, `#default`, `#right` slots
-- `UPageAside` — Sticky sidebar wrapper (visible from `lg` breakpoint)
-- `UPageHeader` — Page title and description
-- `UPageBody` — Main content area
-- `UContentNavigation` — Sidebar navigation tree
-- `UContentToc` — Table of contents
-- `UContentSurround` — Prev/next links
-- `UContentSearch` / `UContentSearchButton` — Search command palette
-- `UPageAnchors` — Simpler alternative to full TOC
-- `UPageLinks` — Related resource links
+- `UPage` — multi-column grid with `#left`, `#default`, `#right` slots
+- `UPageAside` — sticky sidebar wrapper (visible from `lg` breakpoint)
+- `UContentNavigation` — sidebar navigation tree from Nuxt Content
+- `UContentToc` — table of contents from page headings
+- `UContentSurround` — prev/next links
+- `UContentSearch` / `UContentSearchButton` — search command palette
+- `UPageAnchors` — simpler alternative to full TOC

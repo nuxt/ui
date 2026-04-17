@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Sao chép mã vào bộ nhớ tạm'
+      },
+      prompt: {
+        copy: 'Sao chép lệnh',
+        openIn: 'Mở trong {name}'
       }
     },
     sidebar: {

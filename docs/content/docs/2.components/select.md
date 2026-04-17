@@ -165,10 +165,6 @@ props:
 ---
 ::
 
-::tip
-Use the `by` prop to compare objects by a field instead of reference when the `model-value` is an object.
-::
-
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections, the selected items will be separated by a comma in the trigger.
@@ -255,6 +251,41 @@ props:
     align: center
     side: bottom
     sideOffset: 8
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
+::note
+These options only apply when `content.position` is `popper` (default).
+::
+
+### Position :badge{label="Soon" class="align-text-top"}
+
+Use the `content.position` prop to control how the Select content is positioned relative to the trigger. Defaults to `popper`, which positions the content like other popovers. Set it to `item-aligned` to align the content with the selected item (similar to a native macOS menu).
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+external:
+  - items
+  - modelValue
+items:
+  content.position:
+    - item-aligned
+    - popper
+props:
+  modelValue: 'Todo'
+  content:
+    position: item-aligned
   items:
     - Backlog
     - Todo
@@ -492,6 +523,7 @@ ignore:
   - items
   - modelValue
   - class
+  - avatar.loading
 external:
   - items
   - modelValue

@@ -14,6 +14,50 @@ describe('ChatPromptSubmit', () => {
     ['with class', { props: { class: '' } }]
   ])
 
+  it('disables the button when status is ready and disabled is true', async () => {
+    const wrapper = await mountSuspended(ChatPromptSubmit, {
+      props: {
+        status: 'ready',
+        disabled: true
+      }
+    })
+
+    expect(wrapper.find('button').attributes('disabled')).toBeDefined()
+  })
+
+  it('does not disable the button when status is streaming even if disabled is true', async () => {
+    const wrapper = await mountSuspended(ChatPromptSubmit, {
+      props: {
+        status: 'streaming',
+        disabled: true
+      }
+    })
+
+    expect(wrapper.find('button').attributes('disabled')).toBeUndefined()
+  })
+
+  it('does not disable the button when status is submitted even if disabled is true', async () => {
+    const wrapper = await mountSuspended(ChatPromptSubmit, {
+      props: {
+        status: 'submitted',
+        disabled: true
+      }
+    })
+
+    expect(wrapper.find('button').attributes('disabled')).toBeUndefined()
+  })
+
+  it('does not disable the button when status is error even if disabled is true', async () => {
+    const wrapper = await mountSuspended(ChatPromptSubmit, {
+      props: {
+        status: 'error',
+        disabled: true
+      }
+    })
+
+    expect(wrapper.find('button').attributes('disabled')).toBeUndefined()
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ChatPromptSubmit, {
       props: {

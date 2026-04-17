@@ -160,7 +160,7 @@ function onClose() {
       tabindex="-1"
       raw
     >
-      <span class="absolute inset-0 " aria-hidden="true" />
+      <span class="absolute inset-0" aria-hidden="true" />
     </ULink>
 
     <UContainer data-slot="container" :class="ui.container({ class: uiProp?.container })">

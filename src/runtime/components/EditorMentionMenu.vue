@@ -20,7 +20,7 @@ export interface EditorMentionMenuItem {
   [key: string]: any
 }
 
-export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = EditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'appendTo' | 'ignoreFilter'>> {
+export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = EditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo' | 'ignoreFilter'>> {
   /**
    * @defaultValue 'md'
    */
@@ -72,6 +72,7 @@ onMounted(async () => {
     ignoreFilter: props.ignoreFilter,
     limit: props.limit,
     options: props.options,
+    suggestion: props.suggestion,
     appendTo: props.appendTo,
     searchTerm,
     ui,

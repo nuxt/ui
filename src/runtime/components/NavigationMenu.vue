@@ -394,6 +394,7 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
     <component
       :is="(orientation === 'vertical' && !collapsed) ? AccordionItem : NavigationMenuItem"
       as="li"
+      v-bind="(orientation === 'vertical' && !collapsed) ? { disabled: !!item.disabled } : {}"
       :value="getItemValue(item, index, level, listIndex)"
     >
       <div v-if="orientation === 'vertical' && item.type === 'label' && !collapsed" data-slot="label" :class="ui.label({ class: [uiProp?.label, item.ui?.label, item.class] })">

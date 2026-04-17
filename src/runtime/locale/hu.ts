@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kód másolása a vágólapra'
+      },
+      prompt: {
+        copy: 'Prompt másolása',
+        openIn: 'Megnyitás: {name}'
       }
     },
     sidebar: {

@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'কোড ক্লিপবোর্ডে কপি করুন'
+      },
+      prompt: {
+        copy: 'প্রম্পট কপি করুন',
+        openIn: '{name}-এ খুলুন'
       }
     },
     sidebar: {

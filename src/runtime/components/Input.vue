@@ -94,11 +94,11 @@ const modelValue = useVModel<InputProps<T, Mod>, 'modelValue', 'update:modelValu
 const appConfig = useAppConfig() as Input['AppConfig']
 const uiProp = useComponentUI('input', props)
 
-const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps<T>>(props, { deferInputValidation: true })
+const { emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps<T>>(props, { deferInputValidation: true })
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps<T>>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
+const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })({
   type: props.type as Input['variants']['type'],

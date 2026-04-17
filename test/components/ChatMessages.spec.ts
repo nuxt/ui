@@ -32,7 +32,8 @@ describe('ChatMessages', () => {
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with indicator slot', { props: { ...props, status: 'submitted' }, slots: { indicator: () => 'Indicator slot' } }],
     ['with viewport slot', { props, slots: { viewport: () => 'Viewport slot' } }],
-    ['with content slot', { props, slots: { content: () => 'Content slot' } }]
+    ['with content slot', { props, slots: { content: () => 'Content slot' } }],
+    ['with files slot', { props, slots: { files: () => 'Files slot' } }]
   ])
 
   it('passes accessibility tests', async () => {

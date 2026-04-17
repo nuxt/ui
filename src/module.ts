@@ -1,8 +1,9 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addPlugin, hasNuxtModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, hasNuxtModule } from '@nuxt/kit'
 import type { HookResult } from '@nuxt/schema'
 import type { ModuleDependencies } from 'nuxt/schema'
 import { addTemplates } from './templates'
+import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
 import { name, version } from '../package.json'
 
@@ -81,11 +82,20 @@ export interface ModuleOptions {
   /**
    * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
    * @defaultValue false
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#prose
+   */
+  prose?: boolean
+
+  /**
+   * @deprecated Use `prose` instead
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#mdc
    */
   mdc?: boolean
+
   /**
    * Force the import of content & prose components even if `@nuxt/content` is not installed
    * @defaultValue false
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#content
    */
   content?: boolean
 
@@ -180,6 +190,7 @@ export default defineNuxtModule<ModuleOptions>({
               'icon': 'ProseIcon',
               'kbd': 'ProseKbd',
               'note': 'ProseNote',
+              'prompt': 'ProsePrompt',
               'steps': 'ProseSteps',
               'tabs': 'ProseTabs',
               'tabs-item': 'ProseTabsItem',
@@ -203,6 +214,8 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme))
 
+    nuxt.options.build.transpile.push('reka-ui')
+
     // Isolate root node from portaled components
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
     nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, `${options.theme?.prefix ? options.theme.prefix + ':' : ''}isolate`].filter(Boolean).join(' ')
@@ -218,7 +231,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
 
-    if (options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
+    if (options.prose || options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
       addComponentsDir({
         path: resolve('./runtime/components/prose'),
         pathPrefix: false,
@@ -253,7 +266,11 @@ export default defineNuxtModule<ModuleOptions>({
       ignore: ['color-mode/**', 'content/**', 'prose/**']
     })
 
-    addImportsDir(resolve('./runtime/composables'))
+    addImports(
+      Object.entries(publicComposables).flatMap(([file, exports]) =>
+        exports.map(name => ({ name, from: resolve(`./runtime/composables/${file}`) }))
+      )
+    )
 
     addTemplates(options, nuxt, resolve)
   }

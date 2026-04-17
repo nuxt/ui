@@ -178,6 +178,33 @@ slots:
 ::
 ```
 
+### Collapsed Code
+
+Use `collapse: true` to collapse the code block (useful for long examples):
+
+```md
+::component-code
+---
+collapse: true
+props:
+  color: neutral
+slots:
+  default: Content
+---
+::
+```
+
+This also works with `::component-example`:
+
+```md
+::component-example
+---
+collapse: true
+name: 'select-fetch-example'
+---
+::
+```
+
 ### Prettier Formatting
 
 For complex props, use prettier:
@@ -312,11 +339,13 @@ Configure icons in your Vite config.
 4. **Document all props** with examples
 5. **Include `class` and `ui` examples** in every component doc
 6. **Link to related components** when relevant
-7. **Mark unreleased features** - When documenting a new feature that has not yet been released, append `:badge{label="Soon" class="align-text-top"}` to the heading. This signals to users that the feature is upcoming. The maintainer will replace `Soon` with the actual version number (e.g., `4.4+`) at release time.
+7. **Mark unreleased features** - When documenting a new feature or fix in a PR, append `:badge{label="Soon" class="align-text-top"}` to the heading. The docs site redeploys as soon as the PR is merged, but the feature only ships in the next npm release — the `Soon` badge bridges that gap so users don't try to use a feature that isn't in their installed version yet. The maintainer will replace `Soon` with the actual version number (e.g., `4.4+`) at release time.
 
 ```md
 ### With chip in items :badge{label="Soon" class="align-text-top"}
 ```
+
+> **Note for PR reviewers (including AI agents):** This badge is expected on new features and fixes. Do not flag it as incorrect or inconsistent with a PR that implements the feature — it is part of the intentional release workflow (docs deploy on merge, feature ships on next release).
 
 ## Categories
 

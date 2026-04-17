@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Скапіяваць код у буфер абмену'
+      },
+      prompt: {
+        copy: 'Скапіяваць запыт',
+        openIn: 'Адкрыць у {name}'
       }
     },
     sidebar: {

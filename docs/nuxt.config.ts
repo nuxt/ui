@@ -107,7 +107,8 @@ export default defineNuxtConfig({
     // v2 redirects
     '/getting-started/theming': { redirect: { to: '/getting-started/theme', statusCode: 301 }, prerender: false },
     '/pro/getting-started/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
-    '/playground': { redirect: { to: '/getting-started/installation/nuxt', statusCode: 301 }, prerender: false },
+    '/play': { redirect: { to: 'https://play.ui.nuxt.com', statusCode: 302 }, prerender: false },
+    '/playground': { redirect: { to: 'https://play.ui.nuxt.com', statusCode: 301 }, prerender: false },
     '/pro/guide/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
     '/pro/prose/**': { redirect: { to: '/getting-started/typography#vue-components', statusCode: 301 }, prerender: false },
     '/components/range': { redirect: { to: '/components/slider', statusCode: 301 }, prerender: false },
@@ -167,6 +168,11 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-01-14',
 
   nitro: {
+    publicAssets: [{
+      dir: resolve('../skills'),
+      baseURL: '/.well-known/skills',
+      maxAge: 60 * 60 * 24
+    }],
     prerender: {
       routes: [
         '/docs/getting-started',
@@ -240,7 +246,9 @@ export default defineNuxtConfig({
       '@nuxt/icon',
       '@nuxt/image',
       '@nuxtjs/color-mode',
+      '@nuxtjs/mcp-toolkit',
       '@nuxtjs/mdc',
+      '@comark/vue',
       'nuxt/dist',
       'nuxt-og-image',
       resolve('./app/components')

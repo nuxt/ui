@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { VNode } from 'vue'
+import type { VNode, MaybeRef } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
@@ -137,11 +137,13 @@ export interface FileUploadSlots<M extends boolean = false> {
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
-import { computed, toRef, watch } from 'vue'
+import { computed, toRef, toRefs, watch } from 'vue'
 import { Primitive, VisuallyHidden } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig, useLocale } from '#imports'
+import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import { useComponentUI } from '../composables/useComponentUI'
+import { useResolvedVariants } from '../composables/useResolvedVariants'
 import { useFormField } from '../composables/useFormField'
 import { useFileUpload } from '../composables/useFileUpload'
 import { tv } from '../utils/tv'
@@ -175,17 +177,20 @@ const { t } = useLocale()
 
 const [DefineFilesTemplate, ReuseFilesTemplate] = createReusableTemplate()
 
+const { accept, multiple, reset } = toRefs(props)
+
 const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
-  accept: props.accept,
-  reset: props.reset,
-  multiple: props.multiple,
+  accept,
+  reset,
+  multiple: multiple as MaybeRef<boolean>,
   dropzone: props.dropzone,
   onUpdate
 })
 const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props)
 
-const variant = computed(() => props.multiple ? 'area' : props.variant)
-const layout = computed(() => props.variant === 'button' && !props.multiple ? 'grid' : props.layout)
+const { variant: resolvedVariant } = useResolvedVariants('fileUpload', props, theme, ['variant'])
+const variant = computed(() => props.multiple ? 'area' : resolvedVariant.value)
+const layout = computed(() => resolvedVariant.value === 'button' && !props.multiple ? 'grid' : props.layout)
 const position = computed(() => {
   if (layout.value === 'grid' && props.multiple) {
     return 'inside'

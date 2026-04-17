@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'คัดลอกโค้ดไปยังคลิปบอร์ด'
+      },
+      prompt: {
+        copy: 'คัดลอกพรอมต์',
+        openIn: 'เปิดใน {name}'
       }
     },
     sidebar: {

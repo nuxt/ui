@@ -1,7 +1,6 @@
 ---
 title: Accordion
 description: 'Create expandable content sections for better information organization.'
-framework: nuxt
 category: components
 links:
   - label: GitHub
