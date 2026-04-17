@@ -72,7 +72,7 @@ export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
 </script>
 
 <script setup lang="ts" generic="T extends ContentTocLink">
-import { computed } from 'vue'
+import { computed, onUnmounted } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useRouter, useAppConfig, useNuxtApp } from '#imports'
@@ -195,13 +195,23 @@ const circuitMaskStyle = computed(() => {
 
 const nuxtApp = useNuxtApp()
 
-nuxtApp.hooks.hook('page:loading:end', () => {
-  const headings = Array.from(document.querySelectorAll('h2, h3'))
+function refreshHeadings() {
+  const flatLinks = flattenLinks(props.links || [])
+  if (!flatLinks.length) {
+    updateHeadings([])
+    return
+  }
+  const selector = flatLinks.map(l => `#${CSS.escape(l.id)}`).join(', ')
+  const headings = Array.from(document.querySelectorAll(selector))
   updateHeadings(headings)
-})
-nuxtApp.hooks.hook('page:transition:finish', () => {
-  const headings = Array.from(document.querySelectorAll('h2, h3'))
-  updateHeadings(headings)
+}
+
+const offLoadingEnd = nuxtApp.hooks.hook('page:loading:end', refreshHeadings)
+const offTransitionFinish = nuxtApp.hooks.hook('page:transition:finish', refreshHeadings)
+
+onUnmounted(() => {
+  offLoadingEnd()
+  offTransitionFinish()
 })
 </script>
 
