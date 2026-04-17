@@ -184,7 +184,7 @@ const portalProps = usePortal(toRef(() => props.portal))
 // Resolve `position` from props > `app.config.ts` `defaultVariants` > hardcoded default,
 // so both the template logic (`isItemAligned`) and the Reka UI primitive see the same value.
 // `tv()` only applies `defaultVariants` to classes, not to runtime logic (see #6360).
-const position = computed(() => props.content?.position ?? (appConfig.ui?.select as any)?.defaultVariants?.position ?? 'popper')
+const position = computed(() => props.content?.position ?? appConfig.ui?.select?.defaultVariants?.position ?? 'popper')
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: position.value }) as SelectContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as SelectArrowProps)
 
