@@ -150,8 +150,11 @@ const to = computed(() => {
   const path = props.to ?? props.href
   if (!path) return path
 
+  // Only localize string paths, leave route objects untouched to preserve state/params
+  if (typeof path !== 'string') return path
+
   // Skip external links and absolute URLs
-  if (props.external || (typeof path === 'string' && hasProtocol(path, { acceptRelative: true }))) {
+  if (props.external || hasProtocol(path, { acceptRelative: true })) {
     return path
   }
 
