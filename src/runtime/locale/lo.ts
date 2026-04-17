@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'ຄັດລອກໂຄ້ດ'
+      },
+      prompt: {
+        copy: 'ຄັດລອກຄຳສັ່ງ',
+        openIn: 'ເປີດໃນ {name}'
       }
     },
     sidebar: {

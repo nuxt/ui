@@ -114,6 +114,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Copy code to clipboard'
+      },
+      prompt: {
+        copy: 'Copy prompt',
+        openIn: 'Open in {name}'
       }
     },
     chatReasoning: {

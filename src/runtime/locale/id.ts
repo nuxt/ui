@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Salin kode ke clipboard'
+      },
+      prompt: {
+        copy: 'Salin prompt',
+        openIn: 'Buka di {name}'
       }
     },
     sidebar: {

@@ -119,6 +119,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: '複製程式碼到剪貼簿'
+      },
+      prompt: {
+        copy: '複製提示詞',
+        openIn: '在 {name} 中開啟'
       }
     },
     sidebar: {
