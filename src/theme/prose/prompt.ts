@@ -4,6 +4,6 @@ export default {
     icon: 'size-4 shrink-0 text-highlighted',
     content: 'flex-1 min-w-0',
     description: 'text-sm/6 text-default font-medium',
-    actions: 'flex items-center shrink-0 gap-1'
+    actions: 'flex items-center shrink-0 gap-1.5'
   }
 }

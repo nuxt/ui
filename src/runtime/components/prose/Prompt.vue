@@ -9,6 +9,9 @@ type ProsePrompt = ComponentConfig<typeof theme, AppConfig, 'prompt', 'ui.prose'
 
 export interface ProsePromptProps {
   description?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: IconProps['name']
   /**
    * @defaultValue '["copy"]'
