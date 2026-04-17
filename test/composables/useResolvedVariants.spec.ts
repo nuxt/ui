@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { defineComponent, reactive, nextTick } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { useResolvedVariants } from '../../src/runtime/composables/useResolvedVariants'
+import { useAppConfig } from '#imports'
 
 const theme = {
   defaultVariants: {
@@ -26,7 +27,25 @@ describe('useResolvedVariants', () => {
     expect(variant.value).toBe('card')
   })
 
-  it('falls back to theme defaultVariants when prop is undefined', async () => {
+  it('falls back to appConfig defaultVariants over theme when prop is undefined', async () => {
+    let variant: any
+
+    const component = defineComponent({
+      setup() {
+        const appConfig = useAppConfig() as any
+        appConfig.ui = { ...appConfig.ui, _testAppConfig: { defaultVariants: { variant: 'card' } } }
+
+        const props = reactive({ variant: undefined as string | undefined })
+        ;({ variant } = useResolvedVariants('_testAppConfig', props, theme, ['variant']))
+        return () => null
+      }
+    })
+
+    await mountSuspended(component)
+    expect(variant.value).toBe('card')
+  })
+
+  it('falls back to theme defaultVariants when prop and appConfig are undefined', async () => {
     let variant: any
 
     const component = defineComponent({
@@ -39,6 +58,24 @@ describe('useResolvedVariants', () => {
 
     await mountSuspended(component)
     expect(variant.value).toBe('list')
+  })
+
+  it('prop takes precedence over appConfig defaultVariants', async () => {
+    let variant: any
+
+    const component = defineComponent({
+      setup() {
+        const appConfig = useAppConfig() as any
+        appConfig.ui = { ...appConfig.ui, _testPropPrecedence: { defaultVariants: { variant: 'table' } } }
+
+        const props = reactive({ variant: 'card' })
+        ;({ variant } = useResolvedVariants('_testPropPrecedence', props, theme, ['variant']))
+        return () => null
+      }
+    })
+
+    await mountSuspended(component)
+    expect(variant.value).toBe('card')
   })
 
   it('is reactive to prop changes', async () => {
