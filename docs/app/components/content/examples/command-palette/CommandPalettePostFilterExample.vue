@@ -16,8 +16,8 @@ const items = [
     level: 3
   },
   {
-    id: '/docs/getting-started#tailwind-css-v4',
-    label: 'Tailwind CSS v4',
+    id: '/docs/getting-started#tailwind-css',
+    label: 'Tailwind CSS',
     level: 3
   },
   {

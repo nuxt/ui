@@ -6,6 +6,9 @@ links:
   - label: Combobox
     icon: i-custom-reka-ui
     to: https://reka-ui.com/docs/components/combobox
+  - label: Autocomplete
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/autocomplete
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputMenu.vue
@@ -156,6 +159,10 @@ props:
 ---
 ::
 
+::tip
+Use the `by` prop to compare objects by a field instead of reference when the `model-value` is an object.
+::
+
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections, the selected items will be displayed as tags.
@@ -246,6 +253,24 @@ props:
     - In Progress
     - Done
 ---
+::
+
+### Autocomplete :badge{label="4.6+" class="align-text-top"}
+
+Use the `autocomplete` prop to turn the InputMenu into a free-form text input with suggestions. The `modelValue` becomes the input text (`string`) instead of a selected item.
+
+::component-example
+---
+name: 'input-menu-autocomplete-example'
+---
+::
+
+::caution
+When `autocomplete` is `true`, `multiple`, `by`, `resetSearchTermOnSelect` and `resetModelValueOnClear` are not applicable.
+::
+
+::tip
+Use the `content.hideWhenEmpty` prop to hide the menu when there are no matching suggestions.
 ::
 
 ### Content
@@ -488,9 +513,9 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
-### Avatar
+### Clear :badge{label="4.4+" class="align-text-top"}
 
-Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the InputMenu.
+Use the `clear` prop to display a clear button when a value is selected.
 
 ::component-code
 ---
@@ -501,10 +526,81 @@ ignore:
 external:
   - items
   - modelValue
+items:
+  clear:
+    - true
+    - false
+props:
+  modelValue: 'Backlog'
+  clear: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+### Clear Icon :badge{label="4.4+" class="align-text-top"}
+
+Use the `clear-icon` prop to customize the clear button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+external:
+  - items
+  - modelValue
+items:
+  clear:
+    - true
+    - false
+props:
+  modelValue: 'Backlog'
+  clear: true
+  clearIcon: 'i-lucide-trash'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
+::
+
+### Avatar
+
+Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the InputMenu.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - avatar.loading
+external:
+  - items
+  - modelValue
 props:
   modelValue: 'Nuxt'
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   items:
     - Nuxt
     - NuxtHub
@@ -756,6 +852,10 @@ name: 'input-menu-fetch-example'
 ---
 ::
 
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the menu opens, avoiding unnecessary API calls on page load.
+::
+
 ### With ignore filter
 
 Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
@@ -768,7 +868,7 @@ name: 'input-menu-ignore-filter-example'
 ::
 
 ::note
-This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls. The fetch is deferred with `immediate: false` so no request is made until the menu opens.
 ::
 
 ### With filter fields
@@ -780,6 +880,10 @@ Use the `filter-fields` prop with an array of fields to filter on. Defaults to `
 collapse: true
 name: 'input-menu-filter-fields-example'
 ---
+::
+
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the menu opens, avoiding unnecessary API calls on page load.
 ::
 
 ### With virtualization :badge{label="4.1+" class="align-text-top"}
@@ -795,6 +899,26 @@ When enabled, all groups are flattened into a single list due to a limitation of
 prettier: true
 name: 'input-menu-virtualize-example'
 ---
+::
+
+### With infinite scroll :badge{label="4.4+" class="align-text-top"}
+
+You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
+
+::component-example
+---
+prettier: true
+collapse: true
+highlights:
+  - 41
+  - 51
+overflowHidden: true
+name: 'input-menu-infinite-scroll-example'
+---
+::
+
+::note
+This example uses `useLazyFetch` with `immediate: false` so data is only loaded as the user scrolls.
 ::
 
 ### With full content width
@@ -824,15 +948,19 @@ export default defineAppConfig({
 ```
 ::
 
-### As a CountryPicker
+### As a country picker
 
-This example demonstrates using the InputMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
+You can use the InputMenu as a country picker with lazy loading. Countries are only fetched when the menu is first opened.
 
 ::component-example
 ---
 collapse: true
 name: 'input-menu-countries-example'
 ---
+::
+
+::note
+This example uses `useLazyFetch` with `immediate: false` to only load countries when the menu is first opened.
 ::
 
 ## API
@@ -860,6 +988,7 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
+| `viewportRef`{lang="ts-type"} | `Ref<HTMLDivElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

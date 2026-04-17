@@ -5,8 +5,12 @@ import { upperFirst } from 'scule'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
 import { TextAlign } from '@tiptap/extension-text-align'
-import { ImageUpload } from './EditorImageUpload'
+import { CodeBlockShiki } from 'tiptap-extension-code-block-shiki'
+import { ImageUpload } from './EditorImageUploadExtension'
+import { useEditorCompletion } from './EditorUseCompletion'
 import EditorLinkPopover from './EditorLinkPopover.vue'
+
+const editorRef = useTemplateRef('editorRef')
 
 const value = ref(`# Building Modern Interfaces with Nuxt UI
 
@@ -41,7 +45,7 @@ Try out these powerful capabilities:
 
 Perfect for technical documentation:
 
-\`\`\`
+\`\`\`vue
 <template>
   <UEditor v-model="value" content-type="markdown" />
 </template>
@@ -51,13 +55,16 @@ Perfect for technical documentation:
 
 Whether you're building a blog, documentation site, or content management system, the Nuxt UI Editor provides everything you need for a professional editing experience. Visit [ui.nuxt.com](https://ui.nuxt.com) to explore more components.`)
 
+const { extension: completionExtension, handlers: aiHandlers, isLoading: aiLoading } = useEditorCompletion(editorRef)
+
 const customHandlers = {
   imageUpload: {
     canExecute: (editor: Editor) => editor.can().insertContent({ type: 'imageUpload' }),
     execute: (editor: Editor) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
     isActive: (editor: Editor) => editor.isActive('imageUpload'),
     isDisabled: undefined
-  }
+  },
+  ...aiHandlers
 } satisfies EditorCustomHandlers
 
 const fixedToolbarItems = [[{
@@ -179,7 +186,61 @@ const fixedToolbarItems = [[{
   }]
 }]] satisfies EditorToolbarItem<typeof customHandlers>[][]
 
-const bubbleToolbarItems = [[{
+const bubbleToolbarItems = computed(() => [[{
+  icon: 'i-lucide-sparkles',
+  label: 'Improve',
+  activeColor: 'neutral',
+  activeVariant: 'ghost',
+  loading: aiLoading.value,
+  content: {
+    align: 'start'
+  },
+  items: [{
+    kind: 'aiFix',
+    icon: 'i-lucide-spell-check',
+    label: 'Fix spelling & grammar'
+  }, {
+    kind: 'aiExtend',
+    icon: 'i-lucide-unfold-vertical',
+    label: 'Extend text'
+  }, {
+    kind: 'aiReduce',
+    icon: 'i-lucide-fold-vertical',
+    label: 'Reduce text'
+  }, {
+    kind: 'aiSimplify',
+    icon: 'i-lucide-lightbulb',
+    label: 'Simplify text'
+  }, {
+    kind: 'aiContinue',
+    icon: 'i-lucide-text',
+    label: 'Continue sentence'
+  }, {
+    kind: 'aiSummarize',
+    icon: 'i-lucide-list',
+    label: 'Summarize'
+  }, {
+    icon: 'i-lucide-languages',
+    label: 'Translate',
+    children: [{
+      kind: 'aiTranslate',
+      language: 'English',
+      label: 'English'
+    }, {
+      kind: 'aiTranslate',
+      language: 'French',
+      label: 'French'
+    }, {
+      kind: 'aiTranslate',
+      language: 'Spanish',
+      label: 'Spanish'
+    }, {
+      kind: 'aiTranslate',
+      language: 'German',
+      label: 'German'
+    }]
+  }]
+}], [{
   label: 'Turn into',
   trailingIcon: 'i-lucide-chevron-down',
   activeColor: 'neutral',
@@ -294,7 +355,7 @@ const bubbleToolbarItems = [[{
     icon: 'i-lucide-align-justify',
     label: 'Align Justify'
   }]
-}]] satisfies EditorToolbarItem<typeof customHandlers>[][]
+}]] satisfies EditorToolbarItem<typeof customHandlers>[][])
 
 const imageToolbarItems = (editor: Editor): EditorToolbarItem[][] => {
   const node = editor.state.doc.nodeAt(editor.state.selection.from)
@@ -413,6 +474,13 @@ const handleItems = (editor: Editor): DropdownMenuItem[][] => {
 
 const suggestionItems = [[{
   type: 'label',
+  label: 'AI'
+}, {
+  kind: 'aiContinue',
+  label: 'Continue writing',
+  icon: 'i-lucide-sparkles'
+}], [{
+  type: 'label',
   label: 'Style'
 }, {
   kind: 'paragraph',
@@ -472,25 +540,25 @@ const suggestionItems = [[{
 
 const mentionItems: EditorMentionMenuItem[] = [{
   label: 'benjamincanac',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4', loading: 'lazy' as const }
 }, {
   label: 'HugoRCD',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/71938701?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/71938701?v=4', loading: 'lazy' as const }
 }, {
   label: 'romhml',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/25613751?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/25613751?v=4', loading: 'lazy' as const }
 }, {
   label: 'sandros94',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/13056429?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/13056429?v=4', loading: 'lazy' as const }
 }, {
   label: 'hywax',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/149865959?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/149865959?v=4', loading: 'lazy' as const }
 }, {
   label: 'J-Michalek',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/71264422?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/71264422?v=4', loading: 'lazy' as const }
 }, {
   label: 'genu',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/928780?v=4' }
+  avatar: { src: 'https://avatars.githubusercontent.com/u/928780?v=4', loading: 'lazy' as const }
 }]
 
 const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.name.startsWith('regional_indicator_'))
@@ -498,13 +566,22 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
 
 <template>
   <UEditor
+    ref="editorRef"
     v-slot="{ editor, handlers }"
     v-model="value"
     content-type="markdown"
     :extensions="[
       Emoji,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
-      ImageUpload
+      ImageUpload,
+      CodeBlockShiki.configure({
+        defaultTheme: 'material-theme',
+        themes: {
+          light: 'material-theme-lighter',
+          dark: 'material-theme-palenight'
+        }
+      }),
+      completionExtension
     ]"
     :handlers="customHandlers"
     placeholder="Write, type '/' for commands..."
@@ -543,6 +620,12 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
       }"
     />
 
+    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
+
+    <UEditorMentionMenu :editor="editor" :items="mentionItems" />
+
+    <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
+
     <UEditorDragHandle v-slot="{ ui, onClick }" :editor="editor" @node-change="selectedNode = $event">
       <UButton
         icon="i-lucide-plus"
@@ -577,9 +660,13 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
         />
       </UDropdownMenu>
     </UEditorDragHandle>
-
-    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
-    <UEditorMentionMenu :editor="editor" :items="mentionItems" />
-    <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
   </UEditor>
 </template>
+
+<style>
+html.dark .tiptap .shiki,
+html.dark .tiptap .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--ui-bg-muted) !important;
+}
+</style>

@@ -25,6 +25,7 @@ authors:
     description: antfu7
     avatar:
       src: https://github.com/antfu.png
+      loading: lazy
     to: https://github.com/antfu
     target: _blank
 to: 'https://nuxt.com/blog/nuxt-icon-v1-0'
@@ -36,7 +37,7 @@ class: 'w-96'
 ::
 
 ::tip{to="/docs/components/blog-posts"}
-Use the [`BlogPosts`](/docs/components/blog-posts) component to display multiple blog posts in a responsive grid layout.
+Use the `BlogPosts` component to display multiple blog posts in a responsive grid layout.
 ::
 
 ### Title
@@ -186,6 +187,8 @@ hide:
   - class
 external:
   - authors
+externalTypes:
+  - UserProps[]
 ignore:
   - title
   - description
@@ -202,6 +205,7 @@ props:
       description: antfu7
       avatar:
         src: https://github.com/antfu.png
+        loading: lazy
       to: https://github.com/antfu
       target: _blank
   class: 'w-96'
@@ -217,6 +221,8 @@ hide:
   - class
 external:
   - authors
+externalTypes:
+  - UserProps[]
 ignore:
   - title
   - description
@@ -233,12 +239,14 @@ props:
       description: antfu7
       avatar:
         src: https://github.com/antfu.png
+        loading: lazy
       to: https://github.com/antfu
       target: _blank
     - name: Benjamin Canac
       description: benjamincanac
       avatar:
         src: https://github.com/benjamincanac.png
+        loading: lazy
       to: https://github.com/benjamincanac
       target: _blank
   class: 'w-96'

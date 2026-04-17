@@ -1,0 +1,9 @@
+seo:
+  title: Blog
+  description: Tutorials, guides, and insights to help you build beautiful applications with Nuxt UI.
+title: Blog
+description: Tutorials, guides, and insights to help you build beautiful applications with Nuxt UI.
+hero:
+  title: Nuxt [UI]{.text-primary} Blog
+  description: Tutorials, guides, and insights to help you build beautiful applications with Nuxt UI.
+navigation: false

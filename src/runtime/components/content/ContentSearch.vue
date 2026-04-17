@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
@@ -36,6 +37,10 @@ export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPal
 }
 
 export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+  /**
+   * @defaultValue 'md'
+   */
+  size?: ContentSearch['variants']['size']
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
@@ -98,8 +103,8 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   ui?: ContentSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>['ui']
 }
 
-export type ContentSearchSlots = CommandPaletteSlots<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem> & {
-  content(props: { close: () => void }): any
+export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
+  content?(props: { close: () => void }): VNode[]
 }
 
 </script>
@@ -110,6 +115,7 @@ import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
 import { omit, transformUI } from '../../utils'
@@ -132,8 +138,9 @@ const { open, mapNavigationItems, postFilter } = useContentSearch()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
+const uiProp = useComponentUI('contentSearch', props)
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
+const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
 
 const getProxySlots = () => omit(slots, ['content'])
@@ -145,6 +152,7 @@ const fuse = computed(() => defu({}, props.fuse, {
 } as UseFuseOptions<T>))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })({
+  size: props.size,
   fullscreen: props.fullscreen
 }))
 
@@ -268,7 +276,7 @@ defineExpose({
     :description="description || t('contentSearch.description')"
     v-bind="modalProps"
     data-slot="modal"
-    :class="ui.modal({ class: [props.ui?.modal, props.class] })"
+    :class="ui.modal({ class: [uiProp?.modal, props.class] })"
   >
     <template #content="contentData">
       <slot name="content" v-bind="contentData">
@@ -278,7 +286,8 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :ui="transformUI(omit(ui, ['modal']), props.ui)"
+          :input="{ fixed: true }"
+          :ui="transformUI(omit(ui, ['modal']), uiProp)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >

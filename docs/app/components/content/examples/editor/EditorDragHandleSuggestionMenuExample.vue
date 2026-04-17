@@ -34,6 +34,8 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
     class="w-full min-h-35"
     :ui="{ base: 'p-8 sm:px-16' }"
   >
+    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
+
     <UEditorDragHandle v-slot="{ ui, onClick }" :editor="editor">
       <UButton
         icon="i-lucide-plus"
@@ -57,7 +59,5 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
         :class="ui.handle()"
       />
     </UEditorDragHandle>
-
-    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
   </UEditor>
 </template>

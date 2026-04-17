@@ -1138,8 +1138,7 @@ exports[`CheckboxGroup > renders with valueKey correctly 1`] = `
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
     <!--v-if-->
     <div data-slot="root" class="relative flex items-start flex-row">
-      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0:Option 1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
-          <!---->
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0:Option 1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><span class="iconify i-lucide:check shrink-0 size-full" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
       <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0:Option 1" data-slot="label" class="block font-medium text-default">Option 1</label>

@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Editor } from '@tiptap/vue-3'
 import type { BubbleMenuPluginProps } from '@tiptap/extension-bubble-menu'
@@ -83,13 +84,13 @@ type SlotPropsProps = {
   isDisabled: (item: EditorToolbarItem) => boolean
   onClick: (e: MouseEvent, item: EditorToolbarItem) => void
 }
-type SlotProps<T extends EditorToolbarItem> = (props: { item: T } & SlotPropsProps) => any
+type SlotProps<T extends EditorToolbarItem> = (props: { item: T } & SlotPropsProps) => VNode[]
 
 export type EditorToolbarSlots<
   A extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  item: SlotProps<T>
+  item?: SlotProps<T>
 } & DynamicSlots<MergeTypes<T>, undefined, SlotPropsProps>
 
 </script>
@@ -101,6 +102,7 @@ import { defu } from 'defu'
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { isArrayOfArray, pick, omit } from '../utils'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
@@ -121,6 +123,7 @@ const props = withDefaults(defineProps<EditorToolbarProps<T>>(), {
 defineSlots<EditorToolbarSlots<T>>()
 
 const appConfig = useAppConfig() as EditorToolbar['AppConfig']
+const uiProp = useComponentUI('editorToolbar', props)
 
 const handlers = inject('editorHandlers', computed(() => createHandlers()))
 
@@ -143,11 +146,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorToolba
   layout: props.layout
 }))
 
-const groups = computed<EditorToolbarItem[][]>(() =>
+const groups = computed(() =>
   props.items?.length
     ? isArrayOfArray(props.items)
       ? props.items
-      : [props.items]
+      : [props.items as NestedItem<T>[]]
     : []
 )
 
@@ -178,13 +181,14 @@ function isDisabled(item: EditorToolbarItem): boolean {
 
   if ('items' in item && item.items?.length) {
     const items = isArrayOfArray(item.items) ? item.items.flat() : item.items
-    const itemItems = items.filter((item): item is EditorToolbarItem => 'kind' in item)
+    // Filter out structural elements (separators, labels)
+    const actionableItems = items.filter((item: any) => item.type !== 'separator' && item.type !== 'label')
 
-    if (itemItems.length === 0) {
+    if (actionableItems.length === 0) {
       return true
     }
 
-    return itemItems.every(item => isDisabled(item))
+    return actionableItems.every((item: any) => isDisabled(item))
   }
 
   if (!('kind' in item)) {
@@ -241,7 +245,7 @@ function getActiveChildItem(item: EditorToolbarDropdownItem): EditorToolbarItem 
 }
 
 function getButtonProps(item: EditorToolbarItem) {
-  const baseProps = omit(item as any, ['kind', 'mark', 'align', 'level', 'href', 'src', 'pos', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'tooltip'])
+  const baseProps = omit(item as any, ['kind', 'mark', 'align', 'level', 'href', 'src', 'pos', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'tooltip', 'onClick'])
 
   // For dropdown items, use the active child's icon if available
   if ('items' in item && item.items?.length) {
@@ -264,25 +268,32 @@ function getButtonProps(item: EditorToolbarItem) {
 }
 
 function getDropdownProps(item: EditorToolbarDropdownItem) {
-  const baseProps = pick(item as any, ['checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'ui'])
+  const baseProps = pick(item as any, ['size', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'ui'])
 
   return defu(baseProps, {
-    modal: false
+    modal: false,
+    size: props.size
   })
 }
 
-function mapDropdownItem(item: EditorToolbarDropdownChildItem) {
-  // If it's a separator or label (no 'kind' property), return as is
+function mapDropdownItem(item: EditorToolbarDropdownChildItem): DropdownMenuItem {
+  // Recursively map children if present
+  const children = 'children' in item && Array.isArray(item.children)
+    ? item.children.map(mapDropdownItem)
+    : undefined
+
+  // If it's a separator or label (no 'kind' property), return with mapped children
   if (!('kind' in item)) {
-    return item
+    return children ? { ...item, children } : item
   }
 
   const editorToolbarItem = item as EditorToolbarDropdownChildItem
   return {
     ...editorToolbarItem,
+    ...(children && { children }),
     active: isActive(editorToolbarItem),
     disabled: isDisabled(editorToolbarItem),
-    onClick: (e: MouseEvent) => onClick(e, editorToolbarItem)
+    onSelect: (e: Event) => onClick(e as MouseEvent, editorToolbarItem)
   }
 }
 
@@ -303,7 +314,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
     v-bind="Component !== 'template' ? {
       editor,
       tabindex: -1,
-      class: ui.root({ class: props.ui?.root }),
+      class: ui.root({ class: uiProp?.root }),
       ...rootProps,
       options,
       ...$attrs
@@ -311,9 +322,9 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
       ...$attrs
     }"
   >
-    <Primitive :as="as" role="toolbar" data-slot="base" :class="ui.base({ class: [props.ui?.base, props.class] })">
+    <Primitive :as="as" role="toolbar" data-slot="base" :class="ui.base({ class: [uiProp?.base, props.class] })">
       <template v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`">
-        <div role="group" data-slot="group" :class="ui.group({ class: props.ui?.group })">
+        <div role="group" data-slot="group" :class="ui.group({ class: uiProp?.group })">
           <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
             <slot
               :name="((item.slot || 'item') as keyof EditorToolbarSlots<T>)"
@@ -329,10 +340,10 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
                 :items="getDropdownItems(item as EditorToolbarDropdownItem)"
               >
                 <UTooltip v-if="item.tooltip" :disabled="isDisabled(item)" v-bind="{ ...(item.tooltip || {}) }">
-                  <UButton :active="isActive(item)" :disabled="isDisabled(item)" v-bind="getButtonProps(item)" />
+                  <UButton :active="isActive(item)" :disabled="isDisabled(item)" v-bind="getButtonProps(item)" @click="onClick($event, item)" />
                 </UTooltip>
 
-                <UButton v-else :active="isActive(item)" :disabled="isDisabled(item)" v-bind="getButtonProps(item)" />
+                <UButton v-else :active="isActive(item)" :disabled="isDisabled(item)" v-bind="getButtonProps(item)" @click="onClick($event, item)" />
               </UDropdownMenu>
 
               <UTooltip v-else-if="item.tooltip" :disabled="isDisabled(item)" v-bind="{ ...(item.tooltip || {}) }">
@@ -360,7 +371,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
         <Separator
           v-if="groupIndex < groups.length - 1"
           data-slot="separator"
-          :class="ui.separator({ class: props.ui?.separator })"
+          :class="ui.separator({ class: uiProp?.separator })"
           orientation="vertical"
         />
       </template>

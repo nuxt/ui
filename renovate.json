@@ -2,16 +2,15 @@
   "extends": [
     "github>nuxt/renovate-config-nuxt"
   ],
+  "timezone": "Europe/Paris",
+  "schedule": ["* 6-9 * * 1"],
   "lockFileMaintenance": {
     "enabled": true
   },
   "baseBranchPatterns": [
-    "v2",
-    "v3",
     "v4"
   ],
   "ignoreDeps": [
-    "typescript",
     "actions/stale"
   ],
   "packageRules": [
@@ -33,21 +32,7 @@
     {
       "groupName": "tiptap",
       "matchPackageNames": [
-        "@tiptap/core",
-        "@tiptap/extension-bubble-menu",
-        "@tiptap/extension-drag-handle-vue-3",
-        "@tiptap/extension-emoji",
-        "@tiptap/extension-floating-menu",
-        "@tiptap/extension-horizontal-rule",
-        "@tiptap/extension-image",
-        "@tiptap/extension-mention",
-        "@tiptap/extension-placeholder",
-        "@tiptap/extension-text-align",
-        "@tiptap/markdown",
-        "@tiptap/pm",
-        "@tiptap/starter-kit",
-        "@tiptap/suggestion",
-        "@tiptap/vue-3"
+        "@tiptap/*"
       ]
     },
     {

@@ -3,10 +3,6 @@ title: ChatMessages
 description: 'Display a list of chat messages, designed to work seamlessly with Vercel AI SDK.'
 category: chat
 links:
-  - label: AI SDK
-    icon: i-simple-icons-vercel
-    to: https://sdk.vercel.ai/
-    target: _blank
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ChatMessages.vue
@@ -107,7 +103,7 @@ props:
 ::
 
 ::note
-Here's the detail of the different statuses from the AI SDK v5 Chat class:
+Here's the detail of the different statuses from the AI SDK Chat class:
 
 - `submitted`: The message has been sent to the API and we're awaiting the start of the response stream.
 - `streaming`: The response is actively streaming in from the API, receiving chunks of data.
@@ -130,6 +126,7 @@ external:
 ignore:
   - messages
   - avatar.src
+  - avatar.loading
 hide:
   - shouldScrollToBottom
 collapse: true
@@ -150,6 +147,7 @@ props:
     variant: solid
     avatar:
       src: https://github.com/benjamincanac.png
+      loading: lazy
   messages:
     - id: '6045235a-a435-46b8-989d-2df38ca2eb47'
       role: user
@@ -386,79 +384,21 @@ Use the `should-scroll-to-bottom` prop to enable/disable bottom auto scroll when
 
 ## Examples
 
-::note{to="https://ai-sdk.dev/docs/getting-started/nuxt" target="_blank"}
-These chat components are designed to be used with the **AI SDK v5** from **Vercel AI SDK**.
-::
-
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/chat" target="_blank"}
-Check out the source code of our **AI Chat template** on GitHub for a real-life example.
-::
-
-### Within a page
-
-Use the ChatMessages component with the `Chat` class from AI SDK v5 to display a list of chat messages within a page.
-
-Pass the `messages` prop alongside the `status` prop that will be used for the auto scroll and the indicator display.
-
-```vue [pages/\[id\\].vue] {2,7-11,24,28}
-<script setup lang="ts">
-import { Chat } from '@ai-sdk/vue'
-import { getTextFromMessage } from '@nuxt/ui/utils/ai'
-
-const input = ref('')
-
-const chat = new Chat({
-  onError(error) {
-    console.error(error)
-  }
-})
-
-function onSubmit() {
-  chat.sendMessage({ text: input.value })
-
-  input.value = ''
-}
-</script>
-
-<template>
-  <UDashboardPanel>
-    <template #body>
-      <UContainer>
-        <UChatMessages :messages="chat.messages" :status="chat.status">
-          <template #content="{ message }">
-            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" class="*:first:mt-0 *:last:mb-0" />
-          </template>
-        </UChatMessages>
-      </UContainer>
-    </template>
-
-    <template #footer>
-      <UContainer class="pb-4 sm:pb-6">
-        <UChatPrompt v-model="input" :error="chat.error" @submit="onSubmit">
-          <UChatPromptSubmit :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
-        </UChatPrompt>
-      </UContainer>
-    </template>
-  </UDashboardPanel>
-</template>
-```
-
-::note
-In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) to render the content of the message. The `getTextFromMessage` utility extracts the text content from the AI SDK V5 message parts. As Nuxt UI provides pre-styled prose components, your content will be automatically styled.
+::tip{to="/docs/components/chat"}
+Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
 ### With indicator slot
 
-You can customize the loading indicator that appears when the status is `submitted`.
+Use the `#indicator` slot to customize the loading indicator with a [`ChatShimmer`](/docs/components/chat-shimmer) effect.
 
 ::component-example
 ---
-name: "chat-messages-indicator-slot-example"
+name: 'chat-messages-indicator-slot-example'
 class: 'overflow-y-auto'
 collapse: true
 ---
 ::
-
 
 ## API
 
@@ -473,15 +413,22 @@ collapse: true
 ::tip
 You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
 
-```vue{7-9}
+```vue{7-15}
 <script setup lang="ts">
-import { getTextFromMessage } from '@nuxt/ui/utils/ai'
+import { isTextUIPart } from 'ai'
 </script>
 
 <template>
   <UChatMessages :messages="messages" :status="status">
     <template #content="{ message }">
-      <MDC :value="getTextFromMessage(message)" :cache-key="message.id" class="*:first:mt-0 *:last:mb-0" />
+      <template
+        v-for="(part, index) in message.parts"
+        :key="`${message.id}-${part.type}-${index}`"
+      >
+        <p v-if="isTextUIPart(part)" class="whitespace-pre-wrap">
+          {{ part.text }}
+        </p>
+      </template>
     </template>
   </UChatMessages>
 </template>

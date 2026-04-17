@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/tabs'
 import type { TabsProps } from '../../types'
@@ -25,13 +26,14 @@ export interface ProseTabsProps {
 }
 
 export interface ProseTabsSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed, watch, onMounted, ref, onBeforeUpdate } from 'vue'
 import { useState, useAppConfig } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
 import UTabs from '../Tabs.vue'
@@ -44,6 +46,7 @@ const slots = defineSlots<ProseTabsSlots>()
 const model = defineModel<string>()
 
 const appConfig = useAppConfig() as ProseTabs['AppConfig']
+const uiProp = useComponentUI('prose.tabs', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.tabs || {}) }))
@@ -115,7 +118,7 @@ onBeforeUpdate(() => rerenderCount.value++)
     :items="items"
     :class="props.class"
     :unmount-on-hide="false"
-    :ui="transformUI(ui(), props.ui)"
+    :ui="transformUI(ui(), uiProp)"
     @update:model-value="onUpdateModelValue"
   >
     <template #content="{ item }">

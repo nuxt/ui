@@ -1,7 +1,6 @@
 ---
 title: Collapsible
 description: 'Toggle content visibility with smooth expand and collapse animations.'
-framework: nuxt
 category: components
 links:
   - label: GitHub

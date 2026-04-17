@@ -1,15 +1,14 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Card from '../../src/runtime/components/Card.vue'
-import type { CardProps, CardSlots } from '../../src/runtime/components/Card.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/card'
 
 describe('Card', () => {
   const variants = Object.keys(theme.variants.variant) as any
 
-  it.each([
+  renderEach(Card, [
     // Props
     ['with as', { props: { as: 'section' } }],
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
@@ -19,10 +18,7 @@ describe('Card', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with header slot', { slots: { header: () => 'Header slot' } }],
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CardProps, slots?: Partial<CardSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Card)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Card)

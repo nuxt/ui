@@ -1,16 +1,15 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Badge from '../../src/runtime/components/Badge.vue'
-import type { BadgeProps, BadgeSlots } from '../../src/runtime/components/Badge.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/badge'
 
 describe('Badge', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
 
-  it.each([
+  renderEach(Badge, [
     // Props
     ['with label', { props: { label: 'Badge' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Badge', size } }]),
@@ -32,10 +31,7 @@ describe('Badge', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BadgeProps, slots?: Partial<BadgeSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Badge)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Badge, {

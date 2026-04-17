@@ -101,24 +101,25 @@ export function createLinkHandler() {
     execute: (editor: Editor, cmd: any) => {
       const chain = editor.chain()
       const previousUrl = editor.getAttributes('link').href
+      const hasCode = editor.isActive('code')
 
       // If link is already active, unset it
       if (previousUrl) {
         return chain.focus().unsetLink()
       }
 
-      // If href is provided in cmd, use it
-      if (cmd?.href) {
-        return chain.focus().setLink({ href: cmd.href })
+      // If href is provided in cmd, use it, otherwise prompt
+      const href = cmd?.href || prompt('Enter the URL:')
+      if (!href) {
+        return chain
       }
 
-      // Otherwise prompt for URL
-      const href = prompt('Enter the URL:')
-      if (href) {
-        return chain.focus().setLink({ href })
+      // When linking code, extend the code mark range first to select the full code
+      if (hasCode) {
+        return chain.focus().extendMarkRange('code').setLink({ href })
       }
 
-      return chain
+      return chain.focus().setLink({ href })
     },
     isActive: (editor: Editor) => editor.isActive('link'),
     isDisabled: (editor: Editor) => {
@@ -160,12 +161,21 @@ export function createImageHandler() {
   }
 }
 
-export function createListHandler(listType: 'bulletList' | 'orderedList') {
-  const fnName = listType === 'bulletList' ? 'toggleBulletList' : 'toggleOrderedList'
+export function createListHandler(listType: 'bulletList' | 'orderedList' | 'taskList') {
+  const fnNameMap = {
+    bulletList: 'toggleBulletList',
+    orderedList: 'toggleOrderedList',
+    taskList: 'toggleTaskList'
+  } as const
+  const fnName = fnNameMap[listType]
+  const listItemType = listType === 'taskList' ? 'taskItem' : 'listItem'
+  const allListTypes = ['bulletList', 'orderedList', 'taskList'] as const
 
   return {
     canExecute: (editor: Editor) => {
-      return (editor.can() as any)[fnName]() || editor.isActive('bulletList') || editor.isActive('orderedList')
+      return (editor.can() as any)[fnName]()
+        || editor.isActive('listItem')
+        || allListTypes.some(type => isExtensionAvailable(editor, type) && editor.isActive(type))
     },
     execute: (editor: Editor) => {
       const { state } = editor
@@ -189,19 +199,38 @@ export function createListHandler(listType: 'bulletList' | 'orderedList') {
       }
 
       if (editor.isActive(listType)) {
-        // Unwrap list
-        return chain
-          .liftListItem('listItem')
-          .lift('bulletList')
-          .lift('orderedList')
-          .selectTextblockEnd()
+        let result = chain.liftListItem(listItemType)
+        for (const type of allListTypes) {
+          if (isExtensionAvailable(editor, type)) {
+            result = result.lift(type)
+          }
+        }
+        return result.selectTextblockEnd()
+      }
+
+      // Check if a different list type is active and convert
+      if (allListTypes.some(type => isExtensionAvailable(editor, type) && editor.isActive(type))) {
+        const currentListItemType = editor.isActive('taskList') ? 'taskItem' : 'listItem'
+        let unwrapped = chain.liftListItem(currentListItemType)
+        for (const type of allListTypes) {
+          if (isExtensionAvailable(editor, type)) {
+            unwrapped = unwrapped.lift(type)
+          }
+        }
+        return (unwrapped as any)[fnName]().selectTextblockEnd()
       }
 
       // Wrap in list and normalize selection
       return (chain as any)[fnName]().selectTextblockEnd()
     },
     isActive: (editor: Editor) => editor.isActive(listType),
-    isDisabled: (editor: Editor) => isNodeTypeSelected(editor, ['image']) || editor.isActive('code')
+    isDisabled: (editor: Editor) => {
+      // Check if the target list extension is available
+      if (!isExtensionAvailable(editor, listType)) {
+        return true
+      }
+      return isNodeTypeSelected(editor, ['image']) || editor.isActive('code')
+    }
   }
 }
 
@@ -258,6 +287,7 @@ export function createHandlers(): EditorHandlers {
     blockquote: createToggleHandler('blockquote'),
     bulletList: createListHandler('bulletList'),
     orderedList: createListHandler('orderedList'),
+    taskList: createListHandler('taskList'),
     codeBlock: createToggleHandler('codeBlock'),
     horizontalRule: createSetHandler('horizontalRule'),
     paragraph: createSetHandler('paragraph'),

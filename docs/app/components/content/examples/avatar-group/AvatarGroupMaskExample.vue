@@ -3,18 +3,21 @@
     <UAvatar
       src="https://github.com/benjamincanac.png"
       alt="Benjamin Canac"
+      loading="lazy"
       class="rounded-none squircle"
     />
 
     <UAvatar
       src="https://github.com/romhml.png"
       alt="Romain Hamel"
+      loading="lazy"
       class="rounded-none squircle"
     />
 
     <UAvatar
       src="https://github.com/noook.png"
       alt="Neil Richter"
+      loading="lazy"
       class="rounded-none squircle"
     />
   </UAvatarGroup>

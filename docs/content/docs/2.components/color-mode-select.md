@@ -27,7 +27,7 @@ The ColorModeSelect component extends the [SelectMenu](/docs/components/select-m
 
 Use the `app.config.ts` to customize the icon with the `ui.icons` property:
 
-```ts [app.config.ts]
+```ts [app/app.config.ts]
 export default defineAppConfig({
   ui: {
     icons: {

@@ -7,12 +7,12 @@ defineProps<{
 </script>
 
 <template>
-  <div class="bg-white w-full h-full flex flex-col">
-    <div class="absolute top-0 bottom-0 left-26 w-[2px] bg-slate-200" />
-    <div class="absolute top-0 bottom-0 right-26 w-[2px] bg-slate-200" />
+  <div class="bg-white size-full flex flex-col">
+    <div class="absolute inset-y-0 left-26 w-[2px] bg-slate-200" />
+    <div class="absolute inset-y-0 right-26 w-[2px] bg-slate-200" />
     <div class="absolute top-12 inset-x-0 h-[2px] bg-slate-200" />
     <svg
-      class="absolute top-[24px] left-33 bg-white p-1 h-11 w-11"
+      class="absolute top-[24px] left-33 bg-white p-1 size-11"
       viewBox="0 0 512 512"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

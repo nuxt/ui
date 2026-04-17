@@ -1,5 +1,6 @@
 <script lang="ts">
-import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
+import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits, PointerDownOutsideEvent } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/modal'
 import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
@@ -66,15 +67,15 @@ export interface ModalEmits extends DialogRootEmits {
 }
 
 export interface ModalSlots {
-  default(props: { open: boolean }): any
-  content(props: { close: () => void }): any
-  header(props: { close: () => void }): any
-  title(props?: {}): any
-  description(props?: {}): any
-  actions(props?: {}): any
-  close(props: { ui: Modal['ui'] }): any
-  body(props: { close: () => void }): any
-  footer(props: { close: () => void }): any
+  default?(props: { open: boolean }): VNode[]
+  content?(props: { close: () => void }): VNode[]
+  header?(props: { close: () => void }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  close?(props: { ui: Modal['ui'] }): VNode[]
+  body?(props: { close: () => void }): VNode[]
+  footer?(props: { close: () => void }): VNode[]
 }
 </script>
 
@@ -83,8 +84,11 @@ import { computed, toRef } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
+import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
+import { pointerDownOutside } from '../utils/overlay'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -101,13 +105,14 @@ const slots = defineSlots<ModalSlots>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Modal['AppConfig']
+const uiProp = useComponentUI('modal', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
+    const events = ['interactOutside', 'escapeKeyDown']
 
     return events.reduce((acc, curr) => {
       acc[curr] = (e: Event) => {
@@ -118,20 +123,9 @@ const contentEvents = computed(() => {
     }, {} as Record<typeof events[number], (e: Event) => void>)
   }
 
-  if (props.scrollable) {
-    return {
-      // FIXME: This is a workaround to prevent the modal from closing when clicking on the scrollbar https://reka-ui.com/docs/components/dialog#scrollable-overlay but it's not working on Mac OS.
-      pointerDownOutside: (e: any) => {
-        const originalEvent = e.detail.originalEvent
-        const target = originalEvent.target as HTMLElement
-        if (originalEvent.offsetX > target.clientWidth || originalEvent.offsetY > target.clientHeight) {
-          e.preventDefault()
-        }
-      }
-    }
+  return {
+    pointerDownOutside: (e: PointerDownOutsideEvent) => pointerDownOutside(e, { scrollable: props.scrollable })
   }
-
-  return {}
 })
 
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
@@ -150,20 +144,22 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
     <DefineContentTemplate>
       <DialogContent
         data-slot="content"
-        :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
+        :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })"
         v-bind="contentProps"
         @after-enter="emits('after:enter')"
         @after-leave="emits('after:leave')"
         v-on="contentEvents"
       >
-        <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
-          <DialogTitle v-if="title || !!slots.title">
+        <VisuallyHidden v-if="(!title && !slots.title) || (!description && !slots.description) || !!slots.content">
+          <DialogTitle v-if="!title && !slots.title" />
+          <DialogTitle v-else-if="!!slots.content">
             <slot name="title">
               {{ title }}
             </slot>
           </DialogTitle>
 
-          <DialogDescription v-if="description || !!slots.description">
+          <DialogDescription v-if="!description && !slots.description" />
+          <DialogDescription v-else-if="!!slots.content">
             <slot name="description">
               {{ description }}
             </slot>
@@ -171,16 +167,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
         </VisuallyHidden>
 
         <slot name="content" :close="close">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" data-slot="header" :class="ui.header({ class: uiProp?.header })">
             <slot name="header" :close="close">
-              <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-                <DialogTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+              <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+                <DialogTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
                   <slot name="title">
                     {{ title }}
                   </slot>
                 </DialogTitle>
 
-                <DialogDescription v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+                <DialogDescription v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
                   <slot name="description">
                     {{ description }}
                   </slot>
@@ -199,18 +195,18 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
                     :aria-label="t('modal.close')"
                     v-bind="(typeof props.close === 'object' ? props.close : {})"
                     data-slot="close"
-                    :class="ui.close({ class: props.ui?.close })"
+                    :class="ui.close({ class: uiProp?.close })"
                   />
                 </slot>
               </DialogClose>
             </slot>
           </div>
 
-          <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+          <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: uiProp?.body })">
             <slot name="body" :close="close" />
           </div>
 
-          <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+          <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
             <slot name="footer" :close="close" />
           </div>
         </slot>
@@ -222,17 +218,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
     </DialogTrigger>
 
     <DialogPortal v-bind="portalProps">
-      <template v-if="scrollable">
-        <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })">
+      <FieldGroupReset>
+        <template v-if="scrollable">
+          <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })">
+            <ReuseContentTemplate />
+          </DialogOverlay>
+        </template>
+
+        <template v-else>
+          <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })" />
+
           <ReuseContentTemplate />
-        </DialogOverlay>
-      </template>
-
-      <template v-else>
-        <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
-
-        <ReuseContentTemplate />
-      </template>
+        </template>
+      </FieldGroupReset>
     </DialogPortal>
   </DialogRoot>
 </template>

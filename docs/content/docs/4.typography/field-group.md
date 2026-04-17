@@ -1,7 +1,6 @@
 ---
 title: FieldGroup
 description: 'Group related fields together for comprehensive API documentation.'
-framework: nuxt
 category: components
 links:
   - label: GitHub
@@ -13,7 +12,7 @@ links:
 
 Group fields together in a list.
 
-::code-preview
+:::code-preview
 
 ::field-group{class="my-0"}
 
@@ -57,7 +56,7 @@ Group fields together in a list.
 ::
 ```
 
-::
+:::
 
 ## API
 

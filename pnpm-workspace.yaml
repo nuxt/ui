@@ -4,6 +4,7 @@ packages:
   - docs
   - playgrounds/nuxt
   - playgrounds/vue
+  - playgrounds/repl
 
 ignoredBuiltDependencies:
   - '@parcel/watcher'
@@ -17,3 +18,5 @@ onlyBuiltDependencies:
   - better-sqlite3
   - puppeteer
   - sharp
+
+ignoreWorkspaceRootCheck: true

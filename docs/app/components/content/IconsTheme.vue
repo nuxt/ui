@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import json5 from 'json5'
-import icons from '../../../../src/theme/icons'
+import { themeIcons } from '../../utils/theme'
 
-const { framework } = useFrameworks()
+const { icon: iconSet } = useTheme()
 
-const { data: ast } = await useAsyncData(`icons-theme`, async () => {
+const icons = computed(() => themeIcons[iconSet.value as keyof typeof themeIcons || 'lucide'])
+
+const { data: ast } = useAsyncData(`icons-theme`, async () => {
   const md = `
 ::code-collapse{class="nuxt-only"}
 
 \`\`\`ts [app.config.ts]
 export default defineAppConfig(${json5.stringify({
   ui: {
-    icons
+    icons: icons.value
   }
 }, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')})
 \`\`\`\
@@ -30,7 +32,7 @@ export default defineConfig({
     vue(),
     ui(${json5.stringify({
       ui: {
-        icons
+        icons: icons.value
       }
     }, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')
       .split('\n')
@@ -43,8 +45,8 @@ export default defineConfig({
 ::
 `
 
-  return parseMarkdown(md)
-}, { watch: [framework] })
+  return cachedParseMarkdown(md)
+}, { lazy: import.meta.client, watch: [icons] })
 </script>
 
 <template>

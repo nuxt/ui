@@ -22,6 +22,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
   - ui
@@ -33,7 +35,7 @@ props:
     content: 'text-muted'
   items:
     - label: 'Is Nuxt UI free to use?'
-      content: 'Yes! Nuxt UI is completely free and open source under the MIT license. All 100+ components are available to everyone.'
+      content: 'Yes! Nuxt UI is completely free and open source under the MIT license. All 125+ components are available to everyone.'
     - label: 'Can I use Nuxt UI with Vue without Nuxt?'
       content: 'Yes! While optimized for Nuxt, Nuxt UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.'
     - label: 'Is Nuxt UI production-ready?'
@@ -270,6 +272,10 @@ props:
 ---
 ::
 
+::tip
+Use the `value-key` prop to change the key used to match items when a `v-model` or `default-value` is provided.
+::
+
 ::caution
 When `type="multiple"`, ensure to pass an array to the `default-value` prop or the `v-model` directive.
 ::
@@ -331,7 +337,7 @@ props:
 
 ### With markdown content
 
-You can use the [MDC](https://github.com/nuxt-modules/mdc?tab=readme-ov-file#mdc) component from `@nuxtjs/mdc` to render markdown in the accordion items.
+You can use the [MDC](https://github.com/nuxt-content/mdc?tab=readme-ov-file#mdc) component from `@nuxtjs/mdc` to render markdown in the accordion items.
 
 ::component-example
 ---

@@ -42,6 +42,7 @@ export const defaultOptions = {
     },
     prefix: undefined
   },
+  prose: false,
   mdc: false,
   content: false
 }

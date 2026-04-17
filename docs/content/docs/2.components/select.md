@@ -260,6 +260,41 @@ props:
 ---
 ::
 
+::note
+These options only apply when `content.position` is `popper` (default).
+::
+
+### Position :badge{label="Soon" class="align-text-top"}
+
+Use the `content.position` prop to control how the Select content is positioned relative to the trigger. Defaults to `popper`, which positions the content like other popovers. Set it to `item-aligned` to align the content with the selected item (similar to a native macOS menu).
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+external:
+  - items
+  - modelValue
+items:
+  content.position:
+    - item-aligned
+    - popper
+props:
+  modelValue: 'Todo'
+  content:
+    position: item-aligned
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
 ### Arrow
 
 Use the `arrow` prop to display an arrow on the Select.
@@ -488,6 +523,7 @@ ignore:
   - items
   - modelValue
   - class
+  - avatar.loading
 external:
   - items
   - modelValue
@@ -495,6 +531,7 @@ props:
   modelValue: 'Nuxt'
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   items:
     - Nuxt
     - NuxtHub
@@ -724,6 +761,30 @@ collapse: true
 ---
 ::
 
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the menu opens, avoiding unnecessary API calls on page load.
+::
+
+### With infinite scroll :badge{label="4.4+" class="align-text-top"}
+
+You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
+
+::component-example
+---
+prettier: true
+collapse: true
+highlights:
+  - 41
+  - 51
+overflowHidden: true
+name: 'select-infinite-scroll-example'
+---
+::
+
+::note
+This example uses `useLazyFetch` with `immediate: false` so data is only loaded as the user scrolls.
+::
+
 ### With full content width
 
 You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
@@ -776,6 +837,7 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `triggerRef`{lang="ts-type"} | `Ref<HTMLButtonElement \| null>`{lang="ts-type"} |
+| `viewportRef`{lang="ts-type"} | `Ref<HTMLDivElement \| null>`{lang="ts-type"} |
 
 ## Theme
 
