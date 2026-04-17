@@ -63,6 +63,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           if (isDev) {
             const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${kebabCase(component)}`, import.meta.url))
             const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url))
+            const defaultVariantsJson = JSON.stringify(options.theme?.defaultVariants) ?? 'undefined'
+            const prefixJson = JSON.stringify(options.theme?.prefix) ?? 'undefined'
 
             return [
               `import template from ${JSON.stringify(templatePath)}`,
@@ -70,8 +72,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
               ...generateVariantDeclarations(variants),
               `const options = ${JSON.stringify(options, null, 2)}`,
               `let result = typeof template === 'function' ? (template as Function)(options) : template`,
-              `result = applyDefaultVariants(result, options.theme?.defaultVariants)`,
-              `result = applyPrefixToObject(result, options.theme?.prefix)`,
+              `result = applyDefaultVariants(result, ${defaultVariantsJson})`,
+              `result = applyPrefixToObject(result, ${prefixJson})`,
               `const theme = ${json}`,
               `export default result as typeof theme`
             ].join('\n\n')
@@ -87,7 +89,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     }
   }
 
-  if (!!nuxt && ((hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content))) {
+  if (options.prose || options.mdc || options.content || (!!nuxt && (hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')))) {
     hasProse = true
 
     const path = 'prose'
@@ -101,7 +103,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     })
   }
 
-  if (!!nuxt && (hasNuxtModule('@nuxt/content') || options.content)) {
+  if (options.content || (!!nuxt && hasNuxtModule('@nuxt/content'))) {
     hasContent = true
 
     writeThemeTemplate(themeContent, 'content')
@@ -260,8 +262,10 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --divide-color-bg: var(--ui-bg);
   --outline-color-default: var(--ui-border);
   --outline-color-inverted: var(--ui-border-inverted);
+  --stroke-bg: var(--ui-bg);
   --stroke-default: var(--ui-border);
   --stroke-inverted: var(--ui-border-inverted);
+  --fill-bg: var(--ui-bg);
   --fill-default: var(--ui-border);
   --fill-inverted: var(--ui-border-inverted);
 }
@@ -293,7 +297,7 @@ import colors from 'tailwindcss/colors'
 
 type IconsConfig = Record<${iconUnion} | (string & {}), string>
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: '發送'
     },
+    chatReasoning: {
+      thinking: '思考中…',
+      thought: '已思考',
+      thoughtFor: '思考了 {duration}'
+    },
     colorMode: {
       dark: '深色',
       light: '淺色',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: '本頁內容'
+    },
+    dropdownMenu: {
+      noMatch: '沒有相符的資料',
+      search: '搜尋…'
     },
     dashboardSearch: {
       theme: '主題'
@@ -110,7 +119,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: '複製程式碼到剪貼簿'
+      },
+      prompt: {
+        copy: '複製提示詞',
+        openIn: '在 {name} 中開啟'
       }
+    },
+    sidebar: {
+      close: '關閉',
+      toggle: '切換'
     },
     selectMenu: {
       create: '建立「{label}」',

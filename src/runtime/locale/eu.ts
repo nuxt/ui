@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Bidali'
     },
+    chatReasoning: {
+      thinking: 'Pentsatzen…',
+      thought: 'Pentsatu du',
+      thoughtFor: '{duration} pentsatzen'
+    },
     colorMode: {
       dark: 'Iluna',
       light: 'Argia',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Orri honetan'
+    },
+    dropdownMenu: {
+      noMatch: 'Ez da datu bat ere aurkitu',
+      search: 'Bilatu…'
     },
     dashboardSearch: {
       theme: 'Gaia'
@@ -110,7 +119,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopiatu kodea clipboard-era'
+      },
+      prompt: {
+        copy: 'Kopiatu prompt',
+        openIn: '{name}(e)n ireki'
       }
+    },
+    sidebar: {
+      close: 'Itxi',
+      toggle: 'Txandakatu'
     },
     selectMenu: {
       create: 'Sortu {label}',

@@ -1,17 +1,16 @@
 ---
 title: EditorMentionMenu
-description: A mention menu that displays user suggestions when typing the @ character in the editor.
+description: A mention menu that displays user suggestions when typing a trigger character in the editor.
 category: editor
 links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/EditorMentionMenu.vue
-navigation.badge: New
 ---
 
 ## Usage
 
-The EditorMentionMenu component displays a menu of user suggestions when typing the `@` character in the editor and inserts the selected mention using the `@tiptap/extension-mention` package.
+The EditorMentionMenu component displays a menu of user suggestions when typing a trigger character (defaults to `@`) in the editor and inserts the selected mention using the `@tiptap/extension-mention` package. The trigger character is also used as the prefix when rendering the inserted mention.
 
 ::note
 It uses the `useEditorMenu` composable built on top of TipTap's [Suggestion](https://tiptap.dev/docs/editor/api/utilities/suggestion) utility to filter items as you type and support keyboard navigation (arrow keys, enter to select, escape to close).
@@ -59,12 +58,46 @@ You can also pass an array of arrays to the `items` prop to create separated gro
 
 ### Char
 
-Use the `char` prop to change the trigger character. Defaults to `@`{lang="ts-type"}.
+Use the `char` prop to change the trigger character. Defaults to `@`{lang="ts-type"}. The trigger character is also used as the prefix when rendering the inserted mention (e.g. `#channel` instead of `@channel`).
 
 ```vue
 <template>
   <UEditor v-slot="{ editor }">
     <UEditorMentionMenu :editor="editor" :items="channels" char="#" />
+  </UEditor>
+</template>
+```
+
+::note
+You can use multiple `EditorMentionMenu` components on the same editor with different `char` and `plugin-key` props to support different mention types.
+
+```vue
+<template>
+  <UEditor v-slot="{ editor }">
+    <UEditorMentionMenu :editor="editor" :items="users" plugin-key="mentionMenu" />
+    <UEditorMentionMenu :editor="editor" :items="tags" char="#" plugin-key="tagMenu" />
+  </UEditor>
+</template>
+```
+::
+
+### Suggestion :badge{label="Soon" class="align-text-top"}
+
+Use the `suggestion` prop to customize TipTap's [Suggestion matching behavior](https://tiptap.dev/docs/editor/api/utilities/suggestion#settings).
+
+This is useful when the trigger character should open directly after other characters instead of requiring the default whitespace prefix.
+
+```vue
+<template>
+  <UEditor v-slot="{ editor }">
+    <UEditorMentionMenu
+      :editor="editor"
+      :items="items"
+      char="#"
+      :suggestion="{
+        allowedPrefixes: null
+      }"
+    />
   </UEditor>
 </template>
 ```

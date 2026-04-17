@@ -1,5 +1,5 @@
 <script lang="ts">
-import { computed } from 'vue'
+import { type VNode, computed } from 'vue'
 import { provideThemeContext } from '../composables/useComponentUI'
 import type { ThemeUI } from '../composables/useComponentUI'
 import { provideVariantContext, type VariantUI } from '../composables/useComponentVariant'
@@ -10,7 +10,7 @@ export interface ThemeProps {
 }
 
 export interface ThemeSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 

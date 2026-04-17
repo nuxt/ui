@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt'
 import type { TextareaProps, TextareaSlots } from '../types'
@@ -32,8 +33,8 @@ export interface ChatPromptEmits {
 }
 
 export interface ChatPromptSlots extends TextareaSlots {
-  header(props?: {}): any
-  footer(props?: {}): any
+  header?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 
@@ -43,6 +44,7 @@ import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
+import { useIMEGuard } from '../composables/useIMEGuard'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
@@ -89,6 +91,10 @@ function blur(e: Event) {
   emits('close', e)
 }
 
+const { onKeydown: onEnter, onCompositionEnd } = useIMEGuard((event) => {
+  submit(event)
+})
+
 defineExpose({
   textareaRef: toRef(() => textareaRef.value?.textareaRef)
 })
@@ -106,11 +112,13 @@ defineExpose({
       :placeholder="placeholder || t('chatPrompt.placeholder')"
       :disabled="Boolean(error) || disabled"
       variant="none"
+      fixed
       v-bind="{ ...textareaProps, ...$attrs }"
       :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), uiProp)"
       data-slot="body"
       :class="ui.body({ class: uiProp?.body })"
-      @keydown.enter.exact.prevent="submit"
+      @keydown.enter.exact="onEnter"
+      @compositionend="onCompositionEnd"
       @keydown.esc="blur"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">

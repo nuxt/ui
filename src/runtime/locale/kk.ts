@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Жіберу'
     },
+    chatReasoning: {
+      thinking: 'Ойлануда…',
+      thought: 'Ойланды',
+      thoughtFor: '{duration} ойланды'
+    },
     colorMode: {
       dark: 'Қараңғы',
       light: 'Ашық',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Мазмұны'
+    },
+    dropdownMenu: {
+      noMatch: 'Сәйкес келетін деректер жоқ',
+      search: 'Іздеу…'
     },
     dashboardSearch: {
       theme: 'Тақырып'
@@ -110,7 +119,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Кодты алмасу буферіне көшіру'
+      },
+      prompt: {
+        copy: 'Сұранысты көшіру',
+        openIn: '{name} ішінде ашу'
       }
+    },
+    sidebar: {
+      close: 'Жабу',
+      toggle: 'Ауыстыру'
     },
     selectMenu: {
       create: '"{label}" жасау',

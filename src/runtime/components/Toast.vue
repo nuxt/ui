@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toast'
 import type { AvatarProps, ButtonProps, IconProps, ProgressProps, LinkPropsKeys } from '../types'
@@ -62,16 +63,16 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
 export interface ToastEmits extends ToastRootEmits {}
 
 export interface ToastSlots {
-  leading(props: { ui: Toast['ui'] }): any
-  title(props?: {}): any
-  description(props?: {}): any
-  actions(props?: {}): any
-  close(props: { ui: Toast['ui'] }): any
+  leading?(props: { ui: Toast['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  close?(props: { ui: Toast['ui'] }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick, useTemplateRef } from 'vue'
+import { ref, computed, onMounted, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -107,13 +108,11 @@ const rootRef = useTemplateRef('rootRef')
 const height = ref(0)
 
 onMounted(() => {
-  if (!rootRef.value) {
+  if (!rootRef.value?.$el?.getBoundingClientRect) {
     return
   }
 
-  nextTick(() => {
-    height.value = rootRef.value?.$el?.getBoundingClientRect()?.height
-  })
+  height.value = rootRef.value.$el.getBoundingClientRect().height
 })
 
 defineExpose({

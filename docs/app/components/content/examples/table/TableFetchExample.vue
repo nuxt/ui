@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableColumn } from '@nuxt/ui'
+import type { AvatarProps, TableColumn } from '@nuxt/ui'
 
 const UAvatar = resolveComponent('UAvatar')
 
@@ -8,11 +8,11 @@ type User = {
   name: string
   username: string
   email: string
-  avatar: { src: string }
+  avatar: AvatarProps
   company: { name: string }
 }
 
-const { data, status } = await useFetch<User[]>('https://jsonplaceholder.typicode.com/users', {
+const { data, status } = useLazyFetch<User[]>('https://jsonplaceholder.typicode.com/users', {
   key: 'table-users',
   transform: (data) => {
     return data?.map(user => ({
@@ -20,7 +20,7 @@ const { data, status } = await useFetch<User[]>('https://jsonplaceholder.typicod
       avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, alt: `${user.name} avatar` }
     })) || []
   },
-  lazy: true
+  server: false
 })
 
 const columns: TableColumn<User>[] = [{
@@ -33,6 +33,7 @@ const columns: TableColumn<User>[] = [{
     return h('div', { class: 'flex items-center gap-3' }, [
       h(UAvatar, {
         ...row.original.avatar,
+        loading: 'lazy',
         size: 'lg'
       }),
       h('div', undefined, [
@@ -52,5 +53,10 @@ const columns: TableColumn<User>[] = [{
 </script>
 
 <template>
-  <UTable :data="data" :columns="columns" :loading="status === 'pending'" class="flex-1 h-80" />
+  <UTable
+    :data="data"
+    :columns="columns"
+    :loading="status === 'pending' || status === 'idle'"
+    class="flex-1 h-80"
+  />
 </template>

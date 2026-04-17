@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Wyślij'
     },
+    chatReasoning: {
+      thinking: 'Myśli…',
+      thought: 'Myślenie zakończone',
+      thoughtFor: 'Myślenie zajęło {duration}'
+    },
     colorMode: {
       dark: 'Ciemny',
       light: 'Jasny',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Na tej stronie'
+    },
+    dropdownMenu: {
+      noMatch: 'Brak pasujących danych',
+      search: 'Szukaj…'
     },
     dashboardSearch: {
       theme: 'Motyw'
@@ -110,7 +119,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopiuj kod do schowka'
+      },
+      prompt: {
+        copy: 'Kopiuj prompt',
+        openIn: 'Otwórz w {name}'
       }
+    },
+    sidebar: {
+      close: 'Zamknij',
+      toggle: 'Przełącz'
     },
     selectMenu: {
       create: 'Utwórz "{label}"',

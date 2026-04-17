@@ -1,17 +1,18 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/textarea'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
 import type { TextareaHTMLAttributes } from '../types/html'
-import type { ModelModifiers } from '../types/input'
+import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { ComponentConfig } from '../types/tv'
 
 type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>
 
 type TextareaValue = string | number | null
 
-export interface TextareaProps<T extends TextareaValue = TextareaValue> extends UseComponentIconsProps, /** @vue-ignore */ Omit<TextareaHTMLAttributes, 'name' | 'placeholder' | 'required' | 'autofocus' | 'disabled' | 'rows'> {
+export interface TextareaProps<T extends TextareaValue = TextareaValue, Mod extends ModelModifiers = ModelModifiers> extends UseComponentIconsProps, /** @vue-ignore */ Omit<TextareaHTMLAttributes, 'name' | 'placeholder' | 'required' | 'autofocus' | 'disabled' | 'rows'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -43,27 +44,29 @@ export interface TextareaProps<T extends TextareaValue = TextareaValue> extends 
   maxrows?: number
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  modelValue?: T
-  defaultValue?: T
-  modelModifiers?: ModelModifiers<T>
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
+  defaultValue?: ApplyModifiers<T, Mod>
+  modelValue?: ApplyModifiers<T, Mod>
+  modelModifiers?: Mod
   class?: any
   ui?: Textarea['slots']
 }
 
-export interface TextareaEmits<T extends TextareaValue = TextareaValue> {
-  'update:modelValue': [value: T]
+export interface TextareaEmits<T extends TextareaValue = TextareaValue, Mod extends ModelModifiers = ModelModifiers> {
+  'update:modelValue': [value: ApplyModifiers<T, Mod>]
   'blur': [event: FocusEvent]
   'change': [event: Event]
 }
 
 export interface TextareaSlots {
-  leading(props: { ui: Textarea['ui'] }): any
-  default(props: { ui: Textarea['ui'] }): any
-  trailing(props: { ui: Textarea['ui'] }): any
+  leading?(props: { ui: Textarea['ui'] }): VNode[]
+  default?(props: { ui: Textarea['ui'] }): VNode[]
+  trailing?(props: { ui: Textarea['ui'] }): VNode[]
 }
 </script>
 
-<script setup lang="ts" generic="T extends TextareaValue">
+<script setup lang="ts" generic="T extends TextareaValue, Mod extends ModelModifiers = ModelModifiers">
 import { useTemplateRef, computed, onMounted, nextTick, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
@@ -78,16 +81,16 @@ import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<TextareaProps<T>>(), {
+const props = withDefaults(defineProps<TextareaProps<T, Mod>>(), {
   rows: 3,
   maxrows: 0,
   autofocusDelay: 0,
   autoresizeDelay: 0
 })
-const emits = defineEmits<TextareaEmits<T>>()
+const emits = defineEmits<TextareaEmits<T, Mod>>()
 const slots = defineSlots<TextareaSlots>()
 
-const modelValue = useVModel<TextareaProps<T>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
+const modelValue = useVModel<TextareaProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
 
 const appConfig = useAppConfig() as Textarea['AppConfig']
 const uiProp = useComponentUI('textarea', props)
@@ -101,6 +104,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.textarea || 
   size: size?.value,
   loading: props.loading,
   highlight: highlight.value,
+  fixed: props.fixed,
   autoresize: props.autoresize,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing
@@ -110,7 +114,7 @@ const textareaRef = useTemplateRef('textareaRef')
 
 // Custom function to handle the v-model properties
 function updateInput(value: string | null | undefined) {
-  if (props.modelModifiers?.trim) {
+  if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
     value = value?.trim() ?? null
   }
 
@@ -122,11 +126,11 @@ function updateInput(value: string | null | undefined) {
     value ||= null
   }
 
-  if (props.modelModifiers?.optional) {
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
     value ||= undefined
   }
 
-  modelValue.value = value as T
+  modelValue.value = value as ApplyModifiers<T, Mod>
   emitFormInput()
 }
 
@@ -202,7 +206,8 @@ onMounted(() => {
 })
 
 defineExpose({
-  textareaRef
+  textareaRef,
+  autoResize
 })
 </script>
 

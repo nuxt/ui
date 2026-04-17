@@ -1,11 +1,10 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { flushPromises, mount } from '@vue/test-utils'
 import InputMenu from '../../src/runtime/components/InputMenu.vue'
-import type { InputMenuProps, InputMenuSlots } from '../../src/runtime/components/InputMenu.vue'
 import type { FormInputEvents } from '../../src/module'
-import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import { expectEmitPayloadType } from '../utils/types'
 import theme from '#build/ui/input'
@@ -40,7 +39,7 @@ describe('InputMenu', () => {
 
   const props = { open: true, portal: false, items }
 
-  it.each([
+  renderEach(InputMenu, [
     // Props
     ['with items', { props }],
     ['with items with description', { props: { ...props, items: itemsWithDescription } }],
@@ -57,6 +56,12 @@ describe('InputMenu', () => {
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with required', { props: { ...props, required: true } }],
+    // Autocomplete
+    ['with autocomplete', { props: { ...props, autocomplete: true } }],
+    ['with autocomplete and modelValue', { props: { ...props, autocomplete: true, modelValue: 'Backlog' } }],
+    ['with autocomplete and defaultValue', { props: { ...props, autocomplete: true, defaultValue: 'Backlog' } }],
+    ['with autocomplete and placeholder', { props: { ...props, autocomplete: true, placeholder: 'Type something...' } }],
+    ['with autocomplete and content', { props: { ...props, autocomplete: true, content: { hideWhenEmpty: true } } }],
     ['with icon', { props: { icon: 'i-lucide-search' } }],
     ['with leading and icon', { props: { leading: true, icon: 'i-lucide-arrow-left' } }],
     ['with leadingIcon', { props: { leadingIcon: 'i-lucide-arrow-left' } }],
@@ -93,26 +98,28 @@ describe('InputMenu', () => {
     ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputMenuProps, slots?: Partial<InputMenuSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, InputMenu)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
-  it.each([
-    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
-    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
-    ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
-    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
-  ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
-    const wrapper = mount(InputMenu, {
-      ...options
-    })
+  renderEach(
+    InputMenu,
+    [
+      ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+      ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+      ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
+      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
+    ],
+    '%s works',
+    async (_, options, spec) => {
+      const wrapper = mount(InputMenu, {
+        ...options
+      })
 
-    const input = wrapper.findComponent({ name: 'ComboboxRoot' })
-    await input.setValue(spec.input)
+      const input = wrapper.findComponent({ name: 'ComboboxRoot' })
+      await input.setValue(spec.input)
 
-    expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
-  })
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+    }
+  )
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputMenu, {
@@ -156,6 +163,30 @@ describe('InputMenu', () => {
       const input = wrapper.findComponent({ name: 'TagsInputRoot' })
       await input.vm.$emit('remove-tag', 'Option 1')
       expect(wrapper.emitted()).toMatchObject({ 'remove-tag': [['Option 1']] })
+    })
+
+    test('update:modelValue event with autocomplete', async () => {
+      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], autocomplete: true } })
+      const input = wrapper.findComponent({ name: 'AutocompleteRoot' })
+      await input.setValue('Option 1')
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] })
+    })
+
+    test('change event with autocomplete', async () => {
+      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], autocomplete: true } })
+      const input = wrapper.findComponent({ name: 'AutocompleteRoot' })
+      await input.setValue('Option 1')
+      expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
+    })
+
+    test('searchTerm syncs when parent updates modelValue in autocomplete mode', async () => {
+      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], autocomplete: true, modelValue: 'Option 1' } })
+
+      await wrapper.setProps({ modelValue: 'Option 2' })
+
+      const emissions = wrapper.emitted('update:searchTerm')
+      expect(emissions).toBeTruthy()
+      expect(emissions![emissions!.length - 1]).toEqual(['Option 2'])
     })
   })
 

@@ -166,9 +166,11 @@ Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Te
 prettier: true
 ignore:
   - placeholder
+  - avatar.loading
 props:
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   size: md
   variant: outline
   placeholder: 'Search...'
@@ -259,6 +261,7 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `textareaRef`{lang="ts-type"} | `Ref<HTMLTextAreaElement \| null>`{lang="ts-type"} |
+| `autoResize`{lang="ts-type"} | `() => void`{lang="ts-type"} |
 
 ## Theme
 

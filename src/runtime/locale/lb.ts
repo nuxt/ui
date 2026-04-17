@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Prompt schécken'
     },
+    chatReasoning: {
+      thinking: 'Denkt no…',
+      thought: 'Nogeduecht',
+      thoughtFor: '{duration} nogeduecht'
+    },
     colorMode: {
       dark: 'Donkel',
       light: 'Liicht',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Op dëser Säit'
+    },
+    dropdownMenu: {
+      noMatch: 'Keng entspriechend Donnéeën',
+      search: 'Sichen..'
     },
     dashboardSearch: {
       theme: 'Thema'
@@ -110,7 +119,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Code an d\'Zwëschspäicher kopéieren'
+      },
+      prompt: {
+        copy: 'Prompt kopéieren',
+        openIn: 'An {name} opmaachen'
       }
+    },
+    sidebar: {
+      close: 'Zoumaachen',
+      toggle: 'Ëmschalten'
     },
     selectMenu: {
       create: '"{label}" erstellen',

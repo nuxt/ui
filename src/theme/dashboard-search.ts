@@ -10,21 +10,11 @@ export default {
       }
     },
     size: {
-      xs: {
-        input: '[&>input]:text-sm'
-      },
-      sm: {
-        input: '[&>input]:text-sm'
-      },
-      md: {
-        input: '[&>input]:text-base/5'
-      },
-      lg: {
-        input: '[&>input]:text-base/5'
-      },
-      xl: {
-        input: '[&>input]:text-lg'
-      }
+      xs: {},
+      sm: {},
+      md: {},
+      lg: {},
+      xl: {}
     }
   },
   defaultVariants: {

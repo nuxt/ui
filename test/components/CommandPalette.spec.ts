@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import CommandPalette from '../../src/runtime/components/CommandPalette.vue'
-import type { CommandPaletteProps, CommandPaletteSlots } from '../../src/runtime/components/CommandPalette.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/command-palette'
 
 describe('CommandPalette', () => {
@@ -100,9 +99,11 @@ describe('CommandPalette', () => {
     }]
   }]
 
+  const groupsWithSlot = groups.map(g => g.id === 'users' ? { ...g, slot: 'users' } : g)
+
   const props = { groups }
 
-  it.each([
+  renderEach(CommandPalette, [
     // Props
     ['with groups', { props }],
     ['with groups with description', { props: { groups: groupsWithDescription } }],
@@ -139,12 +140,11 @@ describe('CommandPalette', () => {
     ['with item-description slot', { props: { groups: groupsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
+    ['with group-label slot', { props, slots: { 'group-label': () => 'Group label slot' } }],
+    ['with users-group-label slot', { props: { groups: groupsWithSlot }, slots: { 'users-group-label': () => 'Users group label slot' } }],
     ['with close slot', { props: { ...props, close: true }, slots: { close: () => 'Close slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps, slots?: Partial<CommandPaletteSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, CommandPalette)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CommandPalette, {

@@ -35,6 +35,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'يوللاش'
     },
+    chatReasoning: {
+      thinking: 'ئويلاۋاتىدۇ…',
+      thought: 'ئويلاندى',
+      thoughtFor: '{duration} ئويلاندى'
+    },
     colorMode: {
       dark: 'قاراڭغۇ',
       light: 'يورۇق',
@@ -58,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'مەزمۇن'
+    },
+    dropdownMenu: {
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      search: 'ئىزدەش…'
     },
     dashboardSearch: {
       theme: 'تېما'
@@ -111,7 +120,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'كۆچۈرۈش'
+      },
+      prompt: {
+        copy: 'كۆچۈرۈش',
+        openIn: '{name} دا ئېچىش'
       }
+    },
+    sidebar: {
+      close: 'تاقاش',
+      toggle: 'ئالماشتۇرۇش'
     },
     selectMenu: {
       create: '"{label}" نى قۇرۇش',

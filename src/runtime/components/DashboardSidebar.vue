@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-sidebar'
 import type { UseResizableProps } from '../composables/useResizable'
@@ -31,17 +32,22 @@ export interface DashboardSidebarProps<T extends DashboardSidebarMode = Dashboar
    * @defaultValue 'left'
    */
   toggleSide?: 'left' | 'right'
+  /**
+   * Automatically close when route changes.
+   * @defaultValue true
+   */
+  autoClose?: boolean
   class?: any
   ui?: DashboardSidebar['slots']
 }
 
 export interface DashboardSidebarSlots {
-  'header'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
-  'default'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
-  'footer'(props: { collapsed?: boolean, collapse?: (value: boolean) => void }): any
-  'toggle'(props: { open: boolean, toggle: () => void, ui: DashboardSidebar['ui'] }): any
-  'content'(props: { close?: () => void }): any
-  'resize-handle'(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void, ui: DashboardSidebar['ui'] }): any
+  'header'?(props: { collapsed: boolean, collapse: (value: boolean) => void }): VNode[]
+  'default'?(props: { collapsed: boolean, collapse: (value: boolean) => void }): VNode[]
+  'footer'?(props: { collapsed: boolean, collapse: (value: boolean) => void }): VNode[]
+  'toggle'?(props: { open: boolean, toggle: () => void, ui: DashboardSidebar['ui'] }): VNode[]
+  'content'?(props: { close?: () => void }): VNode[]
+  'resize-handle'?(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void, ui: DashboardSidebar['ui'] }): VNode[]
 }
 </script>
 
@@ -66,6 +72,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<DashboardSidebarProps<T>>(), {
   side: 'left',
   mode: 'slideover' as never,
+  autoClose: true,
   toggle: true,
   toggleSide: 'left',
   minSize: 10,
@@ -111,6 +118,8 @@ watch(open, () => dashboardContext.sidebarOpen!.value = open.value, { immediate:
 watch(isCollapsed, () => dashboardContext.sidebarCollapsed!.value = isCollapsed.value, { immediate: true })
 
 watch(() => route.fullPath, () => {
+  if (!props.autoClose) return
+
   open.value = false
 })
 
@@ -124,11 +133,7 @@ const Menu = computed(() => ({
   drawer: UDrawer
 })[props.mode as DashboardSidebarMode])
 
-const menuProps = toRef(() => defu(props.menu, {
-  content: {
-    onOpenAutoFocus: (e: Event) => e.preventDefault()
-  }
-}, props.mode === 'modal' ? { fullscreen: true, transition: false } : props.mode === 'slideover' ? { side: 'left' } : {}) as DashboardSidebarMenu<T>)
+const menuProps = toRef(() => defu(props.menu, {}, props.mode === 'modal' ? { fullscreen: true, transition: false } : props.mode === 'slideover' ? { side: 'left' } : {}) as DashboardSidebarMenu<T>)
 
 function toggleOpen() {
   open.value = !open.value
@@ -204,17 +209,17 @@ function toggleOpen() {
         <div v-if="!!slots.header || mode !== 'drawer'" data-slot="header" :class="ui.header({ class: uiProp?.header, menu: true })">
           <ReuseToggleTemplate v-if="mode !== 'drawer' && toggleSide === 'left'" />
 
-          <slot name="header" />
+          <slot name="header" :collapsed="false" :collapse="() => {}" />
 
           <ReuseToggleTemplate v-if="mode !== 'drawer' && toggleSide === 'right'" />
         </div>
 
         <div data-slot="body" :class="ui.body({ class: uiProp?.body, menu: true })">
-          <slot />
+          <slot :collapsed="false" :collapse="() => {}" />
         </div>
 
         <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer, menu: true })">
-          <slot name="footer" />
+          <slot name="footer" :collapsed="false" :collapse="() => {}" />
         </div>
       </slot>
     </template>

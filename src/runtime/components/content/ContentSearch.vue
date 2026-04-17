@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
@@ -102,8 +103,8 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   ui?: ContentSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>['ui']
 }
 
-export type ContentSearchSlots = CommandPaletteSlots<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem> & {
-  content(props: { close: () => void }): any
+export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
+  content?(props: { close: () => void }): VNode[]
 }
 
 </script>
@@ -285,6 +286,7 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
+          :input="{ fixed: true }"
           :ui="transformUI(omit(ui, ['modal']), uiProp)"
           @update:model-value="onSelect"
           @update:open="open = $event"

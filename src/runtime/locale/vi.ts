@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Gửi'
     },
+    chatReasoning: {
+      thinking: 'Đang suy nghĩ…',
+      thought: 'Đã suy nghĩ',
+      thoughtFor: 'Đã suy nghĩ {duration}'
+    },
     colorMode: {
       dark: 'Tối',
       light: 'Sáng',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Trong trang này'
+    },
+    dropdownMenu: {
+      noMatch: 'Không có kết quả phù hợp',
+      search: 'Tìm kiếm…'
     },
     dashboardSearch: {
       theme: 'Chủ đề'
@@ -110,7 +119,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Sao chép mã vào bộ nhớ tạm'
+      },
+      prompt: {
+        copy: 'Sao chép lệnh',
+        openIn: 'Mở trong {name}'
       }
+    },
+    sidebar: {
+      close: 'Đóng',
+      toggle: 'Chuyển đổi'
     },
     selectMenu: {
       create: 'Tạo "{label}"',

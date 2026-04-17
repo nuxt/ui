@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode, MaybeRef } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
@@ -82,6 +83,12 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
    */
   fileIcon?: IconProps['name']
   /**
+   * Preview the file (currently only `<img>` is rendered)
+   * When set false, only `fileIcon` is displayed
+   * @defaultValue true
+   */
+  fileImage?: boolean
+  /**
    * Configure the delete button for the file.
    * When `layout` is `grid`, the default is `{ color: 'neutral', variant: 'solid', size: 'xs' }`{lang="ts-type"}
    * When `layout` is `list`, the default is `{ color: 'neutral', variant: 'link' }`{lang="ts-type"}
@@ -109,32 +116,34 @@ export interface FileUploadEmits {
 type FileUploadFiles<M> = (M extends true ? File[] : File) | null
 
 export interface FileUploadSlots<M extends boolean = false> {
-  'default'(props: {
+  'default'?(props: {
     open: UseFileDialogReturn['open']
     removeFile: (index?: number) => void
     ui: FileUpload['ui']
-  }): any
-  'leading'(props: { ui: FileUpload['ui'] }): any
-  'label'(props?: {}): any
-  'description'(props?: {}): any
-  'actions'(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): any
-  'files'(props: { files?: FileUploadFiles<M> }): any
-  'files-top'(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): any
-  'files-bottom'(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): any
-  'file'(props: { file: File, index: number }): any
-  'file-leading'(props: { file: File, index: number, ui: FileUpload['ui'] }): any
-  'file-name'(props: { file: File, index: number }): any
-  'file-size'(props: { file: File, index: number }): any
-  'file-trailing'(props: { file: File, index: number, ui: FileUpload['ui'] }): any
+  }): VNode[]
+  'leading'?(props: { ui: FileUpload['ui'] }): VNode[]
+  'label'?(props?: {}): VNode[]
+  'description'?(props?: {}): VNode[]
+  'actions'?(props: { files: FileUploadFiles<M> | undefined, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
+  'files'?(props: { files: FileUploadFiles<M> }): VNode[]
+  'files-top'?(props: { files: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
+  'files-bottom'?(props: { files: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
+  'file'?(props: { file: File, index: number }): VNode[]
+  'file-leading'?(props: { file: File, index: number, ui: FileUpload['ui'] }): VNode[]
+  'file-name'?(props: { file: File, index: number }): VNode[]
+  'file-size'?(props: { file: File, index: number }): VNode[]
+  'file-trailing'?(props: { file: File, index: number, ui: FileUpload['ui'] }): VNode[]
 }
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
-import { computed, toRef, watch } from 'vue'
+import { computed, toRef, toRefs, watch } from 'vue'
 import { Primitive, VisuallyHidden } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig, useLocale } from '#imports'
+import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import { useComponentUI } from '../composables/useComponentUI'
+import { useResolvedVariants } from '../composables/useResolvedVariants'
 import { useFormField } from '../composables/useFormField'
 import { useFileUpload } from '../composables/useFileUpload'
 import { tv } from '../utils/tv'
@@ -153,7 +162,8 @@ const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   fileDelete: true,
   layout: 'grid',
   position: 'outside',
-  preview: true
+  preview: true,
+  fileImage: true
 })
 const emits = defineEmits<FileUploadEmits>()
 const slots = defineSlots<FileUploadSlots<M>>()
@@ -167,17 +177,20 @@ const { t } = useLocale()
 
 const [DefineFilesTemplate, ReuseFilesTemplate] = createReusableTemplate()
 
+const { accept, multiple, reset } = toRefs(props)
+
 const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
-  accept: props.accept,
-  reset: props.reset,
-  multiple: props.multiple,
+  accept,
+  reset,
+  multiple: multiple as MaybeRef<boolean>,
   dropzone: props.dropzone,
   onUpdate
 })
 const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props)
 
-const variant = computed(() => props.multiple ? 'area' : props.variant)
-const layout = computed(() => props.variant === 'button' && !props.multiple ? 'grid' : props.layout)
+const { variant: resolvedVariant } = useResolvedVariants('fileUpload', props, theme, ['variant'])
+const variant = computed(() => props.multiple ? 'area' : resolvedVariant.value)
+const layout = computed(() => resolvedVariant.value === 'button' && !props.multiple ? 'grid' : props.layout)
 const position = computed(() => {
   if (layout.value === 'grid' && props.multiple) {
     return 'inside'
@@ -202,7 +215,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload |
   disabled: props.disabled
 }))
 
-function createObjectUrl(file: File): string {
+function createObjectUrl(file: File): string | undefined {
+  if (!props.fileImage) return undefined
   return URL.createObjectURL(file)
 }
 

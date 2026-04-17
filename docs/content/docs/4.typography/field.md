@@ -1,7 +1,6 @@
 ---
 title: Field
 description: 'Document API parameters, props, and configuration options clearly.'
-framework: nuxt
 category: components
 links:
   - label: GitHub

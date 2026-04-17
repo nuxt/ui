@@ -183,6 +183,23 @@ props:
 
 ## Examples
 
+### With animated toggle
+
+Use the `#toggle` slot to replace the default toggle button with a custom animated hamburger icon using [Motion Vue](https://motion.dev/docs/vue/motion-component).
+
+::component-example
+---
+collapse: true
+iframe:
+  height: 300px;
+iframeMobile: true
+overflowHidden: true
+name: 'header-toggle-animated-example'
+props:
+  class: 'w-full'
+---
+::
+
 ### Within `app.vue`
 
 Use the Header component in your `app.vue` or in a layout:

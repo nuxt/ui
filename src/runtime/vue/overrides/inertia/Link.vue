@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { InertiaLinkProps } from '@inertiajs/vue3'
 import theme from '#build/ui/link'
@@ -63,14 +64,14 @@ export interface LinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onCl
 }
 
 export interface LinkSlots {
-  default(props: { active: boolean }): any
+  default?(props: { active: boolean }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { defu } from 'defu'
-import { useForwardProps } from 'reka-ui'
+import { useForwardProps, Slot } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { usePage } from '@inertiajs/vue3'
 import { hasProtocol } from 'ufo'
@@ -178,7 +179,7 @@ const linkClass = computed(() => {
 </script>
 
 <template>
-  <template v-if="custom">
+  <Slot v-if="custom">
     <slot
       v-bind="{
         ...$attrs,
@@ -193,7 +194,7 @@ const linkClass = computed(() => {
         isExternal
       }"
     />
-  </template>
+  </Slot>
   <ULinkBase
     v-else
     v-bind="{

@@ -24,6 +24,7 @@ function getEmojiFlag(locale: string): string {
     he: 'il', // Hebrew -> Israel
     hi: 'in', // Hindi -> India
     hy: 'am', // Armenian -> Armenia
+    is: 'is', // Icelandic -> Iceland
     ja: 'jp', // Japanese -> Japan
     ka: 'ge', // Georgian -> Georgia
     kk: 'kz', // Kazakh -> Kazakhstan

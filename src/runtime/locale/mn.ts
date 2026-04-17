@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Мессеж илгээх'
     },
+    chatReasoning: {
+      thinking: 'Бодож байна…',
+      thought: 'Бодсон',
+      thoughtFor: '{duration} бодсон'
+    },
     colorMode: {
       dark: 'Хар',
       light: 'Цагаан',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Энэ хуудсанд'
+    },
+    dropdownMenu: {
+      noMatch: 'Тохирох мэдээлэл олдсонгүй',
+      search: 'Хайх…'
     },
     dashboardSearch: {
       theme: 'Загвар'
@@ -110,7 +119,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Кодыг санах ойд хуулах'
+      },
+      prompt: {
+        copy: 'Хүсэлтийг хуулах',
+        openIn: '{name} дотор нээх'
       }
+    },
+    sidebar: {
+      close: 'Хаах',
+      toggle: 'Сэлгэх'
     },
     selectMenu: {
       create: '"{label}" үүсгэх',
