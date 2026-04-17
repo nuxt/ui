@@ -227,8 +227,9 @@ defineExpose({
         </slot>
       </div>
 
-      <slot v-if="(providers?.length && fields?.length) || !!slots.separator" name="separator">
+      <slot name="separator">
         <USeparator
+          v-if="providers?.length && fields?.length"
           v-bind="typeof separator === 'object' ? separator : { label: separator }"
           data-slot="separator"
           :class="ui.separator({ class: uiProp?.separator })"
