@@ -619,7 +619,7 @@ defineExpose({
 
     <ComboboxPortal v-bind="portalProps">
       <FieldGroupReset>
-        <ComboboxContent data-slot="content" data-position="popper" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps">
+        <ComboboxContent data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps">
           <FocusScope trapped data-slot="focusScope" :class="ui.focusScope({ class: uiProp?.focusScope })">
             <slot name="content-top" />
 

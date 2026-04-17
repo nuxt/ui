@@ -11,7 +11,7 @@ export default (options: Required<ModuleOptions>) => {
       value: 'truncate pointer-events-none',
       placeholder: 'truncate text-dimmed',
       arrow: 'fill-bg stroke-default',
-      content: 'max-h-60 w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[position=popper]:data-[state=open]:animate-[scale-in_100ms_ease-out] data-[position=popper]:data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col',
+      content: 'max-h-60 w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col',
       viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
       group: 'p-1 isolate',
       empty: 'text-center text-muted',
@@ -92,12 +92,23 @@ export default (options: Required<ModuleOptions>) => {
           itemTrailingIcon: 'size-6',
           empty: 'p-3 text-base'
         }
+      },
+      position: {
+        'popper': {
+          content: 'data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]'
+        },
+        'item-aligned': {
+          content: ''
+        }
       }
     },
     compoundVariants: (prev: Record<string, any>[]) => prev.map(item => ({
       ...item,
       class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
-    }))
+    })),
+    defaultVariants: {
+      position: 'popper'
+    }
   }, input(options))
 }
 

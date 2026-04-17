@@ -223,7 +223,50 @@ props:
 
 ### Content
 
-Use the `content` prop to control how the Select content is rendered, like its `position`, `align` or `side` for example.
+Use the `content` prop to control how the Select content is rendered, like its `align` or `side` for example.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+external:
+  - items
+  - modelValue
+items:
+  content.align:
+    - start
+    - center
+    - end
+  content.side:
+    - right
+    - left
+    - top
+    - bottom
+props:
+  modelValue: 'Backlog'
+  content:
+    align: center
+    side: bottom
+    sideOffset: 8
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
+::note
+These options only apply when `content.position` is `popper` (default).
+::
+
+### Position :badge{label="Soon" class="align-text-top"}
+
+Use the `content.position` prop to control how the Select content is positioned relative to the trigger. Defaults to `popper`, which positions the content like other popovers. Set it to `item-aligned` to align the content with the selected item (similar to a native macOS menu).
 
 ::component-code
 ---
@@ -239,22 +282,10 @@ items:
   content.position:
     - item-aligned
     - popper
-  content.align:
-    - start
-    - center
-    - end
-  content.side:
-    - right
-    - left
-    - top
-    - bottom
 props:
   modelValue: 'Todo'
   content:
     position: item-aligned
-    align: center
-    side: bottom
-    sideOffset: 8
   items:
     - Backlog
     - Todo

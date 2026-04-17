@@ -200,7 +200,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}
   highlight: highlight.value,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  fieldGroup: orientation.value
+  fieldGroup: orientation.value,
+  position: contentProps.value.position
 }))
 
 const groups = computed<SelectItem[][]>(() =>
@@ -291,7 +292,10 @@ const viewportRef = useTemplateRef('viewportRef')
 
 defineExpose({
   triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
-  viewportRef: toRef(() => viewportRef.value)
+  viewportRef: toRef(() => {
+    const instance = viewportRef.value
+    return (instance && typeof instance === 'object' && '$el' in instance ? instance.$el : instance) as HTMLElement | null
+  })
 })
 </script>
 
@@ -342,7 +346,7 @@ defineExpose({
 
     <SelectPortal v-bind="portalProps">
       <FieldGroupReset>
-        <SelectContent data-slot="content" :data-position="contentProps.position" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps">
+        <SelectContent data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps">
           <slot name="content-top" />
 
           <component :is="isItemAligned ? SelectViewport : 'div'" ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
