@@ -181,7 +181,11 @@ const uiProp = useComponentUI('select', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
+// Resolve `position` from props > `app.config.ts` `defaultVariants` > hardcoded default,
+// so both the template logic (`isItemAligned`) and the Reka UI primitive see the same value.
+// `tv()` only applies `defaultVariants` to classes, not to runtime logic (see #6360).
+const position = computed(() => props.content?.position ?? (appConfig.ui?.select as any)?.defaultVariants?.position ?? 'popper')
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: position.value }) as SelectContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as SelectArrowProps)
 
 const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
@@ -190,7 +194,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 
 const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
-const isItemAligned = computed(() => contentProps.value.position === 'item-aligned')
+const isItemAligned = computed(() => position.value === 'item-aligned')
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}) })({
   color: color.value,
@@ -201,7 +205,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,
-  position: contentProps.value.position
+  position: position.value
 }))
 
 const groups = computed<SelectItem[][]>(() =>
