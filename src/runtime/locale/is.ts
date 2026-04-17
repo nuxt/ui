@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Afrita kóða á klippiborð'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Afrita fyrirmæli',
+        openIn: 'Opna í {name}'
       }
     },
     sidebar: {

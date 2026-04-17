@@ -1,101 +1,94 @@
 ---
 title: Prompt
-description: 'Display pre-built AI prompts with one-click copy and Cursor integration.'
+description: 'Display pre-built AI prompts with one-click copy and IDE integration.'
 category: components
 links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Prompt.vue
+navigation.badge: Soon
 ---
 
 ## Usage
 
-Use the `prompt` component to display a pre-built AI prompt that users can copy to their clipboard or open directly in [Cursor](https://www.cursor.com). The `description` prop is shown as the visible label, while the default slot contains the prompt text that gets copied.
+Use the `prompt` component to display a pre-built AI prompt that users can copy to their clipboard or open directly in their IDE. The `description` prop is shown as the visible label, while the default slot contains the prompt text that gets copied.
 
-::code-preview{class="[&>div]:*:w-full [&>div]:*:my-0"}
+::component-code{slug="prompt" prose}
+---
+props:
+  description: Build a dashboard layout with Nuxt UI.
+  class: 'w-full my-0'
+hide:
+  - class
+slots:
+  default: |
+    You are a Nuxt UI expert. Help me build a dashboard layout with a collapsible sidebar and a sticky top navbar.
 
-::prompt{description="Generate clear, concise documentation." icon="i-lucide-sparkles"}
-You are a technical writing assistant. Write documentation that is clear, accurate, and concise.
-- Use second-person voice ("you") and active verbs.
-- Start procedures with a goal-oriented heading.
-- Before writing, ask clarifying questions about the end users of the documentation, their goals, and their needs.
-::
-
-#code
-
-```mdc
-::prompt{description="Generate clear, concise documentation." icon="i-lucide-sparkles"}
-You are a technical writing assistant. Write documentation that is clear, accurate, and concise.
-- Use second-person voice ("you") and active verbs.
-- Start procedures with a goal-oriented heading.
-- Before writing, ask clarifying questions about the end users of the documentation, their goals, and their needs.
-::
-```
-
+    Requirements:
+    - Use `UDashboardPanel`, `UDashboardSidebar`, and `UDashboardNavbar`
+    - Use semantic color tokens like `bg-elevated` and `text-muted` for theming
+    - The sidebar should include navigation links with icons using `UNavigationMenu`
+    - The navbar should display a breadcrumb, a search button, and a user dropdown menu
+    - The layout must be fully responsive and collapse the sidebar on mobile
+---
 ::
 
 ### Icon
 
 Use the `icon` prop to display an icon next to the description.
 
-::code-preview{class="[&>div]:*:w-full [&>div]:*:my-0"}
+::component-code{slug="prompt" prose}
+---
+ignore:
+  - description
+hide:
+  - class
+props:
+  description: Create a form with validation.
+  icon: i-lucide-file-pen-line
+  class: 'w-full my-0'
+slots:
+  default: |
+    Create a registration form using Nuxt UI with Zod schema validation.
 
-:::div{class="flex flex-col gap-4 w-full"}
-
-::prompt{description="Summarize the key points of a document."}
-You are a document analyst. Read the provided document and extract the key points into a concise summary with bullet points.
-::
-
-::prompt{description="Review code for best practices." icon="i-lucide-code"}
-You are a senior software engineer. Review the provided code for best practices, performance issues, and potential bugs. Be constructive and suggest improvements.
-::
-
-:::
-
-#code
-
-```mdc
-::prompt{description="Summarize the key points of a document."}
-You are a document analyst. Read the provided document and extract the key points into a concise summary with bullet points.
-::
-
-::prompt{description="Review code for best practices." icon="i-lucide-code"}
-You are a senior software engineer. Review the provided code for best practices, performance issues, and potential bugs. Be constructive and suggest improvements.
-::
-```
-
+    Requirements:
+    - Use `UForm` with a Zod schema for validation
+    - Add `UFormField` wrapping each input: name (`UInput`), email (`UInput` type email), role (`USelect` with options Admin, Editor, Viewer)
+    - Include a submit `UButton` with loading state
+    - Display inline error messages below each field
+    - On successful submit, show a `UToast` notification
+---
 ::
 
 ### Actions
 
 Use the `actions` prop to control which buttons are displayed. Defaults to `["copy"]`. Available actions are `copy`, `cursor` and `windsurf`.
 
-::code-preview{class="[&>div]:*:w-full [&>div]:*:my-0"}
+::component-code{slug="prompt" prose}
+---
+ignore:
+  - description
+  - icon
+hide:
+  - class
+props:
+  description: Add a color mode toggle.
+  icon: i-lucide-sun-moon
+  actions:
+    - copy
+    - cursor
+    - windsurf
+  class: 'w-full my-0'
+slots:
+  default: |
+    Add a color mode toggle to my Nuxt app.
 
-:::div{class="flex flex-col gap-4 w-full"}
-
-::prompt{description="Debug a failing test." icon="i-lucide-bug" :actions='["copy", "cursor", "windsurf"]'}
-Analyze the failing test output below and identify the root cause. Suggest a fix with an explanation.
-::
-
-::prompt{description="Write unit tests for a function." icon="i-lucide-test-tube" :actions='["cursor"]'}
-Write comprehensive unit tests for the function provided. Cover edge cases, error handling, and happy paths.
-::
-
-:::
-
-#code
-
-```mdc
-::prompt{description="Debug a failing test." icon="i-lucide-bug" :actions='["copy", "cursor", "windsurf"]'}
-Analyze the failing test output below and identify the root cause. Suggest a fix with an explanation.
-::
-
-::prompt{description="Write unit tests for a function." icon="i-lucide-test-tube" :actions='["cursor"]'}
-Write comprehensive unit tests for the function provided. Cover edge cases, error handling, and happy paths.
-::
-```
-
+    Requirements:
+    - Use `useColorMode` from `@nuxtjs/color-mode` to manage the current mode
+    - Render a `UButton` with `variant="ghost"` that cycles between `light`, `dark`, and `system` on click
+    - Update the button icon dynamically: `i-lucide-sun` for light, `i-lucide-moon` for dark, `i-lucide-monitor` for system
+    - Add a tooltip using `UTooltip` that shows the current active mode
+---
 ::
 
 ## API

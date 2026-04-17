@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'คัดลอกโค้ดไปยังคลิปบอร์ด'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'คัดลอกพรอมต์',
+        openIn: 'เปิดใน {name}'
       }
     },
     sidebar: {

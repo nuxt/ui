@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Code an d\'Zwëschspäicher kopéieren'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Prompt kopéieren',
+        openIn: 'An {name} opmaachen'
       }
     },
     sidebar: {

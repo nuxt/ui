@@ -122,8 +122,8 @@ export default defineLocale<Messages>({
         copy: 'لەبەرگرتنەوەی کۆد'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'لەبەرگرتنەوەی فەرمان',
+        openIn: 'کردنەوە لە {name}'
       }
     },
     sidebar: {

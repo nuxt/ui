@@ -123,8 +123,8 @@ export default defineLocale<Messages>({
         copy: 'კოდის კოპირება ბუფერში'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'მოთხოვნის კოპირება',
+        openIn: 'გახსნა {name}-ში'
       }
     },
     sidebar: {

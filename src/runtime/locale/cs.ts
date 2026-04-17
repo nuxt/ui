@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Kopírovat kód do schránky'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Kopírovat prompt',
+        openIn: 'Otevřít v {name}'
       }
     },
     sidebar: {

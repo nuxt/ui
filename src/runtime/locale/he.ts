@@ -122,8 +122,8 @@ export default defineLocale<Messages>({
         copy: 'העתק קוד ללוח'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'העתק הנחיה',
+        openIn: 'פתח ב-{name}'
       }
     },
     sidebar: {

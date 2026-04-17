@@ -24,11 +24,12 @@ export interface ProsePromptSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
+import { computed } from 'vue'
 import { useClipboard } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../../composables/useComponentUI'
 import { useLocale } from '../../composables/useLocale'
+import { getSlotChildrenText } from '../../utils'
 import { tv } from '../../utils/tv'
 import UIcon from '../Icon.vue'
 import UButton from '../Button.vue'
@@ -38,20 +39,19 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<ProsePromptProps>(), {
   actions: () => ['copy']
 })
-defineSlots<ProsePromptSlots>()
+const slots = defineSlots<ProsePromptSlots>()
 
 const { t } = useLocale()
 const { copy, copied } = useClipboard()
 const appConfig = useAppConfig() as ProsePrompt['AppConfig']
 const uiProp = useComponentUI('prose.prompt', props)
 
-const contentRef = useTemplateRef('contentRef')
-
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.prompt || {}) })())
 
 function getPromptText() {
-  return (contentRef.value?.textContent ?? '').trim()
+  const children = slots.default?.()
+  return children ? getSlotChildrenText(children).trim() : ''
 }
 
 function copyPrompt() {
@@ -83,18 +83,12 @@ function openInWindsurf() {
       </p>
     </div>
 
-    <div ref="contentRef" hidden>
-      <slot mdc-unwrap="p" />
-    </div>
-
     <div :class="ui.actions({ class: uiProp?.actions })">
       <UButton
         v-if="actions.includes('copy')"
         :icon="copied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
-        color="neutral"
-        variant="ghost"
         size="sm"
-        :aria-label="t('prose.prompt.copy')"
+        :label="t('prose.prompt.copy')"
         @click="copyPrompt"
       />
 
@@ -102,9 +96,9 @@ function openInWindsurf() {
         v-if="actions.includes('cursor')"
         icon="i-simple-icons-cursor"
         color="neutral"
-        variant="ghost"
+        variant="outline"
         size="sm"
-        :aria-label="t('prose.prompt.openIn', { name: 'Cursor' })"
+        :label="t('prose.prompt.openIn', { name: 'Cursor' })"
         @click="openInCursor"
       />
 
@@ -112,9 +106,9 @@ function openInWindsurf() {
         v-if="actions.includes('windsurf')"
         icon="i-simple-icons-windsurf"
         color="neutral"
-        variant="ghost"
+        variant="outline"
         size="sm"
-        :aria-label="t('prose.prompt.openIn', { name: 'Windsurf' })"
+        :label="t('prose.prompt.openIn', { name: 'Windsurf' })"
         @click="openInWindsurf"
       />
     </div>

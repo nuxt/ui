@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Kopjo kodin në kujtesë'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Kopjo komandën',
+        openIn: 'Hap në {name}'
       }
     },
     sidebar: {

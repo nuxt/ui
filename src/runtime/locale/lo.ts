@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'ຄັດລອກໂຄ້ດ'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'ຄັດລອກຄຳສັ່ງ',
+        openIn: 'ເປີດໃນ {name}'
       }
     },
     sidebar: {

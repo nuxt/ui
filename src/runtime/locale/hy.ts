@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Պատճենել կոդը սեղմատախտակին'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Պատdelays delaysdelays',
+        openIn: 'Բացել {name}-ում'
       }
     },
     sidebar: {

@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Кодыг санах ойд хуулах'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Хүсэлтийг хуулах',
+        openIn: '{name} дотор нээх'
       }
     },
     sidebar: {

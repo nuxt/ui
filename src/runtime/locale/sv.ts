@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Kopiera kod till urklipp'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Kopiera prompt',
+        openIn: 'Öppna i {name}'
       }
     },
     sidebar: {

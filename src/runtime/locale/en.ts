@@ -116,7 +116,7 @@ export default defineLocale<Messages>({
         copy: 'Copy code to clipboard'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
+        copy: 'Copy prompt',
         openIn: 'Open in {name}'
       }
     },

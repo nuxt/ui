@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Copiază codul în clipboard'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Copiază promptul',
+        openIn: 'Deschide în {name}'
       }
     },
     sidebar: {

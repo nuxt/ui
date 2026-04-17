@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Koddan buferga nusxa olish'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'So\'rovni nusxalash',
+        openIn: '{name} da ochish'
       }
     },
     sidebar: {

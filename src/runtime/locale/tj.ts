@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Нусха бардоштан'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Нусхабардории дархост',
+        openIn: 'Кушодан дар {name}'
       }
     },
     sidebar: {

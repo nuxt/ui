@@ -122,8 +122,8 @@ export default defineLocale<Messages>({
         copy: 'نسخ الكود إلى الحافظة'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'نسخ التعليمات',
+        openIn: 'فتح في {name}'
       }
     },
     sidebar: {

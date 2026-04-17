@@ -122,8 +122,8 @@ export default defineLocale<Messages>({
         copy: 'كۆچۈرۈش'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'كۆچۈرۈش',
+        openIn: '{name} دا ئېچىش'
       }
     },
     sidebar: {

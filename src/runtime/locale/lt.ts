@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Kopijuoti kodą į iškarpinę'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Kopijuoti užklausą',
+        openIn: 'Atidaryti {name}'
       }
     },
     sidebar: {

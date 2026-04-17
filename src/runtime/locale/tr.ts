@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Kodu panoya kopyala'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'İstemi kopyala',
+        openIn: '{name} içinde aç'
       }
     },
     sidebar: {

@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Αντιγραφή κώδικα στο πρόχειρο'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Αντιγραφή εντολής',
+        openIn: 'Άνοιγμα σε {name}'
       }
     },
     sidebar: {

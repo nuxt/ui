@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Kód másolása a vágólapra'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Prompt másolása',
+        openIn: 'Megnyitás: {name}'
       }
     },
     sidebar: {

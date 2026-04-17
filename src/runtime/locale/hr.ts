@@ -121,8 +121,8 @@ export default defineLocale<Messages>({
         copy: 'Kopiraj kod u međuspremnik'
       },
       prompt: {
-        copy: 'Copy prompt to clipboard',
-        openIn: 'Open in {name}'
+        copy: 'Kopiraj prompt',
+        openIn: 'Otvori u {name}'
       }
     },
     sidebar: {
