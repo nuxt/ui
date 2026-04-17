@@ -94,6 +94,7 @@ Load these based on your task. **Do not load all files at once** — only load w
 | Semantic colors | Use `text-default`, `bg-elevated`, etc. - never Tailwind palette |
 | Reka UI props | Use `reactivePick` + `useForwardPropsEmits` to forward props |
 | Form components | Use `useFormField` and `useFieldGroup` composables |
+| Variant in template logic | Use `useResolvedVariants(name, propValues, fallbacks)` when variant values are consumed in template logic (`<component :is>`, `v-if`, computed) — `tv()` `defaultVariants` only affect classes, not runtime checks |
 
 ## Component Creation Workflow
 
