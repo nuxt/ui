@@ -100,7 +100,7 @@ The Link component automatically integrates with [`@nuxtjs/i18n`](https://i18n.n
 ```
 
 ::tip
-You can still manually use `localePath()` or `localeRoute()` if needed. The Link component handles already-localized paths correctly without double-localizing.
+You can still manually use `localePath()` or `localeRoute()` if needed.
 ::
 
 ::note{to="/docs/getting-started/integrations/i18n/nuxt#dynamic-locale"}
