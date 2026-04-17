@@ -1,7 +1,6 @@
 ---
 title: Badge
 description: 'Display version numbers, status labels, and tags within your content.'
-framework: nuxt
 category: components
 links:
   - label: GitHub

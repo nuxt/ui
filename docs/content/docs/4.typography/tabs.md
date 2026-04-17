@@ -1,7 +1,6 @@
 ---
 title: Tabs
 description: 'Organize related content in interactive tabbed interfaces.'
-framework: nuxt
 category: components
 links:
   - label: GitHub

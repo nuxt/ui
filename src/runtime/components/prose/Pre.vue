@@ -25,7 +25,7 @@ export interface ProsePreSlots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 import { useClipboard } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../../composables/useComponentUI'
@@ -42,8 +42,16 @@ const { copy, copied } = useClipboard()
 const appConfig = useAppConfig() as ProsePre['AppConfig']
 const uiProp = useComponentUI('prose.pre', props)
 
+const baseRef = useTemplateRef('baseRef')
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.pre || {}) })())
+
+function copyCode() {
+  const code = props.code ?? baseRef.value?.textContent ?? ''
+
+  copy(code)
+}
 </script>
 
 <template>
@@ -62,9 +70,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.pre |
       :aria-label="t('prose.pre.copy')"
       :class="ui.copy({ class: uiProp?.copy })"
       tabindex="-1"
-      @click="copy(props.code || '')"
+      @click="copyCode"
     />
 
-    <pre :class="ui.base({ class: [uiProp?.base, props.class] })" v-bind="$attrs"><slot /></pre>
+    <pre ref="baseRef" :class="ui.base({ class: [uiProp?.base, props.class] })" v-bind="$attrs"><slot /></pre>
   </div>
 </template>

@@ -85,6 +85,7 @@ import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, 
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
+import { FieldGroupReset } from '../composables/useFieldGroup'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { pointerDownOutside } from '../utils/overlay'
@@ -217,17 +218,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
     </DialogTrigger>
 
     <DialogPortal v-bind="portalProps">
-      <template v-if="scrollable">
-        <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })">
+      <FieldGroupReset>
+        <template v-if="scrollable">
+          <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })">
+            <ReuseContentTemplate />
+          </DialogOverlay>
+        </template>
+
+        <template v-else>
+          <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })" />
+
           <ReuseContentTemplate />
-        </DialogOverlay>
-      </template>
-
-      <template v-else>
-        <DialogOverlay v-if="overlay" data-slot="overlay" :class="ui.overlay({ class: uiProp?.overlay })" />
-
-        <ReuseContentTemplate />
-      </template>
+        </template>
+      </FieldGroupReset>
     </DialogPortal>
   </DialogRoot>
 </template>

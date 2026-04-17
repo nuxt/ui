@@ -81,6 +81,27 @@ You can use multiple `EditorMentionMenu` components on the same editor with diff
 ```
 ::
 
+### Suggestion :badge{label="Soon" class="align-text-top"}
+
+Use the `suggestion` prop to customize TipTap's [Suggestion matching behavior](https://tiptap.dev/docs/editor/api/utilities/suggestion#settings).
+
+This is useful when the trigger character should open directly after other characters instead of requiring the default whitespace prefix.
+
+```vue
+<template>
+  <UEditor v-slot="{ editor }">
+    <UEditorMentionMenu
+      :editor="editor"
+      :items="items"
+      char="#"
+      :suggestion="{
+        allowedPrefixes: null
+      }"
+    />
+  </UEditor>
+</template>
+```
+
 ### Options
 
 Use the `options` prop to customize the positioning behavior using [Floating UI options](https://floating-ui.com/docs/computeposition#options).

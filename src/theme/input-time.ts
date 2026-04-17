@@ -16,23 +16,23 @@ export default (options: Required<ModuleOptions>) => {
       size: {
         xs: {
           base: (prev: string) => [prev, 'gap-0.25'],
-          segment: 'not-data-[segment=literal]:w-6'
+          segment: 'not-data-[segment=literal]:w-8'
         },
         sm: {
           base: (prev: string) => [prev, 'gap-0.5'],
-          segment: 'not-data-[segment=literal]:w-6'
+          segment: 'not-data-[segment=literal]:w-8'
         },
         md: {
           base: (prev: string) => [prev, 'gap-0.5'],
-          segment: 'not-data-[segment=literal]:w-7'
+          segment: 'not-data-[segment=literal]:w-9'
         },
         lg: {
           base: (prev: string) => [prev, 'gap-0.75'],
-          segment: 'not-data-[segment=literal]:w-7'
+          segment: 'not-data-[segment=literal]:w-9'
         },
         xl: {
           base: (prev: string) => [prev, 'gap-0.75'],
-          segment: 'not-data-[segment=literal]:w-8'
+          segment: 'not-data-[segment=literal]:w-10'
         }
       }
     },

@@ -7,7 +7,7 @@ export function useSearch() {
   const searchTerm = ref('')
 
   function onSelect() {
-    track('AI Chat Opened', { hasSearchTerm: !!searchTerm.value })
+    track('AI Chat Opened', { source: 'search', hasSearchTerm: !!searchTerm.value })
 
     if (searchTerm.value) {
       messages.value = [...messages.value, {

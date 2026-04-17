@@ -65,6 +65,7 @@ Options:
 
 - **Conventional commits**: All commit messages must follow [conventional commits](https://conventionalcommits.org) (e.g. `fix(Button): resolve hover state`, `feat(Modal): add fullscreen prop`).
 - **Semantic colors**: Use `text-default`, `bg-elevated`, etc. — never raw Tailwind palette colors like `text-gray-500`.
+- **`Soon` badge on docs headings**: PRs that introduce a new feature or fix often add `:badge{label="Soon" class="align-text-top"}` to the relevant docs heading. This is intentional: the docs site redeploys on merge, but the feature only ships on the next npm release — the badge bridges that gap. Do NOT flag this as inconsistent in reviews. See [documentation.md](.github/contributing/documentation.md) for details.
 
 ## Library Source (`src/` and `test/`)
 
@@ -93,6 +94,7 @@ Load these based on your task. **Do not load all files at once** — only load w
 | Semantic colors | Use `text-default`, `bg-elevated`, etc. - never Tailwind palette |
 | Reka UI props | Use `reactivePick` + `useForwardPropsEmits` to forward props |
 | Form components | Use `useFormField` and `useFieldGroup` composables |
+| Variant in template logic | Use `useResolvedVariants(name, props, theme, ['variant'])` when variant values are consumed in template logic (`<component :is>`, `v-if`, computed) — `tv()` `defaultVariants` only affect classes, not runtime checks |
 
 ## Component Creation Workflow
 
@@ -126,6 +128,9 @@ PR Review:
 - [ ] Conventional commit message format
 - [ ] All checks pass (lint, typecheck, test)
 ```
+
+**Do NOT flag as issues:**
+- `:badge{label="Soon"}` on docs headings in PRs adding new features/fixes (intentional — bridges the gap between docs deploy on merge and feature shipping on next npm release).
 
 ## Before Submitting
 

@@ -5,6 +5,8 @@ import { hash } from 'ohash'
 import { useElementSize } from '@vueuse/core'
 import { get, set } from '#ui/utils'
 
+const { track } = useAnalytics()
+
 const props = withDefaults(defineProps<{
   name: string
   class?: any
@@ -262,6 +264,7 @@ const urlSearchParams = computed(() => {
               size="sm"
               class="absolute -bottom-[13px] -right-[13px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
               aria-label="Open in playground"
+              @click="track('Playground Opened', { component: camelName, source: 'example' })"
             />
           </UTooltip>
 

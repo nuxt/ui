@@ -77,6 +77,7 @@ import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardProp
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useRouter, useAppConfig, useNuxtApp } from '#imports'
 import { useComponentUI } from '../../composables/useComponentUI'
+import { useResolvedVariants } from '../../composables/useResolvedVariants'
 import { useScrollspy } from '../../composables/useScrollspy'
 import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
@@ -96,6 +97,7 @@ const { t } = useLocale()
 const router = useRouter()
 const appConfig = useAppConfig() as ContentToc['AppConfig']
 const uiProp = useComponentUI('contentToc', props)
+const { highlightVariant } = useResolvedVariants('contentToc', props, theme, ['highlightVariant'])
 const { activeHeadings, updateHeadings } = useScrollspy()
 
 const [DefineListTemplate, ReuseListTemplate] = createReusableTemplate<{ links: T[], level: number }>({
@@ -110,7 +112,7 @@ const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentToc || {}) })({
   color: props.color,
   highlight: props.highlight,
-  highlightVariant: props.highlightVariant,
+  highlightVariant: highlightVariant.value,
   highlightColor: props.highlightColor || props.color
 }))
 
@@ -149,7 +151,7 @@ const indicatorStyle = computed(() => {
 
 // Generate SVG path for the circuit line structure
 const circuitMaskStyle = computed(() => {
-  if (!props.highlight || props.highlightVariant !== 'circuit' || !props.links?.length) {
+  if (!props.highlight || highlightVariant.value !== 'circuit' || !props.links?.length) {
     return
   }
 
