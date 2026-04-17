@@ -122,7 +122,7 @@ export default defineLocale<Messages>({
       },
       prompt: {
         copy: 'So\'rovni nusxalash',
-        openIn: '{name} da ochish'
+        openIn: '{name}da ochish'
       }
     },
     sidebar: {

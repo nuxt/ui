@@ -122,7 +122,7 @@ export default defineLocale<Messages>({
       },
       prompt: {
         copy: 'Copiar prompt',
-        openIn: 'Abrir no {name}'
+        openIn: 'Abrir em {name}'
       }
     },
     sidebar: {

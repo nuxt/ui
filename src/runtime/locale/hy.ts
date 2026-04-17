@@ -121,7 +121,7 @@ export default defineLocale<Messages>({
         copy: 'Պատճենել կոդը սեղմատախտակին'
       },
       prompt: {
-        copy: 'Պատdelays delaysdelays',
+        copy: 'Պատճենել հարցումը',
         openIn: 'Բացել {name}-ում'
       }
     },

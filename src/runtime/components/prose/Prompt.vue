@@ -14,7 +14,7 @@ export interface ProsePromptProps {
    */
   icon?: IconProps['name']
   /**
-   * @defaultValue '["copy"]'
+   * @defaultValue ['copy']
    */
   actions?: ('copy' | 'cursor' | 'windsurf')[]
   class?: any

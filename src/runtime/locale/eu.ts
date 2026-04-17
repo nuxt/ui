@@ -121,7 +121,7 @@ export default defineLocale<Messages>({
         copy: 'Kopiatu kodea clipboard-era'
       },
       prompt: {
-        copy: 'Kopiatu gonbidapena',
+        copy: 'Kopiatu prompt',
         openIn: '{name}(e)n ireki'
       }
     },
