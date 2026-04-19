@@ -19,6 +19,23 @@ const AvatarGroupWrapper = defineComponent({
 </UAvatarGroup>`
 })
 
+const AvatarGroupOverflowTooltipWrapper = defineComponent({
+  components: {
+    UAvatar: Avatar,
+    UAvatarGroup: AvatarGroup
+  },
+  template: `<UAvatarGroup :max="2">
+  <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
+  <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
+  <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
+  <template #overflow="{ hiddenCount, avatarProps }">
+    <span :data-hidden-count="hiddenCount">
+      <UAvatar v-bind="avatarProps" />
+    </span>
+  </template>
+</UAvatarGroup>`
+})
+
 describe('AvatarGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
 
@@ -32,6 +49,12 @@ describe('AvatarGroup', () => {
     // Slots
     ['with default slot', {}]
   ])
+
+  it('exposes the hidden count to the overflow slot', async () => {
+    const wrapper = await mountSuspended(AvatarGroupOverflowTooltipWrapper)
+
+    expect(wrapper.find('[data-hidden-count="1"]').exists()).toBe(true)
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(AvatarGroupWrapper, {
