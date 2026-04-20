@@ -14,7 +14,7 @@ export default defineNuxtModule((_options, nuxt) => {
       vcConfig.routes.unshift(
         // Add Vary header so CDNs don't serve cached HTML to agents or vice versa
         {
-          src: '^/docs/.*$',
+          src: '^/docs/(?!.*\\.md$).*$',
           headers: { Vary: 'Accept, User-Agent' },
           continue: true
         },
@@ -33,7 +33,7 @@ export default defineNuxtModule((_options, nuxt) => {
         {
           src: '^/docs/(.*)$',
           dest: '/raw/docs/$1.md',
-          has: [{ type: 'header', key: 'user-agent', value: '.*(GPTBot|ChatGPT-User|ClaudeBot|Claude-Web|CCBot|Google-Extended|PerplexityBot|Amazonbot|cohere-ai|AI2Bot|AnthropicBot).*' }]
+          has: [{ type: 'header', key: 'user-agent', value: '.*(ClaudeBot|Claude-Web|anthropic-ai|GPTBot|ChatGPT-User|OAI-SearchBot|Google-Extended|Google-CloudVertexBot|Meta-ExternalAgent|Meta-ExternalFetcher|PerplexityBot|YouBot|DeepSeekBot|Amazonbot|cohere-ai|AI2Bot|Applebot-Extended|Bytespider).*' }]
         }
       )
       await writeFile(vcJSON, JSON.stringify(vcConfig, null, 2), 'utf8')
