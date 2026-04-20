@@ -2,12 +2,12 @@
 
 exports[`PricingTable > renders with as correctly 1`] = `
 "<section data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <!--v-if-->
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -25,7 +25,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -43,7 +43,7 @@ exports[`PricingTable > renders with as correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -291,12 +291,12 @@ exports[`PricingTable > renders with as correctly 1`] = `
 
 exports[`PricingTable > renders with caption correctly 1`] = `
 "<div data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <caption data-slot="caption" class="sr-only">Caption</caption>
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -314,7 +314,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -332,7 +332,7 @@ exports[`PricingTable > renders with caption correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -580,12 +580,12 @@ exports[`PricingTable > renders with caption correctly 1`] = `
 
 exports[`PricingTable > renders with caption slot correctly 1`] = `
 "<div data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <caption data-slot="caption" class="sr-only">Caption slot</caption>
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -603,7 +603,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -621,7 +621,7 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -869,12 +869,12 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
 
 exports[`PricingTable > renders with class correctly 1`] = `
 "<div data-slot="root" class="w-full relative max-w-sm">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <!--v-if-->
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -892,7 +892,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -910,7 +910,7 @@ exports[`PricingTable > renders with class correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -1158,18 +1158,18 @@ exports[`PricingTable > renders with class correctly 1`] = `
 
 exports[`PricingTable > renders with tier slot correctly 1`] = `
 "<div data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <!--v-if-->
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">Tier slot</div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">Tier slot</div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">Tier slot</div>
         </th>
       </tr>
@@ -1357,12 +1357,12 @@ exports[`PricingTable > renders with tier slot correctly 1`] = `
 
 exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
 "<div data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <!--v-if-->
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>Tier badge slot
@@ -1379,7 +1379,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div>Tier badge slot
@@ -1396,7 +1396,7 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>Tier badge slot
@@ -1640,12 +1640,12 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
 
 exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
 "<div data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <!--v-if-->
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -1663,7 +1663,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -1681,7 +1681,7 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -1929,12 +1929,12 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
 
 exports[`PricingTable > renders with tier-button slot correctly 1`] = `
 "<div data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <!--v-if-->
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -1949,7 +1949,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6">Tier button slot</div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -1964,7 +1964,7 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
             <div data-slot="tierButton" class="mt-6">Tier button slot</div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -2200,12 +2200,12 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
 
 exports[`PricingTable > renders with tier-description slot correctly 1`] = `
 "<div data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <!--v-if-->
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -2223,7 +2223,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -2241,7 +2241,7 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -2489,12 +2489,12 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
 
 exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
 "<div data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <!--v-if-->
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -2512,7 +2512,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -2530,7 +2530,7 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -2778,12 +2778,12 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
 
 exports[`PricingTable > renders with tier-price slot correctly 1`] = `
 "<div data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <!--v-if-->
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -2801,7 +2801,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -2819,7 +2819,7 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -3067,12 +3067,12 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
 
 exports[`PricingTable > renders with tier-title slot correctly 1`] = `
 "<div data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <!--v-if-->
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Tier title slot</div>
@@ -3090,7 +3090,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Tier title slot</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -3108,7 +3108,7 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Tier title slot</div>
@@ -3356,12 +3356,12 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
 
 exports[`PricingTable > renders with tiers and sections correctly 1`] = `
 "<div data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table">
+  <table data-slot="table" class="w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit">
     <!--v-if-->
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -3379,7 +3379,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -3397,7 +3397,7 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>
@@ -3645,12 +3645,12 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
 
 exports[`PricingTable > renders with ui correctly 1`] = `
 "<div data-slot="root" class="w-full relative">
-  <table data-slot="table" class="w-full border-separate border-spacing-x-0 hidden md:table table-auto">
+  <table data-slot="table" class="w-full border-separate border-spacing-x-0 hidden md:table h-fit table-auto">
     <!--v-if-->
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Free</div>
@@ -3668,7 +3668,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0 bg-elevated/50 border-x border-t border-default rounded-t-lg">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full bg-elevated/50 border-x border-t border-default rounded-t-lg">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Pro</div><span data-slot="tierBadge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary/10 text-primary ring ring-inset ring-primary/25 truncate"><!--v-if--><span data-slot="label" class="truncate">Most popular</span>
@@ -3686,7 +3686,7 @@ exports[`PricingTable > renders with ui correctly 1`] = `
               </button></div>
           </div>
         </th>
-        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-0">
+        <th scope="col" data-slot="tier" class="p-6 text-left font-normal h-full">
           <div data-slot="tierWrapper" class="h-full flex flex-col justify-between">
             <div data-slot="tierTitleWrapper" class="flex items-center gap-3">
               <div data-slot="tierTitle" class="text-lg font-semibold text-highlighted">Enterprise</div>

@@ -1,7 +1,7 @@
 export default {
   slots: {
     root: 'w-full relative',
-    table: 'w-full table-fixed border-separate border-spacing-x-0 hidden md:table',
+    table: 'w-full table-fixed border-separate border-spacing-x-0 hidden md:table h-fit',
     list: 'md:hidden flex flex-col gap-6 w-full',
     item: 'p-6 flex flex-col border border-default rounded-lg',
     caption: 'sr-only',
@@ -10,7 +10,7 @@ export default {
     tr: '',
     th: 'py-4 font-normal text-left border-b border-default',
     td: 'px-6 py-4 text-center border-b border-default',
-    tier: 'p-6 text-left font-normal h-0',
+    tier: 'p-6 text-left font-normal h-full',
     tierWrapper: 'h-full flex flex-col justify-between',
     tierTitleWrapper: 'flex items-center gap-3',
     tierTitle: 'text-lg font-semibold text-highlighted',
