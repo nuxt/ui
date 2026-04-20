@@ -82,10 +82,30 @@ useHead({
   link: [
     {
       rel: 'alternate',
-      href: joinURL(site.url, 'raw', `${path.value}.md`),
+      href: `${site.url}${path.value}.md`,
       type: 'text/markdown'
     }
-  ]
+  ],
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'TechArticle',
+      'headline': `${prefix}${title} ${suffix}`.trim(),
+      'description': description,
+      'url': joinURL(site.url, path.value),
+      'dateModified': new Date().toISOString(),
+      'breadcrumb': {
+        '@type': 'BreadcrumbList',
+        'itemListElement': breadcrumb.value?.map((item, index) => ({
+          '@type': 'ListItem',
+          'position': index + 1,
+          'name': item.label,
+          'item': item.to ? joinURL(site.url, String(item.to)) : undefined
+        })) || []
+      }
+    })
+  }]
 })
 
 const { open, messages } = useChat()
