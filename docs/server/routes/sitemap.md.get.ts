@@ -33,7 +33,10 @@ export default eventHandler(async (event) => {
     const label = sectionLabels[key] || key.charAt(0).toUpperCase() + key.slice(1).replace(/-/g, ' ')
     md += `## ${label}\n\n`
     for (const page of pages) {
-      const pageLabel = (page.title || page.path).replace(/\[/g, '\\[').replace(/\]/g, '\\]')
+      const pageLabel = (page.title || page.path)
+        .replace(/\\/g, '\\\\')
+        .replace(/\[/g, '\\[')
+        .replace(/\]/g, '\\]')
       md += `- [${pageLabel}](https://ui.nuxt.com${page.path}.md)\n`
     }
     md += '\n'
