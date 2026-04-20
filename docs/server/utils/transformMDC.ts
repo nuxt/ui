@@ -616,15 +616,7 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     })
   }
 
-  // Transform field-group to remove wrapper (fields already handled)
-  const fieldWrappers = ['field-group', 'collapsible']
-  for (const wrapperType of fieldWrappers) {
-    visitAndReplace(doc, wrapperType, (node) => {
-      replaceWithChildren(node, node.slice(2))
-    })
-  }
-
-  // Transform field to a definition format
+  // Transform field to a definition format (before field-group unwrapping so attrs are intact)
   visitAndReplace(doc, 'field', (node) => {
     const attrs = node[1] || {}
     const content = node.slice(2)
@@ -662,6 +654,14 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
       node.push(part)
     }
   })
+
+  // Remove field-group / collapsible wrappers (after fields are transformed to <p>)
+  const fieldWrappers = ['field-group', 'collapsible']
+  for (const wrapperType of fieldWrappers) {
+    visitAndReplace(doc, wrapperType, (node) => {
+      replaceWithChildren(node, node.slice(2))
+    })
+  }
 
   // Transform code-preview to extract the Vue code as a code block
   visitAndReplace(doc, 'code-preview', (node) => {
