@@ -22,7 +22,7 @@ export default {
     tierBilling: 'flex flex-col justify-between min-w-0',
     tierBillingPeriod: 'text-toned truncate text-xs font-medium',
     tierBillingCycle: 'text-muted truncate text-xs font-medium',
-    tierButton: 'mt-6 justify-end',
+    tierButton: 'mt-6',
     tierFeatureIcon: 'size-5 shrink-0',
     section: 'mt-6 flex flex-col gap-2',
     sectionTitle: 'font-semibold text-sm text-highlighted',
