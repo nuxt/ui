@@ -94,7 +94,6 @@ useHead({
       'headline': `${prefix}${title} ${suffix}`.trim(),
       'description': description,
       'url': joinURL(site.url, path.value),
-      'dateModified': new Date().toISOString(),
       'breadcrumb': {
         '@type': 'BreadcrumbList',
         'itemListElement': breadcrumb.value?.map((item, index) => ({
@@ -104,7 +103,7 @@ useHead({
           'item': item.to ? joinURL(site.url, String(item.to)) : undefined
         })) || []
       }
-    })
+    }).replace(/</g, '\\u003c').replace(/>/g, '\\u003e')
   }]
 })
 

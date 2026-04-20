@@ -3,6 +3,10 @@ import { eventHandler, setHeader } from 'h3'
 
 const DOMAIN = 'https://ui.nuxt.com'
 
+function xmlEscape(str: string): string {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;')
+}
+
 export default eventHandler(async (event) => {
   const pages = await queryCollection(event, 'docs')
     .select('path')
@@ -11,9 +15,8 @@ export default eventHandler(async (event) => {
     .order('path', 'ASC')
     .all()
 
-  const today = new Date().toISOString().split('T')[0]
   const urls = pages.map(page =>
-    `  <url>\n    <loc>${DOMAIN}${page.path}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`
+    `  <url>\n    <loc>${xmlEscape(`${DOMAIN}${page.path}`)}</loc>\n  </url>`
   ).join('\n')
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

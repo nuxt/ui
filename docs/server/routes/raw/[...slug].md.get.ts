@@ -49,10 +49,9 @@ export default eventHandler(async (event) => {
   const canonicalUrl = `${DOMAIN}${path}`
   const frontmatter = [
     '---',
-    `title: "${(page.title || '').replace(/"/g, '\\"')}"`,
-    `description: "${(page.description || '').replace(/"/g, '\\"')}"`,
-    `canonical_url: "${canonicalUrl}"`,
-    `last_updated: "${new Date().toISOString()}"`,
+    `title: ${JSON.stringify(page.title || '')}`,
+    `description: ${JSON.stringify(page.description || '')}`,
+    `canonical_url: ${JSON.stringify(canonicalUrl)}`,
     '---',
     ''
   ].join('\n')
