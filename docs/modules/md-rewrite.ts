@@ -15,7 +15,7 @@ export default defineNuxtModule((_options, nuxt) => {
         // Add Vary header so CDNs don't serve cached HTML to agents or vice versa
         {
           src: '^/docs/.*$',
-          headers: { 'Vary': 'Accept, User-Agent' },
+          headers: { Vary: 'Accept, User-Agent' },
           continue: true
         },
         // Rewrite /docs/*.md URLs to the raw markdown handler
