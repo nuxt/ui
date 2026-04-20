@@ -15,8 +15,9 @@ export default eventHandler(async (event) => {
     .order('path', 'ASC')
     .all()
 
+  const today = new Date().toISOString().split('T')[0]
   const urls = pages.map(page =>
-    `  <url>\n    <loc>${xmlEscape(`${DOMAIN}${page.path}`)}</loc>\n  </url>`
+    `  <url>\n    <loc>${xmlEscape(`${DOMAIN}${page.path}`)}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`
   ).join('\n')
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

@@ -27,9 +27,7 @@ export default eventHandler(async (event) => {
   let page: PageCollectionItemBase | null = null
   for (const collection of _collections) {
     page = await queryCollection(event, collection as keyof Collections).path(path).first() as PageCollectionItemBase | null
-    if (page) {
-      break
-    }
+    if (page) break
   }
 
   if (!page) {
@@ -46,12 +44,13 @@ export default eventHandler(async (event) => {
     page.body.value.unshift(['h1', {}, page.title])
   }
 
-  const canonicalUrl = `${DOMAIN}${path}`
+  const canonicalUrl = `${DOMAIN}${page.path}`
   const frontmatter = [
     '---',
     `title: ${JSON.stringify(page.title || '')}`,
     `description: ${JSON.stringify(page.description || '')}`,
     `canonical_url: ${JSON.stringify(canonicalUrl)}`,
+    `last_updated: ${JSON.stringify(new Date().toISOString().split('T')[0])}`,
     '---',
     ''
   ].join('\n')
