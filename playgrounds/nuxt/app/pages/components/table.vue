@@ -2,7 +2,7 @@
 import { h, resolveComponent } from 'vue'
 import { upperFirst } from 'scule'
 import type { TableColumn, TableRow } from '@nuxt/ui'
-import type { Column } from '@tanstack/vue-table'
+import type { Column, RowPinningState } from '@tanstack/vue-table'
 import { getPaginationRowModel } from '@tanstack/vue-table'
 import { useClipboard, refDebounced } from '@vueuse/core'
 
@@ -80,7 +80,21 @@ function getRowItems(row: TableRow<Payment>) {
   }]
 }
 
+const rowPinning = ref<RowPinningState>({ top: [], bottom: [] })
+
 const columns: TableColumn<Payment>[] = [{
+  id: 'pin',
+  cell: ({ row }) => h(UButton, {
+    'icon': row.getIsPinned() ? 'i-lucide-pin-off' : 'i-lucide-pin',
+    'color': row.getIsPinned() ? 'primary' : 'neutral',
+    'variant': 'ghost',
+    'aria-label': row.getIsPinned() ? 'Unpin row' : 'Pin row to top',
+    'onClick': () => row.pin(row.getIsPinned() ? false : 'top')
+  }),
+  enableSorting: false,
+  enableHiding: false,
+  size: 64
+}, {
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
     'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
@@ -115,7 +129,8 @@ const columns: TableColumn<Payment>[] = [{
       month: 'short',
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false
+      hour12: false,
+      timeZone: 'UTC'
     })
   }
 }, {
@@ -235,7 +250,7 @@ function getPinnedHeader(column: Column<Payment>, label: string, position: 'left
 
 const loading = ref(true)
 const columnPinning = ref({
-  left: ['select'],
+  left: ['pin', 'select'],
   right: ['actions']
 })
 
@@ -335,11 +350,12 @@ onMounted(() => {
     </UDropdownMenu>
   </Navbar>
 
-  <div class="flex flex-col gap-4 w-full h-full">
+  <div class="flex flex-col flex-1 gap-4 w-full max-h-[calc(100vh-7rem)]">
     <UContextMenu :items="contextmenuItems">
       <UTable
         ref="table"
         :key="String(virtualize)"
+        v-model:row-pinning="rowPinning"
         :data="data"
         :columns="columns"
         :column-pinning="columnPinning"

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Gönder'
     },
+    chatReasoning: {
+      thinking: 'Düşünüyor…',
+      thought: 'Düşündü',
+      thoughtFor: '{duration} düşündü'
+    },
     colorMode: {
       dark: 'Koyu',
       light: 'Açık',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Bu sayfada'
+    },
+    dropdownMenu: {
+      noMatch: 'Eşleşen veri yok',
+      search: 'Ara…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -110,7 +119,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kodu panoya kopyala'
+      },
+      prompt: {
+        copy: 'İstemi kopyala',
+        openIn: '{name} içinde aç'
       }
+    },
+    sidebar: {
+      close: 'Kapat',
+      toggle: 'Değiştir'
     },
     selectMenu: {
       create: '"{label}" oluştur',

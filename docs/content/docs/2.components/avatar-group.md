@@ -39,13 +39,13 @@ props:
 slots:
   default: |
 
-    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
-    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
-    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
+    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy" />
+    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy" />
+    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" loading="lazy" />
 ---
-:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac"}
-:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel"}
-:u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
+:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy"}
+:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy"}
+:u-avatar{src="https://github.com/noook.png" alt="Neil Richter" loading="lazy"}
 ::
 
 ### Max
@@ -60,13 +60,13 @@ props:
 slots:
   default: |
 
-    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
-    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
-    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
+    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy" />
+    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy" />
+    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" loading="lazy" />
 ---
-:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac"}
-:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel"}
-:u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
+:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy"}
+:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy"}
+:u-avatar{src="https://github.com/noook.png" alt="Neil Richter" loading="lazy"}
 ::
 
 ## Examples

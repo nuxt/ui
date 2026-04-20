@@ -35,6 +35,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'ناردن'
     },
+    chatReasoning: {
+      thinking: 'بیرکردنەوە…',
+      thought: 'بیری کردەوە',
+      thoughtFor: 'بە ماوەی {duration} بیری کردەوە'
+    },
     colorMode: {
       dark: 'تاریک',
       light: 'ڕووناک',
@@ -58,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'لەم پەڕەیەدا'
+    },
+    dropdownMenu: {
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
+      search: 'گەڕان…'
     },
     dashboardSearch: {
       theme: 'ڕووکار'
@@ -111,7 +120,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'لەبەرگرتنەوەی کۆد'
+      },
+      prompt: {
+        copy: 'لەبەرگرتنەوەی فەرمان',
+        openIn: 'کردنەوە لە {name}'
       }
+    },
+    sidebar: {
+      close: 'داخستن',
+      toggle: 'گۆڕین'
     },
     selectMenu: {
       create: '"{label}" زیادکردنی',

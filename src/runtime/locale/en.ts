@@ -58,6 +58,10 @@ export default defineLocale<Messages>({
     contentToc: {
       title: 'On this page'
     },
+    dropdownMenu: {
+      noMatch: 'No matching data',
+      search: 'Search…'
+    },
     dashboardSearch: {
       theme: 'Theme'
     },
@@ -110,7 +114,20 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Copy code to clipboard'
+      },
+      prompt: {
+        copy: 'Copy prompt',
+        openIn: 'Open in {name}'
       }
+    },
+    chatReasoning: {
+      thinking: 'Thinking...',
+      thought: 'Thought',
+      thoughtFor: 'Thought for {duration}'
+    },
+    sidebar: {
+      close: 'Close',
+      toggle: 'Toggle'
     },
     selectMenu: {
       create: 'Create "{label}"',

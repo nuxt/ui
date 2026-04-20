@@ -142,7 +142,7 @@ props:
 
 ## Examples
 
-### As a Color chooser
+### As a color chooser
 
 Use a [Button](/docs/components/button) and a [Popover](/docs/components/popover) component to create a color chooser.
 

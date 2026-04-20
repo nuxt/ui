@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Küldés'
     },
+    chatReasoning: {
+      thinking: 'Gondolkodik…',
+      thought: 'Gondolkodott',
+      thoughtFor: '{duration} gondolkodott'
+    },
     colorMode: {
       dark: 'Sötét',
       light: 'Világos',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Ezen az oldalon'
+    },
+    dropdownMenu: {
+      noMatch: 'Nincs találat',
+      search: 'Keresés…'
     },
     dashboardSearch: {
       theme: 'Téma'
@@ -110,7 +119,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kód másolása a vágólapra'
+      },
+      prompt: {
+        copy: 'Prompt másolása',
+        openIn: 'Megnyitás: {name}'
       }
+    },
+    sidebar: {
+      close: 'Bezárás',
+      toggle: 'Váltás'
     },
     selectMenu: {
       create: '"{label}" létrehozása',

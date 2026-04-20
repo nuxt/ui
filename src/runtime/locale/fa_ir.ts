@@ -35,6 +35,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'ارسال'
     },
+    chatReasoning: {
+      thinking: 'در حال فکر کردن…',
+      thought: 'فکر کرد',
+      thoughtFor: 'به مدت {duration} فکر کرد'
+    },
     colorMode: {
       dark: 'تیره',
       light: 'روشن',
@@ -58,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'در این صفحه'
+    },
+    dropdownMenu: {
+      noMatch: 'داده‌ای یافت نشد',
+      search: 'جستجو…'
     },
     dashboardSearch: {
       theme: 'تم'
@@ -111,7 +120,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'کپی کد در کلیپ‌بورد'
+      },
+      prompt: {
+        copy: 'کپی دستور',
+        openIn: 'باز کردن در {name}'
       }
+    },
+    sidebar: {
+      close: 'بستن',
+      toggle: 'تغییر وضعیت'
     },
     selectMenu: {
       create: 'ایجاد "{label}"',

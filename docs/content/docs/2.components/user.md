@@ -48,6 +48,7 @@ props:
   description: 'Software Engineer'
   avatar:
     src: 'https://i.pravatar.cc/150?u=john-doe'
+    loading: lazy
     icon: i-lucide-image
 ---
 ::

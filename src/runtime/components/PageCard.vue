@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-card'
 import type { IconProps, LinkProps } from '../types'
@@ -57,13 +58,13 @@ export interface PageCardProps {
 }
 
 export interface PageCardSlots {
-  header(props?: {}): any
-  body(props?: {}): any
-  leading(props: { ui: PageCard['ui'] }): any
-  title(props?: {}): any
-  description(props?: {}): any
-  footer(props?: {}): any
-  default(props?: {}): any
+  header?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  leading?(props: { ui: PageCard['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 

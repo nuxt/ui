@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-toolbar'
 import type { ComponentConfig } from '../types/tv'
@@ -16,9 +17,9 @@ export interface DashboardToolbarProps {
 }
 
 export interface DashboardToolbarSlots {
-  default(props?: {}): any
-  left(props?: {}): any
-  right(props?: {}): any
+  default?(props?: {}): VNode[]
+  left?(props?: {}): VNode[]
+  right?(props?: {}): VNode[]
 }
 </script>
 

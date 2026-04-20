@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/kbd'
 import type { KbdKey } from '../composables/useKbd'
@@ -30,7 +31,7 @@ export interface KbdProps {
 }
 
 export interface KbdSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
@@ -39,8 +40,8 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useKbd } from '../composables/useKbd'
-import { tv } from '../utils/tv'
 import { useComponentUI } from '../composables/useComponentUI'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<KbdProps>(), {
   as: 'kbd'

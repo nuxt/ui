@@ -1,9 +1,8 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Slider from '../../src/runtime/components/Slider.vue'
-import type { SliderProps } from '../../src/runtime/components/Slider.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/slider'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
@@ -12,7 +11,7 @@ import type { FormInputEvents } from '../../src/module'
 describe('Slider', () => {
   const sizes = Object.keys(theme.variants.size) as any
 
-  it.each([
+  renderEach(Slider, [
     // Props
     ['with modelValue', { props: { modelValue: 10 } }],
     ['with defaultValue', { props: { defaultValue: 10 } }],
@@ -20,7 +19,7 @@ describe('Slider', () => {
     ['with name', { props: { name: 'custom-name' } }],
     ['with disabled', { props: { disabled: true } }],
     ['with inverted', { props: { inverted: true } }],
-    ['with orientation vertical', { props: { orientation: 'vertical' as const } }],
+    ['with orientation vertical', { props: { orientation: 'vertical' } }],
     ['with min max step', { props: { min: 4, max: 12, step: 2 } }],
     ['with min steps between thumbs', { props: { defaultValue: [0, 30], minStepsBetweenThumbs: 30 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
@@ -29,10 +28,7 @@ describe('Slider', () => {
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-48' } }],
     ['with ui', { props: { ui: { track: 'bg-elevated' } } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SliderProps }) => {
-    const html = await ComponentRender(nameOrHtml, options, Slider)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Slider, {

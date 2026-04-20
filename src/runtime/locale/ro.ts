@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Trimite'
     },
+    chatReasoning: {
+      thinking: 'Se gândește…',
+      thought: 'A gândit',
+      thoughtFor: 'A gândit {duration}'
+    },
     colorMode: {
       dark: 'Întunecat',
       light: 'Luminos',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Pe această pagină'
+    },
+    dropdownMenu: {
+      noMatch: 'Nu există date corespunzătoare',
+      search: 'Caută…'
     },
     dashboardSearch: {
       theme: 'Temă'
@@ -110,7 +119,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Copiază codul în clipboard'
+      },
+      prompt: {
+        copy: 'Copiază promptul',
+        openIn: 'Deschide în {name}'
       }
+    },
+    sidebar: {
+      close: 'Închide',
+      toggle: 'Comutare'
     },
     selectMenu: {
       create: 'Creează "{label}"',

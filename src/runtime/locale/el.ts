@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Αποστολή'
     },
+    chatReasoning: {
+      thinking: 'Σκέφτεται…',
+      thought: 'Σκέφτηκε',
+      thoughtFor: 'Σκέφτηκε για {duration}'
+    },
     colorMode: {
       dark: 'Σκοτεινό',
       light: 'Φωτεινό',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Σε αυτή τη σελίδα'
+    },
+    dropdownMenu: {
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      search: 'Αναζήτηση…'
     },
     dashboardSearch: {
       theme: 'Θέμα'
@@ -110,7 +119,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Αντιγραφή κώδικα στο πρόχειρο'
+      },
+      prompt: {
+        copy: 'Αντιγραφή εντολής',
+        openIn: 'Άνοιγμα σε {name}'
       }
+    },
+    sidebar: {
+      close: 'Κλείσιμο',
+      toggle: 'Εναλλαγή'
     },
     selectMenu: {
       create: 'Δημιουργία "{label}"',

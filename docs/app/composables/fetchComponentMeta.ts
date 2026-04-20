@@ -1,19 +1,6 @@
 import type { ComponentMeta } from 'vue-component-meta'
 
-const useComponentsMetaState = () => useState<Record<string, any>>('component-meta-state', () => ({}))
-
-export async function fetchComponentMeta(name: string): Promise<{ meta: ComponentMeta }> {
-  const state = useComponentsMetaState()
-
-  if (state.value[name]?.then) {
-    await state.value[name]
-    return state.value[name]
-  }
-  if (state.value[name]) {
-    return state.value[name]
-  }
-
-  // Add to nitro prerender
+export function useFetchComponentMeta(name: string) {
   if (import.meta.server) {
     const event = useRequestEvent()
     event?.node.res.setHeader(
@@ -22,13 +9,9 @@ export async function fetchComponentMeta(name: string): Promise<{ meta: Componen
     )
   }
 
-  // Store promise to avoid multiple calls
-  state.value[name] = $fetch(`/api/component-meta/${name}.json`).then((meta) => {
-    state.value[name] = meta
-  }).catch(() => {
-    state.value[name] = {}
+  return useAsyncData<{ meta: ComponentMeta }>(`component-meta-${name}`, () => $fetch(`/api/component-meta/${name}.json`).catch(() => ({}) as any), {
+    lazy: import.meta.client,
+    dedupe: 'defer',
+    getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key]
   })
-
-  await state.value[name]
-  return state.value[name]
 }

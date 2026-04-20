@@ -1,14 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Collapsible from '../../src/runtime/components/Collapsible.vue'
-import type { CollapsibleProps, CollapsibleSlots } from '../../src/runtime/components/Collapsible.vue'
-import ComponentRender from '../component-render'
 
 describe('Collapsible', () => {
   const props = { open: true }
 
-  it.each([
+  renderEach(Collapsible, [
     // Props
     ['with open', { props }],
     ['with as', { props: { ...props, as: 'section' } }],
@@ -19,10 +18,7 @@ describe('Collapsible', () => {
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CollapsibleProps, slots?: Partial<CollapsibleSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Collapsible)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Collapsible, {

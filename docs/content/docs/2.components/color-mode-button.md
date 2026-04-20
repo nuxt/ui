@@ -31,7 +31,7 @@ The button defaults to `color="neutral"` and `variant="ghost"`.
 
 Use the `app.config.ts` to customize the icon with the `ui.icons` property:
 
-```ts [app.config.ts]
+```ts [app/app.config.ts]
 export default defineAppConfig({
   ui: {
     icons: {

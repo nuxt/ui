@@ -1,15 +1,14 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import ChatPrompt from '../../src/runtime/components/ChatPrompt.vue'
-import type { ChatPromptProps, ChatPromptSlots } from '../../src/runtime/components/ChatPrompt.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/chat-prompt'
 
 describe('ChatPrompt', () => {
   const variants = Object.keys(theme.variants.variant) as any
 
-  it.each([
+  renderEach(ChatPrompt, [
     // Props
     ['with placeholder', { props: { placeholder: 'Placeholder' } }],
     ['with error', { props: { error: new Error('Error') } }],
@@ -20,9 +19,57 @@ describe('ChatPrompt', () => {
     // Slots
     ['with header slot', { slots: { header: () => 'Header slot' } }],
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatPromptProps, slots?: Partial<ChatPromptSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, ChatPrompt)
-    expect(html).toMatchSnapshot()
+  ])
+
+  it('emits submit on Enter', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Hello' }
+    })
+
+    const textarea = wrapper.find('textarea')
+    await textarea.trigger('keydown', { key: 'Enter' })
+
+    expect(wrapper.emitted('submit')).toHaveLength(1)
+  })
+
+  it('does not emit submit on Enter during composition', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Hello' }
+    })
+
+    const textarea = wrapper.find('textarea')
+    await textarea.trigger('keydown', { key: 'Enter', isComposing: true })
+
+    expect(wrapper.emitted('submit')).toBeUndefined()
+  })
+
+  it('does not emit submit on Enter immediately after compositionend', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Hello' }
+    })
+
+    const textarea = wrapper.find('textarea')
+    await textarea.trigger('compositionend')
+    await textarea.trigger('keydown', { key: 'Enter' })
+
+    expect(wrapper.emitted('submit')).toBeUndefined()
+  })
+
+  it('re-enables submit after compositionend cooldown', async () => {
+    vi.useFakeTimers()
+
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Hello' }
+    })
+
+    const textarea = wrapper.find('textarea')
+    await textarea.trigger('compositionend')
+    vi.advanceTimersByTime(50)
+    await textarea.trigger('keydown', { key: 'Enter' })
+
+    expect(wrapper.emitted('submit')).toHaveLength(1)
+
+    vi.useRealTimers()
   })
 
   it('passes accessibility tests', async () => {

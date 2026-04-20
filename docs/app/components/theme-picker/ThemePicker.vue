@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const appConfig = useAppConfig()
 const colorMode = useColorMode()
 const { track } = useAnalytics()
 
@@ -12,13 +11,14 @@ watch(open, (isOpen) => {
 })
 
 const { copy: copyCSS, copied: copiedCSS } = useClipboard()
-const { copy: copyAppConfig, copied: copiedAppConfig } = useClipboard()
+const { copy: copyConfig, copied: copiedConfig } = useClipboard()
 
 const {
   neutralColors,
   neutral,
   primaryColors,
   primary,
+  blackAsPrimary,
   setBlackAsPrimary,
   radiuses,
   radius,
@@ -29,9 +29,10 @@ const {
   modes,
   mode,
   hasCSSChanges,
-  hasAppConfigChanges,
+  hasConfigChanges,
+  configLabel,
   exportCSS,
-  exportAppConfig,
+  exportConfig,
   resetTheme
 } = useTheme()
 </script>
@@ -68,11 +69,11 @@ const {
         <div class="grid grid-cols-3 gap-1 -mx-2">
           <ThemePickerButton
             label="Black"
-            :selected="appConfig.theme.blackAsPrimary"
+            :selected="blackAsPrimary"
             @click="setBlackAsPrimary(true)"
           >
             <template #leading>
-              <span class="inline-block w-2 h-2 rounded-full bg-black dark:bg-white" />
+              <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
             </template>
           </ThemePickerButton>
 
@@ -81,7 +82,7 @@ const {
             :key="color"
             :label="color"
             :chip="color"
-            :selected="!appConfig.theme.blackAsPrimary && primary === color"
+            :selected="!blackAsPrimary && primary === color"
             @click="primary = color"
           />
         </div>
@@ -223,7 +224,7 @@ const {
         </div>
       </fieldset>
 
-      <fieldset v-if="hasCSSChanges || hasAppConfigChanges">
+      <fieldset v-if="hasCSSChanges || hasConfigChanges">
         <legend class="text-[11px] leading-none font-semibold mb-2 select-none">
           Export
         </legend>
@@ -240,14 +241,14 @@ const {
             @click="copyCSS(exportCSS())"
           />
           <UButton
-            v-if="hasAppConfigChanges"
+            v-if="hasConfigChanges"
             color="neutral"
             variant="soft"
             size="sm"
-            label="app.config.ts"
-            :icon="copiedAppConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+            :label="configLabel"
+            :icon="copiedConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
             class="flex-1 text-[11px]"
-            @click="copyAppConfig(exportAppConfig())"
+            @click="copyConfig(exportConfig())"
           />
           <UTooltip text="Reset theme">
             <UButton
