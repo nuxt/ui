@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Скопировать код в буфер обмена'
+      },
+      prompt: {
+        copy: 'Скопировать промпт',
+        openIn: 'Открыть в {name}'
       }
     },
     sidebar: {

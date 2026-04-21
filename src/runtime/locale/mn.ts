@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Кодыг санах ойд хуулах'
+      },
+      prompt: {
+        copy: 'Хүсэлтийг хуулах',
+        openIn: '{name} дотор нээх'
       }
     },
     sidebar: {

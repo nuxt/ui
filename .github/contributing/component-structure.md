@@ -235,6 +235,32 @@ defineExpose({
 </script>
 ```
 
+## Resolving Variants in Template Logic
+
+`tv()`'s `defaultVariants` only apply when computing CSS classes — they do **not** affect runtime checks (e.g. `<component :is>`, `v-if`, computed conditionals). When a variant drives template logic, use `useResolvedVariants` to mirror `tv()`'s resolution: **prop > `app.config.ts` `defaultVariants` > fallback**.
+
+```vue
+<script setup lang="ts">
+import { useResolvedVariants } from '../composables/useResolvedVariants'
+
+const { variant } = useResolvedVariants('radioGroup', props, theme, ['variant'])
+
+// Use variant.value in template logic and pass it to tv()
+</script>
+
+<template>
+  <component :is="variant === 'list' ? 'div' : Label" />
+</template>
+```
+
+For nested prop paths (e.g. `props.content?.position`), use the `overrides` parameter:
+
+```ts
+const { position } = useResolvedVariants('select', props, theme, ['position'], {
+  position: () => props.content?.position
+})
+```
+
 ## Key Patterns
 
 | Pattern | Usage |
@@ -245,6 +271,7 @@ defineExpose({
 | `createReusableTemplate` | Complex template reuse (Table, Modal) |
 | `useTemplateRef` | Template refs (Vue 3.5+) |
 | `toRef(() => props.x)` | Reactive prop access |
+| `useResolvedVariants` | Resolve variants for template logic (when variant drives `<component :is>`, `v-if`, etc.) |
 
 ## Export Types
 

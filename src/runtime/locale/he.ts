@@ -125,6 +125,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'העתק קוד ללוח'
+      },
+      prompt: {
+        copy: 'העתק הנחיה',
+        openIn: 'פתח ב-{name}'
       }
     },
     sidebar: {

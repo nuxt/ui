@@ -125,6 +125,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'لەبەرگرتنەوەی کۆد'
+      },
+      prompt: {
+        copy: 'لەبەرگرتنەوەی فەرمان',
+        openIn: 'کردنەوە لە {name}'
       }
     },
     sidebar: {

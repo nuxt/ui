@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Copiar código al portapapeles'
+      },
+      prompt: {
+        copy: 'Copiar prompt',
+        openIn: 'Abrir en {name}'
       }
     },
     sidebar: {

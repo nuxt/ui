@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopírovať kód do schránky'
+      },
+      prompt: {
+        copy: 'Kopírovať výzvu',
+        openIn: 'Otvoriť v {name}'
       }
     },
     sidebar: {

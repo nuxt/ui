@@ -124,6 +124,10 @@ export type Messages = {
     pre: {
       copy: string
     }
+    prompt: {
+      copy: string
+      openIn: string
+    }
   }
   chatReasoning: {
     thinking: string

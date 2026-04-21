@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Нусха бардоштан'
+      },
+      prompt: {
+        copy: 'Нусхабардории дархост',
+        openIn: 'Кушодан дар {name}'
       }
     },
     sidebar: {

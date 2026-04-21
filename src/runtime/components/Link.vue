@@ -110,9 +110,9 @@ import { computed } from 'vue'
 import { isEqual } from 'ohash/utils'
 import { useForwardProps, Slot } from 'reka-ui'
 import { defu } from 'defu'
-import { reactiveOmit } from '@vueuse/core'
 import { hasProtocol } from 'ufo'
-import { useRoute, useAppConfig } from '#imports'
+import { reactiveOmit } from '@vueuse/core'
+import { useRoute, useAppConfig, useNuxtApp } from '#imports'
 import { mergeClasses } from '../utils'
 import { tv } from '../utils/tv'
 import { isPartiallyEqual } from '../utils/link'
@@ -130,6 +130,7 @@ defineSlots<LinkSlots>()
 
 const route = useRoute()
 const appConfig = useAppConfig() as Link['AppConfig']
+const nuxtApp = useNuxtApp()
 
 const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class'))
 
@@ -145,7 +146,26 @@ const ui = computed(() => tv({
   }, appConfig.ui?.link || {})
 }))
 
-const to = computed(() => props.to ?? props.href)
+const to = computed(() => {
+  const path = props.to ?? props.href
+  if (!path) return path
+
+  // Only localize string paths, leave route objects untouched to preserve state/params
+  if (typeof path !== 'string') return path
+
+  // Skip external links and absolute URLs
+  if (props.external || hasProtocol(path, { acceptRelative: true })) {
+    return path
+  }
+
+  // Use `$localePath` from `@nuxtjs/i18n` if available
+  const localePath = nuxtApp.$localePath as ((route: RouteLocationRaw, locale?: string) => string) | undefined
+  if (localePath) {
+    return localePath(path)
+  }
+
+  return path
+})
 
 const isInternalLink = computed(() => {
   if (!to.value) return false

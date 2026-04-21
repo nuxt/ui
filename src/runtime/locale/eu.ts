@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopiatu kodea clipboard-era'
+      },
+      prompt: {
+        copy: 'Kopiatu prompt',
+        openIn: '{name}(e)n ireki'
       }
     },
     sidebar: {

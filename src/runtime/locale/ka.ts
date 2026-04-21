@@ -126,6 +126,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'კოდის კოპირება ბუფერში'
+      },
+      prompt: {
+        copy: 'მოთხოვნის კოპირება',
+        openIn: 'გახსნა {name}-ში'
       }
     },
     sidebar: {

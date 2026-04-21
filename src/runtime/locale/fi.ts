@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopioi koodi leikepöydälle'
+      },
+      prompt: {
+        copy: 'Kopioi kehote',
+        openIn: 'Avaa sovelluksessa {name}'
       }
     },
     sidebar: {

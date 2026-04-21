@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Koddan buferga nusxa olish'
+      },
+      prompt: {
+        copy: 'So\'rovni nusxalash',
+        openIn: '{name}da ochish'
       }
     },
     sidebar: {

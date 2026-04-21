@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Պատճենել կոդը սեղմատախտակին'
+      },
+      prompt: {
+        copy: 'Պատճենել հարցումը',
+        openIn: 'Բացել {name}-ում'
       }
     },
     sidebar: {

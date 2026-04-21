@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Кодду алмашуу буферине көчүрүү'
+      },
+      prompt: {
+        copy: 'Суроону көчүрүү',
+        openIn: '{name} ичинде ачуу'
       }
     },
     sidebar: {

@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Afrita kóða á klippiborð'
+      },
+      prompt: {
+        copy: 'Afrita fyrirmæli',
+        openIn: 'Opna í {name}'
       }
     },
     sidebar: {

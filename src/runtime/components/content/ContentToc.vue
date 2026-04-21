@@ -72,11 +72,12 @@ export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
 </script>
 
 <script setup lang="ts" generic="T extends ContentTocLink">
-import { computed } from 'vue'
+import { computed, onUnmounted } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useRouter, useAppConfig, useNuxtApp } from '#imports'
 import { useComponentUI } from '../../composables/useComponentUI'
+import { useResolvedVariants } from '../../composables/useResolvedVariants'
 import { useScrollspy } from '../../composables/useScrollspy'
 import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
@@ -96,6 +97,7 @@ const { t } = useLocale()
 const router = useRouter()
 const appConfig = useAppConfig() as ContentToc['AppConfig']
 const uiProp = useComponentUI('contentToc', props)
+const { highlightVariant } = useResolvedVariants('contentToc', props, theme, ['highlightVariant'])
 const { activeHeadings, updateHeadings } = useScrollspy()
 
 const [DefineListTemplate, ReuseListTemplate] = createReusableTemplate<{ links: T[], level: number }>({
@@ -110,7 +112,7 @@ const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentToc || {}) })({
   color: props.color,
   highlight: props.highlight,
-  highlightVariant: props.highlightVariant,
+  highlightVariant: highlightVariant.value,
   highlightColor: props.highlightColor || props.color
 }))
 
@@ -149,7 +151,7 @@ const indicatorStyle = computed(() => {
 
 // Generate SVG path for the circuit line structure
 const circuitMaskStyle = computed(() => {
-  if (!props.highlight || props.highlightVariant !== 'circuit' || !props.links?.length) {
+  if (!props.highlight || highlightVariant.value !== 'circuit' || !props.links?.length) {
     return
   }
 
@@ -193,13 +195,23 @@ const circuitMaskStyle = computed(() => {
 
 const nuxtApp = useNuxtApp()
 
-nuxtApp.hooks.hook('page:loading:end', () => {
-  const headings = Array.from(document.querySelectorAll('h2, h3'))
+function refreshHeadings() {
+  const flatLinks = flattenLinks(props.links || [])
+  if (!flatLinks.length) {
+    updateHeadings([])
+    return
+  }
+  const selector = flatLinks.map(l => `#${CSS.escape(l.id)}`).join(', ')
+  const headings = Array.from(document.querySelectorAll(selector))
   updateHeadings(headings)
-})
-nuxtApp.hooks.hook('page:transition:finish', () => {
-  const headings = Array.from(document.querySelectorAll('h2, h3'))
-  updateHeadings(headings)
+}
+
+const offLoadingEnd = nuxtApp.hooks.hook('page:loading:end', refreshHeadings)
+const offTransitionFinish = nuxtApp.hooks.hook('page:transition:finish', refreshHeadings)
+
+onUnmounted(() => {
+  offLoadingEnd()
+  offTransitionFinish()
 })
 </script>
 

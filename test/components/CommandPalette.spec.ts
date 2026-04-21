@@ -99,6 +99,8 @@ describe('CommandPalette', () => {
     }]
   }]
 
+  const groupsWithSlot = groups.map(g => g.id === 'users' ? { ...g, slot: 'users' } : g)
+
   const props = { groups }
 
   renderEach(CommandPalette, [
@@ -138,6 +140,8 @@ describe('CommandPalette', () => {
     ['with item-description slot', { props: { groups: groupsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
+    ['with group-label slot', { props, slots: { 'group-label': () => 'Group label slot' } }],
+    ['with users-group-label slot', { props: { groups: groupsWithSlot }, slots: { 'users-group-label': () => 'Users group label slot' } }],
     ['with close slot', { props: { ...props, close: true }, slots: { close: () => 'Close slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
   ])

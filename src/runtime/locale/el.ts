@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Αντιγραφή κώδικα στο πρόχειρο'
+      },
+      prompt: {
+        copy: 'Αντιγραφή εντολής',
+        openIn: 'Άνοιγμα σε {name}'
       }
     },
     sidebar: {

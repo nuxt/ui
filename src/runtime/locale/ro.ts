@@ -124,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Copiază codul în clipboard'
+      },
+      prompt: {
+        copy: 'Copiază promptul',
+        openIn: 'Deschide în {name}'
       }
     },
     sidebar: {
