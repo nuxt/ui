@@ -183,34 +183,37 @@ describe('Tabs', () => {
     const container = document.createElement('div')
 
     document.body.appendChild(container)
+    let app: ReturnType<typeof createSSRApp> | undefined
 
-    container.innerHTML = await renderToString(createSSRApp(Tabs, {
-      content: false,
-      items: serverItems,
-      labelKey: 'label',
-      modelValue: 'third',
-      valueKey: 'value'
-    }))
+    try {
+      container.innerHTML = await renderToString(createSSRApp(Tabs, {
+        content: false,
+        items: serverItems,
+        labelKey: 'label',
+        modelValue: 'third',
+        valueKey: 'value'
+      }))
 
-    const app = createSSRApp(Tabs, {
-      content: false,
-      items: clientItems,
-      labelKey: 'label',
-      modelValue: 'third',
-      valueKey: 'value'
-    })
+      app = createSSRApp(Tabs, {
+        content: false,
+        items: clientItems,
+        labelKey: 'label',
+        modelValue: 'third',
+        valueKey: 'value'
+      })
 
-    app.mount(container)
+      app.mount(container)
 
-    await nextTick()
-    await nextTick()
+      await nextTick()
+      await nextTick()
 
-    const activeTabs = Array.from(container.querySelectorAll<HTMLElement>('[data-slot="trigger"][role="tab"][data-state="active"]'))
+      const activeTabs = Array.from(container.querySelectorAll<HTMLElement>('[data-slot="trigger"][role="tab"][data-state="active"]'))
 
-    expect(activeTabs).toHaveLength(1)
-    expect(activeTabs[0]?.textContent).toContain('Third')
-
-    app.unmount()
-    container.remove()
+      expect(activeTabs).toHaveLength(1)
+      expect(activeTabs[0]?.textContent).toContain('Third')
+    } finally {
+      app?.unmount()
+      container.remove()
+    }
   })
 })
