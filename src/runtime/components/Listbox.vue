@@ -1,13 +1,12 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { ListboxRootProps } from 'reka-ui'
 import type { VNode } from 'vue'
-import { computed, ref, toRef, useId } from 'vue'
+import { computed, ref, toRaw, toRef, useId, useTemplateRef } from 'vue'
+import type { ListboxRootEmits, ListboxRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/listbox'
 import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
-import type { GetItemKeys } from '../types/utils'
+import type { ArrayOrNested, GetItemKeys, GetModelValue, GetModelValueEmits, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Listbox = ComponentConfig<typeof theme, AppConfig, 'listbox'>
@@ -22,12 +21,13 @@ export interface ListboxItem {
   avatar?: AvatarProps
   chip?: ChipProps
   disabled?: boolean
+  onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<Listbox['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatar' | 'itemLeadingAvatarSize' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription'>
+  ui?: Pick<Listbox['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatar' | 'itemLeadingAvatarSize' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
 
-export interface ListboxProps<T extends ListboxItem = ListboxItem, M extends boolean = false> extends Pick<ListboxRootProps, 'by' | 'disabled' | 'selectionBehavior' | 'highlightOnHover' | 'orientation' | 'name'> {
+export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ListboxRootProps, 'by' | 'disabled' | 'highlightOnHover' | 'name' | 'orientation' | 'required' | 'selectionBehavior'> {
   id?: string
   /**
    * The element or component this component should render as.
@@ -41,20 +41,25 @@ export interface ListboxProps<T extends ListboxItem = ListboxItem, M extends boo
   /**
    * The items to display in the list.
    */
-  items?: T[]
+  items?: T
   /**
    * The controlled value of the Listbox. Can be bound with `v-model`.
    */
-  modelValue?: M extends true ? T[] : T
+  modelValue?: GetModelValue<T, VK, M>
   /**
    * The default value when not controlled.
    */
-  defaultValue?: M extends true ? T[] : T
+  defaultValue?: GetModelValue<T, VK, M>
   /**
    * Whether multiple items can be selected.
    * @defaultValue false
    */
   multiple?: M & boolean
+  /**
+   * When `items` is an array of objects, select the field to use as the value instead of the object itself.
+   * @defaultValue undefined
+   */
+  valueKey?: VK
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
@@ -76,14 +81,22 @@ export interface ListboxProps<T extends ListboxItem = ListboxItem, M extends boo
    */
   loadingIcon?: IconProps['name']
   /**
-   * Enable search/filter.
+   * Whether to display a filter input or not.
+   * Can be an object to pass additional props to the input.
+   * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
    * @defaultValue false
    */
-  searchable?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   /**
-   * The placeholder text for the search input.
+   * The fields to filter by.
+   * @defaultValue [labelKey]
    */
-  placeholder?: string
+  filterFields?: string[]
+  /**
+   * When `true`, disable the default filters, useful for custom filtering (useAsyncData, useFetch, etc.).
+   * @defaultValue false
+   */
+  ignoreFilter?: boolean
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
@@ -106,40 +119,40 @@ export interface ListboxProps<T extends ListboxItem = ListboxItem, M extends boo
      */
     estimateSize?: number | ((index: number) => number)
   }
-  /**
-   * Options for [useFuse](https://vueuse.org/integrations/useFuse).
-   */
-  fuse?: UseFuseOptions<T>
+  /** Highlight the ring color like a focus state. */
+  highlight?: boolean
   class?: any
   ui?: Listbox['slots']
 }
 
-export type ListboxEmits<T extends ListboxItem = ListboxItem, M extends boolean = false> = {
-  'update:modelValue': [value: M extends true ? T[] : T]
+export type ListboxEmits<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> = Pick<ListboxRootEmits, 'entryFocus' | 'highlight' | 'leave'> & {
+  'update:modelValue': [value: GetModelValueEmits<T, VK, M>]
 }
 
-type SlotProps<T> = (props: { item: T, index: number }) => VNode[]
+type SlotProps<T> = (props: { item: T, index: number, ui: Listbox['ui'] }) => VNode[]
 
-export type ListboxSlots<T extends ListboxItem = ListboxItem> = {
+export type ListboxSlots<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<ListboxItem>> = {
   'loading'?(props?: {}): VNode[]
   'empty'?(props: { searchTerm: string }): VNode[]
-  'item'?: SlotProps<T>
-  'item-leading'?: SlotProps<T>
-  'item-label'?: SlotProps<T>
-  'item-description'?: SlotProps<T>
+  'item'?: SlotProps<NestedItem<T>>
+  'item-leading'?: SlotProps<NestedItem<T>>
+  'item-label'?(props: { item: NestedItem<T>, index: number }): VNode[]
+  'item-description'?(props: { item: NestedItem<T>, index: number }): VNode[]
+  'item-trailing'?: SlotProps<NestedItem<T>>
 }
 
 </script>
 
-<script setup lang="ts" generic="T extends ListboxItem, M extends boolean = false">
-import { ListboxRoot, ListboxContent, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter } from 'reka-ui'
+<script setup lang="ts" generic="T extends ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
+import { ListboxRoot, ListboxContent, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter, useForwardPropsEmits } from 'reka-ui'
+import { createReusableTemplate, reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
-import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
+import { useFilter } from '../composables/useFilter'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
-import { get } from '../utils'
+import { get, isArrayOfArray } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -147,52 +160,90 @@ import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 import UInput from './Input.vue'
 
-const props = withDefaults(defineProps<ListboxProps<T, M>>(), {
-  items: () => [],
+defineOptions({ inheritAttrs: false })
+
+const props = withDefaults(defineProps<ListboxProps<T, VK, M>>(), {
+  as: 'div',
+  items: () => [] as any,
   labelKey: 'label',
   descriptionKey: 'description',
   selectionBehavior: 'toggle',
   highlightOnHover: true,
-  searchable: false,
+  filter: false,
   virtualize: false
 })
-const emits = defineEmits<ListboxEmits<T, M>>()
+const emits = defineEmits<ListboxEmits<T, VK, M>>()
 const slots = defineSlots<ListboxSlots<T>>()
+
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ListboxItem, index: number }>({
+  props: {
+    item: {
+      type: Object,
+      required: true
+    },
+    index: {
+      type: Number,
+      required: false
+    }
+  }
+})
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Listbox['AppConfig']
 const uiProp = useComponentUI('listbox', props)
 
-const { emitFormChange, emitFormInput, name, size, id: _id, disabled, ariaAttrs } = useFormField<ListboxProps<T>>(props, { bind: false })
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'multiple', 'selectionBehavior', 'highlightOnHover', 'by', 'orientation', 'required'), emits)
+const inputProps = toRef(() => defu(typeof props.filter === 'object' ? props.filter : {}, { placeholder: t('listbox.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+
+const { emitFormChange, emitFormInput, name, size, color, id: _id, highlight, disabled, ariaAttrs } = useFormField<ListboxProps<T, VK>>(props, { bind: false })
 // eslint-disable-next-line vue/no-dupe-keys
 const id = _id.value ?? useId()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.listbox || {}) })({
+  color: color.value,
   size: size.value,
+  highlight: highlight.value,
   disabled: disabled.value
 }))
 
 function onUpdate(value: any) {
+  if (toRaw(props.modelValue) === value) {
+    return
+  }
+
   emits('update:modelValue', value)
   emitFormChange()
   emitFormInput()
 }
 
-const searchTerm = ref('')
+function onSelect(e: Event, item: ListboxItem) {
+  if (item.disabled) {
+    e.preventDefault()
+    return
+  }
 
-const fuseOptions = computed(() => defu({}, props.fuse, {
-  fuseOptions: {
-    ignoreLocation: true,
-    threshold: 0.1,
-    keys: [props.labelKey as string]
-  },
-  matchAllWhenSearchEmpty: true
-}) as UseFuseOptions<T>)
+  item.onSelect?.(e)
+}
 
-const { results: fuseResults } = useFuse<T>(searchTerm, () => props.items, fuseOptions)
+const { filter: filterItems } = useFilter()
 
-const filteredItems = computed(() => fuseResults.value.map(r => r.item))
+const searchTerm = defineModel<string>('searchTerm', { default: '' })
+
+const items = computed(() => {
+  if (!props.items?.length) return []
+  return (isArrayOfArray(props.items) ? props.items.flatMap(group => group) : props.items) as NestedItem<T>[]
+})
+
+const filteredItems = computed(() => {
+  if (props.ignoreFilter || !searchTerm.value) {
+    return items.value
+  }
+
+  const fields = Array.isArray(props.filterFields) ? props.filterFields : [props.labelKey] as string[]
+
+  return filterItems(items.value, searchTerm.value, fields)
+})
 
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
@@ -201,38 +252,85 @@ const virtualizerProps = toRef(() => {
     estimateSize: getEstimateSize(filteredItems.value, size.value || 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
+
+const rootRef = useTemplateRef('rootRef')
+
+defineExpose({
+  rootRef: toRef(() => rootRef.value?.$el as HTMLElement)
+})
 </script>
 
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
+  <DefineItemTemplate v-slot="{ item, index }">
+    <RekaListboxItem
+      :value="props.valueKey ? get(item, props.valueKey as string) : item"
+      :disabled="item.disabled"
+      data-slot="item"
+      :class="ui.item({ class: [uiProp?.item, item.ui?.item, item.class] })"
+      @select="onSelect($event, item)"
+    >
+      <slot name="item" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
+        <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
+          <UIcon v-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiProp?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
+          <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || uiProp?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiProp?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
+          <UChip
+            v-else-if="item.chip"
+            :size="((item.ui?.itemLeadingChipSize || uiProp?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
+            inset
+            standalone
+            v-bind="item.chip"
+            data-slot="itemLeadingChip"
+            :class="ui.itemLeadingChip({ class: [uiProp?.itemLeadingChip, item.ui?.itemLeadingChip] })"
+          />
+        </slot>
+
+        <span v-if="get(item, props.labelKey as string) || get(item, props.descriptionKey as string) || !!slots['item-label'] || !!slots['item-description']" data-slot="itemWrapper" :class="ui.itemWrapper({ class: [uiProp?.itemWrapper, item.ui?.itemWrapper] })">
+          <span v-if="get(item, props.labelKey as string) || !!slots['item-label']" data-slot="itemLabel" :class="ui.itemLabel({ class: [uiProp?.itemLabel, item.ui?.itemLabel] })">
+            <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
+              {{ get(item, props.labelKey as string) }}
+            </slot>
+          </span>
+
+          <span v-if="get(item, props.descriptionKey as string) || !!slots['item-description']" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiProp?.itemDescription, item.ui?.itemDescription] })">
+            <slot name="item-description" :item="(item as NestedItem<T>)" :index="index">
+              {{ get(item, props.descriptionKey as string) }}
+            </slot>
+          </span>
+        </span>
+
+        <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [uiProp?.itemTrailing, item.ui?.itemTrailing] })">
+          <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" :ui="ui" />
+
+          <ListboxItemIndicator as-child>
+            <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiProp?.itemTrailingIcon, item.ui?.itemTrailingIcon] })" />
+          </ListboxItemIndicator>
+        </span>
+      </slot>
+    </RekaListboxItem>
+  </DefineItemTemplate>
+
   <ListboxRoot
+    ref="rootRef"
     :id="id"
-    :model-value="modelValue"
-    :default-value="defaultValue"
-    :as="as || 'div'"
-    :multiple="multiple"
-    :selection-behavior="selectionBehavior"
-    :by="by"
+    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :disabled="disabled"
-    :highlight-on-hover="highlightOnHover"
-    :orientation="orientation"
     :name="name"
     data-slot="root"
     :class="ui.root({ class: [uiProp?.root, props.class] })"
     @update:model-value="onUpdate"
   >
-    <ListboxFilter v-if="searchable" v-model="searchTerm" as-child>
+    <ListboxFilter v-if="filter" v-model="searchTerm" as-child>
       <UInput
-        variant="none"
         :size="size"
-        :placeholder="placeholder || t('listbox.search')"
         :icon="appConfig.ui.icons.search"
-        data-slot="search"
-        :class="ui.search({ class: uiProp?.search })"
-        v-bind="typeof searchable === 'object' ? searchable : {}"
+        v-bind="inputProps"
+        data-slot="input"
+        :class="ui.input({ class: uiProp?.input })"
       />
     </ListboxFilter>
 
-    <ListboxContent data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="ariaAttrs">
+    <ListboxContent data-slot="content" :class="ui.content({ class: uiProp?.content })">
       <div v-if="loading" data-slot="loading" :class="ui.loading({ class: uiProp?.loading })">
         <slot name="loading">
           <UIcon :name="loadingIcon || appConfig.ui.icons.loading" data-slot="loadingIcon" :class="ui.loadingIcon({ class: uiProp?.loadingIcon })" />
@@ -251,91 +349,11 @@ const virtualizerProps = toRef(() => {
         :text-content="(item: any) => get(item, props.labelKey as string)"
         v-bind="virtualizerProps"
       >
-        <RekaListboxItem
-          :value="item"
-          :disabled="item.disabled"
-          data-slot="item"
-          :class="ui.item({ class: [uiProp?.item, item.ui?.item, item.class] })"
-        >
-          <slot name="item" :item="(item as T)" :index="virtualItem.index">
-            <slot name="item-leading" :item="(item as T)" :index="virtualItem.index">
-              <UIcon v-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiProp?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
-              <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || uiProp?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiProp?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
-              <UChip
-                v-else-if="item.chip"
-                :size="((item.ui?.itemLeadingChipSize || uiProp?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
-                inset
-                standalone
-                v-bind="item.chip"
-                data-slot="itemLeadingChip"
-                :class="ui.itemLeadingChip({ class: [uiProp?.itemLeadingChip, item.ui?.itemLeadingChip] })"
-              />
-            </slot>
-
-            <span v-if="get(item, props.labelKey as string) || get(item, props.descriptionKey as string) || !!slots['item-label'] || !!slots['item-description']" data-slot="itemWrapper" :class="ui.itemWrapper({ class: [uiProp?.itemWrapper, item.ui?.itemWrapper] })">
-              <span v-if="get(item, props.labelKey as string) || !!slots['item-label']" data-slot="itemLabel" :class="ui.itemLabel({ class: [uiProp?.itemLabel, item.ui?.itemLabel] })">
-                <slot name="item-label" :item="(item as T)" :index="virtualItem.index">
-                  {{ get(item, props.labelKey as string) }}
-                </slot>
-              </span>
-
-              <span v-if="get(item, props.descriptionKey as string) || !!slots['item-description']" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiProp?.itemDescription, item.ui?.itemDescription] })">
-                <slot name="item-description" :item="(item as T)" :index="virtualItem.index">
-                  {{ get(item, props.descriptionKey as string) }}
-                </slot>
-              </span>
-            </span>
-
-            <ListboxItemIndicator as-child>
-              <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemSelectedIcon" :class="ui.itemSelectedIcon({ class: [uiProp?.itemSelectedIcon] })" />
-            </ListboxItemIndicator>
-          </slot>
-        </RekaListboxItem>
+        <ReuseItemTemplate :item="item" :index="virtualItem.index" />
       </ListboxVirtualizer>
 
       <template v-else>
-        <RekaListboxItem
-          v-for="(item, index) in filteredItems"
-          :key="index"
-          :value="item"
-          :disabled="item.disabled"
-          data-slot="item"
-          :class="ui.item({ class: [uiProp?.item, item.ui?.item, item.class] })"
-        >
-          <slot name="item" :item="(item as T)" :index="index">
-            <slot name="item-leading" :item="(item as T)" :index="index">
-              <UIcon v-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiProp?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
-              <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || uiProp?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiProp?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
-              <UChip
-                v-else-if="item.chip"
-                :size="((item.ui?.itemLeadingChipSize || uiProp?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
-                inset
-                standalone
-                v-bind="item.chip"
-                data-slot="itemLeadingChip"
-                :class="ui.itemLeadingChip({ class: [uiProp?.itemLeadingChip, item.ui?.itemLeadingChip] })"
-              />
-            </slot>
-
-            <span v-if="get(item, props.labelKey as string) || get(item, props.descriptionKey as string) || !!slots['item-label'] || !!slots['item-description']" data-slot="itemWrapper" :class="ui.itemWrapper({ class: [uiProp?.itemWrapper, item.ui?.itemWrapper] })">
-              <span v-if="get(item, props.labelKey as string) || !!slots['item-label']" data-slot="itemLabel" :class="ui.itemLabel({ class: [uiProp?.itemLabel, item.ui?.itemLabel] })">
-                <slot name="item-label" :item="(item as T)" :index="index">
-                  {{ get(item, props.labelKey as string) }}
-                </slot>
-              </span>
-
-              <span v-if="get(item, props.descriptionKey as string) || !!slots['item-description']" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiProp?.itemDescription, item.ui?.itemDescription] })">
-                <slot name="item-description" :item="(item as T)" :index="index">
-                  {{ get(item, props.descriptionKey as string) }}
-                </slot>
-              </span>
-            </span>
-
-            <ListboxItemIndicator as-child>
-              <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemSelectedIcon" :class="ui.itemSelectedIcon({ class: [uiProp?.itemSelectedIcon] })" />
-            </ListboxItemIndicator>
-          </slot>
-        </RekaListboxItem>
+        <ReuseItemTemplate v-for="(item, index) in filteredItems" :key="index" :item="item" :index="index" />
       </template>
     </ListboxContent>
   </ListboxRoot>

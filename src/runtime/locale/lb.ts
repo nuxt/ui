@@ -103,7 +103,7 @@ export default defineLocale<Messages>({
     listbox: {
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Sichen..'
+      search: 'Sichen…'
     },
     modal: {
       close: 'Zoumaachen'

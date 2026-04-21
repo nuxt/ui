@@ -38,7 +38,7 @@ function removeSelected() {
         v-model="sourceSelection"
         :items="sourceItems"
         multiple
-        searchable
+        filter
         class="w-full"
       />
     </div>
@@ -67,7 +67,7 @@ function removeSelected() {
         v-model="targetSelection"
         :items="targetItems"
         multiple
-        searchable
+        filter
         class="w-full"
       />
     </div>

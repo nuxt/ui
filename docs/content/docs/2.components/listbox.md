@@ -1,6 +1,6 @@
 ---
 description: A selectable list of items with search, virtualization and rich item rendering.
-category: data
+category: form
 links:
   - label: Listbox
     icon: i-custom-reka-ui
@@ -60,6 +60,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `chip?: ChipProps`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
+- `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, ... }`{lang="ts-type"}
 
@@ -92,6 +93,40 @@ props:
       description: 'The Bull Skin'
       icon: 'i-lucide-map-pin'
       value: 'ES'
+  class: 'w-full'
+---
+::
+
+You can also pass an array of arrays to the `items` prop to display separated groups of items.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+external:
+  - items
+externalTypes:
+  - ListboxItem[][]
+props:
+  items:
+    - - label: 'France'
+        icon: 'i-lucide-map-pin'
+        value: 'FR'
+      - label: 'Germany'
+        icon: 'i-lucide-map-pin'
+        value: 'DE'
+      - label: 'Italy'
+        icon: 'i-lucide-map-pin'
+        value: 'IT'
+    - - label: 'Brazil'
+        icon: 'i-lucide-map-pin'
+        value: 'BR'
+      - label: 'Argentina'
+        icon: 'i-lucide-map-pin'
+        value: 'AR'
   class: 'w-full'
 ---
 ::
@@ -130,9 +165,46 @@ props:
 ---
 ::
 
-### Searchable
+### Value Key
 
-Use the `searchable` prop to enable a search input. You can also pass an object to customize the [Input](/docs/components/input) component.
+You can choose to bind a single property of the object rather than the whole object by using the `value-key` prop. Defaults to `undefined`.
+
+::component-code
+---
+collapse: true
+ignore:
+  - modelValue
+  - valueKey
+  - items
+  - class
+external:
+  - items
+  - modelValue
+externalTypes:
+  - ListboxItem[]
+props:
+  modelValue: 'FR'
+  valueKey: 'value'
+  items:
+    - label: 'France'
+      icon: 'i-lucide-map-pin'
+      value: 'FR'
+    - label: 'Germany'
+      icon: 'i-lucide-map-pin'
+      value: 'DE'
+    - label: 'Italy'
+      icon: 'i-lucide-map-pin'
+      value: 'IT'
+    - label: 'Spain'
+      icon: 'i-lucide-map-pin'
+      value: 'ES'
+  class: 'w-full'
+---
+::
+
+### Filter
+
+Use the `filter` prop to display a filter input. You can also pass an object to customize the [Input](/docs/components/input) component.
 
 ::component-code
 ---
@@ -146,7 +218,7 @@ external:
 externalTypes:
   - ListboxItem[]
 props:
-  searchable: true
+  filter: true
   items:
     - label: 'France'
       icon: 'i-lucide-map-pin'
@@ -170,23 +242,26 @@ props:
 ---
 ::
 
-### Size
+### Selected Icon
 
-Use the `size` prop to change the size of the Listbox.
+Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide-check`.
 
 ::component-code
 ---
 collapse: true
-hide:
-  - class
 ignore:
   - items
+  - modelValue
+  - class
 external:
   - items
+  - modelValue
 externalTypes:
   - ListboxItem[]
 props:
-  size: xl
+  modelValue: 'FR'
+  selectedIcon: 'i-lucide-flame'
+  valueKey: 'value'
   items:
     - label: 'France'
       icon: 'i-lucide-map-pin'
@@ -204,9 +279,9 @@ props:
 ---
 ::
 
-### Disabled
+### Size
 
-Use the `disabled` prop to prevent any user interaction with the Listbox.
+Use the `size` prop to change the size of the Listbox.
 
 ::component-code
 ---
@@ -220,7 +295,7 @@ external:
 externalTypes:
   - ListboxItem[]
 props:
-  disabled: true
+  size: xl
   items:
     - label: 'France'
       icon: 'i-lucide-map-pin'
@@ -262,6 +337,40 @@ props:
     - label: 'Germany'
       icon: 'i-lucide-map-pin'
       value: 'DE'
+  class: 'w-full'
+---
+::
+
+### Disabled
+
+Use the `disabled` prop to prevent any user interaction with the Listbox.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+external:
+  - items
+externalTypes:
+  - ListboxItem[]
+props:
+  disabled: true
+  items:
+    - label: 'France'
+      icon: 'i-lucide-map-pin'
+      value: 'FR'
+    - label: 'Germany'
+      icon: 'i-lucide-map-pin'
+      value: 'DE'
+    - label: 'Italy'
+      icon: 'i-lucide-map-pin'
+      value: 'IT'
+    - label: 'Spain'
+      icon: 'i-lucide-map-pin'
+      value: 'ES'
   class: 'w-full'
 ---
 ::
@@ -312,6 +421,42 @@ collapse: true
 ---
 ::
 
+### Control search term
+
+Use the `v-model:search-term` directive to control the search term.
+
+::component-example
+---
+name: 'listbox-search-term-example'
+---
+::
+
+### With ignore filter
+
+Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
+
+::component-example
+---
+collapse: true
+name: 'listbox-ignore-filter-example'
+---
+::
+
+::note
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+::
+
+### With filter fields
+
+Use the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
+
+::component-example
+---
+collapse: true
+name: 'listbox-filter-fields-example'
+---
+::
+
 ### With virtualization
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
@@ -347,6 +492,14 @@ collapse: true
 ### Emits
 
 :component-emits
+
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `rootRef`{lang="ts-type"} | `Ref<HTMLElement \| null>`{lang="ts-type"} |
 
 ## Theme
 
