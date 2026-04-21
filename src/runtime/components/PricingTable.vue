@@ -176,7 +176,7 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
             </slot>
           </div>
 
-          <div v-if="tier.description || !!slots['tier-description'] || !!slots[(`${tier.id}-description` as keyof PricingTableSlots<T>)]" data-slot="tierDescription" :class="ui.tierDescription({ class: uiProp?.tierDescription })">
+          <div data-slot="tierDescription" :class="ui.tierDescription({ class: uiProp?.tierDescription })">
             <slot :name="(`${tier.id}-description` as keyof PricingTableSlots<T>)" :tier="tier">
               <slot name="tier-description" :tier="(tier as T)">
                 {{ tier.description }}
@@ -184,7 +184,7 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
             </slot>
           </div>
 
-          <div v-if="tier.discount || tier.price || !!slots['tier-discount'] || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-price'] || !!slots[(`${tier.id}-price` as keyof PricingTableSlots<T>)] || tier.billingCycle || tier.billingPeriod || !!slots['tier-billing'] || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)]" data-slot="tierPriceWrapper" :class="ui.tierPriceWrapper({ class: uiProp?.tierPriceWrapper })">
+          <div data-slot="tierPriceWrapper" :class="ui.tierPriceWrapper({ class: uiProp?.tierPriceWrapper })">
             <div v-if="(tier.discount && tier.price) || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-discount']" data-slot="tierDiscount" :class="ui.tierDiscount({ class: uiProp?.tierDiscount })">
               <slot :name="(`${tier.id}-discount` as keyof PricingTableSlots<T>)" :tier="tier">
                 <slot name="tier-discount" :tier="(tier as T)">
