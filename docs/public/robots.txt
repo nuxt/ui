@@ -1,4 +1,12 @@
 User-agent: *
+Disallow: /vercel/
+Disallow: /node_modules/
+Disallow: /docs/src/
+Disallow: /home/
+Disallow: /_nuxt/
+Disallow: /_plausible
+Disallow: /dev/
+Disallow: /api/
 Allow: /
 
 User-agent: GPTBot
