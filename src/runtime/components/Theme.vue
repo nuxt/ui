@@ -1,12 +1,11 @@
 <script lang="ts">
 import { type VNode, computed } from 'vue'
 import { provideThemeContext } from '../composables/useComponentUI'
-import type { ThemeUI } from '../composables/useComponentUI'
-import { provideVariantContext, type VariantUI } from '../composables/useComponentVariant'
+import type { ThemeUI, ThemeVariants } from '../composables/useComponentUI'
 
 export interface ThemeProps {
   ui?: ThemeUI
-  variants?: VariantUI
+  variants?: ThemeVariants
 }
 
 export interface ThemeSlots {
@@ -19,10 +18,7 @@ const props = defineProps<ThemeProps>()
 
 provideThemeContext({
   ui: computed(() => props.ui ?? {}),
-})
-
-provideVariantContext({
-  variant: computed(() => props.variants ?? {})
+  variants: computed(() => props.variants ?? {})
 })
 </script>
 

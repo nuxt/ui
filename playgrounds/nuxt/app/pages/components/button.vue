@@ -24,12 +24,8 @@ function onClick() {
   </Navbar>
 
   <Matrix v-slot="props" :attrs="attrs">
-    <UTheme :variants="{ button: { variant: 'soft', color: 'warning' } }" :ui="{ button: { base: 'font-bold' } }">
-      <UButton label="Button" v-bind="props" />
-      
-      <UButton label="Link" to="/" v-bind="props" />
-    </UTheme>
-
+    <UButton label="Button" v-bind="props" />
+    <UButton label="Link" to="/" v-bind="props" />
     <UButton label="Disabled" disabled v-bind="props" />
     <UButton label="Disabled link" to="#" disabled v-bind="props" />
     <UButton label="Loading" loading v-bind="props" />
