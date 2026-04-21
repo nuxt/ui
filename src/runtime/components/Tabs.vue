@@ -91,10 +91,10 @@ export type TabsSlots<T extends TabsItem = TabsItem> = {
 </script>
 
 <script setup lang="ts" generic="T extends TabsItem">
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick, onMounted, watch } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useNuxtApp } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
@@ -114,6 +114,7 @@ const emits = defineEmits<TabsEmits>()
 const slots = defineSlots<TabsSlots<T>>()
 
 const appConfig = useAppConfig() as Tabs['AppConfig']
+const nuxtApp = useNuxtApp()
 const uiProp = useComponentUI('tabs', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'unmountOnHide'), emits)
@@ -125,12 +126,79 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) 
   orientation: props.orientation
 }))
 
+const hydrationKeyPrefix = ref(import.meta.server || nuxtApp.isHydrating ? 0 : 1)
+const rootRef = ref<Element | ComponentPublicInstance | null>(null)
+
+const resolvedItems = computed(() => {
+  if (!props.items) {
+    return []
+  }
+
+  return props.items.map((item, index) => {
+    const value = get(item, props.valueKey as string) ?? String(index)
+    const stableId = get(item, props.valueKey as string) ?? get(item, props.labelKey as string) ?? String(index)
+
+    return {
+      key: `${hydrationKeyPrefix.value}-${stableId}`,
+      item,
+      index,
+      value
+    }
+  })
+})
+
 const triggersRef = ref<ComponentPublicInstance[]>([])
+
+watch(resolvedItems, (items) => {
+  triggersRef.value = triggersRef.value.slice(0, items.length)
+}, { immediate: true })
+
+function getElement(el: Element | ComponentPublicInstance | null) {
+  if (!el) {
+    return null
+  }
+
+  if ('$el' in el) {
+    return el.$el as HTMLElement
+  }
+
+  return el as HTMLElement
+}
 
 function setTriggerRef(index: number, el: Element | ComponentPublicInstance | null) {
   // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
   triggersRef.value[index] = el
 }
+
+function shouldRefreshHydratedItems() {
+  if (props.modelValue === undefined) {
+    return false
+  }
+
+  const rootEl = getElement(rootRef.value)
+
+  if (!rootEl) {
+    return false
+  }
+
+  const tabs = Array.from(rootEl.querySelectorAll<HTMLElement>(':scope > [data-slot="list"] > [data-slot="trigger"][role="tab"]'))
+  const activeIndexes = tabs.flatMap((tab, index) => tab.dataset.state === 'active' ? [index] : [])
+  const expectedIndex = resolvedItems.value.findIndex(item => item.value === props.modelValue)
+
+  return expectedIndex !== -1 && (activeIndexes.length !== 1 || activeIndexes[0] !== expectedIndex)
+}
+
+onMounted(async () => {
+  if (hydrationKeyPrefix.value !== 0) {
+    return
+  }
+
+  await nextTick()
+
+  if (shouldRefreshHydratedItems()) {
+    hydrationKeyPrefix.value = 1
+  }
+})
 
 defineExpose({
   triggersRef
@@ -139,6 +207,8 @@ defineExpose({
 
 <template>
   <TabsRoot
+    :key="hydrationKeyPrefix"
+    ref="rootRef"
     v-bind="rootProps"
     :model-value="modelValue"
     :default-value="defaultValue"
@@ -153,10 +223,10 @@ defineExpose({
       <slot name="list-leading" />
 
       <TabsTrigger
-        v-for="(item, index) of items"
-        :key="index"
+        v-for="{ item, index, key, value } of resolvedItems"
+        :key="key"
         :ref="el => setTriggerRef(index, el)"
-        :value="get(item, props.valueKey as string) ?? String(index)"
+        :value="value"
         :disabled="item.disabled"
         data-slot="trigger"
         :class="ui.trigger({ class: [uiProp?.trigger, item.ui?.trigger] })"
@@ -187,7 +257,7 @@ defineExpose({
     </TabsList>
 
     <template v-if="!!content">
-      <TabsContent v-for="(item, index) of items" :key="index" :value="get(item, props.valueKey as string) ?? String(index)" data-slot="content" :class="ui.content({ class: [uiProp?.content, item.ui?.content, item.class] })">
+      <TabsContent v-for="{ item, index, key, value } of resolvedItems" :key="key" :value="value" data-slot="content" :class="ui.content({ class: [uiProp?.content, item.ui?.content, item.class] })">
         <slot :name="((item.slot || 'content') as keyof TabsSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :ui="ui">
           {{ item.content }}
         </slot>
