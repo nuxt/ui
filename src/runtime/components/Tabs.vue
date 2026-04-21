@@ -24,7 +24,11 @@ export interface TabsItem {
   badge?: string | number | BadgeProps
   slot?: string
   content?: string
-  /** A unique value for the tab item. Defaults to the index. */
+  /**
+   * A unique value for the tab item. Defaults to the index.
+   * Also used as the Vue `key` for this item, so providing a stable value prevents tab
+   * content (and its local state) from remounting when items are added, removed, or reordered.
+   */
   value?: string | number
   disabled?: boolean
   class?: any
@@ -154,7 +158,7 @@ defineExpose({
 
       <TabsTrigger
         v-for="(item, index) of items"
-        :key="index"
+        :key="get(item, props.valueKey as string) ?? index"
         :ref="el => setTriggerRef(index, el)"
         :value="get(item, props.valueKey as string) ?? String(index)"
         :disabled="item.disabled"
@@ -187,7 +191,7 @@ defineExpose({
     </TabsList>
 
     <template v-if="!!content">
-      <TabsContent v-for="(item, index) of items" :key="index" :value="get(item, props.valueKey as string) ?? String(index)" data-slot="content" :class="ui.content({ class: [uiProp?.content, item.ui?.content, item.class] })">
+      <TabsContent v-for="(item, index) of items" :key="get(item, props.valueKey as string) ?? index" :value="get(item, props.valueKey as string) ?? String(index)" data-slot="content" :class="ui.content({ class: [uiProp?.content, item.ui?.content, item.class] })">
         <slot :name="((item.slot || 'content') as keyof TabsSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :ui="ui">
           {{ item.content }}
         </slot>

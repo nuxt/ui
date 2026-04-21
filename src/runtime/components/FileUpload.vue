@@ -186,7 +186,7 @@ const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   dropzone: props.dropzone,
   onUpdate
 })
-const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props)
+const { emitFormInput, emitFormChange, id, name, color, highlight, disabled, ariaAttrs } = useFormField<FileUploadProps>(props)
 
 const { variant: resolvedVariant } = useResolvedVariants('fileUpload', props, theme, ['variant'])
 const variant = computed(() => props.multiple ? 'area' : resolvedVariant.value)
@@ -205,13 +205,13 @@ const position = computed(() => {
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
   dropzone: props.dropzone,
   interactive: props.interactive,
-  color: props.color,
+  color: color.value,
   size: props.size,
   variant: variant.value,
   layout: layout.value,
   position: position.value,
   multiple: props.multiple,
-  highlight: props.highlight,
+  highlight: highlight.value,
   disabled: props.disabled
 }))
 
