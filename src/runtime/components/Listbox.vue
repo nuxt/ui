@@ -1,11 +1,12 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VNode } from 'vue'
-import { computed, ref, toRaw, toRef, useId, useTemplateRef } from 'vue'
+import { computed, toRaw, toRef, useId } from 'vue'
 import type { ListboxRootEmits, ListboxRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/listbox'
 import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { ArrayOrNested, GetItemKeys, GetModelValue, GetModelValueEmits, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -27,7 +28,7 @@ export interface ListboxItem {
   [key: string]: any
 }
 
-export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ListboxRootProps, 'by' | 'disabled' | 'highlightOnHover' | 'name' | 'orientation' | 'required' | 'selectionBehavior'> {
+export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>> extends Pick<ListboxRootProps, 'by' | 'disabled' | 'highlightOnHover' | 'name' | 'orientation' | 'required' | 'selectionBehavior'> {
   id?: string
   /**
    * The element or component this component should render as.
@@ -45,11 +46,12 @@ export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNest
   /**
    * The controlled value of the Listbox. Can be bound with `v-model`.
    */
-  modelValue?: GetModelValue<T, VK, M>
+  modelValue?: ApplyModifiers<GetModelValue<T, VK, M>, Mod>
+  modelModifiers?: Mod
   /**
    * The default value when not controlled.
    */
-  defaultValue?: GetModelValue<T, VK, M>
+  defaultValue?: ApplyModifiers<GetModelValue<T, VK, M>, Mod>
   /**
    * Whether multiple items can be selected.
    * @defaultValue false
@@ -125,8 +127,9 @@ export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNest
   ui?: Listbox['slots']
 }
 
-export type ListboxEmits<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> = Pick<ListboxRootEmits, 'entryFocus' | 'highlight' | 'leave'> & {
-  'update:modelValue': [value: GetModelValueEmits<T, VK, M>]
+export type ListboxEmits<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>> = Pick<ListboxRootEmits, 'entryFocus' | 'highlight' | 'leave'> & {
+  'change': [event: Event]
+  'update:modelValue': [value: ApplyModifiers<GetModelValueEmits<T, VK, M>, Mod>]
 }
 
 type SlotProps<T> = (props: { item: T, index: number, ui: Listbox['ui'] }) => VNode[]
@@ -143,7 +146,7 @@ export type ListboxSlots<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<Li
 
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
+<script setup lang="ts" generic="T extends ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
 import { ListboxRoot, ListboxContent, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter, useForwardPropsEmits } from 'reka-ui'
 import { createReusableTemplate, reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
@@ -152,7 +155,7 @@ import { useComponentUI } from '../composables/useComponentUI'
 import { useFilter } from '../composables/useFilter'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
-import { get, isArrayOfArray } from '../utils'
+import { get, isArrayOfArray, looseToNumber } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -162,7 +165,7 @@ import UInput from './Input.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ListboxProps<T, VK, M>>(), {
+const props = withDefaults(defineProps<ListboxProps<T, VK, M, Mod>>(), {
   as: 'div',
   items: () => [] as any,
   labelKey: 'label',
@@ -172,7 +175,7 @@ const props = withDefaults(defineProps<ListboxProps<T, VK, M>>(), {
   filter: false,
   virtualize: false
 })
-const emits = defineEmits<ListboxEmits<T, VK, M>>()
+const emits = defineEmits<ListboxEmits<T, VK, M, Mod>>()
 const slots = defineSlots<ListboxSlots<T>>()
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ListboxItem, index: number }>({
@@ -212,6 +215,25 @@ function onUpdate(value: any) {
     return
   }
 
+  if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
+    value = value?.trim() ?? null
+  }
+
+  if (props.modelModifiers?.number) {
+    value = looseToNumber(value)
+  }
+
+  if (props.modelModifiers?.nullable) {
+    value ??= null
+  }
+
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
+    value ??= undefined
+  }
+
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
+  const event = new Event('change', { target: { value } })
+  emits('change', event)
   emits('update:modelValue', value)
   emitFormChange()
   emitFormInput()
@@ -251,12 +273,6 @@ const virtualizerProps = toRef(() => {
   return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
     estimateSize: getEstimateSize(filteredItems.value, size.value || 'md', props.descriptionKey as string, !!slots['item-description'])
   })
-})
-
-const rootRef = useTemplateRef('rootRef')
-
-defineExpose({
-  rootRef: toRef(() => rootRef.value?.$el as HTMLElement)
 })
 </script>
 
@@ -311,7 +327,6 @@ defineExpose({
   </DefineItemTemplate>
 
   <ListboxRoot
-    ref="rootRef"
     :id="id"
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :disabled="disabled"

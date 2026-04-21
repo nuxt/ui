@@ -65,7 +65,7 @@ export default defineLocale<Messages>({
     },
     dropdownMenu: {
       noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Sichen..'
+      search: 'Sichen…'
     },
     dashboardSearch: {
       theme: 'Thema'
@@ -138,7 +138,7 @@ export default defineLocale<Messages>({
       create: '"{label}" erstellen',
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Sichen..'
+      search: 'Sichen…'
     },
     slideover: {
       close: 'Zoumaachen'
