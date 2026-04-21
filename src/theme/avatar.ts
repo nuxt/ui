@@ -2,7 +2,7 @@ export default {
   slots: {
     root: 'inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated',
     image: 'h-full w-full rounded-[inherit] object-cover',
-    fallback: 'font-medium leading-none text-muted truncate',
+    fallback: 'font-medium text-muted truncate',
     icon: 'text-muted shrink-0'
   },
   variants: {
