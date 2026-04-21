@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ListboxItem } from '@nuxt/ui'
 
-const allItems: ListboxItem[] = [
+const items: ListboxItem[] = [
   { label: 'France', icon: 'i-lucide-map-pin', value: 'FR' },
   { label: 'Germany', icon: 'i-lucide-map-pin', value: 'DE' },
   { label: 'Italy', icon: 'i-lucide-map-pin', value: 'IT' },
@@ -16,7 +16,7 @@ const targetItems = ref<ListboxItem[]>([])
 const sourceSelection = ref<ListboxItem[]>([])
 const targetSelection = ref<ListboxItem[]>([])
 
-const sourceItems = computed(() => allItems.filter(item => !targetItems.value.some(t => t.value === item.value)))
+const sourceItems = computed(() => items.filter(item => !targetItems.value.some(t => t.value === item.value)))
 
 function transferSelected() {
   targetItems.value = [...targetItems.value, ...sourceSelection.value]
@@ -39,7 +39,7 @@ function removeSelected() {
         :items="sourceItems"
         multiple
         filter
-        class="w-full"
+        class="size-full"
       />
     </div>
 
@@ -68,7 +68,7 @@ function removeSelected() {
         :items="targetItems"
         multiple
         filter
-        class="w-full"
+        class="size-full"
       />
     </div>
   </div>

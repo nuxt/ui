@@ -1,13 +1,13 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VNode } from 'vue'
-import { computed, toRaw, toRef, useId } from 'vue'
+import { computed, toRaw, toRef } from 'vue'
 import type { ListboxRootEmits, ListboxRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/listbox'
 import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
 import type { ModelModifiers, ApplyModifiers } from '../types/input'
-import type { ArrayOrNested, GetItemKeys, GetModelValue, GetModelValueEmits, NestedItem } from '../types/utils'
+import type { ArrayOrNested, GetItemKeys, GetModelValue, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type Listbox = ComponentConfig<typeof theme, AppConfig, 'listbox'>
@@ -21,10 +21,15 @@ export interface ListboxItem {
   icon?: IconProps['name']
   avatar?: AvatarProps
   chip?: ChipProps
+  /**
+   * The item type.
+   * @defaultValue 'item'
+   */
+  type?: 'label' | 'separator' | 'item'
   disabled?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<Listbox['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatar' | 'itemLeadingAvatarSize' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
+  ui?: Pick<Listbox['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatar' | 'itemLeadingAvatarSize' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
 
@@ -123,13 +128,15 @@ export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNest
   }
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  autofocus?: boolean
+  autofocusDelay?: number
   class?: any
   ui?: Listbox['slots']
 }
 
 export type ListboxEmits<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>> = Pick<ListboxRootEmits, 'entryFocus' | 'highlight' | 'leave'> & {
   'change': [event: Event]
-  'update:modelValue': [value: ApplyModifiers<GetModelValueEmits<T, VK, M>, Mod>]
+  'update:modelValue': [value: ApplyModifiers<GetModelValue<T, VK, M>, Mod>]
 }
 
 type SlotProps<T> = (props: { item: T, index: number, ui: Listbox['ui'] }) => VNode[]
@@ -147,7 +154,7 @@ export type ListboxSlots<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<Li
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
-import { ListboxRoot, ListboxContent, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter, useForwardPropsEmits } from 'reka-ui'
+import { ListboxRoot, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter, useForwardPropsEmits } from 'reka-ui'
 import { createReusableTemplate, reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
@@ -166,17 +173,35 @@ import UInput from './Input.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ListboxProps<T, VK, M, Mod>>(), {
-  as: 'div',
-  items: () => [] as any,
   labelKey: 'label',
   descriptionKey: 'description',
-  selectionBehavior: 'toggle',
   highlightOnHover: true,
   filter: false,
+  autofocusDelay: 0,
   virtualize: false
 })
 const emits = defineEmits<ListboxEmits<T, VK, M, Mod>>()
 const slots = defineSlots<ListboxSlots<T>>()
+
+const searchTerm = defineModel<string>('searchTerm', { default: '' })
+
+const { t } = useLocale()
+const appConfig = useAppConfig() as Listbox['AppConfig']
+const uiProp = useComponentUI('listbox', props)
+const { filterGroups } = useFilter()
+
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'multiple', 'selectionBehavior', 'highlightOnHover', 'by', 'orientation', 'required'), emits)
+
+const virtualizerProps = toRef(() => {
+  if (!props.virtualize) return false
+
+  return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+    estimateSize: getEstimateSize(filteredItems.value, size.value || 'md', props.descriptionKey as string, !!slots['item-description'])
+  })
+})
+const inputProps = toRef(() => defu(typeof props.filter === 'object' ? props.filter : {}, { placeholder: t('listbox.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+
+const { emitFormChange, emitFormInput, name, size, color, id, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props, { bind: false })
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ListboxItem, index: number }>({
   props: {
@@ -191,23 +216,12 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: L
   }
 })
 
-const { t } = useLocale()
-const appConfig = useAppConfig() as Listbox['AppConfig']
-const uiProp = useComponentUI('listbox', props)
-
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'multiple', 'selectionBehavior', 'highlightOnHover', 'by', 'orientation', 'required'), emits)
-const inputProps = toRef(() => defu(typeof props.filter === 'object' ? props.filter : {}, { placeholder: t('listbox.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
-
-const { emitFormChange, emitFormInput, name, size, color, id: _id, highlight, disabled, ariaAttrs } = useFormField<ListboxProps<T, VK>>(props, { bind: false })
-// eslint-disable-next-line vue/no-dupe-keys
-const id = _id.value ?? useId()
-
-// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.listbox || {}) })({
   color: color.value,
   size: size.value,
   highlight: highlight.value,
-  disabled: disabled.value
+  disabled: disabled.value,
+  virtualize: !!props.virtualize
 }))
 
 function onUpdate(value: any) {
@@ -234,7 +248,6 @@ function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
-  emits('update:modelValue', value)
   emitFormChange()
   emitFormInput()
 }
@@ -248,38 +261,44 @@ function onSelect(e: Event, item: ListboxItem) {
   item.onSelect?.(e)
 }
 
-const { filter: filterItems } = useFilter()
+const groups = computed<ListboxItem[][]>(() =>
+  props.items?.length
+    ? isArrayOfArray(props.items)
+      ? props.items
+      : [props.items]
+    : []
+)
 
-const searchTerm = defineModel<string>('searchTerm', { default: '' })
+function isStructuralItem(item: ListboxItem): boolean {
+  return !!item.type && ['label', 'separator'].includes(item.type)
+}
 
-const items = computed(() => {
-  if (!props.items?.length) return []
-  return (isArrayOfArray(props.items) ? props.items.flatMap(group => group) : props.items) as NestedItem<T>[]
-})
-
-const filteredItems = computed(() => {
+const filteredGroups = computed(() => {
   if (props.ignoreFilter || !searchTerm.value) {
-    return items.value
+    return groups.value
   }
 
   const fields = Array.isArray(props.filterFields) ? props.filterFields : [props.labelKey] as string[]
 
-  return filterItems(items.value, searchTerm.value, fields)
-})
-
-const virtualizerProps = toRef(() => {
-  if (!props.virtualize) return false
-
-  return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-    estimateSize: getEstimateSize(filteredItems.value, size.value || 'md', props.descriptionKey as string, !!slots['item-description'])
+  return filterGroups(groups.value, searchTerm.value, {
+    fields,
+    isStructural: isStructuralItem
   })
 })
+const filteredItems = computed(() => filteredGroups.value.flatMap(group => group) as NestedItem<T>[])
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <DefineItemTemplate v-slot="{ item, index }">
+    <ListboxGroupLabel v-if="item.type === 'label'" data-slot="label" :class="ui.label({ class: [uiProp?.label, item.ui?.label, item.class] })">
+      {{ get(item, props.labelKey as string) }}
+    </ListboxGroupLabel>
+
+    <div v-else-if="item.type === 'separator'" role="separator" data-slot="separator" :class="ui.separator({ class: [uiProp?.separator, item.ui?.separator, item.class] })" />
+
     <RekaListboxItem
+      v-else
       :value="props.valueKey ? get(item, props.valueKey as string) : item"
       :disabled="item.disabled"
       data-slot="item"
@@ -337,8 +356,9 @@ const virtualizerProps = toRef(() => {
   >
     <ListboxFilter v-if="filter" v-model="searchTerm" as-child>
       <UInput
+        :autofocus="autofocus"
+        :autofocus-delay="autofocusDelay"
         :size="size"
-        :icon="appConfig.ui.icons.search"
         v-bind="inputProps"
         data-slot="input"
         :class="ui.input({ class: uiProp?.input })"
@@ -368,7 +388,9 @@ const virtualizerProps = toRef(() => {
       </ListboxVirtualizer>
 
       <template v-else>
-        <ReuseItemTemplate v-for="(item, index) in filteredItems" :key="index" :item="item" :index="index" />
+        <ListboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: uiProp?.group })">
+          <ReuseItemTemplate v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`" :item="item" :index="index" />
+        </ListboxGroup>
       </template>
     </ListboxContent>
   </ListboxRoot>

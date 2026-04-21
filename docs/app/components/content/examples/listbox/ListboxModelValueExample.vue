@@ -14,15 +14,9 @@ const value = ref<ListboxItem>(items[2]!)
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-4">
-    <UListbox
-      v-model="value"
-      :items="items"
-      class="w-full"
-    />
-
-    <p class="text-sm text-muted">
-      Selected: {{ value?.label || 'None' }}
-    </p>
-  </div>
+  <UListbox
+    v-model="value"
+    :items="items"
+    class="w-full"
+  />
 </template>

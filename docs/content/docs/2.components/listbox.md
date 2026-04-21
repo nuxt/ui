@@ -21,12 +21,20 @@ collapse: true
 hide:
   - class
 ignore:
+  - modelValue.label
+  - modelValue.icon
+  - modelValue.value
   - items
 external:
   - items
+  - modelValue
 externalTypes:
   - ListboxItem[]
 props:
+  modelValue:
+    label: 'France'
+    icon: 'i-lucide-map-pin'
+    value: 'FR'
   items:
     - label: 'France'
       icon: 'i-lucide-map-pin'
@@ -46,6 +54,18 @@ props:
     - label: 'Poland'
       icon: 'i-lucide-map-pin'
       value: 'PL'
+    - label: 'Belgium'
+      icon: 'i-lucide-map-pin'
+      value: 'BE'
+    - label: 'Portugal'
+      icon: 'i-lucide-map-pin'
+      value: 'PT'
+    - label: 'Austria'
+      icon: 'i-lucide-map-pin'
+      value: 'AT'
+    - label: 'Sweden'
+      icon: 'i-lucide-map-pin'
+      value: 'SE'
   class: 'w-full'
 ---
 ::
@@ -55,14 +75,15 @@ props:
 Use the `items` prop as an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
-- `description?: string`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
-- `avatar?: AvatarProps`{lang="ts-type"}
-- `chip?: ChipProps`{lang="ts-type"}
+- [`description?: string`{lang="ts-type"}](#with-description-in-items)
+- [`type?: "label" | "separator" | "item"`{lang="ts-type"}](#with-items-type)
+- [`icon?: string`{lang="ts-type"}](#with-icon-in-items)
+- [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
+- [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
 - `disabled?: boolean`{lang="ts-type"}
 - `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, ... }`{lang="ts-type"}
+- `ui?: { label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, ... }`{lang="ts-type"}
 
 ::component-code
 ---
@@ -142,6 +163,7 @@ hide:
   - class
 ignore:
   - items
+  - multiple
 external:
   - items
 externalTypes:
@@ -204,7 +226,7 @@ props:
 
 ### Filter
 
-Use the `filter` prop to display a filter input. You can also pass an object to customize the [Input](/docs/components/input) component.
+Use the `filter` prop to display a filter input or pass an object to customize the [Input](/docs/components/input) component. Defaults to `false`.
 
 ::component-code
 ---
@@ -218,7 +240,9 @@ external:
 externalTypes:
   - ListboxItem[]
 props:
-  filter: true
+  filter:
+    placeholder: 'Filter...'
+    icon: 'i-lucide-search'
   items:
     - label: 'France'
       icon: 'i-lucide-map-pin'
@@ -252,6 +276,7 @@ collapse: true
 ignore:
   - items
   - modelValue
+  - valueKey
   - class
 external:
   - items
@@ -377,6 +402,174 @@ props:
 
 ## Examples
 
+### With items type
+
+You can use the `type` property with `separator` to display a separator between items or `label` to display a label.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+external:
+  - items
+externalTypes:
+  - ListboxItem[][]
+props:
+  items:
+    - - type: 'label'
+        label: 'Fruits'
+      - label: 'Apple'
+      - label: 'Banana'
+      - label: 'Blueberry'
+      - label: 'Grapes'
+      - label: 'Pineapple'
+    - - type: 'label'
+        label: 'Vegetables'
+      - label: 'Aubergine'
+      - label: 'Broccoli'
+      - label: 'Carrot'
+      - label: 'Courgette'
+      - label: 'Leek'
+  class: 'w-full'
+---
+::
+
+### With icon in items
+
+You can use the `icon` property to display an [Icon](/docs/components/icon) inside the items.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+external:
+  - items
+externalTypes:
+  - ListboxItem[]
+props:
+  items:
+    - label: 'Backlog'
+      icon: 'i-lucide-circle-help'
+      value: 'backlog'
+    - label: 'Todo'
+      icon: 'i-lucide-circle-plus'
+      value: 'todo'
+    - label: 'In Progress'
+      icon: 'i-lucide-circle-arrow-up'
+      value: 'in_progress'
+    - label: 'Done'
+      icon: 'i-lucide-circle-check'
+      value: 'done'
+  class: 'w-full'
+---
+::
+
+### With avatar in items
+
+You can use the `avatar` property to display an [Avatar](/docs/components/avatar) inside the items.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+external:
+  - items
+externalTypes:
+  - ListboxItem[]
+props:
+  items:
+    - label: 'benjamincanac'
+      avatar:
+        src: 'https://github.com/benjamincanac.png'
+    - label: 'romhml'
+      avatar:
+        src: 'https://github.com/romhml.png'
+    - label: 'atinux'
+      avatar:
+        src: 'https://github.com/atinux.png'
+    - label: 'HugoRCD'
+      avatar:
+        src: 'https://github.com/HugoRCD.png'
+  class: 'w-full'
+---
+::
+
+### With chip in items
+
+You can use the `chip` property to display a [Chip](/docs/components/chip) inside the items.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+external:
+  - items
+externalTypes:
+  - ListboxItem[]
+props:
+  items:
+    - label: 'bug'
+      chip:
+        color: 'error'
+    - label: 'feature'
+      chip:
+        color: 'success'
+    - label: 'enhancement'
+      chip:
+        color: 'info'
+  class: 'w-full'
+---
+::
+
+### With description in items
+
+You can use the `description` property to display additional text below the label.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+external:
+  - items
+externalTypes:
+  - ListboxItem[]
+props:
+  items:
+    - label: 'France'
+      description: 'The Hexagon'
+      icon: 'i-lucide-map-pin'
+      value: 'FR'
+    - label: 'Germany'
+      description: 'The Federal Republic'
+      icon: 'i-lucide-map-pin'
+      value: 'DE'
+    - label: 'Italy'
+      description: 'The Boot'
+      icon: 'i-lucide-map-pin'
+      value: 'IT'
+    - label: 'Spain'
+      description: 'The Bull Skin'
+      icon: 'i-lucide-map-pin'
+      value: 'ES'
+  class: 'w-full'
+---
+::
+
 ### Control selected items
 
 You can control the selected item by using the `default-value` prop or the `v-model` directive.
@@ -384,39 +577,6 @@ You can control the selected item by using the `default-value` prop or the `v-mo
 ::component-example
 ---
 name: 'listbox-model-value-example'
-collapse: true
----
-::
-
-### With multiple selection
-
-Use the `multiple` prop to allow selecting multiple items.
-
-::component-example
----
-name: 'listbox-multiple-example'
-collapse: true
----
-::
-
-### With descriptions
-
-Use the `description` property on items to display additional text below the label.
-
-::component-example
----
-name: 'listbox-description-example'
-collapse: true
----
-::
-
-### With avatars
-
-Use the `avatar` property on items to display an [Avatar](/docs/components/avatar) next to the label.
-
-::component-example
----
-name: 'listbox-avatar-example'
 collapse: true
 ---
 ::
@@ -492,14 +652,6 @@ collapse: true
 ### Emits
 
 :component-emits
-
-### Expose
-
-When accessing the component via a template ref, you can use the following:
-
-| Name | Type |
-| ---- | ---- |
-| `rootRef`{lang="ts-type"} | `Ref<HTMLElement \| null>`{lang="ts-type"} |
 
 ## Theme
 

@@ -10,7 +10,8 @@ const { data: users, status, execute } = await useLazyFetch('https://jsonplaceho
   transform: (data: { id: number, name: string }[]) => {
     return data?.map(user => ({
       label: user.name,
-      value: String(user.id)
+      value: String(user.id),
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const }
     }))
   },
   immediate: false
