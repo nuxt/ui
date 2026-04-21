@@ -24,7 +24,11 @@ export interface TabsItem {
   badge?: string | number | BadgeProps
   slot?: string
   content?: string
-  /** A unique value for the tab item. Defaults to the index. */
+  /**
+   * A unique value for the tab item. Defaults to the index.
+   * Also used as the Vue `key` for this item, so providing a stable value prevents tab
+   * content (and its local state) from remounting when items are added, removed, or reordered.
+   */
   value?: string | number
   disabled?: boolean
   class?: any
