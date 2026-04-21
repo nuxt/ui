@@ -106,7 +106,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
     <AccordionItem
       v-for="(item, index) in props.items"
       v-slot="{ open }"
-      :key="index"
+      :key="get(item, props.valueKey as string) ?? index"
       :value="get(item, props.valueKey as string) ?? String(index)"
       :disabled="item.disabled"
       data-slot="item"
