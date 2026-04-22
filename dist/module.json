@@ -1,0 +1,13 @@
+{
+  "name": "@nuxt/ui",
+  "version": "4.6.1",
+  "docs": "https://ui.nuxt.com/docs/getting-started/installation/nuxt",
+  "configKey": "ui",
+  "compatibility": {
+    "nuxt": ">=4.1.0"
+  },
+  "builder": {
+    "@nuxt/module-builder": "1.0.2",
+    "unbuild": "3.6.1"
+  }
+}

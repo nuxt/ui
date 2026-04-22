@@ -1,0 +1,147 @@
+import { defineLocale } from "../composables/defineLocale.js";
+export default defineLocale({
+  name: "\u0641\u0627\u0631\u0633\u06CC",
+  code: "fa-IR",
+  dir: "rtl",
+  messages: {
+    alert: {
+      close: "\u0628\u0633\u062A\u0646"
+    },
+    authForm: {
+      hidePassword: "\u067E\u0646\u0647\u0627\u0646 \u06A9\u0631\u062F\u0646 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631",
+      showPassword: "\u0646\u0645\u0627\u06CC\u0634 \u0631\u0645\u0632 \u0639\u0628\u0648\u0631",
+      submit: "\u0627\u062F\u0627\u0645\u0647"
+    },
+    banner: {
+      close: "\u0628\u0633\u062A\u0646"
+    },
+    calendar: {
+      nextMonth: "\u0645\u0627\u0647 \u0622\u06CC\u0646\u062F\u0647",
+      nextYear: "\u0633\u0627\u0644 \u0622\u06CC\u0646\u062F\u0647",
+      prevMonth: "\u0645\u0627\u0647 \u06AF\u0630\u0634\u062A\u0647",
+      prevYear: "\u0633\u0627\u0644 \u06AF\u0630\u0634\u062A\u0647"
+    },
+    carousel: {
+      dots: "\u0627\u0633\u0644\u0627\u06CC\u062F \u0645\u0648\u0631\u062F \u0646\u0638\u0631 \u0628\u0631\u0627\u06CC \u0646\u0645\u0627\u06CC\u0634 \u0631\u0627 \u0627\u0646\u062A\u062E\u0627\u0628 \u06A9\u0646\u06CC\u062F",
+      goto: "\u0631\u0641\u062A\u0646 \u0628\u0647 \u0627\u0633\u0644\u0627\u06CC\u062F {slide}",
+      next: "\u0628\u0639\u062F\u06CC",
+      prev: "\u0642\u0628\u0644\u06CC"
+    },
+    chatPrompt: {
+      placeholder: "\u0627\u06CC\u0646\u062C\u0627 \u067E\u06CC\u0627\u0645 \u062E\u0648\u062F \u0631\u0627 \u0628\u0646\u0648\u06CC\u0633\u06CC\u062F\u2026"
+    },
+    chatPromptSubmit: {
+      label: "\u0627\u0631\u0633\u0627\u0644"
+    },
+    chatReasoning: {
+      thinking: "\u062F\u0631 \u062D\u0627\u0644 \u0641\u06A9\u0631 \u06A9\u0631\u062F\u0646\u2026",
+      thought: "\u0641\u06A9\u0631 \u06A9\u0631\u062F",
+      thoughtFor: "\u0628\u0647 \u0645\u062F\u062A {duration} \u0641\u06A9\u0631 \u06A9\u0631\u062F"
+    },
+    colorMode: {
+      dark: "\u062A\u06CC\u0631\u0647",
+      light: "\u0631\u0648\u0634\u0646",
+      switchToDark: "\u062A\u063A\u06CC\u06CC\u0631 \u0628\u0647 \u062D\u0627\u0644\u062A \u062A\u06CC\u0631\u0647",
+      switchToLight: "\u062A\u063A\u06CC\u06CC\u0631 \u0628\u0647 \u062D\u0627\u0644\u062A \u0631\u0648\u0634\u0646",
+      system: "\u0633\u06CC\u0633\u062A\u0645"
+    },
+    commandPalette: {
+      back: "\u0628\u0627\u0632\u06AF\u0634\u062A",
+      close: "\u0628\u0633\u062A\u0646",
+      noData: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u0645\u0648\u062C\u0648\u062F \u0646\u06CC\u0633\u062A",
+      noMatch: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u06CC\u0627\u0641\u062A \u0646\u0634\u062F",
+      placeholder: "\u06CC\u06A9 \u062F\u0633\u062A\u0648\u0631 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F \u06CC\u0627 \u062C\u0633\u062A\u062C\u0648 \u06A9\u0646\u06CC\u062F\u2026"
+    },
+    contentSearch: {
+      links: "\u067E\u06CC\u0648\u0646\u062F\u0647\u0627",
+      theme: "\u062A\u0645"
+    },
+    contentSearchButton: {
+      label: "\u062C\u0633\u062A\u062C\u0648\u2026"
+    },
+    contentToc: {
+      title: "\u062F\u0631 \u0627\u06CC\u0646 \u0635\u0641\u062D\u0647"
+    },
+    dropdownMenu: {
+      noMatch: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u06CC\u0627\u0641\u062A \u0646\u0634\u062F",
+      search: "\u062C\u0633\u062A\u062C\u0648\u2026"
+    },
+    dashboardSearch: {
+      theme: "\u062A\u0645"
+    },
+    dashboardSearchButton: {
+      label: "\u062C\u0633\u062A\u062C\u0648\u2026"
+    },
+    dashboardSidebarCollapse: {
+      collapse: "\u062C\u0645\u0639 \u06A9\u0631\u062F\u0646 \u0646\u0648\u0627\u0631 \u06A9\u0646\u0627\u0631\u06CC",
+      expand: "\u06AF\u0633\u062A\u0631\u0634 \u0646\u0648\u0627\u0631 \u06A9\u0646\u0627\u0631\u06CC"
+    },
+    dashboardSidebarToggle: {
+      close: "\u0628\u0633\u062A\u0646 \u0646\u0648\u0627\u0631 \u06A9\u0646\u0627\u0631\u06CC",
+      open: "\u0628\u0627\u0632 \u06A9\u0631\u062F\u0646 \u0646\u0648\u0627\u0631 \u06A9\u0646\u0627\u0631\u06CC"
+    },
+    error: {
+      clear: "\u0628\u0627\u0632\u06AF\u0634\u062A \u0628\u0647 \u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC"
+    },
+    fileUpload: {
+      removeFile: "\u062D\u0630\u0641 {filename}"
+    },
+    header: {
+      close: "\u0628\u0633\u062A\u0646 \u0645\u0646\u0648",
+      open: "\u0628\u0627\u0632 \u06A9\u0631\u062F\u0646 \u0645\u0646\u0648"
+    },
+    inputMenu: {
+      create: '\u0627\u06CC\u062C\u0627\u062F "{label}"',
+      noData: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u0645\u0648\u062C\u0648\u062F \u0646\u06CC\u0633\u062A",
+      noMatch: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u06CC\u0627\u0641\u062A \u0646\u0634\u062F"
+    },
+    inputNumber: {
+      decrement: "\u06A9\u0627\u0647\u0634",
+      increment: "\u0627\u0641\u0632\u0627\u06CC\u0634"
+    },
+    modal: {
+      close: "\u0628\u0633\u062A\u0646"
+    },
+    pricingTable: {
+      caption: "\u0645\u0642\u0627\u06CC\u0633\u0647 \u0637\u0631\u062D \u0642\u06CC\u0645\u062A"
+    },
+    prose: {
+      codeCollapse: {
+        closeText: "\u062C\u0645\u0639 \u06A9\u0631\u062F\u0646",
+        name: "\u06A9\u062F",
+        openText: "\u06AF\u0633\u062A\u0631\u0634"
+      },
+      collapsible: {
+        closeText: "\u067E\u0646\u0647\u0627\u0646",
+        name: "\u0648\u06CC\u0698\u06AF\u06CC\u200C\u0647\u0627",
+        openText: "\u0646\u0645\u0627\u06CC\u0634"
+      },
+      pre: {
+        copy: "\u06A9\u067E\u06CC \u06A9\u062F \u062F\u0631 \u06A9\u0644\u06CC\u067E\u200C\u0628\u0648\u0631\u062F"
+      },
+      prompt: {
+        copy: "\u06A9\u067E\u06CC \u062F\u0633\u062A\u0648\u0631",
+        openIn: "\u0628\u0627\u0632 \u06A9\u0631\u062F\u0646 \u062F\u0631 {name}"
+      }
+    },
+    sidebar: {
+      close: "\u0628\u0633\u062A\u0646",
+      toggle: "\u062A\u063A\u06CC\u06CC\u0631 \u0648\u0636\u0639\u06CC\u062A"
+    },
+    selectMenu: {
+      create: '\u0627\u06CC\u062C\u0627\u062F "{label}"',
+      noData: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u0645\u0648\u062C\u0648\u062F \u0646\u06CC\u0633\u062A",
+      noMatch: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u06CC\u0627\u0641\u062A \u0646\u0634\u062F",
+      search: "\u062C\u0633\u062A\u062C\u0648\u2026"
+    },
+    slideover: {
+      close: "\u0628\u0633\u062A\u0646"
+    },
+    table: {
+      noData: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u0645\u0648\u062C\u0648\u062F \u0646\u06CC\u0633\u062A"
+    },
+    toast: {
+      close: "\u0628\u0633\u062A\u0646"
+    }
+  }
+});

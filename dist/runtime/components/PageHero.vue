@@ -1,0 +1,83 @@
+<script>
+import theme from "#build/ui/page-hero";
+</script>
+
+<script setup>
+import { computed } from "vue";
+import { Primitive } from "reka-ui";
+import { useAppConfig } from "#imports";
+import { useComponentUI } from "../composables/useComponentUI";
+import { tv } from "../utils/tv";
+import UButton from "./Button.vue";
+import UContainer from "./Container.vue";
+const props = defineProps({
+  as: { type: null, required: false },
+  headline: { type: String, required: false },
+  title: { type: String, required: false },
+  description: { type: String, required: false },
+  links: { type: Array, required: false },
+  orientation: { type: null, required: false, default: "vertical" },
+  reverse: { type: Boolean, required: false },
+  class: { type: null, required: false },
+  ui: { type: Object, required: false }
+});
+const slots = defineSlots();
+const appConfig = useAppConfig();
+const uiProp = useComponentUI("pageHero", props);
+const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.pageHero || {} })({
+  orientation: props.orientation,
+  reverse: props.reverse,
+  title: !!props.title || !!slots.title
+}));
+</script>
+
+<template>
+  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <slot name="top" />
+
+    <UContainer data-slot="container" :class="ui.container({ class: uiProp?.container })">
+      <div v-if="!!slots.header || (headline || !!slots.headline) || (title || !!slots.title) || (description || !!slots.description) || !!slots.body || !!slots.footer || (links?.length || !!slots.links)" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+        <div v-if="!!slots.header || (headline || !!slots.headline) || (title || !!slots.title) || (description || !!slots.description)" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+          <slot name="header">
+            <div v-if="headline || !!slots.headline" data-slot="headline" :class="ui.headline({ class: uiProp?.headline, headline: !slots.headline })">
+              <slot name="headline">
+                {{ headline }}
+              </slot>
+            </div>
+
+            <h1 v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
+              <slot name="title">
+                {{ title }}
+              </slot>
+            </h1>
+
+            <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+              <slot name="description">
+                {{ description }}
+              </slot>
+            </div>
+          </slot>
+        </div>
+
+        <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: uiProp?.body })">
+          <slot name="body" />
+        </div>
+
+        <div v-if="!!slots.footer || (links?.length || !!slots.links)" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
+          <slot name="footer">
+            <div v-if="links?.length || !!slots.links" data-slot="links" :class="ui.links({ class: uiProp?.links })">
+              <slot name="links">
+                <UButton v-for="(link, index) in links" :key="index" size="xl" v-bind="link" />
+              </slot>
+            </div>
+          </slot>
+        </div>
+      </div>
+
+      <slot v-if="!!slots.default" />
+      <div v-else-if="orientation === 'horizontal'" class="hidden lg:block" />
+    </UContainer>
+
+    <slot name="bottom" />
+  </Primitive>
+</template>

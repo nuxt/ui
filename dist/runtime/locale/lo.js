@@ -1,0 +1,146 @@
+import { defineLocale } from "../composables/defineLocale.js";
+export default defineLocale({
+  name: "\u0EA5\u0EB2\u0EA7",
+  code: "lo",
+  messages: {
+    alert: {
+      close: "\u0E9B\u0EB4\u0E94"
+    },
+    authForm: {
+      hidePassword: "\u0EC0\u0E8A\u0EB7\u0EC8\u0EAD\u0E87\u0EA5\u0EB0\u0EAB\u0EB1\u0E94\u0E9C\u0EC8\u0EB2\u0E99",
+      showPassword: "\u0EAA\u0EB0\u0EC1\u0E94\u0E87\u0EA5\u0EB0\u0EAB\u0EB1\u0E94\u0E9C\u0EC8\u0EB2\u0E99",
+      submit: "\u0E94\u0EB3\u0EC0\u0E99\u0EB5\u0E99\u0E81\u0EB2\u0E99\u0E95\u0ECD\u0EC8"
+    },
+    banner: {
+      close: "\u0E9B\u0EB4\u0E94"
+    },
+    calendar: {
+      nextMonth: "\u0EC0\u0E94\u0EB7\u0EAD\u0E99\u0EDC\u0EC9\u0EB2",
+      nextYear: "\u0E9B\u0EB5\u0EDC\u0EC9\u0EB2",
+      prevMonth: "\u0EC0\u0E94\u0EB7\u0EAD\u0E99\u0E81\u0EC8\u0EAD\u0E99",
+      prevYear: "\u0E9B\u0EB5\u0E81\u0EC8\u0EAD\u0E99"
+    },
+    carousel: {
+      dots: "\u0EC0\u0EA5\u0EB7\u0EAD\u0E81\u0EAA\u0EB0\u0EC4\u0EA5\u0EC9\u0E97\u0EB5\u0EC8\u0E88\u0EB0\u0EAA\u0EB0\u0EC1\u0E94\u0E87",
+      goto: "\u0EC4\u0E9B\u0E97\u0EB5\u0EC8\u0EAA\u0EB0\u0EC4\u0EA5\u0EC9 {slide}",
+      next: "\u0E95\u0ECD\u0EC8\u0EC4\u0E9B",
+      prev: "\u0E81\u0EC8\u0EAD\u0E99\u0EDC\u0EC9\u0EB2"
+    },
+    chatPrompt: {
+      placeholder: "\u0E9E\u0EB4\u0EA1\u0E82\u0ECD\u0EC9\u0E84\u0EA7\u0EB2\u0EA1\u0E82\u0EAD\u0E87\u0E97\u0EC8\u0EB2\u0E99\u0E97\u0EB5\u0EC8\u0E99\u0EB5\u0EC9..."
+    },
+    chatPromptSubmit: {
+      label: "\u0EAA\u0EBB\u0EC8\u0E87\u0E84\u0EB3\u0EAA\u0EB1\u0EC8\u0E87"
+    },
+    chatReasoning: {
+      thinking: "\u0E81\u0EB3\u0EA5\u0EB1\u0E87\u0E84\u0EB4\u0E94\u2026",
+      thought: "\u0E84\u0EB4\u0E94\u0EC1\u0EA5\u0EC9\u0EA7",
+      thoughtFor: "\u0E84\u0EB4\u0E94\u0EC0\u0E9B\u0EB1\u0E99\u0EC0\u0EA7\u0EA5\u0EB2 {duration}"
+    },
+    colorMode: {
+      dark: "\u0EA1\u0EB7\u0E94",
+      light: "\u0EC1\u0E88\u0EC9\u0E87",
+      switchToDark: "\u0E9B\u0EC8\u0EBD\u0E99\u0EC0\u0E9B\u0EB1\u0E99\u0EC2\u0EAB\u0EA1\u0E94\u0EA1\u0EB7\u0E94",
+      switchToLight: "\u0E9B\u0EC8\u0EBD\u0E99\u0EC0\u0E9B\u0EB1\u0E99\u0EC2\u0EAB\u0EA1\u0E94\u0EC1\u0E88\u0EC9\u0E87",
+      system: "\u0EA5\u0EB0\u0E9A\u0EBB\u0E9A"
+    },
+    commandPalette: {
+      back: "\u0E81\u0EB1\u0E9A\u0E84\u0EB7\u0E99",
+      close: "\u0E9B\u0EB4\u0E94",
+      noData: "\u0E9A\u0ECD\u0EC8\u0EA1\u0EB5\u0E82\u0ECD\u0EC9\u0EA1\u0EB9\u0E99",
+      noMatch: "\u0E9A\u0ECD\u0EC8\u0E9E\u0EBB\u0E9A\u0E82\u0ECD\u0EC9\u0EA1\u0EB9\u0E99\u0E97\u0EB5\u0EC8\u0E81\u0EBB\u0E87\u0E81\u0EB1\u0E99",
+      placeholder: "\u0E9E\u0EB4\u0EA1\u0E84\u0EB3\u0EAA\u0EB1\u0EC8\u0E87 \u0EAB\u0EBC\u0EB7 \u0E84\u0EBB\u0EC9\u0E99\u0EAB\u0EB2..."
+    },
+    contentSearch: {
+      links: "\u0EA5\u0EB4\u0EC9\u0E87",
+      theme: "\u0E97\u0EB5\u0EA1"
+    },
+    contentSearchButton: {
+      label: "\u0E84\u0EBB\u0EC9\u0E99\u0EAB\u0EB2..."
+    },
+    contentToc: {
+      title: "\u0EC3\u0E99\u0EDC\u0EC9\u0EB2\u0E99\u0EB5\u0EC9"
+    },
+    dropdownMenu: {
+      noMatch: "\u0E9A\u0ECD\u0EC8\u0E9E\u0EBB\u0E9A\u0E82\u0ECD\u0EC9\u0EA1\u0EB9\u0E99\u0E97\u0EB5\u0EC8\u0E81\u0EBB\u0E87\u0E81\u0EB1\u0E99",
+      search: "\u0E84\u0EBB\u0EC9\u0E99\u0EAB\u0EB2..."
+    },
+    dashboardSearch: {
+      theme: "\u0E97\u0EB5\u0EA1"
+    },
+    dashboardSearchButton: {
+      label: "\u0E84\u0EBB\u0EC9\u0E99\u0EAB\u0EB2..."
+    },
+    dashboardSidebarCollapse: {
+      collapse: "\u0EAB\u0E8D\u0ECD\u0EC9\u0EC1\u0E96\u0E9A\u0E94\u0EC9\u0EB2\u0E99\u0E82\u0EC9\u0EB2\u0E87",
+      expand: "\u0E82\u0EB0\u0EAB\u0E8D\u0EB2\u0E8D\u0EC1\u0E96\u0E9A\u0E94\u0EC9\u0EB2\u0E99\u0E82\u0EC9\u0EB2\u0E87"
+    },
+    dashboardSidebarToggle: {
+      close: "\u0E9B\u0EB4\u0E94\u0EC1\u0E96\u0E9A\u0E94\u0EC9\u0EB2\u0E99\u0E82\u0EC9\u0EB2\u0E87",
+      open: "\u0EC0\u0E9B\u0EB5\u0E94\u0EC1\u0E96\u0E9A\u0E94\u0EC9\u0EB2\u0E99\u0E82\u0EC9\u0EB2\u0E87"
+    },
+    error: {
+      clear: "\u0E81\u0EB1\u0E9A\u0EC4\u0E9B\u0EDC\u0EC9\u0EB2\u0EAB\u0EBC\u0EB1\u0E81"
+    },
+    fileUpload: {
+      removeFile: "\u0EA5\u0EBB\u0E9A {filename}"
+    },
+    header: {
+      close: "\u0E9B\u0EB4\u0E94\u0EC0\u0EA1\u0E99\u0EB9",
+      open: "\u0EC0\u0E9B\u0EB5\u0E94\u0EC0\u0EA1\u0E99\u0EB9"
+    },
+    inputMenu: {
+      create: '\u0EAA\u0EC9\u0EB2\u0E87 "{label}"',
+      noData: "\u0E9A\u0ECD\u0EC8\u0EA1\u0EB5\u0E82\u0ECD\u0EC9\u0EA1\u0EB9\u0E99",
+      noMatch: "\u0E9A\u0ECD\u0EC8\u0E9E\u0EBB\u0E9A\u0E82\u0ECD\u0EC9\u0EA1\u0EB9\u0E99\u0E97\u0EB5\u0EC8\u0E81\u0EBB\u0E87\u0E81\u0EB1\u0E99"
+    },
+    inputNumber: {
+      decrement: "\u0EAB\u0EBC\u0EB8\u0E94\u0EA5\u0EBB\u0E87",
+      increment: "\u0EC0\u0E9E\u0EB5\u0EC8\u0EA1\u0E82\u0EB6\u0EC9\u0E99"
+    },
+    modal: {
+      close: "\u0E9B\u0EB4\u0E94"
+    },
+    pricingTable: {
+      caption: "\u0E9B\u0EBD\u0E9A\u0E97\u0EBD\u0E9A\u0EC1\u0E9E\u0EB1\u0E81\u0EC0\u0E81\u0EB1\u0E94\u0EA5\u0EB2\u0E84\u0EB2"
+    },
+    prose: {
+      codeCollapse: {
+        closeText: "\u0EAB\u0E8D\u0ECD\u0EC9",
+        name: "\u0EC2\u0E84\u0EC9\u0E94",
+        openText: "\u0E82\u0EB0\u0EAB\u0E8D\u0EB2\u0E8D"
+      },
+      collapsible: {
+        closeText: "\u0EC0\u0E8A\u0EB7\u0EC8\u0EAD\u0E87",
+        name: "\u0E84\u0EB8\u0E99\u0EAA\u0EBB\u0EA1\u0E9A\u0EB1\u0E94",
+        openText: "\u0EAA\u0EB0\u0EC1\u0E94\u0E87"
+      },
+      pre: {
+        copy: "\u0E84\u0EB1\u0E94\u0EA5\u0EAD\u0E81\u0EC2\u0E84\u0EC9\u0E94"
+      },
+      prompt: {
+        copy: "\u0E84\u0EB1\u0E94\u0EA5\u0EAD\u0E81\u0E84\u0EB3\u0EAA\u0EB1\u0EC8\u0E87",
+        openIn: "\u0EC0\u0E9B\u0EB5\u0E94\u0EC3\u0E99 {name}"
+      }
+    },
+    sidebar: {
+      close: "\u0E9B\u0EB4\u0E94",
+      toggle: "\u0EAA\u0EB0\u0EA5\u0EB1\u0E9A"
+    },
+    selectMenu: {
+      create: '\u0EAA\u0EC9\u0EB2\u0E87 "{label}"',
+      noData: "\u0E9A\u0ECD\u0EC8\u0EA1\u0EB5\u0E82\u0ECD\u0EC9\u0EA1\u0EB9\u0E99",
+      noMatch: "\u0E9A\u0ECD\u0EC8\u0E9E\u0EBB\u0E9A\u0E82\u0ECD\u0EC9\u0EA1\u0EB9\u0E99\u0E97\u0EB5\u0EC8\u0E81\u0EBB\u0E87\u0E81\u0EB1\u0E99",
+      search: "\u0E84\u0EBB\u0EC9\u0E99\u0EAB\u0EB2..."
+    },
+    slideover: {
+      close: "\u0E9B\u0EB4\u0E94"
+    },
+    table: {
+      noData: "\u0E9A\u0ECD\u0EC8\u0EA1\u0EB5\u0E82\u0ECD\u0EC9\u0EA1\u0EB9\u0E99"
+    },
+    toast: {
+      close: "\u0E9B\u0EB4\u0E94"
+    }
+  }
+});
