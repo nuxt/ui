@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const { framework, frameworks } = useFrameworks()
-const { track } = useAnalytics()
+const { framework, setFramework, frameworks } = useFrameworks()
 
 const value = ref<string | undefined>(undefined)
 
@@ -12,8 +11,7 @@ watch(framework, () => {
 })
 
 function onFrameworkChange(newFramework: string) {
-  framework.value = newFramework
-  track('Framework Tab Switched', { framework: newFramework })
+  setFramework(newFramework as 'nuxt' | 'vue', 'tabs')
 }
 </script>
 

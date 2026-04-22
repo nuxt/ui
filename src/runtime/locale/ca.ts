@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Enviar'
     },
+    chatReasoning: {
+      thinking: 'Pensant…',
+      thought: 'Ha pensat',
+      thoughtFor: 'Ha pensat durant {duration}'
+    },
     colorMode: {
       dark: 'Fosc',
       light: 'Clar',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'En aquesta pàgina'
+    },
+    dropdownMenu: {
+      noMatch: 'No hi ha dades coincidents',
+      search: 'Cerca…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -91,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Decrementar',
       increment: 'Incrementar'
     },
+    listbox: {
+      noData: 'Sense dades',
+      noMatch: 'No hi ha dades coincidents',
+      search: 'Cerca…'
+    },
     modal: {
       close: 'Tancar'
     },
@@ -110,7 +124,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Copiar codi al portapapers'
+      },
+      prompt: {
+        copy: 'Copiar instrucció',
+        openIn: 'Obrir a {name}'
       }
+    },
+    sidebar: {
+      close: 'Tancar',
+      toggle: 'Canviar'
     },
     selectMenu: {
       create: 'Crear "{label}"',

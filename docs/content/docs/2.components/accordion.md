@@ -22,6 +22,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
   - ui
@@ -335,7 +337,7 @@ props:
 
 ### With markdown content
 
-You can use the [MDC](https://github.com/nuxt-modules/mdc?tab=readme-ov-file#mdc) component from `@nuxtjs/mdc` to render markdown in the accordion items.
+You can use the [MDC](https://github.com/nuxt-content/mdc?tab=readme-ov-file#mdc) component from `@nuxtjs/mdc` to render markdown in the accordion items.
 
 ::component-example
 ---

@@ -9,18 +9,14 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/image',
     '@nuxt/a11y',
-    '@nuxtjs/plausible',
     '@nuxtjs/mcp-toolkit',
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-llms',
     'nuxt-og-image',
     'motion-v/nuxt',
-    (_, nuxt) => {
-      nuxt.hook('components:dirs', (dirs) => {
-        dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
-      })
-    }
+    '@vercel/analytics',
+    '@vercel/speed-insights'
   ],
 
   $development: {
@@ -71,6 +67,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    '/docs/**': { headers: { Vary: 'Accept, User-Agent' } },
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
@@ -108,10 +105,32 @@ export default defineNuxtConfig({
     '/docs/getting-started/installation/pro': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
     '/docs/getting-started/installation/pro/nuxt': { redirect: { to: '/docs/getting-started/installation/nuxt', statusCode: 301 }, prerender: false },
     '/docs/getting-started/installation/pro/vue': { redirect: { to: '/docs/getting-started/installation/vue', statusCode: 301 }, prerender: false },
-    // v2 redirects
+    // v2 redirects - renamed components (specific before wildcards)
+    '/forms/toggle': { redirect: { to: '/docs/components/switch', statusCode: 301 }, prerender: false },
+    '/forms/form-group': { redirect: { to: '/docs/components/form-field', statusCode: 301 }, prerender: false },
+    '/forms/range': { redirect: { to: '/docs/components/slider', statusCode: 301 }, prerender: false },
+    '/forms/radio': { redirect: { to: '/docs/components/radio-group', statusCode: 301 }, prerender: false },
+    '/navigation/vertical-navigation': { redirect: { to: '/docs/components/navigation-menu', statusCode: 301 }, prerender: false },
+    '/navigation/horizontal-navigation': { redirect: { to: '/docs/components/navigation-menu', statusCode: 301 }, prerender: false },
+    '/overlays/notification': { redirect: { to: '/docs/components/toast', statusCode: 301 }, prerender: false },
+    '/elements/dropdown': { redirect: { to: '/docs/components/dropdown-menu', statusCode: 301 }, prerender: false },
+    '/elements/button-group': { redirect: { to: '/docs/components/field-group', statusCode: 301 }, prerender: false },
+    '/layout/divider': { redirect: { to: '/docs/components/separator', statusCode: 301 }, prerender: false },
+    // v2 redirects - category-based URLs
+    '/forms/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
+    '/navigation/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
+    '/overlays/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
+    '/elements/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
+    '/data/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
+    '/layout/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
+    // v2 redirects - misc pages
+    '/about': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
+    '/roadmap': { redirect: { to: '/docs/getting-started', statusCode: 301 }, prerender: false },
     '/getting-started/theming': { redirect: { to: '/getting-started/theme', statusCode: 301 }, prerender: false },
+    '/getting-started/customization': { redirect: { to: '/docs/getting-started/theme/design-system', statusCode: 301 }, prerender: false },
     '/pro/getting-started/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
-    '/playground': { redirect: { to: '/getting-started/installation/nuxt', statusCode: 301 }, prerender: false },
+    '/play': { redirect: { to: 'https://play.ui.nuxt.com', statusCode: 302 }, prerender: false },
+    '/playground': { redirect: { to: 'https://play.ui.nuxt.com', statusCode: 301 }, prerender: false },
     '/pro/guide/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
     '/pro/prose/**': { redirect: { to: '/getting-started/typography#vue-components', statusCode: 301 }, prerender: false },
     '/components/range': { redirect: { to: '/components/slider', statusCode: 301 }, prerender: false },
@@ -171,10 +190,16 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-01-14',
 
   nitro: {
+    publicAssets: [{
+      dir: resolve('../skills'),
+      baseURL: '/.well-known/skills',
+      maxAge: 60 * 60 * 24
+    }],
     prerender: {
       routes: [
         '/docs/getting-started',
         '/api/countries.json',
+        '/api/phone-codes.json',
         '/api/locales.json',
         '/api/module.json'
         // '/api/github/pulls.json',
@@ -243,8 +268,9 @@ export default defineNuxtConfig({
       '@nuxt/icon',
       '@nuxt/image',
       '@nuxtjs/color-mode',
+      '@nuxtjs/mcp-toolkit',
       '@nuxtjs/mdc',
-      '@nuxtjs/plausible',
+      '@comark/vue',
       'nuxt/dist',
       'nuxt-og-image',
       resolve('./app/components')
@@ -258,18 +284,6 @@ export default defineNuxtConfig({
     }
   },
 
-  fonts: {
-    families: [
-      { name: 'Public Sans', provider: 'google', global: true },
-      { name: 'DM Sans', provider: 'google', global: true },
-      { name: 'Geist', provider: 'google', global: true },
-      { name: 'Inter', provider: 'google', global: true },
-      { name: 'Poppins', provider: 'google', global: true },
-      { name: 'Outfit', provider: 'google', global: true },
-      { name: 'Raleway', provider: 'google', global: true }
-    ]
-  },
-
   icon: {
     customCollections: [{
       prefix: 'custom',
@@ -278,8 +292,7 @@ export default defineNuxtConfig({
     clientBundle: {
       scan: true,
       includeCustomCollections: true
-    },
-    provider: 'iconify'
+    }
   },
 
   image: {
@@ -291,6 +304,9 @@ export default defineNuxtConfig({
     domain: 'https://ui.nuxt.com',
     title: 'Nuxt UI',
     description: 'A comprehensive Vue UI component library (Nuxt optional) with 125+ accessible, production-ready, Tailwind CSS components for building modern web applications.',
+    // Disable content module's built-in raw markdown route - we use our own custom handler
+    // in server/routes/raw/[...slug].md.get.ts that applies MDC transformations
+    contentRawMarkdown: false,
     full: {
       title: 'Nuxt UI Full Documentation',
       description: 'This is the full documentation for Nuxt UI. It includes all the Markdown files written with the MDC syntax.'

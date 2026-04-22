@@ -1,7 +1,6 @@
-import { describe, it, expect } from 'vitest'
+import { describe } from 'vitest'
 import ContentNavigation from '../../../src/runtime/components/content/ContentNavigation.vue'
-import type { ContentNavigationProps, ContentNavigationSlots } from '../../../src/runtime/components/content/ContentNavigation.vue'
-import ComponentRender from '../../component-render'
+import { renderEach } from '../../component-render'
 import theme from '#build/ui/content/content-navigation'
 
 describe('ContentNavigation', () => {
@@ -31,6 +30,7 @@ describe('ContentNavigation', () => {
   }, {
     title: 'Components',
     path: '/components',
+    disabled: true,
     children: [{
       title: 'ContentNavigation',
       path: '/components/content-navigation'
@@ -48,7 +48,7 @@ describe('ContentNavigation', () => {
 
   const props = { navigation }
 
-  it.each([
+  renderEach(ContentNavigation<typeof navigation[number]>, [
     // Props
     ['with navigation', { props }],
     ['with defaultOpen', { props, defaultOpen: true }],
@@ -63,13 +63,9 @@ describe('ContentNavigation', () => {
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots
-    ['with item slot', { props, slots: { item: () => 'Item slot' } }],
-    ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
-    ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
-    ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
-    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentNavigationProps, slots?: Partial<ContentNavigationSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, ContentNavigation)
-    expect(html).toMatchSnapshot()
-  })
+    ['with link slot', { props, slots: { link: () => 'Link slot' } }],
+    ['with link-leading slot', { props, slots: { 'link-leading': () => 'Link leading slot' } }],
+    ['with link-title slot', { props, slots: { 'link-title': () => 'Link title slot' } }],
+    ['with link-trailing slot', { props, slots: { 'link-trailing': () => 'Link trailing slot' } }]
+  ])
 })

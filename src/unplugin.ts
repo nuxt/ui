@@ -8,6 +8,7 @@ import type { Options as ComponentsOptions } from 'unplugin-vue-components/types
 import { defu } from 'defu'
 import tailwind from '@tailwindcss/vite'
 import type colors from 'tailwindcss/colors'
+import type { RuntimeOptions } from '@nuxt/icon'
 
 import type * as ui from '#build/ui'
 
@@ -24,7 +25,7 @@ import AutoImportPlugin from './plugins/auto-import'
 
 import type { TVConfig } from './runtime/types/tv'
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {
@@ -34,29 +35,37 @@ type AppConfigUI = {
   prefix?: string
 } & TVConfig<typeof ui>
 
-export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'> {
+export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode' | 'content' | 'experimental'> {
   /** Whether to generate declaration files for auto-imported components. */
   dts?: boolean
   ui?: AppConfigUI
   /**
+   * Default props for the `Icon` component
+   */
+  icon?: Pick<RuntimeOptions, 'customize' | 'size' | 'mode'>
+  /**
    * Enable or disable `@vueuse/core` color-mode integration
    * @defaultValue `true`
+   * @see https://ui.nuxt.com/docs/getting-started/installation/vue#colormode
    */
   colorMode?: boolean
   /**
-   * Override options for `unplugin-auto-import`
+   * Override options for `unplugin-auto-import`, or `false` to disable composable auto-imports
+   * @see https://ui.nuxt.com/docs/getting-started/installation/vue#autoimport
    */
-  autoImport?: Partial<AutoImportOptions>
+  autoImport?: false | Partial<AutoImportOptions>
   /**
-   * Override options for `unplugin-vue-components`
+   * Override options for `unplugin-vue-components`, or `false` to disable component auto-imports
+   * @see https://ui.nuxt.com/docs/getting-started/installation/vue#components
    */
-  components?: Partial<ComponentsOptions>
+  components?: false | Partial<ComponentsOptions>
   /**
    * Router integration mode
    * - `true` (default): Use vue-router integration
    * - `false`: Disable routing, use anchor tags
    * - `'inertia'`: Use Inertia.js compatibility layer
    * @defaultValue `true`
+   * @see https://ui.nuxt.com/docs/getting-started/installation/vue#router
    */
   router?: boolean | 'inertia'
   /**
@@ -66,6 +75,7 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
   inertia?: boolean
   /**
    * Additional packages to scan for components using Nuxt UI
+   * @see https://ui.nuxt.com/docs/getting-started/installation/vue#scanpackages
    */
   scanPackages?: string[]
 }
@@ -78,7 +88,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
   options.theme = options.theme || {}
   options.theme.colors = resolveColors(options.theme.colors)
 
-  const appConfig = defu({ ui: options.ui, colorMode: options.colorMode }, { ui: getDefaultConfig(options.theme) })
+  const appConfig = defu({ ui: options.ui, colorMode: options.colorMode, icon: options.icon }, { ui: getDefaultConfig(options.theme) })
 
   return [
     NuxtEnvironmentPlugin(options),
@@ -94,10 +104,10 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
         configResolved(config) {
           const plugins = config.plugins || []
 
-          if (plugins.filter(i => i.name === 'unplugin-auto-import').length > 1) {
+          if (options.autoImport !== false && plugins.filter(i => i.name === 'unplugin-auto-import').length > 1) {
             throw new Error('[Nuxt UI] Multiple instances of `unplugin-auto-import` detected. Nuxt UI includes `unplugin-auto-import` already, and you can configure it using `autoImport` option in Nuxt UI module options.')
           }
-          if (plugins.filter(i => i.name === 'unplugin-vue-components').length > 1) {
+          if (options.components !== false && plugins.filter(i => i.name === 'unplugin-vue-components').length > 1) {
             throw new Error('[Nuxt UI] Multiple instances of `unplugin-vue-components` detected. Nuxt UI includes `unplugin-vue-components` already, and you can configure it using `components` option in Nuxt UI module options.')
           }
         }

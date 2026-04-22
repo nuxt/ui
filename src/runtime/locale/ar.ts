@@ -35,6 +35,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'إرسال'
     },
+    chatReasoning: {
+      thinking: 'يفكّر…',
+      thought: 'فكّر',
+      thoughtFor: 'فكّر لمدة {duration}'
+    },
     colorMode: {
       dark: 'داكن',
       light: 'فاتح',
@@ -58,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'في هذه الصفحة'
+    },
+    dropdownMenu: {
+      noMatch: 'لا توجد نتائج مطابقة',
+      search: 'بحث…'
     },
     dashboardSearch: {
       theme: 'السمة'
@@ -92,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'تقليل',
       increment: 'زيادة'
     },
+    listbox: {
+      noData: 'لا توجد بيانات',
+      noMatch: 'لا توجد نتائج مطابقة',
+      search: 'بحث…'
+    },
     modal: {
       close: 'إغلاق'
     },
@@ -111,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'نسخ الكود إلى الحافظة'
+      },
+      prompt: {
+        copy: 'نسخ التعليمات',
+        openIn: 'فتح في {name}'
       }
+    },
+    sidebar: {
+      close: 'إغلاق',
+      toggle: 'تبديل'
     },
     selectMenu: {
       create: 'إنشاء "{label}"',

@@ -2,10 +2,10 @@
 description: A component to display any icon from Iconify or another component.
 category: element
 links:
-  - label: Icônes
-    to: https://icones.js.org/
+  - label: Iconify
+    to: https://iconify.design/
     target: _blank
-    icon: i-custom-icones-js
+    icon: i-simple-icons-iconify
 ---
 
 ## Usage
@@ -18,6 +18,10 @@ props:
   name: 'i-lucide-lightbulb'
   class: 'size-5'
 ---
+::
+
+::note
+You can use any name from the <https://iconify.design> collection. Browse them easily on <https://icones.js.org> or search directly from your AI assistant using the [`search_icons`](/docs/getting-started/ai/mcp#available-tools) MCP tool.
 ::
 
 ::framework-only

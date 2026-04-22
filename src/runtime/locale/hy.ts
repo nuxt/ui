@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Շարունակել'
     },
+    chatReasoning: {
+      thinking: 'Մտածում է…',
+      thought: 'Մտածեց',
+      thoughtFor: 'Մտածեց {duration}'
+    },
     colorMode: {
       dark: 'Մուգ',
       light: 'Լուսավոր',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Այս էջում'
+    },
+    dropdownMenu: {
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      search: 'Որոնում…'
     },
     dashboardSearch: {
       theme: 'Թեմա'
@@ -91,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Պակասեցնել',
       increment: 'Ավելացնել'
     },
+    listbox: {
+      noData: 'Տվյալներ չկան',
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      search: 'Որոնում…'
+    },
     modal: {
       close: 'Փակել'
     },
@@ -110,7 +124,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Պատճենել կոդը սեղմատախտակին'
+      },
+      prompt: {
+        copy: 'Պատճենել հարցումը',
+        openIn: 'Բացել {name}-ում'
       }
+    },
+    sidebar: {
+      close: 'Փակել',
+      toggle: 'Փոխարկել'
     },
     selectMenu: {
       create: 'Ստեղծել "{label}"',

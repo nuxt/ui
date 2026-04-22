@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Odoslať'
     },
+    chatReasoning: {
+      thinking: 'Premýšľa…',
+      thought: 'Premýšľal',
+      thoughtFor: 'Premýšľal {duration}'
+    },
     colorMode: {
       dark: 'Tmavý',
       light: 'Svetlý',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Na tejto stránke'
+    },
+    dropdownMenu: {
+      noMatch: 'Žiadna zhoda',
+      search: 'Hľadať…'
     },
     dashboardSearch: {
       theme: 'Farebný režim'
@@ -91,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Znížiť',
       increment: 'Zvýšiť'
     },
+    listbox: {
+      noData: 'Žiadne dáta',
+      noMatch: 'Žiadna zhoda',
+      search: 'Hľadať…'
+    },
     modal: {
       close: 'Zatvoriť'
     },
@@ -110,7 +124,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopírovať kód do schránky'
+      },
+      prompt: {
+        copy: 'Kopírovať výzvu',
+        openIn: 'Otvoriť v {name}'
       }
+    },
+    sidebar: {
+      close: 'Zatvoriť',
+      toggle: 'Prepnúť'
     },
     selectMenu: {
       create: 'Vytvoriť "{label}"',

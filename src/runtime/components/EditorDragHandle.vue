@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Placement, Strategy } from '@floating-ui/dom'
 import type { Editor, JSONContent } from '@tiptap/vue-3'
@@ -35,11 +36,12 @@ export interface EditorDragHandleProps extends Omit<DragHandleProps, 'editor' | 
 }
 
 export interface EditorDragHandleSlots {
-  default(props: { ui: EditorDragHandle['ui'], onClick: () => { node: JSONContent, pos: number } | undefined }): any
+  default?(props: { ui: EditorDragHandle['ui'], onClick: () => { node: JSONContent, pos: number } | undefined }): VNode[]
 }
 
 export interface EditorDragHandleEmits {
   nodeChange: [{ node: JSONContent, pos: number }]
+  hover: [{ node: JSONContent, pos: number }]
 }
 </script>
 
@@ -50,6 +52,7 @@ import { useForwardProps } from 'reka-ui'
 import { reactiveOmit, reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { buildFloatingUIMiddleware } from '../utils/editor'
 import { transformUI } from '../utils'
 import { tv } from '../utils/tv'
@@ -65,10 +68,11 @@ const props = withDefaults(defineProps<EditorDragHandleProps>(), {
 defineSlots<EditorDragHandleSlots>()
 const emit = defineEmits<EditorDragHandleEmits>()
 
-const dragHandleProps = useForwardProps(reactivePick(props, 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement'))
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class', 'ui'))
+const dragHandleProps = useForwardProps(reactivePick(props, 'pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class', 'ui'))
 
 const appConfig = useAppConfig() as EditorDragHandle['AppConfig']
+const uiProp = useComponentUI('editorDragHandle', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorDragHandle || {}) })())
@@ -114,13 +118,19 @@ const currentNodePos = ref<number | null>()
 
 function onNodeChange({ pos }: { pos: number }) {
   currentNodePos.value = pos
+  if (pos == null || pos < 0) return
+
+  const node = props.editor.state.doc.nodeAt(pos)
+  if (node) {
+    emit('hover', { node: node.toJSON(), pos })
+  }
 }
 
 function onClick() {
   if (!props.editor) return
 
   const pos = currentNodePos.value
-  if (pos == null) return
+  if (pos == null || pos < 0) return
 
   const node = props.editor.state.doc.nodeAt(pos)
   if (node) {
@@ -142,7 +152,7 @@ function onClick() {
     :editor="editor"
     :on-node-change="onNodeChange"
     data-slot="root"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     @click="onClick"
   >
     <slot :ui="ui" :on-click="onClick">
@@ -153,8 +163,8 @@ function onClick() {
           ...$attrs
         }"
         data-slot="handle"
-        :class="ui.handle({ class: [props.ui?.handle, props.class] })"
-        :ui="transformUI(ui, props.ui)"
+        :class="ui.handle({ class: [uiProp?.handle, props.class] })"
+        :ui="transformUI(ui, uiProp)"
       />
     </slot>
   </DragHandle>

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Send'
     },
+    chatReasoning: {
+      thinking: 'Tænker…',
+      thought: 'Tænkte',
+      thoughtFor: 'Tænkte i {duration}'
+    },
     colorMode: {
       dark: 'Mørk',
       light: 'Lys',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'På denne side'
+    },
+    dropdownMenu: {
+      noMatch: 'Ingen matchende data',
+      search: 'Søg…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -91,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Reducer',
       increment: 'Øg'
     },
+    listbox: {
+      noData: 'Ingen data',
+      noMatch: 'Ingen matchende data',
+      search: 'Søg…'
+    },
     modal: {
       close: 'Luk'
     },
@@ -110,7 +124,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopiér kode til udklipsholder'
+      },
+      prompt: {
+        copy: 'Kopiér prompt',
+        openIn: 'Åbn i {name}'
       }
+    },
+    sidebar: {
+      close: 'Luk',
+      toggle: 'Skift'
     },
     selectMenu: {
       create: 'Opret "{label}"',

@@ -11,7 +11,8 @@ const versions = [{
     name: 'Daniel Roe',
     avatar: {
       src: 'https://github.com/danielroe.png',
-      alt: 'Daniel Roe'
+      alt: 'Daniel Roe',
+      loading: 'lazy' as const
     },
     to: 'https://github.com/danielroe',
     target: '_blank'
@@ -28,7 +29,8 @@ const versions = [{
     name: 'Daniel Roe',
     avatar: {
       src: 'https://github.com/danielroe.png',
-      alt: 'Daniel Roe'
+      alt: 'Daniel Roe',
+      loading: 'lazy' as const
     },
     to: 'https://github.com/danielroe',
     target: '_blank'
@@ -45,7 +47,8 @@ const versions = [{
     name: 'Daniel Roe',
     avatar: {
       src: 'https://github.com/danielroe.png',
-      alt: 'Daniel Roe'
+      alt: 'Daniel Roe',
+      loading: 'lazy' as const
     },
     to: 'https://github.com/danielroe',
     target: '_blank'

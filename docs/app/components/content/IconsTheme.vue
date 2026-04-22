@@ -2,11 +2,11 @@
 import json5 from 'json5'
 import { themeIcons } from '../../utils/theme'
 
-const appConfig = useAppConfig()
+const { icon: iconSet } = useTheme()
 
-const icons = computed(() => themeIcons[appConfig.theme.icons as keyof typeof themeIcons || 'lucide'])
+const icons = computed(() => themeIcons[iconSet.value as keyof typeof themeIcons || 'lucide'])
 
-const { data: ast } = await useAsyncData(`icons-theme`, async () => {
+const { data: ast } = useAsyncData(`icons-theme`, async () => {
   const md = `
 ::code-collapse{class="nuxt-only"}
 
@@ -45,8 +45,8 @@ export default defineConfig({
 ::
 `
 
-  return parseMarkdown(md, { })
-}, { watch: [icons] })
+  return cachedParseMarkdown(md)
+}, { lazy: import.meta.client, watch: [icons] })
 </script>
 
 <template>

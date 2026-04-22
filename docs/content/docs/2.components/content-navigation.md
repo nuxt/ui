@@ -37,6 +37,8 @@ prettier: true
 collapse: true
 external:
   - navigation
+externalTypes:
+  - ContentNavigationLink[]
 items:
   type:
   - 'single'
@@ -78,6 +80,8 @@ prettier: true
 collapse: true
 external:
   - navigation
+externalTypes:
+  - ContentNavigationLink[]
 hide:
   - class
   - navigation
@@ -85,23 +89,23 @@ props:
   class: 'w-full'
   color: 'neutral'
   navigation:
-  - title: 'Guide'
-    icon: 'i-lucide-book-open'
-    path: '#getting-started'
-    children:
-    - title: 'Introduction'
-      path: '#introduction'
-      active: true
-    - title: 'Installation'
-      path: '#installation'
-  - title: 'Composables'
-    icon: 'i-lucide-database'
-    path: '#composables'
-    children:
-    - title: 'defineShortcuts'
-      path: '#defineshortcuts'
-    - title: 'useModal'
-      path: '#usemodal'
+    - title: 'Guide'
+      icon: 'i-lucide-book-open'
+      path: '#getting-started'
+      children:
+      - title: 'Introduction'
+        path: '#introduction'
+        active: true
+      - title: 'Installation'
+        path: '#installation'
+    - title: 'Composables'
+      icon: 'i-lucide-database'
+      path: '#composables'
+      children:
+      - title: 'defineShortcuts'
+        path: '#defineshortcuts'
+      - title: 'useModal'
+        path: '#usemodal'
 ---
 ::
 
@@ -115,6 +119,8 @@ prettier: true
 collapse: true
 external:
   - navigation
+externalTypes:
+  - ContentNavigationLink[]
 hide:
   - class
   - navigation
@@ -158,6 +164,8 @@ prettier: true
 collapse: true
 external:
   - navigation
+externalTypes:
+  - ContentNavigationLink[]
 hide:
   - class
   - navigation
@@ -196,6 +204,8 @@ prettier: true
 collapse: true
 external:
   - navigation
+externalTypes:
+  - ContentNavigationLink[]
 hide:
   - class
   - navigation
@@ -203,23 +213,23 @@ props:
   class: 'w-full'
   trailingIcon: 'i-lucide-arrow-up'
   navigation:
-  - title: 'Guide'
-    icon: 'i-lucide-book-open'
-    path: '#getting-started'
-    children:
-    - title: 'Introduction'
-      path: '#introduction'
-      active: true
-    - title: 'Installation'
-      path: '#installation'
-  - title: 'Composables'
-    icon: 'i-lucide-database'
-    path: '#composables'
-    children:
-    - title: 'defineShortcuts'
-      path: '#defineshortcuts'
-    - title: 'useModal'
-      path: '#usemodal'
+    - title: 'Guide'
+      icon: 'i-lucide-book-open'
+      path: '#getting-started'
+      children:
+      - title: 'Introduction'
+        path: '#introduction'
+        active: true
+      - title: 'Installation'
+        path: '#installation'
+    - title: 'Composables'
+      icon: 'i-lucide-database'
+      path: '#composables'
+      children:
+      - title: 'defineShortcuts'
+        path: '#defineshortcuts'
+      - title: 'useModal'
+        path: '#usemodal'
 ---
 ::
 

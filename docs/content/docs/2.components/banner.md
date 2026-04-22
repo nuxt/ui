@@ -144,6 +144,8 @@ ignore:
   - variant
 external:
   - actions
+externalTypes:
+  - ButtonProps[]
 props:
   title: 'This is a banner with actions.'
   actions:

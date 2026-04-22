@@ -1,4 +1,5 @@
 import { isEqual } from 'ohash/utils'
+import { withTrailingSlash, withLeadingSlash, joinURL } from 'ufo'
 import type { GetItemKeys } from '../types/utils'
 
 export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Keys[]): Pick<Data, Keys> {
@@ -159,7 +160,13 @@ export function getDisplayValue<T extends Array<any>, V>(
   return String(source)
 }
 
-export function isArrayOfArray<A>(item: A[] | A[][]): item is A[][] {
+export function isArrayOfArray<
+  A extends any[] | any[][]
+>(item: A): item is A extends Array<infer T>
+  ? T extends any[]
+    ? T[]
+    : never
+  : never {
   return Array.isArray(item[0])
 }
 
@@ -186,7 +193,17 @@ export function transformUI(ui: any, uiProp?: any) {
   return Object.entries(ui).reduce((acc, [key, value]) => {
     acc[key] = typeof value === 'function' ? value({ class: uiProp?.[key] }) : value
     return acc
-  }, uiProp || {})
+  }, { ...(uiProp || {}) })
+}
+
+export function resolveBaseURL(path?: string, baseURL?: string): string | undefined {
+  if (path?.startsWith('/') && !path.startsWith('//')) {
+    const _base = withLeadingSlash(withTrailingSlash(baseURL || '/'))
+    if (_base !== '/' && !path.startsWith(_base)) {
+      return joinURL(_base, path)
+    }
+  }
+  return path
 }
 
 export * from './content'

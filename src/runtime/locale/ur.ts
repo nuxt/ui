@@ -35,6 +35,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'پیغام بھیجیں'
     },
+    chatReasoning: {
+      thinking: 'سوچ رہا ہے…',
+      thought: 'سوچا',
+      thoughtFor: '{duration} سوچا'
+    },
     colorMode: {
       dark: 'تاریک',
       light: 'روشن',
@@ -58,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'اس صفحے پر'
+    },
+    dropdownMenu: {
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
+      search: 'تلاش کریں…'
     },
     dashboardSearch: {
       theme: 'تھیم'
@@ -92,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'کمی',
       increment: 'اضافہ'
     },
+    listbox: {
+      noData: 'کوئی ڈیٹا نہیں',
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
+      search: 'تلاش کریں…'
+    },
     modal: {
       close: 'بند کریں'
     },
@@ -111,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'کوڈ کاپی کریں'
+      },
+      prompt: {
+        copy: 'پرامپٹ کاپی کریں',
+        openIn: '{name} میں کھولیں'
       }
+    },
+    sidebar: {
+      close: 'بند کریں',
+      toggle: 'ٹوگل کریں'
     },
     selectMenu: {
       create: '"{label}" بنائیں',

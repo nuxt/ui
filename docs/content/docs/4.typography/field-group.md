@@ -1,7 +1,6 @@
 ---
 title: FieldGroup
 description: 'Group related fields together for comprehensive API documentation.'
-framework: nuxt
 category: components
 links:
   - label: GitHub

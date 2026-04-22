@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Відправити'
     },
+    chatReasoning: {
+      thinking: 'Думає…',
+      thought: 'Подумав',
+      thoughtFor: 'Думав {duration}'
+    },
     colorMode: {
       dark: 'Темна',
       light: 'Світла',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'На цій сторінці'
+    },
+    dropdownMenu: {
+      noMatch: 'Збігів не знайдено',
+      search: 'Пошук…'
     },
     dashboardSearch: {
       theme: 'Тема'
@@ -91,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Зменшити',
       increment: 'Збільшити'
     },
+    listbox: {
+      noData: 'Немає даних',
+      noMatch: 'Збігів не знайдено',
+      search: 'Пошук…'
+    },
     modal: {
       close: 'Закрити'
     },
@@ -110,7 +124,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Копіювати код у буфер обміну'
+      },
+      prompt: {
+        copy: 'Копіювати запит',
+        openIn: 'Відкрити у {name}'
       }
+    },
+    sidebar: {
+      close: 'Закрити',
+      toggle: 'Перемикнути'
     },
     selectMenu: {
       create: 'Створити "{label}"',

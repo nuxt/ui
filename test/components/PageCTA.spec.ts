@@ -1,24 +1,23 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import PageCTA from '../../src/runtime/components/PageCTA.vue'
-import type { PageCTAProps, PageCTASlots } from '../../src/runtime/components/PageCTA.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/page-cta'
 
 describe('PageCTA', () => {
   const variants = Object.keys(theme.variants.variant) as any
 
-  it.each([
+  renderEach(PageCTA, [
     // Props
     ['with as', { props: { as: 'section' } }],
     ['with title', { props: { title: 'Title' } }],
     ['with description', { props: { description: 'Description' } }],
     ['with links', { props: { links: [{ label: 'Get started' }] } }],
     ['with reverse', { props: { reverse: true } }],
-    ['with orientation horizontal', { props: { orientation: 'horizontal' as const } }],
-    ['with orientation horizontal links', { props: { orientation: 'horizontal' as const, links: [{ label: 'Get started' }] } }],
-    ['with orientation horizontal reverse', { props: { orientation: 'horizontal' as const, reverse: true } }],
+    ['with orientation horizontal', { props: { orientation: 'horizontal' } }],
+    ['with orientation horizontal links', { props: { orientation: 'horizontal', links: [{ label: 'Get started' }] } }],
+    ['with orientation horizontal reverse', { props: { orientation: 'horizontal', reverse: true } }],
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
     ['with class', { props: { class: 'rounded-none' } }],
     ['with ui', { props: { ui: { container: 'max-w-5xl' } } }],
@@ -32,10 +31,7 @@ describe('PageCTA', () => {
     ['with links slot', { slots: { links: () => 'Links slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with bottom slot', { slots: { bottom: () => 'Bottom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageCTAProps, slots?: Partial<PageCTASlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PageCTA)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(PageCTA, {

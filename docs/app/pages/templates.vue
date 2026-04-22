@@ -17,9 +17,7 @@ defineOgImageComponent('Docs')
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <main v-if="page">
-    <UPageHero
-      :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }"
-    >
+    <UPageHero :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }">
       <template #title>
         <MDC :value="page.hero.title" unwrap="p" cache-key="pro-templates-hero-title" />
       </template>
@@ -60,11 +58,30 @@ defineOgImageComponent('Docs')
         <UButton v-for="link of template.links" :key="link.label" color="neutral" variant="outline" v-bind="link" />
 
         <UDropdownMenu
+          :items="template.open_links"
+          :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-auto' }"
+          :modal="false"
+          class="group"
+        >
+          <UButton
+            color="neutral"
+            variant="outline"
+            icon="i-lucide-square-code"
+            trailing-icon="i-lucide-chevron-down"
+            label="Open on"
+            :ui="{
+              trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
+            }"
+          />
+        </UDropdownMenu>
+
+        <UDropdownMenu
           :items="[
             ...template.deploy_links,
-            { label: 'More', icon: 'i-lucide-globe', to: 'https://nuxt.com/deploy', target: '_blank' }
+            { label: 'Other', icon: 'i-lucide-globe', to: 'https://nuxt.com/deploy', target: '_blank' }
           ]"
           :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-auto' }"
+          :modal="false"
           class="group"
         >
           <UButton
@@ -72,7 +89,7 @@ defineOgImageComponent('Docs')
             variant="outline"
             icon="i-lucide-cloud"
             trailing-icon="i-lucide-chevron-down"
-            label="Deploy"
+            label="Deploy to"
             :ui="{
               trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
             }"

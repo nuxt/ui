@@ -1,15 +1,14 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Avatar from '../../src/runtime/components/Avatar.vue'
-import type { AvatarProps, AvatarSlots } from '../../src/runtime/components/Avatar.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/avatar'
 
 describe('Avatar', () => {
   const sizes = Object.keys(theme.variants.size) as any
 
-  it.each([
+  renderEach(Avatar, [
     // Props
     ['with src', { props: { src: 'https://github.com/benjamincanac.png' } }],
     ['with alt', { props: { alt: 'Benjamin Canac' } }],
@@ -22,12 +21,10 @@ describe('Avatar', () => {
     ['with as (partial object)', { props: { src: 'https://github.com/benjamincanac.png', as: { img: 'p' } } }],
     ['with class', { props: { class: 'bg-default' } }],
     ['with ui', { props: { ui: { fallback: 'font-bold' } } }],
+    ['with custom size', { props: { class: 'size-100', src: 'https://github.com/benjamincanac.png' } }],
     // Slots
     ['with default slot', { slots: { default: '🇫🇷' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarProps, slots?: AvatarSlots }) => {
-    const html = await ComponentRender(nameOrHtml, options, Avatar)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Avatar, {

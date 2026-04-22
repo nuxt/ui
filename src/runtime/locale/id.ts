@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Kirim'
     },
+    chatReasoning: {
+      thinking: 'Berpikir…',
+      thought: 'Telah berpikir',
+      thoughtFor: 'Berpikir selama {duration}'
+    },
     colorMode: {
       dark: 'Gelap',
       light: 'Terang',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Pada halaman ini'
+    },
+    dropdownMenu: {
+      noMatch: 'Tidak ada data yang cocok',
+      search: 'Cari…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -91,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Kurangi',
       increment: 'Tambah'
     },
+    listbox: {
+      noData: 'Tidak ada data',
+      noMatch: 'Tidak ada data yang cocok',
+      search: 'Cari…'
+    },
     modal: {
       close: 'Tutup'
     },
@@ -110,7 +124,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Salin kode ke clipboard'
+      },
+      prompt: {
+        copy: 'Salin prompt',
+        openIn: 'Buka di {name}'
       }
+    },
+    sidebar: {
+      close: 'Tutup',
+      toggle: 'Alihkan'
     },
     selectMenu: {
       create: 'Buat "{label}"',

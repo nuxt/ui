@@ -8,6 +8,7 @@
         width="460"
         height="258"
         :alt="`Nuxt UI Screenshot ${i}`"
+        loading="lazy"
         class="aspect-video border border-default rounded-lg bg-white"
       >
     </UMarquee>
@@ -19,6 +20,7 @@
         width="460"
         height="258"
         :alt="`Nuxt UI Screenshot ${i}`"
+        loading="lazy"
         class="aspect-video border border-default rounded-lg bg-white"
       >
     </UMarquee>
@@ -30,6 +32,7 @@
         width="460"
         height="258"
         :alt="`Nuxt UI Screenshot ${i}`"
+        loading="lazy"
         class="aspect-video border border-default rounded-lg bg-white"
       >
     </UMarquee>

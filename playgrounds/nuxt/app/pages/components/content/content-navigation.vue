@@ -37,6 +37,7 @@ const navigation = [{
 }, {
   title: 'Theme',
   path: '#theme',
+  disabled: true,
   children: [{
     title: 'Design System',
     icon: 'i-lucide-palette',
