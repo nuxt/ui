@@ -42,6 +42,7 @@ const schema = z.object({
   listboxMultiple: z.any().refine(values => !!values?.find((option: any) => option.value === 'option-2'), {
     message: 'Option 2 must be included'
   }),
+  inputTags: z.array(z.string(), { message: 'Please add at least one tag' }).min(1, 'Please add at least one tag'),
   inputDate: z.any().refine(value => !!value, {
     message: 'Please select a date'
   }),
@@ -100,30 +101,20 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         <UInputTime v-model="state.inputTime" class="w-full" />
       </UFormField>
 
-      <div class="hidden md:block" />
-
-      <UFormField name="checkbox" label="Checkbox">
-        <UCheckbox v-model="state.checkbox" label="Check me" />
+      <UFormField name="inputTags" label="InputTags">
+        <UInputTags v-model="state.inputTags" placeholder="Add a tag..." class="w-full" />
       </UFormField>
 
-      <UFormField name="switch" label="Switch">
-        <USwitch v-model="state.switch" label="Switch me" />
+      <UFormField name="inputMenu" label="InputMenu">
+        <UInputMenu v-model="state.inputMenu" :items="items" placeholder="Search an option..." class="w-full" />
       </UFormField>
 
-      <UFormField name="slider" label="Slider">
-        <USlider v-model="state.slider" class="mt-2.5" />
-      </UFormField>
-
-      <UFormField name="checkboxGroup">
-        <UCheckboxGroup v-model="state.checkboxGroup" legend="CheckboxGroup" :items="items" />
-      </UFormField>
-
-      <UFormField name="radioGroup">
-        <URadioGroup v-model="state.radioGroup" legend="RadioGroup" :items="items" />
+      <UFormField name="inputMenuMultiple" label="InputMenu (Multiple)">
+        <UInputMenu v-model="state.inputMenuMultiple" multiple :items="items" placeholder="Search options..." class="w-full" />
       </UFormField>
 
       <UFormField label="Textarea" name="textarea">
-        <UTextarea v-model="state.textarea" placeholder="Write your message..." class="w-full" />
+        <UTextarea v-model="state.textarea" placeholder="Write your message..." class="w-full" :rows="1" />
       </UFormField>
 
       <UFormField name="select" label="Select">
@@ -146,16 +137,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
       <div class="hidden md:block" />
 
-      <UFormField name="inputMenu" label="InputMenu">
-        <UInputMenu v-model="state.inputMenu" :items="items" placeholder="Search an option..." class="w-full" />
-      </UFormField>
-
-      <UFormField name="inputMenuMultiple" label="InputMenu (Multiple)">
-        <UInputMenu v-model="state.inputMenuMultiple" multiple :items="items" placeholder="Search options..." class="w-full" />
-      </UFormField>
-
-      <div class="hidden md:block" />
-
       <UFormField name="listbox" label="Listbox">
         <UListbox v-model="state.listbox" :items="items" class="w-full" />
       </UFormField>
@@ -169,8 +150,28 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           v-model="state.file"
           label="Drop your image here"
           description="PNG (max. 1MB)"
-          class="w-full min-h-44"
+          class="w-full"
         />
+      </UFormField>
+
+      <UFormField name="checkbox" label="Checkbox">
+        <UCheckbox v-model="state.checkbox" label="Check me" />
+      </UFormField>
+
+      <UFormField name="switch" label="Switch">
+        <USwitch v-model="state.switch" label="Switch me" />
+      </UFormField>
+
+      <UFormField name="slider" label="Slider">
+        <USlider v-model="state.slider" class="mt-2.5" />
+      </UFormField>
+
+      <UFormField name="checkboxGroup">
+        <UCheckboxGroup v-model="state.checkboxGroup" legend="CheckboxGroup" :items="items" />
+      </UFormField>
+
+      <UFormField name="radioGroup">
+        <URadioGroup v-model="state.radioGroup" legend="RadioGroup" :items="items" />
       </UFormField>
     </div>
 
