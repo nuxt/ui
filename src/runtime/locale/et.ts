@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Vähenda',
       increment: 'Suurenda'
     },
+    listbox: {
+      noData: 'Pole andmeid',
+      noMatch: 'Pole vastavaid andmeid',
+      search: 'Otsi…'
+    },
     modal: {
       close: 'Sulge'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopeeri kood lõikelauale'
+      },
+      prompt: {
+        copy: 'Kopeeri viip',
+        openIn: 'Ava rakenduses {name}'
       }
     },
     sidebar: {

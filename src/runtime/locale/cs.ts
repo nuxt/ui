@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Snížit',
       increment: 'Zvýšit'
     },
+    listbox: {
+      noData: 'Žádná data',
+      noMatch: 'Žádná shoda',
+      search: 'Hledat…'
+    },
     modal: {
       close: 'Zavřít'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopírovat kód do schránky'
+      },
+      prompt: {
+        copy: 'Kopírovat prompt',
+        openIn: 'Otevřít v {name}'
       }
     },
     sidebar: {

@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Verlagen',
       increment: 'Verhogen'
     },
+    listbox: {
+      noData: 'Geen gegevens',
+      noMatch: 'Geen overeenkomende gegevens',
+      search: 'Zoeken…'
+    },
     modal: {
       close: 'Sluiten'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Code naar klembord kopiëren'
+      },
+      prompt: {
+        copy: 'Prompt kopiëren',
+        openIn: 'Openen in {name}'
       }
     },
     sidebar: {

@@ -206,7 +206,8 @@ onMounted(() => {
 })
 
 defineExpose({
-  textareaRef
+  textareaRef,
+  autoResize
 })
 </script>
 

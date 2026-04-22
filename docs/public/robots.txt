@@ -1,1 +1,39 @@
-user-agent: *
+User-agent: *
+Disallow: /vercel/
+Disallow: /node_modules/
+Disallow: /docs/src/
+Disallow: /home/
+Disallow: /_nuxt/
+Disallow: /_plausible
+Disallow: /dev/
+Disallow: /api/
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+Sitemap: https://ui.nuxt.com/sitemap.xml

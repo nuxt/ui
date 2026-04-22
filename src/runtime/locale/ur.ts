@@ -101,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'کمی',
       increment: 'اضافہ'
     },
+    listbox: {
+      noData: 'کوئی ڈیٹا نہیں',
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
+      search: 'تلاش کریں…'
+    },
     modal: {
       close: 'بند کریں'
     },
@@ -120,6 +125,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'کوڈ کاپی کریں'
+      },
+      prompt: {
+        copy: 'پرامپٹ کاپی کریں',
+        openIn: '{name} میں کھولیں'
       }
     },
     sidebar: {

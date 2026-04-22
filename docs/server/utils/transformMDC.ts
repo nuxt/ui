@@ -87,6 +87,54 @@ function visitAndReplace(doc: Document, type: string, handler: (node: any[]) => 
   }, node => node)
 }
 
+const BLOCK_ELEMENTS = new Set([
+  'pre', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+  'ul', 'ol', 'li', 'blockquote', 'table', 'hr'
+])
+
+function collectBlockChildren(nodes: any[]): any[] {
+  const result: any[] = []
+  for (const child of nodes) {
+    if (typeof child === 'string') {
+      if (child.trim()) {
+        result.push(['p', {}, child])
+      }
+    } else if (Array.isArray(child)) {
+      if (BLOCK_ELEMENTS.has(child[0])) {
+        result.push(child)
+      } else {
+        result.push(...collectBlockChildren(child.slice(2)))
+      }
+    }
+  }
+  return result
+}
+
+function replaceWithChildren(node: any[], newChildren: any[]) {
+  const collected = collectBlockChildren(newChildren)
+  node[0] = '__flatten'
+  node[1] = {}
+  node.length = 2
+  for (const child of collected) {
+    node.push(child)
+  }
+}
+
+function flattenMarkers(node: any): void {
+  if (!Array.isArray(node)) return
+  let i = 2
+  while (i < node.length) {
+    const child = node[i]
+    if (Array.isArray(child) && (child[0] === '__flatten' || child[0] === 'div')) {
+      const innerChildren = child.slice(2)
+      node.splice(i, 1, ...innerChildren)
+    } else {
+      flattenMarkers(child)
+      i++
+    }
+  }
+}
+
 function generateTSInterface(
   name: string,
   items: any[],
@@ -407,7 +455,12 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
 
     node[0] = 'p'
     node[1] = {}
-    node[2] = `See commit history for [component](https://github.com/nuxt/ui/commits/v4/${componentPath}) and [theme](https://github.com/nuxt/ui/commits/v4/${themePath}).`
+    node[2] = 'See commit history for '
+    node[3] = ['a', { href: `https://github.com/nuxt/ui/commits/v4/${componentPath}` }, 'component']
+    node[4] = ' and '
+    node[5] = ['a', { href: `https://github.com/nuxt/ui/commits/v4/${themePath}` }, 'theme']
+    node[6] = '.'
+    node.length = 7
   })
 
   // Transform callout components (tip, note, warning, caution, callout) to blockquotes
@@ -426,73 +479,29 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
       const content = node.slice(2)
       const label = calloutLabels[calloutType]
 
-      // Build the blockquote content
-      let blockquoteText = `> [!${label}]`
+      const blockquoteChildren: any[] = []
 
-      // Add link if present
+      let firstLine = `[!${label}]`
       if (attrs.to) {
-        blockquoteText += `\n> See: ${attrs.to}`
+        firstLine += `\nSee: ${attrs.to}`
       }
+      blockquoteChildren.push(['p', {}, firstLine])
 
-      // Extract text content from children
-      const extractText = (children: any[]): string => {
-        return children.map((child) => {
-          if (typeof child === 'string') return child
-          if (Array.isArray(child)) {
-            const tag = child[0]
-            const childAttrs = child[1] || {}
-            const childContent = child.slice(2)
-            if (tag === 'code') return `\`${extractText(childContent)}\``
-            if (tag === 'a') return `[${extractText(childContent)}](${childAttrs.href || ''})`
-            if (tag === 'pre') {
-              const lang = childAttrs.language || ''
-              const code = childAttrs.code || extractText(childContent)
-              return `\n\`\`\`${lang}\n${code}\n\`\`\`\n`
-            }
-            return extractText(childContent)
-          }
-          return ''
-        }).join('')
-      }
+      blockquoteChildren.push(...collectBlockChildren(content))
 
-      if (content.length > 0) {
-        const textContent = extractText(content)
-        if (textContent.trim()) {
-          blockquoteText += `\n> ${textContent.trim().split('\n').join('\n> ')}`
-        }
-      }
-
-      node[0] = 'p'
+      node[0] = 'blockquote'
       node[1] = {}
-      node[2] = blockquoteText
-      node.length = 3
+      node.length = 2
+      for (const child of blockquoteChildren) {
+        node.push(child)
+      }
     })
   }
 
   // Transform framework-only - extract content from both slots and label them
   visitAndReplace(doc, 'framework-only', (node) => {
     const children = node.slice(2)
-    let nuxtContent = ''
-    let vueContent = ''
-
-    // Helper to extract text from AST nodes
-    const extractContent = (nodes: any[]): string => {
-      return nodes.map((n: any) => {
-        if (typeof n === 'string') return n
-        if (Array.isArray(n)) {
-          const tag = n[0]
-          const attrs = n[1] || {}
-          const content = n.slice(2)
-          if (tag === 'pre') {
-            const lang = attrs.language || ''
-            const code = attrs.code || ''
-            return `\n\`\`\`${lang}\n${code}\n\`\`\`\n`
-          }
-          return extractContent(content)
-        }
-        return ''
-      }).join('')
-    }
+    const allChildren: any[] = []
 
     for (const child of children) {
       if (Array.isArray(child) && child[0] === 'template') {
@@ -500,26 +509,21 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
           ? 'nuxt'
           : child[1]?.['v-slot:vue'] !== undefined ? 'vue' : null
         if (slotAttr === 'nuxt') {
-          nuxtContent = extractContent(child.slice(2))
+          allChildren.push(['p', {}, ['strong', {}, 'Nuxt:']])
+          allChildren.push(...collectBlockChildren(child.slice(2)))
         } else if (slotAttr === 'vue') {
-          vueContent = extractContent(child.slice(2))
+          allChildren.push(['p', {}, ['strong', {}, 'Vue:']])
+          allChildren.push(...collectBlockChildren(child.slice(2)))
         }
       }
     }
 
-    let output = ''
-    if (nuxtContent.trim()) {
-      output += '**Nuxt:**\n' + nuxtContent.trim()
-    }
-    if (vueContent.trim()) {
-      if (output) output += '\n\n'
-      output += '**Vue:**\n' + vueContent.trim()
-    }
-
-    node[0] = 'p'
+    node[0] = '__flatten'
     node[1] = {}
-    node[2] = output || ''
-    node.length = 3
+    node.length = 2
+    for (const child of allChildren) {
+      node.push(child)
+    }
   })
 
   // Transform badge to inline text
@@ -538,33 +542,18 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     const content = node.slice(2)
     const title = attrs.title || ''
 
-    // Extract text content from children
-    const extractText = (children: any[]): string => {
-      return children.map((child) => {
-        if (typeof child === 'string') return child
-        if (Array.isArray(child)) {
-          const tag = child[0]
-          const childContent = child.slice(2)
-          if (tag === 'code') return `\`${extractText(childContent)}\``
-          if (tag === 'a') return `[${extractText(childContent)}](${child[1]?.href || ''})`
-          return extractText(childContent)
-        }
-        return ''
-      }).join('')
+    const allChildren: any[] = []
+    if (title) {
+      allChildren.push(['p', {}, ['strong', {}, title]])
     }
+    allChildren.push(...collectBlockChildren(content))
 
-    let cardText = title ? `**${title}**` : ''
-    if (content.length > 0) {
-      const textContent = extractText(content)
-      if (textContent.trim()) {
-        cardText += cardText ? `\n${textContent.trim()}` : textContent.trim()
-      }
-    }
-
-    node[0] = 'p'
+    node[0] = '__flatten'
     node[1] = {}
-    node[2] = cardText
-    node.length = 3
+    node.length = 2
+    for (const child of allChildren) {
+      node.push(child)
+    }
   })
 
   // Transform accordion-item to Q&A format
@@ -573,34 +562,18 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     const content = node.slice(2)
     const label = attrs.label || ''
 
-    // Extract text content from children
-    const extractText = (children: any[]): string => {
-      return children.map((child) => {
-        if (typeof child === 'string') return child
-        if (Array.isArray(child)) {
-          const tag = child[0]
-          const childContent = child.slice(2)
-          if (tag === 'code') return `\`${extractText(childContent)}\``
-          if (tag === 'a') return `[${extractText(childContent)}](${child[1]?.href || ''})`
-          if (tag === 'p') return extractText(childContent)
-          return extractText(childContent)
-        }
-        return ''
-      }).join('')
+    const allChildren: any[] = []
+    if (label) {
+      allChildren.push(['p', {}, ['strong', {}, `Q: ${label}`]])
     }
+    allChildren.push(...collectBlockChildren(content))
 
-    let itemText = label ? `**Q: ${label}**` : ''
-    if (content.length > 0) {
-      const textContent = extractText(content)
-      if (textContent.trim()) {
-        itemText += `\n\nA: ${textContent.trim()}`
-      }
-    }
-
-    node[0] = 'p'
+    node[0] = '__flatten'
     node[1] = {}
-    node[2] = itemText
-    node.length = 3
+    node.length = 2
+    for (const child of allChildren) {
+      node.push(child)
+    }
   })
 
   const componentsListNodes: any[] = []
@@ -623,87 +596,27 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
       .select('path', 'title')
       .all()
 
-    const links = components.map((c: any) => `- [${c.title}](https://ui.nuxt.com/raw${c.path}.md)`).join('\n')
+    const listItems = components.map((c: any) =>
+      ['li', {}, ['a', { href: `https://ui.nuxt.com/raw${c.path}.md` }, c.title]]
+    )
 
-    node[0] = 'p'
+    node[0] = 'ul'
     node[1] = {}
-    node[2] = links
+    node.length = 2
+    for (const item of listItems) {
+      node.push(item)
+    }
   }
 
   // Remove wrapper elements by extracting children content
-  const wrapperTypes = ['card-group', 'accordion', 'steps', 'code-group', 'code-collapse', 'tabs']
+  const wrapperTypes = ['card-group', 'accordion', 'steps', 'code-group', 'code-collapse', 'tabs', 'div']
   for (const wrapperType of wrapperTypes) {
     visitAndReplace(doc, wrapperType, (node) => {
-      const children = node.slice(2)
-
-      // Extract text from transformed children (they should be paragraphs now)
-      const extractFromChildren = (nodes: any[]): string => {
-        return nodes.map((child: any) => {
-          if (typeof child === 'string') return child
-          if (Array.isArray(child)) {
-            const tag = child[0]
-            const attrs = child[1] || {}
-            const content = child.slice(2)
-            // Handle pre/code blocks
-            if (tag === 'pre') {
-              const lang = attrs.language || ''
-              const code = attrs.code || ''
-              return `\n\`\`\`${lang}\n${code}\n\`\`\`\n`
-            }
-            // Handle paragraphs and other text
-            if (tag === 'p') {
-              const text = content.map((c: any) => typeof c === 'string' ? c : '').join('')
-              return text + '\n\n'
-            }
-            return extractFromChildren(content)
-          }
-          return ''
-        }).join('')
-      }
-
-      const extracted = extractFromChildren(children).trim()
-      node[0] = 'p'
-      node[1] = {}
-      node[2] = extracted
-      node.length = 3
+      replaceWithChildren(node, node.slice(2))
     })
   }
 
-  // Transform field-group to remove wrapper (fields already handled)
-  const fieldWrappers = ['field-group', 'collapsible']
-  for (const wrapperType of fieldWrappers) {
-    visitAndReplace(doc, wrapperType, (node) => {
-      const children = node.slice(2)
-      const extractFromChildren = (nodes: any[]): string => {
-        return nodes.map((child: any) => {
-          if (typeof child === 'string') return child
-          if (Array.isArray(child)) {
-            const tag = child[0]
-            const attrs = child[1] || {}
-            const content = child.slice(2)
-            if (tag === 'pre') {
-              const lang = attrs.language || ''
-              const code = attrs.code || ''
-              return `\n\`\`\`${lang}\n${code}\n\`\`\`\n`
-            }
-            if (tag === 'p') {
-              const text = content.map((c: any) => typeof c === 'string' ? c : '').join('')
-              return text + '\n\n'
-            }
-            return extractFromChildren(content)
-          }
-          return ''
-        }).join('')
-      }
-      const extracted = extractFromChildren(children).trim()
-      node[0] = 'p'
-      node[1] = {}
-      node[2] = extracted
-      node.length = 3
-    })
-  }
-
-  // Transform field to a definition format
+  // Transform field to a definition format (before field-group unwrapping so attrs are intact)
   visitAndReplace(doc, 'field', (node) => {
     const attrs = node[1] || {}
     const content = node.slice(2)
@@ -715,24 +628,40 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
       return nodes.map((child: any) => {
         if (typeof child === 'string') return child
         if (Array.isArray(child)) {
-          const content = child.slice(2)
-          return extractText(content)
+          const innerContent = child.slice(2)
+          return extractText(innerContent)
         }
         return ''
       }).join('')
     }
 
-    let fieldText = `**${name}**`
-    if (type) fieldText += ` (\`${type}\`)`
-    if (required) fieldText += ' *required*'
+    const parts: any[] = [['strong', {}, name]]
+    if (type) {
+      parts.push(' (', ['code', {}, type], ')')
+    }
+    if (required) {
+      parts.push(' ', ['em', {}, 'required'])
+    }
     const desc = extractText(content).trim()
-    if (desc) fieldText += `: ${desc}`
+    if (desc) {
+      parts.push(`: ${desc}`)
+    }
 
     node[0] = 'p'
     node[1] = {}
-    node[2] = fieldText
-    node.length = 3
+    node.length = 2
+    for (const part of parts) {
+      node.push(part)
+    }
   })
+
+  // Remove field-group / collapsible wrappers (after fields are transformed to <p>)
+  const fieldWrappers = ['field-group', 'collapsible']
+  for (const wrapperType of fieldWrappers) {
+    visitAndReplace(doc, wrapperType, (node) => {
+      replaceWithChildren(node, node.slice(2))
+    })
+  }
 
   // Transform code-preview to extract the Vue code as a code block
   visitAndReplace(doc, 'code-preview', (node) => {
@@ -776,7 +705,7 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
   visitAndReplace(doc, 'icons-theme', (node) => {
     node[0] = 'p'
     node[1] = {}
-    node[2] = '*See the interactive theme picker on the documentation website.*'
+    node[2] = ['em', {}, 'See the interactive theme picker on the documentation website.']
     node.length = 3
   })
 
@@ -791,7 +720,7 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
   visitAndReplace(doc, 'supported-languages', (node) => {
     node[0] = 'p'
     node[1] = {}
-    node[2] = '*See the full list of supported languages on the documentation website.*'
+    node[2] = ['em', {}, 'See the full list of supported languages on the documentation website.']
     node.length = 3
   })
 
@@ -800,11 +729,25 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     const attrs = node[1] || {}
     const label = attrs.label || ''
     const to = attrs.to || ''
-    node[0] = 'p'
-    node[1] = {}
-    node[2] = to ? `[${label}](${to})` : label
-    node.length = 3
+    if (to) {
+      node[0] = 'p'
+      node[1] = {}
+      node[2] = ['a', { href: to }, label]
+      node.length = 3
+    } else {
+      node[0] = 'p'
+      node[1] = {}
+      node[2] = label
+      node.length = 3
+    }
   })
+
+  // Flatten __flatten markers by splicing their children into parents
+  if (Array.isArray(doc.body)) {
+    flattenMarkers(doc.body)
+  } else if (doc.body?.value && Array.isArray(doc.body.value)) {
+    flattenMarkers(doc.body.value)
+  }
 
   return doc
 }

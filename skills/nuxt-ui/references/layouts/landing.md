@@ -1,6 +1,13 @@
-# Page Layout
+# Landing Page Layout
 
 Build public-facing pages — landing, blog, changelog, pricing — using the Header + Main + Footer shell with Page components.
+
+## When to use
+
+- Marketing sites, product pages, company sites
+- Blog and content pages
+- Pricing, changelog, portfolio pages
+- Any public-facing page that isn't a dashboard or documentation
 
 ## App shell
 
@@ -56,6 +63,11 @@ const items = computed<NavigationMenuItem[]>(() => [{
 </template>
 ```
 
+### Common mistakes
+
+- Forgetting the `#body` slot on `UHeader` — this is the mobile menu content. Without it, mobile users have no navigation.
+- Using `variant="solid"` for both header and hero buttons — the header button should be lower weight than the hero CTA.
+
 ## Landing page
 
 ```vue [pages/index.vue]
@@ -105,116 +117,20 @@ const items = computed<NavigationMenuItem[]>(() => [{
 </template>
 ```
 
-## Blog listing
-
-```vue [pages/blog/index.vue]
-<script setup lang="ts">
-const { data: posts } = await useAsyncData('posts', () => queryCollection('posts').all())
-</script>
-
-<template>
-  <UPage>
-    <UPageHero title="Blog" description="The latest news and updates from our team." />
-
-    <UPageBody>
-      <UContainer>
-        <UBlogPosts>
-          <UBlogPost
-            v-for="(post, index) in posts"
-            :key="index"
-            v-bind="post"
-            :to="post.path"
-          />
-        </UBlogPosts>
-      </UContainer>
-    </UPageBody>
-  </UPage>
-</template>
-```
-
-## Blog article
-
-```vue [pages/blog/[slug].vue]
-<script setup lang="ts">
-const route = useRoute()
-
-const { data: post } = await useAsyncData(route.path, () => {
-  return queryCollection('posts').path(route.path).first()
-})
-</script>
-
-<template>
-  <UPage>
-    <UPageHeader :title="post.title" :description="post.description" />
-
-    <UPageBody>
-      <ContentRenderer :value="post" />
-    </UPageBody>
-
-    <template #right>
-      <UContentToc :links="post.body.toc.links" />
-    </template>
-  </UPage>
-</template>
-```
-
-## Changelog
-
-```vue [pages/changelog.vue]
-<script setup lang="ts">
-const { data: versions } = await useAsyncData('versions', () => queryCollection('changelog').all())
-</script>
-
-<template>
-  <UPage>
-    <UPageHero title="Changelog" />
-
-    <UPageBody>
-      <UContainer>
-        <UChangelogVersions>
-          <UChangelogVersion v-for="(version, index) in versions" :key="index" v-bind="version" />
-        </UChangelogVersions>
-      </UContainer>
-    </UPageBody>
-  </UPage>
-</template>
-```
-
 ## Key components
 
-### Page sections
-
-- `UPageHero` — Hero with title, description, links, and optional media (`orientation`: horizontal/vertical)
-- `UPageSection` — Content section with headline, title, description, and `features` grid
-- `UPageCTA` — Call to action block
-- `UPageHeader` — Page title and description
-- `UPageBody` — Main content area with prose styling
-
-### Grids & cards
-
-- `UPageGrid` / `UPageColumns` — Grid layouts
-- `UPageCard` — Content card for grids
-- `UPageFeature` — Individual feature item
-- `UPageLogos` — Logo wall
-
-### Blog & changelog
-
-- `UBlogPosts` — Responsive grid of posts (`orientation`: horizontal/vertical)
-- `UBlogPost` — Individual post card
-- `UChangelogVersions` / `UChangelogVersion` — Changelog entries
-
-### Pricing
-
-- `UPricingPlans` — Pricing plan cards
-- `UPricingTable` — Feature comparison table
-
-### Footer
-
-- `UFooterColumns` — Multi-column footer with link groups
+- `UPageHero` — hero with title, description, links, and optional media. Use `orientation="horizontal"` for side-by-side layout.
+- `UPageSection` — content section with headline, title, description, and `features` grid. Use `id` for anchor links.
+- `UPageCTA` — call to action block.
+- `UPageGrid` / `UPageCard` — card grid for features, testimonials, etc.
+- `UPageFeature` — individual feature item.
+- `UPageLogos` — logo wall for social proof.
+- `UPricingPlans` / `UPricingTable` — pricing cards and comparison tables.
+- `UFooterColumns` — multi-column footer with link groups (used inside `UFooter`).
 
 ## Variations
 
-### Alternating sections
+### Alternating feature sections
 
 ```vue
 <UPageSection title="Feature A" orientation="horizontal">
@@ -226,35 +142,44 @@ const { data: versions } = await useAsyncData('versions', () => queryCollection(
 </UPageSection>
 ```
 
-### Feature grid
+### Blog listing
 
-```vue
-<UPageSection headline="Features" title="Why choose us">
-  <UPageGrid>
-    <UPageCard v-for="feature in features" :key="feature.title" v-bind="feature" />
-  </UPageGrid>
-</UPageSection>
-```
+```vue [pages/blog/index.vue]
+<script setup lang="ts">
+const { data: posts } = await useAsyncData('posts', () => queryCollection('posts').all())
+</script>
 
-### Blog with sidebar
-
-```vue [layouts/blog.vue]
 <template>
   <UPage>
-    <template #left>
-      <UPageAside>
-        <UNavigationMenu
-          :items="[
-            { label: 'All posts', to: '/blog', icon: 'i-lucide-newspaper' },
-            { label: 'Tutorials', to: '/blog/tutorials', icon: 'i-lucide-graduation-cap' },
-            { label: 'Announcements', to: '/blog/announcements', icon: 'i-lucide-megaphone' }
-          ]"
-          orientation="vertical"
-        />
-      </UPageAside>
-    </template>
+    <UPageHero title="Blog" description="The latest news and updates." />
+    <UPageBody>
+      <UContainer>
+        <UBlogPosts>
+          <UBlogPost v-for="post in posts" :key="post.path" v-bind="post" :to="post.path" />
+        </UBlogPosts>
+      </UContainer>
+    </UPageBody>
+  </UPage>
+</template>
+```
 
-    <slot />
+### Changelog
+
+```vue [pages/changelog.vue]
+<script setup lang="ts">
+const { data: versions } = await useAsyncData('versions', () => queryCollection('changelog').all())
+</script>
+
+<template>
+  <UPage>
+    <UPageHero title="Changelog" />
+    <UPageBody>
+      <UContainer>
+        <UChangelogVersions>
+          <UChangelogVersion v-for="version in versions" :key="version.path" v-bind="version" />
+        </UChangelogVersions>
+      </UContainer>
+    </UPageBody>
   </UPage>
 </template>
 ```

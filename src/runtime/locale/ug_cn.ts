@@ -101,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'ئازايتىش',
       increment: 'كۆپەيتىش'
     },
+    listbox: {
+      noData: 'سانلىق مەلۇمات يوق',
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      search: 'ئىزدەش…'
+    },
     modal: {
       close: 'تاقاش'
     },
@@ -120,6 +125,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'كۆچۈرۈش'
+      },
+      prompt: {
+        copy: 'كۆچۈرۈش',
+        openIn: '{name} دا ئېچىش'
       }
     },
     sidebar: {

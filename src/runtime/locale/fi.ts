@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Vähennä',
       increment: 'Kasvata'
     },
+    listbox: {
+      noData: 'Ei tietoja',
+      noMatch: 'Ei vastaavia tietoja',
+      search: 'Hae…'
+    },
     modal: {
       close: 'Sulje'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopioi koodi leikepöydälle'
+      },
+      prompt: {
+        copy: 'Kopioi kehote',
+        openIn: 'Avaa sovelluksessa {name}'
       }
     },
     sidebar: {

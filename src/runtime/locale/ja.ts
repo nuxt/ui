@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: '減らす',
       increment: '増やす'
     },
+    listbox: {
+      noData: 'データがありません',
+      noMatch: '一致するデータがありません',
+      search: '検索…'
+    },
     modal: {
       close: '閉じる'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'コードをクリップボードにコピー'
+      },
+      prompt: {
+        copy: 'プロンプトをコピー',
+        openIn: '{name}で開く'
       }
     },
     sidebar: {

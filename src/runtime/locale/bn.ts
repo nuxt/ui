@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'হ্রাস করুন',
       increment: 'বৃদ্ধি করুন'
     },
+    listbox: {
+      noData: 'কোন তথ্য নেই',
+      noMatch: 'কোন মিল পাওয়া যায়নি',
+      search: 'অনুসন্ধান করুন…'
+    },
     modal: {
       close: 'বন্ধ করুন'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'কোড ক্লিপবোর্ডে কপি করুন'
+      },
+      prompt: {
+        copy: 'প্রম্পট কপি করুন',
+        openIn: '{name}-এ খুলুন'
       }
     },
     sidebar: {

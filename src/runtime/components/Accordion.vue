@@ -22,7 +22,12 @@ export interface AccordionItem {
   trailingIcon?: IconProps['name']
   slot?: string
   content?: string
-  /** A unique value for the accordion item. Defaults to the index. */
+  /**
+   * A unique value for the accordion item. Defaults to the index.
+   * Also used as the Vue `key` for this item, so providing a stable value prevents
+   * accordion content (and its local state) from remounting when items are added, removed,
+   * or reordered.
+   */
   value?: string
   disabled?: boolean
   class?: any
@@ -106,7 +111,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
     <AccordionItem
       v-for="(item, index) in props.items"
       v-slot="{ open }"
-      :key="index"
+      :key="get(item, props.valueKey as string) ?? index"
       :value="get(item, props.valueKey as string) ?? String(index)"
       :disabled="item.disabled"
       data-slot="item"

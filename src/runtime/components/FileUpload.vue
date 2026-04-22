@@ -143,6 +143,7 @@ import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { useComponentUI } from '../composables/useComponentUI'
+import { useResolvedVariants } from '../composables/useResolvedVariants'
 import { useFormField } from '../composables/useFormField'
 import { useFileUpload } from '../composables/useFileUpload'
 import { tv } from '../utils/tv'
@@ -185,10 +186,11 @@ const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   dropzone: props.dropzone,
   onUpdate
 })
-const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props)
+const { emitFormInput, emitFormChange, id, name, color, highlight, disabled, ariaAttrs } = useFormField<FileUploadProps>(props)
 
-const variant = computed(() => props.multiple ? 'area' : props.variant)
-const layout = computed(() => props.variant === 'button' && !props.multiple ? 'grid' : props.layout)
+const { variant: resolvedVariant } = useResolvedVariants('fileUpload', props, theme, ['variant'])
+const variant = computed(() => props.multiple ? 'area' : resolvedVariant.value)
+const layout = computed(() => resolvedVariant.value === 'button' && !props.multiple ? 'grid' : props.layout)
 const position = computed(() => {
   if (layout.value === 'grid' && props.multiple) {
     return 'inside'
@@ -203,13 +205,13 @@ const position = computed(() => {
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
   dropzone: props.dropzone,
   interactive: props.interactive,
-  color: props.color,
+  color: color.value,
   size: props.size,
   variant: variant.value,
   layout: layout.value,
   position: position.value,
   multiple: props.multiple,
-  highlight: props.highlight,
+  highlight: highlight.value,
   disabled: props.disabled
 }))
 

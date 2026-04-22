@@ -82,10 +82,29 @@ useHead({
   link: [
     {
       rel: 'alternate',
-      href: joinURL(site.url, 'raw', `${path.value}.md`),
+      href: `${site.url}${path.value}.md`,
       type: 'text/markdown'
     }
-  ]
+  ],
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'TechArticle',
+      'headline': `${prefix}${title} ${suffix}`.trim(),
+      'description': description,
+      'url': joinURL(site.url, path.value),
+      'breadcrumb': {
+        '@type': 'BreadcrumbList',
+        'itemListElement': breadcrumb.value?.map((item, index) => ({
+          '@type': 'ListItem',
+          'position': index + 1,
+          'name': item.label,
+          'item': item.to ? joinURL(site.url, String(item.to)) : undefined
+        })) || []
+      }
+    }).replace(/</g, '\\u003c').replace(/>/g, '\\u003e')
+  }]
 })
 
 const { open, messages } = useChat()
@@ -102,7 +121,7 @@ const links = computed(() => [{
     messages.value = [...messages.value, {
       id: String(Date.now()),
       role: 'user',
-      parts: [{ type: 'text', text: `Read the documentation page at ${page.value?.path} and summarize it. I want to ask questions about it.` }]
+      parts: [{ type: 'text', text: 'Read this documentation page and summarize it. I want to ask questions about it.' }]
     }]
     open.value = true
   }
@@ -114,7 +133,7 @@ const links = computed(() => [{
     v-if="page"
     :ui="open ? {
       center: 'lg:col-span-10',
-      right: 'lg:col-span-0'
+      right: 'lg:hidden'
     } : undefined"
   >
     <UPageHeader>

@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Zvogëlo',
       increment: 'Rrit'
     },
+    listbox: {
+      noData: 'Nuk ka të dhëna',
+      noMatch: 'Nuk ka të dhëna që përputhen',
+      search: 'Kërko…'
+    },
     modal: {
       close: 'Mbyll'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopjo kodin në kujtesë'
+      },
+      prompt: {
+        copy: 'Kopjo komandën',
+        openIn: 'Hap në {name}'
       }
     },
     sidebar: {

@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Verringern',
       increment: 'Erhöhen'
     },
+    listbox: {
+      noData: 'Keine Daten',
+      noMatch: 'Nichts gefunden',
+      search: 'Suchen…'
+    },
     modal: {
       close: 'Schliessen'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Code in die Zwischenablage kopieren'
+      },
+      prompt: {
+        copy: 'Prompt kopieren',
+        openIn: 'In {name} öffnen'
       }
     },
     sidebar: {

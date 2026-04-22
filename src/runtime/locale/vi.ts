@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Giảm',
       increment: 'Tăng'
     },
+    listbox: {
+      noData: 'Không có dữ liệu',
+      noMatch: 'Không có kết quả phù hợp',
+      search: 'Tìm kiếm…'
+    },
     modal: {
       close: 'Đóng'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Sao chép mã vào bộ nhớ tạm'
+      },
+      prompt: {
+        copy: 'Sao chép lệnh',
+        openIn: 'Mở trong {name}'
       }
     },
     sidebar: {

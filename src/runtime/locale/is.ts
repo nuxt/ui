@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Minnka',
       increment: 'Auka'
     },
+    listbox: {
+      noData: 'Engin gögn',
+      noMatch: 'Engin gögn fundust',
+      search: 'Leita…'
+    },
     modal: {
       close: 'Loka'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Afrita kóða á klippiborð'
+      },
+      prompt: {
+        copy: 'Afrita fyrirmæli',
+        openIn: 'Opna í {name}'
       }
     },
     sidebar: {

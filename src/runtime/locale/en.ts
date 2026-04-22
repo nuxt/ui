@@ -95,6 +95,11 @@ export default defineLocale<Messages>({
       decrement: 'Decrement',
       increment: 'Increment'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search…'
+    },
     modal: {
       close: 'Close'
     },
@@ -114,10 +119,14 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Copy code to clipboard'
+      },
+      prompt: {
+        copy: 'Copy prompt',
+        openIn: 'Open in {name}'
       }
     },
     chatReasoning: {
-      thinking: 'Thinking...',
+      thinking: 'Thinking…',
       thought: 'Thought',
       thoughtFor: 'Thought for {duration}'
     },

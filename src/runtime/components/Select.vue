@@ -149,11 +149,12 @@ export interface SelectSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
 import { useTemplateRef, computed, onMounted, toRef } from 'vue'
-import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
+import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectValue as RSelectValue, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
+import { useResolvedVariants } from '../composables/useResolvedVariants'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -181,7 +182,10 @@ const uiProp = useComponentUI('select', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
+const { position } = useResolvedVariants('select', props, theme, ['position'], {
+  position: () => props.content?.position
+})
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: position.value }) as SelectContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as SelectArrowProps)
 
 const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
@@ -189,6 +193,8 @@ const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
 const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value)
+
+const isItemAligned = computed(() => position.value === 'item-aligned')
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}) })({
   color: color.value,
@@ -198,7 +204,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}
   highlight: highlight.value,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  fieldGroup: orientation.value
+  fieldGroup: orientation.value,
+  position: position.value
 }))
 
 const groups = computed<SelectItem[][]>(() =>
@@ -289,7 +296,10 @@ const viewportRef = useTemplateRef('viewportRef')
 
 defineExpose({
   triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
-  viewportRef: toRef(() => viewportRef.value)
+  viewportRef: toRef(() => {
+    const instance = viewportRef.value
+    return (instance && typeof instance === 'object' && '$el' in instance ? instance.$el : instance) as HTMLElement | null
+  })
 })
 </script>
 
@@ -320,16 +330,16 @@ defineExpose({
         </slot>
       </span>
 
-      <slot :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-        <template v-for="displayedModelValue in [displayValue(modelValue as any)]" :key="displayedModelValue">
-          <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" data-slot="value" :class="ui.value({ class: uiProp?.value })">
-            {{ displayedModelValue }}
-          </span>
-          <span v-else data-slot="placeholder" :class="ui.placeholder({ class: uiProp?.placeholder })">
-            {{ placeholder ?? '&nbsp;' }}
-          </span>
-        </template>
-      </slot>
+      <template v-for="displayedModelValue in [displayValue(modelValue as any)]" :key="displayedModelValue">
+        <RSelectValue
+          :data-slot="displayedModelValue != null ? 'value' : 'placeholder'"
+          :class="displayedModelValue != null ? ui.value({ class: uiProp?.value }) : ui.placeholder({ class: uiProp?.placeholder })"
+        >
+          <slot :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
+            {{ displayedModelValue ?? (placeholder ?? '&nbsp;') }}
+          </slot>
+        </RSelectValue>
+      </template>
 
       <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
         <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
@@ -343,7 +353,7 @@ defineExpose({
         <SelectContent data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps">
           <slot name="content-top" />
 
-          <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
+          <component :is="isItemAligned ? SelectViewport : 'div'" ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
             <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: uiProp?.group })">
               <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
                 <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" data-slot="label" :class="ui.label({ class: [uiProp?.label, item.ui?.label, item.class] })">
@@ -400,7 +410,7 @@ defineExpose({
                 </RSelectItem>
               </template>
             </SelectGroup>
-          </div>
+          </component>
 
           <slot name="content-bottom" />
 
