@@ -150,80 +150,82 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
 
 <template>
   <DefineTierTemplate v-slot="{ tier }">
-    <slot :name="(tier.id as keyof PricingTableSlots<T>)" :tier="(tier as T)">
-      <slot name="tier" :tier="(tier as T)">
-        <div data-slot="tierTitleWrapper" :class="ui.tierTitleWrapper({ class: uiProp?.tierTitleWrapper })">
-          <div data-slot="tierTitle" :class="ui.tierTitle({ class: uiProp?.tierTitle })">
-            <slot :name="(`${tier.id}-title` as keyof PricingTableSlots<T>)" :tier="tier">
-              <slot name="tier-title" :tier="(tier as T)">
-                {{ tier.title }}
+    <div data-slot="tierWrapper" :class="ui.tierWrapper({ class: uiProp?.tierWrapper })">
+      <slot :name="(tier.id as keyof PricingTableSlots<T>)" :tier="(tier as T)">
+        <slot name="tier" :tier="(tier as T)">
+          <div data-slot="tierTitleWrapper" :class="ui.tierTitleWrapper({ class: uiProp?.tierTitleWrapper })">
+            <div data-slot="tierTitle" :class="ui.tierTitle({ class: uiProp?.tierTitle })">
+              <slot :name="(`${tier.id}-title` as keyof PricingTableSlots<T>)" :tier="tier">
+                <slot name="tier-title" :tier="(tier as T)">
+                  {{ tier.title }}
+                </slot>
+              </slot>
+            </div>
+
+            <slot :name="(`${tier.id}-badge` as keyof PricingTableSlots<T>)" :tier="tier">
+              <slot name="tier-badge" :tier="(tier as T)">
+                <UBadge
+                  v-if="tier.badge"
+                  color="primary"
+                  variant="subtle"
+                  v-bind="typeof tier.badge === 'string' ? { label: tier.badge } : tier.badge"
+                  data-slot="tierBadge"
+                  :class="ui.tierBadge({ class: uiProp?.tierBadge })"
+                />
               </slot>
             </slot>
           </div>
 
-          <slot :name="(`${tier.id}-badge` as keyof PricingTableSlots<T>)" :tier="tier">
-            <slot name="tier-badge" :tier="(tier as T)">
-              <UBadge
-                v-if="tier.badge"
-                color="primary"
-                variant="subtle"
-                v-bind="typeof tier.badge === 'string' ? { label: tier.badge } : tier.badge"
-                data-slot="tierBadge"
-                :class="ui.tierBadge({ class: uiProp?.tierBadge })"
-              />
-            </slot>
-          </slot>
-        </div>
-
-        <div v-if="tier.description || !!slots['tier-description'] || !!slots[(`${tier.id}-description` as keyof PricingTableSlots<T>)]" data-slot="tierDescription" :class="ui.tierDescription({ class: uiProp?.tierDescription })">
-          <slot :name="(`${tier.id}-description` as keyof PricingTableSlots<T>)" :tier="tier">
-            <slot name="tier-description" :tier="(tier as T)">
-              {{ tier.description }}
-            </slot>
-          </slot>
-        </div>
-
-        <div v-if="tier.discount || tier.price || !!slots['tier-discount'] || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-price'] || !!slots[(`${tier.id}-price` as keyof PricingTableSlots<T>)] || tier.billingCycle || tier.billingPeriod || !!slots['tier-billing'] || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)]" data-slot="tierPriceWrapper" :class="ui.tierPriceWrapper({ class: uiProp?.tierPriceWrapper })">
-          <div v-if="(tier.discount && tier.price) || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-discount']" data-slot="tierDiscount" :class="ui.tierDiscount({ class: uiProp?.tierDiscount })">
-            <slot :name="(`${tier.id}-discount` as keyof PricingTableSlots<T>)" :tier="tier">
-              <slot name="tier-discount" :tier="(tier as T)">
-                {{ tier.price }}
+          <div data-slot="tierDescription" :class="ui.tierDescription({ class: uiProp?.tierDescription })">
+            <slot :name="(`${tier.id}-description` as keyof PricingTableSlots<T>)" :tier="tier">
+              <slot name="tier-description" :tier="(tier as T)">
+                {{ tier.description }}
               </slot>
             </slot>
           </div>
 
-          <div v-if="(tier.discount || tier.price) || !!slots[(`${tier.id}-price` as keyof PricingTableSlots<T>)] || !!slots['tier-price']" data-slot="tierPrice" :class="ui.tierPrice({ class: uiProp?.tierPrice })">
-            <slot :name="(`${tier.id}-price` as keyof PricingTableSlots<T>)" :tier="tier">
-              <slot name="tier-price" :tier="(tier as T)">
-                {{ tier.discount || tier.price }}
+          <div data-slot="tierPriceWrapper" :class="ui.tierPriceWrapper({ class: uiProp?.tierPriceWrapper })">
+            <div v-if="(tier.discount && tier.price) || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-discount']" data-slot="tierDiscount" :class="ui.tierDiscount({ class: uiProp?.tierDiscount })">
+              <slot :name="(`${tier.id}-discount` as keyof PricingTableSlots<T>)" :tier="tier">
+                <slot name="tier-discount" :tier="(tier as T)">
+                  {{ tier.price }}
+                </slot>
+              </slot>
+            </div>
+
+            <div v-if="(tier.discount || tier.price) || !!slots[(`${tier.id}-price` as keyof PricingTableSlots<T>)] || !!slots['tier-price']" data-slot="tierPrice" :class="ui.tierPrice({ class: uiProp?.tierPrice })">
+              <slot :name="(`${tier.id}-price` as keyof PricingTableSlots<T>)" :tier="tier">
+                <slot name="tier-price" :tier="(tier as T)">
+                  {{ tier.discount || tier.price }}
+                </slot>
+              </slot>
+            </div>
+
+            <div v-if="tier.billingCycle || tier.billingPeriod || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)] || !!slots['tier-billing']" data-slot="tierBilling" :class="ui.tierBilling({ class: uiProp?.tierBilling })">
+              <slot :name="(`${tier.id}-billing` as keyof PricingTableSlots<T>)" :tier="tier">
+                <slot name="tier-billing" :tier="(tier as T)">
+                  <span data-slot="tierBillingPeriod" :class="ui.tierBillingPeriod({ class: uiProp?.tierBillingPeriod })">
+                    {{ tier.billingPeriod || '&nbsp;' }}
+                  </span>
+
+                  <span v-if="tier.billingCycle" data-slot="tierBillingCycle" :class="ui.tierBillingCycle({ class: uiProp?.tierBillingCycle })">
+                    {{ tier.billingCycle }}
+                  </span>
+                </slot>
+              </slot>
+            </div>
+          </div>
+
+          <div v-if="!!slots[(`${tier.id}-button` as keyof PricingTableSlots<T>)] || !!slots['tier-button'] || tier.button" data-slot="tierButton" :class="ui.tierButton({ class: uiProp?.tierButton })">
+            <slot :name="(`${tier.id}-button` as keyof PricingTableSlots<T>)" :tier="tier">
+              <slot name="tier-button" :tier="(tier as T)">
+                <UButton v-if="tier.button" block size="lg" v-bind="tier.button" />
               </slot>
             </slot>
           </div>
-
-          <div v-if="tier.billingCycle || tier.billingPeriod || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)] || !!slots['tier-billing']" data-slot="tierBilling" :class="ui.tierBilling({ class: uiProp?.tierBilling })">
-            <slot :name="(`${tier.id}-billing` as keyof PricingTableSlots<T>)" :tier="tier">
-              <slot name="tier-billing" :tier="(tier as T)">
-                <span data-slot="tierBillingPeriod" :class="ui.tierBillingPeriod({ class: uiProp?.tierBillingPeriod })">
-                  {{ tier.billingPeriod || '&nbsp;' }}
-                </span>
-
-                <span v-if="tier.billingCycle" data-slot="tierBillingCycle" :class="ui.tierBillingCycle({ class: uiProp?.tierBillingCycle })">
-                  {{ tier.billingCycle }}
-                </span>
-              </slot>
-            </slot>
-          </div>
-        </div>
-
-        <div v-if="!!slots[(`${tier.id}-button` as keyof PricingTableSlots<T>)] || !!slots['tier-button'] || tier.button" data-slot="tierButton" :class="ui.tierButton({ class: uiProp?.tierButton })">
-          <slot :name="(`${tier.id}-button` as keyof PricingTableSlots<T>)" :tier="tier">
-            <slot name="tier-button" :tier="(tier as T)">
-              <UButton v-if="tier.button" block size="lg" v-bind="tier.button" />
-            </slot>
-          </slot>
-        </div>
+        </slot>
       </slot>
-    </slot>
+    </div>
   </DefineTierTemplate>
 
   <DefineFeatureTemplate v-slot="{ feature, tier }">

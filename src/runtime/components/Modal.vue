@@ -169,7 +169,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
         <slot name="content" :close="close">
           <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" data-slot="header" :class="ui.header({ class: uiProp?.header })">
             <slot name="header" :close="close">
-              <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+              <div v-if="title || !!slots.title || description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
                 <DialogTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
                   <slot name="title">
                     {{ title }}

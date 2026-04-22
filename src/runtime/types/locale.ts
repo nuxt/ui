@@ -99,6 +99,11 @@ export type Messages = {
     decrement: string
     increment: string
   }
+  listbox: {
+    noData: string
+    noMatch: string
+    search: string
+  }
   modal: {
     close: string
   }

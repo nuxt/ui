@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Sumažinti',
       increment: 'Padidinti'
     },
+    listbox: {
+      noData: 'Nėra duomenų',
+      noMatch: 'Nėra atitinkančių duomenų',
+      search: 'Ieškoti…'
+    },
     modal: {
       close: 'Uždaryti'
     },

@@ -61,29 +61,36 @@ export default defineNuxtPlugin({
       useHead({
         script: [{
           innerHTML: `
-            var colorsEl = document.querySelector('style#nuxt-ui-colors');
-            if (colorsEl) {
-              let html = colorsEl.innerHTML;
-
-              if (localStorage.getItem('nuxt-ui-primary')) {
-                const primaryColor = localStorage.getItem('nuxt-ui-primary');
-                if (primaryColor !== 'black') {
+            (function() {
+              var primaryColor = localStorage.getItem('nuxt-ui-primary');
+              var neutralColor = localStorage.getItem('nuxt-ui-neutral');
+              if (!primaryColor && !neutralColor) return;
+              function swapColors(el) {
+                var html = el.innerHTML;
+                if (primaryColor && primaryColor !== 'black') {
                   html = html.replace(
                     /(--ui-color-primary-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.primary}(-\\d{2,3}.*?\\))/g,
                     \`$1\${primaryColor}$2\`
                   );
                 }
+                if (neutralColor) {
+                  html = html.replace(
+                    /(--ui-color-neutral-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.neutral}(-\\d{2,3}.*?\\))/g,
+                    \`$1\${neutralColor === 'neutral' ? 'old-neutral' : neutralColor}$2\`
+                  );
+                }
+                el.innerHTML = html;
               }
-              if (localStorage.getItem('nuxt-ui-neutral')) {
-                let neutralColor = localStorage.getItem('nuxt-ui-neutral');
-                html = html.replace(
-                  /(--ui-color-neutral-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.neutral}(-\\d{2,3}.*?\\))/g,
-                  \`$1\${neutralColor === 'neutral' ? 'old-neutral' : neutralColor}$2\`
-                );
+              var colorsEl = document.querySelector('style#nuxt-ui-colors');
+              if (colorsEl) {
+                swapColors(colorsEl);
+              } else {
+                requestAnimationFrame(function() {
+                  var el = document.getElementById('nuxt-ui-colors');
+                  if (el) swapColors(el);
+                });
               }
-
-              colorsEl.innerHTML = html;
-            }
+            })();
             `.replace(/\s+/g, ' '),
           type: 'text/javascript',
           tagPriority: -1
