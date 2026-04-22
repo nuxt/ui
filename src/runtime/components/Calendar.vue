@@ -399,6 +399,23 @@ const monthPicker = computed(() => createPickerConfig('month'))
 const yearPicker = computed(() => createPickerConfig('year'))
 
 const picker = computed<any>(() => isMonthView.value ? monthPicker.value : yearPicker.value)
+const pickerSlotNames = computed(() => {
+  if (picker.value.kind === 'month') {
+    return {
+      grid: 'monthGrid',
+      row: 'monthGridRow',
+      cell: 'monthCell',
+      trigger: 'monthCellTrigger'
+    } as const
+  }
+
+  return {
+    grid: 'yearGrid',
+    row: 'yearGridRow',
+    cell: 'yearCell',
+    trigger: 'yearCellTrigger'
+  } as const
+})
 const pickerDefaultValue = computed(() => props.defaultValue as DateValue | DateRange | undefined)
 const pickerModelValue = computed(() => props.modelValue as DateValue | DateRange | undefined)
 const pickerValueProps = computed<Record<string, any>>(() => isStandalonePicker.value
@@ -608,7 +625,7 @@ function onPickerPlaceholderUpdate(value: DateValue) {
     <component
       :is="picker.grid"
       as="div"
-      data-slot="grid"
+      :data-slot="pickerSlotNames.grid"
       :class="ui.grid({ class: uiProp?.grid })"
     >
       <component :is="picker.gridBody" as="div">
@@ -617,7 +634,7 @@ function onPickerPlaceholderUpdate(value: DateValue) {
           v-for="(row, rowIndex) in grid.rows"
           :key="rowIndex"
           as="div"
-          data-slot="gridRow"
+          :data-slot="pickerSlotNames.row"
           :class="ui.gridRow({ class: uiProp?.gridRow })"
         >
           <component
@@ -626,14 +643,14 @@ function onPickerPlaceholderUpdate(value: DateValue) {
             :key="cellDate.toString()"
             as="div"
             :date="cellDate"
-            data-slot="cell"
+            :data-slot="pickerSlotNames.cell"
             :class="ui.cell({ class: uiProp?.cell })"
           >
             <component
               :is="picker.cellTrigger"
               v-slot="slotProps"
               v-bind="{ [picker.itemProp]: cellDate }"
-              data-slot="cellTrigger"
+              :data-slot="pickerSlotNames.trigger"
               :class="ui.cellTrigger({ class: uiProp?.cellTrigger })"
             >
               <slot v-if="picker.kind === 'month'" name="month-cell" :month="cellDate" :selected="slotProps.selected" :disabled="slotProps.disabled">
