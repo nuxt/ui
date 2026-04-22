@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Scade',
       increment: 'Crește'
     },
+    listbox: {
+      noData: 'Nu există date',
+      noMatch: 'Nu există date corespunzătoare',
+      search: 'Caută…'
+    },
     modal: {
       close: 'Închide'
     },

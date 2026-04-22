@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: '감소',
       increment: '증가'
     },
+    listbox: {
+      noData: '데이터가 없습니다.',
+      noMatch: '일치하는 데이터가 없습니다.',
+      search: '검색…'
+    },
     modal: {
       close: '닫기'
     },

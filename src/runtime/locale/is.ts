@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Minnka',
       increment: 'Auka'
     },
+    listbox: {
+      noData: 'Engin gögn',
+      noMatch: 'Engin gögn fundust',
+      search: 'Leita…'
+    },
     modal: {
       close: 'Loka'
     },

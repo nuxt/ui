@@ -102,6 +102,11 @@ export default defineLocale<Messages>({
       decrement: 'დაკლება',
       increment: 'დამატება'
     },
+    listbox: {
+      noData: 'მონაცემები არ არის',
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      search: 'ძიება…'
+    },
     modal: {
       close: 'დახურვა'
     },

@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Decrementar',
       increment: 'Incrementar'
     },
+    listbox: {
+      noData: 'Sin datos',
+      noMatch: 'No hay datos coincidentes',
+      search: 'Buscar…'
+    },
     modal: {
       close: 'Cerrar'
     },
