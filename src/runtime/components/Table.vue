@@ -99,7 +99,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   meta?: TableMeta<T>
   /**
    * Enable virtualization for large datasets.
-   * Note: when enabled, the divider between rows and row pinning properties are not supported.
+   * Note: row pinning is not supported when virtualization is enabled.
    * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
    * @defaultValue false
    */
@@ -280,8 +280,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {})
   sticky: props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,
-  loadingAnimation: props.loadingAnimation,
-  virtualize: !!props.virtualize
+  loadingAnimation: props.loadingAnimation
 }))
 
 const [DefineTableTemplate, ReuseTableTemplate] = createReusableTemplate()
@@ -436,16 +435,13 @@ const virtualizer = !!props.virtualize && useVirtualizer({
   }
 })
 
-const virtualPaddingTop = computed(() => {
-  if (!virtualizer) return 0
-  const items = virtualizer.value.getVirtualItems()
-  return items[0]?.start ?? 0
-})
+const virtualItems = computed(() => virtualizer ? virtualizer.value.getVirtualItems() : [])
+
+const virtualPaddingTop = computed(() => virtualItems.value[0]?.start ?? 0)
 
 const virtualPaddingBottom = computed(() => {
-  if (!virtualizer) return 0
-  const items = virtualizer.value.getVirtualItems()
-  return items.length > 0 ? virtualizer.value.getTotalSize() - (items[items.length - 1]?.end ?? 0) : 0
+  if (!virtualizer || !virtualItems.value.length) return 0
+  return virtualizer.value.getTotalSize() - (virtualItems.value[virtualItems.value.length - 1]?.end ?? 0)
 })
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
@@ -623,9 +619,9 @@ defineExpose({
 
           <template v-if="virtualizer">
             <tr v-if="virtualPaddingTop > 0" :style="{ height: `${virtualPaddingTop}px` }" aria-hidden="true">
-              <td />
+              <td :colspan="tableApi.getAllLeafColumns().length" />
             </tr>
-            <template v-for="virtualRow in virtualizer.getVirtualItems()" :key="centerRows[virtualRow.index]?.id">
+            <template v-for="virtualRow in virtualItems" :key="centerRows[virtualRow.index]?.id ?? `virtual-${virtualRow.index}`">
               <ReuseRowTemplate
                 v-if="centerRows[virtualRow.index]"
                 :row="centerRows[virtualRow.index]!"
@@ -633,7 +629,7 @@ defineExpose({
               />
             </template>
             <tr v-if="virtualPaddingBottom > 0" :style="{ height: `${virtualPaddingBottom}px` }" aria-hidden="true">
-              <td />
+              <td :colspan="tableApi.getAllLeafColumns().length" />
             </tr>
           </template>
 

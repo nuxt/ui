@@ -1780,7 +1780,7 @@ exports[`Table > renders with meta prop correctly 1`] = `
 
 exports[`Table > renders with row pinning and virtualization correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
-  <table data-slot="base" class="min-w-full">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
@@ -1791,7 +1791,7 @@ exports[`Table > renders with row pinning and virtualization correctly 1`] = `
       </tr>
       <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <!--v-if-->
       <!--v-if-->
     </tbody>
@@ -1967,7 +1967,7 @@ exports[`Table > renders with ui correctly 1`] = `
 
 exports[`Table > renders with virtualize and sticky correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
-  <table data-slot="base" class="min-w-full">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
@@ -1995,7 +1995,7 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
       </tr>
       <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <!--v-if-->
       <!--v-if-->
     </tbody>
@@ -2029,7 +2029,7 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
 
 exports[`Table > renders with virtualize correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto">
-  <table data-slot="base" class="min-w-full">
+  <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
@@ -2040,7 +2040,7 @@ exports[`Table > renders with virtualize correctly 1`] = `
       </tr>
       <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
-    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default">
       <!--v-if-->
       <!--v-if-->
     </tbody>
