@@ -66,7 +66,7 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> extends Pick<
   /**
    * Whether to allow the user to resize the sidebar by dragging the rail.
    * Requires `rail` to be enabled. Drag to resize between `minSize` and `maxSize`.
-   * When `collapsible` is not `none`, dragging below `minSize` snaps to collapsed.
+   * When `collapsible` is not `none`, dragging near `collapsedSize` snaps to collapsed.
    * Double-click the rail to reset to `defaultSize`.
    * @defaultValue false
    */
@@ -125,7 +125,7 @@ const props = withDefaults(defineProps<SidebarProps<T>>(), {
   minSize: 12,
   maxSize: 24,
   defaultSize: 16,
-  collapsedSize: undefined,
+  collapsedSize: 4,
   mode: 'slideover' as never
 })
 const slots = defineSlots<SidebarSlots>()
@@ -192,25 +192,22 @@ const uiProp = useComponentUI('sidebar', props)
 const isResizable = computed(() => props.rail && props.resizable)
 const canCollapse = computed(() => isResizable.value && props.collapsible !== 'none')
 const sidebarId = `sidebar-${props.id || useId()}`
-const desktopCollapsed = ref(!modelOpen.value)
-
-const effectiveCollapsedSize = computed(() => props.collapsedSize ?? 4)
 
 const { el: containerEl, size: sidebarSize, isDragging, isCollapsed, onMouseDown: handleMouseDown, onTouchStart: handleTouchStart, onDoubleClick: handleDoubleClick, collapse } = useResizable(sidebarId, computed(() => ({
-  side: props.side,
+  side: props.side as 'left' | 'right',
   minSize: props.minSize,
   maxSize: props.maxSize,
   defaultSize: props.defaultSize,
   resizable: isResizable.value,
   collapsible: canCollapse.value,
-  collapsedSize: effectiveCollapsedSize.value,
+  collapsedSize: props.collapsedSize,
   unit: 'rem' as const,
   persistent: true,
   storage: 'cookie' as const
-})), { collapsed: desktopCollapsed })
+})))
 
 // Sync initial persisted collapsed state to open model
-if (!isMobile.value && canCollapse.value && isCollapsed.value) {
+if (canCollapse.value && isCollapsed.value) {
   modelOpen.value = false
 }
 
@@ -351,7 +348,7 @@ const menuProps = toRef(() => defu(props.menu, {
       :class="ui.root({ class: [uiProp?.root, props.class] })"
       :style="isResizable ? {
         '--sidebar-width': `${expandedWidth}rem`,
-        ...(props.collapsible === 'icon' ? { '--sidebar-width-icon': `${effectiveCollapsedSize}rem` } : {})
+        ...(props.collapsible === 'icon' ? { '--sidebar-width-icon': `${collapsedSize}rem` } : {})
       } : undefined"
     >
       <!-- Gap spacer: reserves layout space for the fixed sidebar -->
@@ -363,7 +360,7 @@ const menuProps = toRef(() => defu(props.menu, {
 
       <!-- Fixed container: the actual visible sidebar -->
       <div
-        :ref="isResizable ? (el: any) => { containerEl = el } : undefined"
+        ref="containerEl"
         data-slot="container"
         :data-state="state"
         :class="ui.container({ class: uiProp?.container })"
@@ -379,16 +376,19 @@ const menuProps = toRef(() => defu(props.menu, {
           :on-touch-start="handleTouchStart"
           :on-double-click="handleDoubleClick"
         >
-          <button
+          <component
+            :is="isResizable ? 'div' : 'button'"
             data-slot="rail"
             :data-state="state"
-            :aria-label="t('sidebar.toggle')"
+            :role="isResizable ? 'separator' : undefined"
+            :aria-orientation="isResizable ? 'vertical' : undefined"
+            :aria-label="isResizable ? undefined : t('sidebar.toggle')"
             :tabindex="-1"
             :class="ui.rail({ class: uiProp?.rail })"
             :style="railCursor ? { cursor: railCursor } : undefined"
-            @mousedown="isResizable && handleMouseDown($event)"
-            @touchstart="isResizable && handleTouchStart($event)"
-            @dblclick="isResizable && handleDoubleClick($event)"
+            @mousedown="handleMouseDown"
+            @touchstart="handleTouchStart"
+            @dblclick="handleDoubleClick"
             @click="onRailClick"
           />
         </slot>

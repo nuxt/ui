@@ -46,6 +46,7 @@ function onSubmit() {
       collapsible="icon"
       close
       rail
+      resizable
       :ui="{ container: 'relative', body: 'py-2' }"
     >
       <template #title="{ state }">

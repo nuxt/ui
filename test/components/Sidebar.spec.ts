@@ -23,6 +23,7 @@ describe('Sidebar', () => {
     ['with mode drawer', { props: { mode: 'drawer' as const, menu: { portal: false } } }],
     ...collapsibles.filter((c: string) => c !== 'none').map((collapsible: string) => [`with collapsed ${collapsible}`, { props: { open: false, collapsible } }]),
     ['with rail', { props: { rail: true, collapsible: 'icon' as const } }],
+    ['with resizable', { props: { rail: true, resizable: true, collapsible: 'icon' as const } }],
     ['with class', { props: { class: 'bg-elevated/50' } }],
     ['with ui', { props: { ui: { body: 'py-0' } } }],
     // Slots

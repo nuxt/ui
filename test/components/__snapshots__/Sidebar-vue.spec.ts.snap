@@ -334,6 +334,25 @@ exports[`Sidebar > renders with rail correctly 1`] = `
 <!--v-if-->"
 `;
 
+exports[`Sidebar > renders with resizable correctly 1`] = `
+"<!-- Non-collapsible: simple inline sidebar -->
+<!-- Collapsible: fixed sidebar with gap spacer + mobile menu -->
+<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left" class="peer [--sidebar-width:16rem] [--sidebar-width-icon:4rem] data-[dragging=true]:select-none group/sidebar hidden lg:block" style="--sidebar-width: 16rem; --sidebar-width-icon: 4rem;">
+  <!-- Gap spacer: reserves layout space for the fixed sidebar -->
+  <div data-slot="gap" data-state="expanded" class="relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-out group-data-[dragging=true]/sidebar:!duration-0 data-[state=collapsed]:w-(--sidebar-width-icon)"></div><!-- Fixed container: the actual visible sidebar -->
+  <div data-slot="container" data-state="expanded" class="fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-out lg:flex group-data-[dragging=true]/sidebar:!duration-0 left-0 border-e border-default data-[state=collapsed]:w-(--sidebar-width-icon)">
+    <div data-slot="inner" class="flex size-full flex-col overflow-hidden divide-y divide-default">
+      <!--v-if-->
+      <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 group-data-[state=collapsed]/sidebar:overflow-hidden"></div>
+      <!--v-if-->
+    </div>
+    <div data-slot="rail" data-state="expanded" role="separator" aria-orientation="vertical" tabindex="-1" class="absolute inset-y-0 z-20 hidden w-4 transition-all ease-out after:absolute after:inset-y-0 after:left-1/2 after:w-px lg:flex hover:after:bg-(--ui-border-accented) after:transition-colors end-0 translate-x-1/2 cursor-w-resize data-[state=collapsed]:cursor-e-resize" style="cursor: ew-resize;"></div>
+  </div>
+</aside>
+<!-- Mobile menu -->
+<!--v-if-->"
+`;
+
 exports[`Sidebar > renders with side left correctly 1`] = `
 "<!-- Non-collapsible: simple inline sidebar -->
 <!-- Collapsible: fixed sidebar with gap spacer + mobile menu -->
