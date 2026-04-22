@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     header: 'flex items-start gap-4 p-4 sm:p-6',
     icon: 'flex items-center justify-center shrink-0 rounded-lg',
     iconIcon: '',
-    content: 'flex-1 min-w-0 ',
+    content: 'flex-1 min-w-0',
     title: 'text-sm font-medium text-muted',
     value: 'text-2xl font-semibold text-default mt-1',
     label: 'text-xs text-muted mt-1',
