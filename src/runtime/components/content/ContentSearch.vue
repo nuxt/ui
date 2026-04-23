@@ -95,6 +95,13 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    */
   fuse?: UseFuseOptions<T>
   /**
+   * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
+   * Useful for large doc sets where running fuzzy search on every keystroke is the bottleneck — the input stays responsive while Fuse only re-runs after typing settles.
+   * Set to `0` to disable.
+   * @defaultValue 100
+   */
+  searchDelay?: number
+  /**
    * When `true`, the theme command will be added to the groups.
    * @defaultValue true
    */
@@ -127,7 +134,8 @@ const props = withDefaults(defineProps<ContentSearchProps<T>>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
-  fullscreen: false
+  fullscreen: false,
+  searchDelay: 100
 })
 const slots = defineSlots<ContentSearchSlots>()
 
@@ -140,7 +148,7 @@ const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
 const uiProp = useComponentUI('contentSearch', props)
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
+const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
 
 const getProxySlots = () => omit(slots, ['content'])
