@@ -12,43 +12,50 @@ export default defineNuxtModule((_options, nuxt) => {
       const { resolve } = process.getBuiltinModule('node:path')
       const { readFile, writeFile }
         = process.getBuiltinModule('node:fs/promises')
+      // We edit .vercel/output/config.json (Vercel Build Output API v3),
+      // NOT vercel.json — different schema. The `check: true` flag below
+      // is documented on the Source route type here:
+      // https://vercel.com/docs/build-output-api/configuration
       const vcJSON = resolve(nitro.options.output.dir, 'config.json')
       const vcConfig = JSON.parse(await readFile(vcJSON, 'utf8'))
+      // Note: the `Vary: Accept, User-Agent` header for `/docs/**` is set via
+      // Nuxt `routeRules` in `nuxt.config.ts` — Nitro's Vercel preset emits it
+      // into this same config.json, so it doesn't need to be duplicated here.
       vcConfig.routes.unshift(
-        // Add Vary header so CDNs don't serve cached HTML to agents or vice versa
-        {
-          src: '^/docs/(?!.*\\.md$).*$',
-          headers: { Vary: 'Accept, User-Agent' },
-          continue: true
-        },
         // Rewrite /docs/*.md URLs to the raw markdown handler
         {
           src: '^/docs/(.*)\\.md$',
           dest: '/raw/docs/$1.md'
         },
-        // Serve markdown for the homepage when Accept: text/markdown is requested
+        // Serve markdown for the homepage when Accept: text/markdown is requested.
+        // `check: true` re-enters routing so `/raw/index.md` (a dynamic function route,
+        // not a prerendered file) is resolved by the Nitro handler.
         {
           src: '^/$',
           dest: '/raw/index.md',
-          has: [{ type: 'header', key: 'accept', value: '(.*)text/markdown(.*)' }]
+          has: [{ type: 'header', key: 'accept', value: '(.*)text/markdown(.*)' }],
+          check: true
         },
         // Serve markdown for the homepage to known AI agent user agents
         {
           src: '^/$',
           dest: '/raw/index.md',
-          has: [{ type: 'header', key: 'user-agent', value: AGENT_UA_PATTERN }]
+          has: [{ type: 'header', key: 'user-agent', value: AGENT_UA_PATTERN }],
+          check: true
         },
         // Serve markdown when Accept: text/markdown is requested
         {
           src: '^/docs/(.*)$',
           dest: '/raw/docs/$1.md',
-          has: [{ type: 'header', key: 'accept', value: '(.*)text/markdown(.*)' }]
+          has: [{ type: 'header', key: 'accept', value: '(.*)text/markdown(.*)' }],
+          check: true
         },
         // Serve markdown to known AI agent user agents
         {
           src: '^/docs/(.*)$',
           dest: '/raw/docs/$1.md',
-          has: [{ type: 'header', key: 'user-agent', value: AGENT_UA_PATTERN }]
+          has: [{ type: 'header', key: 'user-agent', value: AGENT_UA_PATTERN }],
+          check: true
         }
       )
       await writeFile(vcJSON, JSON.stringify(vcConfig, null, 2), 'utf8')
