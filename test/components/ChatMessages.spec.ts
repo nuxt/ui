@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
-import ChatMessages from '../../src/runtime/components/ChatMessages.vue'
+import ChatMessages, { type ChatMessagesSlots } from '../../src/runtime/components/ChatMessages.vue'
 
 describe('ChatMessages', () => {
   const statuses = ['ready', 'submitted', 'streaming', 'error'] as any
@@ -42,5 +42,60 @@ describe('ChatMessages', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('forwards content slot props together with the deprecated `message`', async () => {
+    const messages = [
+      { id: 'm-1', role: 'user' as const, parts: [{ type: 'text' as const, text: 'a' }], metadata: { foo: 'bar' } },
+      { id: 'm-2', role: 'assistant' as const, parts: [{ type: 'text' as const, text: 'b' }] }
+    ]
+    const captured: Parameters<Exclude<ChatMessagesSlots['content'], undefined>>[0][] = []
+    await mountSuspended(ChatMessages, {
+      props: { messages },
+      slots: {
+        content: (slotProps) => {
+          captured.push(slotProps)
+          return 'x'
+        }
+      }
+    })
+
+    expect(captured).toHaveLength(2)
+    expect(captured[0]).toMatchObject({
+      id: 'm-1',
+      role: 'user',
+      parts: messages[0]!.parts,
+      metadata: { foo: 'bar' },
+      message: messages[0]
+    })
+    expect(captured[1]).toMatchObject({
+      id: 'm-2',
+      role: 'assistant',
+      parts: messages[1]!.parts,
+      message: messages[1]
+    })
+  })
+
+  it('forwards `message` to the actions slot', async () => {
+    const captured: Parameters<Exclude<ChatMessagesSlots['actions'], undefined>>[0][] = []
+    await mountSuspended(ChatMessages, {
+      props: {
+        ...props,
+        user: { actions: [{ icon: 'i-lucide-copy', label: 'Copy' }] },
+        assistant: { actions: [{ icon: 'i-lucide-copy', label: 'Copy' }] }
+      },
+      slots: {
+        actions: (slotProps) => {
+          captured.push(slotProps)
+          return 'x'
+        }
+      }
+    })
+
+    expect(captured.length).toBeGreaterThan(0)
+    for (const p of captured) {
+      expect(p).toHaveProperty('message')
+      expect(p).toHaveProperty('actions')
+    }
   })
 })
