@@ -420,10 +420,10 @@ import { isTextUIPart } from 'ai'
 
 <template>
   <UChatMessages :messages="messages" :status="status">
-    <template #content="{ message }">
+    <template #content="{ id, parts }">
       <template
-        v-for="(part, index) in message.parts"
-        :key="`${message.id}-${part.type}-${index}`"
+        v-for="(part, index) in parts"
+        :key="`${id}-${part.type}-${index}`"
       >
         <p v-if="isTextUIPart(part)" class="whitespace-pre-wrap">
           {{ part.text }}

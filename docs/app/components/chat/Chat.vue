@@ -282,8 +282,8 @@ defineShortcuts({
           <UChatTool icon="i-lucide-brain" text="Thinking..." streaming />
         </template>
 
-        <template #content="{ message }">
-          <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+        <template #content="{ id, role, parts }">
+          <template v-for="(part, index) in parts" :key="`${id}-${part.type}-${index}`">
             <UChatReasoning
               v-if="isReasoningUIPart(part)"
               :text="part.text"
@@ -298,11 +298,11 @@ defineShortcuts({
 
             <template v-else-if="isTextUIPart(part) && part.text.length > 0">
               <ChatComark
-                v-if="message.role === 'assistant'"
+                v-if="role === 'assistant'"
                 :markdown="part.text"
                 :streaming="isPartStreaming(part)"
               />
-              <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
+              <p v-else-if="role === 'user'" class="whitespace-pre-wrap text-sm/6">
                 {{ part.text }}
               </p>
             </template>

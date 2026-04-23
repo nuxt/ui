@@ -334,10 +334,10 @@ function onSubmit() {
     :messages="chat.messages"
     :status="chat.status"
   >
-    <template #content="{ message }">
+    <template #content="{ id, role, parts }">
       <template
-        v-for="(part, index) in message.parts"
-        :key="`${message.id}-${part.type}-${index}`"
+        v-for="(part, index) in parts"
+        :key="`${id}-${part.type}-${index}`"
       >
         <UChatReasoning
           v-if="isReasoningUIPart(part)"
@@ -360,13 +360,13 @@ function onSubmit() {
 
         <template v-else-if="isTextUIPart(part)">
           <Comark
-            v-if="message.role === 'assistant'"
+            v-if="role === 'assistant'"
             :markdown="part.text"
             :streaming="isPartStreaming(part)"
             :plugins="[highlight()]"
             class="*:first:mt-0 *:last:mb-0"
           />
-          <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+          <p v-else-if="role === 'user'" class="whitespace-pre-wrap">
             {{ part.text }}
           </p>
         </template>
@@ -418,10 +418,10 @@ function onSubmit() {
     :messages="chat.messages"
     :status="chat.status"
   >
-    <template #content="{ message }">
+    <template #content="{ id, role, parts }">
       <template
-        v-for="(part, index) in message.parts"
-        :key="`${message.id}-${part.type}-${index}`"
+        v-for="(part, index) in parts"
+        :key="`${id}-${part.type}-${index}`"
       >
         <UChatReasoning
           v-if="isReasoningUIPart(part)"
@@ -444,13 +444,13 @@ function onSubmit() {
 
         <template v-else-if="isTextUIPart(part)">
           <Comark
-            v-if="message.role === 'assistant'"
+            v-if="role === 'assistant'"
             :markdown="part.text"
             :streaming="isPartStreaming(part)"
             :plugins="[highlight()]"
             class="*:first:mt-0 *:last:mb-0"
           />
-          <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+          <p v-else-if="role === 'user'" class="whitespace-pre-wrap">
             {{ part.text }}
           </p>
         </template>
