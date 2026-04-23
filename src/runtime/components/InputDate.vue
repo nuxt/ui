@@ -119,6 +119,51 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputDate ||
 
 const inputsRef = ref<ComponentPublicInstance[]>([])
 
+const isComposing = ref(false)
+
+function onCompositionStart() {
+  isComposing.value = true
+}
+
+function onCompositionEnd(event: Event) {
+  isComposing.value = false
+  const target = event.target as HTMLInputElement
+  const data = (event as CompositionEvent).data
+
+  if (target && data) {
+    // Dispatch fake keydown and input events for reka-ui to recognize numeric input during IME composition.
+    for (const char of data) {
+      target.dispatchEvent(new KeyboardEvent('keydown', {
+        key: char,
+        code: `Digit${char}`,
+        bubbles: true,
+        cancelable: true
+      }))
+
+      target.dispatchEvent(new InputEvent('input', {
+        data: char,
+        bubbles: true,
+        cancelable: true
+      }))
+    }
+  }
+}
+
+function onKeydown(event: KeyboardEvent) {
+  // Prevent IME keydown (229) from interfering with reka-ui's segment logic.
+  if (isComposing.value || event.keyCode === 229) {
+    event.stopPropagation()
+    event.stopImmediatePropagation()
+  }
+}
+
+function onInput(event: Event) {
+  // Prevent browser from inserting characters directly into segments during IME composition.
+  if (isComposing.value || (event as InputEvent).isComposing) {
+    event.stopImmediatePropagation()
+  }
+}
+
 function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
   // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
   inputsRef.value[index] = el
@@ -173,6 +218,10 @@ defineExpose({
       data-slot="segment"
       :class="ui.segment({ class: uiProp?.segment })"
       :data-segment="segment.part"
+      @input.capture="onInput"
+      @keydown.capture="onKeydown"
+      @compositionstart="onCompositionStart"
+      @compositionend="onCompositionEnd"
     >
       {{ segment.value.trim() }}
     </DateField.Input>

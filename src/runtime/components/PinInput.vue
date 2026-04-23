@@ -89,6 +89,30 @@ function setInputRef(index: number, el: Element | ComponentPublicInstance | null
   inputsRef.value[index] = el
 }
 
+const isComposing = ref(false)
+
+function onCompositionStart() {
+  isComposing.value = true
+}
+
+function onCompositionEnd(event: Event) {
+  isComposing.value = false
+  // Some browsers may not fire an input event after compositionend, or reka-ui might miss it.
+  // We manually dispatch an input event to ensure reka-ui receives the final value.
+  const target = event.target as HTMLInputElement
+  if (target) {
+    target.dispatchEvent(new Event('input', { bubbles: true }))
+  }
+}
+
+function onInput(event: Event) {
+  // Prevent reka-ui from shifting focus too early during IME composition,
+  // which causes subsequent characters to be entered into the next input field.
+  if (isComposing.value || (event as InputEvent).isComposing) {
+    event.stopImmediatePropagation()
+  }
+}
+
 const completed = ref(false)
 function onComplete(value: string[] | number[]) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -144,6 +168,9 @@ defineExpose({
       :disabled="disabled"
       @blur="onBlur"
       @focus="emitFormFocus"
+      @input.capture="onInput"
+      @compositionstart="onCompositionStart"
+      @compositionend="onCompositionEnd"
     />
   </PinInputRoot>
 </template>
