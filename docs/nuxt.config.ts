@@ -67,6 +67,22 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    // Agent discovery Link headers on the homepage (RFC 8288, RFC 9727)
+    '/': {
+      headers: {
+        Link: [
+          '</sitemap.xml>; rel="sitemap"; type="application/xml"',
+          '</sitemap.md>; rel="describedby"; type="text/markdown"',
+          '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
+          '</.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json"',
+          '</docs>; rel="service-doc"; type="text/html"',
+          '</llms.txt>; rel="describedby"; type="text/plain"',
+          '</llms-full.txt>; rel="describedby"; type="text/plain"',
+          '</>; rel="alternate"; type="text/markdown"'
+        ].join(', '),
+        Vary: 'Accept, User-Agent'
+      }
+    },
     '/docs/**': { headers: { Vary: 'Accept, User-Agent' } },
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
