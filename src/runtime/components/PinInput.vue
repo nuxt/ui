@@ -39,6 +39,11 @@ export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<Pin
   highlight?: boolean
   /** Keep the mobile text size on all breakpoints. */
   fixed?: boolean
+  /**
+   * Group inputs by inserting a separator after every Nth input.
+   * @example 3 // Insert a separator after every 3rd input → [X][X][X] • [X][X][X]
+   */
+  separator?: number
   class?: any
   ui?: PinInput['slots']
 }
@@ -113,6 +118,12 @@ function autoFocus() {
   }
 }
 
+function shouldInsertSeparator(index: number) {
+  return props.separator !== undefined
+    && (index + 1) % props.separator === 0
+    && (index + 1) < looseToNumber(props.length)
+}
+
 onMounted(() => {
   setTimeout(() => {
     autoFocus()
@@ -137,16 +148,24 @@ defineExpose({
     @update:model-value="emitFormInput()"
     @complete="onComplete"
   >
-    <PinInputInput
-      v-for="(ids, index) in looseToNumber(props.length)"
-      :key="ids"
-      :ref="el => setInputRef(index as number, el)"
-      :index="(index as number)"
-      data-slot="base"
-      :class="ui.base({ class: props.ui?.base })"
-      :disabled="disabled"
-      @blur="onBlur"
-      @focus="emitFormFocus"
-    />
+    <template v-for="(ids, index) in looseToNumber(props.length)" :key="ids">
+      <PinInputInput
+        :ref="el => setInputRef(index as number, el)"
+        :index="(index as number)"
+        data-slot="base"
+        :class="ui.base({ class: props.ui?.base })"
+        :disabled="disabled"
+        @blur="onBlur"
+        @focus="emitFormFocus"
+      />
+      <span
+        v-if="shouldInsertSeparator(index as number)"
+        data-slot="separator"
+        aria-hidden="true"
+        :class="ui.separator({ class: props.ui?.separator })"
+      >
+        <slot name="separator">•</slot>
+      </span>
+    </template>
   </PinInputRoot>
 </template>

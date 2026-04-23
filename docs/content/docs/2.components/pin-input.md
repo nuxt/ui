@@ -170,11 +170,38 @@ props:
 ---
 ::
 
+### Separator :badge{label="Soon" class="align-text-top"}
+
+Use the `separator` prop to insert a seperator between specific input fields. Pass a number indicating after which position to insert a seperator.
+
+::component-code
+---
+ignore:
+  - placeholder
+props:
+  length: 6
+  placeholder: '○'
+  separator: 3
+---
+::
+
+Use the `separator` slot to customize the separator appearance:
+
+::component-example
+---
+name: 'pin-input-separator-example'
+---
+::
+
 ## API
 
 ### Props
 
 :component-props
+
+### Slots
+
+:component-slots
 
 ### Emits
 
