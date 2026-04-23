@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { UIMessage, FileUIPart } from 'ai'
+import type { UIDataTypes, UIMessage, UITools, FileUIPart } from 'ai'
 import theme from '#build/ui/chat-message'
 import type { AvatarProps, ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatMessage = ComponentConfig<typeof theme, AppConfig, 'chatMessage'>
 
-export interface ChatMessageProps extends UIMessage {
+export interface ChatMessageProps<TMetadata = unknown, TDataParts extends UIDataTypes = UIDataTypes, TTools extends UITools = UITools> extends UIMessage<TMetadata, TDataParts, TTools> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'article'
@@ -32,7 +32,7 @@ export interface ChatMessageProps extends UIMessage {
    * The `label` will be used in a tooltip.
    * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  actions?: (Omit<ButtonProps, 'onClick'> & { onClick?: (e: MouseEvent, message: UIMessage) => void })[]
+  actions?: (Omit<ButtonProps, 'onClick'> & { onClick?: (e: MouseEvent, message: UIMessage<TMetadata, TDataParts, TTools>) => void })[]
   /**
    * Render the message in a compact style.
    * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
@@ -48,15 +48,15 @@ export interface ChatMessageProps extends UIMessage {
   ui?: ChatMessage['slots']
 }
 
-export interface ChatMessageSlots {
-  leading?(props: { avatar: ChatMessageProps['avatar'], ui: ChatMessage['ui'] }): VNode[]
+export interface ChatMessageSlots<TMetadata = unknown, TDataParts extends UIDataTypes = UIDataTypes, TTools extends UITools = UITools> {
+  leading?(props: { avatar: ChatMessageProps<TMetadata, TDataParts, TTools>['avatar'], ui: ChatMessage['ui'] }): VNode[]
   files?(props: { parts: FileUIPart[] }): VNode[]
-  content?(props: ChatMessageProps): VNode[]
-  actions?(props: { actions: ChatMessageProps['actions'] }): VNode[]
+  content?(props: UIMessage<TMetadata, TDataParts, TTools> & { content?: string }): VNode[]
+  actions?(props: { actions: ChatMessageProps<TMetadata, TDataParts, TTools>['actions'] }): VNode[]
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="TMetadata, TDataParts extends UIDataTypes, TTools extends UITools">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
@@ -68,15 +68,17 @@ import UTooltip from './Tooltip.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 
-const props = withDefaults(defineProps<ChatMessageProps>(), {
+const props = withDefaults(defineProps<ChatMessageProps<TMetadata, TDataParts, TTools>>(), {
   as: 'article'
 })
-const slots = defineSlots<ChatMessageSlots>()
+const slots = defineSlots<ChatMessageSlots<TMetadata, TDataParts, TTools>>()
 
 const appConfig = useAppConfig() as ChatMessage['AppConfig']
 const uiProp = useComponentUI('chatMessage', props)
 
 const fileParts = computed(() => props.parts?.filter((part): part is FileUIPart => part.type === 'file') ?? [])
+
+const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'side', 'actions', 'compact', 'class', 'ui']))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage || {}) })({
   variant: props.variant,
@@ -102,19 +104,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
       </div>
 
       <div v-if="content || parts.length || !!slots.content" data-slot="content" :class="ui.content({ class: uiProp?.content })">
-        <slot
-          :id="id"
-          name="content"
-          :role="role"
-          :content="content"
-          :parts="parts"
-        >
+        <slot name="content" v-bind="messageProps">
           <template v-if="content">
             {{ content }}
           </template>
           <template v-else>
             <template v-for="(part, index) in parts" :key="`${id}-${part.type}-${index}`">
-              <template v-if="part.type === 'text'">
+              <template v-if="part.type === 'text' && 'text' in part">
                 {{ part.text }}
               </template>
             </template>

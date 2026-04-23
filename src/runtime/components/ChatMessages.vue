@@ -2,15 +2,15 @@
 <script lang="ts">
 import type { ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { UIMessage, ChatStatus } from 'ai'
+import type { UIDataTypes, UIMessage, UITools, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
 import type { ButtonProps, ChatMessageProps, ChatMessageSlots, IconProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
 
-export interface ChatMessagesProps {
-  messages?: UIMessage[]
+export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
+  messages?: T
   status?: ChatStatus
   /**
    * Whether to automatically scroll to the bottom when a message is streaming.
@@ -59,22 +59,40 @@ export interface ChatMessagesProps {
   ui?: ChatMessages['slots']
 }
 
-type ExtendSlotWithVersion<K extends keyof ChatMessageSlots>
-  = Required<ChatMessageSlots>[K] extends (props: infer P) => VNode[]
-    ? (props: P & { message: UIMessage }) => VNode[]
-    : Required<ChatMessageSlots>[K]
+type SlotBase<T extends UIMessage[]>
+  = T[number] extends UIMessage<infer M, infer D, infer U>
+    ? ChatMessageSlots<M, D, U>
+    : ChatMessageSlots<unknown, UIDataTypes, UITools>
 
-export type ChatMessagesSlots = {
-  [K in keyof ChatMessageSlots]?: ExtendSlotWithVersion<K>
-} & {
+type WithMessage<T extends UIMessage[], Slot>
+  = Slot extends (props: infer P) => VNode[]
+    ? (props: P & {
+      /**
+       * @deprecated The enclosing message will stop being attached to slot scopes in a future release.
+       * @example
+       * ```vue
+       * <UChatMessages :messages="messages">
+       *   <template #content="{ id, role, parts, metadata }">
+       *     ...
+       *   </template>
+       * </UChatMessages>
+       * ```
+       */
+        message: T[number]
+      }) => VNode[]
+    : Slot
+
+export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
   default?(props?: {}): VNode[]
   indicator?(props: { ui: ChatMessages['ui'] }): VNode[]
   viewport?(props: { ui: ChatMessages['ui'], onClick: () => void }): VNode[]
+} & {
+  [K in keyof ChatMessageSlots]?: WithMessage<T, NonNullable<SlotBase<T>[K]>>
 }
 
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends UIMessage[] = UIMessage[]">
 import { ref, computed, watch, nextTick, toRef, onMounted } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'
@@ -86,13 +104,13 @@ import { tv } from '../utils/tv'
 import UChatMessage from './ChatMessage.vue'
 import UButton from './Button.vue'
 
-const props = withDefaults(defineProps<ChatMessagesProps>(), {
+const props = withDefaults(defineProps<ChatMessagesProps<T>>(), {
   autoScroll: true,
   shouldAutoScroll: false,
   shouldScrollToBottom: true,
   spacingOffset: 0
 })
-const slots = defineSlots<ChatMessagesSlots>()
+const slots = defineSlots<ChatMessagesSlots<T>>()
 
 const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
 
@@ -318,7 +336,7 @@ onMounted(() => {
           :compact="compact"
         >
           <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
-            <slot :name="name" v-bind="(slotData as any)" :message="message" />
+            <slot :name="name" v-bind="{ ...(slotData as any), message }" />
           </template>
         </UChatMessage>
       </template>
