@@ -225,6 +225,27 @@ export default defineNuxtConfig({
     }
   },
 
+  vite: {
+    optimizeDeps: {
+      include: [
+        'tailwindcss/colors',
+        'ai',
+        '@ai-sdk/vue',
+        'prettier',
+        'tailwind-variants',
+        '@comark/vue',
+        '@comark/vue/plugins/highlight',
+        'vaul-vue',
+        '@vueuse/integrations/useFuse',
+        '@floating-ui/dom',
+        '@tiptap/vue-3',
+        '@tiptap/suggestion',
+        '@tiptap/pm/state',
+        'shiki-transformer-color-highlight'
+      ]
+    }
+  },
+
   a11y: {
     logIssues: false
   },
