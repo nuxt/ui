@@ -9,6 +9,11 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
 
+type PropsBase<T extends UIMessage[]>
+  = T[number] extends UIMessage<infer M, infer D, infer U>
+    ? ChatMessageProps<M, D, U>
+    : ChatMessageProps<unknown, UIDataTypes, UITools>
+
 export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
   messages?: T
   status?: ChatStatus
@@ -38,12 +43,12 @@ export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
    * The `user` messages props.
    * `{ side: 'right', variant: 'soft' }`{lang="ts-type"}
    */
-  user?: Pick<ChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'ui'>
+  user?: Pick<PropsBase<T>, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'ui'>
   /**
    * The `assistant` messages props.
    * `{ side: 'left', variant: 'naked' }`{lang="ts-type"}
    */
-  assistant?: Pick<ChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'ui'>
+  assistant?: Pick<PropsBase<T>, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'ui'>
   /**
    * Render the messages in a compact style.
    * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
