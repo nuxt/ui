@@ -127,7 +127,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
               variant="ghost"
               v-bind="omit(action, ['onClick'])"
               :label="undefined"
-              @click="typeof action.onClick === 'function' ? action.onClick($event, props) : undefined"
+              @click="typeof action.onClick === 'function' ? action.onClick($event, messageProps) : undefined"
             />
           </UTooltip>
         </slot>
