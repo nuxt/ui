@@ -127,20 +127,25 @@ function onCompositionStart() {
 
 function onCompositionEnd(event: Event) {
   isComposing.value = false
-  const target = event.target as HTMLInputElement
   const data = (event as CompositionEvent).data
 
-  if (target && data) {
-    // Dispatch fake keydown and input events for reka-ui to recognize numeric input during IME composition.
+  if (data) {
+    // Process each character from IME composition by dispatching fake events.
+    // We use document.activeElement to follow potential focus shifts between segments.
     for (const char of data) {
-      target.dispatchEvent(new KeyboardEvent('keydown', {
+      if (!/^\d$/.test(char)) continue
+
+      const currentTarget = document.activeElement as HTMLInputElement
+      if (!currentTarget) break
+
+      currentTarget.dispatchEvent(new KeyboardEvent('keydown', {
         key: char,
         code: `Digit${char}`,
         bubbles: true,
         cancelable: true
       }))
 
-      target.dispatchEvent(new InputEvent('input', {
+      currentTarget.dispatchEvent(new InputEvent('input', {
         data: char,
         bubbles: true,
         cancelable: true

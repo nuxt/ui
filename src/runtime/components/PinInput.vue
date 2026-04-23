@@ -97,10 +97,12 @@ function onCompositionStart() {
 
 function onCompositionEnd(event: Event) {
   isComposing.value = false
-  // Some browsers may not fire an input event after compositionend, or reka-ui might miss it.
-  // We manually dispatch an input event to ensure reka-ui receives the final value.
+  // Some browsers (like Chrome/Safari) may not fire an input event after compositionend.
+  // Firefox DOES fire a native input event after compositionend, so we must skip the synthetic dispatch.
+  const isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().includes('firefox')
+
   const target = event.target as HTMLInputElement
-  if (target) {
+  if (target && !isFirefox) {
     target.dispatchEvent(new Event('input', { bubbles: true }))
   }
 }
