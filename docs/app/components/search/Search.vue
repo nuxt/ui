@@ -31,6 +31,6 @@ watchDebounced(searchTerm, (term) => {
     :files="files"
     :groups="groups"
     :navigation="navigation"
-    :fuse="{ resultLimit: 115 }"
+    :fuse="{ resultLimit: 30 }"
   />
 </template>
