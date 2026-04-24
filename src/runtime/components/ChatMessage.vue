@@ -49,10 +49,10 @@ export interface ChatMessageProps<TMetadata = unknown, TDataParts extends UIData
 }
 
 export interface ChatMessageSlots<TMetadata = unknown, TDataParts extends UIDataTypes = UIDataTypes, TTools extends UITools = UITools> {
-  leading?(props: { avatar: ChatMessageProps<TMetadata, TDataParts, TTools>['avatar'], ui: ChatMessage['ui'] }): VNode[]
-  files?(props: { parts: FileUIPart[] }): VNode[]
+  leading?(props: UIMessage<TMetadata, TDataParts, TTools> & { avatar: ChatMessageProps<TMetadata, TDataParts, TTools>['avatar'], ui: ChatMessage['ui'] }): VNode[]
+  files?(props: Omit<UIMessage<TMetadata, TDataParts, TTools>, 'parts'> & { parts: FileUIPart[] }): VNode[]
   content?(props: UIMessage<TMetadata, TDataParts, TTools> & { content?: string }): VNode[]
-  actions?(props: { actions: ChatMessageProps<TMetadata, TDataParts, TTools>['actions'] }): VNode[]
+  actions?(props: UIMessage<TMetadata, TDataParts, TTools> & { actions: ChatMessageProps<TMetadata, TDataParts, TTools>['actions'] }): VNode[]
 }
 </script>
 
@@ -92,12 +92,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
 <template>
   <Primitive :as="as" :data-role="role" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
     <div v-if="!!slots.files && fileParts.length" data-slot="files" :class="ui.files({ class: uiProp?.files })">
-      <slot name="files" :parts="fileParts" />
+      <slot name="files" v-bind="{ ...messageProps, parts: fileParts }" />
     </div>
 
     <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
       <div v-if="icon || avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
-        <slot name="leading" :avatar="avatar" :ui="ui">
+        <slot name="leading" v-bind="{ ...messageProps, avatar, ui }">
           <UIcon v-if="icon" :name="icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
           <UAvatar v-else-if="avatar" :size="((uiProp?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: uiProp?.leadingAvatar })" />
         </slot>
@@ -119,7 +119,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
       </div>
 
       <div v-if="actions || !!slots.actions" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
-        <slot name="actions" :actions="actions">
+        <slot name="actions" v-bind="{ ...messageProps, actions }">
           <UTooltip v-for="(action, index) in actions" :key="index" :text="action.label">
             <UButton
               size="sm"
