@@ -138,8 +138,8 @@ function onSubmit() {
     <template #body>
       <UContainer>
         <UChatMessages :messages="chat.messages" :status="chat.status">
-          <template #content="{ id, role, parts }">
-            <template v-for="(part, index) in parts" :key="`${id}-${part.type}-${index}`">
+          <template #content="{ message }">
+            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
               <UChatReasoning
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
@@ -161,13 +161,13 @@ function onSubmit() {
 
               <template v-else-if="isTextUIPart(part)">
                 <Comark
-                  v-if="role === 'assistant'"
+                  v-if="message.role === 'assistant'"
                   :markdown="part.text"
                   :streaming="isPartStreaming(part)"
                   :plugins="[highlight()]"
                   class="*:first:mt-0 *:last:mb-0"
                 />
-                <p v-else-if="role === 'user'" class="whitespace-pre-wrap">
+                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
                   {{ part.text }}
                 </p>
               </template>

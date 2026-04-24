@@ -57,17 +57,17 @@ const ui = {
             :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const } }"
             :assistant="{ icon: 'i-lucide-bot' }"
           >
-            <template #content="{ id, role, parts }">
-              <template v-for="(part, index) in parts" :key="`${id}-${part.type}-${index}`">
+            <template #content="{ message }">
+              <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
                 <template v-if="isTextUIPart(part)">
                   <Comark
-                    v-if="role === 'assistant'"
+                    v-if="message.role === 'assistant'"
                     :markdown="part.text"
                     :streaming="isPartStreaming(part)"
                     :plugins="[highlight()]"
                     class="*:first:mt-0 *:last:mb-0"
                   />
-                  <p v-else-if="role === 'user'" class="whitespace-pre-wrap leading-6">
+                  <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap leading-6">
                     {{ part.text }}
                   </p>
                 </template>
