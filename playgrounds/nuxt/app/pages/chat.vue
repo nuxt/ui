@@ -6,12 +6,14 @@ import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import { Comark } from '@comark/vue'
 import highlight from '@comark/vue/plugins/highlight'
 
+type MyMessage = UIMessage & { createdAt: Date }
+
 const toast = useToast()
 
-const messages: UIMessage[] = []
+const messages: MyMessage[] = []
 const input = ref('')
 
-const chat = new Chat({
+const chat = new Chat<MyMessage>({
   messages,
   onError(error) {
     let message = error.message
@@ -80,6 +82,9 @@ function getFaviconUrl(url: string): string {
       :spacing-offset="48"
     >
       <template #content="{ message }">
+        <span class="block text-xs text-muted">
+          {{ message.createdAt.toLocaleTimeString() }}
+        </span>
         <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
           <UChatReasoning
             v-if="isReasoningUIPart(part)"

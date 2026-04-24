@@ -9,8 +9,8 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
 
-export interface ChatMessagesProps {
-  messages?: UIMessage[]
+export interface ChatMessagesProps<T extends UIMessage = UIMessage> {
+  messages?: T[]
   status?: ChatStatus
   /**
    * Whether to automatically scroll to the bottom when a message is streaming.
@@ -59,13 +59,13 @@ export interface ChatMessagesProps {
   ui?: ChatMessages['slots']
 }
 
-type ExtendSlotWithVersion<K extends keyof ChatMessageSlots>
+type ExtendSlotWithVersion<K extends keyof ChatMessageSlots, TMessage extends UIMessage>
   = Required<ChatMessageSlots>[K] extends (props: infer P) => VNode[]
-    ? (props: P & { message: UIMessage }) => VNode[]
+    ? (props: P & { message: TMessage }) => VNode[]
     : Required<ChatMessageSlots>[K]
 
-export type ChatMessagesSlots = {
-  [K in keyof ChatMessageSlots]?: ExtendSlotWithVersion<K>
+export type ChatMessagesSlots<T extends UIMessage = UIMessage> = {
+  [K in keyof ChatMessageSlots]?: ExtendSlotWithVersion<K, T>
 } & {
   default?(props?: {}): VNode[]
   indicator?(props: { ui: ChatMessages['ui'] }): VNode[]
@@ -74,7 +74,7 @@ export type ChatMessagesSlots = {
 
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends UIMessage = UIMessage">
 import { ref, computed, watch, nextTick, toRef, onMounted } from 'vue'
 import { Presence } from 'reka-ui'
 import { defu } from 'defu'
@@ -86,13 +86,13 @@ import { tv } from '../utils/tv'
 import UChatMessage from './ChatMessage.vue'
 import UButton from './Button.vue'
 
-const props = withDefaults(defineProps<ChatMessagesProps>(), {
+const props = withDefaults(defineProps<ChatMessagesProps<T>>(), {
   autoScroll: true,
   shouldAutoScroll: false,
   shouldScrollToBottom: true,
   spacingOffset: 0
 })
-const slots = defineSlots<ChatMessagesSlots>()
+const slots = defineSlots<ChatMessagesSlots<T>>()
 
 const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
 
@@ -313,7 +313,7 @@ onMounted(() => {
       <template v-for="message in messages" :key="message.id">
         <UChatMessage
           v-if="message.parts?.length"
-          v-bind="{ ...(message.role === 'user' ? userProps : assistantProps), ...message }"
+          v-bind="{ ...(message.role === 'user' ? userProps : assistantProps), ...(message as UIMessage) }"
           :ref="el => registerMessageRef(message.id, el as ComponentPublicInstance)"
           :compact="compact"
         >
