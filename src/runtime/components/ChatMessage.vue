@@ -79,7 +79,7 @@ const uiProp = useComponentUI('chatMessage', props)
 const fileParts = computed(() => props.parts?.filter((part): part is FileUIPart => part.type === 'file') ?? [])
 const textParts = computed(() => props.parts?.filter((part): part is TextUIPart => part.type === 'text') ?? [])
 
-const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'side', 'actions', 'compact', 'class', 'ui']))
+const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'side', 'actions', 'compact', 'class', 'ui', 'content']))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage || {}) })({
   variant: props.variant,
@@ -104,8 +104,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
         </slot>
       </div>
 
-      <div v-if="content || parts.length || !!slots.content" data-slot="content" :class="ui.content({ class: uiProp?.content })">
-        <slot name="content" v-bind="messageProps">
+      <div v-if="content || textParts.length || !!slots.content" data-slot="content" :class="ui.content({ class: uiProp?.content })">
+        <slot name="content" v-bind="{ ...messageProps, content }">
           <template v-if="content">
             {{ content }}
           </template>
