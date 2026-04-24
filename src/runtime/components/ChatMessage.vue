@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { UIDataTypes, UIMessage, UITools, FileUIPart } from 'ai'
+import type { UIDataTypes, UIMessage, UITools, FileUIPart, TextUIPart } from 'ai'
 import theme from '#build/ui/chat-message'
 import type { AvatarProps, ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
@@ -77,6 +77,7 @@ const appConfig = useAppConfig() as ChatMessage['AppConfig']
 const uiProp = useComponentUI('chatMessage', props)
 
 const fileParts = computed(() => props.parts?.filter((part): part is FileUIPart => part.type === 'file') ?? [])
+const textParts = computed(() => props.parts?.filter((part): part is TextUIPart => part.type === 'text') ?? [])
 
 const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'side', 'actions', 'compact', 'class', 'ui']))
 
@@ -109,10 +110,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
             {{ content }}
           </template>
           <template v-else>
-            <template v-for="(part, index) in parts" :key="`${id}-${part.type}-${index}`">
-              <template v-if="part.type === 'text' && 'text' in part">
-                {{ part.text }}
-              </template>
+            <template v-for="(part, index) in textParts" :key="`${id}-${part.type}-${index}`">
+              {{ part.text }}
             </template>
           </template>
         </slot>
