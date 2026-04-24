@@ -9,10 +9,15 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
 
-type PropsBase<T extends UIMessage[]>
+type MessageBase<T extends UIMessage[]>
   = T[number] extends UIMessage<infer M, infer D, infer U>
+    ? UIMessage<M, D, U>
+    : UIMessage<unknown, UIDataTypes, UITools>
+
+type PropsBase<T extends UIMessage[]>
+  = MessageBase<T> extends UIMessage<infer M, infer D, infer U>
     ? ChatMessageProps<M, D, U>
-    : ChatMessageProps<unknown, UIDataTypes, UITools>
+    : never
 
 export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
   messages?: T
@@ -63,11 +68,6 @@ export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
   class?: any
   ui?: ChatMessages['slots']
 }
-
-type MessageBase<T extends UIMessage[]>
-  = T[number] extends UIMessage<infer M, infer D, infer U>
-    ? UIMessage<M, D, U>
-    : UIMessage<unknown, UIDataTypes, UITools>
 
 export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
   default?(props?: {}): VNode[]
