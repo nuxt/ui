@@ -84,6 +84,11 @@ export default defineNuxtConfig({
       }
     },
     '/docs/**': { headers: { Vary: 'Accept, User-Agent' } },
+    // Our markdown rewrites (see `modules/md-rewrite.ts`) internally route
+    // `/` and `/docs/**` to `/raw/**`, so the `Vary` rules above no longer
+    // match the rewritten path. This rule re-applies it on the actual
+    // served response.
+    '/raw/**': { headers: { Vary: 'Accept, User-Agent' } },
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
@@ -213,13 +218,16 @@ export default defineNuxtConfig({
     }],
     prerender: {
       routes: [
+        '/',
         '/docs/getting-started',
+        // Prerender the homepage markdown so Vercel's filesystem check after the
+        // `/` → `/raw/index.md` rewrite (see `modules/md-rewrite.ts`) resolves
+        // to a static file, the same way `/docs/*.md` does.
+        '/raw/index.md',
         '/api/countries.json',
         '/api/phone-codes.json',
         '/api/locales.json',
         '/api/module.json'
-        // '/api/github/pulls.json',
-        // '/api/github/releases.json'
       ],
       crawlLinks: true
     }

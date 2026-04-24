@@ -42,9 +42,9 @@ Nuxt UI is a free and open source Vue UI library powered by [Reka UI](https://re
 
 ## Explore
 
-- Documentation: <${DOMAIN}/docs.md>
+- Getting started: <${DOMAIN}/docs/getting-started.md>
 - Components: <${DOMAIN}/docs/components.md>
-- Composables: <${DOMAIN}/docs/composables.md>
+- Composables: <${DOMAIN}/docs/composables/define-shortcuts.md>
 - Typography: <${DOMAIN}/docs/typography.md>
 - Sitemap: <${DOMAIN}/sitemap.md>
 - LLMs index: <${DOMAIN}/llms.txt>
