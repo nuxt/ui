@@ -64,35 +64,19 @@ export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
   ui?: ChatMessages['slots']
 }
 
-type SlotBase<T extends UIMessage[]>
+type MessageBase<T extends UIMessage[]>
   = T[number] extends UIMessage<infer M, infer D, infer U>
-    ? ChatMessageSlots<M, D, U>
-    : ChatMessageSlots<unknown, UIDataTypes, UITools>
-
-type WithMessage<T extends UIMessage[], Slot>
-  = Slot extends (props: infer P) => VNode[]
-    ? (props: P & {
-      /**
-       * @deprecated The enclosing message will stop being attached to slot scopes in a future release.
-       * @example
-       * ```vue
-       * <UChatMessages :messages="messages">
-       *   <template #content="{ id, role, parts, metadata }">
-       *     ...
-       *   </template>
-       * </UChatMessages>
-       * ```
-       */
-        message: T[number]
-      }) => VNode[]
-    : Slot
+    ? UIMessage<M, D, U>
+    : UIMessage<unknown, UIDataTypes, UITools>
 
 export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
   default?(props?: {}): VNode[]
   indicator?(props: { ui: ChatMessages['ui'] }): VNode[]
   viewport?(props: { ui: ChatMessages['ui'], onClick: () => void }): VNode[]
 } & {
-  [K in keyof ChatMessageSlots]?: WithMessage<T, NonNullable<SlotBase<T>[K]>>
+  [K in keyof ChatMessageSlots]?: NonNullable<ChatMessageSlots[K]> extends (props: infer P) => VNode[]
+    ? (props: P & { message: MessageBase<T> }) => VNode[]
+    : never
 }
 
 </script>

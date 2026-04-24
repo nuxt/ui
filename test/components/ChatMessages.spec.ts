@@ -44,7 +44,7 @@ describe('ChatMessages', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
-  it('forwards content slot props together with the deprecated `message`', async () => {
+  it('forwards content slot props together with `message`', async () => {
     const messages = [
       { id: 'm-1', role: 'user' as const, parts: [{ type: 'text' as const, text: 'a' }], metadata: { foo: 'bar' } },
       { id: 'm-2', role: 'assistant' as const, parts: [{ type: 'text' as const, text: 'b' }] }
