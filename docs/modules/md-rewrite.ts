@@ -18,9 +18,11 @@ export default defineNuxtModule((_options, nuxt) => {
       // https://vercel.com/docs/build-output-api/configuration
       const vcJSON = resolve(nitro.options.output.dir, 'config.json')
       const vcConfig = JSON.parse(await readFile(vcJSON, 'utf8'))
-      // Note: the `Vary: Accept, User-Agent` header for `/docs/**` is set via
-      // Nuxt `routeRules` in `nuxt.config.ts` — Nitro's Vercel preset emits it
-      // into this same config.json, so it doesn't need to be duplicated here.
+      // Note: `Vary: Accept, User-Agent` is set on all served responses via
+      // `/` and `/docs/**` (for HTML) and `/raw/**` (for the rewritten
+      // markdown responses) routeRules in `nuxt.config.ts` — Nitro's Vercel
+      // preset emits them into this same config.json, so they don't need to
+      // be duplicated here.
       vcConfig.routes.unshift(
         // Rewrite /docs/*.md URLs to the raw markdown handler
         {

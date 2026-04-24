@@ -84,6 +84,11 @@ export default defineNuxtConfig({
       }
     },
     '/docs/**': { headers: { Vary: 'Accept, User-Agent' } },
+    // Our markdown rewrites (see `modules/md-rewrite.ts`) internally route
+    // `/` and `/docs/**` to `/raw/**`, so the `Vary` rules above no longer
+    // match the rewritten path. This rule re-applies it on the actual
+    // served response.
+    '/raw/**': { headers: { Vary: 'Accept, User-Agent' } },
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
