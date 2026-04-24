@@ -186,6 +186,13 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @defaultValue false
    */
   preserveGroupOrder?: boolean
+  /**
+   * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
+   * Useful when indexing large datasets where fuzzy search becomes the bottleneck — the input stays responsive while Fuse and the result pipeline only re-run after typing settles.
+   * Set to `0` (the default) to disable.
+   * @defaultValue 0
+   */
+  searchDelay?: number
   class?: any
   ui?: CommandPalette['slots']
 }
@@ -219,7 +226,7 @@ export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteIte
 import { computed, ref, useTemplateRef, toRef } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
-import { reactivePick, createReusableTemplate, refThrottled } from '@vueuse/core'
+import { reactivePick, createReusableTemplate, refDebounced, refThrottled } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
@@ -248,7 +255,8 @@ const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   back: true,
   preserveGroupOrder: false,
   virtualize: false,
-  highlightOnHover: true
+  highlightOnHover: true,
+  searchDelay: 0
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<T, G>>()
@@ -317,7 +325,12 @@ const items = computed(() => groups.value?.filter((group) => {
   return true
 })?.flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || [])
 
-const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
+// Opt-in debounce for the value piped into Fuse. Default `0` short-circuits inside `refDebounced`
+// so generic uses (menus, pickers) stay effectively instant, while large consumers (e.g. ContentSearch)
+// can opt in to avoid running fuzzy search on every keystroke.
+const fuseSearchTerm = refDebounced(searchTerm, () => props.searchDelay)
+
+const { results: fuseResults } = useFuse<typeof items.value[number]>(fuseSearchTerm, items, fuse)
 
 const throttledFuseResults = refThrottled(fuseResults, 16, true)
 
@@ -325,7 +338,7 @@ function processGroupItems(group: G, items: (T & { matches?: FuseResult<T>['matc
   let processedItems = items
 
   if (group?.postFilter && typeof group.postFilter === 'function') {
-    processedItems = group.postFilter(searchTerm.value, processedItems)
+    processedItems = group.postFilter(fuseSearchTerm.value, processedItems)
   }
 
   return {
@@ -333,8 +346,8 @@ function processGroupItems(group: G, items: (T & { matches?: FuseResult<T>['matc
     items: processedItems.slice(0, fuse.value.resultLimit).map((item) => {
       return {
         ...item,
-        labelHtml: highlight<T>(item, searchTerm.value, props.labelKey),
-        suffixHtml: highlight<T>(item, searchTerm.value, undefined, [props.labelKey])
+        labelHtml: highlight<T>(item, fuseSearchTerm.value, props.labelKey),
+        suffixHtml: highlight<T>(item, fuseSearchTerm.value, undefined, [props.labelKey])
       }
     })
   }
