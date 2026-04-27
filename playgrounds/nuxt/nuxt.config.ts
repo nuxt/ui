@@ -13,5 +13,17 @@ export default defineNuxtConfig({
     '/docs/components/**': { redirect: { to: '/components/**', statusCode: 301 }, prerender: false }
   },
 
-  compatibilityDate: '2024-07-09'
+  compatibilityDate: '2024-07-09',
+
+  vite: {
+    optimizeDeps: {
+      include: [
+        '@vueuse/core',
+        'tailwindcss/colors',
+        'vaul-vue',
+        'tailwind-variants',
+        '@vueuse/integrations/useFuse'
+      ]
+    }
+  }
 })
