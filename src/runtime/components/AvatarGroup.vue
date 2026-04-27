@@ -19,6 +19,10 @@ export interface AvatarGroupProps {
   /**
    * The maximum number of avatars to display.
    */
+  /**
+   * @defaultValue 'neutral'
+   */
+  color?: AvatarGroup['variants']['color']
   max?: number | string
   class?: any
   ui?: AvatarGroup['slots']
@@ -45,7 +49,8 @@ const appConfig = useAppConfig() as AvatarGroup['AppConfig']
 const uiProp = useComponentUI('avatarGroup', props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatarGroup || {}) })({
-  size: props.size
+  size: props.size,
+  color: props.color
 }))
 
 const max = computed(() => typeof props.max === 'string' ? Number.parseInt(props.max, 10) : props.max)
@@ -91,7 +96,8 @@ const hiddenCount = computed(() => {
 })
 
 provide(avatarGroupInjectionKey, computed(() => ({
-  size: props.size
+  size: props.size,
+  color: props.color
 })))
 </script>
 

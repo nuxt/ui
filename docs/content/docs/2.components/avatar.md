@@ -100,6 +100,18 @@ props:
 The `alt` prop is passed to the `img` element as the `alt` attribute.
 ::
 
+### Color
+
+Use the `color` prop to change the color of the Avatar.
+
+::component-code
+---
+props:
+  color: primary
+  alt: 'Benjamin Canac'
+---
+::
+
 ### Chip
 
 Use the `chip` prop to display a chip around the Avatar.
