@@ -175,7 +175,8 @@ const to = computed(() => {
   }
 
   const i18n = nuxtApp.$i18n as { localeCodes?: { value: string[] } } | undefined
-  if (i18n?.localeCodes?.value?.some(code => path === `/${code}` || path.startsWith(`/${code}/`))) {
+  const codes = i18n?.localeCodes?.value
+  if (codes?.length && new RegExp(`^/(${codes.join('|')})($|[/?#])`).test(path)) {
     return path
   }
 
