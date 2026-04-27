@@ -77,7 +77,8 @@ function getFaviconUrl(url: string): string {
       should-auto-scroll
       :messages="chat.messages"
       :status="chat.status"
-      :spacing-offset="48"
+      :spacing-offset="72"
+      :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }] }"
     >
       <template #content="{ message }">
         <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
