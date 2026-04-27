@@ -249,7 +249,8 @@ export default defineNuxtConfig({
         '@tiptap/vue-3',
         '@tiptap/suggestion',
         '@tiptap/pm/state',
-        'shiki-transformer-color-highlight'
+        'shiki-transformer-color-highlight',
+        'json5'
       ]
     }
   },
