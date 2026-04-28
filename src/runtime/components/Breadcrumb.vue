@@ -36,6 +36,10 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
    */
   separatorIcon?: IconProps['name']
   /**
+   * @defaultValue 'primary'
+   */
+  color?: Breadcrumb['variants']['color']
+  /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
@@ -85,7 +89,9 @@ const uiProp = useComponentUI('breadcrumb', props)
 const separatorIcon = computed(() => props.separatorIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb || {}) })({
+  color: props.color,
+}))
 </script>
 
 <template>
