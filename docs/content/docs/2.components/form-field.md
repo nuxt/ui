@@ -143,9 +143,13 @@ slots:
 This sets the `color` to `error` on the form control. You can change it globally in your `app.config.ts`.
 ::
 
-### Error Pattern
+### Error pattern
 
-Errors from nested values within an input component are not reported by default (e.g. array items within [InputTags](/docs/components/input-tags)). See [example](/docs/components/form#error-reporting) usage within a Form.
+Use the `error-pattern` prop to match form errors with a regular expression. This is especially relevant for components with array values such as [InputTags](/docs/components/input-tags), where errors include array indices in their name (e.g. `tags.0`).
+
+::tip{to="/docs/components/form#error-reporting"}
+See an example of using `error-pattern` within a Form.
+::
 
 ### Size
 

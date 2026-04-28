@@ -74,14 +74,14 @@ It requires two props:
   ::
 ::
 
-Nested validation rules are handled using dot notation. For example, a rule like `{ user: z.object({ email: z.string() }) }`{lang="ts"} will be applied to `<FormField name="user.email">`{lang="vue"}.
-
 ### Error reporting
 
-Errors are reported directly to the [FormField](/docs/components/form-field) component based on the `name` or `error-pattern` prop. This means the validation rules defined for the `email` attribute in your schema will be applied to `<FormField name="email">`{lang="vue"}. 
+Errors are matched to the corresponding [FormField](/docs/components/form-field) component using its `name` prop. For example, the validation rule defined for the `email` attribute in your schema will be applied to `<FormField name="email">`{lang="vue"}.
+
+Nested fields are matched using dot notation. A rule like `{ user: z.object({ email: z.string() }) }`{lang="ts"} will be applied to `<FormField name="user.email">`{lang="vue"}.
 
 ::warning
-Errors from nested values within an input component (e.g. [InputTags](/docs/components/input-tags), [Select](/docs/components/select)) are not reported by default. Use the `error-pattern` prop on the [FormField](/docs/components/form-field) component to match nested field errors.
+Errors that include array indices in their name (e.g. `tags.0`, `tags.1`) are not matched by `name` alone. Use the `error-pattern` prop on the [FormField](/docs/components/form-field) component with a regular expression like `/^tags\..+/`{lang="ts"} to display them. This is especially relevant for components with array values such as [InputTags](/docs/components/input-tags).
 ::
 
 ::component-example
