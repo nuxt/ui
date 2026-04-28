@@ -17,12 +17,12 @@ export interface AvatarGroupProps {
    */
   size?: AvatarGroup['variants']['size']
   /**
-   * The maximum number of avatars to display.
-   */
-  /**
    * @defaultValue 'neutral'
    */
   color?: AvatarGroup['variants']['color']
+  /**
+   * The maximum number of avatars to display.
+   */
   max?: number | string
   class?: any
   ui?: AvatarGroup['slots']
