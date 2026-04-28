@@ -9,7 +9,7 @@ links:
 
 ## Usage
 
-The Theme component allows you to override the theme of all child components without modifying each one individually. It uses Vue's `provide` / `inject` mechanism under the hood, so the overrides apply at any depth.
+The Theme component allows you to override default **props** and **slot classes** of all child components without modifying each one individually. It uses Vue's `provide` / `inject` mechanism under the hood, so the overrides apply at any depth.
 
 Use the `ui` prop to pass an object where keys are component names (camelCase) and values are their slot class overrides:
 
@@ -35,6 +35,20 @@ For app-level theme configuration, we recommend using the `vite.config.ts` file 
 :::
 ::
 
+### Props
+
+Use the `props` prop to override the **default value of any prop** on descendant components — not just slot classes. Each key maps to a partial of that component's props, fully typed against its `Props` interface:
+
+::component-example
+---
+name: 'theme-props-example'
+---
+::
+
+::tip
+Explicit props on a component (e.g. `<UButton color="primary" />`) always win over `<UTheme :props>`. Theme defaults only apply when the prop wasn't passed explicitly.
+::
+
 ### Multiple
 
 You can theme multiple component types at once by passing different keys in the `ui` prop.
@@ -57,7 +71,7 @@ name: 'theme-nested-example'
 
 ### Priority
 
-The `ui` prop on individual components always takes priority over the Theme component. This lets you override specific instances while still benefiting from the shared theme.
+Explicitly setting any prop (including `ui`) on an individual component always takes priority over the Theme component. This lets you override specific instances while still benefiting from the shared theme.
 
 ::component-example
 ---

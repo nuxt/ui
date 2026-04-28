@@ -235,31 +235,30 @@ defineExpose({
 </script>
 ```
 
-## Resolving Variants in Template Logic
+## Resolving Theme Defaults
 
-`tv()`'s `defaultVariants` only apply when computing CSS classes — they do **not** affect runtime checks (e.g. `<component :is>`, `v-if`, computed conditionals). When a variant drives template logic, use `useResolvedVariants` to mirror `tv()`'s resolution: **prop > `app.config.ts` `defaultVariants` > fallback**.
+`tv()`'s `defaultVariants` only apply when computing CSS classes — they do **not** affect runtime checks (e.g. `<component :is>`, `v-if`, computed conditionals). They also can't carry per-instance overrides set from `<UTheme :props>` or `app.config.ts`.
+
+Wrap your raw props with `useComponentDefaults` to get a proxy that resolves the priority chain **explicit prop > nearest `<UTheme :props>` > `withDefaults` > `app.config.ui.<name>.defaultVariants` > `theme.defaultVariants`** for any prop, including ones that drive template logic.
 
 ```vue
 <script setup lang="ts">
-import { useResolvedVariants } from '../composables/useResolvedVariants'
+import { useComponentDefaults } from '../composables/useComponentUI'
 
-const { variant } = useResolvedVariants('radioGroup', props, theme, ['variant'])
+const _props = withDefaults(defineProps<RadioGroupProps>(), { /* ... */ })
 
-// Use variant.value in template logic and pass it to tv()
+const props = useComponentDefaults<RadioGroupProps>('radioGroup', _props, theme)
 </script>
 
 <template>
-  <component :is="variant === 'list' ? 'div' : Label" />
+  <component :is="props.variant === 'list' ? 'div' : Label" />
 </template>
 ```
 
-For nested prop paths (e.g. `props.content?.position`), use the `overrides` parameter:
-
-```ts
-const { position } = useResolvedVariants('select', props, theme, ['position'], {
-  position: () => props.content?.position
-})
-```
+Notes:
+- The proxy passes through to `_props` for explicitly set props, so `withDefaults` fallbacks stay lower priority than `<UTheme>` overrides.
+- Pass the **raw** `_props` (not the proxy) to composables that read `vnode.props` themselves — `useFormField`, `useFieldGroup` — so they keep their own injection precedence intact. Use nullish coalescing in `tv()` calls when you need the field-group value to win: `size: formSize.value ?? props.size`.
+- The `ui` prop is deep-merged (explicit slot classes layered on top of theme overrides). All other props are explicit-wins.
 
 ## Key Patterns
 
@@ -271,7 +270,7 @@ const { position } = useResolvedVariants('select', props, theme, ['position'], {
 | `createReusableTemplate` | Complex template reuse (Table, Modal) |
 | `useTemplateRef` | Template refs (Vue 3.5+) |
 | `toRef(() => props.x)` | Reactive prop access |
-| `useResolvedVariants` | Resolve variants for template logic (when variant drives `<component :is>`, `v-if`, etc.) |
+| `useComponentDefaults` | Resolve theme defaults for any prop (incl. variants driving `<component :is>`, `v-if`, etc.) |
 
 ## Export Types
 

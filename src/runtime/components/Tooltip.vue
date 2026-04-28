@@ -56,20 +56,21 @@ import { defu } from 'defu'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits, injectTooltipProviderContext } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentDefaults } from '../composables/useComponentUI'
 import { FieldGroupReset } from '../composables/useFieldGroup'
 import { usePortal } from '../composables/usePortal'
 import { tv } from '../utils/tv'
 import UKbd from './Kbd.vue'
 
-const props = withDefaults(defineProps<TooltipProps>(), {
+const _props = withDefaults(defineProps<TooltipProps>(), {
   portal: true
 })
 const emits = defineEmits<TooltipEmits>()
 const slots = defineSlots<TooltipSlots>()
 
+const props = useComponentDefaults('tooltip', _props, theme)
+
 const appConfig = useAppConfig() as Tooltip['AppConfig']
-const uiProp = useComponentUI('tooltip', props)
 
 const providerContext = injectTooltipProviderContext()
 
@@ -92,16 +93,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {
 
     <TooltipPortal v-bind="portalProps">
       <FieldGroupReset>
-        <TooltipContent v-bind="contentProps" data-slot="content" :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })">
+        <TooltipContent v-bind="contentProps" data-slot="content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
           <slot name="content" :ui="ui">
-            <span v-if="text" data-slot="text" :class="ui.text({ class: uiProp?.text })">{{ text }}</span>
+            <span v-if="text" data-slot="text" :class="ui.text({ class: props.ui?.text })">{{ text }}</span>
 
-            <span v-if="kbds?.length" data-slot="kbds" :class="ui.kbds({ class: uiProp?.kbds })">
-              <UKbd v-for="(kbd, index) in kbds" :key="index" :size="((uiProp?.kbdsSize || ui.kbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+            <span v-if="kbds?.length" data-slot="kbds" :class="ui.kbds({ class: props.ui?.kbds })">
+              <UKbd v-for="(kbd, index) in kbds" :key="index" :size="((props.ui?.kbdsSize || ui.kbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
             </span>
           </slot>
 
-          <TooltipArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
+          <TooltipArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
         </TooltipContent>
       </FieldGroupReset>
     </TooltipPortal>

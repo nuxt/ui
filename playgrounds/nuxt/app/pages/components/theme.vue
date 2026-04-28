@@ -18,13 +18,13 @@ const size = ref<keyof typeof theme.variants.size>('lg')
   </Navbar>
 
   <div class="flex flex-col gap-8">
-    <!-- Variants only -->
+    <!-- Per-component prop defaults via :props -->
     <div class="flex flex-col gap-2">
       <p class="text-sm font-medium text-muted">
-        UTheme variants={{ `{ button: { color: '${color}', variant: '${variant}', size: '${size}' } }` }}
+        <code>:props={{ `{ button: { color: '${color}', variant: '${variant}', size: '${size}' } }` }}</code>
       </p>
 
-      <UTheme :variants="{ button: { color, variant, size } }">
+      <UTheme :props="{ button: { color, variant, size } }">
         <div class="flex items-center gap-2">
           <UButton label="Themed" />
           <UButton label="Themed with icon" icon="i-lucide-rocket" />
@@ -33,13 +33,31 @@ const size = ref<keyof typeof theme.variants.size>('lg')
       </UTheme>
     </div>
 
+    <!-- Multiple components share one :props object -->
+    <div class="flex flex-col gap-2">
+      <p class="text-sm font-medium text-muted">
+        <code>:props</code> applies to multiple components at once
+      </p>
+
+      <UTheme :props="{ button: { color, variant }, tooltip: { delayDuration: 0 } }">
+        <div class="flex items-center gap-2">
+          <UTooltip text="Instant tooltip from theme">
+            <UButton label="Hover me" />
+          </UTooltip>
+          <UTooltip text="Same delay">
+            <UButton label="And me" icon="i-lucide-rocket" />
+          </UTooltip>
+        </div>
+      </UTheme>
+    </div>
+
     <!-- Explicit prop overrides theme -->
     <div class="flex flex-col gap-2">
       <p class="text-sm font-medium text-muted">
-        Explicit props override theme variants
+        Explicit props win over <code>:props</code>
       </p>
 
-      <UTheme :variants="{ button: { color, variant, size } }">
+      <UTheme :props="{ button: { color, variant, size } }">
         <div class="flex items-center gap-2">
           <UButton label="Theme only" />
           <UButton label="color=primary" color="primary" />
@@ -49,14 +67,14 @@ const size = ref<keyof typeof theme.variants.size>('lg')
       </UTheme>
     </div>
 
-    <!-- UI + Variants combined -->
+    <!-- :ui (slot classes) + :props (prop defaults) together -->
     <div class="flex flex-col gap-2">
       <p class="text-sm font-medium text-muted">
-        UI slot classes + variant defaults together
+        <code>:ui</code> slot classes + <code>:props</code> prop defaults together
       </p>
 
       <UTheme
-        :variants="{ button: { color, variant } }"
+        :props="{ button: { color, variant } }"
         :ui="{ button: { base: 'font-bold rounded-full' } }"
       >
         <div class="flex items-center gap-2">
@@ -66,10 +84,27 @@ const size = ref<keyof typeof theme.variants.size>('lg')
       </UTheme>
     </div>
 
-    <!-- Without UTheme (baseline) -->
+    <!-- Nested UTheme: inner overrides outer, non-overridden keys inherit -->
     <div class="flex flex-col gap-2">
       <p class="text-sm font-medium text-muted">
-        Without UTheme (baseline)
+        Nested <code>&lt;UTheme&gt;</code>: inner overrides bleed in, outer keys are inherited
+      </p>
+
+      <UTheme :props="{ button: { color, variant, size } }">
+        <div class="flex items-center gap-2">
+          <UButton label="Outer" />
+          <UTheme :props="{ button: { color: 'success' } }">
+            <UButton label="color=success (inner)" />
+          </UTheme>
+          <UButton label="Outer again" />
+        </div>
+      </UTheme>
+    </div>
+
+    <!-- Baseline -->
+    <div class="flex flex-col gap-2">
+      <p class="text-sm font-medium text-muted">
+        Without <code>&lt;UTheme&gt;</code> (baseline)
       </p>
 
       <div class="flex items-center gap-2">

@@ -8,6 +8,8 @@ import Button from '../../src/runtime/components/Button.vue'
 import Badge from '../../src/runtime/components/Badge.vue'
 import Alert from '../../src/runtime/components/Alert.vue'
 import Input from '../../src/runtime/components/Input.vue'
+import Checkbox from '../../src/runtime/components/Checkbox.vue'
+import type { ButtonProps } from '../../src/runtime/types'
 
 type CaseOptions = { props?: ThemeProps, slots?: ThemeSlots }
 
@@ -94,101 +96,6 @@ describe('Theme', () => {
       })
     }
   )
-
-  test('theme variants apply to child component', async () => {
-    const wrapper = await mountSuspended({
-      components: { Theme, Button },
-      template: `
-        <Theme :variants="{ button: { color: 'error', variant: 'soft' } }">
-          <Button label="Themed" />
-        </Theme>
-      `
-    })
-
-    expect(wrapper.find('button').classes()).toContain('bg-error/10')
-    expect(wrapper.find('button').classes()).not.toContain('bg-primary')
-  })
-
-  test('explicit prop overrides theme variant', async () => {
-    const wrapper = await mountSuspended({
-      components: { Theme, Button },
-      template: `
-        <Theme :variants="{ button: { color: 'error' } }">
-          <Button label="Override" color="primary" />
-        </Theme>
-      `
-    })
-
-    expect(wrapper.find('button').classes()).toContain('bg-primary')
-    expect(wrapper.find('button').classes()).not.toContain('bg-error')
-  })
-
-  test('theme variant applies size', async () => {
-    const wrapper = await mountSuspended({
-      components: { Theme, Button },
-      template: `
-        <Theme :variants="{ button: { size: 'xl' } }">
-          <Button label="Large" />
-        </Theme>
-      `
-    })
-
-    expect(wrapper.find('button').classes()).toContain('text-base')
-  })
-
-  test('theme variants do not leak outside scope', async () => {
-    const wrapper = await mountSuspended({
-      components: { Theme, Button },
-      template: `
-        <div>
-          <Theme :variants="{ button: { color: 'error', variant: 'soft' } }">
-            <Button label="Inside" class="inside-btn" />
-          </Theme>
-          <Button label="Outside" class="outside-btn" />
-        </div>
-      `
-    })
-
-    expect(wrapper.find('.inside-btn').classes()).toContain('bg-error/10')
-    expect(wrapper.find('.outside-btn').classes()).toContain('bg-primary')
-    expect(wrapper.find('.outside-btn').classes()).not.toContain('bg-error/10')
-  })
-
-  test('theme variants react to prop changes', async () => {
-    const variants = ref<any>({ button: { color: 'error', variant: 'soft' } })
-
-    const wrapper = await mountSuspended({
-      components: { Theme, Button },
-      setup: () => ({ variants }),
-      template: `
-        <Theme :variants="variants">
-          <Button label="Themed" />
-        </Theme>
-      `
-    })
-
-    expect(wrapper.find('button').classes()).toContain('bg-error/10')
-
-    variants.value = { button: { color: 'success', variant: 'soft' } }
-    await nextTick()
-
-    expect(wrapper.find('button').classes()).toContain('bg-success/10')
-    expect(wrapper.find('button').classes()).not.toContain('bg-error/10')
-  })
-
-  test('ui and variants work together', async () => {
-    const wrapper = await mountSuspended({
-      components: { Theme, Button },
-      template: `
-        <Theme :variants="{ button: { color: 'error', variant: 'soft' } }" :ui="{ button: { base: 'test-ui-class' } }">
-          <Button label="Both" />
-        </Theme>
-      `
-    })
-
-    expect(wrapper.find('button').classes()).toContain('bg-error/10')
-    expect(wrapper.find('button').classes()).toContain('test-ui-class')
-  })
 
   test('applies theme classes to child component', async () => {
     const wrapper = await mountSuspended({
@@ -335,5 +242,122 @@ describe('Theme', () => {
     })
 
     expect(wrapper.find('[data-slot="root"]').classes()).toContain('input-theme-class')
+  })
+
+  test(':props applies prop defaults to child', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :props="{ button: { color: 'error', variant: 'soft' } }">
+          <Button label="Themed" />
+        </Theme>
+      `
+    })
+
+    expect(wrapper.find('button').classes()).toContain('bg-error/10')
+    expect(wrapper.find('button').classes()).not.toContain('bg-primary')
+  })
+
+  test('explicit prop wins over :props (other theme props still flow through)', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :props="{ button: { color: 'error', variant: 'soft' } }">
+          <Button label="Override" color="primary" />
+        </Theme>
+      `
+    })
+
+    expect(wrapper.find('button').classes()).toContain('bg-primary/10')
+    expect(wrapper.find('button').classes()).not.toContain('bg-error/10')
+  })
+
+  test(':props applies to multiple component types simultaneously', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button, Checkbox },
+      template: `
+        <Theme :props="{ button: { color: 'error', variant: 'soft' }, checkbox: { color: 'success' } }">
+          <Button label="Themed Button" />
+          <Checkbox model-value label="Themed Checkbox" />
+        </Theme>
+      `
+    })
+
+    expect(wrapper.find('button').classes()).toContain('bg-error/10')
+    expect(wrapper.html()).toContain('focus-visible:outline-success')
+  })
+
+  test(':props does not leak outside scope', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <div>
+          <Theme :props="{ button: { color: 'error', variant: 'soft' } }">
+            <Button label="Inside" class="inside-btn" />
+          </Theme>
+          <Button label="Outside" class="outside-btn" />
+        </div>
+      `
+    })
+
+    expect(wrapper.find('.inside-btn').classes()).toContain('bg-error/10')
+    expect(wrapper.find('.outside-btn').classes()).not.toContain('bg-error/10')
+  })
+
+  test('nested :props inherits non-overridden keys from outer', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :props="{ button: { color: 'error', variant: 'soft' } }">
+          <Button label="Outer" class="outer-btn" />
+          <Theme :props="{ button: { color: 'success' } }">
+            <Button label="Inner" class="inner-btn" />
+          </Theme>
+        </Theme>
+      `
+    })
+
+    expect(wrapper.find('.outer-btn').classes()).toContain('bg-error/10')
+    expect(wrapper.find('.inner-btn').classes()).toContain('bg-success/10')
+    expect(wrapper.find('.inner-btn').classes()).not.toContain('bg-error/10')
+  })
+
+  test('reacts to :props changes', async () => {
+    const themeProps = ref<{ button: Partial<ButtonProps> }>({ button: { color: 'error', variant: 'soft' } })
+
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      setup: () => ({ themeProps }),
+      template: `
+        <Theme :props="themeProps">
+          <Button label="Themed" />
+        </Theme>
+      `
+    })
+
+    expect(wrapper.find('button').classes()).toContain('bg-error/10')
+
+    themeProps.value = { button: { color: 'success', variant: 'soft' } }
+    await nextTick()
+
+    expect(wrapper.find('button').classes()).toContain('bg-success/10')
+    expect(wrapper.find('button').classes()).not.toContain('bg-error/10')
+  })
+
+  test(':props and :ui work together', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme
+          :props="{ button: { color: 'error', variant: 'soft' } }"
+          :ui="{ button: { base: 'rounded-full' } }"
+        >
+          <Button label="Both" />
+        </Theme>
+      `
+    })
+
+    expect(wrapper.find('button').classes()).toContain('bg-error/10')
+    expect(wrapper.find('button').classes()).toContain('rounded-full')
   })
 })
