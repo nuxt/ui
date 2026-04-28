@@ -31,7 +31,7 @@ export default (options: Required<ModuleOptions>) => ({
       true: ''
     },
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `focus-visible:outline-${color}`])),
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { link: `focus-visible:outline-${color}` }])),
       neutral: ''
     }
   },
