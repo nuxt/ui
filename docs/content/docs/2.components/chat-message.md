@@ -87,30 +87,6 @@ props:
 When using the [`ChatMessages`](/docs/components/chat-messages) component, the `side` prop is set to `left` for `assistant` messages and `right` for `user` messages.
 ::
 
-### Color :badge{label="Soon" class="align-text-top"}
-
-Use the `color` prop to change the color of the message.
-
-::component-code
----
-prettier: true
-ignore:
-  - parts
-  - role
-  - id
-  - variant
-props:
-  variant: 'soft'
-  color: 'primary'
-  parts:
-    - type: 'text'
-      id: '1'
-      text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
-  role: 'user'
-  id: '1'
----
-::
-
 ### Variant
 
 Use the `variant` prop to change style of the message.
@@ -124,7 +100,6 @@ ignore:
   - id
 props:
   variant: 'soft'
-  color: 'neutral'
   parts:
     - type: 'text'
       id: '1'
@@ -136,6 +111,29 @@ props:
 
 ::note
 When using the [`ChatMessages`](/docs/components/chat-messages) component, the `variant` prop is set to `naked` for `assistant` messages and `soft` for `user` messages.
+::
+
+### Color :badge{label="Soon" class="align-text-top"}
+
+Use the `color` prop to change the color of the message.
+
+::component-code
+---
+prettier: true
+ignore:
+  - parts
+  - role
+  - id
+props:
+  variant: 'soft'
+  color: 'primary'
+  parts:
+    - type: 'text'
+      id: '1'
+      text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+  role: 'user'
+  id: '1'
+---
 ::
 
 ### Icon
